@@ -14,7 +14,7 @@
 #    include "tty-slang.h"
 #else
 #    include "tty-ncurses.h"
-#endif  // HAVE_SLANG
+#endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -58,4 +58,4 @@ void tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__COLOR_INTERNAL_H
+#endif

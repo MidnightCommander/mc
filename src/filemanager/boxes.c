@@ -51,7 +51,7 @@
 #include "lib/vfs/vfs.h"
 #ifdef ENABLE_VFS_FTP
 #    include "src/vfs/ftpfs/ftpfs.h"
-#endif  // ENABLE_VFS_FTP
+#endif
 
 #include "lib/util.h"  // Q_()
 #include "lib/widget.h"
@@ -84,7 +84,7 @@
 #    define B_STOP   (B_USER + 1)
 #    define B_RESUME (B_USER + 2)
 #    define B_KILL   (B_USER + 3)
-#endif  // ENABLE_BACKGROUND
+#endif
 
 /*** file scope type declarations ****************************************************************/
 
@@ -105,18 +105,18 @@ static unsigned long user_mini_status_id, mini_user_format_id;
 
 #ifdef HAVE_CHARSET
 static int new_display_codepage;
-#endif  // HAVE_CHARSET
+#endif
 
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_FTP)
 static unsigned long ftpfs_always_use_proxy_id, ftpfs_proxy_host_id;
-#endif  // ENABLE_VFS && ENABLE_VFS_FTP
+#endif
 
 static GPtrArray *skin_names;
 static gchar *current_skin_name;
 
 #ifdef ENABLE_BACKGROUND
 static WListbox *bg_list = NULL;
-#endif  // ENABLE_BACKGROUND
+#endif
 
 static unsigned long shadows_id;
 
@@ -391,7 +391,7 @@ sel_charset_button (WButton *button, int action)
 
     return 0;
 }
-#endif  // HAVE_CHARSET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -451,7 +451,7 @@ confvfs_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *d
         return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
-#endif  // ENABLE_VFS && ENABLE_VFS_FTP
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -521,7 +521,7 @@ task_cb (WButton *button, int action)
 
     return 0;
 }
-#endif  // ENABLE_BACKGROUND
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -530,11 +530,12 @@ task_cb (WButton *button, int action)
 void
 configure_box (void)
 {
-    const char *pause_options[] = { N_ ("&Never"), N_ ("On dum&b terminals"), N_ ("Alwa&ys") };
-
-    int pause_options_num;
-
-    pause_options_num = G_N_ELEMENTS (pause_options);
+    const char *pause_options[] = {
+        N_ ("&Never"),
+        N_ ("On dum&b terminals"),
+        N_ ("Alwa&ys"),
+    };
+    const int pause_options_num = G_N_ELEMENTS (pause_options);
 
     {
         char time_out[BUF_TINY] = "";
@@ -582,7 +583,7 @@ configure_box (void)
                 QUICK_STOP_GROUPBOX,
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -594,7 +595,7 @@ configure_box (void)
             .help = "[Configuration]",
             .widgets = quick_widgets,
             .callback = configure_callback,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
@@ -645,7 +646,7 @@ appearance_box (void)
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_ ("&Shadows"), &mc_global.tty.shadows, &shadows_id),
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -657,7 +658,7 @@ appearance_box (void)
             .help = "[Appearance]",
             .widgets = quick_widgets,
             .callback = appearance_box_callback,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         if (quick_dialog (&qdlg) == B_ENTER)
@@ -684,8 +685,11 @@ panel_options_box (void)
     simple_swap =
         mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE);
     {
-        const char *qsearch_options[] = { N_ ("Case &insensitive"), N_ ("Cas&e sensitive"),
-                                          N_ ("Use panel sort mo&de") };
+        const char *qsearch_options[] = {
+            N_ ("Case &insensitive"),
+            N_ ("Cas&e sensitive"),
+            N_ ("Use panel sort mo&de"),
+        };
 
         quick_widget_t quick_widgets[] = {
             // clang-format off
@@ -726,7 +730,7 @@ panel_options_box (void)
                 QUICK_STOP_GROUPBOX,
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -738,7 +742,7 @@ panel_options_box (void)
             .help = "[Panel options]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         if (quick_dialog (&qdlg) != B_ENTER)
@@ -784,8 +788,12 @@ panel_listing_box (WPanel *panel, int num, char **userp, char **minip, gboolean 
         char *mini_user_format = NULL;
 
         // Controls whether the array strings have been translated
-        const char *list_formats[LIST_FORMATS] = { N_ ("&Full file list"), N_ ("&Brief file list:"),
-                                                   N_ ("&Long file list"), N_ ("&User defined:") };
+        const char *list_formats[LIST_FORMATS] = {
+            N_ ("&Full file list"),
+            N_ ("&Brief file list:"),
+            N_ ("&Long file list"),
+            N_ ("&User defined:"),
+        };
 
         quick_widget_t quick_widgets[] = {
             // clang-format off
@@ -804,7 +812,7 @@ panel_listing_box (WPanel *panel, int num, char **userp, char **minip, gboolean 
             QUICK_INPUT (panel->user_status_format[panel->list_format], "mini_input",
                          &mini_user_format, &mini_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -816,7 +824,7 @@ panel_listing_box (WPanel *panel, int num, char **userp, char **minip, gboolean 
             .help = "[Listing Format...]",
             .widgets = quick_widgets,
             .callback = panel_listing_callback,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         user_mini_status = panel->user_mini_status;
@@ -899,7 +907,7 @@ sort_box (dir_sort_options_t *op, const panel_field_t *sort_field)
                 QUICK_CHECKBOX (N_ ("&Reverse"), &op->reverse, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -911,7 +919,7 @@ sort_box (dir_sort_options_t *op, const panel_field_t *sort_field)
             .help = "[Sort Order...]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         if (quick_dialog (&qdlg) != B_CANCEL)
@@ -942,7 +950,7 @@ confirm_box (void)
         QUICK_CHECKBOX (Q_ ("Confirmation|&History cleanup"),
                         &mc_global.widget.confirm_history_cleanup, NULL),
         QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END
+        QUICK_END,
     };
 
     WRect r = { -1, -1, 0, 46 };
@@ -953,7 +961,7 @@ confirm_box (void)
         .help = "[Confirmation]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     (void) quick_dialog (&qdlg);
@@ -968,13 +976,20 @@ display_bits_box (void)
     gboolean new_meta;
     int current_mode;
 
-    const char *display_bits_str[] = { N_ ("&UTF-8 output"), N_ ("&Full 8 bits output"),
-                                       N_ ("&ISO 8859-1"), N_ ("7 &bits") };
+    const char *display_bits_str[] = {
+        N_ ("&UTF-8 output"),
+        N_ ("&Full 8 bits output"),
+        N_ ("&ISO 8859-1"),
+        N_ ("7 &bits"),
+    };
 
-    quick_widget_t quick_widgets[] = { QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
-                                       QUICK_SEPARATOR (TRUE),
-                                       QUICK_CHECKBOX (N_ ("F&ull 8 bits input"), &new_meta, NULL),
-                                       QUICK_BUTTONS_OK_CANCEL, QUICK_END };
+    quick_widget_t quick_widgets[] = {
+        QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
+        QUICK_SEPARATOR (TRUE),
+        QUICK_CHECKBOX (N_ ("F&ull 8 bits input"), &new_meta, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END,
+    };
 
     WRect r = { -1, -1, 0, 46 };
 
@@ -984,7 +999,7 @@ display_bits_box (void)
         .help = "[Display bits]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     if (mc_global.full_eight_bits)
@@ -1036,7 +1051,7 @@ display_bits_box (void)
             QUICK_SEPARATOR (TRUE),
                 QUICK_CHECKBOX (N_ ("F&ull 8 bits input"), &new_meta, NULL),
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -1048,7 +1063,7 @@ display_bits_box (void)
             .help = "[Display bits]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         new_meta = !use_8th_bit_as_meta;
@@ -1078,7 +1093,7 @@ display_bits_box (void)
         }
     }
 }
-#endif  // HAVE_CHARSET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /** Show tree in a box, not on a panel */
@@ -1145,7 +1160,7 @@ configure_vfs_box (void)
         char *ret_passwd;
         char *ret_ftp_proxy;
         char *ret_directory_timeout;
-#    endif  // ENABLE_VFS_FTP
+#    endif
 
         quick_widget_t quick_widgets[] = {
             QUICK_LABELED_INPUT (N_ ("Timeout for freeing VFSs (sec):"), input_label_left, buffer2,
@@ -1167,9 +1182,9 @@ configure_vfs_box (void)
             QUICK_CHECKBOX (N_ ("Use &passive mode"), &ftpfs_use_passive_connections, NULL),
             QUICK_CHECKBOX (N_ ("Use passive mode over pro&xy"),
                             &ftpfs_use_passive_connections_over_proxy, NULL),
-#    endif  // ENABLE_VFS_FTP
+#    endif
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
         };
 
         WRect r = { -1, -1, 0, 56 };
@@ -1221,7 +1236,7 @@ configure_vfs_box (void)
     }
 }
 
-#endif  // ENABLE_VFS
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1234,7 +1249,7 @@ cd_box (const WPanel *panel)
     quick_widget_t quick_widgets[] = {
         QUICK_LABELED_INPUT (N_ ("cd"), input_label_left, "", "input", &my_str, NULL, FALSE, TRUE,
                              INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD),
-        QUICK_END
+        QUICK_END,
     };
 
     WRect r = { w->rect.y + w->rect.lines - 6, w->rect.x, 0, w->rect.cols };
@@ -1245,7 +1260,7 @@ cd_box (const WPanel *panel)
         .help = "[Quick cd]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     return (quick_dialog (&qdlg) != B_CANCEL) ? my_str : NULL;
@@ -1265,7 +1280,8 @@ symlink_box (const vfs_path_t *existing_vpath, const vfs_path_t *new_vpath, char
         QUICK_LABELED_INPUT (N_ ("Symbolic link filename:"), input_label_above,
                              vfs_path_as_str (new_vpath), "input-1", ret_new, NULL, FALSE, FALSE,
                              INPUT_COMPLETE_FILENAMES),
-        QUICK_BUTTONS_OK_CANCEL, QUICK_END
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END,
     };
 
     WRect r = { -1, -1, 0, 64 };
@@ -1276,7 +1292,7 @@ symlink_box (const vfs_path_t *existing_vpath, const vfs_path_t *new_vpath, char
         .help = "[File Menu]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     if (quick_dialog (&qdlg) == B_CANCEL)
@@ -1299,10 +1315,12 @@ jobs_box (void)
         int value;
         int len;
         bcback_fn callback;
-    } job_but[] = { { N_ ("&Stop"), NORMAL_BUTTON, B_STOP, 0, task_cb },
-                    { N_ ("&Resume"), NORMAL_BUTTON, B_RESUME, 0, task_cb },
-                    { N_ ("&Kill"), NORMAL_BUTTON, B_KILL, 0, task_cb },
-                    { N_ ("&OK"), DEFPUSH_BUTTON, B_CANCEL, 0, NULL } };
+    } job_but[] = {
+        { N_ ("&Stop"), NORMAL_BUTTON, B_STOP, 0, task_cb },
+        { N_ ("&Resume"), NORMAL_BUTTON, B_RESUME, 0, task_cb },
+        { N_ ("&Kill"), NORMAL_BUTTON, B_KILL, 0, task_cb },
+        { N_ ("&OK"), DEFPUSH_BUTTON, B_CANCEL, 0, NULL },
+    };
 
     size_t i;
     const size_t n_but = G_N_ELEMENTS (job_but);
@@ -1317,7 +1335,7 @@ jobs_box (void)
     {
 #    ifdef ENABLE_NLS
         job_but[i].name = _ (job_but[i].name);
-#    endif  // ENABLE_NLS
+#    endif
 
         job_but[i].len = str_term_width1 (job_but[i].name) + 3;
         if (job_but[i].flags == DEFPUSH_BUTTON)
@@ -1350,6 +1368,6 @@ jobs_box (void)
     (void) dlg_run (jobs_dlg);
     widget_destroy (WIDGET (jobs_dlg));
 }
-#endif  // ENABLE_BACKGROUND
+#endif
 
 /* --------------------------------------------------------------------------------------------- */

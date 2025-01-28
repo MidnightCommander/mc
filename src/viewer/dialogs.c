@@ -94,7 +94,7 @@ mcview_dialog_search (WView *view)
 #endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -106,7 +106,7 @@ mcview_dialog_search (WView *view)
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         qd_result = quick_dialog (&qdlg);
@@ -152,8 +152,12 @@ mcview_dialog_goto (WView *view, off_t *offset)
         MC_VIEW_GOTO_OFFSET_HEX = 3
     } mcview_goto_type_t;
 
-    const char *mc_view_goto_str[] = { N_ ("&Line number"), N_ ("Pe&rcents"),
-                                       N_ ("&Decimal offset"), N_ ("He&xadecimal offset") };
+    const char *mc_view_goto_str[] = {
+        N_ ("&Line number"),
+        N_ ("Pe&rcents"),
+        N_ ("&Decimal offset"),
+        N_ ("He&xadecimal offset"),
+    };
 
     static mcview_goto_type_t current_goto_type = MC_VIEW_GOTO_LINENUM;
 
@@ -174,12 +178,14 @@ mcview_dialog_goto (WView *view, off_t *offset)
 #endif
 
     {
-        quick_widget_t quick_widgets[] = { QUICK_INPUT (INPUT_LAST_TEXT, MC_HISTORY_VIEW_GOTO, &exp,
-                                                        NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-                                           QUICK_RADIO (num_of_types,
-                                                        (const char **) mc_view_goto_str,
-                                                        (int *) &current_goto_type, NULL),
-                                           QUICK_BUTTONS_OK_CANCEL, QUICK_END };
+        quick_widget_t quick_widgets[] = {
+            QUICK_INPUT (INPUT_LAST_TEXT, MC_HISTORY_VIEW_GOTO, &exp, NULL, FALSE, FALSE,
+                         INPUT_COMPLETE_NONE),
+            QUICK_RADIO (num_of_types, (const char **) mc_view_goto_str, (int *) &current_goto_type,
+                         NULL),
+            QUICK_BUTTONS_OK_CANCEL,
+            QUICK_END,
+        };
 
         WRect r = { -1, -1, 0, 40 };
 
@@ -189,7 +195,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         // run dialog

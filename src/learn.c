@@ -273,7 +273,7 @@ init_learn (void)
 
     b0 = _ (b0);
     b1 = _ (b1);
-#endif  // ENABLE_NLS
+#endif
 
     do_refresh ();
 

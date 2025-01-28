@@ -109,10 +109,18 @@ static const struct test_relative_cd_ds
     const vfs_path_flag_t input_flags;
     const char *expected_element_path;
 } test_relative_cd_ds[] = {
-    { // 0.
-      "/test1://user:pass@some.host:12345/path/to/dir", VPF_NONE, "path/to/dir" },
-    { // 1.
-      "some-non-exists-dir", VPF_NO_CANON, "some-non-exists-dir" },
+    {
+        // 0.
+        "/test1://user:pass@some.host:12345/path/to/dir",
+        VPF_NONE,
+        "path/to/dir",
+    },
+    {
+        // 1.
+        "some-non-exists-dir",
+        VPF_NO_CANON,
+        "some-non-exists-dir",
+    },
 };
 
 /* @Test(dataSource = "test_relative_cd_ds") */

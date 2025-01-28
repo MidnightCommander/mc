@@ -92,7 +92,10 @@ static const struct
     { &mc_cache_str, EDIT_HOME_TEMP_FILE },
     { &mc_cache_str, EDIT_HOME_BLOCK_FILE },
 
-    { NULL, NULL }
+    {
+        NULL,
+        NULL,
+    },
 };
 
 /* --------------------------------------------------------------------------------------------- */

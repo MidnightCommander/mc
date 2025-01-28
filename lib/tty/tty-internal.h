@@ -46,4 +46,4 @@ void tty_colorize_area (int y, int x, int rows, int cols, int color);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC_TTY_INTERNAL_H
+#endif

@@ -62,33 +62,19 @@ static const struct test_is_wildcarded_ds
     const char *input_value;
     gboolean expected_result;
 } test_is_wildcarded_ds[] = {
-    { // 0
-      "blabla", FALSE },
-    { // 1
-      "bla?bla", TRUE },
-    { // 2
-      "bla*bla", TRUE },
-    { // 3
-      "bla\\*bla", FALSE },
-
-    { // 4
-      "bla\\\\*bla", TRUE },
-    { // 5
-      "bla\\1bla", TRUE },
-    { // 6
-      "bla\\\\1bla", FALSE },
-    { // 7
-      "bla\\\t\\\\1bla", FALSE },
-    { // 8
-      "bla\\\t\\\\\\1bla", TRUE },
-    { // 9
-      "bla\\9bla", TRUE },
-    { // 10
-      "blabla\\", FALSE },
-    { // 11
-      "blab\\?la", FALSE },
-    { // 12
-      "blab\\\\?la", TRUE },
+    { "blabla", FALSE },            // 0
+    { "bla?bla", TRUE },            // 1
+    { "bla*bla", TRUE },            // 2
+    { "bla\\*bla", FALSE },         // 3
+    { "bla\\\\*bla", TRUE },        // 4
+    { "bla\\1bla", TRUE },          // 5
+    { "bla\\\\1bla", FALSE },       // 6
+    { "bla\\\t\\\\1bla", FALSE },   // 7
+    { "bla\\\t\\\\\\1bla", TRUE },  // 8
+    { "bla\\9bla", TRUE },          // 9
+    { "blabla\\", FALSE },          // 10
+    { "blab\\?la", FALSE },         // 11
+    { "blab\\\\?la", TRUE },        // 12
 };
 
 /* @Test(dataSource = "test_is_wildcarded_ds") */

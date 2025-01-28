@@ -112,15 +112,15 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @DataSource("check_subtitute_ds") */
-static const struct check_subtitute_ds
+/* @DataSource("check_substitute_ds") */
+static const struct check_substitute_ds
 {
     const char *config_opts_string;
     const char *app_name;
     const char *file_name;
     int start_line;
     const char *expected_result;
-} check_subtitute_ds[] = {
+} check_substitute_ds[] = {
     {
         "-a -b -c %filename \\%filename %filename:%lineno \\%lineno +%lineno",
         "some-editor",
@@ -137,8 +137,8 @@ static const struct check_subtitute_ds
     },
 };
 
-/* @Test(dataSource = "check_subtitute_ds") */
-START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_subtitute_ds)
+/* @Test(dataSource = "check_substitute_ds") */
+START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_substitute_ds)
 {
     // given
     char *actual_result;
@@ -181,7 +181,7 @@ main (void)
 
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, check_if_filename_and_lineno_will_be_subtituted,
-                                   check_subtitute_ds);
+                                   check_substitute_ds);
     // ***********************************
 
     return mctest_run_all (tc_core);

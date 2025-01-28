@@ -49,16 +49,40 @@ GIConv str_cnv_not_convert = INVALID_CONV;
 /*** file scope variables ************************************************************************/
 
 /* names, that are used for utf-8 */
-static const char *const str_utf8_encodings[] = { "utf-8", "utf8", NULL };
+static const char *const str_utf8_encodings[] = {
+    "utf-8",
+    "utf8",
+    NULL,
+};
 
 /* standard 8bit encodings, no wide or multibytes characters */
-static const char *const str_8bit_encodings[] = { "cp-1251", "cp1251",
-                                                  // solaris
-                                                  "ansi-1251", "ansi1251", "cp-1250", "cp1250",
-                                                  "cp-866", "cp866",
-                                                  // glibc
-                                                  "ibm-866", "ibm866", "cp-850", "cp850", "cp-852",
-                                                  "cp852", "iso-8859", "iso8859", "koi8", NULL };
+static const char *const str_8bit_encodings[] = {
+    "cp-1251",
+    "cp1251",
+
+    // solaris
+    "ansi-1251",
+    "ansi1251",
+
+    "cp-1250",
+    "cp1250",
+    "cp-866",
+    "cp866",
+
+    // glibc
+    "ibm-866",
+    "ibm866",
+
+    "cp-850",
+    "cp850",
+    "cp-852",
+    "cp852",
+    "iso-8859",
+    "iso8859",
+    "koi8",
+
+    NULL,
+};
 
 /* terminal encoding */
 static char *codeset = NULL;

@@ -118,7 +118,7 @@ const char *mc_prompt = NULL;
  * Don't restrict the output on the screen manager level,
  * the translation tables take care of it.
  */
-#endif  // !HAVE_CHARSET
+#endif
 
 /*** file scope type declarations ****************************************************************/
 
@@ -189,7 +189,7 @@ listmode_cmd (void)
 
     do_refresh ();
 }
-#endif  // LISTMODE_EDITOR
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -505,7 +505,7 @@ check_other_panel_timestamp (const gchar *event_group_name, const gchar *event_n
         check_panel_timestamp (other_panel, get_other_type (), event_data->vclass, event_data->id);
     return !event_data->ret;
 }
-#endif  // ENABLE_VFS
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -677,7 +677,7 @@ create_panels (void)
 #ifdef ENABLE_VFS
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL, NULL);
-#endif  // ENABLE_VFS
+#endif
 
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_print_message", print_vfs_message, NULL, NULL);
 }
@@ -841,7 +841,7 @@ setup_mc (void)
     tty_display_8bit (TRUE);
 #    else
     tty_display_8bit (mc_global.full_eight_bits);
-#    endif  // HAVE_CHARSET
+#    endif
 
 #else  // HAVE_SLANG
 
@@ -849,8 +849,8 @@ setup_mc (void)
     tty_display_8bit (TRUE);
 #    else
     tty_display_8bit (mc_global.eight_bit_clean);
-#    endif  // HAVE_CHARSET
-#endif      // HAVE_SLANG
+#    endif
+#endif
 
     const int baudrate = tty_baudrate ();
     if ((baudrate > 0 && baudrate < 9600) || mc_global.tty.slow_terminal)
@@ -937,7 +937,7 @@ create_file_manager (void)
        NULL dereference in load_prompt() -> ... -> setup_cmdline() -> label_set_text(). */
     if (mc_global.tty.use_subshell)
         add_select_channel (mc_global.tty.subshell_pty, load_prompt, NULL);
-#endif  // !ENABLE_SUBSHELL
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -973,7 +973,7 @@ mc_maybe_editor_or_viewer (void)
     case MC_RUN_EDITOR:
         ret = edit_files ((GList *) mc_run_param0);
         break;
-#endif  // USE_INTERNAL_EDIT
+#endif
     case MC_RUN_VIEWER:
     {
         vfs_path_t *vpath = NULL;
@@ -989,7 +989,7 @@ mc_maybe_editor_or_viewer (void)
     case MC_RUN_DIFFVIEWER:
         ret = dview_diff_cmd (mc_run_param0, mc_run_param1);
         break;
-#endif  // USE_DIFF_VIEW
+#endif
     default:
         ret = FALSE;
     }

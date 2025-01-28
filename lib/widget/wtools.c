@@ -131,7 +131,7 @@ bg_message (int dummy, int *flags, char *title, const char *text)
     query_dialog (title, text, *flags, 1, _ ("&OK"));
     g_free (title);
 }
-#endif  // ENABLE_BACKGROUND
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -155,7 +155,6 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     char histname[64] = "inp|";
     gboolean is_passwd = FALSE;
     char *my_str = NULL;
-    int ret;
 
     // label text
     p_text = g_strstrip (g_strdup (text));
@@ -173,25 +172,25 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
         def_text = "";
     }
 
-    {
-        quick_widget_t quick_widgets[] = { QUICK_LABELED_INPUT (p_text, input_label_above, def_text,
-                                                                histname, &my_str, NULL, is_passwd,
-                                                                strip_password, completion_flags),
-                                           QUICK_BUTTONS_OK_CANCEL, QUICK_END };
+    quick_widget_t quick_widgets[] = {
+        QUICK_LABELED_INPUT (p_text, input_label_above, def_text, histname, &my_str, NULL,
+                             is_passwd, strip_password, completion_flags),
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END,
+    };
 
-        WRect r = { -1, -1, 0, COLS / 2 };
+    WRect r = { -1, -1, 0, COLS / 2 };
 
-        quick_dialog_t qdlg = {
-            .rect = r,
-            .title = header,
-            .help = help,
-            .widgets = quick_widgets,
-            .callback = NULL,
-            .mouse_callback = NULL
-        };
+    quick_dialog_t qdlg = {
+        .rect = r,
+        .title = header,
+        .help = help,
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL,
+    };
 
-        ret = quick_dialog (&qdlg);
-    }
+    const int ret = quick_dialog (&qdlg);
 
     g_free (p_text);
 
@@ -229,7 +228,7 @@ wtools_parent_call_string (void *routine, int argc, ...)
     va_end (event_data.ap);
     return event_data.ret.s;
 }
-#endif  // ENABLE_BACKGROUND
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -403,7 +402,7 @@ message (int flags, const char *title, const char *text, ...)
                             strlen (p), p);
     }
     else
-#endif  // ENABLE_BACKGROUND
+#endif
         query_dialog (title, p, flags, 1, _ ("&OK"));
 
     g_free (p);
@@ -460,7 +459,7 @@ input_dialog_help (const char *header, const char *text, const char *help, const
             strip_password, sizeof (input_complete_t), completion_flags);
     }
     else
-#endif  // ENABLE_BACKGROUND
+#endif
         return fg_input_dialog_help (header, text, help, history_name, def_text, strip_password,
                                      completion_flags);
 }

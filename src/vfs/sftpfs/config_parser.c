@@ -80,18 +80,49 @@ static struct
     enum config_var_type type;
     size_t offset;
 } config_variables[] = {
-    { "^\\s*User\\s+(.*)$", NULL, STRING, offsetof (sftpfs_ssh_config_entity_t, user) },
-    { "^\\s*HostName\\s+(.*)$", NULL, STRING, offsetof (sftpfs_ssh_config_entity_t, real_host) },
-    { "^\\s*IdentitiesOnly\\s+(.*)$", NULL, BOOLEAN,
-      offsetof (sftpfs_ssh_config_entity_t, identities_only) },
-    { "^\\s*IdentityFile\\s+(.*)$", NULL, FILENAME,
-      offsetof (sftpfs_ssh_config_entity_t, identity_file) },
-    { "^\\s*Port\\s+(.*)$", NULL, INTEGER, offsetof (sftpfs_ssh_config_entity_t, port) },
-    { "^\\s*PasswordAuthentication\\s+(.*)$", NULL, BOOLEAN,
-      offsetof (sftpfs_ssh_config_entity_t, password_auth) },
-    { "^\\s*PubkeyAuthentication\\s+(.*)$", NULL, STRING,
-      offsetof (sftpfs_ssh_config_entity_t, pubkey_auth) },
-    { NULL, NULL, 0, 0 }
+    {
+        "^\\s*User\\s+(.*)$",
+        NULL,
+        STRING,
+        offsetof (sftpfs_ssh_config_entity_t, user),
+    },
+    {
+        "^\\s*HostName\\s+(.*)$",
+        NULL,
+        STRING,
+        offsetof (sftpfs_ssh_config_entity_t, real_host),
+    },
+    {
+        "^\\s*IdentitiesOnly\\s+(.*)$",
+        NULL,
+        BOOLEAN,
+        offsetof (sftpfs_ssh_config_entity_t, identities_only),
+    },
+    {
+        "^\\s*IdentityFile\\s+(.*)$",
+        NULL,
+        FILENAME,
+        offsetof (sftpfs_ssh_config_entity_t, identity_file),
+    },
+    {
+        "^\\s*Port\\s+(.*)$",
+        NULL,
+        INTEGER,
+        offsetof (sftpfs_ssh_config_entity_t, port),
+    },
+    {
+        "^\\s*PasswordAuthentication\\s+(.*)$",
+        NULL,
+        BOOLEAN,
+        offsetof (sftpfs_ssh_config_entity_t, password_auth),
+    },
+    {
+        "^\\s*PubkeyAuthentication\\s+(.*)$",
+        NULL,
+        STRING,
+        offsetof (sftpfs_ssh_config_entity_t, pubkey_auth),
+    },
+    { NULL, NULL, 0, 0 },
 };
 
 /* --------------------------------------------------------------------------------------------- */

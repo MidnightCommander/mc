@@ -317,7 +317,7 @@ add_name_to_list (const char *path)
 {
     listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, path, NULL, FALSE);
 }
-#endif  // !ENABLE_VFS
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -464,7 +464,7 @@ hotlist_run_cmd (int action)
                           FALSE);
         vfs_fill_names (add_name_to_list);
         return 0;
-#endif  // ENABLE_VFS
+#endif
 
     default:
         return 1;
@@ -682,7 +682,7 @@ init_i18n_stuff (int list_type, int cols)
         {
 #ifdef ENABLE_NLS
             hotlist_but[i].text = _ (hotlist_but[i].text);
-#endif  // ENABLE_NLS
+#endif
             hotlist_but[i].len = str_term_width1 (hotlist_but[i].text) + 3;
             if (hotlist_but[i].flags == DEFPUSH_BUTTON)
                 hotlist_but[i].len += 2;
@@ -767,7 +767,7 @@ init_hotlist (hotlist_t list_type)
         dh = 1;
     }
     else
-#endif  // !ENABLE_VFS
+#endif
     {
         title = _ ("Directory hotlist");
         help_node = "[Hotlist]";
@@ -794,7 +794,7 @@ init_hotlist (hotlist_t list_type)
         vfs_fill_names (add_name_to_list);
     }
     else
-#endif  // !ENABLE_VFS
+#endif
         fill_listbox (l_hotlist);
 
     // insert before groupbox to view scrollbar
@@ -1003,7 +1003,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2, c
             QUICK_BUTTON (N_ ("&Append"), B_APPEND, NULL, NULL),
             QUICK_BUTTON (N_ ("&Insert"), B_INSERT, NULL, NULL),
             QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK_END
+        QUICK_END,
         // clang-format on
     };
 
@@ -1015,7 +1015,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2, c
         .help = help,
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     return quick_dialog (&qdlg);
@@ -1065,7 +1065,7 @@ add_new_group_input (const char *header, const char *label, char **result)
             QUICK_BUTTON (N_ ("&Append"), B_APPEND, NULL, NULL),
             QUICK_BUTTON (N_ ("&Insert"), B_INSERT, NULL, NULL),
             QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
-        QUICK_END
+        QUICK_END,
         // clang-format on
     };
 
@@ -1077,7 +1077,7 @@ add_new_group_input (const char *header, const char *label, char **result)
         .help = "[Hotlist]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     int ret;

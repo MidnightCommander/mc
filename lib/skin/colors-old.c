@@ -102,7 +102,7 @@ static const mc_skin_colors_old_t old_colors[] = {
     { "viewbold", "viewer", "viewbold" },
     { "viewnormal", "viewer", "_default_" },
     { "viewselected", "viewer", "viewselected" },
-    { "viewunderline", "viewer", "viewunderline" }
+    { "viewunderline", "viewer", "viewunderline" },
 };
 
 static const size_t num_old_colors = G_N_ELEMENTS (old_colors);

@@ -42,7 +42,7 @@
 #    define bindtextdomain(Domain, Directory) 1
 #    define _(String)                         (String)
 #    define N_(String)                        (String)
-#endif  // !ENABLE_NLS
+#endif
 
 #ifdef HAVE_FUNC_ATTRIBUTE_FALLTHROUGH
 #    define MC_FALLTHROUGH __attribute__ ((fallthrough))
@@ -126,7 +126,7 @@ typedef struct
      * This is reported to break on many terminals (xterm, qansi-m).
      */
     gboolean full_eight_bits;
-#endif  // !HAVE_CHARSET
+#endif
     /*
      * If utf-8 terminal utf8_display = TRUE
      * Display bits set UTF-8
@@ -141,7 +141,7 @@ typedef struct
 #ifdef ENABLE_BACKGROUND
     // If true, this is a background process
     gboolean we_are_background;
-#endif  // ENABLE_BACKGROUND
+#endif
 
     struct
     {
@@ -175,14 +175,14 @@ typedef struct
 #ifndef LINUX_CONS_SAVER_C
         // Used only in mc, not in cons.saver
         char console_flag;
-#endif  // !LINUX_CONS_SAVER_C
+#endif
         // If using a subshell for evaluating commands this is true
         gboolean use_subshell;
 
 #ifdef ENABLE_SUBSHELL
         // File descriptors of the pseudoterminal used by the subshell
         int subshell_pty;
-#endif  // !ENABLE_SUBSHELL
+#endif
 
         // This flag is set by xterm detection routine in function main()
         // It is used by function toggle_subshell()

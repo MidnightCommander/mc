@@ -115,7 +115,7 @@ extern gboolean use_internal_edit;
 extern int default_source_codepage;
 extern char *autodetect_codeset;
 extern gboolean is_autodetect_codeset_enabled;
-#endif  // !HAVE_CHARSET
+#endif
 
 #ifdef HAVE_ASPELL
 extern char *spell_language;
@@ -139,7 +139,7 @@ extern int macro_index;
 extern struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
 
 extern GArray *macros_list;
-#endif  // USE_INTERNAL_EDIT
+#endif
 
 extern int saving_setup;
 
@@ -154,11 +154,11 @@ void setup_save_config_show_error (const char *filename, GError **mcerror);
 void load_key_defs (void);
 #ifdef ENABLE_VFS_FTP
 char *load_anon_passwd (void);
-#endif  // ENABLE_VFS_FTP
+#endif
 
 void panel_load_setup (WPanel *panel, const char *section);
 void panel_save_setup (WPanel *panel, const char *section);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__SETUP_H
+#endif

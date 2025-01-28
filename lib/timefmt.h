@@ -56,4 +56,4 @@ const char *file_date (time_t when);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__UTIL_TIMEFMT_H
+#endif

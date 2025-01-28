@@ -83,4 +83,4 @@ GString *mc_search_hex_prepare_replace_str (mc_search_t *lc_mc_search, GString *
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__SEARCH_INTERNAL_H
+#endif

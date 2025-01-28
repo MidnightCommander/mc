@@ -93,17 +93,44 @@ static const struct
 {
     int key_code;
     const char *key_name;
-} key_table[] = { { KEY_F (0), "k0" },  { KEY_F (1), "k1" },  { KEY_F (2), "k2" },
-                  { KEY_F (3), "k3" },  { KEY_F (4), "k4" },  { KEY_F (5), "k5" },
-                  { KEY_F (6), "k6" },  { KEY_F (7), "k7" },  { KEY_F (8), "k8" },
-                  { KEY_F (9), "k9" },  { KEY_F (10), "k;" }, { KEY_F (11), "F1" },
-                  { KEY_F (12), "F2" }, { KEY_F (13), "F3" }, { KEY_F (14), "F4" },
-                  { KEY_F (15), "F5" }, { KEY_F (16), "F6" }, { KEY_F (17), "F7" },
-                  { KEY_F (18), "F8" }, { KEY_F (19), "F9" }, { KEY_F (20), "FA" },
-                  { KEY_IC, "kI" },     { KEY_NPAGE, "kN" },  { KEY_PPAGE, "kP" },
-                  { KEY_LEFT, "kl" },   { KEY_RIGHT, "kr" },  { KEY_UP, "ku" },
-                  { KEY_DOWN, "kd" },   { KEY_DC, "kD" },     { KEY_BACKSPACE, "kb" },
-                  { KEY_HOME, "kh" },   { KEY_END, "@7" },    { 0, NULL } };
+} key_table[] = {
+    { KEY_F (0), "k0" },
+    { KEY_F (1), "k1" },
+    { KEY_F (2), "k2" },
+    { KEY_F (3), "k3" },
+    { KEY_F (4), "k4" },
+    { KEY_F (5), "k5" },
+    { KEY_F (6), "k6" },
+    { KEY_F (7), "k7" },
+    { KEY_F (8), "k8" },
+    { KEY_F (9), "k9" },
+    { KEY_F (10), "k;" },
+    { KEY_F (11), "F1" },
+    { KEY_F (12), "F2" },
+    { KEY_F (13), "F3" },
+    { KEY_F (14), "F4" },
+    { KEY_F (15), "F5" },
+    { KEY_F (16), "F6" },
+    { KEY_F (17), "F7" },
+    { KEY_F (18), "F8" },
+    { KEY_F (19), "F9" },
+    { KEY_F (20), "FA" },
+    { KEY_IC, "kI" },
+    { KEY_NPAGE, "kN" },
+    { KEY_PPAGE, "kP" },
+    { KEY_LEFT, "kl" },
+    { KEY_RIGHT, "kr" },
+    { KEY_UP, "ku" },
+    { KEY_DOWN, "kd" },
+    { KEY_DC, "kD" },
+    { KEY_BACKSPACE, "kb" },
+    { KEY_HOME, "kh" },
+    { KEY_END, "@7" },
+    {
+        0,
+        NULL,
+    },
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -207,19 +234,21 @@ mc_tty_normalize_lines_char (const char *str)
     {
         const char *line;
         int line_code;
-    } const lines_codes[] = { { "\342\224\214", SLSMG_ULCORN_CHAR },
-                              { "\342\224\220", SLSMG_URCORN_CHAR },
-                              { "\342\224\224", SLSMG_LLCORN_CHAR },
-                              { "\342\224\230", SLSMG_LRCORN_CHAR },
-                              { "\342\224\234", SLSMG_LTEE_CHAR },
-                              { "\342\224\244", SLSMG_RTEE_CHAR },
-                              { "\342\224\254", SLSMG_UTEE_CHAR },
-                              { "\342\224\264", SLSMG_DTEE_CHAR },
-                              { "\342\224\200", SLSMG_HLINE_CHAR },
-                              { "\342\224\202", SLSMG_VLINE_CHAR },
-                              { "\342\224\274", SLSMG_PLUS_CHAR },
+    } const lines_codes[] = {
+        { "\342\224\214", SLSMG_ULCORN_CHAR },
+        { "\342\224\220", SLSMG_URCORN_CHAR },
+        { "\342\224\224", SLSMG_LLCORN_CHAR },
+        { "\342\224\230", SLSMG_LRCORN_CHAR },
+        { "\342\224\234", SLSMG_LTEE_CHAR },
+        { "\342\224\244", SLSMG_RTEE_CHAR },
+        { "\342\224\254", SLSMG_UTEE_CHAR },
+        { "\342\224\264", SLSMG_DTEE_CHAR },
+        { "\342\224\200", SLSMG_HLINE_CHAR },
+        { "\342\224\202", SLSMG_VLINE_CHAR },
+        { "\342\224\274", SLSMG_PLUS_CHAR },
 
-                              { NULL, 0 } };
+        { NULL, 0 },
+    };
 
     if (!str)
         return (int) ' ';

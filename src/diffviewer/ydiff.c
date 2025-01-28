@@ -650,7 +650,7 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
     }
     return MAX (length, (size_t) result);
 }
-#endif  // HAVE_CHARSET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2275,7 +2275,7 @@ dview_select_encoding (WDiff *dview)
     tty_touch_screen ();
     repaint_screen ();
 }
-#endif  // HAVE_CHARSET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2341,8 +2341,11 @@ dview_save_options (WDiff *dview)
 static void
 dview_diff_options (WDiff *dview)
 {
-    const char *quality_str[] = { N_ ("No&rmal"), N_ ("&Fastest (Assume large files)"),
-                                  N_ ("&Minimal (Find a smaller set of change)") };
+    const char *quality_str[] = {
+        N_ ("No&rmal"),
+        N_ ("&Fastest (Assume large files)"),
+        N_ ("&Minimal (Find a smaller set of change)"),
+    };
 
     quick_widget_t quick_widgets[] = {
         // clang-format off
@@ -2358,7 +2361,7 @@ dview_diff_options (WDiff *dview)
                             NULL),
         QUICK_STOP_GROUPBOX,
         QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END
+        QUICK_END,
         // clang-format on
     };
 
@@ -2370,7 +2373,7 @@ dview_diff_options (WDiff *dview)
         .help = "[Diff Options]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     if (quick_dialog (&qdlg) != B_CANCEL)
@@ -2897,7 +2900,10 @@ dview_goto_cmd (WDiff *dview, diff_place_t ord)
 {
     static gboolean first_run = TRUE;
 
-    static const char *title[2] = { N_ ("Goto line (left)"), N_ ("Goto line (right)") };
+    static const char *title[2] = {
+        N_ ("Goto line (left)"),
+        N_ ("Goto line (right)"),
+    };
 
     int newline;
     char *input;

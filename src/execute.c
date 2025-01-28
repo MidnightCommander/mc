@@ -140,7 +140,7 @@ do_possible_cd (const vfs_path_t *new_dir_vpath)
                     "deleted your working directory, or given yourself\n"
                     "extra access permissions with the \"su\" command?"));
 }
-#endif  // ENABLE_SUBSHELL
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -167,7 +167,7 @@ do_suspend_cmd (void)
         // Restore previous SIGTSTP action
         my_sigaction (SIGTSTP, &sigtstp_action, NULL);
     }
-#endif  // SIGTSTP
+#endif
 
     if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
         handle_console (CONSOLE_SAVE);
@@ -295,7 +295,7 @@ do_executev (const char *shell, int flags, char *const argv[])
 {
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
-#endif  // ENABLE_SUBSHELL
+#endif
 
     vfs_path_t *old_vfs_dir_vpath = NULL;
 
@@ -322,7 +322,7 @@ do_executev (const char *shell, int flags, char *const argv[])
         invoke_subshell (*argv, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
     }
     else
-#endif  // ENABLE_SUBSHELL
+#endif
         my_systemv_flags (flags, shell, argv);
 
     if ((flags & EXECUTE_INTERNAL) == 0)
@@ -333,7 +333,7 @@ do_executev (const char *shell, int flags, char *const argv[])
             && quit == 0
 #ifdef ENABLE_SUBSHELL
             && subshell_state != RUNNING_COMMAND
-#endif  // ENABLE_SUBSHELL
+#endif
         )
         {
             printf ("%s", _ ("Press any key to continue..."));
@@ -361,7 +361,7 @@ do_executev (const char *shell, int flags, char *const argv[])
         vfs_path_free (new_dir_vpath, TRUE);
     }
 
-#endif  // ENABLE_SUBSHELL
+#endif
 
     if (old_vfs_dir_vpath != NULL)
     {
@@ -441,7 +441,7 @@ shell_execute (const char *command, int flags)
             message (D_ERROR, MSG_ERROR, "%s", _ ("The shell is already running a command"));
     }
     else
-#endif  // ENABLE_SUBSHELL
+#endif
         do_execute (mc_global.shell->path, cmd != NULL ? cmd : command, flags | EXECUTE_AS_SHELL);
 
     g_free (cmd);
@@ -456,7 +456,7 @@ toggle_subshell (void)
 
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
-#endif  // ENABLE_SUBSHELL
+#endif
 
     SIG_ATOMIC_VOLATILE_T was_sigwinch = 0;
 
@@ -482,7 +482,7 @@ toggle_subshell (void)
      * is no raw_mode supported
      */
     tty_reset_shell_mode ();
-#endif  // !HAVE_SLANG
+#endif
     tty_noecho ();
     tty_keypad (FALSE);
     tty_reset_screen ();
@@ -500,7 +500,7 @@ toggle_subshell (void)
         invoke_subshell (NULL, VISIBLY, new_dir_p);
     }
     else
-#endif  // ENABLE_SUBSHELL
+#endif
     {
         if (output_starts_shell)
         {
@@ -534,7 +534,7 @@ toggle_subshell (void)
         // restart subshell
         if (mc_global.tty.use_subshell)
             init_subshell ();
-#endif  // ENABLE_SUBSHELL
+#endif
     }
 
     enable_mouse ();
@@ -562,7 +562,7 @@ toggle_subshell (void)
     }
 
     vfs_path_free (new_dir_vpath, TRUE);
-#endif  // ENABLE_SUBSHELL
+#endif
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
     {

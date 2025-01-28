@@ -76,12 +76,24 @@ static const struct test_path_length_ds
     const size_t expected_length_element_encoding;
     const size_t expected_length_terminal_encoding;
 } test_path_length_ds[] = {
-    { // 0.
-      NULL, 0, 0 },
-    { // 1.
-      "/", 1, 1 },
-    { // 2.
-      "/тестовый/путь", 26, 26 },
+    {
+        // 0.
+        NULL,
+        0,
+        0,
+    },
+    {
+        // 1.
+        "/",
+        1,
+        1,
+    },
+    {
+        // 2.
+        "/тестовый/путь",
+        26,
+        26,
+    },
 #ifdef HAVE_CHARSET
     {
         // 3.
@@ -89,7 +101,7 @@ static const struct test_path_length_ds
         14,
         38,
     },
-#endif  // HAVE_CHARSET
+#endif
 };
 
 /* @Test(dataSource = "test_path_length_ds") */

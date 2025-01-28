@@ -33,4 +33,4 @@ void gauge_show (WGauge *g, gboolean shown);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_GAUGE_H
+#endif

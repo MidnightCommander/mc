@@ -52,7 +52,7 @@
 
 #ifdef __linux__
 int cons_saver_pid = 1;
-#endif  // __linux__
+#endif
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -65,7 +65,7 @@ int cons_saver_pid = 1;
             fflush (stdout);                                                                       \
         }                                                                                          \
         while (0)
-#endif  // __linux__
+#endif
 
 /*** file scope type declarations ****************************************************************/
 
@@ -81,7 +81,7 @@ static int pipefd2[2] = { -1, -1 };
 #elif defined(__FreeBSD__)
 static struct scrshot screen_shot;
 static struct vid_info screen_info;
-#endif  // __linux__
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -456,7 +456,7 @@ handle_console_freebsd (console_action_t action)
         break;
     }
 }
-#endif  // __FreeBSD__
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/

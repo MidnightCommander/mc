@@ -458,4 +458,4 @@ widget_overlapped (const Widget *a, const Widget *b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif  // MC__WIDGET_COMMON_H
+#endif

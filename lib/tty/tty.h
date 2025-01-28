@@ -141,4 +141,4 @@ extern void tty_exit_ca_mode (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__TTY_H
+#endif

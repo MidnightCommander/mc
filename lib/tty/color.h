@@ -57,4 +57,4 @@ extern gboolean tty_use_truecolors (GError **error);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__COLOR_H
+#endif

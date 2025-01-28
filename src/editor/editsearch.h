@@ -33,4 +33,4 @@ void edit_replace_cmd (WEdit *edit, gboolean again);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__EDIT_SEARCH_H
+#endif

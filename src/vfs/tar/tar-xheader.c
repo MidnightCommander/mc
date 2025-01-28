@@ -165,7 +165,7 @@ static struct xhdr_tab xhdr_tab[] = {
 
     { "GNU.dumpdir", dumpdir_decoder, XHDR_PROTECTED },
 
-    { NULL, NULL, 0 }
+    { NULL, NULL, 0 },
 };
 
 /* List of keyword/value pairs decoded from the last 'g' type header */
@@ -652,7 +652,10 @@ decg (void *data, const char *keyword, const char *value, size_t size)
 static gboolean
 decx (void *data, const char *keyword, const char *value, size_t size)
 {
-    struct keyword_item kp = { .pattern = (char *) keyword, .value = (char *) value };
+    struct keyword_item kp = {
+        .pattern = (char *) keyword,
+        .value = (char *) value,
+    };
 
     (void) size;
 

@@ -364,4 +364,4 @@ long keybind_lookup_keymap_command (const global_keymap_t *keymap, long key);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__KEYBIND_H
+#endif

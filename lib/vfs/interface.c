@@ -673,7 +673,7 @@ mc_chdir (const vfs_path_t *vpath)
                 super->path_element->path = g_strdup (path_element->path);
             }
         }
-#endif  // ENABLE_VFS_NET
+#endif
     }
 
     return 0;

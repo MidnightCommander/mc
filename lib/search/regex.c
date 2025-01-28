@@ -67,9 +67,33 @@ typedef enum
 static gboolean
 mc_search__regex_str_append_if_special (GString *copy_to, const GString *regex_str, gsize *offset)
 {
-    const char *special_chars[] = { "\\s", "\\S", "\\d", "\\D", "\\b", "\\B", "\\w", "\\W", "\\t",
-                                    "\\n", "\\r", "\\f", "\\a", "\\e", "\\x", "\\X", "\\c", "\\C",
-                                    "\\l", "\\L", "\\u", "\\U", "\\E", "\\Q", NULL };
+    const char *special_chars[] = {
+        "\\a",  //
+        "\\b",  //
+        "\\B",  //
+        "\\c",  //
+        "\\C",  //
+        "\\d",  //
+        "\\D",  //
+        "\\e",  //
+        "\\E",  //
+        "\\f",  //
+        "\\l",  //
+        "\\L",  //
+        "\\n",  //
+        "\\Q",  //
+        "\\r",  //
+        "\\s",  //
+        "\\S",  //
+        "\\t",  //
+        "\\u",  //
+        "\\U",  //
+        "\\w",  //
+        "\\W",  //
+        "\\x",  //
+        "\\X",  //
+        NULL,
+    };
 
     char *tmp_regex_str;
     const char **spec_chr;
@@ -295,7 +319,7 @@ mc_search__g_regex_match_full_safe (const GRegex *regex, const gchar *string, gs
     g_free (string_safe);
     return ret;
 }
-#endif  // SEARCH_TYPE_GLIB
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -338,7 +362,7 @@ mc_search__regex_found_cond_one (mc_search_t *lc_mc_search, mc_search_regex_t *r
     {
         return COND__NOT_FOUND;
     }
-#endif  // SEARCH_TYPE_GLIB
+#endif
     return COND__FOUND_OK;
 }
 
@@ -421,10 +445,10 @@ mc_search_regex__get_token_by_num (const mc_search_t *lc_mc_search, gsize lc_ind
 
 #ifdef SEARCH_TYPE_GLIB
     g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &fnd_start, &fnd_end);
-#else   // SEARCH_TYPE_GLIB
+#else  // SEARCH_TYPE_GLIB
     fnd_start = lc_mc_search->iovector[lc_index * 2 + 0];
     fnd_end = lc_mc_search->iovector[lc_index * 2 + 1];
-#endif  // SEARCH_TYPE_GLIB
+#endif
 
     if (fnd_end == fnd_start)
         return g_strdup ("");
@@ -878,7 +902,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
             MC_PTR_FREE (mc_search_cond->regex_handle);
             return;
         }
-#endif  // SEARCH_TYPE_GLIB
+#endif
     }
 
     lc_mc_search->is_utf8 = str_isutf8 (charset);
@@ -963,10 +987,10 @@ mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data, off_t st
         case COND__FOUND_OK:
 #ifdef SEARCH_TYPE_GLIB
             g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
-#else   // SEARCH_TYPE_GLIB
+#else  // SEARCH_TYPE_GLIB
             start_pos = lc_mc_search->iovector[0];
             end_pos = lc_mc_search->iovector[1];
-#endif  // SEARCH_TYPE_GLIB
+#endif
             if (found_len != NULL)
                 *found_len = end_pos - start_pos;
             lc_mc_search->normal_offset = lc_mc_search->start_buffer + start_pos;

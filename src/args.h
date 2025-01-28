@@ -44,4 +44,4 @@ gboolean mc_setup_by_args (int argc, char **argv, GError **mcerror);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__ARGS_H
+#endif

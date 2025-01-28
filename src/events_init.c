@@ -31,10 +31,10 @@
 
 #ifdef ENABLE_BACKGROUND
 #    include "background.h"  // (background_parent_call), background_parent_call_string()
-#endif                       // ENABLE_BACKGROUND
-#include "clipboard.h"       // clipboard events
-#include "execute.h"         // execute_suspend()
-#include "help.h"            // help_interactive_display()
+#endif
+#include "clipboard.h"  // clipboard events
+#include "execute.h"    // execute_suspend()
+#include "help.h"       // help_interactive_display()
 
 #include "events_init.h"
 
@@ -69,9 +69,9 @@ events_init (GError **mcerror)
         { MCEVENT_GROUP_CORE, "background_parent_call", background_parent_call, NULL },
         { MCEVENT_GROUP_CORE, "background_parent_call_string", background_parent_call_string,
           NULL },
-#endif  // ENABLE_BACKGROUND
+#endif
 
-        { NULL, NULL, NULL, NULL }
+        { NULL, NULL, NULL, NULL },
     };
 
     if (!mc_event_init (mcerror))

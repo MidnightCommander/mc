@@ -255,4 +255,4 @@ edit_reload (WEdit *edit, const vfs_path_t *filename_vpath)
     return edit_reload_line (edit, &arg);
 }
 
-#endif  // MC__EDIT_IMPL_H
+#endif

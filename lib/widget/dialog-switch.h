@@ -41,4 +41,4 @@ void dialog_change_screen_size (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__DIALOG_SWITCH_H
+#endif

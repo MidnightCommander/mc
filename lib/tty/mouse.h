@@ -11,7 +11,7 @@
 #ifdef HAVE_LIBGPM
 /* GPM mouse support include file */
 #    include <gpm.h>
-#endif  // !HAVE_LIBGPM
+#endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -25,7 +25,7 @@
 #    define GPM_B_RIGHT         (1 << 0)
 
 #    define GPM_BARE_EVENTS(ev) ((ev) & 0xF)
-#endif  // !HAVE_LIBGPM
+#endif
 
 /* Mouse wheel events */
 #ifndef GPM_B_DOWN
@@ -56,7 +56,7 @@ enum Gpm_Etype
     GPM_HARD = 256    /* if set in the defaultMask, force an already
                          used event to pass over to another handler */
 };
-#endif  // !HAVE_LIBGPM
+#endif
 
 /* Constants returned from the mouse callback */
 enum
@@ -85,7 +85,7 @@ typedef struct Gpm_Event
     int buttons, x, y;
     enum Gpm_Etype type;
 } Gpm_Event;
-#endif  // !HAVE_LIBGPM
+#endif
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -112,4 +112,4 @@ void disable_mouse (void);
 void show_mouse_pointer (int x, int y);
 
 /*** inline functions ****************************************************************************/
-#endif  // MC_MOUSE_H
+#endif

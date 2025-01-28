@@ -139,7 +139,7 @@ tty_start_interrupt_key (void)
     sigemptyset (&act.sa_mask);
 #ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
-#endif  // SA_RESTART
+#endif
     my_sigaction (SIGINT, &act, NULL);
 }
 

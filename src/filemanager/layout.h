@@ -96,4 +96,4 @@ void title_path_prepare (char **path, char **login);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__LAYOUT_H
+#endif

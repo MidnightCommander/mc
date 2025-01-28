@@ -207,17 +207,38 @@ static const struct test_vfs_parse_ls_lga_ds
     const char *expected_linkname;
     const size_t expected_filepos;
 } test_vfs_parse_ls_lga_ds[] = {
-    { // 0.
-      "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root", 1, "build_root", NULL,
-      0 },
-    { // 1.
-      "lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING", 1,
-      "COPYING", "doc/COPYING", 0 },
-    { // 2.
-      "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..", 1, "..", NULL, 0 },
-    { // 3.
-      "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root", 1, "build_root", NULL,
-      0 },
+    {
+        // 0.
+        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root",
+        1,
+        "build_root",
+        NULL,
+        0,
+    },
+    {
+        // 1.
+        "lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING",
+        1,
+        "COPYING",
+        "doc/COPYING",
+        0,
+    },
+    {
+        // 2.
+        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
+        1,
+        "..",
+        NULL,
+        0,
+    },
+    {
+        // 3.
+        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root",
+        1,
+        "build_root",
+        NULL,
+        0,
+    },
 };
 
 /* @Test(dataSource = "test_vfs_parse_ls_lga_ds") */
@@ -323,7 +344,7 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
-#define parce_one_line(ent_index, ls_output)                                                       \
+#define parse_one_line(ent_index, ls_output)                                                       \
     {                                                                                              \
         ent[ent_index] = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);            \
         if (!vfs_parse_ls_lga (ls_output, &ent[ent_index]->ino->st, &ent[ent_index]->name,         \
@@ -345,10 +366,10 @@ START_TEST (test_vfs_parse_ls_lga_unaligned)
 
     vfs_parse_ls_lga_init ();
 
-    parce_one_line (0, "drwxrwxr-x   10 500      500          4096 Jun 23 17:09  build_root1");
-    parce_one_line (1, "drwxrwxr-x   10 500     500         4096 Jun 23 17:09     build_root2");
-    parce_one_line (2, "drwxrwxr-x 10 500 500 4096 Jun 23 17:09  ..");
-    parce_one_line (
+    parse_one_line (0, "drwxrwxr-x   10 500      500          4096 Jun 23 17:09  build_root1");
+    parse_one_line (1, "drwxrwxr-x   10 500     500         4096 Jun 23 17:09     build_root2");
+    parse_one_line (2, "drwxrwxr-x 10 500 500 4096 Jun 23 17:09  ..");
+    parse_one_line (
         3,
         "drwxrwxr-x      10   500        500             4096   Jun   23   17:09   build_root 0");
 

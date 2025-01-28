@@ -113,4 +113,4 @@ edit_buffer_get_current_eol (const edit_buffer_t *buf)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif  // MC__EDIT_BUFFER_H
+#endif

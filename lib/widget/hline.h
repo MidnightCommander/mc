@@ -32,4 +32,4 @@ void hline_set_textv (WHLine *l, const char *format, ...) G_GNUC_PRINTF (2, 3);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_HLINE_H
+#endif

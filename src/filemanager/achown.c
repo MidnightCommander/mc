@@ -74,16 +74,18 @@ static struct
     int x;
     int len;
     const char *text;
-} advanced_chown_but[BUTTONS] = { { 0, B_ENTER, NARROW_BUTTON, 3, 0, "   " },
-                                  { 0, B_ENTER, NARROW_BUTTON, 11, 0, "   " },
-                                  { 0, B_ENTER, NARROW_BUTTON, 19, 0, "   " },
-                                  { 0, B_ENTER, NARROW_BUTTON, 29, 0, "" },
-                                  { 0, B_ENTER, NARROW_BUTTON, 47, 0, "" },
+} advanced_chown_but[BUTTONS] = {
+    { 0, B_ENTER, NARROW_BUTTON, 3, 0, "   " },
+    { 0, B_ENTER, NARROW_BUTTON, 11, 0, "   " },
+    { 0, B_ENTER, NARROW_BUTTON, 19, 0, "   " },
+    { 0, B_ENTER, NARROW_BUTTON, 29, 0, "" },
+    { 0, B_ENTER, NARROW_BUTTON, 47, 0, "" },
 
-                                  { 0, B_SETALL, NORMAL_BUTTON, 0, 0, N_ ("Set &all") },
-                                  { 0, B_SKIP, NORMAL_BUTTON, 0, 0, N_ ("S&kip") },
-                                  { 0, B_ENTER, DEFPUSH_BUTTON, 0, 0, N_ ("&Set") },
-                                  { 0, B_CANCEL, NORMAL_BUTTON, 0, 0, N_ ("&Cancel") } };
+    { 0, B_SETALL, NORMAL_BUTTON, 0, 0, N_ ("Set &all") },
+    { 0, B_SKIP, NORMAL_BUTTON, 0, 0, N_ ("S&kip") },
+    { 0, B_ENTER, DEFPUSH_BUTTON, 0, 0, N_ ("&Set") },
+    { 0, B_CANCEL, NORMAL_BUTTON, 0, 0, N_ ("&Cancel") },
+};
 
 static int current_file;
 static gboolean ignore_all;
@@ -119,7 +121,7 @@ advanced_chown_init (void)
     {
 #ifdef ENABLE_NLS
         advanced_chown_but[i].text = _ (advanced_chown_but[i].text);
-#endif  // ENABLE_NLS
+#endif
 
         advanced_chown_but[i].len = str_term_width1 (advanced_chown_but[i].text) + 3;
         if (advanced_chown_but[i].flags == DEFPUSH_BUTTON)

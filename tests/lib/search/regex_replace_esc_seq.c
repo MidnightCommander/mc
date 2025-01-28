@@ -58,52 +58,134 @@ static const struct test_regex_replace_esc_seq_prepare_ds
     const gsize expected_skipped_len;
     const int expected_flags;
 } test_regex_replace_esc_seq_prepare_ds[] = {
-    { // 0. \\{123}
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 7,
-      FALSE, 6, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 1. \\xab
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 20,
-      FALSE, 4, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 2. \\x{456abcd}
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 36,
-      FALSE, 11, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 3. \\xtre
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 54,
-      FALSE, 2, REPLACE_PREPARE_T_NOTHING_SPECIAL },
-    { // 4. \\n
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 59,
-      FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 5. \\t
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 61,
-      FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 6. \\v
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 63,
-      FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 7. \\b
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 65,
-      FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 8. \\r
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 67,
-      FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 9. \\f
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 69,
-      FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 10. \\a
-      "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a", 71,
-      FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ },
-    { // 11. \\{123
-      "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre", 0, TRUE, 5,
-      REPLACE_PREPARE_T_NOTHING_SPECIAL },
-    { // 12. \\x{qwerty}
-      "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre", 6, TRUE, 3,
-      REPLACE_PREPARE_T_NOTHING_SPECIAL },
-    { // 13. \\12}
-      "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre", 17, TRUE, 0, 0 },
-    { // 14. \\x{456a-bcd}
-      "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre", 22, TRUE, 7,
-      REPLACE_PREPARE_T_NOTHING_SPECIAL },
-    { // 15. \\satre
-      "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre", 41, TRUE, 0, 0 },
+    {
+        // 0. \\{123}
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        7,
+        FALSE,
+        6,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 1. \\xab
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        20,
+        FALSE,
+        4,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 2. \\x{456abcd}
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        36,
+        FALSE,
+        11,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 3. \\xtre
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        54,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_NOTHING_SPECIAL,
+    },
+    {
+        // 4. \\n
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        59,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 5. \\t
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        61,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 6. \\v
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        63,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 7. \\b
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        65,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 8. \\r
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        67,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 9. \\f
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        69,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 10. \\a
+        "bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a",
+        71,
+        FALSE,
+        2,
+        REPLACE_PREPARE_T_ESCAPE_SEQ,
+    },
+    {
+        // 11. \\{123
+        "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre",
+        0,
+        TRUE,
+        5,
+        REPLACE_PREPARE_T_NOTHING_SPECIAL,
+    },
+    {
+        // 12. \\x{qwerty}
+        "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre",
+        6,
+        TRUE,
+        3,
+        REPLACE_PREPARE_T_NOTHING_SPECIAL,
+    },
+    {
+        // 13. \\12}
+        "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre",
+        17,
+        TRUE,
+        0,
+        0,
+    },
+    {
+        // 14. \\x{456a-bcd}
+        "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre",
+        22,
+        TRUE,
+        7,
+        REPLACE_PREPARE_T_NOTHING_SPECIAL,
+    },
+    {
+        // 15. \\satre
+        "\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre",
+        41,
+        TRUE,
+        0,
+        0,
+    },
 };
 
 /* @Test(dataSource = "test_regex_replace_esc_seq_prepare_ds") */

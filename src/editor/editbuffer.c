@@ -309,7 +309,7 @@ edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_
     *char_length = cursor_buf_ptr - str;
     return (int) res;
 }
-#endif  // HAVE_CHARSET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**

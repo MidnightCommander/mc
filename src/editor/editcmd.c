@@ -378,9 +378,12 @@ edit_get_save_file_as (WEdit *edit)
     char *filename_res = NULL;
     vfs_path_t *ret_vpath = NULL;
 
-    const char *lb_names[LB_NAMES] = { N_ ("&Do not change"), N_ ("&Unix format (LF)"),
-                                       N_ ("&Windows/DOS format (CR LF)"),
-                                       N_ ("&Macintosh format (CR)") };
+    const char *lb_names[LB_NAMES] = {
+        N_ ("&Do not change"),
+        N_ ("&Unix format (LF)"),
+        N_ ("&Windows/DOS format (CR LF)"),
+        N_ ("&Macintosh format (CR)"),
+    };
 
     quick_widget_t quick_widgets[] = {
         QUICK_LABELED_INPUT (N_ ("Enter file name:"), input_label_above,
@@ -390,7 +393,7 @@ edit_get_save_file_as (WEdit *edit)
         QUICK_LABEL (N_ ("Change line breaks to:"), NULL),
         QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
         QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END
+        QUICK_END,
     };
 
     WRect r = { -1, -1, 0, 64 };
@@ -401,7 +404,7 @@ edit_get_save_file_as (WEdit *edit)
         .help = "[Save File As]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     if (quick_dialog (&qdlg) != B_CANCEL)
@@ -841,8 +844,11 @@ edit_save_mode_cmd (void)
 {
     char *str_result = NULL;
 
-    const char *str[] = { N_ ("&Quick save"), N_ ("&Safe save"),
-                          N_ ("&Do backups with following extension:") };
+    const char *str[] = {
+        N_ ("&Quick save"),
+        N_ ("&Safe save"),
+        N_ ("&Do backups with following extension:"),
+    };
 
 #ifdef ENABLE_NLS
     size_t i;
@@ -861,7 +867,7 @@ edit_save_mode_cmd (void)
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_ ("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
         };
 
         WRect r = { -1, -1, 0, 38 };
@@ -872,7 +878,7 @@ edit_save_mode_cmd (void)
             .help = "[Edit Save Mode]",
             .widgets = quick_widgets,
             .callback = edit_save_mode_callback,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         if (quick_dialog (&qdlg) != B_CANCEL)
@@ -1904,7 +1910,7 @@ edit_mail_dialog (WEdit *edit)
         QUICK_LABELED_INPUT (N_ ("Copies to"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input",
                              &mail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END
+        QUICK_END,
     };
 
     WRect r = { -1, -1, 0, 50 };
@@ -1915,7 +1921,7 @@ edit_mail_dialog (WEdit *edit)
         .help = "[Input Line Keys]",
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     if (quick_dialog (&qdlg) != B_CANCEL)

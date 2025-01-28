@@ -140,4 +140,4 @@ extern "C"
 }
 #endif
 
-#endif  // _IDX_H
+#endif

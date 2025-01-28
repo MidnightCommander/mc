@@ -55,4 +55,4 @@ void button_mouse_default_callback (Widget *w, mouse_msg_t msg, mouse_event_t *e
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_BUTTON_H
+#endif

@@ -118,4 +118,4 @@ is_abort_char (int c)
     return ((c == (int) ESC_CHAR) || (c == (int) KEY_F (10)));
 }
 
-#endif  // MC_KEY_H
+#endif

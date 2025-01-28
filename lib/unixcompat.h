@@ -31,7 +31,7 @@
 #else
 #    include <strings.h>
 // memory and strings.h conflict on other systems
-#endif  // !STDC_HEADERS & !HAVE_STRING_H
+#endif
 
 #if defined(__QNX__) && !defined(__QNXNTO__)
 /* exec*() from <process.h> */
@@ -87,8 +87,8 @@
 #        define O_NONBLOCK O_NDELAY
 #    else  // BSD
 #        define O_NONBLOCK FNDELAY
-#    endif  // !O_NDELAY
-#endif      // !O_NONBLOCK
+#    endif
+#endif
 
 /* Solaris9 doesn't have PRIXMAX */
 #ifndef PRIXMAX

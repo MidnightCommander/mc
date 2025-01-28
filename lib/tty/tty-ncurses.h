@@ -19,11 +19,11 @@
 #    else
 #        include <curses.h>
 #    endif
-#endif  // USE_NCURSES
+#endif
 
 #ifdef USE_NCURSESW
 #    include <ncursesw/curses.h>
-#endif  // USE_NCURSESW
+#endif
 
 /* netbsd-libcurses doesn't define NCURSES_CONST */
 #ifndef NCURSES_CONST
@@ -47,4 +47,4 @@
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC_TTY_NCURSES_H
+#endif

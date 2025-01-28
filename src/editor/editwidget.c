@@ -154,7 +154,7 @@ edit_about (void)
             QUICK_LABEL (N_ ("Copyright (C) 1996-2025 the Free Software Foundation"), NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
-            QUICK_END
+            QUICK_END,
         };
 
         WRect r = { -1, -1, 0, 40 };
@@ -165,7 +165,7 @@ edit_about (void)
             .help = "[Internal File Editor]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         quick_widgets[0].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
@@ -603,7 +603,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 edit->charpoint = 0;
             }
         }
-#endif  // HAVE_CHARSET
+#endif
     }
 
     // Commands specific to the key emulation

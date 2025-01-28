@@ -367,7 +367,7 @@ mc_refresh (void)
 #ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
         return;
-#endif  // ENABLE_BACKGROUND
+#endif
 
     if (!tty_got_winch ())
         tty_refresh ();

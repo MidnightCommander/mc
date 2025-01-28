@@ -82,7 +82,6 @@ static const struct data_source2
 
     const char *expected_string;
 } data_source2[] = {
-    { NULL, NULL },
     { "", NULL },
     { "-", "./-" },
     { "blabla-", "blabla-" },
@@ -93,6 +92,10 @@ static const struct data_source2
     { "blabla#", "blabla#" },
     { "~", "\\~" },
     { "blabla~", "blabla~" },
+    {
+        NULL,
+        NULL,
+    },
 };
 
 /* @Test(dataSource = "data_source2") */

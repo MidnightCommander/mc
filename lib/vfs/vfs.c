@@ -49,11 +49,11 @@
 #ifdef __linux__
 #    ifdef HAVE_LINUX_FS_H
 #        include <linux/fs.h>
-#    endif  // HAVE_LINUX_FS_H
+#    endif
 #    ifdef HAVE_SYS_IOCTL_H
 #        include <sys/ioctl.h>
-#    endif  // HAVE_SYS_IOCTL_H
-#endif      // __linux__
+#    endif
+#endif
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -185,7 +185,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
     (void) defcnv;
 
     g_string_assign (buffer, path);
-#endif  // HAVE_CHARSET
+#endif
 
     return state;
 }
@@ -722,7 +722,7 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
 
     return posix_fallocate (*(int *) dest_fd, dest_fsize, src_fsize - dest_fsize);
 
-#endif  // HAVE_POSIX_FALLOCATE
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

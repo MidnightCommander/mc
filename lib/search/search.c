@@ -114,9 +114,9 @@ mc_search__cond_struct_free (gpointer data)
 #ifdef SEARCH_TYPE_GLIB
     if (mc_search_cond->regex_handle != NULL)
         g_regex_unref (mc_search_cond->regex_handle);
-#else   // SEARCH_TYPE_GLIB
+#else  // SEARCH_TYPE_GLIB
     g_free (mc_search_cond->regex_handle);
-#endif  // SEARCH_TYPE_GLIB
+#endif
 
     g_free (mc_search_cond);
 }
@@ -191,9 +191,9 @@ mc_search_free (mc_search_t *lc_mc_search)
 #ifdef SEARCH_TYPE_GLIB
     if (lc_mc_search->regex_match_info != NULL)
         g_match_info_free (lc_mc_search->regex_match_info);
-#else   // SEARCH_TYPE_GLIB
+#else  // SEARCH_TYPE_GLIB
     g_free (lc_mc_search->regex_match_info);
-#endif  // SEARCH_TYPE_GLIB
+#endif
 
     if (lc_mc_search->regex_buffer != NULL)
         g_string_free (lc_mc_search->regex_buffer, TRUE);
@@ -288,7 +288,7 @@ mc_search_run (mc_search_t *lc_mc_search, const void *user_data, off_t start_sea
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
     }
-#endif  // SEARCH_TYPE_GLIB
+#endif
 
     mc_search_set_error (lc_mc_search, MC_SEARCH_E_OK, NULL);
 
@@ -463,9 +463,9 @@ mc_search_getstart_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) start_pos;
     }
-#else   // SEARCH_TYPE_GLIB
+#else  // SEARCH_TYPE_GLIB
     return lc_mc_search->iovector[lc_index * 2];
-#endif  // SEARCH_TYPE_GLIB
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -485,9 +485,9 @@ mc_search_getend_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) end_pos;
     }
-#else   // SEARCH_TYPE_GLIB
+#else  // SEARCH_TYPE_GLIB
     return lc_mc_search->iovector[lc_index * 2 + 1];
-#endif  // SEARCH_TYPE_GLIB
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

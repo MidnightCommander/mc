@@ -81,4 +81,4 @@ typedef struct
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__EVENT_TYPES_H
+#endif

@@ -51,4 +51,4 @@ gboolean background_parent_call_string (const gchar *event_group_name, const gch
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__BACKGROUND_H
+#endif

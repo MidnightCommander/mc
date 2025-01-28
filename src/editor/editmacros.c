@@ -76,7 +76,9 @@ edit_get_macro (WEdit *edit, int hotkey)
 {
     macros_t *array_start;
     macros_t *result;
-    macros_t search_macro = { .hotkey = hotkey };
+    macros_t search_macro = {
+        .hotkey = hotkey,
+    };
 
     (void) edit;
 
@@ -259,7 +261,10 @@ edit_load_macro_cmd (WEdit *edit)
 
             if (macro_pair != NULL)
             {
-                macro_action_t m_act = { .action = 0, .ch = -1 };
+                macro_action_t m_act = {
+                    .action = 0,
+                    .ch = -1,
+                };
 
                 if (macro_pair[0] != NULL && macro_pair[0][0] != '\0')
                     m_act.action = keybind_lookup_action (macro_pair[0]);
@@ -290,7 +295,10 @@ edit_load_macro_cmd (WEdit *edit)
 
         if (macros != NULL)
         {
-            macros_t macro = { .hotkey = hotkey, .macro = macros };
+            macros_t macro = {
+                .hotkey = hotkey,
+                .macro = macros,
+            };
 
             g_array_append_val (macros_list, macro);
         }

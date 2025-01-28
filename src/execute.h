@@ -48,4 +48,4 @@ void pre_exec (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__EXECUTE_H
+#endif

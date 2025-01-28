@@ -121,4 +121,4 @@ group_get_current_widget_id (const WGroup *g)
     return WIDGET (g->current->data)->id;
 }
 
-#endif  // MC__GROUP_H
+#endif

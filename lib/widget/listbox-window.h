@@ -33,4 +33,4 @@ void *listbox_run_with_data (Listbox *l, const void *select);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__LISTBOX_DIALOG_H
+#endif

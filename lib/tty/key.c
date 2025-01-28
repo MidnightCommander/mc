@@ -72,20 +72,20 @@
 #    ifdef HAVE_SYS_IOCTL_H
 #        include <sys/ioctl.h>
 #    endif
-#endif  // __linux__
+#endif
 
 #ifdef __CYGWIN__
 #    include <termios.h>
 #    ifdef HAVE_SYS_IOCTL_H
 #        include <sys/ioctl.h>
 #    endif
-#endif  // __CYGWIN__
+#endif
 
 #ifdef __QNXNTO__
 #    include <dlfcn.h>
 #    include <Ph.h>
 #    include <sys/dcmd_chr.h>
-#endif  // __QNXNTO__
+#endif
 
 /*** global variables ****************************************************************************/
 
@@ -215,7 +215,7 @@ const key_code_name_t key_name_conv_tab[] = {
     { KEY_M_ALT, "ralt", N_ ("Alt"), "M" },
     { KEY_M_SHIFT, "shift", N_ ("Shift"), "S" },
 
-    { 0, NULL, NULL, NULL }
+    { 0, NULL, NULL, NULL },
 };
 
 /*** file scope macro definitions ****************************************************************/
@@ -547,7 +547,7 @@ ph_pqc_f ph_query_cursor;
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 static Display *x11_display;
 static Window x11_window;
-#endif  // HAVE_TEXTMODE_X11_SUPPORT
+#endif
 
 static KeySortType has_been_sorted = KEY_NOSORT;
 
@@ -710,7 +710,7 @@ init_key_x11 (void)
             x11_window = DefaultRootWindow (x11_display);
     }
 }
-#endif  // HAVE_TEXTMODE_X11_SUPPORT
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /* Workaround for System V Curses vt100 bug */
@@ -897,7 +897,7 @@ get_modifier (void)
 #ifdef __QNXNTO__
     static int in_photon = 0;
     static int ph_ig = 0;
-#endif  // __QNXNTO__
+#endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_window != 0)
@@ -916,7 +916,7 @@ get_modifier (void)
             result |= KEY_M_CTRL;
         return result;
     }
-#endif  // HAVE_TEXTMODE_X11_SUPPORT
+#endif
 
 #ifdef __QNXNTO__
     if (in_photon == 0)
@@ -976,7 +976,7 @@ get_modifier (void)
         if ((cursor_info.key_mods & 0x01) != 0)
             result |= KEY_M_SHIFT;
     }
-#endif  // __QNXNTO__
+#endif
 
 #if defined __linux__ || (defined __CYGWIN__ && defined TIOCLINUX)
     {
@@ -993,7 +993,7 @@ get_modifier (void)
         if ((modifiers & CONTROL_PRESSED) != 0)
             result |= KEY_M_CTRL;
     }
-#endif  // !__linux__
+#endif
 
     return result;
 }
@@ -1029,7 +1029,7 @@ correct_key_code (int code)
 #ifdef __QNXNTO__
     unsigned int qmod; /* bunch of the QNX console
                           modifiers needs unchanged */
-#endif                 // __QNXNTO__
+#endif
 
     /*
      * Add key modifiers directly from X11 or OS.
@@ -1095,7 +1095,7 @@ correct_key_code (int code)
         mod = KEY_M_SHIFT;
         c = KEY_DC;
     }
-#endif  // __QNXNTO__
+#endif
 
     // Unrecognized 0177 is delete (preserve Ctrl)
     if (c == 0177)
@@ -1349,7 +1349,7 @@ init_key (void)
          */
         use_8th_bit_as_meta = FALSE;
     }
-#endif  // __QNX__
+#endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     init_key_x11 ();
@@ -2080,25 +2080,25 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
                 break;
             }
         }
-#endif  // !HAVE_LIBGPM
+#endif
     }
 
 #ifndef HAVE_SLANG
     flag = is_wintouched (stdscr);
     untouchwin (stdscr);
-#endif  // !HAVE_SLANG
+#endif
     c = block ? getch_with_delay () : get_key_code (1);
 
 #ifndef HAVE_SLANG
     if (flag > 0)
         tty_touch_screen ();
-#endif  // !HAVE_SLANG
+#endif
 
     if (mouse_enabled
         && (c == MCKEY_MOUSE
 #ifdef KEY_MOUSE
             || c == KEY_MOUSE
-#endif  // KEY_MOUSE
+#endif
             || c == MCKEY_EXTENDED_MOUSE))
     {
         // Mouse event. See tickets 2956 and 3954 for extended mode detection.
@@ -2107,7 +2107,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 #ifdef KEY_MOUSE
         extended =
             extended || (c == KEY_MOUSE && xmouse_seq == NULL && xmouse_extended_seq != NULL);
-#endif  // KEY_MOUSE
+#endif
 
         xmouse_get_event (event, extended);
         c = (event->type != 0) ? EV_MOUSE : EV_NONE;

@@ -14,7 +14,7 @@
 #    else
 #        include <pcre.h>
 #    endif
-#endif  // SEARCH_TYPE_PCRE
+#endif
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef enum mc_search_cbret_t mc_search_cbret_t;
@@ -132,7 +132,7 @@ typedef struct mc_search_struct
 #    else
     int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
 #    endif
-#endif  // SEARCH_TYPE_PCRE
+#endif
 
     // private data
 
@@ -206,4 +206,4 @@ int mc_search_getend_result_by_num (mc_search_t *lc_mc_search, int lc_index);
 void mc_search_set_error (mc_search_t *lc_mc_search, mc_search_error_t code, const gchar *format,
                           ...) G_GNUC_PRINTF (3, 4);
 
-#endif  // MC__SEARCH_H
+#endif

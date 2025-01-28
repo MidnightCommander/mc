@@ -90,8 +90,11 @@
 /*** global variables ****************************************************************************/
 
 /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix  */
-const char *op_names[3] = { N_ ("DialogTitle|Copy"), N_ ("DialogTitle|Move"),
-                            N_ ("DialogTitle|Delete") };
+const char *op_names[3] = {
+    N_ ("DialogTitle|Copy"),
+    N_ ("DialogTitle|Move"),
+    N_ ("DialogTitle|Delete"),
+};
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -143,8 +146,11 @@ typedef enum
  */
 
 /* TRANSLATORS: no need to translate 'FileOperation', it's just a context prefix  */
-static const char *op_names1[] = { N_ ("FileOperation|Copy"), N_ ("FileOperation|Move"),
-                                   N_ ("FileOperation|Delete") };
+static const char *op_names1[] = {
+    N_ ("FileOperation|Copy"),
+    N_ ("FileOperation|Move"),
+    N_ ("FileOperation|Delete"),
+};
 
 /*
  * These are formats for building a prompt. Parts encoded as follows:
@@ -1104,7 +1110,7 @@ query_replace (file_op_context_t *ctx, const char *src, struct stat *src_stat, c
     return file_progress_real_query_replace (ctx, Foreground, src, src_stat, dst, dst_stat);
 }
 
-#endif  // !ENABLE_BACKGROUND
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /** Report error with two files */
@@ -1874,7 +1880,7 @@ panel_operate_generate_prompt (const WPanel *panel, FileOperation operation,
 
         one_format = _ (one_format);
         many_format = _ (many_format);
-#endif  // ENABLE_NLS
+#endif
         i18n_flag = TRUE;
     }
 
@@ -3577,7 +3583,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         }
     }
     else
-#endif  // ENABLE_BACKGROUND
+#endif
     {
         const file_entry_t *fe;
 
@@ -3714,7 +3720,7 @@ clean_up:
         vfs_shut ();
         my_exit (EXIT_SUCCESS);
     }
-#endif  // ENABLE_BACKGROUND
+#endif
 
 ret_fast:
     file_op_context_destroy (ctx);

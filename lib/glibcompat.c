@@ -97,7 +97,7 @@ g_ptr_array_find_with_equal_func (GPtrArray *haystack, gconstpointer needle, GEq
 
     return FALSE;
 }
-#endif  // ! GLIB_CHECK_VERSION (2, 54, 0)
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -162,7 +162,7 @@ g_clear_list (GList **list_ptr, GDestroyNotify destroy)
     }
 }
 
-#endif  // ! GLIB_CHECK_VERSION (2, 63, 3)
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -187,7 +187,7 @@ g_queue_clear_full (GQueue *queue, GDestroyNotify free_func)
 
     g_queue_clear (queue);
 }
-#endif  // ! GLIB_CHECK_VERSION (2, 60, 0)
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -222,7 +222,7 @@ g_string_new_take (char *init)
 
     return string;
 }
-#endif  // ! GLIB_CHECK_VERSION (2, 77, 0)
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 

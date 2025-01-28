@@ -276,4 +276,4 @@ panel_sized_new (const char *panel_name, const WRect *r)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif  // MC__PANEL_H
+#endif

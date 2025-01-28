@@ -66,7 +66,7 @@ extern char **environ;
         fprintf (stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags (flags))
 #else
 #    define SHOW_C_CTX(func)
-#endif  // DO_CMPLETION_DEBUG
+#endif
 
 #define DO_INSERTION 1
 #define DO_QUERY     2
@@ -122,7 +122,7 @@ show_c_flags (input_complete_t flags)
 
     return s_cf;
 }
-#endif  // DO_CMPLETION_DEBUG
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -546,17 +546,17 @@ command_completion_function (const char *text, int state, input_complete_t flags
     static char *cur_path = NULL;
     static char *cur_word = NULL;
     static int init_state = 0;
-    static const char *const bash_reserved[] = { "if",     "then",  "else",     "elif",
-                                                 "fi",     "case",  "esac",     "for",
-                                                 "select", "while", "until",    "do",
-                                                 "done",   "in",    "function", 0 };
+    static const char *const bash_reserved[] = {
+        "if",     "then",  "else",  "elif", "fi",   "case", "esac",     "for",
+        "select", "while", "until", "do",   "done", "in",   "function", 0,
+    };
     static const char *const bash_builtins[] = {
         "alias",   "bg",      "bind",    "break",  "builtin", "cd",      "command", "continue",
         "declare", "dirs",    "echo",    "enable", "eval",    "exec",    "exit",    "export",
         "fc",      "fg",      "getopts", "hash",   "help",    "history", "jobs",    "kill",
         "let",     "local",   "logout",  "popd",   "pushd",   "pwd",     "read",    "readonly",
         "return",  "set",     "shift",   "source", "suspend", "test",    "times",   "trap",
-        "type",    "typeset", "ulimit",  "umask",  "unalias", "unset",   "wait",    0
+        "type",    "typeset", "ulimit",  "umask",  "unalias", "unset",   "wait",    0,
     };
 
     char *u_text;

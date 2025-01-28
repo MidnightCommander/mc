@@ -78,9 +78,9 @@
 /* define the OS/implementation-specific __TK() format */
 #        define __TK(_tis, _tcs, _tisx, _qtisn) __QTISX (_qtisn)
 
-#    endif  // __USE_QNX_TI
+#    endif
 
-#endif  // HAVE_QNX_KEYS
+#endif
 
 /* {{{ */
 
@@ -292,22 +292,22 @@
 #    ifdef __USE_QNX_TI
 /* define current xtra_key_define_t (enable OS/implementation) */
 #        define xtra_key_define_t qnx_key_define_t
-#    endif  // __USE_QNX_TI
-#endif      // HAVE_QNX_KEYS
+#    endif
+#endif
 
 #ifdef xtra_key_define_t
 #    ifndef FORCE_BASE_KEY_DEFS
 #        define FORCE_BASE_KEY_DEFS 0
 #    endif
-#endif  // xtra_key_define_t
+#endif
 
 #ifdef HAVE_QNX_KEYS
 #    ifdef __USE_QNX_TI
 #        define __CT               (__cur_term)
 #        define __QTISOFFS(_qtisx) (((charoffset *) (&__CT->_strs))[_qtisx])
 #        define __QTISSTR(_qtisx)  (&__CT->_strtab[0] + __QTISOFFS (_qtisx))
-#    endif  // __USE_QNX_TI
-#endif      // HAVE_QNX_KEYS
+#    endif
+#endif
 
 /*** file scope type declarations ****************************************************************/
 
@@ -319,8 +319,8 @@ typedef const struct qnx_key_define_s
     int mc_code;
     int str_idx;
 } qnx_key_define_t;
-#    endif  // __USE_QNX_TI
-#endif      // HAVE_QNX_KEYS
+#    endif
+#endif
 
 /*** file scope variables ************************************************************************/
 
@@ -392,7 +392,7 @@ xtra_key_define_t xtra_key_defines[] = {
     { ALT ('\t'), Key_alt_tab }
 };
 
-#endif  // xtra_key_define_t
+#endif
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -433,8 +433,8 @@ load_qnx_key_defines (void)
         _qnx_keys_defined = 1;
     }
 }
-#    endif  // __USE_QNX_TI
-#endif      // HAVE_QNX_KEYS
+#    endif
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /* called from key.c/init_key() */

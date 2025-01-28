@@ -30,4 +30,4 @@ gboolean save_hotlist (void);
 void done_hotlist (void);
 
 /*** inline functions ****************************************************************************/
-#endif  // MC__HOTLIST_H
+#endif

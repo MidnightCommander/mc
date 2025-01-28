@@ -905,7 +905,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
     {
 #ifdef HAVE_CHARSET
         const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
-#endif  // HAVE_CHARSET
+#endif
 
         for (p = lpath; p[0] != '\0' && p[1] != '\0' && p[2] != '\0';)
         {
@@ -991,7 +991,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                         g_free (enc);
                     }
                     else
-#endif  // HAVE_CHARSET
+#endif
                         str_move (s, p + 4);
                 }
 
@@ -1038,12 +1038,12 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                     if (p >= lpath)
                         continue;
                 }
-#endif  // HAVE_CHARSET
+#endif
                 else
                 {
 #ifdef HAVE_CHARSET
                 last:
-#endif  // HAVE_CHARSET
+#endif
                     if (s >= lpath + url_delim_len
                         && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                         *s = '\0';
@@ -1085,7 +1085,7 @@ mc_realpath (const char *path, char *resolved_path)
             path = p;
         }
     }
-#endif  // HAVE_CHARSET
+#endif
 
 #ifdef HAVE_REALPATH
     return realpath (path, resolved_path);
@@ -1099,7 +1099,7 @@ mc_realpath (const char *path, char *resolved_path)
         char link_path[PATH_MAX];
         int readlinks = 0;
         int n;
-#    endif  // S_IFLNK
+#    endif
 
         // Make a copy of the source path since we may need to modify it.
         if (strlen (path) >= PATH_MAX - 2)
@@ -1218,7 +1218,7 @@ mc_realpath (const char *path, char *resolved_path)
                 strcpy (copy_path, link_path);
                 path = copy_path;
             }
-#    endif  // S_IFLNK
+#    endif
             *new_path++ = PATH_SEP;
         }
         // Delete trailing slash but don't whomp a lone slash.
@@ -1229,7 +1229,7 @@ mc_realpath (const char *path, char *resolved_path)
         strcpy (resolved_path, got_path);
         return resolved_path;
     }
-#endif      // HAVE_REALPATH
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

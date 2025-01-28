@@ -101,7 +101,7 @@ mcdiffview_dialog_search (WDiff *dview)
 #endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -113,7 +113,7 @@ mcdiffview_dialog_search (WDiff *dview)
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         qd_result = quick_dialog (&qdlg);

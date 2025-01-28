@@ -99,4 +99,4 @@ mctest_run_all (TCase *tc_core)
     return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
-#endif  // MC__TEST
+#endif

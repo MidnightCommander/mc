@@ -90,7 +90,7 @@ subshell_handle_cons_saver (void)
             mc_global.tty.console_flag = '\0';
         }
     }
-#endif  // __linux__
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

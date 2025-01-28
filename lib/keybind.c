@@ -304,7 +304,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (SpellCheck),
     ADD_KEYMAP_NAME (SpellCheckCurrentWord),
     ADD_KEYMAP_NAME (SpellCheckSelectLang),
-#    endif  // HAVE_ASPELL
+#    endif
     ADD_KEYMAP_NAME (BookmarkFlush),
     ADD_KEYMAP_NAME (BookmarkNext),
     ADD_KEYMAP_NAME (BookmarkPrev),
@@ -345,7 +345,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (WindowList),
     ADD_KEYMAP_NAME (WindowNext),
     ADD_KEYMAP_NAME (WindowPrev),
-#endif  // USE_INTERNAL_EDIT
+#endif
 
     // viewer
     ADD_KEYMAP_NAME (WrapMode),
@@ -374,7 +374,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (EditOther),
     ADD_KEYMAP_NAME (Merge),
     ADD_KEYMAP_NAME (MergeOther),
-#endif  // USE_DIFF_VIEW
+#endif
 
     { NULL, CK_IgnoreKey }
 };

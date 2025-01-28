@@ -35,4 +35,4 @@ WRadio *radio_new (int y, int x, int count, const char **text);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_RADIO_H
+#endif

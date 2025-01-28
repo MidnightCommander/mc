@@ -23,4 +23,4 @@ int my_rmdir (const char *path);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__FILE_H
+#endif

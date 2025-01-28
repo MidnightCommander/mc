@@ -26,4 +26,4 @@ int unlock_file (const vfs_path_t *fname_vpath);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC_LOCK_H
+#endif

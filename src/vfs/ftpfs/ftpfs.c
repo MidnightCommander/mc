@@ -2440,8 +2440,9 @@ ftpfs_netrc_next (void)
 {
     char *p;
     keyword_t i;
-    static const char *const keywords[] = { "default", "machine", "login",  "password",
-                                            "passwd",  "account", "macdef", NULL };
+    static const char *const keywords[] = {
+        "default", "machine", "login", "password", "passwd", "account", "macdef", NULL,
+    };
 
     while (TRUE)
     {

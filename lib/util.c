@@ -61,7 +61,7 @@
 /* Number of attempts to create a temporary file */
 #ifndef TMP_MAX
 #    define TMP_MAX 16384
-#endif  // !TMP_MAX
+#endif
 
 #define TMP_SUFFIX ".tmp"
 
@@ -242,7 +242,7 @@ is_printable (int c)
         return is_8bit_printable (c);
 
     return is_iso_printable (c);
-#endif  // !HAVE_CHARSET
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -419,32 +419,33 @@ void
 size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si)
 {
     // Avoid taking power for every file.
-    static const uintmax_t power10[] = { // we hope that size of uintmax_t is 4 bytes at least
-                                         1ULL,
-                                         10ULL,
-                                         100ULL,
-                                         1000ULL,
-                                         10000ULL,
-                                         100000ULL,
-                                         1000000ULL,
-                                         10000000ULL,
-                                         100000000ULL,
-                                         1000000000ULL
+    static const uintmax_t power10[] = {
+        // we hope that size of uintmax_t is 4 bytes at least
+        1ULL,
+        10ULL,
+        100ULL,
+        1000ULL,
+        10000ULL,
+        100000ULL,
+        1000000ULL,
+        10000000ULL,
+        100000000ULL,
+        1000000000ULL
     /* maximum value of uintmax_t (in case of 4 bytes) is
         4294967295
      */
 #if SIZEOF_UINTMAX_T == 8
-                                         ,
-                                         10000000000ULL,
-                                         100000000000ULL,
-                                         1000000000000ULL,
-                                         10000000000000ULL,
-                                         100000000000000ULL,
-                                         1000000000000000ULL,
-                                         10000000000000000ULL,
-                                         100000000000000000ULL,
-                                         1000000000000000000ULL,
-                                         10000000000000000000ULL
+        ,
+        10000000000ULL,
+        100000000000ULL,
+        1000000000000ULL,
+        10000000000000ULL,
+        100000000000000ULL,
+        1000000000000000ULL,
+        10000000000000000ULL,
+        100000000000000000ULL,
+        1000000000000000000ULL,
+        10000000000000000000ULL,
     /* maximum value of uintmax_t (in case of 8 bytes) is
         18447644073710439615
      */
@@ -454,8 +455,9 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
     static const char *const suffix[] = {
         "", "K", "M", "G", "T", "P", "E", "Z", "Y", "R", "Q", NULL
     };
-    static const char *const suffix_lc[] = { "",  "k", "m", "g", "t", "p",
-                                             "e", "z", "y", "r", "q", NULL };
+    static const char *const suffix_lc[] = {
+        "", "k", "m", "g", "t", "p", "e", "z", "y", "r", "q", NULL,
+    };
 
     static int sfx_last = -1;
 
@@ -576,15 +578,15 @@ string_perm (mode_t mode_bits)
 #ifdef S_ISUID
     if (ismode (mode_bits, S_ISUID))
         mode[3] = (mode[3] == 'x') ? 's' : 'S';
-#endif  // S_ISUID
+#endif
 #ifdef S_ISGID
     if (ismode (mode_bits, S_ISGID))
         mode[6] = (mode[6] == 'x') ? 's' : 'S';
-#endif  // S_ISGID
+#endif
 #ifdef S_ISVTX
     if (ismode (mode_bits, S_ISVTX))
         mode[9] = (mode[9] == 'x') ? 't' : 'T';
-#endif  // S_ISVTX
+#endif
     return mode;
 }
 

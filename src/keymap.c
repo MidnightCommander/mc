@@ -149,108 +149,130 @@ static const global_keymap_ini_t default_filemanager_keymap[] = {
     { "SelectInvert", "kpasterisk" },
     // List of screens
     { "ScreenList", "alt-prime" },
-    { NULL, NULL }
+    {
+        NULL,
+        NULL,
+    },
 };
 
-static const global_keymap_ini_t default_filemanager_x_keymap[] = { { "CompareDirs", "d" },
+static const global_keymap_ini_t default_filemanager_x_keymap[] = {
+    { "CompareDirs", "d" },
 #ifdef USE_DIFF_VIEW
-                                                                    { "CompareFiles", "ctrl-d" },
-#endif  // USE_DIFF_VIEW
+    { "CompareFiles", "ctrl-d" },
+#endif
 #ifdef ENABLE_VFS
-                                                                    { "VfsList", "a" },
-#endif  // ENABLE_VFS
-                                                                    { "PutCurrentPath", "p" },
-                                                                    { "PutOtherPath", "ctrl-p" },
-                                                                    { "PutCurrentTagged", "t" },
-                                                                    { "PutOtherTagged", "ctrl-t" },
-                                                                    { "ChangeMode", "c" },
-                                                                    { "ChangeOwn", "o" },
+    { "VfsList", "a" },
+#endif
+    { "PutCurrentPath", "p" },
+    { "PutOtherPath", "ctrl-p" },
+    { "PutCurrentTagged", "t" },
+    { "PutOtherTagged", "ctrl-t" },
+    { "ChangeMode", "c" },
+    { "ChangeOwn", "o" },
 #ifdef ENABLE_EXT2FS_ATTR
-                                                                    { "ChangeAttributes", "e" },
-#endif  // ENABLE_EXT2FS_ATTR
-                                                                    { "PutCurrentLink", "r" },
-                                                                    { "PutOtherLink", "ctrl-r" },
-                                                                    { "Link", "l" },
-                                                                    { "LinkSymbolic", "s" },
-                                                                    { "LinkSymbolicRelative", "v" },
-                                                                    { "LinkSymbolicEdit",
-                                                                      "ctrl-s" },
-                                                                    { "PanelInfo", "i" },
-                                                                    { "PanelQuickView", "q" },
-                                                                    { "HotListAdd", "h" },
+    { "ChangeAttributes", "e" },
+#endif
+    { "PutCurrentLink", "r" },
+    { "PutOtherLink", "ctrl-r" },
+    { "Link", "l" },
+    { "LinkSymbolic", "s" },
+    { "LinkSymbolicRelative", "v" },
+    { "LinkSymbolicEdit", "ctrl-s" },
+    { "PanelInfo", "i" },
+    { "PanelQuickView", "q" },
+    { "HotListAdd", "h" },
 #ifdef ENABLE_BACKGROUND
-                                                                    { "Jobs", "j" },
-#endif  // ENABLE_BACKGROUND
-                                                                    { "ExternalPanelize", "!" },
-                                                                    { NULL, NULL } };
+    { "Jobs", "j" },
+#endif
+    { "ExternalPanelize", "!" },
+    {
+        NULL,
+        NULL,
+    },
+};
 
 /* panel */
-static const global_keymap_ini_t default_panel_keymap[] = { { "CycleListingFormat", "alt-t" },
-                                                            { "PanelOtherCd", "alt-o" },
-                                                            { "PanelOtherCdLink", "alt-l" },
-                                                            { "CopySingle", "f15" },
-                                                            { "DeleteSingle", "f18" },
-                                                            { "Enter", "enter" },
-                                                            { "EditNew", "f14" },
-                                                            { "MoveSingle", "f16" },
-                                                            { "SelectInvert", "alt-asterisk" },
-                                                            { "Select", "alt-plus" },
-                                                            { "Unselect", "alt-minus" },
-                                                            { "ViewRaw", "f13" },
-                                                            { "CdChild", "ctrl-pgdn" },
-                                                            { "CdParent", "ctrl-pgup" },
-                                                            { "History", "alt-shift-h" },
-                                                            { "HistoryNext", "alt-u" },
-                                                            { "HistoryPrev", "alt-y" },
-                                                            { "BottomOnScreen", "alt-j" },
-                                                            { "MiddleOnScreen", "alt-r" },
-                                                            { "TopOnScreen", "alt-g" },
-                                                            { "Mark", "insert; ctrl-t" },
-                                                            { "MarkDown", "shift-down" },
-                                                            { "MarkUp", "shift-up" },
-                                                            { "Up", "up; ctrl-p" },
-                                                            { "Down", "down; ctrl-n" },
-                                                            { "Left", "left" },
-                                                            { "Right", "right" },
-                                                            { "Top", "alt-lt; home; a1" },
-                                                            { "Bottom", "alt-gt; end; c1" },
-                                                            { "PageDown", "pgdn; ctrl-v" },
-                                                            { "PageUp", "pgup; alt-v" },
+static const global_keymap_ini_t default_panel_keymap[] = {
+    { "CycleListingFormat", "alt-t" },
+    { "PanelOtherCd", "alt-o" },
+    { "PanelOtherCdLink", "alt-l" },
+    { "CopySingle", "f15" },
+    { "DeleteSingle", "f18" },
+    { "Enter", "enter" },
+    { "EditNew", "f14" },
+    { "MoveSingle", "f16" },
+    { "SelectInvert", "alt-asterisk" },
+    { "Select", "alt-plus" },
+    { "Unselect", "alt-minus" },
+    { "ViewRaw", "f13" },
+    { "CdChild", "ctrl-pgdn" },
+    { "CdParent", "ctrl-pgup" },
+    { "History", "alt-shift-h" },
+    { "HistoryNext", "alt-u" },
+    { "HistoryPrev", "alt-y" },
+    { "BottomOnScreen", "alt-j" },
+    { "MiddleOnScreen", "alt-r" },
+    { "TopOnScreen", "alt-g" },
+    { "Mark", "insert; ctrl-t" },
+    { "MarkDown", "shift-down" },
+    { "MarkUp", "shift-up" },
+    { "Up", "up; ctrl-p" },
+    { "Down", "down; ctrl-n" },
+    { "Left", "left" },
+    { "Right", "right" },
+    { "Top", "alt-lt; home; a1" },
+    { "Bottom", "alt-gt; end; c1" },
+    { "PageDown", "pgdn; ctrl-v" },
+    { "PageUp", "pgup; alt-v" },
 #ifdef HAVE_CHARSET
-                                                            { "SelectCodepage", "alt-e" },
+    { "SelectCodepage", "alt-e" },
 #endif
-                                                            { "Search", "ctrl-s; alt-s" },
-                                                            { "PanelOtherSync", "alt-i" },
-                                                            { NULL, NULL } };
+    { "Search", "ctrl-s; alt-s" },
+    { "PanelOtherSync", "alt-i" },
+    {
+        NULL,
+        NULL,
+    },
+};
 
 /* dialog */
-static const global_keymap_ini_t default_dialog_keymap[] = { { "Ok", "enter" },
-                                                             { "Cancel", "f10; esc; ctrl-g" },
-                                                             { "Up", "up; left" },
-                                                             { "Down", "down; right" },
+static const global_keymap_ini_t default_dialog_keymap[] = {
+    { "Ok", "enter" },
+    { "Cancel", "f10; esc; ctrl-g" },
+    { "Up", "up; left" },
+    { "Down", "down; right" },
 #if 0
     {"Left", "up; left"},
     {"Right", "down; right"},
 #endif
-                                                             { "Help", "f1" },
-                                                             { "Suspend", "ctrl-z" },
-                                                             { "Refresh", "ctrl-l" },
-                                                             { "ScreenList", "alt-prime" },
-                                                             { "ScreenNext", "alt-rbrace" },
-                                                             { "ScreenPrev", "alt-lbrace" },
-                                                             { NULL, NULL } };
+    { "Help", "f1" },
+    { "Suspend", "ctrl-z" },
+    { "Refresh", "ctrl-l" },
+    { "ScreenList", "alt-prime" },
+    { "ScreenNext", "alt-rbrace" },
+    { "ScreenPrev", "alt-lbrace" },
+    {
+        NULL,
+        NULL,
+    },
+};
 
 /* menubar */
-static const global_keymap_ini_t default_menu_keymap[] = { { "Help", "f1" },
-                                                           { "Left", "left; ctrl-b" },
-                                                           { "Right", "right; ctrl-f" },
-                                                           { "Up", "up; ctrl-p" },
-                                                           { "Down", "down; ctrl-n" },
-                                                           { "Home", "home; alt-lt; ctrl-a" },
-                                                           { "End", "end; alt-gt; ctrl-e" },
-                                                           { "Enter", "enter" },
-                                                           { "Quit", "f10; ctrl-g; esc" },
-                                                           { NULL, NULL } };
+static const global_keymap_ini_t default_menu_keymap[] = {
+    { "Help", "f1" },
+    { "Left", "left; ctrl-b" },
+    { "Right", "right; ctrl-f" },
+    { "Up", "up; ctrl-p" },
+    { "Down", "down; ctrl-n" },
+    { "Home", "home; alt-lt; ctrl-a" },
+    { "End", "end; alt-gt; ctrl-e" },
+    { "Enter", "enter" },
+    { "Quit", "f10; ctrl-g; esc" },
+    {
+        NULL,
+        NULL,
+    },
+};
 
 /* input line */
 static const global_keymap_ini_t default_input_keymap[] = {
@@ -284,51 +306,71 @@ static const global_keymap_ini_t default_input_keymap[] = {
     { "HistoryNext", "alt-n; ctrl-up" },
     // Completion
     { "Complete", "alt-tab" },
-    { NULL, NULL }
+    {
+        NULL,
+        NULL,
+    },
 };
 
 /* listbox */
-static const global_keymap_ini_t default_listbox_keymap[] = { { "Up", "up; ctrl-p" },
-                                                              { "Down", "down; ctrl-n" },
-                                                              { "Top", "home; alt-lt; a1" },
-                                                              { "Bottom", "end; alt-gt; c1" },
-                                                              { "PageUp", "pgup; alt-v" },
-                                                              { "PageDown", "pgdn; ctrl-v" },
-                                                              { "Delete", "delete; d" },
-                                                              { "Clear", "shift-delete; shift-d" },
-                                                              { "View", "f3" },
-                                                              { "Edit", "f4" },
-                                                              { "Enter", "enter" },
-                                                              { NULL, NULL } };
+static const global_keymap_ini_t default_listbox_keymap[] = {
+    { "Up", "up; ctrl-p" },
+    { "Down", "down; ctrl-n" },
+    { "Top", "home; alt-lt; a1" },
+    { "Bottom", "end; alt-gt; c1" },
+    { "PageUp", "pgup; alt-v" },
+    { "PageDown", "pgdn; ctrl-v" },
+    { "Delete", "delete; d" },
+    { "Clear", "shift-delete; shift-d" },
+    { "View", "f3" },
+    { "Edit", "f4" },
+    { "Enter", "enter" },
+    {
+        NULL,
+        NULL,
+    },
+};
 
 /* radio */
 static const global_keymap_ini_t default_radio_keymap[] = {
-    { "Up", "up; ctrl-p" },          { "Down", "down; ctrl-n" }, { "Top", "home; alt-lt; a1" },
-    { "Bottom", "end; alt-gt; c1" }, { "Select", "space" },      { NULL, NULL }
+    { "Up", "up; ctrl-p" },
+    { "Down", "down; ctrl-n" },
+    { "Top", "home; alt-lt; a1" },
+    { "Bottom", "end; alt-gt; c1" },
+    { "Select", "space" },
+    {
+        NULL,
+        NULL,
+    },
 };
 
 /* tree */
-static const global_keymap_ini_t default_tree_keymap[] = { { "Help", "f1" },
-                                                           { "Rescan", "f2; ctrl-r" },
-                                                           { "Forget", "f3" },
-                                                           { "ToggleNavigation", "f4" },
-                                                           { "Copy", "f5" },
-                                                           { "Move", "f6" },
+static const global_keymap_ini_t default_tree_keymap[] = {
+    { "Help", "f1" },
+    { "Rescan", "f2; ctrl-r" },
+    { "Forget", "f3" },
+    { "ToggleNavigation", "f4" },
+    { "Copy", "f5" },
+    { "Move", "f6" },
 #if 0
     {"MakeDir", "f7"},
 #endif
-                                                           { "Delete", "f8; delete" },
-                                                           { "Up", "up; ctrl-p" },
-                                                           { "Down", "down; ctrl-n" },
-                                                           { "Left", "left" },
-                                                           { "Right", "right" },
-                                                           { "Top", "home; alt-lt; a1" },
-                                                           { "Bottom", "end; alt-gt; c1" },
-                                                           { "PageUp", "pgup; alt-v" },
-                                                           { "PageDown", "pgdn; ctrl-v" },
-                                                           { "Enter", "enter" },
-                                                           { "Search", "ctrl-s; alt-s" },
-                                                           { NULL, NULL } };
+    { "Delete", "f8; delete" },
+    { "Up", "up; ctrl-p" },
+    { "Down", "down; ctrl-n" },
+    { "Left", "left" },
+    { "Right", "right" },
+    { "Top", "home; alt-lt; a1" },
+    { "Bottom", "end; alt-gt; c1" },
+    { "PageUp", "pgup; alt-v" },
+    { "PageDown", "pgdn; ctrl-v" },
+    { "Enter", "enter" },
+    { "Search", "ctrl-s; alt-s" },
+    {
+        NULL,
+        NULL,
+    },
+};
 
 /* help */
 static const global_keymap_ini_t default_help_keymap[] = {
@@ -349,21 +391,29 @@ static const global_keymap_ini_t default_help_keymap[] = {
     { "LinkPrev", "alt-tab" },
     { "NodeNext", "n" },
     { "NodePrev", "p" },
-    { NULL, NULL }
+    {
+        NULL,
+        NULL,
+    },
 };
 
 #ifdef ENABLE_EXT2FS_ATTR
 /* chattr dialog */
-static const global_keymap_ini_t default_chattr_keymap[] = { { "Up", "up; left; ctrl-p" },
-                                                             { "Down", "down; right; ctrl-n" },
-                                                             { "Top", "home; alt-lt; a1" },
-                                                             { "Bottom", "end; alt-gt; c1" },
-                                                             { "PageUp", "pgup; alt-v" },
-                                                             { "PageDown", "pgdn; ctrl-v" },
-                                                             { "Mark", "t; shift-t" },
-                                                             { "MarkAndDown", "insert" },
-                                                             { NULL, NULL } };
-#endif  // ENABLE_EXT2FS_ATTR
+static const global_keymap_ini_t default_chattr_keymap[] = {
+    { "Up", "up; left; ctrl-p" },
+    { "Down", "down; right; ctrl-n" },
+    { "Top", "home; alt-lt; a1" },
+    { "Bottom", "end; alt-gt; c1" },
+    { "PageUp", "pgup; alt-v" },
+    { "PageDown", "pgdn; ctrl-v" },
+    { "Mark", "t; shift-t" },
+    { "MarkAndDown", "insert" },
+    {
+        NULL,
+        NULL,
+    },
+};
+#endif
 
 #ifdef USE_INTERNAL_EDIT
 static const global_keymap_ini_t default_editor_keymap[] = {
@@ -467,12 +517,17 @@ static const global_keymap_ini_t default_editor_keymap[] = {
     { "SpellCheckCurrentWord", "ctrl-p" },
 #    endif
     { "ExtendedKeyMap", "ctrl-x" },
-    { NULL, NULL }
+    {
+        NULL,
+        NULL,
+    },
 };
 
 /* emacs keyboard layout emulation */
-static const global_keymap_ini_t default_editor_x_keymap[] = { { NULL, NULL } };
-#endif  // USE_INTERNAL_EDIT
+static const global_keymap_ini_t default_editor_x_keymap[] = {
+    { NULL, NULL },
+};
+#endif
 
 /* viewer */
 static const global_keymap_ini_t default_viewer_keymap[] = {
@@ -514,7 +569,10 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
     { "SearchBackwardContinue", "ctrl-r" },
     { "SearchOppositeContinue", "shift-n" },
     { "History", "alt-shift-e" },
-    { NULL, NULL }
+    {
+        NULL,
+        NULL,
+    },
 };
 
 /* hex viewer */
@@ -550,53 +608,61 @@ static const global_keymap_ini_t default_viewer_hex_keymap[] = {
     { "SearchBackwardContinue", "ctrl-r" },
     { "SearchOppositeContinue", "shift-n" },
     { "History", "alt-shift-e" },
-    { NULL, NULL }
+    {
+        NULL,
+        NULL,
+    },
 };
 
 #ifdef USE_DIFF_VIEW
 /* diff viewer */
-static const global_keymap_ini_t default_diff_keymap[] = { { "ShowSymbols", "alt-s; s" },
-                                                           { "ShowNumbers", "alt-n; l" },
-                                                           { "SplitFull", "f" },
-                                                           { "SplitEqual", "equal" },
-                                                           { "SplitMore", "gt" },
-                                                           { "SplitLess", "lt" },
-                                                           { "Tab2", "2" },
-                                                           { "Tab3", "3" },
-                                                           { "Tab4", "4" },
-                                                           { "Tab8", "8" },
-                                                           { "Swap", "ctrl-u" },
-                                                           { "Redo", "ctrl-r" },
-                                                           { "HunkNext", "n; enter; space" },
-                                                           { "HunkPrev", "p; backspace" },
-                                                           { "Goto", "g; shift-g" },
-                                                           { "Save", "f2" },
-                                                           { "Edit", "f4" },
-                                                           { "EditOther", "f14" },
-                                                           { "Merge", "f5" },
-                                                           { "MergeOther", "f15" },
-                                                           { "Search", "f7" },
-                                                           { "SearchContinue", "f17" },
-                                                           { "Options", "f9" },
-                                                           { "Top", "ctrl-home" },
-                                                           { "Bottom", "ctrl-end" },
-                                                           { "Down", "down" },
-                                                           { "Up", "up" },
-                                                           { "LeftQuick", "ctrl-left" },
-                                                           { "RightQuick", "ctrl-right" },
-                                                           { "Left", "left" },
-                                                           { "Right", "right" },
-                                                           { "PageDown", "pgdn" },
-                                                           { "PageUp", "pgup" },
-                                                           { "Home", "home" },
-                                                           { "End", "end" },
-                                                           { "Help", "f1" },
-                                                           { "Quit", "f10; q; shift-q; esc" },
+static const global_keymap_ini_t default_diff_keymap[] = {
+    { "ShowSymbols", "alt-s; s" },
+    { "ShowNumbers", "alt-n; l" },
+    { "SplitFull", "f" },
+    { "SplitEqual", "equal" },
+    { "SplitMore", "gt" },
+    { "SplitLess", "lt" },
+    { "Tab2", "2" },
+    { "Tab3", "3" },
+    { "Tab4", "4" },
+    { "Tab8", "8" },
+    { "Swap", "ctrl-u" },
+    { "Redo", "ctrl-r" },
+    { "HunkNext", "n; enter; space" },
+    { "HunkPrev", "p; backspace" },
+    { "Goto", "g; shift-g" },
+    { "Save", "f2" },
+    { "Edit", "f4" },
+    { "EditOther", "f14" },
+    { "Merge", "f5" },
+    { "MergeOther", "f15" },
+    { "Search", "f7" },
+    { "SearchContinue", "f17" },
+    { "Options", "f9" },
+    { "Top", "ctrl-home" },
+    { "Bottom", "ctrl-end" },
+    { "Down", "down" },
+    { "Up", "up" },
+    { "LeftQuick", "ctrl-left" },
+    { "RightQuick", "ctrl-right" },
+    { "Left", "left" },
+    { "Right", "right" },
+    { "PageDown", "pgdn" },
+    { "PageUp", "pgup" },
+    { "Home", "home" },
+    { "End", "end" },
+    { "Help", "f1" },
+    { "Quit", "f10; q; shift-q; esc" },
 #    ifdef HAVE_CHARSET
-                                                           { "SelectCodepage", "alt-e" },
+    { "SelectCodepage", "alt-e" },
 #    endif
-                                                           { "Shell", "ctrl-o" },
-                                                           { NULL, NULL } };
+    { "Shell", "ctrl-o" },
+    {
+        NULL,
+        NULL,
+    },
+};
 #endif
 
 /* --------------------------------------------------------------------------------------------- */

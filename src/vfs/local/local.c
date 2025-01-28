@@ -219,7 +219,7 @@ local_fsetflags (const vfs_path_t *vpath, unsigned long flags)
     return fsetflags (path, flags);
 }
 
-#endif  // ENABLE_EXT2FS_ATTR
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -37,4 +37,4 @@ extern Bool mc_XQueryPointer (Display *display, Window win, Window *root_return,
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__X11CONN_H
+#endif

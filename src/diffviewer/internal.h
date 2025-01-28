@@ -118,7 +118,7 @@ typedef struct WDiff
     gboolean utf8;
     // converter for translation of text
     GIConv converter;
-#endif  // HAVE_CHARSET
+#endif
 
     struct
     {
@@ -149,4 +149,4 @@ typedef struct WDiff
 void dview_search_cmd (WDiff *dview);
 void dview_continue_search_cmd (WDiff *dview);
 
-#endif  // MC__DIFFVIEW_INTERNAL_H
+#endif

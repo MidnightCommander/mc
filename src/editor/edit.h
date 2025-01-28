@@ -93,4 +93,4 @@ long edit_get_curs_col (const WEdit *edit);
 const char *edit_get_syntax_type (const WEdit *edit);
 
 /*** inline functions ****************************************************************************/
-#endif  // MC__EDIT_H
+#endif

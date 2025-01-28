@@ -355,4 +355,4 @@
                            : (tmin) / (a) < (b))                                                   \
                     : (tmax) / (b) < (a)))
 
-#endif  // _GL_INTPROPS_INTERNAL_H
+#endif

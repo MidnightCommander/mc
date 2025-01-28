@@ -30,4 +30,4 @@ void check_set_text (WCheck *check, const char *text);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_CHECK_H
+#endif

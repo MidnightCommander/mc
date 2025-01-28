@@ -54,4 +54,4 @@ gboolean help_interactive_display (const gchar *event_group_name, const gchar *e
                                    gpointer init_data, gpointer data);
 
 /*** inline functions ****************************************************************************/
-#endif  // MC__HELP_H
+#endif

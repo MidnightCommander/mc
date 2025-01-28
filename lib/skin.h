@@ -142,4 +142,4 @@ gchar *mc_skin_get (const gchar *group, const gchar *key, const gchar *default_v
 
 GPtrArray *mc_skin_list (void);
 
-#endif  // MC_SKIN_H
+#endif

@@ -220,7 +220,7 @@ static panel_field_t panel_fields[] = {
     { "|", 1, FALSE, J_RIGHT, "", " ", FALSE, TRUE, NULL, NULL },
     { "space", 1, FALSE, J_RIGHT, "", " ", FALSE, TRUE, string_space, NULL },
     { "dot", 1, FALSE, J_RIGHT, "", " ", FALSE, FALSE, string_dot, NULL },
-    { NULL, 0, FALSE, J_RIGHT, NULL, NULL, FALSE, FALSE, NULL, NULL }
+    { NULL, 0, FALSE, J_RIGHT, NULL, NULL, FALSE, FALSE, NULL, NULL },
 };
 
 static char *panel_sort_up_char = NULL;
@@ -2538,7 +2538,7 @@ panel_select_unselect_files_dialog (select_flags_t *flags, const char *title,
         QUICK_NEXT_COLUMN,
             QUICK_CHECKBOX (N_ ("&Case sensitive"), &case_sens, NULL),
         QUICK_STOP_COLUMNS,
-        QUICK_END
+        QUICK_END,
         // clang-format on
     };
 
@@ -2550,7 +2550,7 @@ panel_select_unselect_files_dialog (select_flags_t *flags, const char *title,
         .help = help_section,
         .widgets = quick_widgets,
         .callback = NULL,
-        .mouse_callback = NULL
+        .mouse_callback = NULL,
     };
 
     if (quick_dialog (&qdlg) == B_CANCEL)
@@ -2664,7 +2664,11 @@ panel_select_invert_files (WPanel *panel)
 static void
 panel_do_set_filter (WPanel *panel)
 {
-    file_filter_t ff = { .value = NULL, .handler = NULL, .flags = panel->filter.flags };
+    file_filter_t ff = {
+        .value = NULL,
+        .handler = NULL,
+        .flags = panel->filter.flags,
+    };
 
     ff.handler = panel_select_unselect_files_dialog (
         &ff.flags, _ ("Filter"), MC_HISTORY_FM_PANEL_FILTER, "[Filter...]", &ff.value);
@@ -3344,7 +3348,7 @@ panel_do_cd_int (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum cd
 
 #ifdef ENABLE_SUBSHELL
     subshell_chdir (panel->cwd_vpath);
-#endif  // ENABLE_SUBSHELL
+#endif
 
     // Reload current panel
     panel_clean_dir (panel);
@@ -3748,7 +3752,7 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 #ifdef ENABLE_SUBSHELL
         else
             subshell_chdir (panel->cwd_vpath);
-#endif  // ENABLE_SUBSHELL
+#endif
 
         update_xterm_title_path ();
         update_terminal_cwd ();
@@ -5041,7 +5045,7 @@ remove_encoding_from_path (const vfs_path_t *vpath)
     g_string_free (tmp_conv, TRUE);
     return ret_vpath;
 }
-#endif  // HAVE_CHARSET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -5432,7 +5436,7 @@ panel_cd (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum exact)
         else
             panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
     }
-#endif  // HAVE_CHARSET
+#endif
 
     return res;
 }

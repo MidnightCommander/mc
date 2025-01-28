@@ -93,16 +93,30 @@ static WLabel *pname;
 
 static char *listmode_section = "[Listing format edit]";
 
-static char *s_genwidth[2] = { "Half width", "Full width" };
+static char *s_genwidth[2] = {
+    "Half width",
+    "Full width",
+};
 
 static WRadio *radio_genwidth;
-static char *s_columns[2] = { "One column", "Two columns" };
+static char *s_columns[2] = {
+    "One column",
+    "Two columns",
+};
 
 static WRadio *radio_columns;
-static char *s_justify[3] = { "Left justified", "Default justification", "Right justified" };
+static char *s_justify[3] = {
+    "Left justified",
+    "Default justification",
+    "Right justified",
+};
 
 static WRadio *radio_justify;
-static char *s_itemwidth[3] = { "Free width", "Fixed width", "Growable width" };
+static char *s_itemwidth[3] = {
+    "Free width",
+    "Fixed width",
+    "Growable width",
+};
 
 static WRadio *radio_itemwidth;
 
@@ -337,4 +351,4 @@ listmode_edit (char *oldlistformat)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif  // LISTMODE_EDITOR
+#endif

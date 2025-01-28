@@ -76,33 +76,35 @@
 
 /*** global variables ****************************************************************************/
 
-edit_options_t edit_options = { .word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH,
-                                .typewriter_wrap = FALSE,
-                                .auto_para_formatting = FALSE,
-                                .fill_tabs_with_spaces = FALSE,
-                                .return_does_auto_indent = TRUE,
-                                .backspace_through_tabs = FALSE,
-                                .fake_half_tabs = TRUE,
-                                .persistent_selections = TRUE,
-                                .drop_selection_on_copy = TRUE,
-                                .cursor_beyond_eol = FALSE,
-                                .cursor_after_inserted_block = FALSE,
-                                .state_full_filename = FALSE,
-                                .line_state = FALSE,
-                                .line_state_width = 0,
-                                .save_mode = EDIT_QUICK_SAVE,
-                                .confirm_save = TRUE,
-                                .save_position = TRUE,
-                                .syntax_highlighting = TRUE,
-                                .group_undo = FALSE,
-                                .backup_ext = NULL,
-                                .filesize_threshold = NULL,
-                                .stop_format_chars = NULL,
-                                .visible_tabs = TRUE,
-                                .visible_tws = TRUE,
-                                .show_right_margin = FALSE,
-                                .simple_statusbar = FALSE,
-                                .check_nl_at_eof = FALSE };
+edit_options_t edit_options = {
+    .word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH,
+    .typewriter_wrap = FALSE,
+    .auto_para_formatting = FALSE,
+    .fill_tabs_with_spaces = FALSE,
+    .return_does_auto_indent = TRUE,
+    .backspace_through_tabs = FALSE,
+    .fake_half_tabs = TRUE,
+    .persistent_selections = TRUE,
+    .drop_selection_on_copy = TRUE,
+    .cursor_beyond_eol = FALSE,
+    .cursor_after_inserted_block = FALSE,
+    .state_full_filename = FALSE,
+    .line_state = FALSE,
+    .line_state_width = 0,
+    .save_mode = EDIT_QUICK_SAVE,
+    .confirm_save = TRUE,
+    .save_position = TRUE,
+    .syntax_highlighting = TRUE,
+    .group_undo = FALSE,
+    .backup_ext = NULL,
+    .filesize_threshold = NULL,
+    .stop_format_chars = NULL,
+    .visible_tabs = TRUE,
+    .visible_tws = TRUE,
+    .show_right_margin = FALSE,
+    .simple_statusbar = FALSE,
+    .check_nl_at_eof = FALSE,
+};
 
 int max_undo = 32768;
 
@@ -133,11 +135,15 @@ static const struct edit_filters
 {
     const char *read, *write, *extension;
 } all_filters[] = {
-    { "xz -cd %s 2>&1", "xz > %s", ".xz" },        { "zstd -cd %s 2>&1", "zstd > %s", ".zst" },
-    { "lz4 -cd %s 2>&1", "lz4 > %s", ".lz4" },     { "lzip -cd %s 2>&1", "lzip > %s", ".lz" },
-    { "lzma -cd %s 2>&1", "lzma > %s", ".lzma" },  { "lzop -cd %s 2>&1", "lzop > %s", ".lzo" },
-    { "bzip2 -cd %s 2>&1", "bzip2 > %s", ".bz2" }, { "gzip -cd %s 2>&1", "gzip > %s", ".gz" },
-    { "gzip -cd %s 2>&1", "gzip > %s", ".Z" }
+    { "xz -cd %s 2>&1", "xz > %s", ".xz" },         //
+    { "zstd -cd %s 2>&1", "zstd > %s", ".zst" },    //
+    { "lz4 -cd %s 2>&1", "lz4 > %s", ".lz4" },      //
+    { "lzip -cd %s 2>&1", "lzip > %s", ".lz" },     //
+    { "lzma -cd %s 2>&1", "lzma > %s", ".lzma" },   //
+    { "lzop -cd %s 2>&1", "lzop > %s", ".lzo" },    //
+    { "bzip2 -cd %s 2>&1", "bzip2 > %s", ".bz2" },  //
+    { "gzip -cd %s 2>&1", "gzip > %s", ".gz" },     //
+    { "gzip -cd %s 2>&1", "gzip > %s", ".Z" },
 };
 
 static const off_t filesize_default_threshold = 64 * 1024 * 1024;  // 64 MB

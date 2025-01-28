@@ -41,4 +41,4 @@ void free_my_statfs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__MOUNTLIST_H
+#endif

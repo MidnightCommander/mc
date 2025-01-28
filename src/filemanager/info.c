@@ -281,7 +281,7 @@ info_show_info (WInfo *info)
         }
 #else
         tty_print_string (_ ("Attributes: unavailable"));
-#endif  // ENABLE_EXT2FS_ATTR
+#endif
         MC_FALLTHROUGH;
     case 5:
         widget_gotoyx (w, 5, 3);

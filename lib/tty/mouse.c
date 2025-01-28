@@ -73,7 +73,7 @@ show_mouse_pointer (int x, int y)
 #else
     (void) x;
     (void) y;
-#endif  // HAVE_LIBGPM
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -87,7 +87,7 @@ init_mouse (void)
     case MOUSE_NONE:
         use_mouse_p = MOUSE_GPM;
         break;
-#endif  // HAVE_LIBGPM
+#endif
 
     case MOUSE_XTERM_NORMAL_TRACKING:
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
@@ -133,7 +133,7 @@ enable_mouse (void)
         mouse_enabled = TRUE;
     }
     break;
-#endif  // HAVE_LIBGPM
+#endif
 
     case MOUSE_XTERM_NORMAL_TRACKING:
         // save old highlight mouse tracking

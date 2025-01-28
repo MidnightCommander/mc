@@ -78,11 +78,13 @@ static struct
     int y;
     int len;
     const char *text;
-} chown_but[BUTTONS] = { { B_SETALL, NORMAL_BUTTON, 5, 0, N_ ("Set &all") },
-                         { B_SETGRP, NORMAL_BUTTON, 5, 0, N_ ("Set &groups") },
-                         { B_SETUSR, NORMAL_BUTTON, 5, 0, N_ ("Set &users") },
-                         { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
-                         { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") } };
+} chown_but[BUTTONS] = {
+    { B_SETALL, NORMAL_BUTTON, 5, 0, N_ ("Set &all") },
+    { B_SETGRP, NORMAL_BUTTON, 5, 0, N_ ("Set &groups") },
+    { B_SETUSR, NORMAL_BUTTON, 5, 0, N_ ("Set &users") },
+    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
+    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") },
+};
 
 /* summary length of three buttons */
 static int blen = 0;
@@ -91,7 +93,9 @@ static struct
 {
     int y;
     WLabel *l;
-} chown_label[LABELS] = { { 4, NULL }, { 6, NULL }, { 8, NULL }, { 10, NULL }, { 12, NULL } };
+} chown_label[LABELS] = {
+    { 4, NULL }, { 6, NULL }, { 8, NULL }, { 10, NULL }, { 12, NULL },
+};
 
 static int current_file;
 static gboolean ignore_all;
@@ -116,7 +120,7 @@ chown_init (void)
 #ifdef ENABLE_NLS
     for (i = 0; i < BUTTONS; i++)
         chown_but[i].text = _ (chown_but[i].text);
-#endif  // ENABLE_NLS
+#endif
 
     for (i = 0; i < BUTTONS; i++)
     {

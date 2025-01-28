@@ -148,7 +148,7 @@ static struct
 } panels[MAX_VIEWS] = {
     // init MAX_VIEWS items
     { view_listing, NULL, NULL },
-    { view_listing, NULL, NULL }
+    { view_listing, NULL, NULL },
 };
 
 static layout_t old_layout;
@@ -166,13 +166,15 @@ static struct
     const char *text;
     gboolean *variable;
     WCheck *widget;
-} check_options[] = { { N_ ("&Equal split"), &equal_split, NULL },
-                      { N_ ("&Menubar visible"), &menubar_visible, NULL },
-                      { N_ ("Command &prompt"), &command_prompt, NULL },
-                      { N_ ("&Keybar visible"), &mc_global.keybar_visible, NULL },
-                      { N_ ("H&intbar visible"), &mc_global.message_visible, NULL },
-                      { N_ ("&XTerm window title"), &xterm_title, NULL },
-                      { N_ ("&Show free space"), &free_space, NULL } };
+} check_options[] = {
+    { N_ ("&Equal split"), &equal_split, NULL },
+    { N_ ("&Menubar visible"), &menubar_visible, NULL },
+    { N_ ("Command &prompt"), &command_prompt, NULL },
+    { N_ ("&Keybar visible"), &mc_global.keybar_visible, NULL },
+    { N_ ("H&intbar visible"), &mc_global.message_visible, NULL },
+    { N_ ("&XTerm window title"), &xterm_title, NULL },
+    { N_ ("&Show free space"), &free_space, NULL },
+};
 
 static const char *output_lines_label = NULL;
 static int output_lines_label_len;
@@ -493,7 +495,10 @@ layout_dlg_create (void)
     const char *title2 = N_ ("Console output");
     const char *title3 = N_ ("Other options");
 
-    const char *s_split_direction[2] = { N_ ("&Vertical"), N_ ("&Horizontal") };
+    const char *s_split_direction[2] = {
+        N_ ("&Vertical"),
+        N_ ("&Horizontal"),
+    };
 
     const char *ok_button = N_ ("&OK");
     const char *cancel_button = N_ ("&Cancel");
@@ -1516,7 +1521,7 @@ load_prompt (int fd, void *unused)
 
     return 0;
 }
-#endif  // ENABLE_SUBSHELL
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 

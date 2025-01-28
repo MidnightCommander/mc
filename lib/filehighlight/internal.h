@@ -58,4 +58,4 @@ gboolean mc_fhl_init_from_standard_files (mc_fhl_t *fhl);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__FILEHIGHLIGHT_INTERNAL_H
+#endif

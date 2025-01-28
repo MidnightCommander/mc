@@ -22,4 +22,4 @@ void external_panelize_free (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__PANELIZE_H
+#endif

@@ -93,4 +93,4 @@ void simple_status_msg_init_cb (status_msg_t *sm);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WTOOLS_H
+#endif

@@ -70,23 +70,29 @@ static struct
     const char *text;
     gboolean selected;
     WCheck *check;
-} check_perm[BUTTONS_PERM] = { { S_ISUID, N_ ("set &user ID on execution"), FALSE, NULL },
-                               { S_ISGID, N_ ("set &group ID on execution"), FALSE, NULL },
-                               { S_ISVTX, N_ ("stick&y bit"), FALSE, NULL },
-                               { S_IRUSR, N_ ("&read by owner"), FALSE, NULL },
-                               { S_IWUSR, N_ ("&write by owner"), FALSE, NULL },
-                               { S_IXUSR, N_ ("e&xecute/search by owner"), FALSE, NULL },
-                               { S_IRGRP, N_ ("rea&d by group"), FALSE, NULL },
-                               { S_IWGRP, N_ ("write by grou&p"), FALSE, NULL },
-                               { S_IXGRP, N_ ("execu&te/search by group"), FALSE, NULL },
-                               { S_IROTH, N_ ("read &by others"), FALSE, NULL },
-                               { S_IWOTH, N_ ("wr&ite by others"), FALSE, NULL },
-                               { S_IXOTH, N_ ("execute/searc&h by others"), FALSE, NULL } };
+} check_perm[BUTTONS_PERM] = {
+    { S_ISUID, N_ ("set &user ID on execution"), FALSE, NULL },
+    { S_ISGID, N_ ("set &group ID on execution"), FALSE, NULL },
+    { S_ISVTX, N_ ("stick&y bit"), FALSE, NULL },
+    { S_IRUSR, N_ ("&read by owner"), FALSE, NULL },
+    { S_IWUSR, N_ ("&write by owner"), FALSE, NULL },
+    { S_IXUSR, N_ ("e&xecute/search by owner"), FALSE, NULL },
+    { S_IRGRP, N_ ("rea&d by group"), FALSE, NULL },
+    { S_IWGRP, N_ ("write by grou&p"), FALSE, NULL },
+    { S_IXGRP, N_ ("execu&te/search by group"), FALSE, NULL },
+    { S_IROTH, N_ ("read &by others"), FALSE, NULL },
+    { S_IWOTH, N_ ("wr&ite by others"), FALSE, NULL },
+    { S_IXOTH, N_ ("execute/searc&h by others"), FALSE, NULL },
+};
 
 static int check_perm_len = 0;
 
-static const char *file_info_labels[LABELS] = { N_ ("Name:"), N_ ("Permissions (octal):"),
-                                                N_ ("Owner name:"), N_ ("Group name:") };
+static const char *file_info_labels[LABELS] = {
+    N_ ("Name:"),
+    N_ ("Permissions (octal):"),
+    N_ ("Owner name:"),
+    N_ ("Group name:"),
+};
 
 static int file_info_labels_len = 0;
 
@@ -97,12 +103,14 @@ static struct
     int y;  // vertical position relatively to dialog bottom boundary
     int len;
     const char *text;
-} chmod_but[BUTTONS] = { { B_SETALL, NORMAL_BUTTON, 6, 0, N_ ("Set &all") },
-                         { B_MARKED, NORMAL_BUTTON, 6, 0, N_ ("&Marked all") },
-                         { B_SETMRK, NORMAL_BUTTON, 5, 0, N_ ("S&et marked") },
-                         { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_ ("C&lear marked") },
-                         { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
-                         { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") } };
+} chmod_but[BUTTONS] = {
+    { B_SETALL, NORMAL_BUTTON, 6, 0, N_ ("Set &all") },
+    { B_MARKED, NORMAL_BUTTON, 6, 0, N_ ("&Marked all") },
+    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_ ("S&et marked") },
+    { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_ ("C&lear marked") },
+    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
+    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") },
+};
 
 static gboolean mode_change;
 static int current_file;
@@ -140,7 +148,7 @@ chmod_init (void)
 
     for (i = 0; i < BUTTONS; i++)
         chmod_but[i].text = _ (chmod_but[i].text);
-#endif  // ENABLE_NLS
+#endif
 
     for (i = 0; i < BUTTONS_PERM; i++)
     {

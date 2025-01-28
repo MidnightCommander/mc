@@ -72,7 +72,7 @@ struct vfs_s_super
     gboolean want_stale;  // If set, we do not flush cache properly
 #ifdef ENABLE_VFS_NET
     vfs_path_element_t *path_element;
-#endif  // ENABLE_VFS_NET
+#endif
 };
 
 /*

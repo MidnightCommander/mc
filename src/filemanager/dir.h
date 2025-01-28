@@ -112,4 +112,4 @@ link_isdir (const file_entry_t *file)
     return (file->f.link_to_dir != 0);
 }
 
-#endif  // MC__DIR_H
+#endif

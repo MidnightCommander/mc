@@ -66,8 +66,8 @@
 #        else
 #            define FS_TYPE(Ent) mnt_names[(Ent).f_type]
 #        endif
-#    endif  // MOUNTED_GETFSSTAT
-#endif      // STAT_STATVFS || STAT_STATVFS64
+#    endif
+#endif
 
 #ifdef HAVE_SYS_VFS_H
 #    include <sys/vfs.h>
@@ -330,7 +330,7 @@ struct fs_usage
 
 #ifdef HAVE_INFOMOUNT_LIST
 static GSList *mc_mount_list = NULL;
-#endif  // HAVE_INFOMOUNT_LIST
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -492,7 +492,7 @@ fstype_to_string (short int t)
         return "?";
     }
 }
-#        endif  // ! HAVE_STRUCT_STATFS_F_FSTYPENAME
+#        endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -505,7 +505,7 @@ fsp_to_string (const struct statfs *fsp)
     return fstype_to_string (fsp->f_type);
 #        endif
 }
-#    endif  // MOUNTED_GETMNTINFO
+#    endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -521,7 +521,7 @@ fstype_to_string (int t)
     else
         return e->vfsent_name;
 }
-#    endif  // MOUNTED_VMOUNT
+#    endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -695,8 +695,8 @@ read_file_system_list (void)
             if (fclose (fp) == EOF)
                 goto free_then_fail;
         }
-        else    // fallback to /proc/self/mounts (/etc/mtab)
-#        endif  // __linux __ || __ANDROID__
+        else  // fallback to /proc/self/mounts (/etc/mtab)
+#        endif
         {
             struct mntent *mnt;
             const char *table = MOUNTED;
@@ -728,7 +728,7 @@ read_file_system_list (void)
                 goto free_then_fail;
         }
     }
-#    endif  // MOUNTED_GETMNTENT1.
+#    endif
 
 #    ifdef MOUNTED_GETMNTINFO  // Mac OS X, FreeBSD, OpenBSD, also (obsolete) 4.4BSD
     {
@@ -755,7 +755,7 @@ read_file_system_list (void)
             mount_list = g_slist_prepend (mount_list, me);
         }
     }
-#    endif  // MOUNTED_GETMNTINFO
+#    endif
 
 #    ifdef MOUNTED_GETMNTINFO2  // NetBSD, Minix
     {
@@ -780,7 +780,7 @@ read_file_system_list (void)
             mount_list = g_slist_prepend (mount_list, me);
         }
     }
-#    endif  // MOUNTED_GETMNTINFO2
+#    endif
 
 #    if defined MOUNTED_FS_STAT_DEV  // Haiku, also (obsolete) BeOS
     {
@@ -880,7 +880,7 @@ read_file_system_list (void)
             g_free (re);
         }
     }
-#    endif  // MOUNTED_FS_STAT_DEV
+#    endif
 
 #    ifdef MOUNTED_GETFSSTAT  //  OSF/1, also (obsolete) Apple Darwin 1.3
     {
@@ -924,7 +924,7 @@ read_file_system_list (void)
 
         g_free (stats);
     }
-#    endif  // MOUNTED_GETFSSTAT
+#    endif
 
 #    if defined MOUNTED_FREAD_FSTYP  // (obsolete) SVR3
     {
@@ -975,7 +975,7 @@ read_file_system_list (void)
         if (fclose (fp) == EOF)
             goto free_then_fail;
     }
-#    endif  // MOUNTED_FREAD_FSTYP
+#    endif
 
 #    ifdef MOUNTED_GETEXTMNTENT  // Solaris >= 8
     {
@@ -1017,7 +1017,7 @@ read_file_system_list (void)
             goto free_then_fail;
         }
     }
-#    endif  // MOUNTED_GETEXTMNTENT
+#    endif
 
 #    ifdef MOUNTED_GETMNTENT2  // Solaris < 8, also (obsolete) SVR4
     {
@@ -1091,7 +1091,7 @@ read_file_system_list (void)
             goto free_then_fail;
         }
     }
-#    endif  // MOUNTED_GETMNTENT2.
+#    endif
 
 #    ifdef MOUNTED_VMOUNT  // AIX
     {
@@ -1155,7 +1155,7 @@ read_file_system_list (void)
         }
         g_free (entries);
     }
-#    endif  // MOUNTED_VMOUNT.
+#    endif
 
 #    ifdef MOUNTED_INTERIX_STATVFS  // Interix
     {
@@ -1194,7 +1194,7 @@ read_file_system_list (void)
         }
         closedir (dirp);
     }
-#    endif  // MOUNTED_INTERIX_STATVFS
+#    endif
 
     return g_slist_reverse (mount_list);
 
@@ -1209,7 +1209,7 @@ free_then_fail:
         return NULL;
     }
 }
-#endif  // HAVE_INFOMOUNT_LIST
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1305,11 +1305,11 @@ read_file_system_list (void)
              de.disk_type, tp, _DRIVER_NAME_LEN, _DRIVER_NAME_LEN, de.driver_name, de.disk_drv);
     fprintf (stderr, "fsys_get_mount_dev():\n\tdevice='%s'\n", dev);
     fprintf (stderr, "fsys_get_mount_pt():\n\tmount point='%s'\n", dir);
-#    endif  // DEBUG
+#    endif
 
     return (list);
 }
-#endif  // HAVE_INFOMOUNT_QNX
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1401,7 +1401,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
             fsd.f_bfree = fsd.f_spare[1];
             fsd.f_bavail = fsd.f_spare[2];
         }
-#        endif  // STATFS_TRUNCATES_BLOCK_COUNTS
+#        endif
 
 #    elif defined STAT_STATFS2_FSIZE  // 4.4BSD and older NetBSD
 
@@ -1442,7 +1442,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
     return 0;
 }
-#endif  // HAVE_INFOMOUNT
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -1453,7 +1453,7 @@ free_my_statfs (void)
 {
 #ifdef HAVE_INFOMOUNT_LIST
     g_clear_slist (&mc_mount_list, (GDestroyNotify) free_mount_entry);
-#endif  // HAVE_INFOMOUNT_LIST
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1464,7 +1464,7 @@ init_my_statfs (void)
 #ifdef HAVE_INFOMOUNT_LIST
     free_my_statfs ();
     mc_mount_list = read_file_system_list ();
-#endif  // HAVE_INFOMOUNT_LIST
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1511,7 +1511,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         myfs_stats->nodes = (uintmax_t) fs_use.fsu_files;
     }
     else
-#endif  // HAVE_INFOMOUNT_LIST
+#endif
 
 #ifdef HAVE_INFOMOUNT_QNX
         /*
@@ -1539,7 +1539,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         myfs_stats->nodes = (uintmax_t) fs_use.fsu_files;
     }
     else
-#endif  // HAVE_INFOMOUNT_QNX
+#endif
     {
         myfs_stats->type = 0;
         myfs_stats->mpoint = "unknown";

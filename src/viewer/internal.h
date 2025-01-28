@@ -472,4 +472,4 @@ mcview_growbuf_read_all_data (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif  // MC__VIEWER_INTERNAL_H
+#endif

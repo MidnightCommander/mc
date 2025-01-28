@@ -342,4 +342,4 @@ const char *mc_tmpdir (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC_VFS_VFS_H
+#endif

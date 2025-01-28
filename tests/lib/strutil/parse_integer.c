@@ -67,7 +67,7 @@ static const struct parse_integer_test_ds
     { "1M", 1024 * 1024, FALSE },
     { "1m", 0, TRUE },
     { "64M", 64 * 1024 * 1024, FALSE },
-    { "1G", 1 * 1024 * 1024 * 1024, FALSE }
+    { "1G", 1 * 1024 * 1024 * 1024, FALSE },
 };
 
 /* @Test(dataSource = "parse_integer_test_ds") */

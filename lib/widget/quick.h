@@ -7,138 +7,231 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+// clang-format off
+
 #define QUICK_CHECKBOX(txt, st, id_)                                                               \
     {                                                                                              \
-        .widget_type = quick_checkbox, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,     \
-        .id = id_, .u = {                                                                          \
-            .checkbox = { .text = txt, .state = st }                                               \
-        }                                                                                          \
+        .widget_type = quick_checkbox,                                                             \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = id_,                                                                                 \
+        .u = {                                                                                     \
+            .checkbox = {                                                                          \
+                .text = txt,                                                                       \
+                .state = st,                                                                       \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_BUTTON(txt, act, cb, id_)                                                            \
     {                                                                                              \
-        .widget_type = quick_button, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,       \
-        .id = id_, .u = {                                                                          \
-            .button = { .text = txt, .action = act, .callback = cb }                               \
-        }                                                                                          \
+        .widget_type = quick_button,                                                               \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = id_,                                                                                 \
+        .u = {                                                                                     \
+            .button = {                                                                            \
+                .text = txt,                                                                       \
+                .action = act,                                                                     \
+                .callback = cb,                                                                    \
+             },                                                                                    \
+        },                                                                                         \
     }
 
 #define QUICK_INPUT(txt, hname, res, id_, is_passwd_, strip_passwd_, completion_flags_)            \
     {                                                                                              \
-        .widget_type = quick_input, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,        \
-        .id = id_, .u = {                                                                          \
-            .input = { .label_text = NULL,                                                         \
-                       .label_location = input_label_none,                                         \
-                       .label = NULL,                                                              \
-                       .text = txt,                                                                \
-                       .completion_flags = completion_flags_,                                      \
-                       .is_passwd = is_passwd_,                                                    \
-                       .strip_passwd = strip_passwd_,                                              \
-                       .histname = hname,                                                          \
-                       .result = res }                                                             \
-        }                                                                                          \
+        .widget_type = quick_input,                                                                \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = id_,                                                                                 \
+        .u = {                                                                                     \
+            .input = {                                                                             \
+                 .label_text = NULL,                                                               \
+                 .label_location = input_label_none,                                               \
+                 .label = NULL,                                                                    \
+                 .text = txt,                                                                      \
+                 .completion_flags = completion_flags_,                                            \
+                 .is_passwd = is_passwd_,                                                          \
+                 .strip_passwd = strip_passwd_,                                                    \
+                 .histname = hname,                                                                \
+                 .result = res,                                                                    \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_LABELED_INPUT(label_, label_loc, txt, hname, res, id_, is_passwd_, strip_passwd_,    \
                             completion_flags_)                                                     \
     {                                                                                              \
-        .widget_type = quick_input, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,        \
-        .id = id_, .u = {                                                                          \
-            .input = { .label_text = label_,                                                       \
-                       .label_location = label_loc,                                                \
-                       .label = NULL,                                                              \
-                       .text = txt,                                                                \
-                       .completion_flags = completion_flags_,                                      \
-                       .is_passwd = is_passwd_,                                                    \
-                       .strip_passwd = strip_passwd_,                                              \
-                       .histname = hname,                                                          \
-                       .result = res }                                                             \
-        }                                                                                          \
+        .widget_type = quick_input,                                                                \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = id_,                                                                                 \
+        .u = {                                                                                     \
+            .input = {                                                                             \
+                .label_text = label_,                                                              \
+                .label_location = label_loc,                                                       \
+                .label = NULL,                                                                     \
+                .text = txt,                                                                       \
+                .completion_flags = completion_flags_,                                             \
+                .is_passwd = is_passwd_,                                                           \
+                .strip_passwd = strip_passwd_,                                                     \
+                .histname = hname,                                                                 \
+                .result = res,                                                                     \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_LABEL(txt, id_)                                                                      \
     {                                                                                              \
-        .widget_type = quick_label, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,        \
-        .id = id_, .u = {                                                                          \
-            .label = { .text = txt, .input = NULL }                                                \
-        }                                                                                          \
+        .widget_type = quick_label,                                                                \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = id_,                                                                                 \
+        .u = {                                                                                     \
+            .label = {                                                                             \
+                .text = txt,                                                                       \
+                .input = NULL,                                                                     \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_RADIO(cnt, items_, val, id_)                                                         \
     {                                                                                              \
-        .widget_type = quick_radio, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,        \
-        .id = id_, .u = {                                                                          \
-            .radio = { .count = cnt, .items = items_, .value = val }                               \
-        }                                                                                          \
+        .widget_type = quick_radio,                                                                \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = id_,                                                                                 \
+        .u = {                                                                                     \
+            .radio = {                                                                             \
+                .count = cnt,                                                                      \
+                .items = items_,                                                                   \
+                .value = val,                                                                      \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_START_GROUPBOX(t)                                                                    \
     {                                                                                              \
-        .widget_type = quick_start_groupbox, .options = WOP_DEFAULT,                               \
-        .pos_flags = WPOS_KEEP_DEFAULT, .id = NULL, .u = {                                         \
-            .groupbox = { .title = t }                                                             \
-        }                                                                                          \
+        .widget_type = quick_start_groupbox,                                                       \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .groupbox = {                                                                          \
+                .title = t,                                                                        \
+             },                                                                                    \
+        },                                                                                         \
     }
 
 #define QUICK_STOP_GROUPBOX                                                                        \
     {                                                                                              \
-        .widget_type = quick_stop_groupbox, .options = WOP_DEFAULT,                                \
-        .pos_flags = WPOS_KEEP_DEFAULT, .id = NULL, .u = {                                         \
-            .input = { .text = NULL, .histname = NULL, .result = NULL }                            \
-        }                                                                                          \
+        .widget_type = quick_stop_groupbox,                                                        \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .input = {                                                                             \
+                .text = NULL,                                                                      \
+                .histname = NULL,                                                                  \
+                .result = NULL,                                                                    \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_SEPARATOR(line_)                                                                     \
     {                                                                                              \
-        .widget_type = quick_separator, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,    \
-        .id = NULL, .u = {                                                                         \
-            .separator = { .space = TRUE, .line = line_ }                                          \
-        }                                                                                          \
+        .widget_type = quick_separator,                                                            \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .separator = {                                                                         \
+                .space = TRUE,                                                                     \
+                .line = line_,                                                                     \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_START_COLUMNS                                                                        \
     {                                                                                              \
-        .widget_type = quick_start_columns, .options = WOP_DEFAULT,                                \
-        .pos_flags = WPOS_KEEP_DEFAULT, .id = NULL, .u = {                                         \
-            .input = { .text = NULL, .histname = NULL, .result = NULL }                            \
-        }                                                                                          \
+        .widget_type = quick_start_columns,                                                        \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .input = {                                                                             \
+                .text = NULL,                                                                      \
+                .histname = NULL,                                                                  \
+                .result = NULL,                                                                    \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_NEXT_COLUMN                                                                          \
     {                                                                                              \
-        .widget_type = quick_next_column, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,  \
-        .id = NULL, .u = {                                                                         \
-            .input = { .text = NULL, .histname = NULL, .result = NULL }                            \
-        }                                                                                          \
+        .widget_type = quick_next_column,                                                          \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .input = {                                                                             \
+                .text = NULL,                                                                      \
+                .histname = NULL,                                                                  \
+                .result = NULL,                                                                    \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_STOP_COLUMNS                                                                         \
     {                                                                                              \
-        .widget_type = quick_stop_columns, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT, \
-        .id = NULL, .u = {                                                                         \
-            .input = { .text = NULL, .histname = NULL, .result = NULL }                            \
-        }                                                                                          \
+        .widget_type = quick_stop_columns,                                                         \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .input = {                                                                             \
+                .text = NULL,                                                                      \
+                .histname = NULL,                                                                  \
+                .result = NULL,                                                                    \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_START_BUTTONS(space_, line_)                                                         \
     {                                                                                              \
-        .widget_type = quick_buttons, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,      \
-        .id = NULL, .u = {                                                                         \
-            .separator = { .space = space_, .line = line_ }                                        \
-        }                                                                                          \
+        .widget_type = quick_buttons,                                                              \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .separator = {                                                                         \
+                .space = space_,                                                                   \
+                .line = line_,                                                                     \
+            },                                                                                     \
+        },                                                                                         \
     }
 
 #define QUICK_BUTTONS_OK_CANCEL                                                                    \
-    QUICK_START_BUTTONS (TRUE, TRUE), QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),              \
+    QUICK_START_BUTTONS (TRUE, TRUE),                                                              \
+        QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),                                            \
         QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL)
 
 #define QUICK_END                                                                                  \
     {                                                                                              \
-        .widget_type = quick_end, .options = WOP_DEFAULT, .pos_flags = WPOS_KEEP_DEFAULT,          \
-        .id = NULL, .u = {                                                                         \
-            .input = { .text = NULL, .histname = NULL, .result = NULL }                            \
-        }                                                                                          \
+        .widget_type = quick_end,                                                                  \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .input = {                                                                             \
+                .text = NULL,                                                                      \
+                .histname = NULL,                                                                  \
+                .result = NULL,                                                                    \
+            },                                                                                     \
+        },                                                                                         \
     }
+
+// clang-format on
 
 /*** enums ***************************************************************************************/
 
@@ -263,4 +356,4 @@ quick_dialog (quick_dialog_t *quick_dlg)
     return quick_dialog_skip (quick_dlg, 1);
 }
 
-#endif  // MC__QUICK_H
+#endif

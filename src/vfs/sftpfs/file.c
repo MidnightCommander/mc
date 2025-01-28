@@ -188,7 +188,9 @@ sftpfs_open_file (vfs_file_handler_t *fh, int flags, mode_t mode, GError **mcerr
 
     if (do_append)
     {
-        struct stat file_info = { .st_dev = 0 };
+        struct stat file_info = {
+            .st_dev = 0,
+        };
         /* In case of
 
            struct stat file_info = { 0 };

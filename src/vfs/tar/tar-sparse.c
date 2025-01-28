@@ -150,17 +150,21 @@ static gboolean pax_decode_header (tar_super_t *archive, struct tar_sparse_file 
 
 /*** file scope variables ************************************************************************/
 
-static struct tar_sparse_optab const oldgnu_optab = { .init = NULL,  // No init function
-                                                      .done = NULL,  // No done function
-                                                      .sparse_member_p = oldgnu_sparse_member_p,
-                                                      .fixup_header = oldgnu_fixup_header,
-                                                      .decode_header = oldgnu_get_sparse_info };
+static struct tar_sparse_optab const oldgnu_optab = {
+    .init = NULL,  // No init function
+    .done = NULL,  // No done function
+    .sparse_member_p = oldgnu_sparse_member_p,
+    .fixup_header = oldgnu_fixup_header,
+    .decode_header = oldgnu_get_sparse_info,
+};
 
-static struct tar_sparse_optab const star_optab = { .init = NULL,  // No init function
-                                                    .done = NULL,  // No done function
-                                                    .sparse_member_p = star_sparse_member_p,
-                                                    .fixup_header = star_fixup_header,
-                                                    .decode_header = star_get_sparse_info };
+static struct tar_sparse_optab const star_optab = {
+    .init = NULL,  // No init function
+    .done = NULL,  // No done function
+    .sparse_member_p = star_sparse_member_p,
+    .fixup_header = star_fixup_header,
+    .decode_header = star_get_sparse_info,
+};
 
 /* GNU PAX sparse file format. There are several versions:
  * 0.0
@@ -227,12 +231,13 @@ static struct tar_sparse_optab const star_optab = { .init = NULL,  // No init fu
  --sparse-version 0.1 --pax-option delete=GNU.sparse.map
  */
 
-static struct tar_sparse_optab const pax_optab = { .init = NULL,  // No init function
-                                                   .done = NULL,  // No done function
-                                                   .sparse_member_p = pax_sparse_member_p,
-                                                   .fixup_header =
-                                                       NULL,  // No fixup_header function
-                                                   .decode_header = pax_decode_header };
+static struct tar_sparse_optab const pax_optab = {
+    .init = NULL,  // No init function
+    .done = NULL,  // No done function
+    .sparse_member_p = pax_sparse_member_p,
+    .fixup_header = NULL,  // No fixup_header function
+    .decode_header = pax_decode_header,
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

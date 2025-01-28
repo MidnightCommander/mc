@@ -61,8 +61,8 @@
 #        include <ncurses/term.h>
 #    else
 #        include <term.h>
-#    endif  // HAVE_NCURSES_TERM_H
-#endif      // WANT_TERM_H
+#    endif
+#endif
 
 /*** global variables ****************************************************************************/
 
@@ -101,9 +101,9 @@ tty_setup_sigwinch (void (*handler) (int))
     sigemptyset (&act.sa_mask);
 #    ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
-#    endif  // SA_RESTART
+#    endif
     my_sigaction (SIGWINCH, &act, &oact);
-#endif  // SIGWINCH
+#endif
 
     tty_create_winch_pipe ();
 }
@@ -180,30 +180,32 @@ mc_tty_normalize_lines_char (const char *ch)
     {
         const char *line;
         int line_code;
-    } const lines_codes[] = { { "\342\224\230", ACS_LRCORNER },  // ┌
-                              { "\342\224\224", ACS_LLCORNER },  // └
-                              { "\342\224\220", ACS_URCORNER },  // ┐
-                              { "\342\224\214", ACS_ULCORNER },  // ┘
-                              { "\342\224\234", ACS_LTEE },      // ├
-                              { "\342\224\244", ACS_RTEE },      // ┤
-                              { "\342\224\254", ACS_TTEE },      // ┬
-                              { "\342\224\264", ACS_BTEE },      // ┴
-                              { "\342\224\200", ACS_HLINE },     // ─
-                              { "\342\224\202", ACS_VLINE },     // │
-                              { "\342\224\274", ACS_PLUS },      // ┼
+    } const lines_codes[] = {
+        { "\342\224\230", ACS_LRCORNER },  // ┌
+        { "\342\224\224", ACS_LLCORNER },  // └
+        { "\342\224\220", ACS_URCORNER },  // ┐
+        { "\342\224\214", ACS_ULCORNER },  // ┘
+        { "\342\224\234", ACS_LTEE },      // ├
+        { "\342\224\244", ACS_RTEE },      // ┤
+        { "\342\224\254", ACS_TTEE },      // ┬
+        { "\342\224\264", ACS_BTEE },      // ┴
+        { "\342\224\200", ACS_HLINE },     // ─
+        { "\342\224\202", ACS_VLINE },     // │
+        { "\342\224\274", ACS_PLUS },      // ┼
 
-                              { "\342\225\235", ACS_LRCORNER | A_BOLD },  // ╔
-                              { "\342\225\232", ACS_LLCORNER | A_BOLD },  // ╚
-                              { "\342\225\227", ACS_URCORNER | A_BOLD },  // ╗
-                              { "\342\225\224", ACS_ULCORNER | A_BOLD },  // ╝
-                              { "\342\225\237", ACS_LTEE | A_BOLD },      // ╟
-                              { "\342\225\242", ACS_RTEE | A_BOLD },      // ╢
-                              { "\342\225\244", ACS_TTEE | A_BOLD },      // ╤
-                              { "\342\225\247", ACS_BTEE | A_BOLD },      // ╧
-                              { "\342\225\220", ACS_HLINE | A_BOLD },     // ═
-                              { "\342\225\221", ACS_VLINE | A_BOLD },     // ║
+        { "\342\225\235", ACS_LRCORNER | A_BOLD },  // ╔
+        { "\342\225\232", ACS_LLCORNER | A_BOLD },  // ╚
+        { "\342\225\227", ACS_URCORNER | A_BOLD },  // ╗
+        { "\342\225\224", ACS_ULCORNER | A_BOLD },  // ╝
+        { "\342\225\237", ACS_LTEE | A_BOLD },      // ╟
+        { "\342\225\242", ACS_RTEE | A_BOLD },      // ╢
+        { "\342\225\244", ACS_TTEE | A_BOLD },      // ╤
+        { "\342\225\247", ACS_BTEE | A_BOLD },      // ╧
+        { "\342\225\220", ACS_HLINE | A_BOLD },     // ═
+        { "\342\225\221", ACS_VLINE | A_BOLD },     // ║
 
-                              { NULL, 0 } };
+        { NULL, 0 },
+    };
 
     if (ch == NULL)
         return (int) ' ';
@@ -244,7 +246,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
      * them in the "Learn Keys" dialog.  The value is in milliseconds.
      */
     ESCDELAY = 200;
-#endif  // HAVE_ESCDELAY
+#endif
 
     tcgetattr (STDIN_FILENO, &mode);
     // use Ctrl-g to generate SIGINT
@@ -334,7 +336,7 @@ tty_change_screen_size (void)
         LINES = winsz.ws_row;
 #    endif
     }
-#endif  // defined(TIOCGWINSZ) || NCURSES_VERSION_MAJOR >= 4
+#endif
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
@@ -591,7 +593,7 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
     (void) rows;
     (void) cols;
     (void) color;
-#endif  // ENABLE_SHADOWS
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

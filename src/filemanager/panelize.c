@@ -163,10 +163,12 @@ external_panelize_init (void)
         int ret_cmd;
         button_flags_t flags;
         const char *text;
-    } panelize_but[] = { { B_ENTER, DEFPUSH_BUTTON, N_ ("Pane&lize") },
-                         { B_REMOVE, NORMAL_BUTTON, N_ ("&Remove") },
-                         { B_ADD, NORMAL_BUTTON, N_ ("&Add new") },
-                         { B_CANCEL, NORMAL_BUTTON, N_ ("&Cancel") } };
+    } panelize_but[] = {
+        { B_ENTER, DEFPUSH_BUTTON, N_ ("Pane&lize") },
+        { B_REMOVE, NORMAL_BUTTON, N_ ("&Remove") },
+        { B_ADD, NORMAL_BUTTON, N_ ("&Add new") },
+        { B_CANCEL, NORMAL_BUTTON, N_ ("&Cancel") },
+    };
 
     WGroup *g;
 

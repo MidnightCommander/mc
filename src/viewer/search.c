@@ -48,11 +48,13 @@
 
 /*** global variables ****************************************************************************/
 
-mcview_search_options_t mcview_search_options = { .type = MC_SEARCH_T_NORMAL,
-                                                  .case_sens = FALSE,
-                                                  .backwards = FALSE,
-                                                  .whole_words = FALSE,
-                                                  .all_codepages = FALSE };
+mcview_search_options_t mcview_search_options = {
+    .type = MC_SEARCH_T_NORMAL,
+    .case_sens = FALSE,
+    .backwards = FALSE,
+    .whole_words = FALSE,
+    .all_codepages = FALSE,
+};
 
 /*** file scope macro definitions ****************************************************************/
 

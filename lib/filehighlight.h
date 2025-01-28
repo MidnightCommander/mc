@@ -31,4 +31,4 @@ void mc_fhl_clear (mc_fhl_t *fhl);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__FILEHIGHLIGHT_H
+#endif

@@ -42,4 +42,4 @@ void mc_shell_deinit (void);
 
 /*** inline functions **************************************************/
 
-#endif  // MC_SHELL_H
+#endif

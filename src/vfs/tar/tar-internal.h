@@ -345,4 +345,4 @@ tar_represent_uintmax (uintmax_t n)
     return nd + INTMAX_MIN;
 }
 
-#endif  // MC__VFS_TAR_INTERNAL_H
+#endif

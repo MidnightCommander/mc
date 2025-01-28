@@ -24,4 +24,4 @@ const char *spell_dialog_lang_list_show (const GPtrArray *languages);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__EDIT_ASPELL_H
+#endif

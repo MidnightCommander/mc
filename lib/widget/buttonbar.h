@@ -43,4 +43,4 @@ WButtonBar *buttonbar_find (const WDialog *h);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_BUTTONBAR_H
+#endif

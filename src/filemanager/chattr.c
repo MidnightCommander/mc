@@ -137,69 +137,70 @@ static struct
     const char *text;
     gboolean selected;
     gboolean state;  // state of checkboxes
-} check_attr[] = { { EXT2_SECRM_FL, 's', N_ ("Secure deletion"), FALSE, FALSE },
-                   { EXT2_UNRM_FL, 'u', N_ ("Undelete"), FALSE, FALSE },
-                   { EXT2_SYNC_FL, 'S', N_ ("Synchronous updates"), FALSE, FALSE },
-                   { EXT2_DIRSYNC_FL, 'D', N_ ("Synchronous directory updates"), FALSE, FALSE },
-                   { EXT2_IMMUTABLE_FL, 'i', N_ ("Immutable"), FALSE, FALSE },
-                   { EXT2_APPEND_FL, 'a', N_ ("Append only"), FALSE, FALSE },
-                   { EXT2_NODUMP_FL, 'd', N_ ("No dump"), FALSE, FALSE },
-                   { EXT2_NOATIME_FL, 'A', N_ ("No update atime"), FALSE, FALSE },
-                   { EXT2_COMPR_FL, 'c', N_ ("Compress"), FALSE, FALSE },
+} check_attr[] = {
+    { EXT2_SECRM_FL, 's', N_ ("Secure deletion"), FALSE, FALSE },
+    { EXT2_UNRM_FL, 'u', N_ ("Undelete"), FALSE, FALSE },
+    { EXT2_SYNC_FL, 'S', N_ ("Synchronous updates"), FALSE, FALSE },
+    { EXT2_DIRSYNC_FL, 'D', N_ ("Synchronous directory updates"), FALSE, FALSE },
+    { EXT2_IMMUTABLE_FL, 'i', N_ ("Immutable"), FALSE, FALSE },
+    { EXT2_APPEND_FL, 'a', N_ ("Append only"), FALSE, FALSE },
+    { EXT2_NODUMP_FL, 'd', N_ ("No dump"), FALSE, FALSE },
+    { EXT2_NOATIME_FL, 'A', N_ ("No update atime"), FALSE, FALSE },
+    { EXT2_COMPR_FL, 'c', N_ ("Compress"), FALSE, FALSE },
 #ifdef EXT2_COMPRBLK_FL
-                   /* removed in v1.43-WIP-2015-05-18
-                      ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
-                   { EXT2_COMPRBLK_FL, 'B', N_ ("Compressed clusters"), FALSE, FALSE },
+    /* removed in v1.43-WIP-2015-05-18
+       ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
+    { EXT2_COMPRBLK_FL, 'B', N_ ("Compressed clusters"), FALSE, FALSE },
 #endif
 #ifdef EXT2_DIRTY_FL
-                   /* removed in v1.43-WIP-2015-05-18
-                      ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
-                   { EXT2_DIRTY_FL, 'Z', N_ ("Compressed dirty file"), FALSE, FALSE },
+    /* removed in v1.43-WIP-2015-05-18
+       ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
+    { EXT2_DIRTY_FL, 'Z', N_ ("Compressed dirty file"), FALSE, FALSE },
 #endif
 #ifdef EXT2_NOCOMPR_FL
-                   /* removed in v1.43-WIP-2015-05-18
-                      ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
-                   { EXT2_NOCOMPR_FL, 'X', N_ ("Compression raw access"), FALSE, FALSE },
+    /* removed in v1.43-WIP-2015-05-18
+       ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
+    { EXT2_NOCOMPR_FL, 'X', N_ ("Compression raw access"), FALSE, FALSE },
 #endif
 #ifdef EXT4_ENCRYPT_FL
-                   { EXT4_ENCRYPT_FL, 'E', N_ ("Encrypted inode"), FALSE, FALSE },
+    { EXT4_ENCRYPT_FL, 'E', N_ ("Encrypted inode"), FALSE, FALSE },
 #endif
-                   { EXT3_JOURNAL_DATA_FL, 'j', N_ ("Journaled data"), FALSE, FALSE },
-                   { EXT2_INDEX_FL, 'I', N_ ("Indexed directory"), FALSE, FALSE },
-                   { EXT2_NOTAIL_FL, 't', N_ ("No tail merging"), FALSE, FALSE },
-                   { EXT2_TOPDIR_FL, 'T', N_ ("Top of directory hierarchies"), FALSE, FALSE },
-                   { EXT4_EXTENTS_FL, 'e', N_ ("Inode uses extents"), FALSE, FALSE },
+    { EXT3_JOURNAL_DATA_FL, 'j', N_ ("Journaled data"), FALSE, FALSE },
+    { EXT2_INDEX_FL, 'I', N_ ("Indexed directory"), FALSE, FALSE },
+    { EXT2_NOTAIL_FL, 't', N_ ("No tail merging"), FALSE, FALSE },
+    { EXT2_TOPDIR_FL, 'T', N_ ("Top of directory hierarchies"), FALSE, FALSE },
+    { EXT4_EXTENTS_FL, 'e', N_ ("Inode uses extents"), FALSE, FALSE },
 #ifdef EXT4_HUGE_FILE_FL
-                   /* removed in v1.43.9
-                      ext2fsprogs 4825daeb0228e556444d199274b08c499ac3706c 2018-02-06 */
-                   { EXT4_HUGE_FILE_FL, 'h', N_ ("Huge_file"), FALSE, FALSE },
+    /* removed in v1.43.9
+       ext2fsprogs 4825daeb0228e556444d199274b08c499ac3706c 2018-02-06 */
+    { EXT4_HUGE_FILE_FL, 'h', N_ ("Huge_file"), FALSE, FALSE },
 #endif
-                   { FS_NOCOW_FL, 'C', N_ ("No COW"), FALSE, FALSE },
+    { FS_NOCOW_FL, 'C', N_ ("No COW"), FALSE, FALSE },
 #ifdef FS_DAX_FL
-                   /* added in v1.45.7
-                      ext2fsprogs 1dd48bc23c3776df76459aff0c7723fff850ea45 2020-07-28 */
-                   { FS_DAX_FL, 'x', N_ ("Direct access for files"), FALSE, FALSE },
+    /* added in v1.45.7
+       ext2fsprogs 1dd48bc23c3776df76459aff0c7723fff850ea45 2020-07-28 */
+    { FS_DAX_FL, 'x', N_ ("Direct access for files"), FALSE, FALSE },
 #endif
 #ifdef EXT4_CASEFOLD_FL
-                   /* added in v1.45.0
-                      ext2fsprogs 1378bb6515e98a27f0f5c220381d49d20544204e 2018-12-01 */
-                   { EXT4_CASEFOLD_FL, 'F', N_ ("Casefolded file"), FALSE, FALSE },
+    /* added in v1.45.0
+       ext2fsprogs 1378bb6515e98a27f0f5c220381d49d20544204e 2018-12-01 */
+    { EXT4_CASEFOLD_FL, 'F', N_ ("Casefolded file"), FALSE, FALSE },
 #endif
 #ifdef EXT4_INLINE_DATA_FL
-                   { EXT4_INLINE_DATA_FL, 'N', N_ ("Inode has inline data"), FALSE, FALSE },
+    { EXT4_INLINE_DATA_FL, 'N', N_ ("Inode has inline data"), FALSE, FALSE },
 #endif
 #ifdef EXT4_PROJINHERIT_FL
-                   /* added in v1.43-WIP-2016-05-12
-                      ext2fsprogs e1cec4464bdaf93ea609de43c5cdeb6a1f553483 2016-03-07
-                                  97d7e2fdb2ebec70c3124c1a6370d28ec02efad0 2016-05-09 */
-                   { EXT4_PROJINHERIT_FL, 'P', N_ ("Project hierarchy"), FALSE, FALSE },
+    /* added in v1.43-WIP-2016-05-12
+       ext2fsprogs e1cec4464bdaf93ea609de43c5cdeb6a1f553483 2016-03-07
+                   97d7e2fdb2ebec70c3124c1a6370d28ec02efad0 2016-05-09 */
+    { EXT4_PROJINHERIT_FL, 'P', N_ ("Project hierarchy"), FALSE, FALSE },
 #endif
 #ifdef EXT4_VERITY_FL
-                   /* added in v1.44.4
-                      ext2fsprogs faae7aa00df0abe7c6151fc4947aa6501b981ee1 2018-08-14
-                      v1.44.5
-                      ext2fsprogs 7e5a95e3d59719361661086ec7188ca6e674f139 2018-08-21 */
-                   { EXT4_VERITY_FL, 'V', N_ ("Verity protected inode"), FALSE, FALSE }
+    /* added in v1.44.4
+       ext2fsprogs faae7aa00df0abe7c6151fc4947aa6501b981ee1 2018-08-14
+       v1.44.5
+       ext2fsprogs 7e5a95e3d59719361661086ec7188ca6e674f139 2018-08-21 */
+    { EXT4_VERITY_FL, 'V', N_ ("Verity protected inode"), FALSE, FALSE },
 #endif
 };
 
@@ -226,7 +227,7 @@ static struct
     /* 2 */ { B_SETMRK, NORMAL_BUTTON, 0, N_ ("S&et marked"), NULL },
     /* 3 */ { B_CLRMRK, NORMAL_BUTTON, 0, N_ ("C&lear marked"), NULL },
     /* 4 */ { B_ENTER, DEFPUSH_BUTTON, 0, N_ ("&Set"), NULL },
-    /* 5 */ { B_CANCEL, NORMAL_BUTTON, 0, N_ ("&Cancel"), NULL }
+    /* 5 */ { B_CANCEL, NORMAL_BUTTON, 0, N_ ("&Cancel"), NULL },
 };
 
 static gboolean flags_changed;

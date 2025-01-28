@@ -16,7 +16,7 @@
 
 #ifdef LISTMODE_EDITOR
 char *listmode_edit (char *);
-#endif  // LISTMODE_EDITOR
+#endif
 
 /*** inline functions ****************************************************************************/
-#endif  // MC__LISTMODE_H
+#endif

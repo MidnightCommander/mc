@@ -32,4 +32,4 @@ void label_set_textv (WLabel *label, const char *format, ...) G_GNUC_PRINTF (2, 
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_LABEL_H
+#endif

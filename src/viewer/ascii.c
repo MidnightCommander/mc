@@ -213,7 +213,7 @@ mcview_wcwidth (const WView *view, int c)
 #else
     (void) view;
     (void) c;
-#endif  // HAVE_CHARSET
+#endif
     return 1;
 }
 
@@ -228,7 +228,7 @@ mcview_ismark (const WView *view, int c)
 #else
     (void) view;
     (void) c;
-#endif  // HAVE_CHARSET
+#endif
     return FALSE;
 }
 
@@ -250,7 +250,7 @@ mcview_is_non_spacing_mark (const WView *view, int c)
 #else
     (void) view;
     (void) c;
-#endif  // HAVE_CHARSET
+#endif
     return FALSE;
 }
 
@@ -266,10 +266,10 @@ mcview_is_spacing_mark (const WView *view, int c)
 #    else
     (void) view;
     (void) c;
-#    endif  // HAVE_CHARSET 
+#    endif
     return FALSE;
 }
-#endif      // 0
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -284,7 +284,7 @@ mcview_isprint (const WView *view, int c)
     (void) view;
     // TODO this is very-very buggy by design: ticket 3257 comments 0-1
     return is_printable (c);
-#endif  // HAVE_CHARSET
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -320,7 +320,7 @@ mcview_char_display (const WView *view, int c, char *s)
     }
 #else
     (void) view;
-#endif  // HAVE_CHARSET
+#endif
     // TODO this is very-very buggy by design: ticket 3257 comments 0-1
     if (!is_printable (c))
         c = '.';
@@ -363,7 +363,7 @@ mcview_get_next_char (WView *view, mcview_state_machine_t *state, int *c)
         state->offset += char_length;
         return TRUE;
     }
-#endif  // HAVE_CHARSET
+#endif
     if (!mcview_get_byte (view, state->offset, c))
         return FALSE;
     state->offset++;

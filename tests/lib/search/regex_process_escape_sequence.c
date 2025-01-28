@@ -39,28 +39,83 @@ static const struct test_regex_process_escape_sequence_ds
     const gboolean input_use_utf;
     const char *expected_string;
 } test_regex_process_escape_sequence_ds[] = {
-    { // 0.
-      "{101}", REPLACE_T_NO_TRANSFORM, FALSE, "A" },
-    { // 1.
-      "x42", REPLACE_T_NO_TRANSFORM, FALSE, "B" },
-    { // 2.
-      "x{444}", REPLACE_T_NO_TRANSFORM, FALSE, "D" },
-    { // 3.
-      "x{444}", REPLACE_T_NO_TRANSFORM, TRUE, "ф" },
-    { // 4.
-      "n", REPLACE_T_NO_TRANSFORM, FALSE, "\n" },
-    { // 5.
-      "t", REPLACE_T_NO_TRANSFORM, FALSE, "\t" },
-    { // 6.
-      "v", REPLACE_T_NO_TRANSFORM, FALSE, "\v" },
-    { // 7.
-      "b", REPLACE_T_NO_TRANSFORM, FALSE, "\b" },
-    { // 8.
-      "r", REPLACE_T_NO_TRANSFORM, FALSE, "\r" },
-    { // 9.
-      "f", REPLACE_T_NO_TRANSFORM, FALSE, "\f" },
-    { // 10.
-      "a", REPLACE_T_NO_TRANSFORM, FALSE, "\a" },
+    {
+        // 0.
+        "{101}",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "A",
+    },
+    {
+        // 1.
+        "x42",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "B",
+    },
+    {
+        // 2.
+        "x{444}",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "D",
+    },
+    {
+        // 3.
+        "x{444}",
+        REPLACE_T_NO_TRANSFORM,
+        TRUE,
+        "ф",
+    },
+    {
+        // 4.
+        "n",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\n",
+    },
+    {
+        // 5.
+        "t",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\t",
+    },
+    {
+        // 6.
+        "v",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\v",
+    },
+    {
+        // 7.
+        "b",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\b",
+    },
+    {
+        // 8.
+        "r",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\r",
+    },
+    {
+        // 9.
+        "f",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\f",
+    },
+    {
+        // 10.
+        "a",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\a",
+    },
 };
 
 /* @Test(dataSource = "test_regex_process_escape_sequence_ds") */

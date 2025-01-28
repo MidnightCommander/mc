@@ -35,39 +35,111 @@ static const struct test_hex_translate_to_regex_ds
     const char *expected_result;
     mc_search_hex_parse_error_t expected_error;
 } test_hex_translate_to_regex_ds[] = {
-    { // Simplest case
-      "12 34", "\\x12\\x34", MC_SEARCH_HEX_E_OK },
-    { // Prefixes (0x, 0X)
-      "0x12 0X34", "\\x12\\x34", MC_SEARCH_HEX_E_OK },
-    { // Prefix "0" doesn't signify octal! Numbers are always interpreted in hex.
-      "012", "\\x12", MC_SEARCH_HEX_E_OK },
-    { // Extra whitespace
-      "  12  34  ", "\\x12\\x34", MC_SEARCH_HEX_E_OK },
-    { // Min/max values
-      "0 ff", "\\x00\\xFF", MC_SEARCH_HEX_E_OK },
-    { // Error: Number out of range
-      "100", NULL, MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE },
-    { // Error: Number out of range (negative)
-      "-1", NULL, MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE },
-    { // Error: Invalid characters
-      "1 z 2", NULL, MC_SEARCH_HEX_E_INVALID_CHARACTER },
+    {
+        // Simplest case
+        "12 34",
+        "\\x12\\x34",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        // Prefixes (0x, 0X)
+        "0x12 0X34",
+        "\\x12\\x34",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        // Prefix "0" doesn't signify octal! Numbers are always interpreted in hex.
+        "012",
+        "\\x12",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        // Extra whitespace
+        "  12  34  ",
+        "\\x12\\x34",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        // Min/max values
+        "0 ff",
+        "\\x00\\xFF",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        // Error: Number out of range
+        "100",
+        NULL,
+        MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE,
+    },
+    {
+        // Error: Number out of range (negative)
+        "-1",
+        NULL,
+        MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE,
+    },
+    {
+        // Error: Invalid characters
+        "1 z 2",
+        NULL,
+        MC_SEARCH_HEX_E_INVALID_CHARACTER,
+    },
     /*
      * Quotes.
      */
-    { " \"abc\" ", "abc", MC_SEARCH_HEX_E_OK },
-    { // Preserve upper/lower case
-      "\"aBc\"", "aBc", MC_SEARCH_HEX_E_OK },
-    { " 12\"abc\"34 ", "\\x12abc\\x34", MC_SEARCH_HEX_E_OK },
-    { "\"a\"\"b\"", "ab", MC_SEARCH_HEX_E_OK },
+    {
+        " \"abc\" ",
+        "abc",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        // Preserve upper/lower case
+        "\"aBc\"",
+        "aBc",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        " 12\"abc\"34 ",
+        "\\x12abc\\x34",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        "\"a\"\"b\"",
+        "ab",
+        MC_SEARCH_HEX_E_OK,
+    },
     // Empty quotes
-    { "\"\"", "", MC_SEARCH_HEX_E_OK },
-    { "12 \"\"", "\\x12", MC_SEARCH_HEX_E_OK },
+    {
+        "\"\"",
+        "",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        "12 \"\"",
+        "\\x12",
+        MC_SEARCH_HEX_E_OK,
+    },
     // Error: Unmatched quotes
-    { "\"a", NULL, MC_SEARCH_HEX_E_UNMATCHED_QUOTES },
-    { "\"", NULL, MC_SEARCH_HEX_E_UNMATCHED_QUOTES },
+    {
+        "\"a",
+        NULL,
+        MC_SEARCH_HEX_E_UNMATCHED_QUOTES,
+    },
+    {
+        "\"",
+        NULL,
+        MC_SEARCH_HEX_E_UNMATCHED_QUOTES,
+    },
     // Escaped quotes
-    { "\"a\\\"b\"", "a\"b", MC_SEARCH_HEX_E_OK },
-    { "\"a\\\\b\"", "a\\b", MC_SEARCH_HEX_E_OK },
+    {
+        "\"a\\\"b\"",
+        "a\"b",
+        MC_SEARCH_HEX_E_OK,
+    },
+    {
+        "\"a\\\\b\"",
+        "a\\b",
+        MC_SEARCH_HEX_E_OK,
+    },
 };
 
 /* @Test(dataSource = "test_hex_translate_to_regex_ds") */

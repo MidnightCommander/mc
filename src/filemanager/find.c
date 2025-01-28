@@ -183,23 +183,26 @@ static struct
     int x;
     Widget *button;
     bcback_fn callback;
-} fbuts[] = { { B_ENTER, DEFPUSH_BUTTON, N_ ("&Chdir"), 0, 0, NULL, NULL },
-              { B_AGAIN, NORMAL_BUTTON, N_ ("&Again"), 0, 0, NULL, NULL },
-              { B_STOP, NORMAL_BUTTON, N_ ("S&uspend"), 0, 0, NULL, start_stop },
-              { B_STOP, NORMAL_BUTTON, N_ ("Con&tinue"), 0, 0, NULL, NULL },
-              { B_CANCEL, NORMAL_BUTTON, N_ ("&Quit"), 0, 0, NULL, NULL },
+} fbuts[] = {
+    { B_ENTER, DEFPUSH_BUTTON, N_ ("&Chdir"), 0, 0, NULL, NULL },
+    { B_AGAIN, NORMAL_BUTTON, N_ ("&Again"), 0, 0, NULL, NULL },
+    { B_STOP, NORMAL_BUTTON, N_ ("S&uspend"), 0, 0, NULL, start_stop },
+    { B_STOP, NORMAL_BUTTON, N_ ("Con&tinue"), 0, 0, NULL, NULL },
+    { B_CANCEL, NORMAL_BUTTON, N_ ("&Quit"), 0, 0, NULL, NULL },
 
-              { B_PANELIZE, NORMAL_BUTTON, N_ ("Pane&lize"), 0, 0, NULL, NULL },
-              { B_VIEW, NORMAL_BUTTON, N_ ("&View - F3"), 0, 0, NULL, find_do_view_file },
-              { B_VIEW, NORMAL_BUTTON, N_ ("&Edit - F4"), 0, 0, NULL, find_do_edit_file } };
+    { B_PANELIZE, NORMAL_BUTTON, N_ ("Pane&lize"), 0, 0, NULL, NULL },
+    { B_VIEW, NORMAL_BUTTON, N_ ("&View - F3"), 0, 0, NULL, find_do_view_file },
+    { B_VIEW, NORMAL_BUTTON, N_ ("&Edit - F4"), 0, 0, NULL, find_do_edit_file },
+};
 
 static const size_t fbuts_num = G_N_ELEMENTS (fbuts);
 static const size_t quit_button = 4;  // index of "Quit" button
 
 static WListbox *find_list;  // Listbox with the file list
 
-static find_file_options_t options = { TRUE,  TRUE,  TRUE,  FALSE, FALSE, FALSE, TRUE,
-                                       FALSE, FALSE, FALSE, FALSE, FALSE, NULL };
+static find_file_options_t options = {
+    TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, NULL,
+};
 
 static char *in_start_dir = INPUT_LAST_TEXT;
 
@@ -601,7 +604,11 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     const char *content_whole_words_label = N_ ("&Whole words");
     const char *content_first_hit_label = N_ ("Fir&st hit");
 
-    const char *buts[] = { N_ ("&Tree"), N_ ("&OK"), N_ ("&Cancel") };
+    const char *buts[] = {
+        N_ ("&Tree"),
+        N_ ("&OK"),
+        N_ ("&Cancel"),
+    };
 
     // button lengths
     int b0, b1, b2, b12;
@@ -637,7 +644,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
         for (i = 0; i < G_N_ELEMENTS (buts); i++)
             buts[i] = _ (buts[i]);
     }
-#endif  // ENABLE_NLS
+#endif
 
     // calculate dialog width
 
@@ -1669,7 +1676,7 @@ setup_gui (void)
         {
 #ifdef ENABLE_NLS
             fbuts[i].text = _ (fbuts[i].text);
-#endif  // ENABLE_NLS
+#endif
             fbuts[i].len = str_term_width1 (fbuts[i].text) + 3;
             if (fbuts[i].flags == DEFPUSH_BUTTON)
                 fbuts[i].len += 2;

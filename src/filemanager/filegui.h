@@ -190,4 +190,4 @@ FileProgressStatus file_progress_real_query_replace (file_op_context_t *ctx,
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__FILEGUI_H
+#endif

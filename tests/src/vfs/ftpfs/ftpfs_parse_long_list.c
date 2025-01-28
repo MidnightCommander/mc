@@ -87,10 +87,10 @@ read_list (const char *fname)
 static const struct test_ftpfs_parse_long_list_ds
 {
     const char *name;
-} test_ftpfs_parse_long_list_ds[] = { { // 0. Ticket #2841
-                                        "aix" },
-                                      { // 1. Ticket #3174
-                                        "ms" } };
+} test_ftpfs_parse_long_list_ds[] = {
+    { "aix" },  // 0. Ticket #2841
+    { "ms" },   // 1. Ticket #3174
+};
 
 /* @Test(dataSource = "test_ftpfs_parse_long_list_ds") */
 START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_ds)

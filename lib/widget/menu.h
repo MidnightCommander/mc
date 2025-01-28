@@ -60,4 +60,4 @@ void menubar_activate (WMenuBar *menubar, gboolean dropped, int which);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_MENU_H
+#endif

@@ -47,4 +47,4 @@ void history_show (history_descriptor_t *hd);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_HISTORY_H
+#endif

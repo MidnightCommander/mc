@@ -42,4 +42,4 @@ gboolean rects_are_equal (const WRect *r1, const WRect *r2);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_RECT_H
+#endif

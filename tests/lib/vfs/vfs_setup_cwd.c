@@ -102,10 +102,8 @@ static const struct test_vfs_setup_cwd_symlink_ds
     gboolean is_2nd_call_different;
     const char *expected_result;
 } test_vfs_setup_cwd_symlink_ds[] = {
-    { // 0.
-      TRUE, "/some/path" },
-    { // 1.
-      FALSE, "/some/path2" },
+    { TRUE, "/some/path" },    // 0.
+    { FALSE, "/some/path2" },  // 1.
 };
 
 /* @Test */

@@ -93,4 +93,4 @@
 #    endif
 #endif
 
-#endif  // STAT_SIZE_H
+#endif

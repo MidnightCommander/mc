@@ -61,4 +61,4 @@ void keymap_free (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__KEYBIND_DEFAULTS_H
+#endif

@@ -88,7 +88,7 @@ static GOptionContext *context;
 
 #ifdef ENABLE_SUBSHELL
 static gboolean mc_args__nouse_subshell = FALSE;
-#endif  // ENABLE_SUBSHELL
+#endif
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
 #ifdef ENABLE_CONFIGURE_ARGS
@@ -99,91 +99,216 @@ static GOptionGroup *main_group;
 
 static const GOptionEntry argument_main_table[] = {
     // generic options
-    { "version", 'V', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &mc_args__show_version,
-      N_ ("Displays the current version"), NULL },
+    {
+        "version",
+        'V',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_NONE,
+        &mc_args__show_version,
+        N_ ("Displays the current version"),
+        NULL,
+    },
 
     // options for wrappers
-    { "datadir", 'f', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &mc_args__show_datadirs,
-      N_ ("Print data directory"), NULL },
+    {
+        "datadir",
+        'f',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_NONE,
+        &mc_args__show_datadirs,
+        N_ ("Print data directory"),
+        NULL,
+    },
 
     // show extended information about used data directories
-    { "datadir-info", 'F', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
-      &mc_args__show_datadirs_extended, N_ ("Print extended info about used data directories"),
-      NULL },
+    {
+        "datadir-info",
+        'F',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_NONE,
+        &mc_args__show_datadirs_extended,
+        N_ ("Print extended info about used data directories"),
+        NULL,
+    },
 
 #ifdef ENABLE_CONFIGURE_ARGS
     // show configure options
-    { "configure-options", '\0', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
-      &mc_args__show_configure_opts, N_ ("Print configure options"), NULL },
+    {
+        "configure-options",
+        '\0',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_NONE,
+        &mc_args__show_configure_opts,
+        N_ ("Print configure options"),
+        NULL,
+    },
 #endif
 
-    { "printwd", 'P', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING, &mc_args__last_wd_file,
-      N_ ("Print last working directory to specified file"), N_ ("<file>") },
+    {
+        "printwd",
+        'P',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_STRING,
+        &mc_args__last_wd_file,
+        N_ ("Print last working directory to specified file"),
+        N_ ("<file>"),
+    },
 
 #ifdef ENABLE_SUBSHELL
-    { "subshell", 'U', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &mc_global.tty.use_subshell,
-      N_ ("Enables subshell support (default)"), NULL },
+    {
+        "subshell",
+        'U',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_NONE,
+        &mc_global.tty.use_subshell,
+        N_ ("Enables subshell support (default)"),
+        NULL,
+    },
 
-    { "nosubshell", 'u', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &mc_args__nouse_subshell,
-      N_ ("Disables subshell support"), NULL },
+    {
+        "nosubshell",
+        'u',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_NONE,
+        &mc_args__nouse_subshell,
+        N_ ("Disables subshell support"),
+        NULL,
+    },
 #endif
 
 // debug options
 #ifdef ENABLE_VFS_FTP
-    { "ftplog", 'l', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING, &mc_args__netfs_logfile,
-      N_ ("Log ftp dialog to specified file"), N_ ("<file>") },
-#endif  // ENABLE_VFS_FTP
+    {
+        "ftplog",
+        'l',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_STRING,
+        &mc_args__netfs_logfile,
+        N_ ("Log ftp dialog to specified file"),
+        N_ ("<file>"),
+    },
+#endif
 
-    { // handle arguments manually
-      "view", 'v', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
-      (gpointer) parse_mc_v_argument, N_ ("Launches the file viewer on a file"), N_ ("<file>") },
+    {
+        // handle arguments manually
+        "view",
+        'v',
+        G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG,
+        G_OPTION_ARG_CALLBACK,
+        (gpointer) parse_mc_v_argument,
+        N_ ("Launches the file viewer on a file"),
+        N_ ("<file>"),
+    },
 
-    { // handle arguments manually
-      "edit", 'e', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
-      (gpointer) parse_mc_e_argument, N_ ("Edit files"), N_ ("<file> ...") },
+    {
+        // handle arguments manually
+        "edit",
+        'e',
+        G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG,
+        G_OPTION_ARG_CALLBACK,
+        (gpointer) parse_mc_e_argument,
+        N_ ("Edit files"),
+        N_ ("<file> ..."),
+    },
 
-    G_OPTION_ENTRY_NULL
+    G_OPTION_ENTRY_NULL,
 };
 
 static GOptionGroup *terminal_group;
 #define ARGS_TERM_OPTIONS 0
 static const GOptionEntry argument_terminal_table[] = {
     // terminal options
-    { "xterm", 'x', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &mc_args__force_xterm,
-      N_ ("Forces xterm features"), NULL },
+    {
+        "xterm",
+        'x',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_args__force_xterm,
+        N_ ("Forces xterm features"),
+        NULL,
+    },
 
-    { "no-x11", 'X', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &mc_global.tty.disable_x11,
-      N_ ("Disable X11 support"), NULL },
+    {
+        "no-x11",
+        'X',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_global.tty.disable_x11,
+        N_ ("Disable X11 support"),
+        NULL,
+    },
 
-    { "oldmouse", 'g', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &mc_global.tty.old_mouse,
-      N_ ("Tries to use an old highlight mouse tracking"), NULL },
+    {
+        "oldmouse",
+        'g',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_global.tty.old_mouse,
+        N_ ("Tries to use an old highlight mouse tracking"),
+        NULL,
+    },
 
-    { "nomouse", 'd', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &mc_args__nomouse,
-      N_ ("Disable mouse support in text version"), NULL },
+    {
+        "nomouse",
+        'd',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_args__nomouse,
+        N_ ("Disable mouse support in text version"),
+        NULL,
+    },
 
 #ifdef HAVE_SLANG
     { "termcap", 't', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &SLtt_Try_Termcap,
       N_ ("Tries to use termcap instead of terminfo"), NULL },
 #endif
 
-    { "slow", 's', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &mc_global.tty.slow_terminal,
-      N_ ("To run on slow terminals"), NULL },
+    {
+        "slow",
+        's',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_global.tty.slow_terminal,
+        N_ ("To run on slow terminals"),
+        NULL,
+    },
 
-    { "stickchars", 'a', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &mc_global.tty.ugly_line_drawing,
-      N_ ("Use stickchars to draw"), NULL },
+    {
+        "stickchars",
+        'a',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_global.tty.ugly_line_drawing,
+        N_ ("Use stickchars to draw"),
+        NULL,
+    },
 
 #ifdef HAVE_SLANG
     { "resetsoft", 'k', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &reset_hp_softkeys,
       N_ ("Resets soft keys on HP terminals"), NULL },
 #endif
 
-    { "keymap", 'K', ARGS_TERM_OPTIONS, G_OPTION_ARG_STRING, &mc_args__keymap_file,
-      N_ ("Load definitions of key bindings from specified file"), N_ ("<file>") },
+    {
+        "keymap",
+        'K',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_STRING,
+        &mc_args__keymap_file,
+        N_ ("Load definitions of key bindings from specified file"),
+        N_ ("<file>"),
+    },
 
-    { "nokeymap", '\0', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &mc_args__nokeymap,
-      N_ ("Don't load definitions of key bindings from file, use defaults"), NULL },
+    {
+        "nokeymap",
+        '\0',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_args__nokeymap,
+        N_ ("Don't load definitions of key bindings from file, use defaults"),
+        NULL,
+    },
 
-    G_OPTION_ENTRY_NULL
+    G_OPTION_ENTRY_NULL,
 };
 
 #undef ARGS_TERM_OPTIONS
@@ -193,19 +318,47 @@ static GOptionGroup *color_group;
 /* #define ARGS_COLOR_OPTIONS G_OPTION_FLAG_IN_MAIN */
 static const GOptionEntry argument_color_table[] = {
     // color options
-    { "nocolor", 'b', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE, &mc_global.tty.disable_colors,
-      N_ ("Requests to run in black and white"), NULL },
+    {
+        "nocolor",
+        'b',
+        ARGS_COLOR_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_global.tty.disable_colors,
+        N_ ("Requests to run in black and white"),
+        NULL,
+    },
 
-    { "color", 'c', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE, &mc_args__force_colors,
-      N_ ("Request to run in color mode"), NULL },
+    {
+        "color",
+        'c',
+        ARGS_COLOR_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_args__force_colors,
+        N_ ("Request to run in color mode"),
+        NULL,
+    },
 
-    { "colors", 'C', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING, &mc_global.tty.command_line_colors,
-      N_ ("Specifies a color configuration"), N_ ("<string>") },
+    {
+        "colors",
+        'C',
+        ARGS_COLOR_OPTIONS,
+        G_OPTION_ARG_STRING,
+        &mc_global.tty.command_line_colors,
+        N_ ("Specifies a color configuration"),
+        N_ ("<string>"),
+    },
 
-    { "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING, &mc_global.tty.skin,
-      N_ ("Show mc with specified skin"), N_ ("<string>") },
+    {
+        "skin",
+        'S',
+        ARGS_COLOR_OPTIONS,
+        G_OPTION_ARG_STRING,
+        &mc_global.tty.skin,
+        N_ ("Show mc with specified skin"),
+        N_ ("<string>"),
+    },
 
-    G_OPTION_ENTRY_NULL
+    G_OPTION_ENTRY_NULL,
 };
 
 #undef ARGS_COLOR_OPTIONS
@@ -280,7 +433,7 @@ mc_args_add_usage_info (void)
     case MC_RUN_EDITOR:
         s = g_strdup_printf ("%s\n", _ ("[+lineno] file1[:lineno] [file2[:lineno]...]"));
         break;
-#endif  // USE_INTERNAL_EDIT
+#endif
     case MC_RUN_VIEWER:
         s = g_strdup_printf ("%s\n", _ ("file"));
         break;
@@ -288,7 +441,7 @@ mc_args_add_usage_info (void)
     case MC_RUN_DIFFVIEWER:
         s = g_strdup_printf ("%s\n", _ ("file1 file2"));
         break;
-#endif  // USE_DIFF_VIEW
+#endif
     case MC_RUN_FULL:
     default:
         s = g_strdup_printf ("%s\n", _ ("[this_dir] [other_panel_dir]"));
@@ -475,7 +628,7 @@ parse_mcedit_arguments (int argc, char **argv)
 
     return flist;
 }
-#endif  // USE_INTERNAL_EDIT
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -506,7 +659,7 @@ mc_setup_run_mode (char **argv)
         // mcd* or diff is link to mc
         mc_global.mc_run_mode = MC_RUN_DIFFVIEWER;
     }
-#endif  // USE_DIFF_VIEW
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -639,7 +792,7 @@ mc_setup_by_args (int argc, char **argv, GError **mcerror)
 #ifdef ENABLE_SUBSHELL
     if (mc_args__nouse_subshell)
         mc_global.tty.use_subshell = FALSE;
-#endif  // ENABLE_SUBSHELL
+#endif
 
 #ifdef ENABLE_VFS_FTP
     if (mc_args__netfs_logfile != NULL)
@@ -650,7 +803,7 @@ mc_setup_by_args (int argc, char **argv, GError **mcerror)
         mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
         vfs_path_free (vpath, TRUE);
     }
-#endif  // ENABLE_VFS_FTP
+#endif
 
     tmp = (argc > 0) ? argv[1] : NULL;
 
@@ -684,7 +837,7 @@ mc_setup_by_args (int argc, char **argv, GError **mcerror)
             return FALSE;
         }
         MC_FALLTHROUGH;
-#endif  // USE_DIFF_VIEW
+#endif
 
     case MC_RUN_FULL:
     default:

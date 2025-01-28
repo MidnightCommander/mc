@@ -60,4 +60,4 @@ void tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data
 void tree_store_remove_entry_remove_hook (tree_store_remove_fn callback);
 
 /*** inline functions ****************************************************************************/
-#endif  // MC__TREE_STORE_H
+#endif

@@ -673,7 +673,10 @@ group_default_set_state (Widget *w, widget_state_t state, gboolean enable)
 {
     gboolean ret = MSG_HANDLED;
     WGroup *g = GROUP (w);
-    widget_state_info_t st = { .state = state, .enable = enable };
+    widget_state_info_t st = {
+        .state = state,
+        .enable = enable,
+    };
 
     ret = widget_default_set_state (w, state, enable);
 

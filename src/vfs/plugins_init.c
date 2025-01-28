@@ -95,29 +95,29 @@ vfs_plugins_init (void)
 
 #ifdef ENABLE_VFS_CPIO
     vfs_init_cpiofs ();
-#endif  // ENABLE_VFS_CPIO
+#endif
 #ifdef ENABLE_VFS_TAR
     vfs_init_tarfs ();
-#endif  // ENABLE_VFS_TAR
+#endif
 #ifdef ENABLE_VFS_SFS
     vfs_init_sfs ();
-#endif  // ENABLE_VFS_SFS
+#endif
 #ifdef ENABLE_VFS_EXTFS
     vfs_init_extfs ();
-#endif  // ENABLE_VFS_EXTFS
+#endif
 #ifdef ENABLE_VFS_UNDELFS
     vfs_init_undelfs ();
-#endif  // ENABLE_VFS_UNDELFS
+#endif
 
 #ifdef ENABLE_VFS_FTP
     vfs_init_ftpfs ();
-#endif  // ENABLE_VFS_FTP
+#endif
 #ifdef ENABLE_VFS_SFTP
     vfs_init_sftpfs ();
-#endif  // ENABLE_VFS_SFTP
+#endif
 #ifdef ENABLE_VFS_SHELL
     vfs_init_shell ();
-#endif  // ENABLE_VFS_SHELL
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -24,4 +24,4 @@ void vfs_init_shell (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__VFS_SHELL_H
+#endif

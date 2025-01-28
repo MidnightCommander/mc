@@ -81,7 +81,7 @@
 #ifdef HAVE_CHARSET
 #    include "lib/charsets.h"
 #    include "selcodepage.h"
-#endif  // HAVE_CHARSET
+#endif
 
 #include "consaver/cons.saver.h"  // cons_saver_pid
 
@@ -183,7 +183,7 @@ sigchld_handler_no_subshell (int sig)
         }
     }
     // If we got here, some other child exited; ignore it
-#endif  // __linux__
+#endif
 
     (void) sig;
 }
@@ -199,14 +199,14 @@ init_sigchld (void)
     sigchld_action.sa_handler =
 #ifdef ENABLE_SUBSHELL
         mc_global.tty.use_subshell ? sigchld_handler :
-#endif  // ENABLE_SUBSHELL
+#endif
                                    sigchld_handler_no_subshell;
 
     sigemptyset (&sigchld_action.sa_mask);
 
 #ifdef SA_RESTART
     sigchld_action.sa_flags = SA_RESTART;
-#endif  // !SA_RESTART
+#endif
 
     if (my_sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
     {
@@ -216,7 +216,7 @@ init_sigchld (void)
          * is defined but not implemented.  Fallback to no subshell.
          */
         mc_global.tty.use_subshell = FALSE;
-#endif  // ENABLE_SUBSHELL
+#endif
     }
 }
 
@@ -378,7 +378,7 @@ main (int argc, char *argv[])
 
     if (mc_global.tty.use_subshell)
         subshell_get_console_attributes ();
-#endif  // ENABLE_SUBSHELL
+#endif
 
     // Install the SIGCHLD handler; must be done before init_subshell()
     init_sigchld ();
@@ -400,7 +400,7 @@ main (int argc, char *argv[])
 
 #ifdef USE_INTERNAL_EDIT
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
-#endif  // USE_INTERNAL_EDIT
+#endif
 
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
@@ -439,7 +439,7 @@ main (int argc, char *argv[])
 
     if (mc_global.tty.use_subshell)
         init_subshell ();
-#endif  // ENABLE_SUBSHELL
+#endif
 
     if (!mc_global.midnight_shutdown)
     {
@@ -541,7 +541,7 @@ main (int argc, char *argv[])
         }
         (void) g_array_free (macros_list, TRUE);
     }
-#endif  // USE_INTERNAL_EDIT
+#endif
 
     str_uninit_strings ();
 
@@ -550,7 +550,7 @@ main (int argc, char *argv[])
 #ifdef USE_INTERNAL_EDIT
     else
         g_list_free_full ((GList *) mc_run_param0, (GDestroyNotify) edit_arg_free);
-#endif  // USE_INTERNAL_EDIT
+#endif
 
     g_free (mc_run_param1);
     g_free (saved_other_dir);

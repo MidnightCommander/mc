@@ -96,25 +96,56 @@ static const struct test_vfs_path_tokens_count_ds
     const vfs_path_flag_t input_flags;
     const size_t expected_token_count;
 } test_vfs_path_tokens_count_ds[] = {
-    // 0.
-    { "/", VPF_NONE, 0 },
-    // 1.
-    { "/path", VPF_NONE, 1 },
-    // 2.
-    { "/path1/path2/path3", VPF_NONE, 3 },
-    // 3.
-    { "test3://path1/path2/path3/path4", VPF_NO_CANON, 4 },
-    // 4.
-    { "path1/path2/path3", VPF_NO_CANON, 3 },
-    // 5.
-    { "/path1/path2/path3/", VPF_NONE, 3 },
-    // 6.
-    { "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/", VPF_NONE, 5 },
+    {
+        // 0.
+        "/",
+        VPF_NONE,
+        0,
+    },
+    {
+        // 1.
+        "/path",
+        VPF_NONE,
+        1,
+    },
+    {
+        // 2.
+        "/path1/path2/path3",
+        VPF_NONE,
+        3,
+    },
+    {
+        // 3.
+        "test3://path1/path2/path3/path4",
+        VPF_NO_CANON,
+        4,
+    },
+    {
+        // 4.
+        "path1/path2/path3",
+        VPF_NO_CANON,
+        3,
+    },
+    {
+        // 5.
+        "/path1/path2/path3/",
+        VPF_NONE,
+        3,
+    },
+    {
+        // 6.
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        VPF_NONE,
+        5,
+    },
 #ifdef HAVE_CHARSET
-    // 7.
-    { "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/"
-      "test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33",
-      VPF_NONE, 11 },
+    {
+        // 7.
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/"
+        "test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33",
+        VPF_NONE,
+        11,
+    },
 #endif
 };
 
@@ -148,35 +179,98 @@ static const struct test_vfs_path_tokens_get_ds
 
     const char *expected_path;
 } test_vfs_path_tokens_get_ds[] = {
-    { // 0. Invalid start position
-      "/", 2, 1, NULL },
-    { // 1. Invalid negative position
-      "/path", -3, 1, NULL },
-    { // 2. Count of tokens is zero. Count should be autocorrected
-      "/path", 0, 0, "path" },
+    {
+        // 0. Invalid start position
+        "/",
+        2,
+        1,
+        NULL,
+    },
+    {
+        // 1. Invalid negative position
+        "/path",
+        -3,
+        1,
+        NULL,
+    },
+    {
+        // 2. Count of tokens is zero. Count should be autocorrected
+        "/path",
+        0,
+        0,
+        "path",
+    },
     // 3. get 'path2/path3' by 1,2
-    { "/path1/path2/path3/path4", 1, 2, "path2/path3" },
+    {
+        "/path1/path2/path3/path4",
+        1,
+        2,
+        "path2/path3",
+    },
     // 4. get 'path2/path3' by 1,2  from LOCAL VFS
-    { "test3://path1/path2/path3/path4", 1, 2, "path2/path3" },
+    {
+        "test3://path1/path2/path3/path4",
+        1,
+        2,
+        "path2/path3",
+    },
     // 5. get 'path2/path3' by 1,2  from non-LOCAL VFS
-    { "test2://path1/path2/path3/path4", 1, 2, "test2://path2/path3" },
+    {
+        "test2://path1/path2/path3/path4",
+        1,
+        2,
+        "test2://path2/path3",
+    },
     // 6. get 'path2/path3' by 1,2  through non-LOCAL VFS
-    { "/path1/path2/test1://user:pass@some.host:12345/path3/path4", 1, 2,
-      "path2/test1://user:pass@some.host:12345/path3" },
+    {
+        "/path1/path2/test1://user:pass@some.host:12345/path3/path4",
+        1,
+        2,
+        "path2/test1://user:pass@some.host:12345/path3",
+    },
     // 7. get 'path2/path3' by 1,2  where path2 it's LOCAL VFS
-    { "test3://path1/path2/test2://path3/path4", 1, 2, "path2/test2://path3" },
+    {
+        "test3://path1/path2/test2://path3/path4",
+        1,
+        2,
+        "path2/test2://path3",
+    },
     // 8. get 'path2/path3' by 1,2  where path3 it's LOCAL VFS
-    { "test2://path1/path2/test3://path3/path4", 1, 2, "test2://path2/test3://path3" },
+    {
+        "test2://path1/path2/test3://path3/path4",
+        1,
+        2,
+        "test2://path2/test3://path3",
+    },
     // 9. get 'path4' by -1,1
-    { "/path1/path2/path3/path4", -1, 1, "path4" },
+    {
+        "/path1/path2/path3/path4",
+        -1,
+        1,
+        "path4",
+    },
     // 10. get 'path2/path3/path4' by -3,0
-    { "/path1/path2/path3/path4", -3, 0, "path2/path3/path4" },
+    {
+        "/path1/path2/path3/path4",
+        -3,
+        0,
+        "path2/path3/path4",
+    },
 #ifdef HAVE_CHARSET
     // 11. get 'path2/path3' by 1,2  from LOCAL VFS with encoding
-    { "test3://path1/path2/test3://#enc:KOI8-R/path3/path4", 1, 2,
-      "path2/test3://#enc:KOI8-R/path3" },
+    {
+        "test3://path1/path2/test3://#enc:KOI8-R/path3/path4",
+        1,
+        2,
+        "path2/test3://#enc:KOI8-R/path3",
+    },
     // 12. get 'path2/path3' by 1,2  with encoding
-    { "#enc:KOI8-R/path1/path2/path3/path4", 1, 2, "#enc:KOI8-R/path2/path3" },
+    {
+        "#enc:KOI8-R/path1/path2/path3/path4",
+        1,
+        2,
+        "#enc:KOI8-R/path2/path3",
+    },
 #endif
     /* TODO: currently this test don't passed. Probably broken string URI parser
      * // 13. get 'path2/path3' by 1,2  from LOCAL VFS
@@ -241,7 +335,7 @@ static const struct test_vfs_path_append_vpath_ds
         "bla-bla/some/path/test3://111/22/33"
         "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path",
     },
-#endif  // HAVE_CHARSET
+#endif
 };
 
 /* @Test(dataSource = "test_vfs_path_append_vpath_ds") */
@@ -275,11 +369,18 @@ static const struct test_vfs_path_relative_ds
     const char *expected_path;
     const char *expected_last_path_in_element;
 } test_vfs_path_relative_ds[] = {
-    { // 0.
-      "../bla-bla", "../bla-bla", "../bla-bla" },
-    { // 1.
-      "../path/test1://user:pass@some.host:12345/bla-bla/some/path/",
-      "../path/test1://user:pass@some.host:12345/bla-bla/some/path/", "bla-bla/some/path/" },
+    {
+        // 0.
+        "../bla-bla",
+        "../bla-bla",
+        "../bla-bla",
+    },
+    {
+        // 1.
+        "../path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        "../path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        "bla-bla/some/path/",
+    },
 };
 
 /* @Test(dataSource = "test_vfs_path_relative_ds") */

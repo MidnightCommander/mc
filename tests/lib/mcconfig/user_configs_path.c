@@ -73,54 +73,30 @@ static const struct test_user_config_paths_ds
     const char *input_base_dir;
     const char *input_file_name;
 } test_user_config_paths_ds[] = {
-    { // 0.
-      CONF_MAIN, MC_CONFIG_FILE },
-    { // 1.
-      CONF_MAIN, MC_FHL_INI_FILE },
-    { // 2.
-      CONF_MAIN, MC_HOTLIST_FILE },
-    { // 3.
-      CONF_MAIN, GLOBAL_KEYMAP_FILE },
-    { // 4.
-      CONF_MAIN, MC_USERMENU_FILE },
-    { // 5.
-      CONF_DATA, EDIT_SYNTAX_FILE },
-    { // 6.
-      CONF_MAIN, EDIT_HOME_MENU },
-    { // 7.
-      CONF_MAIN, MC_PANELS_FILE },
-    { // 8.
-      CONF_MAIN, MC_EXT_FILE },
-    { // 9.
-      CONF_DATA, MC_SKINS_DIR },
-    { // 10.
-      CONF_DATA, VFS_SHELL_PREFIX },
-    { // 11.
-      CONF_DATA, MC_ASHRC_FILE },
-    { // 12.
-      CONF_DATA, MC_BASHRC_FILE },
-    { // 13.
-      CONF_DATA, MC_INPUTRC_FILE },
-    { // 14.
-      CONF_DATA, MC_ZSHRC_FILE },
-    { // 15.
-      CONF_DATA, MC_EXTFS_DIR },
-    { // 16.
-      CONF_DATA, MC_HISTORY_FILE },
-    { // 17.
-      CONF_DATA, MC_FILEPOS_FILE },
-    { // 18.
-      CONF_DATA, EDIT_HOME_CLIP_FILE },
-    { // 19.
-      CONF_DATA, MC_MACRO_FILE },
-    { // 20.
-      CONF_CACHE, "mc.log" },
-    { // 21.
-      CONF_CACHE, MC_TREESTORE_FILE },
-    { // 22.
-      CONF_CACHE, EDIT_HOME_TEMP_FILE },
-    { // 23.
-      CONF_CACHE, EDIT_HOME_BLOCK_FILE },
+    { CONF_MAIN, MC_CONFIG_FILE },         // 0.
+    { CONF_MAIN, MC_FHL_INI_FILE },        // 1.
+    { CONF_MAIN, MC_HOTLIST_FILE },        // 2.
+    { CONF_MAIN, GLOBAL_KEYMAP_FILE },     // 3.
+    { CONF_MAIN, MC_USERMENU_FILE },       // 4.
+    { CONF_DATA, EDIT_SYNTAX_FILE },       // 5.
+    { CONF_MAIN, EDIT_HOME_MENU },         // 6.
+    { CONF_MAIN, MC_PANELS_FILE },         // 7.
+    { CONF_MAIN, MC_EXT_FILE },            // 8.
+    { CONF_DATA, MC_SKINS_DIR },           // 9.
+    { CONF_DATA, VFS_SHELL_PREFIX },       // 10.
+    { CONF_DATA, MC_ASHRC_FILE },          // 11.
+    { CONF_DATA, MC_BASHRC_FILE },         // 12.
+    { CONF_DATA, MC_INPUTRC_FILE },        // 13.
+    { CONF_DATA, MC_ZSHRC_FILE },          // 14.
+    { CONF_DATA, MC_EXTFS_DIR },           // 15.
+    { CONF_DATA, MC_HISTORY_FILE },        // 16.
+    { CONF_DATA, MC_FILEPOS_FILE },        // 17.
+    { CONF_DATA, EDIT_HOME_CLIP_FILE },    // 18.
+    { CONF_DATA, MC_MACRO_FILE },          // 19.
+    { CONF_CACHE, "mc.log" },              // 20.
+    { CONF_CACHE, MC_TREESTORE_FILE },     // 21.
+    { CONF_CACHE, EDIT_HOME_TEMP_FILE },   // 22.
+    { CONF_CACHE, EDIT_HOME_BLOCK_FILE },  // 23.
 };
 
 /* @Test(dataSource = "test_user_config_paths_ds") */

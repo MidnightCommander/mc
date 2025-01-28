@@ -52,4 +52,4 @@ void sigchld_handler (int sig);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__SUBSHELL_H
+#endif

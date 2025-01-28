@@ -163,7 +163,7 @@ my_setup (void)
 #ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif  // HAVE_CHARSET
+#endif
 
     mc_global.main_config = mc_config_init ("edit_complete_word_cmd.ini", FALSE);
     mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION,
@@ -195,7 +195,7 @@ my_teardown (void)
 
 #ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif  // HAVE_CHARSET
+#endif
 
     vfs_shut ();
 
@@ -220,17 +220,33 @@ static const struct test_autocomplete_ds
     int input_completed_word_start_pos;
     const char *expected_completed_word;
 } test_autocomplete_ds[] = {
-    { // 0.
-      102, "KOI8-R", 0, "UTF-8", 1, "эъйцукен",
-
-      16, 2, 98, "эъйцукен" },
     {
-        // 1.
-        138, "UTF-8", 1, "KOI8-R", 0,
-        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE",  // эъйцукен
+        // 0. KOI8-R/UTF-8 - эъйцукен
+        102,
+        "KOI8-R",
+        0,
+        "UTF-8",
+        1,
+        "эъйцукен",
 
-        8, 2, 136,
-        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE"  // эъйцукен
+        16,
+        2,
+        98,
+        "эъйцукен",
+    },
+    {
+        // 1. UTF-8/KOI8-R - эъйцукен
+        138,
+        "UTF-8",
+        1,
+        "KOI8-R",
+        0,
+        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE",
+
+        8,
+        2,
+        136,
+        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE",
     },
 };
 
@@ -296,11 +312,15 @@ static const struct test_autocomplete_single_ds
     const char *expected_completed_word;
 } test_autocomplete_single_ds[] = {
     {
-        // 0.
-        146, "UTF-8", 1, "KOI8-R", 0,
+        // 0. UTF-8/KOI8-R - фыва
+        146,
+        "UTF-8",
+        1,
+        "KOI8-R",
+        0,
 
         145,
-        "\xC6\xD9\xD7\xC1"  // фыва
+        "\xC6\xD9\xD7\xC1",
     },
 };
 
@@ -343,7 +363,7 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
 }
 END_PARAMETRIZED_TEST
 
-#endif  // HAVE_CHARSET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -360,7 +380,7 @@ main (void)
 #ifdef HAVE_CHARSET
     mctest_add_parameterized_test (tc_core, test_autocomplete, test_autocomplete_ds);
     mctest_add_parameterized_test (tc_core, test_autocomplete_single, test_autocomplete_single_ds);
-#endif  // HAVE_CHARSET
+#endif
     // ***********************************
 
     return mctest_run_all (tc_core);

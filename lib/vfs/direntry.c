@@ -1058,9 +1058,9 @@ vfs_adjust_stat (struct stat *s)
 #    else
         // Let IO block size is 512 bytes
         s->st_blocks = 1 + (s->st_size - 1) / 512;
-#    endif  // HAVE_STRUCT_STAT_ST_BLKSIZE
+#    endif
     }
-#endif  // HAVE_STRUCT_STAT_ST_BLOCKS
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1578,7 +1578,10 @@ vfs_getid (const vfs_path_t *vpath)
 int
 vfs_s_select_on_two (int fd1, int fd2)
 {
-    struct timeval time_out = { .tv_sec = 1, .tv_usec = 0 };
+    struct timeval time_out = {
+        .tv_sec = 1,
+        .tv_usec = 0,
+    };
     fd_set set;
     int maxfd;
     int v;
@@ -1694,7 +1697,7 @@ ret:
 
     return res;
 }
-#endif  // ENABLE_VFS_NET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**

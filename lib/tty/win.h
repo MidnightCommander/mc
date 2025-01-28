@@ -21,4 +21,4 @@ void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2);
 gboolean look_for_rxvt_extensions (void);
 
 /*** inline functions ****************************************************************************/
-#endif  // MC_WIN_H
+#endif

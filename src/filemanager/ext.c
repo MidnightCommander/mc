@@ -198,11 +198,13 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
         const char symbol;
         const char *name;
         const gboolean is_result_quoted;
-    } export_variables[] = { { 'p', "MC_EXT_BASENAME", FALSE },
-                             { 'd', "MC_EXT_CURRENTDIR", FALSE },
-                             { 's', "MC_EXT_SELECTED", TRUE },
-                             { 't', "MC_EXT_ONLYTAGGED", TRUE },
-                             { '\0', NULL, FALSE } };
+    } export_variables[] = {
+        { 'p', "MC_EXT_BASENAME", FALSE },
+        { 'd', "MC_EXT_CURRENTDIR", FALSE },
+        { 's', "MC_EXT_SELECTED", TRUE },
+        { 't', "MC_EXT_ONLYTAGGED", TRUE },
+        { '\0', NULL, FALSE },
+    };
 
     text = exec_get_file_name (filename_vpath);
     if (text == NULL)
@@ -365,10 +367,12 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
 static void
 exec_extension_view (void *target, char *cmd, const vfs_path_t *filename_vpath, int start_line)
 {
-    mcview_mode_flags_t def_flags = { .wrap = FALSE,
-                                      .hex = mcview_global_flags.hex,
-                                      .magic = FALSE,
-                                      .nroff = mcview_global_flags.nroff };
+    mcview_mode_flags_t def_flags = {
+        .wrap = FALSE,
+        .hex = mcview_global_flags.hex,
+        .magic = FALSE,
+        .nroff = mcview_global_flags.nroff,
+    };
 
     mcview_mode_flags_t changed_flags;
 
@@ -634,7 +638,7 @@ get_file_encoding_local (const vfs_path_t *filename_vpath, char *buf, int buflen
 
     return ret;
 }
-#    endif  // HAVE_CHARSET
+#    endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -664,7 +668,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 #    ifdef HAVE_CHARSET
         static char encoding_id[21];  // CSISO51INISCYRILLIC -- 20
         int got_encoding_data;
-#    endif  // HAVE_CHARSET
+#    endif
 
         // Don't repeate even unsuccessful checks
         *have_type = TRUE;
@@ -697,7 +701,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
             do_set_codepage (cp_id);
         }
-#    endif  // HAVE_CHARSET
+#    endif
 
         got_data = get_file_type_local (localfile_vpath, content_string, sizeof (content_string));
 
@@ -731,7 +735,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
                             ;
                 }
             }
-#    endif  // FILE_B
+#    endif
         }
         else
         {
@@ -768,7 +772,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
     return found;
 }
-#endif  // USE_FILE_CMD
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -981,7 +985,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
                     continue;
             }
         }
-#endif  // USE_FILE_CMD
+#endif
 
         pattern = mc_config_get_string_raw (ext_ini, g, "Regex", NULL);
         if (pattern != NULL)

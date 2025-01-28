@@ -50,4 +50,4 @@ typedef struct WGroup WGroup;
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_H
+#endif

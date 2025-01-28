@@ -114,9 +114,9 @@ mcview_display_hex (WView *view)
     mark_t boldflag_char = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
 #ifdef HAVE_CHARSET
-    int cont_bytes = 0;             // number of continuation bytes remanining from current UTF-8
-    gboolean cjk_right = FALSE;     // whether the second byte of a CJK is to be processed
-#endif                              // HAVE_CHARSET
+    int cont_bytes = 0;          // number of continuation bytes remanining from current UTF-8
+    gboolean cjk_right = FALSE;  // whether the second byte of a CJK is to be processed
+#endif
     gboolean utf8_changed = FALSE;  // whether any of the bytes in the UTF-8 were changed
 
     char hex_buff[10];  // A temporary buffer for sprintf and mvwaddstr
@@ -146,7 +146,7 @@ mcview_display_hex (WView *view)
             from -= view->bytes_per_line;
         }
     }
-#endif  // HAVE_CHARSET
+#endif
     while (curr != NULL && (curr->offset < from))
         curr = curr->next;
 
@@ -235,7 +235,7 @@ mcview_display_hex (WView *view)
                     curr = corr;
                 }
             }
-#endif  // HAVE_CHARSET
+#endif
 
             /* For negative rows, the only thing we care about is overflowing
              * UTF-8 continuation bytes which were handled above. */

@@ -117,7 +117,7 @@ refresh_cmd (void)
     // Use this if the refreshes fail
     tty_clear_screen ();
     repaint_screen ();
-#endif  // HAVE_SLANG
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -245,10 +245,12 @@ static struct
     const char *text;
     button_flags_t flags;
     int len;
-} progress_buttons[] = { { NULL, FILE_SKIP, N_ ("&Skip"), NORMAL_BUTTON, -1 },
-                         { NULL, FILE_SUSPEND, N_ ("S&uspend"), NORMAL_BUTTON, -1 },
-                         { NULL, FILE_SUSPEND, N_ ("Con&tinue"), NORMAL_BUTTON, -1 },
-                         { NULL, FILE_ABORT, N_ ("&Abort"), NORMAL_BUTTON, -1 } };
+} progress_buttons[] = {
+    { NULL, FILE_SKIP, N_ ("&Skip"), NORMAL_BUTTON, -1 },
+    { NULL, FILE_SUSPEND, N_ ("S&uspend"), NORMAL_BUTTON, -1 },
+    { NULL, FILE_SUSPEND, N_ ("Con&tinue"), NORMAL_BUTTON, -1 },
+    { NULL, FILE_ABORT, N_ ("&Abort"), NORMAL_BUTTON, -1 },
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -540,7 +542,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
             if (dlg_widgets[i].text != NULL)
                 dlg_widgets[i].text = _ (dlg_widgets[i].text);
     }
-#endif  // ENABLE_NLS
+#endif
 
     // create widgets to get their real widths
     // new file
@@ -1435,7 +1437,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
                 QUICK_BUTTON (N_ ("&Background"), B_USER, NULL, NULL),
 #endif
                 QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -1447,7 +1449,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
             .help = "[Mask Copy/Rename]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         while (TRUE)

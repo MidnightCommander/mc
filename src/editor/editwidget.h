@@ -162,4 +162,4 @@ struct WEdit
 /*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/
-#endif  // MC__EDIT_WIDGET_H
+#endif

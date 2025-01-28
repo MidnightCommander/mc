@@ -69,12 +69,14 @@ typedef struct edit_search_options_t
 
 /*** file scope variables ************************************************************************/
 
-static edit_search_options_t edit_search_options = { .type = MC_SEARCH_T_NORMAL,
-                                                     .case_sens = FALSE,
-                                                     .backwards = FALSE,
-                                                     .only_in_selection = FALSE,
-                                                     .whole_words = FALSE,
-                                                     .all_codepages = FALSE };
+static edit_search_options_t edit_search_options = {
+    .type = MC_SEARCH_T_NORMAL,
+    .case_sens = FALSE,
+    .backwards = FALSE,
+    .only_in_selection = FALSE,
+    .whole_words = FALSE,
+    .all_codepages = FALSE,
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -113,7 +115,7 @@ edit_dialog_search_show (WEdit *edit)
                 QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
                 QUICK_BUTTON (N_ ("&Find all"), B_USER, NULL, NULL),
                 QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -125,7 +127,7 @@ edit_dialog_search_show (WEdit *edit)
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         dialog_result = quick_dialog (&qdlg);
@@ -198,7 +200,7 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
 #endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -210,7 +212,7 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         if (quick_dialog (&qdlg) != B_CANCEL)
@@ -267,7 +269,7 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
                 QUICK_BUTTON (N_ ("A&ll"), B_REPLACE_ALL, NULL, NULL),
                 QUICK_BUTTON (N_ ("&Skip"), B_SKIP_REPLACE, NULL, NULL),
                 QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -279,7 +281,7 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
             .help = NULL,
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         retval = quick_dialog (&qdlg);

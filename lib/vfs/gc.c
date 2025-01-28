@@ -143,7 +143,10 @@ vfs_addstamp (struct vfs_class *v, vfsid id)
 gboolean
 vfs_stamp (struct vfs_class *v, vfsid id)
 {
-    struct vfs_stamping what = { .v = v, .id = id };
+    struct vfs_stamping what = {
+        .v = v,
+        .id = id,
+    };
     GSList *stamp;
     gboolean ret = FALSE;
 
@@ -162,7 +165,10 @@ vfs_stamp (struct vfs_class *v, vfsid id)
 void
 vfs_rmstamp (struct vfs_class *v, vfsid id)
 {
-    struct vfs_stamping what = { .v = v, .id = id };
+    struct vfs_stamping what = {
+        .v = v,
+        .id = id,
+    };
     GSList *stamp;
 
     stamp = g_slist_find_custom (stamps, &what, vfs_stamp_compare);

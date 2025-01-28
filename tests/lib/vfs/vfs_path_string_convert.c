@@ -66,7 +66,7 @@ setup (void)
 #ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif  // HAVE_CHARSET
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -77,7 +77,7 @@ teardown (void)
 {
 #ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif  // HAVE_CHARSET
+#endif
 
     vfs_shut ();
     str_uninit_strings ();
@@ -93,44 +93,92 @@ static const struct test_from_to_string_ds
     const size_t expected_elements_count;
     struct vfs_class *expected_vfs_class;
 } test_from_to_string_ds[] = {
-    { // 0.
-      ETALON_PATH_STR, ETALON_PATH_URL_STR, "111/22/33", 4, &vfs_test_ops3 },
-    { // 1.
-      "/", "/", "/", 1, VFS_CLASS (&local_subclass) },
-    { // 2.
-      "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/"
-      "22/33",
-      "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/"
-      "22/33",
-      "111/22/33", 4, &vfs_test_ops3 },
+    {
+        // 0.
+        ETALON_PATH_STR,
+        ETALON_PATH_URL_STR,
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
+    {
+        // 1.
+        "/",
+        "/",
+        "/",
+        1,
+        VFS_CLASS (&local_subclass),
+    },
+    {
+        // 2.
+        "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/"
+        "test3://111/22/33",
+        "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/"
+        "test3://111/22/33",
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
 #ifdef HAVE_CHARSET
-    { // 3.
-      "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-      "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
-      "111/22/33", 4, &vfs_test_ops3 },
-    { // 4.
-      "/#test1/bla-bla1/#enc:CP866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-      "/test1://#enc:CP866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/"
-      "22/33",
-      "111/22/33", 4, &vfs_test_ops3 },
-    { // 5.
-      "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:CP866/#enc:KOI8-R/some/path#test3/111/22/33",
-      "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
-      "111/22/33", 4, &vfs_test_ops3 },
-    { // 6.
-      "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:CP866/some/#enc:KOI8-R/path#test3/111/22/33",
-      "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
-      "111/22/33", 4, &vfs_test_ops3 },
-    { // 7.
-      "/#test1/bla-bla1/some/path/#test2/#enc:CP866/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-      "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
-      "111/22/33", 4, &vfs_test_ops3 },
-    { // 8.
-      "/#test1/bla-bla1/some/path/#enc:CP866/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-      "/test1://#enc:CP866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/"
-      "22/33",
-      "111/22/33", 4, &vfs_test_ops3 },
-#endif  // HAVE_CHARSET
+    {
+        // 3.
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
+    {
+        // 4.
+        "/#test1/bla-bla1/#enc:CP866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path"
+        "#test3/111/22/33",
+        "/test1://#enc:CP866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/"
+        "test3://111/22/33",
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
+    {
+        // 5.
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:CP866/#enc:KOI8-R/some/path"
+        "#test3/111/22/33",
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/"
+        "test3://111/22/33",
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
+    {
+        // 6.
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:CP866/some/#enc:KOI8-R/path"
+        "#test3/111/22/33",
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/"
+        "test3://111/22/33",
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
+    {
+        // 7.
+        "/#test1/bla-bla1/some/path/#test2/#enc:CP866/bla-bla2/#enc:KOI8-R/some/path"
+        "#test3/111/22/33",
+        "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/"
+        "test3://111/22/33",
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
+    {
+        // 8.
+        "/#test1/bla-bla1/some/path/#enc:CP866/#test2/bla-bla2/#enc:KOI8-R/some/path"
+        "#test3/111/22/33",
+        "/test1://#enc:CP866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/"
+        "test3://111/22/33",
+        "111/22/33",
+        4,
+        &vfs_test_ops3,
+    },
+#endif
 };
 
 /* @Test */
@@ -168,24 +216,60 @@ static const struct test_partial_string_by_index_ds
     const off_t element_index;
     const char *expected_result;
 } test_partial_string_by_index_ds[] = {
-    { // 0.
-      ETALON_PATH_STR, -1, "/test1://bla-bla/some/path/test2://bla-bla/some/path" },
-    { // 1.
-      ETALON_PATH_STR, -2, "/test1://bla-bla/some/path/" },
-    { // 2.
-      ETALON_PATH_STR, -3, "/" },
-    { // 3. Index out of bound
-      ETALON_PATH_STR, -4, "" },
-    { // 4.
-      ETALON_PATH_STR, 1, "/" },
-    { // 5.
-      ETALON_PATH_STR, 2, "/test1://bla-bla/some/path/" },
-    { // 6.
-      ETALON_PATH_STR, 3, "/test1://bla-bla/some/path/test2://bla-bla/some/path" },
-    { // 6.
-      ETALON_PATH_STR, 4, ETALON_PATH_URL_STR },
-    { // 7. Index out of bound
-      ETALON_PATH_STR, 5, ETALON_PATH_URL_STR },
+    {
+        // 0.
+        ETALON_PATH_STR,
+        -1,
+        "/test1://bla-bla/some/path/test2://bla-bla/some/path",
+    },
+    {
+        // 1.
+        ETALON_PATH_STR,
+        -2,
+        "/test1://bla-bla/some/path/",
+    },
+    {
+        // 2.
+        ETALON_PATH_STR,
+        -3,
+        "/",
+    },
+    {
+        // 3. Index out of bound
+        ETALON_PATH_STR,
+        -4,
+        "",
+    },
+    {
+        // 4.
+        ETALON_PATH_STR,
+        1,
+        "/",
+    },
+    {
+        // 5.
+        ETALON_PATH_STR,
+        2,
+        "/test1://bla-bla/some/path/",
+    },
+    {
+        // 6.
+        ETALON_PATH_STR,
+        3,
+        "/test1://bla-bla/some/path/test2://bla-bla/some/path",
+    },
+    {
+        // 6.
+        ETALON_PATH_STR,
+        4,
+        ETALON_PATH_URL_STR,
+    },
+    {
+        // 7. Index out of bound
+        ETALON_PATH_STR,
+        5,
+        ETALON_PATH_URL_STR,
+    },
 };
 
 /* @Test(dataSource = "test_partial_string_by_index_ds") */
@@ -236,7 +320,7 @@ START_TEST (test_vfs_path_encoding_at_end)
 }
 
 END_TEST
-#endif  // HAVE_CHARSET
+#endif
 /* --------------------------------------------------------------------------------------------- */
 
 int

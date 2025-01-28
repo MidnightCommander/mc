@@ -78,39 +78,96 @@ static const struct test_vfs_split_ds
     const char *expected_op;
     const struct vfs_class *expected_result;
 } test_vfs_split_ds[] = {
-    { // 0.
-      "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/#test3:/qqq/www/eee.rr",
-      "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/", "qqq/www/eee.rr",
-      "test3:", &vfs_test_ops3 },
-    { // 1.
-      "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/", "#test1:/bla-bla/some/path/",
-      "bla-bla/some/path2/", "test2:", &vfs_test_ops2 },
-    { // 2.
-      "#test1:/bla-bla/some/path/", "", "bla-bla/some/path/", "test1:", &vfs_test_ops1 },
-    { // 3.
-      "", "", NULL, NULL, NULL },
-    { // 4. split with local
-      "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2#test3:/qqq/www/eee.rr",
-      "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2", "qqq/www/eee.rr",
-      "test3:", &vfs_test_ops3 },
-    { // 5. split with local
-      "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2",
-      "/local/path/#test1:/bla-bla/some/path/", "bla-bla/some/path2", "test2:", &vfs_test_ops2 },
-    { // 6. split with local
-      "/local/path/#test1:/bla-bla/some/path/", "/local/path/", "bla-bla/some/path/",
-      "test1:", &vfs_test_ops1 },
-    { // 7. split with local
-      "/local/path/", "/local/path/", NULL, NULL, NULL },
-    { // 8. split with URL
-      "#test2:username:passwd@somehost.net/bla-bla/some/path2", "", "bla-bla/some/path2",
-      "test2:username:passwd@somehost.net", &vfs_test_ops2 },
-    { // 9. split URL with semi
-      "/local/path/#test1:/bla-bla/some/path/#test2:username:p!a@s#s$w%d@somehost.net/bla-bla/some/"
-      "path2",
-      "/local/path/#test1:/bla-bla/some/path/", "bla-bla/some/path2",
-      "test2:username:p!a@s#s$w%d@somehost.net", &vfs_test_ops2 },
-    { // 10. split with semi in path
-      "#test2:/bl#a-bl#a/so#me/pa#th2", "", "bl#a-bl#a/so#me/pa#th2", "test2:", &vfs_test_ops2 }
+    {
+        // 0.
+        "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/#test3:/qqq/www/eee.rr",
+        "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/",
+        "qqq/www/eee.rr",
+        "test3:",
+        &vfs_test_ops3,
+    },
+    {
+        // 1.
+        "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/",
+        "#test1:/bla-bla/some/path/",
+        "bla-bla/some/path2/",
+        "test2:",
+        &vfs_test_ops2,
+    },
+    {
+        // 2.
+        "#test1:/bla-bla/some/path/",
+        "",
+        "bla-bla/some/path/",
+        "test1:",
+        &vfs_test_ops1,
+    },
+    {
+        // 3.
+        "",
+        "",
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // 4. split with local
+        "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2#test3:/qqq/www/eee.rr",
+        "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2",
+        "qqq/www/eee.rr",
+        "test3:",
+        &vfs_test_ops3,
+    },
+    {
+        // 5. split with local
+        "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2",
+        "/local/path/#test1:/bla-bla/some/path/",
+        "bla-bla/some/path2",
+        "test2:",
+        &vfs_test_ops2,
+    },
+    {
+        // 6. split with local
+        "/local/path/#test1:/bla-bla/some/path/",
+        "/local/path/",
+        "bla-bla/some/path/",
+        "test1:",
+        &vfs_test_ops1,
+    },
+    {
+        // 7. split with local
+        "/local/path/",
+        "/local/path/",
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // 8. split with URL
+        "#test2:username:passwd@somehost.net/bla-bla/some/path2",
+        "",
+        "bla-bla/some/path2",
+        "test2:username:passwd@somehost.net",
+        &vfs_test_ops2,
+    },
+    {
+        // 9. split URL with semi
+        "/local/path/#test1:/bla-bla/some/path/#test2:username:p!a@s#s$w%d@somehost.net/bla-bla/"
+        "some/"
+        "path2",
+        "/local/path/#test1:/bla-bla/some/path/",
+        "bla-bla/some/path2",
+        "test2:username:p!a@s#s$w%d@somehost.net",
+        &vfs_test_ops2,
+    },
+    {
+        // 10. split with semi in path
+        "#test2:/bl#a-bl#a/so#me/pa#th2",
+        "",
+        "bl#a-bl#a/so#me/pa#th2",
+        "test2:",
+        &vfs_test_ops2,
+    }
 };
 
 /* @Test(dataSource = "test_vfs_split_ds") */

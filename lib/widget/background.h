@@ -33,4 +33,4 @@ cb_ret_t background_callback (Widget *w, Widget *sender, widget_msg_t msg, int p
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_BACKGROUND_H
+#endif

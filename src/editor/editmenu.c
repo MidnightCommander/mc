@@ -181,7 +181,7 @@ create_command_menu (void)
             entries, menu_entry_new (_ ("Change spelling &language..."), CK_SpellCheckSelectLang));
         entries = g_list_prepend (entries, menu_separator_new ());
     }
-#endif  // HAVE_ASPELL
+#endif
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Mail..."), CK_EditMail));
 
     return g_list_reverse (entries);

@@ -63,4 +63,4 @@ int mouse_handle_event (Widget *w, Gpm_Event *event);
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_MOUSE_H
+#endif

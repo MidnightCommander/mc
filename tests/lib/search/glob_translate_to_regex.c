@@ -38,16 +38,42 @@ static const struct test_glob_translate_to_regex_ds
     const char *input_value;
     const char *expected_result;
 } test_glob_translate_to_regex_ds[] = {
-    { "test*", "test(.*)" },
-    { "t?es*t", "t(.)es(.*)t" },
-    { "te{st}", "te(st)" },
-    { "te{st|ts}", "te(st|ts)" },
-    { "te{st,ts}", "te(st|ts)" },
-    { "te[st]", "te[st]" },
-    { "t,e.st", "t,e\\.st" },
-    { "^t,e.+st+$", "\\^t,e\\.\\+st\\+\\$" },
-    { "te!@#$%^&*()_+|\";:'{}:><?\\?\\*.,/[]|\\/st",
-      "te!@#\\$%\\^&(.*)\\(\\)_\\+|\";:'():><(.)\\?\\*\\.,/[]|\\/st" },
+    {
+        "test*",
+        "test(.*)",
+    },
+    {
+        "t?es*t",
+        "t(.)es(.*)t",
+    },
+    {
+        "te{st}",
+        "te(st)",
+    },
+    {
+        "te{st|ts}",
+        "te(st|ts)",
+    },
+    {
+        "te{st,ts}",
+        "te(st|ts)",
+    },
+    {
+        "te[st]",
+        "te[st]",
+    },
+    {
+        "t,e.st",
+        "t,e\\.st",
+    },
+    {
+        "^t,e.+st+$",
+        "\\^t,e\\.\\+st\\+\\$",
+    },
+    {
+        "te!@#$%^&*()_+|\";:'{}:><?\\?\\*.,/[]|\\/st",
+        "te!@#\\$%\\^&(.*)\\(\\)_\\+|\";:'():><(.)\\?\\*\\.,/[]|\\/st",
+    },
 };
 
 /* @Test(dataSource = "test_glob_translate_to_regex_ds") */

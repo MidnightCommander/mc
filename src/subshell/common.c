@@ -79,7 +79,7 @@
 
 #ifdef HAVE_STROPTS_H
 #    include <stropts.h>  // For I_PUSH
-#endif                    // HAVE_STROPTS_H
+#endif
 
 #ifdef HAVE_OPENPTY
 /* includes for openpty() */
@@ -93,7 +93,7 @@
 #    ifdef HAVE_LIBUTIL_H
 #        include <libutil.h>
 #    endif
-#endif  // HAVE_OPENPTY
+#endif
 
 #include "lib/global.h"
 
@@ -1043,15 +1043,15 @@ pty_open_slave (const char *pty_name)
             close (pty_slave);
             return -1;
         }
-#                endif  // sgi || __sgi
-#            endif      // I_FIND && I_PUSH
-#        endif          // __osf__ || __linux__
+#                endif
+#            endif
+#        endif
 
     fcntl (pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;
 }
 
-#    else   // !HAVE_GRANTPT
+#    else  // !HAVE_GRANTPT
 
 /* --------------------------------------------------------------------------------------------- */
 /** BSD version of pty_open_master */
@@ -1113,9 +1113,9 @@ pty_open_slave (const char *pty_name)
     fcntl (pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;
 }
-#    endif  // !HAVE_GRANTPT
+#    endif
 
-#endif  // !HAVE_OPENPTY
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -1565,7 +1565,7 @@ init_subshell (void)
             mc_global.tty.use_subshell = FALSE;
             return;
         }
-#endif  // HAVE_OPENPTY
+#endif
 
         // Create a pipe for receiving the subshell's CWD
 

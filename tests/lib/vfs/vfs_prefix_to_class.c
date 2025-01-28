@@ -89,23 +89,50 @@ static const struct test_vfs_prefix_to_class_ds
     const char *input_string;
     const struct vfs_class *expected_result;
 } test_vfs_prefix_to_class_ds[] = {
-    { // 0
-      "test_1:", &vfs_test_ops1 },
-    { // 1
-      "test_2:", &vfs_test_ops1 },
-    { // 2
-      "test_3:", &vfs_test_ops1 },
-    { // 3
-      "test_4:", &vfs_test_ops1 },
-    { // 4
-      "test2:", &vfs_test_ops2 },
-    { // 5
-      "test3:", &vfs_test_ops3 },
-    { "test1:", NULL },
-    { // 6
-      "test_5:", NULL },
-    { // 7
-      "test4:", NULL },
+    {
+        // 0
+        "test_1:",
+        &vfs_test_ops1,
+    },
+    {
+        // 1
+        "test_2:",
+        &vfs_test_ops1,
+    },
+    {
+        // 2
+        "test_3:",
+        &vfs_test_ops1,
+    },
+    {
+        // 3
+        "test_4:",
+        &vfs_test_ops1,
+    },
+    {
+        // 4
+        "test2:",
+        &vfs_test_ops2,
+    },
+    {
+        // 5
+        "test3:",
+        &vfs_test_ops3,
+    },
+    {
+        "test1:",
+        NULL,
+    },
+    {
+        // 6
+        "test_5:",
+        NULL,
+    },
+    {
+        // 7
+        "test4:",
+        NULL,
+    },
 };
 
 /* @Test(dataSource = "test_vfs_prefix_to_class_ds") */

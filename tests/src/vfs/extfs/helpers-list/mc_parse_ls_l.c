@@ -73,18 +73,46 @@ static output_format_t opt_output_format = FORMAT_LS;
 /* Misc. */
 static int error_count = 0;
 
-static GOptionEntry entries[] = { { "drop-mtime", 0, 0, G_OPTION_ARG_NONE, &opt_drop_mtime,
-                                    "Don't include mtime in the output.", NULL },
-                                  { "drop-ids", 0, 0, G_OPTION_ARG_NONE, &opt_drop_ids,
-                                    "Don't include uid/gid in the output.", NULL },
-                                  { "symbolic-ids", 0, 0, G_OPTION_ARG_NONE, &opt_symbolic_ids,
-                                    "Print the strings '<<uid>>'/'<<gid>>' instead of the numeric "
-                                    "IDs when they match the process' uid/gid.",
-                                    NULL },
-                                  { "format", 'f', 0, G_OPTION_ARG_CALLBACK,
-                                    parse_format_name_argument, "Output format. Default: ls.",
-                                    "<ls|yaml>" },
-                                  G_OPTION_ENTRY_NULL };
+static GOptionEntry entries[] = {
+    {
+        "drop-mtime",
+        0,
+        0,
+        G_OPTION_ARG_NONE,
+        &opt_drop_mtime,
+        "Don't include mtime in the output.",
+        NULL,
+    },
+    {
+        "drop-ids",
+        0,
+        0,
+        G_OPTION_ARG_NONE,
+        &opt_drop_ids,
+        "Don't include uid/gid in the output.",
+        NULL,
+    },
+    {
+        "symbolic-ids",
+        0,
+        0,
+        G_OPTION_ARG_NONE,
+        &opt_symbolic_ids,
+        "Print the strings '<<uid>>'/'<<gid>>' instead of the numeric IDs when they match the "
+        "process' uid/gid.",
+        NULL,
+    },
+    {
+        "format",
+        'f',
+        0,
+        G_OPTION_ARG_CALLBACK,
+        parse_format_name_argument,
+        "Output format. Default: ls.",
+        "<ls|yaml>",
+    },
+    G_OPTION_ENTRY_NULL,
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

@@ -50,8 +50,12 @@
 
 /*** file scope variables ************************************************************************/
 
-static const char *wrap_str[] = { N_ ("&None"), N_ ("&Dynamic paragraphing"),
-                                  N_ ("Type &writer wrap"), NULL };
+static const char *wrap_str[] = {
+    N_ ("&None"),
+    N_ ("&Dynamic paragraphing"),
+    N_ ("Type &writer wrap"),
+    NULL,
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -67,7 +71,7 @@ i18n_translate_array (const char *array[])
         array++;
     }
 }
-#endif  // ENABLE_NLS
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -129,7 +133,7 @@ edit_options_dialog (WDialog *h)
         i18n_translate_array (wrap_str);
         i18n_flag = TRUE;
     }
-#endif  // ENABLE_NLS
+#endif
 
     g_snprintf (wrap_length, sizeof (wrap_length), "%d", edit_options.word_wrap_line_length);
     g_snprintf (tab_spacing, sizeof (tab_spacing), "%d", TAB_SIZE);
@@ -183,7 +187,7 @@ edit_options_dialog (WDialog *h)
                 QUICK_STOP_GROUPBOX,
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
+            QUICK_END,
             // clang-format on
         };
 
@@ -195,7 +199,7 @@ edit_options_dialog (WDialog *h)
             .help = "[Editor options]",
             .widgets = quick_widgets,
             .callback = NULL,
-            .mouse_callback = NULL
+            .mouse_callback = NULL,
         };
 
         if (quick_dialog (&qdlg) == B_CANCEL)

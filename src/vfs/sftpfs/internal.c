@@ -64,7 +64,7 @@ sftpfs_blksize (struct stat *s)
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;  // FIXME
-#endif                                               // HAVE_STRUCT_STAT_ST_BLKSIZE
+#endif
     vfs_adjust_stat (s);
 }
 

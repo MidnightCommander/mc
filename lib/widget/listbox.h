@@ -81,4 +81,4 @@ char *listbox_add_item_take (WListbox *l, listbox_append_t pos, int hotkey, char
 
 /*** inline functions ****************************************************************************/
 
-#endif  // MC__WIDGET_LISTBOX_H
+#endif

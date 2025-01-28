@@ -110,7 +110,7 @@ enum CompareMode
 
 #ifdef ENABLE_VFS_NET
 static const char *machine_str = N_ ("Enter machine name (F1 for details):");
-#endif  // ENABLE_VFS_NET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -432,7 +432,7 @@ nice_cd (const char *text, const char *xtext, const char *help, const char *hist
     if (MENU_PANEL != current_panel)
         (void) mc_chdir (current_panel->cwd_vpath);
 }
-#endif  // ENABLE_VFS_UNDELFS || ENABLE_VFS_NET
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -651,7 +651,7 @@ edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_l
         edit_file (&arg);
     }
     else
-#endif  // USE_INTERNAL_EDIT
+#endif
     {
         static const char *editor = NULL;
 
@@ -674,7 +674,7 @@ edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_l
     if (use_internal_edit)
         dialog_switch_process_pending ();
     else
-#endif  // USE_INTERNAL_EDIT
+#endif
         repaint_screen ();
 }
 
@@ -1006,7 +1006,7 @@ vfs_list (WPanel *panel)
     vfs_path_free (target_vpath, TRUE);
     g_free (target);
 }
-#endif  // ENABLE_VFS
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1168,7 +1168,7 @@ ftplink_cmd (void)
     nice_cd (_ ("FTP to machine"), _ (machine_str), "[FTP File System]",
              ":ftplink_cmd: FTP to machine ", "ftp://", 1, TRUE);
 }
-#endif  // ENABLE_VFS_FTP
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1180,7 +1180,7 @@ sftplink_cmd (void)
              "[SFTP (SSH File Transfer Protocol) filesystem]", ":sftplink_cmd: SFTP to machine ",
              "sftp://", 1, TRUE);
 }
-#endif  // ENABLE_VFS_SFTP
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1191,7 +1191,7 @@ shelllink_cmd (void)
     nice_cd (_ ("Shell link to machine"), _ (machine_str), "[FIle transfer over SHell filesystem]",
              ":fishlink_cmd: Shell link to machine ", "sh://", 1, TRUE);
 }
-#endif  // ENABLE_VFS_SHELL
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1203,7 +1203,7 @@ undelete_cmd (void)
              _ ("Enter device (without /dev/) to undelete\nfiles on: (F1 for details)"),
              "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "undel://", 0, FALSE);
 }
-#endif  // ENABLE_VFS_UNDELFS
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
