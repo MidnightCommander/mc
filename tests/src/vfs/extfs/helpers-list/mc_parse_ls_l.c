@@ -162,7 +162,7 @@ my_itoa (int i)
 static const char *
 symbolic_uid (uid_t uid)
 {
-    return (opt_symbolic_ids && uid == getuid ())? "<<uid>>" : my_itoa ((int) uid);
+    return (opt_symbolic_ids && uid == getuid () && uid != 0)? "<<uid>>" : my_itoa ((int) uid);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -170,7 +170,7 @@ symbolic_uid (uid_t uid)
 static const char *
 symbolic_gid (gid_t gid)
 {
-    return (opt_symbolic_ids && gid == getgid ())? "<<gid>>" : my_itoa ((int) gid);
+    return (opt_symbolic_ids && gid == getgid () && gid != 0)? "<<gid>>" : my_itoa ((int) gid);
 }
 
 /* --------------------------------------------------------------------------------------------- */
