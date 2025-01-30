@@ -13,7 +13,3 @@ Our 'uarc' doesn't support spaces in filenames but that's no biggie:
     put long-winded filenames in a 'shar' before arcing them."
 
     Wikipedia: "ARC is incapable of compressing entire directory trees"
-
-Known issues with our uarc:
-
-- It reports '0' gid.
