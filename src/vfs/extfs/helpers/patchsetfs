@@ -24,7 +24,6 @@ patchsetfs_list_git()
 {
     WORK_DIR=$1; shift
     fname=$1; shift
-    USER=$1; shift
     DATE=$1; shift
 
     GIT_DIR=`found_git_dir "$WORK_DIR"`
@@ -40,7 +39,7 @@ patchsetfs_list_git()
             DATE=`date -d @"$TIMESTAMP" +"%b %d %Y"`
         }
         NAME="$chset $author"
-        echo "-rw-rw-rw-   1 $USER    0 0 $DATE  $NAME.diff"
+        echo "-rw-rw-rw-   1 0    0 0 $DATE  $NAME.diff"
     done
 }
 
@@ -68,10 +67,9 @@ patchsetfs_list()
     fname=$1; shift
 
     DATE=`date +"%b %d %H:%M"`
-    USER=`whoami`
 
     case "$VCS_type" in
-        git) patchsetfs_list_git "$WORK_DIR" "$fname" "$USER" "$DATE" ;;
+        git) patchsetfs_list_git "$WORK_DIR" "$fname" "$DATE" ;;
     esac
 }
 

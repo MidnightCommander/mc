@@ -49,8 +49,8 @@ sub mc_ulib_fs_list
 
         $fname =~ s|\\|/|g;
 
-        printf("-rw-r--r-- 1 %s %s %d %s-%02u-%s %s %s\n",
-           $uid, $gid, int($w[1]), $month{lc($w[4])}, $w[5], $w[7], substr($w[6], 0, 5), $fname);
+        printf("-rw-r--r-- 1 %d %d %d %s-%02u-%s %s %s\n",
+           0, 0, int($w[1]), $month{lc($w[4])}, $w[5], $w[7], substr($w[6], 0, 5), $fname);
     }
     close (PIPE);
 }

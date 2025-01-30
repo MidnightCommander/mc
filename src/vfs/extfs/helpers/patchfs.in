@@ -308,13 +308,9 @@ sub parse($$$$)
 	$fmap_time{"$prefix$f"}=$time;
     }
 
-    # use uid and gid from file
-    my $qarchive = quotemeta $archive;
-    my ($uid,$gid)=(`ls -l $qarchive`=~/$ls_extract_id/o);
-
     # flush all file names with cumulative file size
     while(my ($fn, $fs) = each %fmap_size) {
-	printf $fh "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $fs, datetime($fmap_time{$fn}), $fn;
+	printf $fh "-rw-r--r-- 1 %d %d %d %s %s\n", 0, 0, $fs, datetime($fmap_time{$fn}), $fn;
     }
 
     close($fh) if($file ne '');

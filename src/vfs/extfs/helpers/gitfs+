@@ -12,12 +12,11 @@ gitfs_list()
 {
     DATE=`date +"%b %d %H:%M"`
     GIT_DIR="$2/.git"
-    user=`whoami`
     git ls-files -v -c -m -d | sort -k 2 | uniq -f 1 | while read status fname
     do
         [ "$status" = "H" ] && status=" "
         [ "$status" = "C" ] && status="*"
-        echo "-r--r--r--   1 $user     0  0 $DATE `dirname $fname`/$prefix$status`basename $fname`"
+        echo "-r--r--r--   1 0     0  0 $DATE `dirname $fname`/$prefix$status`basename $fname`"
     done
 }
 

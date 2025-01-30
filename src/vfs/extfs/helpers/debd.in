@@ -102,7 +102,7 @@ sub ls {
     my @stat = stat($file);
     # mode, nlink, uid, gid, size, mtime, filename
     printf "%s%s %d %d %d %d %s CONTENTS%s\n", ft($file), fm($stat[2] & 07777),
-    $stat[3], $stat[4], $stat[5], $stat[7], bt($stat[9]), $file;
+    0, 0, $stat[5], $stat[7], bt($stat[9]), $file;
 }
 
 sub list

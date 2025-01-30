@@ -26,13 +26,7 @@ ACE_GET="unace x"
 # ls:
 mc_ace_fs_list()
 {
-    if [ "x$UID" = "x" ]; then
-        UID=`id -ru 2>/dev/null`
-        if [ "x$UID" = "x" ]; then
-            UID=0
-        fi
-    fi
-    $ACE_LIST "$1" | @AWK@ -v uid=$UID '
+    $ACE_LIST "$1" | @AWK@ '
 /%/ { 
   split($1,date,".")
 
@@ -41,7 +35,7 @@ mc_ace_fs_list()
   else
     date[3]=date[3] + 2000
 
-  printf "-rw-r--r--   1 %-8d %-8d %8d %02d-%02d-%04d %s %s\n", uid, 0, $4, date[2], date[1], date[3], $2, $6
+  printf "-rw-r--r--   1 %-8d %-8d %8d %02d-%02d-%04d %s %s\n", 0, 0, $4, date[2], date[1], date[3], $2, $6
 }' 2>/dev/null
     exit 0
 }

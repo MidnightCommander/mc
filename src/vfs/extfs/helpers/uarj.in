@@ -24,14 +24,14 @@ sub mcarjfs_list($) {
     # file information
     my @fileinfo = stat($arc);
     # UID/GID from file
-    my $uid = getpwuid($fileinfo[4]) || "root";
-    my $gid = getgrgid($fileinfo[5]) || "root";
+    my $uid = 0;
+    my $gid = 0;
 
     use Data::Dumper;
 
     my $arc_list_cmd = "arj -+ -ja1 v \"$arc\"";
     $arc_list_cmd = $ENV{MC_TEST_EXTFS_LIST_CMD} if defined $ENV{MC_TEST_EXTFS_LIST_CMD};
-    
+
     my @lines = `$arc_list_cmd`;
     chomp @lines;
     if ($? != 0) { exit 1; } # arj command error (exit code != 0)
@@ -82,7 +82,7 @@ sub mcarjfs_list($) {
 
             $list[-1]->{filename} .= " -> $1";
             $list[-1]->{perm} =~ s|^.|l|;
-            
+
         }
     }
 

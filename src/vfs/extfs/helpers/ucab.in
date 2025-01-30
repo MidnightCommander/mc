@@ -4,7 +4,7 @@ CAB=cabextract
 
 mccabfs_list ()
 {
-    $CAB -l "$1" | @AWK@ -v uid=`id -un` -v gid=`id -gn` '
+    $CAB -l "$1" | @AWK@ '
 BEGIN { flag=0 }
 /^-------/ { flag++; if (flag > 1) exit 0; next }
 {
@@ -13,7 +13,7 @@ if (length($6) == 0) next
 pr="-rw-r--r--"
 split($3, a, ".")
 split($4, b, ":")
-printf "%s 1 %s %s %d %02d/%02d/%02d %02d:%02d  %s\n", pr, uid, gid, $1, a[2], a[1], a[3], b[1], b[2], $6
+printf "%s 1 %d %d %d %02d/%02d/%02d %02d:%02d  %s\n", pr, 0, 0, $1, a[2], a[1], a[3], b[1], b[2], $6
 }'
 
 }

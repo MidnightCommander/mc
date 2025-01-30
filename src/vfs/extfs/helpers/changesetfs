@@ -24,7 +24,6 @@ changesetfs_list_git()
 {
     WORK_DIR=$1; shift
     fname=$1; shift
-    USER=$1; shift
     DATE=$1; shift
 
     GIT_DIR=`found_git_dir "$WORK_DIR"`
@@ -40,7 +39,7 @@ changesetfs_list_git()
             DATE=`date -d @"$TIMESTAMP" +"%b %d %Y"`
         }
         NAME="$chset $author"
-        echo "-rw-rw-rw-   1 $USER    0 0 $DATE  $NAME `basename $fname`"
+        echo "-rw-rw-rw-   1 0    0 0 $DATE  $NAME `basename $fname`"
     done
 }
 
@@ -73,10 +72,9 @@ changesetfs_list()
     fname=$1; shift
 
     DATE=`date +"%b %d %H:%M"`
-    USER=`whoami`
 
     case "$VCS_type" in
-        git) changesetfs_list_git "$WORK_DIR" "$fname" "$USER" "$DATE" ;;
+        git) changesetfs_list_git "$WORK_DIR" "$fname" "$DATE" ;;
     esac
 }
 

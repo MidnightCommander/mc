@@ -130,14 +130,14 @@ sub process_header {
 sub print_dir_line {
     $from=$to if ($from eq $user); # otherwise, it would look pretty boring
     $date=localtime(time) if (!defined $date);
-    printf "-r-------- 1 $< $< %d %s %3.3d_%.25s\n",
+    printf "-r-------- 1 0 0 %d %s %3.3d_%.25s\n",
     $size, $date, $msg_nr, "${from}_${subj}";
 
 }
 
 sub mailfs_list {
     my $blank = 1;
-    $user=$ENV{USER}||getlogin||getpwuid($<) || "nobody";
+    $user=$ENV{USER}||getlogin||getpwuid($UID) || "nobody";
 
     while(<IN>) {
 	s/\r$//;
