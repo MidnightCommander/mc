@@ -22,25 +22,20 @@ jobs:
           apk add autoconf automake build-base libtool pkgconf sudo
           apk add aspell-dev check-dev e2fsprogs-dev gettext-dev glib-dev gpm-dev libssh2-dev perl slang-dev
 
-      - name: Bootstrap build system
-        run: ./autogen.sh
+      - name: Bootstrap & configure build system
+        run: |
+          ./autogen.sh
+
+          ./configure \
+            --prefix="$(pwd)/install-prefix" \
+            --enable-aspell \
+            --enable-werror
 
       - name: Build default configuration
         run: |
-          adduser --home "$(pwd)" --no-create-home --disabled-password test
-          chown -R test "$(pwd)"
-
-          su - test -c ' \
-            ./configure \
-              --prefix="$(pwd)/install-prefix" \
-              --enable-aspell \
-              --enable-werror \
-              && \
-            \
-            make -j$(nproc) && \
-            make check  && \
-            make install \
-          '
+            make -j$(nproc)
+            make check
+            make install
 
       - uses: actions/upload-artifact@v7
         if: failure()

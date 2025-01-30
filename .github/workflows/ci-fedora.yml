@@ -42,30 +42,26 @@ jobs:
         working-directory: maint
         run: ./doctest.py
 
-      - name: Bootstrap build system
-        run: ./autogen.sh
+      - name: Bootstrap & configure build system
+        run: |
+          ./autogen.sh
+
+          ./configure \
+            --prefix="$(pwd)/install-prefix" \
+            --enable-aspell \
+            --enable-werror
+
+      - name: Check formatting
+        run: |
+          clang-format --version
+          make indent
+          git diff --exit-code          
 
       - name: Build default configuration
         run: |
-          useradd --home "$(pwd)" test
-          chown -R test "$(pwd)"
-
-          su - test -c ' \
-            ./configure \
-              --prefix="$(pwd)/install-prefix" \
-              --enable-aspell \
-              --enable-werror \
-              && \
-            \
-            echo "Checking formatting..." && \
-            clang-format --version && \
-            make indent && \
-            git diff --exit-code && \
-            \
-            make -j$(nproc) && \
-            make check && \
-            make install \
-          '
+          make -j$(nproc)
+          make check
+          make install
 
       - name: Render manual pages to HTML
         run: |
