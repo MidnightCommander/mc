@@ -6,6 +6,8 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	@CHECK_CFLAGS@
 
+CLEANFILES = config_string.ini
+
 LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/lib/libmc.la
 
