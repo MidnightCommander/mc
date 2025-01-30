@@ -30,21 +30,15 @@ jobs:
 
       - name: Build default configuration
         run: |
-          useradd --home "$(pwd)" test
-          chown -R test "$(pwd)"
+          ./configure \
+            --prefix="$(pwd)/install-prefix" \
+            --enable-mclib \
+            --enable-aspell \
+            --enable-werror
 
-          su - test -c ' \
-            ./configure \
-              --prefix="$(pwd)/install-prefix" \
-              --enable-mclib \
-              --enable-aspell \
-              --enable-werror \
-              && \
-            \
-            make -j$(nproc) && \
-            make check && \
-            make install \
-          '
+          make -j$(nproc)
+          make check
+          make install
 
       - uses: actions/upload-artifact@v4
         if: failure()

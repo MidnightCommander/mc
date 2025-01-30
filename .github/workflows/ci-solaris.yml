@@ -22,24 +22,18 @@ jobs:
           run: |
             ./autogen.sh
 
-            useradd -d "$(pwd)" test
-            chown -R test $(pwd)
+            export PKG_CONFIG_PATH=/usr/lib/64/pkgconfig
 
-            su - test -c ' \
-              export PKG_CONFIG_PATH=/usr/lib/64/pkgconfig && \
-              \
-              ./configure \
-                --prefix="$(pwd)/install-prefix" \
-                --with-screen=ncurses \
-                --enable-mclib \
-                --enable-aspell \
-                --enable-werror \
-                && \
-              \
-              make && \
-              make check && \
-              make install \
-            '
+            ./configure \
+              --prefix="$(pwd)/install-prefix" \
+              --with-screen=ncurses \
+              --enable-mclib \
+              --enable-aspell \
+              --enable-werror
+
+            make
+            make check
+            make install
 
       - uses: actions/upload-artifact@v4
         if: failure()

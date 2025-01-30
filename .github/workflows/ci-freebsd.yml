@@ -27,25 +27,18 @@ jobs:
           run: |
             ./autogen.sh
 
-            pw useradd test -d "$(pwd)"
-            chown -R test $(pwd)
+            export CFLAGS="${{ inputs.CFLAGS }}"
 
-            su - test -c ' \
-              \
-              export CFLAGS="${{ inputs.CFLAGS }}" && \
-              \
-              ./configure \
-                --prefix="$(pwd)/install-prefix" \
-                --with-screen=ncurses \
-                --enable-mclib \
-                --enable-aspell \
-                --enable-werror \
-                && \
-              \
-              make && \
-              make check && \
-              make install \
-            '
+            ./configure \
+              --prefix="$(pwd)/install-prefix" \
+              --with-screen=ncurses \
+              --enable-mclib \
+              --enable-aspell \
+              --enable-werror
+
+            make
+            make check
+            make install
 
       - uses: actions/upload-artifact@v4
         if: failure()
