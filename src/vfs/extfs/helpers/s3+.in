@@ -84,7 +84,6 @@ from boto.exception import BotoServerError
 
 
 # Get settings from environment
-USER=os.getenv('USER','0')
 AWS_ACCESS_KEY_ID=os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY=os.getenv('AWS_SECRET_ACCESS_KEY')
 S3LOCATION=os.getenv('MCVFS_EXTFS_S3_LOCATION', 'EU')
@@ -358,13 +357,13 @@ if cmd == 'list':
 			mostrecent = max(mostrecent, k.last_modified)
 			datetime = convDate(k.last_modified)
 			ret.append('%10s %3d %-8s %-8s %d %s %s\n' % (
-				'-rw-r--r--', 1, USER, USER, k.size, datetime, b.name+'/'+k.name)
+				'-rw-r--r--', 1, "0", "0", k.size, datetime, b.name+'/'+k.name)
 			)
 			totsz += k.size
 
 		datetime=convDate(mostrecent)
 		sys.stdout.write('%10s %3d %-8s %-8s %d %s %s\n' % (
-			'drwxr-xr-x', 1, USER, USER, totsz, datetime, b.name)
+			'drwxr-xr-x', 1, "0", "0", totsz, datetime, b.name)
 		)
 		for line in ret:
 			sys.stdout.write(line)

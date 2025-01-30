@@ -35,7 +35,7 @@ fi
 
 mcrar4fs_list ()
 {
-     $UNRAR v -c- -cfg- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
+     $UNRAR v -c- -cfg- "$1" | @AWK@ '
 BEGIN { flag=0 }
 /^-------/ { flag++; if (flag > 1) exit 0; next }
 flag==1 {
@@ -47,13 +47,13 @@ flag==1 {
     else
 	if (index($6, ".") != 0)
 	    $6="-rw-r--r--"
-    printf "%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n", $6, uid, gid, $1, a[2], a[1], a[3], $5, str
+    printf "%s 1 %d %d %d %02d/%02d/%02d %s ./%s\n", $6, 0, 0, $1, a[2], a[1], a[3], $5, str
 }'
 }
 
 mcrar5fs_list ()
 {
-    $UNRAR vt -c- -cfg- "$1" | @AWK@ -F ':' -v uid=`id -u` -v gid=`id -g` '
+    $UNRAR vt -c- -cfg- "$1" | @AWK@ -F ':' '
     {
         ### remove space after the ":" of the field name
         sub ("^ ", "", $2);
@@ -105,8 +105,8 @@ mcrar5fs_list ()
         }
 
         ### and finally
-        printf ("%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n",
-                attrs, uid, gid, size, date[2], date[3], date[1], time, name);
+        printf ("%s 1 %d %d %d %02d/%02d/%02d %s ./%s\n",
+                attrs, 0, 0, size, date[2], date[3], date[1], time, name);
     }
 '
 }

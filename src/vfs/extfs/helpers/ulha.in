@@ -40,7 +40,7 @@ LHA_PUT="lha aq"
 mc_lha_fs_list()
 {
    # List the contents of the archive and sort it out    
-   $LHA_LIST "$1" | $AWK -v uid=`id -nu` -v gid=`id -ng` '
+   $LHA_LIST "$1" | $AWK '
       # Strip a leading '/' if present in a filepath
       $(NF) ~ /^\// { $(NF) = substr($NF,2) }
       # Print the line this way if there is no permission string
@@ -49,7 +49,7 @@ mc_lha_fs_list()
          $1 = ($NF ~ /\/$/) ? "drwxr-xr-x":"-rwxr--r--";
          # Print it
          printf "%s 1 %-8s %-8s %-8d %s %s %s %s\n",
-                 $1, uid, gid, $2, $4, $5, $6, $7;
+                 $1, 0, 0, $2, $4, $5, $6, $7;
          # Get the next line of the list
          next;
       }

@@ -16,7 +16,7 @@ ARJ="arj -+ -ja1"
 
 mcarjfs_list ()
 {
- $ARJ v "$1" | @AWK@ -v uuid=`id -ru` '
+ $ARJ v "$1" | @AWK@ '
   { 
    if (($0 ~ /^[0-9]+\) .*/)||($0 ~ /^------------ ---------- ---------- -----/)){
     if (filestr ~ /^[0-9]+\) .*/) {
@@ -32,7 +32,7 @@ mcarjfs_list ()
     filestr=$0
     sub(/^[0-9]*\) /, "")
     file=$0
-    uid=uuid
+    uid=0
     gid=0
    }
 

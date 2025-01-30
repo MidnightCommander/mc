@@ -24,11 +24,9 @@ mcwim_list() {
 	# but on some broken images we can get garbage, instead of number
 	IMAGECOUNT=`${WIM} info ${WIMFILENAME} | grep  Index: | grep -v Boot | wc -l`
 	IMGNUM=1
-	VUID=`id -nu`
-	VGID=`id -ng`
 	while [ ${IMGNUM} -le ${IMAGECOUNT} ]; do
 		${WIM} dir ${WIMFILENAME} ${IMGNUM} --detailed | \
-			${AWK}  -v uid=${VUID} -v gid=${VGID} -v imgnum=${IMGNUM} '
+			${AWK} -v imgnum=${IMGNUM} '
 				/^----------------------------------------------------------------------------/,/^$/ {
 					if (match($0, /^Full Path/)) {
 						split($0, namesrc, "\"");
@@ -58,8 +56,8 @@ mcwim_list() {
 					}
 					
 					if (match($0, /^$/)) {
-						printf("%s 1 %s %s % 20s % 24s IMAGE%s%s\n",
-							attr, uid, gid, size, mtime, imgnum, name);
+						printf("%s 1 %d %d % 20s % 24s IMAGE%s%s\n",
+							attr, 0, 0, size, mtime, imgnum, name);
 						name = size = mtime = "";
 						attr="-rw-r--r--";
 					}
@@ -70,8 +68,8 @@ mcwim_list() {
 	done
 	
 	# Virtual files
-	echo "-r-xr-xr-x 1 ${VUID} ${VGID}                    1      01/01/2020 00:00:00 OPTIMIZE"
-	echo "-r-xr-xr-x 1 ${VUID} ${VGID}                    1      01/01/2020 00:00:00 VERIFY"
+	echo "-r-xr-xr-x 1 0 0                    1      01/01/2020 00:00:00 OPTIMIZE"
+	echo "-r-xr-xr-x 1 0 0                    1      01/01/2020 00:00:00 VERIFY"
 }
 
 mcwim_copyout() {

@@ -17,13 +17,7 @@ ARC_DEL="arc d"
 
 mc_arc_fs_list()
 {
-    if [ "x$UID" = "x" ]; then
-        UID=`id -ru 2>/dev/null`
-        if [ "x$UID" = "x" ]; then
-            UID=0
-        fi
-    fi
-    $ARC_LIST "$1" | @AWK@ -v uid=$UID '
+    $ARC_LIST "$1" | @AWK@ '
 BEGIN {
   # Copied from uzoo.in.
   split("Jan:Feb:Mar:Apr:May:Jun:Jul:Aug:Sep:Oct:Nov:Dec", month_list, ":")
@@ -51,7 +45,7 @@ BEGIN {
                 a[2]=substr(a[2],1,2)
         }
 
-        printf "-rw-r--r--   1 %-8d %-8d %8d %02d-%02d-%04d %02d:%02d %s\n", uid, 0, $2, month[$7], $6, $8, a[1], a[2], $1
+        printf "-rw-r--r--   1 %-8d %-8d %8d %02d-%02d-%04d %02d:%02d %s\n", 0, 0, $2, month[$7], $6, $8, a[1], a[2], $1
 }' 2>/dev/null
     exit 0
 }

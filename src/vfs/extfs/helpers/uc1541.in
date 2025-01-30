@@ -474,9 +474,6 @@ class Uc1541(object):
         """
         directory = []
 
-        uid = os.getuid()
-        gid = os.getgid()
-
         res = self._call_command('list')
         if res != 0:
             return res
@@ -510,8 +507,8 @@ class Uc1541(object):
 
                 directory.append({'pattern_name': pattern_name,
                                   'display_name': display_name,
-                                  'uid': uid,
-                                  'gid': gid,
+                                  'uid': 0,
+                                  'gid': 0,
                                   'size': int(blocks) * SECLEN,
                                   'perms': perms})
                 idx += 1

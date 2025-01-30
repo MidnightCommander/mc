@@ -9,7 +9,7 @@ UNALZ=unalz
 
 mcualz_list ()
 {
-	$UNALZ -l "$1" | @AWK@ -v uid=`id -nu` -v gid=`id -ng` '
+	$UNALZ -l "$1" | @AWK@ '
 {
     if ($1 ~ /[0-9][0-9][:/][0-9][0-9][:/][0-9][0-9]$/)
     {
@@ -31,7 +31,7 @@ mcualz_list ()
 		perm = "drwxr-xr-x"
 	else
 		perm = "-rw-r--r--"
-	printf "%s 1 %s %s %d %s %s %s\n", perm, uid, gid, size, pdate, time, file
+	printf "%s 1 %d %d %d %s %s %s\n", perm, 0, 0, size, pdate, time, file
     }
 }
 '

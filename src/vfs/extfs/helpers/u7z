@@ -31,9 +31,6 @@ mcu7zip_list ()
 {
         # Symlinks are not shown - no idea how to distinguish them
         # Read-only files are not shown as such - it's rarely useful
-
-        ugid="`id -nu` `id -ng`"
-
         date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)' # 19 chars.
         date_mc='\2-\3-\1 \4'
         empty_date_re='^ \{19\}'
@@ -60,12 +57,12 @@ mcu7zip_list ()
                   # but we don't mind: the printing commands that follow use strict patterns.).
 
                   # Handle directories.
-                  s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p
-            s/$empty_date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_archive \1/p
+                  s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 0 0 0 $date_mc \5/p
+            s/$empty_date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 0 0 0 $date_archive \1/p
 
                   # Handle normal files.
-                  s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \5 $date_mc \6/p
-            s/$empty_date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \1 $date_archive \2/p
+                  s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 0 0 \5 $date_mc \6/p
+            s/$empty_date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 0 0 \1 $date_archive \2/p
         "
 }
 
