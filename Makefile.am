@@ -19,6 +19,8 @@ ACLOCAL_AMFLAGS = -I m4
 
 CONFIG_STATUS_DEPENDENCIES = $(top_srcdir)/mc-version.h
 
+CLEANFILES = po/stamp-po
+
 .PHONY: update-version \
         cppcheck \
         cppcheck-error \
