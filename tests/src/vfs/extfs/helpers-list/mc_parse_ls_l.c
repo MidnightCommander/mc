@@ -42,8 +42,9 @@
 
 #include "lib/vfs/utilvfs.h"  // vfs_parse_ls_lga()
 #include "lib/util.h"         // string_perm()
-#include "lib/timefmt.h"      // FMT_LOCALTIME
-#include "lib/widget.h"       // for the prototype of message() only
+#include "lib/strutil.h"
+#include "lib/timefmt.h"  // FMT_LOCALTIME
+#include "lib/widget.h"   // for the prototype of message() only
 
 /*** global variables ****************************************************************************/
 
@@ -196,25 +197,6 @@ static const char *
 symbolic_gid (gid_t gid)
 {
     return (opt_symbolic_ids && gid == getgid ()) ? "<<gid>>" : my_itoa ((int) gid);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Cuts off a string's line-end (as in Perl).
- */
-static void
-chomp (char *s)
-{
-    int i;
-
-    i = strlen (s);
-
-    // Code taken from vfs_parse_ls_lga(), with modifications.
-    if ((--i >= 0) && (s[i] == '\r' || s[i] == '\n'))
-        s[i] = '\0';
-    if ((--i >= 0) && (s[i] == '\r' || s[i] == '\n'))
-        s[i] = '\0';
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -396,7 +378,7 @@ process_input (FILE *input)
 
     while (fgets (line, sizeof line, input) != NULL)
     {
-        chomp (line);                          // Not mandatory. Makes error messages nicer.
+        str_rstrip_eol (line);                 // Not mandatory. Makes error messages nicer.
         if (strncmp (line, "total ", 6) == 0)  // Convenience only: makes 'ls -l' parse cleanly.
             continue;
         process_ls_line (line);
