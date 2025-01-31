@@ -282,6 +282,9 @@ include named.syntax
 file ..\*\\.strace$ Strace\sdebug\soutput
 include strace.syntax
 
+file APKBUILD$ Alpine\spackage\sbuild\sscript
+include PKGBUILD.syntax
+
 file PKGBUILD$ Arch\spackage\sbuild\sscript
 include PKGBUILD.syntax
 
