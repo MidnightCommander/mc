@@ -79,6 +79,7 @@ SYNTAXFILES =			\
 	r.syntax		\
 	ruby.syntax		\
 	rust.syntax		\
+	turtle.syntax		\
 	sh.syntax		\
 	slang.syntax		\
 	smalltalk.syntax	\
