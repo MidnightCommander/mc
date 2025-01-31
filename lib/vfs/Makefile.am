@@ -16,4 +16,4 @@ if ENABLE_VFS_NET
 libmcvfs_la_SOURCES += netutil.c netutil.h
 endif
 
-EXTRA_DIST = HACKING README
+EXTRA_DIST = README
