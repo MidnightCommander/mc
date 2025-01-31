@@ -1,7 +1,7 @@
 # Java properties file syntax highlighting
 # Author: Tomas Horsky <tomas@thorsky.info>
 #
-# http://java.sun.com/j2se/1.4.2/docs/api/java/util/Properties.html#load(java.io.InputStream)
+# https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/util/Properties.html#load(java.io.Reader)
 # - Does not support escapes in keys: \ , \=, \:
 # - Additionally highlights numbers, HTML color codes (#AABBCC), some sort of "variable references" (${ref.to.other.key}), and more
 

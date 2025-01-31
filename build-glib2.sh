@@ -15,7 +15,7 @@
 #  GNU General Public License for more details.
 
 #  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # This script is incomplete!  It doesn't download libiconv.  This is OK
 # for glibc-based systems, but probably not for others.  This limitation
@@ -35,7 +35,7 @@ GLIB_URL="https://download.gnome.org/sources/glib/2.30/$GLIB_TARBALL"
 
 PKGC_DIR="pkg-config-$PKGC_VERSION"
 PKGC_TARBALL="pkg-config-$PKGC_VERSION.tar.gz"
-PKGC_URL="http://pkgconfig.freedesktop.org/releases/$PKGC_TARBALL"
+PKGC_URL="https://pkgconfig.freedesktop.org/releases/$PKGC_TARBALL"
 
 GETTEXT_DIR="gettext-$GETTEXT_VERSION/gettext-runtime"
 GETTEXT_TARBALL="gettext-$GETTEXT_VERSION.tar.gz"

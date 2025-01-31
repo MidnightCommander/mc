@@ -18,7 +18,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # Suppress warnings about `local`
 # shellcheck disable=SC3043
@@ -89,7 +89,7 @@ opt_run_mcdiff_on_error=no  # "yes" if '--mcdiff' provided.
 # Portability notes:
 #
 # - We do `local var="$whatever"` instead of `local var=$whatever` for
-#   compatibility with Dash. See http://unix.stackexchange.com/questions/97560.
+#   compatibility with Dash. See https://unix.stackexchange.com/questions/97560.
 #
 # - The 'local' keyword used in this file isn't mandatory. Feel free to
 #   remove it if it isn't supported by your archaic shell.
@@ -126,7 +126,7 @@ basename_sans_extensions() {
 # Does an executable exist?
 #
 has_prog() {
-  # see http://stackoverflow.com/questions/592620
+  # see https://stackoverflow.com/questions/592620
   command -v "$1" >/dev/null 2>&1
 }
 

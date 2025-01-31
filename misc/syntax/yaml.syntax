@@ -2,7 +2,7 @@
 
 # Reference:
 #   https://en.wikipedia.org/wiki/YAML
-#   http://yaml.org/refcard.html
+#   https://yaml.org/refcard.html
 
 context default
     spellcheck

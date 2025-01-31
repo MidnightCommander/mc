@@ -57,10 +57,10 @@ echo QUIT)| $KERMIT -B >/dev/null
 #    Object_name Object_size_bytes Object_type Object_CRC
 #    ...
 #
-# [1] http://newarea48.tripod.com/kermit.html
-# [2] http://www.hpmuseum.org/forum/thread-4684.html
+# [1] https://newarea48.tripod.com/kermit.html
+# [2] https://www.hpmuseum.org/forum/thread-4684.html
 # [3] https://groups.google.com/d/msg/comp.sys.hp48/bYTCu9K3k20/YWQfF--W3EEJ
-# [4] http://www.columbia.edu/kermit/hp48.html (also has a link to the HP's user manual).
+# [4] https://www.columbia.edu/kermit/hp48.html (also has a link to the HP's user manual).
 #
 hp48_parser()
 {

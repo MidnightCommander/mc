@@ -45,7 +45,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /** \file subshell.c
@@ -1299,7 +1299,7 @@ subshell_name_quote (const char *s)
         quote_cmd_end = "')";
     }
     /* TODO: When BusyBox printf is fixed, get rid of this "else if", see
-       http://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
+       https://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
     /* else if (subshell_type == ASH_BUSYBOX)
        {
        quote_cmd_start = "\"`echo -en '";

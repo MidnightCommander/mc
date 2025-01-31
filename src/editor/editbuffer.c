@@ -20,7 +20,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /** \file
@@ -72,8 +72,8 @@
  *
  * This is called a "gap buffer".
  * See also:
- * http://en.wikipedia.org/wiki/Gap_buffer
- * http://stackoverflow.com/questions/4199694/data-structure-for-text-editor
+ * https://en.wikipedia.org/wiki/Gap_buffer
+ * https://stackoverflow.com/questions/4199694/data-structure-for-text-editor
  */
 
 /*** global variables ****************************************************************************/

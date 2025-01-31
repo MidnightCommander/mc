@@ -18,8 +18,8 @@ Tips and tricks
 
     $ export CK_FORK=no
 
-[1]: http://libcheck.github.io/check/
+[1]: https://libcheck.github.io/check/
 [2]: Your package manager likely has it.
 [3]: Actually, some tests (like src/vfs/extfs/helpers-list) don't use
      this framework and will compile just fine. But that's the exception.
-[4]: http://stackoverflow.com/questions/1649814/debugging-unit-test-in-c-using-check
+[4]: https://stackoverflow.com/questions/1649814/debugging-unit-test-in-c-using-check

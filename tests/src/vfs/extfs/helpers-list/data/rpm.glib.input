@@ -36,7 +36,7 @@ as an event loop, threads, dynamic loading, and an object system.',
   'PROVIDES' => 'glib2',
   'EXCLUSIVEOS' => '(none)',
   'NVRA' => 'glib2-2.46.2-4.el7.i686',
-  'URL' => 'http://www.gtk.org',
+  'URL' => 'https://www.gtk.org',
   'DISTRIBUTION' => '(none)',
   'OBSOLETENEVRS' => '(none)',
   'O' => '(none)',
@@ -184,9 +184,9 @@ Source RPM  : glib2-2.46.2-4.el7.src.rpm
 Build Date  : Fri Nov 11 23:01:44 2016
 Build Host  : c1bm.rdu2.centos.org
 Relocations : (not relocatable)
-Packager    : CentOS BuildSystem <http://bugs.centos.org>
+Packager    : CentOS BuildSystem
 Vendor      : CentOS
-URL         : http://www.gtk.org
+URL         : https://www.gtk.org
 Summary     : A library of handy utility functions
 Description :
 GLib is the low-level core library that forms the basis for projects
@@ -242,7 +242,7 @@ gio-querymodules-32 /usr/lib/gio/modules',
   'ARCHIVESIZE' => '11168196',
   'RSAHEADER' => '8902150305005831e31824c6a8a7f4a80eb50108cdf90ffc09656e816376ef5f32f146d136999f958f3e1338f21e0cac90bac97795d92c29301478a97f8b72afee0505896fa7c31195612542ba972da405323e3ec910ecc45350459220f39f2437a9ccbc3f9052b3d042d0e4a6d687f9be827b9c766d7fc680b2d99aebafe5134a54e64f0452be09b5592360d940ed3f3f3b14de7b0b124f510cfbdbd118e1638ee280edcbf6a9f916925f1b0bda0980935aedab1f9bfc342dceae437fa14736cdff2fe330ad37ab2719f6a3de84aaf3982a575a6f4980bc8a8e10a7ba51f53ed967a6c99638565147bbb0b2427c176ffbb8be5774b45f79388ff1407e6976608c3592784b971b791f0eca73a8a2ddafa70f656e3e565c9523aa1f4e78a56acdf39a91ebd90a481c0f02186f4bca965ecf889d075a87922830ed2c701d39ce627c362b222ed153c07b532a875744e1c54e9245c1044cf93520b208384d15413aba6b3425c457781862efd215a24c0c37c32c3ab29af785adfe418d5e86af53662163a9fed16dbac3ff4704120af67e0eb584a4f8766e510e6366eb5fcce0938253962b03972eca392e61f0f979f0dd7a554273d5ca463933033d67be82c7b31bcc2ef5c477907d3734aa596aefb7988a259d48d160413590243b56850eeab96ffa76d06b86faa0b6c9fd6fe43e902669444284e1947aa652673eb58214db9d19d0447de5bd036a45e9746ab4039f4dab7c73481a1bfb5a4d',
   'FILESTATES' => '(none)',
-  'PACKAGER' => 'CentOS BuildSystem <http://bugs.centos.org>',
+  'PACKAGER' => 'CentOS BuildSystem',
   'SUMMARY' => 'A library of handy utility functions',
   'OPTFLAGS' => '-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches   -m32 -march=x86-64 -mtune=generic -mfpmath=sse -fasynchronous-unwind-tables',
   'OBSOLETENAME' => '(none)',

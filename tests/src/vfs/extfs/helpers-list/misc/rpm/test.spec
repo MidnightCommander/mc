@@ -19,7 +19,7 @@ Summary:        Testing
 Epoch:          1
 Version:        2.3
 Release:        4%{?dist}
-URL:            http://example.com
+URL:            https://example.com
 Group:          Development/System
 License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root

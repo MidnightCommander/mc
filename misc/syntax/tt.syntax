@@ -14,7 +14,7 @@ context default
 #    keyword <\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890\s"#$%&'()*+,-.=?@\\\]^_`{|}~\]> green
     spellcheck
 
-# TT directives - http://template-toolkit.org/docs/manual/Directives.html
+# TT directives - https://template-toolkit.org/docs/manual/Directives.html
 context [% %] red black
     keyword whole GET yellow
     keyword whole CALL yellow
@@ -66,7 +66,7 @@ context [% %] red black
     keyword whole NOT white
     keyword | white
 
-# TT VMethods - http://template-toolkit.org/docs/manual/VMethods.html
+# TT VMethods - https://template-toolkit.org/docs/manual/VMethods.html
     keyword .defined brown
     keyword .length brown
     keyword .repeat brown

@@ -34,7 +34,7 @@ Build Host  : mooffie-desktop
 Relocations : (not relocatable)
 Packager    : Test Packager
 Vendor      : Test Vendor
-URL         : http://example.com
+URL         : https://example.com
 Summary     : Testing
 Description :
 Multi-line description field
@@ -155,7 +155,7 @@ with "double", \'single quotes\', and $weird | \\characters i\\n = i\\\\t, empty
   'LONGARCHIVESIZE' => '264',
   'ENHANCES' => '(none)',
   'VENDOR' => 'Test Vendor',
-  'URL' => 'http://example.com',
+  'URL' => 'https://example.com',
   'RSAHEADER' => '(none)',
   'VCS' => '(none)',
   'POSTTRANSPROG' => '/bin/sh',

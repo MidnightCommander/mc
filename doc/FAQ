@@ -508,7 +508,7 @@ f2 Keyboard
    Thomas Dickey maintains his more advanced version of xterm at
    ftp://dickey.his.com/xterm/
 
-   rxvt has its own site http://www.rxvt.net/ - get the latest version
+   rxvt has its own site https://rxvt.sourceforge.net - get the latest version
    there.
 
 4.8 I got colors working with MC but the other programs don't work at
@@ -632,7 +632,7 @@ just a clear, screen is blanked.
        other words, sends multiple 'smcup' without an 'rmcup'). This should
        fix debian #558724
 
-  (see http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=558724)
+  (see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=558724)
 
   or do not rewrite TERM (mustbe TERM=screen) andrun mc as follow:
 
@@ -710,7 +710,7 @@ indenting increases with each line!
 
    Yes if you submit the patch.  There are no legal problems with it
    because it's licensed under GPL now.  The homepage of Colorer is
-   http://colorer.sourceforge.net/
+   https://colorer.sourceforge.net/
 
 
 9 Other common problems
@@ -883,12 +883,12 @@ an answer?
    mc-commits@googlegroups.com
           mailing list only for applyed commits into master/stable branches
           To subscribe visit
-          http://groups.google.com/group/mc-commits/subscribe
+          https://groups.google.com/group/mc-commits/subscribe
 
    mc-bugs@googlegroups.com
           Mailing list only for tickets and comments (use it as RSS :) )
           To subscribe visit
-          http://groups.google.com/group/mc-bugs/subscribe
+          https://groups.google.com/group/mc-bugs/subscribe
 
 11.3 Where should I look on the World Wide Web for MC stuff?
 

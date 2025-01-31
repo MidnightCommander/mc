@@ -21,7 +21,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /** \file color-slang.c
@@ -235,7 +235,7 @@ tty_use_truecolors (GError **error)
 
     /* True color is supported since slang-2.3.1 on 64-bit machines,
        and expected to be supported from slang-3 on 32-bit machines:
-       http://lists.jedsoft.org/lists/slang-users/2016/0000014.html.
+       https://lists.jedsoft.org/lists/slang-users/2016/0000014.html
        Check for sizeof (long) being 8, exactly as slang does. */
     if (SLang_Version < 20301 || (sizeof (long) != 8 && SLang_Version < 30000))
     {

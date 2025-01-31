@@ -5,7 +5,7 @@
 # (C) 1996 The Free Software Foundation.
 #
 # Package of a new italian distribution: Bad Penguin
-# http://www.badpenguin.org/
+# https://www.badpenguin.org
 
 # override any locale for dates
 unset LC_ALL

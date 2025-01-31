@@ -19,7 +19,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /** \file
@@ -28,7 +28,7 @@
  *  \date 2015
  *
  *  Parser of ftp long file list (reply to "LIST -la" command).
- *  Borrowed from lftp project (http://http://lftp.yar.ru/).
+ *  Borrowed from lftp project (https://lftp.yar.ru).
  *  Author of original lftp code: Alexander V. Lukyanov (lav@yars.free.net)
  */
 

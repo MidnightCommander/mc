@@ -25,7 +25,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /** \file lib/util.c
@@ -787,7 +787,7 @@ strip_ctrl_codes (char *s)
             {
                 /*
                  * Skip xterm's OSC (Operating System Command)
-                 * http://www.xfree86.org/current/ctlseqs.html
+                 * https://www.xfree86.org/current/ctlseqs.html
                  * OSC P s ; P t ST
                  * OSC P s ; P t BEL
                  */

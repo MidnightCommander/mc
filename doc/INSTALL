@@ -32,7 +32,7 @@ Build requirements for GNU Midnight Commander
 - libssh2 >= 1.2.8 (required only for sftp vfs)
   - https://libssh2.org
 - libaspell (spell checking support in the internal editor)
-  - http://aspell.net
+  - https://github.com/GNUAspell/aspell
 - ext2fs >= 1.42.4 (support for ext{2,3,4}fs extended attributes)
   - https://e2fsprogs.sourceforge.net
 

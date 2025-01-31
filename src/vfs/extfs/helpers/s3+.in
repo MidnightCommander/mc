@@ -14,7 +14,7 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #
 # Notes:
@@ -27,7 +27,7 @@
 #
 #
 # Installation:
-#  Make sure that boto <http://code.google.com/p/boto> (python-boto in Debian) is installed.
+#  Make sure that boto <https://github.com/boto/boto> (python-boto in Debian) is installed.
 #  Preferably pytz (package python-tz in Debian) should be installed as well.
 #
 #  Save as executable file /usr/libexec/mc/extfs/s3 (or wherever your mc expects to find extfs modules)
@@ -299,7 +299,6 @@ if cmd == 'list':
 
 	# Find timezone
 	# (yes, timeZONE as in _geographic zone_ not EST/CEST or whatever crap we get from time.tzname)
-	# http://regebro.wordpress.com/2008/05/10/python-and-time-zones-part-2-the-beast-returns/
 	def getGuessedTimezone():
 		# 1. check TZ env. var
 		try:

@@ -255,7 +255,7 @@ Version 4.8.28
 - Editor
 
     * Add syntax highlighting:
-        - Ngspice/SPICE (http://ngspice.sourceforge.net/) (#4316, #4319)
+        - Ngspice/SPICE (https://ngspice.sourceforge.net/) (#4316, #4319)
         - DOT/Graphviz (https://graphviz.org/doc/info/lang.html) (#4322)
 
 - Viewer
@@ -1635,7 +1635,7 @@ Version 4.8.0-pre1
 
 WARNING: Configuration files was moved from your $HOME/.mc directory into
 XDG_CONFIG_* directories to respect FDO standard
-(http://standards.freedesktop.org/basedir-spec/basedir-spec-0.7.html).
+(https://specifications.freedesktop.org/basedir-spec/0.7/).
 To get more information, see ticket #1851.
 
 WARNING: VFS paths now handled as vfsprefix1://vfsdata/vfsprefix2://vfsdata
@@ -1724,7 +1724,7 @@ Be aware.
         - mc-4.6 (#2524)
     * Updated skins:
     * Nice dark (#1791)
-    * Added support for check unit test framework (http://check.sourceforge.net) (as part of #2501)
+    * Added support for check unit test framework (https://check.sourceforge.net) (as part of #2501)
     * Added -F/--datadir-info option to show extended information about used data dirs (#2495)
     * Added --configure-options to easy update & reconfigure existing mc (#2495)
     * Language-specific man pages and hint and help files are not installed

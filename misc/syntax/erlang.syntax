@@ -3,7 +3,7 @@
 # Erlang programming language syntax highlighting
 # for CoolEdit
 #
-# Homepage of Erlang: http://www.erlang.org
+# Homepage of Erlang: https://www.erlang.org
 #
 # Author: Witold Baryluk < baryluk at smp if uj edu pl >
 # Date: 07-07-2009, 08-02-2009
@@ -11,14 +11,9 @@
 # -------------------------------
 #
 # Useful links:
-# http://www.erlang.org/doc/doc-5.4.13/doc/reference_manual/part_frame.html
-# http://www.erlang.org/doc/reference_manual/data_types.html#2.14
-# http://www.regular-expressions.info/reference.html
-# gedit: http://martin.ankerl.com/files/erlang.lang
-# joe: http://www.straatinvestments.com/~tlack/erlang/joe-editor/erlang.jsf
-# geshi: http://www.kreisquadratur.de/blog/?p=305
-# vim: http://erlang.org/pipermail/erlang-questions/2006-July/021362.html
-# kate: http://bugsfiles.kde.org/attachment.cgi?id=21155
+# https://www.erlang.org/doc/system/data_types.html#2.14
+# https://www.regular-expressions.info/reference.html
+# kate: https://bugsfiles.kde.org/attachment.cgi?id=21155
 #
 # entries for Syntax file:
 #

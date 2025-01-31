@@ -32,7 +32,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
    ------------------------------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@
    - A "paragraph" is the text between two adjacent newline characters. A "line" or "row" is a
    visual row on the screen. In wrap mode, the viewer formats a paragraph into one or more lines.
 
-   - The Unicode glossary <http://www.unicode.org/glossary/> doesn't seem to have a notion of "base
+   - The Unicode glossary <https://www.unicode.org/glossary/> doesn't seem to have a notion of "base
    character followed by zero or more combining characters". The closest matches are "Combining
    Character Sequence" meaning a base character followed by one or more combining characters, or
    "Grapheme" which seems to exclude non-printable characters such as newline. In this file,

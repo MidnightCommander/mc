@@ -11,7 +11,7 @@ AC_DEFUN([mc_UNIT_TESTS],[
 
     AC_ARG_ENABLE(
         [tests],
-        AS_HELP_STRING([--enable-tests], [Enable unit tests (see http://libcheck.github.io/check/) @<:@auto@:>@])
+        AS_HELP_STRING([--enable-tests], [Enable unit tests (see https://libcheck.github.io/check/) @<:@auto@:>@])
     )
 
     dnl 'tests_msg' holds the human-readable message to show in configure's summary text.

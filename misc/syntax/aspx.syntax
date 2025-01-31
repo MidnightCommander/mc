@@ -1,7 +1,7 @@
 # ASP.NET syntax highlighting
 #
 # Author: Juan C. Olivares <juancri@juancri.com>
-# http://www.juancri.com
+# https://www.juancri.com
 
 context default
     keyword "*" lightgray

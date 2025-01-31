@@ -1,7 +1,6 @@
 # XML syntax highlighting
 #
 # Author: Petr Kozelka <pkozelka@email.cz>
-# http://kozelka.hyperlink.cz
 
 context default
     keyword &*; white cyan

@@ -607,8 +607,7 @@ str_replace (char *s, char from, char to)
  *   AND
  *  * dest and str are pointers to one object (as Roland Illig pointed).
  *
- * We can't use str*cpy funs here:
- * http://kerneltrap.org/mailarchive/openbsd-misc/2008/5/27/1951294
+ * We can't use str*cpy funs here.
  *
  * @param dest pointer to string
  * @param src pointer to string

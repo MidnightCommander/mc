@@ -6,7 +6,7 @@
 # It addresses the following problem:
 #
 #    "Can htags create permanent addresses?"
-#    http://lists.gnu.org/archive/html/help-global/2015-11/msg00002.html
+#    https://lists.gnu.org/archive/html/help-global/2015-11/msg00002.html
 #
 
 require 'fileutils'

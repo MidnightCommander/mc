@@ -7,8 +7,8 @@
 # full ARJ rather than UNARJ. Open-source ARJ v 3.10 for Unix platforms can
 # be obtained here:
 #
-# - http://www.sourceforge.net/projects/arj/
-# - http://arj.sourceforge.net/
+# - https://www.sourceforge.net/projects/arj/
+# - https://arj.sourceforge.net/
 
 
 ARJ="arj -+ -ja1"
