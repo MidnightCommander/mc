@@ -342,6 +342,9 @@ include kotlin.syntax
 file ..\*\\.swift$ Swift\sProgram
 include swift.syntax
 
+file ..\*\\.ttl$ Turtle/RDF\sFile
+include turtle.syntax
+
 file ..\*\\.action$ Privoxy\sFile
 include privoxy.syntax
 

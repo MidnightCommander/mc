@@ -1,0 +1,120 @@
+#
+# Turtle syntax highlighting
+# for MC Editor/CoolEdit
+#
+# Copyright 2020, Jonas Smedegaard <dr@jones.dk>
+#
+# This program is free software:
+# you can redistribute it and/or modify it
+# under the terms of the GNU General Public License
+# as published by the Free Software Foundation,
+# either version 3 of the License,
+# or (at your option) any later version.
+#
+# 2020-04-12  Jonas Smedegaard <dr@jones.dk>
+#  * Initial public release.
+#
+# Reference:
+#   https://www.w3.org/TeamSubmission/turtle/
+
+context default lightgray
+    spellcheck
+
+# declarations
+    keyword whole @base magenta
+    keyword whole @prefix magenta
+
+    keyword whole a yellow
+
+    keyword ^^ brightmagenta
+
+# Collection
+    keyword ( brightmagenta
+    keyword ) brightmagenta
+
+# Shorthand prefix
+    keyword wholeleft \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[\abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-\]: cyan
+    keyword wholeleft : cyan
+
+# Anonymous node
+    keyword wholeleft _: cyan
+    keyword [ cyan
+    keyword ] cyan
+
+# Decimal integers
+    keyword whole \{0123456789\}\[0123456789\] yellow
+    keyword whole \{-+\}\{0123456789\}\[0123456789\] yellow
+
+# Decimal floating point arbitrary precision number
+    keyword whole \{0123456789\}.\[0123456789\] yellow
+    keyword whole .\{0123456789\}\[0123456789\] yellow
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\] yellow
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\] yellow
+
+# Decimal floating point double/fixed precision number
+    keyword whole \{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole .\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole .\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
+
+# Boolean
+    keyword whole true yellow
+    keyword whole false yellow
+
+# Language
+    keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789-\]\[abcdefghijklmnopqrstuvwxyz0123456789\] brightmagenta
+    keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789\] brightmagenta
+
+# Punctuation
+    keyword , white
+    keyword ; white
+#    keyword . black white
+    keyword . white brightmagenta
+
+# URL
+#    keyword whole <*> brightred
+context < > brightred
+
+# TODO: enable when context ending at newline doesn't ruin next context
+# syntax violation
+#    keyword  +\n black red
+
+# String escape
+    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
+    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
+    keyword \\\{tnr>\\} brightgreen
+
+# Single-line literals
+context exclusive " " green
+    spellcheck
+
+# TODO: enable when context ending at newline doesn't ruin next context
+# syntax violation
+#    keyword +\n black red
+
+# String escape
+    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
+    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
+    keyword \\\{tnr"\\} brightgreen
+
+# Multi-line literals
+context """ """ green
+    spellcheck
+
+# String escape
+    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
+    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
+    keyword \\\{tnr"\\} brightgreen
+
+# Comment
+context linestart # \n brown
+    spellcheck
+
+# Ideally we would have defined comments with "context linestart \[\s\]# ...",
+# but contexts can't start with a character class. So we define comments twice.
+context linestart \s\[\s\]# \n brown
+    spellcheck
