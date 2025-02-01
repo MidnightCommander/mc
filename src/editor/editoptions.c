@@ -194,8 +194,12 @@ edit_options_dialog (WDialog *h)
         WRect r = { -1, -1, 0, 74 };
 
         quick_dialog_t qdlg = {
-            r, N_("Editor options"), "[Editor options]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Editor options"),
+            .help = "[Editor options]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         if (quick_dialog (&qdlg) == B_CANCEL)

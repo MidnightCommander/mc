@@ -1013,8 +1013,12 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     WRect r = { -1, -1, 0, 64 };
 
     quick_dialog_t qdlg = {
-        r, header, help,
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = header,
+        .help = help,
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     return quick_dialog (&qdlg);
@@ -1071,8 +1075,12 @@ add_new_group_input (const char *header, const char *label, char **result)
     WRect r = { -1, -1, 0, 64 };
 
     quick_dialog_t qdlg = {
-        r, header, "[Hotlist]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = header,
+        .help = "[Hotlist]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     int ret;

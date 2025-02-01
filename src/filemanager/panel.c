@@ -2686,8 +2686,12 @@ panel_select_unselect_files_dialog (select_flags_t *flags, const char *title,
     WRect r = { -1, -1, 0, 50 };
 
     quick_dialog_t qdlg = {
-        r, title, help_section,
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = title,
+        .help = help_section,
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     if (quick_dialog (&qdlg) == B_CANCEL)

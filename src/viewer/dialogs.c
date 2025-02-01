@@ -101,8 +101,12 @@ mcview_dialog_search (WView *view)
         WRect r = { -1, -1, 0, 58 };
 
         quick_dialog_t qdlg = {
-            r, N_("Search"), "[Input Line Keys]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Search"),
+            .help = "[Input Line Keys]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         qd_result = quick_dialog (&qdlg);
@@ -186,8 +190,12 @@ mcview_dialog_goto (WView *view, off_t *offset)
         WRect r = { -1, -1, 0, 40 };
 
         quick_dialog_t qdlg = {
-            r, N_("Goto"), "[Input Line Keys]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Goto"),
+            .help = "[Input Line Keys]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         // run dialog

@@ -1447,8 +1447,12 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         WRect r = { -1, -1, 0, fmd_xlen };
 
         quick_dialog_t qdlg = {
-            r, op_names[ctx->operation], "[Mask Copy/Rename]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = op_names[ctx->operation],
+            .help = "[Mask Copy/Rename]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         while (TRUE)

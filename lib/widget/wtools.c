@@ -184,8 +184,12 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
         WRect r = { -1, -1, 0, COLS / 2 };
 
         quick_dialog_t qdlg = {
-            r, header, help,
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = header,
+            .help = help,
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         ret = quick_dialog (&qdlg);

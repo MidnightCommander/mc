@@ -122,8 +122,12 @@ edit_dialog_search_show (WEdit *edit)
         WRect r = { -1, -1, 0, 58 };
 
         quick_dialog_t qdlg = {
-            r, N_("Search"), "[Input Line Keys]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Search"),
+            .help = "[Input Line Keys]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         dialog_result = quick_dialog (&qdlg);
@@ -203,8 +207,12 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
         WRect r = { -1, -1, 0, 58 };
 
         quick_dialog_t qdlg = {
-            r, N_("Replace"), "[Input Line Keys]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Replace"),
+            .help = "[Input Line Keys]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         if (quick_dialog (&qdlg) != B_CANCEL)
@@ -268,8 +276,12 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
         WRect r = { ypos, xpos, 0, -1 };
 
         quick_dialog_t qdlg = {
-            r, N_("Confirm replace"), NULL,
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Confirm replace"),
+            .help = NULL,
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         retval = quick_dialog (&qdlg);

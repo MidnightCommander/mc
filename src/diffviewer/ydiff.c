@@ -2372,8 +2372,12 @@ dview_diff_options (WDiff *dview)
     WRect r = { -1, -1, 0, 56 };
 
     quick_dialog_t qdlg = {
-        r, N_("Diff Options"), "[Diff Options]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Diff Options"),
+        .help = "[Diff Options]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     if (quick_dialog (&qdlg) != B_CANCEL)

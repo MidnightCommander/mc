@@ -398,8 +398,12 @@ edit_get_save_file_as (WEdit *edit)
     WRect r = { -1, -1, 0, 64 };
 
     quick_dialog_t qdlg = {
-        r, N_("Save As"), "[Save File As]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Save As"),
+        .help = "[Save File As]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     if (quick_dialog (&qdlg) != B_CANCEL)
@@ -867,8 +871,12 @@ edit_save_mode_cmd (void)
         WRect r = { -1, -1, 0, 38 };
 
         quick_dialog_t qdlg = {
-            r, N_("Edit Save Mode"), "[Edit Save Mode]",
-            quick_widgets, edit_save_mode_callback, NULL
+            .rect = r,
+            .title = N_ ("Edit Save Mode"),
+            .help = "[Edit Save Mode]",
+            .widgets = quick_widgets,
+            .callback = edit_save_mode_callback,
+            .mouse_callback = NULL
         };
 
         if (quick_dialog (&qdlg) != B_CANCEL)
@@ -1916,8 +1924,12 @@ edit_mail_dialog (WEdit *edit)
     WRect r = { -1, -1, 0, 50 };
 
     quick_dialog_t qdlg = {
-        r, N_("Mail"), "[Input Line Keys]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Mail"),
+        .help = "[Input Line Keys]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     if (quick_dialog (&qdlg) != B_CANCEL)

@@ -594,8 +594,12 @@ configure_box (void)
         WRect r = { -1, -1, 0, 60 };
 
         quick_dialog_t qdlg = {
-            r, N_("Configure options"), "[Configuration]",
-            quick_widgets, configure_callback, NULL
+            .rect = r,
+            .title = N_ ("Configure options"),
+            .help = "[Configuration]",
+            .widgets = quick_widgets,
+            .callback = configure_callback,
+            .mouse_callback = NULL
         };
 
         g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
@@ -653,8 +657,12 @@ appearance_box (void)
         WRect r = { -1, -1, 0, 54 };
 
         quick_dialog_t qdlg = {
-            r, N_("Appearance"), "[Appearance]",
-            quick_widgets, appearance_box_callback, NULL
+            .rect = r,
+            .title = N_ ("Appearance"),
+            .help = "[Appearance]",
+            .widgets = quick_widgets,
+            .callback = appearance_box_callback,
+            .mouse_callback = NULL
         };
 
         if (quick_dialog (&qdlg) == B_ENTER)
@@ -733,8 +741,12 @@ panel_options_box (void)
         WRect r = { -1, -1, 0, 60 };
 
         quick_dialog_t qdlg = {
-            r, N_("Panel options"), "[Panel options]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Panel options"),
+            .help = "[Panel options]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         if (quick_dialog (&qdlg) != B_ENTER)
@@ -810,8 +822,12 @@ panel_listing_box (WPanel *panel, int num, char **userp, char **minip, gboolean 
         WRect r = { -1, -1, 0, 48 };
 
         quick_dialog_t qdlg = {
-            r, N_("Listing format"), "[Listing Format...]",
-            quick_widgets, panel_listing_callback, NULL
+            .rect = r,
+            .title = N_ ("Listing format"),
+            .help = "[Listing Format...]",
+            .widgets = quick_widgets,
+            .callback = panel_listing_callback,
+            .mouse_callback = NULL
         };
 
         user_mini_status = panel->user_mini_status;
@@ -901,8 +917,12 @@ sort_box (dir_sort_options_t *op, const panel_field_t *sort_field)
         WRect r = { -1, -1, 0, 40 };
 
         quick_dialog_t qdlg = {
-            r, N_("Sort order"), "[Sort Order...]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Sort order"),
+            .help = "[Sort Order...]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         if (quick_dialog (&qdlg) != B_CANCEL)
@@ -939,8 +959,12 @@ confirm_box (void)
     WRect r = { -1, -1, 0, 46 };
 
     quick_dialog_t qdlg = {
-        r, N_("Confirmation"), "[Confirmation]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Confirmation"),
+        .help = "[Confirmation]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     (void) quick_dialog (&qdlg);
@@ -973,8 +997,12 @@ display_bits_box (void)
     WRect r = { -1, -1, 0, 46 };
 
     quick_dialog_t qdlg = {
-        r, _("Display bits"), "[Display bits]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Display bits"),
+        .help = "[Display bits]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     if (mc_global.full_eight_bits)
@@ -1032,8 +1060,12 @@ display_bits_box (void)
         WRect r = { -1, -1, 0, 46 };
 
         quick_dialog_t qdlg = {
-            r, N_("Display bits"), "[Display bits]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Display bits"),
+            .help = "[Display bits]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL
         };
 
         new_meta = !use_8th_bit_as_meta;
@@ -1160,14 +1192,16 @@ configure_vfs_box (void)
         WRect r = { -1, -1, 0, 56 };
 
         quick_dialog_t qdlg = {
-            r, N_("Virtual File System Setting"), "[Virtual FS]",
-            quick_widgets,
+            .rect = r,
+            .title = N_ ("Virtual File System Setting"),
+            .help = "[Virtual FS]",
+            .widgets = quick_widgets,
 #ifdef ENABLE_VFS_FTP
-            confvfs_callback,
+            .callback = confvfs_callback,
 #else
-            NULL,
+            .callback = NULL,
 #endif
-            NULL,
+            .mouse_callback = NULL,
         };
 
 #ifdef ENABLE_VFS_FTP
@@ -1223,8 +1257,12 @@ cd_box (const WPanel *panel)
     WRect r = { w->rect.y + w->rect.lines - 6, w->rect.x, 0, w->rect.cols };
 
     quick_dialog_t qdlg = {
-        r, N_("Quick cd"), "[Quick cd]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Quick cd"),
+        .help = "[Quick cd]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     return (quick_dialog (&qdlg) != B_CANCEL) ? my_str : NULL;
@@ -1251,8 +1289,12 @@ symlink_box (const vfs_path_t *existing_vpath, const vfs_path_t *new_vpath,
     WRect r = { -1, -1, 0, 64 };
 
     quick_dialog_t qdlg = {
-        r, N_("Symbolic link"), "[File Menu]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Symbolic link"),
+        .help = "[File Menu]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL
     };
 
     if (quick_dialog (&qdlg) == B_CANCEL)
