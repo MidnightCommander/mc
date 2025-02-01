@@ -1195,13 +1195,14 @@ init_subshell_precmd (char *precmd, size_t buff_size)
                     " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
                     " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING
                     "\":\"echo $BASH_VERSINFO:$READLINE_POINT >&%d\"'\n"
+                    " PS1=${PS1:-'\\u@\\h:\\w\\$ \'}\n"
                     " if test ${BASH_VERSION%%%%.*} -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> /dev/null; then\n"
                     "   eval \"PROMPT_COMMAND+=( 'pwd>&%d;kill -STOP $$' )\"\n"
                     " else\n"
                     "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
-                    " fi\n"
-                    "PS1='\\u@\\h:\\w\\$ '\n", command_buffer_pipe[WRITE],
-                    command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
+                    " fi\n",
+                    command_buffer_pipe[WRITE], command_buffer_pipe[WRITE],
+                    subshell_pipe[WRITE], subshell_pipe[WRITE]);
         break;
 
     case SHELL_ASH_BUSYBOX:
@@ -1226,9 +1227,9 @@ init_subshell_precmd (char *precmd, size_t buff_size)
     case SHELL_KSH:
         /* pdksh based variants support \x placeholders but not any "precmd" functionality. */
         g_snprintf (precmd, buff_size,
-                    " PS1='$(pwd>&%d; kill -STOP $$)'"
-                    "\"${PS1:-\\u@\\h:\\w\\$ }\"\n", subshell_pipe[WRITE]);
-        break;
+                    " PS1='$(pwd>&%d; kill -STOP $$)'\"${PS1:-\\u@\\h:\\w\\$ }\"\n",
+                    subshell_pipe[WRITE]);
+       break;
 
     case SHELL_ZSH:
         g_snprintf (precmd, buff_size,
@@ -1238,9 +1239,10 @@ init_subshell_precmd (char *precmd, size_t buff_size)
                     " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
                     " zle -N mc_print_cursor_position\n"
                     " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position\n"
-                    " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
-                    "PS1='%%n@%%m:%%~%%# '\n",
-                    command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
+                    " PS1=${PS1:-'%%n@%%m:%%~%%# '}\n"
+                    " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n",
+                    command_buffer_pipe[WRITE], command_buffer_pipe[WRITE],
+                    subshell_pipe[WRITE]);
         break;
 
     case SHELL_TCSH:
@@ -1275,11 +1277,11 @@ init_subshell_precmd (char *precmd, size_t buff_size)
  * Use following technique:
  *
  * printf(1) with format string containing a single conversion specifier,
- * "b", and an argument which contains a copy of the string passed to 
+ * "b", and an argument which contains a copy of the string passed to
  * subshell_name_quote() with all characters, except digits and letters,
  * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
  * numeric value of the character converted to octal number.
- * 
+ *
  *   cd "`printf '%b' 'ABC\0nnnDEF\0nnnXYZ'`"
  *
  * N.B.: Use single quotes for conversion specifier to work around
