@@ -288,6 +288,9 @@ include PKGBUILD.syntax
 file PKGBUILD$ Arch\spackage\sbuild\sscript
 include PKGBUILD.syntax
 
+file \\.?[Mm]uttrc$ Mutt\sconfig\sfile
+include muttrc.syntax
+
 file \\.install$ Arch\spackage\sinstall\sscript
 include sh.syntax
 

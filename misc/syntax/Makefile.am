@@ -59,6 +59,7 @@ SYNTAXFILES =			\
 	markdown.syntax		\
 	ml.syntax		\
 	meson.syntax		\
+	muttrc.syntax		\
 	named.syntax		\
 	nemerle.syntax		\
 	nroff.syntax		\
