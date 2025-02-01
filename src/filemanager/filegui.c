@@ -1415,6 +1415,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         struct stat buf;
 
         quick_widget_t quick_widgets[] = {
+            // clang-format off
             QUICK_LABELED_INPUT (fmd_buf, input_label_above, easy_patterns ? "*" : "^(.*)$",
                                  "input-def", &source_mask, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_FILENAMES),
@@ -1440,6 +1441,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
 #endif // ENABLE_BACKGROUND
                 QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END
+            // clang-format on
         };
 
         WRect r = { -1, -1, 0, fmd_xlen };

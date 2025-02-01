@@ -996,16 +996,18 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
                      const char *help, const char *def_text, char **r1, char **r2)
 {
     quick_widget_t quick_widgets[] = {
+        // clang-format off
         QUICK_LABELED_INPUT (text1, input_label_above, def_text, "input-lbl", r1, NULL,
                              FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_SEPARATOR (FALSE),
         QUICK_LABELED_INPUT (text2, input_label_above, def_text, "input-lbl", r2, NULL,
                              FALSE, FALSE, INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD),
         QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
-            QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
-            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Append"), B_APPEND, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Insert"), B_INSERT, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
         QUICK_END
+        // clang-format on
     };
 
     WRect r = { -1, -1, 0, 64 };
@@ -1055,13 +1057,15 @@ static int
 add_new_group_input (const char *header, const char *label, char **result)
 {
     quick_widget_t quick_widgets[] = {
+        // clang-format off
         QUICK_LABELED_INPUT (label, input_label_above, "", "input", result, NULL,
                              FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
-            QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
-            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Append"), B_APPEND, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Insert"), B_INSERT, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
         QUICK_END
+        // clang-format on
     };
 
     WRect r = { -1, -1, 0, 64 };

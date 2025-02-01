@@ -77,23 +77,25 @@ mcview_dialog_search (WView *view)
 
     {
         quick_widget_t quick_widgets[] = {
-            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                 INPUT_LAST_TEXT, MC_HISTORY_SHARED_SEARCH, &exp,
-                                 NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+            // clang-format off
+            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
+                                 MC_HISTORY_SHARED_SEARCH, &exp, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &mcview_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_("&Backwards"), &mcview_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_("&Whole words"), &mcview_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (N_ ("&Backwards"), &mcview_search_options.backwards, NULL),
+                QUICK_CHECKBOX (N_ ("&Whole words"), &mcview_search_options.whole_words, NULL),
 #ifdef HAVE_CHARSET
-                QUICK_CHECKBOX (N_("&All charsets"), &mcview_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (N_ ("&All charsets"), &mcview_search_options.all_codepages, NULL),
 #endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
+            // clang-format on
         };
 
         WRect r = { -1, -1, 0, 58 };

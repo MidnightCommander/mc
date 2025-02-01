@@ -2670,6 +2670,7 @@ panel_select_unselect_files_dialog (select_flags_t *flags, const char *title,
     mc_search_t *search;
 
     quick_widget_t quick_widgets[] = {
+        // clang-format off
         QUICK_INPUT (INPUT_LAST_TEXT, history_name, &reg_exp, NULL,
                      FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_START_COLUMNS,
@@ -2679,6 +2680,7 @@ panel_select_unselect_files_dialog (select_flags_t *flags, const char *title,
             QUICK_CHECKBOX (N_("&Case sensitive"), &case_sens, NULL),
         QUICK_STOP_COLUMNS,
         QUICK_END
+        // clang-format on
     };
 
     WRect r = { -1, -1, 0, 50 };

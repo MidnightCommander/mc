@@ -2352,19 +2352,21 @@ dview_diff_options (WDiff *dview)
     };
 
     quick_widget_t quick_widgets[] = {
-        QUICK_START_GROUPBOX (N_("Diff algorithm")),
+        // clang-format off
+        QUICK_START_GROUPBOX (N_ ("Diff algorithm")),
             QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
         QUICK_STOP_GROUPBOX,
-        QUICK_START_GROUPBOX (N_("Diff extra options")),
-            QUICK_CHECKBOX (N_("&Ignore case"), &dview->opt.ignore_case, NULL),
-            QUICK_CHECKBOX (N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
-            QUICK_CHECKBOX (N_("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
-            QUICK_CHECKBOX (N_("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
-            QUICK_CHECKBOX (N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
+        QUICK_START_GROUPBOX (N_ ("Diff extra options")),
+            QUICK_CHECKBOX (N_ ("&Ignore case"), &dview->opt.ignore_case, NULL),
+            QUICK_CHECKBOX (N_ ("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
+            QUICK_CHECKBOX (N_ ("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
+            QUICK_CHECKBOX (N_ ("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
+            QUICK_CHECKBOX (N_ ("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
                             NULL),
         QUICK_STOP_GROUPBOX,
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
+        // clang-format on
     };
 
     WRect r = { -1, -1, 0, 56 };
