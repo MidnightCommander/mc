@@ -7,7 +7,7 @@
    Copyright (C) 1995, 1996 Miguel de Icaza
 
    Written by:
-   Miguel de Icaza, 1995, 1996 
+   Miguel de Icaza, 1995, 1996
    Slava Zanko <slavazanko@gmail.com>, 2011
 
    This file is part of the Midnight Commander.
@@ -40,8 +40,8 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "lib/unixcompat.h"     /* makedev */
-#include "lib/widget.h"         /* message() */
+#include "lib/unixcompat.h"  // makedev
+#include "lib/widget.h"      // message()
 
 #include "utilvfs.h"
 
@@ -50,7 +50,7 @@
 /*** file scope macro definitions ****************************************************************/
 
 /* Parsing code is used by ftpfs, shell and extfs */
-#define MAXCOLS         30
+#define MAXCOLS 30
 
 /*** file scope type declarations ****************************************************************/
 
@@ -58,8 +58,8 @@
 
 /*** file scope variables ************************************************************************/
 
-static char *columns[MAXCOLS];  /* Points to the string in column n */
-static int column_ptr[MAXCOLS]; /* Index from 0 to the starting positions of the columns */
+static char *columns[MAXCOLS];   // Points to the string in column n
+static int column_ptr[MAXCOLS];  // Index from 0 to the starting positions of the columns
 static size_t vfs_parse_ls_final_num_spaces = 0;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -132,9 +132,9 @@ is_localized_month (const char *month)
     if (month == NULL)
         return FALSE;
 
-    for (i = 0;
-         i < 3 && *month != '\0' && !isdigit ((unsigned char) *month)
-         && !iscntrl ((unsigned char) *month) && !ispunct ((unsigned char) *month); i++, month++)
+    for (i = 0; i < 3 && *month != '\0' && !isdigit ((unsigned char) *month)
+         && !iscntrl ((unsigned char) *month) && !ispunct ((unsigned char) *month);
+         i++, month++)
         ;
 
     return (i == 3 && *month == '\0');
@@ -188,7 +188,7 @@ is_year (char *str, struct tm *tim)
     if (strlen (str) != 4)
         return FALSE;
 
-    /* cppcheck-suppress invalidscanf */
+    // cppcheck-suppress invalidscanf
     if (sscanf (str, "%ld", &year) != 1)
         return FALSE;
 
@@ -232,7 +232,7 @@ vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
         type = S_IFIFO;
         break;
 #endif
-#ifdef S_IFDOOR                 /* Solaris door */
+#ifdef S_IFDOOR  // Solaris door
     case 'D':
         type = S_IFDOOR;
         break;
@@ -244,7 +244,7 @@ vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
     case 'p':
         type = S_IFIFO;
         break;
-#ifdef S_IFNAM                  /* Special named files */
+#ifdef S_IFNAM  // Special named files
     case 'n':
         type = S_IFNAM;
         break;
@@ -253,7 +253,7 @@ vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
         type = S_IFREG;
         break;
 #endif
-    case 'm':                  /* Don't know what these are :-) */
+    case 'm':  // Don't know what these are :-)
     case '-':
     case '?':
         type = S_IFREG;
@@ -347,7 +347,7 @@ vfs_parse_fileperms (const char *s, size_t *ret_skipped, mode_t *ret_perms)
         break;
     case 'l':
         perms |= S_ISGID;
-        break;                  /* found on Solaris */
+        break;  // found on Solaris
     case 's':
         perms |= S_IXGRP | S_ISGID;
         break;
@@ -398,7 +398,7 @@ vfs_parse_fileperms (const char *s, size_t *ret_skipped, mode_t *ret_perms)
     }
 
     if (*p == '+')
-        /* ACLs on Solaris, HP-UX and others */
+        // ACLs on Solaris, HP-UX and others
         p++;
 
     if (ret_skipped != NULL)
@@ -439,7 +439,7 @@ vfs_parse_raw_filemode (const char *s, size_t *ret_skipped, mode_t *ret_mode)
     const char *p = s;
     mode_t remote_type = 0, local_type, perms = 0;
 
-    /* isoctal */
+    // isoctal
     for (; *p >= '0' && *p <= '7'; p++)
     {
         perms *= 010;
@@ -481,7 +481,7 @@ vfs_parse_raw_filemode (const char *s, size_t *ret_skipped, mode_t *ret_mode)
         local_type = S_IFLNK;
         break;
     case 0100000:
-    default:                   /* don't know what is it */
+    default:  // don't know what is it
         local_type = S_IFREG;
         break;
     }
@@ -523,11 +523,11 @@ vfs_parse_filedate (int idx, time_t *t)
     struct tm tim;
     int d[3];
     gboolean got_year = FALSE;
-    gboolean l10n = FALSE;      /* Locale's abbreviated month name */
+    gboolean l10n = FALSE;  // Locale's abbreviated month name
     time_t current_time;
     struct tm *local_time;
 
-    /* Let's setup default time values */
+    // Let's setup default time values
     current_time = time (NULL);
     local_time = localtime (&current_time);
     tim.tm_mday = local_time->tm_mday;
@@ -537,11 +537,11 @@ vfs_parse_filedate (int idx, time_t *t)
     tim.tm_hour = 0;
     tim.tm_min = 0;
     tim.tm_sec = 0;
-    tim.tm_isdst = -1;          /* Let mktime() try to guess correct dst offset */
+    tim.tm_isdst = -1;  // Let mktime() try to guess correct dst offset
 
     p = columns[idx++];
 
-    /* We eat weekday name in case of extfs */
+    // We eat weekday name in case of extfs
     if (is_week (p, &tim))
         p = columns[idx++];
 
@@ -571,33 +571,32 @@ vfs_parse_filedate (int idx, time_t *t)
        string preceding it.)
      */
 
-    /* Month name */
+    // Month name
     if (vfs_parse_month (p, &tim))
     {
-        /* And we expect, it followed by day number */
+        // And we expect, it followed by day number
         if (!is_num (idx))
-            return 0;           /* No day */
+            return 0;  // No day
 
         tim.tm_mday = (int) atol (columns[idx++]);
-
     }
     else if (is_dos_date (p))
     {
-        /* Case with MM-DD-YY or MM-DD-YYYY */
+        // Case with MM-DD-YY or MM-DD-YYYY
         p[2] = p[5] = '-';
 
-        /* cppcheck-suppress invalidscanf */
+        // cppcheck-suppress invalidscanf
         if (sscanf (p, "%2d-%2d-%d", &d[0], &d[1], &d[2]) != 3)
-            return 0;           /* sscanf failed */
+            return 0;  // sscanf failed
 
-        /* Months are zero based */
+        // Months are zero based
         if (d[0] > 0)
             d[0]--;
 
         if (d[2] > 1900)
             d[2] -= 1900;
         else if (d[2] < 70)
-            /* Y2K madness */
+            // Y2K madness
             d[2] += 100;
 
         tim.tm_mon = d[0];
@@ -606,15 +605,15 @@ vfs_parse_filedate (int idx, time_t *t)
         got_year = TRUE;
     }
     else if (is_localized_month (p) && is_num (idx++))
-        /* Locale's abbreviated month name followed by day number */
+        // Locale's abbreviated month name followed by day number
         l10n = TRUE;
     else
-        return 0;               /* unsupported format */
+        return 0;  // unsupported format
 
-    /* Here we expect to find time or year */
+    // Here we expect to find time or year
     if (!is_num (idx)
         || !(is_time (columns[idx], &tim) || (got_year = is_year (columns[idx], &tim))))
-        return 0;               /* Neither time nor date */
+        return 0;  // Neither time nor date
 
     idx++;
 
@@ -696,14 +695,14 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         goto error;
 
     p += skipped;
-    if (*p == ' ')              /* Notwell 4 */
+    if (*p == ' ')  // Notwell 4
         p++;
     if (*p == '[')
     {
         if (strlen (p) <= 8 || p[8] != ']')
             goto error;
 
-        /* Should parse here the Novell permissions :) */
+        // Should parse here the Novell permissions :)
         if (S_ISDIR (s->st_mode))
             s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IXUSR | S_IXGRP | S_IXOTH);
         else
@@ -734,7 +733,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     else
         s->st_uid = (uid_t) atol (columns[1]);
 
-    /* Mhm, the ls -lg did not produce a group field */
+    // Mhm, the ls -lg did not produce a group field
     for (idx = 3; idx <= 5; idx++)
         if (vfs_parse_month (columns[idx], NULL) || is_week (columns[idx], NULL)
             || is_dos_date (columns[idx]) || is_localized_month (columns[idx]))
@@ -743,12 +742,12 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     if (idx == 6 || (idx == 5 && !S_ISCHR (s->st_mode) && !S_ISBLK (s->st_mode)))
         goto error;
 
-    /* We don't have gid */
+    // We don't have gid
     if (idx == 3 || (idx == 4 && (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode))))
         idx2 = 2;
     else
     {
-        /* We have gid field */
+        // We have gid field
         if (is_num (2))
             s->st_gid = (gid_t) atol (columns[2]);
         else
@@ -756,25 +755,25 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         idx2 = 3;
     }
 
-    /* This is device */
+    // This is device
     if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode))
     {
         int maj, min;
 
-        /* Corner case: there is no whitespace(s) between maj & min */
+        // Corner case: there is no whitespace(s) between maj & min
         if (!is_num (idx2) && idx2 == 2)
         {
-            /* cppcheck-suppress invalidscanf */
+            // cppcheck-suppress invalidscanf
             if (!is_num (++idx2) || sscanf (columns[idx2], " %d,%d", &maj, &min) != 2)
                 goto error;
         }
         else
         {
-            /* cppcheck-suppress invalidscanf */
+            // cppcheck-suppress invalidscanf
             if (!is_num (idx2) || sscanf (columns[idx2], " %d,", &maj) != 1)
                 goto error;
 
-            /* cppcheck-suppress invalidscanf */
+            // cppcheck-suppress invalidscanf
             if (!is_num (++idx2) || sscanf (columns[idx2], " %d", &min) != 1)
                 goto error;
         }
@@ -782,11 +781,10 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         s->st_rdev = makedev (maj, min);
 #endif
         s->st_size = 0;
-
     }
     else
     {
-        /* Common file size */
+        // Common file size
         if (!is_num (idx2))
             goto error;
 
@@ -802,10 +800,10 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     if (idx == 0)
         goto error;
 
-    /* Use resulting time value */
+    // Use resulting time value
     s->st_atime = s->st_ctime = s->st_mtime;
 
-    /* s->st_dev and s->st_ino must be initialized by vfs_s_new_inode () */
+    // s->st_dev and s->st_ino must be initialized by vfs_s_new_inode ()
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     s->st_blksize = 512;
 #endif
@@ -825,7 +823,8 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
             break;
         }
 
-    if (((S_ISLNK (s->st_mode) || (num_cols == idx + 3 && s->st_nlink > 1)))    /* Maybe a hardlink? (in extfs) */
+    if (((S_ISLNK (s->st_mode)
+          || (num_cols == idx + 3 && s->st_nlink > 1)))  // Maybe a hardlink? (in extfs)
         && idx2 != 0)
     {
         if (filename != NULL)
@@ -844,7 +843,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
          */
         if (filename != NULL)
         {
-            /* filename = g_strdup (columns [idx++]); */
+            // filename = g_strdup (columns [idx++]);
             t = g_strdup (p + column_ptr[idx]);
             *filename = t;
         }
@@ -867,16 +866,16 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     g_free (p_copy);
     return TRUE;
 
-  error:
-    {
-        static int errorcount = 0;
+error:
+{
+    static int errorcount = 0;
 
-        if (++errorcount < 5)
-            message (D_ERROR, _("Cannot parse:"), "%s",
-                     (p_copy != NULL && *p_copy != '\0') ? p_copy : line);
-        else if (errorcount == 5)
-            message (D_ERROR, MSG_ERROR, _("More parsing errors will be ignored."));
-    }
+    if (++errorcount < 5)
+        message (D_ERROR, _ ("Cannot parse:"), "%s",
+                 (p_copy != NULL && *p_copy != '\0') ? p_copy : line);
+    else if (errorcount == 5)
+        message (D_ERROR, MSG_ERROR, _ ("More parsing errors will be ignored."));
+}
 
     g_free (p_copy);
     return FALSE;

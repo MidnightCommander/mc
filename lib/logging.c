@@ -43,8 +43,8 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define CONFIG_GROUP_NAME "Development"
-#define CONFIG_KEY_NAME "logging"
+#define CONFIG_GROUP_NAME    "Development"
+#define CONFIG_KEY_NAME      "logging"
 #define CONFIG_KEY_NAME_FILE "logfile"
 
 /*** file scope type declarations ****************************************************************/
@@ -113,8 +113,7 @@ get_log_filename (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-G_GNUC_PRINTF (1, 0)
+static void G_GNUC_PRINTF (1, 0)
 mc_va_log (const char *fmt, va_list args)
 {
     char *logfilename;
@@ -133,7 +132,6 @@ mc_va_log (const char *fmt, va_list args)
         }
         g_free (logfilename);
     }
-
 }
 
 /* --------------------------------------------------------------------------------------------- */

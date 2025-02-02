@@ -115,14 +115,7 @@ cppcheck-split-all: \
     cppcheck-unusedFunction \
     cppcheck-missingInclude
 
-INDENT_CMD = $(INDENT) \
-    --gnu-style \
-    --format-first-column-comments \
-    --indent-level4 \
-    --brace-indent0 \
-    --line-length100 \
-    --no-tabs \
-    --blank-lines-after-procedures
+INDENT_CMD = clang-format -i
 
 INDENT_DIRS = \
     "$(top_srcdir)/lib" \

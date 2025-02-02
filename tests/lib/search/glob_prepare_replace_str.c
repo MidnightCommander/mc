@@ -27,47 +27,45 @@
 
 #include "tests/mctest.h"
 
-#include "glob.c"               /* for testing static functions */
+#include "glob.c"  // for testing static functions
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_glob_prepare_replace_str_ds") */
-/* *INDENT-OFF* */
 static const struct test_glob_prepare_replace_str_ds
 {
     const char *input_value;
     const char *glob_str;
     const char *replace_str;
     const char *expected_result;
-} test_glob_prepare_replace_str_ds[] =
-{
-    { /* 0. */
+} test_glob_prepare_replace_str_ds[] = {
+    {
+        // 0.
         "qqwwee",
         "*ww*",
         "\\1AA\\2",
-        "qqAAee"
+        "qqAAee",
     },
-    { /* 1. */
+    {
+        // 1.
         "qqwwee",
         "*qq*",
         "\\1SS\\2",
-        "SSwwee"
+        "SSwwee",
     },
-    { /* 2. */
+    {
+        // 2.
         "qqwwee",
         "*ee*",
         "\\1RR\\2",
-        "qqwwRR"
-    }
+        "qqwwRR",
+    },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_glob_prepare_replace_str_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_glob_prepare_replace_str, test_glob_prepare_replace_str_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     mc_search_t *s;
     char *dest_str;
 
@@ -75,19 +73,17 @@ START_PARAMETRIZED_TEST (test_glob_prepare_replace_str, test_glob_prepare_replac
     s->is_case_sensitive = TRUE;
     s->search_type = MC_SEARCH_T_GLOB;
 
-    /* when */
+    // when
     mc_search_run (s, data->input_value, 0, strlen (data->input_value), NULL);
     dest_str = mc_search_prepare_replace_str2 (s, data->replace_str);
 
-    /* then */
+    // then
     mctest_assert_str_eq (dest_str, data->expected_result);
 
     g_free (dest_str);
     mc_search_free (s);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -98,10 +94,10 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_glob_prepare_replace_str,
                                    test_glob_prepare_replace_str_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

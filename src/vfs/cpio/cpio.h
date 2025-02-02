@@ -15,4 +15,4 @@ void vfs_init_cpiofs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__VFS_CPIO_H */
+#endif

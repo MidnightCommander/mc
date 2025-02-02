@@ -48,11 +48,8 @@
  * you can write
  *    char_isspace (c);
  */
-#define DECLARE_CTYPE_WRAPPER(func_name)       \
-static inline int char_##func_name(char c)     \
-{                                              \
-    return func_name((int)(unsigned char)c);   \
-}
+#define DECLARE_CTYPE_WRAPPER(func_name)                                                           \
+    static inline int char_##func_name (char c) { return func_name ((int) (unsigned char) c); }
 
 /*** file scope type declarations ****************************************************************/
 
@@ -66,7 +63,6 @@ static const char replch = '?';
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 DECLARE_CTYPE_WRAPPER (isalnum)
 DECLARE_CTYPE_WRAPPER (isdigit)
 DECLARE_CTYPE_WRAPPER (isprint)
@@ -74,7 +70,6 @@ DECLARE_CTYPE_WRAPPER (ispunct)
 DECLARE_CTYPE_WRAPPER (isspace)
 DECLARE_CTYPE_WRAPPER (toupper)
 DECLARE_CTYPE_WRAPPER (tolower)
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -248,7 +243,7 @@ str_8bit_conv_gerror_message (GError *mcerror, const char *def_msg)
     GIConv conv;
     gchar *ret;
 
-    /* glib messages are in UTF-8 charset */
+    // glib messages are in UTF-8 charset
     conv = str_crt_conv_from ("UTF-8");
 
     if (conv == INVALID_CONV)
@@ -392,7 +387,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
     }
 
-  finally:
+finally:
     if (actual >= result + sizeof (result))
         actual = result + sizeof (result) - 1;
     actual[0] = '\0';
@@ -537,7 +532,7 @@ str_8bit_trunc (const char *text, int width)
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
     }
 
-  finally:
+finally:
     actual[0] = '\0';
     return result;
 }
@@ -682,7 +677,7 @@ str_8bit_ncompare (const char *t1, const char *t2)
 static int
 str_8bit_casecmp (const char *s1, const char *s2)
 {
-    /* code from GLib */
+    // code from GLib
 
 #ifdef HAVE_STRCASECMP
     g_return_val_if_fail (s1 != NULL, 0);
@@ -701,13 +696,13 @@ str_8bit_casecmp (const char *s1, const char *s2)
         /* According to A. Cox, some platforms have islower's that
          * don't work right on non-uppercase
          */
-        c1 = isupper ((guchar) * s1) ? tolower ((guchar) * s1) : *s1;
-        c2 = isupper ((guchar) * s2) ? tolower ((guchar) * s2) : *s2;
+        c1 = isupper ((guchar) *s1) ? tolower ((guchar) *s1) : *s1;
+        c2 = isupper ((guchar) *s2) ? tolower ((guchar) *s2) : *s2;
         if (c1 != c2)
             return (c1 - c2);
     }
 
-    return (((gint) (guchar) * s1) - ((gint) (guchar) * s2));
+    return (((gint) (guchar) *s1) - ((gint) (guchar) *s2));
 #endif
 }
 
@@ -726,7 +721,7 @@ str_8bit_ncasecmp (const char *s1, const char *s2)
     l2 = strlen (s2);
     n = MIN (l1, l2);
 
-    /* code from GLib */
+    // code from GLib
 
 #ifdef HAVE_STRNCASECMP
     return strncasecmp (s1, s2, n);
@@ -740,8 +735,8 @@ str_8bit_ncasecmp (const char *s1, const char *s2)
         /* According to A. Cox, some platforms have islower's that
          * don't work right on non-uppercase
          */
-        c1 = isupper ((guchar) * s1) ? tolower ((guchar) * s1) : *s1;
-        c2 = isupper ((guchar) * s2) ? tolower ((guchar) * s2) : *s2;
+        c1 = isupper ((guchar) *s1) ? tolower ((guchar) *s1) : *s1;
+        c2 = isupper ((guchar) *s2) ? tolower ((guchar) *s2) : *s2;
         if (c1 != c2)
             return (c1 - c2);
     }
@@ -749,7 +744,7 @@ str_8bit_ncasecmp (const char *s1, const char *s2)
     if (n == 0)
         return 0;
 
-    return (((gint) (guchar) * s1) - ((gint) (guchar) * s2));
+    return (((gint) (guchar) *s1) - ((gint) (guchar) *s2));
 
 #endif
 }
@@ -761,8 +756,9 @@ str_8bit_prefix (const char *text, const char *prefix)
 {
     int result;
 
-    for (result = 0; text[result] != '\0' && prefix[result] != '\0'
-         && text[result] == prefix[result]; result++);
+    for (result = 0;
+         text[result] != '\0' && prefix[result] != '\0' && text[result] == prefix[result]; result++)
+        ;
 
     return result;
 }
@@ -775,7 +771,9 @@ str_8bit_caseprefix (const char *text, const char *prefix)
     int result;
 
     for (result = 0; text[result] != '\0' && prefix[result] != '\0'
-         && char_toupper (text[result]) == char_toupper (prefix[result]); result++);
+         && char_toupper (text[result]) == char_toupper (prefix[result]);
+         result++)
+        ;
 
     return result;
 }

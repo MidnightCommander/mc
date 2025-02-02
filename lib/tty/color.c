@@ -35,7 +35,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>  // size_t
 
 #include "lib/global.h"
 
@@ -46,15 +46,9 @@
 
 /*** global variables ****************************************************************************/
 
-/* *INDENT-OFF* */
-static tty_color_pair_t tty_color_defaults =
-{
-    .fg = NULL,
-    .bg = NULL,
-    .attrs = NULL,
-    .pair_index = 0
+static tty_color_pair_t tty_color_defaults = {
+    .fg = NULL, .bg = NULL, .attrs = NULL, .pair_index = 0
 };
-/* *INDENT-ON* */
 
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
@@ -115,7 +109,8 @@ tty_color_get_next__color_pair_number (void)
     cp_count = g_hash_table_size (mc_tty_color__hashtable);
     for (cp = 0; cp < cp_count; cp++)
         if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb,
-                               GSIZE_TO_POINTER (cp)) == NULL)
+                               GSIZE_TO_POINTER (cp))
+            == NULL)
             break;
 
     return cp;
@@ -171,9 +166,8 @@ tty_try_alloc_color_pair (const tty_color_pair_t *color, gboolean is_temp)
     if (color_pair == NULL)
         return 0;
 
-    mc_color_pair =
-        (tty_color_lib_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable,
-                                                      (gpointer) color_pair);
+    mc_color_pair = (tty_color_lib_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable,
+                                                                  (gpointer) color_pair);
 
     if (mc_color_pair != NULL)
     {

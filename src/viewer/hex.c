@@ -36,17 +36,17 @@
 #include <config.h>
 
 #include <errno.h>
-#include <inttypes.h>           /* uintmax_t */
+#include <inttypes.h>  // uintmax_t
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/vfs/vfs.h"
-#include "lib/lock.h"           /* lock_file() and unlock_file() */
+#include "lib/lock.h"  // lock_file() and unlock_file()
 #include "lib/util.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "internal.h"
@@ -85,9 +85,10 @@ static mark_t
 mcview_hex_calculate_boldflag (WView *view, off_t from, struct hexedit_change_node *curr,
                                gboolean force_changed)
 {
-    return (from == view->hex_cursor) ? MARK_CURSOR
+    return (from == view->hex_cursor)                               ? MARK_CURSOR
         : ((curr != NULL && from == curr->offset) || force_changed) ? MARK_CHANGED
-        : (view->search_start <= from && from < view->search_end) ? MARK_SELECTED : MARK_NORMAL;
+        : (view->search_start <= from && from < view->search_end)   ? MARK_SELECTED
+                                                                    : MARK_NORMAL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -113,12 +114,12 @@ mcview_display_hex (WView *view)
     mark_t boldflag_char = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
 #ifdef HAVE_CHARSET
-    int cont_bytes = 0;         /* number of continuation bytes remanining from current UTF-8 */
-    gboolean cjk_right = FALSE; /* whether the second byte of a CJK is to be processed */
-#endif /* HAVE_CHARSET */
-    gboolean utf8_changed = FALSE;      /* whether any of the bytes in the UTF-8 were changed */
+    int cont_bytes = 0;          // number of continuation bytes remanining from current UTF-8
+    gboolean cjk_right = FALSE;  // whether the second byte of a CJK is to be processed
+#endif
+    gboolean utf8_changed = FALSE;  // whether any of the bytes in the UTF-8 were changed
 
-    char hex_buff[10];          /* A temporary buffer for sprintf and mvwaddstr */
+    char hex_buff[10];  // A temporary buffer for sprintf and mvwaddstr
 
     text_start = 8 + 13 * ngroups;
     if (r->cols == 80)
@@ -128,8 +129,8 @@ mcview_display_hex (WView *view)
 
     mcview_display_clean (view);
 
-    /* Find the first displayable changed byte */
-    /* In UTF-8 mode, go back by 1 or maybe 2 lines to handle continuation bytes properly. */
+    // Find the first displayable changed byte
+    // In UTF-8 mode, go back by 1 or maybe 2 lines to handle continuation bytes properly.
     from = view->dpy_start;
 #ifdef HAVE_CHARSET
     if (view->utf8)
@@ -145,16 +146,16 @@ mcview_display_hex (WView *view)
             from -= view->bytes_per_line;
         }
     }
-#endif /* HAVE_CHARSET */
+#endif
     while (curr != NULL && (curr->offset < from))
         curr = curr->next;
 
     for (; mcview_get_byte (view, from, NULL) && row < r->lines; row++)
     {
         int col = 0;
-        int bytes;              /* Number of bytes already printed on the line */
+        int bytes;  // Number of bytes already printed on the line
 
-        /* Print the hex offset */
+        // Print the hex offset
         if (row >= 0)
         {
             int i;
@@ -179,12 +180,12 @@ mcview_display_hex (WView *view)
 
                 if (cont_bytes != 0)
                 {
-                    /* UTF-8 continuation bytes, print a space (with proper attributes)... */
+                    // UTF-8 continuation bytes, print a space (with proper attributes)...
                     cont_bytes--;
                     ch = ' ';
                     if (cjk_right)
                     {
-                        /* ... except when it'd wipe out the right half of a CJK, then print nothing */
+                        // ... except when it'd wipe out the right half of a CJK, then print nothing
                         cjk_right = FALSE;
                         ch = -1;
                     }
@@ -216,7 +217,7 @@ mcview_display_hex (WView *view)
                     }
                     utf8buf[UTF8_CHAR_LEN] = '\0';
 
-                    /* Determine the state of the current multibyte char */
+                    // Determine the state of the current multibyte char
                     ch = g_utf8_get_char_validated (utf8buf, -1);
                     if (ch == -1 || ch == -2)
                         ch = '.';
@@ -234,7 +235,7 @@ mcview_display_hex (WView *view)
                     curr = corr;
                 }
             }
-#endif /* HAVE_CHARSET */
+#endif
 
             /* For negative rows, the only thing we care about is overflowing
              * UTF-8 continuation bytes which were handled above. */
@@ -248,32 +249,34 @@ mcview_display_hex (WView *view)
             if (!mcview_get_byte (view, from, &c))
                 break;
 
-            /* Save the cursor position for mcview_place_cursor() */
+            // Save the cursor position for mcview_place_cursor()
             if (from == view->hex_cursor && !view->hexview_in_text)
             {
                 view->cursor_row = row;
                 view->cursor_col = col;
             }
 
-            /* Determine the state of the current byte */
+            // Determine the state of the current byte
             boldflag_byte = mcview_hex_calculate_boldflag (view, from, curr, FALSE);
             boldflag_char = mcview_hex_calculate_boldflag (view, from, curr, utf8_changed);
 
-            /* Determine the value of the current byte */
+            // Determine the value of the current byte
             if (curr != NULL && from == curr->offset)
             {
                 c = curr->value;
                 curr = curr->next;
             }
 
-            /* Select the color for the hex number */
-            tty_setcolor (boldflag_byte == MARK_NORMAL ? VIEW_NORMAL_COLOR :
-                          boldflag_byte == MARK_SELECTED ? VIEW_BOLD_COLOR :
-                          boldflag_byte == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
-                          /* boldflag_byte == MARK_CURSOR */
-                          view->hexview_in_text ? VIEW_SELECTED_COLOR : VIEW_UNDERLINED_COLOR);
+            // Select the color for the hex number
+            tty_setcolor (boldflag_byte == MARK_NORMAL         ? VIEW_NORMAL_COLOR
+                              : boldflag_byte == MARK_SELECTED ? VIEW_BOLD_COLOR
+                              : boldflag_byte == MARK_CHANGED  ? VIEW_UNDERLINED_COLOR
+                                                               :
+                                                              // boldflag_byte == MARK_CURSOR
+                              view->hexview_in_text ? VIEW_SELECTED_COLOR
+                                                    : VIEW_UNDERLINED_COLOR);
 
-            /* Print the hex number */
+            // Print the hex number
             widget_gotoyx (view, r->y + row, r->x + col);
             if (col < r->cols)
             {
@@ -286,7 +289,7 @@ mcview_display_hex (WView *view)
                 col++;
             }
 
-            /* Print the separator */
+            // Print the separator
             tty_setcolor (VIEW_NORMAL_COLOR);
             if (bytes != view->bytes_per_line - 1)
             {
@@ -296,7 +299,7 @@ mcview_display_hex (WView *view)
                     col++;
                 }
 
-                /* After every four bytes, print a group separator */
+                // After every four bytes, print a group separator
                 if (bytes % 4 == 3)
                 {
                     if (view->data_area.cols >= 80 && col < r->cols)
@@ -314,12 +317,13 @@ mcview_display_hex (WView *view)
 
             /* Select the color for the character; this differs from the
              * hex color when boldflag == MARK_CURSOR */
-            tty_setcolor (boldflag_char == MARK_NORMAL ? VIEW_NORMAL_COLOR :
-                          boldflag_char == MARK_SELECTED ? VIEW_BOLD_COLOR :
-                          boldflag_char == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
-                          /* boldflag_char == MARK_CURSOR */
-                          view->hexview_in_text ? VIEW_SELECTED_COLOR : MARKED_SELECTED_COLOR);
-
+            tty_setcolor (boldflag_char == MARK_NORMAL         ? VIEW_NORMAL_COLOR
+                              : boldflag_char == MARK_SELECTED ? VIEW_BOLD_COLOR
+                              : boldflag_char == MARK_CHANGED  ? VIEW_UNDERLINED_COLOR
+                                                               :
+                                                              // boldflag_char == MARK_CURSOR
+                              view->hexview_in_text ? VIEW_SELECTED_COLOR
+                                                    : MARKED_SELECTED_COLOR);
 
 #ifdef HAVE_CHARSET
             if (mc_global.utf8_display)
@@ -342,7 +346,7 @@ mcview_display_hex (WView *view)
                     c = '.';
             }
 
-            /* Print corresponding character on the text side */
+            // Print corresponding character on the text side
             if (text_start + bytes < r->cols)
             {
                 widget_gotoyx (view, r->y + row, r->x + text_start + bytes);
@@ -354,7 +358,7 @@ mcview_display_hex (WView *view)
                     tty_print_char (c);
             }
 
-            /* Save the cursor position for mcview_place_cursor() */
+            // Save the cursor position for mcview_place_cursor()
             if (from == view->hex_cursor && view->hexview_in_text)
             {
                 view->cursor_row = row;
@@ -363,7 +367,7 @@ mcview_display_hex (WView *view)
         }
     }
 
-    /* Be polite to the other functions */
+    // Be polite to the other functions
     tty_setcolor (VIEW_NORMAL_COLOR);
 
     mcview_place_cursor (view);
@@ -399,7 +403,7 @@ mcview_hexedit_save_changes (WView *view)
                     || mc_write (fp, &(curr->value), 1) != 1)
                     goto save_error;
 
-                /* delete the saved item from the change list */
+                // delete the saved item from the change list
                 view->change_list = next;
                 view->dirty++;
                 mcview_set_byte (view, curr->offset, curr->value);
@@ -412,19 +416,20 @@ mcview_hexedit_save_changes (WView *view)
                 view->locked = unlock_file (view->filename_vpath) != 0;
 
             if (mc_close (fp) == -1)
-                message (D_ERROR, _("Save file"),
-                         _("Error while closing the file:\n%s\n"
-                           "Data may have been written or not"), unix_error_string (errno));
+                message (D_ERROR, _ ("Save file"),
+                         _ ("Error while closing the file:\n%s\n"
+                            "Data may have been written or not"),
+                         unix_error_string (errno));
 
             view->dirty++;
             return TRUE;
         }
 
-      save_error:
-        text = g_strdup_printf (_("Cannot save file:\n%s"), unix_error_string (errno));
+    save_error:
+        text = g_strdup_printf (_ ("Cannot save file:\n%s"), unix_error_string (errno));
         (void) mc_close (fp);
 
-        answer = query_dialog (_("Save file"), text, D_ERROR, 2, _("&Retry"), _("&Cancel"));
+        answer = query_dialog (_ ("Save file"), text, D_ERROR, 2, _ ("&Retry"), _ ("&Cancel"));
         g_free (text);
     }
 

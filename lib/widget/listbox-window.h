@@ -7,7 +7,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define LISTBOX_APPEND_TEXT(l,h,t,d,f) \
+#define LISTBOX_APPEND_TEXT(l, h, t, d, f)                                                         \
     listbox_add_item (l->list, LISTBOX_APPEND_AT_END, h, t, d, f)
 
 /*** enums ***************************************************************************************/
@@ -28,9 +28,9 @@ typedef struct
 Listbox *listbox_window_centered_new (int center_y, int center_x, int lines, int cols,
                                       const char *title, const char *help);
 Listbox *listbox_window_new (int lines, int cols, const char *title, const char *help);
-int listbox_run (Listbox * l);
-void *listbox_run_with_data (Listbox * l, const void *select);
+int listbox_run (Listbox *l);
+void *listbox_run_with_data (Listbox *l, const void *select);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__LISTBOX_DIALOG_H */
+#endif

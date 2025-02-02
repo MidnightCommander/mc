@@ -47,7 +47,7 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "lib/util.h"           /* whitespace() */
+#include "lib/util.h"  // whitespace()
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -98,13 +98,13 @@ bad_line_start (const edit_buffer_t *buf, off_t p)
     c = edit_buffer_get_byte (buf, p);
     if (c == '.')
     {
-        /* `...' is acceptable */
+        // `...' is acceptable
         return !(edit_buffer_get_byte (buf, p + 1) == '.'
                  && edit_buffer_get_byte (buf, p + 2) == '.');
     }
     if (c == '-')
     {
-        /* `---' is acceptable */
+        // `---' is acceptable
         return !(edit_buffer_get_byte (buf, p + 1) == '-'
                  && edit_buffer_get_byte (buf, p + 2) == '-');
     }
@@ -125,8 +125,8 @@ begin_paragraph (WEdit *edit, gboolean force, long *lines)
     long i;
 
     for (i = edit->buffer.curs_line - 1; i >= 0; i--)
-        if (edit_line_is_blank (edit, i) ||
-            (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
+        if (edit_line_is_blank (edit, i)
+            || (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
         {
             i++;
             break;
@@ -150,18 +150,17 @@ end_paragraph (WEdit *edit, gboolean force)
     long i;
 
     for (i = edit->buffer.curs_line + 1; i <= edit->buffer.lines; i++)
-        if (edit_line_is_blank (edit, i) ||
-            (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
+        if (edit_line_is_blank (edit, i)
+            || (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
         {
             i--;
             break;
         }
 
-    return edit_buffer_get_eol (&edit->buffer,
-                                edit_buffer_get_forward_offset (&edit->buffer,
-                                                                edit_buffer_get_current_bol
-                                                                (&edit->buffer),
-                                                                i - edit->buffer.curs_line, 0));
+    return edit_buffer_get_eol (
+        &edit->buffer,
+        edit_buffer_get_forward_offset (&edit->buffer, edit_buffer_get_current_bol (&edit->buffer),
+                                        i - edit->buffer.curs_line, 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -216,8 +215,8 @@ next_tab_pos (off_t x)
 static inline off_t
 line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
 {
-    off_t xn, x;                /* position counters */
-    off_t char_length = 0;      /* character length in bytes */
+    off_t xn, x;            // position counters
+    off_t char_length = 0;  // character length in bytes
 
 #ifndef HAVE_CHARSET
     (void) utf8;
@@ -249,7 +248,7 @@ line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
                 {
                     char *next_ch;
 
-                    /* Calculate UTF-8 char length */
+                    // Calculate UTF-8 char length
                     next_ch = g_utf8_next_char (tb);
                     char_length = next_ch - tb;
 
@@ -343,12 +342,12 @@ format_this (unsigned char *t, off_t size, long indent, gboolean utf8)
             break;
         p = word_start (t, q, size);
         if (p == -1)
-            q = next_word_start (t, q, size);   /* Return the end of the word if the beginning
-                                                   of the word is at the beginning of a line
-                                                   (i.e. a very long word) */
+            q = next_word_start (t, q, size); /* Return the end of the word if the beginning
+                                                 of the word is at the beginning of a line
+                                                 (i.e. a very long word) */
         else
             q = p;
-        if (q == -1)            /* end of paragraph */
+        if (q == -1)  // end of paragraph
             break;
         if (q != 0)
             t[q - 1] = '\n';
@@ -372,11 +371,11 @@ edit_indent_width (const WEdit *edit, off_t p)
 {
     off_t q = p;
 
-    /* move to the end of the leading whitespace of the line */
+    // move to the end of the leading whitespace of the line
     while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, q)) != NULL
            && q < edit->buffer.size - 1)
         q++;
-    /* count the number of columns of indentation */
+    // count the number of columns of indentation
     return (long) edit_move_forward3 (edit, p, 0, q);
 }
 
@@ -447,7 +446,7 @@ put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size)
         if (c != t[i])
             replace_at (edit, p, t[i]);
     }
-    edit_cursor_move (edit, cursor - edit->buffer.curs1);       /* restore cursor position */
+    edit_cursor_move (edit, cursor - edit->buffer.curs1);  // restore cursor position
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -531,7 +530,7 @@ format_paragraph (WEdit *edit, gboolean force)
     put_paragraph (edit, t2, p, indent, size);
     g_free ((char *) t2);
 
-    /* Scroll left as much as possible to show the formatted paragraph */
+    // Scroll left as much as possible to show the formatted paragraph
     edit_scroll_left (edit, -edit->start_col);
 }
 

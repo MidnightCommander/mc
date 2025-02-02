@@ -25,14 +25,14 @@
 
 #include <config.h>
 
-#include <stdio.h>              /* file functions */
+#include <stdio.h>  // file functions
 
 #include "lib/global.h"
 
-#include "lib/fileloc.h"        /* MC_FILEPOS_FILE */
-#include "lib/mcconfig.h"       /* mc_config_get_full_path() */
-#include "lib/strutil.h"        /* str_term_width1() */
-#include "lib/util.h"           /* backup functions */
+#include "lib/fileloc.h"   // MC_FILEPOS_FILE
+#include "lib/mcconfig.h"  // mc_config_get_full_path()
+#include "lib/strutil.h"   // str_term_width1()
+#include "lib/util.h"      // backup functions
 
 #include "file_history.h"
 
@@ -66,7 +66,7 @@ file_history_list_read (void)
     char buf[MC_MAXPATHLEN + 100];
     GList *file_list = NULL;
 
-    /* open file with positions */
+    // open file with positions
     fn = mc_config_get_full_path (MC_FILEPOS_FILE);
     if (fn == NULL)
         return NULL;
@@ -83,11 +83,11 @@ file_history_list_read (void)
         size_t len;
 
         s = strrchr (buf, ' ');
-        /* FIXME: saved file position info is present in filepos file */
+        // FIXME: saved file position info is present in filepos file
         fhd = g_new (file_history_data_t, 1);
         fhd->file_name = g_strndup (buf, s - buf);
         len = strlen (s + 1);
-        fhd->file_pos = g_strndup (s + 1, len - 1);     /* ignore '\n' */
+        fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
         file_list = g_list_prepend (file_list, fhd);
     }
 
@@ -158,7 +158,7 @@ file_history_create_item (history_descriptor_t *hd, void *data)
     hd->max_width = MAX (width, hd->max_width);
 
     listbox_add_item (hd->listbox, LISTBOX_APPEND_AT_END, 0, fhd->file_name, fhd->file_pos, TRUE);
-    /* fhd->file_pos is not copied, NULLize it to prevent double free */
+    // fhd->file_pos is not copied, NULLize it to prevent double free
     fhd->file_pos = NULL;
 }
 
@@ -220,7 +220,7 @@ show_file_history (const Widget *w, int *action)
     file_list = g_list_last (file_list);
 
     history_descriptor_init (&hd, w->rect.y, w->rect.x, file_list, 0);
-    /* redefine list-specific functions */
+    // redefine list-specific functions
     hd.create = file_history_create_item;
     hd.release = file_history_release_item;
     hd.free = file_history_free_item;
@@ -229,7 +229,7 @@ show_file_history (const Widget *w, int *action)
 
     hd.list = g_list_first (hd.list);
 
-    /* Has history cleaned up or not? */
+    // Has history cleaned up or not?
     if (len != g_list_length (hd.list))
     {
         hd.list = g_list_reverse (hd.list);

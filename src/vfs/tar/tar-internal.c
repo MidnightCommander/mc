@@ -32,12 +32,12 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isdigit() */
-#include <inttypes.h>           /* uintmax_t */
+#include <ctype.h>     // isdigit()
+#include <inttypes.h>  // uintmax_t
 
 #include "lib/global.h"
-#include "lib/widget.h"         /* message() */
-#include "lib/vfs/vfs.h"        /* mc_read() */
+#include "lib/widget.h"   // message()
+#include "lib/vfs/vfs.h"  // mc_read()
 
 #include "tar-internal.h"
 
@@ -46,7 +46,7 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef UINTMAX_WIDTH
-#define UINTMAX_WIDTH (sizeof (uintmax_t) * CHAR_BIT)
+#    define UINTMAX_WIDTH (sizeof (uintmax_t) * CHAR_BIT)
 #endif
 
 /* Log base 2 of common values. */
@@ -61,29 +61,19 @@
 /* Table of base-64 digit values + 1, indexed by unsigned chars.
    See Internet RFC 2045 Table 1.
    Zero entries are for unsigned chars that are not base-64 digits.  */
-/* *INDENT-OFF* */
-static char const base64_map[UCHAR_MAX + 1] =
-{
-    ['A'] =  0 + 1, ['B'] =  1 + 1, ['C'] =  2 + 1, ['D'] =  3 + 1,
-    ['E'] =  4 + 1, ['F'] =  5 + 1, ['G'] =  6 + 1, ['H'] =  7 + 1,
-    ['I'] =  8 + 1, ['J'] =  9 + 1, ['K'] = 10 + 1, ['L'] = 11 + 1,
-    ['M'] = 12 + 1, ['N'] = 13 + 1, ['O'] = 14 + 1, ['P'] = 15 + 1,
-    ['Q'] = 16 + 1, ['R'] = 17 + 1, ['S'] = 18 + 1, ['T'] = 19 + 1,
-    ['U'] = 20 + 1, ['V'] = 21 + 1, ['W'] = 22 + 1, ['X'] = 23 + 1,
-    ['Y'] = 24 + 1, ['Z'] = 25 + 1,
-    ['a'] = 26 + 1, ['b'] = 27 + 1, ['c'] = 28 + 1, ['d'] = 29 + 1,
-    ['e'] = 30 + 1, ['f'] = 31 + 1, ['g'] = 32 + 1, ['h'] = 33 + 1,
-    ['i'] = 34 + 1, ['j'] = 35 + 1, ['k'] = 36 + 1, ['l'] = 37 + 1,
-    ['m'] = 38 + 1, ['n'] = 39 + 1, ['o'] = 40 + 1, ['p'] = 41 + 1,
-    ['q'] = 42 + 1, ['r'] = 43 + 1, ['s'] = 44 + 1, ['t'] = 45 + 1,
-    ['u'] = 46 + 1, ['v'] = 47 + 1, ['w'] = 48 + 1, ['x'] = 49 + 1,
-    ['y'] = 50 + 1, ['z'] = 51 + 1,
-    ['0'] = 52 + 1, ['1'] = 53 + 1, ['2'] = 54 + 1, ['3'] = 55 + 1,
-    ['4'] = 56 + 1, ['5'] = 57 + 1, ['6'] = 58 + 1, ['7'] = 59 + 1,
-    ['8'] = 60 + 1, ['9'] = 61 + 1,
-    ['+'] = 62 + 1, ['/'] = 63 + 1,
+static char const base64_map[UCHAR_MAX + 1] = {
+    ['A'] = 0 + 1,  ['B'] = 1 + 1,  ['C'] = 2 + 1,  ['D'] = 3 + 1,  ['E'] = 4 + 1,  ['F'] = 5 + 1,
+    ['G'] = 6 + 1,  ['H'] = 7 + 1,  ['I'] = 8 + 1,  ['J'] = 9 + 1,  ['K'] = 10 + 1, ['L'] = 11 + 1,
+    ['M'] = 12 + 1, ['N'] = 13 + 1, ['O'] = 14 + 1, ['P'] = 15 + 1, ['Q'] = 16 + 1, ['R'] = 17 + 1,
+    ['S'] = 18 + 1, ['T'] = 19 + 1, ['U'] = 20 + 1, ['V'] = 21 + 1, ['W'] = 22 + 1, ['X'] = 23 + 1,
+    ['Y'] = 24 + 1, ['Z'] = 25 + 1, ['a'] = 26 + 1, ['b'] = 27 + 1, ['c'] = 28 + 1, ['d'] = 29 + 1,
+    ['e'] = 30 + 1, ['f'] = 31 + 1, ['g'] = 32 + 1, ['h'] = 33 + 1, ['i'] = 34 + 1, ['j'] = 35 + 1,
+    ['k'] = 36 + 1, ['l'] = 37 + 1, ['m'] = 38 + 1, ['n'] = 39 + 1, ['o'] = 40 + 1, ['p'] = 41 + 1,
+    ['q'] = 42 + 1, ['r'] = 43 + 1, ['s'] = 44 + 1, ['t'] = 45 + 1, ['u'] = 46 + 1, ['v'] = 47 + 1,
+    ['w'] = 48 + 1, ['x'] = 49 + 1, ['y'] = 50 + 1, ['z'] = 51 + 1, ['0'] = 52 + 1, ['1'] = 53 + 1,
+    ['2'] = 54 + 1, ['3'] = 55 + 1, ['4'] = 56 + 1, ['5'] = 57 + 1, ['6'] = 58 + 1, ['7'] = 59 + 1,
+    ['8'] = 60 + 1, ['9'] = 61 + 1, ['+'] = 62 + 1, ['/'] = 63 + 1,
 };
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -92,8 +82,8 @@ static char const base64_map[UCHAR_MAX + 1] =
 static gboolean
 tar_short_read (size_t status, tar_super_t *archive)
 {
-    size_t left;                /* bytes left */
-    char *more;                 /* pointer to next byte to read */
+    size_t left;  // bytes left
+    char *more;   // pointer to next byte to read
 
     more = archive->record_start->buffer + status;
     left = record_size - status;
@@ -160,7 +150,7 @@ tar_seek_archive (tar_super_t *archive, off_t size)
     off_t nrec, nblk;
     off_t skipped;
 
-    /* If low level I/O is already at EOF, do not try to seek further. */
+    // If low level I/O is already at EOF, do not try to seek further.
     if (record_end < archive->record_start + blocking_factor)
         return 0;
 
@@ -168,7 +158,7 @@ tar_seek_archive (tar_super_t *archive, off_t size)
     if (size <= skipped)
         return 0;
 
-    /* Compute number of records to skip */
+    // Compute number of records to skip
     nrec = (size - skipped) / record_size;
     if (nrec == 0)
         return 0;
@@ -187,12 +177,12 @@ tar_seek_archive (tar_super_t *archive, off_t size)
     }
 #endif
 
-    /* Convert to number of records */
+    // Convert to number of records
     offset /= BLOCKSIZE;
-    /* Compute number of skipped blocks */
+    // Compute number of skipped blocks
     nblk = offset - start;
 
-    /* Update buffering info */
+    // Update buffering info
     record_start_block = offset - blocking_factor;
     current_block = record_end;
 
@@ -267,8 +257,8 @@ tar_assign_string_dup_n (char **string, const char *value, size_t n)
    This function is named "stoint" instead of "strtoint" because
    <string.h> reserves names beginning with "str".
  */
-#if ! (INTMAX_MAX <= UINTMAX_MAX)
-#error "strtosysint: nonnegative intmax_t does not fit in uintmax_t"
+#if !(INTMAX_MAX <= UINTMAX_MAX)
+#    error "strtosysint: nonnegative intmax_t does not fit in uintmax_t"
 #endif
 intmax_t
 stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval, uintmax_t maxval)
@@ -347,11 +337,11 @@ stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval, uin
  *
  * Result is -1 if the field is invalid.
  */
-#if !(INTMAX_MAX <= UINTMAX_MAX && - (INTMAX_MIN + 1) <= UINTMAX_MAX)
-#error "tar_from_header() internally represents intmax_t as uintmax_t + sign"
+#if !(INTMAX_MAX <= UINTMAX_MAX && -(INTMAX_MIN + 1) <= UINTMAX_MAX)
+#    error "tar_from_header() internally represents intmax_t as uintmax_t + sign"
 #endif
 #if !(UINTMAX_MAX / 2 <= INTMAX_MAX)
-#error "tar_from_header() returns intmax_t to represent uintmax_t"
+#    error "tar_from_header() returns intmax_t to represent uintmax_t"
 #endif
 intmax_t
 tar_from_header (const char *where0, size_t digs, char const *type, intmax_t minval,
@@ -369,7 +359,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
     if (*where == '\0')
         where++;
 
-    /* Accommodate older tars, which output leading spaces. */
+    // Accommodate older tars, which output leading spaces.
     while (TRUE)
     {
         if (where == lim)
@@ -401,7 +391,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
            catches the common case of 32-bit negative time stamps. */
         if ((overflow || maxval < value) && *where1 >= 2 && type != NULL)
         {
-            /* Compute the negative of the input value, assuming two's complement. */
+            // Compute the negative of the input value, assuming two's complement.
             int digit;
 
             digit = (*where1 - '0') | 4;
@@ -430,7 +420,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
     }
     else if (octal_only)
     {
-        /* Suppress the following extensions. */
+        // Suppress the following extensions.
     }
     else if (*where == '-' || *where == '+')
     {
@@ -455,8 +445,9 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             where++;
         }
     }
-    else if (where <= lim - 2 && (*where == '\200'      /* positive base-256 */
-                                  || *where == '\377' /* negative base-256 */ ))
+    else if (where <= lim - 2
+             && (*where == '\200'  // positive base-256
+                 || *where == '\377' /* negative base-256 */))
     {
         /* Parse base-256 output.  A nonnegative number N is
            represented as (256**DIGS)/2 + N; a negative number -N is
@@ -469,7 +460,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         uintmax_t topbits;
 
         signbit = *where & (1 << (LG_256 - 2));
-        topbits = ((uintmax_t) - signbit) << (UINTMAX_WIDTH - LG_256 - (LG_256 - 2));
+        topbits = ((uintmax_t) -signbit) << (UINTMAX_WIDTH - LG_256 - (LG_256 - 2));
 
         value = (*where++ & ((1 << (LG_256 - 2)) - 1)) - signbit;
 
@@ -526,7 +517,7 @@ tar_find_next_block (tar_super_t *archive)
 
         if (!tar_flush_archive (archive))
         {
-            message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
+            message (D_ERROR, MSG_ERROR, _ ("Inconsistent tar archive"));
             return NULL;
         }
 

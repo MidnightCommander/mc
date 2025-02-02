@@ -13,7 +13,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get install -y autoconf autopoint check gettext indent libtool pkg-config
+          sudo apt-get install -y autoconf autopoint check gettext libtool pkg-config
           sudo apt-get install -y e2fslibs-dev libaspell-dev libglib2.0-dev libgpm-dev libncurses5-dev libpcre2-dev libslang2-dev libssh2-1-dev libx11-dev unzip
 
       - name: Bootstrap build system
@@ -38,10 +38,6 @@ jobs:
               --enable-aspell \
               --enable-vfs-undelfs \
               --enable-werror
-
-          make indent
-          # TODO: exit 1
-          git ls-files --modified
 
           make -j$(nproc)
           make check

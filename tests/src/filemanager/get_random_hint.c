@@ -33,7 +33,6 @@
 
 #include "src/filemanager/filemanager.h"
 
-
 /* --------------------------------------------------------------------------------------------- */
 /* mocked functions */
 
@@ -73,9 +72,7 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_not_force)
-/* *INDENT-ON* */
 {
     // given
     char *first_hint_for_ignore;
@@ -100,63 +97,59 @@ START_TEST (test_not_force)
     g_free (actual_hint1);
     g_free (first_hint_for_ignore);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 #define MC_HINT_FILE_SIZE 58
 /* @DataSource("get_random_ds") */
-/* *INDENT-OFF* */
 static const struct get_random_ds
 {
     int input_random_value;
 
     const char *expected_value;
-} get_random_ds[] =
-{
-    { /* 0. */
+} get_random_ds[] = {
+    {
+        // 0.
         MC_HINT_FILE_SIZE + 2,
         "Para_1",
     },
-    { /* 1. */
+    {
+        // 1.
         MC_HINT_FILE_SIZE + 10,
         "Para_2_line_1 Para_2_line_2",
     },
-    { /* 2. */
+    {
+        // 2.
         MC_HINT_FILE_SIZE + 25,
         "Para_2_line_1 Para_2_line_2",
     },
-    { /* 3. */
+    {
+        // 3.
         MC_HINT_FILE_SIZE + 40,
         "Para_3",
     },
-    { /* 4. */
+    {
+        // 4.
         MC_HINT_FILE_SIZE + 50,
-        "P A R A _ 4 ", /* the trailing space it's a bug, but not critical and may be omitted */
+        "P A R A _ 4 ",  // the trailing space it's a bug, but not critical and may be omitted
     },
 };
-/* *INDENT-ON* */
-    /* @Test(dataSource = "get_random_ds") */
-/* *INDENT-OFF* */
+// @Test(dataSource = "get_random_ds")
 START_PARAMETRIZED_TEST (get_random, get_random_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_value;
 
     rand__return_value = data->input_random_value;
 
-    /* when */
+    // when
     actual_value = get_random_hint (TRUE);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_value, data->expected_value);
     g_free (actual_value);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -169,10 +162,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_not_force);
     mctest_add_parameterized_test (tc_core, get_random, get_random_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

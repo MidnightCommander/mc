@@ -24,10 +24,10 @@ typedef enum
 
 /*** declarations of public functions ************************************************************/
 
-void add2hotlist_cmd (WPanel * panel);
-char *hotlist_show (hotlist_t list_type, WPanel * panel);
+void add2hotlist_cmd (WPanel *panel);
+char *hotlist_show (hotlist_t list_type, WPanel *panel);
 gboolean save_hotlist (void);
 void done_hotlist (void);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__HOTLIST_H */
+#endif

@@ -28,78 +28,71 @@
 
 #include "tests/mctest.h"
 
-#include "glob.c"               /* for testing static functions */
+#include "glob.c"  // for testing static functions
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_glob_translate_to_regex_ds") */
-/* *INDENT-OFF* */
 static const struct test_glob_translate_to_regex_ds
 {
     const char *input_value;
     const char *expected_result;
-} test_glob_translate_to_regex_ds[] =
-{
+} test_glob_translate_to_regex_ds[] = {
     {
         "test*",
-        "test(.*)"
+        "test(.*)",
     },
     {
         "t?es*t",
-        "t(.)es(.*)t"
+        "t(.)es(.*)t",
     },
     {
         "te{st}",
-        "te(st)"
+        "te(st)",
     },
     {
         "te{st|ts}",
-        "te(st|ts)"
+        "te(st|ts)",
     },
     {
         "te{st,ts}",
-        "te(st|ts)"
+        "te(st|ts)",
     },
     {
         "te[st]",
-        "te[st]"
+        "te[st]",
     },
     {
         "t,e.st",
-        "t,e\\.st"
+        "t,e\\.st",
     },
     {
         "^t,e.+st+$",
-        "\\^t,e\\.\\+st\\+\\$"
+        "\\^t,e\\.\\+st\\+\\$",
     },
     {
         "te!@#$%^&*()_+|\";:'{}:><?\\?\\*.,/[]|\\/st",
-        "te!@#\\$%\\^&(.*)\\(\\)_\\+|\";:'():><(.)\\?\\*\\.,/[]|\\/st"
+        "te!@#\\$%\\^&(.*)\\(\\)_\\+|\";:'():><(.)\\?\\*\\.,/[]|\\/st",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_glob_translate_to_regex_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_glob_translate_to_regex, test_glob_translate_to_regex_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     GString *tmp = g_string_new (data->input_value);
     GString *dest_str;
 
-    /* when */
+    // when
     dest_str = mc_search__glob_translate_to_regex (tmp);
 
-    /* then */
+    // then
     g_string_free (tmp, TRUE);
 
     mctest_assert_str_eq (dest_str->str, data->expected_result);
     g_string_free (dest_str, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -110,10 +103,10 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_glob_translate_to_regex,
                                    test_glob_translate_to_regex_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

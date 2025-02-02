@@ -18,7 +18,7 @@ typedef struct WInfo WInfo;
 
 /*** declarations of public functions ************************************************************/
 
-WInfo *info_new (const WRect * r);
+WInfo *info_new (const WRect *r);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__INFO_H */
+#endif

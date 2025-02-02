@@ -29,17 +29,17 @@
 #include <limits.h>
 #include <stdio.h>
 #include <sys/types.h>
-#include <stdint.h>             /* uintmax_t */
+#include <stdint.h>  // uintmax_t
 
-#if defined (ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
-#include <libssh2.h>
-#endif /* ENABLE_VFS_SFTP && ENABLE_VFS */
+#if defined(ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
+#    include <libssh2.h>
+#endif
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
-#include "lib/util.h"           /* mc_get_profile_root() */
-#include "lib/tty/tty.h"        /* S-Lang or ncurses version */
+#include "lib/util.h"     // mc_get_profile_root()
+#include "lib/tty/tty.h"  // S-Lang or ncurses version
 
 #include "src/textconf.h"
 
@@ -55,76 +55,76 @@
 
 #ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {
-#ifdef ENABLE_VFS_CPIO
+#    ifdef ENABLE_VFS_CPIO
     "cpiofs",
-#endif
-#ifdef ENABLE_VFS_TAR
+#    endif
+#    ifdef ENABLE_VFS_TAR
     "tarfs",
-#endif
-#ifdef ENABLE_VFS_SFS
+#    endif
+#    ifdef ENABLE_VFS_SFS
     "sfs",
-#endif
-#ifdef ENABLE_VFS_EXTFS
+#    endif
+#    ifdef ENABLE_VFS_EXTFS
     "extfs",
-#endif
-#ifdef ENABLE_VFS_UNDELFS
+#    endif
+#    ifdef ENABLE_VFS_UNDELFS
     "ext2undelfs",
-#endif
-#ifdef ENABLE_VFS_FTP
+#    endif
+#    ifdef ENABLE_VFS_FTP
     "ftpfs",
-#endif
-#ifdef ENABLE_VFS_SFTP
+#    endif
+#    ifdef ENABLE_VFS_SFTP
     "sftpfs",
-#endif
-#ifdef ENABLE_VFS_SHELL
+#    endif
+#    ifdef ENABLE_VFS_SHELL
     "shell",
-#endif
+#    endif
     NULL
 };
-#endif /* ENABLE_VFS */
+#endif
 
 static const char *const features[] = {
 
 #ifdef USE_INTERNAL_EDIT
-#ifdef HAVE_ASPELL
-    N_("With builtin editor and aspell support"),
-#else
-    N_("With builtin editor"),
-#endif /* HAVE_ASPELL */
-#endif /* USE_INTERNAL_EDIT */
+#    ifdef HAVE_ASPELL
+    N_ ("With builtin editor and aspell support"),
+#    else
+    N_ ("With builtin editor"),
+#    endif
+#endif
 
 #ifdef ENABLE_SUBSHELL
-#ifdef SUBSHELL_OPTIONAL
-    N_("With optional subshell support"),
-#else
-    N_("With subshell support as default"),
+#    ifdef SUBSHELL_OPTIONAL
+    N_ ("With optional subshell support"),
+#    else
+    N_ ("With subshell support as default"),
+#    endif
 #endif
-#endif /* !ENABLE_SUBSHELL */
 
 #ifdef ENABLE_BACKGROUND
-    N_("With support for background operations"),
+    N_ ("With support for background operations"),
 #endif
 
 #ifdef HAVE_LIBGPM
-    N_("With mouse support on xterm and Linux console"),
+    N_ ("With mouse support on xterm and Linux console"),
 #else
-    N_("With mouse support on xterm"),
+    N_ ("With mouse support on xterm"),
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    N_("With support for X11 events"),
+    N_ ("With support for X11 events"),
 #endif
 
 #ifdef ENABLE_NLS
-    N_("With internationalization support"),
+    N_ ("With internationalization support"),
 #endif
 
 #ifdef HAVE_CHARSET
-    N_("With multiple codepages support"),
+    N_ ("With multiple codepages support"),
 #endif
 
 #ifdef ENABLE_EXT2FS_ATTR
-    N_("With ext2fs attributes support"),
+    N_ ("With ext2fs attributes support"),
 #endif
 
     NULL
@@ -142,47 +142,46 @@ show_version (void)
 {
     size_t i;
 
-    printf (_("GNU Midnight Commander %s\n"), mc_global.mc_version);
+    printf (_ ("GNU Midnight Commander %s\n"), mc_global.mc_version);
 
-    printf (_("Built with GLib %d.%d.%d\n"),
-            GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
+    printf (_ ("Built with GLib %d.%d.%d\n"), GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION,
+            GLIB_MICRO_VERSION);
 
 #ifdef HAVE_SLANG
-    printf (_("Built with S-Lang %s with terminfo database\n"), SLANG_VERSION_STRING);
+    printf (_ ("Built with S-Lang %s with terminfo database\n"), SLANG_VERSION_STRING);
 #elif defined(USE_NCURSES)
-#ifdef NCURSES_VERSION
-    printf (_("Built with ncurses %s\n"), NCURSES_VERSION);
-#else
-    puts (_("Built with ncurses (unknown version)"));
-#endif /* !NCURSES_VERSION */
+#    ifdef NCURSES_VERSION
+    printf (_ ("Built with ncurses %s\n"), NCURSES_VERSION);
+#    else
+    puts (_ ("Built with ncurses (unknown version)"));
+#    endif
 #elif defined(USE_NCURSESW)
-#ifdef NCURSES_VERSION
-    printf (_("Built with ncursesw %s\n"), NCURSES_VERSION);
+#    ifdef NCURSES_VERSION
+    printf (_ ("Built with ncursesw %s\n"), NCURSES_VERSION);
+#    else
+    puts (_ ("Built with ncursesw (unknown version)"));
+#    endif
 #else
-    puts (_("Built with ncursesw (unknown version)"));
-#endif /* !NCURSES_VERSION */
-#else
-#error "Cannot compile mc without S-Lang or ncurses"
-#endif /* !HAVE_SLANG && !USE_NCURSES */
+#    error "Cannot compile mc without S-Lang or ncurses"
+#endif
 
-#if defined (ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
-    printf (_("Built with libssh2 %d.%d.%d\n"),
-            LIBSSH2_VERSION_MAJOR, LIBSSH2_VERSION_MINOR, LIBSSH2_VERSION_PATCH);
-#endif /* ENABLE_VFS_SFTP && ENABLE_VFS */
+#if defined(ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
+    printf (_ ("Built with libssh2 %d.%d.%d\n"), LIBSSH2_VERSION_MAJOR, LIBSSH2_VERSION_MINOR,
+            LIBSSH2_VERSION_PATCH);
+#endif
 
     for (i = 0; features[i] != NULL; i++)
-        puts (_(features[i]));
+        puts (_ (features[i]));
 
 #ifdef ENABLE_VFS
-    puts (_("Virtual File Systems:"));
+    puts (_ ("Virtual File Systems:"));
     for (i = 0; vfs_supported[i] != NULL; i++)
-        printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
+        printf ("%s %s", i == 0 ? "" : ",", _ (vfs_supported[i]));
     (void) puts ("");
-#endif /* ENABLE_VFS */
+#endif
 
-    (void) puts (_("Data types:"));
-#define TYPE_INFO(T) \
-    (void)printf(" %s: %d;", #T, (int) (CHAR_BIT * sizeof(T)))
+    (void) puts (_ ("Data types:"));
+#define TYPE_INFO(T) (void) printf (" %s: %d;", #T, (int) (CHAR_BIT * sizeof (T)))
     TYPE_INFO (char);
     TYPE_INFO (int);
     TYPE_INFO (long);
@@ -195,46 +194,41 @@ show_version (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#define PRINTF_GROUP(a) \
-    (void) printf ("[%s]\n", a)
-#define PRINTF_SECTION(a,b) \
-    (void) printf ("    %-17s %s\n", a, b)
-#define PRINTF_SECTION2(a,b) \
-    (void) printf ("    %-17s %s/\n", a, b)
-#define PRINTF(a, b, c) \
-    (void) printf ("\t%-15s %s/%s\n", a, b, c)
-#define PRINTF2(a, b, c) \
-    (void) printf ("\t%-15s %s%s\n", a, b, c)
+#define PRINTF_GROUP(a)       (void) printf ("[%s]\n", a)
+#define PRINTF_SECTION(a, b)  (void) printf ("    %-17s %s\n", a, b)
+#define PRINTF_SECTION2(a, b) (void) printf ("    %-17s %s/\n", a, b)
+#define PRINTF(a, b, c)       (void) printf ("\t%-15s %s/%s\n", a, b, c)
+#define PRINTF2(a, b, c)      (void) printf ("\t%-15s %s%s\n", a, b, c)
 
 void
 show_datadirs_extended (void)
 {
-    (void) printf ("%s %s\n", _("Home directory:"), mc_config_get_home_dir ());
-    (void) printf ("%s %s\n", _("Profile root directory:"), mc_get_profile_root ());
+    (void) printf ("%s %s\n", _ ("Home directory:"), mc_config_get_home_dir ());
+    (void) printf ("%s %s\n", _ ("Profile root directory:"), mc_get_profile_root ());
     (void) puts ("");
 
-    PRINTF_GROUP (_("System data"));
+    PRINTF_GROUP (_ ("System data"));
 
-    PRINTF_SECTION (_("Config directory:"), mc_global.sysconfig_dir);
-    PRINTF_SECTION (_("Data directory:"), mc_global.share_data_dir);
+    PRINTF_SECTION (_ ("Config directory:"), mc_global.sysconfig_dir);
+    PRINTF_SECTION (_ ("Data directory:"), mc_global.share_data_dir);
 
-    PRINTF_SECTION (_("File extension handlers:"), EXTHELPERSDIR);
+    PRINTF_SECTION (_ ("File extension handlers:"), EXTHELPERSDIR);
 
 #if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_SHELL
-    PRINTF_SECTION (_("VFS plugins and scripts:"), LIBEXECDIR);
-#ifdef ENABLE_VFS_EXTFS
+    PRINTF_SECTION (_ ("VFS plugins and scripts:"), LIBEXECDIR);
+#    ifdef ENABLE_VFS_EXTFS
     PRINTF2 ("extfs.d:", LIBEXECDIR, MC_EXTFS_DIR PATH_SEP_STR);
-#endif
-#ifdef ENABLE_VFS_SHELL
+#    endif
+#    ifdef ENABLE_VFS_SHELL
     PRINTF2 ("shell:", LIBEXECDIR, VFS_SHELL_PREFIX PATH_SEP_STR);
+#    endif
 #endif
-#endif /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_SHELL */
     (void) puts ("");
 
-    PRINTF_GROUP (_("User data"));
+    PRINTF_GROUP (_ ("User data"));
 
-    PRINTF_SECTION2 (_("Config directory:"), mc_config_get_path ());
-    PRINTF_SECTION2 (_("Data directory:"), mc_config_get_data_path ());
+    PRINTF_SECTION2 (_ ("Config directory:"), mc_config_get_path ());
+    PRINTF_SECTION2 (_ ("Data directory:"), mc_config_get_data_path ());
     PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_DIR PATH_SEP_STR);
 #ifdef ENABLE_VFS_EXTFS
     PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR PATH_SEP_STR);
@@ -246,7 +240,7 @@ show_datadirs_extended (void)
     PRINTF ("mcedit macros:", mc_config_get_data_path (), MC_MACRO_FILE);
     PRINTF ("mcedit external macros:", mc_config_get_data_path (), EDIT_HOME_MACRO_FILE ".*");
 #endif
-    PRINTF_SECTION2 (_("Cache directory:"), mc_config_get_cache_path ());
+    PRINTF_SECTION2 (_ ("Cache directory:"), mc_config_get_cache_path ());
 }
 
 #undef PRINTF

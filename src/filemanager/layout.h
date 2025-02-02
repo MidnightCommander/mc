@@ -14,11 +14,11 @@
 
 typedef enum
 {
-    view_listing = 0,           /* Directory listing */
-    view_info = 1,              /* Information panel */
-    view_tree = 2,              /* Tree view */
-    view_quick = 3,             /* Quick view */
-    view_nothing = 4,           /* Undefined */
+    view_listing = 0,  // Directory listing
+    view_info = 1,     // Information panel
+    view_tree = 2,     // Tree view
+    view_quick = 3,    // Quick view
+    view_nothing = 4,  // Undefined
 } panel_view_mode_t;
 
 /*** enums ***************************************************************************************/
@@ -29,11 +29,11 @@ typedef struct
 {
     gboolean horizontal_split;
 
-    /* vertical split */
+    // vertical split
     gboolean vertical_equal;
     int left_panel_size;
 
-    /* horizontal split */
+    // horizontal split
     gboolean horizontal_equal;
     int top_panel_size;
 } panels_layout_t;
@@ -55,7 +55,7 @@ extern panels_layout_t panels_layout;
 /*** declarations of public functions ************************************************************/
 void layout_change (void);
 void layout_box (void);
-void panel_update_cols (Widget * widget, panel_display_t frame_size);
+void panel_update_cols (Widget *widget, panel_display_t frame_size);
 void setup_panels (void);
 void panels_split_equal (void);
 void panels_split_more (void);
@@ -76,12 +76,12 @@ Widget *get_panel_widget (int idx);
 WPanel *get_other_panel (void);
 
 void save_panel_dir (int idx);
-char *get_panel_dir_for (const WPanel * widget);
+char *get_panel_dir_for (const WPanel *widget);
 
 void set_hintbar (const char *str);
 
-/* Rotating dash routines */
-void use_dash (gboolean flag);  /* Disable/Enable rotate_dash routines */
+// Rotating dash routines
+void use_dash (gboolean flag);  // Disable/Enable rotate_dash routines
 void rotate_dash (gboolean show);
 
 #ifdef ENABLE_SUBSHELL
@@ -96,4 +96,4 @@ void title_path_prepare (char **path, char **login);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__LAYOUT_H */
+#endif

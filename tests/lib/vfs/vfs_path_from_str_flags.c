@@ -66,43 +66,38 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_from_to_string_ds") */
-/* *INDENT-OFF* */
 static const struct test_strip_home_ds
 {
     const char *input_string;
     const char *expected_result;
-} test_strip_home_ds[] =
-{
-    { /* 0. */
+} test_strip_home_ds[] = {
+    {
+        // 0.
         "/mock/test/some/path",
-        "~/some/path"
+        "~/some/path",
     },
-    { /* 1. */
+    {
+        // 1.
         "/mock/testttt/some/path",
-        "/mock/testttt/some/path"
+        "/mock/testttt/some/path",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_strip_home, test_strip_home_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *actual_result;
 
-    /* when */
+    // when
     actual_result = vfs_path_from_str_flags (data->input_string, VPF_STRIP_HOME);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_result->str, data->expected_result);
 
     vfs_path_free (actual_result, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -115,9 +110,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_strip_home, test_strip_home_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

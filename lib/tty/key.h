@@ -5,14 +5,14 @@
 #ifndef MC__KEY_H
 #define MC__KEY_H
 
-#include "lib/global.h"         /* <glib.h> */
-#include "tty.h"                /* KEY_F macro */
+#include "lib/global.h"  // <glib.h>
+#include "tty.h"         // KEY_F macro
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* Possible return values from tty_get_event: */
-#define EV_MOUSE   -2
-#define EV_NONE    -1
+#define EV_MOUSE -2
+#define EV_NONE  -1
 
 /*
  * Internal representation of the key modifiers.  It is used in the
@@ -23,18 +23,18 @@
 #define KEY_M_CTRL  0x4000
 #define KEY_M_MASK  0x7000
 
-#define XCTRL(x) (KEY_M_CTRL | ((x) & 0x1F))
-#define ALT(x) (KEY_M_ALT | (unsigned int)(x))
+#define XCTRL(x)    (KEY_M_CTRL | ((x) & 0x1F))
+#define ALT(x)      (KEY_M_ALT | (unsigned int) (x))
 
 /* To define sequences and return codes */
-#define MCKEY_NOACTION  0
-#define MCKEY_ESCAPE    1
+#define MCKEY_NOACTION 0
+#define MCKEY_ESCAPE   1
 
 /* Return code for the mouse sequence */
-#define MCKEY_MOUSE     -2
+#define MCKEY_MOUSE -2
 
 /* Return code for the extended mouse sequence */
-#define MCKEY_EXTENDED_MOUSE     -3
+#define MCKEY_EXTENDED_MOUSE -3
 
 /* Return code for brackets of bracketed paste mode */
 #define MCKEY_BRACKETED_PASTING_START -4
@@ -118,4 +118,4 @@ is_abort_char (int c)
     return ((c == (int) ESC_CHAR) || (c == (int) KEY_F (10)));
 }
 
-#endif /* MC_KEY_H */
+#endif

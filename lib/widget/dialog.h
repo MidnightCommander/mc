@@ -9,24 +9,24 @@
 #ifndef MC__DIALOG_H
 #define MC__DIALOG_H
 
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>  // size_t
 
 #include "lib/global.h"
-#include "lib/hook.h"           /* hook_t */
-#include "lib/keybind.h"        /* global_keymap_t */
+#include "lib/hook.h"     // hook_t
+#include "lib/keybind.h"  // global_keymap_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define DIALOG(x) ((WDialog *)(x))
-#define CONST_DIALOG(x) ((const WDialog *)(x))
+#define DIALOG(x)       ((WDialog *) (x))
+#define CONST_DIALOG(x) ((const WDialog *) (x))
 
 /* Common return values */
 /* ATTENTION: avoid overlapping with FileProgressStatus values */
-#define B_EXIT          0
-#define B_CANCEL        1
-#define B_ENTER         2
-#define B_HELP          3
-#define B_USER          100
+#define B_EXIT   0
+#define B_CANCEL 1
+#define B_ENTER  2
+#define B_HELP   3
+#define B_USER   100
 
 /*** enums ***************************************************************************************/
 
@@ -50,7 +50,7 @@ typedef struct WDialog WDialog;
 typedef char *(*dlg_shortcut_str) (long command);
 
 /* get dialog name to show in dialog list */
-typedef char *(*dlg_title_str) (const WDialog * h, size_t len);
+typedef char *(*dlg_title_str) (const WDialog *h, size_t len);
 
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
@@ -58,29 +58,29 @@ typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
 struct WDialog
 {
-    WGroup group;               /* base class */
+    WGroup group;  // base class
 
-    /* Set by the user */
-    gboolean compact;           /* Suppress spaces around the frame */
-    const char *help_ctx;       /* Name of the help entry */
-    const int *colors;          /* Color set. Unused in viewer and editor */
+    // Set by the user
+    gboolean compact;      // Suppress spaces around the frame
+    const char *help_ctx;  // Name of the help entry
+    const int *colors;     // Color set. Unused in viewer and editor
 
-    /* Set and received by the user */
-    int ret_value;              /* Result of dlg_run() */
+    // Set and received by the user
+    int ret_value;  // Result of dlg_run()
 
-    /* Internal variables */
-    char *event_group;          /* Name of event group for this dialog */
-    Widget *bg;                 /* WFrame or WBackground */
+    // Internal variables
+    char *event_group;  // Name of event group for this dialog
+    Widget *bg;         // WFrame or WBackground
 
-    /* Data can be passed to dialog */
+    // Data can be passed to dialog
     union
     {
         void *p;
         int i;
     } data;
 
-    dlg_shortcut_str get_shortcut;      /* Shortcut string */
-    dlg_title_str get_title;    /* useless for modal dialogs */
+    dlg_shortcut_str get_shortcut;  // Shortcut string
+    dlg_title_str get_title;        // useless for modal dialogs
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -101,29 +101,29 @@ extern const global_keymap_t *dialog_map;
 
 /* Creates a dialog head  */
 WDialog *dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
-                     widget_pos_flags_t pos_flags, gboolean compact,
-                     const int *colors, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback,
-                     const char *help_ctx, const char *title);
+                     widget_pos_flags_t pos_flags, gboolean compact, const int *colors,
+                     widget_cb_fn callback, widget_mouse_cb_fn mouse_callback, const char *help_ctx,
+                     const char *title);
 
 void dlg_set_default_colors (void);
 
-void dlg_init (WDialog * h);
-int dlg_run (WDialog * d);
+void dlg_init (WDialog *h);
+int dlg_run (WDialog *d);
 
-void dlg_run_done (WDialog * h);
-void dlg_save_history (WDialog * h);
-void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
+void dlg_run_done (WDialog *h);
+void dlg_save_history (WDialog *h);
+void dlg_process_event (WDialog *h, int key, Gpm_Event *event);
 
-char *dlg_get_title (const WDialog * h, size_t len);
+char *dlg_get_title (const WDialog *h, size_t len);
 
 /* Default callbacks for dialogs */
-cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
-void dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event);
+cb_ret_t dlg_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data);
+void dlg_default_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event);
 
-void dlg_close (WDialog * h);
+void dlg_close (WDialog *h);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__DIALOG_H */
+#endif

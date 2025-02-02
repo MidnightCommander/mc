@@ -29,14 +29,8 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
-START_TEST (test_library_independ)
-/* *INDENT-ON* */
-{
-}
-/* *INDENT-OFF* */
+START_TEST (test_library_independ) {}
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -47,9 +41,9 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_library_independ);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

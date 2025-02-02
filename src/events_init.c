@@ -30,11 +30,11 @@
 #include "lib/event.h"
 
 #ifdef ENABLE_BACKGROUND
-#include "background.h"         /* (background_parent_call), background_parent_call_string() */
-#endif /* ENABLE_BACKGROUND */
-#include "clipboard.h"          /* clipboard events */
-#include "execute.h"            /* execute_suspend() */
-#include "help.h"               /* help_interactive_display() */
+#    include "background.h"  // (background_parent_call), background_parent_call_string()
+#endif
+#include "clipboard.h"  // clipboard events
+#include "execute.h"    // execute_suspend()
+#include "help.h"       // help_interactive_display()
 
 #include "events_init.h"
 
@@ -46,7 +46,6 @@
 
 /*** file scope variables ************************************************************************/
 
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -57,25 +56,23 @@
 gboolean
 events_init (GError **mcerror)
 {
-    /* *INDENT-OFF* */
-    static const event_init_t standard_events[] =
-    {
-        {MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
-        {MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},
-        {MCEVENT_GROUP_CORE, "clipboard_text_to_file", clipboard_text_to_file, NULL},
-        {MCEVENT_GROUP_CORE, "clipboard_text_from_file", clipboard_text_from_file, NULL},
+    static const event_init_t standard_events[] = {
+        { MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL },
+        { MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL },
+        { MCEVENT_GROUP_CORE, "clipboard_text_to_file", clipboard_text_to_file, NULL },
+        { MCEVENT_GROUP_CORE, "clipboard_text_from_file", clipboard_text_from_file, NULL },
 
-        {MCEVENT_GROUP_CORE, "help", help_interactive_display, NULL},
-        {MCEVENT_GROUP_CORE, "suspend", execute_suspend, NULL},
+        { MCEVENT_GROUP_CORE, "help", help_interactive_display, NULL },
+        { MCEVENT_GROUP_CORE, "suspend", execute_suspend, NULL },
 
 #ifdef ENABLE_BACKGROUND
-        {MCEVENT_GROUP_CORE, "background_parent_call", background_parent_call, NULL},
-        {MCEVENT_GROUP_CORE, "background_parent_call_string", background_parent_call_string, NULL},
-#endif /* ENABLE_BACKGROUND */
+        { MCEVENT_GROUP_CORE, "background_parent_call", background_parent_call, NULL },
+        { MCEVENT_GROUP_CORE, "background_parent_call_string", background_parent_call_string,
+          NULL },
+#endif
 
-        {NULL, NULL, NULL, NULL}
+        { NULL, NULL, NULL, NULL },
     };
-    /* *INDENT-ON* */
 
     if (!mc_event_init (mcerror))
         return FALSE;

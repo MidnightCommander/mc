@@ -26,12 +26,12 @@
 
 #include "lib/global.h"
 #include "lib/mcconfig.h"
-#include "lib/tty/key.h"        /* tty_keyname_to_keycode*() */
-#include "lib/keybind.h"        /* keybind_lookup_actionname() */
+#include "lib/tty/key.h"  // tty_keyname_to_keycode*()
+#include "lib/keybind.h"  // keybind_lookup_actionname()
 #include "lib/fileloc.h"
 
-#include "src/setup.h"          /* macro_action_t */
-#include "src/history.h"        /* MC_HISTORY_EDIT_REPEAT */
+#include "src/setup.h"    // macro_action_t
+#include "src/history.h"  // MC_HISTORY_EDIT_REPEAT
 
 #include "editwidget.h"
 
@@ -77,13 +77,13 @@ edit_get_macro (WEdit *edit, int hotkey)
     macros_t *array_start;
     macros_t *result;
     macros_t search_macro = {
-        .hotkey = hotkey
+        .hotkey = hotkey,
     };
 
     (void) edit;
 
-    result = bsearch (&search_macro, macros_list->data, macros_list->len,
-                      sizeof (macros_t), (GCompareFunc) edit_macro_comparator);
+    result = bsearch (&search_macro, macros_list->data, macros_list->len, sizeof (macros_t),
+                      (GCompareFunc) edit_macro_comparator);
 
     if (result == NULL || result->macro == NULL)
         return (-1);
@@ -105,7 +105,7 @@ edit_delete_macro (WEdit *edit, int hotkey)
     int indx;
     char *skeyname;
 
-    /* clear array of actions for current hotkey */
+    // clear array of actions for current hotkey
     while ((indx = edit_get_macro (edit, hotkey)) != -1)
     {
         macros_t *macros;
@@ -150,14 +150,14 @@ edit_store_macro_cmd (WEdit *edit)
     char *skeyname;
 
     hotkey =
-        editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), TRUE);
+        editcmd_dialog_raw_key_query (_ ("Save macro"), _ ("Press the macro's new hotkey:"), TRUE);
     if (hotkey == ESC_CHAR)
         return FALSE;
 
     tmp_act = keybind_lookup_keymap_command (WIDGET (edit)->keymap, hotkey);
-    /* return FALSE if try assign macro into restricted hotkeys */
-    if (tmp_act == CK_MacroStartRecord
-        || tmp_act == CK_MacroStopRecord || tmp_act == CK_MacroStartStopRecord)
+    // return FALSE if try assign macro into restricted hotkeys
+    if (tmp_act == CK_MacroStartRecord || tmp_act == CK_MacroStopRecord
+        || tmp_act == CK_MacroStartStopRecord)
         return FALSE;
 
     edit_delete_macro (edit, hotkey);
@@ -263,7 +263,7 @@ edit_load_macro_cmd (WEdit *edit)
             {
                 macro_action_t m_act = {
                     .action = 0,
-                    .ch = -1
+                    .ch = -1,
                 };
 
                 if (macro_pair[0] != NULL && macro_pair[0][0] != '\0')
@@ -274,7 +274,7 @@ edit_load_macro_cmd (WEdit *edit)
 
                 if (m_act.action != 0)
                 {
-                    /* a shell command */
+                    // a shell command
                     if ((m_act.action / CK_PipeBlock (0)) == 1)
                     {
                         m_act.action = CK_PipeBlock (0);
@@ -297,7 +297,7 @@ edit_load_macro_cmd (WEdit *edit)
         {
             macros_t macro = {
                 .hotkey = hotkey,
-                .macro = macros
+                .macro = macros,
             };
 
             g_array_append_val (macros_list, macro);
@@ -320,10 +320,10 @@ edit_delete_macro_cmd (WEdit *edit)
 {
     int hotkey;
 
-    hotkey = editcmd_dialog_raw_key_query (_("Delete macro"), _("Press macro hotkey:"), TRUE);
+    hotkey = editcmd_dialog_raw_key_query (_ ("Delete macro"), _ ("Press macro hotkey:"), TRUE);
 
     if (hotkey != 0 && !edit_delete_macro (edit, hotkey))
-        message (D_ERROR, _("Delete macro"), _("Macro not deleted"));
+        message (D_ERROR, _ ("Delete macro"), _ ("Macro not deleted"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -335,7 +335,7 @@ edit_repeat_macro_cmd (WEdit *edit)
     char *f;
     long count_repeat = 0;
 
-    f = input_dialog (_("Repeat last commands"), _("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL,
+    f = input_dialog (_ ("Repeat last commands"), _ ("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL,
                       INPUT_COMPLETE_NONE);
     ok = (f != NULL && *f != '\0');
 
@@ -411,7 +411,7 @@ edit_execute_macro (WEdit *edit, int hotkey)
 void
 edit_begin_end_macro_cmd (WEdit *edit)
 {
-    /* edit is a pointer to the widget */
+    // edit is a pointer to the widget
     if (edit != NULL)
     {
         long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
@@ -420,12 +420,12 @@ edit_begin_end_macro_cmd (WEdit *edit)
     }
 }
 
- /* --------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_begin_end_repeat_cmd (WEdit *edit)
 {
-    /* edit is a pointer to the widget */
+    // edit is a pointer to the widget
     if (edit != NULL)
     {
         long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;

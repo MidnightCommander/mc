@@ -36,14 +36,13 @@
  * \date 1995, 1998, 2003
  */
 
-
 #include <config.h>
 
 #include <stdlib.h>
 
 #include "lib/global.h"
 #include "lib/event.h"
-#include "lib/util.h"           /* MC_PTR_FREE */
+#include "lib/util.h"  // MC_PTR_FREE
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -85,11 +84,11 @@
 
 /*** global variables ****************************************************************************/
 
-int vfs_timeout = 60;           /* VFS timeout in seconds */
+int vfs_timeout = 60;  // VFS timeout in seconds
 
 /*** file scope macro definitions ****************************************************************/
 
-#define VFS_STAMPING(a) ((struct vfs_stamping *)(a))
+#define VFS_STAMPING(a) ((struct vfs_stamping *) (a))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -146,7 +145,7 @@ vfs_stamp (struct vfs_class *v, vfsid id)
 {
     struct vfs_stamping what = {
         .v = v,
-        .id = id
+        .id = id,
     };
     GSList *stamp;
     gboolean ret = FALSE;
@@ -168,7 +167,7 @@ vfs_rmstamp (struct vfs_class *v, vfsid id)
 {
     struct vfs_stamping what = {
         .v = v,
-        .id = id
+        .id = id,
     };
     GSList *stamp;
 
@@ -223,7 +222,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 
     if (!(id == NULL || (me == vclass && nvfsid == id)))
     {
-        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data);
+        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) &event_data);
 
         if (!event_data.ret && vclass != NULL && vclass->nothingisopen != NULL
             && vclass->nothingisopen (id))
@@ -253,25 +252,25 @@ vfs_expire (gboolean now)
 
     if (now)
     {
-        /* reverse list to free nested VFSes at first */
+        // reverse list to free nested VFSes at first
         stamps = g_slist_reverse (stamps);
     }
 
-    /* NULLize stamps that point to expired VFS */
+    // NULLize stamps that point to expired VFS
     for (stamp = stamps; stamp != NULL; stamp = g_slist_next (stamp))
     {
         struct vfs_stamping *stamping = VFS_STAMPING (stamp->data);
 
         if (now)
         {
-            /* free VFS forced */
+            // free VFS forced
             if (stamping->v->free != NULL)
                 stamping->v->free (stamping->id);
             MC_PTR_FREE (stamp->data);
         }
         else if (stamping->time <= exp_time)
         {
-            /* update timestamp of VFS that is in use, or free unused VFS */
+            // update timestamp of VFS that is in use, or free unused VFS
             if (stamping->v->nothingisopen != NULL && !stamping->v->nothingisopen (stamping->id))
                 stamping->time = curr_time;
             else
@@ -283,7 +282,7 @@ vfs_expire (gboolean now)
         }
     }
 
-    /* then remove NULLized stamps */
+    // then remove NULLized stamps
     stamps = g_slist_remove_all (stamps, NULL);
 
     locked = FALSE;

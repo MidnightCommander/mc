@@ -37,7 +37,7 @@
 #include <config.h>
 
 #include <stdlib.h>
-#include <limits.h>             /* MB_LEN_MAX */
+#include <limits.h>  // MB_LEN_MAX
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -46,8 +46,8 @@
 
 /*** global variables ****************************************************************************/
 
-char *user_recent_timeformat = NULL;    /* time format string for recent dates */
-char *user_old_timeformat = NULL;       /* time format string for older dates */
+char *user_recent_timeformat = NULL;  // time format string for recent dates
+char *user_old_timeformat = NULL;     // time format string for older dates
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -90,18 +90,18 @@ i18n_checktimelength (void)
 
     if (lt == NULL)
     {
-        /* huh, localtime() doesn't seem to work ... falling back to "(invalid)" */
-        length = str_term_width1 (_(INVALID_TIME_TEXT));
+        // huh, localtime() doesn't seem to work ... falling back to "(invalid)"
+        length = str_term_width1 (_ (INVALID_TIME_TEXT));
     }
     else
     {
         char buf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
         size_t tlen;
 
-        /* We are interested in the longest possible date */
+        // We are interested in the longest possible date
         lt->tm_sec = lt->tm_min = lt->tm_hour = lt->tm_mday = 10;
 
-        /* Loop through all months to find out the longest one */
+        // Loop through all months to find out the longest one
         for (lt->tm_mon = 0; lt->tm_mon < 12; lt->tm_mon++)
         {
             strftime (buf, sizeof (buf) - 1, user_recent_timeformat, lt);
@@ -112,15 +112,15 @@ i18n_checktimelength (void)
             length = MAX (tlen, length);
         }
 
-        tlen = (size_t) str_term_width1 (_(INVALID_TIME_TEXT));
+        tlen = (size_t) str_term_width1 (_ (INVALID_TIME_TEXT));
         length = MAX (tlen, length);
     }
 
-    /* Don't handle big differences. Use standard value (email bug, please) */
+    // Don't handle big differences. Use standard value (email bug, please)
     if (length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH)
         length = STD_I18NTIMELENGTH;
 
-    /* Save obtained value to the cache */
+    // Save obtained value to the cache
     i18n_timelength_cache = length;
 
     return i18n_timelength_cache;
@@ -135,8 +135,8 @@ file_date (time_t when)
     time_t current_time = time (NULL);
     const char *fmt;
 
-    if (current_time > when + 6L * 30L * 24L * 60L * 60L        /* Old. */
-        || current_time < when - 60L * 60L)     /* In the future. */
+    if (current_time > when + 6L * 30L * 24L * 60L * 60L  // Old.
+        || current_time < when - 60L * 60L)               // In the future.
         /* The file is fairly old or in the future.
            POSIX says the cutoff is 6 months old;
            approximate this by 6*30 days.

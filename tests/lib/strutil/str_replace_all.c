@@ -50,127 +50,120 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("str_replace_all_test_ds") */
-/* *INDENT-OFF* */
 static const struct str_replace_all_test_ds
 {
     const char *haystack;
     const char *needle;
     const char *replacement;
     const char *expected_result;
-} str_replace_all_test_ds[] =
-{
+} str_replace_all_test_ds[] = {
     {
-        /* 0. needle not found*/
+        // 0. needle not found
         "needle not found",
         "blablablabla",
         "1234567890",
         "needle not found",
     },
     {
-        /* 1.  replacement is less rather that needle */
+        // 1.  replacement is less rather that needle
         "some string blablablabla string",
-       "blablablabla",
+        "blablablabla",
         "1234",
         "some string 1234 string",
     },
     {
-        /* 2.  replacement is great rather that needle */
+        // 2.  replacement is great rather that needle
         "some string bla string",
         "bla",
         "1234567890",
         "some string 1234567890 string",
     },
     {
-        /* 3.  replace few substrings in a start of string */
+        // 3.  replace few substrings in a start of string
         "blabla blabla string",
         "blabla",
         "111111111",
         "111111111 111111111 string",
     },
     {
-        /* 4.  replace few substrings in a middle of string */
+        // 4.  replace few substrings in a middle of string
         "some string blabla str blabla string",
         "blabla",
         "111111111",
         "some string 111111111 str 111111111 string",
     },
     {
-        /* 5.  replace few substrings in an end of string */
+        // 5.  replace few substrings in an end of string
         "some string blabla str blabla",
         "blabla",
         "111111111",
         "some string 111111111 str 111111111",
     },
     {
-        /* 6.  escaped substring */
+        // 6.  escaped substring
         "\\blabla blabla",
         "blabla",
         "111111111",
         "blabla 111111111",
     },
     {
-        /* 7.  escaped substring */
+        // 7.  escaped substring
         "str \\blabla blabla",
         "blabla",
         "111111111",
         "str blabla 111111111",
     },
     {
-        /* 8.  escaped substring */
+        // 8.  escaped substring
         "str \\\\\\blabla blabla",
         "blabla",
         "111111111",
         "str \\\\blabla 111111111",
     },
     {
-        /* 9.  double-escaped substring (actually non-escaped) */
+        // 9.  double-escaped substring (actually non-escaped)
         "\\\\blabla blabla",
         "blabla",
         "111111111",
         "\\\\111111111 111111111",
     },
     {
-        /* 10.  partial substring */
+        // 10.  partial substring
         "blablabla",
         "blabla",
         "111111111",
         "111111111bla",
     },
     {
-        /* 11.  special symbols */
+        // 11.  special symbols
         "bla bla",
         "bla",
         "111\t1 1\n1111",
         "111\t1 1\n1111 111\t1 1\n1111",
     },
     {
-        /* 12. empty string */
+        // 12. empty string
         "",
         "blablablabla",
         "1234567890",
         NULL,
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "str_replace_all_test_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (str_replace_all_test, str_replace_all_test_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_result;
 
-    /* when */
+    // when
     actual_result = str_replace_all (data->haystack, data->needle, data->replacement);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_result, data->expected_result);
     g_free (actual_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -183,9 +176,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, str_replace_all_test, str_replace_all_test_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

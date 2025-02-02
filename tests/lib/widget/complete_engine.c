@@ -32,7 +32,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-void complete_engine_fill_completions (WInput * in);
+void complete_engine_fill_completions (WInput *in);
 GPtrArray *try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
 
 /* --------------------------------------------------------------------------------------------- */
@@ -99,7 +99,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_complete_engine_fill_completions_ds") */
-/* *INDENT-OFF* */
 static const struct test_complete_engine_fill_completions_ds
 {
     const char *input_buffer;
@@ -107,112 +106,40 @@ static const struct test_complete_engine_fill_completions_ds
     const input_complete_t input_completion_flags;
     int expected_start;
     int expected_end;
-} test_complete_engine_fill_completions_ds[] =
-{
-    {
-        "string",
-        3,
-        INPUT_COMPLETE_NONE,
-        0,
-        3
-    },
-    {
-        "some string",
-        7,
-        INPUT_COMPLETE_NONE,
-        0,
-        7
-    },
-    {
-        "some string",
-        7,
-        INPUT_COMPLETE_SHELL_ESC,
-        5,
-        7
-    },
-    {
-        "some\\ string111",
-        9,
-        INPUT_COMPLETE_SHELL_ESC,
-        0,
-        9
-    },
-    {
-        "some\\\tstring111",
-        9,
-        INPUT_COMPLETE_SHELL_ESC,
-        0,
-        9
-    },
-    {
-        "some\tstring",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some;string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some|string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some<string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some>string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some!@#$%^&*()_\\+~`\"',./?:string",
-        30,
-        INPUT_COMPLETE_NONE,
-        0,
-        30
-    },
+} test_complete_engine_fill_completions_ds[] = {
+    { "string", 3, INPUT_COMPLETE_NONE, 0, 3 },
+    { "some string", 7, INPUT_COMPLETE_NONE, 0, 7 },
+    { "some string", 7, INPUT_COMPLETE_SHELL_ESC, 5, 7 },
+    { "some\\ string111", 9, INPUT_COMPLETE_SHELL_ESC, 0, 9 },
+    { "some\\\tstring111", 9, INPUT_COMPLETE_SHELL_ESC, 0, 9 },
+    { "some\tstring", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some;string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some|string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some<string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some>string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some!@#$%^&*()_\\+~`\"',./?:string", 30, INPUT_COMPLETE_NONE, 0, 30 },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_complete_engine_fill_completions_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_complete_engine_fill_completions,
                          test_complete_engine_fill_completions_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     WInput *w_input;
 
     w_input = input_new (1, 1, NULL, 100, data->input_buffer, NULL, data->input_completion_flags);
     w_input->point = data->input_point;
 
-    /* when */
+    // when
     complete_engine_fill_completions (w_input);
 
-    /* then */
+    // then
     mctest_assert_str_eq (try_complete__text__captured, data->input_buffer);
     ck_assert_int_eq (try_complete__lc_start__captured, data->expected_start);
     ck_assert_int_eq (try_complete__lc_end__captured, data->expected_end);
     ck_assert_int_eq (try_complete__flags__captured, data->input_completion_flags);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -225,10 +152,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_complete_engine_fill_completions,
                                    test_complete_engine_fill_completions_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

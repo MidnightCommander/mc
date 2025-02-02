@@ -51,61 +51,54 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_x_basename_ds") */
-/* *INDENT-OFF* */
 static const struct test_x_basename_ds
 {
     const char *input_value;
     const char *expected_result;
-} test_x_basename_ds[] =
-{
+} test_x_basename_ds[] = {
     {
         "/test/path/test2/path2",
-        "path2"
+        "path2",
     },
     {
         "/test/path/test2/path2#vfsprefix",
-        "path2#vfsprefix"
+        "path2#vfsprefix",
     },
     {
         "/test/path/test2/path2/vfsprefix://",
-        "path2/vfsprefix://"
+        "path2/vfsprefix://",
     },
     {
         "/test/path/test2/path2/vfsprefix://subdir",
-        "subdir"
+        "subdir",
     },
     {
         "/test/path/test2/path2/vfsprefix://subdir/",
-        "subdir/"
+        "subdir/",
     },
     {
         "/test/path/test2/path2/vfsprefix://subdir/subdir2",
-        "subdir2"
+        "subdir2",
     },
     {
         "/test/path/test2/path2/vfsprefix:///",
-        "/"
+        "/",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_x_basename_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_x_basename, test_x_basename_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     const char *actual_result;
 
-    /* when */
+    // when
     actual_result = x_basename (data->input_value);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_result, data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -118,9 +111,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_x_basename, test_x_basename_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

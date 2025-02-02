@@ -31,7 +31,7 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isdigit() */
+#include <ctype.h>  // isdigit()
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
@@ -87,7 +87,7 @@
 
 /* Configurable: log2 of the buffer size in bytes */
 #ifndef S_EDIT_BUF_SIZE
-#define S_EDIT_BUF_SIZE 16
+#    define S_EDIT_BUF_SIZE 16
 #endif
 
 /* Size of the buffer */
@@ -106,13 +106,13 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Get pointer to byte at specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  *
-  * @return NULL if byte_index is negative or larger than file size; pointer to byte otherwise.
-  */
+ * Get pointer to byte at specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ *
+ * @return NULL if byte_index is negative or larger than file size; pointer to byte otherwise.
+ */
 static char *
 edit_buffer_get_byte_ptr (const edit_buffer_t *buf, off_t byte_index)
 {
@@ -175,13 +175,13 @@ edit_buffer_clean (edit_buffer_t *buf)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Get byte at specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  *
-  * @return '\n' if byte_index is negative or larger than file size; byte at byte_index otherwise.
-  */
+ * Get byte at specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ *
+ * @return '\n' if byte_index is negative or larger than file size; byte at byte_index otherwise.
+ */
 
 int
 edit_buffer_get_byte (const edit_buffer_t *buf, off_t byte_index)
@@ -197,16 +197,16 @@ edit_buffer_get_byte (const edit_buffer_t *buf, off_t byte_index)
 
 #ifdef HAVE_CHARSET
 /**
-  * Get utf-8 symbol at specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  * @param char_length length of returned symbol
-  *
-  * @return '\n' if byte_index is negative or larger than file size;
-  *         0 if utf-8 symbol at specified index is invalid;
-  *         utf-8 symbol otherwise
-  */
+ * Get utf-8 symbol at specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ * @param char_length length of returned symbol
+ *
+ * @return '\n' if byte_index is negative or larger than file size;
+ *         0 if utf-8 symbol at specified index is invalid;
+ *         utf-8 symbol otherwise
+ */
 
 int
 edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length)
@@ -232,7 +232,7 @@ edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_lengt
     res = g_utf8_get_char_validated (str, -1);
     if (res == (gunichar) (-2) || res == (gunichar) (-1))
     {
-        /* Retry with explicit bytes to make sure it's not a buffer boundary */
+        // Retry with explicit bytes to make sure it's not a buffer boundary
         size_t i;
         gchar utf8_buf[UTF8_CHAR_LEN + 1];
 
@@ -250,7 +250,7 @@ edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_lengt
     else
     {
         ch = res;
-        /* Calculate UTF-8 char length */
+        // Calculate UTF-8 char length
         next_ch = g_utf8_next_char (str);
         *char_length = next_ch - str;
     }
@@ -260,16 +260,16 @@ edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_lengt
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Get utf-8 symbol before specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  * @param char_length length of returned symbol
-  *
-  * @return 0 if byte_index is negative or larger than file size;
-  *         1-byte value before specified index if utf-8 symbol before specified index is invalid;
-  *         utf-8 symbol otherwise
-  */
+ * Get utf-8 symbol before specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ * @param char_length length of returned symbol
+ *
+ * @return 0 if byte_index is negative or larger than file size;
+ *         1-byte value before specified index if utf-8 symbol before specified index is invalid;
+ *         utf-8 symbol otherwise
+ */
 
 int
 edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length)
@@ -309,7 +309,7 @@ edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_
     *char_length = cursor_buf_ptr - str;
     return (int) res;
 }
-#endif /* HAVE_CHARSET */
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -388,7 +388,7 @@ edit_buffer_get_eol (const edit_buffer_t *buf, off_t current)
  * @param buf editor buffer
  * @param current start_pos offset
  * @param start actual start word ofset
- * @param cut 
+ * @param cut
  *
  * @return word as newly allocated object
  */
@@ -444,16 +444,16 @@ edit_buffer_find_word_start (const edit_buffer_t *buf, off_t *word_start, gsize 
     int c;
     off_t i;
 
-    /* return if at begin of file */
+    // return if at begin of file
     if (buf->curs1 <= 0)
         return FALSE;
 
     c = edit_buffer_get_previous_byte (buf);
-    /* return if not at end or in word */
+    // return if not at end or in word
     if (is_break_char (c))
         return FALSE;
 
-    /* search start of word */
+    // search start of word
     for (i = 1;; i++)
     {
         int last;
@@ -463,7 +463,7 @@ edit_buffer_find_word_start (const edit_buffer_t *buf, off_t *word_start, gsize 
 
         if (is_break_char (c))
         {
-            /* return if word starts with digit */
+            // return if word starts with digit
             if (isdigit (last))
                 return FALSE;
 
@@ -471,8 +471,8 @@ edit_buffer_find_word_start (const edit_buffer_t *buf, off_t *word_start, gsize 
         }
     }
 
-    /* success */
-    *word_start = buf->curs1 - i;       /* start found */
+    // success
+    *word_start = buf->curs1 - i;  // start found
     *word_len = (gsize) i;
 
     return TRUE;
@@ -495,18 +495,18 @@ edit_buffer_insert (edit_buffer_t *buf, int c)
 
     i = buf->curs1 & M_EDIT_BUF_SIZE;
 
-    /* add a new buffer if we've reached the end of the last one */
+    // add a new buffer if we've reached the end of the last one
     if (i == 0)
         g_ptr_array_add (buf->b1, g_malloc0 (EDIT_BUF_SIZE));
 
-    /* perform the insertion */
+    // perform the insertion
     b = g_ptr_array_index (buf->b1, buf->curs1 >> S_EDIT_BUF_SIZE);
     *((unsigned char *) b + i) = (unsigned char) c;
 
-    /* update cursor position */
+    // update cursor position
     buf->curs1++;
 
-    /* update file length */
+    // update file length
     buf->size++;
 }
 
@@ -527,18 +527,18 @@ edit_buffer_insert_ahead (edit_buffer_t *buf, int c)
 
     i = buf->curs2 & M_EDIT_BUF_SIZE;
 
-    /* add a new buffer if we've reached the end of the last one */
+    // add a new buffer if we've reached the end of the last one
     if (i == 0)
         g_ptr_array_add (buf->b2, g_malloc0 (EDIT_BUF_SIZE));
 
-    /* perform the insertion */
+    // perform the insertion
     b = g_ptr_array_index (buf->b2, buf->curs2 >> S_EDIT_BUF_SIZE);
     *((unsigned char *) b + EDIT_BUF_SIZE - 1 - i) = (unsigned char) c;
 
-    /* update cursor position */
+    // update cursor position
     buf->curs2++;
 
-    /* update file length */
+    // update file length
     buf->size++;
 }
 
@@ -576,7 +576,7 @@ edit_buffer_delete (edit_buffer_t *buf)
 
     buf->curs2 = prev;
 
-    /* update file length */
+    // update file length
     buf->size--;
 
     return c;
@@ -616,7 +616,7 @@ edit_buffer_backspace (edit_buffer_t *buf)
 
     buf->curs1 = prev;
 
-    /* update file length */
+    // update file length
     buf->size--;
 
     return c;
@@ -708,7 +708,7 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
     buf->curs2 = size;
     i = buf->curs2 >> S_EDIT_BUF_SIZE;
 
-    /* fill last part of b2 */
+    // fill last part of b2
     data_size = buf->curs2 & M_EDIT_BUF_SIZE;
     if (data_size != 0)
     {
@@ -717,7 +717,7 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
         b = (char *) b + EDIT_BUF_SIZE - data_size;
         ret = mc_read (fd, b, data_size);
 
-        /* count lines */
+        // count lines
         for (j = 0; j < ret; j++)
             if (*((char *) b + j) == '\n')
                 buf->lines++;
@@ -726,7 +726,7 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
             return ret;
     }
 
-    /* fulfill other parts of b2 from end to begin */
+    // fulfill other parts of b2 from end to begin
     data_size = EDIT_BUF_SIZE;
     for (--i; i >= 0; i--)
     {
@@ -738,7 +738,7 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
         if (sz >= 0)
             ret += sz;
 
-        /* count lines */
+        // count lines
         for (j = 0; j < sz; j++)
             if (*((char *) b + j) == '\n')
                 buf->lines++;
@@ -748,7 +748,7 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
             update_cnt = (update_cnt + 1) & 0xf;
             if (update_cnt == 0)
             {
-                /* FIXME: overcare */
+                // FIXME: overcare
                 if (sm->buf == NULL)
                     sm->buf = buf;
 
@@ -765,7 +765,7 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
             break;
     }
 
-    /* reverse buffer */
+    // reverse buffer
     for (i = 0; i < (off_t) buf->b2->len / 2; i++)
     {
         void **b1, **b2;
@@ -813,7 +813,7 @@ edit_buffer_write_file (edit_buffer_t *buf, int fd)
     off_t data_size, sz;
     void *b;
 
-    /* write all fulfilled parts of b1 from begin to end */
+    // write all fulfilled parts of b1 from begin to end
     if (buf->b1->len != 0)
     {
         data_size = EDIT_BUF_SIZE;
@@ -829,7 +829,7 @@ edit_buffer_write_file (edit_buffer_t *buf, int fd)
                 return ret;
         }
 
-        /* write last partially filled part of b1 */
+        // write last partially filled part of b1
         data_size = ((buf->curs1 - 1) & M_EDIT_BUF_SIZE) + 1;
         b = g_ptr_array_index (buf->b1, i);
         sz = mc_write (fd, b, data_size);
@@ -839,10 +839,10 @@ edit_buffer_write_file (edit_buffer_t *buf, int fd)
             return ret;
     }
 
-    /* write b2 from end to begin, if b2 contains some data */
+    // write b2 from end to begin, if b2 contains some data
     if (buf->b2->len != 0)
     {
-        /* write last partially filled part of b2 */
+        // write last partially filled part of b2
         i = buf->b2->len - 1;
         b = g_ptr_array_index (buf->b2, i);
         data_size = ((buf->curs2 - 1) & M_EDIT_BUF_SIZE) + 1;
@@ -852,7 +852,7 @@ edit_buffer_write_file (edit_buffer_t *buf, int fd)
 
         if (sz == data_size)
         {
-            /* write other fulfilled parts of b2 from end to begin */
+            // write other fulfilled parts of b2 from end to begin
             data_size = EDIT_BUF_SIZE;
             while (--i >= 0)
             {

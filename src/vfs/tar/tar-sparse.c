@@ -33,15 +33,16 @@
  *   comparison of unsigned expression < 0 is always false [-Werror=type-limits]
  *
  * https://www.boost.org/doc/libs/1_55_0/libs/integer/test/cstdint_test.cpp
- *   We can't suppress this warning on the command line as not all GCC versions support -Wno-type-limits
+ *   We can't suppress this warning on the command line as not all GCC versions support
+ * -Wno-type-limits
  */
 #if defined(__GNUC__) && (__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 4))
-#pragma GCC diagnostic ignored "-Wtype-limits"
+#    pragma GCC diagnostic ignored "-Wtype-limits"
 #endif
 
 #include <config.h>
 
-#include <inttypes.h>           /* uintmax_t */
+#include <inttypes.h>  // uintmax_t
 
 #include "lib/global.h"
 
@@ -74,36 +75,36 @@
 
 /* Bound on buffer size needed to represent an integer type or expression T,
    including the terminating null.  T must not be a bit-field expression.  */
-#define INT_BUFSIZE_BOUND(t) (INT_STRLEN_BOUND (t) + 1)
+#define INT_BUFSIZE_BOUND(t)  (INT_STRLEN_BOUND (t) + 1)
 
 #define UINTMAX_STRSIZE_BOUND INT_BUFSIZE_BOUND (uintmax_t)
 
-#define COPY_BUF(arch,b,buf,src)                                         \
-do                                                                       \
-{                                                                        \
-    char *endp = b->buffer + BLOCKSIZE;                                  \
-    char *dst = buf;                                                     \
-    do                                                                   \
-    {                                                                    \
-        if (dst == buf + UINTMAX_STRSIZE_BOUND - 1)                      \
-            /* numeric overflow in sparse archive member */              \
-            return FALSE;                                                \
-        if (src == endp)                                                 \
-        {                                                                \
-            tar_set_next_block_after (b);                                \
-            b = tar_find_next_block (arch);                              \
-            if (b == NULL)                                               \
-                /* unexpected EOF in archive */                          \
-                return FALSE;                                            \
-            src = b->buffer;                                             \
-            endp = b->buffer + BLOCKSIZE;                                \
-        }                                                                \
-        *dst = *src++;                                                   \
-    }                                                                    \
-    while (*dst++ != '\n');                                              \
-    dst[-1] = '\0';                                                      \
-}                                                                        \
-while (FALSE)
+#define COPY_BUF(arch, b, buf, src)                                                                \
+    do                                                                                             \
+    {                                                                                              \
+        char *endp = b->buffer + BLOCKSIZE;                                                        \
+        char *dst = buf;                                                                           \
+        do                                                                                         \
+        {                                                                                          \
+            if (dst == buf + UINTMAX_STRSIZE_BOUND - 1)                                            \
+                /* numeric overflow in sparse archive member */                                    \
+                return FALSE;                                                                      \
+            if (src == endp)                                                                       \
+            {                                                                                      \
+                tar_set_next_block_after (b);                                                      \
+                b = tar_find_next_block (arch);                                                    \
+                if (b == NULL)                                                                     \
+                    /* unexpected EOF in archive */                                                \
+                    return FALSE;                                                                  \
+                src = b->buffer;                                                                   \
+                endp = b->buffer + BLOCKSIZE;                                                      \
+            }                                                                                      \
+            *dst = *src++;                                                                         \
+        }                                                                                          \
+        while (*dst++ != '\n');                                                                    \
+        dst[-1] = '\0';                                                                            \
+    }                                                                                              \
+    while (FALSE)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -111,20 +112,20 @@ struct tar_sparse_file;
 
 struct tar_sparse_optab
 {
-    gboolean (*init) (struct tar_sparse_file * file);
-    gboolean (*done) (struct tar_sparse_file * file);
-    gboolean (*sparse_member_p) (struct tar_sparse_file * file);
-    gboolean (*fixup_header) (struct tar_sparse_file * file);
-    gboolean (*decode_header) (tar_super_t * archive, struct tar_sparse_file * file);
+    gboolean (*init) (struct tar_sparse_file *file);
+    gboolean (*done) (struct tar_sparse_file *file);
+    gboolean (*sparse_member_p) (struct tar_sparse_file *file);
+    gboolean (*fixup_header) (struct tar_sparse_file *file);
+    gboolean (*decode_header) (tar_super_t *archive, struct tar_sparse_file *file);
 };
 
 struct tar_sparse_file
 {
-    int fd;                     /**< File descriptor */
-    off_t dumped_size;          /**< Number of bytes actually written to the archive */
-    struct tar_stat_info *stat_info;    /**< Information about the file */
+    int fd;                           // File descriptor
+    off_t dumped_size;                // Number of bytes actually written to the archive
+    struct tar_stat_info *stat_info;  // Information about the file
     struct tar_sparse_optab const *optab;
-    void *closure;              /**< Any additional data optab calls might reqiure */
+    void *closure;  // Any additional data optab calls might reqiure
 };
 
 enum oldgnu_add_status
@@ -138,38 +139,32 @@ enum oldgnu_add_status
 
 static gboolean oldgnu_sparse_member_p (struct tar_sparse_file *file);
 static gboolean oldgnu_fixup_header (struct tar_sparse_file *file);
-static gboolean oldgnu_get_sparse_info (tar_super_t * archive, struct tar_sparse_file *file);
+static gboolean oldgnu_get_sparse_info (tar_super_t *archive, struct tar_sparse_file *file);
 
 static gboolean star_sparse_member_p (struct tar_sparse_file *file);
 static gboolean star_fixup_header (struct tar_sparse_file *file);
-static gboolean star_get_sparse_info (tar_super_t * archive, struct tar_sparse_file *file);
+static gboolean star_get_sparse_info (tar_super_t *archive, struct tar_sparse_file *file);
 
 static gboolean pax_sparse_member_p (struct tar_sparse_file *file);
-static gboolean pax_decode_header (tar_super_t * archive, struct tar_sparse_file *file);
+static gboolean pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file);
 
 /*** file scope variables ************************************************************************/
 
-/* *INDENT-OFF* */
-static struct tar_sparse_optab const oldgnu_optab =
-{
-    .init = NULL,               /* No init function */
-    .done = NULL,               /* No done function */
+static struct tar_sparse_optab const oldgnu_optab = {
+    .init = NULL,  // No init function
+    .done = NULL,  // No done function
     .sparse_member_p = oldgnu_sparse_member_p,
     .fixup_header = oldgnu_fixup_header,
-    .decode_header = oldgnu_get_sparse_info
+    .decode_header = oldgnu_get_sparse_info,
 };
-/* *INDENT-ON* */
 
-/* *INDENT-OFF* */
-static struct tar_sparse_optab const star_optab =
-{
-    .init = NULL,               /* No init function */
-    .done = NULL,               /* No done function */
+static struct tar_sparse_optab const star_optab = {
+    .init = NULL,  // No init function
+    .done = NULL,  // No done function
     .sparse_member_p = star_sparse_member_p,
     .fixup_header = star_fixup_header,
-    .decode_header = star_get_sparse_info
+    .decode_header = star_get_sparse_info,
 };
-/* *INDENT-ON* */
 
 /* GNU PAX sparse file format. There are several versions:
  * 0.0
@@ -208,7 +203,7 @@ static struct tar_sparse_optab const star_optab =
  Starting from this version, the exact sparse format version is specified explicitly
  in the header using the following variables:
 
- GNU.sparse.major     Major version 
+ GNU.sparse.major     Major version
  GNU.sparse.minor     Minor version
 
  X header keeps the following variables:
@@ -237,11 +232,11 @@ static struct tar_sparse_optab const star_optab =
  */
 
 static struct tar_sparse_optab const pax_optab = {
-    .init = NULL,               /* No init function */
-    .done = NULL,               /* No done function */
+    .init = NULL,  // No init function
+    .done = NULL,  // No done function
     .sparse_member_p = pax_sparse_member_p,
-    .fixup_header = NULL,       /* No fixup_header function */
-    .decode_header = pax_decode_header
+    .fixup_header = NULL,  // No fixup_header function
+    .decode_header = pax_decode_header,
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -270,7 +265,7 @@ sparse_select_optab (const tar_super_t *archive, struct tar_sparse_file *file)
         return FALSE;
 
     case TAR_OLDGNU:
-    case TAR_GNU:              /* FIXME: This one should disappear? */
+    case TAR_GNU:  // FIXME: This one should disappear?
         file->optab = &oldgnu_optab;
         break;
 
@@ -494,7 +489,7 @@ star_get_sparse_info (tar_super_t *archive, struct tar_sparse_file *file)
 
     if (h->star_in_header.prefix[0] == '\0' && h->star_in_header.sp[0].offset[10] != '\0')
     {
-        /* Old star format */
+        // Old star format
         for (i = 0; i < SPARSES_IN_STAR_HEADER; i++)
         {
             rc = oldgnu_add_sparse (file, &h->star_in_header.sp[i]);
@@ -550,14 +545,14 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
         tar_set_next_block_after (current_header);
         blk = tar_find_next_block (archive);
         if (blk == NULL)
-            /* unexpected EOF in archive */
+            // unexpected EOF in archive
             return FALSE;
         p = blk->buffer;
         COPY_BUF (archive, blk, nbuf, p);
 
         if (!decode_num (&u, nbuf, SIZE_MAX))
         {
-            /* malformed sparse archive member */
+            // malformed sparse archive member
             return FALSE;
         }
 
@@ -577,7 +572,7 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
             COPY_BUF (archive, blk, nbuf, p);
             if (!decode_num (&u, nbuf, TYPE_MAXIMUM (off_t)))
             {
-                /* malformed sparse archive member */
+                // malformed sparse archive member
                 return FALSE;
             }
             sp.offset = u;
@@ -585,7 +580,7 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
             if (!decode_num (&u, nbuf, TYPE_MAXIMUM (off_t)) || ckd_add (&size, sp.offset, u)
                 || file->stat_info->stat.st_size < size)
             {
-                /* malformed sparse archive member */
+                // malformed sparse archive member
                 return FALSE;
             }
             sp.numbytes = u;

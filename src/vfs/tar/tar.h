@@ -15,4 +15,4 @@ void vfs_init_tarfs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__VFS_TAR_H */
+#endif

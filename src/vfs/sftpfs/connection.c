@@ -27,11 +27,11 @@
 #include <config.h>
 #include <errno.h>
 
-#include <netdb.h>              /* struct hostent */
-#include <sys/socket.h>         /* AF_INET */
-#include <netinet/in.h>         /* struct in_addr */
+#include <netdb.h>       // struct hostent
+#include <sys/socket.h>  // AF_INET
+#include <netinet/in.h>  // struct in_addr
 #ifdef HAVE_ARPA_INET_H
-#include <arpa/inet.h>
+#    include <arpa/inet.h>
 #endif
 
 #include <libssh2.h>
@@ -40,10 +40,10 @@
 #include "lib/global.h"
 
 #include "lib/util.h"
-#include "lib/tty/tty.h"        /* tty_enable_interrupt_key () */
+#include "lib/tty/tty.h"  // tty_enable_interrupt_key ()
 #include "lib/vfs/utilvfs.h"
-#include "lib/mcconfig.h"       /* mc_config_get_home_dir () */
-#include "lib/widget.h"         /* query_dialog () */
+#include "lib/mcconfig.h"  // mc_config_get_home_dir ()
+#include "lib/widget.h"    // query_dialog ()
 
 #include "internal.h"
 
@@ -74,7 +74,6 @@ static const char *const hostkey_method_ssh_ecdsa_256 = "ecdsa-sha2-nistp256";
 static const char *const hostkey_method_ssh_rsa = "ssh-rsa";
 static const char *const hostkey_method_ssh_dss = "ssh-dss";
 
-/* *INDENT-OFF* */
 static const char *default_hostkey_methods =
 #ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_256
     "ecdsa-sha2-nistp256,"
@@ -103,7 +102,6 @@ static const char *default_hostkey_methods =
     "ssh-rsa,"
     "ssh-rsa-cert-v01@openssh.com,"
     "ssh-dss";
-/* *INDENT-ON* */
 
 /**
  *
@@ -144,13 +142,13 @@ sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
 
     if (super->path_element->host == NULL || *super->path_element->host == '\0')
     {
-        mc_propagate_error (mcerror, 0, "%s", _("sftp: Invalid host name."));
+        mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Invalid host name."));
         return LIBSSH2_INVALID_SOCKET;
     }
 
     sprintf (port, "%hu", (unsigned short) super->path_element->port);
 
-    tty_enable_interrupt_key ();        /* clear the interrupt flag */
+    tty_enable_interrupt_key ();  // clear the interrupt flag
 
     memset (&hints, 0, sizeof (hints));
     hints.ai_family = AF_UNSPEC;
@@ -168,7 +166,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
 #ifdef AI_ADDRCONFIG
     if (e == EAI_BADFLAGS)
     {
-        /* Retry with no flags if AI_ADDRCONFIG was rejected. */
+        // Retry with no flags if AI_ADDRCONFIG was rejected.
         hints.ai_flags = 0;
         e = getaddrinfo (super->path_element->host, port, &hints, &res);
     }
@@ -176,7 +174,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
 
     if (e != 0)
     {
-        mc_propagate_error (mcerror, e, _("sftp: %s"), gai_strerror (e));
+        mc_propagate_error (mcerror, e, _ ("sftp: %s"), gai_strerror (e));
         my_socket = LIBSSH2_INVALID_SOCKET;
         goto ret;
     }
@@ -203,8 +201,9 @@ sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
 
         if (sftpfs_super->ip_address == NULL)
         {
-            mc_propagate_error (mcerror, 0, "%s",
-                                _("sftp: failed to convert remote host IP address into text form"));
+            mc_propagate_error (
+                mcerror, 0, "%s",
+                _ ("sftp: failed to convert remote host IP address into text form"));
             my_socket = LIBSSH2_INVALID_SOCKET;
             goto ret;
         }
@@ -216,12 +215,12 @@ sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
             if (curr_res->ai_next != NULL)
                 continue;
 
-            vfs_print_message (_("sftp: %s"), unix_error_string (errno));
+            vfs_print_message (_ ("sftp: %s"), unix_error_string (errno));
             my_socket = LIBSSH2_INVALID_SOCKET;
             goto ret;
         }
 
-        vfs_print_message (_("sftp: making connection to %s"), super->path_element->host);
+        vfs_print_message (_ ("sftp: making connection to %s"), super->path_element->host);
 
         if (connect (my_socket, curr_res->ai_addr, curr_res->ai_addrlen) >= 0)
             break;
@@ -231,9 +230,9 @@ sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
         close (my_socket);
 
         if (save_errno == EINTR && tty_got_interrupt ())
-            mc_propagate_error (mcerror, 0, "%s", _("sftp: connection interrupted by user"));
+            mc_propagate_error (mcerror, 0, "%s", _ ("sftp: connection interrupted by user"));
         else if (res->ai_next == NULL)
-            mc_propagate_error (mcerror, save_errno, _("sftp: connection to server failed: %s"),
+            mc_propagate_error (mcerror, save_errno, _ ("sftp: connection to server failed: %s"),
                                 unix_error_string (save_errno));
         else
             continue;
@@ -242,7 +241,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
         break;
     }
 
-  ret:
+ret:
     if (res != NULL)
         freeaddrinfo (res);
     tty_disable_interrupt_key ();
@@ -288,7 +287,7 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError **mcerror)
                 continue;
 
             if (store->name == NULL)
-                /* Ignore hashed hostnames. Currently, libssh2 offers no way for us to match it */
+                // Ignore hashed hostnames. Currently, libssh2 offers no way for us to match it
                 continue;
 
             if (store->name[0] != '[')
@@ -299,7 +298,7 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError **mcerror)
 
                 kh_name_end = strstr (store->name, "]:");
                 if (kh_name_end == NULL)
-                    /* Invalid host pattern */
+                    // Invalid host pattern
                     continue;
 
                 port = (int) g_ascii_strtoll (kh_name_end + 2, NULL, 10);
@@ -352,10 +351,10 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError **mcerror)
             break;
         case LIBSSH2_KNOWNHOST_KEY_RSA1:
             mc_propagate_error (mcerror, 0, "%s",
-                                _("sftp: found host key of unsupported type: RSA1"));
+                                _ ("sftp: found host key of unsupported type: RSA1"));
             return FALSE;
         default:
-            mc_propagate_error (mcerror, 0, "%s 0x%x", _("sftp: unknown host key type:"),
+            mc_propagate_error (mcerror, 0, "%s 0x%x", _ ("sftp: unknown host key type:"),
                                 (unsigned int) mask);
             return FALSE;
         }
@@ -375,13 +374,13 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError **mcerror)
 
     return TRUE;
 
-  err:
-    {
-        int sftp_errno;
+err:
+{
+    int sftp_errno;
 
-        sftp_errno = libssh2_session_last_errno (sftpfs_super->session);
-        sftpfs_ssherror_to_gliberror (sftpfs_super, sftp_errno, mcerror);
-    }
+    sftp_errno = libssh2_session_last_errno (sftpfs_super->session);
+    sftpfs_ssherror_to_gliberror (sftpfs_super, sftp_errno, mcerror);
+}
     return FALSE;
 }
 
@@ -405,21 +404,21 @@ sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, si
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     int rc;
 
-    /* add this host + key pair  */
+    // add this host + key pair
     rc = libssh2_knownhost_addc (sftpfs_super->known_hosts, super->path_element->host, NULL,
                                  remote_key, remote_key_len, NULL, 0, type_mask, NULL);
     if (rc < 0)
         return rc;
 
-    /* write the entire in-memory list of known hosts to the known_hosts file */
+    // write the entire in-memory list of known hosts to the known_hosts file
     rc = libssh2_knownhost_writefile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
                                       LIBSSH2_KNOWNHOST_FILE_OPENSSH);
 
     if (rc < 0)
         return rc;
 
-    (void) message (D_NORMAL, _("Information"),
-                    _("Permanently added\n%s (%s)\nto the list of known hosts."),
+    (void) message (D_NORMAL, _ ("Information"),
+                    _ ("Permanently added\n%s (%s)\nto the list of known hosts."),
                     super->path_element->host, sftpfs_super->ip_address);
 
     return 0;
@@ -435,11 +434,11 @@ sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, si
 static const char *
 sftpfs_compute_fingerprint_hash (LIBSSH2_SESSION *session)
 {
-    static char result[SHA1_DIGEST_LENGTH * 3 + 1];     /* "XX:" for each byte, and EOL */
+    static char result[SHA1_DIGEST_LENGTH * 3 + 1];  // "XX:" for each byte, and EOL
     const char *fingerprint;
     size_t i;
 
-    /* The fingerprint points to static storage (!), don't free() it. */
+    // The fingerprint points to static storage (!), don't free() it.
     fingerprint = libssh2_hostkey_hash (session, LIBSSH2_HOSTKEY_HASH_SHA1);
     if (fingerprint == NULL)
         return NULL;
@@ -447,7 +446,7 @@ sftpfs_compute_fingerprint_hash (LIBSSH2_SESSION *session)
     for (i = 0; i < SHA1_DIGEST_LENGTH && i * 3 < sizeof (result) - 1; i++)
         g_snprintf ((gchar *) (result + i * 3), 4, "%02x:", (guint8) fingerprint[i]);
 
-    /* remove last ":" */
+    // remove last ":"
     result[i * 3 - 1] = '\0';
 
     return result;
@@ -483,7 +482,7 @@ sftpfs_process_known_host (struct vfs_s_super *super, GError **mcerror)
     if (remote_key == NULL || remote_key_len == 0
         || remote_key_type == LIBSSH2_HOSTKEY_TYPE_UNKNOWN)
     {
-        mc_propagate_error (mcerror, 0, "%s", _("sftp: cannot get the remote host key"));
+        mc_propagate_error (mcerror, 0, "%s", _ ("sftp: cannot get the remote host key"));
         return FALSE;
     }
 
@@ -523,55 +522,56 @@ sftpfs_process_known_host (struct vfs_s_super *super, GError **mcerror)
 #endif
     default:
         mc_propagate_error (mcerror, 0, "%s",
-                            _("sftp: unsupported key type, can't check remote host key"));
+                            _ ("sftp: unsupported key type, can't check remote host key"));
         return FALSE;
     }
 
     fingerprint_hash = sftpfs_compute_fingerprint_hash (sftpfs_super->session);
     if (fingerprint_hash == NULL)
     {
-        mc_propagate_error (mcerror, 0, "%s", _("sftp: can't compute host key fingerprint hash"));
+        mc_propagate_error (mcerror, 0, "%s", _ ("sftp: can't compute host key fingerprint hash"));
         return FALSE;
     }
 
-    rc = libssh2_knownhost_checkp (sftpfs_super->known_hosts, super->path_element->host,
-                                   super->path_element->port, remote_key, remote_key_len,
-                                   LIBSSH2_KNOWNHOST_TYPE_PLAIN | LIBSSH2_KNOWNHOST_KEYENC_RAW |
-                                   keybit, &host);
+    rc = libssh2_knownhost_checkp (
+        sftpfs_super->known_hosts, super->path_element->host, super->path_element->port, remote_key,
+        remote_key_len, LIBSSH2_KNOWNHOST_TYPE_PLAIN | LIBSSH2_KNOWNHOST_KEYENC_RAW | keybit,
+        &host);
 
     switch (rc)
     {
     default:
     case LIBSSH2_KNOWNHOST_CHECK_FAILURE:
-        /* something prevented the check to be made */
+        // something prevented the check to be made
         goto err;
 
     case LIBSSH2_KNOWNHOST_CHECK_MATCH:
-        /* host + key pair matched -- OK */
+        // host + key pair matched -- OK
         break;
 
     case LIBSSH2_KNOWNHOST_CHECK_NOTFOUND:
-        /* no host match was found -- add it to the known_hosts file */
-        msg = g_strdup_printf (_("The authenticity of host\n%s (%s)\ncan't be established!\n"
-                                 "%s key fingerprint hash is\nSHA1:%s.\n"
-                                 "Do you want to add it to the list of known hosts and continue connecting?"),
-                               super->path_element->host, sftpfs_super->ip_address,
-                               key_type, fingerprint_hash);
-        /* Select "No" initially */
+        // no host match was found -- add it to the known_hosts file
+        msg = g_strdup_printf (
+            _ ("The authenticity of host\n%s (%s)\ncan't be established!\n"
+               "%s key fingerprint hash is\nSHA1:%s.\n"
+               "Do you want to add it to the list of known hosts and continue connecting?"),
+            super->path_element->host, sftpfs_super->ip_address, key_type, fingerprint_hash);
+        // Select "No" initially
         query_set_sel (2);
-        rc = query_dialog (_("Warning"), msg, D_NORMAL, 3, _("&Yes"), _("&Ignore"), _("&No"));
+        rc = query_dialog (_ ("Warning"), msg, D_NORMAL, 3, _ ("&Yes"), _ ("&Ignore"), _ ("&No"));
         g_free (msg);
         handle_query = TRUE;
         break;
 
     case LIBSSH2_KNOWNHOST_CHECK_MISMATCH:
-        msg = g_strdup_printf (_("%s (%s)\nis found in the list of known hosts but\n"
-                                 "KEYS DO NOT MATCH! THIS COULD BE A MITM ATTACK!\n"
-                                 "Are you sure you want to add it to the list of known hosts and continue connecting?"),
+        msg = g_strdup_printf (_ ("%s (%s)\nis found in the list of known hosts but\n"
+                                  "KEYS DO NOT MATCH! THIS COULD BE A MITM ATTACK!\n"
+                                  "Are you sure you want to add it to the list of known hosts and "
+                                  "continue connecting?"),
                                super->path_element->host, sftpfs_super->ip_address);
-        /* Select "No" initially */
+        // Select "No" initially
         query_set_sel (2);
-        rc = query_dialog (MSG_ERROR, msg, D_ERROR, 3, _("&Yes"), _("&Ignore"), _("&No"));
+        rc = query_dialog (MSG_ERROR, msg, D_ERROR, 3, _ ("&Yes"), _ ("&Ignore"), _ ("&No"));
         g_free (msg);
         handle_query = TRUE;
         break;
@@ -581,31 +581,32 @@ sftpfs_process_known_host (struct vfs_s_super *super, GError **mcerror)
         switch (rc)
         {
         case 0:
-            /* Yes: add this host + key pair, continue connecting */
+            // Yes: add this host + key pair, continue connecting
             if (sftpfs_update_known_hosts (super, remote_key, remote_key_len,
                                            LIBSSH2_KNOWNHOST_TYPE_PLAIN
-                                           | LIBSSH2_KNOWNHOST_KEYENC_RAW | keybit) < 0)
+                                               | LIBSSH2_KNOWNHOST_KEYENC_RAW | keybit)
+                < 0)
                 goto err;
             break;
         case 1:
-            /* Ignore: do not add this host + key pair, continue connecting anyway */
+            // Ignore: do not add this host + key pair, continue connecting anyway
             break;
         case 2:
         default:
-            mc_propagate_error (mcerror, 0, "%s", _("sftp: host key verification failed"));
-            /* No: abort connection */
+            mc_propagate_error (mcerror, 0, "%s", _ ("sftp: host key verification failed"));
+            // No: abort connection
             goto err;
         }
 
     return TRUE;
 
-  err:
-    {
-        int sftp_errno;
+err:
+{
+    int sftp_errno;
 
-        sftp_errno = libssh2_session_last_errno (sftpfs_super->session);
-        sftpfs_ssherror_to_gliberror (sftpfs_super, sftp_errno, mcerror);
-    }
+    sftp_errno = libssh2_session_last_errno (sftpfs_super->session);
+    sftpfs_ssherror_to_gliberror (sftpfs_super, sftp_errno, mcerror);
+}
 
     return FALSE;
 }
@@ -624,8 +625,8 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
     char *userauthlist;
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
-    /* check what authentication methods are available */
-    /* userauthlist is internally managed by libssh2 and freed by libssh2_session_free() */
+    // check what authentication methods are available
+    // userauthlist is internally managed by libssh2 and freed by libssh2_session_free()
     userauthlist = libssh2_userauth_list (sftpfs_super->session, super->path_element->user,
                                           strlen (super->path_element->user));
 
@@ -670,7 +671,7 @@ sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError **mcerror)
     if ((sftpfs_super->auth_type & AGENT) == 0)
         return FALSE;
 
-    /* Connect to the ssh-agent */
+    // Connect to the ssh-agent
     sftpfs_super->agent = libssh2_agent_init (sftpfs_super->session);
     if (sftpfs_super->agent == NULL)
         return FALSE;
@@ -725,21 +726,22 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
 
     if (libssh2_userauth_publickey_fromfile (sftpfs_super->session, super->path_element->user,
                                              sftpfs_super->pubkey, sftpfs_super->privkey,
-                                             super->path_element->password) == 0)
+                                             super->path_element->password)
+        == 0)
         return TRUE;
 
-    p = g_strdup_printf (_("sftp: Enter passphrase for %s "), super->path_element->user);
+    p = g_strdup_printf (_ ("sftp: Enter passphrase for %s "), super->path_element->user);
     passwd = vfs_get_password (p);
     g_free (p);
 
     if (passwd == NULL)
-        mc_propagate_error (mcerror, 0, "%s", _("sftp: Passphrase is empty."));
+        mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Passphrase is empty."));
     else
     {
-        ret_value = (libssh2_userauth_publickey_fromfile (sftpfs_super->session,
-                                                          super->path_element->user,
-                                                          sftpfs_super->pubkey,
-                                                          sftpfs_super->privkey, passwd) == 0);
+        ret_value = (libssh2_userauth_publickey_fromfile (
+                         sftpfs_super->session, super->path_element->user, sftpfs_super->pubkey,
+                         sftpfs_super->privkey, passwd)
+                     == 0);
         g_free (passwd);
     }
 
@@ -764,8 +766,7 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
  * @param abstract         unused
  */
 
-static
-LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
+static LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
 {
     int i;
     size_t len;
@@ -780,7 +781,7 @@ LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
     if (strncmp (name, kbi_super->path_element->user, name_len) != 0)
         return;
 
-    /* assume these are password prompts */
+    // assume these are password prompts
     len = strlen (kbi_passwd);
 
     for (i = 0; i < num_prompts; ++i)
@@ -816,19 +817,19 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror
     if (super->path_element->password != NULL)
     {
         while ((rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user,
-                                                super->path_element->password)) ==
-               LIBSSH2_ERROR_EAGAIN);
+                                                super->path_element->password))
+               == LIBSSH2_ERROR_EAGAIN)
+            ;
         if (rc == 0)
             return TRUE;
 
         kbi_super = super;
         kbi_passwd = super->path_element->password;
 
-        while ((rc =
-                libssh2_userauth_keyboard_interactive (sftpfs_super->session,
-                                                       super->path_element->user,
-                                                       sftpfs_keyboard_interactive_helper)) ==
-               LIBSSH2_ERROR_EAGAIN)
+        while ((rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session,
+                                                            super->path_element->user,
+                                                            sftpfs_keyboard_interactive_helper))
+               == LIBSSH2_ERROR_EAGAIN)
             ;
 
         kbi_super = NULL;
@@ -838,16 +839,17 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror
             return TRUE;
     }
 
-    p = g_strdup_printf (_("sftp: Enter password for %s "), super->path_element->user);
+    p = g_strdup_printf (_ ("sftp: Enter password for %s "), super->path_element->user);
     passwd = vfs_get_password (p);
     g_free (p);
 
     if (passwd == NULL)
-        mc_propagate_error (mcerror, 0, "%s", _("sftp: Password is empty."));
+        mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Password is empty."));
     else
     {
         while ((rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user,
-                                                passwd)) == LIBSSH2_ERROR_EAGAIN)
+                                                passwd))
+               == LIBSSH2_ERROR_EAGAIN)
             ;
 
         if (rc != 0)
@@ -855,11 +857,10 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror
             kbi_super = super;
             kbi_passwd = passwd;
 
-            while ((rc =
-                    libssh2_userauth_keyboard_interactive (sftpfs_super->session,
-                                                           super->path_element->user,
-                                                           sftpfs_keyboard_interactive_helper)) ==
-                   LIBSSH2_ERROR_EAGAIN)
+            while ((rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session,
+                                                                super->path_element->user,
+                                                                sftpfs_keyboard_interactive_helper))
+                   == LIBSSH2_ERROR_EAGAIN)
                 ;
 
             kbi_super = NULL;
@@ -906,7 +907,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError **mcerror)
     if (sftpfs_super->socket_handle == LIBSSH2_INVALID_SOCKET)
         return (-1);
 
-    /* Create a session instance */
+    // Create a session instance
     sftpfs_super->session = libssh2_session_init ();
     if (sftpfs_super->session == NULL)
         return (-1);
@@ -917,14 +918,13 @@ sftpfs_open_connection (struct vfs_s_super *super, GError **mcerror)
     /* ... start it up. This will trade welcome banners, exchange keys,
      * and setup crypto, compression, and MAC layers
      */
-    while ((rc =
-            libssh2_session_handshake (sftpfs_super->session,
-                                       (libssh2_socket_t) sftpfs_super->socket_handle)) ==
-           LIBSSH2_ERROR_EAGAIN)
+    while ((rc = libssh2_session_handshake (sftpfs_super->session,
+                                            (libssh2_socket_t) sftpfs_super->socket_handle))
+           == LIBSSH2_ERROR_EAGAIN)
         ;
     if (rc != 0)
     {
-        mc_propagate_error (mcerror, rc, "%s", _("sftp: failure establishing SSH session"));
+        mc_propagate_error (mcerror, rc, "%s", _ ("sftp: failure establishing SSH session"));
         return (-1);
     }
 
@@ -950,7 +950,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError **mcerror)
     if (sftpfs_super->sftp_session == NULL)
         return (-1);
 
-    /* Since we have not set non-blocking, tell libssh2 we are blocking */
+    // Since we have not set non-blocking, tell libssh2 we are blocking
     libssh2_session_set_blocking (sftpfs_super->session, 1);
 
     return 0;
@@ -970,7 +970,7 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
-    /* no mc_return_*_if_error() here because of abort open_connection handling too */
+    // no mc_return_*_if_error() here because of abort open_connection handling too
     (void) mcerror;
 
     if (sftpfs_super->sftp_session != NULL)

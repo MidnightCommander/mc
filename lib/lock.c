@@ -42,7 +42,7 @@
 
 #include <config.h>
 
-#include <signal.h>             /* kill() */
+#include <signal.h>  // kill()
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -58,13 +58,13 @@
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/lock.h"
-#include "lib/widget.h"         /* query_dialog() */
+#include "lib/widget.h"  // query_dialog()
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
-#define BUF_SIZE 255
+#define BUF_SIZE     255
 #define PID_BUF_SIZE 10
 
 /*** file scope type declarations ****************************************************************/
@@ -106,7 +106,7 @@ lock_build_name (void)
     if (user == NULL)
         user = "";
 
-    /** \todo Use FQDN, no clean interface, so requires lot of code */
+    // TODO: Use FQDN, no clean interface, so requires lot of code
     if (gethostname (host, sizeof (host) - 1) == -1)
         *host = '\0';
 
@@ -121,7 +121,7 @@ lock_build_symlink_name (const vfs_path_t *fname_vpath)
     const char *elpath;
     char *str_filename, *str_dirname, *symlink_name;
 
-    /* get first path piece */
+    // get first path piece
     elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
 
     str_filename = g_path_get_basename (elpath);
@@ -151,14 +151,14 @@ lock_extract_info (const char *str)
     for (p = str + len - 1; p >= str && *p != '.'; p--)
         ;
 
-    /* Everything before last '.' is user@host */
+    // Everything before last '.' is user@host
     for (i = 0, s = str; i < sizeof (who) && s < p; i++, s++)
         who[i] = *s;
     if (i == sizeof (who))
         i--;
     who[i] = '\0';
 
-    /* Treat text between '.' and ':' or '\0' as pid */
+    // Treat text between '.' and ':' or '\0' as pid
     for (i = 0, p++, s = str + len; i < sizeof (pid) && p < s && *p != ':'; i++, p++)
         pid[i] = *p;
     if (i == sizeof (pid))
@@ -210,15 +210,15 @@ lock_file (const vfs_path_t *fname_vpath)
         return 0;
 
     elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
-    /* Just to be sure (and don't lock new file) */
+    // Just to be sure (and don't lock new file)
     if (*elpath == '\0')
         return 0;
 
-    /* Locking on VFS is not supported */
+    // Locking on VFS is not supported
     is_local = vfs_file_is_local (fname_vpath);
     if (is_local)
     {
-        /* Check if already locked */
+        // Check if already locked
         lockfname = lock_build_symlink_name (fname_vpath);
     }
 
@@ -234,23 +234,21 @@ lock_file (const vfs_path_t *fname_vpath)
             goto ret;
         lockinfo = lock_extract_info (lock);
 
-        /* Check if locking process alive, ask user if required */
+        // Check if locking process alive, ask user if required
         if (lockinfo->pid == 0 || !(kill (lockinfo->pid, 0) == -1 && errno == ESRCH))
         {
-            msg =
-                g_strdup_printf (_
-                                 ("File \"%s\" is already being edited.\n"
-                                  "User: %s\nProcess ID: %d"), x_basename (lockfname) + 2,
-                                 lockinfo->who, (int) lockinfo->pid);
-            /* TODO: Implement "Abort" - needs to rewind undo stack */
-            switch (query_dialog
-                    (_("File locked"), msg, D_NORMAL, 2, _("&Grab lock"), _("&Ignore lock")))
+            msg = g_strdup_printf (_ ("File \"%s\" is already being edited.\n"
+                                      "User: %s\nProcess ID: %d"),
+                                   x_basename (lockfname) + 2, lockinfo->who, (int) lockinfo->pid);
+            // TODO: Implement "Abort" - needs to rewind undo stack
+            switch (query_dialog (_ ("File locked"), msg, D_NORMAL, 2, _ ("&Grab lock"),
+                                  _ ("&Ignore lock")))
             {
             case 0:
                 break;
             case 1:
             case -1:
-            default:           /* Esc Esc */
+            default:  // Esc Esc
                 g_free (msg);
                 goto ret;
             }
@@ -259,12 +257,12 @@ lock_file (const vfs_path_t *fname_vpath)
         unlink (lockfname);
     }
 
-    /* Create lock symlink */
+    // Create lock symlink
     newlock = lock_build_name ();
     symlink_ok = (symlink (newlock, lockfname) != -1);
     g_free (newlock);
 
-  ret:
+ret:
     g_free (lockfname);
     return symlink_ok ? 1 : 0;
 }
@@ -285,7 +283,7 @@ unlock_file (const vfs_path_t *fname_vpath)
         return 0;
 
     elpath = vfs_path_get_by_index (fname_vpath, 0)->path;
-    /* Just to be sure (and don't lock new file) */
+    // Just to be sure (and don't lock new file)
     if (*elpath == '\0')
         return 0;
 
@@ -294,13 +292,13 @@ unlock_file (const vfs_path_t *fname_vpath)
     {
         struct stat statbuf;
 
-        /* Check if lock exists */
+        // Check if lock exists
         if (lstat (lockfname, &statbuf) != -1)
         {
             const char *lock;
 
             lock = lock_get_info (lockfname);
-            /* Don't touch if lock is not ours */
+            // Don't touch if lock is not ours
             if (lock == NULL || lock_extract_info (lock)->pid == getpid ())
                 unlink (lockfname);
         }

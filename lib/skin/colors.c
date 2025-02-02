@@ -143,7 +143,7 @@ mc_skin_color_look_up_alias (mc_skin_t *mc_skin, gchar *str)
         values = mc_config_get_string_list (mc_skin->config, "aliases", str, &items_count);
         if (items_count != 1)
         {
-            /* No such alias declaration found, that is, we've got the resolved value. */
+            // No such alias declaration found, that is, we've got the resolved value.
             g_strfreev (values);
             g_free (str2);
             g_free (orig);
@@ -154,7 +154,7 @@ mc_skin_color_look_up_alias (mc_skin_t *mc_skin, gchar *str)
         str = g_strdup (values[0]);
         g_strfreev (values);
 
-        /* str2 resolves at half speed than str. This is used for loop detection. */
+        // str2 resolves at half speed than str. This is used for loop detection.
         if (hop++ % 2 != 0)
         {
             values = mc_config_get_string_list (mc_skin->config, "aliases", str2, &items_count);
@@ -165,7 +165,7 @@ mc_skin_color_look_up_alias (mc_skin_t *mc_skin, gchar *str)
 
             if (strcmp (str, str2) == 0)
             {
-                /* Loop detected. */
+                // Loop detected.
                 fprintf (stderr,
                          "Loop detected while trying to resolve alias \"%s\" in skin \"%s\"\n",
                          orig, mc_skin->name);
@@ -201,15 +201,18 @@ mc_skin_color_get_from_ini_file (mc_skin_t *mc_skin, const gchar *group, const g
     }
 
     tmp = mc_skin_color_get_with_defaults (group, "_default_");
-    mc_skin_color->fg = (items_count > 0 && values[0][0]) ?
-        mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[0]))) :
-        (tmp != NULL) ? g_strdup (tmp->fg) : NULL;
-    mc_skin_color->bg = (items_count > 1 && values[1][0]) ?
-        mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[1]))) :
-        (tmp != NULL) ? g_strdup (tmp->bg) : NULL;
-    mc_skin_color->attrs = (items_count > 2 && values[2][0]) ?
-        mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[2]))) :
-        (tmp != NULL) ? g_strdup (tmp->attrs) : NULL;
+    mc_skin_color->fg = (items_count > 0 && values[0][0])
+        ? mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[0])))
+        : (tmp != NULL) ? g_strdup (tmp->fg)
+                        : NULL;
+    mc_skin_color->bg = (items_count > 1 && values[1][0])
+        ? mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[1])))
+        : (tmp != NULL) ? g_strdup (tmp->bg)
+                        : NULL;
+    mc_skin_color->attrs = (items_count > 2 && values[2][0])
+        ? mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[2])))
+        : (tmp != NULL) ? g_strdup (tmp->attrs)
+                        : NULL;
 
     g_strfreev (values);
 
@@ -369,7 +372,7 @@ mc_skin_color_parse_ini_file (mc_skin_t *mc_skin)
     if (*orig_groups == NULL)
         goto ret;
 
-    /* as first, need to set up default colors */
+    // as first, need to set up default colors
     mc_skin_color_set_default_for_terminal (mc_skin);
     mc_skin_color = mc_skin_color_get_from_ini_file (mc_skin, "core", "_default_");
     if (mc_skin_color == NULL)
@@ -400,7 +403,7 @@ mc_skin_color_parse_ini_file (mc_skin_t *mc_skin)
 
     ret = TRUE;
 
-  ret:
+ret:
     g_strfreev (orig_groups);
     return ret;
 }

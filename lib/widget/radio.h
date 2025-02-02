@@ -6,11 +6,11 @@
 #ifndef MC__WIDGET_RADIO_H
 #define MC__WIDGET_RADIO_H
 
-#include "lib/keybind.h"        /* global_keymap_t */
+#include "lib/keybind.h"  // global_keymap_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define RADIO(x) ((WRadio *)(x))
+#define RADIO(x) ((WRadio *) (x))
 
 /*** enums ***************************************************************************************/
 
@@ -21,8 +21,8 @@ typedef struct WRadio
     Widget widget;
     int pos;
     int sel;
-    int count;                  /* number of members */
-    hotkey_t *texts;            /* texts of labels */
+    int count;        // number of members
+    hotkey_t *texts;  // texts of labels
 } WRadio;
 
 /*** global variables defined in .c file *********************************************************/
@@ -35,4 +35,4 @@ WRadio *radio_new (int y, int x, int count, const char **text);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_RADIO_H */
+#endif

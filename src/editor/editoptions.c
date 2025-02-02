@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#include <stdlib.h>             /* atoi(), NULL */
+#include <stdlib.h>  // atoi(), NULL
 
 #include "lib/global.h"
 #include "lib/widget.h"
@@ -51,10 +51,10 @@
 /*** file scope variables ************************************************************************/
 
 static const char *wrap_str[] = {
-    N_("&None"),
-    N_("&Dynamic paragraphing"),
-    N_("Type &writer wrap"),
-    NULL
+    N_ ("&None"),
+    N_ ("&Dynamic paragraphing"),
+    N_ ("Type &writer wrap"),
+    NULL,
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -67,11 +67,11 @@ i18n_translate_array (const char *array[])
 {
     while (*array != NULL)
     {
-        *array = _(*array);
+        *array = _ (*array);
         array++;
     }
 }
-#endif /* ENABLE_NLS */
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -133,7 +133,7 @@ edit_options_dialog (WDialog *h)
         i18n_translate_array (wrap_str);
         i18n_flag = TRUE;
     }
-#endif /* ENABLE_NLS */
+#endif
 
     g_snprintf (wrap_length, sizeof (wrap_length), "%d", edit_options.word_wrap_line_length);
     g_snprintf (tab_spacing, sizeof (tab_spacing), "%d", TAB_SIZE);
@@ -147,49 +147,59 @@ edit_options_dialog (WDialog *h)
 
     {
         quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
+            // clang-format off
             QUICK_START_COLUMNS,
-                QUICK_START_GROUPBOX (N_("Wrap mode")),
+                QUICK_START_GROUPBOX (N_ ("Wrap mode")),
                     QUICK_RADIO (3, wrap_str, &wrap_mode, NULL),
                 QUICK_STOP_GROUPBOX,
                 QUICK_SEPARATOR (FALSE),
                 QUICK_SEPARATOR (FALSE),
-                QUICK_START_GROUPBOX (N_("Tabulation")),
-                    QUICK_CHECKBOX (N_("&Fake half tabs"), &edit_options.fake_half_tabs, NULL),
-                    QUICK_CHECKBOX (N_("&Backspace through tabs"),
+                QUICK_START_GROUPBOX (N_ ("Tabulation")),
+                    QUICK_CHECKBOX (N_ ("&Fake half tabs"), &edit_options.fake_half_tabs, NULL),
+                    QUICK_CHECKBOX (N_ ("&Backspace through tabs"),
                                     &edit_options.backspace_through_tabs, NULL),
-                    QUICK_CHECKBOX (N_("Fill tabs with &spaces"),
+                    QUICK_CHECKBOX (N_ ("Fill tabs with &spaces"),
                                     &edit_options.fill_tabs_with_spaces, NULL),
-                    QUICK_LABELED_INPUT (N_("Tab spacing:"), input_label_left, tab_spacing,
-                                         "edit-tab-spacing", &q, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+                    QUICK_LABELED_INPUT (N_ ("Tab spacing:"), input_label_left, tab_spacing,
+                                         "edit-tab-spacing", &q, NULL, FALSE, FALSE,
+                                         INPUT_COMPLETE_NONE),
                 QUICK_STOP_GROUPBOX,
             QUICK_NEXT_COLUMN,
-                QUICK_START_GROUPBOX (N_("Other options")),
-                    QUICK_CHECKBOX (N_("&Return does autoindent"), &edit_options.return_does_auto_indent, NULL),
-                    QUICK_CHECKBOX (N_("Confir&m before saving"), &edit_options.confirm_save, NULL),
-                    QUICK_CHECKBOX (N_("Save file &position"), &edit_options.save_position, NULL),
-                    QUICK_CHECKBOX (N_("&Visible trailing spaces"), &edit_options.visible_tws, NULL),
-                    QUICK_CHECKBOX (N_("Visible &tabs"), &edit_options.visible_tabs, NULL),
-                    QUICK_CHECKBOX (N_("Synta&x highlighting"), &edit_options.syntax_highlighting, NULL),
-                    QUICK_CHECKBOX (N_("C&ursor after inserted block"),
+                QUICK_START_GROUPBOX (N_ ("Other options")),
+                    QUICK_CHECKBOX (N_ ("&Return does autoindent"),
+                                    &edit_options.return_does_auto_indent, NULL),
+                    QUICK_CHECKBOX (N_ ("Confir&m before saving"), &edit_options.confirm_save, NULL),
+                    QUICK_CHECKBOX (N_ ("Save file &position"), &edit_options.save_position, NULL),
+                    QUICK_CHECKBOX (N_ ("&Visible trailing spaces"), &edit_options.visible_tws,
+                                    NULL),
+                    QUICK_CHECKBOX (N_ ("Visible &tabs"), &edit_options.visible_tabs, NULL),
+                    QUICK_CHECKBOX (N_ ("Synta&x highlighting"), &edit_options.syntax_highlighting,
+                                    NULL),
+                    QUICK_CHECKBOX (N_ ("C&ursor after inserted block"),
                                     &edit_options.cursor_after_inserted_block, NULL),
-                    QUICK_CHECKBOX (N_("Pers&istent selection"), &edit_options.persistent_selections, NULL),
-                    QUICK_CHECKBOX (N_("Cursor be&yond end of line"), &edit_options.cursor_beyond_eol, NULL),
-                    QUICK_CHECKBOX (N_("&Group undo"), &edit_options.group_undo, NULL),
-                    QUICK_LABELED_INPUT (N_("Word wrap line length:"), input_label_left, wrap_length,
+                    QUICK_CHECKBOX (N_ ("Pers&istent selection"),
+                                    &edit_options.persistent_selections, NULL),
+                    QUICK_CHECKBOX (N_ ("Cursor be&yond end of line"),
+                                    &edit_options.cursor_beyond_eol, NULL),
+                    QUICK_CHECKBOX (N_ ("&Group undo"), &edit_options.group_undo, NULL),
+                    QUICK_LABELED_INPUT (N_ ("Word wrap line length:"), input_label_left, wrap_length,
                                          "edit-word-wrap", &p, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
                 QUICK_STOP_GROUPBOX,
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
-            /* *INDENT-ON* */
+            QUICK_END,
+            // clang-format on
         };
 
         WRect r = { -1, -1, 0, 74 };
 
         quick_dialog_t qdlg = {
-            r, N_("Editor options"), "[Editor options]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Editor options"),
+            .help = "[Editor options]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL,
         };
 
         if (quick_dialog (&qdlg) == B_CANCEL)
@@ -233,7 +243,7 @@ edit_options_dialog (WDialog *h)
         edit_options.typewriter_wrap = FALSE;
     }
 
-    /* Load or unload syntax rules if the option has changed */
+    // Load or unload syntax rules if the option has changed
     if (edit_options.syntax_highlighting != old_syntax_hl)
         g_list_foreach (GROUP (h)->widgets, edit_reload_syntax, NULL);
 }

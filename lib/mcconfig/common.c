@@ -25,10 +25,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <errno.h>              /* extern int errno */
+#include <errno.h>  // extern int errno
 
 #include "lib/global.h"
-#include "lib/vfs/vfs.h"        /* mc_stat */
+#include "lib/vfs/vfs.h"  // mc_stat
 #include "lib/util.h"
 
 #include "lib/mcconfig.h"
@@ -135,7 +135,7 @@ mc_config_init (const gchar *ini_path, gboolean read_only)
             if (!read_only)
                 flags |= G_KEY_FILE_KEEP_COMMENTS;
 
-            /* file exists and not empty */
+            // file exists and not empty
             g_key_file_load_from_file (mc_config->handle, ini_path, flags, NULL);
         }
         vfs_path_free (vpath, TRUE);

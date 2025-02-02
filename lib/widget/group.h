@@ -13,8 +13,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define GROUP(x) ((WGroup *)(x))
-#define CONST_GROUP(x) ((const WGroup *)(x))
+#define GROUP(x)       ((WGroup *) (x))
+#define CONST_GROUP(x) ((const WGroup *) (x))
 
 /*** enums ***************************************************************************************/
 
@@ -26,42 +26,41 @@ struct WGroup
 {
     Widget widget;
 
-    /* Group members */
-    GList *widgets;             /* widgets list */
-    GList *current;             /* Currently active widget */
+    // Group members
+    GList *widgets;  // widgets list
+    GList *current;  // Currently active widget
 
-    gboolean winch_pending;     /* SIGWINCH signal has been got. Resize group after rise */
-    int mouse_status;           /* For the autorepeat status of the mouse */
+    gboolean winch_pending;  // SIGWINCH signal has been got. Resize group after rise
+    int mouse_status;        // For the autorepeat status of the mouse
 };
 
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-void group_init (WGroup * g, const WRect * r, widget_cb_fn callback,
+void group_init (WGroup *g, const WRect *r, widget_cb_fn callback,
                  widget_mouse_cb_fn mouse_callback);
 /* Default callback for groups */
-cb_ret_t group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
-                                 void *data);
-cb_ret_t group_default_set_state (Widget * w, widget_state_t state, gboolean enable);
-int group_handle_mouse_event (Widget * w, Gpm_Event * event);
+cb_ret_t group_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data);
+cb_ret_t group_default_set_state (Widget *w, widget_state_t state, gboolean enable);
+int group_handle_mouse_event (Widget *w, Gpm_Event *event);
 
-unsigned long group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags,
+unsigned long group_add_widget_autopos (WGroup *g, void *w, widget_pos_flags_t pos_flags,
                                         const void *before);
 void group_remove_widget (void *w);
 
-void group_set_current_widget_next (WGroup * g);
-void group_set_current_widget_prev (WGroup * g);
+void group_set_current_widget_next (WGroup *g);
+void group_set_current_widget_prev (WGroup *g);
 
-GList *group_get_widget_next_of (GList * w);
-GList *group_get_widget_prev_of (GList * w);
+GList *group_get_widget_next_of (GList *w);
+GList *group_get_widget_prev_of (GList *w);
 
-void group_select_next_widget (WGroup * g);
-void group_select_prev_widget (WGroup * g);
+void group_select_next_widget (WGroup *g);
+void group_select_prev_widget (WGroup *g);
 
-void group_select_widget_by_id (const WGroup * g, unsigned long id);
+void group_select_widget_by_id (const WGroup *g, unsigned long id);
 
-void group_send_broadcast_msg (WGroup * g, widget_msg_t message);
+void group_send_broadcast_msg (WGroup *g, widget_msg_t message);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
@@ -122,4 +121,4 @@ group_get_current_widget_id (const WGroup *g)
     return WIDGET (g->current->data)->id;
 }
 
-#endif /* MC__GROUP_H */
+#endif

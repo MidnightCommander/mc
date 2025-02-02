@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install autoconf automake gettext check gnu-indent libtool pkg-config
+          brew install autoconf automake gettext check libtool pkg-config
           brew install aspell e2fsprogs glib libssh2 openssl s-lang
 
           # unzip is part of the base system

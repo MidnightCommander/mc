@@ -31,17 +31,16 @@
  * \date 2011
  */
 
-
 #include <config.h>
 
 #include <stdio.h>
-#include <stdlib.h>             /* For atol() */
+#include <stdlib.h>  // For atol()
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>
 #include <sys/types.h>
 #include <signal.h>
-#include <ctype.h>              /* is_digit() */
+#include <ctype.h>  // is_digit()
 #include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h>
@@ -50,8 +49,8 @@
 
 #include "lib/global.h"
 
-#include "lib/widget.h"         /* message() */
-#include "lib/strutil.h"        /* str_crt_conv_from() */
+#include "lib/widget.h"   // message()
+#include "lib/strutil.h"  // str_crt_conv_from()
 #include "lib/util.h"
 
 #include "vfs.h"
@@ -118,7 +117,7 @@ mc_def_getlocalcopy (const vfs_path_t *filename_vpath)
 
     return tmp_vpath;
 
-  fail:
+fail:
     vfs_path_free (tmp_vpath, TRUE);
     if (fdout != -1)
         close (fdout);
@@ -130,8 +129,8 @@ mc_def_getlocalcopy (const vfs_path_t *filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath,
-                       const vfs_path_t *local_vpath, gboolean has_changed)
+mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath, const vfs_path_t *local_vpath,
+                       gboolean has_changed)
 {
     int fdin = -1, fdout = -1;
     const char *local;
@@ -173,8 +172,9 @@ mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath,
     unlink (local);
     return 0;
 
-  failed:
-    message (D_ERROR, _("Changes to file lost"), "%s", vfs_path_get_last_path_str (filename_vpath));
+failed:
+    message (D_ERROR, _ ("Changes to file lost"), "%s",
+             vfs_path_get_last_path_str (filename_vpath));
     if (fdout != -1)
         mc_close (fdout);
     if (fdin != -1)
@@ -197,7 +197,7 @@ mc_open (const vfs_path_t *vpath, int flags, ...)
     if (vpath == NULL)
         return (-1);
 
-    /* Get the mode flag */
+    // Get the mode flag
     if ((flags & O_CREAT) != 0)
     {
         va_list ap;
@@ -215,7 +215,7 @@ mc_open (const vfs_path_t *vpath, int flags, ...)
     {
         void *info;
 
-        /* open must be supported */
+        // open must be supported
         info = me->open (vpath, flags, mode);
         if (info == NULL)
             errno = vfs_ferrno (me);
@@ -230,39 +230,35 @@ mc_open (const vfs_path_t *vpath, int flags, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
-
-#define MC_NAMEOP(name, inarg, callarg) \
-int mc_##name inarg \
-{ \
-    int result; \
-    struct vfs_class *me; \
-\
-    if (vpath == NULL) \
-        return (-1); \
-\
-    me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath)); \
-    if (me == NULL) \
-        return (-1); \
-\
-    result = me->name != NULL ? me->name callarg : -1; \
-    if (result == -1) \
-        errno = me->name != NULL ? vfs_ferrno (me) : ENOTSUP; \
-    return result; \
-}
+#define MC_NAMEOP(name, inarg, callarg)                                                            \
+    int mc_##name inarg                                                                            \
+    {                                                                                              \
+        int result;                                                                                \
+        struct vfs_class *me;                                                                      \
+                                                                                                   \
+        if (vpath == NULL)                                                                         \
+            return (-1);                                                                           \
+                                                                                                   \
+        me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));                                       \
+        if (me == NULL)                                                                            \
+            return (-1);                                                                           \
+                                                                                                   \
+        result = me->name != NULL ? me->name callarg : -1;                                         \
+        if (result == -1)                                                                          \
+            errno = me->name != NULL ? vfs_ferrno (me) : ENOTSUP;                                  \
+        return result;                                                                             \
+    }
 
 MC_NAMEOP (chmod, (const vfs_path_t *vpath, mode_t mode), (vpath, mode))
 MC_NAMEOP (chown, (const vfs_path_t *vpath, uid_t owner, gid_t group), (vpath, owner, group))
 MC_NAMEOP (fgetflags, (const vfs_path_t *vpath, unsigned long *flags), (vpath, flags))
 MC_NAMEOP (fsetflags, (const vfs_path_t *vpath, unsigned long flags), (vpath, flags))
-MC_NAMEOP (utime, (const vfs_path_t *vpath, mc_timesbuf_t * times), (vpath, times))
+MC_NAMEOP (utime, (const vfs_path_t *vpath, mc_timesbuf_t *times), (vpath, times))
 MC_NAMEOP (readlink, (const vfs_path_t *vpath, char *buf, size_t bufsiz), (vpath, buf, bufsiz))
 MC_NAMEOP (unlink, (const vfs_path_t *vpath), (vpath))
 MC_NAMEOP (mkdir, (const vfs_path_t *vpath, mode_t mode), (vpath, mode))
 MC_NAMEOP (rmdir, (const vfs_path_t *vpath), (vpath))
 MC_NAMEOP (mknod, (const vfs_path_t *vpath, mode_t mode, dev_t dev), (vpath, mode, dev))
-
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -288,27 +284,25 @@ mc_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
-
-#define MC_HANDLEOP(rettype, name, inarg, callarg) \
-rettype mc_##name inarg \
-{ \
-    struct vfs_class *vfs; \
-    void *fsinfo = NULL; \
-    rettype result; \
-\
-    if (handle == -1) \
-        return (-1); \
-\
-    vfs = vfs_class_find_by_handle (handle, &fsinfo); \
-    if (vfs == NULL) \
-        return (-1); \
-\
-    result = vfs->name != NULL ? vfs->name callarg : -1; \
-    if (result == -1) \
-        errno = vfs->name != NULL ? vfs_ferrno (vfs) : ENOTSUP; \
-    return result; \
-}
+#define MC_HANDLEOP(rettype, name, inarg, callarg)                                                 \
+    rettype mc_##name inarg                                                                        \
+    {                                                                                              \
+        struct vfs_class *vfs;                                                                     \
+        void *fsinfo = NULL;                                                                       \
+        rettype result;                                                                            \
+                                                                                                   \
+        if (handle == -1)                                                                          \
+            return (-1);                                                                           \
+                                                                                                   \
+        vfs = vfs_class_find_by_handle (handle, &fsinfo);                                          \
+        if (vfs == NULL)                                                                           \
+            return (-1);                                                                           \
+                                                                                                   \
+        result = vfs->name != NULL ? vfs->name callarg : -1;                                       \
+        if (result == -1)                                                                          \
+            errno = vfs->name != NULL ? vfs_ferrno (vfs) : ENOTSUP;                                \
+        return result;                                                                             \
+    }
 
 MC_HANDLEOP (ssize_t, read, (int handle, void *buf, size_t count), (fsinfo, buf, count))
 MC_HANDLEOP (ssize_t, write, (int handle, const void *buf, size_t count), (fsinfo, buf, count))
@@ -316,34 +310,32 @@ MC_HANDLEOP (int, fstat, (int handle, struct stat *buf), (fsinfo, buf))
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define MC_RENAMEOP(name) \
-int mc_##name (const vfs_path_t *vpath1, const vfs_path_t *vpath2) \
-{ \
-    int result; \
-    struct vfs_class *me1, *me2; \
-\
-    if (vpath1 == NULL || vpath2 == NULL) \
-        return (-1); \
-\
-    me1 = VFS_CLASS (vfs_path_get_last_path_vfs (vpath1)); \
-    me2 = VFS_CLASS (vfs_path_get_last_path_vfs (vpath2)); \
-\
-    if (me1 == NULL || me2 == NULL || me1 != me2) \
-    { \
-        errno = EXDEV; \
-        return (-1); \
-    } \
-\
-    result = me1->name != NULL ? me1->name (vpath1, vpath2) : -1; \
-    if (result == -1) \
-        errno = me1->name != NULL ? vfs_ferrno (me1) : ENOTSUP; \
-    return result; \
-}
+#define MC_RENAMEOP(name)                                                                          \
+    int mc_##name (const vfs_path_t *vpath1, const vfs_path_t *vpath2)                             \
+    {                                                                                              \
+        int result;                                                                                \
+        struct vfs_class *me1, *me2;                                                               \
+                                                                                                   \
+        if (vpath1 == NULL || vpath2 == NULL)                                                      \
+            return (-1);                                                                           \
+                                                                                                   \
+        me1 = VFS_CLASS (vfs_path_get_last_path_vfs (vpath1));                                     \
+        me2 = VFS_CLASS (vfs_path_get_last_path_vfs (vpath2));                                     \
+                                                                                                   \
+        if (me1 == NULL || me2 == NULL || me1 != me2)                                              \
+        {                                                                                          \
+            errno = EXDEV;                                                                         \
+            return (-1);                                                                           \
+        }                                                                                          \
+                                                                                                   \
+        result = me1->name != NULL ? me1->name (vpath1, vpath2) : -1;                              \
+        if (result == -1)                                                                          \
+            errno = me1->name != NULL ? vfs_ferrno (me1) : ENOTSUP;                                \
+        return result;                                                                             \
+    }
 
 MC_RENAMEOP (link)
 MC_RENAMEOP (rename)
-
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -434,8 +426,9 @@ mc_opendir (const vfs_path_t *vpath)
     path_element->dir.info = info;
 
 #ifdef HAVE_CHARSET
-    path_element->dir.converter = (path_element->encoding != NULL) ?
-        str_crt_conv_from (path_element->encoding) : str_cnv_from_term;
+    path_element->dir.converter = (path_element->encoding != NULL)
+        ? str_crt_conv_from (path_element->encoding)
+        : str_cnv_from_term;
     if (path_element->dir.converter == INVALID_CONV)
         path_element->dir.converter = str_cnv_from_term;
 #endif
@@ -529,32 +522,28 @@ mc_closedir (DIR *dirp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
-
-#define MC_STATOP(name) \
-int mc_##name (const vfs_path_t *vpath, struct stat *buf) \
-{ \
-    int result = -1; \
-    struct vfs_class *me; \
-\
-    if (vpath == NULL) \
-        return (-1); \
-\
-    me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath)); \
-    if (me != NULL) \
-    { \
-        result = me->name ? me->name (vpath, buf) : -1; \
-        if (result == -1) \
-            errno = me->name ? vfs_ferrno (me) : ENOTSUP; \
-    } \
-\
-    return result; \
-}
+#define MC_STATOP(name)                                                                            \
+    int mc_##name (const vfs_path_t *vpath, struct stat *buf)                                      \
+    {                                                                                              \
+        int result = -1;                                                                           \
+        struct vfs_class *me;                                                                      \
+                                                                                                   \
+        if (vpath == NULL)                                                                         \
+            return (-1);                                                                           \
+                                                                                                   \
+        me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));                                       \
+        if (me != NULL)                                                                            \
+        {                                                                                          \
+            result = me->name ? me->name (vpath, buf) : -1;                                        \
+            if (result == -1)                                                                      \
+                errno = me->name ? vfs_ferrno (me) : ENOTSUP;                                      \
+        }                                                                                          \
+                                                                                                   \
+        return result;                                                                             \
+    }
 
 MC_STATOP (stat)
 MC_STATOP (lstat)
-
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -570,8 +559,8 @@ mc_getlocalcopy (const vfs_path_t *pathname_vpath)
     me = VFS_CLASS (vfs_path_get_last_path_vfs (pathname_vpath));
     if (me != NULL)
     {
-        result = me->getlocalcopy != NULL ?
-            me->getlocalcopy (pathname_vpath) : mc_def_getlocalcopy (pathname_vpath);
+        result = me->getlocalcopy != NULL ? me->getlocalcopy (pathname_vpath)
+                                          : mc_def_getlocalcopy (pathname_vpath);
         if (result == NULL)
             errno = vfs_ferrno (me);
     }
@@ -592,9 +581,9 @@ mc_ungetlocalcopy (const vfs_path_t *pathname_vpath, const vfs_path_t *local_vpa
 
     me = vfs_path_get_last_path_vfs (pathname_vpath);
     if (me != NULL)
-        result = me->ungetlocalcopy != NULL ?
-            me->ungetlocalcopy (pathname_vpath, local_vpath, has_changed) :
-            mc_def_ungetlocalcopy (pathname_vpath, local_vpath, has_changed);
+        result = me->ungetlocalcopy != NULL
+            ? me->ungetlocalcopy (pathname_vpath, local_vpath, has_changed)
+            : mc_def_ungetlocalcopy (pathname_vpath, local_vpath, has_changed);
 
     return result;
 }
@@ -653,14 +642,14 @@ mc_chdir (const vfs_path_t *vpath)
     old_vfsid = vfs_getid (vfs_get_raw_current_dir ());
     old_vfs = current_vfs;
 
-    /* Actually change directory */
+    // Actually change directory
     vfs_set_raw_current_dir (cd_vpath);
     current_vfs = me;
 
-    /* This function uses the new current_dir implicitly */
+    // This function uses the new current_dir implicitly
     vfs_stamp_create (old_vfs, old_vfsid);
 
-    /* Sometimes we assume no trailing slash on cwd */
+    // Sometimes we assume no trailing slash on cwd
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
     if (vfs_path_element_valid (path_element))
     {
@@ -684,12 +673,12 @@ mc_chdir (const vfs_path_t *vpath)
                 super->path_element->path = g_strdup (path_element->path);
             }
         }
-#endif /* ENABLE_VFS_NET */
+#endif
     }
 
     return 0;
 
-  error_end:
+error_end:
     vfs_path_free (cd_vpath, TRUE);
     return (-1);
 }
@@ -740,7 +729,7 @@ mc_mkstemps (vfs_path_t **pname_vpath, const char *prefix, const char *suffix)
         p1 = g_strdup (prefix);
     else
     {
-        /* Add prefix first to find the position of XXXXXX */
+        // Add prefix first to find the position of XXXXXX
         p1 = g_build_filename (mc_tmpdir (), prefix, (char *) NULL);
     }
 
@@ -778,7 +767,7 @@ mc_tmpdir (void)
     const char *sys_tmp;
     gchar *template;
 
-    /* Check if already correctly initialized */
+    // Check if already correctly initialized
     if (tmpdir != NULL)
     {
         struct stat st;
@@ -805,11 +794,12 @@ mc_tmpdir (void)
         g_setenv ("MC_TMPDIR", tmpdir, TRUE);
     else
     {
-        fprintf (stderr, _("Cannot create temporary directory %s: %s.\n"
-                           "Temporary files will not be created\n"), buffer,
-                 unix_error_string (errno));
+        fprintf (stderr,
+                 _ ("Cannot create temporary directory %s: %s.\n"
+                    "Temporary files will not be created\n"),
+                 buffer, unix_error_string (errno));
         g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
-        fprintf (stderr, "%s\n", _("Press any key to continue..."));
+        fprintf (stderr, "%s\n", _ ("Press any key to continue..."));
         getc (stdin);
     }
 

@@ -33,18 +33,16 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (fork_child_as_shell)
-/* *INDENT-ON* */
 {
     int actual_value;
-    /* given */
+    // given
     fork__return_value = 0;
 
-    /* when */
+    // when
     actual_value = my_system (EXECUTE_AS_SHELL, "/bin/shell", "some command");
 
-    /* then */
+    // then
     ck_assert_int_eq (actual_value, 0);
 
     VERIFY_SIGACTION_CALLS ();
@@ -57,12 +55,11 @@ START_TEST (fork_child_as_shell)
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "-c");
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 2), "some command");
 
-    /* All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation */
+    // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal
+    // situation
     ck_assert_int_eq (my_exit__status__captured, 127);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -75,9 +72,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, fork_child_as_shell);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

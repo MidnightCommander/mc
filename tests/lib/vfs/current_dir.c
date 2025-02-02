@@ -27,7 +27,7 @@
 
 #include "tests/mctest.h"
 
-#include <string.h>             /* memset() */
+#include <string.h>  // memset()
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -80,7 +80,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_cd_ds") */
-/* *INDENT-OFF* */
 static const struct test_cd_ds
 {
     const char *input_initial_path;
@@ -88,71 +87,76 @@ static const struct test_cd_ds
     const vfs_flags_t input_class_flags;
 
     const char *expected_cd_path;
-} test_cd_ds[] =
-{
-    { /* 0. */
+} test_cd_ds[] = {
+    {
+        // 0.
         "/",
         "/dev/some.file/test://",
         VFSF_NOLINKS,
-        "/dev/some.file/test://"
+        "/dev/some.file/test://",
     },
-    { /* 1. */
+    {
+        // 1.
         "/",
         "/dev/some.file/test://bla-bla",
         VFSF_NOLINKS,
-        "/dev/some.file/test://bla-bla"
+        "/dev/some.file/test://bla-bla",
     },
-    { /* 2. */
+    {
+        // 2.
         "/dev/some.file/test://bla-bla",
         "..",
         VFSF_NOLINKS,
-        "/dev/some.file/test://"
+        "/dev/some.file/test://",
     },
-    { /* 3. */
+    {
+        // 3.
         "/dev/some.file/test://",
         "..",
         VFSF_NOLINKS,
-        "/dev"
+        "/dev",
     },
-    { /* 4. */
+    {
+        // 4.
         "/dev",
         "..",
         VFSF_NOLINKS,
-        "/"
+        "/",
     },
-    { /* 5. */
+    {
+        // 5.
         "/",
         "..",
         VFSF_NOLINKS,
-        "/"
+        "/",
     },
-    { /* 6. */
+    {
+        // 6.
         "/",
         "/test://user:pass@host.net/path",
         VFSF_NOLINKS | VFSF_REMOTE,
-        "/test://user:pass@host.net/path"
+        "/test://user:pass@host.net/path",
     },
-    { /* 7. */
+    {
+        // 7.
         "/test://user:pass@host.net/path",
         "..",
         VFSF_NOLINKS | VFSF_REMOTE,
-        "/test://user:pass@host.net/"
+        "/test://user:pass@host.net/",
     },
-    { /* 8. */
+    {
+        // 8.
         "/test://user:pass@host.net/",
         "..",
         VFSF_NOLINKS | VFSF_REMOTE,
-        "/"
+        "/",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_cd_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
 
     vfs_test_ops->flags = data->input_class_flags;
@@ -162,10 +166,10 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
 
     vpath = vfs_path_from_str (data->input_cd_path);
 
-    /* when */
+    // when
     mc_chdir (vpath);
 
-    /* then */
+    // then
     {
         char *actual_cd_path;
 
@@ -177,9 +181,7 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
 
     vfs_unregister_class (vfs_test_ops);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -191,16 +193,16 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* writable directory where check creates temporary files */
+    // writable directory where check creates temporary files
     cwd = my_get_current_dir ();
     g_setenv ("TEMP", cwd, TRUE);
     g_free (cwd);
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_cd, test_cd_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

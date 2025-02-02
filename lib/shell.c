@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#include <pwd.h>                /* for username in xterm title */
+#include <pwd.h>  // for username in xterm title
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,7 +65,7 @@ mc_shell_get_installed_in_system (void)
 
     mc_shell = g_new0 (mc_shell_t, 1);
 
-    /* 3rd choice: look for existing shells supported as MC subshells.  */
+    // 3rd choice: look for existing shells supported as MC subshells.
     if (access ("/bin/bash", X_OK) == 0)
         mc_shell->path = g_strdup ("/bin/bash");
     else if (access ("/bin/zsh", X_OK) == 0)
@@ -96,7 +96,7 @@ mc_shell_get_installed_in_system (void)
      *     mc_global.tty.shell = g_strdup ("/bin/fish");
      */
     else
-        /* Fallback and last resort: system default shell */
+        // Fallback and last resort: system default shell
         mc_shell->path = g_strdup ("/bin/sh");
 
     return mc_shell;
@@ -113,7 +113,7 @@ mc_shell_get_name_env (void)
     shell_env = g_getenv ("SHELL");
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
-        /* 2nd choice: user login shell */
+        // 2nd choice: user login shell
         struct passwd *pwd;
 
         pwd = getpwuid (geteuid ());
@@ -121,7 +121,7 @@ mc_shell_get_name_env (void)
             shell_name = g_strdup (pwd->pw_shell);
     }
     else
-        /* 1st choice: SHELL environment variable */
+        // 1st choice: SHELL environment variable
         shell_name = g_strdup (shell_env);
 
     return shell_name;
@@ -155,14 +155,14 @@ mc_shell_recognize_real_path (mc_shell_t *mc_shell)
     if (strstr (mc_shell->path, "/zsh") != NULL || strstr (mc_shell->real_path, "/zsh") != NULL
         || getenv ("ZSH_VERSION") != NULL)
     {
-        /* Also detects ksh symlinked to zsh */
+        // Also detects ksh symlinked to zsh
         mc_shell->type = SHELL_ZSH;
         mc_shell->name = "zsh";
     }
     else if (strstr (mc_shell->path, "/tcsh") != NULL
              || strstr (mc_shell->real_path, "/tcsh") != NULL)
     {
-        /* Also detects csh symlinked to tcsh */
+        // Also detects csh symlinked to tcsh
         mc_shell->type = SHELL_TCSH;
         mc_shell->name = "tcsh";
     }
@@ -181,7 +181,7 @@ mc_shell_recognize_real_path (mc_shell_t *mc_shell)
     else if (strstr (mc_shell->path, "/dash") != NULL
              || strstr (mc_shell->real_path, "/dash") != NULL)
     {
-        /* Debian ash (also found if symlinked to by ash/sh) */
+        // Debian ash (also found if symlinked to by ash/sh)
         mc_shell->type = SHELL_DASH;
         mc_shell->name = "dash";
     }
@@ -197,8 +197,7 @@ mc_shell_recognize_real_path (mc_shell_t *mc_shell)
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = mc_shell->path;
     }
-    else if (strstr (mc_shell->path, "/ksh") != NULL
-             || strstr (mc_shell->real_path, "/ksh") != NULL
+    else if (strstr (mc_shell->path, "/ksh") != NULL || strstr (mc_shell->real_path, "/ksh") != NULL
              || strstr (mc_shell->path, "/ksh93") != NULL
              || strstr (mc_shell->real_path, "/ksh93") != NULL
              || strstr (mc_shell->path, "/oksh") != NULL
@@ -222,7 +221,7 @@ mc_shell_recognize_real_path (mc_shell_t *mc_shell)
 static void
 mc_shell_recognize_path (mc_shell_t *mc_shell)
 {
-    /* If shell is not symlinked to busybox, it is safe to assume it is a real shell */
+    // If shell is not symlinked to busybox, it is safe to assume it is a real shell
     if (strstr (mc_shell->path, "/bash") != NULL || getenv ("BASH_VERSION") != NULL)
     {
         mc_shell->type = SHELL_BASH;
@@ -238,8 +237,7 @@ mc_shell_recognize_path (mc_shell_t *mc_shell)
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = "ash";
     }
-    else if (strstr (mc_shell->path, "/ksh") != NULL
-             || strstr (mc_shell->path, "/ksh93") != NULL
+    else if (strstr (mc_shell->path, "/ksh") != NULL || strstr (mc_shell->path, "/ksh93") != NULL
              || strstr (mc_shell->path, "/oksh") != NULL
              || (getenv ("KSH_VERSION") != NULL
                  && strstr (getenv ("KSH_VERSION"), "PD KSH") != NULL))

@@ -23,32 +23,7 @@ pollute name space by unnecessary symbols (so I do not crash fellow
 programs) and that I should have a clean interface between myself and
 midnight.
 
-Because I'm rather close to midnight, try to:
-
-* Keep the indentation as the rest of the code. Following could help
-you with your friend emacs:
-
-(defun mc-c-mode ()
-	"C mode with adjusted defaults for use with the Midnight commander."
-	(interactive)
-	(c-mode)
-	(c-set-style "K&R")
-	(setq	c-indent-level 4
-		c-continued-statement-offset 4
-		c-brace-offset 0
-		c-argdecl-indent 4
-		c-label-offset -4
-		c-brace-imaginary-offset 0
-		c-continued-brace-offset 0
-		c-tab-always-indent nil
-		c-basic-offset 4
-		tab-width 8
-		comment-column 60))
-
-(setq auto-mode-alist (cons '(".*/mc/.*\\.[ch]$" . mc-c-mode)
-                       auto-mode-alist))
-
-And because I'm trying to live life on my own as libvfs.so, try to:
+Because I'm trying to live life on my own as libvfs.so, try to:
 
 * Make sure all exported symbols are defined in vfs.h and begin with
 'vfs_'.

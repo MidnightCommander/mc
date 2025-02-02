@@ -35,7 +35,7 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/key.h"        /* ALT() */
+#include "lib/tty/key.h"  // ALT()
 
 #include "lib/widget.h"
 
@@ -143,8 +143,8 @@ group_widget_set_state (gpointer data, gpointer user_data)
  * @param g WGroup object
  * @param msg message sent to widgets
  * @param reverse if TRUE, send message in reverse order, FALSE -- in direct one.
- * @param options if WOP_DEFAULT, the message is sent to all widgets. Else message is sent to widgets
- *                that have specified options.
+ * @param options if WOP_DEFAULT, the message is sent to all widgets. Else message is sent to
+ * widgets that have specified options.
  */
 
 static void
@@ -169,7 +169,7 @@ group_send_broadcast_msg_custom (WGroup *g, widget_msg_t msg, gboolean reverse,
         p = group_get_next_or_prev_of (p, !reverse);
 
         if (options == WOP_DEFAULT || (options & w->options) != 0)
-            /* special case: don't draw invisible widgets */
+            // special case: don't draw invisible widgets
             if (msg != MSG_DRAW || widget_get_state (w, WST_VISIBLE))
                 send_message (w, NULL, msg, 0, NULL);
     }
@@ -179,11 +179,11 @@ group_send_broadcast_msg_custom (WGroup *g, widget_msg_t msg, gboolean reverse,
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  * Default group callback to convert group coordinates from local (relative to owner) to global
-  * (relative to screen).
-  *
-  * @param w widget
-  */
+ * Default group callback to convert group coordinates from local (relative to owner) to global
+ * (relative to screen).
+ *
+ * @param w widget
+ */
 
 static void
 group_default_make_global (Widget *w, const WRect *delta)
@@ -192,9 +192,9 @@ group_default_make_global (Widget *w, const WRect *delta)
 
     if (delta != NULL)
     {
-        /* change own coordinates */
+        // change own coordinates
         widget_default_make_global (w, delta);
-        /* change child widget coordinates */
+        // change child widget coordinates
         for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
             WIDGET (iter->data)->make_global (WIDGET (iter->data), delta);
     }
@@ -204,9 +204,9 @@ group_default_make_global (Widget *w, const WRect *delta)
 
         r.lines = 0;
         r.cols = 0;
-        /* change own coordinates */
+        // change own coordinates
         widget_default_make_global (w, &r);
-        /* change child widget coordinates */
+        // change child widget coordinates
         for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
             WIDGET (iter->data)->make_global (WIDGET (iter->data), &r);
     }
@@ -215,11 +215,11 @@ group_default_make_global (Widget *w, const WRect *delta)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  * Default group callback to convert group coordinates from global (relative to screen) to local
-  * (relative to owner).
-  *
-  * @param w widget
-  */
+ * Default group callback to convert group coordinates from global (relative to screen) to local
+ * (relative to owner).
+ *
+ * @param w widget
+ */
 
 static void
 group_default_make_local (Widget *w, const WRect *delta)
@@ -228,9 +228,9 @@ group_default_make_local (Widget *w, const WRect *delta)
 
     if (delta != NULL)
     {
-        /* change own coordinates */
+        // change own coordinates
         widget_default_make_local (w, delta);
-        /* change child widget coordinates */
+        // change child widget coordinates
         for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
             WIDGET (iter->data)->make_local (WIDGET (iter->data), delta);
     }
@@ -240,9 +240,9 @@ group_default_make_local (Widget *w, const WRect *delta)
 
         r.lines = 0;
         r.cols = 0;
-        /* change own coordinates */
+        // change own coordinates
         widget_default_make_local (w, &r);
-        /* change child widget coordinates */
+        // change child widget coordinates
         for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
             WIDGET (iter->data)->make_local (WIDGET (iter->data), &r);
     }
@@ -426,19 +426,19 @@ group_set_position (WGroup *g, const WRect *r)
 {
     WRect *w = &WIDGET (g)->rect;
     widget_shift_scale_t wss;
-    /* save old positions, will be used to reposition childs */
+    // save old positions, will be used to reposition childs
     WRect or = *w;
 
     *w = *r;
 
-    /* dialog is empty */
+    // dialog is empty
     if (g->widgets == NULL)
         return;
 
     if (g->current == NULL)
         g->current = g->widgets;
 
-    /* values by which controls should be moved */
+    // values by which controls should be moved
     wss.shift_x = w->x - or.x;
     wss.scale_x = w->cols - or.cols;
     wss.shift_y = w->y - or.y;
@@ -474,7 +474,7 @@ group_draw (WGroup *g)
 {
     Widget *wg = WIDGET (g);
 
-    /* draw all widgets in Z-order, from first to last */
+    // draw all widgets in Z-order, from first to last
     if (widget_get_state (wg, WST_ACTIVE))
     {
         GList *p;
@@ -499,14 +499,14 @@ group_handle_key (WGroup *g, int key)
 {
     cb_ret_t handled;
 
-    /* first try the hotkey */
+    // first try the hotkey
     handled = send_message (g, NULL, MSG_HOTKEY, key, NULL);
 
-    /* not used - then try widget_callback */
+    // not used - then try widget_callback
     if (handled == MSG_NOT_HANDLED)
         handled = send_message (g->current->data, NULL, MSG_KEY, key, NULL);
 
-    /* not used - try to use the unhandled case */
+    // not used - try to use the unhandled case
     if (handled == MSG_NOT_HANDLED)
         handled = send_message (g, g->current->data, MSG_UNHANDLED_KEY, key, NULL);
 
@@ -538,12 +538,12 @@ group_handle_hotkey (WGroup *g, int key)
      * if the currently selected widget is an input line */
     if (widget_get_options (w, WOP_IS_INPUT))
     {
-        /* skip ascii control characters, anything else can valid character in some encoding */
+        // skip ascii control characters, anything else can valid character in some encoding
         if (key >= 32 && key < 256)
             return MSG_NOT_HANDLED;
     }
 
-    /* If it's an alt key, send the message */
+    // If it's an alt key, send the message
     c = key & ~ALT (0);
     if (key & ALT (0) && g_ascii_isalpha (c))
         key = g_ascii_tolower (c);
@@ -551,13 +551,13 @@ group_handle_hotkey (WGroup *g, int key)
     if (widget_get_options (w, WOP_WANT_HOTKEY))
         handled = send_message (w, NULL, MSG_HOTKEY, key, NULL);
 
-    /* If not used, send hotkey to other widgets */
+    // If not used, send hotkey to other widgets
     if (handled == MSG_HANDLED)
         return MSG_HANDLED;
 
     current = group_get_widget_next_of (g->current);
 
-    /* send it to all widgets */
+    // send it to all widgets
     while (g->current != current && handled == MSG_NOT_HANDLED)
     {
         w = WIDGET (current->data);
@@ -675,25 +675,25 @@ group_default_set_state (Widget *w, widget_state_t state, gboolean enable)
     WGroup *g = GROUP (w);
     widget_state_info_t st = {
         .state = state,
-        .enable = enable
+        .enable = enable,
     };
 
     ret = widget_default_set_state (w, state, enable);
 
     if (state == WST_ACTIVE || state == WST_SUSPENDED || state == WST_CLOSED)
-        /* inform all child widgets */
+        // inform all child widgets
         g_list_foreach (g->widgets, group_widget_set_state, &st);
 
     if ((w->state & WST_ACTIVE) != 0)
     {
         if ((w->state & WST_FOCUSED) != 0)
         {
-            /* update current widget */
+            // update current widget
             if (g->current != NULL)
                 widget_set_state (WIDGET (g->current->data), WST_FOCUSED, enable);
         }
         else
-            /* inform all child widgets */
+            // inform all child widgets
             g_list_foreach (g->widgets, group_widget_set_state, &st);
     }
 
@@ -719,7 +719,7 @@ group_handle_mouse_event (Widget *w, Gpm_Event *event)
     {
         GList *p;
 
-        /* send the event to widgets in reverse Z-order */
+        // send the event to widgets in reverse Z-order
         p = g_list_last (g->widgets);
         do
         {
@@ -730,7 +730,7 @@ group_handle_mouse_event (Widget *w, Gpm_Event *event)
                For example, commandl line in file manager */
             if (widget_get_state (w, WST_VISIBLE) && !widget_get_state (wp, WST_DISABLED))
             {
-                /* put global cursor position to the widget */
+                // put global cursor position to the widget
                 int ret;
 
                 ret = wp->mouse_handler (wp, event);
@@ -767,7 +767,7 @@ group_add_widget_autopos (WGroup *g, void *w, widget_pos_flags_t pos_flags, cons
     Widget *ww = WIDGET (w);
     GList *new_current;
 
-    /* Don't accept NULL widget. This shouldn't happen */
+    // Don't accept NULL widget. This shouldn't happen
     assert (ww != NULL);
 
     if ((pos_flags & WPOS_CENTER_HORZ) != 0)
@@ -791,7 +791,7 @@ group_add_widget_autopos (WGroup *g, void *w, widget_pos_flags_t pos_flags, cons
 
         b = g_list_find (g->widgets, before);
 
-        /* don't accept widget not from group. This shouldn't happen */
+        // don't accept widget not from group. This shouldn't happen
         assert (b != NULL);
 
         b = g_list_next (b);
@@ -802,7 +802,7 @@ group_add_widget_autopos (WGroup *g, void *w, widget_pos_flags_t pos_flags, cons
             new_current = g_list_last (g->widgets);
     }
 
-    /* widget has been added at runtime */
+    // widget has been added at runtime
     if (widget_get_state (wg, WST_ACTIVE))
     {
         group_widget_init (ww, NULL);
@@ -828,7 +828,7 @@ group_remove_widget (void *w)
     WGroup *g;
     GList *d;
 
-    /* Don't accept NULL widget. This shouldn't happen */
+    // Don't accept NULL widget. This shouldn't happen
     assert (w != NULL);
 
     g = ww->owner;
@@ -841,7 +841,7 @@ group_remove_widget (void *w)
     if (g->widgets == NULL)
         g->current = NULL;
 
-    /* widget has been deleted at runtime */
+    // widget has been deleted at runtime
     if (widget_get_state (WIDGET (g), WST_ACTIVE))
     {
         group_draw (g);

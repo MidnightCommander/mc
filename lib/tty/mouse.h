@@ -10,9 +10,8 @@
 
 #ifdef HAVE_LIBGPM
 /* GPM mouse support include file */
-#include <gpm.h>
-#endif /* !HAVE_LIBGPM */
-
+#    include <gpm.h>
+#endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -21,20 +20,20 @@
 /* These lines are modified version from the lines appearing in the */
 /* gpm.h include file of the Linux General Purpose Mouse server */
 
-#define GPM_B_LEFT      (1 << 2)
-#define GPM_B_MIDDLE    (1 << 1)
-#define GPM_B_RIGHT     (1 << 0)
+#    define GPM_B_LEFT          (1 << 2)
+#    define GPM_B_MIDDLE        (1 << 1)
+#    define GPM_B_RIGHT         (1 << 0)
 
-#define GPM_BARE_EVENTS(ev) ((ev)&0xF)
-#endif /* !HAVE_LIBGPM */
+#    define GPM_BARE_EVENTS(ev) ((ev) & 0xF)
+#endif
 
 /* Mouse wheel events */
 #ifndef GPM_B_DOWN
-#define GPM_B_DOWN      (1 << 5)
+#    define GPM_B_DOWN (1 << 5)
 #endif
 
 #ifndef GPM_B_UP
-#define GPM_B_UP        (1 << 4)
+#    define GPM_B_UP (1 << 4)
 #endif
 
 /*** enums ***************************************************************************************/
@@ -45,20 +44,19 @@
 enum Gpm_Etype
 {
     GPM_MOVE = 1,
-    GPM_DRAG = 2,               /* exactly one in four is active at a time */
+    GPM_DRAG = 2,  // exactly one in four is active at a time
     GPM_DOWN = 4,
     GPM_UP = 8,
 
-
-    GPM_SINGLE = 16,            /* at most one in three is set */
+    GPM_SINGLE = 16,  // at most one in three is set
     GPM_DOUBLE = 32,
     GPM_TRIPLE = 64,
 
-    GPM_MFLAG = 128,            /* motion during click? */
-    GPM_HARD = 256              /* if set in the defaultMask, force an already
-                                   used event to pass over to another handler */
+    GPM_MFLAG = 128,  // motion during click?
+    GPM_HARD = 256    /* if set in the defaultMask, force an already
+                         used event to pass over to another handler */
 };
-#endif /* !HAVE_LIBGPM */
+#endif
 
 /* Constants returned from the mouse callback */
 enum
@@ -71,10 +69,10 @@ enum
 /* Type of mouse support */
 typedef enum
 {
-    MOUSE_NONE,                 /* Not detected yet */
-    MOUSE_DISABLED,             /* Explicitly disabled by -d */
-    MOUSE_GPM,                  /* Support using GPM on Linux */
-    MOUSE_XTERM,                /* Support using xterm-style mouse reporting */
+    MOUSE_NONE,      // Not detected yet
+    MOUSE_DISABLED,  // Explicitly disabled by -d
+    MOUSE_GPM,       // Support using GPM on Linux
+    MOUSE_XTERM,     // Support using xterm-style mouse reporting
     MOUSE_XTERM_NORMAL_TRACKING = MOUSE_XTERM,
     MOUSE_XTERM_BUTTON_EVENT_TRACKING
 } Mouse_Type;
@@ -87,7 +85,7 @@ typedef struct Gpm_Event
     int buttons, x, y;
     enum Gpm_Etype type;
 } Gpm_Event;
-#endif /* !HAVE_LIBGPM */
+#endif
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -114,4 +112,4 @@ void disable_mouse (void);
 void show_mouse_pointer (int x, int y);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_MOUSE_H */
+#endif

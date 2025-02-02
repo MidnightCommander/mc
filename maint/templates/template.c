@@ -34,7 +34,7 @@
 
 #include <config.h>
 
-#include <System Headers> /* see maint/headers.txt for details */
+#include <System Headers> // see maint/headers.txt for details
 
 #include "lib/global.h"
 #include "..."

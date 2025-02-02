@@ -28,11 +28,11 @@
 #include <errno.h>
 
 #ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>
+#    include <sys/select.h>
 #else
-#include <sys/time.h>
-#include <sys/types.h>
-#include <unistd.h>
+#    include <sys/time.h>
+#    include <sys/types.h>
+#    include <unistd.h>
 #endif
 
 #include "lib/global.h"
@@ -63,8 +63,8 @@ static void
 sftpfs_blksize (struct stat *s)
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-    s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;     /* FIXME */
-#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+    s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;  // FIXME
+#endif
     vfs_adjust_stat (s);
 }
 
@@ -91,7 +91,7 @@ sftpfs_internal_waitsocket (sftpfs_super_t *super, GError **mcerror)
     FD_ZERO (&fd);
     FD_SET (super->socket_handle, &fd);
 
-    /* now make sure we wait in the correct direction */
+    // now make sure we wait in the correct direction
     dir = libssh2_session_block_directions (super->session);
 
     if ((dir & LIBSSH2_SESSION_BLOCK_INBOUND) != 0)
@@ -105,7 +105,7 @@ sftpfs_internal_waitsocket (sftpfs_super_t *super, GError **mcerror)
     {
         int my_errno = errno;
 
-        mc_propagate_error (mcerror, my_errno, _("sftp: socket error: %s"),
+        mc_propagate_error (mcerror, my_errno, _ ("sftp: socket error: %s"),
                             unix_error_string (my_errno));
     }
 
@@ -129,8 +129,8 @@ sftpfs_stat_init (sftpfs_super_t **super, const vfs_path_element_t **path_elemen
 
     do
     {
-        res = libssh2_sftp_stat_ex ((*super)->sftp_session, fixfname->str, fixfname->len,
-                                    stat_type, attrs);
+        res = libssh2_sftp_stat_ex ((*super)->sftp_session, fixfname->str, fixfname->len, stat_type,
+                                    attrs);
         if (res >= 0)
             break;
 
@@ -171,8 +171,8 @@ sftpfs_waitsocket (sftpfs_super_t *super, int sftp_res, GError **mcerror)
 gboolean
 sftpfs_is_sftp_error (LIBSSH2_SFTP *sftp_session, int sftp_res, int sftp_error)
 {
-    return (sftp_res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
-            libssh2_sftp_last_error (sftp_session) == (unsigned long) sftp_error);
+    return (sftp_res == LIBSSH2_ERROR_SFTP_PROTOCOL
+            && libssh2_sftp_last_error (sftp_session) == (unsigned long) sftp_error);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -355,9 +355,8 @@ sftpfs_readlink (const vfs_path_t *vpath, char *buf, size_t size, GError **mcerr
 
     do
     {
-        res =
-            libssh2_sftp_symlink_ex (super->sftp_session, fixfname->str, fixfname->len, buf, size,
-                                     LIBSSH2_SFTP_READLINK);
+        res = libssh2_sftp_symlink_ex (super->sftp_session, fixfname->str, fixfname->len, buf, size,
+                                       LIBSSH2_SFTP_READLINK);
         if (res >= 0)
             break;
 
@@ -403,9 +402,8 @@ sftpfs_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2, GError **mce
 
     do
     {
-        res =
-            libssh2_sftp_symlink_ex (super->sftp_session, path1, path1_len, tmp_path, tmp_path_len,
-                                     LIBSSH2_SFTP_SYMLINK);
+        res = libssh2_sftp_symlink_ex (super->sftp_session, path1, path1_len, tmp_path,
+                                       tmp_path_len, LIBSSH2_SFTP_SYMLINK);
         if (res >= 0)
             break;
 
@@ -453,9 +451,8 @@ sftpfs_utime (const vfs_path_t *vpath, time_t atime, time_t mtime, GError **mcer
 
     do
     {
-        res =
-            libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
-                                  LIBSSH2_SFTP_SETSTAT, &attrs);
+        res = libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
+                                    LIBSSH2_SFTP_SETSTAT, &attrs);
         if (res >= 0)
             break;
 
@@ -464,7 +461,7 @@ sftpfs_utime (const vfs_path_t *vpath, time_t atime, time_t mtime, GError **mcer
 
         if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_FAILURE))
         {
-            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
+            res = 0;  // need something like ftpfs_ignore_chattr_errors
             break;
         }
 
@@ -506,9 +503,8 @@ sftpfs_chmod (const vfs_path_t *vpath, mode_t mode, GError **mcerror)
 
     do
     {
-        res =
-            libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
-                                  LIBSSH2_SFTP_SETSTAT, &attrs);
+        res = libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
+                                    LIBSSH2_SFTP_SETSTAT, &attrs);
         if (res >= 0)
             break;
 
@@ -517,7 +513,7 @@ sftpfs_chmod (const vfs_path_t *vpath, mode_t mode, GError **mcerror)
 
         if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_FAILURE))
         {
-            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
+            res = 0;  // need something like ftpfs_ignore_chattr_errors
             break;
         }
 
@@ -599,9 +595,8 @@ sftpfs_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2, GError **mcer
 
     do
     {
-        res =
-            libssh2_sftp_rename_ex (super->sftp_session, fixfname->str, fixfname->len, tmp_path,
-                                    tmp_path_len, LIBSSH2_SFTP_SYMLINK);
+        res = libssh2_sftp_rename_ex (super->sftp_session, fixfname->str, fixfname->len, tmp_path,
+                                      tmp_path_len, LIBSSH2_SFTP_SYMLINK);
         if (res >= 0)
             break;
 

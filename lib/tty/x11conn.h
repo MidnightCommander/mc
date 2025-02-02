@@ -29,12 +29,12 @@
 /*** declarations of public functions ************************************************************/
 
 extern Display *mc_XOpenDisplay (const char *displayname);
-extern int mc_XCloseDisplay (Display * display);
+extern int mc_XCloseDisplay (Display *display);
 
-extern Bool mc_XQueryPointer (Display * display, Window win, Window * root_return,
-                              Window * child_return, int *root_x_return, int *root_y_return,
+extern Bool mc_XQueryPointer (Display *display, Window win, Window *root_return,
+                              Window *child_return, int *root_x_return, int *root_y_return,
                               int *win_x_return, int *win_y_return, unsigned int *mask_return);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__X11CONN_H */
+#endif

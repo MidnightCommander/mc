@@ -40,7 +40,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        /* XCTRL and ALT macros  */
+#include "lib/tty/key.h"  // XCTRL and ALT macros
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
@@ -221,15 +221,15 @@ buttonbar_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
     switch (msg)
     {
     case MSG_MOUSE_CLICK:
-        {
-            WButtonBar *bb = BUTTONBAR (w);
-            int button;
+    {
+        WButtonBar *bb = BUTTONBAR (w);
+        int button;
 
-            button = buttonbar_get_button_by_x_coord (bb, event->x);
-            if (button >= 0)
-                buttonbar_call (bb, button);
-            break;
-        }
+        button = buttonbar_get_button_by_x_coord (bb, event->x);
+        if (button >= 0)
+            buttonbar_call (bb, button);
+        break;
+    }
 
     default:
         break;

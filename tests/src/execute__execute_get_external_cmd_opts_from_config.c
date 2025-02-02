@@ -33,8 +33,7 @@
 #include "src/vfs/local/local.c"
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath,
-                                                 long start_line);
+                                                 const vfs_path_t *filename_vpath, long start_line);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -49,8 +48,8 @@ static GPtrArray *mc_config_get_string__return_value;
 
 /* @Mock */
 gchar *
-mc_config_get_string_raw (mc_config_t *config_ignored, const gchar *group,
-                          const gchar *param, const gchar *default_value)
+mc_config_get_string_raw (mc_config_t *config_ignored, const gchar *group, const gchar *param,
+                          const gchar *default_value)
 {
     char *return_value;
     (void) config_ignored;
@@ -113,17 +112,15 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @DataSource("check_subtitute_ds") */
-/* *INDENT-OFF* */
-static const struct check_subtitute_ds
+/* @DataSource("check_substitute_ds") */
+static const struct check_substitute_ds
 {
     const char *config_opts_string;
     const char *app_name;
     const char *file_name;
-    int  start_line;
+    int start_line;
     const char *expected_result;
-} check_subtitute_ds[] =
-{
+} check_substitute_ds[] = {
     {
         "-a -b -c %filename \\%filename %filename:%lineno \\%lineno +%lineno",
         "some-editor",
@@ -139,31 +136,27 @@ static const struct check_subtitute_ds
         "'/path/to/'\\''f i\" l e \t\t\n':\\\\\\\\\\\\1234",
     },
 };
-/* *INDENT-ON* */
 
-/* @Test(dataSource = "check_subtitute_ds") */
-/* *INDENT-OFF* */
-START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_subtitute_ds)
-/* *INDENT-ON* */
+/* @Test(dataSource = "check_substitute_ds") */
+START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_substitute_ds)
 {
-    /* given */
+    // given
     char *actual_result;
     vfs_path_t *filename_vpath;
 
     g_ptr_array_add (mc_config_get_string__return_value, g_strdup (data->config_opts_string));
     filename_vpath = vfs_path_from_str (data->file_name);
 
-    /* when */
-    actual_result =
-        execute_get_external_cmd_opts_from_config (data->app_name, filename_vpath,
-                                                   data->start_line);
+    // when
+    actual_result = execute_get_external_cmd_opts_from_config (data->app_name, filename_vpath,
+                                                               data->start_line);
 
-    /* then */
+    // then
 
-    /* check returned value */
+    // check returned value
     mctest_assert_str_eq (actual_result, data->expected_result);
 
-    /* check calls to mc_config_get_string() function */
+    // check calls to mc_config_get_string() function
     mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__group__captured, 0),
                           CONFIG_EXT_EDITOR_VIEWER_SECTION);
     mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__param__captured, 0),
@@ -172,11 +165,8 @@ START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_
                           NULL);
 
     vfs_path_free (filename_vpath, TRUE);
-
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -189,10 +179,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, check_if_filename_and_lineno_will_be_subtituted,
-                                   check_subtitute_ds);
-    /* *********************************** */
+                                   check_substitute_ds);
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

@@ -29,7 +29,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/util.h"           /* _GL_CMP() */
+#include "lib/util.h"  // _GL_CMP()
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -65,14 +65,12 @@ sign (int n)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("str_verscmp_test_ds") */
-/* *INDENT-OFF* */
 static const struct str_verscmp_test_struct
 {
     const char *s1;
     const char *s2;
     int expected_result;
-} str_verscmp_test_ds[] =
-{
+} str_verscmp_test_ds[] = {
     { "", "", 0 },
     { "a", "a", 0 },
     { "a", "b", -1 },
@@ -86,34 +84,29 @@ static const struct str_verscmp_test_struct
     { "09", "0", -1 },
     { "9", "10", -1 },
     { "0a", "0", 1 },
-    /* From glibc bug 9913 */
+    // From glibc bug 9913
     { a, b, -1 },
     { b, c, -1 },
     { a, c, -1 },
     { b, a, 1 },
     { c, b, 1 },
-    { c, a, 1 }
+    { c, a, 1 },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "str_verscmp_test_ds") */
-/* *INDENT-OFF* */
 START_TEST (str_verscmp_test)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     int actual_result;
     const struct str_verscmp_test_struct *data = &str_verscmp_test_ds[_i];
 
-    /* when */
+    // when
     actual_result = str_verscmp (data->s1, data->s2);
 
-    /* then */
+    // then
     ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -126,9 +119,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, str_verscmp_test, str_verscmp_test_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

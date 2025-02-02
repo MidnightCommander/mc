@@ -84,33 +84,24 @@ read_list (const char *fname)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_ftpfs_parse_long_list_ds") */
-/* *INDENT-OFF* */
 static const struct test_ftpfs_parse_long_list_ds
 {
     const char *name;
-} test_ftpfs_parse_long_list_ds[] =
-{
-    { /* 0. Ticket #2841 */
-        "aix"
-    },
-    { /* 1. Ticket #3174 */
-        "ms"
-    }
+} test_ftpfs_parse_long_list_ds[] = {
+    { "aix" },  // 0. Ticket #2841
+    { "ms" },   // 1. Ticket #3174
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_ftpfs_parse_long_list_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *name;
     GSList *input, *parsed, *output;
     GSList *parsed_iter, *output_iter;
     int err_count;
 
-    /* when */
+    // when
     name = g_strdup_printf ("%s/%s_list.input", TEST_DATA_DIR, data->name);
     input = read_list (name);
     g_free (name);
@@ -123,9 +114,8 @@ START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_
 
     parsed = ftpfs_parse_long_list (me, super->root, input, &err_count);
 
-    /* then */
-    for (parsed_iter = parsed, output_iter = output;
-         parsed_iter != NULL && output_iter != NULL;
+    // then
+    for (parsed_iter = parsed, output_iter = output; parsed_iter != NULL && output_iter != NULL;
          parsed_iter = g_slist_next (parsed_iter), output_iter = g_slist_next (output_iter))
         mctest_assert_str_eq (VFS_ENTRY (parsed_iter->data)->name, (char *) output_iter->data);
 
@@ -141,9 +131,7 @@ START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_
     g_slist_free_full (input, g_free);
     g_slist_free_full (output, g_free);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -156,10 +144,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_ftpfs_parse_long_list,
                                    test_ftpfs_parse_long_list_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

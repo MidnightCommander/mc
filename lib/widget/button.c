@@ -125,49 +125,49 @@ button_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, 
         return MSG_HANDLED;
 
     case MSG_DRAW:
+    {
+        gboolean focused;
+
+        focused = widget_get_state (w, WST_FOCUSED);
+
+        widget_selectcolor (w, focused, FALSE);
+        widget_gotoyx (w, 0, 0);
+
+        switch (b->flags)
         {
-            gboolean focused;
-
-            focused = widget_get_state (w, WST_FOCUSED);
-
-            widget_selectcolor (w, focused, FALSE);
-            widget_gotoyx (w, 0, 0);
-
-            switch (b->flags)
-            {
-            case DEFPUSH_BUTTON:
-                tty_print_string ("[< ");
-                break;
-            case NORMAL_BUTTON:
-                tty_print_string ("[ ");
-                break;
-            case NARROW_BUTTON:
-                tty_print_string ("[");
-                break;
-            case HIDDEN_BUTTON:
-            default:
-                return MSG_HANDLED;
-            }
-
-            hotkey_draw (w, b->text, focused);
-
-            switch (b->flags)
-            {
-            case DEFPUSH_BUTTON:
-                tty_print_string (" >]");
-                break;
-            case NORMAL_BUTTON:
-                tty_print_string (" ]");
-                break;
-            case NARROW_BUTTON:
-                tty_print_string ("]");
-                break;
-            default:
-                break;
-            }
-
+        case DEFPUSH_BUTTON:
+            tty_print_string ("[< ");
+            break;
+        case NORMAL_BUTTON:
+            tty_print_string ("[ ");
+            break;
+        case NARROW_BUTTON:
+            tty_print_string ("[");
+            break;
+        case HIDDEN_BUTTON:
+        default:
             return MSG_HANDLED;
         }
+
+        hotkey_draw (w, b->text, focused);
+
+        switch (b->flags)
+        {
+        case DEFPUSH_BUTTON:
+            tty_print_string (" >]");
+            break;
+        case NORMAL_BUTTON:
+            tty_print_string (" ]");
+            break;
+        case NARROW_BUTTON:
+            tty_print_string ("]");
+            break;
+        default:
+            break;
+        }
+
+        return MSG_HANDLED;
+    }
 
     case MSG_DESTROY:
         hotkey_free (b->text);

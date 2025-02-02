@@ -67,7 +67,7 @@ check_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         {
             if (g_ascii_tolower ((gchar) c->text.hotkey[0]) == parm)
             {
-                /* make action */
+                // make action
                 send_message (w, sender, MSG_KEY, ' ', data);
                 return MSG_HANDLED;
             }
@@ -87,16 +87,16 @@ check_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case MSG_DRAW:
-        {
-            gboolean focused;
+    {
+        gboolean focused;
 
-            focused = widget_get_state (w, WST_FOCUSED);
-            widget_selectcolor (w, focused, FALSE);
-            widget_gotoyx (w, 0, 0);
-            tty_print_string (c->state ? "[x] " : "[ ] ");
-            hotkey_draw (w, c->text, focused);
-            return MSG_HANDLED;
-        }
+        focused = widget_get_state (w, WST_FOCUSED);
+        widget_selectcolor (w, focused, FALSE);
+        widget_gotoyx (w, 0, 0);
+        tty_print_string (c->state ? "[x] " : "[ ] ");
+        hotkey_draw (w, c->text, focused);
+        return MSG_HANDLED;
+    }
 
     case MSG_DESTROY:
         hotkey_free (c->text);
@@ -144,7 +144,7 @@ check_new (int y, int x, gboolean state, const char *text)
     c = g_new (WCheck, 1);
     w = WIDGET (c);
     c->text = hotkey_new (text);
-    /* 4 is width of "[X] " */
+    // 4 is width of "[X] "
     r.cols = 4 + hotkey_width (c->text);
     widget_init (w, &r, check_callback, check_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
@@ -172,9 +172,9 @@ check_set_text (WCheck *check, const char *text)
     check->text = hk;
 
     if (check->text.start[0] == '\0' && check->text.hotkey == NULL && check->text.end == NULL)
-        w->rect.cols = 3;       /* "[ ]" */
+        w->rect.cols = 3;  // "[ ]"
     else
-        w->rect.cols = 4 + hotkey_width (check->text);  /* "[ ]  text" */
+        w->rect.cols = 4 + hotkey_width (check->text);  // "[ ]  text"
 
     widget_draw (w);
 }

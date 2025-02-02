@@ -53,20 +53,20 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"  // mc_event_raise()
 
-#include "src/setup.h"          /* confirm_delete, panels_options */
+#include "src/setup.h"  // confirm_delete, panels_options
 #include "src/keymap.h"
 #include "src/history.h"
 
 #include "dir.h"
-#include "filemanager.h"        /* the_menubar */
-#include "file.h"               /* copy_dir_dir(), move_dir_dir(), erase_dir() */
-#include "layout.h"             /* command_prompt */
+#include "filemanager.h"  // the_menubar
+#include "file.h"         // copy_dir_dir(), move_dir_dir(), erase_dir()
+#include "layout.h"       // command_prompt
 #include "treestore.h"
 #include "cmd.h"
 #include "filegui.h"
-#include "cd.h"                 /* cd_error_message() */
+#include "cd.h"  // cd_error_message()
 
 #include "tree.h"
 
@@ -83,8 +83,9 @@ gboolean xtree_mode = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define tlines(t) (t->is_panel ? WIDGET (t)->rect.lines - 2 - \
-                    (panels_options.show_mini_info ? 2 : 0) : WIDGET (t)->rect.lines)
+#define tlines(t)                                                                                  \
+    (t->is_panel ? WIDGET (t)->rect.lines - 2 - (panels_options.show_mini_info ? 2 : 0)            \
+                 : WIDGET (t)->rect.lines)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -92,13 +93,13 @@ struct WTree
 {
     Widget widget;
     struct TreeStore *store;
-    tree_entry *selected_ptr;   /* The selected directory */
-    GString *search_buffer;     /* Current search string */
-    tree_entry **tree_shown;    /* Entries currently on screen */
-    gboolean is_panel;          /* panel or plain widget flag */
-    gboolean searching;         /* Are we on searching mode? */
-    int topdiff;                /* The difference between the topmost
-                                   shown and the selected */
+    tree_entry *selected_ptr;  // The selected directory
+    GString *search_buffer;    // Current search string
+    tree_entry **tree_shown;   // Entries currently on screen
+    gboolean is_panel;         // panel or plain widget flag
+    gboolean searching;        // Are we on searching mode?
+    int topdiff;               /* The difference between the topmost
+                                  shown and the selected */
 };
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -172,7 +173,7 @@ save_tree (WTree *tree)
         char *tree_name;
 
         tree_name = mc_config_get_full_path (MC_TREESTORE_FILE);
-        fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), tree_name,
+        fprintf (stderr, _ ("Cannot open the %s file for writing:\n%s\n"), tree_name,
                  unix_error_string (error));
         g_free (tree_name);
     }
@@ -224,7 +225,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
     Widget *w = WIDGET (tree);
     int line;
 
-    /* Show mini info */
+    // Show mini info
     if (tree->is_panel)
     {
         if (!panels_options.show_mini_info)
@@ -236,7 +237,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 
     if (tree->searching)
     {
-        /* Show search string */
+        // Show search string
         tty_setcolor (INPUT_COLOR);
         tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
@@ -246,7 +247,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
     }
     else
     {
-        /* Show full name of selected directory */
+        // Show full name of selected directory
 
         const int *colors;
 
@@ -254,8 +255,8 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
         tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
-        tty_print_string (str_fit_to_term
-                          (vfs_path_as_str (tree->selected_ptr->name), tree_cols, J_LEFT_FIT));
+        tty_print_string (
+            str_fit_to_term (vfs_path_as_str (tree->selected_ptr->name), tree_cols, J_LEFT_FIT));
     }
 }
 
@@ -271,7 +272,7 @@ show_tree (WTree *tree)
     int x = 0, y = 0;
     int tree_lines, tree_cols;
 
-    /* Initialize */
+    // Initialize
     tree_lines = tlines (tree);
     tree_cols = w->rect.cols;
 
@@ -295,7 +296,7 @@ show_tree (WTree *tree)
     }
     current = tree->selected_ptr;
 
-    /* Calculate the directory which is to be shown on the topmost line */
+    // Calculate the directory which is to be shown on the topmost line
     if (!tree_navigation_flag)
         current = back_ptr (current, &tree->topdiff);
     else
@@ -331,7 +332,7 @@ show_tree (WTree *tree)
         tree->topdiff = i;
     }
 
-    /* Loop for every line */
+    // Loop for every line
     for (i = 0; i < tree_lines; i++)
     {
         const int *colors;
@@ -339,7 +340,7 @@ show_tree (WTree *tree)
         colors = widget_get_colors (w);
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
 
-        /* Move to the beginning of the line */
+        // Move to the beginning of the line
         tty_draw_hline (w->rect.y + y + i, w->rect.x + x, ' ', tree_cols);
 
         if (current == NULL)
@@ -361,16 +362,15 @@ show_tree (WTree *tree)
 
         tree->tree_shown[i] = current;
         if (current->sublevel == topsublevel)
-            /* Show full name */
-            tty_print_string (str_fit_to_term
-                              (vfs_path_as_str (current->name),
-                               tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
+            // Show full name
+            tty_print_string (str_fit_to_term (vfs_path_as_str (current->name),
+                                               tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
         else
         {
-            /* Sub level directory */
+            // Sub level directory
             tty_set_alt_charset (TRUE);
 
-            /* Output branch parts */
+            // Output branch parts
             for (j = 0; j < current->sublevel - topsublevel - 1; j++)
             {
                 if (tree_cols - 8 - 3 * j < 9)
@@ -391,13 +391,13 @@ show_tree (WTree *tree)
             tty_print_char (ACS_HLINE);
             tty_set_alt_charset (FALSE);
 
-            /* Show sub-name */
+            // Show sub-name
             tty_print_char (' ');
-            tty_print_string (str_fit_to_term
-                              (current->subname, tree_cols - x - 3 * j, J_LEFT_FIT));
+            tty_print_string (
+                str_fit_to_term (current->subname, tree_cols - x - 3 * j, J_LEFT_FIT));
         }
 
-        /* Calculate the next value for current */
+        // Calculate the next value for current
         current = current->next;
         if (tree_navigation_flag)
             for (; current != NULL; current = current->next)
@@ -509,23 +509,23 @@ tree_move_to_child (WTree *tree)
 {
     tree_entry *current;
 
-    /* Do we have a starting point? */
+    // Do we have a starting point?
     if (tree->selected_ptr == NULL)
         return;
 
-    /* Take the next entry */
+    // Take the next entry
     current = tree->selected_ptr->next;
-    /* Is it the child of the selected entry */
+    // Is it the child of the selected entry
     if (current != NULL && current->sublevel > tree->selected_ptr->sublevel)
     {
-        /* Yes -> select this entry */
+        // Yes -> select this entry
         tree->selected_ptr = current;
         tree->topdiff++;
         tree_check_focus (tree);
     }
     else
     {
-        /* No -> rescan and try again */
+        // No -> rescan and try again
         tree_rescan (tree);
         current = tree->selected_ptr->next;
         if (current != NULL && current->sublevel > tree->selected_ptr->sublevel)
@@ -655,7 +655,7 @@ search_tree (WTree *tree, const GString *text)
 static void
 tree_do_search (WTree *tree, int key)
 {
-    /* TODO: support multi-byte characters, see do_search() in panel.c */
+    // TODO: support multi-byte characters, see do_search() in panel.c
 
     if (tree->search_buffer->len != 0 && key == KEY_BACKSPACE)
         g_string_set_size (tree->search_buffer, tree->search_buffer->len - 1);
@@ -714,10 +714,9 @@ tree_copy (WTree *tree, const char *default_dest)
     if (tree->selected_ptr == NULL)
         return;
 
-    g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
+    g_snprintf (msg, sizeof (msg), _ ("Copy \"%s\" directory to:"),
                 str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
-    dest = input_expand_dialog (Q_ ("DialogTitle|Copy"),
-                                msg, MC_HISTORY_FM_TREE_COPY, default_dest,
+    dest = input_expand_dialog (Q_ ("DialogTitle|Copy"), msg, MC_HISTORY_FM_TREE_COPY, default_dest,
                                 INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
 
     if (dest != NULL && *dest != '\0')
@@ -746,11 +745,10 @@ tree_move (WTree *tree, const char *default_dest)
     if (tree->selected_ptr == NULL)
         return;
 
-    g_snprintf (msg, sizeof (msg), _("Move \"%s\" directory to:"),
+    g_snprintf (msg, sizeof (msg), _ ("Move \"%s\" directory to:"),
                 str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
-    dest =
-        input_expand_dialog (Q_ ("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, default_dest,
-                             INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
+    dest = input_expand_dialog (Q_ ("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, default_dest,
+                                INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
 
     if (dest != NULL && *dest != '\0')
     {
@@ -760,10 +758,10 @@ tree_move (WTree *tree, const char *default_dest)
         dest_vpath = vfs_path_from_str (dest);
 
         if (mc_stat (dest_vpath, &buf) != 0)
-            message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
+            message (D_ERROR, MSG_ERROR, _ ("Cannot stat the destination\n%s"),
                      unix_error_string (errno));
         else if (!S_ISDIR (buf.st_mode))
-            file_error (NULL, TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
+            file_error (NULL, TRUE, _ ("Destination \"%s\" must be a directory\n%s"), dest);
         else
         {
             file_op_context_t *ctx;
@@ -814,9 +812,9 @@ tree_rmdir (void *data)
         char *buf;
         int result;
 
-        buf = g_strdup_printf (_("Delete %s?"), vfs_path_as_str (tree->selected_ptr->name));
+        buf = g_strdup_printf (_ ("Delete %s?"), vfs_path_as_str (tree->selected_ptr->name));
 
-        result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
+        result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _ ("&Yes"), _ ("&No"));
         g_free (buf);
         if (result != 0)
             return;
@@ -1066,7 +1064,7 @@ tree_key (WTree *tree, int key)
         {
             tree->searching = FALSE;
             show_tree (tree);
-            return MSG_HANDLED; /* eat abort char */
+            return MSG_HANDLED;  // eat abort char
         }
         /* modal tree dialog: let upper layer see the
            abort character and close the dialog */
@@ -1094,7 +1092,7 @@ tree_key (WTree *tree, int key)
         return MSG_HANDLED;
     }
 
-    /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
+    // Do not eat characters not meant for the tree below ' ' (e.g. C-l).
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
         tree_start_search (tree);
@@ -1118,7 +1116,7 @@ tree_frame (WDialog *h, WTree *tree)
     widget_erase (w);
     if (tree->is_panel)
     {
-        const char *title = _("Directory tree");
+        const char *title = _ ("Directory tree");
         const int len = str_term_width1 (title);
 
         tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
@@ -1166,12 +1164,13 @@ tree_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
         buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), w->keymap, w);
         buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), w->keymap, w);
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), w->keymap, w);
-        buttonbar_set_label (b, 4, tree_navigation_flag ? Q_ ("ButtonBar|Static")
-                             : Q_ ("ButtonBar|Dynamc"), w->keymap, w);
+        buttonbar_set_label (
+            b, 4, tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
+            w->keymap, w);
         buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), w->keymap, w);
         buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), w->keymap, w);
 #if 0
-        /* FIXME: mkdir is currently defunct */
+        // FIXME: mkdir is currently defunct 
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), w->keymap, w);
 #else
         buttonbar_clear_label (b, 7, w);
@@ -1188,7 +1187,7 @@ tree_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
         return tree_key (tree, parm);
 
     case MSG_ACTION:
-        /* command from buttonbar */
+        // command from buttonbar
         return tree_execute_cmd (tree, parm);
 
     case MSG_DESTROY:
@@ -1203,8 +1202,8 @@ tree_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  * Mouse callback
-  */
+ * Mouse callback
+ */
 static void
 tree_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
@@ -1218,10 +1217,10 @@ tree_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        /* rest of the upper frame - call menu */
+        // rest of the upper frame - call menu
         if (tree->is_panel && event->y == WIDGET (w->owner)->rect.y)
         {
-            /* return MOU_UNHANDLED */
+            // return MOU_UNHANDLED
             event->result.abort = TRUE;
         }
         else if (!widget_get_state (w, WST_FOCUSED))
@@ -1229,37 +1228,37 @@ tree_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
 
     case MSG_MOUSE_CLICK:
+    {
+        int lines;
+
+        lines = tlines (tree);
+
+        if (y < 0)
         {
-            int lines;
-
-            lines = tlines (tree);
-
-            if (y < 0)
-            {
-                tree_move_backward (tree, lines - 1);
-                show_tree (tree);
-            }
-            else if (y >= lines)
-            {
-                tree_move_forward (tree, lines - 1);
-                show_tree (tree);
-            }
-            else if ((event->count & GPM_DOUBLE) != 0)
-            {
-                if (tree->tree_shown[y] != NULL)
-                {
-                    tree->selected_ptr = tree->tree_shown[y];
-                    tree->topdiff = y;
-                }
-
-                tree_chdir_sel (tree);
-            }
+            tree_move_backward (tree, lines - 1);
+            show_tree (tree);
         }
-        break;
+        else if (y >= lines)
+        {
+            tree_move_forward (tree, lines - 1);
+            show_tree (tree);
+        }
+        else if ((event->count & GPM_DOUBLE) != 0)
+        {
+            if (tree->tree_shown[y] != NULL)
+            {
+                tree->selected_ptr = tree->tree_shown[y];
+                tree->topdiff = y;
+            }
+
+            tree_chdir_sel (tree);
+        }
+    }
+    break;
 
     case MSG_MOUSE_SCROLL_UP:
     case MSG_MOUSE_SCROLL_DOWN:
-        /* TODO: Ticket #2218 */
+        // TODO: Ticket #2218
         break;
 
     default:

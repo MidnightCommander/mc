@@ -28,8 +28,8 @@
 
 #include <config.h>
 #include <stdlib.h>
-#include <string.h>             /* strcmp() */
-#include <sys/types.h>          /* size_t */
+#include <string.h>     // strcmp()
+#include <sys/types.h>  // size_t
 
 #include "internal.h"
 
@@ -54,55 +54,55 @@ typedef struct mc_skin_colors_old_struct
 
 /* keep this table alphabetically sorted */
 static const mc_skin_colors_old_t old_colors[] = {
-    {"bbarbutton", "buttonbar", "button"},
-    {"bbarhotkey", "buttonbar", "hotkey"},
-    {"commandlinemark", "core", "commandlinemark"},
-    {"dfocus", "dialog", "dfocus"},
-    {"dhotfocus", "dialog", "dhotfocus"},
-    {"dhotnormal", "dialog", "dhotnormal"},
-    {"disabled", "core", "disabled"},
-    {"dnormal", "dialog", "_default_"},
-    {"editbg", "editor", "editbg"},
-    {"editbold", "editor", "editbold"},
-    {"editframe", "editor", "editframe"},
-    {"editframeactive", "editor", "editframeactive"},
-    {"editframedrag", "editor", "editframedrag"},
-    {"editlinestate", "editor", "editlinestate"},
-    {"editmarked", "editor", "editmarked"},
-    {"editnonprintable", "editor", "editnonprintable"},
-    {"editnormal", "editor", "_default_"},
-    {"editwhitespace", "editor", "editwhitespace"},
-    {"errdhotfocus", "error", "errdhotfocus"},
-    {"errdhotnormal", "error", "errdhotnormal"},
-    {"errors", "error", "_default_"},
-    {"gauge", "core", "gauge"},
-    {"header", "core", "header"},
-    {"helpbold", "help", "helpbold"},
-    {"helpitalic", "help", "helpitalic"},
-    {"helplink", "help", "helplink"},
-    {"helpnormal", "help", "_default_"},
-    {"helpslink", "help", "helpslink"},
-    {"input", "core", "input"},
-    {"inputmark", "core", "inputmark"},
-    {"inputunchanged", "core", "inputunchanged"},
-    {"marked", "core", "marked"},
-    {"markselect", "core", "markselect"},
-    {"menuhot", "menu", "menuhot"},
-    {"menuhotsel", "menu", "menuhotsel"},
-    {"menuinactive", "menu", "menuinactive"},
-    {"menunormal", "menu", "_default_"},
-    {"menusel", "menu", "menusel"},
-    {"normal", "core", "_default_"},
-    {"pmenunormal", "popupmenu", "_default_"},
-    {"pmenusel", "popupmenu", "menusel"},
-    {"pmenutitle", "popupmenu", "menutitle"},
-    {"reverse", "core", "reverse"},
-    {"selected", "core", "selected"},
-    {"statusbar", "statusbar", "_default_"},
-    {"viewbold", "viewer", "viewbold"},
-    {"viewnormal", "viewer", "_default_"},
-    {"viewselected", "viewer", "viewselected"},
-    {"viewunderline", "viewer", "viewunderline"}
+    { "bbarbutton", "buttonbar", "button" },
+    { "bbarhotkey", "buttonbar", "hotkey" },
+    { "commandlinemark", "core", "commandlinemark" },
+    { "dfocus", "dialog", "dfocus" },
+    { "dhotfocus", "dialog", "dhotfocus" },
+    { "dhotnormal", "dialog", "dhotnormal" },
+    { "disabled", "core", "disabled" },
+    { "dnormal", "dialog", "_default_" },
+    { "editbg", "editor", "editbg" },
+    { "editbold", "editor", "editbold" },
+    { "editframe", "editor", "editframe" },
+    { "editframeactive", "editor", "editframeactive" },
+    { "editframedrag", "editor", "editframedrag" },
+    { "editlinestate", "editor", "editlinestate" },
+    { "editmarked", "editor", "editmarked" },
+    { "editnonprintable", "editor", "editnonprintable" },
+    { "editnormal", "editor", "_default_" },
+    { "editwhitespace", "editor", "editwhitespace" },
+    { "errdhotfocus", "error", "errdhotfocus" },
+    { "errdhotnormal", "error", "errdhotnormal" },
+    { "errors", "error", "_default_" },
+    { "gauge", "core", "gauge" },
+    { "header", "core", "header" },
+    { "helpbold", "help", "helpbold" },
+    { "helpitalic", "help", "helpitalic" },
+    { "helplink", "help", "helplink" },
+    { "helpnormal", "help", "_default_" },
+    { "helpslink", "help", "helpslink" },
+    { "input", "core", "input" },
+    { "inputmark", "core", "inputmark" },
+    { "inputunchanged", "core", "inputunchanged" },
+    { "marked", "core", "marked" },
+    { "markselect", "core", "markselect" },
+    { "menuhot", "menu", "menuhot" },
+    { "menuhotsel", "menu", "menuhotsel" },
+    { "menuinactive", "menu", "menuinactive" },
+    { "menunormal", "menu", "_default_" },
+    { "menusel", "menu", "menusel" },
+    { "normal", "core", "_default_" },
+    { "pmenunormal", "popupmenu", "_default_" },
+    { "pmenusel", "popupmenu", "menusel" },
+    { "pmenutitle", "popupmenu", "menutitle" },
+    { "reverse", "core", "reverse" },
+    { "selected", "core", "selected" },
+    { "statusbar", "statusbar", "_default_" },
+    { "viewbold", "viewer", "viewbold" },
+    { "viewnormal", "viewer", "_default_" },
+    { "viewselected", "viewer", "viewselected" },
+    { "viewunderline", "viewer", "viewunderline" },
 };
 
 static const size_t num_old_colors = G_N_ELEMENTS (old_colors);
@@ -131,8 +131,8 @@ mc_skin_colors_old_transform (const char *old_color, const char **group, const c
     if (old_color == NULL)
         return FALSE;
 
-    res = (mc_skin_colors_old_t *) bsearch (&oc, old_colors, num_old_colors,
-                                            sizeof (old_colors[0]), old_color_comparator);
+    res = (mc_skin_colors_old_t *) bsearch (&oc, old_colors, num_old_colors, sizeof (old_colors[0]),
+                                            old_color_comparator);
 
     if (res == NULL)
         return FALSE;

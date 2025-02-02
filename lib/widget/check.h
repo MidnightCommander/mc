@@ -8,7 +8,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define CHECK(x) ((WCheck *)(x))
+#define CHECK(x) ((WCheck *) (x))
 
 /*** enums ***************************************************************************************/
 
@@ -17,8 +17,8 @@
 typedef struct WCheck
 {
     Widget widget;
-    gboolean state;             /* check button state */
-    hotkey_t text;              /* text of check button */
+    gboolean state;  // check button state
+    hotkey_t text;   // text of check button
 } WCheck;
 
 /*** global variables defined in .c file *********************************************************/
@@ -26,8 +26,8 @@ typedef struct WCheck
 /*** declarations of public functions ************************************************************/
 
 WCheck *check_new (int y, int x, gboolean state, const char *text);
-void check_set_text (WCheck * check, const char *text);
+void check_set_text (WCheck *check, const char *text);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_CHECK_H */
+#endif

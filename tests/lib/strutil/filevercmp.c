@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/util.h"           /* _GL_CMP() */
+#include "lib/util.h"  // _GL_CMP()
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -92,44 +92,36 @@ test_filevercmp (char const *a, char const *b)
 
 /* @DataSource("filevercmp_test_ds1") */
 /* Testcases are taken from Gnulib */
-/* *INDENT-OFF* */
 static const struct filevercmp_test_struct
 {
     const char *s1;
     const char *s2;
     int expected_result;
-} filevercmp_test_ds1[] =
-{
-    { "", "", 0 },
-    { "a", "a", 0 },
-    { "a", "b", -1 },
-    { "b", "a", 1 },
-    { "00", "01", -1 },
-    { "01", "010", -1 },
-    { "9", "10", -1 },
-    { "0a", "0", 1 }
+} filevercmp_test_ds1[] = {
+    { "", "", 0 },        //
+    { "a", "a", 0 },      //
+    { "a", "b", -1 },     //
+    { "b", "a", 1 },      //
+    { "00", "01", -1 },   //
+    { "01", "010", -1 },  //
+    { "9", "10", -1 },    //
+    { "0a", "0", 1 },     //
 };
-/* *INDENT-ON* */
-
 
 /* @Test(dataSource = "filevercmp_test_ds1") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test1)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     int actual_result;
     const struct filevercmp_test_struct *data = &filevercmp_test_ds1[_i];
 
-    /* when */
+    // when
     actual_result = filevercmp (data->s1, data->s2);
 
-    /* then */
+    // then
     ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -207,15 +199,13 @@ static const char *filevercmp_test_ds2[] = {
     "\1x\1",
     "\1.0",
     "#\1.b#",
-    "#.b#"
+    "#.b#",
 };
 
 static const size_t filevercmp_test_ds2_len = G_N_ELEMENTS (filevercmp_test_ds2);
 
 /* @Test(dataSource = "filevercmp_test_ds2") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test2)
-/* *INDENT-ON* */
 {
     const char *i = filevercmp_test_ds2[_i];
     size_t _j;
@@ -235,24 +225,19 @@ START_TEST (filevercmp_test2)
             ck_assert_int_eq ((size_t) _i, _j);
     }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
-
 
 /* @DataSource("filevercmp_test_ds3") */
 /* Ticket #3959 */
 static const char *filevercmp_test_ds3[] = {
     "application-1.10.tar.gz",
-    "application-1.10.1.tar.gz"
+    "application-1.10.1.tar.gz",
 };
 
 static const size_t filevercmp_test_ds3_len = G_N_ELEMENTS (filevercmp_test_ds3);
 
 /* @Test(dataSource = "filevercmp_test_ds3") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test3)
-/* *INDENT-ON* */
 {
     const char *i = filevercmp_test_ds3[_i];
     size_t _j;
@@ -272,25 +257,20 @@ START_TEST (filevercmp_test3)
             ck_assert_int_eq ((size_t) _i, _j);
     }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
-
 
 /* @DataSource("filevercmp_test_ds4") */
 /* Ticket #3905 */
 static const char *filevercmp_test_ds4[] = {
     "firefox-58.0.1+build1.tar.gz",
     "firefox-59.0~b14+build1.tar.gz",
-    "firefox-59.0.1+build1.tar.gz"
+    "firefox-59.0.1+build1.tar.gz",
 };
 
 static const size_t filevercmp_test_ds4_len = G_N_ELEMENTS (filevercmp_test_ds4);
 
 /* @Test(dataSource = "filevercmp_test_ds4") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test4)
-/* *INDENT-ON* */
 {
     const char *i = filevercmp_test_ds4[_i];
     size_t _j;
@@ -310,10 +290,7 @@ START_TEST (filevercmp_test4)
             ck_assert_int_eq ((size_t) _i, _j);
     }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
-
 
 /* @DataSource("filevercmp_test_ds5") */
 /* Testcases are taken from Gnulib */
@@ -343,15 +320,13 @@ static const char *filevercmp_test_ds5[] = {
     NULL,
     ".a\1c-1\1.txt",
     ".a\1c-001\1.txt",
-    NULL
+    NULL,
 };
 
 static const size_t filevercmp_test_ds5_len = G_N_ELEMENTS (filevercmp_test_ds5);
 
 /* @Test(dataSource = "filevercmp_test_ds5") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test5)
-/* *INDENT-ON* */
 {
     size_t ii;
 
@@ -370,9 +345,7 @@ START_TEST (filevercmp_test5)
             }
         }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -385,13 +358,13 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, filevercmp_test1, filevercmp_test_ds1);
     tcase_add_loop_test (tc_core, filevercmp_test2, 0, filevercmp_test_ds2_len);
     tcase_add_loop_test (tc_core, filevercmp_test3, 0, filevercmp_test_ds3_len);
     tcase_add_loop_test (tc_core, filevercmp_test4, 0, filevercmp_test_ds4_len);
     tcase_add_test (tc_core, filevercmp_test5);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

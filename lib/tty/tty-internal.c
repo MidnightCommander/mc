@@ -68,8 +68,8 @@ tty_create_winch_pipe (void)
 
     if (!g_unix_open_pipe (sigwinch_pipe, FD_CLOEXEC, &mcerror))
     {
-        fprintf (stderr, _("\nCannot create pipe for SIGWINCH: %s (%d)\n"),
-                 mcerror->message, mcerror->code);
+        fprintf (stderr, _ ("\nCannot create pipe for SIGWINCH: %s (%d)\n"), mcerror->message,
+                 mcerror->code);
         g_error_free (mcerror);
         exit (EXIT_FAILURE);
     }
@@ -81,7 +81,7 @@ tty_create_winch_pipe (void)
      */
     if (!g_unix_set_fd_nonblocking (sigwinch_pipe[0], TRUE, &mcerror))
     {
-        fprintf (stderr, _("\nCannot configure write end of SIGWINCH pipe: %s (%d)\n"),
+        fprintf (stderr, _ ("\nCannot configure write end of SIGWINCH pipe: %s (%d)\n"),
                  mcerror->message, mcerror->code);
         g_error_free (mcerror);
         tty_destroy_winch_pipe ();
@@ -90,7 +90,7 @@ tty_create_winch_pipe (void)
 
     if (!g_unix_set_fd_nonblocking (sigwinch_pipe[1], TRUE, &mcerror))
     {
-        fprintf (stderr, _("\nCannot configure read end of SIGWINCH pipe: %s (%d)\n"),
+        fprintf (stderr, _ ("\nCannot configure read end of SIGWINCH pipe: %s (%d)\n"),
                  mcerror->message, mcerror->code);
         g_error_free (mcerror);
         tty_destroy_winch_pipe ();

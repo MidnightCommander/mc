@@ -23,7 +23,6 @@ void subshell_handle_cons_saver (void);
 int subshell_get_mainloop_quit (void);
 void subshell_set_mainloop_quit (const int param_quit);
 
-
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__SUBSHELL_INTERNAL_H */
+#endif

@@ -14,13 +14,13 @@ typedef enum
     SHELL_NONE,
     SHELL_SH,
     SHELL_BASH,
-    SHELL_ASH_BUSYBOX,          /* BusyBox default shell (ash) */
-    SHELL_DASH,                 /* Debian variant of ash */
+    SHELL_ASH_BUSYBOX,  // BusyBox default shell (ash)
+    SHELL_DASH,         // Debian variant of ash
     SHELL_TCSH,
     SHELL_ZSH,
     SHELL_FISH,
-    SHELL_KSH,                  /* Public Domain Korn shell (pdksh) and variants */
-    SHELL_MKSH                  /* MirBSD Korn shell (mksh) */
+    SHELL_KSH,  // Public Domain Korn shell (pdksh) and variants
+    SHELL_MKSH  // MirBSD Korn shell (mksh)
 } shell_type_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -42,4 +42,4 @@ void mc_shell_deinit (void);
 
 /*** inline functions **************************************************/
 
-#endif /* MC_SHELL_H */
+#endif

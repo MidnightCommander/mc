@@ -43,7 +43,7 @@
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "src/history.h"
@@ -77,32 +77,36 @@ mcview_dialog_search (WView *view)
 
     {
         quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                 INPUT_LAST_TEXT, MC_HISTORY_SHARED_SEARCH, &exp,
-                                 NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+            // clang-format off
+            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
+                                 MC_HISTORY_SHARED_SEARCH, &exp, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &mcview_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_("&Backwards"), &mcview_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_("&Whole words"), &mcview_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (N_ ("&Backwards"), &mcview_search_options.backwards, NULL),
+                QUICK_CHECKBOX (N_ ("&Whole words"), &mcview_search_options.whole_words, NULL),
 #ifdef HAVE_CHARSET
-                QUICK_CHECKBOX (N_("&All charsets"), &mcview_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (N_ ("&All charsets"), &mcview_search_options.all_codepages, NULL),
 #endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
-            /* *INDENT-ON* */
+            QUICK_END,
+            // clang-format on
         };
 
         WRect r = { -1, -1, 0, 58 };
 
         quick_dialog_t qdlg = {
-            r, N_("Search"), "[Input Line Keys]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Search"),
+            .help = "[Input Line Keys]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL,
         };
 
         qd_result = quick_dialog (&qdlg);
@@ -149,10 +153,10 @@ mcview_dialog_goto (WView *view, off_t *offset)
     } mcview_goto_type_t;
 
     const char *mc_view_goto_str[] = {
-        N_("&Line number"),
-        N_("Pe&rcents"),
-        N_("&Decimal offset"),
-        N_("He&xadecimal offset")
+        N_ ("&Line number"),
+        N_ ("Pe&rcents"),
+        N_ ("&Decimal offset"),
+        N_ ("He&xadecimal offset"),
     };
 
     static mcview_goto_type_t current_goto_type = MC_VIEW_GOTO_LINENUM;
@@ -169,36 +173,38 @@ mcview_dialog_goto (WView *view, off_t *offset)
         size_t i;
 
         for (i = 0; i < num_of_types; i++)
-            mc_view_goto_str[i] = _(mc_view_goto_str[i]);
+            mc_view_goto_str[i] = _ (mc_view_goto_str[i]);
     }
 #endif
 
     {
         quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
-            QUICK_INPUT (INPUT_LAST_TEXT, MC_HISTORY_VIEW_GOTO, &exp, NULL,
-                         FALSE, FALSE, INPUT_COMPLETE_NONE),
+            QUICK_INPUT (INPUT_LAST_TEXT, MC_HISTORY_VIEW_GOTO, &exp, NULL, FALSE, FALSE,
+                         INPUT_COMPLETE_NONE),
             QUICK_RADIO (num_of_types, (const char **) mc_view_goto_str, (int *) &current_goto_type,
                          NULL),
             QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
-            /* *INDENT-ON* */
+            QUICK_END,
         };
 
         WRect r = { -1, -1, 0, 40 };
 
         quick_dialog_t qdlg = {
-            r, N_("Goto"), "[Input Line Keys]",
-            quick_widgets, NULL, NULL
+            .rect = r,
+            .title = N_ ("Goto"),
+            .help = "[Input Line Keys]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL,
         };
 
-        /* run dialog */
+        // run dialog
         qd_result = quick_dialog (&qdlg);
     }
 
     *offset = -1;
 
-    /* check input line value */
+    // check input line value
     res = (qd_result != B_CANCEL && exp[0] != '\0');
     if (res)
     {
@@ -212,7 +218,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
             switch (current_goto_type)
             {
             case MC_VIEW_GOTO_LINENUM:
-                /* Line number entered by user is 1-based. */
+                // Line number entered by user is 1-based.
                 if (addr > 0)
                     addr--;
                 mcview_coord_to_offset (view, offset, addr, 0);
@@ -221,7 +227,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
             case MC_VIEW_GOTO_PERCENT:
                 if (addr > 100)
                     addr = 100;
-                /* read all data from pipe to get real size */
+                // read all data from pipe to get real size
                 if (view->growbuf_in_use)
                     mcview_growbuf_read_all_data (view);
                 *offset = addr * mcview_get_filesize (view) / 100;
@@ -239,7 +245,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
                 }
                 else
                 {
-                    /* read all data from pipe to get real size */
+                    // read all data from pipe to get real size
                     if (view->growbuf_in_use)
                         mcview_growbuf_read_all_data (view);
 

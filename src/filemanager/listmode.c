@@ -32,41 +32,41 @@
 
 #ifdef LISTMODE_EDITOR
 
-#include <stdio.h>
-#include <string.h>
+#    include <stdio.h>
+#    include <string.h>
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#    include <sys/types.h>
+#    include <sys/stat.h>
+#    include <unistd.h>
 
-#include "lib/global.h"
-#include "lib/widget.h"
+#    include "lib/global.h"
+#    include "lib/widget.h"
 
-#include "lib/tty/tty.h"
-#include "lib/tty/key.h"
-#include "lib/skin/skin.h"
+#    include "lib/tty/tty.h"
+#    include "lib/tty/key.h"
+#    include "lib/skin/skin.h"
 
 /* Needed for the extern declarations of integer parameters */
-#include "dir.h"
-#include "panel.h"              /* Needed for the externs */
-#include "file.h"
-#include "listmode.h"
+#    include "dir.h"
+#    include "panel.h"  // Needed for the externs
+#    include "file.h"
+#    include "listmode.h"
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UX 5
-#define UY 2
+#    define UX       5
+#    define UY       2
 
-#define BX 5
-#define BY 18
+#    define BX       5
+#    define BY       18
 
-#define B_ADD    B_USER
-#define B_REMOVE (B_USER + 1)
+#    define B_ADD    B_USER
+#    define B_REMOVE (B_USER + 1)
 
-#define B_PLUS B_USER
-#define B_MINUS (B_USER+1)
+#    define B_PLUS   B_USER
+#    define B_MINUS  (B_USER + 1)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -93,16 +93,30 @@ static WLabel *pname;
 
 static char *listmode_section = "[Listing format edit]";
 
-static char *s_genwidth[2] = { "Half width", "Full width" };
+static char *s_genwidth[2] = {
+    "Half width",
+    "Full width",
+};
 
 static WRadio *radio_genwidth;
-static char *s_columns[2] = { "One column", "Two columns" };
+static char *s_columns[2] = {
+    "One column",
+    "Two columns",
+};
 
 static WRadio *radio_columns;
-static char *s_justify[3] = { "Left justified", "Default justification", "Right justified" };
+static char *s_justify[3] = {
+    "Left justified",
+    "Default justification",
+    "Right justified",
+};
 
 static WRadio *radio_justify;
-static char *s_itemwidth[3] = { "Free width", "Fixed width", "Growable width" };
+static char *s_itemwidth[3] = {
+    "Free width",
+    "Fixed width",
+    "Growable width",
+};
 
 static WRadio *radio_itemwidth;
 
@@ -185,24 +199,21 @@ init_listmode (char *oldlistformat)
     int format_columns = 0;
     WDialog *listmode_dlg;
 
-    static struct listmode_label listmode_labels[] = {
-        {UY + 13, UX + 22, "Item width:"}
-    };
+    static struct listmode_label listmode_labels[] = { { UY + 13, UX + 22, "Item width:" } };
 
     static struct listmode_button listmode_but[] = {
-        {B_CANCEL, NORMAL_BUTTON, BY, BX + 53, "&Cancel", NULL},
-        {B_ADD, NORMAL_BUTTON, BY, BX + 22, "&Add item", badd_cback},
-        {B_REMOVE, NORMAL_BUTTON, BY, BX + 10, "&Remove", bremove_cback},
-        {B_ENTER, DEFPUSH_BUTTON, BY, BX, "&OK", NULL},
-        {B_PLUS, NARROW_BUTTON, UY + 13, UX + 37, "&+", bplus_cback},
-        {B_MINUS, NARROW_BUTTON, UY + 13, UX + 34, "&-", bminus_cback},
+        { B_CANCEL, NORMAL_BUTTON, BY, BX + 53, "&Cancel", NULL },
+        { B_ADD, NORMAL_BUTTON, BY, BX + 22, "&Add item", badd_cback },
+        { B_REMOVE, NORMAL_BUTTON, BY, BX + 10, "&Remove", bremove_cback },
+        { B_ENTER, DEFPUSH_BUTTON, BY, BX, "&OK", NULL },
+        { B_PLUS, NARROW_BUTTON, UY + 13, UX + 37, "&+", bplus_cback },
+        { B_MINUS, NARROW_BUTTON, UY + 13, UX + 34, "&-", bminus_cback },
     };
 
     do_refresh ();
 
-    listmode_dlg =
-        dlg_create (TRUE, 0, 0, 22, 74, WPOS_CENTER, FALSE, dialog_colors, NULL, NULL,
-                    listmode_section, "Listing format edit");
+    listmode_dlg = dlg_create (TRUE, 0, 0, 22, 74, WPOS_CENTER, FALSE, dialog_colors, NULL, NULL,
+                               listmode_section, "Listing format edit");
 
     add_widget (listmode_dlg, groupbox_new (UY, UX, 4, 63, "General options"));
     add_widget (listmode_dlg, groupbox_new (UY + 4, UX, 11, 18, "Items"));
@@ -210,12 +221,11 @@ init_listmode (char *oldlistformat)
 
     for (i = 0; i < sizeof (listmode_but) / sizeof (struct listmode_button); i++)
         add_widget (listmode_dlg,
-                    button_new (listmode_but[i].y, listmode_but[i].x,
-                                listmode_but[i].ret_cmd,
-                                listmode_but[i].flags,
-                                listmode_but[i].text, listmode_but[i].callback));
+                    button_new (listmode_but[i].y, listmode_but[i].x, listmode_but[i].ret_cmd,
+                                listmode_but[i].flags, listmode_but[i].text,
+                                listmode_but[i].callback));
 
-    /* We add the labels. */
+    // We add the labels.
     for (i = 0; i < sizeof (listmode_labels) / sizeof (struct listmode_label); i++)
     {
         pname = label_new (listmode_labels[i].y, listmode_labels[i].x, listmode_labels[i].text);
@@ -229,7 +239,7 @@ init_listmode (char *oldlistformat)
     add_widget (listmode_dlg, radio_justify);
     radio_justify->sel = 1;
 
-    /* get new listbox */
+    // get new listbox
     l_listmode = listbox_new (UY + 5, UX + 1, 9, 16, FALSE, NULL);
 
     if (strncmp (oldlistformat, "full ", 5) == 0)
@@ -258,7 +268,7 @@ init_listmode (char *oldlistformat)
         s = strtok (NULL, ",");
     }
 
-    /* add listbox to the dialogs */
+    // add listbox to the dialogs
     add_widget (listmode_dlg, l_listmode);
 
     radio_columns = radio_new (UY + 1, UX + 32, 2, s_columns);
@@ -341,4 +351,4 @@ listmode_edit (char *oldlistformat)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* LISTMODE_EDITOR */
+#endif

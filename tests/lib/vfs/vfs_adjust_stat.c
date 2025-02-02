@@ -31,160 +31,73 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if defined(HAVE_STRUCT_STAT_ST_BLKSIZE) && defined(HAVE_STRUCT_STAT_ST_BLOCKS)
+#    define STRUCT_STAT(size, blksize, blocks)                                                     \
+        {                                                                                          \
+            .st_size = size,                                                                       \
+            .st_blksize = blksize,                                                                 \
+            .st_blocks = blocks,                                                                   \
+        }
+#elif defined(HAVE_STRUCT_STAT_ST_BLKSIZE)
+#    define STRUCT_STAT(st_blksize, st_blocks)                                                     \
+        {                                                                                          \
+            .st_size = size,                                                                       \
+            .st_blksize = st_blksize,                                                              \
+        }
+#elif defined(HAVE_STRUCT_STAT_ST_BLOCKS)
+#    define STRUCT_STAT(st_blksize, st_blocks)                                                     \
+        {                                                                                          \
+            .st_size = size,                                                                       \
+            .st_blocks = st_blocks,                                                                \
+        }
+#else
+#    define STRUCT_STAT(st_blksize, st_blocks)                                                     \
+        {                                                                                          \
+            .st_size = size,                                                                       \
+        }
+#endif
+
 /* @DataSource("test_test_vfs_adjust_stat_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_adjust_stat_ds
 {
     struct stat etalon_stat;
-} test_vfs_adjust_stat_ds[] =
-{
-    /* 0 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 0,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 512,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 0
-#endif
-        }
-    },
-    /* 1 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 512,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
-#endif
-        }
-    },
-    /* 2 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 1024,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
-#endif
-        }
-    },
-    /* 3 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 2048,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
-#endif
-        }
-    },
-    /* 4 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 4096,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
-#endif
-        }
-    },
-    /* 5 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 512,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 10
-#endif
-        }
-    },
-    /* 6 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 1024,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 10
-#endif
-        }
-    },
-    /* 7 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 2048,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 12
-#endif
-        }
-    },
-    /* 8 */
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 4096,
-#endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 16
-#endif
-        }
-    }
+} test_vfs_adjust_stat_ds[] = {
+    { .etalon_stat = STRUCT_STAT (0, 512, 0) },       // 0
+    { .etalon_stat = STRUCT_STAT (4096, 512, 8) },    // 1
+    { .etalon_stat = STRUCT_STAT (4096, 1024, 8) },   // 2
+    { .etalon_stat = STRUCT_STAT (4096, 2048, 8) },   // 3
+    { .etalon_stat = STRUCT_STAT (4096, 4096, 8) },   // 4
+    { .etalon_stat = STRUCT_STAT (5000, 512, 10) },   // 5
+    { .etalon_stat = STRUCT_STAT (5000, 1024, 10) },  // 6
+    { .etalon_stat = STRUCT_STAT (5000, 2048, 12) },  // 7
+    { .etalon_stat = STRUCT_STAT (5000, 4096, 16) },  // 8
 };
-/* *INDENT-ON* */
+
+#undef STRUCT_STAT
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test(dataSource = "test_vfs_adjust_stat_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
-/* *INDENT-ON* */
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-    /* given */
+    // given
     struct stat expected_stat;
 
     expected_stat.st_size = data->etalon_stat.st_size;
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+#    ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     expected_stat.st_blksize = data->etalon_stat.st_blksize;
-#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
-    /* when */
+#    endif
+    // when
     vfs_adjust_stat (&expected_stat);
 
-    /* then */
+    // then
     ck_assert_int_eq (data->etalon_stat.st_blocks, expected_stat.st_blocks);
 #else
     ck_assert_int_eq (0, 0);
-#endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
+#endif
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -195,9 +108,9 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_vfs_adjust_stat, test_vfs_adjust_stat_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

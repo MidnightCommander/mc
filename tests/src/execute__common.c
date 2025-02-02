@@ -129,7 +129,6 @@ mc_getlocalcopy__deinit (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-
 /* @CapturedValue */
 static int message_flags__captured;
 
@@ -147,12 +146,11 @@ message (int flags, const char *title, const char *text, ...)
 
     message_flags__captured = flags;
 
-    message_title__captured = (title == MSG_ERROR) ? g_strdup (_("Error")) : g_strdup (title);
+    message_title__captured = (title == MSG_ERROR) ? g_strdup (_ ("Error")) : g_strdup (title);
 
     va_start (ap, text);
     message_text__captured = g_strdup_vprintf (text, ap);
     va_end (ap);
-
 }
 
 static void
@@ -186,7 +184,6 @@ mc_stat (const vfs_path_t *vpath, struct stat *stat_ignored)
         g_ptr_array_add (mc_stat__vpath__captured, vfs_path_clone (vpath));
     return mc_stat__return_value;
 }
-
 
 static void
 mc_stat__init (void)

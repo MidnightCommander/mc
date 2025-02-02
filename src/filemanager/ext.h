@@ -14,8 +14,8 @@
 
 /*** declarations of public functions ************************************************************/
 
-int regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *action,
-                       vfs_path_t ** script_vpath);
+int regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *action,
+                       vfs_path_t **script_vpath);
 
 /* Call it after the user has edited the mc.ext file,
  * to flush the cached mc.ext file
@@ -30,4 +30,4 @@ regex_command (const vfs_path_t *filename_vpath, const char *action)
     return regex_command_for (NULL, filename_vpath, action, NULL);
 }
 
-#endif /* MC__EXT_H */
+#endif

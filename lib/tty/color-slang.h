@@ -6,7 +6,7 @@
 #ifndef MC__COLOR_SLANG_H
 #define MC__COLOR_SLANG_H
 
-#include "tty-slang.h"          /* S-Lang headers */
+#include "tty-slang.h"  // S-Lang headers
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -15,22 +15,22 @@
  */
 
 #ifndef A_BOLD
-#define A_BOLD SLTT_BOLD_MASK
-#endif /* A_BOLD */
-#ifdef SLTT_ITALIC_MASK         /* available since slang-pre2.3.0-107 */
-#ifndef A_ITALIC
-#define A_ITALIC SLTT_ITALIC_MASK
-#endif /* A_ITALIC */
-#endif /* SLTT_ITALIC_MASK */
+#    define A_BOLD SLTT_BOLD_MASK
+#endif
+#ifdef SLTT_ITALIC_MASK  // available since slang-pre2.3.0-107
+#    ifndef A_ITALIC
+#        define A_ITALIC SLTT_ITALIC_MASK
+#    endif
+#endif
 #ifndef A_UNDERLINE
-#define A_UNDERLINE SLTT_ULINE_MASK
-#endif /* A_UNDERLINE */
+#    define A_UNDERLINE SLTT_ULINE_MASK
+#endif
 #ifndef A_REVERSE
-#define A_REVERSE SLTT_REV_MASK
-#endif /* A_REVERSE */
+#    define A_REVERSE SLTT_REV_MASK
+#endif
 #ifndef A_BLINK
-#define A_BLINK SLTT_BLINK_MASK
-#endif /* A_BLINK */
+#    define A_BLINK SLTT_BLINK_MASK
+#endif
 
 /*** enums ***************************************************************************************/
 
@@ -53,4 +53,4 @@ enum
 /*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_COLOR_SLANG_H */
+#endif

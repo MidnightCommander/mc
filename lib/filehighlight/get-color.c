@@ -29,7 +29,7 @@
 
 #include "lib/global.h"
 #include "lib/skin.h"
-#include "lib/util.h"           /* is_exe() */
+#include "lib/util.h"  // is_exe()
 #include "lib/filehighlight.h"
 #include "internal.h"
 
@@ -171,9 +171,8 @@ mc_fhl_is_special_door (const file_entry_t *fe)
 inline static gboolean
 mc_fhl_is_special (const file_entry_t *fe)
 {
-    return
-        (mc_fhl_is_special_socket (fe) || mc_fhl_is_special_fifo (fe)
-         || mc_fhl_is_special_door (fe));
+    return (mc_fhl_is_special_socket (fe) || mc_fhl_is_special_fifo (fe)
+            || mc_fhl_is_special_door (fe));
 }
 
 /* --------------------------------------------------------------------------------------------- */

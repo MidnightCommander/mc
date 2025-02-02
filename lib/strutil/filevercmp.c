@@ -50,7 +50,7 @@
 static ssize_t
 file_prefixlen (const char *s, ssize_t *len)
 {
-    size_t n = (size_t) (*len); /* SIZE_MAX if N == -1 */
+    size_t n = (size_t) (*len);  // SIZE_MAX if N == -1
     size_t i = 0;
     size_t prefixlen = 0;
 
@@ -157,8 +157,8 @@ verrevcmp (const char *s1, ssize_t s1_len, const char *s2, ssize_t s2_len)
         while (s2_pos < s2_len && s2[s2_pos] == '0')
             s2_pos++;
 
-        while (s1_pos < s1_len && s2_pos < s2_len
-               && g_ascii_isdigit (s1[s1_pos]) && g_ascii_isdigit (s2[s2_pos]))
+        while (s1_pos < s1_len && s2_pos < s2_len && g_ascii_isdigit (s1[s1_pos])
+               && g_ascii_isdigit (s2[s2_pos]))
         {
             if (first_diff == 0)
                 first_diff = s1[s1_pos] - s2[s2_pos];
@@ -199,7 +199,7 @@ filenvercmp (const char *a, ssize_t alen, const char *b, ssize_t blen)
     gboolean one_pass_only;
     int result;
 
-    /* Special case for empty versions. */
+    // Special case for empty versions.
     aempty = alen < 0 ? a[0] == '\0' : alen == 0;
     bempty = blen < 0 ? b[0] == '\0' : blen == 0;
 
@@ -236,11 +236,11 @@ filenvercmp (const char *a, ssize_t alen, const char *b, ssize_t blen)
     else if (b[0] == '.')
         return 1;
 
-    /* Cut file suffixes. */
+    // Cut file suffixes.
     aprefixlen = file_prefixlen (a, &alen);
     bprefixlen = file_prefixlen (b, &blen);
 
-    /* If both suffixes are empty, a second pass would return the same thing. */
+    // If both suffixes are empty, a second pass would return the same thing.
     one_pass_only = aprefixlen == alen && bprefixlen == blen;
 
     result = verrevcmp (a, aprefixlen, b, bprefixlen);

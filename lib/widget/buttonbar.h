@@ -8,10 +8,10 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define BUTTONBAR(x) ((WButtonBar *)(x))
+#define BUTTONBAR(x) ((WButtonBar *) (x))
 
 /* number of bttons in buttonbar */
-#define BUTTONBAR_LABELS_NUM 10
+#define BUTTONBAR_LABELS_NUM                 10
 
 #define buttonbar_clear_label(bb, idx, recv) buttonbar_set_label (bb, idx, "", NULL, recv)
 
@@ -28,7 +28,7 @@ typedef struct WButtonBar
         char *text;
         long command;
         Widget *receiver;
-        int end_coord;          /* cumulative width of buttons so far */
+        int end_coord;  // cumulative width of buttons so far
     } labels[BUTTONBAR_LABELS_NUM];
 } WButtonBar;
 
@@ -37,10 +37,10 @@ typedef struct WButtonBar
 /*** declarations of public functions ************************************************************/
 
 WButtonBar *buttonbar_new (void);
-void buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
-                          const global_keymap_t * keymap, Widget * receiver);
-WButtonBar *buttonbar_find (const WDialog * h);
+void buttonbar_set_label (WButtonBar *bb, int idx, const char *text, const global_keymap_t *keymap,
+                          Widget *receiver);
+WButtonBar *buttonbar_find (const WDialog *h);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_BUTTONBAR_H */
+#endif

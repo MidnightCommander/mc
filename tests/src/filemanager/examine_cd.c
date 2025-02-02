@@ -72,17 +72,16 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define check_examine_cd(input, etalon) \
-{ \
-    result = examine_cd (input); \
-    ck_assert_msg (strcmp (result->str, etalon) == 0, \
-    "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result->str, etalon); \
-    g_string_free (result, TRUE); \
-}
+#define check_examine_cd(input, etalon)                                                            \
+    {                                                                                              \
+        result = examine_cd (input);                                                               \
+        ck_assert_msg (strcmp (result->str, etalon) == 0,                                          \
+                       "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result->str,  \
+                       etalon);                                                                    \
+        g_string_free (result, TRUE);                                                              \
+    }
 
-/* *INDENT-OFF* */
 START_TEST (test_examine_cd)
-/* *INDENT-ON* */
 {
     GString *result;
 
@@ -119,9 +118,7 @@ START_TEST (test_examine_cd)
     check_examine_cd ("/test/path/\\${AAA}test2", "/test/path/${AAA}test2");
     check_examine_cd ("/test/path/test1\\${AAA}test2", "/test/path/test1${AAA}test2");
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -134,9 +131,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_examine_cd);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

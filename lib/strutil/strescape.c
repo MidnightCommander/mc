@@ -57,7 +57,7 @@ str_escape (const char *src, gsize src_len, const char *escaped_chars,
 {
     GString *ret;
     gsize curr_index;
-    /* do NOT break allocation semantics */
+    // do NOT break allocation semantics
     if (src == NULL)
         return NULL;
 
@@ -133,7 +133,7 @@ str_unescape (const char *src, gsize src_len, const char *unescaped_chars,
 
         if (unescaped_chars == ESCAPE_SHELL_CHARS && src[curr_index] == '$')
         {
-            /* special case: \$ is used to disallow variable substitution */
+            // special case: \$ is used to disallow variable substitution
             g_string_append_c (ret, '\\');
         }
         else

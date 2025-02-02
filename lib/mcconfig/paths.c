@@ -31,7 +31,7 @@
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/vfs.h"
-#include "lib/util.h"           /* unix_error_string() */
+#include "lib/util.h"  // unix_error_string()
 
 #include "lib/mcconfig.h"
 
@@ -57,8 +57,7 @@ static const struct
     char **basedir;
     const char *filename;
 } mc_config_files_reference[] = {
-    /* *INDENT-OFF* */
-    /* config */
+    // config
     { &mc_config_str, MC_CONFIG_FILE },
     { &mc_config_str, MC_FHL_INI_FILE },
     { &mc_config_str, MC_HOTLIST_FILE },
@@ -67,11 +66,11 @@ static const struct
     { &mc_config_str, EDIT_HOME_MENU },
     { &mc_config_str, MC_PANELS_FILE },
 
-    /* User should move this file with applying some changes in file */
+    // User should move this file with applying some changes in file
     { &mc_config_str, MC_EXT_FILE },
     { &mc_config_str, MC_EXT_OLD_FILE },
 
-    /* data */
+    // data
     { &mc_data_str, MC_SKINS_DIR },
     { &mc_data_str, VFS_SHELL_PREFIX },
     { &mc_data_str, MC_ASHRC_FILE },
@@ -87,14 +86,16 @@ static const struct
     { &mc_data_str, EDIT_HOME_CLIP_FILE },
     { &mc_data_str, MC_MACRO_FILE },
 
-    /* cache */
+    // cache
     { &mc_cache_str, "mc.log" },
     { &mc_cache_str, MC_TREESTORE_FILE },
     { &mc_cache_str, EDIT_HOME_TEMP_FILE },
     { &mc_cache_str, EDIT_HOME_BLOCK_FILE },
 
-    { NULL, NULL }
-    /* *INDENT-ON* */
+    {
+        NULL,
+        NULL,
+    },
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -106,9 +107,9 @@ mc_config_mkdir (const char *directory_name, GError **mcerror)
 {
     mc_return_if_error (mcerror);
 
-    if ((!g_file_test (directory_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) &&
-        (g_mkdir_with_parents (directory_name, 0700) != 0))
-        mc_propagate_error (mcerror, 0, _("Cannot create %s directory"), directory_name);
+    if ((!g_file_test (directory_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
+        && (g_mkdir_with_parents (directory_name, 0700) != 0))
+        mc_propagate_error (mcerror, 0, _ ("Cannot create %s directory"), directory_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -128,7 +129,7 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
             config_dir_present = TRUE;
         else
         {
-            fprintf (stderr, "%s %s\n", _("FATAL: not a directory:"), full_path);
+            fprintf (stderr, "%s %s\n", _ ("FATAL: not a directory:"), full_path);
             exit (EXIT_FAILURE);
         }
     }

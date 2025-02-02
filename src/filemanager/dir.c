@@ -43,20 +43,20 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 
-#include "src/setup.h"          /* panels_options */
+#include "src/setup.h"  // panels_options
 
 #include "treestore.h"
-#include "file.h"               /* file_is_symlink_to_dir() */
+#include "file.h"  // file_is_symlink_to_dir()
 #include "dir.h"
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
-#define MY_ISDIR(x) (\
-    (is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || link_isdir (x)) && exec_first) \
-        ? 1 \
-        : ( (S_ISDIR (x->st.st_mode) || link_isdir (x)) ? 2 : 0) )
+#define MY_ISDIR(x)                                                                                \
+    ((is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || link_isdir (x)) && exec_first)        \
+         ? 1                                                                                       \
+         : ((S_ISDIR (x->st.st_mode) || link_isdir (x)) ? 2 : 0))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -94,13 +94,13 @@ key_collate (const char *t1, const char *t2)
         ret = str_key_collate (t1, t2, case_sensitive) * reverse;
         break;
     case 1:
-        ret = -1;               /* t1 < t2 */
+        ret = -1;  // t1 < t2
         break;
     case 2:
-        ret = 1;                /* t1 > t2 */
+        ret = 1;  // t1 > t2
         break;
     default:
-        ret = 0;                /* it must not happen */
+        ret = 0;  // it must not happen
     }
 
     return ret;
@@ -111,7 +111,7 @@ key_collate (const char *t1, const char *t2)
 static inline int
 compare_by_names (file_entry_t *a, file_entry_t *b)
 {
-    /* create key if does not exist, key will be freed after sorting */
+    // create key if does not exist, key will be freed after sorting
     if (a->name_sort_key == NULL)
         a->name_sort_key = str_create_key_for_filename (a->fname->str, case_sensitive);
     if (b->name_sort_key == NULL)
@@ -176,7 +176,7 @@ handle_dirent (struct vfs_dirent *dp, const file_filter_t *filter, struct stat *
     if (S_ISDIR (buf1->st_mode))
         tree_store_mark_checked (dp->d_name);
 
-    /* A link to a file or a directory? */
+    // A link to a file or a directory?
     *link_to_dir = file_is_symlink_to_dir (vpath, buf1, stale_link);
 
     vfs_path_free (vpath, TRUE);
@@ -296,12 +296,12 @@ dir_list_grow (dir_list *list, int delta)
  */
 
 gboolean
-dir_list_append (dir_list *list, const char *fname, const struct stat *st,
-                 gboolean link_to_dir, gboolean stale_link)
+dir_list_append (dir_list *list, const char *fname, const struct stat *st, gboolean link_to_dir,
+                 gboolean stale_link)
 {
     file_entry_t *fentry;
 
-    /* Need to grow the *list? */
+    // Need to grow the *list?
     if (list->len == list->size && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
         return FALSE;
 
@@ -532,7 +532,7 @@ dir_list_clean (dir_list *list)
     }
 
     list->len = 0;
-    /* reduce memory usage */
+    // reduce memory usage
     dir_list_grow (list, DIR_LIST_MIN_SIZE - list->size);
 }
 
@@ -564,7 +564,7 @@ dir_list_init (dir_list *list)
 {
     file_entry_t *fentry;
 
-    /* Need to grow the *list? */
+    // Need to grow the *list?
     if (list->size == 0 && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
     {
         list->len = 0;
@@ -610,7 +610,7 @@ handle_path (const char *path, struct stat *buf1, gboolean *link_to_dir, gboolea
     if (S_ISDIR (buf1->st_mode))
         tree_store_mark_checked (path);
 
-    /* A link to a file or a directory? */
+    // A link to a file or a directory?
     *link_to_dir = FALSE;
     *stale_link = FALSE;
     if (S_ISLNK (buf1->st_mode))
@@ -641,7 +641,7 @@ dir_list_load (dir_list *list, const vfs_path_t *vpath, GCompareFunc sort,
     const char *vpath_str;
     gboolean ret = TRUE;
 
-    /* ".." (if any) must be the first entry in the list */
+    // ".." (if any) must be the first entry in the list
     if (!dir_list_init (list))
         return FALSE;
 
@@ -658,7 +658,7 @@ dir_list_load (dir_list *list, const vfs_path_t *vpath, GCompareFunc sort,
     tree_store_start_check (vpath);
 
     vpath_str = vfs_path_as_str (vpath);
-    /* Do not add a ".." entry to the root directory */
+    // Do not add a ".." entry to the root directory
     if (IS_PATH_SEP (vpath_str[0]) && vpath_str[1] == '\0')
         dir_list_clean (list);
 
@@ -751,7 +751,7 @@ dir_list_reload (dir_list *list, const vfs_path_t *vpath, GCompareFunc sort,
         }
     }
 
-    /* save len for later dir_list_clean() */
+    // save len for later dir_list_clean()
     dir_copy.len = list->len;
 
     /* Add ".." except to the root directory. The ".." entry
@@ -759,7 +759,7 @@ dir_list_reload (dir_list *list, const vfs_path_t *vpath, GCompareFunc sort,
     tmp_path = vfs_path_get_by_index (vpath, 0)->path;
     if (vfs_path_elements_count (vpath) == 1 && IS_PATH_SEP (tmp_path[0]) && tmp_path[1] == '\0')
     {
-        /* root directory */
+        // root directory
         dir_list_clean (list);
     }
     else
@@ -804,8 +804,8 @@ dir_list_reload (dir_list *list, const vfs_path_t *vpath, GCompareFunc sort,
              * to find matching file.  Decrease number of remaining marks if
              * we copied one.
              */
-            fentry->f.marked = (marked_cnt > 0
-                                && g_hash_table_lookup (marked_files, dp->d_name) != NULL) ? 1 : 0;
+            fentry->f.marked =
+                (marked_cnt > 0 && g_hash_table_lookup (marked_files, dp->d_name) != NULL) ? 1 : 0;
             if (fentry->f.marked != 0)
                 marked_cnt--;
         }
@@ -833,7 +833,7 @@ file_filter_clear (file_filter_t *filter)
     MC_PTR_FREE (filter->value);
     mc_search_free (filter->handler);
     filter->handler = NULL;
-    /* keep filter->flags */
+    // keep filter->flags
 }
 
 /* --------------------------------------------------------------------------------------------- */

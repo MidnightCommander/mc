@@ -34,7 +34,7 @@
 #include <setjmp.h>
 #include <X11/Xlib.h>
 #ifdef HAVE_GMODULE
-#include <gmodule.h>
+#    include <gmodule.h>
 #endif
 
 #include "lib/global.h"
@@ -45,11 +45,11 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef HAVE_GMODULE
-#define func_XOpenDisplay       XOpenDisplay
-#define func_XCloseDisplay      XCloseDisplay
-#define func_XSetErrorHandler   XSetErrorHandler
-#define func_XSetIOErrorHandler XSetIOErrorHandler
-#define func_XQueryPointer      XQueryPointer
+#    define func_XOpenDisplay       XOpenDisplay
+#    define func_XCloseDisplay      XCloseDisplay
+#    define func_XSetErrorHandler   XSetErrorHandler
+#    define func_XSetIOErrorHandler XSetIOErrorHandler
+#    define func_XQueryPointer      XQueryPointer
 #endif
 
 /*** file scope type declarations ****************************************************************/
@@ -66,8 +66,8 @@ static Display *(*func_XOpenDisplay) (_Xconst char *);
 static int (*func_XCloseDisplay) (Display *);
 static mc_XErrorHandler_callback (*func_XSetErrorHandler) (mc_XErrorHandler_callback);
 static mc_XIOErrorHandler_callback (*func_XSetIOErrorHandler) (mc_XIOErrorHandler_callback);
-static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
-                                   int *, int *, int *, int *, unsigned int *);
+static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *, int *, int *, int *,
+                                   int *, unsigned int *);
 
 static GModule *x11_module;
 #endif
@@ -79,7 +79,7 @@ static gboolean handlers_installed = FALSE;
  * reconnect, as that would violate the X11 protocol. */
 static gboolean lost_connection = FALSE;
 
-static jmp_buf x11_exception;   /* FIXME: get a better name */
+static jmp_buf x11_exception;  // FIXME: get a better name
 static gboolean longjmp_allowed = FALSE;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -156,7 +156,7 @@ x11_available (void)
     install_error_handlers ();
     return TRUE;
 
-  cleanup:
+cleanup:
     func_XOpenDisplay = 0;
     func_XCloseDisplay = 0;
     func_XQueryPointer = 0;
@@ -184,12 +184,12 @@ mc_XOpenDisplay (const char *displayname)
         {
             Display *retval;
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = TRUE;
 
             retval = func_XOpenDisplay (displayname);
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = FALSE;
             return retval;
         }
@@ -208,12 +208,12 @@ mc_XCloseDisplay (Display *display)
         {
             int retval;
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = TRUE;
 
             retval = func_XCloseDisplay (display);
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = FALSE;
 
             return retval;
@@ -225,9 +225,9 @@ mc_XCloseDisplay (Display *display)
 /* --------------------------------------------------------------------------------------------- */
 
 Bool
-mc_XQueryPointer (Display *display, Window win, Window *root_return,
-                  Window *child_return, int *root_x_return, int *root_y_return,
-                  int *win_x_return, int *win_y_return, unsigned int *mask_return)
+mc_XQueryPointer (Display *display, Window win, Window *root_return, Window *child_return,
+                  int *root_x_return, int *root_y_return, int *win_x_return, int *win_y_return,
+                  unsigned int *mask_return)
 {
     Bool retval;
 
@@ -235,14 +235,13 @@ mc_XQueryPointer (Display *display, Window win, Window *root_return,
     {
         if (setjmp (x11_exception) == 0)
         {
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = TRUE;
 
-            retval = func_XQueryPointer (display, win, root_return,
-                                         child_return, root_x_return, root_y_return,
-                                         win_x_return, win_y_return, mask_return);
+            retval = func_XQueryPointer (display, win, root_return, child_return, root_x_return,
+                                         root_y_return, win_x_return, win_y_return, mask_return);
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = FALSE;
 
             return retval;

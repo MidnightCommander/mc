@@ -36,7 +36,7 @@
 #include "lib/search.h"
 #include "lib/util.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "internal.h"
@@ -52,11 +52,11 @@
 /*** file scope variables ************************************************************************/
 
 static const mc_search_type_str_t mc_search__list_types[] = {
-    {N_("No&rmal"), MC_SEARCH_T_NORMAL},
-    {N_("Re&gular expression"), MC_SEARCH_T_REGEX},
-    {N_("He&xadecimal"), MC_SEARCH_T_HEX},
-    {N_("Wil&dcard search"), MC_SEARCH_T_GLOB},
-    {NULL, MC_SEARCH_T_INVALID}
+    { N_ ("No&rmal"), MC_SEARCH_T_NORMAL },
+    { N_ ("Re&gular expression"), MC_SEARCH_T_REGEX },
+    { N_ ("He&xadecimal"), MC_SEARCH_T_HEX },
+    { N_ ("Wil&dcard search"), MC_SEARCH_T_GLOB },
+    { NULL, MC_SEARCH_T_INVALID }
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -114,9 +114,9 @@ mc_search__cond_struct_free (gpointer data)
 #ifdef SEARCH_TYPE_GLIB
     if (mc_search_cond->regex_handle != NULL)
         g_regex_unref (mc_search_cond->regex_handle);
-#else /* SEARCH_TYPE_GLIB */
+#else  // SEARCH_TYPE_GLIB
     g_free (mc_search_cond->regex_handle);
-#endif /* SEARCH_TYPE_GLIB */
+#endif
 
     g_free (mc_search_cond);
 }
@@ -162,9 +162,8 @@ mc_search_new_len (const gchar *original, gsize original_len, const gchar *origi
     lc_mc_search = g_new0 (mc_search_t, 1);
     lc_mc_search->original.str = g_string_new_len (original, original_len);
 #ifdef HAVE_CHARSET
-    lc_mc_search->original.charset =
-        g_strdup (original_charset != NULL
-                  && *original_charset != '\0' ? original_charset : cp_display);
+    lc_mc_search->original.charset = g_strdup (
+        original_charset != NULL && *original_charset != '\0' ? original_charset : cp_display);
 #else
     (void) original_charset;
 #endif
@@ -192,9 +191,9 @@ mc_search_free (mc_search_t *lc_mc_search)
 #ifdef SEARCH_TYPE_GLIB
     if (lc_mc_search->regex_match_info != NULL)
         g_match_info_free (lc_mc_search->regex_match_info);
-#else /* SEARCH_TYPE_GLIB */
+#else  // SEARCH_TYPE_GLIB
     g_free (lc_mc_search->regex_match_info);
-#endif /* SEARCH_TYPE_GLIB */
+#endif
 
     if (lc_mc_search->regex_buffer != NULL)
         g_string_free (lc_mc_search->regex_buffer, TRUE);
@@ -236,10 +235,9 @@ mc_search_prepare (mc_search_t *lc_mc_search)
             {
                 GString *buffer;
 
-                buffer =
-                    mc_search__recode_str (lc_mc_search->original.str->str,
-                                           lc_mc_search->original.str->len,
-                                           lc_mc_search->original.charset, id);
+                buffer = mc_search__recode_str (lc_mc_search->original.str->str,
+                                                lc_mc_search->original.str->len,
+                                                lc_mc_search->original.charset, id);
                 g_ptr_array_add (ret, mc_search__cond_struct_new (lc_mc_search, buffer, id));
                 g_string_free (buffer, TRUE);
             }
@@ -272,8 +270,8 @@ mc_search_prepare (mc_search_t *lc_mc_search)
  *     is in lc_mc_search->error_str.
  */
 gboolean
-mc_search_run (mc_search_t *lc_mc_search, const void *user_data,
-               off_t start_search, off_t end_search, gsize *found_len)
+mc_search_run (mc_search_t *lc_mc_search, const void *user_data, off_t start_search,
+               off_t end_search, gsize *found_len)
 {
     gboolean ret = FALSE;
 
@@ -281,7 +279,7 @@ mc_search_run (mc_search_t *lc_mc_search, const void *user_data,
         return FALSE;
     if (!mc_search_is_type_avail (lc_mc_search->search_type))
     {
-        mc_search_set_error (lc_mc_search, MC_SEARCH_E_INPUT, "%s", _(STR_E_UNKNOWN_TYPE));
+        mc_search_set_error (lc_mc_search, MC_SEARCH_E_INPUT, "%s", _ (STR_E_UNKNOWN_TYPE));
         return FALSE;
     }
 #ifdef SEARCH_TYPE_GLIB
@@ -290,7 +288,7 @@ mc_search_run (mc_search_t *lc_mc_search, const void *user_data,
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
     }
-#endif /* SEARCH_TYPE_GLIB */
+#endif
 
     mc_search_set_error (lc_mc_search, MC_SEARCH_E_OK, NULL);
 
@@ -340,7 +338,7 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 const mc_search_type_str_t *
 mc_search_types_list_get (size_t *num)
 {
-    /* don't count last NULL item */
+    // don't count last NULL item
     if (num != NULL)
         *num = G_N_ELEMENTS (mc_search__list_types) - 1;
 
@@ -465,9 +463,9 @@ mc_search_getstart_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) start_pos;
     }
-#else /* SEARCH_TYPE_GLIB */
+#else  // SEARCH_TYPE_GLIB
     return lc_mc_search->iovector[lc_index * 2];
-#endif /* SEARCH_TYPE_GLIB */
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -487,9 +485,9 @@ mc_search_getend_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) end_pos;
     }
-#else /* SEARCH_TYPE_GLIB */
+#else  // SEARCH_TYPE_GLIB
     return lc_mc_search->iovector[lc_index * 2 + 1];
-#endif /* SEARCH_TYPE_GLIB */
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

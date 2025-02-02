@@ -77,11 +77,11 @@ mc_search__hex_translate_to_regex (const GString *astr, mc_search_hex_parse_erro
 
         if (g_ascii_isspace (str[loop]))
         {
-            /* Eat-up whitespace between tokens. */
+            // Eat-up whitespace between tokens.
             while (g_ascii_isspace (str[loop]))
                 loop++;
         }
-        /* cppcheck-suppress invalidscanf */
+        // cppcheck-suppress invalidscanf
         else if (sscanf (str + loop, "%x%n", &val, &ptr) == 1)
         {
             if (val > 255)
@@ -192,15 +192,14 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t *lc_mc_sea
         switch (error)
         {
         case MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE:
-            desc =
-                _
-                ("Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in hex)");
+            desc = _ (
+                "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in hex)");
             break;
         case MC_SEARCH_HEX_E_INVALID_CHARACTER:
-            desc = _("Invalid character");
+            desc = _ ("Invalid character");
             break;
         case MC_SEARCH_HEX_E_UNMATCHED_QUOTES:
-            desc = _("Unmatched quotes character");
+            desc = _ ("Unmatched quotes character");
             break;
         default:
             desc = "";
@@ -208,15 +207,15 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t *lc_mc_sea
 
         lc_mc_search->error = MC_SEARCH_E_INPUT;
         lc_mc_search->error_str =
-            g_strdup_printf (_("Hex pattern error at position %d:\n%s."), error_pos + 1, desc);
+            g_strdup_printf (_ ("Hex pattern error at position %d:\n%s."), error_pos + 1, desc);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__run_hex (mc_search_t *lc_mc_search, const void *user_data,
-                    off_t start_search, off_t end_search, gsize *found_len)
+mc_search__run_hex (mc_search_t *lc_mc_search, const void *user_data, off_t start_search,
+                    off_t end_search, gsize *found_len)
 {
     return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }

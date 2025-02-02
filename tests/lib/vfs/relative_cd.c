@@ -26,7 +26,7 @@
 
 #include "tests/mctest.h"
 
-#include <string.h>             /* memset() */
+#include <string.h>  // memset()
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
@@ -35,11 +35,10 @@
 
 #include "src/vfs/local/local.c"
 
-
 static struct vfs_s_subclass vfs_test_subclass1;
 static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&vfs_test_subclass1);
 
-static int test_chdir (const vfs_path_t * vpath);
+static int test_chdir (const vfs_path_t *vpath);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -104,33 +103,30 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /* @DataSource("test_relative_cd_ds") */
-/* *INDENT-OFF* */
 static const struct test_relative_cd_ds
 {
     const char *input_string;
     const vfs_path_flag_t input_flags;
     const char *expected_element_path;
-} test_relative_cd_ds[] =
-{
-    { /* 0. */
+} test_relative_cd_ds[] = {
+    {
+        // 0.
         "/test1://user:pass@some.host:12345/path/to/dir",
         VPF_NONE,
-        "path/to/dir"
+        "path/to/dir",
     },
-    { /* 1. */
+    {
+        // 1.
         "some-non-exists-dir",
         VPF_NO_CANON,
-        "some-non-exists-dir"
+        "some-non-exists-dir",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_relative_cd_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
     int actual_result;
 
@@ -138,10 +134,10 @@ START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
 
     vpath = vfs_path_from_str_flags (data->input_string, data->input_flags);
 
-    /* when */
+    // when
     actual_result = mc_chdir (vpath);
 
-    /* then */
+    // then
     {
         const char *element_path;
 
@@ -151,25 +147,21 @@ START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
         vfs_path_free (vpath, TRUE);
     }
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* Relative to panel_correct_path_to_show()  */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_vpath_to_str_filter)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath, *last_vpath;
     char *filtered_path;
     const vfs_path_element_t *path_element;
 
-    /* when */
+    // when
     vpath = vfs_path_from_str ("/test1://some.host/dir");
     path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, -1));
     vfs_path_free (vpath, TRUE);
@@ -181,15 +173,13 @@ START_TEST (test_vpath_to_str_filter)
     filtered_path = vfs_path_to_str_flags (last_vpath, 0,
                                            VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET);
 
-    /* then */
+    // then
     mctest_assert_str_eq (filtered_path, "test1://some.host/dir");
 
     vfs_path_free (last_vpath, TRUE);
     g_free (filtered_path);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -201,17 +191,17 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* writable directory where check creates temporary files */
+    // writable directory where check creates temporary files
     cwd = my_get_current_dir ();
     g_setenv ("TEMP", cwd, TRUE);
     g_free (cwd);
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_relative_cd, test_relative_cd_ds);
     tcase_add_test (tc_core, test_vpath_to_str_filter);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

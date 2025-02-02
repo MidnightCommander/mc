@@ -12,7 +12,7 @@
 typedef int (*DFUNC) (void *ctx, int ch, int line, off_t off, size_t sz, const char *str);
 typedef int PAIR[2];
 
-#define error_dialog(h, s) query_dialog(h, s, D_ERROR, 1, _("&Dismiss"))
+#define error_dialog(h, s) query_dialog (h, s, D_ERROR, 1, _ ("&Dismiss"))
 
 /*** enums ***************************************************************************************/
 
@@ -56,7 +56,6 @@ typedef struct
     int cmd;
 } DIFFCMD;
 
-
 typedef struct
 {
     int off;
@@ -86,18 +85,18 @@ typedef struct WDiff
 {
     Widget widget;
 
-    const char *args;           /* Args passed to diff */
-    const char *file[DIFF_COUNT];       /* filenames */
+    const char *args;              // Args passed to diff
+    const char *file[DIFF_COUNT];  // filenames
     char *label[DIFF_COUNT];
     FBUF *f[DIFF_COUNT];
     const char *backup_sufix;
     gboolean merged[DIFF_COUNT];
     GArray *a[DIFF_COUNT];
     GPtrArray *hdiff;
-    int ndiff;                  /* number of hunks */
-    DSRC dsrc;                  /* data source: memory or temporary file */
+    int ndiff;  // number of hunks
+    DSRC dsrc;  // data source: memory or temporary file
 
-    gboolean view_quit;         /* Quit flag */
+    gboolean view_quit;  // Quit flag
 
     int height;
     int half1;
@@ -117,9 +116,9 @@ typedef struct WDiff
 
 #ifdef HAVE_CHARSET
     gboolean utf8;
-    /* converter for translation of text */
+    // converter for translation of text
     GIConv converter;
-#endif                          /* HAVE_CHARSET */
+#endif
 
     struct
     {
@@ -131,7 +130,7 @@ typedef struct WDiff
         gboolean ignore_case;
     } opt;
 
-    /* Search variables */
+    // Search variables
     struct
     {
         mc_search_t *handle;
@@ -147,7 +146,7 @@ typedef struct WDiff
 /*** declarations of public functions ************************************************************/
 
 /* search.c */
-void dview_search_cmd (WDiff * dview);
-void dview_continue_search_cmd (WDiff * dview);
+void dview_search_cmd (WDiff *dview);
+void dview_continue_search_cmd (WDiff *dview);
 
-#endif /* MC__DIFFVIEW_INTERNAL_H */
+#endif

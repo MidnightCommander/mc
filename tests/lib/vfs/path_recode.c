@@ -88,65 +88,65 @@ test_deinit_vfs (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_path_recode_ds") */
-/* *INDENT-OFF* */
 static const struct test_path_recode_ds
 {
     const char *input_codepage;
     const char *input_path;
     const char *expected_element_path;
     const char *expected_recoded_path;
-} test_path_recode_ds[] =
-{
-    { /* 0. */
+} test_path_recode_ds[] = {
+    {
+        // 0.
         "UTF-8",
         "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
         "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
-        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
+        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
     },
-    { /* 1. */
+    {
+        // 1.
         "UTF-8",
         "/#enc:KOI8-R/тестовый/путь",
         "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
-        "/#enc:KOI8-R/тестовый/путь"
+        "/#enc:KOI8-R/тестовый/путь",
     },
-    { /* 2. */
+    {
+        // 2.
         "KOI8-R",
         "/тестовый/путь",
         "/тестовый/путь",
-        "/тестовый/путь"
+        "/тестовый/путь",
     },
-    { /* 3. */
+    {
+        // 3.
         "KOI8-R",
         "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
         "/тестовый/путь",
-        "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
+        "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
     },
-    { /* 4. Test encode info at start */
+    {
+        // 4. Test encode info at start
         "UTF-8",
         "#enc:KOI8-R/bla-bla/some/path",
         "/bla-bla/some/path",
-        "/#enc:KOI8-R/bla-bla/some/path"
+        "/#enc:KOI8-R/bla-bla/some/path",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_path_recode_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_path_recode, test_path_recode_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
     const char *element_path;
     const char *vpath_str;
 
     test_init_vfs (data->input_codepage);
 
-    /* when */
+    // when
     vpath = vfs_path_from_str (data->input_path);
     element_path = vfs_path_get_last_path_str (vpath);
 
-    /* then */
+    // then
     vpath_str = vfs_path_as_str (vpath);
     mctest_assert_ptr_ne (vpath, NULL);
     mctest_assert_str_eq (element_path, data->expected_element_path);
@@ -155,88 +155,89 @@ START_PARAMETRIZED_TEST (test_path_recode, test_path_recode_ds)
     vfs_path_free (vpath, TRUE);
     test_deinit_vfs ();
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
-
 
 /* --------------------------------------------------------------------------------------------- */
 
 static struct vfs_class vfs_test_ops1;
 
 /* @DataSource("test_path_to_str_flags_ds") */
-/* *INDENT-OFF* */
 static const struct test_path_to_str_flags_ds
 {
     const char *input_path;
     const vfs_path_flag_t input_from_str_flags;
     const vfs_path_flag_t input_to_str_flags;
     const char *expected_path;
-} test_path_to_str_flags_ds[] =
-{
-    { /* 0. */
+} test_path_to_str_flags_ds[] = {
+    {
+        // 0.
         "test1://user:passwd@127.0.0.1",
         VPF_NO_CANON,
         VPF_STRIP_PASSWORD,
-        "test1://user@127.0.0.1/"
+        "test1://user@127.0.0.1/",
     },
-    { /* 1. */
+    {
+        // 1.
         "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
         VPF_NONE,
         VPF_STRIP_PASSWORD,
-        "/test1://user@host.name/#enc:KOI8-R/тестовый/путь"
+        "/test1://user@host.name/#enc:KOI8-R/тестовый/путь",
     },
-    { /* 2. */
+    {
+        // 2.
         "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
         VPF_NONE,
         VPF_RECODE,
-        "/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
+        "/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
     },
-    { /* 3. */
+    {
+        // 3.
         "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
         VPF_NONE,
         VPF_RECODE | VPF_STRIP_PASSWORD,
-        "/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
+        "/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
     },
-    { /* 4. */
+    {
+        // 4.
         "/mock/home/test/dir",
         VPF_NONE,
         VPF_STRIP_HOME,
-        "~/test/dir"
+        "~/test/dir",
     },
-    { /* 5. */
+    {
+        // 5.
         "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
         VPF_NONE,
         VPF_STRIP_HOME | VPF_STRIP_PASSWORD,
-        "~/test1://user@host.name/#enc:KOI8-R/тестовый/путь"
+        "~/test1://user@host.name/#enc:KOI8-R/тестовый/путь",
     },
-    { /* 6. */
+    {
+        // 6.
         "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
         VPF_NONE,
         VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET,
-        "~/test1://user@host.name/тестовый/путь"
+        "~/test1://user@host.name/тестовый/путь",
     },
-    { /* 7. */
+    {
+        // 7.
         "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
         VPF_NONE,
         VPF_STRIP_HOME | VPF_RECODE,
-        "~/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
+        "~/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
     },
-    { /* 8. */
+    {
+        // 8.
         "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
         VPF_NONE,
         VPF_STRIP_HOME | VPF_RECODE | VPF_STRIP_PASSWORD,
-        "~/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
+        "~/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_path_to_str_flags_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_path_to_str_flags, test_path_to_str_flags_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
     char *str_path;
 
@@ -245,21 +246,19 @@ START_PARAMETRIZED_TEST (test_path_to_str_flags, test_path_to_str_flags_ds)
     vfs_init_class (&vfs_test_ops1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
     vfs_register_class (&vfs_test_ops1);
 
-    /* when */
+    // when
 
     vpath = vfs_path_from_str_flags (data->input_path, data->input_from_str_flags);
     str_path = vfs_path_to_str_flags (vpath, 0, data->input_to_str_flags);
 
-    /* then */
+    // then
     mctest_assert_str_eq (str_path, data->expected_path);
 
     g_free (str_path);
     vfs_path_free (vpath, TRUE);
     test_deinit_vfs ();
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -272,10 +271,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_path_recode, test_path_recode_ds);
     mctest_add_parameterized_test (tc_core, test_path_to_str_flags, test_path_to_str_flags_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

@@ -34,12 +34,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>  // size_t
 
 #include "lib/global.h"
 
 #include "tty-ncurses.h"
-#include "color.h"              /* variables */
+#include "color.h"  // variables
 #include "color-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -96,15 +96,15 @@ color_get_attr (int color_pair)
     int *fnd = NULL;
 
     if (mc_tty_color_color_pair_attrs != NULL)
-        fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) & color_pair);
+        fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) &color_pair);
     return (fnd != NULL) ? *fnd : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_tty_color_pair_init_special (tty_color_lib_pair_t *mc_color_pair,
-                                int fg1, int bg1, int fg2, int bg2, int attr)
+mc_tty_color_pair_init_special (tty_color_lib_pair_t *mc_color_pair, int fg1, int bg1, int fg2,
+                                int bg2, int attr)
 {
     if (has_colors () && !mc_tty_color_disable)
         init_pair (mc_color_pair->pair_index, fg1, bg1);
@@ -129,8 +129,8 @@ tty_color_init_lib (gboolean disable, gboolean force)
         use_default_colors ();
     }
 
-    mc_tty_color_color_pair_attrs = g_hash_table_new_full
-        (g_int_hash, g_int_equal, mc_tty_color_attr_destroy_cb, mc_tty_color_attr_destroy_cb);
+    mc_tty_color_color_pair_attrs = g_hash_table_new_full (
+        g_int_hash, g_int_equal, mc_tty_color_attr_destroy_cb, mc_tty_color_attr_destroy_cb);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -152,24 +152,20 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
         switch (mc_color_pair->fg)
         {
         case SPEC_A_REVERSE:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            COLOR_BLACK, COLOR_WHITE,
-                                            COLOR_BLACK, COLOR_WHITE | A_BOLD, A_REVERSE);
+            mc_tty_color_pair_init_special (mc_color_pair, COLOR_BLACK, COLOR_WHITE, COLOR_BLACK,
+                                            COLOR_WHITE | A_BOLD, A_REVERSE);
             break;
         case SPEC_A_BOLD:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            COLOR_WHITE, COLOR_BLACK,
-                                            COLOR_WHITE, COLOR_BLACK, A_BOLD);
+            mc_tty_color_pair_init_special (mc_color_pair, COLOR_WHITE, COLOR_BLACK, COLOR_WHITE,
+                                            COLOR_BLACK, A_BOLD);
             break;
         case SPEC_A_BOLD_REVERSE:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            COLOR_WHITE, COLOR_WHITE,
-                                            COLOR_WHITE, COLOR_WHITE, A_BOLD | A_REVERSE);
+            mc_tty_color_pair_init_special (mc_color_pair, COLOR_WHITE, COLOR_WHITE, COLOR_WHITE,
+                                            COLOR_WHITE, A_BOLD | A_REVERSE);
             break;
         case SPEC_A_UNDERLINE:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            COLOR_WHITE, COLOR_BLACK,
-                                            COLOR_WHITE, COLOR_BLACK, A_UNDERLINE);
+            mc_tty_color_pair_init_special (mc_color_pair, COLOR_WHITE, COLOR_BLACK, COLOR_WHITE,
+                                            COLOR_BLACK, A_UNDERLINE);
             break;
         default:
             break;
@@ -183,7 +179,7 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
         ibg = mc_color_pair->bg;
         attr = mc_color_pair->attr;
 
-        /* In legacy color mode, change bright colors into bold */
+        // In legacy color mode, change bright colors into bold
         if (!tty_use_256colors (NULL) && !tty_use_truecolors (NULL))
         {
             if (ifg >= 8 && ifg < 16)
@@ -195,7 +191,7 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
             if (ibg >= 8 && ibg < 16)
             {
                 ibg &= 0x07;
-                /* attr | = A_BOLD | A_REVERSE ; */
+                // attr | = A_BOLD | A_REVERSE ;
             }
         }
 
@@ -243,8 +239,8 @@ tty_use_256colors (GError **error)
 gboolean
 tty_use_truecolors (GError **error)
 {
-    /* Not yet supported in ncurses */
-    g_set_error (error, MC_ERROR, -1, _("True color not supported with ncurses."));
+    // Not yet supported in ncurses
+    g_set_error (error, MC_ERROR, -1, _ ("True color not supported with ncurses."));
     return FALSE;
 }
 

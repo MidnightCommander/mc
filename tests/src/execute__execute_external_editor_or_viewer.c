@@ -32,8 +32,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath,
-                                                 long start_line);
+                                                 const vfs_path_t *filename_vpath, long start_line);
 
 /* @CapturedValue */
 static char *execute_external_cmd_opts__command__captured;
@@ -135,31 +134,28 @@ my_teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (do_open_external_editor_or_viewer)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
     filename_vpath = vfs_path_from_str ("/path/to/file.txt");
 
     vfs_file_is_local__return_value = TRUE;
-    execute_external_cmd_opts__return_value =
-        g_strdup
-        (" 'param 1 with spaces' \"param 2\"           -a -b -cdef /path/to/file.txt +123");
+    execute_external_cmd_opts__return_value = g_strdup (
+        " 'param 1 with spaces' \"param 2\"           -a -b -cdef /path/to/file.txt +123");
 
-    /* when */
+    // when
     execute_external_editor_or_viewer ("editor_or_viewer", filename_vpath, 123);
 
-    /* then */
+    // then
 
-    /* check call to execute_get_external_cmd_opts_from_config() */
+    // check call to execute_get_external_cmd_opts_from_config()
     mctest_assert_str_eq (execute_external_cmd_opts__command__captured, "editor_or_viewer");
-    mctest_assert_true (vfs_path_equal
-                        (execute_external_cmd_opts__filename_vpath__captured, filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (execute_external_cmd_opts__filename_vpath__captured, filename_vpath));
     ck_assert_int_eq (execute_external_cmd_opts__start_line__captured, 123);
 
-    /* check call to do_executev() */
+    // check call to do_executev()
     mctest_assert_str_eq (do_executev__lc_shell__captured, "editor_or_viewer");
     ck_assert_int_eq (do_executev__flags__captured, EXECUTE_INTERNAL);
     ck_assert_int_eq (do_executev__argv__captured->len, 7);
@@ -175,9 +171,7 @@ START_TEST (do_open_external_editor_or_viewer)
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -190,9 +184,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, my_setup, my_teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, do_open_external_editor_or_viewer);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

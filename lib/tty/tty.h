@@ -11,12 +11,12 @@
 #ifndef MC__TTY_H
 #define MC__TTY_H
 
-#include "lib/global.h"         /* include <glib.h> */
+#include "lib/global.h"  // include <glib.h>
 
 #ifdef HAVE_SLANG
-#include "tty-slang.h"
+#    include "tty-slang.h"
 #else
-#include "tty-ncurses.h"
+#    include "tty-ncurses.h"
 #endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -29,7 +29,7 @@
 
 typedef enum
 {
-    /* single lines */
+    // single lines
     MC_TTY_FRM_VERT,
     MC_TTY_FRM_HORIZ,
     MC_TTY_FRM_LEFTTOP,
@@ -42,7 +42,7 @@ typedef enum
     MC_TTY_FRM_RIGHTMIDDLE,
     MC_TTY_FRM_CROSS,
 
-    /* double lines */
+    // double lines
     MC_TTY_FRM_DVERT,
     MC_TTY_FRM_DHORIZ,
     MC_TTY_FRM_DLEFTTOP,
@@ -117,9 +117,7 @@ extern void tty_print_char (int c);
 extern void tty_print_alt_char (int c, gboolean single);
 extern void tty_print_anychar (int c);
 extern void tty_print_string (const char *s);
-/* *INDENT-OFF* */
 extern void tty_printf (const char *s, ...) G_GNUC_PRINTF (1, 2);
-/* *INDENT-ON* */
 
 extern void tty_print_one_vline (gboolean single);
 extern void tty_print_one_hline (gboolean single);
@@ -143,4 +141,4 @@ extern void tty_exit_ca_mode (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__TTY_H */
+#endif

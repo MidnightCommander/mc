@@ -39,29 +39,29 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/tty.h"        /* tty_print*() */
-#include "lib/tty/color.h"      /* tty_setcolor() */
-#include "lib/skin.h"           /* COLOR_NORMAL, DISABLED_COLOR */
+#include "lib/tty/tty.h"    // tty_print*()
+#include "lib/tty/color.h"  // tty_setcolor()
+#include "lib/skin.h"       // COLOR_NORMAL, DISABLED_COLOR
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
-#include "lib/util.h"           /* x_basename() */
+#include "lib/util.h"  // x_basename()
 
-#include "src/keymap.h"         /* chattr_map */
+#include "src/keymap.h"  // chattr_map
 
-#include "cmd.h"                /* chattr_cmd(), chattr_get_as_str() */
+#include "cmd.h"  // chattr_cmd(), chattr_get_as_str()
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
-#define B_MARKED B_USER
-#define B_SETALL (B_USER + 1)
-#define B_SETMRK (B_USER + 2)
-#define B_CLRMRK (B_USER + 3)
+#define B_MARKED       B_USER
+#define B_SETALL       (B_USER + 1)
+#define B_SETMRK       (B_USER + 2)
+#define B_CLRMRK       (B_USER + 3)
 
-#define BUTTONS  6
+#define BUTTONS        6
 
-#define CHATTRBOXES(x) ((WChattrBoxes *)(x))
+#define CHATTRBOXES(x) ((WChattrBoxes *) (x))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -69,21 +69,21 @@ typedef struct WFileAttrText WFileAttrText;
 
 struct WFileAttrText
 {
-    Widget widget;              /* base class */
+    Widget widget;  // base class
 
     char *filename;
-    int filename_width;         /* cached width of file name */
-    char attrs[32 + 1];         /* 32 bits in attributes (unsigned long) */
+    int filename_width;  // cached width of file name
+    char attrs[32 + 1];  // 32 bits in attributes (unsigned long)
 };
 
 typedef struct WChattrBoxes WChattrBoxes;
 
 struct WChattrBoxes
 {
-    WGroup base;                /* base class */
+    WGroup base;  // base class
 
-    int pos;                    /* The current checkbox selected */
-    int top;                    /* The first flag displayed */
+    int pos;  // The current checkbox selected
+    int top;  // The first flag displayed
 };
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -136,74 +136,72 @@ static struct
     char attr;
     const char *text;
     gboolean selected;
-    gboolean state;             /* state of checkboxes */
+    gboolean state;  // state of checkboxes
 } check_attr[] = {
-    /* *INDENT-OFF* */
-    { EXT2_SECRM_FL,        's', N_("Secure deletion"),               FALSE, FALSE },
-    { EXT2_UNRM_FL,         'u', N_("Undelete"),                      FALSE, FALSE },
-    { EXT2_SYNC_FL,         'S', N_("Synchronous updates"),           FALSE, FALSE },
-    { EXT2_DIRSYNC_FL,      'D', N_("Synchronous directory updates"), FALSE, FALSE },
-    { EXT2_IMMUTABLE_FL,    'i', N_("Immutable"),                     FALSE, FALSE },
-    { EXT2_APPEND_FL,       'a', N_("Append only"),                   FALSE, FALSE },
-    { EXT2_NODUMP_FL,       'd', N_("No dump"),                       FALSE, FALSE },
-    { EXT2_NOATIME_FL,      'A', N_("No update atime"),               FALSE, FALSE },
-    { EXT2_COMPR_FL,        'c', N_("Compress"),                      FALSE, FALSE },
+    { EXT2_SECRM_FL, 's', N_ ("Secure deletion"), FALSE, FALSE },
+    { EXT2_UNRM_FL, 'u', N_ ("Undelete"), FALSE, FALSE },
+    { EXT2_SYNC_FL, 'S', N_ ("Synchronous updates"), FALSE, FALSE },
+    { EXT2_DIRSYNC_FL, 'D', N_ ("Synchronous directory updates"), FALSE, FALSE },
+    { EXT2_IMMUTABLE_FL, 'i', N_ ("Immutable"), FALSE, FALSE },
+    { EXT2_APPEND_FL, 'a', N_ ("Append only"), FALSE, FALSE },
+    { EXT2_NODUMP_FL, 'd', N_ ("No dump"), FALSE, FALSE },
+    { EXT2_NOATIME_FL, 'A', N_ ("No update atime"), FALSE, FALSE },
+    { EXT2_COMPR_FL, 'c', N_ ("Compress"), FALSE, FALSE },
 #ifdef EXT2_COMPRBLK_FL
     /* removed in v1.43-WIP-2015-05-18
        ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
-    { EXT2_COMPRBLK_FL,     'B', N_("Compressed clusters"),           FALSE, FALSE },
+    { EXT2_COMPRBLK_FL, 'B', N_ ("Compressed clusters"), FALSE, FALSE },
 #endif
 #ifdef EXT2_DIRTY_FL
     /* removed in v1.43-WIP-2015-05-18
        ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
-    { EXT2_DIRTY_FL,        'Z', N_("Compressed dirty file"),         FALSE, FALSE },
+    { EXT2_DIRTY_FL, 'Z', N_ ("Compressed dirty file"), FALSE, FALSE },
 #endif
 #ifdef EXT2_NOCOMPR_FL
     /* removed in v1.43-WIP-2015-05-18
        ext2fsprogs 4a05268cf86f7138c78d80a53f7e162f32128a3d 2015-04-12 */
-    { EXT2_NOCOMPR_FL,      'X', N_("Compression raw access"),        FALSE, FALSE },
+    { EXT2_NOCOMPR_FL, 'X', N_ ("Compression raw access"), FALSE, FALSE },
 #endif
 #ifdef EXT4_ENCRYPT_FL
-    { EXT4_ENCRYPT_FL,      'E', N_("Encrypted inode"),               FALSE, FALSE },
+    { EXT4_ENCRYPT_FL, 'E', N_ ("Encrypted inode"), FALSE, FALSE },
 #endif
-    { EXT3_JOURNAL_DATA_FL, 'j', N_("Journaled data"),                FALSE, FALSE },
-    { EXT2_INDEX_FL,        'I', N_("Indexed directory"),             FALSE, FALSE },
-    { EXT2_NOTAIL_FL,       't', N_("No tail merging"),               FALSE, FALSE },
-    { EXT2_TOPDIR_FL,       'T', N_("Top of directory hierarchies"),  FALSE, FALSE },
-    { EXT4_EXTENTS_FL,      'e', N_("Inode uses extents"),            FALSE, FALSE },
+    { EXT3_JOURNAL_DATA_FL, 'j', N_ ("Journaled data"), FALSE, FALSE },
+    { EXT2_INDEX_FL, 'I', N_ ("Indexed directory"), FALSE, FALSE },
+    { EXT2_NOTAIL_FL, 't', N_ ("No tail merging"), FALSE, FALSE },
+    { EXT2_TOPDIR_FL, 'T', N_ ("Top of directory hierarchies"), FALSE, FALSE },
+    { EXT4_EXTENTS_FL, 'e', N_ ("Inode uses extents"), FALSE, FALSE },
 #ifdef EXT4_HUGE_FILE_FL
     /* removed in v1.43.9
        ext2fsprogs 4825daeb0228e556444d199274b08c499ac3706c 2018-02-06 */
-    { EXT4_HUGE_FILE_FL,    'h', N_("Huge_file"),                     FALSE, FALSE },
+    { EXT4_HUGE_FILE_FL, 'h', N_ ("Huge_file"), FALSE, FALSE },
 #endif
-    { FS_NOCOW_FL,          'C', N_("No COW"),                        FALSE, FALSE },
+    { FS_NOCOW_FL, 'C', N_ ("No COW"), FALSE, FALSE },
 #ifdef FS_DAX_FL
     /* added in v1.45.7
        ext2fsprogs 1dd48bc23c3776df76459aff0c7723fff850ea45 2020-07-28 */
-    { FS_DAX_FL,            'x', N_("Direct access for files"),       FALSE, FALSE },
+    { FS_DAX_FL, 'x', N_ ("Direct access for files"), FALSE, FALSE },
 #endif
 #ifdef EXT4_CASEFOLD_FL
     /* added in v1.45.0
        ext2fsprogs 1378bb6515e98a27f0f5c220381d49d20544204e 2018-12-01 */
-    { EXT4_CASEFOLD_FL,     'F', N_("Casefolded file"),               FALSE, FALSE },
+    { EXT4_CASEFOLD_FL, 'F', N_ ("Casefolded file"), FALSE, FALSE },
 #endif
 #ifdef EXT4_INLINE_DATA_FL
-    { EXT4_INLINE_DATA_FL,  'N', N_("Inode has inline data"),         FALSE, FALSE },
+    { EXT4_INLINE_DATA_FL, 'N', N_ ("Inode has inline data"), FALSE, FALSE },
 #endif
 #ifdef EXT4_PROJINHERIT_FL
     /* added in v1.43-WIP-2016-05-12
        ext2fsprogs e1cec4464bdaf93ea609de43c5cdeb6a1f553483 2016-03-07
                    97d7e2fdb2ebec70c3124c1a6370d28ec02efad0 2016-05-09 */
-    { EXT4_PROJINHERIT_FL,  'P', N_("Project hierarchy"),             FALSE, FALSE },
+    { EXT4_PROJINHERIT_FL, 'P', N_ ("Project hierarchy"), FALSE, FALSE },
 #endif
 #ifdef EXT4_VERITY_FL
     /* added in v1.44.4
        ext2fsprogs faae7aa00df0abe7c6151fc4947aa6501b981ee1 2018-08-14
        v1.44.5
        ext2fsprogs 7e5a95e3d59719361661086ec7188ca6e674f139 2018-08-21 */
-    { EXT4_VERITY_FL,       'V', N_("Verity protected inode"),        FALSE, FALSE }
+    { EXT4_VERITY_FL, 'V', N_ ("Verity protected inode"), FALSE, FALSE },
 #endif
-    /* *INDENT-ON* */
 };
 
 /* number of attributes */
@@ -211,7 +209,7 @@ static const size_t check_attr_num = G_N_ELEMENTS (check_attr);
 
 /* modifiable attribute numbers */
 static int check_attr_mod[32];
-static int check_attr_mod_num = 0;      /* 0..31 */
+static int check_attr_mod_num = 0;  // 0..31
 
 /* maximum width of attribute text */
 static int check_attr_width = 0;
@@ -224,14 +222,12 @@ static struct
     const char *text;
     Widget *button;
 } chattr_but[BUTTONS] = {
-    /* *INDENT-OFF* */
-    /* 0 */ { B_SETALL, NORMAL_BUTTON, 0, N_("Set &all"),      NULL },
-    /* 1 */ { B_MARKED, NORMAL_BUTTON, 0, N_("&Marked all"),   NULL },
-    /* 2 */ { B_SETMRK, NORMAL_BUTTON, 0, N_("S&et marked"),   NULL },
-    /* 3 */ { B_CLRMRK, NORMAL_BUTTON, 0, N_("C&lear marked"), NULL },
-    /* 4 */ { B_ENTER, DEFPUSH_BUTTON, 0, N_("&Set"),          NULL },
-    /* 5 */ { B_CANCEL, NORMAL_BUTTON, 0, N_("&Cancel"),       NULL }
-    /* *INDENT-ON* */
+    /* 0 */ { B_SETALL, NORMAL_BUTTON, 0, N_ ("Set &all"), NULL },
+    /* 1 */ { B_MARKED, NORMAL_BUTTON, 0, N_ ("&Marked all"), NULL },
+    /* 2 */ { B_SETMRK, NORMAL_BUTTON, 0, N_ ("S&et marked"), NULL },
+    /* 3 */ { B_CLRMRK, NORMAL_BUTTON, 0, N_ ("C&lear marked"), NULL },
+    /* 4 */ { B_ENTER, DEFPUSH_BUTTON, 0, N_ ("&Set"), NULL },
+    /* 5 */ { B_CANCEL, NORMAL_BUTTON, 0, N_ ("&Cancel"), NULL },
 };
 
 static gboolean flags_changed;
@@ -287,63 +283,63 @@ fileattrtext_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
     switch (msg)
     {
     case MSG_DRAW:
+    {
+        int color = COLOR_NORMAL;
+        size_t i;
+
+        tty_setcolor (color);
+
+        if (w->rect.cols > fat->filename_width)
         {
-            int color = COLOR_NORMAL;
-            size_t i;
+            widget_gotoyx (w, 0, (w->rect.cols - fat->filename_width) / 2);
+            tty_print_string (fat->filename);
+        }
+        else
+        {
+            widget_gotoyx (w, 0, 0);
+            tty_print_string (str_trunc (fat->filename, w->rect.cols));
+        }
 
-            tty_setcolor (color);
-
-            if (w->rect.cols > fat->filename_width)
+        // hope that w->cols is greater than check_attr_num
+        widget_gotoyx (w, 1, (w->rect.cols - check_attr_num) / 2);
+        for (i = 0; i < check_attr_num; i++)
+        {
+            // Do not set new color for each symbol. Try to use previous color.
+            if (chattr_is_modifiable (i))
             {
-                widget_gotoyx (w, 0, (w->rect.cols - fat->filename_width) / 2);
-                tty_print_string (fat->filename);
+                if (color == DISABLED_COLOR)
+                {
+                    color = COLOR_NORMAL;
+                    tty_setcolor (color);
+                }
             }
             else
             {
-                widget_gotoyx (w, 0, 0);
-                tty_print_string (str_trunc (fat->filename, w->rect.cols));
+                if (color != DISABLED_COLOR)
+                {
+                    color = DISABLED_COLOR;
+                    tty_setcolor (color);
+                }
             }
 
-            /* hope that w->cols is greater than check_attr_num */
-            widget_gotoyx (w, 1, (w->rect.cols - check_attr_num) / 2);
-            for (i = 0; i < check_attr_num; i++)
-            {
-                /* Do not set new color for each symbol. Try to use previous color. */
-                if (chattr_is_modifiable (i))
-                {
-                    if (color == DISABLED_COLOR)
-                    {
-                        color = COLOR_NORMAL;
-                        tty_setcolor (color);
-                    }
-                }
-                else
-                {
-                    if (color != DISABLED_COLOR)
-                    {
-                        color = DISABLED_COLOR;
-                        tty_setcolor (color);
-                    }
-                }
-
-                tty_print_char (fat->attrs[i]);
-            }
-            return MSG_HANDLED;
+            tty_print_char (fat->attrs[i]);
         }
+        return MSG_HANDLED;
+    }
 
     case MSG_RESIZE:
-        {
-            const WRect *wo = &CONST_WIDGET (w->owner)->rect;
+    {
+        const WRect *wo = &CONST_WIDGET (w->owner)->rect;
 
-            widget_default_callback (w, sender, msg, parm, data);
-            /* initially file name may be wider than screen */
-            if (fat->filename_width > wo->cols - wx * 2)
-            {
-                w->rect.x = wo->x + wx;
-                w->rect.cols = wo->cols - wx * 2;
-            }
-            return MSG_HANDLED;
+        widget_default_callback (w, sender, msg, parm, data);
+        // initially file name may be wider than screen
+        if (fat->filename_width > wo->cols - wx * 2)
+        {
+            w->rect.x = wo->x + wx;
+            w->rect.cols = wo->cols - wx * 2;
         }
+        return MSG_HANDLED;
+    }
 
     case MSG_DESTROY:
         g_free (fat->filename);
@@ -393,7 +389,7 @@ chattr_toggle_select (const WChattrBoxes *cb, int Id)
 {
     Widget *w;
 
-    /* find checkbox */
+    // find checkbox
     w = WIDGET (g_list_nth_data (CONST_GROUP (cb)->widgets, Id - cb->top));
 
     check_attr[Id].selected = !check_attr[Id].selected;
@@ -412,7 +408,7 @@ chattrboxes_draw_scrollbar (const WChattrBoxes *cb)
     int line;
     int i;
 
-    /* Are we at the top? */
+    // Are we at the top?
     widget_gotoyx (w, 0, w->rect.cols);
     if (cb->top == 0)
         tty_print_one_vline (TRUE);
@@ -421,14 +417,14 @@ chattrboxes_draw_scrollbar (const WChattrBoxes *cb)
 
     max_line = w->rect.lines - 1;
 
-    /* Are we at the bottom? */
+    // Are we at the bottom?
     widget_gotoyx (w, max_line, w->rect.cols);
     if (cb->top + w->rect.lines == check_attr_mod_num || w->rect.lines >= check_attr_mod_num)
         tty_print_one_vline (TRUE);
     else
         tty_print_char ('v');
 
-    /* Now draw the nice relative pointer */
+    // Now draw the nice relative pointer
     line = 1 + (cb->pos * (w->rect.lines - 2)) / check_attr_mod_num;
 
     for (i = 1; i < max_line; i++)
@@ -455,15 +451,15 @@ chattrboxes_draw (WChattrBoxes *cb)
     tty_setcolor (colors[DLG_COLOR_NORMAL]);
     tty_fill_region (w->rect.y, w->rect.x - 1, w->rect.lines, w->rect.cols + 1, ' ');
 
-    /* redraw checkboxes */
+    // redraw checkboxes
     group_default_callback (w, NULL, MSG_DRAW, 0, NULL);
 
-    /* draw scrollbar */
+    // draw scrollbar
     tty_setcolor (colors[DLG_COLOR_NORMAL]);
     if (!mc_global.tty.slow_terminal && check_attr_mod_num > w->rect.lines)
         chattrboxes_draw_scrollbar (cb);
 
-    /* mark selected checkboxes */
+    // mark selected checkboxes
     for (i = cb->top, l = GROUP (cb)->widgets; l != NULL; i++, l = g_list_next (l))
         chattr_draw_select (WIDGET (l->data), check_attr[i].selected);
 }
@@ -480,7 +476,7 @@ chattrboxes_rename (WChattrBoxes *cb)
 
     active = widget_get_state (w, WST_ACTIVE);
 
-    /* lock the group to avoid redraw of checkboxes individually */
+    // lock the group to avoid redraw of checkboxes individually
     if (active)
         widget_set_state (w, WST_SUSPENDED, TRUE);
 
@@ -488,14 +484,14 @@ chattrboxes_rename (WChattrBoxes *cb)
     {
         WCheck *c = CHECK (l->data);
         int m = check_attr_mod[i];
-        char btext[BUF_SMALL];  /* FIXME: are 128 bytes enough? */
+        char btext[BUF_SMALL];  // FIXME: are 128 bytes enough?
 
         g_snprintf (btext, sizeof (btext), "(%c) %s", check_attr[m].attr, check_attr[m].text);
         check_set_text (c, btext);
         c->state = check_attr[m].state;
     }
 
-    /* unlock */
+    // unlock
     if (active)
         widget_set_state (w, WST_ACTIVE, TRUE);
 
@@ -529,20 +525,20 @@ chattrboxes_down (WChattrBoxes *cb)
            Keep this position. */
 
         if (cb->pos == check_attr_mod_num - 1)
-            /* get out of widget */
+            // get out of widget
             return MSG_NOT_HANDLED;
 
-        /* emulate scroll of checkboxes */
+        // emulate scroll of checkboxes
         checkboxes_save_state (cb);
         cb->pos++;
         cb->top++;
         chattrboxes_rename (cb);
     }
-    else                        /* cb->pos > cb-top */
+    else  // cb->pos > cb-top
     {
         GList *l;
 
-        /* select next checkbox */
+        // select next checkbox
         cb->pos++;
         l = g_list_next (GROUP (cb)->current);
         widget_select (WIDGET (l->data));
@@ -625,20 +621,20 @@ chattrboxes_up (WChattrBoxes *cb)
            Keep this position. */
 
         if (cb->top == 0)
-            /* get out of widget */
+            // get out of widget
             return MSG_NOT_HANDLED;
 
-        /* emulate scroll of checkboxes */
+        // emulate scroll of checkboxes
         checkboxes_save_state (cb);
         cb->pos--;
         cb->top--;
         chattrboxes_rename (cb);
     }
-    else                        /* cb->pos > cb-top */
+    else  // cb->pos > cb-top
     {
         GList *l;
 
-        /* select previous checkbox */
+        // select previous checkbox
         cb->pos--;
         l = g_list_previous (GROUP (cb)->current);
         widget_select (WIDGET (l->data));
@@ -735,13 +731,13 @@ chattrboxes_execute_cmd (WChattrBoxes *cb, long command)
 
     case CK_Mark:
     case CK_MarkAndDown:
-        {
-            chattr_toggle_select (cb, cb->pos); /* FIXME */
-            if (command == CK_MarkAndDown)
-                chattrboxes_down (cb);
+    {
+        chattr_toggle_select (cb, cb->pos);  // FIXME
+        if (command == CK_MarkAndDown)
+            chattrboxes_down (cb);
 
-            return MSG_HANDLED;
-        }
+        return MSG_HANDLED;
+    }
 
     default:
         return MSG_NOT_HANDLED;
@@ -776,28 +772,28 @@ chattrboxes_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
+    {
+        // handle checkboxes
+        int i;
+
+        i = g_list_index (g->widgets, sender);
+        if (i >= 0)
         {
-            /* handle checkboxes */
-            int i;
+            int m;
 
-            i = g_list_index (g->widgets, sender);
-            if (i >= 0)
-            {
-                int m;
-
-                i += cb->top;
-                m = check_attr_mod[i];
-                flags ^= check_attr[m].flags;
-                fileattrtext_fill (file_attr, flags);
-                chattr_toggle_select (cb, i);
-                flags_changed = TRUE;
-                return MSG_HANDLED;
-            }
+            i += cb->top;
+            m = check_attr_mod[i];
+            flags ^= check_attr[m].flags;
+            fileattrtext_fill (file_attr, flags);
+            chattr_toggle_select (cb, i);
+            flags_changed = TRUE;
+            return MSG_HANDLED;
         }
+    }
         return MSG_NOT_HANDLED;
 
     case MSG_CHANGED_FOCUS:
-        /* sender is one of chattr checkboxes */
+        // sender is one of chattr checkboxes
         if (widget_get_state (sender, WST_FOCUSED))
         {
             int i;
@@ -808,21 +804,21 @@ chattrboxes_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     case MSG_KEY:
-        {
-            cb_ret_t ret;
+    {
+        cb_ret_t ret;
 
-            ret = chattrboxes_key (cb, parm);
-            if (ret != MSG_HANDLED)
-                ret = group_default_callback (w, NULL, MSG_KEY, parm, NULL);
+        ret = chattrboxes_key (cb, parm);
+        if (ret != MSG_HANDLED)
+            ret = group_default_callback (w, NULL, MSG_KEY, parm, NULL);
 
-            return ret;
-        }
+        return ret;
+    }
 
     case MSG_ACTION:
         return chattrboxes_execute_cmd (cb, parm);
 
     case MSG_DESTROY:
-        /* save all states */
+        // save all states
         checkboxes_save_state (cb);
         MC_FALLTHROUGH;
 
@@ -865,7 +861,7 @@ chattrboxes_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
 
     default:
-        /* return MOU_UNHANDLED */
+        // return MOU_UNHANDLED
         event->result.abort = TRUE;
         break;
     }
@@ -889,7 +885,7 @@ chattrboxes_new (const WRect *r)
     w->mouse_handler = chattrboxes_handle_mouse_event;
     w->keymap = chattr_map;
 
-    /* create checkboxes */
+    // create checkboxes
     for (i = 0; i < r->lines; i++)
     {
         int m = check_attr_mod[i];
@@ -901,7 +897,7 @@ chattrboxes_new (const WRect *r)
 
     chattrboxes_rename (cb);
 
-    /* select first checkbox */
+    // select first checkbox
     cbg->current = cbg->widgets;
 
     return cb;
@@ -929,26 +925,26 @@ chattr_init (void)
             int width;
 
 #ifdef ENABLE_NLS
-            check_attr[i].text = _(check_attr[i].text);
+            check_attr[i].text = _ (check_attr[i].text);
 #endif
 
             check_attr_mod[check_attr_mod_num++] = i;
 
-            width = 4 + str_term_width1 (check_attr[i].text);   /* "(Q) text " */
+            width = 4 + str_term_width1 (check_attr[i].text);  // "(Q) text "
             check_attr_width = MAX (check_attr_width, width);
         }
 
-    check_attr_width += 1 + 3 + 1;      /* mark, [x] and space */
+    check_attr_width += 1 + 3 + 1;  // mark, [x] and space
 
     for (i = 0; i < BUTTONS; i++)
     {
 #ifdef ENABLE_NLS
-        chattr_but[i].text = _(chattr_but[i].text);
+        chattr_but[i].text = _ (chattr_but[i].text);
 #endif
 
-        chattr_but[i].width = str_term_width1 (chattr_but[i].text) + 3; /* [], spaces and w/o & */
+        chattr_but[i].width = str_term_width1 (chattr_but[i].text) + 3;  // [], spaces and w/o &
         if (chattr_but[i].flags == DEFPUSH_BUTTON)
-            chattr_but[i].width += 2;   /* <> */
+            chattr_but[i].width += 2;  // <>
     }
 }
 
@@ -970,7 +966,7 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
     const int cb_scrollbar_width = 1;
     WRect r;
 
-    /* prepare to set up checkbox states */
+    // prepare to set up checkbox states
     for (i = 0; i < check_attr_num; i++)
         check_attr[i].state = chattr_is_modifiable (i) && (attr & check_attr[i].flags) != 0;
 
@@ -991,9 +987,8 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
         checkboxes_lines -= dl;
     }
 
-    ch_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols + wx * 2, WPOS_CENTER, FALSE, dialog_colors,
-                    dlg_default_callback, NULL, "[Chattr]", _("Chattr command"));
+    ch_dlg = dlg_create (TRUE, 0, 0, lines, cols + wx * 2, WPOS_CENTER, FALSE, dialog_colors,
+                         dlg_default_callback, NULL, "[Chattr]", _ ("Chattr command"));
     dg = GROUP (ch_dlg);
     dw = WIDGET (ch_dlg);
 
@@ -1037,12 +1032,12 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
                                 chattr_but[i].flags, chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
-        /* two buttons in a row */
+        // two buttons in a row
         cols =
             MAX (cols, chattr_but[i - 1].button->rect.cols + 1 + chattr_but[i].button->rect.cols);
     }
 
-    /* adjust dialog size and button positions */
+    // adjust dialog size and button positions
     cols += 6;
     if (cols > dw->rect.cols)
     {
@@ -1051,7 +1046,7 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
         r.cols = cols;
         widget_set_size_rect (dw, &r);
 
-        /* dialog center */
+        // dialog center
         cols = dw->rect.x + dw->rect.cols / 2 + 1;
 
         for (i = single_set ? (BUTTONS - 2) : 0; i < BUTTONS; i++)
@@ -1100,30 +1095,29 @@ try_chattr (const vfs_path_t *p, unsigned long m)
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_("Cannot chattr \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result =
-            query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
-                          _("&Cancel"));
+        msg = g_strdup_printf (_ ("Cannot chattr \"%s\"\n%s"), fname, unix_error_string (my_errno));
+        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
+                               _ ("&Retry"), _ ("&Cancel"));
         g_free (msg);
 
         switch (result)
         {
         case 0:
-            /* try next file */
+            // try next file
             return TRUE;
 
         case 1:
             ignore_all = TRUE;
-            /* try next file */
+            // try next file
             return TRUE;
 
         case 2:
-            /* retry this file */
+            // retry this file
             break;
 
         case 3:
         default:
-            /* stop remain files processing */
+            // stop remain files processing
             return FALSE;
         }
     }
@@ -1168,11 +1162,11 @@ chattr_apply_mask (WPanel *panel, vfs_path_t *vpath, unsigned long m)
 
         if (!ok)
         {
-            /* if current file was deleted outside mc -- try next file */
-            /* decrease panel->marked */
+            // if current file was deleted outside mc -- try next file
+            // decrease panel->marked
             do_file_mark (panel, current_file, 0);
 
-            /* try next file */
+            // try next file
             ok = TRUE;
         }
         else
@@ -1201,7 +1195,7 @@ chattr_cmd (WPanel *panel)
     ignore_all = FALSE;
 
     do
-    {                           /* do while any files remaining */
+    {  // do while any files remaining
         vfs_path_t *vpath;
         WDialog *ch_dlg;
         const GString *fname;
@@ -1221,7 +1215,7 @@ chattr_cmd (WPanel *panel)
 
         if (mc_fgetflags (vpath, &flags) != 0)
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot get ext2 attributes of \"%s\"\n%s"), fname->str,
+            message (D_ERROR, MSG_ERROR, _ ("Cannot get ext2 attributes of \"%s\"\n%s"), fname->str,
                      unix_error_string (errno));
             vfs_path_free (vpath, TRUE);
             break;
@@ -1244,15 +1238,15 @@ chattr_cmd (WPanel *panel)
             {
                 if (panel->marked <= 1)
                 {
-                    /* single or last file */
+                    // single or last file
                     if (mc_fsetflags (vpath, flags) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _("Cannot chattr \"%s\"\n%s"), fname->str,
+                        message (D_ERROR, MSG_ERROR, _ ("Cannot chattr \"%s\"\n%s"), fname->str,
                                  unix_error_string (errno));
                     end_chattr = TRUE;
                 }
                 else if (!try_chattr (vpath, flags))
                 {
-                    /* stop multiple files processing */
+                    // stop multiple files processing
                     result = B_CANCEL;
                     end_chattr = TRUE;
                 }
@@ -1317,7 +1311,6 @@ chattr_cmd (WPanel *panel)
         }
 
         vfs_path_free (vpath, TRUE);
-
     }
     while (panel->marked != 0 && !end_chattr);
 
@@ -1329,7 +1322,7 @@ chattr_cmd (WPanel *panel)
 const char *
 chattr_get_as_str (unsigned long attr)
 {
-    static char str[32 + 1];    /* 32 bits in attributes (unsigned long) */
+    static char str[32 + 1];  // 32 bits in attributes (unsigned long)
 
     chattr_fill_str (attr, str);
 

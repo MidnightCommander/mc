@@ -37,11 +37,11 @@
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* whitespace() */
-#include "lib/widget.h"         /* message() */
+#include "lib/util.h"    // whitespace()
+#include "lib/widget.h"  // message()
 
-#include "filemanager.h"        /* current_panel, panel.h, layout.h */
-#include "tree.h"               /* sync_tree() */
+#include "filemanager.h"  // current_panel, panel.h, layout.h
+#include "tree.h"         // sync_tree()
 
 #include "cd.h"
 
@@ -76,27 +76,25 @@
 static GString *
 examine_cd (const char *_path)
 {
-    /* *INDENT-OFF* */
     typedef enum
     {
         copy_sym,
         subst_var
     } state_t;
-    /* *INDENT-ON* */
 
     state_t state = copy_sym;
     GString *q;
     char *path_tilde, *path;
     char *p;
 
-    /* Tilde expansion */
+    // Tilde expansion
     path = str_shell_unescape (_path);
     path_tilde = tilde_expand (path);
     g_free (path);
 
     q = g_string_sized_new (32);
 
-    /* Variable expansion */
+    // Variable expansion
     for (p = path_tilde; *p != '\0';)
     {
         switch (state)
@@ -117,44 +115,44 @@ examine_cd (const char *_path)
             break;
 
         case subst_var:
+        {
+            char *s = NULL;
+            char c;
+            const char *t = NULL;
+
+            // skip dollar
+            p++;
+
+            if (p[0] == '{')
             {
-                char *s = NULL;
-                char c;
-                const char *t = NULL;
-
-                /* skip dollar */
                 p++;
-
-                if (p[0] == '{')
-                {
-                    p++;
-                    s = strchr (p, '}');
-                }
-                if (s == NULL)
-                    s = strchr (p, PATH_SEP);
-                if (s == NULL)
-                    s = strchr (p, '\0');
-                c = *s;
-                *s = '\0';
-                t = getenv (p);
-                *s = c;
-                if (t == NULL)
-                {
-                    g_string_append_c (q, '$');
-                    if (p[-1] != '$')
-                        g_string_append_c (q, '{');
-                }
-                else
-                {
-                    g_string_append (q, t);
-                    p = s;
-                    if (*s == '}')
-                        p++;
-                }
-
-                state = copy_sym;
-                break;
+                s = strchr (p, '}');
             }
+            if (s == NULL)
+                s = strchr (p, PATH_SEP);
+            if (s == NULL)
+                s = strchr (p, '\0');
+            c = *s;
+            *s = '\0';
+            t = getenv (p);
+            *s = c;
+            if (t == NULL)
+            {
+                g_string_append_c (q, '$');
+                if (p[-1] != '$')
+                    g_string_append_c (q, '{');
+            }
+            else
+            {
+                g_string_append (q, t);
+                p = s;
+                if (*s == '}')
+                    p++;
+            }
+
+            state = copy_sym;
+            break;
+        }
 
         default:
             break;
@@ -174,7 +172,7 @@ handle_cdpath (const char *path)
 {
     gboolean result = FALSE;
 
-    /* CDPATH handling */
+    // CDPATH handling
     if (!IS_PATH_SEP (*path))
     {
         char *cdpath, *p;
@@ -224,8 +222,8 @@ cd_to (const char *path)
 {
     char *p;
 
-    /* Remove leading whitespaces. */
-    /* Any final whitespace should be removed here (to see why, try "cd fred "). */
+    // Remove leading whitespaces.
+    // Any final whitespace should be removed here (to see why, try "cd fred ").
     /* NOTE: I think we should not remove the extra space,
        that way, we can cd into hidden directories */
     /* FIXME: what about interpreting quoted strings like the shell.
@@ -243,8 +241,8 @@ cd_to (const char *path)
         }
         else if (DIR_IS_DOTDOT (p))
         {
-            if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
-                strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)
+            if (vfs_path_elements_count (current_panel->cwd_vpath) != 1
+                || strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)
             {
                 vfs_path_t *tmp_vpath = current_panel->cwd_vpath;
 
@@ -303,7 +301,7 @@ cd_to (const char *path)
 void
 cd_error_message (const char *path)
 {
-    message (D_ERROR, MSG_ERROR, _("Cannot change directory to\n%s\n%s"), path,
+    message (D_ERROR, MSG_ERROR, _ ("Cannot change directory to\n%s\n%s"), path,
              unix_error_string (errno));
 }
 

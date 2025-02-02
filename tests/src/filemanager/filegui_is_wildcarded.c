@@ -31,7 +31,6 @@
 
 #include "src/filemanager/filegui.c"
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Before */
@@ -58,85 +57,38 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_is_wildcarded_ds") */
-/* *INDENT-OFF* */
 static const struct test_is_wildcarded_ds
 {
     const char *input_value;
     gboolean expected_result;
-} test_is_wildcarded_ds[] =
-{
-    { /* 0 */
-        "blabla",
-        FALSE
-    },
-    { /* 1 */
-        "bla?bla",
-        TRUE
-    },
-    { /* 2 */
-        "bla*bla",
-        TRUE
-    },
-    { /* 3 */
-        "bla\\*bla",
-        FALSE
-    },
-
-    { /* 4 */
-        "bla\\\\*bla",
-        TRUE
-    },
-    { /* 5 */
-        "bla\\1bla",
-        TRUE
-    },
-    { /* 6 */
-        "bla\\\\1bla",
-        FALSE
-    },
-    { /* 7 */
-        "bla\\\t\\\\1bla",
-        FALSE
-    },
-    { /* 8 */
-        "bla\\\t\\\\\\1bla",
-        TRUE
-    },
-    { /* 9 */
-        "bla\\9bla",
-        TRUE
-    },
-    { /* 10 */
-        "blabla\\",
-        FALSE
-    },
-    { /* 11 */
-        "blab\\?la",
-        FALSE
-    },
-    { /* 12 */
-        "blab\\\\?la",
-        TRUE
-    },
+} test_is_wildcarded_ds[] = {
+    { "blabla", FALSE },            // 0
+    { "bla?bla", TRUE },            // 1
+    { "bla*bla", TRUE },            // 2
+    { "bla\\*bla", FALSE },         // 3
+    { "bla\\\\*bla", TRUE },        // 4
+    { "bla\\1bla", TRUE },          // 5
+    { "bla\\\\1bla", FALSE },       // 6
+    { "bla\\\t\\\\1bla", FALSE },   // 7
+    { "bla\\\t\\\\\\1bla", TRUE },  // 8
+    { "bla\\9bla", TRUE },          // 9
+    { "blabla\\", FALSE },          // 10
+    { "blab\\?la", FALSE },         // 11
+    { "blab\\\\?la", TRUE },        // 12
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_is_wildcarded_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_is_wildcarded, test_is_wildcarded_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     gboolean actual_result;
 
-    /* when */
+    // when
     actual_result = is_wildcarded (data->input_value);
-    /* then */
+    // then
     ck_assert_int_eq (actual_result, data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -149,9 +101,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_is_wildcarded, test_is_wildcarded_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

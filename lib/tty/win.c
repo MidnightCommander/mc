@@ -33,17 +33,17 @@
 #include <stdlib.h>
 #include <string.h>
 #ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>
+#    include <sys/select.h>
 #else
-#include <sys/time.h>
-#include <sys/types.h>
-#include <unistd.h>
+#    include <sys/time.h>
+#    include <sys/types.h>
+#    include <unistd.h>
 #endif
 
 #include "lib/global.h"
-#include "lib/util.h"           /* is_printable() */
+#include "lib/util.h"  // is_printable()
 #include "tty-internal.h"
-#include "tty.h"                /* tty_gotoyx, tty_print_char */
+#include "tty.h"  // tty_gotoyx, tty_print_char
 #include "win.h"
 
 /*** global variables ****************************************************************************/
@@ -72,11 +72,13 @@ rxvt_getc (void)
     int r;
     unsigned char c;
 
-    while (read (0, &c, 1) != 1);
+    while (read (0, &c, 1) != 1)
+        ;
     if (c == '\n')
         return -1;
     r = (c - 'A') * 16;
-    while (read (0, &c, 1) != 1);
+    while (read (0, &c, 1) != 1)
+        ;
     r += (c - 'A');
     return r;
 }
@@ -106,16 +108,16 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     unsigned char *k;
     int bytes, i, j, cols = 0;
 
-    y1 += mc_global.keybar_visible != 0 ? 1 : 0;        /* i don't know why we need this - paul */
+    y1 += mc_global.keybar_visible != 0 ? 1 : 0;  // i don't know why we need this - paul
     y2 += mc_global.keybar_visible != 0 ? 1 : 0;
     while (anything_ready ())
         tty_lowlevel_getch ();
 
-    /* my own weird protocol base 26 - paul */
+    // my own weird protocol base 26 - paul
     printf (ESC_STR "CL%c%c%c%c\n", (y1 / 26) + 'A', (y1 % 26) + 'A', (y2 / 26) + 'A',
             (y2 % 26) + 'A');
 
-    bytes = (y2 - y1) * (COLS + 1) + 1; /* *should* be the number of bytes read */
+    bytes = (y2 - y1) * (COLS + 1) + 1;  // *should* be the number of bytes read
     j = 0;
     k = g_malloc (bytes);
     while (TRUE)

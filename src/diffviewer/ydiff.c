@@ -26,12 +26,11 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 #include <config.h>
 
 #include <ctype.h>
 #include <errno.h>
-#include <stddef.h>             /* ptrdiff_t */
+#include <stddef.h>  // ptrdiff_t
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -41,26 +40,26 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
-#include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
+#include "lib/skin.h"  // EDITOR_NORMAL_COLOR
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/strutil.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"  // mc_event_raise()
 
-#include "src/filemanager/cmd.h"        /* edit_file_at_line() */
+#include "src/filemanager/cmd.h"  // edit_file_at_line()
 #include "src/filemanager/panel.h"
-#include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
+#include "src/filemanager/layout.h"  // Needed for get_current_index and get_other_panel
 
-#include "src/execute.h"        /* toggle_subshell() */
+#include "src/execute.h"  // toggle_subshell()
 #include "src/keymap.h"
 #include "src/setup.h"
 #include "src/history.h"
 #ifdef HAVE_CHARSET
-#include "src/selcodepage.h"
+#    include "src/selcodepage.h"
 #endif
 
 #include "ydiff.h"
@@ -70,25 +69,25 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define FILE_READ_BUF 4096
+#define FILE_READ_BUF  4096
 #define FILE_FLAG_TEMP (1 << 0)
 
-#define ADD_CH '+'
-#define DEL_CH '-'
-#define CHG_CH '*'
-#define EQU_CH ' '
+#define ADD_CH         '+'
+#define DEL_CH         '-'
+#define CHG_CH         '*'
+#define EQU_CH         ' '
 
-#define HDIFF_ENABLE 1
-#define HDIFF_MINCTX 5
-#define HDIFF_DEPTH 10
+#define HDIFF_ENABLE   1
+#define HDIFF_MINCTX   5
+#define HDIFF_DEPTH    10
 
-#define FILE_DIRTY(fs) \
-do \
-{ \
-    (fs)->pos = 0; \
-    (fs)->len = 0;  \
-} \
-while (0)
+#define FILE_DIRTY(fs)                                                                             \
+    do                                                                                             \
+    {                                                                                              \
+        (fs)->pos = 0;                                                                             \
+        (fs)->len = 0;                                                                             \
+    }                                                                                              \
+    while (0)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -180,8 +179,8 @@ open_temp (void **name)
     fd = mc_mkstemps (&diff_file_name, "mcdiff", NULL);
     if (fd == -1)
     {
-        message (D_ERROR, MSG_ERROR,
-                 _("Cannot create temporary diff file\n%s"), unix_error_string (errno));
+        message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary diff file\n%s"),
+                 unix_error_string (errno));
         return -1;
     }
 
@@ -609,7 +608,7 @@ dview_get_utf (const char *str, int *ch, int *ch_length)
     {
         const char *next_ch;
 
-        /* Calculate UTF-8 char length */
+        // Calculate UTF-8 char length
         next_ch = g_utf8_next_char (str);
         *ch_length = next_ch - str;
     }
@@ -651,7 +650,7 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
     }
     return MAX (length, (size_t) result);
 }
-#endif /*HAVE_CHARSET */
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -806,11 +805,10 @@ scan_diff (FBUF *f, GArray *ops)
 static int
 dff_execute (const char *args, const char *extra, const char *file1, const char *file2, GArray *ops)
 {
-    static const char *opt =
-        " --old-group-format='%df%(f=l?:,%dl)d%dE\n'"
-        " --new-group-format='%dea%dF%(F=L?:,%dL)\n'"
-        " --changed-group-format='%df%(f=l?:,%dl)c%dF%(F=L?:,%dL)\n'"
-        " --unchanged-group-format=''";
+    static const char *opt = " --old-group-format='%df%(f=l?:,%dl)d%dE\n'"
+                             " --new-group-format='%dea%dF%(F=L?:,%dL)\n'"
+                             " --changed-group-format='%df%(f=l?:,%dl)c%dF%(F=L?:,%dL)\n'"
+                             " --unchanged-group-format=''";
 
     int rv;
     FBUF *f;
@@ -818,7 +816,7 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
     int code;
     char *file1_esc, *file2_esc;
 
-    /* escape potential $ to avoid shell variable substitutions in popen() */
+    // escape potential $ to avoid shell variable substitutions in popen()
     file1_esc = str_shell_escape (file1);
     file2_esc = str_shell_escape (file2);
     cmd = g_strdup_printf ("diff %s %s %s %s %s", args, extra, opt, file1_esc, file2_esc);
@@ -920,8 +918,8 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray *ops, DFUNC pr
     }
 #define F1 a[eff][0]
 #define F2 a[eff][1]
-#define T1 a[ ord^1 ][0]
-#define T2 a[ ord^1 ][1]
+#define T1 a[ord ^ 1][0]
+#define T2 a[ord ^ 1][1]
     for (i = 0; i < ops->len; i++)
     {
         int n;
@@ -976,7 +974,7 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray *ops, DFUNC pr
     dview_fclose (f);
     return 0;
 
-  err:
+err:
     dview_fclose (f);
     return -1;
 }
@@ -1007,7 +1005,7 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray *ret, int min)
 
     if (m < min || n < min)
     {
-        /* XXX early culling */
+        // XXX early culling
         return 0;
     }
 
@@ -1179,7 +1177,7 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray *hdiff, 
     int i;
     BRACKET b;
 
-    /* dumbscan (single horizontal diff) -- does not compress whitespace */
+    // dumbscan (single horizontal diff) -- does not compress whitespace
     for (i = 0; i < m && i < n && s[i] == t[i]; i++)
         ;
     for (; m > i && n > i && s[m - 1] == t[n - 1]; m--, n--)
@@ -1190,7 +1188,7 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray *hdiff, 
     b[DIFF_RIGHT].off = i;
     b[DIFF_RIGHT].len = n - i;
 
-    /* smartscan (multiple horizontal diff) */
+    // smartscan (multiple horizontal diff)
     return hdiff_multi (s, t, b, min, hdiff, depth);
 }
 
@@ -1528,12 +1526,12 @@ cvt_fget (FBUF *f, off_t off, char *dst, size_t dstsize, int skip, int ts, gbool
     size_t sz;
     int lastch = '\0';
     const char *q = NULL;
-    char tmp[BUFSIZ];           /* XXX capacity must be >= MAX{dstsize + 1, amount} */
-    char cvt[BUFSIZ];           /* XXX capacity must be >= MAX_TAB_WIDTH * amount */
+    char tmp[BUFSIZ];  // XXX capacity must be >= MAX{dstsize + 1, amount}
+    char cvt[BUFSIZ];  // XXX capacity must be >= MAX_TAB_WIDTH * amount
 
     if (sizeof (tmp) < amount || sizeof (tmp) <= dstsize || sizeof (cvt) < 8 * amount)
     {
-        /* abnormal, but avoid buffer overflow */
+        // abnormal, but avoid buffer overflow
         fill_by_space (dst, dstsize, TRUE);
         return 0;
     }
@@ -1875,18 +1873,18 @@ static int
 find_prev_hunk (const GArray *a, int pos)
 {
 #if 1
-    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos--)
+    for (; pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos--)
         ;
-    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH; pos--)
+    for (; pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch == EQU_CH; pos--)
         ;
-    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos--)
+    for (; pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos--)
         ;
     if (pos > 0 && (size_t) pos < a->len)
         pos++;
 #else
-    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH; pos--)
+    for (; pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH; pos--)
         ;
-    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH; pos--)
+    for (; pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH; pos--)
         ;
 #endif
 
@@ -1898,9 +1896,9 @@ find_prev_hunk (const GArray *a, int pos)
 static size_t
 find_next_hunk (const GArray *a, size_t pos)
 {
-    for (; pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos++)
+    for (; pos < a->len && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos++)
         ;
-    for (; pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH; pos++)
+    for (; pos < a->len && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch == EQU_CH; pos++)
         ;
     return pos;
 }
@@ -1926,7 +1924,7 @@ get_current_hunk (WDiff *dview, int *start_line1, int *end_line1, int *start_lin
     int ch;
     int res = 0;
 
-    /* Is file empty? */
+    // Is file empty?
     if (a0->len == 0)
         return 0;
 
@@ -1936,7 +1934,7 @@ get_current_hunk (WDiff *dview, int *start_line1, int *end_line1, int *start_lin
     *end_line2 = 1;
 
     pos = dview->skip_rows;
-    ch = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch;
+    ch = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch;
     if (ch != EQU_CH)
     {
         switch (ch)
@@ -1954,21 +1952,21 @@ get_current_hunk (WDiff *dview, int *start_line1, int *end_line1, int *start_lin
             break;
         }
 
-        for (; pos > 0 && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH; pos--)
+        for (; pos > 0 && ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch != EQU_CH; pos--)
             ;
         if (pos > 0)
         {
-            *start_line1 = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->line + 1;
-            *start_line2 = ((DIFFLN *) & g_array_index (a1, DIFFLN, pos))->line + 1;
+            *start_line1 = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->line + 1;
+            *start_line2 = ((DIFFLN *) &g_array_index (a1, DIFFLN, pos))->line + 1;
         }
 
         for (pos = dview->skip_rows;
-             pos < a0->len && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH; pos++)
+             pos < a0->len && ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch != EQU_CH; pos++)
         {
             int l0, l1;
 
-            l0 = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->line;
-            l1 = ((DIFFLN *) & g_array_index (a1, DIFFLN, pos))->line;
+            l0 = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->line;
+            l1 = ((DIFFLN *) &g_array_index (a1, DIFFLN, pos))->line;
             if (l0 > 0)
                 *end_line1 = MAX (*start_line1, l0);
             if (l1 > 0)
@@ -2141,8 +2139,7 @@ do_merge_hunk (WDiff *dview, action_direction_t merge_direction)
             dview->merged[n_merge] = mc_util_make_backup_if_possible (dview->file[n_merge], "~~~");
             if (!dview->merged[n_merge])
             {
-                message (D_ERROR, MSG_ERROR,
-                         _("Cannot create backup file\n%s%s\n%s"),
+                message (D_ERROR, MSG_ERROR, _ ("Cannot create backup file\n%s%s\n%s"),
                          dview->file[n_merge], "~~~", unix_error_string (errno));
                 return;
             }
@@ -2151,7 +2148,7 @@ do_merge_hunk (WDiff *dview, action_direction_t merge_direction)
         merge_file_fd = mc_mkstemps (&merge_file_name_vpath, "mcmerge", NULL);
         if (merge_file_fd == -1)
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot create temporary merge file\n%s"),
+            message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary merge file\n%s"),
                      unix_error_string (errno));
             return;
         }
@@ -2250,9 +2247,8 @@ dview_set_codeset (WDiff *dview)
     const char *encoding_id = NULL;
 
     dview->utf8 = TRUE;
-    encoding_id =
-        get_codepage_id (mc_global.source_codepage >=
-                         0 ? mc_global.source_codepage : mc_global.display_codepage);
+    encoding_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage
+                                                                  : mc_global.display_codepage);
     if (encoding_id != NULL)
     {
         GIConv conv;
@@ -2279,7 +2275,7 @@ dview_select_encoding (WDiff *dview)
     tty_touch_screen ();
     repaint_screen ();
 }
-#endif /* HAVE_CHARSET */
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2346,34 +2342,38 @@ static void
 dview_diff_options (WDiff *dview)
 {
     const char *quality_str[] = {
-        N_("No&rmal"),
-        N_("&Fastest (Assume large files)"),
-        N_("&Minimal (Find a smaller set of change)")
+        N_ ("No&rmal"),
+        N_ ("&Fastest (Assume large files)"),
+        N_ ("&Minimal (Find a smaller set of change)"),
     };
 
     quick_widget_t quick_widgets[] = {
-        /* *INDENT-OFF* */
-        QUICK_START_GROUPBOX (N_("Diff algorithm")),
+        // clang-format off
+        QUICK_START_GROUPBOX (N_ ("Diff algorithm")),
             QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
         QUICK_STOP_GROUPBOX,
-        QUICK_START_GROUPBOX (N_("Diff extra options")),
-            QUICK_CHECKBOX (N_("&Ignore case"), &dview->opt.ignore_case, NULL),
-            QUICK_CHECKBOX (N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
-            QUICK_CHECKBOX (N_("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
-            QUICK_CHECKBOX (N_("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
-            QUICK_CHECKBOX (N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
+        QUICK_START_GROUPBOX (N_ ("Diff extra options")),
+            QUICK_CHECKBOX (N_ ("&Ignore case"), &dview->opt.ignore_case, NULL),
+            QUICK_CHECKBOX (N_ ("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
+            QUICK_CHECKBOX (N_ ("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
+            QUICK_CHECKBOX (N_ ("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
+            QUICK_CHECKBOX (N_ ("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
                             NULL),
         QUICK_STOP_GROUPBOX,
         QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END
-        /* *INDENT-ON* */
+        QUICK_END,
+        // clang-format on
     };
 
     WRect r = { -1, -1, 0, 56 };
 
     quick_dialog_t qdlg = {
-        r, N_("Diff Options"), "[Diff Options]",
-        quick_widgets, NULL, NULL
+        .rect = r,
+        .title = N_ ("Diff Options"),
+        .help = "[Diff Options]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL,
     };
 
     if (quick_dialog (&qdlg) != B_CANCEL)
@@ -2539,7 +2539,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
 
     if ((int) sizeof (buf) <= width || (int) sizeof (buf) <= nwidth)
     {
-        /* abnormal, but avoid buffer overflow */
+        // abnormal, but avoid buffer overflow
         return -1;
     }
 
@@ -2550,7 +2550,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         int col;
         size_t cnt;
 
-        p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
+        p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
         tty_setcolor (NORMAL_COLOR);
         if (display_symbols)
@@ -2617,9 +2617,8 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                             {
                                 if (!dview->utf8)
                                 {
-                                    next_ch =
-                                        convert_from_8bit_to_utf_c ((unsigned char) next_ch,
-                                                                    dview->converter);
+                                    next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch,
+                                                                          dview->converter);
                                 }
                             }
                             else if (dview->utf8)
@@ -2663,7 +2662,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
             fill_by_space (buf, width, TRUE);
         }
         tty_gotoyx (r + j, c);
-        /* tty_print_nstring (buf, width); */
+        // tty_print_nstring (buf, width);
         col = 0;
         for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
         {
@@ -2714,11 +2713,11 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         if (xwidth != 0)
         {
             tty_gotoyx (r + j, c - xwidth);
-            /* tty_print_nstring (buf, xwidth - 1); */
+            // tty_print_nstring (buf, xwidth - 1);
             tty_print_string (str_fit_to_term (buf, xwidth - 1, J_LEFT_FIT));
         }
         tty_gotoyx (r + j, c);
-        /* tty_print_nstring (buf, width); */
+        // tty_print_nstring (buf, width);
         tty_print_string (str_fit_to_term (buf, width, J_LEFT_FIT));
     }
 
@@ -2768,7 +2767,7 @@ dview_redo (WDiff *dview)
         int old;
 
         old = dview->display_numbers;
-        dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
+        dview->display_numbers = calc_nwidth ((const GArray *const *) dview->a);
         dview->new_frame = (old != dview->display_numbers);
     }
     dview_reread (dview);
@@ -2795,9 +2794,9 @@ dview_update (WDiff *dview)
     if (height < 2)
         return;
 
-    /* use an actual length of dview->a */
+    // use an actual length of dview->a
     if (dview->display_numbers != 0)
-        dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
+        dview->display_numbers = calc_nwidth ((const GArray *const *) dview->a);
 
     width1 = dview->half1 + dview->bias;
     width2 = dview->half2 - dview->bias;
@@ -2869,7 +2868,7 @@ dview_edit (WDiff *dview, diff_place_t ord)
 
     if (dview->dsrc == DATA_SRC_TMP)
     {
-        error_dialog (_("Edit"), _("Edit is disabled"));
+        error_dialog (_ ("Edit"), _ ("Edit is disabled"));
         return;
     }
 
@@ -2878,7 +2877,7 @@ dview_edit (WDiff *dview, diff_place_t ord)
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
 
-    /* disallow edit file in several editors */
+    // disallow edit file in several editors
     widget_set_state (h, WST_MODAL, TRUE);
 
     {
@@ -2901,19 +2900,16 @@ dview_goto_cmd (WDiff *dview, diff_place_t ord)
 {
     static gboolean first_run = TRUE;
 
-    /* *INDENT-OFF* */
     static const char *title[2] = {
-        N_("Goto line (left)"),
-        N_("Goto line (right)")
+        N_ ("Goto line (left)"),
+        N_ ("Goto line (right)"),
     };
-    /* *INDENT-ON* */
 
     int newline;
     char *input;
 
-    input =
-        input_dialog (_(title[ord]), _("Enter line:"), MC_HISTORY_YDIFF_GOTO_LINE,
-                      first_run ? NULL : INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
+    input = input_dialog (_ (title[ord]), _ ("Enter line:"), MC_HISTORY_YDIFF_GOTO_LINE,
+                          first_run ? NULL : INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
     if (input != NULL)
     {
         const char *s = input;
@@ -3003,25 +2999,26 @@ dview_ok_to_exit (WDiff *dview)
     if (!dview->merged[DIFF_LEFT] && !dview->merged[DIFF_RIGHT])
         return res;
 
-    act = query_dialog (_("Quit"), !mc_global.midnight_shutdown ?
-                        _("File(s) was modified. Save with exit?") :
-                        _("Midnight Commander is being shut down.\nSave modified file(s)?"),
-                        D_NORMAL, 2, _("&Yes"), _("&No"));
+    act = query_dialog (_ ("Quit"),
+                        !mc_global.midnight_shutdown
+                            ? _ ("File(s) was modified. Save with exit?")
+                            : _ ("Midnight Commander is being shut down.\nSave modified file(s)?"),
+                        D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
 
-    /* Esc is No */
+    // Esc is No
     if (mc_global.midnight_shutdown || (act == -1))
         act = 1;
 
     switch (act)
     {
-    case -1:                   /* Esc */
+    case -1:  // Esc
         res = FALSE;
         break;
-    case 0:                    /* Yes */
+    case 0:  // Yes
         (void) dview_save (dview);
         res = TRUE;
         break;
-    case 1:                    /* No */
+    case 1:  // No
         if (mc_util_restore_from_backup_if_possible (dview->file[DIFF_LEFT], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[DIFF_LEFT], "~~~");
         if (mc_util_restore_from_backup_if_possible (dview->file[DIFF_RIGHT], "~~~"))
@@ -3048,7 +3045,7 @@ dview_execute_cmd (WDiff *dview, long command)
         dview->new_frame = TRUE;
         break;
     case CK_ShowNumbers:
-        dview->display_numbers ^= calc_nwidth ((const GArray * const *) dview->a);
+        dview->display_numbers ^= calc_nwidth ((const GArray *const *) dview->a);
         dview->new_frame = TRUE;
         break;
     case CK_SplitFull:
@@ -3190,7 +3187,7 @@ dview_execute_cmd (WDiff *dview, long command)
         break;
 #endif
     case CK_Cancel:
-        /* don't close diffviewer due to SIGINT */
+        // don't close diffviewer due to SIGINT
         break;
     default:
         res = MSG_NOT_HANDLED;
@@ -3306,7 +3303,7 @@ dview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
     switch (msg)
     {
     case MSG_ACTION:
-        /* Handle shortcuts. */
+        // Handle shortcuts.
 
         /* Note: the buttonbar sends messages directly to the the WDiff, not to
          * here, which is why we can pass NULL in the following call. */
@@ -3314,7 +3311,7 @@ dview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
 
     case MSG_VALIDATE:
         dview = (WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
-        /* don't stop the dialog before final decision */
+        // don't stop the dialog before final decision
         widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
             dlg_close (h);
@@ -3337,10 +3334,10 @@ dview_get_title (const WDialog *h, size_t len)
     GString *title;
 
     dview = (const WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
-    len1 = (len - str_term_width1 (_("Diff:")) - strlen (modified) - 3) / 2;
+    len1 = (len - str_term_width1 (_ ("Diff:")) - strlen (modified) - 3) / 2;
 
     title = g_string_sized_new (len);
-    g_string_append (title, _("Diff:"));
+    g_string_append (title, _ ("Diff:"));
     g_string_append (title, dview->merged[DIFF_LEFT] ? modified : notmodified);
     g_string_append (title, str_term_trim (dview->label[DIFF_LEFT], len1));
     g_string_append (title, " | ");
@@ -3363,10 +3360,9 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     WRect r;
     WGroup *g;
 
-    /* Create dialog and widgets, put them on the dialog */
-    dview_dlg =
-        dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, dview_dialog_callback, NULL,
-                    "[Diff Viewer]", NULL);
+    // Create dialog and widgets, put them on the dialog
+    dview_dlg = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, dview_dialog_callback,
+                            NULL, "[Diff Viewer]", NULL);
     dw = WIDGET (dview_dlg);
     widget_want_tab (dw, TRUE);
     r = dw->rect;
@@ -3386,7 +3382,8 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     dview_dlg->get_title = dview_get_title;
 
-    error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
+    error =
+        dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);  // XXX binary diff?
     if (error >= 0)
         error = redo_diff (dview);
     if (error >= 0)
@@ -3408,42 +3405,42 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#define GET_FILE_AND_STAMP(n) \
-do \
-{ \
-    use_copy##n = 0; \
-    real_file##n = file##n; \
-    if (!vfs_file_is_local (file##n)) \
-    { \
-        real_file##n = mc_getlocalcopy (file##n); \
-        if (real_file##n != NULL) \
-        { \
-            use_copy##n = 1; \
-            if (mc_stat (real_file##n, &st##n) != 0) \
-                use_copy##n = -1; \
-        } \
-    } \
-} \
-while (0)
+#define GET_FILE_AND_STAMP(n)                                                                      \
+    do                                                                                             \
+    {                                                                                              \
+        use_copy##n = 0;                                                                           \
+        real_file##n = file##n;                                                                    \
+        if (!vfs_file_is_local (file##n))                                                          \
+        {                                                                                          \
+            real_file##n = mc_getlocalcopy (file##n);                                              \
+            if (real_file##n != NULL)                                                              \
+            {                                                                                      \
+                use_copy##n = 1;                                                                   \
+                if (mc_stat (real_file##n, &st##n) != 0)                                           \
+                    use_copy##n = -1;                                                              \
+            }                                                                                      \
+        }                                                                                          \
+    }                                                                                              \
+    while (0)
 
-#define UNGET_FILE(n) \
-do \
-{ \
-    if (use_copy##n != 0) \
-    { \
-        gboolean changed = FALSE; \
-        if (use_copy##n > 0) \
-        { \
-            time_t mtime; \
-            mtime = st##n.st_mtime; \
-            if (mc_stat (real_file##n, &st##n) == 0) \
-                changed = (mtime != st##n.st_mtime); \
-        } \
-        mc_ungetlocalcopy (file##n, real_file##n, changed); \
-        vfs_path_free (real_file##n, TRUE); \
-    } \
-} \
-while (0)
+#define UNGET_FILE(n)                                                                              \
+    do                                                                                             \
+    {                                                                                              \
+        if (use_copy##n != 0)                                                                      \
+        {                                                                                          \
+            gboolean changed = FALSE;                                                              \
+            if (use_copy##n > 0)                                                                   \
+            {                                                                                      \
+                time_t mtime;                                                                      \
+                mtime = st##n.st_mtime;                                                            \
+                if (mc_stat (real_file##n, &st##n) == 0)                                           \
+                    changed = (mtime != st##n.st_mtime);                                           \
+            }                                                                                      \
+            mc_ungetlocalcopy (file##n, real_file##n, changed);                                    \
+            vfs_path_free (real_file##n, TRUE);                                                    \
+        }                                                                                          \
+    }                                                                                              \
+    while (0)
 
 gboolean
 dview_diff_cmd (const void *f0, const void *f1)
@@ -3457,91 +3454,91 @@ dview_diff_cmd (const void *f0, const void *f1)
     switch (mc_global.mc_run_mode)
     {
     case MC_RUN_FULL:
+    {
+        // run from panels
+        const WPanel *panel0 = (const WPanel *) f0;
+        const WPanel *panel1 = (const WPanel *) f1;
+        const file_entry_t *fe0, *fe1;
+
+        fe0 = panel_current_entry (panel0);
+        if (fe0 == NULL)
         {
-            /* run from panels */
-            const WPanel *panel0 = (const WPanel *) f0;
-            const WPanel *panel1 = (const WPanel *) f1;
-            const file_entry_t *fe0, *fe1;
-
-            fe0 = panel_current_entry (panel0);
-            if (fe0 == NULL)
-            {
-                message (D_ERROR, MSG_ERROR, "%s", _("File name is empty!"));
-                goto ret;
-            }
-
-            file0 = vfs_path_append_new (panel0->cwd_vpath, fe0->fname->str, (char *) NULL);
-            is_dir0 = S_ISDIR (fe0->st.st_mode);
-            if (is_dir0)
-            {
-                message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (fe0->fname->str, 30));
-                goto ret;
-            }
-
-            fe1 = panel_current_entry (panel1);
-            if (fe1 == NULL)
-            {
-                message (D_ERROR, MSG_ERROR, "%s", _("File name is empty!"));
-                goto ret;
-            }
-            file1 = vfs_path_append_new (panel1->cwd_vpath, fe1->fname->str, (char *) NULL);
-            is_dir1 = S_ISDIR (fe1->st.st_mode);
-            if (is_dir1)
-            {
-                message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (fe1->fname->str, 30));
-                goto ret;
-            }
-            break;
+            message (D_ERROR, MSG_ERROR, "%s", _ ("File name is empty!"));
+            goto ret;
         }
+
+        file0 = vfs_path_append_new (panel0->cwd_vpath, fe0->fname->str, (char *) NULL);
+        is_dir0 = S_ISDIR (fe0->st.st_mode);
+        if (is_dir0)
+        {
+            message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"),
+                     path_trunc (fe0->fname->str, 30));
+            goto ret;
+        }
+
+        fe1 = panel_current_entry (panel1);
+        if (fe1 == NULL)
+        {
+            message (D_ERROR, MSG_ERROR, "%s", _ ("File name is empty!"));
+            goto ret;
+        }
+        file1 = vfs_path_append_new (panel1->cwd_vpath, fe1->fname->str, (char *) NULL);
+        is_dir1 = S_ISDIR (fe1->st.st_mode);
+        if (is_dir1)
+        {
+            message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"),
+                     path_trunc (fe1->fname->str, 30));
+            goto ret;
+        }
+        break;
+    }
 
     case MC_RUN_DIFFVIEWER:
+    {
+        // run from command line
+        const char *p0 = (const char *) f0;
+        const char *p1 = (const char *) f1;
+        struct stat st;
+
+        file0 = vfs_path_from_str (p0);
+        if (mc_stat (file0, &st) == 0)
         {
-            /* run from command line */
-            const char *p0 = (const char *) f0;
-            const char *p1 = (const char *) f1;
-            struct stat st;
-
-            file0 = vfs_path_from_str (p0);
-            if (mc_stat (file0, &st) == 0)
+            is_dir0 = S_ISDIR (st.st_mode);
+            if (is_dir0)
             {
-                is_dir0 = S_ISDIR (st.st_mode);
-                if (is_dir0)
-                {
-                    message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"), path_trunc (p0, 30));
-                    goto ret;
-                }
-            }
-            else
-            {
-                message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
-                         path_trunc (p0, 30), unix_error_string (errno));
+                message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"), path_trunc (p0, 30));
                 goto ret;
             }
-
-            file1 = vfs_path_from_str (p1);
-            if (mc_stat (file1, &st) == 0)
-            {
-                is_dir1 = S_ISDIR (st.st_mode);
-                if (is_dir1)
-                {
-                    message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"), path_trunc (p1, 30));
-                    goto ret;
-                }
-            }
-            else
-            {
-                message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
-                         path_trunc (p1, 30), unix_error_string (errno));
-                goto ret;
-            }
-            break;
+        }
+        else
+        {
+            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (p0, 30),
+                     unix_error_string (errno));
+            goto ret;
         }
 
+        file1 = vfs_path_from_str (p1);
+        if (mc_stat (file1, &st) == 0)
+        {
+            is_dir1 = S_ISDIR (st.st_mode);
+            if (is_dir1)
+            {
+                message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"), path_trunc (p1, 30));
+                goto ret;
+            }
+        }
+        else
+        {
+            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (p1, 30),
+                     unix_error_string (errno));
+            goto ret;
+        }
+        break;
+    }
+
     default:
-        /* this should not happened */
-        message (D_ERROR, MSG_ERROR, _("Diff viewer: invalid mode"));
+        // this should not happened
+        message (D_ERROR, MSG_ERROR, _ ("Diff viewer: invalid mode"));
         return FALSE;
     }
 
@@ -3567,9 +3564,9 @@ dview_diff_cmd (const void *f0, const void *f1)
     }
 
     if (rv == 0)
-        message (D_ERROR, MSG_ERROR, _("Two files are needed to compare"));
+        message (D_ERROR, MSG_ERROR, _ ("Two files are needed to compare"));
 
-  ret:
+ret:
     vfs_path_free (file1, TRUE);
     vfs_path_free (file0, TRUE);
 

@@ -63,7 +63,7 @@ init_mouse_event (mouse_event_t *event, mouse_msg_t msg, const Gpm_Event *global
                   const Widget *w)
 {
     event->msg = msg;
-    event->x = global_gpm->x - w->rect.x - 1;   /* '-1' because Gpm_Event is 1-based. */
+    event->x = global_gpm->x - w->rect.x - 1;  // '-1' because Gpm_Event is 1-based.
     event->y = global_gpm->y - w->rect.y - 1;
     event->count = global_gpm->type & (GPM_SINGLE | GPM_DOUBLE | GPM_TRIPLE);
     event->buttons = global_gpm->buttons;
@@ -191,7 +191,7 @@ mouse_process_event (Widget *w, mouse_event_t *event)
         if (event->msg == MSG_MOUSE_UP && w->mouse.last_msg == MSG_MOUSE_DOWN)
             w->mouse_callback (w, MSG_MOUSE_CLICK, event);
 
-        /* Record the current event type for the benefit of the next event. */
+        // Record the current event type for the benefit of the next event.
         w->mouse.last_msg = event->msg;
 
         if (!event->result.abort)
@@ -200,7 +200,6 @@ mouse_process_event (Widget *w, mouse_event_t *event)
 
     return ret;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/

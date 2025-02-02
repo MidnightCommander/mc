@@ -2,8 +2,8 @@
 #define MC__KEYBIND_DEFAULTS_H
 
 #include "lib/global.h"
-#include "lib/keybind.h"        /* global_keymap_t */
-#include "lib/mcconfig.h"       /* mc_config_t */
+#include "lib/keybind.h"   // global_keymap_t
+#include "lib/mcconfig.h"  // mc_config_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -61,4 +61,4 @@ void keymap_free (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__KEYBIND_DEFAULTS_H */
+#endif

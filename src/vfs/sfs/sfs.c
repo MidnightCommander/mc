@@ -45,13 +45,13 @@
 
 #include "lib/global.h"
 #include "lib/util.h"
-#include "lib/widget.h"         /* D_ERROR, D_NORMAL */
+#include "lib/widget.h"  // D_ERROR, D_NORMAL
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/xdirentry.h"
 #include "src/vfs/local/local.h"
-#include "lib/vfs/gc.h"         /* vfs_stamp_create */
+#include "lib/vfs/gc.h"  // vfs_stamp_create
 
 #include "sfs.h"
 
@@ -70,25 +70,25 @@ typedef enum
     F_FULLMATCH = 0x8
 } sfs_flags_t;
 
-#define COPY_CHAR \
-    if ((size_t) (t - pad) > sizeof (pad)) \
-    { \
-        g_free (pqname); \
-        return (-1); \
-    } \
-    else \
+#define COPY_CHAR                                                                                  \
+    if ((size_t) (t - pad) > sizeof (pad))                                                         \
+    {                                                                                              \
+        g_free (pqname);                                                                           \
+        return (-1);                                                                               \
+    }                                                                                              \
+    else                                                                                           \
         *t++ = *s_iter;
 
-#define COPY_STRING(a) \
-    if ((t - pad) + strlen (a) > sizeof (pad)) \
-    { \
-        g_free (pqname); \
-        return (-1); \
-    } \
-    else \
-    { \
-        strcpy (t, a); \
-        t += strlen (a); \
+#define COPY_STRING(a)                                                                             \
+    if ((t - pad) + strlen (a) > sizeof (pad))                                                     \
+    {                                                                                              \
+        g_free (pqname);                                                                           \
+        return (-1);                                                                               \
+    }                                                                                              \
+    else                                                                                           \
+    {                                                                                              \
+        strcpy (t, a);                                                                             \
+        t += strlen (a);                                                                           \
     }
 
 /*** file scope type declarations ****************************************************************/
@@ -138,8 +138,8 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
     char pad[10240];
     char *s_iter, *t = pad;
     gboolean was_percent = FALSE;
-    vfs_path_t *pname;          /* name of parent archive */
-    char *pqname;               /* name of parent archive, quoted */
+    vfs_path_t *pname;  // name of parent archive
+    char *pqname;       // name of parent archive, quoted
     const vfs_path_element_t *path_element;
     mc_pipe_t *pip;
     GError *error = NULL;
@@ -159,7 +159,7 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
         return (-1);
     }
 
-    /*    if ((sfs_info[w].flags & F_2) || (!inpath) || (!*inpath)); else return -1; */
+    //    if ((sfs_info[w].flags & F_2) || (!inpath) || (!*inpath)); else return -1;
     if ((sfs_info[w].flags & F_NOLOCALCOPY) != 0)
         pqname = name_quote (vfs_path_as_str (pname), FALSE);
     else
@@ -220,11 +220,11 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
 
     g_free (pqname);
 
-    /* don't read stdout */
+    // don't read stdout
     pip = mc_popen (pad, FALSE, TRUE, &error);
     if (pip == NULL)
     {
-        message (D_ERROR, MSG_ERROR, _("SFS virtual file system:\n%s"), error->message);
+        message (D_ERROR, MSG_ERROR, _ ("SFS virtual file system:\n%s"), error->message);
         g_error_free (error);
         return (-1);
     }
@@ -234,17 +234,17 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
     mc_pread (pip, &error);
     if (error != NULL)
     {
-        message (D_ERROR, MSG_ERROR, _("SFS virtual file system:\n%s"), error->message);
+        message (D_ERROR, MSG_ERROR, _ ("SFS virtual file system:\n%s"), error->message);
         g_error_free (error);
         mc_pclose (pip, NULL);
         return (-1);
     }
 
     if (pip->err.len > 0)
-        message (D_ERROR, MSG_ERROR, _("SFS virtual file system:\n%s"), pip->err.buf);
+        message (D_ERROR, MSG_ERROR, _ ("SFS virtual file system:\n%s"), pip->err.buf);
 
     mc_pclose (pip, NULL);
-    return 0;                   /* OK */
+    return 0;  // OK
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -292,7 +292,7 @@ sfs_redirect (const vfs_path_t *vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-sfs_open (const vfs_path_t *vpath /*struct vfs_class *me, const char *path */ , int flags,
+sfs_open (const vfs_path_t *vpath /*struct vfs_class *me, const char *path */, int flags,
           mode_t mode)
 {
     int *info;
@@ -453,7 +453,7 @@ sfs_init (struct vfs_class *me)
 
     if (cfg == NULL)
     {
-        fprintf (stderr, _("%s: Warning: file %s not found\n"), "sfs_init()", mc_sfsini);
+        fprintf (stderr, _ ("%s: Warning: file %s not found\n"), "sfs_init()", mc_sfsini);
         g_free (mc_sfsini);
         return 0;
     }
@@ -482,8 +482,8 @@ sfs_init (struct vfs_class *me)
 
         if (semi == NULL)
         {
-          invalid_line:
-            fprintf (stderr, _("Warning: Invalid line in %s:\n%s\n"), "sfs.ini", key);
+        invalid_line:
+            fprintf (stderr, _ ("Warning: Invalid line in %s:\n%s\n"), "sfs.ini", key);
             continue;
         }
 
@@ -500,7 +500,7 @@ sfs_init (struct vfs_class *me)
                 flags |= F_NOLOCALCOPY;
                 break;
             default:
-                fprintf (stderr, _("Warning: Invalid flag %c in %s:\n%s\n"), *c, "sfs.ini", key);
+                fprintf (stderr, _ ("Warning: Invalid flag %c in %s:\n%s\n"), *c, "sfs.ini", key);
             }
 
         if (*c == '\0')
@@ -567,7 +567,7 @@ sfs_which (struct vfs_class *me, const char *path)
 void
 vfs_init_sfs (void)
 {
-    /* NULLize vfs_s_subclass members */
+    // NULLize vfs_s_subclass members
     memset (&sfs_subclass, 0, sizeof (sfs_subclass));
 
     vfs_init_class (vfs_sfs_ops, "sfs", VFSF_UNKNOWN, NULL);

@@ -26,7 +26,7 @@
 
 #include <config.h>
 
-#include <errno.h>              /* ENOENT, EACCES */
+#include <errno.h>  // ENOENT, EACCES
 
 #include <libssh2.h>
 #include <libssh2_sftp.h>
@@ -46,7 +46,7 @@
 
 typedef struct
 {
-    vfs_file_handler_t base;    /* base class */
+    vfs_file_handler_t base;  // base class
 
     LIBSSH2_SFTP_HANDLE *handle;
     int flags;
@@ -154,8 +154,8 @@ sftpfs_open_file (vfs_file_handler_t *fh, int flags, mode_t mode, GError **mcerr
         }
         sftp_open_flags |= (flags & O_TRUNC) != 0 ? LIBSSH2_FXF_TRUNC : 0;
 
-        sftp_open_mode = LIBSSH2_SFTP_S_IRUSR |
-            LIBSSH2_SFTP_S_IWUSR | LIBSSH2_SFTP_S_IRGRP | LIBSSH2_SFTP_S_IROTH;
+        sftp_open_mode = LIBSSH2_SFTP_S_IRUSR | LIBSSH2_SFTP_S_IWUSR | LIBSSH2_SFTP_S_IRGRP
+            | LIBSSH2_SFTP_S_IROTH;
     }
     else
         sftp_open_flags = LIBSSH2_FXF_READ;
@@ -189,7 +189,7 @@ sftpfs_open_file (vfs_file_handler_t *fh, int flags, mode_t mode, GError **mcerr
     if (do_append)
     {
         struct stat file_info = {
-            .st_dev = 0
+            .st_dev = 0,
         };
         /* In case of
 
@@ -200,7 +200,8 @@ sftpfs_open_file (vfs_file_handler_t *fh, int flags, mode_t mode, GError **mcerr
            error: missing initializer [-Werror=missing-field-initializers]
            error: (near initialization for 'file_info.st_dev') [-Werror=missing-field-initializers]
 
-           [1] https://stackoverflow.com/questions/13373695/how-to-remove-the-warning-in-gcc-4-6-missing-initializer-wmissing-field-initi/27461062#27461062
+           [1]
+           https://stackoverflow.com/questions/13373695/how-to-remove-the-warning-in-gcc-4-6-missing-initializer-wmissing-field-initi/27461062#27461062
          */
 
         if (sftpfs_fstat (fh, &file_info, mcerror) == 0)
@@ -277,7 +278,7 @@ sftpfs_read_file (vfs_file_handler_t *fh, char *buffer, size_t count, GError **m
     if (fh == NULL)
     {
         mc_propagate_error (mcerror, 0, "%s",
-                            _("sftp: No file handler data present for reading file"));
+                            _ ("sftp: No file handler data present for reading file"));
         return -1;
     }
 

@@ -46,84 +46,73 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("data_source1") */
-/* *INDENT-OFF* */
 static const struct data_source1
 {
     gboolean input_quote_percent;
     const char *input_string;
 
     const char *expected_string;
-} data_source1[] =
-{
-    { TRUE, "%%", "%%%%"},
-    { FALSE, "%%", "%%"},
+} data_source1[] = {
+    { TRUE, "%%", "%%%%" },
+    { FALSE, "%%", "%%" },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "data_source1") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (quote_percent_test, data_source1)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_string;
 
-    /* when */
+    // when
     actual_string = name_quote (data->input_string, data->input_quote_percent);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_string, data->expected_string);
 
     g_free (actual_string);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("data_source2") */
-/* *INDENT-OFF* */
 static const struct data_source2
 {
     const char *input_string;
 
     const char *expected_string;
-} data_source2[] =
-{
-    {NULL, NULL},
-    {"", NULL},
-    {"-", "./-"},
-    {"blabla-", "blabla-"},
-    {"\r\n\t", "\\\r\\\n\\\t"},
-    {"'\\\";?|[]{}<>`!$&*()", "\\'\\\\\\\"\\;\\?\\|\\[\\]\\{\\}\\<\\>\\`\\!\\$\\&\\*\\(\\)"},
-    {"a b c ", "a\\ b\\ c\\ "},
-    {"#", "\\#"},
-    {"blabla#", "blabla#"},
-    {"~", "\\~"},
-    {"blabla~", "blabla~"},
+} data_source2[] = {
+    { "", NULL },
+    { "-", "./-" },
+    { "blabla-", "blabla-" },
+    { "\r\n\t", "\\\r\\\n\\\t" },
+    { "'\\\";?|[]{}<>`!$&*()", "\\'\\\\\\\"\\;\\?\\|\\[\\]\\{\\}\\<\\>\\`\\!\\$\\&\\*\\(\\)" },
+    { "a b c ", "a\\ b\\ c\\ " },
+    { "#", "\\#" },
+    { "blabla#", "blabla#" },
+    { "~", "\\~" },
+    { "blabla~", "blabla~" },
+    {
+        NULL,
+        NULL,
+    },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "data_source2") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (name_quote_test, data_source2)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_string;
 
-    /* when */
+    // when
     actual_string = name_quote (data->input_string, FALSE);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_string, data->expected_string);
 
     g_free (actual_string);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -136,10 +125,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, quote_percent_test, data_source1);
     mctest_add_parameterized_test (tc_core, name_quote_test, data_source2);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

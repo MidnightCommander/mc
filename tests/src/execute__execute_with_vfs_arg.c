@@ -32,12 +32,10 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("the_file_is_local_ds") */
-/* *INDENT-OFF* */
 static const struct the_file_is_local_ds
 {
     const char *input_path;
-} the_file_is_local_ds[] =
-{
+} the_file_is_local_ds[] = {
     {
         NULL,
     },
@@ -45,23 +43,20 @@ static const struct the_file_is_local_ds
         "/blabla",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "the_file_is_local_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
     filename_vpath = vfs_path_from_str (data->input_path);
 
     vfs_file_is_local__return_value = TRUE;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_local_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, "cmd_for_local_file");
     mctest_assert_str_eq (do_execute__command__captured, data->input_path);
 
@@ -70,8 +65,8 @@ START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
         const vfs_path_t *tmp_vpath;
 
         tmp_vpath = (data->input_path == NULL) ? vfs_get_raw_current_dir () : filename_vpath;
-        mctest_assert_true (vfs_path_equal
-                            (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), tmp_vpath));
+        mctest_assert_true (
+            vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), tmp_vpath));
     }
     ck_assert_int_eq (do_execute__flags__captured, EXECUTE_INTERNAL);
     ck_assert_msg (mc_getlocalcopy__pathname_vpath__captured == NULL,
@@ -79,35 +74,30 @@ START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (the_file_is_remote_but_empty)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
     filename_vpath = NULL;
 
     vfs_file_is_local__return_value = FALSE;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_remote_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, NULL);
     mctest_assert_str_eq (do_execute__command__captured, NULL);
 
     ck_assert_int_eq (vfs_file_is_local__vpath__captured->len, 2);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
-                         vfs_get_raw_current_dir ()));
+    mctest_assert_true (vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
+                                        vfs_get_raw_current_dir ()));
     ck_assert_msg (g_ptr_array_index (vfs_file_is_local__vpath__captured, 1) == NULL,
                    "\nParameter for second call to vfs_file_is_local() should be NULL!");
     ck_assert_msg (mc_getlocalcopy__pathname_vpath__captured == NULL,
@@ -115,18 +105,14 @@ START_TEST (the_file_is_remote_but_empty)
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (the_file_is_remote_fail_to_create_local_copy)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
 
     filename_vpath = vfs_path_from_str ("/ftp://some.host/editme.txt");
@@ -134,40 +120,34 @@ START_TEST (the_file_is_remote_fail_to_create_local_copy)
     vfs_file_is_local__return_value = FALSE;
     mc_getlocalcopy__return_value = NULL;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_remote_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, NULL);
     mctest_assert_str_eq (do_execute__command__captured, NULL);
 
     ck_assert_int_eq (vfs_file_is_local__vpath__captured->len, 1);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
-                         filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), filename_vpath));
 
     mctest_assert_true (vfs_path_equal (mc_getlocalcopy__pathname_vpath__captured, filename_vpath));
 
-    mctest_assert_str_eq (message_title__captured, _("Error"));
+    mctest_assert_str_eq (message_title__captured, _ ("Error"));
     mctest_assert_str_eq (message_text__captured,
-                          _("Cannot fetch a local copy of /ftp://some.host/editme.txt"));
-
+                          _ ("Cannot fetch a local copy of /ftp://some.host/editme.txt"));
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (the_file_is_remote)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath, *local_vpath, *local_vpath_should_be_freeing;
 
     filename_vpath = vfs_path_from_str ("/ftp://some.host/editme.txt");
@@ -177,40 +157,36 @@ START_TEST (the_file_is_remote)
     vfs_file_is_local__return_value = FALSE;
     mc_getlocalcopy__return_value = local_vpath_should_be_freeing;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_remote_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, "cmd_for_remote_file");
     mctest_assert_str_eq (do_execute__command__captured, "/tmp/blabla-editme.txt");
 
     ck_assert_int_eq (vfs_file_is_local__vpath__captured->len, 1);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
-                         filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), filename_vpath));
 
     mctest_assert_true (vfs_path_equal (mc_getlocalcopy__pathname_vpath__captured, filename_vpath));
 
     ck_assert_int_eq (mc_stat__vpath__captured->len, 2);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (mc_stat__vpath__captured, 0), local_vpath));
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (mc_stat__vpath__captured, 0),
-                         g_ptr_array_index (mc_stat__vpath__captured, 1)));
+    mctest_assert_true (
+        vfs_path_equal (g_ptr_array_index (mc_stat__vpath__captured, 0), local_vpath));
+    mctest_assert_true (vfs_path_equal (g_ptr_array_index (mc_stat__vpath__captured, 0),
+                                        g_ptr_array_index (mc_stat__vpath__captured, 1)));
 
-    mctest_assert_true (vfs_path_equal
-                        (mc_ungetlocalcopy__pathname_vpath__captured, filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (mc_ungetlocalcopy__pathname_vpath__captured, filename_vpath));
 
     mctest_assert_true (vfs_path_equal (mc_ungetlocalcopy__local_vpath__captured, local_vpath));
 
     vfs_path_free (filename_vpath, TRUE);
     vfs_path_free (local_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -223,12 +199,12 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, the_file_is_local, the_file_is_local_ds);
     tcase_add_test (tc_core, the_file_is_remote_but_empty);
     tcase_add_test (tc_core, the_file_is_remote_fail_to_create_local_copy);
     tcase_add_test (tc_core, the_file_is_remote);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

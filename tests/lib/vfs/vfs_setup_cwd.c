@@ -97,44 +97,31 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_setup_cwd_symlink_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_setup_cwd_symlink_ds
 {
     gboolean is_2nd_call_different;
     const char *expected_result;
-} test_vfs_setup_cwd_symlink_ds[] =
-{
-    { /* 0. */
-        TRUE,
-        "/some/path"
-    },
-    { /* 1. */
-        FALSE,
-        "/some/path2"
-    },
+} test_vfs_setup_cwd_symlink_ds[] = {
+    { TRUE, "/some/path" },    // 0.
+    { FALSE, "/some/path2" },  // 1.
 };
-/* *INDENT-ON* */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_setup_cwd_symlink, test_vfs_setup_cwd_symlink_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_set_raw_current_dir (NULL);
     mc_stat__is_2nd_call_different = data->is_2nd_call_different;
     mc_stat__call_count = 0;
     setenv ("PWD", "/some/path2", 1);
 
-    /* when */
+    // when
     vfs_setup_cwd ();
 
-    /* then */
+    // then
     mctest_assert_str_eq (vfs_get_current_dir (), data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -147,10 +134,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_vfs_setup_cwd_symlink,
                                    test_vfs_setup_cwd_symlink_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

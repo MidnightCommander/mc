@@ -39,35 +39,35 @@
 #include "local/local.h"
 
 #ifdef ENABLE_VFS_CPIO
-#include "cpio/cpio.h"
+#    include "cpio/cpio.h"
 #endif
 
 #ifdef ENABLE_VFS_EXTFS
-#include "extfs/extfs.h"
+#    include "extfs/extfs.h"
 #endif
 
 #ifdef ENABLE_VFS_SHELL
-#include "shell/shell.h"
+#    include "shell/shell.h"
 #endif
 
 #ifdef ENABLE_VFS_FTP
-#include "ftpfs/ftpfs.h"
+#    include "ftpfs/ftpfs.h"
 #endif
 
 #ifdef ENABLE_VFS_SFTP
-#include "sftpfs/sftpfs.h"
+#    include "sftpfs/sftpfs.h"
 #endif
 
 #ifdef ENABLE_VFS_SFS
-#include "sfs/sfs.h"
+#    include "sfs/sfs.h"
 #endif
 
 #ifdef ENABLE_VFS_TAR
-#include "tar/tar.h"
+#    include "tar/tar.h"
 #endif
 
 #ifdef ENABLE_VFS_UNDELFS
-#include "undelfs/undelfs.h"
+#    include "undelfs/undelfs.h"
 #endif
 
 #include "plugins_init.h"
@@ -90,34 +90,34 @@
 void
 vfs_plugins_init (void)
 {
-    /* localfs needs to be the first one */
+    // localfs needs to be the first one
     vfs_init_localfs ();
 
 #ifdef ENABLE_VFS_CPIO
     vfs_init_cpiofs ();
-#endif /* ENABLE_VFS_CPIO */
+#endif
 #ifdef ENABLE_VFS_TAR
     vfs_init_tarfs ();
-#endif /* ENABLE_VFS_TAR */
+#endif
 #ifdef ENABLE_VFS_SFS
     vfs_init_sfs ();
-#endif /* ENABLE_VFS_SFS */
+#endif
 #ifdef ENABLE_VFS_EXTFS
     vfs_init_extfs ();
-#endif /* ENABLE_VFS_EXTFS */
+#endif
 #ifdef ENABLE_VFS_UNDELFS
     vfs_init_undelfs ();
-#endif /* ENABLE_VFS_UNDELFS */
+#endif
 
 #ifdef ENABLE_VFS_FTP
     vfs_init_ftpfs ();
-#endif /* ENABLE_VFS_FTP */
+#endif
 #ifdef ENABLE_VFS_SFTP
     vfs_init_sftpfs ();
-#endif /* ENABLE_VFS_SFTP */
+#endif
 #ifdef ENABLE_VFS_SHELL
     vfs_init_shell ();
-#endif /* ENABLE_VFS_SHELL */
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

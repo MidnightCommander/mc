@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
+#    define HAVE_CHARSET 1
 #endif
 
 #include "lib/charsets.h"
@@ -45,7 +45,7 @@
 static void
 setup (void)
 {
-    /* Ensure that tests behave consistently irrespectively of the environment */
+    // Ensure that tests behave consistently irrespectively of the environment
     g_unsetenv ("MC_TMPDIR");
 
     str_init_strings (NULL);
@@ -68,58 +68,50 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_mc_tmpdir)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     const char *tmpdir;
     const char *env_tmpdir;
 
-    /* when */
+    // when
     tmpdir = mc_tmpdir ();
     env_tmpdir = g_getenv ("MC_TMPDIR");
 
-    /* then */
+    // then
     ck_assert_msg (g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
                    "\nNo such directory: %s\n", tmpdir);
     mctest_assert_str_eq (env_tmpdir, tmpdir);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_mc_mkstemps)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *pname_vpath = NULL;
     char *begin_pname;
     int fd;
 
-    /* when */
+    // when
     fd = mc_mkstemps (&pname_vpath, "mctest-", NULL);
     begin_pname = g_build_filename (mc_tmpdir (), "mctest-", (char *) NULL);
 
-    /* then */
+    // then
     close (fd);
     ck_assert_int_ne (fd, -1);
-    ck_assert_msg (g_file_test
-                   (vfs_path_as_str (pname_vpath), G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
-                   "\nNo such file: %s\n", vfs_path_as_str (pname_vpath));
+    ck_assert_msg (
+        g_file_test (vfs_path_as_str (pname_vpath), G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
+        "\nNo such file: %s\n", vfs_path_as_str (pname_vpath));
     unlink (vfs_path_as_str (pname_vpath));
     ck_assert_msg (strncmp (vfs_path_as_str (pname_vpath), begin_pname, strlen (begin_pname)) == 0,
                    "\nstart of %s should be equal to %s\n", vfs_path_as_str (pname_vpath),
                    begin_pname);
     vfs_path_free (pname_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -132,10 +124,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_mc_tmpdir);
     tcase_add_test (tc_core, test_mc_mkstemps);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

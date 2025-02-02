@@ -33,13 +33,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>  // size_t
 
 #include "lib/global.h"
-#include "lib/util.h"           /* whitespace() */
+#include "lib/util.h"  // whitespace()
 
 #include "tty-slang.h"
-#include "color.h"              /* variables */
+#include "color.h"  // variables
 #include "color-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -70,7 +70,7 @@ has_colors (gboolean disable, gboolean force)
         const size_t len = strlen (terminal);
         char *cts = mc_global.tty.color_terminal_string;
 
-        /* check mc_global.tty.color_terminal_string */
+        // check mc_global.tty.color_terminal_string
         while (*cts != '\0')
         {
             char *s;
@@ -99,9 +99,9 @@ has_colors (gboolean disable, gboolean force)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_tty_color_pair_init_special (tty_color_lib_pair_t *mc_color_pair,
-                                const char *fg1, const char *bg1,
-                                const char *fg2, const char *bg2, SLtt_Char_Type mask)
+mc_tty_color_pair_init_special (tty_color_lib_pair_t *mc_color_pair, const char *fg1,
+                                const char *bg1, const char *fg2, const char *bg2,
+                                SLtt_Char_Type mask)
 {
     if (SLtt_Use_Ansi_Colors != 0)
     {
@@ -152,21 +152,20 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
         switch (mc_color_pair->fg)
         {
         case SPEC_A_REVERSE:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            "black", "white", "black", "lightgray", SLTT_REV_MASK);
+            mc_tty_color_pair_init_special (mc_color_pair, "black", "white", "black", "lightgray",
+                                            SLTT_REV_MASK);
             break;
         case SPEC_A_BOLD:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            "white", "black", "white", "black", SLTT_BOLD_MASK);
+            mc_tty_color_pair_init_special (mc_color_pair, "white", "black", "white", "black",
+                                            SLTT_BOLD_MASK);
             break;
         case SPEC_A_BOLD_REVERSE:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            "white", "white",
-                                            "white", "white", SLTT_BOLD_MASK | SLTT_REV_MASK);
+            mc_tty_color_pair_init_special (mc_color_pair, "white", "white", "white", "white",
+                                            SLTT_BOLD_MASK | SLTT_REV_MASK);
             break;
         case SPEC_A_UNDERLINE:
-            mc_tty_color_pair_init_special (mc_color_pair,
-                                            "white", "black", "white", "black", SLTT_ULINE_MASK);
+            mc_tty_color_pair_init_special (mc_color_pair, "white", "black", "white", "black",
+                                            SLTT_ULINE_MASK);
             break;
         default:
             break;
@@ -221,7 +220,7 @@ tty_use_256colors (GError **error)
 
     if (!ret)
         g_set_error (error, MC_ERROR, -1,
-                     _("Your terminal doesn't even seem to support 256 colors."));
+                     _ ("Your terminal doesn't even seem to support 256 colors."));
 
     return ret;
 }
@@ -239,7 +238,7 @@ tty_use_truecolors (GError **error)
        Check for sizeof (long) being 8, exactly as slang does. */
     if (SLang_Version < 20301 || (sizeof (long) != 8 && SLang_Version < 30000))
     {
-        g_set_error (error, MC_ERROR, -1, _("True color not supported in this slang version."));
+        g_set_error (error, MC_ERROR, -1, _ ("True color not supported in this slang version."));
         return FALSE;
     }
 
@@ -250,7 +249,7 @@ tty_use_truecolors (GError **error)
         || (strcmp (colorterm, "truecolor") != 0 && strcmp (colorterm, "24bit") != 0))
     {
         g_set_error (error, MC_ERROR, -1,
-                     _("Set COLORTERM=truecolor if your terminal really supports true colors."));
+                     _ ("Set COLORTERM=truecolor if your terminal really supports true colors."));
         return FALSE;
     }
 

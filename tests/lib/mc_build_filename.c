@@ -87,47 +87,40 @@ run_mc_build_filename (int iteration)
 }
 
 /* @DataSource("test_mc_build_filename_ds") */
-/* *INDENT-OFF* */
 static const struct test_mc_build_filename_ds
 {
     const char *expected_result;
-} test_mc_build_filename_ds[] =
-{
-    {"test/path"},
-    {"/test/path"},
-    {"/test/pa/th"},
-    {"/test/#vfsprefix:/path  "},
-    {"/test/vfsprefix://path  "},
-    {"/test/prefix://p\\/ath"},
-    {"/test/test/path"},
-    {"path"},
-    {"path"},
-    {"path"},
-    {"/path"},
-    {"pa/th"},
-    {"/pa/th"},
+} test_mc_build_filename_ds[] = {
+    { "test/path" },
+    { "/test/path" },
+    { "/test/pa/th" },
+    { "/test/#vfsprefix:/path  " },
+    { "/test/vfsprefix://path  " },
+    { "/test/prefix://p\\/ath" },
+    { "/test/test/path" },
+    { "path" },
+    { "path" },
+    { "path" },
+    { "/path" },
+    { "pa/th" },
+    { "/pa/th" },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_mc_build_filename_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_mc_build_filename, test_mc_build_filename_ds)
-/* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_result;
 
-    /* when */
+    // when
     actual_result = run_mc_build_filename (_i);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_result, data->expected_result);
 
     g_free (actual_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -140,9 +133,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_mc_build_filename, test_mc_build_filename_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

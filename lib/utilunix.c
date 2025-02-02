@@ -46,12 +46,12 @@
 #include <stdlib.h>
 #include <string.h>
 #ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>
+#    include <sys/param.h>
 #endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>
+#    include <sys/select.h>
 #endif
 #include <sys/wait.h>
 #include <pwd.h>
@@ -60,14 +60,14 @@
 #include "lib/global.h"
 
 #include "lib/unixcompat.h"
-#include "lib/vfs/vfs.h"        /* VFS_ENCODING_PREFIX */
-#include "lib/strutil.h"        /* str_move(), str_tokenize() */
+#include "lib/vfs/vfs.h"  // VFS_ENCODING_PREFIX
+#include "lib/strutil.h"  // str_move(), str_tokenize()
 #include "lib/util.h"
-#include "lib/widget.h"         /* message() */
+#include "lib/widget.h"  // message()
 #include "lib/vfs/xdirentry.h"
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 /*** global variables ****************************************************************************/
@@ -178,8 +178,8 @@ my_system__save_sigaction_handlers (my_system_sigactions_t *sigactions)
     my_sigaction (SIGINT, &ignore, &sigactions->intr);
     my_sigaction (SIGQUIT, &ignore, &sigactions->quit);
 
-    /* Restore the original SIGTSTP handler, we don't want ncurses' */
-    /* handler messing the screen after the SIGCONT */
+    // Restore the original SIGTSTP handler, we don't want ncurses'
+    // handler messing the screen after the SIGCONT
     my_sigaction (SIGTSTP, &startup_handler, &sigactions->stop);
 }
 
@@ -244,16 +244,16 @@ mc_pread_stream (mc_pipe_stream_t *ps, const fd_set *fds)
 
     if (read_len < 0)
     {
-        /* reading error */
+        // reading error
         ps->len = MC_PIPE_ERROR_READ;
         ps->error = errno;
     }
     else if (read_len == 0)
-        /* EOF */
+        // EOF
         ps->len = MC_PIPE_STREAM_EOF;
     else
     {
-        /* success */
+        // success
         ps->len = read_len;
 
         if (ps->null_term)
@@ -411,7 +411,8 @@ my_get_current_dir (void)
  * @parameter shell   shell (if flags contain EXECUTE_AS_SHELL), command to run otherwise.
  *                    Shell (or command) will be found in paths described in PATH variable
  *                    (if shell parameter doesn't begin from path delimiter)
- * @parameter command Command for shell (or first parameter for command, if flags contain EXECUTE_AS_SHELL)
+ * @parameter command Command for shell (or first parameter for command, if flags contain
+ * EXECUTE_AS_SHELL)
  * @return 0 if successful, -1 otherwise
  */
 
@@ -447,7 +448,7 @@ my_systeml (int flags, const char *shell, ...)
 
     va_start (vargs, shell);
     while ((one_arg = va_arg (vargs, char *)) != NULL)
-          g_ptr_array_add (args_array, one_arg);
+        g_ptr_array_add (args_array, one_arg);
     va_end (vargs);
 
     g_ptr_array_add (args_array, NULL);
@@ -484,17 +485,17 @@ my_systemv (const char *command, char *const argv[])
         status = -1;
         break;
     case FORK_CHILD:
-        {
-            my_signal (SIGINT, SIG_DFL);
-            my_signal (SIGQUIT, SIG_DFL);
-            my_signal (SIGTSTP, SIG_DFL);
-            my_signal (SIGCHLD, SIG_DFL);
+    {
+        my_signal (SIGINT, SIG_DFL);
+        my_signal (SIGQUIT, SIG_DFL);
+        my_signal (SIGTSTP, SIG_DFL);
+        my_signal (SIGCHLD, SIG_DFL);
 
-            my_execvp (command, argv);
-            my_exit (127);      /* Exec error */
-        }
+        my_execvp (command, argv);
+        my_exit (127);  // Exec error
+    }
         MC_FALLTHROUGH;
-        /* no break here, or unreachable-code warning by no returning my_exit() */
+        // no break here, or unreachable-code warning by no returning my_exit()
     default:
         status = 0;
         break;
@@ -560,20 +561,20 @@ mc_popen (const char *command, gboolean read_out, gboolean read_err, GError **er
     if (p == NULL)
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE, "%s",
-                          _("Cannot create pipe descriptor"));
+                          _ ("Cannot create pipe descriptor"));
         goto ret_err;
     }
 
     p->out.fd = -1;
     p->err.fd = -1;
 
-    if (!g_spawn_async_with_pipes
-        (NULL, (gchar **) argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO, NULL,
-         NULL, &p->child_pid, NULL, read_out ? &p->out.fd : NULL, read_err ? &p->err.fd : NULL,
-         error))
+    if (!g_spawn_async_with_pipes (NULL, (gchar **) argv, NULL,
+                                   G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO, NULL,
+                                   NULL, &p->child_pid, NULL, read_out ? &p->out.fd : NULL,
+                                   read_err ? &p->err.fd : NULL, error))
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE_STREAM, "%s",
-                          _("Cannot create pipe streams"));
+                          _ ("Cannot create pipe streams"));
         goto ret_err;
     }
 
@@ -587,7 +588,7 @@ mc_popen (const char *command, gboolean read_out, gboolean read_err, GError **er
 
     return p;
 
-  ret_err:
+ret_err:
     g_free (p);
     return NULL;
 }
@@ -646,14 +647,14 @@ mc_pread (mc_pipe_t *p, GError **error)
         maxfd = MAX (maxfd, p->err.fd);
     }
 
-    /* no timeout */
+    // no timeout
     res = select (maxfd + 1, &fds, NULL, NULL, NULL);
     if (res < 0 && errno != EINTR)
     {
-        mc_propagate_error (error, MC_PIPE_ERROR_READ,
-                            _
-                            ("Unexpected error in select() reading data from a child process:\n%s"),
-                            unix_error_string (errno));
+        mc_propagate_error (
+            error, MC_PIPE_ERROR_READ,
+            _ ("Unexpected error in select() reading data from a child process:\n%s"),
+            unix_error_string (errno));
         return;
     }
 
@@ -700,7 +701,7 @@ mc_pstream_get_string (mc_pipe_stream_t *ps)
     if (s[0] == '\0')
         return NULL;
 
-    /* find '\0' or unescaped '\n' */
+    // find '\0' or unescaped '\n'
     for (i = 0; i < size && !(s[i] == '\0' || (s[i] == '\n' && !escape)); i++)
         escape = s[i] == '\\' ? !escape : FALSE;
 
@@ -728,7 +729,7 @@ mc_pclose (mc_pipe_t *p, GError **error)
     if (p == NULL)
     {
         mc_replace_error (error, MC_PIPE_ERROR_READ, "%s",
-                          _("Cannot close pipe descriptor (p == NULL)"));
+                          _ ("Cannot close pipe descriptor (p == NULL)"));
         return;
     }
 
@@ -746,7 +747,7 @@ mc_pclose (mc_pipe_t *p, GError **error)
     while (res < 0 && errno == EINTR);
 
     if (res < 0)
-        mc_replace_error (error, MC_PIPE_ERROR_READ, _("Unexpected error in waitpid():\n%s"),
+        mc_replace_error (error, MC_PIPE_ERROR_READ, _ ("Unexpected error in waitpid():\n%s"),
                           unix_error_string (errno));
 
     g_free (p);
@@ -773,7 +774,7 @@ tilde_expand (const char *directory)
 
     p = directory + 1;
 
-    /* d = "~" or d = "~/" */
+    // d = "~" or d = "~/"
     if (*p == '\0' || IS_PATH_SEP (*p))
     {
         passwd = getpwuid (geteuid ());
@@ -795,7 +796,7 @@ tilde_expand (const char *directory)
         }
     }
 
-    /* If we can't figure the user name, leave tilde unexpanded */
+    // If we can't figure the user name, leave tilde unexpanded
     if (passwd == NULL)
         return g_strdup (directory);
 
@@ -817,10 +818,10 @@ void
 canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 {
     char *p, *s;
-    char *lpath = path;         /* path without leading UNC part */
+    char *lpath = path;  // path without leading UNC part
     const size_t url_delim_len = strlen (VFS_PATH_URL_DELIMITER);
 
-    /* Detect and preserve UNC paths: //server/... */
+    // Detect and preserve UNC paths: //server/...
     if ((flags & CANON_PATH_GUARDUNC) != 0 && IS_PATH_SEP (path[0]) && IS_PATH_SEP (path[1]))
     {
         for (p = path + 2; p[0] != '\0' && !IS_PATH_SEP (p[0]); p++)
@@ -834,7 +835,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 
     if ((flags & CANON_PATH_JOINSLASHES) != 0)
     {
-        /* Collapse multiple slashes */
+        // Collapse multiple slashes
         for (p = lpath; *p != '\0'; p++)
             if (IS_PATH_SEP (p[0]) && IS_PATH_SEP (p[1]) && (p == lpath || *(p - 1) != ':'))
             {
@@ -844,7 +845,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                 str_move (p + 1, s);
             }
 
-        /* Collapse "/./" -> "/" */
+        // Collapse "/./" -> "/"
         for (p = lpath; *p != '\0';)
             if (IS_PATH_SEP (p[0]) && p[1] == '.' && IS_PATH_SEP (p[2]))
                 str_move (p, p + 2);
@@ -856,7 +857,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
     {
         size_t len;
 
-        /* Remove trailing slashes */
+        // Remove trailing slashes
         for (p = lpath + strlen (lpath) - 1; p > lpath && IS_PATH_SEP (*p); p--)
         {
             if (p >= lpath + url_delim_len - 1
@@ -865,7 +866,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
             *p = '\0';
         }
 
-        /* Remove leading "./" */
+        // Remove leading "./"
         if (lpath[0] == '.' && IS_PATH_SEP (lpath[1]))
         {
             if (lpath[2] == '\0')
@@ -877,15 +878,15 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
             str_move (lpath, lpath + 2);
         }
 
-        /* Remove trailing "/" or "/." */
+        // Remove trailing "/" or "/."
         len = strlen (lpath);
         if (len < 2)
             return;
 
         if (IS_PATH_SEP (lpath[len - 1])
             && (len < url_delim_len
-                || strncmp (lpath + len - url_delim_len, VFS_PATH_URL_DELIMITER,
-                            url_delim_len) != 0))
+                || strncmp (lpath + len - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len)
+                    != 0))
             lpath[len - 1] = '\0';
         else if (lpath[len - 1] == '.' && IS_PATH_SEP (lpath[len - 2]))
         {
@@ -899,12 +900,12 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
         }
     }
 
-    /* Collapse "/.." with the previous part of path */
+    // Collapse "/.." with the previous part of path
     if ((flags & CANON_PATH_REMDOUBLEDOTS) != 0)
     {
 #ifdef HAVE_CHARSET
         const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
-#endif /* HAVE_CHARSET */
+#endif
 
         for (p = lpath; p[0] != '\0' && p[1] != '\0' && p[2] != '\0';)
         {
@@ -915,7 +916,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                 continue;
             }
 
-            /* search for the previous token */
+            // search for the previous token
             s = p - 1;
             if (s >= lpath + url_delim_len - 2
                 && strncmp (s - url_delim_len + 2, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
@@ -957,7 +958,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 
             s++;
 
-            /* If the previous token is "..", we cannot collapse it */
+            // If the previous token is "..", we cannot collapse it
             if (s[0] == '.' && s[1] == '.' && s + 2 == p)
             {
                 p += 3;
@@ -968,12 +969,12 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
             {
                 if (s == lpath && IS_PATH_SEP (*s))
                 {
-                    /* "/../foo" -> "/foo" */
+                    // "/../foo" -> "/foo"
                     str_move (s + 1, p + 4);
                 }
                 else
                 {
-                    /* "token/../foo" -> "foo" */
+                    // "token/../foo" -> "foo"
 #ifdef HAVE_CHARSET
                     if (strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                     {
@@ -982,7 +983,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                         enc = vfs_get_encoding (s, -1);
 
                         if (is_supported_encoding (enc))
-                            /* special case: remove encoding */
+                            // special case: remove encoding
                             str_move (s, p + 1);
                         else
                             str_move (s, p + 4);
@@ -990,7 +991,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                         g_free (enc);
                     }
                     else
-#endif /* HAVE_CHARSET */
+#endif
                         str_move (s, p + 4);
                 }
 
@@ -998,17 +999,17 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                 continue;
             }
 
-            /* trailing ".." */
+            // trailing ".."
             if (s == lpath)
             {
-                /* "token/.." -> "." */
+                // "token/.." -> "."
                 if (!IS_PATH_SEP (lpath[0]))
                     lpath[0] = '.';
                 lpath[1] = '\0';
             }
             else
             {
-                /* "foo/token/.." -> "foo" */
+                // "foo/token/.." -> "foo"
                 if (s == lpath + 1)
                     s[0] = '\0';
 #ifdef HAVE_CHARSET
@@ -1024,25 +1025,25 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                     if (!ok)
                         goto last;
 
-                    /* special case: remove encoding */
+                    // special case: remove encoding
                     s[0] = '.';
                     s[1] = '.';
                     s[2] = '\0';
 
-                    /* search for the previous token */
-                    /* IS_PATH_SEP (s[-1]) */
+                    // search for the previous token
+                    // IS_PATH_SEP (s[-1])
                     for (p = s - 1; p >= lpath && !IS_PATH_SEP (*p); p--)
                         ;
 
                     if (p >= lpath)
                         continue;
                 }
-#endif /* HAVE_CHARSET */
+#endif
                 else
                 {
 #ifdef HAVE_CHARSET
-                  last:
-#endif /* HAVE_CHARSET */
+                last:
+#endif
                     if (s >= lpath + url_delim_len
                         && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                         *s = '\0';
@@ -1071,7 +1072,7 @@ mc_realpath (const char *path, char *resolved_path)
         p++;
     }
 
-    /* ignore encoding: skip "#enc:" */
+    // ignore encoding: skip "#enc:"
     if (g_str_has_prefix (p, VFS_ENCODING_PREFIX))
     {
         p += strlen (VFS_ENCODING_PREFIX);
@@ -1084,7 +1085,7 @@ mc_realpath (const char *path, char *resolved_path)
             path = p;
         }
     }
-#endif /* HAVE_CHARSET */
+#endif
 
 #ifdef HAVE_REALPATH
     return realpath (path, resolved_path);
@@ -1094,13 +1095,13 @@ mc_realpath (const char *path, char *resolved_path)
         char got_path[PATH_MAX];
         char *new_path = got_path;
         char *max_path;
-#ifdef S_IFLNK
+#    ifdef S_IFLNK
         char link_path[PATH_MAX];
         int readlinks = 0;
         int n;
-#endif /* S_IFLNK */
+#    endif
 
-        /* Make a copy of the source path since we may need to modify it. */
+        // Make a copy of the source path since we may need to modify it.
         if (strlen (path) >= PATH_MAX - 2)
         {
             errno = ENAMETOOLONG;
@@ -1110,7 +1111,7 @@ mc_realpath (const char *path, char *resolved_path)
         strcpy (copy_path, path);
         path = copy_path;
         max_path = copy_path + PATH_MAX - 2;
-        /* If it's a relative pathname use getwd for starters. */
+        // If it's a relative pathname use getwd for starters.
         if (!IS_PATH_SEP (*path))
         {
             new_path = my_get_current_dir ();
@@ -1132,10 +1133,10 @@ mc_realpath (const char *path, char *resolved_path)
             *new_path++ = PATH_SEP;
             path++;
         }
-        /* Expand each slash-separated pathname component. */
+        // Expand each slash-separated pathname component.
         while (*path != '\0')
         {
-            /* Ignore stray "/". */
+            // Ignore stray "/"
             if (IS_PATH_SEP (*path))
             {
                 path++;
@@ -1143,7 +1144,7 @@ mc_realpath (const char *path, char *resolved_path)
             }
             if (*path == '.')
             {
-                /* Ignore ".". */
+                // Ignore ".".
                 if (path[1] == '\0' || IS_PATH_SEP (path[1]))
                 {
                     path++;
@@ -1154,17 +1155,17 @@ mc_realpath (const char *path, char *resolved_path)
                     if (path[2] == '\0' || IS_PATH_SEP (path[2]))
                     {
                         path += 2;
-                        /* Ignore ".." at root. */
+                        // Ignore ".." at root.
                         if (new_path == got_path + 1)
                             continue;
-                        /* Handle ".." by backing up. */
+                        // Handle ".." by backing up.
                         while (!IS_PATH_SEP ((--new_path)[-1]))
                             ;
                         continue;
                     }
                 }
             }
-            /* Safely copy the next pathname component. */
+            // Safely copy the next pathname component.
             while (*path != '\0' && !IS_PATH_SEP (*path))
             {
                 if (path > max_path)
@@ -1174,22 +1175,22 @@ mc_realpath (const char *path, char *resolved_path)
                 }
                 *new_path++ = *path++;
             }
-#ifdef S_IFLNK
-            /* Protect against infinite loops. */
+#    ifdef S_IFLNK
+            // Protect against infinite loops.
             if (readlinks++ > MAXSYMLINKS)
             {
                 errno = ELOOP;
                 return NULL;
             }
-            /* See if latest pathname component is a symlink. */
+            // See if latest pathname component is a symlink.
             *new_path = '\0';
             n = readlink (got_path, link_path, PATH_MAX - 1);
             if (n < 0)
             {
-                /* EINVAL means the file exists but isn't a symlink. */
+                // EINVAL means the file exists but isn't a symlink.
                 if (errno != EINVAL)
                 {
-                    /* Make sure it's null terminated. */
+                    // Make sure it's null terminated.
                     *new_path = '\0';
                     strcpy (resolved_path, got_path);
                     return NULL;
@@ -1197,38 +1198,38 @@ mc_realpath (const char *path, char *resolved_path)
             }
             else
             {
-                /* Note: readlink doesn't add the null byte. */
+                // Note: readlink doesn't add the null byte.
                 link_path[n] = '\0';
                 if (IS_PATH_SEP (*link_path))
-                    /* Start over for an absolute symlink. */
+                    // Start over for an absolute symlink.
                     new_path = got_path;
                 else
-                    /* Otherwise back up over this component. */
+                    // Otherwise back up over this component.
                     while (!IS_PATH_SEP (*(--new_path)))
                         ;
-                /* Safe sex check. */
+                // Safe sex check.
                 if (strlen (path) + n >= PATH_MAX - 2)
                 {
                     errno = ENAMETOOLONG;
                     return NULL;
                 }
-                /* Insert symlink contents into path. */
+                // Insert symlink contents into path.
                 strcat (link_path, path);
                 strcpy (copy_path, link_path);
                 path = copy_path;
             }
-#endif /* S_IFLNK */
+#    endif
             *new_path++ = PATH_SEP;
         }
-        /* Delete trailing slash but don't whomp a lone slash. */
+        // Delete trailing slash but don't whomp a lone slash.
         if (new_path != got_path + 1 && IS_PATH_SEP (new_path[-1]))
             new_path--;
-        /* Make sure it's null terminated. */
+        // Make sure it's null terminated.
         *new_path = '\0';
         strcpy (resolved_path, got_path);
         return resolved_path;
     }
-#endif /* HAVE_REALPATH */
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1252,7 +1253,7 @@ get_user_permissions (struct stat *st)
 
         ngroups = getgroups (0, NULL);
         if (ngroups == -1)
-            ngroups = 0;        /* ignore errors */
+            ngroups = 0;  // ignore errors
 
         /* allocate space for one element in addition to what
          * will be filled by getgroups(). */
@@ -1262,7 +1263,7 @@ get_user_permissions (struct stat *st)
         {
             ngroups = getgroups (ngroups, groups);
             if (ngroups == -1)
-                ngroups = 0;    /* ignore errors */
+                ngroups = 0;  // ignore errors
         }
 
         /* getgroups() may or may not return the effective group ID,
