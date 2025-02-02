@@ -368,6 +368,8 @@ static panel_field_t panel_fields[] = {
 
 static char *panel_sort_up_char = NULL;
 static char *panel_sort_down_char = NULL;
+static int panel_sort_up_indicator_width = 0;
+static int panel_sort_down_indicator_width = 0;
 
 static char *panel_hiddenfiles_show_char = NULL;
 static char *panel_hiddenfiles_hide_char = NULL;
@@ -1579,14 +1581,22 @@ panel_paint_sort_info (const WPanel *panel)
 {
     if (*panel->sort_field->hotkey != '\0')
     {
-        const char *sort_sign =
-            panel->sort_info.reverse ? panel_sort_up_char : panel_sort_down_char;
-        char *str;
+        char str[BUF_TINY];
 
-        str = g_strdup_printf ("%s%s", sort_sign, Q_ (panel->sort_field->hotkey));
+        if (panel->sort_info.reverse)
+        {
+            g_snprintf (str, sizeof (str), "%s%s", panel_sort_up_char,
+                        Q_ (panel->sort_field->hotkey));
+            panel_sort_up_indicator_width = str_term_width1 (str);
+        }
+        else
+        {
+            g_snprintf (str, sizeof (str), "%s%s", panel_sort_down_char,
+                        Q_ (panel->sort_field->hotkey));
+            panel_sort_down_indicator_width = str_term_width1 (str);
+        }
         widget_gotoyx (panel, 1, 1);
         tty_print_string (str);
-        g_free (str);
     }
 }
 
@@ -3999,6 +4009,17 @@ mouse_sort_col (WPanel *panel, int x)
     GSList *format;
     const char *lc_sort_name = NULL;
     panel_field_t *col_sort_format = NULL;
+
+    const int sort_indicator_width =
+        panel->sort_info.reverse ? panel_sort_up_indicator_width : panel_sort_down_indicator_width;
+
+    // Clicking the sort order indicator itself should reverse the current sort order
+    if (x >= 2 && x < 2 + sort_indicator_width)
+    {
+        panel->sort_info.reverse = !panel->sort_info.reverse;
+        panel_set_sort_order (panel, panel->sort_field);
+        return;
+    }
 
     for (format = panel->format; format != NULL; format = g_slist_next (format))
     {
