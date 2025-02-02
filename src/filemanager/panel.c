@@ -1581,21 +1581,22 @@ panel_paint_sort_info (const WPanel *panel)
 {
     if (*panel->sort_field->hotkey != '\0')
     {
-        char *str;
+        char str[BUF_TINY];
 
         if (panel->sort_info.reverse)
         {
-            str = g_strdup_printf ("%s%s", panel_sort_up_char, Q_ (panel->sort_field->hotkey));
+            g_snprintf (str, sizeof (str), "%s%s", panel_sort_up_char,
+                        Q_ (panel->sort_field->hotkey));
             panel_sort_up_indicator_width = str_term_width1 (str);
         }
         else
         {
-            str = g_strdup_printf ("%s%s", panel_sort_down_char, Q_ (panel->sort_field->hotkey));
+            g_snprintf (str, sizeof (str), "%s%s", panel_sort_down_char,
+                        Q_ (panel->sort_field->hotkey));
             panel_sort_down_indicator_width = str_term_width1 (str);
         }
         widget_gotoyx (panel, 1, 1);
         tty_print_string (str);
-        g_free (str);
     }
 }
 
