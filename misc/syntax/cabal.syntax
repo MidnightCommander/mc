@@ -145,6 +145,7 @@ context default
 
 #   links
     keyword http://+ gray
+    keyword https://+ gray
     keyword ftp://+ gray
     keyword git://+ gray
     keyword cvs://+ gray
