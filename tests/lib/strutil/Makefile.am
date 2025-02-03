@@ -16,6 +16,7 @@ TESTS = \
 	parse_integer \
 	str_replace_all \
 	str_verscmp \
+	str_rstrip_eol \
 	filevercmp
 
 check_PROGRAMS = $(TESTS)
@@ -28,6 +29,9 @@ str_replace_all_SOURCES = \
 
 str_verscmp_SOURCES = \
 	str_verscmp.c
+
+str_rstrip_eol_SOURCES = \
+	str_rstrip_eol.c
 
 filevercmp_SOURCES = \
 	filevercmp.c

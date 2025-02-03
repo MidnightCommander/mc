@@ -1020,3 +1020,21 @@ parse_integer (const char *str, gboolean *invalid)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Strips single right (trailing) EOL (\\r, \\n, or \\r\\n), NULL-safe
+ */
+void
+str_rstrip_eol (char *s)
+{
+    if (s == NULL || *s == '\0')
+        return;
+
+    const size_t len = strlen (s);
+    if (len >= 2 && s[len - 2] == '\r' && s[len - 1] == '\n')  // removes \r\n
+        s[len - 2] = '\0';
+    else if (len >= 1 && (s[len - 1] == '\n' || s[len - 1] == '\r'))  // removes \n or \r
+        s[len - 1] = '\0';
+}
+
+/* --------------------------------------------------------------------------------------------- */

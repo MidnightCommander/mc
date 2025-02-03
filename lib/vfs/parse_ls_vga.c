@@ -40,6 +40,7 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"
 #include "lib/unixcompat.h"  // makedev
 #include "lib/widget.h"      // message()
 
@@ -852,16 +853,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
             *linkname = NULL;
     }
 
-    if (t != NULL)
-    {
-        size_t p2;
-
-        p2 = strlen (t);
-        if (--p2 > 0 && (t[p2] == '\r' || t[p2] == '\n'))
-            t[p2] = '\0';
-        if (--p2 > 0 && (t[p2] == '\r' || t[p2] == '\n'))
-            t[p2] = '\0';
-    }
+    str_rstrip_eol (t);
 
     g_free (p_copy);
     return TRUE;
