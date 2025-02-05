@@ -96,37 +96,50 @@ sigintr_handler (int signo)
  * @param force_xterm Set forced the XTerm type
  *
  * @return true if @param force_xterm is true or value of $TERM is one of following:
- *         term*
+ *         alacritty*
+ *         contour*
+ *         dtterm
+ *         Eterm
+ *         foot*
  *         konsole*
  *         rxvt*
- *         Eterm
- *         dtterm
- *         alacritty*
- *         foot*
  *         screen*
+ *         term*
  *         tmux*
- *         contour*
  */
 gboolean
-tty_check_term (gboolean force_xterm)
+tty_check_xterm_compat (const gboolean force_xterm)
 {
-    const char *termvalue;
+    static const char *xterm_compatible_terminals[] = {
+        "alacritty",  //
+        "contour",    //
+        "dtterm",     //
+        "Eterm",      //
+        "foot",       //
+        "konsole",    //
+        "rxvt",       //
+        "screen",     //
+        "tmux",       //
+        "xterm",      //
+        NULL,
+    };
 
-    termvalue = getenv ("TERM");
+    const char *termvalue = getenv ("TERM");
     if (termvalue == NULL || *termvalue == '\0')
     {
         fputs (_ ("The TERM environment variable is unset!\n"), stderr);
-        exit (EXIT_FAILURE);
+        my_exit (EXIT_FAILURE);
     }
 
-    return force_xterm || strncmp (termvalue, "xterm", 5) == 0
-        || strncmp (termvalue, "konsole", 7) == 0 || strncmp (termvalue, "rxvt", 4) == 0
-        || strcmp (termvalue, "Eterm") == 0 || strcmp (termvalue, "dtterm") == 0
-        || strncmp (termvalue, "alacritty", 9) == 0 || strncmp (termvalue, "foot", 4) == 0
-        || strncmp (termvalue, "screen", 6) == 0 || strncmp (termvalue, "tmux", 4) == 0
-        || strncmp (termvalue, "contour", 7) == 0;
-}
+    if (force_xterm)
+        return TRUE;
 
+    for (const char **p = xterm_compatible_terminals; *p != NULL; p++)
+        if (strncmp (termvalue, *p, strlen (*p)) == 0)
+            return TRUE;
+
+    return FALSE;
+}
 /* --------------------------------------------------------------------------------------------- */
 
 extern void

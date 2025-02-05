@@ -71,7 +71,7 @@ extern void tty_beep (void);
 
 /* {{{ Input }}} */
 
-extern gboolean tty_check_term (gboolean force_xterm);
+extern gboolean tty_check_xterm_compat (gboolean force_xterm);
 extern void tty_init (gboolean mouse_enable, gboolean is_xterm);
 extern void tty_shutdown (void);
 

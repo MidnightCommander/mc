@@ -290,7 +290,7 @@ main (int argc, char *argv[])
      * mc_global.tty.xterm_flag is used in init_key() and tty_init()
      * Do this after mc_args_parse() where mc_args__force_xterm is set up.
      */
-    mc_global.tty.xterm_flag = tty_check_term (mc_args__force_xterm);
+    mc_global.tty.xterm_flag = tty_check_xterm_compat (mc_args__force_xterm);
 
     // do this before mc_args_show_info () to view paths in the --datadir-info output
     OS_Setup ();
