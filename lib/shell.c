@@ -129,19 +129,17 @@ mc_shell_get_name_env (void)
 static mc_shell_t *
 mc_shell_get_from_env (void)
 {
-    mc_shell_t *mc_shell = NULL;
-
-    char *shell_name;
-
-    shell_name = mc_shell_get_name_env ();
+    char *shell_name = mc_shell_get_name_env ();
 
     if (shell_name != NULL)
     {
+        mc_shell_t *mc_shell = NULL;
         mc_shell = g_new0 (mc_shell_t, 1);
         mc_shell->path = shell_name;
+        return mc_shell;
     }
 
-    return mc_shell;
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
