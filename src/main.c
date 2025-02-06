@@ -415,23 +415,19 @@ main (int argc, char *argv[])
     // inherit the file descriptors opened below, etc
     if (mc_global.tty.use_subshell && mc_global.run_from_parent_mc)
     {
-        int r;
-
-        r = query_dialog (_ ("Warning"),
+        const int quit_mc =
+            query_dialog (_ ("Warning"),
                           _ ("GNU Midnight Commander\nis already running on this terminal.\n"
                              "Subshell support will be disabled."),
                           D_ERROR, 2, _ ("&OK"), _ ("&Quit"));
-        if (r == 0)
-        {
-            // parent mc was found and the user wants to continue
-            ;
-        }
-        else
+
+        if (quit_mc != 0)
         {
             // parent mc was found and the user wants to quit mc
             mc_global.midnight_shutdown = TRUE;
         }
 
+        // quit or not, disable nested subshell
         mc_global.tty.use_subshell = FALSE;
     }
 
