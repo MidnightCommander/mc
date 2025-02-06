@@ -1127,13 +1127,10 @@ pty_open_slave (const char *pty_name)
  *
  * @return initialized pre-command string
  */
-
-static void
-init_subshell_precmd (char *precmd, size_t buff_size)
+static gchar *
+init_subshell_precmd (void)
 {
     /*
-     * ATTENTION! Make sure that the buffer for precmd is big enough.
-     *
      * Fallback precmd emulation that should work with virtually any shell.
      * No real precmd functionality is required, no support for \x substitutions
      * in PS1 is needed. For convenience, $HOME is replaced by ~ in PS1.
@@ -1185,8 +1182,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
     switch (mc_global.shell->type)
     {
     case SHELL_BASH:
-        g_snprintf (
-            precmd, buff_size,
+        return g_strdup_printf (
             " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$READLINE_LINE\" >&%d; }\n"
             " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
             " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING
@@ -1200,69 +1196,58 @@ init_subshell_precmd (char *precmd, size_t buff_size)
             "PS1='\\u@\\h:\\w\\$ '\n",
             command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE],
             subshell_pipe[WRITE]);
-        break;
 
     case SHELL_ASH_BUSYBOX:
-        /* BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
-         * that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway.
-         */
-        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
-        break;
+        // BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
+        // that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway
+        return g_strdup_printf (precmd_fallback, subshell_pipe[WRITE]);
 
     case SHELL_DASH:
-        /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
-         * but does not support escape sequences for user, host and cwd in prompt.
-         */
-        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
-        break;
+        // Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
+        // but does not support escape sequences for user, host and cwd in prompt
+        return g_strdup_printf (precmd_fallback, subshell_pipe[WRITE]);
 
     case SHELL_MKSH:
         // mksh doesn't support \x placeholders in PS1 and needs precmd emulation via PS1
-        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
-        break;
+        return g_strdup_printf (precmd_fallback, subshell_pipe[WRITE]);
 
     case SHELL_KSH:
-        // pdksh based variants support \x placeholders but not any "precmd" functionality.
-        g_snprintf (precmd, buff_size,
-                    " PS1='$(pwd>&%d; kill -STOP $$)'"
-                    "\"${PS1:-\\u@\\h:\\w\\$ }\"\n",
-                    subshell_pipe[WRITE]);
-        break;
+        // pdksh based variants support \x placeholders but not any "precmd" functionality
+        return g_strdup_printf (" PS1='$(pwd>&%d; kill -STOP $$)'"
+                                "\"${PS1:-\\u@\\h:\\w\\$ }\"\n",
+                                subshell_pipe[WRITE]);
 
     case SHELL_ZSH:
-        g_snprintf (precmd, buff_size,
-                    " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$BUFFER\" >&%d; }\n"
-                    " zle -N mc_print_command_buffer\n"
-                    " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
-                    " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
-                    " zle -N mc_print_cursor_position\n"
-                    " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position\n"
-                    " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
-                    "PS1='%%n@%%m:%%~%%# '\n",
-                    command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
-        break;
+        return g_strdup_printf (
+            " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$BUFFER\" >&%d; }\n"
+            " zle -N mc_print_command_buffer\n"
+            " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
+            " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
+            " zle -N mc_print_cursor_position\n"
+            " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position\n"
+            " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
+            "PS1='%%n@%%m:%%~%%# '\n",
+            command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_TCSH:
-        g_snprintf (precmd, buff_size,
-                    "set echo_style=both; "
-                    "set prompt='%%n@%%m:%%~%%# '; "
-                    "alias precmd 'echo -n;echo $cwd:q >>%s; kill -STOP $$'\n",
-                    tcsh_fifo);
-        break;
-    case SHELL_FISH:
-        g_snprintf (precmd, buff_size,
-                    " bind \\e" SHELL_BUFFER_KEYBINDING " 'commandline >&%d';"
-                    "bind \\e" SHELL_CURSOR_KEYBINDING " 'commandline -C >&%d';"
-                    "if not functions -q fish_prompt_mc;"
-                    "functions -e fish_right_prompt;"
-                    "functions -c fish_prompt fish_prompt_mc; end;"
-                    "function fish_prompt;"
-                    "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP $fish_pid; end\n",
-                    command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
-        break;
+        return g_strdup_printf ("set echo_style=both; "
+                                "set prompt='%%n@%%m:%%~%%# '; "
+                                "alias precmd 'echo -n;echo $cwd:q >>%s; kill -STOP $$'\n",
+                                tcsh_fifo);
 
+    case SHELL_FISH:
+        return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING " 'commandline >&%d';"
+                                "bind \\e" SHELL_CURSOR_KEYBINDING " 'commandline -C >&%d';"
+                                "if not functions -q fish_prompt_mc;"
+                                "functions -e fish_right_prompt;"
+                                "functions -c fish_prompt fish_prompt_mc; end;"
+                                "function fish_prompt;"
+                                "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP $fish_pid; end\n",
+                                command_buffer_pipe[WRITE], command_buffer_pipe[WRITE],
+                                subshell_pipe[WRITE]);
     default:
-        break;
+        fprintf (stderr, "subshell: unknown shell type (%u), aborting!\r\n", mc_global.shell->type);
+        exit (EXIT_FAILURE);
     }
 }
 
@@ -1525,8 +1510,6 @@ init_subshell (void)
 {
     // This must be remembered across calls to init_subshell()
     static char pty_name[BUF_SMALL];
-    // Must be considerably longer than BUF_SMALL (128) to support fancy shell prompts
-    char precmd[BUF_MEDIUM];
 
     // Take the current (hopefully pristine) tty mode and make
     // a raw mode based on it now, before we do anything else with it
@@ -1630,12 +1613,11 @@ init_subshell (void)
         init_subshell_child (pty_name);
     }
 
-    init_subshell_precmd (precmd, BUF_MEDIUM);
-
+    gchar *precmd = init_subshell_precmd ();
     write_all (mc_global.tty.subshell_pty, precmd, strlen (precmd));
+    g_free (precmd);
 
     // Wait until the subshell has started up and processed the command
-
     subshell_state = RUNNING_COMMAND;
     tty_enable_interrupt_key ();
     if (!feed_subshell (QUIETLY, TRUE))
