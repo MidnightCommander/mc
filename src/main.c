@@ -129,17 +129,15 @@ check_codeset (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /** POSIX version.  The only version we support.  */
-
 static void
 OS_Setup (void)
 {
-    const char *datadir_env;
-
     mc_shell_init ();
 
     // This is the directory, where MC was installed, on Unix this is DATADIR
     // and can be overridden by the MC_DATADIR environment variable
-    datadir_env = g_getenv ("MC_DATADIR");
+    const char *datadir_env = g_getenv ("MC_DATADIR");
+
     if (datadir_env != NULL)
         mc_global.sysconfig_dir = g_strdup (datadir_env);
     else
