@@ -107,16 +107,13 @@ mc_shell_get_installed_in_system (void)
 static char *
 mc_shell_get_name_env (void)
 {
-    const char *shell_env;
     char *shell_name = NULL;
 
-    shell_env = g_getenv ("SHELL");
+    const char *shell_env = g_getenv ("SHELL");
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
         // 2nd choice: user login shell
-        struct passwd *pwd;
-
-        pwd = getpwuid (geteuid ());
+        const struct passwd *pwd = getpwuid (geteuid ());
         if (pwd != NULL)
             shell_name = g_strdup (pwd->pw_shell);
     }
