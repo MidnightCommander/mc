@@ -1831,7 +1831,7 @@ do_nc (void)
 
         // widget_destroy destroys even current_panel->cwd_vpath, so we have to save a copy :)
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
-            last_wd_string = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
+            last_wd_str = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
 
         // don't handle VFS timestamps for dirs opened in panels
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");

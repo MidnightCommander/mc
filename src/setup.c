@@ -196,7 +196,7 @@ char *spell_language = NULL;
 char *saved_other_dir = NULL;
 
 /* If set, then print to the given file the last directory we were at */
-char *last_wd_string = NULL;
+char *last_wd_str = NULL;
 
 /* Set when main loop should be terminated */
 int quit = 0;

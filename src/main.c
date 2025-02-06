@@ -498,23 +498,19 @@ main (int argc, char *argv[])
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_DONE);
 
-    if (mc_global.mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL
-        && last_wd_string != NULL && !print_last_revert)
+    if (mc_global.mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL && last_wd_str != NULL
+        && !print_last_revert)
     {
-        int last_wd_fd;
-
-        last_wd_fd = open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        const int last_wd_fd =
+            open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
         if (last_wd_fd != -1)
         {
-            ssize_t ret1;
-            int ret2;
-            ret1 = write (last_wd_fd, last_wd_string, strlen (last_wd_string));
-            ret2 = close (last_wd_fd);
-            (void) ret1;
-            (void) ret2;
+            MC_UNUSED const ssize_t ret1 = write (last_wd_fd, last_wd_str, strlen (last_wd_str));
+            MC_UNUSED const int ret2 = close (last_wd_fd);
         }
     }
-    g_free (last_wd_string);
+
+    g_free (last_wd_str);
 
     mc_shell_deinit ();
 

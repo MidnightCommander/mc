@@ -125,7 +125,7 @@ extern char *spell_language;
 extern char *saved_other_dir;
 
 /* If set, then print to the given file the last directory we were at */
-extern char *last_wd_string;
+extern char *last_wd_str;
 
 extern int quit;
 /* Set to TRUE to suppress printing the last directory */
