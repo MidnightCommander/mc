@@ -599,7 +599,7 @@ read_command_line_buffer (gboolean test_mode)
 
     // get contents of command line buffer
     write_all (mc_global.tty.subshell_pty, ESC_STR SHELL_BUFFER_KEYBINDING,
-               sizeof (ESC_STR SHELL_CURSOR_KEYBINDING) - 1);
+               sizeof (ESC_STR SHELL_BUFFER_KEYBINDING) - 1);
 
     subshell_prompt_timer.tv_sec = 1;
     FD_ZERO (&read_set);
