@@ -14,7 +14,7 @@ if ENABLE_MCLIB
 LIBS += $(GLIB_LIBS)
 endif
 
-EXTRA_DIST = mc.charsets test-data.txt.in
+EXTRA_DIST = mc.charsets edit_complete_word_cmd_test_data.txt.in
 
 TESTS = \
 	edit_complete_word_cmd \
