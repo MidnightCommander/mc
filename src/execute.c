@@ -308,13 +308,14 @@ do_executev (const char *shell, int flags, char *const argv[])
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_RESTORE);
 
-    if (!mc_global.tty.use_subshell && *argv != NULL && (flags & EXECUTE_INTERNAL) == 0)
+    if (!mc_global.tty.use_subshell && (flags & EXECUTE_INTERNAL) == 0 && argv != NULL
+        && *argv != NULL)
     {
         printf ("%s%s\n", mc_prompt, *argv);
         fflush (stdout);
     }
 #ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell && (flags & EXECUTE_INTERNAL) == 0)
+    if (mc_global.tty.use_subshell && (flags & EXECUTE_INTERNAL) == 0 && argv != NULL)
     {
         do_update_prompt ();
 
