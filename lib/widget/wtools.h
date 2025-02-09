@@ -84,9 +84,10 @@ gboolean mc_error_message (GError **mcerror, int *code);
 status_msg_t *status_msg_create (const char *title, double delay, status_msg_cb init_cb,
                                  status_msg_update_cb update_cb, status_msg_cb deinit_cb);
 void status_msg_destroy (status_msg_t *sm);
-void status_msg_init (status_msg_t *sm, const char *title, double delay, status_msg_cb init_cb,
-                      status_msg_update_cb update_cb, status_msg_cb deinit_cb);
-void status_msg_deinit (status_msg_t *sm);
+MC_MOCKABLE void status_msg_init (status_msg_t *sm, const char *title, double delay,
+                                  status_msg_cb init_cb, status_msg_update_cb update_cb,
+                                  status_msg_cb deinit_cb);
+MC_MOCKABLE void status_msg_deinit (status_msg_t *sm);
 int status_msg_common_update (status_msg_t *sm);
 
 void simple_status_msg_init_cb (status_msg_t *sm);

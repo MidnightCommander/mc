@@ -47,29 +47,7 @@
 
 /*** global variables ****************************************************************************/
 
-/*** file scope macro definitions ****************************************************************/
-
-#define B_REPLACE_ALL  (B_USER + 1)
-#define B_REPLACE_ONE  (B_USER + 2)
-#define B_SKIP_REPLACE (B_USER + 3)
-
-/*** file scope type declarations ****************************************************************/
-
-typedef struct edit_search_options_t
-{
-    mc_search_type_t type;
-    gboolean case_sens;
-    gboolean backwards;
-    gboolean only_in_selection;
-    gboolean whole_words;
-    gboolean all_codepages;
-} edit_search_options_t;
-
-/*** forward declarations (file scope functions) *************************************************/
-
-/*** file scope variables ************************************************************************/
-
-static edit_search_options_t edit_search_options = {
+edit_search_options_t edit_search_options = {
     .type = MC_SEARCH_T_NORMAL,
     .case_sens = FALSE,
     .backwards = FALSE,
@@ -77,6 +55,21 @@ static edit_search_options_t edit_search_options = {
     .whole_words = FALSE,
     .all_codepages = FALSE,
 };
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** forward declarations (file scope functions) *************************************************/
+
+MC_MOCKABLE void edit_dialog_replace_show (WEdit *edit, const char *search_default,
+                                           const char *replace_default, char **search_text,
+                                           char **replace_text);
+
+MC_MOCKABLE int edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text,
+                                                 int xpos, int ypos);
+
+/*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -161,136 +154,6 @@ edit_dialog_search_show (WEdit *edit)
     edit->last_search_string = search_text;
 
     return edit_search_init (edit, edit->last_search_string);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *replace_default,
-                          /*@out@ */ char **search_text, /*@out@ */ char **replace_text)
-{
-    size_t num_of_types = 0;
-    gchar **list_of_types;
-
-    if ((search_default == NULL) || (*search_default == '\0'))
-        search_default = INPUT_LAST_TEXT;
-
-    list_of_types = mc_search_get_types_strings_array (&num_of_types);
-
-    {
-        quick_widget_t quick_widgets[] = {
-            // clang-format off
-            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, search_default,
-                                 MC_HISTORY_SHARED_SEARCH, search_text, NULL, FALSE, FALSE,
-                                 INPUT_COMPLETE_NONE),
-            QUICK_LABELED_INPUT (N_ ("Enter replacement string:"), input_label_above,
-                                 replace_default, "replace", replace_text, NULL, FALSE, FALSE,
-                                 INPUT_COMPLETE_NONE),
-            QUICK_SEPARATOR (TRUE),
-            QUICK_START_COLUMNS,
-                QUICK_RADIO (num_of_types, (const char **) list_of_types,
-                             (int *) &edit_search_options.type, NULL),
-            QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
-                QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
-#ifdef HAVE_CHARSET
-                QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
-#endif
-            QUICK_STOP_COLUMNS,
-            QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END,
-            // clang-format on
-        };
-
-        WRect r = { -1, -1, 0, 58 };
-
-        quick_dialog_t qdlg = {
-            .rect = r,
-            .title = N_ ("Replace"),
-            .help = "[Input Line Keys]",
-            .widgets = quick_widgets,
-            .callback = NULL,
-            .mouse_callback = NULL,
-        };
-
-        if (quick_dialog (&qdlg) != B_CANCEL)
-            edit->replace_mode = 0;
-        else
-        {
-            *replace_text = NULL;
-            *search_text = NULL;
-        }
-    }
-
-    g_strfreev (list_of_types);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, int xpos, int ypos)
-{
-    Widget *w = WIDGET (edit);
-
-    // dialog size
-    int dlg_height = 10;
-    int dlg_width;
-
-    char tmp[BUF_MEDIUM];
-    char *repl_from, *repl_to;
-    int retval;
-
-    if (xpos == -1)
-        xpos = w->rect.x + edit_options.line_state_width + 1;
-    if (ypos == -1)
-        ypos = w->rect.y + w->rect.lines / 2;
-    // Sometimes menu can hide replaced text. I don't like it
-    if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + dlg_height - 1))
-        ypos -= dlg_height;
-
-    dlg_width = WIDGET (w->owner)->rect.cols - xpos - 1;
-
-    g_snprintf (tmp, sizeof (tmp), "\"%s\"", from_text);
-    repl_from = g_strdup (str_trunc (tmp, dlg_width - 7));
-
-    g_snprintf (tmp, sizeof (tmp), "\"%s\"", to_text);
-    repl_to = g_strdup (str_trunc (tmp, dlg_width - 7));
-
-    {
-        quick_widget_t quick_widgets[] = {
-            // clang-format off
-            QUICK_LABEL (repl_from, NULL),
-            QUICK_LABEL (N_ ("Replace with:"), NULL),
-            QUICK_LABEL (repl_to, NULL),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_ ("&Replace"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_ ("A&ll"), B_REPLACE_ALL, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Skip"), B_SKIP_REPLACE, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
-            QUICK_END,
-            // clang-format on
-        };
-
-        WRect r = { ypos, xpos, 0, -1 };
-
-        quick_dialog_t qdlg = {
-            .rect = r,
-            .title = N_ ("Confirm replace"),
-            .help = NULL,
-            .widgets = quick_widgets,
-            .callback = NULL,
-            .mouse_callback = NULL,
-        };
-
-        retval = quick_dialog (&qdlg);
-    }
-
-    g_free (repl_from);
-    g_free (repl_to);
-
-    return retval;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -822,6 +685,136 @@ edit_search_cmd (WEdit *edit, gboolean again)
         // if not... then ask for an expression
         edit_search (edit);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *replace_default,
+                          /*@out@ */ char **search_text, /*@out@ */ char **replace_text)
+{
+    size_t num_of_types = 0;
+    gchar **list_of_types;
+
+    if ((search_default == NULL) || (*search_default == '\0'))
+        search_default = INPUT_LAST_TEXT;
+
+    list_of_types = mc_search_get_types_strings_array (&num_of_types);
+
+    {
+        quick_widget_t quick_widgets[] = {
+            // clang-format off
+            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, search_default,
+                                 MC_HISTORY_SHARED_SEARCH, search_text, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_NONE),
+            QUICK_LABELED_INPUT (N_ ("Enter replacement string:"), input_label_above,
+                                 replace_default, "replace", replace_text, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_NONE),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_START_COLUMNS,
+                QUICK_RADIO (num_of_types, (const char **) list_of_types,
+                             (int *) &edit_search_options.type, NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
+                QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
+                QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
+#ifdef HAVE_CHARSET
+                QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
+#endif
+            QUICK_STOP_COLUMNS,
+            QUICK_BUTTONS_OK_CANCEL,
+            QUICK_END,
+            // clang-format on
+        };
+
+        WRect r = { -1, -1, 0, 58 };
+
+        quick_dialog_t qdlg = {
+            .rect = r,
+            .title = N_ ("Replace"),
+            .help = "[Input Line Keys]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL,
+        };
+
+        if (quick_dialog (&qdlg) != B_CANCEL)
+            edit->replace_mode = 0;
+        else
+        {
+            *replace_text = NULL;
+            *search_text = NULL;
+        }
+    }
+
+    g_strfreev (list_of_types);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, int xpos, int ypos)
+{
+    Widget *w = WIDGET (edit);
+
+    // dialog size
+    int dlg_height = 10;
+    int dlg_width;
+
+    char tmp[BUF_MEDIUM];
+    char *repl_from, *repl_to;
+    int retval;
+
+    if (xpos == -1)
+        xpos = w->rect.x + edit_options.line_state_width + 1;
+    if (ypos == -1)
+        ypos = w->rect.y + w->rect.lines / 2;
+    // Sometimes menu can hide replaced text. I don't like it
+    if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + dlg_height - 1))
+        ypos -= dlg_height;
+
+    dlg_width = WIDGET (w->owner)->rect.cols - xpos - 1;
+
+    g_snprintf (tmp, sizeof (tmp), "\"%s\"", from_text);
+    repl_from = g_strdup (str_trunc (tmp, dlg_width - 7));
+
+    g_snprintf (tmp, sizeof (tmp), "\"%s\"", to_text);
+    repl_to = g_strdup (str_trunc (tmp, dlg_width - 7));
+
+    {
+        quick_widget_t quick_widgets[] = {
+            // clang-format off
+            QUICK_LABEL (repl_from, NULL),
+            QUICK_LABEL (N_ ("Replace with:"), NULL),
+            QUICK_LABEL (repl_to, NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_ ("&Replace"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (N_ ("A&ll"), B_REPLACE_ALL, NULL, NULL),
+                QUICK_BUTTON (N_ ("&Skip"), B_SKIP_REPLACE, NULL, NULL),
+                QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END,
+            // clang-format on
+        };
+
+        WRect r = { ypos, xpos, 0, -1 };
+
+        quick_dialog_t qdlg = {
+            .rect = r,
+            .title = N_ ("Confirm replace"),
+            .help = NULL,
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL,
+        };
+
+        retval = quick_dialog (&qdlg);
+    }
+
+    g_free (repl_from);
+    g_free (repl_to);
+
+    return retval;
 }
 
 /* --------------------------------------------------------------------------------------------- */
