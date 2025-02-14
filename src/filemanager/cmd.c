@@ -642,13 +642,13 @@ view_filtered_cmd (const WPanel *panel)
 void
 edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_line)
 {
-
 #ifdef USE_INTERNAL_EDIT
     if (internal)
     {
         const edit_arg_t arg = { (vfs_path_t *) what_vpath, start_line };
 
         edit_file (&arg);
+        dialog_switch_process_pending ();
     }
     else
 #endif
@@ -666,16 +666,6 @@ edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_l
 
         execute_external_editor_or_viewer (editor, what_vpath, start_line);
     }
-
-    if (mc_global.mc_run_mode == MC_RUN_FULL)
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-
-#ifdef USE_INTERNAL_EDIT
-    if (use_internal_edit)
-        dialog_switch_process_pending ();
-    else
-#endif
-        repaint_screen ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
