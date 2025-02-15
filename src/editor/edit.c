@@ -825,7 +825,8 @@ static void
 edit_end_page (WEdit *edit)
 {
     edit_update_curs_row (edit);
-    edit_move_down (edit, WIDGET (edit)->rect.lines - edit->curs_row - 1, FALSE);
+    edit_move_down (edit, WIDGET (edit)->rect.lines - edit->curs_row - (edit->fullscreen ? 1 : 3),
+                    FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
