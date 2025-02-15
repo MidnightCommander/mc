@@ -2061,8 +2061,14 @@ move_down (WPanel *panel)
 {
     int items;
 
-    if (panel->dir.len == 0 || panel->current + 1 == panel->dir.len)
+    if (panel->dir.len == 0)
         return;
+
+    if (panel->current >= panel->dir.len - 1)
+    {
+        panel->current = panel->dir.len - 1;
+        return;
+    }
 
     unselect_item (panel);
     panel->current++;
