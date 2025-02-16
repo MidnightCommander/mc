@@ -3950,7 +3950,7 @@ panel_mouse_is_on_item (const WPanel *panel, int y, int x)
     y += panel->top + lines * col;
 
     // are we below or in the next column of last file?
-    if (y > panel->dir.len)
+    if (y >= panel->dir.len)
         return MOUSE_AFTER_LAST_FILE;
 
     // we are on item of the file file; return an index to select a file
