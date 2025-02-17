@@ -2061,8 +2061,14 @@ move_down (WPanel *panel)
 {
     int items;
 
-    if (panel->dir.len == 0 || panel->current + 1 == panel->dir.len)
+    if (panel->dir.len == 0)
         return;
+
+    if (panel->current >= panel->dir.len - 1)
+    {
+        panel->current = panel->dir.len - 1;
+        return;
+    }
 
     unselect_item (panel);
     panel->current++;
@@ -3944,7 +3950,7 @@ panel_mouse_is_on_item (const WPanel *panel, int y, int x)
     y += panel->top + lines * col;
 
     // are we below or in the next column of last file?
-    if (y > panel->dir.len)
+    if (y >= panel->dir.len)
         return MOUSE_AFTER_LAST_FILE;
 
     // we are on item of the file file; return an index to select a file
