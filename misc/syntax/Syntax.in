@@ -330,6 +330,9 @@ include r.syntax
 file ..\*\\.(?i:md)$ Markdown
 include markdown.syntax
 
+file ..\*\\.(?i:adoc)$ ASCIIDoc
+include asciidoc.syntax
+
 file ..\*\\.proto$ Protobuf\sFile
 include protobuf.syntax
 
@@ -356,6 +359,9 @@ include toml.syntax
 
 file .\*\\.(mch|ref|imp)$ B\sFile
 include b.syntax
+
+file ..\*\\.(?i:cbl|cob)$ Cobol\sProgram
+include cobol.syntax
 
 file .\* unknown
 include unknown.syntax
