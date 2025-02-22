@@ -228,7 +228,6 @@ dnl ############################################################################
 mc_CHECK_GLIB
 mc_G_MODULE_SUPPORTED
 mc_WITH_SCREEN
-mc_CHECK_SEARCH_TYPE
 dnl X11 support. Used to read keyboard modifiers when running under X11.
 mc_WITH_X
 
@@ -751,7 +750,6 @@ Configuration:
   Internal editor:                ${edit_msg}
   Diff viewer:                    ${diff_msg}
   Support for charset:            ${charset_msg}
-  Search type:                    ${SEARCH_TYPE}
 ])
 
 dnl option checking is disable by default due to AC_CONFIG_SUBDIRS

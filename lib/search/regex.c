@@ -269,7 +269,6 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString *ast
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef SEARCH_TYPE_GLIB
 /* A thin wrapper above g_regex_match_full that makes sure the string passed
  * to it is valid UTF-8 (unless G_REGEX_RAW compile flag was set), as it is a
  * requirement by glib and it might crash otherwise. See: mc ticket 3449.
@@ -319,15 +318,12 @@ mc_search__g_regex_match_full_safe (const GRegex *regex, const gchar *string, gs
     g_free (string_safe);
     return ret;
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_search__found_cond_t
-mc_search__regex_found_cond_one (mc_search_t *lc_mc_search, mc_search_regex_t *regex,
-                                 GString *search_str)
+mc_search__regex_found_cond_one (mc_search_t *lc_mc_search, GRegex *regex, GString *search_str)
 {
-#ifdef SEARCH_TYPE_GLIB
     GError *mcerror = NULL;
 
     if (!mc_search__g_regex_match_full_safe (regex, search_str->str, search_str->len, 0,
@@ -348,21 +344,7 @@ mc_search__regex_found_cond_one (mc_search_t *lc_mc_search, mc_search_regex_t *r
         return COND__NOT_FOUND;
     }
     lc_mc_search->num_results = g_match_info_get_match_count (lc_mc_search->regex_match_info);
-#else  // SEARCH_TYPE_GLIB
 
-    lc_mc_search->num_results =
-#    ifdef HAVE_PCRE2
-        pcre2_match (regex, (unsigned char *) search_str->str, search_str->len, 0, 0,
-                     lc_mc_search->regex_match_info, NULL);
-#    else
-        pcre_exec (regex, lc_mc_search->regex_match_info, search_str->str, search_str->len, 0, 0,
-                   lc_mc_search->iovector, MC_SEARCH__NUM_REPLACE_ARGS);
-#    endif
-    if (lc_mc_search->num_results < 0)
-    {
-        return COND__NOT_FOUND;
-    }
-#endif
     return COND__FOUND_OK;
 }
 
@@ -443,12 +425,7 @@ mc_search_regex__get_token_by_num (const mc_search_t *lc_mc_search, gsize lc_ind
 {
     int fnd_start = 0, fnd_end = 0;
 
-#ifdef SEARCH_TYPE_GLIB
     g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &fnd_start, &fnd_end);
-#else  // SEARCH_TYPE_GLIB
-    fnd_start = lc_mc_search->iovector[lc_index * 2 + 0];
-    fnd_end = lc_mc_search->iovector[lc_index * 2 + 1];
-#endif
 
     if (fnd_end == fnd_start)
         return g_strdup ("");
@@ -807,7 +784,6 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
     }
 
     {
-#ifdef SEARCH_TYPE_GLIB
         GError *mcerror = NULL;
         GRegexCompileFlags g_regex_options = G_REGEX_OPTIMIZE | G_REGEX_DOTALL;
 
@@ -842,67 +818,6 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
             g_error_free (mcerror);
             return;
         }
-#else  // SEARCH_TYPE_GLIB
-
-#    ifdef HAVE_PCRE2
-        int errcode;
-        char error[BUF_SMALL] = "";
-        size_t erroffset;
-        int pcre_options = PCRE2_MULTILINE;
-#    else
-        const char *error;
-        int erroffset;
-        int pcre_options = PCRE_EXTRA | PCRE_MULTILINE;
-#    endif
-
-        if (str_isutf8 (charset) && mc_global.utf8_display)
-        {
-#    ifdef HAVE_PCRE2
-            pcre_options |= PCRE2_UTF;
-            if (!lc_mc_search->is_case_sensitive)
-                pcre_options |= PCRE2_CASELESS;
-#    else
-            pcre_options |= PCRE_UTF8;
-            if (!lc_mc_search->is_case_sensitive)
-                pcre_options |= PCRE_CASELESS;
-#    endif
-        }
-        else if (!lc_mc_search->is_case_sensitive)
-        {
-            GString *tmp;
-
-            tmp = mc_search_cond->str;
-            mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
-            g_string_free (tmp, TRUE);
-        }
-
-        mc_search_cond->regex_handle =
-#    ifdef HAVE_PCRE2
-            pcre2_compile ((unsigned char *) mc_search_cond->str->str, PCRE2_ZERO_TERMINATED,
-                           pcre_options, &errcode, &erroffset, NULL);
-#    else
-            pcre_compile (mc_search_cond->str->str, pcre_options, &error, &erroffset, NULL);
-#    endif
-        if (mc_search_cond->regex_handle == NULL)
-        {
-#    ifdef HAVE_PCRE2
-            pcre2_get_error_message (errcode, (unsigned char *) error, sizeof (error));
-#    endif
-            mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_COMPILE, "%s", error);
-            return;
-        }
-#    ifdef HAVE_PCRE2
-        if (pcre2_jit_compile (mc_search_cond->regex_handle, PCRE2_JIT_COMPLETE) && *error != '\0')
-#    else
-        lc_mc_search->regex_match_info = pcre_study (mc_search_cond->regex_handle, 0, &error);
-        if (lc_mc_search->regex_match_info == NULL && error != NULL)
-#    endif
-        {
-            mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_COMPILE, "%s", error);
-            MC_PTR_FREE (mc_search_cond->regex_handle);
-            return;
-        }
-#endif
     }
 
     lc_mc_search->is_utf8 = str_isutf8 (charset);
@@ -985,12 +900,7 @@ mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data, off_t st
         switch (mc_search__regex_found_cond (lc_mc_search, lc_mc_search->regex_buffer))
         {
         case COND__FOUND_OK:
-#ifdef SEARCH_TYPE_GLIB
             g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
-#else  // SEARCH_TYPE_GLIB
-            start_pos = lc_mc_search->iovector[0];
-            end_pos = lc_mc_search->iovector[1];
-#endif
             if (found_len != NULL)
                 *found_len = end_pos - start_pos;
             lc_mc_search->normal_offset = lc_mc_search->start_buffer + start_pos;

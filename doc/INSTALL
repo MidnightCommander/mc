@@ -25,8 +25,6 @@ Build requirements for GNU Midnight Commander
   - https://invisible-island.net/ncurses/ncurses.html
 - gettext >= 0.18.2
   - https://www.gnu.org/software/gettext/
-- pcre or pcre2 (as an alternative to glib-regexp)
-  - https://www.pcre.org
 - gpm (general purpose mouse daemon as an alternative to xterm mouse)
   - https://www.nico.schottelius.org/software/gpm/
 - libssh2 >= 1.2.8 (required only for sftp vfs)

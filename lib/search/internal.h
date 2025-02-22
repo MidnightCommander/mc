@@ -3,16 +3,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#ifdef SEARCH_TYPE_GLIB
-#    define mc_search_regex_t GRegex
-#else
-#    ifdef HAVE_PCRE2
-#        define mc_search_regex_t pcre2_code
-#    else
-#        define mc_search_regex_t pcre
-#    endif
-#endif
-
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -32,7 +22,7 @@ typedef struct mc_search_cond_struct
     GString *str;
     GString *upper;
     GString *lower;
-    mc_search_regex_t *regex_handle;
+    GRegex *regex_handle;
     gchar *charset;
 } mc_search_cond_t;
 

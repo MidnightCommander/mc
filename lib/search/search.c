@@ -71,10 +71,7 @@ mc_search__cond_struct_new (mc_search_t *lc_mc_search, const GString *str, const
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
     mc_search_cond->str = mc_g_string_dup (str);
     mc_search_cond->charset = g_strdup (charset);
-#ifdef HAVE_PCRE2
-    lc_mc_search->regex_match_info = pcre2_match_data_create (MC_SEARCH__NUM_REPLACE_ARGS, NULL);
-    lc_mc_search->iovector = pcre2_get_ovector_pointer (lc_mc_search->regex_match_info);
-#endif
+
     switch (lc_mc_search->search_type)
     {
     case MC_SEARCH_T_GLOB:
@@ -111,12 +108,8 @@ mc_search__cond_struct_free (gpointer data)
     g_string_free (mc_search_cond->str, TRUE);
     g_free (mc_search_cond->charset);
 
-#ifdef SEARCH_TYPE_GLIB
     if (mc_search_cond->regex_handle != NULL)
         g_regex_unref (mc_search_cond->regex_handle);
-#else  // SEARCH_TYPE_GLIB
-    g_free (mc_search_cond->regex_handle);
-#endif
 
     g_free (mc_search_cond);
 }
@@ -188,12 +181,8 @@ mc_search_free (mc_search_t *lc_mc_search)
     if (lc_mc_search->prepared.conditions != NULL)
         g_ptr_array_free (lc_mc_search->prepared.conditions, TRUE);
 
-#ifdef SEARCH_TYPE_GLIB
     if (lc_mc_search->regex_match_info != NULL)
         g_match_info_free (lc_mc_search->regex_match_info);
-#else  // SEARCH_TYPE_GLIB
-    g_free (lc_mc_search->regex_match_info);
-#endif
 
     if (lc_mc_search->regex_buffer != NULL)
         g_string_free (lc_mc_search->regex_buffer, TRUE);
@@ -282,13 +271,12 @@ mc_search_run (mc_search_t *lc_mc_search, const void *user_data, off_t start_sea
         mc_search_set_error (lc_mc_search, MC_SEARCH_E_INPUT, "%s", _ (STR_E_UNKNOWN_TYPE));
         return FALSE;
     }
-#ifdef SEARCH_TYPE_GLIB
+
     if (lc_mc_search->regex_match_info != NULL)
     {
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
     }
-#endif
 
     mc_search_set_error (lc_mc_search, MC_SEARCH_E_OK, NULL);
 
@@ -455,7 +443,6 @@ mc_search_getstart_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         return 0;
     if (lc_mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
-#ifdef SEARCH_TYPE_GLIB
     {
         gint start_pos;
         gint end_pos;
@@ -463,9 +450,6 @@ mc_search_getstart_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) start_pos;
     }
-#else  // SEARCH_TYPE_GLIB
-    return lc_mc_search->iovector[lc_index * 2];
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -477,7 +461,6 @@ mc_search_getend_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         return 0;
     if (lc_mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
-#ifdef SEARCH_TYPE_GLIB
     {
         gint start_pos;
         gint end_pos;
@@ -485,9 +468,6 @@ mc_search_getend_result_by_num (mc_search_t *lc_mc_search, int lc_index)
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) end_pos;
     }
-#else  // SEARCH_TYPE_GLIB
-    return lc_mc_search->iovector[lc_index * 2 + 1];
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
