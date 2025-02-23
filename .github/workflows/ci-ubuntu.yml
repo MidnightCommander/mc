@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install -y autoconf autopoint check gettext libtool pkg-config
-          sudo apt-get install -y e2fslibs-dev libaspell-dev libglib2.0-dev libgpm-dev libncurses5-dev libpcre2-dev libslang2-dev libssh2-1-dev libx11-dev unzip
+          sudo apt-get install -y e2fslibs-dev libaspell-dev libglib2.0-dev libgpm-dev libncurses5-dev libslang2-dev libssh2-1-dev libx11-dev unzip
 
       - name: Bootstrap build system
         run: ./autogen.sh
@@ -43,7 +43,7 @@ jobs:
           make check
           make install
 
-      - name: Build ncurses & pcre2 configuration
+      - name: Build ncurses configuration
         run: |
           tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-ncurses
           cd build-ncurses
@@ -51,7 +51,6 @@ jobs:
           ../configure \
               --prefix="$(pwd)/install" \
               --with-screen=ncurses \
-              --with-search-engine=pcre2 \
               --enable-werror
 
           make -j$(nproc)
