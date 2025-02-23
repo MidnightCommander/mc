@@ -211,7 +211,7 @@ int macro_index = -1;
 /* macro stuff */
 struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
 
-GArray *macros_list;
+GArray *macros_list = NULL;
 #endif
 
 /*** file scope macro definitions ****************************************************************/
