@@ -1,0 +1,63 @@
+name: Process incoming issues
+
+on:
+  issues:
+    types: [ opened ]
+
+env:
+  GQL_HEADERS: "{headers: {'GraphQL-Features': 'issue_types'}}"
+  ISSUE_TYPE_TASK_ID: IT_kwDOABIuus4AAqnX
+
+jobs:
+  set-default-issue-type:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    if: ${{ ! github.event.issue.pull_request }}
+
+    permissions:
+      issues: write
+
+    steps:
+      - uses: actions/github-script@v7
+        id: get-issue-type
+        with:
+          script: |
+            return github.graphql(`
+              query {
+                repository(owner: "${context.repo.owner}", name: "${context.repo.repo}") {
+                  issue(number: ${{ github.event.issue.number }}) {
+                    issueType {
+                      name
+                    }
+                  }
+                }
+              }
+            `, ${{ env.GQL_HEADERS }})
+
+      - run: echo "${{ steps.get-issue-type.outputs.result }}"
+
+      - uses: actions/github-script@v7
+        id: set-issue-type
+        if: ${{ ! steps.get-issue-type.outputs.result.repository.issue.issueType }}
+        with:
+          script: |
+            return github.graphql(`
+              mutation {
+                updateIssueIssueType(input: {
+                  issueId: "${{ github.event.issue.node_id }}",
+                  issueTypeId: "${{ env.ISSUE_TYPE_TASK_ID }}"
+                }) {
+                  issue {
+                    id
+                  }
+                }
+              }
+            `, ${{ env.GQL_HEADERS }})
+
+      - run: |
+          gh issue edit ${{ github.event.issue.number }} \
+            --milestone "Future Releases"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
