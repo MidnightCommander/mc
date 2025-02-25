@@ -1,9 +1,26 @@
-Thank you for thinking about contributing to Midnight Commander, but we **ARE NOT** using pull requests to manage incoming patches!
+## Proposed changes
 
-Instead, please check out our Trac instance to see if the issue has already been reported, or submit a new ticket:
+<!--
+⚠️ Please remove these instructions when submitting the PR! ⚠️
 
-https://midnight-commander.org/wiki/NewTicket
+Describe the big picture of your changes here, to communicate to the maintainers why we should accept this pull request. If it fixes a bug or resolves a feature request, be sure to link to that issue.
+-->
 
-If you chose to submit the pull request instead, keep in mind that we are not checking on them regularly, so it might take ages before we even get to it, if at all.
+Resolves: #...
 
-Unfortunately, GitHub does not allow us to disable the pull requests feature for this repository, so we have to warn you this way...
+## Checklist
+
+<!-- _Put an `x` in the boxes that apply:_ -->
+
+- [ ] I have referenced the issue(s) resolved by this PR (if any)
+- [ ] Lint and unit tests pass locally with my changes (`make indent && make check`)
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] I have added the necessary documentation (if appropriate)
+
+<!--
+⚠️ Please remove these instructions when submitting the PR! ⚠️
+
+This checklist is a reminder of what we will be looking for before merging your code. The more complete your contribution is, the more likely it is to be reviewed and accepted in a timely manner.
+
+If you're unsure about anything, don't hesitate to ask. We're here to help!
+-->
