@@ -1,0 +1,47 @@
+name: Feature request
+description: Suggest an idea for Midnight Commander
+labels: [ 'needs triage', 'prio: medium' ]
+type: Feature
+
+body:
+
+  - type: checkboxes
+    id: search-confirmation
+    attributes:
+      label: Is there an existing request for this?
+      description: 'Please [search :mag: the issues](/MidnightCommander/mc/issues) to check if this feature has already been requested.'
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: Is your feature request related to a problem?
+      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...].
+    validations:
+      required: true
+
+  - type: textarea
+    id: possible-solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives-considered
+    attributes:
+      label: Describe alternatives you've considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context or screenshots about the feature request here.
+    validations:
+      required: false

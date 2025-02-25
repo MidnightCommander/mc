@@ -1,0 +1,13 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Questions or discussions about Midnight Commander
+    url: https://github.com/MidnightCommander/mc/discussions
+    about: Please ask for support and answer questions here
+
+  - name: List for Midnight Commander users
+    url: https://lists.midnight-commander.org/mailman/listinfo/mc
+    about: If you prefer mailing lists, post your questions to the users list
+  - name: List for Midnight Commander developers
+    url: https://lists.midnight-commander.org/mailman/listinfo/mc-devel
+    about: If you prefer mailing lists, post development-related messages to the developers list

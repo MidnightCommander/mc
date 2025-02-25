@@ -1,0 +1,77 @@
+name: Bug report
+description: Create a new bug report
+labels: [ 'needs triage', 'prio: medium' ]
+type: Bug
+
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        Please briefly explain what is not working properly.
+
+        :stop_sign: _Make sure you are reporting an issue. For general questions, please use [Discussions](/MidnightCommander/mc/discussions)._
+
+  - type: checkboxes
+    id: search-confirmation
+    attributes:
+      label: Is there an existing issue for this?
+      description: 'Please [search :mag: the issues](/MidnightCommander/mc/issues) to check if this bug has already been reported.'
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: mc-version
+    attributes:
+      label: Midnight Commander version
+      description: What Midnight Commander version are you running?
+      placeholder: Output of `mc -V`
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: mc-os
+    attributes:
+      label: Operating system
+      description: What operating system do you use?
+      placeholder: Output of `uname -a`
+      render: shell
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: reproducible-latest
+    attributes:
+      label: Is this issue reproducible using the latest version of Midnight Commander?
+      description: |
+        Check [Releases](/MidnightCommander/mc/tags) for the latest version of Midnight Commander. If you are not up to date, please try to reproduce your problem after updating to the latest version.
+      options:
+        - label: I confirm the issue is still reproducible with the latest version of Midnight Commander
+
+  - type: textarea
+    id: behavior-current
+    attributes:
+      label: Current behavior
+      description: Describe the problem you are experiencing. Screenshots or screencasts are welcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior-expected
+    attributes:
+      label: Expected behavior
+      description: Describe what you expect to happen instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: If needed, please provide additional information about your issue (attachments, links, references, etc.).
+
+  - type: markdown
+    attributes:
+      value: ':stop_sign: _Make sure you are reporting an issue. For general questions, please use [Discussions](/MidnightCommander/mc/discussions)._'
