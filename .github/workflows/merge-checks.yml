@@ -1,0 +1,36 @@
+# This file was added by Pulumi and should not be edited manually.
+
+name: Merge checks
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request_target:
+
+jobs:
+  merge-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+
+    permissions:
+      contents: read
+      statuses: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/github-script@v7
+        id: get-head-hash
+        with:
+          result-encoding: string
+          script: |
+            core.setOutput("value", context.eventName == "pull_request_target" ? context.payload.pull_request.head.sha : context.sha);
+
+      - name: Merge checks
+        uses: midnightcommander/action-merge-checks@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          head_sha: ${{ steps.get-head-hash.outputs.value }}
