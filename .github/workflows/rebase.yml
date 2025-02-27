@@ -1,0 +1,44 @@
+# This file was added by Pulumi and should not be edited manually.
+
+name: Rebase command
+
+on:
+  issue_comment:
+    types: [ created ]
+
+jobs:
+  rebase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
+    if: github.event.issue.pull_request && github.event.comment.body == '/rebase' && github.event.comment.author_association == 'MEMBER'
+
+    permissions:
+      contents: read
+      pull-requests: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token
+          fetch-depth: 0
+          ssh-key: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
+          show-progress: false
+
+      - name: Checkout PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr checkout ${{ github.event.issue.number }}
+
+      # Warning: beware of running any user-injected content from this point on (CWE-829)!
+
+      - name: Rebase and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash origin/master
+
+          git push -u origin HEAD --force-with-lease
