@@ -48,4 +48,4 @@ jobs:
           git add .
           git commit -m "Deploy to GitHub Pages"
 
-          git push --force-with-lease
+          git push
