@@ -6,9 +6,13 @@ on:
 jobs:
   build-alpine:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+
     container:
       image: alpine:latest
-    timeout-minutes: 5
+
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
