@@ -6,9 +6,13 @@ on:
 jobs:
   build-fedora:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+
     container:
       image: fedora:latest
-    timeout-minutes: 5
+
+    permissions:
+      contents: read
 
     steps:
       - name: Install git inside container
