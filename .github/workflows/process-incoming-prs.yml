@@ -12,6 +12,9 @@ jobs:
     permissions:
       pull-requests: write
 
+      # https://github.com/cli/cli/issues/6274
+      repository-projects: read
+
     steps:
       - run: |
           gh pr edit ${{ github.event.pull_request.number }}  \
