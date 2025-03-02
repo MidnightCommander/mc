@@ -161,7 +161,7 @@ do_define_key (int code, const char *strcap)
 {
     char *seq;
 
-    seq = SLtt_tgetstr ((SLFUTURE_CONST char *) strcap);
+    seq = tty_tgetstr (strcap);
     if (seq != NULL)
         define_sequence (code, seq, MCKEY_NOACTION);
 }
@@ -306,7 +306,7 @@ tty_shutdown (void)
     /* Load the op capability to reset the colors to those that were
      * active when the program was started up
      */
-    op_cap = SLtt_tgetstr ((SLFUTURE_CONST char *) "op");
+    op_cap = tty_tgetstr ("op");
     if (op_cap != NULL)
     {
         fputs (op_cap, stdout);
@@ -403,8 +403,7 @@ tty_keypad (gboolean set)
 {
     char *keypad_string;
 
-    keypad_string = SLtt_tgetstr ((SLFUTURE_CONST char *) (set ? "ks" : "ke"));
-
+    keypad_string = tty_tgetstr (set ? "ks" : "ke");
     if (keypad_string != NULL)
         SLtt_write_string (keypad_string);
 }
