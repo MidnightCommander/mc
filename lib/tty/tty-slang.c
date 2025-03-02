@@ -82,52 +82,6 @@ static gboolean no_slang_delay;
 
 static gboolean slsmg_active = FALSE;
 
-/* This table describes which capabilities we want and which values we
- * assign to them.
- */
-static const struct
-{
-    int key_code;
-    const char *key_name;
-} key_table[] = {
-    { KEY_F (0), "k0" },
-    { KEY_F (1), "k1" },
-    { KEY_F (2), "k2" },
-    { KEY_F (3), "k3" },
-    { KEY_F (4), "k4" },
-    { KEY_F (5), "k5" },
-    { KEY_F (6), "k6" },
-    { KEY_F (7), "k7" },
-    { KEY_F (8), "k8" },
-    { KEY_F (9), "k9" },
-    { KEY_F (10), "k;" },
-    { KEY_F (11), "F1" },
-    { KEY_F (12), "F2" },
-    { KEY_F (13), "F3" },
-    { KEY_F (14), "F4" },
-    { KEY_F (15), "F5" },
-    { KEY_F (16), "F6" },
-    { KEY_F (17), "F7" },
-    { KEY_F (18), "F8" },
-    { KEY_F (19), "F9" },
-    { KEY_F (20), "FA" },
-    { KEY_IC, "kI" },
-    { KEY_NPAGE, "kN" },
-    { KEY_PPAGE, "kP" },
-    { KEY_LEFT, "kl" },
-    { KEY_RIGHT, "kr" },
-    { KEY_UP, "ku" },
-    { KEY_DOWN, "kd" },
-    { KEY_DC, "kD" },
-    { KEY_BACKSPACE, "kb" },
-    { KEY_HOME, "kh" },
-    { KEY_END, "@7" },
-    {
-        0,
-        NULL,
-    },
-};
-
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -253,7 +207,6 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     tcgetattr (SLang_TT_Read_FD, &new_mode);
 
     tty_reset_prog_mode ();
-    load_terminfo_keys ();
     init_key ();
 
     SLtt_Blink_Mode = (tty_use_256colors (NULL) || tty_use_truecolors (NULL)) ? 1 : 0;
