@@ -18,9 +18,6 @@ AC_DEFUN([mc_WITH_SCREEN], [
     xncurses)
         mc_WITH_NCURSES
         ;;
-    xncursesw)
-        mc_WITH_NCURSESW
-        ;;
     *)
         AC_MSG_ERROR([Value of the screen library is incorrect])
         ;;

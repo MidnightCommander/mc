@@ -7,22 +7,18 @@
 #    define _XOPEN_SOURCE_EXTENDED
 #endif
 
-#ifdef USE_NCURSES
-#    ifdef HAVE_NCURSES_CURSES_H
-#        include <ncurses/curses.h>
-#    elif defined(HAVE_NCURSES_NCURSES_H)
-#        include <ncurses/ncurses.h>
-#    elif defined(HAVE_NCURSESW_CURSES_H)
-#        include <ncursesw/curses.h>
-#    elif defined(HAVE_NCURSES_HCURSES_H) || defined(HAVE_NCURSES_H)
-#        include <ncurses.h>
-#    else
-#        include <curses.h>
-#    endif
-#endif
-
-#ifdef USE_NCURSESW
+#ifdef HAVE_NCURSESW_NCURSES_H
+#    include <ncursesw/ncurses.h>
+#elif defined(HAVE_NCURSESW_CURSES_H)
 #    include <ncursesw/curses.h>
+#elif defined(HAVE_NCURSES_NCURSES_H)
+#    include <ncurses/ncurses.h>
+#elif defined(HAVE_NCURSES_CURSES_H)
+#    include <ncurses/curses.h>
+#elif defined(HAVE_NCURSES_H)
+#    include <ncurses.h>
+#else
+#    include <curses.h>
 #endif
 
 /* netbsd-libcurses doesn't define NCURSES_CONST */
