@@ -157,24 +157,18 @@ sigwinch_handler (int dummy)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_define_key (int code, const char *strcap)
-{
-    char *seq;
-
-    seq = tty_tgetstr (strcap);
-    if (seq != NULL)
-        define_sequence (code, seq, MCKEY_NOACTION);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 load_terminfo_keys (void)
 {
     int i;
 
     for (i = 0; key_table[i].key_code; i++)
-        do_define_key (key_table[i].key_code, key_table[i].key_name);
+    {
+        char *seq;
+
+        seq = tty_tgetstr (key_table[i].key_name);
+        if (seq != NULL)
+            define_sequence (key_table[i].key_code, seq, MCKEY_NOACTION);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
