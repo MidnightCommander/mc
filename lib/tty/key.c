@@ -886,9 +886,18 @@ define_term_sequences (term_key_define_t * kd)
 
         /* Check terminfo at first... */
         seq = tty_tgetstr (kd[i].terminfo_name);
+        if (seq != NULL)
+            mc_log ("Terminfo: %s: %s\n", kd[i].terminfo_name, seq);
+        else if (kd[i].termcap_name != NULL)
+            mc_log ("Terminfo: %s: sequence is NULL, try termcap: %s: ",
+                    kd[i].terminfo_name, kd[i].termcap_name);
+
         /* ...then check termcap */
         if (seq == NULL && kd[i].termcap_name != NULL)
+        {
             seq = tty_tgetstr (kd[i].termcap_name);
+            mc_log ("%s.\n", seq != NULL ? seq : "NULL");
+        }
 
         kd[i].seq = seq;
     }
