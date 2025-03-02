@@ -13,6 +13,7 @@ Resolves: #...
 <!-- _Put an `x` in the boxes that apply:_ -->
 
 - [ ] I have referenced the issue(s) resolved by this PR (if any)
+- [ ] I have signed-off my contribution with `git commit --amend -s`
 - [ ] Lint and unit tests pass locally with my changes (`make indent && make check`)
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] I have added the necessary documentation (if appropriate)
