@@ -253,6 +253,15 @@ typedef struct
     int action;
 } key_define_t;
 
+typedef struct
+{
+    int code;
+    const char *terminfo_name;
+    const char *termcap_name;
+    const char *seq;
+    int action;
+} term_key_define_t;
+
 /* File descriptor monitoring add/remove routines */
 typedef struct
 {
@@ -285,6 +294,175 @@ static key_define_t mc_default_keys[] = {
     { MCKEY_BRACKETED_PASTING_END, ESC_STR "[201~", MCKEY_NOACTION },
     { 0, NULL, MCKEY_NOACTION },
 };
+
+// Termcap/terminfo keys
+/*
+  Based on:
+  https://gist.github.com/ketsuban/651e24c2d59506922d928c65c163d79c
+  https://man7.org/linux/man-pages/man5/terminfo.5.html
+  https://www.gnu.org/software/termutils/manual/termcap-1.3/html_node/termcap_37.html
+ */
+// clang-format off
+static term_key_define_t term_key_defines[] = {
+    /* Backspace */               { KEY_BACKSPACE,                                    "kbs",   "kb", NULL, MCKEY_NOACTION },
+    /* Ctrl-Backspace */          { KEY_M_CTRL | KEY_BACKSPACE,                       "cub1",  "le", NULL, MCKEY_NOACTION },
+
+    /* Insert */                  { KEY_IC,                                           "kich1", "kI", NULL, MCKEY_NOACTION },
+    /* Shift-Insert */            { KEY_M_SHIFT | KEY_IC,                             "kIC",   "#3", NULL, MCKEY_NOACTION },
+    /* Alt-Insert */              { KEY_M_ALT | KEY_IC,                               "kIC3",  NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Insert */        { KEY_M_SHIFT | KEY_M_ALT | KEY_IC,                 "kIC4",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Insert */             { KEY_M_CTRL | KEY_IC,                              "kIC5",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Insert */       { KEY_M_CTRL | KEY_M_SHIFT | KEY_IC,                "kIC6",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Insert */         { KEY_M_CTRL | KEY_M_ALT | KEY_IC,                  "kIC7",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Insert */   { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_IC,    "kIC8",  NULL, NULL, MCKEY_NOACTION },
+
+    /* Delete */                  { KEY_DC,                                           "kdch1", "kD", NULL, MCKEY_NOACTION },
+    /* Shift-Delete */            { KEY_M_SHIFT | KEY_DC,                             "kDC",   "*4", NULL, MCKEY_NOACTION },
+    /* Alt-Delete */              { KEY_M_ALT | KEY_DC,                               "kDC3",  NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Delete */        { KEY_M_SHIFT | KEY_M_ALT | KEY_DC,                 "kDC4",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Insert */             { KEY_M_CTRL | KEY_DC,                              "kDC5",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Delete */       { KEY_M_CTRL | KEY_M_SHIFT | KEY_DC,                "kDC6",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Delete */         { KEY_M_CTRL | KEY_M_ALT | KEY_DC,                  "kDC7",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Delete */   { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_DC,    "kDC8",  NULL, NULL, MCKEY_NOACTION },
+
+    /* Home */                    { KEY_HOME,                                         "khome", "kh", NULL, MCKEY_NOACTION },
+    /* Shift-Home */              { KEY_M_SHIFT | KEY_HOME,                           "kHOM",  "#2", NULL, MCKEY_NOACTION },
+    /* Alt-Home */                { KEY_M_ALT | KEY_HOME,                             "kHOM3", NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Home */          { KEY_M_SHIFT | KEY_M_ALT | KEY_HOME,               "kHOM4", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Home */               { KEY_M_CTRL | KEY_HOME,                            "kHOM5", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Home */         { KEY_M_CTRL | KEY_M_SHIFT | KEY_HOME,              "kHOM6", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Home */           { KEY_M_CTRL | KEY_M_ALT | KEY_HOME,                "kHOM7", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Home */     { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_HOME,  "kHOM8", NULL, NULL, MCKEY_NOACTION },
+
+    /* Emd */                     { KEY_END,                                          "kend",  "@7", NULL, MCKEY_NOACTION },
+    /* Shift-Emd */               { KEY_M_SHIFT | KEY_END,                            "kEND",  "*7", NULL, MCKEY_NOACTION },
+    /* Alt-Emd */                 { KEY_M_ALT | KEY_END,                              "kEND3", NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Emd */           { KEY_M_SHIFT | KEY_M_ALT | KEY_END,                "kEND4", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Emd */                { KEY_M_CTRL | KEY_END,                             "kEND5", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Emd */          { KEY_M_CTRL | KEY_M_SHIFT | KEY_END,               "kEND6", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Emd */            { KEY_M_CTRL | KEY_M_ALT | KEY_END,                 "kEND7", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Emd */      { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_END,   "kEND8", NULL, NULL, MCKEY_NOACTION },
+
+    /* PageUp */                  { KEY_PPAGE,                                        "kpp",   "kP", NULL, MCKEY_NOACTION },
+    /* Shift-PageUp */            { KEY_M_SHIFT | KEY_PPAGE,                          "kPRV",  "%e", NULL, MCKEY_NOACTION },
+    /* Alt-PageUp */              { KEY_M_ALT | KEY_PPAGE,                            "kPRV3", NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-PageUp */        { KEY_M_SHIFT | KEY_M_ALT | KEY_PPAGE,              "kPRV4", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-PageUp */             { KEY_M_CTRL | KEY_PPAGE,                           "kPRV5", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-PageUp */       { KEY_M_CTRL | KEY_M_SHIFT | KEY_PPAGE,             "kPRV6", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-PageUp */         { KEY_M_CTRL | KEY_M_ALT | KEY_PPAGE,               "kPRV7", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-PageUp */   { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_PPAGE, "kPRV8", NULL, NULL, MCKEY_NOACTION },
+
+    /* PageDown */                { KEY_NPAGE,                                        "knp",   "kN", NULL, MCKEY_NOACTION },
+    /* Shift-PageDown */          { KEY_M_SHIFT | KEY_NPAGE,                          "kNXT",  "%c", NULL, MCKEY_NOACTION },
+    /* Alt-PageDown */            { KEY_M_ALT | KEY_NPAGE,                            "kNXT3", NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-PageDown */      { KEY_M_SHIFT | KEY_M_ALT | KEY_NPAGE,              "kNXT4", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-PageDown */           { KEY_M_CTRL | KEY_NPAGE,                           "kNXT5", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-PageDown */     { KEY_M_CTRL | KEY_M_SHIFT | KEY_NPAGE,             "kNXT6", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-PageDown */       { KEY_M_CTRL | KEY_M_ALT | KEY_NPAGE,               "kNXT7", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-PageDown */ { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_NPAGE, "kNXT8", NULL, NULL, MCKEY_NOACTION },
+
+    /* Up */                      { KEY_UP,                                           "kcuu1", "ku", NULL, MCKEY_NOACTION },
+    /* Shift-Up */                { KEY_M_SHIFT | KEY_UP,                             "kUP",   NULL, NULL, MCKEY_NOACTION },
+    /* Alt-Up */                  { KEY_M_ALT | KEY_UP,                               "kUP3",  NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Up */            { KEY_M_SHIFT | KEY_M_ALT | KEY_UP,                 "kUP4",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Up */                 { KEY_M_CTRL | KEY_UP,                              "kUP5",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Up */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_UP,                "kUP6",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Up */             { KEY_M_CTRL | KEY_M_ALT | KEY_UP,                  "kUP7",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Up */       { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_UP,    "kUP8",  NULL, NULL, MCKEY_NOACTION },
+
+    /* Down */                    { KEY_DOWN,                                         "kcud1", "kd", NULL, MCKEY_NOACTION },
+    /* Shift-Down */              { KEY_M_SHIFT | KEY_DOWN,                           "kDN",   NULL, NULL, MCKEY_NOACTION },
+    /* Alt-Down */                { KEY_M_ALT | KEY_DOWN,                             "kDN3",  NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Down */          { KEY_M_SHIFT | KEY_M_ALT | KEY_DOWN,               "kDN4",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Down */               { KEY_M_CTRL | KEY_DOWN,                            "kDN5",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Down */         { KEY_M_CTRL | KEY_M_SHIFT | KEY_DOWN,              "kDN6",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Down */           { KEY_M_CTRL | KEY_M_ALT | KEY_DOWN,                "kDN7",  NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Down */     { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_DOWN,  "kDN8",  NULL, NULL, MCKEY_NOACTION },
+
+    /* Right */                   { KEY_RIGHT,                                        "kcuf1", "kr", NULL, MCKEY_NOACTION },
+    /* Shift-Right */             { KEY_M_SHIFT | KEY_RIGHT,                          "kRIT",  "%i", NULL, MCKEY_NOACTION },
+    /* Alt-Right */               { KEY_M_ALT | KEY_RIGHT,                            "kRIT3", NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Right */         { KEY_M_SHIFT | KEY_M_ALT | KEY_RIGHT,              "kRIT4", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Right */              { KEY_M_CTRL | KEY_RIGHT,                           "kRIT5", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Right */        { KEY_M_CTRL | KEY_M_SHIFT | KEY_RIGHT,             "kRIT6", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Right */          { KEY_M_CTRL | KEY_M_ALT | KEY_RIGHT,               "kRIT7", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Right */    { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_RIGHT, "kRIT8", NULL, NULL, MCKEY_NOACTION },
+
+    /* Left */                    { KEY_LEFT,                                         "kcub1", "kl", NULL, MCKEY_NOACTION },
+    /* Shift-Left */              { KEY_M_SHIFT | KEY_LEFT,                           "kLFT",  "#4", NULL, MCKEY_NOACTION },
+    /* Alt-Left */                { KEY_M_ALT | KEY_LEFT,                             "kLFT3", NULL, NULL, MCKEY_NOACTION },
+    /* Shift-Alt-Left */          { KEY_M_SHIFT | KEY_M_ALT | KEY_LEFT,               "kLFT4", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Left */               { KEY_M_CTRL | KEY_LEFT,                            "kLFT5", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Left */         { KEY_M_CTRL | KEY_M_SHIFT | KEY_LEFT,              "kLFT6", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Alt-Left */           { KEY_M_CTRL | KEY_M_ALT | KEY_LEFT,                "kLFT7", NULL, NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-Alt-Left */     { KEY_M_CTRL | KEY_M_SHIFT | KEY_M_ALT | KEY_LEFT,  "kLFT8", NULL, NULL, MCKEY_NOACTION },
+
+    /* F1 */                      { KEY_F(1),                                         "kf1",   "k1", NULL, MCKEY_NOACTION },
+    /* F2 */                      { KEY_F(2),                                         "kf2",   "k2", NULL, MCKEY_NOACTION },
+    /* F3 */                      { KEY_F(3),                                         "kf3",   "k3", NULL, MCKEY_NOACTION },
+    /* F4 */                      { KEY_F(4),                                         "kf4",   "k4", NULL, MCKEY_NOACTION },
+    /* F5 */                      { KEY_F(5),                                         "kf5",   "k5", NULL, MCKEY_NOACTION },
+    /* F6 */                      { KEY_F(6),                                         "kf6",   "k6", NULL, MCKEY_NOACTION },
+    /* F7 */                      { KEY_F(7),                                         "kf7",   "k7", NULL, MCKEY_NOACTION },
+    /* F8 */                      { KEY_F(8),                                         "kf8",   "k8", NULL, MCKEY_NOACTION },
+    /* F9 */                      { KEY_F(9),                                         "kf9",   "k9", NULL, MCKEY_NOACTION },
+    /* F10 */                     { KEY_F(10),                                        "kf10",  "k;", NULL, MCKEY_NOACTION },
+    /* F11 */                     { KEY_F(11),                                        "kf11",  "F1", NULL, MCKEY_NOACTION },
+    /* F12 */                     { KEY_F(12),                                        "kf12",  "F2", NULL, MCKEY_NOACTION },
+    /* Shift-F2 */                { KEY_M_SHIFT | KEY_F(2),                           "kf14",  "F4", NULL, MCKEY_NOACTION },
+    /* Shift-F3 */                { KEY_M_SHIFT | KEY_F(3),                           "kf15",  "F5", NULL, MCKEY_NOACTION },
+    /* Shift-F4 */                { KEY_M_SHIFT | KEY_F(4),                           "kf16",  "F6", NULL, MCKEY_NOACTION },
+    /* Shift-F5 */                { KEY_M_SHIFT | KEY_F(5),                           "kf17",  "F7", NULL, MCKEY_NOACTION },
+    /* Shift-F6 */                { KEY_M_SHIFT | KEY_F(6),                           "kf18",  "F8", NULL, MCKEY_NOACTION },
+    /* Shift-F7 */                { KEY_M_SHIFT | KEY_F(7),                           "kf19",  "F9", NULL, MCKEY_NOACTION },
+    /* Shift-F8 */                { KEY_M_SHIFT | KEY_F(8),                           "kf20",  "FA", NULL, MCKEY_NOACTION },
+    /* Shift-F9 */                { KEY_M_SHIFT | KEY_F(9),                           "kf21",  "FB", NULL, MCKEY_NOACTION },
+    /* Shift-F10 */               { KEY_M_SHIFT | KEY_F(10),                          "kf22",  "FC", NULL, MCKEY_NOACTION },
+    /* Shift-F11 */               { KEY_M_SHIFT | KEY_F(11),                          "kf23",  "FD", NULL, MCKEY_NOACTION },
+    /* Shift-F12 */               { KEY_M_SHIFT | KEY_F(12),                          "kf24",  "FE", NULL, MCKEY_NOACTION },
+    /* Ctrl-F1 */                 { KEY_M_CTRL | KEY_F(1),                            "kf25",  "FF", NULL, MCKEY_NOACTION },
+    /* Ctrl-F2 */                 { KEY_M_CTRL | KEY_F(2),                            "kf26",  "FG", NULL, MCKEY_NOACTION },
+    /* Ctrl-F3 */                 { KEY_M_CTRL | KEY_F(3),                            "kf27",  "FH", NULL, MCKEY_NOACTION },
+    /* Ctrl-F4 */                 { KEY_M_CTRL | KEY_F(4),                            "kf28",  "FI", NULL, MCKEY_NOACTION },
+    /* Ctrl-F5 */                 { KEY_M_CTRL | KEY_F(5),                            "kf29",  "FJ", NULL, MCKEY_NOACTION },
+    /* Ctrl-F6 */                 { KEY_M_CTRL | KEY_F(6),                            "kf30",  "FK", NULL, MCKEY_NOACTION },
+    /* Ctrl-F7 */                 { KEY_M_CTRL | KEY_F(7),                            "kf31",  "FL", NULL, MCKEY_NOACTION },
+    /* Ctrl-F8 */                 { KEY_M_CTRL | KEY_F(8),                            "kf32",  "FM", NULL, MCKEY_NOACTION },
+    /* Ctrl-F9 */                 { KEY_M_CTRL | KEY_F(9),                            "kf33",  "FN", NULL, MCKEY_NOACTION },
+    /* Ctrl-F10 */                { KEY_M_CTRL | KEY_F(10),                           "kf34",  "FO", NULL, MCKEY_NOACTION },
+    /* Ctrl-F11 */                { KEY_M_CTRL | KEY_F(11),                           "kf35",  "FP", NULL, MCKEY_NOACTION },
+    /* Ctrl-F12 */                { KEY_M_CTRL | KEY_F(12),                           "kf36",  "FQ", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F1 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(1),              "kf37",  "FR", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F2 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(2),              "kf38",  "FS", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F3 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(3),              "kf39",  "FT", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F4 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(4),              "kf40",  "FU", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F5 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(5),              "kf41",  "FV", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F6 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(6),              "kf42",  "FW", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F7 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(7),              "kf43",  "FX", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F8 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(8),              "kf44",  "FY", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F9 */           { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(9),              "kf45",  "FZ", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F10 */          { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(10),             "kf46",  "Fa", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F11 */          { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(11),             "kf47",  "Fb", NULL, MCKEY_NOACTION },
+    /* Ctrl-Shift-F12 */          { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(12),             "kf48",  "Fc", NULL, MCKEY_NOACTION },
+    /* Alt-F1 */                  { KEY_M_ALT | KEY_F(1),                             "kf49",  "Fd", NULL, MCKEY_NOACTION },
+    /* Alt-F2 */                  { KEY_M_ALT | KEY_F(2),                             "kf50",  "Fe", NULL, MCKEY_NOACTION },
+    /* Alt-F3 */                  { KEY_M_ALT | KEY_F(3),                             "kf51",  "Ff", NULL, MCKEY_NOACTION },
+    /* Alt-F4 */                  { KEY_M_ALT | KEY_F(4),                             "kf52",  "Fg", NULL, MCKEY_NOACTION },
+    /* Alt-F5 */                  { KEY_M_ALT | KEY_F(5),                             "kf53",  "Fh", NULL, MCKEY_NOACTION },
+    /* Alt-F6 */                  { KEY_M_ALT | KEY_F(6),                             "kf54",  "Fi", NULL, MCKEY_NOACTION },
+    /* Alt-F7 */                  { KEY_M_ALT | KEY_F(7),                             "kf55",  "Fj", NULL, MCKEY_NOACTION },
+    /* Alt-F8 */                  { KEY_M_ALT | KEY_F(8),                             "kf56",  "Fk", NULL, MCKEY_NOACTION },
+    /* Alt-F9 */                  { KEY_M_ALT | KEY_F(9),                             "kf57",  "Fl", NULL, MCKEY_NOACTION },
+    /* Alt-F10 */                 { KEY_M_ALT | KEY_F(10),                            "kf58",  "Fm", NULL, MCKEY_NOACTION },
+    /* Alt-F11 */                 { KEY_M_ALT | KEY_F(11),                            "kf59",  "Fn", NULL, MCKEY_NOACTION },
+    /* Alt-F12 */                 { KEY_M_ALT | KEY_F(12),                            "kf60",  "Fo", NULL, MCKEY_NOACTION },
+    /* Shift-Alt-F1 */            { KEY_M_SHIFT | KEY_M_ALT | KEY_F(1),               "kf61",  "Fp", NULL, MCKEY_NOACTION },
+    /* Shift-Alt-F2 */            { KEY_M_SHIFT | KEY_M_ALT | KEY_F(2),               "kf62",  "Fq", NULL, MCKEY_NOACTION },
+    /* Shift-Alt-F3 */            { KEY_M_SHIFT | KEY_M_ALT | KEY_F(3),               "kf63",  "Fr", NULL, MCKEY_NOACTION },
+
+                                  { 0,                                                NULL,    NULL, NULL, MCKEY_NOACTION },
+};
+// clang-format on
 
 /* Broken terminfo and termcap databases on xterminals */
 static key_define_t xterm_key_defines[] = {
@@ -693,6 +871,27 @@ define_sequences (const key_define_t *kd)
 
     for (i = 0; kd[i].code != 0; i++)
         define_sequence (kd[i].code, kd[i].seq, kd[i].action);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+define_term_sequences (term_key_define_t * kd)
+{
+    int i;
+
+    for (i = 0; kd[i].code != 0; i++)
+    {
+        char *seq = NULL;
+
+        /* Check terminfo at first... */
+        seq = tty_tgetstr (kd[i].terminfo_name);
+        /* ...then check termcap */
+        if (seq == NULL && kd[i].termcap_name != NULL)
+            seq = tty_tgetstr (kd[i].termcap_name);
+
+        kd[i].seq = seq;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1319,6 +1518,8 @@ init_key (void)
     // This has to be the first define_sequence
     // So, we can assume that the first keys member has ESC
     define_sequences (mc_default_keys);
+
+    define_term_sequences (term_key_defines);
 
     // Terminfo on irix does not have some keys
     if (mc_global.tty.xterm_flag
