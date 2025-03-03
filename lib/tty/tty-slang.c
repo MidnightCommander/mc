@@ -254,6 +254,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 
     tty_reset_prog_mode ();
     load_terminfo_keys ();
+    init_key ();
 
     SLtt_Blink_Mode = (tty_use_256colors (NULL) || tty_use_truecolors (NULL)) ? 1 : 0;
 
@@ -289,6 +290,7 @@ tty_shutdown (void)
     char *op_cap;
 
     tty_destroy_winch_pipe ();
+    done_key ();
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);

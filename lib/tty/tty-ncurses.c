@@ -302,6 +302,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 
     if (!mouse_enable)
         use_mouse_p = MOUSE_DISABLED;
+    init_key ();
     tty_init_xterm_support (is_xterm);  // do it before tty_enter_ca_mode() call
     tty_enter_ca_mode ();
     tty_raw_mode ();
@@ -318,6 +319,7 @@ void
 tty_shutdown (void)
 {
     tty_destroy_winch_pipe ();
+    done_key ();
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);
