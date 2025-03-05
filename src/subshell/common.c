@@ -461,7 +461,7 @@ init_subshell_child (const char *pty_name)
 
     case SHELL_FISH:
         execl (mc_global.shell->path, mc_global.shell->path, "--init-command",
-               "set --global __mc_csi_u 1", (char *) NULL);
+               "set --global __mc_kitty_keyboard 1", (char *) NULL);
         break;
 
     case SHELL_ASH_BUSYBOX:
