@@ -41,6 +41,7 @@
 #include <unistd.h>
 
 #include "lib/global.h"
+#include "lib/terminal.h"  // strip_ctrl_codes()
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/tty/key.h"
