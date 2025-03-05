@@ -98,6 +98,7 @@
 #include "lib/global.h"
 
 #include "lib/fileloc.h"
+#include "lib/terminal.h"
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"  // LINES
 #include "lib/tty/key.h"  // XCTRL

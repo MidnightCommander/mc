@@ -191,12 +191,6 @@ const char *extension (const char *);
 const char *unix_error_string (int error_num);
 const char *skip_separators (const char *s);
 const char *skip_numbers (const char *s);
-char *strip_ctrl_codes (char *s);
-
-/* Replaces "\\E" and "\\e" with "\033". Replaces "^" + [a-z] with
- * ((char) 1 + (c - 'a')). The same goes for "^" + [A-Z].
- * Returns a newly allocated string. */
-char *convert_controls (const char *s);
 
 /* overwrites passwd with '\0's and frees it. */
 void wipe_password (char *passwd);
