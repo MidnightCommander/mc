@@ -63,8 +63,8 @@
 char *
 strip_ctrl_codes (char *s)
 {
-    char *w;  // Current position where the stripped data is written
-    char *r;  // Current position where the original data is read
+    char *w;        // Current position where the stripped data is written
+    const char *r;  // Current position where the original data is read
 
     if (s == NULL)
         return NULL;
@@ -91,7 +91,7 @@ strip_ctrl_codes (char *s)
                  * OSC P s ; P t ST
                  * OSC P s ; P t BEL
                  */
-                char *new_r;
+                const char *new_r;
 
                 for (new_r = r; *new_r != '\0'; new_r++)
                 {
@@ -125,7 +125,7 @@ strip_ctrl_codes (char *s)
         }
         else
         {
-            char *n;
+            const char *n;
 
             n = str_cget_next_char (r);
             if (str_isprint (r))
