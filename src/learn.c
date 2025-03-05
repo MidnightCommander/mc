@@ -38,7 +38,8 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
-#include "lib/util.h"  // convert_controls()
+#include "lib/terminal.h"  // convert_controls()
+#include "lib/util.h"      // MC_PTR_FREE
 #include "lib/widget.h"
 
 #include "setup.h"
