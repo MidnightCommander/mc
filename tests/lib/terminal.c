@@ -51,6 +51,18 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+START_TEST (test_parse_csi)
+{
+    const char *s = &"\x1b[=5uRest"[2];
+    const char *end = s + strlen (s);
+    gboolean ok = parse_csi (NULL, &s, end);
+    ck_assert_msg (ok, "failed to parse");
+    ck_assert_str_eq (s, "Rest");
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 START_TEST (test_strip_ctrl_codes)
 {
     char *s = strdup (
@@ -76,6 +88,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
+    tcase_add_test (tc_core, test_parse_csi);
     tcase_add_test (tc_core, test_strip_ctrl_codes);
     // ***********************************
 
