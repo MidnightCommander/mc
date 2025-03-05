@@ -118,7 +118,7 @@
 
 /* State of the subshell:
  * INACTIVE: the default state; awaiting a command
- * ACTIVE: remain in the shell until the user hits 'subshell_switch_key'
+ * ACTIVE: remain in the shell until the user hits the subshell switch key
  * RUNNING_COMMAND: return to MC when the current command finishes */
 enum subshell_state_enum subshell_state;
 
@@ -177,12 +177,6 @@ enum
 static char tcsh_fifo[BUF_SMALL];
 
 static int subshell_pty_slave = -1;
-
-/* The key for switching back to MC from the subshell */
-static const char subshell_switch_key = XCTRL ('o') & 255;
-
-static const char subshell_switch_key_csi_u[] = "\x1b[111;5u";
-static const size_t subshell_switch_key_csi_u_len = sizeof (subshell_switch_key_csi_u) - 1;
 
 /* For reading/writing on the subshell's pty */
 static char pty_buffer[PTY_BUFFER_SIZE] = "\0";
@@ -780,6 +774,57 @@ set_prompt_string (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+enum kitty_keyboard_protocol_t
+{
+    MODIFIER_SHIFT = 0x01,
+    MODIFIER_CTRL = 0x04,
+    MODIFIER_CAPS_LOCK = 0x40,
+    MODIFIER_NUM_LOCK = 0x80,
+
+    EVENT_TYPE_PRESS = 1,
+    EVENT_TYPE_REPEAT = 2
+};
+
+static gboolean
+peek_subshell_switch_key (const char *buffer, size_t len)
+{
+    if (len == 0)
+        return FALSE;
+    if (buffer[0] == (XCTRL ('o') & 255))
+        return TRUE;
+
+    // Also check if ctrl-o is encoded as per the kitty keyboard protocol.
+    if (len == 1)
+        return FALSE;
+    if (buffer[0] != ESC_CHAR || buffer[1] != '[')  // CSI
+        return FALSE;
+    buffer += 2;
+    len -= 2;
+
+    struct csi_command_t csi;
+
+    if (!parse_csi (&csi, &buffer, buffer + len))
+        return FALSE;
+    if (csi.private_mode != '\0' || buffer[-1] != 'u')
+        return FALSE;
+    if (csi.param_count != 2)  // ctrl-o must have the modifier field
+        return FALSE;
+    if (csi.params[1][0] == 0)  // Bad modifier.
+        return FALSE;
+
+    const uint32_t codepoint = csi.params[0][0];
+    const uint32_t modifiers = csi.params[1][0] - 1;
+    const uint32_t event = csi.params[1][1];
+
+    if (event != 0 && event != EVENT_TYPE_PRESS && event != EVENT_TYPE_REPEAT)
+        return FALSE;
+
+    return codepoint == 'o'
+        && (modifiers & ~(MODIFIER_CAPS_LOCK | MODIFIER_NUM_LOCK)) == MODIFIER_CTRL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Feed the subshell our keyboard input until it says it's finished */
 
 static gboolean
@@ -908,11 +953,7 @@ feed_subshell (int how, gboolean fail_on_error)
             }
 
             for (i = 0; i < bytes; ++i)
-                if (pty_buffer[i] == subshell_switch_key
-                    || (subshell_switch_key_csi_u_len <= (size_t) bytes - i
-                        && memcmp (&pty_buffer[i], subshell_switch_key_csi_u,
-                                   subshell_switch_key_csi_u_len)
-                            == 0))
+                if (peek_subshell_switch_key (pty_buffer + i, bytes - i))
                 {
                     write_all (mc_global.tty.subshell_pty, pty_buffer, i);
 
