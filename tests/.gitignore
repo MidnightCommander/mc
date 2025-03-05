@@ -53,6 +53,7 @@ lib/strutil/str_verscmp
 lib/strutil/str_verscmp.log
 lib/strutil/str_verscmp.trs
 lib/strutil/test-suite.log
+lib/terminal
 lib/test-suite.log
 lib/utilinux__my_system-fork_child.log
 lib/utilinux__my_system-fork_child_shell.log
