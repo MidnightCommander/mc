@@ -27,8 +27,6 @@
 
 #include "tests/mctest.h"
 
-#include <stdio.h>
-
 #include "lib/strutil.h"
 #include "lib/util.h"
 

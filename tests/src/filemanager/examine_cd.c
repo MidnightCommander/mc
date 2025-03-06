@@ -28,8 +28,6 @@
 
 #include "tests/mctest.h"
 
-#include <stdio.h>
-
 #include "src/filemanager/cd.c"
 
 /* --------------------------------------------------------------------------------------------- */
