@@ -32,22 +32,6 @@
 #include "lib/tty/tty.h"
 
 /* --------------------------------------------------------------------------------------------- */
-
-/* @Before */
-static void
-setup (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* @After */
-static void
-teardown (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /* @CapturedValue */
 static int my_exit__status__captured;
 
@@ -116,8 +100,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_tty_check_term_unset);

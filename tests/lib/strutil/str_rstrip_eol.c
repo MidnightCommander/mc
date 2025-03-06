@@ -28,22 +28,6 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @Before */
-static void
-setup (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* @After */
-static void
-teardown (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* @DataSource("str_rstrip_eol_test_ds1") */
 /* Testcases are taken from Glib */
 static const struct str_rstrip_eol_test_struct
@@ -114,8 +98,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
     mctest_add_parameterized_test (tc_core, str_rstrip_eol_test1, str_rstrip_eol_test_ds1);

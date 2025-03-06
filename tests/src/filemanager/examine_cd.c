@@ -58,18 +58,6 @@ sync_tree (const vfs_path_t *vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-setup (void)
-{
-}
-
-static void
-teardown (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 #define check_examine_cd(input, etalon)                                                            \
     {                                                                                              \
         result = examine_cd (input);                                                               \
@@ -126,8 +114,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_examine_cd);

@@ -33,22 +33,6 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @Before */
-static void
-setup (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* @After */
-static void
-teardown (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* @DataSource("parse_integer_test_ds") */
 static const struct parse_integer_test_ds
 {
@@ -95,8 +79,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, parse_integer_test, parse_integer_test_ds);

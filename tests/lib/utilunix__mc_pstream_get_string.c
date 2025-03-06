@@ -42,20 +42,6 @@ static size_t etalon_long_file_list_pos;
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @Before */
-static void
-setup (void)
-{
-}
-
-/* @After */
-static void
-teardown (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* @DataSource("data_source") */
 static const struct data_source
 {
@@ -369,8 +355,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, mc_pstream_get_string_test, data_source);
