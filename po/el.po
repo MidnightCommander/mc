@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://app.transifex.com/mc/mc/language/el/)\n"
@@ -1500,6 +1500,14 @@ msgstr ""
 msgid "&Find all"
 msgstr "&Εύρεση όλων"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr ""
+
+#, c-format
+msgid "Searching %s"
+msgstr "Αναζήτηση %s"
+
 msgid "Enter replacement string:"
 msgstr ""
 
@@ -1520,14 +1528,6 @@ msgstr "&Παράβλεψη"
 
 msgid "Confirm replace"
 msgstr "Επιβεβαίωση αντικατάστασης"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr ""
-
-#, c-format
-msgid "Searching %s"
-msgstr "Αναζήτηση %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3855,25 +3855,23 @@ msgid "With ext2fs attributes support"
 msgstr ""
 
 #, c-format
-msgid "Built with GLib %d.%d.%d\n"
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr ""
 
 #, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
+msgid "Built with S-Lang"
 msgstr ""
 
 #, c-format
-msgid "Built with ncurses %s\n"
-msgstr ""
-
-msgid "Built with ncurses (unknown version)"
+msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
 #, c-format
-msgid "Built with ncursesw %s\n"
+msgid "Built with %s"
 msgstr ""
 
-msgid "Built with ncursesw (unknown version)"
+#, c-format
+msgid " (using %s)\n"
 msgstr ""
 
 #, c-format

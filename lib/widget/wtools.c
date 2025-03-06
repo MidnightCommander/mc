@@ -152,7 +152,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
                       input_complete_t completion_flags)
 {
     char *p_text;
-    char histname[64] = "inp|";
+    char histname[BUF_TINY] = "inp|";
     gboolean is_passwd = FALSE;
     char *my_str = NULL;
 

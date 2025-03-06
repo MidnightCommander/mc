@@ -246,7 +246,7 @@ get_codepage_id (const int n)
 int
 get_codepage_index (const char *id)
 {
-    size_t i;
+    guint i;
 
     if (codepages == NULL)
         return -1;
@@ -254,7 +254,7 @@ get_codepage_index (const char *id)
         return -1;
     for (i = 0; i < codepages->len; i++)
         if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
-            return i;
+            return (int) i;
     return -1;
 }
 

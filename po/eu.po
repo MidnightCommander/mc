@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -1536,6 +1536,14 @@ msgstr "&Hautapenean"
 msgid "&Find all"
 msgstr "&Aurkitu dena"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "%s bilatzen: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "%s bilatzen"
+
 msgid "Enter replacement string:"
 msgstr "Sartu ordezko katea:"
 
@@ -1556,14 +1564,6 @@ msgstr "&Saltatu"
 
 msgid "Confirm replace"
 msgstr "Berretsi ordezkapena"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "%s bilatzen: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "%s bilatzen"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3946,26 +3946,24 @@ msgstr ""
 msgid "With ext2fs attributes support"
 msgstr ""
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "GLib %d.%d.%d erabiliz eraikita\n"
 
 #, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
+msgid "Built with S-Lang"
 msgstr ""
 
 #, c-format
-msgid "Built with ncurses %s\n"
+msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-msgid "Built with ncurses (unknown version)"
-msgstr ""
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "GLib %d.%d.%d erabiliz eraikita\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr ""
-
-msgid "Built with ncursesw (unknown version)"
+msgid " (using %s)\n"
 msgstr ""
 
 #, c-format

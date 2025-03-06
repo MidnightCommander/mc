@@ -425,18 +425,23 @@ def decode_torrent():
 
 def decode_datetime_asc(dt):
     try:
-        return asctime(localtime(float(dt)))
-    except ValueError:
+        lt = localtime(float(dt))
+        Y = lt[0]
+        if Y > 9999:
+            raise ValueError
+    except (OSError, ValueError):
         return datetime.max.ctime()
+    else:
+        return asctime(lt)
 
 
 def decode_datetime(dt):
     try:
-        Y, m, d, H, M = localtime(float(dt))[0:5]
-    except ValueError:
-        return datetime.max.ctime()
-    if Y > 9999:
-        Y = 9999
+        Y, m, d, H, M = localtime(float(dt))[:5]
+        if Y > 9999:
+            raise ValueError
+    except (OSError, ValueError):
+        Y, m, d, H, M = datetime.max.timetuple()[:5]
     return "%02d-%02d-%d %02d:%02d" % (m, d, Y, H, M)
 
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
@@ -1572,6 +1572,14 @@ msgstr "solo en se&Lección"
 msgid "&Find all"
 msgstr "buscar &Todos"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Buscando %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Buscando %s"
+
 msgid "Enter replacement string:"
 msgstr "Teclee el cambio a realizar:"
 
@@ -1592,14 +1600,6 @@ msgstr "&Saltar"
 
 msgid "Confirm replace"
 msgstr "Confirmar cambios"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Buscando %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Buscando %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -4024,27 +4024,25 @@ msgstr "Con soporte para cambio de juegos de caracteres"
 msgid "With ext2fs attributes support"
 msgstr "Con soporte para atributos ext2fs"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Incluye la biblioteca GLib %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Incluye la biblioteca S-Lang %s y terminales según terminfo\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Incluye la biblioteca ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Incluye la biblioteca ncurses (versión desconocida)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Incluye la biblioteca ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Incluye la biblioteca ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Incluye la biblioteca ncursesw (versión desconocida)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4763,3 +4761,17 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Incluye la biblioteca S-Lang %s y terminales según terminfo\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Incluye la biblioteca ncurses (versión desconocida)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Incluye la biblioteca ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Incluye la biblioteca ncursesw (versión desconocida)"

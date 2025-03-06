@@ -31,20 +31,6 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @Before */
-static void
-setup (void)
-{
-}
-
-/* @After */
-static void
-teardown (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* @DataSource("data_source1") */
 static const struct data_source1
 {
@@ -122,8 +108,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, quote_percent_test, data_source1);

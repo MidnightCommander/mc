@@ -594,7 +594,6 @@ misc/mc.menu
 misc/mcedit.menu
 misc/skins/Makefile
 misc/ext.d/Makefile
-misc/ext.d/doc.sh
 misc/ext.d/misc.sh
 misc/ext.d/text.sh
 misc/macros.d/Makefile
@@ -719,7 +718,7 @@ tests/lib/widget/Makefile
 tests/src/Makefile
 tests/src/filemanager/Makefile
 tests/src/editor/Makefile
-tests/src/editor/test-data.txt
+tests/src/editor/edit_complete_word_cmd_test_data.txt
 tests/src/vfs/Makefile
 tests/src/vfs/extfs/Makefile
 tests/src/vfs/extfs/helpers-list/Makefile

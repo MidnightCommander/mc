@@ -27,26 +27,8 @@
 
 #include "tests/mctest.h"
 
-#include <stdio.h>
-
 #include "lib/strutil.h"
 #include "lib/util.h"
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* @Before */
-static void
-setup (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* @After */
-static void
-teardown (void)
-{
-}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -130,8 +112,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_mc_build_filename, test_mc_build_filename_ds);

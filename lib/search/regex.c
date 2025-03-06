@@ -831,8 +831,6 @@ mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data, off_t st
 {
     mc_search_cbret_t ret = MC_SEARCH_CB_NOTFOUND;
     off_t current_pos, virtual_pos;
-    gint start_pos;
-    gint end_pos;
 
     if (lc_mc_search->regex_buffer != NULL)
         g_string_set_size (lc_mc_search->regex_buffer, 0);
@@ -900,11 +898,15 @@ mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data, off_t st
         switch (mc_search__regex_found_cond (lc_mc_search, lc_mc_search->regex_buffer))
         {
         case COND__FOUND_OK:
+        {
+            gint start_pos, end_pos;
+
             g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
             if (found_len != NULL)
                 *found_len = end_pos - start_pos;
             lc_mc_search->normal_offset = lc_mc_search->start_buffer + start_pos;
             return TRUE;
+        }
         case COND__NOT_ALL_FOUND:
             break;
         default:

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -1583,6 +1583,14 @@ msgstr "A la se&lecció"
 msgid "&Find all"
 msgstr "Cer&ca'ls tots"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "S'està cercant %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "S'està cercant a %s"
+
 msgid "Enter replacement string:"
 msgstr "Introduïu la cadena de substitució:"
 
@@ -1603,14 +1611,6 @@ msgstr "&Salta"
 
 msgid "Confirm replace"
 msgstr "Consigna la substitució"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "S'està cercant %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "S'està cercant a %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -4037,27 +4037,25 @@ msgstr "Amb la implementació per a múltiples pàgines de codi"
 msgid "With ext2fs attributes support"
 msgstr "Amb la implementació dels atributs «ext2fs»"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Construït amb GLib %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Construïda amb S-Lang %s amb base de dades terminfo\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Construïda amb ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Construïda amb ncurses (versió desconeguda)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Construïda amb ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Construïda amb ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Construïda amb ncursesw (versió desconeguda)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4787,3 +4785,17 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Construïda amb S-Lang %s amb base de dades terminfo\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Construïda amb ncurses (versió desconeguda)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Construïda amb ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Construïda amb ncursesw (versió desconeguda)"

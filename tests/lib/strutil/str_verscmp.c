@@ -40,22 +40,6 @@ static char const c[] = "B007502357019.GBP.CORP.COM";
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @Before */
-static void
-setup (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* @After */
-static void
-teardown (void)
-{
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 sign (int n)
 {
@@ -116,8 +100,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, str_verscmp_test, str_verscmp_test_ds);

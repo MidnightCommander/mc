@@ -25,13 +25,9 @@
 
 #define TEST_SUITE_NAME "lib/widget/group"
 
-#include <config.h>
-
-#include <check.h>
+#include "tests/mctest.h"
 
 #include "lib/widget.h"
-
-#include "tests/mctest.h"
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -1,4 +1,4 @@
-shelldir = $(libexecdir)/@PACKAGE@/shell
+shelldir = $(pkglibexecdir)/shell
 
 # Files to install and distribute other than shell scripts
 SHELL_MISC  = README.shell

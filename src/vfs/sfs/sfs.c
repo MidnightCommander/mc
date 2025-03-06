@@ -135,7 +135,7 @@ static int
 sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
 {
     int w;
-    char pad[10240];
+    char pad[BUF_10K];
     char *s_iter, *t = pad;
     gboolean was_percent = FALSE;
     vfs_path_t *pname;  // name of parent archive

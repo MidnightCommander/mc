@@ -107,16 +107,13 @@ mc_shell_get_installed_in_system (void)
 static char *
 mc_shell_get_name_env (void)
 {
-    const char *shell_env;
     char *shell_name = NULL;
 
-    shell_env = g_getenv ("SHELL");
+    const char *shell_env = g_getenv ("SHELL");
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
         // 2nd choice: user login shell
-        struct passwd *pwd;
-
-        pwd = getpwuid (geteuid ());
+        const struct passwd *pwd = getpwuid (geteuid ());
         if (pwd != NULL)
             shell_name = g_strdup (pwd->pw_shell);
     }
@@ -132,19 +129,17 @@ mc_shell_get_name_env (void)
 static mc_shell_t *
 mc_shell_get_from_env (void)
 {
-    mc_shell_t *mc_shell = NULL;
-
-    char *shell_name;
-
-    shell_name = mc_shell_get_name_env ();
+    char *shell_name = mc_shell_get_name_env ();
 
     if (shell_name != NULL)
     {
+        mc_shell_t *mc_shell = NULL;
         mc_shell = g_new0 (mc_shell_t, 1);
         mc_shell->path = shell_name;
+        return mc_shell;
     }
 
-    return mc_shell;
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -263,9 +258,7 @@ mc_shell_recognize_path (mc_shell_t *mc_shell)
 void
 mc_shell_init (void)
 {
-    mc_shell_t *mc_shell;
-
-    mc_shell = mc_shell_get_from_env ();
+    mc_shell_t *mc_shell = mc_shell_get_from_env ();
 
     if (mc_shell == NULL)
         mc_shell = mc_shell_get_installed_in_system ();
@@ -274,7 +267,6 @@ mc_shell_init (void)
 
     /* Find out what type of shell we have. Also consider real paths (resolved symlinks)
      * because e.g. csh might point to tcsh, ash to dash or busybox, sh to anything. */
-
     if (mc_shell->real_path != NULL)
         mc_shell_recognize_real_path (mc_shell);
 

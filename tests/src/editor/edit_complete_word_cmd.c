@@ -172,7 +172,7 @@ my_setup (void)
     edit_options.filesize_threshold = (char *) "64M";
 
     rect_init (&r, 0, 0, 24, 80);
-    arg.file_vpath = vfs_path_from_str ("test-data.txt");
+    arg.file_vpath = vfs_path_from_str ("edit_complete_word_cmd_test_data.txt");
     arg.line_number = 1;
     test_edit = edit_init (NULL, &r, &arg);
     memset (&owner, 0, sizeof (owner));

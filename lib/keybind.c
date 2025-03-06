@@ -433,7 +433,7 @@ void
 keybind_cmd_bind (GArray *keymap, const char *keybind, long action)
 {
     char *caption = NULL;
-    long key;
+    int key;
 
     key = tty_keyname_to_keycode (keybind, &caption);
     keymap_add (keymap, key, action, caption);

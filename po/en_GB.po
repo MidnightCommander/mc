@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -1561,6 +1561,14 @@ msgstr "In se&lection"
 msgid "&Find all"
 msgstr "&Find all"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Searching %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Searching %s"
+
 msgid "Enter replacement string:"
 msgstr "Enter replacement string:"
 
@@ -1581,14 +1589,6 @@ msgstr "&Skip"
 
 msgid "Confirm replace"
 msgstr "Confirm replace"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Searching %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Searching %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -4005,27 +4005,25 @@ msgstr "With multiple codepages support"
 msgid "With ext2fs attributes support"
 msgstr "With ext2fs attributes support"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Built with GLib %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Built with S-Lang %s with terminfo database\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Built with ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Built with ncurses (unknown version)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Built with ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Built with ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Built with ncursesw (unknown version)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4745,3 +4743,17 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Built with S-Lang %s with terminfo database\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Built with ncurses (unknown version)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Built with ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Built with ncursesw (unknown version)"

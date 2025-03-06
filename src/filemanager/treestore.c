@@ -343,7 +343,8 @@ tree_store_save_to (char *name)
     for (current = ts.tree_first; current != NULL; current = current->next)
         if (vfs_file_is_local (current->name))
         {
-            int i, common;
+            int i;
+            size_t common;
 
             // Clear-text compression
             if (current->prev != NULL
@@ -352,7 +353,7 @@ tree_store_save_to (char *name)
                 char *encoded;
 
                 encoded = encode (current->name, common);
-                i = fprintf (file, "%d:%d %s\n", current->scanned ? 1 : 0, common, encoded);
+                i = fprintf (file, "%d:%zu %s\n", current->scanned ? 1 : 0, common, encoded);
                 g_free (encoded);
             }
             else

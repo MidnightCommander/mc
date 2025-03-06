@@ -28,8 +28,6 @@
 
 #include "tests/mctest.h"
 
-#include <stdio.h>
-
 #include "src/filemanager/cd.c"
 
 /* --------------------------------------------------------------------------------------------- */
@@ -56,18 +54,6 @@ void
 sync_tree (const vfs_path_t *vpath)
 {
     (void) vpath;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-setup (void)
-{
-}
-
-static void
-teardown (void)
-{
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -128,8 +114,6 @@ main (void)
     TCase *tc_core;
 
     tc_core = tcase_create ("Core");
-
-    tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_examine_cd);

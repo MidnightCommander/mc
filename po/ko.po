@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2023-2024\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -1544,6 +1544,14 @@ msgstr "선택 영역(&L)"
 msgid "&Find all"
 msgstr "모두 찾기(&F)"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "%s 검색중: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "%s 검색중"
+
 msgid "Enter replacement string:"
 msgstr "대체 문자열 입력:"
 
@@ -1564,14 +1572,6 @@ msgstr "건너뛰기(&S)"
 
 msgid "Confirm replace"
 msgstr "바꾸기 확인"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "%s 검색중: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "%s 검색중"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3972,27 +3972,25 @@ msgstr "다중 코드페이지 지원 포함"
 msgid "With ext2fs attributes support"
 msgstr "ext2fs 속성 지원"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "GLib %d.%d.%d로 빌드\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "터미널 데이터베이스가 있는 S-Lang %s로 구축\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "ncurses %s로 구축\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "ncures로 구축 (알 수 없는 버전)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "ncurses %s로 구축\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "ncursesw %s로 구축\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "ncursesw로 구축 (알 수 없는 버전)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4708,3 +4706,17 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "터미널 데이터베이스가 있는 S-Lang %s로 구축\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "ncures로 구축 (알 수 없는 버전)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "ncursesw %s로 구축\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "ncursesw로 구축 (알 수 없는 버전)"

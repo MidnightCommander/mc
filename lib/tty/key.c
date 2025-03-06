@@ -1438,7 +1438,7 @@ channels_down (void)
  * Return the code associated with the symbolic name keyname
  */
 
-long
+int
 tty_keyname_to_keycode (const char *name, char **label)
 {
     char **lc_keys, **p;
@@ -1548,7 +1548,7 @@ tty_keyname_to_keycode (const char *name, char **label)
     if (use_meta != -1)
         k = ALT (k);
 
-    return (long) k;
+    return k;
 }
 
 /* --------------------------------------------------------------------------------------------- */

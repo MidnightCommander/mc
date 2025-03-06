@@ -129,17 +129,15 @@ check_codeset (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /** POSIX version.  The only version we support.  */
-
 static void
 OS_Setup (void)
 {
-    const char *datadir_env;
-
     mc_shell_init ();
 
     // This is the directory, where MC was installed, on Unix this is DATADIR
     // and can be overridden by the MC_DATADIR environment variable
-    datadir_env = g_getenv ("MC_DATADIR");
+    const char *datadir_env = g_getenv ("MC_DATADIR");
+
     if (datadir_env != NULL)
         mc_global.sysconfig_dir = g_strdup (datadir_env);
     else
@@ -290,7 +288,7 @@ main (int argc, char *argv[])
      * mc_global.tty.xterm_flag is used in init_key() and tty_init()
      * Do this after mc_args_parse() where mc_args__force_xterm is set up.
      */
-    mc_global.tty.xterm_flag = tty_check_term (mc_args__force_xterm);
+    mc_global.tty.xterm_flag = tty_check_xterm_compat (mc_args__force_xterm);
 
     // do this before mc_args_show_info () to view paths in the --datadir-info output
     OS_Setup ();
@@ -417,23 +415,19 @@ main (int argc, char *argv[])
     // inherit the file descriptors opened below, etc
     if (mc_global.tty.use_subshell && mc_global.run_from_parent_mc)
     {
-        int r;
-
-        r = query_dialog (_ ("Warning"),
+        const int quit_mc =
+            query_dialog (_ ("Warning"),
                           _ ("GNU Midnight Commander\nis already running on this terminal.\n"
                              "Subshell support will be disabled."),
                           D_ERROR, 2, _ ("&OK"), _ ("&Quit"));
-        if (r == 0)
-        {
-            // parent mc was found and the user wants to continue
-            ;
-        }
-        else
+
+        if (quit_mc != 0)
         {
             // parent mc was found and the user wants to quit mc
             mc_global.midnight_shutdown = TRUE;
         }
 
+        // quit or not, disable nested subshell
         mc_global.tty.use_subshell = FALSE;
     }
 
@@ -504,23 +498,19 @@ main (int argc, char *argv[])
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_DONE);
 
-    if (mc_global.mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL
-        && last_wd_string != NULL && !print_last_revert)
+    if (mc_global.mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file != NULL && last_wd_str != NULL
+        && !print_last_revert)
     {
-        int last_wd_fd;
-
-        last_wd_fd = open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        const int last_wd_fd =
+            open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
         if (last_wd_fd != -1)
         {
-            ssize_t ret1;
-            int ret2;
-            ret1 = write (last_wd_fd, last_wd_string, strlen (last_wd_string));
-            ret2 = close (last_wd_fd);
-            (void) ret1;
-            (void) ret2;
+            MC_UNUSED const ssize_t ret1 = write (last_wd_fd, last_wd_str, strlen (last_wd_str));
+            MC_UNUSED const int ret2 = close (last_wd_fd);
         }
     }
-    g_free (last_wd_string);
+
+    g_free (last_wd_str);
 
     mc_shell_deinit ();
 

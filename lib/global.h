@@ -64,6 +64,7 @@
 #define BUF_10K       10240L
 #define BUF_8K        8192L
 #define BUF_4K        4096L
+#define BUF_2K        2048L
 #define BUF_1K        1024L
 
 #define BUF_LARGE     BUF_1K

@@ -195,7 +195,7 @@ compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
                     ;
             }
             while (n1 == n2 && n1 == sizeof (buf1) && memcmp (buf1, buf2, sizeof (buf1)) == 0);
-            result = (n1 != n2) || (memcmp (buf1, buf2, n1) != 0);
+            result = (n1 != n2) || (memcmp (buf1, buf2, MIN ((size_t) n1, sizeof (buf1))) != 0);
             rotate_dash (FALSE);
 
             close (file2);
