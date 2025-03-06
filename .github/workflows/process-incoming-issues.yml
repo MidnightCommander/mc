@@ -3,6 +3,12 @@ name: Process incoming issues
 on:
   issues:
     types: [ opened ]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number
+        required: true
+        type: number
 
 env:
   GQL_HEADERS: "{headers: {'GraphQL-Features': 'issue_types'}}"
@@ -26,10 +32,11 @@ jobs:
             return github.graphql(`
               query {
                 repository(owner: "${context.repo.owner}", name: "${context.repo.repo}") {
-                  issue(number: ${{ github.event.issue.number }}) {
+                  issue(number: ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }}) {
                     issueType {
                       name
                     }
+                    id
                   }
                 }
               }
@@ -39,13 +46,13 @@ jobs:
 
       - uses: actions/github-script@v7
         id: set-issue-type
-        if: ${{ steps.get-issue-type.outputs.result.repository.issue.issueType.name != "Bug" && steps.get-issue-type.outputs.result.repository.issue.issueType.name != "Feature" }}
+        if: ${{ steps.get-issue-type.outputs.result.repository.issue.issueType.name == '' }}
         with:
           script: |
             return github.graphql(`
               mutation {
                 updateIssueIssueType(input: {
-                  issueId: "${{ github.event.issue.node_id }}",
+                  issueId: "${{ steps.get-issue-type.outputs.result.repository.issue.id }}",
                   issueTypeId: "${{ env.ISSUE_TYPE_TASK_ID }}"
                 }) {
                   issue {
