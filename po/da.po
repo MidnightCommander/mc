@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -1545,6 +1545,14 @@ msgstr "I &markering"
 msgid "&Find all"
 msgstr "&Find alle"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Søger %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Søger i %s"
+
 msgid "Enter replacement string:"
 msgstr "Indtast erstatningsstreng:"
 
@@ -1565,14 +1573,6 @@ msgstr "&Spring over"
 
 msgid "Confirm replace"
 msgstr "Bekræft erstatning"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Søger %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Søger i %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3979,27 +3979,25 @@ msgstr "Med understøttelse af flere tegnsæt"
 msgid "With ext2fs attributes support"
 msgstr "Med understøttelse af ext2fs-attributter"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Kompileret med GLib %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Bygget med S-Lang %s med terminfo-database\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Bygget med ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Bygget med ncurses (ukendt version)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Bygget med ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Bygget med ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Bygget med ncursesw (ukendt version)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4710,3 +4708,17 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Bygget med S-Lang %s med terminfo-database\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Bygget med ncurses (ukendt version)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Bygget med ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Bygget med ncursesw (ukendt version)"

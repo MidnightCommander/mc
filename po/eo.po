@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -1564,6 +1564,14 @@ msgstr "En e&lekto"
 msgid "&Find all"
 msgstr "&Trovi ĉion"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Serĉanta en %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Serĉanta en %s"
+
 msgid "Enter replacement string:"
 msgstr "Enmetu anstataŭigan ĉenon:"
 
@@ -1584,14 +1592,6 @@ msgstr "&Preterlasi"
 
 msgid "Confirm replace"
 msgstr "Konfirmi anstataŭigon"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Serĉanta en %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Serĉanta en %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3996,27 +3996,25 @@ msgstr "Kun rego de pluraj kodpaĝoj"
 msgid "With ext2fs attributes support"
 msgstr "Kun rego de ext2fs-atributoj"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Muntita kun GLib %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Muntita kun S-Lang %s kun terminfo-datumbazo\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Muntita kun ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Muntita kun ncurses (nekonata eldono)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Muntita kun ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Muntita kun ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Muntita kun ncursesw (nekonata eldono)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4735,3 +4733,17 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Muntita kun S-Lang %s kun terminfo-datumbazo\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Muntita kun ncurses (nekonata eldono)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Muntita kun ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Muntita kun ncursesw (nekonata eldono)"

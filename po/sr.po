@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1528,6 +1528,14 @@ msgstr "У &избору"
 msgid "&Find all"
 msgstr "&Нађи све"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Тражим „%s“: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Тражим „%s“"
+
 msgid "Enter replacement string:"
 msgstr "Унесите ниску замене:"
 
@@ -1548,14 +1556,6 @@ msgstr "&Прескочи"
 
 msgid "Confirm replace"
 msgstr "Потврди замену"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Тражим „%s“: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Тражим „%s“"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3929,26 +3929,24 @@ msgstr ""
 msgid "With ext2fs attributes support"
 msgstr ""
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Изграђено је Гбиблиотеком %d.%d.%d\n"
 
 #, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
+msgid "Built with S-Lang"
 msgstr ""
 
 #, c-format
-msgid "Built with ncurses %s\n"
+msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-msgid "Built with ncurses (unknown version)"
-msgstr ""
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Изграђено је Гбиблиотеком %d.%d.%d\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr ""
-
-msgid "Built with ncursesw (unknown version)"
+msgid " (using %s)\n"
 msgstr ""
 
 #, c-format

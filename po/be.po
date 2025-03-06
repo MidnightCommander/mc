@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Źmicier Turok <nashtlumach@gmail.com>, 2018\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -29,9 +29,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1584,6 +1584,14 @@ msgstr "У абраным(&L)"
 msgid "&Find all"
 msgstr "Знайсці ўсё(&F)"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Пошук %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Пошук \"%s\""
+
 msgid "Enter replacement string:"
 msgstr "Замяніць на радок:"
 
@@ -1604,14 +1612,6 @@ msgstr "Прапусціць(&S)"
 
 msgid "Confirm replace"
 msgstr "Замяніць?"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Пошук %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Пошук \"%s\""
 
 #, c-format
 msgid "%ld replacements made"
@@ -4025,27 +4025,25 @@ msgstr "З падтрымкай некалькіх кадаванняў"
 msgid "With ext2fs attributes support"
 msgstr "З падтрымкай атрыбутаў ext2fs"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Сабрана з бібліятэкай \"GLib\" версіі %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Сабрана з S-Lang %s з базай даных terminfo\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Сабрана з ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Сабрана з ncurses (невядомая версія)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Сабрана з ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Сабрана з ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Сабрана з ncursesw (невядомая версія)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4766,3 +4764,17 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Сабрана з S-Lang %s з базай даных terminfo\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Сабрана з ncurses (невядомая версія)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Сабрана з ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Сабрана з ncursesw (невядомая версія)"

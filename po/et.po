@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2025\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -1570,6 +1570,14 @@ msgstr "&Valikus"
 msgid "&Find all"
 msgstr "&Otsi kõikjalt"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Otsitakse %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Otsitakse %s"
+
 msgid "Enter replacement string:"
 msgstr "Sisesta asendus string:"
 
@@ -1590,14 +1598,6 @@ msgstr "&Jäta vahele"
 
 msgid "Confirm replace"
 msgstr "Kinnita asendamine"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Otsitakse %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Otsitakse %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -4016,27 +4016,25 @@ msgstr "Mitme kooditabeli toega"
 msgid "With ext2fs attributes support"
 msgstr "Sealhulgas ext2fs atribuutide tugi"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Ehitatud GLib teegiga %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Kompileerimisel on kaasatud S-Lang %s terminfo andmekoguga\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Kompileerimisel on kaasatud ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Kompileerimisel on kaasatud ncurses (versioon pole teada)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Kompileerimisel on kaasatud ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Kompileerimisel on kaasatud ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Kompileerimisel on kaasatud ncursesw (versioon pole teada)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4756,3 +4754,17 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Kompileerimisel on kaasatud S-Lang %s terminfo andmekoguga\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Kompileerimisel on kaasatud ncurses (versioon pole teada)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Kompileerimisel on kaasatud ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Kompileerimisel on kaasatud ncursesw (versioon pole teada)"

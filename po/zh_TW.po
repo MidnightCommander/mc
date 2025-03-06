@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -1505,6 +1505,14 @@ msgstr "在選擇中"
 msgid "&Find all"
 msgstr "尋找全部"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "搜尋 %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "搜尋 %s"
+
 msgid "Enter replacement string:"
 msgstr "輸入要取代的字串："
 
@@ -1525,14 +1533,6 @@ msgstr "跳過"
 
 msgid "Confirm replace"
 msgstr "確認取代"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "搜尋 %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "搜尋 %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3822,25 +3822,23 @@ msgid "With ext2fs attributes support"
 msgstr ""
 
 #, c-format
-msgid "Built with GLib %d.%d.%d\n"
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr ""
 
 #, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
+msgid "Built with S-Lang"
 msgstr ""
 
 #, c-format
-msgid "Built with ncurses %s\n"
-msgstr ""
-
-msgid "Built with ncurses (unknown version)"
+msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
 #, c-format
-msgid "Built with ncursesw %s\n"
+msgid "Built with %s"
 msgstr ""
 
-msgid "Built with ncursesw (unknown version)"
+#, c-format
+msgid " (using %s)\n"
 msgstr ""
 
 #, c-format

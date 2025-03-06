@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-23 10:30+0100\n"
+"POT-Creation-Date: 2025-03-06 20:56+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Appukonrad <appukonrad@gmail.com>, 2024\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -1549,6 +1549,14 @@ msgstr "&Ve výběru"
 msgid "&Find all"
 msgstr "&Najít všechny"
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Hledání %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Hledání %s"
+
 msgid "Enter replacement string:"
 msgstr "Zadejte nahrazující text:"
 
@@ -1569,14 +1577,6 @@ msgstr "Pře&skočit"
 
 msgid "Confirm replace"
 msgstr "Potvrdit nahrazení"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Hledání %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Hledání %s"
 
 #, c-format
 msgid "%ld replacements made"
@@ -3997,27 +3997,25 @@ msgstr "S podporou vícero znakových sad"
 msgid "With ext2fs attributes support"
 msgstr "S podporou ext2fs atributů"
 
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
+#, fuzzy, c-format
+msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr "Sestaveno s GLib %d.%d.%d\n"
 
-#, c-format
-msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Sestavenou s využitím knihovny S-Lang %s s databází terminfo\n"
-
-#, c-format
-msgid "Built with ncurses %s\n"
+#, fuzzy, c-format
+msgid "Built with S-Lang"
 msgstr "Sestaveno s využitím ncurses %s\n"
 
-msgid "Built with ncurses (unknown version)"
-msgstr "Sestaveno s využitím ncurses (neznámá verze)"
+#, c-format
+msgid " and terminfo database (using S-Lang %s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with %s"
+msgstr "Sestaveno s využitím ncurses %s\n"
 
 #, c-format
-msgid "Built with ncursesw %s\n"
-msgstr "Sestaveno s využitím ncursesw %s\n"
-
-msgid "Built with ncursesw (unknown version)"
-msgstr "Sestaveno s využitím ncursesw (neznámá verze)"
+msgid " (using %s)\n"
+msgstr ""
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4732,3 +4730,17 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "Built with S-Lang %s with terminfo database\n"
+#~ msgstr "Sestavenou s využitím knihovny S-Lang %s s databází terminfo\n"
+
+#~ msgid "Built with ncurses (unknown version)"
+#~ msgstr "Sestaveno s využitím ncurses (neznámá verze)"
+
+#, c-format
+#~ msgid "Built with ncursesw %s\n"
+#~ msgstr "Sestaveno s využitím ncursesw %s\n"
+
+#~ msgid "Built with ncursesw (unknown version)"
+#~ msgstr "Sestaveno s využitím ncursesw (neznámá verze)"
