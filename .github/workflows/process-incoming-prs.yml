@@ -3,6 +3,12 @@ name: Process incoming PRs
 on:
   pull_request_target:
     types: [ opened ]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: PR number
+        required: true
+        type: number
 
 jobs:
   label-new-pr:
@@ -17,7 +23,7 @@ jobs:
 
     steps:
       - run: |
-          gh pr edit ${{ github.event.pull_request.number }}  \
+          gh pr edit ${{ inputs.pr_number != '' && inputs.pr_number || github.event.pull_request.number }}  \
             --add-label "needs triage,prio: medium" \
             --milestone "Future Releases"
         env:
