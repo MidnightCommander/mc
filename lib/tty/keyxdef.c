@@ -53,32 +53,32 @@
 #include "key.h"
 
 #if defined(__QNX__) && !defined(__QNXNTO__)
-#    define HAVE_QNX_KEYS
+#define HAVE_QNX_KEYS
 #endif
 
 #ifdef HAVE_QNX_KEYS
 
 /* select implementation: use QNX/term interface */
-#    define __USE_QNX_TI
+#define __USE_QNX_TI
 
 /* implementation specific _TE() definition */
-#    ifdef __USE_QNX_TI
+#ifdef __USE_QNX_TI
 
 /* include QNX/term.h (not NCURSES/term.h!) */
-#        if __WATCOMC__ > 1000
-#            include <sys/term.h>
-#        else
-#            include <term.h>
-#        endif
-#        include <stdlib.h>  // getenv()
+#if __WATCOMC__ > 1000
+#include <sys/term.h>
+#else
+#include <term.h>
+#endif
+#include <stdlib.h>  // getenv()
 
 /* fieldname -> index conversion */
-#        define __QTISX(_qtisn) (((int) (&((struct _strs *) 0)->_qtisn)) / sizeof (charoffset))
+#define __QTISX(_qtisn) (((int) (&((struct _strs *) 0)->_qtisn)) / sizeof (charoffset))
 
 /* define the OS/implementation-specific __TK() format */
-#        define __TK(_tis, _tcs, _tisx, _qtisn) __QTISX (_qtisn)
+#define __TK(_tis, _tcs, _tisx, _qtisn) __QTISX (_qtisn)
 
-#    endif
+#endif
 
 #endif
 
@@ -253,73 +253,73 @@
 #ifdef HAVE_QNX_KEYS
 
 /* don't force pre-defining of base keys under QNX */
-#    define FORCE_BASE_KEY_DEFS 0
+#define FORCE_BASE_KEY_DEFS 0
 
 /* OS specific key aliases */
-#    define Key_alt_a     Key_clear
-#    define Key_alt_b     Key_stab
-#    define Key_alt_c     Key_close
-#    define Key_alt_d     Key_catab
-#    define Key_alt_e     Key_message
-#    define Key_alt_f     Key_find
-#    define Key_alt_g     Key_refresh
-#    define Key_alt_h     Key_help
-#    define Key_alt_i     Key_move
-#    define Key_alt_j     Key_restart
-#    define Key_alt_k     Key_options
-#    define Key_alt_l     Key_reference
-#    define Key_alt_m     Key_mark
-#    define Key_alt_n     Key_sbeg
-#    define Key_alt_o     Key_open
-#    define Key_alt_p     Key_resume
-#    define Key_alt_q     Key_save
-#    define Key_alt_r     Key_replace
-#    define Key_alt_s     Key_scopy
-#    define Key_alt_t     Key_screate
-#    define Key_alt_u     Key_undo
-#    define Key_alt_v     Key_sdl
-#    define Key_alt_w     Key_sexit
-#    define Key_alt_x     Key_sfind
-#    define Key_alt_y     Key_shelp
-#    define Key_alt_z     Key_soptions
+#define Key_alt_a     Key_clear
+#define Key_alt_b     Key_stab
+#define Key_alt_c     Key_close
+#define Key_alt_d     Key_catab
+#define Key_alt_e     Key_message
+#define Key_alt_f     Key_find
+#define Key_alt_g     Key_refresh
+#define Key_alt_h     Key_help
+#define Key_alt_i     Key_move
+#define Key_alt_j     Key_restart
+#define Key_alt_k     Key_options
+#define Key_alt_l     Key_reference
+#define Key_alt_m     Key_mark
+#define Key_alt_n     Key_sbeg
+#define Key_alt_o     Key_open
+#define Key_alt_p     Key_resume
+#define Key_alt_q     Key_save
+#define Key_alt_r     Key_replace
+#define Key_alt_s     Key_scopy
+#define Key_alt_t     Key_screate
+#define Key_alt_u     Key_undo
+#define Key_alt_v     Key_sdl
+#define Key_alt_w     Key_sexit
+#define Key_alt_x     Key_sfind
+#define Key_alt_y     Key_shelp
+#define Key_alt_z     Key_soptions
 
-#    define Key_ctl_enter Key_enter
-#    define Key_ctl_tab   Key_ctab
+#define Key_ctl_enter Key_enter
+#define Key_ctl_tab   Key_ctab
 
-#    define Key_alt_tab   Key_ctl_tab    // map ALT-TAB to CTRL-TAB
-#    define Key_alt_enter Key_ctl_enter  // map ALT-ENTER to CTRL-ENTER
+#define Key_alt_tab   Key_ctl_tab    // map ALT-TAB to CTRL-TAB
+#define Key_alt_enter Key_ctl_enter  // map ALT-ENTER to CTRL-ENTER
 
-#    ifdef __USE_QNX_TI
+#ifdef __USE_QNX_TI
 /* define current xtra_key_define_t (enable OS/implementation) */
-#        define xtra_key_define_t qnx_key_define_t
-#    endif
+#define xtra_key_define_t qnx_key_define_t
+#endif
 #endif
 
 #ifdef xtra_key_define_t
-#    ifndef FORCE_BASE_KEY_DEFS
-#        define FORCE_BASE_KEY_DEFS 0
-#    endif
+#ifndef FORCE_BASE_KEY_DEFS
+#define FORCE_BASE_KEY_DEFS 0
+#endif
 #endif
 
 #ifdef HAVE_QNX_KEYS
-#    ifdef __USE_QNX_TI
-#        define __CT               (__cur_term)
-#        define __QTISOFFS(_qtisx) (((charoffset *) (&__CT->_strs))[_qtisx])
-#        define __QTISSTR(_qtisx)  (&__CT->_strtab[0] + __QTISOFFS (_qtisx))
-#    endif
+#ifdef __USE_QNX_TI
+#define __CT               (__cur_term)
+#define __QTISOFFS(_qtisx) (((charoffset *) (&__CT->_strs))[_qtisx])
+#define __QTISSTR(_qtisx)  (&__CT->_strtab[0] + __QTISOFFS (_qtisx))
+#endif
 #endif
 
 /*** file scope type declarations ****************************************************************/
 
 #ifdef HAVE_QNX_KEYS
-#    ifdef __USE_QNX_TI
+#ifdef __USE_QNX_TI
 /* OS/implementation specific key-define struct */
 typedef const struct qnx_key_define_s
 {
     int mc_code;
     int str_idx;
 } qnx_key_define_t;
-#    endif
+#endif
 #endif
 
 /*** file scope variables ************************************************************************/
@@ -328,7 +328,7 @@ typedef const struct qnx_key_define_s
 
 /* general key define table */
 xtra_key_define_t xtra_key_defines[] = {
-#    if FORCE_BASE_KEY_DEFS
+#if FORCE_BASE_KEY_DEFS
     { KEY_BACKSPACE, Key_backspace },
     { KEY_LEFT, Key_left },
     { KEY_RIGHT, Key_right },
@@ -360,7 +360,7 @@ xtra_key_define_t xtra_key_defines[] = {
     { KEY_F (18), Key_f18 },
     { KEY_F (19), Key_f19 },
     { KEY_F (20), Key_f20 },
-#    endif
+#endif
     { ALT ('a'), Key_alt_a },
     { ALT ('b'), Key_alt_b },
     { ALT ('c'), Key_alt_c },
@@ -402,7 +402,7 @@ xtra_key_define_t xtra_key_defines[] = {
 /* --------------------------------------------------------------------------------------------- */
 
 #ifdef HAVE_QNX_KEYS
-#    ifdef __USE_QNX_TI
+#ifdef __USE_QNX_TI
 void
 load_qnx_key_defines (void)
 {
@@ -433,7 +433,7 @@ load_qnx_key_defines (void)
         _qnx_keys_defined = 1;
     }
 }
-#    endif
+#endif
 #endif
 
 /* --------------------------------------------------------------------------------------------- */

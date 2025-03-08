@@ -35,13 +35,13 @@
 #include "global.h"
 
 #ifdef ENABLE_SUBSHELL
-#    ifdef SUBSHELL_OPTIONAL
-#        define SUBSHELL_USE FALSE
-#    else  // SUBSHELL_OPTIONAL
-#        define SUBSHELL_USE TRUE
-#    endif
-#else  // !ENABLE_SUBSHELL
-#    define SUBSHELL_USE FALSE
+#ifdef SUBSHELL_OPTIONAL
+#define SUBSHELL_USE FALSE
+#else
+#define SUBSHELL_USE TRUE
+#endif
+#else
+#define SUBSHELL_USE FALSE
 #endif
 
 /*** global variables ****************************************************************************/

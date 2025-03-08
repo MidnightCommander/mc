@@ -37,15 +37,15 @@
 #include <string.h>  // memset()
 
 #ifdef HAVE_SYS_SELECT_H
-#    include <sys/select.h>
+#include <sys/select.h>
 #else
-#    include <sys/time.h>
-#    include <sys/types.h>
+#include <sys/time.h>
+#include <sys/types.h>
 #endif
 #include <unistd.h>  // exit()
 
 #ifdef HAVE_SYS_IOCTL_H
-#    include <sys/ioctl.h>
+#include <sys/ioctl.h>
 #endif
 
 /* In some systems (like Solaris 11.4 SPARC), TIOCSWINSZ is defined in termios.h */

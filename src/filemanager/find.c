@@ -624,9 +624,9 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
         file_recurs_label = _ (file_recurs_label);
         file_follow_symlinks = _ (file_follow_symlinks);
         file_pattern_label = _ (file_pattern_label);
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
         file_all_charsets_label = _ (file_all_charsets_label);
-#    endif
+#endif
         file_case_label = _ (file_case_label);
         file_skip_hidden_label = _ (file_skip_hidden_label);
 
@@ -635,9 +635,9 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
         content_use_label = _ (content_use_label);
         content_regexp_label = _ (content_regexp_label);
         content_case_label = _ (content_case_label);
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
         content_all_charsets_label = _ (content_all_charsets_label);
-#    endif
+#endif
         content_whole_words_label = _ (content_whole_words_label);
         content_first_hit_label = _ (content_first_hit_label);
 

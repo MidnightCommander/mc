@@ -44,7 +44,7 @@
 
 #include "src/setup.h"  // quit
 #ifdef ENABLE_SUBSHELL
-#    include "src/subshell/subshell.h"
+#include "src/subshell/subshell.h"
 #endif
 #include "src/execute.h"   // shell_execute()
 #include "src/usermenu.h"  // expand_format()

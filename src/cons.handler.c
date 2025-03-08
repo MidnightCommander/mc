@@ -32,10 +32,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef __FreeBSD__
-#    include <sys/consio.h>
-#    ifdef HAVE_SYS_IOCTL_H
-#        include <sys/ioctl.h>
-#    endif
+#include <sys/consio.h>
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
 #endif
 
 #include "lib/global.h"
@@ -57,14 +57,14 @@ int cons_saver_pid = 1;
 /*** file scope macro definitions ****************************************************************/
 
 #if defined(__FreeBSD__)
-#    define FD_OUT 1
-#    define cursor_to(x, y)                                                                        \
-        do                                                                                         \
-        {                                                                                          \
-            printf ("\x1B[%d;%df", (y) + 1, (x) + 1);                                              \
-            fflush (stdout);                                                                       \
-        }                                                                                          \
-        while (0)
+#define FD_OUT 1
+#define cursor_to(x, y)                                                                            \
+    do                                                                                             \
+    {                                                                                              \
+        printf ("\x1B[%d;%df", (y) + 1, (x) + 1);                                                  \
+        fflush (stdout);                                                                           \
+    }                                                                                              \
+    while (0)
 #endif
 
 /*** file scope type declarations ****************************************************************/

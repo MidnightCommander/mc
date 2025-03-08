@@ -62,10 +62,10 @@ extern char **environ;
 
 /* #define DO_COMPLETION_DEBUG */
 #ifdef DO_COMPLETION_DEBUG
-#    define SHOW_C_CTX(func)                                                                       \
-        fprintf (stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags (flags))
+#define SHOW_C_CTX(func)                                                                           \
+    fprintf (stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags (flags))
 #else
-#    define SHOW_C_CTX(func)
+#define SHOW_C_CTX(func)
 #endif
 
 #define DO_INSERTION 1

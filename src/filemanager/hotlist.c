@@ -80,8 +80,8 @@
 #define B_APPEND      (B_USER + 7)
 #define B_MOVE        (B_USER + 8)
 #ifdef ENABLE_VFS
-#    define B_FREE_ALL_VFS (B_USER + 9)
-#    define B_REFRESH_VFS  (B_USER + 10)
+#define B_FREE_ALL_VFS (B_USER + 9)
+#define B_REFRESH_VFS  (B_USER + 10)
 #endif
 
 #define TKN_GROUP    0

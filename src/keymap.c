@@ -456,9 +456,9 @@ static const global_keymap_ini_t default_editor_keymap[] = {
     { "DeleteToEnd", "ctrl-k" },
     { "Undo", "ctrl-u; ctrl-backspace" },
     { "Redo", "alt-r" },
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
     { "SelectCodepage", "alt-e" },
-#    endif
+#endif
     { "Goto", "alt-l; alt-shift-l" },
     { "Refresh", "ctrl-l" },
     { "Shell", "ctrl-o" },
@@ -513,9 +513,9 @@ static const global_keymap_ini_t default_editor_keymap[] = {
     { "Sort", "alt-t" },
     { "Mail", "alt-m" },
     { "ExternalCommand", "alt-u" },
-#    ifdef HAVE_ASPELL
+#ifdef HAVE_ASPELL
     { "SpellCheckCurrentWord", "ctrl-p" },
-#    endif
+#endif
     { "ExtendedKeyMap", "ctrl-x" },
     {
         NULL,
@@ -654,9 +654,9 @@ static const global_keymap_ini_t default_diff_keymap[] = {
     { "End", "end" },
     { "Help", "f1" },
     { "Quit", "f10; q; shift-q; esc" },
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
     { "SelectCodepage", "alt-e" },
-#    endif
+#endif
     { "Shell", "ctrl-o" },
     {
         NULL,

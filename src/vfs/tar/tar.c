@@ -40,7 +40,7 @@
 
 #ifdef hpux
 /* major() and minor() macros (among other things) defined here for hpux */
-#    include <sys/mknod.h>
+#include <sys/mknod.h>
 #endif
 
 #include "lib/global.h"

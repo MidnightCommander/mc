@@ -52,7 +52,7 @@
 #include <config.h>
 
 #ifndef _GNU_SOURCE
-#    define _GNU_SOURCE
+#define _GNU_SOURCE
 #endif
 
 #include <stdlib.h>
@@ -62,10 +62,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_SYS_IOCTL_H
-#    include <sys/ioctl.h>
+#include <sys/ioctl.h>
 #endif
 #ifdef HAVE_FCNTL_H
-#    include <fcntl.h>
+#include <fcntl.h>
 #endif
 #include <termios.h>
 

@@ -46,9 +46,9 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef ENABLE_NLS
-#    define I18N(x) (x = x != NULL && *x != '\0' ? _ (x) : x)
+#define I18N(x) (x = x != NULL && *x != '\0' ? _ (x) : x)
 #else
-#    define I18N(x) (x = x)
+#define I18N(x) (x = x)
 #endif
 
 /*** file scope type declarations ****************************************************************/

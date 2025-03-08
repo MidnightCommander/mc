@@ -11,9 +11,9 @@
 #include <sys/stat.h>
 #include <dirent.h>  // DIR
 #ifdef HAVE_UTIMENSAT
-#    include <sys/time.h>
+#include <sys/time.h>
 #elif defined(HAVE_UTIME_H)
-#    include <utime.h>
+#include <utime.h>
 #endif
 #include <stdio.h>
 #include <unistd.h>
@@ -34,14 +34,14 @@
    listed above and O_APPEND */
 
 #if (O_ALL & O_APPEND)
-#    warning "Unexpected problem with flags, O_LINEAR disabled, contact pavel@ucw.cz"
-#    define O_LINEAR     0
-#    define IS_LINEAR(a) 0
-#    define NO_LINEAR(a) a
+#warning "Unexpected problem with flags, O_LINEAR disabled, contact pavel@ucw.cz"
+#define O_LINEAR     0
+#define IS_LINEAR(a) 0
+#define NO_LINEAR(a) a
 #else
-#    define O_LINEAR     O_APPEND
-#    define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))  // Return only 0 and 1 !
-#    define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
+#define O_LINEAR     O_APPEND
+#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))  // Return only 0 and 1 !
+#define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
 #endif
 
 /* O_LINEAR is strange beast, be careful. If you open file asserting
@@ -62,21 +62,21 @@
 /* And now some defines for our errors. */
 
 #ifdef ENOMSG
-#    define E_UNKNOWN ENOMSG  // if we do not know what error happened
+#define E_UNKNOWN ENOMSG  // if we do not know what error happened
 #else
-#    define E_UNKNOWN EIO  // if we do not know what error happened
+#define E_UNKNOWN EIO  // if we do not know what error happened
 #endif
 
 #ifdef EREMOTEIO
-#    define E_REMOTE EREMOTEIO  // if other side of ftp/shell reports error
+#define E_REMOTE EREMOTEIO  // if other side of ftp/shell reports error
 #else
-#    define E_REMOTE ENETUNREACH  // :-( there's no EREMOTEIO on some systems
+#define E_REMOTE ENETUNREACH  // :-( there's no EREMOTEIO on some systems
 #endif
 
 #ifdef EPROTO
-#    define E_PROTO EPROTO  // if other side fails to follow protocol
+#define E_PROTO EPROTO  // if other side fails to follow protocol
 #else
-#    define E_PROTO EIO
+#define E_PROTO EIO
 #endif
 
 /**

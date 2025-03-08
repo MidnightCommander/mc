@@ -46,7 +46,7 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef UINTMAX_WIDTH
-#    define UINTMAX_WIDTH (sizeof (uintmax_t) * CHAR_BIT)
+#define UINTMAX_WIDTH (sizeof (uintmax_t) * CHAR_BIT)
 #endif
 
 /* Log base 2 of common values. */
@@ -258,7 +258,7 @@ tar_assign_string_dup_n (char **string, const char *value, size_t n)
    <string.h> reserves names beginning with "str".
  */
 #if !(INTMAX_MAX <= UINTMAX_MAX)
-#    error "strtosysint: nonnegative intmax_t does not fit in uintmax_t"
+#error "strtosysint: nonnegative intmax_t does not fit in uintmax_t"
 #endif
 intmax_t
 stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval, uintmax_t maxval)
@@ -338,10 +338,10 @@ stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval, uin
  * Result is -1 if the field is invalid.
  */
 #if !(INTMAX_MAX <= UINTMAX_MAX && -(INTMAX_MIN + 1) <= UINTMAX_MAX)
-#    error "tar_from_header() internally represents intmax_t as uintmax_t + sign"
+#error "tar_from_header() internally represents intmax_t as uintmax_t + sign"
 #endif
 #if !(UINTMAX_MAX / 2 <= INTMAX_MAX)
-#    error "tar_from_header() returns intmax_t to represent uintmax_t"
+#error "tar_from_header() returns intmax_t to represent uintmax_t"
 #endif
 intmax_t
 tar_from_header (const char *where0, size_t digs, char const *type, intmax_t minval,

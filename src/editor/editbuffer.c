@@ -87,7 +87,7 @@
 
 /* Configurable: log2 of the buffer size in bytes */
 #ifndef S_EDIT_BUF_SIZE
-#    define S_EDIT_BUF_SIZE 16
+#define S_EDIT_BUF_SIZE 16
 #endif
 
 /* Size of the buffer */

@@ -32,7 +32,7 @@
 #include <stdint.h>  // uintmax_t
 
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
-#    include <libssh2.h>
+#include <libssh2.h>
 #endif
 
 #include "lib/global.h"
@@ -55,30 +55,30 @@
 
 #ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {
-#    ifdef ENABLE_VFS_CPIO
+#ifdef ENABLE_VFS_CPIO
     "cpiofs",
-#    endif
-#    ifdef ENABLE_VFS_TAR
+#endif
+#ifdef ENABLE_VFS_TAR
     "tarfs",
-#    endif
-#    ifdef ENABLE_VFS_SFS
+#endif
+#ifdef ENABLE_VFS_SFS
     "sfs",
-#    endif
-#    ifdef ENABLE_VFS_EXTFS
+#endif
+#ifdef ENABLE_VFS_EXTFS
     "extfs",
-#    endif
-#    ifdef ENABLE_VFS_UNDELFS
+#endif
+#ifdef ENABLE_VFS_UNDELFS
     "ext2undelfs",
-#    endif
-#    ifdef ENABLE_VFS_FTP
+#endif
+#ifdef ENABLE_VFS_FTP
     "ftpfs",
-#    endif
-#    ifdef ENABLE_VFS_SFTP
+#endif
+#ifdef ENABLE_VFS_SFTP
     "sftpfs",
-#    endif
-#    ifdef ENABLE_VFS_SHELL
+#endif
+#ifdef ENABLE_VFS_SHELL
     "shell",
-#    endif
+#endif
     NULL
 };
 #endif
@@ -86,19 +86,19 @@ static const char *const vfs_supported[] = {
 static const char *const features[] = {
 
 #ifdef USE_INTERNAL_EDIT
-#    ifdef HAVE_ASPELL
+#ifdef HAVE_ASPELL
     N_ ("With builtin editor and aspell support"),
-#    else
+#else
     N_ ("With builtin editor"),
-#    endif
+#endif
 #endif
 
 #ifdef ENABLE_SUBSHELL
-#    ifdef SUBSHELL_OPTIONAL
+#ifdef SUBSHELL_OPTIONAL
     N_ ("With optional subshell support"),
-#    else
+#else
     N_ ("With subshell support as default"),
-#    endif
+#endif
 #endif
 
 #ifdef ENABLE_BACKGROUND
@@ -150,26 +150,26 @@ show_version (void)
 
 #ifdef HAVE_SLANG
     printf (_ ("Built with S-Lang"));
-#    ifdef SLANG_VERSION_STRING
+#ifdef SLANG_VERSION_STRING
     printf (" %s", SLANG_VERSION_STRING);
-#    elif defined SLANG_VERSION
+#elif defined SLANG_VERSION
     printf (" %d", SLANG_VERSION);
-#    endif /* SLANG_VERSION_STRING || SLANG_VERSION */
+#endif
     printf (_ (" and terminfo database (using S-Lang %s)\n"), SLang_Version_String);
 #elif defined HAVE_NCURSES
     printf (_ ("Built with %s"), NCURSES_LIB_DISPLAYNAME);
-#    ifdef NCURSES_VERSION_MAJOR
+#ifdef NCURSES_VERSION_MAJOR
     printf (" %d", NCURSES_VERSION_MAJOR);
-#        ifdef NCURSES_VERSION_MINOR
+#ifdef NCURSES_VERSION_MINOR
     printf (".%d", NCURSES_VERSION_MINOR);
-#        endif
-#    endif /* NCURSES_VERSION_MAJOR */
-#    ifdef NCURSES_VERSION_PATCH
+#endif
+#endif
+#ifdef NCURSES_VERSION_PATCH
     printf (".%d", NCURSES_VERSION_PATCH);
-#    endif
+#endif
     printf (_ (" (using %s)\n"), curses_version ());
 #else
-#    error "Cannot compile mc without S-Lang or ncurses"
+#error "Cannot compile mc without S-Lang or ncurses"
 #endif
 
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
@@ -223,12 +223,12 @@ show_datadirs_extended (void)
 
 #if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_SHELL
     PRINTF_SECTION (_ ("VFS plugins and scripts:"), LIBEXECDIR);
-#    ifdef ENABLE_VFS_EXTFS
+#ifdef ENABLE_VFS_EXTFS
     PRINTF2 ("extfs.d:", LIBEXECDIR, MC_EXTFS_DIR PATH_SEP_STR);
-#    endif
-#    ifdef ENABLE_VFS_SHELL
+#endif
+#ifdef ENABLE_VFS_SHELL
     PRINTF2 ("shell:", LIBEXECDIR, VFS_SHELL_PREFIX PATH_SEP_STR);
-#    endif
+#endif
 #endif
     (void) puts ("");
 

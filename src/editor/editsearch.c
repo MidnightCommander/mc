@@ -31,7 +31,7 @@
 #include "lib/search.h"
 #include "lib/mcconfig.h"  // mc_config_history_get_recent_item()
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"  // cp_source
+#include "lib/charsets.h"  // cp_source
 #endif
 #include "lib/util.h"
 #include "lib/widget.h"

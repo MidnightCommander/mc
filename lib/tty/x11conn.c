@@ -34,7 +34,7 @@
 #include <setjmp.h>
 #include <X11/Xlib.h>
 #ifdef HAVE_GMODULE
-#    include <gmodule.h>
+#include <gmodule.h>
 #endif
 
 #include "lib/global.h"
@@ -45,11 +45,11 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef HAVE_GMODULE
-#    define func_XOpenDisplay       XOpenDisplay
-#    define func_XCloseDisplay      XCloseDisplay
-#    define func_XSetErrorHandler   XSetErrorHandler
-#    define func_XSetIOErrorHandler XSetIOErrorHandler
-#    define func_XQueryPointer      XQueryPointer
+#define func_XOpenDisplay       XOpenDisplay
+#define func_XCloseDisplay      XCloseDisplay
+#define func_XSetErrorHandler   XSetErrorHandler
+#define func_XSetIOErrorHandler XSetIOErrorHandler
+#define func_XQueryPointer      XQueryPointer
 #endif
 
 /*** file scope type declarations ****************************************************************/

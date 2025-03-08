@@ -44,7 +44,7 @@
 #define SFTP_DEFAULT_PORT 22
 
 #ifndef SFTPFS_SSH_CONFIG
-#    define SFTPFS_SSH_CONFIG "~/.ssh/config"
+#define SFTPFS_SSH_CONFIG "~/.ssh/config"
 #endif
 
 /*** file scope type declarations ****************************************************************/

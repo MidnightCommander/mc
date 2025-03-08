@@ -36,7 +36,7 @@
 #include "lib/search.h"
 #include "lib/util.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "internal.h"

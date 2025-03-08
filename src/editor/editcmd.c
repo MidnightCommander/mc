@@ -55,13 +55,13 @@
 #include "lib/widget.h"
 #include "lib/event.h"  // mc_event_raise()
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "src/history.h"
 #include "src/file_history.h"  // show_file_history()
 #ifdef HAVE_CHARSET
-#    include "src/selcodepage.h"
+#include "src/selcodepage.h"
 #endif
 #include "src/util.h"  // check_for_default()
 

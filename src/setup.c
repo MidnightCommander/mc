@@ -43,14 +43,14 @@
 #include "lib/util.h"
 
 #ifdef ENABLE_VFS_FTP
-#    include "src/vfs/ftpfs/ftpfs.h"
+#include "src/vfs/ftpfs/ftpfs.h"
 #endif
 #ifdef ENABLE_VFS_SHELL
-#    include "src/vfs/shell/shell.h"
+#include "src/vfs/shell/shell.h"
 #endif
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "filemanager/dir.h"
@@ -66,11 +66,11 @@
 #include "clipboard.h"
 
 #ifdef HAVE_CHARSET
-#    include "selcodepage.h"
+#include "selcodepage.h"
 #endif
 
 #ifdef USE_INTERNAL_EDIT
-#    include "src/editor/edit.h"
+#include "src/editor/edit.h"
 #endif
 
 #include "src/viewer/mcviewer.h"  // For the externs
@@ -333,7 +333,7 @@ static const struct
     { "file_op_compute_totals", &file_op_compute_totals },
     { "classic_progressbar", &classic_progressbar },
 #ifdef ENABLE_VFS
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
     { "use_netrc", &ftpfs_use_netrc },
     { "ftpfs_always_use_proxy", &ftpfs_always_use_proxy },
     { "ftpfs_use_passive_connections", &ftpfs_use_passive_connections },
@@ -341,7 +341,7 @@ static const struct
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
     { "ignore_ftp_chattr_errors", &ftpfs_ignore_chattr_errors },
-#    endif
+#endif
 #endif
 #ifdef USE_INTERNAL_EDIT
     { "editor_fill_tabs_with_spaces", &edit_options.fill_tabs_with_spaces },
@@ -392,13 +392,13 @@ static const struct
 
 #ifdef ENABLE_VFS
     { "vfs_timeout", &vfs_timeout },
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
     { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
     { "ftpfs_retry_seconds", &ftpfs_retry_seconds },
-#    endif
-#    ifdef ENABLE_VFS_SHELL
+#endif
+#ifdef ENABLE_VFS_SHELL
     { "shell_directory_timeout", &shell_directory_timeout },
-#    endif
+#endif
 #endif
 
     // option_tab_spacing is used in internal viewer

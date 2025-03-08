@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "lib/strutil.h"

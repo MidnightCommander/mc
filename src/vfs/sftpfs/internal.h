@@ -18,7 +18,7 @@
 
 /* LIBSSH2_INVALID_SOCKET is defined in libssh2 >= 1.4.1 */
 #ifndef LIBSSH2_INVALID_SOCKET
-#    define LIBSSH2_INVALID_SOCKET -1
+#define LIBSSH2_INVALID_SOCKET -1
 #endif
 
 #define SFTP_SUPER(super) ((sftpfs_super_t *) (super))

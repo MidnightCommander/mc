@@ -151,7 +151,7 @@
 #include "lib/skin.h"
 #include "lib/util.h"  // is_printable()
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "src/setup.h"  // option_tab_spacing
@@ -260,13 +260,13 @@ mcview_is_non_spacing_mark (const WView *view, int c)
 static gboolean
 mcview_is_spacing_mark (const WView *view, int c)
 {
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
     if (view->utf8)
         return g_unichar_type (c) == G_UNICODE_SPACING_MARK;
-#    else
+#else
     (void) view;
     (void) c;
-#    endif
+#endif
     return FALSE;
 }
 #endif

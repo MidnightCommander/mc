@@ -39,7 +39,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "internal.h"

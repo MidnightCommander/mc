@@ -12,9 +12,9 @@
 
 /* Taken from S-Lang's slutty.c */
 #ifdef _POSIX_VDISABLE
-#    define NULL_VALUE _POSIX_VDISABLE
+#define NULL_VALUE _POSIX_VDISABLE
 #else
-#    define NULL_VALUE 255
+#define NULL_VALUE 255
 #endif
 
 /*** enums ***************************************************************************************/

@@ -60,7 +60,7 @@
 
 /* Number of attempts to create a temporary file */
 #ifndef TMP_MAX
-#    define TMP_MAX 16384
+#define TMP_MAX 16384
 #endif
 
 #define TMP_SUFFIX ".tmp"

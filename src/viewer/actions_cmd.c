@@ -54,7 +54,7 @@
 #include "lib/file-entry.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 #include "lib/event.h"     // mc_event_raise()
 #include "lib/mcconfig.h"  // mc_config_history_get_recent_item()

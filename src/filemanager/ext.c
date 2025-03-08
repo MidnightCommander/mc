@@ -47,11 +47,11 @@
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"  // get_codepage_index
+#include "lib/charsets.h"  // get_codepage_index
 #endif
 
 #ifdef USE_FILE_CMD
-#    include "src/setup.h"  // use_file_to_check_type
+#include "src/setup.h"  // use_file_to_check_type
 #endif
 #include "src/execute.h"
 #include "src/history.h"
@@ -61,7 +61,7 @@
 #include "src/viewer/mcviewer.h"
 
 #ifdef HAVE_CHARSET
-#    include "src/selcodepage.h"  // do_set_codepage
+#include "src/selcodepage.h"  // do_set_codepage
 #endif
 
 #include "filemanager.h"  // current_panel
@@ -74,11 +74,11 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef USE_FILE_CMD
-#    ifdef FILE_B
-#        define FILE_CMD "file -z " FILE_B FILE_S FILE_L
-#    else
-#        define FILE_CMD "file -z " FILE_S FILE_L
-#    endif
+#ifdef FILE_B
+#define FILE_CMD "file -z " FILE_B FILE_S FILE_L
+#else
+#define FILE_CMD "file -z " FILE_S FILE_L
+#endif
 #endif
 
 /*** file scope type declarations ****************************************************************/
@@ -558,13 +558,13 @@ get_popen_information (const char *cmd_file, const char *args, char *buf, int bu
 
     if (f != NULL)
     {
-#    ifdef __QNXNTO__
+#ifdef __QNXNTO__
         if (setvbuf (f, NULL, _IOFBF, 0) != 0)
         {
             (void) pclose (f);
             return -1;
         }
-#    endif
+#endif
         read_bytes = (fgets (buf, buflen, f) != NULL);
         if (!read_bytes)
             buf[0] = '\0';  // Paranoid termination
@@ -609,7 +609,7 @@ get_file_type_local (const vfs_path_t *filename_vpath, char *buf, int buflen)
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
 
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
 static int
 get_file_encoding_local (const vfs_path_t *filename_vpath, char *buf, int buflen)
 {
@@ -638,7 +638,7 @@ get_file_encoding_local (const vfs_path_t *filename_vpath, char *buf, int buflen
 
     return ret;
 }
-#    endif
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -665,10 +665,10 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
     {
         vfs_path_t *localfile_vpath;
 
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
         static char encoding_id[21];  // CSISO51INISCYRILLIC -- 20
         int got_encoding_data;
-#    endif
+#endif
 
         // Don't repeate even unsuccessful checks
         *have_type = TRUE;
@@ -681,7 +681,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
             return FALSE;
         }
 
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
         got_encoding_data = is_autodetect_codeset_enabled
             ? get_file_encoding_local (localfile_vpath, encoding_id, sizeof (encoding_id))
             : 0;
@@ -701,7 +701,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
             do_set_codepage (cp_id);
         }
-#    endif
+#endif
 
         got_data = get_file_type_local (localfile_vpath, content_string, sizeof (content_string));
 
@@ -715,7 +715,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
             if (pp != NULL)
                 *pp = '\0';
 
-#    ifndef FILE_B
+#ifndef FILE_B
             {
                 const char *real_name;  // name used with "file"
                 size_t real_len;
@@ -735,7 +735,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
                             ;
                 }
             }
-#    endif
+#endif
         }
         else
         {

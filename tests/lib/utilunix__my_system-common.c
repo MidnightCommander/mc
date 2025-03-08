@@ -36,7 +36,7 @@ static sigset_t *sigemptyset_set__captured;
 static int sigemptyset__return_value = 0;
 
 #ifdef sigemptyset
-#    undef sigemptyset
+#undef sigemptyset
 #endif
 
 /* @Mock */

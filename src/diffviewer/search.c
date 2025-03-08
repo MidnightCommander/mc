@@ -33,7 +33,7 @@
 #include "lib/tty/key.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "src/history.h"

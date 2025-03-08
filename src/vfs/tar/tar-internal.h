@@ -8,9 +8,9 @@
 #include <sys/types.h>
 
 #ifdef HAVE_STDCKDINT_H
-#    include <stdckdint.h>
+#include <stdckdint.h>
 #else
-#    include "lib/stdckdint.h"
+#include "lib/stdckdint.h"
 #endif
 #include "lib/intprops.h"
 #include "lib/idx.h"
@@ -330,7 +330,7 @@ void tar_xheader_destroy (struct xheader *xhdr);
    With a good optimizing compiler, this is equivalent to (intmax_t) i
    and requires zero machine instructions.  */
 #if !(UINTMAX_MAX / 2 <= INTMAX_MAX)
-#    error "tar_represent_uintmax() returns intmax_t to represent uintmax_t"
+#error "tar_represent_uintmax() returns intmax_t to represent uintmax_t"
 #endif
 static inline intmax_t
 tar_represent_uintmax (uintmax_t n)

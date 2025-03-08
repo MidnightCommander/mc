@@ -40,7 +40,7 @@
 #include <config.h>
 
 #ifdef HAVE_STRVERSCMP
-#    include <string.h>
+#include <string.h>
 #endif
 
 #include "lib/strutil.h"
@@ -53,14 +53,14 @@
 
 /* states: S_N: normal, S_I: comparing integral part, S_F: comparing
    fractional parts, S_Z: idem but with leading Zeroes only */
-#    define S_N 0x0
-#    define S_I 0x3
-#    define S_F 0x6
-#    define S_Z 0x9
+#define S_N 0x0
+#define S_I 0x3
+#define S_F 0x6
+#define S_Z 0x9
 
 /* result_type: CMP: return diff; LEN: compare using len_diff/diff */
-#    define CMP 2
-#    define LEN 3
+#define CMP 2
+#define LEN 3
 
 #endif
 

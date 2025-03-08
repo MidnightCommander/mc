@@ -16,7 +16,7 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef MC_USERCONF_DIR
-#    define MC_USERCONF_DIR "mc"
+#define MC_USERCONF_DIR "mc"
 #endif
 
 #define TAGS_NAME               "TAGS"

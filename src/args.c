@@ -37,7 +37,7 @@
 #include "src/textconf.h"
 
 #ifdef USE_INTERNAL_EDIT
-#    include "editor/edit.h"  // edit_arg_t
+#include "editor/edit.h"  // edit_arg_t
 #endif
 
 #include "src/args.h"

@@ -62,7 +62,7 @@
 #include <inttypes.h>  // uintmax_t
 #include <stdarg.h>
 #ifdef HAVE_SYS_SELECT_H
-#    include <sys/select.h>
+#include <sys/select.h>
 #endif
 #include <sys/types.h>
 #include <unistd.h>
@@ -72,7 +72,7 @@
 #include "lib/tty/tty.h"  // enable/disable interrupt key
 #include "lib/util.h"     // canonicalize_pathname_custom()
 #if 0
-#    include "lib/widget.h"  // message()
+#include "lib/widget.h"  // message()
 #endif
 
 #include "vfs.h"
@@ -1045,7 +1045,7 @@ vfs_adjust_stat (struct stat *s)
         s->st_blocks = 0;
     else
     {
-#    ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         blkcnt_t ioblocks;
         blksize_t ioblock_size;
 
@@ -1055,10 +1055,10 @@ vfs_adjust_stat (struct stat *s)
         ioblock_size = 1 + (s->st_blksize - 1) / 512;
         // 3. Calculate number of blocks
         s->st_blocks = ioblocks * ioblock_size;
-#    else
+#else
         // Let IO block size is 512 bytes
         s->st_blocks = 1 + (s->st_size - 1) / 512;
-#    endif
+#endif
     }
 #endif
 }

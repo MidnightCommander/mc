@@ -46,7 +46,7 @@
 #include "lib/util.h"
 
 #ifdef USE_INTERNAL_EDIT
-#    include "src/editor/edit.h"  // WEdit
+#include "src/editor/edit.h"  // WEdit
 #endif
 #include "src/viewer/mcviewer.h"  // for default_* externs
 

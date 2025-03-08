@@ -82,12 +82,12 @@ What to do with this?
 #include <sys/socket.h>  // AF_INET
 #include <netinet/in.h>  // struct in_addr
 #ifdef HAVE_ARPA_INET_H
-#    include <arpa/inet.h>
+#include <arpa/inet.h>
 #endif
 #include <arpa/ftp.h>
 #include <arpa/telnet.h>
 #ifdef HAVE_SYS_PARAM_H
-#    include <sys/param.h>
+#include <sys/param.h>
 #endif
 #include <errno.h>
 #include <ctype.h>
@@ -151,7 +151,7 @@ gboolean ftpfs_ignore_chattr_errors = TRUE;
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef MAXHOSTNAMELEN
-#    define MAXHOSTNAMELEN 64
+#define MAXHOSTNAMELEN 64
 #endif
 
 #define FTP_SUPER(super)     ((ftp_super_t *) (super))
@@ -159,7 +159,7 @@ gboolean ftpfs_ignore_chattr_errors = TRUE;
 #define FH_SOCK              FTP_FILE_HANDLER (fh)->sock
 
 #ifndef INADDR_NONE
-#    define INADDR_NONE 0xffffffff
+#define INADDR_NONE 0xffffffff
 #endif
 
 #define RFC_AUTODETECT 0

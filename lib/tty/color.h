@@ -14,9 +14,9 @@
 #include "lib/global.h"  // glib.h
 
 #ifdef HAVE_SLANG
-#    include "color-slang.h"
+#include "color-slang.h"
 #else
-#    include "tty-ncurses.h"
+#include "tty-ncurses.h"
 #endif
 
 /*** typedefs(not structures) and defined constants **********************************************/

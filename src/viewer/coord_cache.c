@@ -51,7 +51,7 @@
 
 #include <string.h>  // memset()
 #ifdef MC_ENABLE_DEBUGGING_CODE
-#    include <inttypes.h>  // uintmax_t
+#include <inttypes.h>  // uintmax_t
 #endif
 
 #include "lib/global.h"

@@ -53,7 +53,7 @@
 
 #include "src/args.h"
 #ifdef ENABLE_SUBSHELL
-#    include "src/subshell/subshell.h"
+#include "src/subshell/subshell.h"
 #endif
 #include "src/execute.h"  // toggle_subshell
 #include "src/setup.h"    // variables
@@ -74,11 +74,11 @@
 #include "dir.h"      // dir_list_clean()
 
 #ifdef USE_INTERNAL_EDIT
-#    include "src/editor/edit.h"
+#include "src/editor/edit.h"
 #endif
 
 #ifdef USE_DIFF_VIEW
-#    include "src/diffviewer/ydiff.h"
+#include "src/diffviewer/ydiff.h"
 #endif
 
 #include "src/consaver/cons.saver.h"  // show_console_contents
@@ -837,19 +837,19 @@ static void
 setup_mc (void)
 {
 #ifdef HAVE_SLANG
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
-#    else
+#else
     tty_display_8bit (mc_global.full_eight_bits);
-#    endif
+#endif
 
 #else  // HAVE_SLANG
 
-#    ifdef HAVE_CHARSET
+#ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
-#    else
+#else
     tty_display_8bit (mc_global.eight_bit_clean);
-#    endif
+#endif
 #endif
 
     const int baudrate = tty_baudrate ();

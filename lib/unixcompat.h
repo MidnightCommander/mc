@@ -18,86 +18,86 @@
 #include <sys/types.h>  // BSD
 
 #ifdef MAJOR_IN_MKDEV
-#    include <sys/mkdev.h>
+#include <sys/mkdev.h>
 #elif defined MAJOR_IN_SYSMACROS
-#    include <sys/sysmacros.h>
+#include <sys/sysmacros.h>
 #endif
 
 #if defined(HAVE_STRING_H)
-#    include <string.h>
+#include <string.h>
 // An ANSI string.h and pre-ANSI memory.h might conflict
 #elif defined(HAVE_MEMORY_H)
-#    include <memory.h>
+#include <memory.h>
 #else
-#    include <strings.h>
+#include <strings.h>
 // memory and strings.h conflict on other systems
 #endif
 
 #if defined(__QNX__) && !defined(__QNXNTO__)
 /* exec*() from <process.h> */
-#    include <unix.h>
+#include <unix.h>
 #endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef major
-#    warning major() is undefined. Device numbers will not be shown correctly.
-#    define major(devnum) (((devnum) >> 8) & 0xff)
+#warning major() is undefined. Device numbers will not be shown correctly.
+#define major(devnum) (((devnum) >> 8) & 0xff)
 #endif
 
 #ifndef minor
-#    warning minor() is undefined. Device numbers will not be shown correctly.
-#    define minor(devnum) (((devnum) & 0xff))
+#warning minor() is undefined. Device numbers will not be shown correctly.
+#define minor(devnum) (((devnum) & 0xff))
 #endif
 
 #ifndef makedev
-#    warning makedev() is undefined. Device numbers will not be shown correctly.
-#    define makedev(major, minor) ((((major) & 0xff) << 8) | ((minor) & 0xff))
+#warning makedev() is undefined. Device numbers will not be shown correctly.
+#define makedev(major, minor) ((((major) & 0xff) << 8) | ((minor) & 0xff))
 #endif
 
 #ifndef STDIN_FILENO
-#    define STDIN_FILENO 0
+#define STDIN_FILENO 0
 #endif
 
 #ifndef STDOUT_FILENO
-#    define STDOUT_FILENO 1
+#define STDOUT_FILENO 1
 #endif
 
 #ifndef STDERR_FILENO
-#    define STDERR_FILENO 2
+#define STDERR_FILENO 2
 #endif
 
 /* The O_BINARY definition was taken from gettext */
 #if !defined O_BINARY && defined _O_BINARY
 // For MSC-compatible compilers.
-#    define O_BINARY _O_BINARY
+#define O_BINARY _O_BINARY
 #endif
 #ifdef __BEOS__
 // BeOS 5 has O_BINARY, but it has no effect.
-#    undef O_BINARY
+#undef O_BINARY
 #endif
 /* On reasonable systems, binary I/O is the default.  */
 #ifndef O_BINARY
-#    define O_BINARY 0
+#define O_BINARY 0
 #endif
 
 /* Replacement for O_NONBLOCK */
 #ifndef O_NONBLOCK
-#    ifdef O_NDELAY  // SYSV
-#        define O_NONBLOCK O_NDELAY
-#    else  // BSD
-#        define O_NONBLOCK FNDELAY
-#    endif
+#ifdef O_NDELAY  // SYSV
+#define O_NONBLOCK O_NDELAY
+#else  // BSD
+#define O_NONBLOCK FNDELAY
+#endif
 #endif
 
 /* Solaris9 doesn't have PRIXMAX */
 #ifndef PRIXMAX
-#    define PRIXMAX PRIxMAX
+#define PRIXMAX PRIxMAX
 #endif
 
 /* ESC_CHAR is defined in /usr/include/langinfo.h in some systems */
 #ifdef ESC_CHAR
-#    undef ESC_CHAR
+#undef ESC_CHAR
 #endif
 /* AIX compiler doesn't understand '\e' */
 #define ESC_CHAR '\033'

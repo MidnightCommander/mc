@@ -47,12 +47,12 @@
 #include <stdlib.h>
 
 #ifdef __linux__
-#    ifdef HAVE_LINUX_FS_H
-#        include <linux/fs.h>
-#    endif
-#    ifdef HAVE_SYS_IOCTL_H
-#        include <sys/ioctl.h>
-#    endif
+#ifdef HAVE_LINUX_FS_H
+#include <linux/fs.h>
+#endif
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
 #endif
 
 #include "lib/global.h"
@@ -62,7 +62,7 @@
 #include "lib/event.h"
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "vfs.h"

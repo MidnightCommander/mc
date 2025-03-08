@@ -64,9 +64,9 @@ input_colors_t input_colors;
 #define LARGE_HISTORY_BUTTON 1
 
 #ifdef LARGE_HISTORY_BUTTON
-#    define HISTORY_BUTTON_WIDTH 3
+#define HISTORY_BUTTON_WIDTH 3
 #else
-#    define HISTORY_BUTTON_WIDTH 1
+#define HISTORY_BUTTON_WIDTH 1
 #endif
 
 #define should_show_history_button(in)                                                             \

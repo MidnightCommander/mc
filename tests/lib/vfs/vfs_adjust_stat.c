@@ -32,29 +32,29 @@
 /* --------------------------------------------------------------------------------------------- */
 
 #if defined(HAVE_STRUCT_STAT_ST_BLKSIZE) && defined(HAVE_STRUCT_STAT_ST_BLOCKS)
-#    define STRUCT_STAT(size, blksize, blocks)                                                     \
-        {                                                                                          \
-            .st_size = size,                                                                       \
-            .st_blksize = blksize,                                                                 \
-            .st_blocks = blocks,                                                                   \
-        }
+#define STRUCT_STAT(size, blksize, blocks)                                                         \
+    {                                                                                              \
+        .st_size = size,                                                                           \
+        .st_blksize = blksize,                                                                     \
+        .st_blocks = blocks,                                                                       \
+    }
 #elif defined(HAVE_STRUCT_STAT_ST_BLKSIZE)
-#    define STRUCT_STAT(st_blksize, st_blocks)                                                     \
-        {                                                                                          \
-            .st_size = size,                                                                       \
-            .st_blksize = st_blksize,                                                              \
-        }
+#define STRUCT_STAT(st_blksize, st_blocks)                                                         \
+    {                                                                                              \
+        .st_size = size,                                                                           \
+        .st_blksize = st_blksize,                                                                  \
+    }
 #elif defined(HAVE_STRUCT_STAT_ST_BLOCKS)
-#    define STRUCT_STAT(st_blksize, st_blocks)                                                     \
-        {                                                                                          \
-            .st_size = size,                                                                       \
-            .st_blocks = st_blocks,                                                                \
-        }
+#define STRUCT_STAT(st_blksize, st_blocks)                                                         \
+    {                                                                                              \
+        .st_size = size,                                                                           \
+        .st_blocks = st_blocks,                                                                    \
+    }
 #else
-#    define STRUCT_STAT(st_blksize, st_blocks)                                                     \
-        {                                                                                          \
-            .st_size = size,                                                                       \
-        }
+#define STRUCT_STAT(st_blksize, st_blocks)                                                         \
+    {                                                                                              \
+        .st_size = size,                                                                           \
+    }
 #endif
 
 /* @DataSource("test_test_vfs_adjust_stat_ds") */
@@ -85,9 +85,9 @@ START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
     struct stat expected_stat;
 
     expected_stat.st_size = data->etalon_stat.st_size;
-#    ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     expected_stat.st_blksize = data->etalon_stat.st_blksize;
-#    endif
+#endif
     // when
     vfs_adjust_stat (&expected_stat);
 

@@ -50,19 +50,19 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"  // get_codepage_id ()
+#include "lib/charsets.h"  // get_codepage_id ()
 #endif
 #include "lib/event.h"
 
 #include "src/setup.h"  // For loading/saving panel options
 #include "src/execute.h"
 #ifdef HAVE_CHARSET
-#    include "src/selcodepage.h"  // select_charset (), SELECT_CHARSET_NO_TRANSLATE
+#include "src/selcodepage.h"  // select_charset (), SELECT_CHARSET_NO_TRANSLATE
 #endif
 #include "src/keymap.h"  // global_keymap_t
 #include "src/history.h"
 #ifdef ENABLE_SUBSHELL
-#    include "src/subshell/subshell.h"  // subshell_chdir()
+#include "src/subshell/subshell.h"  // subshell_chdir()
 #endif
 
 #include "src/usermenu.h"

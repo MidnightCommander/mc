@@ -38,7 +38,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"  // cp_source
+#include "lib/charsets.h"  // cp_source
 #endif
 #include "lib/widget.h"
 

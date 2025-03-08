@@ -17,7 +17,7 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef MAXSYMLINKS
-#    define MAXSYMLINKS 32
+#define MAXSYMLINKS 32
 #endif
 
 #define MAX_SAVED_BOOKMARKS 10

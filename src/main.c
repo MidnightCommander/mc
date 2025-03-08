@@ -65,7 +65,7 @@
 #include "filemanager/filenot.h"  // my_rmdir()
 
 #ifdef USE_INTERNAL_EDIT
-#    include "editor/edit.h"  // edit_arg_free()
+#include "editor/edit.h"  // edit_arg_free()
 #endif
 
 #include "vfs/plugins_init.h"
@@ -73,14 +73,14 @@
 #include "events_init.h"
 #include "args.h"
 #ifdef ENABLE_SUBSHELL
-#    include "subshell/subshell.h"
+#include "subshell/subshell.h"
 #endif
 #include "keymap.h"
 #include "setup.h"  // load_setup()
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
-#    include "selcodepage.h"
+#include "lib/charsets.h"
+#include "selcodepage.h"
 #endif
 
 #include "consaver/cons.saver.h"  // cons_saver_pid

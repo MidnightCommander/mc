@@ -29,7 +29,7 @@ BraceWrapping:
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Custom
 ColumnLimit: 100
-IndentPPDirectives: AfterHash
+IndentPPDirectives: None
 IndentWidth: 4
 SortIncludes: Never
 SpaceAfterCStyleCast: true

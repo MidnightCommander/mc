@@ -50,7 +50,7 @@
 
 #include "lib/vfs/vfs.h"
 #ifdef ENABLE_VFS_FTP
-#    include "src/vfs/ftpfs/ftpfs.h"
+#include "src/vfs/ftpfs/ftpfs.h"
 #endif
 
 #include "lib/util.h"  // Q_()
@@ -60,12 +60,12 @@
 #include "src/history.h"  // MC_HISTORY_ESC_TIMEOUT
 #include "src/execute.h"  // pause_after_run
 #ifdef ENABLE_BACKGROUND
-#    include "src/background.h"  // task_list
+#include "src/background.h"  // task_list
 #endif
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
-#    include "src/selcodepage.h"
+#include "lib/charsets.h"
+#include "src/selcodepage.h"
 #endif
 
 #include "command.h"  // For cmdline
@@ -81,9 +81,9 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef ENABLE_BACKGROUND
-#    define B_STOP   (B_USER + 1)
-#    define B_RESUME (B_USER + 2)
-#    define B_KILL   (B_USER + 3)
+#define B_STOP   (B_USER + 1)
+#define B_RESUME (B_USER + 2)
+#define B_KILL   (B_USER + 3)
 #endif
 
 /*** file scope type declarations ****************************************************************/
@@ -493,7 +493,7 @@ task_cb (WButton *button, int action)
     // Get this instance information
     listbox_get_current (bg_list, NULL, (void **) &tl);
 
-#    ifdef SIGTSTP
+#ifdef SIGTSTP
     if (action == B_STOP)
     {
         sig = SIGSTOP;
@@ -505,7 +505,7 @@ task_cb (WButton *button, int action)
         tl->state = Task_Running;
     }
     else
-#    endif
+#endif
         if (action == B_KILL)
         sig = SIGKILL;
 
@@ -1015,11 +1015,11 @@ display_bits_box (void)
     {
         mc_global.eight_bit_clean = current_mode < 3;
         mc_global.full_eight_bits = current_mode < 2;
-#    ifndef HAVE_SLANG
+#ifndef HAVE_SLANG
         tty_display_8bit (mc_global.eight_bit_clean);
-#    else
+#else
         tty_display_8bit (mc_global.full_eight_bits);
-#    endif
+#endif
         use_8th_bit_as_meta = !new_meta;
     }
 }
@@ -1082,11 +1082,11 @@ display_bits_box (void)
                 g_free (errmsg);
             }
 
-#    ifdef HAVE_SLANG
+#ifdef HAVE_SLANG
             tty_display_8bit (mc_global.display_codepage != 0 && mc_global.display_codepage != 1);
-#    else
+#else
             tty_display_8bit (mc_global.display_codepage != 0);
-#    endif
+#endif
             use_8th_bit_as_meta = !new_meta;
 
             repaint_screen ();
@@ -1146,27 +1146,27 @@ void
 configure_vfs_box (void)
 {
     char buffer2[BUF_TINY];
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
     char buffer3[BUF_TINY];
 
     g_snprintf (buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
-#    endif
+#endif
 
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
 
     {
         char *ret_timeout;
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
         char *ret_passwd;
         char *ret_ftp_proxy;
         char *ret_directory_timeout;
-#    endif
+#endif
 
         quick_widget_t quick_widgets[] = {
             QUICK_LABELED_INPUT (N_ ("Timeout for freeing VFSs (sec):"), input_label_left, buffer2,
                                  "input-timo-vfs", &ret_timeout, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
             QUICK_SEPARATOR (TRUE),
             QUICK_LABELED_INPUT (N_ ("FTP anonymous password:"), input_label_left,
                                  ftpfs_anonymous_passwd, "input-passwd", &ret_passwd, NULL, FALSE,
@@ -1182,7 +1182,7 @@ configure_vfs_box (void)
             QUICK_CHECKBOX (N_ ("Use &passive mode"), &ftpfs_use_passive_connections, NULL),
             QUICK_CHECKBOX (N_ ("Use passive mode over pro&xy"),
                             &ftpfs_use_passive_connections_over_proxy, NULL),
-#    endif
+#endif
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
         };
@@ -1194,18 +1194,18 @@ configure_vfs_box (void)
             .title = N_ ("Virtual File System Setting"),
             .help = "[Virtual FS]",
             .widgets = quick_widgets,
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
             .callback = confvfs_callback,
-#    else
+#else
             .callback = NULL,
-#    endif
+#endif
             .mouse_callback = NULL,
         };
 
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
         if (!ftpfs_always_use_proxy)
             quick_widgets[5].state = WST_DISABLED;
-#    endif
+#endif
 
         if (quick_dialog (&qdlg) != B_CANCEL)
         {
@@ -1218,7 +1218,7 @@ configure_vfs_box (void)
 
             if (vfs_timeout < 0 || vfs_timeout > 10000)
                 vfs_timeout = 10;
-#    ifdef ENABLE_VFS_FTP
+#ifdef ENABLE_VFS_FTP
             g_free (ftpfs_anonymous_passwd);
             // cppcheck-suppress uninitvar
             ftpfs_anonymous_passwd = ret_passwd;
@@ -1231,7 +1231,7 @@ configure_vfs_box (void)
             else
                 ftpfs_directory_timeout = atoi (ret_directory_timeout);
             g_free (ret_directory_timeout);
-#    endif
+#endif
         }
     }
 }
@@ -1333,9 +1333,9 @@ jobs_box (void)
 
     for (i = 0; i < n_but; i++)
     {
-#    ifdef ENABLE_NLS
+#ifdef ENABLE_NLS
         job_but[i].name = _ (job_but[i].name);
-#    endif
+#endif
 
         job_but[i].len = str_term_width1 (job_but[i].name) + 3;
         if (job_but[i].flags == DEFPUSH_BUTTON)

@@ -41,11 +41,11 @@
 #include <stdlib.h>
 #include <string.h>
 #ifdef HAVE_SYS_SELECT_H
-#    include <sys/select.h>
+#include <sys/select.h>
 #else
-#    include <sys/time.h>
-#    include <sys/types.h>
-#    include <unistd.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
 #endif
 
 #include "lib/global.h"
@@ -60,31 +60,31 @@
 #include "lib/widget.h"  // mc_refresh()
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-#    include "x11conn.h"
+#include "x11conn.h"
 #endif
 
 #ifdef __linux__
-#    if defined(__GLIBC__) && (__GLIBC__ < 2)
-#        include <linux/termios.h>  // TIOCLINUX
-#    else
-#        include <termios.h>
-#    endif
-#    ifdef HAVE_SYS_IOCTL_H
-#        include <sys/ioctl.h>
-#    endif
+#if defined(__GLIBC__) && (__GLIBC__ < 2)
+#include <linux/termios.h>  // TIOCLINUX
+#else
+#include <termios.h>
+#endif
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
 #endif
 
 #ifdef __CYGWIN__
-#    include <termios.h>
-#    ifdef HAVE_SYS_IOCTL_H
-#        include <sys/ioctl.h>
-#    endif
+#include <termios.h>
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
 #endif
 
 #ifdef __QNXNTO__
-#    include <dlfcn.h>
-#    include <Ph.h>
-#    include <sys/dcmd_chr.h>
+#include <dlfcn.h>
+#include <Ph.h>
+#include <sys/dcmd_chr.h>
 #endif
 
 /*** global variables ****************************************************************************/

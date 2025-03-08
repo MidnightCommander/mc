@@ -49,7 +49,7 @@
 #include "lib/util.h"     // is_printable()
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "edit-impl.h"

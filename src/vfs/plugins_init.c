@@ -39,35 +39,35 @@
 #include "local/local.h"
 
 #ifdef ENABLE_VFS_CPIO
-#    include "cpio/cpio.h"
+#include "cpio/cpio.h"
 #endif
 
 #ifdef ENABLE_VFS_EXTFS
-#    include "extfs/extfs.h"
+#include "extfs/extfs.h"
 #endif
 
 #ifdef ENABLE_VFS_SHELL
-#    include "shell/shell.h"
+#include "shell/shell.h"
 #endif
 
 #ifdef ENABLE_VFS_FTP
-#    include "ftpfs/ftpfs.h"
+#include "ftpfs/ftpfs.h"
 #endif
 
 #ifdef ENABLE_VFS_SFTP
-#    include "sftpfs/sftpfs.h"
+#include "sftpfs/sftpfs.h"
 #endif
 
 #ifdef ENABLE_VFS_SFS
-#    include "sfs/sfs.h"
+#include "sfs/sfs.h"
 #endif
 
 #ifdef ENABLE_VFS_TAR
-#    include "tar/tar.h"
+#include "tar/tar.h"
 #endif
 
 #ifdef ENABLE_VFS_UNDELFS
-#    include "undelfs/undelfs.h"
+#include "undelfs/undelfs.h"
 #endif
 
 #include "plugins_init.h"

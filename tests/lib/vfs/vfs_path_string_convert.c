@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "lib/strutil.h"
@@ -295,7 +295,7 @@ END_PARAMETRIZED_TEST
 #ifdef HAVE_CHARSET
 /* --------------------------------------------------------------------------------------------- */
 
-#    define ETALON_STR "/path/to/file.ext/test1://#enc:KOI8-R"
+#define ETALON_STR "/path/to/file.ext/test1://#enc:KOI8-R"
 /* @Test */
 START_TEST (test_vfs_path_encoding_at_end)
 {

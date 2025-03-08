@@ -51,7 +51,7 @@
 #include "layout.h"
 #include "mountlist.h"
 #ifdef ENABLE_EXT2FS_ATTR
-#    include "cmd.h"  // chattr_get_as_str()
+#include "cmd.h"  // chattr_get_as_str()
 #endif
 
 #include "info.h"

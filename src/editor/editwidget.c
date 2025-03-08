@@ -52,7 +52,7 @@
 #include "lib/mcconfig.h"
 #include "lib/event.h"  // mc_event_raise()
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #include "src/keymap.h"           // keybind_lookup_keymap_command()
@@ -65,7 +65,7 @@
 #include "editwidget.h"
 #include "editmacros.h"  // edit_execute_macro()
 #ifdef HAVE_ASPELL
-#    include "spell.h"
+#include "spell.h"
 #endif
 
 /*** global variables ****************************************************************************/

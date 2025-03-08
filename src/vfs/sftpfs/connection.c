@@ -31,7 +31,7 @@
 #include <sys/socket.h>  // AF_INET
 #include <netinet/in.h>  // struct in_addr
 #ifdef HAVE_ARPA_INET_H
-#    include <arpa/inet.h>
+#include <arpa/inet.h>
 #endif
 
 #include <libssh2.h>

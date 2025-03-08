@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <string.h>
 #ifdef ENABLE_EXT2FS_ATTR
-#    include <e2p/e2p.h>  // fgetflags(), fsetflags()
+#include <e2p/e2p.h>  // fgetflags(), fsetflags()
 #endif
 
 #include "lib/global.h"

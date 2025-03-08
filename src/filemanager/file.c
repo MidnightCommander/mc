@@ -72,7 +72,7 @@
 
 #include "src/setup.h"
 #ifdef ENABLE_BACKGROUND
-#    include "src/background.h"  // do_background()
+#include "src/background.h"  // do_background()
 #endif
 
 /* Needed for other_panel and WTree */

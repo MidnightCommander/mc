@@ -155,26 +155,25 @@
    (e.g., A and B) have the same type as MIN and MAX.  Instead, they assume
    that the result (e.g., A + B) has that type.  */
 #if _GL_HAS_BUILTIN_OVERFLOW_P
-#    define _GL_ADD_OVERFLOW(a, b, min, max)                                                       \
-        __builtin_add_overflow_p (a, b, (__typeof__ ((a) + (b))) 0)
-#    define _GL_SUBTRACT_OVERFLOW(a, b, min, max)                                                  \
-        __builtin_sub_overflow_p (a, b, (__typeof__ ((a) - (b))) 0)
-#    define _GL_MULTIPLY_OVERFLOW(a, b, min, max)                                                  \
-        __builtin_mul_overflow_p (a, b, (__typeof__ ((a) * (b))) 0)
+#define _GL_ADD_OVERFLOW(a, b, min, max) __builtin_add_overflow_p (a, b, (__typeof__ ((a) + (b))) 0)
+#define _GL_SUBTRACT_OVERFLOW(a, b, min, max)                                                      \
+    __builtin_sub_overflow_p (a, b, (__typeof__ ((a) - (b))) 0)
+#define _GL_MULTIPLY_OVERFLOW(a, b, min, max)                                                      \
+    __builtin_mul_overflow_p (a, b, (__typeof__ ((a) * (b))) 0)
 #else
-#    define _GL_ADD_OVERFLOW(a, b, min, max)                                                       \
-        ((min) < 0     ? INT_ADD_RANGE_OVERFLOW (a, b, min, max)                                   \
-             : (a) < 0 ? (b) <= (a) + (b)                                                          \
-             : (b) < 0 ? (a) <= (a) + (b)                                                          \
-                       : (a) + (b) < (b))
-#    define _GL_SUBTRACT_OVERFLOW(a, b, min, max)                                                  \
-        ((min) < 0     ? INT_SUBTRACT_RANGE_OVERFLOW (a, b, min, max)                              \
-             : (a) < 0 ? 1                                                                         \
-             : (b) < 0 ? (a) - (b) <= (a)                                                          \
-                       : (a) < (b))
-#    define _GL_MULTIPLY_OVERFLOW(a, b, min, max)                                                  \
-        (((min) == 0 && (((a) < 0 && 0 < (b)) || ((b) < 0 && 0 < (a))))                            \
-         || INT_MULTIPLY_RANGE_OVERFLOW (a, b, min, max))
+#define _GL_ADD_OVERFLOW(a, b, min, max)                                                           \
+    ((min) < 0     ? INT_ADD_RANGE_OVERFLOW (a, b, min, max)                                       \
+         : (a) < 0 ? (b) <= (a) + (b)                                                              \
+         : (b) < 0 ? (a) <= (a) + (b)                                                              \
+                   : (a) + (b) < (b))
+#define _GL_SUBTRACT_OVERFLOW(a, b, min, max)                                                      \
+    ((min) < 0     ? INT_SUBTRACT_RANGE_OVERFLOW (a, b, min, max)                                  \
+         : (a) < 0 ? 1                                                                             \
+         : (b) < 0 ? (a) - (b) <= (a)                                                              \
+                   : (a) < (b))
+#define _GL_MULTIPLY_OVERFLOW(a, b, min, max)                                                      \
+    (((min) == 0 && (((a) < 0 && 0 < (b)) || ((b) < 0 && 0 < (a))))                                \
+     || INT_MULTIPLY_RANGE_OVERFLOW (a, b, min, max))
 #endif
 #define _GL_DIVIDE_OVERFLOW(a, b, min, max)                                                        \
     ((min) < 0     ? (b) == _GL_INT_NEGATE_CONVERT (min, 1) && (a) < -(max)                        \

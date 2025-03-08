@@ -46,7 +46,7 @@
 #include "lib/widget.h"
 #include "lib/strutil.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 #include "lib/event.h"  // mc_event_raise()
 
@@ -59,7 +59,7 @@
 #include "src/setup.h"
 #include "src/history.h"
 #ifdef HAVE_CHARSET
-#    include "src/selcodepage.h"
+#include "src/selcodepage.h"
 #endif
 
 #include "ydiff.h"

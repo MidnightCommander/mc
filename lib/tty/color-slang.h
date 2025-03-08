@@ -15,21 +15,21 @@
  */
 
 #ifndef A_BOLD
-#    define A_BOLD SLTT_BOLD_MASK
+#define A_BOLD SLTT_BOLD_MASK
 #endif
 #ifdef SLTT_ITALIC_MASK  // available since slang-pre2.3.0-107
-#    ifndef A_ITALIC
-#        define A_ITALIC SLTT_ITALIC_MASK
-#    endif
+#ifndef A_ITALIC
+#define A_ITALIC SLTT_ITALIC_MASK
+#endif
 #endif
 #ifndef A_UNDERLINE
-#    define A_UNDERLINE SLTT_ULINE_MASK
+#define A_UNDERLINE SLTT_ULINE_MASK
 #endif
 #ifndef A_REVERSE
-#    define A_REVERSE SLTT_REV_MASK
+#define A_REVERSE SLTT_REV_MASK
 #endif
 #ifndef A_BLINK
-#    define A_BLINK SLTT_BLINK_MASK
+#define A_BLINK SLTT_BLINK_MASK
 #endif
 
 /*** enums ***************************************************************************************/

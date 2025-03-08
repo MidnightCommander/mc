@@ -32,7 +32,7 @@
 #include "lib/search.h"
 #include "lib/strutil.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"  // str_convert_to_input()
+#include "lib/charsets.h"  // str_convert_to_input()
 #endif
 #include "lib/tty/tty.h"  // LINES, COLS
 #include "lib/widget.h"

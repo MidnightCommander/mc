@@ -39,7 +39,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef ENABLE_VFS_NET
-#    include <netdb.h>
+#include <netdb.h>
 #endif
 #include <unistd.h>
 #include <stdlib.h>
@@ -69,11 +69,11 @@
 #include "src/viewer/mcviewer.h"
 
 #ifdef USE_INTERNAL_EDIT
-#    include "src/editor/edit.h"
+#include "src/editor/edit.h"
 #endif
 
 #ifdef USE_DIFF_VIEW
-#    include "src/diffviewer/ydiff.h"
+#include "src/diffviewer/ydiff.h"
 #endif
 
 #include "filegui.h"

@@ -30,8 +30,8 @@
 #include <ctype.h>
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
-#    include "src/selcodepage.h"
+#include "lib/charsets.h"
+#include "src/selcodepage.h"
 #endif
 #include "src/editor/editwidget.h"
 #include "src/editor/editmacros.h"  // edit_load_macro_cmd()

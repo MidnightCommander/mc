@@ -57,7 +57,7 @@
 #include "lib/widget.h"
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"  // get_codepage_id
+#include "lib/charsets.h"  // get_codepage_id
 #endif
 
 #include "src/usermenu.h"  // user_menu_cmd()
@@ -71,7 +71,7 @@
 #include "editmacros.h"
 #include "etags.h"  // edit_get_match_keyword_cmd()
 #ifdef HAVE_ASPELL
-#    include "spell.h"
+#include "spell.h"
 #endif
 
 /*** global variables ****************************************************************************/

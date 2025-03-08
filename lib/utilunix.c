@@ -46,12 +46,12 @@
 #include <stdlib.h>
 #include <string.h>
 #ifdef HAVE_SYS_PARAM_H
-#    include <sys/param.h>
+#include <sys/param.h>
 #endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_SYS_SELECT_H
-#    include <sys/select.h>
+#include <sys/select.h>
 #endif
 #include <sys/wait.h>
 #include <pwd.h>
@@ -67,7 +67,7 @@
 #include "lib/vfs/xdirentry.h"
 
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 /*** global variables ****************************************************************************/
@@ -1095,11 +1095,11 @@ mc_realpath (const char *path, char *resolved_path)
         char got_path[PATH_MAX];
         char *new_path = got_path;
         char *max_path;
-#    ifdef S_IFLNK
+#ifdef S_IFLNK
         char link_path[PATH_MAX];
         int readlinks = 0;
         int n;
-#    endif
+#endif
 
         // Make a copy of the source path since we may need to modify it.
         if (strlen (path) >= PATH_MAX - 2)
@@ -1175,7 +1175,7 @@ mc_realpath (const char *path, char *resolved_path)
                 }
                 *new_path++ = *path++;
             }
-#    ifdef S_IFLNK
+#ifdef S_IFLNK
             // Protect against infinite loops.
             if (readlinks++ > MAXSYMLINKS)
             {
@@ -1218,7 +1218,7 @@ mc_realpath (const char *path, char *resolved_path)
                 strcpy (copy_path, link_path);
                 path = copy_path;
             }
-#    endif
+#endif
             *new_path++ = PATH_SEP;
         }
         // Delete trailing slash but don't whomp a lone slash.

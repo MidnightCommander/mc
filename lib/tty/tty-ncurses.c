@@ -35,7 +35,7 @@
 #include <stdarg.h>
 #include <signal.h>
 #ifdef HAVE_SYS_IOCTL_H
-#    include <sys/ioctl.h>
+#include <sys/ioctl.h>
 #endif
 #include <termios.h>
 
@@ -53,11 +53,11 @@
 
 /* include at last !!! */
 #ifdef HAVE_NCURSESW_TERM_H
-#    include <ncursesw/term.h>
+#include <ncursesw/term.h>
 #elif defined HAVE_NCURSES_TERM_H
-#    include <ncurses/term.h>
+#include <ncurses/term.h>
 #else
-#    include <term.h>
+#include <term.h>
 #endif
 
 /*** global variables ****************************************************************************/
@@ -65,7 +65,7 @@
 /*** file scope macro definitions ****************************************************************/
 
 #if !defined(CTRL)
-#    define CTRL(x) ((x) & 0x1f)
+#define CTRL(x) ((x) & 0x1f)
 #endif
 
 #define yx_in_screen(y, x) (y >= 0 && y < LINES && x >= 0 && x < COLS)
@@ -95,9 +95,9 @@ tty_setup_sigwinch (void (*handler) (int))
     memset (&act, 0, sizeof (act));
     act.sa_handler = handler;
     sigemptyset (&act.sa_mask);
-#    ifdef SA_RESTART
+#ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
-#    endif
+#endif
     my_sigaction (SIGWINCH, &act, &oact);
 #endif
 
@@ -315,22 +315,22 @@ tty_change_screen_size (void)
 
     winsz.ws_col = winsz.ws_row = 0;
 
-#    ifndef NCURSES_VERSION
+#ifndef NCURSES_VERSION
     tty_noraw_mode ();
     tty_reset_screen ();
-#    endif
+#endif
 
     // Ioctl on the STDIN_FILENO
     ioctl (fileno (stdout), TIOCGWINSZ, &winsz);
     if (winsz.ws_col != 0 && winsz.ws_row != 0)
     {
-#    if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
+#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
         resizeterm (winsz.ws_row, winsz.ws_col);
         clearok (stdscr, TRUE);  // sigwinch's should use a semaphore!
-#    else
+#else
         COLS = winsz.ws_col;
         LINES = winsz.ws_row;
-#    endif
+#endif
     }
 #endif
 

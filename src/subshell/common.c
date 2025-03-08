@@ -55,7 +55,7 @@
 #include <config.h>
 
 #ifndef _GNU_SOURCE
-#    define _GNU_SOURCE 1
+#define _GNU_SOURCE 1
 #endif
 
 #include <ctype.h>
@@ -65,34 +65,34 @@
 #include <string.h>
 #include <signal.h>
 #ifdef HAVE_SYS_SELECT_H
-#    include <sys/select.h>
+#include <sys/select.h>
 #else
-#    include <sys/time.h>
-#    include <unistd.h>
+#include <sys/time.h>
+#include <unistd.h>
 #endif
 #include <sys/types.h>
 #include <sys/wait.h>
 #ifdef HAVE_SYS_IOCTL_H
-#    include <sys/ioctl.h>
+#include <sys/ioctl.h>
 #endif
 #include <termios.h>
 
 #ifdef HAVE_STROPTS_H
-#    include <stropts.h>  // For I_PUSH
+#include <stropts.h>  // For I_PUSH
 #endif
 
 #ifdef HAVE_OPENPTY
 /* includes for openpty() */
-#    ifdef HAVE_PTY_H
-#        include <pty.h>
-#    endif
-#    ifdef HAVE_UTIL_H
-#        include <util.h>
-#    endif
+#ifdef HAVE_PTY_H
+#include <pty.h>
+#endif
+#ifdef HAVE_UTIL_H
+#include <util.h>
+#endif
 /* <sys/types.h> is a prerequisite of <libutil.h> on FreeBSD 8.0.  */
-#    ifdef HAVE_LIBUTIL_H
-#        include <libutil.h>
-#    endif
+#ifdef HAVE_LIBUTIL_H
+#include <libutil.h>
+#endif
 #endif
 
 #include "lib/global.h"
@@ -136,11 +136,11 @@ gboolean should_read_new_subshell_prompt;
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef WEXITSTATUS
-#    define WEXITSTATUS(stat_val) ((unsigned) (stat_val) >> 8)
+#define WEXITSTATUS(stat_val) ((unsigned) (stat_val) >> 8)
 #endif
 
 #ifndef WIFEXITED
-#    define WIFEXITED(stat_val) (((stat_val) & 255) == 0)
+#define WIFEXITED(stat_val) (((stat_val) & 255) == 0)
 #endif
 
 /* Initial length of the buffer for the subshell's prompt */
@@ -1002,7 +1002,7 @@ feed_subshell (int how, gboolean fail_on_error)
 
 #ifndef HAVE_OPENPTY
 
-#    ifdef HAVE_GRANTPT
+#ifdef HAVE_GRANTPT
 
 /* System V version of pty_open_master */
 
@@ -1012,18 +1012,18 @@ pty_open_master (char *pty_name)
     char *slave_name;
     int pty_master;
 
-#        ifdef HAVE_POSIX_OPENPT
+#ifdef HAVE_POSIX_OPENPT
     pty_master = posix_openpt (O_RDWR);
-#        elif defined HAVE_GETPT
+#elif defined HAVE_GETPT
     // getpt () is a GNU extension (glibc 2.1.x)
     pty_master = getpt ();
-#        elif defined IS_AIX
+#elif defined IS_AIX
     strcpy (pty_name, "/dev/ptc");
     pty_master = open (pty_name, O_RDWR);
-#        else
+#else
     strcpy (pty_name, "/dev/ptmx");
     pty_master = open (pty_name, O_RDWR);
-#        endif
+#endif
 
     if (pty_master == -1)
         return -1;
@@ -1053,8 +1053,8 @@ pty_open_slave (const char *pty_name)
         fprintf (stderr, "open (%s, O_RDWR): %s\r\n", pty_name, unix_error_string (errno));
         return -1;
     }
-#        if !defined(__osf__) && !defined(__linux__)
-#            if defined(I_FIND) && defined(I_PUSH)
+#if !defined(__osf__) && !defined(__linux__)
+#if defined(I_FIND) && defined(I_PUSH)
     if (ioctl (pty_slave, I_FIND, "ptem") == 0)
         if (ioctl (pty_slave, I_PUSH, "ptem") == -1)
         {
@@ -1072,7 +1072,7 @@ pty_open_slave (const char *pty_name)
             close (pty_slave);
             return -1;
         }
-#                if !defined(sgi) && !defined(__sgi)
+#if !defined(sgi) && !defined(__sgi)
     if (ioctl (pty_slave, I_FIND, "ttcompat") == 0)
         if (ioctl (pty_slave, I_PUSH, "ttcompat") == -1)
         {
@@ -1081,15 +1081,15 @@ pty_open_slave (const char *pty_name)
             close (pty_slave);
             return -1;
         }
-#                endif
-#            endif
-#        endif
+#endif
+#endif
+#endif
 
     fcntl (pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;
 }
 
-#    else  // !HAVE_GRANTPT
+#else  // !HAVE_GRANTPT
 
 /* --------------------------------------------------------------------------------------------- */
 /** BSD version of pty_open_master */
@@ -1151,7 +1151,7 @@ pty_open_slave (const char *pty_name)
     fcntl (pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;
 }
-#    endif
+#endif
 
 #endif
 

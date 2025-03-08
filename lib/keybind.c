@@ -300,11 +300,11 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (MacroStartStopRecord),
     ADD_KEYMAP_NAME (MacroDelete),
     ADD_KEYMAP_NAME (RepeatStartStopRecord),
-#    ifdef HAVE_ASPELL
+#ifdef HAVE_ASPELL
     ADD_KEYMAP_NAME (SpellCheck),
     ADD_KEYMAP_NAME (SpellCheckCurrentWord),
     ADD_KEYMAP_NAME (SpellCheckSelectLang),
-#    endif
+#endif
     ADD_KEYMAP_NAME (BookmarkFlush),
     ADD_KEYMAP_NAME (BookmarkNext),
     ADD_KEYMAP_NAME (BookmarkPrev),

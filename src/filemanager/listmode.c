@@ -32,41 +32,41 @@
 
 #ifdef LISTMODE_EDITOR
 
-#    include <stdio.h>
-#    include <string.h>
+#include <stdio.h>
+#include <string.h>
 
-#    include <sys/types.h>
-#    include <sys/stat.h>
-#    include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-#    include "lib/global.h"
-#    include "lib/widget.h"
+#include "lib/global.h"
+#include "lib/widget.h"
 
-#    include "lib/tty/tty.h"
-#    include "lib/tty/key.h"
-#    include "lib/skin/skin.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/skin/skin.h"
 
 /* Needed for the extern declarations of integer parameters */
-#    include "dir.h"
-#    include "panel.h"  // Needed for the externs
-#    include "file.h"
-#    include "listmode.h"
+#include "dir.h"
+#include "panel.h"  // Needed for the externs
+#include "file.h"
+#include "listmode.h"
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
-#    define UX       5
-#    define UY       2
+#define UX       5
+#define UY       2
 
-#    define BX       5
-#    define BY       18
+#define BX       5
+#define BY       18
 
-#    define B_ADD    B_USER
-#    define B_REMOVE (B_USER + 1)
+#define B_ADD    B_USER
+#define B_REMOVE (B_USER + 1)
 
-#    define B_PLUS   B_USER
-#    define B_MINUS  (B_USER + 1)
+#define B_PLUS   B_USER
+#define B_MINUS  (B_USER + 1)
 
 /*** file scope type declarations ****************************************************************/
 

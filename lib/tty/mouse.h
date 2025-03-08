@@ -10,7 +10,7 @@
 
 #ifdef HAVE_LIBGPM
 /* GPM mouse support include file */
-#    include <gpm.h>
+#include <gpm.h>
 #endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -20,20 +20,20 @@
 /* These lines are modified version from the lines appearing in the */
 /* gpm.h include file of the Linux General Purpose Mouse server */
 
-#    define GPM_B_LEFT          (1 << 2)
-#    define GPM_B_MIDDLE        (1 << 1)
-#    define GPM_B_RIGHT         (1 << 0)
+#define GPM_B_LEFT          (1 << 2)
+#define GPM_B_MIDDLE        (1 << 1)
+#define GPM_B_RIGHT         (1 << 0)
 
-#    define GPM_BARE_EVENTS(ev) ((ev) & 0xF)
+#define GPM_BARE_EVENTS(ev) ((ev) & 0xF)
 #endif
 
 /* Mouse wheel events */
 #ifndef GPM_B_DOWN
-#    define GPM_B_DOWN (1 << 5)
+#define GPM_B_DOWN (1 << 5)
 #endif
 
 #ifndef GPM_B_UP
-#    define GPM_B_UP (1 << 4)
+#define GPM_B_UP (1 << 4)
 #endif
 
 /*** enums ***************************************************************************************/

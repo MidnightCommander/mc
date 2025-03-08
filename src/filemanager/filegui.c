@@ -55,9 +55,9 @@
 #if ((defined STAT_STATVFS || defined STAT_STATVFS64)                                              \
      && (defined HAVE_STRUCT_STATVFS_F_BASETYPE || defined HAVE_STRUCT_STATVFS_F_FSTYPENAME        \
          || (!defined HAVE_STRUCT_STATFS_F_FSTYPENAME)))
-#    define USE_STATVFS 1
+#define USE_STATVFS 1
 #else
-#    define USE_STATVFS 0
+#define USE_STATVFS 0
 #endif
 
 #include <errno.h>
@@ -69,39 +69,39 @@
 #include <sys/stat.h>
 
 #if USE_STATVFS
-#    include <sys/statvfs.h>
+#include <sys/statvfs.h>
 #elif defined HAVE_SYS_VFS_H
-#    include <sys/vfs.h>
+#include <sys/vfs.h>
 #elif defined HAVE_SYS_MOUNT_H && defined HAVE_SYS_PARAM_H
 /* NOTE: freebsd5.0 needs sys/param.h and sys/mount.h for statfs.
    It does have statvfs.h, but shouldn't use it, since it doesn't
    HAVE_STRUCT_STATVFS_F_BASETYPE.  So find a clean way to fix it.  */
 /* NetBSD 1.5.2 needs these, for the declaration of struct statfs. */
-#    include <sys/param.h>
-#    include <sys/mount.h>
+#include <sys/param.h>
+#include <sys/mount.h>
 #elif defined HAVE_OS_H  // Haiku, also (obsolete) BeOS
-#    include <fs_info.h>
+#include <fs_info.h>
 #endif
 
 #if USE_STATVFS
-#    if !defined STAT_STATVFS && defined STAT_STATVFS64
-#        define STRUCT_STATVFS struct statvfs64
-#        define STATFS         statvfs64
-#    else
-#        define STRUCT_STATVFS struct statvfs
-#        define STATFS         statvfs
+#if !defined STAT_STATVFS && defined STAT_STATVFS64
+#define STRUCT_STATVFS struct statvfs64
+#define STATFS         statvfs64
+#else
+#define STRUCT_STATVFS struct statvfs
+#define STATFS         statvfs
 
-#        if defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__)
-#            include <sys/utsname.h>
-#            include <sys/statfs.h>
-#            define STAT_STATFS2_BSIZE 1
-#        endif
-#    endif
+#if defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__)
+#include <sys/utsname.h>
+#include <sys/statfs.h>
+#define STAT_STATFS2_BSIZE 1
+#endif
+#endif
 
 #else
-#    define STATFS         statfs
-#    define STRUCT_STATVFS struct statfs
-#    ifdef HAVE_OS_H  // Haiku, also (obsolete) BeOS
+#define STATFS         statfs
+#define STRUCT_STATVFS struct statfs
+#ifdef HAVE_OS_H  // Haiku, also (obsolete) BeOS
 /* BeOS has a statvfs function, but it does not return sensible values
    for f_files, f_ffree and f_favail, and lacks f_type, f_basetype and
    f_fstypename.  Use 'struct fs_info' instead.  */
@@ -126,20 +126,20 @@ statfs (char const *filename, struct fs_info *buf)
     return fs_stat_dev (device, buf);
 }
 
-#        define STRUCT_STATVFS struct fs_info
-#    else
-#        define STRUCT_STATVFS struct statfs
-#    endif
+#define STRUCT_STATVFS struct fs_info
+#else
+#define STRUCT_STATVFS struct statfs
+#endif
 #endif
 
 #ifdef HAVE_STRUCT_STATVFS_F_BASETYPE
-#    define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_basetype
+#define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_basetype
 #else
-#    if defined HAVE_STRUCT_STATVFS_F_FSTYPENAME || defined HAVE_STRUCT_STATFS_F_FSTYPENAME
-#        define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_fstypename
-#    elif defined HAVE_OS_H  // Haiku, also (obsolete) BeOS
-#        define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME fsh_name
-#    endif
+#if defined HAVE_STRUCT_STATVFS_F_FSTYPENAME || defined HAVE_STRUCT_STATFS_F_FSTYPENAME
+#define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_fstypename
+#elif defined HAVE_OS_H  // Haiku, also (obsolete) BeOS
+#define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME fsh_name
+#endif
 #endif
 
 #include <unistd.h>
@@ -265,16 +265,16 @@ static struct
 static int
 statvfs_works (void)
 {
-#    if !(defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
+#if !(defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
     return 1;
-#    else
+#else
     static int statvfs_works_cache = -1;
     struct utsname name;
 
     if (statvfs_works_cache < 0)
         statvfs_works_cache = (uname (&name) == 0 && 0 <= str_verscmp (name.release, "2.6.36"));
     return statvfs_works_cache;
-#    endif
+#endif
 }
 #endif
 

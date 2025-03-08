@@ -10,9 +10,9 @@
 #include <glib.h>
 
 #if defined(HAVE_FUNC_ATTRIBUTE_WEAK) && defined(HAVE_TESTS)
-#    define MC_MOCKABLE __attribute__ ((weak))
+#define MC_MOCKABLE __attribute__ ((weak))
 #else
-#    define MC_MOCKABLE
+#define MC_MOCKABLE
 #endif
 
 #include "glibcompat.h"
@@ -26,38 +26,38 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifdef ENABLE_NLS
-#    include <libintl.h>
-#    define _(String) gettext (String)
-#    ifdef gettext_noop
-#        define N_(String) gettext_noop (String)
-#    else
-#        define N_(String) (String)
-#    endif
+#include <libintl.h>
+#define _(String) gettext (String)
+#ifdef gettext_noop
+#define N_(String) gettext_noop (String)
+#else
+#define N_(String) (String)
+#endif
 #else  // Stubs that do something close enough.
-#    define textdomain(String)                1
-#    define gettext(String)                   (String)
-#    define ngettext(String1, String2, Num)   (((Num) == 1) ? (String1) : (String2))
-#    define dgettext(Domain, Message)         (Message)
-#    define dcgettext(Domain, Message, Type)  (Message)
-#    define bindtextdomain(Domain, Directory) 1
-#    define _(String)                         (String)
-#    define N_(String)                        (String)
+#define textdomain(String)                1
+#define gettext(String)                   (String)
+#define ngettext(String1, String2, Num)   (((Num) == 1) ? (String1) : (String2))
+#define dgettext(Domain, Message)         (Message)
+#define dcgettext(Domain, Message, Type)  (Message)
+#define bindtextdomain(Domain, Directory) 1
+#define _(String)                         (String)
+#define N_(String)                        (String)
 #endif
 
 #ifdef HAVE_FUNC_ATTRIBUTE_FALLTHROUGH
-#    define MC_FALLTHROUGH __attribute__ ((fallthrough))
+#define MC_FALLTHROUGH __attribute__ ((fallthrough))
 #else
-#    define MC_FALLTHROUGH
+#define MC_FALLTHROUGH
 #endif
 
 #ifdef HAVE_FUNC_ATTRIBUTE_UNUSED
-#    define MC_UNUSED __attribute__ ((unused))
+#define MC_UNUSED __attribute__ ((unused))
 #else
-#    define MC_UNUSED
+#define MC_UNUSED
 #endif
 
 #ifdef USE_MAINTAINER_MODE
-#    include "lib/logging.h"
+#include "lib/logging.h"
 #endif
 
 /* Just for keeping Your's brains from invention a proper size of the buffer :-) */

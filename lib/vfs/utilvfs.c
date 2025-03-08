@@ -39,7 +39,7 @@
 #include <string.h>
 
 #if !defined(HAVE_UTIMENSAT) && defined(HAVE_UTIME_H)
-#    include <utime.h>
+#include <utime.h>
 #endif
 
 #include "lib/global.h"
@@ -55,10 +55,10 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef TUNMLEN
-#    define TUNMLEN 256
+#define TUNMLEN 256
 #endif
 #ifndef TGNMLEN
-#    define TGNMLEN 256
+#define TGNMLEN 256
 #endif
 
 #define MC_HISTORY_VFS_PASSWORD "mc.vfs.password"
@@ -412,7 +412,7 @@ void
 vfs_get_timesbuf_from_stat (const struct stat *s, mc_timesbuf_t *times)
 {
 #ifdef HAVE_UTIMENSAT
-#    ifdef HAVE_STRUCT_STAT_ST_MTIM
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
     /* POSIX IEEE Std 1003.1-2008 should be the preferred way
      *
      * AIX has internal type st_timespec_t conflicting with timespec, so assign per field, for
@@ -422,19 +422,19 @@ vfs_get_timesbuf_from_stat (const struct stat *s, mc_timesbuf_t *times)
     (*times)[0].tv_nsec = s->st_atim.tv_nsec;
     (*times)[1].tv_sec = s->st_mtim.tv_sec;
     (*times)[1].tv_nsec = s->st_mtim.tv_nsec;
-#    elif HAVE_STRUCT_STAT_ST_MTIMESPEC
+#elif HAVE_STRUCT_STAT_ST_MTIMESPEC
     // Modern BSD solution
     (*times)[0] = s->st_atimespec;
     (*times)[1] = s->st_mtimespec;
-#    elif HAVE_STRUCT_STAT_ST_MTIMENSEC
+#elif HAVE_STRUCT_STAT_ST_MTIMENSEC
     // Legacy BSD solution
     (*times)[0].tv_sec = s->st_atime;
     (*times)[0].tv_nsec = s->st_atimensec;
     (*times)[1].tv_sec = s->st_mtime;
     (*times)[1].tv_nsec = s->st_mtimensec;
-#    else
-#        error "Found utimensat for nanosecond timestamps, but unsupported struct stat format!"
-#    endif
+#else
+#error "Found utimensat for nanosecond timestamps, but unsupported struct stat format!"
+#endif
 #else
     times->actime = s->st_atime;
     times->modtime = s->st_mtime;

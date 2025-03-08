@@ -44,11 +44,11 @@
 #include "lib/util.h"  // save_file_position()
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#    include "lib/charsets.h"
+#include "lib/charsets.h"
 #endif
 
 #ifdef HAVE_CHARSET
-#    include "src/selcodepage.h"
+#include "src/selcodepage.h"
 #endif
 
 #include "internal.h"

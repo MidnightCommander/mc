@@ -788,7 +788,7 @@ undelfs_init (struct vfs_class *me)
     return 1;
 }
 #else
-#    define undelfs_init NULL
+#define undelfs_init NULL
 #endif
 
 /* --------------------------------------------------------------------------------------------- */

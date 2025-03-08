@@ -37,7 +37,7 @@
 #include <sys/types.h>  // size_t
 #include <unistd.h>
 #ifdef HAVE_SYS_IOCTL_H
-#    include <sys/ioctl.h>
+#include <sys/ioctl.h>
 #endif
 #include <termios.h>
 
@@ -64,11 +64,11 @@ int reset_hp_softkeys = 0;
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef SLTT_MAX_SCREEN_COLS
-#    define SLTT_MAX_SCREEN_COLS 512
+#define SLTT_MAX_SCREEN_COLS 512
 #endif
 
 #ifndef SLTT_MAX_SCREEN_ROWS
-#    define SLTT_MAX_SCREEN_ROWS 512
+#define SLTT_MAX_SCREEN_ROWS 512
 #endif
 
 /*** file scope type declarations ****************************************************************/
