@@ -52,9 +52,10 @@
 
 #include <config.h>
 
+// Keep this conditional in sync with the similar conditional in m4.include/mc-get-fs-info.
 #if ((defined STAT_STATVFS || defined STAT_STATVFS64)                                              \
      && (defined HAVE_STRUCT_STATVFS_F_BASETYPE || defined HAVE_STRUCT_STATVFS_F_FSTYPENAME        \
-         || (!defined HAVE_STRUCT_STATFS_F_FSTYPENAME)))
+         || (!defined HAVE_STRUCT_STATFS_F_FSTYPENAME && defined HAVE_STRUCT_STATVFS_F_TYPE)))
 #define USE_STATVFS 1
 #else
 #define USE_STATVFS 0

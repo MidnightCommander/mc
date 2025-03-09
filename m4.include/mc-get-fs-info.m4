@@ -58,6 +58,8 @@ AC_INCLUDES_DEFAULT
 # include <fs_info.h>
 #endif
 "
+  dnl Keep this long conditional in sync with the USE_STATVFS conditional
+  dnl in src/filemanager/filegui.c.
   if case "$fu_cv_sys_stat_statvfs$fu_cv_sys_stat_statvfs64" in
        *yes*) ;; *) false;; esac &&
      { AC_CHECK_MEMBERS([struct statvfs.f_basetype],,, [$statvfs_includes])
@@ -68,7 +70,6 @@ AC_INCLUDES_DEFAULT
            { AC_CHECK_MEMBERS([struct statvfs.f_type],,, [$statvfs_includes])
              test $ac_cv_member_struct_statvfs_f_type = yes; }; }; }; }
   then
-    AC_CHECK_MEMBERS([struct statvfs.f_namemax],,, [$statvfs_includes])
     AC_COMPILE_IFELSE(
       [AC_LANG_PROGRAM(
          [$statvfs_includes],
