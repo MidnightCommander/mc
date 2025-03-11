@@ -58,8 +58,7 @@ AC_INCLUDES_DEFAULT
 # include <fs_info.h>
 #endif
 "
-  dnl Keep this long conditional in sync with the USE_STATVFS conditional
-  dnl in src/filemanager/filegui.c.
+  dnl Keep this long conditional in sync with the USE_STATVFS conditional below
   if case "$fu_cv_sys_stat_statvfs$fu_cv_sys_stat_statvfs64" in
        *yes*) ;; *) false;; esac &&
      { AC_CHECK_MEMBERS([struct statvfs.f_basetype],,, [$statvfs_includes])
@@ -89,6 +88,12 @@ AC_INCLUDES_DEFAULT
         [AC_DEFINE([STRUCT_STATFS_F_FSID_IS_INTEGER], [1],
            [Define to 1 if the f_fsid member of struct statfs is an integer.])])
     fi
+  fi
+  if test x"$fu_cv_sys_stat_statvfs" = xyes -o x"$fu_cv_sys_stat_statvfs64" = xyes && \
+      test x"$ac_cv_member_struct_statvfs_f_basetype" = xyes || \
+      test x"$ac_cv_member_struct_statvfs_f_fstypename" = xyes || \
+      test x"$ac_cv_member_struct_statvfs_f_fstypename" != xyes -a x"$ac_cv_member_struct_statvfs_f_type" = xyes ; then
+    AC_DEFINE([USE_STATVFS], [1], [Define to 1 if header <sys/statvfs.h> is usable])
   fi
 ])
 
