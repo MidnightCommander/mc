@@ -52,14 +52,6 @@
 
 #include <config.h>
 
-#if ((defined STAT_STATVFS || defined STAT_STATVFS64)                                              \
-     && (defined HAVE_STRUCT_STATVFS_F_BASETYPE || defined HAVE_STRUCT_STATVFS_F_FSTYPENAME        \
-         || (!defined HAVE_STRUCT_STATFS_F_FSTYPENAME)))
-#define USE_STATVFS 1
-#else
-#define USE_STATVFS 0
-#endif
-
 #include <errno.h>
 #include <ctype.h>
 #include <limits.h>  // INT_MAX
@@ -68,7 +60,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if USE_STATVFS
+#if defined(USE_STATVFS)
 #include <sys/statvfs.h>
 #elif defined HAVE_SYS_VFS_H
 #include <sys/vfs.h>
@@ -83,7 +75,7 @@
 #include <fs_info.h>
 #endif
 
-#if USE_STATVFS
+#if defined(USE_STATVFS)
 #if !defined STAT_STATVFS && defined STAT_STATVFS64
 #define STRUCT_STATVFS struct statvfs64
 #define STATFS         statvfs64
@@ -261,7 +253,7 @@ static struct
    preceding entries in /proc/mounts; that makes df hang if even one
    of the corresponding file systems is hard-mounted but not available.  */
 
-#if USE_STATVFS && !(!defined STAT_STATVFS && defined STAT_STATVFS64)
+#if defined(USE_STATVFS) && !(!defined STAT_STATVFS && defined STAT_STATVFS64)
 static int
 statvfs_works (void)
 {
@@ -285,7 +277,7 @@ filegui__check_attrs_on_fs (const char *fs_path)
 {
     STRUCT_STATVFS stfs;
 
-#if USE_STATVFS && defined(STAT_STATVFS)
+#if defined(USE_STATVFS) && defined(STAT_STATVFS)
     if (statvfs_works () && statvfs (fs_path, &stfs) != 0)
         return TRUE;
 #else
@@ -293,8 +285,8 @@ filegui__check_attrs_on_fs (const char *fs_path)
         return TRUE;
 #endif
 
-#if (USE_STATVFS && defined(HAVE_STRUCT_STATVFS_F_TYPE))                                           \
-    || (!USE_STATVFS && defined(HAVE_STRUCT_STATFS_F_TYPE))
+#if (defined(USE_STATVFS) && defined(HAVE_STRUCT_STATVFS_F_TYPE))                                  \
+    || (!defined(USE_STATVFS) && defined(HAVE_STRUCT_STATFS_F_TYPE))
     switch ((filegui_nonattrs_fs_t) stfs.f_type)
     {
     case MSDOS_SUPER_MAGIC:
