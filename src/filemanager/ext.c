@@ -755,7 +755,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
     {
         mc_search_t *search;
 
-        search = mc_search_new (ptr, DEFAULT_CHARSET);
+        search = mc_search_new (ptr, NULL);
         if (search != NULL)
         {
             search->search_type = MC_SEARCH_T_REGEX;
@@ -956,8 +956,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
         if (pattern != NULL)
         {
             found = S_ISDIR (mystat.st_mode)
-                && mc_search (pattern, DEFAULT_CHARSET, vfs_path_as_str (filename_vpath),
-                              MC_SEARCH_T_REGEX);
+                && mc_search (pattern, NULL, vfs_path_as_str (filename_vpath), MC_SEARCH_T_REGEX);
             g_free (pattern);
 
             continue;  // stop if found
@@ -993,7 +992,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
             mc_search_t *search;
 
             ignore_case = mc_config_get_bool (ext_ini, g, "RegexIgnoreCase", FALSE);
-            search = mc_search_new (pattern, DEFAULT_CHARSET);
+            search = mc_search_new (pattern, NULL);
             g_free (pattern);
 
             if (search != NULL)
