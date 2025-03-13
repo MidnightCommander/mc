@@ -40,7 +40,7 @@ jobs:
       - name: Create sources index
         run: |
           pushd HTML
-            git rm -rf *
+            git switch --orphan gh-pages-new
           popd
 
           htags --gtags --suggest --tree-view --insert-header man/header.html \
@@ -62,4 +62,4 @@ jobs:
           git add .
           git commit -m "Deploy to GitHub Pages"
 
-          git push
+          git push --force-with-lease origin HEAD:gh-pages
