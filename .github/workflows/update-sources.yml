@@ -1,9 +1,10 @@
 name: update-sources
 
 on:
-  push:
-    branches:
-      - master
+  workflow_call:
+    secrets:
+      SOURCE_DEPLOY_KEY:
+        required: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,7 +23,7 @@ jobs:
       - name: Install GNU Global
         run: sudo apt-get install -y global exuberant-ctags python3-pygments
 
-      - name: Checkout source repo
+      - name: Checkout source.midnight-commander.org repo
         uses: actions/checkout@v4
         with:
           repository: MidnightCommander/source
@@ -30,25 +31,33 @@ jobs:
           ref: gh-pages
           ssh-key: ${{ secrets.SOURCE_DEPLOY_KEY }}
 
+      - name: Download rendered manual pages
+        uses: actions/download-artifact@v4
+        with:
+          name: man-pages-html-${{ github.sha }}
+          path: man
+
       - name: Create sources index
         run: |
           pushd HTML
             git rm -rf *
           popd
 
-          gtags
-          htags --suggest -t "Welcome to the Midnight Commander source tour!"
+          htags --gtags --suggest --tree-view --insert-header man/header.html \
+            -t "Welcome to the Midnight Commander source tour!"
           ./maint/htagsfix
 
       - name: Deploy to GitHub
         run: |
+          mv man HTML
+
           cd HTML
 
           touch .nojekyll
           echo "source.midnight-commander.org" > CNAME
 
-          git config user.name "GitHub Actions"
-          git config user.email "github@midnight-commander.org"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
           git add .
           git commit -m "Deploy to GitHub Pages"
