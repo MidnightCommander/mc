@@ -69,7 +69,7 @@ mc ()
 }
 
 użytkownicy tcsh:
-alias mc 'setenv MC `%bindir%/mc \-P \!*`; cd $MC; unsetenv MC'
+alias mc 'setenv MC `%bindir%/mc \-P !*`; cd $MC; unsetenv MC'
 .fi
 Wiem, że ta funkcja mogłaby być krótsza dla basha i zsh, ale małe cudzysłowy
 nie zaakceptowały by zawieszenia programu kombinacją
