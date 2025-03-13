@@ -3900,7 +3900,7 @@ front end для системы управления пакетами APT (Debia
 .TP
 .B audio
 Чтение и воспроизведение звуковых дорожек с CD ("\fIcd audio://\fR" или
-\"\fIcd device/audio://\fR").
+\&"\fIcd device/audio://\fR").
 .TP
 .B bpp
 пакеты дистрибутива Bad Penguin GNU/Linux ("\fIcd file.bpp/bpp://\fR").
