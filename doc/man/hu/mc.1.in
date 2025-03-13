@@ -3209,7 +3209,7 @@ Nézd meg a disztribúció TODO fájlát, hogy megtudhasd, milyen teendők
 vannak még vissza.
 .PP
 Ha a programmal kapcsolatos problémád van, akkor azt küld el az alábbi
-levélcímre: mc\-devel@lists.midnight-commander.org.
+levélcímre: mc\-devel@lists.midnight\-commander.org.
 .PP
 Gondoskodj arról, hogy tartalmazza a hiba minél pontosabb
 meghatározását, a futtatott program verziószámát (az mc \-V parancs meg

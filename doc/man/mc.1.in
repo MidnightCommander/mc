@@ -2422,8 +2422,8 @@ or ~/.mkshrc).
 users may specify startup commands in ~/.local/share/mc/.zshrc (fallback ~/.zshrc).
 .PP
 .B tcsh, fish
-users cannot specify mc-specific startup commands at present. They have to rely on
-shell-specific startup files.
+users cannot specify mc\-specific startup commands at present. They have to rely on
+shell\-specific startup files.
 .PP
 The following paragraphs are relevant only when the subshell support is
 active:
@@ -2439,13 +2439,13 @@ prompt displayed by Midnight Commander will be the same prompt that you
 are currently using in your shell.
 .PP
 (There's a known problem when using fish: the prompt is displayed only in
-full screen mode (Ctrl-o), not when the panels are visible.)
+full screen mode (Ctrl\-o), not when the panels are visible.)
 .PP
 The
 .\"LINK2"
 OPTIONS
 .\"OPTIONS"
-section has more information on how you can control subshell usage (-U/-u).
+section has more information on how you can control subshell usage (\-U/\-u).
 Furthermore, to set a specific subshell different from your current SHELL variable or
 login shell defined in /etc/passwd, you may call MC like this:
 .B SHELL=/bin/myshell mc
@@ -2622,7 +2622,7 @@ button to append the source file to the target one.
 .B [Reget]
 button to append the rest of the source file to the target one.
 This button is displayed only if the size of the target file
-is non-zero and less than the size of the source file.
+is non\-zero and less than the size of the source file.
 .TP
 .B [All]
 button to overwrite all the files.

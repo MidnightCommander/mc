@@ -1959,7 +1959,7 @@ está activado.
 Mostrar tamaños de archivos en bytes con prefijos según el SI, Sistema
 Internacional de Unidades, o sea, en base de 10. Por defecto, está
 desactivada: los tamaños se calculan con prefijos según el IEC, empleando
-base de 2. Véase al respecto ISO/IEC 80000-13.
+base de 2. Véase al respecto ISO/IEC 80000\-13.
 .PP
 .I Mezclar Archivos y Directorios.
 Cuando esta opción está habilitada, todos los archivos y directorios

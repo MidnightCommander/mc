@@ -2916,7 +2916,7 @@ pozostało jeszcze do zrobienia.
 .PP
 Jeśli chcesz zgłosić kłopoty z programem [błędy w nim],
 wyślij e\-mail [po angielsku], na adres
-mc\-devel@lists.midnight-commander.org.
+mc\-devel@lists.midnight\-commander.org.
 .PP
 Do zgłoszenia błędu dołącz opis problemu, versję programu, którego używasz
 (wyświetla ją mc \-V), system operacyjny, na którym pracujesz i jeśli program
