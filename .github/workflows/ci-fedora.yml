@@ -18,21 +18,20 @@ jobs:
       contents: read
 
     steps:
-      - name: Install git inside container
-        run: dnf install -y git
+      - name: Install dependencies
+        run: |
+          dnf install -y \
+            git `# Install git inside container` \
+            \
+            autoconf automake clang-tools-extra gcc gettext-devel groff libtool make pkgconfig \
+            aspell-devel check-devel gpm-devel libX11-devel "pkgconfig(ext2fs)" "pkgconfig(glib-2.0)" "pkgconfig(gmodule-2.0)" "pkgconfig(libssh2)" "pkgconfig(slang)" \
+            \
+            glibc-gconv-extra util-linux `# For tests` \
+            mandoc `# To render manual pages` \
+
 
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          dnf install -y autoconf automake clang-tools-extra gcc gettext-devel groff libtool make pkgconfig
-          dnf install -y aspell-devel check-devel gpm-devel libX11-devel "pkgconfig(ext2fs)" "pkgconfig(glib-2.0)" "pkgconfig(gmodule-2.0)" "pkgconfig(libssh2)" "pkgconfig(slang)"
-
-          # For tests
-          dnf install -y glibc-gconv-extra util-linux
-
-          # To render manual pages
-          dnf install -y mandoc
 
       - name: Lint documentation
         working-directory: maint
