@@ -330,7 +330,7 @@ Przełącza tryb wyświetlania do następnego możliwego. Używając tej opcji
 łatwo jest przejść szybko z długiego do krótkiego trybu wyświetlania
 jak również do tego zdefiniowanego przez użytkownika.
 .PP
-.B C\-\\\\
+.B C\-\e
 (control\-backslash).
 Pokazuje hotlistę katalogów i zmienia katalog do wybranego przez użytkownika.
 .PP
@@ -346,9 +346,9 @@ jest wyłączona, sposób zaznaczania plików jest zgodny z ustawieniami
 (zobacz
 .BR ed (1)).
 .PP
-.B \\\\
+.B \e
 (backslash).
-Używaj znaków "\\" do odznaczania grupy plików. Jest to przeciwieństwo klawisza
+Używaj znaków "\e" do odznaczania grupy plików. Jest to przeciwieństwo klawisza
 plus.
 .PP
 .BR "strzałka do góry" ", " C\-p .
@@ -784,7 +784,7 @@ Space for destination file may be preallocated relative to preallocate_space
 configure option.
 Podczas procesu kopiowania możesz go w każdej chwili przerwać wciskając C\-c lub
 Esc. Żeby dowiedzieć się czegoś więcej na temat jokerów w ścieżce źródłowej
-(którymi najczęściej będą * lub ^\\(.*\\)$) i innych możliwych określeń w
+(którymi najczęściej będą * lub ^\e(.*\e)$) i innych możliwych określeń w
 katalogu docelowym zobacz kategorię
 .B "Maski kopiowania/przenoszenia"
 .PP
@@ -860,7 +860,7 @@ oznacza zero lub więcej znaków a ? oznacza jeden znak). Jeśli opcja
 jest wyłączona, wtedy zaznaczanie plików jest robione z zastosowaniem norm
 zewnętrznych (zobacz ed (1)).
 .PP
-.B Odznacz grupę (\\\\)
+.B Odznacz grupę (\e)
 .PP
 Używane do odznaczania grupy plików. Jest przeciwieństwem komendy
 .IR "Zaznacz pliki" .
@@ -903,7 +903,7 @@ Komenda historii komend (Command history) pokazuje listę wpisanych komend.
 Ta, którą wybierzesz, jest kopiowana do linii poleceń. Do historii komend
 można mieć dostęp również przy użyciu kombinacji M\-p lub M\-n.
 .PP
-Komenda hotlisty katalogów (Directory hotlist) (C\-\\) pozwala na zmienianie
+Komenda hotlisty katalogów (Directory hotlist) (C\-\e) pozwala na zmienianie
 katalogów do tych najczęściej używanych dużo szybciej.
 .PP
 Komenda panelu zewnętrznego (External panelize) pozwala na wykonywania programów
@@ -1010,7 +1010,7 @@ możesz wybrać katalog startowy z drzewa katalogów.
 .PP
 Pole trzecie akceptuje wszystkie wyrażenia podobne do tych w egrep(1).
 Oznacza to, że musisz rozpoczynać znaki o specjalnym znaczeniu kombinacją
-"\\" np. szukając "strcmp (" będziesz musiał wpisać "strcmp \\(" (bez
+"\e" np. szukając "strcmp (" będziesz musiał wpisać "strcmp \e(" (bez
 cudzysłowów oczywiście).
 .PP
 Możesz zacząć przeszukiwanie naciskając przycisk Ok. Podczas szukania możesz
@@ -1883,10 +1883,10 @@ używana jest aktualna wartość zmiennej umask.
 .PP
 Jeśli opcja obsługi wzorców powłoki jest włączona, możesz używać znaków '*' i
 \&'?' w maskach źródłowych. Działają one tak jak w powłoce. W masce docelowej możesz
-używać tylko '*' i '\\<cyfra>'. Pierwsza maska '*' w nazwie docelowej
+używać tylko '*' i '\e<cyfra>'. Pierwsza maska '*' w nazwie docelowej
 odnosi sie do pierwszej gwiazdki w masce źródłowej, druga do drugiej itd.
-Joker '\\1' odnosi się do pierwszego jokera w masce źródłowej, '\\2' odnosi
-się do drugiego i tak dalej aż do '\\9'. Joker '\\0' oznacza pełną nazwę
+Joker '\e1' odnosi się do pierwszego jokera w masce źródłowej, '\e2' odnosi
+się do drugiego i tak dalej aż do '\e9'. Joker '\e0' oznacza pełną nazwę
 pliku źródłowego.
 .PP
 Dwa przykłady:
@@ -1897,45 +1897,45 @@ i plikiem, który ma zostać przekopiowany jest "foo.tar.gz", to kopią będzie
 .PP
 Załóżmy, że chcesz zaminieć miejscami nazwę i rozszerzenie pliku, tak, że
 plik "plik.c" ma być zmieniony na "c.plik" itp. Maska źródłowa powinna być
-następująca: "*.*", natomiast docelowa: "\\2.\\1".
+następująca: "*.*", natomiast docelowa: "\e2.\e1".
 .PP
 .B "Use shell patterns off"
 .PP
 Kiedy wzorce powłoki są wyłączone, MC nie dokonuje automatycznego grupowania
-plików. Musisz użyć wyrażenia'\\(...\\)' w masce źródłowej aby zasygnalizować
+plików. Musisz użyć wyrażenia'\e(...\e)' w masce źródłowej aby zasygnalizować
 istnienie jokerów w masce docelowej. Jest to trochę łatwiejsze, ale też
 wymaga aby trochę się napisać. Z drugiej jednak strony, makra są bardzo
 podobne tych używanych kiedy wzorce powłoki są włączone.
 .PP
 Dwa przykłady:
 .PP
-Jeśli maską źródłową jest "^\\(.*\\)\\.tar\\.gz$", docelową jest
+Jeśli maską źródłową jest "^\e(.*\e)\e.tar\e.gz$", docelową jest
 "/bla/*.tgz"
 i plikiem do przekopiowania jest "foo.tar.gz", kopią będzie "/bla/foo.tgz".
 .PP
 Załóżmy, że chemy zamienić miejscami nazwę i rozszerzenia, tak, że plik
 "plik.c" będzie się nazywał "c.plik" itp. Maską źródłową powinno być
-"^\\(.*\\)\\.\\(.*\\)$", a docelową "\\2.\\1".
+"^\e(.*\e)\e.\e(.*\e)$", a docelową "\e2.\e1".
 .PP
 .B "Konwersje nazwy (Case Conversions)"
 .PP
-Możesz również zmieniać nazwy plików. Jeśli użyjesz '\\u' lub
-\&'\\l' w masce docelowej, następny znak będzie przekonwertowany na
+Możesz również zmieniać nazwy plików. Jeśli użyjesz '\eu' lub
+\&'\el' w masce docelowej, następny znak będzie przekonwertowany na
 duży lub mały, zależnie od podanej opcji.
 .PP
-Jeśli użyjesz '\\U' lub '\\L' w masce docelowej, następne znaki będą
+Jeśli użyjesz '\eU' lub '\eL' w masce docelowej, następne znaki będą
 zmieniane na małe lub duże (zależnie od opcji), aż do napotkania znaku
-\&'\\E' lub następnych '\\U', '\\L' bądź też końca linii.
+\&'\eE' lub następnych '\eU', '\eL' bądź też końca linii.
 .PP
-Konwersje '\\u' i '\\l' mają wyższy priorytet niż '\\U' i '\\L'.
+Konwersje '\eu' i '\el' mają wyższy priorytet niż '\eU' i '\eL'.
 .PP
-Na przykład, jeśli maską źródłową jest '*' (shell patterns on) lub '^\\(.*\\)$'
-(shell patterns off) i maską docelową jest '\\L\\u*', nazwa pliku będzie
+Na przykład, jeśli maską źródłową jest '*' (shell patterns on) lub '^\e(.*\e)$'
+(shell patterns off) i maską docelową jest '\eL\eu*', nazwa pliku będzie
 miała pierwszą literę dużą, ale pozostałe już małe, niezależnie od obecnej
 nazwy.
 .PP
-Możesz również używać '\\' aby "podkreślić" znak. Na przykład, '\\\\' jest
-backsleshem, a '\\*' jest gwiazdką.
+Możesz również używać '\e' aby "podkreślić" znak. Na przykład, '\e\e' jest
+backsleshem, a '\e*' jest gwiazdką.
 .PP
 .\"NODE "Internal File Viewer"
 .SH "Wbudowany podgląd plików"
@@ -2427,7 +2427,7 @@ Edit Extension File
 section.  Here is an example entry for Debian packages:
 .PP
 .nf
-  regex/\.deb$
+  regex/\e.deb$
           Open=%cd %p/deb://
 .fi
 .SH Polskie znaki
@@ -2750,7 +2750,7 @@ posiadania uprawnień roota. Midnight Commander szuka w pliku startowym
 pliku ~/.config/mc/ini sekcji "terminal:nazwa\-twojego\-terminala" i potem sekcji
 "terminal:general", każda linia sekcji zawiera symbol klawisza, który
 chcesz zdefiniować, zaczynające się do znaku równości i definicji klawisza.
-Możesz użyć kombinacji \\E aby reprezentować znak escape i ^x aby
+Możesz użyć kombinacji \eE aby reprezentować znak escape i ^x aby
 reprezentować znak Control\-x.
 .PP
 Możliwymi klawiszami symboli są:
@@ -2775,7 +2775,7 @@ Na przykład, aby zdefiniować klawisz insert jako Escape + [ + O + p, możesz
 ustawić to pliku ini:
 .PP
 .nf
-insert=\\E[Op
+insert=\eE[Op
 .fi
 .PP
 Symbol klawisza

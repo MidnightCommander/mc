@@ -527,7 +527,7 @@ rota el listado de pantalla actual para mostrar el siguiente modo
 de listado. Con esto es posible intercambiar rápidamente de un listado
 completo al regular o breve, así como al modo de listado definido por el usuario.
 .TP
-.B Ctrl\-\\\\ (control\-Contrabarra)
+.B Ctrl\-\e (control\-Contrabarra)
 muestra la lista de sitios
 .\"LINK2"
 Favoritos
@@ -559,8 +559,8 @@ Finalmente, si no se activa
 .I Distinguir May/min
 la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 .TP
-.B \- (menos) o \\\\ (contrabarra)
-usaremos las teclas «\-» o «\\» para deseleccionar un grupo de archivos.  Esta es
+.B \- (menos) o \e (contrabarra)
+usaremos las teclas «\-» o «\e» para deseleccionar un grupo de archivos.  Esta es
 la operación opuesta a la realizada por la tecla «+».
 
 .TP
@@ -1133,7 +1133,7 @@ relative to preallocate_space configure option. Durante este proceso, podemos
 pulsar
 .IR Ctrl\-c " o " Esc
 para anular la operación. Para más detalles sobre la máscara de origen
-(que será normalmente * o ^\\(.*\\)$ dependiendo
+(que será normalmente * o ^\e(.*\e)$ dependiendo
 de la selección de Uso de los patrones del shell) y los posibles comodines en destino
 véase
 .\"LINK2"
@@ -1235,7 +1235,7 @@ Finalmente, si no se activa
 .I Distinguir May/min
 la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 .PP
-.B De\-seleccionar Grupo (\\\\)
+.B De\-seleccionar Grupo (\e)
 .PP
 Utilizado para deseleccionar un grupo de archivos. Es la operación antagonista al comando
 .IR "Selecciona grupo" .
@@ -1292,7 +1292,7 @@ de los comandos escritos. El comando seleccionado es copiado a la línea de órd
 El histórico de comandos puede ser accedido también tecleando Alt\-p ó Alt\-n.
 .PP
 .\"LINK2"
-Favoritos (Ctrl\-\\)
+Favoritos (Ctrl\-\e)
 .\"Hotlist"
 permite acceder con facilidad a directorios y sitios utilizados con frecuencia.
 .PP
@@ -1416,8 +1416,8 @@ el directorio inicial en el
 .\"Directory Tree"
 .PP
 El campo de contenidos puede aceptar expresiones regulares similares a egrep(1). En 
-ese caso podremos proteger caracteres con significado especial para egrep anteponiendo «\\»,
-p.ej. si buscamos «strcmp (» tendremos que introducir «strcmp \\(".
+ese caso podremos proteger caracteres con significado especial para egrep anteponiendo «\e»,
+p.ej. si buscamos «strcmp (» tendremos que introducir «strcmp \e(".
 .PP
 Con la opción «Palabras completas» se puede limitar la búsqueda a archivos donde
 la parte coincidente forme una palabra completa.  Eso se corresponde con la función
@@ -2578,11 +2578,11 @@ Si esta opción no está activa se aplica el valor actual de umask.
 .PP
 Usando Patrones Shell nos permite usar los caracteres comodín '*' y '?'
 en la máscara de origen. Funcionará igual que en la línea de órdenes. En
-la máscara destino, solo están permitidos los comodines '*' y '\\<número>'.
+la máscara destino, solo están permitidos los comodines '*' y '\e<número>'.
 El primer '*' en la máscara destino corresponde al primer grupo del comodín
 en la máscara de origen, el segundo '*' al segundo grupo, etcétera.
-El comodín '\\1' corresponde al primer grupo en la máscara de origen,
-el comodín '\\2' al segundo y así sucesivamente hasta '\\9'. El comodín '\\0'
+El comodín '\e1' corresponde al primer grupo en la máscara de origen,
+el comodín '\e2' al segundo y así sucesivamente hasta '\e9'. El comodín '\e0'
 es el nombre completo del archivo fuente.
 .PP
 Dos ejemplos:
@@ -2593,46 +2593,46 @@ en "/blas".
 .PP
 Supongamos que queremos intercambiar el nombre y la extensión de modo que
 "archivo.c" se convierta en "c.archivo". La máscara origen será "*.*" y
-la de destino "\\2.\\1".
+la de destino "\e2.\e1".
 .PP
 .B "Usando Patrones Shell desactivado"
 .PP
 Cuando la opción de Patrones Shell está desactivada MC no realiza una
-agrupación automática. Deberemos usar expresiones '\\(...\\)' en la máscara
+agrupación automática. Deberemos usar expresiones '\e(...\e)' en la máscara
 origen para especificar el significado de los comodines en la máscara destino.
 Esto es más flexible pero también necesita más escritura. Por lo demás,
 las máscaras destino son similares al caso de Patrones Shell activos.
 .PP
 Dos ejemplos:
 .PP
-Si la máscara de origen es "^\\(.*\\)\\.tar\\.gz$", el destino es
+Si la máscara de origen es "^\e(.*\e)\e.tar\e.gz$", el destino es
 "/blas/*.tgz" y el archivo a ser copiado es "coco.tar.gz", la copia
 será "/blas/coco.tgz".
 .PP
 Si queremos intercambiar el nombre y la extensión para que "archivo.c"
 sea "c.archivo", la máscara de origen puede ser
-"^\\(.*\\)\\.\\(.*\\)$" y la de destino "\\2.\\1".
+"^\e(.*\e)\e.\e(.*\e)$" y la de destino "\e2.\e1".
 .PP
 .B "Capitalización"
 .PP
 Podemos hacer cambios entre mayúsculas y minúsculas en los nombres de archivos.
-Si usamos '\\u' o '\\l' en la máscara destino, el siguiente carácter será convertido a
+Si usamos '\eu' o '\el' en la máscara destino, el siguiente carácter será convertido a
 mayúsculas o minúsculas respectivamente.
 .PP
-Si usamos '\\U' o '\\L' en la máscara destino, los siguientes caracteres
+Si usamos '\eU' o '\eL' en la máscara destino, los siguientes caracteres
 serán convertidos a mayúsculas o minúsculas respectivamente hasta encontrar
-\&'\\E' o un segundo '\\U' o '\\L' o el fin del nombre del archivo.
+\&'\eE' o un segundo '\eU' o '\eL' o el fin del nombre del archivo.
 .PP
-\&'\\u' y '\\l' tienen prioridad sobre '\\U' y '\\L'.
+\&'\eu' y '\el' tienen prioridad sobre '\eU' y '\eL'.
 .PP
-Por ejemplo, si la máscara fuente es '*' (con Patrones Shell activo) o '^\\(.*\\)$'
-(Patrones Shell desactivado) y la máscara destino es '\\L\\u*' los nombres de archivos
+Por ejemplo, si la máscara fuente es '*' (con Patrones Shell activo) o '^\e(.*\e)$'
+(Patrones Shell desactivado) y la máscara destino es '\eL\eu*' los nombres de archivos
 serán convertidos para que tengan su inicial en mayúscula y el resto del nombre en
 minúsculas.
 .PP
-También podemos usar '\\' como carácter de escape evitando la interpretación de todos
-estos caracteres especiales. Por ejemplo, '\\\\' es
-una contrabarra y '\\*' es un asterisco.
+También podemos usar '\e' como carácter de escape evitando la interpretación de todos
+estos caracteres especiales. Por ejemplo, '\e\e' es
+una contrabarra y '\e*' es un asterisco.
 .\"NODE "Select/Unselect Files"
 .SH "Seleccionar/Deseleccionar Archivos"
 El diálogo permite seleccionar o deseleccionar grupos de archivos y
@@ -3004,7 +3004,7 @@ por segunda vez; con la primera Midnight Commander solo emite un pitido.
 .PP
 Aplica escapes a los símbolos
 .BR ? ", " * " y " &
-(como \fB\\?\fR, \fB\\*\fR, \fB\\&\fR )
+(como \fB\e?\fR, \fB\e*\fR, \fB\e&\fR )
 en los nombres de archivo para evitar su interpretación en expresiones
 regulares al realizar sustituciones en la línea de entrada.
 .\"NODE "Virtual File System"
@@ -3331,7 +3331,7 @@ de Midnight Commander. He aquí, a modo de ejemplo, una entrada para
 paquetes Debian:
 .PP
 .nf
-  regex/\.deb$
+  regex/\e.deb$
           Open=%cd %p/deb://
 .fi
 .\"NODE "Colors"
@@ -3501,7 +3501,7 @@ del archivo de configuración.
 .PP
 En línea de órdenes, en la variable de entorno o el parámetro de la
 configuración pueden contener la ruta absoluta al archivo de skin con
-o sin su extensión \.ini. De no indicar la ruta se realiza la búsqueda,
+o sin su extensión .ini. De no indicar la ruta se realiza la búsqueda,
 en orden, en:
 .IP
 1)
@@ -4027,7 +4027,7 @@ o en el del usuario
 en la sección "terminal:nuestro\-terminal" y si no en "terminal:general".
 Cada línea comienza con el identificador de la tecla, seguido de un signo
 de igual y la definición de la tecla. Para representar el carácter de escape
-se utiliza \\e y ^x para el carácter control\-x.
+se utiliza \ee y ^x para el carácter control\-x.
 .PP
 Los identificadores de tecla son:
 .PP
@@ -4052,7 +4052,7 @@ a la tecla de insertar, hay que colocar en el archivo
 .BR ~/.config/mc/ini :
 .PP
 .nf
-insert=\\e[Op
+insert=\ee[Op
 .fi
 .PP
 También se pueden usar
@@ -4060,13 +4060,13 @@ También se pueden usar
 Por ejemplo:
 
 .nf
-    ctrl\-alt\-right=\\e[[1;6C
-    ctrl\-alt\-left=\\e[[1;6D
+    ctrl\-alt\-right=\ee[[1;6C
+    ctrl\-alt\-left=\ee[[1;6D
 .fi
 
 .PP
 Esto significa que Ctrl + Alt + Izquierda envía la secuencia de escape
-\\e[[1;6D y que entonces Midnight Commander debe interpretar "\\e[[1;6D"
+\ee[[1;6D y que entonces Midnight Commander debe interpretar "\ee[[1;6D"
 como Ctrl\-Alt\-Izquierda.
 .PP
 El identificador

@@ -55,8 +55,8 @@ environment variable.  Foreground and background colors pairs may be
 specified for example with:
 .PP
 .nf
-MC_COLOR_TABLE="$MC_COLOR_TABLE:\\
-normal=lightgray,black:\\
+MC_COLOR_TABLE="$MC_COLOR_TABLE:\e
+normal=lightgray,black:\e
 selected=black,green"
 .fi
 .PP

@@ -413,7 +413,7 @@ cambia il modo di visualizzazione corrente per mostrare la modalità
 successiva. In questo modo è possibile cambiare velocemente da listati
 lunghi a listati normali a listati definiti dall'utente.
 .TP
-.B C\-\\\\ (control\-barra retroversa)
+.B C\-\e (control\-barra retroversa)
 mostra le
 .\"LINK2"
 directory favorite
@@ -431,8 +431,8 @@ regolari in una shell (* significa zero o più caratteri e ? un carattere). Se i
 sono disabilitati, la marcatura dei file viene fatta con le normali espressioni
 regolari (vedere ed (1)).
 .TP
-.B \\\\ (barra retroversa)
-usare il tasto "\\" per deselezionare un gruppo di file. Questo è l'opposto
+.B \e (barra retroversa)
+usare il tasto "\e" per deselezionare un gruppo di file. Questo è l'opposto
 del tasto più.
 .TP
 .B freccia\-su, C\-p
@@ -946,7 +946,7 @@ dall'utente nella finestra di dialogo. Space for destination
 file may be preallocated relative to preallocate_space configure option.
 Durante il processo è possibile
 premere C\-c o ESC per abortire l'operazione. Per maggiori dettagli sulla
-maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
+maschera sorgente (che sarà normalmente * o ^\e(.*\e)$ a seconda
 dell'impostazione di "modelli della shell") o sui caratteri jolly sulla
 destinazione vedere
 .\"LINK2"
@@ -1038,7 +1038,7 @@ gruppo; se l'opzione
 è disabilitata, allora la selezione dei file viene eseguita con le normali
 espressioni regolari (vedere ed (1)).
 .PP
-.B Deseleziona gruppo (\\\\)
+.B Deseleziona gruppo (\e)
 .PP
 Usata per deselezionare un gruppo di file. E' l'opposto di del comando
 .IR "Seleziona gruppo" .
@@ -1099,7 +1099,7 @@ comandi vi si  può accedere premendo M\-p o M\-n.
 .PP
 Il comando
 .\"LINK2"
-directory favorite (C\-\\)
+directory favorite (C\-\e)
 .\"Hotlist"
 permette un cambio più veloce dalla directory corrente ad una di quelle usate 
 più spesso.
@@ -1224,8 +1224,8 @@ dall'albero directory\&.
 .PP
 Il campo contenuto accetta espressioni regolari simili a egrep(1). Ciò
 significa che è necessario proteggere i caratteri con significati speciali per
-egrep con "\\", per esempio se si ricerca "strcmp (" si dovrà immettere 
-"strcmp \\(" (senza le virgolette).
+egrep con "\e", per esempio se si ricerca "strcmp (" si dovrà immettere
+"strcmp \e(" (senza le virgolette).
 .PP
 Per far partire la ricerca premere il tasto Ok.
 E' possibile bloccare la ricerca con il tasto Sospende e farla riprendere
@@ -2257,12 +2257,12 @@ corrente di umask.
 Quando l'opzione dei modelli della shell è abilitata è possibile usare
 i caratteri jolly '*' e '?' nella maschera sorgente. Questi lavorano
 come nella shell. Nella maschera obbiettivo sono permessi solo i caratteri 
-jolly '*' e '\\<cifra>'. Il primo carattere jolly '*' nella maschera
+jolly '*' e '\e<cifra>'. Il primo carattere jolly '*' nella maschera
 obbiettivo corrisponde al primo gruppo di caratteri jolly nella maschera
 sorgente, il secondo '*' al secondo gruppo e così via. Il carattere 
-jolly '\\1' corrisponde al primo gruppo di caratteri jolly nella maschera
-sorgente, '\\2' corrisponde al secondo gruppo e così via fino al '\\9'.
-Il carattere jolly '\\0' rappresenta tutto il nome del file sorgente.
+jolly '\e1' corrisponde al primo gruppo di caratteri jolly nella maschera
+sorgente, '\e2' corrisponde al secondo gruppo e così via fino al '\e9'.
+Il carattere jolly '\e0' rappresenta tutto il nome del file sorgente.
 .PP
 Due esempi:
 .PP
@@ -2271,47 +2271,47 @@ il file da copiare è "foo.tar.gz", la copia sarà "foo.tgz" in "/bla".
 .PP
 Supponiamo si voglia scambiare la base e l'estensione di un file cosicché 
 "file.c" divenga "c.file" e così via. La maschera sorgente per questa
-operazione sarà "*.*" e la destinazione sarà "\\2.\\1".
+operazione sarà "*.*" e la destinazione sarà "\e2.\e1".
 .PP
 .B "Usa i modelli della shell, opzione disabilitata"
 .PP
 Quando l'opzione dei modelli della shell è disabilitata, MC non
 esegue più il raggruppamento automatico. E' necessario usare 
-espressioni tipo '\\(...\\)' nella maschera sorgente per dare significato
+espressioni tipo '\e(...\e)' nella maschera sorgente per dare significato
 ai caratteri jolly nella maschera obbiettivo. Altrimenti le maschere
 obbiettivo si trovano nella situazione di quando i modelli della shell
 sono abilitati.
 .PP
 Due esempi:
 .PP
-Se la maschera sorgente è "^\\(.*\\)\\.tar\\.gz$", la destinazione è
+Se la maschera sorgente è "^\e(.*\e)\e.tar\e.gz$", la destinazione è
 "/bla/*.tgz" e il file da copiare è "foo.tar.gz", la copia sarà
 "/bla/foo.tgz".
 .PP
 Supponiamo che si voglia scambiare la base e l'estensione di un file
 cosicché "file.c" divenga "c.file" e così via. La maschera sorgente per
-questa  operazione sarà "^\\(.*\\)\\.\\(.*\\)$" e la destinazione sarà
-"\\2.\\1".
+questa  operazione sarà "^\e(.*\e)\e.\e(.*\e)$" e la destinazione sarà
+"\e2.\e1".
 .PP
 .B "Conversioni Maiuscole/Minuscole"
 .PP
 E' anche possibile cambiare tra maiuscole e minuscole i caratteri dei file. 
-Se si usa '\\u' o '\\l' nella maschera obbiettivo, il carattere successivo
+Se si usa '\eu' o '\el' nella maschera obbiettivo, il carattere successivo
 sarà convertito rispettivamente in maiuscolo o minuscolo.
 .PP
-Se si usa '\\U' o '\\L' nella maschera obbiettivo, il caratteri successivi
+Se si usa '\eU' o '\eL' nella maschera obbiettivo, il caratteri successivi
 saranno convertiti rispettivamente in maiuscolo o minuscolo fino alla
-prossima corrispondenza di '\\E' o '\\U', '\\L' o alla fine del nome del file.
+prossima corrispondenza di '\eE' o '\eU', '\eL' o alla fine del nome del file.
 .PP
-Notare che '\\u' e '\\l' sono più forti di '\\U' e '\\L'.
+Notare che '\eu' e '\el' sono più forti di '\eU' e '\eL'.
 .PP
 Per esempio, se la maschera sorgente è '*' (modelli della shell abilitati)
-o '^\\(.*\\)$' (modelli della shell disabilitati) e la maschera obbiettivo
-è '\\L\\u*' i nomi dei file saranno convertiti ad avere maiuscola iniziale
+o '^\e(.*\e)$' (modelli della shell disabilitati) e la maschera obbiettivo
+è '\eL\eu*' i nomi dei file saranno convertiti ad avere maiuscola iniziale
 ed il resto minuscolo.
 .PP
-Si può usare '\\' come carattere di protezione. Per esempio, '\\\\' è
-una barra retroversa e '\\*' è un asterisco.
+Si può usare '\e' come carattere di protezione. Per esempio, '\e\e' è
+una barra retroversa e '\e*' è un asterisco.
 .\"NODE "Internal File Viewer"
 .SH "Visualizzatore di file interno"
 Il visualizzatore di file interno fornisce due modalità di visualizzazione:
@@ -2806,7 +2806,7 @@ Edit Extension File
 section.  Here is an example entry for Debian packages:
 .PP
 .nf
-  regex/\.deb$
+  regex/\e.deb$
           Open=%cd %p/deb://
 .fi
 .\"NODE "Colors"
@@ -3045,7 +3045,7 @@ di libreria del Midnight Commander) e nel file ~/.config/mc/ini la sezione
 "terminal:nome\-del\-terminale\-in\-uso" e poi la sezione "terminal:general",
 ogni riga della sezione contiene il simbolo chiave che si vuol definire,
 seguito da un segno di uguale e la definizione per quel tasto.
-E' possibile usare la forma speciale \\e per rappresentare il carattere
+E' possibile usare la forma speciale \ee per rappresentare il carattere
 di escape e ^x per rappresentare il carattere control\-x.
 .PP
 I simboli chiave possibili sono:
@@ -3070,7 +3070,7 @@ Per esempio, per definire il tasto di inserimento come escape + [ + O + p
 impostare il seguente nel file ini:
 .PP
 .nf
-insert=\\e[Op
+insert=\ee[Op
 .fi
 .PP
 Il tasto di 
