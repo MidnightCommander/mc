@@ -30,7 +30,7 @@ jobs:
 
       - name: Lint documentation
         working-directory: maint
-        run: ./doctest
+        run: ./doctest.py
 
       - name: Bootstrap build system
         run: ./autogen.sh
