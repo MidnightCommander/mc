@@ -2,6 +2,9 @@ name: ci-fedora
 
 on:
   workflow_call:
+    secrets:
+      SOURCE_DEPLOY_KEY:
+        required: true
 
 jobs:
   build-fedora:
@@ -15,22 +18,24 @@ jobs:
       contents: read
 
     steps:
-      - name: Install git inside container
-        run: dnf install -y git
+      - name: Install dependencies
+        run: |
+          dnf install -y \
+            git `# Install git inside container` \
+            \
+            autoconf automake clang-tools-extra gcc gettext-devel groff libtool make pkgconfig \
+            aspell-devel check-devel gpm-devel libX11-devel "pkgconfig(ext2fs)" "pkgconfig(glib-2.0)" "pkgconfig(gmodule-2.0)" "pkgconfig(libssh2)" "pkgconfig(slang)" \
+            \
+            glibc-gconv-extra util-linux `# For tests` \
+            mandoc `# To render manual pages` \
+
 
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          dnf install -y autoconf automake clang-tools-extra gcc gettext-devel groff libtool make pkgconfig
-          dnf install -y aspell-devel check-devel gpm-devel libX11-devel "pkgconfig(ext2fs)" "pkgconfig(glib-2.0)" "pkgconfig(gmodule-2.0)" "pkgconfig(libssh2)" "pkgconfig(slang)"
-
-          # For tests
-          dnf install -y glibc-gconv-extra util-linux
 
       - name: Lint documentation
         working-directory: maint
-        run: ./doctest
+        run: ./doctest.py
 
       - name: Bootstrap build system
         run: ./autogen.sh
@@ -58,8 +63,37 @@ jobs:
             make install \
           '
 
+      - name: Render manual pages to HTML
+        run: |
+          mkdir man
+          cp maint/mandoc-1.14.6.css man/mandoc.css
+
+          MANPAGES="mc mcdiff mcedit mcview"
+
+          for MANPAGE in $MANPAGES ; do
+            man.mandoc -K utf-8 -mandoc -T html -O style=mandoc.css \
+              $(pwd)/install-prefix/share/man/man1/$MANPAGE.1 > man/$MANPAGE.html
+          done
+
+          echo "<div align='right'>Manual pages: " > man/header.html
+          python3 -c "print(' &bullet; '.join(f'<a href="man/{p}.html">{p}</a>' for p in '$MANPAGES'.split()))" >> man/header.html
+          echo "</div>" >> man/header.html
+
+      - uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          name: man-pages-html-${{ github.sha }}
+          path: man
+
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: test-suite-logs-fedora
           path: ./**/test-suite.log
+
+  call-update-sources:
+    needs: [ build-fedora ]
+    if: github.ref == 'refs/heads/master'
+    uses: ./.github/workflows/update-sources.yml
+    secrets:
+      SOURCE_DEPLOY_KEY: ${{ secrets.SOURCE_DEPLOY_KEY }}

@@ -320,7 +320,7 @@ of config file.
 .br
 .PP
 Command line option, environment variable and parameter in config file may
-contain the absolute path to the keymap\-file (with the extension \.keymap
+contain the absolute path to the keymap\-file (with the extension .keymap
 or without it). Search of keymap\-file will occur in (to the first one found):
 .IP
 .br
@@ -469,7 +469,7 @@ format.
 With this it is possible to quickly switch to brief listing, long
 listing, user defined listing format, and back to the default.
 .TP
-.B C\-\\\\ (control\-backslash)
+.B C\-\e (control\-backslash)
 show the
 .\"LINK2"
 directory hotlist
@@ -497,8 +497,8 @@ If
 .I Case sensitive
 is off, the case will be ignored.
 .TP
-.B \\\\ (backslash)
-use the "\\" key to unselect a group of files. This is the opposite of
+.B \e (backslash)
+use the "\e" key to unselect a group of files. This is the opposite of
 the Plus key.
 .TP
 .B up\-key, C\-p
@@ -1063,7 +1063,7 @@ directory/filename you specify in the input dialog. The destination
 defaults to the directory in the non\-selected panel. Space for destination
 file may be preallocated relative to preallocate_space configure option.
 During this process, you can press C\-c or Esc to abort the operation.
-For details about source mask (which will be usually either * or ^\\(.*\\)$
+For details about source mask (which will be usually either * or ^\e(.*\e)$
 depending on setting of Use shell patterns) and possible wildcards in the
 destination see
 .\"LINK2"
@@ -1192,7 +1192,7 @@ If
 .I Case sensitive
 is off, the case will be ignored.
 .PP
-.B Unselect group (\\\\)
+.B Unselect group (\e)
 .PP
 Used to unselect a group of files. This is the opposite of the
 .I "Select group"
@@ -2422,8 +2422,8 @@ or ~/.mkshrc).
 users may specify startup commands in ~/.local/share/mc/.zshrc (fallback ~/.zshrc).
 .PP
 .B tcsh, fish
-users cannot specify mc-specific startup commands at present. They have to rely on
-shell-specific startup files.
+users cannot specify mc\-specific startup commands at present. They have to rely on
+shell\-specific startup files.
 .PP
 The following paragraphs are relevant only when the subshell support is
 active:
@@ -2439,13 +2439,13 @@ prompt displayed by Midnight Commander will be the same prompt that you
 are currently using in your shell.
 .PP
 (There's a known problem when using fish: the prompt is displayed only in
-full screen mode (Ctrl-o), not when the panels are visible.)
+full screen mode (Ctrl\-o), not when the panels are visible.)
 .PP
 The
 .\"LINK2"
 OPTIONS
 .\"OPTIONS"
-section has more information on how you can control subshell usage (-U/-u).
+section has more information on how you can control subshell usage (\-U/\-u).
 Furthermore, to set a specific subshell different from your current SHELL variable or
 login shell defined in /etc/passwd, you may call MC like this:
 .B SHELL=/bin/myshell mc
@@ -2622,7 +2622,7 @@ button to append the source file to the target one.
 .B [Reget]
 button to append the rest of the source file to the target one.
 This button is displayed only if the size of the target file
-is non-zero and less than the size of the source file.
+is non\-zero and less than the size of the source file.
 .TP
 .B [All]
 button to overwrite all the files.
@@ -2722,12 +2722,12 @@ set, the current value of the umask will be respected.
 .PP
 When this option is on you can use the '*' and '?' wildcards in the source
 mask. They work like they do in the shell. In the target mask only the '*'
-and '\\<digit>' wildcards are allowed. The first '*' wildcard in the target
+and '\e<digit>' wildcards are allowed. The first '*' wildcard in the target
 mask corresponds to the first wildcard group in the source mask,
-the second '*' corresponds to the second group and so on.  The '\\1' wildcard
-corresponds to the first wildcard group in the source mask, the '\\2' wildcard
-corresponds to the second group and so on all the way up to '\\9'.
-The '\\0' wildcard is the whole filename of the source file.
+the second '*' corresponds to the second group and so on.  The '\e1' wildcard
+corresponds to the first wildcard group in the source mask, the '\e2' wildcard
+corresponds to the second group and so on all the way up to '\e9'.
+The '\e0' wildcard is the whole filename of the source file.
 .PP
 Two examples:
 .PP
@@ -2736,47 +2736,47 @@ file to be copied is "foo.tar.gz", the copy will be "foo.tgz" in "/bla".
 .PP
 Suppose you want to swap basename and extension so that "file.c" would
 become "c.file" and so on.  The source mask for this is "*.*" and the
-destination is "\\2.\\1".
+destination is "\e2.\e1".
 .PP
 .B Use shell patterns off
 .PP
 When the shell patterns option is off the MC doesn't do automatic
-grouping anymore. You must use '\\(...\\)' expressions in the source
+grouping anymore. You must use '\e(...\e)' expressions in the source
 mask to specify meaning for the wildcards in the target mask. This is
 more flexible but also requires more typing. Otherwise target masks
 are similar to the situation when the shell patterns option is on.
 .PP
 Two examples:
 .PP
-If the source mask is "^\\(.*\\)\\.tar\\.gz$", the destination is
+If the source mask is "^\e(.*\e)\e.tar\e.gz$", the destination is
 "/bla/*.tgz" and the file to be copied is "foo.tar.gz", the copy
 will be "/bla/foo.tgz".
 .PP
 Let's suppose you want to swap basename and extension so that "file.c"
 will become "c.file" and so on. The source mask for this is
-"^\\(.*\\)\\.\\(.*\\)$" and the destination is "\\2.\\1".
+"^\e(.*\e)\e.\e(.*\e)$" and the destination is "\e2.\e1".
 .PP
 .B Case Conversions
 .PP
-You can also change the case of the filenames.  If you use '\\u'
-or '\\l' in the target mask, the next character will be converted to
+You can also change the case of the filenames.  If you use '\eu'
+or '\el' in the target mask, the next character will be converted to
 uppercase or lowercase correspondingly.
 .PP
-If you use '\\U' or '\\L' in the target mask, the next characters will
+If you use '\eU' or '\eL' in the target mask, the next characters will
 be converted to uppercase or lowercase correspondingly up to the
-next '\\E' or next '\\U', '\\L' or the end of the file name.
+next '\eE' or next '\eU', '\eL' or the end of the file name.
 .PP
-The '\\u' and '\\l' are stronger than '\\U' and '\\L'.
+The '\eu' and '\el' are stronger than '\eU' and '\eL'.
 .PP
 For example, if the source mask is '*' (
 .I Use shell patterns
-on) or '^\\(.*\\)$' (
+on) or '^\e(.*\e)$' (
 .I Use shell patterns
-off) and the target mask is '\\L\\u*' the file names will be converted
+off) and the target mask is '\eL\eu*' the file names will be converted
 to have initial upper case and otherwise lower case.
 .PP
-You can also use '\\' as a quote character. For example, '\\\\' is
-a backslash and '\\*' is an asterisk.
+You can also use '\e' as a quote character. For example, '\e\e' is
+a backslash and '\e*' is an asterisk.
 .PP
 .B Stable symlinks
 .PP
@@ -3187,8 +3187,8 @@ is disabled, the dialog pops up only if you press
 .B Alt\-Tab
 for the second time, for the first time MC just beeps.
 .PP
-Apply escaping of \fB?\fR, \fB*\fR, and \fB&\fR symbols (as \fB\\?\fR, \fB\\*\fR,
-and \fB\\&\fR) in filenames to disallow use them as metasymbols in regular
+Apply escaping of \fB?\fR, \fB*\fR, and \fB&\fR symbols (as \fB\e?\fR, \fB\e*\fR,
+and \fB\e&\fR) in filenames to disallow use them as metasymbols in regular
 expressions when substitution is performed in the input line.
 
 .\"NODE "Virtual File System"
@@ -3521,7 +3521,7 @@ Edit Extension File
 section.  Here is an example entry for Debian packages:
 .PP
 .nf
-  regex/\.deb$
+  regex/\e.deb$
           Open=%cd %p/deb://
 .fi
 .\"NODE "Colors"
@@ -3697,7 +3697,7 @@ in config file.
 
 .PP
 Command line option, environment variable and parameter in config file may
-contain the absolute path to the skin\-file (with the extension \.ini
+contain the absolute path to the skin\-file (with the extension .ini
 or without it). Search of skin\-file will occur in (to the first one found):
 .IP
 1)
@@ -4118,7 +4118,7 @@ On the other hand, you cannot use them to change selection when the
 command line is not empty.
 .TP
 .I alternate_plus_minus
-If true, use '+', '\-', '\\' and '*' keys normally. For select/unselect,
+If true, use '+', '\-', '\e' and '*' keys normally. For select/unselect,
 use 'Alt\-+', 'Alt\--' and 'Alt\-*'.
 .TP
 .I show_output_starts_shell
@@ -4243,7 +4243,7 @@ Midnight Commander's library directory) and in the
 "terminal:your\-terminal\-name" and then for the section
 "terminal:general", each line of the section contains a key symbol that
 you want to define, followed by an equal sign and the definition for the
-key.  You can use the special \\e form to represent the escape character
+key.  You can use the special \ee form to represent the escape character
 and the ^x to represent the control\-x character.
 .PP
 The possible key symbols are:
@@ -4268,7 +4268,7 @@ For example, to define the key insert to be the Escape + [ + O + p, you
 set this in the ini file:
 .PP
 .nf
-insert=\\e[Op
+insert=\ee[Op
 .fi
 
 .PP
@@ -4277,13 +4277,13 @@ Also now you can use
 For example:
 
 .nf
-    ctrl\-alt\-right=\\e[[1;6C
-    ctrl\-alt\-left=\\e[[1;6D
+    ctrl\-alt\-right=\ee[[1;6C
+    ctrl\-alt\-left=\ee[[1;6D
 .fi
 
 .PP
-This means that ctrl+alt+left sends a \\e[[1;6D escape sequence
-and therefore Midnight Commander interprets "\\e[[1;6D" as C\-Alt\-Left.
+This means that ctrl+alt+left sends a \ee[[1;6D escape sequence
+and therefore Midnight Commander interprets "\ee[[1;6D" as C\-Alt\-Left.
 
 .PP
 The

@@ -280,7 +280,7 @@ within a C comment.
 A trivial C programming section might look like this:
 .PP
 .nf
-file .\\*\\\\.c C\\sProgram\\sFile (#include|/\\\\\\*)
+file .\e*\e\e.c C\esProgram\esFile (#include|/\e\e\e*)
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
@@ -301,18 +301,18 @@ context default
   keyword         '*'      green
 
 # C comments
-context /\\* \\*/ comment
+context /\e* \e*/ comment
 
 # C preprocessor directives
-context linestart # \\n red
-  keyword  \\\\\\n  brightred
+context linestart # \en red
+  keyword  \e\e\en  brightred
 
 # C string constants
 context " " green
   keyword  %d    brightgreen
   keyword  %s    brightgreen
   keyword  %c    brightgreen
-  keyword  \\\\"   brightgreen
+  keyword  \e\e"   brightgreen
 .fi
 .PP
 Each context starts with a line of the form:
@@ -376,9 +376,9 @@ Each rule is a line of the form:
 .RI [ attributes ]
 .PP
 Context or keyword strings are interpreted, so that you can include tabs
-and spaces with the sequences \\t and \\s.  Newlines and backslashes are
-specified with \\n and \\\\ respectively.  Since whitespace is used as a
-separator, it may not be used as is.  Also, \\* must be used to specify
+and spaces with the sequences \et and \es.  Newlines and backslashes are
+specified with \en and \e\e respectively.  Since whitespace is used as a
+separator, it may not be used as is.  Also, \e* must be used to specify
 an asterisk.  The * itself is a wildcard that matches any length of
 characters.  For example,
 .PP
@@ -400,7 +400,7 @@ or first character.
 Important to note is the line
 .PP
 .nf
-  keyword  \\\\\\n  brightgreen
+  keyword  \e\e\en  brightgreen
 .fi
 .PP
 This line defines a keyword containing the backslash and newline
@@ -467,9 +467,9 @@ environment variable.  Foreground and background colors pairs may be
 specified for example with:
 .PP
 .nf
-MC_COLOR_TABLE="$MC_COLOR_TABLE:\\
-editnormal=lightgray,black:\\
-editbold=yellow,black:\\
+MC_COLOR_TABLE="$MC_COLOR_TABLE:\e
+editnormal=lightgray,black:\e
+editbold=yellow,black:\e
 editmarked=black,cyan"
 .fi
 .SH OPTIONS
@@ -602,7 +602,7 @@ in the [Misc] section.
 Set of characters to stop paragraph formatting. If one of those characters
 is found in the beginning of line, that line and all following lines of paragraph
 will be untouched. Default value is
-"\fB-\fR\fB+\fR\fB*\fR\fB\\\fR\fB,\fR\fB.\fR\fB;\fR\fB:\fR\fB&\fR\fB>\fR".
+"\fB-\fR\fB+\fR\fB*\fR\fB\e\fR\fB,\fR\fB.\fR\fB;\fR\fB:\fR\fB&\fR\fB>\fR".
 .TP
 .I editor_state_full_filename
 Show full path name in the status line. If disabled (default), only base name of the

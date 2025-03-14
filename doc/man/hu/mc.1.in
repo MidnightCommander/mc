@@ -402,7 +402,7 @@ Vált a jelenlegi lista megjelenítési módról a következő megjelenítési
 módra. Ezzel gyorsan át tudsz váltani a hosszú listáról a rendezett
 listára és a felhasználó által definiált listázási módra.
 .PP
-.B C\-\\\\ (control\-backslash)
+.B C\-\e (control\-backslash)
 Megjeleníti a
 .\"LINK2"
 Könyvjelzőket
@@ -422,8 +422,8 @@ kikapcsolva tartjuk, a fájlok kijelölésére a normál kifejezések
 használhatóak (lásd
 .IR "ed (1)" ).
 .PP
-.B \\\\ (backslash).
-Használd a "\\" gombot a fájlcsoportok kiválasztásának megszüntetéséhez.
+.B \e (backslash).
+Használd a "\e" gombot a fájlcsoportok kiválasztásának megszüntetéséhez.
 Ez a Plusz gomb ellentettje.
 .PP
 .B crsr up, C\-p
@@ -922,7 +922,7 @@ fájlról van szó) a beviteli ablakban megadott könyvtárba. Space for
 destination file may be preallocated relative to preallocate_space
 configure option. A folyamat
 futását a C\-c, vagy ESC lenyomásával szakíthatod meg. A forrás maszk
-beállításairól (ami általában a *, vagy a ^\\(.*\\)$ közül valamelyik.
+beállításairól (ami általában a *, vagy a ^\e(.*\e)$ közül valamelyik.
 Ezekről a "Shell kifejezések" beállításnál, illetve a
 .\"LINK2"
 Kijelölt fájlok másolása vagy áthelyezése
@@ -1077,7 +1077,7 @@ Parancssor előzmények a M\-p, vagy a M\-n begépelésével is elérhető.
 .PP
 A
 .\"LINK2"
-Könyvjelzők (C\-\\)
+Könyvjelzők (C\-\e)
 .\"Hotlist"
 parancs felveszi a jelenlegi könyvtárat a gyakran használt könyvtárak
 közé.
@@ -1204,8 +1204,8 @@ nézetből.
 .PP
 A tartalom mezőben szabványos kifejezéseket is használhatunk megadásával
 (man egrep(1)). Használd az egrep escape (kilépés) karakterét (backslash,
-\\). Például, ha az "strcmp (" szöveget keresed, ezt így add meg:
-"strcmp \\(" (a dupla idézőjel nélkül).
+\e). Például, ha az "strcmp (" szöveget keresed, ezt így add meg:
+"strcmp \e(" (a dupla idézőjel nélkül).
 .PP
 Az Oké gomb lenyomásával indíthatod el a keresést. Keresés közben a
 keresés leállítható a Felfüggeszt gombbal és folytatható a Folytatás
@@ -2231,12 +2231,12 @@ fogja használni a funkció.
 .PP
 Amikor a "Shell mintát használ" kifejezések opció be van kapcsolva, a
 forrás maszkhoz használhatsz használhatod a '*' és a '?' maszkokat. Ezek
-használhatóak a shellben is. A cél maszkhoz csak '*' és '\\<szám>' maszk
+használhatóak a shellben is. A cél maszkhoz csak '*' és '\e<szám>' maszk
 használható. A célmaszk első '*' maszkja megfelel a forrás maszk első
 maszk csoportjának, a második '*' megfelel a második csoportnak, és így
-tovább. A '\\1' maszk megfelel a forrás maszk első maszk csoportjának, a
-\&'\\2' maszk megfelel a második csoportnak, és ez így megy '\\9'\-ig. A
-\&'\\0' maszk jelentése: a forrás fájl teljes neve.
+tovább. A '\e1' maszk megfelel a forrás maszk első maszk csoportjának, a
+\&'\e2' maszk megfelel a második csoportnak, és ez így megy '\e9'\-ig. A
+\&'\e0' maszk jelentése: a forrás fájl teljes neve.
 .PP
 Két példa:
 .PP
@@ -2246,12 +2246,12 @@ fájl a "foo.tar.gz", \- a másolat a "/bla" könyvtárban található
 .PP
 Tételezzük fel azt, hogy fel akarod cserélni a fájlnevet a
 kiterjesztéssel, például a "file.c"\-t a "c.file"\-lal, és a többit. Ennek
-a forrásmaszkja a "*.*" lesz, a rendeltetésé pedig a "\\2.\\1".
+a forrásmaszkja a "*.*" lesz, a rendeltetésé pedig a "\e2.\e1".
 .PP
 .B "Shell kifejezések ki"
 .PP
 Amikor a shell kifejezések opció ki van kapcsolva az MC a továbbiakban
-nem csoportosít automatikusan. Az '\\(...\\)' kiegészítést kell
+nem csoportosít automatikusan. Az '\e(...\e)' kiegészítést kell
 használnod a forrásmaszkban, a célmaszk specifikációnak meagadásához. Ez
 jóval gördülékenyebb módszernel tűnik, de több gépelést igényel.
 Egyébként a cél maszk használata egyszerűbb, ha a Shell kifejezések
@@ -2259,23 +2259,23 @@ opció be van kapcsolva.
 .PP
 .B Kisbetű\-nagybetű csere"
 .PP
-Magváltoztathatod a fájlnév betűnagyságát. Ha a '\\u'\-t, vagy a '\\l'\-t
+Magváltoztathatod a fájlnév betűnagyságát. Ha a '\eu'\-t, vagy a '\el'\-t
 használod a cél maszkban, a következő karaktert naggyá, vagy kicsivé
 konvertálja.
 .PP
-Ha a '\\U'\-t, vagy '\\L'\-t használod a cél maszkban a következő
+Ha a '\eU'\-t, vagy '\eL'\-t használod a cél maszkban a következő
 karakterek naggyá, illetve kicsivé fognak változni egészen addig, amíg
-\&'\\E', vagy '\\U', '\\L', vagy a fájlnév vége következik.
+\&'\eE', vagy '\eU', '\eL', vagy a fájlnév vége következik.
 .PP
-Az '\\u' és '\\l' erősebb az '\\U'\-nál és az '\\L'\-nél.
+Az '\eu' és '\el' erősebb az '\eU'\-nál és az '\eL'\-nél.
 .PP
 Például, ha a forrás maszk '*' (Shell kifejezés be van kapcsolva), vagy
-\&'^\\(.*\\)$' (Shell kifejezés ki van kapcsolva) és a célmaszk '\\L\\u*'
+\&'^\e(.*\e)$' (Shell kifejezés ki van kapcsolva) és a célmaszk '\eL\eu*'
 a fájl nevek eleje nagybetűsre konvertálódik, a többi betű pedig
 kicsire.
 .PP
-Ezeken kívül még használhatod a '\\' karaktert, mint hivatkozó
-karaktert. Például a  '\\\\'\-t a backslash\-hez és a '\\*'\-et a
+Ezeken kívül még használhatod a '\e' karaktert, mint hivatkozó
+karaktert. Például a  '\e\e'\-t a backslash\-hez és a '\e*'\-et a
 csillaghoz.
 .\"NODE "Internal File Viewer"
 .SH "Belső fájlnéző"
@@ -2798,7 +2798,7 @@ Edit Extension File
 section.  Here is an example entry for Debian packages:
 .PP
 .nf
-  regex/\.deb$
+  regex/\e.deb$
           Open=%cd %p/deb://
 .fi
 .\"NODE "Colors"
@@ -3048,7 +3048,7 @@ fájlban (az mc.lib fájlt a Midnight Commander library könyvtárában
 találjuk), vagy az ~/.config/mc/ini file "terminal:your\-terminal\-name" részében
 keres, és, a "terminal:general" rész minden sora tartalmazza azokat a
 billentyűzet szimbólumokat az egyenlőségjelet és a definiált szimbólumot
-követően, amelyeket te mag akarsz határozni. A \\e speciális formátumot
+követően, amelyeket te mag akarsz határozni. A \ee speciális formátumot
 az escape és a ^x\-t a control\-x karakter megjelenítésére használhatod.
 .PP
 A látható billentyű szimbólumok:
@@ -3073,7 +3073,7 @@ Például ahhoz, hogy az insert gomb az Escape + [+ O + p\-pel legyen
 azonos, az alábbiakat állítsd be az ini fájlban:
 .PP
 .nf
-insert=\\e[Op
+insert=\ee[Op
 .fi
 .PP
 A
@@ -3209,7 +3209,7 @@ Nézd meg a disztribúció TODO fájlát, hogy megtudhasd, milyen teendők
 vannak még vissza.
 .PP
 Ha a programmal kapcsolatos problémád van, akkor azt küld el az alábbi
-levélcímre: mc\-devel@lists.midnight-commander.org.
+levélcímre: mc\-devel@lists.midnight\-commander.org.
 .PP
 Gondoskodj arról, hogy tartalmazza a hiba minél pontosabb
 meghatározását, a futtatott program verziószámát (az mc \-V parancs meg
