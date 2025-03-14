@@ -1,9 +1,6 @@
 GNU Midnight Commander
 Frequently Asked Questions
 
-   The newest version of this document is available at
-   https://www.midnight-commander.org/browser/doc/FAQ
-
      * 1 Getting started
           + 1.1 What is Midnight Commander?
           + 1.2 Does it run on my machine?
@@ -28,8 +25,6 @@ Frequently Asked Questions
      * 3 Mouse
           + 3.1 How do I enable mouse support?
           + 3.2 How do I cut and paste text with mouse?
-          + 3.3 How do I get the extension dependent pop-up menu to
-            pop up?
 
      * 4 Display
           + 4.1 Why do I keep getting "Terminal not powerful enough for
@@ -43,8 +38,6 @@ Frequently Asked Questions
           + 4.7 Where can I get xterm or rxvt?
           + 4.8 I got colors working with MC but the other programs
             don't work at all anymore!
-          + 4.9 Why are there both terminfo and termcap?  Wouldn't one
-            database be enough?
 
      * 5 Graphical user interface
           + 5.1 Xview, Tk and Gnome editions?
@@ -63,6 +56,11 @@ Frequently Asked Questions
           + 6.6 When I use Ctrl-O I don't get a subshell.  How do I fix
             this?
           + 6.7 Ctrl-O doesn't work at all.  What happens?
+          + 6.8 Why I see lot of strange 'cd "printf ' lines into my
+            .history file?
+          6.9 I have a problem with Screen which makes using Midnight
+            Commander problematic. I use Ctrl-O to disable panels. Output
+            of previous commands, just a clear, screen is blanked.
 
      * 7 Virtual file systems
           + 7.1 How can I see the contents of a tar archive?
@@ -119,24 +117,7 @@ Frequently Asked Questions
    can also be compiled under Cygwin on Windows.
 
    GNU Midnight Commander uses GNU Autoconf which should automatically
-   configure it for every Unix clone.  Following configurations have
-   been tested in the past (this list is very old):
-
-     * i386-*-linux1.x, 2.x
-     * alpha-linux-linux2
-     * sparc-linux-linux2.x
-     * sparc64-linux-linux2.1
-     * mips-sgi-irix5.x, 6.x
-     * sparc-sun-sunos4.1
-     * sparc-sun-solaris2.3, 2.4, 2.5
-     * sparc-sun-netbsd1.0
-     * hppa-hp-hpux9
-     * hppa-hp-hpux7
-     * m68k-apple-aux
-     * unixware
-     * mc88110-aviion-dgux5.4R2.01
-     * i386-*-sco3.2v4.2
-     * i386-*-sco3.2v5
+   configure it for every Unix clone.
 
 1.3 Does it work with my terminal?
 
@@ -153,10 +134,10 @@ Frequently Asked Questions
    running Windows, use Cygwin.
 
    To compile any edition you need to have glib >= 2.32  installed.
-   It's available at https://download.gnome.org/sources/glib/.
+   It's available at https://download.gnome.org/sources/glib/ .
 
    If you want to use mouse on the Linux console you need the gpm daemon
-   from https://www.nico.schottelius.org/software/gpm/.  You need nothing
+   from https://www.nico.schottelius.org/software/gpm/ .  You need nothing
    extra to use mouse on xterm.
 
    If you do not want to use the S-Lang library you could try using
@@ -177,7 +158,7 @@ Frequently Asked Questions
 
 1.6 Where can I get GNU Midnight Commander?
 
-   The main site is https://www.midnight-commander.org
+   The main site is https://midnight-commander.org .
 
 1.7 I cannot compile MC.  What should I do?
 
@@ -187,7 +168,7 @@ Frequently Asked Questions
    If you have compile problems in the VFS code, try disabling it by
    using "--disable-vfs" option.
 
-f2 Keyboard
+2 Keyboard
 
 2.1 What does documentation mean with the C-?, M-? and F? keys?
 
@@ -226,7 +207,7 @@ f2 Keyboard
    Up-to-date termcap and terminfo databases are available here:
 
      http://www.catb.org/~esr/terminfo/
-     ftp://ftp.gnu.org/pub/gnu/ncurses/
+     https://ftp.gnu.org/gnu/ncurses/
 
    If you don't have permissions to edit terminal databases you can use
    Learn keys feature of Midnight Commander instead.  Press Esc 9 o k
@@ -634,7 +615,7 @@ just a clear, screen is blanked.
 
   (see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=558724)
 
-  or do not rewrite TERM (mustbe TERM=screen) andrun mc as follow:
+  or do not rewrite TERM (mustbe TERM=screen) and run mc as follow:
 
    echo -e '\e[?1000h' && mc -x
 
@@ -743,9 +724,10 @@ indenting increases with each line!
 
 10.1 Who has written Midnight Commander?
 
-   Midnight Commander was started by Miguel de Icaza and he is the
+   Midnight Commander was started by Miguel de Icaza and was is the
    maintainer of the package.  Other authors have joined the project
    later:
+
      * Mauricio Plaza (early releases)
      * Janne Kukonlehto (joined Sep 27 1994)
      * Radek Doulik (joined Oct 30 1994)
@@ -758,13 +740,13 @@ indenting increases with each line!
      * Norbert Warmuth
      * Alex I. Tkachenko
 
-
    Alessandro Rubini has been specially helpful with debugging and
    enhancing of the mouse support.  John E. Davis has made his S-Lang
    library available to us and answered many questions about it.
 
    Many people have contributed bug reports, feature suggestions and
    small code bits (alphabetical order):
+
      * Thomasz Cholewo
      * Juan Jose Ciarlante
      * Alexander Dong (OS/2 port, NT port updates)
@@ -784,17 +766,10 @@ indenting increases with each line!
      * Jon Stevens
      * Adam Tla/lka
 
-   Current list of active developers can be found here:
-   https://www.midnight-commander.org/wiki/McDevelopers
-
-   This page lists everbody who has provided a patch or
-   has written code for the Midnight Commander in the past:
-   https://www.midnight-commander.org/wiki/McContributors
-
 10.2 Do I dare to use a development version?
 
    Yes, of course. Feel free to test:
-   https://www.midnight-commander.org/wiki#Download
+   https://midnight-commander.org
    As we do our development in git, please do a git checkout
    of the master branch and build it
 
@@ -809,7 +784,7 @@ indenting increases with each line!
    the bug is fixed or the feature is added already.
 
    If this is not the case, feel free to add a ticket in our ticket system,
-   which is located here: https://www.midnight-commander.org/newticket
+   which is located here: https://github.com/MidnightCommander/mc/issues
 
    If you want to send an email instead write your report to
    mc-devel@lists.midnight-commander.org or mc@lists.midnight-commander.org.
@@ -880,21 +855,11 @@ an answer?
           To subscribe visit
           https://lists.midnight-commander.org/mailman/listinfo/mc-devel/
 
-   mc-commits@googlegroups.com
-          mailing list only for applyed commits into master/stable branches
-          To subscribe visit
-          https://groups.google.com/group/mc-commits/subscribe
-
-   mc-bugs@googlegroups.com
-          Mailing list only for tickets and comments (use it as RSS :) )
-          To subscribe visit
-          https://groups.google.com/group/mc-bugs/subscribe
-
 11.3 Where should I look on the World Wide Web for MC stuff?
 
    There is a WWW page for Midnight Commander.  The URL is:
 
-     https://www.midnight-commander.org/
+     https://midnight-commander.org
 
 11.4 Are the mailing lists archived anywhere?
 
