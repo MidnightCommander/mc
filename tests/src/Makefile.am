@@ -10,7 +10,7 @@ AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/lib/vfs \
-	-DTEST_SHARE_DIR=\"$(abs_srcdir)\" \
+	-DTEST_SHARE_DIR=\"$(abs_srcdir)/fixtures\" \
 	@CHECK_CFLAGS@
 
 LIBS = @CHECK_LIBS@ \
@@ -21,7 +21,11 @@ if ENABLE_MCLIB
 LIBS += $(GLIB_LIBS)
 endif
 
-EXTRA_DIST = execute__common.c
+EXTRA_DIST = \
+	fixtures/mc.charsets \
+	fixtures/hints/mc.hint \
+	fixtures/viewertest.txt \
+	execute__common.c
 
 TESTS = \
 	execute__execute_with_vfs_arg \

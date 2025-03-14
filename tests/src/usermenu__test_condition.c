@@ -71,7 +71,7 @@ setup_charset (const char *encoding, MC_UNUSED const gboolean utf8_display)
     str_init_strings (encoding);
 
 #ifdef HAVE_CHARSET
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR "/editor";
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 
     cp_source = encoding;
