@@ -70,7 +70,7 @@ body:
     id: additional-context
     attributes:
       label: Additional context
-      description: If needed, please provide additional information about your issue (attachments, links, references, etc.).
+      description: If needed, please provide additional information about your issue (attachments, links, references, etc.). In case of a crash or hang, a `gdb bt full' on the core dump or the hanging process would be very helpful to diagnose the problem.
 
   - type: markdown
     attributes:
