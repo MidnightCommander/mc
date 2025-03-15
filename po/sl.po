@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://app.transifex.com/mc/mc/language/sl/)\n"
@@ -448,6 +448,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -473,12 +479,6 @@ msgid ""
 msgstr ""
 "Velikost zaslona %dx%d ni podprta.\n"
 "Preverite okoljsko spremenljivko TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -735,10 +735,11 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
 
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 
 msgid "Main options"
@@ -4272,9 +4273,6 @@ msgstr "Napaka sporočena po prekinitvi."
 msgid "Aborted transfer would be successful."
 msgstr "Prekinjen prenos bi bil uspešen."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Nekonsistenten tar arhiv"
 
@@ -4293,6 +4291,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4469,11 +4470,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "Polnočni poveljnik GNU %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Polnočni Poveljnik %s"

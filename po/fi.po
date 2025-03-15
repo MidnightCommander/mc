@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -459,6 +459,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Vaihto"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ei voi tarkistaa SIGWINCH -putkea"
+
 #, c-format
 msgid ""
 "\n"
@@ -490,12 +496,6 @@ msgid ""
 msgstr ""
 "Näytön koko %dx%d ei ole yhteensopiva.\n"
 "Tarkista TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ei voi tarkistaa SIGWINCH -putkea"
 
 msgid "B"
 msgstr "t"
@@ -756,10 +756,11 @@ msgstr "tiedosto1 tiedosto2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 
 msgid "Main options"
@@ -3853,17 +3854,17 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr " Luotu ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr " Luotu ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4327,9 +4328,6 @@ msgstr "Virhe raportoitu keskeyttämisen jälkeen."
 msgid "Aborted transfer would be successful."
 msgstr "Keskeytetty siirto olisi onnistunut."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4346,6 +4344,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4522,17 +4523,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Luotu ncurses (tuntematon versio)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr " Luotu ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Luotu ncursesw (tuntematon versio)"

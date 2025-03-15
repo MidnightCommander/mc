@@ -6,13 +6,14 @@
 # lusitanus <interlusitana@gmail.com>, 2011
 # Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017
 # SoftInterlingua <>, 2015
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
@@ -447,6 +448,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Clave \"Shift\""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Le variabile de ambiente TERM non es definite!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -472,12 +479,6 @@ msgid ""
 msgstr ""
 "Le dimenion de schermo %dx%d non es supportate.\n"
 "Verifica le variabile de ambiente TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Le variabile de ambiente TERM non es definite!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -734,11 +735,15 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[iste_dir] [altere_dir_de_pannello]"
 
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
+"\n"
+"Per favor invia reportos de falta (includente le resultato de 'mc -V')\n"
+"como tickets a %s\n"
 
 msgid "Main options"
 msgstr "Optiones principal"
@@ -4256,9 +4261,6 @@ msgstr "Error reportate post abortamento."
 msgid "Aborted transfer would be successful."
 msgstr "Le transferentia abortate haberea succedite."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Archivo tar inconsistente"
 
@@ -4277,6 +4279,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4459,7 +4464,3 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"

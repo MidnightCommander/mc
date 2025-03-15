@@ -14,14 +14,14 @@
 # Serhii Trykoza <sergey.trikoza@gmail.com>, 2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Vlad Anisimov <uniss@ua.fm>, 2019
-# Yury V. Zaytsev <yury@shurup.com>, 2016
+# Yury V. Zaytsev <yury@shurup.com>, 2016,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Rostyslav Haitkulov <info@ubilling.net.ua>, 2023\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -472,6 +472,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Змінна середовища TERM не встановлена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Не вдалося перевірити канал SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -503,12 +509,6 @@ msgid ""
 msgstr ""
 "Розмір екрана %dx%d не підтримується.\n"
 "Перевірте змінну оточення TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Змінна середовища TERM не встановлена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Не вдалося перевірити канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -780,15 +780,16 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[цей_каталог] [каталог_іншої_панелі]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Будь ласка, надсилайте будь-які повідомлення про помилки (включаючи вивід "
-"'mc -V') як квитки на сайті www.midnight-commander.org\n"
+"'mc -V')\n"
+"як квитки на сайті %s\n"
 
 msgid "Main options"
 msgstr "Головні параметри"
@@ -3975,21 +3976,21 @@ msgstr "Із підтримкою кількох кодових сторінок
 msgid "With ext2fs attributes support"
 msgstr "Із підтримкою атрибутів ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Зібрано із GLib %d.%d.%d\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Зібрано з ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Зібрано з ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4493,9 +4494,6 @@ msgstr "Сталася помилка після переривання."
 msgid "Aborted transfer would be successful."
 msgstr "Перерване перенесення могло завершитися успішно."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Виявлено неузгоджений архів tar"
 
@@ -4514,6 +4512,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4708,25 +4709,3 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Зібрано зі S-Lang %s з базою даних terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Зібрано з ncurses (невідома версія)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Зібрано з ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Зібрано з ncursesw (невідома версія)"

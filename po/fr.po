@@ -13,14 +13,14 @@
 # 4a14a73d523224463300dea5e0502458_3dab472, 2012
 # Towinet, 2017
 # Wallon Wallon, 2022-2025
-# Yury V. Zaytsev <yury@shurup.com>, 2016
+# Yury V. Zaytsev <yury@shurup.com>, 2016,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Wallon Wallon, 2022-2025\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: French (http://app.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -469,6 +469,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maj"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "La variable d’environnement TERM n’est pas définie !\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Impossible de vérifier le tuyau SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -500,12 +506,6 @@ msgid ""
 msgstr ""
 "La taille de l’écran %dx%d n’est pas supportée.\n"
 "Vérifiez la variable d’environnement TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "La variable d’environnement TERM n’est pas définie !\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Impossible de vérifier le tuyau SIGWINCH"
 
 msgid "B"
 msgstr "O"
@@ -801,15 +801,15 @@ msgstr "fichier1 fichier2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[ce_rép] [autre_rép_panneau]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Envoyez vos rapports d’anomalies (incluant la sortie de « mc -V »)\n"
-"comme ticket de www.midnight-commander.org\n"
+"comme ticket à %s\n"
 
 msgid "Main options"
 msgstr "Options principales"
@@ -2218,7 +2218,7 @@ msgid "Inode uses extents"
 msgstr "Inode utilise des formats étendus"
 
 msgid "Huge_file"
-msgstr "Fichier énorme"
+msgstr "_Fichier énorme"
 
 msgid "No COW"
 msgstr "Pas de Copy-On-Write"
@@ -4033,25 +4033,25 @@ msgstr "Avec prise en charge de plusieurs pages de code"
 msgid "With ext2fs attributes support"
 msgstr "Avec la prise en charge des attributs ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Compilé avec GLib %d.%d.%d\n"
+msgstr "Conçu avec GLib %d.%d.%d (en utilisant GLib %u.%u.%u)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Construit avec ncurses %s\n"
+msgstr "Conçu avec S-Lang"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " et la base de données terminfo (en utilisant l’%s S-Lang)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Construit avec ncurses %s\n"
+msgstr "Conçu avec %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (en utilisant %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4567,9 +4567,6 @@ msgstr "Erreur rapportée après l’abandon."
 msgid "Aborted transfer would be successful."
 msgstr "Le transfert abandonné devrait avoir réussi."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar : mc_lseek ne s’est pas arrêté à une limite d’enregistrement."
-
 msgid "Inconsistent tar archive"
 msgstr "Archive tar incohérente"
 
@@ -4591,6 +4588,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "ne ressemble pas à une archive tar."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar : mc_lseek ne s’est pas arrêté à une limite d’enregistrement."
 
 msgid "undelfs: error"
 msgstr " undelfs : erreur"
@@ -4785,25 +4785,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Construit avec S-Lang %s avec la base de données terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Construit avec ncurses (version inconnue)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Construit avec ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Construit avec ncursesw (version inconnue)"

@@ -14,13 +14,14 @@
 # MagnusHerrlin <m8618@abc.se>, 2016
 # Sebastian Rasmussen <sebras@gmail.com>, 2019-2020
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -465,6 +466,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Skift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Omgivningsvariablen TERM är inte satt!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kan inte kontrollera SIGWINCH-tunnel"
+
 #, c-format
 msgid ""
 "\n"
@@ -490,12 +497,6 @@ msgid ""
 msgstr ""
 "Skärmstorleken %d×%d stöds inte.\n"
 "Kontrollera miljövariabeln TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Omgivningsvariablen TERM är inte satt!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan inte kontrollera SIGWINCH-tunnel"
 
 msgid "B"
 msgstr "B"
@@ -769,15 +770,15 @@ msgstr "fil1 fil2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[denna_katalog] [andra_panelens_katalog]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Skicka felrapporter (med utskriften från 'mc -V' inkluderat)\n"
-"som 'tickets' på www.midnight-commander.org\n"
+"som 'tickets' på %s\n"
 
 msgid "Main options"
 msgstr "Huvudalternativ"
@@ -3946,9 +3947,9 @@ msgstr ""
 msgid "With ext2fs attributes support"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Byggd med GLib %d.%d.%d\n"
+msgstr ""
 
 #, c-format
 msgid "Built with S-Lang"
@@ -3958,9 +3959,9 @@ msgstr ""
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Byggd med GLib %d.%d.%d\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4439,9 +4440,6 @@ msgstr "Fel rapporterades efter avslutningen."
 msgid "Aborted transfer would be successful."
 msgstr "Avbruten överföring skulle ha varit lyckad."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistensfel i tararkivet"
 
@@ -4460,6 +4458,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4653,11 +4654,3 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"

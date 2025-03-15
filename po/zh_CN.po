@@ -13,14 +13,15 @@
 # qingxianhao <qinghao1@foxmail.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # walking <waling@mail.i2p>, 2013
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 # xtoaster <zhazhenzhong@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -464,6 +465,12 @@ msgstr "Alt 键"
 msgid "Shift"
 msgstr "Shift 键"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "没有设置 TERM 环境变量!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -489,12 +496,6 @@ msgid ""
 msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "没有设置 TERM 环境变量!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -764,15 +765,15 @@ msgstr "文件1 文件2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
-"错误报告 (包括 'mc -V' 输出结果)\n"
-"请以 ticket 的形式发至 www.midnight-commander.org\n"
+"错误报告 (包括'mc -V'输出结果)\n"
+"请以 ticket 的形式发至 %s\n"
 
 msgid "Main options"
 msgstr "主要选项"
@@ -3933,9 +3934,9 @@ msgstr ""
 msgid "With ext2fs attributes support"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "编译使用了 GLib %d.%d.%d\n"
+msgstr ""
 
 #, c-format
 msgid "Built with S-Lang"
@@ -3945,9 +3946,9 @@ msgstr ""
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "编译使用了 GLib %d.%d.%d\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4426,9 +4427,6 @@ msgstr "中止后发生错误。"
 msgid "Aborted transfer would be successful."
 msgstr "被中止的传输可能成功完成了。"
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 档案文件"
 
@@ -4447,6 +4445,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4640,11 +4641,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"

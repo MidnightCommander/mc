@@ -8,13 +8,14 @@
 # Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2025
 # vaba <vaba@riseup.net>, 2020
 # vaba <vaba@riseup.net>, 2020
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2025\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -461,6 +462,12 @@ msgstr "Klahv Alt"
 msgid "Shift"
 msgstr "Klahv Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Keskkonnamuutujat TERM on määramata!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH toru ei saa kontrollida"
+
 #, c-format
 msgid ""
 "\n"
@@ -494,12 +501,6 @@ msgid ""
 msgstr ""
 "Ekraani suurus %dx%d ei ole toetatud.\n"
 "Kontrolli keskkonna muutujat TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Keskkonnamuutujat TERM on määramata!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH toru ei saa kontrollida"
 
 msgid "B"
 msgstr "B"
@@ -791,15 +792,15 @@ msgstr "fail1 fail2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Palun saada kõik vearaportid (ja käsu 'mc -V' väljund)\n"
-"aadressile www.midnight-commander.org\n"
+"aadressile %s\n"
 
 msgid "Main options"
 msgstr "Põhisuvandid"
@@ -4009,25 +4010,25 @@ msgstr "Mitme kooditabeli toega"
 msgid "With ext2fs attributes support"
 msgstr "Sealhulgas ext2fs atribuutide tugi"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Ehitatud GLib teegiga %d.%d.%d\n"
+msgstr "Kompileeritud GLib teegiga %d.%d.%d (kasutades GLibi %u.%u.%u)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Kompileerimisel on kaasatud ncurses %s\n"
+msgstr "Kompileeritud S-Langi teegiga"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " ja terminfo andmebaasiga (kasutades S-Langi %s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Kompileerimisel on kaasatud ncurses %s\n"
+msgstr "Kompileerimisel on kaasatud %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (kasutades %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4531,9 +4532,6 @@ msgstr "Pärast katkestamist raporteeriti viga."
 msgid "Aborted transfer would be successful."
 msgstr "Katkestatud ülekanne oleks edukas."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek ei peatunud kirje piiril"
-
 msgid "Inconsistent tar archive"
 msgstr "Tar arhiiv sisaldab vasturääkivusi"
 
@@ -4555,6 +4553,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "ei meenuta tar arhiivi"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek ei peatunud kirje piiril"
 
 msgid "undelfs: error"
 msgstr "undelfs: viga"
@@ -4747,25 +4748,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Kompileerimisel on kaasatud S-Lang %s terminfo andmekoguga\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Kompileerimisel on kaasatud ncurses (versioon pole teada)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Kompileerimisel on kaasatud ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Kompileerimisel on kaasatud ncursesw (versioon pole teada)"

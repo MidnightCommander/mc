@@ -11,13 +11,14 @@
 # Radek Valášek <valin@buchlovice.org>, 2014
 # Robin Kriebel <kriebel.robin@gmail.com>, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Appukonrad <appukonrad@gmail.com>, 2024\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -465,6 +466,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Proměnná prostředí TERM není nastavena!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -496,12 +503,6 @@ msgid ""
 msgstr ""
 "Velikost obrazovky %d×%d není podporovaná.\n"
 "Prověřte nastavení proměnné prostředí TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Proměnná prostředí TERM není nastavena!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -772,15 +773,15 @@ msgstr "soubor1 soubor2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[aktuální_složka] [složka_druhého_panelu]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Hlášení chyb (společně s výstupem z příkazu „mc -V“)\n"
-"posílejte jako požadavky prostřednictvím www.midnight-commander.org\n"
+"posílejte jako požadavky prostřednictvím %s\n"
 
 msgid "Main options"
 msgstr "Hlavní nastavení"
@@ -3990,21 +3991,21 @@ msgstr "S podporou vícero znakových sad"
 msgid "With ext2fs attributes support"
 msgstr "S podporou ext2fs atributů"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Sestaveno s GLib %d.%d.%d\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Sestaveno s využitím ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Sestaveno s využitím ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4507,9 +4508,6 @@ msgstr "Po přerušení byla oznámena chyba."
 msgid "Aborted transfer would be successful."
 msgstr "Přerušení přenosu proběhlo v pořádku."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
-
 msgid "Inconsistent tar archive"
 msgstr "Nekonzistentní archiv .tar"
 
@@ -4531,6 +4529,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "nevypadá jako archiv .tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
 
 msgid "undelfs: error"
 msgstr "undelfs: chyba"
@@ -4723,25 +4724,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Sestavenou s využitím knihovny S-Lang %s s databází terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Sestaveno s využitím ncurses (neznámá verze)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Sestaveno s využitím ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Sestaveno s využitím ncursesw (neznámá verze)"

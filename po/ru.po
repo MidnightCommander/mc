@@ -26,13 +26,14 @@
 # Simple88, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2009,2011
 # Valek Filippov <frob@df.ru>, 2000
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Andrei Stepanov, 2023-2025\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -482,6 +483,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Переменная среды TERM не определена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Не удаётся проверить канал SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -513,12 +520,6 @@ msgid ""
 msgstr ""
 "Размер экрана %dx%d не поддерживается.\n"
 "Проверьте переменную окружения TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Переменная среды TERM не определена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Не удаётся проверить канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -816,15 +817,15 @@ msgstr "файл1 файл2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[этот_каталог] [каталог_другой_панели]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Пожалуйста, посылайте любые отчёты об ошибках (включая вывод \"mc -V\")\n"
-"как тикеты на www.midnight-commander.org\n"
+"как тикеты на %s\n"
 
 msgid "Main options"
 msgstr "Основные настройки"
@@ -4043,29 +4044,29 @@ msgstr "С поддержкой многих кодировок"
 msgid "With ext2fs attributes support"
 msgstr "С поддержкой атрибутов ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Скомпилирован с библиотекой GLib версии %d.%d.%d\n"
+msgstr "Собрано с GLib версии %d.%d.%d (используется GLib %u.%u.%u)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "С библиотекой ncurses %s\n"
+msgstr "Собрано с S-Lang"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " и базой данных terminfo (используется S-Lang %s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "С библиотекой ncurses %s\n"
+msgstr "Собрано с %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (используется %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Скомпилирован с библиотекой libssh2 версии %d.%d.%d\n"
+msgstr "Собрано с libssh2 версии %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Виртуальная файловая система:"
@@ -4567,9 +4568,6 @@ msgstr "Отмечена ошибка после прерывания."
 msgid "Aborted transfer would be successful."
 msgstr "Передача успешно прервана."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek не остановился на границе записи"
-
 msgid "Inconsistent tar archive"
 msgstr "Несогласованный архив tar"
 
@@ -4591,6 +4589,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "не похож на архив tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek не остановился на границе записи"
 
 msgid "undelfs: error"
 msgstr "undelfs: ошибка"
@@ -4783,25 +4784,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander, версия %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "С библиотекой S-Lang %s и с базой данных terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "С библиотекой ncurses (версия неизвестна)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "С библиотекой ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "С библиотекой ncursesw (версия неизвестна)"

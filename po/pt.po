@@ -5,16 +5,17 @@
 # Translators:
 # Gilberto J <2101458@my.ipleiria.pt>, 2012
 # Gilberto Jorge <gmj125@gmail.com>, 2012-2013
-# Gilberto Jorge <gmj125@gmail.com>, 2013-2024
+# Gilberto Jorge <gmj125@gmail.com>, 2013-2025
 # Peter J. Mello <admin@petermello.net>, 2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2024\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -461,6 +462,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variável de ambiente TERM foi limpa!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Não é possível verificar o pipe SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -492,12 +499,6 @@ msgid ""
 msgstr ""
 "Tamanho de ecrã %dx%d não é suportado.\n"
 "Verifique a variável de ambiente TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variável de ambiente TERM foi limpa!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Não é possível verificar o pipe SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -792,16 +793,16 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[este_dir] [outro_painel_dir]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
-"Por favor envie quaisquer relatório de erros (incluindo o output de 'mc "
-"-V')\n"
-"como tickets em www.midnight-commander.org\n"
+"Por favor envie quaisquer relatório de erros (incluindo o output de 'mc -"
+"V')\n"
+"como tickets em %s\n"
 
 msgid "Main options"
 msgstr "Opções principais"
@@ -1182,7 +1183,7 @@ msgid "Save block"
 msgstr "Guardar bloco"
 
 msgid "Cannot save block"
-msgstr ""
+msgstr "Não é possível gravar bloco"
 
 msgid "Insert file"
 msgstr "Inserir ficheiro"
@@ -1215,7 +1216,7 @@ msgid "Enter shell command(s):"
 msgstr "Inserir comando(s) shell:"
 
 msgid "Cannot execute external command"
-msgstr ""
+msgstr "Não é possível executar comando externo"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -1610,7 +1611,7 @@ msgstr ""
 "escrito para o Midnight Commander."
 
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca"
@@ -2708,6 +2709,8 @@ msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
+"Não é possível entrar no directório \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3890,6 +3893,8 @@ msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
 msgstr ""
+"Não é possível aceitar esta chave.\n"
+"Você digitou \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4015,25 +4020,25 @@ msgstr "Com suporte para múltiplas páginas de código"
 msgid "With ext2fs attributes support"
 msgstr "Com suporte de atributos ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Compilado com GLib %d.%d.%d\n"
+msgstr "Compilado com GLib %d.%d.%d (usando GLib %u.%u.%u)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Desenvolvido com ncurses %s\n"
+msgstr "Compilado com S-Lang"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " e terminfo database (usando S-Lang %s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Desenvolvido com ncurses %s\n"
+msgstr "Compilado com %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (usando %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4538,9 +4543,6 @@ msgstr "Erro reportado após abortar."
 msgid "Aborted transfer would be successful."
 msgstr "Transferência abortada teria tido sucesso."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek não parou num limite de registo"
-
 msgid "Inconsistent tar archive"
 msgstr "Arquivo tar inconsistente"
 
@@ -4562,6 +4564,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "não parece um arquivo tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek não parou num limite de registo"
 
 msgid "undelfs: error"
 msgstr "undelfs: erro"
@@ -4754,25 +4759,3 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Desenvolvido com S-Lang %s com base de dados terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Desenvolvido com ncurses (versão desconhecida)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Desenvolvido com ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Desenvolvido com ncursesw (versão desconhecida)"

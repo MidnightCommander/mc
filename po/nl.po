@@ -10,14 +10,14 @@
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # toniotonba <TonioTonBa@gmail.com>, 2011
 # bucovaina78 <wannessmet@gmail.com>, 2012
-# Yury V. Zaytsev <yury@shurup.com>, 2016-2017
+# Yury V. Zaytsev <yury@shurup.com>, 2016-2017,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Jaap Kramer <jaap-kramer@ziggo.nl>, 2023\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016-2017,2025\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -461,6 +461,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "De TERM-omgevingsvariabele is niet gezet!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kan SIGWINCH-pipe niet controleren"
+
 #, c-format
 msgid ""
 "\n"
@@ -492,12 +498,6 @@ msgid ""
 msgstr ""
 "Schermgrootte %dx%d wordt niet ondersteund.\n"
 "Controleer omgevingsvariabele TERM ( opdr: set).\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "De TERM-omgevingsvariabele is niet gezet!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan SIGWINCH-pipe niet controleren"
 
 msgid "B"
 msgstr "B"
@@ -769,15 +769,15 @@ msgstr "bestand1 bestand2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[deze map] [ander paneel map]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"Stuur a.u.b. bug-reports (met inbegrip van de output van `mc -V ')\n"
+"als tickets naar %s\n"
 
 msgid "Main options"
 msgstr "Hoofd-opties"
@@ -3960,21 +3960,21 @@ msgstr "Met ondersteuning voor meerdere karaktersets"
 msgid "With ext2fs attributes support"
 msgstr "Met ext2fs-attributie-ondersteuning"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Gebouwd met GLib %d.%d.%d\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Built met ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Built met ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4477,9 +4477,6 @@ msgstr "Fout gemeld na verbreking."
 msgid "Aborted transfer would be successful."
 msgstr "Verbroken transfer zou een success zijn."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Inconsistent tar-archief"
 
@@ -4498,6 +4495,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4683,25 +4683,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander  %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Built met S-Lang %s met terminfo-database\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Built met ncurses (onbekende versie)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Built met ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Built met ncursesw (onbekende versie)"

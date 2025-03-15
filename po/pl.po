@@ -6,13 +6,14 @@
 # Piotr Drąg <piotrdrag@gmail.com>, 2011-2025
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Waldemar Stoczkowski, 2021
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2025\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -462,6 +463,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nie można sprawdzić potoku SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -493,12 +500,6 @@ msgid ""
 msgstr ""
 "Rozmiar ekranu %d×%d nie jest obsługiwany.\n"
 "Proszę sprawdzić zmienną środowiskową TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nie można sprawdzić potoku SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -794,16 +795,16 @@ msgstr "plik1 plik2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[ten_katalog] [katalog_w_drugim_panelu]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Proszę wysyłać raporty błędów (w języku angielskim, wraz\n"
 "z wyjściem polecenia „mc -V”) jako zgłoszenia na stronie\n"
-"www.midnight-commander.org\n"
+"%s\n"
 
 msgid "Main options"
 msgstr "Główne opcje"
@@ -4025,25 +4026,26 @@ msgstr "Z obsługą wielu stron kodowych"
 msgid "With ext2fs attributes support"
 msgstr "Z obsługą atrybutów ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Zbudowano za pomocą biblioteki GLib %d.%d.%d\n"
+msgstr ""
+"Zbudowano za pomocą biblioteki GLib %d.%d.%d (używanie GLib %u.%u.%u)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Zbudowano za pomocą biblioteki ncurses %s\n"
+msgstr "Zbudowano za pomocą biblioteki S-Lang"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " i bazy danych terminfo (używanie S-Lang %s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Zbudowano za pomocą biblioteki ncurses %s\n"
+msgstr "Zbudowano za pomocą biblioteki %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (używanie %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4550,9 +4552,6 @@ msgstr "Zgłoszono błąd po przerwaniu."
 msgid "Aborted transfer would be successful."
 msgstr "Przerwane przesyłanie zostałoby pomyślnie zakończone."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
-
 msgid "Inconsistent tar archive"
 msgstr "Niespójne archiwum tar"
 
@@ -4574,6 +4573,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "nie wygląda na archiwum tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
 
 msgid "undelfs: error"
 msgstr "undelfs: błąd"
@@ -4767,25 +4769,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Zbudowano za pomocą biblioteki S-Lang %s z bazą danych terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Zbudowano za pomocą biblioteki ncurses (nieznana wersja)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Zbudowano za pomocą biblioteki ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Zbudowano za pomocą biblioteki ncursesw (nieznana wersja)"

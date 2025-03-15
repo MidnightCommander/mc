@@ -8,14 +8,14 @@
 # Rezső Páder <rezso@rezso.net>, 2012-2017,2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Szabo Attila, 2013
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
-"<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -453,6 +453,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Nincs beállítva a TERM környezeti változó.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -478,12 +484,6 @@ msgid ""
 msgstr ""
 "A(z) %dx%d képernyőméret nem támogatott.\n"
 "Ellenőrizze a TERM környezeti változót.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Nincs beállítva a TERM környezeti változó.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -752,15 +752,15 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[aktuális_könyvtár] [másik_könyvtár]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Hibajelentéseket (az \"mc -V\" parancs kimenetét mellékelve) a\n"
-"www.midnight-commander.org címre lehet küldeni \"ticket\"-ként.\n"
+"%s címre lehet küldeni \"ticket\"-ként.\n"
 
 msgid "Main options"
 msgstr "Alapbeállítások"
@@ -3924,9 +3924,9 @@ msgstr ""
 msgid "With ext2fs attributes support"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "GLib %d.%d.%d verzióval fordíva\n"
+msgstr ""
 
 #, c-format
 msgid "Built with S-Lang"
@@ -3936,9 +3936,9 @@ msgstr ""
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "GLib %d.%d.%d verzióval fordíva\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4417,9 +4417,6 @@ msgstr "Megszakítás után hibajelzés érkezett."
 msgid "Aborted transfer would be successful."
 msgstr "Átvitel megszakítva; hibajelzés nem érkezett."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Inkonzisztens tar-archívum."
 
@@ -4438,6 +4435,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4627,11 +4627,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"

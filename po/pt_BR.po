@@ -10,13 +10,14 @@
 # Rafael Fontenelle <rffontenelle@gmail.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Van Der Fran <transifex@vanderland.com>, 2011
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022-2025\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
 "Language: pt_BR\n"
@@ -473,6 +474,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variável de ambiente TERM não foi definida!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Não é possível verificar o canal do SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -504,12 +511,6 @@ msgid ""
 msgstr ""
 "O tamanho da tela %d x %d não é suportado. \n"
 "Verifique a variável de ambiente TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variável de ambiente TERM não foi definida!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Não é possível verificar o canal do SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -810,17 +811,17 @@ msgstr "arquivo 1 arquivo 2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[este_diretório] [outro_painel_do_diretório]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Se você identificar algum erro ou falha no Midnight Commander,\n"
 "por favor, nos envie o resultado do comando 'mc -V' em um\n"
 "emulador de terminal para a nossa página eletrônica\n"
-"www.midnight-commander.org.\n"
+"%s.\n"
 
 msgid "Main options"
 msgstr "Opções principais"
@@ -4072,25 +4073,26 @@ msgstr "Com suporte a várias páginas de códigos"
 msgid "With ext2fs attributes support"
 msgstr "Com suporte aos atributos do ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Construído com o GLib %d.%d.%d\n"
+msgstr ""
+"O programa foi construído com o GLib %d.%d.%d (utilizando o GLib %u.%u.%u)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Construído com o ncurses %s\n"
+msgstr "O programa foi construído com o S-Lang"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " e o banco de dados ‘terminfo’ (utilizando o S-Lang %s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Construído com o ncurses %s\n"
+msgstr "O programa foi construído com o  %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (utilizando o %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4617,9 +4619,6 @@ msgstr "O erro foi reportado depois será finalizado."
 msgid "Aborted transfer would be successful."
 msgstr "A transferência foi interrompida, mas poderia ser bem sucedida."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: o mc_lseek não parou no limite do registro"
-
 msgid "Inconsistent tar archive"
 msgstr "O arquivo tar não é consistente"
 
@@ -4641,6 +4640,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "não parece ser um arquivo do tipo .tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: o mc_lseek não parou no limite do registro"
 
 msgid "undelfs: error"
 msgstr "Ocorreu um erro no undelfs"
@@ -4835,25 +4837,3 @@ msgstr "Você quer continuar a partir do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "Midnight Commander do GNU %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Construído com o S-Lang %s com o banco de dados do terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Construído com o ncurses (de uma versão desconhecida)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Construído com o ncurses %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Construído com o ncursesw (de uma versão desconhecida)"

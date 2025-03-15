@@ -6,13 +6,14 @@
 # Andika Triwidada <andika@gmail.com>, 2011-2012
 # Ferriandy Chianiago <gpl4all@gmail.com>, 2015
 # Gung Sukma <so.hot.call@gmail.com>, 2015
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Ferriandy Chianiago <gpl4all@gmail.com>, 2015\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Indonesian (http://app.transifex.com/mc/mc/language/id/)\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -450,6 +451,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Environment variable TERM belum diset\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -475,12 +482,6 @@ msgid ""
 msgstr ""
 "Ukuran layar %dx%d tak didukung.\n"
 "Periksalah variabel lingkungan TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Environment variable TERM belum diset\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -742,15 +743,15 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Harap kirimkan laporan bug (sertakan output dari 'mc -V)\n"
-"sebagai tiket di www.midnight-commander.org\n"
+"sebagai tiket di %s\n"
 
 msgid "Main options"
 msgstr "Opsi utama"
@@ -4254,9 +4255,6 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4273,6 +4271,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4449,7 +4450,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"

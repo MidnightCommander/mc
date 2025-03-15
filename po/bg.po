@@ -8,14 +8,14 @@
 # Myselus, 2015-2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Yasen Pramatarov <yasen@lindeas.com>, 2011-2014,2016
-# Yury V. Zaytsev <yury@shurup.com>, 2017,2020
+# Yury V. Zaytsev <yury@shurup.com>, 2017,2020,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2017,2020,2025\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -460,6 +460,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променливата TERM не е зададена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Каналът за SIGWINCH не може да се провери"
+
 #, c-format
 msgid ""
 "\n"
@@ -491,12 +497,6 @@ msgid ""
 msgstr ""
 "Не се поддържа размер на екрана %dx%d.\n"
 "Проверете променливата на средата TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Променливата TERM не е зададена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Каналът за SIGWINCH не може да се провери"
 
 msgid "B"
 msgstr "B"
@@ -768,16 +768,16 @@ msgstr "файл_1 файл_2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[тази_дир-я] [дир-я_на_другия_панел]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Моля изпращайте всякакви доклади за бъгове (включително изходната информация "
 "от 'mc -V')\n"
-"като билети на www.midnight-commander.org\n"
+"като билети на %s\n"
 
 msgid "Main options"
 msgstr "Основни настройки"
@@ -3960,21 +3960,21 @@ msgstr "С поддръжка на множество кодирания"
 msgid "With ext2fs attributes support"
 msgstr "С поддръжка на атрибути на ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "С поддръжка на GLib %d.%d.%d\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "С поддръжка на ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "С поддръжка на ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4476,9 +4476,6 @@ msgstr "Грешка след отмяната."
 msgid "Aborted transfer would be successful."
 msgstr "Преносът е отменен успешно."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "сгрешен архив tar"
 
@@ -4497,6 +4494,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4690,25 +4690,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "С поддръжка на S-Lang %s с terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "С поддръжка на ncurses (непозната версия)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "С поддръжка на ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "С поддръжка на ncursesw (непозната версия)"

@@ -12,13 +12,14 @@
 # Martin Steghöfer <martin@steghoefer.eu>, 2015
 # Martin Steghöfer <martin@steghoefer.eu>, 2015
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2025\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -466,6 +467,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Majús"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "La variable d'entorn TERM no està definida!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -499,12 +506,6 @@ msgid ""
 msgstr ""
 "La mida de pantalla %dx%d no està admesa.\n"
 "Reviseu la variable d'entorn TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "La variable d'entorn TERM no està definida!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -802,16 +803,16 @@ msgstr "fitxer_1 fitxer_2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[aquest_dir] [altre_plafó_dir]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Si us plau, envieu tots els informes de problemes (inclouent el resultat de "
 "«mc -V»)\n"
-"a www.midnight-commander.org en forma de tiquets.\n"
+"a %s en forma de tiquets.\n"
 
 msgid "Main options"
 msgstr "Opcions principals"
@@ -4030,21 +4031,21 @@ msgstr "Amb la implementació per a múltiples pàgines de codi"
 msgid "With ext2fs attributes support"
 msgstr "Amb la implementació dels atributs «ext2fs»"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Construït amb GLib %d.%d.%d\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Construïda amb ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Construïda amb ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4560,9 +4561,6 @@ msgstr "S'ha informat d'un error després d'interrompre."
 msgid "Aborted transfer would be successful."
 msgstr "Transferència interrompuda amb èxit."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
-
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu TAR no és coherent"
 
@@ -4584,6 +4582,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "no sembla un arxiu tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4778,25 +4779,3 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "Midnight Commander %s de GNU\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Construïda amb S-Lang %s amb base de dades terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Construïda amb ncurses (versió desconeguda)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Construïda amb ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Construïda amb ncursesw (versió desconeguda)"

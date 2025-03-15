@@ -12,7 +12,7 @@
 # Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024
 # Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024
 # Viktar Palstsiuk <vipals@gmail.com>, 2015
-# Yury V. Zaytsev <yury@shurup.com>, 2019
+# Yury V. Zaytsev <yury@shurup.com>, 2019,2025
 # Źmicier Turok <nashtlumach@gmail.com>, 2018
 # Źmicier Turok <nashtlumach@gmail.com>, 2018
 # Zmicer Turok <zmicerturok@gmail.com >, 2017-2018
@@ -21,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Źmicier Turok <nashtlumach@gmail.com>, 2018\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2019,2025\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -473,6 +473,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Немагчыма праверыць канал SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -504,12 +510,6 @@ msgid ""
 msgstr ""
 "Памер экрана %d×%d не падтрымліваецца.\n"
 "Праверце зменную асяроддзя \"TERM\".\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Немагчыма праверыць канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -807,15 +807,15 @@ msgstr "файл1 файл2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[гэты_каталог] [каталог_іншай_панэлі]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Адпраўляйце справаздачы пра хібы (уключаючы вывад 'mc -V')\n"
-"як квіткі на www.midnight-commander.org\n"
+"як квіткі на %s\n"
 
 msgid "Main options"
 msgstr "Асноўныя параметры"
@@ -4018,21 +4018,21 @@ msgstr "З падтрымкай некалькіх кадаванняў"
 msgid "With ext2fs attributes support"
 msgstr "З падтрымкай атрыбутаў ext2fs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Сабрана з бібліятэкай \"GLib\" версіі %d.%d.%d\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Сабрана з ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Сабрана з ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4541,9 +4541,6 @@ msgstr "Пасля перарывання выяўлена памылка."
 msgid "Aborted transfer would be successful."
 msgstr "Перадача перарваная."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
-
 msgid "Inconsistent tar archive"
 msgstr "Несумяшчальны архіў tar"
 
@@ -4565,6 +4562,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "не падобны на архіў tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
 
 msgid "undelfs: error"
 msgstr "undelfs: памылка"
@@ -4757,25 +4757,3 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander, версія %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Сабрана з S-Lang %s з базай даных terminfo\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Сабрана з ncurses (невядомая версія)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Сабрана з ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Сабрана з ncursesw (невядомая версія)"

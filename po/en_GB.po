@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2024
+# Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2025
+# Yury V. Zaytsev <yury@shurup.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2024\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
 "language/en_GB/)\n"
 "Language: en_GB\n"
@@ -456,43 +457,43 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-#, c-format
-msgid ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-
 msgid "The TERM environment variable is unset!\n"
 msgstr "The TERM environment variable is unset!\n"
 
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Cannot check SIGWINCH pipe"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
 
 msgid "B"
 msgstr "B"
@@ -784,15 +785,15 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
-#, fuzzy
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at %s\n"
 
 msgid "Main options"
 msgstr "Main options"
@@ -1173,7 +1174,7 @@ msgid "Save block"
 msgstr "Save block"
 
 msgid "Cannot save block"
-msgstr ""
+msgstr "Cannot save block"
 
 msgid "Insert file"
 msgstr "Insert file"
@@ -1204,7 +1205,7 @@ msgid "Enter shell command(s):"
 msgstr "Enter shell command(s):"
 
 msgid "Cannot execute external command"
-msgstr ""
+msgstr "Cannot execute external command"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -1599,7 +1600,7 @@ msgstr ""
 "written for the Midnight Commander."
 
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 msgid "About"
 msgstr "About"
@@ -2696,6 +2697,8 @@ msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3873,6 +3876,8 @@ msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
 msgstr ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3998,21 +4003,21 @@ msgstr "With multiple codepages support"
 msgid "With ext2fs attributes support"
 msgstr "With ext2fs attributes support"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr "Built with GLib %d.%d.%d\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang"
-msgstr "Built with ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with %s"
-msgstr "Built with ncurses %s\n"
+msgstr ""
 
 #, c-format
 msgid " (using %s)\n"
@@ -4520,9 +4525,6 @@ msgstr "Error reported after abort."
 msgid "Aborted transfer would be successful."
 msgstr "Aborted transfer would be successful."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek not stopped at a record boundary"
-
 msgid "Inconsistent tar archive"
 msgstr "Inconsistent tar archive"
 
@@ -4544,6 +4546,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "doesn't look like a tar archive"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek not stopped at a record boundary"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4736,25 +4741,3 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "GNU Midnight Commander %s\n"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Midnight Commander %s"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Built with S-Lang %s with terminfo database\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Built with ncurses (unknown version)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Built with ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Built with ncursesw (unknown version)"

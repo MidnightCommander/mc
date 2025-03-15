@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.33-142-ged5d7975b\n"
+"Project-Id-Version: mc 4.8.33-143-gf46de7937\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:27+0100\n"
+"POT-Creation-Date: 2025-03-15 13:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -566,6 +566,14 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+#: lib/tty/tty.c:130
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+#: lib/tty/tty.c:214
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #: lib/tty/tty-internal.c:71
 #, c-format
 msgid ""
@@ -592,14 +600,6 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-
-#: lib/tty/tty.c:130
-msgid "The TERM environment variable is unset!\n"
-msgstr ""
-
-#: lib/tty/tty.c:214
-msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
 #: lib/util.c:351
@@ -5546,12 +5546,8 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-#: src/vfs/tar/tar-internal.c:175
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
-#: src/vfs/tar/tar-internal.c:520 src/vfs/tar/tar.c:638 src/vfs/tar/tar.c:712
-#: src/vfs/tar/tar.c:809
+#: src/vfs/tar/tar.c:638 src/vfs/tar/tar.c:712 src/vfs/tar/tar.c:809
+#: src/vfs/tar/tar-internal.c:520
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -5571,6 +5567,10 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+#: src/vfs/tar/tar-internal.c:175
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 #: src/vfs/undelfs/undelfs.c:124
