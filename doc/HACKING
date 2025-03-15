@@ -243,12 +243,10 @@ Where to Find Bug Reports and Patches
 
 The official place for bug reports is:
 
-    https://www.midnight-commander.org
-
+    https://github.com/MidnightCommander/mc/issues
 
 There are various unofficial sources where bug reports and patches can
 be found (NOT maintained by the MC team).
-
 
 https://tracker.debian.org/pkg/mc
 https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=mc

@@ -2,7 +2,7 @@
 """Torrent Virtual FileSystem for Midnight Commander
 
 The script requires Midnight Commander 3.1+
-(https://www.midnight-commander.org/), Python 2.7+ (https://www.python.org/),
+(https://midnight-commander.org), Python 2.7+ (https://www.python.org),
 module eff_bdecode.py (from effbot.org/zone/bencode.htm) is now included
 in the code.
 

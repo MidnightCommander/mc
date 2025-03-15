@@ -1,5 +1,5 @@
 # syntax highlighting for cobol.
-# the author is Wuerl, see https://midnight-commander.org/ticket/1987
+# the author is Wuerl, see https://github.com/MidnightCommander/mc/issues/1987
 # adapted to use in mcedit version 4.8.24 by alex bodnaru <alexbodn@gmail.com>
 
 caseinsensitive

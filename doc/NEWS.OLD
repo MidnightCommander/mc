@@ -2,7 +2,7 @@ Version 4.6.2
 
 - MC Core
 	- Changed HQ url to point to new website
-	  www.midnight-commander.org (Closes: #137, #138)
+	  midnight-commander.org (Closes: #137, #138)
 	- Added a micro helper library in order to go slowly
 	  avay from glib (Closes: #157)
 	- Use static strings as section entries in ~/.mc/history
