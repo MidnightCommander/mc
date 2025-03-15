@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.33-140-gf2c885017\n"
+"Project-Id-Version: mc 4.8.33-142-ged5d7975b\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 12:43+0100\n"
+"POT-Creation-Date: 2025-03-15 13:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -969,11 +969,12 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
 
-#: src/args.c:462
+#: src/args.c:461
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at "
+"as tickets at %s\n"
 msgstr ""
 
 #: src/args.c:687 src/filemanager/boxes.c:697

@@ -458,10 +458,10 @@ static void
 mc_args_add_extended_info_to_help (void)
 {
     mc_args__loc__footer_string =
-        g_strdup_printf ("%s",
-                         _ ("\n"
+        g_strdup_printf (_ ("\n"
                             "Please send any bug reports (including the output of 'mc -V')\n"
-                            "as tickets at " PACKAGE_BUGREPORT "\n"));
+                            "as tickets at %s\n"),
+                         PACKAGE_BUGREPORT);
     mc_args__loc__header_string = g_strdup_printf (PACKAGE_NAME " %s\n", mc_global.mc_version);
 
     g_option_context_set_description (context, mc_args__loc__footer_string);
