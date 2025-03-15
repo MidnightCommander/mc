@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -462,12 +462,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Premenná prostredia TERM nie je nastavená!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -493,6 +487,12 @@ msgid ""
 msgstr ""
 "Veľkosť obrazovky %dx%d nie je podporovaná.\n"
 "Skontrolujte premennú prostredia TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Premenná prostredia TERM nie je nastavená!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -764,18 +764,15 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[tento_adresár] [adresár_v_druhom_paneli]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Prosím, posielajte chybové hlásenia (spolu s výstupom „mc -V“)\n"
 "vo forme ticketu na www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Hlavné možnosti"
@@ -3407,10 +3404,6 @@ msgid "Add to hotlist"
 msgstr "Pridať do hotlistu"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Súbor: %s"
 
@@ -4446,6 +4439,9 @@ msgstr "Chyba hlásená po prerušení."
 msgid "Aborted transfer would be successful."
 msgstr "Prerušenie prenosu bolo úspešné."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Poškodený archív .tar"
 
@@ -4464,9 +4460,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4660,3 +4653,11 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"

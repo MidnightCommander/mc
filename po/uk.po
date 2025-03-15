@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Rostyslav Haitkulov <info@ubilling.net.ua>, 2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -472,12 +472,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Змінна середовища TERM не встановлена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Не вдалося перевірити канал SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -509,6 +503,12 @@ msgid ""
 msgstr ""
 "Розмір екрана %dx%d не підтримується.\n"
 "Перевірте змінну оточення TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Змінна середовища TERM не встановлена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Не вдалося перевірити канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -780,18 +780,15 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[цей_каталог] [каталог_іншої_панелі]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Будь ласка, надсилайте будь-які повідомлення про помилки (включаючи вивід "
 "'mc -V') як квитки на сайті www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Головні параметри"
@@ -3429,10 +3426,6 @@ msgid "Add to hotlist"
 msgstr "Додати до списку"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Файл: %s"
 
@@ -4500,6 +4493,9 @@ msgstr "Сталася помилка після переривання."
 msgid "Aborted transfer would be successful."
 msgstr "Перерване перенесення могло завершитися успішно."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Виявлено неузгоджений архів tar"
 
@@ -4518,9 +4514,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4715,6 +4708,14 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2025\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -461,12 +461,6 @@ msgstr "Klahv Alt"
 msgid "Shift"
 msgstr "Klahv Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Keskkonnamuutujat TERM on määramata!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH toru ei saa kontrollida"
-
 #, c-format
 msgid ""
 "\n"
@@ -500,6 +494,12 @@ msgid ""
 msgstr ""
 "Ekraani suurus %dx%d ei ole toetatud.\n"
 "Kontrolli keskkonna muutujat TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Keskkonnamuutujat TERM on määramata!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH toru ei saa kontrollida"
 
 msgid "B"
 msgstr "B"
@@ -791,18 +791,15 @@ msgstr "fail1 fail2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Palun saada kõik vearaportid (ja käsu 'mc -V' väljund)\n"
 "aadressile www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Põhisuvandid"
@@ -3466,10 +3463,6 @@ msgid "Add to hotlist"
 msgstr "Lisa kiirvalikusse"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Fail: %s"
 
@@ -4538,6 +4531,9 @@ msgstr "Pärast katkestamist raporteeriti viga."
 msgid "Aborted transfer would be successful."
 msgstr "Katkestatud ülekanne oleks edukas."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek ei peatunud kirje piiril"
+
 msgid "Inconsistent tar archive"
 msgstr "Tar arhiiv sisaldab vasturääkivusi"
 
@@ -4559,9 +4555,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ei meenuta tar arhiivi"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek ei peatunud kirje piiril"
 
 msgid "undelfs: error"
 msgstr "undelfs: viga"
@@ -4754,6 +4747,14 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

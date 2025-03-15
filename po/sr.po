@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -450,12 +450,6 @@ msgstr "Алт"
 msgid "Shift"
 msgstr "Помак"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Променљива љуске „TERM“ је расподешена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -481,6 +475,12 @@ msgid ""
 msgstr ""
 "Величина екрана %dx%d није подржана.\n"
 "Проверите променљиву окружења „TERM“.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променљива љуске „TERM“ је расподешена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -751,18 +751,15 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[овај_дир] [други_дир_панела]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Извештаје о грешкама (укључујући и излаз наредбе „mc -V“)\n"
 "пошаљите као листић на „www.midnight-commander.org“\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "Гнуов Поноћни наредник %s\n"
 
 msgid "Main options"
 msgstr "Главне опције"
@@ -3386,10 +3383,6 @@ msgid "Add to hotlist"
 msgstr "Додај на врући списак"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Поноћни наредник %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Датотека:           %s"
 
@@ -4422,6 +4415,9 @@ msgstr "Пријављена је грешка после прекида."
 msgid "Aborted transfer would be successful."
 msgstr "Прекинути пренос би био успешан."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Недоследна тар архива"
 
@@ -4440,9 +4436,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4636,3 +4629,11 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "Гнуов Поноћни наредник %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Поноћни наредник %s"

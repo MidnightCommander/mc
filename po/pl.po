@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -18,9 +18,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -462,12 +462,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nie można sprawdzić potoku SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -499,6 +493,12 @@ msgid ""
 msgstr ""
 "Rozmiar ekranu %d×%d nie jest obsługiwany.\n"
 "Proszę sprawdzić zmienną środowiskową TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nie można sprawdzić potoku SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -794,19 +794,16 @@ msgstr "plik1 plik2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[ten_katalog] [katalog_w_drugim_panelu]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Proszę wysyłać raporty błędów (w języku angielskim, wraz\n"
 "z wyjściem polecenia „mc -V”) jako zgłoszenia na stronie\n"
 "www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Główne opcje"
@@ -3477,10 +3474,6 @@ msgid "Add to hotlist"
 msgstr "Dodaj do podręcznych"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Plik: %s"
 
@@ -4557,6 +4550,9 @@ msgstr "Zgłoszono błąd po przerwaniu."
 msgid "Aborted transfer would be successful."
 msgstr "Przerwane przesyłanie zostałoby pomyślnie zakończone."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
+
 msgid "Inconsistent tar archive"
 msgstr "Niespójne archiwum tar"
 
@@ -4578,9 +4574,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "nie wygląda na archiwum tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
 
 msgid "undelfs: error"
 msgstr "undelfs: błąd"
@@ -4774,6 +4767,14 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

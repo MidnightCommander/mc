@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mehmet Akif 9oglu, 2023\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -463,12 +463,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM çevre değişkeni atanmamış!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH borusu kontrol edilemiyor"
-
 #, c-format
 msgid ""
 "\n"
@@ -500,6 +494,12 @@ msgid ""
 msgstr ""
 "%dx%d ekran boyutu desteklenmiyor.\n"
 "TERM ortam değişkenini kontrol ediniz.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM çevre değişkeni atanmamış!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH borusu kontrol edilemiyor"
 
 msgid "B"
 msgstr "B"
@@ -770,18 +770,15 @@ msgstr "dosya1 dosya2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[seçenekler] [bu_dizin] [diğer_panel_dizini]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Lütfen herhangi bir hata raporunu ('mc -V' çıktısı da dahil olmak üzere)\n"
 "hata kaydı olarak www.midnight-commander.org'a gönderin\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Ana seçenekler"
@@ -3417,10 +3414,6 @@ msgid "Add to hotlist"
 msgstr "Listeye Ekle"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Dosya: %s"
 
@@ -4452,6 +4445,9 @@ msgstr "Durdurma sonra hata raporlandı."
 msgid "Aborted transfer would be successful."
 msgstr "Aktarımın durdurulması başarıldı."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Tar arşivi düzgün değil"
 
@@ -4470,9 +4466,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4666,3 +4659,11 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"

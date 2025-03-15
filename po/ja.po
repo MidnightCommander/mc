@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -450,12 +450,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "環境変数 TERM がセットされていません\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH パイプをチェックできません"
-
 #, c-format
 msgid ""
 "\n"
@@ -481,6 +475,12 @@ msgid ""
 msgstr ""
 "スクリーンサイズ %dx%d はサポートされていません\n"
 "TERM環境変数の値をチェックしてください\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "環境変数 TERM がセットされていません\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH パイプをチェックできません"
 
 msgid "B"
 msgstr ""
@@ -740,12 +740,8 @@ msgstr ""
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr ""
@@ -3255,10 +3251,6 @@ msgid "Add to hotlist"
 msgstr "ホットリストへ追加"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "ファイル: %s"
 
@@ -4269,6 +4261,9 @@ msgstr "中断後にエラーが報告されました"
 msgid "Aborted transfer would be successful."
 msgstr "転送中断に成功しました"
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
 
@@ -4287,9 +4282,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4470,3 +4462,11 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"

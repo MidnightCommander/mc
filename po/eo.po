@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -457,12 +457,6 @@ msgstr "Alternativo"
 msgid "Shift"
 msgstr "Uskleca inversigilo"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La medivariablo TERM ne estas valorizita!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ne eblas kontroli SIGWINCH-dukton"
-
 #, c-format
 msgid ""
 "\n"
@@ -494,6 +488,12 @@ msgid ""
 msgstr ""
 "Ekrangrando %dx%d ne estas regata.\n"
 "Kontroli la medivariablon TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La medivariablo TERM ne estas valorizita!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ne eblas kontroli SIGWINCH-dukton"
 
 msgid "B"
 msgstr "B"
@@ -785,18 +785,15 @@ msgstr "dosiero1 dosiero2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[ĉi_tiu_flanko] [alia_flanko]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Bonvolu sendi ĉiujn raportojn pri eraroj (inkluzivu la eligon de 'mc -V')\n"
 "kiel biletojn en www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "Midnight Commander de GNU, %s\n"
 
 msgid "Main options"
 msgstr "Ĉefa agordo"
@@ -3448,10 +3445,6 @@ msgid "Add to hotlist"
 msgstr "Aldoni al rapidolisto"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Dosiero: %s"
 
@@ -4517,6 +4510,9 @@ msgstr "Eraro raportita post ĉesigo."
 msgid "Aborted transfer would be successful."
 msgstr "Ĉesigita transigo estus sukcesa."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
+
 msgid "Inconsistent tar archive"
 msgstr "Malkonsekvenca tar-dosiero"
 
@@ -4538,9 +4534,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ne ŝajnas esti TAR-arkivo"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
 
 msgid "undelfs: error"
 msgstr "undelfs: eraro"
@@ -4733,6 +4726,14 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "Midnight Commander de GNU, %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2023-2024\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -460,12 +460,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH 파이프를 확인할 수 없음"
-
 #, c-format
 msgid ""
 "\n"
@@ -497,6 +491,12 @@ msgid ""
 msgstr ""
 "화면크기 %dx%d은(는) 지원되지 않습니다.\n"
 "TERM 환경변수를 확인해 보세요.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH 파이프를 확인할 수 없음"
 
 msgid "B"
 msgstr "B"
@@ -767,18 +767,15 @@ msgstr "파일1 파일2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[이_디렉터리] [다른_패널_디렉터리]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "모든 버그 보고서('mc-V' 출력 포함)는 \n"
 "www.midnight-commander.org에서 티켓으로 보내주십시오\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU 미드나잇 커맨더 %s\n"
 
 msgid "Main options"
 msgstr "주요 옵션"
@@ -3426,10 +3423,6 @@ msgid "Add to hotlist"
 msgstr "단축목록에 추가"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "미드나잇 커맨더 %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "파일: %s"
 
@@ -4490,6 +4483,9 @@ msgstr "중단 후 오류가 보고됨"
 msgid "Aborted transfer would be successful."
 msgstr "중단된 전송이 성공적으로 완료되었을 수 있음."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek가 레코드 경계에서 멈추지 않았습니다"
+
 msgid "Inconsistent tar archive"
 msgstr "잘못된 tar 압축 파일"
 
@@ -4511,9 +4507,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "tar 압축 파일처럼 보이지 않습니다"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek가 레코드 경계에서 멈추지 않았습니다"
 
 msgid "undelfs: error"
 msgstr "unelfs: 오류"
@@ -4706,6 +4699,14 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU 미드나잇 커맨더 %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "미드나잇 커맨더 %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Appukonrad <appukonrad@gmail.com>, 2024\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -465,12 +465,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Proměnná prostředí TERM není nastavena!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -502,6 +496,12 @@ msgid ""
 msgstr ""
 "Velikost obrazovky %d×%d není podporovaná.\n"
 "Prověřte nastavení proměnné prostředí TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Proměnná prostředí TERM není nastavena!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -772,18 +772,15 @@ msgstr "soubor1 soubor2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[aktuální_složka] [složka_druhého_panelu]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Hlášení chyb (společně s výstupem z příkazu „mc -V“)\n"
 "posílejte jako požadavky prostřednictvím www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Hlavní nastavení"
@@ -3443,10 +3440,6 @@ msgid "Add to hotlist"
 msgstr "Přidat do rychlého přístupu"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Soubor: %s"
 
@@ -4514,6 +4507,9 @@ msgstr "Po přerušení byla oznámena chyba."
 msgid "Aborted transfer would be successful."
 msgstr "Přerušení přenosu proběhlo v pořádku."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
+
 msgid "Inconsistent tar archive"
 msgstr "Nekonzistentní archiv .tar"
 
@@ -4535,9 +4531,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "nevypadá jako archiv .tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
 
 msgid "undelfs: error"
 msgstr "undelfs: chyba"
@@ -4730,6 +4723,14 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

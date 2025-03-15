@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2024\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
@@ -461,12 +461,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variável de ambiente TERM foi limpa!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Não é possível verificar o pipe SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -498,6 +492,12 @@ msgid ""
 msgstr ""
 "Tamanho de ecrã %dx%d não é suportado.\n"
 "Verifique a variável de ambiente TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variável de ambiente TERM foi limpa!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Não é possível verificar o pipe SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -792,19 +792,16 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[este_dir] [outro_painel_dir]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
-"Por favor envie quaisquer relatório de erros (incluindo o output de 'mc -"
-"V')\n"
+"Por favor envie quaisquer relatório de erros (incluindo o output de 'mc "
+"-V')\n"
 "como tickets em www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Opções principais"
@@ -3471,10 +3468,6 @@ msgid "Add to hotlist"
 msgstr "Adicionar à hotlist"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Ficheiro: %s"
 
@@ -4545,6 +4538,9 @@ msgstr "Erro reportado após abortar."
 msgid "Aborted transfer would be successful."
 msgstr "Transferência abortada teria tido sucesso."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek não parou num limite de registo"
+
 msgid "Inconsistent tar archive"
 msgstr "Arquivo tar inconsistente"
 
@@ -4566,9 +4562,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "não parece um arquivo tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek não parou num limite de registo"
 
 msgid "undelfs: error"
 msgstr "undelfs: erro"
@@ -4761,6 +4754,14 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

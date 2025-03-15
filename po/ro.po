@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2023\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -464,12 +464,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Variabila de mediu TERM nu este setată!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nu se poate verifica conducta SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -501,6 +495,12 @@ msgid ""
 msgstr ""
 "Mărimea %dx%d a ecranului nu este suportată.\n"
 "Verificați variabila de mediu TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Variabila de mediu TERM nu este setată!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nu se poate verifica conducta SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -773,19 +773,16 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[acest_dir] [celălalt_panou_dir]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Te rog trimite rapoartele de disfuncționalitate (inclusiv rezultatul "
 "comenzii 'mc -V')\n"
 "ca tichet pe www.midnight-commander.org\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Opțiuni principale"
@@ -3438,10 +3435,6 @@ msgid "Add to hotlist"
 msgstr "Adaugă la lista rapidă"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Fișier: %s"
 
@@ -4508,6 +4501,9 @@ msgstr "S-a raportat o eroare după abandon."
 msgid "Aborted transfer would be successful."
 msgstr "Transferul abandonat va reuși."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Arhivă tar trunchiată"
 
@@ -4526,9 +4522,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4722,6 +4715,14 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
 
 #, c-format
 #~ msgid "Built with S-Lang %s with terminfo database\n"

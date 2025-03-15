@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
 "<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
@@ -453,12 +453,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Nincs beállítva a TERM környezeti változó.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -484,6 +478,12 @@ msgid ""
 msgstr ""
 "A(z) %dx%d képernyőméret nem támogatott.\n"
 "Ellenőrizze a TERM környezeti változót.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Nincs beállítva a TERM környezeti változó.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -752,18 +752,15 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[aktuális_könyvtár] [másik_könyvtár]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Hibajelentéseket (az \"mc -V\" parancs kimenetét mellékelve) a\n"
 "www.midnight-commander.org címre lehet küldeni \"ticket\"-ként.\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
 msgstr "Alapbeállítások"
@@ -3388,10 +3385,6 @@ msgid "Add to hotlist"
 msgstr "Felvétel a gyorslistára"
 
 #, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
-
-#, c-format
 msgid "File: %s"
 msgstr "Fájl: %s"
 
@@ -4424,6 +4417,9 @@ msgstr "Megszakítás után hibajelzés érkezett."
 msgid "Aborted transfer would be successful."
 msgstr "Átvitel megszakítva; hibajelzés nem érkezett."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonzisztens tar-archívum."
 
@@ -4442,9 +4438,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4634,3 +4627,11 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNU Midnight Commander %s\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"

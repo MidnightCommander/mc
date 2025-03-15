@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-03-06 20:56+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
+"POT-Creation-Date: 2025-03-15 12:43+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -458,12 +458,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maius"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -489,6 +483,12 @@ msgid ""
 msgstr ""
 "%dx%d pantaila-neurria ez da onartzen.\n"
 "Egiaztatu TERM ingurune-aldagaia.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -759,18 +759,15 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[dir_hau] [beste_panel_dir]"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
-"as tickets at www.midnight-commander.org\n"
+"as tickets at "
 msgstr ""
 "\n"
 "Mesedez bidali edozein akats-txosten ('mc -V'-ren irteera barne)\n"
 "\"ticket\" gisa www.midnight-commander.org helbidera\n"
-
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNUren %s Midnight Commander-a\n"
 
 msgid "Main options"
 msgstr "Aukera nagusiak"
@@ -2524,8 +2521,8 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
-"(stat)\\n\n"
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
+"\\n\n"
 "%s"
 
 #, c-format
@@ -3403,10 +3400,6 @@ msgstr "\"%s\"(r)en etiketa:"
 
 msgid "Add to hotlist"
 msgstr "Erantsi gogokoetara"
-
-#, c-format
-msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
 
 #, c-format
 msgid "File: %s"
@@ -4440,6 +4433,9 @@ msgstr "Akatsaren berri eman da galarazi ondoren."
 msgid "Aborted transfer would be successful."
 msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar artxibo inkoherentea"
 
@@ -4458,9 +4454,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4656,3 +4649,11 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "GNU Midnight Commander %s\n"
+#~ msgstr "GNUren %s Midnight Commander-a\n"
+
+#, c-format
+#~ msgid "Midnight Commander %s"
+#~ msgstr "Midnight Commander %s"
