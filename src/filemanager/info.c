@@ -122,7 +122,7 @@ info_show_info (WInfo *info)
 
     tty_setcolor (MARKED_COLOR);
     widget_gotoyx (w, 1, 3);
-    tty_printf (_ ("Midnight Commander %s"), mc_global.mc_version);
+    tty_printf (PACKAGE_NAME " %s", mc_global.mc_version);
 
     if (!info->ready)
         return;
