@@ -14,7 +14,7 @@
 
 Падказка: калі ў тэрмінала няма функцыянальных клавіш, выкарыстоўвайце "ESC+лічба".
 
-Падказка: сайт GNU Midnight Commander — https://www.midnight-commander.org
+Падказка: сайт GNU Midnight Commander — https://midnight-commander.org
 
 Падказка: пра хібы паведамляйце на mc-devel@lists.midnight-commander.org
 

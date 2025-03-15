@@ -14,7 +14,7 @@ Hint: For å velge mapper kan du legge til en skråstrek til slutt i søkemønst
 
 Hint: Hvis terminalen mangler funksjonstaster så kan du bruke ESC + tallet.
 
-Hint: Hjemmesiden til GNU Midnight Commander er https://www.midnight-commander.org
+Hint: Hjemmesiden til GNU Midnight Commander er https://midnight-commander.org
 
 Hint: Du kan sende feilrapporter til mc-devel@lists.midnight-commander.org
 

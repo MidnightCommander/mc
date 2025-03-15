@@ -14,7 +14,7 @@
 
 Совет: Если ваш терминал без функц. клавиш, вам поможет ESC+цифра.
 
-Совет: Домашняя страница Midnight Commander: https://www.midnight-commander.org
+Совет: Домашняя страница Midnight Commander: https://midnight-commander.org
 
 Совет: Пожалуйста, шлите любые отчёты об ошибках на mc-devel@lists.midnight-commander.org
 

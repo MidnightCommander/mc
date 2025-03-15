@@ -14,7 +14,7 @@ Astuce : Sélection de répertoires: ajouter une barre oblique à la fin de moti
 
 Astuce : Si votre clavier n’a pas de touche de fonction, utilisez la combinaison ESC+nombre.
 
-Astuce : Site officiel de GNU Midnight Commander : https://www.midnight-commander.org
+Astuce : Site officiel de GNU Midnight Commander : https://midnight-commander.org
 
 Astuce : Envoyez vos rapports de bogues à l’adresse mc-devel@lists.midnight-commander.org
 

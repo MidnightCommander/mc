@@ -14,7 +14,7 @@ Hint: Directories selecteren: zet een slash aan het eind van het zoekpatroon.
 
 Hint: Als je terminal geen functietoetsen ondersteunt, gebruik dan ESC+nummer.
 
-Hint: Midnight Commander home page: https://www.midnight-commander.org
+Hint: The homepage of GNU Midnight Commander: https://midnight-commander.org
 
 Hint: Stuur bug rapporten naar mc-devel@lists.midnight-commander.org
 

@@ -14,7 +14,7 @@ Porada: zaznaczanie katalogów: należy dodać ukośnik na końcu wzorca dopasow
 
 Porada: jeśli w terminalu nie ma klawiszy funkcyjnych, można użyć Esc+numer.
 
-Porada: witryna programu GNU Midnight Commander: https://www.midnight-commander.org
+Porada: witryna programu GNU Midnight Commander: https://midnight-commander.org
 
 Porada: raporty błędów (w języku angielskim) proszę wysłać na mc-devel@lists.midnight-commander.org
 
