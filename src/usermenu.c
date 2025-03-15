@@ -265,10 +265,9 @@ test_condition (const Widget *edit_widget, char *p, gboolean *condition)
 #ifdef USE_INTERNAL_EDIT
             if (e != NULL)
             {
-                const char *edit_filename;
+                const char *edit_filename = edit_get_file_name (e);
 
-                edit_filename = edit_get_file_name (e);
-                *condition = mc_search (arg, DEFAULT_CHARSET, edit_filename, search_type);
+                *condition = mc_search (arg, NULL, edit_filename, search_type);
             }
             else
 #endif
@@ -277,11 +276,9 @@ test_condition (const Widget *edit_widget, char *p, gboolean *condition)
                     *condition = FALSE;
                 else
                 {
-                    const file_entry_t *fe;
+                    const file_entry_t *fe = panel_current_entry (panel);
 
-                    fe = panel_current_entry (panel);
-                    *condition =
-                        fe != NULL && mc_search (arg, DEFAULT_CHARSET, fe->fname->str, search_type);
+                    *condition = fe != NULL && mc_search (arg, NULL, fe->fname->str, search_type);
                 }
             }
             break;
@@ -289,13 +286,12 @@ test_condition (const Widget *edit_widget, char *p, gboolean *condition)
 #ifdef USE_INTERNAL_EDIT
             if (e != NULL)
             {
-                const char *syntax_type;
+                const char *syntax_type = edit_get_syntax_type (e);
 
-                syntax_type = edit_get_syntax_type (e);
                 if (syntax_type != NULL)
                 {
                     p = extract_arg (p, arg, sizeof (arg));
-                    *condition = mc_search (arg, DEFAULT_CHARSET, syntax_type, MC_SEARCH_T_NORMAL);
+                    *condition = mc_search (arg, NULL, syntax_type, MC_SEARCH_T_NORMAL);
                 }
             }
 #endif
@@ -303,8 +299,7 @@ test_condition (const Widget *edit_widget, char *p, gboolean *condition)
         case 'd':
             p = extract_arg (p, arg, sizeof (arg));
             *condition = panel != NULL
-                && mc_search (arg, DEFAULT_CHARSET, vfs_path_as_str (panel->cwd_vpath),
-                              search_type);
+                && mc_search (arg, NULL, vfs_path_as_str (panel->cwd_vpath), search_type);
             break;
         case 't':
             p = extract_arg (p, arg, sizeof (arg));

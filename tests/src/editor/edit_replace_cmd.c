@@ -222,15 +222,15 @@ setup (void)
     memset (&owner, 0, sizeof (owner));
     group_add_widget (&owner, WIDGET (test_edit));
 
+#ifdef HAVE_CHARSET
     mc_global.source_codepage = 0;
     mc_global.display_codepage = 0;
-#ifdef HAVE_CHARSET
     cp_source = "ASCII";
     cp_display = "ASCII";
-#endif
 
     do_set_codepage (0);
     edit_set_codeset (test_edit);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

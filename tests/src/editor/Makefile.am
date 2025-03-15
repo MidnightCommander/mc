@@ -1,7 +1,7 @@
 PACKAGE_STRING = "/src/editor"
 
 AM_CPPFLAGS = \
-	-DTEST_SHARE_DIR=\"$(abs_srcdir)\" \
+	-DTEST_SHARE_DIR=\"$(abs_srcdir)/../fixtures\" \
 	$(GLIB_CFLAGS) \
 	-I$(top_srcdir) \
 	@CHECK_CFLAGS@
@@ -14,7 +14,7 @@ if ENABLE_MCLIB
 LIBS += $(GLIB_LIBS)
 endif
 
-EXTRA_DIST = mc.charsets edit_complete_word_cmd_test_data.txt.in
+EXTRA_DIST = edit_complete_word_cmd_test_data.txt.in
 
 TESTS = \
 	edit_complete_word_cmd \
