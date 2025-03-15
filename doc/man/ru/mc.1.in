@@ -4861,7 +4861,7 @@ insert=\ee[Op
 .\"NODE "AVAILABILITY"
 .SH "Обновление версий"
 Последние версии программы Midnight Commander можно найти на сайте
-http://ftp.midnight\-commander.org/.
+https://ftp.osuosl.org/pub/midnightcommander/ .
 .\"NODE "SEE ALSO"
 .SH "Другие источники"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1), tcsh(1),
@@ -4869,7 +4869,7 @@ zsh(1), mcedit(1).
 .PP
 .nf
 Страница, посвященная Midnight Commander, в World Wide Web:
-	https://www.midnight\-commander.org/
+	https://midnight\-commander.org
 .fi
 .PP
 Данная страница оперативного руководства содержит информацию, актуальную
@@ -4922,7 +4922,7 @@ and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
 Если вы обнаружили в программе какие\-то недостатки или недоработки,
 оформите, пожалуйста, ваши замечания по адресу
-.IR https://www.midnight\-commander.org/ .
+.IR https://github.com/MidnightCommander/mc/issues .
 .PP
 Дайте подробное описание обнаруженных недостатков (и/или ваших
 предложений по усовершенствованию программы), сообщите версию программы

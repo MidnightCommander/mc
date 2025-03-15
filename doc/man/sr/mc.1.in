@@ -3132,7 +3132,7 @@ insert=\ee[Op
 .\"NODE "AVAILABILITY"
 .SH "ДОСТУПНОСТ"
 Најновија верзија овог програма се може наћи на адреси
-http://ftp.midnight\-commander.org/.
+https://ftp.osuosl.org/pub/midnightcommander/ .
 .\"NODE "SEE ALSO"
 .SH "ВИДИТЕ И"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
@@ -3140,7 +3140,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Страница Поноћног наредника на Међународној мрежи:
-	https://www.midnight\-commander.org/
+	https://midnight\-commander.org
 .fi
 .\"NODE "AUTHORS"
 .SH "АУТОРИ"
