@@ -574,7 +574,6 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 unsigned int c;
                 gboolean wide_width_char = FALSE;
                 gboolean control_char = FALSE;
-                gboolean printable;
 
                 p->ch = 0;
                 p->style = q == edit->buffer.curs1 ? MOD_CURSOR : 0;
@@ -719,6 +718,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     MC_FALLTHROUGH;
 
                 default:
+                {
 #ifdef HAVE_CHARSET
                     if (mc_global.utf8_display)
                     {
@@ -762,20 +762,12 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         break;
                     }
 
+                    const gboolean printable =
 #ifdef HAVE_CHARSET
-                    if (edit->utf8)
-                    {
-                        if (mc_global.utf8_display)
-                            // c is gunichar
-                            printable = g_unichar_isprint (c);
-                        else
-                            // c was gunichar; now c is 8-bit char converted from gunichar
-                            printable = is_printable (c);
-                    }
-                    else
+                        edit->utf8 ? g_unichar_isprint (c) :
 #endif
-                        // c is 8-bit char
-                        printable = is_printable (c);
+                        mc_global.utf8_display ? g_unichar_isprint (c)
+                                               : is_printable (c);
 
                     if (printable)
                         p->ch = c;
@@ -787,6 +779,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     p++;
                     col++;
                     break;
+                }
                 }  // case
 
                 q++;
