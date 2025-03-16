@@ -187,11 +187,11 @@ mcview_display_hex (WView *view)
                 else
                 {
                     int j;
-                    gchar utf8buf[UTF8_CHAR_LEN + 1];
+                    gchar utf8buf[MB_LEN_MAX + 1];
                     int res;
                     int first_changed = -1;
 
-                    for (j = 0; j < UTF8_CHAR_LEN; j++)
+                    for (j = 0; j < MB_LEN_MAX; j++)
                     {
                         if (mcview_get_byte (view, from + j, &res))
                             utf8buf[j] = res;
@@ -209,7 +209,7 @@ mcview_display_hex (WView *view)
                         if (curr != NULL && from + j >= curr->offset)
                             curr = curr->next;
                     }
-                    utf8buf[UTF8_CHAR_LEN] = '\0';
+                    utf8buf[MB_LEN_MAX] = '\0';
 
                     // Determine the state of the current multibyte char
                     ch = g_utf8_get_char_validated (utf8buf, -1);
