@@ -3432,7 +3432,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         if (char_for_insertion > 127 && str_isutf8 (get_codepage_id (mc_global.source_codepage))
             && !mc_global.utf8_display)
         {
-            unsigned char str[UTF8_CHAR_LEN + 1];
+            unsigned char str[MB_LEN_MAX + 1];
             size_t i;
             int res;
 
@@ -3445,7 +3445,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
             else
                 str[res] = '\0';
 
-            for (i = 0; i <= UTF8_CHAR_LEN && str[i] != '\0'; i++)
+            for (i = 0; i <= MB_LEN_MAX && str[i] != '\0'; i++)
             {
                 char_for_insertion = str[i];
                 edit_insert (edit, char_for_insertion);

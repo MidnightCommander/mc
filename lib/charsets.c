@@ -29,6 +29,7 @@
 
 #include <config.h>
 
+#include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -408,7 +409,7 @@ str_nconvert_to_input (const char *str, int len)
 unsigned char
 convert_from_utf_to_current (const char *str)
 {
-    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
+    unsigned char buf_ch[MB_LEN_MAX + 1];
     unsigned char ch = '.';
     GIConv conv;
     const char *cp_to;
@@ -444,8 +445,8 @@ convert_from_utf_to_current (const char *str)
 unsigned char
 convert_from_utf_to_current_c (int input_char, GIConv conv)
 {
-    unsigned char str[UTF8_CHAR_LEN + 1];
-    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
+    unsigned char str[MB_LEN_MAX + 1];
+    unsigned char buf_ch[MB_LEN_MAX + 1];
     unsigned char ch = '.';
     int res;
 
@@ -477,7 +478,7 @@ int
 convert_from_8bit_to_utf_c (char input_char, GIConv conv)
 {
     unsigned char str[2];
-    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
+    unsigned char buf_ch[MB_LEN_MAX + 1];
     int ch;
 
     str[0] = (unsigned char) input_char;
