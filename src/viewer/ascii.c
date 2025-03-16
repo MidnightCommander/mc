@@ -543,7 +543,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
     off_t dpy_text_column = view->mode_flags.wrap ? 0 : view->dpy_text_column;
     int col = 0;
     int cs[1 + MAX_COMBINING_CHARS];
-    char str[(1 + MAX_COMBINING_CHARS) * UTF8_CHAR_LEN + 1];
+    char str[(1 + MAX_COMBINING_CHARS) * MB_LEN_MAX + 1];
     int i, j;
 
     if (paragraph_ended != NULL)

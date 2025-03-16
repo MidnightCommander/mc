@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <limits.h>  // MB_LEN_MAX
 #include <stdlib.h>
 #include <stdarg.h>
 #include <signal.h>
@@ -626,7 +627,7 @@ tty_print_anychar (int c)
     if (mc_global.utf8_display || c > 255)
     {
         int res;
-        unsigned char str[UTF8_CHAR_LEN + 1];
+        unsigned char str[MB_LEN_MAX + 1];
 
         res = g_unichar_to_utf8 (c, (char *) str);
         if (res == 0)
