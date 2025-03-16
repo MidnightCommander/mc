@@ -84,8 +84,6 @@
 #define BUF_SMALL     128
 #define BUF_TINY      64
 
-#define UTF8_CHAR_LEN 6
-
 /* Used to distinguish between a normal MC termination and */
 /* one caused by typing 'exit' or 'logout' in the subshell */
 #define SUBSHELL_EXIT   128

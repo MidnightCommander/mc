@@ -1,7 +1,7 @@
 #ifndef MC__VIEWER_INTERNAL_H
 #define MC__VIEWER_INTERNAL_H
 
-#include <limits.h>  // CHAR_BIT
+#include <limits.h>  // CHAR_BIT, MB_LEN_MAX
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
