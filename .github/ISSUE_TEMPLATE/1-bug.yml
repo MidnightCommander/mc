@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please briefly explain what is not working properly.
+        Please summarize the issue in a few words.
 
         :stop_sign: _Make sure you are reporting an issue. For general questions, please use [Discussions](/MidnightCommander/mc/discussions)._
 
@@ -16,7 +16,7 @@ body:
     id: search-confirmation
     attributes:
       label: Is there an existing issue for this?
-      description: 'Please [search :mag: the issues](/MidnightCommander/mc/issues) to check if this bug has already been reported.'
+      description: 'Please [:mag: search the issues](/MidnightCommander/mc/issues) to check if this bug has already been reported.'
       options:
         - label: I have searched the existing issues
           required: true
@@ -24,8 +24,7 @@ body:
   - type: textarea
     id: mc-version
     attributes:
-      label: Midnight Commander version
-      description: What Midnight Commander version are you running?
+      label: Midnight Commander version and build configuration
       placeholder: Output of `mc -V`
       render: shell
     validations:
@@ -35,7 +34,6 @@ body:
     id: mc-os
     attributes:
       label: Operating system
-      description: What operating system do you use?
       placeholder: Output of `uname -a`
       render: shell
     validations:
@@ -51,10 +49,10 @@ body:
         - label: I confirm the issue is still reproducible with the latest version of Midnight Commander
 
   - type: textarea
-    id: behavior-current
+    id: reproduction-steps
     attributes:
-      label: Current behavior
-      description: Describe the problem you are experiencing. Screenshots or screencasts are welcome.
+      label: How to reproduce
+      placeholder: Please give minimal, yet complete instructions how to reproduce the issue.
     validations:
       required: true
 
@@ -62,7 +60,15 @@ body:
     id: behavior-expected
     attributes:
       label: Expected behavior
-      description: Describe what you expect to happen instead.
+      placeholder: Please describe what you think should happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior-current
+    attributes:
+      label: Actual behavior
+      placeholder: Please describe what is happening instead. Screenshots or screencasts are welcome.
     validations:
       required: true
 
@@ -70,7 +76,7 @@ body:
     id: additional-context
     attributes:
       label: Additional context
-      description: If needed, please provide additional information about your issue (attachments, links, references, etc.). In case of a crash or hang, a `gdb bt full` on the core dump or the hanging process would be very helpful to diagnose the problem.
+      placeholder: If needed, please provide additional information about your issue (attachments, links, references, etc.). In case of a crash or hang, a `gdb bt full` on the core dump or the hanging process would be very helpful to diagnose the problem.
 
   - type: markdown
     attributes:
