@@ -52,7 +52,7 @@ body:
     id: reproduction-steps
     attributes:
       label: How to reproduce
-      description: Please give minimal, yet complete instructions how to reproduce the issue.
+      placeholder: Please give minimal, yet complete instructions how to reproduce the issue.
     validations:
       required: true
 
@@ -60,7 +60,7 @@ body:
     id: behavior-expected
     attributes:
       label: Expected behavior
-      description: Please describe what you think should happen.
+      placeholder: Please describe what you think should happen.
     validations:
       required: true
 
@@ -68,7 +68,7 @@ body:
     id: behavior-current
     attributes:
       label: Actual behavior
-      description: Please describe what is happening instead. Screenshots or screencasts are welcome.
+      placeholder: Please describe what is happening instead. Screenshots or screencasts are welcome.
     validations:
       required: true
 
@@ -76,7 +76,7 @@ body:
     id: additional-context
     attributes:
       label: Additional context
-      description: If needed, please provide additional information about your issue (attachments, links, references, etc.). In case of a crash or hang, a `gdb bt full` on the core dump or the hanging process would be very helpful to diagnose the problem.
+      placeholder: If needed, please provide additional information about your issue (attachments, links, references, etc.). In case of a crash or hang, a `gdb bt full` on the core dump or the hanging process would be very helpful to diagnose the problem.
 
   - type: markdown
     attributes:
