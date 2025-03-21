@@ -266,28 +266,35 @@ dialog_switch_list (void)
 int
 dialog_switch_process_pending (void)
 {
+    WDialog *h = DIALOG (mc_current->data);
     int ret = 0;
 
-    while (dialog_switch_pending)
+    if (!dialog_switch_pending)
     {
-        WDialog *h = DIALOG (mc_current->data);
-        Widget *wh = WIDGET (h);
-
-        dialog_switch_pending = FALSE;
-        widget_set_state (wh, WST_SUSPENDED, TRUE);
-        ret = dlg_run (h);
-        if (widget_get_state (wh, WST_CLOSED))
+        // return to panels and reload them forced
+        if (mc_global.mc_run_mode == MC_RUN_FULL && h == filemanager)
+            mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
+    }
+    else
+        while (dialog_switch_pending)
         {
-            widget_destroy (wh);
+            Widget *wh = WIDGET (h);
 
-            // return to panels
-            if (mc_global.mc_run_mode == MC_RUN_FULL)
+            dialog_switch_pending = FALSE;
+            widget_set_state (wh, WST_SUSPENDED, TRUE);
+            ret = dlg_run (h);
+            if (widget_get_state (wh, WST_CLOSED))
             {
-                mc_current = g_list_find (mc_dialogs, filemanager);
-                mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
+                widget_destroy (wh);
+
+                // return to panels
+                if (mc_global.mc_run_mode == MC_RUN_FULL)
+                {
+                    mc_current = g_list_find (mc_dialogs, filemanager);
+                    mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
+                }
             }
         }
-    }
 
     repaint_screen ();
 
