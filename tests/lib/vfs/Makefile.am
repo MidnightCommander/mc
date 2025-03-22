@@ -9,9 +9,7 @@ AM_CPPFLAGS = \
 
 EXTRA_DIST = mc.charsets.in
 
-if CHARSET
 CLEANFILES = mc.charsets
-endif
 
 LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/lib/libmc.la
@@ -39,10 +37,8 @@ TESTS = \
 	vfs_split \
 	vfs_s_get_path
 
-if CHARSET
 TESTS += path_recode \
 	vfs_get_encoding
-endif
 
 check_PROGRAMS = $(TESTS)
 

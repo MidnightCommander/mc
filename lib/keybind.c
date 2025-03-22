@@ -104,9 +104,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (Shell),
     ADD_KEYMAP_NAME (Edit),
     ADD_KEYMAP_NAME (EditNew),
-#ifdef HAVE_CHARSET
     ADD_KEYMAP_NAME (SelectCodepage),
-#endif
     ADD_KEYMAP_NAME (EditorViewerHistory),
     ADD_KEYMAP_NAME (History),
     ADD_KEYMAP_NAME (HistoryNext),

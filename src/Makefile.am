@@ -83,15 +83,11 @@ libinternal_la_SOURCES = \
 	history.h \
 	keymap.c keymap.h \
 	learn.c learn.h \
+	selcodepage.c selcodepage.h \
 	setup.c setup.h \
 	textconf.c textconf.h \
 	usermenu.c usermenu.h \
 	util.c util.h
-
-if CHARSET
-    libinternal_la_SOURCES += selcodepage.c selcodepage.h
-endif
-
 
 if ENABLE_BACKGROUND
     libinternal_la_SOURCES += background.c background.h

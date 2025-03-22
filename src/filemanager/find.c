@@ -141,10 +141,8 @@ static WCheck *content_case_sens_cbox;    // "case sensitive" checkbox
 static WCheck *content_regexp_cbox;       // "find regular expression" checkbox
 static WCheck *content_first_hit_cbox;    // "First hit" checkbox"
 static WCheck *content_whole_words_cbox;  // "whole words" checkbox
-#ifdef HAVE_CHARSET
 static WCheck *file_all_charsets_cbox;
 static WCheck *content_all_charsets_cbox;
-#endif
 static WCheck *ignore_dirs_cbox;
 
 static gboolean running = FALSE;      // nice flag
@@ -441,9 +439,7 @@ find_toggle_enable_params (void)
 
     widget_disable (WIDGET (file_pattern_cbox), disable);
     widget_disable (WIDGET (file_case_sens_cbox), disable);
-#ifdef HAVE_CHARSET
     widget_disable (WIDGET (file_all_charsets_cbox), disable);
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -453,9 +449,7 @@ find_toggle_enable_content (void)
 {
     widget_disable (WIDGET (content_regexp_cbox), content_is_empty);
     widget_disable (WIDGET (content_case_sens_cbox), content_is_empty);
-#ifdef HAVE_CHARSET
     widget_disable (WIDGET (content_all_charsets_cbox), content_is_empty);
-#endif
     widget_disable (WIDGET (content_whole_words_cbox), content_is_empty);
     widget_disable (WIDGET (content_first_hit_cbox), content_is_empty);
 }
@@ -573,11 +567,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     WGroup *g;
 
     // Size of the find parameters window
-#ifdef HAVE_CHARSET
     const int lines = 19;
-#else
-    const int lines = 18;
-#endif
     int cols = 68;
 
     gboolean return_value;
@@ -587,9 +577,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     const char *file_recurs_label = N_ ("&Find recursively");
     const char *file_follow_symlinks = N_ ("Follow s&ymlinks");
     const char *file_pattern_label = N_ ("&Using shell patterns");
-#ifdef HAVE_CHARSET
     const char *file_all_charsets_label = N_ ("&All charsets");
-#endif
     const char *file_case_label = N_ ("Cas&e sensitive");
     const char *file_skip_hidden_label = N_ ("S&kip hidden");
 
@@ -598,9 +586,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     const char *content_use_label = N_ ("Sea&rch for content");
     const char *content_regexp_label = N_ ("Re&gular expression");
     const char *content_case_label = N_ ("Case sens&itive");
-#ifdef HAVE_CHARSET
     const char *content_all_charsets_label = N_ ("A&ll charsets");
-#endif
     const char *content_whole_words_label = N_ ("&Whole words");
     const char *content_first_hit_label = N_ ("Fir&st hit");
 
@@ -624,9 +610,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
         file_recurs_label = _ (file_recurs_label);
         file_follow_symlinks = _ (file_follow_symlinks);
         file_pattern_label = _ (file_pattern_label);
-#ifdef HAVE_CHARSET
         file_all_charsets_label = _ (file_all_charsets_label);
-#endif
         file_case_label = _ (file_case_label);
         file_skip_hidden_label = _ (file_skip_hidden_label);
 
@@ -635,9 +619,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
         content_use_label = _ (content_use_label);
         content_regexp_label = _ (content_regexp_label);
         content_case_label = _ (content_case_label);
-#ifdef HAVE_CHARSET
         content_all_charsets_label = _ (content_all_charsets_label);
-#endif
         content_whole_words_label = _ (content_whole_words_label);
         content_first_hit_label = _ (content_first_hit_label);
 
@@ -653,9 +635,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     cw = max (cw, str_term_width1 (file_recurs_label) + 4);
     cw = max (cw, str_term_width1 (file_follow_symlinks) + 4);
     cw = max (cw, str_term_width1 (file_pattern_label) + 4);
-#ifdef HAVE_CHARSET
     cw = max (cw, str_term_width1 (file_all_charsets_label) + 4);
-#endif
     cw = max (cw, str_term_width1 (file_case_label) + 4);
     cw = max (cw, str_term_width1 (file_skip_hidden_label) + 4);
 
@@ -663,9 +643,7 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     cw = max (cw, str_term_width1 (content_use_label) + 4);
     cw = max (cw, str_term_width1 (content_regexp_label) + 4);
     cw = max (cw, str_term_width1 (content_case_label) + 4);
-#ifdef HAVE_CHARSET
     cw = max (cw, str_term_width1 (content_all_charsets_label) + 4);
-#endif
     cw = max (cw, str_term_width1 (content_whole_words_label) + 4);
     cw = max (cw, str_term_width1 (content_first_hit_label) + 4);
 
@@ -738,11 +716,9 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     file_case_sens_cbox = check_new (y1++, x1, options.file_case_sens, file_case_label);
     group_add_widget (g, file_case_sens_cbox);
 
-#ifdef HAVE_CHARSET
     file_all_charsets_cbox =
         check_new (y1++, x1, options.file_all_charsets, file_all_charsets_label);
     group_add_widget (g, file_all_charsets_cbox);
-#endif
 
     skip_hidden_cbox = check_new (y1++, x1, options.skip_hidden, file_skip_hidden_label);
     group_add_widget (g, skip_hidden_cbox);
@@ -758,11 +734,9 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     content_case_sens_cbox = check_new (y2++, x2, options.content_case_sens, content_case_label);
     group_add_widget (g, content_case_sens_cbox);
 
-#ifdef HAVE_CHARSET
     content_all_charsets_cbox =
         check_new (y2++, x2, options.content_all_charsets, content_all_charsets_label);
     group_add_widget (g, content_all_charsets_cbox);
-#endif
 
     content_first_hit_cbox =
         check_new (y2++, x2, options.content_first_hit, content_first_hit_label);
@@ -812,10 +786,7 @@ find_par_start:
     {
         char *s;
 
-#ifdef HAVE_CHARSET
-        options.file_all_charsets = file_all_charsets_cbox->state;
         options.content_all_charsets = content_all_charsets_cbox->state;
-#endif
         options.content_case_sens = content_case_sens_cbox->state;
         options.content_regexp = content_regexp_cbox->state;
         options.content_first_hit = content_first_hit_cbox->state;
@@ -824,6 +795,7 @@ find_par_start:
         options.follow_symlinks = follow_sym_cbox->state;
         options.file_pattern = file_pattern_cbox->state;
         options.file_case_sens = file_case_sens_cbox->state;
+        options.file_all_charsets = file_all_charsets_cbox->state;
         options.skip_hidden = skip_hidden_cbox->state;
         options.ignore_dirs_enable = ignore_dirs_cbox->state;
         g_free (options.ignore_dirs);
@@ -1741,16 +1713,12 @@ run_process (void)
             options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
         search_content_handle->is_case_sensitive = options.content_case_sens;
         search_content_handle->whole_words = options.content_whole_words;
-#ifdef HAVE_CHARSET
         search_content_handle->is_all_charsets = options.content_all_charsets;
-#endif
     }
     search_file_handle = mc_search_new (find_pattern, NULL);
     search_file_handle->search_type = options.file_pattern ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search_file_handle->is_case_sensitive = options.file_case_sens;
-#ifdef HAVE_CHARSET
     search_file_handle->is_all_charsets = options.file_all_charsets;
-#endif
     search_file_handle->is_entire_line = options.file_pattern;
 
     resuming = FALSE;

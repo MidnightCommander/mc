@@ -31,9 +31,7 @@
 #include "lib/global.h"
 #include "lib/search.h"
 #include "lib/strutil.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"  // str_convert_to_input()
-#endif
 #include "lib/tty/tty.h"  // LINES, COLS
 #include "lib/widget.h"
 
@@ -179,7 +177,6 @@ edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue * * comp
             }
         }
 
-#ifdef HAVE_CHARSET
         {
             GString *recoded;
 
@@ -192,7 +189,6 @@ edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue * * comp
                 g_string_free (recoded, TRUE);
             }
         }
-#endif
 
         if (active_buffer)
             g_queue_push_tail (*compl, temp);
@@ -228,11 +224,7 @@ edit_collect_completions (WEdit *edit, off_t word_start, gsize word_len, const c
     gboolean entire_file, all_files;
     edit_search_status_msg_t esm;
 
-#ifdef HAVE_CHARSET
     srch = mc_search_new (match_expr, cp_source);
-#else
-    srch = mc_search_new (match_expr, NULL);
-#endif
     if (srch == NULL)
         return NULL;
 
@@ -321,7 +313,6 @@ edit_collect_completions (WEdit *edit, off_t word_start, gsize word_len, const c
 static void
 edit_complete_word_insert_recoded_completion (WEdit *edit, char *completion, gsize word_len)
 {
-#ifdef HAVE_CHARSET
     GString *temp;
 
     temp = str_convert_to_input (completion);
@@ -331,10 +322,6 @@ edit_complete_word_insert_recoded_completion (WEdit *edit, char *completion, gsi
             edit_insert (edit, *completion);
         g_string_free (temp, TRUE);
     }
-#else
-    for (completion += word_len; *completion != '\0'; completion++)
-        edit_insert (edit, *completion);
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

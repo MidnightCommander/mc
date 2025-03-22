@@ -60,10 +60,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"  // message()
 #include "lib/event.h"
-
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -121,7 +118,6 @@ static estr_t
 _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
 {
     estr_t state = ESTR_SUCCESS;
-#ifdef HAVE_CHARSET
     const char *semi;
 
     if (size == 0)
@@ -180,12 +176,6 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
         // path can be translated whole at once
         state = str_vfs_convert_to (defcnv, path, size, buffer);
     }
-#else
-    (void) size;
-    (void) defcnv;
-
-    g_string_assign (buffer, path);
-#endif
 
     return state;
 }

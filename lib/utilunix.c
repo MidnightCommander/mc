@@ -65,10 +65,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"  // message()
 #include "lib/vfs/xdirentry.h"
-
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 /*** global variables ****************************************************************************/
 
@@ -903,9 +900,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
     // Collapse "/.." with the previous part of path
     if ((flags & CANON_PATH_REMDOUBLEDOTS) != 0)
     {
-#ifdef HAVE_CHARSET
         const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
-#endif
 
         for (p = lpath; p[0] != '\0' && p[1] != '\0' && p[2] != '\0';)
         {
@@ -975,7 +970,6 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                 else
                 {
                     // "token/../foo" -> "foo"
-#ifdef HAVE_CHARSET
                     if (strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                     {
                         char *enc;
@@ -991,7 +985,6 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                         g_free (enc);
                     }
                     else
-#endif
                         str_move (s, p + 4);
                 }
 
@@ -1012,7 +1005,6 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                 // "foo/token/.." -> "foo"
                 if (s == lpath + 1)
                     s[0] = '\0';
-#ifdef HAVE_CHARSET
                 else if (strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                 {
                     char *enc;
@@ -1038,12 +1030,9 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                     if (p >= lpath)
                         continue;
                 }
-#endif
                 else
                 {
-#ifdef HAVE_CHARSET
                 last:
-#endif
                     if (s >= lpath + url_delim_len
                         && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                         *s = '\0';
@@ -1062,7 +1051,6 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 char *
 mc_realpath (const char *path, char *resolved_path)
 {
-#ifdef HAVE_CHARSET
     const char *p = path;
     gboolean absolute_path = FALSE;
 
@@ -1085,7 +1073,6 @@ mc_realpath (const char *path, char *resolved_path)
             path = p;
         }
     }
-#endif
 
 #ifdef HAVE_REALPATH
     return realpath (path, resolved_path);

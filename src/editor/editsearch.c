@@ -30,9 +30,7 @@
 #include "lib/global.h"
 #include "lib/search.h"
 #include "lib/mcconfig.h"  // mc_config_history_get_recent_item()
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"  // cp_source
-#endif
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/skin.h"  // BOOK_MARK_FOUND_COLOR
@@ -100,9 +98,7 @@ edit_dialog_search_show (WEdit *edit)
                 QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
                 QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
                 QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
-#ifdef HAVE_CHARSET
                 QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
-#endif
             QUICK_STOP_COLUMNS,
             QUICK_START_BUTTONS (TRUE, TRUE),
                 QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
@@ -137,7 +133,6 @@ edit_dialog_search_show (WEdit *edit)
     if (dialog_result == B_USER)
         search_create_bookmark = TRUE;
 
-#ifdef HAVE_CHARSET
     {
         GString *tmp;
 
@@ -148,7 +143,6 @@ edit_dialog_search_show (WEdit *edit)
         else
             search_text = g_strdup ("");
     }
-#endif
 
     edit_search_deinit (edit);
     edit->last_search_string = search_text;
@@ -416,7 +410,6 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
 static char *
 edit_replace_cmd__conv_to_display (const char *str)
 {
-#ifdef HAVE_CHARSET
     GString *tmp;
 
     tmp = str_convert_to_display (str);
@@ -426,7 +419,7 @@ edit_replace_cmd__conv_to_display (const char *str)
             return g_string_free (tmp, FALSE);
         g_string_free (tmp, TRUE);
     }
-#endif
+
     return g_strdup (str);
 }
 
@@ -435,7 +428,6 @@ edit_replace_cmd__conv_to_display (const char *str)
 static char *
 edit_replace_cmd__conv_to_input (char *str)
 {
-#ifdef HAVE_CHARSET
     GString *tmp;
 
     tmp = str_convert_to_input (str);
@@ -445,7 +437,7 @@ edit_replace_cmd__conv_to_input (char *str)
             return g_string_free (tmp, FALSE);
         g_string_free (tmp, TRUE);
     }
-#endif
+
     return g_strdup (str);
 }
 
@@ -563,19 +555,13 @@ edit_search (WEdit *edit)
 gboolean
 edit_search_init (WEdit *edit, const char *str)
 {
-#ifdef HAVE_CHARSET
     edit->search = mc_search_new (str, cp_source);
-#else
-    edit->search = mc_search_new (str, NULL);
-#endif
 
     if (edit->search == NULL)
         return FALSE;
 
     edit->search->search_type = edit_search_options.type;
-#ifdef HAVE_CHARSET
     edit->search->is_all_charsets = edit_search_options.all_codepages;
-#endif
     edit->search->is_case_sensitive = edit_search_options.case_sens;
     edit->search->whole_words = edit_search_options.whole_words;
     edit->search->search_fn = edit_search_cmd_callback;
@@ -719,9 +705,7 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
                 QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
                 QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
                 QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
-#ifdef HAVE_CHARSET
                 QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
-#endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,

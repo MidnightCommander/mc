@@ -27,10 +27,7 @@
 
 #include "tests/mctest.h"
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
-
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.c"  // for testing static methods
@@ -63,10 +60,8 @@ setup (void)
     vfs_init_class (&vfs_test_ops3, "testfs3", VFSF_UNKNOWN, "test3");
     vfs_register_class (&vfs_test_ops3);
 
-#ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -75,10 +70,7 @@ setup (void)
 static void
 teardown (void)
 {
-#ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif
-
     vfs_shut ();
     str_uninit_strings ();
 }
@@ -119,7 +111,6 @@ static const struct test_from_to_string_ds
         4,
         &vfs_test_ops3,
     },
-#ifdef HAVE_CHARSET
     {
         // 3.
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
@@ -178,7 +169,6 @@ static const struct test_from_to_string_ds
         4,
         &vfs_test_ops3,
     },
-#endif
 };
 
 /* @Test */
@@ -291,11 +281,8 @@ START_PARAMETRIZED_TEST (test_partial_string_by_index, test_partial_string_by_in
 }
 END_PARAMETRIZED_TEST
 
-/* --------------------------------------------------------------------------------------------- */
-#ifdef HAVE_CHARSET
-/* --------------------------------------------------------------------------------------------- */
-
 #define ETALON_STR "/path/to/file.ext/test1://#enc:KOI8-R"
+
 /* @Test */
 START_TEST (test_vfs_path_encoding_at_end)
 {
@@ -320,7 +307,7 @@ START_TEST (test_vfs_path_encoding_at_end)
 }
 
 END_TEST
-#endif
+
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -336,9 +323,7 @@ main (void)
     mctest_add_parameterized_test (tc_core, test_from_to_string, test_from_to_string_ds);
     mctest_add_parameterized_test (tc_core, test_partial_string_by_index,
                                    test_partial_string_by_index_ds);
-#ifdef HAVE_CHARSET
     tcase_add_test (tc_core, test_vfs_path_encoding_at_end);
-#endif
     // ***********************************
 
     return mctest_run_all (tc_core);
