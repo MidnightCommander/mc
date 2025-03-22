@@ -1,4 +1,4 @@
-dnl @synopsis mc_I18N
+dnl @synopsis mc_ENCODING
 dnl
 dnl Clarify encoding names in mc.charset
 dnl
@@ -9,7 +9,7 @@ dnl @version 2025-03-22
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 
-AC_DEFUN([mc_I18N],[
+AC_DEFUN([mc_EMCODING],[
     AC_CHECK_HEADERS([gnu/libc-version.h])
 
     dnl Solaris has different name of Windows 1251 encoding
