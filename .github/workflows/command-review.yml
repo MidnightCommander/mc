@@ -1,0 +1,31 @@
+name: Review command
+
+on:
+  issue_comment:
+    types: [ created ]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number
+        required: true
+        type: number
+
+jobs:
+  review-issue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
+    if: ${{ ! github.event.issue.pull_request && (github.event.comment.body == '/review' && github.event.comment.author_association == 'MEMBER' || inputs.issue_number != '') }}
+
+    permissions:
+      issues: write
+
+    steps:
+      - run: |
+          gh issue edit \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+              --add-label "state: in review"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
