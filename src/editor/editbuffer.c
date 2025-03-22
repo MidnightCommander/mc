@@ -195,7 +195,6 @@ edit_buffer_get_byte (const edit_buffer_t *buf, off_t byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 /**
  * Get utf-8 symbol at specified index
  *
@@ -309,7 +308,6 @@ edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_
     *char_length = cursor_buf_ptr - str;
     return (int) res;
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**

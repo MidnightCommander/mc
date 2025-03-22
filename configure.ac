@@ -561,7 +561,6 @@ AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_INTERNAL_EDIT, [test x"$use_internal_edit" = xyes ])
 AM_CONDITIONAL(USE_ASPELL, [test x"$enable_aspell" = xyes ])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
-AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 dnl Clarify do we really need GModule
 AM_CONDITIONAL([HAVE_GMODULE], [test -n "$g_module_supported" && \
@@ -748,7 +747,6 @@ Configuration:
   With ext2fs attributes support: ${ext2fs_attr_msg}
   Internal editor:                ${edit_msg}
   Diff viewer:                    ${diff_msg}
-  Support for charset:            ${charset_msg}
 ])
 
 dnl option checking is disable by default due to AC_CONFIG_SUBDIRS

@@ -46,9 +46,7 @@
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"  // get_codepage_index
-#endif
 
 #ifdef USE_FILE_CMD
 #include "src/setup.h"  // use_file_to_check_type
@@ -59,10 +57,7 @@
 
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"
-
-#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"  // do_set_codepage
-#endif
 
 #include "filemanager.h"  // current_panel
 #include "panel.h"        // panel_cd
@@ -609,7 +604,6 @@ get_file_type_local (const vfs_path_t *filename_vpath, char *buf, int buflen)
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
 
-#ifdef HAVE_CHARSET
 static int
 get_file_encoding_local (const vfs_path_t *filename_vpath, char *buf, int buflen)
 {
@@ -638,7 +632,6 @@ get_file_encoding_local (const vfs_path_t *filename_vpath, char *buf, int buflen
 
     return ret;
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -665,10 +658,8 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
     {
         vfs_path_t *localfile_vpath;
 
-#ifdef HAVE_CHARSET
         static char encoding_id[21];  // CSISO51INISCYRILLIC -- 20
         int got_encoding_data;
-#endif
 
         // Don't repeate even unsuccessful checks
         *have_type = TRUE;
@@ -681,7 +672,6 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
             return FALSE;
         }
 
-#ifdef HAVE_CHARSET
         got_encoding_data = is_autodetect_codeset_enabled
             ? get_file_encoding_local (localfile_vpath, encoding_id, sizeof (encoding_id))
             : 0;
@@ -701,7 +691,6 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
             do_set_codepage (cp_id);
         }
-#endif
 
         got_data = get_file_type_local (localfile_vpath, content_string, sizeof (content_string));
 

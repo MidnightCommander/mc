@@ -135,9 +135,7 @@ struct WView
     gboolean hexedit_lownibble;  // Are we editing the last significant nibble?
     gboolean locked;             // We hold lock on current file
 
-#ifdef HAVE_CHARSET
     gboolean utf8;  // It's multibyte file codeset
-#endif
 
     GPtrArray *coord_cache;  // Cache for mapping offsets to cursor positions
 
@@ -290,10 +288,8 @@ void mcview_toggle_nroff_mode (WView *view);
 void mcview_toggle_hex_mode (WView *view);
 void mcview_init (WView *view);
 void mcview_done (WView *view);
-#ifdef HAVE_CHARSET
 void mcview_select_encoding (WView *view);
 void mcview_set_codeset (WView *view);
-#endif
 void mcview_show_error (WView *view, const char *error);
 off_t mcview_bol (WView *view, off_t current, off_t limit);
 off_t mcview_eol (WView *view, off_t current);

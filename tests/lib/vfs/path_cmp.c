@@ -26,10 +26,7 @@
 
 #include "tests/mctest.h"
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
-
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.h"
@@ -48,10 +45,8 @@ setup (void)
     vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-#ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -60,10 +55,7 @@ setup (void)
 static void
 teardown (void)
 {
-#ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif
-
     vfs_shut ();
     str_uninit_strings ();
 }
@@ -101,7 +93,6 @@ static const struct test_path_equal_ds
         "/test/path",
         TRUE,
     },
-#ifdef HAVE_CHARSET
     {
         // 4.
         "/#enc:KOI8-R/тестовый/путь",
@@ -120,7 +111,6 @@ static const struct test_path_equal_ds
         "/#enc:KOI8-R/тестовый/путь",
         TRUE,
     },
-#endif
 };
 
 /* @Test(dataSource = "test_path_equal_ds") */

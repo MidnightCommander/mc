@@ -39,10 +39,8 @@ void edit_buffer_init (edit_buffer_t *buf, off_t size);
 void edit_buffer_clean (edit_buffer_t *buf);
 
 int edit_buffer_get_byte (const edit_buffer_t *buf, off_t byte_index);
-#ifdef HAVE_CHARSET
 int edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length);
 int edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length);
-#endif
 long edit_buffer_count_lines (const edit_buffer_t *buf, off_t first, off_t last);
 off_t edit_buffer_get_bol (const edit_buffer_t *buf, off_t current);
 off_t edit_buffer_get_eol (const edit_buffer_t *buf, off_t current);

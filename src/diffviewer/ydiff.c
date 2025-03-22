@@ -45,9 +45,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/strutil.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 #include "lib/event.h"  // mc_event_raise()
 
 #include "src/filemanager/cmd.h"  // edit_file_at_line()
@@ -58,9 +56,7 @@
 #include "src/keymap.h"
 #include "src/setup.h"
 #include "src/history.h"
-#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
-#endif
 
 #include "ydiff.h"
 #include "internal.h"
@@ -581,7 +577,6 @@ dview_get_byte (const char *str, int *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 /**
  * Get utf multibyte char from string
  *
@@ -650,7 +645,6 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
     }
     return MAX (length, (size_t) result);
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1372,7 +1366,6 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
             }
             else if (skip > 0)
             {
-#ifdef HAVE_CHARSET
                 int ch = 0;
                 int ch_length = 1;
 
@@ -1380,7 +1373,6 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
 
                 if (ch_length > 1)
                     skip += ch_length - 1;
-#endif
 
                 skip--;
             }
@@ -1472,14 +1464,12 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             }
             else if (skip != 0)
             {
-#ifdef HAVE_CHARSET
                 int ch = 0;
                 int ch_length = 1;
 
                 (void) dview_get_utf (src, &ch, &ch_length);
                 if (ch_length > 1)
                     skip += ch_length - 1;
-#endif
 
                 skip--;
             }
@@ -2240,7 +2230,6 @@ dview_reread (WDiff *dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 static void
 dview_set_codeset (WDiff *dview)
 {
@@ -2275,7 +2264,6 @@ dview_select_encoding (WDiff *dview)
     tty_touch_screen ();
     repaint_screen ();
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2449,10 +2437,8 @@ dview_init (WDiff *dview, const char *args, const char *file1, const char *file2
     dview->merged[DIFF_RIGHT] = FALSE;
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
-#ifdef HAVE_CHARSET
     dview->converter = str_cnv_from_term;
     dview_set_codeset (dview);
-#endif
     dview->a[DIFF_LEFT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     g_array_set_clear_func (dview->a[DIFF_LEFT], cc_free_elt);
     dview->a[DIFF_RIGHT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
@@ -2472,10 +2458,8 @@ dview_fini (WDiff *dview)
         dview_fclose (dview->f[DIFF_LEFT]);
     }
 
-#ifdef HAVE_CHARSET
     if (dview->converter != str_cnv_from_term)
         str_close_conv (dview->converter);
-#endif
 
     destroy_hdiff (dview);
     if (dview->a[DIFF_LEFT] != NULL)
@@ -2578,11 +2562,9 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 {
                     char att[BUFSIZ];
 
-#ifdef HAVE_CHARSET
                     if (dview->utf8)
                         k = dview_str_utf8_offset_to_pos (p->p, width);
                     else
-#endif
                         k = width;
 
                     cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
@@ -2594,7 +2576,6 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                     {
                         gboolean ch_res;
 
-#ifdef HAVE_CHARSET
                         if (dview->utf8)
                         {
                             int ch_length = 0;
@@ -2606,13 +2587,11 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                                 next_ch = '.';
                         }
                         else
-#endif
                             ch_res = dview_get_byte (buf + cnt, &next_ch);
 
                         if (ch_res)
                         {
                             tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
-#ifdef HAVE_CHARSET
                             if (mc_global.utf8_display)
                             {
                                 if (!dview->utf8)
@@ -2625,7 +2604,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                                 next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
                             else
                                 next_ch = convert_to_display_c (next_ch);
-#endif
+
                             tty_print_anychar (next_ch);
                             col++;
                         }
@@ -2636,11 +2615,9 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 if (ch == CHG_CH)
                     tty_setcolor (DFF_CHH_COLOR);
 
-#ifdef HAVE_CHARSET
                 if (dview->utf8)
                     k = dview_str_utf8_offset_to_pos (p->p, width);
                 else
-#endif
                     k = width;
                 cvt_mget (p->p, p->u.len, buf, k, skip, tab_size, show_cr);
             }
@@ -2668,7 +2645,6 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         {
             gboolean ch_res;
 
-#ifdef HAVE_CHARSET
             if (dview->utf8)
             {
                 int ch_length = 0;
@@ -2680,12 +2656,10 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                     next_ch = '.';
             }
             else
-#endif
                 ch_res = dview_get_byte (buf + cnt, &next_ch);
 
             if (ch_res)
             {
-#ifdef HAVE_CHARSET
                 if (mc_global.utf8_display)
                 {
                     if (!dview->utf8)
@@ -2696,7 +2670,6 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                     next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
                 else
                     next_ch = convert_to_display_c (next_ch);
-#endif
 
                 tty_print_anychar (next_ch);
                 col++;
@@ -3181,11 +3154,9 @@ dview_execute_cmd (WDiff *dview, long command)
     case CK_Options:
         dview_diff_options (dview);
         break;
-#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         dview_select_encoding (dview);
         break;
-#endif
     case CK_Cancel:
         // don't close diffviewer due to SIGINT
         break;
@@ -3202,9 +3173,7 @@ dview_handle_key (WDiff *dview, int key)
 {
     long command;
 
-#ifdef HAVE_CHARSET
     key = convert_from_input_c (key);
-#endif
 
     command = widget_lookup_key (WIDGET (dview), key);
     if (command == CK_IgnoreKey)

@@ -48,9 +48,7 @@
 #include "lib/strutil.h"  // utf string functions
 #include "lib/util.h"     // is_printable()
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -109,7 +107,6 @@ status_string (WEdit *edit, char *s, int w)
      */
     if (edit->buffer.curs1 >= edit->buffer.size)
         strcpy (byte_str, "<EOF>     ");
-#ifdef HAVE_CHARSET
     else if (edit->utf8)
     {
         unsigned int cur_utf;
@@ -126,7 +123,6 @@ status_string (WEdit *edit, char *s, int w)
                         (unsigned) cur_utf);
         }
     }
-#endif
     else
     {
         unsigned char cur_byte;
@@ -148,10 +144,8 @@ status_string (WEdit *edit, char *s, int w)
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
                     byte_str,
-#ifdef HAVE_CHARSET
-                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
-#endif
-                                                   "");
+                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
+                                                   : "");
     else
         g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) %s  %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
@@ -166,10 +160,8 @@ status_string (WEdit *edit, char *s, int w)
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
                     byte_str,
-#ifdef HAVE_CHARSET
-                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
-#endif
-                                                   "");
+                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
+                                                   : "");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -303,7 +295,6 @@ edit_status_window (WEdit *edit)
         edit_move (32, w->rect.lines - 1);
         if (edit->buffer.curs1 >= edit->buffer.size)
             tty_print_string ("[<EOF>       ]");
-#ifdef HAVE_CHARSET
         else if (edit->utf8)
         {
             unsigned int cur_utf;
@@ -314,7 +305,6 @@ edit_status_window (WEdit *edit)
                 cur_utf = edit_buffer_get_current_byte (&edit->buffer);
             tty_printf ("[%05u 0x%04X]", cur_utf, cur_utf);
         }
-#endif
         else
         {
             unsigned char cur_byte;
@@ -603,11 +593,9 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 if (q >= edit->found_start && q < (off_t) (edit->found_start + edit->found_len))
                     p->style |= MOD_BOLD;
 
-#ifdef HAVE_CHARSET
                 if (edit->utf8)
                     c = edit_buffer_get_utf (&edit->buffer, q, &char_length);
                 else
-#endif
                     c = edit_buffer_get_byte (&edit->buffer, q);
 
                 // we don't use bg for mc - fg contains both
@@ -719,7 +707,6 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     MC_FALLTHROUGH;
 
                 default:
-#ifdef HAVE_CHARSET
                     if (mc_global.utf8_display)
                     {
                         if (!edit->utf8)
@@ -734,7 +721,6 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         c = convert_from_utf_to_current_c (c, edit->converter);
                     else
                         c = convert_to_display_c (c);
-#endif
 
                     // Caret notation for control characters
                     if (c < 32)
@@ -762,7 +748,6 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         break;
                     }
 
-#ifdef HAVE_CHARSET
                     if (edit->utf8)
                     {
                         if (mc_global.utf8_display)
@@ -773,7 +758,6 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                             printable = is_printable (c);
                     }
                     else
-#endif
                         // c is 8-bit char
                         printable = is_printable (c);
 

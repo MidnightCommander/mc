@@ -115,19 +115,9 @@ typedef struct
     mc_config_t *main_config;
     mc_config_t *panels_config;
 
-#ifdef HAVE_CHARSET
     // Numbers of (file I/O) and (input/display) codepages. -1 if not selected
     int source_codepage;
     int display_codepage;
-#else
-    // If true, allow characters in the range 160-255
-    gboolean eight_bit_clean;
-    /*
-     * If true, also allow characters in the range 128-159.
-     * This is reported to break on many terminals (xterm, qansi-m).
-     */
-    gboolean full_eight_bits;
-#endif
     /*
      * If utf-8 terminal utf8_display = TRUE
      * Display bits set UTF-8

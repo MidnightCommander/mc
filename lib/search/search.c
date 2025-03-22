@@ -35,9 +35,7 @@
 #include "lib/strutil.h"
 #include "lib/search.h"
 #include "lib/util.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "internal.h"
 
@@ -154,12 +152,8 @@ mc_search_new_len (const gchar *original, gsize original_len, const gchar *origi
 
     lc_mc_search = g_new0 (mc_search_t, 1);
     lc_mc_search->original.str = g_string_new_len (original, original_len);
-#ifdef HAVE_CHARSET
     lc_mc_search->original.charset = g_strdup (
         original_charset != NULL && *original_charset != '\0' ? original_charset : cp_display);
-#else
-    (void) original_charset;
-#endif
 
     return lc_mc_search;
 }
@@ -173,9 +167,7 @@ mc_search_free (mc_search_t *lc_mc_search)
         return;
 
     g_string_free (lc_mc_search->original.str, TRUE);
-#ifdef HAVE_CHARSET
     g_free (lc_mc_search->original.charset);
-#endif
     g_free (lc_mc_search->error_str);
 
     if (lc_mc_search->prepared.conditions != NULL)
@@ -201,7 +193,6 @@ mc_search_prepare (mc_search_t *lc_mc_search)
         return lc_mc_search->prepared.result;
 
     ret = g_ptr_array_new_with_free_func (mc_search__cond_struct_free);
-#ifdef HAVE_CHARSET
     if (!lc_mc_search->is_all_charsets)
         g_ptr_array_add (ret,
                          mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
@@ -232,11 +223,7 @@ mc_search_prepare (mc_search_t *lc_mc_search)
             }
         }
     }
-#else
-    g_ptr_array_add (ret,
-                     mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
-                                                 str_detect_termencoding ()));
-#endif
+
     lc_mc_search->prepared.conditions = ret;
     lc_mc_search->prepared.result = (lc_mc_search->error == MC_SEARCH_E_OK);
 

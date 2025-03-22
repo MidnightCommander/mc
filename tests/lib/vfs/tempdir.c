@@ -27,12 +27,7 @@
 
 #include "tests/mctest.h"
 
-#ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
-#endif
-
 #include "lib/charsets.h"
-
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.h"

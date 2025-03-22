@@ -351,9 +351,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
 
     path_element->host = g_strdup (rest);
     g_free (pcopy);
-#ifdef HAVE_CHARSET
     path_element->dir.converter = INVALID_CONV;
-#endif
 
     return path_element;
 }

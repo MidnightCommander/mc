@@ -29,10 +29,9 @@
 
 #include <ctype.h>
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #include "src/selcodepage.h"
-#endif
+
 #include "src/editor/editwidget.h"
 #include "src/editor/editmacros.h"  // edit_load_macro_cmd()
 #include "src/editor/editsearch.h"
@@ -210,10 +209,8 @@ setup (void)
 
     str_init_strings (NULL);
 
-#ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif
 
     edit_options.filesize_threshold = (char *) "64M";
 
@@ -222,7 +219,6 @@ setup (void)
     memset (&owner, 0, sizeof (owner));
     group_add_widget (&owner, WIDGET (test_edit));
 
-#ifdef HAVE_CHARSET
     mc_global.source_codepage = 0;
     mc_global.display_codepage = 0;
     cp_source = "ASCII";
@@ -230,7 +226,6 @@ setup (void)
 
     do_set_codepage (0);
     edit_set_codeset (test_edit);
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -243,10 +238,7 @@ teardown (void)
     group_remove_widget (test_edit);
     g_free (test_edit);
 
-#ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif
-
     str_uninit_strings ();
 }
 

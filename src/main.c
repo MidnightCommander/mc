@@ -78,10 +78,8 @@
 #include "keymap.h"
 #include "setup.h"  // load_setup()
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #include "selcodepage.h"
-#endif
 
 #include "consaver/cons.saver.h"  // cons_saver_pid
 
@@ -106,7 +104,6 @@ check_codeset (void)
 
     current_system_codepage = str_detect_termencoding ();
 
-#ifdef HAVE_CHARSET
     {
         const char *_display_codepage;
 
@@ -122,7 +119,6 @@ check_codeset (void)
                                   cp_display);
         }
     }
-#endif
 
     mc_global.utf8_display = str_isutf8 (current_system_codepage);
 }

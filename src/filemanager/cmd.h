@@ -80,9 +80,7 @@ void setup_listing_format_cmd (void);
 void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);
 void quick_view_cmd (void);
-#ifdef HAVE_CHARSET
 void encoding_cmd (void);
-#endif
 /* achown.c */
 void advanced_chown_cmd (WPanel *panel);
 /* chmod.c */

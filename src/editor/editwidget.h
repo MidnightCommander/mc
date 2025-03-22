@@ -68,13 +68,11 @@ struct WEdit
     // dynamic buffers and cursor position for editor:
     edit_buffer_t buffer;
 
-#ifdef HAVE_CHARSET
     // multibyte support
     gboolean utf8;  // It's multibyte file codeset
     GIConv converter;
     char charbuf[MB_LEN_MAX + 1];
     int charpoint;
-#endif
 
     // search handler
     mc_search_t *search;

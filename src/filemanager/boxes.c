@@ -55,6 +55,7 @@
 
 #include "lib/util.h"  // Q_()
 #include "lib/widget.h"
+#include "lib/charsets.h"
 
 #include "src/setup.h"
 #include "src/history.h"  // MC_HISTORY_ESC_TIMEOUT
@@ -62,11 +63,7 @@
 #ifdef ENABLE_BACKGROUND
 #include "src/background.h"  // task_list
 #endif
-
-#ifdef HAVE_CHARSET
-#include "lib/charsets.h"
 #include "src/selcodepage.h"
-#endif
 
 #include "command.h"  // For cmdline
 #include "dir.h"
@@ -103,9 +100,7 @@ static char **status_format;
 static unsigned long panel_list_formats_id, panel_user_format_id, panel_brief_cols_id;
 static unsigned long user_mini_status_id, mini_user_format_id;
 
-#ifdef HAVE_CHARSET
 static int new_display_codepage;
-#endif
 
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_FTP)
 static unsigned long ftpfs_always_use_proxy_id, ftpfs_proxy_host_id;
@@ -362,7 +357,6 @@ panel_listing_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 static int
 sel_charset_button (WButton *button, int action)
 {
@@ -391,7 +385,6 @@ sel_charset_button (WButton *button, int action)
 
     return 0;
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -969,64 +962,6 @@ confirm_box (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifndef HAVE_CHARSET
-void
-display_bits_box (void)
-{
-    gboolean new_meta;
-    int current_mode;
-
-    const char *display_bits_str[] = {
-        N_ ("&UTF-8 output"),
-        N_ ("&Full 8 bits output"),
-        N_ ("&ISO 8859-1"),
-        N_ ("7 &bits"),
-    };
-
-    quick_widget_t quick_widgets[] = {
-        QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
-        QUICK_SEPARATOR (TRUE),
-        QUICK_CHECKBOX (N_ ("F&ull 8 bits input"), &new_meta, NULL),
-        QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END,
-    };
-
-    WRect r = { -1, -1, 0, 46 };
-
-    quick_dialog_t qdlg = {
-        .rect = r,
-        .title = N_ ("Display bits"),
-        .help = "[Display bits]",
-        .widgets = quick_widgets,
-        .callback = NULL,
-        .mouse_callback = NULL,
-    };
-
-    if (mc_global.full_eight_bits)
-        current_mode = 0;
-    else if (mc_global.eight_bit_clean)
-        current_mode = 1;
-    else
-        current_mode = 2;
-
-    new_meta = !use_8th_bit_as_meta;
-
-    if (quick_dialog (&qdlg) != B_CANCEL)
-    {
-        mc_global.eight_bit_clean = current_mode < 3;
-        mc_global.full_eight_bits = current_mode < 2;
-#ifndef HAVE_SLANG
-        tty_display_8bit (mc_global.eight_bit_clean);
-#else
-        tty_display_8bit (mc_global.full_eight_bits);
-#endif
-        use_8th_bit_as_meta = !new_meta;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-#else  // HAVE_CHARSET
-
 void
 display_bits_box (void)
 {
@@ -1093,7 +1028,6 @@ display_bits_box (void)
         }
     }
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /** Show tree in a box, not on a panel */

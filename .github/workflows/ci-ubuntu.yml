@@ -72,7 +72,6 @@ jobs:
               --disable-largefile \
               --disable-nls \
               --disable-rpath \
-              --disable-charset \
               --disable-mclib \
               --disable-assert \
               --disable-aspell \

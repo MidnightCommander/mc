@@ -158,10 +158,8 @@ create_command_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Find declaration"), CK_Find));
     entries = g_list_prepend (entries, menu_entry_new (_ ("Back from &declaration"), CK_FilePrev));
     entries = g_list_prepend (entries, menu_entry_new (_ ("For&ward to declaration"), CK_FileNext));
-#ifdef HAVE_CHARSET
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("Encod&ing..."), CK_SelectCodepage));
-#endif
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Refresh screen"), CK_Refresh));
     entries = g_list_prepend (entries, menu_separator_new ());

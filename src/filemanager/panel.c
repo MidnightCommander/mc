@@ -49,16 +49,12 @@
 #include "lib/timefmt.h"  // file_date()
 #include "lib/util.h"
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"  // get_codepage_id ()
-#endif
 #include "lib/event.h"
 
 #include "src/setup.h"  // For loading/saving panel options
 #include "src/execute.h"
-#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"  // select_charset (), SELECT_CHARSET_NO_TRANSLATE
-#endif
 #include "src/keymap.h"  // global_keymap_t
 #include "src/history.h"
 #ifdef ENABLE_SUBSHELL
@@ -1156,7 +1152,6 @@ panel_correct_path_to_show (const WPanel *panel)
  * @return newly allocated string or NULL if path charset is same as system charset
  */
 
-#ifdef HAVE_CHARSET
 static char *
 panel_get_encoding_info_str (const WPanel *panel)
 {
@@ -1169,7 +1164,6 @@ panel_get_encoding_info_str (const WPanel *panel)
 
     return ret_str;
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1210,7 +1204,6 @@ show_dir (const WPanel *panel)
 
     if (panel->is_panelized)
         tty_printf (" %s ", _ ("Panelize"));
-#ifdef HAVE_CHARSET
     else
     {
         tmp = panel_get_encoding_info_str (panel);
@@ -1221,7 +1214,6 @@ show_dir (const WPanel *panel)
             g_free (tmp);
         }
     }
-#endif
 
     if (panel->active)
         tty_setcolor (REVERSE_COLOR);
@@ -2917,9 +2909,7 @@ do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
         g_free (cmd);
     }
 
-#ifdef HAVE_CHARSET
     mc_global.source_codepage = default_source_codepage;
-#endif
 
     return TRUE;
 }
@@ -3621,11 +3611,9 @@ panel_execute_cmd (WPanel *panel, long command)
     case CK_Top:
         move_home (panel);
         break;
-#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         panel_change_encoding (panel);
         break;
-#endif
     case CK_ScrollLeft:
         panel_content_scroll_left (panel);
         break;
@@ -4473,9 +4461,7 @@ panel_sized_empty_new (const char *panel_name, const WRect *r)
     for (i = 0; i < LIST_FORMATS; i++)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
-#ifdef HAVE_CHARSET
     panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
-#endif
 
     panel->frame_size = frame_half;
 
@@ -4534,9 +4520,7 @@ panel_sized_with_dir_new (const char *panel_name, const WRect *r, const vfs_path
 {
     WPanel *panel;
     char *curdir = NULL;
-#ifdef HAVE_CHARSET
     const vfs_path_element_t *path_element;
-#endif
 
     panel = panel_sized_empty_new (panel_name, r);
 
@@ -4553,17 +4537,13 @@ panel_sized_with_dir_new (const char *panel_name, const WRect *r, const vfs_path
 
     panel_set_lwd (panel, vfs_get_raw_current_dir ());
 
-#ifdef HAVE_CHARSET
     path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
     if (path_element->encoding != NULL)
         panel->codepage = get_codepage_index (path_element->encoding);
-#endif
 
     if (mc_chdir (panel->cwd_vpath) != 0)
     {
-#ifdef HAVE_CHARSET
         panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
-#endif
         vfs_setup_cwd ();
         vfs_path_free (panel->cwd_vpath, TRUE);
         panel->cwd_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
@@ -4944,9 +4924,6 @@ panel_set_sort_order (WPanel *panel, const panel_field_t *sort_order)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#ifdef HAVE_CHARSET
-
 /**
  * Change panel encoding.
  * @param panel WPanel object
@@ -5051,7 +5028,6 @@ remove_encoding_from_path (const vfs_path_t *vpath)
     g_string_free (tmp_conv, TRUE);
     return ret_vpath;
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -5431,7 +5407,6 @@ panel_cd (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum exact)
 
     res = panel_do_cd (panel, _new_dir_vpath, exact);
 
-#ifdef HAVE_CHARSET
     if (res)
     {
         const vfs_path_element_t *path_element;
@@ -5442,7 +5417,6 @@ panel_cd (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum exact)
         else
             panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
     }
-#endif
 
     return res;
 }

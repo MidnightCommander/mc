@@ -111,11 +111,9 @@ extern gboolean boot_current_is_left;
 extern gboolean use_internal_view;
 extern gboolean use_internal_edit;
 
-#ifdef HAVE_CHARSET
 extern int default_source_codepage;
 extern char *autodetect_codeset;
 extern gboolean is_autodetect_codeset_enabled;
-#endif
 
 #ifdef HAVE_ASPELL
 extern char *spell_language;

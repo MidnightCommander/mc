@@ -24,9 +24,7 @@
 
 #include "tests/mctest.h"
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "src/usermenu.c"
 
@@ -62,15 +60,10 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-#ifdef HAVE_CHARSET
 setup_charset (const char *encoding, const gboolean utf8_display)
-#else
-setup_charset (const char *encoding, MC_UNUSED const gboolean utf8_display)
-#endif
 {
     str_init_strings (encoding);
 
-#ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 
@@ -80,7 +73,6 @@ setup_charset (const char *encoding, MC_UNUSED const gboolean utf8_display)
     mc_global.display_codepage = get_codepage_index (encoding);
 
     mc_global.utf8_display = utf8_display;
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -88,10 +80,7 @@ setup_charset (const char *encoding, MC_UNUSED const gboolean utf8_display)
 static void
 teardown_charset (void)
 {
-#ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif
-
     str_uninit_strings ();
 }
 
@@ -104,13 +93,11 @@ static const struct check_test_condition_ds
     int current_file;
     gboolean expected_value;
 } check_test_condition_ds[] = {
-#ifdef HAVE_CHARSET
     // In fully UTF-8 environment, only file with real spaces should match
     { "UTF-8", TRUE, 0, FALSE },
     { "UTF-8", TRUE, 1, TRUE },
     { "UTF-8", TRUE, 2, FALSE },
     { "UTF-8", TRUE, 3, FALSE },
-#endif
 
     // Last filename contains 0xa0 byte, which would be interpreted as a non-breaking space in
     // single-byte encodings

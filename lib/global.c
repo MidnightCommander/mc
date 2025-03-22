@@ -59,13 +59,8 @@ mc_global_t mc_global =
 
     .profile_name = NULL,
 
-#ifdef HAVE_CHARSET
     .source_codepage = -1,
     .display_codepage = -1,
-#else
-    .eight_bit_clean = TRUE,
-    .full_eight_bits = FALSE,
-#endif
     .utf8_display = FALSE,
 
     .message_visible = TRUE,

@@ -32,9 +32,7 @@
 #include <gmodule.h>
 #include <aspell.h>
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 #include "lib/strutil.h"
 #include "lib/util.h"     // MC_PTR_FREE()
 #include "lib/tty/tty.h"  // COLS, LINES
@@ -278,11 +276,9 @@ aspell_set_lang (const char *lang)
         g_free (spell_language);
         spell_language = g_strdup (lang);
 
-#ifdef HAVE_CHARSET
         if (mc_global.source_codepage > 0)
             spell_codeset = get_codepage_id (mc_global.source_codepage);
         else
-#endif
             spell_codeset = str_detect_termencoding ();
 
         mc_aspell_config_replace (global_speller->config, "lang", lang);
@@ -599,7 +595,6 @@ edit_suggest_current_word (WEdit *edit)
         edit_buffer_get_word_from_pos (&edit->buffer, edit->buffer.curs1, &word_start, &cut_len);
     word_len = match_word->len;
 
-#ifdef HAVE_CHARSET
     if (mc_global.source_codepage >= 0 && mc_global.source_codepage != mc_global.display_codepage)
     {
         GString *tmp_word;
@@ -608,7 +603,6 @@ edit_suggest_current_word (WEdit *edit)
         g_string_free (match_word, TRUE);
         match_word = tmp_word;
     }
-#endif
     if (match_word != NULL)
     {
         if (!aspell_check (match_word->str, (int) word_len))
@@ -636,7 +630,6 @@ edit_suggest_current_word (WEdit *edit)
 
                 if (retval == B_ENTER && new_word != NULL)
                 {
-#ifdef HAVE_CHARSET
                     if (mc_global.source_codepage >= 0
                         && (mc_global.source_codepage != mc_global.display_codepage))
                     {
@@ -647,7 +640,6 @@ edit_suggest_current_word (WEdit *edit)
                         if (tmp_word != NULL)
                             new_word = g_string_free (tmp_word, FALSE);
                     }
-#endif
                     for (i = 0; i < word_len; i++)
                         edit_backspace (edit, TRUE);
                     if (new_word != NULL)

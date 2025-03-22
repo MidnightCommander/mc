@@ -113,13 +113,6 @@ const char *mc_prompt = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#ifdef HAVE_CHARSET
-/*
- * Don't restrict the output on the screen manager level,
- * the translation tables take care of it.
- */
-#endif
-
 /*** file scope type declarations ****************************************************************/
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -207,9 +200,7 @@ create_panel_menu (void)
         g_list_prepend (entries, menu_entry_new (_ ("&Listing format..."), CK_SetupListingFormat));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Sort order..."), CK_Sort));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Filter..."), CK_Filter));
-#ifdef HAVE_CHARSET
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Encoding..."), CK_SelectCodepage));
-#endif
     entries = g_list_prepend (entries, menu_separator_new ());
 #ifdef ENABLE_VFS_FTP
     entries = g_list_prepend (entries, menu_entry_new (_ ("FT&P link..."), CK_ConnectFtp));
@@ -693,12 +684,7 @@ midnight_put_panel_path (WPanel *panel)
     if (!command_prompt)
         return;
 
-#ifdef HAVE_CHARSET
     cwd_vpath = remove_encoding_from_path (panel->cwd_vpath);
-#else
-    cwd_vpath = vfs_path_clone (panel->cwd_vpath);
-#endif
-
     cwd_vpath_str = vfs_path_as_str (cwd_vpath);
 
     command_insert (cmdline, cwd_vpath_str, FALSE);
@@ -836,21 +822,7 @@ put_other_tagged (void)
 static void
 setup_mc (void)
 {
-#ifdef HAVE_SLANG
-#ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
-#else
-    tty_display_8bit (mc_global.full_eight_bits);
-#endif
-
-#else  // HAVE_SLANG
-
-#ifdef HAVE_CHARSET
-    tty_display_8bit (TRUE);
-#else
-    tty_display_8bit (mc_global.eight_bit_clean);
-#endif
-#endif
 
     const int baudrate = tty_baudrate ();
     if ((baudrate > 0 && baudrate < 9600) || mc_global.tty.slow_terminal)
@@ -1314,11 +1286,9 @@ midnight_execute_cmd (Widget *sender, long command)
     case CK_OptionsPanel:
         panel_options_box ();
         break;
-#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         encoding_cmd ();
         break;
-#endif
     case CK_CdQuick:
         quick_cd_cmd (current_panel);
         break;

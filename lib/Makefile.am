@@ -52,9 +52,7 @@ if USE_MAINTAINER_MODE
 libmc_la_SOURCES += logging.c logging.h
 endif
 
-if CHARSET
 libmc_la_SOURCES += charsets.c charsets.h
-endif
 
 EXTRA_DIST = \
 	stdckdint.in.h

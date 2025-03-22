@@ -41,16 +41,13 @@
 #include "lib/terminal.h"  // convert_controls()
 #include "lib/timefmt.h"
 #include "lib/util.h"
+#include "lib/charsets.h"
 
 #ifdef ENABLE_VFS_FTP
 #include "src/vfs/ftpfs/ftpfs.h"
 #endif
 #ifdef ENABLE_VFS_SHELL
 #include "src/vfs/shell/shell.h"
-#endif
-
-#ifdef HAVE_CHARSET
-#include "lib/charsets.h"
 #endif
 
 #include "filemanager/dir.h"
@@ -64,10 +61,7 @@
 #include "args.h"
 #include "execute.h"  // pause_after_run
 #include "clipboard.h"
-
-#ifdef HAVE_CHARSET
 #include "selcodepage.h"
-#endif
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
@@ -182,12 +176,10 @@ gboolean use_internal_view = TRUE;
 /* If set, use the builtin editor */
 gboolean use_internal_edit = TRUE;
 
-#ifdef HAVE_CHARSET
 /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
 int default_source_codepage = -1;
 char *autodetect_codeset = NULL;
 gboolean is_autodetect_codeset_enabled = FALSE;
-#endif
 
 #ifdef HAVE_ASPELL
 char *spell_language = NULL;
@@ -310,10 +302,6 @@ static const struct
     { "confirm_view_dir", &confirm_view_dir },
     { "safe_delete", &safe_delete },
     { "safe_overwrite", &safe_overwrite },
-#ifndef HAVE_CHARSET
-    { "eight_bit_clean", &mc_global.eight_bit_clean },
-    { "full_eight_bits", &mc_global.full_eight_bits },
-#endif
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
     { "mouse_move_pages_viewer", &mcview_mouse_move_pages },
     { "mouse_close_dialog", &mouse_close_dialog },
@@ -877,11 +865,9 @@ load_setup (void)
 {
     const char *profile;
 
-#ifdef HAVE_CHARSET
     const char *cbuffer;
 
     load_codepages_list ();
-#endif
 
     profile = setup_init ();
 
@@ -934,7 +920,6 @@ load_setup (void)
     //    directory_history_load ();
     // Remove the temporal entries
 
-#ifdef HAVE_CHARSET
     if (codepages->len > 1)
     {
         char *buffer;
@@ -968,7 +953,6 @@ load_setup (void)
     cbuffer = get_codepage_id (mc_global.display_codepage);
     if (cbuffer != NULL)
         mc_global.utf8_display = str_isutf8 (cbuffer);
-#endif
 
 #ifdef HAVE_ASPELL
     spell_language =
@@ -1013,14 +997,12 @@ save_setup (gboolean save_options, gboolean save_panel_options)
                                   ftpfs_proxy_host);
 #endif
 
-#ifdef HAVE_CHARSET
         mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "display_codepage",
                               get_codepage_id (mc_global.display_codepage));
         mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "source_codepage",
                               get_codepage_id (default_source_codepage));
         mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "autodetect_codeset",
                               autodetect_codeset);
-#endif
 
 #ifdef HAVE_ASPELL
         mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "spell_language",
@@ -1070,10 +1052,8 @@ done_setup (void)
     external_panelize_free ();
     //    directory_history_free ();
 
-#ifdef HAVE_CHARSET
     g_free (autodetect_codeset);
     free_codepages_list ();
-#endif
 
 #ifdef HAVE_ASPELL
     g_free (spell_language);

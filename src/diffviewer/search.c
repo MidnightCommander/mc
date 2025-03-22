@@ -32,9 +32,7 @@
 #include "lib/strutil.h"
 #include "lib/tty/key.h"
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "src/history.h"
 
@@ -95,10 +93,8 @@ mcdiffview_dialog_search (WDiff *dview)
                 QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &mcdiffview_search_options.case_sens, NULL),
                 QUICK_CHECKBOX (N_ ("&Backwards"), &mcdiffview_search_options.backwards, NULL),
                 QUICK_CHECKBOX (N_ ("&Whole words"), &mcdiffview_search_options.whole_words, NULL),
-#ifdef HAVE_CHARSET
                 QUICK_CHECKBOX (N_ ("&All charsets"), &mcdiffview_search_options.all_codepages,
                                 NULL),
-#endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
@@ -127,7 +123,6 @@ mcdiffview_dialog_search (WDiff *dview)
         return FALSE;
     }
 
-#ifdef HAVE_CHARSET
     {
         GString *tmp;
 
@@ -138,7 +133,6 @@ mcdiffview_dialog_search (WDiff *dview)
         else
             exp = g_strdup ("");
     }
-#endif
 
     g_free (dview->search.last_string);
     dview->search.last_string = exp;
@@ -258,19 +252,13 @@ dview_search_cmd (WDiff *dview)
         return;
 
     mc_search_free (dview->search.handle);
-#ifdef HAVE_CHARSET
     dview->search.handle = mc_search_new (dview->search.last_string, cp_source);
-#else
-    dview->search.handle = mc_search_new (dview->search.last_string, NULL);
-#endif
 
     if (dview->search.handle == NULL)
         return;
 
     dview->search.handle->search_type = mcdiffview_search_options.type;
-#ifdef HAVE_CHARSET
     dview->search.handle->is_all_charsets = mcdiffview_search_options.all_codepages;
-#endif
     dview->search.handle->is_case_sensitive = mcdiffview_search_options.case_sens;
     dview->search.handle->whole_words = mcdiffview_search_options.whole_words;
 

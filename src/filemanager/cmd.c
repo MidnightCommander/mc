@@ -728,9 +728,7 @@ edit_cmd_new (void)
         g_free (fname);
     }
 
-#ifdef HAVE_CHARSET
     mc_global.source_codepage = default_source_codepage;
-#endif
     do_edit (fname_vpath);
 
     vfs_path_free (fname_vpath, TRUE);
@@ -1434,13 +1432,11 @@ quick_view_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 void
 encoding_cmd (void)
 {
     if (SELECTED_IS_PANEL)
         panel_change_encoding (MENU_PANEL);
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */

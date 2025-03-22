@@ -42,9 +42,7 @@
 #include "lib/search.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "src/history.h"
 
@@ -89,9 +87,7 @@ mcview_dialog_search (WView *view)
                 QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
                 QUICK_CHECKBOX (N_ ("&Backwards"), &mcview_search_options.backwards, NULL),
                 QUICK_CHECKBOX (N_ ("&Whole words"), &mcview_search_options.whole_words, NULL),
-#ifdef HAVE_CHARSET
                 QUICK_CHECKBOX (N_ ("&All charsets"), &mcview_search_options.all_codepages, NULL),
-#endif
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
@@ -120,7 +116,6 @@ mcview_dialog_search (WView *view)
         return FALSE;
     }
 
-#ifdef HAVE_CHARSET
     {
         GString *tmp;
 
@@ -131,7 +126,6 @@ mcview_dialog_search (WView *view)
         else
             exp = g_strdup ("");
     }
-#endif
 
     mcview_search_deinit (view);
     view->last_search_string = exp;
