@@ -55,7 +55,7 @@
 #include "src/setup.h"  // For loading/saving panel options
 #include "src/execute.h"
 #include "src/selcodepage.h"  // select_charset (), SELECT_CHARSET_NO_TRANSLATE
-#include "src/keymap.h"  // global_keymap_t
+#include "src/keymap.h"       // global_keymap_t
 #include "src/history.h"
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"  // subshell_chdir()
