@@ -527,13 +527,18 @@ dev_from_mount_options (char const *mount_options)
     if (devopt)
     {
         char const *optval = devopt + sizeof (dev_pattern) - 1;
-        char *optvalend;
-        unsigned long int dev;
-        errno = 0;
-        dev = strtoul (optval, &optvalend, 16);
-        if (optval != optvalend && (*optvalend == '\0' || *optvalend == ',')
-            && !(dev == ULONG_MAX && errno == ERANGE) && dev == (dev_t) dev)
-            return dev;
+
+        if (g_ascii_isxdigit (*optval))
+        {
+            char *optvalend;
+            unsigned long int dev;
+
+            errno = 0;
+            dev = strtoul (optval, &optvalend, 16);
+            if (optval != optvalend && (*optvalend == '\0' || *optvalend == ',')
+                && !(dev == ULONG_MAX && errno == ERANGE) && dev == (dev_t) dev)
+                return dev;
+        }
     }
 #endif
 
