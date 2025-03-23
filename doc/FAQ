@@ -396,12 +396,7 @@ Frequently Asked Questions
    For termcap/terminfo database, change the acsc capability in the
    database.
 
-4.4 I have problems with entering/viewing national characters!
-
-   From the Options - Display Bits dialog select Full 8 bits or ISO
-   8859-1.  In addition, select 8 bit input from the same dialog.
-
-4.5 How can I get colors?
+4.4 How can I get colors?
 
    Invoke mc like this (without quotes): "mc -c".
 
@@ -450,7 +445,7 @@ Frequently Asked Questions
    If you use Linux console the correct value for TERM is linux or
    console.
 
-4.6 My color_xterm goes completely (or partially) black!
+4.5 My color_xterm goes completely (or partially) black!
 
    Some color_xterm terminals define all colors as black instead of the
    standard ANSI colors.  This makes them go completely black when you
@@ -482,7 +477,7 @@ Frequently Asked Questions
    ever the name of your X configuration file is).  Or you can replace
    your non-ANSI color_xterm with an ANSI color_xterm.
 
-4.7 Where can I get xterm or rxvt?
+4.6 Where can I get xterm or rxvt?
 
    xterm is included with the X Window System, so you probably already
    have it if you have X.  This version is not actively maintained, but
@@ -492,7 +487,7 @@ Frequently Asked Questions
    rxvt has its own site https://rxvt.sourceforge.net - get the latest version
    there.
 
-4.8 I got colors working with MC but the other programs don't work at
+4.7 I got colors working with MC but the other programs don't work at
 all anymore!
 
    Midnight Commander uses terminfo database (if available) but many
