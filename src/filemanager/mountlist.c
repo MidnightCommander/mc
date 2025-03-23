@@ -1177,7 +1177,7 @@ read_file_system_list (void)
     }
 #endif
 
-#if defined _WIN32 && !defined __CYGWIN__
+#if defined _WIN32 && !defined __CYGWIN__  // native Windows
 // Don't assume that UNICODE is not defined.
 #undef GetDriveType
 #define GetDriveType GetDriveTypeA
@@ -1387,6 +1387,10 @@ read_file_system_list (void)
             FindVolumeClose (h);
         }
     }
+#endif
+
+#ifdef MOUNTED_NOT_PORTED
+#error "Please port gnulib mountlist.c to your platform!"
 #endif
 
     return g_slist_reverse (mount_list);
