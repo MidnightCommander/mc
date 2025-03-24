@@ -648,7 +648,7 @@ edit_quit (WDialog *h)
 
         widget_select (WIDGET (e));
 
-        if (!edit_ok_to_exit (e))
+        if (!edit_ok_to_quit (e))
             break;
     }
 
