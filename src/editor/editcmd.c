@@ -1241,7 +1241,7 @@ edit_close_cmd (WEdit *edit)
 {
     gboolean ret;
 
-    ret = (edit != NULL) && edit_ok_to_exit (edit);
+    ret = (edit != NULL) && edit_ok_to_quit (edit);
 
     if (ret)
     {
@@ -1449,7 +1449,7 @@ edit_block_delete_cmd (WEdit *edit)
  */
 
 gboolean
-edit_ok_to_exit (WEdit *edit)
+edit_ok_to_quit (WEdit *edit)
 {
     const char *fname = N_ ("[NoName]");
     char *msg;
@@ -1470,7 +1470,7 @@ edit_ok_to_exit (WEdit *edit)
         query_set_sel (2);
 
         msg = g_strdup_printf (_ ("File %s was modified.\nSave before close?"), fname);
-        act = edit_query_dialog3 (_ ("Close file"), msg, _ ("&Yes"), _ ("&No"), _ ("&Cancel"));
+        act = edit_query_dialog3 (_ ("Close file"), msg, _ ("&Yes"), _ ("&No"), _ ("&Cancel quit"));
     }
     else
     {
