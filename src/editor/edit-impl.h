@@ -158,7 +158,7 @@ gboolean edit_save_confirm_cmd (WEdit *edit);
 gboolean edit_save_as_cmd (WEdit *edit);
 WEdit *edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg);
 gboolean edit_clean (WEdit *edit);
-gboolean edit_ok_to_exit (WEdit *edit);
+gboolean edit_ok_to_quit (WEdit *edit);
 gboolean edit_load_cmd (WDialog *h);
 gboolean edit_load_file_from_filename (WDialog *h, const edit_arg_t *arg);
 gboolean edit_load_file_from_history (WDialog *h);

@@ -1241,7 +1241,7 @@ edit_close_cmd (WEdit *edit)
 {
     gboolean ret;
 
-    ret = (edit != NULL) && edit_ok_to_exit (edit);
+    ret = (edit != NULL) && edit_ok_to_quit (edit);
 
     if (ret)
     {
@@ -1449,7 +1449,7 @@ edit_block_delete_cmd (WEdit *edit)
  */
 
 gboolean
-edit_ok_to_exit (WEdit *edit)
+edit_ok_to_quit (WEdit *edit)
 {
     const char *fname = N_ ("[NoName]");
     char *msg;
@@ -1498,7 +1498,7 @@ edit_ok_to_exit (WEdit *edit)
     case 1:  // No
     default:
         break;
-    case 2:   // Cancel quit
+    case 2:   // Cancel
     case -1:  // Esc
         return FALSE;
     }
