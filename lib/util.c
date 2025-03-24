@@ -80,16 +80,6 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#ifndef HAVE_CHARSET
-static inline int
-is_7bit_printable (unsigned char c)
-{
-    return (c > 31 && c < 127);
-}
-#endif
-
-/* --------------------------------------------------------------------------------------------- */
-
 static inline int
 is_iso_printable (unsigned char c)
 {
@@ -228,21 +218,9 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
 int
 is_printable (int c)
 {
-    c &= 0xff;
-
-#ifdef HAVE_CHARSET
     /* "Display bits" is ignored, since the user controls the output
        by setting the output codepage */
-    return is_8bit_printable (c);
-#else
-    if (!mc_global.eight_bit_clean)
-        return is_7bit_printable (c);
-
-    if (mc_global.full_eight_bits)
-        return is_8bit_printable (c);
-
-    return is_iso_printable (c);
-#endif
+    return is_8bit_printable (c & 0xff);
 }
 
 /* --------------------------------------------------------------------------------------------- */

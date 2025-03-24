@@ -114,11 +114,9 @@ typedef struct WDiff
     diff_place_t ord;
     gboolean full;
 
-#ifdef HAVE_CHARSET
     gboolean utf8;
     // converter for translation of text
     GIConv converter;
-#endif
 
     struct
     {

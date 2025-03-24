@@ -51,9 +51,7 @@
 #include "lib/widget.h"
 #include "lib/mcconfig.h"
 #include "lib/event.h"  // mc_event_raise()
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "src/keymap.h"           // keybind_lookup_keymap_command()
 #include "src/setup.h"            // home_dir
@@ -516,13 +514,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     // an ordinary insertable character
     if (!w->ext_mode && x_key < 256)
     {
-#ifndef HAVE_CHARSET
-        if (is_printable (x_key))
-        {
-            char_for_insertion = x_key;
-            goto fin;
-        }
-#else
         int c;
 
         if (edit->charpoint >= MB_LEN_MAX)
@@ -603,7 +594,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 edit->charpoint = 0;
             }
         }
-#endif
     }
 
     // Commands specific to the key emulation

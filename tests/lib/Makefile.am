@@ -27,9 +27,7 @@ TESTS = \
 	utilunix__my_system_fork_child \
 	x_basename
 
-if CHARSET
 TESTS += mc_realpath
-endif
 
 check_PROGRAMS = $(TESTS)
 

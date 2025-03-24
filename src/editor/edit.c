@@ -55,10 +55,7 @@
 #include "lib/timefmt.h"  // time formatting
 #include "lib/lock.h"
 #include "lib/widget.h"
-
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"  // get_codepage_id
-#endif
 
 #include "src/usermenu.h"  // user_menu_cmd()
 
@@ -1021,7 +1018,6 @@ edit_right_char_move_cmd (WEdit *edit)
     int char_length = 1;
     int c;
 
-#ifdef HAVE_CHARSET
     if (edit->utf8)
     {
         c = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
@@ -1029,7 +1025,6 @@ edit_right_char_move_cmd (WEdit *edit)
             char_length = 1;
     }
     else
-#endif
         c = edit_buffer_get_current_byte (&edit->buffer);
 
     if (edit_options.cursor_beyond_eol && c == '\n')
@@ -1048,14 +1043,13 @@ edit_left_char_move_cmd (WEdit *edit)
     if (edit->column_highlight && edit_options.cursor_beyond_eol && edit->mark1 != edit->mark2
         && edit->over_col == 0 && edit->buffer.curs1 == edit_buffer_get_current_bol (&edit->buffer))
         return;
-#ifdef HAVE_CHARSET
+
     if (edit->utf8)
     {
         edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length < 1)
             char_length = 1;
     }
-#endif
 
     if (edit_options.cursor_beyond_eol && edit->over_col > 0)
         edit->over_col--;
@@ -1096,7 +1090,6 @@ edit_move_updown (WEdit *edit, long lines, gboolean do_scroll, gboolean directio
     edit_cursor_move (edit, p - edit->buffer.curs1);
     edit_move_to_prev_col (edit, p);
 
-#ifdef HAVE_CHARSET
     // search start of current multibyte char (like CJK)
     if (edit->buffer.curs1 > 0 && edit->buffer.curs1 + 1 < edit->buffer.size
         && edit_buffer_get_current_byte (&edit->buffer) >= 256)
@@ -1104,7 +1097,6 @@ edit_move_updown (WEdit *edit, long lines, gboolean do_scroll, gboolean directio
         edit_right_char_move_cmd (edit);
         edit_left_char_move_cmd (edit);
     }
-#endif
 
     edit->search_start = edit->buffer.curs1;
     edit->found_len = 0;
@@ -2164,11 +2156,9 @@ edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg)
     edit->redo_stack_size_mask = START_STACK_SIZE - 1;
     edit->redo_stack = g_malloc0 ((edit->redo_stack_size + 10) * sizeof (long));
 
-#ifdef HAVE_CHARSET
     edit->utf8 = FALSE;
     edit->converter = str_cnv_from_term;
     edit_set_codeset (edit);
-#endif
 
     if (!edit_load_file (edit))
     {
@@ -2235,10 +2225,8 @@ edit_clean (WEdit *edit)
     vfs_path_free (edit->dir_vpath, TRUE);
     edit_search_deinit (edit);
 
-#ifdef HAVE_CHARSET
     if (edit->converter != str_cnv_from_term)
         str_close_conv (edit->converter);
-#endif
 
     edit_purge_widget (edit);
 
@@ -2281,7 +2269,6 @@ edit_reload_line (WEdit *edit, const edit_arg_t *arg)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 void
 edit_set_codeset (WEdit *edit)
 {
@@ -2305,7 +2292,6 @@ edit_set_codeset (WEdit *edit)
     if (cp_id != NULL)
         edit->utf8 = str_isutf8 (cp_id);
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2625,7 +2611,6 @@ edit_delete (WEdit *edit, gboolean byte_delete)
     if (edit->buffer.curs2 == 0)
         return 0;
 
-#ifdef HAVE_CHARSET
     // if byte_delete == TRUE then delete only one byte not multibyte char
     if (edit->utf8 && !byte_delete)
     {
@@ -2633,9 +2618,6 @@ edit_delete (WEdit *edit, gboolean byte_delete)
         if (char_length < 1)
             char_length = 1;
     }
-#else
-    (void) byte_delete;
-#endif
 
     if (edit->mark2 != edit->mark1)
         edit_push_markers (edit);
@@ -2689,16 +2671,12 @@ edit_backspace (WEdit *edit, gboolean byte_delete)
     if (edit->mark2 != edit->mark1)
         edit_push_markers (edit);
 
-#ifdef HAVE_CHARSET
     if (edit->utf8 && !byte_delete)
     {
         edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length < 1)
             char_length = 1;
     }
-#else
-    (void) byte_delete;
-#endif
 
     for (i = 1; i <= char_length; i++)
     {
@@ -2811,7 +2789,6 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
 
         orig_c = c = edit_buffer_get_byte (&edit->buffer, p);
 
-#ifdef HAVE_CHARSET
         if (edit->utf8)
         {
             int utf_ch;
@@ -2830,18 +2807,12 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
         }
 
         c = convert_to_display_c (c);
-#endif
 
         if (c == '\n')
             return (upto != 0 ? (off_t) col : p);
         if (c == '\t')
             col += TAB_SIZE - col % TAB_SIZE;
-        else if ((c < 32 || c == 127)
-                 && (orig_c == c
-#ifdef HAVE_CHARSET
-                     || (!mc_global.utf8_display && !edit->utf8)
-#endif
-                         ))
+        else if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !edit->utf8)))
             // '\r' is shown as ^M, so we must advance 2 characters
             // Caret notation for control characters
             col += 2;
@@ -3450,15 +3421,12 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         if (edit->overwrite != 0)
         {
             // remove char only one time, after input first byte, multibyte chars
-#ifdef HAVE_CHARSET
             if (!mc_global.utf8_display || edit->charpoint == 0)
-#endif
                 if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
                     edit_delete (edit, FALSE);
         }
         if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
-#ifdef HAVE_CHARSET
         /**
            Encode 8-bit input as UTF-8, if display (locale) is *not* UTF-8,
            *but* source encoding *is* set to UTF-8; see ticket #3843 for the details.
@@ -3486,7 +3454,6 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
             }
         }
         else
-#endif
             edit_insert (edit, char_for_insertion);
 
         if (edit_options.auto_para_formatting)
@@ -4018,11 +3985,9 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
     case CK_EditMail:
         edit_mail_dialog (edit);
         break;
-#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         edit_select_codepage_cmd (edit);
         break;
-#endif
     case CK_InsertLiteral:
         edit_insert_literal_cmd (edit);
         break;

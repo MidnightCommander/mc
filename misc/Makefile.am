@@ -8,10 +8,7 @@ noinst_DATA = xterm.ad
 
 PKGDATA_IN = mc.charsets.in
 
-PKGDATA_OUT =
-if CHARSET
-PKGDATA_OUT += mc.charsets
-endif
+PKGDATA_OUT = mc.charsets
 
 dist_pkgdata_DATA = \
 	mc.lib

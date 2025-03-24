@@ -218,10 +218,6 @@ line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
     off_t xn, x;            // position counters
     off_t char_length = 0;  // character length in bytes
 
-#ifndef HAVE_CHARSET
-    (void) utf8;
-#endif
-
     for (xn = 0, x = 0; xn <= l; x = xn)
     {
         char *tb;
@@ -238,7 +234,6 @@ line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
             xn = next_tab_pos (x);
             break;
         default:
-#ifdef HAVE_CHARSET
             if (utf8)
             {
                 gunichar ch;
@@ -256,7 +251,6 @@ line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
                         x++;
                 }
             }
-#endif
 
             xn = x + 1;
             break;
@@ -480,7 +474,6 @@ format_paragraph (WEdit *edit, gboolean force)
     GString *t;
     long indent;
     unsigned char *t2;
-    gboolean utf8 = FALSE;
 
     if (edit_options.word_wrap_line_length < 2)
         return;
@@ -523,10 +516,7 @@ format_paragraph (WEdit *edit, gboolean force)
     }
 
     t2 = (unsigned char *) g_string_free (t, FALSE);
-#ifdef HAVE_CHARSET
-    utf8 = edit->utf8;
-#endif
-    format_this (t2, q - p, indent, utf8);
+    format_this (t2, q - p, indent, edit->utf8);
     put_paragraph (edit, t2, p, indent, size);
     g_free ((char *) t2);
 

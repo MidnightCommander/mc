@@ -43,13 +43,9 @@
 #include "lib/strutil.h"
 #include "lib/util.h"  // save_file_position()
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
-#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
-#endif
 
 #include "internal.h"
 
@@ -259,7 +255,6 @@ mcview_done (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 void
 mcview_set_codeset (WView *view)
 {
@@ -291,7 +286,6 @@ mcview_select_encoding (WView *view)
     if (do_select_codepage ())
         mcview_set_codeset (view);
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 

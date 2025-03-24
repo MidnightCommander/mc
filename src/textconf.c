@@ -119,10 +119,6 @@ static const char *const features[] = {
     N_ ("With internationalization support"),
 #endif
 
-#ifdef HAVE_CHARSET
-    N_ ("With multiple codepages support"),
-#endif
-
 #ifdef ENABLE_EXT2FS_ATTR
     N_ ("With ext2fs attributes support"),
 #endif

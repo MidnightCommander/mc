@@ -91,9 +91,7 @@ typedef struct
     gboolean is_panelized;               // Panelization: special mode, can't reload the file list
     panelized_descr_t *panelized_descr;  // Panelization descriptor
 
-#ifdef HAVE_CHARSET
     int codepage;  // Panel codepage
-#endif
 
     dir_list dir;          // Directory contents
     struct stat dir_stat;  // Stat of current dir: used by execute ()
@@ -160,10 +158,8 @@ void panel_reload (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, const panel_field_t *sort_order);
 void panel_re_sort (WPanel *panel);
 
-#ifdef HAVE_CHARSET
 void panel_change_encoding (WPanel *panel);
 vfs_path_t *remove_encoding_from_path (const vfs_path_t *vpath);
-#endif
 
 void update_panels (panel_update_flags_t flags, const char *current_file);
 int set_panel_formats (WPanel *p);

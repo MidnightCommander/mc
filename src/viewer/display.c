@@ -43,9 +43,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "src/setup.h"  // panels_options
 #include "src/keymap.h"
@@ -173,11 +171,8 @@ mcview_display_status (WView *view)
                             panels_options.kilobyte_si);
             tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end, buffer,
                         mcview_may_still_grow (view) ? "+" : " ",
-#ifdef HAVE_CHARSET
                         mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
-                                                       :
-#endif
-                                                       "");
+                                                       : "");
         }
     }
     widget_gotoyx (view, r->y, r->x);

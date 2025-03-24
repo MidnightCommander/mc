@@ -45,9 +45,7 @@
 #include "lib/lock.h"  // lock_file() and unlock_file()
 #include "lib/util.h"
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "internal.h"
 
@@ -113,10 +111,8 @@ mcview_display_hex (WView *view)
     mark_t boldflag_byte = MARK_NORMAL;
     mark_t boldflag_char = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
-#ifdef HAVE_CHARSET
-    int cont_bytes = 0;          // number of continuation bytes remanining from current UTF-8
-    gboolean cjk_right = FALSE;  // whether the second byte of a CJK is to be processed
-#endif
+    int cont_bytes = 0;             // number of continuation bytes remanining from current UTF-8
+    gboolean cjk_right = FALSE;     // whether the second byte of a CJK is to be processed
     gboolean utf8_changed = FALSE;  // whether any of the bytes in the UTF-8 were changed
 
     char hex_buff[10];  // A temporary buffer for sprintf and mvwaddstr
@@ -132,7 +128,6 @@ mcview_display_hex (WView *view)
     // Find the first displayable changed byte
     // In UTF-8 mode, go back by 1 or maybe 2 lines to handle continuation bytes properly.
     from = view->dpy_start;
-#ifdef HAVE_CHARSET
     if (view->utf8)
     {
         if (from >= view->bytes_per_line)
@@ -146,7 +141,7 @@ mcview_display_hex (WView *view)
             from -= view->bytes_per_line;
         }
     }
-#endif
+
     while (curr != NULL && (curr->offset < from))
         curr = curr->next;
 
@@ -171,7 +166,6 @@ mcview_display_hex (WView *view)
         for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++)
         {
             int c;
-#ifdef HAVE_CHARSET
             int ch = 0;
 
             if (view->utf8)
@@ -235,7 +229,6 @@ mcview_display_hex (WView *view)
                     curr = corr;
                 }
             }
-#endif
 
             /* For negative rows, the only thing we care about is overflowing
              * UTF-8 continuation bytes which were handled above. */
@@ -325,7 +318,6 @@ mcview_display_hex (WView *view)
                               view->hexview_in_text ? VIEW_SELECTED_COLOR
                                                     : MARKED_SELECTED_COLOR);
 
-#ifdef HAVE_CHARSET
             if (mc_global.utf8_display)
             {
                 if (!view->utf8)
@@ -336,11 +328,8 @@ mcview_display_hex (WView *view)
             else if (view->utf8)
                 ch = convert_from_utf_to_current_c (ch, view->converter);
             else
-#endif
             {
-#ifdef HAVE_CHARSET
                 c = convert_to_display_c (c);
-#endif
 
                 if (!is_printable (c))
                     c = '.';
@@ -350,11 +339,9 @@ mcview_display_hex (WView *view)
             if (text_start + bytes < r->cols)
             {
                 widget_gotoyx (view, r->y + row, r->x + text_start + bytes);
-#ifdef HAVE_CHARSET
                 if (view->utf8)
                     tty_print_anychar (ch);
                 else
-#endif
                     tty_print_char (c);
             }
 

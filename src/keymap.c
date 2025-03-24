@@ -224,9 +224,7 @@ static const global_keymap_ini_t default_panel_keymap[] = {
     { "Bottom", "alt-gt; end; c1" },
     { "PageDown", "pgdn; ctrl-v" },
     { "PageUp", "pgup; alt-v" },
-#ifdef HAVE_CHARSET
     { "SelectCodepage", "alt-e" },
-#endif
     { "Search", "ctrl-s; alt-s" },
     { "PanelOtherSync", "alt-i" },
     {
@@ -456,9 +454,7 @@ static const global_keymap_ini_t default_editor_keymap[] = {
     { "DeleteToEnd", "ctrl-k" },
     { "Undo", "ctrl-u; ctrl-backspace" },
     { "Redo", "alt-r" },
-#ifdef HAVE_CHARSET
     { "SelectCodepage", "alt-e" },
-#endif
     { "Goto", "alt-l; alt-shift-l" },
     { "Refresh", "ctrl-l" },
     { "Shell", "ctrl-o" },
@@ -558,9 +554,7 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
     { "Bookmark", "r" },
     { "FileNext", "ctrl-f" },
     { "FilePrev", "ctrl-b" },
-#ifdef HAVE_CHARSET
     { "SelectCodepage", "alt-e" },
-#endif
     { "Shell", "ctrl-o" },
     { "Ruler", "alt-r" },
     { "SearchForward", "slash" },
@@ -598,9 +592,7 @@ static const global_keymap_ini_t default_viewer_hex_keymap[] = {
     { "PageUp", "pgup; alt-v" },
     { "Top", "ctrl-home; ctrl-pgup; a1; alt-lt; g" },
     { "Bottom", "ctrl-end; ctrl-pgdn; c1; alt-gt; shift-g" },
-#ifdef HAVE_CHARSET
     { "SelectCodepage", "alt-e" },
-#endif
     { "Shell", "ctrl-o" },
     { "SearchForward", "slash" },
     { "SearchBackward", "question" },
@@ -654,9 +646,7 @@ static const global_keymap_ini_t default_diff_keymap[] = {
     { "End", "end" },
     { "Help", "f1" },
     { "Quit", "f10; q; shift-q; esc" },
-#ifdef HAVE_CHARSET
     { "SelectCodepage", "alt-e" },
-#endif
     { "Shell", "ctrl-o" },
     {
         NULL,

@@ -53,9 +53,7 @@
 #include "lib/lock.h"     // lock_file()
 #include "lib/file-entry.h"
 #include "lib/widget.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 #include "lib/event.h"     // mc_event_raise()
 #include "lib/mcconfig.h"  // mc_config_history_get_recent_item()
 
@@ -504,12 +502,10 @@ mcview_execute_cmd (WView *view, long command)
     case CK_BookmarkGoto:
         view->marks[view->marker] = view->dpy_start;
         break;
-#ifdef HAVE_CHARSET
     case CK_SelectCodepage:
         mcview_select_encoding (view);
         view->dirty++;
         break;
-#endif
     case CK_FileNext:
     case CK_FilePrev:
         // Does not work in panel mode
@@ -550,9 +546,7 @@ mcview_handle_key (WView *view, int key)
 {
     long command;
 
-#ifdef HAVE_CHARSET
     key = convert_from_input_c (key);
-#endif
 
     if (view->hexedit_mode && view->mode_flags.hex
         && mcview_handle_editkey (view, key) == MSG_HANDLED)

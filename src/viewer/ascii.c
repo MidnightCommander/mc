@@ -150,9 +150,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/util.h"  // is_printable()
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "src/setup.h"  // option_tab_spacing
 
@@ -202,7 +200,6 @@
 static int
 mcview_wcwidth (const WView *view, int c)
 {
-#ifdef HAVE_CHARSET
     if (view->utf8)
     {
         if (g_unichar_iswide (c))
@@ -210,26 +207,16 @@ mcview_wcwidth (const WView *view, int c)
         if (g_unichar_iszerowidth (c))
             return 0;
     }
-#else
-    (void) view;
-    (void) c;
-#endif
+
     return 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
+static inline gboolean
 mcview_ismark (const WView *view, int c)
 {
-#ifdef HAVE_CHARSET
-    if (view->utf8)
-        return g_unichar_ismark (c);
-#else
-    (void) view;
-    (void) c;
-#endif
-    return FALSE;
+    return (view->utf8 && g_unichar_ismark (c));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -238,19 +225,13 @@ mcview_ismark (const WView *view, int c)
 static gboolean
 mcview_is_non_spacing_mark (const WView *view, int c)
 {
-#ifdef HAVE_CHARSET
     if (view->utf8)
     {
-        GUnicodeType type;
-
-        type = g_unichar_type (c);
+        const GUnicodeType type = g_unichar_type (c);
 
         return type == G_UNICODE_NON_SPACING_MARK || type == G_UNICODE_ENCLOSING_MARK;
     }
-#else
-    (void) view;
-    (void) c;
-#endif
+
     return FALSE;
 }
 
@@ -260,14 +241,7 @@ mcview_is_non_spacing_mark (const WView *view, int c)
 static gboolean
 mcview_is_spacing_mark (const WView *view, int c)
 {
-#ifdef HAVE_CHARSET
-    if (view->utf8)
-        return g_unichar_type (c) == G_UNICODE_SPACING_MARK;
-#else
-    (void) view;
-    (void) c;
-#endif
-    return FALSE;
+    return (view->utf8 && g_unichar_type (c) == G_UNICODE_SPACING_MARK);
 }
 #endif
 
@@ -276,15 +250,9 @@ mcview_is_spacing_mark (const WView *view, int c)
 static gboolean
 mcview_isprint (const WView *view, int c)
 {
-#ifdef HAVE_CHARSET
     if (!view->utf8)
         c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
     return g_unichar_isprint (c);
-#else
-    (void) view;
-    // TODO this is very-very buggy by design: ticket 3257 comments 0-1
-    return is_printable (c);
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -292,7 +260,6 @@ mcview_isprint (const WView *view, int c)
 static int
 mcview_char_display (const WView *view, int c, char *s)
 {
-#ifdef HAVE_CHARSET
     if (mc_global.utf8_display)
     {
         if (!view->utf8)
@@ -318,9 +285,7 @@ mcview_char_display (const WView *view, int c, char *s)
         // TODO the is_printable check below will be broken for this
         c = convert_to_display_c (c);
     }
-#else
-    (void) view;
-#endif
+
     // TODO this is very-very buggy by design: ticket 3257 comments 0-1
     if (!is_printable (c))
         c = '.';
@@ -349,7 +314,6 @@ mcview_get_next_char (WView *view, mcview_state_machine_t *state, int *c)
     if (view->force_max >= 0 && state->offset >= view->force_max)
         return FALSE;
 
-#ifdef HAVE_CHARSET
     if (view->utf8)
     {
         int char_length = 0;
@@ -363,7 +327,7 @@ mcview_get_next_char (WView *view, mcview_state_machine_t *state, int *c)
         state->offset += char_length;
         return TRUE;
     }
-#endif
+
     if (!mcview_get_byte (view, state->offset, c))
         return FALSE;
     state->offset++;

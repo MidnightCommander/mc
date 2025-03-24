@@ -314,9 +314,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
     if (!mcview_is_in_panel (view))
         view->dpy_text_column = 0;
 
-#ifdef HAVE_CHARSET
     mcview_set_codeset (view);
-#endif
 
     if (command != NULL && (view->mode_flags.magic || file == NULL || file[0] == '\0'))
         retval = mcview_load_command_output (view, command);

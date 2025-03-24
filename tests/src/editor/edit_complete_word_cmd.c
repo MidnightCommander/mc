@@ -30,15 +30,11 @@
 
 #include <ctype.h>
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 #include "lib/strutil.h"
 
 #include "src/vfs/local/local.c"
-#ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
-#endif
 #include "src/editor/editwidget.h"
 #include "src/editor/editmacros.h"  // edit_load_macro_cmd()
 #include "src/editor/editcomplete.h"
@@ -160,10 +156,8 @@ my_setup (void)
     vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-#ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif
 
     mc_global.main_config = mc_config_init ("edit_complete_word_cmd.ini", FALSE);
     mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION,
@@ -192,19 +186,13 @@ my_teardown (void)
     g_free (test_edit);
 
     mc_config_deinit (mc_global.main_config);
-
-#ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif
-
     vfs_shut ();
-
     str_uninit_strings ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 /* @DataSource("test_autocomplete_ds") */
 static const struct test_autocomplete_ds
 {
@@ -363,8 +351,6 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
 }
 END_PARAMETRIZED_TEST
 
-#endif
-
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -377,10 +363,8 @@ main (void)
     tcase_add_checked_fixture (tc_core, my_setup, my_teardown);
 
     // Add new tests here: ***************
-#ifdef HAVE_CHARSET
     mctest_add_parameterized_test (tc_core, test_autocomplete, test_autocomplete_ds);
     mctest_add_parameterized_test (tc_core, test_autocomplete_single, test_autocomplete_single_ds);
-#endif
     // ***********************************
 
     return mctest_run_all (tc_core);

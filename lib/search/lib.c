@@ -33,9 +33,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
 
 #include "internal.h"
 
@@ -69,7 +67,6 @@ mc_search__change_case_str (const char *charset, const GString *str, case_conv_f
     gchar *dst_str;
     gchar *dst_ptr;
     gsize dst_len;
-#ifdef HAVE_CHARSET
     GString *converted_str;
 
     if (charset == NULL)
@@ -90,20 +87,7 @@ mc_search__change_case_str (const char *charset, const GString *str, case_conv_f
 
     ret = mc_search__recode_str (dst_str, dst_len, cp_display, charset);
     g_free (dst_str);
-#else
-    (void) charset;
 
-    dst_len = str->len + 1;  // +1 is required for str_toupper/str_tolower
-    dst_str = g_malloc (dst_len);
-
-    for (src_ptr = str->str, dst_ptr = dst_str; case_conv (src_ptr, &dst_ptr, &dst_len);
-         src_ptr += str_length_char (src_ptr))
-        ;
-    *dst_ptr = '\0';
-
-    ret = g_string_new_len (dst_str, dst_len);
-    g_free (dst_str);
-#endif
     return ret;
 }
 
@@ -156,34 +140,22 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
     GString *converted_str;
     const gchar *next_char;
 
-#ifdef HAVE_CHARSET
     GString *converted_str2;
 
     if (charset == NULL)
         charset = cp_source;
 
     converted_str = mc_search__recode_str (str, str_len, charset, cp_display);
-#else
-    (void) charset;
-
-    converted_str = g_string_new_len (str, str_len);
-#endif
-
     next_char = str_cget_next_char (converted_str->str);
     g_string_set_size (converted_str, (gsize) (next_char - converted_str->str));
 
-#ifdef HAVE_CHARSET
     converted_str2 =
         mc_search__recode_str (converted_str->str, converted_str->len, cp_display, charset);
-#endif
     if (just_letters != NULL)
         *just_letters = str_isalnum (converted_str->str) && !str_isdigit (converted_str->str);
-#ifdef HAVE_CHARSET
     g_string_free (converted_str, TRUE);
+
     return converted_str2;
-#else
-    return converted_str;
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

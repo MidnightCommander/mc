@@ -26,10 +26,7 @@
 
 #include "tests/mctest.h"
 
-#ifdef HAVE_CHARSET
 #include "lib/charsets.h"
-#endif
-
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.h"
@@ -67,10 +64,8 @@ setup (void)
 
     init_test_classes ();
 
-#ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -79,10 +74,7 @@ setup (void)
 static void
 teardown (void)
 {
-#ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif
-
     vfs_shut ();
     str_uninit_strings ();
 }
@@ -138,7 +130,6 @@ static const struct test_vfs_path_tokens_count_ds
         VPF_NONE,
         5,
     },
-#ifdef HAVE_CHARSET
     {
         // 7.
         "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/"
@@ -146,7 +137,6 @@ static const struct test_vfs_path_tokens_count_ds
         VPF_NONE,
         11,
     },
-#endif
 };
 
 /* @Test(dataSource = "test_vfs_path_tokens_count_ds") */
@@ -256,7 +246,6 @@ static const struct test_vfs_path_tokens_get_ds
         0,
         "path2/path3/path4",
     },
-#ifdef HAVE_CHARSET
     // 11. get 'path2/path3' by 1,2  from LOCAL VFS with encoding
     {
         "test3://path1/path2/test3://#enc:KOI8-R/path3/path4",
@@ -271,7 +260,6 @@ static const struct test_vfs_path_tokens_get_ds
         2,
         "#enc:KOI8-R/path2/path3",
     },
-#endif
     /* TODO: currently this test don't passed. Probably broken string URI parser
      * // 13. get 'path2/path3' by 1,2  from LOCAL VFS
      {
@@ -324,7 +312,6 @@ static const struct test_vfs_path_append_vpath_ds
         "test3://111/22/33"
         "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path",
     },
-#ifdef HAVE_CHARSET
     {
         // 1.
         "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/"
@@ -335,7 +322,6 @@ static const struct test_vfs_path_append_vpath_ds
         "bla-bla/some/path/test3://111/22/33"
         "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path",
     },
-#endif
 };
 
 /* @Test(dataSource = "test_vfs_path_append_vpath_ds") */
