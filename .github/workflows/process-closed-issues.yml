@@ -1,0 +1,29 @@
+name: Process closed issues
+
+on:
+  issues:
+    types: [ closed ]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number
+        required: true
+        type: number
+
+jobs:
+  remove-labels-on-close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    if: ${{ ! github.event.issue.pull_request }}
+
+    permissions:
+      issues: write
+
+    steps:
+      - run: |
+          gh issue edit ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+            --remove-label "state: in review,state: approved"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
