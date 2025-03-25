@@ -12,6 +12,8 @@ Resolves: #...
 
 <!-- _Put an `x` in the boxes that apply:_ -->
 
+👉 Our coding style can be found here: https://midnight-commander.org/coding-style/ 👈
+
 - [ ] I have referenced the issue(s) resolved by this PR (if any)
 - [ ] I have signed-off my contribution with `git commit --amend -s`
 - [ ] Lint and unit tests pass locally with my changes (`make indent && make check`)
