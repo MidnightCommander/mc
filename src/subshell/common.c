@@ -621,6 +621,7 @@ read_command_line_buffer (gboolean test_mode)
 
     bytes =
         read (command_buffer_pipe[READ], subshell_command_buffer, sizeof (subshell_command_buffer));
+    // FIXME: what about bytes < 0?
     if (bytes == 0 || bytes == sizeof (subshell_command_buffer))
         return FALSE;
 
@@ -653,6 +654,7 @@ read_command_line_buffer (gboolean test_mode)
 
     bytes =
         read (command_buffer_pipe[READ], subshell_cursor_buffer, sizeof (subshell_cursor_buffer));
+    // FIXME: what about bytes < 0?
     if (bytes == 0)
         return FALSE;
 
@@ -1805,6 +1807,7 @@ flush_subshell (int max_wait_length, int how)
         timeleft.tv_usec = 0;
 
         bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
+        // FIXME: what about bytes <= 0?
         if (how == VISIBLY)
             write_all (STDOUT_FILENO, pty_buffer, bytes);
     }
