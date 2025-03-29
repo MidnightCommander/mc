@@ -1470,7 +1470,7 @@ edit_ok_to_quit (WEdit *edit)
         query_set_sel (2);
 
         msg = g_strdup_printf (_ ("File %s was modified.\nSave before close?"), fname);
-        act = edit_query_dialog3 (_ ("Close file"), msg, _ ("&Yes"), _ ("&No"), _ ("&Cancel quit"));
+        act = edit_query_dialog3 (_ ("Close file"), msg, _ ("&Yes"), _ ("&No"), _ ("&Cancel"));
     }
     else
     {
@@ -1498,7 +1498,7 @@ edit_ok_to_quit (WEdit *edit)
     case 1:  // No
     default:
         break;
-    case 2:   // Cancel quit
+    case 2:   // Cancel
     case -1:  // Esc
         return FALSE;
     }
