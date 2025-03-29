@@ -176,7 +176,7 @@ typedef enum
     USBDEVICE_SUPER_MAGIC = 0x9fa2
 } filegui_nonattrs_fs_t;
 
-/* Used for button result values */
+// Used for button result values
 typedef enum
 {
     REPLACE_YES = B_USER,
@@ -191,9 +191,7 @@ typedef enum
     REPLACE_ABORT
 } replace_action_t;
 
-/* This structure describes the UI and internal data required by a file
- * operation context.
- */
+// UI and internal data required by a file operation context.
 typedef struct
 {
     // ETA and bps
@@ -1001,8 +999,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
 
     widget_select (progress_buttons[0].w);
 
-    /* We will manage the dialog without any help, that's why
-       we have to call dlg_init */
+    // we will manage the dialog without any help, that's why we have to call dlg_init
     dlg_init (ui->op_dlg);
 }
 
@@ -1022,9 +1019,6 @@ file_progress_ui_destroy (file_op_context_t *ctx)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
-   show progressbar for file
- */
 
 void
 file_progress_show (file_op_context_t *ctx, off_t done, off_t total, const char *stalled_msg,
@@ -1159,8 +1153,6 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64
         }
     }
 }
-
-/* }}} */
 
 /* --------------------------------------------------------------------------------------------- */
 
