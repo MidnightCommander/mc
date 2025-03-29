@@ -789,6 +789,8 @@ enum kitty_keyboard_protocol_t
 static gboolean
 peek_subshell_switch_key (const char *buffer, size_t len)
 {
+    csi_command_t csi;
+
     if (len == 0)
         return FALSE;
     if (buffer[0] == (XCTRL ('o') & 255))
@@ -801,8 +803,6 @@ peek_subshell_switch_key (const char *buffer, size_t len)
         return FALSE;
     buffer += 2;
     len -= 2;
-
-    struct csi_command_t csi;
 
     if (!parse_csi (&csi, &buffer, buffer + len))
         return FALSE;
