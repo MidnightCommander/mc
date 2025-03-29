@@ -2,7 +2,7 @@
 #
 # Squash file system
 #
-# tested to comply with unsquashfs version 4.2 (2011/02/28)'s output
+# tested to comply with the output of unsquashfs version 4.6.1 (2023/03/25)
 
 SQUASHFS="${MC_TEST_EXTFS_LIST_CMD:-unsquashfs}"
 AWK="@AWK@"
@@ -13,8 +13,6 @@ mcsqfs_list ()
 {
   $SQUASHFS -d "" -lls "$1" | $AWK '
     {
-      if (NR < 5)
-        next
       split($2, a, "/")
       file_type=substr($1,1,1)
       file_size=file_type == "c" || file_type == "b" ? 0 : $3

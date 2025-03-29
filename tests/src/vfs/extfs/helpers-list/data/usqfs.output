@@ -1,3 +1,7 @@
+drwxr-xr-x   1        235 2024-09-23 14:34:00 
+drwxr-xr-x   1        778 2024-09-23 14:34:00 /bin
+lrwxrwxrwx   1          7 2024-09-23 14:34:00 /bin/ash -> busybox
+-rwxr-xr-x   1        205 2024-09-23 14:34:00 /bin/board_detect
 -rwxr-xr-x   1     327717 2024-09-23 14:34:00 /bin/busybox
 lrwxrwxrwx   1          7 2024-09-23 14:34:00 /bin/cat -> busybox
 lrwxrwxrwx   1          7 2024-09-23 14:34:00 /bin/chgrp -> busybox
