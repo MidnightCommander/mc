@@ -1352,12 +1352,12 @@ subshell_name_quote (const char *s)
      * sequence of the form \0nnn, where "nnn" is the numeric value of the
      * character converted to octal number.
      */
-    for (const char su = s; su[0] != '\0'; su = n)
+    for (const char *su = s; su[0] != '\0'; su = n)
     {
         n = str_cget_next_char_safe (su);
 
         if (str_isalnum (su))
-            g_string_append_len (ret, su, n - su);
+            g_string_append_len (ret, su, (size_t) (n - su));
         else
             for (size_t c = 0; c < (size_t) (n - su); c++)
                 g_string_append_printf (ret, "\\0%03o", (unsigned char) su[c]);
