@@ -53,7 +53,8 @@ START_TEST (test_parse_csi)
 {
     const char *s = &"\x1b[=5uRest"[2];
     const char *end = s + strlen (s);
-    gboolean ok = parse_csi (NULL, &s, end);
+    const gboolean ok = parse_csi (NULL, &s, end);
+
     ck_assert_msg (ok, "failed to parse CSI");
     ck_assert_str_eq (s, "Rest");
 }
@@ -70,6 +71,7 @@ START_TEST (test_strip_ctrl_codes)
         "\033=");
     char *actual = strip_ctrl_codes (s);
     const char *expected = "$ ";
+
     ck_assert_str_eq (actual, expected);
     free (s);
 }
