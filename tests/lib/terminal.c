@@ -64,7 +64,7 @@ END_TEST
 
 START_TEST (test_strip_ctrl_codes)
 {
-    char *s = strdup (
+    char *s = g_strdup (
         "\033]0;~\a\033[30m\033(B\033[m\033]133;A;special_key=1\a$ "
         "\033[K\033[?2004h\033[>4;1m\033[=5u\033=\033[?2004l\033[>4;0m\033[=0u\033>\033[?2004h"
         "\033[>4;1m\033[=5u\033=\033[?2004l\033[>4;0m\033[=0u\033>\033[?2004h\033[>4;1m\033[=5u"
@@ -73,7 +73,7 @@ START_TEST (test_strip_ctrl_codes)
     const char *expected = "$ ";
 
     ck_assert_str_eq (actual, expected);
-    free (s);
+    g_free (s);
 }
 END_TEST
 
