@@ -986,7 +986,9 @@ read_file_system_list (void)
                 me->me_mntroot = NULL;
                 me->me_type = g_strdup (mnt.mnt_fstype);
                 me->me_type_malloced = 1;
-                me->me_dummy = MNT_IGNORE (&mnt) != 0;
+                /* The cast from 'struct extmnttab *' to 'struct mnttab *' is OK
+                   because 'struct extmnttab' extends 'struct mnttab'.  */
+                me->me_dummy = MNT_IGNORE ((struct mnttab *) &mnt) != 0;
                 me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
                 me->me_dev = makedev (mnt.mnt_major, mnt.mnt_minor);
 
