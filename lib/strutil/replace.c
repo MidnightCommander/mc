@@ -92,7 +92,7 @@ str_replace_all (const char *haystack, const char *needle, const char *replaceme
     if (*haystack != '\0')
     {
         if (return_str == NULL)
-            return strdup (haystack);
+            return g_strdup (haystack);
 
         g_string_append (return_str, haystack);
     }
