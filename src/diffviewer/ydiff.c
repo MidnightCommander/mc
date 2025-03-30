@@ -613,7 +613,7 @@ dview_get_utf (const char *str, int *ch, int *ch_length)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static size_t
 dview_str_utf8_offset_to_pos (const char *text, size_t length)
 {
     ptrdiff_t result;
