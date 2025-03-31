@@ -123,7 +123,7 @@ sigwinch_handler (int dummy)
 /**
  * Get visible part of area.
  *
- * @returns TRUE if any part of area is in screen bounds, FALSE otherwise.
+ * @return TRUE if any part of area is in screen bounds, FALSE otherwise.
  */
 static gboolean
 tty_clip (int *y, int *x, int *rows, int *cols)
