@@ -818,7 +818,7 @@ listbox_remove_list (WListbox *l)
  * @param data item data
  * @param free_data if TRUE free the @data when @l is destroyed,
  *
- * @returns pointer to copy of @text.
+ * @return pointer to copy of @text.
  */
 char *
 listbox_add_item (WListbox *l, listbox_append_t pos, int hotkey, const char *text, void *data,
@@ -841,7 +841,7 @@ listbox_add_item (WListbox *l, listbox_append_t pos, int hotkey, const char *tex
  *
  * After this call, @text belongs to the @l and may no longer be modified by the caller.
  *
- * @returns pointer to @text.
+ * @return pointer to @text.
  */
 char *
 listbox_add_item_take (WListbox *l, listbox_append_t pos, int hotkey, char *text, void *data,
