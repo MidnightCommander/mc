@@ -34,9 +34,6 @@ void load_codepages_list (void);
 void free_codepages_list (void);
 gboolean is_supported_encoding (const char *encoding);
 char *init_translation_table (int cpsource, int cpdisplay);
-void convert_to_display (char *str);
-void convert_from_input (char *str);
-void convert_string (unsigned char *str);
 
 /*
  * Converter from utf to selected codepage
