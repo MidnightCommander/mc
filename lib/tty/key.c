@@ -1279,7 +1279,7 @@ lookup_keyname (const char *name, int *idx)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-lookup_keycode (const long code, int *idx)
+lookup_keycode (const int code, int *idx)
 {
     if (code != 0)
     {
