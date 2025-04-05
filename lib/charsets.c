@@ -307,7 +307,7 @@ init_translation_table (int cpsource, int cpdisplay)
     cp_source = ((codepage_desc *) g_ptr_array_index (codepages, cpsource))->id;
     cp_display = ((codepage_desc *) g_ptr_array_index (codepages, cpdisplay))->id;
 
-    // display <- inpit table
+    // display <- input table
 
     cd = g_iconv_open (cp_display, cp_source);
     if (cd == INVALID_CONV)
@@ -318,7 +318,7 @@ init_translation_table (int cpsource, int cpdisplay)
 
     g_iconv_close (cd);
 
-    // inpit <- display table
+    // input <- display table
 
     cd = g_iconv_open (cp_source, cp_display);
     if (cd == INVALID_CONV)
@@ -334,16 +334,6 @@ init_translation_table (int cpsource, int cpdisplay)
     g_iconv_close (cd);
 
     return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-convert_to_display (char *str)
-{
-    if (str != NULL)
-        for (; *str != '\0'; str++)
-            *str = conv_displ[(unsigned char) *str];
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -368,16 +358,6 @@ str_nconvert_to_display (const char *str, int len)
     str_nconvert (conv, str, len, buff);
     str_close_conv (conv);
     return buff;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-convert_from_input (char *str)
-{
-    if (str != NULL)
-        for (; *str != '\0'; str++)
-            *str = conv_input[(unsigned char) *str];
 }
 
 /* --------------------------------------------------------------------------------------------- */
