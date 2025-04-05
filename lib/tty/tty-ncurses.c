@@ -168,7 +168,7 @@ tty_clip (int *y, int *x, int *rows, int *cols)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_tty_normalize_lines_char (const char *ch)
+mc_tty_normalize_lines_char (const char *str)
 {
     char *str2;
     int res;
@@ -204,16 +204,14 @@ mc_tty_normalize_lines_char (const char *ch)
         { NULL, 0 },
     };
 
-    if (ch == NULL)
+    if (str == NULL)
         return (int) ' ';
 
     for (res = 0; lines_codes[res].line; res++)
-    {
-        if (strcmp (ch, lines_codes[res].line) == 0)
+        if (strcmp (str, lines_codes[res].line) == 0)
             return lines_codes[res].line_code;
-    }
 
-    str2 = mc_tty_normalize_from_utf8 (ch);
+    str2 = mc_tty_normalize_from_utf8 (str);
     res = g_utf8_get_char_validated (str2, -1);
 
     if (res < 0)
