@@ -599,7 +599,7 @@ edit_suggest_current_word (WEdit *edit)
     {
         GString *tmp_word;
 
-        tmp_word = str_convert_to_display (match_word->str);
+        tmp_word = str_nconvert_to_display (match_word->str, match_word->len);
         g_string_free (match_word, TRUE);
         match_word = tmp_word;
     }
