@@ -212,7 +212,7 @@ background_attention (int fd, void *closure)
         void *pointer;
     } routine;
     //    void *routine;
-    int argc, i, status;
+    int argc;
     char *data[MAXCALLARGS];
     ssize_t bytes, ret;
     TaskList *p;
@@ -225,6 +225,8 @@ background_attention (int fd, void *closure)
     bytes = read (fd, &routine.pointer, sizeof (routine));
     if (bytes == -1 || (size_t) bytes < (sizeof (routine)))
     {
+        int status;
+
         unregister_task_running (ctx->pid, fd);
 
         if (waitpid (ctx->pid, &status, WNOHANG) == 0)
@@ -257,7 +259,7 @@ background_attention (int fd, void *closure)
     if (have_ctx != 0 && read (fd, ctx, sizeof (*ctx)) != sizeof (*ctx))
         return reading_failed (-1, data);
 
-    for (i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++)
     {
         int size;
 
@@ -335,12 +337,12 @@ background_attention (int fd, void *closure)
 
         // Send the result code and the value for shared variables
         ret = write (to_child_fd, &result, sizeof (result));
-        if (have_ctx != 0 && to_child_fd != -1)
+        if (have_ctx != 0)
             ret = write (to_child_fd, ctx, sizeof (*ctx));
     }
     else if (type == Return_String)
     {
-        int len;
+        int len = 0;
         char *resstr = NULL;
 
         /* FIXME: string routines should also use the Foreground/Background
@@ -367,22 +369,19 @@ background_attention (int fd, void *closure)
             g_assert_not_reached ();
         }
 
-        if (resstr != NULL)
+        if (resstr == NULL)
+            ret = write (to_child_fd, &len, sizeof (len));
+        else
         {
-            len = strlen (resstr);
+            len = (int) strlen (resstr);
             ret = write (to_child_fd, &len, sizeof (len));
             if (len != 0)
                 ret = write (to_child_fd, resstr, len);
             g_free (resstr);
         }
-        else
-        {
-            len = 0;
-            ret = write (to_child_fd, &len, sizeof (len));
-        }
     }
 
-    for (i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++)
         g_free (data[i]);
 
     repaint_screen ();
