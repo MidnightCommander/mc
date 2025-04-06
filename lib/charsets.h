@@ -27,15 +27,15 @@ void free_codepages_list (void);
 gboolean is_supported_encoding (const char *encoding);
 char *init_translation_table (int cpsource, int cpdisplay);
 
-int convert_8bit_to_display (int c);
-int convert_8bit_from_input (int c);
+int convert_8bit_to_display (const int c);
+int convert_8bit_from_input (const int c);
 
 unsigned char convert_utf8_to_input (const char *str);
 
-unsigned char convert_unichar_to_8bit (int input_char, GIConv conv);
-int convert_8bit_to_unichar (char input_char, GIConv conv);
+unsigned char convert_unichar_to_8bit (const gunichar c, GIConv conv);
+gunichar convert_8bit_to_unichar (const char c, GIConv conv);
 
-int convert_8bit_to_input_unichar (char input_char);
+gunichar convert_8bit_to_input_unichar (const char c);
 
 GString *str_nconvert_to_input (const char *str, int len);
 GString *str_nconvert_to_display (const char *str, int len);
