@@ -203,9 +203,8 @@ mc_search_prepare (mc_search_t *lc_mc_search)
 
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
-            const char *id;
+            const char *id = get_codepage_id (loop1);
 
-            id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
             if (g_ascii_strcasecmp (id, lc_mc_search->original.charset) == 0)
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search,
