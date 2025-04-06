@@ -251,7 +251,7 @@ get_codepage_index (const char *id)
     if (strcmp (id, NO_TRANSLATION) == 0)
         return -1;
     for (guint i = 0; i < codepages->len; i++)
-        if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
+        if (strcmp (id, get_codepage_id (i)) == 0)
             return (int) i;
     return -1;
 }
@@ -304,8 +304,9 @@ init_translation_table (int cpsource, int cpdisplay)
         conv_displ[i] = i;
         conv_input[i] = i;
     }
-    cp_source = ((codepage_desc *) g_ptr_array_index (codepages, cpsource))->id;
-    cp_display = ((codepage_desc *) g_ptr_array_index (codepages, cpdisplay))->id;
+
+    cp_source = get_codepage_id (cpsource);
+    cp_display = get_codepage_id (cpdisplay);
 
     // display <- input table
 
