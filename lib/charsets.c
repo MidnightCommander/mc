@@ -64,6 +64,8 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
+static const char NON_PRINTABLE_CHAR = '.';
+
 static const char NO_TRANSLATION[] = N_ ("No translation");
 
 static unsigned char conv_display_table[256];
@@ -356,21 +358,17 @@ init_translation_table (int cpsource, int cpdisplay)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-convert_8bit_to_display (int c)
+convert_8bit_to_display (const int c)
 {
-    if (c < 0 || c >= 256)
-        return c;
-    return (int) conv_display_table[c];
+    return (c < 0 || c >= 256 ? c : (int) conv_display_table[c]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-convert_8bit_from_input (int c)
+convert_8bit_from_input (const int c)
 {
-    if (c < 0 || c >= 256)
-        return c;
-    return (int) conv_input_table[c];
+    return (c < 0 || c >= 256 ? c : (int) conv_input_table[c]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -434,16 +432,15 @@ unsigned char
 convert_utf8_to_input (const char *str)
 {
     unsigned char buf_ch[MB_LEN_MAX + 1];
-    unsigned char ch = '.';
+    unsigned char ch = NON_PRINTABLE_CHAR;
     GIConv conv;
-    const char *cp_to;
 
     if (str == NULL)
-        return '.';
+        return NON_PRINTABLE_CHAR;
 
-    cp_to = get_codepage_id (mc_global.source_codepage);
+    const char *cp_to = get_codepage_id (mc_global.source_codepage);
+
     conv = str_crt_conv_to (cp_to);
-
     if (conv != INVALID_CONV)
     {
         switch (str_translate_char (conv, str, -1, (char *) buf_ch, sizeof (buf_ch)))
@@ -451,13 +448,11 @@ convert_utf8_to_input (const char *str)
         case ESTR_SUCCESS:
             ch = buf_ch[0];
             break;
-        case ESTR_PROBLEM:
-        case ESTR_FAILURE:
-            ch = '.';
-            break;
         default:
+            ch = NON_PRINTABLE_CHAR;
             break;
         }
+
         str_close_conv (conv);
     }
 
@@ -469,39 +464,30 @@ convert_utf8_to_input (const char *str)
 /**
  * Convert Unicode character to 8-bit one using specified coder
  *
- * @param input_char Unicode character
+ * @param c Unicode character
  * @param conv conversion descriptor
  *
  * @return 8-bit character
  */
 unsigned char
-convert_unichar_to_8bit (int input_char, GIConv conv)
+convert_unichar_to_8bit (const gunichar c, GIConv conv)
 {
     unsigned char str[MB_LEN_MAX + 1];
     unsigned char buf_ch[MB_LEN_MAX + 1];
-    unsigned char ch = '.';
-    int res;
+    const int res = g_unichar_to_utf8 (c, (char *) str);
 
-    res = g_unichar_to_utf8 (input_char, (char *) str);
     if (res == 0)
-        return ch;
+        return NON_PRINTABLE_CHAR;
 
     str[res] = '\0';
 
     switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
     {
     case ESTR_SUCCESS:
-        ch = buf_ch[0];
-        break;
-    case ESTR_PROBLEM:
-    case ESTR_FAILURE:
-        ch = '.';
-        break;
+        return buf_ch[0];
     default:
-        break;
+        return NON_PRINTABLE_CHAR;
     }
-
-    return ch;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -509,39 +495,31 @@ convert_unichar_to_8bit (int input_char, GIConv conv)
 /**
  * Convert 8-bit character to Unicode one using specified coder
  *
- * @param input_char 8-bit character
+ * @param c 8-bit character
  * @param conv conversion descriptor
  *
  * @return Unicode character
  */
-int
-convert_8bit_to_unichar (char input_char, GIConv conv)
+gunichar
+convert_8bit_to_unichar (const char c, GIConv conv)
 {
     unsigned char str[2];
     unsigned char buf_ch[MB_LEN_MAX + 1];
-    int ch;
 
-    str[0] = (unsigned char) input_char;
+    str[0] = (const unsigned char) c;
     str[1] = '\0';
 
     switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
     {
     case ESTR_SUCCESS:
     {
-        int res;
+        const gunichar res = g_utf8_get_char_validated ((char *) buf_ch, -1);
 
-        res = g_utf8_get_char_validated ((char *) buf_ch, -1);
-        ch = res >= 0 ? res : buf_ch[0];
-        break;
+        return (res == (gunichar) (-1) || res == (gunichar) (-2) ? buf_ch[0] : res);
     }
-    case ESTR_PROBLEM:
-    case ESTR_FAILURE:
     default:
-        ch = '.';
-        break;
+        return NON_PRINTABLE_CHAR;
     }
-
-    return ch;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -549,27 +527,25 @@ convert_8bit_to_unichar (char input_char, GIConv conv)
 /**
  * Convert 8-bit character to Unicode one in the input (source) codepage.
  *
- * @param input_char 8-bit character
+ * @param c 8-bit character
  *
  * @return Unicode character
  */
-int
-convert_8bit_to_input_unichar (char input_char)
+gunichar
+convert_8bit_to_input_unichar (const char c)
 {
-    int ch = '.';
+    gunichar uni = NON_PRINTABLE_CHAR;
     GIConv conv;
-    const char *cp_from;
+    const char *cp_to = get_codepage_id (mc_global.source_codepage);
 
-    cp_from = get_codepage_id (mc_global.source_codepage);
-
-    conv = str_crt_conv_to (cp_from);
+    conv = str_crt_conv_to (cp_to);
     if (conv != INVALID_CONV)
     {
-        ch = convert_8bit_to_unichar (input_char, conv);
+        uni = convert_8bit_to_unichar (c, conv);
         str_close_conv (conv);
     }
 
-    return ch;
+    return uni;
 }
 
 /* --------------------------------------------------------------------------------------------- */
