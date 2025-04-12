@@ -2,7 +2,7 @@ name: Approve command
 
 on:
   issue_comment:
-    types: [ created ]
+    types: [ created, edited ]
   workflow_dispatch:
     inputs:
       issue_number:
