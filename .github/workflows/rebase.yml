@@ -5,6 +5,15 @@ name: Rebase command
 on:
   issue_comment:
     types: [ created ]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number
+        required: true
+        type: number
+
+env:
+  AUTHOR_ROLES: ("OWNER" "MEMBER" "COLLABORATOR")
 
 jobs:
   rebase:
@@ -12,7 +21,7 @@ jobs:
     timeout-minutes: 5
 
     # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
-    if: github.event.issue.pull_request && github.event.comment.body == '/rebase' && github.event.comment.author_association == 'MEMBER'
+    if: ${{ (github.event.issue.pull_request && github.event.comment.body == '/rebase' && contains(env.AUTHOR_ROLES, github.event.comment.author_association)) || inputs.issue_number != '' }}
 
     permissions:
       contents: read
