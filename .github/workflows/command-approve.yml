@@ -10,16 +10,13 @@ on:
         required: true
         type: number
 
-env:
-  AUTHOR_ROLES: ("OWNER" "MEMBER" "COLLABORATOR")
-
 jobs:
   approve-issue:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
-    if: ${{ !github.event.issue.pull_request && ((github.event.comment.body == '/approve' && contains(env.AUTHOR_ROLES, github.event.comment.author_association)) || inputs.issue_number != '') }}
+    if: ${{ !github.event.issue.pull_request && ((github.event.comment.body == '/approve' && contains('OWNER MEMBER COLLABORATOR', github.event.comment.author_association)) || inputs.issue_number != '') }}
 
     permissions:
       issues: write
@@ -39,7 +36,7 @@ jobs:
     timeout-minutes: 5
 
     # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
-    if: ${{ github.event.issue.pull_request && ((github.event.comment.body == '/approve' && contains(env.AUTHOR_ROLES, github.event.comment.author_association)) || inputs.issue_number != '') }}
+    if: ${{ github.event.issue.pull_request && ((github.event.comment.body == '/approve' && contains('OWNER MEMBER COLLABORATOR', github.event.comment.author_association)) || inputs.issue_number != '') }}
 
     permissions:
       pull-requests: write
