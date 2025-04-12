@@ -47,7 +47,7 @@ jobs:
     steps:
       - run: |
           gh pr review \
-            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.pull_request.number }}  \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }}  \
               --approve
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
