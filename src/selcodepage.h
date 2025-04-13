@@ -26,7 +26,7 @@
 
 int select_charset (int center_y, int center_x, int current_charset);
 gboolean do_set_codepage (int);
-gboolean do_select_codepage (void);
+gboolean select_codepage (GIConv *converter, gboolean *utf8);
 
 /*** inline functions ****************************************************************************/
 

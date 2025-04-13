@@ -518,8 +518,7 @@ mcview_execute_cmd (WView *view, long command)
         view->marks[view->marker] = view->dpy_start;
         break;
     case CK_SelectCodepage:
-        mcview_select_encoding (view);
-        view->dirty++;
+        mcview_select_codepage (view);
         break;
     case CK_FileNext:
     case CK_FilePrev:
