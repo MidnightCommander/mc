@@ -549,3 +549,38 @@ convert_8bit_to_input_unichar (const char c)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Change codepage converter in accordance with display codepage.
+ *
+ * @param converter codepage converter
+ * @param utf8 TRUE if display codepage is UTF-8, FALSE otherwise
+ *
+ * @return TRUE codepage converter was created successfully, FALSE otherwise.
+ *         If FALSE is returned, @converter and @utf8 are unchanged.
+ */
+gboolean
+codepage_change_conv (GIConv *converter, gboolean *utf8)
+{
+    const int cp_from =
+        mc_global.source_codepage >= 0 ? mc_global.source_codepage : mc_global.display_codepage;
+    const char *cp_id = get_codepage_id (cp_from);
+    GIConv conv;
+
+    if (cp_id == NULL)
+        return FALSE;
+
+    conv = str_crt_conv_from (cp_id);
+    if (conv != INVALID_CONV)
+    {
+        if (*converter != str_cnv_from_term)
+            str_close_conv (*converter);
+        *converter = conv;
+    }
+
+    *utf8 = str_isutf8 (cp_id);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */

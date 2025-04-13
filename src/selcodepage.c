@@ -126,9 +126,17 @@ do_set_codepage (const int codepage)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** Show menu selecting codepage */
+/**
+ * Show selecting codepage menu.
+ *
+ * @param converter codepage converter
+ * @param utf8 TRUE if delected codepage is UTF-8, FALSE otherwise
+ *
+ * @return TRUE codepage was changed successfully, FALSE otherwise.
+ *         If FALSE is returned, @converter and @utf8 are unchanged.
+ */
 gboolean
-do_select_codepage (void)
+select_codepage (GIConv *converter, gboolean *utf8)
 {
     const int r = select_charset (-1, -1, default_source_codepage);
 
@@ -136,7 +144,8 @@ do_select_codepage (void)
         return FALSE;
 
     default_source_codepage = r;
-    return do_set_codepage (default_source_codepage);
+
+    return do_set_codepage (r) && codepage_change_conv (converter, utf8);
 }
 
 /* --------------------------------------------------------------------------------------------- */

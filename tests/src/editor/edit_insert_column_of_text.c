@@ -41,7 +41,7 @@ static const char test_text_in[] = "11111\n"  //
                                    "aa\n"     //
                                    "bb\n";    //
 
-// result of colunm cipy to the middle of line:
+// result of colunm copy to the middle of line:
 static const char test_insert_column_out1[] = "11111\n"   //
                                               "22\n"      //
                                               "a111a\n"   //
@@ -72,20 +72,19 @@ setup (void)
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 
-    edit_options.filesize_threshold = (char *) "64M";
-
-    rect_init (&r, 0, 0, 24, 80);
-    test_edit = edit_init (NULL, &r, NULL);
-    memset (&owner, 0, sizeof (owner));
-    group_add_widget (&owner, WIDGET (test_edit));
-
     mc_global.source_codepage = 0;
     mc_global.display_codepage = 0;
     cp_source = "ASCII";
     cp_display = "ASCII";
 
     do_set_codepage (0);
-    edit_set_codeset (test_edit);
+
+    edit_options.filesize_threshold = (char *) "64M";
+
+    rect_init (&r, 0, 0, 24, 80);
+    test_edit = edit_init (NULL, &r, NULL);
+    memset (&owner, 0, sizeof (owner));
+    group_add_widget (&owner, WIDGET (test_edit));
 }
 
 /* --------------------------------------------------------------------------------------------- */
