@@ -2223,35 +2223,9 @@ dview_reread (WDiff *dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_set_codeset (WDiff *dview)
+dview_select_codepage (WDiff *dview)
 {
-    const char *encoding_id = NULL;
-
-    dview->utf8 = TRUE;
-    encoding_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage
-                                                                  : mc_global.display_codepage);
-    if (encoding_id != NULL)
-    {
-        GIConv conv;
-
-        conv = str_crt_conv_from (encoding_id);
-        if (conv != INVALID_CONV)
-        {
-            if (dview->converter != str_cnv_from_term)
-                str_close_conv (dview->converter);
-            dview->converter = conv;
-        }
-        dview->utf8 = (gboolean) str_isutf8 (encoding_id);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dview_select_encoding (WDiff *dview)
-{
-    if (do_select_codepage ())
-        dview_set_codeset (dview);
+    select_codepage (&dview->converter, &dview->utf8);
     dview_reread (dview);
     tty_touch_screen ();
     repaint_screen ();
@@ -2429,8 +2403,11 @@ dview_init (WDiff *dview, const char *args, const char *file1, const char *file2
     dview->merged[DIFF_RIGHT] = FALSE;
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
+
+    dview->utf8 = TRUE;
     dview->converter = str_cnv_from_term;
-    dview_set_codeset (dview);
+    codepage_change_conv (&dview->converter, &dview->utf8);
+
     dview->a[DIFF_LEFT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     g_array_set_clear_func (dview->a[DIFF_LEFT], cc_free_elt);
     dview->a[DIFF_RIGHT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
@@ -3149,7 +3126,7 @@ dview_execute_cmd (WDiff *dview, long command)
         dview_diff_options (dview);
         break;
     case CK_SelectCodepage:
-        dview_select_encoding (dview);
+        dview_select_codepage (dview);
         break;
     case CK_Cancel:
         // don't close diffviewer due to SIGINT

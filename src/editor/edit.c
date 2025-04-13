@@ -2167,9 +2167,9 @@ edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg)
     edit->redo_stack_size_mask = START_STACK_SIZE - 1;
     edit->redo_stack = g_malloc0 ((edit->redo_stack_size + 10) * sizeof (long));
 
-    edit->utf8 = FALSE;
+    edit->utf8 = TRUE;
     edit->converter = str_cnv_from_term;
-    edit_set_codeset (edit);
+    codepage_change_conv (&edit->converter, &edit->utf8);
 
     if (!edit_load_file (edit))
     {
@@ -2276,32 +2276,6 @@ edit_reload_line (WEdit *edit, const edit_arg_t *arg)
     g_free (e);
 
     return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_set_codeset (WEdit *edit)
-{
-    const char *cp_id;
-
-    cp_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage
-                                                            : mc_global.display_codepage);
-
-    if (cp_id != NULL)
-    {
-        GIConv conv;
-        conv = str_crt_conv_from (cp_id);
-        if (conv != INVALID_CONV)
-        {
-            if (edit->converter != str_cnv_from_term)
-                str_close_conv (edit->converter);
-            edit->converter = conv;
-        }
-    }
-
-    if (cp_id != NULL)
-        edit->utf8 = str_isutf8 (cp_id);
 }
 
 /* --------------------------------------------------------------------------------------------- */
