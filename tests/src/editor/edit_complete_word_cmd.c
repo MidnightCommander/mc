@@ -165,6 +165,8 @@ my_setup (void)
 
     edit_options.filesize_threshold = (char *) "64M";
 
+    do_set_codepage (0);
+
     rect_init (&r, 0, 0, 24, 80);
     arg.file_vpath = vfs_path_from_str ("edit_complete_word_cmd_test_data.txt");
     arg.line_number = 1;
@@ -249,8 +251,8 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
     cp_source = data->input_editor_code_page;
     cp_display = data->input_system_code_page;
 
-    do_set_codepage (0);
-    edit_set_codeset (test_edit);
+    test_edit->utf8 = TRUE;
+    codepage_change_conv (&test_edit->converter, &test_edit->utf8);
 
     // when
     edit_cursor_move (test_edit, data->input_position);
@@ -321,8 +323,8 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
     cp_source = data->input_editor_code_page;
     cp_display = data->input_system_code_page;
 
-    do_set_codepage (0);
-    edit_set_codeset (test_edit);
+    test_edit->utf8 = TRUE;
+    codepage_change_conv (&test_edit->converter, &test_edit->utf8);
 
     // when
     edit_cursor_move (test_edit, data->input_position);

@@ -36,6 +36,7 @@
 #include <config.h>
 
 #include "lib/global.h"
+#include "lib/charsets.h"  // codepage_change_conv()
 #include "lib/tty/tty.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
@@ -321,7 +322,10 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
     if (!mcview_is_in_panel (view))
         view->dpy_text_column = 0;
 
-    mcview_set_codeset (view);
+    view->utf8 = TRUE;
+    view->converter = str_cnv_from_term;
+    if (codepage_change_conv (&view->converter, &view->utf8))
+        view->dpy_wrap_dirty = TRUE;
 
     if (command != NULL && (view->mode_flags.magic || file == NULL || file[0] == '\0'))
         retval = mcview_load_command_output (view, command);
