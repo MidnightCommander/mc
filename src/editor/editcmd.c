@@ -1994,9 +1994,7 @@ edit_mail_dialog (WEdit *edit)
 void
 edit_select_codepage_cmd (WEdit *edit)
 {
-    if (do_select_codepage ())
-        edit_set_codeset (edit);
-
+    select_codepage (&edit->converter, &edit->utf8);
     edit->force = REDRAW_PAGE;
     widget_draw (WIDGET (edit));
 }

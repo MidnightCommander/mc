@@ -40,6 +40,8 @@ gunichar convert_8bit_to_input_unichar (const char c);
 GString *str_nconvert_to_input (const char *str, int len);
 GString *str_nconvert_to_display (const char *str, int len);
 
+gboolean codepage_change_conv (GIConv *converter, gboolean *utf8);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */

@@ -229,9 +229,6 @@ mcview_done (WView *view)
         view->coord_cache = NULL;
     }
 
-    if (view->converter == INVALID_CONV)
-        view->converter = str_cnv_from_term;
-
     if (view->converter != str_cnv_from_term)
     {
         str_close_conv (view->converter);
@@ -257,35 +254,10 @@ mcview_done (WView *view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_set_codeset (WView *view)
+mcview_select_codepage (WView *view)
 {
-    const char *cp_id = NULL;
-
-    view->utf8 = TRUE;
-    cp_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage
-                                                            : mc_global.display_codepage);
-    if (cp_id != NULL)
-    {
-        GIConv conv;
-        conv = str_crt_conv_from (cp_id);
-        if (conv != INVALID_CONV)
-        {
-            if (view->converter != str_cnv_from_term)
-                str_close_conv (view->converter);
-            view->converter = conv;
-        }
-        view->utf8 = (gboolean) str_isutf8 (cp_id);
-        view->dpy_wrap_dirty = TRUE;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_select_encoding (WView *view)
-{
-    if (do_select_codepage ())
-        mcview_set_codeset (view);
+    select_codepage (&view->converter, &view->utf8);
+    view->dirty++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
