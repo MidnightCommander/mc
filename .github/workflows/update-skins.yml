@@ -1,0 +1,26 @@
+name: update-skins
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  update-skins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.REPOSITORY_DISPATCH_GITHUB_TOKEN }}
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: "skins",
+              event_type: "deploy-skins"
+            });
