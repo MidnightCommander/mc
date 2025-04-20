@@ -1090,32 +1090,28 @@ try_chattr (const vfs_path_t *p, unsigned long m)
     while (mc_fsetflags (p, m) == -1 && !ignore_all)
     {
         int my_errno = errno;
-        int result;
-        char *msg;
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_ ("Cannot chattr \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
-                               _ ("&Retry"), _ ("&Cancel"));
-        g_free (msg);
 
-        switch (result)
+        errno = my_errno;  // restore errno for file_error(
+
+        switch (file_error (NULL, TRUE, _ ("Cannot chattr\n%sn%s"), fname))
         {
-        case 0:
+        case FILE_IGNORE:
             // try next file
             return TRUE;
 
-        case 1:
+        case FILE_IGNORE_ALL:
             ignore_all = TRUE;
             // try next file
             return TRUE;
 
-        case 2:
+        case FILE_RETRY:
             // retry this file
             break;
 
-        case 3:
+        case FILE_ABORT:
         default:
             // stop remain files processing
             return FALSE;
@@ -1215,7 +1211,7 @@ chattr_cmd (WPanel *panel)
 
         if (mc_fgetflags (vpath, &flags) != 0)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot get ext2 attributes of \"%s\"\n%s"), fname->str,
+            message (D_ERROR, MSG_ERROR, _ ("Cannot get ext2 attributes of\n%s\n%s"), fname->str,
                      unix_error_string (errno));
             vfs_path_free (vpath, TRUE);
             break;
@@ -1240,7 +1236,7 @@ chattr_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_fsetflags (vpath, flags) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chattr \"%s\"\n%s"), fname->str,
+                        message (D_ERROR, MSG_ERROR, _ ("Cannot chattr\n%s\n%s"), fname->str,
                                  unix_error_string (errno));
                     end_chattr = TRUE;
                 }
