@@ -729,20 +729,18 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
                 *field_length = len + 1;
 
                 str_len = str_length (txt);
-                i = MAX (0, str_len - len);
+                i = DOZ (str_len, len);
                 panel->max_shift = MAX (panel->max_shift, i);
                 i = MIN (panel->content_shift, i);
 
-                if (i > -1)
+                if (i > -1 && str_len > len)
                 {
+                    if (i != 0)
+                        res |= FILENAME_SCROLL_LEFT;
+
                     name_offset = str_offset_to_pos (txt, i);
-                    if (str_len > len)
-                    {
-                        if (i != 0)
-                            res |= FILENAME_SCROLL_LEFT;
-                        if (str_length (txt + name_offset) > len)
-                            res |= FILENAME_SCROLL_RIGHT;
-                    }
+                    if (str_length (txt + name_offset) > len)
+                        res |= FILENAME_SCROLL_RIGHT;
                 }
             }
 
