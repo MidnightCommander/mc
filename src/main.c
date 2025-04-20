@@ -31,8 +31,6 @@
 
 #include <config.h>
 
-#include <ctype.h>
-#include <errno.h>
 #include <locale.h>
 #include <pwd.h>  // for username in xterm title
 #include <stdio.h>
