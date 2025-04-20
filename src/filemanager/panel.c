@@ -723,22 +723,21 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
 
             if (!isstatus && panel->content_shift > -1 && strcmp (fi->id, "name") == 0)
             {
-                int str_len;
-                int i;
+                const int str_len = str_length (txt);
+                const int len_diff = DOZ (str_len, len);
 
                 *field_length = len + 1;
 
-                str_len = str_length (txt);
-                i = DOZ (str_len, len);
-                panel->max_shift = MAX (panel->max_shift, i);
-                i = MIN (panel->content_shift, i);
+                panel->max_shift = MAX (panel->max_shift, len_diff);
 
-                if (i > -1 && str_len > len)
+                const int shift = MIN (panel->content_shift, len_diff);
+
+                if (shift > -1 && str_len > len)
                 {
-                    if (i != 0)
+                    if (shift != 0)
                         res |= FILENAME_SCROLL_LEFT;
 
-                    name_offset = str_offset_to_pos (txt, i);
+                    name_offset = str_offset_to_pos (txt, shift);
                     if (str_length (txt + name_offset) > len)
                         res |= FILENAME_SCROLL_RIGHT;
                 }
