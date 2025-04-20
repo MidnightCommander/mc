@@ -721,19 +721,19 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
             if (len <= 0)
                 break;
 
-            if (!isstatus && panel->content_shift > -1 && strcmp (fi->id, "name") == 0)
+            if (!isstatus && strcmp (fi->id, "name") == 0)
             {
                 const int str_len = str_length (txt);
-                const int len_diff = DOZ (str_len, len);
+                const unsigned int len_diff = (unsigned int) DOZ (str_len, len);
 
                 *field_length = len + 1;
 
                 panel->max_shift = MAX (panel->max_shift, len_diff);
 
-                const int shift = MIN (panel->content_shift, len_diff);
-
-                if (shift > -1 && str_len > len)
+                if (len_diff != 0)
                 {
+                    const unsigned int shift = MIN (panel->content_shift, len_diff);
+
                     if (shift != 0)
                         res |= FILENAME_SCROLL_LEFT;
 
@@ -756,7 +756,7 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
             else
                 tty_lowlevel_setcolor (-color);
 
-            if (!isstatus && panel->content_shift > -1)
+            if (!isstatus)
                 prepared_text = str_fit_to_term (txt + name_offset, len, HIDE_FIT (fi->just_mode));
             else
                 prepared_text = str_fit_to_term (txt, len, fi->just_mode);
@@ -970,7 +970,7 @@ paint_dir (WPanel *panel)
 
     items = panel_items (panel);
     // reset max len of filename because we have the new max length for the new file list
-    panel->max_shift = -1;
+    panel->max_shift = 0;
 
     for (i = 0; i < items; i++)
     {
@@ -3218,7 +3218,7 @@ panel_select_sort_order (WPanel *panel)
 static void
 panel_content_scroll_left (WPanel *panel)
 {
-    if (panel->content_shift > -1)
+    if (panel->content_shift != 0)
     {
         if (panel->content_shift > panel->max_shift)
             panel->content_shift = panel->max_shift;
@@ -3241,7 +3241,7 @@ panel_content_scroll_left (WPanel *panel)
 static void
 panel_content_scroll_right (WPanel *panel)
 {
-    if (panel->content_shift < 0 || panel->content_shift < panel->max_shift)
+    if (panel->content_shift == 0 || panel->content_shift < panel->max_shift)
     {
         panel->content_shift++;
         show_dir (panel);
@@ -4392,8 +4392,8 @@ panel_clean_dir (WPanel *panel)
     panel->quick_search.active = FALSE;
     panel->is_panelized = FALSE;
     panel->dirty = TRUE;
-    panel->content_shift = -1;
-    panel->max_shift = -1;
+    panel->content_shift = 0;
+    panel->max_shift = 0;
 
     dir_list_free_list (&panel->dir);
 }
@@ -4466,8 +4466,8 @@ panel_sized_empty_new (const char *panel_name, const WRect *r)
     panel->list_cols = 1;
     panel->brief_cols = 2;
     panel->dirty = TRUE;
-    panel->content_shift = -1;
-    panel->max_shift = -1;
+    panel->content_shift = 0;
+    panel->max_shift = 0;
 
     panel->list_format = list_full;
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
