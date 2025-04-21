@@ -103,10 +103,10 @@ edit_collect_completions_get_current_word (edit_search_status_msg_t *esm, mc_sea
  */
 
 static void
-edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue * * compl,
-                                         mc_search_t *srch, edit_search_status_msg_t *esm,
-                                         off_t word_start, gsize word_len, off_t last_byte,
-                                         GString *current_word, int *max_width)
+edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue **compl, mc_search_t *srch,
+                                         edit_search_status_msg_t *esm, off_t word_start,
+                                         gsize word_len, off_t last_byte, GString *current_word,
+                                         int *max_width)
 {
     GString *temp = NULL;
     gsize len = 0;
@@ -146,7 +146,7 @@ edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue * * comp
         if (current_word != NULL && g_string_equal (current_word, temp))
             continue;
 
-        if (*compl== NULL)
+        if (*compl == NULL)
             *compl = g_queue_new ();
         else
         {
@@ -339,7 +339,7 @@ edit_completion_string_free (gpointer data)
 
 /* Public function for unit tests */
 char *
-edit_completion_dialog_show (const WEdit *edit, GQueue * compl, int max_width)
+edit_completion_dialog_show (const WEdit *edit, GQueue *compl, int max_width)
 {
     const WRect *we = &CONST_WIDGET (edit)->rect;
     int start_x, start_y, offset;
@@ -415,7 +415,7 @@ edit_complete_word_cmd (WEdit *edit)
     gsize word_len = 0;
     GString *match_expr;
     gsize i;
-    GQueue * compl;  // completions: list of GString*
+    GQueue *compl;  // completions: list of GString*
     int max_width;
 
     // search start of word to be completed
@@ -436,7 +436,7 @@ edit_complete_word_cmd (WEdit *edit)
 
     g_string_free (match_expr, TRUE);
 
-    if (compl== NULL)
+    if (compl == NULL)
         return;
 
     if (g_queue_get_length (compl) == 1)

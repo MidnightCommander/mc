@@ -96,7 +96,7 @@ static char *edit_completion_dialog_show__return_value;
 
 /* @Mock */
 char *
-edit_completion_dialog_show (const WEdit *edit, GQueue * compl, int max_width)
+edit_completion_dialog_show (const WEdit *edit, GQueue *compl, int max_width)
 {
 
     edit_completion_dialog_show__edit = edit;
