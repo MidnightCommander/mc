@@ -9,7 +9,13 @@
 
 #include <glib.h>
 
-#if defined(HAVE_FUNC_ATTRIBUTE_WEAK) && defined(HAVE_TESTS)
+#if defined(__has_attribute)
+#define MC_HAS_ATTRIBUTE(ATTR) __has_attribute (ATTR)
+#else
+#define MC_HAS_ATTRIBUTE(ATTR) 0
+#endif
+
+#if MC_HAS_ATTRIBUTE(weak) && defined(HAVE_TESTS)
 #define MC_MOCKABLE __attribute__ ((weak))
 #else
 #define MC_MOCKABLE
@@ -44,13 +50,13 @@
 #define N_(String)                        (String)
 #endif
 
-#ifdef HAVE_FUNC_ATTRIBUTE_FALLTHROUGH
+#if MC_HAS_ATTRIBUTE(fallthrough)
 #define MC_FALLTHROUGH __attribute__ ((fallthrough))
 #else
 #define MC_FALLTHROUGH
 #endif
 
-#ifdef HAVE_FUNC_ATTRIBUTE_UNUSED
+#if MC_HAS_ATTRIBUTE(unused)
 #define MC_UNUSED __attribute__ ((unused))
 #else
 #define MC_UNUSED
