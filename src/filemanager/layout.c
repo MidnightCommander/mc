@@ -1066,7 +1066,7 @@ rotate_dash (gboolean show)
         tty_print_alt_char (ACS_URCORNER, FALSE);
     else
     {
-        static const char rotating_dash[4] = "|/-\\";
+        static const char rotating_dash[4] MC_NONSTRING = "|/-\\";
         static size_t pos = 0;
 
         tty_print_char (rotating_dash[pos]);

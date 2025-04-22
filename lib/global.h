@@ -62,6 +62,12 @@
 #define MC_UNUSED
 #endif
 
+#if MC_HAS_ATTRIBUTE(nonstring)
+#define MC_NONSTRING __attribute__ ((nonstring))
+#else
+#define MC_NONSTRING
+#endif
+
 #ifdef USE_MAINTAINER_MODE
 #include "lib/logging.h"
 #endif
