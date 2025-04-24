@@ -47,7 +47,6 @@
 
 #include <config.h>
 
-#include <errno.h>
 #include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <sys/types.h>
@@ -64,6 +63,7 @@
 #include "lib/event-types.h"
 
 #include "keymap.h"
+#include "util.h"  // file_error_message()
 #include "help.h"
 
 /*** global variables ****************************************************************************/
@@ -1101,8 +1101,8 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
         filedata = load_mc_home_file (mc_global.share_data_dir, MC_HELP, &hlpfile, NULL);
 
     if (filedata == NULL)
-        message (D_ERROR, MSG_ERROR, _ ("Cannot open file %s\n%s"),
-                 event_data->filename ? event_data->filename : hlpfile, unix_error_string (errno));
+        file_error_message (_ ("Cannot open file\n%s"),
+                            event_data->filename ? event_data->filename : hlpfile);
 
     g_free (hlpfile);
 
