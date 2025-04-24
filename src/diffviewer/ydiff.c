@@ -57,6 +57,7 @@
 #include "src/setup.h"
 #include "src/history.h"
 #include "src/selcodepage.h"
+#include "src/util.h"  // file_error_message()
 
 #include "ydiff.h"
 #include "internal.h"
@@ -175,8 +176,7 @@ open_temp (void **name)
     fd = mc_mkstemps (&diff_file_name, "mcdiff", NULL);
     if (fd == -1)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary diff file\n%s"),
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot create temporary diff file"), NULL);
         return -1;
     }
 
@@ -2129,8 +2129,7 @@ do_merge_hunk (WDiff *dview, action_direction_t merge_direction)
             dview->merged[n_merge] = mc_util_make_backup_if_possible (dview->file[n_merge], "~~~");
             if (!dview->merged[n_merge])
             {
-                message (D_ERROR, MSG_ERROR, _ ("Cannot create backup file\n%s%s\n%s"),
-                         dview->file[n_merge], "~~~", unix_error_string (errno));
+                file_error_message (_ ("Cannot create backup file\n%s~~~"), dview->file[n_merge]);
                 return;
             }
         }
@@ -2138,8 +2137,7 @@ do_merge_hunk (WDiff *dview, action_direction_t merge_direction)
         merge_file_fd = mc_mkstemps (&merge_file_name_vpath, "mcmerge", NULL);
         if (merge_file_fd == -1)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary merge file\n%s"),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot create temporary merge file"), NULL);
             return;
         }
 
@@ -3447,8 +3445,7 @@ dview_diff_cmd (const void *f0, const void *f1)
         is_dir0 = S_ISDIR (fe0->st.st_mode);
         if (is_dir0)
         {
-            message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"),
-                     path_trunc (fe0->fname->str, 30));
+            message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), fe0->fname->str);
             goto ret;
         }
 
@@ -3462,8 +3459,7 @@ dview_diff_cmd (const void *f0, const void *f1)
         is_dir1 = S_ISDIR (fe1->st.st_mode);
         if (is_dir1)
         {
-            message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"),
-                     path_trunc (fe1->fname->str, 30));
+            message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), fe1->fname->str);
             goto ret;
         }
         break;
@@ -3482,14 +3478,13 @@ dview_diff_cmd (const void *f0, const void *f1)
             is_dir0 = S_ISDIR (st.st_mode);
             if (is_dir0)
             {
-                message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"), path_trunc (p0, 30));
+                message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), p0);
                 goto ret;
             }
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (p0, 30),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat\n%s"), p0);
             goto ret;
         }
 
@@ -3499,14 +3494,13 @@ dview_diff_cmd (const void *f0, const void *f1)
             is_dir1 = S_ISDIR (st.st_mode);
             if (is_dir1)
             {
-                message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"), path_trunc (p1, 30));
+                message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), p1);
                 goto ret;
             }
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (p1, 30),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat\n%s"), p1);
             goto ret;
         }
         break;
