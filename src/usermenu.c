@@ -31,7 +31,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -54,6 +53,7 @@
 #include "src/execute.h"
 #include "src/setup.h"
 #include "src/history.h"
+#include "src/util.h"  // file_error_message()
 
 #include "src/filemanager/dir.h"
 #include "src/filemanager/filemanager.h"
@@ -465,8 +465,7 @@ execute_menu_command (const Widget *edit_widget, const char *commands, gboolean 
 
     if (cmd_file_fd == -1)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary command file\n%s"),
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot create temporary command file"), NULL);
         return;
     }
 
@@ -1006,8 +1005,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     {
         if (menu_file != NULL)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open file %s\n%s"), menu,
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot open file\n%s"), menu);
             MC_PTR_FREE (menu);
             return FALSE;
         }
@@ -1037,8 +1035,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
 
     if (!g_file_get_contents (menu, &data, NULL, NULL))
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot open file %s\n%s"), menu,
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot open file\n%s"), menu);
         MC_PTR_FREE (menu);
         return FALSE;
     }
