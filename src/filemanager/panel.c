@@ -32,6 +32,7 @@
 
 #include <config.h>
 
+#include <limits.h>  // UINT_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -3245,6 +3246,42 @@ panel_content_scroll_right (WPanel *panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Scroll long filename to home
+ *
+ * @param panel the pointer to the panel on which we operate
+ */
+
+static void
+panel_content_scroll_home (WPanel *panel)
+{
+    panel->content_shift = 0;
+    show_dir (panel);
+    paint_dir (panel);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Scroll long filename to end
+ *
+ * @param panel the pointer to the panel on which we operate
+ */
+
+static void
+panel_content_scroll_end (WPanel *panel)
+{
+    // set content_shift to the maximum possible value
+    panel->content_shift = UINT_MAX;
+
+    show_dir (panel);
+    paint_dir (panel);
+
+    // correct content shift after UINT_MAX
+    if (panel->content_shift > panel->max_shift)
+        panel->content_shift = panel->max_shift;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 panel_set_sort_type_by_id (WPanel *panel, const char *name)
@@ -3627,6 +3664,12 @@ panel_execute_cmd (WPanel *panel, long command)
         break;
     case CK_ScrollRight:
         panel_content_scroll_right (panel);
+        break;
+    case CK_ScrollHome:
+        panel_content_scroll_home (panel);
+        break;
+    case CK_ScrollEnd:
+        panel_content_scroll_end (panel);
         break;
     case CK_Search:
         start_search (panel);

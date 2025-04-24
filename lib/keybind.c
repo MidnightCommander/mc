@@ -225,6 +225,8 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (SelectExt),
     ADD_KEYMAP_NAME (ScrollLeft),
     ADD_KEYMAP_NAME (ScrollRight),
+    ADD_KEYMAP_NAME (ScrollHome),
+    ADD_KEYMAP_NAME (ScrollEnd),
     ADD_KEYMAP_NAME (PanelOtherCd),
     ADD_KEYMAP_NAME (PanelOtherCdLink),
     ADD_KEYMAP_NAME (CopySingle),

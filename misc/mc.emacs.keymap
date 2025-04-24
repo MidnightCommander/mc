@@ -131,6 +131,8 @@ Bottom = alt-gt; end; c1
 # Filter =
 ScrollLeft = alt-lparenthesis
 ScrollRight = alt-rparenthesis
+# ScrollHome =
+# ScrollEnd =
 
 [dialog]
 Ok = enter
