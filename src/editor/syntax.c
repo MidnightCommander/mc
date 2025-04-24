@@ -62,6 +62,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"  // Listbox, message()
 
+#include "src/util.h"  // file_error_message()
+
 #include "edit-impl.h"
 #include "editwidget.h"
 
@@ -1561,8 +1563,7 @@ edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
     if (r == -1)
     {
         edit_free_syntax_rules (edit);
-        message (D_ERROR, _ ("Load syntax file"), _ ("Cannot open file %s\n%s"), f,
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot open file\n%s"), f);
     }
     else if (r != 0)
     {

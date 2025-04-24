@@ -60,6 +60,7 @@
 #include "src/usermenu.h"  // user_menu_cmd()
 
 #include "src/keymap.h"
+#include "src/util.h"  // file_error_message()
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -197,8 +198,7 @@ edit_load_file_fast (edit_buffer_t *buf, const vfs_path_t *filename_vpath)
     file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
     if (file < 0)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot open %s for reading"),
-                 vfs_path_as_str (filename_vpath));
+        file_error_message (_ ("Cannot open\n%s"), vfs_path_as_str (filename_vpath));
         return FALSE;
     }
 
@@ -307,8 +307,7 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
         file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
         if (file < 0)
         {
-            errmsg = g_strdup_printf (_ ("Cannot open %s for reading"),
-                                      vfs_path_as_str (filename_vpath));
+            file_error_message (_ ("Cannot open\n%s"), vfs_path_as_str (filename_vpath));
             goto cleanup;
         }
 
@@ -319,8 +318,7 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
     // Check what we have opened
     if (mc_fstat (file, st) < 0)
     {
-        errmsg = g_strdup_printf (_ ("Cannot get size/permissions for %s"),
-                                  vfs_path_as_str (filename_vpath));
+        file_error_message (_ ("Cannot stat\n%s"), vfs_path_as_str (filename_vpath));
         goto cleanup;
     }
 
@@ -328,7 +326,7 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
     if (!S_ISREG (st->st_mode))
     {
         errmsg =
-            g_strdup_printf (_ ("\"%s\" is not a regular file"), vfs_path_as_str (filename_vpath));
+            g_strdup_printf (_ ("%s\nis not a regular file"), vfs_path_as_str (filename_vpath));
         goto cleanup;
     }
 
@@ -1991,7 +1989,7 @@ edit_insert_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open pipe for reading: %s"), p);
+            file_error_message (_ ("Cannot open pipe for reading\n%s"), p);
             ins_len = -1;
         }
         g_free (p);
