@@ -46,6 +46,7 @@
 #include "lib/charsets.h"
 
 #include "src/selcodepage.h"
+#include "src/util.h"  // file_error_message()
 
 #include "internal.h"
 
@@ -290,12 +291,14 @@ mcview_select_encoding (WView *view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_show_error (WView *view, const char *msg)
+mcview_show_error (WView *view, const char *format, const char *filename)
 {
     if (mcview_is_in_panel (view))
-        mcview_set_datasource_string (view, msg);
+        mcview_set_datasource_string (view, filename);
+    else if (format != NULL)
+        file_error_message (format, filename);
     else
-        message (D_ERROR, MSG_ERROR, "%s", msg);
+        message (D_ERROR, MSG_ERROR, "%s", filename);
 }
 
 /* --------------------------------------------------------------------------------------------- */

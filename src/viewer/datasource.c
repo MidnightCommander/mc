@@ -391,7 +391,7 @@ mcview_load_command_output (WView *view, const char *command)
     if (p == NULL)
     {
         mcview_display (view);
-        mcview_show_error (view, error->message);
+        mcview_show_error (view, NULL, error->message);
         g_error_free (error);
         return FALSE;
     }
