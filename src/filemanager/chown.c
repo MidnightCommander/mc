@@ -45,6 +45,7 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"  // panels_options
+#include "src/util.h"   // file_error_message()
 
 #include "cmd.h"  // chown_cmd()
 
@@ -450,8 +451,7 @@ chown_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_chown (vpath, new_user, new_group) == -1)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chown\n%s\n%s"), fname->str,
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot chown\n%s"), fname->str);
                     end_chown = TRUE;
                 }
                 else if (!try_chown (vpath, new_user, new_group))

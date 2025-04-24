@@ -45,6 +45,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/util.h"  // file_error_message()
+
 #include "cmd.h"  // advanced_chown_cmd()
 
 /*** global variables ****************************************************************************/
@@ -1023,12 +1025,10 @@ advanced_chown_cmd (WPanel *panel)
             {
                 // single or last file
                 if (mc_chmod (vpath, get_mode ()) == -1)
-                    message (D_ERROR, MSG_ERROR, _ ("Cannot chmod\n%s\n%s"), fname->str,
-                             unix_error_string (errno));
+                    file_error_message (_ ("Cannot chmod\n%s"), fname->str);
                 // call mc_chown only, if mc_chmod didn't fail
                 else if (mc_chown (vpath, uid, gid) == -1)
-                    message (D_ERROR, MSG_ERROR, _ ("Cannot chown\n%s\n%s"), fname->str,
-                             unix_error_string (errno));
+                    file_error_message (_ ("Cannot chown\n%s"), fname->str);
 
                 end_chown = TRUE;
             }

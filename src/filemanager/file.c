@@ -74,6 +74,7 @@
 #ifdef ENABLE_BACKGROUND
 #include "src/background.h"  // do_background()
 #endif
+#include "src/util.h"  // file_error_message()
 
 /* Needed for other_panel and WTree */
 #include "dir.h"
@@ -1833,8 +1834,7 @@ check_single_entry (const WPanel *panel, gboolean force_single, struct stat *src
         ok = mc_lstat (source_vpath, src_stat) == 0;
         if (!ok)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (source, 30),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat\n%s"), source);
 
             // Directory was changed outside MC. Reload it forced
             if (!panel->is_panelized)

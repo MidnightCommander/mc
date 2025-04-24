@@ -31,14 +31,14 @@
 #include <config.h>
 
 #include <stdlib.h>
-#include <errno.h>
 #include <string.h>
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"    // whitespace()
-#include "lib/widget.h"  // message()
+#include "lib/util.h"  // whitespace()
+
+#include "src/util.h"  // file_error_message()
 
 #include "filemanager.h"  // current_panel, panel.h, layout.h
 #include "tree.h"         // sync_tree()
@@ -301,8 +301,7 @@ cd_to (const char *path)
 void
 cd_error_message (const char *path)
 {
-    message (D_ERROR, MSG_ERROR, _ ("Cannot change directory to\n%s\n%s"), path,
-             unix_error_string (errno));
+    file_error_message (_ ("Cannot change directory to\n%s"), path);
 }
 
 /* --------------------------------------------------------------------------------------------- */

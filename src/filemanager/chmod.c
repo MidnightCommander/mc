@@ -40,6 +40,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/util.h"  // file_error_message()
+
 #include "cmd.h"  // chmod_cmd()
 
 /*** global variables ****************************************************************************/
@@ -562,8 +564,7 @@ chmod_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_chmod (vpath, ch_mode) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chmod\n%s\n%s"), fname->str,
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot chmod\n%s"), fname->str);
                     end_chmod = TRUE;
                 }
                 else if (!try_chmod (vpath, ch_mode))

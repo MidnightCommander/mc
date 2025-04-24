@@ -64,7 +64,7 @@
 #include "src/setup.h"
 #include "src/execute.h"  // toggle_panels()
 #include "src/history.h"
-#include "src/util.h"  // check_for_default()
+#include "src/util.h"  // check_for_default(), file_error_message()
 
 #include "src/viewer/mcviewer.h"
 
@@ -321,7 +321,7 @@ do_link (link_type_t link_type, const char *fname)
         fname_vpath = vfs_path_from_str (fname);
         dest_vpath = vfs_path_from_str (dest);
         if (mc_link (fname_vpath, dest_vpath) == -1)
-            message (D_ERROR, MSG_ERROR, _ ("link: %s"), unix_error_string (errno));
+            file_error_message (_ ("Cannot create link\n%s"), dest);
         vfs_path_free (fname_vpath, TRUE);
     }
     else
@@ -360,7 +360,7 @@ do_link (link_type_t link_type, const char *fname)
 
         s = vfs_path_from_str (src);
         if (mc_symlink (dest_vpath, s) == -1)
-            message (D_ERROR, MSG_ERROR, _ ("symlink: %s"), unix_error_string (errno));
+            file_error_message (_ ("Canot create symbolic link\n%s"), dest);
         vfs_path_free (s, TRUE);
     }
 
@@ -775,7 +775,7 @@ mkdir_cmd (WPanel *panel)
         save_cwds_stat ();
 
         if (my_mkdir (absdir, 0777) != 0)
-            message (D_ERROR, MSG_ERROR, "%s", unix_error_string (errno));
+            file_error_message (_ ("Cannot create directory\n%s"), vfs_path_as_str (absdir));
         else
         {
             update_panels (UP_OPTIMIZE, dir);
@@ -1108,16 +1108,15 @@ edit_symlink_cmd (void)
                 save_cwds_stat ();
 
                 if (mc_unlink (p_vpath) == -1)
-                    message (D_ERROR, MSG_ERROR, _ ("edit symlink, unable to remove %s: %s"), p,
-                             unix_error_string (errno));
+                    file_error_message (_ ("Edit symlink, unable to remove\n%s"), p);
                 else
                 {
                     vfs_path_t *dest_vpath;
 
                     dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
                     if (mc_symlink (dest_vpath, p_vpath) == -1)
-                        message (D_ERROR, MSG_ERROR, _ ("edit symlink: %s"),
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot edit symlink\n%s"),
+                                            vfs_path_as_str (dest_vpath));
                     vfs_path_free (dest_vpath, TRUE);
                 }
 

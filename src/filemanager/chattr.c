@@ -47,6 +47,7 @@
 #include "lib/util.h"  // x_basename()
 
 #include "src/keymap.h"  // chattr_map
+#include "src/util.h"    // file_error_message()
 
 #include "cmd.h"  // chattr_cmd(), chattr_get_as_str()
 
@@ -1211,8 +1212,7 @@ chattr_cmd (WPanel *panel)
 
         if (mc_fgetflags (vpath, &flags) != 0)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot get ext2 attributes of\n%s\n%s"), fname->str,
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot get ext2 attributes of\n%s"), fname->str);
             vfs_path_free (vpath, TRUE);
             break;
         }
@@ -1236,8 +1236,7 @@ chattr_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_fsetflags (vpath, flags) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chattr\n%s\n%s"), fname->str,
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot chattr\n%s"), fname->str);
                     end_chattr = TRUE;
                 }
                 else if (!try_chattr (vpath, flags))
