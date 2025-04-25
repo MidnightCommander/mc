@@ -1220,7 +1220,7 @@ static void
 find_rotate_dash (const WDialog *h, gboolean show)
 {
     static size_t pos = 0;
-    static const char rotating_dash[4] = "|/-\\";
+    static const char rotating_dash[4] MC_NONSTRING = "|/-\\";
     const Widget *w = CONST_WIDGET (h);
     const int *colors;
 

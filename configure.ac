@@ -64,16 +64,6 @@ if test "x$enable_werror" = xyes; then
     AX_APPEND_COMPILE_FLAGS([-Werror], [mc_configured_cflags])
 fi
 
-dnl Compiler can generate warnings for unrecognized flags added to CFLAGS
-dnl which causes attribute checks to fail
-ax_gcc_func_attribute_save_flags=$[]_AC_LANG_PREFIX[]FLAGS
-_AC_LANG_PREFIX[]FLAGS=
-AX_GCC_FUNC_ATTRIBUTE([fallthrough])
-AX_GCC_FUNC_ATTRIBUTE([weak])
-AX_GCC_FUNC_ATTRIBUTE([unused])
-_AC_LANG_PREFIX[]FLAGS=$ax_gcc_func_attribute_save_flags
-unset ax_gcc_func_attribute_save_flags
-
 LT_INIT
 
 
