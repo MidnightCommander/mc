@@ -6,6 +6,9 @@ on:
       SOURCE_DEPLOY_KEY:
         required: true
 
+env:
+  CLANG_FORMAT_VERSION: 20.1.0
+
 jobs:
   build-fedora:
     runs-on: ubuntu-latest
@@ -27,8 +30,10 @@ jobs:
             aspell-devel check-devel gpm-devel libX11-devel "pkgconfig(ext2fs)" "pkgconfig(glib-2.0)" "pkgconfig(gmodule-2.0)" "pkgconfig(libssh2)" "pkgconfig(slang)" \
             \
             glibc-gconv-extra util-linux `# For tests` \
+            python3-pip \
             mandoc `# To render manual pages` \
 
+            pip install clang-format==${{ env.CLANG_FORMAT_VERSION }}
 
       - uses: actions/checkout@v4
 
