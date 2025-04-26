@@ -2285,7 +2285,7 @@ Jako
 może wystąpić:
 .nf
   'C' \- włącza kompresję;
-  'rsh' \- włącza rsh zamist ssh;
+  'rsh' \- włącza rsh zamiast ssh;
   port \- określa zdalny port.
 .fi
 Jeśli
