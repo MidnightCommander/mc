@@ -2277,12 +2277,18 @@ i
 .I zdalny katalog
 są opcjonalne. Jeśli podasz
 .I użytkownika
-Midnight Commander spróuje zalogować się na obcy komputer jako zadany
+Midnight Commander spróbuje zalogować się na obcy komputer jako zadany
 użytkownik w przeciwnym razie użyty zostanie twój login.
 .PP
 Jako
 .I opcja
-może wystąpić 'C' \- włącza kompresje i 'rsh' \- włącza rsh zamist ssh. Jeśli
+może wystąpić:
+.nf
+  'C' \- włącza kompresję;
+  'rsh' \- włącza rsh zamist ssh;
+  port \- określa zdalny port.
+.fi
+Jeśli
 .I zdalny\-katalog
 istnieje, twój aktualny katalog na zdalnym komputerze będzie ustawiony
 na niego.
