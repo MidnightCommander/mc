@@ -124,6 +124,7 @@ Bottom = alt-gt; end; c1
 # SortNext =
 # SortReverse =
 # SortByName =
+# SortByVersion =
 # SortByExt =
 # SortBySize =
 # SortByMTime =

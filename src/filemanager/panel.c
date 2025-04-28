@@ -3645,6 +3645,9 @@ panel_execute_cmd (WPanel *panel, long command)
     case CK_SortByName:
         panel_set_sort_type_by_id (panel, "name");
         break;
+    case CK_SortByVersion:
+        panel_set_sort_type_by_id (panel, "version");
+        break;
     case CK_SortByExt:
         panel_set_sort_type_by_id (panel, "extension");
         break;
