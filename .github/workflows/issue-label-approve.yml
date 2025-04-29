@@ -1,0 +1,34 @@
+name: Approve issue
+
+on:
+  issues:
+    types: [ labeled ]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number
+        required: true
+        type: number
+
+jobs:
+  approve-issue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    if: ${{ !github.event.issue.pull_request && (contains(github.event.label.name, 'approved') || inputs.issue_number != '') }}
+
+    permissions:
+      issues: write
+
+    steps:
+      - run: |
+          gh issue edit \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+              --remove-label "state: in review"
+          
+          gh issue comment \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+            --body "The changes in the branch associated with this issue have been approved."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}

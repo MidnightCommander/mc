@@ -1,8 +1,8 @@
-name: Review command
+name: Review issue
 
 on:
-  issue_comment:
-    types: [ created, edited ]
+  issues:
+    types: [ labeled ]
   workflow_dispatch:
     inputs:
       issue_number:
@@ -15,8 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-    # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
-    if: ${{ !github.event.issue.pull_request && ((github.event.comment.body == '/review' && contains('OWNER MEMBER COLLABORATOR', github.event.comment.author_association)) || inputs.issue_number != '') }}
+    if: ${{ !github.event.issue.pull_request && (contains(github.event.label.name, 'in review') || inputs.issue_number != '') }}
 
     permissions:
       issues: write
@@ -25,7 +24,11 @@ jobs:
       - run: |
           gh issue edit \
             ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
-              --add-label "state: in review"
+              --remove-label "state: approved"
+
+          gh issue comment \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+            --body "The changes in the branch associated with this issue are ready for review."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}

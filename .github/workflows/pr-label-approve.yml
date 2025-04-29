@@ -1,0 +1,37 @@
+name: Approve PR
+
+on:
+  pull_request:
+    types: [ labeled ]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number
+        required: true
+        type: number
+
+jobs:
+  approve-pr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    if: ${{ github.event.issue.pull_request && (contains(github.event.label.name, 'approved') || inputs.issue_number != '') }}
+
+    permissions:
+      pull-requests: write
+
+      # https://github.com/cli/cli/issues/6274
+      repository-projects: read
+
+    steps:
+      - run: |
+          gh pr review \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }}  \
+              --approve
+          
+          gh pr edit \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+              --remove-label "state: in review"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
