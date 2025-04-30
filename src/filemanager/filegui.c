@@ -234,7 +234,7 @@ static struct
     FileProgressStatus action;
     const char *text;
     button_flags_t flags;
-    int len;
+    int width;
 } progress_buttons[] = {
     { NULL, FILE_SKIP, N_ ("&Skip"), NORMAL_BUTTON, -1 },
     { NULL, FILE_SUSPEND, N_ ("S&uspend"), NORMAL_BUTTON, -1 },
@@ -737,13 +737,13 @@ place_progress_buttons (WDialog *h, const gboolean suspended)
 
     const size_t i = suspended ? 2 : 1;
     const int buttons_width =
-        2 + progress_buttons[0].len + progress_buttons[3].len + progress_buttons[i].len;
+        2 + progress_buttons[0].width + progress_buttons[3].width + progress_buttons[i].width;
 
     button_set_text (BUTTON (progress_buttons[i].w), progress_buttons[i].text);
 
     progress_buttons[0].w->rect.x = w->rect.x + (w->rect.cols - buttons_width) / 2;
-    progress_buttons[i].w->rect.x = progress_buttons[0].w->rect.x + progress_buttons[0].len + 1;
-    progress_buttons[3].w->rect.x = progress_buttons[i].w->rect.x + progress_buttons[i].len + 1;
+    progress_buttons[i].w->rect.x = progress_buttons[0].w->rect.x + progress_buttons[0].width + 1;
+    progress_buttons[3].w->rect.x = progress_buttons[i].w->rect.x + progress_buttons[i].width + 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -874,7 +874,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         return;
 
 #ifdef ENABLE_NLS
-    if (progress_buttons[0].len == -1)
+    if (progress_buttons[0].width == -1)
     {
         size_t i;
 
@@ -956,22 +956,22 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
     progress_buttons[0].w =
         WIDGET (button_new (y, 0, progress_buttons[0].action, progress_buttons[0].flags,
                             progress_buttons[0].text, progress_button_callback));
-    if (progress_buttons[0].len == -1)
-        progress_buttons[0].len = button_get_width (BUTTON (progress_buttons[0].w));
+    if (progress_buttons[0].width == -1)
+        progress_buttons[0].width = button_get_width (BUTTON (progress_buttons[0].w));
 
     progress_buttons[1].w =
         WIDGET (button_new (y, 0, progress_buttons[1].action, progress_buttons[1].flags,
                             progress_buttons[1].text, progress_button_callback));
-    if (progress_buttons[1].len == -1)
-        progress_buttons[1].len = button_get_width (BUTTON (progress_buttons[1].w));
+    if (progress_buttons[1].width == -1)
+        progress_buttons[1].width = button_get_width (BUTTON (progress_buttons[1].w));
 
-    if (progress_buttons[2].len == -1)
+    if (progress_buttons[2].width == -1)
     {
         // create and destroy button to get it length
         progress_buttons[2].w =
             WIDGET (button_new (y, 0, progress_buttons[2].action, progress_buttons[2].flags,
                                 progress_buttons[2].text, progress_button_callback));
-        progress_buttons[2].len = button_get_width (BUTTON (progress_buttons[2].w));
+        progress_buttons[2].width = button_get_width (BUTTON (progress_buttons[2].w));
         widget_destroy (progress_buttons[2].w);
     }
     progress_buttons[2].w = progress_buttons[1].w;
@@ -979,15 +979,15 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
     progress_buttons[3].w =
         WIDGET (button_new (y, 0, progress_buttons[3].action, progress_buttons[3].flags,
                             progress_buttons[3].text, progress_button_callback));
-    if (progress_buttons[3].len == -1)
-        progress_buttons[3].len = button_get_width (BUTTON (progress_buttons[3].w));
+    if (progress_buttons[3].width == -1)
+        progress_buttons[3].width = button_get_width (BUTTON (progress_buttons[3].w));
 
     group_add_widget (g, progress_buttons[0].w);
     group_add_widget (g, progress_buttons[1].w);
     group_add_widget (g, progress_buttons[3].w);
 
-    buttons_width = 2 + progress_buttons[0].len
-        + MAX (progress_buttons[1].len, progress_buttons[2].len) + progress_buttons[3].len;
+    buttons_width = 2 + progress_buttons[0].width
+        + MAX (progress_buttons[1].width, progress_buttons[2].width) + progress_buttons[3].width;
 
     // adjust dialog sizes
     r = w->rect;
