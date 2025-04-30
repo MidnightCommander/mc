@@ -242,7 +242,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     WGroup *g;
     GPtrArray *buttons = NULL;
     WButton *button;
-    int win_len = 0;
+    int win_width = 0;
     int i;
     int result = -1;
     int cols, lines;
@@ -265,7 +265,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
             const char *cp = va_arg (ap, char *);
 
             button = button_new (1, 1, B_USER + i, NORMAL_BUTTON, cp, NULL);
-            win_len += button_get_width (button) + 1;
+            win_width += button_get_width (button) + 1;
             g_ptr_array_add (buttons, button);
         }
         va_end (ap);
@@ -275,7 +275,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     // count coordinates
     str_msg_term_size (text, &lines, &cols);
-    cols = 6 + MAX (win_len, MAX (header_cols, cols));
+    cols = 6 + MAX (win_width, MAX (header_cols, cols));
     lines += 4 + (count > 0 ? 2 : 0);
 
     // prepare dialog
@@ -291,7 +291,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
                                   NULL);
         group_add_widget (g, hline_new (lines - 4, -1, -1));
 
-        cols = (cols - win_len - 2) / 2 + 2;
+        cols = (cols - win_width - 2) / 2 + 2;
 
         for (i = 0; i < count; i++)
         {
