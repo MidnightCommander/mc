@@ -219,16 +219,15 @@ static struct
 {
     int ret_cmd;
     button_flags_t flags;
-    int width;
     const char *text;
     Widget *button;
 } chattr_but[BUTTONS] = {
-    /* 0 */ { B_SETALL, NORMAL_BUTTON, 0, N_ ("Set &all"), NULL },
-    /* 1 */ { B_MARKED, NORMAL_BUTTON, 0, N_ ("&Marked all"), NULL },
-    /* 2 */ { B_SETMRK, NORMAL_BUTTON, 0, N_ ("S&et marked"), NULL },
-    /* 3 */ { B_CLRMRK, NORMAL_BUTTON, 0, N_ ("C&lear marked"), NULL },
-    /* 4 */ { B_ENTER, DEFPUSH_BUTTON, 0, N_ ("&Set"), NULL },
-    /* 5 */ { B_CANCEL, NORMAL_BUTTON, 0, N_ ("&Cancel"), NULL },
+    /* 0 */ { B_SETALL, NORMAL_BUTTON, N_ ("Set &all"), NULL },
+    /* 1 */ { B_MARKED, NORMAL_BUTTON, N_ ("&Marked all"), NULL },
+    /* 2 */ { B_SETMRK, NORMAL_BUTTON, N_ ("S&et marked"), NULL },
+    /* 3 */ { B_CLRMRK, NORMAL_BUTTON, N_ ("C&lear marked"), NULL },
+    /* 4 */ { B_ENTER, DEFPUSH_BUTTON, N_ ("&Set"), NULL },
+    /* 5 */ { B_CANCEL, NORMAL_BUTTON, N_ ("&Cancel"), NULL },
 };
 
 static gboolean flags_changed;
@@ -937,16 +936,10 @@ chattr_init (void)
 
     check_attr_width += 1 + 3 + 1;  // mark, [x] and space
 
-    for (i = 0; i < BUTTONS; i++)
-    {
 #ifdef ENABLE_NLS
+    for (i = 0; i < BUTTONS; i++)
         chattr_but[i].text = _ (chattr_but[i].text);
 #endif
-
-        chattr_but[i].width = str_term_width1 (chattr_but[i].text) + 3;  // [], spaces and w/o &
-        if (chattr_but[i].flags == DEFPUSH_BUTTON)
-            chattr_but[i].width += 2;  // <>
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1022,23 +1015,24 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
         if (i == 0 || i == BUTTONS - 2)
             group_add_widget (dg, hline_new (y++, -1, -1));
 
-        chattr_but[i].button = WIDGET (button_new (y, dw->rect.cols / 2 + 1 - chattr_but[i].width,
-                                                   chattr_but[i].ret_cmd, chattr_but[i].flags,
+        chattr_but[i].button = WIDGET (button_new (y, 1, chattr_but[i].ret_cmd, chattr_but[i].flags,
                                                    chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
+        const int bw0 = button_get_width (BUTTON (chattr_but[i].button));
+
         i++;
-        chattr_but[i].button =
-            WIDGET (button_new (y++, dw->rect.cols / 2 + 2, chattr_but[i].ret_cmd,
-                                chattr_but[i].flags, chattr_but[i].text, NULL));
+        chattr_but[i].button = WIDGET (button_new (y++, 1, chattr_but[i].ret_cmd,
+                                                   chattr_but[i].flags, chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
+        const int bw1 = button_get_width (BUTTON (chattr_but[i].button));
+
         // two buttons in a row
-        cols =
-            MAX (cols, chattr_but[i - 1].button->rect.cols + 1 + chattr_but[i].button->rect.cols);
+        cols = MAX (cols, bw0 + 1 + bw1);
     }
 
-    // adjust dialog size and button positions
+    // adjust dialog size
     cols += 6;
     if (cols > dw->rect.cols)
     {
@@ -1046,24 +1040,25 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
         r.lines = lines;
         r.cols = cols;
         widget_set_size_rect (dw, &r);
+    }
 
-        // dialog center
-        cols = dw->rect.x + dw->rect.cols / 2 + 1;
+    // dialog center
+    const int mid = dw->rect.x + dw->rect.cols / 2 + 1;
 
-        for (i = single_set ? (BUTTONS - 2) : 0; i < BUTTONS; i++)
-        {
-            Widget *b;
+    // adjust button positions
+    for (i = single_set ? (BUTTONS - 2) : 0; i < BUTTONS; i++)
+    {
+        Widget *b;
 
-            b = chattr_but[i++].button;
-            r = b->rect;
-            r.x = cols - r.cols;
-            widget_set_size_rect (b, &r);
-
-            b = chattr_but[i].button;
-            r = b->rect;
-            r.x = cols + 1;
-            widget_set_size_rect (b, &r);
-        }
+        b = chattr_but[i].button;
+        r = b->rect;
+        r.x = mid - r.cols;
+        widget_set_size_rect (b, &r);
+        i++;
+        b = chattr_but[i].button;
+        r = b->rect;
+        r.x = mid + 1;
+        widget_set_size_rect (b, &r);
     }
 
     widget_select (WIDGET (cb));
