@@ -348,11 +348,11 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
 
     add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _ ("&Add word"), 0);
     replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _ ("&Replace"), 0);
-    replace_len = button_get_len (replace_btn);
+    replace_len = button_get_width (replace_btn);
     skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _ ("&Skip"), 0);
-    skip_len = button_get_len (skip_btn);
+    skip_len = button_get_width (skip_btn);
     cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _ ("&Cancel"), 0);
-    cancel_len = button_get_len (cancel_button);
+    cancel_len = button_get_width (cancel_button);
 
     max_btn_len = MAX (replace_len, skip_len);
     max_btn_len = MAX (max_btn_len, cancel_len);
