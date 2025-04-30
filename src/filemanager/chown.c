@@ -77,18 +77,15 @@ static struct
     int ret_cmd;
     button_flags_t flags;
     int y;
-    int len;
     const char *text;
+    WButton *button;
 } chown_but[BUTTONS] = {
-    { B_SETALL, NORMAL_BUTTON, 5, 0, N_ ("Set &all") },
-    { B_SETGRP, NORMAL_BUTTON, 5, 0, N_ ("Set &groups") },
-    { B_SETUSR, NORMAL_BUTTON, 5, 0, N_ ("Set &users") },
-    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
-    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") },
+    { B_SETALL, NORMAL_BUTTON, 5, N_ ("Set &all"), NULL },
+    { B_SETGRP, NORMAL_BUTTON, 5, N_ ("Set &groups"), NULL },
+    { B_SETUSR, NORMAL_BUTTON, 5, N_ ("Set &users"), NULL },
+    { B_ENTER, DEFPUSH_BUTTON, 3, N_ ("&Set"), NULL },
+    { B_CANCEL, NORMAL_BUTTON, 3, N_ ("&Cancel"), NULL },
 };
-
-/* summary length of three buttons */
-static int blen = 0;
 
 static struct
 {
@@ -111,7 +108,6 @@ static void
 chown_init (void)
 {
     static gboolean i18n = FALSE;
-    int i;
 
     if (i18n)
         return;
@@ -119,21 +115,9 @@ chown_init (void)
     i18n = TRUE;
 
 #ifdef ENABLE_NLS
-    for (i = 0; i < BUTTONS; i++)
+    for (int i = 0; i < BUTTONS; i++)
         chown_but[i].text = _ (chown_but[i].text);
 #endif
-
-    for (i = 0; i < BUTTONS; i++)
-    {
-        chown_but[i].len = str_term_width1 (chown_but[i].text) + 3;  // [], spaces and w/o &
-        if (chown_but[i].flags == DEFPUSH_BUTTON)
-            chown_but[i].len += 2;  // <>
-
-        if (i < BUTTONS - 2)
-            blen += chown_but[i].len;
-    }
-
-    blen += 2;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -177,6 +161,36 @@ chown_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+chown_buttons_create (WGroup *g, const int first, const int last)
+{
+    int i;
+    int blen = 0;
+    int x;
+
+    const int y = WIDGET (g)->rect.lines - chown_but[first].y;
+
+    group_add_widget (g, hline_new (y - 1, -1, -1));
+
+    for (i = first; i <= last; i++)
+    {
+        chown_but[i].button =
+            button_new (y, 1, chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text, NULL);
+        blen += button_get_width (chown_but[i].button) + 1;
+        group_add_widget (g, chown_but[i].button);
+    }
+
+    x = WIDGET (g)->rect.x + (WIDGET (g)->rect.cols - blen) / 2;
+
+    for (i = first; i <= last; i++)
+    {
+        WIDGET (chown_but[i].button)->rect.x = x;
+        x += button_get_width (chown_but[i].button) + 1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static WDialog *
 chown_dlg_create (WPanel *panel)
 {
@@ -184,7 +198,6 @@ chown_dlg_create (WPanel *panel)
     WDialog *ch_dlg;
     WGroup *g;
     int lines, cols;
-    int i, y;
     struct passwd *l_pass;
     struct group *l_grp;
 
@@ -223,41 +236,16 @@ chown_dlg_create (WPanel *panel)
 
     group_add_widget (g, groupbox_new (2, 5 + GW * 2, GH, GW, _ ("File")));
     // add widgets for the file information
-    for (i = 0; i < LABELS; i++)
+    for (int i = 0; i < LABELS; i++)
     {
         chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, NULL);
         group_add_widget (g, chown_label[i].l);
     }
 
     if (single_set == 0)
-    {
-        int x;
+        chown_buttons_create (g, 0, BUTTONS - 3);
 
-        group_add_widget (g, hline_new (lines - chown_but[0].y - 1, -1, -1));
-
-        y = lines - chown_but[0].y;
-        x = (cols - blen) / 2;
-
-        for (i = 0; i < BUTTONS - 2; i++)
-        {
-            group_add_widget (g,
-                              button_new (y, x, chown_but[i].ret_cmd, chown_but[i].flags,
-                                          chown_but[i].text, NULL));
-            x += chown_but[i].len + 1;
-        }
-    }
-
-    i = BUTTONS - 2;
-    y = lines - chown_but[i].y;
-    group_add_widget (g, hline_new (y - 1, -1, -1));
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chown_but[i].len,
-                                  chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text,
-                                  NULL));
-    i++;
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, chown_but[i].ret_cmd,
-                                  chown_but[i].flags, chown_but[i].text, NULL));
+    chown_buttons_create (g, BUTTONS - 2, BUTTONS - 1);
 
     // select first listbox
     widget_select (WIDGET (l_user));
