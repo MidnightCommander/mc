@@ -232,7 +232,7 @@ external_panelize_init (void)
                         NULL);
         group_add_widget (g, b);
 
-        x += button_get_len (b) + 1;
+        x += button_get_width (b) + 1;
     }
 
     widget_select (WIDGET (l_panelize));

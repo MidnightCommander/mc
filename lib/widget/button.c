@@ -216,7 +216,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     b->action = action;
     b->flags = flags;
     b->text = hotkey_new (text);
-    r.cols = button_get_len (b);
+    r.cols = button_get_width (b);
     widget_init (w, &r, button_default_callback, button_mouse_default_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     b->callback = callback;
@@ -251,14 +251,14 @@ button_set_text (WButton *b, const char *text)
     hotkey_free (b->text);
     b->text = hk;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
-    w->rect.cols = button_get_len (b);
+    w->rect.cols = button_get_width (b);
     widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-button_get_len (const WButton *b)
+button_get_width (const WButton *b)
 {
     int ret = hotkey_width (b->text);
 
