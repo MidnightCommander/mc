@@ -74,19 +74,18 @@ static struct
     int ret_cmd;
     button_flags_t flags;
     int x;
-    int len;
     const char *text;
 } advanced_chown_but[BUTTONS] = {
-    { 0, B_ENTER, NARROW_BUTTON, 3, 0, "   " },
-    { 0, B_ENTER, NARROW_BUTTON, 11, 0, "   " },
-    { 0, B_ENTER, NARROW_BUTTON, 19, 0, "   " },
-    { 0, B_ENTER, NARROW_BUTTON, 29, 0, "" },
-    { 0, B_ENTER, NARROW_BUTTON, 47, 0, "" },
+    { 0, B_ENTER, NARROW_BUTTON, 3, "   " },
+    { 0, B_ENTER, NARROW_BUTTON, 11, "   " },
+    { 0, B_ENTER, NARROW_BUTTON, 19, "   " },
+    { 0, B_ENTER, NARROW_BUTTON, 29, "" },
+    { 0, B_ENTER, NARROW_BUTTON, 47, "" },
 
-    { 0, B_SETALL, NORMAL_BUTTON, 0, 0, N_ ("Set &all") },
-    { 0, B_SKIP, NORMAL_BUTTON, 0, 0, N_ ("S&kip") },
-    { 0, B_ENTER, DEFPUSH_BUTTON, 0, 0, N_ ("&Set") },
-    { 0, B_CANCEL, NORMAL_BUTTON, 0, 0, N_ ("&Cancel") },
+    { 0, B_SETALL, NORMAL_BUTTON, 0, N_ ("Set &all") },
+    { 0, B_SKIP, NORMAL_BUTTON, 0, N_ ("S&kip") },
+    { 0, B_ENTER, DEFPUSH_BUTTON, 0, N_ ("&Set") },
+    { 0, B_CANCEL, NORMAL_BUTTON, 0, N_ ("&Cancel") },
 };
 
 static int current_file;
@@ -112,23 +111,16 @@ static void
 advanced_chown_init (void)
 {
     static gboolean i18n = FALSE;
-    int i;
 
     if (i18n)
         return;
 
     i18n = TRUE;
 
-    for (i = BUTTONS_PERM; i < BUTTONS; i++)
-    {
 #ifdef ENABLE_NLS
+    for (int i = BUTTONS_PERM; i < BUTTONS; i++)
         advanced_chown_but[i].text = _ (advanced_chown_but[i].text);
 #endif
-
-        advanced_chown_but[i].len = str_term_width1 (advanced_chown_but[i].text) + 3;
-        if (advanced_chown_but[i].flags == DEFPUSH_BUTTON)
-            advanced_chown_but[i].len += 2;  // "<>"
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -776,35 +768,23 @@ advanced_chown_dlg_create (WPanel *panel)
     group_add_widget (ch_grp, l_mode);
 
     y = BY + 3;
-    if (!single_set)
-    {
-        i = BUTTONS_PERM;
-        group_add_widget (ch_grp, hline_new (y++, -1, -1));
-        advanced_chown_but[i].id = group_add_widget (
-            ch_grp,
-            button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - advanced_chown_but[i].len,
-                        advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags,
-                        advanced_chown_but[i].text, NULL));
-        i++;
-        advanced_chown_but[i].id = group_add_widget (
-            ch_grp,
-            button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, advanced_chown_but[i].ret_cmd,
-                        advanced_chown_but[i].flags, advanced_chown_but[i].text, NULL));
-        y++;
-    }
 
-    i = BUTTONS_PERM + 2;
-    group_add_widget (ch_grp, hline_new (y++, -1, -1));
-    advanced_chown_but[i].id =
-        group_add_widget (ch_grp,
-                          button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - advanced_chown_but[i].len,
-                                      advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags,
-                                      advanced_chown_but[i].text, NULL));
-    i++;
-    advanced_chown_but[i].id = group_add_widget (
-        ch_grp,
-        button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, advanced_chown_but[i].ret_cmd,
-                    advanced_chown_but[i].flags, advanced_chown_but[i].text, NULL));
+    for (i = single_set ? BUTTONS_PERM + 2 : BUTTONS_PERM; i < BUTTONS; i++, y++)
+    {
+        WButton *b;
+
+        group_add_widget (ch_grp, hline_new (y++, -1, -1));
+
+        b = button_new (y, 1, advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags,
+                        advanced_chown_but[i].text, NULL);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 - button_get_width (b);
+        group_add_widget (ch_grp, b);
+        i++;
+        b = button_new (y, 1, advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags,
+                        advanced_chown_but[i].text, NULL);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 + 1;
+        group_add_widget (ch_grp, b);
+    }
 
     widget_select (WIDGET (b_att[0]));
 
