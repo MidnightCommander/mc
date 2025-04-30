@@ -362,7 +362,7 @@ chmod_dlg_create (WPanel *panel, const char *fname, const struct stat *sf_stat)
             group_add_widget (g, hline_new (y - 1, -1, -1));
 
         b = button_new (y, 1, chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, NULL);
-        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 - button_get_width (b);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 - widget_get_columns (WIDGET (b));
         group_add_widget (g, b);
         i++;
         b = button_new (y, 1, chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, NULL);

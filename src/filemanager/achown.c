@@ -777,7 +777,7 @@ advanced_chown_dlg_create (WPanel *panel)
 
         b = button_new (y, 1, advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags,
                         advanced_chown_but[i].text, NULL);
-        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 - button_get_width (b);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 - widget_get_columns (WIDGET (b));
         group_add_widget (ch_grp, b);
         i++;
         b = button_new (y, 1, advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags,
