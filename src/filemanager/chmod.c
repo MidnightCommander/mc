@@ -103,15 +103,14 @@ static struct
     int ret_cmd;
     button_flags_t flags;
     int y;  // vertical position relatively to dialog bottom boundary
-    int len;
     const char *text;
 } chmod_but[BUTTONS] = {
-    { B_SETALL, NORMAL_BUTTON, 6, 0, N_ ("Set &all") },
-    { B_MARKED, NORMAL_BUTTON, 6, 0, N_ ("&Marked all") },
-    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_ ("S&et marked") },
-    { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_ ("C&lear marked") },
-    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
-    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") },
+    { B_SETALL, NORMAL_BUTTON, 6, N_ ("Set &all") },
+    { B_MARKED, NORMAL_BUTTON, 6, N_ ("&Marked all") },
+    { B_SETMRK, NORMAL_BUTTON, 5, N_ ("S&et marked") },
+    { B_CLRMRK, NORMAL_BUTTON, 5, N_ ("C&lear marked") },
+    { B_ENTER, DEFPUSH_BUTTON, 3, N_ ("&Set") },
+    { B_CANCEL, NORMAL_BUTTON, 3, N_ ("&Cancel") },
 };
 
 static gboolean mode_change;
@@ -164,13 +163,6 @@ chmod_init (void)
     {
         len = str_term_width1 (file_info_labels[i]) + 2;  // spaces around
         file_info_labels_len = MAX (file_info_labels_len, len);
-    }
-
-    for (i = 0; i < BUTTONS; i++)
-    {
-        chmod_but[i].len = str_term_width1 (chmod_but[i].text) + 3;  // [], spaces and w/o &
-        if (chmod_but[i].flags == DEFPUSH_BUTTON)
-            chmod_but[i].len += 2;  // <>
     }
 }
 
@@ -360,38 +352,23 @@ chmod_dlg_create (WPanel *panel, const char *fname, const struct stat *sf_stat)
     c_fgrp = str_trunc (get_group (sf_stat->st_gid), file_gb_len - 3);
     group_add_widget (g, label_new (y + 6, cols, c_fgrp));
 
-    if (!single_set)
+    for (i = single_set ? BUTTONS - 2 : 0; i < BUTTONS; i++)
     {
-        i = 0;
+        WButton *b;
 
-        group_add_widget (g, hline_new (lines - chmod_but[i].y - 1, -1, -1));
+        y = lines - chmod_but[i].y;
 
-        for (; i < BUTTONS - 2; i++)
-        {
-            y = lines - chmod_but[i].y;
-            group_add_widget (g,
-                              button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chmod_but[i].len,
-                                          chmod_but[i].ret_cmd, chmod_but[i].flags,
-                                          chmod_but[i].text, NULL));
-            i++;
-            group_add_widget (g,
-                              button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1,
-                                          chmod_but[i].ret_cmd, chmod_but[i].flags,
-                                          chmod_but[i].text, NULL));
-        }
+        if (i == 0 || i == BUTTONS - 2)
+            group_add_widget (g, hline_new (y - 1, -1, -1));
+
+        b = button_new (y, 1, chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, NULL);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 - button_get_width (b);
+        group_add_widget (g, b);
+        i++;
+        b = button_new (y, 1, chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, NULL);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 + 1;
+        group_add_widget (g, b);
     }
-
-    i = BUTTONS - 2;
-    y = lines - chmod_but[i].y;
-    group_add_widget (g, hline_new (y - 1, -1, -1));
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chmod_but[i].len,
-                                  chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
-                                  NULL));
-    i++;
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, chmod_but[i].ret_cmd,
-                                  chmod_but[i].flags, chmod_but[i].text, NULL));
 
     // select first checkbox
     widget_select (WIDGET (check_perm[0].check));
