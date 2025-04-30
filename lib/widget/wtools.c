@@ -265,7 +265,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
             const char *cp = va_arg (ap, char *);
 
             button = button_new (1, 1, B_USER + i, NORMAL_BUTTON, cp, NULL);
-            win_len += button_get_len (button) + 1;
+            win_len += button_get_width (button) + 1;
             g_ptr_array_add (buttons, button);
         }
         va_end (ap);
@@ -300,7 +300,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
             WIDGET (button)->rect.x = cols;
             group_add_widget (g, button);
 
-            cols += button_get_len (button) + 1;
+            cols += button_get_width (button) + 1;
 
             if (i == sel_pos)
                 defbutton = button;

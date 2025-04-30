@@ -957,13 +957,13 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         WIDGET (button_new (y, 0, progress_buttons[0].action, progress_buttons[0].flags,
                             progress_buttons[0].text, progress_button_callback));
     if (progress_buttons[0].len == -1)
-        progress_buttons[0].len = button_get_len (BUTTON (progress_buttons[0].w));
+        progress_buttons[0].len = button_get_width (BUTTON (progress_buttons[0].w));
 
     progress_buttons[1].w =
         WIDGET (button_new (y, 0, progress_buttons[1].action, progress_buttons[1].flags,
                             progress_buttons[1].text, progress_button_callback));
     if (progress_buttons[1].len == -1)
-        progress_buttons[1].len = button_get_len (BUTTON (progress_buttons[1].w));
+        progress_buttons[1].len = button_get_width (BUTTON (progress_buttons[1].w));
 
     if (progress_buttons[2].len == -1)
     {
@@ -971,7 +971,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         progress_buttons[2].w =
             WIDGET (button_new (y, 0, progress_buttons[2].action, progress_buttons[2].flags,
                                 progress_buttons[2].text, progress_button_callback));
-        progress_buttons[2].len = button_get_len (BUTTON (progress_buttons[2].w));
+        progress_buttons[2].len = button_get_width (BUTTON (progress_buttons[2].w));
         widget_destroy (progress_buttons[2].w);
     }
     progress_buttons[2].w = progress_buttons[1].w;
@@ -980,7 +980,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         WIDGET (button_new (y, 0, progress_buttons[3].action, progress_buttons[3].flags,
                             progress_buttons[3].text, progress_button_callback));
     if (progress_buttons[3].len == -1)
-        progress_buttons[3].len = button_get_len (BUTTON (progress_buttons[3].w));
+        progress_buttons[3].len = button_get_width (BUTTON (progress_buttons[3].w));
 
     group_add_widget (g, progress_buttons[0].w);
     group_add_widget (g, progress_buttons[1].w);
