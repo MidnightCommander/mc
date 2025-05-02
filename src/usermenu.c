@@ -392,7 +392,7 @@ test_line (const Widget *edit_widget, char *p, gboolean *result)
             p++;
         if (*p == '\0' || *p == '\n')
             break;
-        operator= * p++;
+        operator = *p++;
         if (*p == '?')
         {
             debug_flag = TRUE;
