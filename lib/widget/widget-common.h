@@ -258,6 +258,22 @@ send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static inline int
+widget_get_columns (const Widget *w)
+{
+    return w->rect.cols;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline int
+widget_get_lines (const Widget *w)
+{
+    return w->rect.lines;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Check whether one or several option flags are set or not.
  * @param w widget
