@@ -810,7 +810,8 @@ displays the file size.
 is an alternative form of the
 .B size
 format. It displays the size of the files and for directories it just
-shows SUB\-DIR or UP\-\-DIR.
+shows SUB\-DIR or UP\-\-DIR unless the directory size is computed by the
+"Show directory sizes" command.
 .TP
 .B type
 displays a one character wide type field.  This character is similar to
