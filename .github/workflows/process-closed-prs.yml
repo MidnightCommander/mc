@@ -1,0 +1,38 @@
+name: Process closed PRs
+
+on:
+  pull_request_target:
+    types: [ closed ]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: PR number
+        required: true
+        type: number
+
+jobs:
+  remove-labels-on-close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      pull-requests: write
+
+      # https://github.com/cli/cli/issues/6274
+      repository-projects: read
+
+    steps:
+      - run: |
+          gh pr edit ${{ inputs.pr_number != '' && inputs.pr_number || github.event.pull_request.number }}  \
+            --remove-label "state: in review,state: approved"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+
+      - run: |
+          gh pr edit ${{ inputs.pr_number != '' && inputs.pr_number || github.event.pull_request.number }}  \
+            --remove-milestone
+        if: github.event.pull_request.merged != true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
