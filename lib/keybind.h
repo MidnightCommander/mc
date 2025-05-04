@@ -203,6 +203,7 @@ enum
     CK_SortPrev,
     CK_SortReverse,
     CK_SortByName,
+    CK_SortByVersion,
     CK_SortByExt,
     CK_SortBySize,
     CK_SortByMTime,
