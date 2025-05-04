@@ -26,11 +26,11 @@ jobs:
     steps:
       - run: |
           gh pr review \
-            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }}  \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.pull_request.number }}  \
               --approve
           
           gh pr edit \
-            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.pull_request.number }} \
               --remove-label "state: in review"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
