@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-    if: ${{ github.event.issue.pull_request && (contains(github.event.label.name, 'approved') || inputs.issue_number != '') }}
+    if: ${{ contains(github.event.label.name, 'approved') || inputs.issue_number != '' }}
 
     permissions:
       pull-requests: write
