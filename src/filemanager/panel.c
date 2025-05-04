@@ -424,7 +424,8 @@ string_file_size_brief (const file_entry_t *fe, int len)
     if (S_ISLNK (fe->st.st_mode) && !link_isdir (fe))
         return _ ("SYMLINK");
 
-    if ((S_ISDIR (fe->st.st_mode) || link_isdir (fe)) && !DIR_IS_DOTDOT (fe->fname->str))
+    if ((S_ISDIR (fe->st.st_mode) || link_isdir (fe)) && !fe->f.dir_size_computed
+        && !DIR_IS_DOTDOT (fe->fname->str))
         return _ ("SUB-DIR");
 
     return string_file_size (fe, len);
