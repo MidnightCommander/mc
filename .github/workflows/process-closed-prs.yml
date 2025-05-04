@@ -30,9 +30,9 @@ jobs:
           GH_REPO: ${{ github.repository }}
 
       - run: |
-          gh pr edit ${{ inputs.pr_number != '' && inputs.pr_number || github.event.pull_request.number }}  \
+          gh pr edit ${{ github.event.pull_request.number }}  \
             --remove-milestone
-        if: github.event.pull_request.merged != true
+        if: ${{ ! github.event.pull_request.merged && ! inputs.pr_number != ''}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
