@@ -47,4 +47,4 @@ jobs:
 
           GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash origin/master
 
-          git push -u origin HEAD --force-with-lease
+          git push --force
