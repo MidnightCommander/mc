@@ -519,6 +519,9 @@ move the selection bar one page down.
 .B prev\-page, Alt\-v
 move the selection bar one page up.
 .TP
+.B Alt\-(, Alt\-)
+scroll long filenames to the right or left.
+.TP
 .B Alt\-o
 If the currently selected file is a directory, load that directory on
 the other panel and moves the selection to the next file. If the
