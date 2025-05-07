@@ -209,6 +209,8 @@ enum
     CK_SortByMTime,
     CK_ScrollLeft,
     CK_ScrollRight,
+    CK_ScrollHome,
+    CK_ScrollEnd,
     CK_CycleListingFormat,
 
     // dialog

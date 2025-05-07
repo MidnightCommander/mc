@@ -137,8 +137,8 @@ typedef struct
         int chpoint;          // Point after last characters in @ch
     } quick_search;
 
-    int content_shift;  // Number of characters of filename need to skip from left side.
-    int max_shift;      // Max shift for visible part of current panel
+    unsigned int content_shift;  // Number of characters of filename need to skip from left side
+    unsigned int max_shift;      // Max shift for visible part of current panel
 } WPanel;
 
 /*** global variables defined in .c file *********************************************************/

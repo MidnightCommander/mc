@@ -129,8 +129,10 @@ Bottom = alt-gt; end; c1
 # SortBySize =
 # SortByMTime =
 # Filter =
-# ScrollLeft =
-# ScrollRight =
+ScrollLeft = alt-lparenthesis
+ScrollRight = alt-rparenthesis
+# ScrollHome =
+# ScrollEnd =
 
 [dialog]
 Ok = enter

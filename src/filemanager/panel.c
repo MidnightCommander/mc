@@ -32,6 +32,7 @@
 
 #include <config.h>
 
+#include <limits.h>  // UINT_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -721,27 +722,25 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
             if (len <= 0)
                 break;
 
-            if (!isstatus && panel->content_shift > -1 && strcmp (fi->id, "name") == 0)
+            if (!isstatus && strcmp (fi->id, "name") == 0)
             {
-                int str_len;
-                int i;
+                const int str_len = str_length (txt);
+                const unsigned int len_diff = (unsigned int) DOZ (str_len, len);
 
                 *field_length = len + 1;
 
-                str_len = str_length (txt);
-                i = MAX (0, str_len - len);
-                panel->max_shift = MAX (panel->max_shift, i);
-                i = MIN (panel->content_shift, i);
+                panel->max_shift = MAX (panel->max_shift, len_diff);
 
-                if (i > -1)
+                if (len_diff != 0)
                 {
-                    name_offset = str_offset_to_pos (txt, i);
-                    if (str_len > len)
-                    {
-                        res = FILENAME_SCROLL_LEFT;
-                        if (str_length (txt + name_offset) > len)
-                            res |= FILENAME_SCROLL_RIGHT;
-                    }
+                    const unsigned int shift = MIN (panel->content_shift, len_diff);
+
+                    if (shift != 0)
+                        res |= FILENAME_SCROLL_LEFT;
+
+                    name_offset = str_offset_to_pos (txt, shift);
+                    if (str_length (txt + name_offset) > len)
+                        res |= FILENAME_SCROLL_RIGHT;
                 }
             }
 
@@ -758,7 +757,7 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
             else
                 tty_lowlevel_setcolor (-color);
 
-            if (!isstatus && panel->content_shift > -1)
+            if (!isstatus)
                 prepared_text = str_fit_to_term (txt + name_offset, len, HIDE_FIT (fi->just_mode));
             else
                 prepared_text = str_fit_to_term (txt, len, fi->just_mode);
@@ -854,9 +853,18 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
             }
         }
 
-        widget_gotoyx (w, ypos, offset);
-        tty_setcolor (NORMAL_COLOR);
-        tty_print_string (panel_filename_scroll_left_char);
+        const int file_color =
+            attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT ? SELECTED_COLOR : NORMAL_COLOR;
+
+        if ((ret_frm & FILENAME_SCROLL_LEFT) != 0)
+        {
+            const int scroll_left_char_color =
+                panel->list_format == list_long ? file_color : NORMAL_COLOR;
+
+            widget_gotoyx (w, ypos, offset);
+            tty_setcolor (scroll_left_char_color);
+            tty_print_string (panel_filename_scroll_left_char);
+        }
 
         if ((ret_frm & FILENAME_SCROLL_RIGHT) != 0)
         {
@@ -864,8 +872,13 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
             if (nth_column + 1 >= panel->list_cols)
                 offset++;
 
+            const int scroll_right_char_color =
+                panel->list_format != list_long && g_slist_length (panel->format) > 2
+                ? file_color
+                : NORMAL_COLOR;
+
             widget_gotoyx (w, ypos, offset);
-            tty_setcolor (NORMAL_COLOR);
+            tty_setcolor (scroll_right_char_color);
             tty_print_string (panel_filename_scroll_right_char);
         }
     }
@@ -958,7 +971,7 @@ paint_dir (WPanel *panel)
 
     items = panel_items (panel);
     // reset max len of filename because we have the new max length for the new file list
-    panel->max_shift = -1;
+    panel->max_shift = 0;
 
     for (i = 0; i < items; i++)
     {
@@ -3194,19 +3207,16 @@ panel_select_sort_order (WPanel *panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /**
- * panel_content_scroll_left:
- * @param panel the pointer to the panel on which we operate
+ * Scroll long filename to left
  *
- * scroll long filename to the left (decrement scroll pointer)
- *
+ * @param panel object
  */
 
 static void
 panel_content_scroll_left (WPanel *panel)
 {
-    if (panel->content_shift > -1)
+    if (panel->content_shift != 0)
     {
         if (panel->content_shift > panel->max_shift)
             panel->content_shift = panel->max_shift;
@@ -3219,22 +3229,56 @@ panel_content_scroll_left (WPanel *panel)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * panel_content_scroll_right:
- * @param panel the pointer to the panel on which we operate
+ * Scroll long filename to right
  *
- * scroll long filename to the right (increment scroll pointer)
- *
+ * @param panel object
  */
 
 static void
 panel_content_scroll_right (WPanel *panel)
 {
-    if (panel->content_shift < 0 || panel->content_shift < panel->max_shift)
+    if (panel->content_shift == 0 || panel->content_shift < panel->max_shift)
     {
         panel->content_shift++;
         show_dir (panel);
         paint_dir (panel);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Scroll long filename to home
+ *
+ * @param panel the pointer to the panel on which we operate
+ */
+
+static void
+panel_content_scroll_home (WPanel *panel)
+{
+    panel->content_shift = 0;
+    show_dir (panel);
+    paint_dir (panel);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Scroll long filename to end
+ *
+ * @param panel the pointer to the panel on which we operate
+ */
+
+static void
+panel_content_scroll_end (WPanel *panel)
+{
+    // set content_shift to the maximum possible value
+    panel->content_shift = UINT_MAX;
+
+    show_dir (panel);
+    paint_dir (panel);
+
+    // correct content shift after UINT_MAX
+    if (panel->content_shift > panel->max_shift)
+        panel->content_shift = panel->max_shift;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3620,6 +3664,12 @@ panel_execute_cmd (WPanel *panel, long command)
         break;
     case CK_ScrollRight:
         panel_content_scroll_right (panel);
+        break;
+    case CK_ScrollHome:
+        panel_content_scroll_home (panel);
+        break;
+    case CK_ScrollEnd:
+        panel_content_scroll_end (panel);
         break;
     case CK_Search:
         start_search (panel);
@@ -4380,8 +4430,8 @@ panel_clean_dir (WPanel *panel)
     panel->quick_search.active = FALSE;
     panel->is_panelized = FALSE;
     panel->dirty = TRUE;
-    panel->content_shift = -1;
-    panel->max_shift = -1;
+    panel->content_shift = 0;
+    panel->max_shift = 0;
 
     dir_list_free_list (&panel->dir);
 }
@@ -4454,8 +4504,8 @@ panel_sized_empty_new (const char *panel_name, const WRect *r)
     panel->list_cols = 1;
     panel->brief_cols = 2;
     panel->dirty = TRUE;
-    panel->content_shift = -1;
-    panel->max_shift = -1;
+    panel->content_shift = 0;
+    panel->max_shift = 0;
 
     panel->list_format = list_full;
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
