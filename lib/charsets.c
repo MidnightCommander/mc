@@ -52,9 +52,8 @@ const char *cp_source = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UNKNCHAR   '\001'
-
-#define OTHER_8BIT "Other_8_bit"
+#define UNKNCHAR       '\001'
+#define NO_TRANSLATION "No translation"
 
 /*** file scope type declarations ****************************************************************/
 
@@ -238,7 +237,7 @@ free_codepages_list (void)
 const char *
 get_codepage_id (const int n)
 {
-    return (n < 0) ? OTHER_8BIT : ((codepage_desc *) g_ptr_array_index (codepages, n))->id;
+    return (n < 0) ? NO_TRANSLATION : ((codepage_desc *) g_ptr_array_index (codepages, n))->id;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -246,13 +245,11 @@ get_codepage_id (const int n)
 int
 get_codepage_index (const char *id)
 {
-    guint i;
-
     if (codepages == NULL)
         return -1;
-    if (strcmp (id, OTHER_8BIT) == 0)
+    if (strcmp (id, NO_TRANSLATION) == 0)
         return -1;
-    for (i = 0; i < codepages->len; i++)
+    for (guint i = 0; i < codepages->len; i++)
         if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
             return (int) i;
     return -1;

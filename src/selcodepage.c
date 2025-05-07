@@ -70,71 +70,40 @@ get_hotkey (int n)
 
 /* Return value:
  *   -2 (SELECT_CHARSET_CANCEL)       : Cancel
- *   -1 (SELECT_CHARSET_OTHER_8BIT)   : "Other 8 bit"    if seldisplay == TRUE
- *   -1 (SELECT_CHARSET_NO_TRANSLATE) : "No translation" if seldisplay == FALSE
+ *   -1 (SELECT_CHARSET_NO_TRANSLATE) : "No translation"
  *   >= 0                             : charset number
  */
 int
-select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay)
+select_charset (const int center_y, const int center_x, const int current_charset)
 {
     Listbox *listbox;
-    size_t i;
-    int listbox_result;
-    char buffer[255];
 
-    // Create listbox
     listbox = listbox_window_centered_new (center_y, center_x, codepages->len + 1, ENTRY_LEN + 2,
                                            _ ("Choose codepage"), "[Codepages Translation]");
 
-    if (!seldisplay)
-        LISTBOX_APPEND_TEXT (listbox, '-', _ ("-  < No translation >"), NULL, FALSE);
+    LISTBOX_APPEND_TEXT (listbox, '-', _ ("-  < No translation >"), NULL, FALSE);
 
-    // insert all the items found
-    for (i = 0; i < codepages->len; i++)
+    for (guint i = 0; i < codepages->len; i++)
     {
-        const char *name;
+        char buffer[BUF_SMALL];
 
-        name = ((codepage_desc *) g_ptr_array_index (codepages, i))->name;
+        const char *name = ((codepage_desc *) g_ptr_array_index (codepages, i))->name;
         g_snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i), name);
         LISTBOX_APPEND_TEXT (listbox, get_hotkey (i), buffer, NULL, FALSE);
     }
 
-    if (seldisplay)
-    {
-        unsigned char hotkey;
+    listbox_set_current (listbox->list, current_charset + 1);
 
-        hotkey = get_hotkey (codepages->len);
-        g_snprintf (buffer, sizeof (buffer), "%c  %s", hotkey, _ ("Other 8 bit"));
-        LISTBOX_APPEND_TEXT (listbox, hotkey, buffer, NULL, FALSE);
-    }
+    const int listbox_result = listbox_run (listbox);
 
-    // Select the default entry
-    i = seldisplay ? ((current_charset < 0) ? codepages->len : (size_t) current_charset)
-                   : ((size_t) current_charset + 1);
-
-    listbox_set_current (listbox->list, i);
-
-    listbox_result = listbox_run (listbox);
-
-    if (listbox_result < 0)
-        // Cancel dialog
-        return SELECT_CHARSET_CANCEL;
-
-    // some charset has been selected
-    if (seldisplay)
-        // charset list is finished with "Other 8 bit" item
-        return (listbox_result >= (int) codepages->len) ? SELECT_CHARSET_OTHER_8BIT
-                                                        : listbox_result;
-
-    // charset list is began with "-  < No translation >" item
-    return (listbox_result - 1);
+    return listbox_result < 0 ? SELECT_CHARSET_CANCEL : listbox_result - 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /** Set codepage */
 gboolean
-do_set_codepage (int codepage)
+do_set_codepage (const int codepage)
 {
     char *errmsg;
     gboolean ret;
@@ -161,9 +130,8 @@ do_set_codepage (int codepage)
 gboolean
 do_select_codepage (void)
 {
-    int r;
+    const int r = select_charset (-1, -1, default_source_codepage);
 
-    r = select_charset (-1, -1, default_source_codepage, FALSE);
     if (r == SELECT_CHARSET_CANCEL)
         return FALSE;
 

@@ -307,7 +307,6 @@ static const struct
     { "confirm_view_dir", &confirm_view_dir },
     { "safe_delete", &safe_delete },
     { "safe_overwrite", &safe_overwrite },
-    { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
     { "mouse_move_pages_viewer", &mcview_mouse_move_pages },
     { "mouse_close_dialog", &mouse_close_dialog },
     { "fast_refresh", &fast_refresh },

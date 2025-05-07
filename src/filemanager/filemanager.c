@@ -323,8 +323,6 @@ create_options_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Panel options..."), CK_OptionsPanel));
     entries = g_list_prepend (entries, menu_entry_new (_ ("C&onfirmation..."), CK_OptionsConfirm));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Appearance..."), CK_OptionsAppearance));
-    entries =
-        g_list_prepend (entries, menu_entry_new (_ ("&Display bits..."), CK_OptionsDisplayBits));
     entries = g_list_prepend (entries, menu_entry_new (_ ("Learn &keys..."), CK_LearnKeys));
 #ifdef ENABLE_VFS
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Virtual FS..."), CK_OptionsVfs));
@@ -1186,9 +1184,6 @@ midnight_execute_cmd (Widget *sender, long command)
         diff_view_cmd ();
         break;
 #endif
-    case CK_OptionsDisplayBits:
-        display_bits_box ();
-        break;
     case CK_Edit:
         edit_cmd (current_panel);
         break;

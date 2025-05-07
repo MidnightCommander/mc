@@ -4988,9 +4988,8 @@ panel_change_encoding (WPanel *panel)
 {
     const char *encoding = NULL;
     char *errmsg;
-    int r;
 
-    r = select_charset (-1, -1, panel->codepage, FALSE);
+    const int r = select_charset (-1, -1, panel->codepage);
 
     if (r == SELECT_CHARSET_CANCEL)
         return;  // Cancel
