@@ -589,10 +589,24 @@ configure_box (void)
 void
 appearance_box (void)
 {
-    gboolean shadows = mc_global.tty.shadows;
+    const gboolean shadows = mc_global.tty.shadows;
+    char *label_cp_display;
+    char *label_cp_source;
 
     current_skin_name = g_strdup (mc_skin__default.name);
     skin_names = mc_skin_list ();
+
+    const char *name_cp_display =
+        ((codepage_desc *) g_ptr_array_index (codepages, mc_global.display_codepage))->name;
+
+    const char *name_cp_source = mc_global.source_codepage >= 0
+        ? ((codepage_desc *) g_ptr_array_index (codepages, mc_global.source_codepage))->name
+        : N_ ("No translation");
+
+    label_cp_display =
+        g_strdup_printf ("%s: %s", N_ ("Detected display codepage"), name_cp_display);
+    label_cp_source =
+        g_strdup_printf ("%s: %s", N_ ("Selected source (file I/O) codepage"), name_cp_source);
 
     {
         quick_widget_t quick_widgets[] = {
@@ -605,6 +619,9 @@ appearance_box (void)
             QUICK_STOP_COLUMNS,
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_ ("&Shadows"), &mc_global.tty.shadows, &shadows_id),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABEL (label_cp_display, NULL),
+            QUICK_LABEL (label_cp_source, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
             // clang-format on
@@ -631,6 +648,8 @@ appearance_box (void)
         }
     }
 
+    g_free (label_cp_display);
+    g_free (label_cp_source);
     g_free (current_skin_name);
     g_ptr_array_free (skin_names, TRUE);
 }
