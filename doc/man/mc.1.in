@@ -1687,13 +1687,6 @@ command pops up a dialog from which you specify the skin.
 .PP
 The
 .\"LINK2"
-Display bits
-.\"Display bits"
-command pops up a dialog from which you may select which characters is your
-terminal able to display.
-.PP
-The
-.\"LINK2"
 Learn keys
 .\"Learn keys"
 command pops up a dialog from which you test some keys which are not working
@@ -2069,13 +2062,6 @@ section for technical details about the skin definition files.
 .PP
 .I Shadows.
 If this option is enabled, all dialogs and drop down menus will have a shadow.
-.\"NODE "    Display bits"
-.SH "    Display bits"
-This is used to configure the range of visible characters on the
-screen.  This setting may be 7\-bits if your terminal/curses supports
-only seven output bits, ISO\-8859\-1 displays all the characters in the
-ISO\-8859\-1 map and full 8 bits is for those terminals that can display
-full 8 bit characters.
 .\"NODE "    Learn keys"
 .SH "    Learn keys"
 This dialog allows you to test and redefine functional keys, cursor
@@ -3112,11 +3098,6 @@ file
 which is copied to
 .B ~/.local/share/mc/mcedit/edit.indent.rc
 in your home directory the first time you use it.
-.PP
-The editor also displays non\-us characters (160+). When editing
-binary files, you should set
-.B display bits
-to 7 bits in the options menu to keep the spacing clean.
 
 .\"NODE "Internal File Editor / options"
 .SH "Options of editor in ini\-file"

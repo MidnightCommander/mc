@@ -1497,13 +1497,6 @@ mely műveletekhez kell megerősítést kérni.
 .PP
 A
 .\"LINK2"
-Képernyőbitek
-.\"Display bits"
-parancs dialógus ablakot nyit meg, amellyel beállíthatod azt, hogy
-milyen karakterek jelenhessenek meg a terminálodon.
-.PP
-A
-.\"LINK2"
 Billentyűzet tanítás
 .\"Learn keys"
 dialódus ablakot jelenít meg, amelyben megvizsgálhatod azokat a
@@ -1730,16 +1723,6 @@ jelenleg is kiválasztott bejegyzések információival.
 Ebben a menüben tudod beállítani enter lenyomására a törlés,
 felülírás, futtatás, és programból történő kilépés
 Megerősítésének opcióit.
-.\"NODE "    Display bits"
-.SH "    Képernyőbitek"
-Ez az ablak a megjelenített karakterek tartományának beállítására
-szolgál. Ez a beállítás lehet 7\-bites, ha terminálod, vagy
-megjelenítésed csak a hét bites karaktereket támogatja; az
-ISO\-8859\-1\-ben az ISO\-8859\-1\-es karaktetábla valamennyi karaktere
-megjeleníthető; végül teljes 8 biten azokon a terminálokon, ahol teljes
-8 bitet meg tudsz jeleníteni. A két utolsó megjelenítési forma képes az
-ő és ű betűk kivételével az összes magyar betűt kijelezni a Belső
-filenézőben.
 .\"NODE "    Learn keys"
 .SH "    Billentyűzet tanítás"
 Ebben a dialógus ablakban tudod letesztelni azt, hogy terminálodon az
