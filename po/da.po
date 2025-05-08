@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -461,12 +461,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Skift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM-miljøvariabelen er ikke sat!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan ikke tjekke SIGWINCH-datakanal"
-
 #, c-format
 msgid ""
 "\n"
@@ -498,6 +492,12 @@ msgid ""
 msgstr ""
 "Skærmstørrelsen %dx%d understøttes ikke.\n"
 "Tjek TERM-miljøvariabelen.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM-miljøvariabelen er ikke sat!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kan ikke tjekke SIGWINCH-datakanal"
 
 msgid "B"
 msgstr "B"
@@ -1357,6 +1357,10 @@ msgstr "Gå til mat&chende parentes"
 msgid "Toggle s&yntax highlighting"
 msgstr "Skift s&yntaksfremhævelse"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Skift &mærke"
+
 msgid "&Find declaration"
 msgstr "&Find erklæring"
 
@@ -1814,9 +1818,6 @@ msgstr "< Standard >"
 msgid "Skins"
 msgstr "Temaer"
 
-msgid "Other 8 bit"
-msgstr "Andre 8-bit"
-
 msgid "Running"
 msgstr "Kører"
 
@@ -1900,6 +1901,17 @@ msgstr "Opsætning for a&utomatisk gemning"
 
 msgid "Configure options"
 msgstr "Konfigurer indstillinger"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ingen oversættelse >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Tegnsæt for inddata/visning:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -2041,27 +2053,6 @@ msgstr "Historikoprydning"
 
 msgid "Confirmation"
 msgstr "Bekræftelse"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8-output"
-
-msgid "&Full 8 bits output"
-msgstr "&Fuld 8 bit-output"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bits"
-
-msgid "F&ull 8 bits input"
-msgstr "F&uld 8-bit inddata"
-
-msgid "Display bits"
-msgstr "Vis bit"
-
-msgid "Input / display codepage:"
-msgstr "Tegnsæt for inddata/visning:"
 
 msgid "Directory tree"
 msgstr "Mappetræ"
@@ -3019,6 +3010,10 @@ msgstr "Følg &henvisninger"
 msgid "Preserve &attributes"
 msgstr "Bevar &attributter"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Bevar &attributter"
+
 msgid "Di&ve into subdir if exists"
 msgstr "D&yk ned i undermappe hvis den findes"
 
@@ -3202,9 +3197,6 @@ msgstr "&Bekræftelse..."
 
 msgid "&Appearance..."
 msgstr "&Fremtoning..."
-
-msgid "&Display bits..."
-msgstr "&Vis bit..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuelt FS..."
@@ -3967,9 +3959,6 @@ msgstr "Med understøttelse af X11-hændelser"
 msgid "With internationalization support"
 msgstr "Med understøttelse af internationalisering"
 
-msgid "With multiple codepages support"
-msgstr "Med understøttelse af flere tegnsæt"
-
 msgid "With ext2fs attributes support"
 msgstr "Med understøttelse af ext2fs-attributter"
 
@@ -4352,6 +4341,14 @@ msgstr "sftp: forbindelse afbrudt af bruger"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: forbindelse til server mislykkedes: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Kan ikke åbne »%s«\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: fandt en type nøgle på vært, som ikke er understøttet: RSA1"
 
@@ -4488,6 +4485,9 @@ msgstr "Fejl meldt tilbage efter afbrydelse."
 msgid "Aborted transfer would be successful."
 msgstr "Afbrudt overførsel ville være lykkedes."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
 
@@ -4506,9 +4506,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4702,3 +4699,30 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Andre 8-bit"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8-output"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Fuld 8 bit-output"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bits"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "F&uld 8-bit inddata"
+
+#~ msgid "Display bits"
+#~ msgstr "Vis bit"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Vis bit..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Med understøttelse af flere tegnsæt"

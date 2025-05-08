@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://app.transifex.com/mc/mc/language/lv/)\n"
@@ -439,12 +439,6 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM mainīgais nav ieslēgts!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -470,6 +464,12 @@ msgid ""
 msgstr ""
 "Ekrāna izmērs %dx%d nav atbalstīts.\n"
 "Pārbaudi TERM vides mainīgo.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM mainīgais nav ieslēgts!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1290,6 +1290,9 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+msgid "Togg&le right margin"
+msgstr ""
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1733,9 +1736,6 @@ msgstr ""
 msgid "Skins"
 msgstr ""
 
-msgid "Other 8 bit"
-msgstr "Citi 8 bitu"
-
 msgid "Running"
 msgstr ""
 
@@ -1819,6 +1819,17 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Konfigurēt opcijas"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Nav tulkojuma >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Ievades / displeja kodu tabula:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -1956,27 +1967,6 @@ msgstr ""
 
 msgid "Confirmation"
 msgstr ""
-
-msgid "&UTF-8 output"
-msgstr ""
-
-msgid "&Full 8 bits output"
-msgstr ""
-
-msgid "&ISO 8859-1"
-msgstr ""
-
-msgid "7 &bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr "P&ilna 8 bitu ievade"
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
-msgstr "Ievades / displeja kodu tabula:"
 
 msgid "Directory tree"
 msgstr ""
@@ -2835,6 +2825,9 @@ msgstr ""
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
@@ -3018,9 +3011,6 @@ msgstr ""
 
 msgid "&Appearance..."
 msgstr ""
-
-msgid "&Display bits..."
-msgstr "&Displeja biti..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuālā FS..."
@@ -3763,9 +3753,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4139,6 +4126,12 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4261,6 +4254,9 @@ msgstr "Kļūda paziņota pēc pātraukšanas."
 msgid "Aborted transfer would be successful."
 msgstr "Pātraukā pārraidīšana varētu būt veiksmīga"
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Neatbilstīgs tar arhīvs"
 
@@ -4279,9 +4275,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4458,3 +4451,12 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Citi 8 bitu"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "P&ilna 8 bitu ievade"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Displeja biti..."

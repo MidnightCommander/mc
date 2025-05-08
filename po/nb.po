@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -461,12 +461,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Miljøvariabelen TERM mangler.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Klarte ikke sjekke SIGWINCH-røret"
-
 #, c-format
 msgid ""
 "\n"
@@ -498,6 +492,12 @@ msgid ""
 msgstr ""
 "Skjermstørrelsen %dx%d støttes ikke.\n"
 "Sjekk miljøvariabelen TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Miljøvariabelen TERM mangler.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Klarte ikke sjekke SIGWINCH-røret"
 
 msgid "B"
 msgstr "B"
@@ -1385,6 +1385,10 @@ msgstr "Gå til tilhørende &parentes"
 msgid "Toggle s&yntax highlighting"
 msgstr "S&yntaksutheving av/på"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Ma&rkering av/på"
+
 msgid "&Find declaration"
 msgstr "Finn &deklarasjon"
 
@@ -1842,9 +1846,6 @@ msgstr "< Standard >"
 msgid "Skins"
 msgstr "Drakter"
 
-msgid "Other 8 bit"
-msgstr "Andre 8-biters"
-
 msgid "Running"
 msgstr "Kjører"
 
@@ -1928,6 +1929,17 @@ msgstr "Autolagre o&ppsettet"
 
 msgid "Configure options"
 msgstr "Sett opp innstillinger"
+
+#, fuzzy
+msgid "No translation"
+msgstr "- < Ingen oversettelse >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Tegnkoding for inndata/visning:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Drakt:"
@@ -2069,27 +2081,6 @@ msgstr "Confirmation|Tømming av &historikk"
 
 msgid "Confirmation"
 msgstr "Be om bekreftelse før"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8-utdata"
-
-msgid "&Full 8 bits output"
-msgstr "&Full 8-biters utdata"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7-&biters"
-
-msgid "F&ull 8 bits input"
-msgstr "F&ull 8-biters inndata"
-
-msgid "Display bits"
-msgstr "Tegnkoding"
-
-msgid "Input / display codepage:"
-msgstr "Tegnkoding for inndata/visning:"
 
 msgid "Directory tree"
 msgstr "Mappetre"
@@ -3060,6 +3051,10 @@ msgstr "Følg &lenker"
 msgid "Preserve &attributes"
 msgstr "Bevar a&ttributter"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Bevar a&ttributter"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Søk i alle &undermapper"
 
@@ -3243,9 +3238,6 @@ msgstr "&Bekreftelser ..."
 
 msgid "&Appearance..."
 msgstr "&Presentasjonsdrakt ..."
-
-msgid "&Display bits..."
-msgstr "&Tegnkoding ..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuelt FS ..."
@@ -4008,9 +4000,6 @@ msgstr "Med støtte for X11-hendelser"
 msgid "With internationalization support"
 msgstr "Med støtte for lokaltilpassing"
 
-msgid "With multiple codepages support"
-msgstr "Med støtte for flere tegnkodinger"
-
 msgid "With ext2fs attributes support"
 msgstr "Støtter ext2fs-attributter"
 
@@ -4401,6 +4390,14 @@ msgstr "sftp: Bruker avbrøt tilkoblingen"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: Tilkoblingen til tjeneren mislyktes: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Klarte ikke åpne «%s»\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: Fant vertsnøkkel med type som ikke støttes: RSA1"
 
@@ -4539,6 +4536,9 @@ msgstr "Feil rapportert etter avbrudd."
 msgid "Aborted transfer would be successful."
 msgstr "Avbrutt overføring ville vært i orden."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek stoppet ikke på kanten av en post"
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
 
@@ -4560,9 +4560,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "fremstår ikke som et tar-arkiv"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek stoppet ikke på kanten av en post"
 
 msgid "undelfs: error"
 msgstr "undelfs: feil"
@@ -4755,3 +4752,30 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Andre 8-biters"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8-utdata"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Full 8-biters utdata"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7-&biters"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "F&ull 8-biters inndata"
+
+#~ msgid "Display bits"
+#~ msgstr "Tegnkoding"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Tegnkoding ..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Med støtte for flere tegnkodinger"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
@@ -458,12 +458,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maius"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -489,6 +483,12 @@ msgid ""
 msgstr ""
 "%dx%d pantaila-neurria ez da onartzen.\n"
 "Egiaztatu TERM ingurune-aldagaia.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1347,6 +1347,10 @@ msgstr "Joan kort&xete parekidera"
 msgid "Toggle s&yntax highlighting"
 msgstr "Txandakatu sinta&xi nabarmentzea"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "T&xandakatu marka"
+
 msgid "&Find declaration"
 msgstr "&Aurkitu deklarazioa"
 
@@ -1802,9 +1806,6 @@ msgstr "< Lehenetsitakoa >"
 msgid "Skins"
 msgstr "Azalak"
 
-msgid "Other 8 bit"
-msgstr "Beste 8 bit"
-
 msgid "Running"
 msgstr "Martxan"
 
@@ -1888,6 +1889,17 @@ msgstr "A&uto gorde ezarpena"
 
 msgid "Configure options"
 msgstr "Konfiguratu aukerak"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ez dago itzulpenik >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Sartu / bistaratu kode-orrialdea:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Azala:"
@@ -2029,27 +2041,6 @@ msgstr "&Historia garbitu"
 
 msgid "Confirmation"
 msgstr "Berrespena"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 irteera"
-
-msgid "&Full 8 bits output"
-msgstr "8 biteko &osoko irteera"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bit"
-
-msgid "F&ull 8 bits input"
-msgstr "8 bit-eko sarrera"
-
-msgid "Display bits"
-msgstr "Bistaratu bitak"
-
-msgid "Input / display codepage:"
-msgstr "Sartu / bistaratu kode-orrialdea:"
 
 msgid "Directory tree"
 msgstr "Direktorio zuhaitza"
@@ -2521,8 +2512,8 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
-"(stat)\\n\n"
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
+"\\n\n"
 "%s"
 
 #, c-format
@@ -2993,6 +2984,10 @@ msgstr "jarraitu &estekei"
 msgid "Preserve &attributes"
 msgstr "Mantendu &atributuak"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Mantendu &atributuak"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Mur&gildu azpidirektorioan existitzen bada"
 
@@ -3176,9 +3171,6 @@ msgstr "&Berrespena..."
 
 msgid "&Appearance..."
 msgstr "&Itxura..."
-
-msgid "&Display bits..."
-msgstr "&Bistaratu bitak..."
 
 msgid "&Virtual FS..."
 msgstr "Alegiazko &FS..."
@@ -3933,9 +3925,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4311,6 +4300,14 @@ msgstr "sftp: erabiltzaileak konexioa etenarazi du"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: zerbitzarira konexioak huts egin du: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"\"%s\" ezin ireki\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4433,6 +4430,9 @@ msgstr "Akatsaren berri eman da galarazi ondoren."
 msgid "Aborted transfer would be successful."
 msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar artxibo inkoherentea"
 
@@ -4451,9 +4451,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4649,3 +4646,27 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Beste 8 bit"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 irteera"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "8 biteko &osoko irteera"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bit"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "8 bit-eko sarrera"
+
+#~ msgid "Display bits"
+#~ msgstr "Bistaratu bitak"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Bistaratu bitak..."

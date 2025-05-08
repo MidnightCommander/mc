@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -459,12 +459,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Vaihto"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ei voi tarkistaa SIGWINCH -putkea"
-
 #, c-format
 msgid ""
 "\n"
@@ -496,6 +490,12 @@ msgid ""
 msgstr ""
 "Näytön koko %dx%d ei ole yhteensopiva.\n"
 "Tarkista TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ei voi tarkistaa SIGWINCH -putkea"
 
 msgid "B"
 msgstr "t"
@@ -1339,6 +1339,9 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+msgid "Togg&le right margin"
+msgstr ""
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1786,9 +1789,6 @@ msgstr "<Oletus>"
 msgid "Skins"
 msgstr "Ulkoasuteemat"
 
-msgid "Other 8 bit"
-msgstr "Muut 8-bittiset"
-
 msgid "Running"
 msgstr "Käynnissä"
 
@@ -1871,6 +1871,15 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
+msgstr ""
+
+msgid "No translation"
+msgstr ""
+
+msgid "Detected display codepage"
+msgstr ""
+
+msgid "Selected source (file I/O) codepage"
 msgstr ""
 
 msgid "Skin:"
@@ -2008,27 +2017,6 @@ msgid "Confirmation|&History cleanup"
 msgstr ""
 
 msgid "Confirmation"
-msgstr ""
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 ulostulo"
-
-msgid "&Full 8 bits output"
-msgstr "&Täysi 8-bittinen ulostulo"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr "Täysi &8-bittinen syöte"
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
 msgstr ""
 
 msgid "Directory tree"
@@ -2937,6 +2925,9 @@ msgstr "Seuraa &linkkejä"
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr "Si&irry alihakemistoon, jos sellainen on "
 
@@ -3120,9 +3111,6 @@ msgstr ""
 
 msgid "&Appearance..."
 msgstr "&Ulkoasu..."
-
-msgid "&Display bits..."
-msgstr ""
 
 msgid "&Virtual FS..."
 msgstr ""
@@ -3844,9 +3832,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4206,6 +4191,14 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Ei voi avata tiedostoa %s\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4328,6 +4321,9 @@ msgstr "Virhe raportoitu keskeyttämisen jälkeen."
 msgid "Aborted transfer would be successful."
 msgstr "Keskeytetty siirto olisi onnistunut."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4344,9 +4340,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4523,3 +4516,18 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Muut 8-bittiset"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 ulostulo"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Täysi 8-bittinen ulostulo"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Täysi &8-bittinen syöte"

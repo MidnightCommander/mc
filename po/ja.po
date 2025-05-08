@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -450,12 +450,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "環境変数 TERM がセットされていません\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH パイプをチェックできません"
-
 #, c-format
 msgid ""
 "\n"
@@ -481,6 +475,12 @@ msgid ""
 msgstr ""
 "スクリーンサイズ %dx%d はサポートされていません\n"
 "TERM環境変数の値をチェックしてください\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "環境変数 TERM がセットされていません\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH パイプをチェックできません"
 
 msgid "B"
 msgstr ""
@@ -1301,6 +1301,10 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "マークの切り替え(&G)"
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1748,9 +1752,6 @@ msgstr ""
 msgid "Skins"
 msgstr ""
 
-msgid "Other 8 bit"
-msgstr "別の 8bit"
-
 msgid "Running"
 msgstr "実行しています"
 
@@ -1834,6 +1835,17 @@ msgstr "自動保存の設定(&U)"
 
 msgid "Configure options"
 msgstr "設定オプション"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < 翻訳がありません >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "入力 / コードページを表示:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -1971,27 +1983,6 @@ msgstr ""
 
 msgid "Confirmation"
 msgstr "確認"
-
-msgid "&UTF-8 output"
-msgstr ""
-
-msgid "&Full 8 bits output"
-msgstr ""
-
-msgid "&ISO 8859-1"
-msgstr ""
-
-msgid "7 &bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr "8 ビット入力(&u)"
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
-msgstr "入力 / コードページを表示:"
 
 msgid "Directory tree"
 msgstr "ディレクトリーのツリー"
@@ -2849,6 +2840,9 @@ msgstr ""
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
@@ -3032,9 +3026,6 @@ msgstr "確認(&O)..."
 
 msgid "&Appearance..."
 msgstr ""
-
-msgid "&Display bits..."
-msgstr "表示ビット数(&D)..."
 
 msgid "&Virtual FS..."
 msgstr "仮想FS(&V)..."
@@ -3768,9 +3759,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4141,6 +4129,14 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"「%s」を開けません\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4262,6 +4258,9 @@ msgstr "中断後にエラーが報告されました"
 msgid "Aborted transfer would be successful."
 msgstr "転送中断に成功しました"
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
 
@@ -4280,9 +4279,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4463,3 +4459,12 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Other 8 bit"
+#~ msgstr "別の 8bit"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "8 ビット入力(&u)"
+
+#~ msgid "&Display bits..."
+#~ msgstr "表示ビット数(&D)..."

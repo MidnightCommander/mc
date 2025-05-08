@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -465,12 +465,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Variabila de mediu TERM nu este setată!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nu se poate verifica conducta SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -502,6 +496,12 @@ msgid ""
 msgstr ""
 "Mărimea %dx%d a ecranului nu este suportată.\n"
 "Verificați variabila de mediu TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Variabila de mediu TERM nu este setată!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nu se poate verifica conducta SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1365,6 +1365,10 @@ msgstr "Mergi la &paranteza pereche"
 msgid "Toggle s&yntax highlighting"
 msgstr "Comută evidenţierea de sinta&xă"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Co&mută selecția"
+
 msgid "&Find declaration"
 msgstr "&Găsește declarația"
 
@@ -1822,9 +1826,6 @@ msgstr "< Implicit >"
 msgid "Skins"
 msgstr "Tematici"
 
-msgid "Other 8 bit"
-msgstr "Alt 8 biți"
-
 msgid "Running"
 msgstr "Rulează"
 
@@ -1908,6 +1909,17 @@ msgstr "Auto-salvare a configurației"
 
 msgid "Configure options"
 msgstr "Opțiuni de configurare"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Fără translatare >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Intrare / cod de afișare:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Tematică:"
@@ -2049,27 +2061,6 @@ msgstr "Confirmation|Curățare &istoric"
 
 msgid "Confirmation"
 msgstr "Confirmare"
-
-msgid "&UTF-8 output"
-msgstr "Ieșire &UTF-8"
-
-msgid "&Full 8 bits output"
-msgstr "Ieșire pe 8 biți comple&tă"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &biți"
-
-msgid "F&ull 8 bits input"
-msgstr "&Intrare pe 8 biți completă"
-
-msgid "Display bits"
-msgstr "Biți de afișare"
-
-msgid "Input / display codepage:"
-msgstr "Intrare / cod de afișare:"
 
 msgid "Directory tree"
 msgstr "Arbore dosare"
@@ -3025,6 +3016,10 @@ msgstr "Urmărește &legăturile"
 msgid "Preserve &attributes"
 msgstr "Păstrează &atributele"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Păstrează &atributele"
+
 msgid "Di&ve into subdir if exists"
 msgstr "In&tră în dosar dacă există"
 
@@ -3208,9 +3203,6 @@ msgstr "C&onfirmare..."
 
 msgid "&Appearance..."
 msgstr "&Aspect..."
-
-msgid "&Display bits..."
-msgstr "&Biți de afișare..."
 
 msgid "&Virtual FS..."
 msgstr "Sistem &virtual de fișiere..."
@@ -3977,9 +3969,6 @@ msgstr "Cu suport pentru evenimente X11"
 msgid "With internationalization support"
 msgstr "Cu suport pentru internaționalizare"
 
-msgid "With multiple codepages support"
-msgstr "Cu suport pentru mai multe pagini de cod"
-
 msgid "With ext2fs attributes support"
 msgstr "Cu suport pentru atributele ext2fs"
 
@@ -4364,6 +4353,14 @@ msgstr "sftp: conectare întreruptă de utilizator"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: conectarea la server a eșuat: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Nu se poate deschide \"%s\"\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: a fost găsită o cheie gazdă de tip neacceptat: RSA1"
 
@@ -4502,6 +4499,9 @@ msgstr "S-a raportat o eroare după abandon."
 msgid "Aborted transfer would be successful."
 msgstr "Transferul abandonat va reuși."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Arhivă tar trunchiată"
 
@@ -4520,9 +4520,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4716,3 +4713,30 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Alt 8 biți"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "Ieșire &UTF-8"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "Ieșire pe 8 biți comple&tă"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &biți"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "&Intrare pe 8 biți completă"
+
+#~ msgid "Display bits"
+#~ msgstr "Biți de afișare"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Biți de afișare..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Cu suport pentru mai multe pagini de cod"

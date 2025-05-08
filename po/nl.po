@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016-2017,2025\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
@@ -461,12 +461,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "De TERM-omgevingsvariabele is niet gezet!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan SIGWINCH-pipe niet controleren"
-
 #, c-format
 msgid ""
 "\n"
@@ -498,6 +492,12 @@ msgid ""
 msgstr ""
 "Schermgrootte %dx%d wordt niet ondersteund.\n"
 "Controleer omgevingsvariabele TERM ( opdr: set).\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "De TERM-omgevingsvariabele is niet gezet!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kan SIGWINCH-pipe niet controleren"
 
 msgid "B"
 msgstr "B"
@@ -1354,6 +1354,10 @@ msgstr "Ga naar corresponderend &haakje"
 msgid "Toggle s&yntax highlighting"
 msgstr "Kies syntax highlighting"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Markering &omdraaien"
+
 msgid "&Find declaration"
 msgstr "&Zoek declaratie"
 
@@ -1811,9 +1815,6 @@ msgstr "< Default >"
 msgid "Skins"
 msgstr "Skins"
 
-msgid "Other 8 bit"
-msgstr "Andere 8 bits"
-
 msgid "Running"
 msgstr "Aan het draaien"
 
@@ -1897,6 +1898,17 @@ msgstr "A&utomatisch instellingen opslaan"
 
 msgid "Configure options"
 msgstr "Instellingen"
+
+#, fuzzy
+msgid "No translation"
+msgstr "- < Geen vertaling >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Invoer / weergave karakterset:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Skin:"
@@ -2039,27 +2051,6 @@ msgstr "&Geschiedenis opschonen"
 
 msgid "Confirmation"
 msgstr "Bevestiging"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 uitvoer"
-
-msgid "&Full 8 bits output"
-msgstr "&Volledige 8-bit uitvoer"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7-&bits"
-
-msgid "F&ull 8 bits input"
-msgstr "&Volledige 8-bit invoer"
-
-msgid "Display bits"
-msgstr "Weergave bits"
-
-msgid "Input / display codepage:"
-msgstr "Invoer / weergave karakterset:"
 
 msgid "Directory tree"
 msgstr "Maphiërarchie"
@@ -3005,6 +2996,10 @@ msgstr "&Linken volgen"
 msgid "Preserve &attributes"
 msgstr "&Attributen behouden"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "&Attributen behouden"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Ga door submap, als de&ze bestaat"
 
@@ -3188,9 +3183,6 @@ msgstr "&Bevestiging..."
 
 msgid "&Appearance..."
 msgstr "&Uiterlijk..."
-
-msgid "&Display bits..."
-msgstr "&Weergavebits..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtueel FS..."
@@ -3954,9 +3946,6 @@ msgstr "Met ondersteuning voor X11-signalen"
 msgid "With internationalization support"
 msgstr "Met ondersteuning voor vreemde talen"
 
-msgid "With multiple codepages support"
-msgstr "Met ondersteuning voor meerdere karaktersets"
-
 msgid "With ext2fs attributes support"
 msgstr "Met ext2fs-attributie-ondersteuning"
 
@@ -4340,6 +4329,14 @@ msgstr "sftp: verbinding onderbroken door gebruiker"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: verbinding met server mislukt: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Kan bestand %s niet openen\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: hostsleutel gevonden van niet ondersteund type: RSA1"
 
@@ -4477,6 +4474,9 @@ msgstr "Fout gemeld na verbreking."
 msgid "Aborted transfer would be successful."
 msgstr "Verbroken transfer zou een success zijn."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Inconsistent tar-archief"
 
@@ -4495,9 +4495,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4683,3 +4680,30 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Andere 8 bits"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 uitvoer"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Volledige 8-bit uitvoer"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7-&bits"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "&Volledige 8-bit invoer"
+
+#~ msgid "Display bits"
+#~ msgstr "Weergave bits"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Weergavebits..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Met ondersteuning voor meerdere karaktersets"

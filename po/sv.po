@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -466,12 +466,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Skift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Omgivningsvariablen TERM är inte satt!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan inte kontrollera SIGWINCH-tunnel"
-
 #, c-format
 msgid ""
 "\n"
@@ -497,6 +491,12 @@ msgid ""
 msgstr ""
 "Skärmstorleken %d×%d stöds inte.\n"
 "Kontrollera miljövariabeln TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Omgivningsvariablen TERM är inte satt!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kan inte kontrollera SIGWINCH-tunnel"
 
 msgid "B"
 msgstr "B"
@@ -1358,6 +1358,10 @@ msgstr "Till &matchande parentes"
 msgid "Toggle s&yntax highlighting"
 msgstr "Växla s&yntaxmarkering"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Vä&xla markering"
+
 msgid "&Find declaration"
 msgstr "&Hitta deklaration"
 
@@ -1815,9 +1819,6 @@ msgstr "< Fördefinierat >"
 msgid "Skins"
 msgstr "Teman"
 
-msgid "Other 8 bit"
-msgstr "Annan 8-bitars"
-
 msgid "Running"
 msgstr "Kör"
 
@@ -1901,6 +1902,17 @@ msgstr "A&utospara inställningar"
 
 msgid "Configure options"
 msgstr "Inställningar"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ingen översättning >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Teckenöversättning för inmatning/visning:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -2042,27 +2054,6 @@ msgstr "Confirmation|&Historikrensning"
 
 msgid "Confirmation"
 msgstr "Konfirmera"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8-utmatning"
-
-msgid "&Full 8 bits output"
-msgstr "&Fulla 8 bitars utmatning"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bitar"
-
-msgid "F&ull 8 bits input"
-msgstr "Fu&lla 8 bitars inmatning"
-
-msgid "Display bits"
-msgstr "Bitar för visning"
-
-msgid "Input / display codepage:"
-msgstr "Teckenöversättning för inmatning/visning:"
 
 msgid "Directory tree"
 msgstr "Katalogträd"
@@ -3002,6 +2993,10 @@ msgstr "Följ &länkar"
 msgid "Preserve &attributes"
 msgstr "B&ibehåll attribut"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "B&ibehåll attribut"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Dyk ner i &katalog som finns"
 
@@ -3185,9 +3180,6 @@ msgstr "&Konfirmera..."
 
 msgid "&Appearance..."
 msgstr "&Utseende..."
-
-msgid "&Display bits..."
-msgstr "&Displaybitar..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuellt FS..."
@@ -3941,9 +3933,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4319,6 +4308,14 @@ msgstr "sftp: uppkoppling avbruten av användare"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: uppkoppling mot server misslyckades: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Öppning av \"%s\" misslyckades\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4440,6 +4437,9 @@ msgstr "Fel rapporterades efter avslutningen."
 msgid "Aborted transfer would be successful."
 msgstr "Avbruten överföring skulle ha varit lyckad."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistensfel i tararkivet"
 
@@ -4458,9 +4458,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4654,3 +4651,27 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Annan 8-bitars"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8-utmatning"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Fulla 8 bitars utmatning"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bitar"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Fu&lla 8 bitars inmatning"
+
+#~ msgid "Display bits"
+#~ msgstr "Bitar för visning"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Displaybitar..."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -462,12 +462,6 @@ msgstr "Klahv Alt"
 msgid "Shift"
 msgstr "Klahv Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Keskkonnamuutujat TERM on määramata!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH toru ei saa kontrollida"
-
 #, c-format
 msgid ""
 "\n"
@@ -501,6 +495,12 @@ msgid ""
 msgstr ""
 "Ekraani suurus %dx%d ei ole toetatud.\n"
 "Kontrolli keskkonna muutujat TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Keskkonnamuutujat TERM on määramata!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH toru ei saa kontrollida"
 
 msgid "B"
 msgstr "B"
@@ -1382,6 +1382,10 @@ msgstr "Mine vastavale &nurksulule"
 msgid "Toggle s&yntax highlighting"
 msgstr "Lülita &süntaksi esiletõst"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Lül&ita märkimine"
+
 msgid "&Find declaration"
 msgstr "&Leia deklaratsioon"
 
@@ -1838,9 +1842,6 @@ msgstr "< Vaikimisi >"
 msgid "Skins"
 msgstr "Nahad"
 
-msgid "Other 8 bit"
-msgstr "Muu 8-bitine"
-
 msgid "Running"
 msgstr "Töötab"
 
@@ -1924,6 +1925,17 @@ msgstr "Seadete a&utomaatsalvestus"
 
 msgid "Configure options"
 msgstr "Häälestuse suvandid"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < tõlkimata >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Sisend/kuva kooditabel:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Nahk:"
@@ -2064,27 +2076,6 @@ msgstr "Confirmation|&Ajaloo kustutamisel"
 
 msgid "Confirmation"
 msgstr "Küsi kinnitust"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 väljund"
-
-msgid "&Full 8 bits output"
-msgstr "&Täis 8-bitine väljund"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bitti"
-
-msgid "F&ull 8 bits input"
-msgstr "&Täis 8-bitine sisend"
-
-msgid "Display bits"
-msgstr "Kuva bitlisus"
-
-msgid "Input / display codepage:"
-msgstr "Sisend/kuva kooditabel:"
 
 msgid "Directory tree"
 msgstr "Kataloogipuu"
@@ -3055,6 +3046,10 @@ msgstr "Järgi &viitasid"
 msgid "Preserve &attributes"
 msgstr "Säilita &atribuudid"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Säilita &atribuudid"
+
 msgid "Di&ve into subdir if exists"
 msgstr "&Sisene alamkataloogi, kui on olemas"
 
@@ -3238,9 +3233,6 @@ msgstr "K&innitused..."
 
 msgid "&Appearance..."
 msgstr "&Välimus..."
-
-msgid "&Display bits..."
-msgstr "K&uva bitid..."
 
 msgid "&Virtual FS..."
 msgstr "Vi&rtuaalne FS..."
@@ -4004,9 +3996,6 @@ msgstr "X11 sündmuste toega"
 msgid "With internationalization support"
 msgstr "Internatsionaliseerimise toega"
 
-msgid "With multiple codepages support"
-msgstr "Mitme kooditabeli toega"
-
 msgid "With ext2fs attributes support"
 msgstr "Sealhulgas ext2fs atribuutide tugi"
 
@@ -4397,6 +4386,14 @@ msgstr "sftp: kasutaja katkestas ühenduse"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: ühenduse loomine masinaga nurjus: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"\"%s\" avamine nurjus\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: leiti toetamata tüüpi hostivõti: RSA1"
 
@@ -4532,6 +4529,9 @@ msgstr "Pärast katkestamist raporteeriti viga."
 msgid "Aborted transfer would be successful."
 msgstr "Katkestatud ülekanne oleks edukas."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek ei peatunud kirje piiril"
+
 msgid "Inconsistent tar archive"
 msgstr "Tar arhiiv sisaldab vasturääkivusi"
 
@@ -4553,9 +4553,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ei meenuta tar arhiivi"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek ei peatunud kirje piiril"
 
 msgid "undelfs: error"
 msgstr "undelfs: viga"
@@ -4748,3 +4745,30 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Muu 8-bitine"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 väljund"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Täis 8-bitine väljund"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bitti"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "&Täis 8-bitine sisend"
+
+#~ msgid "Display bits"
+#~ msgstr "Kuva bitlisus"
+
+#~ msgid "&Display bits..."
+#~ msgstr "K&uva bitid..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Mitme kooditabeli toega"

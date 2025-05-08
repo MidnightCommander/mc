@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Walloon (http://app.transifex.com/mc/mc/language/wa/)\n"
@@ -438,12 +438,6 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Li variåve d' evironmint TERM n' est nén metowe!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -466,6 +460,12 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
+msgstr ""
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Li variåve d' evironmint TERM n' est nén metowe!\n"
+
+msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
 msgid "B"
@@ -1287,6 +1287,9 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+msgid "Togg&le right margin"
+msgstr ""
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1730,9 +1733,6 @@ msgstr ""
 msgid "Skins"
 msgstr ""
 
-msgid "Other 8 bit"
-msgstr "Ôte 8 bit"
-
 msgid "Running"
 msgstr ""
 
@@ -1816,6 +1816,16 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Apontyî les tchûzes"
+
+msgid "No translation"
+msgstr ""
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Ecôdaedje po ls intrêyes/rexhowes:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -1953,27 +1963,6 @@ msgstr ""
 
 msgid "Confirmation"
 msgstr ""
-
-msgid "&UTF-8 output"
-msgstr ""
-
-msgid "&Full 8 bits output"
-msgstr ""
-
-msgid "&ISO 8859-1"
-msgstr ""
-
-msgid "7 &bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr "I&ntreye 8 bits etire"
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
-msgstr "Ecôdaedje po ls intrêyes/rexhowes:"
 
 msgid "Directory tree"
 msgstr ""
@@ -2831,6 +2820,9 @@ msgstr ""
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
@@ -3013,9 +3005,6 @@ msgid "C&onfirmation..."
 msgstr ""
 
 msgid "&Appearance..."
-msgstr ""
-
-msgid "&Display bits..."
 msgstr ""
 
 msgid "&Virtual FS..."
@@ -3755,9 +3744,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4118,6 +4104,12 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4239,6 +4231,9 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4255,9 +4250,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4434,3 +4426,9 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Ôte 8 bit"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "I&ntreye 8 bits etire"

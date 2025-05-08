@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -464,12 +464,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM çevre değişkeni atanmamış!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH borusu kontrol edilemiyor"
-
 #, c-format
 msgid ""
 "\n"
@@ -501,6 +495,12 @@ msgid ""
 msgstr ""
 "%dx%d ekran boyutu desteklenmiyor.\n"
 "TERM ortam değişkenini kontrol ediniz.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM çevre değişkeni atanmamış!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH borusu kontrol edilemiyor"
 
 msgid "B"
 msgstr "B"
@@ -1363,6 +1363,10 @@ msgstr "Eşleşen &Paranteze Git   M-b"
 msgid "Toggle s&yntax highlighting"
 msgstr "Sö&zdizim vurgulamasını değiştir"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "İşareti &değiştir"
+
 msgid "&Find declaration"
 msgstr "Be&lirtimi bul"
 
@@ -1822,9 +1826,6 @@ msgstr "< Ön tanımlı >"
 msgid "Skins"
 msgstr "Temalar"
 
-msgid "Other 8 bit"
-msgstr "Diğer 8 bit"
-
 msgid "Running"
 msgstr "Çalışıyor"
 
@@ -1908,6 +1909,17 @@ msgstr "&Ayarları otomatik kaydet"
 
 msgid "Configure options"
 msgstr "Yapılandırma seçenekleri"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Çeviri yok >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Girdi / gösterme karakter kümesi:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Tema"
@@ -2050,27 +2062,6 @@ msgstr "Onayla|Geçmişi temizle"
 
 msgid "Confirmation"
 msgstr "Onaylama"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 çıktı"
-
-msgid "&Full 8 bits output"
-msgstr "&Tam 8-bitlik çıktı"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 bit"
-
-msgid "F&ull 8 bits input"
-msgstr "Ta&m 8-bitlik girdi"
-
-msgid "Display bits"
-msgstr "Bit &gösterimi"
-
-msgid "Input / display codepage:"
-msgstr "Girdi / gösterme karakter kümesi:"
 
 msgid "Directory tree"
 msgstr "Dizin ağacı"
@@ -3006,6 +2997,10 @@ msgstr "&Bağları izle"
 msgid "Preserve &attributes"
 msgstr "&Nitelikleri koru"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "&Nitelikleri koru"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Varsa altdizine &Dal"
 
@@ -3189,9 +3184,6 @@ msgstr "Onaylama..."
 
 msgid "&Appearance..."
 msgstr "&Görünüm..."
-
-msgid "&Display bits..."
-msgstr "Bit &gösterimi..."
 
 msgid "&Virtual FS..."
 msgstr "&Sanal Dosya Sistemi..."
@@ -3946,9 +3938,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4324,6 +4313,14 @@ msgstr "sftp: bağlantı kullanıcı tarafından kesildi"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: sunucuya bağlanma başarısız: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"\"%s\" açılamıyor\n"
+" %s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4446,6 +4443,9 @@ msgstr "Durdurma sonra hata raporlandı."
 msgid "Aborted transfer would be successful."
 msgstr "Aktarımın durdurulması başarıldı."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Tar arşivi düzgün değil"
 
@@ -4464,9 +4464,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4660,3 +4657,27 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Diğer 8 bit"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 çıktı"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Tam 8-bitlik çıktı"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 bit"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Ta&m 8-bitlik girdi"
+
+#~ msgid "Display bits"
+#~ msgstr "Bit &gösterimi"
+
+#~ msgid "&Display bits..."
+#~ msgstr "Bit &gösterimi..."
