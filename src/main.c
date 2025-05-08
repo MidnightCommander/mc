@@ -97,33 +97,6 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-check_codeset (void)
-{
-    const char *current_system_codepage = NULL;
-
-    current_system_codepage = str_detect_termencoding ();
-
-    {
-        const char *_display_codepage;
-
-        _display_codepage = get_codepage_id (mc_global.display_codepage);
-
-        if (strcmp (_display_codepage, current_system_codepage) != 0)
-        {
-            mc_global.display_codepage = get_codepage_index (current_system_codepage);
-            if (mc_global.display_codepage == -1)
-                mc_global.display_codepage = 0;
-
-            mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "display_codepage",
-                                  cp_display);
-        }
-    }
-
-    mc_global.utf8_display = str_isutf8 (current_system_codepage);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** POSIX version.  The only version we support.  */
 static void
 OS_Setup (void)
@@ -383,9 +356,6 @@ main (int argc, char *argv[])
     // Must be done before init_subshell, to set up the terminal size:
     // FIXME: Should be removed and LINES and COLS computed on subshell
     tty_init (!mc_args__nomouse, mc_global.tty.xterm_flag);
-
-    // start check mc_global.display_codepage and mc_global.source_codepage
-    check_codeset ();
 
     // Removing this from the X code let's us type C-c
     load_key_defs ();
