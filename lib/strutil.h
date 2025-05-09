@@ -128,7 +128,7 @@ struct str_class
     void (*fix_string) (char *text);
     /*I*/ const char *(*term_form) (const char *text);
     /*I*/ const char *(*fit_to_term) (const char *text, int width, align_crt_t just_mode);
-    /*I*/ const char *(*term_trim) (const char *text, int width);
+    /*I*/ const char *(*term_trim) (const char *text, const ssize_t width);
     /*I*/ const char *(*term_substring) (const char *text, int start, int width);
     /*I*/ int (*term_width1) (const char *text);
     /*I*/ int (*term_width2) (const char *text, size_t length);
@@ -406,7 +406,7 @@ const char *str_fit_to_term (const char *text, int width, align_crt_t just_mode)
  * no additional spaces are inserted
  * I
  */
-const char *str_term_trim (const char *text, int width);
+const char *str_term_trim (const char *text, const ssize_t width);
 
 /* like str_term_form, but return only specified substring
  * start - column (position) on terminal, where substring begin

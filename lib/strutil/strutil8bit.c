@@ -397,7 +397,7 @@ finally:
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_8bit_term_trim (const char *text, int width)
+str_8bit_term_trim (const char *text, const ssize_t width)
 {
     static char result[BUF_MEDIUM];
     size_t remain;
@@ -412,14 +412,14 @@ str_8bit_term_trim (const char *text, int width)
     {
         size_t pos;
 
-        if (width >= (int) length)
+        if ((size_t) width >= length)
         {
             for (pos = 0; pos < length && remain > 1; pos++, actual++, remain--)
                 actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
         }
         else if (width <= 3)
         {
-            memset (actual, '.', width);
+            memset (actual, '.', (size_t) width);
             actual += width;
         }
         else
@@ -428,7 +428,8 @@ str_8bit_term_trim (const char *text, int width)
             actual += 3;
             remain -= 3;
 
-            for (pos = length - width + 3; pos < length && remain > 1; pos++, actual++, remain--)
+            for (pos = length - (size_t) width + 3; pos < length && remain > 1;
+                 pos++, actual++, remain--)
                 actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
         }
     }

@@ -455,7 +455,7 @@ str_fit_to_term (const char *text, int width, align_crt_t just_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_term_trim (const char *text, int width)
+str_term_trim (const char *text, const ssize_t width)
 {
     return used_class.term_trim (text, width);
 }

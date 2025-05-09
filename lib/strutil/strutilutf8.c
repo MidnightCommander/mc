@@ -754,7 +754,7 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_utf8_term_trim (const char *text, int width)
+str_utf8_term_trim (const char *text, const ssize_t width)
 {
     static char result[BUF_MEDIUM * MB_LEN_MAX];
     const struct term_form *pre_form;
@@ -766,6 +766,8 @@ str_utf8_term_trim (const char *text, int width)
         return result;
     }
 
+    const size_t width1 = (size_t) width;
+
     pre_form = str_utf8_make_make_term_form (text, -1);
 
     tool.checked = pre_form->text;
@@ -773,13 +775,13 @@ str_utf8_term_trim (const char *text, int width)
     tool.remain = sizeof (result);
     tool.compose = FALSE;
 
-    if ((gsize) width >= pre_form->width)
+    if (width1 >= pre_form->width)
         utf8_tool_copy_chars_to_end (&tool);
-    else if (width <= 3)
+    else if (width1 <= 3)
     {
-        memset (tool.actual, '.', width);
-        tool.actual += width;
-        tool.remain -= width;
+        memset (tool.actual, '.', width1);
+        tool.actual += width1;
+        tool.remain -= width1;
     }
     else
     {
@@ -788,7 +790,7 @@ str_utf8_term_trim (const char *text, int width)
         tool.remain -= 3;
 
         tool.ident = 0;
-        utf8_tool_skip_chars_to (&tool, pre_form->width - width + 3);
+        utf8_tool_skip_chars_to (&tool, pre_form->width - width1 + 3);
         utf8_tool_copy_chars_to_end (&tool);
     }
 

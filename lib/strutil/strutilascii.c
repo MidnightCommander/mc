@@ -373,7 +373,7 @@ finally:
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_ascii_term_trim (const char *text, int width)
+str_ascii_term_trim (const char *text, const ssize_t width)
 {
     static char result[BUF_MEDIUM];
     size_t remain;
@@ -388,7 +388,7 @@ str_ascii_term_trim (const char *text, int width)
     {
         size_t pos;
 
-        if (width >= (int) length)
+        if ((size_t) width >= length)
         {
             // copy all characters
             for (pos = 0; pos < length && remain > 1; pos++, actual++, remain--)
@@ -399,7 +399,7 @@ str_ascii_term_trim (const char *text, int width)
         }
         else if (width <= 3)
         {
-            memset (actual, '.', width);
+            memset (actual, '.', (size_t) width);
             actual += width;
         }
         else
@@ -409,7 +409,8 @@ str_ascii_term_trim (const char *text, int width)
             remain -= 3;
 
             // copy suffix of text
-            for (pos = length - width + 3; pos < length && remain > 1; pos++, actual++, remain--)
+            for (pos = length - (size_t) width + 3; pos < length && remain > 1;
+                 pos++, actual++, remain--)
             {
                 actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
                 actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
