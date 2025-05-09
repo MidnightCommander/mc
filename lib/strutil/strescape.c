@@ -52,11 +52,11 @@ static const char ESCAPE_GLOB_CHARS[] = "$*\\?";
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_escape (const char *src, gsize src_len, const char *escaped_chars,
-            gboolean escape_non_printable)
+str_escape (const char *src, const ssize_t src_len, const char *escaped_chars,
+            const gboolean escape_non_printable)
 {
     GString *ret;
-    gsize curr_index;
+
     // do NOT break allocation semantics
     if (src == NULL)
         return NULL;
@@ -66,10 +66,9 @@ str_escape (const char *src, gsize src_len, const char *escaped_chars,
 
     ret = g_string_new ("");
 
-    if (src_len == (gsize) (-1))
-        src_len = strlen (src);
+    const size_t src_len1 = src_len < 0 ? strlen (src) : (size_t) src_len;
 
-    for (curr_index = 0; curr_index < src_len; curr_index++)
+    for (size_t curr_index = 0; curr_index < src_len1; curr_index++)
     {
         if (escape_non_printable)
         {
@@ -103,11 +102,11 @@ str_escape (const char *src, gsize src_len, const char *escaped_chars,
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_unescape (const char *src, gsize src_len, const char *unescaped_chars,
-              gboolean unescape_non_printable)
+str_unescape (const char *src, const ssize_t src_len, const char *unescaped_chars,
+              const gboolean unescape_non_printable)
 {
     GString *ret;
-    gsize curr_index;
+    size_t curr_index;
 
     if (src == NULL)
         return NULL;
@@ -117,11 +116,9 @@ str_unescape (const char *src, gsize src_len, const char *unescaped_chars,
 
     ret = g_string_sized_new (16);
 
-    if (src_len == (gsize) (-1))
-        src_len = strlen (src);
-    src_len--;
+    const size_t src_len1 = src_len < 0 ? strlen (src) : (size_t) src_len;
 
-    for (curr_index = 0; curr_index < src_len; curr_index++)
+    for (curr_index = 0; curr_index < src_len1 - 1; curr_index++)
     {
         if (src[curr_index] != '\\')
         {
