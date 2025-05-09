@@ -2286,7 +2286,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     struct stat src_stat, dst_stat;
     mc_timesbuf_t times;
     unsigned long attrs = 0;
-    gboolean attrs_ok = ctx->preserve;
+    gboolean attrs_ok = copymove_persistent_ext2_attr;
     gboolean dst_exists = FALSE, appending = FALSE;
     off_t file_size = -1;
     FileProgressStatus return_status, temp_status;
@@ -3011,7 +3011,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
     struct vfs_dirent *next;
     struct stat dst_stat, src_stat;
     unsigned long attrs = 0;
-    gboolean attrs_ok = ctx->preserve;
+    gboolean attrs_ok = copymove_persistent_ext2_attr;
     DIR *reading;
     FileProgressStatus return_status = FILE_CONT;
     link_t *lp;

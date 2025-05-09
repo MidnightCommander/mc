@@ -89,6 +89,7 @@ extern gboolean auto_menu;
 extern gboolean drop_menus;
 extern gboolean verbose;
 extern gboolean copymove_persistent_attr;
+extern gboolean copymove_persistent_ext2_attr;
 extern gboolean classic_progressbar;
 extern gboolean easy_patterns;
 extern int option_tab_spacing;

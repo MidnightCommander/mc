@@ -111,6 +111,11 @@ panel_view_mode_t startup_left_mode;
 panel_view_mode_t startup_right_mode;
 
 gboolean copymove_persistent_attr = TRUE;
+#ifdef ENABLE_EXT2FS_ATTR
+gboolean copymove_persistent_ext2_attr = TRUE;
+#else
+gboolean copymove_persistent_ext2_attr = FALSE;
+#endif
 
 /* Tab size */
 int option_tab_spacing = DEFAULT_TAB_SPACING;
@@ -360,6 +365,9 @@ static const struct
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { "copymove_persistent_attr", &copymove_persistent_attr },
+#ifdef ENABLE_EXT2FS_ATTR
+    { "copymove_persistent_ext2_attr", &copymove_persistent_ext2_attr },
+#endif
     {
         NULL,
         NULL,

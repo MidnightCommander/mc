@@ -2722,6 +2722,11 @@ determines whether to preserve the permissions, timestamps and (if you
 are root) the ownership of the original files.  If this option is not
 set, the current value of the umask will be respected.
 .PP
+.B Preserve ext2 attributes
+.PP
+determines whether to preserve the attributes of files and directories
+on an ext2/3/4 file system.
+.PP
 .B Use shell patterns
 .PP
 When this option is on you can use the '*' and '?' wildcards in the source

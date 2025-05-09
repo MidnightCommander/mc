@@ -147,7 +147,7 @@ statfs (char const *filename, struct fs_info *buf)
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"  // verbose, safe_overwrite
+#include "src/setup.h"  // verbose, safe_overwrite, copymove_persistent_ext2_attr
 
 #include "filemanager.h"
 
@@ -1419,6 +1419,9 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
             QUICK_START_COLUMNS,
                 QUICK_CHECKBOX (N_ ("Follow &links"), &ctx->follow_links, NULL),
                 QUICK_CHECKBOX (N_ ("Preserve &attributes"), &preserve, NULL),
+#ifdef ENABLE_EXT2FS_ATTR
+                QUICK_CHECKBOX (N_ ("Preserve e&xt2 attributes"), &copymove_persistent_ext2_attr, NULL),
+#endif
             QUICK_NEXT_COLUMN,
                 QUICK_CHECKBOX (N_ ("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
                 QUICK_CHECKBOX (N_ ("&Stable symlinks"), &ctx->stable_symlinks, NULL),
