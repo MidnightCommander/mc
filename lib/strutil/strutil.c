@@ -351,16 +351,18 @@ str_insert_replace_char (GString *buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 estr_t
-str_translate_char (GIConv conv, const char *keys, size_t ch_size, char *output, size_t out_size)
+str_translate_char (GIConv conv, const char *keys, const ssize_t ch_size, char *output,
+                    const size_t out_size)
 {
     size_t left;
     size_t cnv;
+    size_t osize = out_size;
 
     g_iconv (conv, NULL, NULL, NULL, NULL);
 
-    left = (ch_size == (size_t) (-1)) ? strlen (keys) : ch_size;
+    left = ch_size < 0 ? strlen (keys) : (size_t) ch_size;
 
-    cnv = g_iconv (conv, (gchar **) &keys, &left, &output, &out_size);
+    cnv = g_iconv (conv, (gchar **) &keys, &left, &output, &osize);
     if (cnv == (size_t) (-1))
         return (errno == EINVAL) ? ESTR_PROBLEM : ESTR_FAILURE;
 
