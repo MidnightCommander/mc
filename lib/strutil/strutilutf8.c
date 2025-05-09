@@ -802,21 +802,20 @@ str_utf8_term_trim (const char *text, const ssize_t width)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-str_utf8_term_width2 (const char *text, size_t length)
+static size_t
+str_utf8_term_width2 (const char *text, const ssize_t width)
 {
-    const struct term_form *result;
+    const struct term_form *result = str_utf8_make_make_term_form (text, width);
 
-    result = str_utf8_make_make_term_form (text, (ssize_t) length);
     return result->width;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static size_t
 str_utf8_term_width1 (const char *text)
 {
-    return str_utf8_term_width2 (text, (size_t) (-1));
+    return str_utf8_term_width2 (text, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

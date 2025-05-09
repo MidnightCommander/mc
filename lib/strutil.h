@@ -130,8 +130,8 @@ struct str_class
     /*I*/ const char *(*fit_to_term) (const char *text, int width, align_crt_t just_mode);
     /*I*/ const char *(*term_trim) (const char *text, const ssize_t width);
     /*I*/ const char *(*term_substring) (const char *text, int start, int width);
-    /*I*/ int (*term_width1) (const char *text);
-    /*I*/ int (*term_width2) (const char *text, size_t length);
+    /*I*/ size_t (*term_width1) (const char *text);
+    /*I*/ size_t (*term_width2) (const char *text, const ssize_t width);
     /*I*/ int (*term_char_width) (const char *length);
     /*I*/ const char *(*trunc) (const char *length, const ssize_t width);
     /*I*/ int (*offset_to_pos) (const char *text, size_t length);
@@ -421,10 +421,10 @@ const char *str_term_substring (const char *text, int start, int width);
 int str_term_width1 (const char *text);
 
 /* return width, that will be text occupied on terminal
- * text is limited by length in characters
+ * text is limited by width in characters
  * I
  */
-int str_term_width2 (const char *text, size_t length);
+int str_term_width2 (const char *text, const ssize_t width);
 
 /* return width, that will be character occupied on terminal
  * combining characters are always zero width

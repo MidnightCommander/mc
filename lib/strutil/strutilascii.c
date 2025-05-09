@@ -424,22 +424,20 @@ str_ascii_term_trim (const char *text, const ssize_t width)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-str_ascii_term_width2 (const char *text, size_t length)
+static size_t
+str_ascii_term_width2 (const char *text, const ssize_t width)
 {
-    size_t text_len;
+    const size_t text_len = strlen (text);
 
-    text_len = strlen (text);
-
-    return (length != (size_t) (-1)) ? MIN (text_len, length) : text_len;
+    return (width < 0 ? text_len : MIN (text_len, (size_t) width));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static size_t
 str_ascii_term_width1 (const char *text)
 {
-    return str_ascii_term_width2 (text, (size_t) (-1));
+    return str_ascii_term_width2 (text, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -650,15 +650,21 @@ str_is_valid_char (const char *ch, size_t size)
 int
 str_term_width1 (const char *text)
 {
-    return used_class.term_width1 (text);
+    // Reduce bitwidth size_t -> int
+    // str_term_width1() is widely used to caclulate widget coordinates and sizes
+    // that are of type int (see WRect structure).
+    // It's very unlikely that used_class.term_width1() will return a value greater than MAX_INT.
+    return (int) used_class.term_width1 (text);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-str_term_width2 (const char *text, size_t length)
+str_term_width2 (const char *text, const ssize_t width)
 {
-    return used_class.term_width2 (text, length);
+    // Reduce bitwidth size_t -> int
+    // See comment in str_term_width1().
+    return (int) used_class.term_width2 (text, width);
 }
 
 /* --------------------------------------------------------------------------------------------- */
