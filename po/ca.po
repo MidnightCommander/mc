@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -467,12 +467,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Majús"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La variable d'entorn TERM no està definida!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -506,6 +500,12 @@ msgid ""
 msgstr ""
 "La mida de pantalla %dx%d no està admesa.\n"
 "Reviseu la variable d'entorn TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La variable d'entorn TERM no està definida!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1395,6 +1395,10 @@ msgstr "Ves al &claudàtor relacionat"
 msgid "Toggle s&yntax highlighting"
 msgstr "Alterna el ressaltat de la s&intaxi"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Alte&rna les marques"
+
 msgid "&Find declaration"
 msgstr "&Troba la declaració"
 
@@ -1852,9 +1856,6 @@ msgstr "< Predeterminat >"
 msgid "Skins"
 msgstr "Temes"
 
-msgid "Other 8 bit"
-msgstr "Altres 8 bits"
-
 msgid "Running"
 msgstr "S'està executant"
 
@@ -1938,6 +1939,17 @@ msgstr "Desa &automàticament la configuració"
 
 msgid "Configure options"
 msgstr "Opcions de configuració"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Cap traducció >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Pàgina de codis d'entrada / pantalla:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -2079,27 +2091,6 @@ msgstr "Confirmation|Neteja l'&historial"
 
 msgid "Confirmation"
 msgstr "Confirmació"
-
-msgid "&UTF-8 output"
-msgstr "Sortida &UTF-8"
-
-msgid "&Full 8 bits output"
-msgstr "&Tota la sortida de 8 bits"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bits"
-
-msgid "F&ull 8 bits input"
-msgstr "Tota l'ent&rada de 8 bits"
-
-msgid "Display bits"
-msgstr "Bits de visualització"
-
-msgid "Input / display codepage:"
-msgstr "Pàgina de codis d'entrada / pantalla:"
 
 msgid "Directory tree"
 msgstr "Arbre de directoris"
@@ -3071,6 +3062,10 @@ msgstr "Segueix els en&llaços"
 msgid "Preserve &attributes"
 msgstr "Mantén els &atributs"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Mantén els &atributs"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Su&bmergeix-te en els subdirectoris si existeixen"
 
@@ -3254,9 +3249,6 @@ msgstr "C&onfirmació..."
 
 msgid "&Appearance..."
 msgstr "&Aparença..."
-
-msgid "&Display bits..."
-msgstr "&Bits de visualització..."
 
 msgid "&Virtual FS..."
 msgstr "Sistema de fitxers &virtual..."
@@ -4025,9 +4017,6 @@ msgstr "Amb la implementació per als esdeveniments d'X11"
 msgid "With internationalization support"
 msgstr "Amb la implementació per a la internacionalització"
 
-msgid "With multiple codepages support"
-msgstr "Amb la implementació per a múltiples pàgines de codi"
-
 msgid "With ext2fs attributes support"
 msgstr "Amb la implementació dels atributs «ext2fs»"
 
@@ -4420,6 +4409,14 @@ msgstr "sftp: la connexió ha estat interrompuda per l'usuari"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: la connexió amb el servidor ha fallat: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"No s'ha pogut obrir «%s»\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "SFTP: ha trobat que la clau de l'amfitrió és de tipus no admès: RSA1"
 
@@ -4561,6 +4558,9 @@ msgstr "S'ha informat d'un error després d'interrompre."
 msgid "Aborted transfer would be successful."
 msgstr "Transferència interrompuda amb èxit."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
+
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu TAR no és coherent"
 
@@ -4582,9 +4582,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "no sembla un arxiu tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4779,3 +4776,30 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Altres 8 bits"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "Sortida &UTF-8"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Tota la sortida de 8 bits"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bits"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Tota l'ent&rada de 8 bits"
+
+#~ msgid "Display bits"
+#~ msgstr "Bits de visualització"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Bits de visualització..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Amb la implementació per a múltiples pàgines de codi"

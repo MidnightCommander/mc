@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -448,12 +448,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Clave \"Shift\""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Le variabile de ambiente TERM non es definite!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -479,6 +473,12 @@ msgid ""
 msgstr ""
 "Le dimenion de schermo %dx%d non es supportate.\n"
 "Verifica le variabile de ambiente TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Le variabile de ambiente TERM non es definite!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1311,6 +1311,9 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+msgid "Togg&le right margin"
+msgstr ""
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1754,9 +1757,6 @@ msgstr ""
 msgid "Skins"
 msgstr ""
 
-msgid "Other 8 bit"
-msgstr ""
-
 msgid "Running"
 msgstr ""
 
@@ -1840,6 +1840,15 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Configurar optiones"
+
+msgid "No translation"
+msgstr ""
+
+msgid "Detected display codepage"
+msgstr ""
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -1977,27 +1986,6 @@ msgstr ""
 
 msgid "Confirmation"
 msgstr "Confirmation"
-
-msgid "&UTF-8 output"
-msgstr ""
-
-msgid "&Full 8 bits output"
-msgstr ""
-
-msgid "&ISO 8859-1"
-msgstr ""
-
-msgid "7 &bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr ""
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
-msgstr ""
 
 msgid "Directory tree"
 msgstr ""
@@ -2855,6 +2843,9 @@ msgstr ""
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
@@ -3037,9 +3028,6 @@ msgid "C&onfirmation..."
 msgstr "C&onfirmation..."
 
 msgid "&Appearance..."
-msgstr ""
-
-msgid "&Display bits..."
 msgstr ""
 
 msgid "&Virtual FS..."
@@ -3762,9 +3750,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4138,6 +4123,12 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr "Le file %s non pote esser aperite"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4261,6 +4252,9 @@ msgstr "Error reportate post abortamento."
 msgid "Aborted transfer would be successful."
 msgstr "Le transferentia abortate haberea succedite."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Archivo tar inconsistente"
 
@@ -4279,9 +4273,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

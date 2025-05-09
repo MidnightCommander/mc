@@ -100,8 +100,6 @@ static char **status_format;
 static unsigned long panel_list_formats_id, panel_user_format_id, panel_brief_cols_id;
 static unsigned long user_mini_status_id, mini_user_format_id;
 
-static int new_display_codepage;
-
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_FTP)
 static unsigned long ftpfs_always_use_proxy_id, ftpfs_proxy_host_id;
 #endif
@@ -357,37 +355,6 @@ panel_listing_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-sel_charset_button (WButton *button, int action)
-{
-    int new_dcp;
-
-    (void) action;
-
-    new_dcp = select_charset (-1, -1, new_display_codepage, TRUE);
-
-    if (new_dcp != SELECT_CHARSET_CANCEL)
-    {
-        const char *cpname;
-
-        new_display_codepage = new_dcp;
-        cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT)
-            ? _ ("Other 8 bit")
-            : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
-        if (cpname != NULL)
-            mc_global.utf8_display = str_isutf8 (cpname);
-        else
-            cpname = _ ("7-bit ASCII");  // FIXME
-
-        button_set_text (button, cpname);
-        widget_draw (WIDGET (WIDGET (button)->owner));
-    }
-
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static cb_ret_t
 tree_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
@@ -622,10 +589,24 @@ configure_box (void)
 void
 appearance_box (void)
 {
-    gboolean shadows = mc_global.tty.shadows;
+    const gboolean shadows = mc_global.tty.shadows;
+    char *label_cp_display;
+    char *label_cp_source;
 
     current_skin_name = g_strdup (mc_skin__default.name);
     skin_names = mc_skin_list ();
+
+    const char *name_cp_display =
+        ((codepage_desc *) g_ptr_array_index (codepages, mc_global.display_codepage))->name;
+
+    const char *name_cp_source = mc_global.source_codepage >= 0
+        ? ((codepage_desc *) g_ptr_array_index (codepages, mc_global.source_codepage))->name
+        : N_ ("No translation");
+
+    label_cp_display =
+        g_strdup_printf ("%s: %s", N_ ("Detected display codepage"), name_cp_display);
+    label_cp_source =
+        g_strdup_printf ("%s: %s", N_ ("Selected source (file I/O) codepage"), name_cp_source);
 
     {
         quick_widget_t quick_widgets[] = {
@@ -638,6 +619,9 @@ appearance_box (void)
             QUICK_STOP_COLUMNS,
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_ ("&Shadows"), &mc_global.tty.shadows, &shadows_id),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABEL (label_cp_display, NULL),
+            QUICK_LABEL (label_cp_source, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
             // clang-format on
@@ -664,6 +648,8 @@ appearance_box (void)
         }
     }
 
+    g_free (label_cp_display);
+    g_free (label_cp_source);
     g_free (current_skin_name);
     g_ptr_array_free (skin_names, TRUE);
 }
@@ -958,75 +944,6 @@ confirm_box (void)
     };
 
     (void) quick_dialog (&qdlg);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-display_bits_box (void)
-{
-    const char *cpname;
-
-    new_display_codepage = mc_global.display_codepage;
-
-    cpname = (new_display_codepage < 0)
-        ? _ ("Other 8 bit")
-        : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
-
-    {
-        gboolean new_meta;
-
-        quick_widget_t quick_widgets[] = {
-            // clang-format off
-            QUICK_START_COLUMNS,
-                QUICK_LABEL (N_ ("Input / display codepage:"), NULL),
-            QUICK_NEXT_COLUMN,
-                QUICK_BUTTON (cpname, B_USER, sel_charset_button, NULL),
-            QUICK_STOP_COLUMNS,
-            QUICK_SEPARATOR (TRUE),
-                QUICK_CHECKBOX (N_ ("F&ull 8 bits input"), &new_meta, NULL),
-            QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END,
-            // clang-format on
-        };
-
-        WRect r = { -1, -1, 0, 46 };
-
-        quick_dialog_t qdlg = {
-            .rect = r,
-            .title = N_ ("Display bits"),
-            .help = "[Display bits]",
-            .widgets = quick_widgets,
-            .callback = NULL,
-            .mouse_callback = NULL,
-        };
-
-        new_meta = !use_8th_bit_as_meta;
-        application_keypad_mode ();
-
-        if (quick_dialog (&qdlg) == B_ENTER)
-        {
-            char *errmsg;
-
-            mc_global.display_codepage = new_display_codepage;
-
-            errmsg = init_translation_table (mc_global.source_codepage, mc_global.display_codepage);
-            if (errmsg != NULL)
-            {
-                message (D_ERROR, MSG_ERROR, "%s", errmsg);
-                g_free (errmsg);
-            }
-
-#ifdef HAVE_SLANG
-            tty_display_8bit (mc_global.display_codepage != 0 && mc_global.display_codepage != 1);
-#else
-            tty_display_8bit (mc_global.display_codepage != 0);
-#endif
-            use_8th_bit_as_meta = !new_meta;
-
-            repaint_screen ();
-        }
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

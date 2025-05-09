@@ -1267,11 +1267,6 @@ włącza okno dialogowe, w którym możesz ustawić przy wykonaniu
 których operacji chcesz być pytany o potwierdzenie.
 .PP
 Menu
-.I Display bits
-pozwala określić jakiego typu znaki twój terminal jest
-w stanie wyświetlić.
-.PP
-Menu
 .I Learn Keys
 pokazuje okno dialogowe, w którym możesz poznać
 które klawisze nie działają i w razie problemów naprawić to.
@@ -1465,18 +1460,6 @@ wybranej rzeczy w panelu, będzie pokazany na dole panelu.
 W tym menu możesz skonfigurować opcje potwierdzania dla kasowania,
 zastępowania, wykonywania przez naciśnięcie klawisza Enter, jak również
 wychodzenia z programu.
-.PP
-.\"NODE "    Display bits"
-.SH "    Wyświetlanie znaków (Display bits)"
-Używane do konfigurowania zakresu znaków widocznych potem na ekranie.
-To ustawienie może być 7\-bitowe jeśli twój terminal obsługuje tylko
-siedmiobitowe wyjście, ISO\-8859\-1 wyświetla wszystkie znaki z mapy
-ISO\-8859\-1 a pełny 8 bitowy przeznaczony jest dla tych terminali, które radzą
-sobie z wyświetlaniem znaków ośmiobitowych.
-.PP
-Zobacz sekcję
-.IR "Polskie znaki" ,
-po więcej szczegółów na temat ich używania w Midnight Commanderze.
 .PP
 .\"NODE "    Learn keys"
 .SH "    Nauka klawiszy (Learn keys)"
@@ -2101,14 +2084,6 @@ w twoim katalogu domowym zawierający poniższe:
 cat /dev/null > ~/.cache/mc/mcedit/cooledit.error
 .fi
 .PP
-Edytor wyświetla również znaki nieamerykańskie (160+). Kiedy edytujesz plik
-binarny, powinieneś ustawić opcję
-.B display bits
-do 7 bitów w menu opcji, aby utrzymać przejrzystość odstępów między znakami.
-.PP
-Zobacz sekcję Polskie znaki, aby poznać szczegóły na temat używania
-polskich znaków w Midnight Commanderze.
-.PP
 .\"NODE "Completion"
 .SH Dokańczanie
 .PP
@@ -2463,15 +2438,6 @@ i
 [Zwróć uwagę na to, że te pliki są charakterystyczne dla dystrybucji
 RedHat, jeśli masz inną i wiesz jak to ustawić, to napisz do mnie, a ja to
 tu dopiszę  [ patrz tłumacz na dole ;)) ]].
-.PP
-Teraz wystarczy już tylko włączyć odpowiednie opcje w menu opcji (klawisz
-F9). W menu opcji wybieramy
-.I Display bits
-i włączamy opcje 
-.I ISO 8859\-1
-oraz
-.IR "Full 8 bits input" .
-Potem zapisujemy konfigurację w opcje | Save setup.
 .PP
 I gotowe \- polskie literki działają również w podglądzie i wbudowanym
 edytorze plików.

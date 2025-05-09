@@ -145,7 +145,6 @@ enum
     CK_OptionsConfirm,
     CK_PutCurrentLink,
     CK_PutOtherLink,
-    CK_OptionsDisplayBits,
     CK_EditExtensionsFile,
     CK_EditFileHighlightFile,
     CK_LinkSymbolicEdit,

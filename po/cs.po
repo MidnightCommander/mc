@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -466,12 +466,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Proměnná prostředí TERM není nastavena!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -503,6 +497,12 @@ msgid ""
 msgstr ""
 "Velikost obrazovky %d×%d není podporovaná.\n"
 "Prověřte nastavení proměnné prostředí TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Proměnná prostředí TERM není nastavena!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1361,6 +1361,10 @@ msgstr "Přejít na pá&rovou závorku"
 msgid "Toggle s&yntax highlighting"
 msgstr "Přepnout zvýraznění syntaxe"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "&Přepnout označení"
+
 msgid "&Find declaration"
 msgstr "Najít deklaraci"
 
@@ -1819,9 +1823,6 @@ msgstr "< Výchozí >"
 msgid "Skins"
 msgstr "Schémata vzhledu"
 
-msgid "Other 8 bit"
-msgstr "Ostatní 8 bitů"
-
 msgid "Running"
 msgstr "Spuštěné"
 
@@ -1905,6 +1906,17 @@ msgstr "A&utomatické ukládání parametrů"
 
 msgid "Configure options"
 msgstr "Změna nastavení"
+
+#, fuzzy
+msgid "No translation"
+msgstr "–  < Bez převodu >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Znaková sada pro vstup/zobrazení:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Schéma vzhledu:"
@@ -2046,27 +2058,6 @@ msgstr "Confirmation|Smazání &historie"
 
 msgid "Confirmation"
 msgstr "Potvrzování"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 výstup"
-
-msgid "&Full 8 bits output"
-msgstr "&plný 8 bitový výstup"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bitů"
-
-msgid "F&ull 8 bits input"
-msgstr "Vstup &plných 8 bitů"
-
-msgid "Display bits"
-msgstr "Zobrazení bitů"
-
-msgid "Input / display codepage:"
-msgstr "Znaková sada pro vstup/zobrazení:"
 
 msgid "Directory tree"
 msgstr "Strom složek"
@@ -3028,6 +3019,10 @@ msgstr "Nás&ledovat odkazy"
 msgid "Preserve &attributes"
 msgstr "Zachovat &atributy"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Zachovat &atributy"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Pokud existují, &ponořit se do podsložek"
 
@@ -3211,9 +3206,6 @@ msgstr "P&otvrzování…"
 
 msgid "&Appearance..."
 msgstr "&Vzhled…"
-
-msgid "&Display bits..."
-msgstr "&Zobrazení bitů…"
 
 msgid "&Virtual FS..."
 msgstr "&Virtuální souborový systém…"
@@ -3985,9 +3977,6 @@ msgstr "S podporou X11 událostí"
 msgid "With internationalization support"
 msgstr "S podporou pro místní jazyky a zvyklosti"
 
-msgid "With multiple codepages support"
-msgstr "S podporou vícero znakových sad"
-
 msgid "With ext2fs attributes support"
 msgstr "S podporou ext2fs atributů"
 
@@ -4371,6 +4360,14 @@ msgstr "sftp: připojování přerušeno uživatelem"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: připojování k serveru se nezdařilo: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"„%s“ se nedaří otevřít\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: nalezeny klíče hostitele nepodporovaného typu: RSA1"
 
@@ -4508,6 +4505,9 @@ msgstr "Po přerušení byla oznámena chyba."
 msgid "Aborted transfer would be successful."
 msgstr "Přerušení přenosu proběhlo v pořádku."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
+
 msgid "Inconsistent tar archive"
 msgstr "Nekonzistentní archiv .tar"
 
@@ -4529,9 +4529,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "nevypadá jako archiv .tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
 
 msgid "undelfs: error"
 msgstr "undelfs: chyba"
@@ -4724,3 +4721,30 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Ostatní 8 bitů"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 výstup"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&plný 8 bitový výstup"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bitů"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Vstup &plných 8 bitů"
+
+#~ msgid "Display bits"
+#~ msgstr "Zobrazení bitů"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Zobrazení bitů…"
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "S podporou vícero znakových sad"

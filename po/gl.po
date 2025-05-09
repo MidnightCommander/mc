@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Galician (http://app.transifex.com/mc/mc/language/gl/)\n"
@@ -465,12 +465,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maiús"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variábel de contorno TERM está sen definir!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -496,6 +490,12 @@ msgid ""
 msgstr ""
 "O tamaño de xanela %dx%d non esta admitido.\n"
 "Verifique o valor da variábel de contorno TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variábel de contorno TERM está sen definir!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1354,6 +1354,10 @@ msgstr "Ir á coincidencia do &Paréntese"
 msgid "Toggle s&yntax highlighting"
 msgstr "Alternar a Sinta&Xe de resalte"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Alter&Nar marcados"
+
 msgid "&Find declaration"
 msgstr "Buscar &Declaración"
 
@@ -1809,9 +1813,6 @@ msgstr "< Predeterminado >"
 msgid "Skins"
 msgstr "Temas"
 
-msgid "Other 8 bit"
-msgstr "Outro (8 bit)"
-
 msgid "Running"
 msgstr "Executándose"
 
@@ -1895,6 +1896,17 @@ msgstr "Configuración do &Auto-gardado"
 
 msgid "Configure options"
 msgstr "Configuración"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Sen tradución >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Entrada / mostrar xogo de caracteres:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -2036,27 +2048,6 @@ msgstr "Confirmation|Limpar &Historial"
 
 msgid "Confirmation"
 msgstr "Confirmación"
-
-msgid "&UTF-8 output"
-msgstr "Saída &UTF-8"
-
-msgid "&Full 8 bits output"
-msgstr "Saída &Completa de 8 bits"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bits"
-
-msgid "F&ull 8 bits input"
-msgstr "&Entrada completa de 8 bits"
-
-msgid "Display bits"
-msgstr "Mostrar bits"
-
-msgid "Input / display codepage:"
-msgstr "Entrada / mostrar xogo de caracteres:"
 
 msgid "Directory tree"
 msgstr "Árbore de directorios"
@@ -2998,6 +2989,10 @@ msgstr "Seguir &Ligazóns"
 msgid "Preserve &attributes"
 msgstr "Conservar &Atributos"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Conservar &Atributos"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Entrar en sub&Directorio se existe"
 
@@ -3181,9 +3176,6 @@ msgstr "c&Onfirmación..."
 
 msgid "&Appearance..."
 msgstr "&Aparencia..."
-
-msgid "&Display bits..."
-msgstr "&Mostrar bits..."
 
 msgid "&Virtual FS..."
 msgstr "Sistema de ficheiros &Virtual (VFS)..."
@@ -3937,9 +3929,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4315,6 +4304,14 @@ msgstr "sftp: conexión interrompida polo usuario"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: fracasou a conexión ao servidor: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Non é posíbel abrir «%s»\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4436,6 +4433,9 @@ msgstr "Informouse dun erro despois de interromper."
 msgid "Aborted transfer would be successful."
 msgstr "Transferencia interrompida satisfactoriamente."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Arquivo de tipo tar inconsistente"
 
@@ -4454,9 +4454,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4650,3 +4647,27 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Outro (8 bit)"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "Saída &UTF-8"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "Saída &Completa de 8 bits"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bits"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "&Entrada completa de 8 bits"
+
+#~ msgid "Display bits"
+#~ msgstr "Mostrar bits"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Mostrar bits..."

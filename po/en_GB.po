@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -457,43 +457,43 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "The TERM environment variable is unset!\n"
 
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Cannot check SIGWINCH pipe"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
 
 msgid "B"
 msgstr "B"
@@ -1373,6 +1373,10 @@ msgstr "Go to matching &bracket"
 msgid "Toggle s&yntax highlighting"
 msgstr "Toggle s&yntax highlighting"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "To&ggle mark"
+
 msgid "&Find declaration"
 msgstr "&Find declaration"
 
@@ -1830,9 +1834,6 @@ msgstr "< Default >"
 msgid "Skins"
 msgstr "Skins"
 
-msgid "Other 8 bit"
-msgstr "Other 8 bit"
-
 msgid "Running"
 msgstr "Running"
 
@@ -1916,6 +1917,17 @@ msgstr "A&uto save setup"
 
 msgid "Configure options"
 msgstr "Configure options"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Input / display codepage:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Skin:"
@@ -2057,27 +2069,6 @@ msgstr "Confirmation|&History cleanup"
 
 msgid "Confirmation"
 msgstr "Confirmation"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 output"
-
-msgid "&Full 8 bits output"
-msgstr "&Full 8 bits output"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bits"
-
-msgid "F&ull 8 bits input"
-msgstr "F&ull 8 bits input"
-
-msgid "Display bits"
-msgstr "Display bits"
-
-msgid "Input / display codepage:"
-msgstr "Input / display codepage:"
 
 msgid "Directory tree"
 msgstr "Directory tree"
@@ -3048,6 +3039,10 @@ msgstr "Follow &links"
 msgid "Preserve &attributes"
 msgstr "Preserve &attributes"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Preserve &attributes"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Di&ve into subdir if exists"
 
@@ -3231,9 +3226,6 @@ msgstr "C&onfirmation..."
 
 msgid "&Appearance..."
 msgstr "&Appearance..."
-
-msgid "&Display bits..."
-msgstr "&Display bits..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtual FS..."
@@ -3997,9 +3989,6 @@ msgstr "With support for X11 events"
 msgid "With internationalization support"
 msgstr "With internationalisation support"
 
-msgid "With multiple codepages support"
-msgstr "With multiple codepages support"
-
 msgid "With ext2fs attributes support"
 msgstr "With ext2fs attributes support"
 
@@ -4390,6 +4379,14 @@ msgstr "sftp: connection interrupted by user"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: connection to server failed: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Cannot open \"%s\"\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: found host key of unsupported type: RSA1"
 
@@ -4525,6 +4522,9 @@ msgstr "Error reported after abort."
 msgid "Aborted transfer would be successful."
 msgstr "Aborted transfer would be successful."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek not stopped at a record boundary"
+
 msgid "Inconsistent tar archive"
 msgstr "Inconsistent tar archive"
 
@@ -4546,9 +4546,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "doesn't look like a tar archive"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek not stopped at a record boundary"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4741,3 +4738,30 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Other 8 bit"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 output"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Full 8 bits output"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bits"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "F&ull 8 bits input"
+
+#~ msgid "Display bits"
+#~ msgstr "Display bits"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Display bits..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "With multiple codepages support"

@@ -165,7 +165,6 @@ static name_keymap_t command_names[] = {
 #endif
     ADD_KEYMAP_NAME (OptionsVfs),
     ADD_KEYMAP_NAME (OptionsConfirm),
-    ADD_KEYMAP_NAME (OptionsDisplayBits),
     ADD_KEYMAP_NAME (EditExtensionsFile),
     ADD_KEYMAP_NAME (EditFileHighlightFile),
     ADD_KEYMAP_NAME (LinkSymbolicEdit),

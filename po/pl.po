@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -463,12 +463,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nie można sprawdzić potoku SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -500,6 +494,12 @@ msgid ""
 msgstr ""
 "Rozmiar ekranu %d×%d nie jest obsługiwany.\n"
 "Proszę sprawdzić zmienną środowiskową TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nie można sprawdzić potoku SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1386,6 +1386,10 @@ msgstr "Prze&jdź do pasującego nawiasu"
 msgid "Toggle s&yntax highlighting"
 msgstr "Przełącz w&yróżnianie składni"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "&Przełącz zaznaczenie"
+
 msgid "&Find declaration"
 msgstr "&Znajdź deklarację"
 
@@ -1842,9 +1846,6 @@ msgstr "< Domyślna >"
 msgid "Skins"
 msgstr "Skórki"
 
-msgid "Other 8 bit"
-msgstr "Inne 8-bitowe"
-
 msgid "Running"
 msgstr "Wykonywanie"
 
@@ -1928,6 +1929,17 @@ msgstr "Auto&m. zapis ustawień"
 
 msgid "Configure options"
 msgstr "Konfiguracja"
+
+#, fuzzy
+msgid "No translation"
+msgstr "—  < Bez tłumaczenia >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Strona kodowa wejściowa/wyjściowa:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Skórka:"
@@ -2069,27 +2081,6 @@ msgstr "Wyczyszczenie &historii"
 
 msgid "Confirmation"
 msgstr "Potwierdzenia"
-
-msgid "&UTF-8 output"
-msgstr "Wyjście &UTF-8"
-
-msgid "&Full 8 bits output"
-msgstr "&Pełne wyjście 8-bitowe"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7-&bitowe"
-
-msgid "F&ull 8 bits input"
-msgstr "P&ełne wejście 8-bitowe"
-
-msgid "Display bits"
-msgstr "Wyświetlane bity"
-
-msgid "Input / display codepage:"
-msgstr "Strona kodowa wejściowa/wyjściowa:"
 
 msgid "Directory tree"
 msgstr "Drzewo katalogów"
@@ -3061,6 +3052,10 @@ msgstr "Podążanie za &dowiązaniami"
 msgid "Preserve &attributes"
 msgstr "&Zachowanie atrybutów"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "&Zachowanie atrybutów"
+
 msgid "Di&ve into subdir if exists"
 msgstr "&Schodzenie do podkat."
 
@@ -3244,9 +3239,6 @@ msgstr "P&otwierdzenia…"
 
 msgid "&Appearance..."
 msgstr "W&ygląd…"
-
-msgid "&Display bits..."
-msgstr "&Wyświetlane bity…"
 
 msgid "&Virtual FS..."
 msgstr "Wirtualny &system plików…"
@@ -4020,9 +4012,6 @@ msgstr "Z obsługą zdarzeń X11"
 msgid "With internationalization support"
 msgstr "Z obsługą wielu języków"
 
-msgid "With multiple codepages support"
-msgstr "Z obsługą wielu stron kodowych"
-
 msgid "With ext2fs attributes support"
 msgstr "Z obsługą atrybutów ext2fs"
 
@@ -4416,6 +4405,14 @@ msgstr "sftp: połączenie zostało przerwane przez użytkownika"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: połączenie z serwerem się nie powiodło: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Nie można otworzyć „%s”\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: odnaleziono klucz komputera o nieobsługiwanym typie: RSA1"
 
@@ -4552,6 +4549,9 @@ msgstr "Zgłoszono błąd po przerwaniu."
 msgid "Aborted transfer would be successful."
 msgstr "Przerwane przesyłanie zostałoby pomyślnie zakończone."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
+
 msgid "Inconsistent tar archive"
 msgstr "Niespójne archiwum tar"
 
@@ -4573,9 +4573,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "nie wygląda na archiwum tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
 
 msgid "undelfs: error"
 msgstr "undelfs: błąd"
@@ -4769,3 +4766,30 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Inne 8-bitowe"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "Wyjście &UTF-8"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Pełne wyjście 8-bitowe"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7-&bitowe"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "P&ełne wejście 8-bitowe"
+
+#~ msgid "Display bits"
+#~ msgstr "Wyświetlane bity"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Wyświetlane bity…"
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Z obsługą wielu stron kodowych"

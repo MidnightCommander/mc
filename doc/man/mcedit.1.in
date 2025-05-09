@@ -607,12 +607,6 @@ will be untouched. Default value is
 .I editor_state_full_filename
 Show full path name in the status line. If disabled (default), only base name of the
 file is shown.
-.SH MISCELLANEOUS
-The editor also displays non\-us characters (160+).  When editing
-binary files, you should set
-.B display bits
-to 7 bits in Midnight Commander's options menu to keep the spacing
-clean.
 .SH FILES
 .I %pkgdatadir%/help/mc.hlp
 .IP

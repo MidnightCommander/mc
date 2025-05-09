@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2019,2025\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -473,12 +473,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Немагчыма праверыць канал SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -510,6 +504,12 @@ msgid ""
 msgstr ""
 "Памер экрана %d×%d не падтрымліваецца.\n"
 "Праверце зменную асяроддзя \"TERM\".\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Немагчыма праверыць канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -1395,6 +1395,10 @@ msgstr "Перайсці да парнай дужкі(&B)"
 msgid "Toggle s&yntax highlighting"
 msgstr "Падсвятляць сінтаксіс(&Y)"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Пазначаць або не(&G)"
+
 msgid "&Find declaration"
 msgstr "Шукаць вызначэнне(&F)"
 
@@ -1852,9 +1856,6 @@ msgstr "< Default >"
 msgid "Skins"
 msgstr "Графічныя абалонкі"
 
-msgid "Other 8 bit"
-msgstr "Іншае 8-бітавае"
-
 msgid "Running"
 msgstr "Выконваецца"
 
@@ -1938,6 +1939,17 @@ msgstr "Аўтаматычна захоўваць налады(&U)"
 
 msgid "Configure options"
 msgstr "Наладзіць параметры"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Кадаванне ўводу/вываду:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Графічная абалонка:"
@@ -2079,27 +2091,6 @@ msgstr "Ачышчэнне гісторыі(&H)"
 
 msgid "Confirmation"
 msgstr "Пацвярджэнне"
-
-msgid "&UTF-8 output"
-msgstr "вывад &UTF-8"
-
-msgid "&Full 8 bits output"
-msgstr "8-бітавы вывад(&F)"
-
-msgid "&ISO 8859-1"
-msgstr "ISO 8859-1(&I)"
-
-msgid "7 &bits"
-msgstr "7 бітаў(&B)"
-
-msgid "F&ull 8 bits input"
-msgstr "Поўны 8-бітавы ўвод(&U)"
-
-msgid "Display bits"
-msgstr "Паказ бітаў"
-
-msgid "Input / display codepage:"
-msgstr "Кадаванне ўводу/вываду:"
 
 msgid "Directory tree"
 msgstr "Дрэва каталогаў"
@@ -3055,6 +3046,10 @@ msgstr "Выкарыстоўваць спасылкі(&L)"
 msgid "Preserve &attributes"
 msgstr "Захоўваць атрыбуты(&A)"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Захоўваць атрыбуты(&A)"
+
 msgid "Di&ve into subdir if exists"
 msgstr "У падкаталог, калі ён існуе(&V)"
 
@@ -3238,9 +3233,6 @@ msgstr "Пацвярджэнне(&O)..."
 
 msgid "&Appearance..."
 msgstr "Выгляд(&A)..."
-
-msgid "&Display bits..."
-msgstr "Кадаванне паказу(&D)..."
 
 msgid "&Virtual FS..."
 msgstr "Віртуальныя ФС(&V)..."
@@ -4012,9 +4004,6 @@ msgstr "З падтрымкай падзей X11"
 msgid "With internationalization support"
 msgstr "З падтрымкай інтэрнацыяналізацыі"
 
-msgid "With multiple codepages support"
-msgstr "З падтрымкай некалькіх кадаванняў"
-
 msgid "With ext2fs attributes support"
 msgstr "З падтрымкай атрыбутаў ext2fs"
 
@@ -4407,6 +4396,14 @@ msgstr "sftp: злучэнне перарванае карыстальнікам
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: не ўдалося злучыцца з серверам: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Немагчыма адкрыць \"%s\"\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: знойдзены ключ хоста, тып якога не падтрымліваецца: RSA1"
 
@@ -4541,6 +4538,9 @@ msgstr "Пасля перарывання выяўлена памылка."
 msgid "Aborted transfer would be successful."
 msgstr "Перадача перарваная."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
+
 msgid "Inconsistent tar archive"
 msgstr "Несумяшчальны архіў tar"
 
@@ -4562,9 +4562,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "не падобны на архіў tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
 
 msgid "undelfs: error"
 msgstr "undelfs: памылка"
@@ -4757,3 +4754,30 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Іншае 8-бітавае"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "вывад &UTF-8"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "8-бітавы вывад(&F)"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "ISO 8859-1(&I)"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 бітаў(&B)"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Поўны 8-бітавы ўвод(&U)"
+
+#~ msgid "Display bits"
+#~ msgstr "Паказ бітаў"
+
+#~ msgid "&Display bits..."
+#~ msgstr "Кадаванне паказу(&D)..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "З падтрымкай некалькіх кадаванняў"

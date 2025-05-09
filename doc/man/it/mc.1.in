@@ -1504,13 +1504,6 @@ quali azioni si vuole una richiesta di conferma.
 .PP
 Il comando
 .\"LINK2"
-mostra bit
-.\"Display bits"
-mostra una finestra di dialogo dalla quale è possibile selezionare quali
-caratteri il vostro terminale è capace di mostrare.
-.PP
-Il comando
-.\"LINK2"
 impara tasti
 .\"Learn keys"
 mostra una finestra di dialogo dalla quale è possibile controllare i tasti
@@ -1733,14 +1726,7 @@ selezionata viene mostrata sul fondo dei pannelli.
 .SH "    Conferme"
 In questo menu è possibile configurare le opzioni di conferma per la
 cancellazione e sovrascrittura dei file, esecuzione dei file premendo invio e
-per l'uscita dal programma. 
-.\"NODE "    Display bits"
-.SH "    Mostra bit"
-Viene usata per configurare la quantità dei caratteri visibili sullo
-schermo. Quest'impostazione può essere 7 bit, se il terminale/libreria_curses 
-supporta solo sette bit in uscita, ISO\-8859\-1 se mostra tutti i caratteri
-nella mappa ISO\-8859\-1 e uscita completa a 8 bit per quei terminali che possono
-visualizzare tutti i caratteri a 8 bit.
+per l'uscita dal programma.
 .\"NODE "    Learn keys"
 .SH "    Impara tasti"
 Questa finestra di dialogo permette di controllare e ridefinire i tasti

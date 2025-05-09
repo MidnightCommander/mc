@@ -218,8 +218,6 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
 int
 is_printable (int c)
 {
-    /* "Display bits" is ignored, since the user controls the output
-       by setting the output codepage */
     return is_8bit_printable (c & 0xff);
 }
 

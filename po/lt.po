@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -465,12 +465,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Lyg2"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -496,6 +490,12 @@ msgid ""
 msgstr ""
 "Ekrano dydis %dx%d nepalaikomas.\n"
 "Patikrinkite TERM aplinkos kintamąjį.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1334,6 +1334,9 @@ msgstr "Eiti prie sutampančio skliausto"
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+msgid "Togg&le right margin"
+msgstr ""
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1781,9 +1784,6 @@ msgstr "< Numatytas >"
 msgid "Skins"
 msgstr ""
 
-msgid "Other 8 bit"
-msgstr "Kita 8 bitų"
-
 msgid "Running"
 msgstr ""
 
@@ -1867,6 +1867,17 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Keisti parinktis"
+
+#, fuzzy
+msgid "No translation"
+msgstr "–  < Jokio vertimo >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Įvesties / išvesties kodų lentelė:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Išvaizda"
@@ -2008,27 +2019,6 @@ msgstr ""
 
 msgid "Confirmation"
 msgstr "Patvirtinimas"
-
-msgid "&UTF-8 output"
-msgstr ""
-
-msgid "&Full 8 bits output"
-msgstr ""
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bitai"
-
-msgid "F&ull 8 bits input"
-msgstr "Pilna 8 bitų į&vestis"
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
-msgstr "Įvesties / išvesties kodų lentelė:"
 
 msgid "Directory tree"
 msgstr "Aplankų medis"
@@ -2916,6 +2906,9 @@ msgstr "Sekti nuorodas"
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
@@ -3099,9 +3092,6 @@ msgstr "Patvirtinimas..."
 
 msgid "&Appearance..."
 msgstr "Išvaizda..."
-
-msgid "&Display bits..."
-msgstr "Iš&vesties bitai..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuali failų sistema..."
@@ -3853,9 +3843,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4229,6 +4216,14 @@ msgstr "sftp:  jungimasis nutrauktas"
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Nepavyksta atverti „%s“\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4350,6 +4345,9 @@ msgstr "Po nutraukties pranešta klaida."
 msgid "Aborted transfer would be successful."
 msgstr "Nutrauktas siuntimas būtų sėkmingas."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Nevientisas tar archyvas"
 
@@ -4368,9 +4366,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4556,3 +4551,18 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Kita 8 bitų"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bitai"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Pilna 8 bitų į&vestis"
+
+#~ msgid "&Display bits..."
+#~ msgstr "Iš&vesties bitai..."

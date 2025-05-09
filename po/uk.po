@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -472,12 +472,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Змінна середовища TERM не встановлена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Не вдалося перевірити канал SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -509,6 +503,12 @@ msgid ""
 msgstr ""
 "Розмір екрана %dx%d не підтримується.\n"
 "Перевірте змінну оточення TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Змінна середовища TERM не встановлена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Не вдалося перевірити канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -1368,6 +1368,10 @@ msgstr "Перейти до парної &дужки"
 msgid "Toggle s&yntax highlighting"
 msgstr "Перемкнути підсвітку синтаксис&у"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "П&еремкнути помічання"
+
 msgid "&Find declaration"
 msgstr "&Знайти об’явлення"
 
@@ -1824,9 +1828,6 @@ msgstr "< Типово >"
 msgid "Skins"
 msgstr "Шкіри"
 
-msgid "Other 8 bit"
-msgstr "Інше 8-розрядне"
-
 msgid "Running"
 msgstr "Виконується"
 
@@ -1910,6 +1911,17 @@ msgstr "&Автозбереження параметрів"
 
 msgid "Configure options"
 msgstr "Параметри конфігурації"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Без перекодування >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Кодування вводу/показу:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Шкіра:"
@@ -2050,27 +2062,6 @@ msgstr "Confirmation|&Очищення історії"
 
 msgid "Confirmation"
 msgstr "Підтвердження"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 вивід"
-
-msgid "&Full 8 bits output"
-msgstr "&Повний 8 бітовий вивід"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &біт"
-
-msgid "F&ull 8 bits input"
-msgstr "Повний &8-розрядний ввід"
-
-msgid "Display bits"
-msgstr "Відображення символів"
-
-msgid "Input / display codepage:"
-msgstr "Кодування вводу/показу:"
 
 msgid "Directory tree"
 msgstr "Дерево каталогів"
@@ -3014,6 +3005,10 @@ msgstr "&Iти за посиланнями"
 msgid "Preserve &attributes"
 msgstr "Зберігати атриб&yти"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Зберігати атриб&yти"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Ус&eредину каталога, якщо існує"
 
@@ -3197,9 +3192,6 @@ msgstr "&Підтвердження…"
 
 msgid "&Appearance..."
 msgstr "&Вигляд..."
-
-msgid "&Display bits..."
-msgstr "&Відображення символів…"
 
 msgid "&Virtual FS..."
 msgstr "Віртуальні &ФС…"
@@ -3970,9 +3962,6 @@ msgstr "Із підтримкою подій X11"
 msgid "With internationalization support"
 msgstr "Із підтримкою інтернаціоналізації"
 
-msgid "With multiple codepages support"
-msgstr "Із підтримкою кількох кодових сторінок"
-
 msgid "With ext2fs attributes support"
 msgstr "Із підтримкою атрибутів ext2fs"
 
@@ -4357,6 +4346,14 @@ msgstr "sftp: з’єднання перервано користувачем"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: з’єдання з сервером невдале: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Не вдалося відкрити «%s»\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: знайдено ключ господаря непідтримуваного типу: RSA1"
 
@@ -4494,6 +4491,9 @@ msgstr "Сталася помилка після переривання."
 msgid "Aborted transfer would be successful."
 msgstr "Перерване перенесення могло завершитися успішно."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Виявлено неузгоджений архів tar"
 
@@ -4512,9 +4512,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4709,3 +4706,30 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Інше 8-розрядне"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 вивід"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Повний 8 бітовий вивід"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &біт"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Повний &8-розрядний ввід"
+
+#~ msgid "Display bits"
+#~ msgstr "Відображення символів"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Відображення символів…"
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Із підтримкою кількох кодових сторінок"

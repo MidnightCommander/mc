@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022,2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -457,12 +457,6 @@ msgstr "Alternativo"
 msgid "Shift"
 msgstr "Uskleca inversigilo"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La medivariablo TERM ne estas valorizita!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ne eblas kontroli SIGWINCH-dukton"
-
 #, c-format
 msgid ""
 "\n"
@@ -494,6 +488,12 @@ msgid ""
 msgstr ""
 "Ekrangrando %dx%d ne estas regata.\n"
 "Kontroli la medivariablon TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La medivariablo TERM ne estas valorizita!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ne eblas kontroli SIGWINCH-dukton"
 
 msgid "B"
 msgstr "B"
@@ -1375,6 +1375,10 @@ msgstr "Iri al kongrua &krampo"
 msgid "Toggle s&yntax highlighting"
 msgstr "(Mal)ŝalti &sintaksan prilumadon"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Inversi&gi markon"
+
 msgid "&Find declaration"
 msgstr "&Trovi deklaron"
 
@@ -1832,9 +1836,6 @@ msgstr "< Apriora >"
 msgid "Skins"
 msgstr "Etosoj"
 
-msgid "Other 8 bit"
-msgstr "Alia 8-bita"
-
 msgid "Running"
 msgstr "Plenumanta"
 
@@ -1918,6 +1919,17 @@ msgstr "Aŭtomate konservi agor&don"
 
 msgid "Configure options"
 msgstr "Agordaĵoj"
+
+#, fuzzy
+msgid "No translation"
+msgstr "- < Neniu traduko >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Enmeta / elmontra kodpaĝo:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Etoso:"
@@ -2059,27 +2071,6 @@ msgstr "&Historion purigi"
 
 msgid "Confirmation"
 msgstr "Konfirmo"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8-a eligo"
-
-msgid "&Full 8 bits output"
-msgstr "&Plena 8-bita eligo"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO-8859-1"
-
-msgid "7 &bits"
-msgstr "7-&bitaj"
-
-msgid "F&ull 8 bits input"
-msgstr "&Plena 8-bita enmeto"
-
-msgid "Display bits"
-msgstr "Elmontraj bitoj"
-
-msgid "Input / display codepage:"
-msgstr "Enmeta / elmontra kodpaĝo:"
 
 msgid "Directory tree"
 msgstr "Dosieruja arbo"
@@ -3036,6 +3027,10 @@ msgstr "Sekvi &Ligilojn"
 msgid "Preserve &attributes"
 msgstr "Konservi &atributojn"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Konservi &atributojn"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Plo&nĝi en subdosierujon se ĝi ekzistas"
 
@@ -3219,9 +3214,6 @@ msgstr "Ko&nfirmo..."
 
 msgid "&Appearance..."
 msgstr "A&spekto..."
-
-msgid "&Display bits..."
-msgstr "&Elmontraj bitoj..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtualaj dosiersistemoj..."
@@ -3983,9 +3975,6 @@ msgstr "Kun rego de X11-eventoj"
 msgid "With internationalization support"
 msgstr "Kun internaciiga rego"
 
-msgid "With multiple codepages support"
-msgstr "Kun rego de pluraj kodpaĝoj"
-
 msgid "With ext2fs attributes support"
 msgstr "Kun rego de ext2fs-atributoj"
 
@@ -4375,6 +4364,14 @@ msgstr "sftp: konekto interrompita de uzanto"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: konekto al servilo fiaskis: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Ne eblas malfermi je \"%s\"\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: trovis retnodo-ŝlosilon kun nekomprenata tipo: RSA1"
 
@@ -4510,6 +4507,9 @@ msgstr "Eraro raportita post ĉesigo."
 msgid "Aborted transfer would be successful."
 msgstr "Ĉesigita transigo estus sukcesa."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
+
 msgid "Inconsistent tar archive"
 msgstr "Malkonsekvenca tar-dosiero"
 
@@ -4531,9 +4531,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ne ŝajnas esti TAR-arkivo"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
 
 msgid "undelfs: error"
 msgstr "undelfs: eraro"
@@ -4726,3 +4723,30 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Alia 8-bita"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8-a eligo"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Plena 8-bita eligo"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO-8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7-&bitaj"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "&Plena 8-bita enmeto"
+
+#~ msgid "Display bits"
+#~ msgstr "Elmontraj bitoj"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Elmontraj bitoj..."
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "Kun rego de pluraj kodpaĝoj"

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -462,12 +462,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Premenná prostredia TERM nie je nastavená!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -493,6 +487,12 @@ msgid ""
 msgstr ""
 "Veľkosť obrazovky %dx%d nie je podporovaná.\n"
 "Skontrolujte premennú prostredia TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Premenná prostredia TERM nie je nastavená!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1352,6 +1352,10 @@ msgstr "Prejsť na zodpovedajúcu &zátvorku"
 msgid "Toggle s&yntax highlighting"
 msgstr "Prepnúť zvýrazňovanie s&yntaxe"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Pr&epnúť znač."
+
 msgid "&Find declaration"
 msgstr "&Nájsť deklaráciu"
 
@@ -1807,9 +1811,6 @@ msgstr "< Predvolené >"
 msgid "Skins"
 msgstr "Témy vzhľadu"
 
-msgid "Other 8 bit"
-msgstr "Iné 8-bitové"
-
 msgid "Running"
 msgstr "Beží"
 
@@ -1893,6 +1894,17 @@ msgstr "A&utomaticky ukladať konfiguráciu"
 
 msgid "Configure options"
 msgstr "Konfigurácia"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Žiadny preklad >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Vstupná/zobrazovacia znaková sada:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Téma vzhľadu:"
@@ -2034,27 +2046,6 @@ msgstr "Confirmation|Vyčistiť &históriu"
 
 msgid "Confirmation"
 msgstr "Potvrdenie"
-
-msgid "&UTF-8 output"
-msgstr "Výstup v &UTF-8"
-
-msgid "&Full 8 bits output"
-msgstr "P&lný 8-bitový vstup"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7-&bitový"
-
-msgid "F&ull 8 bits input"
-msgstr "P&lný 8-bitový vstup"
-
-msgid "Display bits"
-msgstr "Zobrazené bity"
-
-msgid "Input / display codepage:"
-msgstr "Vstupná/zobrazovacia znaková sada:"
 
 msgid "Directory tree"
 msgstr "Strom adresárov"
@@ -2991,6 +2982,10 @@ msgstr "Nas&ledovať odkazy"
 msgid "Preserve &attributes"
 msgstr "Zachovať &atribúty"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Zachovať &atribúty"
+
 msgid "Di&ve into subdir if exists"
 msgstr "&Ponoriť sa do podadresára ak existuje"
 
@@ -3174,9 +3169,6 @@ msgstr "P&otvrdenie..."
 
 msgid "&Appearance..."
 msgstr "Vzhľ&ad..."
-
-msgid "&Display bits..."
-msgstr "&Zobrazené bity..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuálny FS..."
@@ -3940,9 +3932,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4318,6 +4307,14 @@ msgstr "sftp: používateľ prerušil spojenie"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: spojenie so serverom zlyhalo: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Nemožno otvoriť „%s“\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4439,6 +4436,9 @@ msgstr "Chyba hlásená po prerušení."
 msgid "Aborted transfer would be successful."
 msgstr "Prerušenie prenosu bolo úspešné."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Poškodený archív .tar"
 
@@ -4457,9 +4457,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4653,3 +4650,27 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Iné 8-bitové"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "Výstup v &UTF-8"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "P&lný 8-bitový vstup"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7-&bitový"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "P&lný 8-bitový vstup"
+
+#~ msgid "Display bits"
+#~ msgstr "Zobrazené bity"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Zobrazené bity..."

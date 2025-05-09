@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -441,12 +441,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "გარემოს ცვლადი TERM დაყენებული არაა!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -472,6 +466,12 @@ msgid ""
 msgstr ""
 "ეკრანიზ ზომა %dx%d არ არის მხარდაჭერილი.\n"
 "შეამოწმეთ გარემოს ცვლადი TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "გარემოს ცვლადი TERM დაყენებული არაა!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "ბ"
@@ -1294,6 +1294,10 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "&ნიშნის ჩართ/გამორთ"
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1743,9 +1747,6 @@ msgstr "< ნაგულისხმევი >"
 msgid "Skins"
 msgstr "სკინები"
 
-msgid "Other 8 bit"
-msgstr "სხვა 8 ბიტიანი"
-
 msgid "Running"
 msgstr "გაშვებულია"
 
@@ -1829,6 +1830,15 @@ msgstr "&პარამეტრების ავტომატური შ
 
 msgid "Configure options"
 msgstr "პარამეტრების მორგება"
+
+msgid "No translation"
+msgstr ""
+
+msgid "Detected display codepage"
+msgstr ""
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "გარეგნობა:"
@@ -1966,27 +1976,6 @@ msgstr "დასტური|&ისტორიის გაწმენდა
 
 msgid "Confirmation"
 msgstr "დასტური"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 გამოტანა"
-
-msgid "&Full 8 bits output"
-msgstr "&სრული8 ბიტის გამოტანა"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &ბიტიანი"
-
-msgid "F&ull 8 bits input"
-msgstr "სრული 8 ბიტიანი შეყვანა"
-
-msgid "Display bits"
-msgstr "ბიტების ცვენება"
-
-msgid "Input / display codepage:"
-msgstr ""
 
 msgid "Directory tree"
 msgstr "საქაღალდეების ხე"
@@ -2847,6 +2836,10 @@ msgstr "&ბმულებზე მიყოლა"
 msgid "Preserve &attributes"
 msgstr "&ატრიბუტების შენარჩუნება"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "&ატრიბუტების შენარჩუნება"
+
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
@@ -3030,9 +3023,6 @@ msgstr "დადასტურებები..."
 
 msgid "&Appearance..."
 msgstr "გარეგნობა..."
-
-msgid "&Display bits..."
-msgstr "ნაჩვენები ნაწილები..."
 
 msgid "&Virtual FS..."
 msgstr "&ვირტუალური FS..."
@@ -3754,9 +3744,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4112,6 +4099,14 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"ფაილის გახსნის შეცდომა %s\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4233,6 +4228,9 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4249,9 +4247,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4428,3 +4423,27 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Other 8 bit"
+#~ msgstr "სხვა 8 ბიტიანი"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 გამოტანა"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&სრული8 ბიტის გამოტანა"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &ბიტიანი"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "სრული 8 ბიტიანი შეყვანა"
+
+#~ msgid "Display bits"
+#~ msgstr "ბიტების ცვენება"
+
+#~ msgid "&Display bits..."
+#~ msgstr "ნაჩვენები ნაწილები..."

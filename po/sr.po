@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
@@ -451,12 +451,6 @@ msgstr "Алт"
 msgid "Shift"
 msgstr "Помак"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Променљива љуске „TERM“ је расподешена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -482,6 +476,12 @@ msgid ""
 msgstr ""
 "Величина екрана %dx%d није подржана.\n"
 "Проверите променљиву окружења „TERM“.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променљива љуске „TERM“ је расподешена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1340,6 +1340,10 @@ msgstr "Иди на одговарајућу &заграду"
 msgid "Toggle s&yntax highlighting"
 msgstr "Промени &истицање синтаксе"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "Промени &ознаку"
+
 msgid "&Find declaration"
 msgstr "&Нађи објаву"
 
@@ -1795,9 +1799,6 @@ msgstr "< Основно >"
 msgid "Skins"
 msgstr "Маске"
 
-msgid "Other 8 bit"
-msgstr "Другa, осмобитнa"
-
 msgid "Running"
 msgstr "Покренут"
 
@@ -1881,6 +1882,17 @@ msgstr "&Сам сачувај подешавања"
 
 msgid "Configure options"
 msgstr "Опције подешавања"
+
+#, fuzzy
+msgid "No translation"
+msgstr "—  < Без претварања >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Кодна страна улаза и приказа:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Маска:"
@@ -2022,27 +2034,6 @@ msgstr "Очисти &историјат"
 
 msgid "Confirmation"
 msgstr "Потврђивање"
-
-msgid "&UTF-8 output"
-msgstr "&УТФ-8 излаз"
-
-msgid "&Full 8 bits output"
-msgstr "&Пун осмобитни излаз"
-
-msgid "&ISO 8859-1"
-msgstr "&ИСО 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &бита"
-
-msgid "F&ull 8 bits input"
-msgstr "Пун &осмобитни улаз"
-
-msgid "Display bits"
-msgstr "Битова у приказу"
-
-msgid "Input / display codepage:"
-msgstr "Кодна страна улаза и приказа:"
 
 msgid "Directory tree"
 msgstr "Стабло директоријума"
@@ -2973,6 +2964,10 @@ msgstr "Прати &везе"
 msgid "Preserve &attributes"
 msgstr "Причувај &особине"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Причувај &особине"
+
 msgid "Di&ve into subdir if exists"
 msgstr "&Урони у поддиректоријум ако постоји"
 
@@ -3156,9 +3151,6 @@ msgstr "П&отврђивање..."
 
 msgid "&Appearance..."
 msgstr "&Изглед..."
-
-msgid "&Display bits..."
-msgstr "&Битова у приказу..."
 
 msgid "&Virtual FS..."
 msgstr "&Виртуелни СД..."
@@ -3917,9 +3909,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4295,6 +4284,14 @@ msgstr "sftp: повезивање је прекинуо корисник"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: повезивање са сервером није успело: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Не могу да отворим „%s“\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4416,6 +4413,9 @@ msgstr "Пријављена је грешка после прекида."
 msgid "Aborted transfer would be successful."
 msgstr "Прекинути пренос би био успешан."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Недоследна тар архива"
 
@@ -4434,9 +4434,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4630,3 +4627,27 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Другa, осмобитнa"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&УТФ-8 излаз"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Пун осмобитни излаз"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ИСО 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &бита"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "Пун &осмобитни улаз"
+
+#~ msgid "Display bits"
+#~ msgstr "Битова у приказу"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Битова у приказу..."

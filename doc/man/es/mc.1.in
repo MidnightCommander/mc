@@ -1708,12 +1708,6 @@ podemos seleccionar un «skin» o apariencia para el programa.
 .PP
 En
 .\"LINK2"
-Juego de Caracteres
-.\"Display bits"
-podemos seleccionar qué caracteres es capaz de mostrar nuestro terminal.
-.PP
-En
-.\"LINK2"
 Aprender Teclas
 .\"Learn keys"
 podemos verificar teclas que no funcionan en algunos terminales y
@@ -2074,16 +2068,6 @@ Véase la sección sobre
 Skins
 .\"Skins"
 para conocer los detalles de los archivos de definición de estos «skins».
-.\"NODE "    Display bits"
-.SH "    Juego de caracteres"
-Esta opción permite configurar el conjunto de caracteres visibles en la
-pantalla.  Este puede ser 7\-bits si nuestro terminal/curses soporta
-solo siete bits de salida, alguna de las tablas del estándar ISO\-8859 y
-diversas codificaciones comunes de PC con ocho bits por carácter, o UTF\-8
-para Unicode.
-.PP
-Para soportar teclados con caracteres locales debemos marcar la opción de
-.IR "Aceptar entrada de 8 bits" .
 .\"NODE "    Learn keys"
 .SH "    Aprender teclas"
 Este diálogo nos permite comprobar si nuestras teclas F1\-F20, Inicio, Fin, etc. funcionan adecuadamente

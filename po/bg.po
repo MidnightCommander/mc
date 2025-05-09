@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2017,2020,2025\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -460,12 +460,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Променливата TERM не е зададена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Каналът за SIGWINCH не може да се провери"
-
 #, c-format
 msgid ""
 "\n"
@@ -497,6 +491,12 @@ msgid ""
 msgstr ""
 "Не се поддържа размер на екрана %dx%d.\n"
 "Проверете променливата на средата TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променливата TERM не е зададена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Каналът за SIGWINCH не може да се провери"
 
 msgid "B"
 msgstr "B"
@@ -1359,6 +1359,10 @@ msgstr "Преместване до съответна &скоба"
 msgid "Toggle s&yntax highlighting"
 msgstr "Оцветяване на с&интаксиса"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "&Избиране"
+
 msgid "&Find declaration"
 msgstr "&Декларация"
 
@@ -1816,9 +1820,6 @@ msgstr "< Стандартно >"
 msgid "Skins"
 msgstr "Теми"
 
-msgid "Other 8 bit"
-msgstr "Други 8 бита"
-
 msgid "Running"
 msgstr "Изпълнява се"
 
@@ -1902,6 +1903,17 @@ msgstr "Автоматично записване на настро&йки"
 
 msgid "Configure options"
 msgstr "Настройки"
+
+#, fuzzy
+msgid "No translation"
+msgstr "—  < Без преобразуване >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Кодова страница:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "Тема:"
@@ -2043,27 +2055,6 @@ msgstr "Из&чистване на историята"
 
 msgid "Confirmation"
 msgstr "Потвърждения"
-
-msgid "&UTF-8 output"
-msgstr "Изход в UTF-&8"
-
-msgid "&Full 8 bits output"
-msgstr "Изход в 8 &бита"
-
-msgid "&ISO 8859-1"
-msgstr "ISO 8859-&1"
-
-msgid "7 &bits"
-msgstr "&7 бита"
-
-msgid "F&ull 8 bits input"
-msgstr "&Всички 8 бита"
-
-msgid "Display bits"
-msgstr "Показване на битовете"
-
-msgid "Input / display codepage:"
-msgstr "Кодова страница:"
 
 msgid "Directory tree"
 msgstr "Дърво на директориите"
@@ -3006,6 +2997,10 @@ msgstr "Следване на &връзките"
 msgid "Preserve &attributes"
 msgstr "Запазване на &атрибутите"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "Запазване на &атрибутите"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Влизане в &поддиректория, ако съществува"
 
@@ -3189,9 +3184,6 @@ msgstr "По&твърждения…"
 
 msgid "&Appearance..."
 msgstr "&Външен вид…"
-
-msgid "&Display bits..."
-msgstr "&Битове за извеждане…"
 
 msgid "&Virtual FS..."
 msgstr "Виртуална &ФС…"
@@ -3954,9 +3946,6 @@ msgstr "С поддръжка на събития от X11"
 msgid "With internationalization support"
 msgstr "С поддръжка на интернационализация"
 
-msgid "With multiple codepages support"
-msgstr "С поддръжка на множество кодирания"
-
 msgid "With ext2fs attributes support"
 msgstr "С поддръжка на атрибути на ext2fs"
 
@@ -4340,6 +4329,14 @@ msgstr "sftp: връзката е прекъсната от потребител
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: връзката към сървъра е неуспешна: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"Не може да се отвори „%s“\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: неподдържан вид на намерения ключ на хост: RSA1"
 
@@ -4476,6 +4473,9 @@ msgstr "Грешка след отмяната."
 msgid "Aborted transfer would be successful."
 msgstr "Преносът е отменен успешно."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "сгрешен архив tar"
 
@@ -4494,9 +4494,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4690,3 +4687,30 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Други 8 бита"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "Изход в UTF-&8"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "Изход в 8 &бита"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "ISO 8859-&1"
+
+#~ msgid "7 &bits"
+#~ msgstr "&7 бита"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "&Всички 8 бита"
+
+#~ msgid "Display bits"
+#~ msgstr "Показване на битовете"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Битове за извеждане…"
+
+#~ msgid "With multiple codepages support"
+#~ msgstr "С поддръжка на множество кодирания"

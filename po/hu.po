@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/mc/mc/language/hu/)\n"
@@ -453,12 +453,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Nincs beállítva a TERM környezeti változó.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -484,6 +478,12 @@ msgid ""
 msgstr ""
 "A(z) %dx%d képernyőméret nem támogatott.\n"
 "Ellenőrizze a TERM környezeti változót.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Nincs beállítva a TERM környezeti változó.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1340,6 +1340,10 @@ msgstr "Ugrás &zárójel párjára"
 msgid "Toggle s&yntax highlighting"
 msgstr "Szintaktikus sz&övegkiemelés ki/be"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "&Inverz kijelölés"
+
 msgid "&Find declaration"
 msgstr "Deklaráció &keresése"
 
@@ -1795,9 +1799,6 @@ msgstr "< Alapértelmezett >"
 msgid "Skins"
 msgstr ""
 
-msgid "Other 8 bit"
-msgstr "Egyéb 8 bites"
-
 msgid "Running"
 msgstr "Futtatás:"
 
@@ -1881,6 +1882,17 @@ msgstr "Auto &Beállításmentés"
 
 msgid "Configure options"
 msgstr "Alapbeállítások"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Nincs konverzió >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Beviteli/kijelzési kódlap:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -2021,27 +2033,6 @@ msgstr "Confirmation|&Történet törlés"
 
 msgid "Confirmation"
 msgstr "Rákérdezés"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 kimenet"
-
-msgid "&Full 8 bits output"
-msgstr "&Teljes 8 bites kimenet"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bit"
-
-msgid "F&ull 8 bits input"
-msgstr "&8 bites bevitel"
-
-msgid "Display bits"
-msgstr "Kivitel és bevitel"
-
-msgid "Input / display codepage:"
-msgstr "Beviteli/kijelzési kódlap:"
 
 msgid "Directory tree"
 msgstr "Könyvtárfa"
@@ -2976,6 +2967,10 @@ msgstr "&Linkek követése"
 msgid "Preserve &attributes"
 msgstr "&Attribútumok megőrzése"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "&Attribútumok megőrzése"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Lét&ező könyvtárba lemenni"
 
@@ -3159,9 +3154,6 @@ msgstr "&Rákérdezés..."
 
 msgid "&Appearance..."
 msgstr "&Megjelenítés..."
-
-msgid "&Display bits..."
-msgstr "&Kivitel és bevitel..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuális fájlrendszer..."
@@ -3918,9 +3910,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4296,6 +4285,14 @@ msgstr "sftp: a kapcsolatot a felhasználó megszakította"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: a kapcsolódás nem sikerült a szerverhez: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" fájl nem megnyitható \n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4417,6 +4414,9 @@ msgstr "Megszakítás után hibajelzés érkezett."
 msgid "Aborted transfer would be successful."
 msgstr "Átvitel megszakítva; hibajelzés nem érkezett."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonzisztens tar-archívum."
 
@@ -4435,9 +4435,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4627,3 +4624,27 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "Egyéb 8 bites"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 kimenet"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "&Teljes 8 bites kimenet"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7 &bit"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "&8 bites bevitel"
+
+#~ msgid "Display bits"
+#~ msgstr "Kivitel és bevitel"
+
+#~ msgid "&Display bits..."
+#~ msgstr "&Kivitel és bevitel..."

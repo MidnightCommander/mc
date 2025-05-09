@@ -94,7 +94,6 @@ int double_click_speed = 250;  // ms
 gboolean old_esc_mode = TRUE;
 /* timeout for old_esc_mode in usec */
 int old_esc_mode_timeout = G_USEC_PER_SEC;  // us, settable via env
-gboolean use_8th_bit_as_meta = FALSE;
 
 gboolean bracketed_pasting_in_progress = FALSE;
 
@@ -1331,26 +1330,6 @@ init_key (void)
     // load some additional keys (e.g. direct Alt-? support)
     load_xtra_key_defines ();
 
-#ifdef __QNX__
-    if ((term != NULL) && (strncmp (term, "qnx", 3) == 0))
-    {
-        /* Modify the default value of use_8th_bit_as_meta: we would
-         * like to provide a working mc for a newbie who knows nothing
-         * about [Options|Display bits|Full 8 bits input]...
-         *
-         * Don't use 'meta'-bit, when we are dealing with a
-         * 'qnx*'-type terminal: clear the default value!
-         * These terminal types use 0xFF as an escape character,
-         * so use_8th_bit_as_meta==1 must not be enabled!
-         *
-         * [mc-4.1.21+,slint.c/getch(): the DEC_8BIT_HACK stuff
-         * is not used now (doesn't even depend on use_8th_bit_as_meta
-         * as in mc-3.1.2)...GREAT!...no additional code is required!]
-         */
-        use_8th_bit_as_meta = FALSE;
-    }
-#endif
-
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     init_key_x11 ();
 #endif
@@ -1761,12 +1740,7 @@ pend_send:
                 ;
         }
         else
-        {
-            if (c > 127 && c < 256 && use_8th_bit_as_meta)
-                c = ALT (c & 0x7f);
-
             goto done;
-        }
     }
 
 nodelay_try_again:
@@ -1813,15 +1787,6 @@ nodelay_try_again:
     {
         this = keys;
         parent = NULL;
-
-        if (c > 127 && c < 256 && use_8th_bit_as_meta)
-        {
-            c &= 0x7f;
-
-            // The first sequence defined starts with esc
-            parent = keys;
-            this = keys->child;
-        }
     }
 
     while (this != NULL)

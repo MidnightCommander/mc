@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2025-05-09 12:01+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/mc/mc/language/"
@@ -465,12 +465,6 @@ msgstr "Alt 键"
 msgid "Shift"
 msgstr "Shift 键"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "没有设置 TERM 环境变量!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -496,6 +490,12 @@ msgid ""
 msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "没有设置 TERM 环境变量!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1353,6 +1353,10 @@ msgstr "转到匹配的括号(&B)"
 msgid "Toggle s&yntax highlighting"
 msgstr "切换语法突出显示(&Y)"
 
+#, fuzzy
+msgid "Togg&le right margin"
+msgstr "翻转标记(&G)"
+
 msgid "&Find declaration"
 msgstr "查找申明(&F)"
 
@@ -1809,9 +1813,6 @@ msgstr "< 默认 >"
 msgid "Skins"
 msgstr "皮肤"
 
-msgid "Other 8 bit"
-msgstr "其它 8 位"
-
 msgid "Running"
 msgstr "正在运行"
 
@@ -1895,6 +1896,17 @@ msgstr "自动保存设置(&U)"
 
 msgid "Configure options"
 msgstr "配置选项"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < 没有翻译 >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "输入/显示代码页: "
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
 
 msgid "Skin:"
 msgstr "皮肤:"
@@ -2035,27 +2047,6 @@ msgstr "Confirmation|清除历史(&H)"
 
 msgid "Confirmation"
 msgstr "确认"
-
-msgid "&UTF-8 output"
-msgstr "&UTF-8 输出"
-
-msgid "&Full 8 bits output"
-msgstr "完整的 8 bit 输出(&F)"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7-bit(&B)"
-
-msgid "F&ull 8 bits input"
-msgstr "全8位输入(&U)"
-
-msgid "Display bits"
-msgstr "显示位"
-
-msgid "Input / display codepage:"
-msgstr "输入/显示代码页: "
 
 msgid "Directory tree"
 msgstr "目录树"
@@ -2993,6 +2984,10 @@ msgstr "跟随链接(&L)"
 msgid "Preserve &attributes"
 msgstr "保留属性(&A)"
 
+#, fuzzy
+msgid "Preserve e&xt2 attributes"
+msgstr "保留属性(&A)"
+
 msgid "Di&ve into subdir if exists"
 msgstr "如果有子目录则进入(&V)"
 
@@ -3176,9 +3171,6 @@ msgstr "确认(&O)..."
 
 msgid "&Appearance..."
 msgstr "外观(&A)..."
-
-msgid "&Display bits..."
-msgstr "显示位(&D)..."
 
 msgid "&Virtual FS..."
 msgstr "虚拟文件系统(&V)..."
@@ -3928,9 +3920,6 @@ msgstr ""
 msgid "With internationalization support"
 msgstr ""
 
-msgid "With multiple codepages support"
-msgstr ""
-
 msgid "With ext2fs attributes support"
 msgstr ""
 
@@ -4306,6 +4295,14 @@ msgstr "sftp: 连接被用户中断"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: 连接服务器失败: %s"
 
+#, fuzzy, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"无法打开“%s”\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4427,6 +4424,9 @@ msgstr "中止后发生错误。"
 msgid "Aborted transfer would be successful."
 msgstr "被中止的传输可能成功完成了。"
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 档案文件"
 
@@ -4445,9 +4445,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4641,3 +4638,27 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "Other 8 bit"
+#~ msgstr "其它 8 位"
+
+#~ msgid "&UTF-8 output"
+#~ msgstr "&UTF-8 输出"
+
+#~ msgid "&Full 8 bits output"
+#~ msgstr "完整的 8 bit 输出(&F)"
+
+#~ msgid "&ISO 8859-1"
+#~ msgstr "&ISO 8859-1"
+
+#~ msgid "7 &bits"
+#~ msgstr "7-bit(&B)"
+
+#~ msgid "F&ull 8 bits input"
+#~ msgstr "全8位输入(&U)"
+
+#~ msgid "Display bits"
+#~ msgstr "显示位"
+
+#~ msgid "&Display bits..."
+#~ msgstr "显示位(&D)..."

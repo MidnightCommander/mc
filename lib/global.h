@@ -130,10 +130,8 @@ typedef struct
     // Numbers of (file I/O) and (input/display) codepages. -1 if not selected
     int source_codepage;
     int display_codepage;
-    /*
-     * If utf-8 terminal utf8_display = TRUE
-     * Display bits set UTF-8
-     */
+
+    // If utf-8 terminal utf8_display = TRUE
     gboolean utf8_display;
 
     // Set if the nice message (hint) bar is visible

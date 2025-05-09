@@ -307,7 +307,6 @@ static const struct
     { "confirm_view_dir", &confirm_view_dir },
     { "safe_delete", &safe_delete },
     { "safe_overwrite", &safe_overwrite },
-    { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
     { "mouse_move_pages_viewer", &mcview_mouse_move_pages },
     { "mouse_close_dialog", &mouse_close_dialog },
     { "fast_refresh", &fast_refresh },
@@ -932,14 +931,20 @@ load_setup (void)
     {
         char *buffer;
 
-        buffer = mc_config_get_string (mc_global.main_config, CONFIG_MISC_SECTION,
-                                       "display_codepage", "");
-        if (buffer[0] != '\0')
-        {
-            mc_global.display_codepage = get_codepage_index (buffer);
-            cp_display = get_codepage_id (mc_global.display_codepage);
-        }
-        g_free (buffer);
+        // Detect display codepage
+        const char *current_system_codepage = str_detect_termencoding ();
+
+        mc_global.display_codepage = get_codepage_index (current_system_codepage);
+
+        // Default to 7-bit ASCII
+        if (mc_global.display_codepage == -1)
+            mc_global.display_codepage = 0;
+
+        cp_display = get_codepage_id (mc_global.display_codepage);
+
+        mc_global.utf8_display = str_isutf8 (current_system_codepage);
+
+        // Restore source codepage
         buffer = mc_config_get_string (mc_global.main_config, CONFIG_MISC_SECTION,
                                        "source_codepage", "");
         if (buffer[0] != '\0')
