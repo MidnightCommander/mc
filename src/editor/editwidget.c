@@ -371,7 +371,7 @@ edit_get_shortcut (long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-edit_get_title (const WDialog *h, size_t len)
+edit_get_title (const WDialog *h, const ssize_t width)
 {
     const WEdit *edit;
     const char *modified;
@@ -381,14 +381,14 @@ edit_get_title (const WDialog *h, size_t len)
     edit = edit_find_editor (h);
     modified = edit->modified != 0 ? "(*) " : "    ";
 
-    len -= 4;
+    const ssize_t width1 = width - strlen (modified);
 
     if (edit->filename_vpath == NULL)
         filename = g_strdup (_ ("[NoName]"));
     else
         filename = g_strdup (vfs_path_as_str (edit->filename_vpath));
 
-    file_label = str_term_trim (filename, len - str_term_width1 (_ ("Edit: ")));
+    file_label = str_term_trim (filename, width1 - str_term_width1 (_ ("Edit: ")));
     g_free (filename);
 
     return g_strconcat (_ ("Edit: "), modified, file_label, (char *) NULL);

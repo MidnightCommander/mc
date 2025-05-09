@@ -372,25 +372,23 @@ mcview_eol (WView *view, off_t current)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mcview_get_title (const WDialog *h, size_t len)
+mcview_get_title (const WDialog *h, const ssize_t width)
 {
     const WView *view;
     const char *modified;
     const char *file_label;
     const char *view_filename;
-    char *ret_str;
 
     view = (const WView *) widget_find_by_type (CONST_WIDGET (h), mcview_callback);
     modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
     view_filename = vfs_path_as_str (view->filename_vpath);
 
-    len -= 4;
+    const ssize_t width1 = width - 4;
 
     file_label = view_filename != NULL ? view_filename : view->command != NULL ? view->command : "";
-    file_label = str_term_trim (file_label, len - str_term_width1 (_ ("View: ")));
+    file_label = str_term_trim (file_label, width1 - str_term_width1 (_ ("View: ")));
 
-    ret_str = g_strconcat (_ ("View: "), modified, file_label, (char *) NULL);
-    return ret_str;
+    return g_strconcat (_ ("View: "), modified, file_label, (char *) NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
