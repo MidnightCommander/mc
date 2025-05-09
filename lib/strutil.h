@@ -133,7 +133,7 @@ struct str_class
     /*I*/ int (*term_width1) (const char *text);
     /*I*/ int (*term_width2) (const char *text, size_t length);
     /*I*/ int (*term_char_width) (const char *length);
-    /*I*/ const char *(*trunc) (const char *length, int width);
+    /*I*/ const char *(*trunc) (const char *length, const ssize_t width);
     /*I*/ int (*offset_to_pos) (const char *text, size_t length);
     /*I*/ int (*column_to_pos) (const char *text, size_t pos);
     /*I*/ char *(*create_search_needle) (const char *needle, gboolean case_sen);
@@ -446,7 +446,7 @@ int str_column_to_pos (const char *text, size_t pos);
  * but do not insert additional spaces
  * I
  */
-const char *str_trunc (const char *text, int width);
+const char *str_trunc (const char *text, const ssize_t width);
 
 /* create needle, that will be searched in str_search_fist/last,
  * so needle can be reused

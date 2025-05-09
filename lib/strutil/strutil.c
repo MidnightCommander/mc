@@ -784,7 +784,7 @@ str_iscombiningmark (const char *ch)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_trunc (const char *text, int width)
+str_trunc (const char *text, const ssize_t width)
 {
     return used_class.trunc (text, width);
 }

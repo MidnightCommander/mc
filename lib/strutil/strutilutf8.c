@@ -27,7 +27,7 @@
 
 #include <stdlib.h>
 #include <langinfo.h>
-#include <limits.h>  // MB_LEN_MAX
+#include <limits.h>  // MB_LEN_MAX, SIZE_MAX
 #include <string.h>
 
 #include "lib/global.h"
@@ -440,13 +440,15 @@ str_utf8_vfs_convert_to (GIConv coder, const char *string, int size, GString *bu
  * return width of string too */
 
 static const struct term_form *
-str_utf8_make_make_term_form (const char *text, size_t length)
+str_utf8_make_make_term_form (const char *text, const ssize_t width)
 {
     static struct term_form result;
+    size_t width1;
     gunichar uni;
     size_t left;
     char *actual;
 
+    width1 = width < 0 ? SIZE_MAX : (size_t) width;
     result.text[0] = '\0';
     result.width = 0;
     result.compose = FALSE;
@@ -454,7 +456,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
 
     /* check if text start with combining character,
      * add space at begin in this case */
-    if (length != 0 && text[0] != '\0')
+    if (width1 != 0 && text[0] != '\0')
     {
         uni = g_utf8_get_char_validated (text, -1);
         if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2))
@@ -467,7 +469,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
         }
     }
 
-    while (length != 0 && text[0] != '\0')
+    for (; width1 != 0 && text[0] != '\0'; width1--)
     {
         uni = g_utf8_get_char_validated (text, -1);
         if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
@@ -504,9 +506,6 @@ str_utf8_make_make_term_form (const char *text, size_t length)
             actual += repl_len;
             result.width++;
         }
-
-        if (length != (size_t) (-1))
-            length--;
     }
     actual[0] = '\0';
 
@@ -521,7 +520,7 @@ str_utf8_term_form (const char *text)
     static char result[BUF_MEDIUM * MB_LEN_MAX];
     const struct term_form *pre_form;
 
-    pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
+    pre_form = str_utf8_make_make_term_form (text, -1);
     if (pre_form->compose)
     {
         char *composed;
@@ -687,7 +686,8 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
-    pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
+    pre_form = str_utf8_make_make_term_form (text, -1);
+
     tool.checked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
@@ -766,7 +766,7 @@ str_utf8_term_trim (const char *text, int width)
         return result;
     }
 
-    pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
+    pre_form = str_utf8_make_make_term_form (text, -1);
 
     tool.checked = pre_form->text;
     tool.actual = result;
@@ -805,7 +805,7 @@ str_utf8_term_width2 (const char *text, size_t length)
 {
     const struct term_form *result;
 
-    result = str_utf8_make_make_term_form (text, length);
+    result = str_utf8_make_make_term_form (text, (ssize_t) length);
     return result->width;
 }
 
@@ -837,7 +837,7 @@ str_utf8_term_substring (const char *text, int start, int width)
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
-    pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
+    pre_form = str_utf8_make_make_term_form (text, -1);
 
     tool.checked = pre_form->text;
     tool.actual = result;
@@ -862,29 +862,31 @@ str_utf8_term_substring (const char *text, int start, int width)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_utf8_trunc (const char *text, int width)
+str_utf8_trunc (const char *text, const ssize_t width)
 {
     static char result[MC_MAXPATHLEN * MB_LEN_MAX * 2];
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
-    pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
+    const size_t width1 = width < 0 ? SIZE_MAX : (size_t) width;
+
+    pre_form = str_utf8_make_make_term_form (text, -1);
 
     tool.checked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
     tool.compose = FALSE;
 
-    if (pre_form->width <= (gsize) width)
+    if (pre_form->width <= width1)
         utf8_tool_copy_chars_to_end (&tool);
     else
     {
         tool.ident = 0;
-        utf8_tool_copy_chars_to (&tool, width / 2);
+        utf8_tool_copy_chars_to (&tool, width1 / 2);
         utf8_tool_insert_char (&tool, '~');
 
         tool.ident = 0;
-        utf8_tool_skip_chars_to (&tool, pre_form->width - width + 1);
+        utf8_tool_skip_chars_to (&tool, pre_form->width - width1 + 1);
         utf8_tool_copy_chars_to_end (&tool);
     }
 

@@ -499,7 +499,7 @@ str_8bit_term_substring (const char *text, int start, int width)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_8bit_trunc (const char *text, int width)
+str_8bit_trunc (const char *text, const ssize_t width)
 {
     static char result[MC_MAXPATHLEN];
     int remain;
@@ -511,9 +511,9 @@ str_8bit_trunc (const char *text, int width)
     remain = sizeof (result);
     length = strlen (text);
 
-    if ((int) length > width)
+    if (width >= 0 && length > (size_t) width)
     {
-        for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
+        for (; pos + 1 <= (size_t) width / 2 && remain > 1; actual++, pos++, remain--)
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 
         if (remain <= 1)
@@ -522,7 +522,7 @@ str_8bit_trunc (const char *text, int width)
         actual++;
         remain--;
 
-        pos += length - width + 1;
+        pos += length - (size_t) width + 1;
         for (; pos < length && remain > 1; pos++, actual++, remain--)
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
     }
