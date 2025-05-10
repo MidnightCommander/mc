@@ -628,40 +628,42 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     if ((edit_options.visible_tabs || (edit_options.visible_tws && q >= tws))
                         && enable_show_tabs_tws && tty_use_colors ())
                     {
+                        int style;
+
                         if ((p->style & MOD_MARKED) != 0)
-                            c = p->style;
+                            style = p->style;
                         else if (book_mark != 0)
-                            c |= book_mark << 16;
+                            style = c | (book_mark << 16);
                         else
-                            c = p->style | MOD_WHITESPACE;
+                            style = p->style | MOD_WHITESPACE;
                         if (i > 2)
                         {
                             p->ch = '<';
-                            p->style = c;
+                            p->style = style;
                             p++;
                             while (--i > 1)
                             {
                                 p->ch = '-';
-                                p->style = c;
+                                p->style = style;
                                 p++;
                             }
                             p->ch = '>';
-                            p->style = c;
+                            p->style = style;
                             p++;
                         }
                         else if (i > 1)
                         {
                             p->ch = '<';
-                            p->style = c;
+                            p->style = style;
                             p++;
                             p->ch = '>';
-                            p->style = c;
+                            p->style = style;
                             p++;
                         }
                         else
                         {
                             p->ch = '>';
-                            p->style = c;
+                            p->style = style;
                             p++;
                         }
                     }
@@ -670,24 +672,28 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     {
                         p->ch = '.';
                         p->style |= MOD_WHITESPACE;
-                        c = p->style & ~MOD_CURSOR;
+
+                        const int style = p->style & ~MOD_CURSOR;
+
                         p++;
                         while (--i != 0)
                         {
                             p->ch = ' ';
-                            p->style = c;
+                            p->style = style;
                             p++;
                         }
                     }
                     else
                     {
                         p->ch |= ' ';
-                        c = p->style & ~MOD_CURSOR;
+
+                        const int style = p->style & ~MOD_CURSOR;
+
                         p++;
                         while (--i != 0)
                         {
                             p->ch = ' ';
-                            p->style = c;
+                            p->style = style;
                             p++;
                         }
                     }
