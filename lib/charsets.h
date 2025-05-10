@@ -11,12 +11,6 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct
-{
-    char *id;
-    char *name;
-} codepage_desc;
-
 /*** global variables defined in .c file *********************************************************/
 
 extern unsigned char conv_displ[256];
