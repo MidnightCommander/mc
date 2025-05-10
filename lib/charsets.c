@@ -57,6 +57,12 @@ const char *cp_source = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
+typedef struct
+{
+    char *id;
+    char *name;
+} codepage_desc;
+
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
