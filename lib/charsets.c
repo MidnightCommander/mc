@@ -243,6 +243,15 @@ get_codepage_id (const int n)
 
 /* --------------------------------------------------------------------------------------------- */
 
+const char *
+get_codepage_name (const int n)
+{
+    return (n < 0) ? ("No translation")
+                   : ((codepage_desc *) g_ptr_array_index (codepages, n))->name;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 get_codepage_index (const char *id)
 {

@@ -596,12 +596,8 @@ appearance_box (void)
     current_skin_name = g_strdup (mc_skin__default.name);
     skin_names = mc_skin_list ();
 
-    const char *name_cp_display =
-        ((codepage_desc *) g_ptr_array_index (codepages, mc_global.display_codepage))->name;
-
-    const char *name_cp_source = mc_global.source_codepage >= 0
-        ? ((codepage_desc *) g_ptr_array_index (codepages, mc_global.source_codepage))->name
-        : N_ ("No translation");
+    const char *name_cp_display = get_codepage_name (mc_global.display_codepage);
+    const char *name_cp_source = get_codepage_name (mc_global.source_codepage);
 
     label_cp_display =
         g_strdup_printf ("%s: %s", N_ ("Detected display codepage"), name_cp_display);
