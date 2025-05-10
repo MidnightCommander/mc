@@ -53,14 +53,15 @@ const char *cp_source = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UNKNCHAR       '\001'
-#define NO_TRANSLATION "No translation"
+#define UNKNCHAR '\001'
 
 /*** file scope type declarations ****************************************************************/
 
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
+
+static const char NO_TRANSLATION[] = N_ ("No translation");
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -239,6 +240,15 @@ const char *
 get_codepage_id (const int n)
 {
     return (n < 0) ? NO_TRANSLATION : ((codepage_desc *) g_ptr_array_index (codepages, n))->id;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+const char *
+get_codepage_name (const int n)
+{
+    return (n < 0) ? _ (NO_TRANSLATION)
+                   : ((codepage_desc *) g_ptr_array_index (codepages, n))->name;
 }
 
 /* --------------------------------------------------------------------------------------------- */

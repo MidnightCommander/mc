@@ -29,6 +29,7 @@ extern GPtrArray *codepages;
 /*** declarations of public functions ************************************************************/
 
 const char *get_codepage_id (const int n);
+const char *get_codepage_name (const int n);
 int get_codepage_index (const char *id);
 void load_codepages_list (void);
 void free_codepages_list (void);

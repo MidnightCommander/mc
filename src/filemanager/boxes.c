@@ -495,12 +495,8 @@ about_box (void)
 
     char *version = g_strdup_printf ("%s %s", PACKAGE_NAME, mc_global.mc_version);
 
-    const char *name_cp_display =
-        ((codepage_desc *) g_ptr_array_index (codepages, mc_global.display_codepage))->name;
-
-    const char *name_cp_source = mc_global.source_codepage >= 0
-        ? ((codepage_desc *) g_ptr_array_index (codepages, mc_global.source_codepage))->name
-        : N_ ("No translation");
+    const char *name_cp_display = get_codepage_name (mc_global.display_codepage);
+    const char *name_cp_source = get_codepage_name (mc_global.source_codepage);
 
     label_cp_display =
         g_strdup_printf ("%s: %s", N_ ("Detected display codepage"), name_cp_display);
