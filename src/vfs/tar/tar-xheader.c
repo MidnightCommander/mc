@@ -198,7 +198,7 @@ keyword_item_run (gpointer data, gpointer user_data)
 
     t = locate_handler (kp->pattern);
     if (t != NULL)
-        return t->decoder (st, t->keyword, kp->value, strlen (kp->value));
+        return t->decoder (st, kp->pattern, kp->value, strlen (kp->value));
 
     return TRUE;  // FIXME
 }
