@@ -558,57 +558,54 @@ dview_pclose (FBUF *fs)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Get one char (byte) from string
+ * Get one character (byte) from string at given position
  *
- * @param str ...
- * @param ch ...
- * @return TRUE on success, FALSE otherwise
+ * @param str string
+ * @param pos byte position
+ *
+ * @return first 8-bit character of @string at position @pos
  */
 
-static gboolean
-dview_get_byte (const char *str, int *ch)
+static int
+dview_get_byte (const char *str, const size_t pos)
 {
-    if (str == NULL)
-        return FALSE;
-
-    *ch = (unsigned char) (*str);
-    return TRUE;
+    return (unsigned char) str[pos];
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Get utf multibyte char from string
+ * Get utf-8 character from string at given position
  *
- * @param str ...
- * @param ch ...
- * @param ch_length ...
- * @return TRUE on success, FALSE otherwise
+ * @param str string
+ * @param pos character position
+ * @param len character length in bytes
+ *
+ * @return first Unicode character of @string at position @pos
  */
 
-static gboolean
-dview_get_utf (const char *str, int *ch, int *ch_length)
+static int
+dview_get_utf (const char *str, const size_t pos, int *len)
 {
-    if (str == NULL)
-        return FALSE;
+    const char *s = str + pos;
+    const gunichar uni = g_utf8_get_char_validated (s, -1);
 
-    *ch = g_utf8_get_char_validated (str, -1);
+    int c;
 
-    if (*ch < 0)
+    if (uni != (gunichar) (-1) && uni != (gunichar) (-2))
     {
-        *ch = (unsigned char) (*str);
-        *ch_length = 1;
+        const char *next_ch = g_utf8_next_char (s);
+
+        c = uni;
+        *len = next_ch - s;
     }
     else
     {
-        const char *next_ch;
-
-        // Calculate UTF-8 char length
-        next_ch = g_utf8_next_char (str);
-        *ch_length = next_ch - str;
+        c = (unsigned char) (*s);
+        *len = 1;
     }
 
-    return TRUE;
+    return c;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1366,11 +1363,9 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
             }
             else if (skip > 0)
             {
-                int ch = 0;
                 int ch_length = 1;
 
-                (void) dview_get_utf (src, &ch, &ch_length);
-
+                (void) dview_get_utf (src, 0, &ch_length);
                 if (ch_length > 1)
                     skip += ch_length - 1;
 
@@ -1464,10 +1459,9 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             }
             else if (skip != 0)
             {
-                int ch = 0;
                 int ch_length = 1;
 
-                (void) dview_get_utf (src, &ch, &ch_length);
+                (void) dview_get_utf (src, 0, &ch_length);
                 if (ch_length > 1)
                     skip += ch_length - 1;
 
@@ -2529,8 +2523,6 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
     {
         int ch;
         int next_ch = 0;
-        int col;
-        size_t cnt;
 
         p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
@@ -2568,44 +2560,35 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                     cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
                                g_ptr_array_index (dview->hdiff, i), ord, att);
                     tty_gotoyx (r + j, c);
-                    col = 0;
 
-                    for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
+                    for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
                     {
-                        gboolean ch_res;
-
                         if (dview->utf8)
                         {
                             int ch_length = 0;
 
-                            ch_res = dview_get_utf (buf + cnt, &next_ch, &ch_length);
+                            next_ch = dview_get_utf (buf, cnt, &ch_length);
                             if (ch_length > 1)
                                 cnt += ch_length - 1;
                             if (!g_unichar_isprint (next_ch))
                                 next_ch = '.';
                         }
                         else
-                            ch_res = dview_get_byte (buf + cnt, &next_ch);
+                            next_ch = dview_get_byte (buf, cnt);
 
-                        if (ch_res)
+                        tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
+                        if (mc_global.utf8_display)
                         {
-                            tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
-                            if (mc_global.utf8_display)
-                            {
-                                if (!dview->utf8)
-                                {
-                                    next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch,
-                                                                          dview->converter);
-                                }
-                            }
-                            else if (dview->utf8)
-                                next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
-                            else
-                                next_ch = convert_to_display_c (next_ch);
-
-                            tty_print_anychar (next_ch);
-                            col++;
+                            if (!dview->utf8)
+                                next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch,
+                                                                      dview->converter);
                         }
+                        else if (dview->utf8)
+                            next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+                        else
+                            next_ch = convert_to_display_c (next_ch);
+
+                        tty_print_anychar (next_ch);
                     }
                     continue;
                 }
@@ -2638,42 +2621,37 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         }
         tty_gotoyx (r + j, c);
         // tty_print_nstring (buf, width);
-        col = 0;
-        for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
-        {
-            gboolean ch_res;
 
+        for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
+        {
             if (dview->utf8)
             {
                 int ch_length = 0;
 
-                ch_res = dview_get_utf (buf + cnt, &next_ch, &ch_length);
+                next_ch = dview_get_utf (buf, cnt, &ch_length);
                 if (ch_length > 1)
                     cnt += ch_length - 1;
                 if (!g_unichar_isprint (next_ch))
                     next_ch = '.';
             }
             else
-                ch_res = dview_get_byte (buf + cnt, &next_ch);
+                next_ch = dview_get_byte (buf, cnt);
 
-            if (ch_res)
+            if (mc_global.utf8_display)
             {
-                if (mc_global.utf8_display)
-                {
-                    if (!dview->utf8)
-                        next_ch =
-                            convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
-                }
-                else if (dview->utf8)
-                    next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
-                else
-                    next_ch = convert_to_display_c (next_ch);
-
-                tty_print_anychar (next_ch);
-                col++;
+                if (!dview->utf8)
+                    next_ch =
+                        convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
             }
+            else if (dview->utf8)
+                next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+            else
+                next_ch = convert_to_display_c (next_ch);
+
+            tty_print_anychar (next_ch);
         }
     }
+
     tty_setcolor (NORMAL_COLOR);
     k = width;
     if (width < xwidth - 1)
