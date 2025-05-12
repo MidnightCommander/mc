@@ -449,24 +449,25 @@ str_utf8_make_make_term_form (const char *text, const ssize_t width)
     char *actual;
 
     width1 = width < 0 ? SIZE_MAX : (size_t) width;
+
     result.text[0] = '\0';
     result.width = 0;
     result.compose = FALSE;
+
+    if (width1 == 0 || text[0] == '\0')
+        return &result;
+
     actual = result.text;
 
     /* check if text start with combining character,
      * add space at begin in this case */
-    if (width1 != 0 && text[0] != '\0')
+    uni = g_utf8_get_char_validated (text, -1);
+    if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)) && str_unichar_iscombiningmark (uni))
     {
-        uni = g_utf8_get_char_validated (text, -1);
-        if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2))
-            && str_unichar_iscombiningmark (uni))
-        {
-            actual[0] = ' ';
-            actual++;
-            result.width++;
-            result.compose = TRUE;
-        }
+        actual[0] = ' ';
+        actual++;
+        result.width++;
+        result.compose = TRUE;
     }
 
     for (; width1 != 0 && text[0] != '\0'; width1--)
