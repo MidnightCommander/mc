@@ -50,7 +50,7 @@ typedef struct WDialog WDialog;
 typedef char *(*dlg_shortcut_str) (long command);
 
 /* get dialog name to show in dialog list */
-typedef char *(*dlg_title_str) (const WDialog *h, size_t len);
+typedef char *(*dlg_title_str) (const WDialog *h, const ssize_t width);
 
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
@@ -114,7 +114,7 @@ void dlg_run_done (WDialog *h);
 void dlg_save_history (WDialog *h);
 void dlg_process_event (WDialog *h, int key, Gpm_Event *event);
 
-char *dlg_get_title (const WDialog *h, size_t len);
+char *dlg_get_title (const WDialog *h, const ssize_t width);
 
 /* Default callbacks for dialogs */
 cb_ret_t dlg_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data);

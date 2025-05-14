@@ -168,7 +168,7 @@ char *fake_name_quote (const char *c, gboolean quote_percent);
 /* path_trunc() is the same as str_trunc() but
  * it deletes possible password from path for security
  * reasons. */
-const char *path_trunc (const char *path, size_t trunc_len);
+const char *path_trunc (const char *path, const ssize_t width);
 
 /* return a static string representing size, appending "K" or "M" for
  * big sizes.

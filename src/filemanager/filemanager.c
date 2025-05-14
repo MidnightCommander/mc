@@ -417,7 +417,7 @@ midnight_get_shortcut (long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-midnight_get_title (const WDialog *h, size_t len)
+midnight_get_title (const WDialog *h, const ssize_t width)
 {
     char *path;
     char *login;
@@ -430,7 +430,7 @@ midnight_get_title (const WDialog *h, size_t len)
     p = g_strdup_printf ("%s [%s]:%s", _ ("Panels:"), login, path);
     g_free (path);
     g_free (login);
-    path = g_strdup (str_trunc (p, len - 4));
+    path = g_strdup (str_trunc (p, width - 4));
     g_free (p);
 
     return path;

@@ -293,7 +293,7 @@ void mcview_set_codeset (WView *view);
 void mcview_show_error (WView *view, const char *error);
 off_t mcview_bol (WView *view, off_t current, off_t limit);
 off_t mcview_eol (WView *view, off_t current);
-char *mcview_get_title (const WDialog *h, size_t len);
+char *mcview_get_title (const WDialog *h, ssize_t width);
 int mcview_calc_percent (WView *view, off_t p);
 
 /* move.c */

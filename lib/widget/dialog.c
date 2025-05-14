@@ -615,7 +615,7 @@ dlg_save_history (WDialog *h)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-dlg_get_title (const WDialog *h, size_t len)
+dlg_get_title (const WDialog *h, const ssize_t width)
 {
     char *t;
 
@@ -623,7 +623,7 @@ dlg_get_title (const WDialog *h, size_t len)
         abort ();
 
     if (h->get_title != NULL)
-        t = h->get_title (h, len);
+        t = h->get_title (h, width);
     else
         t = g_strdup ("");
 

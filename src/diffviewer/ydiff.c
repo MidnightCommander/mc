@@ -3294,24 +3294,31 @@ dview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-dview_get_title (const WDialog *h, size_t len)
+dview_get_title (const WDialog *h, const ssize_t width)
 {
     const WDiff *dview;
     const char *modified = " (*) ";
     const char *notmodified = "     ";
-    size_t len1;
+    ssize_t width1;
     GString *title;
 
     dview = (const WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
-    len1 = (len - str_term_width1 (_ ("Diff:")) - strlen (modified) - 3) / 2;
+    width1 = (width - str_term_width1 (_ ("Diff:")) - strlen (modified) - 3) / 2;
+    if (width1 < 0)
+    {
+        // It's very unlikely that width1 becomes negative at some time.
+        // This means that width is too small and dialog window is too narrow.
+        // Set width1 to some reasonable value.
+        width1 = width / 2;
+    }
 
-    title = g_string_sized_new (len);
+    title = g_string_sized_new (width);
     g_string_append (title, _ ("Diff:"));
     g_string_append (title, dview->merged[DIFF_LEFT] ? modified : notmodified);
-    g_string_append (title, str_term_trim (dview->label[DIFF_LEFT], len1));
+    g_string_append (title, str_term_trim (dview->label[DIFF_LEFT], width1));
     g_string_append (title, " | ");
     g_string_append (title, dview->merged[DIFF_RIGHT] ? modified : notmodified);
-    g_string_append (title, str_term_trim (dview->label[DIFF_RIGHT], len1));
+    g_string_append (title, str_term_trim (dview->label[DIFF_RIGHT], width1));
 
     return g_string_free (title, FALSE);
 }

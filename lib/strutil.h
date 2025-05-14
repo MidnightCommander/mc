@@ -128,12 +128,12 @@ struct str_class
     void (*fix_string) (char *text);
     /*I*/ const char *(*term_form) (const char *text);
     /*I*/ const char *(*fit_to_term) (const char *text, int width, align_crt_t just_mode);
-    /*I*/ const char *(*term_trim) (const char *text, int width);
+    /*I*/ const char *(*term_trim) (const char *text, const ssize_t width);
     /*I*/ const char *(*term_substring) (const char *text, int start, int width);
-    /*I*/ int (*term_width1) (const char *text);
-    /*I*/ int (*term_width2) (const char *text, size_t length);
+    /*I*/ size_t (*term_width1) (const char *text);
+    /*I*/ size_t (*term_width2) (const char *text, const ssize_t width);
     /*I*/ int (*term_char_width) (const char *length);
-    /*I*/ const char *(*trunc) (const char *length, int width);
+    /*I*/ const char *(*trunc) (const char *length, const ssize_t width);
     /*I*/ int (*offset_to_pos) (const char *text, size_t length);
     /*I*/ int (*column_to_pos) (const char *text, size_t pos);
     /*I*/ char *(*create_search_needle) (const char *needle, gboolean case_sen);
@@ -237,8 +237,8 @@ void str_uninit_strings (void);
  * ESTR_PROBLEM if ch contains only part of characters,
  * ESTR_FAILURE if conversion is not possible
  */
-estr_t str_translate_char (GIConv conv, const char *ch, size_t ch_size, char *output,
-                           size_t out_size);
+estr_t str_translate_char (GIConv conv, const char *ch, const ssize_t ch_size, char *output,
+                           const size_t out_size);
 
 /* test, if text is valid in terminal encoding
  * I
@@ -406,7 +406,7 @@ const char *str_fit_to_term (const char *text, int width, align_crt_t just_mode)
  * no additional spaces are inserted
  * I
  */
-const char *str_term_trim (const char *text, int width);
+const char *str_term_trim (const char *text, const ssize_t width);
 
 /* like str_term_form, but return only specified substring
  * start - column (position) on terminal, where substring begin
@@ -421,10 +421,10 @@ const char *str_term_substring (const char *text, int start, int width);
 int str_term_width1 (const char *text);
 
 /* return width, that will be text occupied on terminal
- * text is limited by length in characters
+ * text is limited by width in characters
  * I
  */
-int str_term_width2 (const char *text, size_t length);
+int str_term_width2 (const char *text, const ssize_t width);
 
 /* return width, that will be character occupied on terminal
  * combining characters are always zero width
@@ -446,7 +446,7 @@ int str_column_to_pos (const char *text, size_t pos);
  * but do not insert additional spaces
  * I
  */
-const char *str_trunc (const char *text, int width);
+const char *str_trunc (const char *text, const ssize_t width);
 
 /* create needle, that will be searched in str_search_fist/last,
  * so needle can be reused
@@ -563,10 +563,10 @@ strtol_error_t xstrtoumax (const char *nptr, char **endptr, int base, uintmax_t 
                            const char *valid_suffixes);
 uintmax_t parse_integer (const char *str, gboolean *invalid);
 
-char *str_escape (const char *src, gsize src_len, const char *escaped_chars,
-                  gboolean escape_non_printable);
-char *str_unescape (const char *src, gsize src_len, const char *unescaped_chars,
-                    gboolean unescape_non_printable);
+char *str_escape (const char *src, const ssize_t src_len, const char *escaped_chars,
+                  const gboolean escape_non_printable);
+char *str_unescape (const char *src, const ssize_t src_len, const char *unescaped_chars,
+                    const gboolean unescape_non_printable);
 char *str_shell_unescape (const char *text);
 char *str_shell_escape (const char *text);
 

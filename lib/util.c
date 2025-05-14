@@ -305,13 +305,13 @@ fake_name_quote (const char *s, gboolean quote_percent)
  */
 
 const char *
-path_trunc (const char *path, size_t trunc_len)
+path_trunc (const char *path, const ssize_t width)
 {
     vfs_path_t *vpath;
     const char *ret;
 
     vpath = vfs_path_from_str_flags (path, VPF_STRIP_PASSWORD);
-    ret = str_trunc (vfs_path_as_str (vpath), trunc_len);
+    ret = str_trunc (vfs_path_as_str (vpath), width);
     vfs_path_free (vpath, TRUE);
 
     return ret;
