@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -59,6 +59,9 @@ msgstr "Kan inte skapa gruppen '%s' för händelser!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Kan inte skapa händelsen '%s'!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1588,9 +1591,6 @@ msgstr ""
 "En användarvänlig texteditor\n"
 "skriven för Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "Om"
 
@@ -1825,6 +1825,20 @@ msgstr "Kör"
 msgid "Stopped"
 msgstr "Stannad"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ingen översättning >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Teckenöversättning för inmatning/visning:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "Al&drig"
 
@@ -1902,17 +1916,6 @@ msgstr "A&utospara inställningar"
 
 msgid "Configure options"
 msgstr "Inställningar"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Ingen översättning >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Teckenöversättning för inmatning/visning:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -3860,7 +3863,7 @@ msgid "Home directory path is not absolute"
 msgstr "Hemkatalogsökvägen är inte absolut"
 
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

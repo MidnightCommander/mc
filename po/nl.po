@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016-2017,2025\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
@@ -55,6 +55,9 @@ msgstr "Niet in staat groep '%s' voor bewerking aan te maken!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Niet in staat bewerking '%s' aan te maken!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1584,9 +1587,6 @@ msgstr ""
 "Een gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "Over"
 
@@ -1821,6 +1821,20 @@ msgstr "Aan het draaien"
 msgid "Stopped"
 msgstr "Gestopt"
 
+#, fuzzy
+msgid "No translation"
+msgstr "- < Geen vertaling >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Invoer / weergave karakterset:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nooit"
 
@@ -1898,17 +1912,6 @@ msgstr "A&utomatisch instellingen opslaan"
 
 msgid "Configure options"
 msgstr "Instellingen"
-
-#, fuzzy
-msgid "No translation"
-msgstr "- < Geen vertaling >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Invoer / weergave karakterset:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Skin:"
@@ -3869,8 +3872,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Pad van thuismap is niet absoluut"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

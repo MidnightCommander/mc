@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -57,6 +57,9 @@ msgstr "No s'ha pogut crear el grup «%s» pels esdeveniments!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "No s'ha pogut crear l'esdeveniment «%s»!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2025 la Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -1625,9 +1628,6 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2025 la Free Software Foundation"
-
 msgid "About"
 msgstr "Quant a"
 
@@ -1862,6 +1862,20 @@ msgstr "S'està executant"
 msgid "Stopped"
 msgstr "Aturat"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Cap traducció >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Pàgina de codis d'entrada / pantalla:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Mai"
 
@@ -1939,17 +1953,6 @@ msgstr "Desa &automàticament la configuració"
 
 msgid "Configure options"
 msgstr "Opcions de configuració"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Cap traducció >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Pàgina de codis d'entrada / pantalla:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -3940,8 +3943,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "El camí del directori d'inici no és absolut"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

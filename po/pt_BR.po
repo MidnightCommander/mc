@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/mc/mc/language/"
@@ -60,6 +60,9 @@ msgstr "Não foi possível criar o grupo '%s' para os eventos!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Não foi possível criar o evento '%s'!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Todos os direitos reservados (C) 1996-2025 a Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -1640,9 +1643,6 @@ msgstr ""
 "Um editor de texto amigável\n"
 "escrito para o Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Todos os direitos reservados (C) 1996-2025 a Free Software Foundation"
-
 msgid "About"
 msgstr "Sobre"
 
@@ -1878,6 +1878,20 @@ msgstr "Em execução"
 msgid "Stopped"
 msgstr "Parado"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Sem tradução >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Inserir / Exibir a página de codificação:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nunca"
 
@@ -1955,17 +1969,6 @@ msgstr "Config&urações de salvamento automático"
 
 msgid "Configure options"
 msgstr "Configurar as opções"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Sem tradução >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Inserir / Exibir a página de codificação:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Visual:"
@@ -3980,8 +3983,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "O caminho do diretório pessoal não é absoluto"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

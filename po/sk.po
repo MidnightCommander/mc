@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -56,6 +56,9 @@ msgstr "Nepodarilo sa vytvoriť skupinu „%s“ pre udalosti!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Nepodarilo sa vytvoriť udalosť „%s“!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1582,9 +1585,6 @@ msgstr ""
 "Používateľsky prívetivý textový editor\n"
 "napísaný pre Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "O aplikácii"
 
@@ -1817,6 +1817,20 @@ msgstr "Beží"
 msgid "Stopped"
 msgstr "Zastavený"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Žiadny preklad >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Vstupná/zobrazovacia znaková sada:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nikdy"
 
@@ -1894,17 +1908,6 @@ msgstr "A&utomaticky ukladať konfiguráciu"
 
 msgid "Configure options"
 msgstr "Konfigurácia"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Žiadny preklad >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Vstupná/zobrazovacia znaková sada:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Téma vzhľadu:"
@@ -3859,7 +3862,7 @@ msgid "Home directory path is not absolute"
 msgstr "Cesta do domovského adresára nie je absolútna"
 
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

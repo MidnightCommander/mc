@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -56,6 +56,9 @@ msgstr "이벤트에 대한 '%s' 그룹을 생성할 수 없습니다!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "'%s' 이벤트를 생성할 수 없습니다!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1586,9 +1589,6 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "소개"
 
@@ -1822,6 +1822,20 @@ msgstr "실행중"
 msgid "Stopped"
 msgstr "중지됨"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "코드페이지 입력/표시:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "안 함(&N)"
 
@@ -1899,17 +1913,6 @@ msgstr "자동 저장 설정(&U)"
 
 msgid "Configure options"
 msgstr "설정 옵션"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < No translation >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "코드페이지 입력/표시:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "스킨:"
@@ -3875,8 +3878,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "홈 디렉터리 경로가 절대적이지 않음"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
