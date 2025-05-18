@@ -149,7 +149,7 @@ edit_about (void)
                              "written for the Midnight Commander."),
                          NULL),
             QUICK_SEPARATOR (FALSE),
-            QUICK_LABEL (N_ ("Copyright (C) 1996-2025 the Free Software Foundation"), NULL),
+            QUICK_LABEL (PACKAGE_COPYRIGHT, NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
             QUICK_END,
