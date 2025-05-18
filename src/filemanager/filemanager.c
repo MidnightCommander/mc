@@ -1029,16 +1029,14 @@ quit_cmd_internal (int quiet)
                               "You have %zu opened screens. Quit anyway?", n),
                     n);
 
-        if (query_dialog (_ ("The Midnight Commander"), msg, D_NORMAL, 2, _ ("&Yes"), _ ("&No"))
-            != 0)
+        if (query_dialog (PACKAGE_NAME, msg, D_NORMAL, 2, _ ("&Yes"), _ ("&No")) != 0)
             return FALSE;
         q = 1;
     }
     else if (quiet || !confirm_exit)
         q = 1;
-    else if (query_dialog (_ ("The Midnight Commander"),
-                           _ ("Do you really want to quit the Midnight Commander?"), D_NORMAL, 2,
-                           _ ("&Yes"), _ ("&No"))
+    else if (query_dialog (PACKAGE_NAME, _ ("Do you really want to quit?"), D_NORMAL, 2, _ ("&Yes"),
+                           _ ("&No"))
              == 0)
         q = 1;
 
@@ -1718,7 +1716,7 @@ load_hint (gboolean force)
     {
         char text[BUF_SMALL];
 
-        g_snprintf (text, sizeof (text), PACKAGE_NAME " %s\n", mc_global.mc_version);
+        g_snprintf (text, sizeof (text), "%s %s\n", PACKAGE_NAME, mc_global.mc_version);
         set_hintbar (text);
     }
 }

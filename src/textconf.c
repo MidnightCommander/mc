@@ -138,7 +138,7 @@ show_version (void)
 {
     size_t i;
 
-    printf (PACKAGE_NAME " %s\n", mc_global.mc_version);
+    printf ("%s %s\n", PACKAGE_NAME, mc_global.mc_version);
 
     printf (_ ("Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"), GLIB_MAJOR_VERSION,
             GLIB_MINOR_VERSION, GLIB_MICRO_VERSION, glib_major_version, glib_minor_version,

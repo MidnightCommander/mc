@@ -1474,7 +1474,7 @@ edit_ok_to_exit (WEdit *edit)
     }
     else
     {
-        msg = g_strdup_printf (_ ("Midnight Commander is being shut down.\nSave modified file %s?"),
+        msg = g_strdup_printf (_ ("%s is being shut down.\nSave modified file %s?"), PACKAGE_NAME,
                                fname);
         act = edit_query_dialog2 (_ ("Quit"), msg, _ ("&Yes"), _ ("&No"));
 

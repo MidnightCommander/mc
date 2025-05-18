@@ -493,7 +493,7 @@ about_box (void)
     char *label_cp_display;
     char *label_cp_source;
 
-    char *version = g_strdup_printf ("Midnight Commander %s", mc_global.mc_version);
+    char *version = g_strdup_printf ("%s %s", PACKAGE_NAME, mc_global.mc_version);
 
     const char *name_cp_display =
         ((codepage_desc *) g_ptr_array_index (codepages, mc_global.display_codepage))->name;
@@ -512,7 +512,7 @@ about_box (void)
         QUICK_SEPARATOR (TRUE),
         QUICK_LABEL (N_ ("Classic terminal file manager inspired by Norton Commander."), NULL),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (N_ ("Copyright (C) 1996-2025 the Free Software Foundation"), NULL),
+        QUICK_LABEL (PACKAGE_COPYRIGHT, NULL),
         QUICK_SEPARATOR (TRUE),
         QUICK_LABEL (label_cp_display, NULL),
         QUICK_LABEL (label_cp_source, NULL),

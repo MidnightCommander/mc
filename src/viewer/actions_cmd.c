@@ -598,9 +598,12 @@ mcview_ok_to_quit (WView *view)
     }
     else
     {
-        r = query_dialog (_ ("Quit"),
-                          _ ("Midnight Commander is being shut down.\nSave modified file?"),
-                          D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+        char *text;
+
+        text = g_strdup_printf (_ ("%s is being shut down.\nSave modified file?"), PACKAGE_NAME);
+        r = query_dialog (_ ("Quit"), text, D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+        g_free (text);
+
         // Esc is No
         if (r == -1)
             r = 1;
