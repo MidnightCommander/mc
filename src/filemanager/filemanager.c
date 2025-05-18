@@ -329,6 +329,8 @@ create_options_menu (void)
 #endif
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Save setup"), CK_SaveSetup));
+    entries = g_list_prepend (entries, menu_separator_new ());
+    entries = g_list_prepend (entries, menu_entry_new (_ ("A&bout..."), CK_About));
 
     return g_list_reverse (entries);
 }
@@ -1107,6 +1109,9 @@ midnight_execute_cmd (Widget *sender, long command)
 
     switch (command)
     {
+    case CK_About:
+        about_box ();
+        break;
     case CK_ChangePanel:
         (void) change_panel ();
         break;
