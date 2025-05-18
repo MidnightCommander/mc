@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://app.transifex.com/mc/mc/language/vi/)\n"
@@ -47,6 +47,9 @@ msgstr ""
 
 #, c-format
 msgid "Unable to create event '%s'!"
+msgstr ""
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -728,7 +731,7 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 
@@ -794,24 +797,22 @@ msgstr "Tìm"
 msgid "Search is disabled"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+msgid "Cannot create temporary diff file"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
 msgid "&Fastest (Assume large files)"
 msgstr ""
@@ -879,16 +880,17 @@ msgstr ""
 msgid "ButtonBar|Quit"
 msgstr "Thoát"
 
-msgid "Quit"
-msgstr "Thoát"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr ""
 
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
+
+msgid "Quit"
+msgstr "Thoát"
 
 msgid "Diff:"
 msgstr ""
@@ -896,15 +898,17 @@ msgstr ""
 msgid "File name is empty!"
 msgstr ""
 
-#, c-format
-msgid "\"%s\" is a directory"
-msgstr ""
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"%s\n"
+"is a directory"
+msgstr "In ra tên thư mục dữ liệu"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot stat\n"
 "%s"
-msgstr ""
+msgstr "Không thể phân tích:"
 
 msgid "Diff viewer: invalid mode"
 msgstr ""
@@ -919,9 +923,13 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#, c-format
-msgid "Cannot open %s for reading"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
 msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
 
 msgid "Load file"
 msgstr ""
@@ -931,11 +939,9 @@ msgid "Error reading %s"
 msgstr ""
 
 #, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr ""
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr ""
 
 #, c-format
@@ -951,9 +957,13 @@ msgstr "Cảnh báo"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr ""
+"Không mở được tập tin %s để ghi nhớ:\n"
+"%s\n"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -965,13 +975,14 @@ msgstr ""
 msgid "Error writing to pipe: %s"
 msgstr ""
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr ""
-
-#, c-format
-msgid "Cannot open file for writing: %s"
-msgstr ""
+"Không mở được tập tin %s để ghi nhớ:\n"
+"%s\n"
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1015,7 +1026,11 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-msgid "Cannot save: destination is not a regular file"
+#, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
 msgstr ""
 
 msgid "A file already exists with this name"
@@ -1075,7 +1090,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 
@@ -1511,12 +1526,10 @@ msgstr ""
 msgid "%ld replacements made"
 msgstr ""
 
+#, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
-msgstr ""
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+"written for the %s."
 msgstr ""
 
 msgid "About"
@@ -1645,13 +1658,15 @@ msgstr "< Tự động >"
 msgid "< Reload Current Syntax >"
 msgstr "< Nạp lại cú pháp hiện thời >"
 
-msgid "Load syntax file"
-msgstr ""
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open file %s\n"
+"Cannot open file\n"
 "%s"
+msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
+
+msgid "Load syntax file"
 msgstr ""
 
 #, c-format
@@ -1677,7 +1692,8 @@ msgid ""
 "the subshell cannot be toggled."
 msgstr ""
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr ""
 
 msgid "Set &all"
@@ -1710,22 +1726,25 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
+"Cannot chmod\n"
+"%sn%s"
 msgstr ""
-
-msgid "&Ignore"
-msgstr ""
-
-msgid "Ignore &all"
-msgstr ""
-
-msgid "&Retry"
-msgstr "&Thử lại"
 
 #, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chmod\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chown\n"
 "%s"
 msgstr ""
 
@@ -1740,6 +1759,20 @@ msgstr ""
 
 msgid "Stopped"
 msgstr "Đã dừng"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Không có dịch >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Bảng mã đầu vào / hiển thị:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "&Không bao giờ"
@@ -1818,17 +1851,6 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Tùy chọn cấu hình"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Không có dịch >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Bảng mã đầu vào / hiển thị:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -2021,12 +2043,11 @@ msgstr "&Diệt"
 msgid "Background jobs"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
-msgstr ""
+msgstr "Không đọc được nội dung thư mục"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2115,17 +2136,25 @@ msgstr "&Xóa đánh dấu"
 msgid "Chattr command"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
-msgstr ""
+"Cannot chattr\n"
+"%sn%s"
+msgstr "Không thể phân tích:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr "Không thể phân tích:"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2227,12 +2256,18 @@ msgstr "Tạo liên kết tới %s:"
 msgid "Link"
 msgstr ""
 
-#, c-format
-msgid "link: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
 #, c-format
-msgid "symlink: %s"
+msgid ""
+"Canot create symbolic link\n"
+"%s"
 msgstr ""
 
 msgid "View file"
@@ -2255,6 +2290,12 @@ msgstr "Tạo thư mục mới"
 
 msgid "Enter directory name:"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Không đọc được nội dung thư mục"
 
 msgid "Extension file edit"
 msgstr "Soạn thảo phần mở rộng tập tin"
@@ -2303,11 +2344,15 @@ msgid "Edit symlink"
 msgstr ""
 
 #, c-format
-msgid "edit symlink, unable to remove %s: %s"
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr ""
 
 #, c-format
-msgid "edit symlink: %s"
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr ""
 
 msgid "FTP to machine"
@@ -2347,11 +2392,9 @@ msgstr ""
 msgid "Parameter"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
-msgstr ""
+#, fuzzy
+msgid "Cannot create temporary command file"
+msgstr "Không đọc được nội dung thư mục"
 
 msgid "Pipe failed"
 msgstr ""
@@ -2359,7 +2402,7 @@ msgstr ""
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2369,7 +2412,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2424,27 +2467,27 @@ msgstr "tập tin/thư mục"
 msgid " with source mask:"
 msgstr " với nhãn ban đầu:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
 msgstr ""
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot read source link \"%s\"\n"
+"Không mở được tập tin nén tar\n"
 "%s"
-msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot read source link\n"
+"%s"
+msgstr "Không đọc được nội dung thư mục"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2452,11 +2495,13 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
@@ -2474,160 +2519,208 @@ msgid ""
 "are the same file"
 msgstr ""
 
+msgid "&Ignore"
+msgstr ""
+
 msgid "Ignore a&ll"
 msgstr ""
 
+msgid "&Retry"
+msgstr "&Thử lại"
+
 #, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 
 #, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 
 msgid "Non&e"
 msgstr "&Không"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
-msgstr ""
+msgstr "Không đọc được nội dung thư mục"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
-msgstr ""
+msgstr "Không đọc được nội dung thư mục"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
+msgstr "Không đọc được nội dung thư mục"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
-msgstr ""
+msgstr "Không đọc được nội dung thư mục"
 
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
+"Không mở được tập tin nén cpio\n"
+"%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
 
 msgid "(stalled)"
 msgstr "(bị nhốt)"
@@ -2641,33 +2734,39 @@ msgstr "&Giữ"
 msgid "&Continue copy"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
+"Không mở được tập tin nén cpio\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot close target file\n"
+"%s"
+msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set ext2 attributes for target file\n"
+"%s"
+msgstr ""
+"Không ghi nhớ được vào tập tin %s:\n"
+"%s\n"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot stat source directory\n"
+"%s"
+msgstr "Không đọc được nội dung thư mục"
 
 #, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot stat source directory \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
 
@@ -2685,21 +2784,25 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
-msgstr ""
+msgstr "Không đọc được nội dung thư mục"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -3021,10 +3124,7 @@ msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] ""
 
-msgid "The Midnight Commander"
-msgstr ""
-
-msgid "Do you really want to quit the Midnight Commander?"
+msgid "Do you really want to quit?"
 msgstr ""
 
 msgid "&Above"
@@ -3516,11 +3616,9 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -3558,6 +3656,13 @@ msgstr " Di chuyển thư mục \"%s\" vào:"
 msgid ""
 "Cannot stat the destination\n"
 "%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
 msgstr ""
 
 #, c-format
@@ -3674,8 +3779,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4345,8 +4451,9 @@ msgstr ""
 msgid "&Cancel quit"
 msgstr "&Dừng thoát"
 
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 
@@ -4395,10 +4502,7 @@ msgstr "Bỏ định dạng"
 msgid "ButtonBar|Format"
 msgstr "Định dạng"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+msgid "Failed to read data from child stdout"
 msgstr ""
 
 #, c-format
@@ -4419,18 +4523,20 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr ""
 
-msgid "Cannot view: not a regular file"
-msgstr ""
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
+"Không mở được tập tin nén tar\n"
+"%s"
 
 msgid "Search done"
 msgstr ""

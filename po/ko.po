@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -56,6 +56,9 @@ msgstr "이벤트에 대한 '%s' 그룹을 생성할 수 없습니다!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "'%s' 이벤트를 생성할 수 없습니다!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -768,10 +771,10 @@ msgstr "파일1 파일2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[이_디렉터리] [다른_패널_디렉터리]"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
@@ -842,28 +845,23 @@ msgstr "검색"
 msgid "Search is disabled"
 msgstr "검색이 비활성화되었습니다"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary diff file"
 msgstr ""
 "%s\n"
 "임시 Diff 파일을 생성할 수 없음"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 "%s%s\n"
 "%s\n"
 " 백업 파일을 생성할 수 없음"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
 "%s\n"
 "임시 병합 파일을 생성할 수 없음"
@@ -934,18 +932,19 @@ msgstr "옵션"
 msgid "ButtonBar|Quit"
 msgstr "종료"
 
-msgid "Quit"
-msgstr "종료"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "파일을 수정했습니다. 저장 후 나가시겠습니까?"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 "미드나잇 커맨더를 끝냅니다.\n"
 "수정한 파일을 저장하시겠습니까?"
+
+msgid "Quit"
+msgstr "종료"
 
 msgid "Diff:"
 msgstr "비교:"
@@ -953,13 +952,15 @@ msgstr "비교:"
 msgid "File name is empty!"
 msgstr ""
 
-#, c-format
-msgid "\"%s\" is a directory"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is a directory"
 msgstr "\"%s\"은(는) 디렉터리임"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
 "\"%s\"에 대한 상태\n"
@@ -978,9 +979,13 @@ msgstr "불러오는 중: %3d%%"
 msgid "Loading..."
 msgstr "불러오는 중..."
 
-#, c-format
-msgid "Cannot open %s for reading"
-msgstr "%s을(를) 열 수 없음"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
+"\"%s\"을(를) 열 수 없음\n"
+"%s"
 
 msgid "Load file"
 msgstr "파일 불러오기"
@@ -989,12 +994,10 @@ msgstr "파일 불러오기"
 msgid "Error reading %s"
 msgstr "%s을(를) 읽는 중 오류 발생"
 
-#, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "%s에 대한 크기/사용 권한을 가져올 수 없음"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr "\"%s\"가 일반 파일이 아님"
 
 #, c-format
@@ -1012,8 +1015,10 @@ msgstr "경고"
 msgid "Error reading from pipe: %s"
 msgstr "파이프에서 읽는 중 오류 발생: %s"
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr "읽을 파이프를 열 수 없음: %s"
 
 msgid "File has hard-links. Detach before saving?"
@@ -1026,12 +1031,11 @@ msgstr "파일이 동시에 수정되었습니다. 그래도 저장하겠습니�
 msgid "Error writing to pipe: %s"
 msgstr "파이프에 쓰는 중 오류 발생: %s"
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "쓰기 위해 파이프를 열 수 없음: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr "쓰기 위해 파일을 열 수 없음: %s"
 
 msgid "The file you are saving does not end with a newline."
@@ -1076,8 +1080,12 @@ msgstr "POSIX 새 행 확인(&P)"
 msgid "Edit Save Mode"
 msgstr "저장 모드 편집"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "저장할 수 없음: 대상이 일반 파일이 아님"
+#, fuzzy, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr "볼 수 없음: 일반 파일이 아님"
 
 msgid "A file already exists with this name"
 msgstr "이 이름의 파일이 이미 있음"
@@ -1136,9 +1144,9 @@ msgstr ""
 msgid "Close file"
 msgstr "파일 닫기"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 "미드나잇 커맨더가 종료 중입니다.\n"
@@ -1579,15 +1587,13 @@ msgstr "바꾸기 확인"
 msgid "%ld replacements made"
 msgstr "%ld 교체"
 
+#, fuzzy, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
 
 msgid "About"
 msgstr "소개"
@@ -1715,16 +1721,14 @@ msgstr "< 자동 >"
 msgid "< Reload Current Syntax >"
 msgstr "<현재 구문 새로 고침>"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s"
+msgstr "%s 파일을 열 수 없음"
+
 msgid "Load syntax file"
 msgstr "구문 파일 불러오기"
-
-#, c-format
-msgid ""
-"Cannot open file %s\n"
-"%s"
-msgstr ""
-"%s 파일을 열 수 없음\n"
-"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1754,7 +1758,8 @@ msgstr ""
 "xterm 또는 Linux 콘솔이 아닙니다.\n"
 "서브쉘은 토글할 수 없습니다."
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr "미드나잇 커맨더로 돌아가려면 'exit'를 입력하십시오."
 
 msgid "Set &all"
@@ -1785,26 +1790,33 @@ msgstr "사용권한 (octal): %o"
 msgid "Chown advanced command"
 msgstr "chown 고급 명령어"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
+"Cannot chmod\n"
+"%sn%s"
+msgstr ""
+"\"%s\"을(를) chmod할 수 없음\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"\"%s\"을(를) 선택할 수 없음\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
 "\"%s\"을(를) chmod할 수 없음\n"
 "%s"
 
-msgid "&Ignore"
-msgstr "무시(&I)"
-
-msgid "Ignore &all"
-msgstr "모두 무시(&A)"
-
-msgid "&Retry"
-msgstr "재시도(&R)"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
 "%s"
 msgstr ""
 "\"%s\"을(를) 선택할 수 없음\n"
@@ -1821,6 +1833,20 @@ msgstr "실행중"
 
 msgid "Stopped"
 msgstr "중지됨"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "코드페이지 입력/표시:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "안 함(&N)"
@@ -1899,17 +1925,6 @@ msgstr "자동 저장 설정(&U)"
 
 msgid "Configure options"
 msgstr "설정 옵션"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < No translation >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "코드페이지 입력/표시:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "스킨:"
@@ -2106,10 +2121,9 @@ msgstr "강제종료(&K)"
 msgid "Background jobs"
 msgstr "백그라운드 작업"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
 "디렉터리를 다음으로 변경할 수 없음\n"
@@ -2203,19 +2217,29 @@ msgstr "표시됨 지우기(&L)"
 msgid "Chattr command"
 msgstr "Chattr 명령"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
 "\"%s\" 속성 변경을 할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
+"tar 압축 파일을 열 수 없음\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr ""
+"\"%s\" 속성 변경을 할 수 없음\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "실행 시 사용자 ID 설정(&U)"
@@ -2317,13 +2341,21 @@ msgstr "%s 링크 대상:"
 msgid "Link"
 msgstr "링크"
 
-#, c-format
-msgid "link: %s"
-msgstr "링크: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
+"\"%s\" 대상 심볼릭링크를 만들 수 없음\n"
+"%s"
 
-#, c-format
-msgid "symlink: %s"
-msgstr "심볼릭링크: %s"
+#, fuzzy, c-format
+msgid ""
+"Canot create symbolic link\n"
+"%s"
+msgstr ""
+"순환 심볼릭 링크를 복사할 수 없음\n"
+"\"%s\""
 
 msgid "View file"
 msgstr "파일 보기"
@@ -2345,6 +2377,12 @@ msgstr "새 디렉터리 만들기"
 
 msgid "Enter directory name:"
 msgstr "디렉터리 이름 입력:"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "%s 디렉터리를 만들 수 없음"
 
 msgid "Extension file edit"
 msgstr "파일 확장 편집"
@@ -2394,12 +2432,16 @@ msgstr "'%s' 심볼릭링크가 가리키는 위치:"
 msgid "Edit symlink"
 msgstr "심볼릭링크 편집"
 
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
+#, fuzzy, c-format
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr "심볼릭링크 편집, %s을(를) 제거할 수 없음: %s"
 
-#, c-format
-msgid "edit symlink: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr "심볼릭링크 편집: %s"
 
 msgid "FTP to machine"
@@ -2441,10 +2483,8 @@ msgstr "로컬이 아닌 파일 시스템에서 명령을 실행할 수 없음"
 msgid "Parameter"
 msgstr "매개변수"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary command file"
 msgstr ""
 "임시 명령 파일을 생성할 수 없음\n"
 "%s"
@@ -2452,23 +2492,23 @@ msgstr ""
 msgid "Pipe failed"
 msgstr "파이프 실패"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 "오래된 %s 파일이 있습니다.\n"
 "Midnight Commander는 이제 %s 파일을 사용합니다.\n"
 "이전 파일의 수정 사항을 새 파일에 복사합니다."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 "%s%s\n"
 "파일의 형식이 버전 4.0에서 변경되었습니다.\n"
@@ -2532,29 +2572,23 @@ msgstr "파일들/디렉터리들"
 msgid " with source mask:"
 msgstr " 소스 마스크 사용:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
 "\"%s\" 하드링크 소스 파일을 통계할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
-msgstr ""
-"\"%s\" 대상 하드링크를 만들 수 없음\n"
-"%s"
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
 msgstr "\"%s\" 대상 하드링크를 만들 수 없음"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 "\"%s\" 소스 링크를 읽을 수 없음\n"
@@ -2569,9 +2603,9 @@ msgstr ""
 "\n"
 "옵션 안정 심볼릭링크가 비활성화 됩니다"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 심볼릭링크를 만들 수 없음\n"
@@ -2601,21 +2635,31 @@ msgstr ""
 "\"%s\"\n"
 "는 같은 파일임"
 
+msgid "&Ignore"
+msgstr "무시(&I)"
+
 msgid "Ignore a&ll"
 msgstr ""
 
-#, c-format
+msgid "&Retry"
+msgstr "재시도(&R)"
+
+#, fuzzy, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "\"%s\" 디렉터리가 비어 있지 않음.\n"
 "다시 삭제하시겠습니까?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "배경 프로세스:\n"
@@ -2625,17 +2669,17 @@ msgstr ""
 msgid "Non&e"
 msgstr "없음(&E)"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 "%s 파일을 제거할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
 "%s 파일을 stat할 수 없음\n"
@@ -2645,103 +2689,108 @@ msgstr ""
 msgid "Cannot overwrite directory \"%s\""
 msgstr "%s 디렉터리를 덮어쓸 수 없음"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"%s 파일을 \"%s\"로 이동할 수 없음\n"
-"\n"
+"%s 파일을 제거할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 "%s 디렉터리를 제거할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
-msgstr ""
+msgstr "%s 디렉터리를 덮어쓸 수 없음"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
-"%s 디렉터리를 덮어쓸 수 없음\n"
-"%s"
+msgstr "%s 디렉터리를 덮어쓸 수 없음"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 "%s 파일을 덮어쓸 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"\"%s\" 디렉터리를 \"%s\"로 이동할 수 없음\n"
+"%s 디렉터리를 제거할 수 없음\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "\"..\"에서 작동할 수 없습니다!"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 "\"%s\" 원본 파일을 통계할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
+"\"%s\" 하드링크 소스 파일을 통계할 수 없음\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
+"\"%s\" 대상 파일을 fstat할 수 없음\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
 "\"%s\" 특수 파일을 만들 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 파일을 chown 할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 파일을 chmod할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
 "\"%s\" 원본 파일을 열 수 없음\n"
@@ -2750,49 +2799,49 @@ msgstr ""
 msgid "Reget failed, about to overwrite file"
 msgstr "다시 받기 실패, 파일을 덮어쓰려고 합니다."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
 "\"%s\" 소스 파일을 fstat할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 파일을 생성할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 파일을 fstat할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 파일에 대한 공간을 사전 할당할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
 "\"%s\" 소스 파일를 읽을 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 파일을 쓸 수 없음\n"
@@ -2810,41 +2859,45 @@ msgstr "보존(&K)"
 msgid "&Continue copy"
 msgstr "복사 계속하기(&C)"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 "\"%s\" 원본 파일을 닫을 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 파일을 닫을 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
+"\"%s\" 대상 파일에 대한 공간을 사전 할당할 수 없음\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
 "\"%s\" 소스 디렉터리를 stat할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
+"\"%s\" 소스 디렉터리를 stat할 수 없음\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2862,25 +2915,27 @@ msgstr ""
 "순환 심볼릭 링크를 복사할 수 없음\n"
 "\"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 "\"%s\" 대상은 디렉터리여야 함\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 디렉터리를 생성할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
 "\"%s\" 대상 디렉터리를 선택할 수 없음\n"
@@ -3207,11 +3262,9 @@ msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "%zu 화면이 열려 있습니다. 그래도 끝낼까요?"
 
-msgid "The Midnight Commander"
-msgstr "미드나잇 커맨더"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "미드나잇 커맨더를 절말로 끝내시겠습니까?"
+#, fuzzy
+msgid "Do you really want to quit?"
+msgstr "정말로 실행하시겠습니까?"
 
 msgid "&Above"
 msgstr "이상(&A)"
@@ -3707,11 +3760,10 @@ msgstr ""
 "확장 패널크기:\n"
 "%s"
 
-#, c-format
+#, fuzzy
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
 "확장 패널크기:\n"
 "하위 프로세스의 stdout에서 ​​데이터를 읽을 수 없음:\n"
@@ -3754,6 +3806,15 @@ msgid ""
 "%s"
 msgstr ""
 "대상 정보를 볼 수 없음\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"\"%s\" 대상은 디렉터리여야 함\n"
 "%s"
 
 #, c-format
@@ -3875,8 +3936,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "홈 디렉터리 경로가 절대적이지 않음"
 
+#, fuzzy, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4589,8 +4651,9 @@ msgstr "파일이 수정되었습니다. 저장 후 나가시겠습니까?"
 msgid "&Cancel quit"
 msgstr "끝내기 취소(&C)"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 "미드나잇 커맨더가 종료됩니다.\n"
@@ -4641,10 +4704,8 @@ msgstr " 형식화되지 않음"
 msgid "ButtonBar|Format"
 msgstr " 형식"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Failed to read data from child stdout"
 msgstr ""
 "하위 프로세스의 stdout에서 ​​데이터를 읽을 수 없음:\n"
 "%s"
@@ -4670,20 +4731,18 @@ msgstr ""
 msgid "View: "
 msgstr "보기: "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\"을(를) 열 수 없음\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr "볼 수 없음: 일반 파일이 아님"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 "\"%s\"을(를) 분석 모드에서 열 수 없음\n"
@@ -4697,6 +4756,79 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "The Midnight Commander"
+#~ msgstr "미드나잇 커맨더"
+
+#~ msgid "Do you really want to quit the Midnight Commander?"
+#~ msgstr "미드나잇 커맨더를 절말로 끝내시겠습니까?"
+
+#, c-format
+#~ msgid "Cannot open %s for reading"
+#~ msgstr "%s을(를) 열 수 없음"
+
+#, c-format
+#~ msgid "Cannot get size/permissions for %s"
+#~ msgstr "%s에 대한 크기/사용 권한을 가져올 수 없음"
+
+#, c-format
+#~ msgid "Cannot open pipe for writing: %s"
+#~ msgstr "쓰기 위해 파이프를 열 수 없음: %s"
+
+#~ msgid "Cannot save: destination is not a regular file"
+#~ msgstr "저장할 수 없음: 대상이 일반 파일이 아님"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot open file %s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s 파일을 열 수 없음\n"
+#~ "%s"
+
+#~ msgid "Ignore &all"
+#~ msgstr "모두 무시(&A)"
+
+#, c-format
+#~ msgid "link: %s"
+#~ msgstr "링크: %s"
+
+#, c-format
+#~ msgid "symlink: %s"
+#~ msgstr "심볼릭링크: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot create target hardlink \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "\"%s\" 대상 하드링크를 만들 수 없음\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move file \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s 파일을 \"%s\"로 이동할 수 없음\n"
+#~ "\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot overwrite directory \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s 디렉터리를 덮어쓸 수 없음\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move directory \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "\"%s\" 디렉터리를 \"%s\"로 이동할 수 없음\n"
+#~ "%s"
 
 #~ msgid "Other 8 bit"
 #~ msgstr "다른 8비트"
