@@ -59,7 +59,7 @@
 #include "src/history.h"
 #include "src/file_history.h"  // show_file_history()
 #include "src/selcodepage.h"
-#include "src/util.h"  // check_for_default()
+#include "src/util.h"  // check_for_default(), file_error_message()
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -266,7 +266,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open pipe for writing: %s"), p);
+            file_error_message (_ ("Cannot open pipe for reading\n%s"), p);
             g_free (p);
             goto error_save;
         }
@@ -305,7 +305,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open file for writing: %s"), savename);
+            file_error_message (_ ("Cannot open file\n%s\nfor writing"), savename);
             goto error_save;
         }
     }
@@ -927,8 +927,8 @@ edit_save_as_cmd (WEdit *edit)
 
             if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
             {
-                message (D_ERROR, MSG_ERROR, "%s",
-                         _ ("Cannot save: destination is not a regular file"));
+                file_error_message (_ ("Cannot save\n%s:\nnot a regular file"),
+                                    vfs_path_as_str (exp_vpath));
                 goto ret;
             }
 

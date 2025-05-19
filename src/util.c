@@ -26,8 +26,11 @@
 
 #include <config.h>
 
+#include <errno.h>
+
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/widget.h"
 
 #include "src/filemanager/file.h"
 #include "src/filemanager/filegui.h"
@@ -42,6 +45,7 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -66,6 +70,33 @@ check_for_default (const vfs_path_t *default_file_vpath, const vfs_path_t *file_
     }
 
     return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Report error with one file using errno. Unlike file_error(), this function contains only one
+ * button "OK" and returns nothing.
+ *
+ * @param format printf()-like format for message
+ * @param file file name. Can be NULL.
+ */
+
+void
+file_error_message (const char *format, const char *filename)
+{
+    const char *error_string = unix_error_string (errno);
+
+    if (filename == NULL || *filename == '\0')
+        message (D_ERROR, MSG_ERROR, "%s\n%s", format, error_string);
+    else
+    {
+        char *full_format;
+
+        full_format = g_strconcat (format, "\n", error_string, (char *) NULL);
+        // delete password and try to show a full path
+        message (D_ERROR, MSG_ERROR, full_format, path_trunc (filename, -1));
+        g_free (full_format);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

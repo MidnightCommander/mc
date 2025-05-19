@@ -40,6 +40,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/util.h"  // file_error_message()
+
 #include "cmd.h"  // chmod_cmd()
 
 /*** global variables ****************************************************************************/
@@ -417,32 +419,28 @@ try_chmod (const vfs_path_t *p, mode_t m)
     while (mc_chmod (p, m) == -1 && !ignore_all)
     {
         int my_errno = errno;
-        int result;
-        char *msg;
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_ ("Cannot chmod \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
-                               _ ("&Retry"), _ ("&Cancel"));
-        g_free (msg);
 
-        switch (result)
+        errno = my_errno;  // restore errno for file_error(
+
+        switch (file_error (NULL, TRUE, _ ("Cannot chmod\n%sn%s"), fname))
         {
-        case 0:
+        case FILE_IGNORE:
             // try next file
             return TRUE;
 
-        case 1:
+        case FILE_IGNORE_ALL:
             ignore_all = TRUE;
             // try next file
             return TRUE;
 
-        case 2:
+        case FILE_RETRY:
             // retry this file
             break;
 
-        case 3:
+        case FILE_ABORT:
         default:
             // stop remain files processing
             return FALSE;
@@ -566,8 +564,7 @@ chmod_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_chmod (vpath, ch_mode) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chmod \"%s\"\n%s"), fname->str,
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot chmod\n%s"), fname->str);
                     end_chmod = TRUE;
                 }
                 else if (!try_chmod (vpath, ch_mode))

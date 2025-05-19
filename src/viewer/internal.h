@@ -290,7 +290,7 @@ void mcview_init (WView *view);
 void mcview_done (WView *view);
 void mcview_select_encoding (WView *view);
 void mcview_set_codeset (WView *view);
-void mcview_show_error (WView *view, const char *error);
+void mcview_show_error (WView *view, const char *format, const char *filename);
 off_t mcview_bol (WView *view, off_t current, off_t limit);
 off_t mcview_eol (WView *view, off_t current);
 char *mcview_get_title (const WDialog *h, ssize_t width);

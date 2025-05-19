@@ -31,6 +31,8 @@
 
 #include <config.h>
 
+#include <errno.h>
+
 #include "lib/global.h"
 
 #include "lib/skin.h"
@@ -42,6 +44,7 @@
 #include "lib/util.h"  // mc_pipe_t
 
 #include "src/history.h"
+#include "src/util.h"  // file_error_message()
 
 #include "filemanager.h"  // current_panel
 #include "layout.h"       // rotate_dash()
@@ -346,9 +349,9 @@ do_external_panelize (const char *command)
 
         if (external->out.len == MC_PIPE_ERROR_READ)
         {
-            message (D_ERROR, MSG_ERROR,
-                     _ ("External panelize:\nfailed to read data from child stdout:\n%s"),
-                     unix_error_string (external->out.error));
+            errno = external->out.error;
+            file_error_message (_ ("External panelize:\nfailed to read data from child stdout:"),
+                                NULL);
             break;
         }
 

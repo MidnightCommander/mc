@@ -45,6 +45,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/util.h"  // file_error_message()
+
 #include "cmd.h"  // advanced_chown_cmd()
 
 /*** global variables ****************************************************************************/
@@ -830,32 +832,28 @@ try_advanced_chown (const vfs_path_t *p, mode_t m, uid_t u, gid_t g)
     while ((chmod_result = mc_chmod (p, m)) == -1 && !ignore_all)
     {
         int my_errno = errno;
-        int result;
-        char *msg;
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_ ("Cannot chmod \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
-                               _ ("&Retry"), _ ("&Cancel"));
-        g_free (msg);
 
-        switch (result)
+        errno = my_errno;  // restore errno for file_error(
+
+        switch (file_error (NULL, TRUE, _ ("Cannot chmod\n%sn%s"), fname))
         {
-        case 0:
+        case FILE_IGNORE:
             // call mc_chown() only, if mc_chmod() didn't fail
             return TRUE;
 
-        case 1:
+        case FILE_IGNORE_ALL:
             ignore_all = TRUE;
             // call mc_chown() only, if mc_chmod() didn't fail
             return TRUE;
 
-        case 2:
+        case FILE_RETRY:
             // retry chmod of this file
             break;
 
-        case 3:
+        case FILE_ABORT:
         default:
             // stop remain files processing
             return FALSE;
@@ -866,32 +864,28 @@ try_advanced_chown (const vfs_path_t *p, mode_t m, uid_t u, gid_t g)
     while (chmod_result != -1 && mc_chown (p, u, g) == -1 && !ignore_all)
     {
         int my_errno = errno;
-        int result;
-        char *msg;
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_ ("Cannot chown \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
-                               _ ("&Retry"), _ ("&Cancel"));
-        g_free (msg);
 
-        switch (result)
+        errno = my_errno;  // restore errno for file_error(
+
+        switch (file_error (NULL, TRUE, _ ("Cannot chown\n%sn%s"), fname))
         {
-        case 0:
+        case FILE_IGNORE:
             // try next file
             return TRUE;
 
-        case 1:
+        case FILE_IGNORE_ALL:
             ignore_all = TRUE;
             // try next file
             return TRUE;
 
-        case 2:
+        case FILE_RETRY:
             // retry chown of this file
             break;
 
-        case 3:
+        case FILE_ABORT:
         default:
             // stop remain files processing
             return FALSE;
@@ -1031,12 +1025,10 @@ advanced_chown_cmd (WPanel *panel)
             {
                 // single or last file
                 if (mc_chmod (vpath, get_mode ()) == -1)
-                    message (D_ERROR, MSG_ERROR, _ ("Cannot chmod \"%s\"\n%s"), fname->str,
-                             unix_error_string (errno));
+                    file_error_message (_ ("Cannot chmod\n%s"), fname->str);
                 // call mc_chown only, if mc_chmod didn't fail
                 else if (mc_chown (vpath, uid, gid) == -1)
-                    message (D_ERROR, MSG_ERROR, _ ("Cannot chown \"%s\"\n%s"), fname->str,
-                             unix_error_string (errno));
+                    file_error_message (_ ("Cannot chown\n%s"), fname->str);
 
                 end_chown = TRUE;
             }

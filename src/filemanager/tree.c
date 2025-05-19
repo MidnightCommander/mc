@@ -58,6 +58,7 @@
 #include "src/setup.h"  // confirm_delete, panels_options
 #include "src/keymap.h"
 #include "src/history.h"
+#include "src/util.h"  // file_error_message()
 
 #include "dir.h"
 #include "filemanager.h"  // the_menubar
@@ -758,10 +759,12 @@ tree_move (WTree *tree, const char *default_dest)
         dest_vpath = vfs_path_from_str (dest);
 
         if (mc_stat (dest_vpath, &buf) != 0)
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat the destination\n%s"),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat the destination\n%s"), dest);
         else if (!S_ISDIR (buf.st_mode))
-            file_error (NULL, TRUE, _ ("Destination \"%s\" must be a directory\n%s"), dest);
+        {
+            errno = ENOTDIR;
+            file_error_message (_ ("Destination\n%s\nmust be a directory"), dest);
+        }
         else
         {
             file_op_context_t *ctx;

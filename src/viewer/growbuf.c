@@ -167,7 +167,7 @@ mcview_growbuf_read_until (WView *view, off_t ofs)
 
             if (error != NULL)
             {
-                mcview_show_error (view, error->message);
+                mcview_show_error (view, NULL, error->message);
                 g_error_free (error);
                 mcview_growbuf_done (view);
                 return;
@@ -182,7 +182,7 @@ mcview_growbuf_read_until (WView *view, off_t ofs)
                  */
                 view->pipe_first_err_msg = FALSE;
 
-                mcview_show_error (view, sp->err.buf);
+                mcview_show_error (view, NULL, sp->err.buf);
 
                 /* when switch from parse to raw mode and back,
                  * do not close the already closed pipe (see call to mcview_growbuf_done below).
@@ -204,12 +204,8 @@ mcview_growbuf_read_until (WView *view, off_t ofs)
             {
                 if (sp->out.len == MC_PIPE_ERROR_READ)
                 {
-                    char *err_msg;
-
-                    err_msg = g_strdup_printf (_ ("Failed to read data from child stdout:\n%s"),
-                                               unix_error_string (sp->out.error));
-                    mcview_show_error (view, err_msg);
-                    g_free (err_msg);
+                    errno = sp->out.error;
+                    mcview_show_error (view, _ ("Failed to read data from child stdout"), "");
                 }
 
                 /* when switch from parse to raw mode and back,

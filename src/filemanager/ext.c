@@ -32,7 +32,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -58,6 +57,7 @@
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"
 #include "src/selcodepage.h"  // do_set_codepage
+#include "src/util.h"         // file_error_message()
 
 #include "filemanager.h"  // current_panel
 #include "panel.h"        // panel_cd
@@ -457,8 +457,7 @@ exec_extension (WPanel *panel, void *target, const vfs_path_t *filename_vpath, c
 
     if (cmd_file_fd == -1)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary command file\n%s"),
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot create temporary command file"), NULL);
         g_string_free (shell_string, TRUE);
         goto ret;
     }
