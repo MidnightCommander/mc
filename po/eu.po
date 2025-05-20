@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
@@ -50,6 +50,9 @@ msgstr "Ezin '%s' taldea gertaeratarako sortu!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Ezin '%s' gertaera sortu!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1577,9 +1580,6 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "Honi buruz"
 
@@ -1812,6 +1812,20 @@ msgstr "Martxan"
 msgid "Stopped"
 msgstr "Geldituta"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ez dago itzulpenik >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Sartu / bistaratu kode-orrialdea:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Inoiz ere ez"
 
@@ -1889,17 +1903,6 @@ msgstr "A&uto gorde ezarpena"
 
 msgid "Configure options"
 msgstr "Konfiguratu aukerak"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Ez dago itzulpenik >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Sartu / bistaratu kode-orrialdea:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Azala:"
@@ -3852,7 +3855,7 @@ msgid "Home directory path is not absolute"
 msgstr "Etxeko direktorioaren bide-izena ez da absolutua"
 
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

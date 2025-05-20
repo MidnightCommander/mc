@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/mc/mc/language/hu/)\n"
@@ -53,6 +53,9 @@ msgstr "Nem hozható létre a(z) '%s' csoport az eseményekhez"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "%s esemény nem hozható létre"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1570,9 +1573,6 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "Névjegy"
 
@@ -1805,6 +1805,20 @@ msgstr "Futtatás:"
 msgid "Stopped"
 msgstr "Megállítva"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Nincs konverzió >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Beviteli/kijelzési kódlap:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "So&ha"
 
@@ -1882,17 +1896,6 @@ msgstr "Auto &Beállításmentés"
 
 msgid "Configure options"
 msgstr "Alapbeállítások"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Nincs konverzió >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Beviteli/kijelzési kódlap:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -3837,7 +3840,7 @@ msgid "Home directory path is not absolute"
 msgstr "A Home könyvtár elérési útja nem abszolút"
 
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

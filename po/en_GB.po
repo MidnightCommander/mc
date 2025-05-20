@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -50,6 +50,9 @@ msgstr "Unable to create group '%s' for events!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Unable to create event '%s'!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -1603,9 +1606,6 @@ msgstr ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
-
 msgid "About"
 msgstr "About"
 
@@ -1840,6 +1840,20 @@ msgstr "Running"
 msgid "Stopped"
 msgstr "Stopped"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Input / display codepage:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Never"
 
@@ -1917,17 +1931,6 @@ msgstr "A&uto save setup"
 
 msgid "Configure options"
 msgstr "Configure options"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < No translation >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Input / display codepage:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Skin:"
@@ -3912,8 +3915,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Home directory path is not absolute"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

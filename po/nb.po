@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -54,6 +54,9 @@ msgstr "Klarte ikke lage hendelsesgruppa «%s»."
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Klarte ikke lage hendelse «%s»."
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Opphavsrett (C) 1996-2025 Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -1615,9 +1618,6 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Opphavsrett (C) 1996-2025 Free Software Foundation"
-
 msgid "About"
 msgstr "Om"
 
@@ -1852,6 +1852,20 @@ msgstr "Kjører"
 msgid "Stopped"
 msgstr "Pause"
 
+#, fuzzy
+msgid "No translation"
+msgstr "- < Ingen oversettelse >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Tegnkoding for inndata/visning:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "Aldr&i"
 
@@ -1929,17 +1943,6 @@ msgstr "Autolagre o&ppsettet"
 
 msgid "Configure options"
 msgstr "Sett opp innstillinger"
-
-#, fuzzy
-msgid "No translation"
-msgstr "- < Ingen oversettelse >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Tegnkoding for inndata/visning:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Drakt:"
@@ -3923,8 +3926,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Stien til hjemmemappa er ikke absolutt"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

@@ -114,6 +114,8 @@ mc_global_t mc_global =
 
 };
 
+const char PACKAGE_COPYRIGHT[] = N_ ("Copyright (C) 1996-2025 the Free Software Foundation");
+
 #undef SUBSHELL_USE
 
 /*** file scope macro definitions ****************************************************************/

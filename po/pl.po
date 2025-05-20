@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -53,6 +53,9 @@ msgstr "Nie można utworzyć grupy „%s” dla zdarzeń."
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Nie można utworzyć zdarzenia „%s”."
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Copyright © 1996-2025 Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -1616,9 +1619,6 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright © 1996-2025 Free Software Foundation"
-
 msgid "About"
 msgstr "O programie"
 
@@ -1852,6 +1852,20 @@ msgstr "Wykonywanie"
 msgid "Stopped"
 msgstr "Zatrzymano"
 
+#, fuzzy
+msgid "No translation"
+msgstr "—  < Bez tłumaczenia >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Strona kodowa wejściowa/wyjściowa:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nigdy"
 
@@ -1929,17 +1943,6 @@ msgstr "Auto&m. zapis ustawień"
 
 msgid "Configure options"
 msgstr "Konfiguracja"
-
-#, fuzzy
-msgid "No translation"
-msgstr "—  < Bez tłumaczenia >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Strona kodowa wejściowa/wyjściowa:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Skórka:"
@@ -3935,8 +3938,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Ścieżka do katalogu domowego nie jest bezwzględna"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

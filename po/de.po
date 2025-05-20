@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
@@ -63,6 +63,9 @@ msgstr "Kann die Ereignisgruppe '%s' nicht erstellen!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Kann das Ereignis '%s' nicht erstellen!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1628,9 +1631,6 @@ msgstr ""
 "Ein benutzerfreundlicher Texteditor,\n"
 "geschrieben für Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "Über"
 
@@ -1865,6 +1865,20 @@ msgstr "Läuft"
 msgid "Stopped"
 msgstr "Angehalten"
 
+#, fuzzy
+msgid "No translation"
+msgstr "- < Keine Übersetzung >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Codepage eingeben/anzeigen:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nie"
 
@@ -1942,17 +1956,6 @@ msgstr "Einstellungen auto&m. speichern"
 
 msgid "Configure options"
 msgstr "Einstellungen"
-
-#, fuzzy
-msgid "No translation"
-msgstr "- < Keine Übersetzung >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Codepage eingeben/anzeigen:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Skin:"
@@ -3923,8 +3926,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Benutzerverzeichnis-Pfad ist nicht absolut"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

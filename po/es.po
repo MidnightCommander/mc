@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
@@ -55,6 +55,9 @@ msgstr "¡Imposible crear el grupo de eventos «%s»!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "¡Imposible crear el evento «%s»!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -1614,9 +1617,6 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
-
 msgid "About"
 msgstr "Acerca de..."
 
@@ -1851,6 +1851,20 @@ msgstr "Corriendo"
 msgid "Stopped"
 msgstr "Detenido"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Sin traducción >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Juego de caracteres entrada/pantalla:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nunca"
 
@@ -1928,17 +1942,6 @@ msgstr "auto-guarda con&Figuración"
 
 msgid "Configure options"
 msgstr "Configuración"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Sin traducción >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Juego de caracteres entrada/pantalla:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Skin:"
@@ -3927,8 +3930,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "La ruta del directorio de inicio no es ruta absoluta"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

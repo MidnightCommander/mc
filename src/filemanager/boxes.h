@@ -18,6 +18,7 @@
 
 /*** declarations of public functions ************************************************************/
 
+void about_box (void);
 void configure_box (void);
 void appearance_box (void);
 void panel_options_box (void);

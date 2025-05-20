@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -58,6 +58,9 @@ msgstr "Nu se poate crea grupul '%s' pentru evenimente!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Nu se poate crea evenimentul '%s'!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1595,9 +1598,6 @@ msgstr ""
 "Un editor de text ușor de utilizat\n"
 "creat pentru Midnight Commander."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "Despre"
 
@@ -1832,6 +1832,20 @@ msgstr "Rulează"
 msgid "Stopped"
 msgstr "Oprit"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Fără translatare >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Intrare / cod de afișare:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Niciodată"
 
@@ -1909,17 +1923,6 @@ msgstr "Auto-salvare a configurației"
 
 msgid "Configure options"
 msgstr "Opțiuni de configurare"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Fără translatare >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Intrare / cod de afișare:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Tematică:"
@@ -3892,8 +3895,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Calea către dosarul acasă nu este absolută"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -53,6 +53,9 @@ msgstr "Nurjus grupi \"%s\" loomine sündmustele!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Sündmust \"%s\" ei õnnestunud luua!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Autoriõigused (C) 1996-2025 the Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -1612,9 +1615,6 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Autoriõigused (C) 1996-2025 the Free Software Foundation"
-
 msgid "About"
 msgstr "Programmist"
 
@@ -1848,6 +1848,20 @@ msgstr "Töötab"
 msgid "Stopped"
 msgstr "Peatatud"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < tõlkimata >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Sisend/kuva kooditabel:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Mitte kunagi"
 
@@ -1925,17 +1939,6 @@ msgstr "Seadete a&utomaatsalvestus"
 
 msgid "Configure options"
 msgstr "Häälestuse suvandid"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < tõlkimata >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Sisend/kuva kooditabel:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Nahk:"
@@ -3919,8 +3922,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Kodukataloog ei ole absoluutne"
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

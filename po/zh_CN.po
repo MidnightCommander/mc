@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/mc/mc/language/"
@@ -60,6 +60,9 @@ msgstr "无法创建事件组“%s”!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "无法创建事件“%s”!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1583,9 +1586,6 @@ msgstr ""
 "为 Midnight Commander 编写的\n"
 "一个界面友好的文本编辑器。"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "关于"
 
@@ -1819,6 +1819,20 @@ msgstr "正在运行"
 msgid "Stopped"
 msgstr "已停止"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < 没有翻译 >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "输入/显示代码页: "
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "从不(&N)"
 
@@ -1896,17 +1910,6 @@ msgstr "自动保存设置(&U)"
 
 msgid "Configure options"
 msgstr "配置选项"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < 没有翻译 >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "输入/显示代码页: "
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "皮肤:"
@@ -3847,7 +3850,7 @@ msgid "Home directory path is not absolute"
 msgstr "主目录路径不是绝对路径"
 
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

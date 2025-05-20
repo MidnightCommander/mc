@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://app.transifex.com/mc/mc/language/vi/)\n"
@@ -47,6 +47,9 @@ msgstr ""
 
 #, c-format
 msgid "Unable to create event '%s'!"
+msgstr ""
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -1516,9 +1519,6 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr ""
 
@@ -1741,6 +1741,20 @@ msgstr ""
 msgid "Stopped"
 msgstr "Đã dừng"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Không có dịch >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Bảng mã đầu vào / hiển thị:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "&Không bao giờ"
 
@@ -1818,17 +1832,6 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Tùy chọn cấu hình"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Không có dịch >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Bảng mã đầu vào / hiển thị:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -3675,7 +3678,7 @@ msgid "Home directory path is not absolute"
 msgstr ""
 
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""

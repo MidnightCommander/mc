@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -51,6 +51,9 @@ msgstr "無法建立群組 '%s' !"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "無法建立事件 '%s'!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1543,9 +1546,6 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
-
 msgid "About"
 msgstr "關於"
 
@@ -1772,6 +1772,20 @@ msgstr "執行中"
 msgid "Stopped"
 msgstr "停止了"
 
+#, fuzzy
+msgid "No translation"
+msgstr "-  < 不轉換 >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "輸入/顯示 頁碼："
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
+
 msgid "&Never"
 msgstr "從不"
 
@@ -1849,17 +1863,6 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "設定選項"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < 不轉換 >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "輸入/顯示 頁碼："
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "面板："
@@ -3725,8 +3728,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"GNU Midnight Commander\n"
+"\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
