@@ -30,7 +30,6 @@
 #include "lib/global.h"
 #include "lib/search.h"
 #include "lib/mcconfig.h"  // mc_config_history_get_recent_item()
-#include "lib/charsets.h"  // cp_source
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/skin.h"  // EDITOR_BOOKMARK_FOUND_COLOR

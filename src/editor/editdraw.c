@@ -48,7 +48,6 @@
 #include "lib/strutil.h"  // utf string functions
 #include "lib/util.h"     // is_printable()
 #include "lib/widget.h"
-#include "lib/charsets.h"
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -106,7 +105,7 @@ format_character_code (WEdit *edit)
 
     if (edit->buffer.curs1 >= edit->buffer.size)
         strncpy (buf, "<EOF>   ", CHAR_CODE_BUF_SIZE);
-    else if (edit->utf8)
+    else if (edit->conv.utf8)
     {
         unsigned int cur_utf;
         int char_length = 0;
@@ -598,7 +597,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 if (q >= edit->found_start && q < (off_t) (edit->found_start + edit->found_len))
                     p->style |= MOD_BOLD;
 
-                if (edit->utf8)
+                if (edit->conv.utf8)
                     c = edit_buffer_get_utf (&edit->buffer, q, &char_length);
                 else
                     c = edit_buffer_get_byte (&edit->buffer, q);
@@ -699,16 +698,16 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 default:
                     if (mc_global.utf8_display)
                     {
-                        if (!edit->utf8)
-                            c = convert_8bit_to_unichar ((unsigned char) c, edit->converter);
+                        if (!edit->conv.utf8)
+                            c = convert_8bit_to_unichar ((unsigned char) c, edit->conv.conv);
                         else if (g_unichar_iswide (c))
                         {
                             wide_width_char = TRUE;
                             col++;
                         }
                     }
-                    else if (edit->utf8)
-                        c = convert_unichar_to_8bit (c, edit->converter);
+                    else if (edit->conv.utf8)
+                        c = convert_unichar_to_8bit (c, edit->conv.conv);
                     else
                         c = convert_8bit_to_display (c);
 
@@ -738,7 +737,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         break;
                     }
 
-                    if (edit->utf8)
+                    if (edit->conv.utf8)
                     {
                         if (mc_global.utf8_display)
                             // c is gunichar
