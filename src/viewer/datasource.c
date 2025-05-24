@@ -148,11 +148,11 @@ mcview_get_ptr_file (WView *view, off_t byte_index)
 
 /* Invalid UTF-8 is reported as negative integers (one for each byte),
  * see ticket 3783. */
-gboolean
-mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len)
+int
+mcview_get_utf (WView *view, off_t byte_index, int *ch_len)
 {
     gchar *str = NULL;
-    int res;
+    int res = 0;
     gchar utf8buf[MB_LEN_MAX + 1];
 
     switch (view->datasource)
@@ -172,19 +172,14 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len)
         break;
     }
 
-    *ch = 0;
-
     if (str == NULL)
-        return FALSE;
+        return (-1);
 
     res = g_utf8_get_char_validated (str, -1);
-
     if (res < 0)
     {
         // Retry with explicit bytes to make sure it's not a buffer boundary
-        int i;
-
-        for (i = 0; i < MB_LEN_MAX; i++)
+        for (int i = 0; i < MB_LEN_MAX; i++)
         {
             const int c = mcview_get_byte (view, byte_index + i);
 
@@ -204,20 +199,16 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len)
     if (res < 0)
     {
         // Implicit conversion from signed char to signed int keeps negative values.
-        *ch = *str;
         *ch_len = 1;
-    }
-    else
-    {
-        gchar *next_ch = NULL;
-
-        *ch = res;
-        // Calculate UTF-8 char length
-        next_ch = g_utf8_next_char (str);
-        *ch_len = next_ch - str;
+        return (unsigned char) (*str);
     }
 
-    return TRUE;
+    // Calculate UTF-8 char length
+    const gchar *next_ch = g_utf8_next_char (str);
+
+    *ch_len = next_ch - str;
+
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */

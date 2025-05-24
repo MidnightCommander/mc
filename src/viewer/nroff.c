@@ -63,7 +63,8 @@ mcview_nroff_get_char (mcview_nroff_t *nroff, int *ret_val, off_t nroff_index)
 
     if (nroff->view->utf8)
     {
-        if (!mcview_get_utf (nroff->view, nroff_index, &c, &nroff->char_length))
+        c = mcview_get_utf (nroff->view, nroff_index, &nroff->char_length);
+        if (c == -1)
         {
             // we need got symbol in any case
             nroff->char_length = 1;
