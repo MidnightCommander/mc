@@ -251,8 +251,8 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
     cp_source = data->input_editor_code_page;
     cp_display = data->input_system_code_page;
 
-    test_edit->utf8 = TRUE;
-    codepage_change_conv (&test_edit->converter, &test_edit->utf8);
+    test_edit->conv.utf8 = TRUE;
+    codepage_change_conv (&test_edit->conv.conv, &test_edit->conv.utf8);
 
     // when
     edit_cursor_move (test_edit, data->input_position);
@@ -323,8 +323,8 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
     cp_source = data->input_editor_code_page;
     cp_display = data->input_system_code_page;
 
-    test_edit->utf8 = TRUE;
-    codepage_change_conv (&test_edit->converter, &test_edit->utf8);
+    test_edit->conv.utf8 = TRUE;
+    codepage_change_conv (&test_edit->conv.conv, &test_edit->conv.utf8);
 
     // when
     edit_cursor_move (test_edit, data->input_position);
