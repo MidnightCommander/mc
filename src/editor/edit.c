@@ -1763,6 +1763,22 @@ edit_insert_column_from_file (WEdit *edit, int file, off_t *start_pos, off_t *en
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+edit_buffer_get_byte_wrapper (void *from, const off_t pos)
+{
+    return edit_buffer_get_byte ((const edit_buffer_t *) from, pos);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+edit_buffer_get_utf8_wrapper (void *from, const off_t pos, int *len)
+{
+    return edit_buffer_get_utf ((const edit_buffer_t *) from, pos, len);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2166,9 +2182,7 @@ edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg)
     edit->redo_stack_size_mask = START_STACK_SIZE - 1;
     edit->redo_stack = g_malloc0 ((edit->redo_stack_size + 10) * sizeof (long));
 
-    edit->conv.utf8 = TRUE;
-    edit->conv.conv = str_cnv_from_term;
-    codepage_change_conv (&edit->conv.conv, &edit->conv.utf8);
+    charset_conv_init (&edit->conv, edit_buffer_get_byte_wrapper, edit_buffer_get_utf8_wrapper);
 
     if (!edit_load_file (edit))
     {
@@ -2761,7 +2775,8 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
 
     for (col = 0, p = current; p < q; p++)
     {
-        int c, orig_c;
+        // use a copy of edit->conv to keep @edit constant
+        charset_conv_t conv = edit->conv;
 
         if (cols != -10)
         {
@@ -2771,38 +2786,39 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
                 return p - 1;
         }
 
-        orig_c = c = edit_buffer_get_byte (&edit->buffer, p);
+        convert_char_to_display (&conv, (void *) &edit->buffer, p);
 
-        if (edit->conv.utf8)
+        if (conv.utf8)
         {
-            int utf_ch;
-            int char_length = 1;
-
-            utf_ch = edit_buffer_get_utf (&edit->buffer, p, &char_length);
             if (mc_global.utf8_display)
             {
-                if (char_length > 1)
-                    col -= char_length - 1;
-                if (g_unichar_iswide (utf_ch))
+                if (conv.len > 1)
+                    col -= conv.len - 1;
+                if (conv.wide)
                     col++;
             }
-            else if (char_length > 1 && g_unichar_isprint (utf_ch))
-                col -= char_length - 1;
+            else if (conv.len > 1 && conv.printable)
+                col -= conv.len - 1;
         }
 
-        c = convert_8bit_to_display (c);
-
-        if (c == '\n')
+        if (conv.ch == '\n')
             return (upto != 0 ? (off_t) col : p);
-        if (c == '\t')
+        if (conv.ch == '\t')
             col += TAB_SIZE - col % TAB_SIZE;
-        else if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !edit->conv.utf8)))
-            // '\r' is shown as ^M, so we must advance 2 characters
-            // Caret notation for control characters
-            col += 2;
         else
+        {
+            const int orig_c = conv.utf8 ? edit_buffer_get_byte (&edit->buffer, p) : conv.ch;
+            const int c = convert_8bit_to_display (orig_c);
+
             col++;
+
+            if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !conv.utf8)))
+                // '\r' is shown as ^M, so we must advance 2 characters
+                // Caret notation for control characters
+                col++;
+        }
     }
+
     return (off_t) col;
 }
 
