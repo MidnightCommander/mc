@@ -266,8 +266,13 @@ dialog_switch_list (void)
 int
 dialog_switch_process_pending (void)
 {
-    WDialog *h = DIALOG (mc_current->data);
+    WDialog *h;
     int ret = 0;
+
+    if (mc_current == NULL)
+        return ret;
+
+    h = DIALOG (mc_current->data);
 
     if (!dialog_switch_pending)
     {
