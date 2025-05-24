@@ -167,17 +167,19 @@ mcview_nroff_seq_free (mcview_nroff_t **nroff)
 nroff_type_t
 mcview_nroff_seq_info (mcview_nroff_t *nroff)
 {
-    int next, next2;
+    int next2 = 0;
     gboolean bold_and_underline;
 
     if (nroff == NULL)
         return NROFF_TYPE_NONE;
+
     nroff->type = NROFF_TYPE_NONE;
 
     if (!mcview_nroff_get_char (nroff, &nroff->current_char, nroff->index))
         return nroff->type;
 
-    next = mcview_get_byte (nroff->view, nroff->index + nroff->char_length);
+    const int next = mcview_get_byte (nroff->view, nroff->index + nroff->char_length);
+
     if (next == -1 || next != '\b')
         return nroff->type;
 
@@ -205,14 +207,10 @@ mcview_nroff_seq_info (mcview_nroff_t *nroff)
         nroff->type = NROFF_TYPE_BOLD_UNDERLINE;
     }
     else if (nroff->current_char == '_' && next2 == '_')
-    {
         nroff->type =
             (nroff->prev_type == NROFF_TYPE_BOLD) ? NROFF_TYPE_BOLD : NROFF_TYPE_UNDERLINE;
-    }
     else if (nroff->current_char == next2)
-    {
         nroff->type = NROFF_TYPE_BOLD;
-    }
     else if (nroff->current_char == '_')
     {
         nroff->current_char = next2;
@@ -268,14 +266,10 @@ mcview_nroff_seq_prev (mcview_nroff_t *nroff)
     if (nroff->index == 0)
         return -1;
 
-    prev_index = nroff->index - 1;
-
-    while (prev_index != 0)
-    {
+    for (prev_index = nroff->index - 1; prev_index != 0; prev_index--)
         if (mcview_nroff_get_char (nroff, &nroff->current_char, prev_index))
             break;
-        prev_index--;
-    }
+
     if (prev_index == 0)
     {
         nroff->index--;
@@ -292,16 +286,12 @@ mcview_nroff_seq_prev (mcview_nroff_t *nroff)
         mcview_nroff_seq_info (nroff);
         return nroff->current_char;
     }
-    prev_index2 = prev_index - 1;
 
-    while (prev_index2 != 0)
-    {
+    for (prev_index2 = prev_index - 1; prev_index2 != 0; prev_index2--)
         if (mcview_nroff_get_char (nroff, &prev, prev_index))
             break;
-        prev_index2--;
-    }
 
-    nroff->index = (prev_index2 == 0) ? prev_index : prev_index2;
+    nroff->index = prev_index2 == 0 ? prev_index : prev_index2;
     mcview_nroff_seq_info (nroff);
     return nroff->current_char;
 }
