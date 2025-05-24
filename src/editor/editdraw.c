@@ -551,6 +551,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
         if (row <= edit->buffer.lines - edit->start_line)
         {
             off_t tws = 0;
+            charset_conv_t *conv = &edit->conv;
 
             if (edit_options.visible_tws && tty_use_colors ())
                 for (tws = edit_buffer_get_eol (&edit->buffer, b); tws > b; tws--)
@@ -564,11 +565,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
 
             while (col <= end_col - edit->start_col)
             {
-                int char_length = 1;
-                unsigned int c;
-                gboolean wide_width_char = FALSE;
                 gboolean control_char = FALSE;
-                gboolean printable;
 
                 p->ch = 0;
                 p->style = q == edit->buffer.curs1 ? MOD_CURSOR : 0;
@@ -597,11 +594,6 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 if (q >= edit->found_start && q < (off_t) (edit->found_start + edit->found_len))
                     p->style |= MOD_BOLD;
 
-                if (edit->conv.utf8)
-                    c = edit_buffer_get_utf (&edit->buffer, q, &char_length);
-                else
-                    c = edit_buffer_get_byte (&edit->buffer, q);
-
                 // we don't use bg for mc - fg contains both
                 if (book_mark != 0)
                     p->style |= book_mark << 16;
@@ -613,7 +605,9 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     p->style |= color << 16;
                 }
 
-                switch (c)
+                convert_char_to_display (conv, &edit->buffer, q);
+
+                switch (conv->ch)
                 {
                 case '\n':
                     col = end_col - edit->start_col + 1;  // quit
@@ -637,7 +631,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         if ((p->style & MOD_MARKED) != 0)
                             style = p->style;
                         else if (book_mark != 0)
-                            style = c | (book_mark << 16);
+                            style = conv->ch | (book_mark << 16);
                         else
                             style = p->style | MOD_WHITESPACE;
 
@@ -696,79 +690,36 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     MC_FALLTHROUGH;
 
                 default:
-                    if (mc_global.utf8_display)
-                    {
-                        if (!edit->conv.utf8)
-                            c = convert_8bit_to_unichar ((unsigned char) c, edit->conv.conv);
-                        else if (g_unichar_iswide (c))
-                        {
-                            wide_width_char = TRUE;
-                            col++;
-                        }
-                    }
-                    else if (edit->conv.utf8)
-                        c = convert_unichar_to_8bit (c, edit->conv.conv);
-                    else
-                        c = convert_8bit_to_display (c);
-
                     // Caret notation for control characters
-                    if (c < 32)
+                    if (conv->ch < 32 || conv->ch == 127)
                     {
                         p->ch = '^';
                         p->style = abn_style;
                         p++;
-                        p->ch = c + 0x40;
+                        p->ch = conv->ch == 127 ? '?' : conv->ch + 0x40;
                         p->style = abn_style;
                         p++;
                         col += 2;
                         control_char = TRUE;
-                        break;
                     }
-                    if (c == 127)
+                    else
                     {
-                        p->ch = '^';
-                        p->style = abn_style;
-                        p++;
-                        p->ch = '?';
-                        p->style = abn_style;
-                        p++;
-                        col += 2;
-                        control_char = TRUE;
-                        break;
-                    }
-
-                    if (edit->conv.utf8)
-                    {
-                        if (mc_global.utf8_display)
-                            // c is gunichar
-                            printable = g_unichar_isprint (c);
+                        if (conv->printable)
+                            p->ch = conv->ch;
                         else
-                            // c was gunichar; now c is 8-bit char converted from gunichar
-                            printable = is_printable (c);
+                        {
+                            p->ch = '.';
+                            p->style = abn_style;
+                        }
+                        p++;
+                        col++;
                     }
-                    else
-                        // c is 8-bit char
-                        printable = is_printable (c);
-
-                    if (printable)
-                        p->ch = c;
-                    else
-                    {
-                        p->ch = '.';
-                        p->style = abn_style;
-                    }
-                    p++;
-                    col++;
                     break;
                 }  // case
 
-                q++;
-                if (char_length > 1)
-                    q += char_length - 1;
-
                 if (col > (end_col - edit->start_col + 1))
                 {
-                    if (wide_width_char)
+                    if (conv->wide)
                     {
                         p--;
                         break;
@@ -779,6 +730,8 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         break;
                     }
                 }
+
+                q += MAX (conv->len, 1);
             }
         }
     }
