@@ -7,9 +7,31 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+// Read one 8-bit character from buffer, Return 8-bit character.
+typedef int (*get_byte_fn) (void *from, const off_t pos);
+// Read one UTF-8 character from buffer. Return Unicode character of type gunchar.
+typedef int (*get_utf8_fn) (void *from, const off_t pos, int *len);
+/* NOTE: the 'from' argument is not of 'cont void *' type because it can be modified when buffer
+ * is being read chunk by chunk (see how file is read in mcviewer) */
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct
+{
+    // input
+    gboolean utf8;
+    GIConv conv;
+    get_byte_fn get_byte;
+    get_utf8_fn get_utf8;
+
+    // output
+    int ch;
+    int len;
+    gboolean printable;
+    gboolean wide;
+} charset_conv_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -36,6 +58,9 @@ unsigned char convert_unichar_to_8bit (const gunichar c, GIConv conv);
 gunichar convert_8bit_to_unichar (const char c, GIConv conv);
 
 gunichar convert_8bit_to_input_unichar (const char c);
+
+gboolean charset_conv_init (charset_conv_t *conv, get_byte_fn get_byte, get_utf8_fn get_utf8);
+void convert_char_to_display (charset_conv_t *conv, void *from, const off_t pos);
 
 GString *str_nconvert_to_input (const char *str, int len);
 GString *str_nconvert_to_display (const char *str, int len);
