@@ -550,6 +550,93 @@ convert_8bit_to_input_unichar (const char c)
 
 /* --------------------------------------------------------------------------------------------- */
 
+gboolean
+charset_conv_init (charset_conv_t *conv, get_byte_fn get_byte, get_utf8_fn get_utf8)
+{
+    conv->utf8 = TRUE;
+    conv->conv = INVALID_CONV;
+    conv->get_byte = get_byte;
+    conv->get_utf8 = get_utf8;
+
+    return codepage_change_conv (&conv->conv, &conv->utf8);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Convert one 8-bit or UTF-8 character to display codepage.
+ *
+ * @param conv charset conversion handler
+ * @param from buffer where read character from
+ * @param pos character offset in @from
+ */
+void
+convert_char_to_display (charset_conv_t *conv, void *from, const off_t pos)
+{
+    int c;
+
+    conv->wide = FALSE;
+
+    if (conv->utf8)
+    {
+        conv->len = 0;
+        c = conv->get_utf8 (from, pos, &conv->len);
+
+        if (c < 0)
+        {
+            const int b = conv->get_byte (from, pos);
+
+            if (b != -1)
+            {
+                // Invalid UTF-8 sequence: display one byte as non-printable character
+                conv->ch = '.';
+                conv->src = b;
+                conv->len = 1;
+                conv->printable = FALSE;
+                return;
+            }
+        }
+    }
+    else
+    {
+        conv->len = 1;
+        c = conv->get_byte (from, pos);
+    }
+
+    conv->src = c;
+
+    if (c < 0)
+    {
+        // End of buffer
+        conv->ch = -1;
+        conv->len = 0;
+        conv->printable = FALSE;
+    }
+    else if (mc_global.utf8_display)
+    {
+        if (conv->utf8)
+        {
+            conv->ch = c;
+            conv->wide = g_unichar_iswide (c);
+        }
+        else
+            conv->ch = convert_8bit_to_unichar ((unsigned char) c, conv->conv);
+
+        conv->printable = g_unichar_isprint (conv->ch);
+    }
+    else
+    {
+        if (conv->utf8)
+            conv->ch = convert_unichar_to_8bit (c, conv->conv);
+        else
+            conv->ch = convert_8bit_to_display (c);
+
+        conv->printable = is_printable (conv->ch);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * Change codepage converter in accordance with display codepage.
  *

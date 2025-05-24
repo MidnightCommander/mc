@@ -7,9 +7,37 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+// Read one 8-bit character from buffer, Return 8-bit character.
+typedef int (*get_byte_fn) (void *from, const off_t pos);
+/* Read one UTF-8 character from buffer. Return Unicode character of type gunichar,
+ * or a negative value if there is an invalid UTF-8 sequence at @pos or @pos is out of buffer. */
+typedef int (*get_utf8_fn) (void *from, const off_t pos, int *len);
+/* NOTE: the 'from' argument is not of 'const void *' type because it can be modified when buffer
+ * is being read chunk by chunk (see how file is read in mcviewer) */
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct
+{
+    // input
+    gboolean utf8;
+    GIConv conv;
+    get_byte_fn get_byte;
+    get_utf8_fn get_utf8;
+
+    // output
+    int ch;  // character in the display codepage, -1 at end of buffer
+    int src; /* character in the source codepage: Unicode if @utf8 is TRUE, 8-bit otherwise.
+              * It is required for character classification (width, combining marks) and
+              * by search engine in nroff mode: the display character is not sufficient,
+              * because a lot of characters can be converted to the same one on 8-bit display.
+              */
+    int len;
+    gboolean printable;
+    gboolean wide;
+} charset_conv_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -36,6 +64,9 @@ unsigned char convert_unichar_to_8bit (const gunichar c, GIConv conv);
 gunichar convert_8bit_to_unichar (const char c, GIConv conv);
 
 gunichar convert_8bit_to_input_unichar (const char c);
+
+gboolean charset_conv_init (charset_conv_t *conv, get_byte_fn get_byte, get_utf8_fn get_utf8);
+void convert_char_to_display (charset_conv_t *conv, void *from, const off_t pos);
 
 GString *str_nconvert_to_input (const char *str, int len);
 GString *str_nconvert_to_display (const char *str, int len);
