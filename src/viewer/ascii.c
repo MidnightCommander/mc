@@ -307,31 +307,37 @@ mcview_char_display (const WView *view, int c, char *s)
  * Also, temporary hack: handle force_max here.
  * TODO: move it to lower layers (datasource.c)?
  */
-static gboolean
-mcview_get_next_char (WView *view, mcview_state_machine_t *state, int *c)
+static int
+mcview_get_next_char (WView *view, mcview_state_machine_t *state)
 {
+    int c = -1;
+
     // Pretend EOF if we reached force_max
     if (view->force_max >= 0 && state->offset >= view->force_max)
-        return FALSE;
+        return (-1);
 
     if (view->utf8)
     {
         int char_length = 0;
 
-        if (!mcview_get_utf (view, state->offset, c, &char_length))
-            return FALSE;
+        if (!mcview_get_utf (view, state->offset, &c, &char_length))
+            return (-1);
         // Pretend EOF if we crossed force_max
         if (view->force_max >= 0 && state->offset + char_length > view->force_max)
-            return FALSE;
+            return (-1);
 
         state->offset += char_length;
-        return TRUE;
+    }
+    else
+    {
+        c = mcview_get_byte (view, state->offset);
+        if (c == -1)
+            return (-1);
+
+        state->offset++;
     }
 
-    if (!mcview_get_byte (view, state->offset, c))
-        return FALSE;
-    state->offset++;
-    return TRUE;
+    return c;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -358,15 +364,19 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
 {
     mcview_state_machine_t state_after_three_chars;
     mcview_state_machine_t state_after_five_chars;
-    int c2, c3, c4, c5;
+    gboolean bold_and_underline;
 
     if (color != NULL)
         *color = VIEWER_NORMAL_COLOR;
 
     if (!view->mode_flags.nroff)
-        return mcview_get_next_char (view, state, c);
+    {
+        *c = mcview_get_next_char (view, state);
+        return (*c != -1);
+    }
 
-    if (!mcview_get_next_char (view, state, c))
+    *c = mcview_get_next_char (view, state);
+    if (*c == -1)
         return FALSE;
     // Don't allow nroff formatting around CR, LF, TAB or other special chars
     if (!mcview_isprint (view, *c))
@@ -374,21 +384,33 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
 
     state_after_three_chars = *state;
 
-    if (!mcview_get_next_char (view, &state_after_three_chars, &c2))
-        return TRUE;
-    if (c2 != '\b')
+    const int c2 = mcview_get_next_char (view, &state_after_three_chars);
+
+    if (c2 == -1 || c2 != '\b')
         return TRUE;
 
-    if (!mcview_get_next_char (view, &state_after_three_chars, &c3))
-        return TRUE;
-    if (!mcview_isprint (view, c3))
+    const int c3 = mcview_get_next_char (view, &state_after_three_chars);
+
+    if (c3 == -1 || !mcview_isprint (view, c3))
         return TRUE;
 
     state_after_five_chars = state_after_three_chars;
 
     /* Bold and underlined letter x is denoted by: _ \b x \b x */
-    if (*c == '_' && mcview_get_next_char (view, &state_after_five_chars, &c4) && c4 == '\b'
-        && mcview_get_next_char (view, &state_after_five_chars, &c5) && c3 == c5)
+    bold_and_underline = *c == '_';
+    if (bold_and_underline)
+    {
+        const int c4 = mcview_get_next_char (view, &state_after_five_chars);
+
+        bold_and_underline = c4 != -1 && c4 == '\b';
+    }
+    if (bold_and_underline)
+    {
+        const int c5 = mcview_get_next_char (view, &state_after_five_chars);
+
+        bold_and_underline = c5 != -1 && c3 == c5;
+    }
+    if (bold_and_underline)
     {
         *c = c3;
         *state = state_after_five_chars;

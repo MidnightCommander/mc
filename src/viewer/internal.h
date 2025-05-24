@@ -243,8 +243,8 @@ void mcview_update_filesize (WView *view);
 char *mcview_get_ptr_file (WView *view, off_t byte_index);
 char *mcview_get_ptr_string (WView *view, off_t byte_index);
 gboolean mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len);
-gboolean mcview_get_byte_string (WView *view, off_t byte_index, int *retval);
-gboolean mcview_get_byte_none (WView *view, off_t byte_index, int *retval);
+int mcview_get_byte_string (WView *view, off_t byte_index);
+int mcview_get_byte_none (MC_UNUSED WView *view, MC_UNUSED off_t byte_index);
 void mcview_set_byte (WView *view, off_t offset, byte b);
 void mcview_file_load_data (WView *view, off_t byte_index);
 void mcview_close_datasource (WView *view);
@@ -273,7 +273,7 @@ void mcview_growbuf_done (WView *view);
 void mcview_growbuf_free (WView *view);
 off_t mcview_growbuf_filesize (WView *view);
 void mcview_growbuf_read_until (WView *view, off_t ofs);
-gboolean mcview_get_byte_growing_buffer (WView *view, off_t byte_index, int *retval);
+int mcview_get_byte_growing_buffer (WView *view, off_t byte_index);
 char *mcview_get_ptr_growing_buffer (WView *view, off_t byte_index);
 
 /* hex.c: */
@@ -371,56 +371,49 @@ mcview_already_loaded (off_t offset, off_t idx, size_t size)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline gboolean
-mcview_get_byte_file (WView *view, off_t byte_index, int *retval)
+static inline int
+mcview_get_byte_file (WView *view, off_t byte_index)
 {
     g_assert (view->datasource == DS_FILE);
 
     mcview_file_load_data (view, byte_index);
+
     if (mcview_already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
-    {
-        if (retval)
-            *retval = view->ds_file_data[byte_index - view->ds_file_offset];
-        return TRUE;
-    }
-    if (retval)
-        *retval = -1;
-    return FALSE;
+        return view->ds_file_data[byte_index - view->ds_file_offset];
+
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline gboolean
-mcview_get_byte (WView *view, off_t offset, int *retval)
+static inline int
+mcview_get_byte (WView *view, off_t offset)
 {
     switch (view->datasource)
     {
     case DS_STDIO_PIPE:
     case DS_VFS_PIPE:
-        return mcview_get_byte_growing_buffer (view, offset, retval);
+        return mcview_get_byte_growing_buffer (view, offset);
     case DS_FILE:
-        return mcview_get_byte_file (view, offset, retval);
+        return mcview_get_byte_file (view, offset);
     case DS_STRING:
-        return mcview_get_byte_string (view, offset, retval);
+        return mcview_get_byte_string (view, offset);
     case DS_NONE:
-        return mcview_get_byte_none (view, offset, retval);
+        return mcview_get_byte_none (view, offset);
     default:
-        return FALSE;
+        return (-1);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline gboolean
-mcview_get_byte_indexed (WView *view, off_t base, off_t ofs, int *retval)
+static inline int
+mcview_get_byte_indexed (WView *view, off_t base, off_t ofs)
 {
     if (base <= OFFSETTYPE_MAX - ofs)
-        return mcview_get_byte (view, base + ofs, retval);
+        return mcview_get_byte (view, base + ofs);
 
-    if (retval != NULL)
-        *retval = -1;
-
-    return FALSE;
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -431,7 +424,7 @@ mcview_count_backspaces (WView *view, off_t offset)
     int backspaces = 0;
     int c;
 
-    while (offset >= 2 * backspaces && mcview_get_byte (view, offset - 2 * backspaces, &c)
+    while (offset >= 2 * backspaces && (c = mcview_get_byte (view, offset - 2 * backspaces)) != -1
            && c == '\b')
         backspaces++;
 
@@ -443,18 +436,22 @@ mcview_count_backspaces (WView *view, off_t offset)
 static inline gboolean
 mcview_is_nroff_sequence (WView *view, off_t offset)
 {
-    int c0, c1, c2;
-
     // The following commands are ordered to speed up the calculation.
 
-    if (!mcview_get_byte_indexed (view, offset, 1, &c1) || c1 != '\b')
-        return FALSE;
+    const int c1 = mcview_get_byte_indexed (view, offset, 1);
 
-    if (!mcview_get_byte_indexed (view, offset, 0, &c0) || !g_ascii_isprint (c0))
-        return FALSE;
+    if (c1 == -1 || c1 != '\b')
+        return (-1);
 
-    if (!mcview_get_byte_indexed (view, offset, 2, &c2) || !g_ascii_isprint (c2))
-        return FALSE;
+    const int c0 = mcview_get_byte_indexed (view, offset, 0);
+
+    if (c0 == -1 || !g_ascii_isprint (c0))
+        return (-1);
+
+    const int c2 = mcview_get_byte_indexed (view, offset, 2);
+
+    if (c2 == -1 || !g_ascii_isprint (c2))
+        return (-1);
 
     return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));
 }

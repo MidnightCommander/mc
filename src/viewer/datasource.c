@@ -186,8 +186,10 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len)
 
         for (i = 0; i < MB_LEN_MAX; i++)
         {
-            if (mcview_get_byte (view, byte_index + i, &res))
-                utf8buf[i] = res;
+            const int c = mcview_get_byte (view, byte_index + i);
+
+            if (c != -1)
+                utf8buf[i] = c;
             else
             {
                 utf8buf[i] = '\0';
@@ -232,36 +234,22 @@ mcview_get_ptr_string (WView *view, off_t byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean
-mcview_get_byte_string (WView *view, off_t byte_index, int *retval)
+int
+mcview_get_byte_string (WView *view, off_t byte_index)
 {
-    char *p;
+    const char *p = mcview_get_ptr_string (view, byte_index);
 
-    if (retval != NULL)
-        *retval = -1;
-
-    p = mcview_get_ptr_string (view, byte_index);
-    if (p == NULL)
-        return FALSE;
-
-    if (retval != NULL)
-        *retval = (unsigned char) (*p);
-    return TRUE;
+    return (p == NULL ? -1 : (unsigned char) (*p));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean
-mcview_get_byte_none (WView *view, off_t byte_index, int *retval)
+int
+mcview_get_byte_none (MC_UNUSED WView *view, MC_UNUSED off_t byte_index)
 {
-    (void) &view;
-    (void) byte_index;
-
     g_assert (view->datasource == DS_NONE);
 
-    if (retval != NULL)
-        *retval = -1;
-    return FALSE;
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -398,7 +386,7 @@ mcview_load_command_output (WView *view, const char *command)
 
     // Check if filter produced any output
     mcview_set_datasource_stdio_pipe (view, p);
-    if (!mcview_get_byte (view, 0, NULL))
+    if (mcview_get_byte (view, 0) == -1)
     {
         mcview_close_datasource (view);
         mcview_display (view);
