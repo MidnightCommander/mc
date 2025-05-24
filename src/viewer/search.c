@@ -423,7 +423,7 @@ mcview_search_cmd_callback (const void *user_data, off_t char_offset, int *curre
     //    view_read_continue (view, &view->search_onechar_info);
     if (!view->mode_flags.nroff)
     {
-        mcview_get_byte (view, char_offset, current_char);
+        *current_char = mcview_get_byte (view, char_offset);
         return MC_SEARCH_CB_OK;
     }
 

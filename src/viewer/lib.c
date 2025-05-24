@@ -291,12 +291,14 @@ mcview_bol (WView *view, off_t current, off_t limit)
     if (current > filesize)
         return filesize;
 
-    if (!mcview_get_byte (view, current, &c))
+    c = mcview_get_byte (view, current);
+    if (c == -1)
         return current;
 
     if (c == '\n')
     {
-        if (!mcview_get_byte (view, current - 1, &c))
+        c = mcview_get_byte (view, current - 1);
+        if (c == -1)
             return current;
 
         if (c == '\r')
@@ -305,9 +307,8 @@ mcview_bol (WView *view, off_t current, off_t limit)
 
     for (; current > 0 && current > limit; current--)
     {
-        if (!mcview_get_byte (view, current - 1, &c))
-            break;
-        if (c == '\r' || c == '\n')
+        c = mcview_get_byte (view, current - 1);
+        if (c == -1 || c == '\r' || c == '\n')
             break;
     }
 
@@ -328,7 +329,7 @@ mcview_eol (WView *view, off_t current)
     if (current < 0)
         return 0;
 
-    for (; mcview_get_byte (view, current, &c); current++)
+    for (; (c = mcview_get_byte (view, current)) != -1; current++)
     {
         if (c == '\n')
         {
