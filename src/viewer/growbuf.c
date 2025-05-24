@@ -241,27 +241,17 @@ mcview_growbuf_read_until (WView *view, off_t ofs)
 
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean
-mcview_get_byte_growing_buffer (WView *view, off_t byte_index, int *retval)
+int
+mcview_get_byte_growing_buffer (WView *view, off_t byte_index)
 {
-    char *p;
-
     g_assert (view->growbuf_in_use);
 
-    if (retval != NULL)
-        *retval = -1;
-
     if (byte_index < 0)
-        return FALSE;
+        return (-1);
 
-    p = mcview_get_ptr_growing_buffer (view, byte_index);
-    if (p == NULL)
-        return FALSE;
+    const char *p = mcview_get_ptr_growing_buffer (view, byte_index);
 
-    if (retval != NULL)
-        *retval = (unsigned char) (*p);
-
-    return TRUE;
+    return (p == NULL ? -1 : (unsigned char) (*p));
 }
 
 /* --------------------------------------------------------------------------------------------- */
