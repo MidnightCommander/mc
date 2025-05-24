@@ -145,7 +145,7 @@ mcview_display_hex (WView *view)
     while (curr != NULL && (curr->offset < from))
         curr = curr->next;
 
-    for (; mcview_get_byte (view, from, NULL) && row < r->lines; row++)
+    for (; mcview_get_byte (view, from) != -1 && row < r->lines; row++)
     {
         int col = 0;
         int bytes;  // Number of bytes already printed on the line
@@ -188,12 +188,13 @@ mcview_display_hex (WView *view)
                 {
                     int j;
                     gchar utf8buf[MB_LEN_MAX + 1];
-                    int res;
                     int first_changed = -1;
 
                     for (j = 0; j < MB_LEN_MAX; j++)
                     {
-                        if (mcview_get_byte (view, from + j, &res))
+                        const int res = mcview_get_byte (view, from + j);
+
+                        if (res != -1)
                             utf8buf[j] = res;
                         else
                         {
@@ -239,7 +240,8 @@ mcview_display_hex (WView *view)
                 continue;
             }
 
-            if (!mcview_get_byte (view, from, &c))
+            c = mcview_get_byte (view, from);
+            if (c == -1)
                 break;
 
             // Save the cursor position for mcview_place_cursor()
