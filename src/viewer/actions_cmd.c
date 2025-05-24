@@ -192,7 +192,7 @@ mcview_handle_editkey (WView *view, int key)
         if (node != NULL)
             byte_val = node->value;
         else
-            mcview_get_byte (view, view->hex_cursor, &byte_val);
+            byte_val = mcview_get_byte (view, view->hex_cursor);
 
         if (view->hexedit_lownibble)
             byte_val = (byte_val & 0xf0) | (hexvalue);

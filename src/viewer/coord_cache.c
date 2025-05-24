@@ -290,9 +290,9 @@ retry:
     nroff_state = NROFF_START;
     for (; current.cc_offset < limit; current = next)
     {
-        int c;
+        const int c = mcview_get_byte (view, current.cc_offset);
 
-        if (!mcview_get_byte (view, current.cc_offset, &c))
+        if (c == -1)
             break;
 
         if (!cmp_func (&current, coord)
@@ -309,9 +309,7 @@ retry:
         // and override some of them as necessary.
         if (c == '\r')
         {
-            int nextc = -1;
-
-            mcview_get_byte_indexed (view, current.cc_offset, 1, &nextc);
+            const int nextc = mcview_get_byte_indexed (view, current.cc_offset, 1);
 
             /* Ignore '\r' if it is followed by '\r' or '\n'. If it is
              * followed by anything else, it is a Mac line ending and
