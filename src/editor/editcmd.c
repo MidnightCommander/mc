@@ -55,7 +55,6 @@
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/event.h"  // mc_event_raise()
-#include "lib/charsets.h"
 
 #include "src/history.h"
 #include "src/file_history.h"  // show_file_history()
@@ -1994,7 +1993,7 @@ edit_mail_dialog (WEdit *edit)
 void
 edit_select_codepage_cmd (WEdit *edit)
 {
-    select_codepage (&edit->converter, &edit->utf8);
+    select_codepage (&edit->conv.conv, &edit->conv.utf8);
     edit->force = REDRAW_PAGE;
     widget_draw (WIDGET (edit));
 }

@@ -32,7 +32,6 @@
 #include <gmodule.h>
 #include <aspell.h>
 
-#include "lib/charsets.h"
 #include "lib/strutil.h"
 #include "lib/util.h"     // MC_PTR_FREE()
 #include "lib/tty/tty.h"  // COLS, LINES

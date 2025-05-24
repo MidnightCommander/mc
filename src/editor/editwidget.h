@@ -7,6 +7,7 @@
 
 #include <limits.h>  // MB_LEN_MAX
 
+#include "lib/charsets.h"
 #include "lib/search.h"  // mc_search_t
 #include "lib/widget.h"  // Widget
 
@@ -69,8 +70,7 @@ struct WEdit
     edit_buffer_t buffer;
 
     // multibyte support
-    gboolean utf8;  // It's multibyte file codeset
-    GIConv converter;
+    charset_conv_t conv;
     char charbuf[MB_LEN_MAX + 1];
     int charpoint;
 
