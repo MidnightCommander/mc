@@ -8,9 +8,12 @@ LDADD = \
 	$(top_builddir)/lib/libmc.la \
 	@CHECK_LIBS@
 
-EXTRA_DIST = utilunix__my_system-common.c
+EXTRA_DIST = \
+	fixtures/mc.charsets \
+	utilunix__my_system-common.c
 
 TESTS = \
+	charsets__convert_char_to_display \
 	library_independ \
 	mc_build_filename \
 	mc_realpath \
@@ -26,6 +29,13 @@ TESTS = \
 	x_basename
 
 check_PROGRAMS = $(TESTS)
+
+charsets__convert_char_to_display_CPPFLAGS = \
+	$(AM_CPPFLAGS) \
+	-DTEST_SHARE_DIR=\"$(abs_srcdir)/fixtures\"
+
+charsets__convert_char_to_display_SOURCES = \
+	charsets__convert_char_to_display.c
 
 library_independ_SOURCES = \
 	library_independ.c
