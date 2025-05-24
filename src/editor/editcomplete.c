@@ -31,8 +31,7 @@
 #include "lib/global.h"
 #include "lib/search.h"
 #include "lib/strutil.h"
-#include "lib/charsets.h"  // str_convert_to_input()
-#include "lib/tty/tty.h"   // LINES, COLS
+#include "lib/tty/tty.h"  // LINES, COLS
 #include "lib/widget.h"
 
 #include "src/setup.h"  // verbose

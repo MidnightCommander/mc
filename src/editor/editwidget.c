@@ -51,7 +51,6 @@
 #include "lib/widget.h"
 #include "lib/mcconfig.h"
 #include "lib/event.h"  // mc_event_raise()
-#include "lib/charsets.h"
 
 #include "src/keymap.h"           // keybind_lookup_keymap_command()
 #include "src/setup.h"            // home_dir
@@ -540,7 +539,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
             if (is_printable (c))
             {
-                if (!edit->utf8)
+                if (!edit->conv.utf8)
                     char_for_insertion = c;
                 else
                     char_for_insertion = convert_8bit_to_input_unichar ((char) x_key);
@@ -559,7 +558,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 goto fin;
             }
 
-            if (edit->utf8)
+            if (edit->conv.utf8)
             {
                 // source is in UTF-8 codeset
                 if (res < 0)

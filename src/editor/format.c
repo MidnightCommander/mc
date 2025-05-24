@@ -516,7 +516,7 @@ format_paragraph (WEdit *edit, gboolean force)
     }
 
     t2 = (unsigned char *) g_string_free (t, FALSE);
-    format_this (t2, q - p, indent, edit->utf8);
+    format_this (t2, q - p, indent, edit->conv.utf8);
     put_paragraph (edit, t2, p, indent, size);
     g_free ((char *) t2);
 

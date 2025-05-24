@@ -55,7 +55,6 @@
 #include "lib/timefmt.h"  // time formatting
 #include "lib/lock.h"
 #include "lib/widget.h"
-#include "lib/charsets.h"  // get_codepage_id
 
 #include "src/usermenu.h"  // user_menu_cmd()
 
@@ -1018,7 +1017,7 @@ edit_right_char_move_cmd (WEdit *edit)
     int char_length = 1;
     int c;
 
-    if (edit->utf8)
+    if (edit->conv.utf8)
     {
         c = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length < 1)
@@ -1044,7 +1043,7 @@ edit_left_char_move_cmd (WEdit *edit)
         && edit->over_col == 0 && edit->buffer.curs1 == edit_buffer_get_current_bol (&edit->buffer))
         return;
 
-    if (edit->utf8)
+    if (edit->conv.utf8)
     {
         edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length < 1)
@@ -2167,9 +2166,9 @@ edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg)
     edit->redo_stack_size_mask = START_STACK_SIZE - 1;
     edit->redo_stack = g_malloc0 ((edit->redo_stack_size + 10) * sizeof (long));
 
-    edit->utf8 = TRUE;
-    edit->converter = str_cnv_from_term;
-    codepage_change_conv (&edit->converter, &edit->utf8);
+    edit->conv.utf8 = TRUE;
+    edit->conv.conv = str_cnv_from_term;
+    codepage_change_conv (&edit->conv.conv, &edit->conv.utf8);
 
     if (!edit_load_file (edit))
     {
@@ -2236,8 +2235,8 @@ edit_clean (WEdit *edit)
     vfs_path_free (edit->dir_vpath, TRUE);
     edit_search_deinit (edit);
 
-    if (edit->converter != str_cnv_from_term)
-        str_close_conv (edit->converter);
+    if (edit->conv.conv != str_cnv_from_term)
+        str_close_conv (edit->conv.conv);
 
     edit_purge_widget (edit);
 
@@ -2597,7 +2596,7 @@ edit_delete (WEdit *edit, gboolean byte_delete)
         return 0;
 
     // if byte_delete == TRUE then delete only one byte not multibyte char
-    if (edit->utf8 && !byte_delete)
+    if (edit->conv.utf8 && !byte_delete)
     {
         edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length < 1)
@@ -2656,7 +2655,7 @@ edit_backspace (WEdit *edit, gboolean byte_delete)
     if (edit->mark2 != edit->mark1)
         edit_push_markers (edit);
 
-    if (edit->utf8 && !byte_delete)
+    if (edit->conv.utf8 && !byte_delete)
     {
         edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length < 1)
@@ -2774,7 +2773,7 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
 
         orig_c = c = edit_buffer_get_byte (&edit->buffer, p);
 
-        if (edit->utf8)
+        if (edit->conv.utf8)
         {
             int utf_ch;
             int char_length = 1;
@@ -2797,7 +2796,7 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
             return (upto != 0 ? (off_t) col : p);
         if (c == '\t')
             col += TAB_SIZE - col % TAB_SIZE;
-        else if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !edit->utf8)))
+        else if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !edit->conv.utf8)))
             // '\r' is shown as ^M, so we must advance 2 characters
             // Caret notation for control characters
             col += 2;
