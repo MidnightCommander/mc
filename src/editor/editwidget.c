@@ -137,19 +137,20 @@ edit_dlg_deinit (void)
 static void
 edit_about (void)
 {
-    char *ver;
+    char *ver, *desc;
 
     ver = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
+    desc = g_strdup_printf (N_ ("A user friendly text editor\n"
+                                "written for the %s."),
+                            PACKAGE_NAME);
 
     {
         quick_widget_t quick_widgets[] = {
             QUICK_LABEL (ver, NULL),
             QUICK_SEPARATOR (TRUE),
-            QUICK_LABEL (N_ ("A user friendly text editor\n"
-                             "written for the Midnight Commander."),
-                         NULL),
+            QUICK_LABEL (desc, NULL),
             QUICK_SEPARATOR (FALSE),
-            QUICK_LABEL (N_ ("Copyright (C) 1996-2025 the Free Software Foundation"), NULL),
+            QUICK_LABEL (PACKAGE_COPYRIGHT, NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
             QUICK_END,
@@ -174,6 +175,7 @@ edit_about (void)
     }
 
     g_free (ver);
+    g_free (desc);
 }
 
 /* --------------------------------------------------------------------------------------------- */

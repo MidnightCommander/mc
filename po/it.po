@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Italian (http://app.transifex.com/mc/mc/language/it/)\n"
@@ -56,6 +56,9 @@ msgstr "Non posso creare il gruppo \"%s\" per gli eventi!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Non posso creare l'evento \"%s\"!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -794,10 +797,10 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[questa_dir] [dir_altro_pannello]"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
@@ -868,28 +871,23 @@ msgstr "Cerca"
 msgid "Search is disabled"
 msgstr "Ricerca disabilitata"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary diff file"
 msgstr ""
 "Non posso creare file diff temporaneo\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 "Non posso creare il file di backup\n"
 "%s%s\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
 "Non posso creare il file fusione temporaneo\n"
 "%s"
@@ -960,18 +958,19 @@ msgstr "Opzioni"
 msgid "ButtonBar|Quit"
 msgstr "Esci"
 
-msgid "Quit"
-msgstr "Esci"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "File modificati. Salvarli all'uscita?"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 "Midnight Commander sta per essere chiuso.\n"
 "Salvare i file modificati?"
+
+msgid "Quit"
+msgstr "Esci"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -979,13 +978,15 @@ msgstr "Diff:"
 msgid "File name is empty!"
 msgstr "Il nome file è vuoto!"
 
-#, c-format
-msgid "\"%s\" is a directory"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is a directory"
 msgstr "%s  è una directory"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
 "Non posso ottenere info dal file \"%s\"\n"
@@ -1004,9 +1005,13 @@ msgstr "Caricamento: %3d%%"
 msgid "Loading..."
 msgstr "Caricamento..."
 
-#, c-format
-msgid "Cannot open %s for reading"
-msgstr "Non posso aprire %s in lettura"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
+"Non posso aprire il file \"%s\"\n"
+"%s"
 
 msgid "Load file"
 msgstr "Carica file"
@@ -1015,12 +1020,10 @@ msgstr "Carica file"
 msgid "Error reading %s"
 msgstr "Errore leggendo %s"
 
-#, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "Non posso ottenere dimensioni/permessi per %s"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr "\"%s\" non è un file normale"
 
 #, c-format
@@ -1038,8 +1041,10 @@ msgstr "Attenzione"
 msgid "Error reading from pipe: %s"
 msgstr "Errore leggendo dalla pipe: %s"
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr "Non posso aprire la pipe in lettura: %s"
 
 msgid "File has hard-links. Detach before saving?"
@@ -1052,12 +1057,11 @@ msgstr "Il file è stato modificato nel frattempo. Salvare comunque?"
 msgid "Error writing to pipe: %s"
 msgstr "Errore scrivendo sulla pipe: %s"
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "Non posso aprire la pipe in scrittura: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr "Non posso aprire il file in scrittura: %s"
 
 msgid "The file you are saving does not end with a newline."
@@ -1102,8 +1106,12 @@ msgstr "Controllo nuova linea &POSIX"
 msgid "Edit Save Mode"
 msgstr "Modifica modalità salvataggio"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "Non posso salvare: la destinazione non è un file normale"
+#, fuzzy, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr "Visualizzazione impossibile: non è un semplice file"
 
 msgid "A file already exists with this name"
 msgstr "Un file con lo stesso nome esiste già"
@@ -1162,9 +1170,9 @@ msgstr ""
 msgid "Close file"
 msgstr "Chiudi il file"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 "Midnight Commander si sta chiudendo.\n"
@@ -1605,15 +1613,13 @@ msgstr "Conferma sostituzione"
 msgid "%ld replacements made"
 msgstr "Eseguite %ld sostituzioni"
 
+#, fuzzy, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 msgid "About"
 msgstr "Informazioni"
@@ -1741,16 +1747,14 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Ricarica la sintassi corrente >"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s"
+msgstr "Non posso aprire il file %s"
+
 msgid "Load syntax file"
 msgstr "Carica file sintassi"
-
-#, c-format
-msgid ""
-"Cannot open file %s\n"
-"%s"
-msgstr ""
-"Non posso aprire il file %s\n"
-"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1781,7 +1785,8 @@ msgstr ""
 "Non è un xterm né una console Linux; \n"
 "la subshell non può essere commutata."
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr "Battere 'exit' per tornare al Midnight Commander"
 
 msgid "Set &all"
@@ -1812,26 +1817,33 @@ msgstr "Permessi (ottale): %o"
 msgid "Chown advanced command"
 msgstr "Comando chown avanzato"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
+"Cannot chmod\n"
+"%sn%s"
+msgstr ""
+"Non posso eseguire chmod su \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"Non posso eseguire chown su \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
 "Non posso eseguire chmod su \"%s\"\n"
 "%s"
 
-msgid "&Ignore"
-msgstr "&Ignora"
-
-msgid "Ignore &all"
-msgstr "Ignor&a tutto"
-
-msgid "&Retry"
-msgstr "&Riprova"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
 "%s"
 msgstr ""
 "Non posso eseguire chown su \"%s\"\n"
@@ -1848,6 +1860,20 @@ msgstr "Attivo "
 
 msgid "Stopped"
 msgstr "Sospeso "
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Non tradotto >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Ingresso / mostra codepage:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "Mai (&J)"
@@ -1926,17 +1952,6 @@ msgstr "Autosalva &configurazione"
 
 msgid "Configure options"
 msgstr "Configura opzioni"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Non tradotto >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Ingresso / mostra codepage:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -2134,10 +2149,9 @@ msgstr "&Ferma"
 msgid "Background jobs"
 msgstr "Processi in background"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
 "Non posso cambiare cartella a\n"
@@ -2231,21 +2245,29 @@ msgstr "&Canc. marc."
 msgid "Chattr command"
 msgstr "Comando chattr"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
 "Non posso chattr \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
 "Impossibile ottenere gli attributi ext2 di \" 1%s \"\n"
 "1%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr ""
+"Non posso chattr \"%s\"\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "imposta &UID all'esecuzione"
@@ -2347,13 +2369,21 @@ msgstr "Collega %s a:"
 msgid "Link"
 msgstr "Collegamento"
 
-#, c-format
-msgid "link: %s"
-msgstr "collegamento: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
+"Non posso creare il coll. simb. di dest. \"%s\"\n"
+"%s"
 
-#, c-format
-msgid "symlink: %s"
-msgstr "colleg. simb.: %s"
+#, fuzzy, c-format
+msgid ""
+"Canot create symbolic link\n"
+"%s"
+msgstr ""
+"Non posso copiare un collegamento simbolico ciclico\n"
+"\"%s\""
 
 msgid "View file"
 msgstr "Mostra file"
@@ -2375,6 +2405,12 @@ msgstr "Crea una nuova directory"
 
 msgid "Enter directory name:"
 msgstr "Inserire nome directory:"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Non posso creare la directory %s"
 
 msgid "Extension file edit"
 msgstr "Modifica file delle estensioni"
@@ -2424,12 +2460,16 @@ msgstr "Il coll. simb. \"%s\" punta a:"
 msgid "Edit symlink"
 msgstr "Modifica coll. simb."
 
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
+#, fuzzy, c-format
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr "modifica collegamento simb., impossibile rimuovere %s: %s"
 
-#, c-format
-msgid "edit symlink: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr "modifica del collegamento simb.: %s"
 
 msgid "FTP to machine"
@@ -2471,10 +2511,8 @@ msgstr "Non posso eseguire comandi su filesystem non locali"
 msgid "Parameter"
 msgstr "Parametro"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary command file"
 msgstr ""
 "Non posso creare file comandi temporaneo \n"
 "%s"
@@ -2482,23 +2520,23 @@ msgstr ""
 msgid "Pipe failed"
 msgstr "Pipe fallita"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 "C'è il file %s che è obsoleto.\n"
 "Midnight Commander ora usa il file %s.\n"
 "Copiare le proprie impostazioni dal vecchio file al nuovo."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 "Il formato del file\n"
 "%s%s\n"
@@ -2564,29 +2602,23 @@ msgstr "file/directory"
 msgid " with source mask:"
 msgstr " con maschera sorgente:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
 "Non posso fare stat su coll. fisico file sorg. \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
-msgstr ""
-"Non posso creare il coll. fisico di dest. \"%s\"\n"
-"%s"
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
 msgstr "Non posso creare il coll. fisico di dest. \"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 "Non posso leggere il coll. sorg. \"%s\"\n"
@@ -2601,9 +2633,9 @@ msgstr ""
 "\n"
 "L'opzione coll. simbolici stabili sarà disabilitata"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 "Non posso creare il coll. simb. di dest. \"%s\"\n"
@@ -2633,21 +2665,31 @@ msgstr ""
 "\"%s\"\n"
 "sono lo stesso file"
 
+msgid "&Ignore"
+msgstr "&Ignora"
+
 msgid "Ignore a&ll"
 msgstr "Ignora t&utto"
 
-#, c-format
+msgid "&Retry"
+msgstr "&Riprova"
+
+#, fuzzy, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "La directory \"%s\" non è vuota.\n"
 "Eliminarla ricorsivamente?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Processo in background:\n"
@@ -2657,17 +2699,17 @@ msgstr ""
 msgid "Non&e"
 msgstr "Nessun&o"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 "Non posso rimuovere il file \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
 "Non posso fare stat del file \"%s\"\n"
@@ -2677,108 +2719,110 @@ msgstr ""
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Non posso sovrascrivere la cartella \"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Non posso spostare il file \"%s\" in \"%s\" \n"
+"Non posso rimuovere il file \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 "Non posso cancellare la directory \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
 msgstr ""
 "Impossibile entrare nella cartella \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
-"Non posso sovrascrivere la cartella \"%s\"\n"
-"%s"
+msgstr "Non posso sovrascrivere la cartella \"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 "Non posso sovrascrivere il file \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Non posso spostare la cartella \"%s\" in \"%s\"\n"
+"Non posso cancellare la directory \"%s\"\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Non posso operare su \"..\"!"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 "Non posso fare fstat sul file sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
 "Impossibile ottenere gli attributi ext2 del file sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
 "Impossibile impostare gli attributi ext2 del file obiettivo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
 "Non posso creare il file speciale \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
 "Non posso cambiare il proprietario del file destinazione: \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
 "Non posso cambiare i permessi del file destinazione \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
 "Non posso aprire il file sorgente \"%s\"\n"
@@ -2787,49 +2831,49 @@ msgstr ""
 msgid "Reget failed, about to overwrite file"
 msgstr "Reget fallito, riscrittura file"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
 "Non posso fare fstat sul file sorgente: \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
 "Non posso creare il file destinazione \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
 "Non posso fstat sul file destinazione \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
 "Non posso preallocare lo spazio del file obiettivo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
 "Non posso leggere il file sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
 "Non posso scrivere il file destinazione \"%s\"\n"
@@ -2847,41 +2891,41 @@ msgstr "&Mantieni"
 msgid "&Continue copy"
 msgstr "&Continuare la copia"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 "Non posso chiudere il file sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
 "Non posso chiudere il file destinazione \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
 "Impossibile impostare gli attributi ext2 per il file obiettivo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
 "Non posso ottenere info sulla cartella sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
 "Impossibile ottenere gli attributi ext2 della cartella sorgente \"%s\"\n"
@@ -2903,25 +2947,27 @@ msgstr ""
 "Non posso copiare un collegamento simbolico ciclico\n"
 "\"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 "La destinazione \"%s\" deve essere una directory\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 "Non posso creare la cartella destinazione \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
 "Non posso cambiare proprietario della directory destinazione \"%s\"\n"
@@ -3250,11 +3296,9 @@ msgstr[0] "Hai %zu schermo aperto. Uscire comunque?"
 msgstr[1] "Hai %zu schermi aperti. Uscire comunque?"
 msgstr[2] "Hai %zu schermi aperti. Uscire comunque?"
 
-msgid "The Midnight Commander"
-msgstr "Il Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Vuoi veramente uscire dal Midnight Commander?"
+#, fuzzy
+msgid "Do you really want to quit?"
+msgstr "Vuoi veramente eseguirlo?"
 
 msgid "&Above"
 msgstr "Sopr&a"
@@ -3756,11 +3800,10 @@ msgstr ""
 "Pannellizza esternamente:\n"
 "%s"
 
-#, c-format
+#, fuzzy
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
 "Pannellizza esternamente:\n"
 "Fallita la lettura dati stdout processo figlio:\n"
@@ -3803,6 +3846,15 @@ msgid ""
 "%s"
 msgstr ""
 "Non posso ottenere info sulla destinazione\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"La destinazione \"%s\" deve essere una directory\n"
 "%s"
 
 #, c-format
@@ -3926,8 +3978,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Il percorso della directory home non è assoluto"
 
+#, fuzzy, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4644,8 +4697,9 @@ msgstr "Il file è stato modificato. Lo salvo uscendo?"
 msgid "&Cancel quit"
 msgstr "Annulla l'us&cita"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 "Midnight Commander si sta chiudendo.\n"
@@ -4696,10 +4750,8 @@ msgstr "NonForm"
 msgid "ButtonBar|Format"
 msgstr "Formatt"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Failed to read data from child stdout"
 msgstr ""
 "Fallita la lettura dati stdout processo figlio:\n"
 "%s"
@@ -4725,20 +4777,18 @@ msgstr ""
 msgid "View: "
 msgstr "Mostra: "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"Non posso aprire il file \"%s\"\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr "Visualizzazione impossibile: non è un semplice file"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 "Non posso aprire \"%s\" in modalità analisi\n"
@@ -4752,6 +4802,78 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non posso ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "The Midnight Commander"
+#~ msgstr "Il Midnight Commander"
+
+#~ msgid "Do you really want to quit the Midnight Commander?"
+#~ msgstr "Vuoi veramente uscire dal Midnight Commander?"
+
+#, c-format
+#~ msgid "Cannot open %s for reading"
+#~ msgstr "Non posso aprire %s in lettura"
+
+#, c-format
+#~ msgid "Cannot get size/permissions for %s"
+#~ msgstr "Non posso ottenere dimensioni/permessi per %s"
+
+#, c-format
+#~ msgid "Cannot open pipe for writing: %s"
+#~ msgstr "Non posso aprire la pipe in scrittura: %s"
+
+#~ msgid "Cannot save: destination is not a regular file"
+#~ msgstr "Non posso salvare: la destinazione non è un file normale"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot open file %s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso aprire il file %s\n"
+#~ "%s"
+
+#~ msgid "Ignore &all"
+#~ msgstr "Ignor&a tutto"
+
+#, c-format
+#~ msgid "link: %s"
+#~ msgstr "collegamento: %s"
+
+#, c-format
+#~ msgid "symlink: %s"
+#~ msgstr "colleg. simb.: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot create target hardlink \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso creare il coll. fisico di dest. \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move file \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso spostare il file \"%s\" in \"%s\" \n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot overwrite directory \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso sovrascrivere la cartella \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move directory \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso spostare la cartella \"%s\" in \"%s\"\n"
+#~ "%s"
 
 #~ msgid "Other 8 bit"
 #~ msgstr "Altre a 8 bit"

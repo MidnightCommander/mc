@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2017,2020,2025\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -53,6 +53,9 @@ msgstr "Не може да се създаде група „%s“ за съби
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Не може да се създаде събитие „%s“!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -768,10 +771,10 @@ msgstr "файл_1 файл_2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[тази_дир-я] [дир-я_на_другия_панел]"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
@@ -843,28 +846,23 @@ msgstr "Търсене"
 msgid "Search is disabled"
 msgstr "Търсенето е изключено"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary diff file"
 msgstr ""
 "Не може да се създаде временен diff файл\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 "Не може да се създаде резервен файл\n"
 "%s%s\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
 "Не може да се създаде временен обединяващ файл\n"
 "%s"
@@ -935,18 +933,19 @@ msgstr "Настройки"
 msgid "ButtonBar|Quit"
 msgstr "Изход"
 
-msgid "Quit"
-msgstr "Изход"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "Файл(ове) беше редактиран. Запис при изход?"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 "Midnight Commander се изключва.\n"
 "Записване на редактирания файл(ове)?"
+
+msgid "Quit"
+msgstr "Изход"
 
 msgid "Diff:"
 msgstr "Разлика:"
@@ -954,13 +953,15 @@ msgstr "Разлика:"
 msgid "File name is empty!"
 msgstr ""
 
-#, c-format
-msgid "\"%s\" is a directory"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is a directory"
 msgstr "„%s“ е директория"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
 "Не може да се stat-не „%s“\n"
@@ -979,9 +980,13 @@ msgstr "Зареждане: %3d%%"
 msgid "Loading..."
 msgstr "Зареждане…"
 
-#, c-format
-msgid "Cannot open %s for reading"
-msgstr "Грешка при отваряне на %s за четене"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
+"Не може да се отвори „%s“\n"
+"%s"
 
 msgid "Load file"
 msgstr "Зареждане на файл"
@@ -990,12 +995,10 @@ msgstr "Зареждане на файл"
 msgid "Error reading %s"
 msgstr "Грешка при четене на %s"
 
-#, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "Не може да се получи размера/правата за %s"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr "„%s“ не е обикновен файл"
 
 #, c-format
@@ -1013,8 +1016,10 @@ msgstr "Предупреждение"
 msgid "Error reading from pipe: %s"
 msgstr "Грешка при четене от канал: %s"
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr "Не може да се отвори канал за четене: %s"
 
 msgid "File has hard-links. Detach before saving?"
@@ -1027,12 +1032,11 @@ msgstr "Файлът е бил променен междувременно. Да
 msgid "Error writing to pipe: %s"
 msgstr "Грешка при писане към канал: %s"
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "Не може да се отвори канал за писане: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr "Не може да се отвори файл за писане: %s"
 
 msgid "The file you are saving does not end with a newline."
@@ -1077,8 +1081,12 @@ msgstr "Проверка за &POSIX нов ред"
 msgid "Edit Save Mode"
 msgstr "Редактиране Режим Запис"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "Не може да се запише: крайния файл не обикновен файл"
+#, fuzzy, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr "Не може да се разгледа: не е обикновен файл"
 
 msgid "A file already exists with this name"
 msgstr "Вече съществува файл с такова име"
@@ -1137,9 +1145,9 @@ msgstr ""
 msgid "Close file"
 msgstr "Затваряне на файл"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 "Midnight Commander се изключва.\n"
@@ -1582,15 +1590,13 @@ msgstr "Потвърждаване замяната"
 msgid "%ld replacements made"
 msgstr "направени са %ld замѐни "
 
+#, fuzzy, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
 "Удобен текстови редактор\n"
 "за Midnight Commander."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
 
 msgid "About"
 msgstr "Относно"
@@ -1718,16 +1724,14 @@ msgstr "< Автоматично >"
 msgid "< Reload Current Syntax >"
 msgstr "< Презареждане на сегашния синтаксис >"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s"
+msgstr "Файлът %s не може да бъде отворен"
+
 msgid "Load syntax file"
 msgstr "Зареждане на файл със синтаксис"
-
-#, c-format
-msgid ""
-"Cannot open file %s\n"
-"%s"
-msgstr ""
-"Не може да се отвори файл %s\n"
-"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1758,7 +1762,8 @@ msgstr ""
 "Не е xterm или конзола на Linux.\n"
 "Не може да се превключи подобвивка."
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr "Напишете „exit“, за да се върнете в Midnight Commander"
 
 msgid "Set &all"
@@ -1789,26 +1794,33 @@ msgstr "Права (8-чни): %o"
 msgid "Chown advanced command"
 msgstr "Разширена команда chown"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
+"Cannot chmod\n"
+"%sn%s"
+msgstr ""
+"Не може да се изпълни chmod „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"Не може да се изпълни chown „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
 "Не може да се изпълни chmod „%s“\n"
 "%s"
 
-msgid "&Ignore"
-msgstr "&Прескачане"
-
-msgid "Ignore &all"
-msgstr "Прескачане на &всички"
-
-msgid "&Retry"
-msgstr "&Отново"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
 "%s"
 msgstr ""
 "Не може да се изпълни chown „%s“\n"
@@ -1825,6 +1837,20 @@ msgstr "Изпълнява се"
 
 msgid "Stopped"
 msgstr "Спрян"
+
+#, fuzzy
+msgid "No translation"
+msgstr "—  < Без преобразуване >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Кодова страница:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "&Никога"
@@ -1903,17 +1929,6 @@ msgstr "Автоматично записване на настро&йки"
 
 msgid "Configure options"
 msgstr "Настройки"
-
-#, fuzzy
-msgid "No translation"
-msgstr "—  < Без преобразуване >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Кодова страница:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Тема:"
@@ -2110,12 +2125,13 @@ msgstr "&Убиване"
 msgid "Background jobs"
 msgstr "Фонови задачи"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
+"Не може да се изпълни chown върху целевата директория „%s“\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Надеждно изтриване"
@@ -2204,19 +2220,29 @@ msgstr "&Изчистване на избрано"
 msgid "Chattr command"
 msgstr "Команда chattr"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
 "Неуспешно изпълнение на chattr „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
+"Не може да се отвори архивът tar\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr ""
+"Неуспешно изпълнение на chattr „%s“\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "изпълнение с UID на &собственика"
@@ -2318,13 +2344,21 @@ msgstr "Връзка на %s към:"
 msgid "Link"
 msgstr "Връзка"
 
-#, c-format
-msgid "link: %s"
-msgstr "връзка: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
+"Не може да се създаде целевата символна връзка „%s“\n"
+"%s"
 
-#, c-format
-msgid "symlink: %s"
-msgstr "символна връзка: %s"
+#, fuzzy, c-format
+msgid ""
+"Canot create symbolic link\n"
+"%s"
+msgstr ""
+"Не може да се копира зациклената символна връзка\n"
+"„%s“"
 
 msgid "View file"
 msgstr "Преглед на файл"
@@ -2346,6 +2380,12 @@ msgstr "Нова директория"
 
 msgid "Enter directory name:"
 msgstr "Име на директория:"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Не може да се създаде директория „%s“"
 
 msgid "Extension file edit"
 msgstr "Редактиране на файл с разширения"
@@ -2395,12 +2435,16 @@ msgstr "Символната връзка „%s“ сочи към:"
 msgid "Edit symlink"
 msgstr "Редактиране на символна връзка"
 
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
+#, fuzzy, c-format
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr "редактиране на символна връзка, не може да се изтрие %s: %s"
 
-#, c-format
-msgid "edit symlink: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr "редактиране на символна връзка: %s"
 
 msgid "FTP to machine"
@@ -2442,10 +2486,8 @@ msgstr "Не може да се изпълняват команди на нел�
 msgid "Parameter"
 msgstr "Параметър"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary command file"
 msgstr ""
 "Не може да се създаде временен команден файл\n"
 "%s"
@@ -2456,7 +2498,7 @@ msgstr "Неуспешен канал"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2466,7 +2508,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2521,29 +2563,23 @@ msgstr "файла/директории"
 msgid " with source mask:"
 msgstr " с маска:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
 "Не може да се изпълни stat върху източника на твърдата връзка „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
-msgstr ""
-"Не може да се създаде целевата твърда връзка „%s“\n"
-"%s"
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
 msgstr "Не може да се създаде целевата твърда връзка „%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 "Не може да се прочете изходната връзка „%s“\n"
@@ -2559,9 +2595,9 @@ msgstr ""
 "\n"
 "Опцията за стабилни символни връзки ще бъде деактивирана"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 "Не може да се създаде целевата символна връзка „%s“\n"
@@ -2591,21 +2627,31 @@ msgstr ""
 "„%s“\n"
 "са един и същи файл"
 
+msgid "&Ignore"
+msgstr "&Прескачане"
+
 msgid "Ignore a&ll"
 msgstr ""
 
-#, c-format
+msgid "&Retry"
+msgstr "&Отново"
+
+#, fuzzy, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Непразна директория „%s“.\n"
 "Рекурсивно изтриване?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Фонов процес:\n"
@@ -2615,17 +2661,17 @@ msgstr ""
 msgid "Non&e"
 msgstr "Н&яма"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 "Не може да се изтрие файла „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
 "Не може да се изпълни stat върху изходния файл „%s“\n"
@@ -2635,102 +2681,108 @@ msgstr ""
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Не може да се презапише директорията „%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Не може да се премести файл „%s“ в „%s“\n"
+"Не може да се изтрие файла „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 "Не може да се изтрие директорията „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
-msgstr ""
+msgstr "Не може да се презапише директорията „%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
-"Не може да се презапише директорията „%s“\n"
-"%s"
+msgstr "Не може да се презапише директорията „%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 "Не може да се презапише файлът „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Не може да се премести директорията „%s“ в „%s“\n"
+"Не може да се изтрие директорията „%s“\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Не може да работи върху „..“!"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 "Не може да се изпълни stat върху изходния файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
+"Не може да се изпълни stat върху източника на твърдата връзка „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
+"Не може да се изпълни fstat върху целевия файл „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
 "Не може да се създаде специалният файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
 "Не може да се изпълни chown върху целевия файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
 "Не може да се изпълни chmod върху целевия файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
 "Не може да се отвори изходният файл \"%s\"\n"
@@ -2739,49 +2791,49 @@ msgstr ""
 msgid "Reget failed, about to overwrite file"
 msgstr "Неуспешно повторно изтегляне, файлът ще бъде презаписан"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
 "Не може да се изпълни fstat върху изходния файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
 "Не може да се създаде целевият файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
 "Не може да се изпълни fstat върху целевия файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
 "Не може да се запази пространство за целевия файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
 "Не може да се прочете изходният файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
 "Не може да се пише в целевия файл „%s“\n"
@@ -2799,41 +2851,45 @@ msgstr "&Запазване"
 msgid "&Continue copy"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 "Не може да се затвори изходният файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
 "Не може да се затвори целевият файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
+"Не може да се запази пространство за целевия файл „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
 "Не може да се изпълне stat върху изходната директория „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
+"Не може да се изпълне stat върху изходната директория „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2851,25 +2907,27 @@ msgstr ""
 "Не може да се копира зациклената символна връзка\n"
 "„%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 "Целта „%s“ трябва да е директория\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 "Не може да се създаде целева директория „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
 "Не може да се изпълни chown върху целевата директория „%s“\n"
@@ -3197,11 +3255,9 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Имате %zu отворен прозорец. Изход все пак?"
 msgstr[1] "Имате %zu отворени прозорци. Изход все пак?"
 
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Наистина ли искате да напуснете Midnight Commander?"
+#, fuzzy
+msgid "Do you really want to quit?"
+msgstr "Наистина ли искате да изпълните това?"
 
 msgid "&Above"
 msgstr "От&горе"
@@ -3700,11 +3756,10 @@ msgstr ""
 "Външен панел:\n"
 "%s"
 
-#, c-format
+#, fuzzy
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
 "Външен панел:\n"
 "неуспешно четене от стандартния изход на процес:\n"
@@ -3747,6 +3802,15 @@ msgid ""
 "%s"
 msgstr ""
 "Не може да се изпълни stat върху целта\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Целта „%s“ трябва да е директория\n"
 "%s"
 
 #, c-format
@@ -3868,8 +3932,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Пътят до домашната папка не е абсолютен"
 
+#, fuzzy, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4579,8 +4644,9 @@ msgstr "Файлът е променен. Да се запази ли при и�
 msgid "&Cancel quit"
 msgstr "&Отказ от изход"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 "Изход на Midnight Commander.\n"
@@ -4631,10 +4697,8 @@ msgstr "Без форматиране"
 msgid "ButtonBar|Format"
 msgstr "Форматиране"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Failed to read data from child stdout"
 msgstr ""
 "Неуспех при четене на информация от изхода на процес:\n"
 "%s"
@@ -4660,20 +4724,18 @@ msgstr ""
 msgid "View: "
 msgstr "Преглед:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"Не може да се отвори „%s“\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr "Не може да се разгледа: не е обикновен файл"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 "Не може да се отвори „%s“ в режим с анализ\n"
@@ -4687,6 +4749,78 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+
+#~ msgid "The Midnight Commander"
+#~ msgstr "Midnight Commander"
+
+#~ msgid "Do you really want to quit the Midnight Commander?"
+#~ msgstr "Наистина ли искате да напуснете Midnight Commander?"
+
+#, c-format
+#~ msgid "Cannot open %s for reading"
+#~ msgstr "Грешка при отваряне на %s за четене"
+
+#, c-format
+#~ msgid "Cannot get size/permissions for %s"
+#~ msgstr "Не може да се получи размера/правата за %s"
+
+#, c-format
+#~ msgid "Cannot open pipe for writing: %s"
+#~ msgstr "Не може да се отвори канал за писане: %s"
+
+#~ msgid "Cannot save: destination is not a regular file"
+#~ msgstr "Не може да се запише: крайния файл не обикновен файл"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot open file %s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се отвори файл %s\n"
+#~ "%s"
+
+#~ msgid "Ignore &all"
+#~ msgstr "Прескачане на &всички"
+
+#, c-format
+#~ msgid "link: %s"
+#~ msgstr "връзка: %s"
+
+#, c-format
+#~ msgid "symlink: %s"
+#~ msgstr "символна връзка: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot create target hardlink \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се създаде целевата твърда връзка „%s“\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move file \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се премести файл „%s“ в „%s“\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot overwrite directory \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се презапише директорията „%s“\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move directory \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се премести директорията „%s“ в „%s“\n"
+#~ "%s"
 
 #~ msgid "Other 8 bit"
 #~ msgstr "Други 8 бита"

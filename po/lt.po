@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -56,6 +56,9 @@ msgstr "Nepavyko sukurti grupės '%s' įvykiams!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Nepavyko sukurti įvykio '%s'!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -756,7 +759,7 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 
@@ -822,28 +825,23 @@ msgstr "Paieška"
 msgid "Search is disabled"
 msgstr "Paieška yra išjungta"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary diff file"
 msgstr ""
 "Nepavyko sukurti laikino diff failo\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 "Nepavyko sukurti atsarginės kopijos\n"
 "%s%s\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
 "Napavyko sukurti sujungimo laikinojo failo\n"
 "%s"
@@ -914,18 +912,19 @@ msgstr "ButtonBar|Parinktys"
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|Išeit"
 
-msgid "Quit"
-msgstr "Išeiti"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "Failas(-ai) buvo pakeisti. Ar išsaugoti pakeitimus?"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 "Midnight Commander yra išjungiamas.\n"
 "Ar išsaugoti pakeitimus faile/failuose?"
+
+msgid "Quit"
+msgstr "Išeiti"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -933,15 +932,19 @@ msgstr "Diff:"
 msgid "File name is empty!"
 msgstr ""
 
-#, c-format
-msgid "\"%s\" is a directory"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is a directory"
 msgstr "\"%s\" yra aplankas"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
 msgid "Diff viewer: invalid mode"
 msgstr "Diff peržiūra: neteisingas režimas"
@@ -956,9 +959,13 @@ msgstr ""
 msgid "Loading..."
 msgstr "Įkeliama..."
 
-#, c-format
-msgid "Cannot open %s for reading"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
 msgstr ""
+"Nepavyksta atverti „%s“\n"
+"%s"
 
 msgid "Load file"
 msgstr "Įkelti failą"
@@ -967,12 +974,10 @@ msgstr "Įkelti failą"
 msgid "Error reading %s"
 msgstr ""
 
-#, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr ""
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr "\"%s\" yra neįprastas failas"
 
 #, c-format
@@ -990,9 +995,11 @@ msgstr "Įspėjimas"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr ""
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
+msgstr "Failas negali būti atvertas rašymui: %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1004,12 +1011,11 @@ msgstr "Tuo tarpu failas buvo pakeistas. Vis tiek jį išsaugoti?"
 msgid "Error writing to pipe: %s"
 msgstr ""
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr "Failas negali būti atvertas rašymui: %s"
 
 msgid "The file you are saving does not end with a newline."
@@ -1054,8 +1060,12 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "Neįmanoma išsaugoti: paskirtis nėra įprastas failas"
+#, fuzzy, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr "Peržiūra negalima: neįprastas failas"
 
 msgid "A file already exists with this name"
 msgstr "Failas su tokiu vardu jau egzistuoja"
@@ -1114,9 +1124,9 @@ msgstr ""
 msgid "Close file"
 msgstr "Uždaryti failą"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 "Midnight Commander yra išjungiamas.\n"
@@ -1556,15 +1566,13 @@ msgstr "Patvirtinti pakeitimą"
 msgid "%ld replacements made"
 msgstr ""
 
+#, fuzzy, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
 "Lengvas vartoti teksto redaktorius\n"
 "sukurtas Midnight Commander aplinkai."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
 
 msgid "About"
 msgstr "Apie"
@@ -1692,16 +1700,14 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Įkelti esamą sintaksę iš naujo >"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s"
+msgstr "Nepavyko atverti failo %s"
+
 msgid "Load syntax file"
 msgstr "Įkelti sintaksės failą"
-
-#, c-format
-msgid ""
-"Cannot open file %s\n"
-"%s"
-msgstr ""
-"Napavyko atverti failo %s\n"
-"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1726,7 +1732,8 @@ msgid ""
 "the subshell cannot be toggled."
 msgstr ""
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr ""
 
 msgid "Set &all"
@@ -1757,26 +1764,37 @@ msgstr ""
 msgid "Chown advanced command"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
+"Cannot chmod\n"
+"%sn%s"
+msgstr ""
+"Nepavyksta atverti „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"Nepavyksta atverti „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
+"Nepavyksta atverti „%s“\n"
+"%s"
 
-msgid "&Ignore"
-msgstr "&Nepaisyti"
-
-msgid "Ignore &all"
-msgstr ""
-
-msgid "&Retry"
-msgstr "&Iš naujo"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
 "%s"
 msgstr ""
+"Nepavyksta atverti „%s“\n"
+"%s"
 
 msgid "< Default >"
 msgstr "< Numatytas >"
@@ -1789,6 +1807,20 @@ msgstr ""
 
 msgid "Stopped"
 msgstr "Sustojo"
+
+#, fuzzy
+msgid "No translation"
+msgstr "–  < Jokio vertimo >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Įvesties / išvesties kodų lentelė:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "&Niekada"
@@ -1867,17 +1899,6 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Keisti parinktis"
-
-#, fuzzy
-msgid "No translation"
-msgstr "–  < Jokio vertimo >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Įvesties / išvesties kodų lentelė:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Išvaizda"
@@ -2074,12 +2095,13 @@ msgstr "N&užudyti"
 msgid "Background jobs"
 msgstr "Foninio režimo užduotys"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
+"Nepavyko sukurti aplanko \"%s\"\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2168,17 +2190,25 @@ msgstr "Išva&lyti pažymėtus"
 msgid "Chattr command"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
-msgstr ""
+"Cannot chattr\n"
+"%sn%s"
+msgstr "Nepavyko apdoroti:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
+"Nepavyko atverti tar archyvo\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr "Nepavyko apdoroti:"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2280,13 +2310,21 @@ msgstr "Sukurti nuorodą iš „%s“ į:"
 msgid "Link"
 msgstr "Nuoroda"
 
-#, c-format
-msgid "link: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
-msgid "symlink: %s"
-msgstr "simbolinė nuoroda: %s"
+#, fuzzy, c-format
+msgid ""
+"Canot create symbolic link\n"
+"%s"
+msgstr ""
+"Nepavyko sukurti laikino diff failo\n"
+"%s"
 
 msgid "View file"
 msgstr "Žiūrėti failą"
@@ -2308,6 +2346,12 @@ msgstr "Sukurti naują aplanką"
 
 msgid "Enter directory name:"
 msgstr "Įvesti aplanko pavadinimą:"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Nepavyko sukurti %s aplanko"
 
 msgid "Extension file edit"
 msgstr "Plėtinių failo keitimas"
@@ -2355,12 +2399,16 @@ msgstr "Simbolinė nuoroda '%s' nurodo į:"
 msgid "Edit symlink"
 msgstr "Keisti simbolinę nuorodą"
 
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
+#, fuzzy, c-format
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr "keisti simbolinę nuorodą, neina pašalinti %s: %s"
 
-#, c-format
-msgid "edit symlink: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr "keisti simbolinę nuorodą: %s"
 
 msgid "FTP to machine"
@@ -2400,11 +2448,11 @@ msgstr ""
 msgid "Parameter"
 msgstr "Parametras"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary command file"
 msgstr ""
+"Nepavyko sukurti laikino diff failo\n"
+"%s"
 
 msgid "Pipe failed"
 msgstr ""
@@ -2412,7 +2460,7 @@ msgstr ""
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2422,7 +2470,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2477,27 +2525,27 @@ msgstr "failus/aplankus"
 msgid " with source mask:"
 msgstr " naudojant šabloną:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
 msgstr ""
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot read source link \"%s\"\n"
+"Nepavyko sukurti aplanko \"%s\"\n"
 "%s"
-msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot read source link\n"
+"%s"
+msgstr "Nepavyko perskaityti aplanko turinio"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2508,11 +2556,13 @@ msgstr ""
 "\n"
 "Parinktis 'Pastovios simbolinės nuorodos' bus išjungta"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
+"Nepavyko sukurti aplanko \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2534,21 +2584,31 @@ msgid ""
 "are the same file"
 msgstr ""
 
+msgid "&Ignore"
+msgstr "&Nepaisyti"
+
 msgid "Ignore a&ll"
 msgstr ""
 
-#, c-format
+msgid "&Retry"
+msgstr "&Iš naujo"
+
+#, fuzzy, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Aplankas \"%s\" ne tuščias.\n"
 "Trinti rekursyviai?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Foninis procesas:\n"
@@ -2558,153 +2618,182 @@ msgstr ""
 msgid "Non&e"
 msgstr "&Joks"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 "Nepavyko pašalinti failo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Nepavyko perrašyti aplanko \"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Nepavyko perkelti failo \"%s\" į \"%s\"\n"
+"Nepavyko pašalinti failo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 "Nepavyko pašalinti aplanko \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
-msgstr ""
+msgstr "Nepavyko perrašyti aplanko \"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
-"Nepavyko perrašyti aplanko \"%s\"\n"
-"%s"
+msgstr "Nepavyko perrašyti aplanko \"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 "Nepavyko perrašyti failo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Nepavyko perkelti aplanko \"%s\" į \"%s\"\n"
+"Nepavyko pašalinti aplanko \"%s\"\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
+"Napavyko sukurti sujungimo laikinojo failo\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
+"Napavyko sukurti sujungimo laikinojo failo\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
+"Nepavyko sukurti atsarginės kopijos\n"
+"%s%s\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
-msgstr ""
+msgstr "Nepavyko atverti failo %s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr "Pratęsti nepavyko, failas bus perrašytas"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
+"Napavyko sukurti sujungimo laikinojo failo\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
+"Napavyko sukurti sujungimo laikinojo failo\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
+"Nepavyko įrašyti į failą %s:\n"
+"%s\n"
 
 msgid "(stalled)"
 msgstr "(sustojo)"
@@ -2718,35 +2807,43 @@ msgstr "Išlai&kyti"
 msgid "&Continue copy"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
+"Nepavyko išsaugoti failo:\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
+"Napavyko sukurti sujungimo laikinojo failo\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
-msgstr ""
+msgstr "Nepavyko sukurti %s aplanko"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
+"Nepavyko sukurti aplanko \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2762,27 +2859,31 @@ msgid ""
 "\"%s\""
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 "Paskirtis \"%s\" turi būti aplankas\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 "Nepavyko sukurti aplanko \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
+"Nepavyko sukurti aplanko \"%s\"\n"
+"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -3107,10 +3208,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-msgid "The Midnight Commander"
-msgstr ""
-
-msgid "Do you really want to quit the Midnight Commander?"
+msgid "Do you really want to quit?"
 msgstr ""
 
 msgid "&Above"
@@ -3612,11 +3710,9 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -3656,6 +3752,15 @@ msgid ""
 "%s"
 msgstr ""
 "Nepavyko pasiekti paskirties\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Paskirtis \"%s\" turi būti aplankas\n"
 "%s"
 
 #, c-format
@@ -3772,8 +3877,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Namų aplanko kelias nėra absoliutus"
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4447,8 +4553,9 @@ msgstr "Failas buvo pakeistas. Ar išsaugoti?"
 msgid "&Cancel quit"
 msgstr "&Neišeiti"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 "Midnight Commander yra išjungiamas.\n"
@@ -4499,10 +4606,7 @@ msgstr "ButtonBar|Išform."
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Formuot."
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+msgid "Failed to read data from child stdout"
 msgstr ""
 
 #, c-format
@@ -4526,22 +4630,22 @@ msgstr ""
 msgid "View: "
 msgstr "Rodymas:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"Nepavyksta atverti „%s“\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr "Peržiūra negalima: neįprastas failas"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
+"Nepavyko atverti tar archyvo\n"
+"%s"
 
 msgid "Search done"
 msgstr "Paieška baigta"
@@ -4551,6 +4655,45 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Cannot save: destination is not a regular file"
+#~ msgstr "Neįmanoma išsaugoti: paskirtis nėra įprastas failas"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot open file %s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Napavyko atverti failo %s\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "symlink: %s"
+#~ msgstr "simbolinė nuoroda: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move file \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nepavyko perkelti failo \"%s\" į \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot overwrite directory \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nepavyko perrašyti aplanko \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move directory \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nepavyko perkelti aplanko \"%s\" į \"%s\"\n"
+#~ "%s"
 
 #~ msgid "Other 8 bit"
 #~ msgstr "Kita 8 bitų"

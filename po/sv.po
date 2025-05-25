@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -59,6 +59,9 @@ msgstr "Kan inte skapa gruppen '%s' för händelser!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Kan inte skapa händelsen '%s'!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -770,10 +773,10 @@ msgstr "fil1 fil2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[denna_katalog] [andra_panelens_katalog]"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
@@ -844,28 +847,23 @@ msgstr "Sök"
 msgid "Search is disabled"
 msgstr "Sök är inaktiverat"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary diff file"
 msgstr ""
 "Temporär diff-fil kunde inte skapas\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 "Backupfil kunde inte skapas\n"
 "%s%s\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
 "Temporär sammanflätningsfil kunde inte skapas\n"
 "%s"
@@ -936,18 +934,19 @@ msgstr "ButtonBar|Inställ"
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|Avslut"
 
-msgid "Quit"
-msgstr "Avsluta"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "Filer har ändrats. Spara vid nedstängning?"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 "Midnight Commander är på väg att stängas ned.\n"
 "Spara ändrade filer?"
+
+msgid "Quit"
+msgstr "Avsluta"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -955,13 +954,15 @@ msgstr "Diff:"
 msgid "File name is empty!"
 msgstr ""
 
-#, c-format
-msgid "\"%s\" is a directory"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is a directory"
 msgstr "\"%s\" är en katalog"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
 "'stat' misslyckades på \"%s\"\n"
@@ -980,9 +981,13 @@ msgstr "Laddar %3d%%"
 msgid "Loading..."
 msgstr "Laddar..."
 
-#, c-format
-msgid "Cannot open %s for reading"
-msgstr "Kan inte öppna %s för läsning"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
+"Öppning av \"%s\" misslyckades\n"
+"%s"
 
 msgid "Load file"
 msgstr "Ladda fil"
@@ -991,12 +996,10 @@ msgstr "Ladda fil"
 msgid "Error reading %s"
 msgstr "Fel vid läsning av %s"
 
-#, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "Kan inte läsa storlek/behörigheter för %s"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr "\"%s\" är inte en känd filtyp"
 
 #, c-format
@@ -1014,8 +1017,10 @@ msgstr "Varning"
 msgid "Error reading from pipe: %s"
 msgstr "Fel vid lädning från tunnel: %s"
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr "Tunnel kunde inte öppnas för läsning: %s"
 
 msgid "File has hard-links. Detach before saving?"
@@ -1028,12 +1033,11 @@ msgstr "Filen har modifierats av något annat under tiden. Spara ändå?"
 msgid "Error writing to pipe: %s"
 msgstr "Fel vid skrivning till tunnel: %s"
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "Tunneln kunde inte öppnas för skrivning: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr "Filen kunde inte öppnas för skrivning: %s"
 
 msgid "The file you are saving does not end with a newline."
@@ -1078,8 +1082,12 @@ msgstr "Kontrollera &POSIX-radslut"
 msgid "Edit Save Mode"
 msgstr "Editera sätt att spara"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "Kan inte spara: målfilen är inte en vanlig fil"
+#, fuzzy, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr "Kan inte visas: inte en vanlig fil"
 
 msgid "A file already exists with this name"
 msgstr "En fil med detta namn finns redan"
@@ -1138,9 +1146,9 @@ msgstr ""
 msgid "Close file"
 msgstr "Stäng fil"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 "Midnight Commander är på väg att stängas ned.\n"
@@ -1581,15 +1589,13 @@ msgstr "Bekräfta ersätt"
 msgid "%ld replacements made"
 msgstr "%ld ersättningar gjordes"
 
+#, fuzzy, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
 "En användarvänlig texteditor\n"
 "skriven för Midnight Commander."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
 
 msgid "About"
 msgstr "Om"
@@ -1717,16 +1723,14 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Ladda om nuvarande >"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s"
+msgstr "Öppning av filen %s misslyckades"
+
 msgid "Load syntax file"
 msgstr "Ladda syntax-fil"
-
-#, c-format
-msgid ""
-"Cannot open file %s\n"
-"%s"
-msgstr ""
-"Filen %s kunde inte öppnas\n"
-"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1757,7 +1761,8 @@ msgstr ""
 "Inte en xterm eller linux konsol;\n"
 "Subshell kan inte växlas."
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr "Skriv 'exit' för att återvända till Midnight Commander"
 
 msgid "Set &all"
@@ -1788,26 +1793,33 @@ msgstr "Rättigheter (oktalt): 1%o"
 msgid "Chown advanced command"
 msgstr "Avancerat chown-kommando"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
+"Cannot chmod\n"
+"%sn%s"
+msgstr ""
+"Chmod \"%s\" misslyckades\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"Chown \"%s\" misslyckades\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
 "Chmod \"%s\" misslyckades\n"
 "%s"
 
-msgid "&Ignore"
-msgstr "I&gnorera"
-
-msgid "Ignore &all"
-msgstr "Ignorera a&lla"
-
-msgid "&Retry"
-msgstr "Försök &igen"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
 "%s"
 msgstr ""
 "Chown \"%s\" misslyckades\n"
@@ -1824,6 +1836,20 @@ msgstr "Kör"
 
 msgid "Stopped"
 msgstr "Stannad"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ingen översättning >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Teckenöversättning för inmatning/visning:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "Al&drig"
@@ -1902,17 +1928,6 @@ msgstr "A&utospara inställningar"
 
 msgid "Configure options"
 msgstr "Inställningar"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Ingen översättning >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Teckenöversättning för inmatning/visning:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Tema:"
@@ -2109,12 +2124,13 @@ msgstr "&Döda"
 msgid "Background jobs"
 msgstr "Bakgrundsjobb"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
+"Chown på målkatalogen \"%s\" misslyckades\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "säker radering"
@@ -2203,17 +2219,27 @@ msgstr "N&ollställ markerade"
 msgid "Chattr command"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
+"'stat' misslyckades på \"%s\"\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
+"Kan inte öppna tarfilen\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr "Kunde inte tolka:"
 
 msgid "set &user ID on execution"
 msgstr "sätt användar-I&D vid exekvering"
@@ -2315,13 +2341,21 @@ msgstr "Länka %s till:"
 msgid "Link"
 msgstr "Länk"
 
-#, c-format
-msgid "link: %s"
-msgstr "länk: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
+"Skapandet av mål-symlänken \"%s\" misslyckades\n"
+"%s"
 
-#, c-format
-msgid "symlink: %s"
-msgstr "symlänk: %s"
+#, fuzzy, c-format
+msgid ""
+"Canot create symbolic link\n"
+"%s"
+msgstr ""
+"Cyklisk symboliskt länk kan inte kopieras\n"
+"\"%s\""
 
 msgid "View file"
 msgstr "Visa fil"
@@ -2343,6 +2377,12 @@ msgstr "Skapa en ny katalog"
 
 msgid "Enter directory name:"
 msgstr "Ange katalognamn:"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Kan inte skapa katalogen %s"
 
 msgid "Extension file edit"
 msgstr "Redigera utökningsfilen"
@@ -2392,12 +2432,16 @@ msgstr "Symlänk '%s' pekar på:"
 msgid "Edit symlink"
 msgstr "Redigera symlänk"
 
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
+#, fuzzy, c-format
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr "redigera symlänk: %s kunde inte tas bort: %s"
 
-#, c-format
-msgid "edit symlink: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr "redigera symlänk: %s"
 
 msgid "FTP to machine"
@@ -2439,10 +2483,8 @@ msgstr "Kommandon kan inte exekveras på ickelokala filsystem"
 msgid "Parameter"
 msgstr "Parameter"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary command file"
 msgstr ""
 "Skapandet av en temporär kommandofil misslyckades\n"
 "%s"
@@ -2453,7 +2495,7 @@ msgstr "Tunnel misslyckades"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2463,7 +2505,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2518,29 +2560,23 @@ msgstr "filer/kataloger"
 msgid " with source mask:"
 msgstr " med källfilter:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
 "Kan inte hämta information om källfil för hårdlänk ”%s”\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
-msgstr ""
-"Kan inte skapa mål för hårdlänk ”%s”\n"
-"%s"
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
 msgstr "Kan inte skapa mål för hårdlänk ”%s”"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 "Källänken \"%s\" kunde inte läsas\n"
@@ -2555,9 +2591,9 @@ msgstr ""
 "\n"
 "Inställningen 'stabila symlänkar' kommer att slås av"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 "Skapandet av mål-symlänken \"%s\" misslyckades\n"
@@ -2587,21 +2623,31 @@ msgstr ""
 "\"%s\"\n"
 "är samma fil"
 
+msgid "&Ignore"
+msgstr "I&gnorera"
+
 msgid "Ignore a&ll"
 msgstr ""
 
-#, c-format
+msgid "&Retry"
+msgstr "Försök &igen"
+
+#, fuzzy, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Katalogen \"%s\" är inte tom.\n"
 "Ta bort den rekursivt?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Bakgrundsprocess:\n"
@@ -2611,17 +2657,17 @@ msgstr ""
 msgid "Non&e"
 msgstr "&Ingen"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 "Borttagning av filen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
 "Stat misslyckades på filen \"%s\"\n"
@@ -2631,102 +2677,108 @@ msgstr ""
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Katalogen \"%s\" kan inte skrivas över"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Att flytta filen \"%s\" to \"%s\" misslyckades\n"
+"Borttagning av filen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 "Borttagning av katalogen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
-msgstr ""
+msgstr "Katalogen \"%s\" kan inte skrivas över"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
-"Katalogen \"%s\" kan inte skrivas över\n"
-"%s"
+msgstr "Katalogen \"%s\" kan inte skrivas över"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 "Att skriva över filen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Att flytta katalogen \"%s\" till \"%s\" misslyckades\n"
+"Borttagning av katalogen \"%s\" misslyckades\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Kan inte använda \"..\"!"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 "Stat på källfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
+"Kan inte hämta information om källfil för hårdlänk ”%s”\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
+"Fstat på målfilen \"%s\" misslyckades\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
 "Skapandet av specialfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
 "Chown på målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
 "Chmod på målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
 "Öppning av källfilen \"%s\" misslyckades\n"
@@ -2735,49 +2787,49 @@ msgstr ""
 msgid "Reget failed, about to overwrite file"
 msgstr "Hämta om misslyckades. Skriver över filen."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
 "Fstat på källfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
 "Att skapa målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
 "Fstat på målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
 "Förallokering av utrymme för målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
 "Läsning av källfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
 "Skrivning av målfilen \"%s\" misslyckades\n"
@@ -2795,41 +2847,45 @@ msgstr "&Behåll"
 msgid "&Continue copy"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 "Stängning av källfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
 "Stängning av målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
+"Förallokering av utrymme för målfilen \"%s\" misslyckades\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
 "Stat på källkatalogen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
+"Stat på källkatalogen \"%s\" misslyckades\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2847,25 +2903,27 @@ msgstr ""
 "Cyklisk symboliskt länk kan inte kopieras\n"
 "\"%s\""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 "Målet \"%s\"  måste vara en katalog\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 "Skapandet av målkatalogen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
 "Chown på målkatalogen \"%s\" misslyckades\n"
@@ -3193,11 +3251,9 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Du har %zu öppnad skärm. Avsluta ändå?"
 msgstr[1] "Du har %zu öppnade skärmar. Avsluta ändå?"
 
-msgid "The Midnight Commander"
-msgstr "The Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Vill du verkligen avsluta Midnight Commander?"
+#, fuzzy
+msgid "Do you really want to quit?"
+msgstr "Vill du verkligen exekvera?"
 
 msgid "&Above"
 msgstr "&Över"
@@ -3694,12 +3750,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
+"Läsning av data från barn-stdout misslyckades:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Extern panelisering kan inte köras på en icke-lokal katalog"
@@ -3738,6 +3795,15 @@ msgid ""
 "%s"
 msgstr ""
 "Stat på målet misslyckades\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Målet \"%s\"  måste vara en katalog\n"
 "%s"
 
 #, c-format
@@ -3859,8 +3925,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Hemkatalogsökvägen är inte absolut"
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4543,8 +4610,9 @@ msgstr "Filen har ändrats. Spara vid nedstängning?"
 msgid "&Cancel quit"
 msgstr "&Avbryt nedstängning"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 "Midnight Commander stängs ner.\n"
@@ -4595,10 +4663,8 @@ msgstr "ButtonBar|Oform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Failed to read data from child stdout"
 msgstr ""
 "Läsning av data från barn-stdout misslyckades:\n"
 "%s"
@@ -4624,20 +4690,18 @@ msgstr ""
 msgid "View: "
 msgstr "Visa:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"Öppning av \"%s\" misslyckades\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr "Kan inte visas: inte en vanlig fil"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 "Öppna \"%s\" i tolkningsläge misslyckades\n"
@@ -4651,6 +4715,78 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "The Midnight Commander"
+#~ msgstr "The Midnight Commander"
+
+#~ msgid "Do you really want to quit the Midnight Commander?"
+#~ msgstr "Vill du verkligen avsluta Midnight Commander?"
+
+#, c-format
+#~ msgid "Cannot open %s for reading"
+#~ msgstr "Kan inte öppna %s för läsning"
+
+#, c-format
+#~ msgid "Cannot get size/permissions for %s"
+#~ msgstr "Kan inte läsa storlek/behörigheter för %s"
+
+#, c-format
+#~ msgid "Cannot open pipe for writing: %s"
+#~ msgstr "Tunneln kunde inte öppnas för skrivning: %s"
+
+#~ msgid "Cannot save: destination is not a regular file"
+#~ msgstr "Kan inte spara: målfilen är inte en vanlig fil"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot open file %s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Filen %s kunde inte öppnas\n"
+#~ "%s"
+
+#~ msgid "Ignore &all"
+#~ msgstr "Ignorera a&lla"
+
+#, c-format
+#~ msgid "link: %s"
+#~ msgstr "länk: %s"
+
+#, c-format
+#~ msgid "symlink: %s"
+#~ msgstr "symlänk: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot create target hardlink \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kan inte skapa mål för hårdlänk ”%s”\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move file \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Att flytta filen \"%s\" to \"%s\" misslyckades\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot overwrite directory \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Katalogen \"%s\" kan inte skrivas över\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move directory \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Att flytta katalogen \"%s\" till \"%s\" misslyckades\n"
+#~ "%s"
 
 #~ msgid "Other 8 bit"
 #~ msgstr "Annan 8-bitars"

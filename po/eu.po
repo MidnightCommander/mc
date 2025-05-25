@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
@@ -50,6 +50,9 @@ msgstr "Ezin '%s' taldea gertaeratarako sortu!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Ezin '%s' gertaera sortu!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -759,10 +762,10 @@ msgstr "file1 file2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[dir_hau] [beste_panel_dir]"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
@@ -833,28 +836,23 @@ msgstr "Bilatu"
 msgid "Search is disabled"
 msgstr "Bilaketa ezgaituta dago"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary diff file"
 msgstr ""
 "Aldiuneko diff fitxategia ezin sortu\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 "Babeskopia fitxategia ezin sortu\n"
 "%s%s\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
 "Aldiuneko fitxategi bateratua ezin sortu\n"
 "%s"
@@ -925,18 +923,19 @@ msgstr "Aukerak"
 msgid "ButtonBar|Quit"
 msgstr "Irten"
 
-msgid "Quit"
-msgstr "Irten"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "Fitxategia(k) aldatu d(ir)a. Gorde irteterakoan?"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 "Midnight Commander itzaltzen ari da.\n"
 "Gorde aldatutako fitxategia(k)?"
+
+msgid "Quit"
+msgstr "Irten"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -944,13 +943,15 @@ msgstr "Diff:"
 msgid "File name is empty!"
 msgstr ""
 
-#, c-format
-msgid "\"%s\" is a directory"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is a directory"
 msgstr "\"%s\" direktorio bat da"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
 "\"%s\"-ren egoera (\"stat\") ezin lortu\n"
@@ -969,9 +970,13 @@ msgstr "Zamatzen: %3d%%"
 msgid "Loading..."
 msgstr "Zamatzen..."
 
-#, c-format
-msgid "Cannot open %s for reading"
-msgstr "%s irakurtzeko ezin ireki"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
+"\"%s\" ezin ireki\n"
+"%s"
 
 msgid "Load file"
 msgstr "Zamatu fitxategia"
@@ -980,12 +985,10 @@ msgstr "Zamatu fitxategia"
 msgid "Error reading %s"
 msgstr "Akatsa %s irakurtzerakoan"
 
-#, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "%s-ren neurria/baimenak ezin eskuratu"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr "\"%s\" ez da fitxategi arrunta"
 
 #, c-format
@@ -1003,8 +1006,10 @@ msgstr "Abisua"
 msgid "Error reading from pipe: %s"
 msgstr "Akatsa hoditik irakurtzerakoan: %s"
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr "Hodia irakurtzeko ezin ireki: %s"
 
 msgid "File has hard-links. Detach before saving?"
@@ -1017,12 +1022,11 @@ msgstr "Fitxategia bitartean aldatu egin da. Gorde hala ere?"
 msgid "Error writing to pipe: %s"
 msgstr "Akatsa hodira idazterakoan: %s"
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "Hodia idazteko ezin ireki: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr "Fitxategia idazteko ezin ireki: %s"
 
 msgid "The file you are saving does not end with a newline."
@@ -1067,8 +1071,12 @@ msgstr "Egiaztatu &POSIX lerro berria"
 msgid "Edit Save Mode"
 msgstr "Editatu gordetzeko modua"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "Ezin da gorde: helburua ez da ohiko fitxategi bat"
+#, fuzzy, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr "Ezin ikusi: ez da fitxategi arrunta"
 
 msgid "A file already exists with this name"
 msgstr "Fitxategi bat dago izen hori duena"
@@ -1127,9 +1135,9 @@ msgstr ""
 msgid "Close file"
 msgstr "Itxi fitxategia"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 "Midnight Commander itzaltzen ari da.\n"
@@ -1570,15 +1578,13 @@ msgstr "Berretsi ordezkapena"
 msgid "%ld replacements made"
 msgstr "%ld ordezkapen egin dira"
 
+#, fuzzy, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
 
 msgid "About"
 msgstr "Honi buruz"
@@ -1706,16 +1712,14 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Birzamatu uneko sintaxia >"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s"
+msgstr "%s fitxategia ezin ireki"
+
 msgid "Load syntax file"
 msgstr "Zamatu sintaxi fitxategia"
-
-#, c-format
-msgid ""
-"Cannot open file %s\n"
-"%s"
-msgstr ""
-"%s fitxategia ezin ireki\n"
-"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1744,7 +1748,8 @@ msgid ""
 "the subshell cannot be toggled."
 msgstr ""
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr "Tekleatu «exit» Midnight Commanderrera itzultzeko"
 
 msgid "Set &all"
@@ -1775,26 +1780,33 @@ msgstr ""
 msgid "Chown advanced command"
 msgstr "Chown komando aurreratua"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
+"Cannot chmod\n"
+"%sn%s"
+msgstr ""
+"\"%s\"-ren baimenak ezin aldatu (\"chmod\")\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"\"%s\"-ren jabea ezin aldatu (\"chown\")\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
 "\"%s\"-ren baimenak ezin aldatu (\"chmod\")\n"
 "%s"
 
-msgid "&Ignore"
-msgstr "&Jaromonik ez"
-
-msgid "Ignore &all"
-msgstr "Jaramonik ez &guztiari"
-
-msgid "&Retry"
-msgstr "&Saiatu berriz"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
 "%s"
 msgstr ""
 "\"%s\"-ren jabea ezin aldatu (\"chown\")\n"
@@ -1811,6 +1823,20 @@ msgstr "Martxan"
 
 msgid "Stopped"
 msgstr "Geldituta"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ez dago itzulpenik >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Sartu / bistaratu kode-orrialdea:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "&Inoiz ere ez"
@@ -1889,17 +1915,6 @@ msgstr "A&uto gorde ezarpena"
 
 msgid "Configure options"
 msgstr "Konfiguratu aukerak"
-
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Ez dago itzulpenik >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Sartu / bistaratu kode-orrialdea:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Azala:"
@@ -2098,12 +2113,13 @@ msgstr "&Hil"
 msgid "Background jobs"
 msgstr "Hondoko lanak"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
+"Ezin da aldatu \"%s\" helburu direktorioaren jabea (chown)\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2192,17 +2208,27 @@ msgstr "&Garbitu markatutakoa"
 msgid "Chattr command"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
+"\"%s\"-ren egoera (\"stat\") ezin lortu\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
+"tar artxiboa ezin ireki\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr "Azterketa sintaktikoa ezin da egin:"
 
 msgid "set &user ID on execution"
 msgstr "ezarri &erabiltzaile ID exekutatzean"
@@ -2304,13 +2330,21 @@ msgstr "Estekatu %s hona:"
 msgid "Link"
 msgstr "Esteka"
 
-#, c-format
-msgid "link: %s"
-msgstr "esteka: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
+"Ezin da sortu \"%s\" helburu esteka sinbolikoa\n"
+"%s"
 
-#, c-format
-msgid "symlink: %s"
-msgstr "esteka sinbolikoa: %s"
+#, fuzzy, c-format
+msgid ""
+"Canot create symbolic link\n"
+"%s"
+msgstr ""
+"\"%s\"\n"
+"esteka sinboliko ziklikoa ezin kopiatu"
 
 msgid "View file"
 msgstr "Ikusi fitxategia"
@@ -2332,6 +2366,12 @@ msgstr "Sortu direktorio berria"
 
 msgid "Enter directory name:"
 msgstr "Sartu direktorio izena:"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "%s direktorioa ezin sortu"
 
 msgid "Extension file edit"
 msgstr "Editatu luzapen fitxategia"
@@ -2381,12 +2421,16 @@ msgstr "'%s' esteka sinbolikoak erakusten du:"
 msgid "Edit symlink"
 msgstr "Editatu esteka sinbolikoa"
 
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
+#, fuzzy, c-format
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr "editatu esteka sinbolikoa, ezin da %s kendu: %s"
 
-#, c-format
-msgid "edit symlink: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr "editatu esteka sinbolikoa: %s"
 
 msgid "FTP to machine"
@@ -2428,10 +2472,8 @@ msgstr "Komandoak ezin exekutatu bertakoa ez den fitxategi-sistema batean"
 msgid "Parameter"
 msgstr "Parametroa"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary command file"
 msgstr ""
 "%s\n"
 "aldiuneko komando fitxategia ezin sortu"
@@ -2442,7 +2484,7 @@ msgstr "Hodiak huts egin du"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2452,7 +2494,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2507,30 +2549,24 @@ msgstr "fitxategiak/direktorioak"
 msgid " with source mask:"
 msgstr " iturburu maskararekin:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
 "Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
 "\\n\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
-msgstr ""
-"Ezin da sortu iturburuaren \"%s\" esteka sinbolikoa\\n\n"
-"%s"
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
 msgstr "Ezin da sortu iturburuaren \"%s\" esteka sinbolikoa"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 "Ezin da irakurri \"%s\" iturburu esteka\\n\n"
@@ -2546,9 +2582,9 @@ msgstr ""
 "\n"
 "Esteka-sinboliko egonkorrak aukera desgaituko da"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 "Ezin da sortu \"%s\" helburu esteka sinbolikoa\n"
@@ -2578,21 +2614,31 @@ msgstr ""
 "\"%s\"\n"
 "fitxategi bera dira"
 
+msgid "&Ignore"
+msgstr "&Jaromonik ez"
+
 msgid "Ignore a&ll"
 msgstr ""
 
-#, c-format
+msgid "&Retry"
+msgstr "&Saiatu berriz"
+
+#, fuzzy, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "\"%s\" direktorioa ez dago hutsik.\n"
 "Errekurtsiboki ezabatu?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Hondoko prozesua:\n"
@@ -2602,17 +2648,17 @@ msgstr ""
 msgid "Non&e"
 msgstr "&Bat ere ez"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 "\"%s\" fitxategia ezin ezabatu\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
 "Ezin da lortu \"%s\" fitxategiaren egoera (stat)\n"
@@ -2622,102 +2668,109 @@ msgstr ""
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Ezin da gainidatzi \"%s\" direktorioa"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Ezin da mugitu \"%s\" fitxategia \"%s\"-ra\n"
+"\"%s\" fitxategia ezin ezabatu\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 "Ezin da ezabatu \"%s\" direktorioa\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
-msgstr ""
+msgstr "Ezin da gainidatzi \"%s\" direktorioa"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
-"Ezin da gainidatzi \"%s\" direktorioa\n"
-"%s"
+msgstr "Ezin da gainidatzi \"%s\" direktorioa"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 "Ezin da gainidatzi \"%s\" fitxategia\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Ezin da mugitu \"%s\" direktorioa \"%s\"-ra\n"
+"Ezin da ezabatu \"%s\" direktorioa\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Ezin da \"..\" erabili!"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 "Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
+"\\n\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
+"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
 "Ezin da sortu \"%s\" fitxategi berezia\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
 "Ezin da aldatu \"%s\" helburu fitxategiaren jabea (chown)\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
 "Ezin dira aldatu \"%s\" helburu fitxategiaren baimenak\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
 "Ezin da ireki \"%s\" iturburu fitxategia\n"
@@ -2726,49 +2779,49 @@ msgstr ""
 msgid "Reget failed, about to overwrite file"
 msgstr "Berreskuratzeak huts egin du, fitxategia gainidazteko zorian"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
 "Ezin da lortu \"%s\" iturburu fitxategiaren egoera (fstat)\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
 "Ezin da sortu \"%s\" helburu fitxategia\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
 "Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
 "Lekua ezin aurrealokatu \"%s\" helburu fitxategiarentzako⏎\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
 "Ezin da irakurri \"%s\" iturburu fitxategia\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
 "Ezin da idatzi \"%s\" helburu fitxategia\n"
@@ -2786,41 +2839,45 @@ msgstr "&Gorde"
 msgid "&Continue copy"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 "Ezin da itxi \"%s\" iturburu fitxategia\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
 "Ezin da itxi \"%s\" helburu fitxategia\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
+"Lekua ezin aurrealokatu \"%s\" helburu fitxategiarentzako⏎\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
 "Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
+"Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2838,25 +2895,27 @@ msgstr ""
 "\"%s\"\n"
 "esteka sinboliko ziklikoa ezin kopiatu"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 "\"%s\" helburua direktorio bat izan behar da\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 "\"%s\" helburu direktorioa ezin sortu\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
 "Ezin da aldatu \"%s\" helburu direktorioaren jabea (chown)\n"
@@ -3184,11 +3243,9 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Pantaila %zu irekita duzu. Irten hala ere?"
 msgstr[1] "%zu pantaila irekita dituzu. Irten hala ere?"
 
-msgid "The Midnight Commander"
-msgstr "Midnight Commander-ra"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Benetan utzi nahi duzu Midnight Commander-ra?"
+#, fuzzy
+msgid "Do you really want to quit?"
+msgstr "Beneta exekutatu nahi duzu?"
 
 msgid "&Above"
 msgstr "&Gainean"
@@ -3685,12 +3742,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
+"Ume stdout-etik datuak irakurtzeak huts egin du:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -3730,6 +3788,15 @@ msgid ""
 "%s"
 msgstr ""
 "Helburuaren egoera (\"stat\") ezin lortu\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"\"%s\" helburua direktorio bat izan behar da\n"
 "%s"
 
 #, c-format
@@ -3851,8 +3918,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Etxeko direktorioaren bide-izena ez da absolutua"
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4537,8 +4605,9 @@ msgstr "Fitxategia aldatu da. Gorde irtetzerakoan?"
 msgid "&Cancel quit"
 msgstr "Irteera bertan behera &utzi"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 "Midnight Commander itzaltzen ari da.\n"
@@ -4589,10 +4658,8 @@ msgstr "FormGabe"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Failed to read data from child stdout"
 msgstr ""
 "Ume stdout-etik datuak irakurtzeak huts egin du:\n"
 "%s"
@@ -4618,20 +4685,18 @@ msgstr ""
 msgid "View: "
 msgstr "Ikusi:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" ezin ireki\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr "Ezin ikusi: ez da fitxategi arrunta"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 "Ezin da ireki \"%s\" sintaxi-azterketa moduan\n"
@@ -4646,6 +4711,78 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "The Midnight Commander"
+#~ msgstr "Midnight Commander-ra"
+
+#~ msgid "Do you really want to quit the Midnight Commander?"
+#~ msgstr "Benetan utzi nahi duzu Midnight Commander-ra?"
+
+#, c-format
+#~ msgid "Cannot open %s for reading"
+#~ msgstr "%s irakurtzeko ezin ireki"
+
+#, c-format
+#~ msgid "Cannot get size/permissions for %s"
+#~ msgstr "%s-ren neurria/baimenak ezin eskuratu"
+
+#, c-format
+#~ msgid "Cannot open pipe for writing: %s"
+#~ msgstr "Hodia idazteko ezin ireki: %s"
+
+#~ msgid "Cannot save: destination is not a regular file"
+#~ msgstr "Ezin da gorde: helburua ez da ohiko fitxategi bat"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot open file %s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s fitxategia ezin ireki\n"
+#~ "%s"
+
+#~ msgid "Ignore &all"
+#~ msgstr "Jaramonik ez &guztiari"
+
+#, c-format
+#~ msgid "link: %s"
+#~ msgstr "esteka: %s"
+
+#, c-format
+#~ msgid "symlink: %s"
+#~ msgstr "esteka sinbolikoa: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot create target hardlink \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ezin da sortu iturburuaren \"%s\" esteka sinbolikoa\\n\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move file \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ezin da mugitu \"%s\" fitxategia \"%s\"-ra\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot overwrite directory \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ezin da gainidatzi \"%s\" direktorioa\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move directory \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ezin da mugitu \"%s\" direktorioa \"%s\"-ra\n"
+#~ "%s"
 
 #~ msgid "Other 8 bit"
 #~ msgstr "Beste 8 bit"

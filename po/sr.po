@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-09 12:01+0200\n"
+"POT-Creation-Date: 2025-05-25 12:21+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
@@ -51,6 +51,9 @@ msgstr "Не могу да направим групу „%s“ за догађ�
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Не могу направим догађај „%s“!"
+
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -752,10 +755,10 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[овај_дир] [други_дир_панела]"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
@@ -826,28 +829,23 @@ msgstr "Тражи"
 msgid "Search is disabled"
 msgstr "Претрага је искључена"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary diff file"
 msgstr ""
 "Не могу да направим привремену датотеку разлика\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 "Не могу да направим датотеку резерве\n"
 "%s%s\n"
 "%s"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary merge file"
 msgstr ""
 "Не могу да направим привремену датотеку стапања\n"
 "%s"
@@ -918,18 +916,19 @@ msgstr "Опције"
 msgid "ButtonBar|Quit"
 msgstr "Изађи"
 
-msgid "Quit"
-msgstr "Заврши"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "Датотека је измењена. Да сачувам при изласку?"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 "Поноћни наредник је угашен.\n"
 "Да сачувам измењену датотеку?"
+
+msgid "Quit"
+msgstr "Заврши"
 
 msgid "Diff:"
 msgstr "Разлике:"
@@ -937,13 +936,15 @@ msgstr "Разлике:"
 msgid "File name is empty!"
 msgstr ""
 
-#, c-format
-msgid "\"%s\" is a directory"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is a directory"
 msgstr "„%s“ је директоријум"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
 "Не могу да добијем податке о „%s“\n"
@@ -962,9 +963,13 @@ msgstr "Учитавам: %3d%%"
 msgid "Loading..."
 msgstr "Учитавам..."
 
-#, c-format
-msgid "Cannot open %s for reading"
-msgstr "Не могу да отворим „%s“ за читање"
+#, fuzzy, c-format
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
+"Не могу да отворим „%s“\n"
+"%s"
 
 msgid "Load file"
 msgstr "Учитај датотеку"
@@ -973,12 +978,10 @@ msgstr "Учитај датотеку"
 msgid "Error reading %s"
 msgstr "Грешка читања „%s“"
 
-#, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "Не могу да добавим величину/овлашћења за „%s“"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr "„%s“ није обична датотека"
 
 #, c-format
@@ -996,8 +999,10 @@ msgstr "Упозорење"
 msgid "Error reading from pipe: %s"
 msgstr "Грешка читања из спојке: %s"
 
-#, c-format
-msgid "Cannot open pipe for reading: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr "Не могу да отворим спојку за читање: %s"
 
 msgid "File has hard-links. Detach before saving?"
@@ -1010,12 +1015,11 @@ msgstr "Датотека је измењена у међувремену. Да �
 msgid "Error writing to pipe: %s"
 msgstr "Грешка писања у спојку: %s"
 
-#, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "Не могу да отворим спојку за писање: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr "Не могу да отворим датотеку за писање: %s"
 
 msgid "The file you are saving does not end with a newline."
@@ -1060,8 +1064,12 @@ msgstr "Провери нови ред &ПОСИКС-а"
 msgid "Edit Save Mode"
 msgstr "Уредите режим чувања"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "Не могу да сачувам: одредиште није обична датотека"
+#, fuzzy, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr "Не могу да прикажем: није обична датотека"
 
 msgid "A file already exists with this name"
 msgstr "Већ постоји датотека под овим називом"
@@ -1120,9 +1128,9 @@ msgstr ""
 msgid "Close file"
 msgstr "Затвори датотеку"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 "Поноћни наредник је угашен.\n"
@@ -1563,15 +1571,13 @@ msgstr "Потврди замену"
 msgid "%ld replacements made"
 msgstr "%ld одрађене замене"
 
+#, fuzzy, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
 "Уређивач текста наклоњен кориснику\n"
 "написан за Поноћног наредника."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
 
 msgid "About"
 msgstr "О програму"
@@ -1699,16 +1705,14 @@ msgstr "< Самостално >"
 msgid "< Reload Current Syntax >"
 msgstr "< Учитај текућу синтаксу >"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file\n"
+"%s"
+msgstr "Не могу да отворим датотеку „%s“"
+
 msgid "Load syntax file"
 msgstr "Учитај датотеку синтаксе"
-
-#, c-format
-msgid ""
-"Cannot open file %s\n"
-"%s"
-msgstr ""
-"Не могу да отворим датотеку „%s“\n"
-"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1737,7 +1741,8 @@ msgid ""
 "the subshell cannot be toggled."
 msgstr ""
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr "Укуцајте „exit“ да се вратите Поноћном нареднику"
 
 msgid "Set &all"
@@ -1768,26 +1773,33 @@ msgstr ""
 msgid "Chown advanced command"
 msgstr "Напредна наредба промене власника"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
+"Cannot chmod\n"
+"%sn%s"
+msgstr ""
+"Не могу да променим режим „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"Не могу да променим власника „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
 "Не могу да променим режим „%s“\n"
 "%s"
 
-msgid "&Ignore"
-msgstr ""
-
-msgid "Ignore &all"
-msgstr ""
-
-msgid "&Retry"
-msgstr "Пробај &поново"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
 "%s"
 msgstr ""
 "Не могу да променим власника „%s“\n"
@@ -1804,6 +1816,20 @@ msgstr "Покренут"
 
 msgid "Stopped"
 msgstr "Заустављен"
+
+#, fuzzy
+msgid "No translation"
+msgstr "—  < Без претварања >"
+
+#, fuzzy
+msgid "Detected display codepage"
+msgstr "Кодна страна улаза и приказа:"
+
+msgid "Selected source (file I/O) codepage"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "&Никад"
@@ -1882,17 +1908,6 @@ msgstr "&Сам сачувај подешавања"
 
 msgid "Configure options"
 msgstr "Опције подешавања"
-
-#, fuzzy
-msgid "No translation"
-msgstr "—  < Без претварања >"
-
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Кодна страна улаза и приказа:"
-
-msgid "Selected source (file I/O) codepage"
-msgstr ""
 
 msgid "Skin:"
 msgstr "Маска:"
@@ -2089,12 +2104,13 @@ msgstr "&Убиј"
 msgid "Background jobs"
 msgstr "Позадински послови"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
+"Не могу да променим власништво циљног директоријума „%s“\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2183,17 +2199,27 @@ msgstr "О&чисти означене"
 msgid "Chattr command"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
+"Не могу да добијем податке о „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
+"Не могу да отворим тар архиву\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr\n"
+"%s"
+msgstr "Не могу да обрадим:"
 
 msgid "set &user ID on execution"
 msgstr "подеси ИБ &корисника при извршавању"
@@ -2295,13 +2321,21 @@ msgstr "Повежите „%s“ са:"
 msgid "Link"
 msgstr "Веза"
 
-#, c-format
-msgid "link: %s"
-msgstr "веза: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
+"Не могу да направим циљну симболичку везу „%s“\n"
+"%s"
 
-#, c-format
-msgid "symlink: %s"
-msgstr "симболичка веза: %s"
+#, fuzzy, c-format
+msgid ""
+"Canot create symbolic link\n"
+"%s"
+msgstr ""
+"Не могу да умножим цикличну симболичку везу\n"
+"„%s“"
 
 msgid "View file"
 msgstr "Прегледајте датотеку"
@@ -2323,6 +2357,12 @@ msgstr "Направите нови директоријум"
 
 msgid "Enter directory name:"
 msgstr "Унесите назив директоријума:"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Не могу да направим директоријум „%s“"
 
 msgid "Extension file edit"
 msgstr "Уређивање датотеке проширења"
@@ -2372,12 +2412,16 @@ msgstr "Симболичка веза „%s“ упућује на:"
 msgid "Edit symlink"
 msgstr "Уреди симболичку везу"
 
-#, c-format
-msgid "edit symlink, unable to remove %s: %s"
+#, fuzzy, c-format
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr "уређивање симболичке везе, не може да уклони „%s“: %s"
 
-#, c-format
-msgid "edit symlink: %s"
+#, fuzzy, c-format
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr "уреди симболичку везу: %s"
 
 msgid "FTP to machine"
@@ -2419,10 +2463,8 @@ msgstr "Не могу да извршим наредбе на не-месним 
 msgid "Parameter"
 msgstr "Параметар"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+#, fuzzy
+msgid "Cannot create temporary command file"
 msgstr ""
 "Не могу да направим привремену датотеку наредбе\n"
 "%s"
@@ -2433,7 +2475,7 @@ msgstr "Сојка није успела"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2443,7 +2485,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2498,25 +2540,25 @@ msgstr "датотека/директоријума"
 msgid " with source mask:"
 msgstr " уз изворну маску:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
+"Не могу да добијем податке о изворној датотеци „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
 msgstr ""
+"Не могу да направим циљну симболичку везу „%s“\n"
+"%s"
 
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 "Не могу да прочитам изворну везу „%s“\n"
@@ -2528,9 +2570,9 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 "Не могу да направим циљну симболичку везу „%s“\n"
@@ -2560,21 +2602,31 @@ msgstr ""
 "„%s“\n"
 "су једна иста датотека"
 
+msgid "&Ignore"
+msgstr ""
+
 msgid "Ignore a&ll"
 msgstr ""
 
-#, c-format
+msgid "&Retry"
+msgstr "Пробај &поново"
+
+#, fuzzy, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Директоријум „%s“ није празан.\n"
 "Да га обришем дубински?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 "Позадински процес:\n"
@@ -2584,17 +2636,17 @@ msgstr ""
 msgid "Non&e"
 msgstr "&Ништа"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 "Не могу да уклоним датотеку „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
 "Не могу да добијем податке о датотеци „%s“\n"
@@ -2604,102 +2656,108 @@ msgstr ""
 msgid "Cannot overwrite directory \"%s\""
 msgstr "Не могу да препишем директоријум „%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Не могу да преместим датотеку „%s“ у „%s“\n"
+"Не могу да уклоним датотеку „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 "Не могу да уклоним директоријум „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
-msgstr ""
+msgstr "Не могу да препишем директоријум „%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
-msgstr ""
-"Не могу да препишем директоријум „%s“\n"
-"%s"
+msgstr "Не могу да препишем директоријум „%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 "Не могу да препишем датотеку „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"Не могу да преместим директоријум „%s“ у „%s“\n"
+"Не могу да уклоним директоријум „%s“\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Не могу да радим над \"..\"!"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 "Не могу да добијем податке о изворној датотеци „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
+"Не могу да добијем податке о изворној датотеци „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
+"Не могу да дознам податке о циљној датотеци „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
 "Не могу да направим посебну датотеку „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
 "Не могу да променим власништво циљне датотеке „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
 "Не могу да променим режим циљне датотеке „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
 "Не могу да отворим изворну везу „%s“\n"
@@ -2708,47 +2766,49 @@ msgstr ""
 msgid "Reget failed, about to overwrite file"
 msgstr "Поновно добављање није успело, за време преписивања датотеке"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
 "Не могу да дознам податке о изворној датотеци „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
 "Не могу да направим циљну датотеку „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
 "Не могу да дознам податке о циљној датотеци „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
 "Не могу да прерасподелим простор за циљу датотеку „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
+"Не могу да прочитам изворну везу „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
 "Не могу да запишем циљну датотеку „%s“\n"
@@ -2766,41 +2826,45 @@ msgstr "&Задржи"
 msgid "&Continue copy"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 "Не могу да затворим изворну везу „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
 "Не могу да затворим циљну датотеку „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
+"Не могу да прерасподелим простор за циљу датотеку „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
 "Не могу да добијем податке о изворном директоријуму „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
+"Не могу да добијем податке о изворном директоријуму „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2818,25 +2882,27 @@ msgstr ""
 "Не могу да умножим цикличну симболичку везу\n"
 "„%s“"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 "Одредиште „%s“ мора бити директоријум\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 "Не могу да направим циљни директоријум „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
 "Не могу да променим власништво циљног директоријума „%s“\n"
@@ -3165,11 +3231,9 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-msgid "The Midnight Commander"
-msgstr "Поноћни наредник"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Да ли стварно желите да изађете из Поноћног наредника?"
+#, fuzzy
+msgid "Do you really want to quit?"
+msgstr "Да ли стварно желите да извршите?"
 
 msgid "&Above"
 msgstr "И&знад"
@@ -3669,12 +3733,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
+"Нисам успео да прочитам податке из стандардног излаза порода:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -3714,6 +3779,15 @@ msgid ""
 "%s"
 msgstr ""
 "Не могу да добавим податке о одредишту\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Одредиште „%s“ мора бити директоријум\n"
 "%s"
 
 #, c-format
@@ -3835,8 +3909,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Путања почетног директоријума није апсолутна"
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -4519,8 +4594,9 @@ msgstr "Датотека је измењена. Да сачувам при из�
 msgid "&Cancel quit"
 msgstr "&Откажи излазак"
 
+#, fuzzy, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 "Поноћни наредник је угашен.\n"
@@ -4571,10 +4647,8 @@ msgstr "Разобликуј"
 msgid "ButtonBar|Format"
 msgstr "Обликуј"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Failed to read data from child stdout"
 msgstr ""
 "Нисам успео да прочитам податке из стандардног излаза порода:\n"
 "%s"
@@ -4600,20 +4674,18 @@ msgstr ""
 msgid "View: "
 msgstr "Преглед: "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"Не могу да отворим „%s“\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr "Не могу да прикажем: није обична датотека"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 "Не могу да отворим „%s“ у режиму обраде\n"
@@ -4627,6 +4699,67 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#~ msgid "The Midnight Commander"
+#~ msgstr "Поноћни наредник"
+
+#~ msgid "Do you really want to quit the Midnight Commander?"
+#~ msgstr "Да ли стварно желите да изађете из Поноћног наредника?"
+
+#, c-format
+#~ msgid "Cannot open %s for reading"
+#~ msgstr "Не могу да отворим „%s“ за читање"
+
+#, c-format
+#~ msgid "Cannot get size/permissions for %s"
+#~ msgstr "Не могу да добавим величину/овлашћења за „%s“"
+
+#, c-format
+#~ msgid "Cannot open pipe for writing: %s"
+#~ msgstr "Не могу да отворим спојку за писање: %s"
+
+#~ msgid "Cannot save: destination is not a regular file"
+#~ msgstr "Не могу да сачувам: одредиште није обична датотека"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot open file %s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не могу да отворим датотеку „%s“\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "link: %s"
+#~ msgstr "веза: %s"
+
+#, c-format
+#~ msgid "symlink: %s"
+#~ msgstr "симболичка веза: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move file \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не могу да преместим датотеку „%s“ у „%s“\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot overwrite directory \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не могу да препишем директоријум „%s“\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot move directory \"%s\" to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не могу да преместим директоријум „%s“ у „%s“\n"
+#~ "%s"
 
 #~ msgid "Other 8 bit"
 #~ msgstr "Другa, осмобитнa"

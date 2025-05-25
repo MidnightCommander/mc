@@ -505,7 +505,7 @@ toggle_subshell (void)
     {
         if (output_starts_shell)
         {
-            fputs (_ ("Type 'exit' to return to the Midnight Commander"), stderr);
+            fprintf (stderr, _ ("Type 'exit' to return to the %s"), PACKAGE_NAME);
             fputs ("\n\r\n\r", stderr);
 
             my_system (EXECUTE_INTERNAL, mc_global.shell->path, NULL);

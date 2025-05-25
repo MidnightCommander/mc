@@ -2966,15 +2966,17 @@ dview_ok_to_exit (WDiff *dview)
 {
     gboolean res = TRUE;
     int act;
+    char *text;
 
     if (!dview->merged[DIFF_LEFT] && !dview->merged[DIFF_RIGHT])
         return res;
 
-    act = query_dialog (_ ("Quit"),
-                        !mc_global.midnight_shutdown
-                            ? _ ("File(s) was modified. Save with exit?")
-                            : _ ("Midnight Commander is being shut down.\nSave modified file(s)?"),
-                        D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+    text = g_strdup_printf (!mc_global.midnight_shutdown
+                                ? _ ("File(s) was modified. Save with exit?")
+                                : _ ("%s is being shut down.\nSave modified file(s)?"),
+                            PACKAGE_NAME);
+    act = query_dialog (_ ("Quit"), text, D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+    g_free (text);
 
     // Esc is No
     if (mc_global.midnight_shutdown || (act == -1))

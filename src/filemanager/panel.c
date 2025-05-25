@@ -2894,8 +2894,8 @@ do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
         return FALSE;
 
     if (confirm_execute
-        && query_dialog (_ ("The Midnight Commander"), _ ("Do you really want to execute?"),
-                         D_NORMAL, 2, _ ("&Yes"), _ ("&No"))
+        && query_dialog (PACKAGE_NAME, _ ("Do you really want to execute?"), D_NORMAL, 2,
+                         _ ("&Yes"), _ ("&No"))
             != 0)
         return TRUE;
 
