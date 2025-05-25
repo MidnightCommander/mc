@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/mc/mc/language/"
@@ -29,6 +29,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < 没有翻译 >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -468,6 +472,12 @@ msgstr "Alt 键"
 msgid "Shift"
 msgstr "Shift 键"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "没有设置 TERM 环境变量!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -493,12 +503,6 @@ msgid ""
 msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "没有设置 TERM 环境变量!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1832,10 +1836,6 @@ msgid "Stopped"
 msgstr "已停止"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < 没有翻译 >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "输入/显示代码页: "
 
@@ -2344,7 +2344,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "无法复制循环的符号链接\n"
@@ -4493,9 +4493,6 @@ msgstr "中止后发生错误。"
 msgid "Aborted transfer would be successful."
 msgstr "被中止的传输可能成功完成了。"
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 档案文件"
 
@@ -4514,6 +4511,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4595,9 +4595,6 @@ msgstr "无效的值"
 
 msgid "File was modified. Save with exit?"
 msgstr "文件已被修改。保存并退出?"
-
-msgid "&Cancel quit"
-msgstr "取消退出(&C)"
 
 #, fuzzy, c-format
 msgid ""
@@ -4704,6 +4701,9 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "取消退出(&C)"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

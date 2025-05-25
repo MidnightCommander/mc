@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
@@ -24,6 +24,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
 "1 : 2;\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Sin traducción >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -464,6 +468,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Mayús"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "¡La variable de entorno TERM está sin definir!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Imposible comprobar tuberia para SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -497,12 +507,6 @@ msgid ""
 msgstr ""
 "El tamaño de ventana %dx%d no está soportado.\n"
 "Verifique el valor de la variable de entorno TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "¡La variable de entorno TERM está sin definir!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Imposible comprobar tuberia para SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1864,10 +1868,6 @@ msgid "Stopped"
 msgstr "Detenido"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Sin traducción >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Juego de caracteres entrada/pantalla:"
 
@@ -2380,7 +2380,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Imposible copiar un enlace simbólico cíclico\n"
@@ -4589,9 +4589,6 @@ msgstr "Error denunciado tras abortar."
 msgid "Aborted transfer would be successful."
 msgstr "Abortada transferencia con éxito."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
-
 msgid "Inconsistent tar archive"
 msgstr "Archivo de tipo tar inconsistente"
 
@@ -4613,6 +4610,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "no parece un archivo de tipo tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
 
 msgid "undelfs: error"
 msgstr "undelfs: Error"
@@ -4693,9 +4693,6 @@ msgstr "Posición incorrecta"
 
 msgid "File was modified. Save with exit?"
 msgstr "El archivo fue modificado. ¿Desea guardarlo al salir?"
-
-msgid "&Cancel quit"
-msgstr "&Cancelar salida"
 
 #, fuzzy, c-format
 msgid ""
@@ -4802,6 +4799,9 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Cancelar salida"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "The Midnight Commander"

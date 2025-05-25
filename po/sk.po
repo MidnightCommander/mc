@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -25,6 +25,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
 ">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Žiadny preklad >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -465,6 +469,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Premenná prostredia TERM nie je nastavená!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -490,12 +500,6 @@ msgid ""
 msgstr ""
 "Veľkosť obrazovky %dx%d nie je podporovaná.\n"
 "Skontrolujte premennú prostredia TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Premenná prostredia TERM nie je nastavená!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1830,10 +1834,6 @@ msgid "Stopped"
 msgstr "Zastavený"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Žiadny preklad >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Vstupná/zobrazovacia znaková sada:"
 
@@ -2343,7 +2343,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Nemožno skopírovať cyklický sym. odkaz\n"
@@ -4509,9 +4509,6 @@ msgstr "Chyba hlásená po prerušení."
 msgid "Aborted transfer would be successful."
 msgstr "Prerušenie prenosu bolo úspešné."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Poškodený archív .tar"
 
@@ -4530,6 +4527,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4611,9 +4611,6 @@ msgstr "Neplatná hodnota"
 
 msgid "File was modified. Save with exit?"
 msgstr "Súbor bol zmenený. Uložiť pri ukončení?"
-
-msgid "&Cancel quit"
-msgstr "&Zrušiť ukončenie"
 
 #, fuzzy, c-format
 msgid ""
@@ -4720,6 +4717,9 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Zrušiť ukončenie"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -31,6 +31,10 @@ msgstr ""
 "11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Без перекодування >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -475,6 +479,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Змінна середовища TERM не встановлена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Не вдалося перевірити канал SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -506,12 +516,6 @@ msgid ""
 msgstr ""
 "Розмір екрана %dx%d не підтримується.\n"
 "Перевірте змінну оточення TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Змінна середовища TERM не встановлена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Не вдалося перевірити канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -1847,10 +1851,6 @@ msgid "Stopped"
 msgstr "Зупинено"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Без перекодування >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Кодування вводу/показу:"
 
@@ -2361,7 +2361,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Не вдалося скопіювати циклічне символьне посилання\n"
@@ -4556,9 +4556,6 @@ msgstr "Сталася помилка після переривання."
 msgid "Aborted transfer would be successful."
 msgstr "Перерване перенесення могло завершитися успішно."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Виявлено неузгоджений архів tar"
 
@@ -4577,6 +4574,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4659,9 +4659,6 @@ msgstr "Неправильне значення"
 
 msgid "File was modified. Save with exit?"
 msgstr "Файл змінено. Зберегти?"
-
-msgid "&Cancel quit"
-msgstr "&Не виходити"
 
 #, fuzzy, c-format
 msgid ""
@@ -4768,6 +4765,9 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Не виходити"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

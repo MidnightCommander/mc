@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -25,6 +25,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Çeviri yok >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -467,6 +471,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM çevre değişkeni atanmamış!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH borusu kontrol edilemiyor"
+
 #, c-format
 msgid ""
 "\n"
@@ -498,12 +508,6 @@ msgid ""
 msgstr ""
 "%dx%d ekran boyutu desteklenmiyor.\n"
 "TERM ortam değişkenini kontrol ediniz.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM çevre değişkeni atanmamış!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH borusu kontrol edilemiyor"
 
 msgid "B"
 msgstr "B"
@@ -1845,10 +1849,6 @@ msgid "Stopped"
 msgstr "Durduruldu"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Çeviri yok >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Girdi / gösterme karakter kümesi:"
 
@@ -2359,7 +2359,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Devirli sembolik bağ kopyalanamaz \n"
@@ -4516,9 +4516,6 @@ msgstr "Durdurma sonra hata raporlandı."
 msgid "Aborted transfer would be successful."
 msgstr "Aktarımın durdurulması başarıldı."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Tar arşivi düzgün değil"
 
@@ -4537,6 +4534,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4618,9 +4618,6 @@ msgstr "Geçersiz değer"
 
 msgid "File was modified. Save with exit?"
 msgstr "Değişiklikler çıkarken dosyaya kaydedilsin mi?"
-
-msgid "&Cancel quit"
-msgstr "&Çıkışı durdur"
 
 #, fuzzy, c-format
 msgid ""
@@ -4727,6 +4724,9 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Çıkışı durdur"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

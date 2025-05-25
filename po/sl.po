@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://app.transifex.com/mc/mc/language/sl/)\n"
@@ -18,8 +18,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "- < Brez prevoda >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -451,6 +455,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -476,12 +486,6 @@ msgid ""
 msgstr ""
 "Velikost zaslona %dx%d ni podprta.\n"
 "Preverite okoljsko spremenljivko TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1771,10 +1775,6 @@ msgid "Stopped"
 msgstr "Ustavljen"
 
 #, fuzzy
-msgid "No translation"
-msgstr "- < Brez prevoda >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Vhodni / zaslonski nabor znakov:"
 
@@ -2274,11 +2274,13 @@ msgstr ""
 "Ne morem pisati v datoteko %s:\n"
 "%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
+"Ne morem pisati v datoteko %s:\n"
+"%s\n"
 
 msgid "View file"
 msgstr ""
@@ -4372,9 +4374,6 @@ msgstr "Napaka sporočena po prekinitvi."
 msgid "Aborted transfer would be successful."
 msgstr "Prekinjen prenos bi bil uspešen."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Nekonsistenten tar arhiv"
 
@@ -4393,6 +4392,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4469,9 +4471,6 @@ msgid "Invalid value"
 msgstr ""
 
 msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
 msgstr ""
 
 #, c-format

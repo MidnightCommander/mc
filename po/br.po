@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2017-2018\n"
 "Language-Team: Breton (http://app.transifex.com/mc/mc/language/br/)\n"
@@ -17,10 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !"
-"=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && "
-"(n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 "
-"> 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != "
-"0 && n % 1000000 == 0) ? 3 : 4);\n"
+"=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n"
+"%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > "
+"19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 "
+"&& n % 1000000 == 0) ? 3 : 4);\n"
+
+msgid "No translation"
+msgstr ""
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -445,6 +448,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Pennlizh"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -467,12 +476,6 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr ""
-
-msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
 msgid "B"
@@ -1749,9 +1752,6 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
-msgid "No translation"
-msgstr ""
-
 msgid "Detected display codepage"
 msgstr ""
 
@@ -2249,7 +2249,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 
@@ -4264,9 +4264,6 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4283,6 +4280,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4359,9 +4359,6 @@ msgid "Invalid value"
 msgstr ""
 
 msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
 msgstr ""
 
 #, c-format
