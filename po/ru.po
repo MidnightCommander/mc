@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -42,6 +42,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Без перекодировки >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1885,10 +1889,6 @@ msgid "Stopped"
 msgstr "Остановлен"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Без перекодировки >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Кодировка ввода/вывода:"
 
@@ -2401,7 +2401,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Не удалось скопировать циклическую символическую ссылку\n"
@@ -4723,9 +4723,6 @@ msgstr "Неверный адрес"
 msgid "File was modified. Save with exit?"
 msgstr "Файл был изменён. Сохранить при выходе?"
 
-msgid "&Cancel quit"
-msgstr "&Отменить выход"
-
 #, fuzzy, c-format
 msgid ""
 "%s is being shut down.\n"
@@ -4831,6 +4828,9 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Отменить выход"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -25,6 +25,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1835,10 +1839,6 @@ msgid "Stopped"
 msgstr "중지됨"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < No translation >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "코드페이지 입력/표시:"
 
@@ -2351,7 +2351,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "순환 심볼릭 링크를 복사할 수 없음\n"
@@ -4648,9 +4648,6 @@ msgstr "잘못된 값"
 msgid "File was modified. Save with exit?"
 msgstr "파일이 수정되었습니다. 저장 후 나가시겠습니까?"
 
-msgid "&Cancel quit"
-msgstr "끝내기 취소(&C)"
-
 #, fuzzy, c-format
 msgid ""
 "%s is being shut down.\n"
@@ -4756,6 +4753,9 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "끝내기 취소(&C)"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "미드나잇 커맨더"

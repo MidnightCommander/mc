@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/mc/mc/language/hu/)\n"
@@ -22,6 +22,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Nincs konverzió >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1818,10 +1822,6 @@ msgid "Stopped"
 msgstr "Megállítva"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Nincs konverzió >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Beviteli/kijelzési kódlap:"
 
@@ -2330,7 +2330,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Ciklikus szimbolikus linket nem lehet átmásolni: \n"
@@ -4589,9 +4589,6 @@ msgstr "Érvénytelen érték"
 msgid "File was modified. Save with exit?"
 msgstr "A fájl módosult. Menti kilépéskor?"
 
-msgid "&Cancel quit"
-msgstr "&Mégsem lép ki"
-
 #, fuzzy, c-format
 msgid ""
 "%s is being shut down.\n"
@@ -4694,6 +4691,9 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Mégsem lép ki"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

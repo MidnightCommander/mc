@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Cornish (http://app.transifex.com/mc/mc/language/kw/)\n"
@@ -22,6 +22,9 @@ msgstr ""
 "1000000 == 100000 ? 2 : (n % 100 == 3 || n % 100 == 23 || n % 100 == 43 || n "
 "% 100 == 63 || n % 100 == 83) ? 3 : n != 1 && (n % 100 == 1 || n % 100 == 21 "
 "|| n % 100 == 41 || n % 100 == 61 || n % 100 == 81) ? 4 : 5;\n"
+
+msgid "No translation"
+msgstr ""
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1750,9 +1753,6 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
-msgid "No translation"
-msgstr ""
-
 msgid "Detected display codepage"
 msgstr ""
 
@@ -2250,7 +2250,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 
@@ -4364,9 +4364,6 @@ msgid "Invalid value"
 msgstr ""
 
 msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
 msgstr ""
 
 #, c-format

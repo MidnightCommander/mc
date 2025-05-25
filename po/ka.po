@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -20,6 +20,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "No translation"
+msgstr ""
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1763,9 +1766,6 @@ msgstr "გაშვებულია"
 msgid "Stopped"
 msgstr "შეჩერებულია"
 
-msgid "No translation"
-msgstr ""
-
 msgid "Detected display codepage"
 msgstr ""
 
@@ -2264,11 +2264,11 @@ msgid ""
 "%s"
 msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
-msgstr ""
+msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
 
 msgid "View file"
 msgstr "ფაილის ჩვენება"
@@ -4378,9 +4378,6 @@ msgstr "არასწორი მნიშვნელობა"
 msgid "File was modified. Save with exit?"
 msgstr ""
 
-msgid "&Cancel quit"
-msgstr "&გასვლის გაუქმება"
-
 #, c-format
 msgid ""
 "%s is being shut down.\n"
@@ -4476,6 +4473,9 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&გასვლის გაუქმება"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "The Midnight Commander"

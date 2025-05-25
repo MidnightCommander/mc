@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
@@ -23,6 +23,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
 "1000000 == 0 ? 1 : 2;\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "- < Sem tradução >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1864,10 +1868,6 @@ msgid "Stopped"
 msgstr "Parado"
 
 #, fuzzy
-msgid "No translation"
-msgstr "- < Sem tradução >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Entrada / mostrar página de codificação:"
 
@@ -2380,7 +2380,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Não é possível copiar ligação simbólica ciclíca\n"
@@ -4698,9 +4698,6 @@ msgstr "Valor inválido"
 msgid "File was modified. Save with exit?"
 msgstr "Ficheiro foi modificado. Guardar ao sair?"
 
-msgid "&Cancel quit"
-msgstr "&Cancelar saída"
-
 #, fuzzy, c-format
 msgid ""
 "%s is being shut down.\n"
@@ -4806,6 +4803,9 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Cancelar saída"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "O Midnight Commander"

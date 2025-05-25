@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Greek (http://app.transifex.com/mc/mc/language/el/)\n"
@@ -22,6 +22,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Χωρίς μετάφραση >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1791,10 +1795,6 @@ msgstr "Εκτελείται"
 msgid "Stopped"
 msgstr "Σταμάτησε"
 
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Χωρίς μετάφραση >"
-
 msgid "Detected display codepage"
 msgstr ""
 
@@ -2302,7 +2302,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Αδυναμία δημιουργίας αντιγράφου ασφαλείας\n"
@@ -4521,9 +4521,6 @@ msgstr "Μη έγκυρη τιμή"
 msgid "File was modified. Save with exit?"
 msgstr "Το αρχείο τροποποιήθηκε. Αποθήκευση κατά την έξοδο;"
 
-msgid "&Cancel quit"
-msgstr "&Ακύρωση εξόδου"
-
 #, fuzzy, c-format
 msgid ""
 "%s is being shut down.\n"
@@ -4626,6 +4623,9 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Ακύρωση εξόδου"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Το Midnight Commander"

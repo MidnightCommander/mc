@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-05-26 07:05+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -28,6 +28,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ingen översättning >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1838,10 +1842,6 @@ msgid "Stopped"
 msgstr "Stannad"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Ingen översättning >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Teckenöversättning för inmatning/visning:"
 
@@ -2351,7 +2351,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Cyklisk symboliskt länk kan inte kopieras\n"
@@ -4607,9 +4607,6 @@ msgstr "Ogiltigt värde"
 msgid "File was modified. Save with exit?"
 msgstr "Filen har ändrats. Spara vid nedstängning?"
 
-msgid "&Cancel quit"
-msgstr "&Avbryt nedstängning"
-
 #, fuzzy, c-format
 msgid ""
 "%s is being shut down.\n"
@@ -4715,6 +4712,9 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Avbryt nedstängning"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "The Midnight Commander"
