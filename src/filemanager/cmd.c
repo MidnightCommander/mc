@@ -360,7 +360,7 @@ do_link (link_type_t link_type, const char *fname)
 
         s = vfs_path_from_str (src);
         if (mc_symlink (dest_vpath, s) == -1)
-            file_error_message (_ ("Canot create symbolic link\n%s"), dest);
+            file_error_message (_ ("Cannot create symbolic link\n%s"), dest);
         vfs_path_free (s, TRUE);
     }
 
