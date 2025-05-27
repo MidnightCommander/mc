@@ -1099,7 +1099,6 @@ configure_vfs_box (void)
 
         if (quick_dialog (&qdlg) != B_CANCEL)
         {
-            // cppcheck-suppress uninitvar
             if (ret_timeout[0] == '\0')
                 vfs_timeout = 0;
             else
@@ -1110,12 +1109,9 @@ configure_vfs_box (void)
                 vfs_timeout = 10;
 #ifdef ENABLE_VFS_FTP
             g_free (ftpfs_anonymous_passwd);
-            // cppcheck-suppress uninitvar
             ftpfs_anonymous_passwd = ret_passwd;
             g_free (ftpfs_proxy_host);
-            // cppcheck-suppress uninitvar
             ftpfs_proxy_host = ret_ftp_proxy;
-            // cppcheck-suppress uninitvar
             if (ret_directory_timeout[0] == '\0')
                 ftpfs_directory_timeout = 0;
             else

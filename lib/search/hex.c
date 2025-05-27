@@ -81,7 +81,6 @@ mc_search__hex_translate_to_regex (const GString *astr, mc_search_hex_parse_erro
             while (g_ascii_isspace (str[loop]))
                 loop++;
         }
-        // cppcheck-suppress invalidscanf
         else if (sscanf (str + loop, "%x%n", &val, &ptr) == 1)
         {
             if (val > 255)
