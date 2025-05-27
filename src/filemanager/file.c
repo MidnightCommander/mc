@@ -3731,7 +3731,7 @@ ret_fast:
 FileProgressStatus
 file_error (file_op_context_t *ctx, gboolean allow_retry, const char *format, const char *file)
 {
-    return files_error (ctx, allow_retry, format, file, NULL);
+    return files_error (ctx, allow_retry, format, file, "");
 }
 
 /* --------------------------------------------------------------------------------------------- */
