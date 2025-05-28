@@ -1138,6 +1138,12 @@ TypeIgnoreCase=true
 Open=%cd %p/uzip://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
+[apk]
+Type=Android package \\(APK\\)
+TypeIgnoreCase=true
+Open=%cd %p/uzip://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
 [lha]
 Type=^LHa .*archive
 Open=%cd %p/ulha://
