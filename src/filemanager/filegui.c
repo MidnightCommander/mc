@@ -775,7 +775,16 @@ progress_button_callback (WButton *button, int action)
 file_op_context_t *
 file_op_context_new (FileOperation op)
 {
+    static gboolean i18n_flag = FALSE;
+
     file_op_context_t *ctx;
+
+    if (!i18n_flag)
+    {
+        for (int i = G_N_ELEMENTS (op_names); i-- != 0;)
+            op_names[i] = Q_ (op_names[i]);
+        i18n_flag = TRUE;
+    }
 
     ctx = g_new0 (file_op_context_t, 1);
     ctx->operation = op;
