@@ -1091,12 +1091,67 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 context # \n brown
     spellcheck
 
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END green
-
 context ' ' green
 
+# Basic support for heredocs with suppressed variable expansion: 'exclusive' keyword breaks the matching due
+# to a conflict with the rules for quotes, so remove it in all cases, including `\`, for consistency.
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'"\\
+context whole <<\[\s\]\[-\]\[\s\]\\EOF EOF green
+context whole <<\[\s\]\[-\]\[\s\]\\END END green
+context whole <<\[\s\]\[-\]\[\s\]'EOF' EOF green
+context whole <<\[\s\]\[-\]\[\s\]'END' END green
+context whole <<\[\s\]\[-\]\[\s\]"EOF" EOF green
+context whole <<\[\s\]\[-\]\[\s\]"END" END green
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
+
 context " " green
+    keyword \\* brightgreen
+    keyword \\@ brightgreen
+    keyword \\$ brightgreen
+    keyword \\\\ brightgreen
+    keyword \\` brightgreen
+    keyword \\" brightgreen
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+# Basic support for heredocs with variable expansion
+context exclusive whole <<\[\s\]\[-\]\[\s\]EOF EOF green
+    keyword \\* brightgreen
+    keyword \\@ brightgreen
+    keyword \\$ brightgreen
+    keyword \\\\ brightgreen
+    keyword \\` brightgreen
+    keyword \\" brightgreen
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+context exclusive whole <<\[\s\]\[-\]\[\s\]END END green
     keyword \\* brightgreen
     keyword \\@ brightgreen
     keyword \\$ brightgreen
