@@ -908,7 +908,6 @@ try_complete_all_possible (try_complete_automation_state_t *state, char *text, i
                     char *s;
 
                     s = strchr (cdpath, ':');
-                    // cppcheck-suppress nullPointer
                     if (s == NULL)
                         s = strchr (cdpath, '\0');
                     c = *s;

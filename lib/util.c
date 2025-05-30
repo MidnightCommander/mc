@@ -197,15 +197,8 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
     if (fwrite ((const void *) contents, 1, length, backup_fd) != length)
         ret1 = FALSE;
 
-    {
-        int ret2;
-
-        // cppcheck-suppress redundantAssignment
-        ret2 = fflush (backup_fd);
-        // cppcheck-suppress redundantAssignment
-        ret2 = fclose (backup_fd);
-        (void) ret2;
-    }
+    fflush (backup_fd);
+    fclose (backup_fd);
 
     g_free (contents);
     return ret1;

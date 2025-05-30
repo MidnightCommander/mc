@@ -326,7 +326,6 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     if (colon != NULL)
     {
         *colon = '\0';
-        // cppcheck-suppress invalidscanf
         if (sscanf (colon + 1, "%d", &path_element->port) == 1)
         {
             if (path_element->port <= 0 || path_element->port >= 65536)

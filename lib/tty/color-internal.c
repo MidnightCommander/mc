@@ -118,12 +118,10 @@ parse_256_or_true_color_name (const char *color_name)
     int i;
     char dummy;
 
-    // cppcheck-suppress invalidscanf
     if (sscanf (color_name, "color%d%c", &i, &dummy) == 1 && i >= 0 && i < 256)
     {
         return i;
     }
-    // cppcheck-suppress invalidscanf
     if (sscanf (color_name, "gray%d%c", &i, &dummy) == 1 && i >= 0 && i < 24)
     {
         return 232 + i;

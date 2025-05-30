@@ -77,7 +77,6 @@ jobs:
               --disable-aspell \
               --disable-background \
               --disable-vfs \
-              --disable-doxygen-doc \
               --without-x \
               --without-gpm-mouse \
               --without-internal-edit \
