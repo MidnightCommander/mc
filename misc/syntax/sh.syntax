@@ -1093,7 +1093,8 @@ context # \n brown
 
 context ' ' green
 
-# Basic support for heredocs with suppressed variable expansion ('exclusive' keyword breaks the matching)
+# Basic support for heredocs with suppressed variable expansion: 'exclusive' keyword breaks the matching due
+# to a conflict with the rules for quotes, so remove it in all cases, including `\`, for consistency.
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'"\\
 context whole <<\[\s\]\[-\]\[\s\]\\EOF EOF green
 context whole <<\[\s\]\[-\]\[\s\]\\END END green
@@ -1127,7 +1128,7 @@ context " " green
     keyword $ brightgreen
 
 # Basic support for heredocs with variable expansion
-context whole <<\[\s\]\[-\]\[\s\]EOF EOF green
+context exclusive whole <<\[\s\]\[-\]\[\s\]EOF EOF green
     keyword \\* brightgreen
     keyword \\@ brightgreen
     keyword \\$ brightgreen
@@ -1150,7 +1151,7 @@ context whole <<\[\s\]\[-\]\[\s\]EOF EOF green
 
     keyword $ brightgreen
 
-context whole <<\[\s\]\[-\]\[\s\]END END green
+context exclusive whole <<\[\s\]\[-\]\[\s\]END END green
     keyword \\* brightgreen
     keyword \\@ brightgreen
     keyword \\$ brightgreen
