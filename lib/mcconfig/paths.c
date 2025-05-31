@@ -107,8 +107,9 @@ mc_config_mkdir (const char *directory_name, GError **mcerror)
 {
     mc_return_if_error (mcerror);
 
-    if ((!g_file_test (directory_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
-        && (g_mkdir_with_parents (directory_name, 0700) != 0))
+    if (!(g_file_test (directory_name, G_FILE_TEST_EXISTS)
+          && g_file_test (directory_name, G_FILE_TEST_IS_DIR))
+        && g_mkdir_with_parents (directory_name, 0700) != 0)
         mc_propagate_error (mcerror, 0, _ ("Cannot create %s directory"), directory_name);
 }
 
