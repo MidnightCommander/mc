@@ -784,7 +784,7 @@ put_tagged (WPanel *panel)
     {
         const file_entry_t *fe;
 
-        fe = panel_current_entry (current_panel);
+        fe = panel_current_entry (panel);
         if (fe != NULL)
             command_insert (cmdline, fe->fname->str, TRUE);
     }
