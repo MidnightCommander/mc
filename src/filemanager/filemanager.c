@@ -773,7 +773,7 @@ put_current_selected (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-put_tagged (WPanel *panel)
+put_tagged (const WPanel *panel)
 {
     if (!command_prompt)
         return;
@@ -782,20 +782,18 @@ put_tagged (WPanel *panel)
 
     if (panel->marked == 0)
     {
-        const file_entry_t *fe;
+        const file_entry_t *fe = panel_current_entry (panel);
 
-        fe = panel_current_entry (panel);
         if (fe != NULL)
             command_insert (cmdline, fe->fname->str, TRUE);
     }
     else
-    {
-        int i;
-
-        for (i = 0; i < panel->dir.len; i++)
+        for (int m = 0, i = 0; m < panel->marked && i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked != 0)
+            {
                 command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
-    }
+                m++;
+            }
 
     input_enable_update (cmdline);
 }
