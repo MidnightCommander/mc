@@ -50,7 +50,7 @@
 #include "lib/strutil.h"  // utf string functions
 #include "lib/fileloc.h"
 #include "lib/lock.h"
-#include "lib/util.h"  // tilde_expand()
+#include "lib/util.h"  // tilde_expand(), x_basename()
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/event.h"  // mc_event_raise()
@@ -764,6 +764,49 @@ editcmd_dialog_raw_key_query_cb (Widget *w, Widget *sender, widget_msg_t msg, in
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+editcmd_check_and_create_user_syntax_directory (const vfs_path_t *user_syntax_file_vpath)
+{
+    gboolean ret;
+    struct stat st;
+
+    ret = mc_stat (user_syntax_file_vpath, &st) == 0;
+    if (!ret)
+    {
+        // file doesn't exist -- check why
+        const char *user_syntax_file_path = vfs_path_as_str (user_syntax_file_vpath);
+
+        // check directory
+        const char *user_syntax_file_basename = x_basename (user_syntax_file_path);
+        char *user_syntax_dir;
+        vfs_path_t *user_syntax_vpath;
+
+        user_syntax_dir =
+            g_strndup (user_syntax_file_path, user_syntax_file_basename - user_syntax_file_path);
+        user_syntax_vpath = vfs_path_from_str (user_syntax_dir);
+
+        ret = mc_stat (user_syntax_vpath, &st) == 0;
+        if (!ret)
+            ret = mc_mkdir (user_syntax_vpath, 0700) == 0;
+        else if (!S_ISDIR (st.st_mode))
+        {
+            ret = FALSE;
+            // set for file_error_message()
+            errno = EEXIST;
+        }
+
+        if (!ret)
+            file_error_message (_ ("Cannot create directory\n%s"), user_syntax_dir);
+
+        vfs_path_free (user_syntax_vpath, TRUE);
+        g_free (user_syntax_dir);
+    }
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1146,9 +1189,14 @@ edit_load_syntax_file (WDialog *h)
         vfs_path_t *user_syntax_file_vpath;
 
         user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_SYNTAX_FILE);
-        check_for_default (extdir_vpath, user_syntax_file_vpath);
-        edit_arg_init (&arg, user_syntax_file_vpath, 0);
-        ret = edit_load_file_from_filename (h, &arg);
+
+        if (editcmd_check_and_create_user_syntax_directory (user_syntax_file_vpath))
+        {
+            check_for_default (extdir_vpath, user_syntax_file_vpath);
+            edit_arg_init (&arg, user_syntax_file_vpath, 0);
+            ret = edit_load_file_from_filename (h, &arg);
+        }
+
         vfs_path_free (user_syntax_file_vpath, TRUE);
     }
     else if (dir == 1)
