@@ -1479,7 +1479,7 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
         }
         else
         {
-            if (!FILE_IS_RESOURCE_FORK (next->d_name) || delete_resource_forks)
+            if (delete_resource_forks || !FILE_IS_RESOURCE_FORK (next->d_name))
                 return_status = erase_file (ctx, tmp_vpath);
             else
                 return_status = FILE_SKIP;
