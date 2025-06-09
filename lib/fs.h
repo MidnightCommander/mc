@@ -108,6 +108,11 @@
 #define DIR_IS_DOT(x)     ((x)[0] == '.' && (x)[1] == '\0')
 #define DIR_IS_DOTDOT(x)  ((x)[0] == '.' && (x)[1] == '.' && (x)[2] == '\0')
 
+/* On macOS, if a file system doesn't support metadata, it is automatically stored in shadow files
+ * called resource forks. The names of these files begin with `._`. They are managed automatically
+ * by the OS. */
+#define FILE_IS_RESOURCE_FORK(x) ((x)[0] == '.' && (x)[1] == '_' && (x)[2] != '\0')
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

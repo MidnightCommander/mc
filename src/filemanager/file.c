@@ -1439,9 +1439,14 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
   abort -> cancel stack
   ignore -> warn every level, gets default
   ignore_all -> remove as much as possible
+
+  This function should either be called with delete_resource_forks = TRUE always, or called twice,
+  first with FALSE and then with TRUE to make sure that no errors pop up due to resource forks being
+  deleted on macOS and then being re-created on the fly by the OS.
 */
 static FileProgressStatus
-recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
+recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
+                 const gboolean delete_resource_forks)
 {
     struct vfs_dirent *next;
     DIR *reading;
@@ -1467,9 +1472,18 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
             return FILE_RETRY;
         }
         if (S_ISDIR (buf.st_mode))
-            return_status = recursive_erase (ctx, tmp_vpath);
+        {
+            return_status = recursive_erase (ctx, tmp_vpath, FALSE);
+            if (return_status != FILE_ABORT)
+                return_status = recursive_erase (ctx, tmp_vpath, TRUE);
+        }
         else
-            return_status = erase_file (ctx, tmp_vpath);
+        {
+            if (!FILE_IS_RESOURCE_FORK (next->d_name) || delete_resource_forks)
+                return_status = erase_file (ctx, tmp_vpath);
+            else
+                return_status = FILE_SKIP;
+        }
         vfs_path_free (tmp_vpath, TRUE);
     }
     mc_closedir (reading);
@@ -3351,7 +3365,11 @@ erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
         // not empty
         error = query_recursive (ctx, vfs_path_as_str (vpath));
         if (error == FILE_CONT)
-            error = recursive_erase (ctx, vpath);
+        {
+            error = recursive_erase (ctx, vpath, FALSE);
+            if (error != FILE_ABORT)
+                error = recursive_erase (ctx, vpath, TRUE);
+        }
         return error;
     }
 
