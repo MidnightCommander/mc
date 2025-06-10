@@ -1445,8 +1445,9 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
   deleted on macOS and then being re-created on the fly by the OS.
 */
 static FileProgressStatus
-recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
+recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath
 #ifdef __APPLE__
+                 ,
                  const gboolean delete_resource_forks
 #endif
 )
