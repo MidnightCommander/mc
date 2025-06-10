@@ -1446,7 +1446,10 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 */
 static FileProgressStatus
 recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
-                 const gboolean delete_resource_forks)
+#ifdef __APPLE__
+                 const gboolean delete_resource_forks
+#endif
+)
 {
     struct vfs_dirent *next;
     DIR *reading;
@@ -1487,7 +1490,7 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
         }
 #else
         if (S_ISDIR (buf.st_mode))
-            return_status = recursive_erase (ctx, tmp_vpath, TRUE);
+            return_status = recursive_erase (ctx, tmp_vpath);
         else
             return_status = erase_file (ctx, tmp_vpath);
 #endif
@@ -3378,7 +3381,7 @@ erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
             if (error != FILE_ABORT)
                 error = recursive_erase (ctx, vpath, TRUE);
 #else
-            error = recursive_erase (ctx, vpath, TRUE);
+            error = recursive_erase (ctx, vpath);
 #endif
         }
         return error;
