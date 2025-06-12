@@ -565,7 +565,7 @@ dview_pclose (FBUF *fs)
  * @return first 8-bit character of @string at position @pos
  */
 
-static int
+static inline int
 dview_get_byte (const char *str, const size_t pos)
 {
     return (unsigned char) str[pos];
@@ -605,6 +605,22 @@ dview_get_utf (const char *str, const size_t pos, int *len)
     }
 
     return c;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+dview_get_byte_wrapper (void *from, const off_t pos)
+{
+    return dview_get_byte ((const char *) from, (size_t) pos);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+dview_get_utf_wrapper (void *from, const off_t pos, int *len)
+{
+    return dview_get_utf ((const char *) from, (size_t) pos, len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2403,9 +2419,7 @@ dview_init (WDiff *dview, const char *args, const char *file1, const char *file2
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
 
-    dview->conv.utf8 = TRUE;
-    dview->convconv = str_cnv_from_term;
-    codepage_change_conv (&dview->conv.conv, &dview->conv.utf8);
+    charset_conv_init (&dview->conv, dview_get_byte_wrapper, dview_get_utf_wrapper);
 
     dview->a[DIFF_LEFT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     g_array_set_clear_func (dview->a[DIFF_LEFT], cc_free_elt);
@@ -2448,51 +2462,38 @@ dview_fini (WDiff *dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_display_line (const WDiff *dview, const int y, const int x, const size_t width,
-                    const char *att, const char *buf)
+dview_display_line (const int y, const int x, const size_t width, const char *att,
+                    charset_conv_t *conv, char *buf)
 {
     const size_t len = strlen (buf);
 
     tty_gotoyx (y, x);
 
-    for (size_t i = 0; i < len && i < width; i++)
+    for (size_t i = 0, j = 0; i < len && j < width; i++)
     {
-        int next_ch;
+        convert_char_to_display (conv, buf, i);
 
-        if (dview->conv.utf8)
-        {
-            int ch_length = 0;
-
-            next_ch = dview_get_utf (buf, i, &ch_length);
-            if (ch_length > 1)
-                i += ch_length - 1;
-            if (!g_unichar_isprint (next_ch))
-                next_ch = '.';
-        }
-        else
-            next_ch = dview_get_byte (buf, i);
-
-        if (mc_global.utf8_display)
-        {
-            if (!dview->conv.utf8)
-                next_ch = convert_8bit_to_unichar ((unsigned char) next_ch, dview->conv.conv);
-        }
-        else if (dview->conv.utf8)
-            next_ch = convert_unichar_to_8bit (next_ch, dview->conv.conv);
-        else
-            next_ch = convert_8bit_to_display (next_ch);
+        if (conv->len > 1)
+            i += conv->len - 1;
 
         if (att != NULL)
             tty_setcolor (att[i] != 0 ? DIFFVIEWER_CHANGEDNEW_COLOR : DIFFVIEWER_CHANGEDLINE_COLOR);
 
-        tty_print_anychar (next_ch);
+        tty_print_anychar (conv->ch);
+
+        if (conv->printable)
+        {
+            j++;
+            if (conv->wide)
+                j++;
+        }
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int height, int width)
+dview_display_file (WDiff *dview, diff_place_t ord, int r, int c, int height, int width)
 {
     size_t i, k;
     int j;
@@ -2541,10 +2542,10 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
 
     for (i = dview->skip_rows, j = 0; i < dview->a[ord]->len && j < height; j++, i++)
     {
-        int ch;
-
         p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
-        ch = p->ch;
+
+        const int ch = p->ch;
+
         tty_setcolor (CORE_NORMAL_COLOR);
         if (display_symbols)
         {
@@ -2574,7 +2575,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                     k = dview_str_offset_to_pos (p->p, width, dview->conv.utf8);
                     cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
                                g_ptr_array_index (dview->hdiff, i), ord, att);
-                    dview_display_line (dview, r + j, c, width, att, buf);
+                    dview_display_line (r + j, c, width, att, &dview->conv, buf);
                     continue;
                 }
 
@@ -2602,7 +2603,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
             fill_by_space (buf, width, TRUE);
         }
 
-        dview_display_line (dview, r + j, c, width, NULL, buf);
+        dview_display_line (r + j, c, width, NULL, &dview->conv, buf);
     }
 
     tty_setcolor (CORE_NORMAL_COLOR);
