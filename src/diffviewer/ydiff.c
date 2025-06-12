@@ -611,24 +611,24 @@ dview_get_utf (const char *str, const size_t pos, int *len)
 /* --------------------------------------------------------------------------------------------- */
 
 static size_t
-dview_str_utf8_offset_to_pos (const char *text, size_t length)
+dview_str_offset_to_pos (const char *text, size_t length, const gboolean utf8)
 {
     ptrdiff_t result;
 
-    if (text == NULL || text[0] == '\0')
+    if (!utf8 || text == NULL || text[0] == '\0')
         return length;
 
     if (g_utf8_validate (text, -1, NULL))
         result = g_utf8_offset_to_pointer (text, length) - text;
     else
     {
-        gunichar uni;
         char *tmpbuf, *buffer;
 
         buffer = tmpbuf = g_strdup (text);
         while (tmpbuf[0] != '\0')
         {
-            uni = g_utf8_get_char_validated (tmpbuf, -1);
+            const gunichar uni = g_utf8_get_char_validated (tmpbuf, -1);
+
             if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
                 tmpbuf = g_utf8_next_char (tmpbuf);
             else
@@ -2529,11 +2529,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 {
                     char att[BUFSIZ];
 
-                    if (dview->utf8)
-                        k = dview_str_utf8_offset_to_pos (p->p, width);
-                    else
-                        k = width;
-
+                    k = dview_str_offset_to_pos (p->p, width, dview->utf8);
                     cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
                                g_ptr_array_index (dview->hdiff, i), ord, att);
                     tty_gotoyx (r + j, c);
@@ -2574,10 +2570,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 if (ch == CHG_CH)
                     tty_setcolor (DIFFVIEWER_CHANGEDNEW_COLOR);
 
-                if (dview->utf8)
-                    k = dview_str_utf8_offset_to_pos (p->p, width);
-                else
-                    k = width;
+                k = dview_str_offset_to_pos (p->p, width, dview->utf8);
                 cvt_mget (p->p, p->u.len, buf, k, skip, tab_size, show_cr);
             }
             else
