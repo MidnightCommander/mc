@@ -32,7 +32,6 @@
 #include "lib/strutil.h"
 #include "lib/tty/key.h"
 #include "lib/widget.h"
-#include "lib/charsets.h"
 
 #include "src/history.h"
 

@@ -4,6 +4,7 @@
 #include "lib/global.h"
 #include "lib/mcconfig.h"
 #include "lib/search.h"
+#include "lib/charsets.h"  // charset_conv_t
 #include "lib/tty/color.h"
 #include "lib/widget.h"
 
@@ -114,9 +115,7 @@ typedef struct WDiff
     diff_place_t ord;
     gboolean full;
 
-    gboolean utf8;
-    // converter for translation of text
-    GIConv converter;
+    charset_conv_t conv;
 
     struct
     {
