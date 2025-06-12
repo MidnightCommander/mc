@@ -45,7 +45,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/strutil.h"
-#include "lib/charsets.h"
 #include "lib/event.h"  // mc_event_raise()
 
 #include "src/filemanager/cmd.h"  // edit_file_at_line()
@@ -2225,7 +2224,7 @@ dview_reread (WDiff *dview)
 static void
 dview_select_codepage (WDiff *dview)
 {
-    select_codepage (&dview->converter, &dview->utf8);
+    select_codepage (&dview->conv.conv, &dview->conv.utf8);
     dview_reread (dview);
     tty_touch_screen ();
     repaint_screen ();
@@ -2404,9 +2403,9 @@ dview_init (WDiff *dview, const char *args, const char *file1, const char *file2
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
 
-    dview->utf8 = TRUE;
-    dview->converter = str_cnv_from_term;
-    codepage_change_conv (&dview->converter, &dview->utf8);
+    dview->conv.utf8 = TRUE;
+    dview->convconv = str_cnv_from_term;
+    codepage_change_conv (&dview->conv.conv, &dview->conv.utf8);
 
     dview->a[DIFF_LEFT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     g_array_set_clear_func (dview->a[DIFF_LEFT], cc_free_elt);
@@ -2427,8 +2426,8 @@ dview_fini (WDiff *dview)
         dview_fclose (dview->f[DIFF_LEFT]);
     }
 
-    if (dview->converter != str_cnv_from_term)
-        str_close_conv (dview->converter);
+    if (dview->conv.conv != str_cnv_from_term)
+        str_close_conv (dview->conv.conv);
 
     destroy_hdiff (dview);
     if (dview->a[DIFF_LEFT] != NULL)
@@ -2460,7 +2459,7 @@ dview_display_line (const WDiff *dview, const int y, const int x, const size_t w
     {
         int next_ch;
 
-        if (dview->utf8)
+        if (dview->conv.utf8)
         {
             int ch_length = 0;
 
@@ -2475,11 +2474,11 @@ dview_display_line (const WDiff *dview, const int y, const int x, const size_t w
 
         if (mc_global.utf8_display)
         {
-            if (!dview->utf8)
-                next_ch = convert_8bit_to_unichar ((unsigned char) next_ch, dview->converter);
+            if (!dview->conv.utf8)
+                next_ch = convert_8bit_to_unichar ((unsigned char) next_ch, dview->conv.conv);
         }
-        else if (dview->utf8)
-            next_ch = convert_unichar_to_8bit (next_ch, dview->converter);
+        else if (dview->conv.utf8)
+            next_ch = convert_unichar_to_8bit (next_ch, dview->conv.conv);
         else
             next_ch = convert_8bit_to_display (next_ch);
 
@@ -2572,7 +2571,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 {
                     char att[BUFSIZ];
 
-                    k = dview_str_offset_to_pos (p->p, width, dview->utf8);
+                    k = dview_str_offset_to_pos (p->p, width, dview->conv.utf8);
                     cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
                                g_ptr_array_index (dview->hdiff, i), ord, att);
                     dview_display_line (dview, r + j, c, width, att, buf);
@@ -2582,7 +2581,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 if (ch == CHG_CH)
                     tty_setcolor (DIFFVIEWER_CHANGEDNEW_COLOR);
 
-                k = dview_str_offset_to_pos (p->p, width, dview->utf8);
+                k = dview_str_offset_to_pos (p->p, width, dview->conv.utf8);
                 cvt_mget (p->p, p->u.len, buf, k, skip, tab_size, show_cr);
             }
             else
