@@ -2448,6 +2448,50 @@ dview_fini (WDiff *dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+dview_display_line (const WDiff *dview, const int y, const int x, const size_t width,
+                    const char *att, const char *buf)
+{
+    const size_t len = strlen (buf);
+
+    tty_gotoyx (y, x);
+
+    for (size_t i = 0; i < len && i < width; i++)
+    {
+        int next_ch;
+
+        if (dview->utf8)
+        {
+            int ch_length = 0;
+
+            next_ch = dview_get_utf (buf, i, &ch_length);
+            if (ch_length > 1)
+                i += ch_length - 1;
+            if (!g_unichar_isprint (next_ch))
+                next_ch = '.';
+        }
+        else
+            next_ch = dview_get_byte (buf, i);
+
+        if (mc_global.utf8_display)
+        {
+            if (!dview->utf8)
+                next_ch = convert_8bit_to_unichar ((unsigned char) next_ch, dview->converter);
+        }
+        else if (dview->utf8)
+            next_ch = convert_unichar_to_8bit (next_ch, dview->converter);
+        else
+            next_ch = convert_8bit_to_display (next_ch);
+
+        if (att != NULL)
+            tty_setcolor (att[i] != 0 ? DIFFVIEWER_CHANGEDNEW_COLOR : DIFFVIEWER_CHANGEDLINE_COLOR);
+
+        tty_print_anychar (next_ch);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int height, int width)
 {
@@ -2499,7 +2543,6 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
     for (i = dview->skip_rows, j = 0; i < dview->a[ord]->len && j < height; j++, i++)
     {
         int ch;
-        int next_ch = 0;
 
         p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
@@ -2532,38 +2575,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                     k = dview_str_offset_to_pos (p->p, width, dview->utf8);
                     cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
                                g_ptr_array_index (dview->hdiff, i), ord, att);
-                    tty_gotoyx (r + j, c);
-
-                    for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
-                    {
-                        if (dview->utf8)
-                        {
-                            int ch_length = 0;
-
-                            next_ch = dview_get_utf (buf, cnt, &ch_length);
-                            if (ch_length > 1)
-                                cnt += ch_length - 1;
-                            if (!g_unichar_isprint (next_ch))
-                                next_ch = '.';
-                        }
-                        else
-                            next_ch = dview_get_byte (buf, cnt);
-
-                        tty_setcolor (att[cnt] ? DIFFVIEWER_CHANGEDNEW_COLOR
-                                               : DIFFVIEWER_CHANGEDLINE_COLOR);
-                        if (mc_global.utf8_display)
-                        {
-                            if (!dview->utf8)
-                                next_ch = convert_8bit_to_unichar ((unsigned char) next_ch,
-                                                                   dview->converter);
-                        }
-                        else if (dview->utf8)
-                            next_ch = convert_unichar_to_8bit (next_ch, dview->converter);
-                        else
-                            next_ch = convert_8bit_to_display (next_ch);
-
-                        tty_print_anychar (next_ch);
-                    }
+                    dview_display_line (dview, r + j, c, width, att, buf);
                     continue;
                 }
 
@@ -2590,37 +2602,8 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 tty_setcolor (DIFFVIEWER_CHANGED_COLOR);
             fill_by_space (buf, width, TRUE);
         }
-        tty_gotoyx (r + j, c);
-        // tty_print_nstring (buf, width);
 
-        for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
-        {
-            if (dview->utf8)
-            {
-                int ch_length = 0;
-
-                next_ch = dview_get_utf (buf, cnt, &ch_length);
-                if (ch_length > 1)
-                    cnt += ch_length - 1;
-                if (!g_unichar_isprint (next_ch))
-                    next_ch = '.';
-            }
-            else
-                next_ch = dview_get_byte (buf, cnt);
-
-            if (mc_global.utf8_display)
-            {
-                if (!dview->utf8)
-                    next_ch =
-                        convert_8bit_to_unichar ((unsigned char) next_ch, dview->converter);
-            }
-            else if (dview->utf8)
-                next_ch = convert_unichar_to_8bit (next_ch, dview->converter);
-            else
-                next_ch = convert_8bit_to_display (next_ch);
-
-            tty_print_anychar (next_ch);
-        }
+        dview_display_line (dview, r + j, c, width, NULL, buf);
     }
 
     tty_setcolor (CORE_NORMAL_COLOR);
