@@ -378,15 +378,14 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real, long 
 {
     Widget *w = WIDGET (edit);
     line_s *p;
-    int x, x1, y, cols_to_skip;
+    int x1, y, cols_to_skip;
     int i;
     int wrap_start;
     int len;
 
-    x = start_col_real;
     x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + edit_options.line_state_width;
     y = row + EDIT_TEXT_VERTICAL_OFFSET;
-    cols_to_skip = abs (x);
+    cols_to_skip = abs (start_col_real);
 
     if (edit->fullscreen == 0)
     {
