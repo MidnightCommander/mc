@@ -640,56 +640,35 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                             style = c | (book_mark << 16);
                         else
                             style = p->style | MOD_WHITESPACE;
-                        if (i > 2)
+
+                        if (i > 1)
                         {
                             p->ch = '<';
                             p->style = style;
                             p++;
+
                             while (--i > 1)
                             {
                                 p->ch = '-';
                                 p->style = style;
                                 p++;
                             }
-                            p->ch = '>';
-                            p->style = style;
-                            p++;
                         }
-                        else if (i > 1)
-                        {
-                            p->ch = '<';
-                            p->style = style;
-                            p++;
-                            p->ch = '>';
-                            p->style = style;
-                            p++;
-                        }
-                        else
-                        {
-                            p->ch = '>';
-                            p->style = style;
-                            p++;
-                        }
-                    }
-                    else if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
-                             && tty_use_colors ())
-                    {
-                        p->ch = '.';
-                        p->style |= MOD_WHITESPACE;
 
-                        const int style = p->style & ~MOD_CURSOR;
-
+                        p->ch = '>';
+                        p->style = style;
                         p++;
-                        while (--i != 0)
-                        {
-                            p->ch = ' ';
-                            p->style = style;
-                            p++;
-                        }
                     }
                     else
                     {
-                        p->ch |= ' ';
+                        if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
+                            && tty_use_colors ())
+                        {
+                            p->ch = '.';
+                            p->style |= MOD_WHITESPACE;
+                        }
+                        else
+                            p->ch |= ' ';
 
                         const int style = p->style & ~MOD_CURSOR;
 
