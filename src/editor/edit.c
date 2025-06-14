@@ -2817,7 +2817,7 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
                 col -= char_length - 1;
         }
 
-        c = convert_to_display_c (c);
+        c = convert_8bit_to_display (c);
 
         if (c == '\n')
             return (upto != 0 ? (off_t) col : p);

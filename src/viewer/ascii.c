@@ -251,7 +251,7 @@ static gboolean
 mcview_isprint (const WView *view, int c)
 {
     if (!view->utf8)
-        c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
+        c = convert_8bit_to_unichar ((unsigned char) c, view->converter);
     return g_unichar_isprint (c);
 }
 
@@ -263,7 +263,7 @@ mcview_char_display (const WView *view, int c, char *s)
     if (mc_global.utf8_display)
     {
         if (!view->utf8)
-            c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
+            c = convert_8bit_to_unichar ((unsigned char) c, view->converter);
         if (!g_unichar_isprint (c))
             c = '.';
         return g_unichar_to_utf8 (c, s);
@@ -278,12 +278,12 @@ mcview_char_display (const WView *view, int c, char *s)
         if (g_unichar_iszerowidth (c))
             return 0;
         // TODO the is_printable check below will be broken for this
-        c = convert_from_utf_to_current_c (c, view->converter);
+        c = convert_unichar_to_8bit (c, view->converter);
     }
     else
     {
         // TODO the is_printable check below will be broken for this
-        c = convert_to_display_c (c);
+        c = convert_8bit_to_display (c);
     }
 
     // TODO this is very-very buggy by design: ticket 3257 comments 0-1
