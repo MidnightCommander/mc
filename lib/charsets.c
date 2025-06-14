@@ -66,8 +66,8 @@ typedef struct
 
 static const char NO_TRANSLATION[] = N_ ("No translation");
 
-static unsigned char conv_displ[256];
-static unsigned char conv_input[256];
+static unsigned char conv_display_table[256];
+static unsigned char conv_input_table[256];
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -308,8 +308,8 @@ init_translation_table (int cpsource, int cpdisplay)
     {
         for (i = 0; i <= 255; ++i)
         {
-            conv_displ[i] = i;
-            conv_input[i] = i;
+            conv_display_table[i] = i;
+            conv_input_table[i] = i;
         }
         cp_source = cp_display;
         return NULL;
@@ -317,8 +317,8 @@ init_translation_table (int cpsource, int cpdisplay)
 
     for (i = 0; i <= 127; ++i)
     {
-        conv_displ[i] = i;
-        conv_input[i] = i;
+        conv_display_table[i] = i;
+        conv_input_table[i] = i;
     }
 
     cp_source = get_codepage_id (cpsource);
@@ -331,7 +331,7 @@ init_translation_table (int cpsource, int cpdisplay)
         return g_strdup_printf (_ ("Cannot translate from %s to %s"), cp_source, cp_display);
 
     for (i = 128; i <= 255; ++i)
-        conv_displ[i] = translate_character (cd, i);
+        conv_display_table[i] = translate_character (cd, i);
 
     g_iconv_close (cd);
 
@@ -345,7 +345,7 @@ init_translation_table (int cpsource, int cpdisplay)
     {
         unsigned char ch;
         ch = translate_character (cd, i);
-        conv_input[i] = (ch == UNKNCHAR) ? i : ch;
+        conv_input_table[i] = (ch == UNKNCHAR) ? i : ch;
     }
 
     g_iconv_close (cd);
@@ -360,7 +360,7 @@ convert_to_display_c (int c)
 {
     if (c < 0 || c >= 256)
         return c;
-    return (int) conv_displ[c];
+    return (int) conv_display_table[c];
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -370,7 +370,7 @@ convert_from_input_c (int c)
 {
     if (c < 0 || c >= 256)
         return c;
-    return (int) conv_input[c];
+    return (int) conv_input_table[c];
 }
 
 /* --------------------------------------------------------------------------------------------- */
