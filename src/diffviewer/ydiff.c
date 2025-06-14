@@ -2581,13 +2581,13 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                         if (mc_global.utf8_display)
                         {
                             if (!dview->utf8)
-                                next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch,
-                                                                      dview->converter);
+                                next_ch = convert_8bit_to_unichar ((unsigned char) next_ch,
+                                                                   dview->converter);
                         }
                         else if (dview->utf8)
-                            next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+                            next_ch = convert_unichar_to_8bit (next_ch, dview->converter);
                         else
-                            next_ch = convert_to_display_c (next_ch);
+                            next_ch = convert_8bit_to_display (next_ch);
 
                         tty_print_anychar (next_ch);
                     }
@@ -2642,12 +2642,12 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
             {
                 if (!dview->utf8)
                     next_ch =
-                        convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
+                        convert_8bit_to_unichar ((unsigned char) next_ch, dview->converter);
             }
             else if (dview->utf8)
-                next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+                next_ch = convert_unichar_to_8bit (next_ch, dview->converter);
             else
-                next_ch = convert_to_display_c (next_ch);
+                next_ch = convert_8bit_to_display (next_ch);
 
             tty_print_anychar (next_ch);
         }
@@ -3167,7 +3167,7 @@ dview_handle_key (WDiff *dview, int key)
 {
     long command;
 
-    key = convert_from_input_c (key);
+    key = convert_8bit_from_input (key);
 
     command = widget_lookup_key (WIDGET (dview), key);
     if (command == CK_IgnoreKey)

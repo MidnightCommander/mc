@@ -536,14 +536,14 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
         if (!mc_global.utf8_display)
         {
             // source is in 8-bit codeset
-            c = convert_from_input_c (x_key);
+            c = convert_8bit_from_input (x_key);
 
             if (is_printable (c))
             {
                 if (!edit->utf8)
                     char_for_insertion = c;
                 else
-                    char_for_insertion = convert_from_8bit_to_utf_c2 ((char) x_key);
+                    char_for_insertion = convert_8bit_to_input_unichar ((char) x_key);
                 goto fin;
             }
         }
@@ -587,7 +587,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
                 if (g_unichar_isprint (g_utf8_get_char (edit->charbuf)))
                 {
-                    c = convert_from_utf_to_current (edit->charbuf);
+                    c = convert_utf8_to_input (edit->charbuf);
                     edit->charbuf[0] = '\0';
                     edit->charpoint = 0;
                     char_for_insertion = c;
