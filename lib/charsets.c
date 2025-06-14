@@ -45,9 +45,6 @@
 
 GPtrArray *codepages = NULL;
 
-unsigned char conv_displ[256];
-unsigned char conv_input[256];
-
 const char *cp_display = NULL;
 const char *cp_source = NULL;
 
@@ -68,6 +65,9 @@ typedef struct
 /*** file scope variables ************************************************************************/
 
 static const char NO_TRANSLATION[] = N_ ("No translation");
+
+static unsigned char conv_displ[256];
+static unsigned char conv_input[256];
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -351,6 +351,26 @@ init_translation_table (int cpsource, int cpdisplay)
     g_iconv_close (cd);
 
     return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+convert_to_display_c (int c)
+{
+    if (c < 0 || c >= 256)
+        return c;
+    return (int) conv_displ[c];
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+convert_from_input_c (int c)
+{
+    if (c < 0 || c >= 256)
+        return c;
+    return (int) conv_input[c];
 }
 
 /* --------------------------------------------------------------------------------------------- */
