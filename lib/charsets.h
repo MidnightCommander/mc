@@ -13,9 +13,6 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern unsigned char conv_displ[256];
-extern unsigned char conv_input[256];
-
 extern const char *cp_display;
 extern const char *cp_source;
 extern GPtrArray *codepages;
@@ -29,6 +26,9 @@ void load_codepages_list (void);
 void free_codepages_list (void);
 gboolean is_supported_encoding (const char *encoding);
 char *init_translation_table (int cpsource, int cpdisplay);
+
+int convert_to_display_c (int c);
+int convert_from_input_c (int c);
 
 /*
  * Converter from utf to selected codepage
@@ -63,27 +63,6 @@ GString *str_nconvert_to_display (const char *str, int len);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/* Convert single characters */
-static inline int
-convert_to_display_c (int c)
-{
-    if (c < 0 || c >= 256)
-        return c;
-    return (int) conv_displ[c];
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline int
-convert_from_input_c (int c)
-{
-    if (c < 0 || c >= 256)
-        return c;
-    return (int) conv_input[c];
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static inline GString *
