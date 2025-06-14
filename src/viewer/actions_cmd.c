@@ -561,7 +561,7 @@ mcview_handle_key (WView *view, int key)
 {
     long command;
 
-    key = convert_from_input_c (key);
+    key = convert_8bit_from_input (key);
 
     if (view->hexedit_mode && view->mode_flags.hex
         && mcview_handle_editkey (view, key) == MSG_HANDLED)

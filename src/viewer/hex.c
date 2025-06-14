@@ -323,15 +323,15 @@ mcview_display_hex (WView *view)
             if (mc_global.utf8_display)
             {
                 if (!view->utf8)
-                    c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
+                    c = convert_8bit_to_unichar ((unsigned char) c, view->converter);
                 if (!g_unichar_isprint (c))
                     c = '.';
             }
             else if (view->utf8)
-                ch = convert_from_utf_to_current_c (ch, view->converter);
+                ch = convert_unichar_to_8bit (ch, view->converter);
             else
             {
-                c = convert_to_display_c (c);
+                c = convert_8bit_to_display (c);
 
                 if (!is_printable (c))
                     c = '.';

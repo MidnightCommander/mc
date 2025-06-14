@@ -356,7 +356,7 @@ init_translation_table (int cpsource, int cpdisplay)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-convert_to_display_c (int c)
+convert_8bit_to_display (int c)
 {
     if (c < 0 || c >= 256)
         return c;
@@ -366,7 +366,7 @@ convert_to_display_c (int c)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-convert_from_input_c (int c)
+convert_8bit_from_input (int c)
 {
     if (c < 0 || c >= 256)
         return c;
@@ -423,8 +423,15 @@ str_nconvert_to_input (const char *str, int len)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Convert utf-8 character to 8-bit one in the input (source) codepage.
+ *
+ * @param str utf-8 character
+ *
+ * @return 8-bit character
+ */
 unsigned char
-convert_from_utf_to_current (const char *str)
+convert_utf8_to_input (const char *str)
 {
     unsigned char buf_ch[MB_LEN_MAX + 1];
     unsigned char ch = '.';
@@ -459,8 +466,16 @@ convert_from_utf_to_current (const char *str)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Convert Unicode character to 8-bit one using specified coder
+ *
+ * @param input_char Unicode character
+ * @param conv conversion descriptor
+ *
+ * @return 8-bit character
+ */
 unsigned char
-convert_from_utf_to_current_c (int input_char, GIConv conv)
+convert_unichar_to_8bit (int input_char, GIConv conv)
 {
     unsigned char str[MB_LEN_MAX + 1];
     unsigned char buf_ch[MB_LEN_MAX + 1];
@@ -491,8 +506,16 @@ convert_from_utf_to_current_c (int input_char, GIConv conv)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Convert 8-bit character to Unicode one using specified coder
+ *
+ * @param input_char 8-bit character
+ * @param conv conversion descriptor
+ *
+ * @return Unicode character
+ */
 int
-convert_from_8bit_to_utf_c (char input_char, GIConv conv)
+convert_8bit_to_unichar (char input_char, GIConv conv)
 {
     unsigned char str[2];
     unsigned char buf_ch[MB_LEN_MAX + 1];
@@ -523,8 +546,15 @@ convert_from_8bit_to_utf_c (char input_char, GIConv conv)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Convert 8-bit character to Unicode one in the input (source) codepage.
+ *
+ * @param input_char 8-bit character
+ *
+ * @return Unicode character
+ */
 int
-convert_from_8bit_to_utf_c2 (char input_char)
+convert_8bit_to_input_unichar (char input_char)
 {
     int ch = '.';
     GIConv conv;
@@ -535,7 +565,7 @@ convert_from_8bit_to_utf_c2 (char input_char)
     conv = str_crt_conv_to (cp_from);
     if (conv != INVALID_CONV)
     {
-        ch = convert_from_8bit_to_utf_c (input_char, conv);
+        ch = convert_8bit_to_unichar (input_char, conv);
         str_close_conv (conv);
     }
 

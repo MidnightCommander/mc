@@ -700,7 +700,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     if (mc_global.utf8_display)
                     {
                         if (!edit->utf8)
-                            c = convert_from_8bit_to_utf_c ((unsigned char) c, edit->converter);
+                            c = convert_8bit_to_unichar ((unsigned char) c, edit->converter);
                         else if (g_unichar_iswide (c))
                         {
                             wide_width_char = TRUE;
@@ -708,9 +708,9 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         }
                     }
                     else if (edit->utf8)
-                        c = convert_from_utf_to_current_c (c, edit->converter);
+                        c = convert_unichar_to_8bit (c, edit->converter);
                     else
-                        c = convert_to_display_c (c);
+                        c = convert_8bit_to_display (c);
 
                     // Caret notation for control characters
                     if (c < 32)
