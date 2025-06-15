@@ -42,7 +42,6 @@
 #include "lib/search.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/charsets.h"
 
 #include "src/history.h"
 
