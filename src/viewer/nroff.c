@@ -55,34 +55,22 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-mcview_nroff_get_char (mcview_nroff_t *nroff, int *ret_val, off_t nroff_index)
+static void
+mcview_nroff_get_char (mcview_nroff_t *nroff, const off_t nroff_index)
 {
-    int c = 0;
+    charset_conv_t *conv = &nroff->view->conv;
 
-    if (nroff->view->conv.utf8)
+    convert_char_to_display (conv, nroff->view, nroff_index);
+
+    if (conv->utf8 && conv->ch == -1)
     {
-        c = mcview_get_utf (nroff->view, nroff_index, &nroff->char_length);
-        if (c == -1)
-        {
-            // we need got symbol in any case
-            nroff->char_length = 1;
-            c = mcview_get_byte (nroff->view, nroff_index);
-            if (c == -1 || !g_ascii_isprint (c))
-                return FALSE;
-        }
-    }
-    else
-    {
-        nroff->char_length = 1;
-        c = mcview_get_byte (nroff->view, nroff_index);
-        if (c == -1)
-            return FALSE;
+        // we need to get a symbol in any case
+        conv->utf8 = FALSE;
+        convert_char_to_display (conv, nroff->view, nroff_index);
+        conv->utf8 = TRUE;
     }
 
-    *ret_val = c;
-
-    return g_unichar_isprint (c);
+    nroff->char_length = conv->len;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -166,24 +154,32 @@ mcview_nroff_seq_free (mcview_nroff_t **nroff)
 nroff_type_t
 mcview_nroff_seq_info (mcview_nroff_t *nroff)
 {
-    int next2 = 0;
     gboolean bold_and_underline;
+    charset_conv_t *conv = &nroff->view->conv;
 
     if (nroff == NULL)
         return NROFF_TYPE_NONE;
 
     nroff->type = NROFF_TYPE_NONE;
 
-    if (!mcview_nroff_get_char (nroff, &nroff->current_char, nroff->index))
+    mcview_nroff_get_char (nroff, nroff->index);
+
+    if (conv->ch == -1 || !conv->printable)
         return nroff->type;
+
+    nroff->current_char = conv->ch;
 
     const int next = mcview_get_byte (nroff->view, nroff->index + nroff->char_length);
 
     if (next == -1 || next != '\b')
         return nroff->type;
 
-    if (!mcview_nroff_get_char (nroff, &next2, nroff->index + 1 + nroff->char_length))
+    mcview_nroff_get_char (nroff, nroff->index + 1 + nroff->char_length);
+
+    if (conv->ch == -1 || !conv->printable)
         return nroff->type;
+
+    const int next2 = conv->ch;
 
     bold_and_underline = nroff->current_char == '_';
     if (bold_and_underline)
@@ -194,11 +190,8 @@ mcview_nroff_seq_info (mcview_nroff_t *nroff)
     }
     if (bold_and_underline)
     {
-        int next4;
-
-        bold_and_underline =
-            mcview_nroff_get_char (nroff, &next4, nroff->index + 2 + nroff->char_length + 1);
-        bold_and_underline = bold_and_underline && next2 == next4;
+        mcview_nroff_get_char (nroff, nroff->index + 2 + nroff->char_length + 1);
+        bold_and_underline = conv->ch != -1 && conv->printable && next2 == conv->ch;
     }
     if (bold_and_underline)
     {
@@ -266,8 +259,15 @@ mcview_nroff_seq_prev (mcview_nroff_t *nroff)
         return -1;
 
     for (prev_index = nroff->index - 1; prev_index != 0; prev_index--)
-        if (mcview_nroff_get_char (nroff, &nroff->current_char, prev_index))
+    {
+        charset_conv_t *conv = &nroff->view->conv;
+
+        mcview_nroff_get_char (nroff, prev_index);
+        nroff->current_char = conv->ch;
+
+        if (conv->ch != -1 && conv->printable)
             break;
+    }
 
     if (prev_index == 0)
     {
@@ -287,8 +287,15 @@ mcview_nroff_seq_prev (mcview_nroff_t *nroff)
     }
 
     for (prev_index2 = prev_index - 1; prev_index2 != 0; prev_index2--)
-        if (mcview_nroff_get_char (nroff, &prev, prev_index))
+    {
+        charset_conv_t *conv = &nroff->view->conv;
+
+        mcview_nroff_get_char (nroff, prev_index);
+        prev = conv->ch;
+
+        if (conv->ch != -1 && conv->printable)
             break;
+    }
 
     nroff->index = prev_index2 == 0 ? prev_index : prev_index2;
     mcview_nroff_seq_info (nroff);

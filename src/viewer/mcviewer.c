@@ -192,6 +192,22 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+mcview_get_byte_wrapper (void *from, const off_t pos)
+{
+    return mcview_get_byte ((WView *) from, pos);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+mcview_get_utf8_wrapper (void *from, const off_t pos, int *len)
+{
+    return mcview_get_utf ((WView *) from, pos, len);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -215,7 +231,7 @@ mcview_new (const WRect *r, gboolean is_panel)
     view->locked = FALSE;
 
     view->dpy_frame_size = is_panel ? 1 : 0;
-    view->conv.conv = str_cnv_from_term;
+    view->conv.conv = INVALID_CONV;
 
     mcview_init (view);
 
@@ -321,9 +337,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
     if (!mcview_is_in_panel (view))
         view->dpy_text_column = 0;
 
-    view->conv.utf8 = TRUE;
-    view->conv.conv = str_cnv_from_term;
-    if (codepage_change_conv (&view->conv.conv, &view->conv.utf8))
+    if (charset_conv_init (&view->conv, mcview_get_byte_wrapper, mcview_get_utf8_wrapper))
         view->dpy_wrap_dirty = TRUE;
 
     if (command != NULL && (view->mode_flags.magic || file == NULL || file[0] == '\0'))
