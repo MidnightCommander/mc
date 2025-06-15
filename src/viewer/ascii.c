@@ -149,7 +149,6 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
-#include "lib/util.h"  // is_printable()
 
 #include "src/setup.h"  // option_tab_spacing
 
@@ -186,6 +185,13 @@
 
 /*** file scope type declarations ****************************************************************/
 
+typedef struct
+{
+    int ch;
+    int width;
+    gboolean printable;
+} combining_char_t;
+
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -193,8 +199,6 @@
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-/* TODO: These methods shouldn't be necessary, see ticket 3257 */
 
 static int
 mcview_char_width (const gboolean utf8, const int c)
@@ -238,60 +242,25 @@ mcview_is_non_spacing_mark (const gboolean utf8, const int c)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-mcview_isprint (const charset_conv_t *conv, const int c)
-{
-    gunichar uni;
-
-    if (conv->utf8)
-        uni = (gunichar) c;
-    else
-        uni = convert_8bit_to_unichar ((unsigned char) c, conv->conv);
-
-    return g_unichar_isprint (uni);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static inline int
-mcview_char_display (const charset_conv_t *conv, const int c, char *s)
+mcview_char_display (const gboolean utf8, const combining_char_t *c, char *s)
 {
-    char ch;
-
     if (mc_global.utf8_display)
-    {
-        gunichar uni;
+        return g_unichar_to_utf8 (c->ch, s);
 
-        if (!conv->utf8)
-            uni = (gunichar) c;
-        else
-            uni = convert_8bit_to_unichar ((unsigned char) c, conv->conv);
-        if (!g_unichar_isprint (uni))
-            uni = '.';
-        return g_unichar_to_utf8 (uni, s);
-    }
-    if (conv->utf8)
+    if (utf8)
     {
-        if (g_unichar_iswide (c))
+        if (c->width == 2)
         {
             s[0] = s[1] = '.';
             return 2;
         }
-        if (g_unichar_iszerowidth (c))
+
+        if (c->width == 0)
             return 0;
-        // TODO the is_printable check below will be broken for this
-        ch = convert_unichar_to_8bit (c, conv->conv);
-    }
-    else
-    {
-        // TODO the is_printable check below will be broken for this
-        ch = convert_8bit_to_display (c);
     }
 
-    // TODO this is very-very buggy by design: ticket 3257 comments 0-1
-    if (!is_printable (c))
-        ch = '.';
-    *s = ch;
+    *s = c->ch;
     return 1;
 }
 
@@ -301,46 +270,31 @@ mcview_char_display (const charset_conv_t *conv, const int c, char *s)
  * Just for convenience, a common interface in front of mcview_get_utf and mcview_get_byte, so that
  * the caller doesn't have to care about utf8 vs 8-bit modes.
  *
- * Normally: stores c, updates state, returns TRUE.
- * At EOF: state is unchanged, c is undefined, returns FALSE.
- *
- * Just as with mcview_get_utf(), invalid UTF-8 is reported using negative integers.
+ * Normally: updates state, returns TRUE.
+ * At EOF: state is unchanged, returns FALSE.
  *
  * Also, temporary hack: handle force_max here.
  * TODO: move it to lower layers (datasource.c)?
  */
-static int
+static gboolean
 mcview_get_next_char (WView *view, mcview_state_machine_t *state)
 {
-    int c = -1;
+    charset_conv_t *conv = &view->conv;
 
     // Pretend EOF if we reached force_max
     if (view->force_max >= 0 && state->offset >= view->force_max)
-        return (-1);
+        return FALSE;
 
-    if (view->conv.utf8)
-    {
-        int char_length = 0;
+    convert_char_to_display (conv, view, state->offset);
+    if (conv->ch == -1)
+        return FALSE;
 
-        c = mcview_get_utf (view, state->offset, &char_length);
-        if (c == -1)
-            return (-1);
-        // Pretend EOF if we crossed force_max
-        if (view->force_max >= 0 && state->offset + char_length > view->force_max)
-            return (-1);
+    // Pretend EOF if we crossed force_max
+    if (view->force_max >= 0 && state->offset + conv->len > view->force_max)
+        return FALSE;
 
-        state->offset += char_length;
-    }
-    else
-    {
-        c = mcview_get_byte (view, state->offset);
-        if (c == -1)
-            return (-1);
-
-        state->offset++;
-    }
-
-    return c;
+    state->offset += conv->len;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -363,15 +317,17 @@ mcview_get_next_char (WView *view, mcview_state_machine_t *state)
  * color can be null if the caller doesn't care.
  */
 static gboolean
-mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, int *c, int *color)
+mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, int *color)
 {
+    gboolean ok;
     charset_conv_t *conv = &view->conv;
     mcview_state_machine_t state_after_three_chars;
     mcview_state_machine_t state_after_five_chars;
+    charset_conv_t conv_after_three_chars;
     gboolean bold_and_underline;
 
-    *c = mcview_get_next_char (view, state);
-    if (*c == -1)
+    ok = mcview_get_next_char (view, state);
+    if (!ok || view->conv.ch == -1)
         return FALSE;
 
     if (color != NULL)
@@ -381,61 +337,79 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
         return TRUE;
 
     // Don't allow nroff formatting around CR, LF, TAB or other special chars
-    if (!mcview_isprint (conv, *c))
+    if (!conv->printable)
         return TRUE;
 
+    const int c = view->conv.ch;
+
+    conv_after_three_chars = *conv;
     state_after_three_chars = *state;
 
-    const int c2 = mcview_get_next_char (view, &state_after_three_chars);
+    ok = mcview_get_next_char (view, &state_after_three_chars);
 
-    if (c2 == -1 || c2 != '\b')
+    const int c2 = view->conv.ch;
+
+    if (!ok || c2 == -1 || c2 != '\b')
+    {
+        *conv = conv_after_three_chars;
         return TRUE;
+    }
 
-    const int c3 = mcview_get_next_char (view, &state_after_three_chars);
+    ok = mcview_get_next_char (view, &state_after_three_chars);
 
-    if (c3 == -1 || !mcview_isprint (conv, c3))
+    const int c3 = view->conv.ch;
+
+    if (!ok || c3 == -1 || !conv->printable)
+    {
+        *conv = conv_after_three_chars;
         return TRUE;
+    }
 
     state_after_five_chars = state_after_three_chars;
 
     /* Bold and underlined letter x is denoted by: _ \b x \b x */
-    bold_and_underline = *c == '_';
+    bold_and_underline = c3 == '_';
     if (bold_and_underline)
     {
-        const int c4 = mcview_get_next_char (view, &state_after_five_chars);
+        ok = mcview_get_next_char (view, &state_after_five_chars);
 
-        bold_and_underline = c4 != -1 && c4 == '\b';
+        const int c4 = view->conv.ch;
+
+        bold_and_underline = ok && c4 != -1 && c4 == '\b';
     }
     if (bold_and_underline)
     {
-        const int c5 = mcview_get_next_char (view, &state_after_five_chars);
+        ok = mcview_get_next_char (view, &state_after_five_chars);
 
-        bold_and_underline = c5 != -1 && c3 == c5;
+        const int c5 = view->conv.ch;
+
+        bold_and_underline = ok && c5 != -1 && c3 == c5;
     }
     if (bold_and_underline)
     {
-        *c = c3;
         *state = state_after_five_chars;
         if (color != NULL)
             *color = VIEWER_BOLD_UNDERLINED_COLOR;
     }
-    else if (*c == '_' && c3 == '_')
+    else if (c == '_' && c3 == '_')
     {
+        *conv = conv_after_three_chars;
         *state = state_after_three_chars;
         if (color != NULL)
             *color =
                 state->nroff_underscore_is_underlined ? VIEWER_UNDERLINED_COLOR : VIEWER_BOLD_COLOR;
     }
-    else if (*c == c3)
+    else if (c == c3)
     {
+        *conv = conv_after_three_chars;
         *state = state_after_three_chars;
         state->nroff_underscore_is_underlined = FALSE;
         if (color != NULL)
             *color = VIEWER_BOLD_COLOR;
     }
-    else if (*c == '_')
+    else if (c == '_')
     {
-        *c = c3;
+        *conv = conv_after_three_chars;
         *state = state_after_three_chars;
         state->nroff_underscore_is_underlined = TRUE;
         if (color != NULL)
@@ -473,49 +447,60 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
  * @return the number of entries placed in cs, or 0 on EOF
  */
 static int
-mcview_next_combining_char_sequence (WView *view, mcview_state_machine_t *state, int *cs, int clen,
-                                     int *color)
+mcview_next_combining_char_sequence (WView *view, mcview_state_machine_t *state,
+                                     combining_char_t *cs, int clen, int *color)
 {
     charset_conv_t *conv = &view->conv;
     int i = 1;
+    const gboolean ok = mcview_get_next_maybe_nroff_char (view, state, color);
 
-    if (!mcview_get_next_maybe_nroff_char (view, state, cs, color))
+    cs[0].ch = conv->ch;
+    cs[0].width = mcview_char_width (conv->utf8, cs[0].ch);
+    cs[0].printable = conv->printable;
+
+    if (!ok)
         return 0;
 
     // Process \r and \r\n newlines.
-    if (cs[0] == '\r')
+    if (cs[0].ch == '\r')
     {
-        int cnext;
-
+        charset_conv_t cnext = *conv;
         mcview_state_machine_t state_after_crlf = *state;
-        if (mcview_get_next_maybe_nroff_char (view, &state_after_crlf, &cnext, NULL)
-            && cnext == '\n')
+
+        if (mcview_get_next_maybe_nroff_char (view, &state_after_crlf, NULL)
+            && view->conv.ch == '\n')
+        {
+            *conv = cnext;
             *state = state_after_crlf;
-        cs[0] = '\n';
+        }
+
+        cs[0].ch = '\n';
+        cs[0].width = 0;
+        cs[0].printable = FALSE;
         return 1;
     }
 
     // We don't want combining over non-printable characters. This includes '\n' and '\t' too.
-    if (!mcview_isprint (conv, cs[0]))
+    if (!cs[0].printable)
         return 1;
 
-    if (mcview_ismark (conv->utf8, cs[0]))
+    if (mcview_ismark (conv->utf8, cs[0].ch))
     {
         if (!state->print_lonely_combining)
         {
             // First character is combining. Either just return it, ...
             return 1;
         }
-        else
-        {
-            // or place this (and subsequent combining ones) over a dotted circle.
-            cs[1] = cs[0];
-            cs[0] = BASE_CHARACTER_FOR_LONELY_COMBINING;
-            i = 2;
-        }
+
+        // or place this (and subsequent combining ones) over a dotted circle.
+        cs[1] = cs[0];
+        cs[0].ch = BASE_CHARACTER_FOR_LONELY_COMBINING;
+        cs[0].width = 1;
+        cs[0].printable = FALSE;
+        i = 2;
     }
 
-    if (mcview_char_width (conv->utf8, cs[0]) == 2)
+    if (cs[0].width == 2)
     {
         // Don't allow combining or spacing mark for wide characters, is this okay?
         return 1;
@@ -526,23 +511,26 @@ mcview_next_combining_char_sequence (WView *view, mcview_state_machine_t *state,
     for (; i < clen; i++)
     {
         mcview_state_machine_t state_after_combining = *state;
+        const gboolean ok2 = mcview_get_next_maybe_nroff_char (view, &state_after_combining, NULL);
 
-        if (!mcview_get_next_maybe_nroff_char (view, &state_after_combining, &cs[i], NULL))
-            return i;
-        if (!mcview_ismark (conv->utf8, cs[i]) || !mcview_isprint (conv, cs[i]))
-            return i;
-        if (g_unichar_type (cs[i]) == G_UNICODE_SPACING_MARK)
+        cs[i].ch = conv->ch;
+        cs[i].width = mcview_char_width (conv->utf8, conv->ch);
+        cs[i].printable = conv->printable;
+
+        if (!ok2 || !mcview_ismark (conv->utf8, cs[i].ch) || !cs[i].printable)
+            break;
+
+        *state = state_after_combining;
+
+        if (g_unichar_type (cs[i].ch) == G_UNICODE_SPACING_MARK)
         {
             // Only allow as the first combining char. Stop processing in either case.
             if (i == 1)
-            {
-                *state = state_after_combining;
-                i++;
-            }
-            return i;
+                i = 2;
+            break;
         }
-        *state = state_after_combining;
     }
+
     return i;
 }
 
@@ -579,7 +567,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
     charset_conv_t *conv = &view->conv;
     off_t dpy_text_column = view->mode_flags.wrap ? 0 : view->dpy_text_column;
     int col = 0;
-    int cs[1 + MAX_COMBINING_CHARS];
+    combining_char_t cs[1 + MAX_COMBINING_CHARS];
     char str[(1 + MAX_COMBINING_CHARS) * MB_LEN_MAX + 1];
 
     if (paragraph_ended != NULL)
@@ -618,7 +606,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
         if (view->search_start <= state->offset && state->offset < view->search_end)
             color = VIEWER_SELECTED_COLOR;
 
-        if (cs[0] == '\n')
+        if (cs[0].ch == '\n')
         {
             // New line: reset all formatting state for the next paragraph.
             mcview_state_machine_init (state, state->offset);
@@ -627,30 +615,42 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
             return 1;
         }
 
-        if (mcview_is_non_spacing_mark (conv->utf8, cs[0]))
+        if (mcview_is_non_spacing_mark (conv->utf8, cs[0].ch))
         {
             // Lonely combining character. Probably leftover after too many combining chars.
             // Just ignore.
             continue;
         }
 
-        // Nonprintable, or lonely spacing mark
-        if ((!mcview_isprint (conv, cs[0]) || mcview_ismark (conv->utf8, cs[0])) && cs[0] != '\t')
-            cs[0] = '.';
-
-        for (int i = 0; i < n; i++)
-            charwidth += mcview_char_width (conv->utf8, cs[i]);
-
-        /* Adjust the width for TAB. It's handled below along with the normal characters,
-         * so that it's wrapped consistently with them, and is painted with the proper
-         * attributes (although currently it can't have a special color). */
-        if (cs[0] == '\t')
+        if (cs[0].ch == '\t')
         {
+            /* Adjust the width for TAB. It's handled below along with the normal characters,
+             * so that it's wrapped consistently with them, and is painted with the proper
+             * attributes (although currently it can't have a special color). */
             charwidth = option_tab_spacing - state->unwrapped_column % option_tab_spacing;
+
+            cs[0].width = charwidth;
+            cs[0].printable = TRUE;
             state->print_lonely_combining = TRUE;
         }
         else
+        {
+            // Nonprintable, or lonely spacing mark
+            if (!cs[0].printable || mcview_ismark (conv->utf8, cs[0].ch))
+            {
+                cs[0].ch = '.';
+                cs[0].width = 1;
+                cs[0].printable = TRUE;
+            }
+
             state->print_lonely_combining = FALSE;
+        }
+
+        if (!conv->utf8)
+            charwidth += n;
+        else
+            for (int i = 0; i < n; i++)
+                charwidth += cs[i].width;
 
         /* In wrap mode only: We're done with this row if the character sequence wouldn't fit.
          * Except if at the first column, because then it wouldn't fit in the next row either.
@@ -676,9 +676,9 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
                 // The combining character sequence fits entirely in the viewport. Print it.
                 tty_setcolor (color);
                 widget_gotoyx (view, r->y + row, r->x + ((off_t) col - dpy_text_column));
-                if (cs[0] == '\t')
+                if (cs[0].ch == '\t')
                 {
-                    for (int i = 0; i < charwidth; i++)
+                    for (int i = 0; i < cs[0].width; i++)
                         tty_print_char (' ');
                 }
                 else
@@ -686,7 +686,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
                     int j = 0;
 
                     for (int i = 0; i < n; i++)
-                        j += mcview_char_display (conv, cs[i], str + j);
+                        j += mcview_char_display (conv->utf8, cs + i, str + j);
 
                     str[j] = '\0';
 
@@ -707,7 +707,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
                      i < (off_t) col + charwidth && i < dpy_text_column + (off_t) r->cols; i++)
                 {
                     widget_gotoyx (view, r->y + row, r->x + (i - dpy_text_column));
-                    tty_print_anychar (cs[0] == '\t' ? ' ' : PARTIAL_CJK_AT_LEFT_MARGIN);
+                    tty_print_anychar (cs[0].ch == '\t' ? ' ' : PARTIAL_CJK_AT_LEFT_MARGIN);
                 }
             }
             else if ((off_t) col < dpy_text_column + (off_t) r->cols
@@ -720,7 +720,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
                 for (int i = col; i < dpy_text_column + (off_t) r->cols; i++)
                 {
                     widget_gotoyx (view, r->y + row, r->x + (i - dpy_text_column));
-                    tty_print_anychar (cs[0] == '\t' ? ' ' : PARTIAL_CJK_AT_RIGHT_MARGIN);
+                    tty_print_anychar (cs[0].ch == '\t' ? ' ' : PARTIAL_CJK_AT_RIGHT_MARGIN);
                 }
             }
         }
