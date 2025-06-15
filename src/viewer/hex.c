@@ -89,6 +89,21 @@ mcview_hex_calculate_boldflag (WView *view, off_t from, struct hexedit_change_no
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+mcview_isprint (const WView *view, const int c)
+{
+    gunichar uni;
+
+    if (view->conv.utf8)
+        uni = (gunichar) c;
+    else
+        uni = convert_8bit_to_unichar ((unsigned char) c, view->conv.conv);
+
+    return g_unichar_isprint (uni);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -175,8 +190,9 @@ mcview_display_hex (WView *view)
                 {
                     // UTF-8 continuation bytes, print a space (with proper attributes)...
                     cont_bytes--;
-                    ch = ' ';
-                    if (cjk_right)
+                    if (!cjk_right)
+                        ch = ' ';
+                    else
                     {
                         // ... except when it'd wipe out the right half of a CJK, then print nothing
                         cjk_right = FALSE;
@@ -323,9 +339,7 @@ mcview_display_hex (WView *view)
 
             if (mc_global.utf8_display)
             {
-                if (!view->conv.utf8)
-                    c = convert_8bit_to_unichar ((unsigned char) c, view->conv.conv);
-                if (!g_unichar_isprint (c))
+                if (!mcview_isprint (view, c))
                     c = '.';
             }
             else if (view->conv.utf8)
@@ -333,7 +347,6 @@ mcview_display_hex (WView *view)
             else
             {
                 c = convert_8bit_to_display (c);
-
                 if (!is_printable (c))
                     c = '.';
             }
