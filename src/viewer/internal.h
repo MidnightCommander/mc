@@ -8,6 +8,7 @@
 
 #include "lib/global.h"
 
+#include "lib/charsets.h"
 #include "lib/search.h"
 #include "lib/widget.h"
 #include "lib/vfs/vfs.h"  // vfs_path_t
@@ -136,7 +137,7 @@ struct WView
     gboolean hexedit_lownibble;  // Are we editing the last significant nibble?
     gboolean locked;             // We hold lock on current file
 
-    gboolean utf8;  // It's multibyte file codeset
+    charset_conv_t conv;  // converter text translation
 
     GPtrArray *coord_cache;  // Cache for mapping offsets to cursor positions
 
@@ -180,9 +181,6 @@ struct WView
 
     off_t update_steps;     // The number of bytes between percent increments
     off_t update_activate;  // Last point where we updated the status
-
-    // converter for translation of text
-    GIConv converter;
 
     GArray *saved_bookmarks;
 

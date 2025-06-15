@@ -38,7 +38,6 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
-#include "lib/charsets.h"
 
 #include "internal.h"
 
@@ -61,7 +60,7 @@ mcview_nroff_get_char (mcview_nroff_t *nroff, int *ret_val, off_t nroff_index)
 {
     int c = 0;
 
-    if (nroff->view->utf8)
+    if (nroff->view->conv.utf8)
     {
         c = mcview_get_utf (nroff->view, nroff_index, &nroff->char_length);
         if (c == -1)

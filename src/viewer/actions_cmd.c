@@ -53,7 +53,6 @@
 #include "lib/lock.h"     // lock_file()
 #include "lib/file-entry.h"
 #include "lib/widget.h"
-#include "lib/charsets.h"
 #include "lib/event.h"     // mc_event_raise()
 #include "lib/mcconfig.h"  // mc_config_history_get_recent_item()
 
