@@ -36,7 +36,6 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/charsets.h"  // codepage_change_conv()
 #include "lib/tty/tty.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
@@ -216,7 +215,7 @@ mcview_new (const WRect *r, gboolean is_panel)
     view->locked = FALSE;
 
     view->dpy_frame_size = is_panel ? 1 : 0;
-    view->converter = str_cnv_from_term;
+    view->conv.conv = str_cnv_from_term;
 
     mcview_init (view);
 
@@ -322,9 +321,9 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
     if (!mcview_is_in_panel (view))
         view->dpy_text_column = 0;
 
-    view->utf8 = TRUE;
-    view->converter = str_cnv_from_term;
-    if (codepage_change_conv (&view->converter, &view->utf8))
+    view->conv.utf8 = TRUE;
+    view->conv.conv = str_cnv_from_term;
+    if (codepage_change_conv (&view->conv.conv, &view->conv.utf8))
         view->dpy_wrap_dirty = TRUE;
 
     if (command != NULL && (view->mode_flags.magic || file == NULL || file[0] == '\0'))

@@ -43,7 +43,6 @@
 #include "lib/strutil.h"
 #include "lib/util.h"  // save_file_position()
 #include "lib/widget.h"
-#include "lib/charsets.h"
 
 #include "src/selcodepage.h"
 #include "src/util.h"  // file_error_message()
@@ -229,10 +228,10 @@ mcview_done (WView *view)
         view->coord_cache = NULL;
     }
 
-    if (view->converter != str_cnv_from_term)
+    if (view->conv.conv != str_cnv_from_term)
     {
-        str_close_conv (view->converter);
-        view->converter = str_cnv_from_term;
+        str_close_conv (view->conv.conv);
+        view->conv.conv = str_cnv_from_term;
     }
 
     mcview_search_deinit (view);
@@ -256,7 +255,7 @@ mcview_done (WView *view)
 void
 mcview_select_codepage (WView *view)
 {
-    select_codepage (&view->converter, &view->utf8);
+    select_codepage (&view->conv.conv, &view->conv.utf8);
     view->dirty++;
 }
 
