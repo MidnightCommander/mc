@@ -37,7 +37,6 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
-#include "lib/charsets.h"  // cp_source
 #include "lib/widget.h"
 
 #include "src/setup.h"
