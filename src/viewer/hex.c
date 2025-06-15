@@ -45,7 +45,6 @@
 #include "lib/lock.h"  // lock_file() and unlock_file()
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/charsets.h"
 
 #include "internal.h"
 
@@ -128,7 +127,7 @@ mcview_display_hex (WView *view)
     // Find the first displayable changed byte
     // In UTF-8 mode, go back by 1 or maybe 2 lines to handle continuation bytes properly.
     from = view->dpy_start;
-    if (view->utf8)
+    if (view->conv.utf8)
     {
         if (from >= view->bytes_per_line)
         {
@@ -168,7 +167,7 @@ mcview_display_hex (WView *view)
             int c;
             int ch = 0;
 
-            if (view->utf8)
+            if (view->conv.utf8)
             {
                 struct hexedit_change_node *corr = curr;
 
@@ -324,13 +323,13 @@ mcview_display_hex (WView *view)
 
             if (mc_global.utf8_display)
             {
-                if (!view->utf8)
-                    c = convert_8bit_to_unichar ((unsigned char) c, view->converter);
+                if (!view->conv.utf8)
+                    c = convert_8bit_to_unichar ((unsigned char) c, view->conv.conv);
                 if (!g_unichar_isprint (c))
                     c = '.';
             }
-            else if (view->utf8)
-                ch = convert_unichar_to_8bit (ch, view->converter);
+            else if (view->conv.utf8)
+                ch = convert_unichar_to_8bit (ch, view->conv.conv);
             else
             {
                 c = convert_8bit_to_display (c);
@@ -343,7 +342,7 @@ mcview_display_hex (WView *view)
             if (text_start + bytes < r->cols)
             {
                 widget_gotoyx (view, r->y + row, r->x + text_start + bytes);
-                if (view->utf8)
+                if (view->conv.utf8)
                     tty_print_anychar (ch);
                 else
                     tty_print_char (c);
