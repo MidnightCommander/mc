@@ -85,8 +85,8 @@ tar_short_read (size_t status, tar_super_t *archive)
     size_t left;  // bytes left
     char *more;   // pointer to next byte to read
 
-    more = archive->record_start->buffer + status;
     left = record_size - status;
+    more = (char *) archive->record_start + status;
 
     while (left % BLOCKSIZE != 0 || (left != 0 && status != 0))
     {
