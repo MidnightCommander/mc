@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -250,14 +251,12 @@ mc_tty_normalize_lines_char (const char *str)
         { NULL, 0 },
     };
 
-    if (!str)
+    if (str == NULL)
         return (int) ' ';
 
     for (res = 0; lines_codes[res].line; res++)
-    {
         if (strcmp (str, lines_codes[res].line) == 0)
             return lines_codes[res].line_code;
-    }
 
     str2 = mc_tty_normalize_from_utf8 (str);
     res = g_utf8_get_char_validated (str2, -1);
@@ -712,7 +711,7 @@ tty_print_anychar (int c)
 {
     if (c > 255)
     {
-        char str[UTF8_CHAR_LEN + 1];
+        char str[MB_LEN_MAX + 1];
         int res;
 
         res = g_unichar_to_utf8 (c, str);

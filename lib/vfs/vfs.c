@@ -115,7 +115,7 @@ static long vfs_free_handle_list = -1;
  */
 
 static estr_t
-_vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
+_vfs_translate_path (const char *path, const long size, GIConv defcnv, GString *buffer)
 {
     estr_t state = ESTR_SUCCESS;
     const char *semi;
@@ -123,58 +123,57 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
     if (size == 0)
         return ESTR_SUCCESS;
 
-    size = (size > 0) ? size : (signed int) strlen (path);
+    const long sz = size > 0 ? size : (long) strlen (path);
 
     // try to find /#enc:
-    semi = g_strrstr_len (path, size, VFS_ENCODING_PREFIX);
+    semi = g_strrstr_len (path, sz, VFS_ENCODING_PREFIX);
     if (semi != NULL && (semi == path || IS_PATH_SEP (semi[-1])))
     {
         char encoding[16];
         const char *slash;
         GIConv coder = INVALID_CONV;
-        int ms;
+        long ms;
 
         // first must be translated part before #enc:
         ms = semi - path;
-
         state = _vfs_translate_path (path, ms, defcnv, buffer);
-
         if (state != ESTR_SUCCESS)
             return state;
 
         // now can be translated part after #enc:
         semi += strlen (VFS_ENCODING_PREFIX);  // skip "#enc:"
         slash = strchr (semi, PATH_SEP);
-        // ignore slashes after size;
-        if (slash - path >= size)
+        // ignore slashes after sz
+        if (slash - path >= sz)
             slash = NULL;
 
-        ms = (slash != NULL) ? slash - semi : (int) strlen (semi);
-        ms = MIN ((unsigned int) ms, sizeof (encoding) - 1);
-        // limit encoding size (ms) to path size (size)
-        if (semi + ms > path + size)
-            ms = path + size - semi;
+        ms = slash != NULL ? slash - semi : (long) strlen (semi);
+        ms = MIN (ms, (long) sizeof (encoding) - 1);
+        // limit encoding size (ms) to path size (sz)
+        if (semi + ms > path + sz)
+            ms = path + sz - semi;
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
 
         if (is_supported_encoding (encoding))
             coder = str_crt_conv_to (encoding);
 
-        if (coder != INVALID_CONV)
+        if (coder == INVALID_CONV)
+        {
+            errno = EINVAL;
+            state = ESTR_FAILURE;
+        }
+        else
         {
             if (slash != NULL)
-                state = str_vfs_convert_to (coder, slash + 1, path + size - slash - 1, buffer);
+                state = str_vfs_convert_to (coder, slash + 1, path + sz - slash - 1, buffer);
             str_close_conv (coder);
-            return state;
         }
-
-        errno = EINVAL;
-        state = ESTR_FAILURE;
     }
     else
     {
         // path can be translated whole at once
-        state = str_vfs_convert_to (defcnv, path, size, buffer);
+        state = str_vfs_convert_to (defcnv, path, sz, buffer);
     }
 
     return state;

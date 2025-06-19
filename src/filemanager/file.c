@@ -1495,7 +1495,7 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
  * @param vpath directory handler
  * @param error status of directory reading
  *
- * @returns -1 on error,
+ * @return -1 on error,
  *          1 if there are no entries besides "." and ".." in the directory path points to,
  *          0 else.
  *

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -19,9 +19,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
-"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
-"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "—  < Bez tłumaczenia >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -466,6 +470,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nie można sprawdzić potoku SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -497,12 +507,6 @@ msgid ""
 msgstr ""
 "Rozmiar ekranu %d×%d nie jest obsługiwany.\n"
 "Proszę sprawdzić zmienną środowiskową TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nie można sprawdzić potoku SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1865,10 +1869,6 @@ msgid "Stopped"
 msgstr "Zatrzymano"
 
 #, fuzzy
-msgid "No translation"
-msgstr "—  < Bez tłumaczenia >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Strona kodowa wejściowa/wyjściowa:"
 
@@ -2381,7 +2381,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Nie można skopiować zapętlonego dowiązania symbolicznego\n"
@@ -4602,9 +4602,6 @@ msgstr "Zgłoszono błąd po przerwaniu."
 msgid "Aborted transfer would be successful."
 msgstr "Przerwane przesyłanie zostałoby pomyślnie zakończone."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
-
 msgid "Inconsistent tar archive"
 msgstr "Niespójne archiwum tar"
 
@@ -4626,6 +4623,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "nie wygląda na archiwum tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
 
 msgid "undelfs: error"
 msgstr "undelfs: błąd"
@@ -4706,9 +4706,6 @@ msgstr "Nieprawidłowa wartość"
 
 msgid "File was modified. Save with exit?"
 msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"
-
-msgid "&Cancel quit"
-msgstr "N&ie zamykaj"
 
 #, fuzzy, c-format
 msgid ""
@@ -4816,6 +4813,9 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "N&ie zamykaj"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

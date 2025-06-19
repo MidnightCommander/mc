@@ -47,7 +47,7 @@ WButton *button_new (int y, int x, int action, button_flags_t flags, const char 
                      bcback_fn callback);
 char *button_get_text (const WButton *b);
 void button_set_text (WButton *b, const char *text);
-int button_get_len (const WButton *b);
+int button_get_width (const WButton *b);
 
 cb_ret_t button_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm,
                                   void *data);

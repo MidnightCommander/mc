@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -19,6 +19,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -460,43 +464,43 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-#, c-format
-msgid ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-
 msgid "The TERM environment variable is unset!\n"
 msgstr "The TERM environment variable is unset!\n"
 
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Cannot check SIGWINCH pipe"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
 
 msgid "B"
 msgstr "B"
@@ -1853,10 +1857,6 @@ msgid "Stopped"
 msgstr "Stopped"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < No translation >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Input / display codepage:"
 
@@ -2369,7 +2369,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Cannot copy cyclic symbolic link\n"
@@ -4575,9 +4575,6 @@ msgstr "Error reported after abort."
 msgid "Aborted transfer would be successful."
 msgstr "Aborted transfer would be successful."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek not stopped at a record boundary"
-
 msgid "Inconsistent tar archive"
 msgstr "Inconsistent tar archive"
 
@@ -4599,6 +4596,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "doesn't look like a tar archive"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek not stopped at a record boundary"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4679,9 +4679,6 @@ msgstr "Invalid value"
 
 msgid "File was modified. Save with exit?"
 msgstr "File was modified. Save with exit?"
-
-msgid "&Cancel quit"
-msgstr "&Cancel quit"
 
 #, fuzzy, c-format
 msgid ""
@@ -4788,6 +4785,9 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Cancel quit"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "The Midnight Commander"

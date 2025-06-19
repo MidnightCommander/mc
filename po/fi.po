@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -20,6 +20,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "No translation"
+msgstr ""
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -462,6 +465,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Vaihto"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ei voi tarkistaa SIGWINCH -putkea"
+
 #, c-format
 msgid ""
 "\n"
@@ -493,12 +502,6 @@ msgid ""
 msgstr ""
 "Näytön koko %dx%d ei ole yhteensopiva.\n"
 "Tarkista TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ei voi tarkistaa SIGWINCH -putkea"
 
 msgid "B"
 msgstr "t"
@@ -1815,9 +1818,6 @@ msgstr "Käynnissä"
 msgid "Stopped"
 msgstr "Pysäytetty"
 
-msgid "No translation"
-msgstr ""
-
 msgid "Detected display codepage"
 msgstr ""
 
@@ -2319,7 +2319,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Väliaikaista diff-tiedostoa ei voi luoda\n"
@@ -4403,9 +4403,6 @@ msgstr "Virhe raportoitu keskeyttämisen jälkeen."
 msgid "Aborted transfer would be successful."
 msgstr "Keskeytetty siirto olisi onnistunut."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4422,6 +4419,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4498,9 +4498,6 @@ msgid "Invalid value"
 msgstr ""
 
 msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
 msgstr ""
 
 #, fuzzy, c-format

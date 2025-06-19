@@ -53,7 +53,8 @@ START_TEST (test_parse_csi)
 {
     const char *s = &"\x1b[=5uRest"[2];
     const char *end = s + strlen (s);
-    gboolean ok = parse_csi (NULL, &s, end);
+    const gboolean ok = parse_csi (NULL, &s, end);
+
     ck_assert_msg (ok, "failed to parse CSI");
     ck_assert_str_eq (s, "Rest");
 }
@@ -63,15 +64,20 @@ END_TEST
 
 START_TEST (test_strip_ctrl_codes)
 {
-    char *s = strdup (
-        "\033]0;~\a\033[30m\033(B\033[m\033]133;A;special_key=1\a$ "
-        "\033[K\033[?2004h\033[>4;1m\033[=5u\033=\033[?2004l\033[>4;0m\033[=0u\033>\033[?2004h"
-        "\033[>4;1m\033[=5u\033=\033[?2004l\033[>4;0m\033[=0u\033>\033[?2004h\033[>4;1m\033[=5u"
-        "\033=");
+    // clang-format off
+    char *s = g_strdup (ESC_STR "]0;~\a"                   ESC_STR "[30m" ESC_STR "(B" ESC_STR "[m"
+                        ESC_STR "]133;A;special_key=1\a$ " ESC_STR "[K"   ESC_STR "[?2004h"
+                        ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "="    ESC_STR "[?2004l"
+                        ESC_STR "[>4;0m" ESC_STR "[=0u"    ESC_STR ">"    ESC_STR "[?2004h"
+                        ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "="    ESC_STR "[?2004l"
+                        ESC_STR "[>4;0m" ESC_STR "[=0u"    ESC_STR ">"    ESC_STR "[?2004h"
+                        ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "=");
+    // clang-format on
     char *actual = strip_ctrl_codes (s);
     const char *expected = "$ ";
+
     ck_assert_str_eq (actual, expected);
-    free (s);
+    g_free (s);
 }
 END_TEST
 

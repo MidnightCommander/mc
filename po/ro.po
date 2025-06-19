@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -27,6 +27,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Fără translatare >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -468,6 +472,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Variabila de mediu TERM nu este setată!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nu se poate verifica conducta SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -499,12 +509,6 @@ msgid ""
 msgstr ""
 "Mărimea %dx%d a ecranului nu este suportată.\n"
 "Verificați variabila de mediu TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Variabila de mediu TERM nu este setată!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nu se poate verifica conducta SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1845,10 +1849,6 @@ msgid "Stopped"
 msgstr "Oprit"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Fără translatare >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Intrare / cod de afișare:"
 
@@ -2360,7 +2360,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Nu se poate copia legătura simbolică ciclică\n"
@@ -4564,9 +4564,6 @@ msgstr "S-a raportat o eroare după abandon."
 msgid "Aborted transfer would be successful."
 msgstr "Transferul abandonat va reuși."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Arhivă tar trunchiată"
 
@@ -4585,6 +4582,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4666,9 +4666,6 @@ msgstr "Valoare nevalidă"
 
 msgid "File was modified. Save with exit?"
 msgstr "Fișierul a fost modificat. Salvezi la ieșire?"
-
-msgid "&Cancel quit"
-msgstr "&Renunță la ieșire"
 
 #, fuzzy, c-format
 msgid ""
@@ -4775,6 +4772,9 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "&Renunță la ieșire"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -23,6 +23,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "- < Ingen oversettelse >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -464,6 +468,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Miljøvariabelen TERM mangler.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Klarte ikke sjekke SIGWINCH-røret"
+
 #, c-format
 msgid ""
 "\n"
@@ -495,12 +505,6 @@ msgid ""
 msgstr ""
 "Skjermstørrelsen %dx%d støttes ikke.\n"
 "Sjekk miljøvariabelen TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Miljøvariabelen TERM mangler.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Klarte ikke sjekke SIGWINCH-røret"
 
 msgid "B"
 msgstr "B"
@@ -1865,10 +1869,6 @@ msgid "Stopped"
 msgstr "Pause"
 
 #, fuzzy
-msgid "No translation"
-msgstr "- < Ingen oversettelse >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Tegnkoding for inndata/visning:"
 
@@ -2381,7 +2381,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "Klarte ikke kopiere syklisk symlenke\n"
@@ -4589,9 +4589,6 @@ msgstr "Feil rapportert etter avbrudd."
 msgid "Aborted transfer would be successful."
 msgstr "Avbrutt overføring ville vært i orden."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek stoppet ikke på kanten av en post"
-
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
 
@@ -4613,6 +4610,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "fremstår ikke som et tar-arkiv"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek stoppet ikke på kanten av en post"
 
 msgid "undelfs: error"
 msgstr "undelfs: feil"
@@ -4693,9 +4693,6 @@ msgstr "Ugyldig verdi"
 
 msgid "File was modified. Save with exit?"
 msgstr "Fila er endret. Lagre før avslutning?"
-
-msgid "&Cancel quit"
-msgstr "Av&bryt avslutning"
 
 #, fuzzy, c-format
 msgid ""
@@ -4802,6 +4799,9 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "Av&bryt avslutning"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

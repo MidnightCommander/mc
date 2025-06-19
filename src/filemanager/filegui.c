@@ -176,7 +176,7 @@ typedef enum
     USBDEVICE_SUPER_MAGIC = 0x9fa2
 } filegui_nonattrs_fs_t;
 
-/* Used for button result values */
+// Used for button result values
 typedef enum
 {
     REPLACE_YES = B_USER,
@@ -191,9 +191,7 @@ typedef enum
     REPLACE_ABORT
 } replace_action_t;
 
-/* This structure describes the UI and internal data required by a file
- * operation context.
- */
+// UI and internal data required by a file operation context.
 typedef struct
 {
     // ETA and bps
@@ -236,7 +234,7 @@ static struct
     FileProgressStatus action;
     const char *text;
     button_flags_t flags;
-    int len;
+    int width;
 } progress_buttons[] = {
     { NULL, FILE_SKIP, N_ ("&Skip"), NORMAL_BUTTON, -1 },
     { NULL, FILE_SUSPEND, N_ ("S&uspend"), NORMAL_BUTTON, -1 },
@@ -625,7 +623,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         label_set_text (l, str_trunc (l->text, w));
     }
 
-    // real dlalog width
+    // real dialog width
     dlg_width += 2 * (2 + gap);
 
     WX (1) = WX (0) + WCOLS (0) + gap;
@@ -733,29 +731,26 @@ is_wildcarded (const char *p)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-place_progress_buttons (WDialog *h, gboolean suspended)
+place_progress_buttons (WDialog *h, const gboolean suspended)
 {
-    const size_t i = suspended ? 2 : 1;
-    Widget *w = WIDGET (h);
-    int buttons_width;
+    const Widget *w = WIDGET (h);
 
-    buttons_width = 2 + progress_buttons[0].len + progress_buttons[3].len;
-    buttons_width += progress_buttons[i].len;
+    const size_t i = suspended ? 2 : 1;
+    const int buttons_width =
+        2 + progress_buttons[0].width + progress_buttons[3].width + progress_buttons[i].width;
+
     button_set_text (BUTTON (progress_buttons[i].w), progress_buttons[i].text);
 
     progress_buttons[0].w->rect.x = w->rect.x + (w->rect.cols - buttons_width) / 2;
-    progress_buttons[i].w->rect.x = progress_buttons[0].w->rect.x + progress_buttons[0].len + 1;
-    progress_buttons[3].w->rect.x = progress_buttons[i].w->rect.x + progress_buttons[i].len + 1;
+    progress_buttons[i].w->rect.x = progress_buttons[0].w->rect.x + progress_buttons[0].width + 1;
+    progress_buttons[3].w->rect.x = progress_buttons[i].w->rect.x + progress_buttons[i].width + 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-progress_button_callback (WButton *button, int action)
+progress_button_callback (MC_UNUSED WButton *button, MC_UNUSED int action)
 {
-    (void) button;
-    (void) action;
-
     // don't close dialog in any case
     return 0;
 }
@@ -773,7 +768,7 @@ progress_button_callback (WButton *button, int action)
  */
 
 file_op_context_t *
-file_op_context_new (FileOperation op)
+file_op_context_new (const FileOperation op)
 {
     file_op_context_t *ctx;
 
@@ -817,12 +812,11 @@ file_progress_check_buttons (file_op_context_t *ctx)
 {
     int c;
     Gpm_Event event;
-    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return FILE_CONT;
 
-    ui = ctx->ui;
+    const file_progress_ui_t *ui = ctx->ui;
 
 get_event:
     event.x = -1;  // Don't show the GPM cursor
@@ -880,7 +874,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         return;
 
 #ifdef ENABLE_NLS
-    if (progress_buttons[0].len == -1)
+    if (progress_buttons[0].width == -1)
     {
         size_t i;
 
@@ -962,22 +956,22 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
     progress_buttons[0].w =
         WIDGET (button_new (y, 0, progress_buttons[0].action, progress_buttons[0].flags,
                             progress_buttons[0].text, progress_button_callback));
-    if (progress_buttons[0].len == -1)
-        progress_buttons[0].len = button_get_len (BUTTON (progress_buttons[0].w));
+    if (progress_buttons[0].width == -1)
+        progress_buttons[0].width = button_get_width (BUTTON (progress_buttons[0].w));
 
     progress_buttons[1].w =
         WIDGET (button_new (y, 0, progress_buttons[1].action, progress_buttons[1].flags,
                             progress_buttons[1].text, progress_button_callback));
-    if (progress_buttons[1].len == -1)
-        progress_buttons[1].len = button_get_len (BUTTON (progress_buttons[1].w));
+    if (progress_buttons[1].width == -1)
+        progress_buttons[1].width = button_get_width (BUTTON (progress_buttons[1].w));
 
-    if (progress_buttons[2].len == -1)
+    if (progress_buttons[2].width == -1)
     {
         // create and destroy button to get it length
         progress_buttons[2].w =
             WIDGET (button_new (y, 0, progress_buttons[2].action, progress_buttons[2].flags,
                                 progress_buttons[2].text, progress_button_callback));
-        progress_buttons[2].len = button_get_len (BUTTON (progress_buttons[2].w));
+        progress_buttons[2].width = button_get_width (BUTTON (progress_buttons[2].w));
         widget_destroy (progress_buttons[2].w);
     }
     progress_buttons[2].w = progress_buttons[1].w;
@@ -985,15 +979,15 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
     progress_buttons[3].w =
         WIDGET (button_new (y, 0, progress_buttons[3].action, progress_buttons[3].flags,
                             progress_buttons[3].text, progress_button_callback));
-    if (progress_buttons[3].len == -1)
-        progress_buttons[3].len = button_get_len (BUTTON (progress_buttons[3].w));
+    if (progress_buttons[3].width == -1)
+        progress_buttons[3].width = button_get_width (BUTTON (progress_buttons[3].w));
 
     group_add_widget (g, progress_buttons[0].w);
     group_add_widget (g, progress_buttons[1].w);
     group_add_widget (g, progress_buttons[3].w);
 
-    buttons_width = 2 + progress_buttons[0].len
-        + MAX (progress_buttons[1].len, progress_buttons[2].len) + progress_buttons[3].len;
+    buttons_width = 2 + progress_buttons[0].width
+        + MAX (progress_buttons[1].width, progress_buttons[2].width) + progress_buttons[3].width;
 
     // adjust dialog sizes
     r = w->rect;
@@ -1005,8 +999,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
 
     widget_select (progress_buttons[0].w);
 
-    /* We will manage the dialog without any help, that's why
-       we have to call dlg_init */
+    // we will manage the dialog without any help, that's why we have to call dlg_init
     dlg_init (ui->op_dlg);
 }
 
@@ -1017,7 +1010,7 @@ file_progress_ui_destroy (file_op_context_t *ctx)
 {
     if (ctx != NULL && ctx->ui != NULL)
     {
-        file_progress_ui_t *ui = (file_progress_ui_t *) ctx->ui;
+        const file_progress_ui_t *ui = ctx->ui;
 
         dlg_run_done (ui->op_dlg);
         widget_destroy (WIDGET (ui->op_dlg));
@@ -1026,20 +1019,15 @@ file_progress_ui_destroy (file_op_context_t *ctx)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
-   show progressbar for file
- */
 
 void
 file_progress_show (file_op_context_t *ctx, off_t done, off_t total, const char *stalled_msg,
                     gboolean force_update)
 {
-    file_progress_ui_t *ui;
-
     if (ctx == NULL || ctx->ui == NULL)
         return;
 
-    ui = ctx->ui;
+    const file_progress_ui_t *ui = ctx->ui;
 
     if (total == 0)
     {
@@ -1077,12 +1065,10 @@ file_progress_show (file_op_context_t *ctx, off_t done, off_t total, const char 
 void
 file_progress_show_count (file_op_context_t *ctx)
 {
-    file_progress_ui_t *ui;
-
     if (ctx == NULL || ctx->ui == NULL)
         return;
 
-    ui = ctx->ui;
+    const file_progress_ui_t *ui = ctx->ui;
 
     if (ui->total_files_processed_label == NULL)
         return;
@@ -1103,12 +1089,11 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64
 {
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
-    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
 
-    ui = ctx->ui;
+    const file_progress_ui_t *ui = ctx->ui;
 
     if (ui->progress_total_gauge != NULL)
     {
@@ -1169,19 +1154,15 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64
     }
 }
 
-/* }}} */
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
 file_progress_show_source (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
-    file_progress_ui_t *ui;
-
     if (ctx == NULL || ctx->ui == NULL)
         return;
 
-    ui = ctx->ui;
+    const file_progress_ui_t *ui = ctx->ui;
 
     if (vpath != NULL)
     {
@@ -1200,12 +1181,10 @@ file_progress_show_source (file_op_context_t *ctx, const vfs_path_t *vpath)
 void
 file_progress_show_target (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
-    file_progress_ui_t *ui;
-
     if (ctx == NULL || ctx->ui == NULL)
         return;
 
-    ui = ctx->ui;
+    const file_progress_ui_t *ui = ctx->ui;
 
     if (vpath != NULL)
     {
@@ -1225,15 +1204,12 @@ gboolean
 file_progress_show_deleting (file_op_context_t *ctx, const vfs_path_t *vpath, size_t *count)
 {
     static gint64 timestamp = 0;
-    // update with 25 FPS rate
-    static const gint64 delay = G_USEC_PER_SEC / 25;
-
-    gboolean ret;
+    const gint64 delay = G_USEC_PER_SEC / 25;  // update with 25 FPS rate
 
     if (ctx == NULL || ctx->ui == NULL)
         return FALSE;
 
-    ret = mc_time_elapsed (&timestamp, delay);
+    const gboolean ret = mc_time_elapsed (&timestamp, delay);
 
     if (ret)
     {

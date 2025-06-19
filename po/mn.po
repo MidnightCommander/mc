@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://app.transifex.com/mc/mc/language/mn/)\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Хөрвүүлэгдэхгүй >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -442,6 +446,12 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM хувьсагч утга аваагүй байна!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -467,12 +477,6 @@ msgid ""
 msgstr ""
 "Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\n"
 "TERM хувьсагчийн утгыг шалгана уу.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM хувьсагч утга аваагүй байна!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1762,10 +1766,6 @@ msgid "Stopped"
 msgstr "Зогссон"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Хөрвүүлэгдэхгүй >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Кодлогдсон оролт/гаралт: "
 
@@ -2265,11 +2265,13 @@ msgstr ""
 " %s файл руу бичиж чадсангүй:\n"
 "%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
+" %s файл руу бичиж чадсангүй:\n"
+"%s\n"
 
 msgid "View file"
 msgstr ""
@@ -4353,9 +4355,6 @@ msgstr "Таслалтын дараа алдаа илтгэгдлээ."
 msgid "Aborted transfer would be successful."
 msgstr "Таслагдсан дамжуулалт дууссан ч байж магадгүй."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Алдаатай архив tar"
 
@@ -4374,6 +4373,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4451,9 +4453,6 @@ msgid "Invalid value"
 msgstr ""
 
 msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
 msgstr ""
 
 #, c-format

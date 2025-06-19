@@ -73,18 +73,16 @@
 #endif
 
 /* Just for keeping Your's brains from invention a proper size of the buffer :-) */
-#define BUF_10K       10240L
-#define BUF_8K        8192L
-#define BUF_4K        4096L
-#define BUF_2K        2048L
-#define BUF_1K        1024L
+#define BUF_10K    10240L
+#define BUF_8K     8192L
+#define BUF_4K     4096L
+#define BUF_2K     2048L
+#define BUF_1K     1024L
 
-#define BUF_LARGE     BUF_1K
-#define BUF_MEDIUM    512
-#define BUF_SMALL     128
-#define BUF_TINY      64
-
-#define UTF8_CHAR_LEN 6
+#define BUF_LARGE  BUF_1K
+#define BUF_MEDIUM 512
+#define BUF_SMALL  128
+#define BUF_TINY   64
 
 /* Used to distinguish between a normal MC termination and */
 /* one caused by typing 'exit' or 'logout' in the subshell */

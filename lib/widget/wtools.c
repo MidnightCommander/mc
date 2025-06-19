@@ -238,11 +238,11 @@ wtools_parent_call_string (void *routine, int argc, ...)
 int
 query_dialog (const char *header, const char *text, int flags, int count, ...)
 {
-    va_list ap;
     WDialog *query_dlg;
     WGroup *g;
+    GPtrArray *buttons = NULL;
     WButton *button;
-    int win_len = 0;
+    int win_width = 0;
     int i;
     int result = -1;
     int cols, lines;
@@ -255,21 +255,27 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     if (count > 0)
     {
+        va_list ap;
+
+        buttons = g_ptr_array_sized_new ((guint) count);
+
         va_start (ap, count);
         for (i = 0; i < count; i++)
         {
-            char *cp = va_arg (ap, char *);
+            const char *cp = va_arg (ap, char *);
 
-            win_len += str_term_width1 (cp) + 6;
-            if (strchr (cp, '&') != NULL)
-                win_len--;
+            button = button_new (1, 1, B_USER + i, NORMAL_BUTTON, cp, NULL);
+            win_width += button_get_width (button) + 1;
+            g_ptr_array_add (buttons, button);
         }
         va_end (ap);
     }
 
+    const int header_cols = str_term_width1 (header);
+
     // count coordinates
     str_msg_term_size (text, &lines, &cols);
-    cols = 6 + MAX (win_len, MAX (str_term_width1 (header), cols));
+    cols = 6 + MAX (win_width, MAX (header_cols, cols));
     lines += 4 + (count > 0 ? 2 : 0);
 
     // prepare dialog
@@ -285,25 +291,22 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
                                   NULL);
         group_add_widget (g, hline_new (lines - 4, -1, -1));
 
-        cols = (cols - win_len - 2) / 2 + 2;
-        va_start (ap, count);
+        cols = (cols - win_width - 2) / 2 + 2;
+
         for (i = 0; i < count; i++)
         {
-            int xpos;
-            char *cur_name;
-
-            cur_name = va_arg (ap, char *);
-            xpos = str_term_width1 (cur_name) + 6;
-            if (strchr (cur_name, '&') != NULL)
-                xpos--;
-
-            button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, NULL);
+            button = BUTTON (g_ptr_array_index (buttons, i));
+            WIDGET (button)->rect.y = lines - 3;
+            WIDGET (button)->rect.x = cols;
             group_add_widget (g, button);
-            cols += xpos;
+
+            cols += button_get_width (button) + 1;
+
             if (i == sel_pos)
                 defbutton = button;
         }
-        va_end (ap);
+
+        g_ptr_array_free (buttons, FALSE);
 
         // do resize before running and selecting any widget
         send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);

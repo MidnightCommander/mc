@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Azerbaijani (http://app.transifex.com/mc/mc/language/az/)\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Tərcüməsiz >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -441,6 +445,12 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM dəyişəni bildirilməyib!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -466,12 +476,6 @@ msgid ""
 msgstr ""
 "%dx%d ekran böyüklüyü dəstəklənmir.\n"
 "TERM sistem dəyişgənini yoxla.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM dəyişəni bildirilməyib!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1761,10 +1765,6 @@ msgid "Stopped"
 msgstr "Dayandırılıb"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Tərcüməsiz >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Giriş / ekran kod səhifəsi:"
 
@@ -2264,11 +2264,13 @@ msgstr ""
 "%s faylına yaza bilmirəm:\n"
 "%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
+"%s faylına yaza bilmirəm:\n"
+"%s\n"
 
 msgid "View file"
 msgstr ""
@@ -4357,9 +4359,6 @@ msgstr "Xəta ləğv etmədən sonra bildirildi."
 msgid "Aborted transfer would be successful."
 msgstr "Ləğv edilmiş daşıma əməliyyatı müvəffəqiyyətli olmuş olmaılıdır."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Tar arxivi düzgün deyildir"
 
@@ -4378,6 +4377,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4454,9 +4456,6 @@ msgid "Invalid value"
 msgstr ""
 
 msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
 msgstr ""
 
 #, c-format

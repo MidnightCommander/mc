@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2019,2025\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -29,9 +29,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < No translation >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -476,6 +480,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Немагчыма праверыць канал SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -507,12 +517,6 @@ msgid ""
 msgstr ""
 "Памер экрана %d×%d не падтрымліваецца.\n"
 "Праверце зменную асяроддзя \"TERM\".\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Немагчыма праверыць канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -1875,10 +1879,6 @@ msgid "Stopped"
 msgstr "Спынена"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < No translation >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Кадаванне ўводу/вываду:"
 
@@ -2391,7 +2391,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr "Немагчыма скапіяваць цыклічную сімвалічную спасылку \"%s\""
 
@@ -4599,9 +4599,6 @@ msgstr "Пасля перарывання выяўлена памылка."
 msgid "Aborted transfer would be successful."
 msgstr "Перадача перарваная."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
-
 msgid "Inconsistent tar archive"
 msgstr "Несумяшчальны архіў tar"
 
@@ -4623,6 +4620,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "не падобны на архіў tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
 
 msgid "undelfs: error"
 msgstr "undelfs: памылка"
@@ -4703,9 +4703,6 @@ msgstr "Хібнае значэнне"
 
 msgid "File was modified. Save with exit?"
 msgstr "Файл быў зменены. Захаваць і выйсці?"
-
-msgid "&Cancel quit"
-msgstr "Не выходзіць(&С)"
 
 #, fuzzy, c-format
 msgid ""
@@ -4812,6 +4809,9 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "Не выходзіць(&С)"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander"

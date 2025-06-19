@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <limits.h>  // MB_LEN_MAX
 #include <stdlib.h>
 #include <stdarg.h>
 #include <signal.h>
@@ -122,7 +123,7 @@ sigwinch_handler (int dummy)
 /**
  * Get visible part of area.
  *
- * @returns TRUE if any part of area is in screen bounds, FALSE otherwise.
+ * @return TRUE if any part of area is in screen bounds, FALSE otherwise.
  */
 static gboolean
 tty_clip (int *y, int *x, int *rows, int *cols)
@@ -167,7 +168,7 @@ tty_clip (int *y, int *x, int *rows, int *cols)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_tty_normalize_lines_char (const char *ch)
+mc_tty_normalize_lines_char (const char *str)
 {
     char *str2;
     int res;
@@ -203,16 +204,14 @@ mc_tty_normalize_lines_char (const char *ch)
         { NULL, 0 },
     };
 
-    if (ch == NULL)
+    if (str == NULL)
         return (int) ' ';
 
     for (res = 0; lines_codes[res].line; res++)
-    {
-        if (strcmp (ch, lines_codes[res].line) == 0)
+        if (strcmp (str, lines_codes[res].line) == 0)
             return lines_codes[res].line_code;
-    }
 
-    str2 = mc_tty_normalize_from_utf8 (ch);
+    str2 = mc_tty_normalize_from_utf8 (str);
     res = g_utf8_get_char_validated (str2, -1);
 
     if (res < 0)
@@ -626,7 +625,7 @@ tty_print_anychar (int c)
     if (mc_global.utf8_display || c > 255)
     {
         int res;
-        unsigned char str[UTF8_CHAR_LEN + 1];
+        unsigned char str[MB_LEN_MAX + 1];
 
         res = g_unichar_to_utf8 (c, (char *) str);
         if (res == 0)

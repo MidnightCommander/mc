@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -20,6 +20,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < 不轉換 >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -459,6 +463,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "環境變數 TERM 並未設定！ \n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -484,12 +494,6 @@ msgid ""
 msgstr ""
 "不支援 %dx%d 的螢幕大小。\n"
 "請檢查 TERM 環境變數。\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "環境變數 TERM 並未設定！ \n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1789,10 +1793,6 @@ msgid "Stopped"
 msgstr "停止了"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < 不轉換 >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "輸入/顯示 頁碼："
 
@@ -2298,7 +2298,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "無法建立目標連結 \"%s\"\n"
@@ -4408,9 +4408,6 @@ msgstr "放棄後回報錯誤"
 msgid "Aborted transfer would be successful."
 msgstr "將成功放棄傳輸"
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
 
@@ -4429,6 +4426,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4508,9 +4508,6 @@ msgstr "無效的值"
 
 msgid "File was modified. Save with exit?"
 msgstr "資料已被修改。儲存並離開?"
-
-msgid "&Cancel quit"
-msgstr "取消結束"
 
 #, fuzzy, c-format
 msgid ""
@@ -4614,6 +4611,9 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "取消結束"
 
 #, c-format
 #~ msgid "Cannot get size/permissions for %s"

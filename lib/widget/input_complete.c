@@ -33,7 +33,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

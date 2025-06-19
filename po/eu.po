@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-05-25 12:21+0200\n"
+"POT-Creation-Date: 2025-06-19 21:07+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
@@ -19,6 +19,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "No translation"
+msgstr "-  < Ez dago itzulpenik >"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -461,6 +465,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maius"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -486,12 +496,6 @@ msgid ""
 msgstr ""
 "%dx%d pantaila-neurria ez da onartzen.\n"
 "Egiaztatu TERM ingurune-aldagaia.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1825,10 +1829,6 @@ msgid "Stopped"
 msgstr "Geldituta"
 
 #, fuzzy
-msgid "No translation"
-msgstr "-  < Ez dago itzulpenik >"
-
-#, fuzzy
 msgid "Detected display codepage"
 msgstr "Sartu / bistaratu kode-orrialdea:"
 
@@ -2340,7 +2340,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Canot create symbolic link\n"
+"Cannot create symbolic link\n"
 "%s"
 msgstr ""
 "\"%s\"\n"
@@ -2554,8 +2554,8 @@ msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
-"\\n\n"
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
+"(stat)\\n\n"
 "%s"
 
 #, fuzzy, c-format
@@ -2732,8 +2732,8 @@ msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
-"\\n\n"
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
+"(stat)\\n\n"
 "%s"
 
 #, fuzzy, c-format
@@ -4498,9 +4498,6 @@ msgstr "Akatsaren berri eman da galarazi ondoren."
 msgid "Aborted transfer would be successful."
 msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "tar artxibo inkoherentea"
 
@@ -4519,6 +4516,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4601,9 +4601,6 @@ msgstr "Balio baliogabea"
 
 msgid "File was modified. Save with exit?"
 msgstr "Fitxategia aldatu da. Gorde irtetzerakoan?"
-
-msgid "&Cancel quit"
-msgstr "Irteera bertan behera &utzi"
 
 #, fuzzy, c-format
 msgid ""
@@ -4711,6 +4708,9 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "&Cancel quit"
+#~ msgstr "Irteera bertan behera &utzi"
 
 #~ msgid "The Midnight Commander"
 #~ msgstr "Midnight Commander-ra"
