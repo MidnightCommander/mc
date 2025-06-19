@@ -1556,37 +1556,6 @@ init_subshell (void)
         if (mc_global.shell->type == SHELL_NONE)
             return;
 
-        // Open a pty for talking to the subshell
-
-        // FIXME: We may need to open a fresh pty each time on SVR4
-
-#ifdef HAVE_OPENPTY
-        if (openpty (&mc_global.tty.subshell_pty, &subshell_pty_slave, NULL, NULL, NULL))
-        {
-            fprintf (stderr, "Cannot open master and slave sides of pty: %s\n",
-                     unix_error_string (errno));
-            mc_global.tty.use_subshell = FALSE;
-            return;
-        }
-#else
-        mc_global.tty.subshell_pty = pty_open_master (pty_name);
-        if (mc_global.tty.subshell_pty == -1)
-        {
-            fprintf (stderr, "Cannot open master side of pty: %s\r\n", unix_error_string (errno));
-            mc_global.tty.use_subshell = FALSE;
-            return;
-        }
-
-        subshell_pty_slave = pty_open_slave (pty_name);
-        if (subshell_pty_slave == -1)
-        {
-            fprintf (stderr, "Cannot open slave side of pty %s: %s\r\n", pty_name,
-                     unix_error_string (errno));
-            mc_global.tty.use_subshell = FALSE;
-            return;
-        }
-#endif
-
         // Create a pipe for receiving the subshell's CWD
 
         if (mc_global.shell->type == SHELL_TCSH)
@@ -1629,6 +1598,41 @@ init_subshell (void)
             mc_global.tty.use_subshell = FALSE;
             return;
         }
+
+        // Open a pty for talking to the subshell; do this after
+        // acquiring the pipes, so the latter have a higher chance
+        // of getting a number lower than 10 so the "pwd >&%d" in
+        // the mc-injected precmd does not cause a syntax error, a
+        // ten-second sleep at startup, and other problems.
+
+        // FIXME: We may need to open a fresh pty each time on SVR4
+
+#ifdef HAVE_OPENPTY
+        if (openpty (&mc_global.tty.subshell_pty, &subshell_pty_slave, NULL, NULL, NULL))
+        {
+            fprintf (stderr, "Cannot open master and slave sides of pty: %s\n",
+                     unix_error_string (errno));
+            mc_global.tty.use_subshell = FALSE;
+            return;
+        }
+#else
+        mc_global.tty.subshell_pty = pty_open_master (pty_name);
+        if (mc_global.tty.subshell_pty == -1)
+        {
+            fprintf (stderr, "Cannot open master side of pty: %s\r\n", unix_error_string (errno));
+            mc_global.tty.use_subshell = FALSE;
+            return;
+        }
+
+        subshell_pty_slave = pty_open_slave (pty_name);
+        if (subshell_pty_slave == -1)
+        {
+            fprintf (stderr, "Cannot open slave side of pty %s: %s\r\n", pty_name,
+                     unix_error_string (errno));
+            mc_global.tty.use_subshell = FALSE;
+            return;
+        }
+#endif
     }
 
     // Fork the subshell
