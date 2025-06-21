@@ -78,7 +78,6 @@
 
 /* Needed for other_panel and WTree */
 #include "dir.h"
-#include "filenot.h"
 #include "tree.h"
 #include "filemanager.h"  // other_panel
 #include "layout.h"       // rotate_dash()
@@ -3169,7 +3168,7 @@ retry_dst_stat:
 
     if (do_mkdir)
     {
-        while (my_mkdir (dst_vpath, (src_stat.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
+        while (mc_mkdir (dst_vpath, (src_stat.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
         {
             if (ctx->ignore_all)
                 return_status = FILE_IGNORE_ALL;
