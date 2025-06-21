@@ -1415,14 +1415,12 @@ erase_file (file_op_context_t *ctx, const vfs_path_t *vpath)
 static FileProgressStatus
 try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
-    const char *dir;
     FileProgressStatus return_status = FILE_CONT;
 
-    dir = vfs_path_as_str (vpath);
-
-    while (my_rmdir (dir) != 0 && !ctx->ignore_all)
+    while (mc_rmdir (vpath) != 0 && !ctx->ignore_all)
     {
-        return_status = file_error (ctx, TRUE, _ ("Cannot remove directory\n%s"), dir);
+        return_status =
+            file_error (ctx, TRUE, _ ("Cannot remove directory\n%s"), vfs_path_as_str (vpath));
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
         if (return_status != FILE_RETRY)
@@ -3335,13 +3333,6 @@ erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 
     mc_refresh ();
 
-    /* The old way to detect a non empty directory was:
-       error = my_rmdir (s);
-       if (error && (errno == ENOTEMPTY || errno == EEXIST))){
-       For the linux user space nfs server (nfs-server-2.2beta29-2)
-       we would have to check also for EIO. I hope the new way is
-       fool proof. (Norbert)
-     */
     const int res = check_dir_is_empty (ctx, vpath, &error);
 
     if (res == -1)
