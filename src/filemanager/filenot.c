@@ -104,18 +104,3 @@ my_mkdir (const vfs_path_t *vpath, mode_t mode)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-int
-my_rmdir (const char *path)
-{
-    int result;
-    vfs_path_t *vpath;
-
-    vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
-    // FIXME: Should receive a Wtree!
-    result = mc_rmdir (vpath);
-    vfs_path_free (vpath, TRUE);
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
