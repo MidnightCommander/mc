@@ -77,7 +77,6 @@
 #endif
 
 #include "filegui.h"
-#include "filenot.h"
 #include "hotlist.h"      // hotlist_show()
 #include "tree.h"         // tree_chdir()
 #include "filemanager.h"  // change_panel()
@@ -774,7 +773,7 @@ mkdir_cmd (WPanel *panel)
 
         save_cwds_stat ();
 
-        if (my_mkdir (absdir, 0777) != 0)
+        if (mc_mkdir (absdir, 0777) != 0)
             file_error_message (_ ("Cannot create directory\n%s"), vfs_path_as_str (absdir));
         else
         {
