@@ -79,7 +79,7 @@ script that automatically changes the current directory of the shell to
 the last directory Midnight Commander was in. Source the file
 .B %pkglibexecdir%/mc.sh
 (bash and zsh users) or
-.B %libexecdir%/mc.csh
+.B %pkglibexecdir%/mc.csh
 (tcsh users) respectively to define
 .B mc
 as an alias to the appropriate shell script.
