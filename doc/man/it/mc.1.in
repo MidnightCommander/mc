@@ -82,9 +82,11 @@ utilizzata da una speciale funzione shell che imposti automaticamente
 l'ultima directory corrente della shell come l'ultima directory in cui
 stava il Midnight Commander. Prelevate i file
 .B %pkglibexecdir%/mc.sh
-(utenti bash e zsh) o rispettivamente
+(utenti bash e zsh),
 .B %pkglibexecdir%/mc.csh
-(utenti tcsh) per definire
+(utenti tcsh) o rispettivamente
+.B %pkglibexecdir%/mc.fish
+(utenti fish) per definire
 .B mc
 come un alias allo script di shell appropriato.
 .TP

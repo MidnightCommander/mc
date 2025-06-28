@@ -80,7 +80,9 @@ the last directory Midnight Commander was in. Source the file
 .B %pkglibexecdir%/mc.sh
 (bash and zsh users) or
 .B %pkglibexecdir%/mc.csh
-(tcsh users) respectively to define
+(tcsh users) or
+.B %pkglibexecdir%/mc.fish
+(fish users) respectively to define
 .B mc
 as an alias to the appropriate shell script.
 .TP
