@@ -29,3 +29,5 @@ mc-wrapper.csh: $(top_builddir)/config.status $(srcdir)/mc-wrapper.csh.in
 mc-wrapper.sh: $(top_builddir)/config.status $(srcdir)/mc-wrapper.sh.in
 	$(SED) "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.sh.in > mc-wrapper.sh
 
+mc-wrapper.sh: $(top_builddir)/config.status $(srcdir)/mc-wrapper.fish.in
+	$(SED) "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.fish.in > mc-wrapper.fish
