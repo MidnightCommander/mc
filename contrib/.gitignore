@@ -1,4 +1,5 @@
 mc-wrapper.*
 !mc-wrapper.*.in
 mc.csh
+mc.fish
 mc.sh

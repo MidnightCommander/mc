@@ -1,0 +1,21 @@
+set --local MC_PWD_FILE
+if set -q MC_TMPDIR
+	set MC_PWD_FILE (mktemp $MC_TMPDIR/mc.pwd.XXXXXX)
+else if set -q TMPDIR
+	set MC_PWD_FILE (mktemp $TMPDIR/mc.pwd.XXXXXX)
+else
+	set MC_PWD_FILE (mktemp /tmp/mc.pwd.XXXXXX)
+end
+
+set --local MC_STATUS 0
+@bindir@/mc -P "$MC_PWD_FILE" $argv || set MC_STATUS $status
+
+if test -r "$MC_PWD_FILE"
+	set --local MC_PWD (cat $MC_PWD_FILE)
+	if test -n $MC_PWD && test $MC_PWD != $PWD && test -d $MC_PWD
+		cd $MC_PWD || true
+	end
+end
+
+rm -f $MC_PWD_FILE
+exit $MC_STATUS

@@ -1,0 +1,3 @@
+function mc --description 'Visual shell for Unix-like systems - fish wrapper'
+	source @pkglibexecdir@/mc-wrapper.fish $argv
+end
