@@ -986,7 +986,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     int max_cols = 0;
     int col = 0;
     gboolean accept_entry = TRUE;
-    int selected = 0;
+    int selected = -1;
     gboolean old_patterns;
     gboolean res = FALSE;
     gboolean interactive = TRUE;
@@ -1063,7 +1063,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                 {
                     // Combined adding and default
                     p = test_line (edit_widget, p + 1, &accept_entry);
-                    if (selected == 0 && accept_entry)
+                    if (selected < 0 && accept_entry)
                         selected = menu_lines;
                 }
                 else
@@ -1078,7 +1078,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                 {
                     // Combined adding and default
                     p = test_line (edit_widget, p + 1, &accept_entry);
-                    if (selected == 0 && accept_entry)
+                    if (selected < 0 && accept_entry)
                         selected = menu_lines;
                 }
                 else
@@ -1087,7 +1087,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                     gboolean ok = TRUE;
 
                     p = test_line (edit_widget, p, &ok);
-                    if (selected == 0 && ok)
+                    if (selected < 0 && ok)
                         selected = menu_lines;
                 }
                 break;
