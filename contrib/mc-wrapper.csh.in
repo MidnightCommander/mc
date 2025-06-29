@@ -6,6 +6,7 @@ else
 	setenv MC_PWD_FILE "`mktemp '/tmp/mc.pwd.XXXXXX'`"
 endif
 
+# Propagate mc exit code outside the wrapper
 @bindir@/mc -P "$MC_PWD_FILE" $*
 
 if (-r "$MC_PWD_FILE") then
