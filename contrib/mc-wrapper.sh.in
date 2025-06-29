@@ -6,7 +6,8 @@ else
 	MC_PWD_FILE="`mktemp "/tmp/mc.pwd.XXXXXX"`"
 fi
 
-@bindir@/mc -P "$MC_PWD_FILE" "$@"
+MC_STATUS=0
+@bindir@/mc -P "$MC_PWD_FILE" "$@" || MC_STATUS=$?
 
 if test -r "$MC_PWD_FILE"; then
 	MC_PWD="`cat "$MC_PWD_FILE"`"
@@ -18,3 +19,4 @@ fi
 
 rm -f "$MC_PWD_FILE"
 unset MC_PWD_FILE
+eval "unset MC_STATUS; return $MC_STATUS"
