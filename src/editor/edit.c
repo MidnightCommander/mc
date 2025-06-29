@@ -308,7 +308,7 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
         if (file < 0)
         {
             file_error_message (_ ("Cannot open\n%s"), vfs_path_as_str (filename_vpath));
-            goto cleanup;
+            return FALSE;
         }
 
         // New file, delete it if it's not modified or saved
@@ -319,7 +319,7 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
     if (mc_fstat (file, st) < 0)
     {
         file_error_message (_ ("Cannot stat\n%s"), vfs_path_as_str (filename_vpath));
-        goto cleanup;
+        return FALSE;
     }
 
     // We want to open regular files only

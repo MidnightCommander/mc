@@ -3506,14 +3506,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
     gboolean do_bg = FALSE;  // do background operation?
 
-    static gboolean i18n_flag = FALSE;
-    if (!i18n_flag)
-    {
-        for (i = G_N_ELEMENTS (op_names); i-- != 0;)
-            op_names[i] = Q_ (op_names[i]);
-        i18n_flag = TRUE;
-    }
-
     linklist = free_linklist (linklist);
     dest_dirs = free_linklist (dest_dirs);
 
@@ -3731,7 +3723,7 @@ ret_fast:
 FileProgressStatus
 file_error (file_op_context_t *ctx, gboolean allow_retry, const char *format, const char *file)
 {
-    return files_error (ctx, allow_retry, format, file, NULL);
+    return files_error (ctx, allow_retry, format, file, "");
 }
 
 /* --------------------------------------------------------------------------------------------- */
