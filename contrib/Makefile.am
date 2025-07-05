@@ -1,8 +1,18 @@
 
 noinst_DATA = README.xterm
 
-SCRIPTS_IN = mc.csh.in mc-wrapper.fish.in mc.sh.in mc-wrapper.csh.in mc-wrapper.sh.in
-SCRIPTS_OUT = mc.csh mc.sh mc-wrapper.csh mc-wrapper.fish mc-wrapper.sh
+SCRIPTS_IN = \
+	mc.csh.in \
+	mc.sh.in \
+	mc-wrapper.csh.in \
+	mc-wrapper.fish.in \
+	mc-wrapper.sh.in
+SCRIPTS_OUT = \
+	mc.csh \
+	mc.sh \
+	mc-wrapper.csh \
+	mc-wrapper.fish \
+	mc-wrapper.sh
 
 pkglibexec_SCRIPTS = $(SCRIPTS_OUT)
 
