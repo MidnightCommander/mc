@@ -1,4 +1,4 @@
-mc-wrapper.csh
-mc-wrapper.sh
+mc-wrapper.*
+!mc-wrapper.*.in
 mc.csh
 mc.sh
