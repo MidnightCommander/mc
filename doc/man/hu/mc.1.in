@@ -61,9 +61,11 @@ helyett a Midnight Commander által utoljára meglátogatott könyvtárra való
 Fjerdingstad\-nek és Sergey\-nek közreműködésükért). Kérlek, ne csinálj
 szó szerinti másolatot a funkció beállításairól. A fájlok forrása a
 .I %pkglibexecdir%/mc.sh
-(bash és zsh felhasználóknak), illetőleg a
+(bash és zsh felhasználóknak),
 .I %pkglibexecdir%/mc.csh
-(tcsh felhasználóknak) fájl. Ilyenkor, amikor a funkció beállításokat
+(tcsh felhasználóknak) illetőleg a
+.I %pkglibexecdir%/mc.fish
+(fish felhasználóknak) fájl. Ilyenkor, amikor a funkció beállításokat
 változtatod, a profil értékeket nem szükséges megváltoztatnod, csak
 arról gondoskodj, hogy az MC\-t ne fordítsd eltérő beállításokkal.
 .PP

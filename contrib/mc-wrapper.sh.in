@@ -6,7 +6,7 @@ else
 	MC_PWD_FILE="`mktemp "/tmp/mc.pwd.XXXXXX"`"
 fi
 
-@bindir@/mc -P "$MC_PWD_FILE" "$@"
+@bindir@/mc -P "$MC_PWD_FILE" "$@" || true
 
 if test -r "$MC_PWD_FILE"; then
 	MC_PWD="`cat "$MC_PWD_FILE"`"

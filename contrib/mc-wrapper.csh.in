@@ -6,7 +6,7 @@ else
 	setenv MC_PWD_FILE "`mktemp '/tmp/mc.pwd.XXXXXX'`"
 endif
 
-@bindir@/mc -P "$MC_PWD_FILE" $*
+@bindir@/mc -P "$MC_PWD_FILE" $* || true
 
 if (-r "$MC_PWD_FILE") then
 	setenv MC_PWD "`cat '$MC_PWD_FILE'`"
