@@ -6,6 +6,7 @@ else
 	MC_PWD_FILE="`mktemp "/tmp/mc.pwd.XXXXXX"`"
 fi
 
+# Propagate mc exit code outside the wrapper
 @bindir@/mc -P "$MC_PWD_FILE" "$@"
 
 if test -r "$MC_PWD_FILE"; then
