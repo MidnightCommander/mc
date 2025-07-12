@@ -1771,25 +1771,35 @@ void
 edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
 {
     char *block_file;
-    gboolean mark;
-    off_t curs;
-    off_t start_mark, end_mark;
-    struct stat status;
+    struct stat status_before;
     vfs_path_t *block_file_vpath;
+    gboolean modified = FALSE;
 
     block_file = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
     block_file_vpath = vfs_path_from_str (block_file);
-    curs = edit->buffer.curs1;
-    mark = eval_marks (edit, &start_mark, &end_mark);
-    if (mark)
-        edit_save_block (edit, block_file, start_mark, end_mark);
 
-    // run shell scripts from menu
-    if (user_menu_cmd (CONST_WIDGET (edit), menu_file, selected_entry)
-        && (mc_stat (block_file_vpath, &status) == 0) && (status.st_size != 0))
+    const gboolean status_before_ok = mc_stat (block_file_vpath, &status_before) == 0;
+
+    // run menu command. It can or can not create or modify block_file
+    if (user_menu_cmd (CONST_WIDGET (edit), menu_file, selected_entry))
+    {
+        struct stat status_after;
+        const gboolean status_after_ok = mc_stat (block_file_vpath, &status_after) == 0;
+
+        // was block file created or modified by menu command?
+        modified = (!status_before_ok && status_after_ok)
+            || (status_before_ok && status_after_ok && status_after.st_size != 0
+                && (status_after.st_size != status_before.st_size
+                    || status_after.st_mtime != status_before.st_mtime));
+    }
+
+    if (modified)
     {
         gboolean rc = TRUE;
-        FILE *fd;
+        off_t start_mark, end_mark;
+
+        const off_t curs = edit->buffer.curs1;
+        const gboolean mark = eval_marks (edit, &start_mark, &end_mark);
 
         // i.e. we have marked block
         if (mark)
@@ -1803,15 +1813,16 @@ edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
             if (mark && ins_len > 0)
                 edit_set_markers (edit, start_mark, start_mark + ins_len, 0, 0);
         }
-        // truncate block file
-        fd = fopen (block_file, "w");
-        if (fd != NULL)
-            fclose (fd);
+
+        // delete block file
+        mc_unlink (block_file_vpath);
+
+        edit_cursor_move (edit, curs - edit->buffer.curs1);
     }
+
     g_free (block_file);
     vfs_path_free (block_file_vpath, TRUE);
 
-    edit_cursor_move (edit, curs - edit->buffer.curs1);
     edit->force |= REDRAW_PAGE;
     widget_draw (WIDGET (edit));
 }
