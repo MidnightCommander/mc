@@ -2289,7 +2289,7 @@ menu only.
 .I %y
 The syntax type of current file. For edit menu only.
 .TP
-.I %k
+.I %b
 The block file name.
 .TP
 .I %e
@@ -2305,7 +2305,7 @@ In mcedit user menu: the name of opened file.
 .I %x
 The extension of current file name.
 .TP
-.I %b
+.I %n
 The current file name without extension.
 .TP
 .I %d

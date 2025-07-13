@@ -1959,7 +1959,7 @@ posizione del cursore. Solo per la modifica menu.
 .I "%y"
 Il tipo di sintassi del file corrente. Solo per la modifica menu.
 .TP
-.I "%k"
+.I "%b"
 Nome del file di blocco.
 .TP
 .I "%e"
@@ -1974,7 +1974,7 @@ Nome del file corrente.
 .I "%x"
 L'estensione del file corrente.
 .TP
-.I "%b"
+.I "%n"
 Nome del file corrente ma senza estensione.
 .TP
 .I "%d"
