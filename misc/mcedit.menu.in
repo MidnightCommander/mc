@@ -1,34 +1,39 @@
 shell_patterns=0    # expression type
 
+##############################################################################
 # The macros are:
 #
-# %c The cursor column position number. For edit menu only.
-# %i The indent of blank space, equal the cursor column 
-#    position. For edit menu only.
-# %y The syntax type of current file. For edit menu only.
-# %b The block file name.
-# %f The current file name.
-# %n Only the current file name without extension.
-# %x The extension of current file name.
-# %d The current directory name.
-# %F The current file in the unselected panel.
-# %D The directory name of the unselected panel.
-# %t The currently tagged files.
-# %T The tagged files in the unselected panel.
-# %u and %U Similar to the %t and %T macros, but in
-#    addition the files are untagged. You can use this macro
-#    only once per menu file entry or extension file entry,
-#    because next time there will be no tagged files.
-# %s and %S The selected files: The tagged files if
-#    there are any. Otherwise the current file.
+# %f The name of the current file.
+# %p Same as %f.
+# %n The current file name without extension.
+# %x The extension of the current file name.
+# %d The current working directory.
 #
-# %% The % character
+# Unlike in mc.menu file, file and directory macros do NOT refer to the file on
+# the panels, so uppercase and lowercase versions of the above are the same.
+#
+# %% The % character.
+# %c The cursor column position number.
+# %i The indent of blank space, equal the cursor column position.
+# %y The syntax type of current file.
+# %b The block file name.
+#
+# %view Runs the commands and pipes standard output to the view command.
+#    If %view is immediately followed by '{', keywords 'ascii', 'hex',
+#    'nroff' and 'unform' are recognized.
 #
 # %{some text} Prompt for the substitution. An input box
-#    is shown and the text inside the braces is used as a
-#    prompt. The macro is substituted by the text typed by the
-#    user. The user can press ESC or F10 to cancel. This macro
-#    doesn't work on the command line yet.
+#   is shown and the text inside the braces is used as a
+#   prompt. The macro is substituted by the text typed by the
+#   user. The user can press ESC or F10 to cancel. This macro
+#   doesn't work on the command line yet.
+#
+# With a number followed the % character you can turn quoting on (default)
+# and off. For example:
+#   %f    quote expanded macro
+#   %1f   ditto
+#   %0f   don't quote expanded macro
+##############################################################################
 
 #----------------------- Begin [perl] language template -----------------------
 + y Perl\ Program | f \.pl$

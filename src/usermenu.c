@@ -638,28 +638,60 @@ menu_file_own (char *path)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* Formats defined:
-   %%  The % character
-   %f  The current file in the active panel (if non-local vfs, file will be copied locally
-   and %f will be full path to it) or the opened file in the internal editor.
-   %p  Likewise.
-   %d  The current working directory
-   %s  "Selected files"; the tagged files if any, otherwise the current file
-   %t  Tagged files
-   %u  Tagged files (and they are untagged on return from expand_format)
-   %view Runs the commands and pipes standard output to the view command.
-   If %view is immediately followed by '{', recognize keywords
-   ascii, hex, nroff and unform
+/*  Formats defined:
 
-   If the format letter is in uppercase, it refers to the other panel.
+    mc.menu formats:
 
-   With a number followed the % character you can turn quoting on (default)
-   and off. For example:
-   %f    quote expanded macro
-   %1f   ditto
-   %0f   don't quote expanded macro
+        %f The name of the current file without the path on the active panel.
+        %p Same as %f.
+        %n The current file name without extension.
+        %x The extension of the current file name.
+        %d The directory of the active panel.
+        %t The tagged files.
+        %s The selected files: the tagged files if any, otherwise the current file.
+        %u Similar to the %t macros, but in addition the files are untagged.
+            You can use this macro only once per menu file entry or extension file entry,
+            because next time there will be no tagged files.
 
-   expand_format returns a memory block that must be free()d.
+        If the format letter is in uppercase, it refers to the other panel.
+
+
+    mcedit.menu formats:
+
+        %f The current file name without the path.
+        %p Same as %f.
+        %n The current file name without extension.
+        %x The extension of the current file name.
+        %d The current working directory.
+
+        Unlike mc.menu file, file and directory macros are not referenced file on the panels.
+        Therefore uppercase and lowercase macros above are same.
+
+        %c The cursor column position number.
+        %i The indent of blank space, equal the cursor column position.
+        %y The syntax type of current file.
+        %b The block file name.
+
+
+    Common (for mc.menu and mcedit.menu):
+        %% The % character
+
+        %view Runs the commands and pipes standard output to the view command.
+            If %view is immediately followed by '{', keywords 'ascii', 'hex', 'nroff'
+            and 'unform' are recognized.
+
+        %{some text} Prompt for the substitution. An input box is shown and the text inside
+            the braces is used as a prompt. The macro is substituted by the text typed
+            by the user. The user can press ESC or F10 to cancel. This macro doesn't work
+            on the command line yet.
+
+        With a number followed the % character you can turn quoting on (default)
+        and off. For example:
+            %f  quote expanded macro
+            %1f ditto
+            %0f don't quote expanded macro.
+
+    Expand_format returns a memory block that must be free()d.
  */
 
 /* Returns how many characters we should advance if %view was found */
@@ -837,6 +869,9 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
     case 'x':
         result = quote_func (extension (fname), FALSE);
         goto ret;
+    case 'n':  // strip extension
+        result = strip_ext (quote_func (fname, FALSE));
+        goto ret;
     case 'd':
     {
         const char *cwd;
@@ -882,8 +917,7 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
         }
 #endif
         break;
-    case 'k':  // block file name
-    case 'b':  // block file name / strip extension
+    case 'b':  // block file name
 #ifdef USE_INTERNAL_EDIT
         if (e != NULL)
         {
@@ -892,20 +926,6 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
             file = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
             result = quote_func (file, FALSE);
             g_free (file);
-            goto ret;
-        }
-#endif
-        if (c_lc == 'b')
-        {
-            result = strip_ext (quote_func (fname, FALSE));
-            goto ret;
-        }
-        break;
-    case 'n':  // strip extension in editor
-#ifdef USE_INTERNAL_EDIT
-        if (e != NULL)
-        {
-            result = strip_ext (quote_func (fname, FALSE));
             goto ret;
         }
 #endif

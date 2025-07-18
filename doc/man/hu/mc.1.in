@@ -1918,7 +1918,7 @@ Csak menü szerkesztéshez.
 .IP
 A jelenlegi fájl szintaktikájának típusa. Csak menü szerkesztéshez.
 .PP
-.I "%k"
+.I "%b"
 .IP
 A blokk fájl neve.
 .PP
