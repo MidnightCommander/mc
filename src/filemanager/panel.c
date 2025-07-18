@@ -1940,13 +1940,17 @@ maybe_cd (WPanel *panel, gboolean move_up_dir)
 
         fe = panel_current_entry (panel);
 
-        if (fe != NULL && (S_ISDIR (fe->st.st_mode) || link_isdir (fe)))
+        if (fe != NULL)
         {
-            vfs_path_t *vpath;
+            if (S_ISDIR (fe->st.st_mode) || link_isdir (fe))
+            {
+                vfs_path_t *vpath;
 
-            vpath = vfs_path_from_str (fe->fname->str);
-            panel_cd (panel, vpath, cd_exact);
-            vfs_path_free (vpath, TRUE);
+                vpath = vfs_path_from_str (fe->fname->str);
+                panel_cd (panel, vpath, cd_exact);
+                vfs_path_free (vpath, TRUE);
+            }
+
             return MSG_HANDLED;
         }
     }
