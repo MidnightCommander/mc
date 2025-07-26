@@ -192,6 +192,9 @@ mcview_update (WView *view)
 {
     static int dirt_limit = 1;
 
+    if (widget_get_state (WIDGET (view), WST_CLOSED))
+        return;
+
     if (view->dpy_bbar_dirty)
     {
         view->dpy_bbar_dirty = FALSE;
