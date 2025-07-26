@@ -659,7 +659,8 @@ mcview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
     case MSG_DRAW:
         if (mcview_is_in_panel (view))
             mcview_display_frame (view);
-        mcview_display (view);
+        view->dpy_bbar_dirty = TRUE;
+        mcview_update (view);
         return MSG_HANDLED;
 
     case MSG_CURSOR:
@@ -676,12 +677,6 @@ mcview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
         i = mcview_execute_cmd (view, parm);
         mcview_update (view);
         return i;
-
-    case MSG_FOCUS:
-        view->dpy_bbar_dirty = TRUE;
-        // TODO: get rid of draw here before MSG_DRAW
-        mcview_update (view);
-        return MSG_HANDLED;
 
     case MSG_RESIZE:
         widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
@@ -714,7 +709,7 @@ mcview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
              */
             delete_hook (&idle_hook, mcview_hook);
 
-            if (mc_global.midnight_shutdown)
+            if (mc_global.midnight_shutdown && view->hexedit_mode)
                 mcview_ok_to_quit (view);
         }
         mcview_done (view);
@@ -731,9 +726,6 @@ mcview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
 cb_ret_t
 mcview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
-    WDialog *h = DIALOG (w);
-    WView *view;
-
     switch (msg)
     {
     case MSG_ACTION:
@@ -744,14 +736,21 @@ mcview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
         return mcview_execute_cmd (NULL, parm);
 
     case MSG_VALIDATE:
+    {
+        WView *view;
+
         view = (WView *) widget_find_by_type (w, mcview_callback);
-        // don't stop the dialog before final decision
-        widget_set_state (w, WST_ACTIVE, TRUE);
-        if (mcview_ok_to_quit (view))
-            dlg_close (h);
-        else
-            mcview_update (view);
+        if (view->hexedit_mode)
+        {
+            // don't stop the dialog before final decision
+            widget_set_state (w, WST_ACTIVE, TRUE);
+            if (mcview_ok_to_quit (view))
+                dlg_close (DIALOG (w));
+            else
+                mcview_update (view);
+        }
         return MSG_HANDLED;
+    }
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
