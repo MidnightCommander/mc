@@ -43,6 +43,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
