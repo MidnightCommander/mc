@@ -174,7 +174,7 @@ static struct
 #ifdef EXT4_HUGE_FILE_FL
     /* removed in v1.43.9
        ext2fsprogs 4825daeb0228e556444d199274b08c499ac3706c 2018-02-06 */
-    { EXT4_HUGE_FILE_FL, 'h', N_ ("Huge_file"), FALSE, FALSE },
+    { EXT4_HUGE_FILE_FL, 'h', N_ ("Huge file"), FALSE, FALSE },
 #endif
     { FS_NOCOW_FL, 'C', N_ ("No COW"), FALSE, FALSE },
 #ifdef FS_DAX_FL
