@@ -402,7 +402,6 @@ mcview_load_command_output (WView *view, const char *command)
     {
         mcview_close_datasource (view);
         mcview_display (view);
-        return FALSE;
     }
 
     return TRUE;
