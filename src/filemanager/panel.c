@@ -1060,6 +1060,61 @@ mini_info_separator (const WPanel *panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+show_git_branch (const WPanel *panel, int used_by_free_space)
+{
+    const Widget *w = CONST_WIDGET (panel);
+    char branch[BUF_SMALL], tmp[BUF_SMALL];
+    FILE *gitcmd = NULL;
+    int gitret = -1;
+
+    // Don't try to check git branch on non-local fs
+    if (!vfs_file_is_local (panel->cwd_vpath) || !git_branch)
+        return;
+
+    if (mc_chdir (panel->cwd_vpath) != 0)
+        return;
+
+    gitcmd = popen ("git branch --show-current 2>&1", "r");
+    if (gitcmd == NULL)
+        return;
+
+    if (!fgets (branch, sizeof (branch), gitcmd))
+    {
+         gitret = pclose (gitcmd);
+         return;
+    }
+    else
+    {
+         branch[sizeof (branch) - 1] = '\0';
+         int l = (int) strlen(branch) - 1;
+         while (l >= 0 && (*(branch + l) == '\n' || *(branch + l) == '\r'))
+         {
+             *(branch + l) = '\0';
+             l--;
+         }
+    }
+    gitret = pclose (gitcmd);
+
+    if (gitret == 0)
+    {
+        int avail_space = w->rect.cols - 5 - used_by_free_space;
+        if (avail_space > (int) strlen (" Git: X... "))
+        {
+            if (avail_space - 11 < (int) strlen (branch))
+                 sprintf(branch + avail_space - 11, "...");
+            g_snprintf (tmp, sizeof (tmp), " Git: %s ", branch);
+        }
+        else
+            return;
+        widget_gotoyx (w, w->rect.lines - 1, 2);
+        tty_setcolor (NORMAL_COLOR);
+        tty_print_string (tmp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
 show_free_space (const WPanel *panel)
 {
     // Used to figure out how many free space we have
@@ -1069,7 +1124,7 @@ show_free_space (const WPanel *panel)
 
     // Don't try to stat non-local fs
     if (!vfs_file_is_local (panel->cwd_vpath) || !free_space)
-        return;
+        return 0;
 
     if (old_cwd == NULL || strcmp (old_cwd, vfs_path_as_str (panel->cwd_vpath)) != 0)
     {
@@ -1080,7 +1135,7 @@ show_free_space (const WPanel *panel)
         old_cwd = g_strdup (vfs_path_as_str (panel->cwd_vpath));
 
         if (mc_realpath (old_cwd, rpath) == NULL)
-            return;
+            return 0;
 
         my_statfs (&myfs_stats, rpath);
     }
@@ -1101,7 +1156,10 @@ show_free_space (const WPanel *panel)
         widget_gotoyx (w, w->rect.lines - 1, w->rect.cols - 2 - (int) strlen (tmp));
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (tmp);
+        return (int) strlen (tmp);
     }
+
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1264,7 +1322,8 @@ show_dir (const WPanel *panel)
         }
     }
 
-    show_free_space (panel);
+    int fs_chars = show_free_space (panel);
+    show_git_branch (panel, fs_chars);
 
     if (panel->active)
         tty_set_normal_attrs ();

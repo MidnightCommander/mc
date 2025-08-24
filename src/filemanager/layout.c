@@ -101,6 +101,9 @@ gboolean xterm_title = TRUE;
 /* Set to show free space on device assigned to current directory */
 gboolean free_space = TRUE;
 
+/* Set to show current branch for directory with git */
+gboolean git_branch = TRUE;
+
 /* The starting line for the output of the subprogram */
 int output_start_y = 0;
 
@@ -134,6 +137,7 @@ typedef struct
     gboolean message_visible;
     gboolean xterm_title;
     gboolean free_space;
+    gboolean git_branch;
     int output_lines;
 } layout_t;
 
@@ -175,6 +179,7 @@ static struct
     { N_ ("H&intbar visible"), &mc_global.message_visible, NULL },
     { N_ ("&XTerm window title"), &xterm_title, NULL },
     { N_ ("&Show free space"), &free_space, NULL },
+    { N_ ("Show git &branch"), &git_branch, NULL },
 };
 
 static const char *output_lines_label = NULL;
@@ -462,6 +467,8 @@ layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
                 xterm_title = check_options[5].widget->state;
             else if (sender == WIDGET (check_options[6].widget))
                 free_space = check_options[6].widget->state;
+            else if (sender == WIDGET (check_options[7].widget))
+                git_branch = check_options[7].widget->state;
             else
                 ok = FALSE;
 
@@ -672,6 +679,7 @@ layout_save (void)
     old_layout.message_visible = mc_global.message_visible;
     old_layout.xterm_title = xterm_title;
     old_layout.free_space = free_space;
+    old_layout.git_branch = git_branch;
     old_layout.output_lines = -1;
 
     _output_lines = output_lines;
@@ -690,6 +698,7 @@ layout_restore (void)
     mc_global.message_visible = old_layout.message_visible;
     xterm_title = old_layout.xterm_title;
     free_space = old_layout.free_space;
+    git_branch = old_layout.git_branch;
     output_lines = old_layout.output_lines;
 
     panels_layout = old_panels_layout;

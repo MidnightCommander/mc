@@ -45,6 +45,7 @@ extern gboolean command_prompt;
 extern gboolean menubar_visible;
 extern int output_start_y;
 extern gboolean xterm_title;
+extern gboolean git_branch;
 extern gboolean free_space;
 extern gboolean nice_rotating_dash;
 
