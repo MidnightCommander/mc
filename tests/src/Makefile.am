@@ -31,6 +31,7 @@ TESTS = \
 	execute__execute_with_vfs_arg \
 	execute__execute_external_editor_or_viewer \
 	execute__execute_get_external_cmd_opts_from_config \
+	file_history \
 	usermenu__test_condition
 
 check_PROGRAMS = $(TESTS)
@@ -45,6 +46,9 @@ execute__execute_external_editor_or_viewer_SOURCES = \
 
 execute__execute_get_external_cmd_opts_from_config_SOURCES = \
 	execute__execute_get_external_cmd_opts_from_config.c
+
+file_history_SOURCES = \
+	file_history.c
 
 usermenu__test_condition_SOURCES = \
 	usermenu__test_condition.c
