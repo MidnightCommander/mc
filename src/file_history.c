@@ -54,8 +54,52 @@ typedef struct file_history_data_t
 
 /*** file scope variables ************************************************************************/
 
+static const char SEPARATOR[] = " ";
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+file_history_parse_entry (const char *buf, GList **file_list)
+{
+    file_history_data_t *fhd;
+    const char *s = strrchr (buf, *SEPARATOR);
+
+    // Ignore entries without saved file position info in the filepos file
+    if (s == NULL)
+        return;
+
+    fhd = g_new (file_history_data_t, 1);
+    fhd->file_name = str_unescape (buf, s - buf, "", TRUE);
+
+    const size_t len = strlen (s + 1);
+
+    fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
+
+    *file_list = g_list_prepend (*file_list, fhd);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+file_history_write_entry (const file_history_data_t *fhd, GString *s)
+{
+    {
+        char *file_name;
+
+        file_name = str_escape (fhd->file_name, -1, "", TRUE);
+        g_string_append (s, file_name);
+        g_free (file_name);
+    }
+
+    if (fhd->file_pos != NULL)
+    {
+        g_string_append_c (s, *SEPARATOR);
+        g_string_append (s, fhd->file_pos);
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static GList *
@@ -77,19 +121,7 @@ file_history_list_read (void)
         return NULL;
 
     while (fgets (buf, sizeof (buf), f) != NULL)
-    {
-        char *s;
-        file_history_data_t *fhd;
-        size_t len;
-
-        s = strrchr (buf, ' ');
-        // FIXME: saved file position info is present in filepos file
-        fhd = g_new (file_history_data_t, 1);
-        fhd->file_name = g_strndup (buf, s - buf);
-        len = strlen (s + 1);
-        fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
-        file_list = g_list_prepend (file_list, fhd);
-    }
+        file_history_parse_entry (buf, &file_list);
 
     fclose (f);
 
@@ -120,15 +152,7 @@ file_history_list_write (const GList *file_list)
 
         for (; file_list != NULL && !write_error; file_list = g_list_next (file_list))
         {
-            file_history_data_t *fhd = (file_history_data_t *) file_list->data;
-
-            g_string_append (s, fhd->file_name);
-            if (fhd->file_pos != NULL)
-            {
-                g_string_append_c (s, ' ');
-                g_string_append (s, fhd->file_pos);
-            }
-
+            file_history_write_entry (file_list->data, s);
             write_error = (fprintf (f, "%s\n", s->str) < 0);
             g_string_truncate (s, 0);
         }
