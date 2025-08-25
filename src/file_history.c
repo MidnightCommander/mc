@@ -63,6 +63,10 @@ file_history_parse_entry (const char *buf, GList **file_list)
 {
     const char *s = strrchr (buf, ' ');
 
+    // Ignore entries without saved file position info in the filepos file
+    if (s == NULL)
+        return;
+
     file_history_data_t *fhd = g_new (file_history_data_t, 1);
     fhd->file_name = g_strndup (buf, s - buf);
     const size_t len = strlen (s + 1);
