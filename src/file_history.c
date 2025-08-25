@@ -58,6 +58,21 @@ typedef struct file_history_data_t
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+file_history_parse_entry (const char *buf, GList **file_list)
+{
+    const char *s = strrchr (buf, ' ');
+
+    file_history_data_t *fhd = g_new (file_history_data_t, 1);
+    fhd->file_name = g_strndup (buf, s - buf);
+    const size_t len = strlen (s + 1);
+    fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
+
+    *file_list = g_list_prepend (*file_list, fhd);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 file_history_list_read (void)
 {
@@ -77,19 +92,7 @@ file_history_list_read (void)
         return NULL;
 
     while (fgets (buf, sizeof (buf), f) != NULL)
-    {
-        char *s;
-        file_history_data_t *fhd;
-        size_t len;
-
-        s = strrchr (buf, ' ');
-        // FIXME: saved file position info is present in filepos file
-        fhd = g_new (file_history_data_t, 1);
-        fhd->file_name = g_strndup (buf, s - buf);
-        len = strlen (s + 1);
-        fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
-        file_list = g_list_prepend (file_list, fhd);
-    }
+        file_history_parse_entry (buf, &file_list);
 
     fclose (f);
 
