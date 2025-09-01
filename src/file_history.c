@@ -54,6 +54,8 @@ typedef struct file_history_data_t
 
 /*** file scope variables ************************************************************************/
 
+static const char SEPARATOR[] = " ";
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -61,14 +63,14 @@ typedef struct file_history_data_t
 static void
 file_history_parse_entry (const char *buf, GList **file_list)
 {
-    const char *s = strrchr (buf, ' ');
+    const char *s = strrchr (buf, *SEPARATOR);
 
     // Ignore entries without saved file position info in the filepos file
     if (s == NULL)
         return;
 
     file_history_data_t *fhd = g_new (file_history_data_t, 1);
-    fhd->file_name = g_strndup (buf, s - buf);
+    fhd->file_name = str_unescape (buf, s - buf, SEPARATOR, TRUE);
     const size_t len = strlen (s + 1);
     fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
 
@@ -129,10 +131,13 @@ file_history_list_write (const GList *file_list)
         {
             file_history_data_t *fhd = (file_history_data_t *) file_list->data;
 
-            g_string_append (s, fhd->file_name);
+            char *file_name = str_escape (fhd->file_name, -1, SEPARATOR, TRUE);
+            g_string_append (s, file_name);
+            g_free (file_name);
+
             if (fhd->file_pos != NULL)
             {
-                g_string_append_c (s, ' ');
+                g_string_append_c (s, *SEPARATOR);
                 g_string_append (s, fhd->file_pos);
             }
 
