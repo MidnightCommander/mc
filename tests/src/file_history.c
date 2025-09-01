@@ -33,7 +33,7 @@ START_TEST (test_file_history_parse_entry)
     GList *file_list = NULL;
 
     const char *mock_entries[] = {
-        "/home/codespace/tmp/foo\n", "\n", "bar 2;0;5\n", "ba\\nz 1;0;5\n", "",
+        "/home/codespace/tmp/foo\n", "\n", "bar quux 2;0;5\n", "ba\\nz 1;0;5\n", "",
     };
     const size_t entries_count = sizeof (mock_entries) / sizeof (mock_entries[0]);
 
@@ -46,7 +46,7 @@ START_TEST (test_file_history_parse_entry)
     const file_history_data_t *e2 = g_list_nth_data (file_list, 1);
 
     ck_assert_str_eq (e1->file_name, "ba\nz");
-    ck_assert_str_eq (e2->file_name, "bar");
+    ck_assert_str_eq (e2->file_name, "bar quux");
 }
 END_TEST
 

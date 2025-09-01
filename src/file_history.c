@@ -70,7 +70,7 @@ file_history_parse_entry (const char *buf, GList **file_list)
         return;
 
     file_history_data_t *fhd = g_new (file_history_data_t, 1);
-    fhd->file_name = str_unescape (buf, s - buf, SEPARATOR, TRUE);
+    fhd->file_name = str_unescape (buf, s - buf, "", TRUE);
     const size_t len = strlen (s + 1);
     fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
 
@@ -131,7 +131,7 @@ file_history_list_write (const GList *file_list)
         {
             file_history_data_t *fhd = (file_history_data_t *) file_list->data;
 
-            char *file_name = str_escape (fhd->file_name, -1, SEPARATOR, TRUE);
+            char *file_name = str_escape (fhd->file_name, -1, "", TRUE);
             g_string_append (s, file_name);
             g_free (file_name);
 
