@@ -18,13 +18,13 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install GNU Global
         run: sudo apt-get install -y global exuberant-ctags python3-pygments
 
       - name: Checkout source.midnight-commander.org repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: MidnightCommander/source
           path: HTML
