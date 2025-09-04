@@ -79,6 +79,22 @@ file_history_parse_entry (const char *buf, GList **file_list)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+file_history_write_entry (const file_history_data_t *fhd, GString *s)
+{
+    char *file_name = str_escape (fhd->file_name, -1, "", TRUE);
+    g_string_append (s, file_name);
+    g_free (file_name);
+
+    if (fhd->file_pos != NULL)
+    {
+        g_string_append_c (s, *SEPARATOR);
+        g_string_append (s, fhd->file_pos);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 file_history_list_read (void)
 {
@@ -129,18 +145,7 @@ file_history_list_write (const GList *file_list)
 
         for (; file_list != NULL && !write_error; file_list = g_list_next (file_list))
         {
-            file_history_data_t *fhd = (file_history_data_t *) file_list->data;
-
-            char *file_name = str_escape (fhd->file_name, -1, "", TRUE);
-            g_string_append (s, file_name);
-            g_free (file_name);
-
-            if (fhd->file_pos != NULL)
-            {
-                g_string_append_c (s, *SEPARATOR);
-                g_string_append (s, fhd->file_pos);
-            }
-
+            file_history_write_entry (file_list->data, s);
             write_error = (fprintf (f, "%s\n", s->str) < 0);
             g_string_truncate (s, 0);
         }

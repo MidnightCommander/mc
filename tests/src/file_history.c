@@ -52,6 +52,23 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+START_TEST (test_file_history_write_entry)
+{
+    const file_history_data_t fhd = {
+        .file_name = g_strdup ("ba\nz"),
+        .file_pos = g_strdup ("1;0;5"),
+    };
+
+    GString *s = g_string_new ("");
+    file_history_write_entry (&fhd, s);
+
+    ck_assert_str_eq (s->str, "ba\\nz 1;0;5");
+
+    g_string_free (s, TRUE);
+}
+END_TEST
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -61,6 +78,7 @@ main (void)
 
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_file_history_parse_entry);
+    tcase_add_test (tc_core, test_file_history_write_entry);
     // ***********************************
 
     return mctest_run_all (tc_core);
