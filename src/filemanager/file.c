@@ -2942,12 +2942,6 @@ ret:
             src_mode = 0100666 & ~src_mode;
             mc_chmod (dst_vpath, (src_mode & ctx->umask_kill));
         }
-    }
-
-    if (dst_status == DEST_FULL || dst_status == DEST_SHORT_KEEP)
-    {
-        // Always sync timestamps
-        mc_utime (dst_vpath, &times);
 
         while (attrs_ok && mc_fsetflags (dst_vpath, attrs) != 0 && !ctx->ignore_all)
         {
@@ -2963,7 +2957,10 @@ ret:
             temp_status = file_error (
                 ctx, TRUE, _ ("Cannot set ext2 attributes for target file\n%s"), dst_path);
             if (temp_status == FILE_ABORT)
+            {
                 return_status = FILE_ABORT;
+                goto ret_fast;
+            }
             if (temp_status == FILE_RETRY)
             {
                 attrs_ok = TRUE;
@@ -2979,6 +2976,10 @@ ret:
             break;
         }
     }
+
+    // Always sync timestamps
+    if (dst_status == DEST_FULL || dst_status == DEST_SHORT_KEEP)
+        mc_utime (dst_vpath, &times);
 
     progress_update_one (return_status == FILE_CONT, ctx, file_size);
     if (return_status == FILE_CONT)
