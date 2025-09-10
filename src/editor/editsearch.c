@@ -276,19 +276,8 @@ edit_search_fix_search_start_if_selection (WEdit *edit)
     if (!edit_search_options.only_in_selection)
         return;
 
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    if (edit_search_options.backwards)
-    {
-        if (edit->search_start > end_mark || edit->search_start <= start_mark)
-            edit->search_start = end_mark;
-    }
-    else
-    {
-        if (edit->search_start < start_mark || edit->search_start >= end_mark)
-            edit->search_start = start_mark;
-    }
+    if (eval_marks (edit, &start_mark, &end_mark))
+        edit->search_start = edit_search_options.backwards ? end_mark : start_mark;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -323,12 +312,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
             const off_t bol =
                 edit_calculate_start_of_current_line (buf, search_start, end_string_symbol);
 
-            if (search_start != bol)
-            {
-                start_mark = edit_calculate_start_of_next_line (buf, start_mark, buf->size,
-                                                                end_string_symbol);
-                start_from_next_line = TRUE;
-            }
+            start_from_next_line = search_start != bol;
         }
 
         if ((edit->search_line_type & MC_SEARCH_LINE_END) != 0
@@ -336,7 +320,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
                 || edit_buffer_get_byte (buf, end_mark) != end_string_symbol))
             end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
 
-        if (start_mark >= end_mark)
+        if (search_start >= end_mark)
         {
             mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _ (STR_E_NOTFOUND));
             return FALSE;
@@ -396,11 +380,28 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
 
     // correct end_mark if cursor is in column 0: move end_mark to the end of previous line
     if (end_mark == edit_calculate_start_of_current_line (buf, end_mark, end_string_symbol))
+    {
         end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
+
+        // update bottom marker
+        if (edit->mark2 >= 0 && edit->mark2 != edit->mark1)
+        {
+            if (edit->mark2 > edit->mark1)
+                edit->mark2 = end_mark;
+            else
+                edit->mark1 = end_mark;
+        }
+    }
 
     if (start_from_next_line)
         search_start =
             edit_calculate_start_of_next_line (buf, search_start, end_mark, end_string_symbol);
+
+    if (search_start >= end_mark)
+    {
+        mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _ (STR_E_NOTFOUND));
+        return FALSE;
+    }
 
     return mc_search_run (edit->search, (void *) esm, search_start, end_mark, len);
 }
