@@ -38,52 +38,85 @@
 
 static WGroup owner;
 static WEdit *test_edit;
+static const char **replace_regex__from;
+static const char **replace_regex__to;
 static gboolean only_in_selection = FALSE;
 
-static const char *test_regex_in = "qwe\n"     //
-                                   "qwe\n"     //
-                                   "qwe\n"     //
-                                   "qwe\n"     //
-                                   "qwe\n"     //
-                                   "qwe\n"     //
-                                   "qwe\n"     //
-                                   "qwe\n";    //
-static const char *test_regex_out = "Xqwe\n"   //
-                                    "Xqwe\n"   //
-                                    "Xqwe\n"   //
-                                    "Xqwe\n"   //
-                                    "Xqwe\n"   //
-                                    "Xqwe\n"   //
-                                    "Xqwe\n"   //
-                                    "Xqwe\n";  //
+// input text: entire text
+static const char *test_regex_in = "qwe\n"   //
+                                   "qwe\n"   //
+                                   "qwe\n"   //
+                                   "qwe\n"   //
+                                   "qwe\n"   //
+                                   "qwe\n"   //
+                                   "qwe\n"   //
+                                   "qwe\n";  //
 
-static const char *test_regex_selected_in = "qwe\n"     //
-                                            "qwe\n"     //
-                                            "qwe\n"     // selected, mark1 = 8 (begin of line) or 9
-                                            "qwe\n"     // selected
-                                            "qwe\n"     // selected
-                                            "qwe\n"     // mark2 = 20, begin of line
-                                            "qwe\n"     //
-                                            "qwe\n";    //
+// insert char at begin of string:
+// s/^.*/X\\0
+// s/^/X
+// not in selection
+static const char *test_regex_out1 = "Xqwe\n"   //
+                                     "Xqwe\n"   //
+                                     "Xqwe\n"   //
+                                     "Xqwe\n"   //
+                                     "Xqwe\n"   //
+                                     "Xqwe\n"   //
+                                     "Xqwe\n"   //
+                                     "Xqwe\n";  //
+
+// replace first char of string:
+// s/^./X
+// not in selection
+static const char *test_regex_out2 = "Xwe\n"   //
+                                     "Xwe\n"   //
+                                     "Xwe\n"   //
+                                     "Xwe\n"   //
+                                     "Xwe\n"   //
+                                     "Xwe\n"   //
+                                     "Xwe\n"   //
+                                     "Xwe\n";  //
+
+// input text: selected
+static const char *test_regex_selected_in = "qwe\n"   //
+                                            "qwe\n"   //
+                                            "qwe\n"   // selected, mark1 = 8 (begin of string) or 9
+                                            "qwe\n"   // selected
+                                            "qwe\n"   // selected
+                                            "qwe\n"   // mark2 = 20, begin of string
+                                            "qwe\n"   //
+                                            "qwe\n";  //
+
+// insert char at begin of string:
+// s/^.*/X\\0
+// in selection from begin of string
 static const char *test1_regex_selected_out = "qwe\n"   //
                                               "qwe\n"   //
-                                              "Xqwe\n"  // selected, mark1 = 8 (begin of line)
+                                              "Xqwe\n"  // selected, mark1 = 8 (begin of string)
                                               "Xqwe\n"  // selected
                                               "Xqwe\n"  // selected
-                                              "qwe\n"   // mark2 = 20, begin of line
-                                              "qwe\n"   //
-                                              "qwe\n";  //
-static const char *test2_regex_selected_out = "qwe\n"   //
-                                              "qwe\n"   //
-                                              "qwe\n"   // selected, mark1 = 9 (not begin of line)
-                                              "Xqwe\n"  // selected
-                                              "Xqwe\n"  // selected
-                                              "qwe\n"   // mark2 = 20, begin of line
+                                              "qwe\n"   // mark2 = 20, begin of string
                                               "qwe\n"   //
                                               "qwe\n";  //
 
-static const char *replace_regex_from = "^.*";
-static const char *replace_regex_to = "X\\0";
+// insert char at begin of string:
+// s/^.*/X\\0
+// in selection not from begin of string
+static const char *test2_regex_selected_out = "qwe\n"   //
+                                              "qwe\n"   //
+                                              "qwe\n"   // selected, mark1 = 9 (not begin of string)
+                                              "Xqwe\n"  // selected
+                                              "Xqwe\n"  // selected
+                                              "qwe\n"   // mark2 = 20, begin of string
+                                              "qwe\n"   //
+                                              "qwe\n";  //
+
+static const char *replace_regex_entire_string__from = "^.*";
+static const char *replace_regex_entire_string__to = "X\\0";
+
+static const char *replace_regex_insert_char_at_begin_of_string__from = "^";
+static const char *replace_regex_replace_first_char_of_string__from = "^.";
+static const char *replace_regex_begin_of_string__to = "X";
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -145,8 +178,8 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
     (void) search_default;
     (void) replace_default;
 
-    *search_text = g_strdup (replace_regex_from);
-    *replace_text = g_strdup (replace_regex_to);
+    *search_text = g_strdup (*replace_regex__from);
+    *replace_text = g_strdup (*replace_regex__to);
 
     edit_search_options.type = MC_SEARCH_T_REGEX;
     edit_search_options.only_in_selection = only_in_selection;
@@ -264,10 +297,13 @@ test_replace_check (const char *test_out)
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_replace_regex)
+// replace entire string
+START_TEST (test_replace_regex__entire_string)
 {
     // given
     only_in_selection = FALSE;
+    replace_regex__from = &replace_regex_entire_string__from;
+    replace_regex__to = &replace_regex_entire_string__to;
     test_edit->mark1 = 0;
     test_edit->mark2 = 0;
 
@@ -279,16 +315,67 @@ START_TEST (test_replace_regex)
     edit_replace_cmd (test_edit, FALSE);
 
     // then
-    test_replace_check (test_regex_out);
+    test_replace_check (test_regex_out1);
 }
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test1_replace_regex_in_selection)
+// insert first char in string
+START_TEST (test_replace_regex__insert_char_at_begin_of_string)
+{
+    // given
+    only_in_selection = FALSE;
+    replace_regex__from = &replace_regex_insert_char_at_begin_of_string__from;
+    replace_regex__to = &replace_regex_begin_of_string__to;
+    test_edit->mark1 = 0;
+    test_edit->mark2 = 0;
+
+    for (const char *ti = test_regex_in; *ti != '\0'; ti++)
+        edit_buffer_insert (&test_edit->buffer, *ti);
+
+    // when
+    edit_cursor_move (test_edit, 0);
+    edit_replace_cmd (test_edit, FALSE);
+
+    // then
+    test_replace_check (test_regex_out1);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+// replace first char of string
+START_TEST (test_replace_regex__replace_first_char_of_string)
+{
+    // given
+    only_in_selection = FALSE;
+    replace_regex__from = &replace_regex_replace_first_char_of_string__from;
+    replace_regex__to = &replace_regex_begin_of_string__to;
+    test_edit->mark1 = 0;
+    test_edit->mark2 = 0;
+
+    for (const char *ti = test_regex_in; *ti != '\0'; ti++)
+        edit_buffer_insert (&test_edit->buffer, *ti);
+
+    // when
+    edit_cursor_move (test_edit, 0);
+    edit_replace_cmd (test_edit, FALSE);
+
+    // then
+    test_replace_check (test_regex_out2);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+// replace from begin of string in selection
+START_TEST (test_replace_regex__in_selection_top_down_1)
 {
     // given
     only_in_selection = TRUE;
+    replace_regex__from = &replace_regex_entire_string__from;
+    replace_regex__to = &replace_regex_entire_string__to;
     test_edit->mark1 = 8;
     test_edit->mark2 = 20;
 
@@ -306,12 +393,63 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test2_replace_regex_in_selection)
+// replace not from begin of string in selection
+START_TEST (test_replace_regex__in_selection_top_down_2)
 {
     // given
     only_in_selection = TRUE;
+    replace_regex__from = &replace_regex_entire_string__from;
+    replace_regex__to = &replace_regex_entire_string__to;
     test_edit->mark1 = 9;
     test_edit->mark2 = 20;
+
+    for (const char *ti = test_regex_selected_in; *ti != '\0'; ti++)
+        edit_buffer_insert (&test_edit->buffer, *ti);
+
+    // when
+    edit_cursor_move (test_edit, 0);
+    edit_replace_cmd (test_edit, FALSE);
+
+    // then
+    test_replace_check (test2_regex_selected_out);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+// replace from begin of string in selection
+START_TEST (test_replace_regex__in_selection_bottom_up_1)
+{
+    // given
+    only_in_selection = TRUE;
+    replace_regex__from = &replace_regex_entire_string__from;
+    replace_regex__to = &replace_regex_entire_string__to;
+    test_edit->mark1 = 20;
+    test_edit->mark2 = 8;
+
+    for (const char *ti = test_regex_selected_in; *ti != '\0'; ti++)
+        edit_buffer_insert (&test_edit->buffer, *ti);
+
+    // when
+    edit_cursor_move (test_edit, 0);
+    edit_replace_cmd (test_edit, FALSE);
+
+    // then
+    test_replace_check (test1_regex_selected_out);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+// replace not from begin of string in selection
+START_TEST (test_replace_regex__in_selection_bottom_up_2)
+{
+    // given
+    only_in_selection = TRUE;
+    replace_regex__from = &replace_regex_entire_string__from;
+    replace_regex__to = &replace_regex_entire_string__to;
+    test_edit->mark1 = 20;
+    test_edit->mark2 = 9;
 
     for (const char *ti = test_regex_selected_in; *ti != '\0'; ti++)
         edit_buffer_insert (&test_edit->buffer, *ti);
@@ -337,9 +475,13 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     // Add new tests here: ***************
-    tcase_add_test (tc_core, test_replace_regex);
-    tcase_add_test (tc_core, test1_replace_regex_in_selection);
-    tcase_add_test (tc_core, test2_replace_regex_in_selection);
+    tcase_add_test (tc_core, test_replace_regex__entire_string);
+    tcase_add_test (tc_core, test_replace_regex__insert_char_at_begin_of_string);
+    tcase_add_test (tc_core, test_replace_regex__replace_first_char_of_string);
+    tcase_add_test (tc_core, test_replace_regex__in_selection_top_down_1);
+    tcase_add_test (tc_core, test_replace_regex__in_selection_top_down_2);
+    tcase_add_test (tc_core, test_replace_regex__in_selection_bottom_up_1);
+    tcase_add_test (tc_core, test_replace_regex__in_selection_bottom_up_2);
     // ***********************************
 
     return mctest_run_all (tc_core);
