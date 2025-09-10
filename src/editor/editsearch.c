@@ -288,7 +288,6 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     WEdit *edit = esm->edit;
     edit_buffer_t *buf = &edit->buffer;
     off_t search_start = edit->search_start;
-    off_t search_end;
     off_t start_mark = 0;
     off_t end_mark = buf->size;
     gboolean start_from_next_line = FALSE;
@@ -341,7 +340,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     if (edit_search_options.backwards)
     {
         // backward search
-        search_end = end_mark;
+
+        off_t search_end = end_mark;
 
         if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
             search_start =
