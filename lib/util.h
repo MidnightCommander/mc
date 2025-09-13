@@ -16,7 +16,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-/* sighandler_t is GNU extension */
+// sighandler_t is GNU extension
 #ifndef HAVE_SIGHANDLER_T
 typedef void (*sighandler_t) (int);
 #endif
@@ -77,17 +77,17 @@ typedef void (*sighandler_t) (int);
  */
 #define _GL_CMP(n1, n2) (((n1) > (n2)) - ((n1) < (n2)))
 
-/* Difference or zero */
+// Difference or zero
 #define DOZ(a, b) ((a) > (b) ? (a) - (b) : 0)
 
-/* flags for shell_execute */
+// flags for shell_execute
 #define EXECUTE_INTERNAL (1 << 0)
 #define EXECUTE_AS_SHELL (1 << 2)
 #define EXECUTE_HIDE     (1 << 3)
 
 /*** enums ***************************************************************************************/
 
-/* Pathname canonicalization */
+// Pathname canonicalization
 typedef enum
 {
     CANON_PATH_NOCHANGE = 0,
@@ -117,7 +117,7 @@ enum compression_type
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-/* stdout or stderr stream of child process */
+// stdout or stderr stream of child process
 typedef struct
 {
     // file descriptor
@@ -138,7 +138,7 @@ typedef struct
     int error;
 } mc_pipe_stream_t;
 
-/* Pipe descriptor for child process */
+// Pipe descriptor for child process
 typedef struct
 {
     // PID of child process
@@ -162,7 +162,7 @@ int is_printable (int c);
  * processed by the mc command line. */
 char *name_quote (const char *c, gboolean quote_percent);
 
-/* returns a duplicate of c. */
+// returns a duplicate of c
 char *fake_name_quote (const char *c, gboolean quote_percent);
 
 /* path_trunc() is the same as str_trunc() but
@@ -192,18 +192,18 @@ const char *unix_error_string (int error_num);
 const char *skip_separators (const char *s);
 const char *skip_numbers (const char *s);
 
-/* overwrites passwd with '\0's and frees it. */
+// overwrites passwd with '\0's and frees it
 void wipe_password (char *passwd);
 
 char *diff_two_paths (const vfs_path_t *vpath1, const vfs_path_t *vpath2);
 
-/* Returns the basename of fname. The result is a pointer into fname. */
+// Returns the basename of fname. The result is a pointer into fname
 const char *x_basename (const char *fname);
 
 char *load_mc_home_file (const char *from, const char *filename, char **allocated_filename,
                          size_t *length);
 
-/* uid/gid managing */
+// uid/gid managing
 void init_groups (void);
 void destroy_groups (void);
 int get_user_permissions (struct stat *buf);
@@ -212,17 +212,17 @@ void init_uid_gid_cache (void);
 const char *get_group (gid_t gid);
 const char *get_owner (uid_t uid);
 
-/* Returns a copy of *s until a \n is found and is below top */
+// Returns a copy of *s until a \n is found and is below top
 const char *extract_line (const char *s, const char *top, size_t *len);
 
-/* System call wrappers */
+// System call wrappers
 MC_MOCKABLE sighandler_t my_signal (int signum, sighandler_t handler);
 MC_MOCKABLE int my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact);
 MC_MOCKABLE pid_t my_fork (void);
 MC_MOCKABLE int my_execvp (const char *file, char *const argv[]);
 MC_MOCKABLE char *my_get_current_dir (void);
 
-/* Process spawning */
+// Process spawning
 int my_system (int flags, const char *shell, const char *command);
 int my_systeml (int flags, const char *shell, ...);
 int my_systemv (const char *command, char *const argv[]);
@@ -237,7 +237,7 @@ GString *mc_pstream_get_string (mc_pipe_stream_t *ps);
 MC_MOCKABLE void my_exit (int status);
 void save_stop_handler (void);
 
-/* Tilde expansion */
+// Tilde expansion
 char *tilde_expand (const char *directory);
 
 void canonicalize_pathname_custom (char *path, canon_path_flags_t flags);
@@ -251,11 +251,11 @@ const char *decompress_extension (int type);
 
 GList *list_append_unique (GList *list, char *text);
 
-/* Position saving and restoring */
-/* Load position for the given filename */
+// Position saving and restoring
+// Load position for the given filename
 void load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, off_t *offset,
                          GArray **bookmarks);
-/* Save position for the given filename */
+// Save position for the given filename
 void save_file_position (const vfs_path_t *filename_vpath, long line, long column, off_t offset,
                          GArray *bookmarks);
 
