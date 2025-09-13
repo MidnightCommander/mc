@@ -707,7 +707,7 @@ check_format_view (const char *p)
         {
             for (q++; *q != '\0' && *q != '}'; q++)
             {
-                if (strncmp (q, DEFAULT_CHARSET, 5) == 0)
+                if (strncmp (q, "ascii", 5) == 0)
                 {
                     mcview_global_flags.hex = FALSE;
                     q += 4;
