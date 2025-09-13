@@ -980,7 +980,7 @@ void
 load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, off_t *offset,
                     GArray **bookmarks)
 {
-    char *fn;
+    char *fn, *filename_str;
     FILE *f;
     char buf[MC_MAXPATHLEN + 100];
     const size_t len = vfs_path_len (filename_vpath);
@@ -1001,13 +1001,15 @@ load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, 
     if (bookmarks != NULL)
         *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
 
+    filename_str = str_escape (vfs_path_as_str (filename_vpath), -1, "", TRUE);
+
     while (fgets (buf, sizeof (buf), f) != NULL)
     {
         const char *p;
         gchar **pos_tokens;
 
         // check if the filename matches the beginning of string
-        if (strncmp (buf, vfs_path_as_str (filename_vpath), len) != 0)
+        if (strncmp (buf, filename_str, len) != 0)
             continue;
 
         // followed by single space
@@ -1059,6 +1061,7 @@ load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, 
         g_strfreev (pos_tokens);
     }
 
+    g_free (filename_str);
     fclose (f);
 }
 
@@ -1073,6 +1076,7 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
 {
     static size_t filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
+    char *filename_str = NULL;
     FILE *f, *tmp_f;
     char buf[MC_MAXPATHLEN + 100];
     size_t i;
@@ -1102,12 +1106,12 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
         goto open_source_error;
     }
 
+    filename_str = str_escape (vfs_path_as_str (filename_vpath), -1, "", TRUE);
+
     // put the new record
     if (line != 1 || column != 0 || bookmarks != NULL)
     {
-        if (fprintf (f, "%s %ld;%ld;%" PRIuMAX, vfs_path_as_str (filename_vpath), line, column,
-                     (uintmax_t) offset)
-            < 0)
+        if (fprintf (f, "%s %ld;%ld;%" PRIuMAX, filename_str, line, column, (uintmax_t) offset) < 0)
             goto write_position_error;
         if (bookmarks != NULL)
             for (i = 0; i < bookmarks->len && i < MAX_SAVED_BOOKMARKS; i++)
@@ -1121,7 +1125,7 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
     i = 1;
     while (fgets (buf, sizeof (buf), tmp_f) != NULL)
     {
-        if (buf[len] == ' ' && strncmp (buf, vfs_path_as_str (filename_vpath), len) == 0
+        if (buf[len] == ' ' && strncmp (buf, filename_str, len) == 0
             && strchr (&buf[len + 1], ' ') == NULL)
             continue;
 
@@ -1131,6 +1135,7 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
     }
 
 write_position_error:
+    g_free (filename_str);
     fclose (tmp_f);
 open_source_error:
     g_free (tmp_fn);
