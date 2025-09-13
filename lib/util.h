@@ -16,6 +16,11 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+/* sighandler_t is GNU extension */
+#ifndef HAVE_SIGHANDLER_T
+typedef void (*sighandler_t) (int);
+#endif
+
 #ifndef MAXSYMLINKS
 #define MAXSYMLINKS 32
 #endif
@@ -110,6 +115,8 @@ enum compression_type
     COMPRESSION_ZSTD,
 };
 
+/*** structures declarations (and typedefs of structures)*****************************************/
+
 /* stdout or stderr stream of child process */
 typedef struct
 {
@@ -141,13 +148,6 @@ typedef struct
     // stderr of child process
     mc_pipe_stream_t err;
 } mc_pipe_t;
-
-/* sighandler_t is GNU extension */
-#ifndef HAVE_SIGHANDLER_T
-typedef void (*sighandler_t) (int);
-#endif
-
-/*** structures declarations (and typedefs of structures)*****************************************/
 
 /*** global variables defined in .c file *********************************************************/
 
