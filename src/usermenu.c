@@ -698,42 +698,42 @@ menu_file_own (char *path)
 int
 check_format_view (const char *p)
 {
-    const char *q = p;
+    if (strncmp (p, "view", 4) != 0)
+        return 0;
 
-    if (strncmp (p, "view", 4) == 0)
+    const char *q = p + 4;
+
+    if (*q == '{')
     {
-        q += 4;
-        if (*q == '{')
+        for (q++; *q != '\0' && *q != '}'; q++)
         {
-            for (q++; *q != '\0' && *q != '}'; q++)
+            if (strncmp (q, "ascii", 5) == 0)
             {
-                if (strncmp (q, "ascii", 5) == 0)
-                {
-                    mcview_global_flags.hex = FALSE;
-                    q += 4;
-                }
-                else if (strncmp (q, "hex", 3) == 0)
-                {
-                    mcview_global_flags.hex = TRUE;
-                    q += 2;
-                }
-                else if (strncmp (q, "nroff", 5) == 0)
-                {
-                    mcview_global_flags.nroff = TRUE;
-                    q += 4;
-                }
-                else if (strncmp (q, "unform", 6) == 0)
-                {
-                    mcview_global_flags.nroff = FALSE;
-                    q += 5;
-                }
+                mcview_global_flags.hex = FALSE;
+                q += 4;
             }
-            if (*q == '}')
-                q++;
+            else if (strncmp (q, "hex", 3) == 0)
+            {
+                mcview_global_flags.hex = TRUE;
+                q += 2;
+            }
+            else if (strncmp (q, "nroff", 5) == 0)
+            {
+                mcview_global_flags.nroff = TRUE;
+                q += 4;
+            }
+            else if (strncmp (q, "unform", 6) == 0)
+            {
+                mcview_global_flags.nroff = FALSE;
+                q += 5;
+            }
         }
-        return q - p;
+
+        if (*q == '}')
+            q++;
     }
-    return 0;
+
+    return q - p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
