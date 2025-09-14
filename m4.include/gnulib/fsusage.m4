@@ -1,5 +1,5 @@
 # fsusage.m4
-# serial 36
+# serial 37
 dnl Copyright (C) 1997-1998, 2000-2001, 2003-2025 Free Software Foundation,
 dnl Inc.
 dnl This file is free software; the Free Software Foundation
@@ -48,7 +48,7 @@ AC_DEFUN([gl_FILE_SYSTEM_USAGE],
   # is what it gets when this test fails.
   if test $ac_fsusage_space = no; then
     # glibc/{Hurd,kFreeBSD}, FreeBSD >= 5.0, NetBSD >= 3.0,
-    # OpenBSD >= 4.4, AIX, HP-UX, IRIX, Solaris, Cygwin, Interix, BeOS.
+    # OpenBSD >= 4.4, AIX, HP-UX, Solaris, Cygwin, Interix, BeOS.
     AC_CACHE_CHECK([for statvfs function (SVR4)],
       [fu_cv_sys_stat_statvfs],
       [AC_LINK_IFELSE(
@@ -75,7 +75,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
     if test $fu_cv_sys_stat_statvfs = yes; then
       ac_fsusage_space=yes
       # AIX >= 5.2 has statvfs64 that has a wider f_blocks field than statvfs.
-      # glibc, HP-UX, IRIX, Solaris have statvfs64 as well, but on these systems
+      # glibc, HP-UX, Solaris have statvfs64 as well, but on these systems
       # statvfs with large-file support is already equivalent to statvfs64.
       AC_CACHE_CHECK([whether to use statvfs64],
         [fu_cv_sys_stat_statvfs64],
@@ -140,8 +140,6 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
     # glibc/Linux, Mac OS X, FreeBSD < 5.0, NetBSD < 3.0, OpenBSD < 4.4.
     # (glibc/{Hurd,kFreeBSD}, FreeBSD >= 5.0, NetBSD >= 3.0,
     # OpenBSD >= 4.4, AIX, HP-UX, Cygwin already handled above.)
-    # (On IRIX you need to include <sys/statfs.h>, not only <sys/mount.h> and
-    # <sys/vfs.h>.)
     # (On Solaris, statfs has 4 arguments.)
     AC_CACHE_CHECK([for two-argument statfs with statfs.f_bsize member (AIX, 4.3BSD)],
       [fu_cv_sys_stat_statfs2_bsize],
@@ -195,7 +193,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
     if test $fu_cv_sys_stat_statfs4 = yes; then
       ac_fsusage_space=yes
       AC_DEFINE([STAT_STATFS4], [1],
-        [Define if statfs takes 4 args.  (SVR3, old Irix)])
+        [Define if statfs takes 4 args.  (SVR3)])
     fi
   fi
 

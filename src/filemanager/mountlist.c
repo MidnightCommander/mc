@@ -79,7 +79,7 @@
 #include <sys/statfs.h>
 #endif
 
-#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, IRIX, Cygwin, Android,                                  \
+#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, Cygwin, Android,                                        \
                              also (obsolete) 4.3BSD, SunOS */
 #include <mntent.h>
 #include <sys/types.h>
@@ -209,8 +209,7 @@
      || strcmp (Fs_type, "mqueue") == 0 || strcmp (Fs_type, "rpc_pipefs") == 0                     \
      || strcmp (Fs_type, "sysfs") == 0  /* FreeBSD, Linux 2.4 */                                   \
      || strcmp (Fs_type, "devfs") == 0  /* for NetBSD 3.0 */                                       \
-     || strcmp (Fs_type, "kernfs") == 0 /* for Irix 6.5 */                                         \
-     || strcmp (Fs_type, "ignore") == 0)
+     || strcmp (Fs_type, "kernfs") == 0
 
 /* Historically, we have marked as "dummy" any file system of type "none",
    but now that programs like du need to know about bind-mounted directories,
@@ -587,7 +586,7 @@ read_file_system_list (void)
     GSList *mount_list = NULL;
     struct mount_entry *me;
 
-#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, IRIX, Cygwin, Android,                                  \
+#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, Cygwin, Android,                                        \
                              also (obsolete) 4.3BSD, SunOS */
     {
         FILE *fp;
@@ -1607,7 +1606,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
         fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_fsize);
 
-#elif defined STAT_STATFS4  // SVR3, old Irix
+#elif defined STAT_STATFS4  // SVR3
 
         struct statfs fsd;
 
