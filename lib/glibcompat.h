@@ -42,6 +42,9 @@ GString *mc_g_string_dup (const GString *s);
 /* There is no such API in GLib2 */
 GString *mc_g_string_append_c_len (GString *s, gchar c, guint len);
 
+/* There is no such API in GLib2 */
+GString *mc_g_string_concat (GString *dest, const GString *src);
+
 /*** inline functions ****************************************************************************/
 
 #endif

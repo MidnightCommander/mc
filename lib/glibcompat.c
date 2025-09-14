@@ -302,3 +302,26 @@ mc_g_string_append_c_len (GString *s, gchar c, guint len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * mc_g_string_concat:
+ * @dst: (not nullable): the destination #GString.
+ * @src: (not nullable): the source #GString.
+ * @return: @dst
+ *
+ * Adds @src to the end of @dst.
+ *
+ * There is no such API in GLib2.
+ */
+GString *
+mc_g_string_concat (GString *dest, const GString *src)
+{
+    g_return_val_if_fail (dest != NULL, NULL);
+    g_return_val_if_fail (src != NULL, NULL);
+
+    g_string_append_len (dest, src->str, src->len);
+
+    return dest;
+}
+
+/* --------------------------------------------------------------------------------------------- */
