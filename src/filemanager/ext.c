@@ -138,7 +138,7 @@ exec_cleanup_file_name (const vfs_path_t *filename_vpath, gboolean has_changed)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 exec_get_file_name (const vfs_path_t *filename_vpath)
 {
     if (!do_local_copy)
@@ -160,19 +160,16 @@ exec_get_file_name (const vfs_path_t *filename_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 exec_expand_format (char symbol, gboolean is_result_quoted)
 {
-    char *text;
+    GString *text;
 
     text = expand_format (NULL, symbol, TRUE);
     if (is_result_quoted && text != NULL)
     {
-        char *quoted_text;
-
-        quoted_text = g_strdup_printf ("\"%s\"", text);
-        g_free (text);
-        text = quoted_text;
+        g_string_prepend_c (text, '"');
+        g_string_append_c (text, '"');
     }
     return text;
 }
@@ -182,7 +179,7 @@ exec_expand_format (char symbol, gboolean is_result_quoted)
 static GString *
 exec_get_export_variables (const vfs_path_t *filename_vpath)
 {
-    char *text;
+    GString *text;
     GString *export_vars_string;
     size_t i;
 
@@ -204,8 +201,9 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
         return NULL;
 
     export_vars_string = g_string_new ("MC_EXT_FILENAME=");
-    g_string_append_printf (export_vars_string, "%s\nexport MC_EXT_FILENAME\n", text);
-    g_free (text);
+    mc_g_string_concat (export_vars_string, text);
+    g_string_append (export_vars_string, "\nexport MC_EXT_FILENAME\n");
+    g_string_free (text, TRUE);
 
     for (i = 0; export_variables[i].name != NULL; i++)
     {
@@ -213,9 +211,13 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
             exec_expand_format (export_variables[i].symbol, export_variables[i].is_result_quoted);
         if (text != NULL)
         {
-            g_string_append_printf (export_vars_string, "%s=%s\nexport %s\n",
-                                    export_variables[i].name, text, export_variables[i].name);
-            g_free (text);
+            g_string_append (export_vars_string, export_variables[i].name);
+            g_string_append_c (export_vars_string, '=');
+            mc_g_string_concat (export_vars_string, text);
+            g_string_append (export_vars_string, "\nexport ");
+            g_string_append (export_vars_string, export_variables[i].name);
+            g_string_append_c (export_vars_string, '\n');
+            g_string_free (text, TRUE);
         }
     }
 
@@ -306,7 +308,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
                         }
                         else
                         {
-                            char *text;
+                            GString *text;
 
                             if (*lc_data != 'f')
                                 text = expand_format (NULL, *lc_data, !is_cd);
@@ -323,14 +325,14 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
                             if (text != NULL)
                             {
                                 if (!is_cd)
-                                    g_string_append (shell_string, text);
+                                    mc_g_string_concat (shell_string, text);
                                 else
                                 {
-                                    strcpy (pbuffer, text);
+                                    strncpy (pbuffer, text->str, text->len);
                                     pbuffer = strchr (pbuffer, '\0');
                                 }
 
-                                g_free (text);
+                                g_string_free (text, TRUE);
                             }
 
                             written_nonspace = TRUE;
@@ -582,14 +584,14 @@ get_popen_information (const char *cmd_file, const char *args, char *buf, int bu
 static int
 get_file_type_local (const vfs_path_t *filename_vpath, char *buf, int buflen)
 {
-    char *filename_quoted;
+    GString *filename_quoted;
     int ret = 0;
 
     filename_quoted = name_quote (vfs_path_get_last_path_str (filename_vpath), FALSE);
     if (filename_quoted != NULL)
     {
-        ret = get_popen_information (FILE_CMD, filename_quoted, buf, buflen);
-        g_free (filename_quoted);
+        ret = get_popen_information (FILE_CMD, filename_quoted->str, buf, buflen);
+        g_string_free (filename_quoted, TRUE);
     }
 
     return ret;
@@ -604,27 +606,27 @@ get_file_type_local (const vfs_path_t *filename_vpath, char *buf, int buflen)
 static int
 get_file_encoding_local (const vfs_path_t *filename_vpath, char *buf, int buflen)
 {
-    char *filename_quoted;
+    GString *filename_quoted;
     int ret = 0;
 
     filename_quoted = name_quote (vfs_path_get_last_path_str (filename_vpath), FALSE);
     if (filename_quoted != NULL)
     {
-        char *lang;
+        GString *lang;
 
         lang = name_quote (autodetect_codeset, FALSE);
         if (lang != NULL)
         {
             char *args;
 
-            args = g_strdup_printf (" -L %s -i %s", lang, filename_quoted);
-            g_free (lang);
+            args = g_strdup_printf (" -L %s -i %s", lang->str, filename_quoted->str);
+            g_string_free (lang, TRUE);
 
             ret = get_popen_information ("enca", args, buf, buflen);
             g_free (args);
         }
 
-        g_free (filename_quoted);
+        g_string_free (filename_quoted, TRUE);
     }
 
     return ret;

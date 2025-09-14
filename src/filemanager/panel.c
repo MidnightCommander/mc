@@ -2859,7 +2859,7 @@ static gboolean
 do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
 {
     const char *fname = fe->fname->str;
-    char *fname_quoted;
+    GString *fname_quoted;
     vfs_path_t *full_name_vpath;
     gboolean ok;
 
@@ -2916,8 +2916,8 @@ do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
     {
         char *cmd;
 
-        cmd = g_strconcat ("." PATH_SEP_STR, fname_quoted, (char *) NULL);
-        g_free (fname_quoted);
+        cmd = g_strconcat ("." PATH_SEP_STR, fname_quoted->str, (char *) NULL);
+        g_string_free (fname_quoted, TRUE);
 
         shell_execute (cmd, 0);
         g_free (cmd);

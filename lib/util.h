@@ -22,7 +22,7 @@ typedef void (*sighandler_t) (int);
 #endif
 
 // type for name_quote() and fake_name_quote()
-typedef char *(*quote_func_t) (const char *name, gboolean quote_percent);
+typedef GString *(*quote_func_t) (const char *name, gboolean quote_percent);
 
 #ifndef MAXSYMLINKS
 #define MAXSYMLINKS 32
@@ -163,10 +163,10 @@ int is_printable (int c);
 /* Quote the filename for the purpose of inserting it into the command
  * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
  * processed by the mc command line. */
-char *name_quote (const char *c, gboolean quote_percent);
+GString *name_quote (const char *c, gboolean quote_percent);
 
 // returns a duplicate of c
-char *fake_name_quote (const char *c, gboolean quote_percent);
+GString *fake_name_quote (const char *c, gboolean quote_percent);
 
 /* path_trunc() is the same as str_trunc() but
  * it deletes possible password from path for security

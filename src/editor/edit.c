@@ -247,7 +247,7 @@ static char *
 edit_get_filter (const vfs_path_t *filename_vpath)
 {
     int i;
-    char *quoted_name;
+    GString *quoted_name;
     char *p = NULL;
 
     i = edit_find_filter (filename_vpath);
@@ -257,8 +257,8 @@ edit_get_filter (const vfs_path_t *filename_vpath)
     quoted_name = name_quote (vfs_path_as_str (filename_vpath), FALSE);
     if (quoted_name != NULL)
     {
-        p = g_strdup_printf (all_filters[i].read, quoted_name);
-        g_free (quoted_name);
+        p = g_strdup_printf (all_filters[i].read, quoted_name->str);
+        g_string_free (quoted_name, TRUE);
     }
 
     return p;
@@ -1834,7 +1834,7 @@ edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *fil
 {
     int i;
     const char *write_name;
-    char *write_name_quoted;
+    GString *write_name_quoted;
     char *p = NULL;
 
     i = edit_find_filter (filename_vpath);
@@ -1845,8 +1845,8 @@ edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *fil
     write_name_quoted = name_quote (write_name, FALSE);
     if (write_name_quoted != NULL)
     {
-        p = g_strdup_printf (all_filters[i].write, write_name_quoted);
-        g_free (write_name_quoted);
+        p = g_strdup_printf (all_filters[i].write, write_name_quoted->str);
+        g_string_free (write_name_quoted, TRUE);
     }
     return p;
 }
