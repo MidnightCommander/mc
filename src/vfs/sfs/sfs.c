@@ -139,7 +139,8 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
     char *s_iter, *t = pad;
     gboolean was_percent = FALSE;
     vfs_path_t *pname;  // name of parent archive
-    char *pqname;       // name of parent archive, quoted
+    GString *quoted;
+    char *pqname;  // name of parent archive, quoted
     const vfs_path_element_t *path_element;
     mc_pipe_t *pip;
     GError *error = NULL;
@@ -161,7 +162,7 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
 
     //    if ((sfs_info[w].flags & F_2) || (!inpath) || (!*inpath)); else return -1;
     if ((sfs_info[w].flags & F_NOLOCALCOPY) != 0)
-        pqname = name_quote (vfs_path_as_str (pname), FALSE);
+        quoted = name_quote (vfs_path_as_str (pname), FALSE);
     else
     {
         vfs_path_t *s;
@@ -173,11 +174,13 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
             return (-1);
         }
 
-        pqname = name_quote (vfs_path_get_last_path_str (s), FALSE);
+        quoted = name_quote (vfs_path_get_last_path_str (s), FALSE);
         vfs_path_free (s, TRUE);
     }
 
     vfs_path_free (pname, TRUE);
+
+    pqname = g_string_free (quoted, FALSE);
 
     for (s_iter = sfs_info[w].command; *s_iter != '\0'; s_iter++)
     {

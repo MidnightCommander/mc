@@ -220,7 +220,7 @@ is_printable (int c)
  * line.  If quote_percent is TRUE, replace "%" with "%%" - the percent is
  * processed by the mc command line.
  */
-char *
+GString *
 name_quote (const char *s, gboolean quote_percent)
 {
     GString *ret;
@@ -274,20 +274,25 @@ name_quote (const char *s, gboolean quote_percent)
         default:
             break;
         }
+
         g_string_append_c (ret, *s);
     }
 
-    return g_string_free (ret, ret->len == 0);
+    if (ret->len != 0)
+        return ret;
+
+    g_string_free (ret, TRUE);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
+GString *
 fake_name_quote (const char *s, gboolean quote_percent)
 {
     (void) quote_percent;
 
-    return (s == NULL || *s == '\0' ? NULL : g_strdup (s));
+    return (s == NULL || *s == '\0' ? NULL : g_string_new (s));
 }
 
 /* --------------------------------------------------------------------------------------------- */
