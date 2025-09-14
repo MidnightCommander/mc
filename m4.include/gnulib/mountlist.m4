@@ -1,5 +1,5 @@
 # mountlist.m4
-# serial 19
+# serial 20
 dnl Copyright (C) 2002-2006, 2009-2025 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
@@ -75,7 +75,7 @@ $ac_includes_default
     # Determine whether it's the one-argument variant or the two-argument one.
 
     if test -z "$ac_list_mounted_fs"; then
-      # glibc, HP-UX, IRIX, Cygwin, Android, also (obsolete) 4.3BSD, SunOS.
+      # glibc, HP-UX, Cygwin, Android, also (obsolete) 4.3BSD, SunOS.
       AC_CACHE_CHECK([for one-argument getmntent function],
         [fu_cv_sys_mounted_getmntent1],
         [AC_COMPILE_IFELSE(
@@ -107,7 +107,7 @@ $ac_includes_default
         AC_DEFINE([MOUNTED_GETMNTENT1], [1],
           [Define if there is a function named getmntent for reading the list
            of mounted file systems, and that function takes a single argument.
-           (4.3BSD, SunOS, HP-UX, Irix)])
+           (4.3BSD, SunOS, HP-UX)])
         AC_CHECK_FUNCS([setmntent endmntent hasmntopt])
       fi
     fi

@@ -29,10 +29,6 @@
    Do not evaluate E.  */
 #define _GL_INT_CONVERT(e, v) ((1 ? 0 : (e)) + (v))
 
-/* Act like _GL_INT_CONVERT (E, -V) but work around a bug in IRIX 6.5 cc; see
-   <https://lists.gnu.org/r/bug-gnulib/2011-05/msg00406.html>.  */
-#define _GL_INT_NEGATE_CONVERT(e, v) ((1 ? 0 : (e)) - (v))
-
 /* The extra casts in the following macros work around compiler bugs,
    e.g., in Cray C 5.0.3.0.  */
 
@@ -41,7 +37,7 @@
 
 /* Return 1 if the real expression E, after promotion, has a
    signed or floating type.  Do not evaluate E.  */
-#define _GL_EXPR_SIGNED(e) (_GL_INT_NEGATE_CONVERT (e, 1) < 0)
+#define _GL_EXPR_SIGNED(e) (_GL_INT_CONVERT (e, -1) < 0)
 
 /* Minimum and maximum values for integer types and expressions.  */
 
@@ -55,7 +51,7 @@
 #define _GL_INT_MINIMUM(e)                                                                         \
     (_GL_EXPR_SIGNED (e) ? ~_GL_SIGNED_INT_MAXIMUM (e) : _GL_INT_CONVERT (e, 0))
 #define _GL_INT_MAXIMUM(e)                                                                         \
-    (_GL_EXPR_SIGNED (e) ? _GL_SIGNED_INT_MAXIMUM (e) : _GL_INT_NEGATE_CONVERT (e, 1))
+    (_GL_EXPR_SIGNED (e) ? _GL_SIGNED_INT_MAXIMUM (e) : _GL_INT_CONVERT (e, -1))
 #define _GL_SIGNED_INT_MAXIMUM(e)                                                                  \
     (((_GL_INT_CONVERT (e, 1) << (_GL_TYPE_WIDTH (+(e)) - 2)) - 1) * 2 + 1)
 
