@@ -798,7 +798,7 @@ char *
 expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
-    char *(*quote_func) (const char *, gboolean);
+    quote_func_t quote_func = do_quote ? name_quote : fake_name_quote;
     const char *fname = NULL;
     char *result;
     char c_lc;
@@ -852,11 +852,6 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
         // other modes don't use formats
         return NULL;
     }
-
-    if (do_quote)
-        quote_func = name_quote;
-    else
-        quote_func = fake_name_quote;
 
     c_lc = g_ascii_tolower ((gchar) c);
 
