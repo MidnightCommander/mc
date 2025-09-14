@@ -78,8 +78,6 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef char *(*quote_func_t) (const char *name, gboolean quote_percent);
-
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
