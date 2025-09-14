@@ -1,5 +1,5 @@
 # mountlist.m4
-# serial 18
+# serial 19
 dnl Copyright (C) 2002-2006, 2009-2025 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
@@ -148,7 +148,7 @@ $ac_includes_default
   fi
 
   if test -z "$ac_list_mounted_fs"; then
-    # OSF/1, also (obsolete) Apple Darwin 1.3.
+    # (obsolete) Apple Darwin 1.3.
     # powerpc-apple-darwin1.3.7 needs sys/param.h sys/ucred.h sys/fs_types.h
 
     AC_CACHE_CHECK([for getfsstat function],
@@ -174,7 +174,7 @@ $getfsstat_includes
       ac_list_mounted_fs=found
       AC_DEFINE([MOUNTED_GETFSSTAT], [1],
         [Define if there is a function named getfsstat for reading the
-         list of mounted file systems.  (DEC Alpha running OSF/1)])
+         list of mounted file systems.  (obsolete Darwin)])
     fi
   fi
 
@@ -201,10 +201,9 @@ $getfsstat_includes
 
   if test -z "$ac_list_mounted_fs"; then
     # Mac OS X, FreeBSD, NetBSD, OpenBSD, Minix, also (obsolete) 4.4BSD.
-    # OSF/1 also has getmntinfo but is already handled above.
     # We cannot use AC_CHECK_FUNCS([getmntinfo]) here, because at the linker
     # level the function is sometimes called getmntinfo64 or getmntinfo$INODE64
-    # on Mac OS X, __getmntinfo13 on NetBSD and Minix, _F64_getmntinfo on OSF/1.
+    # on Mac OS X, __getmntinfo13 on NetBSD and Minix.
     AC_CACHE_CHECK([for getmntinfo function],
       [fu_cv_sys_mounted_getmntinfo],
       [AC_LINK_IFELSE(

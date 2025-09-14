@@ -1,11 +1,13 @@
-# serial 35
-# Obtaining file system usage information.
+# fsusage.m4
+# serial 36
+dnl Copyright (C) 1997-1998, 2000-2001, 2003-2025 Free Software Foundation,
+dnl Inc.
+dnl This file is free software; the Free Software Foundation
+dnl gives unlimited permission to copy and/or distribute it,
+dnl with or without modifications, as long as this notice is preserved.
+dnl This file is offered as-is, without any warranty.
 
-# Copyright (C) 1997-1998, 2000-2001, 2003-2020 Free Software Foundation, Inc.
-#
-# This file is free software; the Free Software Foundation
-# gives unlimited permission to copy and/or distribute it,
-# with or without modifications, as long as this notice is preserved.
+# Obtaining file system usage information.
 
 # Written by Jim Meyering.
 
@@ -52,10 +54,6 @@ AC_DEFUN([gl_FILE_SYSTEM_USAGE],
       [AC_LINK_IFELSE(
          [AC_LANG_PROGRAM([[
 #include <sys/types.h>
-#ifdef __osf__
-"Do not use Tru64's statvfs implementation"
-#endif
-
 #include <sys/statvfs.h>
 
 struct statvfs fsd;
@@ -139,35 +137,9 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
   fi
 
   if test $ac_fsusage_space = no; then
-    # DEC Alpha running OSF/1
-    AC_CACHE_CHECK([for 3-argument statfs function (DEC OSF/1)],
-      [fu_cv_sys_stat_statfs3_osf1],
-      [AC_RUN_IFELSE([AC_LANG_SOURCE([[
-#include <sys/param.h>
-#include <sys/types.h>
-#include <sys/mount.h>
-  int
-  main ()
-  {
-    struct statfs fsd;
-    fsd.f_fsize = 0;
-    return statfs (".", &fsd, sizeof (struct statfs)) != 0;
-  }]])],
-         [fu_cv_sys_stat_statfs3_osf1=yes],
-         [fu_cv_sys_stat_statfs3_osf1=no],
-         [fu_cv_sys_stat_statfs3_osf1=no])
-      ])
-    if test $fu_cv_sys_stat_statfs3_osf1 = yes; then
-      ac_fsusage_space=yes
-      AC_DEFINE([STAT_STATFS3_OSF1], [1],
-        [Define if statfs takes 3 args.  (DEC Alpha running OSF/1)])
-    fi
-  fi
-
-  if test $ac_fsusage_space = no; then
     # glibc/Linux, Mac OS X, FreeBSD < 5.0, NetBSD < 3.0, OpenBSD < 4.4.
     # (glibc/{Hurd,kFreeBSD}, FreeBSD >= 5.0, NetBSD >= 3.0,
-    # OpenBSD >= 4.4, AIX, HP-UX, OSF/1, Cygwin already handled above.)
+    # OpenBSD >= 4.4, AIX, HP-UX, Cygwin already handled above.)
     # (On IRIX you need to include <sys/statfs.h>, not only <sys/mount.h> and
     # <sys/vfs.h>.)
     # (On Solaris, statfs has 4 arguments.)
@@ -229,7 +201,6 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
 
   if test $ac_fsusage_space = no; then
     # 4.4BSD and older NetBSD
-    # (OSF/1 already handled above.)
     # (On AIX, you need to include <sys/statfs.h>, not only <sys/mount.h>.)
     # (On Solaris, statfs has 4 arguments and 'struct statfs' is not declared in
     # <sys/mount.h>.)
@@ -269,7 +240,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
 
 # Check for SunOS statfs brokenness wrt partitions 2GB and larger.
 # If <sys/vfs.h> exists and struct statfs has a member named f_spare,
-# enable the work-around code in fsusage.c.
+# enable the workaround code in fsusage.c.
 AC_DEFUN([gl_STATFS_TRUNCATES],
 [
   AC_CACHE_CHECK([for statfs that truncates block counts],

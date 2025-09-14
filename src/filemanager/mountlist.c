@@ -49,7 +49,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#ifdef MOUNTED_GETFSSTAT  // OSF_1, also (obsolete) Apple Darwin 1.3
+#ifdef MOUNTED_GETFSSTAT  // (obsolete) Apple Darwin 1.3
 #ifdef HAVE_SYS_UCRED_H
 #include <grp.h>        /* needed on OSF V4.0 for definition of NGROUPS,
                                    NGROUPS is used as an array dimension in ucred.h */
@@ -868,7 +868,7 @@ read_file_system_list (void)
     }
 #endif
 
-#ifdef MOUNTED_GETFSSTAT  //  OSF/1, also (obsolete) Apple Darwin 1.3
+#ifdef MOUNTED_GETFSSTAT  //  (obsolete) Apple Darwin 1.3
     {
         int numsys, counter;
         size_t bufsize;
@@ -1563,15 +1563,6 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         fsp->fsu_blocksize =
             fsd.f_frsize ? PROPAGATE_ALL_ONES (fsd.f_frsize) : PROPAGATE_ALL_ONES (fsd.f_bsize);
 
-#elif defined STAT_STATFS3_OSF1  // OSF/1
-
-        struct statfs fsd;
-
-        if (statfs (file, &fsd, sizeof (struct statfs)) != 0)
-            return -1;
-
-        fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_fsize);
-
 #elif defined STAT_STATFS2_FRSIZE  // 2.6 < glibc/Linux < 2.6.36
 
         struct statfs fsd;
@@ -1629,8 +1620,8 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         fsp->fsu_blocksize = 512;
 #endif
 
-#if (defined STAT_STATVFS64 || defined STAT_STATFS3_OSF1 || defined STAT_STATFS2_FRSIZE            \
-     || defined STAT_STATFS2_BSIZE || defined STAT_STATFS2_FSIZE || defined STAT_STATFS4)
+#if (defined STAT_STATVFS64 || defined STAT_STATFS2_FRSIZE || defined STAT_STATFS2_BSIZE           \
+     || defined STAT_STATFS2_FSIZE || defined STAT_STATFS4)
 
         fsp->fsu_blocks = PROPAGATE_ALL_ONES (fsd.f_blocks);
         fsp->fsu_bfree = PROPAGATE_ALL_ONES (fsd.f_bfree);
