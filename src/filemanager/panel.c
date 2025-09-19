@@ -2347,6 +2347,7 @@ goto_middle_file (WPanel *panel)
 
     unselect_item (panel);
     panel->current = panel->top + panel_items (panel) / 2;
+    panel->current = MIN (panel->current, panel->dir.len - 1);
     select_item (panel);
 }
 
@@ -2360,6 +2361,7 @@ goto_bottom_file (WPanel *panel)
 
     unselect_item (panel);
     panel->current = panel->top + panel_items (panel) - 1;
+    panel->current = MIN (panel->current, panel->dir.len - 1);
     select_item (panel);
 }
 
