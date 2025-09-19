@@ -276,19 +276,8 @@ edit_search_fix_search_start_if_selection (WEdit *edit)
     if (!edit_search_options.only_in_selection)
         return;
 
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    if (edit_search_options.backwards)
-    {
-        if (edit->search_start > end_mark || edit->search_start <= start_mark)
-            edit->search_start = end_mark;
-    }
-    else
-    {
-        if (edit->search_start < start_mark || edit->search_start >= end_mark)
-            edit->search_start = start_mark;
-    }
+    if (eval_marks (edit, &start_mark, &end_mark))
+        edit->search_start = edit_search_options.backwards ? end_mark : start_mark;
 }
 
 /* --------------------------------------------------------------------------------------------- */
