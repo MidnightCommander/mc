@@ -206,6 +206,10 @@ typedef struct
         /* If true, use + and \ keys normally and select/unselect do if M-+ / M-\.
            and M-- and keypad + / - */
         gboolean alternate_plus_minus;
+
+        // If true, send Kitty Keyboard Protocol initialization string to the terminal
+        // Defaults to true, because terminals that don't support it simply do nothing
+        gboolean kitty_keyboard_protocol;
     } tty;
 
     struct

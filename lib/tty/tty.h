@@ -95,6 +95,7 @@ extern int tty_flush_input (void);
 extern void tty_keypad (gboolean set);
 extern void tty_nodelay (gboolean set);
 extern int tty_baudrate (void);
+extern void tty_kitty (gboolean set);
 
 /* {{{ Output }}} */
 

@@ -426,3 +426,24 @@ tty_init_xterm_support (gboolean is_xterm)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/** Enable or disable Kitty Keyboard Protocol */
+void
+tty_kitty (gboolean set)
+{
+    if (!mc_global.tty.kitty_keyboard_protocol)
+        return;
+
+    if (set)
+    {
+        // 1 = Disambiguate escape codes
+        // 4 = Report alternate keys (required for detecting Ctrl+Alt+key)
+        // 8 = Report all keys as escape codes (required for distinguishing keypad keys [+-*])
+        SLtt_write_string ((char*) ESC_STR "[>13u");
+    }
+    else
+        SLtt_write_string ((char*) ESC_STR "[<u");
+}
+
+/* --------------------------------------------------------------------------------------------- */
+

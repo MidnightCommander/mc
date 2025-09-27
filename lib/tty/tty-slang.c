@@ -334,6 +334,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     tty_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
+    tty_kitty (TRUE);
 
     tty_setup_sigwinch (sigwinch_handler);
 }
@@ -346,6 +347,7 @@ tty_shutdown (void)
     char *op_cap;
 
     tty_destroy_winch_pipe ();
+    tty_kitty (FALSE);
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);
