@@ -1768,7 +1768,11 @@ pend_send:
     {
         gboolean bad_seq;
 
-        // May be a complex sequence
+        /* At this point no sequence was found in the keys tree. So if we have a CSI sequence, try
+         * to get all remaining pending chars from stdin and parse them as a parametrized CSI
+         * sequence. If that succeeds, convert the input to a char array and check if it matches
+         * any of complex sequence we are interested in.
+         */
     complex_seq:
         while (pending_keys != NULL && pending_keys[0] == ESC_CHAR && pending_keys[1] == '[')
         {
@@ -1801,26 +1805,43 @@ pend_send:
                 pending_keys = seq_append = &seq_buffer[seq_char_buffer_ptr - seq_char_buffer];
 
             /* Check for Kitty Keyboard Protocol including backward compatibility sequences:
+             *
              * CSI parameters [u~ABCDEFHPQS]
              *
              * https://sw.kovidgoyal.net/kitty/keyboard-protocol/
+             *
+             * Throughout the process, handle possible following sequences, leaving them in the
+             * pending queue.
+             *
+             * Examples:
+             *
+             * \E[2~ or \E[2;1~ -> KEY_IC
+             * \E[1;2A -> KEY_M_SHIFT | KEY_UP
+             * \E[13;6u -> KEY_M_CTRL | KEY_M_SHIFT | KEY_ENTER
+             * \E[111;5u -> KEY_M_CTRL | 'o'
+             * \E[44:63;132u -> KEY_M_ALT | '?' (on Czech keyboard, with Num Lock on)
              */
+
             if ((final_byte == 'u' && csi.param_count >= 1)
                 || (final_byte == '~' && csi.param_count >= 1)
                 || (final_byte >= 'A' && final_byte <= 'F') || (final_byte == 'H')
                 || (final_byte >= 'P' && final_byte <= 'S'))
             {
+                // Private mode is used for reporting protocol presence and mode. We don't need it
                 if (csi.private_mode != 0)
                     continue;
 
+                // Retrieve the modifier bits
                 if (csi.param_count >= 2)
                     modifiers = ((csi.params[1][0] - 1) << 12) & KEY_M_MASK;
                 else
                     modifiers = 0;
 
+                // Zero parameters are allowed. In that case, assume default 1 as the default
                 if (csi.param_count == 0)
                     csi.params[0][0] = 1;
 
+                // Check for non-alphabet keys using a predefined table
                 for (int j = 0; kitty_key_defines[j].code != 0; j++)
                 {
                     if (kitty_key_defines[j].kitty_code == csi.params[0][0]
@@ -1849,6 +1870,8 @@ pend_send:
                         modifiers &= ~KEY_M_SHIFT;
                 }
 
+                // Check if it is a non-Basic Latin Unicode character. If so, convert it to UTF-8,
+                // insert the remaining bytes into the pending queue and append any current queue
                 if (c >= 0x80)
                 {
                     // Unicode char
@@ -1870,6 +1893,7 @@ pend_send:
                     goto done;
                 }
 
+                // Mask the resulting value with 0x1F if the CTRL modifier is set
                 if ((modifiers & KEY_M_CTRL) && (c == ' ' || (c >= 0x40 && c <= 0x7e)))
                     c = XCTRL (c);
 
