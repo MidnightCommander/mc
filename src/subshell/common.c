@@ -1676,8 +1676,17 @@ init_subshell (void)
      * assume there must be something wrong with the shell, and we turn persistent buffer off
      * for good. This will save the user the trouble of having to wait for the persistent
      * buffer function to time out every time they try to close the subshell. */
-    if (use_persistent_buffer && !read_command_line_buffer (TRUE))
-        use_persistent_buffer = FALSE;
+#ifdef __APPLE__
+    /* On macOS with ZSH, skip the test because the shell is in SIGSTOP state and cannot respond.
+     * The feature works but the test times out. */
+    if (use_persistent_buffer && mc_global.shell->type != SHELL_ZSH)
+#else
+    if (use_persistent_buffer)
+#endif
+    {
+        if (!read_command_line_buffer (TRUE))
+            use_persistent_buffer = FALSE;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
