@@ -171,7 +171,16 @@ init_sigchld (void)
 
 #ifdef SA_RESTART
     sigchld_action.sa_flags = SA_RESTART;
+#else
+    sigchld_action.sa_flags = 0;
 #endif
+    /* BSD systems (macOS, FreeBSD, etc.) differ from Linux in SIGCHLD behavior.
+     * By default, BSD doesn't send SIGCHLD when a stopped child is continued with
+     * SIGCONT, while Linux does. This breaks the subshell's persistent command
+     * buffer test which relies on receiving SIGCHLD after sending SIGCONT.
+     * Explicitly clearing SA_NOCLDSTOP ensures we get SIGCHLD on both stop AND
+     * continue, making behavior consistent across platforms. */
+    sigchld_action.sa_flags &= ~SA_NOCLDSTOP;
 
     if (my_sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
     {

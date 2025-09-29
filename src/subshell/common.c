@@ -1267,7 +1267,7 @@ init_subshell_precmd (void)
             " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
             " zle -N mc_print_cursor_position\n"
             " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position\n"
-            " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
+            " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions=(_mc_precmd $precmd_functions)\n"
             "PS1='%%n@%%m:%%~%%# '\n",
             command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
@@ -1676,15 +1676,19 @@ init_subshell (void)
      * assume there must be something wrong with the shell, and we turn persistent buffer off
      * for good. This will save the user the trouble of having to wait for the persistent
      * buffer function to time out every time they try to close the subshell. */
-#ifdef __APPLE__
-    /* On macOS with ZSH, skip the test because the shell is in SIGSTOP state and cannot respond.
-     * The feature works but the test times out. */
-    if (use_persistent_buffer && mc_global.shell->type != SHELL_ZSH)
-#else
     if (use_persistent_buffer)
-#endif
     {
-        if (!read_command_line_buffer (TRUE))
+        gboolean test_passed = FALSE;
+#if defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__)
+        /* On BSD systems, we need a small delay to ensure proper initialization.
+         * This allows the shell's precmd_functions array to be properly set up
+         * with MC's hook in the first position, and gives time for SIGCHLD
+         * handling to stabilize after SIGCONT. Paradoxically, this delay
+         * actually makes startup faster by avoiding failed test retries. */
+        g_usleep (100000);  /* 100ms */
+#endif
+        test_passed = read_command_line_buffer (TRUE);
+        if (!test_passed)
             use_persistent_buffer = FALSE;
     }
 }
