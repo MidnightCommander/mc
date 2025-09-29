@@ -53,6 +53,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole declare yellow
     keyword whole done yellow
     keyword whole do yellow
+    keyword whole echo yellow
     keyword whole elif yellow
     keyword whole else yellow
     keyword whole esac yellow
@@ -63,13 +64,16 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole getopts yellow
     keyword whole if yellow
     keyword whole in yellow
+    keyword whole printf yellow
     keyword whole read yellow
     keyword whole return yellow
     keyword whole select yellow
+    keyword whole set yellow
     keyword whole shift yellow
     keyword whole source yellow
     keyword whole then yellow
     keyword whole trap yellow
+    keyword whole umask yellow
     keyword whole until yellow
     keyword whole unset yellow
     keyword whole wait yellow
@@ -245,7 +249,6 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole e2fsck cyan
     keyword whole e2image cyan
     keyword whole e2label cyan
-    keyword whole echo cyan
     keyword whole ed cyan
     keyword whole edit cyan
     keyword whole editor cyan
@@ -598,7 +601,6 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole pr cyan
     keyword whole print cyan
     keyword whole printenv cyan
-    keyword whole printf cyan
     keyword whole procmail cyan
     keyword whole prove cyan
     keyword whole ps cyan
@@ -666,7 +668,6 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole see cyan
     keyword whole sendmail cyan
     keyword whole seq cyan
-    keyword whole set cyan
     keyword whole setfdprm cyan
     keyword whole setkeycodes cyan
     keyword whole setleds cyan
