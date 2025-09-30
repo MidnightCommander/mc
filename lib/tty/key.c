@@ -222,6 +222,8 @@ const key_code_name_t key_name_conv_tab[] = {
 
 #define MC_USEC_PER_MSEC 1000
 
+#define SEQ_MAX_LEN      32
+
 /* The buffer can handle multiple sequences */
 #define SEQ_BUFFER_LEN 100
 
@@ -297,9 +299,9 @@ static key_define_t mc_default_keys[] = {
 /* Broken terminfo and termcap databases on xterminals */
 static key_define_t xterm_key_defines[] = {
 
-    /* The most common sequences are already covered by the Kitty Keyboard Protocol's backward
-     * compatibility design. For example, the most common escape sequence for the up arrow (CSI A)
-     * conforms to the protocol design, so it does not need to be duplicated here.
+    /* The Kitty Keyboard Protocol extends the most common key escape sequences in a backwards
+     * compatible way. Thus standard sequences are implicitly handled by the Kitty handler, and
+     * don't need to be listed here.
      */
 
     { KEY_F (1), ESC_STR "OP", MCKEY_NOACTION },
@@ -1107,7 +1109,7 @@ correct_key_code (int code)
      */
     if (c == '\b')
     {
-        // Special case for backspace ('\b' < 32)
+        // Special case for backspase ('\b' < 32)
         c = KEY_BACKSPACE;
         mod &= ~KEY_M_CTRL;
     }
@@ -1771,7 +1773,7 @@ pend_send:
         /* At this point no sequence was found in the keys tree. So if we have a CSI sequence, try
          * to get all remaining pending chars from stdin and parse them as a parametrized CSI
          * sequence. If that succeeds, convert the input to a char array and check if it matches
-         * any of complex sequence we are interested in.
+         * any of the complex sequence we are interested in.
          */
     complex_seq:
         while (pending_keys != NULL && pending_keys[0] == ESC_CHAR && pending_keys[1] == '[')
@@ -1784,10 +1786,10 @@ pend_send:
             seq_complex = pending_keys;
             pending_keys = seq_append = NULL;
 
-            // Check for complex sequence until any KEY_* constant (above 8bit) or maximum length
-            for (i = 0; seq_complex[i] != '\0' && i < 32; i++)
+            // Check for complex sequence until any non-7bit ASCII or maximum length
+            for (i = 0; seq_complex[i] != '\0' && i < SEQ_MAX_LEN; i++)
             {
-                if (seq_complex[i] > 0xFF)
+                if (seq_complex[i] >= 0x80)
                 {
                     pending_keys = seq_append = &seq_complex[i];
                     break;
@@ -1802,7 +1804,7 @@ pend_send:
 
             char final_byte = *(seq_char_buffer_ptr - 1);
             if (*seq_char_buffer_ptr != '\0')
-                pending_keys = seq_append = &seq_buffer[seq_char_buffer_ptr - seq_char_buffer];
+                pending_keys = seq_append = seq_complex + (seq_char_buffer_ptr - seq_char_buffer);
 
             /* Check for Kitty Keyboard Protocol including backward compatibility sequences:
              *
@@ -1817,8 +1819,8 @@ pend_send:
              *
              * \E[2~ or \E[2;1~ -> KEY_IC
              * \E[1;2A -> KEY_M_SHIFT | KEY_UP
-             * \E[13;6u -> KEY_M_CTRL | KEY_M_SHIFT | KEY_ENTER
-             * \E[111;5u -> KEY_M_CTRL | 'o'
+             * \E[13;6u -> KEY_M_CTRL | KEY_M_SHIFT | '\n'
+             * \E[111;5u\E[57421;5:2u -> XCTRL(KEY_M_CTRL | 'o'), KEY_M_CTRL | KEY_PPAGE
              * \E[44:63;132u -> KEY_M_ALT | '?' (on Czech keyboard, with Num Lock on)
              */
 
@@ -1827,7 +1829,8 @@ pend_send:
                 || (final_byte >= 'A' && final_byte <= 'F') || (final_byte == 'H')
                 || (final_byte >= 'P' && final_byte <= 'S'))
             {
-                // Private mode is used for reporting protocol presence and mode. We don't need it
+                // Private mode is used for reporting protocol presence and mode from terminal
+                // (CSI ? flags u). Currently we don't need this info so we don't process it
                 if (csi.private_mode != 0)
                     continue;
 
@@ -1837,11 +1840,11 @@ pend_send:
                 else
                     modifiers = 0;
 
-                // Zero parameters are allowed. In that case, assume default 1 as the default
+                // Zero parameters are allowed. In that case, assume 1 as the default
                 if (csi.param_count == 0)
                     csi.params[0][0] = 1;
 
-                // Check for non-alphabet keys using a predefined table
+                // Check for non-literal keys using a predefined table
                 for (int j = 0; kitty_key_defines[j].code != 0; j++)
                 {
                     if (kitty_key_defines[j].kitty_code == csi.params[0][0]
@@ -1855,6 +1858,12 @@ pend_send:
                         goto done;
                     }
                 }
+
+                // All possible keys (except for a few backward compatibility exceptions) are
+                // defined in the Unicode Basic Multilingual Plane Private Use Area. Discard
+                // unknown ones
+                if (csi.params[0][0] >= 0xE000 && csi.params[0][0] <= 0xF8FF)
+                    return -1;
 
                 // Translate shifted chars so command line input works
                 if (csi.params[0][1])
