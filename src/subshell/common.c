@@ -227,6 +227,10 @@ static struct termios shell_mode;
 /* are delivered to the shell pty */
 static struct termios raw_mode;
 
+/* If the subshell is not yet initialized then we might be sending our initialization code.
+ * During this initialization don't flush the tty line and don't send the interrupt character. */
+static gboolean subshell_initialized = FALSE;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -573,7 +577,7 @@ synchronize (void)
         pselect (0, NULL, NULL, NULL, NULL, &old_mask);
     }
 
-    if (subshell_state != ACTIVE)
+    if (subshell_state != ACTIVE && subshell_initialized)
     {
         // Discard all remaining data from stdin to the subshell
         tcflush (subshell_pty_slave, TCIFLUSH);
@@ -1020,7 +1024,7 @@ feed_subshell (int how, gboolean fail_on_error)
                         if (subshell_ready && !read_command_line_buffer (FALSE))
                         {
                             // If we got here, some unforeseen error must have occurred.
-                            if (mc_global.shell->type != SHELL_FISH)
+                            if (subshell_initialized && mc_global.shell->type != SHELL_FISH)
                             {
                                 write_all (mc_global.tty.subshell_pty, "\003", 1);
                                 subshell_state = RUNNING_COMMAND;
@@ -1536,7 +1540,7 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean force, gboolean update_prom
 
     /* If we are using a shell that doesn't support persistent command buffer, we need to clear
      * the command prompt before we send the cd command. */
-    if (!use_persistent_buffer)
+    if (!use_persistent_buffer && subshell_initialized)
     {
         write_all (mc_global.tty.subshell_pty, "\003", 1);
         subshell_state = RUNNING_COMMAND;
@@ -1805,6 +1809,8 @@ init_subshell (void)
     vfs_subshell_cwd = vfs_path_from_str (subshell_cwd);
     do_subshell_chdir (vfs_subshell_cwd, TRUE, FALSE);
     vfs_path_free (vfs_subshell_cwd, TRUE);
+
+    subshell_initialized = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1863,7 +1869,7 @@ invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
         {
             /* We don't need to call feed_subshell here if we are using fish, because of a
              * quirk in the behavior of that particular shell. */
-            if (mc_global.shell->type != SHELL_FISH)
+            if (subshell_initialized && mc_global.shell->type != SHELL_FISH)
             {
                 write_all (mc_global.tty.subshell_pty, "\003", 1);
                 subshell_state = RUNNING_COMMAND;
