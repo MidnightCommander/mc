@@ -1,18 +1,24 @@
 skindir = $(pkgdatadir)/skins
 
 SKINS = \
+	catppuccin256.ini \
+	catppuccin-latte256.ini \
 	dark.ini \
 	darkfar.ini \
 	default.ini \
 	double-lines.ini \
+	everforest256.ini \
 	featured-plus.ini \
 	featured.ini \
 	gotar.ini \
 	gray-green-purple256.ini \
 	gray-orange-blue256.ini \
+	gruvbox256.ini \
 	julia256.ini \
 	julia256root.ini \
+	kanagawa256.ini \
 	mashdark256.ini \
+	matte-black256.ini \
 	mc46.ini \
 	modarcon16-defbg.ini \
 	modarcon16-defbg-thin.ini \
@@ -31,11 +37,16 @@ SKINS = \
 	modarin256root-thin.ini \
 	modarin256root.ini \
 	nicedark.ini \
+	nord256.ini \
+	osaka-jade256.ini \
+	ristretto256.ini \
+	rose-pine256.ini \
 	sand256.ini \
 	seasons-autumn16M.ini \
 	seasons-spring16M.ini \
 	seasons-summer16M.ini \
 	seasons-winter16M.ini \
+	tokyo-night256.ini \
 	xoria256-thin.ini \
 	xoria256.ini \
 	xoria256root-thin.ini \
