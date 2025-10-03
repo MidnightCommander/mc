@@ -618,7 +618,7 @@ read_command_line_buffer (gboolean test_mode)
     FD_ZERO (&read_set);
     FD_SET (command_buffer_pipe[READ], &read_set);
 
-    const int maxfdp = command_buffer_pipe[READ];
+    const int maxfdp = MAX (command_buffer_pipe[READ], mc_global.tty.subshell_pty);
 
     /* First, flush the command buffer pipe. This pipe shouldn't be written
      * to under normal circumstances, but if it somehow does get written
@@ -647,11 +647,15 @@ read_command_line_buffer (gboolean test_mode)
                sizeof (ESC_STR SHELL_BUFFER_KEYBINDING) - 1);
 
     subshell_prompt_timer.tv_sec = 1;
-    FD_ZERO (&read_set);
-    FD_SET (command_buffer_pipe[READ], &read_set);
 
-    while ((rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer)) != 1)
+    while (TRUE)
     {
+        FD_ZERO (&read_set);
+        FD_SET (command_buffer_pipe[READ], &read_set);
+        FD_SET (mc_global.tty.subshell_pty, &read_set);
+
+        rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer);
+
         if (rc == -1)
         {
             if (errno == EINTR)
@@ -662,6 +666,23 @@ read_command_line_buffer (gboolean test_mode)
 
         if (rc == 0)
             return FALSE;
+
+        /* Keep reading the pty to avoid possible deadlock with the shell. This can happen if
+         * the shell drains the tty line, i.e. waits for mc to read everything, as zsh does.
+         *
+         * When testing the persistent command buffer feature, throw away that data just like
+         * we throw away during the entire subshell initialization.
+         *
+         * When using the feature (bringing back the panels with Ctrl-O), forward that data to
+         * the host terminal, just in case the user quickly beforehand made an edit to the
+         * command line which has to be reflected on the screen.
+         *
+         * See #4625, in particular #issuecomment-3425779646. */
+        if (FD_ISSET (mc_global.tty.subshell_pty, &read_set))
+            flush_subshell (0, test_mode ? QUIETLY : VISIBLY);
+
+        if (FD_ISSET (command_buffer_pipe[READ], &read_set))
+            break;
     }
 
     bytes =
@@ -680,11 +701,15 @@ read_command_line_buffer (gboolean test_mode)
 
     subshell_prompt_timer.tv_sec = 1;
     subshell_prompt_timer.tv_usec = 0;
-    FD_ZERO (&read_set);
-    FD_SET (command_buffer_pipe[READ], &read_set);
 
-    while ((rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer)) != 1)
+    while (TRUE)
     {
+        FD_ZERO (&read_set);
+        FD_SET (command_buffer_pipe[READ], &read_set);
+        FD_SET (mc_global.tty.subshell_pty, &read_set);
+
+        rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer);
+
         if (rc == -1)
         {
             if (errno == EINTR)
@@ -695,6 +720,14 @@ read_command_line_buffer (gboolean test_mode)
 
         if (rc == 0)
             return FALSE;
+
+        /* Keep reading the pty to avoid possible deadlock with the shell.
+         * Throw away the data in testing mode, see above. */
+        if (FD_ISSET (mc_global.tty.subshell_pty, &read_set))
+            flush_subshell (0, test_mode ? QUIETLY : VISIBLY);
+
+        if (FD_ISSET (command_buffer_pipe[READ], &read_set))
+            break;
     }
 
     bytes =
