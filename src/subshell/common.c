@@ -620,7 +620,7 @@ read_command_line_buffer (gboolean test_mode)
     FD_ZERO (&read_set);
     FD_SET (command_buffer_pipe[READ], &read_set);
 
-    const int maxfdp = command_buffer_pipe[READ];
+    const int maxfdp = MAX (command_buffer_pipe[READ], mc_global.tty.subshell_pty);
 
     /* First, flush the command buffer pipe. This pipe shouldn't be written
      * to under normal circumstances, but if it somehow does get written
@@ -650,11 +650,13 @@ read_command_line_buffer (gboolean test_mode)
 
     // Read the response
     subshell_prompt_timer.tv_sec = 1;
-    FD_ZERO (&read_set);
-    FD_SET (command_buffer_pipe[READ], &read_set);
 
     while (TRUE)
     {
+        FD_ZERO (&read_set);
+        FD_SET (command_buffer_pipe[READ], &read_set);
+        FD_SET (mc_global.tty.subshell_pty, &read_set);
+
         rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer);
 
         if (rc == -1)
@@ -668,24 +670,42 @@ read_command_line_buffer (gboolean test_mode)
         if (rc == 0)
             return FALSE;
 
-        bytes = read (command_buffer_pipe[READ], subshell_response_buffer + response_char_length,
-                      sizeof (subshell_response_buffer) - response_char_length);
-        if (bytes <= 0
-            || (size_t) bytes == sizeof (subshell_response_buffer) - response_char_length)
-            return FALSE;
+        /* Keep reading the pty to avoid possible deadlock with the shell. This can happen if
+         * the shell drains the tty line, i.e. waits for mc to read everything, as zsh does.
+         *
+         * When testing the persistent command buffer feature, throw away that data just like
+         * we throw away during the entire subshell initialization.
+         *
+         * When using the feature (bringing back the panels with Ctrl-O), forward that data to
+         * the host terminal, just in case the user quickly beforehand made an edit to the
+         * command line which has to be reflected on the screen.
+         *
+         * See #4625, in particular #issuecomment-3425779646. */
+        if (FD_ISSET (mc_global.tty.subshell_pty, &read_set))
+            flush_subshell (0, test_mode ? QUIETLY : VISIBLY);
 
-        // Did we receive the terminating '\0'? There shouldn't be an embedded '\0', but just in
-        // case there is, stop at the first one.
-        const int latest_chunk_data_length =
-            strnlen (subshell_response_buffer + response_char_length, bytes);
-        if (latest_chunk_data_length < bytes)
+        if (FD_ISSET (command_buffer_pipe[READ], &read_set))
         {
-            // Terminating '\0' found, we're done reading
-            response_char_length += latest_chunk_data_length;
-            break;
+            bytes =
+                read (command_buffer_pipe[READ], subshell_response_buffer + response_char_length,
+                      sizeof (subshell_response_buffer) - response_char_length);
+            if (bytes <= 0
+                || (size_t) bytes == sizeof (subshell_response_buffer) - response_char_length)
+                return FALSE;
+
+            // Did we receive the terminating '\0'? There shouldn't be an embedded '\0', but just in
+            // case there is, stop at the first one.
+            const int latest_chunk_data_length =
+                strnlen (subshell_response_buffer + response_char_length, bytes);
+            if (latest_chunk_data_length < bytes)
+            {
+                // Terminating '\0' found, we're done reading
+                response_char_length += latest_chunk_data_length;
+                break;
+            }
+            // No terminating '\0' yet, keep reading
+            response_char_length += bytes;
         }
-        // No terminating '\0' yet, keep reading
-        response_char_length += bytes;
     }
 
     // fish sends a '\n' before the terminating '\0', strip it
