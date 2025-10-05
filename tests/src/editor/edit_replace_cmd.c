@@ -250,7 +250,7 @@ setup (void)
     cp_source = "ASCII";
     cp_display = "ASCII";
 
-    do_set_codepage (0);
+    set_codepage (0);
 
     edit_options.filesize_threshold = (char *) "64M";
 

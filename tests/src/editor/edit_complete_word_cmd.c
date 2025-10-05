@@ -165,7 +165,7 @@ my_setup (void)
 
     edit_options.filesize_threshold = (char *) "64M";
 
-    do_set_codepage (0);
+    set_codepage (0);
 
     rect_init (&r, 0, 0, 24, 80);
     arg.file_vpath = vfs_path_from_str ("edit_complete_word_cmd_test_data.txt");
