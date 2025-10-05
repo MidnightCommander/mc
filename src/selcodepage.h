@@ -25,7 +25,7 @@
 /*** declarations of public functions ************************************************************/
 
 int select_charset (int center_y, int center_x, int current_charset);
-gboolean do_set_codepage (int);
+gboolean set_codepage (int);
 gboolean select_codepage (GIConv *converter, gboolean *utf8);
 
 /*** inline functions ****************************************************************************/

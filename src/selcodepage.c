@@ -103,7 +103,7 @@ select_charset (const int center_y, const int center_x, const int current_charse
 
 /** Set codepage */
 gboolean
-do_set_codepage (const int codepage)
+set_codepage (const int codepage)
 {
     char *errmsg;
     gboolean ret;
@@ -145,7 +145,7 @@ select_codepage (GIConv *converter, gboolean *utf8)
 
     default_source_codepage = r;
 
-    return do_set_codepage (r) && codepage_change_conv (converter, utf8);
+    return set_codepage (r) && codepage_change_conv (converter, utf8);
 }
 
 /* --------------------------------------------------------------------------------------------- */

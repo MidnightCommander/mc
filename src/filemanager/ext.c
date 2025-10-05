@@ -56,7 +56,7 @@
 
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"
-#include "src/selcodepage.h"  // do_set_codepage
+#include "src/selcodepage.h"  // set_codepage
 #include "src/util.h"         // file_error_message()
 
 #include "filemanager.h"  // current_panel
@@ -688,7 +688,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
             if (cp_id == -1)
                 cp_id = default_source_codepage;
 
-            do_set_codepage (cp_id);
+            set_codepage (cp_id);
         }
 
         got_data = get_file_type_local (localfile_vpath, content_string, sizeof (content_string));
