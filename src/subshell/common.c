@@ -263,6 +263,31 @@ write_all (int fd, const void *buf, size_t count)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ *  Read in nonblocking mode.
+ *
+ *  On a tty master, waiting for data using a select() and then reading it with a blocking read()
+ *  can cause a lockup. That's because between these two steps the slave side can do a tcflush(),
+ *  revoking the data it sent earlier.
+ *
+ *  Reminder for the caller: if no data is available, but data might arrive later, this returns -1
+ *  and errno is set to EAGAIN or EWOULDBLOCK (these two may or may not have the same value).
+ *  Return value 0 means end of stream.
+ */
+
+static ssize_t
+read_nonblock (int fd, void *buf, size_t count)
+{
+    const int old_flags = fcntl (fd, F_GETFL);
+
+    fcntl (fd, F_SETFL, old_flags | O_NONBLOCK);
+    const ssize_t ret = read (fd, buf, count);
+    fcntl (fd, F_SETFL, old_flags);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  *  Prepare child process to running the shell and run it.
  *
  *  Modifies the global variables (in the child process only):
@@ -896,11 +921,17 @@ feed_subshell (int how, gboolean fail_on_error)
         // for (i=0; i<5; ++i)  * FIXME -- experimental
         {
             const ssize_t bytes =
-                read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
+                read_nonblock (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
-            // The subshell has died
-            if (bytes == -1 && errno == EIO && !subshell_alive)
-                return FALSE;
+            if (bytes == -1)
+            {
+                if (errno == EAGAIN || errno == EWOULDBLOCK)
+                    continue;
+
+                if (errno == EIO && !subshell_alive)
+                    // The subshell has died
+                    return FALSE;
+            }
 
             if (bytes <= 0)
             {
@@ -1896,10 +1927,11 @@ flush_subshell (int max_wait_length, int how)
         timeleft.tv_sec = 0;
         timeleft.tv_usec = 0;
 
-        const ssize_t bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
+        const ssize_t bytes =
+            read_nonblock (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
         // FIXME: what about bytes <= 0?
-        if (how == VISIBLY)
+        if (bytes > 0 && how == VISIBLY)
             write_all (STDOUT_FILENO, pty_buffer, (size_t) bytes);
     }
 
@@ -1941,10 +1973,13 @@ read_subshell_prompt (void)
             exit (EXIT_FAILURE);
         }
 
-        bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
+        bytes = read_nonblock (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
-        parse_subshell_prompt_string (pty_buffer, bytes);
-        got_new_prompt = TRUE;
+        if (bytes > 0)
+        {
+            parse_subshell_prompt_string (pty_buffer, bytes);
+            got_new_prompt = TRUE;
+        }
     }
 
     if (got_new_prompt)
