@@ -1170,6 +1170,10 @@ pty_open_slave (const char *pty_name)
  * substrings contain line breaks and indentation for better understanding of the
  * shell code. It is vital that each one-liner ends with a line feed character ("\n" ).
  *
+ * Also note that some shells support not remembering commands beginning with a space in their
+ * history (HISTCONTROL=ignorespace or equivalent). Let's have leading spaces consistently
+ * throughout the data we feed, even for shells that don't support it, it cannot hurt.
+ *
  * @return initialized pre-command string
  */
 static gchar *
@@ -1183,21 +1187,21 @@ init_subshell_precmd (void)
      * The following example is a little less fancy (home directory not replaced)
      * and shows the basic workings of our prompt for easier understanding:
      *
-     * "precmd() { "
-     *     "echo \"$USER@$(hostname -s):$PWD\"; "
-     *     "pwd>&%d; "
-     *     "kill -STOP $$; "
-     * "}; "
-     * "PRECMD=precmd; "
-     * "PS1='$($PRECMD)$ '\n",
+     * " precmd() {"
+     *     " echo \"$USER@$(hostname -s):$PWD\";"
+     *     " pwd >&%d;"
+     *     " kill -STOP $$;"
+     * " };"
+     * " PRECMD=precmd;"
+     * " PS1='$($PRECMD)$ '\n",
      *
      * Explanations:
      *
      * A: This leads to a stopped subshell (=frozen mc) if user calls "ash" command
-     *    "PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
+     *    "PS1='$(pwd >&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
      *
      * B: This leads to "sh: precmd: not found" in sub-subshell if user calls "ash" command
-     *    "precmd() { pwd>&%d; kill -STOP $$; }; "
+     *    "precmd() { pwd >&%d; kill -STOP $$; }; "
      *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
      *
      * C: This works if user calls "ash" command because in sub-subshell
@@ -1206,23 +1210,21 @@ init_subshell_precmd (void)
      *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
      *    especially on embedded systems where people try to save space, so let's use
      *    the fallback version.
-     *
      */
     static const char *precmd_fallback =
-        " "  // Useful if the shell supports HISTCONTROL=ignorespace like functionality
-        "MC_PS1_SAVED=\"$PS1\"; "  // Save custom PS1
-        "precmd() { "
-        "  if [ ! \"${PWD##$HOME}\" ]; then "
-        "    MC_PWD=\"~\"; "
-        "  else "
-        "    [ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
-        "  fi; "
-        "  echo \"${MC_PS1_SAVED:-$USER@$(hostname -s):$MC_PWD\\$ }\"; "
-        "  pwd>&%d; "
-        "  kill -STOP $$; "
-        "}; "
-        "PRECMD=precmd; "
-        "PS1='$($PRECMD)'\n";
+        " MC_PS1_SAVED=\"$PS1\";"  // Save custom PS1
+        " precmd() {"
+        "   if [ ! \"${PWD##$HOME}\" ]; then"
+        "     MC_PWD=\"~\";"
+        "   else"
+        "     [ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\";"
+        "   fi;"
+        "   echo \"${MC_PS1_SAVED:-$USER@$(hostname -s):$MC_PWD\\$ }\";"
+        "   pwd >&%d;"
+        "   kill -STOP $$;"
+        " };"
+        " PRECMD=precmd;"
+        " PS1='$($PRECMD)'\n";
 
     switch (mc_global.shell->type)
     {
@@ -1233,11 +1235,11 @@ init_subshell_precmd (void)
             " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
             " if test $BASH_VERSINFO -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> "
             "/dev/null; then\n"
-            "   PROMPT_COMMAND+=( 'pwd>&%d;kill -STOP $$' )\n"
+            "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' )\n"
             " else\n"
-            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
+            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'\n"
             " fi\n"
-            "PS1='\\u@\\h:\\w\\$ '\n",
+            " PS1='\\u@\\h:\\w\\$ '\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_ASH_BUSYBOX:
@@ -1256,8 +1258,7 @@ init_subshell_precmd (void)
 
     case SHELL_KSH:
         // pdksh based variants support \x placeholders but not any "precmd" functionality
-        return g_strdup_printf (" PS1='$(pwd>&%d; kill -STOP $$)'"
-                                "\"${PS1:-\\u@\\h:\\w\\$ }\"\n",
+        return g_strdup_printf (" PS1='$(pwd >&%d; kill -STOP $$)'\"${PS1:-\\u@\\h:\\w\\$ }\"\n",
                                 subshell_pipe[WRITE]);
 
     case SHELL_ZSH:
@@ -1266,25 +1267,28 @@ init_subshell_precmd (void)
             ">&%d; }\n"
             " zle -N mc_print_command_buffer\n"
             " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
-            " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
-            "PS1='%%n@%%m:%%~%%# '\n",
+            " _mc_precmd() { pwd>&%d; kill -STOP $$; }\n"
+            " precmd_functions+=(_mc_precmd)\n"
+            " PS1='%%n@%%m:%%~%%# '\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_TCSH:
         // "echo -n" is a workaround against a suspected tcsh bug, see ticket #4120
-        return g_strdup_printf ("set echo_style=both; "
-                                "set prompt='%%n@%%m:%%~%%# '; "
-                                "alias precmd 'echo -n;echo $cwd:q >%s; kill -STOP $$'\n",
+        return g_strdup_printf (" set echo_style=both;"
+                                " set prompt='%%n@%%m:%%~%%# ';"
+                                " alias precmd 'echo -n; echo $cwd:q >%s; kill -STOP $$'\n",
                                 tcsh_fifo);
 
     case SHELL_FISH:
         return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING
                                 " \"begin; commandline -C; commandline; printf '\\000'; end >&%d\";"
-                                "if not functions -q fish_prompt_mc;"
-                                "functions -e fish_right_prompt;"
-                                "functions -c fish_prompt fish_prompt_mc; end;"
-                                "function fish_prompt;"
-                                "echo \"$PWD\">&%d; kill -STOP $fish_pid; fish_prompt_mc; end\n",
+                                " if not functions -q fish_prompt_mc;"
+                                " functions -e fish_right_prompt;"
+                                " functions -c fish_prompt fish_prompt_mc;"
+                                " end;"
+                                " function fish_prompt;"
+                                " echo \"$PWD\" >&%d; kill -STOP $fish_pid; fish_prompt_mc;"
+                                " end\n",
                                 command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
     default:
         fprintf (stderr, "subshell: unknown shell type (%u), aborting!\r\n", mc_global.shell->type);
