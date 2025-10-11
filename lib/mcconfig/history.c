@@ -186,6 +186,10 @@ mc_config_history_load (mc_config_t *cfg, const char *name)
 
 /**
  * Save history to the mc_config, but don't save config to file
+ *
+ * @param cfg mc_config_t object where history is stored in
+ * @param name history name
+ * @param h history. If NULL, then the @name group will be removed from @cfg
  */
 void
 mc_config_history_save (mc_config_t *cfg, const char *name, GList *h)
@@ -194,7 +198,12 @@ mc_config_history_save (mc_config_t *cfg, const char *name, GList *h)
     GString *buffer;
     int i;
 
-    if (name == NULL || *name == '\0' || h == NULL)
+    if (name == NULL || *name == '\0')
+        return;
+
+    mc_config_del_group (cfg, name);
+
+    if (h == NULL)
         return;
 
     // go to end of list
@@ -203,8 +212,6 @@ mc_config_history_save (mc_config_t *cfg, const char *name, GList *h)
     // go back 60 places
     for (i = 0; (i < num_history_items_recorded - 1) && (h->prev != NULL); i++)
         h = g_list_previous (h);
-
-    mc_config_del_group (cfg, name);
 
     /* create charset conversion handler to convert strings
        from system codepage to UTF-8 */
