@@ -591,62 +591,26 @@ synchronize (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* Get the contents of the current subshell command line buffer, and */
-/* transfer the contents to the panel command prompt. */
+/**
+ * Read data from command pipe with timeout, avoiding possible deadlock with the shell
+ *
+ * @param buffer       buffer to read data into
+ * @param how          whether to forward data from the inner pty to the outer one or discard it
+ * @param buffer_size  size of the buffer
+ * @param bytes_read   pointer to store number of bytes read
+ * @return TRUE if data was successfully read, FALSE otherwise
+ */
 
 static gboolean
-read_command_line_buffer (gboolean test_mode)
+read_command_buffer_with_timeout (const int nfds, int how, void *buffer, const size_t buffer_size,
+                                  ssize_t *bytes_read)
 {
-    char subshell_command_buffer[BUF_LARGE];
-    char subshell_cursor_buffer[BUF_SMALL];
-
     fd_set read_set;
-    ssize_t bytes;
+
     struct timeval subshell_prompt_timer = {
-        .tv_sec = 0,
+        .tv_sec = 1,
         .tv_usec = 0,
     };
-    int command_buffer_length;
-    size_t command_buffer_char_length;
-    int bash_version;
-    int cursor_position;
-    int rc;
-
-    if (!use_persistent_buffer)
-        return TRUE;
-
-    FD_ZERO (&read_set);
-    FD_SET (command_buffer_pipe[READ], &read_set);
-
-    const int maxfdp = MAX (command_buffer_pipe[READ], mc_global.tty.subshell_pty);
-
-    /* First, flush the command buffer pipe. This pipe shouldn't be written
-     * to under normal circumstances, but if it somehow does get written
-     * to, we need to make sure to discard whatever data is there before
-     * we try to use it. */
-    while ((rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer)) != 0)
-    {
-        if (rc == -1)
-        {
-            if (errno == EINTR)
-                continue;
-
-            return FALSE;
-        }
-
-        if (rc == 1)
-        {
-            bytes = read (command_buffer_pipe[READ], subshell_command_buffer,
-                          sizeof (subshell_command_buffer));
-            (void) bytes;
-        }
-    }
-
-    // get contents of command line buffer
-    write_all (mc_global.tty.subshell_pty, ESC_STR SHELL_BUFFER_KEYBINDING,
-               sizeof (ESC_STR SHELL_BUFFER_KEYBINDING) - 1);
-
-    subshell_prompt_timer.tv_sec = 1;
 
     while (TRUE)
     {
@@ -654,7 +618,7 @@ read_command_line_buffer (gboolean test_mode)
         FD_SET (command_buffer_pipe[READ], &read_set);
         FD_SET (mc_global.tty.subshell_pty, &read_set);
 
-        rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer);
+        const int rc = select (nfds, &read_set, NULL, NULL, &subshell_prompt_timer);
 
         if (rc == -1)
         {
@@ -679,37 +643,55 @@ read_command_line_buffer (gboolean test_mode)
          *
          * See #4625, in particular #issuecomment-3425779646. */
         if (FD_ISSET (mc_global.tty.subshell_pty, &read_set))
-            flush_subshell (0, test_mode ? QUIETLY : VISIBLY);
+            flush_subshell (0, how);
 
         if (FD_ISSET (command_buffer_pipe[READ], &read_set))
             break;
     }
 
-    bytes =
-        read (command_buffer_pipe[READ], subshell_command_buffer, sizeof (subshell_command_buffer));
+    *bytes_read = read (command_buffer_pipe[READ], buffer, buffer_size);
+
     // FIXME: what about bytes < 0?
-    if (bytes == 0 || (size_t) bytes == sizeof (subshell_command_buffer))
+    if (*bytes_read == 0 || (size_t) *bytes_read == buffer_size)
         return FALSE;
 
-    command_buffer_char_length = (size_t) bytes - 1;
-    subshell_command_buffer[command_buffer_char_length] = '\0';
-    command_buffer_length = str_length (subshell_command_buffer);
+    return TRUE;
+}
 
-    // get cursor position
-    write_all (mc_global.tty.subshell_pty, ESC_STR SHELL_CURSOR_KEYBINDING,
-               sizeof (ESC_STR SHELL_CURSOR_KEYBINDING) - 1);
+/* --------------------------------------------------------------------------------------------- */
+/* Get the contents of the current subshell command line buffer, and */
+/* transfer the contents to the panel command prompt. */
 
-    subshell_prompt_timer.tv_sec = 1;
-    subshell_prompt_timer.tv_usec = 0;
+static gboolean
+read_command_line_buffer (gboolean test_mode)
+{
+    char subshell_command_buffer[BUF_LARGE];
+    char subshell_cursor_buffer[BUF_SMALL];
 
-    while (TRUE)
+    fd_set read_set;
+    ssize_t bytes;
+    struct timeval subshell_prompt_timer = {
+        .tv_sec = 0,
+        .tv_usec = 0,
+    };
+    int bash_version;
+    int cursor_position;
+    int rc;
+
+    if (!use_persistent_buffer)
+        return TRUE;
+
+    FD_ZERO (&read_set);
+    FD_SET (command_buffer_pipe[READ], &read_set);
+
+    const int nfds = MAX (command_buffer_pipe[READ], mc_global.tty.subshell_pty) + 1;
+
+    /* First, flush the command buffer pipe. This pipe shouldn't be written
+     * to under normal circumstances, but if it somehow does get written
+     * to, we need to make sure to discard whatever data is there before
+     * we try to use it. */
+    while ((rc = select (nfds, &read_set, NULL, NULL, &subshell_prompt_timer)) != 0)
     {
-        FD_ZERO (&read_set);
-        FD_SET (command_buffer_pipe[READ], &read_set);
-        FD_SET (mc_global.tty.subshell_pty, &read_set);
-
-        rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer);
-
         if (rc == -1)
         {
             if (errno == EINTR)
@@ -718,22 +700,34 @@ read_command_line_buffer (gboolean test_mode)
             return FALSE;
         }
 
-        if (rc == 0)
-            return FALSE;
-
-        /* Keep reading the pty to avoid possible deadlock with the shell.
-         * Throw away the data in testing mode, see above. */
-        if (FD_ISSET (mc_global.tty.subshell_pty, &read_set))
-            flush_subshell (0, test_mode ? QUIETLY : VISIBLY);
-
-        if (FD_ISSET (command_buffer_pipe[READ], &read_set))
-            break;
+        if (rc == 1)
+        {
+            bytes = read (command_buffer_pipe[READ], subshell_command_buffer,
+                          sizeof (subshell_command_buffer));
+            (void) bytes;
+        }
     }
 
-    bytes =
-        read (command_buffer_pipe[READ], subshell_cursor_buffer, sizeof (subshell_cursor_buffer));
-    // FIXME: what about bytes < 0?
-    if (bytes == 0)
+    // get contents of command line buffer
+    write_all (mc_global.tty.subshell_pty, ESC_STR SHELL_BUFFER_KEYBINDING,
+               sizeof (ESC_STR SHELL_BUFFER_KEYBINDING) - 1);
+
+    if (!read_command_buffer_with_timeout (nfds, test_mode ? QUIETLY : VISIBLY,
+                                           subshell_command_buffer,
+                                           sizeof (subshell_command_buffer), &bytes))
+        return FALSE;
+
+    const size_t command_buffer_char_length = (size_t) bytes - 1;
+    subshell_command_buffer[command_buffer_char_length] = '\0';
+    const int command_buffer_length = str_length (subshell_command_buffer);
+
+    // get cursor position
+    write_all (mc_global.tty.subshell_pty, ESC_STR SHELL_CURSOR_KEYBINDING,
+               sizeof (ESC_STR SHELL_CURSOR_KEYBINDING) - 1);
+
+    if (!read_command_buffer_with_timeout (nfds, test_mode ? QUIETLY : VISIBLY,
+                                           subshell_cursor_buffer, sizeof (subshell_cursor_buffer),
+                                           &bytes))
         return FALSE;
 
     subshell_cursor_buffer[(size_t) bytes - 1] = '\0';
