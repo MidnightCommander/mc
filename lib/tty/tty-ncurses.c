@@ -44,7 +44,7 @@
 #include "lib/strutil.h"  // str_term_form
 #include "lib/util.h"
 
-#include "tty-internal.h"  // mc_tty_normalize_from_utf8()
+#include "tty-internal.h"
 #include "tty.h"
 #include "color.h"  // tty_setcolor
 #include "color-internal.h"
