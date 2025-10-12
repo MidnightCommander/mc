@@ -69,7 +69,7 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef gboolean (*cmp_func_t) (const coord_cache_entry_t *a, const coord_cache_entry_t *b);
+typedef gboolean (*cmp_fn) (const coord_cache_entry_t *a, const coord_cache_entry_t *b);
 
 /*** forward declarations (file scope functions) *************************************************/
 
@@ -131,7 +131,7 @@ mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t *a, const coord_c
  * smaller than ''coord'', according to the criterion ''sort_by''. */
 
 static inline size_t
-mcview_ccache_find (WView *view, const coord_cache_entry_t *coord, cmp_func_t cmp_func)
+mcview_ccache_find (WView *view, const coord_cache_entry_t *coord, cmp_fn cmp_func)
 {
     size_t base = 0;
     size_t limit = view->coord_cache->len;
@@ -244,7 +244,7 @@ mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type 
     coord_cache_entry_t current, next, entry;
     enum ccache_type sorter;
     off_t limit;
-    cmp_func_t cmp_func;
+    cmp_fn cmp_func;
 
     enum
     {

@@ -93,7 +93,7 @@ static char buffer[BUF_1K];
 
 static char *pbuffer = NULL;
 static time_t localmtime = 0;
-static quote_func_t quote_func = name_quote;
+static quote_fn quote_func = name_quote;
 static gboolean run_view = FALSE;
 static gboolean is_cd = FALSE;
 static gboolean written_nonspace = FALSE;

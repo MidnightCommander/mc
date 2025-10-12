@@ -13,8 +13,8 @@ struct history_descriptor_t;
 struct WLEntry;
 struct WListbox;
 
-typedef void (*history_create_item_func) (struct history_descriptor_t *hd, void *data);
-typedef void *(*history_release_item_func) (struct history_descriptor_t *hd, struct WLEntry *le);
+typedef void (*history_create_item_fn) (struct history_descriptor_t *hd, void *data);
+typedef void *(*history_release_item_fn) (struct history_descriptor_t *hd, struct WLEntry *le);
 
 /*** enums ***************************************************************************************/
 
@@ -32,9 +32,9 @@ typedef struct history_descriptor_t
     size_t max_width;          // maximum width of string in history
     struct WListbox *listbox;  // listbox widget to draw history
 
-    history_create_item_func create;    // function to create item of @list
-    history_release_item_func release;  // function to release item of @list
-    GDestroyNotify free;                // function to destroy element of @list
+    history_create_item_fn create;    // function to create item of @list
+    history_release_item_fn release;  // function to release item of @list
+    GDestroyNotify free;              // function to destroy element of @list
 } history_descriptor_t;
 
 /*** global variables defined in .c file *********************************************************/
