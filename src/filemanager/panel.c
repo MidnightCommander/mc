@@ -1377,16 +1377,12 @@ panel_save_history (const gchar *event_group_name, const gchar *event_name, gpoi
                     gpointer data)
 {
     WPanel *p = PANEL (init_data);
+    ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
     (void) event_group_name;
     (void) event_name;
 
-    if (p->dir_history.list != NULL)
-    {
-        ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
-
-        mc_config_history_save (ev->cfg, p->dir_history.name, p->dir_history.list);
-    }
+    mc_config_history_save (ev->cfg, p->dir_history.name, p->dir_history.list);
 
     return TRUE;
 }
