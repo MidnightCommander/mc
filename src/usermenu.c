@@ -795,7 +795,7 @@ GString *
 expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
-    quote_func_t quote_func = do_quote ? name_quote : fake_name_quote;
+    quote_fn quote_func = do_quote ? name_quote : fake_name_quote;
     const char *fname = NULL;
     GString *result;
     char c_lc;

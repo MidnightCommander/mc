@@ -22,7 +22,7 @@ typedef void (*sighandler_t) (int);
 #endif
 
 // type for name_quote() and fake_name_quote()
-typedef GString *(*quote_func_t) (const char *name, gboolean quote_percent);
+typedef GString *(*quote_fn) (const char *name, gboolean quote_percent);
 
 #ifndef MAXSYMLINKS
 #define MAXSYMLINKS 32
