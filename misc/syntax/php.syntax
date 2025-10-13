@@ -3070,12 +3070,16 @@ context default
     keyword whole and white
     keyword whole or white
 
-# Magic constants
-    keyword whole __FILE__ brightred
+# Magic constants (https://www.php.net/manual/en/language.constants.magic.php)
     keyword whole __LINE__ brightred
+    keyword whole __FILE__ brightred
+    keyword whole __DIR__ brightred
     keyword whole __FUNCTION__ brightred
     keyword whole __CLASS__ brightred
+    keyword whole __TRAIT__ brightred
     keyword whole __METHOD__ brightred
+    keyword whole __PROPERTY__ brightred
+    keyword whole __NAMESPACE__ brightred
 
     keyword whole parent brightmagenta
     keyword whole $this brightmagenta
