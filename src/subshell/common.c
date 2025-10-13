@@ -1238,8 +1238,7 @@ init_subshell_precmd (void)
             "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' )\n"
             " else\n"
             "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'\n"
-            " fi\n"
-            " PS1='\\u@\\h:\\w\\$ '\n",
+            " fi\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_ASH_BUSYBOX:
@@ -1268,14 +1267,12 @@ init_subshell_precmd (void)
             " zle -N mc_print_command_buffer\n"
             " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
             " _mc_precmd() { pwd>&%d; kill -STOP $$; }\n"
-            " precmd_functions+=(_mc_precmd)\n"
-            " PS1='%%n@%%m:%%~%%# '\n",
+            " precmd_functions+=(_mc_precmd)\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_TCSH:
         // "echo -n" is a workaround against a suspected tcsh bug, see ticket #4120
         return g_strdup_printf (" set echo_style=both;"
-                                " set prompt='%%n@%%m:%%~%%# ';"
                                 " alias precmd 'echo -n; echo $cwd:q >%s; kill -STOP $$'\n",
                                 tcsh_fifo);
 
