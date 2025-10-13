@@ -1233,7 +1233,7 @@ init_subshell_precmd (void)
             " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
             " if test ${BASH_VERSION%%%%.*} -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> "
             "/dev/null; then\n"
-            "   eval \"PROMPT_COMMAND+=( 'pwd>&%d;kill -STOP $$' )\"\n"
+            "   PROMPT_COMMAND+=( 'pwd>&%d;kill -STOP $$' )\n"
             " else\n"
             "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
             " fi\n"
