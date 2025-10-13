@@ -3056,11 +3056,76 @@ context default
 # predefined constants
 # core
 
-    keyword whole PHP\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] white
-    keyword whole E\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] white
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/reserved.constants.php | \
+#   grep -Eo "<strong><code><a href=.*>(PHP|ZEND|DEBUG|PEAR|DEFAULT|E)_.*</a></code></strong>" | \
+#   grep -Eo '(PHP_|ZEND_|DEBUG_|PEAR_|DEFAULT_|E_)[_A-Z]*' | \
+#   sort -u | sed 's/\(.*\)/    keyword whole \1 white/g'
+#
+    keyword whole DEBUG_BACKTRACE_IGNORE_ARGS white
+    keyword whole DEBUG_BACKTRACE_PROVIDE_OBJECT white
     keyword whole DEFAULT_INCLUDE_PATH white
-    keyword whole PEAR_INSTALL_DIR white
+    keyword whole E_ALL white
+    keyword whole E_COMPILE_ERROR white
+    keyword whole E_COMPILE_WARNING white
+    keyword whole E_CORE_ERROR white
+    keyword whole E_CORE_WARNING white
+    keyword whole E_DEPRECATED white
+    keyword whole E_ERROR white
+    keyword whole E_NOTICE white
+    keyword whole E_PARSE white
+    keyword whole E_RECOVERABLE_ERROR white
+    keyword whole E_STRICT white
+    keyword whole E_USER_DEPRECATED white
+    keyword whole E_USER_ERROR white
+    keyword whole E_USER_NOTICE white
+    keyword whole E_USER_WARNING white
+    keyword whole E_WARNING white
     keyword whole PEAR_EXTENSION_DIR white
+    keyword whole PEAR_INSTALL_DIR white
+    keyword whole PHP_BINARY white
+    keyword whole PHP_BINDIR white
+    keyword whole PHP_CLI_PROCESS_TITLE white
+    keyword whole PHP_CONFIG_FILE_PATH white
+    keyword whole PHP_CONFIG_FILE_SCAN_DIR white
+    keyword whole PHP_DATADIR white
+    keyword whole PHP_DEBUG white
+    keyword whole PHP_EOL white
+    keyword whole PHP_EXTENSION_DIR white
+    keyword whole PHP_EXTRA_VERSION white
+    keyword whole PHP_FD_SETSIZE white
+    keyword whole PHP_FLOAT_DIG white
+    keyword whole PHP_FLOAT_EPSILON white
+    keyword whole PHP_FLOAT_MAX white
+    keyword whole PHP_FLOAT_MIN white
+    keyword whole PHP_INT_MAX white
+    keyword whole PHP_INT_MIN white
+    keyword whole PHP_INT_SIZE white
+    keyword whole PHP_LIBDIR white
+    keyword whole PHP_LOCALSTATEDIR white
+    keyword whole PHP_MAJOR_VERSION white
+    keyword whole PHP_MANDIR white
+    keyword whole PHP_MAXPATHLEN white
+    keyword whole PHP_MINOR_VERSION white
+    keyword whole PHP_OS white
+    keyword whole PHP_OS_FAMILY white
+    keyword whole PHP_PREFIX white
+    keyword whole PHP_RELEASE_VERSION white
+    keyword whole PHP_SAPI white
+    keyword whole PHP_SBINDIR white
+    keyword whole PHP_SHLIB_SUFFIX white
+    keyword whole PHP_SYSCONFDIR white
+    keyword whole PHP_VERSION white
+    keyword whole PHP_VERSION_ID white
+    keyword whole PHP_WINDOWS_EVENT_CTRL_BREAK white
+    keyword whole PHP_WINDOWS_EVENT_CTRL_C white
+    keyword whole PHP_ZTS white
+    keyword whole ZEND_DEBUG_BUILD white
+    keyword whole ZEND_THREAD_SAFE white
+
+    keyword whole STDIN white
+    keyword whole STDOUT white
+    keyword whole STDERR white
 
 ####################################
 # expressions, operators and other
