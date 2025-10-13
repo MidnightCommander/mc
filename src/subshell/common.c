@@ -1269,8 +1269,7 @@ init_subshell_precmd (void)
             "   eval \"PROMPT_COMMAND+=( 'pwd>&%d;kill -STOP $$' )\"\n"
             " else\n"
             "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
-            " fi\n"
-            "PS1='\\u@\\h:\\w\\$ '\n",
+            " fi\n",
             command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE],
             subshell_pipe[WRITE]);
 
@@ -1302,13 +1301,11 @@ init_subshell_precmd (void)
             " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
             " zle -N mc_print_cursor_position\n"
             " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position\n"
-            " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
-            "PS1='%%n@%%m:%%~%%# '\n",
+            " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n",
             command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_TCSH:
         return g_strdup_printf ("set echo_style=both; "
-                                "set prompt='%%n@%%m:%%~%%# '; "
                                 "alias precmd 'echo -n;echo $cwd:q >>%s; kill -STOP $$'\n",
                                 tcsh_fifo);
 
