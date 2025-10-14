@@ -1872,8 +1872,76 @@ context default
     keyword whole AL_TRUE white
     keyword whole AL_VELOCITY white
 
-# OpenSSL Functions
-    keyword whole openssl\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow
+# OpenSSL Functions (https://www.php.net/manual/en/book.openssl.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/book.openssl.php |\
+#   sed 's/<li>/\n<li>/g' | grep -Eo "<li><a href=\"function\..*>.*</a>" | sort -u |\
+#   sed 's/<li><a href=.*>\(.*\)<\/a>/    keyword whole \1 yellow/g'
+#
+    keyword whole openssl_cipher_iv_length yellow
+    keyword whole openssl_cipher_key_length yellow
+    keyword whole openssl_cms_decrypt yellow
+    keyword whole openssl_cms_encrypt yellow
+    keyword whole openssl_cms_read yellow
+    keyword whole openssl_cms_sign yellow
+    keyword whole openssl_cms_verify yellow
+    keyword whole openssl_csr_export yellow
+    keyword whole openssl_csr_export_to_file yellow
+    keyword whole openssl_csr_get_public_key yellow
+    keyword whole openssl_csr_get_subject yellow
+    keyword whole openssl_csr_new yellow
+    keyword whole openssl_csr_sign yellow
+    keyword whole openssl_decrypt yellow
+    keyword whole openssl_dh_compute_key yellow
+    keyword whole openssl_digest yellow
+    keyword whole openssl_encrypt yellow
+    keyword whole openssl_error_string yellow
+    keyword whole openssl_free_key yellow
+    keyword whole openssl_get_cert_locations yellow
+    keyword whole openssl_get_cipher_methods yellow
+    keyword whole openssl_get_curve_names yellow
+    keyword whole openssl_get_md_methods yellow
+    keyword whole openssl_get_privatekey yellow
+    keyword whole openssl_get_publickey yellow
+    keyword whole openssl_open yellow
+    keyword whole openssl_pbkdf2 yellow
+    keyword whole openssl_pkcs12_export yellow
+    keyword whole openssl_pkcs12_export_to_file yellow
+    keyword whole openssl_pkcs12_read yellow
+    keyword whole openssl_pkcs7_decrypt yellow
+    keyword whole openssl_pkcs7_encrypt yellow
+    keyword whole openssl_pkcs7_read yellow
+    keyword whole openssl_pkcs7_sign yellow
+    keyword whole openssl_pkcs7_verify yellow
+    keyword whole openssl_pkey_derive yellow
+    keyword whole openssl_pkey_export yellow
+    keyword whole openssl_pkey_export_to_file yellow
+    keyword whole openssl_pkey_free yellow
+    keyword whole openssl_pkey_get_details yellow
+    keyword whole openssl_pkey_get_private yellow
+    keyword whole openssl_pkey_get_public yellow
+    keyword whole openssl_pkey_new yellow
+    keyword whole openssl_private_decrypt yellow
+    keyword whole openssl_private_encrypt yellow
+    keyword whole openssl_public_decrypt yellow
+    keyword whole openssl_public_encrypt yellow
+    keyword whole openssl_random_pseudo_bytes yellow
+    keyword whole openssl_seal yellow
+    keyword whole openssl_sign yellow
+    keyword whole openssl_spki_export_challenge yellow
+    keyword whole openssl_spki_export yellow
+    keyword whole openssl_spki_new yellow
+    keyword whole openssl_spki_verify yellow
+    keyword whole openssl_verify yellow
+    keyword whole openssl_x509_check_private_key yellow
+    keyword whole openssl_x509_checkpurpose yellow
+    keyword whole openssl_x509_export yellow
+    keyword whole openssl_x509_export_to_file yellow
+    keyword whole openssl_x509_fingerprint yellow
+    keyword whole openssl_x509_free yellow
+    keyword whole openssl_x509_parse yellow
+    keyword whole openssl_x509_read yellow
+    keyword whole openssl_x509_verify yellow
 
 # Oracle Functions [deprecated]
     keyword whole ora\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow
