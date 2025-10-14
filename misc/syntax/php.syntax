@@ -305,8 +305,46 @@ context default
 # Character Type Functions
     keyword whole ctype\_\[0123456789_abcdefghijklmnopqrstuvwxyz\] yellow
 
-# CURL, Client URL Library Functions
-    keyword whole curl\_\[0123456789_abcdefghijklmnopqrstuvwxyz\] yellow
+# CURL, Client URL Library Functions (https://www.php.net/manual/en/ref.curl.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/ref.curl.php |\
+#   grep -Eo "<ul class=\"chunklist chunklist_reference\">.*</ul>" |\
+#   sed 's/<li>/\n<li>/g' | grep -Eo "<a href=.*>.*</a>" | sort -u |\
+#   sed 's/<a href=.*>\(.*\)<\/a>/    keyword whole \1 yellow/g'
+#
+    keyword whole curl_close yellow
+    keyword whole curl_copy_handle yellow
+    keyword whole curl_errno yellow
+    keyword whole curl_error yellow
+    keyword whole curl_escape yellow
+    keyword whole curl_exec yellow
+    keyword whole curl_getinfo yellow
+    keyword whole curl_init yellow
+    keyword whole curl_multi_add_handle yellow
+    keyword whole curl_multi_close yellow
+    keyword whole curl_multi_errno yellow
+    keyword whole curl_multi_exec yellow
+    keyword whole curl_multi_getcontent yellow
+    keyword whole curl_multi_info_read yellow
+    keyword whole curl_multi_init yellow
+    keyword whole curl_multi_remove_handle yellow
+    keyword whole curl_multi_select yellow
+    keyword whole curl_multi_setopt yellow
+    keyword whole curl_multi_strerror yellow
+    keyword whole curl_pause yellow
+    keyword whole curl_reset yellow
+    keyword whole curl_setopt_array yellow
+    keyword whole curl_setopt yellow
+    keyword whole curl_share_close yellow
+    keyword whole curl_share_errno yellow
+    keyword whole curl_share_init_persistent yellow
+    keyword whole curl_share_init yellow
+    keyword whole curl_share_setopt yellow
+    keyword whole curl_share_strerror yellow
+    keyword whole curl_strerror yellow
+    keyword whole curl_unescape yellow
+    keyword whole curl_upkeep yellow
+    keyword whole curl_version yellow
 
 # CURL, Client URL Library Functions constants
     keyword whole CURL\[0123456789_ABCDEFGHIJKLMNOPQRSTUVWXYZ\] white
