@@ -46,6 +46,10 @@ context default
     keyword whole switch brightmagenta
     keyword whole true brightmagenta
     keyword whole while brightmagenta
+    keyword whole throw brightmagenta
+    keyword whole try brightmagenta
+    keyword whole catch brightmagenta
+    keyword whole finally brightmagenta
 
 
 # .NET Functions
