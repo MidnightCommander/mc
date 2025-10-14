@@ -46,6 +46,10 @@ context default
     keyword whole switch brightmagenta
     keyword whole true brightmagenta
     keyword whole while brightmagenta
+    keyword whole throw brightmagenta
+    keyword whole try brightmagenta
+    keyword whole catch brightmagenta
+    keyword whole finally brightmagenta
 
 
 # .NET Functions
@@ -305,8 +309,46 @@ context default
 # Character Type Functions
     keyword whole ctype\_\[0123456789_abcdefghijklmnopqrstuvwxyz\] yellow
 
-# CURL, Client URL Library Functions
-    keyword whole curl\_\[0123456789_abcdefghijklmnopqrstuvwxyz\] yellow
+# CURL, Client URL Library Functions (https://www.php.net/manual/en/ref.curl.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/ref.curl.php |\
+#   grep -Eo "<ul class=\"chunklist chunklist_reference\">.*</ul>" |\
+#   sed 's/<li>/\n<li>/g' | grep -Eo "<a href=.*>.*</a>" | sort -u |\
+#   sed 's/<a href=.*>\(.*\)<\/a>/    keyword whole \1 yellow/g'
+#
+    keyword whole curl_close yellow
+    keyword whole curl_copy_handle yellow
+    keyword whole curl_errno yellow
+    keyword whole curl_error yellow
+    keyword whole curl_escape yellow
+    keyword whole curl_exec yellow
+    keyword whole curl_getinfo yellow
+    keyword whole curl_init yellow
+    keyword whole curl_multi_add_handle yellow
+    keyword whole curl_multi_close yellow
+    keyword whole curl_multi_errno yellow
+    keyword whole curl_multi_exec yellow
+    keyword whole curl_multi_getcontent yellow
+    keyword whole curl_multi_info_read yellow
+    keyword whole curl_multi_init yellow
+    keyword whole curl_multi_remove_handle yellow
+    keyword whole curl_multi_select yellow
+    keyword whole curl_multi_setopt yellow
+    keyword whole curl_multi_strerror yellow
+    keyword whole curl_pause yellow
+    keyword whole curl_reset yellow
+    keyword whole curl_setopt_array yellow
+    keyword whole curl_setopt yellow
+    keyword whole curl_share_close yellow
+    keyword whole curl_share_errno yellow
+    keyword whole curl_share_init_persistent yellow
+    keyword whole curl_share_init yellow
+    keyword whole curl_share_setopt yellow
+    keyword whole curl_share_strerror yellow
+    keyword whole curl_strerror yellow
+    keyword whole curl_unescape yellow
+    keyword whole curl_upkeep yellow
+    keyword whole curl_version yellow
 
 # CURL, Client URL Library Functions constants
     keyword whole CURL\[0123456789_ABCDEFGHIJKLMNOPQRSTUVWXYZ\] white
@@ -1685,11 +1727,229 @@ context default
     keyword whole PDO_MYSQL_ATTR_USE_BUFFERED_QUERY white
     keyword whole TRUE white
 
-# MySQL Improved Extension
-    keyword whole mysqli\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow
+# MySQL Improved Extension (https://www.php.net/manual/en/mysqli.summary.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/mysqli.summary.php |\
+#   grep -Eo 'mysqli_[a-z_].*\(\)' | grep -v "::" | sort -u |\
+#   sed 's/\(.*\)()$/    keyword whole \1 yellow/'
+#
+    keyword whole mysqli_affected_rows yellow
+    keyword whole mysqli_autocommit yellow
+    keyword whole mysqli_change_user yellow
+    keyword whole mysqli_character_set_name yellow
+    keyword whole mysqli_close yellow
+    keyword whole mysqli_commit yellow
+    keyword whole mysqli_connect yellow
+    keyword whole mysqli_connect_errno yellow
+    keyword whole mysqli_connect_error yellow
+    keyword whole mysqli_data_seek yellow
+    keyword whole mysqli_debug yellow
+    keyword whole mysqli_dump_debug_info yellow
+    keyword whole mysqli_embedded_server_end yellow
+    keyword whole mysqli_embedded_server_start yellow
+    keyword whole mysqli_errno yellow
+    keyword whole mysqli_error yellow
+    keyword whole mysqli_escape_string yellow
+    keyword whole mysqli_execute yellow
+    keyword whole mysqli_fetch_all yellow
+    keyword whole mysqli_fetch_array yellow
+    keyword whole mysqli_fetch_assoc yellow
+    keyword whole mysqli_fetch_column yellow
+    keyword whole mysqli_fetch_field yellow
+    keyword whole mysqli_fetch_field_direct yellow
+    keyword whole mysqli_fetch_fields yellow
+    keyword whole mysqli_fetch_lengths yellow
+    keyword whole mysqli_fetch_object yellow
+    keyword whole mysqli_fetch_row yellow
+    keyword whole mysqli_field_count yellow
+    keyword whole mysqli_field_seek yellow
+    keyword whole mysqli_field_tell yellow
+    keyword whole mysqli_free_result yellow
+    keyword whole mysqli_get_charset yellow
+    keyword whole mysqli_get_client_info yellow
+    keyword whole mysqli_get_client_stats yellow
+    keyword whole mysqli_get_client_version yellow
+    keyword whole mysqli_get_connection_stats yellow
+    keyword whole mysqli_get_host_info yellow
+    keyword whole mysqli_get_proto_info yellow
+    keyword whole mysqli_get_server_info yellow
+    keyword whole mysqli_get_server_version yellow
+    keyword whole mysqli_get_warnings yellow
+    keyword whole mysqli_info yellow
+    keyword whole mysqli_insert_id yellow
+    keyword whole mysqli_more_results yellow
+    keyword whole mysqli_multi_query yellow
+    keyword whole mysqli_next_result yellow
+    keyword whole mysqli_num_fields yellow
+    keyword whole mysqli_num_rows yellow
+    keyword whole mysqli_options yellow
+    keyword whole mysqli_prepare yellow
+    keyword whole mysqli_query yellow
+    keyword whole mysqli_real_connect yellow
+    keyword whole mysqli_real_escape_string yellow
+    keyword whole mysqli_real_query yellow
+    keyword whole mysqli_report yellow
+    keyword whole mysqli_rollback yellow
+    keyword whole mysqli_select_db yellow
+    keyword whole mysqli_set_charset yellow
+    keyword whole mysqli_set_opt yellow
+    keyword whole mysqli_sqlstate yellow
+    keyword whole mysqli_ssl_set yellow
+    keyword whole mysqli_stat yellow
+    keyword whole mysqli_stmt_affected_rows yellow
+    keyword whole mysqli_stmt_attr_get yellow
+    keyword whole mysqli_stmt_attr_set yellow
+    keyword whole mysqli_stmt_bind_param yellow
+    keyword whole mysqli_stmt_bind_result yellow
+    keyword whole mysqli_stmt_close yellow
+    keyword whole mysqli_stmt_data_seek yellow
+    keyword whole mysqli_stmt_errno yellow
+    keyword whole mysqli_stmt_error yellow
+    keyword whole mysqli_stmt_execute yellow
+    keyword whole mysqli_stmt_fetch yellow
+    keyword whole mysqli_stmt_field_count yellow
+    keyword whole mysqli_stmt_free_result yellow
+    keyword whole mysqli_stmt_get_result yellow
+    keyword whole mysqli_stmt_get_warnings yellow
+    keyword whole mysqli_stmt_init yellow
+    keyword whole mysqli_stmt_insert_id yellow
+    keyword whole mysqli_stmt_more_results yellow
+    keyword whole mysqli_stmt_next_result yellow
+    keyword whole mysqli_stmt_num_rows yellow
+    keyword whole mysqli_stmt_param_count yellow
+    keyword whole mysqli_stmt_prepare yellow
+    keyword whole mysqli_stmt_reset yellow
+    keyword whole mysqli_stmt_result_metadata yellow
+    keyword whole mysqli_stmt_send_long_data yellow
+    keyword whole mysqli_stmt_sqlstate yellow
+    keyword whole mysqli_stmt_store_result yellow
+    keyword whole mysqli_store_result yellow
+    keyword whole mysqli_thread_id yellow
+    keyword whole mysqli_thread_safe yellow
+    keyword whole mysqli_use_result yellow
+    keyword whole mysqli_warning_count yellow
+# deprecated functions in PHP 8.4 (color it by red to attract attention)
+    keyword whole mysqli_init brightred
+    keyword whole mysqli_kill brightred
+    keyword whole mysqli_ping brightred
+    keyword whole mysqli_refresh brightred
 
-# MySQL Improved Extension constants
-    keyword whole MYSQLI\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+# MySQL Improved Extension constants (https://www.php.net/manual/en/mysqli.constants.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/mysqli.constants.php |\
+#   grep -Eo "<strong><code><a href=.*>(MYSQLI)_.*</a></code></strong>" | \
+#   grep -Eo '(MYSQLI_)[_A-Z]*' | sort -u | sed 's/\(.*\)/    keyword whole \1 white/g'
+#
+    keyword whole MYSQLI_ASSOC white
+    keyword whole MYSQLI_ASYNC white
+    keyword whole MYSQLI_AUTO_INCREMENT_FLAG white
+    keyword whole MYSQLI_BINARY_FLAG white
+    keyword whole MYSQLI_BLOB_FLAG white
+    keyword whole MYSQLI_BOTH white
+    keyword whole MYSQLI_CLIENT_CAN_HANDLE_EXPIRED_PASSWORDS white
+    keyword whole MYSQLI_CLIENT_COMPRESS white
+    keyword whole MYSQLI_CLIENT_FOUND_ROWS white
+    keyword whole MYSQLI_CLIENT_IGNORE_SPACE white
+    keyword whole MYSQLI_CLIENT_INTERACTIVE white
+    keyword whole MYSQLI_CLIENT_MULTI_QUERIES white
+    keyword whole MYSQLI_CLIENT_NO_SCHEMA white
+    keyword whole MYSQLI_CLIENT_SSL white
+    keyword whole MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT white
+    keyword whole MYSQLI_CLIENT_SSL_VERIFY_SERVER_CERT white
+    keyword whole MYSQLI_CURSOR_TYPE_FOR_UPDATE white
+    keyword whole MYSQLI_CURSOR_TYPE_NO_CURSOR white
+    keyword whole MYSQLI_CURSOR_TYPE_READ_ONLY white
+    keyword whole MYSQLI_CURSOR_TYPE_SCROLLABLE white
+    keyword whole MYSQLI_DEBUG_TRACE_ENABLED white
+    keyword whole MYSQLI_ENUM_FLAG white
+    keyword whole MYSQLI_GROUP_FLAG white
+    keyword whole MYSQLI_INIT_COMMAND white
+    keyword whole MYSQLI_IS_MARIADB white
+    keyword whole MYSQLI_MULTIPLE_KEY_FLAG white
+    keyword whole MYSQLI_NEED_DATA white
+    keyword whole MYSQLI_NO_DEFAULT_VALUE_FLAG white
+    keyword whole MYSQLI_NOT_NULL_FLAG white
+    keyword whole MYSQLI_NUM white
+    keyword whole MYSQLI_NUM_FLAG white
+    keyword whole MYSQLI_ON_UPDATE_NOW_FLAG white
+    keyword whole MYSQLI_OPT_CAN_HANDLE_EXPIRED_PASSWORDS white
+    keyword whole MYSQLI_OPT_CONNECT_TIMEOUT white
+    keyword whole MYSQLI_OPT_INT_AND_FLOAT_NATIVE white
+    keyword whole MYSQLI_OPT_LOAD_DATA_LOCAL_DIR white
+    keyword whole MYSQLI_OPT_LOCAL_INFILE white
+    keyword whole MYSQLI_OPT_NET_CMD_BUFFER_SIZE white
+    keyword whole MYSQLI_OPT_NET_READ_BUFFER_SIZE white
+    keyword whole MYSQLI_OPT_READ_TIMEOUT white
+    keyword whole MYSQLI_OPT_SSL_VERIFY_SERVER_CERT white
+    keyword whole MYSQLI_PART_KEY_FLAG white
+    keyword whole MYSQLI_PRI_KEY_FLAG white
+    keyword whole MYSQLI_READ_DEFAULT_FILE white
+    keyword whole MYSQLI_READ_DEFAULT_GROUP white
+    keyword whole MYSQLI_REFRESH_BACKUP_LOG white
+    keyword whole MYSQLI_REFRESH_GRANT white
+    keyword whole MYSQLI_REFRESH_HOSTS white
+    keyword whole MYSQLI_REFRESH_LOG white
+    keyword whole MYSQLI_REFRESH_MASTER white
+    keyword whole MYSQLI_REFRESH_REPLICA white
+    keyword whole MYSQLI_REFRESH_SLAVE white
+    keyword whole MYSQLI_REFRESH_STATUS white
+    keyword whole MYSQLI_REFRESH_TABLES white
+    keyword whole MYSQLI_REFRESH_THREADS white
+    keyword whole MYSQLI_REPORT_ALL white
+    keyword whole MYSQLI_REPORT_ERROR white
+    keyword whole MYSQLI_REPORT_INDEX white
+    keyword whole MYSQLI_REPORT_OFF white
+    keyword whole MYSQLI_REPORT_STRICT white
+    keyword whole MYSQLI_SERVER_PUBLIC_KEY white
+    keyword whole MYSQLI_SET_CHARSET_NAME white
+    keyword whole MYSQLI_SET_FLAG white
+    keyword whole MYSQLI_STMT_ATTR_CURSOR_TYPE white
+    keyword whole MYSQLI_STMT_ATTR_PREFETCH_ROWS white
+    keyword whole MYSQLI_STMT_ATTR_UPDATE_MAX_LENGTH white
+    keyword whole MYSQLI_STORE_RESULT white
+    keyword whole MYSQLI_STORE_RESULT_COPY_DATA white
+    keyword whole MYSQLI_TIMESTAMP_FLAG white
+    keyword whole MYSQLI_TRANS_COR_AND_CHAIN white
+    keyword whole MYSQLI_TRANS_COR_AND_NO_CHAIN white
+    keyword whole MYSQLI_TRANS_COR_NO_RELEASE white
+    keyword whole MYSQLI_TRANS_COR_RELEASE white
+    keyword whole MYSQLI_TRANS_START_READ_ONLY white
+    keyword whole MYSQLI_TRANS_START_READ_WRITE white
+    keyword whole MYSQLI_TRANS_START_WITH_CONSISTENT_SNAPSHOT white
+    keyword whole MYSQLI_TYPE_BIT white
+    keyword whole MYSQLI_TYPE_BLOB white
+    keyword whole MYSQLI_TYPE_CHAR white
+    keyword whole MYSQLI_TYPE_DATE white
+    keyword whole MYSQLI_TYPE_DATETIME white
+    keyword whole MYSQLI_TYPE_DECIMAL white
+    keyword whole MYSQLI_TYPE_DOUBLE white
+    keyword whole MYSQLI_TYPE_ENUM white
+    keyword whole MYSQLI_TYPE_FLOAT white
+    keyword whole MYSQLI_TYPE_GEOMETRY white
+    keyword whole MYSQLI_TYPE_INT white
+    keyword whole MYSQLI_TYPE_INTERVAL white
+    keyword whole MYSQLI_TYPE_JSON white
+    keyword whole MYSQLI_TYPE_LONG white
+    keyword whole MYSQLI_TYPE_LONG_BLOB white
+    keyword whole MYSQLI_TYPE_LONGLONG white
+    keyword whole MYSQLI_TYPE_MEDIUM_BLOB white
+    keyword whole MYSQLI_TYPE_NEWDATE white
+    keyword whole MYSQLI_TYPE_NEWDECIMAL white
+    keyword whole MYSQLI_TYPE_NULL white
+    keyword whole MYSQLI_TYPE_SET white
+    keyword whole MYSQLI_TYPE_SHORT white
+    keyword whole MYSQLI_TYPE_STRING white
+    keyword whole MYSQLI_TYPE_TIME white
+    keyword whole MYSQLI_TYPE_TIMESTAMP white
+    keyword whole MYSQLI_TYPE_TINY white
+    keyword whole MYSQLI_TYPE_TINY_BLOB white
+    keyword whole MYSQLI_TYPE_VAR_STRING white
+    keyword whole MYSQLI_TYPE_VECTOR white
+    keyword whole MYSQLI_TYPE_YEAR white
+    keyword whole MYSQLI_UNIQUE_KEY_FLAG white
+    keyword whole MYSQLI_UNSIGNED_FLAG white
+    keyword whole MYSQLI_USE_RESULT white
+    keyword whole MYSQLI_ZEROFILL_FLAG white
 
 # Ncurses Terminal Screen Control Functions
     keyword whole ncurses\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow
@@ -1834,8 +2094,76 @@ context default
     keyword whole AL_TRUE white
     keyword whole AL_VELOCITY white
 
-# OpenSSL Functions
-    keyword whole openssl\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow
+# OpenSSL Functions (https://www.php.net/manual/en/book.openssl.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/book.openssl.php |\
+#   sed 's/<li>/\n<li>/g' | grep -Eo "<li><a href=\"function\..*>.*</a>" | sort -u |\
+#   sed 's/<li><a href=.*>\(.*\)<\/a>/    keyword whole \1 yellow/g'
+#
+    keyword whole openssl_cipher_iv_length yellow
+    keyword whole openssl_cipher_key_length yellow
+    keyword whole openssl_cms_decrypt yellow
+    keyword whole openssl_cms_encrypt yellow
+    keyword whole openssl_cms_read yellow
+    keyword whole openssl_cms_sign yellow
+    keyword whole openssl_cms_verify yellow
+    keyword whole openssl_csr_export yellow
+    keyword whole openssl_csr_export_to_file yellow
+    keyword whole openssl_csr_get_public_key yellow
+    keyword whole openssl_csr_get_subject yellow
+    keyword whole openssl_csr_new yellow
+    keyword whole openssl_csr_sign yellow
+    keyword whole openssl_decrypt yellow
+    keyword whole openssl_dh_compute_key yellow
+    keyword whole openssl_digest yellow
+    keyword whole openssl_encrypt yellow
+    keyword whole openssl_error_string yellow
+    keyword whole openssl_free_key yellow
+    keyword whole openssl_get_cert_locations yellow
+    keyword whole openssl_get_cipher_methods yellow
+    keyword whole openssl_get_curve_names yellow
+    keyword whole openssl_get_md_methods yellow
+    keyword whole openssl_get_privatekey yellow
+    keyword whole openssl_get_publickey yellow
+    keyword whole openssl_open yellow
+    keyword whole openssl_pbkdf2 yellow
+    keyword whole openssl_pkcs12_export yellow
+    keyword whole openssl_pkcs12_export_to_file yellow
+    keyword whole openssl_pkcs12_read yellow
+    keyword whole openssl_pkcs7_decrypt yellow
+    keyword whole openssl_pkcs7_encrypt yellow
+    keyword whole openssl_pkcs7_read yellow
+    keyword whole openssl_pkcs7_sign yellow
+    keyword whole openssl_pkcs7_verify yellow
+    keyword whole openssl_pkey_derive yellow
+    keyword whole openssl_pkey_export yellow
+    keyword whole openssl_pkey_export_to_file yellow
+    keyword whole openssl_pkey_free yellow
+    keyword whole openssl_pkey_get_details yellow
+    keyword whole openssl_pkey_get_private yellow
+    keyword whole openssl_pkey_get_public yellow
+    keyword whole openssl_pkey_new yellow
+    keyword whole openssl_private_decrypt yellow
+    keyword whole openssl_private_encrypt yellow
+    keyword whole openssl_public_decrypt yellow
+    keyword whole openssl_public_encrypt yellow
+    keyword whole openssl_random_pseudo_bytes yellow
+    keyword whole openssl_seal yellow
+    keyword whole openssl_sign yellow
+    keyword whole openssl_spki_export_challenge yellow
+    keyword whole openssl_spki_export yellow
+    keyword whole openssl_spki_new yellow
+    keyword whole openssl_spki_verify yellow
+    keyword whole openssl_verify yellow
+    keyword whole openssl_x509_check_private_key yellow
+    keyword whole openssl_x509_checkpurpose yellow
+    keyword whole openssl_x509_export yellow
+    keyword whole openssl_x509_export_to_file yellow
+    keyword whole openssl_x509_fingerprint yellow
+    keyword whole openssl_x509_free yellow
+    keyword whole openssl_x509_parse yellow
+    keyword whole openssl_x509_read yellow
+    keyword whole openssl_x509_verify yellow
 
 # Oracle Functions [deprecated]
     keyword whole ora\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow
@@ -2127,11 +2455,188 @@ context default
     keyword whole spliti yellow
     keyword whole sql_regcase yellow
 
-# PostgreSQL Functions
-    keyword whole pg\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow
+# PostgreSQL Functions (https://www.php.net/manual/en/ref.pgsql.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/ref.pgsql.php |\
+#   sed 's/<li>/\n<li>/g' | grep -Eo "<li><a href=\"function\..*>.*</a>" | sort -u |\
+#   sed 's/<li><a href=.*>\(.*\)<\/a>/    keyword whole \1 yellow/g'
+#
+    keyword whole pg_affected_rows yellow
+    keyword whole pg_cancel_query yellow
+    keyword whole pg_client_encoding yellow
+    keyword whole pg_close yellow
+    keyword whole pg_connection_busy yellow
+    keyword whole pg_connection_reset yellow
+    keyword whole pg_connection_status yellow
+    keyword whole pg_connect yellow
+    keyword whole pg_connect_poll yellow
+    keyword whole pg_consume_input yellow
+    keyword whole pg_convert yellow
+    keyword whole pg_copy_from yellow
+    keyword whole pg_copy_to yellow
+    keyword whole pg_dbname yellow
+    keyword whole pg_delete yellow
+    keyword whole pg_end_copy yellow
+    keyword whole pg_escape_bytea yellow
+    keyword whole pg_escape_identifier yellow
+    keyword whole pg_escape_literal yellow
+    keyword whole pg_escape_string yellow
+    keyword whole pg_execute yellow
+    keyword whole pg_fetch_all_columns yellow
+    keyword whole pg_fetch_all yellow
+    keyword whole pg_fetch_array yellow
+    keyword whole pg_fetch_assoc yellow
+    keyword whole pg_fetch_object yellow
+    keyword whole pg_fetch_result yellow
+    keyword whole pg_fetch_row yellow
+    keyword whole pg_field_is_null yellow
+    keyword whole pg_field_name yellow
+    keyword whole pg_field_num yellow
+    keyword whole pg_field_prtlen yellow
+    keyword whole pg_field_size yellow
+    keyword whole pg_field_table yellow
+    keyword whole pg_field_type_oid yellow
+    keyword whole pg_field_type yellow
+    keyword whole pg_flush yellow
+    keyword whole pg_free_result yellow
+    keyword whole pg_get_notify yellow
+    keyword whole pg_get_pid yellow
+    keyword whole pg_get_result yellow
+    keyword whole pg_host yellow
+    keyword whole pg_insert yellow
+    keyword whole pg_last_error yellow
+    keyword whole pg_last_notice yellow
+    keyword whole pg_last_oid yellow
+    keyword whole pg_lo_close yellow
+    keyword whole pg_lo_create yellow
+    keyword whole pg_lo_export yellow
+    keyword whole pg_lo_import yellow
+    keyword whole pg_lo_open yellow
+    keyword whole pg_lo_read_all yellow
+    keyword whole pg_lo_read yellow
+    keyword whole pg_lo_seek yellow
+    keyword whole pg_lo_tell yellow
+    keyword whole pg_lo_truncate yellow
+    keyword whole pg_lo_unlink yellow
+    keyword whole pg_lo_write yellow
+    keyword whole pg_meta_data yellow
+    keyword whole pg_num_fields yellow
+    keyword whole pg_num_rows yellow
+    keyword whole pg_options yellow
+    keyword whole pg_parameter_status yellow
+    keyword whole pg_pconnect yellow
+    keyword whole pg_ping yellow
+    keyword whole pg_port yellow
+    keyword whole pg_prepare yellow
+    keyword whole pg_put_line yellow
+    keyword whole pg_query_params yellow
+    keyword whole pg_query yellow
+    keyword whole pg_result_error_field yellow
+    keyword whole pg_result_error yellow
+    keyword whole pg_result_memory_size yellow
+    keyword whole pg_result_seek yellow
+    keyword whole pg_result_status yellow
+    keyword whole pg_select yellow
+    keyword whole pg_send_execute yellow
+    keyword whole pg_send_prepare yellow
+    keyword whole pg_send_query_params yellow
+    keyword whole pg_send_query yellow
+    keyword whole pg_set_chunked_rows_size yellow
+    keyword whole pg_set_client_encoding yellow
+    keyword whole pg_set_error_context_visibility yellow
+    keyword whole pg_set_error_verbosity yellow
+    keyword whole pg_socket yellow
+    keyword whole pg_trace yellow
+    keyword whole pg_transaction_status yellow
+    keyword whole pg_tty yellow
+    keyword whole pg_unescape_bytea yellow
+    keyword whole pg_untrace yellow
+    keyword whole pg_update yellow
+    keyword whole pg_version yellow
 
-# PostgreSQL Functions constants
-    keyword whole PGSQL\_\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] white
+# PostgreSQL Functions constants (https://www.php.net/manual/en/pgsql.constants.php)
+# Helper command:
+#   wget -q -O - https://www.php.net/manual/en/pgsql.constants.php |\
+#   grep -Eo "<strong><code><a href=.*>(PGSQL)_.*</a></code></strong>" | \
+#   grep -Eo '(PGSQL_)[_A-Z]*' | sort -u | sed 's/\(.*\)/    keyword whole \1 white/g'
+#
+    keyword whole PGSQL_ASSOC white
+    keyword whole PGSQL_BAD_RESPONSE white
+    keyword whole PGSQL_BOTH white
+    keyword whole PGSQL_COMMAND_OK white
+    keyword whole PGSQL_CONNECT_ASYNC white
+    keyword whole PGSQL_CONNECT_FORCE_NEW white
+    keyword whole PGSQL_CONNECTION_AUTH_OK white
+    keyword whole PGSQL_CONNECTION_AWAITING_RESPONSE white
+    keyword whole PGSQL_CONNECTION_BAD white
+    keyword whole PGSQL_CONNECTION_MADE white
+    keyword whole PGSQL_CONNECTION_OK white
+    keyword whole PGSQL_CONNECTION_SETENV white
+    keyword whole PGSQL_CONNECTION_SSL_STARTUP white
+    keyword whole PGSQL_CONNECTION_STARTED white
+    keyword whole PGSQL_CONV_FORCE_NULL white
+    keyword whole PGSQL_CONV_IGNORE_DEFAULT white
+    keyword whole PGSQL_CONV_IGNORE_NOT_NULL white
+    keyword whole PGSQL_COPY_IN white
+    keyword whole PGSQL_COPY_OUT white
+    keyword whole PGSQL_DIAG_COLUMN_NAME white
+    keyword whole PGSQL_DIAG_CONSTRAINT_NAME white
+    keyword whole PGSQL_DIAG_CONTEXT white
+    keyword whole PGSQL_DIAG_DATATYPE_NAME white
+    keyword whole PGSQL_DIAG_INTERNAL_POSITION white
+    keyword whole PGSQL_DIAG_INTERNAL_QUERY white
+    keyword whole PGSQL_DIAG_MESSAGE_DETAIL white
+    keyword whole PGSQL_DIAG_MESSAGE_HINT white
+    keyword whole PGSQL_DIAG_MESSAGE_PRIMARY white
+    keyword whole PGSQL_DIAG_SCHEMA_NAME white
+    keyword whole PGSQL_DIAG_SEVERITY white
+    keyword whole PGSQL_DIAG_SEVERITY_NONLOCALIZED white
+    keyword whole PGSQL_DIAG_SOURCE_FILE white
+    keyword whole PGSQL_DIAG_SOURCE_FUNCTION white
+    keyword whole PGSQL_DIAG_SOURCE_LINE white
+    keyword whole PGSQL_DIAG_SQLSTATE white
+    keyword whole PGSQL_DIAG_STATEMENT_POSITION white
+    keyword whole PGSQL_DIAG_TABLE_NAME white
+    keyword whole PGSQL_DML_ASYNC white
+    keyword whole PGSQL_DML_ESCAPE white
+    keyword whole PGSQL_DML_EXEC white
+    keyword whole PGSQL_DML_NO_CONV white
+    keyword whole PGSQL_DML_STRING white
+    keyword whole PGSQL_EMPTY_QUERY white
+    keyword whole PGSQL_ERRORS_DEFAULT white
+    keyword whole PGSQL_ERRORS_SQLSTATE white
+    keyword whole PGSQL_ERRORS_TERSE white
+    keyword whole PGSQL_ERRORS_VERBOSE white
+    keyword whole PGSQL_FATAL_ERROR white
+    keyword whole PGSQL_LIBPQ_VERSION white
+    keyword whole PGSQL_LIBPQ_VERSION_STR white
+    keyword whole PGSQL_NONFATAL_ERROR white
+    keyword whole PGSQL_NOTICE_ALL white
+    keyword whole PGSQL_NOTICE_CLEAR white
+    keyword whole PGSQL_NOTICE_LAST white
+    keyword whole PGSQL_NUM white
+    keyword whole PGSQL_POLLING_ACTIVE white
+    keyword whole PGSQL_POLLING_FAILED white
+    keyword whole PGSQL_POLLING_OK white
+    keyword whole PGSQL_POLLING_READING white
+    keyword whole PGSQL_POLLING_WRITING white
+    keyword whole PGSQL_SEEK_CUR white
+    keyword whole PGSQL_SEEK_END white
+    keyword whole PGSQL_SEEK_SET white
+    keyword whole PGSQL_SHOW_CONTEXT_ALWAYS white
+    keyword whole PGSQL_SHOW_CONTEXT_ERRORS white
+    keyword whole PGSQL_SHOW_CONTEXT_NEVER white
+    keyword whole PGSQL_STATUS_LONG white
+    keyword whole PGSQL_STATUS_STRING white
+    keyword whole PGSQL_TRACE_REGRESS_MODE white
+    keyword whole PGSQL_TRACE_SUPPRESS_TIMESTAMPS white
+    keyword whole PGSQL_TRANSACTION_ACTIVE white
+    keyword whole PGSQL_TRANSACTION_IDLE white
+    keyword whole PGSQL_TRANSACTION_INERROR white
+    keyword whole PGSQL_TRANSACTION_INTRANS white
+    keyword whole PGSQL_TRANSACTION_UNKNOWN white
+    keyword whole PGSQL_TUPLES_CHUNK white
+    keyword whole PGSQL_TUPLES_OK white
     keyword whole PG_DIAG_INTERNAL_QUERY white
     keyword whole PG_DIAG_STATEMENT_POSITION white
 
