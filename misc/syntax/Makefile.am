@@ -28,6 +28,7 @@ SYNTAXFILES =			\
 	debian-sources-list.syntax	\
 	diff.syntax		\
 	dlink.syntax		\
+	dockerfile.syntax	\
 	dos.syntax		\
 	dot.syntax		\
 	ebuild.syntax		\

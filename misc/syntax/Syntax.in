@@ -360,5 +360,8 @@ include b.syntax
 file ..\*\\.(?i:cfg|cnf|conf)$ Config\sfile
 include conf.syntax
 
+file Dockerfile.\*$ Dockerfile
+include dockerfile.syntax
+
 file .\* unknown
 include unknown.syntax
