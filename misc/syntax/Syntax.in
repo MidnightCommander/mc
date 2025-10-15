@@ -357,5 +357,8 @@ include toml.syntax
 file .\*\\.(mch|ref|imp)$ B\sFile
 include b.syntax
 
+file ..\*\\.(?i:cfg|cnf|conf)$ Config\sfile
+include conf.syntax
+
 file .\* unknown
 include unknown.syntax

@@ -15,6 +15,7 @@ SYNTAXFILES =			\
 	changelog.syntax	\
 	cmake.syntax		\
 	cobol.syntax		\
+	conf.syntax		\
 	cs.syntax		\
 	css.syntax		\
 	cuda.syntax		\
