@@ -50,6 +50,7 @@ int mouse_fd =
     -1;  // for when gpm_fd changes to < 0 and the old one must be cleared from select_set
 const char *xmouse_seq;
 const char *xmouse_extended_seq;
+gboolean ncurses_key_mouse_means_extended = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 

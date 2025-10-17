@@ -101,6 +101,9 @@ extern const char *xmouse_seq;
 /* String indicating that an SGR extended mouse event has occurred, namely "\E[<" */
 extern const char *xmouse_extended_seq;
 
+/* Whether ncurses's KEY_MOUSE refers to an SGR extended mouse event */
+extern gboolean ncurses_key_mouse_means_extended;
+
 /*** declarations of public functions ************************************************************/
 
 /* General (i.e. both for xterm and gpm) mouse support definitions */
