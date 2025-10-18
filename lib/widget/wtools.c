@@ -75,8 +75,8 @@ query_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
         if ((w->pos_flags & WPOS_CENTER) == 0)
         {
             WDialog *prev_dlg = NULL;
-            int ypos, xpos;
-            WRect r;
+            int ypos;
+            WRect r = { 0, 0, w->rect.lines, w->rect.cols };
 
             // get dialog under h
             if (top_dlg != NULL)
@@ -101,14 +101,13 @@ query_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
             else
                 ypos = WIDGET (prev_dlg)->rect.y + 2;
 
-            // if dialog is too high, place it centered
-            if (ypos + w->rect.lines < LINES / 2)
-                w->pos_flags |= WPOS_CENTER;
+            // if dialog is too high or too low, place it centered
+            if (ypos + w->rect.lines < LINES / 2 || ypos > LINES / 2)
+                w->pos_flags |= WPOS_CENTER_VERT;
+            else
+                r.y = ypos;
 
-            xpos = COLS / 2 - w->rect.cols / 2;
-
-            // set position
-            rect_init (&r, ypos, xpos, w->rect.lines, w->rect.cols);
+            w->pos_flags |= WPOS_CENTER_HORZ;
 
             return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
         }

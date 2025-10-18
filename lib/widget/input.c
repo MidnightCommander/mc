@@ -842,14 +842,17 @@ input_save_history (const gchar *event_group_name, const gchar *event_name, gpoi
     (void) event_name;
 
     if (!in->is_password && (DIALOG (WIDGET (in)->owner)->ret_value != B_CANCEL))
-    {
-        ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
-
         input_push_history (in);
-        if (in->history.changed)
-            mc_config_history_save (ev->cfg, in->history.name, in->history.list);
-        in->history.changed = FALSE;
+
+    // save modified history regardless of ret_value
+    if (in->history.changed)
+    {
+        const ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
+
+        mc_config_history_save (ev->cfg, in->history.name, in->history.list);
     }
+
+    in->history.changed = FALSE;
 
     return TRUE;
 }
