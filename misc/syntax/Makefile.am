@@ -15,6 +15,7 @@ SYNTAXFILES =			\
 	changelog.syntax	\
 	cmake.syntax		\
 	cobol.syntax		\
+	conf.syntax		\
 	cs.syntax		\
 	css.syntax		\
 	cuda.syntax		\
@@ -27,6 +28,7 @@ SYNTAXFILES =			\
 	debian-sources-list.syntax	\
 	diff.syntax		\
 	dlink.syntax		\
+	dockerfile.syntax	\
 	dos.syntax		\
 	dot.syntax		\
 	ebuild.syntax		\

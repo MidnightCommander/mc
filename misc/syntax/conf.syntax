@@ -1,0 +1,36 @@
+#
+# Simple syntax coloring for most config files (.cfg .conf)
+#
+# The objective is to highlight #-comments, parens and numbers/strings to make files easier to read
+#
+
+context default
+    keyword ; brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword = white
+
+    keyword whole \{0123456789\}\[0123456789\] brightgreen
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+# String values
+context ' ' green
+context " " green
+
+# Comments
+context # \n brown
+    keyword whole BUG brightred
+    keyword whole FixMe brightred
+    keyword whole FIXME brightred
+    keyword whole Note brightred
+    keyword whole NOTE brightred
+    keyword whole ToDo brightred
+    keyword whole TODO brightred
+    keyword !!\[!\] brightred
+    keyword ??\[?\] brightred
+    spellcheck
