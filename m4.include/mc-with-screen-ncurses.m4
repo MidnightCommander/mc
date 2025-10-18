@@ -107,18 +107,7 @@ AC_DEFUN([mc_WITH_NCURSES], [
     AS_IF([test x"$ncurses_term_h_found" != xyes],
         [AC_MSG_ERROR([NCurses(w) term.h header file not found])])
 
-    dnl If ncurses exports the ESCDELAY variable it should be set to 0
-    dnl or you'll have to press Esc three times to dismiss a dialog box.
-    AC_CACHE_CHECK([for ESCDELAY variable], [mc_cv_ncurses_escdelay],
-        [AC_LINK_IFELSE(
-            [AC_LANG_PROGRAM([[extern int ESCDELAY;]],[[ESCDELAY = 0;]])],
-            [mc_cv_ncurses_escdelay=yes], [mc_cv_ncurses_escdelay=no])
-        ])
-
-    AS_IF([test x"$mc_cv_ncurses_escdelay" = xyes],
-        [AC_DEFINE([HAVE_ESCDELAY], [1], [Define if NCurses(w) has ESCDELAY variable])])
-
-    AC_CHECK_FUNCS(resizeterm)
+    AC_CHECK_FUNCS([resizeterm set_escdelay])
 
     AC_DEFINE([HAVE_NCURSES], [1], [Define to use NCurses for screen management])
     AC_DEFINE_UNQUOTED([NCURSES_LIB_DISPLAYNAME], ["$screen_msg"], [Define NCurses library display name])
