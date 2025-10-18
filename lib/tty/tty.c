@@ -338,10 +338,10 @@ tty_resize (int fd)
 #if defined TIOCSWINSZ
     struct winsize tty_size;
 
-    tty_size.ws_row = LINES;
-    tty_size.ws_col = COLS;
-    tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
-
+    /* Make sure to copy to the inner terminal all the fields, even the ones we don't care about,
+     * including ws_xpixel and ws_ypixel. */
+    if (ioctl (STDOUT_FILENO, TIOCGWINSZ, &tty_size) == -1)
+        return -1;
     return ioctl (fd, TIOCSWINSZ, &tty_size);
 #else
     return 0;
