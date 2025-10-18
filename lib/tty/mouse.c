@@ -50,6 +50,7 @@ int mouse_fd =
     -1;  // for when gpm_fd changes to < 0 and the old one must be cleared from select_set
 const char *xmouse_seq;
 const char *xmouse_extended_seq;
+gboolean ncurses_key_mouse_means_extended = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -139,11 +140,8 @@ enable_mouse (void)
         // save old highlight mouse tracking
         printf (ESC_STR "[?1001s");
 
-        // enable mouse tracking
-        printf (ESC_STR "[?1000h");
-
-        // enable SGR extended mouse reporting
-        printf (ESC_STR "[?1006h");
+        // enable mouse tracking and SGR extended mouse reporting
+        printf (ESC_STR "[?1000;1006h");
 
         fflush (stdout);
         mouse_enabled = TRUE;
@@ -153,11 +151,8 @@ enable_mouse (void)
         // save old highlight mouse tracking
         printf (ESC_STR "[?1001s");
 
-        // enable mouse tracking
-        printf (ESC_STR "[?1002h");
-
-        // enable SGR extended mouse reporting
-        printf (ESC_STR "[?1006h");
+        // enable mouse tracking and SGR extended mouse reporting
+        printf (ESC_STR "[?1002;1006h");
 
         fflush (stdout);
         mouse_enabled = TRUE;
@@ -186,11 +181,8 @@ disable_mouse (void)
         break;
 #endif
     case MOUSE_XTERM_NORMAL_TRACKING:
-        // disable SGR extended mouse reporting
-        printf (ESC_STR "[?1006l");
-
-        // disable mouse tracking
-        printf (ESC_STR "[?1000l");
+        // disable SGR extended mouse reporting and mouse tracking
+        printf (ESC_STR "[?1006;1000l");
 
         // restore old highlight mouse tracking
         printf (ESC_STR "[?1001r");
@@ -198,11 +190,8 @@ disable_mouse (void)
         fflush (stdout);
         break;
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
-        // disable SGR extended mouse reporting
-        printf (ESC_STR "[?1006l");
-
-        // disable mouse tracking
-        printf (ESC_STR "[?1002l");
+        // disable SGR extended mouse reporting and mouse tracking
+        printf (ESC_STR "[?1006;1002l");
 
         // restore old highlight mouse tracking
         printf (ESC_STR "[?1001r");

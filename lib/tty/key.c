@@ -2066,12 +2066,11 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 #endif
             || c == MCKEY_EXTENDED_MOUSE))
     {
-        // Mouse event. See tickets 2956 and 3954 for extended mode detection.
+        // Mouse event. See tickets 2956, 3954 and 4144 for extended mode detection.
         gboolean extended = c == MCKEY_EXTENDED_MOUSE;
 
 #ifdef KEY_MOUSE
-        extended =
-            extended || (c == KEY_MOUSE && xmouse_seq == NULL && xmouse_extended_seq != NULL);
+        extended = extended || (c == KEY_MOUSE && ncurses_key_mouse_means_extended);
 #endif
 
         xmouse_get_event (event, extended);
