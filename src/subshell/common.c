@@ -1232,9 +1232,17 @@ pty_open_slave (const char *pty_name)
 /**
  * Set up `precmd' or equivalent for reading the subshell's CWD.
  *
- * Attention! Never forget that these are *one-liners* even though the concatenated
- * substrings contain line breaks and indentation for better understanding of the
- * shell code. It is vital that each one-liner ends with a line feed character ("\n" ).
+ * Attention!
+ *
+ * Physical lines sent to the shell must not be longer than 256 characters, because above that size
+ * on some platforms the kernel's tty driver in cooked mode begins to lose characters (#4480).
+ *
+ * However, it's preferable to send one logical line to the shell, to prevent the pre-prompt
+ * function from getting executed and the prompt from getting printed multiple times. Especially
+ * executing mc's pre-prompt handler with its kill command multiple times can confuse mc.
+ *
+ * Therefore it's recommended to end lines in a physical newline, but include a logical line
+ * continuation, i.e. "\\\n" or "; \\\n" as appropriate.
  *
  * Also note that some shells support not remembering commands beginning with a space in their
  * history (HISTCONTROL=ignorespace or equivalent). Let's have leading spaces consistently
@@ -1253,12 +1261,12 @@ init_subshell_precmd (void)
      * The following example is a little less fancy (home directory not replaced)
      * and shows the basic workings of our prompt for easier understanding:
      *
-     * " precmd() {"
-     *     " echo \"$USER@$(hostname -s):$PWD\";"
-     *     " pwd >&%d;"
-     *     " kill -STOP $$;"
-     * " };"
-     * " PRECMD=precmd;"
+     * " precmd() { \\\n"
+     *     " echo \"$USER@$(hostname -s):$PWD\"; \\\n"
+     *     " pwd >&%d; \\\n"
+     *     " kill -STOP $$; \\\n"
+     * " }; \\\n"
+     * " PRECMD=precmd; \\\n"
      * " PS1='$($PRECMD)$ '\n",
      *
      * Explanations:
@@ -1278,33 +1286,34 @@ init_subshell_precmd (void)
      *    the fallback version.
      */
     static const char *precmd_fallback =
-        " MC_PS1_SAVED=\"$PS1\";"  // Save custom PS1
-        " precmd() {"
-        "   if [ ! \"${PWD##$HOME}\" ]; then"
-        "     MC_PWD=\"~\";"
-        "   else"
-        "     [ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\";"
-        "   fi;"
-        "   echo \"${MC_PS1_SAVED:-$USER@$(hostname -s):$MC_PWD\\$ }\";"
-        "   pwd >&%d;"
-        "   kill -STOP $$;"
-        " };"
-        " PRECMD=precmd;"
+        " MC_PS1_SAVED=\"$PS1\"; \\\n"  // Save custom PS1
+        " precmd() { \\\n"
+        "   if [ ! \"${PWD##$HOME}\" ]; then \\\n"
+        "     MC_PWD=\"~\"; \\\n"
+        "   else \\\n"
+        "     [ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
+        "\\\n"
+        "   fi; \\\n"
+        "   echo \"${MC_PS1_SAVED:-$USER@$(hostname -s):$MC_PWD\\$ }\"; \\\n"
+        "   pwd >&%d; \\\n"
+        "   kill -STOP $$; \\\n"
+        " }; \\\n"
+        " PRECMD=precmd; \\\n"
         " PS1='$($PRECMD)'\n";
 
     switch (mc_global.shell->type)
     {
     case SHELL_BASH:
         return g_strdup_printf (
-            " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$READLINE_LINE\" >&%d; }\n"
-            " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
+            " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$READLINE_LINE\" >&%d; }; \\\n"
+            " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'; \\\n"
             " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING
-            "\":\"echo $BASH_VERSINFO:$READLINE_POINT >&%d\"'\n"
+            "\":\"echo $BASH_VERSINFO:$READLINE_POINT >&%d\"'; \\\n"
             " if test ${BASH_VERSION%%%%.*} -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> "
-            "/dev/null; then\n"
-            "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' )\n"
-            " else\n"
-            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'\n"
+            "/dev/null; then \\\n"
+            "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' ); \\\n"
+            " else \\\n"
+            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'; \\\n"
             " fi\n",
             command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE],
             subshell_pipe[WRITE]);
@@ -1330,13 +1339,13 @@ init_subshell_precmd (void)
 
     case SHELL_ZSH:
         return g_strdup_printf (
-            " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$BUFFER\" >&%d; }\n"
-            " zle -N mc_print_command_buffer\n"
-            " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
-            " mc_print_cursor_position () { echo $CURSOR >&%d; }\n"
-            " zle -N mc_print_cursor_position\n"
-            " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position\n"
-            " _mc_precmd() { pwd >&%d; kill -STOP $$; }\n"
+            " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$BUFFER\" >&%d; }; \\\n"
+            " zle -N mc_print_command_buffer; \\\n"
+            " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer; \\\n"
+            " mc_print_cursor_position () { echo $CURSOR >&%d; }; \\\n"
+            " zle -N mc_print_cursor_position; \\\n"
+            " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position; \\\n"
+            " _mc_precmd() { pwd >&%d; kill -STOP $$; }; \\\n"
             " precmd_functions+=(_mc_precmd)\n",
             command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
@@ -1347,14 +1356,14 @@ init_subshell_precmd (void)
                                 tcsh_fifo);
 
     case SHELL_FISH:
-        return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING " 'commandline >&%d';"
-                                " bind \\e" SHELL_CURSOR_KEYBINDING " 'commandline -C >&%d';"
-                                " if not functions -q fish_prompt_mc;"
-                                " functions -e fish_right_prompt;"
-                                " functions -c fish_prompt fish_prompt_mc;"
-                                " end;"
-                                " function fish_prompt;"
-                                " echo \"$PWD\" >&%d; kill -STOP $fish_pid; fish_prompt_mc;"
+        return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING " 'commandline >&%d'; \\\n"
+                                " bind \\e" SHELL_CURSOR_KEYBINDING " 'commandline -C >&%d'; \\\n"
+                                " if not functions -q fish_prompt_mc; \\\n"
+                                " functions -e fish_right_prompt; \\\n"
+                                " functions -c fish_prompt fish_prompt_mc; \\\n"
+                                " end; \\\n"
+                                " function fish_prompt; \\\n"
+                                " echo \"$PWD\" >&%d; kill -STOP $fish_pid; fish_prompt_mc; \\\n"
                                 " end\n",
                                 command_buffer_pipe[WRITE], command_buffer_pipe[WRITE],
                                 subshell_pipe[WRITE]);
