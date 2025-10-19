@@ -1271,6 +1271,7 @@ init_subshell_precmd (void)
             command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_TCSH:
+        // "echo -n" is a workaround against a suspected tcsh bug, see ticket #4120
         return g_strdup_printf ("set echo_style=both; "
                                 "set prompt='%%n@%%m:%%~%%# '; "
                                 "alias precmd 'echo -n;echo $cwd:q >%s; kill -STOP $$'\n",
