@@ -1224,9 +1224,17 @@ pty_open_slave (const char *pty_name)
 /**
  * Set up `precmd' or equivalent for reading the subshell's CWD.
  *
- * Attention! Never forget that these are *one-liners* even though the concatenated
- * substrings contain line breaks and indentation for better understanding of the
- * shell code. It is vital that each one-liner ends with a line feed character ("\n" ).
+ * Attention!
+ *
+ * Physical lines sent to the shell must not be longer than 256 characters, because above that size
+ * on some platforms the kernel's tty driver in cooked mode begins to lose characters (#4480).
+ *
+ * However, it's preferable to send one logical line to the shell, to prevent the pre-prompt
+ * function from getting executed and the prompt from getting printed multiple times. Especially
+ * executing mc's pre-prompt handler with its kill command multiple times can confuse mc.
+ *
+ * Therefore it's recommended to end lines in a physical newline, but include a logical line
+ * continuation, i.e. "\\\n" or "; \\\n" as appropriate.
  *
  * Also note that some shells support not remembering commands beginning with a space in their
  * history (HISTCONTROL=ignorespace or equivalent). Let's have leading spaces consistently
@@ -1254,11 +1262,11 @@ init_subshell_precmd (void)
      * A hop via $MC_PRECMD works because in the sub-subshell MC_PRECMD is undefined (assuming the
      * user did not export this one), thus evaluated to empty string - no damage done.
      */
-    static const char *precmd_fallback = " mc_precmd() {"
-                                         "   pwd >&%d;"
-                                         "   kill -STOP $$;"
-                                         " };"
-                                         " MC_PRECMD=mc_precmd;"
+    static const char *precmd_fallback = " mc_precmd() { \\\n"
+                                         "   pwd >&%d; \\\n"
+                                         "   kill -STOP $$; \\\n"
+                                         " }; \\\n"
+                                         " MC_PRECMD=mc_precmd; \\\n"
                                          " PS1='$($MC_PRECMD)'\"$PS1\"\n";
 
     switch (mc_global.shell->type)
@@ -1269,10 +1277,10 @@ init_subshell_precmd (void)
             "\"$READLINE_POINT\" \"$READLINE_LINE\" >&%d; }\n"
             " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
             " if test $BASH_VERSINFO -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> "
-            "/dev/null; then\n"
-            "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' )\n"
-            " else\n"
-            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'\n"
+            "/dev/null; then \\\n"
+            "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' ); \\\n"
+            " else \\\n"
+            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'; \\\n"
             " fi\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
 
@@ -1293,10 +1301,10 @@ init_subshell_precmd (void)
     case SHELL_ZSH:
         return g_strdup_printf (
             " mc_print_command_buffer () { printf '%%s\\n%%s\\000' \"$CURSOR\" \"$BUFFER\" "
-            ">&%d; }\n"
-            " zle -N mc_print_command_buffer\n"
-            " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
-            " _mc_precmd() { pwd>&%d; kill -STOP $$; }\n"
+            ">&%d; }; \\\n"
+            " zle -N mc_print_command_buffer; \\\n"
+            " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer; \\\n"
+            " _mc_precmd() { pwd >&%d; kill -STOP $$; }; \\\n"
             " precmd_functions+=(_mc_precmd)\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
@@ -1307,16 +1315,17 @@ init_subshell_precmd (void)
                                 tcsh_fifo);
 
     case SHELL_FISH:
-        return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING
-                                " \"begin; commandline -C; commandline; printf '\\000'; end >&%d\";"
-                                " if not functions -q fish_prompt_mc;"
-                                " functions -e fish_right_prompt;"
-                                " functions -c fish_prompt fish_prompt_mc;"
-                                " end;"
-                                " function fish_prompt;"
-                                " echo \"$PWD\" >&%d; kill -STOP $fish_pid; fish_prompt_mc;"
-                                " end\n",
-                                command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
+        return g_strdup_printf (
+            " bind \\e" SHELL_BUFFER_KEYBINDING
+            " \"begin; commandline -C; commandline; printf '\\000'; end >&%d\"; \\\n"
+            " if not functions -q fish_prompt_mc; \\\n"
+            " functions -e fish_right_prompt; \\\n"
+            " functions -c fish_prompt fish_prompt_mc; \\\n"
+            " end; \\\n"
+            " function fish_prompt; \\\n"
+            " echo \"$PWD\" >&%d; kill -STOP $fish_pid; fish_prompt_mc; \\\n"
+            " end\n",
+            command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
     default:
         fprintf (stderr, "subshell: unknown shell type (%u), aborting!\r\n", mc_global.shell->type);
         exit (EXIT_FAILURE);
