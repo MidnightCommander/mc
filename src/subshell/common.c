@@ -1273,7 +1273,7 @@ init_subshell_precmd (void)
     case SHELL_TCSH:
         return g_strdup_printf ("set echo_style=both; "
                                 "set prompt='%%n@%%m:%%~%%# '; "
-                                "alias precmd 'echo -n;echo $cwd:q >>%s; kill -STOP $$'\n",
+                                "alias precmd 'echo -n;echo $cwd:q >%s; kill -STOP $$'\n",
                                 tcsh_fifo);
 
     case SHELL_FISH:
