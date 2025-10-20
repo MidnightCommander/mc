@@ -6,9 +6,10 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	@CHECK_CFLAGS@
 
-LIBS = @CHECK_LIBS@ \
+LDADD = \
 	$(top_builddir)/src/libinternal.la \
-	$(top_builddir)/lib/libmc.la
+	$(top_builddir)/lib/libmc.la \
+	@CHECK_LIBS@
 
 EXTRA_DIST = \
 	fixtures/skins/dark.ini \
