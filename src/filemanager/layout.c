@@ -974,7 +974,6 @@ setup_cmdline (void)
     const WRect *r = &mw->rect;
     int prompt_width;
     int y;
-    char *tmp_prompt = (char *) mc_prompt;
 
     if (!command_prompt)
         return;
@@ -984,14 +983,16 @@ setup_cmdline (void)
     {
         // Workaround: avoid crash on FreeBSD (see ticket #4213 for details)
         if (subshell_prompt != NULL)
-            tmp_prompt = g_string_free (subshell_prompt, FALSE);
-        else
-            tmp_prompt = g_strdup (mc_prompt);
-        (void) strip_ctrl_codes (tmp_prompt);
+        {
+            g_free (mc_prompt);
+            mc_prompt = g_strndup (subshell_prompt->str, subshell_prompt->len);
+        }
+
+        (void) strip_ctrl_codes (mc_prompt);
     }
 #endif
 
-    prompt_width = str_term_width1 (tmp_prompt);
+    prompt_width = str_term_width1 (mc_prompt);
 
     // Check for prompts too big
     if (r->cols > 8 && prompt_width > r->cols - 8)
@@ -999,17 +1000,9 @@ setup_cmdline (void)
         int prompt_len;
 
         prompt_width = r->cols - 8;
-        prompt_len = str_offset_to_pos (tmp_prompt, prompt_width);
-        tmp_prompt[prompt_len] = '\0';
+        prompt_len = str_offset_to_pos (mc_prompt, prompt_width);
+        mc_prompt[prompt_len] = '\0';
     }
-
-#ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell)
-    {
-        subshell_prompt = g_string_new_take (tmp_prompt);
-        mc_prompt = subshell_prompt->str;
-    }
-#endif
 
     y = r->lines - 1 - (mc_global.keybar_visible ? 1 : 0);
 
