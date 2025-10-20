@@ -7,9 +7,10 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/lib/vfs \
 	@CHECK_CFLAGS@
 
-LIBS = @CHECK_LIBS@ \
+LDADD = \
 	$(top_builddir)/src/libinternal.la \
-	$(top_builddir)/lib/libmc.la
+	$(top_builddir)/lib/libmc.la \
+	@CHECK_LIBS@
 
 EXTRA_DIST = \
 	data/aix_list.input \
