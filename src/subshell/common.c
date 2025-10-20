@@ -542,7 +542,11 @@ synchronize (void)
 
     // Wait until the subshell has stopped
     while (subshell_alive && !subshell_stopped)
-        sigsuspend (&old_mask);
+    {
+        // On macOS, sigsuspend() may fail to restore the original signal mask.
+        // https://openradar.appspot.com/FB18565075
+        pselect (0, NULL, NULL, NULL, NULL, &old_mask);
+    }
 
     if (subshell_state != ACTIVE)
     {
