@@ -11,13 +11,9 @@ EXTRA_DIST = mc.charsets.in
 
 CLEANFILES = mc.charsets
 
-LIBS = @CHECK_LIBS@ \
-	$(top_builddir)/lib/libmc.la
-
-if ENABLE_MCLIB
-LIBS += $(GLIB_LIBS) \
-	@E2P_LIBS@
-endif
+LDADD = \
+	$(top_builddir)/lib/libmc.la \
+	@CHECK_LIBS@
 
 TESTS = \
 	canonicalize_pathname \
