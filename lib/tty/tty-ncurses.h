@@ -27,7 +27,7 @@
 #endif
 
 /* do not draw shadows if NCurses is built with --disable-widec */
-#if defined(NCURSES_WIDECHAR) && NCURSES_WIDECHAR
+#if defined(NCURSES_WIDECHAR) && (NCURSES_WIDECHAR - 0 < 1)
 #define ENABLE_SHADOWS 1
 #endif
 
