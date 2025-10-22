@@ -5,8 +5,9 @@
 #ifndef MC__KEY_H
 #define MC__KEY_H
 
-#include "lib/global.h"  // <glib.h>
-#include "tty.h"         // KEY_F macro
+#include "lib/global.h"    // <glib.h>
+#include "tty.h"           // KEY_F macro
+#include "lib/terminal.h"  // csi_command_t struct
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
