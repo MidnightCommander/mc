@@ -1082,7 +1082,7 @@ correct_key_code (int code)
      */
     if (c == '\b')
     {
-        // Special case for backspase ('\b' < 32)
+        // Special case for backspace ('\b' < 32)
         c = KEY_BACKSPACE;
         mod &= ~KEY_M_CTRL;
     }
