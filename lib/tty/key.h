@@ -5,8 +5,9 @@
 #ifndef MC__KEY_H
 #define MC__KEY_H
 
-#include "lib/global.h"  // <glib.h>
-#include "tty.h"         // KEY_F macro
+#include "lib/global.h"    // <glib.h>
+#include "tty.h"           // KEY_F macro
+#include "lib/terminal.h"  // csi_command_t struct
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -98,6 +99,9 @@ void load_xtra_key_defines (void);
 
 /* Learn a single key */
 char *learn_key (void);
+
+/* Parse Kitty keyboard protocol key sequence */
+int parse_kitty (csi_command_t csi);
 
 /* Returns a key code (interpreted) */
 int get_key_code (int nodelay);
