@@ -1516,13 +1516,13 @@ clear_cwd_pipe (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
+do_subshell_chdir (const vfs_path_t *vpath, gboolean force, gboolean update_prompt)
 {
     char *pcwd;
 
     pcwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_RECODE);
 
-    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
+    if (!force && !(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
         /* We have to repaint the subshell prompt if we read it from
          * the main program.  Please note that in the code after this
@@ -1662,6 +1662,8 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
 void
 init_subshell (void)
 {
+    vfs_path_t *vfs_subshell_cwd;
+
     // This must be remembered across calls to init_subshell()
     static char pty_name[BUF_SMALL];
 
@@ -1796,6 +1798,13 @@ init_subshell (void)
      * buffer function to time out every time they try to close the subshell. */
     if (use_persistent_buffer && !read_command_line_buffer (TRUE))
         use_persistent_buffer = FALSE;
+
+    /* Force an initial `cd` command, even if the subshell is already in the target directory.
+     * Testing the persistent command feature might have read and discarded the prompt. Just get
+     * a new one printed. See #4784#issuecomment-3435834623. */
+    vfs_subshell_cwd = vfs_path_from_str (subshell_cwd);
+    do_subshell_chdir (vfs_subshell_cwd, TRUE, FALSE);
+    vfs_path_free (vfs_subshell_cwd, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1808,7 +1817,7 @@ invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
 
     // Make the subshell change to MC's working directory
     if (new_dir_vpath != NULL)
-        do_subshell_chdir (subshell_get_cwd (), TRUE);
+        do_subshell_chdir (subshell_get_cwd (), FALSE, TRUE);
 
     if (command == NULL)  // The user has done "C-o" from MC
     {
@@ -2049,7 +2058,7 @@ void
 subshell_chdir (const vfs_path_t *vpath)
 {
     if (mc_global.tty.use_subshell && vfs_current_is_local ())
-        do_subshell_chdir (vpath, FALSE);
+        do_subshell_chdir (vpath, FALSE, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
