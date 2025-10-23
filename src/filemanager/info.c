@@ -95,10 +95,10 @@ info_box (WInfo *info)
     tty_printf (" %s ", title);
 
     widget_gotoyx (w, 2, 0);
-    tty_print_alt_char (ACS_LTEE, FALSE);
+    tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
     widget_gotoyx (w, 2, w->rect.cols - 1);
-    tty_print_alt_char (ACS_RTEE, FALSE);
-    tty_draw_hline (w->rect.y + 2, w->rect.x + 1, ACS_HLINE, w->rect.cols - 2);
+    tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
+    tty_draw_hline (w->rect.y + 2, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ], w->rect.cols - 2);
 }
 
 /* --------------------------------------------------------------------------------------------- */
