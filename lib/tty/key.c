@@ -1167,26 +1167,6 @@ correct_key_code (int code)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-getch_with_timeout (unsigned int delay_us)
-{
-    fd_set Read_FD_Set;
-    int c;
-    struct timeval time_out;
-
-    time_out.tv_sec = delay_us / G_USEC_PER_SEC;
-    time_out.tv_usec = delay_us % G_USEC_PER_SEC;
-    tty_nodelay (TRUE);
-    FD_ZERO (&Read_FD_Set);
-    FD_SET (input_fd, &Read_FD_Set);
-    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
-    c = tty_lowlevel_getch ();
-    tty_nodelay (FALSE);
-    return c;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 learn_store_key (GString *buffer, int c)
 {
@@ -2135,6 +2115,26 @@ tty_getch (void)
     while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE)
         ;
     return key;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+getch_with_timeout (unsigned int delay_us)
+{
+    fd_set Read_FD_Set;
+    int c;
+    struct timeval time_out;
+
+    time_out.tv_sec = delay_us / G_USEC_PER_SEC;
+    time_out.tv_usec = delay_us % G_USEC_PER_SEC;
+    tty_nodelay (TRUE);
+    FD_ZERO (&Read_FD_Set);
+    FD_SET (input_fd, &Read_FD_Set);
+    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
+    c = tty_lowlevel_getch ();
+    tty_nodelay (FALSE);
+    return c;
 }
 
 /* --------------------------------------------------------------------------------------------- */

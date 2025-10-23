@@ -51,6 +51,7 @@ terminal_SOURCES = \
 
 tty_SOURCES = \
 	tty.c
+tty_LDADD = $(SLANG_LIBS)
 
 utilunix__mc_pstream_get_string_SOURCES = \
 	utilunix__mc_pstream_get_string.c
