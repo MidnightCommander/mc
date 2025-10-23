@@ -4,11 +4,8 @@ SUBDIRS = misc
 
 AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
-LIBS = $(top_builddir)/lib/libmc.la
-
-if ENABLE_MCLIB
-LIBS += $(GLIB_LIBS)
-endif
+LDADD = \
+	$(top_builddir)/lib/libmc.la
 
 # Programs/scripts to build on 'make check'.
 check_PROGRAMS = mc_parse_ls_l
