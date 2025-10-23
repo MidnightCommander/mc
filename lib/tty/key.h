@@ -80,6 +80,7 @@ char *tty_keycode_to_keyname (const int keycode);
 int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);
 gboolean is_idle (void);
 int tty_getch (void);
+MC_MOCKABLE int getch_with_timeout (unsigned int delay_us);
 
 /* While waiting for input, the program can select on more than one file */
 typedef int (*select_fn) (int fd, void *info);
