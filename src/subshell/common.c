@@ -1283,7 +1283,7 @@ init_subshell_precmd (void)
                                 "functions -e fish_right_prompt;"
                                 "functions -c fish_prompt fish_prompt_mc; end;"
                                 "function fish_prompt;"
-                                "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP $fish_pid; end\n",
+                                "echo \"$PWD\">&%d; kill -STOP $fish_pid; fish_prompt_mc; end\n",
                                 command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
     default:
         fprintf (stderr, "subshell: unknown shell type (%u), aborting!\r\n", mc_global.shell->type);
