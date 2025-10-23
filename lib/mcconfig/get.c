@@ -120,6 +120,48 @@ mc_config_get_string (mc_config_t *mc_config, const gchar *group, const gchar *p
 
 /* --------------------------------------------------------------------------------------------- */
 
+// like mc_config_get_string, but fail (use default) if can't be fully converted to the target
+// charset
+gchar *
+mc_config_get_string_strict (mc_config_t *mc_config, const gchar *group, const gchar *param,
+                             const gchar *def)
+{
+    GIConv conv;
+    GString *buffer;
+    gchar *ret;
+    estr_t conv_res;
+
+    ret = mc_config_get_string_raw (mc_config, group, param, def);
+
+    if (!g_utf8_validate (ret, -1, NULL))
+    {
+        g_free (ret);
+        return g_strdup (def);
+    }
+
+    if (mc_global.utf8_display)
+        return ret;
+
+    conv = str_crt_conv_from ("UTF-8");
+    if (conv == INVALID_CONV)
+        return ret;
+
+    buffer = g_string_new ("");
+    conv_res = str_convert (conv, ret, buffer);
+    g_free (ret);
+    str_close_conv (conv);
+
+    if (conv_res != ESTR_SUCCESS)
+    {
+        g_string_free (buffer, TRUE);
+        return g_strdup (def);
+    }
+
+    return g_string_free (buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 gchar *
 mc_config_get_string_raw (mc_config_t *mc_config, const gchar *group, const gchar *param,
                           const gchar *def)
