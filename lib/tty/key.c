@@ -1343,30 +1343,113 @@ lookup_keycode (const int code, int *idx)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-/* This has to be called before init_slang or whatever routine
-   calls any define_sequence */
-
-int
-getch_with_timeout (unsigned int delay_us)
+/**
+ * Check for Kitty Keyboard Protocol including backward compatibility sequences:
+ *
+ * CSI parameters [u~ABCDEFHPQS]
+ *
+ * https://sw.kovidgoyal.net/kitty/keyboard-protocol/
+ *
+ * Examples:
+ *
+ * \E[2~ or \E[2;1~ -> KEY_IC
+ * \E[1;2A -> KEY_M_SHIFT | KEY_UP
+ * \E[13;6u -> KEY_M_CTRL | KEY_M_SHIFT | '\n'
+ * \E[111;5u\E[57421;5:2u -> XCTRL(KEY_M_CTRL | 'o'), KEY_M_CTRL | KEY_PPAGE
+ * \E[44:63;132u -> KEY_M_ALT | '?' (on Czech keyboard, with Num Lock on)
+ */
+static int
+parse_kitty (csi_command_t csi)
 {
-    fd_set Read_FD_Set;
+    int modifiers;
     int c;
-    struct timeval time_out;
+    gchar utf8char[MB_LEN_MAX + 1];
 
-    time_out.tv_sec = delay_us / G_USEC_PER_SEC;
-    time_out.tv_usec = delay_us % G_USEC_PER_SEC;
-    tty_nodelay (TRUE);
-    FD_ZERO (&Read_FD_Set);
-    FD_SET (input_fd, &Read_FD_Set);
-    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
-    c = tty_lowlevel_getch ();
-    tty_nodelay (FALSE);
+    if (!((csi.final_byte == 'u' && csi.param_count >= 1)
+          || (csi.final_byte == '~' && csi.param_count >= 1)
+          || (csi.final_byte >= 'A' && csi.final_byte <= 'F') || (csi.final_byte == 'H')
+          || (csi.final_byte >= 'P' && csi.final_byte <= 'S')))
+        return -1;
+
+    // Private mode is used for reporting protocol presence and mode from terminal
+    // (CSI ? flags u). Currently we don't need this info so we don't process it
+    if (csi.private_mode != 0)
+        return -1;
+
+    // Retrieve the modifier bits
+    if (csi.param_count >= 2)
+        modifiers = ((csi.params[1][0] - 1) << 12) & KEY_M_MASK;
+    else
+        modifiers = 0;
+
+    // Zero parameters are allowed. In that case, assume 1 as the default
+    if (csi.param_count == 0)
+        csi.params[0][0] = 1;
+
+    // Check for non-literal keys using a predefined table
+    for (int j = 0; kitty_key_defines[j].code != 0; j++)
+    {
+        if (kitty_key_defines[j].kitty_code == csi.params[0][0]
+            && kitty_key_defines[j].final_byte == csi.final_byte)
+        {
+            c = kitty_key_defines[j].code;
+            if (c == -1)
+                return -1;
+            c |= modifiers;
+
+            return c;
+        }
+    }
+
+    // All possible keys (except for a few backward compatibility exceptions) are
+    // defined in the Unicode Basic Multilingual Plane Private Use Area. Discard
+    // unknown ones
+    if (csi.params[0][0] >= 0xE000 && csi.params[0][0] <= 0xF8FF)
+        return -1;
+
+    // Translate shifted chars so command line input works
+    if (csi.params[0][1])
+    {
+        c = csi.params[0][1];
+        modifiers &= ~KEY_M_SHIFT;
+    }
+    else
+    {
+        c = csi.params[0][0];
+        if ((csi.params[0][2] || (c >= '0' && c <= '9')))
+            modifiers &= ~KEY_M_SHIFT;
+    }
+
+    // Check if it is a non-Basic Latin Unicode character. If so, convert it to UTF-8
+    // and return the remaining bytes into the input queue.
+    // Note that we ignore modifiers, because the are not applicable here.
+    if (c >= 0x80)
+    {
+        // Unicode char
+        int utflen = g_unichar_to_utf8 (c, (gchar *) &utf8char);
+
+        c = utf8char[0] & 0xFF;
+        for (int j = 1; j < utflen; j++)
+            push_char (utf8char[j] & 0xFF);
+
+        pending_keys = seq_buffer;
+        return c;
+    }
+
+    // Mask the resulting value with 0x1F if the CTRL modifier is set
+    if ((modifiers & KEY_M_CTRL) && (c == ' ' || (c >= 0x40 && c <= 0x7e)))
+        c = XCTRL (c);
+
+    c |= modifiers;
+
     return c;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/* This has to be called before init_slang or whatever routine
+   calls any define_sequence */
 
 void
 init_key (void)
@@ -1757,121 +1840,11 @@ is_idle (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Check for Kitty Keyboard Protocol including backward compatibility sequences:
- *
- * CSI parameters [u~ABCDEFHPQS]
- *
- * https://sw.kovidgoyal.net/kitty/keyboard-protocol/
- *
- * Examples:
- *
- * \E[2~ or \E[2;1~ -> KEY_IC
- * \E[1;2A -> KEY_M_SHIFT | KEY_UP
- * \E[13;6u -> KEY_M_CTRL | KEY_M_SHIFT | '\n'
- * \E[111;5u\E[57421;5:2u -> XCTRL(KEY_M_CTRL | 'o'), KEY_M_CTRL | KEY_PPAGE
- * \E[44:63;132u -> KEY_M_ALT | '?' (on Czech keyboard, with Num Lock on)
- */
-int
-parse_kitty (csi_command_t csi)
-{
-    int modifiers;
-    int c;
-    gchar utf8char[MB_LEN_MAX + 1];
-
-    if ((csi.final_byte == 'u' && csi.param_count >= 1)
-        || (csi.final_byte == '~' && csi.param_count >= 1)
-        || (csi.final_byte >= 'A' && csi.final_byte <= 'F') || (csi.final_byte == 'H')
-        || (csi.final_byte >= 'P' && csi.final_byte <= 'S'))
-    {
-        // Private mode is used for reporting protocol presence and mode from terminal
-        // (CSI ? flags u). Currently we don't need this info so we don't process it
-        if (csi.private_mode != 0)
-            return -1;
-
-        // Retrieve the modifier bits
-        if (csi.param_count >= 2)
-            modifiers = ((csi.params[1][0] - 1) << 12) & KEY_M_MASK;
-        else
-            modifiers = 0;
-
-        // Zero parameters are allowed. In that case, assume 1 as the default
-        if (csi.param_count == 0)
-            csi.params[0][0] = 1;
-
-        // Check for non-literal keys using a predefined table
-        for (int j = 0; kitty_key_defines[j].code != 0; j++)
-        {
-            if (kitty_key_defines[j].kitty_code == csi.params[0][0]
-                && kitty_key_defines[j].final_byte == csi.final_byte)
-            {
-                c = kitty_key_defines[j].code;
-                if (c == -1)
-                    return -1;
-                c |= modifiers;
-
-                return c;
-            }
-        }
-
-        // All possible keys (except for a few backward compatibility exceptions) are
-        // defined in the Unicode Basic Multilingual Plane Private Use Area. Discard
-        // unknown ones
-        if (csi.params[0][0] >= 0xE000 && csi.params[0][0] <= 0xF8FF)
-            return -1;
-
-        // Translate shifted chars so command line input works
-        if (csi.params[0][1])
-        {
-            c = csi.params[0][1];
-            if (modifiers & KEY_M_SHIFT)
-                modifiers &= ~KEY_M_SHIFT;
-        }
-        else
-        {
-            c = csi.params[0][0];
-            if ((csi.params[0][2] || (c >= '0' && c <= '9')) && modifiers & KEY_M_SHIFT)
-                modifiers &= ~KEY_M_SHIFT;
-        }
-
-        // Check if it is a non-Basic Latin Unicode character. If so, convert it to UTF-8
-        // and return the remaining bytes into the input queue.
-        // For non-Basic Latin characters, ignore modifiers.
-        if (c >= 0x80)
-        {
-            // Unicode char
-            int utflen = g_unichar_to_utf8 (c, (gchar *) &utf8char);
-
-            c = utf8char[0] & 0xFF;
-            for (int j = 1; j < utflen; j++)
-                push_char (utf8char[j] & 0xFF);
-
-            pending_keys = seq_buffer;
-            return c;
-        }
-
-        // Mask the resulting value with 0x1F if the CTRL modifier is set
-        if ((modifiers & KEY_M_CTRL) && (c == ' ' || (c >= 0x40 && c <= 0x7e)))
-            c = XCTRL (c);
-
-        c |= modifiers;
-
-        return c;
-    }
-
-    return -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 int
 get_key_code (int no_delay)
 {
     int c;
-    int i;
-    csi_command_t csi;
-    // Must have same length as seq_buffer
-    char seq_char_buffer[SEQ_BUFFER_LEN];
     static key_def *this = NULL, *parent;
     static gint64 esc_time = -1;
     static int lastnodelay = -1;
@@ -1901,6 +1874,7 @@ pend_send:
          * in, and discard it completely if it is unknown. Leave any keys following these sequences
          * in stdin.
          */
+
         if (pending_keys[0] == ESC_CHAR && pending_keys[1] == ESC_CHAR)
             pending_keys++;
 
@@ -1915,16 +1889,21 @@ pend_send:
                 push_char (c);
             }
 
-            for (i = 0; pending_keys[i] != '\0'; i++)
-                seq_char_buffer[i] = pending_keys[i];
-            seq_char_buffer[i] = '\0';
+            char seq_char_buffer[SEQ_BUFFER_LEN];  // Must have same length as seq_buffer
+            int seqlen;
+
+            for (seqlen = 0; pending_keys[seqlen] != '\0'; seqlen++)
+                seq_char_buffer[seqlen] = pending_keys[seqlen];
+            seq_char_buffer[seqlen] = '\0';
 
             pending_keys = seq_append = NULL;
 
             if (seq_char_buffer[1] == '[')  // CSI
             {
+                csi_command_t csi;
+
                 const char *seq_char_buffer_ptr = &seq_char_buffer[2];
-                if (!parse_csi (&csi, &seq_char_buffer_ptr, &seq_char_buffer[i]))
+                if (!parse_csi (&csi, &seq_char_buffer_ptr, &seq_char_buffer[seqlen]))
                     return -1;
 
                 // Check for Kitty Keyboard Protocol sequence (or any common backwards compatible
@@ -1937,6 +1916,7 @@ pend_send:
             return -1;
         }
 
+        // Most terminals indicate the Alt key by prepending <Esc> to the character sent
         c = *pending_keys++;
         while (c == ESC_CHAR)
             c = ALT (*pending_keys++);
@@ -2307,6 +2287,26 @@ tty_getch (void)
     while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE)
         ;
     return key;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+getch_with_timeout (unsigned int delay_us)
+{
+    fd_set Read_FD_Set;
+    int c;
+    struct timeval time_out;
+
+    time_out.tv_sec = delay_us / G_USEC_PER_SEC;
+    time_out.tv_usec = delay_us % G_USEC_PER_SEC;
+    tty_nodelay (TRUE);
+    FD_ZERO (&Read_FD_Set);
+    FD_SET (input_fd, &Read_FD_Set);
+    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
+    c = tty_lowlevel_getch ();
+    tty_nodelay (FALSE);
+    return c;
 }
 
 /* --------------------------------------------------------------------------------------------- */

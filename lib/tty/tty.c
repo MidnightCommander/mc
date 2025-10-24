@@ -442,10 +442,10 @@ tty_kitty (gboolean set)
         // 1 = Disambiguate escape codes
         // 4 = Report alternate keys (required for detecting Alt+Shift+key)
         // 8 = Report all keys as escape codes (required for distinguishing keypad keys [+-*])
-        tty_print_raw (ESC_STR "[>13u");
+        tty_print_string_raw (ESC_STR "[>13u");
     }
     else
-        tty_print_raw (ESC_STR "[<u");
+        tty_print_string_raw (ESC_STR "[<u");
 }
 
 /* --------------------------------------------------------------------------------------------- */

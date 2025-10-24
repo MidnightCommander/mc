@@ -149,9 +149,6 @@ parse_csi (csi_command_t *out, const char **sptr, const char *end)
     if (c < 0x40 || c > 0x7E)  // final byte
         goto invalid_sequence;
 
-    if (out != NULL)
-        out->final_byte = c;
-
     ++s;
     ok = TRUE;
 
@@ -159,6 +156,7 @@ parse_csi (csi_command_t *out, const char **sptr, const char *end)
     {
         out->private_mode = private_mode;
         out->param_count = param_count;
+        out->final_byte = c;
     }
 
 invalid_sequence:
