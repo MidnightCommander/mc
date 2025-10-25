@@ -38,6 +38,7 @@
 #include "lib/global.h"
 #include "lib/util.h"  // whitespace()
 
+#include "tty.h"
 #include "tty-slang.h"
 #include "color.h"  // variables
 #include "color-internal.h"
@@ -61,7 +62,10 @@ has_colors (gboolean disable, gboolean force)
 {
     mc_tty_color_disable = disable;
 
-    if (force || (getenv ("COLORTERM") != NULL))
+    // S-Lang enables color if the setaf/setab/setf/setb terminfo capabilities are set or
+    // the COLORTERM environment variable is set
+
+    if (force)
         SLtt_Use_Ansi_Colors = 1;
 
     if (!mc_tty_color_disable)
@@ -215,12 +219,19 @@ gboolean
 tty_use_256colors (GError **error)
 {
     gboolean ret;
+    int colors, overlay_colors;
 
-    ret = (SLtt_Use_Ansi_Colors && SLtt_tgetnum ((char *) "Co") == 256);
+    colors = tty_tigetnum ("colors", "Co");
+    overlay_colors = tty_tigetnum ("CO", NULL);
+
+    ret = (SLtt_Use_Ansi_Colors && (colors == 256 || (colors > 256 && overlay_colors == 256)));
 
     if (!ret)
         g_set_error (error, MC_ERROR, -1,
-                     _ ("Your terminal doesn't even seem to support 256 colors."));
+                     _ ("\nIf your terminal supports 256 colors, you need to set your TERM\n"
+                        "environment variable to match your terminal, perhaps using\n"
+                        "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+                        "command to list all available variants on your system.\n"));
 
     return ret;
 }
@@ -245,11 +256,15 @@ tty_use_truecolors (GError **error)
     /* Duplicate slang's check so that we can pop up an error message
        rather than silently use wrong colors. */
     colorterm = getenv ("COLORTERM");
-    if (colorterm == NULL
-        || (strcmp (colorterm, "truecolor") != 0 && strcmp (colorterm, "24bit") != 0))
+    if (!((tty_tigetflag ("RGB", NULL) && tty_tigetnum ("colors", "Co") == COLORS_TRUECOLOR)
+          || (colorterm != NULL
+              && (strcmp (colorterm, "truecolor") == 0 || strcmp (colorterm, "24bit") == 0))))
     {
         g_set_error (error, MC_ERROR, -1,
-                     _ ("Set COLORTERM=truecolor if your terminal really supports true colors."));
+                     _ ("\nIf your terminal supports true colors, you need to set your TERM\n"
+                        "environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+                        "Use the 'toe -a' command to list all available variants on your system.\n"
+                        "Alternatively, you can set COLORTERM=truecolor.\n"));
         return FALSE;
     }
 

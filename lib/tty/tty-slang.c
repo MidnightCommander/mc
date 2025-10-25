@@ -756,10 +756,34 @@ tty_printf (const char *fmt, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
-tty_tgetstr (const char *cap)
+/* Although S-Lang uses the terminfo database by default (through its own parser), it expects
+ * termcap codes to access standard capabilities. Nevertheless, it can also access extended
+ * terminfo capabilities (including those that have no termcap equivalent, i.e., whose names
+ * are longer than two characters).
+ */
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+tty_tigetflag (const char *terminfo_cap, const char *termcap_cap)
 {
-    return SLtt_tgetstr ((SLFUTURE_CONST char *) cap);
+    return SLtt_tgetflag ((SLFUTURE_CONST char *) (termcap_cap ? termcap_cap : terminfo_cap));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+tty_tigetnum (const char *terminfo_cap, const char *termcap_cap)
+{
+    return SLtt_tgetnum ((SLFUTURE_CONST char *) (termcap_cap ? termcap_cap : terminfo_cap));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+tty_tigetstr (const char *terminfo_cap, const char *termcap_cap)
+{
+    return SLtt_tgetstr ((SLFUTURE_CONST char *) (termcap_cap ? termcap_cap : terminfo_cap));
 }
 
 /* --------------------------------------------------------------------------------------------- */

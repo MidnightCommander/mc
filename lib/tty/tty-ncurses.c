@@ -739,12 +739,26 @@ tty_printf (const char *fmt, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
-tty_tgetstr (const char *cap)
+int
+tty_tigetflag (const char *terminfo_cap, MC_UNUSED const char *termcap_cap)
 {
-    char *unused = NULL;
+    return tigetflag ((NCURSES_CONST char *) terminfo_cap);
+}
 
-    return tgetstr ((NCURSES_CONST char *) cap, &unused);
+/* --------------------------------------------------------------------------------------------- */
+
+int
+tty_tigetnum (const char *terminfo_cap, MC_UNUSED const char *termcap_cap)
+{
+    return tigetnum ((NCURSES_CONST char *) terminfo_cap);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+tty_tigetstr (const char *terminfo_cap, MC_UNUSED const char *termcap_cap)
+{
+    return tigetstr ((NCURSES_CONST char *) terminfo_cap);
 }
 
 /* --------------------------------------------------------------------------------------------- */

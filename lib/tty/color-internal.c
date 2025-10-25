@@ -155,7 +155,7 @@ parse_256_or_true_color_name (const char *color_name)
                 i = (h[0] << 20) | (h[0] << 16) | (h[1] << 12) | (h[1] << 8) | (h[2] << 4) | h[2];
             else
                 i = (h[0] << 20) | (h[1] << 16) | (h[2] << 12) | (h[3] << 8) | (h[4] << 4) | h[5];
-            return (1 << 24) | i;
+            return FLAG_TRUECOLOR | i;
         }
     }
 
@@ -178,7 +178,7 @@ tty_color_get_name_by_index (int idx)
             return color_table[i].name;
 
     // Create and return the strings in "colorNNN" or "#rrggbb" format.
-    if ((idx >= 16 && idx < 256) || (idx & (1 << 24)) != 0)
+    if ((idx >= 16 && idx < 256) || (idx & FLAG_TRUECOLOR) != 0)
     {
         char name[9];
 

@@ -18,6 +18,9 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define FLAG_TRUECOLOR   (1 << 24)
+#define COLORS_TRUECOLOR (1 << 24)
+
 /*** enums ***************************************************************************************/
 
 typedef enum
