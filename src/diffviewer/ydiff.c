@@ -2774,18 +2774,18 @@ dview_update (WDiff *dview)
             if (xwidth < width1 - 1)
             {
                 tty_gotoyx (1, xwidth);
-                tty_print_alt_char (ACS_TTEE, FALSE);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE]);
                 tty_gotoyx (height, xwidth);
-                tty_print_alt_char (ACS_BTEE, FALSE);
-                tty_draw_vline (2, xwidth, ACS_VLINE, height - 2);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE]);
+                tty_draw_vline (2, xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
             }
             if (xwidth < width2 - 1)
             {
                 tty_gotoyx (1, width1 + xwidth);
-                tty_print_alt_char (ACS_TTEE, FALSE);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE]);
                 tty_gotoyx (height, width1 + xwidth);
-                tty_print_alt_char (ACS_BTEE, FALSE);
-                tty_draw_vline (2, width1 + xwidth, ACS_VLINE, height - 2);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE]);
+                tty_draw_vline (2, width1 + xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
             }
         }
         dview->new_frame = FALSE;

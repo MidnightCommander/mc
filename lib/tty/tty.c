@@ -63,7 +63,7 @@
 
 /*** global variables ****************************************************************************/
 
-int mc_tty_frm[MC_TTY_FRM_MAX];
+mc_tty_char_t mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -248,7 +248,7 @@ tty_flush_winch (void)
 void
 tty_print_one_hline (gboolean single)
 {
-    tty_print_alt_char (ACS_HLINE, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -256,7 +256,7 @@ tty_print_one_hline (gboolean single)
 void
 tty_print_one_vline (gboolean single)
 {
-    tty_print_alt_char (ACS_VLINE, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -280,13 +280,13 @@ tty_draw_box (int y, int x, int ys, int xs, gboolean single)
     tty_draw_hline (y, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_draw_hline (y2, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_gotoyx (y, x);
-    tty_print_alt_char (ACS_ULCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP]);
     tty_gotoyx (y2, x);
-    tty_print_alt_char (ACS_LLCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM]);
     tty_gotoyx (y, x2);
-    tty_print_alt_char (ACS_URCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP]);
     tty_gotoyx (y2, x2);
-    tty_print_alt_char (ACS_LRCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -327,6 +327,97 @@ mc_tty_normalize_from_utf8 (const char *str)
     str_close_conv (conv);
 
     return g_string_free (buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+mc_tty_char_t
+tty_unicode_to_mc_acs (gunichar c)
+{
+    switch (c)
+    {
+    case 0x2500:  // ─
+        return MC_ACS_HLINE;
+    case 0x2502:  // │
+        return MC_ACS_VLINE;
+    case 0x250C:  // ┌
+        return MC_ACS_ULCORNER;
+    case 0x2510:  // ┐
+        return MC_ACS_URCORNER;
+    case 0x2514:  // └
+        return MC_ACS_LLCORNER;
+    case 0x2518:  // ┘
+        return MC_ACS_LRCORNER;
+    case 0x251C:  // ├
+        return MC_ACS_LTEE;
+    case 0x2524:  // ┤
+        return MC_ACS_RTEE;
+    case 0x252C:  // ┬
+        return MC_ACS_TTEE;
+    case 0x2534:  // ┴
+        return MC_ACS_BTEE;
+    case 0x253C:  // ┼
+        return MC_ACS_PLUS;
+
+    case 0x2550:  // ═
+        return MC_ACS_DBL_HLINE;
+    case 0x2551:  // ║
+        return MC_ACS_DBL_VLINE;
+    case 0x2554:  // ╔
+        return MC_ACS_DBL_ULCORNER;
+    case 0x2557:  // ╗
+        return MC_ACS_DBL_URCORNER;
+    case 0x255A:  // ╚
+        return MC_ACS_DBL_LLCORNER;
+    case 0x255D:  // ╝
+        return MC_ACS_DBL_LRCORNER;
+    case 0x255F:  // ╟
+        return MC_ACS_DBL_LTEE;
+    case 0x2562:  // ╢
+        return MC_ACS_DBL_RTEE;
+    case 0x2564:  // ╤
+        return MC_ACS_DBL_TTEE;
+    case 0x2567:  // ╧
+        return MC_ACS_DBL_BTEE;
+
+    default:
+        return 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+mc_tty_char_t
+tty_mc_acs_map (gunichar c)
+{
+    switch (c)
+    {
+    case 'q':
+        return MC_ACS_HLINE;
+    case 'x':
+        return MC_ACS_VLINE;
+    case 'l':
+        return MC_ACS_ULCORNER;
+    case 'k':
+        return MC_ACS_URCORNER;
+    case 'm':
+        return MC_ACS_LLCORNER;
+    case 'j':
+        return MC_ACS_LRCORNER;
+    case 't':
+        return MC_ACS_LTEE;
+    case 'u':
+        return MC_ACS_RTEE;
+    case 'w':
+        return MC_ACS_TTEE;
+    case 'v':
+        return MC_ACS_BTEE;
+    case 'n':
+        return MC_ACS_PLUS;
+
+    default:
+        return c;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

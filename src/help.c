@@ -563,16 +563,7 @@ help_show (WDialog *h, const char *paint_start)
                     else if (col < HELP_WINDOW_WIDTH)
                     {
                         widget_gotoyx (h, line + 2, col + 2);
-
-                        if ((c == ' ') || (c == '.'))
-                            tty_print_char (c);
-                        else
-#ifndef HAVE_SLANG
-                            tty_print_char (acs_map[c]);
-#else
-                            SLsmg_draw_object (WIDGET (h)->rect.y + line + 2,
-                                               WIDGET (h)->rect.x + col + 2, c);
-#endif
+                        tty_print_char (tty_mc_acs_map (c));
                         col++;
                     }
                 }
