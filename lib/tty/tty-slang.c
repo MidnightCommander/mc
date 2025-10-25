@@ -756,6 +756,22 @@ tty_printf (const char *fmt, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 
+int
+tty_tgetflag (const char *cap)
+{
+    return SLtt_tgetflag ((SLFUTURE_CONST char *) cap);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+tty_tgetnum (const char *cap)
+{
+    return SLtt_tgetnum ((SLFUTURE_CONST char *) cap);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 tty_tgetstr (const char *cap)
 {

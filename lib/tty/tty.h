@@ -63,6 +63,8 @@ typedef enum
 
 extern int mc_tty_frm[];
 
+extern int tty_tgetflag (const char *name);
+extern int tty_tgetnum (const char *name);
 extern char *tty_tgetstr (const char *name);
 
 /*** declarations of public functions ************************************************************/

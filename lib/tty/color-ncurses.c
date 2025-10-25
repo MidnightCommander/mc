@@ -38,6 +38,7 @@
 
 #include "lib/global.h"
 
+#include "tty.h"
 #include "tty-ncurses.h"
 #include "color.h"  // variables
 #include "color-internal.h"
@@ -53,6 +54,7 @@
 /*** file scope variables ************************************************************************/
 
 static GHashTable *mc_tty_color_color_pair_attrs = NULL;
+static int overlay_colors = 0;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -179,23 +181,36 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
         ibg = mc_color_pair->bg;
         attr = mc_color_pair->attr;
 
-        // In legacy color mode, change bright colors into bold
-        if (!tty_use_256colors (NULL) && !tty_use_truecolors (NULL))
+        // Change basic bright colors into bold
+        if (ifg >= 8 && ifg < 16)
         {
-            if (ifg >= 8 && ifg < 16)
-            {
-                ifg &= 0x07;
-                attr |= A_BOLD;
-            }
-
-            if (ibg >= 8 && ibg < 16)
-            {
-                ibg &= 0x07;
-                // attr | = A_BOLD | A_REVERSE ;
-            }
+            ifg &= 0x07;
+            attr |= A_BOLD;
         }
 
-        init_pair (mc_color_pair->pair_index, ifg, ibg);
+        if (ibg >= 8 && ibg < 16)
+        {
+            ibg &= 0x07;
+            // attr | = A_BOLD | A_REVERSE ;
+        }
+
+        // Shady trick: if we don't have the exact color, because it is overlaid by backwards
+        // compatibility indexed values, just borrow one degree of red. The user won't notice :)
+        if (ifg & (1 << 24))
+        {
+            ifg &= ~(1 << 24);
+            if (ifg != 0 && ifg <= overlay_colors)
+                ifg += (1 << 16);
+        }
+
+        if (ibg & (1 << 24))
+        {
+            ibg &= ~(1 << 24);
+            if (ibg != 0 && ibg <= overlay_colors)
+                ibg += (1 << 16);
+        }
+
+        init_extended_pair (mc_color_pair->pair_index, ifg, ibg);
         mc_tty_color_save_attr (mc_color_pair->pair_index, attr);
     }
 }
@@ -231,7 +246,17 @@ tty_use_256colors (GError **error)
 {
     (void) error;
 
-    return (COLORS == 256);
+    if (COLORS != 256 && !(COLORS > 256 && overlay_colors == 256))
+    {
+        g_set_error (error, MC_ERROR, -1,
+                     _ ("\nIf your terminal supports 256 colors, you need to set your TERM\n"
+                        "environment variable to match your terminal, perhaps using\n"
+                        "a *-256color or *-direct256 variant. Use the 'toe' command to list\n"
+                        "all available variants on your system.\n"));
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -239,9 +264,18 @@ tty_use_256colors (GError **error)
 gboolean
 tty_use_truecolors (GError **error)
 {
-    // Not yet supported in ncurses
-    g_set_error (error, MC_ERROR, -1, _ ("True color not supported with ncurses."));
-    return FALSE;
+    if (COLORS != 16777216)
+    {
+        g_set_error (error, MC_ERROR, -1,
+                     _ ("\nIf your terminal supports true colors, you need to set your TERM\n"
+                        "environment variable to a *-direct, *-direct16, or *-direct256 variant.\n"
+                        "Use the 'toe' command to list all available variants on your system.\n"));
+        return FALSE;
+    }
+
+    overlay_colors = tty_tgetnum ("CO");
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
