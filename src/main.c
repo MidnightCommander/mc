@@ -419,7 +419,7 @@ main (int argc, char *argv[])
         enable_bracketed_paste ();
 
         // subshell_prompt is NULL here
-        mc_prompt = (geteuid () == 0) ? "# " : "$ ";
+        mc_prompt = g_strdup ((geteuid () == 0) ? "# " : "$ ");
     }
 
     // Program main loop
@@ -427,6 +427,8 @@ main (int argc, char *argv[])
         exit_code = EXIT_SUCCESS;
     else
         exit_code = do_nc () ? EXIT_SUCCESS : EXIT_FAILURE;
+
+    g_free (mc_prompt);
 
     disable_bracketed_paste ();
 
