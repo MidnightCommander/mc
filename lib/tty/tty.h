@@ -63,7 +63,9 @@ typedef enum
 
 extern int mc_tty_frm[];
 
-extern char *tty_tgetstr (const char *name);
+extern int tty_tigetflag (const char *terminfo_cap, const char *termcap_cap);
+extern int tty_tigetnum (const char *terminfo_cap, const char *termcap_cap);
+extern char *tty_tigetstr (const char *terminfo_cap, const char *termcap_cap);
 
 /*** declarations of public functions ************************************************************/
 
