@@ -3490,9 +3490,13 @@ directory_history_list (WPanel *panel)
         vfs_path_t *s_vpath;
 
         s_vpath = vfs_path_from_str (hd.text);
-        ok = panel_do_cd_int (panel, s_vpath, cd_exact);
+        ok = panel_do_cd (panel, s_vpath, cd_exact);
         if (ok)
-            directory_history_add (panel, panel->cwd_vpath);
+        {
+            // in case of history of other panel, restore current path of VFS
+            if (panel != current_panel)
+                panel_do_cd_int (current_panel, current_panel->cwd_vpath, cd_exact);
+        }
         else
             cd_error_message (hd.text);
         vfs_path_free (s_vpath, TRUE);
