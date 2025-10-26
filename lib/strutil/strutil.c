@@ -316,6 +316,7 @@ str_choose_str_functions (void)
         used_class = str_8bit_init ();
     else
         used_class = str_ascii_init ();
+    used_class.key_collate = alphanum_cmp;
 }
 
 /* --------------------------------------------------------------------------------------------- */
