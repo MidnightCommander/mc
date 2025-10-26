@@ -450,27 +450,49 @@ mc_acs_map (int c)
     switch (c)
     {
     case 'q':
-        return mc_global.utf8_display ? 0x2500 : MC_ACS_HLINE;
+        return mc_global.tty.ugly_line_drawing ? '-'
+            : mc_global.utf8_display           ? 0x2500
+                                               : MC_ACS_HLINE;
     case 'x':
-        return mc_global.utf8_display ? 0x2502 : MC_ACS_VLINE;
+        return mc_global.tty.ugly_line_drawing ? '|'
+            : mc_global.utf8_display           ? 0x2502
+                                               : MC_ACS_VLINE;
     case 'l':
-        return mc_global.utf8_display ? 0x250C : MC_ACS_ULCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x250C
+                                               : MC_ACS_ULCORNER;
     case 'k':
-        return mc_global.utf8_display ? 0x2510 : MC_ACS_URCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x2510
+                                               : MC_ACS_URCORNER;
     case 'm':
-        return mc_global.utf8_display ? 0x2514 : MC_ACS_LLCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x2514
+                                               : MC_ACS_LLCORNER;
     case 'j':
-        return mc_global.utf8_display ? 0x2518 : MC_ACS_LRCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x2518
+                                               : MC_ACS_LRCORNER;
     case 't':
-        return mc_global.utf8_display ? 0x251C : MC_ACS_LTEE;
+        return mc_global.tty.ugly_line_drawing ? '|'
+            : mc_global.utf8_display           ? 0x251C
+                                               : MC_ACS_LTEE;
     case 'u':
-        return mc_global.utf8_display ? 0x2524 : MC_ACS_RTEE;
+        return mc_global.tty.ugly_line_drawing ? '|'
+            : mc_global.utf8_display           ? 0x2524
+                                               : MC_ACS_RTEE;
     case 'w':
-        return mc_global.utf8_display ? 0x252C : MC_ACS_TTEE;
+        return mc_global.tty.ugly_line_drawing ? '-'
+            : mc_global.utf8_display           ? 0x252C
+                                               : MC_ACS_TTEE;
     case 'v':
-        return mc_global.utf8_display ? 0x2534 : MC_ACS_BTEE;
+        return mc_global.tty.ugly_line_drawing ? '-'
+            : mc_global.utf8_display           ? 0x2534
+                                               : MC_ACS_BTEE;
     case 'n':
-        return mc_global.utf8_display ? 0x253C : MC_ACS_PLUS;
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x253C
+                                               : MC_ACS_PLUS;
 
     default:
         return c;
