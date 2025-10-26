@@ -25,6 +25,7 @@
 
 #include <config.h>
 
+#include <assert.h>
 #include <stdlib.h>
 #include <langinfo.h>
 #include <string.h>
@@ -241,6 +242,70 @@ str_test_encoding_class (const char *encoding, const char *const *table)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+alphanum_cmp (const char *l, const char *r, gboolean g)
+{
+    (void) g;
+    int compare_digits = 0;
+
+    while (*l && *r)
+    {
+        if (!compare_digits)
+        {
+            size_t l_spnsz = strcspn (l, "0123456789");
+            size_t r_spnsz = strcspn (r, "0123456789");
+            // if both are number, compare them as numbers
+            if ((r_spnsz == 0) && (l_spnsz == 0))
+            {
+                compare_digits = 1;
+                continue;
+            }
+            if (l_spnsz == 0 || r_spnsz == 0)
+                return l[l_spnsz] - r[r_spnsz];
+
+            int length = l_spnsz > r_spnsz ? r_spnsz : l_spnsz;
+            int res = memcmp (l, r, length);
+            if (res != 0)
+                return res;
+            // strings are equal, continue comparison
+            assert (length > 0);
+            l += length;
+            r += length;
+        }
+        else  // compare_digits
+        {
+            size_t l_spnsz = strspn (l, "0123456789");
+            size_t r_spnsz = strspn (r, "0123456789");
+            assert (l_spnsz > 0);
+            assert (r_spnsz > 0);
+
+            // different number of digits, no need to compare content
+            if (l_spnsz > r_spnsz)
+                return +1;
+            if (l_spnsz < r_spnsz)
+                return -1;
+
+            assert (l_spnsz == r_spnsz);
+            int length = l_spnsz;
+            int res = memcmp (l, r, length);
+            if (res != 0)
+                return res;
+
+            // numbers are equal, continue comparison
+            compare_digits = 0;
+            assert (length > 0);
+            l += length;
+            r += length;
+        }
+    }
+
+    if (*r)
+        return -1;
+    if (*l)
+        return +1;
+    return 0;
+}
 
 static void
 str_choose_str_functions (void)
