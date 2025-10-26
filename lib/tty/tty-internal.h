@@ -7,6 +7,7 @@
 #define MC__TTY_INTERNAL_H
 
 #include "lib/global.h"  // include <glib.h>
+#include "lib/tty/tty.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -33,6 +34,8 @@ extern char *rmcup;
 /* pipe to handle SIGWINCH */
 extern int sigwinch_pipe[2];
 
+extern GHashTable *double_line_map;
+
 /*** declarations of public functions ************************************************************/
 
 void tty_create_winch_pipe (void);
@@ -43,6 +46,10 @@ void tty_init_xterm_support (gboolean is_xterm);
 int tty_lowlevel_getch (void);
 
 void tty_colorize_area (int y, int x, int rows, int cols, int color);
+
+void tty_init_double_line_map (void);
+void tty_destroy_double_line_map (void);
+gunichar tty_double_line_map_lookup (mc_tty_char_t double_line);
 
 /*** inline functions ****************************************************************************/
 

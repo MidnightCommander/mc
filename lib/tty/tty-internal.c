@@ -35,15 +35,19 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"
 
 #include <glib-unix.h>
 
+#include "tty.h"
 #include "tty-internal.h"
 
 /*** global variables ****************************************************************************/
 
 /* pipe to handle SIGWINCH */
 int sigwinch_pipe[2];
+
+GHashTable *double_line_map = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -105,6 +109,93 @@ tty_destroy_winch_pipe (void)
 {
     (void) close (sigwinch_pipe[0]);
     (void) close (sigwinch_pipe[1]);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_init_double_line_map (void)
+{
+    const gunichar double_lines_unicode[] = {
+        0x2550,  // ═
+        0x2551,  // ║
+        0x2554,  // ╔
+        0x2557,  // ╗
+        0x255A,  // ╚
+        0x255D,  // ╝
+        0x255F,  // ╟
+        0x2562,  // ╢
+        0x2564,  // ╤
+        0x2567,  // ╧
+    };
+    gunichar double_lines_local[G_N_ELEMENTS (double_lines_unicode)];
+    gboolean error = FALSE;
+    GIConv conv;
+    GString *buffer;
+    gchar utf8[7];
+    estr_t conv_res;
+
+    if (mc_global.utf8_display)
+        return;
+
+    conv = str_crt_conv_from ("UTF-8");
+    if (conv == INVALID_CONV)
+        return;
+
+    buffer = g_string_new ("");
+    for (unsigned int i = 0; i < G_N_ELEMENTS (double_lines_unicode); i++)
+    {
+        const int utf8len = g_unichar_to_utf8 (double_lines_unicode[i], utf8);
+        utf8[utf8len] = '\0';
+        g_string_assign (buffer, "");
+        conv_res = str_convert (conv, utf8, buffer);
+        if (conv_res != ESTR_SUCCESS)
+        {
+            error = TRUE;
+            break;
+        }
+        double_lines_local[i] = (unsigned char) buffer->str[0];
+    }
+    str_close_conv (conv);
+    g_string_free (buffer, TRUE);
+
+    // Some charsets, e.g. KOI8-U only contain a subset of the double line characters.
+    // We don't want mixed, broken appearance. If any of them are missing from the local charset
+    // then refuse to use all of them.
+    if (error)
+        return;
+
+    // All these characters can be represented in the locale. Create and fill up the hashtable.
+    double_line_map = g_hash_table_new (g_direct_hash, g_direct_equal);
+    for (unsigned int i = 0; i < G_N_ELEMENTS (double_lines_unicode); i++)
+    {
+        g_hash_table_insert (double_line_map,
+                             GINT_TO_POINTER (tty_unicode_to_mc_acs (double_lines_unicode[i])),
+                             GINT_TO_POINTER (double_lines_local[i]));
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_destroy_double_line_map (void)
+{
+    if (!mc_global.utf8_display && double_line_map != NULL)
+        g_hash_table_destroy (double_line_map);
+
+    double_line_map = NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gunichar
+tty_double_line_map_lookup (mc_tty_char_t double_line)
+{
+    if (double_line_map == NULL)
+        return 0;
+
+    void *direct_value = g_hash_table_lookup (double_line_map, GINT_TO_POINTER (double_line));
+    return GPOINTER_TO_INT (direct_value);
 }
 
 /* --------------------------------------------------------------------------------------------- */

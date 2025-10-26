@@ -295,6 +295,13 @@ get_maybe_wacs (mc_tty_char_t c, gboolean *alt_char)
 static int
 get_maybe_acs (mc_tty_char_t c, gboolean *alt_char)
 {
+    const gunichar eight_bit_equiv = tty_double_line_map_lookup (c);
+    if (eight_bit_equiv != 0)
+    {
+        *alt_char = FALSE;
+        return eight_bit_equiv;
+    }
+
     *alt_char = TRUE;
 
     switch (c)
@@ -408,6 +415,8 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     tty_nodelay (FALSE);
 
     tty_setup_sigwinch (sigwinch_handler);
+
+    tty_init_double_line_map ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -416,6 +425,8 @@ void
 tty_shutdown (void)
 {
     char *op_cap;
+
+    tty_destroy_double_line_map ();
 
     tty_destroy_winch_pipe ();
     tty_reset_shell_mode ();

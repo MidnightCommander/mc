@@ -242,6 +242,10 @@ get_maybe_wacs (mc_tty_char_t ch)
 static chtype
 get_maybe_acs (mc_tty_char_t ch)
 {
+    const gunichar eight_bit_equiv = tty_double_line_map_lookup (ch);
+    if (eight_bit_equiv != 0)
+        return eight_bit_equiv;
+
     switch (ch)
     {
     case MC_ACS_HLINE:
@@ -379,6 +383,13 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     nodelay (stdscr, FALSE);
 
     tty_setup_sigwinch (sigwinch_handler);
+
+    // ncurses versions between 6.4.20240203 and 6.5.20251018 inclusive are broken when it comes
+    // to displaying line drawing characters using their 8-bit codepoints in KOI8-R, see #4799.
+    // Do not initialize, and therefore do not use the double line map with these versions.
+    if (strcmp (curses_version (), "ncurses 6.4.20240203") < 0
+        || strcmp (curses_version (), "ncurses 6.5.20251018") > 0)
+        tty_init_double_line_map ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -386,6 +397,8 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 void
 tty_shutdown (void)
 {
+    tty_destroy_double_line_map ();
+
     tty_destroy_winch_pipe ();
     tty_reset_shell_mode ();
     tty_noraw_mode ();
