@@ -450,27 +450,27 @@ mc_acs_map (int c)
     switch (c)
     {
     case 'q':
-        return MC_ACS_HLINE;
+        return mc_global.tty.ugly_line_drawing ? '-' : MC_ACS_HLINE;
     case 'x':
-        return MC_ACS_VLINE;
+        return mc_global.tty.ugly_line_drawing ? '|' : MC_ACS_VLINE;
     case 'l':
-        return MC_ACS_ULCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+' : MC_ACS_ULCORNER;
     case 'k':
-        return MC_ACS_URCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+' : MC_ACS_URCORNER;
     case 'm':
-        return MC_ACS_LLCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+' : MC_ACS_LLCORNER;
     case 'j':
-        return MC_ACS_LRCORNER;
+        return mc_global.tty.ugly_line_drawing ? '+' : MC_ACS_LRCORNER;
     case 't':
-        return MC_ACS_LTEE;
+        return mc_global.tty.ugly_line_drawing ? '|' : MC_ACS_LTEE;
     case 'u':
-        return MC_ACS_RTEE;
+        return mc_global.tty.ugly_line_drawing ? '|' : MC_ACS_RTEE;
     case 'w':
-        return MC_ACS_TTEE;
+        return mc_global.tty.ugly_line_drawing ? '-' : MC_ACS_TTEE;
     case 'v':
-        return MC_ACS_BTEE;
+        return mc_global.tty.ugly_line_drawing ? '-' : MC_ACS_BTEE;
     case 'n':
-        return MC_ACS_PLUS;
+        return mc_global.tty.ugly_line_drawing ? '+' : MC_ACS_PLUS;
 
     default:
         return c;
