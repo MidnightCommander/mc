@@ -432,12 +432,12 @@ Frequently Asked Questions
 
    If your terminal supports 256 colors, the correct entry name may be
    appended with -256color. If your terminal supports true color, it
-   should be appended with -direct, -direct16, or -direct256. The best
-   backwards compatibility option is -direct256 variant, which provides
-   both 256-color and true color support simultaneously. The -direct16
-   variant supports bright versions of the basic colors along with true
-   color support, in contrast to the -direct variant, which supports
-   only basic 8 colors together with true color when used in a skin.
+   should be appended with -direct, -direct16, or -direct256. All three
+   variants provide both 256-color and true color support simultaneously.
+   The latter two variants make no difference in mc, and they support
+   basic colors including their bright versions along with true color
+   support, in contrast to the -direct variant, which supports only basic
+   8 colors together with true color when used in a skin.
 
    If there is no 256-color or true-color terminfo variant for your
    terminal, even though your terminal supports it, send an e-mail to

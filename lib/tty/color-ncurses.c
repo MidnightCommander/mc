@@ -129,6 +129,10 @@ tty_color_init_lib (gboolean disable, gboolean force)
         use_colors = TRUE;
         start_color ();
         use_default_colors ();
+
+        // Extended color mode detection routines must first be called before loading any skin
+        tty_use_256colors (NULL);
+        tty_use_truecolors (NULL);
     }
 
     mc_tty_color_color_pair_attrs = g_hash_table_new_full (
@@ -256,17 +260,21 @@ tty_use_256colors (GError **error)
 
     overlay_colors = tty_tigetnum ("CO", NULL);
 
-    if (COLORS != 256 && !(COLORS > 256 && overlay_colors == 256))
+    if (COLORS == 256 || (COLORS > 256 && overlay_colors == 256))
+        return TRUE;
+
+    if (tty_use_truecolors (NULL))
     {
-        g_set_error (error, MC_ERROR, -1,
-                     _ ("\nIf your terminal supports 256 colors, you need to set your TERM\n"
-                        "environment variable to match your terminal, perhaps using\n"
-                        "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
-                        "command to list all available variants on your system.\n"));
-        return FALSE;
+        need_convert_256color = TRUE;
+        return TRUE;
     }
 
-    return TRUE;
+    g_set_error (error, MC_ERROR, -1,
+                 _ ("\nIf your terminal supports 256 colors, you need to set your TERM\n"
+                    "environment variable to match your terminal, perhaps using\n"
+                    "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+                    "command to list all available variants on your system.\n"));
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
