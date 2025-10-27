@@ -241,3 +241,37 @@ tty_attr_get_bits (const char *attrs)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+int
+convert_256color_to_truecolor (int color)
+{
+    int r, g, b;
+
+    // Invalid color
+    if (color > 255)
+        return 0;
+
+    if (color >= 232)  // Gray scale
+        r = g = b = (color - 231) * 10 + 8;
+    else if (color >= 16)  // 6x6x6 color cube
+    {
+        color -= 16;
+
+        r = (color / (6 * 6) % 6);
+        r = r > 0 ? r * 40 + 55 : 0;
+
+        g = (color / 6 % 6);
+        g = g > 0 ? g * 40 + 55 : 0;
+
+        b = (color % 6);
+        b = b > 0 ? b * 40 + 55 : 0;
+    }
+    else  // We don't convert basic 16 colors as they are terminal-dependent and user-configurable
+        return color;
+
+    color = FLAG_TRUECOLOR | (r << 16) | (g << 8) | b;
+
+    return color;
+}
+
+/* --------------------------------------------------------------------------------------------- */

@@ -53,6 +53,8 @@ static tty_color_pair_t tty_color_defaults = {
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
 
+gboolean need_convert_256color = FALSE;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -173,6 +175,15 @@ tty_try_alloc_color_pair (const tty_color_pair_t *color, gboolean is_temp)
     {
         g_free (color_pair);
         return mc_color_pair->pair_index;
+    }
+
+    if (need_convert_256color)
+    {
+        if ((ifg & FLAG_TRUECOLOR) == 0)
+            ifg = convert_256color_to_truecolor (ifg);
+
+        if ((ibg & FLAG_TRUECOLOR) == 0)
+            ibg = convert_256color_to_truecolor (ibg);
     }
 
     mc_color_pair = g_try_new0 (tty_color_lib_pair_t, 1);
