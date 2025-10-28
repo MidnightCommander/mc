@@ -368,9 +368,6 @@ show_tree (WTree *tree)
                                                tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
         else
         {
-            // Sub level directory
-            tty_set_alt_charset (TRUE);
-
             // Output branch parts
             for (j = 0; j < current->sublevel - topsublevel - 1; j++)
             {
@@ -378,7 +375,7 @@ show_tree (WTree *tree)
                     break;
                 tty_print_char (' ');
                 if ((current->submask & (1 << (j + topsublevel + 1))) != 0)
-                    tty_print_char (ACS_VLINE);
+                    tty_print_char (mc_tty_frm[MC_TTY_FRM_VERT]);
                 else
                     tty_print_char (' ');
                 tty_print_char (' ');
@@ -386,11 +383,10 @@ show_tree (WTree *tree)
             tty_print_char (' ');
             j++;
             if (current->next == NULL || (current->next->submask & (1 << current->sublevel)) == 0)
-                tty_print_char (ACS_LLCORNER);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_LEFTBOTTOM]);
             else
-                tty_print_char (ACS_LTEE);
-            tty_print_char (ACS_HLINE);
-            tty_set_alt_charset (FALSE);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_LEFTMIDDLE]);
+            tty_print_char (mc_tty_frm[MC_TTY_FRM_HORIZ]);
 
             // Show sub-name
             tty_print_char (' ');
@@ -1133,10 +1129,11 @@ tree_frame (WDialog *h, WTree *tree)
 
             y = w->rect.lines - 3;
             widget_gotoyx (w, y, 0);
-            tty_print_alt_char (ACS_LTEE, FALSE);
+            tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
             widget_gotoyx (w, y, w->rect.cols - 1);
-            tty_print_alt_char (ACS_RTEE, FALSE);
-            tty_draw_hline (w->rect.y + y, w->rect.x + 1, ACS_HLINE, w->rect.cols - 2);
+            tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
+            tty_draw_hline (w->rect.y + y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ],
+                            w->rect.cols - 2);
         }
     }
 }
