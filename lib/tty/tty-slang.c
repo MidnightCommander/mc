@@ -211,8 +211,10 @@ do_define_key (int code, const char *strcap)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
-static void
+void
 load_terminfo_keys (void)
 {
     int i;
@@ -221,8 +223,6 @@ load_terminfo_keys (void)
         do_define_key (key_table[i].key_code, key_table[i].key_name);
 }
 
-/* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -334,6 +334,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     tty_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
+    tty_kitty (TRUE);
 
     tty_setup_sigwinch (sigwinch_handler);
 }
@@ -346,6 +347,7 @@ tty_shutdown (void)
     char *op_cap;
 
     tty_destroy_winch_pipe ();
+    tty_kitty (FALSE);
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);
@@ -740,6 +742,14 @@ void
 tty_print_string (const char *s)
 {
     SLsmg_write_string ((char *) str_term_form (s));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_print_string_raw (const char *s)
+{
+    SLtt_write_string ((char *) s);
 }
 
 /* --------------------------------------------------------------------------------------------- */

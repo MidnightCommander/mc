@@ -156,6 +156,7 @@ parse_csi (csi_command_t *out, const char **sptr, const char *end)
     {
         out->private_mode = private_mode;
         out->param_count = param_count;
+        out->final_byte = c;
     }
 
 invalid_sequence:
