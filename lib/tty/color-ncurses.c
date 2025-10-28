@@ -38,6 +38,7 @@
 
 #include "lib/global.h"
 
+#include "tty.h"
 #include "tty-ncurses.h"
 #include "color.h"  // variables
 #include "color-internal.h"
@@ -53,6 +54,7 @@
 /*** file scope variables ************************************************************************/
 
 static GHashTable *mc_tty_color_color_pair_attrs = NULL;
+static int overlay_colors = 0;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -127,6 +129,10 @@ tty_color_init_lib (gboolean disable, gboolean force)
         use_colors = TRUE;
         start_color ();
         use_default_colors ();
+
+        // Extended color mode detection routines must first be called before loading any skin
+        tty_use_256colors (NULL);
+        tty_use_truecolors (NULL);
     }
 
     mc_tty_color_color_pair_attrs = g_hash_table_new_full (
@@ -179,8 +185,9 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
         ibg = mc_color_pair->bg;
         attr = mc_color_pair->attr;
 
-        // In legacy color mode, change bright colors into bold
-        if (!tty_use_256colors (NULL) && !tty_use_truecolors (NULL))
+        // If we have 8 indexed colors only, change foreground bright colors into bold and
+        // background bright colors to basic colors
+        if (COLORS <= 8 || (tty_use_truecolors (NULL) && overlay_colors <= 8))
         {
             if (ifg >= 8 && ifg < 16)
             {
@@ -191,11 +198,31 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
             if (ibg >= 8 && ibg < 16)
             {
                 ibg &= 0x07;
-                // attr | = A_BOLD | A_REVERSE ;
             }
         }
 
+        // Shady trick: if we don't have the exact color, because it is overlaid by backwards
+        // compatibility indexed values, just borrow one degree of red. The user won't notice :)
+        if ((ifg & FLAG_TRUECOLOR) != 0)
+        {
+            ifg &= ~FLAG_TRUECOLOR;
+            if (ifg != 0 && ifg <= overlay_colors)
+                ifg += (1 << 16);
+        }
+
+        if ((ibg & FLAG_TRUECOLOR) != 0)
+        {
+            ibg &= ~FLAG_TRUECOLOR;
+            if (ibg != 0 && ibg <= overlay_colors)
+                ibg += (1 << 16);
+        }
+
+#if NCURSES_VERSION_PATCH >= 20170401 && defined(NCURSES_EXT_COLORS) && defined(NCURSES_EXT_FUNCS) \
+    && defined(HAVE_NCURSES_WIDECHAR)
+        init_extended_pair (mc_color_pair->pair_index, ifg, ibg);
+#else
         init_pair (mc_color_pair->pair_index, ifg, ibg);
+#endif
         mc_tty_color_save_attr (mc_color_pair->pair_index, attr);
     }
 }
@@ -231,7 +258,23 @@ tty_use_256colors (GError **error)
 {
     (void) error;
 
-    return (COLORS == 256);
+    overlay_colors = tty_tigetnum ("CO", NULL);
+
+    if (COLORS == 256 || (COLORS > 256 && overlay_colors == 256))
+        return TRUE;
+
+    if (tty_use_truecolors (NULL))
+    {
+        need_convert_256color = TRUE;
+        return TRUE;
+    }
+
+    g_set_error (error, MC_ERROR, -1,
+                 _ ("\nIf your terminal supports 256 colors, you need to set your TERM\n"
+                    "environment variable to match your terminal, perhaps using\n"
+                    "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+                    "command to list all available variants on your system.\n"));
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -239,9 +282,32 @@ tty_use_256colors (GError **error)
 gboolean
 tty_use_truecolors (GError **error)
 {
-    // Not yet supported in ncurses
-    g_set_error (error, MC_ERROR, -1, _ ("True color not supported with ncurses."));
+    // Low level true color is supported since ncurses 6.0 patch 20170401 preceding release
+    // of ncurses 6.1. It needs ABI 6 or higher.
+#if !(NCURSES_VERSION_PATCH >= 20170401 && defined(NCURSES_EXT_COLORS)                             \
+      && defined(NCURSES_EXT_FUNCS) && defined(HAVE_NCURSES_WIDECHAR))
+    g_set_error (error, MC_ERROR, -1,
+                 _ ("For true color support, you need version 6.1 or later of the ncurses\n"
+                    "library with wide character and ABI 6 or higher support.\n"
+                    "Please upgrade your system.\n"));
     return FALSE;
+#else
+    // We support only bool RGB cap configuration (8:8:8 bits), but the other variants are so rare
+    // that we don't need to bother.
+    if (!(tty_tigetflag ("RGB", NULL) && COLORS == COLORS_TRUECOLOR))
+    {
+        g_set_error (
+            error, MC_ERROR, -1,
+            _ ("\nIf your terminal supports true colors, you need to set your TERM\n"
+               "environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+               "Use the 'toe -a' command to list all available variants on your system.\n"));
+        return FALSE;
+    }
+
+    overlay_colors = tty_tigetnum ("CO", NULL);
+
+    return TRUE;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
