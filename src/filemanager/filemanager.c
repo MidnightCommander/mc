@@ -109,7 +109,7 @@ WLabel *the_hint;
 WButtonBar *the_bar;
 
 /* The prompt */
-const char *mc_prompt = NULL;
+char *mc_prompt = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
