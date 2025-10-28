@@ -935,7 +935,7 @@ to the usual viewer commands.
 .\"NODE "    Sort Order..."
 .SH "    Sort Order..."
 The eight sort orders are by name (alphabetical sort or version sort,
-also knwon as natural sort), by extension, by modification time,
+also known as natural sort), by extension, by modification time,
 by access time, and by inode information modification time, by size,
 by inode and unsorted.  In the Sort order dialog box you can choose
 the sort order and you may also specify if you want to sort in reverse
