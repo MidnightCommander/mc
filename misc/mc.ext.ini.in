@@ -917,6 +917,12 @@ ShellIgnoreCase=true
 Open=%cd %p/uwim://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
 
+[brotli]
+Shell=.br
+ShellIgnoreCase=true
+Open=Open=%cd %p/brotli://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view br
+
 
 ######### Files by Type #########
 
