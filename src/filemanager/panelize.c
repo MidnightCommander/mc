@@ -424,6 +424,7 @@ do_external_panelize (const char *command)
 
     current_panel->is_panelized = TRUE;
     panel_panelize_absolutize_if_needed (current_panel);
+    panel_panelize_save (current_panel);
 
     panel_set_current_by_name (current_panel, NULL);
     panel_re_sort (current_panel);
