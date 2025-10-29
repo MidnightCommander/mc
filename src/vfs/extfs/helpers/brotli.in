@@ -22,7 +22,7 @@ BRFILENAME=$2
 
 br_list() {
     BROUTFILENAME=$(basename "${BRFILENAME}" | sed -e 's/\.br$//')
-    ls -l --time-style="+%d/%m/%Y %H:%M:%S" "${BRFILENAME}" | \
+    ls -l --time-style="+%m/%d/%Y %H:%M:%S" "${BRFILENAME}" | \
         ${AWK} -v f_name="${BROUTFILENAME}" '{
             attr=$1;
             uid=$2;
