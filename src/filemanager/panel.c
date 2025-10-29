@@ -3512,7 +3512,7 @@ directory_history_list (WPanel *panel)
 
         panel->dir_history.current = panel->dir_history.list;
 
-        for (i = 0; i <= pos; i++)
+        for (i = 0; i < pos; i++)
         {
             GList *prev;
 
