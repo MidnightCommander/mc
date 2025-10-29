@@ -595,6 +595,7 @@ src/vfs/extfs/helpers/Makefile
 src/vfs/extfs/helpers/a+
 src/vfs/extfs/helpers/apt+
 src/vfs/extfs/helpers/audio
+src/vfs/extfs/helpers/brotli
 src/vfs/extfs/helpers/deb
 src/vfs/extfs/helpers/deba
 src/vfs/extfs/helpers/debd
