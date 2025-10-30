@@ -12,6 +12,7 @@ SYNTAXFILES =			\
 	b.syntax		\
 	c.syntax		\
 	cabal.syntax		\
+	caddyfile.syntax	\
 	changelog.syntax	\
 	cmake.syntax		\
 	cobol.syntax		\

@@ -360,6 +360,9 @@ include b.syntax
 file ..\*\\.(?i:cfg|cnf|conf)$ Config\sfile
 include conf.syntax
 
+file ((?i:Caddyfile)|..\*\\.(?i:caddy(file)?))$ Caddyfile
+include caddyfile.syntax
+
 file Dockerfile.\*$ Dockerfile
 include dockerfile.syntax
 
