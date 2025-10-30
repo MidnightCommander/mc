@@ -1,4 +1,4 @@
-#! /bin/sh
+#! @PERL@
 # Midnight Commander - Brotli support
 #
 # Written by:
@@ -10,47 +10,67 @@
 # On Debian/Ubuntu brotli can be installed via:
 # apt install brotli
 
-command -v brotli >/dev/null 2>&1 || exit 1
-BROTLI=$(command -v brotli 2>/dev/null)
-AWK=@AWK@
+use strict;
+use warnings;
+use diagnostics;
 
-[ -n "$2" ] || exit 1
+sub f_mode($) {
+    my $mode = shift;
 
-ACTION=$1
-BRFILENAME=$2
+    my @perms = ('---', '--x', '-w-', '-wx', 'r--', 'r-x', 'rw-', 'rwx');
 
+    my $ret = "-";
+    $ret .= $perms[($mode >> 6) & 7];
+    $ret .= $perms[($mode >> 3) & 7];
+    $ret .= $perms[$mode & 7];
 
-br_list() {
-    BROUTFILENAME=$(basename "${BRFILENAME}" | sed -e 's/\.br$//')
-    ls -l --time-style="+%m/%d/%Y %H:%M:%S" "${BRFILENAME}" | \
-        ${AWK} -v f_name="${BROUTFILENAME}" '{
-            attr=$1;
-            uid=$2;
-            gid=$4;
-            f_size=$5;
-            t_date=$6;
-            t_time=$7;
-            printf("%s 1 %s %s %s %s %s %s\n", attr, uid, gid, f_size, t_date, t_time, f_name);
-        }'
+    return $ret;
 }
 
-br_copyout() {
-    ${BROTLI} -dck "${BRFILENAME}" > "${FILENAMEDST}"
+sub f_time($) {
+    my $t = shift;
+    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime($t);
+
+    my $ret = sprintf("%02d/%02d/%04d %02d:%02d:%02d", $mon, $mday, 1900+$year, $hour, $min, $sec);
+    return $ret;
 }
 
-case "$ACTION" in
-	list)
-		br_list
-	;;
-	
-	copyout)
-		[ -n "$4" ] || exit 1
-		FILENAMEDST="$4"
-		br_copyout
-	;;
-	
-	*)
-		exit 1
-	;;
-esac
+sub br_ls($) {
+    my $filename = shift;
+
+    exit 1 if ! -f $filename;
+
+    # file information
+    my @fileinfo = stat($filename);
+
+    # strip extension
+    $filename =~ s/\.br$//;
+    $filename =~ s|^.*/||;
+
+    printf "%s 1 %s %s %s %s %s\n",
+        f_mode($fileinfo[2]), # attr
+        getpwuid($fileinfo[4]) || $fileinfo[4], # uid
+        getgrgid($fileinfo[5]) || $fileinfo[5], # gid
+        $fileinfo[7], # size
+        f_time($fileinfo[9]), # time
+        $filename;
+}
+
+sub br_copyout($$) {
+    my $srcfilename = shift;
+    my $dstfilename = shift;
+
+    system("brotli", "-dkfo", $dstfilename, $srcfilename) == 0 or exit(1);
+}
+
+if (@ARGV >= 2 && $ARGV[0] eq "list") {
+    br_ls($ARGV[1]);
+}
+elsif (@ARGV >= 4 && $ARGV[0] eq "copyout") {
+    br_copyout($ARGV[1], $ARGV[3]);
+}
+else {
+    exit(1);
+}
+
 
