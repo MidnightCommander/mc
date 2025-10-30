@@ -38,7 +38,7 @@
 static void
 setup (void)
 {
-    str_init_strings (NULL);
+    str_init_strings ("UTF-8");
 }
 
 static void
@@ -81,6 +81,26 @@ START_TEST (test_strip_ctrl_codes)
 }
 END_TEST
 
+// Test the handling of inner and final incomplete UTF-8, also make sure there's no overrun.
+// Ticket #4801. Ideally replacement symbols should be added, but we don't have that yet.
+START_TEST (test_strip_ctrl_codes2)
+{
+    // U+2764 heart in UTF-8, followed by " ábcdéfghíjklnmó\000pqrst" in Latin-1
+    const char s_orig[] = "\342\235\244 \341bcd\351fgh\355jklm\363\000pqrst";
+    ck_assert_int_eq (sizeof (s_orig), 25);
+
+    // copy the entire string, with embedded '\0'
+    char *s = g_malloc (sizeof (s_orig));
+    memcpy (s, s_orig, sizeof (s_orig));
+
+    char *actual = strip_ctrl_codes (s);
+    const char *expected = "\342\235\244 bcdfghjklm";
+
+    ck_assert_str_eq (actual, expected);
+    g_free (s);
+}
+END_TEST
+
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -95,6 +115,7 @@ main (void)
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_parse_csi);
     tcase_add_test (tc_core, test_strip_ctrl_codes);
+    tcase_add_test (tc_core, test_strip_ctrl_codes2);
     // ***********************************
 
     return mctest_run_all (tc_core);

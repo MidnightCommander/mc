@@ -238,7 +238,8 @@ strip_ctrl_codes (char *s)
         }
         else
         {
-            const char *n = str_cget_next_char (r);
+            // FIXME Improve the handling of invalid UTF-8, insert a replacement symbol (#4801)
+            const char *n = str_cget_next_char_safe (r);
 
             if (str_isprint (r))
             {
