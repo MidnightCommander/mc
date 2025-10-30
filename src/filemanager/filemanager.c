@@ -1230,7 +1230,7 @@ midnight_execute_cmd (Widget *sender, long command)
         break;
 #endif
     case CK_Panelize:
-        panel_panelize_cd ();
+        panel_panelize_restore ();
         break;
     case CK_Help:
         help_cmd ();
