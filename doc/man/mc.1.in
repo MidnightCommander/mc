@@ -912,6 +912,15 @@ half name | size:7 | type mode:3
 .PP
 Panels may also be set to the following modes:
 .TP
+.B "Quick View"
+In this mode, the panel will switch to a reduced
+.\"LINK2"
+viewer
+.\"Internal File Viewer"
+that displays the contents of the currently selected file, if you
+select the panel (with the tab key or the mouse), you will have access
+to the usual viewer commands.
+.TP
 .B "Info"
 The info view display information related to the currently
 selected file and if possible information about the current file
@@ -924,14 +933,16 @@ directory tree
 .\"Directory Tree"
 feature. See the section about it for more information.
 .TP
-.B "Quick View"
-In this mode, the panel will switch to a reduced
+.B "Panelize"
+This mode shows the results of the latest
 .\"LINK2"
-viewer
-.\"Internal File Viewer"
-that displays the contents of the currently selected file, if you
-select the panel (with the tab key or the mouse), you will have access
-to the usual viewer commands.
+External panelize
+.\"External panelize"
+or
+.\"LINK2"
+Find file
+.\"Find File"
+commands.
 .\"NODE "    Sort Order..."
 .SH "    Sort Order..."
 The eight sort orders are by name (alphabetical sort or version sort,
@@ -1413,7 +1424,8 @@ search. The Quit button quits the search operation. The Panelize
 button will place the found files to the current directory panel so
 that you can do additional operations on them (view, copy, move,
 delete and so on). To return to the normal file listing, change directory
-to "..".
+to ".."; to see the panelized search results again, select the Panelize
+mode in the Left and Right menu.
 .PP
 The 'Enable ignore directories' checkbox and input field below it
 allow one to set up the list of directories that should be skip during the search
@@ -1455,7 +1467,9 @@ find . \-type l \-print
 .PP
 Upon command completion, the directory contents of the panel will no
 longer be the directory listing of the current directory, but all the
-files that are symbolic links.
+files that are symbolic links. To return to the normal file listing,
+change directory to ".."; to see the command output again, select
+the Panelize mode in the Left and Right menu.
 .PP
 If you want to panelize all of the files that have been downloaded
 from your FTP server, you can use this awk command to extract the file
