@@ -155,7 +155,7 @@ test_iso () {
     fi
     if test -n "$CHARSET"; then
         CHARSET=`echo "$CHARSET" | tr '[A-Z]' '[a-z]' | sed -e 's/^iso-/iso/'`
-        $ISOINFO -j $CHARSET -i /dev/null 2>&1 | grep "Iconv not yet supported\|Unknown charset" >/dev/null && CHARSET=
+        $ISOINFO -j "$CHARSET" -i /dev/null 2>&1 | grep "Iconv not yet supported\|Unknown charset" >/dev/null && CHARSET=
     fi
     if test -n "$CHARSET"; then
         JOLIET_OPT="-j $CHARSET -J"

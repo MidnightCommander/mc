@@ -118,7 +118,7 @@ mc_lha_fs_run()
    TMPDIR=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-ulha.XXXXXX"` || exit 1
    trap "rm -rf \"$TMPDIR\"; exit 0" 1 2 3 4 15
    TMPCMD=$TMPDIR/run
-   $LHA_GET "$1" "$2" > $TMPCMD  
+   $LHA_GET "$1" "$2" > "$TMPCMD"  
    chmod a+x "$TMPCMD"
    "$TMPCMD"
    rm -rf "$TMPDIR"
