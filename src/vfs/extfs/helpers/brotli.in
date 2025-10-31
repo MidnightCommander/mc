@@ -6,7 +6,7 @@
 #
 # This file is part of the Midnight Commander.
 #
-# It required brotli: https://github.com/google/brotli
+# It requires brotli: https://github.com/google/brotli
 # On Debian/Ubuntu brotli can be installed via:
 # apt install brotli
 
