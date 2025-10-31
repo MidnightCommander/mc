@@ -5252,8 +5252,12 @@ panel_get_user_possible_fields (gsize *array_size)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Restores the contents of the panel from a snapshot previously saved by
+ * panel_panelize_save()
+ */
 void
-panel_panelize_cd (void)
+panel_panelize_restore (void)
 {
     WPanel *panel;
     int i;
@@ -5373,6 +5377,10 @@ panel_panelize_absolutize_if_needed (WPanel *panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Saves the contents of the panel into a snapshot, so it may be restored later
+ * by panel_panelize_restore().
+ */
 void
 panel_panelize_save (WPanel *panel)
 {

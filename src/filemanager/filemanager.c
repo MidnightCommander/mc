@@ -195,6 +195,7 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Quick view"), CK_PanelQuickView));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Info"), CK_PanelInfo));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Tree"), CK_PanelTree));
+    entries = g_list_prepend (entries, menu_entry_new (_ ("Paneli&ze"), CK_Panelize));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries =
         g_list_prepend (entries, menu_entry_new (_ ("&Listing format..."), CK_SetupListingFormat));
@@ -211,7 +212,6 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_SFTP
     entries = g_list_prepend (entries, menu_entry_new (_ ("SFTP li&nk..."), CK_ConnectSftp));
 #endif
-    entries = g_list_prepend (entries, menu_entry_new (_ ("Paneli&ze"), CK_Panelize));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Rescan"), CK_Reread));
 
@@ -1230,7 +1230,7 @@ midnight_execute_cmd (Widget *sender, long command)
         break;
 #endif
     case CK_Panelize:
-        panel_panelize_cd ();
+        panel_panelize_restore ();
         break;
     case CK_Help:
         help_cmd ();
