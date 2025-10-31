@@ -1,0 +1,76 @@
+#! @PERL@
+# Midnight Commander - Brotli support
+#
+# Written by:
+#  Vadim Kalinnikov <moose@ylsoftware.com>
+#
+# This file is part of the Midnight Commander.
+#
+# It requires brotli: https://github.com/google/brotli
+# On Debian/Ubuntu brotli can be installed via:
+# apt install brotli
+
+use strict;
+use warnings;
+use diagnostics;
+
+sub f_mode($) {
+    my $mode = shift;
+
+    my @perms = ('---', '--x', '-w-', '-wx', 'r--', 'r-x', 'rw-', 'rwx');
+
+    my $ret = "-";
+    $ret .= $perms[($mode >> 6) & 7];
+    $ret .= $perms[($mode >> 3) & 7];
+    $ret .= $perms[$mode & 7];
+
+    return $ret;
+}
+
+sub f_time($) {
+    my $t = shift;
+    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime($t);
+
+    my $ret = sprintf("%02d/%02d/%04d %02d:%02d:%02d", $mon, $mday, 1900+$year, $hour, $min, $sec);
+    return $ret;
+}
+
+sub br_ls($) {
+    my $filename = shift;
+
+    exit 1 if ! -f $filename;
+
+    # file information
+    my @fileinfo = stat($filename);
+
+    # strip extension
+    $filename =~ s/\.br$//;
+    $filename =~ s|^.*/||;
+
+    printf "%s 1 %s %s %s %s %s\n",
+        f_mode($fileinfo[2]), # attr
+        getpwuid($fileinfo[4]) || $fileinfo[4], # uid
+        getgrgid($fileinfo[5]) || $fileinfo[5], # gid
+        $fileinfo[7], # size
+        f_time($fileinfo[9]), # time
+        $filename;
+}
+
+sub br_copyout($$) {
+    my $srcfilename = shift;
+    my $dstfilename = shift;
+
+    system("brotli", "-dkfo", $dstfilename, $srcfilename) == 0 or exit(1);
+}
+
+if (@ARGV >= 2 && $ARGV[0] eq "list") {
+    br_ls($ARGV[1]);
+}
+elsif (@ARGV >= 4 && $ARGV[0] eq "copyout") {
+    br_copyout($ARGV[1], $ARGV[3]);
+}
+else {
+    exit(1);
+}
+
+
