@@ -1,0 +1,24 @@
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2025-11-02 02:05:12 IMAGE1/
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2025-11-02 02:05:12 IMAGE1/es
+-rw-r--r--   1  <<uid>>  <<gid>>         44 2025-11-02 02:05:12 IMAGE1/es/Makefile with space.am
+-rw-r--r--   1  <<uid>>  <<gid>>      79691 2025-11-02 02:05:12 IMAGE1/es/xnc.hlp
+-rw-r--r--   1  <<uid>>  <<gid>>        333 2025-11-02 02:05:12 IMAGE1/hlp-lang-include.am
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2025-11-02 02:05:12 IMAGE1/hu
+-rw-r--r--   1  <<uid>>  <<gid>>         44 2025-11-02 02:05:12 IMAGE1/hu/Makefile.am
+-rw-r--r--   1  <<uid>>  <<gid>>      38498 2025-11-02 02:05:12 IMAGE1/hu/xnc.hlp
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2025-11-02 02:05:12 IMAGE1/it
+-rw-r--r--   1  <<uid>>  <<gid>>         44 2025-11-02 02:05:12 IMAGE1/it/Makefile.am
+-rw-r--r--   1  <<uid>>  <<gid>>      38379 2025-11-02 02:05:12 IMAGE1/it/xnc.hlp
+-rw-r--r--   1  <<uid>>  <<gid>>        354 2025-11-02 02:05:12 IMAGE1/Makefile.am
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2025-11-02 02:05:12 IMAGE1/pl
+-rw-r--r--   1  <<uid>>  <<gid>>         44 2025-11-02 02:05:12 IMAGE1/pl/Makefile.am
+-rw-r--r--   1  <<uid>>  <<gid>>      38375 2025-11-02 02:05:12 IMAGE1/pl/xnc.hlp
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2025-11-02 02:05:12 IMAGE1/ru
+-rw-r--r--   1  <<uid>>  <<gid>>         44 2025-11-02 02:05:12 IMAGE1/ru/Makefile.am
+-rw-r--r--   1  <<uid>>  <<gid>>      41537 2025-11-02 02:05:12 IMAGE1/ru/xnc.hlp
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2025-11-02 02:05:12 IMAGE1/sr
+-rw-r--r--   1  <<uid>>  <<gid>>         44 2025-11-02 02:05:12 IMAGE1/sr/Makefile.am
+-rw-r--r--   1  <<uid>>  <<gid>>      40535 2025-11-02 02:05:12 IMAGE1/sr/xnc.hlp
+-rw-r--r--   1  <<uid>>  <<gid>>      38055 2025-11-02 02:05:12 IMAGE1/xnc.hlp
+-r-xr-xr-x   1  <<uid>>  <<gid>>          1 2020-01-01 00:00:00 OPTIMIZE
+-r-xr-xr-x   1  <<uid>>  <<gid>>          1 2020-01-01 00:00:00 VERIFY
