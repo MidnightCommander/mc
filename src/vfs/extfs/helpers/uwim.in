@@ -11,7 +11,7 @@
 # apt install wimtools
 
 command -v wimlib-imagex >/dev/null 2>&1 || exit 1
-WIM=$(command -v wimlib-imagex 2>/dev/null)
+WIM=`command -v wimlib-imagex 2>/dev/null`
 AWK=@AWK@
 
 [ -n "$2" ] || exit 1
@@ -22,13 +22,13 @@ WIMFILENAME=$2
 mcwim_list() {
 	# Here we can use "Image count" from output,
 	# but on some broken images we can get garbage, instead of number
-	IMAGECOUNT=$(${WIM} info "${WIMFILENAME}" | grep  Index: | grep -v -c Boot )
+	IMAGECOUNT=`${WIM} info "${WIMFILENAME}" | grep  Index: | grep -v -c Boot `
 	IMGNUM=1
-	VUID=$(id -nu)
-	VGID=$(id -ng)
-	while [ ${IMGNUM} -le "${IMAGECOUNT}" ]; do
-		${WIM} dir "${WIMFILENAME}" ${IMGNUM} --detailed | \
-			${AWK}  -v uid="${VUID}" -v gid="${VGID}" -v imgnum=${IMGNUM} '
+	VUID=`id -nu`
+	VGID=`id -ng`
+	while [ "${IMGNUM}" -le "${IMAGECOUNT}" ]; do
+		${WIM} dir "${WIMFILENAME}" "${IMGNUM}" --detailed | \
+			${AWK}  -v uid="${VUID}" -v gid="${VGID}" -v imgnum="${IMGNUM}" '
 				/^----------------------------------------------------------------------------/,/^$/ {
 					if (match($0, /^Full Path/)) {
 						split($0, namesrc, "\"");
@@ -93,8 +93,8 @@ mcwim_copyout() {
 	# Filename must contain imgnum
 	echo "${FILENAMESRC}" | grep -E '^IMAGE[0-9]+/' || exit 1
 
-	IMGNUM=$(echo "${FILENAMESRC}" | cut -d '/' -f1 | sed "s/IMAGE//")
-	REALFILENAME=$(echo "${FILENAMESRC}" | sed "s/IMAGE${IMGNUM}//")
+	IMGNUM=`echo "${FILENAMESRC}" | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALFILENAME=`echo "${FILENAMESRC}" | sed "s/IMAGE${IMGNUM}//"`
 	${WIM} extract "${WIMFILENAME}" "${IMGNUM}" "${REALFILENAME}" --to-stdout > "${FILENAMEDST}"
 }
 
@@ -106,8 +106,8 @@ mcwim_copyin() {
 	# Filename must contain imgnum
 	echo "${FILENAMEDST}" | grep -E '^IMAGE[0-9]+/' || exit 1
 
-	IMGNUM=$(echo "${FILENAMEDST}" | cut -d '/' -f1 | sed "s/IMAGE//")
-	REALFILENAME=$(echo "${FILENAMEDST}" | sed "s/IMAGE${IMGNUM}//")
+	IMGNUM=`echo "${FILENAMEDST}" | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALFILENAME=`echo "${FILENAMEDST}" | sed "s/IMAGE${IMGNUM}//"`
 	echo "add \"${FILENAMESRC}\" \"${REALFILENAME}\"" | ${WIM} update "${WIMFILENAME}" "${IMGNUM}" > /dev/null
 }
 
@@ -120,8 +120,8 @@ mcwim_rm() {
 	# Filename must contain imgnum
 	echo "${FILENAMESRC}" | grep -E '^IMAGE[0-9]+/' || exit 1
 	
-	IMGNUM=$(echo "${FILENAMESRC}" | cut -d '/' -f1 | sed "s/IMAGE//")
-	REALFILENAME=$(echo "${FILENAMESRC}" | sed "s/IMAGE${IMGNUM}//")
+	IMGNUM=`echo "${FILENAMESRC}" | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALFILENAME=`echo "${FILENAMESRC}" | sed "s/IMAGE${IMGNUM}//"`
 
 	if [ -z "${REALFILENAME}" ]; then
 		# If user want to remove image
@@ -133,7 +133,7 @@ mcwim_rm() {
 }
 
 mcwim_run() {
-	case ${RUNFILENAME} in
+	case "${RUNFILENAME}" in
 		OPTIMIZE)
 			${WIM} optimize "${WIMFILENAME}"
 			exit 0;
@@ -150,12 +150,12 @@ mcwim_run() {
 mcwim_mkdir() {
 	# New dirname must contain imgnum
 	echo "${NEWDIRNAME}" | grep -E '^IMAGE[0-9]+/' || exit 1
-	IMGNUM=$(echo "${NEWDIRNAME}" | cut -d '/' -f1 | sed "s/IMAGE//")
-	REALDIRNAME=$(echo "${NEWDIRNAME}" | sed "s/IMAGE${IMGNUM}//")
+	IMGNUM=`echo "${NEWDIRNAME}" | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALDIRNAME=`echo "${NEWDIRNAME}" | sed "s/IMAGE${IMGNUM}//"`
 	[ -z "${REALDIRNAME}" ] && exit 1
 	
-	TMPDIR=$(mktemp -d)
-	DSTBASENAME=$(basename "${REALDIRNAME}")
+	TMPDIR=`mktemp -d`
+	DSTBASENAME=`basename "${REALDIRNAME}"`
 	SRCDIRNAME="${TMPDIR}/${DSTBASENAME}"
 	mkdir -p "${SRCDIRNAME}"
 	echo "add \"${SRCDIRNAME}\" \"${REALDIRNAME}\"" | ${WIM} update "${WIMFILENAME}" "${IMGNUM}" > /dev/null
