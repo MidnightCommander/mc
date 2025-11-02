@@ -173,12 +173,8 @@ typedef enum
 } kitty_keyboard_protocol_t;
 
 /* This is the keybinding that is sent to the shell, to make the shell send us the contents of
- * the current command buffer. */
+ * the current command buffer and the location of the cursor. */
 #define SHELL_BUFFER_KEYBINDING "_"
-
-/* This is the keybinding that is sent to the shell, to make the shell send us the location of
- * the cursor. */
-#define SHELL_CURSOR_KEYBINDING "+"
 
 /*** forward declarations (file scope functions) *************************************************/
 
@@ -562,14 +558,18 @@ synchronize (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* Get the contents of the current subshell command line buffer, and */
-/* transfer the contents to the panel command prompt. */
+/** Get the contents of the current subshell command line buffer and
+ * transfer the contents to the panel command prompt.
+ */
 
 static gboolean
 read_command_line_buffer (gboolean test_mode)
 {
-    char subshell_command_buffer[BUF_LARGE];
-    char subshell_cursor_buffer[BUF_SMALL];
+    char subshell_response_buffer[BUF_LARGE];
+    size_t response_char_length = 0;  // in bytes, up to (excluding) '\0'
+
+    char *subshell_command;
+    int command_length;  // in characters
 
     fd_set read_set;
     ssize_t bytes;
@@ -577,8 +577,6 @@ read_command_line_buffer (gboolean test_mode)
         .tv_sec = 0,
         .tv_usec = 0,
     };
-    int command_buffer_length;
-    size_t command_buffer_char_length;
     int bash_version;
     int cursor_position;
     int rc;
@@ -607,22 +605,25 @@ read_command_line_buffer (gboolean test_mode)
 
         if (rc == 1)
         {
-            bytes = read (command_buffer_pipe[READ], subshell_command_buffer,
-                          sizeof (subshell_command_buffer));
+            bytes = read (command_buffer_pipe[READ], subshell_response_buffer,
+                          sizeof (subshell_response_buffer));
             (void) bytes;
         }
     }
 
-    // get contents of command line buffer
+    // Query the cursor position and the contents of the command line buffer
     write_all (mc_global.tty.subshell_pty, ESC_STR SHELL_BUFFER_KEYBINDING,
                sizeof (ESC_STR SHELL_BUFFER_KEYBINDING) - 1);
 
+    // Read the response
     subshell_prompt_timer.tv_sec = 1;
     FD_ZERO (&read_set);
     FD_SET (command_buffer_pipe[READ], &read_set);
 
-    while ((rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer)) != 1)
+    while (TRUE)
     {
+        rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer);
+
         if (rc == -1)
         {
             if (errno == EINTR)
@@ -633,88 +634,86 @@ read_command_line_buffer (gboolean test_mode)
 
         if (rc == 0)
             return FALSE;
-    }
 
-    bytes =
-        read (command_buffer_pipe[READ], subshell_command_buffer, sizeof (subshell_command_buffer));
-    // FIXME: what about bytes < 0?
-    if (bytes == 0 || (size_t) bytes == sizeof (subshell_command_buffer))
-        return FALSE;
+        bytes = read (command_buffer_pipe[READ], subshell_response_buffer + response_char_length,
+                      sizeof (subshell_response_buffer) - response_char_length);
+        if (bytes <= 0
+            || (size_t) bytes == sizeof (subshell_response_buffer) - response_char_length)
+            return FALSE;
 
-    command_buffer_char_length = (size_t) bytes - 1;
-    subshell_command_buffer[command_buffer_char_length] = '\0';
-    command_buffer_length = str_length (subshell_command_buffer);
-
-    // get cursor position
-    write_all (mc_global.tty.subshell_pty, ESC_STR SHELL_CURSOR_KEYBINDING,
-               sizeof (ESC_STR SHELL_CURSOR_KEYBINDING) - 1);
-
-    subshell_prompt_timer.tv_sec = 1;
-    subshell_prompt_timer.tv_usec = 0;
-    FD_ZERO (&read_set);
-    FD_SET (command_buffer_pipe[READ], &read_set);
-
-    while ((rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer)) != 1)
-    {
-        if (rc == -1)
+        // Did we receive the terminating '\0'? There shouldn't be an embedded '\0', but just in
+        // case there is, stop at the first one.
+        const int latest_chunk_data_length =
+            strnlen (subshell_response_buffer + response_char_length, bytes);
+        if (latest_chunk_data_length < bytes)
         {
-            if (errno == EINTR)
-                continue;
-
-            return FALSE;
+            // Terminating '\0' found, we're done reading
+            response_char_length += latest_chunk_data_length;
+            break;
         }
-
-        if (rc == 0)
-            return FALSE;
+        // No terminating '\0' yet, keep reading
+        response_char_length += bytes;
     }
 
-    bytes =
-        read (command_buffer_pipe[READ], subshell_cursor_buffer, sizeof (subshell_cursor_buffer));
-    // FIXME: what about bytes < 0?
-    if (bytes == 0)
-        return FALSE;
+    // fish sends a '\n' before the terminating '\0', strip it
+    if (mc_global.shell->type == SHELL_FISH)
+    {
+        if (response_char_length == 0)
+            return FALSE;
+        if (subshell_response_buffer[response_char_length - 1] != '\n')
+            return FALSE;
+        subshell_response_buffer[--response_char_length] = '\0';
+    }
 
-    subshell_cursor_buffer[(size_t) bytes - 1] = '\0';
+    // bash sends two numbers in the first line, fish and zsh send one
     if (mc_global.shell->type == SHELL_BASH)
     {
-        if (sscanf (subshell_cursor_buffer, "%d:%d", &bash_version, &cursor_position) != 2)
+        if (sscanf (subshell_response_buffer, "%d:%d", &bash_version, &cursor_position) != 2)
             return FALSE;
     }
     else
     {
-        if (sscanf (subshell_cursor_buffer, "%d", &cursor_position) != 1)
+        if (sscanf (subshell_response_buffer, "%d", &cursor_position) != 1)
             return FALSE;
         bash_version = 1000;
     }
 
+    // Locate the second line of the response which contains the subshell command
+    subshell_command = strchr (subshell_response_buffer, '\n');
+    if (subshell_command == NULL)
+        return FALSE;
+    subshell_command++;
+    command_length = str_length (subshell_command);
+
+    // The response was valid
     if (test_mode)
         return TRUE;
 
     /* Substitute non-text characters in the command buffer, such as tab, or newline, as this
      * could cause problems. */
-    for (size_t i = 0; i < command_buffer_char_length; i++)
-        if ((unsigned char) subshell_command_buffer[i] < 32
-            || (unsigned char) subshell_command_buffer[i] == 127)
-            subshell_command_buffer[i] = ' ';
+    for (unsigned char *p = (unsigned char *) subshell_command; *p != '\0'; p++)
+        if (*p < 32 || *p == 127)
+            *p = ' ';
 
     input_assign_text (cmdline, "");
-    input_insert (cmdline, subshell_command_buffer, FALSE);
+    input_insert (cmdline, subshell_command, FALSE);
 
     if (bash_version < 5)  // implies SHELL_BASH
     {
-        /* We need to do this because bash < v5 gives the cursor position in a utf-8 string based
-         * on the location in bytes, not in unicode characters. */
+        /* We need to do this because bash < v5 gives the cursor position in a UTF-8 string based
+         * on the location in bytes, not in Unicode characters. */
         char *curr, *stop;
 
-        curr = subshell_command_buffer;
+        curr = subshell_command;
         stop = curr + cursor_position;
 
         for (cursor_position = 0; curr < stop; cursor_position++)
             str_next_char_safe (&curr);
     }
-    if (cursor_position > command_buffer_length)
-        cursor_position = command_buffer_length;
+    if (cursor_position > command_length)
+        cursor_position = command_length;
     cmdline->point = cursor_position;
+
     // We send any remaining data to STDOUT before we finish.
     flush_subshell (0, VISIBLY);
 
@@ -722,10 +721,10 @@ read_command_line_buffer (gboolean test_mode)
     if (mc_global.shell->type != SHELL_ZSH)
     {
         /* In zsh, we can just press c-u to clear the line, without needing to go to the end of
-         * the line first first. In all other shells, we must go to the end of the line first. */
+         * the line first. In all other shells, we must go to the end of the line first. */
 
-        // If we are not at the end of the line, we go to the end.
-        if (cursor_position != command_buffer_length)
+        // If we are not at the end of the line, we go to the end
+        if (cursor_position != command_length)
         {
             write_all (mc_global.tty.subshell_pty, "\005", 1);
             if (flush_subshell (1, VISIBLY) != 1)
@@ -733,9 +732,9 @@ read_command_line_buffer (gboolean test_mode)
         }
     }
 
-    if (command_buffer_length > 0)
+    if (command_length > 0)
     {
-        // Now we clear the line.
+        // Now we clear the line
         write_all (mc_global.tty.subshell_pty, "\025", 1);
         if (flush_subshell (1, VISIBLY) != 1)
             return FALSE;
@@ -1229,10 +1228,9 @@ init_subshell_precmd (void)
     {
     case SHELL_BASH:
         return g_strdup_printf (
-            " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$READLINE_LINE\" >&%d; }\n"
+            " mc_print_command_buffer () { printf '%%s:%%s\\n%%s\\000' \"$BASH_VERSINFO\" "
+            "\"$READLINE_POINT\" \"$READLINE_LINE\" >&%d; }\n"
             " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
-            " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING
-            "\":\"echo $BASH_VERSINFO:$READLINE_POINT >&%d\"'\n"
             " if test ${BASH_VERSION%%%%.*} -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> "
             "/dev/null; then\n"
             "   eval \"PROMPT_COMMAND+=( 'pwd>&%d;kill -STOP $$' )\"\n"
@@ -1240,8 +1238,7 @@ init_subshell_precmd (void)
             "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
             " fi\n"
             "PS1='\\u@\\h:\\w\\$ '\n",
-            command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE],
-            subshell_pipe[WRITE]);
+            command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_ASH_BUSYBOX:
         // BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
@@ -1265,15 +1262,13 @@ init_subshell_precmd (void)
 
     case SHELL_ZSH:
         return g_strdup_printf (
-            " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$BUFFER\" >&%d; }\n"
+            " mc_print_command_buffer () { printf '%%s\\n%%s\\000' \"$CURSOR\" \"$BUFFER\" "
+            ">&%d; }\n"
             " zle -N mc_print_command_buffer\n"
             " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
-            " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
-            " zle -N mc_print_cursor_position\n"
-            " bindkey '^[" SHELL_CURSOR_KEYBINDING "' mc_print_cursor_position\n"
             " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
             "PS1='%%n@%%m:%%~%%# '\n",
-            command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
+            command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_TCSH:
         return g_strdup_printf ("set echo_style=both; "
@@ -1282,15 +1277,14 @@ init_subshell_precmd (void)
                                 tcsh_fifo);
 
     case SHELL_FISH:
-        return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING " 'commandline >&%d';"
-                                "bind \\e" SHELL_CURSOR_KEYBINDING " 'commandline -C >&%d';"
+        return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING
+                                " \"begin; commandline -C; commandline; printf '\\000'; end >&%d\";"
                                 "if not functions -q fish_prompt_mc;"
                                 "functions -e fish_right_prompt;"
                                 "functions -c fish_prompt fish_prompt_mc; end;"
                                 "function fish_prompt;"
                                 "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP $fish_pid; end\n",
-                                command_buffer_pipe[WRITE], command_buffer_pipe[WRITE],
-                                subshell_pipe[WRITE]);
+                                command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
     default:
         fprintf (stderr, "subshell: unknown shell type (%u), aborting!\r\n", mc_global.shell->type);
         exit (EXIT_FAILURE);
