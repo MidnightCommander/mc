@@ -82,7 +82,7 @@ START_TEST (test_strip_ctrl_codes)
 END_TEST
 
 // Test the handling of inner and final incomplete UTF-8, also make sure there's no overrun.
-// Ticket #4801. Ideally replacement symbols should be added, but we don't have that yet.
+// Ticket #4801. Invalid UTF-8 fragments are left in the string as-is.
 START_TEST (test_strip_ctrl_codes2)
 {
     // U+2764 heart in UTF-8, followed by " ábcdéfghíjklnmó\000pqrst" in Latin-1
@@ -94,9 +94,8 @@ START_TEST (test_strip_ctrl_codes2)
     memcpy (s, s_orig, sizeof (s_orig));
 
     char *actual = strip_ctrl_codes (s);
-    const char *expected = "\342\235\244 bcdfghjklm";
 
-    ck_assert_str_eq (actual, expected);
+    ck_assert_str_eq (actual, s_orig);
     g_free (s);
 }
 END_TEST
