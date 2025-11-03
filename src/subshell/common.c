@@ -318,13 +318,13 @@ init_subshell_child (const char *pty_name)
     {
     case SHELL_BASH:
         // Do we have a custom init file ~/.local/share/mc/bashrc?
-        init_file = mc_config_get_full_path (MC_BASHRC_FILE);
+        init_file = mc_config_get_full_path (MC_BASHRC_CUSTOM_PROFILE_FILE);
 
         // Otherwise use ~/.bashrc
         if (!exist_file (init_file))
         {
             g_free (init_file);
-            init_file = g_strdup (".bashrc");
+            init_file = g_strdup (MC_BASHRC_DEFAULT_PROFILE_FILE);
         }
 
         /* Make MC's special commands not show up in bash's history and also suppress
@@ -346,13 +346,13 @@ init_subshell_child (const char *pty_name)
     case SHELL_ASH_BUSYBOX:
     case SHELL_DASH:
         // Do we have a custom init file ~/.local/share/mc/ashrc?
-        init_file = mc_config_get_full_path (MC_ASHRC_FILE);
+        init_file = mc_config_get_full_path (MC_ASHRC_CUSTOM_PROFILE_FILE);
 
         // Otherwise use ~/.profile
         if (!exist_file (init_file))
         {
             g_free (init_file);
-            init_file = g_strdup (".profile");
+            init_file = g_strdup (MC_GENERIC_DEFAULT_PROFILE_FILE);
         }
 
         /* Put init file to ENV variable used by ash but only if it
@@ -363,13 +363,13 @@ init_subshell_child (const char *pty_name)
 
     case SHELL_KSH:
         // Do we have a custom init file ~/.local/share/mc/kshrc?
-        init_file = mc_config_get_full_path (MC_KSHRC_FILE);
+        init_file = mc_config_get_full_path (MC_KSHRC_CUSTOM_PROFILE_FILE);
 
         // Otherwise use ~/.profile
         if (!exist_file (init_file))
         {
             g_free (init_file);
-            init_file = g_strdup (".profile");
+            init_file = g_strdup (MC_GENERIC_DEFAULT_PROFILE_FILE);
         }
 
         /* Put init file to ENV variable used by ksh but only if it
@@ -383,13 +383,13 @@ init_subshell_child (const char *pty_name)
 
     case SHELL_MKSH:
         // Do we have a custom init file ~/.local/share/mc/mkshrc?
-        init_file = mc_config_get_full_path (MC_MKSHRC_FILE);
+        init_file = mc_config_get_full_path (MC_MKSHRC_CUSTOM_PROFILE_FILE);
 
         // Otherwise use ~/.mkshrc (default behavior of mksh)
         if (!exist_file (init_file))
         {
             g_free (init_file);
-            init_file = g_strdup (".mkshrc");
+            init_file = g_strdup (MC_MKSHRC_DEFAULT_PROFILE_FILE);
         }
 
         /* Put init file to ENV variable used by mksh but only if it
@@ -409,7 +409,7 @@ init_subshell_child (const char *pty_name)
         {
             /* Do we have a custom init file ~/.local/share/mc/.zshrc?
              * Otherwise use standard ~/.zshrc */
-            init_file = mc_config_get_full_path (MC_ZSHRC_FILE);
+            init_file = mc_config_get_full_path (MC_ZSHRC_CUSTOM_PROFILE_FILE);
             if (exist_file (init_file))
             {
                 // Set ZDOTDIR to ~/.local/share/mc
