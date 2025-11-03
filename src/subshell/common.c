@@ -1211,20 +1211,14 @@ init_subshell_precmd (void)
      *    especially on embedded systems where people try to save space, so let's use
      *    the fallback version.
      */
-    static const char *precmd_fallback =
-        " MC_PS1_SAVED=\"$PS1\";"  // Save custom PS1
-        " precmd() {"
-        "   if [ ! \"${PWD##$HOME}\" ]; then"
-        "     MC_PWD=\"~\";"
-        "   else"
-        "     [ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\";"
-        "   fi;"
-        "   echo \"${MC_PS1_SAVED:-$USER@$(hostname -s):$MC_PWD\\$ }\";"
-        "   pwd >&%d;"
-        "   kill -STOP $$;"
-        " };"
-        " PRECMD=precmd;"
-        " PS1='$($PRECMD)'\n";
+    static const char *precmd_fallback = " MC_PS1_SAVED=\"$PS1\";"  // Save custom PS1
+                                         " precmd() {"
+                                         "   echo \"$MC_PS1_SAVED\";"
+                                         "   pwd >&%d;"
+                                         "   kill -STOP $$;"
+                                         " };"
+                                         " PRECMD=precmd;"
+                                         " PS1='$($PRECMD)'\n";
 
     switch (mc_global.shell->type)
     {
@@ -1257,7 +1251,7 @@ init_subshell_precmd (void)
 
     case SHELL_KSH:
         // pdksh based variants support \x placeholders but not any "precmd" functionality
-        return g_strdup_printf (" PS1='$(pwd >&%d; kill -STOP $$)'\"${PS1:-\\u@\\h:\\w\\$ }\"\n",
+        return g_strdup_printf (" PS1='$(pwd >&%d; kill -STOP $$)'\"$PS1\"\n",
                                 subshell_pipe[WRITE]);
 
     case SHELL_ZSH:
