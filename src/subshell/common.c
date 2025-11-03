@@ -1181,44 +1181,27 @@ init_subshell_precmd (void)
 {
     /*
      * Fallback precmd emulation that should work with virtually any shell.
-     * No real precmd functionality is required, no support for \x substitutions
-     * in PS1 is needed. For convenience, $HOME is replaced by ~ in PS1.
      *
-     * The following example is a little less fancy (home directory not replaced)
-     * and shows the basic workings of our prompt for easier understanding:
+     * Explanation of the indirect hop via $MC_PRECMD:
      *
-     * " precmd() {"
-     *     " echo \"$USER@$(hostname -s):$PWD\";"
-     *     " pwd >&%d;"
-     *     " kill -STOP $$;"
-     * " };"
-     * " PRECMD=precmd;"
-     * " PS1='$($PRECMD)$ '\n",
+     * Scenario: The user exports PS1 and then invokes a sub-subshell (e.g. "sh").
      *
-     * Explanations:
+     * This would lead to the sub-subshell stopping (=frozen mc):
+     *     PS1='$(pwd >&%d; kill -STOP $$)...'
      *
-     * A: This leads to a stopped subshell (=frozen mc) if user calls "ash" command
-     *    "PS1='$(pwd >&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
+     * This would lead to an error message like "sh: mc_precmd: not found":
+     *     mc_precmd() { pwd >&%d; kill -STOP $$; }
+     *     PS1='$(mc_precmd)...'
      *
-     * B: This leads to "sh: precmd: not found" in sub-subshell if user calls "ash" command
-     *    "precmd() { pwd >&%d; kill -STOP $$; }; "
-     *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
-     *
-     * C: This works if user calls "ash" command because in sub-subshell
-     *    PRECMD is undefined, thus evaluated to empty string - no damage done.
-     *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
-     *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
-     *    especially on embedded systems where people try to save space, so let's use
-     *    the fallback version.
+     * A hop via $MC_PRECMD works because in the sub-subshell MC_PRECMD is undefined (assuming the
+     * user did not export this one), thus evaluated to empty string - no damage done.
      */
-    static const char *precmd_fallback = " MC_PS1_SAVED=\"$PS1\";"  // Save custom PS1
-                                         " precmd() {"
-                                         "   echo \"$MC_PS1_SAVED\";"
+    static const char *precmd_fallback = " mc_precmd() {"
                                          "   pwd >&%d;"
                                          "   kill -STOP $$;"
                                          " };"
-                                         " PRECMD=precmd;"
-                                         " PS1='$($PRECMD)'\n";
+                                         " MC_PRECMD=mc_precmd;"
+                                         " PS1='$($MC_PRECMD)'\"$PS1\"\n";
 
     switch (mc_global.shell->type)
     {
@@ -1236,21 +1219,16 @@ init_subshell_precmd (void)
             command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
 
     case SHELL_ASH_BUSYBOX:
-        // BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
-        // that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway
+        // BusyBox needs to be built with CONFIG_ASH_EXPAND_PRMT=y (this is the default)
         return g_strdup_printf (precmd_fallback, subshell_pipe[WRITE]);
 
     case SHELL_DASH:
-        // Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
-        // but does not support escape sequences for user, host and cwd in prompt
         return g_strdup_printf (precmd_fallback, subshell_pipe[WRITE]);
 
     case SHELL_MKSH:
-        // mksh doesn't support \x placeholders in PS1 and needs precmd emulation via PS1
         return g_strdup_printf (precmd_fallback, subshell_pipe[WRITE]);
 
     case SHELL_KSH:
-        // pdksh based variants support \x placeholders but not any "precmd" functionality
         return g_strdup_printf (" PS1='$(pwd >&%d; kill -STOP $$)'\"$PS1\"\n",
                                 subshell_pipe[WRITE]);
 
