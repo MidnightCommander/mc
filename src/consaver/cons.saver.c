@@ -69,7 +69,7 @@
 #endif
 #include <termios.h>
 
-#include "lib/unixcompat.h"  // STDERR_FILENO
+#include "lib/unixcompat.h"  // STDERR_FILENO, major(), minor()
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
@@ -202,9 +202,9 @@ main (int argc, char **argv)
     if (fstat (console_fd, &st) < 0 || !S_ISCHR (st.st_mode))
         die ();
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-    if ((st.st_rdev & 0xff00) != 0x0400)
+    if (major (st.st_rdev) != 4)
         die ();
-    if ((st.st_rdev & 0x00ff) != console_minor)
+    if (minor (st.st_rdev) != console_minor)
         die ();
 #endif
     if (st.st_uid != uid)
@@ -220,9 +220,9 @@ main (int argc, char **argv)
     if (fstat (vcsa_fd, &st) < 0 || !S_ISCHR (st.st_mode))
         die ();
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-    if ((st.st_rdev & 0xff00) != 0x0700)
+    if (major (st.st_rdev) != 7)
         die ();
-    if ((st.st_rdev & 0x00ff) != 128 + console_minor)
+    if (minor (st.st_rdev) != 128 + console_minor)
         die ();
 #endif
 
