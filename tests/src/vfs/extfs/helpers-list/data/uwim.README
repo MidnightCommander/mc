@@ -1,0 +1,4 @@
+uwim.input is created with wimtools from uwim.source
+uwim.source is created with wimtools from the `doc` folder of mc
+
+    wimcapture doc/hlp uwim.source mchelp "help pages"
