@@ -155,7 +155,7 @@ parse_256_or_true_color_name (const char *color_name)
                 i = (h[0] << 20) | (h[0] << 16) | (h[1] << 12) | (h[1] << 8) | (h[2] << 4) | h[2];
             else
                 i = (h[0] << 20) | (h[1] << 16) | (h[2] << 12) | (h[3] << 8) | (h[4] << 4) | h[5];
-            return (1 << 24) | i;
+            return FLAG_TRUECOLOR | i;
         }
     }
 
@@ -178,7 +178,7 @@ tty_color_get_name_by_index (int idx)
             return color_table[i].name;
 
     // Create and return the strings in "colorNNN" or "#rrggbb" format.
-    if ((idx >= 16 && idx < 256) || (idx & (1 << 24)) != 0)
+    if ((idx >= 16 && idx < 256) || (idx & FLAG_TRUECOLOR) != 0)
     {
         char name[9];
 
@@ -238,6 +238,40 @@ tty_attr_get_bits (const char *attrs)
         g_strfreev (attr_list);
     }
     return attr_bits;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+convert_256color_to_truecolor (int color)
+{
+    int r, g, b;
+
+    // Invalid color
+    if (color > 255)
+        return 0;
+
+    if (color >= 232)  // Gray scale
+        r = g = b = (color - 231) * 10 + 8;
+    else if (color >= 16)  // 6x6x6 color cube
+    {
+        color -= 16;
+
+        r = (color / (6 * 6) % 6);
+        r = r > 0 ? r * 40 + 55 : 0;
+
+        g = (color / 6 % 6);
+        g = g > 0 ? g * 40 + 55 : 0;
+
+        b = (color % 6);
+        b = b > 0 ? b * 40 + 55 : 0;
+    }
+    else  // We don't convert basic 16 colors as they are terminal-dependent and user-configurable
+        return color;
+
+    color = FLAG_TRUECOLOR | (r << 16) | (g << 8) | b;
+
+    return color;
 }
 
 /* --------------------------------------------------------------------------------------------- */
