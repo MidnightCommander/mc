@@ -190,16 +190,16 @@ mc_tty_normalize_lines_char (const char *str)
         { "\342\224\202", ACS_VLINE },     // │
         { "\342\224\274", ACS_PLUS },      // ┼
 
-        { "\342\225\235", ACS_LRCORNER | A_BOLD },  // ╔
-        { "\342\225\232", ACS_LLCORNER | A_BOLD },  // ╚
-        { "\342\225\227", ACS_URCORNER | A_BOLD },  // ╗
-        { "\342\225\224", ACS_ULCORNER | A_BOLD },  // ╝
-        { "\342\225\237", ACS_LTEE | A_BOLD },      // ╟
-        { "\342\225\242", ACS_RTEE | A_BOLD },      // ╢
-        { "\342\225\244", ACS_TTEE | A_BOLD },      // ╤
-        { "\342\225\247", ACS_BTEE | A_BOLD },      // ╧
-        { "\342\225\220", ACS_HLINE | A_BOLD },     // ═
-        { "\342\225\221", ACS_VLINE | A_BOLD },     // ║
+        { "\342\225\235", ACS_LRCORNER },  // ╔
+        { "\342\225\232", ACS_LLCORNER },  // ╚
+        { "\342\225\227", ACS_URCORNER },  // ╗
+        { "\342\225\224", ACS_ULCORNER },  // ╝
+        { "\342\225\237", ACS_LTEE },      // ╟
+        { "\342\225\242", ACS_RTEE },      // ╢
+        { "\342\225\244", ACS_TTEE },      // ╤
+        { "\342\225\247", ACS_BTEE },      // ╧
+        { "\342\225\220", ACS_HLINE },     // ═
+        { "\342\225\221", ACS_VLINE },     // ║
 
         { NULL, 0 },
     };
