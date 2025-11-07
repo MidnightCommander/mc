@@ -680,6 +680,16 @@ tty_print_string (const char *s)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+tty_putp (const char *s)
+{
+    // S-Lang has SLtt_tputs(), but it only passes the chars through one-by-one without any
+    // processing
+    SLtt_write_string ((char *) s);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 tty_printf (const char *fmt, ...)
 {
     va_list args;
@@ -719,6 +729,23 @@ char *
 tty_tigetstr (const char *terminfo_cap, const char *termcap_cap)
 {
     return SLtt_tgetstr ((SLFUTURE_CONST char *) (termcap_cap ? termcap_cap : terminfo_cap));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+// Warning: S-Lang doesn't support more than two parameters
+char *
+tty_tiparm (const char *str, ...)
+{
+    va_list args;
+    int p1, p2;
+
+    va_start (args, str);
+    p1 = va_arg (args, int);
+    p2 = va_arg (args, int);
+    va_end (args);
+
+    return SLtt_tgoto ((SLFUTURE_CONST char *) str, p2, p1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
