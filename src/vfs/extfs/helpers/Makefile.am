@@ -11,6 +11,7 @@ EXTFS_IN    = 			\
 	a+.in			\
 	apt+.in			\
 	audio.in		\
+	brotli.in		\
 	deb.in			\
 	deba.in			\
 	debd.in			\
@@ -45,6 +46,7 @@ EXTFS_OUT = 			\
 	a+			\
 	apt+			\
 	audio			\
+	brotli			\
 	deb			\
 	deba			\
 	debd			\
