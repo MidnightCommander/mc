@@ -140,7 +140,7 @@ edit_about (void)
     char *ver, *desc;
 
     ver = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
-    desc = g_strdup_printf (N_ ("A user friendly text editor\n"
+    desc = g_strdup_printf (_ ("A user friendly text editor\n"
                                 "written for the %s."),
                             PACKAGE_NAME);
 
