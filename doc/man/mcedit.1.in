@@ -181,6 +181,13 @@ The currently tagged files.
 .I %T
 The tagged files in the unselected panel.
 .TP
+.IR %v " and " %V
+Similar to the
+.I %t
+and
+.I %T
+, but expands to full names of tagged files.
+.TP
 .IR %u " and " %U
 Similar to the
 .I %t

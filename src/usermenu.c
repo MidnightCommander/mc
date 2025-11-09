@@ -948,9 +948,11 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 
     case 't':
     case 'u':
+    case 'v':
     {
         GString *block = NULL;
         int i;
+        char *qcwd = NULL;
 
         if (panel == NULL)
         {
@@ -958,28 +960,40 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
             goto ret;
         }
 
+        if (c_lc == 'v')
+        {
+            const char *cwd = vfs_path_as_str (panel->cwd_vpath);
+
+            qcwd = quote_func (cwd, FALSE);
+        }
+
+        block = g_string_sized_new (64);
+
         for (i = 0; i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked != 0)
             {
                 char *tmp;
 
+                if (qcwd != NULL)
+                {
+                    g_string_append (block, qcwd);
+                    g_string_append (block, PATH_SEP_STR);
+                }
+
                 tmp = quote_func (panel->dir.list[i].fname->str, FALSE);
+
                 if (tmp != NULL)
                 {
-                    if (block == NULL)
-                        block = g_string_new_take (tmp);
-                    else
-                    {
-                        g_string_append (block, tmp);
-                        g_free (tmp);
-                    }
+                    g_string_append (block, tmp);
+                    g_free (tmp);
                     g_string_append_c (block, ' ');
                 }
 
                 if (c_lc == 'u')
                     do_file_mark (panel, i, 0);
             }
-        result = block == NULL ? NULL : g_string_free (block, block->len == 0);
+        g_free (qcwd);
+        result = g_string_free (block, block->len == 0);
         goto ret;
     }  // sub case block
     default:

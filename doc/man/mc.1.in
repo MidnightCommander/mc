@@ -2340,6 +2340,9 @@ The currently tagged files.
 .I %T
 The tagged files in the unselected panel.
 .TP
+.TP
+.IR %v " and " %V
+Similar to the %t and %T, but expands to full names of tagged files.
 .IR %u " and " %U
 Similar to the %t and %T macros, but in addition the files are untagged.
 You can use this macro only once per menu file entry or extension file
