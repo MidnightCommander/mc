@@ -499,9 +499,9 @@ about_box (void)
     const char *name_cp_source = get_codepage_name (mc_global.source_codepage);
 
     label_cp_display =
-        g_strdup_printf ("%s: %s", N_ ("Detected display codepage"), name_cp_display);
+        g_strdup_printf ("%s: %s", _ ("Detected display codepage"), name_cp_display);
     label_cp_source =
-        g_strdup_printf ("%s: %s", N_ ("Selected source (file I/O) codepage"), name_cp_source);
+        g_strdup_printf ("%s: %s", _ ("Selected source (file I/O) codepage"), name_cp_source);
 
     quick_widget_t quick_widgets[] = {
         QUICK_LABEL (version, NULL),
