@@ -141,7 +141,7 @@ edit_about (void)
     char *package_copyright = mc_get_package_copyright ();
 
     char *description =
-        g_strdup_printf (N_ ("A user friendly text editor\nwritten for the %s."), PACKAGE_NAME);
+        g_strdup_printf (_ ("A user friendly text editor\nwritten for the %s."), PACKAGE_NAME);
 
     {
         quick_widget_t quick_widgets[] = {
