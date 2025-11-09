@@ -459,6 +459,9 @@ shell_set_env (int flags)
 
     ret = g_string_sized_new (256);
 
+    g_string_append (ret, "LANG=C.UTF-8; export LANG; ");
+    g_string_append (ret, "LC_ALL=C.UTF-8; export LC_ALL; ");
+
     if ((flags & SHELL_HAVE_HEAD) != 0)
         g_string_append (ret, "SHELL_HAVE_HEAD=1 export SHELL_HAVE_HEAD; ");
 
@@ -631,7 +634,7 @@ shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
     // Set up remote locale to C, otherwise dates cannot be recognized
     if (shell_command (me, super, WAIT_REPLY,
-                       "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n"
+                       "LANG=C.UTF-8 LC_ALL=C.UTF-8 LC_TIME=C; export LANG LC_ALL LC_TIME;\n"
                        "echo '### 200'\n",
                        -1)
         != COMPLETE)
