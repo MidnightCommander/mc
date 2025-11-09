@@ -237,16 +237,9 @@ strip_ctrl_codes (char *s)
                 r++;
         }
         else
-        {
-            const char *n = str_cget_next_char (r);
-
-            if (str_isprint (r))
-            {
-                memmove (w, r, n - r);
-                w += n - r;
-            }
-            r = n;
-        }
+            // Copy byte by byte, thereby letting mc use its standard mechanism to denote invalid
+            // UTF-8 sequences. See #4801.
+            *(w++) = *(r++);
     }
 
     *w = '\0';
