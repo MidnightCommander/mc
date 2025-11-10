@@ -376,18 +376,18 @@ edit_get_save_file_as (WEdit *edit)
     vfs_path_t *ret_vpath = NULL;
 
     const char *lb_names[LB_NAMES] = {
-        N_ ("&Do not change"),
-        N_ ("&Unix format (LF)"),
-        N_ ("&Windows/DOS format (CR LF)"),
-        N_ ("&Macintosh format (CR)"),
+        _ ("&Do not change"),
+        _ ("&Unix format (LF)"),
+        _ ("&Windows/DOS format (CR LF)"),
+        _ ("&Macintosh format (CR)"),
     };
 
     quick_widget_t quick_widgets[] = {
-        QUICK_LABELED_INPUT (N_ ("Enter file name:"), input_label_above,
+        QUICK_LABELED_INPUT (_ ("Enter file name:"), input_label_above,
                              vfs_path_as_str (edit->filename_vpath), "save-as", &filename_res, NULL,
                              FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_SEPARATOR (TRUE),
-        QUICK_LABEL (N_ ("Change line breaks to:"), NULL),
+        QUICK_LABEL (_ ("Change line breaks to:"), NULL),
         QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END,
@@ -397,7 +397,7 @@ edit_get_save_file_as (WEdit *edit)
 
     quick_dialog_t qdlg = {
         .rect = r,
-        .title = N_ ("Save As"),
+        .title = _ ("Save As"),
         .help = "[Save File As]",
         .widgets = quick_widgets,
         .callback = NULL,
@@ -885,17 +885,10 @@ edit_save_mode_cmd (void)
     char *str_result = NULL;
 
     const char *str[] = {
-        N_ ("&Quick save"),
-        N_ ("&Safe save"),
-        N_ ("&Do backups with following extension:"),
+        _ ("&Quick save"),
+        _ ("&Safe save"),
+        _ ("&Do backups with following extension:"),
     };
-
-#ifdef ENABLE_NLS
-    size_t i;
-
-    for (i = 0; i < 3; i++)
-        str[i] = _ (str[i]);
-#endif
 
     g_assert (edit_options.backup_ext != NULL);
 
@@ -905,7 +898,7 @@ edit_save_mode_cmd (void)
             QUICK_INPUT (edit_options.backup_ext, "edit-backup-ext", &str_result,
                          &edit_save_mode_input_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
-            QUICK_CHECKBOX (N_ ("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
+            QUICK_CHECKBOX (_ ("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
         };
@@ -914,7 +907,7 @@ edit_save_mode_cmd (void)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Edit Save Mode"),
+            .title = _ ("Edit Save Mode"),
             .help = "[Edit Save Mode]",
             .widgets = quick_widgets,
             .callback = edit_save_mode_callback,
@@ -1500,7 +1493,7 @@ edit_block_delete_cmd (WEdit *edit)
 gboolean
 edit_ok_to_quit (WEdit *edit)
 {
-    const char *fname = N_ ("[NoName]");
+    const char *fname;
     char *msg;
     int act;
 
@@ -1509,10 +1502,8 @@ edit_ok_to_quit (WEdit *edit)
 
     if (edit->filename_vpath != NULL)
         fname = vfs_path_as_str (edit->filename_vpath);
-#ifdef ENABLE_NLS
     else
-        fname = _ (fname);
-#endif
+        fname = _ ("[NoName]");
 
     if (!mc_global.midnight_shutdown)
     {
@@ -1947,12 +1938,12 @@ edit_mail_dialog (WEdit *edit)
     char *mail_cc = NULL;
 
     quick_widget_t quick_widgets[] = {
-        QUICK_LABEL (N_ ("mail -s <subject> -c <cc> <to>"), NULL),
-        QUICK_LABELED_INPUT (N_ ("To"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-3",
+        QUICK_LABEL (_ ("mail -s <subject> -c <cc> <to>"), NULL),
+        QUICK_LABELED_INPUT (_ ("To"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-3",
                              &mail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
-        QUICK_LABELED_INPUT (N_ ("Subject"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-2",
+        QUICK_LABELED_INPUT (_ ("Subject"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-2",
                              &mail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-        QUICK_LABELED_INPUT (N_ ("Copies to"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input",
+        QUICK_LABELED_INPUT (_ ("Copies to"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input",
                              &mail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END,
@@ -1962,7 +1953,7 @@ edit_mail_dialog (WEdit *edit)
 
     quick_dialog_t qdlg = {
         .rect = r,
-        .title = N_ ("Mail"),
+        .title = _ ("Mail"),
         .help = "[Input Line Keys]",
         .widgets = quick_widgets,
         .callback = NULL,

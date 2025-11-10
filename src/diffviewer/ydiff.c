@@ -2322,22 +2322,22 @@ static void
 dview_diff_options (WDiff *dview)
 {
     const char *quality_str[] = {
-        N_ ("No&rmal"),
-        N_ ("&Fastest (Assume large files)"),
-        N_ ("&Minimal (Find a smaller set of change)"),
+        _ ("No&rmal"),
+        _ ("&Fastest (Assume large files)"),
+        _ ("&Minimal (Find a smaller set of change)"),
     };
 
     quick_widget_t quick_widgets[] = {
         // clang-format off
-        QUICK_START_GROUPBOX (N_ ("Diff algorithm")),
+        QUICK_START_GROUPBOX (_ ("Diff algorithm")),
             QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
         QUICK_STOP_GROUPBOX,
-        QUICK_START_GROUPBOX (N_ ("Diff extra options")),
-            QUICK_CHECKBOX (N_ ("&Ignore case"), &dview->opt.ignore_case, NULL),
-            QUICK_CHECKBOX (N_ ("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
-            QUICK_CHECKBOX (N_ ("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
-            QUICK_CHECKBOX (N_ ("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
-            QUICK_CHECKBOX (N_ ("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
+        QUICK_START_GROUPBOX (_ ("Diff extra options")),
+            QUICK_CHECKBOX (_ ("&Ignore case"), &dview->opt.ignore_case, NULL),
+            QUICK_CHECKBOX (_ ("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
+            QUICK_CHECKBOX (_ ("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
+            QUICK_CHECKBOX (_ ("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
+            QUICK_CHECKBOX (_ ("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
                             NULL),
         QUICK_STOP_GROUPBOX,
         QUICK_BUTTONS_OK_CANCEL,
@@ -2349,7 +2349,7 @@ dview_diff_options (WDiff *dview)
 
     quick_dialog_t qdlg = {
         .rect = r,
-        .title = N_ ("Diff Options"),
+        .title = _ ("Diff Options"),
         .help = "[Diff Options]",
         .widgets = quick_widgets,
         .callback = NULL,
@@ -2849,9 +2849,9 @@ dview_goto_cmd (WDiff *dview, diff_place_t ord)
 {
     static gboolean first_run = TRUE;
 
-    static const char *title[2] = {
-        N_ ("Goto line (left)"),
-        N_ ("Goto line (right)"),
+    const char *title[2] = {
+        _ ("Goto line (left)"),
+        _ ("Goto line (right)"),
     };
 
     int newline;

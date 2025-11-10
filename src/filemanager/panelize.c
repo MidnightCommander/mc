@@ -167,10 +167,10 @@ external_panelize_init (void)
         button_flags_t flags;
         const char *text;
     } panelize_but[] = {
-        { B_ENTER, DEFPUSH_BUTTON, N_ ("Pane&lize") },
-        { B_REMOVE, NORMAL_BUTTON, N_ ("&Remove") },
-        { B_ADD, NORMAL_BUTTON, N_ ("&Add new") },
-        { B_CANCEL, NORMAL_BUTTON, N_ ("&Cancel") },
+        { B_ENTER, DEFPUSH_BUTTON, _ ("Pane&lize") },
+        { B_REMOVE, NORMAL_BUTTON, _ ("&Remove") },
+        { B_ADD, NORMAL_BUTTON, _ ("&Add new") },
+        { B_CANCEL, NORMAL_BUTTON, _ ("&Cancel") },
     };
 
     WGroup *g;
@@ -188,9 +188,6 @@ external_panelize_init (void)
     blen = i - 1;  // gaps between buttons
     while (i-- != 0)
     {
-#ifdef ENABLE_NLS
-        panelize_but[i].text = _ (panelize_but[i].text);
-#endif
         blen += str_term_width1 (panelize_but[i].text) + 3 + 1;
         if (panelize_but[i].flags == DEFPUSH_BUTTON)
             blen += 2;
