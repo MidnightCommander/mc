@@ -453,7 +453,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         int value;  // 0 for labels and checkbox
     } dlg_widgets[] = {
         //  0 - label
-        { NULL, N_ ("New     :"), 2, 3, WPOS_KEEP_DEFAULT, 0 },
+        { NULL, _ ("New     :"), 2, 3, WPOS_KEEP_DEFAULT, 0 },
         //  1 - label - name
         { NULL, NULL, 2, 14, WPOS_KEEP_DEFAULT, 0 },
         //  2 - label - size
@@ -461,7 +461,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         //  3 - label - date & time
         { NULL, NULL, 3, 43, WPOS_KEEP_TOP | WPOS_KEEP_RIGHT, 0 },
         //  4 - label
-        { NULL, N_ ("Existing:"), 4, 3, WPOS_KEEP_DEFAULT, 0 },
+        { NULL, _ ("Existing:"), 4, 3, WPOS_KEEP_DEFAULT, 0 },
         //  5 - label - name
         { NULL, NULL, 4, 14, WPOS_KEEP_DEFAULT, 0 },
         //  6 - label - size
@@ -470,33 +470,33 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         { NULL, NULL, 5, 43, WPOS_KEEP_TOP | WPOS_KEEP_RIGHT, 0 },
         // ---------------------------------------------------
         //  8 - label
-        { NULL, N_ ("Overwrite this file?"), 7, 21, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
+        { NULL, _ ("Overwrite this file?"), 7, 21, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         //  9 - button
-        { NULL, N_ ("&Yes"), 8, 14, WPOS_KEEP_DEFAULT, REPLACE_YES },
+        { NULL, _ ("&Yes"), 8, 14, WPOS_KEEP_DEFAULT, REPLACE_YES },
         // 10 - button
-        { NULL, N_ ("&No"), 8, 22, WPOS_KEEP_DEFAULT, REPLACE_NO },
+        { NULL, _ ("&No"), 8, 22, WPOS_KEEP_DEFAULT, REPLACE_NO },
         // 11 - button
-        { NULL, N_ ("A&ppend"), 8, 29, WPOS_KEEP_DEFAULT, REPLACE_APPEND },
+        { NULL, _ ("A&ppend"), 8, 29, WPOS_KEEP_DEFAULT, REPLACE_APPEND },
         // 12 - button
-        { NULL, N_ ("&Reget"), 8, 40, WPOS_KEEP_DEFAULT, REPLACE_REGET },
+        { NULL, _ ("&Reget"), 8, 40, WPOS_KEEP_DEFAULT, REPLACE_REGET },
         // ---------------------------------------------------
         // 13 - label
-        { NULL, N_ ("Overwrite all files?"), 10, 21, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
+        { NULL, _ ("Overwrite all files?"), 10, 21, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         // 14 - checkbox
-        { NULL, N_ ("Don't overwrite with &zero length file"), 11, 3, WPOS_KEEP_DEFAULT, 0 },
+        { NULL, _ ("Don't overwrite with &zero length file"), 11, 3, WPOS_KEEP_DEFAULT, 0 },
         // 15 - button
-        { NULL, N_ ("A&ll"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_ALL },
+        { NULL, _ ("A&ll"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_ALL },
         // 16 - button
-        { NULL, N_ ("&Older"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_OLDER },
+        { NULL, _ ("&Older"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_OLDER },
         // 17 - button
-        { NULL, N_ ("Non&e"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_NONE },
+        { NULL, _ ("Non&e"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_NONE },
         // 18 - button
-        { NULL, N_ ("S&maller"), 12, 25, WPOS_KEEP_DEFAULT, REPLACE_SMALLER },
+        { NULL, _ ("S&maller"), 12, 25, WPOS_KEEP_DEFAULT, REPLACE_SMALLER },
         // 19 - button
-        { NULL, N_ ("&Size differs"), 12, 40, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
+        { NULL, _ ("&Size differs"), 12, 40, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
         // ---------------------------------------------------
         // 20 - button
-        { NULL, N_ ("&Abort"), 14, 27, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
+        { NULL, _ ("&Abort"), 14, 27, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
     };
 
     const int gap = 1;
@@ -523,16 +523,6 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         title = _ ("File exists");
     else
         title = _ ("Background process: File exists");
-
-#ifdef ENABLE_NLS
-    {
-        const unsigned short num = G_N_ELEMENTS (dlg_widgets);
-
-        for (i = 0; i < num; i++)
-            if (dlg_widgets[i].text != NULL)
-                dlg_widgets[i].text = _ (dlg_widgets[i].text);
-    }
-#endif
 
     // create widgets to get their real widths
     // new file
@@ -1396,27 +1386,27 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
             QUICK_START_COLUMNS,
                 QUICK_SEPARATOR (FALSE),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("&Using shell patterns"), &source_easy_patterns, NULL),
+                QUICK_CHECKBOX (_ ("&Using shell patterns"), &source_easy_patterns, NULL),
             QUICK_STOP_COLUMNS,
-            QUICK_LABELED_INPUT (N_ ("to:"), input_label_above, def_text_secure, "input2",
+            QUICK_LABELED_INPUT (_ ("to:"), input_label_above, def_text_secure, "input2",
                                  &dest_dir, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
-                QUICK_CHECKBOX (N_ ("Follow &links"), &ctx->follow_links, NULL),
-                QUICK_CHECKBOX (N_ ("Preserve &attributes"), &preserve, NULL),
+                QUICK_CHECKBOX (_ ("Follow &links"), &ctx->follow_links, NULL),
+                QUICK_CHECKBOX (_ ("Preserve &attributes"), &preserve, NULL),
 #ifdef ENABLE_EXT2FS_ATTR
-                QUICK_CHECKBOX (N_ ("Preserve e&xt2 attributes"), &copymove_persistent_ext2_attr, NULL),
+                QUICK_CHECKBOX (_ ("Preserve e&xt2 attributes"), &copymove_persistent_ext2_attr, NULL),
 #endif
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
-                QUICK_CHECKBOX (N_ ("&Stable symlinks"), &ctx->stable_symlinks, NULL),
+                QUICK_CHECKBOX (_ ("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
+                QUICK_CHECKBOX (_ ("&Stable symlinks"), &ctx->stable_symlinks, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
 #ifdef ENABLE_BACKGROUND
-                QUICK_BUTTON (N_ ("&Background"), B_USER, NULL, NULL),
+                QUICK_BUTTON (_ ("&Background"), B_USER, NULL, NULL),
 #endif
-                QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
+                QUICK_BUTTON (_ ("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END,
             // clang-format on
         };

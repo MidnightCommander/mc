@@ -257,8 +257,8 @@ init_learn (void)
 
     // buttons
     WButton *bt0, *bt1;
-    const char *b0 = N_ ("&Save");
-    const char *b1 = N_ ("&Cancel");
+    const char *b0 = _ ("&Save");
+    const char *b1 = _ ("&Cancel");
 
     int x, y, i;
     const key_code_name_t *key;
@@ -270,9 +270,6 @@ init_learn (void)
         learn_title = _ (learn_title);
         i18n_flag = TRUE;
     }
-
-    b0 = _ (b0);
-    b1 = _ (b1);
 #endif
 
     do_refresh ();

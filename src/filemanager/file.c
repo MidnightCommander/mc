@@ -3372,14 +3372,9 @@ dirsize_status_init_cb (status_msg_t *sm)
     Widget *wd = WIDGET (sm->dlg);
     WRect r = wd->rect;
 
-    const char *b1_name = N_ ("&Abort");
-    const char *b2_name = N_ ("&Skip");
+    const char *b1_name = _ ("&Abort");
+    const char *b2_name = _ ("&Skip");
     int b_width, ui_width;
-
-#ifdef ENABLE_NLS
-    b1_name = _ (b1_name);
-    b2_name = _ (b2_name);
-#endif
 
     b_width = str_term_width1 (b1_name) + 4;
     if (dsm->allow_skip)
