@@ -78,6 +78,8 @@ START_TEST (test_mc_tmpdir)
                        && g_file_test (tmpdir, G_FILE_TEST_IS_DIR),
                    "\nNo such directory: %s\n", tmpdir);
     mctest_assert_str_eq (env_tmpdir, tmpdir);
+
+    rmdir (tmpdir);
 }
 END_TEST
 
@@ -88,12 +90,14 @@ START_TEST (test_mc_mkstemps)
 {
     // given
     vfs_path_t *pname_vpath = NULL;
+    const char *tmpdir;
     char *begin_pname;
     int fd;
 
     // when
     fd = mc_mkstemps (&pname_vpath, "mctest-", NULL);
-    begin_pname = g_build_filename (mc_tmpdir (), "mctest-", (char *) NULL);
+    tmpdir = mc_tmpdir ();
+    begin_pname = g_build_filename (tmpdir, "mctest-", (char *) NULL);
 
     // then
     close (fd);
@@ -105,6 +109,7 @@ START_TEST (test_mc_mkstemps)
                        && g_file_test (pname, G_FILE_TEST_IS_REGULAR),
                    "\nNo such file: %s\n", pname);
     unlink (pname);
+    rmdir (tmpdir);
     ck_assert_msg (strncmp (pname, begin_pname, strlen (begin_pname)) == 0,
                    "\nstart of %s should be equal to %s\n", pname, begin_pname);
     vfs_path_free (pname_vpath, TRUE);
