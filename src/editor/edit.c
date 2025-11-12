@@ -518,8 +518,10 @@ edit_save_position (WEdit *edit)
 static void
 edit_purge_widget (WEdit *edit)
 {
-    size_t len = sizeof (WEdit) - sizeof (Widget);
-    char *start = (char *) edit + sizeof (Widget);
+    const size_t len = sizeof (WEdit) - sizeof (Widget);
+    char *start;
+
+    start = (char *) edit + sizeof (Widget);
     memset (start, 0, len);
 }
 

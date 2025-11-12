@@ -397,7 +397,9 @@ console_save (void)
 
     for (i = 0; i < 256; i++)
     {
-        char *p = memchr (map.scrmap, i, 256);
+        char *p;
+
+        p = memchr (map.scrmap, i, 256);
         revmap.scrmap[i] = p ? p - map.scrmap : i;
     }
 

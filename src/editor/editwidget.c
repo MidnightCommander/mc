@@ -137,10 +137,13 @@ edit_dlg_deinit (void)
 static void
 edit_about (void)
 {
-    char *version = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
-    char *package_copyright = mc_get_package_copyright ();
+    char *version;
+    char *package_copyright;
+    char *description;
 
-    char *description =
+    version = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
+    package_copyright = mc_get_package_copyright ();
+    description =
         g_strdup_printf (_ ("A user friendly text editor\nwritten for the %s."), PACKAGE_NAME);
 
     {

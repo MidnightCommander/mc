@@ -345,10 +345,8 @@ static void
 mc_skin_color_cache_init (void)
 {
     for (size_t i = 0; i < G_N_ELEMENTS (color_keywords); i++)
-    {
         tty_color_role_to_pair[color_keywords[i].role - TTY_COLOR_MAP_OFFSET] =
             mc_skin_color_get (color_keywords[i].group, color_keywords[i].key);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

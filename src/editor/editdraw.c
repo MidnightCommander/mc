@@ -118,6 +118,7 @@ format_character_code (WEdit *edit)
             else
             {
                 char uplus[CHAR_CODE_BUF_SIZE];
+
                 g_snprintf (uplus, CHAR_CODE_BUF_SIZE, "U+%04X", cur_utf);
                 g_snprintf (buf, CHAR_CODE_BUF_SIZE, "%8s", uplus);
             }

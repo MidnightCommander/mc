@@ -382,7 +382,9 @@ main (int argc, char *argv[])
         text = g_strdup_printf (_ ("%s\nis already running on this terminal.\n"
                                    "Subshell support will be disabled."),
                                 PACKAGE_NAME);
+
         const int quit_mc = query_dialog (_ ("Warning"), text, D_ERROR, 2, _ ("&OK"), _ ("&Quit"));
+
         g_free (text);
 
         if (quit_mc != 0)
@@ -470,6 +472,7 @@ main (int argc, char *argv[])
     {
         const int last_wd_fd =
             open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+
         if (last_wd_fd != -1)
         {
             MC_UNUSED const ssize_t ret1 = write (last_wd_fd, last_wd_str, strlen (last_wd_str));

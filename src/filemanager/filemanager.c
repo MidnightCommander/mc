@@ -827,6 +827,7 @@ setup_mc (void)
     tty_display_8bit (TRUE);
 
     const int baudrate = tty_baudrate ();
+
     if ((baudrate > 0 && baudrate < 9600) || mc_global.tty.slow_terminal)
         verbose = FALSE;
 }

@@ -110,12 +110,13 @@ static char *
 mc_shell_get_name_env (void)
 {
     char *shell_name = NULL;
-
     const char *shell_env = g_getenv ("SHELL");
+
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
         // 2nd choice: user login shell
         const struct passwd *pwd = getpwuid (geteuid ());
+
         if (pwd != NULL)
             shell_name = g_strdup (pwd->pw_shell);
     }
@@ -131,11 +132,13 @@ mc_shell_get_name_env (void)
 static mc_shell_t *
 mc_shell_get_from_env (void)
 {
-    char *shell_name = mc_shell_get_name_env ();
+    char *shell_name;
 
+    shell_name = mc_shell_get_name_env ();
     if (shell_name != NULL)
     {
-        mc_shell_t *mc_shell = NULL;
+        mc_shell_t *mc_shell;
+
         mc_shell = g_new0 (mc_shell_t, 1);
         mc_shell->path = shell_name;
         return mc_shell;
@@ -265,8 +268,9 @@ mc_shell_recognize_path (mc_shell_t *mc_shell)
 void
 mc_shell_init (void)
 {
-    mc_shell_t *mc_shell = mc_shell_get_from_env ();
+    mc_shell_t *mc_shell;
 
+    mc_shell = mc_shell_get_from_env ();
     if (mc_shell == NULL)
         mc_shell = mc_shell_get_installed_in_system ();
 
