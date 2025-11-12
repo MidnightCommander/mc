@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
@@ -55,7 +55,8 @@ msgstr "Ezin '%s' taldea gertaeratarako sortu!"
 msgid "Unable to create event '%s'!"
 msgstr "Ezin '%s' gertaera sortu!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -159,28 +160,47 @@ msgstr ""
 "%s\n"
 "Lehenetsitako azala zamatu da"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Ezin da 256 koloretarako euskarria duen '%s' azala\n"
-"256 koloretakoa ez den terminal batean erabili.\n"
+"Ezin da '%s' azala erabili benetako-kolore sostenguarekin:\n"
+"%s\n"
 "Lehenetsitako azala zamatu da"
 
-msgid "True color not supported with ncurses."
-msgstr "Benetako-kolorea ez du onartzen ncurses-ek."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Ematen du zure terminalak 256 kolore ere ez dituela onartzen."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "Benetako-kolorea ez da onartzen slang bertsio honetan."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Ezarri COLORTERM=truecolor zure terminalak benetako-kolorea onartzen badu."
 
 msgid "Escape"
 msgstr "Ihes"
@@ -465,12 +485,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maius"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -496,6 +510,12 @@ msgid ""
 msgstr ""
 "%dx%d pantaila-neurria ez da onartzen.\n"
 "Egiaztatu TERM ingurune-aldagaia.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1059,6 +1079,12 @@ msgstr "Aldatu lerro hausturak hontara:"
 
 msgid "Save As"
 msgstr "Gorde honela"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "%s direktorioa ezin sortu"
 
 msgid "&Quick save"
 msgstr "&Azker gordetzea"
@@ -2175,8 +2201,9 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
-msgstr ""
+#, fuzzy
+msgid "Huge file"
+msgstr "Gorde fitxategia"
 
 msgid "No COW"
 msgstr ""
@@ -2367,12 +2394,6 @@ msgstr "Sortu direktorio berria"
 msgid "Enter directory name:"
 msgstr "Sartu direktorio izena:"
 
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "%s direktorioa ezin sortu"
-
 msgid "Extension file edit"
 msgstr "Editatu luzapen fitxategia"
 
@@ -2554,8 +2575,8 @@ msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
-"(stat)\\n\n"
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
+"\\n\n"
 "%s"
 
 #, fuzzy, c-format
@@ -2732,8 +2753,8 @@ msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
-"(stat)\\n\n"
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera (stat)"
+"\\n\n"
 "%s"
 
 #, fuzzy, c-format
@@ -3072,6 +3093,9 @@ msgstr "&Info"
 msgid "&Tree"
 msgstr "Zu&haitza"
 
+msgid "Paneli&ze"
+msgstr "Panelerat&u"
+
 msgid "&Listing format..."
 msgstr "&Zerrenda formatua"
 
@@ -3092,9 +3116,6 @@ msgstr "S&hell esteka..."
 
 msgid "SFTP li&nk..."
 msgstr ""
-
-msgid "Paneli&ze"
-msgstr "Panelerat&u"
 
 msgid "&Rescan"
 msgstr "&Berraztertu"
@@ -4498,6 +4519,9 @@ msgstr "Akatsaren berri eman da galarazi ondoren."
 msgid "Aborted transfer would be successful."
 msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar artxibo inkoherentea"
 
@@ -4516,9 +4540,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4708,6 +4729,27 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Ezin da 256 koloretarako euskarria duen '%s' azala\n"
+#~ "256 koloretakoa ez den terminal batean erabili.\n"
+#~ "Lehenetsitako azala zamatu da"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "Benetako-kolorea ez du onartzen ncurses-ek."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Ematen du zure terminalak 256 kolore ere ez dituela onartzen."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Ezarri COLORTERM=truecolor zure terminalak benetako-kolorea onartzen badu."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "Irteera bertan behera &utzi"

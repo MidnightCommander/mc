@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -63,7 +63,8 @@ msgstr "Nu se poate crea grupul '%s' pentru evenimente!"
 msgid "Unable to create event '%s'!"
 msgstr "Nu se poate crea evenimentul '%s'!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -167,27 +168,47 @@ msgstr ""
 "%s\n"
 "Tema implicita a fost încărcata"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Nu se poate folosi tematica '%s' cu suport pentru 256 de culori\n"
-"pe un terminal non-256.\n"
-"A fost încărcată tematica implicită"
+"Nu se poate folosi tema '%s' cu suport pentru culori reale:\n"
+"%s\n"
+"Tema implicita a fost încărcata"
 
-msgid "True color not supported with ncurses."
-msgstr "CULORI REALE nu sunt acceptate cu ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Terminalul dvs. nu pare ca nu suporta 256 de culori."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "CULORI REALE  nu sunt acceptate în această versiune slang."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr "Setați COLORTERM=truecolor dacă terminalul dvs. suporta culori reale."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
+msgstr ""
 
 msgid "Escape"
 msgstr "Escape"
@@ -472,12 +493,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Variabila de mediu TERM nu este setată!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nu se poate verifica conducta SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -509,6 +524,12 @@ msgid ""
 msgstr ""
 "Mărimea %dx%d a ecranului nu este suportată.\n"
 "Verificați variabila de mediu TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Variabila de mediu TERM nu este setată!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nu se poate verifica conducta SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1075,6 +1096,12 @@ msgstr "Schimbă finalul de linie în:"
 
 msgid "Save As"
 msgstr "Salvează ca"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Nu se poate crea dosarul %s"
 
 msgid "&Quick save"
 msgstr "Salvare &rapidă"
@@ -2193,7 +2220,8 @@ msgstr "Partea superioară a ierarhiilor de directoare"
 msgid "Inode uses extents"
 msgstr "Inode folosește extents"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Huge_fișier"
 
 msgid "No COW"
@@ -2386,12 +2414,6 @@ msgstr "Creează un nou dosar"
 
 msgid "Enter directory name:"
 msgstr "Introdu numele dosarului:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Nu se poate crea dosarul %s"
 
 msgid "Extension file edit"
 msgstr "Editează fișierul de extensii"
@@ -3103,6 +3125,9 @@ msgstr "&Info"
 msgid "&Tree"
 msgstr "Arbore"
 
+msgid "Paneli&ze"
+msgstr "Paneli&zare"
+
 msgid "&Listing format..."
 msgstr "formatul de  &listare "
 
@@ -3123,9 +3148,6 @@ msgstr "Conectare s&hell..."
 
 msgid "SFTP li&nk..."
 msgstr "SFTP li&nk..."
-
-msgid "Paneli&ze"
-msgstr "Paneli&zare"
 
 msgid "&Rescan"
 msgstr "&Rescanează"
@@ -4564,6 +4586,9 @@ msgstr "S-a raportat o eroare după abandon."
 msgid "Aborted transfer would be successful."
 msgstr "Transferul abandonat va reuși."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Arhivă tar trunchiată"
 
@@ -4582,9 +4607,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4772,6 +4794,27 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Nu se poate folosi tematica '%s' cu suport pentru 256 de culori\n"
+#~ "pe un terminal non-256.\n"
+#~ "A fost încărcată tematica implicită"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "CULORI REALE nu sunt acceptate cu ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Terminalul dvs. nu pare ca nu suporta 256 de culori."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Setați COLORTERM=truecolor dacă terminalul dvs. suporta culori reale."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Renunță la ieșire"

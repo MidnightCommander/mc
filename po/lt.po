@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -61,7 +61,8 @@ msgstr "Nepavyko sukurti grupės '%s' įvykiams!"
 msgid "Unable to create event '%s'!"
 msgstr "Nepavyko sukurti įvykio '%s'!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -165,29 +166,47 @@ msgstr ""
 "%s\n"
 "Įkeltas numatytasis apipavidalinimas"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Nepavyko panaudoti '%s' apipavidalinimo su 256 spalvų palaikymu.\n"
-"Terminalas paleistas ne-256 spalvų režime.\n"
+"Nepavyko panaudoti '%s' apipavidalinimo su tikrų spalvų palaikymu:\n"
+"%s\n"
 "Įkeltas numatytasis apipavidalinimas"
 
-msgid "True color not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Panašu, kad terminalas nepalaiko 256 spalvų režimo."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr ""
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Pateikite nustatymą COLORTERM=truecolor jei terminalas palaiko tikrų spalvų "
-"režimą."
 
 msgid "Escape"
 msgstr ""
@@ -472,12 +491,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Lyg2"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -503,6 +516,12 @@ msgid ""
 msgstr ""
 "Ekrano dydis %dx%d nepalaikomas.\n"
 "Patikrinkite TERM aplinkos kintamąjį.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1048,6 +1067,12 @@ msgstr ""
 
 msgid "Save As"
 msgstr "Išsaugoti kaip"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Nepavyko sukurti %s aplanko"
 
 msgid "&Quick save"
 msgstr "&Greitas išsaugojimas"
@@ -2157,8 +2182,9 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
-msgstr ""
+#, fuzzy
+msgid "Huge file"
+msgstr "Išsaugoti failą"
 
 msgid "No COW"
 msgstr ""
@@ -2346,12 +2372,6 @@ msgstr "Sukurti naują aplanką"
 
 msgid "Enter directory name:"
 msgstr "Įvesti aplanko pavadinimą:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Nepavyko sukurti %s aplanko"
 
 msgid "Extension file edit"
 msgstr "Plėtinių failo keitimas"
@@ -3035,6 +3055,9 @@ msgstr "&Informacija"
 msgid "&Tree"
 msgstr "&Medis"
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr ""
 
@@ -3054,9 +3077,6 @@ msgid "S&hell link..."
 msgstr "Apli&nkos ryšys..."
 
 msgid "SFTP li&nk..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -4451,6 +4471,9 @@ msgstr "Po nutraukties pranešta klaida."
 msgid "Aborted transfer would be successful."
 msgstr "Nutrauktas siuntimas būtų sėkmingas."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Nevientisas tar archyvas"
 
@@ -4469,9 +4492,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4652,6 +4672,25 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Nepavyko panaudoti '%s' apipavidalinimo su 256 spalvų palaikymu.\n"
+#~ "Terminalas paleistas ne-256 spalvų režime.\n"
+#~ "Įkeltas numatytasis apipavidalinimas"
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Panašu, kad terminalas nepalaiko 256 spalvų režimo."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Pateikite nustatymą COLORTERM=truecolor jei terminalas palaiko tikrų "
+#~ "spalvų režimą."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Neišeiti"

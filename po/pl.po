@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -19,9 +19,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #, fuzzy
 msgid "No translation"
@@ -58,7 +58,8 @@ msgstr "Nie można utworzyć grupy „%s” dla zdarzeń."
 msgid "Unable to create event '%s'!"
 msgstr "Nie można utworzyć zdarzenia „%s”."
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, fuzzy, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr "Copyright © 1996-2025 Free Software Foundation"
 
 #, c-format
@@ -163,29 +164,47 @@ msgstr ""
 "%s\n"
 "Wczytano domyślną"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Nie można użyć skórki „%s” za pomocą obsługi 256\n"
-"kolorów na terminalu nie dysponującym 256 kolorami.\n"
-"Domyślna skórka nie została wczytana"
+"Nie można użyć skórki „%s” za pomocą obsługi kolorów 24-bitowych:\n"
+"%s\n"
+"Wczytano domyślną"
 
-msgid "True color not supported with ncurses."
-msgstr "Kolory 24-bitowe nie są obsługiwane za pomocą biblioteki ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Terminal nie obsługuje nawet 256 kolorów."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "Kolory 24-bitowe nie są obsługiwane w tej wersji biblioteki S-Lang."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Należy ustawić „COLORTERM=truecolor”, jeśli terminal naprawdę obsługuje "
-"kolory 24-bitowe."
 
 msgid "Escape"
 msgstr "Escape"
@@ -470,12 +489,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nie można sprawdzić potoku SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -507,6 +520,12 @@ msgid ""
 msgstr ""
 "Rozmiar ekranu %d×%d nie jest obsługiwany.\n"
 "Proszę sprawdzić zmienną środowiskową TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nie można sprawdzić potoku SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1096,6 +1115,12 @@ msgstr "Zmiana łamania wierszy na:"
 
 msgid "Save As"
 msgstr "Zapisz jako"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Nie można utworzyć katalogu %s"
 
 msgid "&Quick save"
 msgstr "Szybki &zapis"
@@ -2214,7 +2239,8 @@ msgstr "Hierarchie góry katalogów"
 msgid "Inode uses extents"
 msgstr "I-węzeł używa „extent”"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Wielki_plik"
 
 msgid "No COW"
@@ -2407,12 +2433,6 @@ msgstr "Tworzenie nowego katalogu"
 
 msgid "Enter directory name:"
 msgstr "Nazwa katalogu:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Nie można utworzyć katalogu %s"
 
 msgid "Extension file edit"
 msgstr "Modyfikacja pliku rozszerzeń"
@@ -3127,6 +3147,9 @@ msgstr "&Informacje"
 msgid "&Tree"
 msgstr "&Drzewo"
 
+msgid "Paneli&ze"
+msgstr "Filtru&j"
+
 msgid "&Listing format..."
 msgstr "&Format wyświetlania…"
 
@@ -3147,9 +3170,6 @@ msgstr "Połączenie po po&włoce…"
 
 msgid "SFTP li&nk..."
 msgstr "Połączenie SF&TP…"
-
-msgid "Paneli&ze"
-msgstr "Filtru&j"
 
 msgid "&Rescan"
 msgstr "Odświ&eż"
@@ -4602,6 +4622,9 @@ msgstr "Zgłoszono błąd po przerwaniu."
 msgid "Aborted transfer would be successful."
 msgstr "Przerwane przesyłanie zostałoby pomyślnie zakończone."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
+
 msgid "Inconsistent tar archive"
 msgstr "Niespójne archiwum tar"
 
@@ -4623,9 +4646,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "nie wygląda na archiwum tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
 
 msgid "undelfs: error"
 msgstr "undelfs: błąd"
@@ -4813,6 +4833,28 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Nie można użyć skórki „%s” za pomocą obsługi 256\n"
+#~ "kolorów na terminalu nie dysponującym 256 kolorami.\n"
+#~ "Domyślna skórka nie została wczytana"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "Kolory 24-bitowe nie są obsługiwane za pomocą biblioteki ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Terminal nie obsługuje nawet 256 kolorów."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Należy ustawić „COLORTERM=truecolor”, jeśli terminal naprawdę obsługuje "
+#~ "kolory 24-bitowe."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "N&ie zamykaj"

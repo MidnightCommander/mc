@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022,2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -54,7 +54,8 @@ msgstr "Ne eblas krei grupon '%s' por eventoj!"
 msgid "Unable to create event '%s'!"
 msgstr "Ne eblas krei eventon '%s'!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -158,28 +159,47 @@ msgstr ""
 "%s\n"
 "Uzanta la aprioran etoson"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Ne eblas uzi 256-koloran etoson '%s'.\n"
-"ĉe terminalo kun malpli da koloroj.\n"
+"Ne eblas uzi etoson '%s' kun rego de verkoloj:\n"
+"%s\n"
 "Uzanta la aprioran etoson"
 
-msgid "True color not supported with ncurses."
-msgstr "Verkoloro ne estas regata per ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Via terminalo ŝajnas ne regi 256 kolorojn"
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "Verkoloro ne estas regata de tiu eldono de S-Lang"
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Agordi je COLORTERM=truecolor se via terminalo efektive regas verkolorojn."
 
 msgid "Escape"
 msgstr "Eskapa klavo"
@@ -464,12 +484,6 @@ msgstr "Alternativo"
 msgid "Shift"
 msgstr "Uskleca inversigilo"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La medivariablo TERM ne estas valorizita!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ne eblas kontroli SIGWINCH-dukton"
-
 #, c-format
 msgid ""
 "\n"
@@ -501,6 +515,12 @@ msgid ""
 msgstr ""
 "Ekrangrando %dx%d ne estas regata.\n"
 "Kontroli la medivariablon TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La medivariablo TERM ne estas valorizita!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ne eblas kontroli SIGWINCH-dukton"
 
 msgid "B"
 msgstr "B"
@@ -1085,6 +1105,12 @@ msgstr "ŝanĝi linirompojn al:"
 
 msgid "Save As"
 msgstr "Konservi kiel"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Ne eblas krei dosierujon %s"
 
 msgid "&Quick save"
 msgstr "&Rapida konservado"
@@ -2204,7 +2230,8 @@ msgstr "Supro de dosierujaj hierarkioj"
 msgid "Inode uses extents"
 msgstr "Inodo uzas etendaĵojn"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Grandega_dosieron"
 
 msgid "No COW"
@@ -2397,12 +2424,6 @@ msgstr "Krei novan dosierujon"
 
 msgid "Enter directory name:"
 msgstr "Enmetu dosierujan nomon:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Ne eblas krei dosierujon %s"
 
 msgid "Extension file edit"
 msgstr "sufikso-dosiera redaktilo"
@@ -3112,6 +3133,9 @@ msgstr "&Informoj"
 msgid "&Tree"
 msgstr "&Arbo"
 
+msgid "Paneli&ze"
+msgstr "&Flankigi"
+
 msgid "&Listing format..."
 msgstr "&Listo-aranĝo..."
 
@@ -3132,9 +3156,6 @@ msgstr "Ŝ&ela ligilo..."
 
 msgid "SFTP li&nk..."
 msgstr "&SFTP-ligilo..."
-
-msgid "Paneli&ze"
-msgstr "&Flankigi"
 
 msgid "&Rescan"
 msgstr "&Refreŝigi"
@@ -4570,6 +4591,9 @@ msgstr "Eraro raportita post ĉesigo."
 msgid "Aborted transfer would be successful."
 msgstr "Ĉesigita transigo estus sukcesa."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
+
 msgid "Inconsistent tar archive"
 msgstr "Malkonsekvenca tar-dosiero"
 
@@ -4591,9 +4615,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ne ŝajnas esti TAR-arkivo"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
 
 msgid "undelfs: error"
 msgstr "undelfs: eraro"
@@ -4780,6 +4801,27 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Ne eblas uzi 256-koloran etoson '%s'.\n"
+#~ "ĉe terminalo kun malpli da koloroj.\n"
+#~ "Uzanta la aprioran etoson"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "Verkoloro ne estas regata per ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Via terminalo ŝajnas ne regi 256 kolorojn"
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Agordi je COLORTERM=truecolor se via terminalo efektive regas verkolorojn."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "Ne &eliri"

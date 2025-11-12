@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -59,7 +59,8 @@ msgstr "Kan ikke oprette gruppen '%s' for hændelser!"
 msgid "Unable to create event '%s'!"
 msgstr "Kan ikke oprette hændelsen '%s'!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -162,28 +163,47 @@ msgstr ""
 "%s\n"
 "Standardtemaet er blevet indlæst"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Kan ikke bruge »%s«-tema med understøttelse af\n"
-"256 farver, på terminal som ikke er bruger 256 farver.\n"
-"Standardtema er blevet indlæst"
+"Kan ikke bruge '%s'-temaet med understøttelse af ægte farver:\n"
+"%s\n"
+"Standardtemaet er blevet indlæst"
 
-msgid "True color not supported with ncurses."
-msgstr "Ægte farver understøttes ikke med ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Din terminal ser ikke ud til at understøtte 256 farver."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "Ægte farver understøttes ikke i denne version af slang."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Sæt COLORTERM=truecolor hvis din terminal virkeligt understøtter ægte farver."
 
 msgid "Escape"
 msgstr "Escape"
@@ -468,12 +488,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Skift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM-miljøvariabelen er ikke sat!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan ikke tjekke SIGWINCH-datakanal"
-
 #, c-format
 msgid ""
 "\n"
@@ -505,6 +519,12 @@ msgid ""
 msgstr ""
 "Skærmstørrelsen %dx%d understøttes ikke.\n"
 "Tjek TERM-miljøvariabelen.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM-miljøvariabelen er ikke sat!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kan ikke tjekke SIGWINCH-datakanal"
 
 msgid "B"
 msgstr "B"
@@ -1068,6 +1088,12 @@ msgstr "Ændre linjeskift til:"
 
 msgid "Save As"
 msgstr "Gem som"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Kan ikke oprette mappen %s"
 
 msgid "&Quick save"
 msgstr "&Hurtiggem"
@@ -2186,7 +2212,8 @@ msgstr "Øverst i mappehierarkier"
 msgid "Inode uses extents"
 msgstr "Inode bruger extents"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Kæmpe _fil"
 
 msgid "No COW"
@@ -2379,12 +2406,6 @@ msgstr "Opret en ny mappe"
 
 msgid "Enter directory name:"
 msgstr "Indtast mappenavn:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Kan ikke oprette mappen %s"
 
 msgid "Extension file edit"
 msgstr "Rediger filendelse"
@@ -3097,6 +3118,9 @@ msgstr "&Info"
 msgid "&Tree"
 msgstr "&Træ"
 
+msgid "Paneli&ze"
+msgstr "Paneli&sér"
+
 msgid "&Listing format..."
 msgstr "&Listeformat..."
 
@@ -3117,9 +3141,6 @@ msgstr "S&kalhenvisning..."
 
 msgid "SFTP li&nk..."
 msgstr "SFTP-li&nk ..."
-
-msgid "Paneli&ze"
-msgstr "Paneli&sér"
 
 msgid "&Rescan"
 msgstr "&Genskan"
@@ -4550,6 +4571,9 @@ msgstr "Fejl meldt tilbage efter afbrydelse."
 msgid "Aborted transfer would be successful."
 msgstr "Afbrudt overførsel ville være lykkedes."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
 
@@ -4568,9 +4592,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4758,6 +4779,28 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Kan ikke bruge »%s«-tema med understøttelse af\n"
+#~ "256 farver, på terminal som ikke er bruger 256 farver.\n"
+#~ "Standardtema er blevet indlæst"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "Ægte farver understøttes ikke med ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Din terminal ser ikke ud til at understøtte 256 farver."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Sæt COLORTERM=truecolor hvis din terminal virkeligt understøtter ægte "
+#~ "farver."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Afbryd afslut"

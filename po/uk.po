@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -67,7 +67,8 @@ msgstr "Не вдалося створити для подій групу «%s»
 msgid "Unable to create event '%s'!"
 msgstr "Не вдалося створити подію '%s'!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -172,29 +173,47 @@ msgstr ""
 "%s\n"
 "Завантажено стандартну обкладинку"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
 "Не вдалося використати обкладинку «%s» із підтримкою 256 кольорів\n"
-"на не-256-кольоровому терміналі.\n"
+"%s\n"
 "Завантажено стандартну обкладинку"
 
-msgid "True color not supported with ncurses."
-msgstr "Ncurses не підтримує 16М кольорів."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Не виглядає на те, що ваш термінал підтримує 256 кольорів."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "True колір не підтримується в цій версії slang."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Встановіть COLORTERM=truecolor якщо ваш термінал справді підтримує 16,7М "
-"кольорів."
 
 msgid "Escape"
 msgstr "Клавіша Escape"
@@ -479,12 +498,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Змінна середовища TERM не встановлена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Не вдалося перевірити канал SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -516,6 +529,12 @@ msgid ""
 msgstr ""
 "Розмір екрана %dx%d не підтримується.\n"
 "Перевірте змінну оточення TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Змінна середовища TERM не встановлена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Не вдалося перевірити канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -1079,6 +1098,12 @@ msgstr "Замінити закінчення рядків на:"
 
 msgid "Save As"
 msgstr "Зберегти як"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Не вдалося створити каталог %s"
 
 msgid "&Quick save"
 msgstr "&Швидке збереження"
@@ -2194,7 +2219,8 @@ msgstr "На верху ієрархії каталогів"
 msgid "Inode uses extents"
 msgstr "Інфовузол використовує екстенти"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Великий_файл"
 
 msgid "No COW"
@@ -2387,12 +2413,6 @@ msgstr "Створити новий каталог"
 
 msgid "Enter directory name:"
 msgstr "Введіть назву каталогу:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Не вдалося створити каталог %s"
 
 msgid "Extension file edit"
 msgstr "Редагування файла розширень"
@@ -3092,6 +3112,9 @@ msgstr "&Відомості"
 msgid "&Tree"
 msgstr "Д&eрево"
 
+msgid "Paneli&ze"
+msgstr "Панелі&зувати"
+
 msgid "&Listing format..."
 msgstr "&Формат списку"
 
@@ -3112,9 +3135,6 @@ msgstr "&Shell-з’єднання…"
 
 msgid "SFTP li&nk..."
 msgstr "SFTP-&зʼєднання"
-
-msgid "Paneli&ze"
-msgstr "Панелі&зувати"
 
 msgid "&Rescan"
 msgstr "&Пересканувати"
@@ -4556,6 +4576,9 @@ msgstr "Сталася помилка після переривання."
 msgid "Aborted transfer would be successful."
 msgstr "Перерване перенесення могло завершитися успішно."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Виявлено неузгоджений архів tar"
 
@@ -4574,9 +4597,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4765,6 +4785,28 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Не вдалося використати обкладинку «%s» із підтримкою 256 кольорів\n"
+#~ "на не-256-кольоровому терміналі.\n"
+#~ "Завантажено стандартну обкладинку"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "Ncurses не підтримує 16М кольорів."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Не виглядає на те, що ваш термінал підтримує 256 кольорів."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Встановіть COLORTERM=truecolor якщо ваш термінал справді підтримує 16,7М "
+#~ "кольорів."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Не виходити"

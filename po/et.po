@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -58,7 +58,8 @@ msgstr "Nurjus grupi \"%s\" loomine sündmustele!"
 msgid "Unable to create event '%s'!"
 msgstr "Sündmust \"%s\" ei õnnestunud luua!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, fuzzy, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr "Autoriõigused (C) 1996-2025 the Free Software Foundation"
 
 #, c-format
@@ -162,29 +163,47 @@ msgstr ""
 "%s\n"
 "Laadisime vaikimisi naha"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"256 värvi toega naha \"%s\" kasutamine terminalis,\n"
-"mis ei toeta 256 värvi on võimatu.\n"
+"Nahka '%s' ei saa tõeliste värvide toega kasutada:\n"
+"%s\n"
 "Laadisime vaikimisi naha"
 
-msgid "True color not supported with ncurses."
-msgstr "Tõelised värvid ei ole toetatud teegiga ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Su terminal ei paista toetavat isegi 256 värvi."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "Tõelised värvid ei ole teegi slang selle versiooniga toetatud."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Sea keskkonnamuutuja COLORTERM=truecolor, kui su terminal tõesti toetab "
-"tõeliseid värve."
 
 msgid "Escape"
 msgstr "Paoklahv"
@@ -469,12 +488,6 @@ msgstr "Klahv Alt"
 msgid "Shift"
 msgstr "Klahv Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Keskkonnamuutujat TERM on määramata!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH toru ei saa kontrollida"
-
 #, c-format
 msgid ""
 "\n"
@@ -508,6 +521,12 @@ msgid ""
 msgstr ""
 "Ekraani suurus %dx%d ei ole toetatud.\n"
 "Kontrolli keskkonna muutujat TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Keskkonnamuutujat TERM on määramata!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH toru ei saa kontrollida"
 
 msgid "B"
 msgstr "B"
@@ -1092,6 +1111,12 @@ msgstr "Vaheta reavahetused:"
 
 msgid "Save As"
 msgstr "Salvesta kui"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "%s kataloogi loomine ei õnnestunud"
 
 msgid "&Quick save"
 msgstr "&Kiirsalvestus"
@@ -2209,7 +2234,8 @@ msgstr "Kataloogihierarhiate tipp"
 msgid "Inode uses extents"
 msgstr "Inode kasutab ulatusi"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "suurfail"
 
 msgid "No COW"
@@ -2402,12 +2428,6 @@ msgstr "Loo uus kataloog"
 
 msgid "Enter directory name:"
 msgstr "Sisesta kataloogi nimi:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "%s kataloogi loomine ei õnnestunud"
 
 msgid "Extension file edit"
 msgstr "Laiendite faili muutmine"
@@ -3121,6 +3141,9 @@ msgstr "&Info"
 msgid "&Tree"
 msgstr "P&uu"
 
+msgid "Paneli&ze"
+msgstr "&Paneelile"
+
 msgid "&Listing format..."
 msgstr "&Loendi vormindus..."
 
@@ -3141,9 +3164,6 @@ msgstr "K&esta ühendus..."
 
 msgid "SFTP li&nk..."
 msgstr "SFTP li&nk..."
-
-msgid "Paneli&ze"
-msgstr "&Paneelile"
 
 msgid "&Rescan"
 msgstr "Ko&rdusskannimine"
@@ -4582,6 +4602,9 @@ msgstr "Pärast katkestamist raporteeriti viga."
 msgid "Aborted transfer would be successful."
 msgstr "Katkestatud ülekanne oleks edukas."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek ei peatunud kirje piiril"
+
 msgid "Inconsistent tar archive"
 msgstr "Tar arhiiv sisaldab vasturääkivusi"
 
@@ -4603,9 +4626,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ei meenuta tar arhiivi"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek ei peatunud kirje piiril"
 
 msgid "undelfs: error"
 msgstr "undelfs: viga"
@@ -4792,6 +4812,28 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "256 värvi toega naha \"%s\" kasutamine terminalis,\n"
+#~ "mis ei toeta 256 värvi on võimatu.\n"
+#~ "Laadisime vaikimisi naha"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "Tõelised värvid ei ole toetatud teegiga ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Su terminal ei paista toetavat isegi 256 värvi."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Sea keskkonnamuutuja COLORTERM=truecolor, kui su terminal tõesti toetab "
+#~ "tõeliseid värve."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Tühista väljumine"
