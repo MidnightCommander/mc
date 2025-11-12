@@ -222,9 +222,10 @@ typedef struct
 /*** global variables defined in .c file *********************************************************/
 
 extern mc_global_t mc_global;
-extern const char PACKAGE_COPYRIGHT[];
 
 /*** declarations of public functions ************************************************************/
+
+char *mc_get_package_copyright (void);
 
 /*** inline functions ****************************************************************************/
 #endif

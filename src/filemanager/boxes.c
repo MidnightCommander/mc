@@ -494,6 +494,7 @@ about_box (void)
     char *label_cp_source;
 
     char *version = g_strdup_printf ("%s %s", PACKAGE_NAME, mc_global.mc_version);
+    char *package_copyright = mc_get_package_copyright ();
 
     const char *name_cp_display = get_codepage_name (mc_global.display_codepage);
     const char *name_cp_source = get_codepage_name (mc_global.source_codepage);
@@ -508,7 +509,7 @@ about_box (void)
         QUICK_SEPARATOR (TRUE),
         QUICK_LABEL (N_ ("Classic terminal file manager inspired by Norton Commander."), NULL),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (PACKAGE_COPYRIGHT, NULL),
+        QUICK_LABEL (package_copyright, NULL),
         QUICK_SEPARATOR (TRUE),
         QUICK_LABEL (label_cp_display, NULL),
         QUICK_LABEL (label_cp_source, NULL),
@@ -535,6 +536,7 @@ about_box (void)
     (void) quick_dialog (&qdlg);
 
     g_free (version);
+    g_free (package_copyright);
     g_free (label_cp_display);
     g_free (label_cp_source);
 }

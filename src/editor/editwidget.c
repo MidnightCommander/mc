@@ -137,20 +137,19 @@ edit_dlg_deinit (void)
 static void
 edit_about (void)
 {
-    char *ver, *desc;
+    char *version = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
+    char *package_copyright = mc_get_package_copyright ();
 
-    ver = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
-    desc = g_strdup_printf (N_ ("A user friendly text editor\n"
-                                "written for the %s."),
-                            PACKAGE_NAME);
+    char *description =
+        g_strdup_printf (N_ ("A user friendly text editor\nwritten for the %s."), PACKAGE_NAME);
 
     {
         quick_widget_t quick_widgets[] = {
-            QUICK_LABEL (ver, NULL),
+            QUICK_LABEL (version, NULL),
             QUICK_SEPARATOR (TRUE),
-            QUICK_LABEL (desc, NULL),
+            QUICK_LABEL (description, NULL),
             QUICK_SEPARATOR (FALSE),
-            QUICK_LABEL (PACKAGE_COPYRIGHT, NULL),
+            QUICK_LABEL (package_copyright, NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
             QUICK_END,
@@ -174,8 +173,9 @@ edit_about (void)
         (void) quick_dialog (&qdlg);
     }
 
-    g_free (ver);
-    g_free (desc);
+    g_free (version);
+    g_free (package_copyright);
+    g_free (description);
 }
 
 /* --------------------------------------------------------------------------------------------- */
