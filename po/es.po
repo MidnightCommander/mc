@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
@@ -60,7 +60,8 @@ msgstr "¡Imposible crear el grupo de eventos «%s»!"
 msgid "Unable to create event '%s'!"
 msgstr "¡Imposible crear el evento «%s»!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, fuzzy, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 #, c-format
@@ -163,27 +164,47 @@ msgstr ""
 "%s\n"
 "Se ha cargado skin por defecto."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Imposible usar skin «%s» con soporte de 256 colores\n"
-"en terminales sin esta característica.\n"
+"Imposible usar skin «%s» con soporte de color real:\n"
+"%s\n"
 "Se ha cargado skin por defecto."
 
-msgid "True color not supported with ncurses."
-msgstr "El color real no está soportado con ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "El terminal no parece siquiera poder soportar 256 colores."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "El color real no está soportado con esta versión de slang."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr "Pruebe COLORTERM=truecolor si el terminal realmente soporta color real"
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
+msgstr ""
 
 msgid "Escape"
 msgstr "Escape"
@@ -468,12 +489,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Mayús"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "¡La variable de entorno TERM está sin definir!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Imposible comprobar tuberia para SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -507,6 +522,12 @@ msgid ""
 msgstr ""
 "El tamaño de ventana %dx%d no está soportado.\n"
 "Verifique el valor de la variable de entorno TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "¡La variable de entorno TERM está sin definir!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Imposible comprobar tuberia para SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1096,6 +1117,12 @@ msgstr "Cambiar saltos de línea por:"
 
 msgid "Save As"
 msgstr "Guardar como"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Imposible crear directorio %s"
 
 msgid "&Quick save"
 msgstr "guardar &Rápido"
@@ -2213,7 +2240,8 @@ msgstr "Cima de la jerarquía de directorios"
 msgid "Inode uses extents"
 msgstr "Inodo usa extensiones"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Archivo_enorme"
 
 msgid "No COW"
@@ -2406,12 +2434,6 @@ msgstr "Crear directorio"
 
 msgid "Enter directory name:"
 msgstr "Teclee el nombre del directorio:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Imposible crear directorio %s"
 
 msgid "Extension file edit"
 msgstr "Editar extensiones"
@@ -3125,6 +3147,9 @@ msgstr "&Información"
 msgid "&Tree"
 msgstr "ár&Bol"
 
+msgid "Paneli&ze"
+msgstr "búsqueda e&Xterna"
+
 msgid "&Listing format..."
 msgstr "for&Mato de listado..."
 
@@ -3145,9 +3170,6 @@ msgstr "conexión por SS&H..."
 
 msgid "SFTP li&nk..."
 msgstr "conexión por SF&TP..."
-
-msgid "Paneli&ze"
-msgstr "búsqueda e&Xterna"
 
 msgid "&Rescan"
 msgstr "&Actualizar"
@@ -4589,6 +4611,9 @@ msgstr "Error denunciado tras abortar."
 msgid "Aborted transfer would be successful."
 msgstr "Abortada transferencia con éxito."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
+
 msgid "Inconsistent tar archive"
 msgstr "Archivo de tipo tar inconsistente"
 
@@ -4610,9 +4635,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "no parece un archivo de tipo tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
 
 msgid "undelfs: error"
 msgstr "undelfs: Error"
@@ -4799,6 +4821,27 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Imposible usar skin «%s» con soporte de 256 colores\n"
+#~ "en terminales sin esta característica.\n"
+#~ "Se ha cargado skin por defecto."
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "El color real no está soportado con ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "El terminal no parece siquiera poder soportar 256 colores."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Pruebe COLORTERM=truecolor si el terminal realmente soporta color real"
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Cancelar salida"

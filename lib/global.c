@@ -114,8 +114,6 @@ mc_global_t mc_global =
 
 };
 
-const char PACKAGE_COPYRIGHT[] = N_ ("Copyright (C) 1996-2025 the Free Software Foundation");
-
 #undef SUBSHELL_USE
 
 /*** file scope macro definitions ****************************************************************/
@@ -127,4 +125,12 @@ const char PACKAGE_COPYRIGHT[] = N_ ("Copyright (C) 1996-2025 the Free Software 
 /*** file scope functions ************************************************************************/
 
 /*** public functions ****************************************************************************/
+
+char *
+mc_get_package_copyright (void)
+{
+    const size_t last_year = 2025;
+    return g_strdup_printf (N_ ("Copyright (C) 1996-%zu the Free Software Foundation"), last_year);
+}
+
 /* --------------------------------------------------------------------------------------------- */

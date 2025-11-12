@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #, fuzzy
 msgid "No translation"
@@ -56,7 +56,8 @@ msgstr "Не могу да направим групу „%s“ за догађ�
 msgid "Unable to create event '%s'!"
 msgstr "Не могу направим догађај „%s“!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -153,26 +154,46 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
 "Не могу да користим маску „%s“ са подршком за 256 боја\n"
 "на терминалу који нема 256 боја.\n"
 "Учитана је основна маска."
 
-msgid "True color not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr ""
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
 
 msgid "Escape"
@@ -458,12 +479,6 @@ msgstr "Алт"
 msgid "Shift"
 msgstr "Помак"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Променљива љуске „TERM“ је расподешена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -489,6 +504,12 @@ msgid ""
 msgstr ""
 "Величина екрана %dx%d није подржана.\n"
 "Проверите променљиву окружења „TERM“.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променљива љуске „TERM“ је расподешена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1052,6 +1073,12 @@ msgstr "Измени преломе редова на:"
 
 msgid "Save As"
 msgstr "Сачувај као"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Не могу да направим директоријум „%s“"
 
 msgid "&Quick save"
 msgstr "&Брзо сачувај"
@@ -2166,8 +2193,9 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
-msgstr ""
+#, fuzzy
+msgid "Huge file"
+msgstr "Сачувај датотеку"
 
 msgid "No COW"
 msgstr ""
@@ -2357,12 +2385,6 @@ msgstr "Направите нови директоријум"
 
 msgid "Enter directory name:"
 msgstr "Унесите назив директоријума:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Не могу да направим директоријум „%s“"
 
 msgid "Extension file edit"
 msgstr "Уређивање датотеке проширења"
@@ -3059,6 +3081,9 @@ msgstr "&Подаци"
 msgid "&Tree"
 msgstr "&Стабло"
 
+msgid "Paneli&ze"
+msgstr "Претвори &у окно"
+
 msgid "&Listing format..."
 msgstr ""
 
@@ -3079,9 +3104,6 @@ msgstr "Веза &љуске..."
 
 msgid "SFTP li&nk..."
 msgstr ""
-
-msgid "Paneli&ze"
-msgstr "Претвори &у окно"
 
 msgid "&Rescan"
 msgstr "&Поново прегледај"
@@ -4488,6 +4510,9 @@ msgstr "Пријављена је грешка после прекида."
 msgid "Aborted transfer would be successful."
 msgstr "Прекинути пренос би био успешан."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Недоследна тар архива"
 
@@ -4506,9 +4531,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

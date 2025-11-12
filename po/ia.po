@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -55,7 +55,8 @@ msgstr ""
 msgid "Unable to create event '%s'!"
 msgstr ""
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -152,23 +153,45 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Impossibile processar le apparentia '%s'.\n"
+"Le apparentia predefinite ha essite cargate"
 
-msgid "True color not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr ""
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
 
 msgid "Escape"
@@ -454,12 +477,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Clave \"Shift\""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Le variabile de ambiente TERM non es definite!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -485,6 +502,12 @@ msgid ""
 msgstr ""
 "Le dimenion de schermo %dx%d non es supportate.\n"
 "Verifica le variabile de ambiente TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Le variabile de ambiente TERM non es definite!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1028,6 +1051,14 @@ msgstr ""
 
 msgid "Save As"
 msgstr "Salveguardar como"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr ""
+"Impossibile crear file diff temporari\n"
+"%s"
 
 msgid "&Quick save"
 msgstr ""
@@ -2116,8 +2147,9 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
-msgstr ""
+#, fuzzy
+msgid "Huge file"
+msgstr "Salveguardar le file"
 
 msgid "No COW"
 msgstr ""
@@ -2306,14 +2338,6 @@ msgstr "Crear un nove directorio"
 
 msgid "Enter directory name:"
 msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr ""
-"Impossibile crear file diff temporari\n"
-"%s"
 
 msgid "Extension file edit"
 msgstr ""
@@ -2961,6 +2985,9 @@ msgstr "&Info"
 msgid "&Tree"
 msgstr "&Arbore"
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr ""
 
@@ -2980,9 +3007,6 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "SFTP li&nk..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -4345,6 +4369,9 @@ msgstr "Error reportate post abortamento."
 msgid "Aborted transfer would be successful."
 msgstr "Le transferentia abortate haberea succedite."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Archivo tar inconsistente"
 
@@ -4363,9 +4390,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

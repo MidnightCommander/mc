@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -58,7 +58,8 @@ msgstr ""
 msgid "Unable to create event '%s'!"
 msgstr ""
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -155,23 +156,45 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
+"スキン '%s' を正しくパースできません。\n"
+"デフォルトのスキンがロードされます。"
 
-msgid "True color not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr ""
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
 
 msgid "Escape"
@@ -457,12 +480,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "環境変数 TERM がセットされていません\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH パイプをチェックできません"
-
 #, c-format
 msgid ""
 "\n"
@@ -488,6 +505,12 @@ msgid ""
 msgstr ""
 "スクリーンサイズ %dx%d はサポートされていません\n"
 "TERM環境変数の値をチェックしてください\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "環境変数 TERM がセットされていません\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH パイプをチェックできません"
 
 msgid "B"
 msgstr ""
@@ -1029,6 +1052,12 @@ msgstr ""
 
 msgid "Save As"
 msgstr "別名で保存"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "ディレクトリー %s が作成できません"
 
 msgid "&Quick save"
 msgstr ""
@@ -2127,8 +2156,9 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
-msgstr ""
+#, fuzzy
+msgid "Huge file"
+msgstr "ファイルの保存"
 
 msgid "No COW"
 msgstr ""
@@ -2318,12 +2348,6 @@ msgstr "新規ディレクトリの作成"
 
 msgid "Enter directory name:"
 msgstr "ディレクトリー名の入力:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "ディレクトリー %s が作成できません"
 
 msgid "Extension file edit"
 msgstr "拡張ファイルの編集"
@@ -2982,6 +3006,9 @@ msgstr "情報(&I)"
 msgid "&Tree"
 msgstr "ツリー(&T)"
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr ""
 
@@ -3001,9 +3028,6 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "SFTP li&nk..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -4376,6 +4400,9 @@ msgstr "中断後にエラーが報告されました"
 msgid "Aborted transfer would be successful."
 msgstr "転送中断に成功しました"
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
 
@@ -4394,9 +4421,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

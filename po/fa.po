@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Arya Hadi <arya.hadi97@gmail.com>, 2017\n"
 "Language-Team: Persian (http://app.transifex.com/mc/mc/language/fa/)\n"
@@ -56,7 +56,8 @@ msgstr "ایجاد گروه '%s' برای رویدادها ممکن نیست!"
 msgid "Unable to create event '%s'!"
 msgstr "ایجاد رویداد '%s' ممکن نیست!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -148,21 +149,41 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
 
-msgid "True color not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr ""
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
 
 msgid "Escape"
@@ -448,12 +469,6 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr ""
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -476,6 +491,12 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
+msgstr ""
+
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
 msgid "B"
@@ -1004,6 +1025,12 @@ msgstr ""
 
 msgid "Save As"
 msgstr "ذخیره به عنوان"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "اخطار: پوشه‌ی %s را نمی‌توان باز کرد\n"
 
 msgid "&Quick save"
 msgstr "ذخیره‌ی سریع"
@@ -2090,8 +2117,9 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
-msgstr ""
+#, fuzzy
+msgid "Huge file"
+msgstr "ذخیره فایل"
 
 msgid "No COW"
 msgstr ""
@@ -2273,12 +2301,6 @@ msgstr "ساخت پوشه‌ی جدید"
 
 msgid "Enter directory name:"
 msgstr "نام پوشه را وارد کنید:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "اخطار: پوشه‌ی %s را نمی‌توان باز کرد\n"
 
 msgid "Extension file edit"
 msgstr ""
@@ -2889,6 +2911,9 @@ msgstr ""
 msgid "&Tree"
 msgstr ""
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr ""
 
@@ -2908,9 +2933,6 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "SFTP li&nk..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -4254,6 +4276,9 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4270,9 +4295,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

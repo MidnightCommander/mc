@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2017-2018\n"
 "Language-Team: Breton (http://app.transifex.com/mc/mc/language/br/)\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !"
-"=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n"
-"%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > "
-"19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 "
-"&& n % 1000000 == 0) ? 3 : 4);\n"
+"=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && "
+"(n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 "
+"> 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != "
+"0 && n % 1000000 == 0) ? 3 : 4);\n"
 
 msgid "No translation"
 msgstr ""
@@ -56,7 +56,8 @@ msgstr ""
 msgid "Unable to create event '%s'!"
 msgstr ""
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -148,21 +149,41 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
 
-msgid "True color not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr ""
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
 
 msgid "Escape"
@@ -448,12 +469,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Pennlizh"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr ""
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -476,6 +491,12 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
+msgstr ""
+
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
 msgid "B"
@@ -1004,6 +1025,12 @@ msgstr ""
 
 msgid "Save As"
 msgstr "Enrollañ evel"
+
+#, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr ""
 
 msgid "&Quick save"
 msgstr "Enrollañ &prim"
@@ -2090,8 +2117,9 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
-msgstr ""
+#, fuzzy
+msgid "Huge file"
+msgstr "restr"
 
 msgid "No COW"
 msgstr ""
@@ -2272,12 +2300,6 @@ msgid "Create a new Directory"
 msgstr ""
 
 msgid "Enter directory name:"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
 msgstr ""
 
 msgid "Extension file edit"
@@ -2888,6 +2910,9 @@ msgstr ""
 msgid "&Tree"
 msgstr ""
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr ""
 
@@ -2907,9 +2932,6 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "SFTP li&nk..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -4264,6 +4286,9 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4280,9 +4305,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

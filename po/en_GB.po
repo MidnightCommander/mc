@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -55,7 +55,8 @@ msgstr "Unable to create group '%s' for events!"
 msgid "Unable to create event '%s'!"
 msgstr "Unable to create event '%s'!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, fuzzy, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 #, c-format
@@ -159,27 +160,47 @@ msgstr ""
 "%s\n"
 "Default skin has been loaded"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Unable to use '%s' skin with 256 colours support\n"
-"on non-256 colours terminal.\n"
+"Unable to use '%s' skin with true colours support:\n"
+"%s\n"
 "Default skin has been loaded"
 
-msgid "True color not supported with ncurses."
-msgstr "True colour not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Your terminal doesn't even seem to support 256 colours."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "True colour not supported in this slang version."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr "Set COLORTERM=truecolor if your terminal really supports true colours."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
+msgstr ""
 
 msgid "Escape"
 msgstr "Escape"
@@ -464,43 +485,43 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "The TERM environment variable is unset!\n"
 
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Cannot check SIGWINCH pipe"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
 
 msgid "B"
 msgstr "B"
@@ -1085,6 +1106,12 @@ msgstr "Change line breaks to:"
 
 msgid "Save As"
 msgstr "Save As"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Cannot create %s directory"
 
 msgid "&Quick save"
 msgstr "&Quick save"
@@ -2202,7 +2229,8 @@ msgstr "Top of directory hierarchies"
 msgid "Inode uses extents"
 msgstr "Inode uses extents"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Huge_file"
 
 msgid "No COW"
@@ -2395,12 +2423,6 @@ msgstr "Create a new Directory"
 
 msgid "Enter directory name:"
 msgstr "Enter directory name:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Cannot create %s directory"
 
 msgid "Extension file edit"
 msgstr "Extension file edit"
@@ -3114,6 +3136,9 @@ msgstr "&Info"
 msgid "&Tree"
 msgstr "&Tree"
 
+msgid "Paneli&ze"
+msgstr "Panelise"
+
 msgid "&Listing format..."
 msgstr "&Listing format..."
 
@@ -3134,9 +3159,6 @@ msgstr "S&hell link..."
 
 msgid "SFTP li&nk..."
 msgstr "SFTP li&nk..."
-
-msgid "Paneli&ze"
-msgstr "Panelise"
 
 msgid "&Rescan"
 msgstr "&Rescan"
@@ -4575,6 +4597,9 @@ msgstr "Error reported after abort."
 msgid "Aborted transfer would be successful."
 msgstr "Aborted transfer would be successful."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek not stopped at a record boundary"
+
 msgid "Inconsistent tar archive"
 msgstr "Inconsistent tar archive"
 
@@ -4596,9 +4621,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "doesn't look like a tar archive"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek not stopped at a record boundary"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4785,6 +4807,27 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Unable to use '%s' skin with 256 colours support\n"
+#~ "on non-256 colours terminal.\n"
+#~ "Default skin has been loaded"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "True colour not supported with ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Your terminal doesn't even seem to support 256 colours."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colours."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Cancel quit"

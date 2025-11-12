@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -62,7 +62,8 @@ msgstr "No s'ha pogut crear el grup «%s» pels esdeveniments!"
 msgid "Unable to create event '%s'!"
 msgstr "No s'ha pogut crear l'esdeveniment «%s»!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, fuzzy, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr "Copyright (C) 1996-2025 la Free Software Foundation"
 
 #, c-format
@@ -168,28 +169,47 @@ msgstr ""
 "%s\n"
 "S'ha carregat el predeterminat"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"No es pot usar el tema «%s» amb suport\n"
-"de 256 colors en un terminal de no-256 colors.\n"
-"S'ha carregat el tema predeterminat"
+"No es pot usar el tema «%s» amb suport de colors vertaders:\n"
+"%s\n"
+"S'ha carregat el predeterminat"
 
-msgid "True color not supported with ncurses."
-msgstr "El color veritable no està admès amb «ncurses»."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "El terminal no sembla admetre 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "El color veritable no està admès en aquesta versió de «slang»."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Establiu COLORTERM=truecolor si el terminal realment admet colors veritables."
 
 msgid "Escape"
 msgstr "Esc"
@@ -474,12 +494,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Majús"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La variable d'entorn TERM no està definida!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -513,6 +527,12 @@ msgid ""
 msgstr ""
 "La mida de pantalla %dx%d no està admesa.\n"
 "Reviseu la variable d'entorn TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La variable d'entorn TERM no està definida!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1105,6 +1125,12 @@ msgstr "Canvia els salts de línia a:"
 
 msgid "Save As"
 msgstr "Desa com a"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "No s'ha pogut crear el directori %s"
 
 msgid "&Quick save"
 msgstr "Desament &ràpid"
@@ -2224,7 +2250,8 @@ msgstr "Començament de les jerarquies de directori"
 msgid "Inode uses extents"
 msgstr "El node-i usa extensions"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Fitxer_enorme"
 
 msgid "No COW"
@@ -2417,12 +2444,6 @@ msgstr "Crea un directori nou"
 
 msgid "Enter directory name:"
 msgstr "Introduïu el nom del directori:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "No s'ha pogut crear el directori %s"
 
 msgid "Extension file edit"
 msgstr "Edita el fitxer d'extensions"
@@ -3137,6 +3158,9 @@ msgstr "&Informació"
 msgid "&Tree"
 msgstr "Ar&bre"
 
+msgid "Paneli&ze"
+msgstr "&Quadre de cerca"
+
 msgid "&Listing format..."
 msgstr "Format del &llistat..."
 
@@ -3157,9 +3181,6 @@ msgstr "Enllaç per a l'i&ntèrpret..."
 
 msgid "SFTP li&nk..."
 msgstr "E&nllaç SFTP..."
-
-msgid "Paneli&ze"
-msgstr "&Quadre de cerca"
 
 msgid "&Rescan"
 msgstr "To&rna a escanejar"
@@ -4611,6 +4632,9 @@ msgstr "S'ha informat d'un error després d'interrompre."
 msgid "Aborted transfer would be successful."
 msgstr "Transferència interrompuda amb èxit."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
+
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu TAR no és coherent"
 
@@ -4632,9 +4656,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "no sembla un arxiu tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4823,6 +4844,28 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "No es pot usar el tema «%s» amb suport\n"
+#~ "de 256 colors en un terminal de no-256 colors.\n"
+#~ "S'ha carregat el tema predeterminat"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "El color veritable no està admès amb «ncurses»."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "El terminal no sembla admetre 256 colors."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Establiu COLORTERM=truecolor si el terminal realment admet colors "
+#~ "veritables."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "&Cancel·la la sortida"

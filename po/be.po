@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2019,2025\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -29,9 +29,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #, fuzzy
 msgid "No translation"
@@ -68,7 +68,8 @@ msgstr "Не ўдалося стварыць групу падзей \"%s\"!"
 msgid "Unable to create event '%s'!"
 msgstr "Не ўдалося стварыць падзею \"%s\"!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -173,29 +174,47 @@ msgstr ""
 "%s\n"
 "Будзе загружана прадвызначаная абалонка"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Немагчыма выкарыстаць графічную абалонку \"%s\" з падтрымкай 256 колераў,\n"
-"тэрмінал не падтрымлівае столькі.\n"
+"Немагчыма выкарыстаць графічную абалонку \"%s\" з падтрымкай колераў:\n"
+"%s\n"
 "Будзе загружана прадвызначаная абалонка"
 
-msgid "True color not supported with ncurses."
-msgstr "Колеры не падтрымліваюцца ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Здаецца, ваш тэрмінал не падтрымлівае 256 колераў."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "True color не падтрымліваецца ў гэтай версіі slang."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Вызначце COLORTERM=truecolor, калі ваш тэрмінал сапраўды падтрымлівае true "
-"color."
 
 msgid "Escape"
 msgstr "Escape"
@@ -480,12 +499,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Немагчыма праверыць канал SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -517,6 +530,12 @@ msgid ""
 msgstr ""
 "Памер экрана %d×%d не падтрымліваецца.\n"
 "Праверце зменную асяроддзя \"TERM\".\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Немагчыма праверыць канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -1107,6 +1126,12 @@ msgstr "Змяніць пераводы радкоў на:"
 
 msgid "Save As"
 msgstr "Захаваць як"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "Немагчыма стварыць каталог \"%s\""
 
 msgid "&Quick save"
 msgstr "Хуткае захаванне(&Q)"
@@ -2224,7 +2249,8 @@ msgstr "Верхні ўзровень іерархіі каталогаў"
 msgid "Inode uses extents"
 msgstr "Inode выкарыстоўвае экстэнты"
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "Вялізны_файл"
 
 msgid "No COW"
@@ -2415,12 +2441,6 @@ msgstr "Стварыць каталог"
 
 msgid "Enter directory name:"
 msgstr "Увядзіце назву каталога:"
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "Немагчыма стварыць каталог \"%s\""
 
 msgid "Extension file edit"
 msgstr "Рэдагаваць файл пашырэння"
@@ -3129,6 +3149,9 @@ msgstr "Інфармацыя(&I)"
 msgid "&Tree"
 msgstr "Дрэва(&T)"
 
+msgid "Paneli&ze"
+msgstr "На панэль(&Z)"
+
 msgid "&Listing format..."
 msgstr "Фармат спіса(&L)..."
 
@@ -3149,9 +3172,6 @@ msgstr "Падлучэнне з дапамогай абалонкі(&H)..."
 
 msgid "SFTP li&nk..."
 msgstr "Падлучэнне з дапамогай SFTP(&N)..."
-
-msgid "Paneli&ze"
-msgstr "На панэль(&Z)"
 
 msgid "&Rescan"
 msgstr "Перасканаваць(&R)"
@@ -4599,6 +4619,9 @@ msgstr "Пасля перарывання выяўлена памылка."
 msgid "Aborted transfer would be successful."
 msgstr "Перадача перарваная."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
+
 msgid "Inconsistent tar archive"
 msgstr "Несумяшчальны архіў tar"
 
@@ -4620,9 +4643,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "не падобны на архіў tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
 
 msgid "undelfs: error"
 msgstr "undelfs: памылка"
@@ -4809,6 +4829,29 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "Немагчыма выкарыстаць графічную абалонку \"%s\" з падтрымкай 256 "
+#~ "колераў,\n"
+#~ "тэрмінал не падтрымлівае столькі.\n"
+#~ "Будзе загружана прадвызначаная абалонка"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "Колеры не падтрымліваюцца ncurses."
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "Здаецца, ваш тэрмінал не падтрымлівае 256 колераў."
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr ""
+#~ "Вызначце COLORTERM=truecolor, калі ваш тэрмінал сапраўды падтрымлівае "
+#~ "true color."
 
 #~ msgid "&Cancel quit"
 #~ msgstr "Не выходзіць(&С)"

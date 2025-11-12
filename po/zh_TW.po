@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-06-19 21:07+0300\n"
+"POT-Creation-Date: 2025-11-12 14:34+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -56,7 +56,8 @@ msgstr "無法建立群組 '%s' !"
 msgid "Unable to create event '%s'!"
 msgstr "無法建立事件 '%s'!"
 
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -158,27 +159,47 @@ msgstr ""
 "%s\n"
 "已載入預設面板"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"無法在非256色的終端機上使用\n"
-"需要支援256色的 '%s' 面板。\n"
+"無法使用需要支援真實色彩的 '%s' 面板：\n"
+"%s\n"
 "已載入預設面板"
 
-msgid "True color not supported with ncurses."
-msgstr "ncurses 不支援真實色彩。"
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "您的終端機看起來不支援256色的色彩"
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "本 slang 版本不支援真實色彩。"
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr "若您的終端機支援真實色彩，請設定 COLORTERM=truecolor"
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
+msgstr ""
 
 msgid "Escape"
 msgstr "Esc 鍵"
@@ -463,12 +484,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "環境變數 TERM 並未設定！ \n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -494,6 +509,12 @@ msgid ""
 msgstr ""
 "不支援 %dx%d 的螢幕大小。\n"
 "請檢查 TERM 環境變數。\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "環境變數 TERM 並未設定！ \n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1034,6 +1055,12 @@ msgstr "切換行尾到:"
 
 msgid "Save As"
 msgstr "儲存為"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr "無法建立目錄 %s"
 
 msgid "&Quick save"
 msgstr "快速儲存"
@@ -2133,7 +2160,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
+#, fuzzy
+msgid "Huge file"
 msgstr "大型檔案"
 
 msgid "No COW"
@@ -2324,12 +2352,6 @@ msgstr "建立新目錄"
 
 msgid "Enter directory name:"
 msgstr "輸入目錄名稱："
-
-#, fuzzy, c-format
-msgid ""
-"Cannot create directory\n"
-"%s"
-msgstr "無法建立目錄 %s"
 
 msgid "Extension file edit"
 msgstr "擴充檔案編輯"
@@ -3002,6 +3024,9 @@ msgstr "資訊 (&I)"
 msgid "&Tree"
 msgstr "樹狀檢視 (&T)"
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr "列表格式... (&L)"
 
@@ -3022,9 +3047,6 @@ msgstr "連結 Shell... (&H)"
 
 msgid "SFTP li&nk..."
 msgstr "連結 SFTP... (&N)"
-
-msgid "Paneli&ze"
-msgstr ""
 
 msgid "&Rescan"
 msgstr "重新搜尋 (&R)"
@@ -4408,6 +4430,9 @@ msgstr "放棄後回報錯誤"
 msgid "Aborted transfer would be successful."
 msgstr "將成功放棄傳輸"
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
 
@@ -4426,9 +4451,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4611,6 +4633,26 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Unable to use '%s' skin with 256 colors support\n"
+#~ "on non-256 colors terminal.\n"
+#~ "Default skin has been loaded"
+#~ msgstr ""
+#~ "無法在非256色的終端機上使用\n"
+#~ "需要支援256色的 '%s' 面板。\n"
+#~ "已載入預設面板"
+
+#~ msgid "True color not supported with ncurses."
+#~ msgstr "ncurses 不支援真實色彩。"
+
+#~ msgid "Your terminal doesn't even seem to support 256 colors."
+#~ msgstr "您的終端機看起來不支援256色的色彩"
+
+#~ msgid ""
+#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
+#~ msgstr "若您的終端機支援真實色彩，請設定 COLORTERM=truecolor"
 
 #~ msgid "&Cancel quit"
 #~ msgstr "取消結束"

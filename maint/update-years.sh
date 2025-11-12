@@ -21,7 +21,7 @@ for i in $SOURCES; do
 done
 
 # special case
-${SED-sed} -e "/$LINE/s/-[0-9]\{4\} the/-$YEAR the/" lib/global.c > lib/global.c.tmp && \
+${SED-sed} -e "/last_year =/s/[0-9]\{4\};/$YEAR;/" lib/global.c > lib/global.c.tmp && \
   mv -f lib/global.c.tmp lib/global.c
 
 # restore permissions
