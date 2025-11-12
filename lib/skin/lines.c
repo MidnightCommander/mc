@@ -110,7 +110,9 @@ skin_get_char (mc_skin_t *mc_skin, const char *name, gunichar def, mc_tty_char_t
     {
         // the default to be used if not defined in the skin file
         value_utf8 = g_malloc (7);
+
         const int len = g_unichar_to_utf8 (def, value_utf8);
+
         value_utf8[len] = '\0';
         c = def;
     }
@@ -159,6 +161,7 @@ skin_get_char (mc_skin_t *mc_skin, const char *name, gunichar def, mc_tty_char_t
     str_close_conv (conv);
     g_string_free (buffer, TRUE);
     g_free (value_utf8);
+
     return conv_res == ESTR_SUCCESS;
 }
 

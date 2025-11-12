@@ -64,16 +64,21 @@ END_TEST
 
 START_TEST (test_strip_ctrl_codes)
 {
+    char *s;
+    char *actual;
+
     // clang-format off
-    char *s = g_strdup (ESC_STR "]0;~\a"                   ESC_STR "[30m" ESC_STR "(B" ESC_STR "[m"
-                        ESC_STR "]133;A;special_key=1\a$ " ESC_STR "[K"   ESC_STR "[?2004h"
-                        ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "="    ESC_STR "[?2004l"
-                        ESC_STR "[>4;0m" ESC_STR "[=0u"    ESC_STR ">"    ESC_STR "[?2004h"
-                        ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "="    ESC_STR "[?2004l"
-                        ESC_STR "[>4;0m" ESC_STR "[=0u"    ESC_STR ">"    ESC_STR "[?2004h"
-                        ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "=");
+    s = g_strdup (ESC_STR "]0;~\a"                   ESC_STR "[30m" ESC_STR "(B" ESC_STR "[m"
+                  ESC_STR "]133;A;special_key=1\a$ " ESC_STR "[K"   ESC_STR "[?2004h"
+                  ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "="    ESC_STR "[?2004l"
+                  ESC_STR "[>4;0m" ESC_STR "[=0u"    ESC_STR ">"    ESC_STR "[?2004h"
+                  ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "="    ESC_STR "[?2004l"
+                  ESC_STR "[>4;0m" ESC_STR "[=0u"    ESC_STR ">"    ESC_STR "[?2004h"
+                  ESC_STR "[>4;1m" ESC_STR "[=5u"    ESC_STR "=");
     // clang-format on
-    char *actual = strip_ctrl_codes (s);
+
+    actual = strip_ctrl_codes (s);
+
     const char *expected = "$ ";
 
     ck_assert_str_eq (actual, expected);
@@ -85,15 +90,18 @@ END_TEST
 // Ticket #4801. Invalid UTF-8 fragments are left in the string as-is.
 START_TEST (test_strip_ctrl_codes2)
 {
+    char *s;
+    char *actual;
     // U+2764 heart in UTF-8, followed by " ábcdéfghíjklnmó\000pqrst" in Latin-1
     const char s_orig[] = "\342\235\244 \341bcd\351fgh\355jklm\363\000pqrst";
+
     ck_assert_int_eq (sizeof (s_orig), 25);
 
     // copy the entire string, with embedded '\0'
-    char *s = g_malloc (sizeof (s_orig));
+    s = g_malloc (sizeof (s_orig));
     memcpy (s, s_orig, sizeof (s_orig));
 
-    char *actual = strip_ctrl_codes (s);
+    actual = strip_ctrl_codes (s);
 
     ck_assert_str_eq (actual, s_orig);
     g_free (s);
