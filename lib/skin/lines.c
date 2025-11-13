@@ -128,6 +128,17 @@ skin_get_char (mc_skin_t *mc_skin, const char *name, gunichar def, mc_tty_char_t
     }
 
     // convert to 8-bit charset, e.g. KOI8-R has all the double line chars
+
+#ifdef HAVE_NCURSES
+    // ncurses is known to have problems here in 8-bit locales, see mc #4799.
+    // Claim failure so that the caller will fall back to ACS single lines.
+    if (c >= 128)
+    {
+        g_free (value_utf8);
+        return FALSE;
+    }
+#endif
+
     conv = str_crt_conv_from ("UTF-8");
     if (conv == INVALID_CONV)
     {
