@@ -14,11 +14,11 @@
 
 ГНУ-овог поноћног наредника су написали његови ауториAUTHORS.
 
-ГНУ-ов поноћни наредник се испоручује БЕЗ ИКАКВЕ ГАРАНЦИЈЕWarranty. Ово је слободни софтвер, а ви сте позвани да га расподелите под одредбама ГНУ-ове опште јавне лиценцеЛиценца (оригинал на енглеском). Погледајте и незваничан превод ГНУ-ове ОЈЛ на српскиЛиценца (на српском).
+ГНУ-ов поноћни наредник се испоручује БЕЗ ИКАКВЕ ГАРАНЦИЈЕWarranty. Ово је слободни софтвер, а ви сте позвани да га расподелите под одредбама ГНУ-ове опште јавне лиценцеЛиценца.
 
-Превод Поноћног наредника и ове датотеке помоћи на српски: Страхиња Радић, <mr99164@alas.matf.bg.ac.yu> СРД `Уликс', http://uliks.sourceforge.net
+Превод Поноћног наредника и ове датотеке помоћи на српски: Страхиња Радић, <sr@strahinja.org>
 
-[Лиценца (оригинал на енглеском)]
+[Лиценца]
 
                  GNU GENERAL PUBLIC LICENSE
                    Version 3, 29 June 2007
@@ -299,10 +299,6 @@ Also add information on how to contact you by electronic and paper mail.
 
     The GNU General Public License does not permit incorporating your program into proprietary programs. If your program is a subroutine library, you may consider it more useful to permit linking proprietary applications with the library. If this is what you want to do, use the GNU Lesser General Public License instead of this License. But first, please read <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 
-[Лиценца (на српском)]
-
-See original License.
-
 [QueryBox]
 Прозори упита
 
@@ -323,14 +319,14 @@ See original License.
 
 tab           Помери се на следећу ставку.
 M-tab         Помери се на претходну ставку.
-доле          Помери се на след. ставку или клизај 1 ред надоле.
-горе          Помери се на прет. ставку или клизај 1 ред нагоре.
+доле          Помери се на след. ставку или скролуј ред надоле.
+горе          Помери се на прет. ставку или скролуј ред нагоре.
 десно, enter  Прати текућу везу.
 лево, l       Врати се уназад у историји посећених чворова.
-F1            Прикажи помоћ око прегледача помоћи.
+F1            Прикажи помоћ у вези са прегледачем помоћи.
 n             Иди на следећи чвор.
 p             Иди на претходни чвор.
-c             Иди на чвор `садржај'.
+c             Иди на чвор „садржај“.
 F10, esc      Излаз из прегледача помоћи.
 
 Local variables:
