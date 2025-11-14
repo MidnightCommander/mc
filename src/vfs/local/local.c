@@ -127,10 +127,20 @@ static struct vfs_dirent *
 local_readdir (void *data)
 {
     struct dirent *d;
+    unsigned char type;
 
     d = readdir (*(DIR **) data);
 
-    return (d != NULL ? vfs_dirent_init (NULL, d->d_name, d->d_ino) : NULL);
+    if (d == NULL)
+        return NULL;
+
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+    type = d->d_type;
+#else
+    type = DT_UNKNOWN;
+#endif
+
+    return vfs_dirent_init (NULL, d->d_name, d->d_ino, type);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -67,6 +67,12 @@
 #define STDERR_FILENO 2
 #endif
 
+#ifndef HAVE_STRUCT_DIRENT_D_TYPE
+#define DT_UNKNOWN 0
+#define DT_DIR     101  // the value doesn't matter, just needs to be different from DT_UNKNOWN
+#define DT_LNK     102  // ditto
+#endif
+
 /* The O_BINARY definition was taken from gettext */
 #if !defined O_BINARY && defined _O_BINARY
 // For MSC-compatible compilers.

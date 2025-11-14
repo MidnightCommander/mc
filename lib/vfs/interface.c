@@ -470,7 +470,7 @@ mc_readdir (DIR *dirp)
 
         g_string_set_size (vfs_str_buffer, 0);
         str_vfs_convert_from (vfs_path_element->dir.converter, entry->d_name, vfs_str_buffer);
-        vfs_dirent_assign (mc_readdir_result, vfs_str_buffer->str, entry->d_ino);
+        vfs_dirent_assign (mc_readdir_result, vfs_str_buffer->str, entry->d_ino, entry->d_type);
         vfs_dirent_free (entry);
     }
     if (entry == NULL)

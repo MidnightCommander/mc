@@ -219,6 +219,7 @@ struct vfs_dirent
     ino_t d_ino;
     char *d_name;  // Alias of d_name_str->str
     size_t d_len;  // Alias of d_name_str->len
+    unsigned char d_type;
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -279,8 +280,9 @@ void vfs_stamp_path (const vfs_path_t *path);
 
 void vfs_release_path (const vfs_path_t *vpath);
 
-struct vfs_dirent *vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino);
-void vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino);
+struct vfs_dirent *vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino,
+                                    unsigned char type);
+void vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino, unsigned char type);
 void vfs_dirent_free (struct vfs_dirent *d);
 
 void vfs_fill_names (fill_names_f);
