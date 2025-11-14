@@ -1,0 +1,6 @@
+ualz.input is created with unalz from ualz.alz
+ualz.alz is created with ALZip android app from the `doc` folder of mc
+
+	1. echo "Hello, World!" > "doc/Hello world.txt"
+	2. mkdir -p "doc/empty dir"
+	3. compress folder "doc"
