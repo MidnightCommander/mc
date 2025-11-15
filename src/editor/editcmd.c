@@ -80,6 +80,10 @@ int search_create_bookmark = FALSE;
 
 /*** forward declarations (file scope functions) *************************************************/
 
+MC_TESTABLE void edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size,
+                                             long width, off_t *start_pos, off_t *end_pos,
+                                             long *col1, long *col2);
+
 /*** file scope variables ************************************************************************/
 
 static unsigned long edit_save_mode_radio_id, edit_save_mode_input_id;
@@ -677,7 +681,7 @@ edit_append_spaces_at_eol (WEdit *edit, const long col, const long width)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+MC_TESTABLE void
 edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long width,
                             off_t *start_pos, off_t *end_pos, long *col1, long *col2)
 {
