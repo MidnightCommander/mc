@@ -74,8 +74,6 @@ int search_create_bookmark = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define space_width  1
-
 #define TEMP_BUF_LEN 1024
 
 /*** file scope type declarations ****************************************************************/
@@ -673,7 +671,7 @@ static void
 edit_append_spaces_at_eol (WEdit *edit, const long col, const long width)
 {
     if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
-        for (long l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
+        for (long l = width - (edit_get_col (edit) - col); l > 0; l--)
             edit_insert (edit, ' ');
 }
 
@@ -716,7 +714,7 @@ edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long w
             }
             edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->buffer.curs1);
 
-            for (long l = col - edit_get_col (edit); l >= space_width; l -= space_width)
+            for (long l = col - edit_get_col (edit); l >= 1; l--)
                 edit_insert (edit, ' ');
         }
     }
