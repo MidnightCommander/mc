@@ -21,6 +21,7 @@ typedef struct
     char private_mode;
     uint32_t params[16][4];
     size_t param_count;
+    char final_byte;
 } csi_command_t;
 
 /*** global variables defined in .c file *********************************************************/

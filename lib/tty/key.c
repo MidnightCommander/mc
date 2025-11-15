@@ -56,6 +56,7 @@
 #include "tty-internal.h"  // mouse_enabled
 #include "mouse.h"
 #include "key.h"
+#include "lib/terminal.h"
 
 #include "lib/widget.h"  // mc_refresh()
 
@@ -253,6 +254,13 @@ typedef struct
     int action;
 } key_define_t;
 
+typedef struct
+{
+    int code;
+    unsigned int kitty_code;
+    const char final_byte;
+} key_kitty_t;
+
 /* File descriptor monitoring add/remove routines */
 typedef struct
 {
@@ -306,20 +314,16 @@ static key_define_t mc_default_keys[] = {
 
 /* Broken terminfo and termcap databases on xterminals */
 static key_define_t xterm_key_defines[] = {
+
+    /* The Kitty Keyboard Protocol extends the most common key escape sequences in a backwards
+     * compatible way. Thus standard sequences are implicitly handled by the Kitty handler, and
+     * don't need to be listed here.
+     */
+
     { KEY_F (1), ESC_STR "OP", MCKEY_NOACTION },
     { KEY_F (2), ESC_STR "OQ", MCKEY_NOACTION },
     { KEY_F (3), ESC_STR "OR", MCKEY_NOACTION },
     { KEY_F (4), ESC_STR "OS", MCKEY_NOACTION },
-    { KEY_F (1), ESC_STR "[11~", MCKEY_NOACTION },
-    { KEY_F (2), ESC_STR "[12~", MCKEY_NOACTION },
-    { KEY_F (3), ESC_STR "[13~", MCKEY_NOACTION },
-    { KEY_F (4), ESC_STR "[14~", MCKEY_NOACTION },
-    { KEY_F (5), ESC_STR "[15~", MCKEY_NOACTION },
-    { KEY_F (6), ESC_STR "[17~", MCKEY_NOACTION },
-    { KEY_F (7), ESC_STR "[18~", MCKEY_NOACTION },
-    { KEY_F (8), ESC_STR "[19~", MCKEY_NOACTION },
-    { KEY_F (9), ESC_STR "[20~", MCKEY_NOACTION },
-    { KEY_F (10), ESC_STR "[21~", MCKEY_NOACTION },
 
     // old xterm Shift-arrows
     { KEY_M_SHIFT | KEY_UP, ESC_STR "O2A", MCKEY_NOACTION },
@@ -327,38 +331,8 @@ static key_define_t xterm_key_defines[] = {
     { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "O2C", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_LEFT, ESC_STR "O2D", MCKEY_NOACTION },
 
-    // new xterm Shift-arrows
-    { KEY_M_SHIFT | KEY_UP, ESC_STR "[1;2A", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_DOWN, ESC_STR "[1;2B", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[1;2C", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_LEFT, ESC_STR "[1;2D", MCKEY_NOACTION },
-
     // more xterm keys with modifiers
-    { KEY_M_CTRL | KEY_PPAGE, ESC_STR "[5;5~", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_NPAGE, ESC_STR "[6;5~", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_IC, ESC_STR "[2;5~", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_DC, ESC_STR "[3;5~", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_HOME, ESC_STR "[1;5H", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_END, ESC_STR "[1;5F", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_HOME, ESC_STR "[1;2H", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_END, ESC_STR "[1;2F", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_UP, ESC_STR "[1;5A", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_DOWN, ESC_STR "[1;5B", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_RIGHT, ESC_STR "[1;5C", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_LEFT, ESC_STR "[1;5D", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_IC, ESC_STR "[2;2~", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_DC, ESC_STR "[3;2~", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP, ESC_STR "[1;6A", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN, ESC_STR "[1;6B", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[1;6C", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "[1;6D", MCKEY_NOACTION },
     { KEY_M_SHIFT | '\t', ESC_STR "[Z", MCKEY_NOACTION },
-
-    // putty
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP, ESC_STR "[[1;6A", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN, ESC_STR "[[1;6B", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[[1;6C", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "[[1;6D", MCKEY_NOACTION },
 
     // putty alt-arrow keys
     // removed as source esc esc esc trouble
@@ -371,39 +345,7 @@ static key_define_t xterm_key_defines[] = {
        { KEY_M_ALT | KEY_NPAGE, ESC_STR ESC_STR "[6~", MCKEY_NOACTION },
        { KEY_M_ALT | KEY_HOME,  ESC_STR ESC_STR "[1~", MCKEY_NOACTION },
        { KEY_M_ALT | KEY_END,   ESC_STR ESC_STR "[4~", MCKEY_NOACTION },
-
-       { KEY_M_CTRL | KEY_M_ALT | KEY_UP,    ESC_STR ESC_STR "[1;2A", MCKEY_NOACTION },
-       { KEY_M_CTRL | KEY_M_ALT | KEY_DOWN,  ESC_STR ESC_STR "[1;2B", MCKEY_NOACTION },
-       { KEY_M_CTRL | KEY_M_ALT | KEY_RIGHT, ESC_STR ESC_STR "[1;2C", MCKEY_NOACTION },
-       { KEY_M_CTRL | KEY_M_ALT | KEY_LEFT,  ESC_STR ESC_STR "[1;2D", MCKEY_NOACTION },
-
-       { KEY_M_CTRL | KEY_M_ALT | KEY_PPAGE, ESC_STR ESC_STR "[[5;5~", MCKEY_NOACTION },
-       { KEY_M_CTRL | KEY_M_ALT | KEY_NPAGE, ESC_STR ESC_STR "[[6;5~", MCKEY_NOACTION },
-       { KEY_M_CTRL | KEY_M_ALT | KEY_HOME,  ESC_STR ESC_STR "[1;5H", MCKEY_NOACTION },
-       { KEY_M_CTRL | KEY_M_ALT | KEY_END,   ESC_STR ESC_STR "[1;5F", MCKEY_NOACTION },
      */
-    // xterm alt-arrow keys
-    { KEY_M_ALT | KEY_UP, ESC_STR "[1;3A", MCKEY_NOACTION },
-    { KEY_M_ALT | KEY_DOWN, ESC_STR "[1;3B", MCKEY_NOACTION },
-    { KEY_M_ALT | KEY_RIGHT, ESC_STR "[1;3C", MCKEY_NOACTION },
-    { KEY_M_ALT | KEY_LEFT, ESC_STR "[1;3D", MCKEY_NOACTION },
-    { KEY_M_ALT | KEY_PPAGE, ESC_STR "[5;3~", MCKEY_NOACTION },
-    { KEY_M_ALT | KEY_NPAGE, ESC_STR "[6;3~", MCKEY_NOACTION },
-    { KEY_M_ALT | KEY_HOME, ESC_STR "[1~", MCKEY_NOACTION },
-    { KEY_M_ALT | KEY_END, ESC_STR "[4~", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_UP, ESC_STR "[1;7A", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_DOWN, ESC_STR "[1;7B", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_RIGHT, ESC_STR "[1;7C", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_LEFT, ESC_STR "[1;7D", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_PPAGE, ESC_STR "[5;7~", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_NPAGE, ESC_STR "[6;7~", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_HOME, ESC_STR "OH", MCKEY_NOACTION },
-    { KEY_M_CTRL | KEY_M_ALT | KEY_END, ESC_STR "OF", MCKEY_NOACTION },
-
-    { KEY_M_SHIFT | KEY_M_ALT | KEY_UP, ESC_STR "[1;4A", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_ALT | KEY_DOWN, ESC_STR "[1;4B", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_ALT | KEY_RIGHT, ESC_STR "[1;4C", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_M_ALT | KEY_LEFT, ESC_STR "[1;4D", MCKEY_NOACTION },
 
     // rxvt keys with modifiers
     { KEY_M_SHIFT | KEY_UP, ESC_STR "[a", MCKEY_NOACTION },
@@ -451,14 +393,6 @@ static key_define_t xterm_key_defines[] = {
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN, ESC_STR "O6B", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "O6C", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "O6D", MCKEY_NOACTION },
-
-    // iTerm
-    { KEY_M_SHIFT | KEY_PPAGE, ESC_STR "[5;2~", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_NPAGE, ESC_STR "[6;2~", MCKEY_NOACTION },
-
-    // putty
-    { KEY_M_SHIFT | KEY_PPAGE, ESC_STR "[[5;53~", MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_NPAGE, ESC_STR "[[6;53~", MCKEY_NOACTION },
 
     // keypad keys
     { KEY_IC, ESC_STR "Op", MCKEY_NOACTION },
@@ -540,6 +474,113 @@ static key_define_t qansi_key_defines[] = {
     { KEY_KP_SUBTRACT, ESC_STR "[S", MCKEY_NOACTION },               // Gr-Minus
     { KEY_KP_ADD, ESC_STR "[T", MCKEY_NOACTION },                    // Gr-Plus
     { 0, NULL, MCKEY_NOACTION },
+};
+
+static key_kitty_t kitty_key_defines[] = {
+    { ESC_CHAR, 27, 'u' },
+    { (int) '\r', 13, 'u' },
+    { KEY_IC, 2, '~' },
+    { KEY_DC, 3, '~' },
+    { KEY_UP, 1, 'A' },
+    { KEY_DOWN, 1, 'B' },
+    { KEY_RIGHT, 1, 'C' },
+    { KEY_LEFT, 1, 'D' },
+    { KEY_PPAGE, 5, '~' },
+    { KEY_NPAGE, 6, '~' },
+    { KEY_HOME, 1, 'H' },
+    { KEY_HOME, 7, '~' },
+    { KEY_END, 1, 'F' },
+    { KEY_END, 8, '~' },
+    { -1, 57361, 'u' },  // PRINT_SCREEN
+    { -1, 57362, 'u' },  // PAUSE
+    { -1, 57363, 'u' },  // MENU
+    { KEY_F (1), 11, '~' },
+    { KEY_F (1), 1, 'P' },
+    { KEY_F (2), 12, '~' },
+    { KEY_F (2), 1, 'Q' },
+    { KEY_F (3), 13, '~' },
+    { KEY_F (4), 14, '~' },
+    { KEY_F (4), 1, 'S' },
+    { KEY_F (5), 15, '~' },
+    { KEY_F (6), 17, '~' },
+    { KEY_F (7), 18, '~' },
+    { KEY_F (8), 19, '~' },
+    { KEY_F (9), 20, '~' },
+    { KEY_F (10), 21, '~' },
+    { KEY_F (11), 23, '~' },
+    { KEY_F (12), 24, '~' },
+    { KEY_F (13), 57376, 'u' },
+    { KEY_F (14), 57377, '~' },
+    { KEY_F (15), 57378, '~' },
+    { KEY_F (16), 57379, '~' },
+    { KEY_F (17), 57380, '~' },
+    { KEY_F (18), 57381, '~' },
+    { KEY_F (19), 57382, '~' },
+    { KEY_F (20), 57383, '~' },
+    { KEY_F (21), 57384, '~' },
+    { KEY_F (22), 57385, '~' },
+    { KEY_F (23), 57386, '~' },
+    { KEY_F (24), 57387, '~' },
+    { KEY_F (25), 57388, '~' },
+    { KEY_F (26), 57389, '~' },
+    { KEY_F (27), 57390, '~' },
+    { KEY_F (28), 57391, '~' },
+    { KEY_F (29), 57392, '~' },
+    { KEY_F (30), 57393, '~' },
+    { KEY_F (31), 57394, '~' },
+    { KEY_F (32), 57395, '~' },
+    { KEY_F (33), 57396, '~' },
+    { KEY_F (34), 57397, '~' },
+    { KEY_F (35), 57398, '~' },
+    { (int) '0', 57399, 'u' },  // KP_0
+    { (int) '1', 57400, 'u' },  // KP_1
+    { (int) '2', 57401, 'u' },  // KP_2
+    { (int) '3', 57402, 'u' },  // KP_3
+    { (int) '4', 57403, 'u' },  // KP_4
+    { (int) '5', 57404, 'u' },  // KP_5
+    { (int) '6', 57405, 'u' },  // KP_6
+    { (int) '7', 57406, 'u' },  // KP_7
+    { (int) '8', 57407, 'u' },  // KP_8
+    { (int) '9', 57408, 'u' },  // KP_9
+    { (int) '.', 57409, 'u' },  // KP_DECIMAL
+    { (int) '/', 57410, 'u' },  // KP_DIVIDE
+    { KEY_KP_MULTIPLY, 57411, 'u' },
+    { KEY_KP_SUBTRACT, 57412, 'u' },
+    { KEY_KP_ADD, 57413, 'u' },
+    { KEY_ENTER, 57414, 'u' },  // KP_ENTER
+    { -1, 57415, 'u' },         // KP_EQUAL
+    { -1, 57416, 'u' },         // KP_SEPARATOR
+    { KEY_LEFT, 57417, 'u' },   // KP_LEFT
+    { KEY_RIGHT, 57418, 'u' },  // KP_RIGHT
+    { KEY_UP, 57419, 'u' },     // KP_UP
+    { KEY_DOWN, 57420, 'u' },   // KP_DOWN
+    { KEY_PPAGE, 57421, 'u' },  // KP_PAGE_UP
+    { KEY_NPAGE, 57422, 'u' },  // KP_PAGE_DOWN
+    { KEY_HOME, 57423, 'u' },   // KP_HOME
+    { KEY_END, 57424, 'u' },    // KP_END
+    { KEY_IC, 57425, 'u' },     // KP_INSERT
+    { KEY_DC, 57426, 'u' },     // KP_DELETE
+    { -1, 1, 'E' },             // KP_BEGIN
+    { -1, 57427, '~' },         // KP_BEGIN
+
+    // MEDIA_* keys omitted
+
+    { -1, 57441, 'u' },  // LEFT_SHIFT
+    { -1, 57442, 'u' },  // LEFT_CONTROL
+    { -1, 57443, 'u' },  // LEFT_ALT
+    { -1, 57444, 'u' },  // LEFT_SUPER
+    { -1, 57445, 'u' },  // LEFT_HYPER
+    { -1, 57446, 'u' },  // LEFT_META
+    { -1, 57447, 'u' },  // RIGHT_SHIFT
+    { -1, 57448, 'u' },  // RIGHT_CONTROL
+    { -1, 57449, 'u' },  // RIGHT_ALT
+    { -1, 57450, 'u' },  // RIGHT_SUPER
+    { -1, 57451, 'u' },  // RIGHT_HYPER
+    { -1, 57452, 'u' },  // RIGHT_META
+    { -1, 57453, 'u' },  // ISO_LEVEL3_SHIFT
+    { -1, 57454, 'u' },  // ISO_LEVEL5_SHIFT
+
+    { 0, 0, 0 },
 };
 
 /* This holds all the key definitions */
@@ -1302,6 +1343,116 @@ lookup_keycode (const int code, int *idx)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Check for Kitty Keyboard Protocol including backward compatibility sequences:
+ *
+ * CSI parameters [u~ABCDEFHPQS]
+ *
+ * https://sw.kovidgoyal.net/kitty/keyboard-protocol/
+ *
+ * Examples:
+ *
+ * \E[2~ or \E[2;1~ -> KEY_IC
+ * \E[1;2A -> KEY_M_SHIFT | KEY_UP
+ * \E[13;6u -> KEY_M_CTRL | KEY_M_SHIFT | '\n'
+ * \E[111;5u\E[57421;5:2u -> XCTRL(KEY_M_CTRL | 'o'), KEY_M_CTRL | KEY_PPAGE
+ * \E[44:63;132u -> KEY_M_ALT | '?' (on Czech keyboard, with Num Lock on)
+ */
+static int
+parse_kitty (csi_command_t csi)
+{
+    int c;
+    guint unicode_key_code, shifted_key, base_layout_key, modifiers;
+    gchar utf8char[MB_LEN_MAX + 1];
+
+    if (!((csi.final_byte == 'u' && csi.param_count >= 1)
+          || (csi.final_byte == '~' && csi.param_count >= 1)
+          || (csi.final_byte >= 'A' && csi.final_byte <= 'F') || (csi.final_byte == 'H')
+          || (csi.final_byte >= 'P' && csi.final_byte <= 'S')))
+        return -1;
+
+    // Private mode is used for reporting protocol presence and mode from terminal
+    // (CSI ? flags u). Currently we don't need this info so we don't process it
+    if (csi.private_mode != 0)
+        return -1;
+
+    unicode_key_code = csi.params[0][0];
+    shifted_key = csi.params[0][1];
+    base_layout_key = csi.params[0][2];
+    modifiers = csi.params[1][0];
+
+    if (modifiers != 0)
+        modifiers = ((modifiers - 1) << 12) & KEY_M_MASK;
+
+    // Zero parameters are allowed. In that case, assume key code 1 as the default
+    if (csi.param_count == 0)
+        unicode_key_code = 1;
+
+    // Check for non-literal keys using a predefined table
+    for (int j = 0; kitty_key_defines[j].code != 0; j++)
+    {
+        if (kitty_key_defines[j].kitty_code == unicode_key_code
+            && kitty_key_defines[j].final_byte == csi.final_byte)
+        {
+            c = kitty_key_defines[j].code;
+            if (c == -1)
+                return -1;
+            c |= modifiers;
+
+            return c;
+        }
+    }
+
+    // All possible keys (except for a few backward compatibility exceptions) are
+    // defined in the Unicode Basic Multilingual Plane Private Use Area. Discard
+    // unknown ones
+    if (unicode_key_code >= 0xE000 && unicode_key_code <= 0xF8FF)
+        return -1;
+
+    // Translate shifted chars so command line input works
+    if (shifted_key)
+    {
+        c = shifted_key;
+        modifiers &= ~KEY_M_SHIFT;
+    }
+    else
+    {
+        c = unicode_key_code;
+        if ((base_layout_key || (c >= '0' && c <= '9')))
+            modifiers &= ~KEY_M_SHIFT;
+    }
+
+    // Check if it is a non-Basic Latin Unicode character. If so, convert it to UTF-8
+    // and return the remaining bytes into the input queue.
+    if (c >= 0x80)
+    {
+        // If it's a CTRL or ALT combination and we have a base layout key, use it instead.
+        if (base_layout_key && (modifiers & (KEY_M_CTRL | KEY_M_ALT)) != 0)
+            c = base_layout_key;
+        // Otherwise, use the Unicode character and ignore modifiers.
+        else
+        {
+            const int utflen = g_unichar_to_utf8 (c, (gchar *) &utf8char);
+
+            c = utf8char[0] & 0xFF;
+            for (int j = 1; j < utflen; j++)
+                push_char (utf8char[j] & 0xFF);
+
+            pending_keys = seq_buffer;
+            return c;
+        }
+    }
+
+    // Mask the resulting value with 0x1F if the CTRL modifier is set
+    if ((modifiers & KEY_M_CTRL) && (c == ' ' || (c >= 0x40 && c <= 0x7e)))
+        c = XCTRL (c);
+
+    c |= modifiers;
+
+    return c;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /* This has to be called before init_slang or whatever routine
@@ -1714,10 +1865,9 @@ get_key_code (int no_delay)
 pend_send:
     if (pending_keys != NULL)
     {
-
         /* At this point, no sequence was found in the keys tree.
          *
-         * Now discard all CSI and SS3 sequences, as these two are the de-facto standard for
+         * Now check for all CSI and SS3 sequences, as these two are the de-facto standard for
          * sending key sequences in most terminals. The only well-known deviations are:
          * - Linux console (it sends invalid CSI for F1-F5, as double '[' is not allowed in CSI);
          *   this is handled by defining them in our key defines table (see above).
@@ -1726,6 +1876,10 @@ pend_send:
          *   As a workaround, we treat SS3 like CSI.
          * - Some terminals begin sequences with ESC ESC to indicate Alt modifier (for example
          *   PuTTY).
+         *
+         * Parse the sequence, check if it matches any of the complex sequences we are interested
+         * in, and discard it completely if it is unknown. Leave any keys following these sequences
+         * in stdin.
          */
 
         if (pending_keys[0] == ESC_CHAR && pending_keys[1] == ESC_CHAR)
@@ -1733,13 +1887,39 @@ pend_send:
 
         if (pending_keys[0] == ESC_CHAR && (pending_keys[1] == '[' || pending_keys[1] == 'O'))
         {
+            int seqlen;
+
             c = seq_append[-1];
 
             // Get all parameter bytes and intermediate bytes before the final byte
             while (c >= ' ' && c <= '?')
+            {
                 c = tty_lowlevel_getch ();
+                push_char (c);
+            }
+
+            char seq_char_buffer[SEQ_BUFFER_LEN];  // Must have same length as seq_buffer
+
+            for (seqlen = 0; pending_keys[seqlen] != '\0'; seqlen++)
+                seq_char_buffer[seqlen] = pending_keys[seqlen];
+            seq_char_buffer[seqlen] = '\0';
 
             pending_keys = seq_append = NULL;
+
+            if (seq_char_buffer[1] == '[')  // CSI
+            {
+                csi_command_t csi;
+
+                const char *seq_char_buffer_ptr = &seq_char_buffer[2];
+                if (!parse_csi (&csi, &seq_char_buffer_ptr, &seq_char_buffer[seqlen]))
+                    return -1;
+
+                // Check for Kitty Keyboard Protocol sequence (or any common backwards compatible
+                // sequence)
+                c = parse_kitty (csi);
+                if (c != -1)
+                    goto done;
+            }
 
             return -1;
         }

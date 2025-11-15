@@ -146,8 +146,35 @@ START_TEST (test_tty_get_key_code)
     load_terminfo_keys ();
 #endif
 
+    mock_input ("\x1b[2~");
+    ck_assert_int_eq (get_key_code (0), KEY_IC);
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
     mock_input ("\x1b[1;2A");
     ck_assert_int_eq (get_key_code (0), KEY_M_SHIFT | KEY_UP);
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
+    mock_input ("\x1b[1;2A\x1b[13;6uA");
+    ck_assert_int_eq (get_key_code (0), KEY_M_SHIFT | KEY_UP);
+    ck_assert_int_eq (get_key_code (0), KEY_M_CTRL | KEY_M_SHIFT | '\n');
+    ck_assert_int_eq (get_key_code (0), 'A');
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
+    mock_input ("\x1b[111;5u\x1b[57421;5:2ux");
+    ck_assert_int_eq (get_key_code (0), XCTRL (KEY_M_CTRL | 'o'));
+    ck_assert_int_eq (get_key_code (0), KEY_M_CTRL | KEY_PPAGE);
+    ck_assert_int_eq (get_key_code (0), 'x');
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
+    mock_input ("abc\x1b[44:63;132u");
+    ck_assert_int_eq (get_key_code (0), 'a');
+    ck_assert_int_eq (get_key_code (0), 'b');
+    ck_assert_int_eq (get_key_code (0), 'c');
+    ck_assert_int_eq (get_key_code (0), KEY_M_ALT | '?');
     ck_assert_int_eq (get_key_code (0), -1);
     ck_assert_int_eq (get_key_code (0), -1);
 
@@ -156,6 +183,16 @@ START_TEST (test_tty_get_key_code)
     ck_assert_int_eq (get_key_code (0), 0x9F);
     ck_assert_int_eq (get_key_code (0), 0x98);
     ck_assert_int_eq (get_key_code (0), 0x8A);
+    ck_assert_int_eq (get_key_code (0), 'F');
+    ck_assert_int_eq (get_key_code (0), 'G');
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
+    mock_input ("\x1b[128512;2uFG");
+    ck_assert_int_eq (get_key_code (0), 0xF0);  // 😀
+    ck_assert_int_eq (get_key_code (0), 0x9F);
+    ck_assert_int_eq (get_key_code (0), 0x98);
+    ck_assert_int_eq (get_key_code (0), 0x80);
     ck_assert_int_eq (get_key_code (0), 'F');
     ck_assert_int_eq (get_key_code (0), 'G');
     ck_assert_int_eq (get_key_code (0), -1);
@@ -175,7 +212,28 @@ START_TEST (test_tty_get_key_code)
     ck_assert_int_eq (get_key_code (0), -1);
     ck_assert_int_eq (get_key_code (0), -1);
 
+    mock_input ("\x1b[85405465064;6065606146066:::::::u$");
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), '$');
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
     mock_input ("\x1b[u");
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
+    mock_input ("\x1b[.abc");
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), 'b');
+    ck_assert_int_eq (get_key_code (0), 'c');
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), -1);
+
+    mock_input ("\x1bOP\x1bO1;2abc");
+    ck_assert_int_eq (get_key_code (0), KEY_F (1));
+    ck_assert_int_eq (get_key_code (0), -1);
+    ck_assert_int_eq (get_key_code (0), 'b');
+    ck_assert_int_eq (get_key_code (0), 'c');
     ck_assert_int_eq (get_key_code (0), -1);
     ck_assert_int_eq (get_key_code (0), -1);
 }

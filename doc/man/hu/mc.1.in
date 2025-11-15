@@ -3014,6 +3014,14 @@ utolsó fájl a panelben.
 .IP
 Ha ez a változó be van állítva (alapértelmezésben) meg foja jelölni azt
 a fájl parancsot, amelyhez a
+.PP
+.I kitty_keyboard_protocol
+Alapértelmezés szerint a Midnight Commander egy olyan escape szekvenciát
+küld, amely engedélyezi a Kitty billentyűzetprotokollt. Ez lehetővé teszi
+a billentyűzet pontos kezelését (beleértve az olyan billentyűkombinációkat
+is, mint a C\-Enter vagy a C\-S\-Enter), amikor olyan terminálról
+csatlakoznak, amely támogatja ezt a protokollt. Ha az érték hamisra van
+állítva, a Midnight Commander nem próbálja meg engedélyezni ezt a protokollt.
 .\"LINK2"
 Társításokban
 .\"Edit Extension File"

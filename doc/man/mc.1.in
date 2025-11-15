@@ -4208,6 +4208,13 @@ For example:
 .nf
 autodetect_codeset=russian
 .fi
+.TP
+.I kitty_keyboard_protocol
+By default, Midnight Commander sends an escape sequence that enables the Kitty
+Keyboard Protocol, which allows precise keyboard handling (including key
+combinations such as C\-Enter or C\-S\-Enter) when connected from terminals that
+support this protocol. If set to false, Midnight Commander will not attempt to
+enable this protocol.
 .\"NODE "Parameters for external editor or viewer"
 .SH "Parameters for external editor or viewer"
 Midnight Commander provides a way for specify an options for external editors
