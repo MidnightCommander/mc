@@ -670,6 +670,16 @@ pipe_mail (const edit_buffer_t *buf, char *to, char *subject, char *cc)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+edit_append_spaces_at_eol (WEdit *edit, const long col, const long width)
+{
+    if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+        for (long l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
+            edit_insert (edit, ' ');
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long width,
                             off_t *start_pos, off_t *end_pos, long *col1, long *col2)
 {
@@ -685,14 +695,10 @@ edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long w
             edit_insert (edit, data[i]);
         else
         {  // fill in and move to next line
-            long l;
             off_t p;
 
-            if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
-            {
-                for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
-                    edit_insert (edit, ' ');
-            }
+            edit_append_spaces_at_eol (edit, col, width);
+
             for (p = edit->buffer.curs1;; p++)
             {
                 if (p == edit->buffer.size)
@@ -710,15 +716,13 @@ edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long w
             }
             edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->buffer.curs1);
 
-            for (l = col - edit_get_col (edit); l >= space_width; l -= space_width)
+            for (long l = col - edit_get_col (edit); l >= space_width; l -= space_width)
                 edit_insert (edit, ' ');
         }
     }
 
     // add spaces at the end of the last line if this line is short
-    if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
-        for (long l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
-            edit_insert (edit, ' ');
+    edit_append_spaces_at_eol (edit, col, width);
 
     *col1 = col;
     *col2 = col + width;
