@@ -221,8 +221,8 @@ const key_code_name_t key_name_conv_tab[] = {
 
 #define MC_USEC_PER_MSEC 1000
 
-/* The maximum sequence length (32 + null terminator) */
-#define SEQ_BUFFER_LEN 33
+/* The maximum sequence length */
+#define SEQ_BUFFER_LEN 100
 
 /*** file scope type declarations ****************************************************************/
 
@@ -283,6 +283,24 @@ static key_define_t mc_default_keys[] = {
     { ESC_CHAR, ESC_STR ESC_STR, MCKEY_NOACTION },
     { MCKEY_BRACKETED_PASTING_START, ESC_STR "[200~", MCKEY_NOACTION },
     { MCKEY_BRACKETED_PASTING_END, ESC_STR "[201~", MCKEY_NOACTION },
+
+    // Linux function keys F1-F5
+    // They must be defined here because the generic CSI handler in get_key_code() can't ignore them
+    // quietly, as they violate standardized CSI syntax
+    { KEY_F (1), ESC_STR "[[A", MCKEY_NOACTION },
+    { KEY_F (2), ESC_STR "[[B", MCKEY_NOACTION },
+    { KEY_F (3), ESC_STR "[[C", MCKEY_NOACTION },
+    { KEY_F (4), ESC_STR "[[D", MCKEY_NOACTION },
+    { KEY_F (5), ESC_STR "[[E", MCKEY_NOACTION },
+
+    // DEC VT100 cursor application mode keys
+    // Since there must be at least one SS3 definition for the get_key_code() sequence parser to
+    // work correctly, define these cursor sequences as they are very common
+    { KEY_UP, ESC_STR "OA", MCKEY_NOACTION },
+    { KEY_DOWN, ESC_STR "OB", MCKEY_NOACTION },
+    { KEY_RIGHT, ESC_STR "OC", MCKEY_NOACTION },
+    { KEY_LEFT, ESC_STR "OD", MCKEY_NOACTION },
+
     { 0, NULL, MCKEY_NOACTION },
 };
 
@@ -1716,31 +1734,45 @@ get_key_code (int no_delay)
 pend_send:
     if (pending_keys != NULL)
     {
-        gboolean bad_seq;
 
+        /* At this point, no sequence was found in the keys tree.
+         *
+         * Now discard all CSI and SS3 sequences, as these two are the de-facto standard for
+         * sending key sequences in most terminals. The only well-known deviations are:
+         * - Linux console (it sends invalid CSI for F1-F5, as double '[' is not allowed in CSI);
+         *   this is handled by defining them in our key defines table (see above).
+         * - xterm with modify*Keys:0 (the old behavior, which sends parametrized SS3 sequences),
+         *   and many terminals that inherited this ill behavior, as SS3 can't have any parameters.
+         *   As a workaround, we treat SS3 like CSI.
+         * - Some terminals begin sequences with ESC ESC to indicate Alt modifier (for example
+         *   PuTTY).
+         */
+
+        if (pending_keys[0] == ESC_CHAR && pending_keys[1] == ESC_CHAR)
+            pending_keys++;
+
+        if (pending_keys[0] == ESC_CHAR && (pending_keys[1] == '[' || pending_keys[1] == 'O'))
+        {
+            c = seq_append[-1];
+
+            // Get all parameter bytes and intermediate bytes before the final byte
+            while (c >= ' ' && c <= '?')
+                c = tty_lowlevel_getch ();
+
+            pending_keys = seq_append = NULL;
+
+            return -1;
+        }
+
+        // Most terminals indicate the Alt key by prepending <Esc> to the character sent
         c = *pending_keys++;
         while (c == ESC_CHAR)
             c = ALT (*pending_keys++);
 
-        bad_seq = (*pending_keys != ESC_CHAR && *pending_keys != '\0');
-        if (*pending_keys == '\0' || bad_seq)
+        if (*pending_keys == '\0')
             pending_keys = seq_append = NULL;
 
-        if (bad_seq)
-        {
-            /* This is an unknown ESC sequence.
-             * To prevent interpreting its tail as a random garbage,
-             * eat and discard all buffered and quickly following chars.
-             * Small, but non-zero timeout is needed to reconnect
-             * escape sequence split up by e.g. a serial line.
-             */
-            int paranoia = 20;
-
-            while (getch_with_timeout (old_esc_mode_timeout) >= 0 && --paranoia != 0)
-                ;
-        }
-        else
-            goto done;
+        goto done;
     }
 
 nodelay_try_again:
