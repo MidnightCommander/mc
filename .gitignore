@@ -4,6 +4,8 @@
 *.la
 *~
 *.cache
+*.log
+*.orig
 *.tar.gz
 # autoconf runs "mktemp ./confXXXXXX"
 /conf??????/
@@ -44,6 +46,7 @@ TAGS
 doc/devel/
 doc/html/
 .deps
+lib/stdckdint.h
 libtool
 make.log
 make.clang
