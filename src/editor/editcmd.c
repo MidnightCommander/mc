@@ -715,6 +715,11 @@ edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long w
         }
     }
 
+    // add spaces at the end of the last line if this line is short
+    if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+        for (long l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
+            edit_insert (edit, ' ');
+
     *col1 = col;
     *col2 = col + width;
     *start_pos = cursor;
