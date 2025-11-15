@@ -63,7 +63,7 @@
 
 /*** global variables ****************************************************************************/
 
-int mc_tty_frm[MC_TTY_FRM_MAX];
+mc_tty_char_t mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -248,7 +248,7 @@ tty_flush_winch (void)
 void
 tty_print_one_hline (gboolean single)
 {
-    tty_print_alt_char (ACS_HLINE, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -256,7 +256,7 @@ tty_print_one_hline (gboolean single)
 void
 tty_print_one_vline (gboolean single)
 {
-    tty_print_alt_char (ACS_VLINE, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -280,13 +280,13 @@ tty_draw_box (int y, int x, int ys, int xs, gboolean single)
     tty_draw_hline (y, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_draw_hline (y2, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_gotoyx (y, x);
-    tty_print_alt_char (ACS_ULCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP]);
     tty_gotoyx (y2, x);
-    tty_print_alt_char (ACS_LLCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM]);
     tty_gotoyx (y, x2);
-    tty_print_alt_char (ACS_URCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP]);
     tty_gotoyx (y2, x2);
-    tty_print_alt_char (ACS_LRCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
