@@ -141,7 +141,7 @@ edit_about (void)
     char *package_copyright = mc_get_package_copyright ();
 
     char *description =
-        g_strdup_printf (N_ ("A user friendly text editor\nwritten for the %s."), PACKAGE_NAME);
+        g_strdup_printf (_ ("A user friendly text editor\nwritten for the %s."), PACKAGE_NAME);
 
     {
         quick_widget_t quick_widgets[] = {
@@ -151,7 +151,7 @@ edit_about (void)
             QUICK_SEPARATOR (FALSE),
             QUICK_LABEL (package_copyright, NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
+            QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
             QUICK_END,
         };
 
@@ -159,7 +159,7 @@ edit_about (void)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("About"),
+            .title = _ ("About"),
             .help = "[Internal File Editor]",
             .widgets = quick_widgets,
             .callback = NULL,

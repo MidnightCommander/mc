@@ -663,14 +663,10 @@ simple_status_msg_init_cb (status_msg_t *sm)
     WGroup *wg = GROUP (sm->dlg);
     WRect r;
 
-    const char *b_name = N_ ("&Abort");
+    const char *b_name = _ ("&Abort");
     int b_width;
     int wd_width, y;
     Widget *b;
-
-#ifdef ENABLE_NLS
-    b_name = _ (b_name);
-#endif
 
     b_width = str_term_width1 (b_name) + 4;
     wd_width = MAX (wd->rect.cols, b_width + 6);
