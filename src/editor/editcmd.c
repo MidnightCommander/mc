@@ -566,43 +566,37 @@ edit_block_delete (WEdit *edit, off_t start_mark, off_t end_mark)
 /* --------------------------------------------------------------------------------------------- */
 /** Return a null terminated length of text. Result must be g_free'd */
 
-static unsigned char *
-edit_get_block (WEdit *edit, off_t start, off_t finish, off_t *l)
+static GString *
+edit_get_block (WEdit *edit, const off_t start, const off_t finish)
 {
-    unsigned char *s, *r;
+    GString *r;
 
-    r = s = g_malloc0 (finish - start + 1);
+    r = g_string_sized_new (finish - start);
 
     if (edit->column_highlight)
     {
-        *l = 0;
-
         // copy from buffer, excluding chars that are out of the column 'margins'
-        for (; start < finish; start++)
+        for (off_t i = start; i < finish; i++)
         {
-            int c;
             off_t x;
 
-            x = edit_buffer_get_bol (&edit->buffer, start);
-            x = edit_move_forward3 (edit, x, 0, start);
-            c = edit_buffer_get_byte (&edit->buffer, start);
+            x = edit_buffer_get_bol (&edit->buffer, i);
+            x = edit_move_forward3 (edit, x, 0, i);
+
+            const int c = edit_buffer_get_byte (&edit->buffer, i);
+
             if ((x >= edit->column1 && x < edit->column2)
                 || (x >= edit->column2 && x < edit->column1) || c == '\n')
-            {
-                *s++ = c;
-                (*l)++;
-            }
+                g_string_append_c (r, (gchar) c);
         }
     }
     else
-    {
-        *l = finish - start;
+        for (off_t i = start; i < finish; i++)
+        {
+            const int c = edit_buffer_get_byte (&edit->buffer, i);
 
-        for (; start < finish; start++)
-            *s++ = edit_buffer_get_byte (&edit->buffer, start);
-    }
-
-    *s = '\0';
+            g_string_append_c (r, (gchar) c);
+        }
 
     return r;
 }
@@ -1331,14 +1325,13 @@ edit_block_copy_cmd (WEdit *edit)
     off_t start_mark, end_mark, current = edit->buffer.curs1;
     off_t mark1 = 0, mark2 = 0;
     long c1 = 0, c2 = 0;
-    off_t size;
-    unsigned char *copy_buf;
+    GString *copy_buf;
 
     edit_update_curs_col (edit);
     if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
-    copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
+    copy_buf = edit_get_block (edit, start_mark, end_mark);
 
     // all that gets pushed are deletes hence little space is used on the stack
 
@@ -1349,21 +1342,20 @@ edit_block_copy_cmd (WEdit *edit)
         long col_delta;
 
         col_delta = labs (edit->column2 - edit->column1);
-        edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
+        edit_insert_column_of_text (edit, (unsigned char *) copy_buf->str, copy_buf->len, col_delta,
+                                    &mark1, &mark2, &c1, &c2);
     }
     else
     {
-        int size_orig = size;
-
-        while (size-- != 0)
-            edit_insert_ahead (edit, copy_buf[size]);
+        for (gsize i = copy_buf->len; i != 0; i--)
+            edit_insert_ahead (edit, copy_buf->str[i - 1]);
 
         // Place cursor at the end of text selection
         if (edit_options.cursor_after_inserted_block)
-            edit_cursor_move (edit, size_orig);
+            edit_cursor_move (edit, copy_buf->len);
     }
 
-    g_free (copy_buf);
+    g_string_free (copy_buf, TRUE);
     edit_scroll_screen_over_cursor (edit);
 
     if (edit->column_highlight)
@@ -1380,7 +1372,6 @@ void
 edit_block_move_cmd (WEdit *edit)
 {
     off_t current;
-    unsigned char *copy_buf = NULL;
     off_t start_mark, end_mark;
 
     if (!eval_marks (edit, &start_mark, &end_mark))
@@ -1396,10 +1387,10 @@ edit_block_move_cmd (WEdit *edit)
     if (edit->column_highlight)
     {
         off_t mark1, mark2;
-        off_t size;
         long c1, c2, b_width;
         long x, x2;
         off_t b1, b2;
+        GString *copy_buf;
 
         c1 = MIN (edit->column1, edit->column2);
         c2 = MAX (edit->column1, edit->column2);
@@ -1425,7 +1416,7 @@ edit_block_move_cmd (WEdit *edit)
                 x = c1;
         }
         // save current selection into buffer
-        copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
+        copy_buf = edit_get_block (edit, start_mark, end_mark);
 
         // remove current selection
         edit_block_delete_cmd (edit);
@@ -1441,11 +1432,14 @@ edit_block_move_cmd (WEdit *edit)
         if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 
-        edit_insert_column_of_text (edit, copy_buf, size, b_width, &mark1, &mark2, &c1, &c2);
+        edit_insert_column_of_text (edit, (unsigned char *) copy_buf->str, copy_buf->len, b_width,
+                                    &mark1, &mark2, &c1, &c2);
         edit_set_markers (edit, mark1, mark2, c1, c2);
+        g_string_free (copy_buf, TRUE);
     }
     else
     {
+        unsigned char *copy_buf;
         off_t count, count_orig;
         off_t x;
 
@@ -1464,6 +1458,7 @@ edit_block_move_cmd (WEdit *edit)
         count_orig = count;
         while (count-- > start_mark)
             edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
+        g_free (copy_buf);
 
         edit_set_markers (edit, edit->buffer.curs1, edit->buffer.curs1 + end_mark - start_mark, 0,
                           0);
@@ -1474,7 +1469,6 @@ edit_block_move_cmd (WEdit *edit)
     }
 
     edit_scroll_screen_over_cursor (edit);
-    g_free (copy_buf);
     edit->force |= REDRAW_PAGE;
 }
 
@@ -1564,8 +1558,8 @@ gboolean
 edit_save_block (WEdit *edit, const char *filename, off_t start, off_t finish)
 {
     int file;
-    off_t len = 1;
     vfs_path_t *vpath;
+    off_t len = 1;
 
     vpath = vfs_path_from_str (filename);
     file = mc_open (vpath, O_CREAT | O_WRONLY | O_TRUNC,
@@ -1581,9 +1575,13 @@ edit_save_block (WEdit *edit, const char *filename, off_t start, off_t finish)
         r = mc_write (file, VERTICAL_MAGIC, sizeof (VERTICAL_MAGIC));
         if (r > 0)
         {
-            unsigned char *block, *p;
+            GString *block;
+            char *p;
 
-            p = block = edit_get_block (edit, start, finish, &len);
+            block = edit_get_block (edit, start, finish);
+            p = block->str;
+            len = block->len;
+
             while (len != 0)
             {
                 r = mc_write (file, p, len);
@@ -1592,7 +1590,8 @@ edit_save_block (WEdit *edit, const char *filename, off_t start, off_t finish)
                 p += r;
                 len -= r;
             }
-            g_free (block);
+
+            g_string_free (block, TRUE);
         }
     }
     else
