@@ -247,7 +247,7 @@ edit_status_window (WEdit *edit)
 
     if (cols > 5)
     {
-        const char *fname = N_ ("NoName");
+        const char *fname;
 
         if (edit->filename_vpath != NULL)
         {
@@ -256,10 +256,8 @@ edit_status_window (WEdit *edit)
             if (!edit_options.state_full_filename)
                 fname = x_basename (fname);
         }
-#ifdef ENABLE_NLS
         else
-            fname = _ (fname);
-#endif
+            fname = _ ("NoName");
 
         edit_move (2, 0);
         tty_printf ("[%s]", str_term_trim (fname, w->rect.cols - 8 - 6));

@@ -492,17 +492,17 @@ layout_dlg_create (void)
     int b1, b2, b;
     size_t i;
 
-    const char *title1 = N_ ("Panel split");
-    const char *title2 = N_ ("Console output");
-    const char *title3 = N_ ("Other options");
+    const char *title1 = _ ("Panel split");
+    const char *title2 = _ ("Console output");
+    const char *title3 = _ ("Other options");
 
     const char *s_split_direction[2] = {
-        N_ ("&Vertical"),
-        N_ ("&Horizontal"),
+        _ ("&Vertical"),
+        _ ("&Horizontal"),
     };
 
-    const char *ok_button = N_ ("&OK");
-    const char *cancel_button = N_ ("&Cancel");
+    const char *ok_button = _ ("&OK");
+    const char *cancel_button = _ ("&Cancel");
 
     output_lines_label = _ ("Output lines:");
 
@@ -510,23 +510,12 @@ layout_dlg_create (void)
     {
         static gboolean i18n = FALSE;
 
-        title1 = _ (title1);
-        title2 = _ (title2);
-        title3 = _ (title3);
-
-        i = G_N_ELEMENTS (s_split_direction);
-        while (i-- != 0)
-            s_split_direction[i] = _ (s_split_direction[i]);
-
         if (!i18n)
         {
             for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
                 check_options[i].text = _ (check_options[i].text);
             i18n = TRUE;
         }
-
-        ok_button = _ (ok_button);
-        cancel_button = _ (cancel_button);
     }
 #endif
 

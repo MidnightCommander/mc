@@ -86,7 +86,7 @@ edit_dialog_search_show (WEdit *edit)
     {
         quick_widget_t quick_widgets[] = {
             // clang-format off
-            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
+            QUICK_LABELED_INPUT (_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
                                  MC_HISTORY_SHARED_SEARCH, &search_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
@@ -94,16 +94,16 @@ edit_dialog_search_show (WEdit *edit)
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &edit_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
-                QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
-                QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (_ ("&Backwards"), &edit_search_options.backwards, NULL),
+                QUICK_CHECKBOX (_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
+                QUICK_CHECKBOX (_ ("&Whole words"), &edit_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Find all"), B_USER, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
+                QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (_ ("&Find all"), B_USER, NULL, NULL),
+                QUICK_BUTTON (_ ("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END,
             // clang-format on
         };
@@ -112,7 +112,7 @@ edit_dialog_search_show (WEdit *edit)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Search"),
+            .title = _ ("Search"),
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
@@ -691,10 +691,10 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
     {
         quick_widget_t quick_widgets[] = {
             // clang-format off
-            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, search_default,
+            QUICK_LABELED_INPUT (_ ("Enter search string:"), input_label_above, search_default,
                                  MC_HISTORY_SHARED_SEARCH, search_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
-            QUICK_LABELED_INPUT (N_ ("Enter replacement string:"), input_label_above,
+            QUICK_LABELED_INPUT (_ ("Enter replacement string:"), input_label_above,
                                  replace_default, "replace", replace_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
@@ -702,11 +702,11 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &edit_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
-                QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
-                QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (_ ("&Backwards"), &edit_search_options.backwards, NULL),
+                QUICK_CHECKBOX (_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
+                QUICK_CHECKBOX (_ ("&Whole words"), &edit_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
@@ -717,7 +717,7 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Replace"),
+            .title = _ ("Replace"),
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
@@ -771,13 +771,13 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
         quick_widget_t quick_widgets[] = {
             // clang-format off
             QUICK_LABEL (repl_from, NULL),
-            QUICK_LABEL (N_ ("Replace with:"), NULL),
+            QUICK_LABEL (_ ("Replace with:"), NULL),
             QUICK_LABEL (repl_to, NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_ ("&Replace"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_ ("A&ll"), B_REPLACE_ALL, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Skip"), B_SKIP_REPLACE, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
+                QUICK_BUTTON (_ ("&Replace"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (_ ("A&ll"), B_REPLACE_ALL, NULL, NULL),
+                QUICK_BUTTON (_ ("&Skip"), B_SKIP_REPLACE, NULL, NULL),
+                QUICK_BUTTON (_ ("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END,
             // clang-format on
         };
@@ -786,7 +786,7 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Confirm replace"),
+            .title = _ ("Confirm replace"),
             .help = NULL,
             .widgets = quick_widgets,
             .callback = NULL,
