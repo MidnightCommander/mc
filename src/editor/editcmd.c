@@ -80,9 +80,9 @@ int search_create_bookmark = FALSE;
 
 /*** forward declarations (file scope functions) *************************************************/
 
-MC_TESTABLE void edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size,
-                                             long width, off_t *start_pos, off_t *end_pos,
-                                             long *col1, long *col2);
+MC_TESTABLE void edit_insert_column_of_text (WEdit *edit, GString *data, long width,
+                                             off_t *start_pos, off_t *end_pos, long *col1,
+                                             long *col2);
 
 /*** file scope variables ************************************************************************/
 
@@ -676,19 +676,19 @@ edit_append_spaces_at_eol (WEdit *edit, const long col, const long width)
 /* --------------------------------------------------------------------------------------------- */
 
 MC_TESTABLE void
-edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long width,
-                            off_t *start_pos, off_t *end_pos, long *col1, long *col2)
+edit_insert_column_of_text (WEdit *edit, GString *data, long width, off_t *start_pos,
+                            off_t *end_pos, long *col1, long *col2)
 {
-    off_t i, cursor;
+    off_t cursor;
     long col;
 
     cursor = edit->buffer.curs1;
     col = edit_get_col (edit);
 
-    for (i = 0; i < size; i++)
+    for (gsize i = 0; i < data->len; i++)
     {
-        if (data[i] != '\n')
-            edit_insert (edit, data[i]);
+        if (data->str[i] != '\n')
+            edit_insert (edit, data->str[i]);
         else
         {  // fill in and move to next line
             off_t p;
@@ -1342,8 +1342,7 @@ edit_block_copy_cmd (WEdit *edit)
         long col_delta;
 
         col_delta = labs (edit->column2 - edit->column1);
-        edit_insert_column_of_text (edit, (unsigned char *) copy_buf->str, copy_buf->len, col_delta,
-                                    &mark1, &mark2, &c1, &c2);
+        edit_insert_column_of_text (edit, copy_buf, col_delta, &mark1, &mark2, &c1, &c2);
     }
     else
     {
@@ -1432,8 +1431,7 @@ edit_block_move_cmd (WEdit *edit)
         if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 
-        edit_insert_column_of_text (edit, (unsigned char *) copy_buf->str, copy_buf->len, b_width,
-                                    &mark1, &mark2, &c1, &c2);
+        edit_insert_column_of_text (edit, copy_buf, b_width, &mark1, &mark2, &c1, &c2);
         edit_set_markers (edit, mark1, mark2, c1, c2);
         g_string_free (copy_buf, TRUE);
     }

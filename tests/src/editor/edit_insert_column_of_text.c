@@ -56,8 +56,8 @@ static const char test_insert_column_out2[] = "11111\n"  //
 /* --------------------------------------------------------------------------------------------- */
 
 // Function under test
-void edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long width,
-                                 off_t *start_pos, off_t *end_pos, long *col1, long *col2);
+void edit_insert_column_of_text (WEdit *edit, GString *data, long width, off_t *start_pos,
+                                 off_t *end_pos, long *col1, long *col2);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -206,8 +206,7 @@ START_PARAMETRIZED_TEST (test_insert_column, test_insert_column_ds)
 
     const long col_delta = labs (test_edit->column2 - test_edit->column1);
 
-    edit_insert_column_of_text (test_edit, (unsigned char *) copy_buf->str, copy_buf->len,
-                                col_delta, &start_pos, &end_pos, &col1, &col2);
+    edit_insert_column_of_text (test_edit, copy_buf, col_delta, &start_pos, &end_pos, &col1, &col2);
 
     g_string_free (copy_buf, TRUE);
 
