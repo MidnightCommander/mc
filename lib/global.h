@@ -21,6 +21,12 @@
 #define MC_MOCKABLE
 #endif
 
+#if defined(HAVE_TESTS)
+#define MC_TESTABLE
+#else
+#define MC_TESTABLE static
+#endif
+
 #include "glibcompat.h"
 
 #include "unixcompat.h"
