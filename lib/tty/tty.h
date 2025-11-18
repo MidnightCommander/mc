@@ -97,6 +97,7 @@ extern int tty_flush_input (void);
 extern void tty_keypad (gboolean set);
 extern void tty_nodelay (gboolean set);
 extern int tty_baudrate (void);
+extern void tty_kitty (gboolean set);
 
 /* {{{ Output }}} */
 
@@ -119,6 +120,7 @@ extern void tty_print_char (int c);
 extern void tty_print_alt_char (int c, gboolean single);
 extern void tty_print_anychar (int c);
 extern void tty_print_string (const char *s);
+extern void tty_print_string_raw (const char *s);
 extern void tty_printf (const char *s, ...) G_GNUC_PRINTF (1, 2);
 
 extern void tty_print_one_vline (gboolean single);
