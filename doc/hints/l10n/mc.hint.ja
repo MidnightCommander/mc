@@ -2,59 +2,59 @@
 
 ヒント：C-x p で、現在のパス名をコマンドラインにコピーできます。
 
-Hint: Completion: use M-Tab (or Esc+Tab). Type it twice to get a list.
+ヒント：補完：M-Tab（またはESC+タブ）を使用します。 リストを取得するには2回入力します。
 
 ヒント：M-pとM-nを使用すると、コマンド履歴にアクセスできます。
 
-Hint: Need to quote a character? Use Control-q and the character.
+ヒント：Control-Qで文字をクォートできます。
 
 Hint: Tired of these messages? Turn them off from the Options/Layout menu.
 
 Hint: Selecting directories: add a slash to the end of the matching pattern.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+ヒント：端末に機能キーがない場合は、ESC+番号シーケンスを使用します。
 
 Hint: The homepage of GNU Midnight Commander: https://midnight-commander.org
 
-Hint: Please send any bug reports to mc-devel@lists.midnight-commander.org
+ヒント：バグレポートをmc-devel@lists.midnight-commander.orgに送信してください
 
-Hint: Tab changes your current panel.
+ヒント：タブは現在のパネルを変更します。
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+ヒント：VFSクールさ：ENTERをタップして、TARファイルの内容を調べます。
 
 ヒント：ナイスなマニュアルページの英語版もありますよ。
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+ヒント：Lynxスタイルのナビゲーションが必要ですか？ [構成]ダイアログで設定します。
 
-Hint: % macros work even on the command line.
+ヒント：％マクロはコマンドラインでも機能します。
 
-Hint: M-! will allow you to execute programs and see the output in the viewer.
+ヒント：M-！プログラムを実行して、ビューアの出力を確認できます。
 
-Hint: The file listing format can be customized; do "man mc" for details.
+ヒント：ファイルリスト形式をカスタマイズできます。詳細については、「man mc」を見て下さい。
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+ヒント：％d/％tは、反対側のディレクトリ内のタグ付きファイルに展開します。
 
 ヒント：プレーンなシェルが必要な場合はC-oを押してください。もう一度押すことでMCに戻ることが出来ます。
 
 Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+ヒント：。*ファイルを表示したい場合は、[構成]ダイアログで指示して下さい。
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+ヒント： *〜バックアップファイルを見たいですか？ [構成]ダイアログで設定します。
 
 Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
 
-Hint: On slow terminals the -s flag may help.
+ヒント：遅い端末では、-sフラグが役立つ場合があります。
 
-Hint: Find File: you can work on the files found using the Panelize button.
+ヒント：ファイルを見つける：パネル化ボタンを使用して見つかったファイルで作業できます。
 
-Hint: Want to do complex searches? Use the External Panelize command.
+ヒント：複雑な検索をしたいですか？外部パネライズコマンドを使用します。
 
-Hint: To change directory halfway through typing a command, use M-c (quick cd).
+ヒント：コマンドの入力の途中でディレクトリを変更するには、M-C（即時 cd）を使用します。
 
-Hint: Shell commands will not work when you are on a non-local file system.
+ヒント：リモートファイルシステムを使用している場合にはシェルコマンドは機能しません。
 
-Hint: Bring text back from the dead with C-y.
+ヒント：C-Yで削除済みテキストを復帰します。
 
 Hint: Are some of your keys not working? Look at Options/Learn keys.
 
@@ -62,9 +62,9 @@ Hint: To look at the output of a command in the viewer, use M-!
 
 Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+ヒント：シェル変数エディターを使用して、F4のエディターを指定できます。
 
-Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
+ヒント：Shell Vars ViewerまたはPagerを使用して、外部ビューアを指定できます。
 
 Hint: You can disable all requests for confirmation in Options/Confirmation.
 

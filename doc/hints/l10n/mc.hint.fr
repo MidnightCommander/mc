@@ -14,9 +14,9 @@ Astuce : Sélection de répertoires: ajouter une barre oblique à la fin de moti
 
 Astuce : Si votre clavier n’a pas de touche de fonction, utilisez la combinaison ESC+nombre.
 
-Astuce : Site officiel de GNU Midnight Commander : https://midnight-commander.org
+Astuce : Site officiel de GNU Midnight Commander : https://midnight-commander.org
 
-Astuce : Envoyez vos rapports de bogues à l’adresse mc-devel@lists.midnight-commander.org
+Astuce : Envoyez vos rapports de bogues à l’adresse mc-devel@lists.midnight-commander.org
 
 Astuce : La touche Tab permute le panneau courant.
 
@@ -34,7 +34,7 @@ Astuce : Le listing des fichiers peut-être customisée ; consultez « man mc »
 
 Astuce : %D/%T substitue le répertoire et la liste des fichiers sélectionnés dans le panneau opposé.
 
-Astuce : Vous voulez un shell plein écran ? Tapez C-o, puis revenez à MC en tapant C-o à nouveau.
+Astuce : Vous voulez un shell plein écran ? Tapez C-o, puis revenez à MC en tapant C-o à nouveau.
 
 Astuce : Assigner des répertoires à la variable d’environnement CDPATH peut rendre plus concise la commande cd.
 
@@ -52,11 +52,11 @@ Astuce : Vous souhaitez faire des recherches complexes ? Rendez-vous dans le men
 
 Astuce : Pour changer de répertoire rapidement, utiliser M-c (cd rapide).
 
-Astuce : Les commandes shell ne fonctionnent que sur des systèmes de fichiers locaux.
+Astuce : Les commandes shell ne fonctionnent que sur des systèmes de fichiers locaux.
 
 Astuce : Coller du texte dans la ligne de commande avec C-y.
 
-Astuce : Tous les raccourcis claviers ne fonctionnent pas ? Vérifiez dans le menu Options/Apprendre les touches.
+Astuce : Tous les raccourcis claviers ne fonctionnent pas ? Vérifiez dans le menu Options/Apprendre les touches.
 
 Astuce : Pour voir le résultat d’une commande dans la visionneuse, utilisez M-!
 

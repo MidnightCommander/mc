@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Azerbaijani (http://app.transifex.com/mc/mc/language/az/)\n"
@@ -18,11 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Tərcüməsiz >"
-
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr ""
+
 msgid "Warning: cannot load codepages list"
 msgstr ""
 
@@ -466,6 +465,12 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM dəyişəni bildirilməyib!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -491,12 +496,6 @@ msgid ""
 msgstr ""
 "%dx%d ekran böyüklüyü dəstəklənmir.\n"
 "TERM sistem dəyişgənini yoxla.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM dəyişəni bildirilməyib!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -825,19 +824,14 @@ msgstr ""
 msgid "Cannot create temporary diff file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s~~~"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy
 msgid "Cannot create temporary merge file"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
 msgid "&Fastest (Assume large files)"
 msgstr ""
@@ -923,17 +917,17 @@ msgstr ""
 msgid "File name is empty!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "qovluq"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
-msgstr "Daraya bilmədim :"
+msgstr ""
 
 msgid "Diff viewer: invalid mode"
 msgstr ""
@@ -948,13 +942,11 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
 msgid "Load file"
 msgstr ""
@@ -982,13 +974,11 @@ msgstr "Xəbərdarlıq"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
 msgstr ""
-"%s faylını yazmaq üçün aça bilmədim :\n"
-"%s\n"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1000,14 +990,12 @@ msgstr ""
 msgid "Error writing to pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s\n"
 "for writing"
 msgstr ""
-"%s faylını yazmaq üçün aça bilmədim :\n"
-"%s\n"
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1036,11 +1024,11 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
-msgstr " Təzə Qovluq yarat"
+msgstr ""
 
 msgid "&Quick save"
 msgstr ""
@@ -1689,13 +1677,11 @@ msgstr ""
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
 msgid "Load syntax file"
 msgstr ""
@@ -1791,11 +1777,12 @@ msgstr ""
 msgid "Stopped"
 msgstr "Dayandırılıb"
 
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Giriş / ekran kod səhifəsi:"
+#, c-format
+msgid "Detected display codepage: %s"
+msgstr ""
 
-msgid "Selected source (file I/O) codepage"
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
 msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
@@ -2070,11 +2057,11 @@ msgstr "&Öldür"
 msgid "Background jobs"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s"
-msgstr "Xəbərdarlıq : %s'ye keçə bilmədim .\n"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2130,9 +2117,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge file"
-msgstr "fayl"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2164,25 +2150,23 @@ msgstr "Seçilanləri T&əmizlə"
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
-msgstr "Daraya bilmədim :"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
-msgstr "Daraya bilmədim :"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2284,21 +2268,17 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create link\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
 msgid "View file"
 msgstr ""
@@ -2490,29 +2470,23 @@ msgstr "fayllar/qovluqlar"
 msgid " with source mask:"
 msgstr " qaynaq maskalı: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2520,13 +2494,11 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -2573,51 +2545,41 @@ msgstr ""
 msgid "Non&e"
 msgstr "heç&biri"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
 msgstr ""
-"%s\n"
-"cpio arxivini aça bilmədim"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
 msgstr ""
-"%s\n"
-"cpio arxivini aça bilmədim"
 
 #, c-format
 msgid ""
@@ -2625,13 +2587,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -2644,112 +2604,86 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
 msgstr ""
-"%s\n"
-"cpio arxivini aça bilmədim"
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
 msgid "(stalled)"
 msgstr "(stalled)"
@@ -2763,35 +2697,29 @@ msgstr "&Saxla"
 msgid "&Continue copy"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
 msgstr ""
-"%s\n"
-"cpio arxivini aça bilmədim"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
-msgstr " Təzə Qovluq yarat"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2819,19 +2747,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory\n"
 "%s"
-msgstr " Təzə Qovluq yarat"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -4381,9 +4307,6 @@ msgstr "Xəta ləğv etmədən sonra bildirildi."
 msgid "Aborted transfer would be successful."
 msgstr "Ləğv edilmiş daşıma əməliyyatı müvəffəqiyyətli olmuş olmaılıdır."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Tar arxivi düzgün deyildir"
 
@@ -4402,6 +4325,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4557,15 +4483,13 @@ msgid ""
 "Not a regular file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
 
 msgid "Search done"
 msgstr ""
@@ -4575,12 +4499,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Other 8 bit"
-#~ msgstr "Başqa 8 bit"
-
-#~ msgid "F&ull 8 bits input"
-#~ msgstr "Tam 8-bitlik giriş"
-
-#~ msgid "&Display bits..."
-#~ msgstr "Bitləri &göstər ..."

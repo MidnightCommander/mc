@@ -4,15 +4,16 @@
 #
 # Translators:
 # linwebs <thomas881114@gmail.com>, 2020
-# Meng Pang Wang, 2023
+# MP Wang, 2023
+# MP Wang, 2025
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Meng Pang Wang, 2023\n"
+"Last-Translator: MP Wang, 2025\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
 "zh_TW/)\n"
 "Language: zh_TW\n"
@@ -21,13 +22,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#, fuzzy
-msgid "No translation"
-msgstr "-  < 不轉換 >"
-
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr ""
+
 msgid "Warning: cannot load codepages list"
-msgstr "警告: 無法讀取頁碼列表"
+msgstr "警告: 無法讀取字碼頁列表"
 
 msgid "7-bit ASCII"
 msgstr "7位元 ASCII"
@@ -128,7 +128,7 @@ msgid "Re&gular expression"
 msgstr " 正規表示式 "
 
 msgid "He&xadecimal"
-msgstr "十六進制"
+msgstr "十六進制 (&X)"
 
 msgid "Wil&dcard search"
 msgstr "萬用搜尋"
@@ -159,15 +159,12 @@ msgstr ""
 "%s\n"
 "已載入預設面板"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support:\n"
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"無法使用需要支援真實色彩的 '%s' 面板：\n"
-"%s\n"
-"已載入預設面板"
 
 msgid ""
 "\n"
@@ -484,6 +481,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "環境變數 TERM 並未設定！ \n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -509,12 +512,6 @@ msgid ""
 msgstr ""
 "不支援 %dx%d 的螢幕大小。\n"
 "請檢查 TERM 環境變數。\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "環境變數 TERM 並未設定！ \n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -557,6 +554,8 @@ msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
 msgstr ""
+"在 waitpid() 發生不可預期的錯誤：\n"
+"%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -642,7 +641,7 @@ msgid "Displays the current version"
 msgstr "顯示目前的版本"
 
 msgid "Print data directory"
-msgstr ""
+msgstr "列印資料目錄"
 
 msgid "Print extended info about used data directories"
 msgstr ""
@@ -777,6 +776,9 @@ msgid ""
 "Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
+"\n"
+"若有任何錯誤回報(輸出包含'%s -V')，\n"
+"請寄送至 %s\n"
 
 msgid "Main options"
 msgstr "主要選項"
@@ -788,7 +790,7 @@ msgid "Arguments parse error!"
 msgstr ""
 
 msgid "MC is built without builtin editor."
-msgstr ""
+msgstr "MC 編譯時並沒有內建編輯器。"
 
 msgid "No arguments given to the viewer."
 msgstr "沒有為檢視器指定引數。"
@@ -840,24 +842,19 @@ msgstr "搜尋"
 msgid "Search is disabled"
 msgstr "禁止被搜尋"
 
-#, fuzzy
 msgid "Cannot create temporary diff file"
-msgstr "無法建立目錄 %s"
+msgstr "無法建立 diff 暫存檔案"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s~~~"
 msgstr ""
 "無法建立備份檔案\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 
-#, fuzzy
 msgid "Cannot create temporary merge file"
-msgstr ""
-"無法建立目標目錄 \"%s\"\n"
-"%s"
+msgstr "無法建立 merge 暫存檔案"
 
 msgid "&Fastest (Assume large files)"
 msgstr ""
@@ -866,10 +863,10 @@ msgid "&Minimal (Find a smaller set of change)"
 msgstr ""
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Diff 演算法"
 
 msgid "Diff extra options"
-msgstr ""
+msgstr "Diff 額外選項"
 
 msgid "&Ignore case"
 msgstr ""
@@ -887,7 +884,7 @@ msgid "Strip &trailing carriage return"
 msgstr ""
 
 msgid "Diff Options"
-msgstr ""
+msgstr "Diff 選項"
 
 msgid "Edit"
 msgstr "編輯"
@@ -923,21 +920,19 @@ msgid "ButtonBar|Options"
 msgstr "按鈕列 | 選項"
 
 msgid "ButtonBar|Quit"
-msgstr "按鈕列 | 結束"
+msgstr "按鈕列|退出"
 
 msgid "File(s) was modified. Save with exit?"
-msgstr ""
+msgstr "檔案已被修改。儲存並離開？"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"正在結束 Midnight Commander。\n"
-"是否儲存已修改的檔案？"
 
 msgid "Quit"
-msgstr "結束"
+msgstr "退出"
 
 msgid "Diff:"
 msgstr "不同:"
@@ -945,19 +940,17 @@ msgstr "不同:"
 msgid "File name is empty!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "\"%s\" 是一個資料夾"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
 msgstr ""
-"無法統計 \"%s\"\n"
-"%s"
 
 msgid "Diff viewer: invalid mode"
 msgstr "差異檢視器：無效的模式"
@@ -972,13 +965,11 @@ msgstr "讀取中: %3d%%"
 msgid "Loading..."
 msgstr "讀取中..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
 msgstr ""
-"無法開啟 \"%s\"\n"
-"%s"
 
 msgid "Load file"
 msgstr "讀取檔案"
@@ -987,11 +978,11 @@ msgstr "讀取檔案"
 msgid "Error reading %s"
 msgstr "讀取 %s 時發生錯誤"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is not a regular file"
-msgstr "\"%s\" 不是一個普通的檔案"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1006,11 +997,11 @@ msgstr "警告"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
-msgstr "無法開啟 %s 進行讀取"
+msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1022,12 +1013,12 @@ msgstr ""
 msgid "Error writing to pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s\n"
 "for writing"
-msgstr "無法開啟 %s 進行讀取"
+msgstr ""
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1056,11 +1047,11 @@ msgstr "切換行尾到:"
 msgid "Save As"
 msgstr "儲存為"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
-msgstr "無法建立目錄 %s"
+msgstr ""
 
 msgid "&Quick save"
 msgstr "快速儲存"
@@ -1077,12 +1068,12 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save\n"
 "%s:\n"
 "not a regular file"
-msgstr "無法檢視: 不是一般的檔案"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr "相同的檔案名稱已經存在"
@@ -1139,13 +1130,11 @@ msgstr ""
 msgid "Close file"
 msgstr "關閉檔案"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"正在結束 Midnight Commander。\n"
-"是否儲存已修改的檔案 %s？"
 
 msgid "This function is not implemented"
 msgstr "尚未實作此功能"
@@ -1178,7 +1167,7 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 
 msgid "Cannot execute sort command"
-msgstr "無法執行簡短的指令"
+msgstr "無法執行 sort 指令"
 
 #, c-format
 msgid "Sort returned non-zero: %s"
@@ -1188,7 +1177,7 @@ msgid "Paste output of external command"
 msgstr "貼上外部指令的輸出結果"
 
 msgid "Enter shell command(s):"
-msgstr "輸入指令:"
+msgstr "輸入 shell 指令："
 
 msgid "Cannot execute external command"
 msgstr ""
@@ -1209,7 +1198,7 @@ msgid "Mail"
 msgstr "郵件"
 
 msgid "Insert literal"
-msgstr ""
+msgstr "插入文字"
 
 msgid "Press any key:"
 msgstr "請按任意鍵:"
@@ -1218,6 +1207,8 @@ msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
 msgstr ""
+"有已修改但尚未儲存的文字。\n"
+"若繼續將捨棄這些變更。"
 
 msgid "Cancel"
 msgstr "取消"
@@ -1277,7 +1268,7 @@ msgid "A&bout..."
 msgstr "關於..."
 
 msgid "&Quit"
-msgstr "結束"
+msgstr "退出 (&Q)"
 
 msgid "&Undo"
 msgstr "復原"
@@ -1292,7 +1283,7 @@ msgid "To&ggle mark"
 msgstr ""
 
 msgid "&Mark columns"
-msgstr "標記欄位"
+msgstr "標記欄位 (&M)"
 
 msgid "Mark &all"
 msgstr "標記全部"
@@ -1397,7 +1388,7 @@ msgid "&Mail..."
 msgstr ""
 
 msgid "Insert &literal..."
-msgstr ""
+msgstr "插入文字... (&L)"
 
 msgid "Insert &date/time"
 msgstr ""
@@ -1430,7 +1421,7 @@ msgid "&Previous"
 msgstr ""
 
 msgid "&List..."
-msgstr ""
+msgstr "列表... (&L)"
 
 msgid "&General..."
 msgstr ""
@@ -1463,7 +1454,7 @@ msgid "&Search"
 msgstr ""
 
 msgid "&Command"
-msgstr "指令"
+msgstr "指令 (&C)"
 
 msgid "For&mat"
 msgstr ""
@@ -1711,11 +1702,11 @@ msgstr "< 自動 >"
 msgid "< Reload Current Syntax >"
 msgstr "< 重新讀取當前語法 >"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
-msgstr "無法開啟檔案 %s"
+msgstr ""
 
 msgid "Load syntax file"
 msgstr ""
@@ -1745,7 +1736,7 @@ msgstr ""
 
 #, c-format
 msgid "Type 'exit' to return to the %s"
-msgstr ""
+msgstr "輸入 'exit' 來返回 %s"
 
 msgid "Set &all"
 msgstr "設定全部"
@@ -1770,42 +1761,34 @@ msgstr "旗標"
 
 #, c-format
 msgid "Permissions (octal): %o"
-msgstr ""
+msgstr "權限 (八進制)： %o"
 
 msgid "Chown advanced command"
-msgstr "Chown 進階指令"
+msgstr "chown 進階指令"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%sn%s"
 msgstr ""
-"無法對 \"%s\" 執行 chmod 指令\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%sn%s"
 msgstr ""
-"無法 chown \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%s"
 msgstr ""
-"無法對 \"%s\" 執行 chmod 指令\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%s"
 msgstr ""
-"無法 chown \"%s\"\n"
-"%s"
 
 msgid "< Default >"
 msgstr "< 預設 >"
@@ -1819,11 +1802,12 @@ msgstr "執行中"
 msgid "Stopped"
 msgstr "停止了"
 
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "輸入/顯示 頁碼："
+#, c-format
+msgid "Detected display codepage: %s"
+msgstr ""
 
-msgid "Selected source (file I/O) codepage"
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
 msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
@@ -1993,16 +1977,16 @@ msgid ""
 msgstr ""
 
 msgid "&Full file list"
-msgstr "完整檔案列表"
+msgstr "完整檔案列表 (&F)"
 
 msgid "&Brief file list:"
-msgstr ""
+msgstr "簡要檔案列表 (&B)"
 
 msgid "&Long file list"
-msgstr "長檔案列表"
+msgstr "長檔案列表 (&L)"
 
 msgid "&User defined:"
-msgstr "使用者自定："
+msgstr "使用者自訂(&U)："
 
 msgid "columns"
 msgstr ""
@@ -2014,7 +1998,7 @@ msgid "Listing format"
 msgstr "列表格式"
 
 msgid "Executable &first"
-msgstr ""
+msgstr "可執行檔優先 (&F)"
 
 msgid "&Reverse"
 msgstr "反向"
@@ -2030,13 +2014,13 @@ msgid "Confirmation|O&verwrite"
 msgstr "確認並覆寫"
 
 msgid "Confirmation|&Execute"
-msgstr "確認並執行"
+msgstr "確認並執行 (&E)"
 
 msgid "Confirmation|E&xit"
-msgstr "確認並離開"
+msgstr "確認並離開 (&X)"
 
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "確認並刪除常用資料夾"
+msgstr "確認刪除常用資料夾 (&R)"
 
 msgid "Confirmation|&History cleanup"
 msgstr "確認並清除歷史紀錄"
@@ -2078,7 +2062,7 @@ msgid "Quick cd"
 msgstr "快速改變目錄"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "既存的檔案名稱 (符號連結要指到的檔案)："
+msgstr "既有的檔案名稱 (符號連結指向的檔案)："
 
 msgid "Symbolic link filename:"
 msgstr "符號連結名稱："
@@ -2098,13 +2082,11 @@ msgstr "關閉"
 msgid "Background jobs"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s"
 msgstr ""
-"無法建立目標目錄 \"%s\"\n"
-"%s"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2160,9 +2142,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge file"
-msgstr "大型檔案"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2194,27 +2175,23 @@ msgstr "清除標示區"
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
 msgstr ""
-"無法統計 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
-"無法開啟 tar 檔案集\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
-msgstr "無法分析:"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2316,21 +2293,17 @@ msgstr "連結 %s 到:"
 msgid "Link"
 msgstr "連結"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create link\n"
 "%s"
 msgstr ""
-"無法建立目標連結 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
 msgstr ""
-"無法建立目標連結 \"%s\"\n"
-"%s"
 
 msgid "View file"
 msgstr "檢視檔案"
@@ -2386,7 +2359,7 @@ msgstr "徹底的"
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
-msgstr ""
+msgstr "若要使用本指令，兩個面板都必須使用列表檢視"
 
 #, c-format
 msgid "'%s' is not a symbolic link"
@@ -2399,17 +2372,17 @@ msgstr "軟連結 '%s' 指向:"
 msgid "Edit symlink"
 msgstr "編輯符號連結"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Edit symlink, unable to remove\n"
 "%s"
-msgstr "編輯符號連結, 無法移除 %s: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot edit symlink\n"
 "%s"
-msgstr "編輯符號連結: %s"
+msgstr ""
 
 msgid "FTP to machine"
 msgstr "FTP 到機器"
@@ -2448,9 +2421,8 @@ msgstr ""
 msgid "Parameter"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot create temporary command file"
-msgstr "無法執行簡短的指令"
+msgstr ""
 
 msgid "Pipe failed"
 msgstr ""
@@ -2523,29 +2495,23 @@ msgstr "檔案/目錄"
 msgid " with source mask:"
 msgstr " 以來源遮罩："
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink\n"
 "%s"
 msgstr ""
-"無法建立目標連結 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link\n"
 "%s"
 msgstr ""
-"無法建立目標連結 \"%s\"\n"
-"%s"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2553,13 +2519,11 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink\n"
 "%s"
 msgstr ""
-"無法建立目標連結 \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2606,182 +2570,145 @@ msgstr ""
 msgid "Non&e"
 msgstr "無"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr "無法覆寫目錄 \"%s\""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"無法儲存檔案 %s:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
 msgstr ""
-"無法刪除目錄 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
-msgstr "無法覆寫目錄 \"%s\""
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite directory\n"
 "%s"
-msgstr "無法覆寫目錄 \"%s\""
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
 msgstr ""
-"無法覆寫檔案 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move directory\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"無法刪除目錄 \"%s\"\n"
-"%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"無法寫入到檔案 %s :\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"無法寫入到檔案 %s :\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
 msgstr ""
-"無法建立備份檔案\n"
-"%s%s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
 msgstr ""
-"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
 msgstr ""
-"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
-msgstr "無法開啟檔案 %s"
+msgstr ""
 
 msgid "Reget failed, about to overwrite file"
 msgstr "複寫檔案找回失敗"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file\n"
 "%s"
 msgstr ""
-"無法建立目標目錄 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file\n"
 "%s"
 msgstr ""
-"無法寫入到檔案 %s :\n"
-"%s\n"
 
 msgid "(stalled)"
 msgstr "(暫停了)"
@@ -2795,43 +2722,35 @@ msgstr "保留"
 msgid "&Continue copy"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
 msgstr ""
-"無法儲存檔案:\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
 msgstr ""
-"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
-"無法寫入到檔案 %s :\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
-msgstr "無法建立目錄 %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
-"無法建立目標目錄 \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2847,31 +2766,25 @@ msgid ""
 "\"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Destination\n"
 "%s\n"
 "must be a directory\n"
 "%s"
 msgstr ""
-"目標 \"%s\" 必須是一個目錄\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory\n"
 "%s"
 msgstr ""
-"無法建立目標目錄 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
 msgstr ""
-"無法建立目標目錄 \"%s\"\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -2984,7 +2897,7 @@ msgid "Deleting"
 msgstr "刪除中"
 
 msgid "&Using shell patterns"
-msgstr "使用系統殼萬用字元"
+msgstr "使用 shell 模式 (&U)"
 
 msgid "to:"
 msgstr "到："
@@ -2995,9 +2908,8 @@ msgstr "跟隨連結 (&L)"
 msgid "Preserve &attributes"
 msgstr "保留屬性 (&A)"
 
-#, fuzzy
 msgid "Preserve e&xt2 attributes"
-msgstr "保留屬性 (&A)"
+msgstr ""
 
 msgid "Di&ve into subdir if exists"
 msgstr ""
@@ -3082,7 +2994,7 @@ msgid "Ch&own"
 msgstr "Chown"
 
 msgid "&Advanced chown"
-msgstr "進階 chown"
+msgstr "進階 chown (&A)"
 
 msgid "Cha&ttr"
 msgstr "聊天室"
@@ -3192,11 +3104,10 @@ msgstr "面板:"
 #, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
+msgstr[0] "您有 %zu 個已開啟的螢幕。確定要退出？"
 
-#, fuzzy
 msgid "Do you really want to quit?"
-msgstr "您真的想要執行?"
+msgstr "您確定要退出嗎？"
 
 msgid "&Above"
 msgstr "上述"
@@ -3390,6 +3301,8 @@ msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
+"MC 無法寫入檔案 %s ，\n"
+"您現有的常用項目並沒有被刪除"
 
 #, c-format
 msgid "Label for \"%s\":"
@@ -3436,7 +3349,7 @@ msgstr ""
 
 #, c-format
 msgid "Modified:   %s"
-msgstr ""
+msgstr "最後修改於：   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
@@ -3671,7 +3584,7 @@ msgid "External panelize"
 msgstr "外部面板化"
 
 msgid "Other command"
-msgstr "其它指令"
+msgstr "其他指令"
 
 msgid "Command"
 msgstr "指令"
@@ -3730,14 +3643,12 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Destination\n"
 "%s\n"
 "must be a directory"
 msgstr ""
-"目標 \"%s\" 必須是一個目錄\n"
-"%s"
 
 #, c-format
 msgid "Delete %s?"
@@ -3853,15 +3764,15 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander\n"
-"已經在終端機中執行了。\n"
-"Subshell將不備支援。"
+"%s\n"
+"已在終端機上執行。\n"
+"將停用子殼層支援。"
 
 #, c-format
 msgid ""
@@ -3899,7 +3810,7 @@ msgid "Cannot open named pipe %s\n"
 msgstr "無法開啟具名管線 %s\n"
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
+msgstr "Shell 仍在執行中。確定要退出？"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -3908,10 +3819,10 @@ msgid "With builtin editor"
 msgstr ""
 
 msgid "With optional subshell support"
-msgstr ""
+msgstr "選用的子殼層支援"
 
 msgid "With subshell support as default"
-msgstr ""
+msgstr "預設啟用子殼層支援"
 
 msgid "With support for background operations"
 msgstr ""
@@ -3974,7 +3885,7 @@ msgid "Config directory:"
 msgstr "設定檔資料夾:"
 
 msgid "Data directory:"
-msgstr "資料的資料夾:"
+msgstr "資料目錄："
 
 msgid "File extension handlers:"
 msgstr ""
@@ -4062,7 +3973,7 @@ msgstr ""
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s 有重複的進入點! 放棄中!"
+msgstr "%s 有重複的項目！正在跳過！"
 
 #, c-format
 msgid ""
@@ -4077,7 +3988,7 @@ msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"未預期的檔案結束\n"
+"不可預期的檔案結尾\n"
 "%s"
 
 msgid "Inconsistent archive"
@@ -4168,7 +4079,7 @@ msgstr "ftpfs: 使用者中斷連線"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: 連結到伺服器發生錯誤: %s"
+msgstr "ftpfs: 無法連線到伺服器： %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
@@ -4180,14 +4091,14 @@ msgstr ""
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr ""
+msgstr "ftpfs: 正在嘗試重新連線到伺服器，第 %u 次"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
 msgstr ""
 
 msgid "ftpfs: could not reconnect to server"
-msgstr ""
+msgstr "ftpfs: 無法重新連線到伺服器"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 無效的家庭地址"
@@ -4220,7 +4131,7 @@ msgstr "解讀符號連結..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs：正在讀取 FTP 目錄 %s... %s%s"
+msgstr "ftpfs: 正在讀取 FTP 目錄 %s... %s%s"
 
 msgid "(strict rfc959)"
 msgstr "(嚴謹的 rfc959)"
@@ -4292,22 +4203,20 @@ msgstr ""
 
 #, c-format
 msgid "sftp: making connection to %s"
-msgstr "sftp: 建立連接到 %s"
+msgstr "sftp: 正在建立與 %s 的連線"
 
 msgid "sftp: connection interrupted by user"
-msgstr "sftp: 連接被使用者中斷"
+msgstr "sftp: 使用者中斷連線"
 
 #, c-format
 msgid "sftp: connection to server failed: %s"
-msgstr "sftp: 連接到伺服器錯誤: %s"
+msgstr "sftp: 無法連線到伺服器： %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "sftp: cannot open %s:\n"
 "%s"
 msgstr ""
-"無法開啟 \"%s\"\n"
-"%s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
@@ -4340,6 +4249,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"無法確認主機\n"
+"%s (%s)\n"
+"的真實性！\n"
+"%s 的金鑰指紋雜湊為\n"
+"SHA1:%s。\n"
+"您想要將其新增到已知的主機列表並繼續連線嗎？"
 
 #, c-format
 msgid ""
@@ -4349,6 +4264,11 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"在已知的主機列表中，但\n"
+"金鑰不吻合！這可能是中間人攻擊！\n"
+"您確定要將其加入已知的主機列表並繼續連線嗎？Are you sure you want to add it "
+"to the list of known hosts and continue connecting?"
 
 msgid "sftp: host key verification failed"
 msgstr ""
@@ -4371,7 +4291,7 @@ msgid "sftp: failure establishing SSH session"
 msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
-msgstr "sftp: 讀取檔案時沒有處理程序資料"
+msgstr "sftp: 讀取檔案時找不到檔案控制碼資料"
 
 #, c-format
 msgid "sftp: socket error: %s"
@@ -4386,7 +4306,7 @@ msgstr "sftp: 列表完成。"
 
 #, c-format
 msgid "shell: Disconnecting from %s"
-msgstr ""
+msgstr "shell: 正在結束與 %s 的連線"
 
 msgid "shell: Waiting for initial line..."
 msgstr ""
@@ -4430,9 +4350,6 @@ msgstr "放棄後回報錯誤"
 msgid "Aborted transfer would be successful."
 msgstr "將成功放棄傳輸"
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
 
@@ -4451,6 +4368,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4490,13 +4410,15 @@ msgid "Cannot open file %s"
 msgstr "無法開啟檔案 %s"
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: 讀取 inode 點陣圖..."
+msgstr "undelfs：正在讀取 inode 點陣圖..."
 
 #, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
+"無法讀取以下位置的 inode 點陣圖：\n"
+"%s"
 
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: 讀取區塊點陣圖中..."
@@ -4516,7 +4438,7 @@ msgid "You have to chdir to extract files first"
 msgstr "您必須先更改目錄才可解開文件"
 
 msgid "while iterating over blocks"
-msgstr "當疊代超過區塊"
+msgstr "當迭代超過區塊"
 
 #, c-format
 msgid "Cannot open file \"%s\""
@@ -4529,14 +4451,14 @@ msgid "Invalid value"
 msgstr "無效的值"
 
 msgid "File was modified. Save with exit?"
-msgstr "資料已被修改。儲存並離開?"
+msgstr "檔案已被修改。儲存並離開？"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
-"正在結束 Midnight Commander。\n"
+"正在結束 %s 。\n"
 "是否儲存已修改的檔案？"
 
 msgid "&Line number"
@@ -4546,10 +4468,10 @@ msgid "Pe&rcents"
 msgstr "百分比"
 
 msgid "&Decimal offset"
-msgstr "十進制位移"
+msgstr "十進制位移 (&D)"
 
 msgid "He&xadecimal offset"
-msgstr "十六進制位移"
+msgstr "十六進制位移 (&X)"
 
 msgid "Goto"
 msgstr "移至"
@@ -4585,7 +4507,7 @@ msgid "ButtonBar|Format"
 msgstr "按鈕列 | 格式"
 
 msgid "Failed to read data from child stdout"
-msgstr ""
+msgstr "無法從子程序 stdout 讀取資料"
 
 #, c-format
 msgid ""
@@ -4593,7 +4515,7 @@ msgid ""
 "%s\n"
 "Data may have been written or not"
 msgstr ""
-"關閉檔案失敗:\n"
+"無法關閉檔案：\n"
 "%s\n"
 "資料可能已寫入或未寫入"
 
@@ -4608,22 +4530,20 @@ msgstr ""
 msgid "View: "
 msgstr "檢視:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot view\n"
 "%s\n"
 "Not a regular file"
-msgstr "無法檢視: 不是一般的檔案"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"無法在解析模式開啟 \"%s\"\n"
-"%s"
 
 msgid "Search done"
 msgstr "搜尋完畢"
@@ -4633,66 +4553,3 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Unable to use '%s' skin with 256 colors support\n"
-#~ "on non-256 colors terminal.\n"
-#~ "Default skin has been loaded"
-#~ msgstr ""
-#~ "無法在非256色的終端機上使用\n"
-#~ "需要支援256色的 '%s' 面板。\n"
-#~ "已載入預設面板"
-
-#~ msgid "True color not supported with ncurses."
-#~ msgstr "ncurses 不支援真實色彩。"
-
-#~ msgid "Your terminal doesn't even seem to support 256 colors."
-#~ msgstr "您的終端機看起來不支援256色的色彩"
-
-#~ msgid ""
-#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
-#~ msgstr "若您的終端機支援真實色彩，請設定 COLORTERM=truecolor"
-
-#~ msgid "&Cancel quit"
-#~ msgstr "取消結束"
-
-#, c-format
-#~ msgid "Cannot get size/permissions for %s"
-#~ msgstr "無法取得 %s 的檔案大小或存取權限"
-
-#~ msgid "Ignore &all"
-#~ msgstr "忽略全部"
-
-#, c-format
-#~ msgid "link: %s"
-#~ msgstr "連結: %s"
-
-#, c-format
-#~ msgid "symlink: %s"
-#~ msgstr "軟連結: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot overwrite directory \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "無法覆寫目錄 \"%s\"\n"
-#~ "%s"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot move directory \"%s\" to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "無法將目錄 \"%s\" 移動到 \"%s\"\n"
-#~ "%s"
-
-#~ msgid "Other 8 bit"
-#~ msgstr "其它八位元"
-
-#~ msgid "F&ull 8 bits input"
-#~ msgstr "完整的八位元輸入"
-
-#~ msgid "&Display bits..."
-#~ msgstr "顯示位元數..."
