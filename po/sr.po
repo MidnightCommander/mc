@@ -1,34 +1,32 @@
-# Serbian translation of GNU Midnight Commander
-# Copyright (C) 2025 Free Software Foundation, Inc.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Strahinya Radich (Страхиња Радић) <sr@strahinja.org>, 2003
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2014
+# Strahinya Radich (Страхиња Радић) <sr@strahinja.org>, 2003,2025
 # Yury V. Zaytsev <yury@shurup.com>, 2025
-# Strahinya Radich (Страхиња Радић) <sr@strahinja.org>, 2025
-#
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-17 20:46+0100\n"
-"PO-Revision-Date: 2025-11-17 20:28+0100\n"
-"Last-Translator: Страхиња Радић <sr@strahinja.org>\n"
-"Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Strahinya Radich (Страхиња Радић) <sr@strahinja.org>, "
+"2003,2025\n"
+"Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: poe 1.8.6-g8e8ab2c\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "No translation"
 msgstr "Без претварања"
 
-# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr "Упозорење: не може се учитати списак кодних страна"
 
@@ -508,6 +506,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променљива окружења TERM није постављена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Не може се проверити SIGWINCH цев"
+
 #, c-format
 msgid ""
 "\n"
@@ -539,12 +543,6 @@ msgid ""
 msgstr ""
 "Величина екрана %dx%d није подржана.\n"
 "Проверите променљиву окружења TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Променљива окружења TERM није постављена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Не може се проверити SIGWINCH цев"
 
 msgid "B"
 msgstr "B"
@@ -1916,11 +1914,11 @@ msgstr "Заустављен"
 
 #, c-format
 msgid "Detected display codepage: %s"
-msgstr "Детектована кодна страна приказа: %s"
+msgstr ""
 
 #, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Изабрана кодна страна извора (У/И датотеке): %s"
+msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Класични терминалски менаџер датотека инспирисан Norton Commander-ом."
@@ -4646,9 +4644,6 @@ msgstr "Пријављена је грешка после прекида."
 msgid "Aborted transfer would be successful."
 msgstr "Прекинути пренос би био успешан."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek није заустављен на граници слога"
-
 msgid "Inconsistent tar archive"
 msgstr "Недоследна tar архива"
 
@@ -4670,6 +4665,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "не изгледа као tar архива"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek није заустављен на граници слога"
 
 msgid "undelfs: error"
 msgstr "undelfs: грешка"
@@ -4858,215 +4856,3 @@ msgstr "Наставити од почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може се добавити локални примерак /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Unable to use '%s' skin with 256 colors support\n"
-#~ "on non-256 colors terminal.\n"
-#~ "Default skin has been loaded"
-#~ msgstr ""
-#~ "Скин „%s“ се не може користити са подршком за 256 боја\n"
-#~ "на терминалу који нема 256 боја.\n"
-#~ "Учитан је подразумевани скин"
-
-#~ msgid "True color not supported with ncurses."
-#~ msgstr "ncurses не подржава true color."
-
-#~ msgid "Your terminal doesn't even seem to support 256 colors."
-#~ msgstr "Ваш терминал изгледа да чак не подржава ни 256 боја."
-
-#~ msgid ""
-#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
-#~ msgstr ""
-#~ "Поставите COLORTERM=truecolor ако ваш терминал заиста подржава true "
-#~ "colors."
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s није директоријум\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Нисте власник директоријума %s\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Не могу се поставити исправне дозволе за директоријум %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Привремене датотеке ће бити креиране у %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Привремене датотеке неће бити креиране\n"
-
-#, c-format
-#~ msgid "GNU Midnight Commander %s\n"
-#~ msgstr "Гнуов Поноћни наредник %s\n"
-
-#, c-format
-#~ msgid "Cannot open %s for reading"
-#~ msgstr "Не могу да отворим „%s“ за читање"
-
-#, c-format
-#~ msgid "Cannot get size/permissions for %s"
-#~ msgstr "Не могу да добавим величину/овлашћења за „%s“"
-
-#, c-format
-#~ msgid "Cannot open pipe for writing: %s"
-#~ msgstr "Не могу да отворим спојку за писање: %s"
-
-#~ msgid "Save as"
-#~ msgstr "Сачувај као"
-
-#~ msgid "Cannot save: destination is not a regular file"
-#~ msgstr "Не могу да сачувам: одредиште није обична датотека"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Умножи у оставу"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Исеци у оставу"
-
-#~ msgid "Sort block"
-#~ msgstr "Поређај блок"
-
-#~ msgid "Sort"
-#~ msgstr "Поређај"
-
-#~ msgid "External command"
-#~ msgstr "Спољна наредба"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot open file %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не могу да отворим датотеку „%s“\n"
-#~ "%s"
-
-#~ msgid "Other 8 bit"
-#~ msgstr "Другa, осмобитнa"
-
-#~ msgid "&UTF-8 output"
-#~ msgstr "&УТФ-8 излаз"
-
-#~ msgid "&Full 8 bits output"
-#~ msgstr "&Пун осмобитни излаз"
-
-#~ msgid "&ISO 8859-1"
-#~ msgstr "&ИСО 8859-1"
-
-#~ msgid "7 &bits"
-#~ msgstr "7 &бита"
-
-#~ msgid "F&ull 8 bits input"
-#~ msgstr "Пун &осмобитни улаз"
-
-#~ msgid "Display bits"
-#~ msgstr "Битова у приказу"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не могу да пређем у директоријум „%s“\n"
-#~ "%s"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Поставите израз за филтрирање назива датотека"
-
-#, c-format
-#~ msgid "link: %s"
-#~ msgstr "веза: %s"
-
-#, c-format
-#~ msgid "symlink: %s"
-#~ msgstr "симболичка веза: %s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Не могу да пређем у директоријум „%s“"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s грешка датотеке"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Грешка датотеке „%s“"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Прескочи &све"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot move file \"%s\" to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не могу да преместим датотеку „%s“ у „%s“\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot overwrite directory \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не могу да препишем директоријум „%s“\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot move directory \"%s\" to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не могу да преместим директоријум „%s“ у „%s“\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid "&Display bits..."
-#~ msgstr "&Битова у приказу..."
-
-#~ msgid "The Midnight Commander"
-#~ msgstr "Поноћни наредник"
-
-#~ msgid "Do you really want to quit the Midnight Commander?"
-#~ msgstr "Да ли стварно желите да изађете из Поноћног наредника?"
-
-#, c-format
-#~ msgid "Midnight Commander %s"
-#~ msgstr "Поноћни наредник %s"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Унесли сте „%s“"
-
-#, c-format
-#~ msgid "Built with S-Lang %s with terminfo database\n"
-#~ msgstr "Изграђено са S-Lang %s са terminfo базом\n"
-
-#~ msgid "Built with ncurses (unknown version)"
-#~ msgstr "Изграђено са ncurses (непозната верзија)"
-
-#, c-format
-#~ msgid "Built with ncursesw %s\n"
-#~ msgstr "Изграђено са ncursesw %s\n"
-
-#~ msgid "Built with ncursesw (unknown version)"
-#~ msgstr "Изграђено са ncursesw (непозната верзија)"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Преговарам о издању..."
-
-#~ msgid "&Cancel quit"
-#~ msgstr "&Откажи излазак"

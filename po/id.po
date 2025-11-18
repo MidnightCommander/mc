@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Indonesian (http://app.transifex.com/mc/mc/language/id/)\n"
@@ -21,10 +21,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "No translation"
 msgstr ""
 
-# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr "Peringatan: tak bisa memuat daftar codepage"
 
@@ -153,15 +153,12 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support:\n"
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Tidak bisa menggukan '%s' skin dengan support 256 warna\n"
-"pada terminal non-256 warna.\n"
-"Skin default sudah dimuat."
 
 msgid ""
 "\n"
@@ -478,6 +475,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Environment variable TERM belum diset\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -503,12 +506,6 @@ msgid ""
 msgstr ""
 "Ukuran layar %dx%d tak didukung.\n"
 "Periksalah variabel lingkungan TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Environment variable TERM belum diset\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -770,15 +767,12 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
-"\n"
-"Harap kirimkan laporan bug (sertakan output dari 'mc -V)\n"
-"sebagai tiket di %s\n"
 
 msgid "Main options"
 msgstr "Opsi utama"
@@ -844,26 +838,17 @@ msgstr "Pencarian"
 msgid "Search is disabled"
 msgstr "Pencarian dinon aktifkan"
 
-#, fuzzy
 msgid "Cannot create temporary diff file"
 msgstr ""
-"Gagal membuat temporary diff file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s~~~"
 msgstr ""
-"Gagal membuat backup file\n"
-"%s%s\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot create temporary merge file"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Fastest (Asumsi file besar)"
@@ -934,13 +919,11 @@ msgstr "ButtonBar|Keluar"
 msgid "File(s) was modified. Save with exit?"
 msgstr "File(s) telah dirubah. Simpan saat keluar?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"Midnight Commander sedang dimatikan.\n"
-"Simpan file yang sudah dirubah?"
 
 msgid "Quit"
 msgstr "Keluar"
@@ -951,19 +934,17 @@ msgstr "Diff:"
 msgid "File name is empty!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "\"%s\" adalah directory"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
 msgid "Diff viewer: invalid mode"
 msgstr "Diff viewer: moda tidak valid"
@@ -978,13 +959,11 @@ msgstr "Memuat: %3d%%"
 msgid "Loading..."
 msgstr "Memuat..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
 msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
 
 msgid "Load file"
 msgstr "Memuat file"
@@ -993,11 +972,11 @@ msgstr "Memuat file"
 msgid "Error reading %s"
 msgstr "Kesalahan membaca %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is not a regular file"
-msgstr "\"%s\" bukan regular file"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1014,11 +993,11 @@ msgstr "Peringatan"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
-msgstr "Gagal membuka %s untuk dibaca"
+msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1030,12 +1009,12 @@ msgstr ""
 msgid "Error writing to pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s\n"
 "for writing"
-msgstr "Gagal membuka %s untuk dibaca"
+msgstr ""
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1064,11 +1043,11 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
 msgid "&Quick save"
 msgstr ""
@@ -1085,12 +1064,12 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save\n"
 "%s:\n"
 "not a regular file"
-msgstr "\"%s\" bukan regular file"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr ""
@@ -1147,13 +1126,11 @@ msgstr ""
 msgid "Close file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"Midnight Commander sedang dimatikan.\n"
-"Simpan file yang sudah dirubah?"
 
 msgid "This function is not implemented"
 msgstr ""
@@ -1719,13 +1696,11 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Reload Current Syntax >"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
 msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
 
 msgid "Load syntax file"
 msgstr ""
@@ -1821,10 +1796,12 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
-msgid "Detected display codepage"
+#, c-format
+msgid "Detected display codepage: %s"
 msgstr ""
 
-msgid "Selected source (file I/O) codepage"
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
 msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
@@ -2099,11 +2076,11 @@ msgstr ""
 msgid "Background jobs"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2192,13 +2169,11 @@ msgstr ""
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2206,11 +2181,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
-msgstr "Gagal mengurai:"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2312,19 +2287,17 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create link\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary diff file\n"
-"%s"
 
 msgid "View file"
 msgstr ""
@@ -2399,13 +2372,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot edit symlink\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
 msgid "FTP to machine"
 msgstr ""
@@ -2444,11 +2415,8 @@ msgstr ""
 msgid "Parameter"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot create temporary command file"
 msgstr ""
-"Gagal membuat temporary diff file\n"
-"%s"
 
 msgid "Pipe failed"
 msgstr "Pipa gagal"
@@ -2521,29 +2489,23 @@ msgstr ""
 msgid " with source mask:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link\n"
 "%s"
 msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2551,13 +2513,11 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2604,181 +2564,145 @@ msgstr ""
 msgid "Non&e"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"Gagal membuat backup file\n"
-"%s%s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary diff file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move directory\n"
 "%s\n"
 "to\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
 msgstr ""
-"Gagal membuat backup file\n"
-"%s%s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
 msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
 msgid "(stalled)"
 msgstr ""
@@ -2792,41 +2716,35 @@ msgstr ""
 msgid "&Continue copy"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
 msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2848,17 +2766,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -4374,9 +4292,6 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4393,6 +4308,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4471,13 +4389,11 @@ msgstr ""
 msgid "File was modified. Save with exit?"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
-"Midnight Commander sedang dimatikan.\n"
-"Simpan file yang sudah dirubah?"
 
 msgid "&Line number"
 msgstr ""
@@ -4543,22 +4459,20 @@ msgstr ""
 msgid "View: "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot view\n"
 "%s\n"
 "Not a regular file"
-msgstr "\"%s\" bukan regular file"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
 
 msgid "Search done"
 msgstr ""
@@ -4568,7 +4482,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "Cannot get size/permissions for %s"
-#~ msgstr "Gagal mendapatkan ukuran/ijin untuk %s"

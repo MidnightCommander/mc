@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -21,10 +21,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "No translation"
 msgstr ""
 
-# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr "Attention: non pote cargar le lista de paginas de codice"
 
@@ -153,14 +153,12 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support:\n"
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Impossibile processar le apparentia '%s'.\n"
-"Le apparentia predefinite ha essite cargate"
 
 msgid ""
 "\n"
@@ -477,6 +475,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Clave \"Shift\""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "Le variabile de ambiente TERM non es definite!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -502,12 +506,6 @@ msgid ""
 msgstr ""
 "Le dimenion de schermo %dx%d non es supportate.\n"
 "Verifica le variabile de ambiente TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "Le variabile de ambiente TERM non es definite!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -764,15 +762,12 @@ msgstr ""
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[iste_dir] [altere_dir_de_pannello]"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
-"\n"
-"Per favor invia reportos de falta (includente le resultato de 'mc -V')\n"
-"como tickets a %s\n"
 
 msgid "Main options"
 msgstr "Optiones principal"
@@ -838,26 +833,17 @@ msgstr "Cercar"
 msgid "Search is disabled"
 msgstr "Le recerca es disactivate"
 
-#, fuzzy
 msgid "Cannot create temporary diff file"
 msgstr ""
-"Impossibile crear file diff temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s~~~"
 msgstr ""
-"Impossibile crear copia de reserva\n"
-"%s%s\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot create temporary merge file"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Le plus &rapide (Supponer grande files)"
@@ -928,13 +914,11 @@ msgstr "ButtonBar|Quitar"
 msgid "File(s) was modified. Save with exit?"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"Midnight Commander essera ora claudite.\n"
-"Salveguardar le file modificate?"
 
 msgid "Quit"
 msgstr "Quitar"
@@ -945,17 +929,17 @@ msgstr "Diff:"
 msgid "File name is empty!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "Monstrar directorio de datos"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
-msgstr "Non pote processar:"
+msgstr ""
 
 msgid "Diff viewer: invalid mode"
 msgstr ""
@@ -970,11 +954,11 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
 msgid "Load file"
 msgstr ""
@@ -983,11 +967,11 @@ msgstr ""
 msgid "Error reading %s"
 msgstr "Error legente %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is not a regular file"
-msgstr "\"%s\" non es un file regular"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1002,11 +986,11 @@ msgstr "Advertimento"
 msgid "Error reading from pipe: %s"
 msgstr "Error de lectura ab tubo: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
-msgstr "Impossibile aperir tubo pro lectura: %s"
+msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Le file ha ligamines physic. Distachar ante salveguardar?"
@@ -1018,12 +1002,12 @@ msgstr "Le file ha essite modificate intertanto. Salveguardar nonobstante?"
 msgid "Error writing to pipe: %s"
 msgstr "Error de scriptura al tubo: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s\n"
 "for writing"
-msgstr "Impossibile aperir tubo pro scriptura: %s"
+msgstr ""
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1052,13 +1036,11 @@ msgstr ""
 msgid "Save As"
 msgstr "Salveguardar como"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
 msgstr ""
-"Impossibile crear file diff temporari\n"
-"%s"
 
 msgid "&Quick save"
 msgstr ""
@@ -1075,12 +1057,12 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save\n"
 "%s:\n"
 "not a regular file"
-msgstr "\"%s\" non es un file regular"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr "Il ja existe un file con iste nomine"
@@ -1137,13 +1119,11 @@ msgstr ""
 msgid "Close file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"Midnight Commander essera ora claudite.\n"
-"Salveguardar le file modificate?"
 
 msgid "This function is not implemented"
 msgstr "Iste function non es implementate"
@@ -1709,11 +1689,11 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Recargar syntaxe actual >"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
 msgid "Load syntax file"
 msgstr ""
@@ -1791,11 +1771,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
 msgid "< Default >"
 msgstr ""
@@ -1809,10 +1789,12 @@ msgstr ""
 msgid "Stopped"
 msgstr "Stoppate"
 
-msgid "Detected display codepage"
+#, c-format
+msgid "Detected display codepage: %s"
 msgstr ""
 
-msgid "Selected source (file I/O) codepage"
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
 msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
@@ -2087,11 +2069,11 @@ msgstr ""
 msgid "Background jobs"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s"
-msgstr "Crear un nove directorio"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2147,9 +2129,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge file"
-msgstr "Salveguardar le file"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2181,25 +2162,23 @@ msgstr ""
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
-msgstr "Non pote processar:"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
-"Impossibile aperir archivo tar\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
-msgstr "Non pote processar:"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2301,22 +2280,17 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create link\n"
 "%s"
 msgstr ""
-"Impossibile crear copia de reserva\n"
-"%s%s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
 msgstr ""
-"Impossibile crear file diff temporari\n"
-"%s"
 
 msgid "View file"
 msgstr ""
@@ -2434,11 +2408,8 @@ msgstr ""
 msgid "Parameter"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot create temporary command file"
 msgstr ""
-"Impossibile crear file diff temporari\n"
-"%s"
 
 msgid "Pipe failed"
 msgstr "Tubo fallite"
@@ -2511,29 +2482,23 @@ msgstr "files/directorios"
 msgid " with source mask:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link\n"
 "%s"
 msgstr ""
-"Impossibile aperir archivo tar\n"
-"%s"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2541,13 +2506,11 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2594,55 +2557,53 @@ msgstr ""
 msgid "Non&e"
 msgstr "Nul&le"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file\n"
 "%s"
-msgstr "Le file non pote esser salveguardate"
+msgstr ""
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
-msgstr "Attention: impossibile aperir directorio %s\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
 msgstr ""
-"Impossibile aperir le archivo cpio\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite directory\n"
 "%s"
-msgstr "Attention: impossibile aperir directorio %s\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2655,103 +2616,86 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
-msgstr "Le file non pote esser salveguardate"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
 msgstr ""
-"Impossibile crear copia de reserva\n"
-"%s%s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
 msgstr ""
-"Impossibile aperir archivo tar\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file\n"
 "%s"
-msgstr "Le file non pote esser salveguardate"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
 msgid "(stalled)"
 msgstr ""
@@ -2765,33 +2709,29 @@ msgstr ""
 msgid "&Continue copy"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
-msgstr "Attention: impossibile aperir directorio %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2819,21 +2759,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
 msgstr ""
-"Impossibile aperir archivo tar\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -4240,11 +4176,11 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "sftp: cannot open %s:\n"
 "%s"
-msgstr "Le file %s non pote esser aperite"
+msgstr ""
 
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
@@ -4369,9 +4305,6 @@ msgstr "Error reportate post abortamento."
 msgid "Aborted transfer would be successful."
 msgstr "Le transferentia abortate haberea succedite."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Archivo tar inconsistente"
 
@@ -4390,6 +4323,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4472,13 +4408,11 @@ msgstr "Valor invalide"
 msgid "File was modified. Save with exit?"
 msgstr "Le file ha essite modificate. Salveguardar ante exir?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
-"Midnight Commander essera ora claudite.\n"
-"Salveguardar le file modificate?"
 
 msgid "&Line number"
 msgstr ""
@@ -4544,22 +4478,20 @@ msgstr ""
 msgid "View: "
 msgstr "Vide:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot view\n"
 "%s\n"
 "Not a regular file"
-msgstr "\"%s\" non es un file regular"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"Impossibile aperir archivo tar\n"
-"%s"
 
 msgid "Search done"
 msgstr ""
@@ -4569,11 +4501,3 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "Cannot open %s for reading"
-#~ msgstr "Impossibile aperir %s pro lectura"
-
-#, c-format
-#~ msgid "Cannot get size/permissions for %s"
-#~ msgstr "Impossibile obtener dimension/permissiones pro %s"

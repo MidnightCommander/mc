@@ -60,7 +60,7 @@ Tip: Pokud některé klávesy nefungují, použijte menu Nastavení/Učení klá
 
 Tip: K zobrazení výstupu příkazu v okně použijte Meta-!
 
-Tip: F13 (nebo Shift-F3) vyvolá prohlížení bez zpracování obsahu souboru.
+Tip: F13 (nebo Shift-F3) vyvolá prohlížeč bez předzpracování obsahu souboru.
 
 Tip: Editor pro klávesu F4 určíte pomocí proměnné prostředí EDITOR.
 
@@ -70,18 +70,18 @@ Tip: Všechny žádosti o potvrzení je možné vypnout v Nastavení/Potvrzován
 
 Tip: K seznamu často používaných složek se můžete dostat i přes Ctrl-\.
 
-Tip: Na anonymní FTP se připojíte pomocí „cd ftp://stroj.domena.cz“.
+Tip: Na anonymní FTP se připojíte příkazem „cd ftp://stroj.example.com“.
 
-Tip: MC má vestavěný FTP. Podívejte se do nabídka Levý/FTP spojení na počítač.
+Tip: Midnight Commander obsahuje vestavěného FTP klienta. Naleznete ho v nabídce Vlevo/Vpravo → FTP spojení.
 
-Tip: Meta-t rychle mění formát zobrazení panelů.
+Tip: Meta-t rychle změní režim výpisu v panelech.
 
-Tip: Při FTP spojení můžete zadat i jméno: „cd ftp://jmeno@stroj.domena.cz“.
+Tip: Pro SFTP spojení je možné zadat i uživatelské jméno: „cd ftp://uzivatel@stroj.example.com“.
 
-Tip: RPM soubory si prohlédnete stiskem Enter.
+Tip: RPM soubory si prohlédnete stiskem Enter na nich.
 
-Tip: Pro označení složek v dialogovém okně výběru souborů, přidejte lomítko.
+Tip: Pokud chcete v dialogovém okně výběru souborů označit složky, přidejte lomítko.
 
-Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte Shift.
+Tip: Pokud chcete pro zkopírování/vložení textu použít myš, podržte Shift.
 
-Tip: V seznamu složek můžete mít i často navštěvované FTP servery. Zkuste Ctrl-\.
+Tip: V seznamu pro rychlý přístup můžete mít i často navštěvované FTP servery. Zkuste Ctrl-\.

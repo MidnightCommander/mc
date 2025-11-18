@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -21,10 +21,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "No translation"
 msgstr ""
 
-# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr "გაფრთხილება: კოდების გვერდების სიის ჩატვირთვის სეცდომა"
 
@@ -468,6 +468,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "გარემოს ცვლადი TERM დაყენებული არაა!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -493,12 +499,6 @@ msgid ""
 msgstr ""
 "ეკრანიზ ზომა %dx%d არ არის მხარდაჭერილი.\n"
 "შეამოწმეთ გარემოს ცვლადი TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "გარემოს ცვლადი TERM დაყენებული არაა!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr "ბ"
@@ -826,19 +826,17 @@ msgstr "ძებნა"
 msgid "Search is disabled"
 msgstr "ძებნა გათიშულია"
 
-#, fuzzy
 msgid "Cannot create temporary diff file"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s~~~"
-msgstr "ფაილის ნაკადის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create temporary merge file"
-msgstr "ფაიფის დესკრიპტორის შექმნა შეუძლებელია"
+msgstr ""
 
 msgid "&Fastest (Assume large files)"
 msgstr ""
@@ -924,17 +922,17 @@ msgstr "განსხვავება:"
 msgid "File name is empty!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "\"%s\" საქაღალდეა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
-msgstr "დამუშავება შეუძლებელია:"
+msgstr ""
 
 msgid "Diff viewer: invalid mode"
 msgstr ""
@@ -949,11 +947,11 @@ msgstr "ჩატვირთვა: %3d%%"
 msgid "Loading..."
 msgstr "ჩატვირთვა..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
 msgid "Load file"
 msgstr "ფაილის ჩატვირთვა"
@@ -962,11 +960,11 @@ msgstr "ფაილის ჩატვირთვა"
 msgid "Error reading %s"
 msgstr "%s-ის კითხვის შეცდომა"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is not a regular file"
-msgstr "\"%s\" ჩვეულებრივი ფაილი არაა"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -981,11 +979,11 @@ msgstr "გაფრთხილება"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
-msgstr "%s-ის წაკითხვის შეცდომა"
+msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -997,12 +995,12 @@ msgstr ""
 msgid "Error writing to pipe: %s"
 msgstr "ფაიფში ჩაწერის შეცდომა: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s\n"
 "for writing"
-msgstr "%s-ის წაკითხვის შეცდომა"
+msgstr ""
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1031,11 +1029,11 @@ msgstr ""
 msgid "Save As"
 msgstr "შეინახე როგორც"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
 msgid "&Quick save"
 msgstr "&სწრაფი შენახვა"
@@ -1052,12 +1050,12 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr "შენახვის რეჟიმის ჩასწორება"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save\n"
 "%s:\n"
 "not a regular file"
-msgstr "\"%s\" ჩვეულებრივი ფაილი არაა"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr "ფაილი ამ სახელით უკვე არსებობს"
@@ -1330,9 +1328,8 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
-#, fuzzy
 msgid "Togg&le right margin"
-msgstr "&ნიშნის ჩართ/გამორთ"
+msgstr ""
 
 msgid "&Find declaration"
 msgstr ""
@@ -1685,11 +1682,11 @@ msgstr "< ავტომატური >"
 msgid "< Reload Current Syntax >"
 msgstr "< მიმდინარე სინტაქსის თავიდან ჩატვირთვა >"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
 msgid "Load syntax file"
 msgstr "სინტაქსის ფაილის ჩატვირთვა"
@@ -1749,37 +1746,29 @@ msgstr "უფლებები (8-ბიტიანი): %o"
 msgid "Chown advanced command"
 msgstr "Chmod-ის დამატებითი პარამეტრები"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%sn%s"
 msgstr ""
-"\"%s\"-ის chmod_ის შეცდომა\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%sn%s"
 msgstr ""
-"\"%s\"-ის chown შეუძლებელია\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%s"
 msgstr ""
-"\"%s\"-ის chmod_ის შეცდომა\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%s"
 msgstr ""
-"\"%s\"-ის chown შეუძლებელია\n"
-"%s"
 
 msgid "< Default >"
 msgstr "< ნაგულისხმევი >"
@@ -1793,10 +1782,12 @@ msgstr "გაშვებულია"
 msgid "Stopped"
 msgstr "შეჩერებულია"
 
-msgid "Detected display codepage"
+#, c-format
+msgid "Detected display codepage: %s"
 msgstr ""
 
-msgid "Selected source (file I/O) codepage"
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
 msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
@@ -2072,11 +2063,11 @@ msgstr "მოკვლა"
 msgid "Background jobs"
 msgstr "ფონური ამოცანები"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "უსაფრთხოდ წაშლა"
@@ -2132,9 +2123,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge file"
-msgstr "ფაილის შენახვა"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2166,13 +2156,11 @@ msgstr ""
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
 msgstr ""
-"\"%s\"-ის chmod_ის შეცდომა\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2180,11 +2168,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
-msgstr "დამუშავება შეუძლებელია:"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2286,17 +2274,17 @@ msgstr "%s-ის მიბმა:"
 msgid "Link"
 msgstr "ბმული"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create link\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
 msgid "View file"
 msgstr "ფაილის ჩვენება"
@@ -2371,11 +2359,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot edit symlink\n"
 "%s"
-msgstr "სიმბმულის ჩასწორება: %s"
+msgstr ""
 
 msgid "FTP to machine"
 msgstr "FTP მანქანამდე"
@@ -2488,17 +2476,17 @@ msgstr "ფაილები/საქაღალდეები"
 msgid " with source mask:"
 msgstr " წყაროს ნიღბით:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
-msgstr "ფაილის ჩასმა ვერ მოხერხდა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink\n"
 "%s"
-msgstr "ფაილის ნაკადის შექმნა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2512,11 +2500,11 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink\n"
 "%s"
-msgstr "ფაილის ნაკადის შექმნა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2543,17 +2531,15 @@ msgstr ""
 msgid "&Retry"
 msgstr "&თავიდან ცდა"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory\n"
 "%s\n"
 "is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"საქაღალდე \"%s\"ცარიელი არაა.\n"
-"წავშალო რეკურსიულად?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory\n"
@@ -2561,80 +2547,74 @@ msgid ""
 "is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"საქაღალდე \"%s\"ცარიელი არაა.\n"
-"წავშალო რეკურსიულად?"
 
 msgid "Non&e"
 msgstr "არცერთი"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file\n"
 "%s"
-msgstr "ფაილის შენახვა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"ფაილის გახსნის შეცდომა %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move directory\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"ფაილის გახსნის შეცდომა %s\n"
-"%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
-msgstr "ფაილის შენახვა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2648,50 +2628,50 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
-msgstr "ფაილის ნაკადის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file\n"
 "%s"
-msgstr "ფაილის შენახვა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file\n"
 "%s"
-msgstr "ფაილის ნაკადის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file\n"
 "%s"
-msgstr "ფაილის შენახვა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2699,17 +2679,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file\n"
 "%s"
-msgstr "ფაილის ჩასმა ვერ მოხერხდა"
+msgstr ""
 
 msgid "(stalled)"
 msgstr "(დაეკიდა)"
@@ -2723,17 +2703,17 @@ msgstr "&შენარჩუნება"
 msgid "&Continue copy"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
-msgstr "ფაილის ჩასმა ვერ მოხერხდა"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2741,17 +2721,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2773,17 +2753,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -2907,9 +2887,8 @@ msgstr "&ბმულებზე მიყოლა"
 msgid "Preserve &attributes"
 msgstr "&ატრიბუტების შენარჩუნება"
 
-#, fuzzy
 msgid "Preserve e&xt2 attributes"
-msgstr "&ატრიბუტების შენარჩუნება"
+msgstr ""
 
 msgid "Di&ve into subdir if exists"
 msgstr ""
@@ -3107,9 +3086,8 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "გაქვთ %zu ღია ეკრანი. მაინც გააგრძელებთ?"
 msgstr[1] "გაქვთ %zu ღია ეკრანი. მაინც გააგრძელებთ?"
 
-#, fuzzy
 msgid "Do you really want to quit?"
-msgstr "ნამდვილად გნებავთ Midnight Commander-დან გასვლა?"
+msgstr ""
 
 msgid "&Above"
 msgstr "ზემოდან"
@@ -4174,13 +4152,11 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "sftp: cannot open %s:\n"
 "%s"
 msgstr ""
-"ფაილის გახსნის შეცდომა %s\n"
-"%s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
@@ -4303,9 +4279,6 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4322,6 +4295,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4470,22 +4446,20 @@ msgstr ""
 msgid "View: "
 msgstr "ნახვა: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot view\n"
 "%s\n"
 "Not a regular file"
-msgstr "\"%s\" ჩვეულებრივი ფაილი არაა"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"ფაილის გახსნის შეცდომა %s\n"
-"%s"
 
 msgid "Search done"
 msgstr "ძებნა დასრულდა"
@@ -4495,44 +4469,3 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "&Cancel quit"
-#~ msgstr "&გასვლის გაუქმება"
-
-#~ msgid "The Midnight Commander"
-#~ msgstr "The Midnight Commander"
-
-#~ msgid "Ignore &all"
-#~ msgstr "ყველას იგნორირება"
-
-#, c-format
-#~ msgid "link: %s"
-#~ msgstr "ბმული: %s"
-
-#, c-format
-#~ msgid "symlink: %s"
-#~ msgstr "სიმბმული: %s"
-
-#~ msgid "Other 8 bit"
-#~ msgstr "სხვა 8 ბიტიანი"
-
-#~ msgid "&UTF-8 output"
-#~ msgstr "&UTF-8 გამოტანა"
-
-#~ msgid "&Full 8 bits output"
-#~ msgstr "&სრული8 ბიტის გამოტანა"
-
-#~ msgid "&ISO 8859-1"
-#~ msgstr "&ISO 8859-1"
-
-#~ msgid "7 &bits"
-#~ msgstr "7 &ბიტიანი"
-
-#~ msgid "F&ull 8 bits input"
-#~ msgstr "სრული 8 ბიტიანი შეყვანა"
-
-#~ msgid "Display bits"
-#~ msgstr "ბიტების ცვენება"
-
-#~ msgid "&Display bits..."
-#~ msgstr "ნაჩვენები ნაწილები..."

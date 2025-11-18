@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://app.transifex.com/mc/mc/language/lv/)\n"
@@ -19,11 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Nav tulkojuma >"
-
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr ""
+
 msgid "Warning: cannot load codepages list"
 msgstr ""
 
@@ -467,6 +466,12 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM mainīgais nav ieslēgts!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -492,12 +497,6 @@ msgid ""
 msgstr ""
 "Ekrāna izmērs %dx%d nav atbalstīts.\n"
 "Pārbaudi TERM vides mainīgo.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM mainīgais nav ieslēgts!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
 
 msgid "B"
 msgstr ""
@@ -826,19 +825,14 @@ msgstr ""
 msgid "Cannot create temporary diff file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s~~~"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy
 msgid "Cannot create temporary merge file"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 msgid "&Fastest (Assume large files)"
 msgstr ""
@@ -924,17 +918,17 @@ msgstr ""
 msgid "File name is empty!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "direktoriju"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
-msgstr "Nevar izanalizēt:"
+msgstr ""
 
 msgid "Diff viewer: invalid mode"
 msgstr ""
@@ -949,13 +943,11 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
 msgid "Load file"
 msgstr ""
@@ -983,13 +975,11 @@ msgstr "Brīdinājums"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
 msgstr ""
-"Nevarēja atvērt failu %s, lai ierakstītu:\n"
-"%s\n"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1001,14 +991,12 @@ msgstr ""
 msgid "Error writing to pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s\n"
 "for writing"
 msgstr ""
-"Nevarēja atvērt failu %s, lai ierakstītu:\n"
-"%s\n"
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1037,11 +1025,11 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
-msgstr "Izveidot Jaunu Direktoriju"
+msgstr ""
 
 msgid "&Quick save"
 msgstr ""
@@ -1690,13 +1678,11 @@ msgstr ""
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
 msgid "Load syntax file"
 msgstr ""
@@ -1792,11 +1778,12 @@ msgstr ""
 msgid "Stopped"
 msgstr "Apstādīnāts"
 
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Ievades / displeja kodu tabula:"
+#, c-format
+msgid "Detected display codepage: %s"
+msgstr ""
 
-msgid "Selected source (file I/O) codepage"
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
 msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
@@ -2072,11 +2059,11 @@ msgstr "&Nokaut"
 msgid "Background jobs"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s"
-msgstr "Brīdinājums: Nevarēja pārmainīt uz %s.\n"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2132,9 +2119,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge file"
-msgstr "failu"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2166,25 +2152,23 @@ msgstr "A&ttīrīt izvēlēto"
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
-msgstr "Nevar izanalizēt:"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
-msgstr "Nevar izanalizēt:"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2286,21 +2270,17 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create link\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 msgid "View file"
 msgstr ""
@@ -2492,29 +2472,23 @@ msgstr "failus/direktorijas"
 msgid " with source mask:"
 msgstr " ar avota masku:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2522,13 +2496,11 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -2575,51 +2547,41 @@ msgstr ""
 msgid "Non&e"
 msgstr "n&Evienu"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
 msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
 msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2627,13 +2589,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -2646,112 +2606,86 @@ msgstr ""
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
 msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 msgid "(stalled)"
 msgstr "(staļļots)"
@@ -2765,35 +2699,29 @@ msgstr "&Paturēt"
 msgid "&Continue copy"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
 msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
-msgstr "Izveidot Jaunu Direktoriju"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2821,19 +2749,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory\n"
 "%s"
-msgstr "Izveidot Jaunu Direktoriju"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -4389,9 +4315,6 @@ msgstr "Kļūda paziņota pēc pātraukšanas."
 msgid "Aborted transfer would be successful."
 msgstr "Pātraukā pārraidīšana varētu būt veiksmīga"
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr "Neatbilstīgs tar arhīvs"
 
@@ -4410,6 +4333,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4565,15 +4491,13 @@ msgid ""
 "Not a regular file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
 
 msgid "Search done"
 msgstr ""
@@ -4583,12 +4507,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Other 8 bit"
-#~ msgstr "Citi 8 bitu"
-
-#~ msgid "F&ull 8 bits input"
-#~ msgstr "P&ilna 8 bitu ievade"
-
-#~ msgid "&Display bits..."
-#~ msgstr "&Displeja biti..."

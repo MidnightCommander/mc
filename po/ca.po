@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -27,11 +27,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Cap traducció >"
-
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr "Cap traducció"
+
 msgid "Warning: cannot load codepages list"
 msgstr "Avís: no s'ha pogut carregar la llista de les pàgines de codis"
 
@@ -62,9 +61,9 @@ msgstr "No s'ha pogut crear el grup «%s» pels esdeveniments!"
 msgid "Unable to create event '%s'!"
 msgstr "No s'ha pogut crear l'esdeveniment «%s»!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Copyright (C) 1996-%zu the Free Software Foundation"
-msgstr "Copyright (C) 1996-2025 la Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -169,15 +168,12 @@ msgstr ""
 "%s\n"
 "S'ha carregat el predeterminat"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support:\n"
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"No es pot usar el tema «%s» amb suport de colors vertaders:\n"
-"%s\n"
-"S'ha carregat el predeterminat"
 
 msgid ""
 "\n"
@@ -494,6 +490,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Majús"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr "La variable d'entorn TERM no està definida!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
+
 #, c-format
 msgid ""
 "\n"
@@ -527,12 +529,6 @@ msgid ""
 msgstr ""
 "La mida de pantalla %dx%d no està admesa.\n"
 "Reviseu la variable d'entorn TERM.\n"
-
-msgid "The TERM environment variable is unset!\n"
-msgstr "La variable d'entorn TERM no està definida!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -830,16 +826,16 @@ msgstr "fitxer_1 fitxer_2"
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[aquest_dir] [altre_plafó_dir]"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
-"Si us plau, envieu tots els informes de problemes (inclouent el resultat de "
-"«mc -V»)\n"
-"a %s en forma de tiquets.\n"
+"Si us plau, envieu qualsevol informe d'error (incloent-hi la sortida de «%s -"
+"V»)\n"
+"com a entrades a %s\n"
 
 msgid "Main options"
 msgstr "Opcions principals"
@@ -905,26 +901,19 @@ msgstr "Cerca"
 msgid "Search is disabled"
 msgstr "La cerca està inhabilitada"
 
-#, fuzzy
 msgid "Cannot create temporary diff file"
-msgstr ""
-"No s'ha pogut crear el fitxer de diff temporal\n"
-"%s"
+msgstr "No s'ha pogut crear un fitxer temporal de diff"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s~~~"
 msgstr ""
-"No s'ha pogut crear el fitxer de còpia de seguretat\n"
-"%s%s\n"
-"%s"
+"No s'ha pogut crear un fitxer de còpia de seguretat\n"
+"%s~~~"
 
-#, fuzzy
 msgid "Cannot create temporary merge file"
-msgstr ""
-"No s'ha pogut crear el fitxer de fusionat temporal\n"
-"%s"
+msgstr "No s'ha pogut crear un fitxer temporal de fusió"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Més &ràpid (assumeix fitxers grans)"
@@ -995,13 +984,13 @@ msgstr "ButtonBar|Surt"
 msgid "File(s) was modified. Save with exit?"
 msgstr "El/s fitxer/s ha/n estat modificat/s. Voleu desar abans de sortir?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"S'està sortint del Midnight Commander.\n"
-"Voleu desar abans de sortir?"
+"S'està tancant %s.\n"
+"Voleu desar el/s fitxer/s modificat/s?"
 
 msgid "Quit"
 msgstr "Surt"
@@ -1012,18 +1001,20 @@ msgstr "Diferència:"
 msgid "File name is empty!"
 msgstr "El nom del fitxer és buit!"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "«%s» és un directori"
+msgstr ""
+"%s\n"
+"és un directori"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
 msgstr ""
-"No s'ha pogut veure l'estat de «%s»\n"
+"No s'ha pogut fer estat\n"
 "%s"
 
 msgid "Diff viewer: invalid mode"
@@ -1039,12 +1030,12 @@ msgstr "S'està carregant: %3d%%"
 msgid "Loading..."
 msgstr "S'està carregant..."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
 msgstr ""
-"No s'ha pogut obrir «%s»\n"
+"No s'ha pogut obrir\n"
 "%s"
 
 msgid "Load file"
@@ -1054,11 +1045,13 @@ msgstr "Carrega el fitxer"
 msgid "Error reading %s"
 msgstr "S'ha produït un error en llegir %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is not a regular file"
-msgstr "«%s» no és un fitxer normal"
+msgstr ""
+"%s\n"
+"no és un fitxer normal"
 
 #, c-format
 msgid ""
@@ -1075,11 +1068,13 @@ msgstr "Avís"
 msgid "Error reading from pipe: %s"
 msgstr "Error en llegir des de la canonada: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
-msgstr "No s'ha pogut obrir la canonada per a lectura: %s"
+msgstr ""
+"No s'ha pogut obrir la canonada per a lectura\n"
+"%s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "El fitxer té enllaços durs. Voleu separar-los abans de desar?"
@@ -1092,12 +1087,15 @@ msgstr ""
 msgid "Error writing to pipe: %s"
 msgstr "Error en escriure a la canonada: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s\n"
 "for writing"
-msgstr "No s'ha pogut obrir el fitxer per a escriptura: %s"
+msgstr ""
+"No s'ha pogut obrir el fitxer\n"
+"%s\n"
+"per a escriptura"
 
 msgid "The file you are saving does not end with a newline."
 msgstr "El fitxer que esteu desant no acaba amb una línia nova."
@@ -1126,11 +1124,13 @@ msgstr "Canvia els salts de línia a:"
 msgid "Save As"
 msgstr "Desa com a"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
-msgstr "No s'ha pogut crear el directori %s"
+msgstr ""
+"No s'ha pogut crear el directori\n"
+"%s"
 
 msgid "&Quick save"
 msgstr "Desament &ràpid"
@@ -1147,12 +1147,15 @@ msgstr "Comprova la línia nova &POSIX"
 msgid "Edit Save Mode"
 msgstr "Edita el mode de desament"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save\n"
 "%s:\n"
 "not a regular file"
-msgstr "No es pot visualitzar: no es tracta d'un fitxer normal"
+msgstr ""
+"No s'ha pogut desar\n"
+"%s:\n"
+"no és un fitxer normal"
 
 msgid "A file already exists with this name"
 msgstr "Ja existeix un fitxer amb aquest nom"
@@ -1211,13 +1214,13 @@ msgstr ""
 msgid "Close file"
 msgstr "Tanca el fitxer"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"S'està sortint del Midnight Commander.\n"
-"Voleu desar el fitxer modificat «%s»?"
+"S'està tancant %s.\n"
+"Voleu desar el fitxer modificat %s?"
 
 msgid "This function is not implemented"
 msgstr "Funció no implementada"
@@ -1433,9 +1436,8 @@ msgstr "Ves al &claudàtor relacionat"
 msgid "Toggle s&yntax highlighting"
 msgstr "Alterna el ressaltat de la s&intaxi"
 
-#, fuzzy
 msgid "Togg&le right margin"
-msgstr "Alte&rna les marques"
+msgstr "Canvia e&l marge dret"
 
 msgid "&Find declaration"
 msgstr "&Troba la declaració"
@@ -1656,13 +1658,13 @@ msgstr "Consigna la substitució"
 msgid "%ld replacements made"
 msgstr "S'han fet %ld substitucions"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A user friendly text editor\n"
 "written for the %s."
 msgstr ""
-"Un editor de text fàcil d'emprar\n"
-"escrit per al Midnight Commander."
+"Un editor de text fàcil d'usar\n"
+"escrit per la %s."
 
 msgid "About"
 msgstr "Quant a"
@@ -1790,11 +1792,13 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Torna a carregar la sintaxi actual >"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
-msgstr "No s'ha pogut obrir el fitxer %s"
+msgstr ""
+"No s'ha pogut obrir el fitxer\n"
+"%s"
 
 msgid "Load syntax file"
 msgstr "Carrega el fitxer de sintaxi"
@@ -1828,9 +1832,9 @@ msgstr ""
 "No és una consola «xterm» o Linux;\n"
 "no es pot alternar el subintèrpret d'ordres."
 
-#, fuzzy, c-format
+#, c-format
 msgid "Type 'exit' to return to the %s"
-msgstr "Escriviu «exit» per a tornar al Midnight Commander"
+msgstr "Escriviu «exit» per a tornar al %s"
 
 msgid "Set &all"
 msgstr "Estableix a &tots"
@@ -1860,36 +1864,36 @@ msgstr "Permisos (octal): %o"
 msgid "Chown advanced command"
 msgstr "Ordre del canvi avançat del propietari"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%sn%s"
 msgstr ""
-"No s'ha pogut fer chmod a «%s»\n"
-"%s"
+"No s'ha pogut fer «chmod»\n"
+"%sn%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%sn%s"
 msgstr ""
-"No s'ha pogut fer chown a «%s»\n"
-"%s"
+"No s'ha pogut fer «chown»\n"
+"%sn%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chmod a «%s»\n"
+"No s'ha pogut fer «chmod»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chown a «%s»\n"
+"No s'ha pogut fer «chown»\n"
 "%s"
 
 msgid "< Default >"
@@ -1904,15 +1908,16 @@ msgstr "S'està executant"
 msgid "Stopped"
 msgstr "Aturat"
 
-#, fuzzy
-msgid "Detected display codepage"
-msgstr "Pàgina de codis d'entrada / pantalla:"
+#, fuzzy, c-format
+msgid "Detected display codepage: %s"
+msgstr "S'ha detectat la pàgina de codis de visualització"
 
-msgid "Selected source (file I/O) codepage"
-msgstr ""
+#, fuzzy, c-format
+msgid "Selected source (file I/O) codepage: %s"
+msgstr "S'ha seleccionat la pàgina de codis d'origen (fitxer E/S)."
 
 msgid "Classic terminal file manager inspired by Norton Commander."
-msgstr ""
+msgstr "Gestor de fitxers de terminal clàssic inspirat en el Norton Commander."
 
 msgid "&Never"
 msgstr "&Mai"
@@ -2187,13 +2192,12 @@ msgstr "A&caba"
 msgid "Background jobs"
 msgstr "Tasques en segon pla"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s"
 msgstr ""
 "No s'ha pogut canviar el directori a\n"
-"%s\n"
 "%s"
 
 msgid "Secure deletion"
@@ -2250,9 +2254,8 @@ msgstr "Començament de les jerarquies de directori"
 msgid "Inode uses extents"
 msgstr "El node-i usa extensions"
 
-#, fuzzy
 msgid "Huge file"
-msgstr "Fitxer_enorme"
+msgstr ""
 
 msgid "No COW"
 msgstr "Sense COW"
@@ -2284,28 +2287,28 @@ msgstr "&Esborra els marcats"
 msgid "Chattr command"
 msgstr "Ordre «chattr»"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
 msgstr ""
-"No s'ha pogut fer chattr «%s»\n"
-"%s"
+"No s'ha pogut fer «chattr»\n"
+"%sn%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 de «%s»\n"
+"No s'han pogut obtenir els atributs «ext2» de\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chattr «%s»\n"
+"No s'ha pogut fer «chattr»\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2408,21 +2411,21 @@ msgstr "Enllaça %s a:"
 msgid "Link"
 msgstr "Enllaça"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create link\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
+"No s'ha pogut crear l'enllaç\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
 msgstr ""
-"No es pot copiar un enllaç simbòlic cíclic\n"
-"«%s»"
+"No s'ha pogut crear l'enllaç simbòlic\n"
+"%s"
 
 msgid "View file"
 msgstr "Veure el fitxer"
@@ -2493,17 +2496,21 @@ msgstr "L'enllaç simbòlic «%s» apunta a:"
 msgid "Edit symlink"
 msgstr "Edita l'enllaç simbòlic"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Edit symlink, unable to remove\n"
 "%s"
-msgstr "editeu l'enllaç simbòlic, no s'ha pogut eliminar %s: %s"
+msgstr ""
+"Editeu l'enllaç simbòlic, no s'ha pogut eliminar\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot edit symlink\n"
 "%s"
-msgstr "edita l'enllaç simbòlic: %s"
+msgstr ""
+"No s'ha pogut editar l'enllaç simbòlic\n"
+"%s"
 
 msgid "FTP to machine"
 msgstr "FTP amb la màquina"
@@ -2544,26 +2551,23 @@ msgstr "No es poden executar ordres en sistemes de fitxers no locals"
 msgid "Parameter"
 msgstr "Paràmetre"
 
-#, fuzzy
 msgid "Cannot create temporary command file"
-msgstr ""
-"No s'ha pogut crear el fitxer d'ordre temporal\n"
-"%s"
+msgstr "No s'ha pogut crear un fitxer temporal d'ordres"
 
 msgid "Pipe failed"
 msgstr "Ha fallat la canonada"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have an outdated %s file.\n"
 "%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
-"Teniu un fitxer obsolet %s.\n"
-"El Midnight Commander ara utilitza el fitxer %s.\n"
-"Copieu les vostres modificacions des del fitxer antic al nou."
+"Teniu un fitxer %s obsolet.\n"
+"%s ara usa el fitxer %s.\n"
+"Copieu les modificacions del fitxer antic al nou."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2571,11 +2575,11 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the %s package."
 msgstr ""
-"El format del\n"
+"El format del fitxer\n"
 "%s%s\n"
-"el fitxer ha canviat amb la versió 4.0.\n"
+"ha canviat amb la versió 4.0.\n"
 "Sembla que la instal·lació ha fallat.\n"
-"Obteniu una còpia fresca des del paquet Midnight Commander."
+"Si us plau, obteniu una còpia nova des del paquet %s."
 
 #, c-format
 msgid ""
@@ -2635,26 +2639,24 @@ msgstr "fitxers/directoris"
 msgid " with source mask:"
 msgstr " amb màscara d'origen:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut visualitzar el fitxer d'origen de l'enllaç dur «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink\n"
 "%s"
-msgstr "No s'ha pogut crear l'enllaç dur de destinació «%s»"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link\n"
 "%s"
 msgstr ""
-"No s'ha pogut llegir l'enllaç d'origen «%s»\n"
+"No s'ha pogut llegir l'enllaç font\n"
 "%s"
 
 msgid ""
@@ -2667,12 +2669,12 @@ msgstr ""
 "\n"
 "L'opció per a enllaços simbòlics estables serà inhabilitada"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target symlink\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
+"No s'ha pogut crear l'enllaç simbòlic de destinació\n"
 "%s"
 
 #, c-format
@@ -2708,17 +2710,15 @@ msgstr "I&gnorar-ho tot"
 msgid "&Retry"
 msgstr "&Reintenta"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory\n"
 "%s\n"
 "is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"El directori «%s» no està buit.\n"
-"Voleu suprimir-lo de forma recursiva?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory\n"
@@ -2726,192 +2726,151 @@ msgid ""
 "is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"Procés en segon pla:\n"
-"El directori «%s» no està buit.\n"
-"Voleu suprimir-lo de forma recursiva?"
 
 msgid "Non&e"
 msgstr "Ca&p"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
 msgstr ""
-"No s'ha pogut eliminar el fitxer «%s»\n"
+"No s'ha pogut eliminar el fitxer\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer «%s»\n"
-"%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr "No s'ha pogut sobreescriure el directori «%s»"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"No s'ha pogut eliminar el fitxer «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut eliminar el directori «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut entrar al directori «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite directory\n"
 "%s"
-msgstr "No s'ha pogut sobreescriure el directori «%s»"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
 msgstr ""
-"No s'ha pogut sobreescriure el fitxer «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move directory\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"No s'ha pogut eliminar el directori «%s»\n"
-"%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "No es pot operar a «..»!"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer d'origen «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 del fitxer font «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"No es poden establir els atributs ext2 del fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear el fitxer especial «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chown al fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chmod al fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut obrir el fitxer d'origen «%s»\n"
-"%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr "Reprendre ha fallat, se sobreescriurà el fitxer"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer fstat al fitxer d'origen «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear el fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot fstat target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut reservar espai pel fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut llegir el fitxer d'origen «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot write target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut escriure al fitxer de destinació «%s»\n"
-"%s"
 
 msgid "(stalled)"
 msgstr "(encallat)"
@@ -2925,45 +2884,35 @@ msgstr "&Conserva'l"
 msgid "&Continue copy"
 msgstr "&Continua la còpia"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut tancar el fitxer d'origen «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut tancar el fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 per al fitxer de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut veure l'estat del directori d'origen «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 del fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2981,31 +2930,25 @@ msgstr ""
 "No es pot copiar un enllaç simbòlic cíclic\n"
 "«%s»"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Destination\n"
 "%s\n"
 "must be a directory\n"
 "%s"
 msgstr ""
-"La destinació «%s» ha de ser un directori\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear el directori de destinació «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut canviar el propietari del directori de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -3129,9 +3072,8 @@ msgstr "Segueix els en&llaços"
 msgid "Preserve &attributes"
 msgstr "Mantén els &atributs"
 
-#, fuzzy
 msgid "Preserve e&xt2 attributes"
-msgstr "Mantén els &atributs"
+msgstr "Conserva els atributs e&xt2"
 
 msgid "Di&ve into subdir if exists"
 msgstr "Su&bmergeix-te en els subdirectoris si existeixen"
@@ -3329,9 +3271,8 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Teniu oberta %zu pantalla. Voleu sortir igualment?"
 msgstr[1] "Teniu obertes %zu pantalles. Voleu sortir igualment?"
 
-#, fuzzy
 msgid "Do you really want to quit?"
-msgstr "Realment el voleu executar?"
+msgstr ""
 
 msgid "&Above"
 msgstr "Qu&ant al"
@@ -3832,14 +3773,10 @@ msgstr ""
 "Quadre de cerca extern:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:"
 msgstr ""
-"Quadre de cerca extern:\n"
-"Ha fallat en llegir les dades des de la sortida estàndard filla:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -3882,14 +3819,12 @@ msgstr ""
 "No s'ha pogut fer estat a la destinació\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Destination\n"
 "%s\n"
 "must be a directory"
 msgstr ""
-"La destinació «%s» ha de ser un directori\n"
-"%s"
 
 #, c-format
 msgid "Delete %s?"
@@ -4013,15 +3948,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "El camí del directori d'inici no és absolut"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"El Midnight Commander de GNU\n"
-"ja s'està executant en aquest terminal.\n"
-"La implementació del subintèrpret d'ordres està inhabilitada."
 
 #, c-format
 msgid ""
@@ -4096,23 +4028,23 @@ msgstr "Amb la implementació dels atributs «ext2fs»"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr ""
+msgstr "Construït amb GLib %d.%d.%d (usant GLib %u.%u.%u)\n"
 
 #, c-format
 msgid "Built with S-Lang"
-msgstr ""
+msgstr "Construït amb S-Lang"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " i la base de dades terminfo (usant S-Lang %s)\n"
 
 #, c-format
 msgid "Built with %s"
-msgstr ""
+msgstr "Construït amb %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (usant %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4483,12 +4415,12 @@ msgstr "sftp: la connexió ha estat interrompuda per l'usuari"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: la connexió amb el servidor ha fallat: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "sftp: cannot open %s:\n"
 "%s"
 msgstr ""
-"No s'ha pogut obrir «%s»\n"
+"sftp: no s'ha pogut obrir %s:\n"
 "%s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
@@ -4632,9 +4564,6 @@ msgstr "S'ha informat d'un error després d'interrompre."
 msgid "Aborted transfer would be successful."
 msgstr "Transferència interrompuda amb èxit."
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
-
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu TAR no és coherent"
 
@@ -4656,6 +4585,9 @@ msgid ""
 msgstr ""
 "%s\n"
 "no sembla un arxiu tar"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4738,13 +4670,11 @@ msgstr "Valor no vàlid"
 msgid "File was modified. Save with exit?"
 msgstr "El fitxer ha estat modificat. Voleu desar-lo abans de sortir?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
-"S'està sortint del Midnight Commander.\n"
-"Voleu desar el fitxer modificat?"
 
 msgid "&Line number"
 msgstr "Número de &línia"
@@ -4791,11 +4721,8 @@ msgstr "ButtonBar|Treu form"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
-#, fuzzy
 msgid "Failed to read data from child stdout"
 msgstr ""
-"Ha fallat en llegir les dades des de la sortida estàndard filla:\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4818,22 +4745,20 @@ msgstr ""
 msgid "View: "
 msgstr "Visualitza: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot view\n"
 "%s\n"
 "Not a regular file"
-msgstr "No es pot visualitzar: no es tracta d'un fitxer normal"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"No s'ha pogut obrir «%s» en el mode d'anàlisi\n"
-"%s"
 
 msgid "Search done"
 msgstr "Cerca finalitzada"
@@ -4844,127 +4769,3 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Unable to use '%s' skin with 256 colors support\n"
-#~ "on non-256 colors terminal.\n"
-#~ "Default skin has been loaded"
-#~ msgstr ""
-#~ "No es pot usar el tema «%s» amb suport\n"
-#~ "de 256 colors en un terminal de no-256 colors.\n"
-#~ "S'ha carregat el tema predeterminat"
-
-#~ msgid "True color not supported with ncurses."
-#~ msgstr "El color veritable no està admès amb «ncurses»."
-
-#~ msgid "Your terminal doesn't even seem to support 256 colors."
-#~ msgstr "El terminal no sembla admetre 256 colors."
-
-#~ msgid ""
-#~ "Set COLORTERM=truecolor if your terminal really supports true colors."
-#~ msgstr ""
-#~ "Establiu COLORTERM=truecolor si el terminal realment admet colors "
-#~ "veritables."
-
-#~ msgid "&Cancel quit"
-#~ msgstr "&Cancel·la la sortida"
-
-#~ msgid "The Midnight Commander"
-#~ msgstr "El Midnight Commander"
-
-#~ msgid "Do you really want to quit the Midnight Commander?"
-#~ msgstr "Segur que voleu sortir del Midnight Commander?"
-
-#, c-format
-#~ msgid "Cannot open %s for reading"
-#~ msgstr "No s'ha pogut obrir %s per a lectura"
-
-#, c-format
-#~ msgid "Cannot get size/permissions for %s"
-#~ msgstr "No s'han pogut obtenir els atributs de %s"
-
-#, c-format
-#~ msgid "Cannot open pipe for writing: %s"
-#~ msgstr "No s'ha pogut obrir la canonada per a escriptura: %s"
-
-#~ msgid "Cannot save: destination is not a regular file"
-#~ msgstr "No s'ha pogut desar: la destinació no és un fitxer normal"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot open file %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "No s'ha pogut obrir el fitxer %s\n"
-#~ "%s"
-
-#~ msgid "Ignore &all"
-#~ msgstr "Ignor&a-ho tot"
-
-#, c-format
-#~ msgid "link: %s"
-#~ msgstr "enllaç: %s"
-
-#, c-format
-#~ msgid "symlink: %s"
-#~ msgstr "enllaç simbòlic: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot create target hardlink \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "No s'ha pogut crear l'enllaç dur de destinació «%s»\n"
-#~ "%s"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot move file \"%s\" to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "No s'ha pogut moure el fitxer «%s» cap a «%s»\n"
-#~ "%s"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot overwrite directory \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "No s'ha pogut sobreescriure el directori «%s»\n"
-#~ "%s"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot move directory \"%s\" to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "No s'ha pogut moure el directori «%s» a «%s»\n"
-#~ "%s"
-
-#~ msgid "Other 8 bit"
-#~ msgstr "Altres 8 bits"
-
-#~ msgid "&UTF-8 output"
-#~ msgstr "Sortida &UTF-8"
-
-#~ msgid "&Full 8 bits output"
-#~ msgstr "&Tota la sortida de 8 bits"
-
-#~ msgid "&ISO 8859-1"
-#~ msgstr "&ISO 8859-1"
-
-#~ msgid "7 &bits"
-#~ msgstr "7 &bits"
-
-#~ msgid "F&ull 8 bits input"
-#~ msgstr "Tota l'ent&rada de 8 bits"
-
-#~ msgid "Display bits"
-#~ msgstr "Bits de visualització"
-
-#~ msgid "&Display bits..."
-#~ msgstr "&Bits de visualització..."
-
-#~ msgid "With multiple codepages support"
-#~ msgstr "Amb la implementació per a múltiples pàgines de codi"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-12 14:34+0100\n"
+"POT-Creation-Date: 2025-11-18 12:04+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Interlingue (http://app.transifex.com/mc/mc/language/ie/)\n"
@@ -17,11 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#, fuzzy
-msgid "No translation"
-msgstr "-  < Null translation >"
-
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr ""
+
 msgid "Warning: cannot load codepages list"
 msgstr ""
 
@@ -465,6 +464,12 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -487,12 +492,6 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-
-msgid "The TERM environment variable is unset!\n"
-msgstr ""
-
-msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
 msgid "B"
@@ -915,17 +914,17 @@ msgstr ""
 msgid "File name is empty!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is a directory"
-msgstr "\"%s\" es un directoria"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat\n"
 "%s"
-msgstr "Ne successat analisar:"
+msgstr ""
 
 msgid "Diff viewer: invalid mode"
 msgstr ""
@@ -940,13 +939,11 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s"
 msgstr ""
-"chown \"%s\" ne successat\n"
-"%s"
 
 msgid "Load file"
 msgstr ""
@@ -955,11 +952,11 @@ msgstr ""
 msgid "Error reading %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "is not a regular file"
-msgstr "\"%s\" ne es un regulari file"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -974,13 +971,11 @@ msgstr "Avise"
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open pipe for reading\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1026,11 +1021,11 @@ msgstr ""
 msgid "Save As"
 msgstr "Gardar quam"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create directory\n"
 "%s"
-msgstr "Comparar directorias"
+msgstr ""
 
 msgid "&Quick save"
 msgstr ""
@@ -1047,12 +1042,12 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save\n"
 "%s:\n"
 "not a regular file"
-msgstr "\"%s\" ne es un regulari file"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr ""
@@ -1679,13 +1674,11 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open file\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 msgid "Load syntax file"
 msgstr ""
@@ -1745,37 +1738,29 @@ msgstr ""
 msgid "Chown advanced command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%sn%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%sn%s"
 msgstr ""
-"chown \"%s\" ne successat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod\n"
 "%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown\n"
 "%s"
 msgstr ""
-"chown \"%s\" ne successat\n"
-"%s"
 
 msgid "< Default >"
 msgstr "< Predefinit >"
@@ -1789,10 +1774,12 @@ msgstr "Executente"
 msgid "Stopped"
 msgstr ""
 
-msgid "Detected display codepage"
+#, c-format
+msgid "Detected display codepage: %s"
 msgstr ""
 
-msgid "Selected source (file I/O) codepage"
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
 msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
@@ -2127,9 +2114,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge file"
-msgstr "Gardar li file"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2161,13 +2147,11 @@ msgstr ""
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%sn%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2175,11 +2159,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr\n"
 "%s"
-msgstr "Ne successat analisar:"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2287,13 +2271,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create symbolic link\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 msgid "View file"
 msgstr ""
@@ -2368,13 +2350,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot edit symlink\n"
 "%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
 msgid "FTP to machine"
 msgstr ""
@@ -2499,13 +2479,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source link\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2564,13 +2542,11 @@ msgstr ""
 msgid "Non&e"
 msgstr "N&ull"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove file\n"
 "%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2582,29 +2558,25 @@ msgstr ""
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move file\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot remove directory\n"
 "%s"
-msgstr "Hem-directoria:"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2612,32 +2584,28 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot overwrite file\n"
 "%s"
-msgstr "Superscrir omni files?"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot move directory\n"
 "%s\n"
 "to\n"
 "%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source file\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2651,37 +2619,29 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create special file\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target file\n"
 "%s"
 msgstr ""
-"chown \"%s\" ne successat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chmod target file\n"
 "%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open source file\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
@@ -2710,13 +2670,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot read source file\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2736,21 +2694,17 @@ msgstr "&Retener"
 msgid "&Continue copy"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close source file\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot close target file\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2758,11 +2712,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat source directory\n"
 "%s"
-msgstr "Comparar directorias"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2796,13 +2750,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chown target directory\n"
 "%s"
 msgstr ""
-"chown \"%s\" ne successat\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -4193,13 +4145,11 @@ msgstr "sftp: li conexion interruptet per li usator"
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "sftp: cannot open %s:\n"
 "%s"
 msgstr ""
-"chown \"%s\" ne successat\n"
-"%s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
@@ -4322,9 +4272,6 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4341,6 +4288,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4489,22 +4439,20 @@ msgstr ""
 msgid "View: "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot view\n"
 "%s\n"
 "Not a regular file"
-msgstr "\"%s\" ne es un regulari file"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
 "in parse mode\n"
 "%s"
 msgstr ""
-"Ne successat aperter li archive cpio\n"
-"%s"
 
 msgid "Search done"
 msgstr ""
@@ -4514,29 +4462,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "The Midnight Commander"
-#~ msgstr "Midnight Commander"
-
-#~ msgid "Ignore &all"
-#~ msgstr "Ignorar &omni"
-
-#, c-format
-#~ msgid "link: %s"
-#~ msgstr "ligament: %s"
-
-#, c-format
-#~ msgid "symlink: %s"
-#~ msgstr "sim. lig.: %s"
-
-#~ msgid "Other 8 bit"
-#~ msgstr "Altri 8-bit"
-
-#~ msgid "&UTF-8 output"
-#~ msgstr "&UTF-8"
-
-#~ msgid "&ISO 8859-1"
-#~ msgstr "&ISO 8859-1"
-
-#~ msgid "7 &bits"
-#~ msgstr "7 &bits"
