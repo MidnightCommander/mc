@@ -204,7 +204,7 @@ mc_skin_get (const gchar *group, const gchar *key, const gchar *default_value)
     if (mc_global.tty.ugly_line_drawing)
         return g_strdup (default_value);
 
-    return mc_config_get_string (mc_skin__default.config, group, key, default_value);
+    return mc_config_get_string_strict (mc_skin__default.config, group, key, default_value);
 }
 
 /* --------------------------------------------------------------------------------------------- */

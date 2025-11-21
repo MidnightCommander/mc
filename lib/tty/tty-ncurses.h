@@ -39,6 +39,8 @@
 
 /*** global variables defined in .c file *********************************************************/
 
+extern gboolean ncurses_koi8r_double_line_bug;
+
 /*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/

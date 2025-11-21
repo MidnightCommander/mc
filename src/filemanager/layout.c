@@ -1045,7 +1045,7 @@ rotate_dash (gboolean show)
     tty_setcolor (NORMAL_COLOR);
 
     if (!show)
-        tty_print_alt_char (ACS_URCORNER, FALSE);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTTOP]);
     else
     {
         static const char rotating_dash[4] MC_NONSTRING = "|/-\\";

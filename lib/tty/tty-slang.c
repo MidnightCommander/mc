@@ -222,52 +222,45 @@ load_terminfo_keys (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
-int
-mc_tty_normalize_lines_char (const char *str)
+static int
+get_maybe_acs (mc_tty_char_t c, gboolean *alt_char)
 {
-    char *str2;
-    int res;
+    *alt_char = TRUE;
 
-    struct mc_tty_lines_struct
+    switch (c)
     {
-        const char *line;
-        int line_code;
-    } const lines_codes[] = {
-        { "\342\224\214", SLSMG_ULCORN_CHAR },
-        { "\342\224\220", SLSMG_URCORN_CHAR },
-        { "\342\224\224", SLSMG_LLCORN_CHAR },
-        { "\342\224\230", SLSMG_LRCORN_CHAR },
-        { "\342\224\234", SLSMG_LTEE_CHAR },
-        { "\342\224\244", SLSMG_RTEE_CHAR },
-        { "\342\224\254", SLSMG_UTEE_CHAR },
-        { "\342\224\264", SLSMG_DTEE_CHAR },
-        { "\342\224\200", SLSMG_HLINE_CHAR },
-        { "\342\224\202", SLSMG_VLINE_CHAR },
-        { "\342\224\274", SLSMG_PLUS_CHAR },
+    case MC_ACS_HLINE:
+        return SLSMG_HLINE_CHAR;
+    case MC_ACS_VLINE:
+        return SLSMG_VLINE_CHAR;
+    case MC_ACS_ULCORNER:
+        return SLSMG_ULCORN_CHAR;
+    case MC_ACS_URCORNER:
+        return SLSMG_URCORN_CHAR;
+    case MC_ACS_LLCORNER:
+        return SLSMG_LLCORN_CHAR;
+    case MC_ACS_LRCORNER:
+        return SLSMG_LRCORN_CHAR;
+    case MC_ACS_LTEE:
+        return SLSMG_LTEE_CHAR;
+    case MC_ACS_RTEE:
+        return SLSMG_RTEE_CHAR;
+    case MC_ACS_TTEE:
+        return SLSMG_UTEE_CHAR;
+    case MC_ACS_BTEE:
+        return SLSMG_DTEE_CHAR;
+    case MC_ACS_PLUS:
+        return SLSMG_PLUS_CHAR;
 
-        { NULL, 0 },
-    };
-
-    if (str == NULL)
-        return (int) ' ';
-
-    for (res = 0; lines_codes[res].line; res++)
-        if (strcmp (str, lines_codes[res].line) == 0)
-            return lines_codes[res].line_code;
-
-    str2 = mc_tty_normalize_from_utf8 (str);
-    res = g_utf8_get_char_validated (str2, -1);
-
-    if (res < 0)
-        res = (unsigned char) str2[0];
-    g_free (str2);
-
-    return res;
+    default:
+        *alt_char = FALSE;
+        return c;
+    }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -537,7 +530,7 @@ tty_getyx (int *py, int *px)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_draw_hline (int y, int x, int ch, int len)
+tty_draw_hline (int y, int x, mc_tty_char_t ch, int len)
 {
     int x1;
 
@@ -554,14 +547,9 @@ tty_draw_hline (int y, int x, int ch, int len)
         x = 0;
     }
 
-    if (ch == ACS_HLINE)
-        ch = mc_tty_frm[MC_TTY_FRM_HORIZ];
-    if (ch == 0)
-        ch = ACS_HLINE;
-
     SLsmg_gotorc (y, x);
 
-    if (ch == ACS_HLINE)
+    if ((mc_global.utf8_display && ch == 0x2500) || ch == MC_ACS_HLINE)
         SLsmg_draw_hline (len);
     else
         while (len-- != 0)
@@ -573,7 +561,7 @@ tty_draw_hline (int y, int x, int ch, int len)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_draw_vline (int y, int x, int ch, int len)
+tty_draw_vline (int y, int x, mc_tty_char_t ch, int len)
 {
     int y1;
 
@@ -590,14 +578,9 @@ tty_draw_vline (int y, int x, int ch, int len)
         y = 0;
     }
 
-    if (ch == ACS_VLINE)
-        ch = mc_tty_frm[MC_TTY_FRM_VERT];
-    if (ch == 0)
-        ch = ACS_VLINE;
-
     SLsmg_gotorc (y, x);
 
-    if (ch == ACS_VLINE)
+    if ((mc_global.utf8_display && ch == 0x2502) || ch == MC_ACS_VLINE)
         SLsmg_draw_vline (len);
     else
     {
@@ -634,14 +617,6 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_set_alt_charset (gboolean alt_charset)
-{
-    SLsmg_set_char_set ((int) alt_charset);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 tty_display_8bit (gboolean what)
 {
     SLsmg_Display_Eight_Bit = what ? 128 : 160;
@@ -650,64 +625,24 @@ tty_display_8bit (gboolean what)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_print_char (int c)
+tty_print_char (mc_tty_char_t c)
 {
-    SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
+    gboolean alt_char = FALSE;
+    int char_maybe_acs = c;
+
+    if (!mc_global.utf8_display)
+        char_maybe_acs = get_maybe_acs (char_maybe_acs, &alt_char);
+
+    if (alt_char)
+        SLsmg_draw_object (SLsmg_get_row (), SLsmg_get_column (), char_maybe_acs);
+    else
+        SLsmg_write_char ((SLwchar_Type) ((unsigned int) char_maybe_acs));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_print_alt_char (int c, gboolean single)
-{
-#define DRAW(x, y)                                                                                 \
-    (x == y) ? SLsmg_draw_object (SLsmg_get_row (), SLsmg_get_column (), x)                        \
-             : SLsmg_write_char ((unsigned int) y)
-    switch (c)
-    {
-    case ACS_VLINE:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT]);
-        break;
-    case ACS_HLINE:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ]);
-        break;
-    case ACS_LTEE:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTMIDDLE : MC_TTY_FRM_DLEFTMIDDLE]);
-        break;
-    case ACS_RTEE:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTMIDDLE : MC_TTY_FRM_DRIGHTMIDDLE]);
-        break;
-    case ACS_TTEE:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_TOPMIDDLE : MC_TTY_FRM_DTOPMIDDLE]);
-        break;
-    case ACS_BTEE:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_BOTTOMMIDDLE : MC_TTY_FRM_DBOTTOMMIDDLE]);
-        break;
-    case ACS_ULCORNER:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP]);
-        break;
-    case ACS_LLCORNER:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM]);
-        break;
-    case ACS_URCORNER:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP]);
-        break;
-    case ACS_LRCORNER:
-        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM]);
-        break;
-    case ACS_PLUS:
-        DRAW (c, mc_tty_frm[MC_TTY_FRM_CROSS]);
-        break;
-    default:
-        SLsmg_write_char ((unsigned int) c);
-    }
-#undef DRAW
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tty_print_anychar (int c)
+tty_print_anychar (mc_tty_char_t c)
 {
     if (c > 255)
     {

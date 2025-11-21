@@ -138,10 +138,10 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
         tty_setcolor (MENU_ENTRY_COLOR);
 
         widget_gotoyx (menubar, y, x - 1);
-        tty_print_alt_char (ACS_LTEE, FALSE);
-        tty_draw_hline (w->y + y, w->x + x, ACS_HLINE, menu->max_entry_len + 3);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
+        tty_draw_hline (w->y + y, w->x + x, mc_tty_frm[MC_TTY_FRM_HORIZ], menu->max_entry_len + 3);
         widget_gotoyx (menubar, y, x + menu->max_entry_len + 3);
-        tty_print_alt_char (ACS_RTEE, FALSE);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
     }
     else
     {

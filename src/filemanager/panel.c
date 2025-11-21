@@ -1050,7 +1050,8 @@ mini_info_separator (const WPanel *panel)
         y = panel_lines (panel) + 2;
 
         tty_setcolor (NORMAL_COLOR);
-        tty_draw_hline (w->rect.y + y, w->rect.x + 1, ACS_HLINE, w->rect.cols - 2);
+        tty_draw_hline (w->rect.y + y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ],
+                        w->rect.cols - 2);
         /* Status displays total marked size.
          * Centered in panel, full format. */
         display_total_marked_size (panel, y, -1, FALSE);
@@ -1197,9 +1198,9 @@ show_dir (const WPanel *panel)
         y = panel_lines (panel) + 2;
 
         widget_gotoyx (w, y, 0);
-        tty_print_alt_char (ACS_LTEE, FALSE);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
         widget_gotoyx (w, y, w->rect.cols - 1);
-        tty_print_alt_char (ACS_RTEE, FALSE);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
     }
 
     widget_gotoyx (w, 0, 1);
