@@ -95,45 +95,64 @@ printwstr (const char *s, int len)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-status_string (WEdit *edit, char *s, int w)
-{
-    char byte_str[16];
+#define CHAR_CODE_BUF_SIZE BUF_TINY
 
-    /*
-     * If we are at the end of file, print <EOF>,
-     * otherwise print the current character as is (if printable),
-     * as decimal and as hex.
-     */
+static char *
+format_character_code (WEdit *edit)
+{
+    char *buf;
+
+    buf = g_malloc (CHAR_CODE_BUF_SIZE);
+
     if (edit->buffer.curs1 >= edit->buffer.size)
-        strcpy (byte_str, "<EOF>     ");
+        strncpy (buf, "<EOF>   ", CHAR_CODE_BUF_SIZE);
     else if (edit->utf8)
     {
         unsigned int cur_utf;
-        int char_length = 1;
+        int char_length = 0;
 
         cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length > 0)
-            g_snprintf (byte_str, sizeof (byte_str), "%04u 0x%03X", (unsigned) cur_utf,
-                        (unsigned) cur_utf);
+            if (cur_utf < 128)
+                g_snprintf (buf, CHAR_CODE_BUF_SIZE, "%3u 0x%02X", cur_utf, cur_utf);
+            else
+            {
+                char uplus[CHAR_CODE_BUF_SIZE];
+                g_snprintf (uplus, CHAR_CODE_BUF_SIZE, "U+%04X", cur_utf);
+                g_snprintf (buf, CHAR_CODE_BUF_SIZE, "%8s", uplus);
+            }
         else
         {
+            // cursor is over some invalid UTF-8 fragment
             cur_utf = edit_buffer_get_current_byte (&edit->buffer);
-            g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X", (int) cur_utf,
-                        (unsigned) cur_utf);
+            g_snprintf (buf, CHAR_CODE_BUF_SIZE, "%3u 0x%02X", cur_utf, cur_utf);
         }
     }
     else
     {
-        unsigned char cur_byte;
+        unsigned int cur_byte;
 
         cur_byte = edit_buffer_get_current_byte (&edit->buffer);
-        g_snprintf (byte_str, sizeof (byte_str), "%4d 0x%03X", (int) cur_byte, (unsigned) cur_byte);
+        g_snprintf (buf, CHAR_CODE_BUF_SIZE, "%3u 0x%02X", cur_byte, cur_byte);
     }
+
+    return buf;
+}
+
+#undef CHAR_CODE_BUF_SIZE
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+status_string (WEdit *edit, char *s, int w)
+{
+    char *character_code;
+
+    character_code = format_character_code (edit);
 
     // The field lengths just prevent the status line from shortening too much
     if (edit_options.simple_statusbar)
-        g_snprintf (s, w, "%c%c%c%c %3ld %5ld/%ld %6ld/%ld %s %s",
+        g_snprintf (s, w, "%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s] %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
@@ -143,11 +162,11 @@ status_string (WEdit *edit, char *s, int w)
                     edit->buffer.lines + 1,                                                   //
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
-                    byte_str,
+                    character_code,
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
                                                    : "");
     else
-        g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) %s  %s",
+        g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
@@ -159,9 +178,11 @@ status_string (WEdit *edit, char *s, int w)
                     edit->buffer.lines + 1,                                                   //
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
-                    byte_str,
+                    character_code,
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
                                                    : "");
+
+    g_free (character_code);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -288,28 +309,14 @@ edit_status_window (WEdit *edit)
      * otherwise print the current character as is (if printable),
      * as decimal and as hex.
      */
-    if (cols > 46)
+    if (cols > 42)
     {
+        char *character_code;
+
         edit_move (32, w->rect.lines - 1);
-        if (edit->buffer.curs1 >= edit->buffer.size)
-            tty_print_string ("[<EOF>       ]");
-        else if (edit->utf8)
-        {
-            unsigned int cur_utf;
-            int char_length = 1;
-
-            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
-            if (char_length <= 0)
-                cur_utf = edit_buffer_get_current_byte (&edit->buffer);
-            tty_printf ("[%05u 0x%04X]", cur_utf, cur_utf);
-        }
-        else
-        {
-            unsigned char cur_byte;
-
-            cur_byte = edit_buffer_get_current_byte (&edit->buffer);
-            tty_printf ("[%05u 0x%04X]", (unsigned int) cur_byte, (unsigned int) cur_byte);
-        }
+        character_code = format_character_code (edit);
+        tty_printf ("[%s]", character_code);
+        g_free (character_code);
     }
 }
 
