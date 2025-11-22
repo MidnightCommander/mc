@@ -56,9 +56,8 @@ static const char test_insert_column_out2[] = "11111\n"  //
 /* --------------------------------------------------------------------------------------------- */
 
 // Function under test
-void
-edit_insert_column_of_text (WEdit *edit, GString *data, long width, off_t *start_pos,
-                            off_t *end_pos, long *col1, long *col2);
+void edit_insert_column_of_text (WEdit *edit, GString *data, long width, off_t *start_pos,
+                                 off_t *end_pos, long *col1, long *col2);
 
 /* --------------------------------------------------------------------------------------------- */
 

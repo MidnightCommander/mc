@@ -80,10 +80,9 @@ int search_create_bookmark = FALSE;
 
 /*** forward declarations (file scope functions) *************************************************/
 
-MC_TESTABLE void
-edit_insert_column_of_text (WEdit *edit, GString *data, long width, off_t *start_pos,
-                            off_t *end_pos, long *col1, long *col2);
-
+MC_TESTABLE void edit_insert_column_of_text (WEdit *edit, GString *data, long width,
+                                             off_t *start_pos, off_t *end_pos, long *col1,
+                                             long *col2);
 
 /*** file scope variables ************************************************************************/
 
