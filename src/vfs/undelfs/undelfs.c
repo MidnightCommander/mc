@@ -402,14 +402,15 @@ undelfs_readdir (void *vfs_info)
     if (readdir_ptr == num_delarray)
         return NULL;
     if (readdir_ptr < 0)
-        dirent = vfs_dirent_init (NULL, readdir_ptr == -2 ? "." : "..", 0);  // FIXME: inode
+        dirent =
+            vfs_dirent_init (NULL, readdir_ptr == -2 ? "." : "..", 0, DT_UNKNOWN);  // FIXME: inode
     else
     {
         char dirent_dest[MC_MAXPATHLEN];
 
         g_snprintf (dirent_dest, MC_MAXPATHLEN, "%ld:%d", (long) delarray[readdir_ptr].ino,
                     delarray[readdir_ptr].num_blocks);
-        dirent = vfs_dirent_init (NULL, dirent_dest, 0);  // FIXME: inode
+        dirent = vfs_dirent_init (NULL, dirent_dest, 0, DT_UNKNOWN);  // FIXME: inode
     }
     readdir_ptr++;
 

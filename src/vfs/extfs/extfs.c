@@ -1214,7 +1214,7 @@ extfs_readdir (void *data)
     if (*info == NULL)
         return NULL;
 
-    dir = vfs_dirent_init (NULL, VFS_ENTRY ((*info)->data)->name, 0);  // FIXME: inode
+    dir = vfs_dirent_init (NULL, VFS_ENTRY ((*info)->data)->name, 0, DT_UNKNOWN);  // FIXME: inode
 
     *info = g_list_next (*info);
 

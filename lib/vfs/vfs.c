@@ -458,7 +458,7 @@ vfs_init (void)
 
     vfs_str_buffer = g_string_new ("");
 
-    mc_readdir_result = vfs_dirent_init (NULL, "", -1);
+    mc_readdir_result = vfs_dirent_init (NULL, "", -1, DT_UNKNOWN);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -521,7 +521,7 @@ vfs_shut (void)
  */
 
 struct vfs_dirent *
-vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino)
+vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino, unsigned char type)
 {
     struct vfs_dirent *ret = d;
 
@@ -531,7 +531,7 @@ vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino)
     if (ret->d_name_str == NULL)
         ret->d_name_str = g_string_sized_new (MC_MAXFILENAMELEN);
 
-    vfs_dirent_assign (ret, fname, ino);
+    vfs_dirent_assign (ret, fname, ino, type);
 
     return ret;
 }
@@ -546,12 +546,13 @@ vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino)
  */
 
 void
-vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino)
+vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino, unsigned char type)
 {
     g_string_assign (d->d_name_str, fname);
     d->d_name = d->d_name_str->str;
     d->d_len = d->d_name_str->len;
     d->d_ino = ino;
+    d->d_type = type;
 }
 
 /* --------------------------------------------------------------------------------------------- */

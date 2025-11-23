@@ -1333,18 +1333,31 @@ do_search (WDialog *h)
                 {
                     vfs_path_t *tmp_vpath;
                     int stat_res;
+                    gboolean descend = FALSE;
 
-                    tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
+                    if (dp->d_type == DT_UNKNOWN || dp->d_type == DT_DIR
+                        || (dp->d_type == DT_LNK && options.follow_symlinks))
+                    {
+                        tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
 
-                    if (options.follow_symlinks)
-                        stat_res = mc_stat (tmp_vpath, &tmp_stat);
-                    else
-                        stat_res = mc_lstat (tmp_vpath, &tmp_stat);
+                        if (dp->d_type == DT_DIR)
+                            descend = TRUE;
+                        else
+                        {
+                            if (options.follow_symlinks)
+                                stat_res = mc_stat (tmp_vpath, &tmp_stat);
+                            else
+                                stat_res = mc_lstat (tmp_vpath, &tmp_stat);
 
-                    if (stat_res == 0 && S_ISDIR (tmp_stat.st_mode))
-                        push_directory (tmp_vpath);
-                    else
-                        vfs_path_free (tmp_vpath, TRUE);
+                            if (stat_res == 0 && S_ISDIR (tmp_stat.st_mode))
+                                descend = TRUE;
+                        }
+
+                        if (descend)
+                            push_directory (tmp_vpath);
+                        else
+                            vfs_path_free (tmp_vpath, TRUE);
+                    }
                 }
             }
 

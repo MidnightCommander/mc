@@ -266,6 +266,8 @@ AC_STRUCT_ST_BLOCKS
 AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev, struct stat.st_mtim, struct stat.st_mtimespec, struct stat.st_mtimensec])
 gl_STAT_SIZE
 
+AC_STRUCT_DIRENT_D_TYPE
+
 AH_TEMPLATE([sig_atomic_t],
             [/* Define to `int' if <signal.h> doesn't define.])
 AH_TEMPLATE([SIG_ATOMIC_VOLATILE_T],
