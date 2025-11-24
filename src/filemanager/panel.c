@@ -1044,14 +1044,11 @@ mini_info_separator (const WPanel *panel)
 {
     if (panels_options.show_mini_info)
     {
-        const Widget *w = CONST_WIDGET (panel);
         int y;
 
         y = panel_lines (panel) + 2;
 
         tty_setcolor (NORMAL_COLOR);
-        tty_draw_hline (w->rect.y + y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ],
-                        w->rect.cols - 2);
         /* Status displays total marked size.
          * Centered in panel, full format. */
         display_total_marked_size (panel, y, -1, FALSE);
@@ -1183,14 +1180,39 @@ panel_get_encoding_info_str (const WPanel *panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+show_vertical_separator_tee (const WPanel *panel, int col)
+{
+    const Widget *w = CONST_WIDGET (panel);
+
+    widget_gotoyx (w, 0, col);
+    tty_print_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE]);
+
+    if (panels_options.show_mini_info)
+    {
+        widget_gotoyx (w, w->rect.lines - 3, col);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_BOTTOMMIDDLE]);
+    }
+    else
+    {
+        widget_gotoyx (w, w->rect.lines - 1, col);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE]);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 show_dir (const WPanel *panel)
 {
     const Widget *w = CONST_WIDGET (panel);
     gchar *tmp;
+    int col, i;
 
+    // paint the basic frame
     set_colors (panel);
     tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 
+    // paint the mini info's separator line
     if (panels_options.show_mini_info)
     {
         int y;
@@ -1199,8 +1221,30 @@ show_dir (const WPanel *panel)
 
         widget_gotoyx (w, y, 0);
         tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
+        tty_draw_hline (w->rect.y + y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ],
+                        w->rect.cols - 2);
         widget_gotoyx (w, y, w->rect.cols - 1);
         tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
+    }
+
+    // paint the tee characters at the top and bottom of inner vertical lines
+    col = 0;
+    for (i = 0; i < panel->list_cols; i++)
+    {
+        GSList *format;
+
+        for (format = panel->format; format != NULL; format = g_slist_next (format))
+        {
+            format_item_t *fi = (format_item_t *) format->data;
+
+            if (fi->string_fn != NULL)
+                col += fi->field_len;
+            else
+                show_vertical_separator_tee (panel, ++col);
+        }
+
+        if (i < panel->list_cols - 1)
+            show_vertical_separator_tee (panel, ++col);
     }
 
     widget_gotoyx (w, 0, 1);
