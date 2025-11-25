@@ -114,7 +114,9 @@ menu_arrange (menu_t *menu, dlg_shortcut_str get_shortcut)
             }
         }
 
-        menu->max_entry_len = menu->max_hotkey_len + max_shortcut_len;
+        // shortcuts, if present, are separated by 2 spaces
+        menu->max_entry_len =
+            menu->max_hotkey_len + (max_shortcut_len > 0 ? max_shortcut_len + 2 : 0);
     }
 }
 
@@ -129,8 +131,8 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
     const int y = 2 + idx;
     int x = menu->start_x;
 
-    if (x + menu->max_entry_len + 4 > (gsize) w->cols)
-        x = w->cols - menu->max_entry_len - 4;
+    if (x + menu->max_entry_len + 3 > (gsize) w->cols)
+        x = w->cols - menu->max_entry_len - 3;
 
     if (entry == NULL)
     {
@@ -139,8 +141,8 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
 
         widget_gotoyx (menubar, y, x - 1);
         tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
-        tty_draw_hline (w->y + y, w->x + x, mc_tty_frm[MC_TTY_FRM_HORIZ], menu->max_entry_len + 3);
-        widget_gotoyx (menubar, y, x + menu->max_entry_len + 3);
+        tty_draw_hline (w->y + y, w->x + x, mc_tty_frm[MC_TTY_FRM_HORIZ], menu->max_entry_len + 2);
+        widget_gotoyx (menubar, y, x + menu->max_entry_len + 2);
         tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
     }
     else
@@ -152,7 +154,7 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
         widget_gotoyx (menubar, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
         tty_getyx (&yt, &xt);
-        tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  // clear line
+        tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 1);  // clear line
         tty_print_string (entry->text.start);
 
         if (entry->text.hotkey != NULL)
@@ -187,15 +189,15 @@ menubar_draw_drop (const WMenuBar *menubar)
     int column = menu->start_x - 1;
     unsigned int i;
 
-    if (column + menu->max_entry_len + 5 > (gsize) w->cols)
-        column = w->cols - menu->max_entry_len - 5;
+    if (column + menu->max_entry_len + 4 > (gsize) w->cols)
+        column = w->cols - menu->max_entry_len - 4;
 
     if (mc_global.tty.shadows)
-        tty_draw_box_shadow (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5,
+        tty_draw_box_shadow (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 4,
                              SHADOW_COLOR);
 
     tty_setcolor (MENU_ENTRY_COLOR);
-    tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5, FALSE);
+    tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 4, FALSE);
 
     for (i = 0; i < count; i++)
         menubar_paint_idx (menubar, i, i == menu->current ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
@@ -738,10 +740,10 @@ menubar_mouse_on_menu (const WMenuBar *menubar, int y, int x)
 
     menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     left_x = menu->start_x;
-    right_x = left_x + menu->max_entry_len + 3;
+    right_x = left_x + menu->max_entry_len + 2;
     if (right_x > w->cols)
     {
-        left_x = w->cols - (menu->max_entry_len + 3);
+        left_x = w->cols - (menu->max_entry_len + 2);
         right_x = w->cols;
     }
 
