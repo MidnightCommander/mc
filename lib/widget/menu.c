@@ -741,10 +741,10 @@ menubar_mouse_on_menu (const WMenuBar *menubar, int y, int x)
     menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     left_x = menu->start_x;
     right_x = left_x + menu->max_entry_len + 2;
-    if (right_x > w->cols)
+    if (right_x > w->cols - 1)
     {
-        left_x = w->cols - (menu->max_entry_len + 2);
-        right_x = w->cols;
+        left_x = w->cols - 1 - (menu->max_entry_len + 2);
+        right_x = w->cols - 1;
     }
 
     bottom_y = g_list_length (menu->entries) + 2;  // skip bar and top frame
