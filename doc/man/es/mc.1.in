@@ -3727,12 +3727,6 @@ Trazos de líneas de la sección
 del archivo de skins.  Por defecto se utilizan líneas sencillas, pero
 se pueden redefinir empleando cualquier símbolo utf\-8 (por ejemplo,
 líneas dobles).
-.PP
-.I ¡¡¡ATENCIÓN!!!
-Si se compila Midnight Commander empleando la biblioteca de pantalla
-ncurses, entonces el trazado de líneas está limitado. Es posible que
-solo se puedan utilizar líneas simples. Para consultas y comentarios
-contactar con los desarrolladores de ncurses.
 
 .PP
 Descripción de parámetros de la sección

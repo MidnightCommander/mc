@@ -3967,12 +3967,6 @@ Lines sets in section
 .B [Lines]
 into skin\-file. By default single lines are used, but you may redefine
 to usage of any utf\-8 symbols (like to lines, for example).
-.PP
-.I WARNING!!!
-When you build Midnight Commander with the ncurses screen library
-usage of drawing lines is limited!
-Possible only drawing a single lines.
-For all questions and comments please contact the developers of ncurses.
 
 .PP
 Descriptions of parameters
