@@ -803,38 +803,34 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
     int offset = 0;
     filename_scroll_flag_t ret_frm;
     int ypos = 0;
-    gboolean panel_is_split;
     int fln = 0;
 
-    panel_is_split = panel->list_cols > 1;
-    width = w->rect.cols - 2;
+    // Divide into panel->list_cols equally wide columns, plus maybe some leftover space: #4906
+    width = w->rect.cols - 1;
 
-    if (panel_is_split)
-    {
-        nth_column = (file_index - panel->top) / panel_lines (panel);
-        width /= panel->list_cols;
+    nth_column = (file_index - panel->top) / panel_lines (panel);
+    width /= panel->list_cols;
 
-        offset = width * nth_column;
+    offset = width * nth_column;
 
-        if (nth_column + 1 >= panel->list_cols)
-            width = w->rect.cols - offset - 2;
-    }
+    if (nth_column + 1 >= panel->list_cols)
+        width = w->rect.cols - offset - 1;
+
+    width--;
 
     // Nothing to paint
     if (width <= 0)
         return;
 
     ypos = file_index - panel->top;
-
-    if (panel_is_split)
-        ypos %= panel_lines (panel);
+    ypos %= panel_lines (panel);
 
     ypos += 2;  // top frame and header
     widget_gotoyx (w, ypos, offset + 1);
 
     ret_frm = format_file (panel, file_index, width, attr, FALSE, &fln);
 
-    if (panel_is_split && nth_column + 1 < panel->list_cols)
+    if (nth_column + 1 < panel->list_cols)
     {
         tty_setcolor (NORMAL_COLOR);
         tty_print_one_vline (TRUE);
@@ -842,7 +838,7 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
 
     if (ret_frm != FILENAME_NOSCROLL)
     {
-        if (!panel_is_split && fln > 0)
+        if (panel->list_cols == 1 && fln > 0)
         {
             if (panel->list_format != list_long)
                 width = fln;
@@ -868,9 +864,7 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
 
         if ((ret_frm & FILENAME_SCROLL_RIGHT) != 0)
         {
-            offset += width;
-            if (nth_column + 1 >= panel->list_cols)
-                offset++;
+            offset += width + 1;
 
             const int scroll_right_char_color =
                 panel->list_format != list_long && g_slist_length (panel->format) > 2
@@ -1816,14 +1810,12 @@ use_display_format (WPanel *panel, const char *format, char **error, gboolean is
 
     panel->dirty = TRUE;
 
-    usable_columns = WIDGET (panel)->rect.cols - 2;
+    // Divide into panel->list_cols equally wide columns, plus maybe some leftover space: #4906
+    usable_columns = WIDGET (panel)->rect.cols - 1;
     // Status needn't to be split
     if (!isstatus)
-    {
         usable_columns /= panel->list_cols;
-        if (panel->list_cols > 1)
-            usable_columns--;
-    }
+    usable_columns--;
 
     // Look for the expandable fields and set field_len based on the requested field len
     for (darr = home; darr != NULL && expand_top < MAX_EXPAND; darr = g_slist_next (darr))
