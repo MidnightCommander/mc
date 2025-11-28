@@ -1,0 +1,8 @@
+Running suite(s): /src/editor
+Running suite /src/editor
+edit_insert_column_of_text.c:202:P:Core:test_insert_column:0: Passed
+edit_insert_column_of_text.c:202:P:Core:test_insert_column:1: Passed
+100%: Checks: 2, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 2, Failures: 0, Errors: 0
+PASS edit_insert_column_of_text (exit status: 0)

@@ -1,0 +1,7 @@
+Running suite(s): lib/widget/group
+Running suite lib/widget/group
+group_init_destroy.c:131:P:Core:test_group_init_deinit:0: Passed
+100%: Checks: 1, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 1, Failures: 0, Errors: 0
+PASS group_init_destroy (exit status: 0)

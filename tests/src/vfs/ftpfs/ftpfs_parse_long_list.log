@@ -1,0 +1,8 @@
+Running suite(s): /src/vfs/ftpfs
+Running suite /src/vfs/ftpfs
+ftpfs_parse_long_list.c:123:P:Core:test_ftpfs_parse_long_list:0: Passed
+ftpfs_parse_long_list.c:123:P:Core:test_ftpfs_parse_long_list:1: Passed
+100%: Checks: 2, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 2, Failures: 0, Errors: 0
+PASS ftpfs_parse_long_list (exit status: 0)

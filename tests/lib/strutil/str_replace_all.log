@@ -1,0 +1,19 @@
+Running suite(s): /lib/strutil
+Running suite /lib/strutil
+str_replace_all.c:154:P:Core:str_replace_all_test:0: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:1: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:2: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:3: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:4: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:5: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:6: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:7: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:8: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:9: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:10: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:11: Passed
+str_replace_all.c:154:P:Core:str_replace_all_test:12: Passed
+100%: Checks: 13, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 13, Failures: 0, Errors: 0
+PASS str_replace_all (exit status: 0)

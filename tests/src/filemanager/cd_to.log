@@ -1,0 +1,10 @@
+Running suite(s): /src/filemanager
+Running suite /src/filemanager
+cd_to.c:137:P:Core:test_empty_mean_home:0: Passed
+cd_to.c:137:P:Core:test_empty_mean_home:1: Passed
+cd_to.c:137:P:Core:test_empty_mean_home:2: Passed
+cd_to.c:137:P:Core:test_empty_mean_home:3: Passed
+100%: Checks: 4, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 4, Failures: 0, Errors: 0
+PASS cd_to (exit status: 0)

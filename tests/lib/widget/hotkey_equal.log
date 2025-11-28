@@ -1,0 +1,17 @@
+Running suite(s): /lib/widget
+Running suite /lib/widget
+hotkey_equal.c:121:P:Core:test_hotkey_equal:0: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:1: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:2: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:3: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:4: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:5: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:6: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:7: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:8: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:9: Passed
+hotkey_equal.c:121:P:Core:test_hotkey_equal:10: Passed
+100%: Checks: 11, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 11, Failures: 0, Errors: 0
+PASS hotkey_equal (exit status: 0)

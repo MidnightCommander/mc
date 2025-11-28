@@ -1,0 +1,25 @@
+Running suite(s): /lib/util
+Running suite /lib/util
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:0: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:1: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:2: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:3: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:4: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:5: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:6: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:7: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:8: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:9: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:10: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:11: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:12: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:13: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:14: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:15: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:16: Passed
+utilunix__mc_pstream_get_string.c:200:P:Core:mc_pstream_get_string_test:17: Passed
+utilunix__mc_pstream_get_string.c:255:P:Core:mc_pstream_get_long_file_list_test:0: Passed
+100%: Checks: 19, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 19, Failures: 0, Errors: 0
+PASS utilunix__mc_pstream_get_string (exit status: 0)

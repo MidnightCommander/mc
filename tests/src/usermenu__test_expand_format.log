@@ -1,0 +1,27 @@
+Running suite(s): /src/usermenu
+Running suite /src/usermenu
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:0: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:1: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:2: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:3: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:4: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:5: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:6: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:7: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:8: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:9: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:10: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:11: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:12: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:13: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:14: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:15: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:16: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:17: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:18: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:19: Passed
+usermenu__test_expand_format.c:184:P:Core:check_expand_format:20: Passed
+100%: Checks: 21, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 21, Failures: 0, Errors: 0
+PASS usermenu__test_expand_format (exit status: 0)

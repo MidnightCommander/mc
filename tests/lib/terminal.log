@@ -1,0 +1,9 @@
+Running suite(s): /lib/terminal
+Running suite /lib/terminal
+terminal.c:59:P:Core:test_parse_csi:0: Passed
+terminal.c:79:P:Core:test_strip_ctrl_codes:0: Passed
+terminal.c:98:P:Core:test_strip_ctrl_codes2:0: Passed
+100%: Checks: 3, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 3, Failures: 0, Errors: 0
+PASS terminal (exit status: 0)

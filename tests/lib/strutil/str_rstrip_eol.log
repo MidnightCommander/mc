@@ -1,0 +1,14 @@
+Running suite(s): /lib/strutil
+Running suite /lib/strutil
+str_rstrip_eol.c:79:P:Core:str_rstrip_eol_test1:0: Passed
+str_rstrip_eol.c:79:P:Core:str_rstrip_eol_test1:1: Passed
+str_rstrip_eol.c:79:P:Core:str_rstrip_eol_test1:2: Passed
+str_rstrip_eol.c:79:P:Core:str_rstrip_eol_test1:3: Passed
+str_rstrip_eol.c:79:P:Core:str_rstrip_eol_test1:4: Passed
+str_rstrip_eol.c:79:P:Core:str_rstrip_eol_test1:5: Passed
+str_rstrip_eol.c:79:P:Core:str_rstrip_eol_test1:6: Passed
+str_rstrip_eol.c:90:P:Core:str_rstrip_eol_test_null:0: Passed
+100%: Checks: 8, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 8, Failures: 0, Errors: 0
+PASS str_rstrip_eol (exit status: 0)

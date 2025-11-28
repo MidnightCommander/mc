@@ -1,0 +1,14 @@
+Running suite(s): /src/usermenu
+Running suite /src/usermenu
+usermenu__test_condition.c:121:P:Core:check_test_condition:0: Passed
+usermenu__test_condition.c:121:P:Core:check_test_condition:1: Passed
+usermenu__test_condition.c:121:P:Core:check_test_condition:2: Passed
+usermenu__test_condition.c:121:P:Core:check_test_condition:3: Passed
+usermenu__test_condition.c:121:P:Core:check_test_condition:4: Passed
+usermenu__test_condition.c:121:P:Core:check_test_condition:5: Passed
+usermenu__test_condition.c:121:P:Core:check_test_condition:6: Passed
+usermenu__test_condition.c:121:P:Core:check_test_condition:7: Passed
+100%: Checks: 8, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 8, Failures: 0, Errors: 0
+PASS usermenu__test_condition (exit status: 0)

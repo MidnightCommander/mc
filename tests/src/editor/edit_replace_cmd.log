@@ -1,0 +1,13 @@
+Running suite(s): /src/editor
+Running suite /src/editor
+edit_replace_cmd.c:301:P:Core:test_replace_regex__entire_string:0: Passed
+edit_replace_cmd.c:325:P:Core:test_replace_regex__insert_char_at_begin_of_string:0: Passed
+edit_replace_cmd.c:349:P:Core:test_replace_regex__replace_first_char_of_string:0: Passed
+edit_replace_cmd.c:373:P:Core:test_replace_regex__in_selection_top_down_1:0: Passed
+edit_replace_cmd.c:397:P:Core:test_replace_regex__in_selection_top_down_2:0: Passed
+edit_replace_cmd.c:421:P:Core:test_replace_regex__in_selection_bottom_up_1:0: Passed
+edit_replace_cmd.c:445:P:Core:test_replace_regex__in_selection_bottom_up_2:0: Passed
+100%: Checks: 7, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 7, Failures: 0, Errors: 0
+PASS edit_replace_cmd (exit status: 0)

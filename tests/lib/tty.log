@@ -1,0 +1,10 @@
+Running suite(s): /lib
+Running suite /lib
+The TERM environment variable is unset!
+tty.c:56:P:Core:test_tty_check_term_unset:0: Passed
+tty.c:74:P:Core:test_tty_check_term_non_xterm:0: Passed
+tty.c:91:P:Core:test_tty_check_term_xterm_like:0: Passed
+100%: Checks: 3, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 3, Failures: 0, Errors: 0
+PASS tty (exit status: 0)

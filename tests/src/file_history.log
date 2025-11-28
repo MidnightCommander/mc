@@ -1,0 +1,8 @@
+Running suite(s): /src/file_history
+Running suite /src/file_history
+file_history.c:49:P:Core:test_file_history_parse_entry:0: Passed
+file_history.c:67:P:Core:test_file_history_write_entry:0: Passed
+100%: Checks: 2, Failures: 0, Errors: 0
+Results for all suites run:
+100%: Checks: 2, Failures: 0, Errors: 0
+PASS file_history (exit status: 0)
