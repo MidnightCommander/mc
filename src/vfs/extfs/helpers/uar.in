@@ -3,6 +3,7 @@
 # Written by    Alex Kuchma <ask@bcs.zp.ua>
 #               Alex Tkachenko <alex@bcs.zp.ua>
 # Updated by    Vitezslav Samel <xsamel00@dcse.fee.vutbr.cz>
+# Updated by    Vadim Kalinnikov <moose@ylsoftware.com>
 #
 # (C) 1997, 1998 The Free Software Foundation.
 #
@@ -12,10 +13,12 @@ XAR=ar
 
 mcarfs_list ()
 {
+    LIST_CMD=${MC_TEST_EXTFS_LIST_CMD:-"$XAR tv \"$1\""}
+
     # If $temp_replace string is part of the filename that part might get lost
     temp_replace='Unique Separator String'
     thisyear="`date +%Y`"
-    $XAR tv "$1" | sed 's,^,-,;s, , 1 ,;s,/, ,' |
+    $LIST_CMD tv "$1" | sed 's,^,-,;s, , 1 ,;s,/, ,' |
 	sed -e "s/\( [0-2][0-9]\:[0-5][0-9]\)\( $thisyear \)\(.*\)/\1$temp_replace\3/" |
 	sed -e "s/\( [0-2][0-9]\:[0-5][0-9] \)\([12][0-9][0-9][0-9] \)\(.*\)/ \2\3/" |
 	sed -e "s/$temp_replace/ /"
@@ -42,6 +45,9 @@ mcarfs_rm ()
 # override any locale for dates
 LC_ALL=C
 export LC_ALL
+
+TZ=UTC
+export TZ
 
 umask 077
 case "$1" in

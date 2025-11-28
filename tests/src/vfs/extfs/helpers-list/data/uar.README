@@ -1,0 +1,8 @@
+uar.ar is created with ar from the `doc` folder of mc:
+
+	ar r uar.ar $(find doc/ -maxdepth 1 -type f)
+
+uar.input is created with ar from uar.ar:
+
+	ar tv uar.ar
+

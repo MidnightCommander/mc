@@ -10,7 +10,8 @@ HA=ha
 
 mchafs_list ()
 {
-    $HA lf "$1" 2>/dev/null | @AWK@ -v uid=`id -ru`  '
+    LIST_CMD=${MC_TEST_EXTFS_LIST_CMD:-"$HA lf \"$1\""}
+    $LIST_CMD 2>/dev/null | @AWK@  '
 /^===========/ {next}
 {
  if ($5="%" && $8~/DIR|ASC|HSC|CPY/) {

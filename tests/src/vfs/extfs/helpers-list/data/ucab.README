@@ -1,0 +1,4 @@
+as test data used listing from cab archive winemono-support.cab:
+
+cabextract -l winemono-support.cab
+

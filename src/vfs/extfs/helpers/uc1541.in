@@ -361,12 +361,15 @@ class Uc1541(object):
 
     def __init__(self, archname):
         self.arch = archname
+        # dirty hack for testing
+        if os.getenv("MC_TEST_UC1541_LIST_FILE", "") != "":
+            self.arch = os.getenv("MC_TEST_UC1541_LIST_FILE")
         self.out = ''
         self.err = ''
         self._verbose = os.getenv("UC1541_VERBOSE", False)
         self._hide_del = os.getenv("UC1541_HIDE_DEL", False)
 
-        self.dirlist = _get_implementation(_get_raw(archname)).list_dir()
+        self.dirlist = _get_implementation(_get_raw(self.arch)).list_dir()
         self.file_map = {}
         self.directory = []
 

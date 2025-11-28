@@ -1,0 +1,27 @@
+Viewing cabinet: /home/moose/projects/mc/ucab.cab
+ File size | Date       Time     | Name
+-----------+---------------------+-------------
+     29535 | 16.08.2024 20:03:48 | Microsoft.NET/Framework/v1.1.4322/CONFIG/machine.config
+    627200 | 16.08.2024 20:03:48 | Microsoft.NET/Framework/v1.1.4322/mscorlib.dll
+     29535 | 16.08.2024 20:03:48 | Microsoft.NET/Framework/v2.0.50727/CONFIG/machine.config
+       586 | 16.08.2024 20:03:48 | Microsoft.NET/Framework/v2.0.50727/CONFIG/security.config
+      5632 | 16.08.2024 20:03:50 | Microsoft.NET/Framework/v2.0.50727/csc.exe
+      8704 | 16.08.2024 20:03:56 | Microsoft.NET/Framework/v2.0.50727/installutil.exe
+    627200 | 16.08.2024 20:03:48 | Microsoft.NET/Framework/v2.0.50727/mscorlib.dll
+     34067 | 16.08.2024 20:03:48 | Microsoft.NET/Framework/v4.0.30319/CONFIG/machine.config
+      5632 | 16.08.2024 20:03:50 | Microsoft.NET/Framework/v4.0.30319/csc.exe
+      8704 | 16.08.2024 20:03:56 | Microsoft.NET/Framework/v4.0.30319/installutil.exe
+    752128 | 16.08.2024 20:03:48 | Microsoft.NET/Framework/v4.0.30319/mscorlib.dll
+     29535 | 16.08.2024 20:03:48 | Microsoft.NET/Framework64/v1.1.4322/CONFIG/machine.config
+    627200 | 16.08.2024 20:03:48 | Microsoft.NET/Framework64/v1.1.4322/mscorlib.dll
+     29535 | 16.08.2024 20:03:48 | Microsoft.NET/Framework64/v2.0.50727/CONFIG/machine.config
+       586 | 16.08.2024 20:03:48 | Microsoft.NET/Framework64/v2.0.50727/CONFIG/security.config
+      5632 | 16.08.2024 20:03:50 | Microsoft.NET/Framework64/v2.0.50727/csc.exe
+      8704 | 16.08.2024 20:03:56 | Microsoft.NET/Framework64/v2.0.50727/installutil.exe
+    627200 | 16.08.2024 20:03:48 | Microsoft.NET/Framework64/v2.0.50727/mscorlib.dll
+     34067 | 16.08.2024 20:03:48 | Microsoft.NET/Framework64/v4.0.30319/CONFIG/machine.config
+      5632 | 16.08.2024 20:03:52 | Microsoft.NET/Framework64/v4.0.30319/csc.exe
+      8704 | 16.08.2024 20:03:56 | Microsoft.NET/Framework64/v4.0.30319/installutil.exe
+    752128 | 16.08.2024 20:03:48 | Microsoft.NET/Framework64/v4.0.30319/mscorlib.dll
+
+All done, no errors.

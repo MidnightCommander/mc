@@ -1,0 +1,8 @@
+-rw-r--r--   1  <<uid>>  <<gid>>       2816 1980-01-01 00:00:00 hello.prg
+-rw-r--r--   1  <<uid>>  <<gid>>        256 1980-01-01 00:00:00 hello.c.usr
+-rw-r--r--   1  <<uid>>  <<gid>>        768 1980-01-01 00:00:00 Makefile.usr
+-rw-r--r--   1  <<uid>>  <<gid>>       2816 1980-01-01 00:00:00 ~with spaces.prg
+-rw-r--r--   1  <<uid>>  <<gid>>       2816 1980-01-01 00:00:00 spec_sy|mb*ls.prg
+-rw-r--r--   1  <<uid>>  <<gid>>       2816 1980-01-01 00:00:00 some file 1.prg
+-rw-r--r--   1  <<uid>>  <<gid>>       2816 1980-01-01 00:00:00 some file 2.prg
+-rw-r--r--   1  <<uid>>  <<gid>>       2816 1980-01-01 00:00:00 some file 3.prg

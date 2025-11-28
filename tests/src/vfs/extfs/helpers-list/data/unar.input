@@ -1,0 +1,160 @@
+unar.zip: Zip
+     Flags  File size   Ratio  Mode  Date       Time   Name
+     =====  ==========  =====  ====  ========== =====  ====
+  0. D----           0  -----  None  2025-11-28 09:06  doc/
+  1. -----       29742  61.1%  Defl  2025-06-29 13:51  doc/NEWS.OLD
+  2. D----           0  -----  None  2025-11-28 09:06  doc/man/
+  3. -----       20705  61.0%  Defl  2025-06-29 13:51  doc/man/mcedit.1.in
+  4. -----        1110  63.6%  Defl  2025-07-15 16:23  doc/man/date-of-man-include.am
+  5. -----         385  39.7%  Defl  2025-06-29 13:51  doc/man/Makefile.am
+  6. -----        2568  51.6%  Defl  2025-11-13 08:42  doc/man/mcview.1
+  7. -----      132635  68.8%  Defl  2025-11-09 04:42  doc/man/mc.1.in
+  8. D----           0  -----  None  2025-11-28 09:06  doc/man/sr/
+  9. -----         176  19.9%  Defl  2025-06-29 13:51  doc/man/sr/Makefile.am
+ 10. -----      172405  75.4%  Defl  2025-10-29 04:49  doc/man/sr/mc.1.in
+ 11. -----       21406  68.1%  Defl  2025-11-28 09:06  doc/man/sr/Makefile
+ 12. -----       20749  69.3%  Defl  2025-11-28 09:05  doc/man/sr/Makefile.in
+ 13. -----      172483  75.4%  Defl  2025-11-13 08:42  doc/man/sr/mc.1
+ 14. -----        2602  51.9%  Defl  2025-06-29 13:51  doc/man/mcdiff.1.in
+ 15. -----       27911  69.2%  Defl  2025-11-28 09:06  doc/man/Makefile
+ 16. D----           0  -----  None  2025-11-28 09:06  doc/man/it/
+ 17. -----         175  20.6%  Defl  2025-06-29 13:51  doc/man/it/Makefile.am
+ 18. -----      111648  67.6%  Defl  2025-10-29 04:49  doc/man/it/mc.1.in
+ 19. -----       21405  68.1%  Defl  2025-11-28 09:06  doc/man/it/Makefile
+ 20. -----       20748  69.3%  Defl  2025-11-28 09:05  doc/man/it/Makefile.in
+ 21. -----      111732  67.7%  Defl  2025-11-13 08:42  doc/man/it/mc.1
+ 22. -----        2560  51.5%  Defl  2025-06-29 13:51  doc/man/mcview.1.in
+ 23. -----        2610  52.0%  Defl  2025-11-13 08:42  doc/man/mcdiff.1
+ 24. -----       20727  61.1%  Defl  2025-11-13 08:42  doc/man/mcedit.1
+ 25. D----           0  -----  None  2025-11-28 09:06  doc/man/es/
+ 26. -----         178  20.8%  Defl  2025-06-29 13:51  doc/man/es/Makefile.am
+ 27. -----      138639  68.7%  Defl  2025-10-29 04:49  doc/man/es/mc.1.in
+ 28. -----       21408  68.1%  Defl  2025-11-28 09:06  doc/man/es/Makefile
+ 29. -----       20751  69.3%  Defl  2025-11-28 09:05  doc/man/es/Makefile.in
+ 30. -----      138792  68.7%  Defl  2025-11-13 08:42  doc/man/es/mc.1
+ 31. -----       27325  70.2%  Defl  2025-11-28 09:05  doc/man/Makefile.in
+ 32. D----           0  -----  None  2025-11-28 09:06  doc/man/hu/
+ 33. -----         176  19.9%  Defl  2025-06-29 13:51  doc/man/hu/Makefile.am
+ 34. -----      116424  66.3%  Defl  2025-10-29 04:49  doc/man/hu/mc.1.in
+ 35. -----       21406  68.1%  Defl  2025-11-28 09:06  doc/man/hu/Makefile
+ 36. -----       20749  69.3%  Defl  2025-11-28 09:05  doc/man/hu/Makefile.in
+ 37. -----      116498  66.3%  Defl  2025-11-13 08:42  doc/man/hu/mc.1
+ 38. D----           0  -----  None  2025-11-28 09:06  doc/man/pl/
+ 39. -----         175  20.0%  Defl  2025-06-29 13:51  doc/man/pl/Makefile.am
+ 40. -----      108968  64.0%  Defl  2025-06-29 13:51  doc/man/pl/mc.1.in
+ 41. -----       21405  68.1%  Defl  2025-11-28 09:06  doc/man/pl/Makefile
+ 42. -----       20748  69.3%  Defl  2025-11-28 09:05  doc/man/pl/Makefile.in
+ 43. -----      109020  64.1%  Defl  2025-11-13 08:42  doc/man/pl/mc.1
+ 44. -----      132778  68.8%  Defl  2025-11-13 08:42  doc/man/mc.1
+ 45. D----           0  -----  None  2025-11-28 09:06  doc/man/ru/
+ 46. -----         175  20.6%  Defl  2025-06-29 13:51  doc/man/ru/Makefile.am
+ 47. -----      273161  75.9%  Defl  2025-10-29 04:49  doc/man/ru/mc.1.in
+ 48. -----       21405  68.1%  Defl  2025-11-28 09:06  doc/man/ru/Makefile
+ 49. -----       20748  69.3%  Defl  2025-11-28 09:05  doc/man/ru/Makefile.in
+ 50. -----      273289  76.0%  Defl  2025-11-13 08:42  doc/man/ru/mc.1
+ 51. -----          87  25.3%  Defl  2025-06-29 13:51  doc/Makefile.am
+ 52. -----       73251  63.7%  Defl  2025-06-29 13:51  doc/NEWS
+ 53. -----          37   8.1%  Defl  2025-06-29 13:51  doc/.gitignore
+ 54. -----         764  47.0%  Defl  2025-06-29 13:51  doc/filehighlight.txt
+ 55. -----       37350  65.2%  Defl  2025-06-29 13:51  doc/COPYING
+ 56. -----        5824  56.9%  Defl  2025-06-29 13:51  doc/README
+ 57. -----       12823  58.6%  Defl  2025-06-29 13:51  doc/HACKING
+ 58. -----       23332  68.7%  Defl  2025-11-28 09:06  doc/Makefile
+ 59. -----       33997  65.5%  Defl  2025-11-09 04:42  doc/FAQ
+ 60. D----           0  -----  None  2025-11-28 09:06  doc/hints/
+ 61. D----           0  -----  None  2025-11-28 09:06  doc/hints/l10n/
+ 62. -----        3474  53.3%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.cs
+ 63. -----        3056  55.3%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.en_GB
+ 64. -----        3653  57.5%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.ca
+ 65. -----        3518  55.2%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.ka
+ 66. -----        3167  54.8%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.da
+ 67. -----         184  25.0%  Defl  2025-06-29 13:51  doc/hints/l10n/Makefile.am
+ 68. -----        3710  57.9%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.de
+ 69. -----        3823  59.7%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.tr
+ 70. -----        3556  60.1%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.id
+ 71. -----        4660  63.6%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.pt_BR
+ 72. -----        3380  52.7%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.sk
+ 73. -----        3233  56.6%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.es
+ 74. -----         186  22.6%  Defl  2025-06-29 13:51  doc/hints/l10n/README.txt
+ 75. -----        3383  56.0%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.pt
+ 76. -----        3355  56.2%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.gl
+ 77. -----       19320  67.8%  Defl  2025-11-28 09:06  doc/hints/l10n/Makefile
+ 78. -----        3053  59.0%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.eo
+ 79. -----        4939  59.9%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.el
+ 80. -----        3618  58.9%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.eu
+ 81. -----        6580  71.3%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.bg
+ 82. -----        3181  56.1%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.sv
+ 83. -----        3801  60.4%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.it
+ 84. -----        3331  52.1%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.zh_CN
+ 85. -----        6151  68.7%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.sr
+ 86. -----        3786  56.3%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.ga
+ 87. -----        3359  50.4%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.zh_TW
+ 88. -----        3320  50.0%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.ja
+ 89. -----        3379  57.0%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.pl
+ 90. -----       18531  69.4%  Defl  2025-11-28 09:05  doc/hints/l10n/Makefile.in
+ 91. -----        3082  55.5%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.et
+ 92. -----        3552  55.9%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.hu
+ 93. -----        4467  58.6%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.fa
+ 94. -----        5557  66.5%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.ru
+ 95. -----        3111  52.2%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.lt
+ 96. -----        4051  60.1%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.fr
+ 97. -----        4080  59.3%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.ko
+ 98. -----        6210  70.6%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.uk
+ 99. -----        3136  54.5%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.nl
+100. -----        6039  69.3%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.be
+101. -----        3660  58.0%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.ro
+102. -----        3109  59.5%  Defl  2025-06-29 13:51  doc/hints/l10n/mc.hint.nb
+103. -----         208  25.0%  Defl  2025-06-29 13:51  doc/hints/Makefile.am
+104. -----        3037  55.2%  Defl  2025-06-29 13:51  doc/hints/mc.hint
+105. -----       25627  69.1%  Defl  2025-11-28 09:06  doc/hints/Makefile
+106. -----       24876  70.1%  Defl  2025-11-28 09:05  doc/hints/Makefile.in
+107. -----       30003  62.0%  Defl  2025-06-29 13:51  doc/NEWS.4.7
+108. -----          14   0.0%  None  2025-11-14 01:47  doc/Hello world.txt
+109. D----           0  -----  None  2025-11-28 09:06  doc/hlp/
+110. -----         354  46.0%  Defl  2025-06-29 13:51  doc/hlp/Makefile.am
+111. -----       38055  66.6%  Defl  2025-06-29 13:51  doc/hlp/xnc.hlp
+112. D----           0  -----  None  2025-11-28 09:06  doc/hlp/sr/
+113. -----          44   6.8%  Defl  2025-06-29 13:51  doc/hlp/sr/Makefile.am
+114. -----       40535  66.3%  Defl  2025-06-29 13:51  doc/hlp/sr/xnc.hlp
+115. -----       19606  68.0%  Defl  2025-11-28 09:06  doc/hlp/sr/Makefile
+116. -----      211480  74.0%  Defl  2025-11-28 09:07  doc/hlp/sr/mc.hlp.sr
+117. -----       18829  69.5%  Defl  2025-11-28 09:05  doc/hlp/sr/Makefile.in
+118. -----       25793  69.2%  Defl  2025-11-28 09:06  doc/hlp/Makefile
+119. D----           0  -----  None  2025-11-28 09:06  doc/hlp/it/
+120. -----      146476  67.8%  Defl  2025-11-28 09:07  doc/hlp/it/mc.hlp.it
+121. -----          44   6.8%  Defl  2025-06-29 13:51  doc/hlp/it/Makefile.am
+122. -----       38379  66.2%  Defl  2025-06-29 13:51  doc/hlp/it/xnc.hlp
+123. -----       19606  68.0%  Defl  2025-11-28 09:06  doc/hlp/it/Makefile
+124. -----       18829  69.5%  Defl  2025-11-28 09:05  doc/hlp/it/Makefile.in
+125. -----      168164  68.9%  Defl  2025-11-28 09:07  doc/hlp/mc.hlp
+126. D----           0  -----  None  2025-11-28 09:06  doc/hlp/es/
+127. -----          44   6.8%  Defl  2025-06-29 13:51  doc/hlp/es/Makefile.am
+128. -----       79691  67.6%  Defl  2025-06-29 13:51  doc/hlp/es/xnc.hlp
+129. -----       19606  68.0%  Defl  2025-11-28 09:06  doc/hlp/es/Makefile
+130. -----      215936  68.6%  Defl  2025-11-28 09:07  doc/hlp/es/mc.hlp.es
+131. -----       18829  69.5%  Defl  2025-11-28 09:05  doc/hlp/es/Makefile.in
+132. -----         333  50.8%  Defl  2025-06-29 13:51  doc/hlp/hlp-lang-include.am
+133. -----       25048  70.2%  Defl  2025-11-28 09:05  doc/hlp/Makefile.in
+134. D----           0  -----  None  2025-11-28 09:06  doc/hlp/hu/
+135. -----          44   6.8%  Defl  2025-06-29 13:51  doc/hlp/hu/Makefile.am
+136. -----       38498  65.8%  Defl  2025-06-29 13:51  doc/hlp/hu/xnc.hlp
+137. -----      152640  66.5%  Defl  2025-11-28 09:07  doc/hlp/hu/mc.hlp.hu
+138. -----       19606  68.0%  Defl  2025-11-28 09:06  doc/hlp/hu/Makefile
+139. -----       18829  69.5%  Defl  2025-11-28 09:05  doc/hlp/hu/Makefile.in
+140. D----           0  -----  None  2025-11-28 09:06  doc/hlp/pl/
+141. -----          44   6.8%  Defl  2025-06-29 13:51  doc/hlp/pl/Makefile.am
+142. -----       38375  65.9%  Defl  2025-06-29 13:51  doc/hlp/pl/xnc.hlp
+143. -----      145952  64.9%  Defl  2025-11-28 09:07  doc/hlp/pl/mc.hlp.pl
+144. -----       19606  68.0%  Defl  2025-11-28 09:06  doc/hlp/pl/Makefile
+145. -----       18829  69.5%  Defl  2025-11-28 09:05  doc/hlp/pl/Makefile.in
+146. D----           0  -----  None  2025-11-28 09:06  doc/hlp/ru/
+147. -----          44   6.8%  Defl  2025-06-29 13:51  doc/hlp/ru/Makefile.am
+148. -----      312899  75.1%  Defl  2025-11-28 09:07  doc/hlp/ru/mc.hlp.ru
+149. -----       41537  66.2%  Defl  2025-06-29 13:51  doc/hlp/ru/xnc.hlp
+150. -----       19606  68.0%  Defl  2025-11-28 09:06  doc/hlp/ru/Makefile
+151. -----       18829  69.5%  Defl  2025-11-28 09:05  doc/hlp/ru/Makefile.in
+152. -----       22594  69.9%  Defl  2025-11-28 09:05  doc/Makefile.in
+153. -----        9510  55.2%  Defl  2025-06-29 13:51  doc/TODO
+154. -----       10369  61.5%  Defl  2025-06-29 13:51  doc/INSTALL
+(Flags: D=Directory, R=Resource fork, L=Link, E=Encrypted, @=Extended attributes)
+(Mode: Defl=Deflate)

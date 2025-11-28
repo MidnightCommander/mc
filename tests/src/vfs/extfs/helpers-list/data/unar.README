@@ -1,0 +1,5 @@
+unar.input created from "doc/" folder fo mc sources with commands:
+
+	zip -r unar doc/
+	lsar -l unar.zip
+

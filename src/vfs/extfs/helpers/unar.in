@@ -3,6 +3,11 @@
 # Written by Ilia Maslakov <il.smind@gmail.com>
 #
 # (C) 2020 The Free Software Foundation.
+#
+# Updated by Vadim Kalinnikov <moose@ylsoftware.com>
+#
+# (C) 2025
+
 
 # Define awk
 AWK=@AWK@
@@ -15,7 +20,8 @@ UNAR_GET="unar "
 mc_unar_fs_list()
 {
     # List the contents of the archive and sort it out
-    $UNAR_LIST -l "$1" | $AWK -v uid=`id -nu` -v gid=`id -ng` '
+	LIST_CMD=${MC_TEST_EXTFS_LIST_CMD-:$UNAR_LIST -l "$1"}
+    $LIST_CMD | $AWK '
 	BEGIN { flag = 0 }
 	/^\(Flags/ {next}
 	/^\(Mode/ {next}
@@ -28,7 +34,7 @@ mc_unar_fs_list()
 		pr="dr-xr-xr-x"
 	    split($6, a, "-")
 	    split($7, b, ":")
-	    printf "%s 1 %s %s %d %02d/%02d/%02d %02d:%02d  %s\n", pr, uid, gid, $3, a[3], a[2], a[1], b[1], b[2], $8
+	    printf "%s 1 %s %s %d %02d/%02d/%02d %02d:%02d  %s\n", pr, 0, 0, $3, a[3], a[2], a[1], b[1], b[2], $8
 	}'
 }
 

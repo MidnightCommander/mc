@@ -1,0 +1,10 @@
+uha.ha is created with ha from the `doc` folder of mc:
+
+	echo "Hello, World!" > "doc/Hello world.txt"
+	ha ar uha.ha doc/*
+	
+
+uha.input is created with ha from uha.ha:
+
+	ha lf uha.ha
+
