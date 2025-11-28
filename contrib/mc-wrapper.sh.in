@@ -19,6 +19,7 @@ if test -r "$MC_PWD_FILE"; then
 	unset MC_PWD
 fi
 
-rm -f "$MC_PWD_FILE"
+# invoke the external rm command, avoiding shell alias or function
+command rm -f "$MC_PWD_FILE"
 unset MC_PWD_FILE
 eval "unset MC_STATUS; return $MC_STATUS"
