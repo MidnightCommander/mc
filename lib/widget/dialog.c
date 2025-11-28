@@ -54,6 +54,7 @@
 dlg_colors_t dialog_colors;
 dlg_colors_t alarm_colors;
 dlg_colors_t listbox_colors;
+dlg_colors_t help_colors;
 
 /* A hook list for idle events */
 hook_t *idle_hook = NULL;
@@ -475,6 +476,14 @@ dlg_set_default_colors (void)
     listbox_colors[DLG_COLOR_SELECTED_NORMAL] = PMENU_SELECTED_COLOR;  // unused
     listbox_colors[DLG_COLOR_SELECTED_FOCUS] = PMENU_SELECTED_COLOR;   // unused
     listbox_colors[DLG_COLOR_TITLE] = PMENU_TITLE_COLOR;
+
+    help_colors[DLG_COLOR_NORMAL] = HELP_NORMAL_COLOR;
+    help_colors[DLG_COLOR_FOCUS] = 0;  // unused
+    help_colors[DLG_COLOR_HOT_NORMAL] = HELP_BOLD_COLOR;
+    help_colors[DLG_COLOR_HOT_FOCUS] = 0;        // unused
+    help_colors[DLG_COLOR_SELECTED_NORMAL] = 0;  // unused
+    help_colors[DLG_COLOR_SELECTED_FOCUS] = 0;   // unused
+    help_colors[DLG_COLOR_TITLE] = HELP_TITLE_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

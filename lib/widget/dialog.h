@@ -91,6 +91,7 @@ struct WDialog
 extern dlg_colors_t dialog_colors;
 extern dlg_colors_t alarm_colors;
 extern dlg_colors_t listbox_colors;
+extern dlg_colors_t help_colors;
 
 /* A hook list for idle events */
 extern hook_t *idle_hook;
