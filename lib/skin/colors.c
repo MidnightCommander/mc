@@ -259,6 +259,8 @@ mc_skin_color_cache_init (void)
     COLOR_FOCUS = mc_skin_color_get ("dialog", "dfocus");
     COLOR_HOT_NORMAL = mc_skin_color_get ("dialog", "dhotnormal");
     COLOR_HOT_FOCUS = mc_skin_color_get ("dialog", "dhotfocus");
+    COLOR_SELECTED_NORMAL = mc_skin_color_get ("dialog", "dselnormal");
+    COLOR_SELECTED_FOCUS = mc_skin_color_get ("dialog", "dselfocus");
     COLOR_TITLE = mc_skin_color_get ("dialog", "dtitle");
 
     ERROR_COLOR = mc_skin_color_get ("error", "_default_");
