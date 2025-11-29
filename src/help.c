@@ -1121,14 +1121,6 @@ gboolean
 help_interactive_display (const gchar *event_group_name, const gchar *event_name,
                           gpointer init_data, gpointer data)
 {
-    const dlg_colors_t help_colors = {
-        HELP_NORMAL_COLOR,  // common text color
-        0,                  // unused in help
-        HELP_BOLD_COLOR,    // bold text color
-        0,                  // unused in help
-        HELP_TITLE_COLOR    // title color
-    };
-
     Widget *wh;
     WGroup *g;
     WButtonBar *help_bar;
