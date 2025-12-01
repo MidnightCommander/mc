@@ -587,6 +587,18 @@ Shell=.avif
 View=%view{ascii} @EXTHELPERSDIR@/image.sh view avif
 Open=@EXTHELPERSDIR@/image.sh open avif
 
+[heic]
+Shell=.heic
+Include=image
+
+[heif]
+Shell=.heif
+Include=image
+
+[hif]
+Shell=.hif
+Include=image
+
 ### Sound files ###
 
 [sound]
