@@ -243,7 +243,7 @@ menubar_draw (const WMenuBar *menubar)
 
         if (menu->text.hotkey != NULL)
         {
-            menubar_set_color (menubar, is_selected, TRUE);
+            menubar_set_color (menubar, is_selected, !menubar->is_dropped);
             tty_print_string (menu->text.hotkey);
             menubar_set_color (menubar, is_selected, FALSE);
         }
