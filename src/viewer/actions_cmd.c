@@ -363,6 +363,18 @@ mcview_load_file_from_history (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+mcview_help (const WView *view)
+{
+    ev_help_t event_data = { NULL, "[Internal File Viewer]" };
+
+    (void) view;
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 mcview_execute_cmd (WView *view, long command)
 {
@@ -370,6 +382,9 @@ mcview_execute_cmd (WView *view, long command)
 
     switch (command)
     {
+    case CK_Help:
+        mcview_help (view);
+        break;
     case CK_HexMode:
         // Toggle between hex view and text view
         mcview_toggle_hex_mode (view);
