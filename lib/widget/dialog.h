@@ -113,9 +113,7 @@ void dlg_set_default_colors (void);
 
 void dlg_init (WDialog *h);
 int dlg_run (WDialog *d);
-
 void dlg_run_done (WDialog *h);
-void dlg_save_history (WDialog *h);
 void dlg_process_event (WDialog *h, int key, Gpm_Event *event);
 
 char *dlg_get_title (const WDialog *h, const ssize_t width);

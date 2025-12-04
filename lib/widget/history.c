@@ -42,7 +42,10 @@
 #include "lib/tty/tty.h"  // LINES, COLS
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/keybind.h"  // CK_*
+#include "lib/keybind.h"   // CK_*
+#include "lib/fileloc.h"   // MC_HISTORY_FILE
+#include "lib/event.h"     // mc_event_raise()
+#include "lib/mcconfig.h"  // num_history_items_recorded
 
 /*** global variables ****************************************************************************/
 
@@ -182,6 +185,74 @@ history_release_item (history_descriptor_t *hd, WLEntry *le)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Load widged history from the ${XDG_DATA_HOME}/mc/history file
+ *
+ * @param h WDialog object, the event group area
+ * @param w Widget object whose history should be loaded. If NULL, history of all widgets of @h
+ *                 will be loaded.
+ */
+void
+history_load (const WDialog *h, Widget *w)
+{
+    char *profile;
+    ev_history_load_save_t event_data;
+
+    if (num_history_items_recorded == 0)  // this is how to disable
+        return;
+
+    profile = mc_config_get_full_path (MC_HISTORY_FILE);
+    event_data.cfg = mc_config_init (profile, TRUE);
+    event_data.receiver = w;
+
+    mc_event_raise (h->event_group, MCEVENT_HISTORY_LOAD, &event_data);
+
+    mc_config_deinit (event_data.cfg);
+    g_free (profile);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Save widget history to the ${XDG_DATA_HOME}/mc/history file
+ *
+ * @param h WDialog object, the event group area
+ * @param w Widget object whose history should be saved. If NULL, history of all widgets of @h
+ *                 will be saved.
+ */
+void
+history_save (const WDialog *h, Widget *w)
+{
+    char *profile;
+    int i;
+
+    if (num_history_items_recorded == 0)  // this is how to disable
+        return;
+
+    profile = mc_config_get_full_path (MC_HISTORY_FILE);
+    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
+    if (i != -1)
+        close (i);
+
+    // Make sure the history is only readable by the user
+    if (chmod (profile, S_IRUSR | S_IWUSR) != -1 || errno == ENOENT)
+    {
+        ev_history_load_save_t event_data;
+
+        event_data.cfg = mc_config_init (profile, FALSE);
+        event_data.receiver = w;
+
+        mc_event_raise (h->event_group, MCEVENT_HISTORY_SAVE, &event_data);
+
+        mc_config_save_file (event_data.cfg, NULL);
+        mc_config_deinit (event_data.cfg);
+    }
+
+    g_free (profile);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 void

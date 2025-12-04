@@ -40,10 +40,8 @@
 #include "lib/skin.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
-#include "lib/fileloc.h"   // MC_HISTORY_FILE
-#include "lib/event.h"     // mc_event_raise()
-#include "lib/util.h"      // MC_PTR_FREE
-#include "lib/mcconfig.h"  // num_history_items_recorded
+#include "lib/event.h"  // mc_event_raise()
+#include "lib/util.h"   // MC_PTR_FREE
 
 #include "lib/widget.h"
 #include "lib/widget/mouse.h"
@@ -80,30 +78,6 @@ static const int *
 dlg_default_get_colors (const Widget *w)
 {
     return CONST_DIALOG (w)->colors;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Read histories from the ${XDG_DATA_HOME}/mc/history file
- */
-static void
-dlg_read_history (WDialog *h)
-{
-    char *profile;
-    ev_history_load_save_t event_data;
-
-    if (num_history_items_recorded == 0)  // this is how to disable
-        return;
-
-    profile = mc_config_get_full_path (MC_HISTORY_FILE);
-    event_data.cfg = mc_config_init (profile, TRUE);
-    event_data.receiver = NULL;
-
-    // create all histories in dialog
-    mc_event_raise (h->event_group, MCEVENT_HISTORY_LOAD, &event_data);
-
-    mc_config_deinit (event_data.cfg);
-    g_free (profile);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -334,7 +308,7 @@ dlg_default_destroy (Widget *w)
     WDialog *h = DIALOG (w);
 
     // if some widgets have history, save all histories at one moment here
-    dlg_save_history (h);
+    history_save (h, NULL);
     group_default_callback (w, NULL, MSG_DESTROY, 0, NULL);
     send_message (w, NULL, MSG_DESTROY, 0, NULL);
     mc_event_group_del (h->event_group);
@@ -521,7 +495,7 @@ dlg_init (WDialog *h)
 
         send_message (h, NULL, MSG_INIT, 0, NULL);
         group_default_callback (wh, NULL, MSG_INIT, 0, NULL);
-        dlg_read_history (h);
+        history_load (h, NULL);
     }
 
     // Select the first widget that takes focus
@@ -592,43 +566,6 @@ dlg_run (WDialog *h)
     frontend_dlg_run (h);
     dlg_run_done (h);
     return h->ret_value;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Write history to the ${XDG_DATA_HOME}/mc/history file
- */
-void
-dlg_save_history (WDialog *h)
-{
-    char *profile;
-    int i;
-
-    if (num_history_items_recorded == 0)  // this is how to disable
-        return;
-
-    profile = mc_config_get_full_path (MC_HISTORY_FILE);
-    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
-    if (i != -1)
-        close (i);
-
-    // Make sure the history is only readable by the user
-    if (chmod (profile, S_IRUSR | S_IWUSR) != -1 || errno == ENOENT)
-    {
-        ev_history_load_save_t event_data;
-
-        event_data.cfg = mc_config_init (profile, FALSE);
-        event_data.receiver = NULL;
-
-        // get all histories in dialog
-        mc_event_raise (h->event_group, MCEVENT_HISTORY_SAVE, &event_data);
-
-        mc_config_save_file (event_data.cfg, NULL);
-        mc_config_deinit (event_data.cfg);
-    }
-
-    g_free (profile);
 }
 
 /* --------------------------------------------------------------------------------------------- */
