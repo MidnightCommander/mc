@@ -2984,6 +2984,18 @@ dview_ok_to_exit (WDiff *dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+dview_help (const WDiff *dview)
+{
+    ev_help_t event_data = { NULL, "[Diff Viewer]" };
+
+    (void) dview;
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 dview_execute_cmd (WDiff *dview, long command)
 {
@@ -2991,6 +3003,9 @@ dview_execute_cmd (WDiff *dview, long command)
 
     switch (command)
     {
+    case CK_Help:
+        dview_help (dview);
+        break;
     case CK_ShowSymbols:
         dview->display_symbols = !dview->display_symbols;
         dview->new_frame = TRUE;
