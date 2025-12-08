@@ -444,7 +444,7 @@ external_panelize_cmd (void)
     external_panelize_init ();
 
     // display file info
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (CORE_SELECTED_COLOR);
 
     switch (dlg_run (panelize_dlg))
     {

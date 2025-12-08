@@ -462,7 +462,7 @@ widget_selectcolor (const Widget *w, gboolean focused, gboolean hotkey)
     colors = widget_get_colors (w);
 
     if (widget_get_state (w, WST_DISABLED))
-        color = DISABLED_COLOR;
+        color = CORE_DISABLED_COLOR;
     else if (hotkey)
         color = colors[focused ? DLG_COLOR_HOT_FOCUS : DLG_COLOR_HOT_NORMAL];
     else

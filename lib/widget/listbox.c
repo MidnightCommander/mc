@@ -147,8 +147,8 @@ listbox_draw (WListbox *l, gboolean focused)
     colors = widget_get_colors (wl);
 
     disabled = widget_get_state (wl, WST_DISABLED);
-    normalc = disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL];
-    selc = disabled ? DISABLED_COLOR
+    normalc = disabled ? CORE_DISABLED_COLOR : colors[DLG_COLOR_NORMAL];
+    selc = disabled ? CORE_DISABLED_COLOR
                     : colors[focused ? DLG_COLOR_SELECTED_FOCUS : DLG_COLOR_SELECTED_NORMAL];
 
     if (l->list != NULL)

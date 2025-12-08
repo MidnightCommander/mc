@@ -33,7 +33,7 @@
 #include "lib/charsets.h"  // cp_source
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/skin.h"  // BOOK_MARK_FOUND_COLOR
+#include "lib/skin.h"  // EDITOR_BOOKMARK_FOUND_COLOR
 
 #include "src/history.h"  // MC_HISTORY_SHARED_SEARCH
 #include "src/setup.h"    // verbose
@@ -490,7 +490,7 @@ edit_do_search (WEdit *edit)
 
             l += edit_buffer_count_lines (&edit->buffer, q, edit->search->normal_offset);
             if (l != l_last)
-                book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
+                book_mark_insert (edit, l, EDITOR_BOOKMARK_FOUND_COLOR);
             l_last = l;
             q = edit->search->normal_offset + 1;
         }

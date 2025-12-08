@@ -277,7 +277,7 @@ set_colors (const WPanel *panel)
     (void) panel;
 
     tty_set_normal_attrs ();
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -329,9 +329,9 @@ add_permission_string (const char *dest, int width, file_entry_t *fe, file_attr_
         if (i >= l && i < r)
         {
             if (attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT)
-                tty_setcolor (MARKED_SELECTED_COLOR);
+                tty_setcolor (CORE_MARKED_SELECTED_COLOR);
             else
-                tty_setcolor (MARKED_COLOR);
+                tty_setcolor (CORE_MARKED_COLOR);
         }
         else if (color >= 0)
             tty_setcolor (color);
@@ -654,17 +654,17 @@ file_compute_color (const file_attr_t attr, file_entry_t *fe)
     switch (attr)
     {
     case FATTR_CURRENT:
-        return (SELECTED_COLOR);
+        return (CORE_SELECTED_COLOR);
     case FATTR_MARKED:
-        return (MARKED_COLOR);
+        return (CORE_MARKED_COLOR);
     case FATTR_MARKED_CURRENT:
-        return (MARKED_SELECTED_COLOR);
+        return (CORE_MARKED_SELECTED_COLOR);
     case FATTR_STATUS:
-        return (NORMAL_COLOR);
+        return (CORE_NORMAL_COLOR);
     case FATTR_NORMAL:
     default:
         if (!panels_options.filetype_mode)
-            return (NORMAL_COLOR);
+            return (CORE_NORMAL_COLOR);
     }
 
     return mc_fhl_get_color (mc_filehighlight, fe);
@@ -686,7 +686,7 @@ static filename_scroll_flag_t
 format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolean isstatus,
              int *field_length)
 {
-    int color = NORMAL_COLOR;
+    int color = CORE_NORMAL_COLOR;
     int length = 0;
     GSList *format, *home;
     file_entry_t *fe = NULL;
@@ -772,9 +772,9 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
         else
         {
             if (attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT)
-                tty_setcolor (SELECTED_COLOR);
+                tty_setcolor (CORE_SELECTED_COLOR);
             else
-                tty_setcolor (NORMAL_COLOR);
+                tty_setcolor (CORE_NORMAL_COLOR);
             tty_print_one_vline (TRUE);
             length++;
         }
@@ -832,7 +832,7 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
 
     if (nth_column + 1 < panel->list_cols)
     {
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         tty_print_one_vline (TRUE);
     }
 
@@ -849,13 +849,14 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
             }
         }
 
-        const int file_color =
-            attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT ? SELECTED_COLOR : NORMAL_COLOR;
+        const int file_color = attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT
+            ? CORE_SELECTED_COLOR
+            : CORE_NORMAL_COLOR;
 
         if ((ret_frm & FILENAME_SCROLL_LEFT) != 0)
         {
             const int scroll_left_char_color =
-                panel->list_format == list_long ? file_color : NORMAL_COLOR;
+                panel->list_format == list_long ? file_color : CORE_NORMAL_COLOR;
 
             widget_gotoyx (w, ypos, offset);
             tty_setcolor (scroll_left_char_color);
@@ -869,7 +870,7 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
             const int scroll_right_char_color =
                 panel->list_format != list_long && g_slist_length (panel->format) > 2
                 ? file_color
-                : NORMAL_COLOR;
+                : CORE_NORMAL_COLOR;
 
             widget_gotoyx (w, ypos, offset);
             tty_setcolor (scroll_right_char_color);
@@ -909,7 +910,7 @@ display_mini_info (WPanel *panel)
 
     if (panel->quick_search.active)
     {
-        tty_setcolor (INPUT_COLOR);
+        tty_setcolor (CORE_INPUT_COLOR);
         tty_print_char ('/');
         tty_print_string (
             str_fit_to_term (panel->quick_search.buffer->str, w->rect.cols - 3, J_LEFT));
@@ -1027,7 +1028,7 @@ display_total_marked_size (const WPanel *panel, int y, int x, gboolean size_only
      * y == w->lines - 1             for panel bottom frame
      */
     widget_gotoyx (w, y, x);
-    tty_setcolor (MARKED_COLOR);
+    tty_setcolor (CORE_MARKED_COLOR);
     tty_printf (" %s ", buf);
 }
 
@@ -1042,7 +1043,7 @@ mini_info_separator (const WPanel *panel)
 
         y = panel_lines (panel) + 2;
 
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         /* Status displays total marked size.
          * Centered in panel, full format. */
         display_total_marked_size (panel, y, -1, FALSE);
@@ -1091,7 +1092,7 @@ show_free_space (const WPanel *panel)
                         ? 0
                         : (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         widget_gotoyx (w, w->rect.lines - 1, w->rect.cols - 2 - (int) strlen (tmp));
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         tty_print_string (tmp);
     }
 }
@@ -1269,7 +1270,7 @@ show_dir (const WPanel *panel)
     }
 
     if (panel->active)
-        tty_setcolor (REVERSE_COLOR);
+        tty_setcolor (CORE_REVERSE_COLOR);
 
     tmp = panel_correct_path_to_show (panel);
     tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->rect.cols - 12, 0), w->rect.cols)));
@@ -1290,7 +1291,7 @@ show_dir (const WPanel *panel)
 
                 g_snprintf (buffer, sizeof (buffer), " %s ",
                             size_trunc_sep (fe->st.st_size, panels_options.kilobyte_si));
-                tty_setcolor (NORMAL_COLOR);
+                tty_setcolor (CORE_NORMAL_COLOR);
                 widget_gotoyx (w, w->rect.lines - 1, 4);
                 tty_print_string (buffer);
             }
@@ -1535,7 +1536,7 @@ panel_print_header (const WPanel *panel)
 
     widget_gotoyx (w, 1, 1);
     tty_getyx (&y, &x);
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
     tty_draw_hline (y, x, ' ', w->rect.cols - 2);
 
     format_txt = g_string_new ("");
@@ -1566,19 +1567,19 @@ panel_print_header (const WPanel *panel)
                     g_string_append (format_txt, "]");
                 }
 
-                tty_setcolor (HEADER_COLOR);
+                tty_setcolor (CORE_HEADER_COLOR);
                 tty_print_string (str_fit_to_term (format_txt->str, fi->field_len, J_CENTER_LEFT));
             }
             else
             {
-                tty_setcolor (NORMAL_COLOR);
+                tty_setcolor (CORE_NORMAL_COLOR);
                 tty_print_one_vline (TRUE);
             }
         }
 
         if (i < panel->list_cols - 1)
         {
-            tty_setcolor (NORMAL_COLOR);
+            tty_setcolor (CORE_NORMAL_COLOR);
             tty_print_one_vline (TRUE);
         }
     }

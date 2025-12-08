@@ -282,7 +282,7 @@ mc_fhl_get_color (const mc_fhl_t *fhl, const file_entry_t *fe)
     int ret;
 
     if (fhl == NULL)
-        return NORMAL_COLOR;
+        return CORE_NORMAL_COLOR;
 
     for (i = 0; i < fhl->filters->len; i++)
     {
@@ -306,7 +306,7 @@ mc_fhl_get_color (const mc_fhl_t *fhl, const file_entry_t *fe)
             break;
         }
     }
-    return NORMAL_COLOR;
+    return CORE_NORMAL_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -101,7 +101,7 @@ hline_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 
     case MSG_DRAW:
         if (l->transparent)
-            tty_setcolor (DEFAULT_COLOR);
+            tty_setcolor (CORE_DEFAULT_COLOR);
         else
         {
             const int *colors;

@@ -1636,7 +1636,7 @@ hotlist_show (hotlist_t list_type, WPanel *panel)
     init_hotlist (list_type);
 
     // display file info
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (CORE_SELECTED_COLOR);
 
     hotlist_state.running = TRUE;
     res = dlg_run (hotlist_dlg);

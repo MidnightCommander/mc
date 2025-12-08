@@ -87,7 +87,7 @@ info_box (WInfo *info)
     const int len = str_term_width1 (title);
 
     tty_set_normal_attrs ();
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
     widget_erase (w);
     tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 
@@ -120,7 +120,7 @@ info_show_info (WInfo *info)
 
     info_box (info);
 
-    tty_setcolor (MARKED_COLOR);
+    tty_setcolor (CORE_MARKED_COLOR);
     widget_gotoyx (w, 1, 3);
     tty_printf ("%s %s", PACKAGE_NAME, mc_global.mc_version);
 
@@ -152,7 +152,7 @@ info_show_info (WInfo *info)
         i18n_adjust = str_term_width1 (file_label) + 2;
     }
 
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
 
     buff = g_string_new ("");
 

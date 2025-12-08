@@ -194,7 +194,7 @@ menubar_draw_drop (const WMenuBar *menubar)
 
     if (mc_global.tty.shadows)
         tty_draw_box_shadow (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 4,
-                             SHADOW_COLOR);
+                             CORE_SHADOW_COLOR);
 
     tty_setcolor (MENU_ENTRY_COLOR);
     tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 4, FALSE);

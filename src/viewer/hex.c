@@ -157,10 +157,10 @@ mcview_display_hex (WView *view)
 
             g_snprintf (hex_buff, sizeof (hex_buff), "%08" PRIXMAX " ", (uintmax_t) from);
             widget_gotoyx (view, r->y + row, r->x);
-            tty_setcolor (VIEW_BOLD_COLOR);
+            tty_setcolor (VIEWER_BOLD_COLOR);
             for (i = 0; col < r->cols && hex_buff[i] != '\0'; col++, i++)
                 tty_print_char (hex_buff[i]);
-            tty_setcolor (VIEW_NORMAL_COLOR);
+            tty_setcolor (VIEWER_NORMAL_COLOR);
         }
 
         for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++)
@@ -261,13 +261,13 @@ mcview_display_hex (WView *view)
             }
 
             // Select the color for the hex number
-            tty_setcolor (boldflag_byte == MARK_NORMAL         ? VIEW_NORMAL_COLOR
-                              : boldflag_byte == MARK_SELECTED ? VIEW_BOLD_COLOR
-                              : boldflag_byte == MARK_CHANGED  ? VIEW_UNDERLINED_COLOR
+            tty_setcolor (boldflag_byte == MARK_NORMAL         ? VIEWER_NORMAL_COLOR
+                              : boldflag_byte == MARK_SELECTED ? VIEWER_BOLD_COLOR
+                              : boldflag_byte == MARK_CHANGED  ? VIEWER_UNDERLINED_COLOR
                                                                :
                                                               // boldflag_byte == MARK_CURSOR
-                              view->hexview_in_text ? VIEW_SELECTED_COLOR
-                                                    : VIEW_UNDERLINED_COLOR);
+                              view->hexview_in_text ? VIEWER_SELECTED_COLOR
+                                                    : VIEWER_UNDERLINED_COLOR);
 
             // Print the hex number
             widget_gotoyx (view, r->y + row, r->x + col);
@@ -283,7 +283,7 @@ mcview_display_hex (WView *view)
             }
 
             // Print the separator
-            tty_setcolor (VIEW_NORMAL_COLOR);
+            tty_setcolor (VIEWER_NORMAL_COLOR);
             if (bytes != view->bytes_per_line - 1)
             {
                 if (col < r->cols)
@@ -310,13 +310,13 @@ mcview_display_hex (WView *view)
 
             /* Select the color for the character; this differs from the
              * hex color when boldflag == MARK_CURSOR */
-            tty_setcolor (boldflag_char == MARK_NORMAL         ? VIEW_NORMAL_COLOR
-                              : boldflag_char == MARK_SELECTED ? VIEW_BOLD_COLOR
-                              : boldflag_char == MARK_CHANGED  ? VIEW_UNDERLINED_COLOR
+            tty_setcolor (boldflag_char == MARK_NORMAL         ? VIEWER_NORMAL_COLOR
+                              : boldflag_char == MARK_SELECTED ? VIEWER_BOLD_COLOR
+                              : boldflag_char == MARK_CHANGED  ? VIEWER_UNDERLINED_COLOR
                                                                :
                                                               // boldflag_char == MARK_CURSOR
-                              view->hexview_in_text ? VIEW_SELECTED_COLOR
-                                                    : MARKED_SELECTED_COLOR);
+                              view->hexview_in_text ? VIEWER_SELECTED_COLOR
+                                                    : CORE_MARKED_SELECTED_COLOR);
 
             if (mc_global.utf8_display)
             {
@@ -355,7 +355,7 @@ mcview_display_hex (WView *view)
     }
 
     // Be polite to the other functions
-    tty_setcolor (VIEW_NORMAL_COLOR);
+    tty_setcolor (VIEWER_NORMAL_COLOR);
 
     mcview_place_cursor (view);
     view->dpy_end = from;

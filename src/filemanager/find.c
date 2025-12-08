@@ -1246,7 +1246,7 @@ do_search (WDialog *h)
             {
                 vfs_path_t *tmp_vpath = NULL;
 
-                tty_setcolor (REVERSE_COLOR);
+                tty_setcolor (CORE_REVERSE_COLOR);
 
                 while (TRUE)
                 {

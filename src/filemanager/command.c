@@ -38,7 +38,7 @@
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"  // vfs_current_is_local()
-#include "lib/skin.h"     // DEFAULT_COLOR
+#include "lib/skin.h"     // CORE_DEFAULT_COLOR
 #include "lib/util.h"     // whitespace()
 #include "lib/widget.h"
 
@@ -229,10 +229,10 @@ command_new (int y, int x, int cols)
 void
 command_set_default_colors (void)
 {
-    command_colors[WINPUTC_MAIN] = DEFAULT_COLOR;
-    command_colors[WINPUTC_MARK] = COMMAND_MARK_COLOR;
-    command_colors[WINPUTC_UNCHANGED] = DEFAULT_COLOR;
-    command_colors[WINPUTC_HISTORY] = COMMAND_HISTORY_COLOR;
+    command_colors[WINPUTC_MAIN] = CORE_DEFAULT_COLOR;
+    command_colors[WINPUTC_MARK] = CORE_COMMAND_MARK_COLOR;
+    command_colors[WINPUTC_UNCHANGED] = CORE_DEFAULT_COLOR;
+    command_colors[WINPUTC_HISTORY] = CORE_COMMAND_HISTORY_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

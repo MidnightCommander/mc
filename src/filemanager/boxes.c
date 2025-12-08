@@ -44,7 +44,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"  // tty_use_colors()
 #include "lib/tty/key.h"    // XCTRL and ALT macros
-#include "lib/skin.h"       // INPUT_COLOR
+#include "lib/skin.h"       // CORE_INPUT_COLOR
 #include "lib/mcconfig.h"   // Load/save user formats
 #include "lib/strutil.h"
 

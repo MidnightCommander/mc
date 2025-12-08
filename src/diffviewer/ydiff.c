@@ -2526,7 +2526,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
 
         p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         if (display_symbols)
         {
             tty_gotoyx (r + j, c - 2);
@@ -2541,13 +2541,13 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 tty_print_string (str_fit_to_term (buf, nwidth, J_LEFT_FIT));
             }
             if (ch == ADD_CH)
-                tty_setcolor (DFF_ADD_COLOR);
+                tty_setcolor (DIFFVIEWER_ADDED_COLOR);
             if (ch == CHG_CH)
-                tty_setcolor (DFF_CHG_COLOR);
+                tty_setcolor (DIFFVIEWER_CHANGEDLINE_COLOR);
             if (f == NULL)
             {
                 if (i == (size_t) dview->search.last_found_line)
-                    tty_setcolor (MARKED_SELECTED_COLOR);
+                    tty_setcolor (CORE_MARKED_SELECTED_COLOR);
                 else if (dview->hdiff != NULL && g_ptr_array_index (dview->hdiff, i) != NULL)
                 {
                     char att[BUFSIZ];
@@ -2576,7 +2576,8 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                         else
                             next_ch = dview_get_byte (buf, cnt);
 
-                        tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
+                        tty_setcolor (att[cnt] ? DIFFVIEWER_CHANGEDNEW_COLOR
+                                               : DIFFVIEWER_CHANGEDLINE_COLOR);
                         if (mc_global.utf8_display)
                         {
                             if (!dview->utf8)
@@ -2594,7 +2595,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 }
 
                 if (ch == CHG_CH)
-                    tty_setcolor (DFF_CHH_COLOR);
+                    tty_setcolor (DIFFVIEWER_CHANGEDNEW_COLOR);
 
                 if (dview->utf8)
                     k = dview_str_utf8_offset_to_pos (p->p, width);
@@ -2614,9 +2615,9 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 tty_print_string (buf);
             }
             if (ch == DEL_CH)
-                tty_setcolor (DFF_DEL_COLOR);
+                tty_setcolor (DIFFVIEWER_REMOVED_COLOR);
             if (ch == CHG_CH)
-                tty_setcolor (DFF_CHD_COLOR);
+                tty_setcolor (DIFFVIEWER_CHANGED_COLOR);
             fill_by_space (buf, width, TRUE);
         }
         tty_gotoyx (r + j, c);
@@ -2652,7 +2653,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         }
     }
 
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
     k = width;
     if (width < xwidth - 1)
         k = xwidth - 1;
@@ -2759,7 +2760,7 @@ dview_update (WDiff *dview)
     {
         int xwidth;
 
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         xwidth = dview->display_numbers;
         if (dview->display_symbols)
             xwidth++;

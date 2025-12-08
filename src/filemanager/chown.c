@@ -128,7 +128,7 @@ chown_refresh (const Widget *h)
     int y = 3;
     int x = 7 + GW * 2;
 
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
 
     widget_gotoyx (h, y + 0, x);
     tty_print_string (_ ("Name"));

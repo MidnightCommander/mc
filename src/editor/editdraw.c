@@ -341,7 +341,7 @@ edit_draw_frame (const WEdit *edit, int color, gboolean active)
     // draw a drag marker
     if (edit->drag_state == MCEDIT_DRAG_NONE)
     {
-        tty_setcolor (EDITOR_FRAME_DRAG);
+        tty_setcolor (EDITOR_FRAME_DRAG_COLOR);
         widget_gotoyx (w, w->rect.lines - 1, w->rect.cols - 1);
         tty_print_char (mc_tty_frm[MC_TTY_FRM_RIGHTBOTTOM]);
     }
@@ -426,7 +426,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real, long 
 
     if (edit_options.line_state)
     {
-        tty_setcolor (LINE_STATE_COLOR);
+        tty_setcolor (EDITOR_LINE_STATE_COLOR);
 
         for (i = 0; i < LINE_STATE_WIDTH; i++)
         {
@@ -502,10 +502,10 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
     if (row > w->rect.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen != 0 ? 0 : 1))
         return;
 
-    if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
-        book_mark = BOOK_MARK_COLOR;
-    else if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_FOUND_COLOR))
-        book_mark = BOOK_MARK_FOUND_COLOR;
+    if (book_mark_query_color (edit, edit->start_line + row, EDITOR_BOOKMARK_COLOR))
+        book_mark = EDITOR_BOOKMARK_COLOR;
+    else if (book_mark_query_color (edit, edit->start_line + row, EDITOR_BOOKMARK_FOUND_COLOR))
+        book_mark = EDITOR_BOOKMARK_FOUND_COLOR;
 
     if (book_mark != 0)
         abn_style = book_mark << 16;
@@ -537,7 +537,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
             line_stat[LINE_STATE_WIDTH] = '\0';
         }
 
-        if (book_mark_query_color (edit, cur_line, BOOK_MARK_COLOR))
+        if (book_mark_query_color (edit, cur_line, EDITOR_BOOKMARK_COLOR))
             g_snprintf (line_stat, 2, "*");
     }
 
@@ -1020,9 +1020,9 @@ edit_status (WEdit *edit, gboolean active)
     }
     else
     {
-        color = edit->drag_state != MCEDIT_DRAG_NONE ? EDITOR_FRAME_DRAG
-            : active                                 ? EDITOR_FRAME_ACTIVE
-                                                     : EDITOR_FRAME;
+        color = edit->drag_state != MCEDIT_DRAG_NONE ? EDITOR_FRAME_DRAG_COLOR
+            : active                                 ? EDITOR_FRAME_ACTIVE_COLOR
+                                                     : EDITOR_FRAME_COLOR;
         edit_draw_frame (edit, color, active);
         edit_status_window (edit);
     }
