@@ -71,7 +71,7 @@ groupbox_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         colors = widget_get_colors (w);
 
         disabled = widget_get_state (w, WST_DISABLED);
-        tty_setcolor (disabled ? CORE_DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_setcolor (disabled ? CORE_DISABLED_COLOR : colors[DLG_COLOR_FRAME]);
         tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, TRUE);
 
         if (g->title != NULL)

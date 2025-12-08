@@ -2760,7 +2760,7 @@ dview_update (WDiff *dview)
     {
         int xwidth;
 
-        tty_setcolor (CORE_NORMAL_COLOR);
+        tty_setcolor (CORE_FRAME_COLOR);
         xwidth = dview->display_numbers;
         if (dview->display_symbols)
             xwidth++;

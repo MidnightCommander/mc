@@ -89,16 +89,18 @@ info_box (WInfo *info)
     tty_set_normal_attrs ();
     tty_setcolor (CORE_NORMAL_COLOR);
     widget_erase (w);
+
+    tty_setcolor (CORE_FRAME_COLOR);
     tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
-
-    widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
-    tty_printf (" %s ", title);
-
     widget_gotoyx (w, 2, 0);
     tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
     widget_gotoyx (w, 2, w->rect.cols - 1);
     tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
     tty_draw_hline (w->rect.y + 2, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ], w->rect.cols - 2);
+
+    tty_setcolor (CORE_NORMAL_COLOR);
+    widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
+    tty_printf (" %s ", title);
 }
 
 /* --------------------------------------------------------------------------------------------- */

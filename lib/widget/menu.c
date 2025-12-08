@@ -137,7 +137,7 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
     if (entry == NULL)
     {
         // menu separator
-        tty_setcolor (MENU_ENTRY_COLOR);
+        tty_setcolor (MENU_FRAME_COLOR);
 
         widget_gotoyx (menubar, y, x - 1);
         tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
@@ -196,7 +196,7 @@ menubar_draw_drop (const WMenuBar *menubar)
         tty_draw_box_shadow (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 4,
                              CORE_SHADOW_COLOR);
 
-    tty_setcolor (MENU_ENTRY_COLOR);
+    tty_setcolor (MENU_FRAME_COLOR);
     tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 4, FALSE);
 
     for (i = 0; i < count; i++)

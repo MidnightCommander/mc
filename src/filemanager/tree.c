@@ -1118,10 +1118,8 @@ tree_frame (WDialog *h, WTree *tree)
         const char *title = _ ("Directory tree");
         const int len = str_term_width1 (title);
 
+        tty_setcolor (CORE_FRAME_COLOR);
         tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
-
-        widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
-        tty_printf (" %s ", title);
 
         if (panels_options.show_mini_info)
         {
@@ -1135,6 +1133,10 @@ tree_frame (WDialog *h, WTree *tree)
             tty_draw_hline (w->rect.y + y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ],
                             w->rect.cols - 2);
         }
+
+        tty_setcolor (CORE_NORMAL_COLOR);
+        widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
+        tty_printf (" %s ", title);
     }
 }
 

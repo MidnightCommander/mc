@@ -774,7 +774,7 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
             if (attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT)
                 tty_setcolor (CORE_SELECTED_COLOR);
             else
-                tty_setcolor (CORE_NORMAL_COLOR);
+                tty_setcolor (CORE_FRAME_COLOR);
             tty_print_one_vline (TRUE);
             length++;
         }
@@ -832,7 +832,7 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
 
     if (nth_column + 1 < panel->list_cols)
     {
-        tty_setcolor (CORE_NORMAL_COLOR);
+        tty_setcolor (CORE_FRAME_COLOR);
         tty_print_one_vline (TRUE);
     }
 
@@ -1204,7 +1204,8 @@ show_dir (const WPanel *panel)
     int col, i;
 
     // paint the basic frame
-    set_colors (panel);
+    tty_set_normal_attrs ();
+    tty_setcolor (CORE_FRAME_COLOR);
     tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 
     // paint the mini info's separator line
@@ -1254,6 +1255,7 @@ show_dir (const WPanel *panel)
 
     g_free (tmp);
 
+    tty_setcolor (CORE_NORMAL_COLOR);
     widget_gotoyx (w, 0, 3);
 
     if (panel->is_panelized)
@@ -1572,14 +1574,14 @@ panel_print_header (const WPanel *panel)
             }
             else
             {
-                tty_setcolor (CORE_NORMAL_COLOR);
+                tty_setcolor (CORE_FRAME_COLOR);
                 tty_print_one_vline (TRUE);
             }
         }
 
         if (i < panel->list_cols - 1)
         {
-            tty_setcolor (CORE_NORMAL_COLOR);
+            tty_setcolor (CORE_FRAME_COLOR);
             tty_print_one_vline (TRUE);
         }
     }

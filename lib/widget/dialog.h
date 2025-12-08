@@ -40,6 +40,7 @@ typedef enum
     DLG_COLOR_SELECTED_NORMAL,
     DLG_COLOR_SELECTED_FOCUS,
     DLG_COLOR_TITLE,
+    DLG_COLOR_FRAME,
     DLG_COLOR_COUNT
 } dlg_colors_enum_t;
 

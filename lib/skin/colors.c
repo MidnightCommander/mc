@@ -254,6 +254,7 @@ mc_skin_color_cache_init (void)
     CORE_HEADER_COLOR = mc_skin_color_get ("core", "header");
     CORE_COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");
     CORE_SHADOW_COLOR = mc_skin_color_get ("core", "shadow");
+    CORE_FRAME_COLOR = mc_skin_color_get ("core", "frame");
 
     DIALOG_NORMAL_COLOR = mc_skin_color_get ("dialog", "_default_");
     DIALOG_FOCUS_COLOR = mc_skin_color_get ("dialog", "dfocus");
@@ -262,22 +263,26 @@ mc_skin_color_cache_init (void)
     DIALOG_SELECTED_NORMAL_COLOR = mc_skin_color_get ("dialog", "dselnormal");
     DIALOG_SELECTED_FOCUS_COLOR = mc_skin_color_get ("dialog", "dselfocus");
     DIALOG_TITLE_COLOR = mc_skin_color_get ("dialog", "dtitle");
+    DIALOG_FRAME_COLOR = mc_skin_color_get ("dialog", "dframe");
 
     ERROR_NORMAL_COLOR = mc_skin_color_get ("error", "_default_");
     ERROR_FOCUS_COLOR = mc_skin_color_get ("error", "errdfocus");
     ERROR_HOT_NORMAL_COLOR = mc_skin_color_get ("error", "errdhotnormal");
     ERROR_HOT_FOCUS_COLOR = mc_skin_color_get ("error", "errdhotfocus");
     ERROR_TITLE_COLOR = mc_skin_color_get ("error", "errdtitle");
+    ERROR_FRAME_COLOR = mc_skin_color_get ("error", "errdframe");
 
     MENU_ENTRY_COLOR = mc_skin_color_get ("menu", "_default_");
     MENU_SELECTED_COLOR = mc_skin_color_get ("menu", "menusel");
     MENU_HOT_COLOR = mc_skin_color_get ("menu", "menuhot");
     MENU_HOTSEL_COLOR = mc_skin_color_get ("menu", "menuhotsel");
     MENU_INACTIVE_COLOR = mc_skin_color_get ("menu", "menuinactive");
+    MENU_FRAME_COLOR = mc_skin_color_get ("menu", "menuframe");
 
     PMENU_ENTRY_COLOR = mc_skin_color_get ("popupmenu", "_default_");
     PMENU_SELECTED_COLOR = mc_skin_color_get ("popupmenu", "menusel");
     PMENU_TITLE_COLOR = mc_skin_color_get ("popupmenu", "menutitle");
+    PMENU_FRAME_COLOR = mc_skin_color_get ("popupmenu", "menuframe");
 
     BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
     BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
@@ -297,11 +302,13 @@ mc_skin_color_cache_init (void)
     HELP_LINK_COLOR = mc_skin_color_get ("help", "helplink");
     HELP_SLINK_COLOR = mc_skin_color_get ("help", "helpslink");
     HELP_TITLE_COLOR = mc_skin_color_get ("help", "helptitle");
+    HELP_FRAME_COLOR = mc_skin_color_get ("help", "helpframe");
 
     VIEWER_NORMAL_COLOR = mc_skin_color_get ("viewer", "_default_");
     VIEWER_BOLD_COLOR = mc_skin_color_get ("viewer", "viewbold");
     VIEWER_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewunderline");
     VIEWER_SELECTED_COLOR = mc_skin_color_get ("viewer", "viewselected");
+    VIEWER_FRAME_COLOR = mc_skin_color_get ("viewer", "viewframe");
 
     EDITOR_NORMAL_COLOR = mc_skin_color_get ("editor", "_default_");
     EDITOR_BOLD_COLOR = mc_skin_color_get ("editor", "editbold");

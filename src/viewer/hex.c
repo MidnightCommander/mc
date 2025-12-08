@@ -297,7 +297,9 @@ mcview_display_hex (WView *view)
                 {
                     if (view->data_area.cols >= 80 && col < r->cols)
                     {
+                        tty_setcolor (VIEWER_FRAME_COLOR);
                         tty_print_one_vline (TRUE);
+                        tty_setcolor (VIEWER_NORMAL_COLOR);
                         col++;
                     }
                     if (col < r->cols)

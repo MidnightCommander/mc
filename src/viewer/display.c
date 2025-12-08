@@ -342,6 +342,7 @@ mcview_display_clean (WView *view)
 
     tty_setcolor (VIEWER_NORMAL_COLOR);
     widget_erase (w);
+    tty_setcolor (VIEWER_FRAME_COLOR);
     if (view->dpy_frame_size != 0)
         tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 }
