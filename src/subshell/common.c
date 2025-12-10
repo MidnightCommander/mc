@@ -1308,13 +1308,6 @@ subshell_name_quote (const char *s)
         quote_cmd_start = "(printf '%b' '";
         quote_cmd_end = "')";
     }
-    /* TODO: When BusyBox printf is fixed, get rid of this "else if", see
-       https://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
-    /* else if (subshell_type == ASH_BUSYBOX)
-       {
-       quote_cmd_start = "\"`echo -en '";
-       quote_cmd_end = "'`\"";
-       } */
     else
     {
         quote_cmd_start = "\"`printf '%b' '";
