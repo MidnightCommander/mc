@@ -918,9 +918,22 @@ feed_subshell (int how, gboolean fail_on_error)
         }
 
         else if (FD_ISSET (subshell_pipe[READ], &read_set))
-        // Read the subshell's CWD and capture its prompt
+        // Read the subshell's CWD and later capture its prompt.
+        // We're inside an "else" branch to checking data on subshell_pty, and CWD is only written
+        // to subshell_pipe after completing the subshell command, therefore we have already read
+        // the entire output of the command.
         {
+            // CWD in subshell_pipe may not be complete yet (ticket #4480). Wait until the shell
+            // completes writing it.
+            // Note: this deadlocks if pwd is longer than a Unix pipe's buffer size, but this
+            // should not be a problem in practice, pipe size is typically at least 16kB.
+            synchronize ();
+
             const ssize_t bytes = read (subshell_pipe[READ], subshell_cwd, sizeof (subshell_cwd));
+
+            // Note: if CWD is longer than our buffer size then there are two bugs. We silently
+            // chop the value and use that directory, instead of explicitly raising an error.
+            // We also don't flush the remaining data from the pipe, breaking the next CWD read.
 
             if (bytes <= 0)
             {
@@ -931,8 +944,6 @@ feed_subshell (int how, gboolean fail_on_error)
             }
 
             subshell_cwd[(size_t) bytes - 1] = '\0';  // Squash the final '\n'
-
-            synchronize ();
 
             clear_subshell_prompt_string ();
             should_read_new_subshell_prompt = TRUE;
