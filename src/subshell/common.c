@@ -1406,8 +1406,15 @@ create_cd_command (const char *s)
     {
         n = str_cget_next_char_safe (su);
 
-        if (str_isalnum (su))
+        // tcsh doesn't support defining strings with UTF-8 characters broken down into individual
+        // bytes each escaped in octal, such as $'\303\251' instead of 'é'. So copy all valid
+        // multibyte UTF-8 characters as-is, without escaping; they aren't special shell characters
+        // in any shell and don't need protection.
+        // Also don't escape frequent safe filename characters like '/', '.' and such.
+        if ((unsigned char) su[0] >= 0x80 || g_ascii_isalnum (su[0])
+            || strchr ("/.-_", su[0]) != NULL)
         {
+            // It's a safe character that we copy as-is.
             if (line_length + (n - su) > max_length)
             {
                 // wrap to next physical line
@@ -1421,6 +1428,8 @@ create_cd_command (const char *s)
             line_length += (n - su);
         }
         else
+            // It's a special shell character, or maybe an invalid UTF-8 segment.
+            // Escape each byte separately.
             for (size_t c = 0; c < (size_t) (n - su); c++)
             {
                 if (line_length + escaped_char_len > max_length)
