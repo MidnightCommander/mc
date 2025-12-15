@@ -474,7 +474,7 @@ edit_load_position (WEdit *edit, gboolean load_position)
 
     load_file_position (edit->filename_vpath, &line, &column, &offset, &edit->serialized_bookmarks);
     // apply bookmarks in any case
-    book_mark_restore (edit, BOOK_MARK_COLOR);
+    book_mark_restore (edit, EDITOR_BOOKMARK_COLOR);
 
     if (!load_position)
         return;
@@ -506,7 +506,7 @@ edit_save_position (WEdit *edit)
         || *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) == '\0')
         return;
 
-    book_mark_serialize (edit, BOOK_MARK_COLOR);
+    book_mark_serialize (edit, EDITOR_BOOKMARK_COLOR);
     save_file_position (edit->filename_vpath, edit->buffer.curs_line + 1, edit->curs_col,
                         edit->buffer.curs1, edit->serialized_bookmarks);
     edit->serialized_bookmarks = NULL;
@@ -3800,15 +3800,15 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         break;
 
     case CK_Bookmark:
-        book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_FOUND_COLOR);
-        if (book_mark_query_color (edit, edit->buffer.curs_line, BOOK_MARK_COLOR))
-            book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
+        book_mark_clear (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_FOUND_COLOR);
+        if (book_mark_query_color (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_COLOR))
+            book_mark_clear (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_COLOR);
         else
-            book_mark_insert (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
+            book_mark_insert (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_COLOR);
         break;
     case CK_BookmarkFlush:
-        book_mark_flush (edit, BOOK_MARK_COLOR);
-        book_mark_flush (edit, BOOK_MARK_FOUND_COLOR);
+        book_mark_flush (edit, EDITOR_BOOKMARK_COLOR);
+        book_mark_flush (edit, EDITOR_BOOKMARK_FOUND_COLOR);
         edit->force |= REDRAW_PAGE;
         break;
     case CK_BookmarkNext:

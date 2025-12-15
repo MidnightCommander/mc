@@ -80,13 +80,13 @@ label_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         disabled = widget_get_state (w, WST_DISABLED);
 
         if (l->transparent)
-            tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);
+            tty_setcolor (disabled ? CORE_DISABLED_COLOR : CORE_DEFAULT_COLOR);
         else
         {
             const int *colors;
 
             colors = widget_get_colors (w);
-            tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
+            tty_setcolor (disabled ? CORE_DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
         }
 
         align = (w->pos_flags & WPOS_CENTER_HORZ) != 0 ? J_CENTER_LEFT : J_LEFT;

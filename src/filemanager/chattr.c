@@ -41,7 +41,7 @@
 
 #include "lib/tty/tty.h"    // tty_print*()
 #include "lib/tty/color.h"  // tty_setcolor()
-#include "lib/skin.h"       // COLOR_NORMAL, DISABLED_COLOR
+#include "lib/skin.h"       // DIALOG_NORMAL_COLOR, CORE_DISABLED_COLOR
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/util.h"  // x_basename()
@@ -284,7 +284,7 @@ fileattrtext_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
     {
     case MSG_DRAW:
     {
-        int color = COLOR_NORMAL;
+        int color = DIALOG_NORMAL_COLOR;
         size_t i;
 
         tty_setcolor (color);
@@ -307,17 +307,17 @@ fileattrtext_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
             // Do not set new color for each symbol. Try to use previous color.
             if (chattr_is_modifiable (i))
             {
-                if (color == DISABLED_COLOR)
+                if (color == CORE_DISABLED_COLOR)
                 {
-                    color = COLOR_NORMAL;
+                    color = DIALOG_NORMAL_COLOR;
                     tty_setcolor (color);
                 }
             }
             else
             {
-                if (color != DISABLED_COLOR)
+                if (color != CORE_DISABLED_COLOR)
                 {
-                    color = DISABLED_COLOR;
+                    color = CORE_DISABLED_COLOR;
                     tty_setcolor (color);
                 }
             }
@@ -394,7 +394,7 @@ chattr_toggle_select (const WChattrBoxes *cb, int Id)
 
     check_attr[Id].selected = !check_attr[Id].selected;
 
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
     chattr_draw_select (w, check_attr[Id].selected);
 }
 

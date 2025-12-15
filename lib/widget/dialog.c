@@ -453,21 +453,23 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
 void
 dlg_set_default_colors (void)
 {
-    dialog_colors[DLG_COLOR_NORMAL] = COLOR_NORMAL;
-    dialog_colors[DLG_COLOR_FOCUS] = COLOR_FOCUS;
-    dialog_colors[DLG_COLOR_HOT_NORMAL] = COLOR_HOT_NORMAL;
-    dialog_colors[DLG_COLOR_HOT_FOCUS] = COLOR_HOT_FOCUS;
-    dialog_colors[DLG_COLOR_SELECTED_NORMAL] = COLOR_SELECTED_NORMAL;
-    dialog_colors[DLG_COLOR_SELECTED_FOCUS] = COLOR_SELECTED_FOCUS;
-    dialog_colors[DLG_COLOR_TITLE] = COLOR_TITLE;
+    dialog_colors[DLG_COLOR_NORMAL] = DIALOG_NORMAL_COLOR;
+    dialog_colors[DLG_COLOR_FOCUS] = DIALOG_FOCUS_COLOR;
+    dialog_colors[DLG_COLOR_HOT_NORMAL] = DIALOG_HOT_NORMAL_COLOR;
+    dialog_colors[DLG_COLOR_HOT_FOCUS] = DIALOG_HOT_FOCUS_COLOR;
+    dialog_colors[DLG_COLOR_SELECTED_NORMAL] = DIALOG_SELECTED_NORMAL_COLOR;
+    dialog_colors[DLG_COLOR_SELECTED_FOCUS] = DIALOG_SELECTED_FOCUS_COLOR;
+    dialog_colors[DLG_COLOR_TITLE] = DIALOG_TITLE_COLOR;
+    dialog_colors[DLG_COLOR_FRAME] = DIALOG_FRAME_COLOR;
 
-    alarm_colors[DLG_COLOR_NORMAL] = ERROR_COLOR;
-    alarm_colors[DLG_COLOR_FOCUS] = ERROR_FOCUS;
-    alarm_colors[DLG_COLOR_HOT_NORMAL] = ERROR_HOT_NORMAL;
-    alarm_colors[DLG_COLOR_HOT_FOCUS] = ERROR_HOT_FOCUS;
-    alarm_colors[DLG_COLOR_SELECTED_NORMAL] = ERROR_HOT_FOCUS;  // unused
-    alarm_colors[DLG_COLOR_SELECTED_FOCUS] = ERROR_FOCUS;       // unused
-    alarm_colors[DLG_COLOR_TITLE] = ERROR_TITLE;
+    alarm_colors[DLG_COLOR_NORMAL] = ERROR_NORMAL_COLOR;
+    alarm_colors[DLG_COLOR_FOCUS] = ERROR_FOCUS_COLOR;
+    alarm_colors[DLG_COLOR_HOT_NORMAL] = ERROR_HOT_NORMAL_COLOR;
+    alarm_colors[DLG_COLOR_HOT_FOCUS] = ERROR_HOT_FOCUS_COLOR;
+    alarm_colors[DLG_COLOR_SELECTED_NORMAL] = ERROR_HOT_FOCUS_COLOR;  // unused
+    alarm_colors[DLG_COLOR_SELECTED_FOCUS] = ERROR_FOCUS_COLOR;       // unused
+    alarm_colors[DLG_COLOR_TITLE] = ERROR_TITLE_COLOR;
+    alarm_colors[DLG_COLOR_FRAME] = ERROR_FRAME_COLOR;
 
     listbox_colors[DLG_COLOR_NORMAL] = PMENU_ENTRY_COLOR;
     listbox_colors[DLG_COLOR_FOCUS] = PMENU_SELECTED_COLOR;
@@ -476,6 +478,7 @@ dlg_set_default_colors (void)
     listbox_colors[DLG_COLOR_SELECTED_NORMAL] = PMENU_SELECTED_COLOR;  // unused
     listbox_colors[DLG_COLOR_SELECTED_FOCUS] = PMENU_SELECTED_COLOR;   // unused
     listbox_colors[DLG_COLOR_TITLE] = PMENU_TITLE_COLOR;
+    listbox_colors[DLG_COLOR_FRAME] = PMENU_FRAME_COLOR;
 
     help_colors[DLG_COLOR_NORMAL] = HELP_NORMAL_COLOR;
     help_colors[DLG_COLOR_FOCUS] = 0;  // unused
@@ -484,6 +487,7 @@ dlg_set_default_colors (void)
     help_colors[DLG_COLOR_SELECTED_NORMAL] = 0;  // unused
     help_colors[DLG_COLOR_SELECTED_FOCUS] = 0;   // unused
     help_colors[DLG_COLOR_TITLE] = HELP_TITLE_COLOR;
+    help_colors[DLG_COLOR_FRAME] = HELP_FRAME_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

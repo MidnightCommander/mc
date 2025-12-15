@@ -101,13 +101,13 @@ hline_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 
     case MSG_DRAW:
         if (l->transparent)
-            tty_setcolor (DEFAULT_COLOR);
+            tty_setcolor (CORE_DEFAULT_COLOR);
         else
         {
             const int *colors;
 
             colors = widget_get_colors (w);
-            tty_setcolor (colors[DLG_COLOR_NORMAL]);
+            tty_setcolor (colors[DLG_COLOR_FRAME]);
         }
 
         tty_draw_hline (w->rect.y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ], w->rect.cols - 2);

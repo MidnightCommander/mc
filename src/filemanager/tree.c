@@ -239,7 +239,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
     if (tree->searching)
     {
         // Show search string
-        tty_setcolor (INPUT_COLOR);
+        tty_setcolor (CORE_INPUT_COLOR);
         tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_char (PATH_SEP);
@@ -253,7 +253,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
         const int *colors;
 
         colors = widget_get_colors (w);
-        tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_setcolor (tree->is_panel ? CORE_NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
         tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_string (
@@ -339,7 +339,7 @@ show_tree (WTree *tree)
         const int *colors;
 
         colors = widget_get_colors (w);
-        tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_setcolor (tree->is_panel ? CORE_NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
 
         // Move to the beginning of the line
         tty_draw_hline (w->rect.y + y + i, w->rect.x + x, ' ', tree_cols);
@@ -352,7 +352,7 @@ show_tree (WTree *tree)
             gboolean selected;
 
             selected = widget_get_state (w, WST_FOCUSED) && current == tree->selected_ptr;
-            tty_setcolor (selected ? SELECTED_COLOR : NORMAL_COLOR);
+            tty_setcolor (selected ? CORE_SELECTED_COLOR : CORE_NORMAL_COLOR);
         }
         else
         {
@@ -1111,17 +1111,15 @@ tree_frame (WDialog *h, WTree *tree)
 
     (void) h;
 
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
     widget_erase (w);
     if (tree->is_panel)
     {
         const char *title = _ ("Directory tree");
         const int len = str_term_width1 (title);
 
+        tty_setcolor (CORE_FRAME_COLOR);
         tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
-
-        widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
-        tty_printf (" %s ", title);
 
         if (panels_options.show_mini_info)
         {
@@ -1135,6 +1133,10 @@ tree_frame (WDialog *h, WTree *tree)
             tty_draw_hline (w->rect.y + y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ],
                             w->rect.cols - 2);
         }
+
+        tty_setcolor (CORE_NORMAL_COLOR);
+        widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
+        tty_printf (" %s ", title);
     }
 }
 

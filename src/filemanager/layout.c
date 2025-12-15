@@ -237,7 +237,7 @@ update_split (const WDialog *h)
         check_options[0].widget->state = panels_layout.vertical_equal;
     widget_draw (WIDGET (check_options[0].widget));
 
-    tty_setcolor (check_options[0].widget->state ? DISABLED_COLOR : COLOR_NORMAL);
+    tty_setcolor (check_options[0].widget->state ? CORE_DISABLED_COLOR : DIALOG_NORMAL_COLOR);
 
     widget_gotoyx (h, 6, 5);
     if (panels_layout.horizontal_split)
@@ -326,7 +326,8 @@ layout_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void 
         if (old_layout.output_lines != _output_lines)
         {
             old_layout.output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? DIALOG_NORMAL_COLOR
+                                                             : CORE_DISABLED_COLOR);
             widget_gotoyx (w, 9, 5);
             tty_print_string (output_lines_label);
             widget_gotoyx (w, 9, 5 + 3 + output_lines_label_len);
@@ -380,7 +381,8 @@ layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
         if (old_layout.output_lines != _output_lines)
         {
             old_layout.output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? DIALOG_NORMAL_COLOR
+                                                             : CORE_DISABLED_COLOR);
             widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
@@ -1042,7 +1044,7 @@ rotate_dash (gboolean show)
         return;
 
     widget_gotoyx (w, menubar_visible ? 1 : 0, w->rect.cols - 1);
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
 
     if (!show)
         tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTTOP]);

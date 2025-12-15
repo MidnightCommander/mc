@@ -340,8 +340,9 @@ mcview_display_clean (WView *view)
 {
     Widget *w = WIDGET (view);
 
-    tty_setcolor (VIEW_NORMAL_COLOR);
+    tty_setcolor (VIEWER_NORMAL_COLOR);
     widget_erase (w);
+    tty_setcolor (VIEWER_FRAME_COLOR);
     if (view->dpy_frame_size != 0)
         tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 }
@@ -363,7 +364,7 @@ mcview_display_ruler (WView *view)
     if (ruler == RULER_NONE || r->lines < 1)
         return;
 
-    tty_setcolor (VIEW_BOLD_COLOR);
+    tty_setcolor (VIEWER_BOLD_COLOR);
     for (c = 0; c < r->cols; c++)
     {
         cl = view->dpy_text_column + c;
@@ -383,7 +384,7 @@ mcview_display_ruler (WView *view)
             }
         }
     }
-    tty_setcolor (VIEW_NORMAL_COLOR);
+    tty_setcolor (VIEWER_NORMAL_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */

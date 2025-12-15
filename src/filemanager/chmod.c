@@ -182,7 +182,7 @@ static void
 chmod_toggle_select (const WDialog *h, int Id)
 {
     check_perm[Id].selected = !check_perm[Id].selected;
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
     chmod_draw_select (h, Id);
 }
 
@@ -194,7 +194,7 @@ chmod_refresh (const WDialog *h)
     int i;
     int y, x;
 
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
 
     for (i = 0; i < BUTTONS_PERM; i++)
         chmod_draw_select (h, i);

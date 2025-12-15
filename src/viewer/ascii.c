@@ -360,7 +360,7 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
     int c2, c3;
 
     if (color != NULL)
-        *color = VIEW_NORMAL_COLOR;
+        *color = VIEWER_NORMAL_COLOR;
 
     if (!view->mode_flags.nroff)
         return mcview_get_next_char (view, state, c);
@@ -388,14 +388,14 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
         *state = state_after_nroff;
         if (color != NULL)
             *color =
-                state->nroff_underscore_is_underlined ? VIEW_UNDERLINED_COLOR : VIEW_BOLD_COLOR;
+                state->nroff_underscore_is_underlined ? VIEWER_UNDERLINED_COLOR : VIEWER_BOLD_COLOR;
     }
     else if (*c == c3)
     {
         *state = state_after_nroff;
         state->nroff_underscore_is_underlined = FALSE;
         if (color != NULL)
-            *color = VIEW_BOLD_COLOR;
+            *color = VIEWER_BOLD_COLOR;
     }
     else if (*c == '_')
     {
@@ -403,7 +403,7 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
         *state = state_after_nroff;
         state->nroff_underscore_is_underlined = TRUE;
         if (color != NULL)
-            *color = VIEW_UNDERLINED_COLOR;
+            *color = VIEWER_UNDERLINED_COLOR;
     }
 
     return TRUE;
@@ -580,7 +580,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
         }
 
         if (view->search_start <= state->offset && state->offset < view->search_end)
-            color = VIEW_SELECTED_COLOR;
+            color = VIEWER_SELECTED_COLOR;
 
         if (cs[0] == '\n')
         {
@@ -857,7 +857,7 @@ mcview_display_text (WView *view)
     view->dpy_end = state.offset;
     view->dpy_state_bottom = state;
 
-    tty_setcolor (VIEW_NORMAL_COLOR);
+    tty_setcolor (VIEWER_NORMAL_COLOR);
     if (mcview_show_eof != NULL && mcview_show_eof[0] != '\0')
         while (row < r->lines)
         {

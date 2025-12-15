@@ -234,7 +234,7 @@ print_flags (const WDialog *h)
 {
     int i;
 
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
 
     for (i = 0; i < 3; i++)
     {
@@ -273,7 +273,7 @@ print_flags (const WDialog *h)
 static void
 advanced_chown_refresh (const WDialog *h)
 {
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
 
     widget_gotoyx (h, BY - 1, advanced_chown_but[0].x + 5);
     tty_print_string (_ ("owner"));

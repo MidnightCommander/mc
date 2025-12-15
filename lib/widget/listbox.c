@@ -137,7 +137,7 @@ listbox_draw (WListbox *l, gboolean focused)
     const WRect *w = &CONST_WIDGET (l)->rect;
     const int *colors;
     gboolean disabled;
-    int normalc, selc;
+    int normalc, selc, scrollbarc;
     int length = 0;
     GList *le = NULL;
     int pos;
@@ -147,9 +147,10 @@ listbox_draw (WListbox *l, gboolean focused)
     colors = widget_get_colors (wl);
 
     disabled = widget_get_state (wl, WST_DISABLED);
-    normalc = disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL];
-    selc = disabled ? DISABLED_COLOR
+    normalc = disabled ? CORE_DISABLED_COLOR : colors[DLG_COLOR_NORMAL];
+    selc = disabled ? CORE_DISABLED_COLOR
                     : colors[focused ? DLG_COLOR_SELECTED_FOCUS : DLG_COLOR_SELECTED_NORMAL];
+    scrollbarc = disabled ? CORE_DISABLED_COLOR : colors[DLG_COLOR_FRAME];
 
     if (l->list != NULL)
     {
@@ -191,7 +192,7 @@ listbox_draw (WListbox *l, gboolean focused)
 
     if (l->scrollbar && length > w->lines)
     {
-        tty_setcolor (normalc);
+        tty_setcolor (scrollbarc);
         listbox_drawscroll (l);
     }
 }

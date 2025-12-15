@@ -525,7 +525,7 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name, gpoin
         tty_getyx (&row, &col);
 
         tty_gotoyx (0, 0);
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         tty_print_string (str_fit_to_term (event_data->msg, COLS - 1, J_LEFT));
 
         // Restore cursor position

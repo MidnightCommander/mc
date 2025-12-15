@@ -1248,7 +1248,7 @@ edit_files (const GList *files)
     g = GROUP (edit_dlg);
 
     edit_dlg->bg = WIDGET (background_new (1, 0, wd->rect.lines - 2, wd->rect.cols,
-                                           EDITOR_BACKGROUND, ' ', edit_dialog_bg_callback));
+                                           EDITOR_BACKGROUND_COLOR, ' ', edit_dialog_bg_callback));
     group_add_widget (g, edit_dlg->bg);
 
     menubar = menubar_new (NULL);

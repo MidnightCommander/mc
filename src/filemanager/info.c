@@ -87,18 +87,20 @@ info_box (WInfo *info)
     const int len = str_term_width1 (title);
 
     tty_set_normal_attrs ();
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
     widget_erase (w);
+
+    tty_setcolor (CORE_FRAME_COLOR);
     tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
-
-    widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
-    tty_printf (" %s ", title);
-
     widget_gotoyx (w, 2, 0);
     tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
     widget_gotoyx (w, 2, w->rect.cols - 1);
     tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
     tty_draw_hline (w->rect.y + 2, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ], w->rect.cols - 2);
+
+    tty_setcolor (CORE_NORMAL_COLOR);
+    widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
+    tty_printf (" %s ", title);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -120,7 +122,7 @@ info_show_info (WInfo *info)
 
     info_box (info);
 
-    tty_setcolor (MARKED_COLOR);
+    tty_setcolor (CORE_MARKED_COLOR);
     widget_gotoyx (w, 1, 3);
     tty_printf ("%s %s", PACKAGE_NAME, mc_global.mc_version);
 
@@ -152,7 +154,7 @@ info_show_info (WInfo *info)
         i18n_adjust = str_term_width1 (file_label) + 2;
     }
 
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
 
     buff = g_string_new ("");
 
