@@ -188,7 +188,7 @@ history_release_item (history_descriptor_t *hd, WLEntry *le)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Load widged history from the ${XDG_DATA_HOME}/mc/history file
+ * Load widget history from the ${XDG_DATA_HOME}/mc/history file
  *
  * @param h WDialog object, the event group area
  * @param w Widget object whose history should be loaded. If NULL, history of all widgets of @h
