@@ -41,6 +41,9 @@ typedef struct history_descriptor_t
 
 /*** declarations of public functions ************************************************************/
 
+void history_load (const WDialog *h, Widget *w);
+void history_save (const WDialog *h, Widget *w);
+
 void history_descriptor_init (history_descriptor_t *hd, int y, int x, GList *history, int current);
 
 void history_show (history_descriptor_t *hd);

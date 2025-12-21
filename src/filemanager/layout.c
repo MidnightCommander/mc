@@ -50,7 +50,6 @@
 #include "lib/vfs/vfs.h"  // vfs_get_cwd ()
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/event.h"
 #include "lib/util.h"  // mc_time_elapsed()
 
 #include "src/consaver/cons.saver.h"
@@ -1203,12 +1202,9 @@ create_panel (int num, panel_view_mode_t type)
     // same state.  Maybe we could just kill it and then replace it
     if (old_widget != NULL)
     {
+        // save directory history of panel
         if (old_type == view_listing)
-        {
-            /* save and write directory history of panel
-             * ... and other histories of filemanager  */
-            dlg_save_history (filemanager);
-        }
+            history_save (filemanager, old_widget);
 
         widget_replace (old_widget, new_widget);
     }
@@ -1219,11 +1215,7 @@ create_panel (int num, panel_view_mode_t type)
 
         // if existing panel changed type to view_listing, then load history
         if (old_widget != NULL)
-        {
-            ev_history_load_save_t event_data = { NULL, new_widget };
-
-            mc_event_raise (filemanager->event_group, MCEVENT_HISTORY_LOAD, &event_data);
-        }
+            history_load (filemanager, new_widget);
 
         if (num == 0)
             left_panel = panel;
