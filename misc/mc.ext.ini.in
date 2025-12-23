@@ -557,18 +557,22 @@ Open=@EXTHELPERSDIR@/text.sh open chm
 
 [xcf]
 Shell=.xcf
+ShellIgnoreCase=true
 Open=@EXTHELPERSDIR@/image.sh open xcf
 
 [xbm]
 Shell=.xbm
+ShellIgnoreCase=true
 Open=@EXTHELPERSDIR@/image.sh open xbm
 
 [xpm]
 Shell=.xpm
+ShellIgnoreCase=true
 Include=image
 
 [ico]
 Shell=.ico
+ShellIgnoreCase=true
 Include=image
 
 [svg]
@@ -579,22 +583,27 @@ Open=@EXTHELPERSDIR@/image.sh open svg
 
 [webp]
 Shell=.webp
+ShellIgnoreCase=true
 Include=image
 
 [avif]
 Shell=.avif
+ShellIgnoreCase=true
 Include=image
 
 [heic]
 Shell=.heic
+ShellIgnoreCase=true
 Include=image
 
 [heif]
 Shell=.heif
+ShellIgnoreCase=true
 Include=image
 
 [hif]
 Shell=.hif
+ShellIgnoreCase=true
 Include=image
 
 ### Sound files ###
