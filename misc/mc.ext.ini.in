@@ -579,13 +579,11 @@ Open=@EXTHELPERSDIR@/image.sh open svg
 
 [webp]
 Shell=.webp
-View=%view{ascii} @EXTHELPERSDIR@/image.sh view webp
-Open=@EXTHELPERSDIR@/image.sh open webp
+Include=image
 
 [avif]
 Shell=.avif
-View=%view{ascii} @EXTHELPERSDIR@/image.sh view avif
-Open=@EXTHELPERSDIR@/image.sh open avif
+Include=image
 
 [heic]
 Shell=.heic
