@@ -14,9 +14,6 @@ do_view_action() {
     filetype=$1
 
     case "${filetype}" in
-    xpm)
-        [ -n "$DISPLAY" ] && sxpm "${MC_EXT_FILENAME}"
-        ;;
     *)
         if command -v exif >/dev/null 2>&1; then
             exif "${MC_EXT_FILENAME}" 2>/dev/null
