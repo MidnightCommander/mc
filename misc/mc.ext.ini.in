@@ -555,16 +555,24 @@ Open=@EXTHELPERSDIR@/text.sh open chm
 
 ### Images ###
 
-[xcf]
-Shell=.xcf
+# Special cases
+[svg]
+Shell=.svg
 ShellIgnoreCase=true
-Open=@EXTHELPERSDIR@/image.sh open xcf
+View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
+Open=@EXTHELPERSDIR@/image.sh open svg
 
 [xbm]
 Shell=.xbm
 ShellIgnoreCase=true
 Open=@EXTHELPERSDIR@/image.sh open xbm
 
+[xcf]
+Shell=.xcf
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/image.sh open xcf
+
+# Rest
 [xpm]
 Shell=.xpm
 ShellIgnoreCase=true
@@ -574,12 +582,6 @@ Include=image
 Shell=.ico
 ShellIgnoreCase=true
 Include=image
-
-[svg]
-Shell=.svg
-ShellIgnoreCase=true
-View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
-Open=@EXTHELPERSDIR@/image.sh open svg
 
 [webp]
 Shell=.webp
