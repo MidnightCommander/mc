@@ -35,12 +35,14 @@ extern int sigwinch_pipe[2];
 
 /*** declarations of public functions ************************************************************/
 
+void load_terminfo_keys (void);
+
 void tty_create_winch_pipe (void);
 void tty_destroy_winch_pipe (void);
 
 char *mc_tty_normalize_from_utf8 (const char *str);
 void tty_init_xterm_support (gboolean is_xterm);
-int tty_lowlevel_getch (void);
+MC_MOCKABLE int tty_lowlevel_getch (void);
 
 void tty_colorize_area (int y, int x, int rows, int cols, int color);
 
