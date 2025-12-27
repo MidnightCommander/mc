@@ -152,6 +152,10 @@ gboolean should_read_new_subshell_prompt;
 /* Length of the buffer for all I/O with the subshell */
 #define PTY_BUFFER_SIZE BUF_MEDIUM  // Arbitrary; but keep it >= 80
 
+/* Assume that the kernel's cooked mode buffer size might not be larger than this.
+ * On Solaris it's 256 bytes, see ticket #4480. Shave off a few bytes, just in case. */
+#define COOKED_MODE_BUFFER_SIZE 250
+
 /*** file scope type declarations ****************************************************************/
 
 /* For pipes */
@@ -918,9 +922,22 @@ feed_subshell (int how, gboolean fail_on_error)
         }
 
         else if (FD_ISSET (subshell_pipe[READ], &read_set))
-        // Read the subshell's CWD and capture its prompt
+        // Read the subshell's CWD and later capture its prompt.
+        // We're inside an "else" branch to checking data on subshell_pty, and CWD is only written
+        // to subshell_pipe after completing the subshell command, therefore we have already read
+        // the entire output of the command.
         {
+            // CWD in subshell_pipe may not be complete yet (ticket #4480). Wait until the shell
+            // completes writing it.
+            // Note: this deadlocks if pwd is longer than a Unix pipe's buffer size, but this
+            // should not be a problem in practice, pipe size is typically at least 16kB.
+            synchronize ();
+
             const ssize_t bytes = read (subshell_pipe[READ], subshell_cwd, sizeof (subshell_cwd));
+
+            // Note: if CWD is longer than our buffer size then there are two bugs. We silently
+            // chop the value and use that directory, instead of explicitly raising an error.
+            // We also don't flush the remaining data from the pipe, breaking the next CWD read.
 
             if (bytes <= 0)
             {
@@ -931,8 +948,6 @@ feed_subshell (int how, gboolean fail_on_error)
             }
 
             subshell_cwd[(size_t) bytes - 1] = '\0';  // Squash the final '\n'
-
-            synchronize ();
 
             clear_subshell_prompt_string ();
             should_read_new_subshell_prompt = TRUE;
@@ -1267,75 +1282,171 @@ init_subshell_precmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Carefully quote directory name to allow entering any directory safely,
- * no matter what weird characters it may contain in its name.
- * NOTE: Treat directory name an untrusted data, don't allow it to cause
- * executing any commands in the shell.  Escape all control characters.
- * Use following technique:
+ * Carefully construct a 'cd' command that allows entering any directory safely. Two things to
+ * watch out for:
  *
- * printf(1) with format string containing a single conversion specifier,
- * "b", and an argument which contains a copy of the string passed to
- * subshell_name_quote() with all characters, except digits and letters,
- * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
- * numeric value of the character converted to octal number.
+ * Enter any directory safely, no matter what special bytes its name contains (special shell
+ * characters, control characters, non-printable characters, invalid UTF-8 etc.).
+ * NOTE: Treat directory name as untrusted data, don't allow it to cause executing any commands in
+ * the shell!
  *
- *   cd "`printf '%b' 'ABC\0nnnDEF\0nnnXYZ'`"
- *
- * N.B.: Use single quotes for conversion specifier to work around
- *       tcsh 6.20+ parser breakage, see ticket #3852 for the details.
+ * Keep physical lines under COOKED_MODE_BUFFER_SIZE bytes, as in some kernels the buffer for the
+ * tty line's cooked mode is quite small. If the directory name is longer, we have to somehow
+ * construct a multiline cd command.
  */
 
 static GString *
-subshell_name_quote (const char *s)
+create_cd_command (const char *s)
 {
     GString *ret;
     const char *n;
-    const char *quote_cmd_start, *quote_cmd_end;
+    const char *quote_cmd_start, *before_wrap, *after_wrap, *quote_cmd_end;
+    const char *escape_fmt;
+    int line_length;
+    char buf[BUF_TINY];
 
-    if (mc_global.shell->type == SHELL_FISH)
+    if (mc_global.shell->type == SHELL_BASH || mc_global.shell->type == SHELL_ZSH)
     {
-        quote_cmd_start = "(printf '%b' '";
-        quote_cmd_end = "')";
+        /*
+         * bash and zsh: Use $'...\ooo...' notation (ooo is three octal digits).
+         *
+         * Use octal because hex mode likes to go multibyte.
+         *
+         * Line wrapping (if necessary) with a trailing backslash outside of quotes.
+         */
+        quote_cmd_start = " cd $'";
+        before_wrap = "'\\";
+        after_wrap = "$'";
+        quote_cmd_end = "'";
+        escape_fmt = "\\%03o";
     }
-    /* TODO: When BusyBox printf is fixed, get rid of this "else if", see
-       https://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
-    /* else if (subshell_type == ASH_BUSYBOX)
-       {
-       quote_cmd_start = "\"`echo -en '";
-       quote_cmd_end = "'`\"";
-       } */
+    else if (mc_global.shell->type == SHELL_FISH)
+    {
+        /*
+         * fish: Use ...\xHH... notation (HH is two hex digits).
+         *
+         * Its syntax requires that escapes go outside of quotes, and the rest is also safe there.
+         * Use hex because it only supports octal for low (up to octal 177 / decimal 127) bytes.
+         *
+         * Line wrapping (if necessary) with a trailing backslash.
+         */
+        quote_cmd_start = " cd ";
+        before_wrap = "\\";
+        after_wrap = "";
+        quote_cmd_end = "";
+        escape_fmt = "\\x%02X";
+    }
+    else if (mc_global.shell->type == SHELL_TCSH)
+    {
+        /*
+         * tcsh: Use $'...\ooo...' notation (ooo is three octal digits).
+         *
+         * It doesn't support string contants spanning across multipline lines (a trailing
+         * backslash introduces a space), therefore construct the string in a tmp variable.
+         * Nevertheless emit a trailing backslash so it's just one line in its history.
+         *
+         * The :q modifier is needed to preserve newlines and other special chars.
+         *
+         * Note that tcsh's variables aren't binary clean, in its UTF-8 mode they are enforced
+         * to be valid UTF-8. So unfortunately we cannot enter every weird directory.
+         */
+        quote_cmd_start = " set _mc_newdir=$'";
+        before_wrap = "'; \\";
+        after_wrap = " set _mc_newdir=${_mc_newdir:q}$'";
+        quote_cmd_end = "'; cd ${_mc_newdir:q}";
+        escape_fmt = "\\%03o";
+    }
     else
     {
-        quote_cmd_start = "\"`printf '%b' '";
-        quote_cmd_end = "'`\"";
+        /*
+         * Fallback / POSIX sh: Construct a command like this:
+         *
+         *     _mc_newdir_=`printf '%b_' 'ABC\0oooDEF\0oooXYZ'`  # ooo are three octal digits
+         *     cd "${_mc_newdir_%_}"
+         *
+         * Command substitution removes trailing '\n's, hence the added and later removed '_'.
+         *
+         * Wrapping to new line with a trailing backslash outside of the innermost single quotes.
+         */
+        quote_cmd_start = " _mc_newdir_=`printf '%b_' '";
+        before_wrap = "'\\";
+        after_wrap = "'";
+        quote_cmd_end = "'`; cd \"${_mc_newdir_%_}\"";
+        escape_fmt = "\\0%03o";
     }
 
+    const int quote_cmd_start_len = strlen (quote_cmd_start);
+    const int before_wrap_len = strlen (before_wrap);
+    const int after_wrap_len = strlen (after_wrap);
+    const int quote_cmd_end_len = strlen (quote_cmd_end);
+
+    /* Measure the length of an escaped byte. In the unlikely case that it won't be uniform in some
+     * future shell, have an upper estimate by measuring the largest byte. */
+    const int escaped_char_len = sprintf (buf, escape_fmt, 0xFF);
+
     ret = g_string_sized_new (64);
+
+    // Copy the beginning of the command to the buffer
+    g_string_append_len (ret, quote_cmd_start, quote_cmd_start_len);
 
     // Prevent interpreting leading '-' as a switch for 'cd'
     if (s[0] == '-')
         g_string_append (ret, "./");
 
-    // Copy the beginning of the command to the buffer
-    g_string_append (ret, quote_cmd_start);
+    /* Sending physical lines over a certain small limit causes problems on some platforms,
+     * see ticket #4480. Make sure to wrap in time. See how large we can grow so that an
+     * additional line wrapping or closing string still fits. */
+    const int max_length = COOKED_MODE_BUFFER_SIZE - MAX (before_wrap_len, quote_cmd_end_len);
+    g_assert (max_length >= 64);  // make sure we have enough room to breathe
 
-    /*
-     * Print every character except digits and letters as a backslash-escape
-     * sequence of the form \0nnn, where "nnn" is the numeric value of the
-     * character converted to octal number.
-     */
+    line_length = ret->len;
+
+    /* Print every character except digits and letters as a backslash-escape sequence. */
     for (const char *su = s; su[0] != '\0'; su = n)
     {
         n = str_cget_next_char_safe (su);
 
-        if (str_isalnum (su))
+        // tcsh doesn't support defining strings with UTF-8 characters broken down into individual
+        // bytes each escaped in octal, such as $'\303\251' instead of 'é'. So copy all valid
+        // multibyte UTF-8 characters as-is, without escaping; they aren't special shell characters
+        // in any shell and don't need protection.
+        // Also don't escape frequent safe filename characters like '/', '.' and such.
+        if ((unsigned char) su[0] >= 0x80 || g_ascii_isalnum (su[0])
+            || strchr ("/.-_", su[0]) != NULL)
+        {
+            // It's a safe character that we copy as-is.
+            if (line_length + (n - su) > max_length)
+            {
+                // wrap to next physical line
+                g_string_append_len (ret, before_wrap, before_wrap_len);
+                g_string_append_c (ret, '\n');
+                g_string_append_len (ret, after_wrap, after_wrap_len);
+                line_length = after_wrap_len;
+            }
+            // append character
             g_string_append_len (ret, su, (size_t) (n - su));
+            line_length += (n - su);
+        }
         else
+            // It's a special shell character, or maybe an invalid UTF-8 segment.
+            // Escape each byte separately.
             for (size_t c = 0; c < (size_t) (n - su); c++)
-                g_string_append_printf (ret, "\\0%03o", (unsigned char) su[c]);
+            {
+                if (line_length + escaped_char_len > max_length)
+                {
+                    // wrap to next physical line
+                    g_string_append_len (ret, before_wrap, before_wrap_len);
+                    g_string_append_c (ret, '\n');
+                    g_string_append_len (ret, after_wrap, after_wrap_len);
+                    line_length = after_wrap_len;
+                }
+                // append escaped byte
+                g_string_append_printf (ret, escape_fmt, (unsigned char) su[c]);
+                line_length += escaped_char_len;
+            }
     }
 
-    g_string_append (ret, quote_cmd_end);
+    g_string_append_len (ret, quote_cmd_end, quote_cmd_end_len);
 
     return ret;
 }
@@ -1416,23 +1527,27 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
         feed_subshell (QUIETLY, TRUE);
     }
 
-    /* The initial space keeps this out of the command history (in bash
-       because we set "HISTCONTROL=ignorespace") */
-    write_all (mc_global.tty.subshell_pty, " cd ", 4);
-
     if (vpath == NULL)
-        write_all (mc_global.tty.subshell_pty, "/", 1);
+    {
+        /* The initial space keeps this out of the command history (in bash
+           because we set "HISTCONTROL=ignorespace") */
+        const char *cmd = " cd /";
+        write_all (mc_global.tty.subshell_pty, cmd, sizeof (cmd) - 1);
+    }
     else
     {
         const char *translate = vfs_translate_path (vfs_path_as_str (vpath));
 
         if (translate == NULL)
-            write_all (mc_global.tty.subshell_pty, ".", 1);
+        {
+            const char *cmd = " cd .";
+            write_all (mc_global.tty.subshell_pty, cmd, sizeof (cmd) - 1);
+        }
         else
         {
             GString *temp;
 
-            temp = subshell_name_quote (translate);
+            temp = create_cd_command (translate);
             write_all (mc_global.tty.subshell_pty, temp->str, temp->len);
             g_string_free (temp, TRUE);
         }
