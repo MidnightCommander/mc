@@ -227,6 +227,10 @@ static struct termios shell_mode;
 /* are delivered to the shell pty */
 static struct termios raw_mode;
 
+/* If the subshell is not yet initialized then we might be sending our initialization code.
+ * During this initialization don't flush the tty line and don't send the interrupt character. */
+static gboolean subshell_initialized = FALSE;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -259,6 +263,31 @@ write_all (int fd, const void *buf, size_t count)
         written += ret;
     }
     return written;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ *  Read in nonblocking mode.
+ *
+ *  On a tty master, waiting for data using a select() and then reading it with a blocking read()
+ *  can cause a lockup. That's because between these two steps the slave side can do a tcflush(),
+ *  revoking the data it sent earlier.
+ *
+ *  Reminder for the caller: if no data is available, but data might arrive later, this returns -1
+ *  and errno is set to EAGAIN or EWOULDBLOCK (these two may or may not have the same value).
+ *  Return value 0 means end of stream.
+ */
+
+static ssize_t
+read_nonblock (int fd, void *buf, size_t count)
+{
+    const int old_flags = fcntl (fd, F_GETFL);
+
+    fcntl (fd, F_SETFL, old_flags | O_NONBLOCK);
+    const ssize_t ret = read (fd, buf, count);
+    fcntl (fd, F_SETFL, old_flags);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -548,7 +577,7 @@ synchronize (void)
         pselect (0, NULL, NULL, NULL, NULL, &old_mask);
     }
 
-    if (subshell_state != ACTIVE)
+    if (subshell_state != ACTIVE && subshell_initialized)
     {
         // Discard all remaining data from stdin to the subshell
         tcflush (subshell_pty_slave, TCIFLUSH);
@@ -591,7 +620,7 @@ read_command_line_buffer (gboolean test_mode)
     FD_ZERO (&read_set);
     FD_SET (command_buffer_pipe[READ], &read_set);
 
-    const int maxfdp = command_buffer_pipe[READ];
+    const int maxfdp = MAX (command_buffer_pipe[READ], mc_global.tty.subshell_pty);
 
     /* First, flush the command buffer pipe. This pipe shouldn't be written
      * to under normal circumstances, but if it somehow does get written
@@ -621,11 +650,13 @@ read_command_line_buffer (gboolean test_mode)
 
     // Read the response
     subshell_prompt_timer.tv_sec = 1;
-    FD_ZERO (&read_set);
-    FD_SET (command_buffer_pipe[READ], &read_set);
 
     while (TRUE)
     {
+        FD_ZERO (&read_set);
+        FD_SET (command_buffer_pipe[READ], &read_set);
+        FD_SET (mc_global.tty.subshell_pty, &read_set);
+
         rc = select (maxfdp + 1, &read_set, NULL, NULL, &subshell_prompt_timer);
 
         if (rc == -1)
@@ -639,24 +670,42 @@ read_command_line_buffer (gboolean test_mode)
         if (rc == 0)
             return FALSE;
 
-        bytes = read (command_buffer_pipe[READ], subshell_response_buffer + response_char_length,
-                      sizeof (subshell_response_buffer) - response_char_length);
-        if (bytes <= 0
-            || (size_t) bytes == sizeof (subshell_response_buffer) - response_char_length)
-            return FALSE;
+        /* Keep reading the pty to avoid possible deadlock with the shell. This can happen if
+         * the shell drains the tty line, i.e. waits for mc to read everything, as zsh does.
+         *
+         * When testing the persistent command buffer feature, throw away that data just like
+         * we throw away during the entire subshell initialization.
+         *
+         * When using the feature (bringing back the panels with Ctrl-O), forward that data to
+         * the host terminal, just in case the user quickly beforehand made an edit to the
+         * command line which has to be reflected on the screen.
+         *
+         * See #4625, in particular #issuecomment-3425779646. */
+        if (FD_ISSET (mc_global.tty.subshell_pty, &read_set))
+            flush_subshell (0, test_mode ? QUIETLY : VISIBLY);
 
-        // Did we receive the terminating '\0'? There shouldn't be an embedded '\0', but just in
-        // case there is, stop at the first one.
-        const int latest_chunk_data_length =
-            strnlen (subshell_response_buffer + response_char_length, bytes);
-        if (latest_chunk_data_length < bytes)
+        if (FD_ISSET (command_buffer_pipe[READ], &read_set))
         {
-            // Terminating '\0' found, we're done reading
-            response_char_length += latest_chunk_data_length;
-            break;
+            bytes =
+                read (command_buffer_pipe[READ], subshell_response_buffer + response_char_length,
+                      sizeof (subshell_response_buffer) - response_char_length);
+            if (bytes <= 0
+                || (size_t) bytes == sizeof (subshell_response_buffer) - response_char_length)
+                return FALSE;
+
+            // Did we receive the terminating '\0'? There shouldn't be an embedded '\0', but just in
+            // case there is, stop at the first one.
+            const int latest_chunk_data_length =
+                strnlen (subshell_response_buffer + response_char_length, bytes);
+            if (latest_chunk_data_length < bytes)
+            {
+                // Terminating '\0' found, we're done reading
+                response_char_length += latest_chunk_data_length;
+                break;
+            }
+            // No terminating '\0' yet, keep reading
+            response_char_length += bytes;
         }
-        // No terminating '\0' yet, keep reading
-        response_char_length += bytes;
     }
 
     // fish sends a '\n' before the terminating '\0', strip it
@@ -896,11 +945,17 @@ feed_subshell (int how, gboolean fail_on_error)
         // for (i=0; i<5; ++i)  * FIXME -- experimental
         {
             const ssize_t bytes =
-                read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
+                read_nonblock (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
-            // The subshell has died
-            if (bytes == -1 && errno == EIO && !subshell_alive)
-                return FALSE;
+            if (bytes == -1)
+            {
+                if (errno == EAGAIN || errno == EWOULDBLOCK)
+                    continue;
+
+                if (errno == EIO && !subshell_alive)
+                    // The subshell has died
+                    return FALSE;
+            }
 
             if (bytes <= 0)
             {
@@ -989,7 +1044,7 @@ feed_subshell (int how, gboolean fail_on_error)
                         if (subshell_ready && !read_command_line_buffer (FALSE))
                         {
                             // If we got here, some unforeseen error must have occurred.
-                            if (mc_global.shell->type != SHELL_FISH)
+                            if (subshell_initialized && mc_global.shell->type != SHELL_FISH)
                             {
                                 write_all (mc_global.tty.subshell_pty, "\003", 1);
                                 subshell_state = RUNNING_COMMAND;
@@ -1181,9 +1236,17 @@ pty_open_slave (const char *pty_name)
 /**
  * Set up `precmd' or equivalent for reading the subshell's CWD.
  *
- * Attention! Never forget that these are *one-liners* even though the concatenated
- * substrings contain line breaks and indentation for better understanding of the
- * shell code. It is vital that each one-liner ends with a line feed character ("\n" ).
+ * Attention!
+ *
+ * Physical lines sent to the shell must not be longer than 256 characters, because above that size
+ * on some platforms the kernel's tty driver in cooked mode begins to lose characters (#4480).
+ *
+ * However, it's preferable to send one logical line to the shell, to prevent the pre-prompt
+ * function from getting executed and the prompt from getting printed multiple times. Especially
+ * executing mc's pre-prompt handler with its kill command multiple times can confuse mc.
+ *
+ * Therefore it's recommended to end lines in a physical newline, but include a logical line
+ * continuation, i.e. "\\\n" or "; \\\n" as appropriate.
  *
  * Also note that some shells support not remembering commands beginning with a space in their
  * history (HISTCONTROL=ignorespace or equivalent). Let's have leading spaces consistently
@@ -1211,11 +1274,11 @@ init_subshell_precmd (void)
      * A hop via $MC_PRECMD works because in the sub-subshell MC_PRECMD is undefined (assuming the
      * user did not export this one), thus evaluated to empty string - no damage done.
      */
-    static const char *precmd_fallback = " mc_precmd() {"
-                                         "   pwd >&%d;"
-                                         "   kill -STOP $$;"
-                                         " };"
-                                         " MC_PRECMD=mc_precmd;"
+    static const char *precmd_fallback = " mc_precmd() { \\\n"
+                                         "   pwd >&%d; \\\n"
+                                         "   kill -STOP $$; \\\n"
+                                         " }; \\\n"
+                                         " MC_PRECMD=mc_precmd; \\\n"
                                          " PS1='$($MC_PRECMD)'\"$PS1\"\n";
 
     switch (mc_global.shell->type)
@@ -1226,10 +1289,10 @@ init_subshell_precmd (void)
             "\"$READLINE_POINT\" \"$READLINE_LINE\" >&%d; }\n"
             " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
             " if test $BASH_VERSINFO -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> "
-            "/dev/null; then\n"
-            "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' )\n"
-            " else\n"
-            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'\n"
+            "/dev/null; then \\\n"
+            "   PROMPT_COMMAND+=( 'pwd >&%d; kill -STOP $$' ); \\\n"
+            " else \\\n"
+            "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd >&%d; kill -STOP $$'; \\\n"
             " fi\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
 
@@ -1250,10 +1313,10 @@ init_subshell_precmd (void)
     case SHELL_ZSH:
         return g_strdup_printf (
             " mc_print_command_buffer () { printf '%%s\\n%%s\\000' \"$CURSOR\" \"$BUFFER\" "
-            ">&%d; }\n"
-            " zle -N mc_print_command_buffer\n"
-            " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
-            " _mc_precmd() { pwd>&%d; kill -STOP $$; }\n"
+            ">&%d; }; \\\n"
+            " zle -N mc_print_command_buffer; \\\n"
+            " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer; \\\n"
+            " _mc_precmd() { pwd >&%d; kill -STOP $$; }; \\\n"
             " precmd_functions+=(_mc_precmd)\n",
             command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
 
@@ -1264,16 +1327,17 @@ init_subshell_precmd (void)
                                 tcsh_fifo);
 
     case SHELL_FISH:
-        return g_strdup_printf (" bind \\e" SHELL_BUFFER_KEYBINDING
-                                " \"begin; commandline -C; commandline; printf '\\000'; end >&%d\";"
-                                " if not functions -q fish_prompt_mc;"
-                                " functions -e fish_right_prompt;"
-                                " functions -c fish_prompt fish_prompt_mc;"
-                                " end;"
-                                " function fish_prompt;"
-                                " echo \"$PWD\" >&%d; kill -STOP $fish_pid; fish_prompt_mc;"
-                                " end\n",
-                                command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
+        return g_strdup_printf (
+            " bind \\e" SHELL_BUFFER_KEYBINDING
+            " \"begin; commandline -C; commandline; printf '\\000'; end >&%d\"; \\\n"
+            " if not functions -q fish_prompt_mc; \\\n"
+            " functions -e fish_right_prompt; \\\n"
+            " functions -c fish_prompt fish_prompt_mc; \\\n"
+            " end; \\\n"
+            " function fish_prompt; \\\n"
+            " echo \"$PWD\" >&%d; kill -STOP $fish_pid; fish_prompt_mc; \\\n"
+            " end\n",
+            command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
     default:
         fprintf (stderr, "subshell: unknown shell type (%u), aborting!\r\n", mc_global.shell->type);
         exit (EXIT_FAILURE);
@@ -1485,13 +1549,13 @@ clear_cwd_pipe (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
+do_subshell_chdir (const vfs_path_t *vpath, gboolean force, gboolean update_prompt)
 {
     char *pcwd;
 
     pcwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_RECODE);
 
-    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
+    if (!force && !(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
         /* We have to repaint the subshell prompt if we read it from
          * the main program.  Please note that in the code after this
@@ -1505,7 +1569,7 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
 
     /* If we are using a shell that doesn't support persistent command buffer, we need to clear
      * the command prompt before we send the cd command. */
-    if (!use_persistent_buffer)
+    if (!use_persistent_buffer && subshell_initialized)
     {
         write_all (mc_global.tty.subshell_pty, "\003", 1);
         subshell_state = RUNNING_COMMAND;
@@ -1631,6 +1695,8 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
 void
 init_subshell (void)
 {
+    vfs_path_t *vfs_subshell_cwd;
+
     // This must be remembered across calls to init_subshell()
     static char pty_name[BUF_SMALL];
 
@@ -1765,6 +1831,15 @@ init_subshell (void)
      * buffer function to time out every time they try to close the subshell. */
     if (use_persistent_buffer && !read_command_line_buffer (TRUE))
         use_persistent_buffer = FALSE;
+
+    /* Force an initial `cd` command, even if the subshell is already in the target directory.
+     * Testing the persistent command feature might have read and discarded the prompt. Just get
+     * a new one printed. See #4784#issuecomment-3435834623. */
+    vfs_subshell_cwd = vfs_path_from_str (subshell_cwd);
+    do_subshell_chdir (vfs_subshell_cwd, TRUE, FALSE);
+    vfs_path_free (vfs_subshell_cwd, TRUE);
+
+    subshell_initialized = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1777,7 +1852,7 @@ invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
 
     // Make the subshell change to MC's working directory
     if (new_dir_vpath != NULL)
-        do_subshell_chdir (subshell_get_cwd (), TRUE);
+        do_subshell_chdir (subshell_get_cwd (), FALSE, TRUE);
 
     if (command == NULL)  // The user has done "C-o" from MC
     {
@@ -1823,7 +1898,7 @@ invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
         {
             /* We don't need to call feed_subshell here if we are using fish, because of a
              * quirk in the behavior of that particular shell. */
-            if (mc_global.shell->type != SHELL_FISH)
+            if (subshell_initialized && mc_global.shell->type != SHELL_FISH)
             {
                 write_all (mc_global.tty.subshell_pty, "\003", 1);
                 subshell_state = RUNNING_COMMAND;
@@ -1896,10 +1971,11 @@ flush_subshell (int max_wait_length, int how)
         timeleft.tv_sec = 0;
         timeleft.tv_usec = 0;
 
-        const ssize_t bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
+        const ssize_t bytes =
+            read_nonblock (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
         // FIXME: what about bytes <= 0?
-        if (how == VISIBLY)
+        if (bytes > 0 && how == VISIBLY)
             write_all (STDOUT_FILENO, pty_buffer, (size_t) bytes);
     }
 
@@ -1941,10 +2017,13 @@ read_subshell_prompt (void)
             exit (EXIT_FAILURE);
         }
 
-        bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
+        bytes = read_nonblock (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
-        parse_subshell_prompt_string (pty_buffer, bytes);
-        got_new_prompt = TRUE;
+        if (bytes > 0)
+        {
+            parse_subshell_prompt_string (pty_buffer, bytes);
+            got_new_prompt = TRUE;
+        }
     }
 
     if (got_new_prompt)
@@ -2014,7 +2093,7 @@ void
 subshell_chdir (const vfs_path_t *vpath)
 {
     if (mc_global.tty.use_subshell && vfs_current_is_local ())
-        do_subshell_chdir (vpath, FALSE);
+        do_subshell_chdir (vpath, FALSE, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
