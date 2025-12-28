@@ -698,10 +698,10 @@ read_command_line_buffer (gboolean test_mode)
 
             // Did we receive the terminating '\0'? There shouldn't be an embedded '\0', but just in
             // case there is, stop at the first one.
-            const int latest_chunk_data_length =
+            const size_t latest_chunk_data_length =
                 strnlen (subshell_response_buffer + response_char_length, bytes);
 
-            if (latest_chunk_data_length < bytes)
+            if (latest_chunk_data_length < (size_t) bytes)
             {
                 // Terminating '\0' found, we're done reading
                 response_char_length += latest_chunk_data_length;
@@ -1443,10 +1443,10 @@ create_cd_command (const char *s)
         escape_fmt = "\\0%03o";
     }
 
-    const int quote_cmd_start_len = strlen (quote_cmd_start);
-    const int before_wrap_len = strlen (before_wrap);
-    const int after_wrap_len = strlen (after_wrap);
-    const int quote_cmd_end_len = strlen (quote_cmd_end);
+    const int quote_cmd_start_len = (int) strlen (quote_cmd_start);
+    const int before_wrap_len = (int) strlen (before_wrap);
+    const int after_wrap_len = (int) strlen (after_wrap);
+    const int quote_cmd_end_len = (int) strlen (quote_cmd_end);
 
     /* Measure the length of an escaped byte. In the unlikely case that it won't be uniform in some
      * future shell, have an upper estimate by measuring the largest byte. */
@@ -1468,7 +1468,7 @@ create_cd_command (const char *s)
 
     g_assert (max_length >= 64);  // make sure we have enough room to breathe
 
-    line_length = ret->len;
+    line_length = (int) ret->len;
 
     /* Print every character except digits and letters as a backslash-escape sequence. */
     for (const char *su = s; su[0] != '\0'; su = n)
