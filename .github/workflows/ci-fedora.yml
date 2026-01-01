@@ -84,13 +84,13 @@ jobs:
           python3 -c "print(' &bullet; '.join(f'<a href="man/{p}.html">{p}</a>' for p in '$MANPAGES'.split()))" >> man/header.html
           echo "</div>" >> man/header.html
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         if: github.ref == 'refs/heads/master'
         with:
           name: man-pages-html-${{ github.sha }}
           path: man
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: test-suite-logs-fedora
