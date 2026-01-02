@@ -445,21 +445,23 @@ mcview_search_cmd_callback (const void *user_data, off_t char_offset, int *curre
         else
             search_cb_char_buffer[0] = (char) view->search_nroff_seq->current_char;
 
-        if (view->search_nroff_seq->type != NROFF_TYPE_NONE)
+        switch (view->search_nroff_seq->type)
         {
-            switch (view->search_nroff_seq->type)
-            {
-            case NROFF_TYPE_BOLD:
-                view->search_numNeedSkipChar =
-                    1 + view->search_nroff_seq->char_length;  // real char length and 0x8
-                break;
-            case NROFF_TYPE_UNDERLINE:
-                view->search_numNeedSkipChar = 2;  // underline symbol and ox8
-                break;
-            default:
-                break;
-            }
+        case NROFF_TYPE_BOLD:
+            view->search_numNeedSkipChar =
+                view->search_nroff_seq->char_length + 1;  // letter + '\b'
+            break;
+        case NROFF_TYPE_UNDERLINE:
+            view->search_numNeedSkipChar = 2;  // '_' + '\b'
+            break;
+        case NROFF_TYPE_BOLD_UNDERLINE:
+            view->search_numNeedSkipChar =
+                2 + view->search_nroff_seq->char_length + 1;  // '_' + '\b' + letter + '\b'
+            break;
+        default:
+            break;
         }
+
         return MC_SEARCH_CB_INVALID;
     }
 
