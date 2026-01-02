@@ -68,56 +68,57 @@
  * This should be selectable independently. Default has to be black background
  * foreground does not matter at all.
  */
-#define CORE_GAUGE_COLOR           mc_skin_color__cache[40]
-#define CORE_INPUT_COLOR           mc_skin_color__cache[41]
-#define CORE_INPUT_UNCHANGED_COLOR mc_skin_color__cache[42]
-#define CORE_INPUT_MARK_COLOR      mc_skin_color__cache[43]
-#define CORE_INPUT_HISTORY_COLOR   mc_skin_color__cache[44]
-#define CORE_COMMAND_HISTORY_COLOR mc_skin_color__cache[45]
+#define CORE_GAUGE_COLOR             mc_skin_color__cache[40]
+#define CORE_INPUT_COLOR             mc_skin_color__cache[41]
+#define CORE_INPUT_UNCHANGED_COLOR   mc_skin_color__cache[42]
+#define CORE_INPUT_MARK_COLOR        mc_skin_color__cache[43]
+#define CORE_INPUT_HISTORY_COLOR     mc_skin_color__cache[44]
+#define CORE_COMMAND_HISTORY_COLOR   mc_skin_color__cache[45]
 
-#define HELP_NORMAL_COLOR          mc_skin_color__cache[46]
-#define HELP_ITALIC_COLOR          mc_skin_color__cache[47]
-#define HELP_BOLD_COLOR            mc_skin_color__cache[48]
-#define HELP_LINK_COLOR            mc_skin_color__cache[49]
-#define HELP_SLINK_COLOR           mc_skin_color__cache[50]
-#define HELP_TITLE_COLOR           mc_skin_color__cache[51]
-#define HELP_FRAME_COLOR           mc_skin_color__cache[52]
+#define HELP_NORMAL_COLOR            mc_skin_color__cache[46]
+#define HELP_ITALIC_COLOR            mc_skin_color__cache[47]
+#define HELP_BOLD_COLOR              mc_skin_color__cache[48]
+#define HELP_LINK_COLOR              mc_skin_color__cache[49]
+#define HELP_SLINK_COLOR             mc_skin_color__cache[50]
+#define HELP_TITLE_COLOR             mc_skin_color__cache[51]
+#define HELP_FRAME_COLOR             mc_skin_color__cache[52]
 
-#define VIEWER_NORMAL_COLOR        mc_skin_color__cache[53]
-#define VIEWER_BOLD_COLOR          mc_skin_color__cache[54]
-#define VIEWER_UNDERLINED_COLOR    mc_skin_color__cache[55]
-#define VIEWER_SELECTED_COLOR      mc_skin_color__cache[56]
-#define VIEWER_FRAME_COLOR         mc_skin_color__cache[57]
+#define VIEWER_NORMAL_COLOR          mc_skin_color__cache[53]
+#define VIEWER_BOLD_COLOR            mc_skin_color__cache[54]
+#define VIEWER_UNDERLINED_COLOR      mc_skin_color__cache[55]
+#define VIEWER_BOLD_UNDERLINED_COLOR mc_skin_color__cache[56]
+#define VIEWER_SELECTED_COLOR        mc_skin_color__cache[57]
+#define VIEWER_FRAME_COLOR           mc_skin_color__cache[58]
 
 /*
  * editor colors - only 4 for normal, search->found, select, and whitespace
  * respectively
  * Last is defined to view color.
  */
-#define EDITOR_NORMAL_COLOR       mc_skin_color__cache[58]
-#define EDITOR_NONPRINTABLE_COLOR mc_skin_color__cache[59]
-#define EDITOR_BOLD_COLOR         mc_skin_color__cache[60]
-#define EDITOR_MARKED_COLOR       mc_skin_color__cache[61]
-#define EDITOR_WHITESPACE_COLOR   mc_skin_color__cache[62]
-#define EDITOR_RIGHT_MARGIN_COLOR mc_skin_color__cache[63]
-#define EDITOR_BACKGROUND_COLOR   mc_skin_color__cache[64]
-#define EDITOR_FRAME_COLOR        mc_skin_color__cache[65]
-#define EDITOR_FRAME_ACTIVE_COLOR mc_skin_color__cache[66]
-#define EDITOR_FRAME_DRAG_COLOR   mc_skin_color__cache[67]
+#define EDITOR_NORMAL_COLOR       mc_skin_color__cache[59]
+#define EDITOR_NONPRINTABLE_COLOR mc_skin_color__cache[60]
+#define EDITOR_BOLD_COLOR         mc_skin_color__cache[61]
+#define EDITOR_MARKED_COLOR       mc_skin_color__cache[62]
+#define EDITOR_WHITESPACE_COLOR   mc_skin_color__cache[63]
+#define EDITOR_RIGHT_MARGIN_COLOR mc_skin_color__cache[64]
+#define EDITOR_BACKGROUND_COLOR   mc_skin_color__cache[65]
+#define EDITOR_FRAME_COLOR        mc_skin_color__cache[66]
+#define EDITOR_FRAME_ACTIVE_COLOR mc_skin_color__cache[67]
+#define EDITOR_FRAME_DRAG_COLOR   mc_skin_color__cache[68]
 /* color of left 8 char status per line */
-#define EDITOR_LINE_STATE_COLOR     mc_skin_color__cache[68]
-#define EDITOR_BOOKMARK_COLOR       mc_skin_color__cache[69]
-#define EDITOR_BOOKMARK_FOUND_COLOR mc_skin_color__cache[70]
+#define EDITOR_LINE_STATE_COLOR     mc_skin_color__cache[69]
+#define EDITOR_BOOKMARK_COLOR       mc_skin_color__cache[70]
+#define EDITOR_BOOKMARK_FOUND_COLOR mc_skin_color__cache[71]
 
 /* Diff colors */
-#define DIFFVIEWER_ADDED_COLOR       mc_skin_color__cache[71]
-#define DIFFVIEWER_CHANGEDLINE_COLOR mc_skin_color__cache[72]
-#define DIFFVIEWER_CHANGEDNEW_COLOR  mc_skin_color__cache[73]
-#define DIFFVIEWER_CHANGED_COLOR     mc_skin_color__cache[74]
-#define DIFFVIEWER_REMOVED_COLOR     mc_skin_color__cache[75]
-#define DIFFVIEWER_ERROR_COLOR       mc_skin_color__cache[76]
+#define DIFFVIEWER_ADDED_COLOR       mc_skin_color__cache[72]
+#define DIFFVIEWER_CHANGEDLINE_COLOR mc_skin_color__cache[73]
+#define DIFFVIEWER_CHANGEDNEW_COLOR  mc_skin_color__cache[74]
+#define DIFFVIEWER_CHANGED_COLOR     mc_skin_color__cache[75]
+#define DIFFVIEWER_REMOVED_COLOR     mc_skin_color__cache[76]
+#define DIFFVIEWER_ERROR_COLOR       mc_skin_color__cache[77]
 
-#define MC_SKIN_COLOR_CACHE_COUNT    77
+#define MC_SKIN_COLOR_CACHE_COUNT    78
 
 /*** enums ***************************************************************************************/
 
