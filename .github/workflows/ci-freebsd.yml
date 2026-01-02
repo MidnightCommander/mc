@@ -50,7 +50,7 @@ jobs:
               make install \
             '
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: test-suite-logs-freebsd
