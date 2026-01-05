@@ -1,6 +1,7 @@
 skindir = $(pkgdatadir)/skins
 
 skin_DATA = \
+	README.txt \
 	dark.ini \
 	darkfar.ini \
 	default.ini \
