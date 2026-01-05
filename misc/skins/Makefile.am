@@ -1,6 +1,6 @@
 skindir = $(pkgdatadir)/skins
 
-skin_DATA = \
+SKINS = \
 	dark.ini \
 	darkfar.ini \
 	default.ini \
@@ -41,5 +41,9 @@ skin_DATA = \
 	yadt256-defbg.ini \
 	yadt256.ini
 
+skin_DATA = \
+	README.txt \
+	$(SKINS)
+
 EXTRA_DIST = \
-    $(skin_DATA)
+	$(skin_DATA)
