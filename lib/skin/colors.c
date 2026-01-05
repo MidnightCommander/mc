@@ -307,6 +307,7 @@ mc_skin_color_cache_init (void)
     VIEWER_NORMAL_COLOR = mc_skin_color_get ("viewer", "_default_");
     VIEWER_BOLD_COLOR = mc_skin_color_get ("viewer", "viewbold");
     VIEWER_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewunderline");
+    VIEWER_BOLD_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewboldunderline");
     VIEWER_SELECTED_COLOR = mc_skin_color_get ("viewer", "viewselected");
     VIEWER_FRAME_COLOR = mc_skin_color_get ("viewer", "viewframe");
 

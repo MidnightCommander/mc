@@ -45,9 +45,10 @@ enum ccache_type
 
 typedef enum
 {
-    NROFF_TYPE_NONE = 0,
-    NROFF_TYPE_BOLD = 1,
-    NROFF_TYPE_UNDERLINE = 2
+    NROFF_TYPE_NONE,
+    NROFF_TYPE_BOLD,
+    NROFF_TYPE_UNDERLINE,
+    NROFF_TYPE_BOLD_UNDERLINE
 } nroff_type_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
