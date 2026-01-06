@@ -34,8 +34,12 @@
 
 #include <config.h>
 
+#include <errno.h>
+#include <fcntl.h>  // open(2)
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/stat.h>  // chmod(2)
+#include <unistd.h>    // close(2)
 
 #include "lib/global.h"
 
