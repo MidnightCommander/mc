@@ -361,7 +361,7 @@ menu_cmd (void)
 {
     int selected;
 
-    if ((get_current_index () == 0) == current_panel->active)
+    if ((get_current_index () == 0) == widget_get_state (WIDGET (current_panel), WST_FOCUSED))
         selected = 0;
     else
         selected = g_list_length (the_menubar->menu) - 1;
@@ -1402,7 +1402,7 @@ is_cmdline_mute (void)
        it's activity. Thus, we can't use get_current_type() here.
        current_panel should point to actually current active panel
        independently of it's type. */
-    return (!current_panel->active
+    return (!widget_get_state (WIDGET (current_panel), WST_FOCUSED)
             && (get_other_type () == view_quick || get_other_type () == view_tree));
 }
 

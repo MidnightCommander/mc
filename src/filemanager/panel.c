@@ -979,7 +979,7 @@ paint_dir (WPanel *panel)
 
         if (n < panel->dir.len)
         {
-            if (panel->current == n && panel->active)
+            if (panel->current == n && widget_get_state (WIDGET (panel), WST_FOCUSED))
                 attr = marked ? FATTR_MARKED_CURRENT : FATTR_CURRENT;
             else if (marked)
                 attr = FATTR_MARKED;
@@ -1271,7 +1271,7 @@ show_dir (const WPanel *panel)
         }
     }
 
-    if (panel->active)
+    if (widget_get_state (WIDGET (panel), WST_FOCUSED))
         tty_setcolor (CORE_REVERSE_COLOR);
 
     tmp = panel_correct_path_to_show (panel);
@@ -1308,7 +1308,7 @@ show_dir (const WPanel *panel)
 
     show_free_space (panel);
 
-    if (panel->active)
+    if (widget_get_state (WIDGET (panel), WST_FOCUSED))
         tty_set_normal_attrs ();
 }
 
@@ -3790,7 +3790,6 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
     case MSG_FOCUS:
         state_mark = -1;
         current_panel = panel;
-        panel->active = TRUE;
 
         if (mc_chdir (panel->cwd_vpath) != 0)
         {
@@ -3818,7 +3817,6 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
     case MSG_UNFOCUS:
         // Janne: look at this for the multiple panel options
         stop_search (panel);
-        panel->active = FALSE;
         unselect_item (panel);
         return MSG_HANDLED;
 
