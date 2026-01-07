@@ -1268,7 +1268,6 @@ swap_panels (void)
     panel2->x = panel.x;
         // Change content and related stuff
         panelswap (dir);
-        panelswap (active);
         panelswap (cwd_vpath);
         panelswap (lwd_vpath);
         panelswap (marked);
