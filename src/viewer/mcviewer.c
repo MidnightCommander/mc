@@ -167,11 +167,19 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
 
     case MSG_MOUSE_SCROLL_UP:
-        mcview_move_up (view, 2);
+        // ignore mouse wheel events in the inactive quick view panel
+        if (widget_get_state (w, WST_FOCUSED))
+            mcview_move_up (view, 2);
+        else
+            ok = FALSE;
         break;
 
     case MSG_MOUSE_SCROLL_DOWN:
-        mcview_move_down (view, 2);
+        // ignore mouse wheel events in the inactive quick view panel
+        if (widget_get_state (w, WST_FOCUSED))
+            mcview_move_down (view, 2);
+        else
+            ok = FALSE;
         break;
 
     default:
