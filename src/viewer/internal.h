@@ -263,6 +263,7 @@ void mcview_display (WView *view);
 void mcview_compute_areas (WView *view);
 void mcview_update_bytes_per_line (WView *view);
 void mcview_display_toggle_ruler (WView *view);
+void mcview_display_frame (const WView *view);
 void mcview_display_clean (WView *view);
 void mcview_display_ruler (WView *view);
 
