@@ -348,7 +348,6 @@ mcview_display_frame (const WView *view)
     const char *title = _ ("Quick view");
 
     tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_NORMAL_COLOR);
-    // TODO: truncate long title
     widget_gotoyx (w, 0, (r->cols - str_term_width1 (title) - 2) / 2);
     tty_printf (" %s ", title);
 }
