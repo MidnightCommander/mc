@@ -3649,9 +3649,8 @@ is used for popup menu title.
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white. And there is a special keyword
-for transparent background. It is 'default'. The 'default' can only be
-used for background color. Another special keyword "base" means mc's main
+cyan, brightcyan, lightgray and white; as well as "default" for the terminal's
+default foreground or background color. Another special keyword "base" means mc's main
 colors.  When 256 colors are available, they can be specified either as
 color16 to color255, or as rgb000 to rgb555 and gray0 to gray23. Example:
 .PP
