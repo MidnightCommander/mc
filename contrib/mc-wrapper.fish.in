@@ -18,5 +18,6 @@ if test -r "$MC_PWD_FILE"
 	end
 end
 
-rm -f $MC_PWD_FILE
+# invoke the external rm command, avoiding shell alias or function
+command rm -f $MC_PWD_FILE
 exit $MC_STATUS
