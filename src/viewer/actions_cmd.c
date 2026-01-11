@@ -659,6 +659,8 @@ mcview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
         return MSG_HANDLED;
 
     case MSG_DRAW:
+        if (mcview_is_in_panel (view))
+            mcview_display_frame (view);
         mcview_display (view);
         return MSG_HANDLED;
 

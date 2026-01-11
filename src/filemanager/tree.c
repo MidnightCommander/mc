@@ -1134,7 +1134,9 @@ tree_frame (WDialog *h, WTree *tree)
                             w->rect.cols - 2);
         }
 
-        tty_setcolor (CORE_NORMAL_COLOR);
+        const gboolean focused = widget_get_state (w, WST_FOCUSED);
+
+        tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_NORMAL_COLOR);
         widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
         tty_printf (" %s ", title);
     }
