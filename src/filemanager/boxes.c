@@ -83,6 +83,8 @@
 #define B_KILL   (B_USER + 3)
 #endif
 
+#define SKIN_NAME_DISPLAY_LEN 25
+
 /*** file scope type declarations ****************************************************************/
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -212,15 +214,15 @@ sel_skin_button (WButton *button, int action)
 
     (void) action;
 
-    skin_dlg = dlg_create (TRUE, 0, 0, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors,
-                           skin_dlg_callback, NULL, "[Appearance]", _ ("Skins"));
+    skin_dlg = dlg_create (TRUE, 0, 0, 13, SKIN_NAME_DISPLAY_LEN + 4, WPOS_KEEP_DEFAULT, TRUE,
+                           dialog_colors, skin_dlg_callback, NULL, "[Appearance]", _ ("Skins"));
     // use Appearance dialog for positioning
     skin_dlg->data.p = WIDGET (button)->owner;
 
     // set dialog location before all
     send_message (skin_dlg, NULL, MSG_RESIZE, 0, NULL);
 
-    skin_list = listbox_new (1, 1, 11, 22, FALSE, NULL);
+    skin_list = listbox_new (1, 1, 11, SKIN_NAME_DISPLAY_LEN + 2, FALSE, NULL);
     skin_name = "default";
     listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
                       (void *) skin_name, FALSE);
@@ -254,7 +256,7 @@ sel_skin_button (WButton *button, int action)
         current_skin_name = g_strdup (skin_name);
         skin_apply (skin_name);
 
-        button_set_text (button, str_fit_to_term (skin_label, 20, J_LEFT_FIT));
+        button_set_text (button, str_fit_to_term (skin_label, SKIN_NAME_DISPLAY_LEN, J_LEFT_FIT));
     }
     widget_destroy (WIDGET (skin_dlg));
 
@@ -655,7 +657,7 @@ appearance_box (void)
             QUICK_START_COLUMNS,
                 QUICK_LABEL (_ ("Skin:"), NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_BUTTON (str_fit_to_term (skin_name_to_label (current_skin_name), 20,
+                QUICK_BUTTON (str_fit_to_term (skin_name_to_label (current_skin_name), SKIN_NAME_DISPLAY_LEN,
                               J_LEFT_FIT), B_USER, sel_skin_button, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_SEPARATOR (TRUE),
