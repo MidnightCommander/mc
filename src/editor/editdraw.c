@@ -343,7 +343,7 @@ edit_draw_frame (const WEdit *edit, int color, gboolean active)
     {
         tty_setcolor (EDITOR_FRAME_DRAG_COLOR);
         widget_gotoyx (w, w->rect.lines - 1, w->rect.cols - 1);
-        tty_print_char (mc_tty_frm[MC_TTY_FRM_RIGHTBOTTOM]);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTBOTTOM]);
     }
 }
 
