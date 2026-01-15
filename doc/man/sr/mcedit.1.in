@@ -625,11 +625,12 @@ M\-n смењује ову опцију.
 наредника за детаље о Лиценци и одсуству гаранције.
 .SH ДОСТУПНОСТ
 Најновија верзија овог програма се може наћи на адреси
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .SH ВИДЕТИ И
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
 .SH АУТОРИ
 Пол Шир (Paul Sheer, psheer@obsidian.co.za) је првобитни аутор уграђеног
 уређивача Поноћног наредника.
 .SH ГРЕШКЕ
-Грешке пријављивати на https://github.com/MidnightCommander/mc/issues .
+Грешке пријављивати на
+\X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .

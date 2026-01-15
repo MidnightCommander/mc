@@ -4141,7 +4141,7 @@ carencia de garantía.
 .\"NODE "AVAILABILITY"
 .SH "DISPONIBILIDAD"
 La última versión de este programa se puede encontrar en
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .\"NODE "SEE ALSO"
 .SH "VÉASE TAMBIÉN"
 mcedit(1), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),
@@ -4149,7 +4149,7 @@ terminfo(1), gpm(1).
 .PP
 .nf
 La página web de Midnight Commander está en:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .PP
 La presente documentación recoge información relativa a la versión 4.8
@@ -4169,8 +4169,8 @@ distribución.
 .SH "ERRORES"
 Véase el archivo "TODO" en la distribución para saber qué falta por hacer.
 .PP
-Para informar de problemas con el programa, introducir una nueva incidencia
-en https://github.com/MidnightCommander/mc/issues .
+Para informar de problemas con el programa, introducir una nueva incidencia en
+\X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .
 .PP
 Se debe proporcionar una descripción detallada del problema, la
 versión del programa (que se obtiene con

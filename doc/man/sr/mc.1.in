@@ -4211,7 +4211,7 @@ insert=\ee[Op
 .\"NODE "AVAILABILITY"
 .SH "ДОСТУПНОСТ"
 Најновија верзија овог програма се може наћи на адреси
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .\"NODE "SEE ALSO"
 .SH "ВИДЕТИ И"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
@@ -4219,7 +4219,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Страница Поноћног наредника на Међународној мрежи:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .\"NODE "AUTHORS"
 .SH "АУТОРИ"
@@ -4230,7 +4230,7 @@ tcsh(1), zsh(1).
 уради.
 .PP
 Ако желите да пријавите проблем у вези са програмом, пошаљите пријаву грешке на:
-https://github.com/MidnightCommander/mc/issues .
+\X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .
 .PP
 Доставите детаљан опис грешке, верзију програма коју користите
 .RI ( "mc \-V"

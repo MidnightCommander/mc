@@ -3156,7 +3156,7 @@ zsh(1).
 .nf
 A Midnight Commander World Wide Web oldalának címe a
 következő:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .\"NODE "AUTHORS"
 .SH "Szerzők"
