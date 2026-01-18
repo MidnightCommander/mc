@@ -103,7 +103,7 @@ como un alias para el correspondiente guión de shell.
 .I \-s, \-\-slow
 Activa el modo para terminales lentos. En este modo el programa no
 dibuja bordes con líneas de caracteres y desactiva el modo detallado.
-Si no se rellena la sección [Lines] el marco pseudo\-gráfico estará
+Si no se rellena la sección [lines] el marco pseudo\-gráfico estará
 formado por espacios; en caso contrario el marco se contruye con
 caracteres de texto según los parámetros siguientes:
 .TP
@@ -3723,14 +3723,14 @@ Colores\&.
 .\"NODE "  Skins lines"
 .SH "  Trazado de líneas"
 Trazos de líneas de la sección
-.B [Lines]
+.B [lines]
 del archivo de skins.  Por defecto se utilizan líneas sencillas, pero
 se pueden redefinir empleando cualquier símbolo utf\-8 (por ejemplo,
 líneas dobles).
 
 .PP
 Descripción de parámetros de la sección
-.BR [Lines] :
+.BR [lines] :
 .TP
 .I lefttop
 esquina superior izquierda.

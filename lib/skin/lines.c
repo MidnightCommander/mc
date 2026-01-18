@@ -91,7 +91,12 @@ skin_get_char (mc_skin_t *mc_skin, const char *name, gunichar def, mc_tty_char_t
     estr_t conv_res;
     char *value_utf8;
 
-    value_utf8 = mc_config_get_string_raw (mc_skin->config, "Lines", name, NULL);
+    value_utf8 = mc_config_get_string_raw (mc_skin->config, "lines", name, NULL);
+    if (value_utf8 == NULL)
+    {
+        // it was called "Lines" (uppercase L) in mc <= 4.8.33, accept that for compatibility
+        value_utf8 = mc_config_get_string_raw (mc_skin->config, "Lines", name, NULL);
+    }
     if (value_utf8 != NULL)
     {
         c = g_utf8_get_char_validated (value_utf8, -1);

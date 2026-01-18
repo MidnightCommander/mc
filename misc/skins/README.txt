@@ -320,7 +320,7 @@ Character sections
 The following keys define characters to be shown at various positions on the
 display. The characters in the skin files need to be encoded in UTF-8.
 
-    [Lines]
+    [lines]
         Frame characters used all throughout mc.
 
         horiz
