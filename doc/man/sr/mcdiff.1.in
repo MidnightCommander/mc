@@ -86,9 +86,9 @@ selected=black,green"
 Лиценци и одсуству гаранције.
 .SH ДОСТУПНОСТ
 Најновија верзија овог програма се може наћи на
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .SH ВИДЕТИ И
 mc(1), mcedit(1), mcview(1)
 .PP
 .SH ГРЕШКЕ
-Грешке пријавите на https://github.com/MidnightCommander/mc/issues .
+Грешке пријавите на \X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .

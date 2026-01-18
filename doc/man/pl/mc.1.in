@@ -2837,7 +2837,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Strona Midnight Commander w sieci World Wide Web:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .PP
 .\"NODE "AUTHORS"
