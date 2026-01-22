@@ -1771,9 +1771,6 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    filemanager = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, dialog_colors,
-                              midnight_callback, NULL, "[main]", NULL);
-
     // Check if we were invoked as an editor or file viewer
     if (mc_global.mc_run_mode != MC_RUN_FULL)
     {
@@ -1782,6 +1779,9 @@ do_nc (void)
     }
     else
     {
+        filemanager = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, dialog_colors,
+                                  midnight_callback, NULL, "[main]", NULL);
+
         // We only need the first idle event to show user menu after start
         widget_idle (WIDGET (filemanager), TRUE);
 
@@ -1807,7 +1807,10 @@ do_nc (void)
     mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
-    widget_destroy (WIDGET (filemanager));
+
+    if (filemanager != NULL)
+        widget_destroy (WIDGET (filemanager));
+
     current_panel = NULL;
 
 #ifdef USE_INTERNAL_EDIT
