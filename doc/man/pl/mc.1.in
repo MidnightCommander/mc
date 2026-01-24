@@ -2708,6 +2708,13 @@ Jeśli ta opcja jest włączona (standardowo tak nie jest) kiedy przeglądasz pl
 w panelu drzewa, będzie on automatycznie przeładowywał drugi panel na
 zawartość wybranego katalogu.
 .PP
+.I kitty_keyboard_protocol
+Domyślnie Midnight Commander wysyła sekwencję escape, która włącza protokół
+klawiatury Kitty. Umożliwia on precyzyjną obsługę klawiatury (w tym kombinacje
+klawiszy takie jak C\-Enter czy C\-S\-Enter) podczas połączenia z terminalami
+obsługującymi ten protokół. Jeśli ustawione na false, Midnight Commander
+nie będzie próbował włączyć tego protokołu.
+.PP
 .\"NODE "Terminal databases"
 .SH Baza danych terminali (Terminal databases)
 Midnight Commander pozwala ci na naprawienie bazy danych terminali bez
