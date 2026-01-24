@@ -319,7 +319,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
                 || edit_buffer_get_byte (buf, end_mark) != end_string_symbol))
             end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
 
-        if (search_start >= end_mark)
+        // in case of backward search, cursor posision could be anywhere
+        if (!edit_search_options.backwards && search_start >= end_mark)
         {
             mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _ (STR_E_NOTFOUND));
             return FALSE;
