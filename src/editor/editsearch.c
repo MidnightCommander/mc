@@ -379,7 +379,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     // forward search
 
     // correct end_mark if cursor is in column 0: move end_mark to the end of previous line
-    if (end_mark == edit_calculate_start_of_current_line (buf, end_mark, end_string_symbol))
+    if (edit_search_options.only_in_selection
+        && end_mark == edit_calculate_start_of_current_line (buf, end_mark, end_string_symbol))
     {
         end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
 
