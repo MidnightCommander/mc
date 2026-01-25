@@ -1,7 +1,7 @@
 /*
    lib/terminal - tests for terminal emulation functions
 
-   Copyright (C) 2013-2025
+   Copyright (C) 2025-2026
    Free Software Foundation, Inc.
 
    Written by:
