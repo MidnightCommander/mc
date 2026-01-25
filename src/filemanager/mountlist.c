@@ -1090,8 +1090,7 @@ read_file_system_list (void)
         int i;
 
         // Ask how many bytes to allocate for the mounted file system info.
-        entries = &bufsize;
-        if (mntctl (MCTL_QUERY, sizeof (bufsize), entries) != 0)
+        if (mntctl (MCTL_QUERY, sizeof (bufsize), (char *) &bufsize) != 0)
             return NULL;
         entries = g_malloc (bufsize);
 
