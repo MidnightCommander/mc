@@ -1,7 +1,7 @@
 /*
    Terminal emulation.
 
-   Copyright (C) 2025
+   Copyright (C) 2025-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

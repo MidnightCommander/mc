@@ -1,7 +1,7 @@
 /*
    lib - Read string from mc_pipe_stream
 
-   Copyright (C) 2021-2025
+   Copyright (C) 2021-2026
    Free Software Foundation, Inc.
 
    Written by:

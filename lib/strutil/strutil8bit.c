@@ -1,7 +1,7 @@
 /*
    8bit strings utilities
 
-   Copyright (C) 2007-2025
+   Copyright (C) 2007-2026
    Free Software Foundation, Inc.
 
    Written by:

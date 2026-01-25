@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for hex view
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Written by:

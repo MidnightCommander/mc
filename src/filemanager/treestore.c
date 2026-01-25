@@ -8,7 +8,7 @@
    created and destroyed.  This is required for the future vfs layer,
    it will be possible to have tree views over virtual file systems.
 
-   Copyright (C) 1999-2025
+   Copyright (C) 1999-2026
    Free Software Foundation, Inc.
 
    Written by:

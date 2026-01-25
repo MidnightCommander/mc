@@ -1,7 +1,7 @@
 /*
    src/filemanager - examine_cd() function testing
 
-   Copyright (C) 2012-2025
+   Copyright (C) 2012-2026
    Free Software Foundation, Inc.
 
    Written by:

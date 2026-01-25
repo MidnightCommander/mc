@@ -1,7 +1,7 @@
 /*
    lib - tty function testing
 
-   Copyright (C) 2011-2025
+   Copyright (C) 2011-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

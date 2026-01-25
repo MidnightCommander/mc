@@ -1,7 +1,7 @@
 /*
    Global structure for some library-related variables
 
-   Copyright (C) 2009-2025
+   Copyright (C) 2009-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -132,7 +132,7 @@ mc_global_t mc_global =
 char *
 mc_get_package_copyright (void)
 {
-    const size_t last_year = 2025;
+    const size_t last_year = 2026;
 
     return g_strdup_printf (_ ("Copyright (C) 1996-%zu the Free Software Foundation"), last_year);
 }

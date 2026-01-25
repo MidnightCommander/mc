@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_adjust_stat() functionality
 
-   Copyright (C) 2017-2025
+   Copyright (C) 2017-2026
    Free Software Foundation, Inc.
 
    Written by:
