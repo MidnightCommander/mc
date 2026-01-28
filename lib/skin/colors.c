@@ -252,6 +252,9 @@ mc_skin_color_cache_init (void)
     CORE_DISABLED_COLOR = mc_skin_color_get ("core", "disabled");
     CORE_REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
     CORE_HEADER_COLOR = mc_skin_color_get ("core", "header");
+    CORE_HINTBAR_COLOR = mc_skin_color_get ("core", "hintbar");
+    CORE_PROMPT_COLOR = mc_skin_color_get ("core", "prompt");
+    CORE_COMMAND_COLOR = mc_skin_color_get ("core", "commandline");
     CORE_COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");
     CORE_SHADOW_COLOR = mc_skin_color_get ("core", "shadow");
     CORE_FRAME_COLOR = mc_skin_color_get ("core", "frame");

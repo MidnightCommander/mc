@@ -229,9 +229,9 @@ command_new (int y, int x, int cols)
 void
 command_set_default_colors (void)
 {
-    command_colors[INPUT_COLOR_MAIN] = CORE_DEFAULT_COLOR;
+    command_colors[INPUT_COLOR_MAIN] = CORE_COMMAND_COLOR;
     command_colors[INPUT_COLOR_MARK] = CORE_COMMAND_MARK_COLOR;
-    command_colors[INPUT_COLOR_UNCHANGED] = CORE_DEFAULT_COLOR;
+    command_colors[INPUT_COLOR_UNCHANGED] = CORE_COMMAND_COLOR;
     command_colors[INPUT_COLOR_HISTORY] = CORE_COMMAND_HISTORY_COLOR;
 }
 
