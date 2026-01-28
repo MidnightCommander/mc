@@ -13,7 +13,6 @@
    See color-slang.h (A_*) */
 
 /* cache often used colors */
-#define CORE_DEFAULT_COLOR         mc_skin_color__cache[80]  // removed in the second next commit
 #define CORE_NORMAL_COLOR          mc_skin_color__cache[0]
 #define CORE_MARKED_COLOR          mc_skin_color__cache[1]
 #define CORE_SELECTED_COLOR        mc_skin_color__cache[2]
@@ -121,7 +120,7 @@
 #define DIFFVIEWER_REMOVED_COLOR     mc_skin_color__cache[78]
 #define DIFFVIEWER_ERROR_COLOR       mc_skin_color__cache[79]
 
-#define MC_SKIN_COLOR_CACHE_COUNT    81
+#define MC_SKIN_COLOR_CACHE_COUNT    80
 
 /*** enums ***************************************************************************************/
 
