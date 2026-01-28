@@ -261,7 +261,10 @@ mc_skin_color_cache_init (void)
     mc_skin_one_color_init (CORE_DISABLED_COLOR, "core", "disabled");
     mc_skin_one_color_init (CORE_REVERSE_COLOR, "core", "reverse");
     mc_skin_one_color_init (CORE_HEADER_COLOR, "core", "header");
-    mc_skin_one_color_init (CORE_COMMAND_MARK_COLOR, "core", "commandlinemark");
+    mc_skin_one_color_init (CORE_HINTBAR_COLOR, "core", "hintbar");
+    mc_skin_one_color_init (CORE_SHELLPROMPT_COLOR, "core", "shellprompt");
+    mc_skin_one_color_init (CORE_COMMANDLINE_COLOR, "core", "commandline");
+    mc_skin_one_color_init (CORE_COMMANDLINE_MARK_COLOR, "core", "commandlinemark");
     mc_skin_one_color_init (CORE_SHADOW_COLOR, "core", "shadow");
     mc_skin_one_color_init (CORE_FRAME_COLOR, "core", "frame");
 
