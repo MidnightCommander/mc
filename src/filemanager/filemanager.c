@@ -525,7 +525,7 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name, gpoin
         tty_getyx (&row, &col);
 
         tty_gotoyx (0, 0);
-        tty_setcolor (CORE_NORMAL_COLOR);
+        tty_setcolor (CORE_DEFAULT_COLOR);
         tty_print_string (str_fit_to_term (event_data->msg, COLS - 1, J_LEFT));
 
         // Restore cursor position
@@ -886,7 +886,7 @@ create_file_manager (void)
     group_add_widget (g, get_panel_widget (1));
 
     the_hint = label_new (0, 0, NULL);
-    the_hint->transparent = TRUE;
+    the_hint->color = hintbar_colors;
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->rect.cols = COLS;
     group_add_widget (g, the_hint);
@@ -895,7 +895,7 @@ create_file_manager (void)
     group_add_widget (g, cmdline);
 
     the_prompt = label_new (0, 0, mc_prompt);
-    the_prompt->transparent = TRUE;
+    the_prompt->color = prompt_colors;
     group_add_widget (g, the_prompt);
 
     the_bar = buttonbar_new ();

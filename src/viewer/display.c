@@ -347,7 +347,7 @@ mcview_display_frame (const WView *view)
     const gboolean focused = widget_get_state (w, WST_FOCUSED);
     const char *title = _ ("Quick view");
 
-    tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_NORMAL_COLOR);
+    tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_DEFAULT_COLOR);
     widget_gotoyx (w, 0, (r->cols - str_term_width1 (title) - 2) / 2);
     tty_printf (" %s ", title);
 }

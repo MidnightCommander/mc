@@ -277,7 +277,7 @@ set_colors (const WPanel *panel)
     (void) panel;
 
     tty_set_normal_attrs ();
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -660,11 +660,11 @@ file_compute_color (const file_attr_t attr, file_entry_t *fe)
     case FATTR_MARKED_CURRENT:
         return (CORE_MARKED_SELECTED_COLOR);
     case FATTR_STATUS:
-        return (CORE_NORMAL_COLOR);
+        return (CORE_DEFAULT_COLOR);
     case FATTR_NORMAL:
     default:
         if (!panels_options.filetype_mode)
-            return (CORE_NORMAL_COLOR);
+            return (CORE_DEFAULT_COLOR);
     }
 
     return mc_fhl_get_color (mc_filehighlight, fe);
@@ -686,7 +686,7 @@ static filename_scroll_flag_t
 format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolean isstatus,
              int *field_length)
 {
-    int color = CORE_NORMAL_COLOR;
+    int color = CORE_DEFAULT_COLOR;
     int length = 0;
     GSList *format, *home;
     file_entry_t *fe = NULL;
@@ -851,12 +851,12 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
 
         const int file_color = attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT
             ? CORE_SELECTED_COLOR
-            : CORE_NORMAL_COLOR;
+            : CORE_DEFAULT_COLOR;
 
         if ((ret_frm & FILENAME_SCROLL_LEFT) != 0)
         {
             const int scroll_left_char_color =
-                panel->list_format == list_long ? file_color : CORE_NORMAL_COLOR;
+                panel->list_format == list_long ? file_color : CORE_DEFAULT_COLOR;
 
             widget_gotoyx (w, ypos, offset);
             tty_setcolor (scroll_left_char_color);
@@ -870,7 +870,7 @@ repaint_file (WPanel *panel, int file_index, file_attr_t attr)
             const int scroll_right_char_color =
                 panel->list_format != list_long && g_slist_length (panel->format) > 2
                 ? file_color
-                : CORE_NORMAL_COLOR;
+                : CORE_DEFAULT_COLOR;
 
             widget_gotoyx (w, ypos, offset);
             tty_setcolor (scroll_right_char_color);
@@ -1043,7 +1043,7 @@ mini_info_separator (const WPanel *panel)
 
         y = panel_lines (panel) + 2;
 
-        tty_setcolor (CORE_NORMAL_COLOR);
+        tty_setcolor (CORE_DEFAULT_COLOR);
         /* Status displays total marked size.
          * Centered in panel, full format. */
         display_total_marked_size (panel, y, -1, FALSE);
@@ -1092,7 +1092,7 @@ show_free_space (const WPanel *panel)
                         ? 0
                         : (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         widget_gotoyx (w, w->rect.lines - 1, w->rect.cols - 2 - (int) strlen (tmp));
-        tty_setcolor (CORE_NORMAL_COLOR);
+        tty_setcolor (CORE_DEFAULT_COLOR);
         tty_print_string (tmp);
     }
 }
@@ -1255,7 +1255,7 @@ show_dir (const WPanel *panel)
 
     g_free (tmp);
 
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
     widget_gotoyx (w, 0, 3);
 
     if (panel->is_panelized)
@@ -1293,7 +1293,7 @@ show_dir (const WPanel *panel)
 
                 g_snprintf (buffer, sizeof (buffer), " %s ",
                             size_trunc_sep (fe->st.st_size, panels_options.kilobyte_si));
-                tty_setcolor (CORE_NORMAL_COLOR);
+                tty_setcolor (CORE_DEFAULT_COLOR);
                 widget_gotoyx (w, w->rect.lines - 1, 4);
                 tty_print_string (buffer);
             }
@@ -1538,7 +1538,7 @@ panel_print_header (const WPanel *panel)
 
     widget_gotoyx (w, 1, 1);
     tty_getyx (&y, &x);
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
     tty_draw_hline (y, x, ' ', w->rect.cols - 2);
 
     format_txt = g_string_new ("");

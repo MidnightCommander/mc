@@ -1043,7 +1043,7 @@ rotate_dash (gboolean show)
         return;
 
     widget_gotoyx (w, menubar_visible ? 1 : 0, w->rect.cols - 1);
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
 
     if (!show)
         tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTTOP]);

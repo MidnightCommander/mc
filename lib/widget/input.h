@@ -19,11 +19,11 @@
 
 typedef enum
 {
-    WINPUTC_MAIN,         // color used
-    WINPUTC_MARK,         // color for marked text
-    WINPUTC_UNCHANGED,    // color for inactive text (Is first keystroke)
-    WINPUTC_HISTORY,      // color for history list
-    WINPUTC_COUNT_COLORS  // count of used colors
+    INPUT_COLOR_MAIN,       // color used
+    INPUT_COLOR_MARK,       // color for marked text
+    INPUT_COLOR_UNCHANGED,  // color for inactive text (Is first keystroke)
+    INPUT_COLOR_HISTORY,    // color for history list
+    INPUT_COLOR_COUNT       // count of used colors
 } input_colors_enum_t;
 
 /* completion flags */
@@ -41,7 +41,7 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef int input_colors_t[WINPUTC_COUNT_COLORS];
+typedef int input_colors_t[INPUT_COLOR_COUNT];
 
 typedef struct
 {
@@ -78,7 +78,7 @@ extern int quote;
 
 extern const global_keymap_t *input_map;
 
-/* Color styles for normal and command line input widgets */
+/* Color styles for input widgets */
 extern input_colors_t input_colors;
 
 /*** declarations of public functions ************************************************************/

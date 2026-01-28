@@ -48,6 +48,11 @@
 
 /*** global variables ****************************************************************************/
 
+/* Color styles for label widgets */
+label_colors_t label_colors;
+label_colors_t hintbar_colors;
+label_colors_t prompt_colors;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -78,16 +83,7 @@ label_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
             return MSG_HANDLED;
 
         disabled = widget_get_state (w, WST_DISABLED);
-
-        if (l->transparent)
-            tty_setcolor (disabled ? CORE_DISABLED_COLOR : CORE_DEFAULT_COLOR);
-        else
-        {
-            const int *colors;
-
-            colors = widget_get_colors (w);
-            tty_setcolor (disabled ? CORE_DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
-        }
+        tty_setcolor (l->color[disabled ? LABEL_COLOR_DISABLED : LABEL_COLOR_MAIN]);
 
         align = (w->pos_flags & WPOS_CENTER_HORZ) != 0 ? J_CENTER_LEFT : J_LEFT;
 
@@ -145,9 +141,31 @@ label_new (int y, int x, const char *text)
 
     l->text = g_strdup (text);
     l->auto_adjust_cols = TRUE;
-    l->transparent = FALSE;
+
+    // Most of the labels use these colors, so don't take it as a parameter to the constructor.
+    // Instead have a separate call to replace these colors when needed.
+    l->color = label_colors;
 
     return l;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Set default colors for labels.
+ */
+
+void
+label_set_default_colors (void)
+{
+    label_colors[LABEL_COLOR_MAIN] = DIALOG_NORMAL_COLOR;
+    label_colors[LABEL_COLOR_DISABLED] = CORE_DISABLED_COLOR;
+
+    hintbar_colors[LABEL_COLOR_MAIN] = CORE_HINTBAR_COLOR;
+    hintbar_colors[LABEL_COLOR_DISABLED] = CORE_DISABLED_COLOR;  // unused
+
+    prompt_colors[LABEL_COLOR_MAIN] = CORE_PROMPT_COLOR;
+    prompt_colors[LABEL_COLOR_DISABLED] = CORE_DISABLED_COLOR;  // unused
 }
 
 /* --------------------------------------------------------------------------------------------- */
