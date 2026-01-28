@@ -38,8 +38,8 @@
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"  // vfs_current_is_local()
-#include "lib/skin.h"     // CORE_DEFAULT_COLOR
-#include "lib/util.h"     // whitespace()
+#include "lib/skin.h"
+#include "lib/util.h"  // whitespace()
 #include "lib/widget.h"
 
 #include "src/setup.h"  // quit
