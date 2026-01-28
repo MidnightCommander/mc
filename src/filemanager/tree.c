@@ -253,7 +253,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
         const int *colors;
 
         colors = widget_get_colors (w);
-        tty_setcolor (tree->is_panel ? CORE_NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_setcolor (tree->is_panel ? CORE_DEFAULT_COLOR : colors[DLG_COLOR_NORMAL]);
         tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_string (
@@ -339,7 +339,7 @@ show_tree (WTree *tree)
         const int *colors;
 
         colors = widget_get_colors (w);
-        tty_setcolor (tree->is_panel ? CORE_NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_setcolor (tree->is_panel ? CORE_DEFAULT_COLOR : colors[DLG_COLOR_NORMAL]);
 
         // Move to the beginning of the line
         tty_draw_hline (w->rect.y + y + i, w->rect.x + x, ' ', tree_cols);
@@ -352,7 +352,7 @@ show_tree (WTree *tree)
             gboolean selected;
 
             selected = widget_get_state (w, WST_FOCUSED) && current == tree->selected_ptr;
-            tty_setcolor (selected ? CORE_SELECTED_COLOR : CORE_NORMAL_COLOR);
+            tty_setcolor (selected ? CORE_SELECTED_COLOR : CORE_DEFAULT_COLOR);
         }
         else
         {
@@ -1111,7 +1111,7 @@ tree_frame (WDialog *h, WTree *tree)
 
     (void) h;
 
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
     widget_erase (w);
     if (tree->is_panel)
     {
@@ -1136,7 +1136,7 @@ tree_frame (WDialog *h, WTree *tree)
 
         const gboolean focused = widget_get_state (w, WST_FOCUSED);
 
-        tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_NORMAL_COLOR);
+        tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_DEFAULT_COLOR);
         widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
         tty_printf (" %s ", title);
     }

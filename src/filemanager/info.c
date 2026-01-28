@@ -87,7 +87,7 @@ info_box (WInfo *info)
     const int len = str_term_width1 (title);
 
     tty_set_normal_attrs ();
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
     widget_erase (w);
 
     tty_setcolor (CORE_FRAME_COLOR);
@@ -98,7 +98,7 @@ info_box (WInfo *info)
     tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
     tty_draw_hline (w->rect.y + 2, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ], w->rect.cols - 2);
 
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
     widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
     tty_printf (" %s ", title);
 }
@@ -154,7 +154,7 @@ info_show_info (WInfo *info)
         i18n_adjust = str_term_width1 (file_label) + 2;
     }
 
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
 
     buff = g_string_new ("");
 

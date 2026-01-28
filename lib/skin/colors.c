@@ -243,7 +243,7 @@ mc_skin_color_set_default_for_terminal (void)
 static void
 mc_skin_color_cache_init (void)
 {
-    CORE_NORMAL_COLOR = mc_skin_color_get ("core", "_default_");
+    CORE_DEFAULT_COLOR = mc_skin_color_get ("core", "_default_");
     CORE_MARKED_COLOR = mc_skin_color_get ("core", "marked");
     CORE_SELECTED_COLOR = mc_skin_color_get ("core", "selected");
     CORE_MARKED_SELECTED_COLOR = mc_skin_color_get ("core", "markselect");

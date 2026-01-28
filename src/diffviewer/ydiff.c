@@ -2526,7 +2526,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
 
         p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
-        tty_setcolor (CORE_NORMAL_COLOR);
+        tty_setcolor (CORE_DEFAULT_COLOR);
         if (display_symbols)
         {
             tty_gotoyx (r + j, c - 2);
@@ -2653,7 +2653,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         }
     }
 
-    tty_setcolor (CORE_NORMAL_COLOR);
+    tty_setcolor (CORE_DEFAULT_COLOR);
     k = width;
     if (width < xwidth - 1)
         k = xwidth - 1;

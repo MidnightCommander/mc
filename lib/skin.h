@@ -13,7 +13,7 @@
    See color-slang.h (A_*) */
 
 /* cache often used colors */
-#define CORE_NORMAL_COLOR          mc_skin_color__cache[0]
+#define CORE_DEFAULT_COLOR         mc_skin_color__cache[0]
 #define CORE_MARKED_COLOR          mc_skin_color__cache[1]
 #define CORE_SELECTED_COLOR        mc_skin_color__cache[2]
 #define CORE_MARKED_SELECTED_COLOR mc_skin_color__cache[3]
