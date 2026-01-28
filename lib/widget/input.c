@@ -949,7 +949,7 @@ input_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 /** Create new instance of WInput object.
  * @param y                    Y coordinate
  * @param x                    X coordinate
- * @param input_colors         Array of used colors
+ * @param colors               Array of used colors
  * @param width                Widget width
  * @param def_text             Default text filled in widget
  * @param histname             Name of history

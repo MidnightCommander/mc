@@ -59,7 +59,10 @@ static const color_keyword_t color_keywords[] = {
     { CORE_DISABLED_COLOR, "core", "disabled" },
     { CORE_REVERSE_COLOR, "core", "reverse" },
     { CORE_HEADER_COLOR, "core", "header" },
-    { CORE_COMMAND_MARK_COLOR, "core", "commandlinemark" },
+    { CORE_HINTBAR_COLOR, "core", "hintbar" },
+    { CORE_SHELLPROMPT_COLOR, "core", "shellprompt" },
+    { CORE_COMMANDLINE_COLOR, "core", "commandline" },
+    { CORE_COMMANDLINE_MARK_COLOR, "core", "commandlinemark" },
     { CORE_SHADOW_COLOR, "core", "shadow" },
     { CORE_FRAME_COLOR, "core", "frame" },
 

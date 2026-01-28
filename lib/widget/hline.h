@@ -19,7 +19,6 @@ typedef struct
     Widget widget;
     char *text;
     gboolean auto_adjust_cols;  // Compute widget.cols from parent width?
-    gboolean transparent;       // Paint in the default color fg/bg
 } WHLine;
 
 /*** global variables defined in .c file *********************************************************/
