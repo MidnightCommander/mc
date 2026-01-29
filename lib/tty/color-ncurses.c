@@ -192,15 +192,8 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
 void
 tty_setcolor (int color)
 {
+    color = tty_maybe_map_color (color);
     attrset (COLOR_PAIR (color) | color_get_attr (color));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tty_lowlevel_setcolor (int color)
-{
-    tty_setcolor (color);
 }
 
 /* --------------------------------------------------------------------------------------------- */

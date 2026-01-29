@@ -49,6 +49,17 @@
 
 /*** file scope variables ************************************************************************/
 
+static const dlg_colors_t listbox_colors = {
+    [DLG_COLOR_NORMAL] = PMENU_ENTRY_COLOR,
+    [DLG_COLOR_FOCUS] = PMENU_SELECTED_COLOR,
+    [DLG_COLOR_HOT_NORMAL] = PMENU_ENTRY_COLOR,
+    [DLG_COLOR_HOT_FOCUS] = PMENU_SELECTED_COLOR,
+    [DLG_COLOR_SELECTED_NORMAL] = PMENU_SELECTED_COLOR,  // unused
+    [DLG_COLOR_SELECTED_FOCUS] = PMENU_SELECTED_COLOR,   // unused
+    [DLG_COLOR_TITLE] = PMENU_TITLE_COLOR,
+    [DLG_COLOR_FRAME] = PMENU_FRAME_COLOR,
+};
+
 /*** file scope functions ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */

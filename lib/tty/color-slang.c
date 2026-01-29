@@ -157,18 +157,8 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
 void
 tty_setcolor (int color)
 {
+    color = tty_maybe_map_color (color);
     SLsmg_set_color (color);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Set colorpair by index, don't interpret S-Lang "emulated attributes"
- */
-
-void
-tty_lowlevel_setcolor (int color)
-{
-    SLsmg_set_color (color & 0x7F);
 }
 
 /* --------------------------------------------------------------------------------------------- */

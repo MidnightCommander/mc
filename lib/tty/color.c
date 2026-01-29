@@ -50,6 +50,8 @@ static tty_color_pair_t tty_color_defaults = {
     .fg = NULL, .bg = NULL, .attrs = NULL, .pair_index = 0
 };
 
+int tty_color_role_to_pair[COLOR_MAP_SIZE];
+
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
 

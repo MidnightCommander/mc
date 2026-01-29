@@ -57,7 +57,12 @@ gboolean quote = FALSE;
 const global_keymap_t *input_map = NULL;
 
 /* Color styles for input widgets */
-input_colors_t input_colors;
+const input_colors_t input_colors = {
+    [INPUT_COLOR_MAIN] = CORE_INPUT_COLOR,
+    [INPUT_COLOR_MARK] = CORE_INPUT_MARK_COLOR,
+    [INPUT_COLOR_UNCHANGED] = CORE_INPUT_UNCHANGED_COLOR,
+    [INPUT_COLOR_HISTORY] = CORE_INPUT_HISTORY_COLOR,
+};
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -1074,17 +1079,6 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
     default:
         return widget_default_callback (w, sender, msg, parm, data);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-input_set_default_colors (void)
-{
-    input_colors[INPUT_COLOR_MAIN] = CORE_INPUT_COLOR;
-    input_colors[INPUT_COLOR_MARK] = CORE_INPUT_MARK_COLOR;
-    input_colors[INPUT_COLOR_UNCHANGED] = CORE_INPUT_UNCHANGED_COLOR;
-    input_colors[INPUT_COLOR_HISTORY] = CORE_INPUT_HISTORY_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */
