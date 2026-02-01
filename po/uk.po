@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrij Mizyk <andm1zyk@proton.me>, 2022,2025\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -2437,16 +2437,6 @@ msgstr "З’єднання по SFTP"
 msgid "Shell link to machine"
 msgstr "Shell-з’єднання з віддаленою машиною"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Відновлення файлів на файловій системі ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Введіть назву пристрою (без /dev/), на якому\n"
-"потрібно відновити файли після видалення: (F1 — подробиці)"
-
 msgid "Directory scanning"
 msgstr "Сканування каталогу"
 
@@ -3124,9 +3114,6 @@ msgstr "Фонові завдання"
 
 msgid "Screen lis&t"
 msgstr "Список екранів"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Відновлення файлів (лише ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "&Редагування формату списку"
@@ -4471,81 +4458,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: сталася помилка"
-
-msgid "not enough memory"
-msgstr "недостатньо пам’яті"
-
-msgid "while allocating block buffer"
-msgstr "при отриманні блока буфера"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "на початку сканування інформаційного вузла %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-"undelfs: завантаження інформації про видалені файли інформаційних вузлів: %d"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "під час викликання ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "не вистачило пам’яті для масиву"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "під час сканування інформаційного вузла %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Не вдалося відкрити файл %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: читається бітова карта інформаційних вузлів…"
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Не вдалося завантажити бітову карту інформаційних вузлів з:\n"
-" %s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: читається блок бітової карти…"
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Не вдалося завантажити блок бітової карти з:\n"
-" %s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info не є файловою системою."
-
-msgid "You have to chdir to extract files first"
-msgstr "Щоб видобути файли, необхідно спочатку змінити каталог"
-
-msgid "while iterating over blocks"
-msgstr "під час проходження блоків"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Не вдалося відкрити файл «%s»"
-
-msgid "Ext2lib error"
-msgstr "Сталася помилка Ext2lib"
-
 msgid "Invalid value"
 msgstr "Неправильне значення"
 
@@ -4603,6 +4515,10 @@ msgstr "ButtonBar|НеФормат."
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Формат."
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Швидкий перегляд"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4650,3 +4566,92 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Відновлення файлів на файловій системі ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Введіть назву пристрою (без /dev/), на якому\n"
+#~ "потрібно відновити файли після видалення: (F1 — подробиці)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Відновлення файлів (лише ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: сталася помилка"
+
+#~ msgid "not enough memory"
+#~ msgstr "недостатньо пам’яті"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "при отриманні блока буфера"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "на початку сканування інформаційного вузла %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr ""
+#~ "undelfs: завантаження інформації про видалені файли інформаційних вузлів: "
+#~ "%d"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "під час викликання ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "не вистачило пам’яті для масиву"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "під час сканування інформаційного вузла %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Не вдалося відкрити файл %s "
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: читається бітова карта інформаційних вузлів…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не вдалося завантажити бітову карту інформаційних вузлів з:\n"
+#~ " %s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: читається блок бітової карти…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не вдалося завантажити блок бітової карти з:\n"
+#~ " %s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info не є файловою системою."
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Щоб видобути файли, необхідно спочатку змінити каталог"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "під час проходження блоків"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Не вдалося відкрити файл «%s»"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Сталася помилка Ext2lib"

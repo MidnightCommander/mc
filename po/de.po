@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
@@ -2467,16 +2467,6 @@ msgstr "SFTP zu Server"
 msgid "Shell link to machine"
 msgstr "Shell-Verbindung zu Server"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Löschen von Dateien auf einem Ext2-Dateisystem rückgängig machen"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Namen des Gerätes (ohne /dev/) angeben, auf dem das Löschen von\n"
-"Dateien rückgängig gemacht werden soll: (Details mit F1)"
-
 msgid "Directory scanning"
 msgstr "Verzeichnis scannen"
 
@@ -3160,9 +3150,6 @@ msgstr "Hintergrundaufga&ben"
 
 msgid "Screen lis&t"
 msgstr "Bildschirm&liste"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Dateien &wiederherstellen (nur ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "&Listenformat bearbeiten"
@@ -4513,80 +4500,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek hält nicht an einer Satzgrenze an"
 
-msgid "undelfs: error"
-msgstr "undelfs: Fehler"
-
-msgid "not enough memory"
-msgstr "nicht genug Speicher"
-
-msgid "while allocating block buffer"
-msgstr "beim Bereitstellen des Blockpuffers"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "beim Starten von Inode-Scan %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: Lade Information über gelöschte Dateien, %d Inodes"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "beim Aufrufen von ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "kein Speicher mehr vorhanden während der Bereitstellung eines Arrays"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "beim Inode-Scan %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Kann Datei %s nicht öffnen"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: Lese Inode-Bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Kann Inode-Bitmap nicht lesen aus:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: Lese Block-Bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Kann Block-Bitmap nicht laden aus:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info ist nicht fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Sie müssen erst ins Verzeichnis wechseln, um Dateien zu extrahieren"
-
-msgid "while iterating over blocks"
-msgstr "beim Iterieren über Blöcke"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Kann Datei \"%s\" nicht öffnen"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib-Fehler"
-
 msgid "Invalid value"
 msgstr "Ungültiger Wert"
 
@@ -4644,6 +4557,10 @@ msgstr "ButtonBar|Unform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Schnell&ansicht"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4691,3 +4608,91 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Löschen von Dateien auf einem Ext2-Dateisystem rückgängig machen"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Namen des Gerätes (ohne /dev/) angeben, auf dem das Löschen von\n"
+#~ "Dateien rückgängig gemacht werden soll: (Details mit F1)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Dateien &wiederherstellen (nur ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: Fehler"
+
+#~ msgid "not enough memory"
+#~ msgstr "nicht genug Speicher"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "beim Bereitstellen des Blockpuffers"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "beim Starten von Inode-Scan %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: Lade Information über gelöschte Dateien, %d Inodes"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "beim Aufrufen von ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr ""
+#~ "kein Speicher mehr vorhanden während der Bereitstellung eines Arrays"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "beim Inode-Scan %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Kann Datei %s nicht öffnen"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: Lese Inode-Bitmap..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kann Inode-Bitmap nicht lesen aus:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: Lese Block-Bitmap..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kann Block-Bitmap nicht laden aus:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info ist nicht fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Sie müssen erst ins Verzeichnis wechseln, um Dateien zu extrahieren"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "beim Iterieren über Blöcke"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Kann Datei \"%s\" nicht öffnen"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib-Fehler"

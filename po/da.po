@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -2429,16 +2429,6 @@ msgstr "SFTP til maskine"
 msgid "Shell link to machine"
 msgstr "Skalhenvisning til maskine"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Gendan filer på et ext2-filsystem"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Indtast enhed (uden /dev/) for at gendanne\n"
-"filer på: (F1 for detaljer)"
-
 msgid "Directory scanning"
 msgstr "Mappeskanning"
 
@@ -3122,9 +3112,6 @@ msgstr "&Baggrundsjob"
 
 msgid "Screen lis&t"
 msgstr "Skærmlis&te"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Gendan filer (kun ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Redigering af &listeformat"
@@ -4458,80 +4445,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: Fejl"
-
-msgid "not enough memory"
-msgstr "ikke nok hukommelse"
-
-msgid "while allocating block buffer"
-msgstr "under allokering af blokmellemlager"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "under opstart af inode-skan %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: Henter information om slettede filer %d inoder"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "under kald af ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "ikke mere hukommelse under reallokering af matrice"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "under udførsel af inode-skan %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Kan ikke åbne fil %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: Læser inode-bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Kan ikke indlæse inode-bitmap fra:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: Læser blok-bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Kan ikke indlæse blok-bitmap fra:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info er ikke fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Du skal chdir for først at udtrække filer"
-
-msgid "while iterating over blocks"
-msgstr "under gentagelser over blokke"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Kan ikke åbne fil »%s«"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib-fejl"
-
 msgid "Invalid value"
 msgstr "Ugyldig værdi"
 
@@ -4589,6 +4502,10 @@ msgstr "Fjern format"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Hurtig visning"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4636,3 +4553,90 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Gendan filer på et ext2-filsystem"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Indtast enhed (uden /dev/) for at gendanne\n"
+#~ "filer på: (F1 for detaljer)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Gendan filer (kun ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: Fejl"
+
+#~ msgid "not enough memory"
+#~ msgstr "ikke nok hukommelse"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "under allokering af blokmellemlager"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "under opstart af inode-skan %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: Henter information om slettede filer %d inoder"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "under kald af ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "ikke mere hukommelse under reallokering af matrice"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "under udførsel af inode-skan %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Kan ikke åbne fil %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: Læser inode-bitmap..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kan ikke indlæse inode-bitmap fra:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: Læser blok-bitmap..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kan ikke indlæse blok-bitmap fra:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info er ikke fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Du skal chdir for først at udtrække filer"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "under gentagelser over blokke"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Kan ikke åbne fil »%s«"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib-fejl"

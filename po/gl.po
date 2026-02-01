@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Galician (http://app.transifex.com/mc/mc/language/gl/)\n"
@@ -2423,16 +2423,6 @@ msgstr "SFTP á máquina"
 msgid "Shell link to machine"
 msgstr "Ligazón á máquina do terminal"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Recuperar ficheiros dun sistema de ficheiros ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Introduza o dispositivo (sen /dev/) onde quere\n"
-"recuperar ficheiros: (F1 para máis detalles)"
-
 msgid "Directory scanning"
 msgstr "Examinando directorio"
 
@@ -3110,9 +3100,6 @@ msgstr "&Procesos en 2º plano"
 
 msgid "Screen lis&t"
 msgstr "&Lista de pantallas"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "rec&Uperar ficheiros (só ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Edición do formato de &Lista"
@@ -4421,80 +4408,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: erro"
-
-msgid "not enough memory"
-msgstr "non hai memoria abondo"
-
-msgid "while allocating block buffer"
-msgstr "ao reservar búfer de bloque"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "ao iniciar rastrexo de nodo-i %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: cargando información de ficheiros eliminados %d nodos-i"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "ao chamar a ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "esgotouse toda a memoria mentres se recolocaba a matriz"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "mentres se executaba o rastrexo de nodos-i %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Non é posíbel abrir o ficheiro %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: lendo mapa de nodos-i..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Non é posíbel cargar o mapa de nodo-i de: \n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: lendo mapa de bloques..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Non é posíbel cargar mapa de bloques de: \n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info non é fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Ten que ir ao directorio antes de extraer ficheiros"
-
-msgid "while iterating over blocks"
-msgstr "ao repetir entre bloques"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Non é posíbel abrir o ficheiro «%s»"
-
-msgid "Ext2lib error"
-msgstr "Produciuse un erro de ext2lib"
-
 msgid "Invalid value"
 msgstr "Valor incorrecto"
 
@@ -4552,6 +4465,10 @@ msgstr "ButtonBar|SenFormato"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Formato"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Vista &Rápida"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4599,3 +4516,90 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Recuperar ficheiros dun sistema de ficheiros ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Introduza o dispositivo (sen /dev/) onde quere\n"
+#~ "recuperar ficheiros: (F1 para máis detalles)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "rec&Uperar ficheiros (só ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: erro"
+
+#~ msgid "not enough memory"
+#~ msgstr "non hai memoria abondo"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "ao reservar búfer de bloque"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "ao iniciar rastrexo de nodo-i %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: cargando información de ficheiros eliminados %d nodos-i"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "ao chamar a ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "esgotouse toda a memoria mentres se recolocaba a matriz"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "mentres se executaba o rastrexo de nodos-i %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Non é posíbel abrir o ficheiro %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: lendo mapa de nodos-i..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non é posíbel cargar o mapa de nodo-i de: \n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: lendo mapa de bloques..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non é posíbel cargar mapa de bloques de: \n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info non é fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Ten que ir ao directorio antes de extraer ficheiros"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "ao repetir entre bloques"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Non é posíbel abrir o ficheiro «%s»"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Produciuse un erro de ext2lib"

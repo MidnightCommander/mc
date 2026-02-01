@@ -4,7 +4,7 @@
 #
 # Translators:
 # Ivar Smolin <okul@linux.ee>, 2021
-# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019,2024-2025
+# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019,2024-2026
 # Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2025
 # vaba <vaba@riseup.net>, 2020
 # vaba <vaba@riseup.net>, 2020
@@ -13,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>, "
-"2013-2016,2018-2019,2024-2025\n"
+"2013-2016,2018-2019,2024-2026\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -29,14 +29,14 @@ msgid "No translation"
 msgstr "Tõlkimata"
 
 msgid "Warning: cannot load codepages list"
-msgstr "Hoiatus: kooditabelide laadimine ei õnnestunud"
+msgstr "Hoiatus: kooditabelide laadimine nurjus"
 
 msgid "7-bit ASCII"
 msgstr "7-bitine ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "Tõlkimine %s-st %s-ks nurjus"
+msgstr "Ei saa tõlkida keelest %s keelde %s"
 
 msgid "Event system already initialized"
 msgstr "Sündmuste süsteem on juba lähtestatud"
@@ -68,9 +68,9 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"Fail \"%s\" on juba avatud muutmiseks.\n"
+"Fail \"%s\" on muutmiseks juba avatud.\n"
 "Kasutaja: %s\n"
-"Protsessi ID: %d"
+"Protsess: %d"
 
 msgid "File locked"
 msgstr "Fail on lukustatud"
@@ -92,8 +92,8 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
-"Väärtus ei ole oodatud vahemikus (peab olema baidi vahemikus 0x00 <= x <= "
-"0xFF, kirjutatud 16-süsteemis)"
+"Väärtus ei ole oodatud vahemikus (peab olema bait vahemikus 0x00 <= x <= "
+"0xFF, 16-süsteemis)"
 
 msgid "Invalid character"
 msgstr "Vigane märk"
@@ -1913,13 +1913,13 @@ msgstr "Töötab"
 msgid "Stopped"
 msgstr "Peatatud"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Tuvastasin kuvatava kooditabel"
+msgstr "Tuvastatud kooditabel kuvamisel: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Valisin lähtefaili kooditabeli"
+msgstr "Valitud sisendi (sisend/väljundfaili) kooditabel: %s"
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr ""
@@ -2524,16 +2524,6 @@ msgstr "SFTP masinasse"
 
 msgid "Shell link to machine"
 msgstr "Kesta ühendus masinaga"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Taasta failid ext2 failisüsteemis"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Sisesta seade (ilma /dev/'ta) millelt\n"
-"faile taastada (F1 lisainfo):"
 
 msgid "Directory scanning"
 msgstr "Kausta skannimine"
@@ -3304,9 +3294,6 @@ msgstr "&Tööd taustal"
 
 msgid "Screen lis&t"
 msgstr "&Ekraanide loend"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Taasta f&ailid (ainult ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Muuda &loendi vormindust"
@@ -4660,80 +4647,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek ei peatunud kirje piiril"
 
-msgid "undelfs: error"
-msgstr "undelfs: viga"
-
-msgid "not enough memory"
-msgstr "ei ole piisavalt mälu"
-
-msgid "while allocating block buffer"
-msgstr "ploki puhvri allokeerimisel"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "alustades i-kirje %d skannimist"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: laadime kustutatud failide informatsiooni %d i-kirjest"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "ext2_block_iterate %d väljakutsel"
-
-msgid "no more memory while reallocating array"
-msgstr "puudub mälu massiivi suuruse muutmiseks"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "i-kirje %d skannimisel"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Faili %s avamine nurjus"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: loetakse i-kirje andmeid..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"I-kirjete andmete laadimine nurjus:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: loetakse plokkide andmeid..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Plokkide andmete laadimine nurjus:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info ei viita failisüsteemile!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Enne failide lahtipakkimist pead vahetama kausta"
-
-msgid "while iterating over blocks"
-msgstr "itereerides üle plokkide"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Faili \"%s\" avamine nurjus"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib viga"
-
 msgid "Invalid value"
 msgstr "Vigane väärtus"
 
@@ -4793,6 +4706,10 @@ msgstr "ButtonBar|Vormita"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Vormiga"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Kiirvaade"
+
 msgid "Failed to read data from child stdout"
 msgstr "Järglasprotsessi standardväljundi andmete lugemine ei õnnestunud"
 
@@ -4846,3 +4763,90 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Taasta failid ext2 failisüsteemis"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Sisesta seade (ilma /dev/'ta) millelt\n"
+#~ "faile taastada (F1 lisainfo):"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Taasta f&ailid (ainult ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: viga"
+
+#~ msgid "not enough memory"
+#~ msgstr "ei ole piisavalt mälu"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "ploki puhvri allokeerimisel"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "alustades i-kirje %d skannimist"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: laadime kustutatud failide informatsiooni %d i-kirjest"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "ext2_block_iterate %d väljakutsel"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "puudub mälu massiivi suuruse muutmiseks"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "i-kirje %d skannimisel"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Faili %s avamine nurjus"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: loetakse i-kirje andmeid..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "I-kirjete andmete laadimine nurjus:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: loetakse plokkide andmeid..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Plokkide andmete laadimine nurjus:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info ei viita failisüsteemile!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Enne failide lahtipakkimist pead vahetama kausta"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "itereerides üle plokkide"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Faili \"%s\" avamine nurjus"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib viga"

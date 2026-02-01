@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -2436,16 +2436,6 @@ msgstr "SFTP către mașina"
 msgid "Shell link to machine"
 msgstr "Legătură shell către mașina"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Recuperare fișiere dintr-o partiție de tip ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Introdu dispozitivul (fără /dev/) în care se vor recupera\n"
-"fișiere: (F1 pentru detalii)"
-
 msgid "Directory scanning"
 msgstr "Scanarea dosarelor"
 
@@ -3128,9 +3118,6 @@ msgstr "Sarcini în &fundal"
 
 msgid "Screen lis&t"
 msgstr "Lis&ta ecranelor"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Rec&uperare fișiere (doar ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Editare mod de &listare"
@@ -4472,80 +4459,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: eroare"
-
-msgid "not enough memory"
-msgstr "nu există destulă memorie"
-
-msgid "while allocating block buffer"
-msgstr "în timp ce se aloca tamponul de blocuri"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "în timpul pornirii scanării de inoduri %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: încarc informațiile despre fișierele șterse: %d inoduri"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "în timp ce se rula ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "nu a mai rămas memorie în timpul realocării array-ului"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "în timpul scanării inodurilor %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Nu se poate deschide fișierul %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: citesc harta inodurilor..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Nu se poate încărca harta inodurilor din:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: citesc harta blocurilor..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Nu se poate încărca harta blocurilor din:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info nu este fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Trebuie mai întâi să chdir pentru a extrage fișierele"
-
-msgid "while iterating over blocks"
-msgstr "în timpul parcurgerii blocurilor"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Nu se poate deschide fișierul \"%s\""
-
-msgid "Ext2lib error"
-msgstr "Eroare ext2lib"
-
 msgid "Invalid value"
 msgstr "Valoare nevalidă"
 
@@ -4603,6 +4516,10 @@ msgstr "ButtonBar|Unform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Vizualizare &rapidă"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4650,3 +4567,90 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Recuperare fișiere dintr-o partiție de tip ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Introdu dispozitivul (fără /dev/) în care se vor recupera\n"
+#~ "fișiere: (F1 pentru detalii)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Rec&uperare fișiere (doar ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: eroare"
+
+#~ msgid "not enough memory"
+#~ msgstr "nu există destulă memorie"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "în timp ce se aloca tamponul de blocuri"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "în timpul pornirii scanării de inoduri %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: încarc informațiile despre fișierele șterse: %d inoduri"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "în timp ce se rula ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "nu a mai rămas memorie în timpul realocării array-ului"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "în timpul scanării inodurilor %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Nu se poate deschide fișierul %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: citesc harta inodurilor..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nu se poate încărca harta inodurilor din:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: citesc harta blocurilor..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nu se poate încărca harta blocurilor din:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info nu este fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Trebuie mai întâi să chdir pentru a extrage fișierele"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "în timpul parcurgerii blocurilor"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Nu se poate deschide fișierul \"%s\""
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Eroare ext2lib"

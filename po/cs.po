@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023,2025\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -63,7 +63,7 @@ msgstr "Nedaří vytvořit událost „%s“!"
 
 #, c-format
 msgid "Copyright (C) 1996-%zu the Free Software Foundation"
-msgstr ""
+msgstr "Autorská práva © 1996-%zu nadace Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -172,6 +172,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Nepodařilo se použít schéma vzhledu „%s“ s podporou 256 barev:\n"
+"%s\n"
+"Náhradně bylo nahráno výchozí schéma vzhledu"
 
 msgid ""
 "\n"
@@ -180,12 +183,22 @@ msgid ""
 "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
 "command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"Pokud vámi používaný terminál podporuje 256 barev, je třeba nastavit "
+"proměnnou prostředí TERM\n"
+"tak, aby odpovídala vašemu terminálu – nejspíše pomocí varianty *-256color "
+"nebo *-direct256\n"
+"Pokud chcete vypsat veškeré varianty, které jsou v systému k dispozici, "
+"použijte příkaz „toe -a“.\n"
 
 msgid ""
 "For true color support, you need version 6.1 or later of the ncurses\n"
 "library with wide character and ABI 6 or higher support.\n"
 "Please upgrade your system.\n"
 msgstr ""
+"Pro podporu true color je zapotřebí knihovny ncurses verze 6.1 a novější s "
+"podporou širokých znaků a ABI 6.\n"
+"Zaktualizujte svůj systém.\n"
 
 msgid ""
 "\n"
@@ -193,6 +206,12 @@ msgid ""
 "environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
 "Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"Pokud vámi používaný terminál podporuje true color, je třeba nastavit "
+"proměnnou prostředí TERM\n"
+"na variantu *-direct256, *-direct16, nebo *-direct\n"
+"Pokud chcete vypsat veškeré varianty, které jsou v systému k dispozici, "
+"použijte příkaz „toe -a“.\n"
 
 msgid "True color not supported in this slang version."
 msgstr "24 bitové barvy nejsou podporovány v tomto nářečí."
@@ -204,6 +223,13 @@ msgid ""
 "Use the 'toe -a' command to list all available variants on your system.\n"
 "Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
+"\n"
+"Pokud vámi používaný terminál podporuje true color, je třeba nastavit "
+"proměnnou prostředí TERM\n"
+"na variantu *-direct256, *-direct16, nebo *-direct\n"
+"Pokud chcete vypsat veškeré varianty, které jsou v systému k dispozici, "
+"použijte příkaz „toe -a“.\n"
+"Alternativně je možné nastavit COLORTERM=truecolor.\n"
 
 msgid "Escape"
 msgstr "Escape"
@@ -1893,13 +1919,13 @@ msgstr "Spuštěné"
 msgid "Stopped"
 msgstr "Zastaveno"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Zjištěná znaková sada zobrazení"
+msgstr "Zjištěná znaková sada zobrazení: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Vybraná zdrojová (souborový vstup/výstup) znaková sada"
+msgstr "Vybraná zdrojová (souborový vstup/výstup) znaková sada: %s"
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Klasický terminálový správce souborů, inspirovaný Norton Commanderem."
@@ -2240,7 +2266,7 @@ msgid "Inode uses extents"
 msgstr "I-uzel používá extent jednotek"
 
 msgid "Huge file"
-msgstr ""
+msgstr "Obrovský soubor"
 
 msgid "No COW"
 msgstr "Nepoužít kopírování při zápisu (CoW)"
@@ -2505,16 +2531,6 @@ msgstr "SFTP spojení na počítač"
 
 msgid "Shell link to machine"
 msgstr "Shellové spojení na počítač"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Obnovit soubory na souborovém systému typu ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Zadejte zařízení (bez /dev/), na kterém chcete\n"
-"obnovit soubory: (nápověda F1)"
 
 msgid "Directory scanning"
 msgstr "Prohledávání složky"
@@ -3290,9 +3306,6 @@ msgstr "Úlohy na po&zadí"
 
 msgid "Screen lis&t"
 msgstr "Seznam obrazove&k"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Obnovit smazané soubory (jen ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Upravit formát &výpisu"
@@ -4659,80 +4672,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
 
-msgid "undelfs: error"
-msgstr "undelfs: chyba"
-
-msgid "not enough memory"
-msgstr "nedostatek paměti"
-
-msgid "while allocating block buffer"
-msgstr "při přidělování vyrovnávací paměti bloků"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "při spouštění kontroly i-uzlů %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: načítají se informace o smazaných souborech %d i-uzlů"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "při volání ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "došla paměť při opětovném přidělování pole"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "při skenování i-uzlů %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Nedaří se otevřít soubor %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: čte se bitová mapa i-uzlů…"
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Nedaří se načíst bitovou mapu i-uzlů z:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: načítání bitové mapy bloku…"
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Nedaří se načíst bitovou mapu bloků z:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info není soubor. systém!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Před získáním souborů je nutné nejdříve změnit složku (chdir)"
-
-msgid "while iterating over blocks"
-msgstr "při průchodu přes bloky"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Nedaří se otevřít soubor „%s“"
-
-msgid "Ext2lib error"
-msgstr "Chyba ext2lib"
-
 msgid "Invalid value"
 msgstr "Neplatná hodnota"
 
@@ -4792,6 +4731,10 @@ msgstr "ButtonBar|Odform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Formát"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Rychlé zobrazení "
+
 msgid "Failed to read data from child stdout"
 msgstr "Nepodařilo se číst data z podřízeného standardního výstupu"
 
@@ -4846,3 +4789,90 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Obnovit soubory na souborovém systému typu ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Zadejte zařízení (bez /dev/), na kterém chcete\n"
+#~ "obnovit soubory: (nápověda F1)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Obnovit smazané soubory (jen ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: chyba"
+
+#~ msgid "not enough memory"
+#~ msgstr "nedostatek paměti"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "při přidělování vyrovnávací paměti bloků"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "při spouštění kontroly i-uzlů %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: načítají se informace o smazaných souborech %d i-uzlů"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "při volání ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "došla paměť při opětovném přidělování pole"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "při skenování i-uzlů %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Nedaří se otevřít soubor %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: čte se bitová mapa i-uzlů…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nedaří se načíst bitovou mapu i-uzlů z:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: načítání bitové mapy bloku…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nedaří se načíst bitovou mapu bloků z:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info není soubor. systém!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Před získáním souborů je nutné nejdříve změnit složku (chdir)"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "při průchodu přes bloky"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Nedaří se otevřít soubor „%s“"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Chyba ext2lib"

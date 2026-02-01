@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
@@ -2418,16 +2418,6 @@ msgstr "SFTP makinara"
 msgid "Shell link to machine"
 msgstr "Shell esteka makinara"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Berreskuratu ezabatutako fitxategiak ext2 fitxategi sistema batean"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Sartu gailua (/dev/ gabe) nondik fitxategiak\n"
-"berreskuratuko diren: (F1 xehetasunetarako)"
-
 msgid "Directory scanning"
 msgstr "Direktorio azterketa"
 
@@ -3105,9 +3095,6 @@ msgstr "&Hondoko lanak"
 
 msgid "Screen lis&t"
 msgstr "Pantaila &zerrenda"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Berreskuratu fitxategiak (soilik ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Zerrendatzeko &formatua editatu"
@@ -4418,81 +4405,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: akatsa"
-
-msgid "not enough memory"
-msgstr "ez dago behar adina memoria"
-
-msgid "while allocating block buffer"
-msgstr "bloke bufferra alokatzerakoan"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "%d inodoen azterketa hasi bitartean"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: ezabatutako fitxategien informazioa zamatzen, %d inodo"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "ext2_block_iterate %d deitzerakoan"
-
-msgid "no more memory while reallocating array"
-msgstr "memoria agortu da array-a berralokatzerakoan"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "%d inodo azterketa egin bitartean"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "%s fitxategia ezin ireki"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: inodoen bit-mapa irakurtzen..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Inode bit-mapa hemendik ezin zamatu:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: blokeen bit-mapa irakurtzen..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Blokeen bit-mapa hemendik ezin zamatu:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info ez da fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr ""
-"Fitxategiak erauzteko aurrena direktorioa aldatu (\"chdir\") behar duzu"
-
-msgid "while iterating over blocks"
-msgstr "blokeen gainean iteratzerakoan"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "\"%s\" fitxategia ezin ireki"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib akatsa"
-
 msgid "Invalid value"
 msgstr "Balio baliogabea"
 
@@ -4550,6 +4462,10 @@ msgstr "FormGabe"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Ikuspegi &azkarra"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4598,3 +4514,91 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Berreskuratu ezabatutako fitxategiak ext2 fitxategi sistema batean"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Sartu gailua (/dev/ gabe) nondik fitxategiak\n"
+#~ "berreskuratuko diren: (F1 xehetasunetarako)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Berreskuratu fitxategiak (soilik ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: akatsa"
+
+#~ msgid "not enough memory"
+#~ msgstr "ez dago behar adina memoria"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "bloke bufferra alokatzerakoan"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "%d inodoen azterketa hasi bitartean"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: ezabatutako fitxategien informazioa zamatzen, %d inodo"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "ext2_block_iterate %d deitzerakoan"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "memoria agortu da array-a berralokatzerakoan"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "%d inodo azterketa egin bitartean"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "%s fitxategia ezin ireki"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: inodoen bit-mapa irakurtzen..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Inode bit-mapa hemendik ezin zamatu:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: blokeen bit-mapa irakurtzen..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Blokeen bit-mapa hemendik ezin zamatu:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info ez da fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr ""
+#~ "Fitxategiak erauzteko aurrena direktorioa aldatu (\"chdir\") behar duzu"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "blokeen gainean iteratzerakoan"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "\"%s\" fitxategia ezin ireki"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib akatsa"

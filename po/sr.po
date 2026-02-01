@@ -11,10 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Strahinya Radich (Страхиња Радић) <sr@strahinja.org>, "
-"2003,2025\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -2525,16 +2524,6 @@ msgstr "SFTP на рачунар"
 msgid "Shell link to machine"
 msgstr "Веза љуске на рачунар"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Одбрисање датотека на ext2 систему датотека"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Унесите уређај (без /dev/) на коме ће се одбрисати\n"
-"датотеке: (F1 за појединости)"
-
 msgid "Directory scanning"
 msgstr "Скенирање директоријума"
 
@@ -3306,9 +3295,6 @@ msgstr "&Позадински послови"
 
 msgid "Screen lis&t"
 msgstr "Списак &екрана"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Одобриши датотеке (само на ext2fs-у)"
 
 msgid "&Listing format edit"
 msgstr "&Испиши уређивање записа"
@@ -4669,80 +4655,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek није заустављен на граници слога"
 
-msgid "undelfs: error"
-msgstr "undelfs: грешка"
-
-msgid "not enough memory"
-msgstr "нема довољно меморије"
-
-msgid "while allocating block buffer"
-msgstr "приликом алоцирања бафера блока"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "током покретања скенирања inode-а %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: учитавање информација о обрисаним датотекама %d inode-ова"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "током позивања ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "нема више меморије при поновној додели низу"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "током скенирања inode-а %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Не може се отворити датотека %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: читање inode битмапе..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Не може се учитати inode битмапа из:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: читање битмапе блока..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Не може се учитати битмапу блока из:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info није fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Да бисте распаковали датотеке, прво морате променити директоријум"
-
-msgid "while iterating over blocks"
-msgstr "током итерације над блоковима"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Не може се отворити датотека „%s“"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib грешка"
-
 msgid "Invalid value"
 msgstr "Неисправна вредност"
 
@@ -4802,6 +4714,10 @@ msgstr "ButtonBar|Неформ"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Формат"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Брзи преглед"
+
 msgid "Failed to read data from child stdout"
 msgstr "Неуспешно читање података са стандардног излаза подређеног процеса"
 
@@ -4856,3 +4772,90 @@ msgstr "Наставити од почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може се добавити локални примерак /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Одбрисање датотека на ext2 систему датотека"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Унесите уређај (без /dev/) на коме ће се одбрисати\n"
+#~ "датотеке: (F1 за појединости)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Одобриши датотеке (само на ext2fs-у)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: грешка"
+
+#~ msgid "not enough memory"
+#~ msgstr "нема довољно меморије"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "приликом алоцирања бафера блока"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "током покретања скенирања inode-а %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: учитавање информација о обрисаним датотекама %d inode-ова"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "током позивања ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "нема више меморије при поновној додели низу"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "током скенирања inode-а %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Не може се отворити датотека %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: читање inode битмапе..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може се учитати inode битмапа из:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: читање битмапе блока..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може се учитати битмапу блока из:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info није fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Да бисте распаковали датотеке, прво морате променити директоријум"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "током итерације над блоковима"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Не може се отворити датотека „%s“"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib грешка"

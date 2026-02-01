@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Uzbek (http://app.transifex.com/mc/mc/language/uz/)\n"
@@ -2365,14 +2365,6 @@ msgstr ""
 msgid "Shell link to machine"
 msgstr ""
 
-msgid "Undelete files on an ext2 file system"
-msgstr ""
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-
 msgid "Directory scanning"
 msgstr ""
 
@@ -3033,9 +3025,6 @@ msgid "&Background jobs"
 msgstr ""
 
 msgid "Screen lis&t"
-msgstr ""
-
-msgid "&Undelete files (ext2fs only)"
 msgstr ""
 
 msgid "&Listing format edit"
@@ -4287,76 +4276,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr ""
-
-msgid "not enough memory"
-msgstr ""
-
-msgid "while allocating block buffer"
-msgstr ""
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr ""
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr ""
-
-msgid "no more memory while reallocating array"
-msgstr ""
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr ""
-
-msgid "undelfs: reading inode bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "undelfs: reading block bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "vfs_info is not fs!"
-msgstr ""
-
-msgid "You have to chdir to extract files first"
-msgstr ""
-
-msgid "while iterating over blocks"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr ""
-
-msgid "Ext2lib error"
-msgstr ""
-
 msgid "Invalid value"
 msgstr ""
 
@@ -4412,6 +4331,9 @@ msgid "ButtonBar|Unform"
 msgstr ""
 
 msgid "ButtonBar|Format"
+msgstr ""
+
+msgid "Quick view"
 msgstr ""
 
 msgid "Failed to read data from child stdout"

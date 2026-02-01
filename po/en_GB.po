@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -56,7 +56,7 @@ msgstr "Unable to create event '%s'!"
 
 #, c-format
 msgid "Copyright (C) 1996-%zu the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-%zu the Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -165,6 +165,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Unable to use '%s' skin with 256 colours support:\n"
+"%s\n"
+"Default skin has been loaded"
 
 msgid ""
 "\n"
@@ -173,12 +176,20 @@ msgid ""
 "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
 "command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"If your terminal supports 256 colours, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 
 msgid ""
 "For true color support, you need version 6.1 or later of the ncurses\n"
 "library with wide character and ABI 6 or higher support.\n"
 "Please upgrade your system.\n"
 msgstr ""
+"For true colour support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
 
 msgid ""
 "\n"
@@ -186,6 +197,10 @@ msgid ""
 "environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
 "Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"If your terminal supports true colours, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
 
 msgid "True color not supported in this slang version."
 msgstr "True colour not supported in this slang version."
@@ -197,6 +212,11 @@ msgid ""
 "Use the 'toe -a' command to list all available variants on your system.\n"
 "Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
+"\n"
+"If your terminal supports true colours, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 
 msgid "Escape"
 msgstr "Escape"
@@ -1887,13 +1907,13 @@ msgstr "Running"
 msgid "Stopped"
 msgstr "Stopped"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Detected display codepage"
+msgstr "Detected display codepage: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Selected source (file I/O) codepage"
+msgstr "Selected source (file I/O) codepage: %s"
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Classic terminal file manager inspired by Norton Commander."
@@ -2234,7 +2254,7 @@ msgid "Inode uses extents"
 msgstr "Inode uses extents"
 
 msgid "Huge file"
-msgstr ""
+msgstr "Huge file"
 
 msgid "No COW"
 msgstr "No COW"
@@ -2499,16 +2519,6 @@ msgstr "SFTP to machine"
 
 msgid "Shell link to machine"
 msgstr "Shell link to machine"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Undelete files on an ext2 file system"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
 
 msgid "Directory scanning"
 msgstr "Directory scanning"
@@ -3281,9 +3291,6 @@ msgstr "&Background jobs"
 
 msgid "Screen lis&t"
 msgstr "Screen lis&t"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Undelete files (ext2fs only)"
 
 msgid "&Listing format edit"
 msgstr "&Listing format edit"
@@ -4637,80 +4644,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek not stopped at a record boundary"
 
-msgid "undelfs: error"
-msgstr "undelfs: error"
-
-msgid "not enough memory"
-msgstr "not enough memory"
-
-msgid "while allocating block buffer"
-msgstr "while allocating block buffer"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "while starting inode scan %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: loading deleted files information %d inodes"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "while calling ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "no more memory while reallocating array"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "while doing inode scan %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Cannot open file %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: reading inode bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Cannot load inode bitmap from:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: reading block bitmap..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Cannot load block bitmap from:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info is not fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "You have to chdir to extract files first"
-
-msgid "while iterating over blocks"
-msgstr "while iterating over blocks"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Cannot open file \"%s\""
-
-msgid "Ext2lib error"
-msgstr "Ext2lib error"
-
 msgid "Invalid value"
 msgstr "Invalid value"
 
@@ -4770,6 +4703,10 @@ msgstr "ButtonBar|Unform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Quick view"
+
 msgid "Failed to read data from child stdout"
 msgstr "Failed to read data from child stdout"
 
@@ -4824,3 +4761,90 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Undelete files on an ext2 file system"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Undelete files (ext2fs only)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: error"
+
+#~ msgid "not enough memory"
+#~ msgstr "not enough memory"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "while allocating block buffer"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "while starting inode scan %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: loading deleted files information %d inodes"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "while calling ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "no more memory while reallocating array"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "while doing inode scan %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Cannot open file %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: reading inode bitmap..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: reading block bitmap..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info is not fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "You have to chdir to extract files first"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "while iterating over blocks"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Cannot open file \"%s\""
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib error"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -1919,13 +1919,13 @@ msgstr "Wykonywanie"
 msgid "Stopped"
 msgstr "Zatrzymano"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Wykryta wyjściowa strona kodowa"
+msgstr "Wykryta wyjściowa strona kodowa: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Wybrana źródłowa (wejście/wyjście pliku) strona kodowa"
+msgstr "Wybrana źródłowa (wejście/wyjście pliku) strona kodowa: %s"
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr ""
@@ -2533,16 +2533,6 @@ msgstr "Połączenie SFTP z komputerem"
 
 msgid "Shell link to machine"
 msgstr "Połączenie po powłoce z komputerem"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Odtwórz pliki na systemie plików ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Proszę podać urządzenie (bez /dev/), na którym\n"
-"są pliki do odzyskania (F1 wyświetli więcej informacji):"
 
 msgid "Directory scanning"
 msgstr "Skanowanie katalogu"
@@ -3315,9 +3305,6 @@ msgstr "Zadania w &tle"
 
 msgid "Screen lis&t"
 msgstr "&Lista ekranów"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Odtwórz pliki (tylko system plików ext2)"
 
 msgid "&Listing format edit"
 msgstr "Modyfikacja &formatu wyświetlania"
@@ -4685,80 +4672,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
 
-msgid "undelfs: error"
-msgstr "undelfs: błąd"
-
-msgid "not enough memory"
-msgstr "brak pamięci"
-
-msgid "while allocating block buffer"
-msgstr "podczas przydzielania bufora bloku"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "podczas rozpoczynaniu skanowania i-węzłów %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: wczytywanie informacji o usuniętych plikach %d i-węzłów"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "podczas wywoływania ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "brak pamięci podczas ponownego przydzielania tablicy"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "podczas skanowania i-węzłów %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Nie można otworzyć pliku %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: odczytywanie mapy bitowej i-węzłów…"
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Nie można odczytać mapy bitowej i-węzłów z:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: odczytywanie mapy bitowej bloków…"
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Nie można wczytać mapy bitowej bloków z:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info nie systemem plików."
-
-msgid "You have to chdir to extract files first"
-msgstr "Przed rozpakowaniem plików należy zmienić katalog"
-
-msgid "while iterating over blocks"
-msgstr "podczas iterowania po blokach"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Nie można otworzyć pliku „%s”"
-
-msgid "Ext2lib error"
-msgstr "Błąd ext2lib"
-
 msgid "Invalid value"
 msgstr "Nieprawidłowa wartość"
 
@@ -4818,6 +4731,10 @@ msgstr "BezFrm"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Szybki widok"
+
 msgid "Failed to read data from child stdout"
 msgstr "Odczytanie danych z potomnego standardowego wyjścia się nie powiodło"
 
@@ -4873,3 +4790,90 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Odtwórz pliki na systemie plików ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Proszę podać urządzenie (bez /dev/), na którym\n"
+#~ "są pliki do odzyskania (F1 wyświetli więcej informacji):"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Odtwórz pliki (tylko system plików ext2)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: błąd"
+
+#~ msgid "not enough memory"
+#~ msgstr "brak pamięci"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "podczas przydzielania bufora bloku"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "podczas rozpoczynaniu skanowania i-węzłów %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: wczytywanie informacji o usuniętych plikach %d i-węzłów"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "podczas wywoływania ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "brak pamięci podczas ponownego przydzielania tablicy"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "podczas skanowania i-węzłów %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Nie można otworzyć pliku %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: odczytywanie mapy bitowej i-węzłów…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nie można odczytać mapy bitowej i-węzłów z:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: odczytywanie mapy bitowej bloków…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nie można wczytać mapy bitowej bloków z:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info nie systemem plików."
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Przed rozpakowaniem plików należy zmienić katalog"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "podczas iterowania po blokach"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Nie można otworzyć pliku „%s”"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Błąd ext2lib"
