@@ -57,11 +57,6 @@
 
 /*** global variables ****************************************************************************/
 
-/* If true program softkeys (HP terminals only) on startup and after every
-   command ran in the subshell to the description found in the termcap/terminfo
-   database */
-int reset_hp_softkeys = 0;
-
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef SLTT_MAX_SCREEN_COLS
@@ -157,45 +152,6 @@ sigwinch_handler (int dummy)
     (void) n;
 
     (void) SLsignal (SIGWINCH, sigwinch_handler);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* HP Terminals have capabilities (pfkey, pfloc, pfx) to program function keys.
-   elm 2.4pl15 invoked with the -K option utilizes these softkeys and the
-   consequence is that function keys don't work in MC sometimes...
-   Unfortunately I don't now the one and only escape sequence to turn off.
-   softkeys (elm uses three different capabilities to turn on softkeys and two.
-   capabilities to turn them off)..
-   Among other things elm uses the pair we already use in slang_keypad. That's.
-   the reason why I call slang_reset_softkeys from slang_keypad. In lack of
-   something better the softkeys are programmed to their defaults from the
-   termcap/terminfo database.
-   The escape sequence to program the softkeys is taken from elm and it is.
-   hardcoded because neither slang nor ncurses 4.1 know how to 'printf' this.
-   sequence. -- Norbert
- */
-
-static void
-slang_reset_softkeys (void)
-{
-    int key;
-    static const char display[] = "                ";
-    char tmp[BUF_SMALL];
-
-    for (key = 1; key < 9; key++)
-    {
-        char *send;
-
-        g_snprintf (tmp, sizeof (tmp), "k%d", key);
-        send = SLtt_tgetstr (tmp);
-        if (send != NULL)
-        {
-            g_snprintf (tmp, sizeof (tmp), ESC_STR "&f%dk%dd%dL%s%s", key,
-                        (int) (sizeof (display) - 1), (int) strlen (send), display, send);
-            SLtt_write_string (tmp);
-        }
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -448,10 +404,9 @@ tty_keypad (gboolean set)
     char *keypad_string;
 
     keypad_string = SLtt_tgetstr ((SLFUTURE_CONST char *) (set ? "ks" : "ke"));
+
     if (keypad_string != NULL)
         SLtt_write_string (keypad_string);
-    if (set && reset_hp_softkeys)
-        slang_reset_softkeys ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

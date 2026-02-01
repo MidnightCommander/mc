@@ -51,10 +51,6 @@ Midnight Commander.
 Force a "normal tracking" mouse mode. Used when running on
 xterm\-capable terminals (tmux/screen).
 .TP
-.I \-k, \-\-resetsoft
-Reset softkeys to their default from the termcap/terminfo
-database. Only useful on HP terminals when the function keys don't work.
-.TP
 .I \-K file, \-\-keymap=file
 Specify a name of keymap file in the command line.
 .TP
