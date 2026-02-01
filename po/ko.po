@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Junghee Lee <daemul72@gmail.com>, 2021
-# Junghee Lee <daemul72@gmail.com>, 2019-2020
+# JungHee Lee <daemul72@gmail.com>, 2021
+# JungHee Lee <daemul72@gmail.com>, 2019-2020
 # JinYeong Bak <dongdm@gmail.com>, 2016
-# Junghee Lee <daemul72@gmail.com>, 2022-2023
-# Junghee Lee <daemul72@gmail.com>, 2022
-# Junghee Lee <daemul72@gmail.com>, 2019-2021,2023
+# JungHee Lee <daemul72@gmail.com>, 2022-2023
+# JungHee Lee <daemul72@gmail.com>, 2022
+# JungHee Lee <daemul72@gmail.com>, 2019-2021,2023
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2023-2024
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Yury V. Zaytsev <yury@shurup.com>, 2025
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -2427,16 +2427,6 @@ msgstr "호스트에 SFTP"
 msgid "Shell link to machine"
 msgstr "호스트에 쉘 링크"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "ext2 파일 시스템에서 파일 삭제 해제"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"삭제를 취소할 장치 입력 (/dev/ 없이).\n"
-"다음 파일: (자세한 내용은 F1)"
-
 msgid "Directory scanning"
 msgstr "디렉터리 스캐닝"
 
@@ -3118,9 +3108,6 @@ msgstr "백그라운드 작업(&B)"
 
 msgid "Screen lis&t"
 msgstr "화면 목록(&T)"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "파일 삭제취소 (est2fs만 가능)(&U)"
 
 msgid "&Listing format edit"
 msgstr "파일 목록 형식 편집(&L)"
@@ -4454,80 +4441,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek가 레코드 경계에서 멈추지 않았습니다"
 
-msgid "undelfs: error"
-msgstr "unelfs: 오류"
-
-msgid "not enough memory"
-msgstr "메모리 부족"
-
-msgid "while allocating block buffer"
-msgstr "블록 버퍼를 할당하는 동안"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "inode 스캔 %d를 시작하는 동안"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "unelfs: 삭제된 파일 정보 %d inode 불러오는 중"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "ext2_block_iterate %d을(를) 호출하는 중"
-
-msgid "no more memory while reallocating array"
-msgstr "배열을 재할당하는 동안 메모리가 더 이상 없음"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "inode 스캔 %d를 수행하는 동안"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "%s 파일을 열 수 없음"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "unelfs: inode 비트맵 읽는 중..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"다음 위치에서 inode 비트맵을 로드할 수 없음:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "unelfs: 블록 비트맵 읽는 중..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"블록 비트맵을 로드할 수 없음:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info는 파일 시스템이 아닙니다!"
-
-msgid "You have to chdir to extract files first"
-msgstr "먼저 파일을 추출하려면 디렉터리 변경이 필요함."
-
-msgid "while iterating over blocks"
-msgstr "블록을 반복하는 동안"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "\"%s\" 파일을 열 수 없음"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib 오류"
-
 msgid "Invalid value"
 msgstr "잘못된 값"
 
@@ -4585,6 +4498,10 @@ msgstr " 형식화되지 않음"
 msgid "ButtonBar|Format"
 msgstr " 형식"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "빠른 보기(&Q)"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4632,3 +4549,90 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "ext2 파일 시스템에서 파일 삭제 해제"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "삭제를 취소할 장치 입력 (/dev/ 없이).\n"
+#~ "다음 파일: (자세한 내용은 F1)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "파일 삭제취소 (est2fs만 가능)(&U)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "unelfs: 오류"
+
+#~ msgid "not enough memory"
+#~ msgstr "메모리 부족"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "블록 버퍼를 할당하는 동안"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "inode 스캔 %d를 시작하는 동안"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "unelfs: 삭제된 파일 정보 %d inode 불러오는 중"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "ext2_block_iterate %d을(를) 호출하는 중"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "배열을 재할당하는 동안 메모리가 더 이상 없음"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "inode 스캔 %d를 수행하는 동안"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "%s 파일을 열 수 없음"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "unelfs: inode 비트맵 읽는 중..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "다음 위치에서 inode 비트맵을 로드할 수 없음:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "unelfs: 블록 비트맵 읽는 중..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "블록 비트맵을 로드할 수 없음:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info는 파일 시스템이 아닙니다!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "먼저 파일을 추출하려면 디렉터리 변경이 필요함."
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "블록을 반복하는 동안"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "\"%s\" 파일을 열 수 없음"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib 오류"

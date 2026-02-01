@@ -16,7 +16,7 @@ Hint: If your terminal lacks functions keys, use the ESC+number sequence.
 
 Συμβουλή: Η ιστοσελίδα του GNU Midnight Commander: https://midnight-commander.org
 
-Συμβουλή: Παρακαλούμε στείλτε μας αναφορές σφαλμάτων στο mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Hint: Tab changes your current panel.
 

@@ -40,7 +40,6 @@ jobs:
               --prefix="$(pwd)/install" \
               --enable-mclib \
               --enable-aspell \
-              --enable-vfs-undelfs \
               --enable-werror
 
           make -j$(nproc)

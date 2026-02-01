@@ -292,14 +292,8 @@ create_command_menu (void)
 #endif
     entries = g_list_prepend (entries, menu_entry_new (_ ("Screen lis&t"), CK_ScreenList));
     entries = g_list_prepend (entries, menu_separator_new ());
-#ifdef ENABLE_VFS_UNDELFS
-    entries =
-        g_list_prepend (entries, menu_entry_new (_ ("&Undelete files (ext2fs only)"), CK_Undelete));
-#endif
 #ifdef LISTMODE_EDITOR
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Listing format edit"), CK_ListMode));
-#endif
-#if defined(ENABLE_VFS_UNDELFS) || defined(LISTMODE_EDITOR)
     entries = g_list_prepend (entries, menu_separator_new ());
 #endif
     entries = g_list_prepend (entries,
@@ -1368,11 +1362,6 @@ midnight_execute_cmd (Widget *sender, long command)
     case CK_Tree:
         treebox_cmd ();
         break;
-#ifdef ENABLE_VFS_UNDELFS
-    case CK_Undelete:
-        undelete_cmd ();
-        break;
-#endif
     case CK_UserMenu:
         user_file_menu_cmd ();
         break;

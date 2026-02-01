@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -2374,14 +2374,6 @@ msgstr "SFTP მანქანამდე"
 msgid "Shell link to machine"
 msgstr "გარსის შეერთება მანქანამდე"
 
-msgid "Undelete files on an ext2 file system"
-msgstr ""
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-
 msgid "Directory scanning"
 msgstr ""
 
@@ -3043,9 +3035,6 @@ msgstr "ფონური ამოცანები"
 
 msgid "Screen lis&t"
 msgstr "ეკრანის სია"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "ფაილების აღდგენა (მხოლოდ ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "&სიის ფორმატის ჩასწორება"
@@ -4300,76 +4289,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: შეცდომა"
-
-msgid "not enough memory"
-msgstr "მეხსიერება საკმარისი არ არის"
-
-msgid "while allocating block buffer"
-msgstr ""
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr ""
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr ""
-
-msgid "no more memory while reallocating array"
-msgstr ""
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "undelfs: reading block bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info ფაილური სისტემა არაა!"
-
-msgid "You have to chdir to extract files first"
-msgstr ""
-
-msgid "while iterating over blocks"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr ""
-
-msgid "Ext2lib error"
-msgstr "Ext2lib-ის შეცდომა"
-
 msgid "Invalid value"
 msgstr "არასწორი მნიშვნელობა"
 
@@ -4427,6 +4346,10 @@ msgstr "დაუფორმ"
 msgid "ButtonBar|Format"
 msgstr "ფორმატი"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&სწრაფი ხედი"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4469,3 +4392,22 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "ფაილების აღდგენა (მხოლოდ ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: შეცდომა"
+
+#~ msgid "not enough memory"
+#~ msgstr "მეხსიერება საკმარისი არ არის"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info ფაილური სისტემა არაა!"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib-ის შეცდომა"

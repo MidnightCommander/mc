@@ -16,7 +16,7 @@
 
 Падказка: сайт GNU Midnight Commander — https://midnight-commander.org
 
-Падказка: пра хібы паведамляйце на mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Падказка: клавішай "Tab" пераключаецца бягучая панэль.
 

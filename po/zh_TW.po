@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: MP Wang, 2025\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -2393,14 +2393,6 @@ msgstr "SFTP 到機器"
 msgid "Shell link to machine"
 msgstr ""
 
-msgid "Undelete files on an ext2 file system"
-msgstr ""
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-
 msgid "Directory scanning"
 msgstr "目錄掃描"
 
@@ -3064,9 +3056,6 @@ msgstr "背景工作"
 
 msgid "Screen lis&t"
 msgstr "畫面列表"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "復原檔案 (只能用在 ext2fs 上面)"
 
 msgid "&Listing format edit"
 msgstr "編輯列表格式"
@@ -4373,80 +4362,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr ""
-
-msgid "not enough memory"
-msgstr ""
-
-msgid "while allocating block buffer"
-msgstr "當分配區塊緩衝區"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr ""
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: 載入刪除的檔案資訊 %d inode"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "當呼叫 ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr ""
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "無法開啟檔案 %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs：正在讀取 inode 點陣圖..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"無法讀取以下位置的 inode 點陣圖：\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: 讀取區塊點陣圖中..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"無法讀取 bitmap 的區塊從:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info 不是 fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "您必須先更改目錄才可解開文件"
-
-msgid "while iterating over blocks"
-msgstr "當迭代超過區塊"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "無法開啟檔案 \"%s\""
-
-msgid "Ext2lib error"
-msgstr "Ext2lib 錯誤"
-
 msgid "Invalid value"
 msgstr "無效的值"
 
@@ -4506,6 +4421,10 @@ msgstr "按鈕列 | 取消格式"
 msgid "ButtonBar|Format"
 msgstr "按鈕列 | 格式"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "快速檢視 (&Q)"
+
 msgid "Failed to read data from child stdout"
 msgstr "無法從子程序 stdout 讀取資料"
 
@@ -4553,3 +4472,59 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "復原檔案 (只能用在 ext2fs 上面)"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "當分配區塊緩衝區"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: 載入刪除的檔案資訊 %d inode"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "當呼叫 ext2_block_iterate %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "無法開啟檔案 %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs：正在讀取 inode 點陣圖..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "無法讀取以下位置的 inode 點陣圖：\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: 讀取區塊點陣圖中..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "無法讀取 bitmap 的區塊從:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info 不是 fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "您必須先更改目錄才可解開文件"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "當迭代超過區塊"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "無法開啟檔案 \"%s\""
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib 錯誤"

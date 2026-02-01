@@ -16,7 +16,7 @@ Hint: Als je terminal geen functietoetsen ondersteunt, gebruik dan ESC+nummer.
 
 Hint: The homepage of GNU Midnight Commander: https://midnight-commander.org
 
-Hint: Stuur bug rapporten naar mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Hint: Tab verandert focus huidig paneel (links/rechts).
 

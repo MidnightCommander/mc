@@ -6,6 +6,7 @@
 # Alexander Kilian <alexander.kilian@gmail.com>, 2022
 # Cybjit <cybjit@gmail.com>, 2012
 # Cybjit <cybjit@gmail.com>, 2012
+# Daniel Nylander <po@danielnylander.se>, 2025
 # Henrik Mattsson-Mårn <h@reglage.net>, 2016
 # Ingemar Karlsson <ingemar@ingk.se>, 2021
 # Jonas Hultén <jonas@kollektivet.nu>, 2017
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +66,7 @@ msgstr "Kan inte skapa händelsen '%s'!"
 
 #, c-format
 msgid "Copyright (C) 1996-%zu the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-%zu the Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -174,6 +175,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Det går inte att använda skalet ’%s’ med stöd för 256 färger:\n"
+"%s\n"
+"Standardskalet har lästs in"
 
 msgid ""
 "\n"
@@ -182,12 +186,20 @@ msgid ""
 "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
 "command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"Om din terminal har stöd för 256 färger måste du ställa in din TERM-\n"
+"miljövariabel så att den matchar din terminal, kanske med hjälp av\n"
+"en *-256color- eller *-direct256-variant. Använd kommandot ’toe -a’\n"
+"för att lista alla tillgängliga varianter på ditt system.\n"
 
 msgid ""
 "For true color support, you need version 6.1 or later of the ncurses\n"
 "library with wide character and ABI 6 or higher support.\n"
 "Please upgrade your system.\n"
 msgstr ""
+"För stöd för true color behöver du version 6.1 eller senare av ncurses\n"
+"-biblioteket med stöd för breda tecken och ABI 6 eller högre.\n"
+"Uppgradera ditt system.\n"
 
 msgid ""
 "\n"
@@ -195,6 +207,11 @@ msgid ""
 "environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
 "Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"Om din terminal har stöd för true color måste du ställa in din TERM-\n"
+"miljövariabel till en *-direct256-, *-direct16- eller *-direct-variant.\n"
+"Använd kommandot ’toe -a’ för att lista alla tillgängliga varianter på ditt "
+"system.\n"
 
 msgid "True color not supported in this slang version."
 msgstr "Fullfärg stöds inte i den här versionen av slang."
@@ -206,6 +223,12 @@ msgid ""
 "Use the 'toe -a' command to list all available variants on your system.\n"
 "Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
+"\n"
+"Om din terminal har stöd för true color måste du ställa in din TERM-\n"
+"miljövariabel till en *-direct256-, *-direct16- eller *-direct-variant.\n"
+"Använd kommandot ’toe -a’ för att lista alla tillgängliga varianter på ditt "
+"system.\n"
+"Alternativt kan du ställa in COLORTERM=truecolor.\n"
 
 msgid "Escape"
 msgstr "Escape"
@@ -1901,13 +1924,13 @@ msgstr "Kör"
 msgid "Stopped"
 msgstr "Stannad"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Upptäckt kodsida för display"
+msgstr "Upptäckt codepage för skärm: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Vald källa (fil I/O) kodsida"
+msgstr "Valde codepage som källa (file I/O): %s"
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Klassisk terminalfilhanterare inspirerad av Norton Commander."
@@ -2248,7 +2271,7 @@ msgid "Inode uses extents"
 msgstr "Inode använder extenter"
 
 msgid "Huge file"
-msgstr ""
+msgstr "Mycket stor fil"
 
 msgid "No COW"
 msgstr "Ingen COW"
@@ -2513,16 +2536,6 @@ msgstr "SFTP till maskin"
 
 msgid "Shell link to machine"
 msgstr "Shell-länk till maskin"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Återställ borttagna filer på ett ext2-filsystem"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Mata in enhet (utan /dev/) att återställa\n"
-"filer på: (F1 för detaljer)"
 
 msgid "Directory scanning"
 msgstr "Kataloginläsning"
@@ -3295,9 +3308,6 @@ msgstr "&Bakgrundsjobb"
 
 msgid "Screen lis&t"
 msgstr "Skä&rmlista"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Återskapa raderade filer (endast ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Redigera &listningsformatet"
@@ -4653,80 +4663,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek inte stoppad vid en postgräns"
 
-msgid "undelfs: error"
-msgstr "undelfs: fel"
-
-msgid "not enough memory"
-msgstr "inte tillräckligt med minne"
-
-msgid "while allocating block buffer"
-msgstr "under allokering av blockbuffert"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "under start av inode-avsökning %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: laddar information för raderade filer %d inoder"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "under anrop av ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "slut på minne under omallokering av fält"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "under inod-avsökning %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Öppning av filen %s misslyckades"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: läser inodbitkarta..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Kan inte ladda inod-bitkarta från:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: läser blockbitkarta..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Kan inte ladda blockbitkarta från:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info är skilt från fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Du måste byta katalog med chdir för att extrahera filer först"
-
-msgid "while iterating over blocks"
-msgstr "under iterering över block"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Öppning av filen \"%s\" misslyckades"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib-fel"
-
 msgid "Invalid value"
 msgstr "Ogiltigt värde"
 
@@ -4786,6 +4722,10 @@ msgstr "ButtonBar|Oform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Fil&vy"
+
 msgid "Failed to read data from child stdout"
 msgstr "Misslyckades med att läsa data från barnets stdout"
 
@@ -4840,3 +4780,90 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Återställ borttagna filer på ett ext2-filsystem"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Mata in enhet (utan /dev/) att återställa\n"
+#~ "filer på: (F1 för detaljer)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Återskapa raderade filer (endast ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: fel"
+
+#~ msgid "not enough memory"
+#~ msgstr "inte tillräckligt med minne"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "under allokering av blockbuffert"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "under start av inode-avsökning %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: laddar information för raderade filer %d inoder"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "under anrop av ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "slut på minne under omallokering av fält"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "under inod-avsökning %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Öppning av filen %s misslyckades"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: läser inodbitkarta..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kan inte ladda inod-bitkarta från:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: läser blockbitkarta..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kan inte ladda blockbitkarta från:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info är skilt från fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Du måste byta katalog med chdir för att extrahera filer först"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "under iterering över block"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Öppning av filen \"%s\" misslyckades"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib-fel"

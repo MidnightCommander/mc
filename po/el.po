@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Greek (http://app.transifex.com/mc/mc/language/el/)\n"
@@ -2384,16 +2384,6 @@ msgstr "SFTP σε μηχάνημα"
 msgid "Shell link to machine"
 msgstr "Δεσμός κελύφους σε μηχάνημα"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Επαναφορά αρχείων σε  ένα σύστημα αρχείων ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Εισάγετε τη συσκευή (χωρίς το /dev/) για να επαναφέρετε\n"
-"αρχεία σε: (F1 για λεπτομέρειες)"
-
 msgid "Directory scanning"
 msgstr "Σάρωση καταλόγου"
 
@@ -3065,9 +3055,6 @@ msgstr "&Εργασίες παρασκηνίες"
 
 msgid "Screen lis&t"
 msgstr "&Λίστα οθονών"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Επαναφορά αρχείων (ext2fs μόνο)"
 
 msgid "&Listing format edit"
 msgstr ""
@@ -4356,76 +4343,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: σφάλμα"
-
-msgid "not enough memory"
-msgstr "ελλειπής μνήμη"
-
-msgid "while allocating block buffer"
-msgstr ""
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr ""
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr ""
-
-msgid "no more memory while reallocating array"
-msgstr ""
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Αδύνατο το άνοιγμα του αρχείου %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "undelfs: reading block bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "vfs_info is not fs!"
-msgstr "το vfs_info δεν είναι fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Πρέπει πρώτα να κάνετε chdir για να εξάγετε αρχεία"
-
-msgid "while iterating over blocks"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Αδύνατο το άνοιγμα του αρχείου \"%s\""
-
-msgid "Ext2lib error"
-msgstr "Σφάλμα ext2lib"
-
 msgid "Invalid value"
 msgstr "Μη έγκυρη τιμή"
 
@@ -4483,6 +4400,10 @@ msgstr ""
 msgid "ButtonBar|Format"
 msgstr ""
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Γρήγορη προβολή"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4530,3 +4451,39 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Επαναφορά αρχείων σε  ένα σύστημα αρχείων ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Εισάγετε τη συσκευή (χωρίς το /dev/) για να επαναφέρετε\n"
+#~ "αρχεία σε: (F1 για λεπτομέρειες)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Επαναφορά αρχείων (ext2fs μόνο)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: σφάλμα"
+
+#~ msgid "not enough memory"
+#~ msgstr "ελλειπής μνήμη"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Αδύνατο το άνοιγμα του αρχείου %s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "το vfs_info δεν είναι fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Πρέπει πρώτα να κάνετε chdir για να εξάγετε αρχεία"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Αδύνατο το άνοιγμα του αρχείου \"%s\""
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Σφάλμα ext2lib"

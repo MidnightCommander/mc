@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023-2025\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -1941,13 +1941,13 @@ msgstr "Выполняется"
 msgid "Stopped"
 msgstr "Остановлен"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Обнаруженная кодовая страница отображения"
+msgstr "Обнаруженная кодовая страница отображения: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Выбранная кодовая страница источника (файловый ввод/вывод)"
+msgstr "Выбранная кодовая страница источника (ввод-вывод файлов): %s"
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr ""
@@ -2555,16 +2555,6 @@ msgstr "SFTP-соединение с удалённой машиной"
 
 msgid "Shell link to machine"
 msgstr "Shell-соединение с удалённой машиной"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Восстановление файлов на файловой системе ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Введите имя устройства (без /dev/), на котором\n"
-"восстанавливать файлы после удаления (детали по F1):"
 
 msgid "Directory scanning"
 msgstr "Путь к каталогу"
@@ -3338,9 +3328,6 @@ msgstr "Фоновые &задания"
 
 msgid "Screen lis&t"
 msgstr "Список &экранов"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Восстановление файлов"
 
 msgid "&Listing format edit"
 msgstr "&Редактирование формата"
@@ -4704,80 +4691,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek не остановился на границе записи"
 
-msgid "undelfs: error"
-msgstr "undelfs: ошибка"
-
-msgid "not enough memory"
-msgstr "недостаточно памяти"
-
-msgid "while allocating block buffer"
-msgstr "при получении блока буферов"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "при начале сканирования узла ФС %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: загрузка информации об удалённых файлах %d узлов ФС"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "при вызове ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "не хватило памяти при переоткрытии массива"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "при сканировании узла ФС %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Не удалось открыть файл %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: чтение битовой карты узлов ФС..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Не удалось загрузить битовую карту узлов ФС с:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: чтение блока битовой карты..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Не удалось загрузить блок битовой карты с:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info - не файловая система!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Вы должны сначала сменить каталог, чтобы извлечь файлы"
-
-msgid "while iterating over blocks"
-msgstr "при переборе блоков"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Не удалось открыть файл %s"
-
-msgid "Ext2lib error"
-msgstr "Сбой Ext2lib"
-
 msgid "Invalid value"
 msgstr "Неверный адрес"
 
@@ -4837,6 +4750,10 @@ msgstr "Не форм"
 msgid "ButtonBar|Format"
 msgstr "Формат"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Быстрый просмотр"
+
 msgid "Failed to read data from child stdout"
 msgstr "Не удалось прочесть данные из дочернего stdout."
 
@@ -4891,3 +4808,90 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Восстановление файлов на файловой системе ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Введите имя устройства (без /dev/), на котором\n"
+#~ "восстанавливать файлы после удаления (детали по F1):"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Восстановление файлов"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: ошибка"
+
+#~ msgid "not enough memory"
+#~ msgstr "недостаточно памяти"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "при получении блока буферов"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "при начале сканирования узла ФС %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: загрузка информации об удалённых файлах %d узлов ФС"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "при вызове ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "не хватило памяти при переоткрытии массива"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "при сканировании узла ФС %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Не удалось открыть файл %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: чтение битовой карты узлов ФС..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не удалось загрузить битовую карту узлов ФС с:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: чтение блока битовой карты..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не удалось загрузить блок битовой карты с:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info - не файловая система!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Вы должны сначала сменить каталог, чтобы извлечь файлы"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "при переборе блоков"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Не удалось открыть файл %s"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Сбой Ext2lib"

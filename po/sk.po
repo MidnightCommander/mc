@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -2422,16 +2422,6 @@ msgstr "Pripojiť pomocou SFTP"
 msgid "Shell link to machine"
 msgstr "Pripojiť pomocou shellu"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Obnoviť zmazané súbory na súborovom systéme ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Zadajte zariadenie (bez /dev/), na ktorom\n"
-"chcete obnoviť súbory: (podrobnosti - F1)"
-
 msgid "Directory scanning"
 msgstr "Prehľadávanie adresára"
 
@@ -3109,9 +3099,6 @@ msgstr "Úlohy v &pozadí"
 
 msgid "Screen lis&t"
 msgstr "Zoznam& obrazoviek"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Obnoviť &Súbory (iba ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "&Upraviť formát výpisu"
@@ -4430,80 +4417,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: chyba"
-
-msgid "not enough memory"
-msgstr "nedostatok pamäte"
-
-msgid "while allocating block buffer"
-msgstr "počas alokovania bloku buffera"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "počas spúšťania hľadania inode %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: načítavajú sa informácie o odstránených súboroch %d inodes"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "počas volania ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "došla pamäť počas realokácie poľa"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "počas hľadania inode %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Nie je možné otvoriť súbor %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: číta sa bitová mapa inode..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Nemožno načítať bitovú mapu inodes z:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: číta sa bitová mapa blokov..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Nemožno načítať bitovú mapu blokov z:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info nie je súborový systém!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Na rozbalenie súborov musíte najskôr zmeniť adresár"
-
-msgid "while iterating over blocks"
-msgstr "počas iterovania po blokoch"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Nie je možné otvoriť súbor „%s“"
-
-msgid "Ext2lib error"
-msgstr "Chyba ext2lib"
-
 msgid "Invalid value"
 msgstr "Neplatná hodnota"
 
@@ -4561,6 +4474,10 @@ msgstr "ButtonBar|Neform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Formát"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Rýchle zobrazenie"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4608,3 +4525,90 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Obnoviť zmazané súbory na súborovom systéme ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Zadajte zariadenie (bez /dev/), na ktorom\n"
+#~ "chcete obnoviť súbory: (podrobnosti - F1)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Obnoviť &Súbory (iba ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: chyba"
+
+#~ msgid "not enough memory"
+#~ msgstr "nedostatok pamäte"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "počas alokovania bloku buffera"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "počas spúšťania hľadania inode %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: načítavajú sa informácie o odstránených súboroch %d inodes"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "počas volania ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "došla pamäť počas realokácie poľa"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "počas hľadania inode %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Nie je možné otvoriť súbor %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: číta sa bitová mapa inode..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nemožno načítať bitovú mapu inodes z:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: číta sa bitová mapa blokov..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nemožno načítať bitovú mapu blokov z:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info nie je súborový systém!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Na rozbalenie súborov musíte najskôr zmeniť adresár"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "počas iterovania po blokoch"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Nie je možné otvoriť súbor „%s“"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Chyba ext2lib"

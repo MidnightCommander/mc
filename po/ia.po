@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -2380,14 +2380,6 @@ msgstr ""
 msgid "Shell link to machine"
 msgstr ""
 
-msgid "Undelete files on an ext2 file system"
-msgstr ""
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-
 msgid "Directory scanning"
 msgstr ""
 
@@ -3048,9 +3040,6 @@ msgid "&Background jobs"
 msgstr ""
 
 msgid "Screen lis&t"
-msgstr ""
-
-msgid "&Undelete files (ext2fs only)"
 msgstr ""
 
 msgid "&Listing format edit"
@@ -4328,80 +4317,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: error"
-
-msgid "not enough memory"
-msgstr "memoria insufficiente"
-
-msgid "while allocating block buffer"
-msgstr "durante le allocation del buffer in blocos"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "durante le initio del scan de inode %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: loading deleted files information %d inodes"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "durante le appello de ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "memoria exhaurite durante le reallocation del array"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "durante le scan del inode %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Le file %s non pote esser aperite"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: lege bitmap de inode..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Impossibile cargar bitmap de inode ab:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: lege bitmap de bloco..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Impossibile cargar bitmap de bloco ab:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info non es fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Es necessari cambiar de directorio ante extraher files"
-
-msgid "while iterating over blocks"
-msgstr "durante iteration inter blocos"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Le file \"%s\" non pote esser aperite"
-
-msgid "Ext2lib error"
-msgstr "error de Ext2lib"
-
 msgid "Invalid value"
 msgstr "Valor invalide"
 
@@ -4459,6 +4374,9 @@ msgstr ""
 msgid "ButtonBar|Format"
 msgstr ""
 
+msgid "Quick view"
+msgstr ""
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4501,3 +4419,77 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: error"
+
+#~ msgid "not enough memory"
+#~ msgstr "memoria insufficiente"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "durante le allocation del buffer in blocos"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "durante le initio del scan de inode %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: loading deleted files information %d inodes"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "durante le appello de ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "memoria exhaurite durante le reallocation del array"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "durante le scan del inode %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Le file %s non pote esser aperite"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: lege bitmap de inode..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Impossibile cargar bitmap de inode ab:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: lege bitmap de bloco..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Impossibile cargar bitmap de bloco ab:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info non es fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Es necessari cambiar de directorio ante extraher files"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "durante iteration inter blocos"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Le file \"%s\" non pote esser aperite"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "error de Ext2lib"

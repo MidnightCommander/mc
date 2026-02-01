@@ -16,7 +16,7 @@ Fif: Hvis din terminal mangler funktionstaster, så rug ESC+talsekvensen.
 
 Fif: Hjemmesiden for GNU Midnight Commander: https://midnight-commander.org
 
-Fif: Send venligst eventuelle fejlrappporter til mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Fif: Tabulator skifter dit nuværende panel.
 

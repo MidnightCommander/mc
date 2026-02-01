@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>, 2023,2025\n"
 "Language-Team: Italian (http://app.transifex.com/mc/mc/language/it/)\n"
@@ -1896,13 +1896,13 @@ msgstr "Attivo "
 msgid "Stopped"
 msgstr "Sospeso "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Codepage schermo rilevata"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Codepage sorgente selezionata (file I/O)"
+msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Classico gestore di file da terminale ispirato al Norton Commander."
@@ -2509,16 +2509,6 @@ msgstr "Connessione SFTP"
 
 msgid "Shell link to machine"
 msgstr "Connessione shell"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Ripristina file da un filesystem ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Inserire il nome del dispositivo (senza /dev/) dal quale\n"
-"volete ripristinare i file: (F1 per i dettagli)"
 
 msgid "Directory scanning"
 msgstr "Scansione directory"
@@ -3291,9 +3281,6 @@ msgstr "Processi in &background"
 
 msgid "Screen lis&t"
 msgstr "Elenco schermi"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Ripristina file (solo ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Modifica formato &lista"
@@ -4651,80 +4638,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek non fermata al limite del record"
 
-msgid "undelfs: error"
-msgstr "undelfs: errore"
-
-msgid "not enough memory"
-msgstr "memoria insufficente"
-
-msgid "while allocating block buffer"
-msgstr "durante l'allocazione buffer blocchi"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "durante inizio scansione inode %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: caricamento informazioni file eliminati %d inode"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "durante la chiamata ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "memoria esaurita durante riallocazione array"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "durante scansione inode %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Non posso aprire il file %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: lettura bitmap inode..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Non posso caricare bitmap inode da:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: lettura bitmap blocchi..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Non posso caricare bitmap blocchi da:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info non è un fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Devi prima fare chdir per estrarre i file"
-
-msgid "while iterating over blocks"
-msgstr "durante l'iterazione sui blocchi"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Non posso aprire il file \"%s\""
-
-msgid "Ext2lib error"
-msgstr "Errore ext2lib"
-
 msgid "Invalid value"
 msgstr "Valore non valido"
 
@@ -4784,6 +4697,10 @@ msgstr "NonForm"
 msgid "ButtonBar|Format"
 msgstr "Formatt"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Vista veloce"
+
 msgid "Failed to read data from child stdout"
 msgstr "Fallita lettura da stdout processo figlio"
 
@@ -4837,3 +4754,90 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non posso ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Ripristina file da un filesystem ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Inserire il nome del dispositivo (senza /dev/) dal quale\n"
+#~ "volete ripristinare i file: (F1 per i dettagli)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Ripristina file (solo ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: errore"
+
+#~ msgid "not enough memory"
+#~ msgstr "memoria insufficente"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "durante l'allocazione buffer blocchi"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "durante inizio scansione inode %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: caricamento informazioni file eliminati %d inode"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "durante la chiamata ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "memoria esaurita durante riallocazione array"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "durante scansione inode %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Non posso aprire il file %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: lettura bitmap inode..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso caricare bitmap inode da:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: lettura bitmap blocchi..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso caricare bitmap blocchi da:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info non è un fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Devi prima fare chdir per estrarre i file"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "durante l'iterazione sui blocchi"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Non posso aprire il file \"%s\""
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Errore ext2lib"

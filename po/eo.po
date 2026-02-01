@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022,2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -1888,13 +1888,13 @@ msgstr "Plenumanta"
 msgid "Stopped"
 msgstr "Ĉesigita"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Malkovrita elmontra kodpaĝo:"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Elektita fonta (dosiera eneligo) kodpaĝo"
+msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Klasika terminala dosieradministrilo inspirita de Norton Commander."
@@ -2500,16 +2500,6 @@ msgstr "SFTP al servilo"
 
 msgid "Shell link to machine"
 msgstr "Ŝela ligilo al servilo"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Remeti dosierojn en ext2-dosiersistemon"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Enmetu aparaton (sen /dev/) por reatingi\n"
-"dosierojn: (F1 por detaloj)"
 
 msgid "Directory scanning"
 msgstr "Dosieruja skanado"
@@ -3280,9 +3270,6 @@ msgstr "Fo&naj taskoj"
 
 msgid "Screen lis&t"
 msgstr "&Paĝa listo"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Reat&ingi dosierojn (nur en ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Redakti &listan aranĝon"
@@ -4637,80 +4624,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
 
-msgid "undelfs: error"
-msgstr "undelfs: eraro"
-
-msgid "not enough memory"
-msgstr "ne sufiĉan memoron"
-
-msgid "while allocating block buffer"
-msgstr "dum okupi blokan bufron"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "dum komenci inode-skanon %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: ŝargis forigitajn dosierajn informojn [%d inode-oj]"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "dum voki al ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "ne plu memoro dum okupi tabelon"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "dum fari inode-skanon %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Ne eblas malfermi dosieron %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: leganta inode-bitmapon..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Ne eblas ŝargi inode-bitmapon el:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: leganta blokan bitmapon..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Ne eblas ŝargi blokan bitmapon el:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info estas ne fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Vi devas ŝanĝi dosierujon antaŭ ol eltiri dosierujojn"
-
-msgid "while iterating over blocks"
-msgstr "dum trairi blokojn"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Ne eblas malfermi dosieron \"%s\""
-
-msgid "Ext2lib error"
-msgstr "Ext2lib: eraro"
-
 msgid "Invalid value"
 msgstr "Nevalida valoro"
 
@@ -4770,6 +4683,10 @@ msgstr "Buttonbar|Malform"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Rapida &vido"
+
 msgid "Failed to read data from child stdout"
 msgstr "Malsukcesis legi datumojn el ida ĉefeligujo"
 
@@ -4824,3 +4741,90 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Remeti dosierojn en ext2-dosiersistemon"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Enmetu aparaton (sen /dev/) por reatingi\n"
+#~ "dosierojn: (F1 por detaloj)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Reat&ingi dosierojn (nur en ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: eraro"
+
+#~ msgid "not enough memory"
+#~ msgstr "ne sufiĉan memoron"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "dum okupi blokan bufron"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "dum komenci inode-skanon %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: ŝargis forigitajn dosierajn informojn [%d inode-oj]"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "dum voki al ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "ne plu memoro dum okupi tabelon"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "dum fari inode-skanon %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Ne eblas malfermi dosieron %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: leganta inode-bitmapon..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ne eblas ŝargi inode-bitmapon el:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: leganta blokan bitmapon..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ne eblas ŝargi blokan bitmapon el:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info estas ne fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Vi devas ŝanĝi dosierujon antaŭ ol eltiri dosierujojn"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "dum trairi blokojn"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Ne eblas malfermi dosieron \"%s\""
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib: eraro"

@@ -200,9 +200,6 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (LinkSymbolic),
     ADD_KEYMAP_NAME (PanelTree),
     ADD_KEYMAP_NAME (Tree),
-#ifdef ENABLE_VFS_UNDELFS
-    ADD_KEYMAP_NAME (Undelete),
-#endif
     ADD_KEYMAP_NAME (PutCurrentLink),
     ADD_KEYMAP_NAME (PutOtherLink),
     ADD_KEYMAP_NAME (HotListAdd),

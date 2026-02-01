@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -1908,13 +1908,13 @@ msgstr "S'està executant"
 msgid "Stopped"
 msgstr "Aturat"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "S'ha detectat la pàgina de codis de visualització"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "S'ha seleccionat la pàgina de codis d'origen (fitxer E/S)."
+msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Gestor de fitxers de terminal clàssic inspirat en el Norton Commander."
@@ -2520,16 +2520,6 @@ msgstr "SFTP amb la màquina"
 
 msgid "Shell link to machine"
 msgstr "Enllaç per a l'intèrpret amb la màquina"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Recupera els fitxers en un sistema de fitxers ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Introduïu el dispositiu (sense /dev/) en el qual es\n"
-"realitzarà la recuperació: (F1 per a més detalls)"
 
 msgid "Directory scanning"
 msgstr "S'està escanejant el directori"
@@ -3228,9 +3218,6 @@ msgstr "Tasques en se&gon pla"
 
 msgid "Screen lis&t"
 msgstr "Llis&ta les pantalles"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Recupera el&s fitxers (només ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Edita el format del &llistat"
@@ -4589,81 +4576,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
-msgid "undelfs: error"
-msgstr "undelfs: error"
-
-msgid "not enough memory"
-msgstr "no hi ha prou memòria"
-
-msgid "while allocating block buffer"
-msgstr "mentre s'assigna un bloc de la memòria intermèdia"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "mentre es comença l'exploració del node-i %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-"undelfs: s'està carregant la informació dels fitxers suprimits %d nodes-i"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "mentre es crida a ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "s'ha esgotat la memòria mentre és reassignava la taula"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "mentre es fa l'exploració del node-i %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "No s'ha pogut obrir el fitxer %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: s'està llegint el mapa de bits del node-i..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"No s'ha pogut carregar el mapa de bits del node-i des de:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: s'està llegint el mapa de bits del bloc..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"No s'ha pogut carregar el bloc de mapa de bits des de:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info no és un FS!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Primer haureu de canviar al directori per a extreure els fitxers"
-
-msgid "while iterating over blocks"
-msgstr "mentre s'iterava entre els blocs"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "No s'ha pogut obrir el fitxer «%s»"
-
-msgid "Ext2lib error"
-msgstr "Error de la «ext2lib»"
-
 msgid "Invalid value"
 msgstr "Valor no vàlid"
 
@@ -4721,6 +4633,10 @@ msgstr "ButtonBar|Treu form"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Vista &ràpida"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4769,3 +4685,91 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Recupera els fitxers en un sistema de fitxers ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Introduïu el dispositiu (sense /dev/) en el qual es\n"
+#~ "realitzarà la recuperació: (F1 per a més detalls)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Recupera el&s fitxers (només ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: error"
+
+#~ msgid "not enough memory"
+#~ msgstr "no hi ha prou memòria"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "mentre s'assigna un bloc de la memòria intermèdia"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "mentre es comença l'exploració del node-i %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr ""
+#~ "undelfs: s'està carregant la informació dels fitxers suprimits %d nodes-i"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "mentre es crida a ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "s'ha esgotat la memòria mentre és reassignava la taula"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "mentre es fa l'exploració del node-i %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "No s'ha pogut obrir el fitxer %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: s'està llegint el mapa de bits del node-i..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "No s'ha pogut carregar el mapa de bits del node-i des de:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: s'està llegint el mapa de bits del bloc..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "No s'ha pogut carregar el bloc de mapa de bits des de:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info no és un FS!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Primer haureu de canviar al directori per a extreure els fitxers"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "mentre s'iterava entre els blocs"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "No s'ha pogut obrir el fitxer «%s»"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Error de la «ext2lib»"

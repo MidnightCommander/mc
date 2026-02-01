@@ -3174,30 +3174,6 @@ Ejemplos:
     sftp://pepe@maquina.ssh.edu:2222/privado
 .fi
 
-.\"NODE "  Undelete File System"
-.SH "  Sistema de archivos de Recuperación"
-En sistemas Linux, si el programa de configuración nos preguntó si queríamos usar
-las facilidades de recuperación de archivos de ext2fs, tendremos el sistema de archivos
-recuperables accesible.
-La recuperación de archivos borrados está disponible solo en los sistemas de archivos ext2. El
-sistema de archivos recuperable es solo un interface de la librería ext2fs con:
-restaurar todos los archivos borrados en un ext2fs y proporciona
-la extracción selectiva de archivos en una partición regular.
-.PP
-Para usar este sistema de archivos, tendremos que hacer un chdir a un nombre de archivo especial
-formado por el prefijo "/undel://" y el nombre de archivo donde se encuentra el
-sistema de archivos actual.
-.PP
-Por ejemplo, para recuperar archivos borrados en la segunda partición del
-primer disco scsi en Linux, usaríamos el siguiente nombre de ruta:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-Esto le llevaría un tiempo a undelfs para cargar la información
-antes de empezar a navegar por los archivos allí contenidos.
-
 .\"NODE "  EXTernal File System"
 .SH "  Sistema de archivos EXTerno (extfs)"
 .B extfs

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
@@ -61,7 +61,7 @@ msgstr "¡Imposible crear el evento «%s»!"
 
 #, c-format
 msgid "Copyright (C) 1996-%zu the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-%zu the Free Software Foundation"
 
 #, c-format
 msgid ""
@@ -169,6 +169,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Imposible usar skin «%s» con soporte de 256 colores:\n"
+"%s\n"
+"Se ha cargado skin por defecto."
 
 msgid ""
 "\n"
@@ -177,12 +180,21 @@ msgid ""
 "a *-256color or *-direct256 variant. Use the 'toe -a'\n"
 "command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"Si el terminal soporta 256 colores se necesita establecer la variable\n"
+"de entorno TERM para que coincida con el terminal, acaso usando alguna\n"
+"variante como «*-256color» o «*-direct256». Use el comando «toe -a»\n"
+"para ver la lista de todas las variantes disponibles en el sistema.\n"
 
 msgid ""
 "For true color support, you need version 6.1 or later of the ncurses\n"
 "library with wide character and ABI 6 or higher support.\n"
 "Please upgrade your system.\n"
 msgstr ""
+"Para disponer de soporte de color real se necesita la versión 6.1 o\n"
+"posterior de la biblioteca «ncurses» con soporte para caracteres ampliados\n"
+"y ABI 6 o superior.\n"
+"Considere actualizar su sistema.\n"
 
 msgid ""
 "\n"
@@ -190,6 +202,11 @@ msgid ""
 "environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
 "Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
+"\n"
+"Si el terminal soporta color real se necesita establecer la variable\n"
+"de entorno TERM a alguna variante como «*-direct256», «*-direct16», o\n"
+"«*-direct». Use el comando «toe -a» para ver la lista de todas las\n"
+"variantes disponibles en el sistema.\n"
 
 msgid "True color not supported in this slang version."
 msgstr "El color real no está soportado con esta versión de slang."
@@ -201,6 +218,12 @@ msgid ""
 "Use the 'toe -a' command to list all available variants on your system.\n"
 "Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
+"\n"
+"Si el terminal soporta color real se necesita establecer la variable\n"
+"de entorno TERM a alguna variante como «*-direct256», «*-direct16», o\n"
+"«*-direct». Use el comando «toe -a» para ver la lista de todas las\n"
+"variantes disponibles en el sistema. Como alternativa puede establecer\n"
+"«COLORTERM=truecolor».\n"
 
 msgid "Escape"
 msgstr "Escape"
@@ -1900,13 +1923,13 @@ msgstr "Corriendo"
 msgid "Stopped"
 msgstr "Detenido"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Juego de caracteres entrada/pantalla"
+msgstr "Codificación de caracteres de pantalla detectada: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Juego de caracteres del archivo E/S elegido"
+msgstr "Codificación de caracteres de archivo E/S elegido: %s"
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Gestor de archivos en terminal inspirado en el Comandante Norton"
@@ -2247,7 +2270,7 @@ msgid "Inode uses extents"
 msgstr "Inodo usa extensiones"
 
 msgid "Huge file"
-msgstr ""
+msgstr "Archivo_enorme"
 
 msgid "No COW"
 msgstr "Sin COW"
@@ -2513,16 +2536,6 @@ msgstr "Conexión por SFTP"
 
 msgid "Shell link to machine"
 msgstr "Conexión por SSH"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Recuperar archivos de un sistema de archivos ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Introduzca el dispositivo (sin /dev/) donde quiere\n"
-"recuperar archivos: (F1 para más detalles)"
 
 msgid "Directory scanning"
 msgstr "Analizando directorio"
@@ -3296,9 +3309,6 @@ msgstr "&Procesos en 2º plano..."
 
 msgid "Screen lis&t"
 msgstr "&Lista de pantallas..."
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Recuperar archivos (ext2fs)..."
 
 msgid "&Listing format edit"
 msgstr "edición del formato de &Listado"
@@ -4655,80 +4665,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
 
-msgid "undelfs: error"
-msgstr "undelfs: Error"
-
-msgid "not enough memory"
-msgstr "memoria insuficiente"
-
-msgid "while allocating block buffer"
-msgstr "al reservar buffer de bloque"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "al iniciar rastreo de inodos %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: Cargando información de archivos eliminados %d inodos"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "al llamar a ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "se agotó la memoria mientras se reubicaba la tabla"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "mientras se hacía el rastreo de inodos %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Imposible abrir el archivo %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: Leyendo mapa de inodos..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Imposible cargar el inodo de:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: Leyendo mapa de bloques..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Imposible cargar bloques de:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "¡vfs_info no es fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Tiene que ir al directorio antes de extraer archivos"
-
-msgid "while iterating over blocks"
-msgstr "al iterar entre bloques"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Imposible abrir el archivo «%s»"
-
-msgid "Ext2lib error"
-msgstr "error Ext2lib"
-
 msgid "Invalid value"
 msgstr "Posición incorrecta"
 
@@ -4788,6 +4724,10 @@ msgstr "SinFor"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Vista rápida"
+
 msgid "Failed to read data from child stdout"
 msgstr "Fallo de lectura sobre la salida estándar del proceso hijo"
 
@@ -4842,3 +4782,90 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Recuperar archivos de un sistema de archivos ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Introduzca el dispositivo (sin /dev/) donde quiere\n"
+#~ "recuperar archivos: (F1 para más detalles)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Recuperar archivos (ext2fs)..."
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: Error"
+
+#~ msgid "not enough memory"
+#~ msgstr "memoria insuficiente"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "al reservar buffer de bloque"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "al iniciar rastreo de inodos %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: Cargando información de archivos eliminados %d inodos"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "al llamar a ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "se agotó la memoria mientras se reubicaba la tabla"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "mientras se hacía el rastreo de inodos %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Imposible abrir el archivo %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: Leyendo mapa de inodos..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Imposible cargar el inodo de:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: Leyendo mapa de bloques..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Imposible cargar bloques de:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "¡vfs_info no es fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Tiene que ir al directorio antes de extraer archivos"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "al iterar entre bloques"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Imposible abrir el archivo «%s»"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "error Ext2lib"

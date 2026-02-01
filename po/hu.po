@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/mc/mc/language/hu/)\n"
@@ -2409,16 +2409,6 @@ msgstr "SFTP célgép"
 msgid "Shell link to machine"
 msgstr "Shell-kapcsolat egy másik géppel"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Törölt fájlok visszaállítása Ext2 fájlrendszeren"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"A visszaállítandó fájlokat tároló eszköz neve\n"
-"(/dev/ nélkül) (részletek: F1 billentyű):"
-
 msgid "Directory scanning"
 msgstr "Könyvtárak átfésülése"
 
@@ -3091,9 +3081,6 @@ msgstr "Háttérfolyamatok"
 
 msgid "Screen lis&t"
 msgstr "Képernyő lis&ta"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Törölt fájlok visszaállítása"
 
 msgid "&Listing format edit"
 msgstr "Listá&zási formátum szerkesztése"
@@ -4405,80 +4392,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: hiba"
-
-msgid "not enough memory"
-msgstr "nincs elég memória"
-
-msgid "while allocating block buffer"
-msgstr "a blokk-puffer allokálásakor"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "az inode-keresés indításakor: %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "Undelfs: törölt fájlok adatainak betöltése; %d inode"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "az  ext2_block_iterate hívásakor: %d"
-
-msgid "no more memory while reallocating array"
-msgstr "nincs elég memória a tömb újraallokálásakor"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "inode-keresés közben: %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "A(z) %s fájl nem megnyitható"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "Undelfs: inode-bittérkép betöltése..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Nem betölthető az inode-bittérkép:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "Undelfs: blokk-bittérkép betöltése..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Nem betölthető a blokk-bittérkép:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "A vfs_info nem fs!"
-
-msgid "You have to chdir to extract files first"
-msgstr "A fájlok kigyűjtéséhez előbb könyvtárt kell váltani"
-
-msgid "while iterating over blocks"
-msgstr "a blokkokon való végighaladás közben"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "A(z) %s fájl nem megnyitható"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib-hiba"
-
 msgid "Invalid value"
 msgstr "Érvénytelen érték"
 
@@ -4536,6 +4449,10 @@ msgstr "NemForm"
 msgid "ButtonBar|Format"
 msgstr "Formáz"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "Gyors nézet"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4583,3 +4500,90 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Törölt fájlok visszaállítása Ext2 fájlrendszeren"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "A visszaállítandó fájlokat tároló eszköz neve\n"
+#~ "(/dev/ nélkül) (részletek: F1 billentyű):"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Törölt fájlok visszaállítása"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: hiba"
+
+#~ msgid "not enough memory"
+#~ msgstr "nincs elég memória"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "a blokk-puffer allokálásakor"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "az inode-keresés indításakor: %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "Undelfs: törölt fájlok adatainak betöltése; %d inode"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "az  ext2_block_iterate hívásakor: %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "nincs elég memória a tömb újraallokálásakor"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "inode-keresés közben: %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "A(z) %s fájl nem megnyitható"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "Undelfs: inode-bittérkép betöltése..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nem betölthető az inode-bittérkép:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "Undelfs: blokk-bittérkép betöltése..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nem betölthető a blokk-bittérkép:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "A vfs_info nem fs!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "A fájlok kigyűjtéséhez előbb könyvtárt kell váltani"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "a blokkokon való végighaladás közben"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "A(z) %s fájl nem megnyitható"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib-hiba"

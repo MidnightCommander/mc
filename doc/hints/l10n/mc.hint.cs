@@ -16,7 +16,7 @@ Tip: Pokud váš terminál nezná nebo nemá funkční (F1-12) klávesy, použij
 
 Tip: Domovská stránka GNU Midnight Commander je: https://midnight-commander.org
 
-Tip: Chyby hlaste na mc-devel@lists.midnight-commander.org (v angličtině).
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Tip: Pomocí klávesy Tab přejdete na další panel.
 

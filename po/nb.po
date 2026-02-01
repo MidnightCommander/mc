@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad, 2024-2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -1897,13 +1897,13 @@ msgstr "Kjører"
 msgid "Stopped"
 msgstr "Pause"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Detected display codepage: %s"
-msgstr "Gjenkjent tegnkoding for skjerm"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Selected source (file I/O) codepage: %s"
-msgstr "Tegnkoding for valgt kilde (fil-I/U)"
+msgstr ""
 
 msgid "Classic terminal file manager inspired by Norton Commander."
 msgstr "Klassisk filbehandler inspirert av Norton Commander."
@@ -2509,16 +2509,6 @@ msgstr "Koble til SFTP"
 
 msgid "Shell link to machine"
 msgstr "Koble til skall"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Gjenopprett filer i et ext2-filsystem"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Angi enhet (uten «/dev/») der filene\n"
-"skal gjenopprettes (F1 for hjelp): "
 
 msgid "Directory scanning"
 msgstr "Leter igjennom mappe"
@@ -3291,9 +3281,6 @@ msgstr "Bakgrunns&jobber"
 
 msgid "Screen lis&t"
 msgstr "Kjørende mo&duler"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Gjenopprett filer (kun ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Redigering av listeformat"
@@ -4649,80 +4636,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek stoppet ikke på kanten av en post"
 
-msgid "undelfs: error"
-msgstr "undelfs: feil"
-
-msgid "not enough memory"
-msgstr "ikke nok minne"
-
-msgid "while allocating block buffer"
-msgstr "under reservering av blokkbuffer"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "under oppstart av inode-leting: %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: laster informasjon om slettede filer, %d inoder"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "under oppkall av ext2_block_iterate: %d"
-
-msgid "no more memory while reallocating array"
-msgstr "gikk tom for minne under nyreservering av tabell"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "under utførelse av inode-leting: %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Klarte ikke åpne fila %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: leser inode-bitmap ..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Klarte ikke laste inode-bitmap fra:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: leser blokkbitmap ..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Klarte ikke laste blokkbitmap fra:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info er ikke lik fs"
-
-msgid "You have to chdir to extract files first"
-msgstr "Du må bytte mappe for å pakke ut filer"
-
-msgid "while iterating over blocks"
-msgstr "under iterasjon over blokker"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Klarte ikke åpne fila «%s»"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib-feil"
-
 msgid "Invalid value"
 msgstr "Ugyldig verdi"
 
@@ -4782,6 +4695,10 @@ msgstr "ButtonBar|IkForm"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Hurtigvis"
+
 msgid "Failed to read data from child stdout"
 msgstr "Klarte ikke lese data fra barnets stdout"
 
@@ -4836,3 +4753,90 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Gjenopprett filer i et ext2-filsystem"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Angi enhet (uten «/dev/») der filene\n"
+#~ "skal gjenopprettes (F1 for hjelp): "
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Gjenopprett filer (kun ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: feil"
+
+#~ msgid "not enough memory"
+#~ msgstr "ikke nok minne"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "under reservering av blokkbuffer"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "under oppstart av inode-leting: %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: laster informasjon om slettede filer, %d inoder"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "under oppkall av ext2_block_iterate: %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "gikk tom for minne under nyreservering av tabell"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "under utførelse av inode-leting: %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Klarte ikke åpne fila %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: leser inode-bitmap ..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Klarte ikke laste inode-bitmap fra:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: leser blokkbitmap ..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Klarte ikke laste blokkbitmap fra:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info er ikke lik fs"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Du må bytte mappe for å pakke ut filer"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "under iterasjon over blokker"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Klarte ikke åpne fila «%s»"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib-feil"

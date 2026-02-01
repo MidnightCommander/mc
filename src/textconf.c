@@ -67,9 +67,6 @@ static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_EXTFS
     "extfs",
 #endif
-#ifdef ENABLE_VFS_UNDELFS
-    "ext2undelfs",
-#endif
 #ifdef ENABLE_VFS_FTP
     "ftpfs",
 #endif

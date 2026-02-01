@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-11-18 12:04+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2017,2020,2025\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -2430,16 +2430,6 @@ msgstr "SFTP към машина"
 msgid "Shell link to machine"
 msgstr "SSH към машина"
 
-msgid "Undelete files on an ext2 file system"
-msgstr "Възстановяване на файлове на ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Въведете устройство (без /dev/) за\n"
-"възстановяване на файлове: (F1 за детайли)"
-
 msgid "Directory scanning"
 msgstr "Претърсване на директория"
 
@@ -3117,9 +3107,6 @@ msgstr "Фонови &задачи"
 
 msgid "Screen lis&t"
 msgstr "Списък на &екрани"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Възстановяване на файлове (само ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "&Формат на списъка"
@@ -4454,80 +4441,6 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr "undelfs: грешка"
-
-msgid "not enough memory"
-msgstr "няма достатъчно памет"
-
-msgid "while allocating block buffer"
-msgstr "при заделянето на буфер"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "при стартиране на сканиране на i-възел %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: зареждане на информация за изтритите файлове, %d i-възела"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "при изпълнението на ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "няма повече памет при повторното заделяне на масива"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "при изпълнението на сканиране на i-възел %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "Файлът %s не може да бъде отворен"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: четене на битовата карта на i-възлите…"
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"Не може да се зареди битовата карта на i-възлите от:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: четене на блоковата битова карта…"
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"Не може да се зареди битовата карта на блока от:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info не е ФС!"
-
-msgid "You have to chdir to extract files first"
-msgstr "За да разархивирате файловете, първо изпълнете chdir"
-
-msgid "while iterating over blocks"
-msgstr "при обработване на блокове"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "Не може да се отвори файлът „%s“"
-
-msgid "Ext2lib error"
-msgstr "Грешка в Ext2lib"
-
 msgid "Invalid value"
 msgstr "Неправилна стойност"
 
@@ -4585,6 +4498,10 @@ msgstr "Без форматиране"
 msgid "ButtonBar|Format"
 msgstr "Форматиране"
 
+#, fuzzy
+msgid "Quick view"
+msgstr "&Бърз преглед"
+
 msgid "Failed to read data from child stdout"
 msgstr ""
 
@@ -4632,3 +4549,90 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Възстановяване на файлове на ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Въведете устройство (без /dev/) за\n"
+#~ "възстановяване на файлове: (F1 за детайли)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "&Възстановяване на файлове (само ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: грешка"
+
+#~ msgid "not enough memory"
+#~ msgstr "няма достатъчно памет"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "при заделянето на буфер"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "при стартиране на сканиране на i-възел %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: зареждане на информация за изтритите файлове, %d i-възела"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "при изпълнението на ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "няма повече памет при повторното заделяне на масива"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "при изпълнението на сканиране на i-възел %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "Файлът %s не може да бъде отворен"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: четене на битовата карта на i-възлите…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се зареди битовата карта на i-възлите от:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: четене на блоковата битова карта…"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се зареди битовата карта на блока от:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info не е ФС!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "За да разархивирате файловете, първо изпълнете chdir"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "при обработване на блокове"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "Не може да се отвори файлът „%s“"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Грешка в Ext2lib"

@@ -16,7 +16,7 @@ Astuce : Si votre clavier n’a pas de touche de fonction, utilisez la combinais
 
 Astuce : Site officiel de GNU Midnight Commander : https://midnight-commander.org
 
-Astuce : Envoyez vos rapports de bogues à l’adresse mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Astuce : La touche Tab permute le panneau courant.
 
