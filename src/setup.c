@@ -142,7 +142,6 @@ panels_options_t panels_options = {
     .filetype_mode = TRUE,
     .permission_mode = FALSE,
     .qsearch_mode = QSEARCH_PANEL_CASE,
-    .torben_fj_mode = FALSE,
     .select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS,
 };
 
@@ -444,7 +443,6 @@ static const struct
     { "mouse_move_pages", &panels_options.mouse_move_pages },
     { "filetype_mode", &panels_options.filetype_mode },
     { "permission_mode", &panels_options.permission_mode },
-    { "torben_fj_mode", &panels_options.torben_fj_mode },
     {
         NULL,
         NULL,

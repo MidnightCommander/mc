@@ -2411,24 +2411,6 @@ move_home (WPanel *panel)
 
     unselect_item (panel);
 
-    if (panels_options.torben_fj_mode)
-    {
-        int middle_pos;
-
-        middle_pos = panel->top + panel_items (panel) / 2;
-
-        if (panel->current > middle_pos)
-        {
-            goto_middle_file (panel);
-            return;
-        }
-        if (panel->current != panel->top)
-        {
-            goto_top_file (panel);
-            return;
-        }
-    }
-
     panel->top = 0;
     panel->current = 0;
 
@@ -2445,25 +2427,6 @@ move_end (WPanel *panel)
         return;
 
     unselect_item (panel);
-
-    if (panels_options.torben_fj_mode)
-    {
-        int items, middle_pos;
-
-        items = panel_items (panel);
-        middle_pos = panel->top + items / 2;
-
-        if (panel->current < middle_pos)
-        {
-            goto_middle_file (panel);
-            return;
-        }
-        if (panel->current != panel->top + items - 1)
-        {
-            goto_bottom_file (panel);
-            return;
-        }
-    }
 
     panel->current = panel->dir.len - 1;
     paint_dir (panel);
@@ -3783,12 +3746,6 @@ panel_key (WPanel *panel, int key)
     command = widget_lookup_key (WIDGET (panel), key);
     if (command != CK_IgnoreKey)
         return panel_execute_cmd (panel, command);
-
-    if (panels_options.torben_fj_mode && key == ALT ('h'))
-    {
-        goto_middle_file (panel);
-        return MSG_HANDLED;
-    }
 
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
