@@ -27,13 +27,6 @@ Wymusza wyświetlanie w kolorze, zobacz sekcję
 .B Kolory
 żeby zasięgnąć szerszej informacji.
 .TP
-.I \-C arg
-Używane do wybierania innego koloru, który ma być obecny w linii poleceń. Format
-argumentu
-.I arg
-jest opisany w sekcji
-.BR Kolory .
-.TP
 .I \-d
 Wyłącza używanie myszy.
 .TP
@@ -2449,91 +2442,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 Program może być skompilowany zarówno z bibliotekami S\-Lang jak i ncurses.
 Ncurses nie obsługuje metody wymuszania wyświetlania, zawsze sprawdza w bazie danych
 terminali.
-.PP
-Midnight Commander umożliwia również zmianę standardowych barw ekranu.
-Aktualnie kolory są skonfigurowane przy użyciu zmiennej
-.B MC_COLOR_TABLE
-w sekcji Colors pliku startowego.
-.PP
-W sekcji kolorów, standardowa mapa kolorów jest ładowana ze zmiennej
-.IR base_color .
-Możesz wybrać swoją własną mapę dla terminala poprzez użycie nazwy terminala
-jako klucza w tej sekcji. Na przykład:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-Format definicji kolorów jest następujący:
-.PP
-.nf
-  <słowo kluczowe>=<kolor powierzchni">,<kolor tła>:<słowo kluczowe>= ...
-.fi
-.PP
-Kolory są opcjonalne, a słowa kluczowe są następujące: normal, selected,
-marked, markselect, errors, input, reverse menunormal, menusel, menuhot, menuhotsel,
-menuinactive, gauge;  kolory okien dialogowych: dnormal, dfocus, dhotnormal,
-dhotfocus; Kolory pomocy: helpnormal, helpitalic, helpbold, helplink,
-helpslink; Kolory podglądu: viewunderline; Specjalne tryby podświetlenia:
-executable, directory, link, device, special. Viewer colors are: viewnormal,
-viewbold, viewunderline, viewselected. Editor colors are: editnormal, editbold,
-editmarked, editwhitespace, editnonprintable, editlinestate. Popup menu colors
-are: pmenunormal, pmenusel, pmenutitle.
-[nie tłumaczyłem nazw z racji tego, że trzeba je stosować w ich angielskim
-brzmieniu \- jeśli jesteś aż tak zaawansowany, użyj słownika].
-.PP
-Okna dialogowe mogą mieć następujące kolory:
-.I dnormal
-używany do normalnego tekstu,
-.I dfocus
-jest kolorem używanym do wyświetlania aktualnego komponentu,
-.I dhotnormal
-jest kolorem używanym do odróżnienia klawiszy w normalnych komponentach,
-a
-.I dhotfocus
-jest używany do wyświetlania owych w aktualnie wybranym.
-.PP
-Menu używa tego samego schematu, ale jako nazw kolorów używa menunormal, menusel,
-menuhot, menuhotsel i menuinactive.
-.PP
-Pomoc używa następujących kolorów:
-.I helpnormal
-używany do normalnego tekstu,
-.I helpitalic
-używa tej samej czcionki, którą wykorzystuje manual do wyświetlania
-czcionki typu italic,
-.I helpbold
-tak samo jak wyżej tylko czcionki są typu bold,
-.I helplink
-używane dla niewybranych jeszcze dowiązań i
-.I helpslink
-używane dla już wybranych.
-.PP
-.I gauge
-pokazuje kolor wypełnienia pokazywany przy wskaźniku postępu [ang. gauge],
-ukazującym ile procent pliku zostało przekopiowane itp. w graficzny sposób.
-.PP
-Dla trybu wysokiego podświetlania
-.I directory
-jest używane jako kolor do wyświetlania katalogów;
-.I executable
-dla plików wykonywalnych;
-.I link
-do wyświetlania dowiązań;
-.I device
-do wyświetlania plików urządzeń (devices);
-.I special
-dla plików specjalnych, takich jak gniazda FIFO i IPC;
-.I core
-dla wyświetlania plików typu core (zobacz również tę opcję w sekcji Specjalne
-ustawienia).
-.PP
-Możliwe kolory to: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white. [sorry, że ich nazw nie tłumaczyłem,
-ale używać ich trzeba w oryginalnym brzmieniu :))].
 .PP
 .\"NODE "Special Settings"
 .SH "Specjalne ustawienia"

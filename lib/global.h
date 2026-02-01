@@ -174,8 +174,6 @@ typedef struct
         char *setup_color_string;
         char *term_color_string;
         char *color_terminal_string;
-        // colors specified on the command line: they override any other setting
-        char *command_line_colors;
 
 #ifndef LINUX_CONS_SAVER_C
         // Used only in mc, not in cons.saver

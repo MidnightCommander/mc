@@ -29,14 +29,6 @@ Colors
 .\"Colors"
 for more information.
 .TP
-.I \-C arg, \-\-colors=arg
-Specify a different color set in the command line.  The format of arg is
-documented in the
-.\"LINK2"
-Colors
-.\"Colors"
-section.
-.TP
 .I \-\-configure\-options
 Display configure options.
 .TP
@@ -3544,110 +3536,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 The program can be compiled with both ncurses and S\-Lang, ncurses does
 not provide a way to force color mode: ncurses uses just the
 information in the terminal database.
-.PP
-Midnight Commander provides a way to change the default colors.
-Currently the colors are configured using the environment variable
-.B MC_COLOR_TABLE
-or the Colors section in the initialization file.
-.PP
-In the Colors section, the default color map is loaded from the
-.I base_color
-variable.  You can specify an alternate color map for a terminal by
-using the terminal name as the key in this section.  Example:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-The format for the color definition is:
-.PP
-.nf
-  <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>=...
-.fi
-.PP
-The colors are optional, and the keywords are: normal, selected, disabled, marked,
-markselect, errors, input, inputmark, inputunchanged, commandlinemark,
-reverse, gauge, header, inputhistory, commandhistory. Button bar colors are:
-bbarhotkey, bbarbutton. Status bar color: statusbar. Menu colors are: menunormal,
-menusel, menuhot, menuhotsel, menuinactive. Dialog colors are: dnormal, dfocus,
-dhotnormal, dhotfocus, dtitle. Error dialog colors are: errdfocus, errdhotnormal,
-errdhotfocus, errdtitle.  Help colors are: helpnormal, helpitalic, helpbold,
-helplink, helpslink, helptitle.  Viewer colors are: viewnormal, viewbold,
-viewunderline, viewselected. Editor colors are: editnormal, editbold, editmarked,
-editwhitespace, editnonprintable, editlinestate. Popup menu colors are: pmenunormal,
-pmenusel, pmenutitle.
-.PP
-.I header
-determines the color of panel header, the line that contains column titles
-and sort mode indicator.
-.PP
-.I input
-determines the color of input lines used in query dialogs.
-.PP
-.I gauge
-determines the color of the filled part of the progress bar (gauge),
-which is used to show the user the progress of file operations, such as
-copying.
-.PP
-.I disabled
-determines the color of the widget that cannot be selected.
-.PP
-The dialog boxes use the following colors:
-.I dnormal
-is used for the normal text,
-.I dfocus
-is the color used for the currently selected component,
-.I dhotnormal
-is the color used to differentiate the hotkey color in normal
-components, whereas the
-.I dhotfocus
-color is used for the highlighted color in the currently selected
-component.
-.PP
-Menus use the same scheme but uses the menunormal, menusel, menuhot, menuhotsel
-and menuinactive tags instead.
-.PP
-Help uses the following colors:
-.I helpnormal
-is used for normal text,
-.I helpitalic
-is used for text which is emphasized in italic in the manual page,
-.I helpbold
-is used for text which is emphasized in bold in the manual page,
-.I helplink
-is used for not selected hyperlinks and
-.I helpslink
-is used for selected hyperlink.
-.PP
-Popup menu uses following colors:
-.I pmenunormal
-is used for non\-selected menu items and as a main color of popup menu window,
-.I pmenusel
-is used for selected menu item,
-.I pmenutitle
-is used for popup menu title.
-.PP
-The possible colors are: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white; as well as "default" for the terminal's
-default foreground or background color. Another special keyword "base" means mc's main
-colors.  When 256 colors are available, they can be specified either as
-color16 to color255, or as rgb000 to rgb555 and gray0 to gray23. Example:
-.PP
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
-.PP
-Attributes can be any of bold, italic, underline, reverse and blink, appended by a
-plus sign if more than one are desired.  The special word "none" means no
-attributes, without attempting to fall back to base_color.  Example:
-.PP
-.nf
-menuhotsel=yellow;black;bold+underline
-.fi
 
 .\"NODE "Skins"
 .SH "Skins"

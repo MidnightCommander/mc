@@ -31,17 +31,17 @@ Force black and white display.
 Force ANSI color mode on terminals that don't seem to have color
 support.
 .TP
-.I "\-C <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ..."
-Specify a different color set.  See the
-.B Colors
-section in mc(1) for more information.
-.TP
 .I "\-d"
 Disable mouse support.
 .TP
 .I "\-f"
 Display the compiled\-in search path for GNU Midnight Commander data
 files.
+.TP
+.I \-S arg, \-\-skin=arg
+Specify a name of skin in the command line.  See the
+.B Skins
+section in mc(1) for more information.
 .TP
 .I "\-t"
 Force using termcap database instead of terminfo.  This option is only
@@ -467,18 +467,6 @@ with.  Also remember that the aim of syntax highlighting is to make
 programming less prone to error, not to make code look pretty.
 .PP
 The syntax highlighting can be toggled using Ctrl\-s shortcut.
-.SH COLORS
-The default colors may be changed by appending to the
-.B MC_COLOR_TABLE
-environment variable.  Foreground and background colors pairs may be
-specified for example with:
-.PP
-.nf
-MC_COLOR_TABLE="$MC_COLOR_TABLE:\e
-editnormal=lightgray,black:\e
-editbold=yellow,black:\e
-editmarked=black,cyan"
-.fi
 .SH OPTIONS
 Most options can be set from Options dialog box.  See the
 .B Options

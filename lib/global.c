@@ -86,7 +86,6 @@ mc_global_t mc_global =
         .setup_color_string = NULL,
         .term_color_string = NULL,
         .color_terminal_string = NULL,
-        .command_line_colors = NULL,
 #ifndef LINUX_CONS_SAVER_C
         .console_flag = '\0',
 #endif
