@@ -283,11 +283,6 @@ static const GOptionEntry argument_terminal_table[] = {
         NULL,
     },
 
-#ifdef HAVE_SLANG
-    { "resetsoft", 'k', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &reset_hp_softkeys,
-      N_ ("Resets soft keys on HP terminals"), NULL },
-#endif
-
     {
         "keymap",
         'K',

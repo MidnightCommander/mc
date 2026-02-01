@@ -60,10 +60,6 @@ partenza. Vedere anche
 .I "\-f"
 Mostra i percorsi di ricerca compilati per i file del Midnight Commander.
 .TP
-.I "\-k"
-Reimposta i softkeys ai valori predefiniti dal database termcap/terminfo.
-Utile solo su terminali HP quando non vanno i tasti funzione.
-.TP
 .I "\-l file" 
 Salva il dialogo ftpfs con il server in file.
 .TP

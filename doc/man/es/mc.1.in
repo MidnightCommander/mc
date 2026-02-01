@@ -63,11 +63,6 @@ en Midnight Commander.
 Fuerza el uso de ratón en modo de seguimiento «normal». Se usa para
 terminales compatibles con xterm (tmux/screen).
 .TP
-.I \-k, \-\-resetsoft
-Restablece las softkeys a su valor por defecto según la base de datos de
-termcap/terminfo.  Solo útil en terminales HP cuando las teclas de función
-no funcionan.
-.TP
 .I \-K arch, \-\-keymap=arch
 Carga desde un archivo la configuración de teclas para la línea de órdenes.
 .TP
