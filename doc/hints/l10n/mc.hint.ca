@@ -16,7 +16,7 @@ Consell: Si no funcionen les tecles de funció, empreu la seqüència «ESC+núm
 
 Consell: La pàgina inicial del Midnight Commander de GNU és https://midnight-commander.org
 
-Consell: Si us plau, envieu qualsevol informe d'error a «mc-devel@lists.midnight-commander.org».
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Consell: El tabulador canvia de plafó.
 

@@ -16,7 +16,7 @@ Hint: Selecting directories: add a slash to the end of the matching pattern.
 
 Hint: The homepage of GNU Midnight Commander: https://midnight-commander.org
 
-ヒント：バグレポートをmc-devel@lists.midnight-commander.orgに送信してください
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 ヒント：タブは現在のパネルを変更します。
 

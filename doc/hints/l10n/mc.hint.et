@@ -1,4 +1,4 @@
-Vihje: Kasuta C-x, et kopeerida märgitud failide nimed käsureale.
+Vihje: C-x kopeerib märgitud failide nimed käsureale.
 
 Vihje: Kasuta C-x p, et kopeerida aktiivne otsingurada käsureale.
 
@@ -16,7 +16,7 @@ Vihje: Kui terminalil puuduvad funktsiooniklahvid, siis kasuta ESC+number jadasi
 
 Vihje: GNU Midnight Commanderi koduleht: https://midnight-commander.org
 
-Vihje: Palun saada vearaportid aadressile mc-devel@lists.midnight-commander.org
+Vihje: Palun teata vigadest meie veahaldussüsteemis https://github.com/MidnightCommander/mc/issues
 
 Vihje: TAB vahetab aktiivset paneeli.
 
@@ -72,7 +72,7 @@ Vihje: Hüppa sageli kasutatud kataloogidesse ühe seotud C-\'ga.
 
 Vihje: Anonüümse FTP kasutamiseks mc-ga sisesta 'cd ftp://masin.ee'
 
-Vihje: FTP on Midnight Commanderisse sisse ehitatud; vaata menüüst Fail/FTP link.
+Vihje: FTP on Midnight Commanderisse sisse ehitatud; käsk menüüst Fail/FTP ühendus.
 
 Vihje: M-t võimaldab listingu režiimi kiiret muutmist.
 

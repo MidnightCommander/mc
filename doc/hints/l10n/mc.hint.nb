@@ -16,7 +16,7 @@ Hint: Hvis terminalen mangler funksjonstaster så kan du bruke ESC + tallet.
 
 Hint: Hjemmesiden til GNU Midnight Commander er https://midnight-commander.org
 
-Hint: Du kan sende feilrapporter til mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Hint: Tabulatoren endrer det aktive panelet.
 

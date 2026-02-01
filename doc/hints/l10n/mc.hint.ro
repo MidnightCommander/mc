@@ -16,7 +16,7 @@ Sfat: Dacă terminalul nu dispune de taste funcționale, folosiți ESC+ numărul
 
 Sfat: Pagină de start pentru GNU Midnight Commander: https://midnight-commander.org
 
-Sfat: Vă rugăm semnalați orice bug la adresa mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Sfat: Tasta Tab schimbă panoul curent.
 
