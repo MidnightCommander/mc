@@ -3401,28 +3401,6 @@ nevertheless (at you own risk).
 .PP
 .B [No]
 abort connection.
-.\"NODE "  Undelete File System"
-.SH "  Undelete File System"
-On Linux systems, if you asked configure to use the ext2fs undelete
-facilities, you will have the undelete file system available.
-Recovery of deleted files is only available on ext2 file systems.  The
-undelete file system is just an interface to the ext2fs library to
-retrieve all of the deleted files names on an ext2fs and provides and
-to extract the selected files into a regular partition.
-.PP
-To use this file system, you have to chdir into the special file name
-formed by the "undel://" prefix and the file name where the actual
-file system resides.
-.PP
-For example, to recover deleted files on the second partition of the
-first SCSI disk on Linux, you would use the following path name:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-It may take a while for the undelfs to load the required information
-before you start browsing files there.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs

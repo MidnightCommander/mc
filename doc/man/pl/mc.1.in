@@ -2269,27 +2269,6 @@ Przykłady:
     sh://joe@want.compression.edu:C/private
     sh://joe@noncompressed.ssh.edu/private
 .fi
-.\"NODE "  Undelete File System"
-.SH "  Odzyskiwanie plików"
-Na systemach Linuksowych, jeśli dodałeś w konfiguracji opcję przywracania
-skasowanych plików z systemów ext2, będziesz w stanie to robić. Odzyskiwanie
-plików jest możliwe tylko i wyłącznie na systemach typu ext2. Przywracany
-system plików jest tylko nakładką na bibliotekę ext2fs: odzyskiwanie nazw
-wszystkich skasowanych plików i próba uczynienia z nich normalnej partycji.
-.PP
-Żeby używać tych systemów plików, będziesz musiał przejść od specjalnego
-pliku, którego nazwa składa się z przedrostka "undel://" i nazwy pliku,
-w której ów plik rezyduje.
-.PP
-Na przykład, aby odzyskać skasowane pliki z drugiej partycji pierwszego
-dysku scsi Linux, będziesz musiał użyć następującej ścieżki:
-.PP
-.nf
-    undel:///dev/sda2
-.fi
-.PP
-Może to chwilkę potrwać zanim pliki zostaną pokazane i będziesz mógł je
-normalnie oglądać.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs

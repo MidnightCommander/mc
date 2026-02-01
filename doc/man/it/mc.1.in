@@ -2659,29 +2659,6 @@ Esempi:
     sh://joe@vuole.lacompressione.edu:C/privato
     sh://joe@noncompresso.ssh.edu/privato
 .fi
-.\"NODE "  Undelete File System"
-.SH "  Recupero file cancellati"
-Su sistemi Linux, se si richiede, tramite configure, di usare la
-caratteristica di undelete del file system ext2, si avrà accesso al
-file system di recupero file cancellati. Il recupero file cancellati è
-disponibile solo su file system di tipo ext2. Il file system è solo
-un'interfaccia alla libreria ext2fs che: recupera tutti i nomi dei
-file cancellati su un fs ext2 e fornisce ed estrae i file selezionati
-in una partizione normale.
-.PP
-Per usare questo file system, è necessario entrare nella directory
-con il nome speciale formato dal prefisso "undel://" e dal nome del
-file system dove il file risiede.
-.PP
-Per esempio, per recuperare file cancellati sulla seconda partizione
-del primo disco SCSI su Linux, si dovrà usare il seguente percorso:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-Il recupero può metterci un po' di tempo per caricare le informazioni
-necessarie per poter cominciare a navigare attraverso i file.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs

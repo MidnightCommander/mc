@@ -84,11 +84,6 @@ The features include:
 
 	* FTP proxy is supported.
 
-	* Linux file recovery: If you are using Linux, you can recover
-	  deleted files from an ext2 or ext3 partition with the undelete
-	  file system.  This is a low level file recovery function that
-	  can recover files deleted by any program on Linux.
-
 	* External panelization: You can run any arbitrary external
 	  command and GNU Midnight Commander will display the output
 	  generated as a file listing that can be manipulated as a

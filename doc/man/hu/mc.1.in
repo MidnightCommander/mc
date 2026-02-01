@@ -2644,33 +2644,6 @@ Példák:
     sh://joe@want.compression.edu:C/private
     sh://joe@noncompressed.ssh.edu/private
 .fi
-.\"NODE "  Undelete File System"
-.SH "  Törlés visszaállítása"
-(csak ext2; second extended filesystem)
-.PP
-Linux rendszereken, ha azt válaszolod a konfiguráláskor, hogy használni
-akarod az ext2fs törlés visszavonás lehetőségét, akkor lehetőséged lesz
-a törlés művelet visszavonására. A Törlés visszaállítása funkció csak
-ext2 fájlrendszeren végezhető el. A Törlés visszaállítása csak
-csatlakozó eszköz az ext2fs library\-hoz: helyrehozza az összes törölt
-fájlnevet az ext2fs\-en, megjeleníti őket és a kiválasztott fájlokat a
-kiteszi a megadott partícióra.
-.PP
-Ezen fájlrendszer használatához abba a speciális fájlrendszerbe kell
-belépned, amely "undel://" meghatározással kezdődik, és annak az aktuális
-fájlrendszernek a nevét tartalmazza, ahol a visszaállítani kívánt file
-található.
-.PP
-Például, ha a törölt fájlokat az első scsi lemez második partícióján
-szeretnénk visszaállítani, akkor a következő elérési utat kell
-megadnunk:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-Persze várakozni kell, amíg az undelfs a szükséges információkat
-beolvassa, a fájl böngészés megkezdése előtt.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs

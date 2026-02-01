@@ -186,12 +186,6 @@ VFS options:
      (on by default)
      Support for sfs
 
-`--enable-vfs-undelfs'
-     (off by default)
-     Support for ext2 undelete filesystem.
-     On systems that use the ext2 or ext3 file system and have the
-     libext2fs library available, this option adds support for
-     recovering deleted files (the undel virtual file system).
 
 Screen library:
 - - - - - - - -
