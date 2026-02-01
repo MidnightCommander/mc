@@ -3839,20 +3839,6 @@ now or for dates in the future.
 See strftime or date man page for the format specification. If this
 option is absent, default timeformat is used.
 .TP
-.I torben_fj_mode
-If this flag is set, then the home and end keys will work slightly
-different on the panels, instead of moving the selection to the first
-and last files in the panels, they will act as follows:
-.IP
-The home key will: Go up to the middle line, if below it; else go to the
-top line unless it is already on the top line, in this case it will go
-to the first file in the panel.
-.IP
-The end key has a similar behavior: Go down to the middle line, if over
-it; else go to the bottom line unless you already are at the bottom
-line, in such case it will move the selection to the last file name in
-the panel.
-.TP
 .I use_file_to_guess_type
 If this variable is on (the default) it will spawn the file command to
 match the file types listed on the
