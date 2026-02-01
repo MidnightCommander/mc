@@ -2668,21 +2668,6 @@ Jeśli chcesz widzieć wszystkie możliwe dokończenia już po pierwszym naciśn
 .BR M\-Tab ,
 zmień tę opcję na 1.
 .PP
-.I torben_fj_mode
-.IP
-Jeśli ta opcja jest włączona, klawisze home i end będą działały troszkę
-inaczej w panelach, zamiast przemieszczać linię wyboru do pierwszej lub
-ostatniej linii w panelu, będą działały tak jak jest to opisane poniżej:
-.IP
-Klawisz home będzie: przechodził do środkowej linii, jeśli jest pod nią; w
-przeciwnym wypadku będzie przechodził do najwyższej linii w panelu, jeśli
-już w niej jest, będzie przechodził do pierwszego pliku w panelu.
-.IP
-Klawisz end ma podobne zastosowanie: przechodzi do środkowej linii, jeśli
-jest nad nią; w przeciwnym wypadku przechodzi do najniższej linii w panelu,
-chyba że już się w niej znajduje, wtedy przechodzi do ostatniego pliku w
-panelu.
-.PP
 .I highlight_mode
 Standardowo wszystkie informacje w panelach są wyświetlane tym samym
 kolorem. Jeśli ta warość jest ustawiona na 1, to

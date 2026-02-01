@@ -3899,19 +3899,6 @@ Cambiar el formato de fecha y hora empleado para fechas más antiguas que seis
 meses.  Véanse las páginas de manual de strftime o date para la descripción del formato a
 emplear. Sin esta opción se emplea el formato por defecto.
 .TP
-.I torben_fj_mode
-Si este modificador existe, entonces las teclas Inicio y Fin funcionarán de manera
-diferente en los paneles, en lugar de mover la selección al primer
-o último archivo en los paneles, actuarán como sigue:
-.IP
-La tecla Inicio: Irá a la línea central del panel, si está bajo ella; sino va a
-la primera línea a menos que ya esté allí, en este caso
-irá al primer archivo del panel.
-.IP
-La tecla Fin tiene un comportamiento similar: Irá a la línea central del panel, si
-está situada en la mitad superior del panel; si no irá a la línea inferior del panel a menos que
-ya estemos ahí, en cuyo caso moverá la selección al último nombre de archivo del panel.
-.TP
 .I use_file_to_guess_type
 Si esta variable está activada (por defecto lo está) se recurrirá al
 comando «file» para reconocer los tipos de archivo referidos en el archivo

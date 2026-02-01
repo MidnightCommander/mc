@@ -2999,17 +2999,6 @@ Amikor a C\-o billentyű kombinációt használod, visszalépsz a felhasználói
 képernyőre, ha "egy" a beállítás, akkor a shellt frissíted. Egyébként
 bármely gomb lenyomásával visszatérhetsz a Midnight Commander\-hez.
 .PP
-.I torben_fj_mode
-.IP
-Ha ez a flag be van állítva, akkor a home és az end gombok kissé
-eltérően fognak működni a panelekben, a kiválasztást a panel első és
-utolsó fájljára mozgatja, s a következőképp működik: A home gombnál:
-Felmegy a középső sorra, ha lejjebb volt; egyébként a felső sor lép
-addíg, amíg el nem éri a legfelső sort, ebben ez esetben ez lesz a panel
-első fájlja. Az end gomb működése hasonló: Lemegy a középső sorra, ha
-felette volt; egyébként a legalsó sorra lép addíg, amíg el nem éri az
-utolsó fájl a panelben.
-.PP
 .I use_file_to_guess_type
 .IP
 Ha ez a változó be van állítva (alapértelmezésben) meg foja jelölni azt

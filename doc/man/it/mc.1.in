@@ -2997,20 +2997,6 @@ subshell. Quando si usano i tasti C\-o per tornare allo schermo utente,
 se quest'opzione è impostata, si avrà una nuova shell. Altrimenti,
 premendo qualsiasi tasto si tornerà al Midnight Commander.
 .TP
-.I torben_fj_mode
-Se quest'opzione è impostata, allora i tasti inizio e fine lavoreranno
-leggermente differentemente sui pannelli. Invece che muovere le selezioni
-al primo e ultimo file del pannello, agiranno nel modo seguente:
-.IP
-Il tasto inizio: va alla riga centrale, se sotto di essa, altrimenti
-va alla riga in cima a meno che non ci sia già; in tal caso andrà al
-primo file del pannello.
-.IP
-Il tasto fine ha un comportamento simile: va giù alla riga centrale
-se era sopra di essa, altrimenti va alla riga di fondo a meno che non 
-ci sia già; in tal caso sposterà la selezione all'ultimo file del
-pannello.
-.TP
 .I use_file_to_guess_type
 Se questa variabile è abilitata (valore predefinito) userà il comando
 file per trovare delle corrispondenze sui tipi di file elencati nel
