@@ -446,7 +446,7 @@ look at the section on
 Left and Right Menus\&.
 .\"Left and Right Menus"
 .TP
-.B Tab, C\-i
+.B Tab, C\-i, left\-key, right\-key
 change the current panel. The old other panel becomes the new current
 panel and the old current panel becomes the new other panel. The
 selection bar moves from the old current panel to the new current
@@ -1215,6 +1215,13 @@ is off, the case will be ignored.
 Used to unselect a group of files. This is the opposite of the
 .I "Select group"
 command.
+.PP
+.B Invert selection (*)
+.PP
+Select (tag) all items that are currently unselected, and unselect
+(untag) all items that are currently selected. Applies to only files
+or to both files and directories, depending on whether 'Reverse files
+only' is enabled.
 .PP
 .B Quit (F10, S\-F10)
 .PP
@@ -1985,11 +1992,8 @@ If enabled, the selection bar will move down when you mark a file (with
 Insert key). Enabled by default.
 .PP
 .I Reverse files only.
-Allow revert selection of files only. Enabled by default.
-If enabled, the reverse selection is applied to files only, not to directories.
-The selection of directories is untouched. If off, the reverse selection
-is applied to files as well to directories: all unselected items become
-selected, and vice versa.
+If enabled, 'Invert selection' in the File menu will apply to only files
+rather than to both files and directories. Enabled by default.
 .PP
 .I Simple swap.
 If both panels contain file listing, simple swap means that panels exchange
