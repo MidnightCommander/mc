@@ -30,13 +30,6 @@ mc \- Визуелна љуска за Униксолике системе.
 .\"Colors"
 за више информација.
 .TP
-.I \-C арг, \-\-colors=арг
-Задавање другачијег скупа боја у командној линији. Формат аргумента „арг“ је
-описан у одељку
-.\"LINK2"
-Боје\&.
-.\"Colors"
-.TP
 .I \-\-configure\-options
 Приказује configure опције.
 .TP
@@ -3400,107 +3393,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 .PP
 Програм се може компајлирати и са подршком за ncurses и S\-Lang; ncurses нема
 начина да захтева режим у боји: он користи само податке из базе терминала.
-.PP
-Поноћни наредник нуди начин за промену подразумеване боје. За сада се боје
-подешавају преко променљиве окружења
-.B MC_COLOR_TABLE
-или одељка Colors у иницијализационој датотеци.
-.PP
-У одељку Colors, подразумевана мапа боја се учитава из променљиве
-.IR base_color .
-Можете задати другачију мапу боја терминала коришћењем назива терминала као
-кључа у овом одељку. На пример:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-Формат дефиниције боје је следећи:
-.PP
-.nf
-  <кључнареч>=<бојатекста>,<бојапозадине>:<кључнареч>= ...
-.fi
-.PP
-Боје су необавезне, док кључне речи могу бити: normal, selected, disabled,
-marked, markselect, errors, input, inputmark, inputunchanged, commandlinemark,
-reverse, gauge, header, inputhistory, commandhistory. Боје менија су:
-menunormal, menusel, menuhot, menuhotsel, menuinactive. Боје дијалога су:
-dnormal, dfocus, dhotnormal, dhotfocus, dtitle. Боје помоћи су: helpnormal,
-helpitalic, helpbold, helplink, helpslink, helptitle. Боје прегледача су:
-viewnormal, viewbold, viewunderline, viewselected. Боје уређивача су:
-editnormal, editbold, editmarked, editwhitespace, editnonprintable,
-editlinestate. Боје искачућег менија су: pmenunormal, pmenusel, pmenutitle.
-.PP
-.I header
-одређује боју наслова панела, линије која садржи наслове колона и индикатор
-режима сортирања.
-.PP
-.I input
-одређује боју линија за унос које се користе у дијалозима упита.
-.PP
-.I gauge
-одређује боју испуњеног дела траке напретка, који се користи да прикаже напредак
-операција над датотекама као што је копирање.
-.PP
-.I disabled
-одређује боју контроле која се не може изабрати.
-.PP
-Дијалози користе следеће боје:
-.I dnormal
-се користи за обичан текст,
-.I dfocus
-се користи за тренутно изабрану компоненту,
-.I dhotnormal
-се користи за разликовање боје пречице у обичним компонентама, а боја
-.I dhotfocus
-се користи за боју истицања у тренутно изабраној компоненти.
-.PP
-Менији користе исту шему, али користе ознаке menunormal, menusel, menuhot,
-menuhotsel и menuinactive.
-.PP
-Помоћ користи следеће боје:
-.I helpnormal
-се користи за обичан текст,
-.I helpitalic
-се користи за текст који је у страници упутства истакнут курзивом,
-.I helpbold
-се користи за текст који је у страници упутства истакнут подебљано,
-.I helplink
-се користи за хипервезе које нису изабране, а
-.I helpslink
-се користи за изабране хипервезе.
-.PP
-Искачући менији користе следеће боје:
-.I pmenunormal
-се користи за неизабране ставке менија и као главна боја искачућег прозора
-менија,
-.I pmenusel
-се користи за изабрану ставку менија,
-.I pmenutitle
-се користи за наслов искачућег менија.
-.PP
-Могуће боје су: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray и white. Постоји и посебна кључна реч за
-провидну позадину. Она гласи: „default“ и може да се користи само за
-боју позадине. Још једна посебна кључна реч је „base“ и означава основне боје
-ПН\-а. Када је доступно 256 боја, оне се могу задати било као color16 до
-color255, било као rgb000 до rgb555 и gray0 до gray23. На пример:
-.PP
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
-.PP
-Атрибути могу бити било која комбинација bold, italic, underline, reverse и
-blink, уз додат знак плус ако се жели више од једног. Посебна реч „none“ значи
-одсуство атрибута, без резервне опције base_color. На пример:
-.PP
-.nf
-menuhotsel=yellow;black;bold+underline
-.fi
 
 .\"NODE "Skins"
 .SH "Скинови"

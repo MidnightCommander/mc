@@ -41,13 +41,6 @@ Colores
 .\"Colors"
 para más información.
 .TP
-.I \-C arg, \-\-colors=arg
-Usado para especificar un juego de colores diferentes desde la línea de
-órdenes.  El formato de arg está documentado en la sección
-.\"LINK2"
-Colores\&. 
-.\"Colors"
-.TP
 .I \-\-configure\-options
 Muestra opciones de configuración compiladas.
 .TP
@@ -3325,105 +3318,6 @@ color_terminals=nombre\-terminal1,nombre\-terminal2...
 El programa puede compilarse con ncurses y S\-Lang, ncurses no
 ofrece la posibilidad de forzar el modo en color: ncurses utiliza la
 información de la base de datos de terminales.
-.PP
-Midnight Commander ofrece una forma de cambiar los colores por defecto.
-Actualmente los colores se configuran a través de la variable de entorno
-.B MC_COLOR_TABLE
-o en la sección Colors del archivo de inicialización.
-.PP
-En la sección Colors, el mapa de colores por defecto se carga desde la variable
-.IR base_color .
-Podemos especificar un mapa de colores alternativo para un terminal
-utilizando el nombre del terminal como clave en esta sección. Ejemplo:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-El formato de la definición de color es:
-.PP
-.nf
-  <PalabraClave>=<ColorTexto>,<ColorFondo>:<PalabraClave>= ...
-.fi
-.PP
-los colores son opcionales, y las palabras claves son: normal, selected,
-disabled, marked, markselect, errors, input, inputmark, inputunchanged,
-commandlinemark, reverse, gauge, header, inputhistory, commandhistory;
-los colores de la barra de botones: bbarhotkey, bbarbutton; los colores
-de la barra de estado: statusbar; los colores de menú: menunormal,
-menusel, menuhot, menuhotsel, menuinactive; los colores de los diálogos:
-dnormal, dfocus, dhotnormal, dhotfocus, dtitle; los colores de los diálogos
-de error: errdfocus, errdhotnormal, errdhotfocus, errdtitle; los colores
-de la ayuda: helpnormal, helpitalic, helpbold, helplink, helpslink,
-helptitle; los colores del visor: viewnormal, viewbold, viewunderline,
-viewselected; loc colores del editor: editnormal, editbold, editmarked,
-editwhitespace, editnonprintable, editlinestate; los colores de los menús
-desplegables: pmenunormal, pmenusel, pmenutitle.
-.PP
-.I header
-determina el color del encabezado de los paneles, la línea con los
-títulos de columna y el modo de ordenación.
-.PP
-.I input
-determina el color de las líneas de entrada de texto en los diálogos.
-.PP
-.I gauge (indicador)
-determina el color de la parte completada de la barra de progresión (gauge), que muestra
-qué porcentaje de archivos fueron copiados etc. de modo gráfico.
-.PP
-.I disabled
-detemina el color de los componentes inactivos.
-.PP
-Los cuadros de diálogo usan los siguientes colores:
-.I dnormal
-usado para el texto normal,
-.I dfocus
-usado para el componente actualmente seleccionado,
-.I dhotnormal
-usado para diferenciar el color de la tecla activa
-en los componentes normales, mientras que el color
-.I dhotfocus
-se utiliza para el color resaltado en el componente seleccionado.
-.PP
-Los menús utilizan el mismo esquema equivalente con los nombres menunormal,
-menusel, menuhot, menuhotsel and menuinactive en lugar de los anteriores.
-.PP
-La ayuda utiliza los siguientes colores:
-.I helpnormal
-texto normal,
-.I helpitalic
-utilizado para el texto enfatizado con letra itálica en la página del manual,
-.I helpbold
-usado para el texto enfatizado en negrita en la página del manual,
-.I helplink
-usado para los hiperenlaces no seleccionados y
-.I helpslink
-es utilizado para el hiperenlace seleccionado.
-.PP
-En los menús desplegables:
-.I pmenunormal
-se usa como color del fondo y de los elementos no seleccionados,
-.I menusel
-se usa para el elemento seleccionado,
-.I pmenutitle
-se usa para el titulo del menú.
-
-.PP
-Los colores posibles son: negro (black), gris (gray), rojo (red), rojo brillante (brightred), verde (green),
-verde claro (brightgreen), marrón (brown), amarillo (yellow), azul oscuro (blue), azul brillante (brightblue),
-rosa (magenta), rosa claro (brightmagenta),
-azul celeste (cyan), celeste claro (brightcyan), gris claro (lightgray) y blanco (white).
-Hay una palabra clave especial para obtener un fondo transparente. Se trata de 'default'. 'default'
-solo se puede utilizar como color de fondo. Otra palabra especial es 'base' que hace referencia a los
-colores generales. Cuando se puede disponer de 256 colores se pueden referir como color16 hasta
-color255. Ejemplo:
-.PP
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
 
 .\"NODE "Skins"
 .SH "Skins"

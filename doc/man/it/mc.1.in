@@ -49,13 +49,6 @@ colori
 .\"Colors"
 per ulteriori informazioni.
 .TP
-.I "\-C arg"
-Usato per specificare un set di colori differente a riga di comando.
-Il formato di arg è documentato nella sezione
-.\"LINK2"
-colori\&.
-.\"Colors"
-.TP
 .I "\-d"
 Disabilita il supporto mouse.
 .TP
@@ -2804,107 +2797,6 @@ color_terminals=nome_terminale\-1,nome\-terminale\-2...
 Il programma può essere compilato sia con il supporto di ncurses che
 di S\-Lang ma ncurses non fornisce alcun modo per forzare la modalità
 colore: ncurses userà solo le informazioni nel database dei terminali.
-.PP
-Il Midnight Commander fornisce un modo per cambiare i colori predefiniti.
-Attualmente i colori sono configurati usando la variabile ambiente
-.B MC_COLOR_TABLE 
-o la sezione Colors nel file di inizializzazione.
-.PP
-Nella sezione Colors, la mappa dei colori predefinita viene caricata 
-dalla variabile 
-.IR base_color . 
-Si può specificare una mappa colori alternativa per un terminale
-usando il nome del terminale come chiave nella sezione. Esempio:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-Il formato della definizione dei colori è:
-.PP
-.nf
-  <parolachiave>=<coloreprimopiano>,<coloresfondo>:<parolachiave>= ...
-.fi
-.PP
-I colori sono opzionali e le parolechiave sono: normal, selected, marked,
-markselect, errors, input, reverse, gauge. I colori dei menu sono: menunormal,
-menusel, menuhot, menuhotsel, menuinactive. I colori delle finestre di
-dialogo sono: dnormal, dfocus, dhotnormal, dhotfocus. I colori dell'aiuto
-sono: helpnormal, helpitalic, helpbold, helplink, helpslink.
-Il colore del visualizzatore è: viewunderline.
-Colori speciali di evidenziazione: executable, directory, link, device, 
-special, core.
-I colori dell'viewer sono: viewnormal, viewbold, viewunderline, viewselected.
-I colori dell'editor sono: editnormal, editbold, editmarked, editnonprintable.
-.PP
-.I input 
-determina il colore delle righe di input usate delle finestre di dialogo.
-.PP
-.I gauge 
-determina il colore della parte riempita della barra di progressione
-(gauge), che mostra quanta percentuale del file è stata copiata o 
-altro in forma grafica.
-.PP
-Le finestre di dialogo usano i colori seguenti:
-.I dnormal 
-usata per il testo normale,
-.I dfocus
-è il colore usato per il componente correntemente selezionato,
-.I dhotnormal
-è il colore usato per differenziare il tasto di scelta rapida
-nei componenti normali, mentre il colore
-.I dhotfocus
-viene usato per il colore evidenziato nel componente correntemente
-selezionato.
-.PP
-I menu usano lo stesso schema ma usano invece i selettori menunormal, menusel,
-menuhot, menuhotsel e menuinactive.
-.PP
-L'aiuto usa i seguenti colori:
-.I helpnormal
-viene usato per il testo normale,
-.I helpitalic
-viene usato per il testo enfatizzato con il corsivo nelle pagine del manuale,
-.I helpbold
-viene usato per il testo enfatizzato con il grassetto nelle pagine del manuale,
-.I helplink
-viene usato per un collegamento non selezionato e
-.I helpslink
-viene usato per un collegamento selezionato.
-.PP
-I colori speciali di evidenziazione determinano come i file
-vengono visualizzati quando l'evidenziazione dei file è 
-abilitata (vedere sezione 
-.\"LINK2"
-aspetto\&).
-.\"Layout
-.I directory
-usata per directory o collegamenti simbolici a directory;
-.I executable
-per il file eseguibili;
-.I link
-viene usata per i collegamenti simbolici che non sono nè interrotti
-nè connessi a directory;
-.I stalelink
-usata per collegamenti simbolici interrotti;
-.I device
-\- dispositivi a caratteri e blocchi;
-.I special
-usata per i file speciali, come pipe e socket;
-.I core
-usata per i file core.
-.PP
-I colori possibili sono: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray e white. Inoltre c'è una speciale parola
-chiave per lo sfondo trasparente. Essa è 'default'. Il 'default' può
-essere usato solo come colore di sfondo. Esempio:
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
 .\"NODE "Special Settings"
 .SH "Impostazioni speciali"
 Molte delle impostazioni del Midnight Commander possono essere cambiate
