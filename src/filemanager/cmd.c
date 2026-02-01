@@ -375,7 +375,7 @@ cleanup:
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if defined(ENABLE_VFS_UNDELFS) || defined(ENABLE_VFS_NET)
+#if defined(ENABLE_VFS_NET)
 static void
 nice_cd (const char *text, const char *xtext, const char *help, const char *history_name,
          const char *prefix, int to_home, gboolean strip_password)
@@ -1177,18 +1177,6 @@ shelllink_cmd (void)
 {
     nice_cd (_ ("Shell link to machine"), _ (machine_str), "[FIle transfer over SHell filesystem]",
              ":fishlink_cmd: Shell link to machine ", "sh://", 1, TRUE);
-}
-#endif
-
-/* --------------------------------------------------------------------------------------------- */
-
-#ifdef ENABLE_VFS_UNDELFS
-void
-undelete_cmd (void)
-{
-    nice_cd (_ ("Undelete files on an ext2 file system"),
-             _ ("Enter device (without /dev/) to undelete\nfiles on: (F1 for details)"),
-             "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "undel://", 0, FALSE);
 }
 #endif
 

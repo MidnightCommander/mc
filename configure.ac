@@ -640,8 +640,6 @@ src/vfs/sfs/Makefile
 
 src/vfs/tar/Makefile
 
-src/vfs/undelfs/Makefile
-
 lib/Makefile
 lib/event/Makefile
 lib/filehighlight/Makefile

@@ -168,7 +168,6 @@ enum
     CK_ShowHidden,
     CK_PanelTree,
     CK_Tree,
-    CK_Undelete,
     CK_SplitVertHoriz,
     CK_SplitEqual,
     CK_SplitMore,

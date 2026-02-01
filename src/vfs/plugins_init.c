@@ -66,10 +66,6 @@
 #include "tar/tar.h"
 #endif
 
-#ifdef ENABLE_VFS_UNDELFS
-#include "undelfs/undelfs.h"
-#endif
-
 #include "plugins_init.h"
 
 /*** global variables ****************************************************************************/
@@ -104,9 +100,6 @@ vfs_plugins_init (void)
 #endif
 #ifdef ENABLE_VFS_EXTFS
     vfs_init_extfs ();
-#endif
-#ifdef ENABLE_VFS_UNDELFS
-    vfs_init_undelfs ();
 #endif
 
 #ifdef ENABLE_VFS_FTP
