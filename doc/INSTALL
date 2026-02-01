@@ -133,11 +133,6 @@ incomplete, use `configure --help' to get the full list):
      but support for 64-bit offsets is available.  May be useful for
      slow processors and embedded systems.
 
-`--enable-charset'
-     This option adds support for selecting character set of the text in
-     the internal viewer and editor and converting it on the fly.  The
-     implementation of this option is currently incomplete.
-
 `--disable-background'
      This option disables support for background operations.  Background
      operations allow to perform some tasks such as copying files in a
