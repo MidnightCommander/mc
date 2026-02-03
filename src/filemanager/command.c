@@ -106,7 +106,7 @@ enter (WInput *lc_cmdline)
     else if (strcmp (cmd, "exit") == 0)
     {
         input_assign_text (lc_cmdline, "");
-        if (!quiet_quit_cmd ())
+        if (!quiet_quit_cmd (FALSE))
             return MSG_NOT_HANDLED;
     }
     else
@@ -154,7 +154,7 @@ enter (WInput *lc_cmdline)
 #ifdef ENABLE_SUBSHELL
         if ((quit & SUBSHELL_EXIT) != 0)
         {
-            if (quiet_quit_cmd ())
+            if (quiet_quit_cmd (FALSE))
                 return MSG_HANDLED;
 
             quit = 0;
