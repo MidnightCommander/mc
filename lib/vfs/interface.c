@@ -194,8 +194,10 @@ mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath, const vfs_path_t *local
                        gboolean has_changed)
 {
     int fdin = -1, fdout = -1;
+    const char *filename;
     const char *local;
 
+    filename = vfs_path_get_last_path_str (filename_vpath);
     local = vfs_path_get_last_path_str (local_vpath);
 
     if (has_changed)
@@ -234,8 +236,11 @@ mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath, const vfs_path_t *local
     return 0;
 
 failed:
-    message (D_ERROR, _ ("Changes to file lost"), "%s",
-             vfs_path_get_last_path_str (filename_vpath));
+    if (filename != NULL)
+        message (D_ERROR, MSG_ERROR, _ ("Changes to file lost:\n%s"), filename);
+    else
+        message (D_ERROR, MSG_ERROR, "%s", _ ("Changes to file lost"));
+
     if (fdout != -1)
         mc_close (fdout);
     if (fdin != -1)
