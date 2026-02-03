@@ -70,7 +70,7 @@ local_open (const vfs_path_t *vpath, int flags, mode_t mode)
     path = vfs_path_get_last_path_str (vpath);
     fd = open (path, NO_LINEAR (flags), mode);
     if (fd == -1)
-        return 0;
+        return NULL;
 
     local_info = g_new (int, 1);
     *local_info = fd;
