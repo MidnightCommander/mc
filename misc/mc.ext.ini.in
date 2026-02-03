@@ -1159,9 +1159,15 @@ Type=\\(Zip archive
 Open=%cd %p/uzip://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
-[jar]
+[jar-war-by-type]
 Type=\\(Java (Jar file|archive) data \\((zip|JAR)\\)\\)
 TypeIgnoreCase=true
+Open=%cd %p/uzip://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
+[jar-war-by-regex]
+Regex=\\.[jw]ar$
+RegexIgnoreCase=true
 Open=%cd %p/uzip://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
