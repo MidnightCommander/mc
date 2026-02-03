@@ -389,7 +389,7 @@ free_mount_entry (struct mount_entry *me)
 #ifdef MOUNTED_GETMNTINFO  // Mac OS X, FreeBSD, OpenBSD, also (obsolete) 4.4BSD
 
 #ifndef HAVE_STRUCT_STATFS_F_FSTYPENAME
-static char *
+static const char *
 fstype_to_string (short int t)
 {
     switch (t)
@@ -486,11 +486,11 @@ fstype_to_string (short int t)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static const char *
 fsp_to_string (const struct statfs *fsp)
 {
 #ifdef HAVE_STRUCT_STATFS_F_FSTYPENAME
-    return (char *) (fsp->f_fstypename);
+    return fsp->f_fstypename;
 #else
     return fstype_to_string (fsp->f_type);
 #endif
@@ -500,7 +500,7 @@ fsp_to_string (const struct statfs *fsp)
 /* --------------------------------------------------------------------------------------------- */
 
 #ifdef MOUNTED_VMOUNT  // AIX
-static char *
+static const char *
 fstype_to_string (int t)
 {
     struct vfs_ent *e;
@@ -734,14 +734,14 @@ read_file_system_list (void)
             return NULL;
         for (; entries-- > 0; fsp++)
         {
-            char *fs_type = fsp_to_string (fsp);
+            const char *fs_type = fsp_to_string (fsp);
 
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (fsp->f_mntfromname);
             me->me_mountdir = g_strdup (fsp->f_mntonname);
             me->me_mntroot = NULL;
-            me->me_type = fs_type;
-            me->me_type_malloced = 0;
+            me->me_type = g_strdup (fs_type);
+            me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = (dev_t) (-1);  // Magic; means not known yet.
