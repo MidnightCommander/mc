@@ -527,7 +527,7 @@ toggle_subshell (void)
     if ((quit & SUBSHELL_EXIT) != 0)
     {
         // User did 'exit' or 'logout': quit MC
-        if (quiet_quit_cmd ())
+        if (quiet_quit_cmd (FALSE))
             return;
 
         quit = 0;

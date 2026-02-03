@@ -1292,7 +1292,7 @@ midnight_execute_cmd (Widget *sender, long command)
             quick_cmd_no_menu ();  // shortcut or buttonabr
         break;
     case CK_QuitQuiet:
-        quiet_quit_cmd ();
+        quiet_quit_cmd (TRUE);
         break;
     case CK_Quit:
         quit_cmd ();
@@ -1742,9 +1742,9 @@ save_cwds_stat (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-quiet_quit_cmd (void)
+quiet_quit_cmd (const gboolean suppress_last_pwd)
 {
-    print_last_revert = TRUE;
+    print_last_revert = suppress_last_pwd;
     return quit_cmd_internal (1);
 }
 
