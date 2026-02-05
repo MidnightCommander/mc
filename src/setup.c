@@ -308,7 +308,6 @@ static const struct
     { "safe_overwrite", &safe_overwrite },
     { "mouse_move_pages_viewer", &mcview_mouse_move_pages },
     { "mouse_close_dialog", &mouse_close_dialog },
-    { "fast_refresh", &fast_refresh },
     { "drop_menus", &drop_menus },
     { "wrap_mode", &mcview_global_flags.wrap },
     { "old_esc_mode", &old_esc_mode },
