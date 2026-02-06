@@ -612,10 +612,16 @@ mc_setup_run_mode (char **argv)
 gboolean
 mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError **mcerror)
 {
+    const char *nocolor_env;
     const gchar *_system_codepage;
     gboolean ok = TRUE;
 
     mc_return_val_if_error (mcerror, FALSE);
+
+    // https://no-color.org/ - avoid colors if NO_COLOR is nonempty, unless overridden in cmdline
+    nocolor_env = getenv ("NO_COLOR");
+    if (nocolor_env != NULL && nocolor_env[0] != '\0')
+        mc_global.tty.disable_colors = TRUE;
 
     _system_codepage = str_detect_termencoding ();
 
