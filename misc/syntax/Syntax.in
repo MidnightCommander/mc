@@ -31,9 +31,9 @@
 # meaning when used in the actual syntax definitions.
 #
 # You can use the following colors in the syntax highlighting files:
-# black, blue, brightblue, brightcyan, brightgreen, brightmagenta,
-# brightred, brown, cyan, gray, green, lightgray, magenta, red, white,
-# yellow
+# black, red, green, yellow, blue, magenta, cyan, white, brightblack,
+# brightred, brightgreen, brightyellow, brightblue, brightmagenta,
+# brightcyan, brightwhite.
 #
 
 file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s

@@ -1,117 +1,117 @@
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._
 
 context default
-    keyword whole after yellow
-    keyword whole append yellow
-    keyword whole array yellow
-    keyword whole bgerror yellow
-    keyword whole binary yellow
-    keyword whole body yellow
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole catch yellow
-    keyword whole cd yellow
-    keyword whole class yellow
-    keyword whole clock yellow
-    keyword whole close yellow
-    keyword whole concat yellow
-    keyword whole constructor yellow
-    keyword whole continue yellow
-    keyword whole dde yellow
-    keyword whole default yellow
-    keyword whole delete yellow
-    keyword whole destructor yellow
-    keyword whole else yellow
-    keyword whole elseif yellow
-    keyword whole encoding yellow
-    keyword whole end yellow
-    keyword whole eof yellow
-    keyword whole error yellow
-    keyword whole eval yellow
-    keyword whole exec yellow
-    keyword whole exit yellow
-    keyword whole expr yellow
-    keyword whole fblocked yellow
-    keyword whole fconfigure yellow
-    keyword whole fcopy yellow
-    keyword whole file yellow
-    keyword whole fileevent yellow
-    keyword whole filename yellow
-    keyword whole flush yellow
-    keyword whole for yellow
-    keyword whole foreach yellow
-    keyword whole format yellow
-    keyword whole gets yellow
-    keyword whole glob yellow
-    keyword whole global yellow
-    keyword whole history yellow
-    keyword whole http yellow
-    keyword whole if yellow
-    keyword whole incr yellow
-    keyword whole info yellow
-    keyword whole inherit yellow
-    keyword whole insert yellow
-    keyword whole interp yellow
-    keyword whole join yellow
-    keyword whole lappend yellow
-    keyword whole library yellow
-    keyword whole lindex yellow
-    keyword whole linsert yellow
-    keyword whole list yellow
-    keyword whole llength yellow
-    keyword whole load yellow
-    keyword whole lrange yellow
-    keyword whole lreplace yellow
-    keyword whole lsearch yellow
-    keyword whole lset yellow
-    keyword whole lsort yellow
-    keyword whole memory yellow
-    keyword whole method yellow
-    keyword whole msgcat yellow
-    keyword whole namespace yellow
-    keyword whole object yellow
-    keyword whole open yellow
-    keyword whole package yellow
-    keyword whole packagens yellow
-    keyword whole pid yellow
-    keyword whole pkgMkIndex yellow
-    keyword whole proc yellow
-    keyword whole protected yellow
-    keyword whole public yellow
-    keyword whole puts yellow
-    keyword whole pwd yellow
-    keyword whole re_syntax yellow
-    keyword whole read yellow
-    keyword whole regexp yellow
-    keyword whole registry yellow
-    keyword whole regsub yellow
-    keyword whole rename yellow
-    keyword whole resource yellow
-    keyword whole return yellow
-    keyword whole safe yellow
-    keyword whole scan yellow
-    keyword whole seek yellow
-    keyword whole set yellow
-    keyword whole socket yellow
-    keyword whole source yellow
-    keyword whole split yellow
-    keyword whole string yellow
-    keyword whole subst yellow
-    keyword whole switch yellow
-    keyword whole tcltest yellow
-    keyword whole tclvars yellow
-    keyword whole tell yellow
-    keyword whole time yellow
-    keyword whole then yellow
-    keyword whole trace yellow
-    keyword whole unknown yellow
-    keyword whole unset yellow
-    keyword whole update yellow
-    keyword whole uplevel yellow
-    keyword whole upvar yellow
-    keyword whole variable yellow
-    keyword whole vwait yellow
-    keyword whole while yellow
+    keyword whole after brightyellow
+    keyword whole append brightyellow
+    keyword whole array brightyellow
+    keyword whole bgerror brightyellow
+    keyword whole binary brightyellow
+    keyword whole body brightyellow
+    keyword whole break brightyellow
+    keyword whole case brightyellow
+    keyword whole catch brightyellow
+    keyword whole cd brightyellow
+    keyword whole class brightyellow
+    keyword whole clock brightyellow
+    keyword whole close brightyellow
+    keyword whole concat brightyellow
+    keyword whole constructor brightyellow
+    keyword whole continue brightyellow
+    keyword whole dde brightyellow
+    keyword whole default brightyellow
+    keyword whole delete brightyellow
+    keyword whole destructor brightyellow
+    keyword whole else brightyellow
+    keyword whole elseif brightyellow
+    keyword whole encoding brightyellow
+    keyword whole end brightyellow
+    keyword whole eof brightyellow
+    keyword whole error brightyellow
+    keyword whole eval brightyellow
+    keyword whole exec brightyellow
+    keyword whole exit brightyellow
+    keyword whole expr brightyellow
+    keyword whole fblocked brightyellow
+    keyword whole fconfigure brightyellow
+    keyword whole fcopy brightyellow
+    keyword whole file brightyellow
+    keyword whole fileevent brightyellow
+    keyword whole filename brightyellow
+    keyword whole flush brightyellow
+    keyword whole for brightyellow
+    keyword whole foreach brightyellow
+    keyword whole format brightyellow
+    keyword whole gets brightyellow
+    keyword whole glob brightyellow
+    keyword whole global brightyellow
+    keyword whole history brightyellow
+    keyword whole http brightyellow
+    keyword whole if brightyellow
+    keyword whole incr brightyellow
+    keyword whole info brightyellow
+    keyword whole inherit brightyellow
+    keyword whole insert brightyellow
+    keyword whole interp brightyellow
+    keyword whole join brightyellow
+    keyword whole lappend brightyellow
+    keyword whole library brightyellow
+    keyword whole lindex brightyellow
+    keyword whole linsert brightyellow
+    keyword whole list brightyellow
+    keyword whole llength brightyellow
+    keyword whole load brightyellow
+    keyword whole lrange brightyellow
+    keyword whole lreplace brightyellow
+    keyword whole lsearch brightyellow
+    keyword whole lset brightyellow
+    keyword whole lsort brightyellow
+    keyword whole memory brightyellow
+    keyword whole method brightyellow
+    keyword whole msgcat brightyellow
+    keyword whole namespace brightyellow
+    keyword whole object brightyellow
+    keyword whole open brightyellow
+    keyword whole package brightyellow
+    keyword whole packagens brightyellow
+    keyword whole pid brightyellow
+    keyword whole pkgMkIndex brightyellow
+    keyword whole proc brightyellow
+    keyword whole protected brightyellow
+    keyword whole public brightyellow
+    keyword whole puts brightyellow
+    keyword whole pwd brightyellow
+    keyword whole re_syntax brightyellow
+    keyword whole read brightyellow
+    keyword whole regexp brightyellow
+    keyword whole registry brightyellow
+    keyword whole regsub brightyellow
+    keyword whole rename brightyellow
+    keyword whole resource brightyellow
+    keyword whole return brightyellow
+    keyword whole safe brightyellow
+    keyword whole scan brightyellow
+    keyword whole seek brightyellow
+    keyword whole set brightyellow
+    keyword whole socket brightyellow
+    keyword whole source brightyellow
+    keyword whole split brightyellow
+    keyword whole string brightyellow
+    keyword whole subst brightyellow
+    keyword whole switch brightyellow
+    keyword whole tcltest brightyellow
+    keyword whole tclvars brightyellow
+    keyword whole tell brightyellow
+    keyword whole time brightyellow
+    keyword whole then brightyellow
+    keyword whole trace brightyellow
+    keyword whole unknown brightyellow
+    keyword whole unset brightyellow
+    keyword whole update brightyellow
+    keyword whole uplevel brightyellow
+    keyword whole upvar brightyellow
+    keyword whole variable brightyellow
+    keyword whole vwait brightyellow
+    keyword whole while brightyellow
 
     keyword ${+} brightgreen
 
@@ -120,14 +120,14 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
     keyword wholeright $+ brightgreen
     keyword wholeright \s-\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}+ cyan
 
-    keyword < yellow
-    keyword > yellow
-    keyword = yellow
-    keyword || yellow
-    keyword && yellow
-    keyword != yellow
-    keyword == yellow
-    keyword :: yellow
+    keyword < brightyellow
+    keyword > brightyellow
+    keyword = brightyellow
+    keyword || brightyellow
+    keyword && brightyellow
+    keyword != brightyellow
+    keyword == brightyellow
+    keyword :: brightyellow
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -136,7 +136,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
     keyword ] brightcyan
     keyword ; brightmagenta
 
-context # \n brown
+context # \n yellow
 
 context " " green
     keyword wholeright $+ brightgreen

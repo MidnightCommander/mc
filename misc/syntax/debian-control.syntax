@@ -20,4 +20,4 @@ context default
     keyword linestart Description green/6
     keyword <*@*> brightred/19
 
-context linestart \s \n brown/22
+context linestart \s \n yellow/22

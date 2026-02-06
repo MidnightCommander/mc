@@ -2,96 +2,96 @@
 
 context default
 
-    keyword whole abstract yellow
-    keyword whole as yellow
-    keyword whole base yellow
-    keyword whole bool yellow
-    keyword whole break yellow
-    keyword whole byte yellow
-    keyword whole case yellow
-    keyword whole catch yellow
-    keyword whole char yellow
-    keyword whole checked yellow
-    keyword whole class white
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole decimal yellow
-    keyword whole default yellow
-    keyword whole delegate white
-    keyword whole do yellow
-    keyword whole double yellow
-    keyword whole else yellow
-    keyword whole enum white
-    keyword whole event yellow
-    keyword whole explicit yellow
-    keyword whole extern yellow
-    keyword whole false yellow
-    keyword whole finally yellow
-    keyword whole fixed yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole foreach yellow
+    keyword whole abstract brightyellow
+    keyword whole as brightyellow
+    keyword whole base brightyellow
+    keyword whole bool brightyellow
+    keyword whole break brightyellow
+    keyword whole byte brightyellow
+    keyword whole case brightyellow
+    keyword whole catch brightyellow
+    keyword whole char brightyellow
+    keyword whole checked brightyellow
+    keyword whole class brightwhite
+    keyword whole const brightyellow
+    keyword whole continue brightyellow
+    keyword whole decimal brightyellow
+    keyword whole default brightyellow
+    keyword whole delegate brightwhite
+    keyword whole do brightyellow
+    keyword whole double brightyellow
+    keyword whole else brightyellow
+    keyword whole enum brightwhite
+    keyword whole event brightyellow
+    keyword whole explicit brightyellow
+    keyword whole extern brightyellow
+    keyword whole false brightyellow
+    keyword whole finally brightyellow
+    keyword whole fixed brightyellow
+    keyword whole float brightyellow
+    keyword whole for brightyellow
+    keyword whole foreach brightyellow
     keyword whole get brightgreen
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole implicit yellow
-    keyword whole in yellow
-    keyword whole int yellow
-    keyword whole interface white
+    keyword whole goto brightyellow
+    keyword whole if brightyellow
+    keyword whole implicit brightyellow
+    keyword whole in brightyellow
+    keyword whole int brightyellow
+    keyword whole interface brightwhite
     keyword whole internal brightred
-    keyword whole is yellow
-    keyword whole lock yellow
-    keyword whole long yellow
-    keyword whole namespace white
-    keyword whole new yellow
-    keyword whole null yellow
-    keyword whole object yellow
-    keyword whole operator yellow
-    keyword whole out yellow
-    keyword whole override yellow
-    keyword whole params yellow
-    keyword whole partial yellow
+    keyword whole is brightyellow
+    keyword whole lock brightyellow
+    keyword whole long brightyellow
+    keyword whole namespace brightwhite
+    keyword whole new brightyellow
+    keyword whole null brightyellow
+    keyword whole object brightyellow
+    keyword whole operator brightyellow
+    keyword whole out brightyellow
+    keyword whole override brightyellow
+    keyword whole params brightyellow
+    keyword whole partial brightyellow
     keyword whole private brightred
-    keyword whole protected yellow
+    keyword whole protected brightyellow
     keyword whole public brightred
-    keyword whole readonly yellow
-    keyword whole ref yellow
-    keyword whole return yellow
-    keyword whole sbyte yellow
-    keyword whole sealed yellow
+    keyword whole readonly brightyellow
+    keyword whole ref brightyellow
+    keyword whole return brightyellow
+    keyword whole sbyte brightyellow
+    keyword whole sealed brightyellow
     keyword whole set brightgreen
-    keyword whole short yellow
-    keyword whole sizeof yellow
-    keyword whole stackalloc yellow
-    keyword whole static yellow
-    keyword whole string yellow
-    keyword whole struct white
-    keyword whole switch yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole true yellow
-    keyword whole try yellow
-    keyword whole typeof yellow
-    keyword whole uint yellow
-    keyword whole ulong yellow
-    keyword whole unchecked yellow
-    keyword whole unsafe yellow
-    keyword whole ushort yellow
+    keyword whole short brightyellow
+    keyword whole sizeof brightyellow
+    keyword whole stackalloc brightyellow
+    keyword whole static brightyellow
+    keyword whole string brightyellow
+    keyword whole struct brightwhite
+    keyword whole switch brightyellow
+    keyword whole this brightyellow
+    keyword whole throw brightyellow
+    keyword whole true brightyellow
+    keyword whole try brightyellow
+    keyword whole typeof brightyellow
+    keyword whole uint brightyellow
+    keyword whole ulong brightyellow
+    keyword whole unchecked brightyellow
+    keyword whole unsafe brightyellow
+    keyword whole ushort brightyellow
     keyword whole using brightcyan
-    keyword whole value yellow
-    keyword whole virtual yellow
-    keyword whole void yellow
-    keyword whole volatile yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole yield yellow
+    keyword whole value brightyellow
+    keyword whole virtual brightyellow
+    keyword whole void brightyellow
+    keyword whole volatile brightyellow
+    keyword whole where brightyellow
+    keyword whole while brightyellow
+    keyword whole yield brightyellow
 
 
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
     keyword '\\\{"abtnvfr\}' brightgreen
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
@@ -100,16 +100,16 @@ context default
     keyword '\\0' brightgreen
     keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
 
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
+    keyword > brightyellow
+    keyword < brightyellow
+    keyword \+ brightyellow
+    keyword - brightyellow
+    keyword \* brightyellow
+    keyword / brightyellow
+    keyword % brightyellow
+    keyword = brightyellow
+    keyword != brightyellow
+    keyword == brightyellow
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -121,15 +121,15 @@ context default
     keyword ? brightcyan
     keyword ; brightmagenta
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
     keyword "+" red
 
 context " " green

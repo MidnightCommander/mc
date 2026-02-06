@@ -1,54 +1,54 @@
 context default
-    keyword whole interface yellow
-    keyword whole module yellow
+    keyword whole interface brightyellow
+    keyword whole module brightyellow
 
-    keyword whole Object yellow
+    keyword whole Object brightyellow
 
-    keyword whole struct yellow
-    keyword whole union yellow
-    keyword whole enum yellow
-    keyword whole sequence yellow
-    keyword whole typedef yellow
+    keyword whole struct brightyellow
+    keyword whole union brightyellow
+    keyword whole enum brightyellow
+    keyword whole sequence brightyellow
+    keyword whole typedef brightyellow
 
-    keyword whole switch yellow
-    keyword whole case yellow
-    keyword whole default yellow
+    keyword whole switch brightyellow
+    keyword whole case brightyellow
+    keyword whole default brightyellow
 
-    keyword whole const yellow
-    keyword whole char yellow
-    keyword whole wchar yellow
-    keyword whole short yellow
-    keyword whole long yellow
-    keyword whole unsigned yellow
-    keyword whole double yellow
-    keyword whole float yellow
-    keyword whole fixed yellow
-    keyword whole string yellow
-    keyword whole wstring yellow
-    keyword whole octet yellow
-    keyword whole any yellow
-    keyword whole void yellow
-    keyword whole boolean yellow
-    keyword whole TRUE yellow
-    keyword whole FALSE yellow
-    keyword whole valuetype yellow
+    keyword whole const brightyellow
+    keyword whole char brightyellow
+    keyword whole wchar brightyellow
+    keyword whole short brightyellow
+    keyword whole long brightyellow
+    keyword whole unsigned brightyellow
+    keyword whole double brightyellow
+    keyword whole float brightyellow
+    keyword whole fixed brightyellow
+    keyword whole string brightyellow
+    keyword whole wstring brightyellow
+    keyword whole octet brightyellow
+    keyword whole any brightyellow
+    keyword whole void brightyellow
+    keyword whole boolean brightyellow
+    keyword whole TRUE brightyellow
+    keyword whole FALSE brightyellow
+    keyword whole valuetype brightyellow
 
-    keyword whole attribute yellow
-    keyword whole readonly yellow
-    keyword whole in yellow
-    keyword whole out yellow
-    keyword whole inout yellow
-    keyword whole oneway yellow
-    keyword whole context yellow
+    keyword whole attribute brightyellow
+    keyword whole readonly brightyellow
+    keyword whole in brightyellow
+    keyword whole out brightyellow
+    keyword whole inout brightyellow
+    keyword whole oneway brightyellow
+    keyword whole context brightyellow
 
-    keyword whole exception yellow
-    keyword whole raises yellow
+    keyword whole exception brightyellow
+    keyword whole raises brightyellow
 
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
     keyword '\\\{"abtnvfr\}' brightgreen
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
@@ -57,16 +57,16 @@ context default
     keyword '\\0' brightgreen
     keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
 
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
+    keyword > brightyellow
+    keyword < brightyellow
+    keyword \+ brightyellow
+    keyword - brightyellow
+    keyword \* brightyellow
+    keyword / brightyellow
+    keyword % brightyellow
+    keyword = brightyellow
+    keyword != brightyellow
+    keyword == brightyellow
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -78,15 +78,15 @@ context default
     keyword ? brightcyan
     keyword ; brightmagenta
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
     keyword "+" red
     keyword <+> red
 

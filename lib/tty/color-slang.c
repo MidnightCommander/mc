@@ -128,6 +128,24 @@ tty_color_deinit_lib (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static const char *
+tty_color_get_name_by_index (int idx)
+{
+    if (idx >= 0 && (idx < 256 || (idx & FLAG_TRUECOLOR) != 0))
+    {
+        char name[9];
+
+        if (idx < 256)
+            g_snprintf (name, sizeof (name), "color%d", idx);
+        else
+            g_snprintf (name, sizeof (name), "#%06X", (unsigned int) idx & 0xFFFFFF);
+        return g_intern_string (name);
+    }
+    return "default";
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
 {

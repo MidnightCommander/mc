@@ -13,9 +13,9 @@ context default
     keyword readv(*) brightmagenta
     keyword writev(*) brightmagenta
 
-    keyword fcntl64(*) white
-    keyword fstat64(*) white
-    keyword stat64(*) white
+    keyword fcntl64(*) brightwhite
+    keyword fstat64(*) brightwhite
+    keyword stat64(*) brightwhite
 
     keyword old_mmap(*) red
     keyword mmap2(*) red
@@ -31,12 +31,12 @@ context default
     keyword alarm(*) brightred
     keyword brk(*) brightred
 
-    keyword chown32(*) yellow
-    keyword chmod(*) yellow
-    keyword geteuid32(*) yellow
-    keyword getegid32(*) yellow
-    keyword getuid32(*) yellow
-    keyword getgid32(*) yellow
-    keyword setresuid32(*) yellow
-    keyword setresgid32(*) yellow
-    keyword gettimeofday(*) yellow
+    keyword chown32(*) brightyellow
+    keyword chmod(*) brightyellow
+    keyword geteuid32(*) brightyellow
+    keyword getegid32(*) brightyellow
+    keyword getuid32(*) brightyellow
+    keyword getgid32(*) brightyellow
+    keyword setresuid32(*) brightyellow
+    keyword setresgid32(*) brightyellow
+    keyword gettimeofday(*) brightyellow

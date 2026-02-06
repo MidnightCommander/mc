@@ -1,39 +1,39 @@
 context default
 
 # keywords
-    keyword whole as yellow
-    keyword whole break yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole crate yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extern yellow
-    keyword whole fn yellow
-    keyword whole for yellow
-    keyword whole if yellow
-    keyword whole impl yellow
-    keyword whole in yellow
-    keyword whole let yellow
-    keyword whole loop yellow
-    keyword whole match yellow
-    keyword whole mod yellow
-    keyword whole move yellow
-    keyword whole mut yellow
-    keyword whole pub yellow
-    keyword whole ref yellow
-    keyword whole return yellow
-    keyword whole Self yellow
+    keyword whole as brightyellow
+    keyword whole break brightyellow
+    keyword whole const brightyellow
+    keyword whole continue brightyellow
+    keyword whole crate brightyellow
+    keyword whole else brightyellow
+    keyword whole enum brightyellow
+    keyword whole extern brightyellow
+    keyword whole fn brightyellow
+    keyword whole for brightyellow
+    keyword whole if brightyellow
+    keyword whole impl brightyellow
+    keyword whole in brightyellow
+    keyword whole let brightyellow
+    keyword whole loop brightyellow
+    keyword whole match brightyellow
+    keyword whole mod brightyellow
+    keyword whole move brightyellow
+    keyword whole mut brightyellow
+    keyword whole pub brightyellow
+    keyword whole ref brightyellow
+    keyword whole return brightyellow
+    keyword whole Self brightyellow
     keyword whole self brightgreen
-    keyword whole static yellow
-    keyword whole struct yellow
-    keyword whole super yellow
-    keyword whole trait yellow
-    keyword whole type yellow
-    keyword whole unsafe yellow
-    keyword whole use yellow
-    keyword whole where yellow
-    keyword whole while yellow
+    keyword whole static brightyellow
+    keyword whole struct brightyellow
+    keyword whole super brightyellow
+    keyword whole trait brightyellow
+    keyword whole type brightyellow
+    keyword whole unsafe brightyellow
+    keyword whole use brightyellow
+    keyword whole where brightyellow
+    keyword whole while brightyellow
 
 # keywords reserved for future use
     keyword whole abstract red
@@ -111,7 +111,7 @@ context default
 
 # comments
 
-context /\* \*/ brown
+context /\* \*/ yellow
     spellcheck
     keyword whole BUG brightred
     keyword whole FixMe brightred
@@ -124,7 +124,7 @@ context /\* \*/ brown
     keyword ??\[?\] brightred
 
 
-context // \n brown
+context // \n yellow
     spellcheck
     keyword whole BUG brightred
     keyword whole FixMe brightred
@@ -149,5 +149,5 @@ context r#" "# green
     spellcheck
 
 
-context #[ ] white
-context #![ ] white
+context #[ ] brightwhite
+context #![ ] brightwhite

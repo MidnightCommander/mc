@@ -12,48 +12,48 @@ context default
 
     #=========================
     # Built-in macros with mandatory parameters
-    keyword whole builtin yellow
-    keyword whole decr yellow
-    keyword whole define yellow
-    keyword whole defn yellow
-    keyword whole esyscmd yellow
-    keyword whole eval yellow
-    keyword whole format yellow
-    keyword whole ifdef yellow
-    keyword whole ifelse yellow
-    keyword whole include yellow
-    keyword whole incr yellow
-    keyword whole index yellow
-    keyword whole len yellow
-    keyword whole maketemp yellow
-    keyword whole patsubst yellow
-    keyword whole popdef yellow
-    keyword whole pushdef yellow
-    keyword whole regexp yellow
-    keyword whole sinclude yellow
-    keyword whole substr yellow
-    keyword whole syscmd yellow
-    keyword whole translit yellow
-    keyword whole undefine yellow
+    keyword whole builtin brightyellow
+    keyword whole decr brightyellow
+    keyword whole define brightyellow
+    keyword whole defn brightyellow
+    keyword whole esyscmd brightyellow
+    keyword whole eval brightyellow
+    keyword whole format brightyellow
+    keyword whole ifdef brightyellow
+    keyword whole ifelse brightyellow
+    keyword whole include brightyellow
+    keyword whole incr brightyellow
+    keyword whole index brightyellow
+    keyword whole len brightyellow
+    keyword whole maketemp brightyellow
+    keyword whole patsubst brightyellow
+    keyword whole popdef brightyellow
+    keyword whole pushdef brightyellow
+    keyword whole regexp brightyellow
+    keyword whole sinclude brightyellow
+    keyword whole substr brightyellow
+    keyword whole syscmd brightyellow
+    keyword whole translit brightyellow
+    keyword whole undefine brightyellow
 
     #=========================
     # Built-in macros with optional parameters
-    keyword whole changecom yellow
-    keyword whole changequote yellow
-    keyword whole debugfile yellow
-    keyword whole debugmode yellow
-    keyword whole divert yellow
-    keyword whole divnum yellow
-    keyword whole dumpdef yellow
-    keyword whole errprint yellow
-    keyword whole indir yellow
-    keyword whole m4exit yellow
-    keyword whole m4wrap yellow
-    keyword whole shift yellow
-    keyword whole sysval yellow
-    keyword whole traceoff yellow
-    keyword whole traceon yellow
-    keyword whole undivert yellow
+    keyword whole changecom brightyellow
+    keyword whole changequote brightyellow
+    keyword whole debugfile brightyellow
+    keyword whole debugmode brightyellow
+    keyword whole divert brightyellow
+    keyword whole divnum brightyellow
+    keyword whole dumpdef brightyellow
+    keyword whole errprint brightyellow
+    keyword whole indir brightyellow
+    keyword whole m4exit brightyellow
+    keyword whole m4wrap brightyellow
+    keyword whole shift brightyellow
+    keyword whole sysval brightyellow
+    keyword whole traceoff brightyellow
+    keyword whole traceon brightyellow
+    keyword whole undivert brightyellow
 
     #=========================
     # Autoconf and Automake macros
@@ -84,7 +84,7 @@ context default
 #=============================
 # Comments
 
-context # \n brown
+context # \n yellow
     spellcheck
     keyword whole BUG brightred
     keyword whole FixMe brightred
@@ -97,7 +97,7 @@ context # \n brown
     keyword ??\[?\] brightred
 
 
-context dnl \n brown
+context dnl \n yellow
     spellcheck
     keyword whole BUG brightred
     keyword whole FixMe brightred

@@ -5,7 +5,7 @@
 
 context default
     keyword whole linestart #*procmail\n brightcyan black
-    keyword whole #*\n brown
+    keyword whole #*\n yellow
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
@@ -179,7 +179,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole :0*\n        black magenta
     keyword whole \**\n cyan
 
-    keyword whole |*\n yellow
+    keyword whole |*\n brightyellow
     keyword whole !*\n brightblue
 
     keyword ${*} brightgreen
@@ -191,7 +191,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 context  " "            green
     keyword ${*} brightgreen
 
-context exclusive ` `        lightgray black
+context exclusive ` `        white black
     keyword '*' green
     keyword " green
     keyword \\` brightred
@@ -261,11 +261,11 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole wc cyan
     keyword whole which cyan
 
-    keyword whole if yellow
-    keyword whole then yellow
-    keyword whole else yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole in yellow
-    keyword whole do yellow
-    keyword whole done yellow
+    keyword whole if brightyellow
+    keyword whole then brightyellow
+    keyword whole else brightyellow
+    keyword whole fi brightyellow
+    keyword whole for brightyellow
+    keyword whole in brightyellow
+    keyword whole do brightyellow
+    keyword whole done brightyellow

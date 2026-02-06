@@ -1,30 +1,30 @@
 context default
 # keywords
-	keyword whole break yellow
-	keyword whole case yellow
-	keyword whole chan yellow
-	keyword whole const yellow
-	keyword whole continue yellow
-	keyword whole default yellow
-	keyword whole defer yellow
-	keyword whole else yellow
-	keyword whole fallthrough yellow
-	keyword whole for yellow
-	keyword whole func yellow
-	keyword whole go yellow
-	keyword whole goto yellow
-	keyword whole if yellow
-	keyword whole import yellow
-	keyword whole interface yellow
-	keyword whole map yellow
-	keyword whole package yellow
-	keyword whole range yellow
-	keyword whole return yellow
-	keyword whole select yellow
-	keyword whole struct yellow
-	keyword whole switch yellow
-	keyword whole type yellow
-	keyword whole var yellow
+	keyword whole break brightyellow
+	keyword whole case brightyellow
+	keyword whole chan brightyellow
+	keyword whole const brightyellow
+	keyword whole continue brightyellow
+	keyword whole default brightyellow
+	keyword whole defer brightyellow
+	keyword whole else brightyellow
+	keyword whole fallthrough brightyellow
+	keyword whole for brightyellow
+	keyword whole func brightyellow
+	keyword whole go brightyellow
+	keyword whole goto brightyellow
+	keyword whole if brightyellow
+	keyword whole import brightyellow
+	keyword whole interface brightyellow
+	keyword whole map brightyellow
+	keyword whole package brightyellow
+	keyword whole range brightyellow
+	keyword whole return brightyellow
+	keyword whole select brightyellow
+	keyword whole struct brightyellow
+	keyword whole switch brightyellow
+	keyword whole type brightyellow
+	keyword whole var brightyellow
 # builtin types
 	keyword whole uint8 brightgreen
 	keyword whole uint16 brightgreen
@@ -45,20 +45,20 @@ context default
 	keyword whole bool brightgreen
 	keyword whole time brightgreen
 # builtin functions
-	keyword whole nil brown
-	keyword whole true brown
-	keyword whole false brown
-	keyword whole iota brown
-	keyword whole cap brown
-	keyword whole close brown
-	keyword whole closed brown
-	keyword whole len brown
-	keyword whole make brown
-	keyword whole new brown
-	keyword whole panic brown
-	keyword whole panicln brown
-	keyword whole print brown
-	keyword whole println brown
+	keyword whole nil yellow
+	keyword whole true yellow
+	keyword whole false yellow
+	keyword whole iota yellow
+	keyword whole cap yellow
+	keyword whole close yellow
+	keyword whole closed yellow
+	keyword whole len yellow
+	keyword whole make yellow
+	keyword whole new yellow
+	keyword whole panic yellow
+	keyword whole panicln yellow
+	keyword whole print yellow
+	keyword whole println yellow
 # builtin packages
 	keyword whole tar brightgreen
 	keyword whole zip brightgreen
@@ -106,8 +106,8 @@ context default
 	keyword whole vendor brightgreen
 	keyword whole unicode brightgreen
 # special functions
-	keyword whole init brown
-	keyword whole main brown
+	keyword whole init yellow
+	keyword whole main yellow
 # comment chars
 	keyword /\* green
 	keyword \*/ green
@@ -138,16 +138,16 @@ context default
 	keyword : brightcyan
 
 # comment
-context exclusive /\* \*/ brown
-context exclusive // \n brown
+context exclusive /\* \*/ yellow
+context exclusive // \n yellow
 
 # char, raw string, string
-context ' ' gray
-	keyword \\\{abfnrtv\\'"\} white
-	keyword \\\{0123\}\{01234567\}\{01234567\} white
-	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
-	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
-	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
+context ' ' brightblack
+	keyword \\\{abfnrtv\\'"\} brightwhite
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightwhite
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightwhite
+	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightwhite
+	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightwhite
 context ` ` green
 context " " green
 	spellcheck

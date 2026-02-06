@@ -9,23 +9,23 @@ context default
 
 #wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
-    keyword whole with yellow
-    keyword whole select yellow
-    keyword whole use yellow
-    keyword whole is yellow
-    keyword whole of yellow
-    keyword whole length yellow
-    keyword whole range yellow
-    keyword whole left yellow
-    keyword whole right yellow
-    keyword whole delta yellow
-    keyword whole return yellow
-    keyword whole next yellow
-    keyword whole null yellow
-    keyword whole array yellow
-    keyword whole downto yellow
-    keyword whole to yellow
-    keyword whole foreign yellow
+    keyword whole with brightyellow
+    keyword whole select brightyellow
+    keyword whole use brightyellow
+    keyword whole is brightyellow
+    keyword whole of brightyellow
+    keyword whole length brightyellow
+    keyword whole range brightyellow
+    keyword whole left brightyellow
+    keyword whole right brightyellow
+    keyword whole delta brightyellow
+    keyword whole return brightyellow
+    keyword whole next brightyellow
+    keyword whole null brightyellow
+    keyword whole array brightyellow
+    keyword whole downto brightyellow
+    keyword whole to brightyellow
+    keyword whole foreign brightyellow
 
 # comment
     keyword -- magenta
@@ -76,34 +76,34 @@ context default
     keyword whole abs green
     keyword whole new green
 
-    keyword whole begin yellow
-    keyword whole end yellow
-    keyword whole exit yellow
-    keyword whole for yellow
-    keyword whole while yellow
-    keyword whole if yellow
-    keyword whole then yellow
-    keyword whole else yellow
-    keyword whole elsif yellow
-    keyword whole case yellow
-    keyword whole when yellow
-    keyword whole with yellow
-    keyword whole select yellow
-    keyword whole assert yellow
-    keyword    whole wait yellow
-    keyword    whole open yellow
-    keyword whole loop yellow
-    keyword whole until yellow
-    keyword whole others yellow
-    keyword whole all yellow
-    keyword whole block yellow
-    keyword whole guarded yellow
-    keyword whole after yellow
-    keyword whole transport yellow
-    keyword whole inertial yellow
-    keyword whole reject yellow
-    keyword whole unaffected yellow
-    keyword whole disconnect yellow
+    keyword whole begin brightyellow
+    keyword whole end brightyellow
+    keyword whole exit brightyellow
+    keyword whole for brightyellow
+    keyword whole while brightyellow
+    keyword whole if brightyellow
+    keyword whole then brightyellow
+    keyword whole else brightyellow
+    keyword whole elsif brightyellow
+    keyword whole case brightyellow
+    keyword whole when brightyellow
+    keyword whole with brightyellow
+    keyword whole select brightyellow
+    keyword whole assert brightyellow
+    keyword    whole wait brightyellow
+    keyword    whole open brightyellow
+    keyword whole loop brightyellow
+    keyword whole until brightyellow
+    keyword whole others brightyellow
+    keyword whole all brightyellow
+    keyword whole block brightyellow
+    keyword whole guarded brightyellow
+    keyword whole after brightyellow
+    keyword whole transport brightyellow
+    keyword whole inertial brightyellow
+    keyword whole reject brightyellow
+    keyword whole unaffected brightyellow
+    keyword whole disconnect brightyellow
 
 # types and related stuff
     keyword whole integer cyan
@@ -138,46 +138,46 @@ context default
     keyword whole type brightcyan
     keyword whole subtype brightcyan
 
-    keyword whole variable yellow
-    keyword whole shared yellow
-    keyword whole signal yellow
-    keyword whole constant yellow
-    keyword whole group yellow
-    keyword whole file yellow
-    keyword whole register yellow
+    keyword whole variable brightyellow
+    keyword whole shared brightyellow
+    keyword whole signal brightyellow
+    keyword whole constant brightyellow
+    keyword whole group brightyellow
+    keyword whole file brightyellow
+    keyword whole register brightyellow
 
-    keyword whole port yellow
-    keyword whole map yellow
-    keyword whole label yellow
-    keyword whole record yellow
-    keyword whole generic yellow
-    keyword whole alias yellow
-    keyword whole attribute yellow
+    keyword whole port brightyellow
+    keyword whole map brightyellow
+    keyword whole label brightyellow
+    keyword whole record brightyellow
+    keyword whole generic brightyellow
+    keyword whole alias brightyellow
+    keyword whole attribute brightyellow
 
 # ports
-    keyword whole in white
-    keyword whole out white
-    keyword whole inout white
-    keyword whole buffer white
-    keyword whole linkage white
-    keyword whole bus white
+    keyword whole in brightwhite
+    keyword whole out brightwhite
+    keyword whole inout brightwhite
+    keyword whole buffer brightwhite
+    keyword whole linkage brightwhite
+    keyword whole bus brightwhite
 
 # library units
-    keyword whole library yellow
-    keyword whole entity yellow
-    keyword whole architecture yellow
-    keyword whole package yellow
-    keyword whole body yellow
-    keyword whole procedure yellow
-    keyword whole function yellow
-    keyword whole pure yellow
-    keyword whole impure yellow
-    keyword whole configuration yellow
-    keyword whole component yellow
-    keyword whole generic yellow
-    keyword whole process yellow
-    keyword whole postponded yellow
-    keyword whole generate yellow
+    keyword whole library brightyellow
+    keyword whole entity brightyellow
+    keyword whole architecture brightyellow
+    keyword whole package brightyellow
+    keyword whole body brightyellow
+    keyword whole procedure brightyellow
+    keyword whole function brightyellow
+    keyword whole pure brightyellow
+    keyword whole impure brightyellow
+    keyword whole configuration brightyellow
+    keyword whole component brightyellow
+    keyword whole generic brightyellow
+    keyword whole process brightyellow
+    keyword whole postponded brightyellow
+    keyword whole generate brightyellow
 
 # reports
     keyword whole report red

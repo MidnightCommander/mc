@@ -2,52 +2,52 @@
 # Daniel F Moisset - dmoisset@grulic.org.ar
 # Based on mc's pascal.syntax
 
-context default yellow
+context default brightyellow
 
-    keyword whole agent white
-    keyword whole alias white
-    keyword whole as white
-    keyword whole check white
-    keyword whole class white
-    keyword whole create white
-    keyword whole creation white
-    keyword whole debug white
-    keyword whole deferred white
-    keyword whole do white
-    keyword whole else white
-    keyword whole elseif white
-    keyword whole end white
-    keyword whole ensure white
-    keyword whole expanded white
-    keyword whole export white
-    keyword whole external white
-    keyword whole feature white
-    keyword whole from white
-    keyword whole if white
-    keyword whole is white
-    keyword whole indexing white
-    keyword whole inherit white
-    keyword whole inspect white
-    keyword whole invariant white
-    keyword whole like white
-    keyword whole local white
-    keyword whole loop white
-    keyword whole obsolete white
-    keyword whole old white
-    keyword whole once white
-    keyword whole redefine white
-    keyword whole reference white
-    keyword whole rename white
-    keyword whole require white
-    keyword whole rescue white
-    keyword whole retry white
-    keyword whole select white
-    keyword whole then white
-    keyword whole undefine white
-    keyword whole unique white
-    keyword whole until white
-    keyword whole variant white
-    keyword whole when white
+    keyword whole agent brightwhite
+    keyword whole alias brightwhite
+    keyword whole as brightwhite
+    keyword whole check brightwhite
+    keyword whole class brightwhite
+    keyword whole create brightwhite
+    keyword whole creation brightwhite
+    keyword whole debug brightwhite
+    keyword whole deferred brightwhite
+    keyword whole do brightwhite
+    keyword whole else brightwhite
+    keyword whole elseif brightwhite
+    keyword whole end brightwhite
+    keyword whole ensure brightwhite
+    keyword whole expanded brightwhite
+    keyword whole export brightwhite
+    keyword whole external brightwhite
+    keyword whole feature brightwhite
+    keyword whole from brightwhite
+    keyword whole if brightwhite
+    keyword whole is brightwhite
+    keyword whole indexing brightwhite
+    keyword whole inherit brightwhite
+    keyword whole inspect brightwhite
+    keyword whole invariant brightwhite
+    keyword whole like brightwhite
+    keyword whole local brightwhite
+    keyword whole loop brightwhite
+    keyword whole obsolete brightwhite
+    keyword whole old brightwhite
+    keyword whole once brightwhite
+    keyword whole redefine brightwhite
+    keyword whole reference brightwhite
+    keyword whole rename brightwhite
+    keyword whole require brightwhite
+    keyword whole rescue brightwhite
+    keyword whole retry brightwhite
+    keyword whole select brightwhite
+    keyword whole then brightwhite
+    keyword whole undefine brightwhite
+    keyword whole unique brightwhite
+    keyword whole until brightwhite
+    keyword whole variant brightwhite
+    keyword whole when brightwhite
 
     keyword whole Current brightmagenta
     keyword whole Precursor brightmagenta
@@ -55,7 +55,7 @@ context default yellow
     keyword whole Void brightmagenta
 
 # prevents - keyword from interfering with comment
-    keyword -- lightgray
+    keyword -- white
 
     keyword := brightcyan
     keyword ?= brightcyan
@@ -87,12 +87,12 @@ context default yellow
     keyword whole or cyan
 
 # Uncomment this to highlight tabs and trailing spaces
-#    keyword \t yellow red
-#    keyword \s\[\s\]\n yellow red
+#    keyword \t brightyellow red
+#    keyword \s\[\s\]\n brightyellow red
 
 # Comments
-context exclusive -- \n    lightgray
-    keyword `*' brown
+context exclusive -- \n    white
+    keyword `*' yellow
 
 # Strings and characters
 context " "    green

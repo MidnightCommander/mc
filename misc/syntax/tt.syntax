@@ -16,101 +16,101 @@ context default
 
 # TT directives - https://template-toolkit.org/docs/manual/Directives.html
 context [% %] red black
-    keyword whole GET yellow
-    keyword whole CALL yellow
-    keyword whole SET yellow
-    keyword whole DEFAULT yellow
+    keyword whole GET brightyellow
+    keyword whole CALL brightyellow
+    keyword whole SET brightyellow
+    keyword whole DEFAULT brightyellow
 
-    keyword whole INSERT yellow
-    keyword whole INCLUDE yellow
-    keyword whole PROCESS yellow
-    keyword whole WRAPPER yellow
-    keyword whole BLOCK yellow
+    keyword whole INSERT brightyellow
+    keyword whole INCLUDE brightyellow
+    keyword whole PROCESS brightyellow
+    keyword whole WRAPPER brightyellow
+    keyword whole BLOCK brightyellow
 
-    keyword whole IF yellow
-    keyword whole UNLESS yellow
-    keyword whole ELSIF yellow
-    keyword whole ELSE yellow
-    keyword whole SWITCH yellow
-    keyword whole CASE yellow
+    keyword whole IF brightyellow
+    keyword whole UNLESS brightyellow
+    keyword whole ELSIF brightyellow
+    keyword whole ELSE brightyellow
+    keyword whole SWITCH brightyellow
+    keyword whole CASE brightyellow
 
-    keyword whole FOREACH yellow
-    keyword whole IN yellow
-    keyword whole WHILE yellow
+    keyword whole FOREACH brightyellow
+    keyword whole IN brightyellow
+    keyword whole WHILE brightyellow
 
-    keyword whole FILTER yellow
-    keyword whole USE yellow
-    keyword whole MACRO yellow
-    keyword whole PERL yellow
-    keyword whole RAWPERL yellow
+    keyword whole FILTER brightyellow
+    keyword whole USE brightyellow
+    keyword whole MACRO brightyellow
+    keyword whole PERL brightyellow
+    keyword whole RAWPERL brightyellow
 
-    keyword whole TRY yellow
-    keyword whole THROW yellow
-    keyword whole CATCH yellow
-    keyword whole FINAL yellow
+    keyword whole TRY brightyellow
+    keyword whole THROW brightyellow
+    keyword whole CATCH brightyellow
+    keyword whole FINAL brightyellow
 
-    keyword whole NEXT yellow
-    keyword whole LAST yellow
-    keyword whole RETURN yellow
-    keyword whole STOP yellow
-    keyword whole CLEAR yellow
-    keyword whole META yellow
-    keyword whole TAGS yellow
-    keyword whole DEBUG yellow
+    keyword whole NEXT brightyellow
+    keyword whole LAST brightyellow
+    keyword whole RETURN brightyellow
+    keyword whole STOP brightyellow
+    keyword whole CLEAR brightyellow
+    keyword whole META brightyellow
+    keyword whole TAGS brightyellow
+    keyword whole DEBUG brightyellow
 
-    keyword whole END yellow
+    keyword whole END brightyellow
 
 # AND, OR and NOT are apparently not documented
-    keyword whole AND white
-    keyword whole OR white
-    keyword whole NOT white
-    keyword | white
+    keyword whole AND brightwhite
+    keyword whole OR brightwhite
+    keyword whole NOT brightwhite
+    keyword | brightwhite
 
 # TT VMethods - https://template-toolkit.org/docs/manual/VMethods.html
-    keyword .defined brown
-    keyword .length brown
-    keyword .repeat brown
-    keyword .replace brown
-    keyword .remove brown
-    keyword .match brown
-    keyword .search brown
-    keyword .split brown
-    keyword .chunk brown
-    keyword .substr brown
-    keyword .list brown
-    keyword .hash brown
-    keyword .size brown
-    keyword .keys brown
-    keyword .values brown
-    keyword .items brown
-    keyword .each brown
-    keyword .pairs brown
-    keyword .sort brown
-    keyword .nsort brown
-    keyword .import brown
-    keyword .exists brown
-    keyword .delete brown
-    keyword .item brown
-    keyword .first brown
-    keyword .last brown
-    keyword .max brown
-    keyword .reverse brown
-    keyword .join brown
-    keyword .grep brown
-    keyword .unshift brown
-    keyword .push brown
-    keyword .shift brown
-    keyword .pop brown
-    keyword .unique brown
-    keyword .merge brown
-    keyword .slice brown
-    keyword .splice brown
+    keyword .defined yellow
+    keyword .length yellow
+    keyword .repeat yellow
+    keyword .replace yellow
+    keyword .remove yellow
+    keyword .match yellow
+    keyword .search yellow
+    keyword .split yellow
+    keyword .chunk yellow
+    keyword .substr yellow
+    keyword .list yellow
+    keyword .hash yellow
+    keyword .size yellow
+    keyword .keys yellow
+    keyword .values yellow
+    keyword .items yellow
+    keyword .each yellow
+    keyword .pairs yellow
+    keyword .sort yellow
+    keyword .nsort yellow
+    keyword .import yellow
+    keyword .exists yellow
+    keyword .delete yellow
+    keyword .item yellow
+    keyword .first yellow
+    keyword .last yellow
+    keyword .max yellow
+    keyword .reverse yellow
+    keyword .join yellow
+    keyword .grep yellow
+    keyword .unshift yellow
+    keyword .push yellow
+    keyword .shift yellow
+    keyword .pop yellow
+    keyword .unique yellow
+    keyword .merge yellow
+    keyword .slice yellow
+    keyword .splice yellow
 
     keyword "*" green
     keyword '*' brightgreen
 
 # HTML comments
-context <!-- --> brown
+context <!-- --> yellow
     spellcheck
 
 # HTML DOCTYPE
@@ -123,4 +123,4 @@ context </ > brightcyan
 # HTML open tags - enabling this will hide TT syntax in HTML, e.g. <img src="[% image_url %]">
 #context < > brightcyan
 #   keyword "*" green
-#   keyword = yellow
+#   keyword = brightyellow

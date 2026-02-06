@@ -15,12 +15,12 @@
 
 # For the default (blue) background.
 # The colors almost match the original "c.syntax" file, slightly extending it:
-define _punctuation		yellow
+define _punctuation		brightyellow
 define _punct_operator	brightcyan
 define _punct_semicolon	brightmagenta
 define _punct_bracket	brightcyan
 define _punct_sqbracket	brightcyan
-define _punct_field		yellow
+define _punct_field		brightyellow
 define _punct_comma		brightcyan
 define _punct_ternary	brightcyan
 define _punct_bitwise	brightmagenta
@@ -29,46 +29,46 @@ define _preproc			brightred
 define _preproc_str		red
 define _preproc_nl_esc	red
 define _preproc_indent	brightmagenta
-define _keyword			yellow
-define _datatype		yellow
-define _datatype_void	yellow
-define _datatype_mod	yellow
-define _datatype_scope	yellow
-define _const			lightgray
-define _num_integer		lightgray
-define _num_hex			lightgray
-define _num_oct			lightgray
-define _num_float		lightgray
+define _keyword			brightyellow
+define _datatype		brightyellow
+define _datatype_void	brightyellow
+define _datatype_mod	brightyellow
+define _datatype_scope	brightyellow
+define _const			white
+define _num_integer		white
+define _num_hex			white
+define _num_oct			white
+define _num_float		white
 define _string			green
 define _string_specsymb	brightgreen
 define _string_escchar	brightgreen
 define _char			brightgreen
-define _comment			brown
-define _comment_word	black brown
-define _comment_exmark	black yellow
-define _comment_qnmark	black brown
+define _comment			yellow
+define _comment_word	black yellow
+define _comment_exmark	black brightyellow
+define _comment_qnmark	black yellow
 
 # I think this highlighting is easier for the eyes for the black background themes. Can be also used with the blue background:
-#define _punctuation		yellow
+#define _punctuation		brightyellow
 #define _punct_operator 	brightmagenta
 #define _punct_semicolon	brightmagenta
-#define _punct_bracket	yellow
-#define _punct_sqbracket	brown
-#define _punct_field		yellow
-#define _punct_comma		yellow
-#define _punct_ternary	white
-#define _punct_bitwise	yellow
+#define _punct_bracket	brightyellow
+#define _punct_sqbracket	yellow
+#define _punct_field		brightyellow
+#define _punct_comma		brightyellow
+#define _punct_ternary	brightwhite
+#define _punct_bitwise	brightyellow
 #define _label			brightcyan
-#define _preproc			lightgray
-#define _preproc_str		white
-#define _preproc_nl_esc	white
-#define _preproc_indent	lightgray
+#define _preproc			white
+#define _preproc_str		brightwhite
+#define _preproc_nl_esc	brightwhite
+#define _preproc_indent	white
 #define _keyword			brightcyan
 #define _datatype		brightcyan
 #define _datatype_void	brightcyan
 #define _datatype_mod	brightcyan
 #define _datatype_scope 	brightblue
-#define _const			lightgray
+#define _const			white
 #define _num_integer		red
 #define _num_hex			red
 #define _num_oct			red
@@ -77,10 +77,10 @@ define _comment_qnmark	black brown
 #define _string_specsymb	brightcyan
 #define _string_escchar 	brightcyan
 #define _char			brightgreen
-#define _comment			gray
-#define _comment_word	black gray
-#define _comment_exmark	black yellow
-#define _comment_qnmark	black brown
+#define _comment			brightblack
+#define _comment_word	black brightblack
+#define _comment_exmark	black brightyellow
+#define _comment_qnmark	black yellow
 
 
 context default

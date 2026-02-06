@@ -1,107 +1,107 @@
 context default
-    keyword whole auto yellow
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole char yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole default yellow
-    keyword whole do yellow
-    keyword whole double yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extern yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole int yellow
-    keyword whole long yellow
-    keyword whole register yellow
-    keyword whole return yellow
-    keyword whole short yellow
-    keyword whole signed yellow
-    keyword whole sizeof yellow
-    keyword whole static yellow
-    keyword whole struct yellow
-    keyword whole switch yellow
-    keyword whole typedef yellow
-    keyword whole union yellow
-    keyword whole unsigned yellow
-    keyword whole void yellow
-    keyword whole volatile yellow
-    keyword whole while yellow
-    keyword whole asm yellow
-    keyword whole catch yellow
-    keyword whole class yellow
-    keyword whole friend yellow
-    keyword whole delete yellow
-    keyword whole inline yellow
-    keyword whole new yellow
-    keyword whole operator yellow
-    keyword whole private yellow
-    keyword whole protected yellow
-    keyword whole public yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole template yellow
-    keyword whole try yellow
-    keyword whole virtual yellow
-    keyword whole bool yellow
-    keyword whole const_cast yellow
-    keyword whole dynamic_cast yellow
-    keyword whole explicit yellow
-    keyword whole false yellow
-    keyword whole mutable yellow
-    keyword whole namespace yellow
-    keyword whole reinterpret_cast yellow
-    keyword whole static_cast yellow
-    keyword whole true yellow
-    keyword whole typeid yellow
-    keyword whole typename yellow
-    keyword whole using yellow
-    keyword whole wchar_t yellow
-    keyword whole ... yellow
+    keyword whole auto brightyellow
+    keyword whole break brightyellow
+    keyword whole case brightyellow
+    keyword whole char brightyellow
+    keyword whole const brightyellow
+    keyword whole continue brightyellow
+    keyword whole default brightyellow
+    keyword whole do brightyellow
+    keyword whole double brightyellow
+    keyword whole else brightyellow
+    keyword whole enum brightyellow
+    keyword whole extern brightyellow
+    keyword whole float brightyellow
+    keyword whole for brightyellow
+    keyword whole goto brightyellow
+    keyword whole if brightyellow
+    keyword whole int brightyellow
+    keyword whole long brightyellow
+    keyword whole register brightyellow
+    keyword whole return brightyellow
+    keyword whole short brightyellow
+    keyword whole signed brightyellow
+    keyword whole sizeof brightyellow
+    keyword whole static brightyellow
+    keyword whole struct brightyellow
+    keyword whole switch brightyellow
+    keyword whole typedef brightyellow
+    keyword whole union brightyellow
+    keyword whole unsigned brightyellow
+    keyword whole void brightyellow
+    keyword whole volatile brightyellow
+    keyword whole while brightyellow
+    keyword whole asm brightyellow
+    keyword whole catch brightyellow
+    keyword whole class brightyellow
+    keyword whole friend brightyellow
+    keyword whole delete brightyellow
+    keyword whole inline brightyellow
+    keyword whole new brightyellow
+    keyword whole operator brightyellow
+    keyword whole private brightyellow
+    keyword whole protected brightyellow
+    keyword whole public brightyellow
+    keyword whole this brightyellow
+    keyword whole throw brightyellow
+    keyword whole template brightyellow
+    keyword whole try brightyellow
+    keyword whole virtual brightyellow
+    keyword whole bool brightyellow
+    keyword whole const_cast brightyellow
+    keyword whole dynamic_cast brightyellow
+    keyword whole explicit brightyellow
+    keyword whole false brightyellow
+    keyword whole mutable brightyellow
+    keyword whole namespace brightyellow
+    keyword whole reinterpret_cast brightyellow
+    keyword whole static_cast brightyellow
+    keyword whole true brightyellow
+    keyword whole typeid brightyellow
+    keyword whole typename brightyellow
+    keyword whole using brightyellow
+    keyword whole wchar_t brightyellow
+    keyword whole ... brightyellow
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
 
-    keyword whole accept yellow
-    keyword whole code yellow
-    keyword whole debug yellow
-    keyword whole defines yellow
-    keyword whole destructor yellow
-    keyword whole dprec yellow
-    keyword whole end yellow
-    keyword whole error yellow
-    keyword whole error-verbose yellow
-    keyword whole expect yellow
-    keyword whole file-prefix yellow
-    keyword whole glr-parser yellow
-    keyword whole initial-action yellow
-    keyword whole language yellow
-    keyword whole left yellow
-    keyword whole lex-param yellow
-    keyword whole locations yellow
-    keyword whole merge yellow
-    keyword whole name-prefix yellow
-    keyword whole node yellow
-    keyword whole nonassoc yellow
-    keyword whole no-parser yellow
-    keyword whole no-lines yellow
-    keyword whole output yellow
-    keyword whole parse-param yellow
-    keyword whole prec yellow
-    keyword whole pure-parser yellow
-    keyword whole require yellow
-    keyword whole right yellow
-    keyword whole skeleton yellow
-    keyword whole start yellow
-    keyword whole token yellow
-    keyword whole token-table yellow
-    keyword whole type yellow
-    keyword whole undefined yellow
-    keyword whole union yellow
-    keyword whole verbose yellow
-    keyword whole yacc yellow
+    keyword whole accept brightyellow
+    keyword whole code brightyellow
+    keyword whole debug brightyellow
+    keyword whole defines brightyellow
+    keyword whole destructor brightyellow
+    keyword whole dprec brightyellow
+    keyword whole end brightyellow
+    keyword whole error brightyellow
+    keyword whole error-verbose brightyellow
+    keyword whole expect brightyellow
+    keyword whole file-prefix brightyellow
+    keyword whole glr-parser brightyellow
+    keyword whole initial-action brightyellow
+    keyword whole language brightyellow
+    keyword whole left brightyellow
+    keyword whole lex-param brightyellow
+    keyword whole locations brightyellow
+    keyword whole merge brightyellow
+    keyword whole name-prefix brightyellow
+    keyword whole node brightyellow
+    keyword whole nonassoc brightyellow
+    keyword whole no-parser brightyellow
+    keyword whole no-lines brightyellow
+    keyword whole output brightyellow
+    keyword whole parse-param brightyellow
+    keyword whole prec brightyellow
+    keyword whole pure-parser brightyellow
+    keyword whole require brightyellow
+    keyword whole right brightyellow
+    keyword whole skeleton brightyellow
+    keyword whole start brightyellow
+    keyword whole token brightyellow
+    keyword whole token-table brightyellow
+    keyword whole type brightyellow
+    keyword whole undefined brightyellow
+    keyword whole union brightyellow
+    keyword whole verbose brightyellow
+    keyword whole yacc brightyellow
 
     keyword whole YYABORT brightred
     keyword whole YYACCEPT brightred
@@ -134,9 +134,9 @@ context default
     keyword whole yypush_parse brightmagenta
     keyword whole yywrap brightmagenta
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
     keyword '\\\{"abtnvfr\}' brightgreen
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
@@ -145,16 +145,16 @@ context default
     keyword '\\0' brightgreen
     keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
 
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
+    keyword > brightyellow
+    keyword < brightyellow
+    keyword \+ brightyellow
+    keyword - brightyellow
+    keyword \* brightyellow
+    keyword / brightyellow
+    keyword % brightyellow
+    keyword = brightyellow
+    keyword != brightyellow
+    keyword == brightyellow
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -169,22 +169,22 @@ context default
     keyword wholeright %{ brightcyan
     keyword wholeright %} brightcyan
     keyword wholeright %% brightcyan
-    keyword % yellow
-    keyword $$ yellow
-    keyword $\[0123456789\] yellow
-    keyword @$ yellow
-    keyword @\[0123456789\] yellow
+    keyword % brightyellow
+    keyword $$ brightyellow
+    keyword $\[0123456789\] brightyellow
+    keyword @$ brightyellow
+    keyword @\[0123456789\] brightyellow
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
+    keyword //*\n yellow
     keyword "+" red
     keyword <+> red
 

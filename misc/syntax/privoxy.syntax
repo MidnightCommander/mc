@@ -6,48 +6,48 @@
 context default
 
 context { }\n magenta
-    keyword \\ brown
+    keyword \\ yellow
 
-    keyword \+add-header yellow
-    keyword \+block yellow
-    keyword \+change-x-forwarded-for yellow
-    keyword \+client-header-filter yellow
-    keyword \+client-body-filter yellow
-    keyword \+client-header-tagger yellow
-    keyword \+content-type-overwrite yellow
-    keyword \+crunch-client-header yellow
-    keyword \+crunch-if-none-match yellow
-    keyword \+crunch-incoming-cookies yellow
-    keyword \+crunch-server-header yellow
-    keyword \+crunch-outgoing-cookies yellow
-    keyword \+deanimate-gifs yellow
-    keyword \+delay-response yellow
-    keyword \+downgrade-http-version yellow
-    keyword \+external-filter yellow
-    keyword \+fast-redirects yellow
-    keyword \+filter yellow
-    keyword \+force-text-mode yellow
-    keyword \+forward-override yellow
-    keyword \+handle-as-empty-document yellow
-    keyword \+handle-as-image yellow
-    keyword \+hide-accept-language yellow
-    keyword \+hide-content-disposition yellow
-    keyword \+hide-if-modified-since yellow
-    keyword \+hide-from-header yellow
-    keyword \+hide-referrer yellow
-    keyword \+hide-user-agent yellow
-    keyword \+https-inspection yellow
-    keyword \+ignore-certificate-errors yellow
-    keyword \+limit-connect yellow
-    keyword \+limit-cookie-lifetime yellow
-    keyword \+prevent-compression yellow
-    keyword \+overwrite-last-modified yellow
-    keyword \+redirect yellow
-    keyword \+server-header-filter yellow
-    keyword \+server-header-tagger yellow
-    keyword \+suppress-tag yellow
-    keyword \+session-cookies-only yellow
-    keyword \+set-image-blocker yellow
+    keyword \+add-header brightyellow
+    keyword \+block brightyellow
+    keyword \+change-x-forwarded-for brightyellow
+    keyword \+client-header-filter brightyellow
+    keyword \+client-body-filter brightyellow
+    keyword \+client-header-tagger brightyellow
+    keyword \+content-type-overwrite brightyellow
+    keyword \+crunch-client-header brightyellow
+    keyword \+crunch-if-none-match brightyellow
+    keyword \+crunch-incoming-cookies brightyellow
+    keyword \+crunch-server-header brightyellow
+    keyword \+crunch-outgoing-cookies brightyellow
+    keyword \+deanimate-gifs brightyellow
+    keyword \+delay-response brightyellow
+    keyword \+downgrade-http-version brightyellow
+    keyword \+external-filter brightyellow
+    keyword \+fast-redirects brightyellow
+    keyword \+filter brightyellow
+    keyword \+force-text-mode brightyellow
+    keyword \+forward-override brightyellow
+    keyword \+handle-as-empty-document brightyellow
+    keyword \+handle-as-image brightyellow
+    keyword \+hide-accept-language brightyellow
+    keyword \+hide-content-disposition brightyellow
+    keyword \+hide-if-modified-since brightyellow
+    keyword \+hide-from-header brightyellow
+    keyword \+hide-referrer brightyellow
+    keyword \+hide-user-agent brightyellow
+    keyword \+https-inspection brightyellow
+    keyword \+ignore-certificate-errors brightyellow
+    keyword \+limit-connect brightyellow
+    keyword \+limit-cookie-lifetime brightyellow
+    keyword \+prevent-compression brightyellow
+    keyword \+overwrite-last-modified brightyellow
+    keyword \+redirect brightyellow
+    keyword \+server-header-filter brightyellow
+    keyword \+server-header-tagger brightyellow
+    keyword \+suppress-tag brightyellow
+    keyword \+session-cookies-only brightyellow
+    keyword \+set-image-blocker brightyellow
 
     keyword \-add-header green
     keyword \-block green
@@ -144,12 +144,12 @@ context { }\n magenta
     keyword hide-tor-exit-notation cyan
 
 # Lines, which ignored by Privoxy, if it starts with "- ":
-context linestart -\s \n gray
+context linestart -\s \n brightblack
 
 # Comments:
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
-context linestart \s\[\s\]# \n brown
+context linestart \s\[\s\]# \n yellow
     spellcheck
-context linestart /\s \n brown
+context linestart /\s \n yellow
     spellcheck

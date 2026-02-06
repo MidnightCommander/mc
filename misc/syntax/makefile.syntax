@@ -1,6 +1,6 @@
 context default
     keyword $$ brightcyan
-    keyword $(*) yellow
+    keyword $(*) brightyellow
     keyword ${*} brightgreen
 # GNU Makefiles
     keyword whole linestart define magenta
@@ -23,49 +23,49 @@ context default
     keyword whole linestart .\[\s\t\]include magenta
     keyword whole linestart .\[\s\t\]undef magenta
 
-    keyword linestart \t lightgray red
-    keyword whole .PHONY white
-    keyword whole .SUFFIXES white
-    keyword whole .DEFAULT white
-    keyword whole .PRECIOUS white
-    keyword whole .INTERMEDIATE white
-    keyword whole .SECONDARY white
-    keyword whole .DELETE_ON_ERROR white
-    keyword whole .IGNORE white
-    keyword whole .LOW_RESOLUTION_TIME white
-    keyword whole .SILENT white
-    keyword whole .EXPORT_ALL_VARIABLES white
-    keyword whole .NOTPARALLEL white
-    keyword whole .NOEXPORT white
-    keyword = white
-    keyword : yellow
-    keyword \\\n yellow
+    keyword linestart \t white red
+    keyword whole .PHONY brightwhite
+    keyword whole .SUFFIXES brightwhite
+    keyword whole .DEFAULT brightwhite
+    keyword whole .PRECIOUS brightwhite
+    keyword whole .INTERMEDIATE brightwhite
+    keyword whole .SECONDARY brightwhite
+    keyword whole .DELETE_ON_ERROR brightwhite
+    keyword whole .IGNORE brightwhite
+    keyword whole .LOW_RESOLUTION_TIME brightwhite
+    keyword whole .SILENT brightwhite
+    keyword whole .EXPORT_ALL_VARIABLES brightwhite
+    keyword whole .NOTPARALLEL brightwhite
+    keyword whole .NOEXPORT brightwhite
+    keyword = brightwhite
+    keyword : brightyellow
+    keyword \\\n brightyellow
 # this handles strange cases like @something@@somethingelse@ properly
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black
 
 # comment
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black
 
 # right part of an assignment
 context exclusive = \n brightcyan
-    keyword \\\n yellow
+    keyword \\\n brightyellow
     keyword $$ brightcyan
-    keyword $(*) yellow
+    keyword $(*) brightyellow
     keyword ${*} brightgreen
-    keyword linestart \t lightgray red
+    keyword linestart \t white red
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black
 
 # shell code
 context exclusive linestart \t \n
-    keyword \\\n yellow
+    keyword \\\n brightyellow
     keyword $$ brightcyan
-    keyword $(*) yellow
+    keyword $(*) brightyellow
     keyword ${*} brightgreen
-    keyword linestart \t lightgray red
+    keyword linestart \t white red
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black

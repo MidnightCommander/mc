@@ -13,7 +13,7 @@ context default
 #   reserved keywords:
 
 #comments
-    keyword -- brown
+    keyword -- yellow
 
 #   unused symbols
     keyword whole _\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] magenta
@@ -144,69 +144,69 @@ context default
     keyword whole ViewPatterns brightmagenta
 
 #   links
-    keyword http://+ gray
-    keyword https://+ gray
-    keyword ftp://+ gray
-    keyword git://+ gray
-    keyword cvs://+ gray
-    keyword svn://+ gray
-    keyword darcs://+ gray
+    keyword http://+ brightblack
+    keyword https://+ brightblack
+    keyword ftp://+ brightblack
+    keyword git://+ brightblack
+    keyword cvs://+ brightblack
+    keyword svn://+ brightblack
+    keyword darcs://+ brightblack
 #   special text inside of <>, i.e. emails
     keyword \<+\> red
 
 #   build types with '\s & \n' hack to remove too stupid highlighting
-    keyword whole Configure\s white
-    keyword whole Configure\n white
-    keyword whole Custom\s white
-    keyword whole Custom\n white
-    keyword whole Make\s white
-    keyword whole Make\n white
-    keyword whole Simple\n white
-    keyword whole Simple\s white
+    keyword whole Configure\s brightwhite
+    keyword whole Configure\n brightwhite
+    keyword whole Custom\s brightwhite
+    keyword whole Custom\n brightwhite
+    keyword whole Make\s brightwhite
+    keyword whole Make\n brightwhite
+    keyword whole Simple\n brightwhite
+    keyword whole Simple\s brightwhite
 
 #   licenses
-    keyword whole AllRightsReserved white
-    keyword whole OtherLicense white
-    keyword whole PublicDomain white
-    keyword whole LGPL white
-    keyword whole GPL white
-    keyword whole LGPL2 white
-    keyword whole GPL2 white
-    keyword whole LGPL3 white
-    keyword whole GPL3 white
-    keyword whole BSD white
-    keyword whole BSD3 white
-    keyword whole BSD4 white
-    keyword whole MIT white
+    keyword whole AllRightsReserved brightwhite
+    keyword whole OtherLicense brightwhite
+    keyword whole PublicDomain brightwhite
+    keyword whole LGPL brightwhite
+    keyword whole GPL brightwhite
+    keyword whole LGPL2 brightwhite
+    keyword whole GPL2 brightwhite
+    keyword whole LGPL3 brightwhite
+    keyword whole GPL3 brightwhite
+    keyword whole BSD brightwhite
+    keyword whole BSD3 brightwhite
+    keyword whole BSD4 brightwhite
+    keyword whole MIT brightwhite
 
 #   compilers
-    keyword whole GHC white
-    keyword whole NHC white
-    keyword whole JHC white
-    keyword whole HBC white
-    keyword whole Helium white
-    keyword whole Hugs white
+    keyword whole GHC brightwhite
+    keyword whole NHC brightwhite
+    keyword whole JHC brightwhite
+    keyword whole HBC brightwhite
+    keyword whole Helium brightwhite
+    keyword whole Hugs brightwhite
 
 #   special keywords
-    keyword whole True white
-    keyword whole False white
-    keyword whole if white
-    keyword whole else white
-    keyword whole os white
-    keyword whole impl white
-    keyword whole arch white
+    keyword whole True brightwhite
+    keyword whole False brightwhite
+    keyword whole if brightwhite
+    keyword whole else brightwhite
+    keyword whole os brightwhite
+    keyword whole impl brightwhite
+    keyword whole arch brightwhite
 
-    keyword whole linestart \[\s\]executable yellow
-    keyword whole linestart \[\s\]library yellow
-    keyword whole linestart \[\s\]test-suite yellow
-    keyword whole flag yellow
-    keyword whole repo yellow
+    keyword whole linestart \[\s\]executable brightyellow
+    keyword whole linestart \[\s\]library brightyellow
+    keyword whole linestart \[\s\]test-suite brightyellow
+    keyword whole flag brightyellow
+    keyword whole repo brightyellow
 
 
 #   unboxed (started from upcase)
-#    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]# white
+#    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]# brightwhite
 #   types/modules
-#    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+#    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightwhite
 
 #digits
     keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
@@ -220,39 +220,39 @@ context default
 
 
 # some punctuation characters
-    keyword whole $ yellow
-    keyword whole ! white
-    keyword whole && white
-    keyword whole \* yellow
-    keyword whole \+ yellow
-    keyword whole / yellow
-    keyword whole ^ white
-    keyword whole || white
-    keyword whole | white
+    keyword whole $ brightyellow
+    keyword whole ! brightwhite
+    keyword whole && brightwhite
+    keyword whole \* brightyellow
+    keyword whole \+ brightyellow
+    keyword whole / brightyellow
+    keyword whole ^ brightwhite
+    keyword whole || brightwhite
+    keyword whole | brightwhite
 
-    keyword ~ white
+    keyword ~ brightwhite
     keyword , brightcyan
-    keyword - yellow
+    keyword - brightyellow
     keyword : brightcyan
-    keyword ; yellow
-    keyword = yellow
-    keyword < yellow
-    keyword > yellow
-    keyword { white
-    keyword } white
+    keyword ; brightyellow
+    keyword = brightyellow
+    keyword < brightyellow
+    keyword > brightyellow
+    keyword { brightwhite
+    keyword } brightwhite
     keyword [ brightcyan
     keyword ] brightcyan
     keyword ( brightcyan
     keyword ) brightcyan
 
 # comments
-context exclusive {- -} brown
+context exclusive {- -} yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
-context exclusive \-\- \n brown
+context exclusive \-\- \n yellow
     spellcheck
 
 context " " green
@@ -273,4 +273,4 @@ context " " green
     keyword \\\{abtnvfr\} brightgreen
 
 # infix binop
-context exclusive ` ` white
+context exclusive ` ` brightwhite

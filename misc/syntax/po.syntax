@@ -7,7 +7,7 @@
 #
 # It highlights:
 #   - Original and translated messages   (blue/green)
-#   - Generic comments added by Gettext  (white)
+#   - Generic comments added by Gettext  (brightwhite)
 #   - C-style format modifiers,
 #      as in c.syntax                    (brightgreen)
 #   - Messages marked as "fuzzy"         (brightred)
@@ -25,14 +25,14 @@ context default
 
 context linestart #,\sfuzzy \n\n brightred
 
-context linestart #: \n white
+context linestart #: \n brightwhite
 
-context linestart #, \n white
-    keyword c-format yellow
+context linestart #, \n brightwhite
+    keyword c-format brightyellow
 
 context linestart #~ \n red
 
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
 
 context exclusive linestart msgid \n cyan

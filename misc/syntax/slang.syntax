@@ -1,64 +1,64 @@
 context default
-    keyword whole forever white
-    keyword whole foreach white
-    keyword whole using white
-    keyword whole orelse white
-    keyword whole andelse white
-    keyword whole loop white
-    keyword whole variable white
-    keyword whole define white
-    keyword whole break white
-    keyword whole case white
-    keyword whole continue white
-    keyword whole do white
-    keyword whole else white
-    keyword whole for white
-    keyword whole goto white
-    keyword whole if white
-    keyword whole !if white
-    keyword whole return white
-    keyword whole sizeof white
-    keyword whole static white
-    keyword whole struct white
-    keyword whole switch white
-    keyword whole typedef white
-    keyword whole while white
-    keyword whole typecast white
-    keyword whole delete white
-    keyword whole private white
-    keyword whole protected white
-    keyword whole public white
-    keyword whole namespace white
-    keyword whole implements white
+    keyword whole forever brightwhite
+    keyword whole foreach brightwhite
+    keyword whole using brightwhite
+    keyword whole orelse brightwhite
+    keyword whole andelse brightwhite
+    keyword whole loop brightwhite
+    keyword whole variable brightwhite
+    keyword whole define brightwhite
+    keyword whole break brightwhite
+    keyword whole case brightwhite
+    keyword whole continue brightwhite
+    keyword whole do brightwhite
+    keyword whole else brightwhite
+    keyword whole for brightwhite
+    keyword whole goto brightwhite
+    keyword whole if brightwhite
+    keyword whole !if brightwhite
+    keyword whole return brightwhite
+    keyword whole sizeof brightwhite
+    keyword whole static brightwhite
+    keyword whole struct brightwhite
+    keyword whole switch brightwhite
+    keyword whole typedef brightwhite
+    keyword whole while brightwhite
+    keyword whole typecast brightwhite
+    keyword whole delete brightwhite
+    keyword whole private brightwhite
+    keyword whole protected brightwhite
+    keyword whole public brightwhite
+    keyword whole namespace brightwhite
+    keyword whole implements brightwhite
 
-    keyword whole EXIT_BLOCK white
-    keyword whole ERROR_BLOCK white
-    keyword whole EXECUTE_ERROR_BLOCK white
+    keyword whole EXIT_BLOCK brightwhite
+    keyword whole ERROR_BLOCK brightwhite
+    keyword whole EXECUTE_ERROR_BLOCK brightwhite
 
-    keyword whole and white
-    keyword whole or white
-    keyword whole xor white
+    keyword whole and brightwhite
+    keyword whole or brightwhite
+    keyword whole xor brightwhite
 
 
-    keyword whole Char_Type yellow
-    keyword whole UChar_Type yellow
-    keyword whole Short_Type yellow
-    keyword whole UShort_Type yellow
-    keyword whole Integer_Type yellow
-    keyword whole UInteger_Type yellow
-    keyword whole Long_Type yellow
-    keyword whole ULong_Type yellow
-    keyword whole Float_Type yellow
-    keyword whole Double_Type yellow
-    keyword whole Complex_Type yellow
-    keyword whole String_Type yellow
-    keyword whole BString_Type yellow
-    keyword whole Struct_Type yellow
-    keyword whole Ref_Type yellow
-    keyword whole Null_Type yellow
-    keyword whole Array_Type yellow
-    keyword whole DataType_Type yellow
-    keyword whole Assoc_Type yellow
+    keyword whole Char_Type brightyellow
+    keyword whole UChar_Type brightyellow
+    keyword whole Short_Type brightyellow
+    keyword whole UShort_Type brightyellow
+    keyword whole Integer_Type brightyellow
+    keyword whole UInteger_Type brightyellow
+    keyword whole Long_Type brightyellow
+    keyword whole ULong_Type brightyellow
+    keyword whole Float_Type brightyellow
+    keyword whole Double_Type brightyellow
+    keyword whole Complex_Type brightyellow
+    keyword whole String_Type brightyellow
+    keyword whole BString_Type brightyellow
+    keyword whole Struct_Type brightyellow
+    keyword whole Ref_Type brightyellow
+    keyword whole Null_Type brightyellow
+    keyword whole Array_Type brightyellow
+    keyword whole DataType_Type brightyellow
+    keyword whole Assoc_Type brightyellow
 
     keyword '\\\{"abtnvfr\}' brightgreen
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
@@ -67,16 +67,16 @@ context default
     keyword '\\0' brightgreen
     keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
 
-    keyword > white
-    keyword < white
-    keyword \+ white
-    keyword - white
-    keyword \* white
-    keyword / white
-    keyword = white
-    keyword != white
-    keyword == white
-    keyword ; white
+    keyword > brightwhite
+    keyword < brightwhite
+    keyword \+ brightwhite
+    keyword - brightwhite
+    keyword \* brightwhite
+    keyword / brightwhite
+    keyword = brightwhite
+    keyword != brightwhite
+    keyword == brightwhite
+    keyword ; brightwhite
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -85,11 +85,11 @@ context default
     keyword ] brightcyan
     keyword , brightcyan
     keyword : brightcyan
-context % \n brown
+context % \n yellow
     spellcheck
 context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
     keyword "+" red
     keyword <+> red
 context " " green

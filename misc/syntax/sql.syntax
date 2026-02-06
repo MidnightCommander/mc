@@ -4,286 +4,286 @@
 caseinsensitive
 
 context default
-    keyword whole abort yellow
-    keyword whole absolute yellow
-    keyword whole action yellow
-    keyword whole ada yellow
-    keyword whole add yellow
-    keyword whole all yellow
-    keyword whole allocate yellow
-    keyword whole alter yellow
-    keyword whole and yellow
-    keyword whole any yellow
-    keyword whole are yellow
-    keyword whole as yellow
-    keyword whole asc yellow
-    keyword whole assertion yellow
-    keyword whole at yellow
-    keyword whole authorization yellow
-    keyword whole auto_increment yellow
-    keyword whole begin yellow
-    keyword whole between yellow
-    keyword whole bigint yellow
-    keyword whole bit yellow
-    keyword whole bit_length yellow
-    keyword whole blob yellow
-    keyword whole both yellow
-    keyword whole by yellow
-    keyword whole cascade yellow
-    keyword whole cascaded yellow
-    keyword whole case yellow
-    keyword whole cast yellow
-    keyword whole catalog yellow
-    keyword whole char yellow
-    keyword whole char_length yellow
-    keyword whole character yellow
-    keyword whole character_length yellow
-    keyword whole check yellow
-    keyword whole close yellow
-    keyword whole coalesce yellow
-    keyword whole collate yellow
-    keyword whole collation yellow
-    keyword whole column yellow
-    keyword whole comment yellow
-    keyword whole commit yellow
-    keyword whole compile yellow
-    keyword whole connect yellow
-    keyword whole connection yellow
-    keyword whole constraint yellow
-    keyword whole constraint yellow
-    keyword whole constraints yellow
-    keyword whole continue yellow
-    keyword whole copy yellow
-    keyword whole corresponding yellow
-    keyword whole create yellow
-    keyword whole cross yellow
-    keyword whole count yellow
-    keyword whole current yellow
-    keyword whole current_date yellow
-    keyword whole current_time yellow
-    keyword whole current_timestamp yellow
-    keyword whole current_user yellow
-    keyword whole cursor yellow
-    keyword whole database yellow
-    keyword whole date yellow
-    keyword whole datetime yellow
-    keyword whole day yellow
-    keyword whole deallocate yellow
-    keyword whole dec yellow
-    keyword whole decimal yellow
-    keyword whole declare yellow
-    keyword whole default yellow
-    keyword whole deferrable yellow
-    keyword whole deferred yellow
-    keyword whole delete yellow
-    keyword whole desc yellow
-    keyword whole describe yellow
-    keyword whole descriptor yellow
-    keyword whole diagnostics yellow
-    keyword whole disconnect yellow
-    keyword whole distinct yellow
-    keyword whole domain yellow
-    keyword whole double yellow
-    keyword whole drop yellow
-    keyword whole else yellow
-    keyword whole elsif yellow
-    keyword whole encoding yellow
-    keyword whole end yellow
-    keyword whole end-exec yellow
-    keyword whole enum yellow
-    keyword whole escape yellow
-    keyword whole except yellow
-    keyword whole exception yellow
-    keyword whole exec yellow
-    keyword whole execute yellow
-    keyword whole exists yellow
-    keyword whole external yellow
-    keyword whole extract yellow
-    keyword whole false yellow
-    keyword whole fetch yellow
-    keyword whole first yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole foreign yellow
-    keyword whole fortran yellow
-    keyword whole found yellow
-    keyword whole from yellow
-    keyword whole full yellow
-    keyword whole function yellow
-    keyword whole get yellow
-    keyword whole global yellow
-    keyword whole go yellow
-    keyword whole goto yellow
-    keyword whole grant yellow
-    keyword whole group yellow
-    keyword whole having yellow
-    keyword whole hour yellow
-    keyword whole identity yellow
-    keyword whole if yellow
-    keyword whole immediate yellow
-    keyword whole in yellow
-    keyword whole include yellow
-    keyword whole index yellow
-    keyword whole indicator yellow
-    keyword whole initially yellow
-    keyword whole inner yellow
-    keyword whole input yellow
-    keyword whole insensitive yellow
-    keyword whole insert yellow
-    keyword whole int yellow
-    keyword whole integer yellow
-    keyword whole intersect yellow
-    keyword whole interval yellow
-    keyword whole into yellow
-    keyword whole is yellow
-    keyword whole isolation yellow
-    keyword whole join yellow
-    keyword whole key yellow
-    keyword whole key yellow
-    keyword whole language yellow
-    keyword whole last yellow
-    keyword whole leading yellow
-    keyword whole left yellow
-    keyword whole level yellow
-    keyword whole like yellow
-    keyword whole local yellow
-    keyword whole lock yellow
-    keyword whole longblob yellow
-    keyword whole longtext yellow
-    keyword whole loop yellow
-    keyword whole min yellow
-    keyword whole match yellow
-    keyword whole max yellow
-    keyword whole mediumblob yellow
-    keyword whole mediumint yellow
-    keyword whole mediumtext yellow
-    keyword whole merge yellow
-    keyword whole minute yellow
-    keyword whole minus yellow
-    keyword whole module yellow
-    keyword whole month yellow
-    keyword whole names yellow
-    keyword whole national yellow
-    keyword whole natural yellow
-    keyword whole nchar yellow
-    keyword whole next yellow
-    keyword whole no yellow
-    keyword whole none yellow
-    keyword whole not yellow
-    keyword whole null yellow
-    keyword whole nullif yellow
-    keyword whole number yellow
-    keyword whole numeric yellow
-    keyword whole octet_length yellow
-    keyword whole of yellow
-    keyword whole offline yellow
-    keyword whole on yellow
-    keyword whole online yellow
-    keyword whole only yellow
-    keyword whole open yellow
-    keyword whole option yellow
-    keyword whole or yellow
-    keyword whole order yellow
-    keyword whole out yellow
-    keyword whole outer yellow
-    keyword whole output yellow
-    keyword whole overlaps yellow
-    keyword whole pad yellow
-    keyword whole partial yellow
-    keyword whole pascal yellow
-    keyword whole position yellow
-    keyword whole precision yellow
-    keyword whole prepare yellow
-    keyword whole preserve yellow
-    keyword whole primary yellow
-    keyword whole primary yellow
-    keyword whole prior yellow
-    keyword whole privileges yellow
-    keyword whole procedure yellow
-    keyword whole public yellow
-    keyword whole raise yellow
-    keyword whole read yellow
-    keyword whole real yellow
-    keyword whole rebuild yellow
-    keyword whole references yellow
-    keyword whole relative yellow
-    keyword whole rename yellow
-    keyword whole replace yellow
-    keyword whole restrict yellow
-    keyword whole revoke yellow
-    keyword whole right yellow
-    keyword whole rollback yellow
-    keyword whole round yellow
-    keyword whole rows yellow
-    keyword whole schema yellow
-    keyword whole scroll yellow
-    keyword whole second yellow
-    keyword whole section yellow
-    keyword whole select yellow
-    keyword whole sequence yellow
-    keyword whole session yellow
-    keyword whole session_user yellow
-    keyword whole set yellow
-    keyword whole size yellow
-    keyword whole smallint yellow
-    keyword whole some yellow
-    keyword whole space yellow
-    keyword whole sql yellow
-    keyword whole sqlca yellow
-    keyword whole sqlstate yellow
-    keyword whole sqlwarning yellow
-    keyword whole substring yellow
-    keyword whole sum yellow
-    keyword whole system_user yellow
-    keyword whole table yellow
-    keyword whole tablespace yellow
-    keyword whole template yellow
-    keyword whole temporary yellow
-    keyword whole text yellow
-    keyword whole then yellow
-    keyword whole time yellow
-    keyword whole truncate yellow
-    keyword whole timestamp yellow
-    keyword whole timezone_hour yellow
-    keyword whole timezone_minute yellow
-    keyword whole tinyblob yellow
-    keyword whole tinyint yellow
-    keyword whole tinytext yellow
-    keyword whole to yellow
-    keyword whole trailing yellow
-    keyword whole transaction yellow
-    keyword whole translation yellow
-    keyword whole trigger yellow
-    keyword whole trim yellow
-    keyword whole true yellow
-    keyword whole type yellow
-    keyword whole union yellow
-    keyword whole unique yellow
-    keyword whole unknown yellow
-    keyword whole unsigned yellow
-    keyword whole update yellow
-    keyword whole usage yellow
-    keyword whole use yellow
-    keyword whole user yellow
-    keyword whole using yellow
-    keyword whole value yellow
-    keyword whole values yellow
-    keyword whole varchar yellow
-    keyword whole varying yellow
-    keyword whole view yellow
-    keyword whole when yellow
-    keyword whole whenever yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole with yellow
-    keyword whole work yellow
-    keyword whole write yellow
-    keyword whole year yellow
-    keyword whole zone yellow
+    keyword whole abort brightyellow
+    keyword whole absolute brightyellow
+    keyword whole action brightyellow
+    keyword whole ada brightyellow
+    keyword whole add brightyellow
+    keyword whole all brightyellow
+    keyword whole allocate brightyellow
+    keyword whole alter brightyellow
+    keyword whole and brightyellow
+    keyword whole any brightyellow
+    keyword whole are brightyellow
+    keyword whole as brightyellow
+    keyword whole asc brightyellow
+    keyword whole assertion brightyellow
+    keyword whole at brightyellow
+    keyword whole authorization brightyellow
+    keyword whole auto_increment brightyellow
+    keyword whole begin brightyellow
+    keyword whole between brightyellow
+    keyword whole bigint brightyellow
+    keyword whole bit brightyellow
+    keyword whole bit_length brightyellow
+    keyword whole blob brightyellow
+    keyword whole both brightyellow
+    keyword whole by brightyellow
+    keyword whole cascade brightyellow
+    keyword whole cascaded brightyellow
+    keyword whole case brightyellow
+    keyword whole cast brightyellow
+    keyword whole catalog brightyellow
+    keyword whole char brightyellow
+    keyword whole char_length brightyellow
+    keyword whole character brightyellow
+    keyword whole character_length brightyellow
+    keyword whole check brightyellow
+    keyword whole close brightyellow
+    keyword whole coalesce brightyellow
+    keyword whole collate brightyellow
+    keyword whole collation brightyellow
+    keyword whole column brightyellow
+    keyword whole comment brightyellow
+    keyword whole commit brightyellow
+    keyword whole compile brightyellow
+    keyword whole connect brightyellow
+    keyword whole connection brightyellow
+    keyword whole constraint brightyellow
+    keyword whole constraint brightyellow
+    keyword whole constraints brightyellow
+    keyword whole continue brightyellow
+    keyword whole copy brightyellow
+    keyword whole corresponding brightyellow
+    keyword whole create brightyellow
+    keyword whole cross brightyellow
+    keyword whole count brightyellow
+    keyword whole current brightyellow
+    keyword whole current_date brightyellow
+    keyword whole current_time brightyellow
+    keyword whole current_timestamp brightyellow
+    keyword whole current_user brightyellow
+    keyword whole cursor brightyellow
+    keyword whole database brightyellow
+    keyword whole date brightyellow
+    keyword whole datetime brightyellow
+    keyword whole day brightyellow
+    keyword whole deallocate brightyellow
+    keyword whole dec brightyellow
+    keyword whole decimal brightyellow
+    keyword whole declare brightyellow
+    keyword whole default brightyellow
+    keyword whole deferrable brightyellow
+    keyword whole deferred brightyellow
+    keyword whole delete brightyellow
+    keyword whole desc brightyellow
+    keyword whole describe brightyellow
+    keyword whole descriptor brightyellow
+    keyword whole diagnostics brightyellow
+    keyword whole disconnect brightyellow
+    keyword whole distinct brightyellow
+    keyword whole domain brightyellow
+    keyword whole double brightyellow
+    keyword whole drop brightyellow
+    keyword whole else brightyellow
+    keyword whole elsif brightyellow
+    keyword whole encoding brightyellow
+    keyword whole end brightyellow
+    keyword whole end-exec brightyellow
+    keyword whole enum brightyellow
+    keyword whole escape brightyellow
+    keyword whole except brightyellow
+    keyword whole exception brightyellow
+    keyword whole exec brightyellow
+    keyword whole execute brightyellow
+    keyword whole exists brightyellow
+    keyword whole external brightyellow
+    keyword whole extract brightyellow
+    keyword whole false brightyellow
+    keyword whole fetch brightyellow
+    keyword whole first brightyellow
+    keyword whole float brightyellow
+    keyword whole for brightyellow
+    keyword whole foreign brightyellow
+    keyword whole fortran brightyellow
+    keyword whole found brightyellow
+    keyword whole from brightyellow
+    keyword whole full brightyellow
+    keyword whole function brightyellow
+    keyword whole get brightyellow
+    keyword whole global brightyellow
+    keyword whole go brightyellow
+    keyword whole goto brightyellow
+    keyword whole grant brightyellow
+    keyword whole group brightyellow
+    keyword whole having brightyellow
+    keyword whole hour brightyellow
+    keyword whole identity brightyellow
+    keyword whole if brightyellow
+    keyword whole immediate brightyellow
+    keyword whole in brightyellow
+    keyword whole include brightyellow
+    keyword whole index brightyellow
+    keyword whole indicator brightyellow
+    keyword whole initially brightyellow
+    keyword whole inner brightyellow
+    keyword whole input brightyellow
+    keyword whole insensitive brightyellow
+    keyword whole insert brightyellow
+    keyword whole int brightyellow
+    keyword whole integer brightyellow
+    keyword whole intersect brightyellow
+    keyword whole interval brightyellow
+    keyword whole into brightyellow
+    keyword whole is brightyellow
+    keyword whole isolation brightyellow
+    keyword whole join brightyellow
+    keyword whole key brightyellow
+    keyword whole key brightyellow
+    keyword whole language brightyellow
+    keyword whole last brightyellow
+    keyword whole leading brightyellow
+    keyword whole left brightyellow
+    keyword whole level brightyellow
+    keyword whole like brightyellow
+    keyword whole local brightyellow
+    keyword whole lock brightyellow
+    keyword whole longblob brightyellow
+    keyword whole longtext brightyellow
+    keyword whole loop brightyellow
+    keyword whole min brightyellow
+    keyword whole match brightyellow
+    keyword whole max brightyellow
+    keyword whole mediumblob brightyellow
+    keyword whole mediumint brightyellow
+    keyword whole mediumtext brightyellow
+    keyword whole merge brightyellow
+    keyword whole minute brightyellow
+    keyword whole minus brightyellow
+    keyword whole module brightyellow
+    keyword whole month brightyellow
+    keyword whole names brightyellow
+    keyword whole national brightyellow
+    keyword whole natural brightyellow
+    keyword whole nchar brightyellow
+    keyword whole next brightyellow
+    keyword whole no brightyellow
+    keyword whole none brightyellow
+    keyword whole not brightyellow
+    keyword whole null brightyellow
+    keyword whole nullif brightyellow
+    keyword whole number brightyellow
+    keyword whole numeric brightyellow
+    keyword whole octet_length brightyellow
+    keyword whole of brightyellow
+    keyword whole offline brightyellow
+    keyword whole on brightyellow
+    keyword whole online brightyellow
+    keyword whole only brightyellow
+    keyword whole open brightyellow
+    keyword whole option brightyellow
+    keyword whole or brightyellow
+    keyword whole order brightyellow
+    keyword whole out brightyellow
+    keyword whole outer brightyellow
+    keyword whole output brightyellow
+    keyword whole overlaps brightyellow
+    keyword whole pad brightyellow
+    keyword whole partial brightyellow
+    keyword whole pascal brightyellow
+    keyword whole position brightyellow
+    keyword whole precision brightyellow
+    keyword whole prepare brightyellow
+    keyword whole preserve brightyellow
+    keyword whole primary brightyellow
+    keyword whole primary brightyellow
+    keyword whole prior brightyellow
+    keyword whole privileges brightyellow
+    keyword whole procedure brightyellow
+    keyword whole public brightyellow
+    keyword whole raise brightyellow
+    keyword whole read brightyellow
+    keyword whole real brightyellow
+    keyword whole rebuild brightyellow
+    keyword whole references brightyellow
+    keyword whole relative brightyellow
+    keyword whole rename brightyellow
+    keyword whole replace brightyellow
+    keyword whole restrict brightyellow
+    keyword whole revoke brightyellow
+    keyword whole right brightyellow
+    keyword whole rollback brightyellow
+    keyword whole round brightyellow
+    keyword whole rows brightyellow
+    keyword whole schema brightyellow
+    keyword whole scroll brightyellow
+    keyword whole second brightyellow
+    keyword whole section brightyellow
+    keyword whole select brightyellow
+    keyword whole sequence brightyellow
+    keyword whole session brightyellow
+    keyword whole session_user brightyellow
+    keyword whole set brightyellow
+    keyword whole size brightyellow
+    keyword whole smallint brightyellow
+    keyword whole some brightyellow
+    keyword whole space brightyellow
+    keyword whole sql brightyellow
+    keyword whole sqlca brightyellow
+    keyword whole sqlstate brightyellow
+    keyword whole sqlwarning brightyellow
+    keyword whole substring brightyellow
+    keyword whole sum brightyellow
+    keyword whole system_user brightyellow
+    keyword whole table brightyellow
+    keyword whole tablespace brightyellow
+    keyword whole template brightyellow
+    keyword whole temporary brightyellow
+    keyword whole text brightyellow
+    keyword whole then brightyellow
+    keyword whole time brightyellow
+    keyword whole truncate brightyellow
+    keyword whole timestamp brightyellow
+    keyword whole timezone_hour brightyellow
+    keyword whole timezone_minute brightyellow
+    keyword whole tinyblob brightyellow
+    keyword whole tinyint brightyellow
+    keyword whole tinytext brightyellow
+    keyword whole to brightyellow
+    keyword whole trailing brightyellow
+    keyword whole transaction brightyellow
+    keyword whole translation brightyellow
+    keyword whole trigger brightyellow
+    keyword whole trim brightyellow
+    keyword whole true brightyellow
+    keyword whole type brightyellow
+    keyword whole union brightyellow
+    keyword whole unique brightyellow
+    keyword whole unknown brightyellow
+    keyword whole unsigned brightyellow
+    keyword whole update brightyellow
+    keyword whole usage brightyellow
+    keyword whole use brightyellow
+    keyword whole user brightyellow
+    keyword whole using brightyellow
+    keyword whole value brightyellow
+    keyword whole values brightyellow
+    keyword whole varchar brightyellow
+    keyword whole varying brightyellow
+    keyword whole view brightyellow
+    keyword whole when brightyellow
+    keyword whole whenever brightyellow
+    keyword whole where brightyellow
+    keyword whole while brightyellow
+    keyword whole with brightyellow
+    keyword whole work brightyellow
+    keyword whole write brightyellow
+    keyword whole year brightyellow
+    keyword whole zone brightyellow
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword -- brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword -- yellow
 
     keyword > brightcyan
     keyword < brightcyan
@@ -297,63 +297,63 @@ context default
     keyword ) brightcyan
     keyword , brightcyan
     keyword ; brightcyan
-    keyword . white
+    keyword . brightwhite
 
 # PostgreSQL specific
-    keyword aggregate yellow
-    keyword checkpoint yellow
-    keyword cluster yellow
-    keyword conversion yellow
-    keyword listen yellow
-    keyword notify yellow
-    keyword operator yellow
-    keyword reindex yellow
-    keyword savepoint yellow
-    keyword unlisten yellow
-    keyword vacuum yellow
+    keyword aggregate brightyellow
+    keyword checkpoint brightyellow
+    keyword cluster brightyellow
+    keyword conversion brightyellow
+    keyword listen brightyellow
+    keyword notify brightyellow
+    keyword operator brightyellow
+    keyword reindex brightyellow
+    keyword savepoint brightyellow
+    keyword unlisten brightyellow
+    keyword vacuum brightyellow
 
-    keyword createdb white
-    keyword createuser white
-    keyword nocreatedb white
-    keyword nocreateuser white
-    keyword password white
-    keyword sysid white
+    keyword createdb brightwhite
+    keyword createuser brightwhite
+    keyword nocreatedb brightwhite
+    keyword nocreateuser brightwhite
+    keyword password brightwhite
+    keyword sysid brightwhite
 
-    keyword currval white
-    keyword nextval white
-    keyword pg_database white
-    keyword pg_group white
-    keyword pg_shadow white
-    keyword setval white
-    keyword stdin white
+    keyword currval brightwhite
+    keyword nextval brightwhite
+    keyword pg_database brightwhite
+    keyword pg_group brightwhite
+    keyword pg_shadow brightwhite
+    keyword setval brightwhite
+    keyword stdin brightwhite
 
 # PostgreSQL sequences
-    keyword cache white
-    keyword increment white
-    keyword maxvalue white
-    keyword minvalue white
-    keyword start white
+    keyword cache brightwhite
+    keyword increment brightwhite
+    keyword maxvalue brightwhite
+    keyword minvalue brightwhite
+    keyword start brightwhite
 
 # Oracle specific
-    keyword dual white
-    keyword whole lag yellow
-    keyword whole lead yellow
-    keyword whole nvl yellow
-    keyword whole over yellow
-    keyword whole partition yellow
-    keyword whole pragma yellow
-    keyword whole varchar2 yellow
-    keyword whole sys_refcursor yellow
+    keyword dual brightwhite
+    keyword whole lag brightyellow
+    keyword whole lead brightyellow
+    keyword whole nvl brightyellow
+    keyword whole over brightyellow
+    keyword whole partition brightyellow
+    keyword whole pragma brightyellow
+    keyword whole varchar2 brightyellow
+    keyword whole sys_refcursor brightyellow
 
 # MySQL comment
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
 
 # ANSI SQL comment
-context exclusive -- \n brown
+context exclusive -- \n yellow
     spellcheck
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
 context ' ' green
@@ -364,4 +364,4 @@ context " " green
 
 # Beckticks are used to escape reserved words in MySQL
 context ` ` cyan
-    keyword . white
+    keyword . brightwhite

@@ -25,155 +25,155 @@ context default
 
     #=========================
     # Keywords
-    keyword whole arguments yellow
-    keyword whole async yellow
-    keyword whole await yellow
-    keyword whole break yellow
-    keyword whole caller yellow
-    keyword whole case yellow
-    keyword whole catch yellow
-    keyword whole class yellow
-    keyword whole const yellow
-    keyword whole constructor yellow
-    keyword whole continue yellow
-    keyword whole debugger yellow
-    keyword whole default yellow
-    keyword whole delete yellow
-    keyword whole do yellow
-    keyword whole else yellow
-    keyword whole export yellow
-    keyword whole extends yellow
-    keyword whole finally yellow
-    keyword whole for yellow
-    keyword whole function yellow
-    keyword whole if yellow
-    keyword whole import yellow
-    keyword whole in yellow
-    keyword whole instanceof yellow
-    keyword whole let yellow
-    keyword whole new yellow
-    keyword whole of yellow
-    keyword whole prototype yellow
-    keyword whole return yellow
-    keyword whole super yellow
-    keyword whole switch yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole try yellow
-    keyword whole typeof yellow
-    keyword whole var yellow
-    keyword whole void yellow
-    keyword whole while yellow
-    keyword whole with yellow
-    keyword whole yield yellow
+    keyword whole arguments brightyellow
+    keyword whole async brightyellow
+    keyword whole await brightyellow
+    keyword whole break brightyellow
+    keyword whole caller brightyellow
+    keyword whole case brightyellow
+    keyword whole catch brightyellow
+    keyword whole class brightyellow
+    keyword whole const brightyellow
+    keyword whole constructor brightyellow
+    keyword whole continue brightyellow
+    keyword whole debugger brightyellow
+    keyword whole default brightyellow
+    keyword whole delete brightyellow
+    keyword whole do brightyellow
+    keyword whole else brightyellow
+    keyword whole export brightyellow
+    keyword whole extends brightyellow
+    keyword whole finally brightyellow
+    keyword whole for brightyellow
+    keyword whole function brightyellow
+    keyword whole if brightyellow
+    keyword whole import brightyellow
+    keyword whole in brightyellow
+    keyword whole instanceof brightyellow
+    keyword whole let brightyellow
+    keyword whole new brightyellow
+    keyword whole of brightyellow
+    keyword whole prototype brightyellow
+    keyword whole return brightyellow
+    keyword whole super brightyellow
+    keyword whole switch brightyellow
+    keyword whole this brightyellow
+    keyword whole throw brightyellow
+    keyword whole try brightyellow
+    keyword whole typeof brightyellow
+    keyword whole var brightyellow
+    keyword whole void brightyellow
+    keyword whole while brightyellow
+    keyword whole with brightyellow
+    keyword whole yield brightyellow
 
     #=========================
     # Objects
-    keyword whole AbortController yellow
-    keyword whole AbortSignal yellow
-    keyword whole AggregateError yellow
-    keyword whole Array yellow
-    keyword whole ArrayBuffer yellow
-    keyword whole AsyncFunction yellow
-    keyword whole AsyncGenerator yellow
-    keyword whole AsyncGeneratorFunction yellow
-    keyword whole Atomics yellow
-    keyword whole BigInt64Array yellow
-    keyword whole BigInt yellow
-    keyword whole BigUint64Array yellow
+    keyword whole AbortController brightyellow
+    keyword whole AbortSignal brightyellow
+    keyword whole AggregateError brightyellow
+    keyword whole Array brightyellow
+    keyword whole ArrayBuffer brightyellow
+    keyword whole AsyncFunction brightyellow
+    keyword whole AsyncGenerator brightyellow
+    keyword whole AsyncGeneratorFunction brightyellow
+    keyword whole Atomics brightyellow
+    keyword whole BigInt64Array brightyellow
+    keyword whole BigInt brightyellow
+    keyword whole BigUint64Array brightyellow
     keyword whole Blob yellowOB
-    keyword whole Boolean yellow
-    keyword whole Buffer yellow
-    keyword whole DataView yellow
-    keyword whole Date yellow
-    keyword whole DOMException yellow
-    keyword whole Error yellow
-    keyword whole EvalError yellow
-    keyword whole Float32Array yellow
-    keyword whole Float64Array yellow
-    keyword whole Function yellow
-    keyword whole Generator yellow
-    keyword whole GeneratorFunction yellow
-    keyword whole global yellow
-    keyword whole globalThis yellow
-    keyword whole Image yellow
-    keyword whole Infinity yellow
-    keyword whole Int16Array yellow
-    keyword whole Int32Array yellow
-    keyword whole Int8Array yellow
-    keyword whole Intl yellow
-    keyword whole JSON yellow
-    keyword whole Map yellow
-    keyword whole Math yellow
-    keyword whole Number yellow
-    keyword whole Object yellow
-    keyword whole Promise yellow
-    keyword whole Promise yellow
-    keyword whole Proxy yellow
-    keyword whole RangeError yellow
-    keyword whole ReferenceError yellow
-    keyword whole Reflect yellow
-    keyword whole RegExp yellow
-    keyword whole Set yellow
-    keyword whole SharedArrayBuffer yellow
-    keyword whole Symbol yellow
-    keyword whole SyntaxError yellow
-    keyword whole TextDecoder yellow
-    keyword whole TypeError yellow
-    keyword whole Uint16Array yellow
-    keyword whole Uint32Array yellow
-    keyword whole Uint8Array yellow
-    keyword whole Uint8ClampedArray yellow
-    keyword whole URIError yellow
-    keyword whole URL yellow
-    keyword whole URLSearchParams yellow
-    keyword whole WeakMap yellow
-    keyword whole WeakSet yellow
-    keyword whole WebAssembly yellow
-    keyword whole window yellow
+    keyword whole Boolean brightyellow
+    keyword whole Buffer brightyellow
+    keyword whole DataView brightyellow
+    keyword whole Date brightyellow
+    keyword whole DOMException brightyellow
+    keyword whole Error brightyellow
+    keyword whole EvalError brightyellow
+    keyword whole Float32Array brightyellow
+    keyword whole Float64Array brightyellow
+    keyword whole Function brightyellow
+    keyword whole Generator brightyellow
+    keyword whole GeneratorFunction brightyellow
+    keyword whole global brightyellow
+    keyword whole globalThis brightyellow
+    keyword whole Image brightyellow
+    keyword whole Infinity brightyellow
+    keyword whole Int16Array brightyellow
+    keyword whole Int32Array brightyellow
+    keyword whole Int8Array brightyellow
+    keyword whole Intl brightyellow
+    keyword whole JSON brightyellow
+    keyword whole Map brightyellow
+    keyword whole Math brightyellow
+    keyword whole Number brightyellow
+    keyword whole Object brightyellow
+    keyword whole Promise brightyellow
+    keyword whole Promise brightyellow
+    keyword whole Proxy brightyellow
+    keyword whole RangeError brightyellow
+    keyword whole ReferenceError brightyellow
+    keyword whole Reflect brightyellow
+    keyword whole RegExp brightyellow
+    keyword whole Set brightyellow
+    keyword whole SharedArrayBuffer brightyellow
+    keyword whole Symbol brightyellow
+    keyword whole SyntaxError brightyellow
+    keyword whole TextDecoder brightyellow
+    keyword whole TypeError brightyellow
+    keyword whole Uint16Array brightyellow
+    keyword whole Uint32Array brightyellow
+    keyword whole Uint8Array brightyellow
+    keyword whole Uint8ClampedArray brightyellow
+    keyword whole URIError brightyellow
+    keyword whole URL brightyellow
+    keyword whole URLSearchParams brightyellow
+    keyword whole WeakMap brightyellow
+    keyword whole WeakSet brightyellow
+    keyword whole WebAssembly brightyellow
+    keyword whole window brightyellow
 
     #=========================
     # Most common functions
-    keyword whole alert yellow
-    keyword whole clearInterval yellow
-    keyword whole clearTimeout yellow
-    keyword whole console yellow
-    keyword whole decodeURIComponent yellow
-    keyword whole decodeURI yellow
-    keyword whole encodeURIComponent yellow
-    keyword whole escape yellow
-    keyword whole eval yellow
-    keyword whole fetch yellow
-    keyword whole isFinite yellow
-    keyword whole isNaN yellow
-    keyword whole module yellow
-    keyword whole parseFloat yellow
-    keyword whole parseInt yellow
-    keyword whole performance yellow
-    keyword whole process yellow
-    keyword whole queueMicrotask yellow
-    keyword whole require yellow
-    keyword whole setImmediate yellow
-    keyword whole setInterval yellow
-    keyword whole setTimeout yellow
-    keyword whole structuredClone yellow
-    keyword whole unescape yellow
+    keyword whole alert brightyellow
+    keyword whole clearInterval brightyellow
+    keyword whole clearTimeout brightyellow
+    keyword whole console brightyellow
+    keyword whole decodeURIComponent brightyellow
+    keyword whole decodeURI brightyellow
+    keyword whole encodeURIComponent brightyellow
+    keyword whole escape brightyellow
+    keyword whole eval brightyellow
+    keyword whole fetch brightyellow
+    keyword whole isFinite brightyellow
+    keyword whole isNaN brightyellow
+    keyword whole module brightyellow
+    keyword whole parseFloat brightyellow
+    keyword whole parseInt brightyellow
+    keyword whole performance brightyellow
+    keyword whole process brightyellow
+    keyword whole queueMicrotask brightyellow
+    keyword whole require brightyellow
+    keyword whole setImmediate brightyellow
+    keyword whole setInterval brightyellow
+    keyword whole setTimeout brightyellow
+    keyword whole structuredClone brightyellow
+    keyword whole unescape brightyellow
 
     #=========================
     # Constants
     keyword whole true brightgreen
     keyword whole false brightgreen
     keyword whole null brightgreen
-    keyword whole undefined yellow
-    keyword whole NaN yellow
-    keyword whole __dirname yellow
-    keyword whole __filename yellow
+    keyword whole undefined brightyellow
+    keyword whole NaN brightyellow
+    keyword whole __dirname brightyellow
+    keyword whole __filename brightyellow
 
     #=========================
     # Comments
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
     #=========================
     # Numbers
@@ -191,20 +191,20 @@ context default
     #=========================
     # Special symbols
     keyword => brightcyan
-    keyword \. yellow
-    keyword \* yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword ! yellow
-    keyword & yellow
-    keyword | yellow
-    keyword ^ yellow
-    keyword ~ yellow
-    keyword > yellow
-    keyword < yellow
+    keyword \. brightyellow
+    keyword \* brightyellow
+    keyword \+ brightyellow
+    keyword - brightyellow
+    keyword / brightyellow
+    keyword % brightyellow
+    keyword = brightyellow
+    keyword ! brightyellow
+    keyword & brightyellow
+    keyword | brightyellow
+    keyword ^ brightyellow
+    keyword ~ brightyellow
+    keyword > brightyellow
+    keyword < brightyellow
 
     #=========================
     # Separators
@@ -223,7 +223,7 @@ context default
 #=============================
 # Comments
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
     keyword whole BUG brightred
     keyword whole FixMe brightred
@@ -236,7 +236,7 @@ context exclusive /\* \*/ brown
     keyword ??\[?\] brightred
 
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
     keyword whole BUG brightred
     keyword whole FixMe brightred
@@ -270,4 +270,4 @@ context ` ` green
     spellcheck
     keyword \\\{\\'"abtnvfr\} brightgreen
     keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword ${*} yellow
+    keyword ${*} brightyellow

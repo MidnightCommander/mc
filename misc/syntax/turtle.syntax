@@ -17,14 +17,14 @@
 # Reference:
 #   https://www.w3.org/TeamSubmission/turtle/
 
-context default lightgray
+context default white
     spellcheck
 
 # declarations
     keyword whole @base magenta
     keyword whole @prefix magenta
 
-    keyword whole a yellow
+    keyword whole a brightyellow
 
     keyword ^^ brightmagenta
 
@@ -42,38 +42,38 @@ context default lightgray
     keyword ] cyan
 
 # Decimal integers
-    keyword whole \{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{0123456789\}\[0123456789\] brightyellow
+    keyword whole \{-+\}\{0123456789\}\[0123456789\] brightyellow
 
 # Decimal floating point arbitrary precision number
-    keyword whole \{0123456789\}.\[0123456789\] yellow
-    keyword whole .\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}.\[0123456789\] yellow
-    keyword whole \{-+\}.\{0123456789\}\[0123456789\] yellow
+    keyword whole \{0123456789\}.\[0123456789\] brightyellow
+    keyword whole .\{0123456789\}\[0123456789\] brightyellow
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\] brightyellow
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\] brightyellow
 
 # Decimal floating point double/fixed precision number
-    keyword whole \{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole .\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole .\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightyellow
+    keyword whole \{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] brightyellow
+    keyword whole .\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightyellow
+    keyword whole .\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] brightyellow
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightyellow
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] brightyellow
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightyellow
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] brightyellow
 
 # Boolean
-    keyword whole true yellow
-    keyword whole false yellow
+    keyword whole true brightyellow
+    keyword whole false brightyellow
 
 # Language
     keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789-\]\[abcdefghijklmnopqrstuvwxyz0123456789\] brightmagenta
     keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789\] brightmagenta
 
 # Punctuation
-    keyword , white
-    keyword ; white
-#    keyword . black white
-    keyword . white brightmagenta
+    keyword , brightwhite
+    keyword ; brightwhite
+#    keyword . black brightwhite
+    keyword . brightwhite brightmagenta
 
 # URL
 #    keyword whole <*> brightred
@@ -111,10 +111,10 @@ context """ """ green
     keyword \\\{tnr"\\} brightgreen
 
 # Comment
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
 
 # Ideally we would have defined comments with "context linestart \[\s\]# ...",
 # but contexts can't start with a character class. So we define comments twice.
-context linestart \s\[\s\]# \n brown
+context linestart \s\[\s\]# \n yellow
     spellcheck

@@ -6,70 +6,70 @@
 
 caseinsensitive
 
-context default lightgray
+context default white
 
 # NASM directives
-    keyword whole BITS white
-    keyword whole SECTION white
-    keyword whole SEGMENT white
-    keyword whole ABSOLUTE white
-    keyword whole EXTERN white
-    keyword whole GLOBAL white
-    keyword whole COMMON white
-    keyword whole CPU white
+    keyword whole BITS brightwhite
+    keyword whole SECTION brightwhite
+    keyword whole SEGMENT brightwhite
+    keyword whole ABSOLUTE brightwhite
+    keyword whole EXTERN brightwhite
+    keyword whole GLOBAL brightwhite
+    keyword whole COMMON brightwhite
+    keyword whole CPU brightwhite
 
 # NASM, WASM, TASM, MASM and common modifiers
-    keyword whole ALIGN white
-    keyword whole ALIGNB white
-    keyword whole STRUC white
-    keyword whole ENDSTRUC white
-    keyword whole ISTRUC white
-    keyword whole IEND white
-    keyword whole AT white
-    keyword whole __FILE__ white
-    keyword whole __LINE__ white
-    keyword whole __NASM_VER__ white
-    keyword whole __NASM_VERSION_ID__ white
-    keyword whole __NASM_MAJOR__ white
-    keyword whole __NASM_MINOR__ white
-    keyword whole __NASM_SUBMINOR__ white
-    keyword whole __NASM_PATCHLEVEL__ white
-    keyword whole __SECT__ white
-    keyword whole STRICT white
-    keyword whole SEG white
-    keyword whole WRT white
-    keyword whole NOSPLIT white
-    keyword whole BYTE white
-    keyword whole WORD white
-    keyword whole DWORD white
-    keyword whole QWORD white
-    keyword whole TWORD white
+    keyword whole ALIGN brightwhite
+    keyword whole ALIGNB brightwhite
+    keyword whole STRUC brightwhite
+    keyword whole ENDSTRUC brightwhite
+    keyword whole ISTRUC brightwhite
+    keyword whole IEND brightwhite
+    keyword whole AT brightwhite
+    keyword whole __FILE__ brightwhite
+    keyword whole __LINE__ brightwhite
+    keyword whole __NASM_VER__ brightwhite
+    keyword whole __NASM_VERSION_ID__ brightwhite
+    keyword whole __NASM_MAJOR__ brightwhite
+    keyword whole __NASM_MINOR__ brightwhite
+    keyword whole __NASM_SUBMINOR__ brightwhite
+    keyword whole __NASM_PATCHLEVEL__ brightwhite
+    keyword whole __SECT__ brightwhite
+    keyword whole STRICT brightwhite
+    keyword whole SEG brightwhite
+    keyword whole WRT brightwhite
+    keyword whole NOSPLIT brightwhite
+    keyword whole BYTE brightwhite
+    keyword whole WORD brightwhite
+    keyword whole DWORD brightwhite
+    keyword whole QWORD brightwhite
+    keyword whole TWORD brightwhite
 
 # Pseudo instructions
-    keyword whole ORG white
-    keyword whole EQU white
-    keyword whole DB white
-    keyword whole DW white
-    keyword whole DD white
-    keyword whole DQ white
-    keyword whole DT white
-    keyword whole RESB white
-    keyword whole RESW white
-    keyword whole RESD white
-    keyword whole RESQ white
-    keyword whole REST white
-    keyword whole INCBIN white
-    keyword whole TIMES white
+    keyword whole ORG brightwhite
+    keyword whole EQU brightwhite
+    keyword whole DB brightwhite
+    keyword whole DW brightwhite
+    keyword whole DD brightwhite
+    keyword whole DQ brightwhite
+    keyword whole DT brightwhite
+    keyword whole RESB brightwhite
+    keyword whole RESW brightwhite
+    keyword whole RESD brightwhite
+    keyword whole RESQ brightwhite
+    keyword whole REST brightwhite
+    keyword whole INCBIN brightwhite
+    keyword whole TIMES brightwhite
 
 # GAS specific
-    keyword whole .string white
-    keyword whole .section white
-    keyword whole .align white
-    keyword whole .type white
-    keyword whole .size white
-    keyword whole .comm white
-    keyword whole .ident white
-    keyword whole .globl white
+    keyword whole .string brightwhite
+    keyword whole .section brightwhite
+    keyword whole .align brightwhite
+    keyword whole .type brightwhite
+    keyword whole .size brightwhite
+    keyword whole .comm brightwhite
+    keyword whole .ident brightwhite
+    keyword whole .globl brightwhite
     keyword whole .rodata brightblue
     keyword whole .data brightblue
     keyword whole .text brightblue
@@ -361,42 +361,42 @@ context default lightgray
     keyword whole %xmm7 brightcyan
 
 # Common symbols
-    keyword ; brown
-    keyword ! brown
-    keyword /\* brown
-    keyword \*/ brown
-    keyword [ white
-    keyword ] white
-    keyword , white
-    keyword \+ white
-    keyword - white
-    keyword . white
-    keyword ( white
-    keyword ) white
-    keyword : white
-    keyword @ white
-    keyword >> white
-    keyword << white
-    keyword % white
-    keyword \\ white
-    keyword / white
-    keyword // white
-    keyword ~ white
-    keyword ^ white
-    keyword & white
-    keyword \* white
-    keyword | white
+    keyword ; yellow
+    keyword ! yellow
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword [ brightwhite
+    keyword ] brightwhite
+    keyword , brightwhite
+    keyword \+ brightwhite
+    keyword - brightwhite
+    keyword . brightwhite
+    keyword ( brightwhite
+    keyword ) brightwhite
+    keyword : brightwhite
+    keyword @ brightwhite
+    keyword >> brightwhite
+    keyword << brightwhite
+    keyword % brightwhite
+    keyword \\ brightwhite
+    keyword / brightwhite
+    keyword // brightwhite
+    keyword ~ brightwhite
+    keyword ^ brightwhite
+    keyword & brightwhite
+    keyword \* brightwhite
+    keyword | brightwhite
     keyword $ brightgreen
     keyword $$ brightgreen
     keyword %% cyan
 
 context " " green
 context ' ' brightgreen
-context exclusive ; \n brown
+context exclusive ; \n yellow
     spellcheck
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive ! \n brown
+context exclusive ! \n yellow
     spellcheck

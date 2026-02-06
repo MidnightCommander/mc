@@ -4,56 +4,56 @@
 caseinsensitive
 
 context default
-    keyword whole break yellow
-    keyword whole call yellow
-    keyword whole cd yellow
-    keyword whole chdir yellow
-    keyword whole cls yellow
-    keyword whole copy yellow
-    keyword whole del yellow
-    keyword whole dir yellow
-    keyword whole do yellow
-    keyword whole echo yellow
-    keyword whole else yellow
-    keyword whole erase yellow
-    keyword whole endlocal yellow
-    keyword whole errorlevel yellow
-    keyword whole exist yellow
-    keyword whole exit yellow
-    keyword whole for yellow
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole md yellow
-    keyword whole mkdir yellow
-    keyword whole move yellow
-    keyword whole not yellow
-    keyword whole off yellow
-    keyword whole on yellow
-    keyword whole pause yellow
-    keyword whole popd yellow
-    keyword whole pushd yellow
-    keyword whole rd yellow
-    keyword wholeleft rem\s*\n brown
-    keyword whole ren yellow
-    keyword whole rename yellow
-    keyword whole rmdir yellow
-    keyword whole set yellow
-    keyword whole setlocal yellow
-    keyword whole shift yellow
-    keyword whole then yellow
-    keyword whole type yellow
-    keyword whole ver yellow
+    keyword whole break brightyellow
+    keyword whole call brightyellow
+    keyword whole cd brightyellow
+    keyword whole chdir brightyellow
+    keyword whole cls brightyellow
+    keyword whole copy brightyellow
+    keyword whole del brightyellow
+    keyword whole dir brightyellow
+    keyword whole do brightyellow
+    keyword whole echo brightyellow
+    keyword whole else brightyellow
+    keyword whole erase brightyellow
+    keyword whole endlocal brightyellow
+    keyword whole errorlevel brightyellow
+    keyword whole exist brightyellow
+    keyword whole exit brightyellow
+    keyword whole for brightyellow
+    keyword whole goto brightyellow
+    keyword whole if brightyellow
+    keyword whole in brightyellow
+    keyword whole md brightyellow
+    keyword whole mkdir brightyellow
+    keyword whole move brightyellow
+    keyword whole not brightyellow
+    keyword whole off brightyellow
+    keyword whole on brightyellow
+    keyword whole pause brightyellow
+    keyword whole popd brightyellow
+    keyword whole pushd brightyellow
+    keyword whole rd brightyellow
+    keyword wholeleft rem\s*\n yellow
+    keyword whole ren brightyellow
+    keyword whole rename brightyellow
+    keyword whole rmdir brightyellow
+    keyword whole set brightyellow
+    keyword whole setlocal brightyellow
+    keyword whole shift brightyellow
+    keyword whole then brightyellow
+    keyword whole type brightyellow
+    keyword whole ver brightyellow
 
-    keyword \\ lightgray
+    keyword \\ white
     keyword whole \%\* brightmagenta
     keyword whole \%\$ brightmagenta
     keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta
     keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta
-    keyword >> white
-    keyword > white
-    keyword < white
-    keyword | white
+    keyword >> brightwhite
+    keyword > brightwhite
+    keyword < brightwhite
+    keyword | brightwhite
 
 context ' ' brightcyan
     spellcheck
@@ -67,7 +67,7 @@ context linestart :: \n brightgreen
     keyword $+:*$ black green
     spellcheck
 
-context linestart : \n white black
+context linestart : \n brightwhite black
     spellcheck
 
 context :: \n brightgreen

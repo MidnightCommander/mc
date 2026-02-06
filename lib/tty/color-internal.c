@@ -58,21 +58,21 @@ typedef struct mc_tty_color_table_struct
 
 static mc_tty_color_table_t const color_table[] = {
     { "black", COLOR_BLACK },
-    { "gray", COLOR_BLACK + COLOR_INTENSITY },
+    { "brightblack", COLOR_BLACK + COLOR_INTENSITY },
     { "red", COLOR_RED },
     { "brightred", COLOR_RED + COLOR_INTENSITY },
     { "green", COLOR_GREEN },
     { "brightgreen", COLOR_GREEN + COLOR_INTENSITY },
-    { "brown", COLOR_YELLOW },
-    { "yellow", COLOR_YELLOW + COLOR_INTENSITY },
+    { "yellow", COLOR_YELLOW },
+    { "brightyellow", COLOR_YELLOW + COLOR_INTENSITY },
     { "blue", COLOR_BLUE },
     { "brightblue", COLOR_BLUE + COLOR_INTENSITY },
     { "magenta", COLOR_MAGENTA },
     { "brightmagenta", COLOR_MAGENTA + COLOR_INTENSITY },
     { "cyan", COLOR_CYAN },
     { "brightcyan", COLOR_CYAN + COLOR_INTENSITY },
-    { "lightgray", COLOR_WHITE },
-    { "white", COLOR_WHITE + COLOR_INTENSITY },
+    { "white", COLOR_WHITE },
+    { "brightwhite", COLOR_WHITE + COLOR_INTENSITY },
     { "default", -1 },  // default color of the terminal
     // End of list
     { NULL, 0 },
@@ -159,33 +159,6 @@ parse_256_or_true_color_name (const char *color_name)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-const char *
-tty_color_get_name_by_index (int idx)
-{
-    int i;
-
-    // Find the real English name of the first 16 colors,
-    // as well as the A_* special values.
-    for (i = 0; color_table[i].name != NULL; i++)
-        if (idx == color_table[i].value)
-            return color_table[i].name;
-
-    // Create and return the strings in "colorNNN" or "#rrggbb" format.
-    if ((idx >= 16 && idx < 256) || (idx & FLAG_TRUECOLOR) != 0)
-    {
-        char name[9];
-
-        if (idx < 256)
-            g_snprintf (name, sizeof (name), "color%d", idx);
-        else
-            g_snprintf (name, sizeof (name), "#%06X", (unsigned int) idx & 0xFFFFFF);
-        return g_intern_string (name);
-    }
-    return "default";
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 int

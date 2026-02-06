@@ -12,35 +12,35 @@ context default
     keyword whole linestart #!\[\s\]/bin/ruby brightcyan black
 
 # Symbols :bla-bla
-    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightwhite
 
 #Operators
 
-    keyword > yellow
-    keyword < yellow
-    keyword - yellow
-    keyword \+ yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword \+= yellow
-    keyword -= yellow
-    keyword == yellow
-    keyword != yellow
-    keyword === yellow
-    keyword <=> yellow
-    keyword ! yellow
-    keyword ~ yellow
-    keyword =~ yellow
-    keyword & yellow
-    keyword | yellow
-    keyword .. yellow
+    keyword > brightyellow
+    keyword < brightyellow
+    keyword - brightyellow
+    keyword \+ brightyellow
+    keyword \* brightyellow
+    keyword / brightyellow
+    keyword % brightyellow
+    keyword = brightyellow
+    keyword \+= brightyellow
+    keyword -= brightyellow
+    keyword == brightyellow
+    keyword != brightyellow
+    keyword === brightyellow
+    keyword <=> brightyellow
+    keyword ! brightyellow
+    keyword ~ brightyellow
+    keyword =~ brightyellow
+    keyword & brightyellow
+    keyword | brightyellow
+    keyword .. brightyellow
 
 #System variables
 
 # hack for regexps
-    keyword $/ yellow
+    keyword $/ brightyellow
     keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} red
     keyword $\{\0123456789\} red
     keyword $-+ red
@@ -93,7 +93,7 @@ context default
 #Variables
 
     keyword wholeright $+ brightgreen
-    keyword wholeright @+ white
+    keyword wholeright @+ brightwhite
     keyword \\" brightred
     keyword \\' brightred
 
@@ -136,9 +136,9 @@ context default
 
 #First class methods
 
-    keyword whole new yellow
-    keyword whole inherited yellow
-    keyword whole superclass yellow
+    keyword whole new brightyellow
+    keyword whole inherited brightyellow
+    keyword whole superclass brightyellow
 
 #Class module
 #   exclusion
@@ -156,27 +156,27 @@ context default
 
 #Class IO
 
-    keyword whole close yellow
-    keyword whole crypt yellow
-    keyword whole delete yellow
-    keyword whole each yellow
-    keyword whole gets yellow
-    keyword whole grep yellow
-    keyword whole inspect yellow
-    keyword whole join yellow
-    keyword whole sync yellow
+    keyword whole close brightyellow
+    keyword whole crypt brightyellow
+    keyword whole delete brightyellow
+    keyword whole each brightyellow
+    keyword whole gets brightyellow
+    keyword whole grep brightyellow
+    keyword whole inspect brightyellow
+    keyword whole join brightyellow
+    keyword whole sync brightyellow
 
 #Class Array
 
-    keyword whole index yellow
-    keyword whole indexes yellow
-    keyword whole indices yellow
-    keyword whole size yellow
-    keyword whole pop yellow
-    keyword whole push yellow
-    keyword whole sort yellow
-    keyword whole shift yellow
-    keyword whole unshift yellow
+    keyword whole index brightyellow
+    keyword whole indexes brightyellow
+    keyword whole indices brightyellow
+    keyword whole size brightyellow
+    keyword whole pop brightyellow
+    keyword whole push brightyellow
+    keyword whole sort brightyellow
+    keyword whole shift brightyellow
+    keyword whole unshift brightyellow
 
 #Math module
 
@@ -195,28 +195,28 @@ context default
 
 #Kernel module
 
-    keyword whole chomp yellow
-    keyword whole chomp! yellow
-    keyword whole chop yellow
-    keyword whole chop! yellow
-    keyword whole raise yellow
-    keyword whole fork yellow
-    keyword whole rand yellow
-    keyword whole srand yellow
-    keyword whole open yellow
-    keyword whole print yellow
-    keyword whole puts yellow
-    keyword whole printf yellow
-    keyword whole sprintf yellow
-    keyword whole exec yellow
-    keyword whole eval yellow
-    keyword whole exit yellow
-    keyword whole sleep yellow
+    keyword whole chomp brightyellow
+    keyword whole chomp! brightyellow
+    keyword whole chop brightyellow
+    keyword whole chop! brightyellow
+    keyword whole raise brightyellow
+    keyword whole fork brightyellow
+    keyword whole rand brightyellow
+    keyword whole srand brightyellow
+    keyword whole open brightyellow
+    keyword whole print brightyellow
+    keyword whole puts brightyellow
+    keyword whole printf brightyellow
+    keyword whole sprintf brightyellow
+    keyword whole exec brightyellow
+    keyword whole eval brightyellow
+    keyword whole exit brightyellow
+    keyword whole sleep brightyellow
 
 #this works only with label EOF :-(
 #context exclusive whole <<\[\s\]EOF EOF green
 
-context # \n brown
+context # \n yellow
     spellcheck
 
 context " " green
@@ -227,4 +227,4 @@ context ' ' brightgreen
     keyword \\' green
     keyword \\\\ green
 
-context exclusive ` ` white black
+context exclusive ` ` brightwhite black

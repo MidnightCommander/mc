@@ -3,38 +3,38 @@
 caseinsensitive
 
 context default
-    keyword whole abort yellow
-    keyword whole abs yellow
-    keyword whole and yellow
-    keyword whole delay yellow
-    keyword whole delta yellow
-    keyword whole digits yellow
-    keyword whole do yellow
-    keyword whole in yellow
-    keyword whole is yellow
-    keyword whole mod yellow
-    keyword whole not yellow
-    keyword whole null yellow
-    keyword whole of yellow
-    keyword whole or yellow
-    keyword whole others yellow
-    keyword whole out yellow
-    keyword whole pragma yellow
-    keyword whole raise yellow
-    keyword whole range yellow
-    keyword whole renames yellow
-    keyword whole requeue yellow
-    keyword whole return yellow
-    keyword whole reverse yellow
-    keyword whole separate yellow
-    keyword whole task yellow
-    keyword whole terminate yellow
-    keyword whole use yellow
-    keyword whole with yellow
-    keyword whole xor yellow
+    keyword whole abort brightyellow
+    keyword whole abs brightyellow
+    keyword whole and brightyellow
+    keyword whole delay brightyellow
+    keyword whole delta brightyellow
+    keyword whole digits brightyellow
+    keyword whole do brightyellow
+    keyword whole in brightyellow
+    keyword whole is brightyellow
+    keyword whole mod brightyellow
+    keyword whole not brightyellow
+    keyword whole null brightyellow
+    keyword whole of brightyellow
+    keyword whole or brightyellow
+    keyword whole others brightyellow
+    keyword whole out brightyellow
+    keyword whole pragma brightyellow
+    keyword whole raise brightyellow
+    keyword whole range brightyellow
+    keyword whole renames brightyellow
+    keyword whole requeue brightyellow
+    keyword whole return brightyellow
+    keyword whole reverse brightyellow
+    keyword whole separate brightyellow
+    keyword whole task brightyellow
+    keyword whole terminate brightyellow
+    keyword whole use brightyellow
+    keyword whole with brightyellow
+    keyword whole xor brightyellow
 
 # prevents - keyword from interfering with comment
-    keyword -- brown
+    keyword -- yellow
 
     keyword # brightgreen
     keyword ' brightgreen
@@ -119,6 +119,6 @@ context default
     keyword whole package magenta
     keyword whole procedure magenta
 
-context exclusive -- \n    brown
+context exclusive -- \n    yellow
 
 context " "    green

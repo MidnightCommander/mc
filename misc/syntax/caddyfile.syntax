@@ -17,8 +17,8 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.
     keyword linestart localhost brightmagenta
 
 # Block delimiters
-    keyword { yellow
-    keyword } yellow
+    keyword { brightyellow
+    keyword } brightyellow
 
 # Separators and operators
     keyword , brightcyan
@@ -63,86 +63,86 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.
     keyword whole https brightblue
 
 # Standard HTTP Directives (Caddy v1)
-    keyword whole basicauth yellow
-    keyword whole bind yellow
-    keyword whole browse yellow
-    keyword whole errors yellow
-    keyword whole expvar yellow
-    keyword whole ext yellow
-    keyword whole fastcgi yellow
-    keyword whole gzip yellow
-    keyword whole header yellow
-    keyword whole import yellow
-    keyword whole index yellow
-    keyword whole internal yellow
-    keyword whole limits yellow
-    keyword whole log yellow
-    keyword whole markdown yellow
-    keyword whole mime yellow
-    keyword whole on yellow
-    keyword whole pprof yellow
-    keyword whole proxy yellow
-    keyword whole push yellow
-    keyword whole redir yellow
-    keyword whole request_id yellow
-    keyword whole rewrite yellow
-    keyword whole root yellow
-    keyword whole status yellow
-    keyword whole templates yellow
-    keyword whole timeouts yellow
-    keyword whole tls yellow
-    keyword whole websocket yellow
+    keyword whole basicauth brightyellow
+    keyword whole bind brightyellow
+    keyword whole browse brightyellow
+    keyword whole errors brightyellow
+    keyword whole expvar brightyellow
+    keyword whole ext brightyellow
+    keyword whole fastcgi brightyellow
+    keyword whole gzip brightyellow
+    keyword whole header brightyellow
+    keyword whole import brightyellow
+    keyword whole index brightyellow
+    keyword whole internal brightyellow
+    keyword whole limits brightyellow
+    keyword whole log brightyellow
+    keyword whole markdown brightyellow
+    keyword whole mime brightyellow
+    keyword whole on brightyellow
+    keyword whole pprof brightyellow
+    keyword whole proxy brightyellow
+    keyword whole push brightyellow
+    keyword whole redir brightyellow
+    keyword whole request_id brightyellow
+    keyword whole rewrite brightyellow
+    keyword whole root brightyellow
+    keyword whole status brightyellow
+    keyword whole templates brightyellow
+    keyword whole timeouts brightyellow
+    keyword whole tls brightyellow
+    keyword whole websocket brightyellow
 
 # Caddy v2 directives
-    keyword whole file_server yellow
-    keyword whole reverse_proxy yellow
-    keyword whole respond yellow
-    keyword whole route yellow
-    keyword whole handle yellow
-    keyword whole handle_path yellow
-    keyword whole handle_errors yellow
-    keyword whole encode yellow
-    keyword whole php_fastcgi yellow
-    keyword whole uri yellow
-    keyword whole try_files yellow
-    keyword whole vars yellow
-    keyword whole request_body yellow
-    keyword whole abort yellow
-    keyword whole acme_server yellow
-    keyword whole basic_auth yellow
-    keyword whole forward_auth yellow
-    keyword whole fs yellow
-    keyword whole intercept yellow
-    keyword whole invoke yellow
-    keyword whole log_append yellow
-    keyword whole log_skip yellow
-    keyword whole log_name yellow
-    keyword whole map yellow
-    keyword whole method yellow
-    keyword whole metrics yellow
-    keyword whole push yellow
-    keyword whole request_header yellow
-    keyword whole tracing yellow
+    keyword whole file_server brightyellow
+    keyword whole reverse_proxy brightyellow
+    keyword whole respond brightyellow
+    keyword whole route brightyellow
+    keyword whole handle brightyellow
+    keyword whole handle_path brightyellow
+    keyword whole handle_errors brightyellow
+    keyword whole encode brightyellow
+    keyword whole php_fastcgi brightyellow
+    keyword whole uri brightyellow
+    keyword whole try_files brightyellow
+    keyword whole vars brightyellow
+    keyword whole request_body brightyellow
+    keyword whole abort brightyellow
+    keyword whole acme_server brightyellow
+    keyword whole basic_auth brightyellow
+    keyword whole forward_auth brightyellow
+    keyword whole fs brightyellow
+    keyword whole intercept brightyellow
+    keyword whole invoke brightyellow
+    keyword whole log_append brightyellow
+    keyword whole log_skip brightyellow
+    keyword whole log_name brightyellow
+    keyword whole map brightyellow
+    keyword whole method brightyellow
+    keyword whole metrics brightyellow
+    keyword whole push brightyellow
+    keyword whole request_header brightyellow
+    keyword whole tracing brightyellow
 
 # Popular plugin directives
-    keyword whole cache yellow
-    keyword whole cors yellow
-    keyword whole jwt yellow
-    keyword whole ratelimit yellow
-    keyword whole realip yellow
-    keyword whole filter yellow
-    keyword whole git yellow
-    keyword whole prometheus yellow
-    keyword whole ipfilter yellow
-    keyword whole forwardproxy yellow
-    keyword whole login yellow
-    keyword whole authz yellow
-    keyword whole minify yellow
-    keyword whole expires yellow
-    keyword whole locale yellow
-    keyword whole webdav yellow
-    keyword whole awslambda yellow
-    keyword whole awses yellow
+    keyword whole cache brightyellow
+    keyword whole cors brightyellow
+    keyword whole jwt brightyellow
+    keyword whole ratelimit brightyellow
+    keyword whole realip brightyellow
+    keyword whole filter brightyellow
+    keyword whole git brightyellow
+    keyword whole prometheus brightyellow
+    keyword whole ipfilter brightyellow
+    keyword whole forwardproxy brightyellow
+    keyword whole login brightyellow
+    keyword whole authz brightyellow
+    keyword whole minify brightyellow
+    keyword whole expires brightyellow
+    keyword whole locale brightyellow
+    keyword whole webdav brightyellow
+    keyword whole awslambda brightyellow
+    keyword whole awses brightyellow
 
 # Common subdirectives and options (with underscores)
     keyword whole to brightcyan
@@ -256,8 +256,8 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.
     keyword @\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] brightmagenta
 
 # Arguments that start with + or - (like +header or -header)
-    keyword +\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] white
-    keyword -\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] white
+    keyword +\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] brightwhite
+    keyword -\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] brightwhite
 
 # Numbers (ports, status codes, sizes)
     keyword whole :\{0123456789\}\[0123456789\] brightgreen
@@ -269,7 +269,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.
     keyword whole \{0123456789\}\[0123456789\]h brightgreen
 
 # Comments
-context # \n brown
+context # \n yellow
     spellcheck
 
 # String literals with quotes

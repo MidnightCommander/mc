@@ -6,7 +6,7 @@
 
 context default
     spellcheck
-    keyword #*\n brown
+    keyword #*\n yellow
     keyword {{*}} brightred
     keyword linestart --- brightcyan
     keyword linestart \[\s\]-\s brightcyan
@@ -15,7 +15,7 @@ context default
     keyword , red
     # Below, we can get by with just "*:\{\s\n\}", but we prefer to restrict the
     # key names in order not to grab too much (e.g., "{one: 1, two: 2}", "one: 1  # possibilities: 1 or 2").
-    keyword \{0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\s-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} yellow
+    keyword \{0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\s-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} brightyellow
     keyword [ brightcyan
     keyword ] brightcyan
     keyword { brightcyan
@@ -37,5 +37,5 @@ context ' ' green
     keyword {{*}} brightred
 
 # The last word below may be: "\n*:\{\s\n\}", but used strict version suitable for more cases
-context exclusive |\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} brown
-context exclusive >\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} brown
+context exclusive |\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} yellow
+context exclusive >\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} yellow

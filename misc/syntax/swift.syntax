@@ -1,5 +1,5 @@
-define keywords yellow
-define attributes yellow
+define keywords brightyellow
+define attributes brightyellow
 define operators brightcyan
 define comments red
 define strings green

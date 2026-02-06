@@ -2,20 +2,20 @@
 context default
     spellcheck
     keyword linestart Begin3 brightmagenta
-    keyword linestart Title:\s\s\s\s\s\s\s\s\s\s red yellow
-    keyword linestart Version:\s\s\s\s\s\s\s\s red yellow
-    keyword linestart Entered-date:\s\s\s red yellow
-    keyword linestart Description:\s\s\s\s red yellow
-    keyword linestart Keywords:\s\s\s\s\s\s\s red yellow
-    keyword linestart Alternate-site:\s red yellow
-    keyword linestart Primary-site:\s\s\s red yellow
-    keyword linestart Original-site:\s\s red yellow
-    keyword linestart Platforms:\s\s\s\s\s\s red yellow
-    keyword linestart Copying-policy:\s red yellow
+    keyword linestart Title:\s\s\s\s\s\s\s\s\s\s red brightyellow
+    keyword linestart Version:\s\s\s\s\s\s\s\s red brightyellow
+    keyword linestart Entered-date:\s\s\s red brightyellow
+    keyword linestart Description:\s\s\s\s red brightyellow
+    keyword linestart Keywords:\s\s\s\s\s\s\s red brightyellow
+    keyword linestart Alternate-site:\s red brightyellow
+    keyword linestart Primary-site:\s\s\s red brightyellow
+    keyword linestart Original-site:\s\s red brightyellow
+    keyword linestart Platforms:\s\s\s\s\s\s red brightyellow
+    keyword linestart Copying-policy:\s red brightyellow
     keyword linestart End brightmagenta
 
-    keyword linestart \t\t                white yellow
-    keyword linestart \s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s white yellow
+    keyword linestart \t\t                brightwhite brightyellow
+    keyword linestart \s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s brightwhite brightyellow
     keyword whole GPL green
     keyword whole BSD green
     keyword whole Shareware green

@@ -24,8 +24,8 @@ context default
     keyword whole wholechars\[\] brightcyan
     keyword whole define\[\] brightcyan
 
-    keyword whole spellcheck\[\] yellow
-    keyword whole keyword\[\] yellow
+    keyword whole spellcheck\[\] brightyellow
+    keyword whole keyword\[\] brightyellow
     keyword whole context\[\t\s\]exclusive brightred
     keyword whole context\[\t\s\]default brightred
     keyword whole context\[\] brightred
@@ -37,24 +37,24 @@ context default
     keyword whole black black blue
     keyword whole red red
     keyword whole green green
-    keyword whole brown brown
+    keyword whole yellow yellow
     keyword whole blue blue black
     keyword whole magenta magenta
     keyword whole cyan cyan
-    keyword whole lightgray lightgray
-    keyword whole gray gray black
+    keyword whole white white
+    keyword whole brightblack brightblack black
     keyword whole brightred brightred
     keyword whole brightgreen brightgreen
-    keyword whole yellow yellow
+    keyword whole brightyellow brightyellow
     keyword whole brightblue brightblue black
     keyword whole brightmagenta brightmagenta
     keyword whole brightcyan brightcyan
-    keyword whole white white
+    keyword whole brightwhite brightwhite
 
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
 
 # Ideally we would have defined comments with "context linestart \[\s\]# ...",
 # but contexts can't start with a character class. So we define comments twice.
-context linestart \s\[\s\]# \n brown
+context linestart \s\[\s\]# \n yellow
     spellcheck

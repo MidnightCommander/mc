@@ -43,7 +43,6 @@ extern gboolean need_convert_256color;
 
 /*** declarations of public functions ************************************************************/
 
-const char *tty_color_get_name_by_index (int idx);
 int tty_color_get_index_by_name (const char *color_name);
 int tty_attr_get_bits (const char *attrs);
 int convert_256color_to_truecolor (int color);

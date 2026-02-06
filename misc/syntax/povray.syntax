@@ -3,73 +3,73 @@
 # // Mike Gorchak
 #
 
-context default lightgray
+context default white
 
 # Keywords
-    keyword whole global_settings yellow
-    keyword whole radiosity yellow
-    keyword whole light_source yellow
-    keyword whole fog yellow
-    keyword whole sphere yellow
-    keyword whole camera yellow
-    keyword whole plane yellow
-    keyword whole union yellow
-    keyword whole box yellow
-    keyword whole cylinder yellow
-    keyword whole torus yellow
-    keyword whole difference yellow
-    keyword whole intersection yellow
-    keyword whole object yellow
-    keyword whole photons yellow
-    keyword whole material yellow
-    keyword whole texture yellow
-    keyword whole pigment yellow
-    keyword whole pigment_pattern yellow
-    keyword whole pigment_map yellow
-    keyword whole finish yellow
-    keyword whole interior yellow
-    keyword whole merge yellow
-    keyword whole warp yellow
-    keyword whole color_map yellow
-    keyword whole colour_map yellow
-    keyword whole isosurface yellow
-    keyword whole sky_sphere yellow
-    keyword whole bounded_by yellow
-    keyword whole clipped_by yellow
-    keyword whole normal yellow
-    keyword whole tiles yellow
-    keyword whole height_field yellow
-    keyword whole image_map yellow
-    keyword whole looks_like yellow
-    keyword whole quadric yellow
-    keyword whole scattering yellow
-    keyword whole text yellow
-    keyword whole bump_map yellow
-    keyword whole texture_map yellow
-    keyword whole slope yellow
-    keyword whole contained_by yellow
-    keyword whole superellipsoid yellow
-    keyword whole cone yellow
-    keyword whole blob yellow
-    keyword whole light_group yellow
+    keyword whole global_settings brightyellow
+    keyword whole radiosity brightyellow
+    keyword whole light_source brightyellow
+    keyword whole fog brightyellow
+    keyword whole sphere brightyellow
+    keyword whole camera brightyellow
+    keyword whole plane brightyellow
+    keyword whole union brightyellow
+    keyword whole box brightyellow
+    keyword whole cylinder brightyellow
+    keyword whole torus brightyellow
+    keyword whole difference brightyellow
+    keyword whole intersection brightyellow
+    keyword whole object brightyellow
+    keyword whole photons brightyellow
+    keyword whole material brightyellow
+    keyword whole texture brightyellow
+    keyword whole pigment brightyellow
+    keyword whole pigment_pattern brightyellow
+    keyword whole pigment_map brightyellow
+    keyword whole finish brightyellow
+    keyword whole interior brightyellow
+    keyword whole merge brightyellow
+    keyword whole warp brightyellow
+    keyword whole color_map brightyellow
+    keyword whole colour_map brightyellow
+    keyword whole isosurface brightyellow
+    keyword whole sky_sphere brightyellow
+    keyword whole bounded_by brightyellow
+    keyword whole clipped_by brightyellow
+    keyword whole normal brightyellow
+    keyword whole tiles brightyellow
+    keyword whole height_field brightyellow
+    keyword whole image_map brightyellow
+    keyword whole looks_like brightyellow
+    keyword whole quadric brightyellow
+    keyword whole scattering brightyellow
+    keyword whole text brightyellow
+    keyword whole bump_map brightyellow
+    keyword whole texture_map brightyellow
+    keyword whole slope brightyellow
+    keyword whole contained_by brightyellow
+    keyword whole superellipsoid brightyellow
+    keyword whole cone brightyellow
+    keyword whole blob brightyellow
+    keyword whole light_group brightyellow
 
 # Constructions
-    keyword whole #switch white
-    keyword whole #break white
-    keyword whole #case white
-    keyword whole #end white
-    keyword whole #declare white
-    keyword whole #macro white
-    keyword whole #local white
-    keyword whole #while white
-    keyword whole #ifndef white
-    keyword whole #version white
-    keyword whole #ifdef white
-    keyword whole #debug white
-    keyword whole #include white
-    keyword whole #if white
-    keyword whole function white
-    keyword whole array white
+    keyword whole #switch brightwhite
+    keyword whole #break brightwhite
+    keyword whole #case brightwhite
+    keyword whole #end brightwhite
+    keyword whole #declare brightwhite
+    keyword whole #macro brightwhite
+    keyword whole #local brightwhite
+    keyword whole #while brightwhite
+    keyword whole #ifndef brightwhite
+    keyword whole #version brightwhite
+    keyword whole #ifdef brightwhite
+    keyword whole #debug brightwhite
+    keyword whole #include brightwhite
+    keyword whole #if brightwhite
+    keyword whole function brightwhite
+    keyword whole array brightwhite
 
 # Predefined constants
     keyword whole on brightblue
@@ -224,9 +224,9 @@ context default lightgray
     keyword whole absorption brightgreen
 
 # Common symbols
-    keyword // brown
-    keyword /\* brown
-    keyword \*/ brown
+    keyword // yellow
+    keyword /\* yellow
+    keyword \*/ yellow
     keyword { brightcyan
     keyword } brightcyan
     keyword , brightcyan
@@ -244,10 +244,10 @@ context default lightgray
     keyword ] brightcyan
     keyword ; brightcyan
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context " " green

@@ -6,47 +6,47 @@ context default
 context linestart From\s \n\n cyan
     keyword linestart From: brightgreen
     keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
+    keyword <*@*> brightwhite
+    keyword whole +@+ brightwhite
     keyword linestart To: brightmagenta
     keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+    keyword linestart +: yellow
 
 context linestart Return-path:\s \n\n cyan
     keyword linestart From: brightgreen
     keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
+    keyword <*@*> brightwhite
+    keyword whole +@+ brightwhite
     keyword linestart To: brightmagenta
     keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+    keyword linestart +: yellow
 
 context linestart Return-Path:\s \n\n cyan
     keyword linestart From: brightgreen
     keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
+    keyword <*@*> brightwhite
+    keyword whole +@+ brightwhite
     keyword linestart To: brightmagenta
     keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+    keyword linestart +: yellow
 
 context linestart From:\s \n\n cyan
     keyword linestart From: brightgreen
     keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
+    keyword <*@*> brightwhite
+    keyword whole +@+ brightwhite
     keyword linestart To: brightmagenta
     keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+    keyword linestart +: yellow
 
 context linestart Date:\s \n\n cyan
     keyword linestart From: brightgreen
     keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
+    keyword <*@*> brightwhite
+    keyword whole +@+ brightwhite
     keyword linestart To: brightmagenta
     keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+    keyword linestart +: yellow
 
 context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
 context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
