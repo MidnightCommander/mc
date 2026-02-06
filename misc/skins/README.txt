@@ -97,6 +97,9 @@ applies individually to each of these three properties.
     [filehighlight]
         Filename highlighting.
 
+        _default_
+            Default color
+
         directory
         executable
         symlink

@@ -118,7 +118,9 @@
 #define DIFFVIEWER_REMOVED_COLOR     mc_skin_color__cache[76]
 #define DIFFVIEWER_ERROR_COLOR       mc_skin_color__cache[77]
 
-#define MC_SKIN_COLOR_CACHE_COUNT    78
+#define FILEHIGHLIGHT_DEFAULT_COLOR  mc_skin_color__cache[78]
+
+#define MC_SKIN_COLOR_CACHE_COUNT    79
 
 /*** enums ***************************************************************************************/
 
