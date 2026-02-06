@@ -46,38 +46,38 @@ context default
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole clear yellow
-    keyword whole continue yellow
-    keyword whole declare yellow
-    keyword whole done yellow
-    keyword whole do yellow
-    keyword whole echo yellow
-    keyword whole elif yellow
-    keyword whole else yellow
-    keyword whole esac yellow
-    keyword whole exit yellow
-    keyword whole export yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole getopts yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole printf yellow
-    keyword whole read yellow
-    keyword whole return yellow
-    keyword whole select yellow
-    keyword whole set yellow
-    keyword whole shift yellow
-    keyword whole source yellow
-    keyword whole then yellow
-    keyword whole trap yellow
-    keyword whole umask yellow
-    keyword whole until yellow
-    keyword whole unset yellow
-    keyword whole wait yellow
-    keyword whole while yellow
+    keyword whole break brightyellow
+    keyword whole case brightyellow
+    keyword whole clear brightyellow
+    keyword whole continue brightyellow
+    keyword whole declare brightyellow
+    keyword whole done brightyellow
+    keyword whole do brightyellow
+    keyword whole echo brightyellow
+    keyword whole elif brightyellow
+    keyword whole else brightyellow
+    keyword whole esac brightyellow
+    keyword whole exit brightyellow
+    keyword whole export brightyellow
+    keyword whole fi brightyellow
+    keyword whole for brightyellow
+    keyword whole getopts brightyellow
+    keyword whole if brightyellow
+    keyword whole in brightyellow
+    keyword whole printf brightyellow
+    keyword whole read brightyellow
+    keyword whole return brightyellow
+    keyword whole select brightyellow
+    keyword whole set brightyellow
+    keyword whole shift brightyellow
+    keyword whole source brightyellow
+    keyword whole then brightyellow
+    keyword whole trap brightyellow
+    keyword whole umask brightyellow
+    keyword whole until brightyellow
+    keyword whole unset brightyellow
+    keyword whole wait brightyellow
+    keyword whole while brightyellow
 
     keyword whole accept cyan
     keyword whole accessdb cyan
@@ -1089,7 +1089,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
-context # \n brown
+context # \n yellow
     spellcheck
 
 context ' ' green
@@ -1175,7 +1175,7 @@ context exclusive whole <<\[\s\]\[-\]\[\s\]END END green
 
     keyword $ brightgreen
 
-context exclusive ` ` lightgray black
+context exclusive ` ` white black
     keyword '*' green
     keyword " green
     keyword \\` green
@@ -1206,34 +1206,34 @@ context exclusive ` ` lightgray black
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole clear yellow
-    keyword whole continue yellow
-    keyword whole declare yellow
-    keyword whole done yellow
-    keyword whole do yellow
-    keyword whole elif yellow
-    keyword whole else yellow
-    keyword whole esac yellow
-    keyword whole exit yellow
-    keyword whole export yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole getopts yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole read yellow
-    keyword whole return yellow
-    keyword whole select yellow
-    keyword whole shift yellow
-    keyword whole source yellow
-    keyword whole then yellow
-    keyword whole trap yellow
-    keyword whole until yellow
-    keyword whole unset yellow
-    keyword whole wait yellow
-    keyword whole while yellow
+    keyword whole break brightyellow
+    keyword whole case brightyellow
+    keyword whole clear brightyellow
+    keyword whole continue brightyellow
+    keyword whole declare brightyellow
+    keyword whole done brightyellow
+    keyword whole do brightyellow
+    keyword whole elif brightyellow
+    keyword whole else brightyellow
+    keyword whole esac brightyellow
+    keyword whole exit brightyellow
+    keyword whole export brightyellow
+    keyword whole fi brightyellow
+    keyword whole for brightyellow
+    keyword whole getopts brightyellow
+    keyword whole if brightyellow
+    keyword whole in brightyellow
+    keyword whole read brightyellow
+    keyword whole return brightyellow
+    keyword whole select brightyellow
+    keyword whole shift brightyellow
+    keyword whole source brightyellow
+    keyword whole then brightyellow
+    keyword whole trap brightyellow
+    keyword whole until brightyellow
+    keyword whole unset brightyellow
+    keyword whole wait brightyellow
+    keyword whole while brightyellow
 
     keyword whole accept cyan
     keyword whole accessdb cyan

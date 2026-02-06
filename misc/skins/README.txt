@@ -467,14 +467,14 @@ your skin to the standard 16 colors (in addition to the terminal's defaults).
 These colors each have two names: the preferred human-friendly one, and a
 technical one referring to their color index.
 
-        black = color0             gray = color8
+        black = color0      brightblack = color8
           red = color1        brightred = color9
         green = color2      brightgreen = color10
-        brown = color3           yellow = color11
+       yellow = color3     brightyellow = color11
          blue = color4       brightblue = color12
       magenta = color5    brightmagenta = color13
          cyan = color6       brightcyan = color14
-    lightgray = color7            white = color15
+        white = color7      brightwhite = color15
 
 With 8 color terminal settings (such as TERM=linux or TERM=xterm), bright
 foreground colors (second column) are emulated in mc by enabling the bold

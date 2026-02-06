@@ -27,177 +27,177 @@
 #
 
 context default
-    keyword whole ABSTRACT_CONSTANTS yellow
-    keyword whole ABSTRACT_VARIABLES yellow
-    keyword whole CONCRETE_CONSTANTS yellow
-    keyword whole CONCRETE_VARIABLES yellow
-    keyword whole LOCAL_OPERATIONS yellow
-    keyword whole IMPLEMENTATION yellow
-    keyword whole INITIALISATION yellow
-    keyword whole CONSTRAINTS yellow
-    keyword whole DEFINITIONS yellow
-    keyword whole ASSERTIONS yellow
-    keyword whole OPERATIONS yellow
-    keyword whole PROPERTIES yellow
-    keyword whole REFINEMENT yellow
-    keyword whole CONSTANTS yellow
-    keyword whole INVARIANT yellow
-    keyword whole sequences yellow
-    keyword whole VARIABLES yellow
-    keyword whole Cardinal yellow
+    keyword whole ABSTRACT_CONSTANTS brightyellow
+    keyword whole ABSTRACT_VARIABLES brightyellow
+    keyword whole CONCRETE_CONSTANTS brightyellow
+    keyword whole CONCRETE_VARIABLES brightyellow
+    keyword whole LOCAL_OPERATIONS brightyellow
+    keyword whole IMPLEMENTATION brightyellow
+    keyword whole INITIALISATION brightyellow
+    keyword whole CONSTRAINTS brightyellow
+    keyword whole DEFINITIONS brightyellow
+    keyword whole ASSERTIONS brightyellow
+    keyword whole OPERATIONS brightyellow
+    keyword whole PROPERTIES brightyellow
+    keyword whole REFINEMENT brightyellow
+    keyword whole CONSTANTS brightyellow
+    keyword whole INVARIANT brightyellow
+    keyword whole sequences brightyellow
+    keyword whole VARIABLES brightyellow
+    keyword whole Cardinal brightyellow
 
     # Relations
-    keyword whole closure1 white
+    keyword whole closure1 brightwhite
 
-    keyword whole INCLUDES yellow
-
-    # Arithmetic
-    keyword whole NATURAL1 yellow
-
-    keyword whole PROMOTES yellow
-    keyword whole Boolean yellow
-    keyword whole EXTENDS yellow
-    keyword whole IMPORTS yellow
+    keyword whole INCLUDES brightyellow
 
     # Arithmetic
-    keyword whole INTEGER yellow
+    keyword whole NATURAL1 brightyellow
 
-    keyword whole iterate yellow
-    keyword whole MACHINE yellow
+    keyword whole PROMOTES brightyellow
+    keyword whole Boolean brightyellow
+    keyword whole EXTENDS brightyellow
+    keyword whole IMPORTS brightyellow
 
     # Arithmetic
-    keyword whole NATURAL yellow
+    keyword whole INTEGER brightyellow
 
-    keyword whole postfix yellow
-    keyword whole REFINES yellow
-    keyword whole subtree yellow
-    keyword whole VARIANT yellow
-    keyword whole ASSERT yellow
-    keyword whole CHOICE yellow
+    keyword whole iterate brightyellow
+    keyword whole MACHINE brightyellow
+
+    # Arithmetic
+    keyword whole NATURAL brightyellow
+
+    keyword whole postfix brightyellow
+    keyword whole REFINES brightyellow
+    keyword whole subtree brightyellow
+    keyword whole VARIANT brightyellow
+    keyword whole ASSERT brightyellow
+    keyword whole CHOICE brightyellow
 
     # Relations
-    keyword whole closure white
+    keyword whole closure brightwhite
 
-    keyword whole EITHER yellow
-    keyword whole father yellow
-    keyword whole MAXINT yellow
-    keyword whole MININT yellow
-    keyword whole mirror yellow
-    keyword whole modulo yellow
-    keyword whole prefix yellow
-    keyword whole SELECT yellow
-    keyword whole STRING yellow
-    keyword whole struct yellow
-    keyword whole VALUES yellow
-    keyword whole arity yellow
-    keyword whole BEGIN yellow
-    keyword whole btree yellow
-    keyword whole const yellow
-    keyword whole ELSIF yellow
-    keyword whole FALSE yellow
-    keyword whole first yellow
-    keyword whole front yellow
-    keyword whole infix yellow
+    keyword whole EITHER brightyellow
+    keyword whole father brightyellow
+    keyword whole MAXINT brightyellow
+    keyword whole MININT brightyellow
+    keyword whole mirror brightyellow
+    keyword whole modulo brightyellow
+    keyword whole prefix brightyellow
+    keyword whole SELECT brightyellow
+    keyword whole STRING brightyellow
+    keyword whole struct brightyellow
+    keyword whole VALUES brightyellow
+    keyword whole arity brightyellow
+    keyword whole BEGIN brightyellow
+    keyword whole btree brightyellow
+    keyword whole const brightyellow
+    keyword whole ELSIF brightyellow
+    keyword whole FALSE brightyellow
+    keyword whole first brightyellow
+    keyword whole front brightyellow
+    keyword whole infix brightyellow
 
     # Sets
-    keyword whole INTER yellow
+    keyword whole INTER brightyellow
 
-    keyword whole inter yellow
-    keyword whole iseq1 yellow
-    keyword whole right yellow
+    keyword whole inter brightyellow
+    keyword whole iseq1 brightyellow
+    keyword whole right brightyellow
 
     # Arithmetic
-    keyword whole SIGMA yellow
+    keyword whole SIGMA brightyellow
 
-    keyword whole sizet yellow
-
-    # Sets
-    keyword whole UNION yellow
-
-    keyword whole union yellow
-    keyword whole WHERE yellow
-    keyword whole WHILE yellow
-    keyword whole bool yellow
-    keyword whole BOOL yellow
-    keyword whole card yellow
-    keyword whole CASE yellow
-    keyword whole conc yellow
-    keyword whole ELSE yellow
+    keyword whole sizet brightyellow
 
     # Sets
-    keyword whole FIN1 yellow
+    keyword whole UNION brightyellow
 
-    keyword whole iseq yellow
-    keyword whole last yellow
-    keyword whole left yellow
-    keyword whole NAT1 yellow
-
-    # Sets
-    keyword whole POW1 yellow
-
-    keyword whole perm yellow
-    keyword whole pred yellow
-    keyword whole prj1 yellow
-    keyword whole prj2 yellow
-    keyword whole rank yellow
-    keyword whole SEES yellow
-    keyword whole seq1 yellow
-    keyword whole SETS yellow
-    keyword whole size yellow
-    keyword whole skip yellow
-    keyword whole sons yellow
-    keyword whole succ yellow
-    keyword whole tail yellow
-    keyword whole THEN yellow
-    keyword whole tree yellow
-    keyword whole TRUE yellow
-    keyword whole USES yellow
-    keyword whole WHEN yellow
-    keyword whole ANY yellow
-    keyword whole bin yellow
-    keyword whole dom yellow
-    keyword whole END yellow
+    keyword whole union brightyellow
+    keyword whole WHERE brightyellow
+    keyword whole WHILE brightyellow
+    keyword whole bool brightyellow
+    keyword whole BOOL brightyellow
+    keyword whole card brightyellow
+    keyword whole CASE brightyellow
+    keyword whole conc brightyellow
+    keyword whole ELSE brightyellow
 
     # Sets
-    keyword whole FIN yellow
+    keyword whole FIN1 brightyellow
 
-    keyword whole fnc yellow
-    keyword whole INT yellow
-    keyword whole LET yellow
-    keyword whole max yellow
-    keyword whole min yellow
-    keyword whole mod yellow
-    keyword whole NAT yellow
+    keyword whole iseq brightyellow
+    keyword whole last brightyellow
+    keyword whole left brightyellow
+    keyword whole NAT1 brightyellow
+
+    # Sets
+    keyword whole POW1 brightyellow
+
+    keyword whole perm brightyellow
+    keyword whole pred brightyellow
+    keyword whole prj1 brightyellow
+    keyword whole prj2 brightyellow
+    keyword whole rank brightyellow
+    keyword whole SEES brightyellow
+    keyword whole seq1 brightyellow
+    keyword whole SETS brightyellow
+    keyword whole size brightyellow
+    keyword whole skip brightyellow
+    keyword whole sons brightyellow
+    keyword whole succ brightyellow
+    keyword whole tail brightyellow
+    keyword whole THEN brightyellow
+    keyword whole tree brightyellow
+    keyword whole TRUE brightyellow
+    keyword whole USES brightyellow
+    keyword whole WHEN brightyellow
+    keyword whole ANY brightyellow
+    keyword whole bin brightyellow
+    keyword whole dom brightyellow
+    keyword whole END brightyellow
+
+    # Sets
+    keyword whole FIN brightyellow
+
+    keyword whole fnc brightyellow
+    keyword whole INT brightyellow
+    keyword whole LET brightyellow
+    keyword whole max brightyellow
+    keyword whole min brightyellow
+    keyword whole mod brightyellow
+    keyword whole NAT brightyellow
 
     # Logical
     keyword whole not cyan
 
     # Sets
-    keyword whole POW yellow
+    keyword whole POW brightyellow
 
-    keyword whole PRE yellow
-    keyword whole ran yellow
-    keyword whole rec yellow
-    keyword whole rel yellow
-    keyword whole rev yellow
-    keyword whole seq yellow
-    keyword whole Set yellow
-    keyword whole son yellow
-    keyword whole top yellow
-    keyword whole VAR yellow
-    keyword whole BE yellow
-    keyword whole DO yellow
-    keyword whole id yellow
-    keyword whole IF yellow
-    keyword whole IN yellow
-    keyword whole OF yellow
-    keyword whole OR yellow
+    keyword whole PRE brightyellow
+    keyword whole ran brightyellow
+    keyword whole rec brightyellow
+    keyword whole rel brightyellow
+    keyword whole rev brightyellow
+    keyword whole seq brightyellow
+    keyword whole Set brightyellow
+    keyword whole son brightyellow
+    keyword whole top brightyellow
+    keyword whole VAR brightyellow
+    keyword whole BE brightyellow
+    keyword whole DO brightyellow
+    keyword whole id brightyellow
+    keyword whole IF brightyellow
+    keyword whole IN brightyellow
+    keyword whole OF brightyellow
+    keyword whole OR brightyellow
 
     # Logical
     keyword whole or cyan
 
     # Arithmetic
-    keyword whole PI yellow
+    keyword whole PI brightyellow
 
 # prevents - keyword from interfering with comment
     keyword /\* green
@@ -205,121 +205,121 @@ context default
     keyword // green
 
 
-    keyword <-- yellow
-    keyword := yellow
+    keyword <-- brightyellow
+    keyword := brightyellow
 
 
     # Relations
-    keyword \+->> white
+    keyword \+->> brightwhite
 
     # Relations
-    keyword -->> white
+    keyword -->> brightwhite
 
     # Sets
-    keyword /<<: yellow
+    keyword /<<: brightyellow
 
     # Sequences
     keyword /|\\ magenta
 
     # Relations
-    keyword >->> white
+    keyword >->> brightwhite
 
     # Relations
-    keyword >\+> white
+    keyword >\+> brightwhite
 
     # Arithmetic
-    keyword \*\* yellow
+    keyword \*\* brightyellow
 
     # Relations
-    keyword \+-> white
+    keyword \+-> brightwhite
 
     # Sequences
     keyword \\|/ magenta
 
     # Relations
-    keyword --> white
+    keyword --> brightwhite
 
     # Sets
-    keyword /<: yellow
+    keyword /<: brightyellow
 
     # Sets
-    keyword /\\ yellow
+    keyword /\\ brightyellow
 
     # Relations
-    keyword <-> white
+    keyword <-> brightwhite
 
     # Sets
-    keyword <<: yellow
+    keyword <<: brightyellow
 
     # Relations
-    keyword <<| white
+    keyword <<| brightwhite
 
     # Logical
     keyword <=> cyan
 
     # Relations
-    keyword <\+ white
+    keyword <\+ brightwhite
 
     # Relations
-    keyword >-> white
+    keyword >-> brightwhite
 
     # Sets
-    keyword \\/ yellow
+    keyword \\/ brightyellow
 
     # Relations
-    keyword |-> white
+    keyword |-> brightwhite
 
     # Relations
-    keyword |>> white
+    keyword |>> brightwhite
 
-    keyword != yellow
+    keyword != brightyellow
 
     # Sequences
     keyword -> magenta
 
     # Sets
-    keyword /: yellow
+    keyword /: brightyellow
 
     # Logical
     keyword /= cyan
 
     # Substitutions
-    keyword :: yellow
+    keyword :: brightyellow
 
     # Sequences
     keyword <- magenta
 
     # Sets
-    keyword <: yellow
+    keyword <: brightyellow
 
     # Arithmetic
-    keyword <= yellow
+    keyword <= brightyellow
 
     # Relations
-    keyword <| white
+    keyword <| brightwhite
 
-    keyword == yellow
+    keyword == brightyellow
 
     # Logical
     keyword => cyan
 
     # Relations
-    keyword >< white
+    keyword >< brightwhite
 
     # Arithmetic
-    keyword >= yellow
+    keyword >= brightyellow
 
     # Arithmetic
-    keyword \* yellow
+    keyword \* brightyellow
 
     # Arithmetic
-    keyword \+ yellow
+    keyword \+ brightyellow
 
     # Sets
-    keyword {} yellow
+    keyword {} brightyellow
 
     # Relations
-    keyword |> white
+    keyword |> brightwhite
 
     # Logical
     keyword ! cyan
@@ -328,49 +328,49 @@ context default
     keyword # cyan
 
     # Relations
-    keyword % white
+    keyword % brightwhite
 
     # Logical
     keyword & cyan
 
-    keyword ( yellow
-    keyword ) yellow
-    keyword , yellow
+    keyword ( brightyellow
+    keyword ) brightyellow
+    keyword , brightyellow
 
     # Arithmetic
-    keyword - yellow
+    keyword - brightyellow
 
     # Arithmetic
-    keyword / yellow
+    keyword / brightyellow
 
     # Sets
-    keyword : yellow
+    keyword : brightyellow
 
-    keyword ; yellow
+    keyword ; brightyellow
 
     # Arithmetic
-    keyword < yellow
+    keyword < brightyellow
 
     # Logical
     keyword = cyan
 
     # Arithmetic
-    keyword > yellow
+    keyword > brightyellow
 
-    keyword ? yellow
-    keyword [ yellow
-    keyword ] yellow
+    keyword ? brightyellow
+    keyword [ brightyellow
+    keyword ] brightyellow
 
     # Sequences
     keyword ^ magenta
 
-    keyword { yellow
-    keyword } yellow
+    keyword { brightyellow
+    keyword } brightyellow
 
-    keyword | yellow
+    keyword | brightyellow
 
     # Relations
-    keyword ~ white
+    keyword ~ brightwhite
 
 
 context exclusive /\* \*/ green

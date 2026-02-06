@@ -12,7 +12,7 @@ context default
     keyword } brightcyan
     keyword [ brightcyan
     keyword ] brightcyan
-    keyword = white
+    keyword = brightwhite
 
     keyword whole \{0123456789\}\[0123456789\] brightgreen
 
@@ -23,7 +23,7 @@ context ' ' green
 context " " green
 
 # Comments
-context # \n brown
+context # \n yellow
     keyword whole BUG brightred
     keyword whole FixMe brightred
     keyword whole FIXME brightred

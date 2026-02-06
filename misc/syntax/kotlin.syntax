@@ -7,40 +7,40 @@
 context default
 
 # hard keywords
-	keyword whole as yellow
-	keyword whole as? yellow
-	keyword whole break yellow
-	keyword whole class yellow
-	keyword whole continue yellow
-	keyword whole do yellow
-	keyword whole else yellow
-	keyword whole false yellow
-	keyword whole for yellow
-	keyword whole fun yellow
-	keyword whole if yellow
-	keyword whole in yellow
-	keyword whole !in yellow
-	keyword whole interface yellow
-	keyword whole is yellow
-	keyword whole !is yellow
-	keyword whole null yellow
-	keyword whole object yellow
-	keyword whole package brown
-	keyword whole return yellow
-	keyword whole super yellow
-	keyword whole this yellow
-	keyword whole throw yellow
-	keyword whole true yellow
-	keyword whole try yellow
-	keyword whole typealias yellow
-	keyword whole val yellow
-	keyword whole var yellow
-	keyword whole when yellow
-	keyword whole while yellow	
+	keyword whole as brightyellow
+	keyword whole as? brightyellow
+	keyword whole break brightyellow
+	keyword whole class brightyellow
+	keyword whole continue brightyellow
+	keyword whole do brightyellow
+	keyword whole else brightyellow
+	keyword whole false brightyellow
+	keyword whole for brightyellow
+	keyword whole fun brightyellow
+	keyword whole if brightyellow
+	keyword whole in brightyellow
+	keyword whole !in brightyellow
+	keyword whole interface brightyellow
+	keyword whole is brightyellow
+	keyword whole !is brightyellow
+	keyword whole null brightyellow
+	keyword whole object brightyellow
+	keyword whole package yellow
+	keyword whole return brightyellow
+	keyword whole super brightyellow
+	keyword whole this brightyellow
+	keyword whole throw brightyellow
+	keyword whole true brightyellow
+	keyword whole try brightyellow
+	keyword whole typealias brightyellow
+	keyword whole val brightyellow
+	keyword whole var brightyellow
+	keyword whole when brightyellow
+	keyword whole while brightyellow	
 
 # soft keywords
 	keyword whole by brightgreen
-	keyword whole catch yellow
+	keyword whole catch brightyellow
 	keyword whole constructor brightgreen
 	keyword whole delegate brightgreen
 	keyword whole dynamic brightgreen
@@ -48,7 +48,7 @@ context default
 	keyword whole file brightgreen
 	keyword whole finally brightgreen
 	keyword whole get brightgreen
-	keyword whole import brown
+	keyword whole import yellow
 	keyword whole init brightgreen
 	keyword whole param brightgreen
 	keyword whole property brightgreen
@@ -148,8 +148,8 @@ context default
 	keyword whole ByteSequence brightred
 
 # comment
-context exclusive /\* \*/ gray
-context exclusive // \n gray
+context exclusive /\* \*/ brightblack
+context exclusive // \n brightblack
 
 context """ """ green
     spellcheck

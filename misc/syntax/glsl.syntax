@@ -11,212 +11,212 @@ context default
 
 # Types
 
-    keyword whole float yellow
-    keyword whole double yellow
-    keyword whole int yellow
-    keyword whole void yellow
-    keyword whole bool yellow
-    keyword whole true yellow
-    keyword whole false yellow
-    keyword whole mat2 yellow
-    keyword whole mat3 yellow
-    keyword whole mat4 yellow
-    keyword whole dmat2 yellow
-    keyword whole dmat3 yellow
-    keyword whole dmat4 yellow
-    keyword whole mat2x2 yellow
-    keyword whole mat2x3 yellow
-    keyword whole mat2x4 yellow
-    keyword whole dmat2x2 yellow
-    keyword whole dmat2x3 yellow
-    keyword whole dmat2x4 yellow
-    keyword whole mat3x2 yellow
-    keyword whole mat3x3 yellow
-    keyword whole mat3x4 yellow
-    keyword whole dmat3x2 yellow
-    keyword whole dmat3x3 yellow
-    keyword whole dmat3x4 yellow
-    keyword whole mat4x2 yellow
-    keyword whole mat4x3 yellow
-    keyword whole mat4x4 yellow
-    keyword whole dmat4x2 yellow
-    keyword whole dmat4x3 yellow
-    keyword whole dmat4x4 yellow
-    keyword whole vec2 yellow
-    keyword whole vec3 yellow
-    keyword whole vec4 yellow
-    keyword whole ivec2 yellow
-    keyword whole ivec3 yellow
-    keyword whole ivec4 yellow
-    keyword whole bvec2 yellow
-    keyword whole bvec3 yellow
-    keyword whole bvec4 yellow
-    keyword whole dvec2 yellow
-    keyword whole dvec3 yellow
-    keyword whole dvec4 yellow
-    keyword whole uint yellow
-    keyword whole uvec2 yellow
-    keyword whole uvec3 yellow
-    keyword whole uvec4 yellow
-    keyword whole sampler1D yellow
-    keyword whole sampler2D yellow
-    keyword whole sampler3D yellow
-    keyword whole samplerCube yellow
-    keyword whole sampler1DShadow yellow
-    keyword whole sampler2DShadow yellow
-    keyword whole samplerCubeShadow yellow
-    keyword whole sampler1DArray yellow
-    keyword whole sampler2DArray yellow
-    keyword whole sampler1DArrayShadow yellow
-    keyword whole sampler2DArrayShadow yellow
-    keyword whole isampler1D yellow
-    keyword whole isampler2D yellow
-    keyword whole isampler3D yellow
-    keyword whole isamplerCube yellow
-    keyword whole isampler1DArray yellow
-    keyword whole isampler2DArray yellow
-    keyword whole usampler1D yellow
-    keyword whole usampler2D yellow
-    keyword whole usampler3D yellow
-    keyword whole usamplerCube yellow
-    keyword whole usampler1DArray yellow
-    keyword whole usampler2DArray yellow
-    keyword whole sampler2DRect yellow
-    keyword whole sampler2DRectShadow yellow
-    keyword whole isampler2DRect yellow
-    keyword whole usampler2DRect yellow
-    keyword whole samplerBuffer yellow
-    keyword whole isamplerBuffer yellow
-    keyword whole usamplerBuffer yellow
-    keyword whole sampler2DMS yellow
-    keyword whole isampler2DMS yellow
-    keyword whole usampler2DMS yellow
-    keyword whole sampler2DMSArray yellow
-    keyword whole isampler2DMSArray yellow
-    keyword whole usampler2DMSArray yellow
-    keyword whole samplerCubeArray yellow
-    keyword whole samplerCubeArrayShadow yellow
-    keyword whole isamplerCubeArray yellow
-    keyword whole usamplerCubeArray yellow
-    keyword whole image1D yellow
-    keyword whole iimage1D yellow
-    keyword whole uimage1D yellow
-    keyword whole image2D yellow
-    keyword whole iimage2D yellow
-    keyword whole uimage2D yellow
-    keyword whole image3D yellow
-    keyword whole iimage3D yellow
-    keyword whole uimage3D yellow
-    keyword whole image2DRect yellow
-    keyword whole iimage2DRect yellow
-    keyword whole uimage2DRect yellow
-    keyword whole imageCube yellow
-    keyword whole iimageCube yellow
-    keyword whole uimageCube yellow
-    keyword whole imageBuffer yellow
-    keyword whole iimageBuffer yellow
-    keyword whole uimageBuffer yellow
-    keyword whole image1DArray yellow
-    keyword whole iimage1DArray yellow
-    keyword whole uimage1DArray yellow
-    keyword whole image2DArray yellow
-    keyword whole iimage2DArray yellow
-    keyword whole uimage2DArray yellow
-    keyword whole imageCubeArray yellow
-    keyword whole iimageCubeArray yellow
-    keyword whole uimageCubeArray yellow
-    keyword whole image2DMS yellow
-    keyword whole iimage2DMS yellow
-    keyword whole uimage2DMS yellow
-    keyword whole image2DMSArray yellow
-    keyword whole iimage2DMSArray yellow
-    keyword whole uimage2DMSArray yellow
-    keyword whole long yellow
-    keyword whole short yellow
-    keyword whole half yellow
-    keyword whole fixed yellow
-    keyword whole unsigned yellow
-    keyword whole hvec2 yellow
-    keyword whole hvec3 yellow
-    keyword whole hvec4 yellow
-    keyword whole fvec2 yellow
-    keyword whole fvec3 yellow
-    keyword whole fvec4 yellow
-    keyword whole sampler3DRect yellow
+    keyword whole float brightyellow
+    keyword whole double brightyellow
+    keyword whole int brightyellow
+    keyword whole void brightyellow
+    keyword whole bool brightyellow
+    keyword whole true brightyellow
+    keyword whole false brightyellow
+    keyword whole mat2 brightyellow
+    keyword whole mat3 brightyellow
+    keyword whole mat4 brightyellow
+    keyword whole dmat2 brightyellow
+    keyword whole dmat3 brightyellow
+    keyword whole dmat4 brightyellow
+    keyword whole mat2x2 brightyellow
+    keyword whole mat2x3 brightyellow
+    keyword whole mat2x4 brightyellow
+    keyword whole dmat2x2 brightyellow
+    keyword whole dmat2x3 brightyellow
+    keyword whole dmat2x4 brightyellow
+    keyword whole mat3x2 brightyellow
+    keyword whole mat3x3 brightyellow
+    keyword whole mat3x4 brightyellow
+    keyword whole dmat3x2 brightyellow
+    keyword whole dmat3x3 brightyellow
+    keyword whole dmat3x4 brightyellow
+    keyword whole mat4x2 brightyellow
+    keyword whole mat4x3 brightyellow
+    keyword whole mat4x4 brightyellow
+    keyword whole dmat4x2 brightyellow
+    keyword whole dmat4x3 brightyellow
+    keyword whole dmat4x4 brightyellow
+    keyword whole vec2 brightyellow
+    keyword whole vec3 brightyellow
+    keyword whole vec4 brightyellow
+    keyword whole ivec2 brightyellow
+    keyword whole ivec3 brightyellow
+    keyword whole ivec4 brightyellow
+    keyword whole bvec2 brightyellow
+    keyword whole bvec3 brightyellow
+    keyword whole bvec4 brightyellow
+    keyword whole dvec2 brightyellow
+    keyword whole dvec3 brightyellow
+    keyword whole dvec4 brightyellow
+    keyword whole uint brightyellow
+    keyword whole uvec2 brightyellow
+    keyword whole uvec3 brightyellow
+    keyword whole uvec4 brightyellow
+    keyword whole sampler1D brightyellow
+    keyword whole sampler2D brightyellow
+    keyword whole sampler3D brightyellow
+    keyword whole samplerCube brightyellow
+    keyword whole sampler1DShadow brightyellow
+    keyword whole sampler2DShadow brightyellow
+    keyword whole samplerCubeShadow brightyellow
+    keyword whole sampler1DArray brightyellow
+    keyword whole sampler2DArray brightyellow
+    keyword whole sampler1DArrayShadow brightyellow
+    keyword whole sampler2DArrayShadow brightyellow
+    keyword whole isampler1D brightyellow
+    keyword whole isampler2D brightyellow
+    keyword whole isampler3D brightyellow
+    keyword whole isamplerCube brightyellow
+    keyword whole isampler1DArray brightyellow
+    keyword whole isampler2DArray brightyellow
+    keyword whole usampler1D brightyellow
+    keyword whole usampler2D brightyellow
+    keyword whole usampler3D brightyellow
+    keyword whole usamplerCube brightyellow
+    keyword whole usampler1DArray brightyellow
+    keyword whole usampler2DArray brightyellow
+    keyword whole sampler2DRect brightyellow
+    keyword whole sampler2DRectShadow brightyellow
+    keyword whole isampler2DRect brightyellow
+    keyword whole usampler2DRect brightyellow
+    keyword whole samplerBuffer brightyellow
+    keyword whole isamplerBuffer brightyellow
+    keyword whole usamplerBuffer brightyellow
+    keyword whole sampler2DMS brightyellow
+    keyword whole isampler2DMS brightyellow
+    keyword whole usampler2DMS brightyellow
+    keyword whole sampler2DMSArray brightyellow
+    keyword whole isampler2DMSArray brightyellow
+    keyword whole usampler2DMSArray brightyellow
+    keyword whole samplerCubeArray brightyellow
+    keyword whole samplerCubeArrayShadow brightyellow
+    keyword whole isamplerCubeArray brightyellow
+    keyword whole usamplerCubeArray brightyellow
+    keyword whole image1D brightyellow
+    keyword whole iimage1D brightyellow
+    keyword whole uimage1D brightyellow
+    keyword whole image2D brightyellow
+    keyword whole iimage2D brightyellow
+    keyword whole uimage2D brightyellow
+    keyword whole image3D brightyellow
+    keyword whole iimage3D brightyellow
+    keyword whole uimage3D brightyellow
+    keyword whole image2DRect brightyellow
+    keyword whole iimage2DRect brightyellow
+    keyword whole uimage2DRect brightyellow
+    keyword whole imageCube brightyellow
+    keyword whole iimageCube brightyellow
+    keyword whole uimageCube brightyellow
+    keyword whole imageBuffer brightyellow
+    keyword whole iimageBuffer brightyellow
+    keyword whole uimageBuffer brightyellow
+    keyword whole image1DArray brightyellow
+    keyword whole iimage1DArray brightyellow
+    keyword whole uimage1DArray brightyellow
+    keyword whole image2DArray brightyellow
+    keyword whole iimage2DArray brightyellow
+    keyword whole uimage2DArray brightyellow
+    keyword whole imageCubeArray brightyellow
+    keyword whole iimageCubeArray brightyellow
+    keyword whole uimageCubeArray brightyellow
+    keyword whole image2DMS brightyellow
+    keyword whole iimage2DMS brightyellow
+    keyword whole uimage2DMS brightyellow
+    keyword whole image2DMSArray brightyellow
+    keyword whole iimage2DMSArray brightyellow
+    keyword whole uimage2DMSArray brightyellow
+    keyword whole long brightyellow
+    keyword whole short brightyellow
+    keyword whole half brightyellow
+    keyword whole fixed brightyellow
+    keyword whole unsigned brightyellow
+    keyword whole hvec2 brightyellow
+    keyword whole hvec3 brightyellow
+    keyword whole hvec4 brightyellow
+    keyword whole fvec2 brightyellow
+    keyword whole fvec3 brightyellow
+    keyword whole fvec4 brightyellow
+    keyword whole sampler3DRect brightyellow
 
 # Modifiers
 
-    keyword whole attribute yellow
-    keyword whole const yellow
-    keyword whole uniform yellow
-    keyword whole varying yellow
-    keyword whole buffer yellow
-    keyword whole shared yellow
-    keyword whole coherent yellow
-    keyword whole volatile yellow
-    keyword whole restrict yellow
-    keyword whole readonly yellow
-    keyword whole writeonly yellow
-    keyword whole atomic_uint yellow
-    keyword whole layout yellow
-    keyword whole centroid yellow
-    keyword whole flat yellow
-    keyword whole smooth yellow
-    keyword whole noperspective yellow
-    keyword whole patch yellow
-    keyword whole sample yellow
-    keyword whole break yellow
-    keyword whole continue yellow
-    keyword whole do yellow
-    keyword whole for yellow
-    keyword whole while yellow
-    keyword whole switch yellow
-    keyword whole case yellow
-    keyword whole default yellow
-    keyword whole if yellow
-    keyword whole else yellow
-    keyword whole subroutine yellow
-    keyword whole in yellow
-    keyword whole out yellow
-    keyword whole inout yellow
-    keyword whole invariant yellow
-    keyword whole discard yellow
-    keyword whole return yellow
-    keyword whole lowp yellow
-    keyword whole mediump yellow
-    keyword whole highp yellow
-    keyword whole precision yellow
-    keyword whole struct yellow
-    keyword whole common yellow
-    keyword whole partition yellow
-    keyword whole active yellow
-    keyword whole asm yellow
-    keyword whole class yellow
-    keyword whole union yellow
-    keyword whole enum yellow
-    keyword whole typedef yellow
-    keyword whole template yellow
-    keyword whole this yellow
-    keyword whole packed yellow
-    keyword whole resource yellow
-    keyword whole goto yellow
-    keyword whole inline yellow
-    keyword whole noinline yellow
-    keyword whole public yellow
-    keyword whole static yellow
-    keyword whole extern yellow
-    keyword whole external yellow
-    keyword whole interface yellow
-    keyword whole superp yellow
-    keyword whole input yellow
-    keyword whole output yellow
-    keyword whole filter yellow
-    keyword whole sizeof yellow
-    keyword whole cast yellow
-    keyword whole namespace yellow
-    keyword whole using yellow
-    keyword whole row_major yellow
-    keyword whole early_fragment_tests yellow
+    keyword whole attribute brightyellow
+    keyword whole const brightyellow
+    keyword whole uniform brightyellow
+    keyword whole varying brightyellow
+    keyword whole buffer brightyellow
+    keyword whole shared brightyellow
+    keyword whole coherent brightyellow
+    keyword whole volatile brightyellow
+    keyword whole restrict brightyellow
+    keyword whole readonly brightyellow
+    keyword whole writeonly brightyellow
+    keyword whole atomic_uint brightyellow
+    keyword whole layout brightyellow
+    keyword whole centroid brightyellow
+    keyword whole flat brightyellow
+    keyword whole smooth brightyellow
+    keyword whole noperspective brightyellow
+    keyword whole patch brightyellow
+    keyword whole sample brightyellow
+    keyword whole break brightyellow
+    keyword whole continue brightyellow
+    keyword whole do brightyellow
+    keyword whole for brightyellow
+    keyword whole while brightyellow
+    keyword whole switch brightyellow
+    keyword whole case brightyellow
+    keyword whole default brightyellow
+    keyword whole if brightyellow
+    keyword whole else brightyellow
+    keyword whole subroutine brightyellow
+    keyword whole in brightyellow
+    keyword whole out brightyellow
+    keyword whole inout brightyellow
+    keyword whole invariant brightyellow
+    keyword whole discard brightyellow
+    keyword whole return brightyellow
+    keyword whole lowp brightyellow
+    keyword whole mediump brightyellow
+    keyword whole highp brightyellow
+    keyword whole precision brightyellow
+    keyword whole struct brightyellow
+    keyword whole common brightyellow
+    keyword whole partition brightyellow
+    keyword whole active brightyellow
+    keyword whole asm brightyellow
+    keyword whole class brightyellow
+    keyword whole union brightyellow
+    keyword whole enum brightyellow
+    keyword whole typedef brightyellow
+    keyword whole template brightyellow
+    keyword whole this brightyellow
+    keyword whole packed brightyellow
+    keyword whole resource brightyellow
+    keyword whole goto brightyellow
+    keyword whole inline brightyellow
+    keyword whole noinline brightyellow
+    keyword whole public brightyellow
+    keyword whole static brightyellow
+    keyword whole extern brightyellow
+    keyword whole external brightyellow
+    keyword whole interface brightyellow
+    keyword whole superp brightyellow
+    keyword whole input brightyellow
+    keyword whole output brightyellow
+    keyword whole filter brightyellow
+    keyword whole sizeof brightyellow
+    keyword whole cast brightyellow
+    keyword whole namespace brightyellow
+    keyword whole using brightyellow
+    keyword whole row_major brightyellow
+    keyword whole early_fragment_tests brightyellow
 
 # Deprecated
     keyword whole varying brightred
@@ -403,28 +403,28 @@ context default
     keyword whole gl_MaxVaryingComponents red
 
 # Comments
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
 # Preprocessor
     keyword # brightred
 
 # Punctuation
-    keyword > white
-    keyword < white
-    keyword \+ white
-    keyword - white
-    keyword \* white
-    keyword / white
-    keyword % white
-    keyword = white
-    keyword != white
-    keyword == white
-    keyword & white
-    keyword | white
-    keyword :: white
-    keyword -> white
+    keyword > brightwhite
+    keyword < brightwhite
+    keyword \+ brightwhite
+    keyword - brightwhite
+    keyword \* brightwhite
+    keyword / brightwhite
+    keyword % brightwhite
+    keyword = brightwhite
+    keyword != brightwhite
+    keyword == brightwhite
+    keyword & brightwhite
+    keyword | brightwhite
+    keyword :: brightwhite
+    keyword -> brightwhite
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -436,14 +436,14 @@ context default
     keyword ; brightmagenta
 
 context exclusive # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
+    keyword //*\n yellow
     keyword "+" red
     keyword <+> red
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context " " green

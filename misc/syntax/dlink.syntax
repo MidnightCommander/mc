@@ -3,13 +3,13 @@
 
 context default
 
-    keyword whole linestart create yellow
-    keyword whole linestart config yellow
-    keyword whole linestart delete yellow
-    keyword whole linestart enable yellow
-    keyword whole linestart disable yellow
-    keyword whole linestart save yellow
-    keyword whole linestart logout yellow
+    keyword whole linestart create brightyellow
+    keyword whole linestart config brightyellow
+    keyword whole linestart delete brightyellow
+    keyword whole linestart enable brightyellow
+    keyword whole linestart disable brightyellow
+    keyword whole linestart save brightyellow
+    keyword whole linestart logout brightyellow
     keyword whole linestart reset\sconfig brightred
 
     keyword whole permit brightgreen
@@ -137,9 +137,9 @@ context default
     keyword whole \[1234567890\].\[1234567890\].\[1234567890\].\[1234567890\] red
     keyword whole \[1234567890abcdefABCDEDF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\] cyan
     keyword whole \[1234567890abcdefABCDEDF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\] cyan
-    keyword whole mst_ports\s\[1234567890\-\] white
-    keyword whole ports\s\[1234567890\-\] white
-    keyword whole port\s\[1234567890\-\] white
+    keyword whole mst_ports\s\[1234567890\-\] brightwhite
+    keyword whole ports\s\[1234567890\-\] brightwhite
+    keyword whole port\s\[1234567890\-\] brightwhite
     keyword whole web\s\[1234567890\] green
     keyword whole telnet\s\[1234567890\] green
     keyword whole udp_port\s\[1234567890\] green
@@ -147,36 +147,36 @@ context default
     keyword whole src_port\s\[1234567890\] green
     keyword whole dst_port\s\[1234567890\] green
     keyword whole icmp\stype\s\[1234567890\] green
-    keyword whole ports\sall white
-    keyword whole port\sall white
+    keyword whole ports\sall brightwhite
+    keyword whole port\sall brightwhite
     keyword whole telnet brightcyan
     keyword whole web brightcyan
 
 context exclusive config\sgvrp state
     keyword whole gvrp brightcyan
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive traffic_segmentation \n
-    keyword whole \[1234567890\-\] white
-    keyword whole all white
+    keyword whole \[1234567890\-\] brightwhite
+    keyword whole all brightwhite
 
 context exclusive traffic\scontrol action
     keyword whole enable brightgreen
     keyword whole disable brightred
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive bandwidth_control \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive default_priority \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive filtering_mode \n
-    keyword whole all white
+    keyword whole all brightwhite
 
 context exclusive config\srouter_ports_forbidden \n
     keyword whole router_ports_forbidden brightcyan
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive config\sssh\sserver \n
     keyword whole ssh\sserver brightcyan
@@ -191,7 +191,7 @@ context exclusive pvid \n
 
 context exclusive config\svlan\s\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_\-\]\sdelete \n
     keyword whole vlan brightcyan
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive CommunityView \n
     keyword whole \[1234567890\.\] blue
@@ -200,17 +200,17 @@ context exclusive restricted \n
     keyword whole \[1234567890\.\] blue
 
 context exclusive lacp_port mode
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive add\sforbidden \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive add\suntagged \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
 context exclusive add\stagged \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] brightwhite
 
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
 

@@ -5,31 +5,31 @@
 # - Does not support escapes in keys: \ , \=, \:
 # - Additionally highlights numbers, HTML color codes (#AABBCC), some sort of "variable references" (${ref.to.other.key}), and more
 
-context default lightgray
+context default white
 # Keys
-    keyword linestart \[\s\t\]\{"$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\}\[!"#$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\] yellow
+    keyword linestart \[\s\t\]\{"$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\}\[!"#$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\] brightyellow
     keyword = brightcyan
     keyword : brightcyan
 # Value continuation (first line)
-    keyword \\\n yellow
+    keyword \\\n brightyellow
     keyword ${*} brightgreen
     keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
     keyword whole \{-0123456789\}\[0123456789\] brightcyan
     keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] green
-    keyword whole true white
-    keyword whole false white
+    keyword whole true brightwhite
+    keyword whole false brightwhite
 
 # Value continuation (rest of the lines)
-context exclusive \\\n \n lightgray
-    keyword linestart \{\s\t\}\[\s\t\] lightgray black
-    keyword \\\n yellow
+context exclusive \\\n \n white
+    keyword linestart \{\s\t\}\[\s\t\] white black
+    keyword \\\n brightyellow
     keyword ${*} brightgreen
     keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
     keyword whole \{-0123456789\}\[0123456789\] brightcyan
     keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] green
 
-context linestart # \n brown
+context linestart # \n yellow
     spellcheck
 
-context linestart ! \n brown
+context linestart ! \n yellow
     spellcheck

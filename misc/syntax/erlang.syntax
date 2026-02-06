@@ -24,36 +24,36 @@
 # include erlang.syntax
 
 context default
-    keyword whole after yellow
-    keyword whole and brown
-    keyword whole andalso brown
-    keyword whole band brown
-    keyword whole begin yellow
-    keyword whole bnot brown
-    keyword whole bor brown
-    keyword whole bsl brown
-    keyword whole bsr brown
-    keyword whole bxor brown
-    keyword whole case yellow
-    keyword whole catch yellow
-    keyword whole cond yellow
-    keyword whole div brown
-    keyword whole end yellow
-    keyword whole fun yellow
-    keyword whole if yellow
-    keyword whole let yellow
-    keyword whole not brown
-    keyword whole of yellow
-    keyword whole or brown
-    keyword whole orelse brown
-    keyword whole query yellow
-    keyword whole receive yellow
-    keyword whole rem brown
-    keyword whole try yellow
-    keyword whole throw yellow
-    keyword whole xor brown
+    keyword whole after brightyellow
+    keyword whole and yellow
+    keyword whole andalso yellow
+    keyword whole band yellow
+    keyword whole begin brightyellow
+    keyword whole bnot yellow
+    keyword whole bor yellow
+    keyword whole bsl yellow
+    keyword whole bsr yellow
+    keyword whole bxor yellow
+    keyword whole case brightyellow
+    keyword whole catch brightyellow
+    keyword whole cond brightyellow
+    keyword whole div yellow
+    keyword whole end brightyellow
+    keyword whole fun brightyellow
+    keyword whole if brightyellow
+    keyword whole let brightyellow
+    keyword whole not yellow
+    keyword whole of brightyellow
+    keyword whole or yellow
+    keyword whole orelse yellow
+    keyword whole query brightyellow
+    keyword whole receive brightyellow
+    keyword whole rem yellow
+    keyword whole try brightyellow
+    keyword whole throw brightyellow
+    keyword whole xor yellow
 
-    keyword whole when yellow
+    keyword whole when brightyellow
 
     keyword whole -module brightmagenta
     keyword whole -compile brightmagenta
@@ -165,47 +165,47 @@ context default
     keyword whole gen_server:start brightgreen
     keyword whole io:format brightgreen
 
-    keyword whole init white
-    keyword whole handle_cast white
-    keyword whole handle_call white
-    keyword whole handle_info white
-    keyword whole handle_event white
-    keyword whole handle_sync_event white
-    keyword whole terminate white
-    keyword whole code_change white
+    keyword whole init brightwhite
+    keyword whole handle_cast brightwhite
+    keyword whole handle_call brightwhite
+    keyword whole handle_info brightwhite
+    keyword whole handle_event brightwhite
+    keyword whole handle_sync_event brightwhite
+    keyword whole terminate brightwhite
+    keyword whole code_change brightwhite
 
 # list comprehension
-    keyword <- yellow
+    keyword <- brightyellow
 # clause
-    keyword -> yellow
+    keyword -> brightyellow
 # guards
-    keyword =:= brown
-    keyword == brown
-    keyword /= brown
-    keyword =/= brown
+    keyword =:= yellow
+    keyword == yellow
+    keyword /= yellow
+    keyword =/= yellow
 # binary
     keyword << brightcyan
     keyword >> brightcyan
 # guards
-    keyword < brown
-    keyword =< brown
-    keyword >= brown
-    keyword > brown
+    keyword < yellow
+    keyword =< yellow
+    keyword >= yellow
+    keyword > yellow
 # ops
-    keyword - yellow
-    keyword \+ yellow
-    keyword / yellow
-    keyword \* yellow
+    keyword - brightyellow
+    keyword \+ brightyellow
+    keyword / brightyellow
+    keyword \* brightyellow
 
     keyword ; brightcyan
     keyword , brightcyan
     keyword . brightcyan
-    keyword = yellow
-    keyword % brown
+    keyword = brightyellow
+    keyword % yellow
 
-    keyword \+\+ yellow
-    keyword -- yellow
-    keyword ! yellow
+    keyword \+\+ brightyellow
+    keyword -- brightyellow
+    keyword ! brightyellow
 # TODO this does not work for $" or $', use $\" or $\' instead. ?
     keyword $\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_{}[]()(\\/`~!@#$%^&\*+-=;:'"|,./?<>\} red
     keyword $\ red
@@ -220,7 +220,7 @@ context default
     keyword whole ?FILE red
     keyword whole ?\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] red
 
-# gray operatory
+# brightblack operatory
 # cyan - moduly
 
 
@@ -236,34 +236,34 @@ context default
     keyword { cyan
     keyword } cyan
 
-    keyword whole lists:seq gray
-    keyword whole lists:map gray
-    keyword whole lists:filter gray
-    keyword whole lists:reduce gray
-    keyword whole lists:foldl gray
-    keyword whole lists:foldr gray
-    keyword whole lists:append gray
-    keyword whole lists:nth gray
-    keyword whole behaviour_info gray
-    keyword whole dict:find gray
-    keyword whole dict:is_key gray
-    keyword whole dict:erase gray
-    keyword whole dict:new gray
-    keyword whole dict:map gray
-    keyword whole dict:store gray
-    keyword whole dict:fetch_keys gray
-    keyword whole dict:append gray
-    keyword whole dict:update gray
-    keyword whole dict:update_counter gray
-    keyword whole dict:fold gray
-    keyword whole dict:to_list gray
-    keyword whole dict:fetch gray
+    keyword whole lists:seq brightblack
+    keyword whole lists:map brightblack
+    keyword whole lists:filter brightblack
+    keyword whole lists:reduce brightblack
+    keyword whole lists:foldl brightblack
+    keyword whole lists:foldr brightblack
+    keyword whole lists:append brightblack
+    keyword whole lists:nth brightblack
+    keyword whole behaviour_info brightblack
+    keyword whole dict:find brightblack
+    keyword whole dict:is_key brightblack
+    keyword whole dict:erase brightblack
+    keyword whole dict:new brightblack
+    keyword whole dict:map brightblack
+    keyword whole dict:store brightblack
+    keyword whole dict:fetch_keys brightblack
+    keyword whole dict:append brightblack
+    keyword whole dict:update brightblack
+    keyword whole dict:update_counter brightblack
+    keyword whole dict:fold brightblack
+    keyword whole dict:to_list brightblack
+    keyword whole dict:fetch brightblack
 
 # todo: no more than one dot in atom, and not at the end
-    keyword whole \{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_.@\] lightgray
-    keyword whole \{_ABCDEFGHIJKLMNOPRQSTUVWXYZ\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] white
+    keyword whole \{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_.@\] white
+    keyword whole \{_ABCDEFGHIJKLMNOPRQSTUVWXYZ\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] brightwhite
 
-context exclusive % \n brown
+context exclusive % \n yellow
     spellcheck
 
 context " " green

@@ -3,43 +3,43 @@
 # Author: Petr Kozelka <pkozelka@email.cz>
 
 context default
-    keyword &*; white cyan
+    keyword &*; brightwhite cyan
     spellcheck
 
 context <!-- --> brightgreen
     spellcheck
 
-context <! > yellow
+context <! > brightyellow
     keyword '+' brightcyan
     keyword "+" brightcyan
-    keyword whole DOCTYPE white red
+    keyword whole DOCTYPE brightwhite red
     keyword whole PUBLIC brightred
     keyword whole SYSTEM brightred
     keyword whole NDATA brightred
-    keyword whole CDATA white
-    keyword whole #PCDATA white
-    keyword whole EMPTY white
-    keyword whole #REQUIRED white
-    keyword whole #IMPLIED white
-    keyword whole ELEMENT white
+    keyword whole CDATA brightwhite
+    keyword whole #PCDATA brightwhite
+    keyword whole EMPTY brightwhite
+    keyword whole #REQUIRED brightwhite
+    keyword whole #IMPLIED brightwhite
+    keyword whole ELEMENT brightwhite
     keyword whole ENTITY brightred
-    keyword whole ATTLIST white
-    keyword whole %*; white cyan
-    keyword \( lightgray
-    keyword \) lightgray
-    keyword \* lightgray
-    keyword \? lightgray
-    keyword \+ lightgray
-    keyword \| lightgray
-    keyword \, lightgray
+    keyword whole ATTLIST brightwhite
+    keyword whole %*; brightwhite cyan
+    keyword \( white
+    keyword \) white
+    keyword \* white
+    keyword \? white
+    keyword \+ white
+    keyword \| white
+    keyword \, white
     spellcheck
 
-context <\?xml \?> white red
-context <\? \?> lightgray black
-context < > white
+context <\?xml \?> brightwhite red
+context <\? \?> white black
+context < > brightwhite
     keyword \sxmlns\:*\="+" brightred
     keyword \sxmlns\="+" brightred
-    keyword \s*= yellow
+    keyword \s*= brightyellow
     keyword '*' brightcyan
     keyword "*" brightcyan
     spellcheck

@@ -58,21 +58,21 @@ typedef struct mc_tty_color_table_struct
 
 static mc_tty_color_table_t const color_table[] = {
     { "black", COLOR_BLACK },
-    { "gray", COLOR_BLACK + COLOR_INTENSITY },
+    { "brightblack", COLOR_BLACK + COLOR_INTENSITY },
     { "red", COLOR_RED },
     { "brightred", COLOR_RED + COLOR_INTENSITY },
     { "green", COLOR_GREEN },
     { "brightgreen", COLOR_GREEN + COLOR_INTENSITY },
-    { "brown", COLOR_YELLOW },
-    { "yellow", COLOR_YELLOW + COLOR_INTENSITY },
+    { "yellow", COLOR_YELLOW },
+    { "brightyellow", COLOR_YELLOW + COLOR_INTENSITY },
     { "blue", COLOR_BLUE },
     { "brightblue", COLOR_BLUE + COLOR_INTENSITY },
     { "magenta", COLOR_MAGENTA },
     { "brightmagenta", COLOR_MAGENTA + COLOR_INTENSITY },
     { "cyan", COLOR_CYAN },
     { "brightcyan", COLOR_CYAN + COLOR_INTENSITY },
-    { "lightgray", COLOR_WHITE },
-    { "white", COLOR_WHITE + COLOR_INTENSITY },
+    { "white", COLOR_WHITE },
+    { "brightwhite", COLOR_WHITE + COLOR_INTENSITY },
     { "default", -1 },  // default color of the terminal
     // End of list
     { NULL, 0 },

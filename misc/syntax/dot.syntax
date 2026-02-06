@@ -5,213 +5,213 @@ context default
     keyword whole digraph brightred
     keyword whole subgraph brightred
 
-    keyword whole node yellow
-    keyword whole edge yellow
+    keyword whole node brightyellow
+    keyword whole edge brightyellow
 
-    keyword wholeleft cluster_ yellow
+    keyword wholeleft cluster_ brightyellow
 
     keyword whole -> brightred
     keyword whole -- brightred
 
-    keyword whole _background white
-    keyword whole area white
-    keyword whole arrowhead white
-    keyword whole arrowsize white
-    keyword whole arrowtail white
-    keyword whole bb white
-    keyword whole bgcolor white
-    keyword whole center white
-    keyword whole charset white
-    keyword whole class white
-    keyword whole clusterrank white
-    keyword whole color white
-    keyword whole colorscheme white
-    keyword whole comment white
-    keyword whole compound white
-    keyword whole concentrate white
-    keyword whole constraint white
-    keyword whole Damping white
-    keyword whole decorate white
-    keyword whole defaultdist white
-    keyword whole dim white
-    keyword whole dimen white
-    keyword whole dir white
-    keyword whole diredgeconstraints white
-    keyword whole distortion white
-    keyword whole dpi white
-    keyword whole edgehref white
-    keyword whole edgetarget white
-    keyword whole edgetooltip white
-    keyword whole edgeURL white
-    keyword whole epsilon white
-    keyword whole esep white
-    keyword whole fillcolor white
-    keyword whole fixedsize white
-    keyword whole fontcolor white
-    keyword whole fontname white
-    keyword whole fontnames white
-    keyword whole fontpath white
-    keyword whole fontsize white
-    keyword whole forcelabels white
-    keyword whole gradientangle white
-    keyword whole group white
-    keyword whole head_lp white
-    keyword whole headclip white
-    keyword whole headhref white
-    keyword whole headlabel white
-    keyword whole headport white
-    keyword whole headtarget white
-    keyword whole headtooltip white
-    keyword whole headURL white
-    keyword whole height white
-    keyword whole href white
-    keyword whole id white
-    keyword whole image white
-    keyword whole imagepath white
-    keyword whole imagepos white
-    keyword whole imagescale white
-    keyword whole inputscale white
-    keyword whole K white
-    keyword whole label white
-    keyword whole label_scheme white
-    keyword whole labelangle white
-    keyword whole labeldistance white
-    keyword whole labelfloat white
-    keyword whole labelfontcolor white
-    keyword whole labelfontname white
-    keyword whole labelfontsize white
-    keyword whole labelhref white
-    keyword whole labeljust white
-    keyword whole labelloc white
-    keyword whole labeltarget white
-    keyword whole labeltooltip white
-    keyword whole labelURL white
-    keyword whole landscape white
-    keyword whole layer white
-    keyword whole layerlistsep white
-    keyword whole layers white
-    keyword whole layerselect white
-    keyword whole layersep white
-    keyword whole layout white
-    keyword whole len white
-    keyword whole levels white
-    keyword whole levelsgap white
-    keyword whole lhead white
-    keyword whole lheight white
-    keyword whole lp white
-    keyword whole ltail white
-    keyword whole lwidth white
-    keyword whole margin white
-    keyword whole maxiter white
-    keyword whole mclimit white
-    keyword whole mindist white
-    keyword whole minlen white
-    keyword whole mode white
-    keyword whole model white
-    keyword whole mosek white
-    keyword whole newrank white
-    keyword whole nodesep white
-    keyword whole nojustify white
-    keyword whole normalize white
-    keyword whole notranslate white
-    keyword whole nslimit white
-    keyword whole nslimit1 white
-    keyword whole ordering white
-    keyword whole orientation white
-    keyword whole outputorder white
-    keyword whole overlap white
-    keyword whole overlap_scaling white
-    keyword whole overlap_shrink white
-    keyword whole pack white
-    keyword whole packmode white
-    keyword whole pad white
-    keyword whole page white
-    keyword whole pagedir white
-    keyword whole pencolor white
-    keyword whole penwidth white
-    keyword whole peripheries white
-    keyword whole pin white
-    keyword whole pos white
-    keyword whole quadtree white
-    keyword whole quantum white
-    keyword whole rank white
-    keyword whole rankdir white
-    keyword whole ranksep white
-    keyword whole ratio white
-    keyword whole rects white
-    keyword whole regular white
-    keyword whole remincross white
-    keyword whole repulsiveforce white
-    keyword whole resolution white
-    keyword whole root white
-    keyword whole rotate white
-    keyword whole rotation white
-    keyword whole samehead white
-    keyword whole sametail white
-    keyword whole samplepoints white
-    keyword whole scale white
-    keyword whole searchsize white
-    keyword whole sep white
-    keyword whole shape white
-    keyword whole shapefile white
-    keyword whole showboxes white
-    keyword whole sides white
-    keyword whole size white
-    keyword whole skew white
-    keyword whole smoothing white
-    keyword whole sortv white
-    keyword whole splines white
-    keyword whole start white
-    keyword whole style white
-    keyword whole stylesheet white
-    keyword whole tail_lp white
-    keyword whole tailclip white
-    keyword whole tailhref white
-    keyword whole taillabel white
-    keyword whole tailport white
-    keyword whole tailtarget white
-    keyword whole tailtooltip white
-    keyword whole tailURL white
-    keyword whole target white
-    keyword whole tooltip white
-    keyword whole truecolor white
-    keyword whole URL white
-    keyword whole vertices white
-    keyword whole viewport white
-    keyword whole voro_margin white
-    keyword whole weight white
-    keyword whole width white
-    keyword whole xdotversion white
-    keyword whole xlabel white
-    keyword whole xlp white
-    keyword whole z white
+    keyword whole _background brightwhite
+    keyword whole area brightwhite
+    keyword whole arrowhead brightwhite
+    keyword whole arrowsize brightwhite
+    keyword whole arrowtail brightwhite
+    keyword whole bb brightwhite
+    keyword whole bgcolor brightwhite
+    keyword whole center brightwhite
+    keyword whole charset brightwhite
+    keyword whole class brightwhite
+    keyword whole clusterrank brightwhite
+    keyword whole color brightwhite
+    keyword whole colorscheme brightwhite
+    keyword whole comment brightwhite
+    keyword whole compound brightwhite
+    keyword whole concentrate brightwhite
+    keyword whole constraint brightwhite
+    keyword whole Damping brightwhite
+    keyword whole decorate brightwhite
+    keyword whole defaultdist brightwhite
+    keyword whole dim brightwhite
+    keyword whole dimen brightwhite
+    keyword whole dir brightwhite
+    keyword whole diredgeconstraints brightwhite
+    keyword whole distortion brightwhite
+    keyword whole dpi brightwhite
+    keyword whole edgehref brightwhite
+    keyword whole edgetarget brightwhite
+    keyword whole edgetooltip brightwhite
+    keyword whole edgeURL brightwhite
+    keyword whole epsilon brightwhite
+    keyword whole esep brightwhite
+    keyword whole fillcolor brightwhite
+    keyword whole fixedsize brightwhite
+    keyword whole fontcolor brightwhite
+    keyword whole fontname brightwhite
+    keyword whole fontnames brightwhite
+    keyword whole fontpath brightwhite
+    keyword whole fontsize brightwhite
+    keyword whole forcelabels brightwhite
+    keyword whole gradientangle brightwhite
+    keyword whole group brightwhite
+    keyword whole head_lp brightwhite
+    keyword whole headclip brightwhite
+    keyword whole headhref brightwhite
+    keyword whole headlabel brightwhite
+    keyword whole headport brightwhite
+    keyword whole headtarget brightwhite
+    keyword whole headtooltip brightwhite
+    keyword whole headURL brightwhite
+    keyword whole height brightwhite
+    keyword whole href brightwhite
+    keyword whole id brightwhite
+    keyword whole image brightwhite
+    keyword whole imagepath brightwhite
+    keyword whole imagepos brightwhite
+    keyword whole imagescale brightwhite
+    keyword whole inputscale brightwhite
+    keyword whole K brightwhite
+    keyword whole label brightwhite
+    keyword whole label_scheme brightwhite
+    keyword whole labelangle brightwhite
+    keyword whole labeldistance brightwhite
+    keyword whole labelfloat brightwhite
+    keyword whole labelfontcolor brightwhite
+    keyword whole labelfontname brightwhite
+    keyword whole labelfontsize brightwhite
+    keyword whole labelhref brightwhite
+    keyword whole labeljust brightwhite
+    keyword whole labelloc brightwhite
+    keyword whole labeltarget brightwhite
+    keyword whole labeltooltip brightwhite
+    keyword whole labelURL brightwhite
+    keyword whole landscape brightwhite
+    keyword whole layer brightwhite
+    keyword whole layerlistsep brightwhite
+    keyword whole layers brightwhite
+    keyword whole layerselect brightwhite
+    keyword whole layersep brightwhite
+    keyword whole layout brightwhite
+    keyword whole len brightwhite
+    keyword whole levels brightwhite
+    keyword whole levelsgap brightwhite
+    keyword whole lhead brightwhite
+    keyword whole lheight brightwhite
+    keyword whole lp brightwhite
+    keyword whole ltail brightwhite
+    keyword whole lwidth brightwhite
+    keyword whole margin brightwhite
+    keyword whole maxiter brightwhite
+    keyword whole mclimit brightwhite
+    keyword whole mindist brightwhite
+    keyword whole minlen brightwhite
+    keyword whole mode brightwhite
+    keyword whole model brightwhite
+    keyword whole mosek brightwhite
+    keyword whole newrank brightwhite
+    keyword whole nodesep brightwhite
+    keyword whole nojustify brightwhite
+    keyword whole normalize brightwhite
+    keyword whole notranslate brightwhite
+    keyword whole nslimit brightwhite
+    keyword whole nslimit1 brightwhite
+    keyword whole ordering brightwhite
+    keyword whole orientation brightwhite
+    keyword whole outputorder brightwhite
+    keyword whole overlap brightwhite
+    keyword whole overlap_scaling brightwhite
+    keyword whole overlap_shrink brightwhite
+    keyword whole pack brightwhite
+    keyword whole packmode brightwhite
+    keyword whole pad brightwhite
+    keyword whole page brightwhite
+    keyword whole pagedir brightwhite
+    keyword whole pencolor brightwhite
+    keyword whole penwidth brightwhite
+    keyword whole peripheries brightwhite
+    keyword whole pin brightwhite
+    keyword whole pos brightwhite
+    keyword whole quadtree brightwhite
+    keyword whole quantum brightwhite
+    keyword whole rank brightwhite
+    keyword whole rankdir brightwhite
+    keyword whole ranksep brightwhite
+    keyword whole ratio brightwhite
+    keyword whole rects brightwhite
+    keyword whole regular brightwhite
+    keyword whole remincross brightwhite
+    keyword whole repulsiveforce brightwhite
+    keyword whole resolution brightwhite
+    keyword whole root brightwhite
+    keyword whole rotate brightwhite
+    keyword whole rotation brightwhite
+    keyword whole samehead brightwhite
+    keyword whole sametail brightwhite
+    keyword whole samplepoints brightwhite
+    keyword whole scale brightwhite
+    keyword whole searchsize brightwhite
+    keyword whole sep brightwhite
+    keyword whole shape brightwhite
+    keyword whole shapefile brightwhite
+    keyword whole showboxes brightwhite
+    keyword whole sides brightwhite
+    keyword whole size brightwhite
+    keyword whole skew brightwhite
+    keyword whole smoothing brightwhite
+    keyword whole sortv brightwhite
+    keyword whole splines brightwhite
+    keyword whole start brightwhite
+    keyword whole style brightwhite
+    keyword whole stylesheet brightwhite
+    keyword whole tail_lp brightwhite
+    keyword whole tailclip brightwhite
+    keyword whole tailhref brightwhite
+    keyword whole taillabel brightwhite
+    keyword whole tailport brightwhite
+    keyword whole tailtarget brightwhite
+    keyword whole tailtooltip brightwhite
+    keyword whole tailURL brightwhite
+    keyword whole target brightwhite
+    keyword whole tooltip brightwhite
+    keyword whole truecolor brightwhite
+    keyword whole URL brightwhite
+    keyword whole vertices brightwhite
+    keyword whole viewport brightwhite
+    keyword whole voro_margin brightwhite
+    keyword whole weight brightwhite
+    keyword whole width brightwhite
+    keyword whole xdotversion brightwhite
+    keyword whole xlabel brightwhite
+    keyword whole xlp brightwhite
+    keyword whole z brightwhite
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
     keyword \+ red
     keyword , brightcyan
     keyword : brightcyan
     keyword ; brightmagenta
     keyword < green
-    keyword = yellow
+    keyword = brightyellow
     keyword > green
     keyword [ brightcyan
     keyword ] brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
+    keyword //*\n yellow
     keyword "+" red
     keyword <+> red
 
@@ -222,6 +222,6 @@ context exclusive < > green
 
 context " " green
     spellcheck
-    keyword \\\n yellow
+    keyword \\\n brightyellow
     keyword \\" brightgreen
     keyword \\\{abtnvfr\} brightgreen

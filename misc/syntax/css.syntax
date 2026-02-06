@@ -1,78 +1,78 @@
 # Updated by Mikhail S. Pobolovets on 2010.09.12
 context default
 #   -moz-...
-    keyword whole \-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] lightgray
+    keyword whole \-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
 #   class
     keyword whole \.\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] green
 
-    keyword whole body white
-    keyword whole div white
-    keyword whole p white
-    keyword whole a white
-    keyword whole h1 white
-    keyword whole h2 white
-    keyword whole h3 white
-    keyword whole h4 white
-    keyword whole h5 white
-    keyword whole h6 white
-    keyword whole 'font' white
-    keyword whole br white
-    keyword whole table white
-    keyword whole td white
-    keyword whole th white
-    keyword whole tr white
-    keyword whole u white
-    keyword whole i white
-    keyword whole b white
-    keyword whole address white
-    keyword whole big white
-    keyword whole small white
-    keyword whole sub white
-    keyword whole sup white
-    keyword whole img white
-    keyword whole form white
-    keyword whole textarea white
-    keyword whole input white
-    keyword whole select white
-    keyword whole option white
-    keyword whole optgroup white
+    keyword whole body brightwhite
+    keyword whole div brightwhite
+    keyword whole p brightwhite
+    keyword whole a brightwhite
+    keyword whole h1 brightwhite
+    keyword whole h2 brightwhite
+    keyword whole h3 brightwhite
+    keyword whole h4 brightwhite
+    keyword whole h5 brightwhite
+    keyword whole h6 brightwhite
+    keyword whole 'font' brightwhite
+    keyword whole br brightwhite
+    keyword whole table brightwhite
+    keyword whole td brightwhite
+    keyword whole th brightwhite
+    keyword whole tr brightwhite
+    keyword whole u brightwhite
+    keyword whole i brightwhite
+    keyword whole b brightwhite
+    keyword whole address brightwhite
+    keyword whole big brightwhite
+    keyword whole small brightwhite
+    keyword whole sub brightwhite
+    keyword whole sup brightwhite
+    keyword whole img brightwhite
+    keyword whole form brightwhite
+    keyword whole textarea brightwhite
+    keyword whole input brightwhite
+    keyword whole select brightwhite
+    keyword whole option brightwhite
+    keyword whole optgroup brightwhite
 
 
-    keyword \:\:add-line white
-    keyword \:\:add-page white
-    keyword \:\:branch white
-    keyword \:\:chunk white
-    keyword \:\:close-button white
-    keyword \:\:down-arrow white
-    keyword \:\:down-button white
-    keyword \:\:drop-down white
-    keyword \:\:float-button white
-    keyword \:\:groove white
-    keyword \:\:indicator white
-    keyword \:\:handle white
-    keyword \:\:icon white
-    keyword \:\:item white
-    keyword \:\:left-arrow white
-    keyword \:\:left-corner white
-    keyword \:\:menu-arrow white
-    keyword \:\:menu-button white
-    keyword \:\:menu-indicator white
-    keyword \:\:right-arrow white
-    keyword \:\:pane white
-    keyword \:\:right-corner white
-    keyword \:\:scroller white
-    keyword \:\:section white
-    keyword \:\:separator white
-    keyword \:\:sub-line white
-    keyword \:\:sub-page white
-    keyword \:\:tab white
-    keyword \:\:tab-bar white
-    keyword \:\:tear white
-    keyword \:\:tear-off white
-    keyword \:\:text white
-    keyword \:\:title white
-    keyword \:\:up-arrow white
-    keyword \:\:up-button white
+    keyword \:\:add-line brightwhite
+    keyword \:\:add-page brightwhite
+    keyword \:\:branch brightwhite
+    keyword \:\:chunk brightwhite
+    keyword \:\:close-button brightwhite
+    keyword \:\:down-arrow brightwhite
+    keyword \:\:down-button brightwhite
+    keyword \:\:drop-down brightwhite
+    keyword \:\:float-button brightwhite
+    keyword \:\:groove brightwhite
+    keyword \:\:indicator brightwhite
+    keyword \:\:handle brightwhite
+    keyword \:\:icon brightwhite
+    keyword \:\:item brightwhite
+    keyword \:\:left-arrow brightwhite
+    keyword \:\:left-corner brightwhite
+    keyword \:\:menu-arrow brightwhite
+    keyword \:\:menu-button brightwhite
+    keyword \:\:menu-indicator brightwhite
+    keyword \:\:right-arrow brightwhite
+    keyword \:\:pane brightwhite
+    keyword \:\:right-corner brightwhite
+    keyword \:\:scroller brightwhite
+    keyword \:\:section brightwhite
+    keyword \:\:separator brightwhite
+    keyword \:\:sub-line brightwhite
+    keyword \:\:sub-page brightwhite
+    keyword \:\:tab brightwhite
+    keyword \:\:tab-bar brightwhite
+    keyword \:\:tear brightwhite
+    keyword \:\:tear-off brightwhite
+    keyword \:\:text brightwhite
+    keyword \:\:title brightwhite
+    keyword \:\:up-arrow brightwhite
+    keyword \:\:up-button brightwhite
 
     keyword  \:active brightmagenta
     keyword  \:after brightmagenta
@@ -129,105 +129,105 @@ context default
 
     keyword whole \!important brightred
 
-    keyword whole background-attachment lightgray
-    keyword whole background-color lightgray
-    keyword whole background-image lightgray
-    keyword whole background-position lightgray
-    keyword whole background-repeat lightgray
-    keyword whole background lightgray
-    keyword whole bidi-override lightgray
-    keyword whole border-bottom lightgray
-    keyword whole border-bottom-color lightgray
-    keyword whole border-bottom-style lightgray
-    keyword whole border-bottom-width lightgray
-    keyword whole border-collapse lightgray
-    keyword whole border-color lightgray
-    keyword whole border-left lightgray
-    keyword whole border-left-color lightgray
-    keyword whole border-left-style lightgray
-    keyword whole border-left-width lightgray
-    keyword whole border-right lightgray
-    keyword whole border-right-color lightgray
-    keyword whole border-right-style lightgray
-    keyword whole border-right-width lightgray
-    keyword whole border-spacing lightgray
-    keyword whole border-style lightgray
-    keyword whole border-top lightgray
-    keyword whole border-top-color lightgray
-    keyword whole border-top-style lightgray
-    keyword whole border-top-width lightgray
-    keyword whole border-width lightgray
-    keyword whole border lightgray
-    keyword whole bottom lightgray
-    keyword whole caption-side lightgray
-    keyword whole clear lightgray
-    keyword whole clip lightgray
-    keyword whole color lightgray
-    keyword whole content lightgray
-    keyword whole counter-increment lightgray
-    keyword whole cursor lightgray
-    keyword whole direction lightgray
-    keyword whole display lightgray
-    keyword whole empty-cells lightgray
-    keyword whole fixed lightgray
-    keyword whole float lightgray
-    keyword whole font-size-adjust lightgray
-    keyword whole font-stretch lightgray
-    keyword whole font-family lightgray
-    keyword whole font-size lightgray
-    keyword whole font-style lightgray
-    keyword whole font-variant lightgray
-    keyword whole font-weight lightgray
-    keyword whole font lightgray
-    keyword whole generic-family lightgray
-    keyword whole height lightgray
-    keyword whole identifier lightgray
-    keyword whole image lightgray
-    keyword whole justify lightgray
-    keyword whole left lightgray
-    keyword whole length lightgray
-    keyword whole letter-spacing lightgray
-    keyword whole line-height lightgray
-    keyword whole list-style-image lightgray
-    keyword whole list-style-position lightgray
-    keyword whole list-style-type lightgray
-    keyword whole list-style lightgray
-    keyword whole margin-left lightgray
-    keyword whole margin-top lightgray
-    keyword whole margin lightgray
-    keyword whole marker-offset lightgray
-    keyword whole max-height lightgray
-    keyword whole max-width lightgray
-    keyword whole min-height lightgray
-    keyword whole min-width lightgray
-    keyword whole nowrap lightgray
-    keyword whole outline-color lightgray
-    keyword whole outline-style lightgray
-    keyword whole outline-width lightgray
-    keyword whole outline lightgray
-    keyword whole padding-left lightgray
-    keyword whole padding-top lightgray
-    keyword whole padding lightgray
-    keyword whole position lightgray
-    keyword whole quotes lightgray
-    keyword whole right lightgray
-    keyword whole subcontrol-origin lightgray
-    keyword whole subcontrol-position lightgray
-    keyword whole table-layout lightgray
-    keyword whole text-align lightgray
-    keyword whole text-decoration lightgray
-    keyword whole text-indent lightgray
-    keyword whole text-shadow lightgray
-    keyword whole text-transform lightgray
-    keyword whole top lightgray
-    keyword whole unicode-bidi lightgray
-    keyword whole vertical-align lightgray
-    keyword whole visibility lightgray
-    keyword whole white-space lightgray
-    keyword whole width lightgray
-    keyword whole word-spacing lightgray
-    keyword whole opacity lightgray
-    keyword whole filter lightgray
+    keyword whole background-attachment white
+    keyword whole background-color white
+    keyword whole background-image white
+    keyword whole background-position white
+    keyword whole background-repeat white
+    keyword whole background white
+    keyword whole bidi-override white
+    keyword whole border-bottom white
+    keyword whole border-bottom-color white
+    keyword whole border-bottom-style white
+    keyword whole border-bottom-width white
+    keyword whole border-collapse white
+    keyword whole border-color white
+    keyword whole border-left white
+    keyword whole border-left-color white
+    keyword whole border-left-style white
+    keyword whole border-left-width white
+    keyword whole border-right white
+    keyword whole border-right-color white
+    keyword whole border-right-style white
+    keyword whole border-right-width white
+    keyword whole border-spacing white
+    keyword whole border-style white
+    keyword whole border-top white
+    keyword whole border-top-color white
+    keyword whole border-top-style white
+    keyword whole border-top-width white
+    keyword whole border-width white
+    keyword whole border white
+    keyword whole bottom white
+    keyword whole caption-side white
+    keyword whole clear white
+    keyword whole clip white
+    keyword whole color white
+    keyword whole content white
+    keyword whole counter-increment white
+    keyword whole cursor white
+    keyword whole direction white
+    keyword whole display white
+    keyword whole empty-cells white
+    keyword whole fixed white
+    keyword whole float white
+    keyword whole font-size-adjust white
+    keyword whole font-stretch white
+    keyword whole font-family white
+    keyword whole font-size white
+    keyword whole font-style white
+    keyword whole font-variant white
+    keyword whole font-weight white
+    keyword whole font white
+    keyword whole generic-family white
+    keyword whole height white
+    keyword whole identifier white
+    keyword whole image white
+    keyword whole justify white
+    keyword whole left white
+    keyword whole length white
+    keyword whole letter-spacing white
+    keyword whole line-height white
+    keyword whole list-style-image white
+    keyword whole list-style-position white
+    keyword whole list-style-type white
+    keyword whole list-style white
+    keyword whole margin-left white
+    keyword whole margin-top white
+    keyword whole margin white
+    keyword whole marker-offset white
+    keyword whole max-height white
+    keyword whole max-width white
+    keyword whole min-height white
+    keyword whole min-width white
+    keyword whole nowrap white
+    keyword whole outline-color white
+    keyword whole outline-style white
+    keyword whole outline-width white
+    keyword whole outline white
+    keyword whole padding-left white
+    keyword whole padding-top white
+    keyword whole padding white
+    keyword whole position white
+    keyword whole quotes white
+    keyword whole right white
+    keyword whole subcontrol-origin white
+    keyword whole subcontrol-position white
+    keyword whole table-layout white
+    keyword whole text-align white
+    keyword whole text-decoration white
+    keyword whole text-indent white
+    keyword whole text-shadow white
+    keyword whole text-transform white
+    keyword whole top white
+    keyword whole unicode-bidi white
+    keyword whole vertical-align white
+    keyword whole visibility white
+    keyword whole white-space white
+    keyword whole width white
+    keyword whole word-spacing white
+    keyword whole opacity white
+    keyword whole filter white
 
     keyword whole qconicalgradient brightgreen
     keyword whole qlineargradient brightgreen
@@ -494,11 +494,11 @@ context default
     keyword whole yellow brightgreen
     keyword whole yellowgreen brightgreen
 
-    keyword { yellow
-    keyword } yellow
+    keyword { brightyellow
+    keyword } brightyellow
 
-    keyword /\* brown
-    keyword \*/ brown
+    keyword /\* yellow
+    keyword \*/ yellow
 
     keyword whole Arial brightgreen
     keyword whole arial brightgreen
@@ -531,7 +531,7 @@ context default
     keyword whole \.\[0123456789\] brightgreen
     keyword whole \-\{0123456789\} brightgreen
 
-    keyword whole '.' white
+    keyword whole '.' brightwhite
 
     keyword { brightcyan
     keyword } brightcyan
@@ -541,7 +541,7 @@ context default
     keyword : brightcyan
     keyword ; brightmagenta
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
 context exclusive counter( ) magenta

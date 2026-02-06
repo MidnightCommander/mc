@@ -29,73 +29,73 @@
 # Adapted from java.syntax by Jacek Sliwerski.
 
 context default
-    keyword whole abstract yellow
-    keyword whole and yellow
-    keyword whole array yellow
-    keyword whole as yellow
-    keyword whole base yellow
-    keyword whole bool yellow
-    keyword whole catch yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole def yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extends yellow
-    keyword whole extern yellow
-    keyword whole false yellow
-    keyword whole finally yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole foreach yellow
-    keyword whole fun yellow
-    keyword whole if yellow
-    keyword whole implements yellow
-    keyword whole in yellow
-    keyword whole int yellow
-    keyword whole interface yellow
-    keyword whole internal yellow
-    keyword whole list yellow
-    keyword whole macro yellow
-    keyword whole match yellow
-    keyword whole module yellow
-    keyword whole mutable yellow
-    keyword whole namespace yellow
-    keyword whole new yellow
-    keyword whole null yellow
-    keyword whole object yellow
-    keyword whole option yellow
-    keyword whole out yellow
-    keyword whole override yellow
-    keyword whole params yellow
-    keyword whole private yellow
-    keyword whole protected yellow
-    keyword whole public yellow
-    keyword whole ref yellow
-    keyword whole sealed yellow
-    keyword whole static yellow
-    keyword whole string yellow
-    keyword whole syntax yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole true yellow
-    keyword whole try yellow
-    keyword whole tymatch yellow
-    keyword whole type yellow
-    keyword whole typeof yellow
-    keyword whole unless yellow
-    keyword whole using yellow
-    keyword whole variant yellow
-    keyword whole virtual yellow
-    keyword whole void yellow
-    keyword whole when yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole with yellow
+    keyword whole abstract brightyellow
+    keyword whole and brightyellow
+    keyword whole array brightyellow
+    keyword whole as brightyellow
+    keyword whole base brightyellow
+    keyword whole bool brightyellow
+    keyword whole catch brightyellow
+    keyword whole const brightyellow
+    keyword whole continue brightyellow
+    keyword whole def brightyellow
+    keyword whole else brightyellow
+    keyword whole enum brightyellow
+    keyword whole extends brightyellow
+    keyword whole extern brightyellow
+    keyword whole false brightyellow
+    keyword whole finally brightyellow
+    keyword whole float brightyellow
+    keyword whole for brightyellow
+    keyword whole foreach brightyellow
+    keyword whole fun brightyellow
+    keyword whole if brightyellow
+    keyword whole implements brightyellow
+    keyword whole in brightyellow
+    keyword whole int brightyellow
+    keyword whole interface brightyellow
+    keyword whole internal brightyellow
+    keyword whole list brightyellow
+    keyword whole macro brightyellow
+    keyword whole match brightyellow
+    keyword whole module brightyellow
+    keyword whole mutable brightyellow
+    keyword whole namespace brightyellow
+    keyword whole new brightyellow
+    keyword whole null brightyellow
+    keyword whole object brightyellow
+    keyword whole option brightyellow
+    keyword whole out brightyellow
+    keyword whole override brightyellow
+    keyword whole params brightyellow
+    keyword whole private brightyellow
+    keyword whole protected brightyellow
+    keyword whole public brightyellow
+    keyword whole ref brightyellow
+    keyword whole sealed brightyellow
+    keyword whole static brightyellow
+    keyword whole string brightyellow
+    keyword whole syntax brightyellow
+    keyword whole this brightyellow
+    keyword whole throw brightyellow
+    keyword whole true brightyellow
+    keyword whole try brightyellow
+    keyword whole tymatch brightyellow
+    keyword whole type brightyellow
+    keyword whole typeof brightyellow
+    keyword whole unless brightyellow
+    keyword whole using brightyellow
+    keyword whole variant brightyellow
+    keyword whole virtual brightyellow
+    keyword whole void brightyellow
+    keyword whole when brightyellow
+    keyword whole where brightyellow
+    keyword whole while brightyellow
+    keyword whole with brightyellow
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
     keyword '\\\{"abtnvfr\}' brightgreen
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
@@ -114,16 +114,16 @@ context default
     keyword :> brightcyan
     keyword <[ brightcyan
     keyword ]> brightcyan
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
+    keyword > brightyellow
+    keyword < brightyellow
+    keyword \+ brightyellow
+    keyword - brightyellow
+    keyword \* brightyellow
+    keyword / brightyellow
+    keyword % brightyellow
+    keyword = brightyellow
+    keyword != brightyellow
+    keyword == brightyellow
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -138,16 +138,16 @@ context default
     keyword ! brightcyan
     keyword ; brightmagenta
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
+    keyword //*\n yellow
     keyword "+" red
     keyword <+> red
 

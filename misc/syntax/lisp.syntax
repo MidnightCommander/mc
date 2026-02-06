@@ -8,54 +8,54 @@
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-*0123456789
 
 context default
-    keyword whole apply yellow
-    keyword whole and yellow
-    keyword whole car yellow
-    keyword whole caar yellow
-    keyword whole cadr yellow
-    keyword whole cdar yellow
-    keyword whole cddr yellow
-    keyword whole cdr yellow
-    keyword whole close yellow
-    keyword whole cond yellow
-    keyword whole cons yellow
-    keyword whole count yellow
-    keyword whole defvar yellow
-    keyword whole defstruct yellow
-    keyword whole defun yellow
-    keyword whole do yellow
-    keyword whole eq yellow
-    keyword whole eql yellow
-    keyword whole equal yellow
-    keyword whole eval yellow
-    keyword whole format yellow
-    keyword whole if yellow
-    keyword whole let* yellow
-    keyword whole let yellow
-    keyword whole list yellow
-    keyword whole load yellow
-    keyword whole make-package yellow
-    keyword whole mapcar yellow
-    keyword whole not yellow
-    keyword whole null yellow
-    keyword whole numberp yellow
-    keyword whole open yellow
-    keyword whole or yellow
-    keyword whole pprint yellow
-    keyword whole prin1 yellow
-    keyword whole princ yellow
-    keyword whole print yellow
-    keyword whole provide yellow
-    keyword whole read yellow
-    keyword whole require yellow
-    keyword whole set yellow
-    keyword whole setf yellow
-    keyword whole setq yellow
-    keyword whole slot-value yellow
-    keyword whole sort yellow
-    keyword whole stringp yellow
-    keyword whole terpri yellow
-    keyword whole write yellow
+    keyword whole apply brightyellow
+    keyword whole and brightyellow
+    keyword whole car brightyellow
+    keyword whole caar brightyellow
+    keyword whole cadr brightyellow
+    keyword whole cdar brightyellow
+    keyword whole cddr brightyellow
+    keyword whole cdr brightyellow
+    keyword whole close brightyellow
+    keyword whole cond brightyellow
+    keyword whole cons brightyellow
+    keyword whole count brightyellow
+    keyword whole defvar brightyellow
+    keyword whole defstruct brightyellow
+    keyword whole defun brightyellow
+    keyword whole do brightyellow
+    keyword whole eq brightyellow
+    keyword whole eql brightyellow
+    keyword whole equal brightyellow
+    keyword whole eval brightyellow
+    keyword whole format brightyellow
+    keyword whole if brightyellow
+    keyword whole let* brightyellow
+    keyword whole let brightyellow
+    keyword whole list brightyellow
+    keyword whole load brightyellow
+    keyword whole make-package brightyellow
+    keyword whole mapcar brightyellow
+    keyword whole not brightyellow
+    keyword whole null brightyellow
+    keyword whole numberp brightyellow
+    keyword whole open brightyellow
+    keyword whole or brightyellow
+    keyword whole pprint brightyellow
+    keyword whole prin1 brightyellow
+    keyword whole princ brightyellow
+    keyword whole print brightyellow
+    keyword whole provide brightyellow
+    keyword whole read brightyellow
+    keyword whole require brightyellow
+    keyword whole set brightyellow
+    keyword whole setf brightyellow
+    keyword whole setq brightyellow
+    keyword whole slot-value brightyellow
+    keyword whole sort brightyellow
+    keyword whole stringp brightyellow
+    keyword whole terpri brightyellow
+    keyword whole write brightyellow
 
     keyword whole lambda brightred
     keyword whole nil brightred
@@ -70,12 +70,12 @@ context default
 
 # Keyword declarations and keywords
 
-    keyword :\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white
-    keyword &\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white
+    keyword :\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] brightwhite
+    keyword &\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] brightwhite
 
 # Comments
 
-context ; \n brown
+context ; \n yellow
 
 # Strings
 
