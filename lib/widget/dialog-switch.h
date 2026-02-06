@@ -14,8 +14,6 @@
 
 extern GList *top_dlg;
 
-extern gboolean fast_refresh;
-
 extern WDialog *filemanager;
 
 /*** declarations of public functions ************************************************************/
