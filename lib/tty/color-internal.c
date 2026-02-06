@@ -161,33 +161,6 @@ parse_256_or_true_color_name (const char *color_name)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-const char *
-tty_color_get_name_by_index (int idx)
-{
-    int i;
-
-    // Find the real English name of the first 16 colors,
-    // as well as the A_* special values.
-    for (i = 0; color_table[i].name != NULL; i++)
-        if (idx == color_table[i].value)
-            return color_table[i].name;
-
-    // Create and return the strings in "colorNNN" or "#rrggbb" format.
-    if ((idx >= 16 && idx < 256) || (idx & FLAG_TRUECOLOR) != 0)
-    {
-        char name[9];
-
-        if (idx < 256)
-            g_snprintf (name, sizeof (name), "color%d", idx);
-        else
-            g_snprintf (name, sizeof (name), "#%06X", (unsigned int) idx & 0xFFFFFF);
-        return g_intern_string (name);
-    }
-    return "default";
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 int
 tty_color_get_index_by_name (const char *color_name)
 {
