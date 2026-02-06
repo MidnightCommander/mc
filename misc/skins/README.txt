@@ -95,9 +95,7 @@ applies individually to each of these three properties.
 
 
     [filehighlight]
-        Filename highlighting. Name of parameters must be equal to names of
-        sections into filehighlight.ini file. See the manual page's Filenames
-        Highlight section for more info.
+        Filename highlighting.
 
         directory
         executable
@@ -114,7 +112,8 @@ applies individually to each of these three properties.
         media
         graph
         database
-            Colors of the given file type
+        [...]
+            Colors of the given file type, matching filehighlight.ini's entry
 
 
     [dialog]
