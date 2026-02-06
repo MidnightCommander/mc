@@ -332,6 +332,8 @@ mc_skin_color_cache_init (void)
     DIFFVIEWER_CHANGED_COLOR = mc_skin_color_get ("diffviewer", "changed");
     DIFFVIEWER_REMOVED_COLOR = mc_skin_color_get ("diffviewer", "removed");
     DIFFVIEWER_ERROR_COLOR = mc_skin_color_get ("diffviewer", "error");
+
+    FILEHIGHLIGHT_DEFAULT_COLOR = mc_skin_color_get ("filehighlight", "_default_");
 }
 
 /* --------------------------------------------------------------------------------------------- */
