@@ -420,8 +420,6 @@ Aliases section
             [core]
                 _default_ = myfavfg;myfavbg;myfavattr
 
-        Aliases can refer to other aliases as long as they don't form a loop.
-
 
 Color pair and attribute definitions
 ====================================
