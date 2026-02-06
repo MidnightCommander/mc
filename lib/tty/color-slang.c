@@ -101,30 +101,6 @@ has_colors (gboolean disable, gboolean force)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-mc_tty_color_pair_init_special (tty_color_lib_pair_t *mc_color_pair, const char *fg1,
-                                const char *bg1, const char *fg2, const char *bg2,
-                                SLtt_Char_Type mask)
-{
-    if (SLtt_Use_Ansi_Colors != 0)
-    {
-        if (!mc_tty_color_disable)
-        {
-            SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg1, (char *) bg1);
-        }
-        else
-        {
-            SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg2, (char *) bg2);
-        }
-    }
-    else
-    {
-        SLtt_set_mono (mc_color_pair->pair_index, NULL, mask);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -155,31 +131,15 @@ tty_color_deinit_lib (void)
 void
 tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
 {
-    if (mc_color_pair->fg <= (int) SPEC_A_REVERSE)
-    {
-        switch (mc_color_pair->fg)
-        {
-        case SPEC_A_REVERSE:
-            mc_tty_color_pair_init_special (mc_color_pair, "black", "white", "black", "lightgray",
-                                            SLTT_REV_MASK);
-            break;
-        case SPEC_A_BOLD:
-            mc_tty_color_pair_init_special (mc_color_pair, "white", "black", "white", "black",
-                                            SLTT_BOLD_MASK);
-            break;
-        case SPEC_A_BOLD_REVERSE:
-            mc_tty_color_pair_init_special (mc_color_pair, "white", "white", "white", "white",
-                                            SLTT_BOLD_MASK | SLTT_REV_MASK);
-            break;
-        case SPEC_A_UNDERLINE:
-            mc_tty_color_pair_init_special (mc_color_pair, "white", "black", "white", "black",
-                                            SLTT_ULINE_MASK);
-            break;
-        default:
-            break;
-        }
-    }
-    else
+    /*
+     * According to the S-Lang Library C Programmer's Guide (v2.3.0)
+     * (https://www.jedsoft.org/slang/doc/pdf/cslang.pdf), §7.4.4:
+     *
+     * "[for SLtt_set_color] When the SLtt_Use_Ansi_Colors variable is zero, all objects with
+     * numbers greater than one will be displayed in inverse video." Footnote: "This behavior can be
+     * modifed by using the SLtt_set_mono function call."
+     */
+    if (SLtt_Use_Ansi_Colors)
     {
         const char *fg, *bg;
 
@@ -188,6 +148,8 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
         SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
         SLtt_add_color_attribute (mc_color_pair->pair_index, mc_color_pair->attr);
     }
+    else
+        SLtt_set_mono (mc_color_pair->pair_index, NULL, mc_color_pair->attr);
 }
 
 /* --------------------------------------------------------------------------------------------- */

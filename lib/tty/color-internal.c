@@ -74,11 +74,6 @@ static mc_tty_color_table_t const color_table[] = {
     { "lightgray", COLOR_WHITE },
     { "white", COLOR_WHITE + COLOR_INTENSITY },
     { "default", -1 },  // default color of the terminal
-    // special colors
-    { "A_REVERSE", SPEC_A_REVERSE },
-    { "A_BOLD", SPEC_A_BOLD },
-    { "A_BOLD_REVERSE", SPEC_A_BOLD_REVERSE },
-    { "A_UNDERLINE", SPEC_A_UNDERLINE },
     // End of list
     { NULL, 0 },
 };

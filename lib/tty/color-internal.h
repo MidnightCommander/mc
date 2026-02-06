@@ -23,14 +23,6 @@
 
 /*** enums ***************************************************************************************/
 
-typedef enum
-{
-    SPEC_A_REVERSE = -100,
-    SPEC_A_BOLD = -101,
-    SPEC_A_BOLD_REVERSE = -102,
-    SPEC_A_UNDERLINE = -103
-} tty_special_color_t;
-
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Screen library specific color pair */
