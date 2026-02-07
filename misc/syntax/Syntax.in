@@ -375,5 +375,8 @@ include meta-ii.syntax
 file ..\*\\.(?i:tmo?)$ TREE-META\sMetasyntax
 include tree-meta.syntax
 
+file (/Kconfig(\\.[A-z0-9-]\+)?|/Config\\.(in|src)(\\.[A-z0-9-]\+)?|.\*\\.kconf(ig)?)$ Kconfig
+include kconfig.syntax
+
 file .\* unknown
 include unknown.syntax
