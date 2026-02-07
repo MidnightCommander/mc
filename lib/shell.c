@@ -50,6 +50,28 @@
 static char rp_shell[PATH_MAX];
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Canonicalize shell path to handle symlinks (e.g., /bin -> /usr/bin in UsrMerge)
+ *
+ * @param path shell path to canonicalize
+ * @return canonicalized path (caller must free) or copy of original path if canonicalization fails
+ */
+
+static char *
+mc_shell_canonicalize_path (const char *path)
+{
+    char *resolved;
+
+    if (path == NULL)
+        return NULL;
+
+    resolved = realpath (path, NULL);
+    
+    /* If realpath fails (e.g., file doesn't exist), return copy of original */
+    return (resolved != NULL) ? resolved : g_strdup (path);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -110,7 +132,6 @@ static char *
 mc_shell_get_name_env (void)
 {
     char *shell_name = NULL;
-
     const char *shell_env = g_getenv ("SHELL");
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
@@ -120,10 +141,21 @@ mc_shell_get_name_env (void)
             shell_name = g_strdup (pwd->pw_shell);
     }
     else
+    {
         // 1st choice: SHELL environment variable
         shell_name = g_strdup (shell_env);
+    }
+
+    /* Canonicalize path to handle UsrMerge symlinks (/bin -> /usr/bin) */
+    if (shell_name != NULL)
+    {
+        char *canonical = mc_shell_canonicalize_path (shell_name);
+        g_free (shell_name);
+        shell_name = canonical;
+    }
 
     return shell_name;
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
