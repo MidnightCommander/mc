@@ -1,22 +1,54 @@
 # TOML: Tom's Obvious Minimal Language
+#
+# Specification: https://toml.io/en/v1.1.0
 
-context default white
+define table   yellow
+define key     cyan
+define equal   white
+define brace   brightcyan
+define bool    cyan
+define number  cyan
+define string  green
+define escape  brightgreen
+define comment brown
 
-# groups
-context [ \n brown
-    keyword [ yellow
-    keyword ] yellow
+context default
+    keyword linestart \[\t\s\][[*]] table
+    keyword linestart \[\t\s\][*] table
 
-# assignment
-context exclusive = \n write
-    keyword "*" brightgreen
-    keyword whole false brightcyan
-    keyword whole true brightcyan
-    keyword \{0123456789\} brightcyan
+    keyword = equal
+    keyword [ brace
+    keyword ] brace
+    keyword { brace
+    keyword } brace
 
-# comments
-context # \n brown
+    keyword linestart \[\t\s\]\{0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-.\] key
+
+    keyword whole true bool
+    keyword whole false bool
+
+    keyword whole inf number
+    keyword whole nan number
+
+    keyword whole 0\{box\}\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef_\] number
+    keyword whole \{0123456789\}\[0123456789_\]\{eE\}\[0123456789_\] number
+    keyword whole \{0123456789\}\[0123456789_\] number
+
+context # \n comment
     spellcheck
 
-# other strings
-context " " brightgreen
+context """ """ string
+    keyword \\" escape
+    keyword \\\\ escape
+    keyword \\\{uU\}\[0123456789\] escape
+    keyword \\\{bfnrt\} escape
+
+context ''' ''' string
+
+context " " string
+    keyword \\" escape
+    keyword \\\\ escape
+    keyword \\\{uU\}\[0123456789\] escape
+    keyword \\\{bfnrt\} escape
+
+context ' ' string
