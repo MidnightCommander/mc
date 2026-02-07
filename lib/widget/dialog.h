@@ -89,10 +89,8 @@ struct WDialog
 /*** global variables defined in .c file *********************************************************/
 
 /* Color styles for normal and error dialogs */
-extern dlg_colors_t dialog_colors;
-extern dlg_colors_t alarm_colors;
-extern dlg_colors_t listbox_colors;
-extern dlg_colors_t help_colors;
+extern const dlg_colors_t dialog_colors;
+extern const dlg_colors_t alarm_colors;
 
 /* A hook list for idle events */
 extern hook_t *idle_hook;
@@ -108,8 +106,6 @@ WDialog *dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
                      widget_pos_flags_t pos_flags, gboolean compact, const int *colors,
                      widget_cb_fn callback, widget_mouse_cb_fn mouse_callback, const char *help_ctx,
                      const char *title);
-
-void dlg_set_default_colors (void);
 
 void dlg_init (WDialog *h);
 int dlg_run (WDialog *d);

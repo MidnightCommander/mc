@@ -293,14 +293,14 @@ mc_fhl_get_color (const mc_fhl_t *fhl, const file_entry_t *fe)
         {
         case MC_FLHGH_T_FTYPE:
             ret = mc_fhl_get_color_filetype (mc_filter, fhl, fe);
-            if (ret > 0)
-                return -ret;
+            if (ret >= 0)
+                return ret;
             break;
         case MC_FLHGH_T_EXT:
         case MC_FLHGH_T_FREGEXP:
             ret = mc_fhl_get_color_regexp (mc_filter, fhl, fe);
-            if (ret > 0)
-                return -ret;
+            if (ret >= 0)
+                return ret;
             break;
         default:
             break;

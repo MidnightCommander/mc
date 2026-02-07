@@ -35,8 +35,6 @@
 
 /*** global variables ****************************************************************************/
 
-int mc_skin_color__cache[MC_SKIN_COLOR_CACHE_COUNT];
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -241,99 +239,110 @@ mc_skin_color_set_default_for_terminal (mc_skin_t *mc_skin)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/*
+ * Helper for mc_skin_color_cache_init ()
+ */
+static inline void
+mc_skin_one_color_init (int color_role, const char *group, const char *key)
+{
+    tty_color_role_to_pair[color_role - COLOR_MAP_OFFSET] = mc_skin_color_get (group, key);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 mc_skin_color_cache_init (void)
 {
-    CORE_DEFAULT_COLOR = mc_skin_color_get ("skin", "terminal_default_color");
-    CORE_NORMAL_COLOR = mc_skin_color_get ("core", "_default_");
-    CORE_MARKED_COLOR = mc_skin_color_get ("core", "marked");
-    CORE_SELECTED_COLOR = mc_skin_color_get ("core", "selected");
-    CORE_MARKED_SELECTED_COLOR = mc_skin_color_get ("core", "markselect");
-    CORE_DISABLED_COLOR = mc_skin_color_get ("core", "disabled");
-    CORE_REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
-    CORE_HEADER_COLOR = mc_skin_color_get ("core", "header");
-    CORE_COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");
-    CORE_SHADOW_COLOR = mc_skin_color_get ("core", "shadow");
-    CORE_FRAME_COLOR = mc_skin_color_get ("core", "frame");
+    mc_skin_one_color_init (CORE_DEFAULT_COLOR, "skin", "terminal_default_color");
+    mc_skin_one_color_init (CORE_NORMAL_COLOR, "core", "_default_");
+    mc_skin_one_color_init (CORE_MARKED_COLOR, "core", "marked");
+    mc_skin_one_color_init (CORE_SELECTED_COLOR, "core", "selected");
+    mc_skin_one_color_init (CORE_MARKED_SELECTED_COLOR, "core", "markselect");
+    mc_skin_one_color_init (CORE_DISABLED_COLOR, "core", "disabled");
+    mc_skin_one_color_init (CORE_REVERSE_COLOR, "core", "reverse");
+    mc_skin_one_color_init (CORE_HEADER_COLOR, "core", "header");
+    mc_skin_one_color_init (CORE_COMMAND_MARK_COLOR, "core", "commandlinemark");
+    mc_skin_one_color_init (CORE_SHADOW_COLOR, "core", "shadow");
+    mc_skin_one_color_init (CORE_FRAME_COLOR, "core", "frame");
 
-    DIALOG_NORMAL_COLOR = mc_skin_color_get ("dialog", "_default_");
-    DIALOG_FOCUS_COLOR = mc_skin_color_get ("dialog", "dfocus");
-    DIALOG_HOT_NORMAL_COLOR = mc_skin_color_get ("dialog", "dhotnormal");
-    DIALOG_HOT_FOCUS_COLOR = mc_skin_color_get ("dialog", "dhotfocus");
-    DIALOG_SELECTED_NORMAL_COLOR = mc_skin_color_get ("dialog", "dselnormal");
-    DIALOG_SELECTED_FOCUS_COLOR = mc_skin_color_get ("dialog", "dselfocus");
-    DIALOG_TITLE_COLOR = mc_skin_color_get ("dialog", "dtitle");
-    DIALOG_FRAME_COLOR = mc_skin_color_get ("dialog", "dframe");
+    mc_skin_one_color_init (DIALOG_NORMAL_COLOR, "dialog", "_default_");
+    mc_skin_one_color_init (DIALOG_FOCUS_COLOR, "dialog", "dfocus");
+    mc_skin_one_color_init (DIALOG_HOT_NORMAL_COLOR, "dialog", "dhotnormal");
+    mc_skin_one_color_init (DIALOG_HOT_FOCUS_COLOR, "dialog", "dhotfocus");
+    mc_skin_one_color_init (DIALOG_SELECTED_NORMAL_COLOR, "dialog", "dselnormal");
+    mc_skin_one_color_init (DIALOG_SELECTED_FOCUS_COLOR, "dialog", "dselfocus");
+    mc_skin_one_color_init (DIALOG_TITLE_COLOR, "dialog", "dtitle");
+    mc_skin_one_color_init (DIALOG_FRAME_COLOR, "dialog", "dframe");
 
-    ERROR_NORMAL_COLOR = mc_skin_color_get ("error", "_default_");
-    ERROR_FOCUS_COLOR = mc_skin_color_get ("error", "errdfocus");
-    ERROR_HOT_NORMAL_COLOR = mc_skin_color_get ("error", "errdhotnormal");
-    ERROR_HOT_FOCUS_COLOR = mc_skin_color_get ("error", "errdhotfocus");
-    ERROR_TITLE_COLOR = mc_skin_color_get ("error", "errdtitle");
-    ERROR_FRAME_COLOR = mc_skin_color_get ("error", "errdframe");
+    mc_skin_one_color_init (ERROR_NORMAL_COLOR, "error", "_default_");
+    mc_skin_one_color_init (ERROR_FOCUS_COLOR, "error", "errdfocus");
+    mc_skin_one_color_init (ERROR_HOT_NORMAL_COLOR, "error", "errdhotnormal");
+    mc_skin_one_color_init (ERROR_HOT_FOCUS_COLOR, "error", "errdhotfocus");
+    mc_skin_one_color_init (ERROR_TITLE_COLOR, "error", "errdtitle");
+    mc_skin_one_color_init (ERROR_FRAME_COLOR, "error", "errdframe");
 
-    MENU_ENTRY_COLOR = mc_skin_color_get ("menu", "_default_");
-    MENU_SELECTED_COLOR = mc_skin_color_get ("menu", "menusel");
-    MENU_HOT_COLOR = mc_skin_color_get ("menu", "menuhot");
-    MENU_HOTSEL_COLOR = mc_skin_color_get ("menu", "menuhotsel");
-    MENU_INACTIVE_COLOR = mc_skin_color_get ("menu", "menuinactive");
-    MENU_FRAME_COLOR = mc_skin_color_get ("menu", "menuframe");
+    mc_skin_one_color_init (FILEHIGHLIGHT_DEFAULT_COLOR, "filehighlight", "_default_");
 
-    PMENU_ENTRY_COLOR = mc_skin_color_get ("popupmenu", "_default_");
-    PMENU_SELECTED_COLOR = mc_skin_color_get ("popupmenu", "menusel");
-    PMENU_TITLE_COLOR = mc_skin_color_get ("popupmenu", "menutitle");
-    PMENU_FRAME_COLOR = mc_skin_color_get ("popupmenu", "menuframe");
+    mc_skin_one_color_init (MENU_ENTRY_COLOR, "menu", "_default_");
+    mc_skin_one_color_init (MENU_SELECTED_COLOR, "menu", "menusel");
+    mc_skin_one_color_init (MENU_HOT_COLOR, "menu", "menuhot");
+    mc_skin_one_color_init (MENU_HOTSEL_COLOR, "menu", "menuhotsel");
+    mc_skin_one_color_init (MENU_INACTIVE_COLOR, "menu", "menuinactive");
+    mc_skin_one_color_init (MENU_FRAME_COLOR, "menu", "menuframe");
 
-    BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
-    BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
+    mc_skin_one_color_init (PMENU_ENTRY_COLOR, "popupmenu", "_default_");
+    mc_skin_one_color_init (PMENU_SELECTED_COLOR, "popupmenu", "menusel");
+    mc_skin_one_color_init (PMENU_TITLE_COLOR, "popupmenu", "menutitle");
+    mc_skin_one_color_init (PMENU_FRAME_COLOR, "popupmenu", "menuframe");
 
-    STATUSBAR_COLOR = mc_skin_color_get ("statusbar", "_default_");
+    mc_skin_one_color_init (BUTTONBAR_HOTKEY_COLOR, "buttonbar", "hotkey");
+    mc_skin_one_color_init (BUTTONBAR_BUTTON_COLOR, "buttonbar", "button");
 
-    CORE_GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
-    CORE_INPUT_COLOR = mc_skin_color_get ("core", "input");
-    CORE_INPUT_HISTORY_COLOR = mc_skin_color_get ("core", "inputhistory");
-    CORE_COMMAND_HISTORY_COLOR = mc_skin_color_get ("core", "commandhistory");
-    CORE_INPUT_MARK_COLOR = mc_skin_color_get ("core", "inputmark");
-    CORE_INPUT_UNCHANGED_COLOR = mc_skin_color_get ("core", "inputunchanged");
+    mc_skin_one_color_init (STATUSBAR_COLOR, "statusbar", "_default_");
 
-    HELP_NORMAL_COLOR = mc_skin_color_get ("help", "_default_");
-    HELP_ITALIC_COLOR = mc_skin_color_get ("help", "helpitalic");
-    HELP_BOLD_COLOR = mc_skin_color_get ("help", "helpbold");
-    HELP_LINK_COLOR = mc_skin_color_get ("help", "helplink");
-    HELP_SLINK_COLOR = mc_skin_color_get ("help", "helpslink");
-    HELP_TITLE_COLOR = mc_skin_color_get ("help", "helptitle");
-    HELP_FRAME_COLOR = mc_skin_color_get ("help", "helpframe");
+    mc_skin_one_color_init (CORE_GAUGE_COLOR, "core", "gauge");
+    mc_skin_one_color_init (CORE_INPUT_COLOR, "core", "input");
+    mc_skin_one_color_init (CORE_INPUT_HISTORY_COLOR, "core", "inputhistory");
+    mc_skin_one_color_init (CORE_COMMAND_HISTORY_COLOR, "core", "commandhistory");
+    mc_skin_one_color_init (CORE_INPUT_MARK_COLOR, "core", "inputmark");
+    mc_skin_one_color_init (CORE_INPUT_UNCHANGED_COLOR, "core", "inputunchanged");
 
-    VIEWER_NORMAL_COLOR = mc_skin_color_get ("viewer", "_default_");
-    VIEWER_BOLD_COLOR = mc_skin_color_get ("viewer", "viewbold");
-    VIEWER_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewunderline");
-    VIEWER_BOLD_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewboldunderline");
-    VIEWER_SELECTED_COLOR = mc_skin_color_get ("viewer", "viewselected");
-    VIEWER_FRAME_COLOR = mc_skin_color_get ("viewer", "viewframe");
+    mc_skin_one_color_init (HELP_NORMAL_COLOR, "help", "_default_");
+    mc_skin_one_color_init (HELP_ITALIC_COLOR, "help", "helpitalic");
+    mc_skin_one_color_init (HELP_BOLD_COLOR, "help", "helpbold");
+    mc_skin_one_color_init (HELP_LINK_COLOR, "help", "helplink");
+    mc_skin_one_color_init (HELP_SLINK_COLOR, "help", "helpslink");
+    mc_skin_one_color_init (HELP_TITLE_COLOR, "help", "helptitle");
+    mc_skin_one_color_init (HELP_FRAME_COLOR, "help", "helpframe");
 
-    EDITOR_NORMAL_COLOR = mc_skin_color_get ("editor", "_default_");
-    EDITOR_BOLD_COLOR = mc_skin_color_get ("editor", "editbold");
-    EDITOR_MARKED_COLOR = mc_skin_color_get ("editor", "editmarked");
-    EDITOR_WHITESPACE_COLOR = mc_skin_color_get ("editor", "editwhitespace");
-    EDITOR_NONPRINTABLE_COLOR = mc_skin_color_get ("editor", "editnonprintable");
-    EDITOR_RIGHT_MARGIN_COLOR = mc_skin_color_get ("editor", "editrightmargin");
-    EDITOR_LINE_STATE_COLOR = mc_skin_color_get ("editor", "editlinestate");
-    EDITOR_BACKGROUND_COLOR = mc_skin_color_get ("editor", "editbg");
-    EDITOR_FRAME_COLOR = mc_skin_color_get ("editor", "editframe");
-    EDITOR_FRAME_ACTIVE_COLOR = mc_skin_color_get ("editor", "editframeactive");
-    EDITOR_FRAME_DRAG_COLOR = mc_skin_color_get ("editor", "editframedrag");
+    mc_skin_one_color_init (VIEWER_NORMAL_COLOR, "viewer", "_default_");
+    mc_skin_one_color_init (VIEWER_BOLD_COLOR, "viewer", "viewbold");
+    mc_skin_one_color_init (VIEWER_UNDERLINED_COLOR, "viewer", "viewunderline");
+    mc_skin_one_color_init (VIEWER_BOLD_UNDERLINED_COLOR, "viewer", "viewboldunderline");
+    mc_skin_one_color_init (VIEWER_SELECTED_COLOR, "viewer", "viewselected");
+    mc_skin_one_color_init (VIEWER_FRAME_COLOR, "viewer", "viewframe");
 
-    EDITOR_BOOKMARK_COLOR = mc_skin_color_get ("editor", "bookmark");
-    EDITOR_BOOKMARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");
+    mc_skin_one_color_init (EDITOR_NORMAL_COLOR, "editor", "_default_");
+    mc_skin_one_color_init (EDITOR_BOLD_COLOR, "editor", "editbold");
+    mc_skin_one_color_init (EDITOR_MARKED_COLOR, "editor", "editmarked");
+    mc_skin_one_color_init (EDITOR_WHITESPACE_COLOR, "editor", "editwhitespace");
+    mc_skin_one_color_init (EDITOR_NONPRINTABLE_COLOR, "editor", "editnonprintable");
+    mc_skin_one_color_init (EDITOR_RIGHT_MARGIN_COLOR, "editor", "editrightmargin");
+    mc_skin_one_color_init (EDITOR_LINE_STATE_COLOR, "editor", "editlinestate");
+    mc_skin_one_color_init (EDITOR_BACKGROUND_COLOR, "editor", "editbg");
+    mc_skin_one_color_init (EDITOR_FRAME_COLOR, "editor", "editframe");
+    mc_skin_one_color_init (EDITOR_FRAME_ACTIVE_COLOR, "editor", "editframeactive");
+    mc_skin_one_color_init (EDITOR_FRAME_DRAG_COLOR, "editor", "editframedrag");
 
-    DIFFVIEWER_ADDED_COLOR = mc_skin_color_get ("diffviewer", "added");
-    DIFFVIEWER_CHANGEDLINE_COLOR = mc_skin_color_get ("diffviewer", "changedline");
-    DIFFVIEWER_CHANGEDNEW_COLOR = mc_skin_color_get ("diffviewer", "changednew");
-    DIFFVIEWER_CHANGED_COLOR = mc_skin_color_get ("diffviewer", "changed");
-    DIFFVIEWER_REMOVED_COLOR = mc_skin_color_get ("diffviewer", "removed");
-    DIFFVIEWER_ERROR_COLOR = mc_skin_color_get ("diffviewer", "error");
+    mc_skin_one_color_init (EDITOR_BOOKMARK_COLOR, "editor", "bookmark");
+    mc_skin_one_color_init (EDITOR_BOOKMARK_FOUND_COLOR, "editor", "bookmarkfound");
 
-    FILEHIGHLIGHT_DEFAULT_COLOR = mc_skin_color_get ("filehighlight", "_default_");
+    mc_skin_one_color_init (DIFFVIEWER_ADDED_COLOR, "diffviewer", "added");
+    mc_skin_one_color_init (DIFFVIEWER_CHANGEDLINE_COLOR, "diffviewer", "changedline");
+    mc_skin_one_color_init (DIFFVIEWER_CHANGEDNEW_COLOR, "diffviewer", "changednew");
+    mc_skin_one_color_init (DIFFVIEWER_CHANGED_COLOR, "diffviewer", "changed");
+    mc_skin_one_color_init (DIFFVIEWER_REMOVED_COLOR, "diffviewer", "removed");
+    mc_skin_one_color_init (DIFFVIEWER_ERROR_COLOR, "diffviewer", "error");
 }
 
 /* --------------------------------------------------------------------------------------------- */

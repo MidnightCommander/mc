@@ -43,10 +43,26 @@
 /*** global variables ****************************************************************************/
 
 /* Color styles for normal and error dialogs */
-dlg_colors_t dialog_colors;
-dlg_colors_t alarm_colors;
-dlg_colors_t listbox_colors;
-dlg_colors_t help_colors;
+const dlg_colors_t dialog_colors = {
+    [DLG_COLOR_NORMAL] = DIALOG_NORMAL_COLOR,
+    [DLG_COLOR_FOCUS] = DIALOG_FOCUS_COLOR,
+    [DLG_COLOR_HOT_NORMAL] = DIALOG_HOT_NORMAL_COLOR,
+    [DLG_COLOR_HOT_FOCUS] = DIALOG_HOT_FOCUS_COLOR,
+    [DLG_COLOR_SELECTED_NORMAL] = DIALOG_SELECTED_NORMAL_COLOR,
+    [DLG_COLOR_SELECTED_FOCUS] = DIALOG_SELECTED_FOCUS_COLOR,
+    [DLG_COLOR_TITLE] = DIALOG_TITLE_COLOR,
+    [DLG_COLOR_FRAME] = DIALOG_FRAME_COLOR,
+};
+const dlg_colors_t alarm_colors = {
+    [DLG_COLOR_NORMAL] = ERROR_NORMAL_COLOR,
+    [DLG_COLOR_FOCUS] = ERROR_FOCUS_COLOR,
+    [DLG_COLOR_HOT_NORMAL] = ERROR_HOT_NORMAL_COLOR,
+    [DLG_COLOR_HOT_FOCUS] = ERROR_HOT_FOCUS_COLOR,
+    [DLG_COLOR_SELECTED_NORMAL] = ERROR_HOT_FOCUS_COLOR,  // unused
+    [DLG_COLOR_SELECTED_FOCUS] = ERROR_FOCUS_COLOR,       // unused
+    [DLG_COLOR_TITLE] = ERROR_TITLE_COLOR,
+    [DLG_COLOR_FRAME] = ERROR_FRAME_COLOR,
+};
 
 /* A hook list for idle events */
 hook_t *idle_hook = NULL;
@@ -414,48 +430,6 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
 
     return new_d;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-dlg_set_default_colors (void)
-{
-    dialog_colors[DLG_COLOR_NORMAL] = DIALOG_NORMAL_COLOR;
-    dialog_colors[DLG_COLOR_FOCUS] = DIALOG_FOCUS_COLOR;
-    dialog_colors[DLG_COLOR_HOT_NORMAL] = DIALOG_HOT_NORMAL_COLOR;
-    dialog_colors[DLG_COLOR_HOT_FOCUS] = DIALOG_HOT_FOCUS_COLOR;
-    dialog_colors[DLG_COLOR_SELECTED_NORMAL] = DIALOG_SELECTED_NORMAL_COLOR;
-    dialog_colors[DLG_COLOR_SELECTED_FOCUS] = DIALOG_SELECTED_FOCUS_COLOR;
-    dialog_colors[DLG_COLOR_TITLE] = DIALOG_TITLE_COLOR;
-    dialog_colors[DLG_COLOR_FRAME] = DIALOG_FRAME_COLOR;
-
-    alarm_colors[DLG_COLOR_NORMAL] = ERROR_NORMAL_COLOR;
-    alarm_colors[DLG_COLOR_FOCUS] = ERROR_FOCUS_COLOR;
-    alarm_colors[DLG_COLOR_HOT_NORMAL] = ERROR_HOT_NORMAL_COLOR;
-    alarm_colors[DLG_COLOR_HOT_FOCUS] = ERROR_HOT_FOCUS_COLOR;
-    alarm_colors[DLG_COLOR_SELECTED_NORMAL] = ERROR_HOT_FOCUS_COLOR;  // unused
-    alarm_colors[DLG_COLOR_SELECTED_FOCUS] = ERROR_FOCUS_COLOR;       // unused
-    alarm_colors[DLG_COLOR_TITLE] = ERROR_TITLE_COLOR;
-    alarm_colors[DLG_COLOR_FRAME] = ERROR_FRAME_COLOR;
-
-    listbox_colors[DLG_COLOR_NORMAL] = PMENU_ENTRY_COLOR;
-    listbox_colors[DLG_COLOR_FOCUS] = PMENU_SELECTED_COLOR;
-    listbox_colors[DLG_COLOR_HOT_NORMAL] = PMENU_ENTRY_COLOR;
-    listbox_colors[DLG_COLOR_HOT_FOCUS] = PMENU_SELECTED_COLOR;
-    listbox_colors[DLG_COLOR_SELECTED_NORMAL] = PMENU_SELECTED_COLOR;  // unused
-    listbox_colors[DLG_COLOR_SELECTED_FOCUS] = PMENU_SELECTED_COLOR;   // unused
-    listbox_colors[DLG_COLOR_TITLE] = PMENU_TITLE_COLOR;
-    listbox_colors[DLG_COLOR_FRAME] = PMENU_FRAME_COLOR;
-
-    help_colors[DLG_COLOR_NORMAL] = HELP_NORMAL_COLOR;
-    help_colors[DLG_COLOR_FOCUS] = 0;  // unused
-    help_colors[DLG_COLOR_HOT_NORMAL] = HELP_BOLD_COLOR;
-    help_colors[DLG_COLOR_HOT_FOCUS] = 0;        // unused
-    help_colors[DLG_COLOR_SELECTED_NORMAL] = 0;  // unused
-    help_colors[DLG_COLOR_SELECTED_FOCUS] = 0;   // unused
-    help_colors[DLG_COLOR_TITLE] = HELP_TITLE_COLOR;
-    help_colors[DLG_COLOR_FRAME] = HELP_FRAME_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */
