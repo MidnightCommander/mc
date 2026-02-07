@@ -369,5 +369,8 @@ include dockerfile.syntax
 file (/Kconfig(\\.[A-z0-9-]\+)\*|/Config\\.(in|src)(\\.[A-z0-9-]\+)\*|.\*\\.kconf(ig)?)$ Kconfig
 include kconfig.syntax
 
+file ..\*(\\.config(\\.[A-z0-9-]\+)\*|defconfig)$ Kconfig\soutput
+include properties.syntax
+
 file .\* unknown
 include unknown.syntax
