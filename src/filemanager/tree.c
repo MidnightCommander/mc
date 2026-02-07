@@ -58,6 +58,7 @@
 #include "src/setup.h"  // confirm_delete, panels_options
 #include "src/keymap.h"
 #include "src/history.h"
+#include "src/util.h"  // file_error_message()
 
 #include "dir.h"
 #include "filemanager.h"  // the_menubar
@@ -238,7 +239,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
     if (tree->searching)
     {
         // Show search string
-        tty_setcolor (INPUT_COLOR);
+        tty_setcolor (CORE_INPUT_COLOR);
         tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_char (PATH_SEP);
@@ -252,7 +253,7 @@ tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
         const int *colors;
 
         colors = widget_get_colors (w);
-        tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_setcolor (tree->is_panel ? CORE_NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
         tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_string (
@@ -338,7 +339,7 @@ show_tree (WTree *tree)
         const int *colors;
 
         colors = widget_get_colors (w);
-        tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_setcolor (tree->is_panel ? CORE_NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
 
         // Move to the beginning of the line
         tty_draw_hline (w->rect.y + y + i, w->rect.x + x, ' ', tree_cols);
@@ -351,7 +352,7 @@ show_tree (WTree *tree)
             gboolean selected;
 
             selected = widget_get_state (w, WST_FOCUSED) && current == tree->selected_ptr;
-            tty_setcolor (selected ? SELECTED_COLOR : NORMAL_COLOR);
+            tty_setcolor (selected ? CORE_SELECTED_COLOR : CORE_NORMAL_COLOR);
         }
         else
         {
@@ -367,9 +368,6 @@ show_tree (WTree *tree)
                                                tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
         else
         {
-            // Sub level directory
-            tty_set_alt_charset (TRUE);
-
             // Output branch parts
             for (j = 0; j < current->sublevel - topsublevel - 1; j++)
             {
@@ -377,7 +375,7 @@ show_tree (WTree *tree)
                     break;
                 tty_print_char (' ');
                 if ((current->submask & (1 << (j + topsublevel + 1))) != 0)
-                    tty_print_char (ACS_VLINE);
+                    tty_print_char (mc_tty_frm[MC_TTY_FRM_VERT]);
                 else
                     tty_print_char (' ');
                 tty_print_char (' ');
@@ -385,11 +383,10 @@ show_tree (WTree *tree)
             tty_print_char (' ');
             j++;
             if (current->next == NULL || (current->next->submask & (1 << current->sublevel)) == 0)
-                tty_print_char (ACS_LLCORNER);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_LEFTBOTTOM]);
             else
-                tty_print_char (ACS_LTEE);
-            tty_print_char (ACS_HLINE);
-            tty_set_alt_charset (FALSE);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_LEFTMIDDLE]);
+            tty_print_char (mc_tty_frm[MC_TTY_FRM_HORIZ]);
 
             // Show sub-name
             tty_print_char (' ');
@@ -758,10 +755,12 @@ tree_move (WTree *tree, const char *default_dest)
         dest_vpath = vfs_path_from_str (dest);
 
         if (mc_stat (dest_vpath, &buf) != 0)
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat the destination\n%s"),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat the destination\n%s"), dest);
         else if (!S_ISDIR (buf.st_mode))
-            file_error (NULL, TRUE, _ ("Destination \"%s\" must be a directory\n%s"), dest);
+        {
+            errno = ENOTDIR;
+            file_error_message (_ ("Destination\n%s\nmust be a directory"), dest);
+        }
         else
         {
             file_op_context_t *ctx;
@@ -1112,17 +1111,15 @@ tree_frame (WDialog *h, WTree *tree)
 
     (void) h;
 
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
     widget_erase (w);
     if (tree->is_panel)
     {
         const char *title = _ ("Directory tree");
         const int len = str_term_width1 (title);
 
+        tty_setcolor (CORE_FRAME_COLOR);
         tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
-
-        widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
-        tty_printf (" %s ", title);
 
         if (panels_options.show_mini_info)
         {
@@ -1130,11 +1127,18 @@ tree_frame (WDialog *h, WTree *tree)
 
             y = w->rect.lines - 3;
             widget_gotoyx (w, y, 0);
-            tty_print_alt_char (ACS_LTEE, FALSE);
+            tty_print_char (mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE]);
             widget_gotoyx (w, y, w->rect.cols - 1);
-            tty_print_alt_char (ACS_RTEE, FALSE);
-            tty_draw_hline (w->rect.y + y, w->rect.x + 1, ACS_HLINE, w->rect.cols - 2);
+            tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE]);
+            tty_draw_hline (w->rect.y + y, w->rect.x + 1, mc_tty_frm[MC_TTY_FRM_HORIZ],
+                            w->rect.cols - 2);
         }
+
+        const gboolean focused = widget_get_state (w, WST_FOCUSED);
+
+        tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_NORMAL_COLOR);
+        widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
+        tty_printf (" %s ", title);
     }
 }
 

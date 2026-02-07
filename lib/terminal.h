@@ -16,18 +16,18 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct csi_command_t
+typedef struct
 {
     char private_mode;
     uint32_t params[16][4];
     size_t param_count;
-};
+} csi_command_t;
 
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-gboolean parse_csi (struct csi_command_t *out, const char **sptr, const char *end);
+gboolean parse_csi (csi_command_t *out, const char **sptr, const char *end);
 
 char *strip_ctrl_codes (char *s);
 

@@ -50,6 +50,8 @@ gchar **mc_config_get_keys (const mc_config_t *mc_config, const gchar *group, gs
 
 gchar *mc_config_get_string (mc_config_t *mc_config, const gchar *group, const gchar *param,
                              const gchar *def);
+gchar *mc_config_get_string_strict (mc_config_t *mc_config, const gchar *group, const gchar *param,
+                                    const gchar *def);
 MC_MOCKABLE gchar *mc_config_get_string_raw (mc_config_t *mc_config, const gchar *group,
                                              const gchar *param, const gchar *def);
 gboolean mc_config_get_bool (mc_config_t *mc_config, const gchar *group, const gchar *param,

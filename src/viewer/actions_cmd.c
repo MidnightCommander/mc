@@ -363,6 +363,18 @@ mcview_load_file_from_history (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+mcview_help (const WView *view)
+{
+    ev_help_t event_data = { NULL, "[Internal File Viewer]" };
+
+    (void) view;
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 mcview_execute_cmd (WView *view, long command)
 {
@@ -370,6 +382,9 @@ mcview_execute_cmd (WView *view, long command)
 
     switch (command)
     {
+    case CK_Help:
+        mcview_help (view);
+        break;
     case CK_HexMode:
         // Toggle between hex view and text view
         mcview_toggle_hex_mode (view);
@@ -594,13 +609,16 @@ mcview_ok_to_quit (WView *view)
     {
         query_set_sel (2);
         r = query_dialog (_ ("Quit"), _ ("File was modified. Save with exit?"), D_NORMAL, 3,
-                          _ ("&Yes"), _ ("&No"), _ ("&Cancel quit"));
+                          _ ("&Yes"), _ ("&No"), _ ("&Cancel"));
     }
     else
     {
-        r = query_dialog (_ ("Quit"),
-                          _ ("Midnight Commander is being shut down.\nSave modified file?"),
-                          D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+        char *text;
+
+        text = g_strdup_printf (_ ("%s is being shut down.\nSave modified file?"), PACKAGE_NAME);
+        r = query_dialog (_ ("Quit"), text, D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+        g_free (text);
+
         // Esc is No
         if (r == -1)
             r = 1;
@@ -641,6 +659,8 @@ mcview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
         return MSG_HANDLED;
 
     case MSG_DRAW:
+        if (mcview_is_in_panel (view))
+            mcview_display_frame (view);
         mcview_display (view);
         return MSG_HANDLED;
 

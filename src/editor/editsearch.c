@@ -33,7 +33,7 @@
 #include "lib/charsets.h"  // cp_source
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/skin.h"  // BOOK_MARK_FOUND_COLOR
+#include "lib/skin.h"  // EDITOR_BOOKMARK_FOUND_COLOR
 
 #include "src/history.h"  // MC_HISTORY_SHARED_SEARCH
 #include "src/setup.h"    // verbose
@@ -86,7 +86,7 @@ edit_dialog_search_show (WEdit *edit)
     {
         quick_widget_t quick_widgets[] = {
             // clang-format off
-            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
+            QUICK_LABELED_INPUT (_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
                                  MC_HISTORY_SHARED_SEARCH, &search_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
@@ -94,16 +94,16 @@ edit_dialog_search_show (WEdit *edit)
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &edit_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
-                QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
-                QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (_ ("&Backwards"), &edit_search_options.backwards, NULL),
+                QUICK_CHECKBOX (_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
+                QUICK_CHECKBOX (_ ("&Whole words"), &edit_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Find all"), B_USER, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
+                QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (_ ("&Find all"), B_USER, NULL, NULL),
+                QUICK_BUTTON (_ ("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END,
             // clang-format on
         };
@@ -112,7 +112,7 @@ edit_dialog_search_show (WEdit *edit)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Search"),
+            .title = _ ("Search"),
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
@@ -276,19 +276,8 @@ edit_search_fix_search_start_if_selection (WEdit *edit)
     if (!edit_search_options.only_in_selection)
         return;
 
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    if (edit_search_options.backwards)
-    {
-        if (edit->search_start > end_mark || edit->search_start <= start_mark)
-            edit->search_start = end_mark;
-    }
-    else
-    {
-        if (edit->search_start < start_mark || edit->search_start >= end_mark)
-            edit->search_start = start_mark;
-    }
+    if (eval_marks (edit, &start_mark, &end_mark))
+        edit->search_start = edit_search_options.backwards ? end_mark : start_mark;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -299,7 +288,6 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     WEdit *edit = esm->edit;
     edit_buffer_t *buf = &edit->buffer;
     off_t search_start = edit->search_start;
-    off_t search_end;
     off_t start_mark = 0;
     off_t end_mark = buf->size;
     gboolean start_from_next_line = FALSE;
@@ -323,12 +311,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
             const off_t bol =
                 edit_calculate_start_of_current_line (buf, search_start, end_string_symbol);
 
-            if (search_start != bol)
-            {
-                start_mark = edit_calculate_start_of_next_line (buf, start_mark, buf->size,
-                                                                end_string_symbol);
-                start_from_next_line = TRUE;
-            }
+            start_from_next_line = search_start != bol;
         }
 
         if ((edit->search_line_type & MC_SEARCH_LINE_END) != 0
@@ -336,7 +319,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
                 || edit_buffer_get_byte (buf, end_mark) != end_string_symbol))
             end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
 
-        if (start_mark >= end_mark)
+        // in case of backward search, cursor posision could be anywhere
+        if (!edit_search_options.backwards && search_start >= end_mark)
         {
             mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _ (STR_E_NOTFOUND));
             return FALSE;
@@ -357,7 +341,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     if (edit_search_options.backwards)
     {
         // backward search
-        search_end = end_mark;
+
+        off_t search_end = end_mark;
 
         if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
             search_start =
@@ -395,12 +380,30 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     // forward search
 
     // correct end_mark if cursor is in column 0: move end_mark to the end of previous line
-    if (end_mark == edit_calculate_start_of_current_line (buf, end_mark, end_string_symbol))
+    if (edit_search_options.only_in_selection
+        && end_mark == edit_calculate_start_of_current_line (buf, end_mark, end_string_symbol))
+    {
         end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
+
+        // update bottom marker
+        if (edit->mark2 >= 0 && edit->mark2 != edit->mark1)
+        {
+            if (edit->mark2 > edit->mark1)
+                edit->mark2 = end_mark;
+            else
+                edit->mark1 = end_mark;
+        }
+    }
 
     if (start_from_next_line)
         search_start =
             edit_calculate_start_of_next_line (buf, search_start, end_mark, end_string_symbol);
+
+    if (search_start >= end_mark)
+    {
+        mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _ (STR_E_NOTFOUND));
+        return FALSE;
+    }
 
     return mc_search_run (edit->search, (void *) esm, search_start, end_mark, len);
 }
@@ -489,7 +492,7 @@ edit_do_search (WEdit *edit)
 
             l += edit_buffer_count_lines (&edit->buffer, q, edit->search->normal_offset);
             if (l != l_last)
-                book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
+                book_mark_insert (edit, l, EDITOR_BOOKMARK_FOUND_COLOR);
             l_last = l;
             q = edit->search->normal_offset + 1;
         }
@@ -690,10 +693,10 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
     {
         quick_widget_t quick_widgets[] = {
             // clang-format off
-            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, search_default,
+            QUICK_LABELED_INPUT (_ ("Enter search string:"), input_label_above, search_default,
                                  MC_HISTORY_SHARED_SEARCH, search_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
-            QUICK_LABELED_INPUT (N_ ("Enter replacement string:"), input_label_above,
+            QUICK_LABELED_INPUT (_ ("Enter replacement string:"), input_label_above,
                                  replace_default, "replace", replace_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
@@ -701,11 +704,11 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &edit_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_ ("&Backwards"), &edit_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
-                QUICK_CHECKBOX (N_ ("&Whole words"), &edit_search_options.whole_words, NULL),
-                QUICK_CHECKBOX (N_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("Cas&e sensitive"), &edit_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (_ ("&Backwards"), &edit_search_options.backwards, NULL),
+                QUICK_CHECKBOX (_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
+                QUICK_CHECKBOX (_ ("&Whole words"), &edit_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
@@ -716,7 +719,7 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Replace"),
+            .title = _ ("Replace"),
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
@@ -770,13 +773,13 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
         quick_widget_t quick_widgets[] = {
             // clang-format off
             QUICK_LABEL (repl_from, NULL),
-            QUICK_LABEL (N_ ("Replace with:"), NULL),
+            QUICK_LABEL (_ ("Replace with:"), NULL),
             QUICK_LABEL (repl_to, NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_ ("&Replace"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_ ("A&ll"), B_REPLACE_ALL, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Skip"), B_SKIP_REPLACE, NULL, NULL),
-                QUICK_BUTTON (N_ ("&Cancel"), B_CANCEL, NULL, NULL),
+                QUICK_BUTTON (_ ("&Replace"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON (_ ("A&ll"), B_REPLACE_ALL, NULL, NULL),
+                QUICK_BUTTON (_ ("&Skip"), B_SKIP_REPLACE, NULL, NULL),
+                QUICK_BUTTON (_ ("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END,
             // clang-format on
         };
@@ -785,7 +788,7 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Confirm replace"),
+            .title = _ ("Confirm replace"),
             .help = NULL,
             .widgets = quick_widgets,
             .callback = NULL,

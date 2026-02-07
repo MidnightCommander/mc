@@ -31,8 +31,6 @@
 
 #include <config.h>
 
-#include <ctype.h>
-#include <errno.h>
 #include <locale.h>
 #include <pwd.h>  // for username in xterm title
 #include <stdio.h>
@@ -97,33 +95,6 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-check_codeset (void)
-{
-    const char *current_system_codepage = NULL;
-
-    current_system_codepage = str_detect_termencoding ();
-
-    {
-        const char *_display_codepage;
-
-        _display_codepage = get_codepage_id (mc_global.display_codepage);
-
-        if (strcmp (_display_codepage, current_system_codepage) != 0)
-        {
-            mc_global.display_codepage = get_codepage_index (current_system_codepage);
-            if (mc_global.display_codepage == -1)
-                mc_global.display_codepage = 0;
-
-            mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "display_codepage",
-                                  cp_display);
-        }
-    }
-
-    mc_global.utf8_display = str_isutf8 (current_system_codepage);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** POSIX version.  The only version we support.  */
 static void
 OS_Setup (void)
@@ -384,9 +355,6 @@ main (int argc, char *argv[])
     // FIXME: Should be removed and LINES and COLS computed on subshell
     tty_init (!mc_args__nomouse, mc_global.tty.xterm_flag);
 
-    // start check mc_global.display_codepage and mc_global.source_codepage
-    check_codeset ();
-
     // Removing this from the X code let's us type C-c
     load_key_defs ();
 
@@ -411,11 +379,13 @@ main (int argc, char *argv[])
     // inherit the file descriptors opened below, etc
     if (mc_global.tty.use_subshell && mc_global.run_from_parent_mc)
     {
-        const int quit_mc =
-            query_dialog (_ ("Warning"),
-                          _ ("GNU Midnight Commander\nis already running on this terminal.\n"
-                             "Subshell support will be disabled."),
-                          D_ERROR, 2, _ ("&OK"), _ ("&Quit"));
+        char *text;
+
+        text = g_strdup_printf (_ ("%s\nis already running on this terminal.\n"
+                                   "Subshell support will be disabled."),
+                                PACKAGE_NAME);
+        const int quit_mc = query_dialog (_ ("Warning"), text, D_ERROR, 2, _ ("&OK"), _ ("&Quit"));
+        g_free (text);
 
         if (quit_mc != 0)
         {
@@ -449,7 +419,7 @@ main (int argc, char *argv[])
         enable_bracketed_paste ();
 
         // subshell_prompt is NULL here
-        mc_prompt = (geteuid () == 0) ? "# " : "$ ";
+        mc_prompt = g_strdup ((geteuid () == 0) ? "# " : "$ ");
     }
 
     // Program main loop
@@ -457,6 +427,8 @@ main (int argc, char *argv[])
         exit_code = EXIT_SUCCESS;
     else
         exit_code = do_nc () ? EXIT_SUCCESS : EXIT_FAILURE;
+
+    g_free (mc_prompt);
 
     disable_bracketed_paste ();
 

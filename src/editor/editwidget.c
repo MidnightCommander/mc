@@ -137,21 +137,21 @@ edit_dlg_deinit (void)
 static void
 edit_about (void)
 {
-    char *ver;
+    char *version = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
+    char *package_copyright = mc_get_package_copyright ();
 
-    ver = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
+    char *description =
+        g_strdup_printf (_ ("A user friendly text editor\nwritten for the %s."), PACKAGE_NAME);
 
     {
         quick_widget_t quick_widgets[] = {
-            QUICK_LABEL (ver, NULL),
+            QUICK_LABEL (version, NULL),
             QUICK_SEPARATOR (TRUE),
-            QUICK_LABEL (N_ ("A user friendly text editor\n"
-                             "written for the Midnight Commander."),
-                         NULL),
+            QUICK_LABEL (description, NULL),
             QUICK_SEPARATOR (FALSE),
-            QUICK_LABEL (N_ ("Copyright (C) 1996-2025 the Free Software Foundation"), NULL),
+            QUICK_LABEL (package_copyright, NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_ ("&OK"), B_ENTER, NULL, NULL),
+            QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
             QUICK_END,
         };
 
@@ -159,7 +159,7 @@ edit_about (void)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("About"),
+            .title = _ ("About"),
             .help = "[Internal File Editor]",
             .widgets = quick_widgets,
             .callback = NULL,
@@ -173,7 +173,9 @@ edit_about (void)
         (void) quick_dialog (&qdlg);
     }
 
-    g_free (ver);
+    g_free (version);
+    g_free (package_copyright);
+    g_free (description);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -371,7 +373,7 @@ edit_get_shortcut (long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-edit_get_title (const WDialog *h, size_t len)
+edit_get_title (const WDialog *h, const ssize_t width)
 {
     const WEdit *edit;
     const char *modified;
@@ -381,14 +383,14 @@ edit_get_title (const WDialog *h, size_t len)
     edit = edit_find_editor (h);
     modified = edit->modified != 0 ? "(*) " : "    ";
 
-    len -= 4;
+    const ssize_t width1 = width - strlen (modified);
 
     if (edit->filename_vpath == NULL)
         filename = g_strdup (_ ("[NoName]"));
     else
         filename = g_strdup (vfs_path_as_str (edit->filename_vpath));
 
-    file_label = str_term_trim (filename, len - str_term_width1 (_ ("Edit: ")));
+    file_label = str_term_trim (filename, width1 - str_term_width1 (_ ("Edit: ")));
     g_free (filename);
 
     return g_strconcat (_ ("Edit: "), modified, file_label, (char *) NULL);
@@ -646,7 +648,7 @@ edit_quit (WDialog *h)
 
         widget_select (WIDGET (e));
 
-        if (!edit_ok_to_exit (e))
+        if (!edit_ok_to_quit (e))
             break;
     }
 
@@ -1246,7 +1248,7 @@ edit_files (const GList *files)
     g = GROUP (edit_dlg);
 
     edit_dlg->bg = WIDGET (background_new (1, 0, wd->rect.lines - 2, wd->rect.cols,
-                                           EDITOR_BACKGROUND, ' ', edit_dialog_bg_callback));
+                                           EDITOR_BACKGROUND_COLOR, ' ', edit_dialog_bg_callback));
     group_add_widget (g, edit_dlg->bg);
 
     menubar = menubar_new (NULL);

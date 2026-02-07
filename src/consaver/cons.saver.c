@@ -69,7 +69,7 @@
 #endif
 #include <termios.h>
 
-#include "lib/unixcompat.h"  // STDERR_FILENO
+#include "lib/unixcompat.h"  // STDERR_FILENO, major(), minor()
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
@@ -163,11 +163,11 @@ int
 main (int argc, char **argv)
 {
     unsigned char action = 0, console_flag = 3;
-    int console_fd, vcsa_fd, console_minor, buffer_size;
+    int console_fd, vcsa_fd, buffer_size;
+    unsigned int console_minor;
     struct stat st;
     uid_t uid, euid;
     char *buffer, *tty_name, console_name[16], vcsa_name[16];
-    const char *p, *q;
     struct winsize winsz;
 
     close (STDERR_FILENO);
@@ -176,7 +176,17 @@ main (int argc, char **argv)
         die ();
 
     tty_name = argv[1];
-    if (strnlen (tty_name, 15) == 15 || strncmp (tty_name, "/dev/", 5))
+
+    // make sure the parameter is /dev/tty1 .. /dev/tty63, extract the number
+    if (sscanf (tty_name, "/dev/tty%u", &console_minor) != 1)
+        die ();
+    if (console_minor < 1 || console_minor > 63)
+        die ();
+
+    // sscanf allows negative sign, leading zeros, integer overflow, or arbitrary suffix;
+    // verify that the canonical form was given
+    snprintf (console_name, sizeof (console_name), "/dev/tty%u", console_minor);
+    if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
         die ();
 
     setsid ();
@@ -185,52 +195,36 @@ main (int argc, char **argv)
 
     if (seteuid (uid) < 0)
         die ();
-    console_fd = open (tty_name, O_RDONLY);
+
+    console_fd = open (console_name, O_RDONLY);
     if (console_fd < 0)
         die ();
     if (fstat (console_fd, &st) < 0 || !S_ISCHR (st.st_mode))
         die ();
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-    if ((st.st_rdev & 0xff00) != 0x0400)
+    if (major (st.st_rdev) != 4)
         die ();
-    console_minor = (int) (st.st_rdev & 0x00ff);
-#else
-    console_minor = 1;  // FIXME
+    if (minor (st.st_rdev) != console_minor)
+        die ();
 #endif
-    if (console_minor < 1 || console_minor > 63)
-        die ();
     if (st.st_uid != uid)
-        die ();
-
-    switch (tty_name[5])
-    {
-    case 'v':
-        // devfs
-        p = "/dev/vc/%d";
-        q = "/dev/vcc/a%d";
-        break;
-    case 't':
-        // /dev/ttyN
-        p = "/dev/tty%d";
-        q = "/dev/vcsa%d";
-        break;
-    default:
-        die ();
-    }
-
-    snprintf (console_name, sizeof (console_name), p, console_minor);
-    if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
         die ();
 
     if (seteuid (euid) < 0)
         die ();
 
-    snprintf (vcsa_name, sizeof (vcsa_name), q, console_minor);
+    snprintf (vcsa_name, sizeof (vcsa_name), "/dev/vcsa%u", console_minor);
     vcsa_fd = open (vcsa_name, O_RDWR);
     if (vcsa_fd < 0)
         die ();
     if (fstat (vcsa_fd, &st) < 0 || !S_ISCHR (st.st_mode))
         die ();
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
+    if (major (st.st_rdev) != 7)
+        die ();
+    if (minor (st.st_rdev) != 128 + console_minor)
+        die ();
+#endif
 
     if (seteuid (uid) < 0)
         die ();

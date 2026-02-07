@@ -351,16 +351,18 @@ str_insert_replace_char (GString *buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 estr_t
-str_translate_char (GIConv conv, const char *keys, size_t ch_size, char *output, size_t out_size)
+str_translate_char (GIConv conv, const char *keys, const ssize_t ch_size, char *output,
+                    const size_t out_size)
 {
     size_t left;
     size_t cnv;
+    size_t osize = out_size;
 
     g_iconv (conv, NULL, NULL, NULL, NULL);
 
-    left = (ch_size == (size_t) (-1)) ? strlen (keys) : ch_size;
+    left = ch_size < 0 ? strlen (keys) : (size_t) ch_size;
 
-    cnv = g_iconv (conv, (gchar **) &keys, &left, &output, &out_size);
+    cnv = g_iconv (conv, (gchar **) &keys, &left, &output, &osize);
     if (cnv == (size_t) (-1))
         return (errno == EINVAL) ? ESTR_PROBLEM : ESTR_FAILURE;
 
@@ -455,7 +457,7 @@ str_fit_to_term (const char *text, int width, align_crt_t just_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_term_trim (const char *text, int width)
+str_term_trim (const char *text, const ssize_t width)
 {
     return used_class.term_trim (text, width);
 }
@@ -650,15 +652,21 @@ str_is_valid_char (const char *ch, size_t size)
 int
 str_term_width1 (const char *text)
 {
-    return used_class.term_width1 (text);
+    // Reduce bitwidth size_t -> int
+    // str_term_width1() is widely used to caclulate widget coordinates and sizes
+    // that are of type int (see WRect structure).
+    // It's very unlikely that used_class.term_width1() will return a value greater than MAX_INT.
+    return (int) used_class.term_width1 (text);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-str_term_width2 (const char *text, size_t length)
+str_term_width2 (const char *text, const ssize_t width)
 {
-    return used_class.term_width2 (text, length);
+    // Reduce bitwidth size_t -> int
+    // See comment in str_term_width1().
+    return (int) used_class.term_width2 (text, width);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -784,7 +792,7 @@ str_iscombiningmark (const char *ch)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_trunc (const char *text, int width)
+str_trunc (const char *text, const ssize_t width)
 {
     return used_class.trunc (text, width);
 }

@@ -76,7 +76,7 @@ mcview_dialog_search (WView *view)
     {
         quick_widget_t quick_widgets[] = {
             // clang-format off
-            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
+            QUICK_LABELED_INPUT (_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
                                  MC_HISTORY_SHARED_SEARCH, &exp, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
@@ -84,10 +84,10 @@ mcview_dialog_search (WView *view)
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &mcview_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_ ("&Backwards"), &mcview_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_ ("&Whole words"), &mcview_search_options.whole_words, NULL),
-                QUICK_CHECKBOX (N_ ("&All charsets"), &mcview_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("Cas&e sensitive"), &mcview_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (_ ("&Backwards"), &mcview_search_options.backwards, NULL),
+                QUICK_CHECKBOX (_ ("&Whole words"), &mcview_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (_ ("&All charsets"), &mcview_search_options.all_codepages, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
@@ -98,7 +98,7 @@ mcview_dialog_search (WView *view)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Search"),
+            .title = _ ("Search"),
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,
@@ -147,10 +147,10 @@ mcview_dialog_goto (WView *view, off_t *offset)
     } mcview_goto_type_t;
 
     const char *mc_view_goto_str[] = {
-        N_ ("&Line number"),
-        N_ ("Pe&rcents"),
-        N_ ("&Decimal offset"),
-        N_ ("He&xadecimal offset"),
+        _ ("&Line number"),
+        _ ("Pe&rcents"),
+        _ ("&Decimal offset"),
+        _ ("He&xadecimal offset"),
     };
 
     static mcview_goto_type_t current_goto_type = MC_VIEW_GOTO_LINENUM;
@@ -161,15 +161,6 @@ mcview_dialog_goto (WView *view, off_t *offset)
     gboolean res;
 
     num_of_types = G_N_ELEMENTS (mc_view_goto_str);
-
-#ifdef ENABLE_NLS
-    {
-        size_t i;
-
-        for (i = 0; i < num_of_types; i++)
-            mc_view_goto_str[i] = _ (mc_view_goto_str[i]);
-    }
-#endif
 
     {
         quick_widget_t quick_widgets[] = {
@@ -185,7 +176,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Goto"),
+            .title = _ ("Goto"),
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,

@@ -336,14 +336,33 @@ mcview_display_toggle_ruler (WView *view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+mcview_display_frame (const WView *view)
+{
+    const Widget *w = CONST_WIDGET (view);
+    const WRect *r = &w->rect;
+
+    tty_setcolor (VIEWER_FRAME_COLOR);
+    tty_draw_box (r->y, r->x, r->lines, r->cols, FALSE);
+
+    const gboolean focused = widget_get_state (w, WST_FOCUSED);
+    const char *title = _ ("Quick view");
+
+    tty_setcolor (focused ? CORE_REVERSE_COLOR : CORE_NORMAL_COLOR);
+    widget_gotoyx (w, 0, (r->cols - str_term_width1 (title) - 2) / 2);
+    tty_printf (" %s ", title);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 mcview_display_clean (WView *view)
 {
     Widget *w = WIDGET (view);
 
-    tty_setcolor (VIEW_NORMAL_COLOR);
+    tty_setcolor (VIEWER_NORMAL_COLOR);
     widget_erase (w);
-    if (view->dpy_frame_size != 0)
-        tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
+    if (mcview_is_in_panel (view))
+        mcview_display_frame (view);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -363,7 +382,7 @@ mcview_display_ruler (WView *view)
     if (ruler == RULER_NONE || r->lines < 1)
         return;
 
-    tty_setcolor (VIEW_BOLD_COLOR);
+    tty_setcolor (VIEWER_BOLD_COLOR);
     for (c = 0; c < r->cols; c++)
     {
         cl = view->dpy_text_column + c;
@@ -383,7 +402,7 @@ mcview_display_ruler (WView *view)
             }
         }
     }
-    tty_setcolor (VIEW_NORMAL_COLOR);
+    tty_setcolor (VIEWER_NORMAL_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */

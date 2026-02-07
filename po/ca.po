@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr "Cap traducció"
+
 msgid "Warning: cannot load codepages list"
 msgstr "Avís: no s'ha pogut carregar la llista de les pàgines de codis"
 
@@ -57,6 +60,10 @@ msgstr "No s'ha pogut crear el grup «%s» pels esdeveniments!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "No s'ha pogut crear l'esdeveniment «%s»!"
+
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -163,26 +170,42 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"No es pot usar el tema «%s» amb suport\n"
-"de 256 colors en un terminal de no-256 colors.\n"
-"S'ha carregat el tema predeterminat"
 
-msgid "True color not supported with ncurses."
-msgstr "El color veritable no està admès amb «ncurses»."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "El terminal no sembla admetre 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "El color veritable no està admès en aquesta versió de «slang»."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Establiu COLORTERM=truecolor si el terminal realment admet colors veritables."
 
 msgid "Escape"
 msgstr "Esc"
@@ -806,13 +829,13 @@ msgstr "[aquest_dir] [altre_plafó_dir]"
 #, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 "\n"
-"Si us plau, envieu tots els informes de problemes (inclouent el resultat de "
-"«mc -V»)\n"
-"a %s en forma de tiquets.\n"
+"Si us plau, envieu qualsevol informe d'error (incloent-hi la sortida de «%s -"
+"V»)\n"
+"com a entrades a %s\n"
 
 msgid "Main options"
 msgstr "Opcions principals"
@@ -878,31 +901,19 @@ msgstr "Cerca"
 msgid "Search is disabled"
 msgstr "La cerca està inhabilitada"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
-msgstr ""
-"No s'ha pogut crear el fitxer de diff temporal\n"
-"%s"
+msgid "Cannot create temporary diff file"
+msgstr "No s'ha pogut crear un fitxer temporal de diff"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
-"No s'ha pogut crear el fitxer de còpia de seguretat\n"
-"%s%s\n"
-"%s"
+"No s'ha pogut crear un fitxer de còpia de seguretat\n"
+"%s~~~"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
-msgstr ""
-"No s'ha pogut crear el fitxer de fusionat temporal\n"
-"%s"
+msgid "Cannot create temporary merge file"
+msgstr "No s'ha pogut crear un fitxer temporal de fusió"
 
 msgid "&Fastest (Assume large files)"
 msgstr "Més &ràpid (assumeix fitxers grans)"
@@ -970,18 +981,19 @@ msgstr "ButtonBar|Opcions"
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|Surt"
 
-msgid "Quit"
-msgstr "Surt"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "El/s fitxer/s ha/n estat modificat/s. Voleu desar abans de sortir?"
 
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"S'està sortint del Midnight Commander.\n"
-"Voleu desar abans de sortir?"
+"S'està tancant %s.\n"
+"Voleu desar el/s fitxer/s modificat/s?"
+
+msgid "Quit"
+msgstr "Surt"
 
 msgid "Diff:"
 msgstr "Diferència:"
@@ -990,15 +1002,19 @@ msgid "File name is empty!"
 msgstr "El nom del fitxer és buit!"
 
 #, c-format
-msgid "\"%s\" is a directory"
-msgstr "«%s» és un directori"
+msgid ""
+"%s\n"
+"is a directory"
+msgstr ""
+"%s\n"
+"és un directori"
 
 #, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
-"No s'ha pogut veure l'estat de «%s»\n"
+"No s'ha pogut fer estat\n"
 "%s"
 
 msgid "Diff viewer: invalid mode"
@@ -1015,8 +1031,12 @@ msgid "Loading..."
 msgstr "S'està carregant..."
 
 #, c-format
-msgid "Cannot open %s for reading"
-msgstr "No s'ha pogut obrir %s per a lectura"
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
+"No s'ha pogut obrir\n"
+"%s"
 
 msgid "Load file"
 msgstr "Carrega el fitxer"
@@ -1026,12 +1046,12 @@ msgid "Error reading %s"
 msgstr "S'ha produït un error en llegir %s"
 
 #, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "No s'han pogut obtenir els atributs de %s"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
-msgstr "«%s» no és un fitxer normal"
+msgid ""
+"%s\n"
+"is not a regular file"
+msgstr ""
+"%s\n"
+"no és un fitxer normal"
 
 #, c-format
 msgid ""
@@ -1049,8 +1069,12 @@ msgid "Error reading from pipe: %s"
 msgstr "Error en llegir des de la canonada: %s"
 
 #, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr "No s'ha pogut obrir la canonada per a lectura: %s"
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
+msgstr ""
+"No s'ha pogut obrir la canonada per a lectura\n"
+"%s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "El fitxer té enllaços durs. Voleu separar-los abans de desar?"
@@ -1064,12 +1088,14 @@ msgid "Error writing to pipe: %s"
 msgstr "Error en escriure a la canonada: %s"
 
 #, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "No s'ha pogut obrir la canonada per a escriptura: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
-msgstr "No s'ha pogut obrir el fitxer per a escriptura: %s"
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
+msgstr ""
+"No s'ha pogut obrir el fitxer\n"
+"%s\n"
+"per a escriptura"
 
 msgid "The file you are saving does not end with a newline."
 msgstr "El fitxer que esteu desant no acaba amb una línia nova."
@@ -1098,6 +1124,14 @@ msgstr "Canvia els salts de línia a:"
 msgid "Save As"
 msgstr "Desa com a"
 
+#, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr ""
+"No s'ha pogut crear el directori\n"
+"%s"
+
 msgid "&Quick save"
 msgstr "Desament &ràpid"
 
@@ -1113,8 +1147,15 @@ msgstr "Comprova la línia nova &POSIX"
 msgid "Edit Save Mode"
 msgstr "Edita el mode de desament"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "No s'ha pogut desar: la destinació no és un fitxer normal"
+#, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr ""
+"No s'ha pogut desar\n"
+"%s:\n"
+"no és un fitxer normal"
 
 msgid "A file already exists with this name"
 msgstr "Ja existeix un fitxer amb aquest nom"
@@ -1175,11 +1216,11 @@ msgstr "Tanca el fitxer"
 
 #, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"S'està sortint del Midnight Commander.\n"
-"Voleu desar el fitxer modificat «%s»?"
+"S'està tancant %s.\n"
+"Voleu desar el fitxer modificat %s?"
 
 msgid "This function is not implemented"
 msgstr "Funció no implementada"
@@ -1394,6 +1435,9 @@ msgstr "Ves al &claudàtor relacionat"
 
 msgid "Toggle s&yntax highlighting"
 msgstr "Alterna el ressaltat de la s&intaxi"
+
+msgid "Togg&le right margin"
+msgstr "Canvia e&l marge dret"
 
 msgid "&Find declaration"
 msgstr "&Troba la declaració"
@@ -1614,15 +1658,13 @@ msgstr "Consigna la substitució"
 msgid "%ld replacements made"
 msgstr "S'han fet %ld substitucions"
 
+#, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
+"written for the %s."
 msgstr ""
-"Un editor de text fàcil d'emprar\n"
-"escrit per al Midnight Commander."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2025 la Free Software Foundation"
+"Un editor de text fàcil d'usar\n"
+"escrit per la %s."
 
 msgid "About"
 msgstr "Quant a"
@@ -1750,16 +1792,16 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Torna a carregar la sintaxi actual >"
 
-msgid "Load syntax file"
-msgstr "Carrega el fitxer de sintaxi"
-
 #, c-format
 msgid ""
-"Cannot open file %s\n"
+"Cannot open file\n"
 "%s"
 msgstr ""
-"No s'ha pogut obrir el fitxer %s\n"
+"No s'ha pogut obrir el fitxer\n"
 "%s"
+
+msgid "Load syntax file"
+msgstr "Carrega el fitxer de sintaxi"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1790,8 +1832,9 @@ msgstr ""
 "No és una consola «xterm» o Linux;\n"
 "no es pot alternar el subintèrpret d'ordres."
 
-msgid "Type 'exit' to return to the Midnight Commander"
-msgstr "Escriviu «exit» per a tornar al Midnight Commander"
+#, c-format
+msgid "Type 'exit' to return to the %s"
+msgstr "Escriviu «exit» per a tornar al %s"
 
 msgid "Set &all"
 msgstr "Estableix a &tots"
@@ -1823,27 +1866,34 @@ msgstr "Ordre del canvi avançat del propietari"
 
 #, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
+"Cannot chmod\n"
+"%sn%s"
 msgstr ""
-"No s'ha pogut fer chmod a «%s»\n"
-"%s"
-
-msgid "&Ignore"
-msgstr "&Ignora"
-
-msgid "Ignore &all"
-msgstr "Ignor&a-ho tot"
-
-msgid "&Retry"
-msgstr "&Reintenta"
+"No s'ha pogut fer «chmod»\n"
+"%sn%s"
 
 #, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+"No s'ha pogut fer «chown»\n"
+"%sn%s"
+
+#, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chown a «%s»\n"
+"No s'ha pogut fer «chmod»\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot chown\n"
+"%s"
+msgstr ""
+"No s'ha pogut fer «chown»\n"
 "%s"
 
 msgid "< Default >"
@@ -1852,14 +1902,22 @@ msgstr "< Predeterminat >"
 msgid "Skins"
 msgstr "Temes"
 
-msgid "Other 8 bit"
-msgstr "Altres 8 bits"
-
 msgid "Running"
 msgstr "S'està executant"
 
 msgid "Stopped"
 msgstr "Aturat"
+
+#, c-format
+msgid "Detected display codepage: %s"
+msgstr ""
+
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr "Gestor de fitxers de terminal clàssic inspirat en el Norton Commander."
 
 msgid "&Never"
 msgstr "&Mai"
@@ -2080,27 +2138,6 @@ msgstr "Confirmation|Neteja l'&historial"
 msgid "Confirmation"
 msgstr "Confirmació"
 
-msgid "&UTF-8 output"
-msgstr "Sortida &UTF-8"
-
-msgid "&Full 8 bits output"
-msgstr "&Tota la sortida de 8 bits"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr "7 &bits"
-
-msgid "F&ull 8 bits input"
-msgstr "Tota l'ent&rada de 8 bits"
-
-msgid "Display bits"
-msgstr "Bits de visualització"
-
-msgid "Input / display codepage:"
-msgstr "Pàgina de codis d'entrada / pantalla:"
-
 msgid "Directory tree"
 msgstr "Arbre de directoris"
 
@@ -2158,11 +2195,9 @@ msgstr "Tasques en segon pla"
 #, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
 "No s'ha pogut canviar el directori a\n"
-"%s\n"
 "%s"
 
 msgid "Secure deletion"
@@ -2219,8 +2254,8 @@ msgstr "Començament de les jerarquies de directori"
 msgid "Inode uses extents"
 msgstr "El node-i usa extensions"
 
-msgid "Huge_file"
-msgstr "Fitxer_enorme"
+msgid "Huge file"
+msgstr ""
 
 msgid "No COW"
 msgstr "Sense COW"
@@ -2254,18 +2289,26 @@ msgstr "Ordre «chattr»"
 
 #, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
+"Cannot chattr\n"
+"%sn%s"
+msgstr ""
+"No s'ha pogut fer «chattr»\n"
+"%sn%s"
+
+#, c-format
+msgid ""
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chattr «%s»\n"
+"No s'han pogut obtenir els atributs «ext2» de\n"
 "%s"
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot chattr\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 de «%s»\n"
+"No s'ha pogut fer «chattr»\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2369,12 +2412,20 @@ msgid "Link"
 msgstr "Enllaça"
 
 #, c-format
-msgid "link: %s"
-msgstr "enllaç: %s"
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
+"No s'ha pogut crear l'enllaç\n"
+"%s"
 
 #, c-format
-msgid "symlink: %s"
-msgstr "enllaç simbòlic: %s"
+msgid ""
+"Cannot create symbolic link\n"
+"%s"
+msgstr ""
+"No s'ha pogut crear l'enllaç simbòlic\n"
+"%s"
 
 msgid "View file"
 msgstr "Veure el fitxer"
@@ -2446,12 +2497,20 @@ msgid "Edit symlink"
 msgstr "Edita l'enllaç simbòlic"
 
 #, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr "editeu l'enllaç simbòlic, no s'ha pogut eliminar %s: %s"
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
+msgstr ""
+"Editeu l'enllaç simbòlic, no s'ha pogut eliminar\n"
+"%s"
 
 #, c-format
-msgid "edit symlink: %s"
-msgstr "edita l'enllaç simbòlic: %s"
+msgid ""
+"Cannot edit symlink\n"
+"%s"
+msgstr ""
+"No s'ha pogut editar l'enllaç simbòlic\n"
+"%s"
 
 msgid "FTP to machine"
 msgstr "FTP amb la màquina"
@@ -2461,16 +2520,6 @@ msgstr "SFTP amb la màquina"
 
 msgid "Shell link to machine"
 msgstr "Enllaç per a l'intèrpret amb la màquina"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "Recupera els fitxers en un sistema de fitxers ext2"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"Introduïu el dispositiu (sense /dev/) en el qual es\n"
-"realitzarà la recuperació: (F1 per a més detalls)"
 
 msgid "Directory scanning"
 msgstr "S'està escanejant el directori"
@@ -2492,13 +2541,8 @@ msgstr "No es poden executar ordres en sistemes de fitxers no locals"
 msgid "Parameter"
 msgstr "Paràmetre"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
-msgstr ""
-"No s'ha pogut crear el fitxer d'ordre temporal\n"
-"%s"
+msgid "Cannot create temporary command file"
+msgstr "No s'ha pogut crear un fitxer temporal d'ordres"
 
 msgid "Pipe failed"
 msgstr "Ha fallat la canonada"
@@ -2506,12 +2550,12 @@ msgstr "Ha fallat la canonada"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
-"Teniu un fitxer obsolet %s.\n"
-"El Midnight Commander ara utilitza el fitxer %s.\n"
-"Copieu les vostres modificacions des del fitxer antic al nou."
+"Teniu un fitxer %s obsolet.\n"
+"%s ara usa el fitxer %s.\n"
+"Copieu les modificacions del fitxer antic al nou."
 
 #, c-format
 msgid ""
@@ -2519,13 +2563,13 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
-"El format del\n"
+"El format del fitxer\n"
 "%s%s\n"
-"el fitxer ha canviat amb la versió 4.0.\n"
+"ha canviat amb la versió 4.0.\n"
 "Sembla que la instal·lació ha fallat.\n"
-"Obteniu una còpia fresca des del paquet Midnight Commander."
+"Si us plau, obteniu una còpia nova des del paquet %s."
 
 #, c-format
 msgid ""
@@ -2587,30 +2631,22 @@ msgstr " amb màscara d'origen:"
 
 #, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut visualitzar el fitxer d'origen de l'enllaç dur «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear l'enllaç dur de destinació «%s»\n"
-"%s"
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
-msgstr "No s'ha pogut crear l'enllaç dur de destinació «%s»"
 
 #, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
-"No s'ha pogut llegir l'enllaç d'origen «%s»\n"
+"No s'ha pogut llegir l'enllaç font\n"
 "%s"
 
 msgid ""
@@ -2625,10 +2661,10 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
+"No s'ha pogut crear l'enllaç simbòlic de destinació\n"
 "%s"
 
 #, c-format
@@ -2655,45 +2691,48 @@ msgstr ""
 "«%s»\n"
 "són el mateix fitxer"
 
+msgid "&Ignore"
+msgstr "&Ignora"
+
 msgid "Ignore a&ll"
 msgstr "I&gnorar-ho tot"
 
+msgid "&Retry"
+msgstr "&Reintenta"
+
 #, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"El directori «%s» no està buit.\n"
-"Voleu suprimir-lo de forma recursiva?"
 
 #, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"Procés en segon pla:\n"
-"El directori «%s» no està buit.\n"
-"Voleu suprimir-lo de forma recursiva?"
 
 msgid "Non&e"
 msgstr "Ca&p"
 
 #, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
-"No s'ha pogut eliminar el fitxer «%s»\n"
+"No s'ha pogut eliminar el fitxer\n"
 "%s"
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer «%s»\n"
-"%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2701,161 +2740,127 @@ msgstr "No s'ha pogut sobreescriure el directori «%s»"
 
 #, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"No s'ha pogut moure el fitxer «%s» cap a «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut eliminar el directori «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut entrar al directori «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut sobreescriure el directori «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
-"No s'ha pogut sobreescriure el fitxer «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
-"No s'ha pogut moure el directori «%s» a «%s»\n"
-"%s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "No es pot operar a «..»!"
 
 #, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer d'origen «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 del fitxer font «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"No es poden establir els atributs ext2 del fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear el fitxer especial «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chown al fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer chmod al fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut obrir el fitxer d'origen «%s»\n"
-"%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr "Reprendre ha fallat, se sobreescriurà el fitxer"
 
 #, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer fstat al fitxer d'origen «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear el fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut reservar espai pel fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut llegir el fitxer d'origen «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut escriure al fitxer de destinació «%s»\n"
-"%s"
 
 msgid "(stalled)"
 msgstr "(encallat)"
@@ -2871,43 +2876,33 @@ msgstr "&Continua la còpia"
 
 #, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
-"No s'ha pogut tancar el fitxer d'origen «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
-"No s'ha pogut tancar el fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 per al fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut veure l'estat del directori d'origen «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs ext2 del fitxer de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2927,27 +2922,23 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
-"La destinació «%s» ha de ser un directori\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear el directori de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
-"No s'ha pogut canviar el propietari del directori de destinació «%s»\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -3071,6 +3062,9 @@ msgstr "Segueix els en&llaços"
 msgid "Preserve &attributes"
 msgstr "Mantén els &atributs"
 
+msgid "Preserve e&xt2 attributes"
+msgstr "Conserva els atributs e&xt2"
+
 msgid "Di&ve into subdir if exists"
 msgstr "Su&bmergeix-te en els subdirectoris si existeixen"
 
@@ -3096,6 +3090,9 @@ msgstr "&Informació"
 msgid "&Tree"
 msgstr "Ar&bre"
 
+msgid "Paneli&ze"
+msgstr "&Quadre de cerca"
+
 msgid "&Listing format..."
 msgstr "Format del &llistat..."
 
@@ -3116,9 +3113,6 @@ msgstr "Enllaç per a l'i&ntèrpret..."
 
 msgid "SFTP li&nk..."
 msgstr "E&nllaç SFTP..."
-
-msgid "Paneli&ze"
-msgstr "&Quadre de cerca"
 
 msgid "&Rescan"
 msgstr "To&rna a escanejar"
@@ -3225,9 +3219,6 @@ msgstr "Tasques en se&gon pla"
 msgid "Screen lis&t"
 msgstr "Llis&ta les pantalles"
 
-msgid "&Undelete files (ext2fs only)"
-msgstr "Recupera el&s fitxers (només ext2fs)"
-
 msgid "&Listing format edit"
 msgstr "Edita el format del &llistat"
 
@@ -3255,9 +3246,6 @@ msgstr "C&onfirmació..."
 msgid "&Appearance..."
 msgstr "&Aparença..."
 
-msgid "&Display bits..."
-msgstr "&Bits de visualització..."
-
 msgid "&Virtual FS..."
 msgstr "Sistema de fitxers &virtual..."
 
@@ -3270,11 +3258,8 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Teniu oberta %zu pantalla. Voleu sortir igualment?"
 msgstr[1] "Teniu obertes %zu pantalles. Voleu sortir igualment?"
 
-msgid "The Midnight Commander"
-msgstr "El Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Segur que voleu sortir del Midnight Commander?"
+msgid "Do you really want to quit?"
+msgstr ""
 
 msgid "&Above"
 msgstr "Qu&ant al"
@@ -3775,15 +3760,10 @@ msgstr ""
 "Quadre de cerca extern:\n"
 "%s"
 
-#, c-format
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
-"Quadre de cerca extern:\n"
-"Ha fallat en llegir les dades des de la sortida estàndard filla:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -3825,6 +3805,13 @@ msgid ""
 msgstr ""
 "No s'ha pogut fer estat a la destinació\n"
 "%s"
+
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
 
 #, c-format
 msgid "Delete %s?"
@@ -3948,14 +3935,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "El camí del directori d'inici no és absolut"
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"El Midnight Commander de GNU\n"
-"ja s'està executant en aquest terminal.\n"
-"La implementació del subintèrpret d'ordres està inhabilitada."
 
 #, c-format
 msgid ""
@@ -4025,31 +4010,28 @@ msgstr "Amb la implementació per als esdeveniments d'X11"
 msgid "With internationalization support"
 msgstr "Amb la implementació per a la internacionalització"
 
-msgid "With multiple codepages support"
-msgstr "Amb la implementació per a múltiples pàgines de codi"
-
 msgid "With ext2fs attributes support"
 msgstr "Amb la implementació dels atributs «ext2fs»"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"
-msgstr ""
+msgstr "Construït amb GLib %d.%d.%d (usant GLib %u.%u.%u)\n"
 
 #, c-format
 msgid "Built with S-Lang"
-msgstr ""
+msgstr "Construït amb S-Lang"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
-msgstr ""
+msgstr " i la base de dades terminfo (usant S-Lang %s)\n"
 
 #, c-format
 msgid "Built with %s"
-msgstr ""
+msgstr "Construït amb %s"
 
 #, c-format
 msgid " (using %s)\n"
-msgstr ""
+msgstr " (usant %s)\n"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
@@ -4420,6 +4402,14 @@ msgstr "sftp: la connexió ha estat interrompuda per l'usuari"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: la connexió amb el servidor ha fallat: %s"
 
+#, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+"sftp: no s'ha pogut obrir %s:\n"
+"%s"
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "SFTP: ha trobat que la clau de l'amfitrió és de tipus no admès: RSA1"
 
@@ -4586,96 +4576,17 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
-msgid "undelfs: error"
-msgstr "undelfs: error"
-
-msgid "not enough memory"
-msgstr "no hi ha prou memòria"
-
-msgid "while allocating block buffer"
-msgstr "mentre s'assigna un bloc de la memòria intermèdia"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "mentre es comença l'exploració del node-i %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-"undelfs: s'està carregant la informació dels fitxers suprimits %d nodes-i"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "mentre es crida a ext2_block_iterate %d"
-
-msgid "no more memory while reallocating array"
-msgstr "s'ha esgotat la memòria mentre és reassignava la taula"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "mentre es fa l'exploració del node-i %d"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "No s'ha pogut obrir el fitxer %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: s'està llegint el mapa de bits del node-i..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"No s'ha pogut carregar el mapa de bits del node-i des de:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: s'està llegint el mapa de bits del bloc..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"No s'ha pogut carregar el bloc de mapa de bits des de:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info no és un FS!"
-
-msgid "You have to chdir to extract files first"
-msgstr "Primer haureu de canviar al directori per a extreure els fitxers"
-
-msgid "while iterating over blocks"
-msgstr "mentre s'iterava entre els blocs"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "No s'ha pogut obrir el fitxer «%s»"
-
-msgid "Ext2lib error"
-msgstr "Error de la «ext2lib»"
-
 msgid "Invalid value"
 msgstr "Valor no vàlid"
 
 msgid "File was modified. Save with exit?"
 msgstr "El fitxer ha estat modificat. Voleu desar-lo abans de sortir?"
 
-msgid "&Cancel quit"
-msgstr "&Cancel·la la sortida"
-
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
-"S'està sortint del Midnight Commander.\n"
-"Voleu desar el fitxer modificat?"
 
 msgid "&Line number"
 msgstr "Número de &línia"
@@ -4722,13 +4633,12 @@ msgstr "ButtonBar|Treu form"
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Format"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Quick view"
+msgstr "Vista &ràpida"
+
+msgid "Failed to read data from child stdout"
 msgstr ""
-"Ha fallat en llegir les dades des de la sortida estàndard filla:\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4753,22 +4663,18 @@ msgstr "Visualitza: "
 
 #, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr ""
-"No s'ha pogut obrir «%s»\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
-msgstr "No es pot visualitzar: no es tracta d'un fitxer normal"
 
 #, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
-"No s'ha pogut obrir «%s» en el mode d'anàlisi\n"
-"%s"
 
 msgid "Search done"
 msgstr "Cerca finalitzada"
@@ -4779,3 +4685,91 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "Recupera els fitxers en un sistema de fitxers ext2"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "Introduïu el dispositiu (sense /dev/) en el qual es\n"
+#~ "realitzarà la recuperació: (F1 per a més detalls)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "Recupera el&s fitxers (només ext2fs)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "undelfs: error"
+
+#~ msgid "not enough memory"
+#~ msgstr "no hi ha prou memòria"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "mentre s'assigna un bloc de la memòria intermèdia"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "mentre es comença l'exploració del node-i %d"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr ""
+#~ "undelfs: s'està carregant la informació dels fitxers suprimits %d nodes-i"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "mentre es crida a ext2_block_iterate %d"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "s'ha esgotat la memòria mentre és reassignava la taula"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "mentre es fa l'exploració del node-i %d"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "No s'ha pogut obrir el fitxer %s"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: s'està llegint el mapa de bits del node-i..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "No s'ha pogut carregar el mapa de bits del node-i des de:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: s'està llegint el mapa de bits del bloc..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "No s'ha pogut carregar el bloc de mapa de bits des de:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info no és un FS!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "Primer haureu de canviar al directori per a extreure els fitxers"
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "mentre s'iterava entre els blocs"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "No s'ha pogut obrir el fitxer «%s»"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Error de la «ext2lib»"

@@ -233,9 +233,9 @@ edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_lengt
     {
         // Retry with explicit bytes to make sure it's not a buffer boundary
         size_t i;
-        gchar utf8_buf[UTF8_CHAR_LEN + 1];
+        gchar utf8_buf[MB_LEN_MAX + 1];
 
-        for (i = 0; i < UTF8_CHAR_LEN; i++)
+        for (i = 0; i < MB_LEN_MAX; i++)
             utf8_buf[i] = edit_buffer_get_byte (buf, byte_index + i);
         utf8_buf[i] = '\0';
         res = g_utf8_get_char_validated (utf8_buf, -1);
@@ -274,7 +274,7 @@ int
 edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length)
 {
     size_t i;
-    gchar utf8_buf[3 * UTF8_CHAR_LEN + 1];
+    gchar utf8_buf[3 * MB_LEN_MAX + 1];
     gchar *str;
     gchar *cursor_buf_ptr;
     gunichar res;
@@ -285,11 +285,11 @@ edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_
         return 0;
     }
 
-    for (i = 0; i < (3 * UTF8_CHAR_LEN); i++)
-        utf8_buf[i] = edit_buffer_get_byte (buf, byte_index + i - (2 * UTF8_CHAR_LEN));
+    for (i = 0; i < (3 * MB_LEN_MAX); i++)
+        utf8_buf[i] = edit_buffer_get_byte (buf, byte_index + i - (2 * MB_LEN_MAX));
     utf8_buf[i] = '\0';
 
-    cursor_buf_ptr = utf8_buf + (2 * UTF8_CHAR_LEN);
+    cursor_buf_ptr = utf8_buf + (2 * MB_LEN_MAX);
     str = g_utf8_find_prev_char (utf8_buf, cursor_buf_ptr);
 
     if (str == NULL || g_utf8_next_char (str) != cursor_buf_ptr)

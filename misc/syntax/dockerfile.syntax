@@ -1,0 +1,76 @@
+# Syntax coloring for Dockerfile
+# https://docs.docker.com/reference/dockerfile
+
+context default
+    keyword ADD yellow
+    keyword ARG yellow
+    keyword CMD yellow
+    keyword COPY yellow
+    keyword ENTRYPOINT yellow
+    keyword ENV yellow
+    keyword EXPOSE yellow
+    keyword FROM yellow
+    keyword HEALTHCHECK yellow
+    keyword LABEL yellow
+    keyword ONBUILD yellow
+    keyword RUN yellow
+    keyword SHELL yellow
+    keyword STOPSIGNAL yellow
+    keyword USER yellow
+    keyword VOLUME yellow
+    keyword WORKDIR yellow
+    # deprecated things
+    keyword MAINTAINER brightred
+
+    # Options for RUN
+    keyword --mount brightmagenta
+    keyword --device brightmagenta
+    keyword --network brightmagenta
+    keyword --security brightmagenta
+
+    # Options for ADD
+    keyword --keep-git-dir brightmagenta
+    keyword --checksum brightmagenta
+    keyword --chown brightmagenta
+    keyword --chmod brightmagenta
+    keyword --link brightmagenta
+    keyword --exclude brightmagenta
+
+    # Options for COPY (some already in ADD)
+    keyword --from brightmagenta
+    keyword --parents brightmagenta
+
+    keyword ; brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword = white
+    keyword && white
+    keyword || white
+    keyword \\$ white
+    keyword ${*} brightgreen
+
+    keyword whole \{0123456789\}\[0123456789\] brightgreen
+    keyword wholeright $+ brightgreen
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+# String values
+context ' ' green
+context " " green
+
+# Comments
+context # \n brown
+    keyword whole BUG brightred
+    keyword whole FixMe brightred
+    keyword whole FIXME brightred
+    keyword whole Note brightred
+    keyword whole NOTE brightred
+    keyword whole ToDo brightred
+    keyword whole TODO brightred
+    keyword !!\[!\] brightred
+    keyword ??\[?\] brightred
+    spellcheck

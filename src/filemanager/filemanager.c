@@ -109,7 +109,7 @@ WLabel *the_hint;
 WButtonBar *the_bar;
 
 /* The prompt */
-const char *mc_prompt = NULL;
+char *mc_prompt = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -195,6 +195,7 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Quick view"), CK_PanelQuickView));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Info"), CK_PanelInfo));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Tree"), CK_PanelTree));
+    entries = g_list_prepend (entries, menu_entry_new (_ ("Paneli&ze"), CK_Panelize));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries =
         g_list_prepend (entries, menu_entry_new (_ ("&Listing format..."), CK_SetupListingFormat));
@@ -211,7 +212,6 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_SFTP
     entries = g_list_prepend (entries, menu_entry_new (_ ("SFTP li&nk..."), CK_ConnectSftp));
 #endif
-    entries = g_list_prepend (entries, menu_entry_new (_ ("Paneli&ze"), CK_Panelize));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Rescan"), CK_Reread));
 
@@ -292,14 +292,8 @@ create_command_menu (void)
 #endif
     entries = g_list_prepend (entries, menu_entry_new (_ ("Screen lis&t"), CK_ScreenList));
     entries = g_list_prepend (entries, menu_separator_new ());
-#ifdef ENABLE_VFS_UNDELFS
-    entries =
-        g_list_prepend (entries, menu_entry_new (_ ("&Undelete files (ext2fs only)"), CK_Undelete));
-#endif
 #ifdef LISTMODE_EDITOR
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Listing format edit"), CK_ListMode));
-#endif
-#if defined(ENABLE_VFS_UNDELFS) || defined(LISTMODE_EDITOR)
     entries = g_list_prepend (entries, menu_separator_new ());
 #endif
     entries = g_list_prepend (entries,
@@ -323,14 +317,14 @@ create_options_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Panel options..."), CK_OptionsPanel));
     entries = g_list_prepend (entries, menu_entry_new (_ ("C&onfirmation..."), CK_OptionsConfirm));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Appearance..."), CK_OptionsAppearance));
-    entries =
-        g_list_prepend (entries, menu_entry_new (_ ("&Display bits..."), CK_OptionsDisplayBits));
     entries = g_list_prepend (entries, menu_entry_new (_ ("Learn &keys..."), CK_LearnKeys));
 #ifdef ENABLE_VFS
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Virtual FS..."), CK_OptionsVfs));
 #endif
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Save setup"), CK_SaveSetup));
+    entries = g_list_prepend (entries, menu_separator_new ());
+    entries = g_list_prepend (entries, menu_entry_new (_ ("A&bout..."), CK_About));
 
     return g_list_reverse (entries);
 }
@@ -419,7 +413,7 @@ midnight_get_shortcut (long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-midnight_get_title (const WDialog *h, size_t len)
+midnight_get_title (const WDialog *h, const ssize_t width)
 {
     char *path;
     char *login;
@@ -432,7 +426,7 @@ midnight_get_title (const WDialog *h, size_t len)
     p = g_strdup_printf ("%s [%s]:%s", _ ("Panels:"), login, path);
     g_free (path);
     g_free (login);
-    path = g_strdup (str_trunc (p, len - 4));
+    path = g_strdup (str_trunc (p, width - 4));
     g_free (p);
 
     return path;
@@ -525,7 +519,7 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name, gpoin
         tty_getyx (&row, &col);
 
         tty_gotoyx (0, 0);
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         tty_print_string (str_fit_to_term (event_data->msg, COLS - 1, J_LEFT));
 
         // Restore cursor position
@@ -773,7 +767,7 @@ put_current_selected (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-put_tagged (WPanel *panel)
+put_tagged (const WPanel *panel)
 {
     if (!command_prompt)
         return;
@@ -782,20 +776,18 @@ put_tagged (WPanel *panel)
 
     if (panel->marked == 0)
     {
-        const file_entry_t *fe;
+        const file_entry_t *fe = panel_current_entry (panel);
 
-        fe = panel_current_entry (current_panel);
         if (fe != NULL)
             command_insert (cmdline, fe->fname->str, TRUE);
     }
     else
-    {
-        int i;
-
-        for (i = 0; i < panel->dir.len; i++)
+        for (int m = 0, i = 0; m < panel->marked && i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked != 0)
+            {
                 command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
-    }
+                m++;
+            }
 
     input_enable_update (cmdline);
 }
@@ -1029,16 +1021,14 @@ quit_cmd_internal (int quiet)
                               "You have %zu opened screens. Quit anyway?", n),
                     n);
 
-        if (query_dialog (_ ("The Midnight Commander"), msg, D_NORMAL, 2, _ ("&Yes"), _ ("&No"))
-            != 0)
+        if (query_dialog (PACKAGE_NAME, msg, D_NORMAL, 2, _ ("&Yes"), _ ("&No")) != 0)
             return FALSE;
         q = 1;
     }
     else if (quiet || !confirm_exit)
         q = 1;
-    else if (query_dialog (_ ("The Midnight Commander"),
-                           _ ("Do you really want to quit the Midnight Commander?"), D_NORMAL, 2,
-                           _ ("&Yes"), _ ("&No"))
+    else if (query_dialog (PACKAGE_NAME, _ ("Do you really want to quit?"), D_NORMAL, 2, _ ("&Yes"),
+                           _ ("&No"))
              == 0)
         q = 1;
 
@@ -1109,6 +1099,9 @@ midnight_execute_cmd (Widget *sender, long command)
 
     switch (command)
     {
+    case CK_About:
+        about_box ();
+        break;
     case CK_ChangePanel:
         (void) change_panel ();
         break;
@@ -1186,9 +1179,6 @@ midnight_execute_cmd (Widget *sender, long command)
         diff_view_cmd ();
         break;
 #endif
-    case CK_OptionsDisplayBits:
-        display_bits_box ();
-        break;
     case CK_Edit:
         edit_cmd (current_panel);
         break;
@@ -1234,7 +1224,7 @@ midnight_execute_cmd (Widget *sender, long command)
         break;
 #endif
     case CK_Panelize:
-        panel_panelize_cd ();
+        panel_panelize_restore ();
         break;
     case CK_Help:
         help_cmd ();
@@ -1302,7 +1292,7 @@ midnight_execute_cmd (Widget *sender, long command)
             quick_cmd_no_menu ();  // shortcut or buttonabr
         break;
     case CK_QuitQuiet:
-        quiet_quit_cmd ();
+        quiet_quit_cmd (TRUE);
         break;
     case CK_Quit:
         quit_cmd ();
@@ -1372,11 +1362,6 @@ midnight_execute_cmd (Widget *sender, long command)
     case CK_Tree:
         treebox_cmd ();
         break;
-#ifdef ENABLE_VFS_UNDELFS
-    case CK_Undelete:
-        undelete_cmd ();
-        break;
-#endif
     case CK_UserMenu:
         user_file_menu_cmd ();
         break;
@@ -1718,7 +1703,7 @@ load_hint (gboolean force)
     {
         char text[BUF_SMALL];
 
-        g_snprintf (text, sizeof (text), PACKAGE_NAME " %s\n", mc_global.mc_version);
+        g_snprintf (text, sizeof (text), "%s %s\n", PACKAGE_NAME, mc_global.mc_version);
         set_hintbar (text);
     }
 }
@@ -1757,9 +1742,9 @@ save_cwds_stat (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-quiet_quit_cmd (void)
+quiet_quit_cmd (const gboolean suppress_last_pwd)
 {
-    print_last_revert = TRUE;
+    print_last_revert = suppress_last_pwd;
     return quit_cmd_internal (1);
 }
 
@@ -1775,9 +1760,6 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    filemanager = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, dialog_colors,
-                              midnight_callback, NULL, "[main]", NULL);
-
     // Check if we were invoked as an editor or file viewer
     if (mc_global.mc_run_mode != MC_RUN_FULL)
     {
@@ -1786,6 +1768,9 @@ do_nc (void)
     }
     else
     {
+        filemanager = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, dialog_colors,
+                                  midnight_callback, NULL, "[main]", NULL);
+
         // We only need the first idle event to show user menu after start
         widget_idle (WIDGET (filemanager), TRUE);
 
@@ -1811,7 +1796,10 @@ do_nc (void)
     mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
-    widget_destroy (WIDGET (filemanager));
+
+    if (filemanager != NULL)
+        widget_destroy (WIDGET (filemanager));
+
     current_panel = NULL;
 
 #ifdef USE_INTERNAL_EDIT

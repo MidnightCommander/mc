@@ -19,13 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-    if: ${{ !github.event.issue.pull_request }}
-
     permissions:
       issues: write
 
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         id: get-issue-type
         with:
           script: |
@@ -44,7 +42,7 @@ jobs:
 
       - run: echo "${{ steps.get-issue-type.outputs.result }}"
 
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         id: set-issue-type
         if: ${{ fromJson(steps.get-issue-type.outputs.result).repository.issue.issueType.name == '' }}
         with:

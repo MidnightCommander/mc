@@ -137,8 +137,8 @@ typedef struct
         int chpoint;          // Point after last characters in @ch
     } quick_search;
 
-    int content_shift;  // Number of characters of filename need to skip from left side.
-    int max_shift;      // Max shift for visible part of current panel
+    unsigned int content_shift;  // Number of characters of filename need to skip from left side
+    unsigned int max_shift;      // Max shift for visible part of current panel
 } WPanel;
 
 /*** global variables defined in .c file *********************************************************/
@@ -192,7 +192,7 @@ char **panel_get_user_possible_fields (gsize *array_size);
 void panel_set_cwd (WPanel *panel, const vfs_path_t *vpath);
 void panel_set_lwd (WPanel *panel, const vfs_path_t *vpath);
 
-void panel_panelize_cd (void);
+void panel_panelize_restore (void);
 void panel_panelize_change_root (WPanel *panel, const vfs_path_t *new_root);
 void panel_panelize_absolutize_if_needed (WPanel *panel);
 void panel_panelize_save (WPanel *panel);

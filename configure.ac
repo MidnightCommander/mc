@@ -266,6 +266,8 @@ AC_STRUCT_ST_BLOCKS
 AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev, struct stat.st_mtim, struct stat.st_mtimespec, struct stat.st_mtimensec])
 gl_STAT_SIZE
 
+AC_STRUCT_DIRENT_D_TYPE
+
 AH_TEMPLATE([sig_atomic_t],
             [/* Define to `int' if <signal.h> doesn't define.])
 AH_TEMPLATE([SIG_ATOMIC_VOLATILE_T],
@@ -522,17 +524,6 @@ for h_lang in $ALL_DOC_LINGUAS; do
 done
 AC_SUBST(DOC_LINGUAS)
 
-DX_HTML_FEATURE(ON)
-DX_CHM_FEATURE(OFF)
-DX_CHI_FEATURE(OFF)
-DX_MAN_FEATURE(OFF)
-DX_RTF_FEATURE(OFF)
-DX_XML_FEATURE(OFF)
-DX_PDF_FEATURE(OFF)
-DX_PS_FEATURE(OFF)
-DX_INIT_DOXYGEN(mc,doxygen.cfg,devel)
-
-
 dnl ############################################################################
 dnl Configure results
 dnl ############################################################################
@@ -606,6 +597,7 @@ src/vfs/extfs/helpers/Makefile
 src/vfs/extfs/helpers/a+
 src/vfs/extfs/helpers/apt+
 src/vfs/extfs/helpers/audio
+src/vfs/extfs/helpers/brotli
 src/vfs/extfs/helpers/deb
 src/vfs/extfs/helpers/deba
 src/vfs/extfs/helpers/debd
@@ -647,8 +639,6 @@ src/vfs/local/Makefile
 src/vfs/sfs/Makefile
 
 src/vfs/tar/Makefile
-
-src/vfs/undelfs/Makefile
 
 lib/Makefile
 lib/event/Makefile

@@ -84,7 +84,8 @@ AC_DEFUN([mc_WITH_NCURSES], [
             ])
         ])
 
-    AC_CHECK_FUNC([addwstr], [],
+    AC_CHECK_FUNC([addwstr],
+        [AC_DEFINE(HAVE_NCURSES_WIDECHAR, 1, [Define if ncurses library has wide characters support])],
         [AC_MSG_WARN([NCurses(w) library found without wide characters support])])
 
     dnl

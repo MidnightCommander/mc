@@ -305,6 +305,12 @@ sub print_string($)
                         $backslash_flag = 0;
                         next;
                     }
+                    if ($_ eq 'e' && $backslash_flag)
+                    {
+                        print $f_out '\\';
+                        $backslash_flag = 0;
+                        next;
+                    }
                     if ($_ eq '\\' && !$backslash_flag)
                     {
                         $backslash_flag = 1;

@@ -1,0 +1,779 @@
+ARJ32 v 3.10, Copyright (c) 1998-2004, ARJ Software Russia.
+
+Processing archive: uarj.arj
+Archive created: 2025-11-13 05:45:46, modified: 2025-11-13 05:45:46
+Sequence/Pathname/Comment/Chapters
+Rev/Host OS    Original Compressed Ratio DateTime modified Attributes/GUA BPMGS
+------------ ---------- ---------- ----- ----------------- -------------- -----
+001) doc/man/sr/Makefile.am
+ 11 UNIX            176        136 0.773 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+002) doc/man/sr/mc.1.in
+ 11 UNIX         172405      42570 0.247 25-10-29 04:49:59 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-10-29 04:49:59
+    Owner: moose/moose
+003) doc/man/sr/Makefile
+ 11 UNIX          21406       6848 0.320 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+004) doc/man/sr/Makefile.in
+ 11 UNIX          20749       6342 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+005) doc/man/sr/mc.1
+ 11 UNIX         172483      42553 0.247 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+006) doc/man/it/Makefile.am
+ 11 UNIX            175        135 0.771 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+007) doc/man/it/mc.1.in
+ 11 UNIX         111648      36685 0.329 25-10-29 04:49:59 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-10-29 04:49:59
+    Owner: moose/moose
+008) doc/man/it/Makefile
+ 11 UNIX          21405       6848 0.320 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+009) doc/man/it/Makefile.in
+ 11 UNIX          20748       6341 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+010) doc/man/it/mc.1
+ 11 UNIX         111732      36666 0.328 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+011) doc/man/es/Makefile.am
+ 11 UNIX            178        136 0.764 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+012) doc/man/es/mc.1.in
+ 11 UNIX         138639      44281 0.319 25-10-29 04:49:59 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-10-29 04:49:59
+    Owner: moose/moose
+013) doc/man/es/Makefile
+ 11 UNIX          21408       6851 0.320 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+014) doc/man/es/Makefile.in
+ 11 UNIX          20751       6343 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+015) doc/man/es/mc.1
+ 11 UNIX         138792      44257 0.319 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+016) doc/man/hu/Makefile.am
+ 11 UNIX            176        136 0.773 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+017) doc/man/hu/mc.1.in
+ 11 UNIX         116424      40066 0.344 25-10-29 04:49:59 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-10-29 04:49:59
+    Owner: moose/moose
+018) doc/man/hu/Makefile
+ 11 UNIX          21406       6850 0.320 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+019) doc/man/hu/Makefile.in
+ 11 UNIX          20749       6343 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+020) doc/man/hu/mc.1
+ 11 UNIX         116498      40047 0.344 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+021) doc/man/pl/Makefile.am
+ 11 UNIX            175        135 0.771 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+022) doc/man/pl/mc.1.in
+ 11 UNIX         108968      39760 0.365 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+023) doc/man/pl/Makefile
+ 11 UNIX          21405       6848 0.320 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+024) doc/man/pl/Makefile.in
+ 11 UNIX          20748       6342 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+025) doc/man/pl/mc.1
+ 11 UNIX         109020      39736 0.364 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+026) doc/man/ru/Makefile.am
+ 11 UNIX            175        134 0.766 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+027) doc/man/ru/mc.1.in
+ 11 UNIX         273161      66237 0.242 25-10-29 04:49:59 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-10-29 04:49:59
+    Owner: moose/moose
+028) doc/man/ru/Makefile
+ 11 UNIX          21405       6848 0.320 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+029) doc/man/ru/Makefile.in
+ 11 UNIX          20748       6342 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+030) doc/man/ru/mc.1
+ 11 UNIX         273289      66204 0.242 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+031) doc/man/mcedit.1.in
+ 11 UNIX          20705       8075 0.390 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+032) doc/man/date-of-man-include.am
+ 11 UNIX           1110        405 0.365 25-07-15 16:23:33 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-07-15 16:23:33
+    Owner: moose/moose
+033) doc/man/Makefile.am
+ 11 UNIX            385        229 0.595 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+034) doc/man/mcview.1
+ 11 UNIX           2568       1238 0.482 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+035) doc/man/mc.1.in
+ 11 UNIX         132635      42013 0.317 25-11-09 04:42:21 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-11-09 04:42:21
+    Owner: moose/moose
+036) doc/man/sr
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+037) doc/man/mcdiff.1.in
+ 11 UNIX           2602       1252 0.481 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+038) doc/man/Makefile
+ 11 UNIX          27911       8677 0.311 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+039) doc/man/it
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+040) doc/man/mcview.1.in
+ 11 UNIX           2560       1240 0.484 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+041) doc/man/mcdiff.1
+ 11 UNIX           2610       1250 0.479 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+042) doc/man/mcedit.1
+ 11 UNIX          20727       8062 0.389 25-11-02 05:34:30 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-11-02 05:34:30
+    Owner: moose/moose
+043) doc/man/es
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+044) doc/man/Makefile.in
+ 11 UNIX          27325       8206 0.300 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+045) doc/man/hu
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+046) doc/man/pl
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+047) doc/man/mc.1
+ 11 UNIX         132778      41992 0.316 25-11-13 03:32:45 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-11-13 03:32:45
+    Owner: moose/moose
+048) doc/man/ru
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+049) doc/hints/l10n/mc.hint.cs
+ 11 UNIX           3474       1631 0.469 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+050) doc/hints/l10n/mc.hint.en_GB
+ 11 UNIX           3056       1366 0.447 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+051) doc/hints/l10n/mc.hint.ca
+ 11 UNIX           3653       1561 0.427 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+052) doc/hints/l10n/mc.hint.ka
+ 11 UNIX           3518       1578 0.449 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+053) doc/hints/l10n/mc.hint.da
+ 11 UNIX           3167       1433 0.452 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+054) doc/hints/l10n/Makefile.am
+ 11 UNIX            184        134 0.728 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+055) doc/hints/l10n/mc.hint.de
+ 11 UNIX           3710       1563 0.421 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+056) doc/hints/l10n/mc.hint.tr
+ 11 UNIX           3823       1541 0.403 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+057) doc/hints/l10n/mc.hint.id
+ 11 UNIX           3556       1424 0.400 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+058) doc/hints/l10n/mc.hint.pt_BR
+ 11 UNIX           4660       1701 0.365 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+059) doc/hints/l10n/mc.hint.sk
+ 11 UNIX           3380       1603 0.474 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+060) doc/hints/l10n/mc.hint.es
+ 11 UNIX           3233       1412 0.437 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+061) doc/hints/l10n/README.txt
+ 11 UNIX            186        141 0.758 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+062) doc/hints/l10n/mc.hint.pt
+ 11 UNIX           3383       1496 0.442 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+063) doc/hints/l10n/mc.hint.gl
+ 11 UNIX           3355       1474 0.439 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+064) doc/hints/l10n/Makefile
+ 11 UNIX          19320       6225 0.322 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+065) doc/hints/l10n/mc.hint.eo
+ 11 UNIX           3053       1252 0.410 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+066) doc/hints/l10n/mc.hint.el
+ 11 UNIX           4939       1983 0.401 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+067) doc/hints/l10n/mc.hint.eu
+ 11 UNIX           3618       1486 0.411 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+068) doc/hints/l10n/mc.hint.bg
+ 11 UNIX           6580       1891 0.287 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+069) doc/hints/l10n/mc.hint.sv
+ 11 UNIX           3181       1397 0.439 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+070) doc/hints/l10n/mc.hint.it
+ 11 UNIX           3801       1511 0.398 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+071) doc/hints/l10n/mc.hint.zh_CN
+ 11 UNIX           3331       1599 0.480 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+072) doc/hints/l10n/mc.hint.sr
+ 11 UNIX           6151       1927 0.313 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+073) doc/hints/l10n/mc.hint.ga
+ 11 UNIX           3786       1663 0.439 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+074) doc/hints/l10n/mc.hint.zh_TW
+ 11 UNIX           3359       1672 0.498 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+075) doc/hints/l10n/mc.hint.ja
+ 11 UNIX           3320       1660 0.500 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+076) doc/hints/l10n/mc.hint.pl
+ 11 UNIX           3379       1459 0.432 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+077) doc/hints/l10n/Makefile.in
+ 11 UNIX          18531       5680 0.307 25-11-02 05:40:40 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:40
+    Owner: moose/moose
+078) doc/hints/l10n/mc.hint.et
+ 11 UNIX           3082       1375 0.446 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+079) doc/hints/l10n/mc.hint.hu
+ 11 UNIX           3552       1577 0.444 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+080) doc/hints/l10n/mc.hint.fa
+ 11 UNIX           4467       1856 0.415 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+081) doc/hints/l10n/mc.hint.ru
+ 11 UNIX           5557       1859 0.335 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+082) doc/hints/l10n/mc.hint.lt
+ 11 UNIX           3111       1491 0.479 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+083) doc/hints/l10n/mc.hint.fr
+ 11 UNIX           4051       1625 0.401 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+084) doc/hints/l10n/mc.hint.ko
+ 11 UNIX           4080       1665 0.408 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+085) doc/hints/l10n/mc.hint.uk
+ 11 UNIX           6210       1825 0.294 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+086) doc/hints/l10n/mc.hint.nl
+ 11 UNIX           3136       1432 0.457 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+087) doc/hints/l10n/mc.hint.be
+ 11 UNIX           6039       1852 0.307 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+088) doc/hints/l10n/mc.hint.ro
+ 11 UNIX           3660       1545 0.422 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+089) doc/hints/l10n/mc.hint.nb
+ 11 UNIX           3109       1265 0.407 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+090) doc/hints/l10n
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+091) doc/hints/Makefile.am
+ 11 UNIX            208        152 0.731 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+092) doc/hints/mc.hint
+ 11 UNIX           3037       1362 0.448 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+093) doc/hints/Makefile
+ 11 UNIX          25627       7983 0.312 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+094) doc/hints/Makefile.in
+ 11 UNIX          24876       7463 0.300 25-11-02 05:40:40 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:40
+    Owner: moose/moose
+095) doc/hlp/sr/Makefile.am
+ 11 UNIX             44         44 1.000 25-06-29 13:51:51 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+096) doc/hlp/sr/xnc.hlp
+ 11 UNIX          40535      13742 0.339 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+097) doc/hlp/sr/Makefile
+ 11 UNIX          19606       6290 0.321 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+098) doc/hlp/sr/mc.hlp.sr
+ 11 UNIX         211480      55112 0.261 25-11-13 03:32:46 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:47
+                                   DTC   25-11-13 03:32:46
+    Owner: moose/moose
+099) doc/hlp/sr/Makefile.in
+ 11 UNIX          18829       5753 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+100) doc/hlp/it/mc.hlp.it
+ 11 UNIX         146476      47647 0.325 25-11-13 03:32:45 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-11-13 03:32:45
+    Owner: moose/moose
+101) doc/hlp/it/Makefile.am
+ 11 UNIX             44         44 1.000 25-06-29 13:51:51 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+102) doc/hlp/it/xnc.hlp
+ 11 UNIX          38379      13075 0.341 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+103) doc/hlp/it/Makefile
+ 11 UNIX          19606       6290 0.321 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+104) doc/hlp/it/Makefile.in
+ 11 UNIX          18829       5753 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+105) doc/hlp/es/Makefile.am
+ 11 UNIX             44         44 1.000 25-06-29 13:51:51 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+106) doc/hlp/es/xnc.hlp
+ 11 UNIX          79691      26047 0.327 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+107) doc/hlp/es/Makefile
+ 11 UNIX          19606       6290 0.321 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+108) doc/hlp/es/mc.hlp.es
+ 11 UNIX         215936      68764 0.318 25-11-13 03:32:45 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-11-13 03:32:45
+    Owner: moose/moose
+109) doc/hlp/es/Makefile.in
+ 11 UNIX          18829       5753 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+110) doc/hlp/hu/Makefile.am
+ 11 UNIX             44         44 1.000 25-06-29 13:51:51 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+111) doc/hlp/hu/xnc.hlp
+ 11 UNIX          38498      13285 0.345 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+112) doc/hlp/hu/mc.hlp.hu
+ 11 UNIX         152640      51924 0.340 25-11-13 03:32:45 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-11-13 03:32:45
+    Owner: moose/moose
+113) doc/hlp/hu/Makefile
+ 11 UNIX          19606       6291 0.321 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+114) doc/hlp/hu/Makefile.in
+ 11 UNIX          18829       5753 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+115) doc/hlp/pl/Makefile.am
+ 11 UNIX             44         44 1.000 25-06-29 13:51:51 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+116) doc/hlp/pl/xnc.hlp
+ 11 UNIX          38375      13181 0.343 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:45
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+117) doc/hlp/pl/mc.hlp.pl
+ 11 UNIX         145952      51799 0.355 25-11-13 03:32:45 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-11-13 03:32:45
+    Owner: moose/moose
+118) doc/hlp/pl/Makefile
+ 11 UNIX          19606       6291 0.321 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+119) doc/hlp/pl/Makefile.in
+ 11 UNIX          18829       5753 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+120) doc/hlp/ru/Makefile.am
+ 11 UNIX             44         44 1.000 25-06-29 13:51:51 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+121) doc/hlp/ru/mc.hlp.ru
+ 11 UNIX         312899      78488 0.251 25-11-13 03:32:46 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-11-13 03:32:46
+    Owner: moose/moose
+122) doc/hlp/ru/xnc.hlp
+ 11 UNIX          41537      14092 0.339 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+123) doc/hlp/ru/Makefile
+ 11 UNIX          19606       6291 0.321 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+124) doc/hlp/ru/Makefile.in
+ 11 UNIX          18829       5753 0.306 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+125) doc/hlp/Makefile.am
+ 11 UNIX            354        188 0.531 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+126) doc/hlp/xnc.hlp
+ 11 UNIX          38055      12825 0.337 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:46
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+127) doc/hlp/sr
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+128) doc/hlp/Makefile
+ 11 UNIX          25793       8005 0.310 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+129) doc/hlp/it
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+130) doc/hlp/mc.hlp
+ 11 UNIX         168164      53083 0.316 25-11-13 03:32:46 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:32:47
+                                   DTC   25-11-13 03:32:46
+    Owner: moose/moose
+131) doc/hlp/es
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+132) doc/hlp/hlp-lang-include.am
+ 11 UNIX            333        164 0.492 25-06-29 13:51:51 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:51
+    Owner: moose/moose
+133) doc/hlp/Makefile.in
+ 11 UNIX          25048       7494 0.299 25-11-02 05:40:41 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:41
+    Owner: moose/moose
+134) doc/hlp/hu
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+135) doc/hlp/pl
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+136) doc/hlp/ru
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+137) doc/NEWS.OLD
+ 11 UNIX          29742      11619 0.391 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+138) doc/man
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+139) doc/Makefile.am
+ 11 UNIX             87         71 0.816 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+140) doc/NEWS
+ 11 UNIX          73251      26742 0.365 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+141) doc/.gitignore
+ 11 UNIX             37         37 1.000 25-06-29 13:51:50 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 04:48:08
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+142) doc/filehighlight.txt
+ 11 UNIX            764        402 0.526 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+143) doc/COPYING
+ 11 UNIX          37350      13093 0.351 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+144) doc/README
+ 11 UNIX           5824       2519 0.433 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+145) doc/HACKING
+ 11 UNIX          12823       5330 0.416 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+146) doc/Makefile
+ 11 UNIX          23332       7339 0.315 25-11-13 03:31:27 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:28
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+147) doc/FAQ
+ 11 UNIX          33997      11905 0.350 25-11-09 04:42:21 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-11-09 04:42:21
+    Owner: moose/moose
+148) doc/hints
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+149) doc/NEWS.4.7
+ 11 UNIX          30003      11426 0.381 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+150) doc/Hello world.txt
+ 11 UNIX             14         14 1.000 25-11-13 05:44:16 -rw-r--r-- ---  +0  
+                                   DTA   25-11-13 05:44:16
+                                   DTC   25-11-13 05:44:16
+    Owner: moose/moose
+151) doc/hlp
+ 11 UNIX              0          0 0.000 25-11-13 03:31:27 drwxr-xr-x ---  +0  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-13 03:31:27
+    Owner: moose/moose
+152) doc/Makefile.in
+ 11 UNIX          22594       6811 0.301 25-11-02 05:40:40 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 03:31:27
+                                   DTC   25-11-02 05:40:40
+    Owner: moose/moose
+153) doc/TODO
+ 11 UNIX           9510       4277 0.450 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+154) doc/INSTALL
+ 11 UNIX          10369       4007 0.386 25-06-29 13:51:50 -rw-r--r-- ---  +1  
+                                   DTA   25-11-13 04:44:22
+                                   DTC   25-06-29 13:51:50
+    Owner: moose/moose
+------------ ---------- ---------- -----
+   154 files    4948163    1536481 0.311 

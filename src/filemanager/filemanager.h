@@ -35,7 +35,7 @@ extern WPanel *left_panel;
 extern WPanel *right_panel;
 extern WPanel *current_panel;
 
-extern const char *mc_prompt;
+extern char *mc_prompt;
 
 /*** declarations of public functions ************************************************************/
 
@@ -45,7 +45,7 @@ char *get_random_hint (gboolean force);
 void load_hint (gboolean force);
 WPanel *change_panel (void);
 void save_cwds_stat (void);
-gboolean quiet_quit_cmd (void);
+gboolean quiet_quit_cmd (gboolean suppress_last_pwd);
 gboolean do_nc (void);
 
 /*** inline functions ****************************************************************************/

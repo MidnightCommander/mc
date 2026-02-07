@@ -32,7 +32,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -58,6 +57,7 @@
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"
 #include "src/selcodepage.h"  // do_set_codepage
+#include "src/util.h"         // file_error_message()
 
 #include "filemanager.h"  // current_panel
 #include "panel.h"        // panel_cd
@@ -457,8 +457,7 @@ exec_extension (WPanel *panel, void *target, const vfs_path_t *filename_vpath, c
 
     if (cmd_file_fd == -1)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary command file\n%s"),
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot create temporary command file"), NULL);
         g_string_free (shell_string, TRUE);
         goto ret;
     }
@@ -773,9 +772,9 @@ check_old_extension_file (void)
     extension_old_file = mc_config_get_full_path (MC_EXT_OLD_FILE);
     if (exist_file (extension_old_file))
         message (D_ERROR, _ ("Warning"),
-                 _ ("You have an outdated %s file.\nMidnight Commander now uses %s file.\n"
+                 _ ("You have an outdated %s file.\n%s now uses %s file.\n"
                     "Please copy your modifications of the old file to the new one."),
-                 extension_old_file, MC_EXT_FILE);
+                 extension_old_file, PACKAGE_NAME, MC_EXT_FILE);
     g_free (extension_old_file);
 }
 
@@ -826,8 +825,8 @@ load_extension_file (void)
             message (D_ERROR, MSG_ERROR,
                      _ ("The format of the\n%s%s\nfile has changed with version 4.0.\n"
                         "It seems that the installation has failed.\nPlease fetch a fresh copy "
-                        "from the Midnight Commander package."),
-                     mc_global.sysconfig_dir, MC_EXT_FILE);
+                        "from the %s package."),
+                     mc_global.sysconfig_dir, MC_EXT_FILE, PACKAGE_NAME);
             return FALSE;
         }
 

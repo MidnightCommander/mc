@@ -60,7 +60,8 @@
 const vfs_path_t *
 subshell_get_cwd (void)
 {
-    if (mc_global.mc_run_mode == MC_RUN_FULL)
+    // Note: current_panel is NULL during subshell startup
+    if (mc_global.mc_run_mode == MC_RUN_FULL && current_panel != NULL)
         return current_panel->cwd_vpath;
 
     return vfs_get_raw_current_dir ();

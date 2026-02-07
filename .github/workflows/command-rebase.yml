@@ -25,7 +25,7 @@ jobs:
       pull-requests: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token
           fetch-depth: 0
@@ -36,6 +36,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          gh config set git_protocol ssh
           gh pr checkout ${{ github.event.issue.number }}
 
       # Warning: beware of running any user-injected content from this point on (CWE-829)!
@@ -47,4 +48,4 @@ jobs:
 
           GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash origin/master
 
-          git push -u origin HEAD --force-with-lease
+          git push --force

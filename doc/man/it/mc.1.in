@@ -49,13 +49,6 @@ colori
 .\"Colors"
 per ulteriori informazioni.
 .TP
-.I "\-C arg"
-Usato per specificare un set di colori differente a riga di comando.
-Il formato di arg è documentato nella sezione
-.\"LINK2"
-colori\&.
-.\"Colors"
-.TP
 .I "\-d"
 Disabilita il supporto mouse.
 .TP
@@ -66,10 +59,6 @@ partenza. Vedere anche
 .TP
 .I "\-f"
 Mostra i percorsi di ricerca compilati per i file del Midnight Commander.
-.TP
-.I "\-k"
-Reimposta i softkeys ai valori predefiniti dal database termcap/terminfo.
-Utile solo su terminali HP quando non vanno i tasti funzione.
 .TP
 .I "\-l file" 
 Salva il dialogo ftpfs con il server in file.
@@ -82,9 +71,11 @@ utilizzata da una speciale funzione shell che imposti automaticamente
 l'ultima directory corrente della shell come l'ultima directory in cui
 stava il Midnight Commander. Prelevate i file
 .B %pkglibexecdir%/mc.sh
-(utenti bash e zsh) o rispettivamente
+(utenti bash e zsh),
 .B %pkglibexecdir%/mc.csh
-(utenti tcsh) per definire
+(utenti tcsh) o rispettivamente
+.B %pkglibexecdir%/mc.fish
+(utenti fish) per definire
 .B mc
 come un alias allo script di shell appropriato.
 .TP
@@ -1504,13 +1495,6 @@ quali azioni si vuole una richiesta di conferma.
 .PP
 Il comando
 .\"LINK2"
-mostra bit
-.\"Display bits"
-mostra una finestra di dialogo dalla quale è possibile selezionare quali
-caratteri il vostro terminale è capace di mostrare.
-.PP
-Il comando
-.\"LINK2"
 impara tasti
 .\"Learn keys"
 mostra una finestra di dialogo dalla quale è possibile controllare i tasti
@@ -1733,14 +1717,7 @@ selezionata viene mostrata sul fondo dei pannelli.
 .SH "    Conferme"
 In questo menu è possibile configurare le opzioni di conferma per la
 cancellazione e sovrascrittura dei file, esecuzione dei file premendo invio e
-per l'uscita dal programma. 
-.\"NODE "    Display bits"
-.SH "    Mostra bit"
-Viene usata per configurare la quantità dei caratteri visibili sullo
-schermo. Quest'impostazione può essere 7 bit, se il terminale/libreria_curses 
-supporta solo sette bit in uscita, ISO\-8859\-1 se mostra tutti i caratteri
-nella mappa ISO\-8859\-1 e uscita completa a 8 bit per quei terminali che possono
-visualizzare tutti i caratteri a 8 bit.
+per l'uscita dal programma.
 .\"NODE "    Learn keys"
 .SH "    Impara tasti"
 Questa finestra di dialogo permette di controllare e ridefinire i tasti
@@ -1973,7 +1950,7 @@ posizione del cursore. Solo per la modifica menu.
 .I "%y"
 Il tipo di sintassi del file corrente. Solo per la modifica menu.
 .TP
-.I "%k"
+.I "%b"
 Nome del file di blocco.
 .TP
 .I "%e"
@@ -1988,7 +1965,7 @@ Nome del file corrente.
 .I "%x"
 L'estensione del file corrente.
 .TP
-.I "%b"
+.I "%n"
 Nome del file corrente ma senza estensione.
 .TP
 .I "%d"
@@ -2671,29 +2648,6 @@ Esempi:
     sh://joe@vuole.lacompressione.edu:C/privato
     sh://joe@noncompresso.ssh.edu/privato
 .fi
-.\"NODE "  Undelete File System"
-.SH "  Recupero file cancellati"
-Su sistemi Linux, se si richiede, tramite configure, di usare la
-caratteristica di undelete del file system ext2, si avrà accesso al
-file system di recupero file cancellati. Il recupero file cancellati è
-disponibile solo su file system di tipo ext2. Il file system è solo
-un'interfaccia alla libreria ext2fs che: recupera tutti i nomi dei
-file cancellati su un fs ext2 e fornisce ed estrae i file selezionati
-in una partizione normale.
-.PP
-Per usare questo file system, è necessario entrare nella directory
-con il nome speciale formato dal prefisso "undel://" e dal nome del
-file system dove il file risiede.
-.PP
-Per esempio, per recuperare file cancellati sulla seconda partizione
-del primo disco SCSI su Linux, si dovrà usare il seguente percorso:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-Il recupero può metterci un po' di tempo per caricare le informazioni
-necessarie per poter cominciare a navigare attraverso i file.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs
@@ -2839,107 +2793,6 @@ color_terminals=nome_terminale\-1,nome\-terminale\-2...
 Il programma può essere compilato sia con il supporto di ncurses che
 di S\-Lang ma ncurses non fornisce alcun modo per forzare la modalità
 colore: ncurses userà solo le informazioni nel database dei terminali.
-.PP
-Il Midnight Commander fornisce un modo per cambiare i colori predefiniti.
-Attualmente i colori sono configurati usando la variabile ambiente
-.B MC_COLOR_TABLE 
-o la sezione Colors nel file di inizializzazione.
-.PP
-Nella sezione Colors, la mappa dei colori predefinita viene caricata 
-dalla variabile 
-.IR base_color . 
-Si può specificare una mappa colori alternativa per un terminale
-usando il nome del terminale come chiave nella sezione. Esempio:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-Il formato della definizione dei colori è:
-.PP
-.nf
-  <parolachiave>=<coloreprimopiano>,<coloresfondo>:<parolachiave>= ...
-.fi
-.PP
-I colori sono opzionali e le parolechiave sono: normal, selected, marked,
-markselect, errors, input, reverse, gauge. I colori dei menu sono: menunormal,
-menusel, menuhot, menuhotsel, menuinactive. I colori delle finestre di
-dialogo sono: dnormal, dfocus, dhotnormal, dhotfocus. I colori dell'aiuto
-sono: helpnormal, helpitalic, helpbold, helplink, helpslink.
-Il colore del visualizzatore è: viewunderline.
-Colori speciali di evidenziazione: executable, directory, link, device, 
-special, core.
-I colori dell'viewer sono: viewnormal, viewbold, viewunderline, viewselected.
-I colori dell'editor sono: editnormal, editbold, editmarked, editnonprintable.
-.PP
-.I input 
-determina il colore delle righe di input usate delle finestre di dialogo.
-.PP
-.I gauge 
-determina il colore della parte riempita della barra di progressione
-(gauge), che mostra quanta percentuale del file è stata copiata o 
-altro in forma grafica.
-.PP
-Le finestre di dialogo usano i colori seguenti:
-.I dnormal 
-usata per il testo normale,
-.I dfocus
-è il colore usato per il componente correntemente selezionato,
-.I dhotnormal
-è il colore usato per differenziare il tasto di scelta rapida
-nei componenti normali, mentre il colore
-.I dhotfocus
-viene usato per il colore evidenziato nel componente correntemente
-selezionato.
-.PP
-I menu usano lo stesso schema ma usano invece i selettori menunormal, menusel,
-menuhot, menuhotsel e menuinactive.
-.PP
-L'aiuto usa i seguenti colori:
-.I helpnormal
-viene usato per il testo normale,
-.I helpitalic
-viene usato per il testo enfatizzato con il corsivo nelle pagine del manuale,
-.I helpbold
-viene usato per il testo enfatizzato con il grassetto nelle pagine del manuale,
-.I helplink
-viene usato per un collegamento non selezionato e
-.I helpslink
-viene usato per un collegamento selezionato.
-.PP
-I colori speciali di evidenziazione determinano come i file
-vengono visualizzati quando l'evidenziazione dei file è 
-abilitata (vedere sezione 
-.\"LINK2"
-aspetto\&).
-.\"Layout
-.I directory
-usata per directory o collegamenti simbolici a directory;
-.I executable
-per il file eseguibili;
-.I link
-viene usata per i collegamenti simbolici che non sono nè interrotti
-nè connessi a directory;
-.I stalelink
-usata per collegamenti simbolici interrotti;
-.I device
-\- dispositivi a caratteri e blocchi;
-.I special
-usata per i file speciali, come pipe e socket;
-.I core
-usata per i file core.
-.PP
-I colori possibili sono: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray e white. Inoltre c'è una speciale parola
-chiave per lo sfondo trasparente. Essa è 'default'. Il 'default' può
-essere usato solo come colore di sfondo. Esempio:
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
 .\"NODE "Special Settings"
 .SH "Impostazioni speciali"
 Molte delle impostazioni del Midnight Commander possono essere cambiate
@@ -3008,20 +2861,6 @@ Questa variabile lavora solo se non si sta usando il supporto della
 subshell. Quando si usano i tasti C\-o per tornare allo schermo utente,
 se quest'opzione è impostata, si avrà una nuova shell. Altrimenti,
 premendo qualsiasi tasto si tornerà al Midnight Commander.
-.TP
-.I torben_fj_mode
-Se quest'opzione è impostata, allora i tasti inizio e fine lavoreranno
-leggermente differentemente sui pannelli. Invece che muovere le selezioni
-al primo e ultimo file del pannello, agiranno nel modo seguente:
-.IP
-Il tasto inizio: va alla riga centrale, se sotto di essa, altrimenti
-va alla riga in cima a meno che non ci sia già; in tal caso andrà al
-primo file del pannello.
-.IP
-Il tasto fine ha un comportamento simile: va giù alla riga centrale
-se era sopra di essa, altrimenti va alla riga di fondo a meno che non 
-ci sia già; in tal caso sposterà la selezione all'ultimo file del
-pannello.
 .TP
 .I use_file_to_guess_type
 Se questa variabile è abilitata (valore predefinito) userà il comando
@@ -3156,7 +2995,7 @@ per i dettagli sulla licenza e sulla mancanza di garanzie.
 .\"NODE "AVAILABILITY"
 .SH "REPERIBILITA'"
 L'ultima versione di questo programma si trova su
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .\"NODE "SEE ALSO"
 .SH "VEDERE ANCHE"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
@@ -3164,7 +3003,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 La pagina Web del Midnight Commander:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTORI"

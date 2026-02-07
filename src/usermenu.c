@@ -31,7 +31,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -54,6 +53,7 @@
 #include "src/execute.h"
 #include "src/setup.h"
 #include "src/history.h"
+#include "src/util.h"  // file_error_message()
 
 #include "src/filemanager/dir.h"
 #include "src/filemanager/filemanager.h"
@@ -392,7 +392,7 @@ test_line (const Widget *edit_widget, char *p, gboolean *result)
             p++;
         if (*p == '\0' || *p == '\n')
             break;
-        operator= * p++;
+        operator = *p++;
         if (*p == '?')
         {
             debug_flag = TRUE;
@@ -465,8 +465,7 @@ execute_menu_command (const Widget *edit_widget, const char *commands, gboolean 
 
     if (cmd_file_fd == -1)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary command file\n%s"),
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot create temporary command file"), NULL);
         return;
     }
 
@@ -639,28 +638,60 @@ menu_file_own (char *path)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* Formats defined:
-   %%  The % character
-   %f  The current file in the active panel (if non-local vfs, file will be copied locally
-   and %f will be full path to it) or the opened file in the internal editor.
-   %p  Likewise.
-   %d  The current working directory
-   %s  "Selected files"; the tagged files if any, otherwise the current file
-   %t  Tagged files
-   %u  Tagged files (and they are untagged on return from expand_format)
-   %view Runs the commands and pipes standard output to the view command.
-   If %view is immediately followed by '{', recognize keywords
-   ascii, hex, nroff and unform
+/*  Formats defined:
 
-   If the format letter is in uppercase, it refers to the other panel.
+    mc.menu formats:
 
-   With a number followed the % character you can turn quoting on (default)
-   and off. For example:
-   %f    quote expanded macro
-   %1f   ditto
-   %0f   don't quote expanded macro
+        %f The name of the current file without the path on the active panel.
+        %p Same as %f.
+        %n The current file name without extension.
+        %x The extension of the current file name.
+        %d The directory of the active panel.
+        %t The tagged files.
+        %s The selected files: the tagged files if any, otherwise the current file.
+        %u Similar to the %t macros, but in addition the files are untagged.
+            You can use this macro only once per menu file entry or extension file entry,
+            because next time there will be no tagged files.
 
-   expand_format returns a memory block that must be free()d.
+        If the format letter is in uppercase, it refers to the other panel.
+
+
+    mcedit.menu formats:
+
+        %f The current file name without the path.
+        %p Same as %f.
+        %n The current file name without extension.
+        %x The extension of the current file name.
+        %d The current working directory.
+
+        Unlike mc.menu file, file and directory macros are not referenced file on the panels.
+        Therefore uppercase and lowercase macros above are same.
+
+        %c The cursor column position number.
+        %i The indent of blank space, equal the cursor column position.
+        %y The syntax type of current file.
+        %b The block file name.
+
+
+    Common (for mc.menu and mcedit.menu):
+        %% The % character
+
+        %view Runs the commands and pipes standard output to the view command.
+            If %view is immediately followed by '{', keywords 'ascii', 'hex', 'nroff'
+            and 'unform' are recognized.
+
+        %{some text} Prompt for the substitution. An input box is shown and the text inside
+            the braces is used as a prompt. The macro is substituted by the text typed
+            by the user. The user can press ESC or F10 to cancel. This macro doesn't work
+            on the command line yet.
+
+        With a number followed the % character you can turn quoting on (default)
+        and off. For example:
+            %f  quote expanded macro
+            %1f ditto
+            %0f don't quote expanded macro.
+
+    Expand_format returns a memory block that must be free()d.
  */
 
 /* Returns how many characters we should advance if %view was found */
@@ -838,6 +869,9 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
     case 'x':
         result = quote_func (extension (fname), FALSE);
         goto ret;
+    case 'n':  // strip extension
+        result = strip_ext (quote_func (fname, FALSE));
+        goto ret;
     case 'd':
     {
         const char *cwd;
@@ -883,8 +917,7 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
         }
 #endif
         break;
-    case 'k':  // block file name
-    case 'b':  // block file name / strip extension
+    case 'b':  // block file name
 #ifdef USE_INTERNAL_EDIT
         if (e != NULL)
         {
@@ -893,20 +926,6 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
             file = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
             result = quote_func (file, FALSE);
             g_free (file);
-            goto ret;
-        }
-#endif
-        if (c_lc == 'b')
-        {
-            result = strip_ext (quote_func (fname, FALSE));
-            goto ret;
-        }
-        break;
-    case 'n':  // strip extension in editor
-#ifdef USE_INTERNAL_EDIT
-        if (e != NULL)
-        {
-            result = strip_ext (quote_func (fname, FALSE));
             goto ret;
         }
 #endif
@@ -929,9 +948,11 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 
     case 't':
     case 'u':
+    case 'v':
     {
         GString *block = NULL;
         int i;
+        char *qcwd = NULL;
 
         if (panel == NULL)
         {
@@ -939,28 +960,40 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
             goto ret;
         }
 
+        if (c_lc == 'v')
+        {
+            const char *cwd = vfs_path_as_str (panel->cwd_vpath);
+
+            qcwd = quote_func (cwd, FALSE);
+        }
+
+        block = g_string_sized_new (64);
+
         for (i = 0; i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked != 0)
             {
                 char *tmp;
 
+                if (qcwd != NULL)
+                {
+                    g_string_append (block, qcwd);
+                    g_string_append (block, PATH_SEP_STR);
+                }
+
                 tmp = quote_func (panel->dir.list[i].fname->str, FALSE);
+
                 if (tmp != NULL)
                 {
-                    if (block == NULL)
-                        block = g_string_new_take (tmp);
-                    else
-                    {
-                        g_string_append (block, tmp);
-                        g_free (tmp);
-                    }
+                    g_string_append (block, tmp);
+                    g_free (tmp);
                     g_string_append_c (block, ' ');
                 }
 
                 if (c_lc == 'u')
                     do_file_mark (panel, i, 0);
             }
-        result = block == NULL ? NULL : g_string_free (block, block->len == 0);
+        g_free (qcwd);
+        result = g_string_free (block, block->len == 0);
         goto ret;
     }  // sub case block
     default:
@@ -987,7 +1020,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     int max_cols = 0;
     int col = 0;
     gboolean accept_entry = TRUE;
-    int selected = 0;
+    int selected = -1;
     gboolean old_patterns;
     gboolean res = FALSE;
     gboolean interactive = TRUE;
@@ -1006,8 +1039,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     {
         if (menu_file != NULL)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open file %s\n%s"), menu,
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot open file\n%s"), menu);
             MC_PTR_FREE (menu);
             return FALSE;
         }
@@ -1037,8 +1069,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
 
     if (!g_file_get_contents (menu, &data, NULL, NULL))
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot open file %s\n%s"), menu,
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot open file\n%s"), menu);
         MC_PTR_FREE (menu);
         return FALSE;
     }
@@ -1066,7 +1097,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                 {
                     // Combined adding and default
                     p = test_line (edit_widget, p + 1, &accept_entry);
-                    if (selected == 0 && accept_entry)
+                    if (selected < 0 && accept_entry)
                         selected = menu_lines;
                 }
                 else
@@ -1081,7 +1112,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                 {
                     // Combined adding and default
                     p = test_line (edit_widget, p + 1, &accept_entry);
-                    if (selected == 0 && accept_entry)
+                    if (selected < 0 && accept_entry)
                         selected = menu_lines;
                 }
                 else
@@ -1090,7 +1121,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                     gboolean ok = TRUE;
 
                     p = test_line (edit_widget, p, &ok);
-                    if (selected == 0 && ok)
+                    if (selected < 0 && ok)
                         selected = menu_lines;
                 }
                 break;

@@ -328,10 +328,10 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
     WDialog *sug_dlg;
     WGroup *g;
     WListbox *sug_list;
-    int max_btn_len = 0;
-    int replace_len;
-    int skip_len;
-    int cancel_len;
+    int max_btn_width = 0;
+    int replace_width;
+    int skip_width;
+    int cancel_width;
     WButton *add_btn;
     WButton *replace_btn;
     WButton *skip_btn;
@@ -348,20 +348,20 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
 
     add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _ ("&Add word"), 0);
     replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _ ("&Replace"), 0);
-    replace_len = button_get_len (replace_btn);
+    replace_width = button_get_width (replace_btn);
     skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _ ("&Skip"), 0);
-    skip_len = button_get_len (skip_btn);
+    skip_width = button_get_width (skip_btn);
     cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _ ("&Cancel"), 0);
-    cancel_len = button_get_len (cancel_button);
+    cancel_width = button_get_width (cancel_button);
 
-    max_btn_len = MAX (replace_len, skip_len);
-    max_btn_len = MAX (max_btn_len, cancel_len);
+    max_btn_width = MAX (replace_width, skip_width);
+    max_btn_width = MAX (max_btn_width, cancel_width);
 
     lang_label = g_strdup_printf ("%s: %s", _ ("Language"), aspell_get_lang ());
     word_label = g_strdup_printf ("%s: %s", _ ("Misspelled"), word);
     word_label_len = str_term_width1 (word_label) + 5;
 
-    sug_dlg_w += max_btn_len;
+    sug_dlg_w += max_btn_width;
     sug_dlg_w = MAX (sug_dlg_w, word_label_len) + 1;
 
     sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
@@ -599,7 +599,7 @@ edit_suggest_current_word (WEdit *edit)
     {
         GString *tmp_word;
 
-        tmp_word = str_convert_to_display (match_word->str);
+        tmp_word = str_nconvert_to_display (match_word->str, match_word->len);
         g_string_free (match_word, TRUE);
         match_word = tmp_word;
     }

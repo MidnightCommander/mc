@@ -1,0 +1,5 @@
+uarj.input is created with arj from uarj.arj
+uarj.arj is created with arj from the `doc` folder of mc
+
+	echo "Hello, World!" > "doc/Hello world.txt"
+	arj a -+ -y -a1 -r -2s -2o2 -jf uarj.arj doc/

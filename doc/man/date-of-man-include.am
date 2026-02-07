@@ -1,10 +1,10 @@
 SED_PARAMETERS = \
 	-e "s/%DATE_OF_MAN_PAGE%/$${MAN_DATE}/g" \
-	-e "s/%MAN_VERSION%/@MAN_VERSION@/g" \
-	-e "s{%sysconfdir%{@sysconfdir@{g" \
-	-e "s{%libexecdir%{@libexecdir@{g" \
-	-e "s{%pkglibexecdir%{@pkglibexecdir@{g" \
-	-e "s{%pkgdatadir%{$(datadir)/@PACKAGE@{g"
+	-e "s/%MAN_VERSION%/$(MAN_VERSION)/g" \
+	-e "s{%sysconfdir%{$(sysconfdir){g" \
+	-e "s{%libexecdir%{$(libexecdir){g" \
+	-e "s{%pkglibexecdir%{$(pkglibexecdir){g" \
+	-e "s{%pkgdatadir%{$(pkgdatadir){g"
 
 MAN_DATE_CMD = \
 	LC_ALL=$(DATE_LANG) @PERL_FOR_BUILD@ -CS -MPOSIX -e '\

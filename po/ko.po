@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Junghee Lee <daemul72@gmail.com>, 2021
-# Junghee Lee <daemul72@gmail.com>, 2019-2020
+# JungHee Lee <daemul72@gmail.com>, 2021
+# JungHee Lee <daemul72@gmail.com>, 2019-2020
 # JinYeong Bak <dongdm@gmail.com>, 2016
-# Junghee Lee <daemul72@gmail.com>, 2022-2023
-# Junghee Lee <daemul72@gmail.com>, 2022
-# Junghee Lee <daemul72@gmail.com>, 2019-2021,2023
+# JungHee Lee <daemul72@gmail.com>, 2022-2023
+# JungHee Lee <daemul72@gmail.com>, 2022
+# JungHee Lee <daemul72@gmail.com>, 2019-2021,2023
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2023-2024
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Yury V. Zaytsev <yury@shurup.com>, 2025
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -27,6 +27,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr ""
+
 msgid "Warning: cannot load codepages list"
 msgstr "경고: 코드 페이지 목록을 불러올 수 없음"
 
@@ -56,6 +59,10 @@ msgstr "이벤트에 대한 '%s' 그룹을 생성할 수 없습니다!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "'%s' 이벤트를 생성할 수 없습니다!"
+
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -158,25 +165,42 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"256색이 아닌 터미널에서 256색을 지원하는\n"
-"'%s' 스킨을 사용할 수 없습니다.\n"
-"기본 스킨을 불러왔습니다"
 
-msgid "True color not supported with ncurses."
-msgstr "트루 컬러는 ncurses에서 지원하지 않습니다."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "터미널이 256색상을 지원하지 않는 것 같습니다."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "트루 컬러는 이 속어 버전에서 지원되지 않습니다."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr "터미널이 트루 컬러를 지원하는 경우, COLORTERM=truecolor로 설정."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
+msgstr ""
 
 msgid "Escape"
 msgstr "Esc"
@@ -771,12 +795,9 @@ msgstr "[이_디렉터리] [다른_패널_디렉터리]"
 #, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
-"\n"
-"모든 버그 보고서('mc-V' 출력 포함)는 \n"
-"%s 에서 티켓으로 보내주십시오\n"
 
 msgid "Main options"
 msgstr "주요 옵션"
@@ -842,31 +863,17 @@ msgstr "검색"
 msgid "Search is disabled"
 msgstr "검색이 비활성화되었습니다"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+msgid "Cannot create temporary diff file"
 msgstr ""
-"%s\n"
-"임시 Diff 파일을 생성할 수 없음"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
-"%s%s\n"
-"%s\n"
-" 백업 파일을 생성할 수 없음"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+msgid "Cannot create temporary merge file"
 msgstr ""
-"%s\n"
-"임시 병합 파일을 생성할 수 없음"
 
 msgid "&Fastest (Assume large files)"
 msgstr "가장 빠름 (대용량 파일 추정)(&F)"
@@ -934,18 +941,17 @@ msgstr "옵션"
 msgid "ButtonBar|Quit"
 msgstr "종료"
 
-msgid "Quit"
-msgstr "종료"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "파일을 수정했습니다. 저장 후 나가시겠습니까?"
 
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"미드나잇 커맨더를 끝냅니다.\n"
-"수정한 파일을 저장하시겠습니까?"
+
+msgid "Quit"
+msgstr "종료"
 
 msgid "Diff:"
 msgstr "비교:"
@@ -954,16 +960,16 @@ msgid "File name is empty!"
 msgstr ""
 
 #, c-format
-msgid "\"%s\" is a directory"
-msgstr "\"%s\"은(는) 디렉터리임"
+msgid ""
+"%s\n"
+"is a directory"
+msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
-"\"%s\"에 대한 상태\n"
-"%s"
 
 msgid "Diff viewer: invalid mode"
 msgstr "Diff 뷰어: 잘못된 모드"
@@ -979,8 +985,10 @@ msgid "Loading..."
 msgstr "불러오는 중..."
 
 #, c-format
-msgid "Cannot open %s for reading"
-msgstr "%s을(를) 열 수 없음"
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
 
 msgid "Load file"
 msgstr "파일 불러오기"
@@ -990,12 +998,10 @@ msgid "Error reading %s"
 msgstr "%s을(를) 읽는 중 오류 발생"
 
 #, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "%s에 대한 크기/사용 권한을 가져올 수 없음"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
-msgstr "\"%s\"가 일반 파일이 아님"
+msgid ""
+"%s\n"
+"is not a regular file"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1013,8 +1019,10 @@ msgid "Error reading from pipe: %s"
 msgstr "파이프에서 읽는 중 오류 발생: %s"
 
 #, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr "읽을 파이프를 열 수 없음: %s"
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
+msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "파일에 하드-링크가 있습니다. 저장하기 전에 분리 하시겠습니까?"
@@ -1027,12 +1035,11 @@ msgid "Error writing to pipe: %s"
 msgstr "파이프에 쓰는 중 오류 발생: %s"
 
 #, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "쓰기 위해 파이프를 열 수 없음: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
-msgstr "쓰기 위해 파일을 열 수 없음: %s"
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
+msgstr ""
 
 msgid "The file you are saving does not end with a newline."
 msgstr "저장중인 파일은 개행 문자로 끝나지 않음."
@@ -1061,6 +1068,12 @@ msgstr "줄 바꿈을 다음으로 변경:"
 msgid "Save As"
 msgstr "다른이름으로 저장"
 
+#, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr ""
+
 msgid "&Quick save"
 msgstr "빠른 저장(&Q)"
 
@@ -1076,8 +1089,12 @@ msgstr "POSIX 새 행 확인(&P)"
 msgid "Edit Save Mode"
 msgstr "저장 모드 편집"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "저장할 수 없음: 대상이 일반 파일이 아님"
+#, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr "이 이름의 파일이 이미 있음"
@@ -1138,11 +1155,9 @@ msgstr "파일 닫기"
 
 #, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"미드나잇 커맨더가 종료 중입니다.\n"
-"수정된 파일 %s을(를) 저장하시겠습니까?"
 
 msgid "This function is not implemented"
 msgstr "이 기능은 구현되지 않음"
@@ -1355,6 +1370,9 @@ msgstr "일치하는 괄호로 이동(&B)"
 
 msgid "Toggle s&yntax highlighting"
 msgstr "구문 강조표시 전환(&Y)"
+
+msgid "Togg&le right margin"
+msgstr ""
 
 msgid "&Find declaration"
 msgstr "선언문 찾기(&F)"
@@ -1575,14 +1593,10 @@ msgstr "바꾸기 확인"
 msgid "%ld replacements made"
 msgstr "%ld 교체"
 
+#, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
-msgstr ""
-"사용자 친화적인 텍스트 편집기\n"
-"미드나잇 커맨더를 위해 작성됨."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+"written for the %s."
 msgstr ""
 
 msgid "About"
@@ -1711,16 +1725,14 @@ msgstr "< 자동 >"
 msgid "< Reload Current Syntax >"
 msgstr "<현재 구문 새로 고침>"
 
-msgid "Load syntax file"
-msgstr "구문 파일 불러오기"
-
 #, c-format
 msgid ""
-"Cannot open file %s\n"
+"Cannot open file\n"
 "%s"
 msgstr ""
-"%s 파일을 열 수 없음\n"
-"%s"
+
+msgid "Load syntax file"
+msgstr "구문 파일 불러오기"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1750,8 +1762,9 @@ msgstr ""
 "xterm 또는 Linux 콘솔이 아닙니다.\n"
 "서브쉘은 토글할 수 없습니다."
 
-msgid "Type 'exit' to return to the Midnight Commander"
-msgstr "미드나잇 커맨더로 돌아가려면 'exit'를 입력하십시오."
+#, c-format
+msgid "Type 'exit' to return to the %s"
+msgstr ""
 
 msgid "Set &all"
 msgstr "모두 설정(&A)"
@@ -1783,28 +1796,27 @@ msgstr "chown 고급 명령어"
 
 #, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
+"Cannot chmod\n"
+"%sn%s"
 msgstr ""
-"\"%s\"을(를) chmod할 수 없음\n"
-"%s"
-
-msgid "&Ignore"
-msgstr "무시(&I)"
-
-msgid "Ignore &all"
-msgstr "모두 무시(&A)"
-
-msgid "&Retry"
-msgstr "재시도(&R)"
 
 #, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chmod\n"
 "%s"
 msgstr ""
-"\"%s\"을(를) 선택할 수 없음\n"
+
+#, c-format
+msgid ""
+"Cannot chown\n"
 "%s"
+msgstr ""
 
 msgid "< Default >"
 msgstr "< 기본 값 >"
@@ -1812,14 +1824,22 @@ msgstr "< 기본 값 >"
 msgid "Skins"
 msgstr "스킨"
 
-msgid "Other 8 bit"
-msgstr "다른 8비트"
-
 msgid "Running"
 msgstr "실행중"
 
 msgid "Stopped"
 msgstr "중지됨"
+
+#, c-format
+msgid "Detected display codepage: %s"
+msgstr ""
+
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "안 함(&N)"
@@ -2040,27 +2060,6 @@ msgstr "히스토리 정리(&H)"
 msgid "Confirmation"
 msgstr "확인"
 
-msgid "&UTF-8 output"
-msgstr "UTF-8 출력(&U)"
-
-msgid "&Full 8 bits output"
-msgstr "전체 8비트 출력(&F)"
-
-msgid "&ISO 8859-1"
-msgstr "ISO 8859-1(&I)"
-
-msgid "7 &bits"
-msgstr "7비트(&B)"
-
-msgid "F&ull 8 bits input"
-msgstr "8비트 입력(&U)"
-
-msgid "Display bits"
-msgstr "디스플레이 비트"
-
-msgid "Input / display codepage:"
-msgstr "코드페이지 입력/표시:"
-
 msgid "Directory tree"
 msgstr "디렉터리 트리"
 
@@ -2118,12 +2117,8 @@ msgstr "백그라운드 작업"
 #, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
-"디렉터리를 다음으로 변경할 수 없음\n"
-"%s\n"
-"%s"
 
 msgid "Secure deletion"
 msgstr "보안 삭제"
@@ -2179,8 +2174,8 @@ msgstr "최상위 디렉터리 계층"
 msgid "Inode uses extents"
 msgstr "Inode는 extents를 사용합니다"
 
-msgid "Huge_file"
-msgstr "대용량_파일"
+msgid "Huge file"
+msgstr ""
 
 msgid "No COW"
 msgstr "COW 없음"
@@ -2214,15 +2209,19 @@ msgstr "Chattr 명령"
 
 #, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
-"%s"
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
-"\"%s\" 속성 변경을 할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot get ext2 attributes of\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chattr\n"
 "%s"
 msgstr ""
 
@@ -2327,12 +2326,16 @@ msgid "Link"
 msgstr "링크"
 
 #, c-format
-msgid "link: %s"
-msgstr "링크: %s"
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr ""
 
 #, c-format
-msgid "symlink: %s"
-msgstr "심볼릭링크: %s"
+msgid ""
+"Cannot create symbolic link\n"
+"%s"
+msgstr ""
 
 msgid "View file"
 msgstr "파일 보기"
@@ -2404,12 +2407,16 @@ msgid "Edit symlink"
 msgstr "심볼릭링크 편집"
 
 #, c-format
-msgid "edit symlink, unable to remove %s: %s"
-msgstr "심볼릭링크 편집, %s을(를) 제거할 수 없음: %s"
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
+msgstr ""
 
 #, c-format
-msgid "edit symlink: %s"
-msgstr "심볼릭링크 편집: %s"
+msgid ""
+"Cannot edit symlink\n"
+"%s"
+msgstr ""
 
 msgid "FTP to machine"
 msgstr "호스트에 FTP"
@@ -2419,16 +2426,6 @@ msgstr "호스트에 SFTP"
 
 msgid "Shell link to machine"
 msgstr "호스트에 쉘 링크"
-
-msgid "Undelete files on an ext2 file system"
-msgstr "ext2 파일 시스템에서 파일 삭제 해제"
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
-msgstr ""
-"삭제를 취소할 장치 입력 (/dev/ 없이).\n"
-"다음 파일: (자세한 내용은 F1)"
 
 msgid "Directory scanning"
 msgstr "디렉터리 스캐닝"
@@ -2450,13 +2447,8 @@ msgstr "로컬이 아닌 파일 시스템에서 명령을 실행할 수 없음"
 msgid "Parameter"
 msgstr "매개변수"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+msgid "Cannot create temporary command file"
 msgstr ""
-"임시 명령 파일을 생성할 수 없음\n"
-"%s"
 
 msgid "Pipe failed"
 msgstr "파이프 실패"
@@ -2464,12 +2456,9 @@ msgstr "파이프 실패"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
-"오래된 %s 파일이 있습니다.\n"
-"Midnight Commander는 이제 %s 파일을 사용합니다.\n"
-"이전 파일의 수정 사항을 새 파일에 복사합니다."
 
 #, c-format
 msgid ""
@@ -2477,12 +2466,8 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
-"%s%s\n"
-"파일의 형식이 버전 4.0에서 변경되었습니다.\n"
-"설치가 실패한 것 같습니다.\n"
-"Midnight Commander 패키지에서 새 사본을 가져오십시오."
 
 #, c-format
 msgid ""
@@ -2543,31 +2528,21 @@ msgstr " 소스 마스크 사용:"
 
 #, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
-"\"%s\" 하드링크 소스 파일을 통계할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 하드링크를 만들 수 없음\n"
-"%s"
-
-#, c-format
-msgid "Cannot create target hardlink \"%s\""
-msgstr "\"%s\" 대상 하드링크를 만들 수 없음"
 
 #, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
-"\"%s\" 소스 링크를 읽을 수 없음\n"
-"%s"
 
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
@@ -2580,11 +2555,9 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 심볼릭링크를 만들 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2610,45 +2583,46 @@ msgstr ""
 "\"%s\"\n"
 "는 같은 파일임"
 
+msgid "&Ignore"
+msgstr "무시(&I)"
+
 msgid "Ignore a&ll"
 msgstr ""
 
+msgid "&Retry"
+msgstr "재시도(&R)"
+
 #, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\"%s\" 디렉터리가 비어 있지 않음.\n"
-"다시 삭제하시겠습니까?"
 
 #, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"배경 프로세스:\n"
-"\"%s\" 디렉터리가 비어 있지 않음.\n"
-"다시 삭제하시겠습니까?"
 
 msgid "Non&e"
 msgstr "없음(&E)"
 
 #, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
-"%s 파일을 제거할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
-"%s 파일을 stat할 수 없음\n"
-"%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2656,156 +2630,127 @@ msgstr "%s 디렉터리를 덮어쓸 수 없음"
 
 #, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"%s 파일을 \"%s\"로 이동할 수 없음\n"
-"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-"%s 디렉터리를 제거할 수 없음\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
-"%s 디렉터리를 덮어쓸 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
 msgstr ""
-"%s 파일을 덮어쓸 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
 msgstr ""
-"\"%s\" 디렉터리를 \"%s\"로 이동할 수 없음\n"
+
+#, c-format
+msgid ""
+"Cannot overwrite file\n"
 "%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot move directory\n"
+"%s\n"
+"to\n"
+"%s"
+msgstr ""
 
 msgid "Cannot operate on \"..\"!"
 msgstr "\"..\"에서 작동할 수 없습니다!"
 
 #, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" 원본 파일을 통계할 수 없음\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"\"%s\" 특수 파일을 만들 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일을 chown 할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일을 chmod할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
-"\"%s\" 원본 파일을 열 수 없음\n"
+
+#, c-format
+msgid ""
+"Cannot open source file\n"
 "%s"
+msgstr ""
 
 msgid "Reget failed, about to overwrite file"
 msgstr "다시 받기 실패, 파일을 덮어쓰려고 합니다."
 
 #, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
-"\"%s\" 소스 파일을 fstat할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일을 생성할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일을 fstat할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일에 대한 공간을 사전 할당할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
-"\"%s\" 소스 파일를 읽을 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일을 쓸 수 없음\n"
-"%s"
 
 msgid "(stalled)"
 msgstr "(지연됨)"
@@ -2821,37 +2766,31 @@ msgstr "복사 계속하기(&C)"
 
 #, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" 원본 파일을 닫을 수 없음\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot close target file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" 대상 파일을 닫을 수 없음\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
-"\"%s\" 소스 디렉터리를 stat할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot stat source directory\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
 
@@ -2873,27 +2812,23 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
-"\"%s\" 대상은 디렉터리여야 함\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 디렉터리를 생성할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 디렉터리를 선택할 수 없음\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -3017,6 +2952,9 @@ msgstr "링크 따라가기(&L)"
 msgid "Preserve &attributes"
 msgstr "??????????????영역 속성(&A)"
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr "존재한다면 하위 디렉터리로 이동(&V)"
 
@@ -3042,6 +2980,9 @@ msgstr "정보(&I)"
 msgid "&Tree"
 msgstr "트리구조(&T)"
 
+msgid "Paneli&ze"
+msgstr "패널 크기조정"
+
 msgid "&Listing format..."
 msgstr "목록 형식(&L)..."
 
@@ -3062,9 +3003,6 @@ msgstr "쉘 링크(&H)..."
 
 msgid "SFTP li&nk..."
 msgstr "SFTP 링크(&S)..."
-
-msgid "Paneli&ze"
-msgstr "패널 크기조정"
 
 msgid "&Rescan"
 msgstr "재스캔(&R)"
@@ -3171,9 +3109,6 @@ msgstr "백그라운드 작업(&B)"
 msgid "Screen lis&t"
 msgstr "화면 목록(&T)"
 
-msgid "&Undelete files (ext2fs only)"
-msgstr "파일 삭제취소 (est2fs만 가능)(&U)"
-
 msgid "&Listing format edit"
 msgstr "파일 목록 형식 편집(&L)"
 
@@ -3201,9 +3136,6 @@ msgstr "확인(&O)..."
 msgid "&Appearance..."
 msgstr "외형(&A)..."
 
-msgid "&Display bits..."
-msgstr "디스플레이 비트(&D)..."
-
 msgid "&Virtual FS..."
 msgstr "가상 파일시스템(&V)..."
 
@@ -3215,11 +3147,8 @@ msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "%zu 화면이 열려 있습니다. 그래도 끝낼까요?"
 
-msgid "The Midnight Commander"
-msgstr "미드나잇 커맨더"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "미드나잇 커맨더를 절말로 끝내시겠습니까?"
+msgid "Do you really want to quit?"
+msgstr ""
 
 msgid "&Above"
 msgstr "이상(&A)"
@@ -3715,15 +3644,10 @@ msgstr ""
 "확장 패널크기:\n"
 "%s"
 
-#, c-format
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
-"확장 패널크기:\n"
-"하위 프로세스의 stdout에서 ​​데이터를 읽을 수 없음:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "로컬이 아닌 디렉터리에서 확장 패널크기를 실행할 수 없음"
@@ -3763,6 +3687,13 @@ msgid ""
 msgstr ""
 "대상 정보를 볼 수 없음\n"
 "%s"
+
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
 
 #, c-format
 msgid "Delete %s?"
@@ -3883,14 +3814,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "홈 디렉터리 경로가 절대적이지 않음"
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU 미드나잇 코맨더가\n"
-"이미 이 터미널에서 실행 중입니다.\n"
-"Subshell 지원이 비활성화 됩니다."
 
 #, c-format
 msgid ""
@@ -3959,9 +3888,6 @@ msgstr "X11 이벤트 지원 포함"
 
 msgid "With internationalization support"
 msgstr "국제화 지원 포함"
-
-msgid "With multiple codepages support"
-msgstr "다중 코드페이지 지원 포함"
 
 msgid "With ext2fs attributes support"
 msgstr "ext2fs 속성 지원"
@@ -4351,6 +4277,12 @@ msgstr "sftp: 사용자가 연결을 중단함"
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: 서버 연결 실패: %s"
 
+#, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp: 지원되지 않는 유형의 호스트 키를 찾았습니다: RSA1"
 
@@ -4509,95 +4441,17 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr "tar: mc_lseek가 레코드 경계에서 멈추지 않았습니다"
 
-msgid "undelfs: error"
-msgstr "unelfs: 오류"
-
-msgid "not enough memory"
-msgstr "메모리 부족"
-
-msgid "while allocating block buffer"
-msgstr "블록 버퍼를 할당하는 동안"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr "open_inode_scan: %d"
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr "inode 스캔 %d를 시작하는 동안"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "unelfs: 삭제된 파일 정보 %d inode 불러오는 중"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr "ext2_block_iterate %d을(를) 호출하는 중"
-
-msgid "no more memory while reallocating array"
-msgstr "배열을 재할당하는 동안 메모리가 더 이상 없음"
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr "inode 스캔 %d를 수행하는 동안"
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr "%s 파일을 열 수 없음"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "unelfs: inode 비트맵 읽는 중..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-"다음 위치에서 inode 비트맵을 로드할 수 없음:\n"
-"%s"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "unelfs: 블록 비트맵 읽는 중..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-"블록 비트맵을 로드할 수 없음:\n"
-"%s"
-
-msgid "vfs_info is not fs!"
-msgstr "vfs_info는 파일 시스템이 아닙니다!"
-
-msgid "You have to chdir to extract files first"
-msgstr "먼저 파일을 추출하려면 디렉터리 변경이 필요함."
-
-msgid "while iterating over blocks"
-msgstr "블록을 반복하는 동안"
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr "\"%s\" 파일을 열 수 없음"
-
-msgid "Ext2lib error"
-msgstr "Ext2lib 오류"
-
 msgid "Invalid value"
 msgstr "잘못된 값"
 
 msgid "File was modified. Save with exit?"
 msgstr "파일이 수정되었습니다. 저장 후 나가시겠습니까?"
 
-msgid "&Cancel quit"
-msgstr "끝내기 취소(&C)"
-
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
-"미드나잇 커맨더가 종료됩니다.\n"
-"수정된 파일을 저장하시겠습니까?"
 
 msgid "&Line number"
 msgstr "행 번호(&L)"
@@ -4644,13 +4498,12 @@ msgstr " 형식화되지 않음"
 msgid "ButtonBar|Format"
 msgstr " 형식"
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Quick view"
+msgstr "빠른 보기(&Q)"
+
+msgid "Failed to read data from child stdout"
 msgstr ""
-"하위 프로세스의 stdout에서 ​​데이터를 읽을 수 없음:\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4675,22 +4528,18 @@ msgstr "보기: "
 
 #, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr ""
-"\"%s\"을(를) 열 수 없음\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
-msgstr "볼 수 없음: 일반 파일이 아님"
 
 #, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
-"\"%s\"을(를) 분석 모드에서 열 수 없음\n"
-"%s"
 
 msgid "Search done"
 msgstr "검색 완료"
@@ -4700,3 +4549,90 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "ext2 파일 시스템에서 파일 삭제 해제"
+
+#~ msgid ""
+#~ "Enter device (without /dev/) to undelete\n"
+#~ "files on: (F1 for details)"
+#~ msgstr ""
+#~ "삭제를 취소할 장치 입력 (/dev/ 없이).\n"
+#~ "다음 파일: (자세한 내용은 F1)"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "파일 삭제취소 (est2fs만 가능)(&U)"
+
+#~ msgid "undelfs: error"
+#~ msgstr "unelfs: 오류"
+
+#~ msgid "not enough memory"
+#~ msgstr "메모리 부족"
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "블록 버퍼를 할당하는 동안"
+
+#, c-format
+#~ msgid "open_inode_scan: %d"
+#~ msgstr "open_inode_scan: %d"
+
+#, c-format
+#~ msgid "while starting inode scan %d"
+#~ msgstr "inode 스캔 %d를 시작하는 동안"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "unelfs: 삭제된 파일 정보 %d inode 불러오는 중"
+
+#, c-format
+#~ msgid "while calling ext2_block_iterate %d"
+#~ msgstr "ext2_block_iterate %d을(를) 호출하는 중"
+
+#~ msgid "no more memory while reallocating array"
+#~ msgstr "배열을 재할당하는 동안 메모리가 더 이상 없음"
+
+#, c-format
+#~ msgid "while doing inode scan %d"
+#~ msgstr "inode 스캔 %d를 수행하는 동안"
+
+#, c-format
+#~ msgid "Cannot open file %s"
+#~ msgstr "%s 파일을 열 수 없음"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "unelfs: inode 비트맵 읽는 중..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load inode bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "다음 위치에서 inode 비트맵을 로드할 수 없음:\n"
+#~ "%s"
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "unelfs: 블록 비트맵 읽는 중..."
+
+#, c-format
+#~ msgid ""
+#~ "Cannot load block bitmap from:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "블록 비트맵을 로드할 수 없음:\n"
+#~ "%s"
+
+#~ msgid "vfs_info is not fs!"
+#~ msgstr "vfs_info는 파일 시스템이 아닙니다!"
+
+#~ msgid "You have to chdir to extract files first"
+#~ msgstr "먼저 파일을 추출하려면 디렉터리 변경이 필요함."
+
+#~ msgid "while iterating over blocks"
+#~ msgstr "블록을 반복하는 동안"
+
+#, c-format
+#~ msgid "Cannot open file \"%s\""
+#~ msgstr "\"%s\" 파일을 열 수 없음"
+
+#~ msgid "Ext2lib error"
+#~ msgstr "Ext2lib 오류"

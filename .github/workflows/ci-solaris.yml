@@ -12,7 +12,7 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build on Solaris
         uses: vmactions/solaris-vm@v1
@@ -44,7 +44,7 @@ jobs:
               make install \
             '
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: test-suite-logs-solaris

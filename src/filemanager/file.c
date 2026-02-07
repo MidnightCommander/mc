@@ -74,6 +74,7 @@
 #ifdef ENABLE_BACKGROUND
 #include "src/background.h"  // do_background()
 #endif
+#include "src/util.h"  // file_error_message()
 
 /* Needed for other_panel and WTree */
 #include "dir.h"
@@ -400,8 +401,7 @@ check_hardlinks (file_op_context_t *ctx, const vfs_path_t *src_vpath, const stru
                     {
                         FileProgressStatus status;
 
-                        status = file_error (ctx, TRUE,
-                                             _ ("Cannot stat hardlink source file \"%s\"\n%s"),
+                        status = file_error (ctx, TRUE, _ ("Cannot stat hardlink source file\n%s"),
                                              vfs_path_as_str (lnk->dst_vpath));
                         if (status == FILE_ABORT)
                             return HARDLINK_ABORT;
@@ -420,9 +420,8 @@ check_hardlinks (file_op_context_t *ctx, const vfs_path_t *src_vpath, const stru
                     {
                         FileProgressStatus status;
 
-                        status =
-                            file_error (ctx, TRUE, _ ("Cannot create target hardlink \"%s\"\n%s"),
-                                        vfs_path_as_str (dst_vpath));
+                        status = file_error (ctx, TRUE, _ ("Cannot create target hardlink\n%s"),
+                                             vfs_path_as_str (dst_vpath));
                         if (status == FILE_ABORT)
                             return HARDLINK_ABORT;
                         if (status == FILE_RETRY)
@@ -456,7 +455,7 @@ check_hardlinks (file_op_context_t *ctx, const vfs_path_t *src_vpath, const stru
              *
              */
             errno = 0;
-            status = file_error (ctx, FALSE, _ ("Cannot create target hardlink \"%s\""),
+            status = file_error (ctx, FALSE, _ ("Cannot create target hardlink\n%s"),
                                  vfs_path_as_str (dst_vpath));
 
             if (status == FILE_ABORT)
@@ -519,8 +518,7 @@ retry_src_readlink:
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE, _ ("Cannot read source link \"%s\"\n%s"), src_path);
+            return_status = file_error (ctx, TRUE, _ ("Cannot read source link\n%s"), src_path);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -604,8 +602,7 @@ retry_dst_symlink:
         return_status = FILE_IGNORE_ALL;
     else
     {
-        return_status =
-            file_error (ctx, TRUE, _ ("Cannot create target symlink \"%s\"\n%s"), dst_path);
+        return_status = file_error (ctx, TRUE, _ ("Cannot create target symlink\n%s"), dst_path);
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
         if (return_status == FILE_RETRY)
@@ -989,9 +986,10 @@ real_query_recursive (file_op_context_t *ctx, enum OperationMode mode, const cha
         const gint64 t = g_get_monotonic_time ();
 
         msg = mode == Foreground
-            ? _ ("Directory \"%s\" not empty.\nDelete it recursively?")
-            : _ ("Background process:\nDirectory \"%s\" not empty.\nDelete it recursively?");
-        text = g_strdup_printf (msg, path_trunc (s, 30));
+            ? _ ("Directory\n%s\nis not empty.\nDelete it recursively?")
+            : _ ("Background process:\nDirectory\n%s\nis not empty.\nDelete it recursively?");
+        // delete password and try to show a full path
+        text = g_strdup_printf (msg, path_trunc (s, -1));
 
         if (safe_delete)
             query_set_sel (1);
@@ -1116,18 +1114,27 @@ query_replace (file_op_context_t *ctx, const char *src, struct stat *src_stat, c
 /** Report error with two files */
 
 static FileProgressStatus
-files_error (file_op_context_t *ctx, const char *format, const char *file1, const char *file2)
+files_error (file_op_context_t *ctx, gboolean allow_retry, const char *format, const char *file1,
+             const char *file2)
 {
-    char buf[BUF_MEDIUM];
+    char *full_format;
     char *nfile1, *nfile2;
+    char *message;
 
-    nfile1 = g_strdup (path_trunc (file1, 15));
-    nfile2 = g_strdup (path_trunc (file2, 15));
-    g_snprintf (buf, sizeof (buf), format, nfile1, nfile2, unix_error_string (errno));
+    // delete password and try to show a full path
+    nfile1 = g_strdup (path_trunc (file1, -1));
+    nfile2 = g_strdup (path_trunc (file2, -1));
+    full_format = g_strconcat (format, "\n", unix_error_string (errno), (char *) NULL);
+    message = g_strdup_printf (full_format, nfile1, nfile2);
+    g_free (full_format);
     g_free (nfile1);
     g_free (nfile2);
 
-    return do_file_error (ctx, TRUE, buf);
+    const FileProgressStatus ret = do_file_error (ctx, allow_retry, message);
+
+    g_free (message);
+
+    return ret;
 }
 
 /* }}} */
@@ -1178,8 +1185,7 @@ try_remove_file (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgressSt
 {
     while (mc_unlink (vpath) != 0 && !ctx->ignore_all)
     {
-        *status =
-            file_error (ctx, TRUE, _ ("Cannot remove file \"%s\"\n%s"), vfs_path_as_str (vpath));
+        *status = file_error (ctx, TRUE, _ ("Cannot remove file\n%s"), vfs_path_as_str (vpath));
         if (*status == FILE_RETRY)
             continue;
         if (*status == FILE_IGNORE_ALL)
@@ -1235,7 +1241,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status = file_error (ctx, TRUE, _ ("Cannot stat file \"%s\"\n%s"), s);
+            return_status = file_error (ctx, TRUE, _ ("Cannot stat file\n%s"), s);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
         }
@@ -1302,7 +1308,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status = files_error (ctx, _("Cannot move file \"%s\" to \"%s\"\n%s"), s, d);
+            return_status = files_error (ctx, TRUE, _("Cannot move file\n%s\nto\n%s"), s, d);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -1416,7 +1422,7 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 
     while (my_rmdir (dir) != 0 && !ctx->ignore_all)
     {
-        return_status = file_error (ctx, TRUE, _ ("Cannot remove directory \"%s\"\n%s"), dir);
+        return_status = file_error (ctx, TRUE, _ ("Cannot remove directory\n%s"), dir);
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
         if (return_status != FILE_RETRY)
@@ -1489,7 +1495,7 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
  * @param vpath directory handler
  * @param error status of directory reading
  *
- * @returns -1 on error,
+ * @return -1 on error,
  *          1 if there are no entries besides "." and ".." in the directory path points to,
  *          0 else.
  *
@@ -1511,7 +1517,7 @@ check_dir_is_empty (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgres
         else
         {
             const FileProgressStatus status = file_error (
-                ctx, TRUE, _ ("Cannot enter into directory \"%s\"\n%s"), vfs_path_as_str (vpath));
+                ctx, TRUE, _ ("Cannot enter into directory\n%s"), vfs_path_as_str (vpath));
 
             if (status == FILE_RETRY)
                 continue;
@@ -1680,10 +1686,9 @@ retry_dst_stat:
         else
         {
             if (S_ISDIR (dst_stat.st_mode))
-                return_status =
-                    file_error (ctx, TRUE, _ ("Cannot overwrite directory \"%s\"\n%s"), d);
+                return_status = file_error (ctx, TRUE, _ ("Cannot overwrite directory\n%s"), d);
             else
-                return_status = file_error (ctx, TRUE, _ ("Cannot overwrite file \"%s\"\n%s"), d);
+                return_status = file_error (ctx, TRUE, _ ("Cannot overwrite file\n%s"), d);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -1704,8 +1709,7 @@ retry_rename:
     {
         if (!ctx->ignore_all)
         {
-            return_status =
-                files_error (ctx, _ ("Cannot move directory \"%s\" to \"%s\"\n%s"), s, d);
+            return_status = files_error (ctx, TRUE, _ ("Cannot move directory\n%s\nto\n%s"), s, d);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -1830,8 +1834,7 @@ check_single_entry (const WPanel *panel, gboolean force_single, struct stat *src
         ok = mc_lstat (source_vpath, src_stat) == 0;
         if (!ok)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (source, 30),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat\n%s"), source);
 
             // Directory was changed outside MC. Reload it forced
             if (!panel->is_panelized)
@@ -2286,7 +2289,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     struct stat src_stat, dst_stat;
     mc_timesbuf_t times;
     unsigned long attrs = 0;
-    gboolean attrs_ok = ctx->preserve;
+    gboolean attrs_ok = copymove_persistent_ext2_attr;
     gboolean dst_exists = FALSE, appending = FALSE;
     off_t file_size = -1;
     FileProgressStatus return_status, temp_status;
@@ -2326,7 +2329,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _ ("Cannot overwrite directory \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot overwrite directory\n%s"), dst_path);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
                 if (return_status == FILE_RETRY)
@@ -2345,8 +2348,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE, _ ("Cannot stat source file \"%s\"\n%s"), src_path);
+            return_status = file_error (ctx, TRUE, _ ("Cannot stat source file\n%s"), src_path);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
         }
@@ -2377,7 +2379,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         else
         {
             return_status = file_error (
-                ctx, TRUE, _ ("Cannot get ext2 attributes of source file \"%s\"\n%s"), src_path);
+                ctx, TRUE, _ ("Cannot get ext2 attributes of source file\n%s"), src_path);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_ABORT)
@@ -2448,7 +2450,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                         ctx->ignore_all = TRUE;
                     else
                         return_status = file_error (
-                            ctx, TRUE, _ ("Cannot set ext2 attributes of target file \"%s\"\n%s"),
+                            ctx, TRUE, _ ("Cannot set ext2 attributes of target file\n%s"),
                             dst_path);
 
                     if (return_status != FILE_RETRY)
@@ -2474,7 +2476,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                    && !ctx->ignore_all)
             {
                 return_status =
-                    file_error (ctx, TRUE, _ ("Cannot create special file \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot create special file\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
                 if (return_status == FILE_IGNORE_ALL)
@@ -2487,8 +2489,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                    && mc_chown (dst_vpath, src_stat.st_uid, src_stat.st_gid) != 0
                    && !ctx->ignore_all)
             {
-                temp_status =
-                    file_error (ctx, TRUE, _ ("Cannot chown target file \"%s\"\n%s"), dst_path);
+                temp_status = file_error (ctx, TRUE, _ ("Cannot chown target file\n%s"), dst_path);
                 if (temp_status == FILE_IGNORE)
                     break;
                 if (temp_status == FILE_IGNORE_ALL)
@@ -2503,8 +2504,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             while (ctx->preserve && mc_chmod (dst_vpath, src_stat.st_mode & ctx->umask_kill) != 0
                    && !ctx->ignore_all)
             {
-                temp_status =
-                    file_error (ctx, TRUE, _ ("Cannot chmod target file \"%s\"\n%s"), dst_path);
+                temp_status = file_error (ctx, TRUE, _ ("Cannot chmod target file\n%s"), dst_path);
                 if (temp_status == FILE_IGNORE)
                     break;
                 if (temp_status == FILE_IGNORE_ALL)
@@ -2525,8 +2525,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                     break;
 
                 temp_status = file_error (
-                    ctx, TRUE, _ ("Cannot set ext2 attributes of target file \"%s\"\n%s"),
-                    dst_path);
+                    ctx, TRUE, _ ("Cannot set ext2 attributes of target file\n%s"), dst_path);
                 if (temp_status == FILE_IGNORE)
                     break;
                 if (temp_status == FILE_IGNORE_ALL)
@@ -2555,8 +2554,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE, _ ("Cannot open source file \"%s\"\n%s"), src_path);
+            return_status = file_error (ctx, TRUE, _ ("Cannot open source file\n%s"), src_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_IGNORE_ALL)
@@ -2579,8 +2577,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE, _ ("Cannot fstat source file \"%s\"\n%s"), src_path);
+            return_status = file_error (ctx, TRUE, _ ("Cannot fstat source file\n%s"), src_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_IGNORE_ALL)
@@ -2613,7 +2610,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _ ("Cannot create target file \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot create target file\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
                 if (return_status == FILE_IGNORE_ALL)
@@ -2645,8 +2642,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE, _ ("Cannot fstat target file \"%s\"\n%s"), dst_path);
+            return_status = file_error (ctx, TRUE, _ ("Cannot fstat target file\n%s"), dst_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_IGNORE_ALL)
@@ -2666,8 +2662,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             break;
         }
 
-        return_status = file_error (
-            ctx, TRUE, _ ("Cannot preallocate space for target file \"%s\"\n%s"), dst_path);
+        return_status =
+            file_error (ctx, TRUE, _ ("Cannot preallocate space for target file\n%s"), dst_path);
 
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
@@ -2724,7 +2720,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 while ((n_read = mc_read (src_desc, buf, bufsize)) < 0 && !ctx->ignore_all)
                 {
                     return_status =
-                        file_error (ctx, TRUE, _ ("Cannot read source file \"%s\"\n%s"), src_path);
+                        file_error (ctx, TRUE, _ ("Cannot read source file\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
                     if (return_status == FILE_IGNORE_ALL)
@@ -2763,8 +2759,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                     if (ctx->ignore_all)
                         return_status = FILE_IGNORE_ALL;
                     else
-                        return_status = file_error (
-                            ctx, TRUE, _ ("Cannot write target file \"%s\"\n%s"), dst_path);
+                        return_status =
+                            file_error (ctx, TRUE, _ ("Cannot write target file\n%s"), dst_path);
 
                     if (return_status == FILE_IGNORE)
                     {
@@ -2859,7 +2855,7 @@ ret:
     rotate_dash (FALSE);
     while (src_desc != -1 && mc_close (src_desc) < 0 && !ctx->ignore_all)
     {
-        temp_status = file_error (ctx, TRUE, _ ("Cannot close source file \"%s\"\n%s"), src_path);
+        temp_status = file_error (ctx, TRUE, _ ("Cannot close source file\n%s"), src_path);
         if (temp_status == FILE_RETRY)
             continue;
         if (temp_status == FILE_ABORT)
@@ -2871,7 +2867,7 @@ ret:
 
     while (dest_desc != -1 && mc_close (dest_desc) < 0 && !ctx->ignore_all)
     {
-        temp_status = file_error (ctx, TRUE, _ ("Cannot close target file \"%s\"\n%s"), dst_path);
+        temp_status = file_error (ctx, TRUE, _ ("Cannot close target file\n%s"), dst_path);
         if (temp_status == FILE_RETRY)
             continue;
         if (temp_status == FILE_IGNORE_ALL)
@@ -2900,8 +2896,7 @@ ret:
         while (ctx->preserve_uidgid && mc_chown (dst_vpath, src_uid, src_gid) != 0
                && !ctx->ignore_all)
         {
-            temp_status =
-                file_error (ctx, TRUE, _ ("Cannot chown target file \"%s\"\n%s"), dst_path);
+            temp_status = file_error (ctx, TRUE, _ ("Cannot chown target file\n%s"), dst_path);
             if (temp_status == FILE_ABORT)
             {
                 return_status = FILE_ABORT;
@@ -2922,8 +2917,7 @@ ret:
         while (ctx->preserve && mc_chmod (dst_vpath, (src_mode & ctx->umask_kill)) != 0
                && !ctx->ignore_all)
         {
-            temp_status =
-                file_error (ctx, TRUE, _ ("Cannot chmod target file \"%s\"\n%s"), dst_path);
+            temp_status = file_error (ctx, TRUE, _ ("Cannot chmod target file\n%s"), dst_path);
             if (temp_status == FILE_ABORT)
             {
                 return_status = FILE_ABORT;
@@ -2948,12 +2942,6 @@ ret:
             src_mode = 0100666 & ~src_mode;
             mc_chmod (dst_vpath, (src_mode & ctx->umask_kill));
         }
-    }
-
-    if (dst_status == DEST_FULL || dst_status == DEST_SHORT_KEEP)
-    {
-        // Always sync timestamps
-        mc_utime (dst_vpath, &times);
 
         while (attrs_ok && mc_fsetflags (dst_vpath, attrs) != 0 && !ctx->ignore_all)
         {
@@ -2967,9 +2955,12 @@ ret:
             }
 
             temp_status = file_error (
-                ctx, TRUE, _ ("Cannot set ext2 attributes for target file \"%s\"\n%s"), dst_path);
+                ctx, TRUE, _ ("Cannot set ext2 attributes for target file\n%s"), dst_path);
             if (temp_status == FILE_ABORT)
+            {
                 return_status = FILE_ABORT;
+                goto ret_fast;
+            }
             if (temp_status == FILE_RETRY)
             {
                 attrs_ok = TRUE;
@@ -2985,6 +2976,10 @@ ret:
             break;
         }
     }
+
+    // Always sync timestamps
+    if (dst_status == DEST_FULL || dst_status == DEST_SHORT_KEEP)
+        mc_utime (dst_vpath, &times);
 
     progress_update_one (return_status == FILE_CONT, ctx, file_size);
     if (return_status == FILE_CONT)
@@ -3011,7 +3006,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
     struct vfs_dirent *next;
     struct stat dst_stat, src_stat;
     unsigned long attrs = 0;
-    gboolean attrs_ok = ctx->preserve;
+    gboolean attrs_ok = copymove_persistent_ext2_attr;
     DIR *reading;
     FileProgressStatus return_status = FILE_CONT;
     link_t *lp;
@@ -3030,8 +3025,7 @@ retry_src_stat:
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE, _ ("Cannot stat source directory \"%s\"\n%s"), s);
+            return_status = file_error (ctx, TRUE, _ ("Cannot stat source directory\n%s"), s);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
         }
@@ -3051,8 +3045,8 @@ retry_src_stat:
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status = file_error (
-                ctx, TRUE, _ ("Cannot get ext2 attributes of source directory \"%s\"\n%s"), s);
+            return_status =
+                file_error (ctx, TRUE, _ ("Cannot get ext2 attributes of source directory\n%s"), s);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_ABORT)
@@ -3152,7 +3146,7 @@ retry_dst_stat:
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _ ("Destination \"%s\" must be a directory\n%s"), d);
+                    file_error (ctx, TRUE, _ ("Destination\n%s\nmust be a directory\n%s"), d);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
                 if (return_status == FILE_RETRY)
@@ -3183,8 +3177,7 @@ retry_dst_stat:
                 return_status = FILE_IGNORE_ALL;
             else
             {
-                return_status =
-                    file_error (ctx, TRUE, _ ("Cannot create target directory \"%s\"\n%s"), d);
+                return_status = file_error (ctx, TRUE, _ ("Cannot create target directory\n%s"), d);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
             }
@@ -3208,8 +3201,7 @@ retry_dst_stat:
                 return_status = FILE_IGNORE_ALL;
             else
             {
-                return_status =
-                    file_error (ctx, TRUE, _ ("Cannot chown target directory \"%s\"\n%s"), d);
+                return_status = file_error (ctx, TRUE, _ ("Cannot chown target directory\n%s"), d);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
             }
@@ -3380,14 +3372,9 @@ dirsize_status_init_cb (status_msg_t *sm)
     Widget *wd = WIDGET (sm->dlg);
     WRect r = wd->rect;
 
-    const char *b1_name = N_ ("&Abort");
-    const char *b2_name = N_ ("&Skip");
+    const char *b1_name = _ ("&Abort");
+    const char *b2_name = _ ("&Skip");
     int b_width, ui_width;
-
-#ifdef ENABLE_NLS
-    b1_name = _ (b1_name);
-    b2_name = _ (b2_name);
-#endif
 
     b_width = str_term_width1 (b1_name) + 4;
     if (dsm->allow_skip)
@@ -3514,14 +3501,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     filegui_dialog_type_t dialog_type = FILEGUI_DIALOG_ONE_ITEM;
 
     gboolean do_bg = FALSE;  // do background operation?
-
-    static gboolean i18n_flag = FALSE;
-    if (!i18n_flag)
-    {
-        for (i = G_N_ELEMENTS (op_names); i-- != 0;)
-            op_names[i] = Q_ (op_names[i]);
-        i18n_flag = TRUE;
-    }
 
     linklist = free_linklist (linklist);
     dest_dirs = free_linklist (dest_dirs);
@@ -3653,7 +3632,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 break;
 
             if (ctx->ignore_all
-                || file_error (ctx, TRUE, _ ("Destination \"%s\" must be a directory\n%s"), dest)
+                || file_error (ctx, TRUE, _ ("Destination\n%s\nmust be a directory\n%s"), dest)
                     != FILE_RETRY)
                 goto clean_up;
         }
@@ -3734,16 +3713,13 @@ ret_fast:
 /* }}} */
 
 /* --------------------------------------------------------------------------------------------- */
+
 /* {{{ Query/status report routines */
 /** Report error with one file */
 FileProgressStatus
 file_error (file_op_context_t *ctx, gboolean allow_retry, const char *format, const char *file)
 {
-    char buf[BUF_MEDIUM];
-
-    g_snprintf (buf, sizeof (buf), format, path_trunc (file, 30), unix_error_string (errno));
-
-    return do_file_error (ctx, allow_retry, buf);
+    return files_error (ctx, allow_retry, format, file, "");
 }
 
 /* --------------------------------------------------------------------------------------------- */

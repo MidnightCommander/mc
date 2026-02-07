@@ -82,7 +82,7 @@ mcdiffview_dialog_search (WDiff *dview)
     {
         quick_widget_t quick_widgets[] = {
             // clang-format off
-            QUICK_LABELED_INPUT (N_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
+            QUICK_LABELED_INPUT (_ ("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
                                  MC_HISTORY_SHARED_SEARCH, &exp, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
@@ -90,10 +90,10 @@ mcdiffview_dialog_search (WDiff *dview)
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
                              (int *) &mcdiffview_search_options.type, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_ ("Cas&e sensitive"), &mcdiffview_search_options.case_sens, NULL),
-                QUICK_CHECKBOX (N_ ("&Backwards"), &mcdiffview_search_options.backwards, NULL),
-                QUICK_CHECKBOX (N_ ("&Whole words"), &mcdiffview_search_options.whole_words, NULL),
-                QUICK_CHECKBOX (N_ ("&All charsets"), &mcdiffview_search_options.all_codepages,
+                QUICK_CHECKBOX (_ ("Cas&e sensitive"), &mcdiffview_search_options.case_sens, NULL),
+                QUICK_CHECKBOX (_ ("&Backwards"), &mcdiffview_search_options.backwards, NULL),
+                QUICK_CHECKBOX (_ ("&Whole words"), &mcdiffview_search_options.whole_words, NULL),
+                QUICK_CHECKBOX (_ ("&All charsets"), &mcdiffview_search_options.all_codepages,
                                 NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
@@ -105,7 +105,7 @@ mcdiffview_dialog_search (WDiff *dview)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Search"),
+            .title = _ ("Search"),
             .help = "[Input Line Keys]",
             .widgets = quick_widgets,
             .callback = NULL,

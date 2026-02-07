@@ -52,7 +52,6 @@ ScreenList = alt-prime
 # Filter =
 # ConnectShell =
 # ConnectFtp =
-# Undelete =
 EditorViewerHistory = alt-shift-e
 ExtendedKeyMap = ctrl-x
 
@@ -124,12 +123,15 @@ Bottom = alt-gt; end; c1
 # SortNext =
 # SortReverse =
 # SortByName =
+# SortByVersion =
 # SortByExt =
 # SortBySize =
 # SortByMTime =
 # Filter =
-# ScrollLeft =
-# ScrollRight =
+ScrollLeft = alt-lparenthesis
+ScrollRight = alt-rparenthesis
+# ScrollHome =
+# ScrollEnd =
 
 [dialog]
 Ok = enter

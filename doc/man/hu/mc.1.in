@@ -28,15 +28,6 @@ Színek
 .\"Colors"
 részt további információkért.
 .TP
-.I "\-C opció"
-Saját parancssori színválaszték beállításához használható.  Az
-.B opció
-használatáról a
-.\"LINK2"
-Színek
-.\"Colors"
-részben olvashatsz.
-.TP
 .I "\-d"
 Nem engedélyezi az egér használatát.
 .TP
@@ -61,9 +52,11 @@ helyett a Midnight Commander által utoljára meglátogatott könyvtárra való
 Fjerdingstad\-nek és Sergey\-nek közreműködésükért). Kérlek, ne csinálj
 szó szerinti másolatot a funkció beállításairól. A fájlok forrása a
 .I %pkglibexecdir%/mc.sh
-(bash és zsh felhasználóknak), illetőleg a
+(bash és zsh felhasználóknak),
 .I %pkglibexecdir%/mc.csh
-(tcsh felhasználóknak) fájl. Ilyenkor, amikor a funkció beállításokat
+(tcsh felhasználóknak) illetőleg a
+.I %pkglibexecdir%/mc.fish
+(fish felhasználóknak) fájl. Ilyenkor, amikor a funkció beállításokat
 változtatod, a profil értékeket nem szükséges megváltoztatnod, csak
 arról gondoskodj, hogy az MC\-t ne fordítsd eltérő beállításokkal.
 .PP
@@ -1497,13 +1490,6 @@ mely műveletekhez kell megerősítést kérni.
 .PP
 A
 .\"LINK2"
-Képernyőbitek
-.\"Display bits"
-parancs dialógus ablakot nyit meg, amellyel beállíthatod azt, hogy
-milyen karakterek jelenhessenek meg a terminálodon.
-.PP
-A
-.\"LINK2"
 Billentyűzet tanítás
 .\"Learn keys"
 dialódus ablakot jelenít meg, amelyben megvizsgálhatod azokat a
@@ -1730,16 +1716,6 @@ jelenleg is kiválasztott bejegyzések információival.
 Ebben a menüben tudod beállítani enter lenyomására a törlés,
 felülírás, futtatás, és programból történő kilépés
 Megerősítésének opcióit.
-.\"NODE "    Display bits"
-.SH "    Képernyőbitek"
-Ez az ablak a megjelenített karakterek tartományának beállítására
-szolgál. Ez a beállítás lehet 7\-bites, ha terminálod, vagy
-megjelenítésed csak a hét bites karaktereket támogatja; az
-ISO\-8859\-1\-ben az ISO\-8859\-1\-es karaktetábla valamennyi karaktere
-megjeleníthető; végül teljes 8 biten azokon a terminálokon, ahol teljes
-8 bitet meg tudsz jeleníteni. A két utolsó megjelenítési forma képes az
-ő és ű betűk kivételével az összes magyar betűt kijelezni a Belső
-filenézőben.
 .\"NODE "    Learn keys"
 .SH "    Billentyűzet tanítás"
 Ebben a dialógus ablakban tudod letesztelni azt, hogy terminálodon az
@@ -1935,7 +1911,7 @@ Csak menü szerkesztéshez.
 .IP
 A jelenlegi fájl szintaktikájának típusa. Csak menü szerkesztéshez.
 .PP
-.I "%k"
+.I "%b"
 .IP
 A blokk fájl neve.
 .PP
@@ -2659,33 +2635,6 @@ Példák:
     sh://joe@want.compression.edu:C/private
     sh://joe@noncompressed.ssh.edu/private
 .fi
-.\"NODE "  Undelete File System"
-.SH "  Törlés visszaállítása"
-(csak ext2; second extended filesystem)
-.PP
-Linux rendszereken, ha azt válaszolod a konfiguráláskor, hogy használni
-akarod az ext2fs törlés visszavonás lehetőségét, akkor lehetőséged lesz
-a törlés művelet visszavonására. A Törlés visszaállítása funkció csak
-ext2 fájlrendszeren végezhető el. A Törlés visszaállítása csak
-csatlakozó eszköz az ext2fs library\-hoz: helyrehozza az összes törölt
-fájlnevet az ext2fs\-en, megjeleníti őket és a kiválasztott fájlokat a
-kiteszi a megadott partícióra.
-.PP
-Ezen fájlrendszer használatához abba a speciális fájlrendszerbe kell
-belépned, amely "undel://" meghatározással kezdődik, és annak az aktuális
-fájlrendszernek a nevét tartalmazza, ahol a visszaállítani kívánt file
-található.
-.PP
-Például, ha a törölt fájlokat az első scsi lemez második partícióján
-szeretnénk visszaállítani, akkor a következő elérési utat kell
-megadnunk:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-Persze várakozni kell, amíg az undelfs a szükséges információkat
-beolvassa, a fájl böngészés megkezdése előtt.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs
@@ -2829,109 +2778,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 .PP
 A program mindkét opcióval fordítható (ncurses és S\-Lang).  Az ncurses nem
 jelent feltétlenül színes üzemmódot; csak a terminál adatbázist használja.
-.PP
-A Midnight Commander lehetőséget nyújt az alapértelmezett színek
-beállítására. Jelenleg a színek a
-.B MC_COLOR_TABLE
-környezeti változóban, vagy a Colors részben definiálhatók az indító
-fájlban.
-.PP
-Az alapértelmezett színtérképet a Colors rész a
-.I base_color
-változójából olvassa ki. Megadhatsz ettől eltérő színtérképet is, a
-terminál nevének kulcsszóként való használatával. Példa:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-A színmeghatározás formátuma:
-.PP
-.nf
-  <kulcsszó>=<előtérszín>,<háttérszín>:<kulcsszó>= ...
-.fi
-.PP
-A színek opcionálisak, a kulcsszavak a következők: normal, selected,
-marked, markselect, errors, input, reverse, gauge; A menü színek: menunormal,
-menusel, menuhot, menuhotsel, menuinactive; A dialog színek: dnormal, dfocus,
-dhotnormal, dhotfocus; Súgó színek: helpnormal, helpitalic, helpbold,
-helplink, helpslink; Fájlnéző színek: viewunderline; Speciális kijelölés
-színei: executable, directory, link, stalelink, device, special, core;
-Viewer colors are: viewnormal, viewbold, viewunderline, viewselected.
-Szerkesztő színei: editnormal, editbold, editmarked, editnonprintable.
-.PP
-.I input
-maghatározza a beviteli sorok színét a dialogus ablakora vonatkozóan.
-.PP
-.I gauge
-meghatározza a folyamat\-mutató sáv (gauge) kitöltött részének, amely pl.
-azt mutatja, hogy a fájl másolásakor annak hány százaléka másolásolódott
-már át a grafikus megjelenítésben.
-.PP
-A dialógus ablakok a következő színeket használják:
-.I dnormal
-a normál szöveghez,
-.I dfocus
-a jelenleg kiválasztott szövegelemekhez,
-.I dhotnormal
-a gyorsbillentyűk színei, amelyek eltérnek a normál szöveg színétől,
-aholis a
-.I dhotfocus
-színt használjuk a jelenleg kiválasztott komponensekhez.
-.PP
-A menük azonos sémát használnak a menunormal, menusel, menuhot, menuhotsel és a
-menuinactive részeknél.
-.PP
-A súgó a következő színeket használja:
-.I helpnormal
-a normál szöveghez,
-.I helpitalic
-ahhoz a szöveghez, amelyet dőlt betűvel szeretnénk nyomatékosítani
-akarunk a manualban,
-.I helpbold
-ahhoz a szöveghez, amelyet félkövérrel szeretnénk nyomatékosítani a man
-oldalon,
-.IR helplink \-et
-a nem kiválaszott hyperlinkekhez használjuk és a
-.IR helpslink \-et
-a kiválasztott hyperlinkekhez.
-.PP
-A kiemelés színei azt határozzák meg, a fájlok hogyan jelenjenek meg
-akkor, ha a kiemelés engedélyezve van (lásd a
-.\"LINK2"
-Megjelenés részt\&).
-.\"Layout"
-.I directory
-a könyvtárakhoz, és a könyvtárak szimbolikus linkjeihez használatos;
-.I executable
-a futtatható fájlokhoz;
-.I link
-a szimbolikus linkekhez, amelyekk még létezőek, és nem könyvtárra
-mutató linkek;
-.I stalelink
-az elvesztett szimbolikus linkekhez;
-.I device
-\- karakter és blokk eszközökhöz;
-.I special
-a speciális fájlokhoz, mint pl.FIFO\-k és az IPC socket\-ek;
-.I core
-a core fájlokhoz.
-.PP
-A megjeleníthető színek: black (fekete), gray (szürke), red (piros),
-brightred (világospiros), green (zöld), brightgreen (világoszöld), brown
-(barna), yellow (sárga), blue (kék), brightblue (világoskék), magenta
-(bíborvörös), brightmagenta (világos bíborvörös), cyan, brightcyan
-(világos zöldeskék), lightgray (világosszürke) és a white (fehér). Van
-külön speciális kulcsszó az átlátszó háttérhez. Ez a 'default'
-(alapértelmezett). Csak a 'default'\-ot tudod háttérszínként használni.
-Példa:
-.PP
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
 .\"NODE "Special Settings"
 .SH "Speciális Beállítások"
 A legtöbb Midnight Commander beállítás a menükből is elérhető. Ám van
@@ -3013,17 +2859,6 @@ Ez a változó csak akkor működik, ha a subshell támogatást nem használod.
 Amikor a C\-o billentyű kombinációt használod, visszalépsz a felhasználói
 képernyőre, ha "egy" a beállítás, akkor a shellt frissíted. Egyébként
 bármely gomb lenyomásával visszatérhetsz a Midnight Commander\-hez.
-.PP
-.I torben_fj_mode
-.IP
-Ha ez a flag be van állítva, akkor a home és az end gombok kissé
-eltérően fognak működni a panelekben, a kiválasztást a panel első és
-utolsó fájljára mozgatja, s a következőképp működik: A home gombnál:
-Felmegy a középső sorra, ha lejjebb volt; egyébként a felső sor lép
-addíg, amíg el nem éri a legfelső sort, ebben ez esetben ez lesz a panel
-első fájlja. Az end gomb működése hasonló: Lemegy a középső sorra, ha
-felette volt; egyébként a legalsó sorra lép addíg, amíg el nem éri az
-utolsó fájl a panelben.
 .PP
 .I use_file_to_guess_type
 .IP
@@ -3171,7 +3006,7 @@ zsh(1).
 .nf
 A Midnight Commander World Wide Web oldalának címe a
 következő:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .\"NODE "AUTHORS"
 .SH "Szerzők"

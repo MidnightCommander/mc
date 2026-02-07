@@ -34,7 +34,6 @@
  */
 
 #include <config.h>
-#include <errno.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -168,11 +167,19 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
 
     case MSG_MOUSE_SCROLL_UP:
-        mcview_move_up (view, 2);
+        // ignore mouse wheel events in the inactive quick view panel
+        if (widget_get_state (w, WST_FOCUSED))
+            mcview_move_up (view, 2);
+        else
+            ok = FALSE;
         break;
 
     case MSG_MOUSE_SCROLL_DOWN:
-        mcview_move_down (view, 2);
+        // ignore mouse wheel events in the inactive quick view panel
+        if (widget_get_state (w, WST_FOCUSED))
+            mcview_move_down (view, 2);
+        else
+            ok = FALSE;
         break;
 
     default:
@@ -329,10 +336,8 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         fd = mc_open (vpath, O_RDONLY | O_NONBLOCK);
         if (fd == -1)
         {
-            g_snprintf (tmp, sizeof (tmp), _ ("Cannot open \"%s\"\n%s"), file,
-                        unix_error_string (errno));
             mcview_close_datasource (view);
-            mcview_show_error (view, tmp);
+            mcview_show_error (view, _ ("Cannot open\n%s"), file);
             vfs_path_free (view->filename_vpath, TRUE);
             view->filename_vpath = NULL;
             vfs_path_free (view->workdir_vpath, TRUE);
@@ -344,10 +349,8 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         if (mc_fstat (fd, &st) == -1)
         {
             mc_close (fd);
-            g_snprintf (tmp, sizeof (tmp), _ ("Cannot stat \"%s\"\n%s"), file,
-                        unix_error_string (errno));
             mcview_close_datasource (view);
-            mcview_show_error (view, tmp);
+            mcview_show_error (view, _ ("Cannot stat\n%s"), file);
             vfs_path_free (view->filename_vpath, TRUE);
             view->filename_vpath = NULL;
             vfs_path_free (view->workdir_vpath, TRUE);
@@ -359,7 +362,8 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         {
             mc_close (fd);
             mcview_close_datasource (view);
-            mcview_show_error (view, _ ("Cannot view: not a regular file"));
+            g_snprintf (tmp, sizeof (tmp), _ ("Cannot view\n%s\nNot a regular file"), file);
+            mcview_show_error (view, NULL, tmp);
             vfs_path_free (view->filename_vpath, TRUE);
             view->filename_vpath = NULL;
             vfs_path_free (view->workdir_vpath, TRUE);
@@ -394,10 +398,8 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
 
                     if (fd1 == -1)
                     {
-                        g_snprintf (tmp, sizeof (tmp), _ ("Cannot open \"%s\" in parse mode\n%s"),
-                                    file, unix_error_string (errno));
                         mcview_close_datasource (view);
-                        mcview_show_error (view, tmp);
+                        mcview_show_error (view, _ ("Cannot open\n%s\nin parse mode\n%s"), file);
                     }
                     else
                     {

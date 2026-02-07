@@ -228,7 +228,6 @@ shell_decode_reply (char *s, gboolean was_garbage)
 {
     int code;
 
-    // cppcheck-suppress invalidscanf
     if (sscanf (s, "%d", &code) == 0)
     {
         code = 500;
@@ -855,7 +854,6 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
         struct tm tim;
 
         memset (&tim, 0, sizeof (tim));
-        // cppcheck-suppress invalidscanf
         if (sscanf (buffer, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon, &tim.tm_mday,
                     &tim.tm_hour, &tim.tm_min, &tim.tm_sec)
             != 6)
@@ -869,7 +867,6 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
     {
         int maj, min;
 
-        // cppcheck-suppress invalidscanf
         if (sscanf (buffer, "%d,%d", &maj, &min) != 2)
             break;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV

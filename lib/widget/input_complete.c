@@ -33,7 +33,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -908,7 +907,6 @@ try_complete_all_possible (try_complete_automation_state_t *state, char *text, i
                     char *s;
 
                     s = strchr (cdpath, ':');
-                    // cppcheck-suppress nullPointer
                     if (s == NULL)
                         s = strchr (cdpath, '\0');
                     c = *s;

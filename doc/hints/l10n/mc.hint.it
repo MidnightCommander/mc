@@ -1,4 +1,4 @@
-Suggerimento: Ctrl-x t per copiare i nomi di file selezionati nella linea di comando.
+Suggerimento: Ctrl-x t per copiare i nomi di file selezionati nella riga di comando.
 
 Suggerimento: Ctrl-x p per copiare il percorso attuale nella linea di comando.
 
@@ -16,7 +16,7 @@ Suggerimento: Se nel terminale mancano i tasti di funzione, utilizzare la sequen
 
 Suggerimento: La pagina principale su Internet di GNU Midnight Commander é: https://midnight-commander.org
 
-Suggerimento: Inviare i rapporti d'errore a mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Suggerimento: Tab modifica il pannello corrente.
 

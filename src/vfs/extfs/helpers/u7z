@@ -16,6 +16,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# Binary | Description
+# ------ | -----------
+# 7z     | Fully-featured version that can utilize plugins via dlopen, like the unRAR plugin
+# 7zz    | Standalone, fully-featured version that does not support plugins
+# 7za    | Version that supports major formats only, has no plugins, and is smaller than the full version
+# 7zr    | Most limited version, which only supports the LZMA and related formats and cannot handle encrypted archives
 
 P7ZIP=`command -v 7z 2>/dev/null` \
     || P7ZIP=`command -v 7zz 2>/dev/null` \

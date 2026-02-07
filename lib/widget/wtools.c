@@ -75,8 +75,8 @@ query_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
         if ((w->pos_flags & WPOS_CENTER) == 0)
         {
             WDialog *prev_dlg = NULL;
-            int ypos, xpos;
-            WRect r;
+            int ypos;
+            WRect r = { 0, 0, w->rect.lines, w->rect.cols };
 
             // get dialog under h
             if (top_dlg != NULL)
@@ -101,14 +101,13 @@ query_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
             else
                 ypos = WIDGET (prev_dlg)->rect.y + 2;
 
-            // if dialog is too high, place it centered
-            if (ypos + w->rect.lines < LINES / 2)
-                w->pos_flags |= WPOS_CENTER;
+            // if dialog is too high or too low, place it centered
+            if (ypos + w->rect.lines < LINES / 2 || ypos > LINES / 2)
+                w->pos_flags |= WPOS_CENTER_VERT;
+            else
+                r.y = ypos;
 
-            xpos = COLS / 2 - w->rect.cols / 2;
-
-            // set position
-            rect_init (&r, ypos, xpos, w->rect.lines, w->rect.cols);
+            w->pos_flags |= WPOS_CENTER_HORZ;
 
             return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
         }
@@ -238,11 +237,11 @@ wtools_parent_call_string (void *routine, int argc, ...)
 int
 query_dialog (const char *header, const char *text, int flags, int count, ...)
 {
-    va_list ap;
     WDialog *query_dlg;
     WGroup *g;
+    GPtrArray *buttons = NULL;
     WButton *button;
-    int win_len = 0;
+    int win_width = 0;
     int i;
     int result = -1;
     int cols, lines;
@@ -255,21 +254,27 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     if (count > 0)
     {
+        va_list ap;
+
+        buttons = g_ptr_array_sized_new ((guint) count);
+
         va_start (ap, count);
         for (i = 0; i < count; i++)
         {
-            char *cp = va_arg (ap, char *);
+            const char *cp = va_arg (ap, char *);
 
-            win_len += str_term_width1 (cp) + 6;
-            if (strchr (cp, '&') != NULL)
-                win_len--;
+            button = button_new (1, 1, B_USER + i, NORMAL_BUTTON, cp, NULL);
+            win_width += button_get_width (button) + 1;
+            g_ptr_array_add (buttons, button);
         }
         va_end (ap);
     }
 
+    const int header_cols = str_term_width1 (header);
+
     // count coordinates
     str_msg_term_size (text, &lines, &cols);
-    cols = 6 + MAX (win_len, MAX (str_term_width1 (header), cols));
+    cols = 6 + MAX (win_width, MAX (header_cols, cols));
     lines += 4 + (count > 0 ? 2 : 0);
 
     // prepare dialog
@@ -285,25 +290,22 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
                                   NULL);
         group_add_widget (g, hline_new (lines - 4, -1, -1));
 
-        cols = (cols - win_len - 2) / 2 + 2;
-        va_start (ap, count);
+        cols = (cols - win_width - 2) / 2 + 2;
+
         for (i = 0; i < count; i++)
         {
-            int xpos;
-            char *cur_name;
-
-            cur_name = va_arg (ap, char *);
-            xpos = str_term_width1 (cur_name) + 6;
-            if (strchr (cur_name, '&') != NULL)
-                xpos--;
-
-            button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, NULL);
+            button = BUTTON (g_ptr_array_index (buttons, i));
+            WIDGET (button)->rect.y = lines - 3;
+            WIDGET (button)->rect.x = cols;
             group_add_widget (g, button);
-            cols += xpos;
+
+            cols += button_get_width (button) + 1;
+
             if (i == sel_pos)
                 defbutton = button;
         }
-        va_end (ap);
+
+        g_ptr_array_free (buttons, FALSE);
 
         // do resize before running and selecting any widget
         send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
@@ -661,14 +663,10 @@ simple_status_msg_init_cb (status_msg_t *sm)
     WGroup *wg = GROUP (sm->dlg);
     WRect r;
 
-    const char *b_name = N_ ("&Abort");
+    const char *b_name = _ ("&Abort");
     int b_width;
     int wd_width, y;
     Widget *b;
-
-#ifdef ENABLE_NLS
-    b_name = _ (b_name);
-#endif
 
     b_width = str_term_width1 (b_name) + 4;
     wd_width = MAX (wd->rect.cols, b_width + 6);

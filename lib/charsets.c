@@ -29,6 +29,7 @@
 
 #include <config.h>
 
+#include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,15 +53,21 @@ const char *cp_source = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UNKNCHAR   '\001'
-
-#define OTHER_8BIT "Other_8_bit"
+#define UNKNCHAR '\001'
 
 /*** file scope type declarations ****************************************************************/
+
+typedef struct
+{
+    char *id;
+    char *name;
+} codepage_desc;
 
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
+
+static const char NO_TRANSLATION[] = N_ ("No translation");
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -238,7 +245,16 @@ free_codepages_list (void)
 const char *
 get_codepage_id (const int n)
 {
-    return (n < 0) ? OTHER_8BIT : ((codepage_desc *) g_ptr_array_index (codepages, n))->id;
+    return (n < 0) ? NO_TRANSLATION : ((codepage_desc *) g_ptr_array_index (codepages, n))->id;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+const char *
+get_codepage_name (const int n)
+{
+    return (n < 0) ? _ (NO_TRANSLATION)
+                   : ((codepage_desc *) g_ptr_array_index (codepages, n))->name;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -246,14 +262,12 @@ get_codepage_id (const int n)
 int
 get_codepage_index (const char *id)
 {
-    guint i;
-
     if (codepages == NULL)
         return -1;
-    if (strcmp (id, OTHER_8BIT) == 0)
+    if (strcmp (id, NO_TRANSLATION) == 0)
         return -1;
-    for (i = 0; i < codepages->len; i++)
-        if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
+    for (guint i = 0; i < codepages->len; i++)
+        if (strcmp (id, get_codepage_id (i)) == 0)
             return (int) i;
     return -1;
 }
@@ -306,10 +320,11 @@ init_translation_table (int cpsource, int cpdisplay)
         conv_displ[i] = i;
         conv_input[i] = i;
     }
-    cp_source = ((codepage_desc *) g_ptr_array_index (codepages, cpsource))->id;
-    cp_display = ((codepage_desc *) g_ptr_array_index (codepages, cpdisplay))->id;
 
-    // display <- inpit table
+    cp_source = get_codepage_id (cpsource);
+    cp_display = get_codepage_id (cpdisplay);
+
+    // display <- input table
 
     cd = g_iconv_open (cp_display, cp_source);
     if (cd == INVALID_CONV)
@@ -320,7 +335,7 @@ init_translation_table (int cpsource, int cpdisplay)
 
     g_iconv_close (cd);
 
-    // inpit <- display table
+    // input <- display table
 
     cd = g_iconv_open (cp_source, cp_display);
     if (cd == INVALID_CONV)
@@ -336,16 +351,6 @@ init_translation_table (int cpsource, int cpdisplay)
     g_iconv_close (cd);
 
     return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-convert_to_display (char *str)
-{
-    if (str != NULL)
-        for (; *str != '\0'; str++)
-            *str = conv_displ[(unsigned char) *str];
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -370,16 +375,6 @@ str_nconvert_to_display (const char *str, int len)
     str_nconvert (conv, str, len, buff);
     str_close_conv (conv);
     return buff;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-convert_from_input (char *str)
-{
-    if (str != NULL)
-        for (; *str != '\0'; str++)
-            *str = conv_input[(unsigned char) *str];
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -411,7 +406,7 @@ str_nconvert_to_input (const char *str, int len)
 unsigned char
 convert_from_utf_to_current (const char *str)
 {
-    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
+    unsigned char buf_ch[MB_LEN_MAX + 1];
     unsigned char ch = '.';
     GIConv conv;
     const char *cp_to;
@@ -447,8 +442,8 @@ convert_from_utf_to_current (const char *str)
 unsigned char
 convert_from_utf_to_current_c (int input_char, GIConv conv)
 {
-    unsigned char str[UTF8_CHAR_LEN + 1];
-    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
+    unsigned char str[MB_LEN_MAX + 1];
+    unsigned char buf_ch[MB_LEN_MAX + 1];
     unsigned char ch = '.';
     int res;
 
@@ -480,7 +475,7 @@ int
 convert_from_8bit_to_utf_c (char input_char, GIConv conv)
 {
     unsigned char str[2];
-    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
+    unsigned char buf_ch[MB_LEN_MAX + 1];
     int ch;
 
     str[0] = (unsigned char) input_char;

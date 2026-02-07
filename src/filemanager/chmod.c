@@ -40,6 +40,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
+#include "src/util.h"  // file_error_message()
+
 #include "cmd.h"  // chmod_cmd()
 
 /*** global variables ****************************************************************************/
@@ -101,15 +103,14 @@ static struct
     int ret_cmd;
     button_flags_t flags;
     int y;  // vertical position relatively to dialog bottom boundary
-    int len;
     const char *text;
 } chmod_but[BUTTONS] = {
-    { B_SETALL, NORMAL_BUTTON, 6, 0, N_ ("Set &all") },
-    { B_MARKED, NORMAL_BUTTON, 6, 0, N_ ("&Marked all") },
-    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_ ("S&et marked") },
-    { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_ ("C&lear marked") },
-    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
-    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") },
+    { B_SETALL, NORMAL_BUTTON, 6, N_ ("Set &all") },
+    { B_MARKED, NORMAL_BUTTON, 6, N_ ("&Marked all") },
+    { B_SETMRK, NORMAL_BUTTON, 5, N_ ("S&et marked") },
+    { B_CLRMRK, NORMAL_BUTTON, 5, N_ ("C&lear marked") },
+    { B_ENTER, DEFPUSH_BUTTON, 3, N_ ("&Set") },
+    { B_CANCEL, NORMAL_BUTTON, 3, N_ ("&Cancel") },
 };
 
 static gboolean mode_change;
@@ -163,13 +164,6 @@ chmod_init (void)
         len = str_term_width1 (file_info_labels[i]) + 2;  // spaces around
         file_info_labels_len = MAX (file_info_labels_len, len);
     }
-
-    for (i = 0; i < BUTTONS; i++)
-    {
-        chmod_but[i].len = str_term_width1 (chmod_but[i].text) + 3;  // [], spaces and w/o &
-        if (chmod_but[i].flags == DEFPUSH_BUTTON)
-            chmod_but[i].len += 2;  // <>
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -188,7 +182,7 @@ static void
 chmod_toggle_select (const WDialog *h, int Id)
 {
     check_perm[Id].selected = !check_perm[Id].selected;
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
     chmod_draw_select (h, Id);
 }
 
@@ -200,7 +194,7 @@ chmod_refresh (const WDialog *h)
     int i;
     int y, x;
 
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
 
     for (i = 0; i < BUTTONS_PERM; i++)
         chmod_draw_select (h, i);
@@ -358,38 +352,23 @@ chmod_dlg_create (WPanel *panel, const char *fname, const struct stat *sf_stat)
     c_fgrp = str_trunc (get_group (sf_stat->st_gid), file_gb_len - 3);
     group_add_widget (g, label_new (y + 6, cols, c_fgrp));
 
-    if (!single_set)
+    for (i = single_set ? BUTTONS - 2 : 0; i < BUTTONS; i++)
     {
-        i = 0;
+        WButton *b;
 
-        group_add_widget (g, hline_new (lines - chmod_but[i].y - 1, -1, -1));
+        y = lines - chmod_but[i].y;
 
-        for (; i < BUTTONS - 2; i++)
-        {
-            y = lines - chmod_but[i].y;
-            group_add_widget (g,
-                              button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chmod_but[i].len,
-                                          chmod_but[i].ret_cmd, chmod_but[i].flags,
-                                          chmod_but[i].text, NULL));
-            i++;
-            group_add_widget (g,
-                              button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1,
-                                          chmod_but[i].ret_cmd, chmod_but[i].flags,
-                                          chmod_but[i].text, NULL));
-        }
+        if (i == 0 || i == BUTTONS - 2)
+            group_add_widget (g, hline_new (y - 1, -1, -1));
+
+        b = button_new (y, 1, chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, NULL);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 - button_get_width (b);
+        group_add_widget (g, b);
+        i++;
+        b = button_new (y, 1, chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, NULL);
+        WIDGET (b)->rect.x = WIDGET (ch_dlg)->rect.cols / 2 + 1;
+        group_add_widget (g, b);
     }
-
-    i = BUTTONS - 2;
-    y = lines - chmod_but[i].y;
-    group_add_widget (g, hline_new (y - 1, -1, -1));
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chmod_but[i].len,
-                                  chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
-                                  NULL));
-    i++;
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, chmod_but[i].ret_cmd,
-                                  chmod_but[i].flags, chmod_but[i].text, NULL));
 
     // select first checkbox
     widget_select (WIDGET (check_perm[0].check));
@@ -417,32 +396,28 @@ try_chmod (const vfs_path_t *p, mode_t m)
     while (mc_chmod (p, m) == -1 && !ignore_all)
     {
         int my_errno = errno;
-        int result;
-        char *msg;
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_ ("Cannot chmod \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
-                               _ ("&Retry"), _ ("&Cancel"));
-        g_free (msg);
 
-        switch (result)
+        errno = my_errno;  // restore errno for file_error(
+
+        switch (file_error (NULL, TRUE, _ ("Cannot chmod\n%sn%s"), fname))
         {
-        case 0:
+        case FILE_IGNORE:
             // try next file
             return TRUE;
 
-        case 1:
+        case FILE_IGNORE_ALL:
             ignore_all = TRUE;
             // try next file
             return TRUE;
 
-        case 2:
+        case FILE_RETRY:
             // retry this file
             break;
 
-        case 3:
+        case FILE_ABORT:
         default:
             // stop remain files processing
             return FALSE;
@@ -566,8 +541,7 @@ chmod_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_chmod (vpath, ch_mode) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chmod \"%s\"\n%s"), fname->str,
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot chmod\n%s"), fname->str);
                     end_chmod = TRUE;
                 }
                 else if (!try_chmod (vpath, ch_mode))

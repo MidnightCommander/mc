@@ -21,6 +21,12 @@
 #define MC_MOCKABLE
 #endif
 
+#if defined(HAVE_TESTS)
+#define MC_TESTABLE
+#else
+#define MC_TESTABLE static
+#endif
+
 #include "glibcompat.h"
 
 #include "unixcompat.h"
@@ -73,18 +79,16 @@
 #endif
 
 /* Just for keeping Your's brains from invention a proper size of the buffer :-) */
-#define BUF_10K       10240L
-#define BUF_8K        8192L
-#define BUF_4K        4096L
-#define BUF_2K        2048L
-#define BUF_1K        1024L
+#define BUF_10K    10240L
+#define BUF_8K     8192L
+#define BUF_4K     4096L
+#define BUF_2K     2048L
+#define BUF_1K     1024L
 
-#define BUF_LARGE     BUF_1K
-#define BUF_MEDIUM    512
-#define BUF_SMALL     128
-#define BUF_TINY      64
-
-#define UTF8_CHAR_LEN 6
+#define BUF_LARGE  BUF_1K
+#define BUF_MEDIUM 512
+#define BUF_SMALL  128
+#define BUF_TINY   64
 
 /* Used to distinguish between a normal MC termination and */
 /* one caused by typing 'exit' or 'logout' in the subshell */
@@ -130,10 +134,8 @@ typedef struct
     // Numbers of (file I/O) and (input/display) codepages. -1 if not selected
     int source_codepage;
     int display_codepage;
-    /*
-     * If utf-8 terminal utf8_display = TRUE
-     * Display bits set UTF-8
-     */
+
+    // If utf-8 terminal utf8_display = TRUE
     gboolean utf8_display;
 
     // Set if the nice message (hint) bar is visible
@@ -172,8 +174,6 @@ typedef struct
         char *setup_color_string;
         char *term_color_string;
         char *color_terminal_string;
-        // colors specified on the command line: they override any other setting
-        char *command_line_colors;
 
 #ifndef LINUX_CONS_SAVER_C
         // Used only in mc, not in cons.saver
@@ -228,6 +228,8 @@ typedef struct
 extern mc_global_t mc_global;
 
 /*** declarations of public functions ************************************************************/
+
+char *mc_get_package_copyright (void);
 
 /*** inline functions ****************************************************************************/
 #endif

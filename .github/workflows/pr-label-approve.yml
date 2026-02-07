@@ -1,7 +1,7 @@
 name: Approve PR
 
 on:
-  pull_request:
+  pull_request_target:
     types: [ labeled ]
   workflow_dispatch:
     inputs:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-    if: ${{ github.event.issue.pull_request && (contains(github.event.label.name, 'approved') || inputs.issue_number != '') }}
+    if: ${{ contains(github.event.label.name, 'approved') || inputs.issue_number != '' }}
 
     permissions:
       pull-requests: write
@@ -26,11 +26,11 @@ jobs:
     steps:
       - run: |
           gh pr review \
-            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }}  \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.pull_request.number }}  \
               --approve
           
           gh pr edit \
-            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
+            ${{ inputs.issue_number != '' && inputs.issue_number || github.event.pull_request.number }} \
               --remove-label "state: in review"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

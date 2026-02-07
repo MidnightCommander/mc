@@ -165,7 +165,6 @@ static name_keymap_t command_names[] = {
 #endif
     ADD_KEYMAP_NAME (OptionsVfs),
     ADD_KEYMAP_NAME (OptionsConfirm),
-    ADD_KEYMAP_NAME (OptionsDisplayBits),
     ADD_KEYMAP_NAME (EditExtensionsFile),
     ADD_KEYMAP_NAME (EditFileHighlightFile),
     ADD_KEYMAP_NAME (LinkSymbolicEdit),
@@ -201,9 +200,6 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (LinkSymbolic),
     ADD_KEYMAP_NAME (PanelTree),
     ADD_KEYMAP_NAME (Tree),
-#ifdef ENABLE_VFS_UNDELFS
-    ADD_KEYMAP_NAME (Undelete),
-#endif
     ADD_KEYMAP_NAME (PutCurrentLink),
     ADD_KEYMAP_NAME (PutOtherLink),
     ADD_KEYMAP_NAME (HotListAdd),
@@ -225,6 +221,8 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (SelectExt),
     ADD_KEYMAP_NAME (ScrollLeft),
     ADD_KEYMAP_NAME (ScrollRight),
+    ADD_KEYMAP_NAME (ScrollHome),
+    ADD_KEYMAP_NAME (ScrollEnd),
     ADD_KEYMAP_NAME (PanelOtherCd),
     ADD_KEYMAP_NAME (PanelOtherCdLink),
     ADD_KEYMAP_NAME (CopySingle),
@@ -238,6 +236,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (SortPrev),
     ADD_KEYMAP_NAME (SortReverse),
     ADD_KEYMAP_NAME (SortByName),
+    ADD_KEYMAP_NAME (SortByVersion),
     ADD_KEYMAP_NAME (SortByExt),
     ADD_KEYMAP_NAME (SortBySize),
     ADD_KEYMAP_NAME (SortByMTime),

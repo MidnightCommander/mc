@@ -75,10 +75,11 @@ frame_draw (const WFrame *f)
     colors = widget_get_colors (wf);
 
     if (mc_global.tty.shadows)
-        tty_draw_box_shadow (w->y, w->x, w->lines, w->cols, SHADOW_COLOR);
+        tty_draw_box_shadow (w->y, w->x, w->lines, w->cols, CORE_SHADOW_COLOR);
 
     tty_setcolor (colors[FRAME_COLOR_NORMAL]);
     tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
+    tty_setcolor (colors[FRAME_COLOR_FRAME]);
     tty_draw_box (w->y + d, w->x + d, w->lines - 2 * d, w->cols - 2 * d, f->single);
 
     if (f->title != NULL)

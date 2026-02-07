@@ -31,6 +31,8 @@
 
 #include <config.h>
 
+#include <errno.h>
+
 #include "lib/global.h"
 
 #include "lib/skin.h"
@@ -42,6 +44,7 @@
 #include "lib/util.h"  // mc_pipe_t
 
 #include "src/history.h"
+#include "src/util.h"  // file_error_message()
 
 #include "filemanager.h"  // current_panel
 #include "layout.h"       // rotate_dash()
@@ -164,10 +167,10 @@ external_panelize_init (void)
         button_flags_t flags;
         const char *text;
     } panelize_but[] = {
-        { B_ENTER, DEFPUSH_BUTTON, N_ ("Pane&lize") },
-        { B_REMOVE, NORMAL_BUTTON, N_ ("&Remove") },
-        { B_ADD, NORMAL_BUTTON, N_ ("&Add new") },
-        { B_CANCEL, NORMAL_BUTTON, N_ ("&Cancel") },
+        { B_ENTER, DEFPUSH_BUTTON, _ ("Pane&lize") },
+        { B_REMOVE, NORMAL_BUTTON, _ ("&Remove") },
+        { B_ADD, NORMAL_BUTTON, _ ("&Add new") },
+        { B_CANCEL, NORMAL_BUTTON, _ ("&Cancel") },
     };
 
     WGroup *g;
@@ -185,9 +188,6 @@ external_panelize_init (void)
     blen = i - 1;  // gaps between buttons
     while (i-- != 0)
     {
-#ifdef ENABLE_NLS
-        panelize_but[i].text = _ (panelize_but[i].text);
-#endif
         blen += str_term_width1 (panelize_but[i].text) + 3 + 1;
         if (panelize_but[i].flags == DEFPUSH_BUTTON)
             blen += 2;
@@ -229,7 +229,7 @@ external_panelize_init (void)
                         NULL);
         group_add_widget (g, b);
 
-        x += button_get_len (b) + 1;
+        x += button_get_width (b) + 1;
     }
 
     widget_select (WIDGET (l_panelize));
@@ -346,9 +346,9 @@ do_external_panelize (const char *command)
 
         if (external->out.len == MC_PIPE_ERROR_READ)
         {
-            message (D_ERROR, MSG_ERROR,
-                     _ ("External panelize:\nfailed to read data from child stdout:\n%s"),
-                     unix_error_string (external->out.error));
+            errno = external->out.error;
+            file_error_message (_ ("External panelize:\nfailed to read data from child stdout:"),
+                                NULL);
             break;
         }
 
@@ -421,6 +421,7 @@ do_external_panelize (const char *command)
 
     current_panel->is_panelized = TRUE;
     panel_panelize_absolutize_if_needed (current_panel);
+    panel_panelize_save (current_panel);
 
     panel_set_current_by_name (current_panel, NULL);
     panel_re_sort (current_panel);
@@ -443,7 +444,7 @@ external_panelize_cmd (void)
     external_panelize_init ();
 
     // display file info
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (CORE_SELECTED_COLOR);
 
     switch (dlg_run (panelize_dlg))
     {

@@ -356,11 +356,12 @@ mcview_get_next_char (WView *view, mcview_state_machine_t *state, int *c)
 static gboolean
 mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, int *c, int *color)
 {
-    mcview_state_machine_t state_after_nroff;
-    int c2, c3;
+    mcview_state_machine_t state_after_three_chars;
+    mcview_state_machine_t state_after_five_chars;
+    int c2, c3, c4, c5;
 
     if (color != NULL)
-        *color = VIEW_NORMAL_COLOR;
+        *color = VIEWER_NORMAL_COLOR;
 
     if (!view->mode_flags.nroff)
         return mcview_get_next_char (view, state, c);
@@ -371,39 +372,50 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
     if (!mcview_isprint (view, *c))
         return TRUE;
 
-    state_after_nroff = *state;
+    state_after_three_chars = *state;
 
-    if (!mcview_get_next_char (view, &state_after_nroff, &c2))
+    if (!mcview_get_next_char (view, &state_after_three_chars, &c2))
         return TRUE;
     if (c2 != '\b')
         return TRUE;
 
-    if (!mcview_get_next_char (view, &state_after_nroff, &c3))
+    if (!mcview_get_next_char (view, &state_after_three_chars, &c3))
         return TRUE;
     if (!mcview_isprint (view, c3))
         return TRUE;
 
-    if (*c == '_' && c3 == '_')
+    state_after_five_chars = state_after_three_chars;
+
+    /* Bold and underlined letter x is denoted by: _ \b x \b x */
+    if (*c == '_' && mcview_get_next_char (view, &state_after_five_chars, &c4) && c4 == '\b'
+        && mcview_get_next_char (view, &state_after_five_chars, &c5) && c3 == c5)
     {
-        *state = state_after_nroff;
+        *c = c3;
+        *state = state_after_five_chars;
+        if (color != NULL)
+            *color = VIEWER_BOLD_UNDERLINED_COLOR;
+    }
+    else if (*c == '_' && c3 == '_')
+    {
+        *state = state_after_three_chars;
         if (color != NULL)
             *color =
-                state->nroff_underscore_is_underlined ? VIEW_UNDERLINED_COLOR : VIEW_BOLD_COLOR;
+                state->nroff_underscore_is_underlined ? VIEWER_UNDERLINED_COLOR : VIEWER_BOLD_COLOR;
     }
     else if (*c == c3)
     {
-        *state = state_after_nroff;
+        *state = state_after_three_chars;
         state->nroff_underscore_is_underlined = FALSE;
         if (color != NULL)
-            *color = VIEW_BOLD_COLOR;
+            *color = VIEWER_BOLD_COLOR;
     }
     else if (*c == '_')
     {
         *c = c3;
-        *state = state_after_nroff;
+        *state = state_after_three_chars;
         state->nroff_underscore_is_underlined = TRUE;
         if (color != NULL)
-            *color = VIEW_UNDERLINED_COLOR;
+            *color = VIEWER_UNDERLINED_COLOR;
     }
 
     return TRUE;
@@ -543,7 +555,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
     off_t dpy_text_column = view->mode_flags.wrap ? 0 : view->dpy_text_column;
     int col = 0;
     int cs[1 + MAX_COMBINING_CHARS];
-    char str[(1 + MAX_COMBINING_CHARS) * UTF8_CHAR_LEN + 1];
+    char str[(1 + MAX_COMBINING_CHARS) * MB_LEN_MAX + 1];
     int i, j;
 
     if (paragraph_ended != NULL)
@@ -580,7 +592,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
         }
 
         if (view->search_start <= state->offset && state->offset < view->search_end)
-            color = VIEW_SELECTED_COLOR;
+            color = VIEWER_SELECTED_COLOR;
 
         if (cs[0] == '\n')
         {
@@ -857,7 +869,7 @@ mcview_display_text (WView *view)
     view->dpy_end = state.offset;
     view->dpy_state_bottom = state;
 
-    tty_setcolor (VIEW_NORMAL_COLOR);
+    tty_setcolor (VIEWER_NORMAL_COLOR);
     if (mcview_show_eof != NULL && mcview_show_eof[0] != '\0')
         while (row < r->lines)
         {

@@ -16,7 +16,7 @@
 
 Совет: Домашняя страница Midnight Commander: https://midnight-commander.org
 
-Совет: Пожалуйста, шлите любые отчёты об ошибках на mc-devel@lists.midnight-commander.org
+Совет: Направляйте все сообщения об ошибках по адресу https://github.com/MidnightCommander/mc/issues
 
 Совет: Tab меняет текущую панель.
 

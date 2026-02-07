@@ -7,7 +7,7 @@ on:
         required: true
 
 env:
-  CLANG_FORMAT_VERSION: 20.1.0
+  CLANG_FORMAT_VERSION: 20.1.3
 
 jobs:
   build-fedora:
@@ -35,7 +35,7 @@ jobs:
 
             pip install clang-format==${{ env.CLANG_FORMAT_VERSION }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
 
       - name: Lint documentation
@@ -84,13 +84,13 @@ jobs:
           python3 -c "print(' &bullet; '.join(f'<a href="man/{p}.html">{p}</a>' for p in '$MANPAGES'.split()))" >> man/header.html
           echo "</div>" >> man/header.html
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: github.ref == 'refs/heads/master'
         with:
           name: man-pages-html-${{ github.sha }}
           path: man
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: test-suite-logs-fedora

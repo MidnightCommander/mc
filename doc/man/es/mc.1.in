@@ -41,13 +41,6 @@ Colores
 .\"Colors"
 para más información.
 .TP
-.I \-C arg, \-\-colors=arg
-Usado para especificar un juego de colores diferentes desde la línea de
-órdenes.  El formato de arg está documentado en la sección
-.\"LINK2"
-Colores\&. 
-.\"Colors"
-.TP
 .I \-\-configure\-options
 Muestra opciones de configuración compiladas.
 .TP
@@ -70,11 +63,6 @@ en Midnight Commander.
 Fuerza el uso de ratón en modo de seguimiento «normal». Se usa para
 terminales compatibles con xterm (tmux/screen).
 .TP
-.I \-k, \-\-resetsoft
-Restablece las softkeys a su valor por defecto según la base de datos de
-termcap/terminfo.  Solo útil en terminales HP cuando las teclas de función
-no funcionan.
-.TP
 .I \-K arch, \-\-keymap=arch
 Carga desde un archivo la configuración de teclas para la línea de órdenes.
 .TP
@@ -92,16 +80,18 @@ usada directamente, sino desde un guión de shell adecuado, para dejar
 como directorio activo el directorio que estaba en uso dentro de
 Midnight Commander.  Consúltese en los archivos
 .B %pkglibexecdir%/mc.sh
-(usuarios de bash y zsh) y
+(usuarios de bash y zsh),
 .B %pkglibexecdir%/mc.csh
-(usuarios de tcsh) la manera de definir
+(usuarios de tcsh) y
+.B %pkglibexecdir%/mc.fish
+(usuarios de fish) la manera de definir
 .B mc
 como un alias para el correspondiente guión de shell.
 .TP
 .I \-s, \-\-slow
 Activa el modo para terminales lentos. En este modo el programa no
 dibuja bordes con líneas de caracteres y desactiva el modo detallado.
-Si no se rellena la sección [Lines] el marco pseudo\-gráfico estará
+Si no se rellena la sección [lines] el marco pseudo\-gráfico estará
 formado por espacios; en caso contrario el marco se contruye con
 caracteres de texto según los parámetros siguientes:
 .TP
@@ -1708,12 +1698,6 @@ podemos seleccionar un «skin» o apariencia para el programa.
 .PP
 En
 .\"LINK2"
-Juego de Caracteres
-.\"Display bits"
-podemos seleccionar qué caracteres es capaz de mostrar nuestro terminal.
-.PP
-En
-.\"LINK2"
 Aprender Teclas
 .\"Learn keys"
 podemos verificar teclas que no funcionan en algunos terminales y
@@ -2074,16 +2058,6 @@ Véase la sección sobre
 Skins
 .\"Skins"
 para conocer los detalles de los archivos de definición de estos «skins».
-.\"NODE "    Display bits"
-.SH "    Juego de caracteres"
-Esta opción permite configurar el conjunto de caracteres visibles en la
-pantalla.  Este puede ser 7\-bits si nuestro terminal/curses soporta
-solo siete bits de salida, alguna de las tablas del estándar ISO\-8859 y
-diversas codificaciones comunes de PC con ocho bits por carácter, o UTF\-8
-para Unicode.
-.PP
-Para soportar teclados con caracteres locales debemos marcar la opción de
-.IR "Aceptar entrada de 8 bits" .
 .\"NODE "    Learn keys"
 .SH "    Aprender teclas"
 Este diálogo nos permite comprobar si nuestras teclas F1\-F20, Inicio, Fin, etc. funcionan adecuadamente
@@ -3188,30 +3162,6 @@ Ejemplos:
     sftp://pepe@maquina.ssh.edu:2222/privado
 .fi
 
-.\"NODE "  Undelete File System"
-.SH "  Sistema de archivos de Recuperación"
-En sistemas Linux, si el programa de configuración nos preguntó si queríamos usar
-las facilidades de recuperación de archivos de ext2fs, tendremos el sistema de archivos
-recuperables accesible.
-La recuperación de archivos borrados está disponible solo en los sistemas de archivos ext2. El
-sistema de archivos recuperable es solo un interface de la librería ext2fs con:
-restaurar todos los archivos borrados en un ext2fs y proporciona
-la extracción selectiva de archivos en una partición regular.
-.PP
-Para usar este sistema de archivos, tendremos que hacer un chdir a un nombre de archivo especial
-formado por el prefijo "/undel://" y el nombre de archivo donde se encuentra el
-sistema de archivos actual.
-.PP
-Por ejemplo, para recuperar archivos borrados en la segunda partición del
-primer disco scsi en Linux, usaríamos el siguiente nombre de ruta:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-Esto le llevaría un tiempo a undelfs para cargar la información
-antes de empezar a navegar por los archivos allí contenidos.
-
 .\"NODE "  EXTernal File System"
 .SH "  Sistema de archivos EXTerno (extfs)"
 .B extfs
@@ -3363,105 +3313,6 @@ color_terminals=nombre\-terminal1,nombre\-terminal2...
 El programa puede compilarse con ncurses y S\-Lang, ncurses no
 ofrece la posibilidad de forzar el modo en color: ncurses utiliza la
 información de la base de datos de terminales.
-.PP
-Midnight Commander ofrece una forma de cambiar los colores por defecto.
-Actualmente los colores se configuran a través de la variable de entorno
-.B MC_COLOR_TABLE
-o en la sección Colors del archivo de inicialización.
-.PP
-En la sección Colors, el mapa de colores por defecto se carga desde la variable
-.IR base_color .
-Podemos especificar un mapa de colores alternativo para un terminal
-utilizando el nombre del terminal como clave en esta sección. Ejemplo:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-El formato de la definición de color es:
-.PP
-.nf
-  <PalabraClave>=<ColorTexto>,<ColorFondo>:<PalabraClave>= ...
-.fi
-.PP
-los colores son opcionales, y las palabras claves son: normal, selected,
-disabled, marked, markselect, errors, input, inputmark, inputunchanged,
-commandlinemark, reverse, gauge, header, inputhistory, commandhistory;
-los colores de la barra de botones: bbarhotkey, bbarbutton; los colores
-de la barra de estado: statusbar; los colores de menú: menunormal,
-menusel, menuhot, menuhotsel, menuinactive; los colores de los diálogos:
-dnormal, dfocus, dhotnormal, dhotfocus, dtitle; los colores de los diálogos
-de error: errdfocus, errdhotnormal, errdhotfocus, errdtitle; los colores
-de la ayuda: helpnormal, helpitalic, helpbold, helplink, helpslink,
-helptitle; los colores del visor: viewnormal, viewbold, viewunderline,
-viewselected; loc colores del editor: editnormal, editbold, editmarked,
-editwhitespace, editnonprintable, editlinestate; los colores de los menús
-desplegables: pmenunormal, pmenusel, pmenutitle.
-.PP
-.I header
-determina el color del encabezado de los paneles, la línea con los
-títulos de columna y el modo de ordenación.
-.PP
-.I input
-determina el color de las líneas de entrada de texto en los diálogos.
-.PP
-.I gauge (indicador)
-determina el color de la parte completada de la barra de progresión (gauge), que muestra
-qué porcentaje de archivos fueron copiados etc. de modo gráfico.
-.PP
-.I disabled
-detemina el color de los componentes inactivos.
-.PP
-Los cuadros de diálogo usan los siguientes colores:
-.I dnormal
-usado para el texto normal,
-.I dfocus
-usado para el componente actualmente seleccionado,
-.I dhotnormal
-usado para diferenciar el color de la tecla activa
-en los componentes normales, mientras que el color
-.I dhotfocus
-se utiliza para el color resaltado en el componente seleccionado.
-.PP
-Los menús utilizan el mismo esquema equivalente con los nombres menunormal,
-menusel, menuhot, menuhotsel and menuinactive en lugar de los anteriores.
-.PP
-La ayuda utiliza los siguientes colores:
-.I helpnormal
-texto normal,
-.I helpitalic
-utilizado para el texto enfatizado con letra itálica en la página del manual,
-.I helpbold
-usado para el texto enfatizado en negrita en la página del manual,
-.I helplink
-usado para los hiperenlaces no seleccionados y
-.I helpslink
-es utilizado para el hiperenlace seleccionado.
-.PP
-En los menús desplegables:
-.I pmenunormal
-se usa como color del fondo y de los elementos no seleccionados,
-.I menusel
-se usa para el elemento seleccionado,
-.I pmenutitle
-se usa para el titulo del menú.
-
-.PP
-Los colores posibles son: negro (black), gris (gray), rojo (red), rojo brillante (brightred), verde (green),
-verde claro (brightgreen), marrón (brown), amarillo (yellow), azul oscuro (blue), azul brillante (brightblue),
-rosa (magenta), rosa claro (brightmagenta),
-azul celeste (cyan), celeste claro (brightcyan), gris claro (lightgray) y blanco (white).
-Hay una palabra clave especial para obtener un fondo transparente. Se trata de 'default'. 'default'
-solo se puede utilizar como color de fondo. Otra palabra especial es 'base' que hace referencia a los
-colores generales. Cuando se puede disponer de 256 colores se pueden referir como color16 hasta
-color255. Ejemplo:
-.PP
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
 
 .\"NODE "Skins"
 .SH "Skins"
@@ -3737,20 +3588,14 @@ Colores\&.
 .\"NODE "  Skins lines"
 .SH "  Trazado de líneas"
 Trazos de líneas de la sección
-.B [Lines]
+.B [lines]
 del archivo de skins.  Por defecto se utilizan líneas sencillas, pero
 se pueden redefinir empleando cualquier símbolo utf\-8 (por ejemplo,
 líneas dobles).
-.PP
-.I ¡¡¡ATENCIÓN!!!
-Si se compila Midnight Commander empleando la biblioteca de pantalla
-ncurses, entonces el trazado de líneas está limitado. Es posible que
-solo se puedan utilizar líneas simples. Para consultas y comentarios
-contactar con los desarrolladores de ncurses.
 
 .PP
 Descripción de parámetros de la sección
-.BR [Lines] :
+.BR [lines] :
 .TP
 .I lefttop
 esquina superior izquierda.
@@ -3918,19 +3763,6 @@ del formato a emplear.  Sin esta opción se emplea el formato por defecto.
 Cambiar el formato de fecha y hora empleado para fechas más antiguas que seis
 meses.  Véanse las páginas de manual de strftime o date para la descripción del formato a
 emplear. Sin esta opción se emplea el formato por defecto.
-.TP
-.I torben_fj_mode
-Si este modificador existe, entonces las teclas Inicio y Fin funcionarán de manera
-diferente en los paneles, en lugar de mover la selección al primer
-o último archivo en los paneles, actuarán como sigue:
-.IP
-La tecla Inicio: Irá a la línea central del panel, si está bajo ella; sino va a
-la primera línea a menos que ya esté allí, en este caso
-irá al primer archivo del panel.
-.IP
-La tecla Fin tiene un comportamiento similar: Irá a la línea central del panel, si
-está situada en la mitad superior del panel; si no irá a la línea inferior del panel a menos que
-ya estemos ahí, en cuyo caso moverá la selección al último nombre de archivo del panel.
 .TP
 .I use_file_to_guess_type
 Si esta variable está activada (por defecto lo está) se recurrirá al
@@ -4161,7 +3993,7 @@ carencia de garantía.
 .\"NODE "AVAILABILITY"
 .SH "DISPONIBILIDAD"
 La última versión de este programa se puede encontrar en
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .\"NODE "SEE ALSO"
 .SH "VÉASE TAMBIÉN"
 mcedit(1), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),
@@ -4169,7 +4001,7 @@ terminfo(1), gpm(1).
 .PP
 .nf
 La página web de Midnight Commander está en:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .PP
 La presente documentación recoge información relativa a la versión 4.8
@@ -4189,8 +4021,8 @@ distribución.
 .SH "ERRORES"
 Véase el archivo "TODO" en la distribución para saber qué falta por hacer.
 .PP
-Para informar de problemas con el programa, introducir una nueva incidencia
-en https://github.com/MidnightCommander/mc/issues .
+Para informar de problemas con el programa, introducir una nueva incidencia en
+\X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .
 .PP
 Se debe proporcionar una descripción detallada del problema, la
 versión del programa (que se obtiene con

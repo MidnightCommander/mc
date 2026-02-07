@@ -50,7 +50,6 @@
 #include "lib/vfs/vfs.h"  // vfs_get_cwd ()
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/event.h"
 #include "lib/util.h"  // mc_time_elapsed()
 
 #include "src/consaver/cons.saver.h"
@@ -237,7 +236,7 @@ update_split (const WDialog *h)
         check_options[0].widget->state = panels_layout.vertical_equal;
     widget_draw (WIDGET (check_options[0].widget));
 
-    tty_setcolor (check_options[0].widget->state ? DISABLED_COLOR : COLOR_NORMAL);
+    tty_setcolor (check_options[0].widget->state ? CORE_DISABLED_COLOR : DIALOG_NORMAL_COLOR);
 
     widget_gotoyx (h, 6, 5);
     if (panels_layout.horizontal_split)
@@ -326,7 +325,8 @@ layout_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void 
         if (old_layout.output_lines != _output_lines)
         {
             old_layout.output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? DIALOG_NORMAL_COLOR
+                                                             : CORE_DISABLED_COLOR);
             widget_gotoyx (w, 9, 5);
             tty_print_string (output_lines_label);
             widget_gotoyx (w, 9, 5 + 3 + output_lines_label_len);
@@ -380,7 +380,8 @@ layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
         if (old_layout.output_lines != _output_lines)
         {
             old_layout.output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? DIALOG_NORMAL_COLOR
+                                                             : CORE_DISABLED_COLOR);
             widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
@@ -492,17 +493,17 @@ layout_dlg_create (void)
     int b1, b2, b;
     size_t i;
 
-    const char *title1 = N_ ("Panel split");
-    const char *title2 = N_ ("Console output");
-    const char *title3 = N_ ("Other options");
+    const char *title1 = _ ("Panel split");
+    const char *title2 = _ ("Console output");
+    const char *title3 = _ ("Other options");
 
     const char *s_split_direction[2] = {
-        N_ ("&Vertical"),
-        N_ ("&Horizontal"),
+        _ ("&Vertical"),
+        _ ("&Horizontal"),
     };
 
-    const char *ok_button = N_ ("&OK");
-    const char *cancel_button = N_ ("&Cancel");
+    const char *ok_button = _ ("&OK");
+    const char *cancel_button = _ ("&Cancel");
 
     output_lines_label = _ ("Output lines:");
 
@@ -510,23 +511,12 @@ layout_dlg_create (void)
     {
         static gboolean i18n = FALSE;
 
-        title1 = _ (title1);
-        title2 = _ (title2);
-        title3 = _ (title3);
-
-        i = G_N_ELEMENTS (s_split_direction);
-        while (i-- != 0)
-            s_split_direction[i] = _ (s_split_direction[i]);
-
         if (!i18n)
         {
             for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
                 check_options[i].text = _ (check_options[i].text);
             i18n = TRUE;
         }
-
-        ok_button = _ (ok_button);
-        cancel_button = _ (cancel_button);
     }
 #endif
 
@@ -974,7 +964,6 @@ setup_cmdline (void)
     const WRect *r = &mw->rect;
     int prompt_width;
     int y;
-    char *tmp_prompt = (char *) mc_prompt;
 
     if (!command_prompt)
         return;
@@ -984,14 +973,16 @@ setup_cmdline (void)
     {
         // Workaround: avoid crash on FreeBSD (see ticket #4213 for details)
         if (subshell_prompt != NULL)
-            tmp_prompt = g_string_free (subshell_prompt, FALSE);
-        else
-            tmp_prompt = g_strdup (mc_prompt);
-        (void) strip_ctrl_codes (tmp_prompt);
+        {
+            g_free (mc_prompt);
+            mc_prompt = g_strndup (subshell_prompt->str, subshell_prompt->len);
+        }
+
+        (void) strip_ctrl_codes (mc_prompt);
     }
 #endif
 
-    prompt_width = str_term_width1 (tmp_prompt);
+    prompt_width = str_term_width1 (mc_prompt);
 
     // Check for prompts too big
     if (r->cols > 8 && prompt_width > r->cols - 8)
@@ -999,17 +990,9 @@ setup_cmdline (void)
         int prompt_len;
 
         prompt_width = r->cols - 8;
-        prompt_len = str_offset_to_pos (tmp_prompt, prompt_width);
-        tmp_prompt[prompt_len] = '\0';
+        prompt_len = str_offset_to_pos (mc_prompt, prompt_width);
+        mc_prompt[prompt_len] = '\0';
     }
-
-#ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell)
-    {
-        subshell_prompt = g_string_new_take (tmp_prompt);
-        mc_prompt = subshell_prompt->str;
-    }
-#endif
 
     y = r->lines - 1 - (mc_global.keybar_visible ? 1 : 0);
 
@@ -1060,10 +1043,10 @@ rotate_dash (gboolean show)
         return;
 
     widget_gotoyx (w, menubar_visible ? 1 : 0, w->rect.cols - 1);
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (CORE_NORMAL_COLOR);
 
     if (!show)
-        tty_print_alt_char (ACS_URCORNER, FALSE);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DRIGHTTOP]);
     else
     {
         static const char rotating_dash[4] MC_NONSTRING = "|/-\\";
@@ -1219,12 +1202,9 @@ create_panel (int num, panel_view_mode_t type)
     // same state.  Maybe we could just kill it and then replace it
     if (old_widget != NULL)
     {
+        // save directory history of panel
         if (old_type == view_listing)
-        {
-            /* save and write directory history of panel
-             * ... and other histories of filemanager  */
-            dlg_save_history (filemanager);
-        }
+            history_save (filemanager, old_widget);
 
         widget_replace (old_widget, new_widget);
     }
@@ -1235,11 +1215,7 @@ create_panel (int num, panel_view_mode_t type)
 
         // if existing panel changed type to view_listing, then load history
         if (old_widget != NULL)
-        {
-            ev_history_load_save_t event_data = { NULL, new_widget };
-
-            mc_event_raise (filemanager->event_group, MCEVENT_HISTORY_LOAD, &event_data);
-        }
+            history_load (filemanager, new_widget);
 
         if (num == 0)
             left_panel = panel;

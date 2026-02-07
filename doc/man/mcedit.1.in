@@ -31,17 +31,17 @@ Force black and white display.
 Force ANSI color mode on terminals that don't seem to have color
 support.
 .TP
-.I "\-C <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ..."
-Specify a different color set.  See the
-.B Colors
-section in mc(1) for more information.
-.TP
 .I "\-d"
 Disable mouse support.
 .TP
 .I "\-f"
 Display the compiled\-in search path for GNU Midnight Commander data
 files.
+.TP
+.I \-S arg, \-\-skin=arg
+Specify a name of skin in the command line.  See the
+.B Skins
+section in mc(1) for more information.
 .TP
 .I "\-t"
 Force using termcap database instead of terminfo.  This option is only
@@ -180,6 +180,13 @@ The currently tagged files.
 .TP
 .I %T
 The tagged files in the unselected panel.
+.TP
+.IR %v " and " %V
+Similar to the
+.I %t
+and
+.I %T
+, but expands to full names of tagged files.
 .TP
 .IR %u " and " %U
 Similar to the
@@ -460,18 +467,6 @@ with.  Also remember that the aim of syntax highlighting is to make
 programming less prone to error, not to make code look pretty.
 .PP
 The syntax highlighting can be toggled using Ctrl\-s shortcut.
-.SH COLORS
-The default colors may be changed by appending to the
-.B MC_COLOR_TABLE
-environment variable.  Foreground and background colors pairs may be
-specified for example with:
-.PP
-.nf
-MC_COLOR_TABLE="$MC_COLOR_TABLE:\e
-editnormal=lightgray,black:\e
-editbold=yellow,black:\e
-editmarked=black,cyan"
-.fi
 .SH OPTIONS
 Most options can be set from Options dialog box.  See the
 .B Options
@@ -607,12 +602,6 @@ will be untouched. Default value is
 .I editor_state_full_filename
 Show full path name in the status line. If disabled (default), only base name of the
 file is shown.
-.SH MISCELLANEOUS
-The editor also displays non\-us characters (160+).  When editing
-binary files, you should set
-.B display bits
-to 7 bits in Midnight Commander's options menu to keep the spacing
-clean.
 .SH FILES
 .I %pkgdatadir%/help/mc.hlp
 .IP
@@ -651,11 +640,12 @@ help of Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .SH SEE ALSO
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
 .SH AUTHORS
 Paul Sheer (psheer@obsidian.co.za) is the original author of
 Midnight Commander's internal editor.
 .SH BUGS
-Bugs should be reported to https://github.com/MidnightCommander/mc/issues .
+Bugs should be reported to
+\X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .

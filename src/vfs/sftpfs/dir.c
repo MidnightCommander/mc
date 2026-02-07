@@ -127,7 +127,7 @@ sftpfs_readdir (void *data, GError **mcerror)
     }
     while (rc == LIBSSH2_ERROR_EAGAIN);
 
-    return (rc != 0 ? vfs_dirent_init (NULL, mem, 0) : NULL);  // FIXME: inode
+    return (rc != 0 ? vfs_dirent_init (NULL, mem, 0, DT_UNKNOWN) : NULL);  // FIXME: inode
 }
 
 /* --------------------------------------------------------------------------------------------- */

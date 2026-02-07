@@ -27,7 +27,7 @@
 #endif
 
 /* do not draw shadows if NCurses is built with --disable-widec */
-#if defined(NCURSES_WIDECHAR) && NCURSES_WIDECHAR
+#ifdef HAVE_NCURSES_WIDECHAR
 #define ENABLE_SHADOWS 1
 #endif
 
@@ -38,6 +38,8 @@
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /*** global variables defined in .c file *********************************************************/
+
+extern gboolean ncurses_koi8r_double_line_bug;
 
 /*** declarations of public functions ************************************************************/
 

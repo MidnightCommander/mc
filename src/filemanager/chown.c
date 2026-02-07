@@ -45,6 +45,7 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"  // panels_options
+#include "src/util.h"   // file_error_message()
 
 #include "cmd.h"  // chown_cmd()
 
@@ -76,18 +77,15 @@ static struct
     int ret_cmd;
     button_flags_t flags;
     int y;
-    int len;
     const char *text;
+    WButton *button;
 } chown_but[BUTTONS] = {
-    { B_SETALL, NORMAL_BUTTON, 5, 0, N_ ("Set &all") },
-    { B_SETGRP, NORMAL_BUTTON, 5, 0, N_ ("Set &groups") },
-    { B_SETUSR, NORMAL_BUTTON, 5, 0, N_ ("Set &users") },
-    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_ ("&Set") },
-    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_ ("&Cancel") },
+    { B_SETALL, NORMAL_BUTTON, 5, N_ ("Set &all"), NULL },
+    { B_SETGRP, NORMAL_BUTTON, 5, N_ ("Set &groups"), NULL },
+    { B_SETUSR, NORMAL_BUTTON, 5, N_ ("Set &users"), NULL },
+    { B_ENTER, DEFPUSH_BUTTON, 3, N_ ("&Set"), NULL },
+    { B_CANCEL, NORMAL_BUTTON, 3, N_ ("&Cancel"), NULL },
 };
-
-/* summary length of three buttons */
-static int blen = 0;
 
 static struct
 {
@@ -110,7 +108,6 @@ static void
 chown_init (void)
 {
     static gboolean i18n = FALSE;
-    int i;
 
     if (i18n)
         return;
@@ -118,21 +115,9 @@ chown_init (void)
     i18n = TRUE;
 
 #ifdef ENABLE_NLS
-    for (i = 0; i < BUTTONS; i++)
+    for (int i = 0; i < BUTTONS; i++)
         chown_but[i].text = _ (chown_but[i].text);
 #endif
-
-    for (i = 0; i < BUTTONS; i++)
-    {
-        chown_but[i].len = str_term_width1 (chown_but[i].text) + 3;  // [], spaces and w/o &
-        if (chown_but[i].flags == DEFPUSH_BUTTON)
-            chown_but[i].len += 2;  // <>
-
-        if (i < BUTTONS - 2)
-            blen += chown_but[i].len;
-    }
-
-    blen += 2;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -143,7 +128,7 @@ chown_refresh (const Widget *h)
     int y = 3;
     int x = 7 + GW * 2;
 
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
 
     widget_gotoyx (h, y + 0, x);
     tty_print_string (_ ("Name"));
@@ -176,6 +161,36 @@ chown_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+chown_buttons_create (WGroup *g, const int first, const int last)
+{
+    int i;
+    int blen = 0;
+    int x;
+
+    const int y = WIDGET (g)->rect.lines - chown_but[first].y;
+
+    group_add_widget (g, hline_new (y - 1, -1, -1));
+
+    for (i = first; i <= last; i++)
+    {
+        chown_but[i].button =
+            button_new (y, 1, chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text, NULL);
+        blen += button_get_width (chown_but[i].button) + 1;
+        group_add_widget (g, chown_but[i].button);
+    }
+
+    x = WIDGET (g)->rect.x + (WIDGET (g)->rect.cols - blen) / 2;
+
+    for (i = first; i <= last; i++)
+    {
+        WIDGET (chown_but[i].button)->rect.x = x;
+        x += button_get_width (chown_but[i].button) + 1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static WDialog *
 chown_dlg_create (WPanel *panel)
 {
@@ -183,7 +198,6 @@ chown_dlg_create (WPanel *panel)
     WDialog *ch_dlg;
     WGroup *g;
     int lines, cols;
-    int i, y;
     struct passwd *l_pass;
     struct group *l_grp;
 
@@ -222,41 +236,16 @@ chown_dlg_create (WPanel *panel)
 
     group_add_widget (g, groupbox_new (2, 5 + GW * 2, GH, GW, _ ("File")));
     // add widgets for the file information
-    for (i = 0; i < LABELS; i++)
+    for (int i = 0; i < LABELS; i++)
     {
         chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, NULL);
         group_add_widget (g, chown_label[i].l);
     }
 
     if (single_set == 0)
-    {
-        int x;
+        chown_buttons_create (g, 0, BUTTONS - 3);
 
-        group_add_widget (g, hline_new (lines - chown_but[0].y - 1, -1, -1));
-
-        y = lines - chown_but[0].y;
-        x = (cols - blen) / 2;
-
-        for (i = 0; i < BUTTONS - 2; i++)
-        {
-            group_add_widget (g,
-                              button_new (y, x, chown_but[i].ret_cmd, chown_but[i].flags,
-                                          chown_but[i].text, NULL));
-            x += chown_but[i].len + 1;
-        }
-    }
-
-    i = BUTTONS - 2;
-    y = lines - chown_but[i].y;
-    group_add_widget (g, hline_new (y - 1, -1, -1));
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chown_but[i].len,
-                                  chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text,
-                                  NULL));
-    i++;
-    group_add_widget (g,
-                      button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, chown_but[i].ret_cmd,
-                                  chown_but[i].flags, chown_but[i].text, NULL));
+    chown_buttons_create (g, BUTTONS - 2, BUTTONS - 1);
 
     // select first listbox
     widget_select (WIDGET (l_user));
@@ -284,32 +273,28 @@ try_chown (const vfs_path_t *p, uid_t u, gid_t g)
     while (mc_chown (p, u, g) == -1 && !ignore_all)
     {
         int my_errno = errno;
-        int result;
-        char *msg;
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_ ("Cannot chown \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
-                               _ ("&Retry"), _ ("&Cancel"));
-        g_free (msg);
 
-        switch (result)
+        errno = my_errno;  // restore errno for file_error()
+
+        switch (file_error (NULL, TRUE, _ ("Cannot chown\n%sn%s"), fname))
         {
-        case 0:
+        case FILE_IGNORE:
             // try next file
             return TRUE;
 
-        case 1:
+        case FILE_IGNORE_ALL:
             ignore_all = TRUE;
             // try next file
             return TRUE;
 
-        case 2:
+        case FILE_RETRY:
             // retry this file
             break;
 
-        case 3:
+        case FILE_ABORT:
         default:
             // stop remain files processing
             return FALSE;
@@ -454,8 +439,7 @@ chown_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_chown (vpath, new_user, new_group) == -1)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chown \"%s\"\n%s"), fname->str,
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot chown\n%s"), fname->str);
                     end_chown = TRUE;
                 }
                 else if (!try_chown (vpath, new_user, new_group))

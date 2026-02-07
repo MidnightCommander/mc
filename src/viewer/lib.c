@@ -46,6 +46,7 @@
 #include "lib/charsets.h"
 
 #include "src/selcodepage.h"
+#include "src/util.h"  // file_error_message()
 
 #include "internal.h"
 
@@ -290,12 +291,14 @@ mcview_select_encoding (WView *view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_show_error (WView *view, const char *msg)
+mcview_show_error (WView *view, const char *format, const char *filename)
 {
     if (mcview_is_in_panel (view))
-        mcview_set_datasource_string (view, msg);
+        mcview_set_datasource_string (view, filename);
+    else if (format != NULL)
+        file_error_message (format, filename);
     else
-        message (D_ERROR, MSG_ERROR, "%s", msg);
+        message (D_ERROR, MSG_ERROR, "%s", filename);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -372,25 +375,23 @@ mcview_eol (WView *view, off_t current)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mcview_get_title (const WDialog *h, size_t len)
+mcview_get_title (const WDialog *h, const ssize_t width)
 {
     const WView *view;
     const char *modified;
     const char *file_label;
     const char *view_filename;
-    char *ret_str;
 
     view = (const WView *) widget_find_by_type (CONST_WIDGET (h), mcview_callback);
     modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
     view_filename = vfs_path_as_str (view->filename_vpath);
 
-    len -= 4;
+    const ssize_t width1 = width - 4;
 
     file_label = view_filename != NULL ? view_filename : view->command != NULL ? view->command : "";
-    file_label = str_term_trim (file_label, len - str_term_width1 (_ ("View: ")));
+    file_label = str_term_trim (file_label, width1 - str_term_width1 (_ ("View: ")));
 
-    ret_str = g_strconcat (_ ("View: "), modified, file_label, (char *) NULL);
-    return ret_str;
+    return g_strconcat (_ ("View: "), modified, file_label, (char *) NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

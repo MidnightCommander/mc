@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -22,6 +22,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr ""
+
 msgid "Warning: cannot load codepages list"
 msgstr "Varoitus: Koodisivuja ei pystytä lataamaan"
 
@@ -51,6 +54,10 @@ msgstr "Ryhmää '%s' ei voi luoda tapahtumille!"
 #, c-format
 msgid "Unable to create event '%s'!"
 msgstr "Tapahtuman '%s' luonti epäonnistui!"
+
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -155,26 +162,42 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Ei voi käyttää '%s' ulkoasua 256 värlillä\n"
-"terminaalissa joka ei tue värikarttaa-256\n"
-"Oletus ulkoasu on ladattu"
 
-msgid "True color not supported with ncurses."
-msgstr "Täyttä värikarttaa ei ncurses tue."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
+msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Päätteesi ei näytä edes tukevan 256 värikarttaa."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+msgstr ""
 
 msgid "True color not supported in this slang version."
 msgstr "Täyttä värikarttaa ei tueta tässä slang versiossa."
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
-"Aseta COLORTERM=truecolor, jos pääte todella tukee täydellistä värikarttaa."
 
 msgid "Escape"
 msgstr "Esc"
@@ -759,7 +782,7 @@ msgstr "[this_dir] [other_panel_dir]"
 #, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 
@@ -827,31 +850,17 @@ msgstr "Etsi"
 msgid "Search is disabled"
 msgstr "Haku on pois käytöstä"
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+msgid "Cannot create temporary diff file"
 msgstr ""
-"Väliaikaista diff-tiedostoa ei voi luoda\n"
-"%s"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
-"Ei voi luoda varmuuskopion tiedostoa\n"
-"%s%s\n"
-"%s"
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+msgid "Cannot create temporary merge file"
 msgstr ""
-"Väliaikaista merge-tiedostoa ei voi luoda\n"
-"%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Nopein (oleta suuria tiedostoja)"
@@ -919,18 +928,17 @@ msgstr ""
 msgid "ButtonBar|Quit"
 msgstr ""
 
-msgid "Quit"
-msgstr "Poistu"
-
 msgid "File(s) was modified. Save with exit?"
 msgstr "Tiedostot ovat muuttuneet. Tallenna ja poistu?"
 
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"Midnight Commander suljetaan.\n"
-"Tallenna muuttuneet tiedostot?"
+
+msgid "Quit"
+msgstr "Poistu"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -939,12 +947,14 @@ msgid "File name is empty!"
 msgstr ""
 
 #, c-format
-msgid "\"%s\" is a directory"
-msgstr "\"%s\" on hakemisto"
+msgid ""
+"%s\n"
+"is a directory"
+msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"Cannot stat\n"
 "%s"
 msgstr ""
 
@@ -962,8 +972,10 @@ msgid "Loading..."
 msgstr "Avataan..."
 
 #, c-format
-msgid "Cannot open %s for reading"
-msgstr "Ei voida avata %s lukemista varten"
+msgid ""
+"Cannot open\n"
+"%s"
+msgstr ""
 
 msgid "Load file"
 msgstr "Avaa tiedosto"
@@ -973,12 +985,10 @@ msgid "Error reading %s"
 msgstr "Virhe lukiessa %s"
 
 #, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr "Ei saada kohteen %s kokoa/käyttöoikeuksia"
-
-#, c-format
-msgid "\"%s\" is not a regular file"
-msgstr "\"%s\" ei ole tavallinen tiedosto"
+msgid ""
+"%s\n"
+"is not a regular file"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -996,8 +1006,10 @@ msgid "Error reading from pipe: %s"
 msgstr "Virhe luettaessa putkesta: %s"
 
 #, c-format
-msgid "Cannot open pipe for reading: %s"
-msgstr "Putki ei avaudu lukemista varten: %s"
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
+msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Tiedostossa on kovia linkkejä. Irrota ennen tallennusta?"
@@ -1010,12 +1022,11 @@ msgid "Error writing to pipe: %s"
 msgstr "Virhe kirjoitettaessa putkeen: %s"
 
 #, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr "Putki ei avaudu kirjoitusta varten: %s"
-
-#, c-format
-msgid "Cannot open file for writing: %s"
-msgstr "Ei voida avata %s kirjoitusta varten"
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
+msgstr ""
 
 msgid "The file you are saving does not end with a newline."
 msgstr "Tallentamasi tiedosto ei pääty uuteen riviin."
@@ -1044,6 +1055,12 @@ msgstr "Muuta rivinvaihdot:"
 msgid "Save As"
 msgstr "Tallenna nimellä"
 
+#, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
+msgstr ""
+
 msgid "&Quick save"
 msgstr "&Nopea tallennus"
 
@@ -1059,8 +1076,12 @@ msgstr "Tarkista &POSIX uusi rivi"
 msgid "Edit Save Mode"
 msgstr "Muokkaa tallennustilaa"
 
-msgid "Cannot save: destination is not a regular file"
-msgstr "Ei voi tallentaa: kohde ei ole tavallinen tiedosto"
+#, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
+msgstr ""
 
 msgid "A file already exists with this name"
 msgstr "Nimellä on jo tiedosto olemassa"
@@ -1121,11 +1142,9 @@ msgstr "Sulje tiedosto"
 
 #, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"Midnight Commander suljetaan.\n"
-"Tallenna muuttunut tiedosto %s?"
 
 msgid "This function is not implemented"
 msgstr "Tätä toimintoa ei ole otettu käyttöön"
@@ -1337,6 +1356,9 @@ msgid "Go to matching &bracket"
 msgstr ""
 
 msgid "Toggle s&yntax highlighting"
+msgstr ""
+
+msgid "Togg&le right margin"
 msgstr ""
 
 msgid "&Find declaration"
@@ -1558,14 +1580,10 @@ msgstr "Vahvista vaihto"
 msgid "%ld replacements made"
 msgstr "%ld korvaaminen tehty"
 
+#, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
-msgstr ""
-"Midnight Commanderille kirjoitettu\n"
-"käyttäjäystävällinen tekstieditori."
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+"written for the %s."
 msgstr ""
 
 msgid "About"
@@ -1694,16 +1712,14 @@ msgstr "< Automaatti >"
 msgid "< Reload Current Syntax >"
 msgstr "< Lataa syntaksi uudelleen >"
 
-msgid "Load syntax file"
-msgstr "Lataa syntaksi tiedosto"
-
 #, c-format
 msgid ""
-"Cannot open file %s\n"
+"Cannot open file\n"
 "%s"
 msgstr ""
-"Ei voi avata tiedostoa %s\n"
-"%s"
+
+msgid "Load syntax file"
+msgstr "Lataa syntaksi tiedosto"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1728,7 +1744,8 @@ msgid ""
 "the subshell cannot be toggled."
 msgstr ""
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr ""
 
 msgid "Set &all"
@@ -1761,22 +1778,25 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
+"Cannot chmod\n"
+"%sn%s"
 msgstr ""
-
-msgid "&Ignore"
-msgstr "&Ohita"
-
-msgid "Ignore &all"
-msgstr "Ohita &kaikki"
-
-msgid "&Retry"
-msgstr "&Uudelleen"
 
 #, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chmod\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chown\n"
 "%s"
 msgstr ""
 
@@ -1786,14 +1806,22 @@ msgstr "<Oletus>"
 msgid "Skins"
 msgstr "Ulkoasuteemat"
 
-msgid "Other 8 bit"
-msgstr "Muut 8-bittiset"
-
 msgid "Running"
 msgstr "Käynnissä"
 
 msgid "Stopped"
 msgstr "Pysäytetty"
+
+#, c-format
+msgid "Detected display codepage: %s"
+msgstr ""
+
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "&Koskaan"
@@ -2010,27 +2038,6 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-msgid "&UTF-8 output"
-msgstr "&UTF-8 ulostulo"
-
-msgid "&Full 8 bits output"
-msgstr "&Täysi 8-bittinen ulostulo"
-
-msgid "&ISO 8859-1"
-msgstr "&ISO 8859-1"
-
-msgid "7 &bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr "Täysi &8-bittinen syöte"
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
-msgstr ""
-
 msgid "Directory tree"
 msgstr ""
 
@@ -2088,7 +2095,6 @@ msgstr "Taustatyöt"
 #, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
 
@@ -2146,7 +2152,7 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
+msgid "Huge file"
 msgstr ""
 
 msgid "No COW"
@@ -2181,13 +2187,19 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
+"Cannot chattr\n"
+"%sn%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot chattr\n"
 "%s"
 msgstr ""
 
@@ -2292,11 +2304,15 @@ msgid "Link"
 msgstr ""
 
 #, c-format
-msgid "link: %s"
+msgid ""
+"Cannot create link\n"
+"%s"
 msgstr ""
 
 #, c-format
-msgid "symlink: %s"
+msgid ""
+"Cannot create symbolic link\n"
+"%s"
 msgstr ""
 
 msgid "View file"
@@ -2367,11 +2383,15 @@ msgid "Edit symlink"
 msgstr ""
 
 #, c-format
-msgid "edit symlink, unable to remove %s: %s"
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr ""
 
 #, c-format
-msgid "edit symlink: %s"
+msgid ""
+"Cannot edit symlink\n"
+"%s"
 msgstr ""
 
 msgid "FTP to machine"
@@ -2381,14 +2401,6 @@ msgid "SFTP to machine"
 msgstr ""
 
 msgid "Shell link to machine"
-msgstr ""
-
-msgid "Undelete files on an ext2 file system"
-msgstr ""
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
 msgstr ""
 
 msgid "Directory scanning"
@@ -2411,10 +2423,7 @@ msgstr ""
 msgid "Parameter"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
+msgid "Cannot create temporary command file"
 msgstr ""
 
 msgid "Pipe failed"
@@ -2423,7 +2432,7 @@ msgstr "Virheellinen putki"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2433,7 +2442,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2490,23 +2499,19 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
 msgstr ""
 
 #, c-format
-msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-
-#, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 
@@ -2518,7 +2523,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 
@@ -2538,19 +2543,29 @@ msgid ""
 "are the same file"
 msgstr ""
 
+msgid "&Ignore"
+msgstr "&Ohita"
+
 msgid "Ignore a&ll"
 msgstr ""
 
+msgid "&Retry"
+msgstr "&Uudelleen"
+
 #, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 
 #, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 
@@ -2559,19 +2574,15 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
-"Tiedostoa \"%s\" ei voi poistaa\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
-"Tiedostoa \"%s\" ei voi lisätä\n"
-"%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2579,155 +2590,127 @@ msgstr "Kansiota \"%s\" ei voi ylikirjoittaa"
 
 #, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Tiedostoa ei voi siirtää \"%s\" - \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove directory \"%s\"\n"
-"%s"
-msgstr ""
-"Kansiota \"%s\" ei voi poistaa\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
-"Kansiota \"%s\" ei voi ylikirjoittaa\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
 msgstr ""
-"Tiedostoa \"%s\" ei voi ylikirjoittaa\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
 msgstr ""
-"Kansiota ei voi siirtää \"%s\" - \"%s\"\n"
+
+#, c-format
+msgid ""
+"Cannot overwrite file\n"
 "%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot move directory\n"
+"%s\n"
+"to\n"
+"%s"
+msgstr ""
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Ei voi käyttää \"..\"!"
 
 #, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
-"%s"
-msgstr ""
-"Lähdetiedostoa ei voi lisätä \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
-"Erikoistiedostoa ei voi luoda \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
-"Ei onnistu chown kohdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
-"Ei onnistu chmod kohdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
-"Lähdetiedostoa ei voi avata \"%s\"\n"
+
+#, c-format
+msgid ""
+"Cannot open source file\n"
 "%s"
+msgstr ""
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
-"Ei onnistu fstat lähdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
-"Kohdetiedostoa ei voi luoda \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
-"Ei onnistu fstat kohdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
-"Ei voitu varata tilaa kohdetiedostolle \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
-"Lähdetiedostoa ei voi lukea \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
-"Kohdetiedostoa ei voi kirjoittaa \"%s\"\n"
-"%s"
 
 msgid "(stalled)"
 msgstr ""
@@ -2743,37 +2726,31 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
-"%s"
-msgstr ""
-"Lähdetiedostoa ei voi sulkea \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot close target file \"%s\"\n"
-"%s"
-msgstr ""
-"Kohdetiedostoa ei voi sulkea \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
-"Kohdekansiota ei voi lisätä \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot stat source directory\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
 
@@ -2793,27 +2770,23 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
-"Kohteen \"%s\" on oltava kansio\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
-"Kohdekansiota ei voi luoda \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
-"Ei onnistu chown kohdekansioon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
@@ -2937,6 +2910,9 @@ msgstr "Seuraa &linkkejä"
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr "Si&irry alihakemistoon, jos sellainen on "
 
@@ -2962,6 +2938,9 @@ msgstr "&Tiedot"
 msgid "&Tree"
 msgstr "&Puu"
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr "&Luettelomuoto..."
 
@@ -2981,9 +2960,6 @@ msgid "S&hell link..."
 msgstr "S&hell linkki..."
 
 msgid "SFTP li&nk..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -3091,9 +3067,6 @@ msgstr ""
 msgid "Screen lis&t"
 msgstr ""
 
-msgid "&Undelete files (ext2fs only)"
-msgstr ""
-
 msgid "&Listing format edit"
 msgstr ""
 
@@ -3121,9 +3094,6 @@ msgstr ""
 msgid "&Appearance..."
 msgstr "&Ulkoasu..."
 
-msgid "&Display bits..."
-msgstr ""
-
 msgid "&Virtual FS..."
 msgstr ""
 
@@ -3136,11 +3106,8 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Haluatko sulkea Midnight Commanderin?"
+msgid "Do you really want to quit?"
+msgstr ""
 
 msgid "&Above"
 msgstr ""
@@ -3633,11 +3600,9 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -3673,6 +3638,13 @@ msgstr ""
 msgid ""
 "Cannot stat the destination\n"
 "%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
 msgstr ""
 
 #, c-format
@@ -3775,8 +3747,9 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -3842,9 +3815,6 @@ msgid "With support for X11 events"
 msgstr ""
 
 msgid "With internationalization support"
-msgstr ""
-
-msgid "With multiple codepages support"
 msgstr ""
 
 msgid "With ext2fs attributes support"
@@ -4206,6 +4176,12 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4349,87 +4325,15 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr ""
-
-msgid "not enough memory"
-msgstr ""
-
-msgid "while allocating block buffer"
-msgstr "samalla kun valitaan alueen puskuria"
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr ""
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr ""
-
-msgid "no more memory while reallocating array"
-msgstr ""
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr ""
-
-msgid "undelfs: reading inode bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "undelfs: reading block bitmap..."
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "vfs_info is not fs!"
-msgstr ""
-
-msgid "You have to chdir to extract files first"
-msgstr ""
-
-msgid "while iterating over blocks"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr ""
-
-msgid "Ext2lib error"
-msgstr ""
-
 msgid "Invalid value"
 msgstr ""
 
 msgid "File was modified. Save with exit?"
 msgstr ""
 
-msgid "&Cancel quit"
-msgstr ""
-
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 
@@ -4478,10 +4382,11 @@ msgstr ""
 msgid "ButtonBar|Format"
 msgstr ""
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Quick view"
+msgstr "&Pikanäkymä"
+
+msgid "Failed to read data from child stdout"
 msgstr ""
 
 #, c-format
@@ -4502,16 +4407,16 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 
@@ -4523,3 +4428,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "while allocating block buffer"
+#~ msgstr "samalla kun valitaan alueen puskuria"

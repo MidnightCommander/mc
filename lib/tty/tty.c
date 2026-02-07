@@ -63,7 +63,7 @@
 
 /*** global variables ****************************************************************************/
 
-int mc_tty_frm[MC_TTY_FRM_MAX];
+mc_tty_char_t mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -248,7 +248,7 @@ tty_flush_winch (void)
 void
 tty_print_one_hline (gboolean single)
 {
-    tty_print_alt_char (ACS_HLINE, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -256,7 +256,7 @@ tty_print_one_hline (gboolean single)
 void
 tty_print_one_vline (gboolean single)
 {
-    tty_print_alt_char (ACS_VLINE, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -280,13 +280,13 @@ tty_draw_box (int y, int x, int ys, int xs, gboolean single)
     tty_draw_hline (y, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_draw_hline (y2, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_gotoyx (y, x);
-    tty_print_alt_char (ACS_ULCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP]);
     tty_gotoyx (y2, x);
-    tty_print_alt_char (ACS_LLCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM]);
     tty_gotoyx (y, x2);
-    tty_print_alt_char (ACS_URCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP]);
     tty_gotoyx (y2, x2);
-    tty_print_alt_char (ACS_LRCORNER, single);
+    tty_print_char (mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -338,10 +338,10 @@ tty_resize (int fd)
 #if defined TIOCSWINSZ
     struct winsize tty_size;
 
-    tty_size.ws_row = LINES;
-    tty_size.ws_col = COLS;
-    tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
-
+    /* Make sure to copy to the inner terminal all the fields, even the ones we don't care about,
+     * including ws_xpixel and ws_ypixel. */
+    if (ioctl (STDOUT_FILENO, TIOCGWINSZ, &tty_size) == -1)
+        return -1;
     return ioctl (fd, TIOCSWINSZ, &tty_size);
 #else
     return 0;
@@ -371,16 +371,9 @@ tty_init_xterm_support (gboolean is_xterm)
     // Check mouse and ca capabilities
     /* terminfo/termcap structures have been already initialized,
        in slang_init() or/and init_curses()  */
-    // Check terminfo at first, then check termcap
-    xmouse_seq = tty_tgetstr ("kmous");
-    if (xmouse_seq == NULL)
-        xmouse_seq = tty_tgetstr ("Km");
-    smcup = tty_tgetstr ("smcup");
-    if (smcup == NULL)
-        smcup = tty_tgetstr ("ti");
-    rmcup = tty_tgetstr ("rmcup");
-    if (rmcup == NULL)
-        rmcup = tty_tgetstr ("te");
+    xmouse_seq = tty_tigetstr ("kmous", "Km");
+    smcup = tty_tigetstr ("smcup", "ti");
+    rmcup = tty_tigetstr ("rmcup", "te");
 
     if (strcmp (termvalue, "cygwin") == 0)
     {
@@ -419,7 +412,10 @@ tty_init_xterm_support (gboolean is_xterm)
     if (xmouse_seq != NULL)
     {
         if (strcmp (xmouse_seq, ESC_STR "[<") == 0)
+        {
             xmouse_seq = ESC_STR "[M";
+            ncurses_key_mouse_means_extended = TRUE;
+        }
 
         xmouse_extended_seq = ESC_STR "[<";
     }

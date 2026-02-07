@@ -1,0 +1,418 @@
+----------------------------------------------------------------------------
+Full Path           = "/"
+Short Name          = ""
+Attributes          = 0x00000010
+    FILE_ATTRIBUTE_DIRECTORY is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x0000000000000000000000000000000000000000
+Uncompressed size = 0 bytes
+Compressed size   = 0 bytes
+Offset in WIM     = 0 bytes
+Part Number       = 0
+Reference Count   = 0
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/es"
+Short Name          = ""
+Attributes          = 0x00000010
+    FILE_ATTRIBUTE_DIRECTORY is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x0000000000000000000000000000000000000000
+Uncompressed size = 0 bytes
+Compressed size   = 0 bytes
+Offset in WIM     = 0 bytes
+Part Number       = 0
+Reference Count   = 0
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/es/Makefile with space.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x55acb38dc7f95f65226229b5256d506dcd9a2d43
+Uncompressed size = 44 bytes
+Compressed size   = 44 bytes
+Offset in WIM     = 105916 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/es/xnc.hlp"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x3c430e2c96413975b1df6e9c27ed3457a790b827
+Uncompressed size = 79691 bytes
+Compressed size   = 26290 bytes
+Offset in WIM     = 428 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/hlp-lang-include.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0xff56171e7ed7076455da51c0cd10c0aa492b4213
+Uncompressed size = 333 bytes
+Compressed size   = 204 bytes
+Offset in WIM     = 26718 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/hu"
+Short Name          = ""
+Attributes          = 0x00000010
+    FILE_ATTRIBUTE_DIRECTORY is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x0000000000000000000000000000000000000000
+Uncompressed size = 0 bytes
+Compressed size   = 0 bytes
+Offset in WIM     = 0 bytes
+Part Number       = 0
+Reference Count   = 0
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/hu/Makefile.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0xce78e597ab309a8e3b9c8886cfef11794b590d07
+Uncompressed size = 44 bytes
+Compressed size   = 44 bytes
+Offset in WIM     = 105960 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/hu/xnc.hlp"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0xce70cfc6da69ef962f0d3513e5a96a8eb59b8a63
+Uncompressed size = 38498 bytes
+Compressed size   = 13120 bytes
+Offset in WIM     = 26922 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/it"
+Short Name          = ""
+Attributes          = 0x00000010
+    FILE_ATTRIBUTE_DIRECTORY is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x0000000000000000000000000000000000000000
+Uncompressed size = 0 bytes
+Compressed size   = 0 bytes
+Offset in WIM     = 0 bytes
+Part Number       = 0
+Reference Count   = 0
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/it/Makefile.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x51f8049930fd3b38b27d98e648cc81373024194e
+Uncompressed size = 44 bytes
+Compressed size   = 44 bytes
+Offset in WIM     = 106004 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/it/xnc.hlp"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0xbf96e3aa35d542c2695e58a40a15d06db740a8c7
+Uncompressed size = 38379 bytes
+Compressed size   = 12914 bytes
+Offset in WIM     = 40042 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/Makefile.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x7c07a5fea980bdaf432e5b09b6e9e73b2fa1d9c0
+Uncompressed size = 354 bytes
+Compressed size   = 220 bytes
+Offset in WIM     = 208 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/pl"
+Short Name          = ""
+Attributes          = 0x00000010
+    FILE_ATTRIBUTE_DIRECTORY is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x0000000000000000000000000000000000000000
+Uncompressed size = 0 bytes
+Compressed size   = 0 bytes
+Offset in WIM     = 0 bytes
+Part Number       = 0
+Reference Count   = 0
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/pl/Makefile.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x3288ab187f13680af03e46ecb405d25a1085762d
+Uncompressed size = 44 bytes
+Compressed size   = 44 bytes
+Offset in WIM     = 106048 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/pl/xnc.hlp"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0xa060385ec6f1714d7ce6a037246680855165f961
+Uncompressed size = 38375 bytes
+Compressed size   = 13026 bytes
+Offset in WIM     = 52956 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/ru"
+Short Name          = ""
+Attributes          = 0x00000010
+    FILE_ATTRIBUTE_DIRECTORY is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x0000000000000000000000000000000000000000
+Uncompressed size = 0 bytes
+Compressed size   = 0 bytes
+Offset in WIM     = 0 bytes
+Part Number       = 0
+Reference Count   = 0
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/ru/Makefile.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x1531a4c3c3bcf4535f6ce7c142435a71a5497696
+Uncompressed size = 44 bytes
+Compressed size   = 44 bytes
+Offset in WIM     = 106092 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/ru/xnc.hlp"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0xb55bb26972da207b2bc078083801b6bd099c8671
+Uncompressed size = 41537 bytes
+Compressed size   = 13818 bytes
+Offset in WIM     = 65982 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/sr"
+Short Name          = ""
+Attributes          = 0x00000010
+    FILE_ATTRIBUTE_DIRECTORY is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x0000000000000000000000000000000000000000
+Uncompressed size = 0 bytes
+Compressed size   = 0 bytes
+Offset in WIM     = 0 bytes
+Part Number       = 0
+Reference Count   = 0
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/sr/Makefile.am"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x586863ed9c025d2321a94b1481f991b3f6a5a32a
+Uncompressed size = 44 bytes
+Compressed size   = 44 bytes
+Offset in WIM     = 106136 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = 
+
+----------------------------------------------------------------------------
+Full Path           = "/sr/xnc.hlp"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x2e43f8b1a1420153f8e6d1be99b5816010a7cc10
+Uncompressed size = 40535 bytes
+Compressed size   = 13412 bytes
+Offset in WIM     = 79800 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+
+----------------------------------------------------------------------------
+Full Path           = "/xnc.hlp"
+Short Name          = ""
+Attributes          = 0x00000080
+    FILE_ATTRIBUTE_NORMAL is set
+Creation Time       = Sun Nov 02 02:05:12 2025 UTC
+Last Write Time     = Sun Nov 02 02:05:12 2025 UTC
+Last Access Time    = Sun Nov 02 02:05:12 2025 UTC
+Link Group ID       = 0x0000000000000000
+Link Count          = 1
+	Unnamed data stream:
+Hash              = 0x5c478742b937533c38f7645828de6c4c243a2d4c
+Uncompressed size = 38055 bytes
+Compressed size   = 12704 bytes
+Offset in WIM     = 93212 bytes
+Part Number       = 1
+Reference Count   = 1
+Flags             = WIM_RESHDR_FLAG_COMPRESSED  
+

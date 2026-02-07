@@ -37,7 +37,10 @@ typedef enum
     DLG_COLOR_FOCUS,
     DLG_COLOR_HOT_NORMAL,
     DLG_COLOR_HOT_FOCUS,
+    DLG_COLOR_SELECTED_NORMAL,
+    DLG_COLOR_SELECTED_FOCUS,
     DLG_COLOR_TITLE,
+    DLG_COLOR_FRAME,
     DLG_COLOR_COUNT
 } dlg_colors_enum_t;
 
@@ -50,7 +53,7 @@ typedef struct WDialog WDialog;
 typedef char *(*dlg_shortcut_str) (long command);
 
 /* get dialog name to show in dialog list */
-typedef char *(*dlg_title_str) (const WDialog *h, size_t len);
+typedef char *(*dlg_title_str) (const WDialog *h, const ssize_t width);
 
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
@@ -89,6 +92,7 @@ struct WDialog
 extern dlg_colors_t dialog_colors;
 extern dlg_colors_t alarm_colors;
 extern dlg_colors_t listbox_colors;
+extern dlg_colors_t help_colors;
 
 /* A hook list for idle events */
 extern hook_t *idle_hook;
@@ -109,12 +113,10 @@ void dlg_set_default_colors (void);
 
 void dlg_init (WDialog *h);
 int dlg_run (WDialog *d);
-
 void dlg_run_done (WDialog *h);
-void dlg_save_history (WDialog *h);
 void dlg_process_event (WDialog *h, int key, Gpm_Event *event);
 
-char *dlg_get_title (const WDialog *h, size_t len);
+char *dlg_get_title (const WDialog *h, const ssize_t width);
 
 /* Default callbacks for dialogs */
 cb_ret_t dlg_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data);

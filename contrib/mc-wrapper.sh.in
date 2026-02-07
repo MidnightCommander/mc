@@ -6,15 +6,20 @@ else
 	MC_PWD_FILE="`mktemp "/tmp/mc.pwd.XXXXXX"`"
 fi
 
-@bindir@/mc -P "$MC_PWD_FILE" "$@"
+MC_STATUS=0
+@bindir@/mc -P "$MC_PWD_FILE" "$@" || MC_STATUS=$?
 
 if test -r "$MC_PWD_FILE"; then
-	MC_PWD="`cat "$MC_PWD_FILE"`"
+	# Command substitution removes trailing '\n's, hence the added and later removed '_'.
+	MC_PWD="`cat "$MC_PWD_FILE"; printf '_'`"
+	MC_PWD="${MC_PWD%_}"
 	if test -n "$MC_PWD" && test "$MC_PWD" != "$PWD" && test -d "$MC_PWD"; then
 		cd "$MC_PWD" || true
 	fi
 	unset MC_PWD
 fi
 
-rm -f "$MC_PWD_FILE"
+# invoke the external rm command, avoiding shell alias or function
+command rm -f "$MC_PWD_FILE"
 unset MC_PWD_FILE
+eval "unset MC_STATUS; return $MC_STATUS"

@@ -38,7 +38,6 @@ void sftplink_cmd (void);
 #ifdef ENABLE_VFS_SHELL
 void shelllink_cmd (void);
 #endif
-void undelete_cmd (void);
 void help_cmd (void);
 void smart_dirsize_cmd (WPanel *panel);
 void single_dirsize_cmd (WPanel *panel);

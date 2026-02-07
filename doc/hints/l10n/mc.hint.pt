@@ -16,7 +16,7 @@ Dica: Se o seu terminal não tem algumas teclas de função, use a sequência ES
 
 Dica: A página do GNU Midnight Commander: https://midnight-commander.org
 
-Dica: Por favor envie relatórios de bugs para mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Dica: O tab altera o painel atual.
 
@@ -24,7 +24,7 @@ Dica: VFS coolness: pressione enter num ficheiro tar para examinar o seu conteú
 
 Dica: Também temos uma página manual interessante.
 
-Dica: Deseja navegação tipo Lynx? Ative-a no diálogo de Configuração.
+Dica: Deseja navegação tipo Lynx? Active-a no diálogo de Configuração.
 
 Dica: % macros funcionam mesmo na linha de comandos.
 

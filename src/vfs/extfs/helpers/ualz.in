@@ -1,68 +1,120 @@
-#!/bin/sh
+# @PERL@
 #
 # Written by Pavel Roskin <proski@gnu.org>
 # (C) 2005 The Free Software Foundation.
 #
+# Rewritten by Vadim Kalinnikov <moose@ylsoftware.com>
+# (C) 2025
 #
+# It requires unalz v0.65. Older version may be work, but it is not tested.
 
-UNALZ=unalz
+use strict;
+use warnings;
+# disabled, because test harness doesn't have it
+#use diagnostics;
 
-mcualz_list ()
-{
-	$UNALZ -l "$1" | @AWK@ -v uid=`id -nu` -v gid=`id -ng` '
-{
-    if ($1 ~ /[0-9][0-9][:/][0-9][0-9][:/][0-9][0-9]$/)
-    {
-	# Kludge for non-POSIX date format in unalz 0.50
-	split($1, date, "[/:]")
-	if (length(date[1]) == 4) {
-	    pdate = date[2] "/" date[3] "/" date[1]
-	} else {
-	    pdate = date[1] "/" date[2] "/" date[3]
+# Some ideas found in file UnAlzUtils.cpp from unalz sources
+# Attr from unalz output have 4 chars.
+# Every chars may be:
+# - - no attr
+# A - Archived file
+# D - Directory
+# R - Read-only
+# H - Hidden
+sub attrToStr($) {
+	my $attr_src = shift;
+	if ($attr_src =~ m{D} && $attr_src =~ m{R}) {
+		return "dr-xr-xr-x"
+	}
+	elsif ($attr_src =~ m{D}) {
+		return "drwxr-xr-x"
+	}
+	elsif ($attr_src =~ m{R}) {
+		return "-r--r--r--"
+	}
+	else {
+		return "-rw-r--r--"
+	}
+}
+
+sub mcalzfs_list($) {
+	my $arc = shift;
+
+	my $arc_list_cmd = "unalz -l \"$arc\"";
+    $arc_list_cmd = $ENV{MC_TEST_EXTFS_LIST_CMD} if defined $ENV{MC_TEST_EXTFS_LIST_CMD};
+
+    my @lines = `$arc_list_cmd`;
+    chomp @lines;
+    if ($? != 0) { exit 1; } # unalz command error (exit code != 0)
+
+    my @list;
+    foreach my $line (@lines) {
+		if ($line =~ m{(.{4})\s+(\d+)\s+\d+ (\d{2})\.(\d{2})\.(\d{4}) (\d{2}:\d{2}):\d{2}  (.+)}) {
+			my $item = {
+				attr => attrToStr($1),
+				size => $2,
+				filename => $7,
+				ts => "$3-$4-$5 $6",
+			};
+			push @list, $item;
+		}
 	}
 
-	time=$2
-	perm=$3
-	size=$4
-	sub(/^ *[^ ]* *[^ ]* *[^ ]* *[^ ]* *[^ ]* */, "")
-	file=$0
-	gsub(/\\/, "/", file)
-	if (perm ~ /.D../)
-		perm = "drwxr-xr-x"
-	else
-		perm = "-rw-r--r--"
-	printf "%s 1 %s %s %d %s %s %s\n", perm, uid, gid, size, pdate, time, file
-    }
-}
-'
+
+	# Set UID / GID to 0 / 0 as described in issue 4643
+	foreach my $item (@list) {
+		printf "%s 1 0 0 %10d %s %s\n",
+			$item->{attr},
+			$item->{size},
+			$item->{ts},
+			$item->{filename};
+	}
 }
 
-mcualz_copyout ()
-{
-    TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-ualz.XXXXXX` || exit 1
 
-    # This is a workaround for a bug in unalz 0.50 - it crashes if the
-    # output directory is an absolute path.
-    dir=`dirname "$TMPDIR/$2"`
-    mkdir -p "$dir"
+sub mcalzfs_copyout($$$) {
+	my $arc = shift;
+	my $src = shift;
+	my $dst = shift;
 
-    $UNALZ -d "$TMPDIR" "$1" "$2" >/dev/null
-    cat "$TMPDIR/$2" > "$3"
-    rm -rf "$TMPDIR"
+	`unalz -p "$arc" "$src" > "$dst"`;
+	if ($? != 0) { exit 1; } # unalz command error (exit code != 0)
+
 }
 
-# override any locale for dates
-LC_ALL=C
-export LC_ALL
-umask 077
+my $action = shift @ARGV || exit 1;
+my $filename = shift @ARGV || exit 1;
 
-cmd="$1"
-shift
+if ($action eq "list") {
+    mcalzfs_list($filename);
+    exit 0;
+}
+elsif ($action eq "copyout") {
+    my $srcfilename = shift @ARGV || exit 1;
+    my $dstfilename = shift @ARGV || exit 1;
+    mcalzfs_copyout($filename, $srcfilename, $dstfilename);
+    exit 0;
+}
+elsif ($action eq "copyin") {
+    print "copyin not implemented\n";
+    exit 1;
+}
+elsif ($action eq "run") {
+    print "run not implemented\n";
+    exit 1;
+}
+elsif ($action eq "mkdir") {
+    print "mkdir not implemented\n";
+    exit 1;
+}
+elsif ($action eq "rmdir") {
+    print "rmdir not implemented\n";
+    exit 1;
+}
+elsif ($action eq "rm") {
+    print "rm not implemented\n";
+    exit 1;
+}
 
-case "$cmd" in
-  list)    mcualz_list    "$@" ;;
-  copyout) mcualz_copyout "$@" ;;
-  *) exit 1 ;;
-esac
+exit 1;
 
-exit 0

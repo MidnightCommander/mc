@@ -3,6 +3,7 @@ Makefile.in
 a+
 apt+
 audio
+brotli
 deb
 deba
 debd

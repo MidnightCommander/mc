@@ -153,7 +153,7 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len)
 {
     gchar *str = NULL;
     int res;
-    gchar utf8buf[UTF8_CHAR_LEN + 1];
+    gchar utf8buf[MB_LEN_MAX + 1];
 
     switch (view->datasource)
     {
@@ -184,7 +184,7 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len)
         // Retry with explicit bytes to make sure it's not a buffer boundary
         int i;
 
-        for (i = 0; i < UTF8_CHAR_LEN; i++)
+        for (i = 0; i < MB_LEN_MAX; i++)
         {
             if (mcview_get_byte (view, byte_index + i, &res))
                 utf8buf[i] = res;
@@ -194,7 +194,7 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch, int *ch_len)
                 break;
             }
         }
-        utf8buf[UTF8_CHAR_LEN] = '\0';
+        utf8buf[MB_LEN_MAX] = '\0';
         str = utf8buf;
         res = g_utf8_get_char_validated (str, -1);
     }
@@ -391,7 +391,7 @@ mcview_load_command_output (WView *view, const char *command)
     if (p == NULL)
     {
         mcview_display (view);
-        mcview_show_error (view, error->message);
+        mcview_show_error (view, NULL, error->message);
         g_error_free (error);
         return FALSE;
     }
@@ -402,7 +402,6 @@ mcview_load_command_output (WView *view, const char *command)
     {
         mcview_close_datasource (view);
         mcview_display (view);
-        return FALSE;
     }
 
     return TRUE;

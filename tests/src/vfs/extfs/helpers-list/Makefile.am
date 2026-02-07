@@ -79,6 +79,10 @@ data_files_to_distribute = \
 	data/urar.v6,v5.output \
 	data/usqfs.input \
 	data/usqfs.output \
+	data/uwim.README \
+	data/uwim.input \
+	data/uwim.output \
+	data/uwim.env_vars \
 	data/uzip.README \
 	data/uzip.with-zipinfo.env_vars \
 	data/uzip.with-zipinfo.input \

@@ -27,13 +27,6 @@ Wymusza wyświetlanie w kolorze, zobacz sekcję
 .B Kolory
 żeby zasięgnąć szerszej informacji.
 .TP
-.I \-C arg
-Używane do wybierania innego koloru, który ma być obecny w linii poleceń. Format
-argumentu
-.I arg
-jest opisany w sekcji
-.BR Kolory .
-.TP
 .I \-d
 Wyłącza używanie myszy.
 .TP
@@ -1267,11 +1260,6 @@ włącza okno dialogowe, w którym możesz ustawić przy wykonaniu
 których operacji chcesz być pytany o potwierdzenie.
 .PP
 Menu
-.I Display bits
-pozwala określić jakiego typu znaki twój terminal jest
-w stanie wyświetlić.
-.PP
-Menu
 .I Learn Keys
 pokazuje okno dialogowe, w którym możesz poznać
 które klawisze nie działają i w razie problemów naprawić to.
@@ -1465,18 +1453,6 @@ wybranej rzeczy w panelu, będzie pokazany na dole panelu.
 W tym menu możesz skonfigurować opcje potwierdzania dla kasowania,
 zastępowania, wykonywania przez naciśnięcie klawisza Enter, jak również
 wychodzenia z programu.
-.PP
-.\"NODE "    Display bits"
-.SH "    Wyświetlanie znaków (Display bits)"
-Używane do konfigurowania zakresu znaków widocznych potem na ekranie.
-To ustawienie może być 7\-bitowe jeśli twój terminal obsługuje tylko
-siedmiobitowe wyjście, ISO\-8859\-1 wyświetla wszystkie znaki z mapy
-ISO\-8859\-1 a pełny 8 bitowy przeznaczony jest dla tych terminali, które radzą
-sobie z wyświetlaniem znaków ośmiobitowych.
-.PP
-Zobacz sekcję
-.IR "Polskie znaki" ,
-po więcej szczegółów na temat ich używania w Midnight Commanderze.
 .PP
 .\"NODE "    Learn keys"
 .SH "    Nauka klawiszy (Learn keys)"
@@ -2101,14 +2077,6 @@ w twoim katalogu domowym zawierający poniższe:
 cat /dev/null > ~/.cache/mc/mcedit/cooledit.error
 .fi
 .PP
-Edytor wyświetla również znaki nieamerykańskie (160+). Kiedy edytujesz plik
-binarny, powinieneś ustawić opcję
-.B display bits
-do 7 bitów w menu opcji, aby utrzymać przejrzystość odstępów między znakami.
-.PP
-Zobacz sekcję Polskie znaki, aby poznać szczegóły na temat używania
-polskich znaków w Midnight Commanderze.
-.PP
 .\"NODE "Completion"
 .SH Dokańczanie
 .PP
@@ -2294,27 +2262,6 @@ Przykłady:
     sh://joe@want.compression.edu:C/private
     sh://joe@noncompressed.ssh.edu/private
 .fi
-.\"NODE "  Undelete File System"
-.SH "  Odzyskiwanie plików"
-Na systemach Linuksowych, jeśli dodałeś w konfiguracji opcję przywracania
-skasowanych plików z systemów ext2, będziesz w stanie to robić. Odzyskiwanie
-plików jest możliwe tylko i wyłącznie na systemach typu ext2. Przywracany
-system plików jest tylko nakładką na bibliotekę ext2fs: odzyskiwanie nazw
-wszystkich skasowanych plików i próba uczynienia z nich normalnej partycji.
-.PP
-Żeby używać tych systemów plików, będziesz musiał przejść od specjalnego
-pliku, którego nazwa składa się z przedrostka "undel://" i nazwy pliku,
-w której ów plik rezyduje.
-.PP
-Na przykład, aby odzyskać skasowane pliki z drugiej partycji pierwszego
-dysku scsi Linux, będziesz musiał użyć następującej ścieżki:
-.PP
-.nf
-    undel:///dev/sda2
-.fi
-.PP
-Może to chwilkę potrwać zanim pliki zostaną pokazane i będziesz mógł je
-normalnie oglądać.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs
@@ -2464,15 +2411,6 @@ i
 RedHat, jeśli masz inną i wiesz jak to ustawić, to napisz do mnie, a ja to
 tu dopiszę  [ patrz tłumacz na dole ;)) ]].
 .PP
-Teraz wystarczy już tylko włączyć odpowiednie opcje w menu opcji (klawisz
-F9). W menu opcji wybieramy
-.I Display bits
-i włączamy opcje 
-.I ISO 8859\-1
-oraz
-.IR "Full 8 bits input" .
-Potem zapisujemy konfigurację w opcje | Save setup.
-.PP
 I gotowe \- polskie literki działają również w podglądzie i wbudowanym
 edytorze plików.
 .PP
@@ -2504,91 +2442,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 Program może być skompilowany zarówno z bibliotekami S\-Lang jak i ncurses.
 Ncurses nie obsługuje metody wymuszania wyświetlania, zawsze sprawdza w bazie danych
 terminali.
-.PP
-Midnight Commander umożliwia również zmianę standardowych barw ekranu.
-Aktualnie kolory są skonfigurowane przy użyciu zmiennej
-.B MC_COLOR_TABLE
-w sekcji Colors pliku startowego.
-.PP
-W sekcji kolorów, standardowa mapa kolorów jest ładowana ze zmiennej
-.IR base_color .
-Możesz wybrać swoją własną mapę dla terminala poprzez użycie nazwy terminala
-jako klucza w tej sekcji. Na przykład:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-Format definicji kolorów jest następujący:
-.PP
-.nf
-  <słowo kluczowe>=<kolor powierzchni">,<kolor tła>:<słowo kluczowe>= ...
-.fi
-.PP
-Kolory są opcjonalne, a słowa kluczowe są następujące: normal, selected,
-marked, markselect, errors, input, reverse menunormal, menusel, menuhot, menuhotsel,
-menuinactive, gauge;  kolory okien dialogowych: dnormal, dfocus, dhotnormal,
-dhotfocus; Kolory pomocy: helpnormal, helpitalic, helpbold, helplink,
-helpslink; Kolory podglądu: viewunderline; Specjalne tryby podświetlenia:
-executable, directory, link, device, special. Viewer colors are: viewnormal,
-viewbold, viewunderline, viewselected. Editor colors are: editnormal, editbold,
-editmarked, editwhitespace, editnonprintable, editlinestate. Popup menu colors
-are: pmenunormal, pmenusel, pmenutitle.
-[nie tłumaczyłem nazw z racji tego, że trzeba je stosować w ich angielskim
-brzmieniu \- jeśli jesteś aż tak zaawansowany, użyj słownika].
-.PP
-Okna dialogowe mogą mieć następujące kolory:
-.I dnormal
-używany do normalnego tekstu,
-.I dfocus
-jest kolorem używanym do wyświetlania aktualnego komponentu,
-.I dhotnormal
-jest kolorem używanym do odróżnienia klawiszy w normalnych komponentach,
-a
-.I dhotfocus
-jest używany do wyświetlania owych w aktualnie wybranym.
-.PP
-Menu używa tego samego schematu, ale jako nazw kolorów używa menunormal, menusel,
-menuhot, menuhotsel i menuinactive.
-.PP
-Pomoc używa następujących kolorów:
-.I helpnormal
-używany do normalnego tekstu,
-.I helpitalic
-używa tej samej czcionki, którą wykorzystuje manual do wyświetlania
-czcionki typu italic,
-.I helpbold
-tak samo jak wyżej tylko czcionki są typu bold,
-.I helplink
-używane dla niewybranych jeszcze dowiązań i
-.I helpslink
-używane dla już wybranych.
-.PP
-.I gauge
-pokazuje kolor wypełnienia pokazywany przy wskaźniku postępu [ang. gauge],
-ukazującym ile procent pliku zostało przekopiowane itp. w graficzny sposób.
-.PP
-Dla trybu wysokiego podświetlania
-.I directory
-jest używane jako kolor do wyświetlania katalogów;
-.I executable
-dla plików wykonywalnych;
-.I link
-do wyświetlania dowiązań;
-.I device
-do wyświetlania plików urządzeń (devices);
-.I special
-dla plików specjalnych, takich jak gniazda FIFO i IPC;
-.I core
-dla wyświetlania plików typu core (zobacz również tę opcję w sekcji Specjalne
-ustawienia).
-.PP
-Możliwe kolory to: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white. [sorry, że ich nazw nie tłumaczyłem,
-ale używać ich trzeba w oryginalnym brzmieniu :))].
 .PP
 .\"NODE "Special Settings"
 .SH "Specjalne ustawienia"
@@ -2701,21 +2554,6 @@ możliwe i jeśli będzie więcej możliwości słychać będzie krótkie bipni�
 Jeśli chcesz widzieć wszystkie możliwe dokończenia już po pierwszym naciśnięciu
 .BR M\-Tab ,
 zmień tę opcję na 1.
-.PP
-.I torben_fj_mode
-.IP
-Jeśli ta opcja jest włączona, klawisze home i end będą działały troszkę
-inaczej w panelach, zamiast przemieszczać linię wyboru do pierwszej lub
-ostatniej linii w panelu, będą działały tak jak jest to opisane poniżej:
-.IP
-Klawisz home będzie: przechodził do środkowej linii, jeśli jest pod nią; w
-przeciwnym wypadku będzie przechodził do najwyższej linii w panelu, jeśli
-już w niej jest, będzie przechodził do pierwszego pliku w panelu.
-.IP
-Klawisz end ma podobne zastosowanie: przechodzi do środkowej linii, jeśli
-jest nad nią; w przeciwnym wypadku przechodzi do najniższej linii w panelu,
-chyba że już się w niej znajduje, wtedy przechodzi do ostatniego pliku w
-panelu.
 .PP
 .I highlight_mode
 Standardowo wszystkie informacje w panelach są wyświetlane tym samym
@@ -2871,7 +2709,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Strona Midnight Commander w sieci World Wide Web:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .PP
 .\"NODE "AUTHORS"

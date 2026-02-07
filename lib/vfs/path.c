@@ -259,7 +259,6 @@ vfs_path_url_split (vfs_path_element_t *path_element, const char *path)
     if (colon != NULL)
     {
         *colon = '\0';
-        // cppcheck-suppress invalidscanf
         if (sscanf (colon + 1, "%d", &path_element->port) == 1)
         {
             if (path_element->port <= 0 || path_element->port >= 65536)
@@ -1099,7 +1098,6 @@ char *
 vfs_path_serialize (const vfs_path_t *vpath, GError **mcerror)
 {
     mc_config_t *cpath;
-    ssize_t element_index;
     char *ret_value;
 
     mc_return_val_if_error (mcerror, FALSE);
@@ -1112,12 +1110,12 @@ vfs_path_serialize (const vfs_path_t *vpath, GError **mcerror)
 
     cpath = mc_config_init (NULL, FALSE);
 
-    for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
+    for (int element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
         char groupname[BUF_TINY];
         const vfs_path_element_t *element;
 
-        g_snprintf (groupname, sizeof (groupname), "path-element-%zd", element_index);
+        g_snprintf (groupname, sizeof (groupname), "path-element-%d", element_index);
         element = vfs_path_get_by_index (vpath, element_index);
         // convert one element to config group
 

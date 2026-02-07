@@ -55,7 +55,6 @@ typedef struct
     gboolean filetype_mode;     // If TRUE then add per file type highlighting
     gboolean permission_mode;   // If TRUE, we use permission highlighting
     qsearch_mode_t qsearch_mode;  // Quick search mode
-    gboolean torben_fj_mode;      // If TRUE, use some usability hacks by Torben
     select_flags_t select_flags;  // Select/unselect file flags
 } panels_options_t;
 
@@ -89,6 +88,7 @@ extern gboolean auto_menu;
 extern gboolean drop_menus;
 extern gboolean verbose;
 extern gboolean copymove_persistent_attr;
+extern gboolean copymove_persistent_ext2_attr;
 extern gboolean classic_progressbar;
 extern gboolean easy_patterns;
 extern int option_tab_spacing;

@@ -86,7 +86,6 @@ mc_global_t mc_global =
         .setup_color_string = NULL,
         .term_color_string = NULL,
         .color_terminal_string = NULL,
-        .command_line_colors = NULL,
 #ifndef LINUX_CONS_SAVER_C
         .console_flag = '\0',
 #endif
@@ -125,4 +124,12 @@ mc_global_t mc_global =
 /*** file scope functions ************************************************************************/
 
 /*** public functions ****************************************************************************/
+
+char *
+mc_get_package_copyright (void)
+{
+    const size_t last_year = 2025;
+    return g_strdup_printf (_ ("Copyright (C) 1996-%zu the Free Software Foundation"), last_year);
+}
+
 /* --------------------------------------------------------------------------------------------- */

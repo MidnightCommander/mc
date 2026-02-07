@@ -57,6 +57,7 @@
 #include "src/setup.h"
 #include "src/history.h"
 #include "src/selcodepage.h"
+#include "src/util.h"  // file_error_message()
 
 #include "ydiff.h"
 #include "internal.h"
@@ -175,8 +176,7 @@ open_temp (void **name)
     fd = mc_mkstemps (&diff_file_name, "mcdiff", NULL);
     if (fd == -1)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary diff file\n%s"),
-                 unix_error_string (errno));
+        file_error_message (_ ("Cannot create temporary diff file"), NULL);
         return -1;
     }
 
@@ -558,62 +558,59 @@ dview_pclose (FBUF *fs)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Get one char (byte) from string
+ * Get one character (byte) from string at given position
  *
- * @param str ...
- * @param ch ...
- * @return TRUE on success, FALSE otherwise
+ * @param str string
+ * @param pos byte position
+ *
+ * @return first 8-bit character of @string at position @pos
  */
 
-static gboolean
-dview_get_byte (const char *str, int *ch)
+static int
+dview_get_byte (const char *str, const size_t pos)
 {
-    if (str == NULL)
-        return FALSE;
-
-    *ch = (unsigned char) (*str);
-    return TRUE;
+    return (unsigned char) str[pos];
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Get utf multibyte char from string
+ * Get utf-8 character from string at given position
  *
- * @param str ...
- * @param ch ...
- * @param ch_length ...
- * @return TRUE on success, FALSE otherwise
+ * @param str string
+ * @param pos character position
+ * @param len character length in bytes
+ *
+ * @return first Unicode character of @string at position @pos
  */
 
-static gboolean
-dview_get_utf (const char *str, int *ch, int *ch_length)
+static int
+dview_get_utf (const char *str, const size_t pos, int *len)
 {
-    if (str == NULL)
-        return FALSE;
+    const char *s = str + pos;
+    const gunichar uni = g_utf8_get_char_validated (s, -1);
 
-    *ch = g_utf8_get_char_validated (str, -1);
+    int c;
 
-    if (*ch < 0)
+    if (uni != (gunichar) (-1) && uni != (gunichar) (-2))
     {
-        *ch = (unsigned char) (*str);
-        *ch_length = 1;
+        const char *next_ch = g_utf8_next_char (s);
+
+        c = uni;
+        *len = next_ch - s;
     }
     else
     {
-        const char *next_ch;
-
-        // Calculate UTF-8 char length
-        next_ch = g_utf8_next_char (str);
-        *ch_length = next_ch - str;
+        c = (unsigned char) (*s);
+        *len = 1;
     }
 
-    return TRUE;
+    return c;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static size_t
 dview_str_utf8_offset_to_pos (const char *text, size_t length)
 {
     ptrdiff_t result;
@@ -1366,11 +1363,9 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
             }
             else if (skip > 0)
             {
-                int ch = 0;
                 int ch_length = 1;
 
-                (void) dview_get_utf (src, &ch, &ch_length);
-
+                (void) dview_get_utf (src, 0, &ch_length);
                 if (ch_length > 1)
                     skip += ch_length - 1;
 
@@ -1464,10 +1459,9 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             }
             else if (skip != 0)
             {
-                int ch = 0;
                 int ch_length = 1;
 
-                (void) dview_get_utf (src, &ch, &ch_length);
+                (void) dview_get_utf (src, 0, &ch_length);
                 if (ch_length > 1)
                     skip += ch_length - 1;
 
@@ -2129,8 +2123,7 @@ do_merge_hunk (WDiff *dview, action_direction_t merge_direction)
             dview->merged[n_merge] = mc_util_make_backup_if_possible (dview->file[n_merge], "~~~");
             if (!dview->merged[n_merge])
             {
-                message (D_ERROR, MSG_ERROR, _ ("Cannot create backup file\n%s%s\n%s"),
-                         dview->file[n_merge], "~~~", unix_error_string (errno));
+                file_error_message (_ ("Cannot create backup file\n%s~~~"), dview->file[n_merge]);
                 return;
             }
         }
@@ -2138,8 +2131,7 @@ do_merge_hunk (WDiff *dview, action_direction_t merge_direction)
         merge_file_fd = mc_mkstemps (&merge_file_name_vpath, "mcmerge", NULL);
         if (merge_file_fd == -1)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot create temporary merge file\n%s"),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot create temporary merge file"), NULL);
             return;
         }
 
@@ -2330,22 +2322,22 @@ static void
 dview_diff_options (WDiff *dview)
 {
     const char *quality_str[] = {
-        N_ ("No&rmal"),
-        N_ ("&Fastest (Assume large files)"),
-        N_ ("&Minimal (Find a smaller set of change)"),
+        _ ("No&rmal"),
+        _ ("&Fastest (Assume large files)"),
+        _ ("&Minimal (Find a smaller set of change)"),
     };
 
     quick_widget_t quick_widgets[] = {
         // clang-format off
-        QUICK_START_GROUPBOX (N_ ("Diff algorithm")),
+        QUICK_START_GROUPBOX (_ ("Diff algorithm")),
             QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
         QUICK_STOP_GROUPBOX,
-        QUICK_START_GROUPBOX (N_ ("Diff extra options")),
-            QUICK_CHECKBOX (N_ ("&Ignore case"), &dview->opt.ignore_case, NULL),
-            QUICK_CHECKBOX (N_ ("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
-            QUICK_CHECKBOX (N_ ("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
-            QUICK_CHECKBOX (N_ ("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
-            QUICK_CHECKBOX (N_ ("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
+        QUICK_START_GROUPBOX (_ ("Diff extra options")),
+            QUICK_CHECKBOX (_ ("&Ignore case"), &dview->opt.ignore_case, NULL),
+            QUICK_CHECKBOX (_ ("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
+            QUICK_CHECKBOX (_ ("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
+            QUICK_CHECKBOX (_ ("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
+            QUICK_CHECKBOX (_ ("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
                             NULL),
         QUICK_STOP_GROUPBOX,
         QUICK_BUTTONS_OK_CANCEL,
@@ -2357,7 +2349,7 @@ dview_diff_options (WDiff *dview)
 
     quick_dialog_t qdlg = {
         .rect = r,
-        .title = N_ ("Diff Options"),
+        .title = _ ("Diff Options"),
         .help = "[Diff Options]",
         .widgets = quick_widgets,
         .callback = NULL,
@@ -2531,12 +2523,10 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
     {
         int ch;
         int next_ch = 0;
-        int col;
-        size_t cnt;
 
         p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_NORMAL_COLOR);
         if (display_symbols)
         {
             tty_gotoyx (r + j, c - 2);
@@ -2551,13 +2541,13 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 tty_print_string (str_fit_to_term (buf, nwidth, J_LEFT_FIT));
             }
             if (ch == ADD_CH)
-                tty_setcolor (DFF_ADD_COLOR);
+                tty_setcolor (DIFFVIEWER_ADDED_COLOR);
             if (ch == CHG_CH)
-                tty_setcolor (DFF_CHG_COLOR);
+                tty_setcolor (DIFFVIEWER_CHANGEDLINE_COLOR);
             if (f == NULL)
             {
                 if (i == (size_t) dview->search.last_found_line)
-                    tty_setcolor (MARKED_SELECTED_COLOR);
+                    tty_setcolor (CORE_MARKED_SELECTED_COLOR);
                 else if (dview->hdiff != NULL && g_ptr_array_index (dview->hdiff, i) != NULL)
                 {
                     char att[BUFSIZ];
@@ -2570,50 +2560,42 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                     cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
                                g_ptr_array_index (dview->hdiff, i), ord, att);
                     tty_gotoyx (r + j, c);
-                    col = 0;
 
-                    for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
+                    for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
                     {
-                        gboolean ch_res;
-
                         if (dview->utf8)
                         {
                             int ch_length = 0;
 
-                            ch_res = dview_get_utf (buf + cnt, &next_ch, &ch_length);
+                            next_ch = dview_get_utf (buf, cnt, &ch_length);
                             if (ch_length > 1)
                                 cnt += ch_length - 1;
                             if (!g_unichar_isprint (next_ch))
                                 next_ch = '.';
                         }
                         else
-                            ch_res = dview_get_byte (buf + cnt, &next_ch);
+                            next_ch = dview_get_byte (buf, cnt);
 
-                        if (ch_res)
+                        tty_setcolor (att[cnt] ? DIFFVIEWER_CHANGEDNEW_COLOR
+                                               : DIFFVIEWER_CHANGEDLINE_COLOR);
+                        if (mc_global.utf8_display)
                         {
-                            tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
-                            if (mc_global.utf8_display)
-                            {
-                                if (!dview->utf8)
-                                {
-                                    next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch,
-                                                                          dview->converter);
-                                }
-                            }
-                            else if (dview->utf8)
-                                next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
-                            else
-                                next_ch = convert_to_display_c (next_ch);
-
-                            tty_print_anychar (next_ch);
-                            col++;
+                            if (!dview->utf8)
+                                next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch,
+                                                                      dview->converter);
                         }
+                        else if (dview->utf8)
+                            next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+                        else
+                            next_ch = convert_to_display_c (next_ch);
+
+                        tty_print_anychar (next_ch);
                     }
                     continue;
                 }
 
                 if (ch == CHG_CH)
-                    tty_setcolor (DFF_CHH_COLOR);
+                    tty_setcolor (DIFFVIEWER_CHANGEDNEW_COLOR);
 
                 if (dview->utf8)
                     k = dview_str_utf8_offset_to_pos (p->p, width);
@@ -2633,50 +2615,45 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 tty_print_string (buf);
             }
             if (ch == DEL_CH)
-                tty_setcolor (DFF_DEL_COLOR);
+                tty_setcolor (DIFFVIEWER_REMOVED_COLOR);
             if (ch == CHG_CH)
-                tty_setcolor (DFF_CHD_COLOR);
+                tty_setcolor (DIFFVIEWER_CHANGED_COLOR);
             fill_by_space (buf, width, TRUE);
         }
         tty_gotoyx (r + j, c);
         // tty_print_nstring (buf, width);
-        col = 0;
-        for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
-        {
-            gboolean ch_res;
 
+        for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
+        {
             if (dview->utf8)
             {
                 int ch_length = 0;
 
-                ch_res = dview_get_utf (buf + cnt, &next_ch, &ch_length);
+                next_ch = dview_get_utf (buf, cnt, &ch_length);
                 if (ch_length > 1)
                     cnt += ch_length - 1;
                 if (!g_unichar_isprint (next_ch))
                     next_ch = '.';
             }
             else
-                ch_res = dview_get_byte (buf + cnt, &next_ch);
+                next_ch = dview_get_byte (buf, cnt);
 
-            if (ch_res)
+            if (mc_global.utf8_display)
             {
-                if (mc_global.utf8_display)
-                {
-                    if (!dview->utf8)
-                        next_ch =
-                            convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
-                }
-                else if (dview->utf8)
-                    next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
-                else
-                    next_ch = convert_to_display_c (next_ch);
-
-                tty_print_anychar (next_ch);
-                col++;
+                if (!dview->utf8)
+                    next_ch =
+                        convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
             }
+            else if (dview->utf8)
+                next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+            else
+                next_ch = convert_to_display_c (next_ch);
+
+            tty_print_anychar (next_ch);
         }
     }
-    tty_setcolor (NORMAL_COLOR);
+
+    tty_setcolor (CORE_NORMAL_COLOR);
     k = width;
     if (width < xwidth - 1)
         k = xwidth - 1;
@@ -2783,7 +2760,7 @@ dview_update (WDiff *dview)
     {
         int xwidth;
 
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (CORE_FRAME_COLOR);
         xwidth = dview->display_numbers;
         if (dview->display_symbols)
             xwidth++;
@@ -2798,18 +2775,18 @@ dview_update (WDiff *dview)
             if (xwidth < width1 - 1)
             {
                 tty_gotoyx (1, xwidth);
-                tty_print_alt_char (ACS_TTEE, FALSE);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE]);
                 tty_gotoyx (height, xwidth);
-                tty_print_alt_char (ACS_BTEE, FALSE);
-                tty_draw_vline (2, xwidth, ACS_VLINE, height - 2);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE]);
+                tty_draw_vline (2, xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
             }
             if (xwidth < width2 - 1)
             {
                 tty_gotoyx (1, width1 + xwidth);
-                tty_print_alt_char (ACS_TTEE, FALSE);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE]);
                 tty_gotoyx (height, width1 + xwidth);
-                tty_print_alt_char (ACS_BTEE, FALSE);
-                tty_draw_vline (2, width1 + xwidth, ACS_VLINE, height - 2);
+                tty_print_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE]);
+                tty_draw_vline (2, width1 + xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
             }
         }
         dview->new_frame = FALSE;
@@ -2873,9 +2850,9 @@ dview_goto_cmd (WDiff *dview, diff_place_t ord)
 {
     static gboolean first_run = TRUE;
 
-    static const char *title[2] = {
-        N_ ("Goto line (left)"),
-        N_ ("Goto line (right)"),
+    const char *title[2] = {
+        _ ("Goto line (left)"),
+        _ ("Goto line (right)"),
     };
 
     int newline;
@@ -2968,15 +2945,17 @@ dview_ok_to_exit (WDiff *dview)
 {
     gboolean res = TRUE;
     int act;
+    char *text;
 
     if (!dview->merged[DIFF_LEFT] && !dview->merged[DIFF_RIGHT])
         return res;
 
-    act = query_dialog (_ ("Quit"),
-                        !mc_global.midnight_shutdown
-                            ? _ ("File(s) was modified. Save with exit?")
-                            : _ ("Midnight Commander is being shut down.\nSave modified file(s)?"),
-                        D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+    text = g_strdup_printf (!mc_global.midnight_shutdown
+                                ? _ ("File(s) was modified. Save with exit?")
+                                : _ ("%s is being shut down.\nSave modified file(s)?"),
+                            PACKAGE_NAME);
+    act = query_dialog (_ ("Quit"), text, D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+    g_free (text);
 
     // Esc is No
     if (mc_global.midnight_shutdown || (act == -1))
@@ -3006,6 +2985,18 @@ dview_ok_to_exit (WDiff *dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+dview_help (const WDiff *dview)
+{
+    ev_help_t event_data = { NULL, "[Diff Viewer]" };
+
+    (void) dview;
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 dview_execute_cmd (WDiff *dview, long command)
 {
@@ -3013,6 +3004,9 @@ dview_execute_cmd (WDiff *dview, long command)
 
     switch (command)
     {
+    case CK_Help:
+        dview_help (dview);
+        break;
     case CK_ShowSymbols:
         dview->display_symbols = !dview->display_symbols;
         dview->new_frame = TRUE;
@@ -3294,24 +3288,31 @@ dview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-dview_get_title (const WDialog *h, size_t len)
+dview_get_title (const WDialog *h, const ssize_t width)
 {
     const WDiff *dview;
     const char *modified = " (*) ";
     const char *notmodified = "     ";
-    size_t len1;
+    ssize_t width1;
     GString *title;
 
     dview = (const WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
-    len1 = (len - str_term_width1 (_ ("Diff:")) - strlen (modified) - 3) / 2;
+    width1 = (width - str_term_width1 (_ ("Diff:")) - strlen (modified) - 3) / 2;
+    if (width1 < 0)
+    {
+        // It's very unlikely that width1 becomes negative at some time.
+        // This means that width is too small and dialog window is too narrow.
+        // Set width1 to some reasonable value.
+        width1 = width / 2;
+    }
 
-    title = g_string_sized_new (len);
+    title = g_string_sized_new (width);
     g_string_append (title, _ ("Diff:"));
     g_string_append (title, dview->merged[DIFF_LEFT] ? modified : notmodified);
-    g_string_append (title, str_term_trim (dview->label[DIFF_LEFT], len1));
+    g_string_append (title, str_term_trim (dview->label[DIFF_LEFT], width1));
     g_string_append (title, " | ");
     g_string_append (title, dview->merged[DIFF_RIGHT] ? modified : notmodified);
-    g_string_append (title, str_term_trim (dview->label[DIFF_RIGHT], len1));
+    g_string_append (title, str_term_trim (dview->label[DIFF_RIGHT], width1));
 
     return g_string_free (title, FALSE);
 }
@@ -3440,8 +3441,7 @@ dview_diff_cmd (const void *f0, const void *f1)
         is_dir0 = S_ISDIR (fe0->st.st_mode);
         if (is_dir0)
         {
-            message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"),
-                     path_trunc (fe0->fname->str, 30));
+            message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), fe0->fname->str);
             goto ret;
         }
 
@@ -3455,8 +3455,7 @@ dview_diff_cmd (const void *f0, const void *f1)
         is_dir1 = S_ISDIR (fe1->st.st_mode);
         if (is_dir1)
         {
-            message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"),
-                     path_trunc (fe1->fname->str, 30));
+            message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), fe1->fname->str);
             goto ret;
         }
         break;
@@ -3475,14 +3474,13 @@ dview_diff_cmd (const void *f0, const void *f1)
             is_dir0 = S_ISDIR (st.st_mode);
             if (is_dir0)
             {
-                message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"), path_trunc (p0, 30));
+                message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), p0);
                 goto ret;
             }
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (p0, 30),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat\n%s"), p0);
             goto ret;
         }
 
@@ -3492,14 +3490,13 @@ dview_diff_cmd (const void *f0, const void *f1)
             is_dir1 = S_ISDIR (st.st_mode);
             if (is_dir1)
             {
-                message (D_ERROR, MSG_ERROR, _ ("\"%s\" is a directory"), path_trunc (p1, 30));
+                message (D_ERROR, MSG_ERROR, _ ("%s\nis a directory"), p1);
                 goto ret;
             }
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (p1, 30),
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot stat\n%s"), p1);
             goto ret;
         }
         break;

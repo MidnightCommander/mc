@@ -1,7 +1,7 @@
 #ifndef MC__VIEWER_INTERNAL_H
 #define MC__VIEWER_INTERNAL_H
 
-#include <limits.h>  // CHAR_BIT
+#include <limits.h>  // CHAR_BIT, MB_LEN_MAX
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -45,9 +45,10 @@ enum ccache_type
 
 typedef enum
 {
-    NROFF_TYPE_NONE = 0,
-    NROFF_TYPE_BOLD = 1,
-    NROFF_TYPE_UNDERLINE = 2
+    NROFF_TYPE_NONE,
+    NROFF_TYPE_BOLD,
+    NROFF_TYPE_UNDERLINE,
+    NROFF_TYPE_BOLD_UNDERLINE
 } nroff_type_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -262,6 +263,7 @@ void mcview_display (WView *view);
 void mcview_compute_areas (WView *view);
 void mcview_update_bytes_per_line (WView *view);
 void mcview_display_toggle_ruler (WView *view);
+void mcview_display_frame (const WView *view);
 void mcview_display_clean (WView *view);
 void mcview_display_ruler (WView *view);
 
@@ -290,10 +292,10 @@ void mcview_init (WView *view);
 void mcview_done (WView *view);
 void mcview_select_encoding (WView *view);
 void mcview_set_codeset (WView *view);
-void mcview_show_error (WView *view, const char *error);
+void mcview_show_error (WView *view, const char *format, const char *filename);
 off_t mcview_bol (WView *view, off_t current, off_t limit);
 off_t mcview_eol (WView *view, off_t current);
-char *mcview_get_title (const WDialog *h, size_t len);
+char *mcview_get_title (const WDialog *h, ssize_t width);
 int mcview_calc_percent (WView *view, off_t p);
 
 /* move.c */

@@ -283,11 +283,6 @@ static const GOptionEntry argument_terminal_table[] = {
         NULL,
     },
 
-#ifdef HAVE_SLANG
-    { "resetsoft", 'k', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &reset_hp_softkeys,
-      N_ ("Resets soft keys on HP terminals"), NULL },
-#endif
-
     {
         "keymap",
         'K',
@@ -339,16 +334,6 @@ static const GOptionEntry argument_color_table[] = {
     },
 
     {
-        "colors",
-        'C',
-        ARGS_COLOR_OPTIONS,
-        G_OPTION_ARG_STRING,
-        &mc_global.tty.command_line_colors,
-        N_ ("Specifies a color configuration"),
-        N_ ("<string>"),
-    },
-
-    {
         "skin",
         'S',
         ARGS_COLOR_OPTIONS,
@@ -379,45 +364,6 @@ mc_args_clean_temp_help_strings (void)
     MC_PTR_FREE (mc_args__loc__footer_string);
     MC_PTR_FREE (mc_args__loc__header_string);
     MC_PTR_FREE (mc_args__loc__usage_string);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static GOptionGroup *
-mc_args_new_color_group (void)
-{
-    // FIXME: to preserve translations, lines should be split.
-    mc_args__loc__colors_string = g_strdup_printf (
-        "%s\n%s",
-        // TRANSLATORS: don't translate keywords
-        _ ("--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n\n"
-           "{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
-           "\n Keywords:\n"
-           "   Global:       errors, disabled, reverse, gauge, header\n"
-           "                 input, inputmark, inputunchanged, commandlinemark\n"
-           "                 bbarhotkey, bbarbutton, statusbar\n"
-           "   File display: normal, selected, marked, markselect\n"
-           "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-           "                 errdhotfocus\n"
-           "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-           "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-           "   Editor:       editnormal, editbold, editmarked, editwhitespace, editnonprintable,\n"
-           "                 editlinestate, editbg, editframe, editframeactive\n"
-           "                 editframedrag\n"
-           "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
-           "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"),
-        // TRANSLATORS: don't translate color names and attributes
-        _ ("Standard Colors:\n"
-           "   black, gray, red, brightred, green, brightgreen, brown,\n"
-           "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-           "   brightcyan, lightgray and white\n\n"
-           "Extended colors, when 256 colors are available:\n"
-           "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n\n"
-           "Attributes:\n"
-           "   bold, italic, underline, reverse, blink; append more with '+'\n"));
-
-    return g_option_group_new ("color", mc_args__loc__colors_string, _ ("Color options"), NULL,
-                               NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -459,10 +405,10 @@ mc_args_add_extended_info_to_help (void)
 {
     mc_args__loc__footer_string =
         g_strdup_printf (_ ("\n"
-                            "Please send any bug reports (including the output of 'mc -V')\n"
+                            "Please send any bug reports (including the output of '%s -V')\n"
                             "as tickets at %s\n"),
-                         PACKAGE_BUGREPORT);
-    mc_args__loc__header_string = g_strdup_printf (PACKAGE_NAME " %s\n", mc_global.mc_version);
+                         PACKAGE, PACKAGE_BUGREPORT);
+    mc_args__loc__header_string = g_strdup_printf ("%s %s\n", PACKAGE_NAME, mc_global.mc_version);
 
     g_option_context_set_description (context, mc_args__loc__footer_string);
     g_option_context_set_summary (context, mc_args__loc__header_string);
@@ -697,7 +643,8 @@ mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError *
     g_option_context_add_group (context, terminal_group);
     g_option_group_set_translation_domain (terminal_group, translation_domain);
 
-    color_group = mc_args_new_color_group ();
+    color_group =
+        g_option_group_new ("color", _ ("Color options"), _ ("Color options"), NULL, NULL);
 
     g_option_group_add_entries (color_group, argument_color_table);
     g_option_context_add_group (context, color_group);

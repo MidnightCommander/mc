@@ -1,7 +1,10 @@
-#! /bin/sh
+#! @PERL@
 #                                                                     
 # Written by Viatcheslav Odintsov (2:5020/181)
 # (C) 2002 ARJ Software Russia.
+#
+# Rewritten by Vadim Kalinnikov <moose@ylsoftware.com>
+# (C) 2025
 #
 # This is an updated parser for ARJ archives in Midnight Commander. You need
 # full ARJ rather than UNARJ. Open-source ARJ v 3.10 for Unix platforms can
@@ -10,66 +13,135 @@
 # - https://www.sourceforge.net/projects/arj/
 # - https://arj.sourceforge.net/
 
+use strict;
+use warnings;
+# disabled, because test harness doesn't have it
+#use diagnostics;
 
-ARJ="arj -+ -ja1"
 
+sub mcarjfs_list($) {
+    my $arc = shift;
+    # file information
+    my @fileinfo = stat($arc);
+    # UID/GID from file
+    my $uid = getpwuid($fileinfo[4]) || "root";
+    my $gid = getgrgid($fileinfo[5]) || "root";
 
-mcarjfs_list ()
-{
- $ARJ v "$1" | @AWK@ -v uuid=`id -ru` '
-  { 
-   if (($0 ~ /^[0-9]+\) .*/)||($0 ~ /^------------ ---------- ---------- -----/)){
-    if (filestr ~ /^[0-9]+\) .*/) {
-     printf "%s   1 %-8d %-8d %8d %02d-%02d-%02d %02d:%02d %s%s\n", perm, uid, gid, size, date[2], date[3], date[1], time[1], time[2], file, symfile
-     perm=""
-     file=""
-     symfile=""
-     filestr=""
+    use Data::Dumper;
+
+    my $arc_list_cmd = "arj -+ -ja1 v \"$arc\"";
+    $arc_list_cmd = $ENV{MC_TEST_EXTFS_LIST_CMD} if defined $ENV{MC_TEST_EXTFS_LIST_CMD};
+    
+    my @lines = `$arc_list_cmd`;
+    chomp @lines;
+    if ($? != 0) { exit 1; } # arj command error (exit code != 0)
+
+    my @list;
+    foreach my $line (@lines) {
+        # start next record
+        if ($line =~ m/^[0-9]+\) (.*)/) {
+            # New item
+            push @list, {};
+
+            # filename
+            $list[-1]->{filename} = $1;
+            # uid/gid. default values
+            $list[-1]->{uid} = $uid;
+            $list[-1]->{gid} = $gid;
+            # size
+            $list[-1]->{size} = 0;
+            # perm
+            $list[-1]->{perm} = "----------";
+            # ts
+            $list[-1]->{ts} = "1970-01-01 00:00:00";
+        }
+        # fileinfo
+        elsif ($line =~ m/^.* (\d+)[\t ]+\d+ \d\.\d{3} (\d{2})-(\d{2})-(\d{2}) (\d{2}:\d{2}:\d{2}) (.{10})/) {
+            # skip if array is empty
+            next if @list == 0;
+
+            $list[-1]->{size} = $1;
+            $list[-1]->{ts} = "$3-$4-$2 $5";
+            $list[-1]->{perm} = $6;
+        }
+        # Owner
+        elsif ($line =~ m/Owner: (.*)/) {
+            # skip if array is empty
+            next if @list == 0;
+
+            # maybe "user" or "user/group"
+            my @uinfo = split('/', $1);
+
+            $list[-1]->{uid} = shift @uinfo || $uid;
+            $list[-1]->{gid} = shift @uinfo || $gid;
+        }
+        # Symlink
+        elsif ($line =~ m/SymLink -> (.*)/) {
+            # skip if array is empty
+            next if @list == 0;
+
+            $list[-1]->{filename} .= " -> $1";
+            $list[-1]->{perm} =~ s|^.|l|;
+            
+        }
     }
-   }
 
-   if ($0 ~ /^[0-9]+\) .*/) {
-    filestr=$0
-    sub(/^[0-9]*\) /, "")
-    file=$0
-    uid=uuid
-    gid=0
-   }
-
-   if ($0 ~ /^.* [0-9]+[\t ]+[0-9]+ [0-9]\.[0-9][0-9][0-9] [0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9].*/) {
-    size=$3
-    split($6, date, "-")
-    split($7, time, ":")
-    if ($8 ~ /^[rwx-]/) {perm=$8;}
-    else                {perm="-rw-r--r--"}
-   }
-
-   if ($0 ~ /^[\t ]+SymLink -> .*/) {
-    symfile = " -> "$3
-    perm="l"substr(perm, 2)
-   }
-
-   if ($0 ~ /^[\t ]+Owner: UID [0-9]+\, GID [0-9]+/) {
-    uid=$3
-    gid=$5
-    owner=1
-   }
-  }'
+    foreach my $item (@list) {
+        printf "%s  1 %s %s %10s %s %s\n",
+            $item->{perm},
+            $item->{uid},
+            $item->{gid},
+            $item->{size},
+            $item->{ts},
+            $item->{filename};
+    }
 }
 
-
-mcarjfs_copyout ()
+sub mcarjfs_copyout($$$)
 {
-    $ARJ e -y "$1" "$2" -jw"$3" >/dev/null 2>/dev/null
+    my $arc = shift;
+    my $src = shift;
+    my $dst = shift;
+    system("arj", "-+", "-ja1", "e", "-y", "$arc", "$src", "-jw$dst") == 0 or exit 1;
 }
 
+my $action = shift @ARGV || exit 1;
+my $filename = shift @ARGV || exit 1;
 
-umask 077
-cmd="$1"
-shift
-case "$cmd" in
-    list)    mcarjfs_list    "$@" ;;
-    copyout) mcarjfs_copyout "$@" ;;
-    *)       exit 1 ;;
-esac
-exit 0
+if ($action eq "list") {
+    mcarjfs_list($filename);
+    exit 0;
+}
+elsif ($action eq "copyout") {
+    my $srcfilename = shift @ARGV || exit 1;
+    my $dstfilename = shift @ARGV || exit 1;
+    mcarjfs_copyout($filename, $srcfilename, $dstfilename);
+    exit 0;
+}
+elsif ($action eq "copyin") {
+    # arj can't add files into subfolders
+    # solutions like "create symlink" from "uzip" are controversial
+    print "copyin not implemented\n";
+    exit 1;
+}
+elsif ($action eq "run") {
+    print "run not implemented\n";
+    exit 1;
+}
+elsif ($action eq "mkdir") {
+    # arj doesn't allow to create subfolders
+    # and doesn't allow to add empty folders
+    print "mkdir not implemented\n";
+    exit 1;
+}
+elsif ($action eq "rmdir") {
+    print "rmdir not implemented\n";
+    exit 1;
+}
+elsif ($action eq "rm") {
+    print "rm not implemented\n";
+    exit 1;
+}
+
+exit 1;
+

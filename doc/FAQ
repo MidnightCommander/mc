@@ -396,61 +396,60 @@ Frequently Asked Questions
    For termcap/terminfo database, change the acsc capability in the
    database.
 
-4.4 I have problems with entering/viewing national characters!
-
-   From the Options - Display Bits dialog select Full 8 bits or ISO
-   8859-1.  In addition, select 8 bit input from the same dialog.
-
-4.5 How can I get colors?
+4.4 How can I get colors?
 
    Invoke mc like this (without quotes): "mc -c".
 
    If you get colors, be happy.
 
    If your terminal stays black and white, your terminal doesn't support
-   color.  You might want to upgrade to a terminal which compatible with
+   color.  You might want to upgrade to a terminal which is compatible with
    the ANSI color sequences.
 
    If your terminal goes completely black, see the next question.
 
    More detailed answer:
 
-   Check that your terminal supports color.  color_xterm, rxvt and Linux
-   console do support, most other terminals don't.  You can test color
-   support with following simple C program:
+   Check that your terminal supports color.  Most terminals do. You can
+   test color support with the following command:
 
-    #include <stdio.h>
+        printf "\033[32m Hello color world! \033[m\n"
 
-    int main (void){
-        printf ("\033[32m Hello world! \033[m\n");
-        return 0;
-    }
+   You can test 256 color support with the following command:
 
-   Compile and run it.  If you see "Hello world!" text in green your
-   terminal supports color, otherwise not (however, for color_xterm see
-   also the next question).
+        printf "\033[38;5;120m Hello 256-color world! \033[m\n"
 
-   Check whether you are using Ncurses or the S-Lang library (type
-   "mc -V" to find out).
+   You can test true color support with the following command:
 
-   With S-Lang library you can force color support by setting the
-   environment variable COLORTERM to any value.
+        printf "\033[38;2;0;200;0m Hello true color world! \033[m\n"
 
-   If you use ncurses library, check that your terminfo database
-   supports color.  If not, you should install one of the enhanced
-   terminfo databases included in GNU Midnight Commander source
-   distribution.
+   If you see the text in green, your terminal supports the respective
+   color mode.
 
-   You might want to set the TERM environment variable so that you are
-   using the correct terminfo database or termcap entry.
+   Check that you are using the proper TERM variable for your terminal.
+   If not, set it accordingly. You can use the 'toe -a' command to list
+   all available terminfo entries.
 
-   If you use color_xterm (or rxvt) the correct value might be
-   xterm-color, xtermc or simply xterm.
+   If your terminal supports 256 colors, the correct entry name may be
+   appended with -256color. If your terminal supports true color, it
+   should be appended with -direct, -direct16, or -direct256. All three
+   variants provide both 256-color and true color support simultaneously.
+   The latter two variants make no difference in mc, and they support
+   basic colors including their bright versions along with true color
+   support, in contrast to the -direct variant, which supports only basic
+   8 colors together with true color when used in a skin.
 
-   If you use Linux console the correct value for TERM is linux or
-   console.
+   If there is no 256-color or true-color terminfo variant for your
+   terminal, even though your terminal supports it, send an e-mail to
+   ncurses/terminfo maintainers (bug-ncurses@gnu.org) and ask them to
+   add one.
 
-4.6 My color_xterm goes completely (or partially) black!
+   With the S-Lang library (you can check by 'mc -V'), you can force
+   color support by setting the environment variable COLORTERM to any
+   value, and specifically force true color support by setting it to
+   'truecolor'.
+
+4.5 My color_xterm goes completely (or partially) black!
 
    Some color_xterm terminals define all colors as black instead of the
    standard ANSI colors.  This makes them go completely black when you
@@ -482,7 +481,7 @@ Frequently Asked Questions
    ever the name of your X configuration file is).  Or you can replace
    your non-ANSI color_xterm with an ANSI color_xterm.
 
-4.7 Where can I get xterm or rxvt?
+4.6 Where can I get xterm or rxvt?
 
    xterm is included with the X Window System, so you probably already
    have it if you have X.  This version is not actively maintained, but
@@ -492,7 +491,7 @@ Frequently Asked Questions
    rxvt has its own site https://rxvt.sourceforge.net - get the latest version
    there.
 
-4.8 I got colors working with MC but the other programs don't work at
+4.7 I got colors working with MC but the other programs don't work at
 all anymore!
 
    Midnight Commander uses terminfo database (if available) but many

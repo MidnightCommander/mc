@@ -111,6 +111,11 @@ panel_view_mode_t startup_left_mode;
 panel_view_mode_t startup_right_mode;
 
 gboolean copymove_persistent_attr = TRUE;
+#ifdef ENABLE_EXT2FS_ATTR
+gboolean copymove_persistent_ext2_attr = TRUE;
+#else
+gboolean copymove_persistent_ext2_attr = FALSE;
+#endif
 
 /* Tab size */
 int option_tab_spacing = DEFAULT_TAB_SPACING;
@@ -137,7 +142,6 @@ panels_options_t panels_options = {
     .filetype_mode = TRUE,
     .permission_mode = FALSE,
     .qsearch_mode = QSEARCH_PANEL_CASE,
-    .torben_fj_mode = FALSE,
     .select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS,
 };
 
@@ -302,10 +306,8 @@ static const struct
     { "confirm_view_dir", &confirm_view_dir },
     { "safe_delete", &safe_delete },
     { "safe_overwrite", &safe_overwrite },
-    { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
     { "mouse_move_pages_viewer", &mcview_mouse_move_pages },
     { "mouse_close_dialog", &mouse_close_dialog },
-    { "fast_refresh", &fast_refresh },
     { "drop_menus", &drop_menus },
     { "wrap_mode", &mcview_global_flags.wrap },
     { "old_esc_mode", &old_esc_mode },
@@ -360,6 +362,9 @@ static const struct
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { "copymove_persistent_attr", &copymove_persistent_attr },
+#ifdef ENABLE_EXT2FS_ATTR
+    { "copymove_persistent_ext2_attr", &copymove_persistent_ext2_attr },
+#endif
     {
         NULL,
         NULL,
@@ -437,7 +442,6 @@ static const struct
     { "mouse_move_pages", &panels_options.mouse_move_pages },
     { "filetype_mode", &panels_options.filetype_mode },
     { "permission_mode", &panels_options.permission_mode },
-    { "torben_fj_mode", &panels_options.torben_fj_mode },
     {
         NULL,
         NULL,
@@ -924,14 +928,20 @@ load_setup (void)
     {
         char *buffer;
 
-        buffer = mc_config_get_string (mc_global.main_config, CONFIG_MISC_SECTION,
-                                       "display_codepage", "");
-        if (buffer[0] != '\0')
-        {
-            mc_global.display_codepage = get_codepage_index (buffer);
-            cp_display = get_codepage_id (mc_global.display_codepage);
-        }
-        g_free (buffer);
+        // Detect display codepage
+        const char *current_system_codepage = str_detect_termencoding ();
+
+        mc_global.display_codepage = get_codepage_index (current_system_codepage);
+
+        // Default to 7-bit ASCII
+        if (mc_global.display_codepage == -1)
+            mc_global.display_codepage = 0;
+
+        cp_display = get_codepage_id (mc_global.display_codepage);
+
+        mc_global.utf8_display = str_isutf8 (current_system_codepage);
+
+        // Restore source codepage
         buffer = mc_config_get_string (mc_global.main_config, CONFIG_MISC_SECTION,
                                        "source_codepage", "");
         if (buffer[0] != '\0')

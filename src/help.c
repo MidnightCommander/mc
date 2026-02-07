@@ -47,7 +47,6 @@
 
 #include <config.h>
 
-#include <errno.h>
 #include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <sys/types.h>
@@ -64,6 +63,7 @@
 #include "lib/event-types.h"
 
 #include "keymap.h"
+#include "util.h"  // file_error_message()
 #include "help.h"
 
 /*** global variables ****************************************************************************/
@@ -444,6 +444,63 @@ help_print_word (WDialog *h, GString *word, int *col, int *line, gboolean add_sp
 
 /* --------------------------------------------------------------------------------------------- */
 
+static mc_tty_char_t
+mc_acs_map (int c)
+{
+    switch (c)
+    {
+    case 'q':
+        return mc_global.tty.ugly_line_drawing ? '-'
+            : mc_global.utf8_display           ? 0x2500
+                                               : MC_ACS_HLINE;
+    case 'x':
+        return mc_global.tty.ugly_line_drawing ? '|'
+            : mc_global.utf8_display           ? 0x2502
+                                               : MC_ACS_VLINE;
+    case 'l':
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x250C
+                                               : MC_ACS_ULCORNER;
+    case 'k':
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x2510
+                                               : MC_ACS_URCORNER;
+    case 'm':
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x2514
+                                               : MC_ACS_LLCORNER;
+    case 'j':
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x2518
+                                               : MC_ACS_LRCORNER;
+    case 't':
+        return mc_global.tty.ugly_line_drawing ? '|'
+            : mc_global.utf8_display           ? 0x251C
+                                               : MC_ACS_LTEE;
+    case 'u':
+        return mc_global.tty.ugly_line_drawing ? '|'
+            : mc_global.utf8_display           ? 0x2524
+                                               : MC_ACS_RTEE;
+    case 'w':
+        return mc_global.tty.ugly_line_drawing ? '-'
+            : mc_global.utf8_display           ? 0x252C
+                                               : MC_ACS_TTEE;
+    case 'v':
+        return mc_global.tty.ugly_line_drawing ? '-'
+            : mc_global.utf8_display           ? 0x2534
+                                               : MC_ACS_BTEE;
+    case 'n':
+        return mc_global.tty.ugly_line_drawing ? '+'
+            : mc_global.utf8_display           ? 0x253C
+                                               : MC_ACS_PLUS;
+
+    default:
+        return c;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 help_show (WDialog *h, const char *paint_start)
 {
@@ -563,16 +620,7 @@ help_show (WDialog *h, const char *paint_start)
                     else if (col < HELP_WINDOW_WIDTH)
                     {
                         widget_gotoyx (h, line + 2, col + 2);
-
-                        if ((c == ' ') || (c == '.'))
-                            tty_print_char (c);
-                        else
-#ifndef HAVE_SLANG
-                            tty_print_char (acs_map[c]);
-#else
-                            SLsmg_draw_object (WIDGET (h)->rect.y + line + 2,
-                                               WIDGET (h)->rect.x + col + 2, c);
-#endif
+                        tty_print_char (mc_acs_map (c));
                         col++;
                     }
                 }
@@ -1073,14 +1121,6 @@ gboolean
 help_interactive_display (const gchar *event_group_name, const gchar *event_name,
                           gpointer init_data, gpointer data)
 {
-    const dlg_colors_t help_colors = {
-        HELP_NORMAL_COLOR,  // common text color
-        0,                  // unused in help
-        HELP_BOLD_COLOR,    // bold text color
-        0,                  // unused in help
-        HELP_TITLE_COLOR    // title color
-    };
-
     Widget *wh;
     WGroup *g;
     WButtonBar *help_bar;
@@ -1101,8 +1141,8 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
         filedata = load_mc_home_file (mc_global.share_data_dir, MC_HELP, &hlpfile, NULL);
 
     if (filedata == NULL)
-        message (D_ERROR, MSG_ERROR, _ ("Cannot open file %s\n%s"),
-                 event_data->filename ? event_data->filename : hlpfile, unix_error_string (errno));
+        file_error_message (_ ("Cannot open file\n%s"),
+                            event_data->filename ? event_data->filename : hlpfile);
 
     g_free (hlpfile);
 

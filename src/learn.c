@@ -256,10 +256,9 @@ init_learn (void)
     const int dlg_height = 23;
 
     // buttons
-    int bx0, bx1;
-    const char *b0 = N_ ("&Save");
-    const char *b1 = N_ ("&Cancel");
-    int bl0, bl1;
+    WButton *bt0, *bt1;
+    const char *b0 = _ ("&Save");
+    const char *b1 = _ ("&Cancel");
 
     int x, y, i;
     const key_code_name_t *key;
@@ -271,9 +270,6 @@ init_learn (void)
         learn_title = _ (learn_title);
         i18n_flag = TRUE;
     }
-
-    b0 = _ (b0);
-    b1 = _ (b1);
 #endif
 
     do_refresh ();
@@ -333,12 +329,20 @@ init_learn (void)
                       "key, or click with the mouse to define it. Move around with Tab.")));
     group_add_widget (g, hline_new (dlg_height - 4, -1, -1));
     // buttons
-    bl0 = str_term_width1 (b0) + 5;  // default button
-    bl1 = str_term_width1 (b1) + 3;  // normal button
-    bx0 = (dlg_width - (bl0 + bl1 + 1)) / 2;
-    bx1 = bx0 + bl0 + 1;
-    group_add_widget (g, button_new (dlg_height - 3, bx0, B_ENTER, DEFPUSH_BUTTON, b0, NULL));
-    group_add_widget (g, button_new (dlg_height - 3, bx1, B_CANCEL, NORMAL_BUTTON, b1, NULL));
+    bt0 = button_new (dlg_height - 3, 1, B_ENTER, DEFPUSH_BUTTON, b0, NULL);
+    bt1 = button_new (dlg_height - 3, 1, B_CANCEL, NORMAL_BUTTON, b1, NULL);
+
+    const int bw0 = button_get_width (bt0);
+    const int bw1 = button_get_width (bt1);
+
+    const int bx0 = (dlg_width - (bw0 + bw1 + 1)) / 2;
+    const int bx1 = bx0 + bw0 + 1;
+
+    WIDGET (bt0)->rect.x = bx0;
+    WIDGET (bt1)->rect.x = bx1;
+
+    group_add_widget (g, bt0);
+    group_add_widget (g, bt1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

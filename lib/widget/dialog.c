@@ -26,13 +26,7 @@
 
 #include <config.h>
 
-#include <ctype.h>
-#include <errno.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 
 #include "lib/global.h"
 
@@ -40,10 +34,8 @@
 #include "lib/skin.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
-#include "lib/fileloc.h"   // MC_HISTORY_FILE
-#include "lib/event.h"     // mc_event_raise()
-#include "lib/util.h"      // MC_PTR_FREE
-#include "lib/mcconfig.h"  // num_history_items_recorded
+#include "lib/event.h"  // mc_event_raise()
+#include "lib/util.h"   // MC_PTR_FREE
 
 #include "lib/widget.h"
 #include "lib/widget/mouse.h"
@@ -54,6 +46,7 @@
 dlg_colors_t dialog_colors;
 dlg_colors_t alarm_colors;
 dlg_colors_t listbox_colors;
+dlg_colors_t help_colors;
 
 /* A hook list for idle events */
 hook_t *idle_hook = NULL;
@@ -79,30 +72,6 @@ static const int *
 dlg_default_get_colors (const Widget *w)
 {
     return CONST_DIALOG (w)->colors;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Read histories from the ${XDG_DATA_HOME}/mc/history file
- */
-static void
-dlg_read_history (WDialog *h)
-{
-    char *profile;
-    ev_history_load_save_t event_data;
-
-    if (num_history_items_recorded == 0)  // this is how to disable
-        return;
-
-    profile = mc_config_get_full_path (MC_HISTORY_FILE);
-    event_data.cfg = mc_config_init (profile, TRUE);
-    event_data.receiver = NULL;
-
-    // create all histories in dialog
-    mc_event_raise (h->event_group, MCEVENT_HISTORY_LOAD, &event_data);
-
-    mc_config_deinit (event_data.cfg);
-    g_free (profile);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -333,7 +302,7 @@ dlg_default_destroy (Widget *w)
     WDialog *h = DIALOG (w);
 
     // if some widgets have history, save all histories at one moment here
-    dlg_save_history (h);
+    history_save (h, NULL);
     group_default_callback (w, NULL, MSG_DESTROY, 0, NULL);
     send_message (w, NULL, MSG_DESTROY, 0, NULL);
     mc_event_group_del (h->event_group);
@@ -452,23 +421,41 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
 void
 dlg_set_default_colors (void)
 {
-    dialog_colors[DLG_COLOR_NORMAL] = COLOR_NORMAL;
-    dialog_colors[DLG_COLOR_FOCUS] = COLOR_FOCUS;
-    dialog_colors[DLG_COLOR_HOT_NORMAL] = COLOR_HOT_NORMAL;
-    dialog_colors[DLG_COLOR_HOT_FOCUS] = COLOR_HOT_FOCUS;
-    dialog_colors[DLG_COLOR_TITLE] = COLOR_TITLE;
+    dialog_colors[DLG_COLOR_NORMAL] = DIALOG_NORMAL_COLOR;
+    dialog_colors[DLG_COLOR_FOCUS] = DIALOG_FOCUS_COLOR;
+    dialog_colors[DLG_COLOR_HOT_NORMAL] = DIALOG_HOT_NORMAL_COLOR;
+    dialog_colors[DLG_COLOR_HOT_FOCUS] = DIALOG_HOT_FOCUS_COLOR;
+    dialog_colors[DLG_COLOR_SELECTED_NORMAL] = DIALOG_SELECTED_NORMAL_COLOR;
+    dialog_colors[DLG_COLOR_SELECTED_FOCUS] = DIALOG_SELECTED_FOCUS_COLOR;
+    dialog_colors[DLG_COLOR_TITLE] = DIALOG_TITLE_COLOR;
+    dialog_colors[DLG_COLOR_FRAME] = DIALOG_FRAME_COLOR;
 
-    alarm_colors[DLG_COLOR_NORMAL] = ERROR_COLOR;
-    alarm_colors[DLG_COLOR_FOCUS] = ERROR_FOCUS;
-    alarm_colors[DLG_COLOR_HOT_NORMAL] = ERROR_HOT_NORMAL;
-    alarm_colors[DLG_COLOR_HOT_FOCUS] = ERROR_HOT_FOCUS;
-    alarm_colors[DLG_COLOR_TITLE] = ERROR_TITLE;
+    alarm_colors[DLG_COLOR_NORMAL] = ERROR_NORMAL_COLOR;
+    alarm_colors[DLG_COLOR_FOCUS] = ERROR_FOCUS_COLOR;
+    alarm_colors[DLG_COLOR_HOT_NORMAL] = ERROR_HOT_NORMAL_COLOR;
+    alarm_colors[DLG_COLOR_HOT_FOCUS] = ERROR_HOT_FOCUS_COLOR;
+    alarm_colors[DLG_COLOR_SELECTED_NORMAL] = ERROR_HOT_FOCUS_COLOR;  // unused
+    alarm_colors[DLG_COLOR_SELECTED_FOCUS] = ERROR_FOCUS_COLOR;       // unused
+    alarm_colors[DLG_COLOR_TITLE] = ERROR_TITLE_COLOR;
+    alarm_colors[DLG_COLOR_FRAME] = ERROR_FRAME_COLOR;
 
     listbox_colors[DLG_COLOR_NORMAL] = PMENU_ENTRY_COLOR;
     listbox_colors[DLG_COLOR_FOCUS] = PMENU_SELECTED_COLOR;
     listbox_colors[DLG_COLOR_HOT_NORMAL] = PMENU_ENTRY_COLOR;
     listbox_colors[DLG_COLOR_HOT_FOCUS] = PMENU_SELECTED_COLOR;
+    listbox_colors[DLG_COLOR_SELECTED_NORMAL] = PMENU_SELECTED_COLOR;  // unused
+    listbox_colors[DLG_COLOR_SELECTED_FOCUS] = PMENU_SELECTED_COLOR;   // unused
     listbox_colors[DLG_COLOR_TITLE] = PMENU_TITLE_COLOR;
+    listbox_colors[DLG_COLOR_FRAME] = PMENU_FRAME_COLOR;
+
+    help_colors[DLG_COLOR_NORMAL] = HELP_NORMAL_COLOR;
+    help_colors[DLG_COLOR_FOCUS] = 0;  // unused
+    help_colors[DLG_COLOR_HOT_NORMAL] = HELP_BOLD_COLOR;
+    help_colors[DLG_COLOR_HOT_FOCUS] = 0;        // unused
+    help_colors[DLG_COLOR_SELECTED_NORMAL] = 0;  // unused
+    help_colors[DLG_COLOR_SELECTED_FOCUS] = 0;   // unused
+    help_colors[DLG_COLOR_TITLE] = HELP_TITLE_COLOR;
+    help_colors[DLG_COLOR_FRAME] = HELP_FRAME_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -502,7 +489,7 @@ dlg_init (WDialog *h)
 
         send_message (h, NULL, MSG_INIT, 0, NULL);
         group_default_callback (wh, NULL, MSG_INIT, 0, NULL);
-        dlg_read_history (h);
+        history_load (h, NULL);
     }
 
     // Select the first widget that takes focus
@@ -577,45 +564,8 @@ dlg_run (WDialog *h)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/**
- * Write history to the ${XDG_DATA_HOME}/mc/history file
- */
-void
-dlg_save_history (WDialog *h)
-{
-    char *profile;
-    int i;
-
-    if (num_history_items_recorded == 0)  // this is how to disable
-        return;
-
-    profile = mc_config_get_full_path (MC_HISTORY_FILE);
-    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
-    if (i != -1)
-        close (i);
-
-    // Make sure the history is only readable by the user
-    if (chmod (profile, S_IRUSR | S_IWUSR) != -1 || errno == ENOENT)
-    {
-        ev_history_load_save_t event_data;
-
-        event_data.cfg = mc_config_init (profile, FALSE);
-        event_data.receiver = NULL;
-
-        // get all histories in dialog
-        mc_event_raise (h->event_group, MCEVENT_HISTORY_SAVE, &event_data);
-
-        mc_config_save_file (event_data.cfg, NULL);
-        mc_config_deinit (event_data.cfg);
-    }
-
-    g_free (profile);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 char *
-dlg_get_title (const WDialog *h, size_t len)
+dlg_get_title (const WDialog *h, const ssize_t width)
 {
     char *t;
 
@@ -623,7 +573,7 @@ dlg_get_title (const WDialog *h, size_t len)
         abort ();
 
     if (h->get_title != NULL)
-        t = h->get_title (h, len);
+        t = h->get_title (h, width);
     else
         t = g_strdup ("");
 

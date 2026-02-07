@@ -38,7 +38,7 @@
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"  // vfs_current_is_local()
-#include "lib/skin.h"     // DEFAULT_COLOR
+#include "lib/skin.h"     // CORE_DEFAULT_COLOR
 #include "lib/util.h"     // whitespace()
 #include "lib/widget.h"
 
@@ -106,7 +106,7 @@ enter (WInput *lc_cmdline)
     else if (strcmp (cmd, "exit") == 0)
     {
         input_assign_text (lc_cmdline, "");
-        if (!quiet_quit_cmd ())
+        if (!quiet_quit_cmd (FALSE))
             return MSG_NOT_HANDLED;
     }
     else
@@ -154,7 +154,7 @@ enter (WInput *lc_cmdline)
 #ifdef ENABLE_SUBSHELL
         if ((quit & SUBSHELL_EXIT) != 0)
         {
-            if (quiet_quit_cmd ())
+            if (quiet_quit_cmd (FALSE))
                 return MSG_HANDLED;
 
             quit = 0;
@@ -229,10 +229,10 @@ command_new (int y, int x, int cols)
 void
 command_set_default_colors (void)
 {
-    command_colors[WINPUTC_MAIN] = DEFAULT_COLOR;
-    command_colors[WINPUTC_MARK] = COMMAND_MARK_COLOR;
-    command_colors[WINPUTC_UNCHANGED] = DEFAULT_COLOR;
-    command_colors[WINPUTC_HISTORY] = COMMAND_HISTORY_COLOR;
+    command_colors[WINPUTC_MAIN] = CORE_DEFAULT_COLOR;
+    command_colors[WINPUTC_MARK] = CORE_COMMAND_MARK_COLOR;
+    command_colors[WINPUTC_UNCHANGED] = CORE_DEFAULT_COLOR;
+    command_colors[WINPUTC_HISTORY] = CORE_COMMAND_HISTORY_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

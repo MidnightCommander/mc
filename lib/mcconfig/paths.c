@@ -73,12 +73,12 @@ static const struct
     // data
     { &mc_data_str, MC_SKINS_DIR },
     { &mc_data_str, VFS_SHELL_PREFIX },
-    { &mc_data_str, MC_ASHRC_FILE },
-    { &mc_data_str, MC_KSHRC_FILE },
-    { &mc_data_str, MC_MKSHRC_FILE },
-    { &mc_data_str, MC_BASHRC_FILE },
+    { &mc_data_str, MC_ASHRC_CUSTOM_PROFILE_FILE },
+    { &mc_data_str, MC_KSHRC_CUSTOM_PROFILE_FILE },
+    { &mc_data_str, MC_MKSHRC_CUSTOM_PROFILE_FILE },
+    { &mc_data_str, MC_BASHRC_CUSTOM_PROFILE_FILE },
     { &mc_data_str, MC_INPUTRC_FILE },
-    { &mc_data_str, MC_ZSHRC_FILE },
+    { &mc_data_str, MC_ZSHRC_CUSTOM_PROFILE_FILE },
     { &mc_data_str, MC_EXTFS_DIR },
     { &mc_data_str, MC_HISTORY_FILE },
     { &mc_data_str, MC_FILEPOS_FILE },
@@ -107,8 +107,9 @@ mc_config_mkdir (const char *directory_name, GError **mcerror)
 {
     mc_return_if_error (mcerror);
 
-    if ((!g_file_test (directory_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
-        && (g_mkdir_with_parents (directory_name, 0700) != 0))
+    if (!(g_file_test (directory_name, G_FILE_TEST_EXISTS)
+          && g_file_test (directory_name, G_FILE_TEST_IS_DIR))
+        && g_mkdir_with_parents (directory_name, 0700) != 0)
         mc_propagate_error (mcerror, 0, _ ("Cannot create %s directory"), directory_name);
 }
 

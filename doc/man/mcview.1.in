@@ -23,16 +23,16 @@ Force color mode on terminals where
 .B mcview
 defaults to black and white.
 .TP
-.I "\-C <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ..."
-Specify a different color set.  See the
-.B Colors
-section in mc(1) for more information.
-.TP
 .I "\-d"
 Disable mouse support.
 .TP
 .I "\-f"
 Display the compiled\-in search paths for Midnight Commander files.
+.TP
+.I \-S arg, \-\-skin=arg
+Specify a name of skin in the command line.  See the
+.B Skins
+section in mc(1) for more information.
 .TP
 .I "\-t"
 Used only if the code was compiled with S\-Lang and terminfo: it makes
@@ -47,18 +47,6 @@ Displays the version of the program.
 .I "\-x"
 Forces xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
-.PP
-.SH COLORS
-The default colors may be changed by appending to the
-.B MC_COLOR_TABLE
-environment variable.  Foreground and background colors pairs may be
-specified for example with:
-.PP
-.nf
-MC_COLOR_TABLE="$MC_COLOR_TABLE:\e
-normal=lightgray,black:\e
-selected=black,green"
-.fi
 .PP
 .SH FILES
 .I %pkgdatadir%/help/mc.hlp
@@ -87,9 +75,10 @@ help of Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .SH SEE ALSO
 mc(1), mcedit(1)
 .PP
 .SH BUGS
-Bugs should be reported to https://github.com/MidnightCommander/mc/issues .
+Bugs should be reported to
+\X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .

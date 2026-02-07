@@ -69,10 +69,12 @@ mc_skin_get_list_from_dir (const gchar *base_dir, GPtrArray *list)
             unsigned int i;
 
             slen = strlen (cname);
-            sname = g_strndup (cname, slen);
 
-            if (slen > 4 && strcmp (sname + slen - 4, ".ini") == 0)
-                sname[slen - 4] = '\0';
+            if (slen <= 4 || strcmp (cname + slen - 4, ".ini") != 0)
+                continue;
+
+            sname = g_strndup (cname, slen);
+            sname[slen - 4] = '\0';
 
             for (i = 0; i < list->len; i++)
                 if (strcmp (sname, g_ptr_array_index (list, i)) == 0)

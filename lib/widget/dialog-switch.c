@@ -44,10 +44,6 @@
 /* This is needed by async routines like load_prompt */
 GList *top_dlg = NULL;
 
-/* If set then dialogs just clean the screen when refreshing, else */
-/* they do a complete refresh, refreshing all the parts of the program */
-gboolean fast_refresh = FALSE;
-
 WDialog *filemanager = NULL;
 
 /*** file scope macro definitions ****************************************************************/
@@ -266,8 +262,13 @@ dialog_switch_list (void)
 int
 dialog_switch_process_pending (void)
 {
-    WDialog *h = DIALOG (mc_current->data);
+    WDialog *h;
     int ret = 0;
+
+    if (mc_current == NULL)
+        return ret;
+
+    h = DIALOG (mc_current->data);
 
     if (!dialog_switch_pending)
     {
@@ -334,27 +335,19 @@ do_refresh (void)
 {
     GList *d = top_dlg;
 
-    if (fast_refresh)
-    {
-        if (d != NULL)
-            widget_draw (WIDGET (d->data));
-    }
-    else
-    {
-        // Search first fullscreen dialog
-        for (; d != NULL; d = g_list_next (d))
-            if ((WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
-                break;
+    // Search first fullscreen dialog
+    for (; d != NULL; d = g_list_next (d))
+        if ((WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
+            break;
 
-        /* when small dialog (i.e. error message) is created first,
-           there is no fullscreen dialog in the stack */
-        if (d == NULL)
-            d = g_list_last (top_dlg);
+    /* when small dialog (i.e. error message) is created first,
+       there is no fullscreen dialog in the stack */
+    if (d == NULL)
+        d = g_list_last (top_dlg);
 
-        // back to top dialog
-        for (; d != NULL; d = g_list_previous (d))
-            widget_draw (WIDGET (d->data));
-    }
+    // back to top dialog
+    for (; d != NULL; d = g_list_previous (d))
+        widget_draw (WIDGET (d->data));
 }
 
 /* --------------------------------------------------------------------------------------------- */

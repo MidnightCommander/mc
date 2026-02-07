@@ -43,6 +43,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -50,7 +51,7 @@
 #include "lib/strutil.h"  // utf string functions
 #include "lib/fileloc.h"
 #include "lib/lock.h"
-#include "lib/util.h"  // tilde_expand()
+#include "lib/util.h"  // tilde_expand(), x_basename()
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/event.h"  // mc_event_raise()
@@ -59,7 +60,7 @@
 #include "src/history.h"
 #include "src/file_history.h"  // show_file_history()
 #include "src/selcodepage.h"
-#include "src/util.h"  // check_for_default()
+#include "src/util.h"  // check_for_default(), file_error_message()
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -73,13 +74,15 @@ int search_create_bookmark = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define space_width  1
-
 #define TEMP_BUF_LEN 1024
 
 /*** file scope type declarations ****************************************************************/
 
 /*** forward declarations (file scope functions) *************************************************/
+
+MC_TESTABLE void edit_insert_column_of_text (WEdit *edit, GString *data, long width,
+                                             off_t *start_pos, off_t *end_pos, long *col1,
+                                             long *col2);
 
 /*** file scope variables ************************************************************************/
 
@@ -266,7 +269,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open pipe for writing: %s"), p);
+            file_error_message (_ ("Cannot open pipe for reading\n%s"), p);
             g_free (p);
             goto error_save;
         }
@@ -305,7 +308,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open file for writing: %s"), savename);
+            file_error_message (_ ("Cannot open file\n%s\nfor writing"), savename);
             goto error_save;
         }
     }
@@ -375,18 +378,18 @@ edit_get_save_file_as (WEdit *edit)
     vfs_path_t *ret_vpath = NULL;
 
     const char *lb_names[LB_NAMES] = {
-        N_ ("&Do not change"),
-        N_ ("&Unix format (LF)"),
-        N_ ("&Windows/DOS format (CR LF)"),
-        N_ ("&Macintosh format (CR)"),
+        _ ("&Do not change"),
+        _ ("&Unix format (LF)"),
+        _ ("&Windows/DOS format (CR LF)"),
+        _ ("&Macintosh format (CR)"),
     };
 
     quick_widget_t quick_widgets[] = {
-        QUICK_LABELED_INPUT (N_ ("Enter file name:"), input_label_above,
+        QUICK_LABELED_INPUT (_ ("Enter file name:"), input_label_above,
                              vfs_path_as_str (edit->filename_vpath), "save-as", &filename_res, NULL,
                              FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_SEPARATOR (TRUE),
-        QUICK_LABEL (N_ ("Change line breaks to:"), NULL),
+        QUICK_LABEL (_ ("Change line breaks to:"), NULL),
         QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END,
@@ -396,7 +399,7 @@ edit_get_save_file_as (WEdit *edit)
 
     quick_dialog_t qdlg = {
         .rect = r,
-        .title = N_ ("Save As"),
+        .title = _ ("Save As"),
         .help = "[Save File As]",
         .widgets = quick_widgets,
         .callback = NULL,
@@ -563,43 +566,37 @@ edit_block_delete (WEdit *edit, off_t start_mark, off_t end_mark)
 /* --------------------------------------------------------------------------------------------- */
 /** Return a null terminated length of text. Result must be g_free'd */
 
-static unsigned char *
-edit_get_block (WEdit *edit, off_t start, off_t finish, off_t *l)
+static GString *
+edit_get_block (WEdit *edit, const off_t start, const off_t finish)
 {
-    unsigned char *s, *r;
+    GString *r;
 
-    r = s = g_malloc0 (finish - start + 1);
+    r = g_string_sized_new (finish - start);
 
     if (edit->column_highlight)
     {
-        *l = 0;
-
         // copy from buffer, excluding chars that are out of the column 'margins'
-        for (; start < finish; start++)
+        for (off_t i = start; i < finish; i++)
         {
-            int c;
             off_t x;
 
-            x = edit_buffer_get_bol (&edit->buffer, start);
-            x = edit_move_forward3 (edit, x, 0, start);
-            c = edit_buffer_get_byte (&edit->buffer, start);
+            x = edit_buffer_get_bol (&edit->buffer, i);
+            x = edit_move_forward3 (edit, x, 0, i);
+
+            const int c = edit_buffer_get_byte (&edit->buffer, i);
+
             if ((x >= edit->column1 && x < edit->column2)
                 || (x >= edit->column2 && x < edit->column1) || c == '\n')
-            {
-                *s++ = c;
-                (*l)++;
-            }
+                g_string_append_c (r, (gchar) c);
         }
     }
     else
-    {
-        *l = finish - start;
+        for (off_t i = start; i < finish; i++)
+        {
+            const int c = edit_buffer_get_byte (&edit->buffer, i);
 
-        for (; start < finish; start++)
-            *s++ = edit_buffer_get_byte (&edit->buffer, start);
-    }
-
-    *s = '\0';
+            g_string_append_c (r, (gchar) c);
+        }
 
     return r;
 }
@@ -669,29 +666,35 @@ pipe_mail (const edit_buffer_t *buf, char *to, char *subject, char *cc)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long width,
-                            off_t *start_pos, off_t *end_pos, long *col1, long *col2)
+edit_append_spaces_at_eol (WEdit *edit, const long col, const long width)
 {
-    off_t i, cursor;
+    if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+        for (long l = width - (edit_get_col (edit) - col); l > 0; l--)
+            edit_insert (edit, ' ');
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+MC_TESTABLE void
+edit_insert_column_of_text (WEdit *edit, GString *data, long width, off_t *start_pos,
+                            off_t *end_pos, long *col1, long *col2)
+{
+    off_t cursor;
     long col;
 
     cursor = edit->buffer.curs1;
     col = edit_get_col (edit);
 
-    for (i = 0; i < size; i++)
+    for (gsize i = 0; i < data->len; i++)
     {
-        if (data[i] != '\n')
-            edit_insert (edit, data[i]);
+        if (data->str[i] != '\n')
+            edit_insert (edit, data->str[i]);
         else
         {  // fill in and move to next line
-            long l;
             off_t p;
 
-            if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
-            {
-                for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
-                    edit_insert (edit, ' ');
-            }
+            edit_append_spaces_at_eol (edit, col, width);
+
             for (p = edit->buffer.curs1;; p++)
             {
                 if (p == edit->buffer.size)
@@ -709,10 +712,13 @@ edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long w
             }
             edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->buffer.curs1);
 
-            for (l = col - edit_get_col (edit); l >= space_width; l -= space_width)
+            for (long l = col - edit_get_col (edit); l >= 1; l--)
                 edit_insert (edit, ' ');
         }
     }
+
+    // add spaces at the end of the last line if this line is short
+    edit_append_spaces_at_eol (edit, col, width);
 
     *col1 = col;
     *col2 = col + width;
@@ -761,6 +767,49 @@ editcmd_dialog_raw_key_query_cb (Widget *w, Widget *sender, widget_msg_t msg, in
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+editcmd_check_and_create_user_syntax_directory (const vfs_path_t *user_syntax_file_vpath)
+{
+    gboolean ret;
+    struct stat st;
+
+    ret = mc_stat (user_syntax_file_vpath, &st) == 0;
+    if (!ret)
+    {
+        // file doesn't exist -- check why
+        const char *user_syntax_file_path = vfs_path_as_str (user_syntax_file_vpath);
+
+        // check directory
+        const char *user_syntax_file_basename = x_basename (user_syntax_file_path);
+        char *user_syntax_dir;
+        vfs_path_t *user_syntax_vpath;
+
+        user_syntax_dir =
+            g_strndup (user_syntax_file_path, user_syntax_file_basename - user_syntax_file_path);
+        user_syntax_vpath = vfs_path_from_str (user_syntax_dir);
+
+        ret = mc_stat (user_syntax_vpath, &st) == 0;
+        if (!ret)
+            ret = mc_mkdir (user_syntax_vpath, 0700) == 0;
+        else if (!S_ISDIR (st.st_mode))
+        {
+            ret = FALSE;
+            // set for file_error_message()
+            errno = EEXIST;
+        }
+
+        if (!ret)
+            file_error_message (_ ("Cannot create directory\n%s"), user_syntax_dir);
+
+        vfs_path_free (user_syntax_vpath, TRUE);
+        g_free (user_syntax_dir);
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -841,17 +890,10 @@ edit_save_mode_cmd (void)
     char *str_result = NULL;
 
     const char *str[] = {
-        N_ ("&Quick save"),
-        N_ ("&Safe save"),
-        N_ ("&Do backups with following extension:"),
+        _ ("&Quick save"),
+        _ ("&Safe save"),
+        _ ("&Do backups with following extension:"),
     };
-
-#ifdef ENABLE_NLS
-    size_t i;
-
-    for (i = 0; i < 3; i++)
-        str[i] = _ (str[i]);
-#endif
 
     g_assert (edit_options.backup_ext != NULL);
 
@@ -861,7 +903,7 @@ edit_save_mode_cmd (void)
             QUICK_INPUT (edit_options.backup_ext, "edit-backup-ext", &str_result,
                          &edit_save_mode_input_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
-            QUICK_CHECKBOX (N_ ("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
+            QUICK_CHECKBOX (_ ("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
         };
@@ -870,7 +912,7 @@ edit_save_mode_cmd (void)
 
         quick_dialog_t qdlg = {
             .rect = r,
-            .title = N_ ("Edit Save Mode"),
+            .title = _ ("Edit Save Mode"),
             .help = "[Edit Save Mode]",
             .widgets = quick_widgets,
             .callback = edit_save_mode_callback,
@@ -927,8 +969,8 @@ edit_save_as_cmd (WEdit *edit)
 
             if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
             {
-                message (D_ERROR, MSG_ERROR, "%s",
-                         _ ("Cannot save: destination is not a regular file"));
+                file_error_message (_ ("Cannot save\n%s:\nnot a regular file"),
+                                    vfs_path_as_str (exp_vpath));
                 goto ret;
             }
 
@@ -1146,9 +1188,14 @@ edit_load_syntax_file (WDialog *h)
         vfs_path_t *user_syntax_file_vpath;
 
         user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_SYNTAX_FILE);
-        check_for_default (extdir_vpath, user_syntax_file_vpath);
-        edit_arg_init (&arg, user_syntax_file_vpath, 0);
-        ret = edit_load_file_from_filename (h, &arg);
+
+        if (editcmd_check_and_create_user_syntax_directory (user_syntax_file_vpath))
+        {
+            check_for_default (extdir_vpath, user_syntax_file_vpath);
+            edit_arg_init (&arg, user_syntax_file_vpath, 0);
+            ret = edit_load_file_from_filename (h, &arg);
+        }
+
         vfs_path_free (user_syntax_file_vpath, TRUE);
     }
     else if (dir == 1)
@@ -1241,7 +1288,7 @@ edit_close_cmd (WEdit *edit)
 {
     gboolean ret;
 
-    ret = (edit != NULL) && edit_ok_to_exit (edit);
+    ret = (edit != NULL) && edit_ok_to_quit (edit);
 
     if (ret)
     {
@@ -1278,14 +1325,13 @@ edit_block_copy_cmd (WEdit *edit)
     off_t start_mark, end_mark, current = edit->buffer.curs1;
     off_t mark1 = 0, mark2 = 0;
     long c1 = 0, c2 = 0;
-    off_t size;
-    unsigned char *copy_buf;
+    GString *copy_buf;
 
     edit_update_curs_col (edit);
     if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
-    copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
+    copy_buf = edit_get_block (edit, start_mark, end_mark);
 
     // all that gets pushed are deletes hence little space is used on the stack
 
@@ -1296,21 +1342,19 @@ edit_block_copy_cmd (WEdit *edit)
         long col_delta;
 
         col_delta = labs (edit->column2 - edit->column1);
-        edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
+        edit_insert_column_of_text (edit, copy_buf, col_delta, &mark1, &mark2, &c1, &c2);
     }
     else
     {
-        int size_orig = size;
-
-        while (size-- != 0)
-            edit_insert_ahead (edit, copy_buf[size]);
+        for (gsize i = copy_buf->len; i != 0; i--)
+            edit_insert_ahead (edit, copy_buf->str[i - 1]);
 
         // Place cursor at the end of text selection
         if (edit_options.cursor_after_inserted_block)
-            edit_cursor_move (edit, size_orig);
+            edit_cursor_move (edit, copy_buf->len);
     }
 
-    g_free (copy_buf);
+    g_string_free (copy_buf, TRUE);
     edit_scroll_screen_over_cursor (edit);
 
     if (edit->column_highlight)
@@ -1327,7 +1371,6 @@ void
 edit_block_move_cmd (WEdit *edit)
 {
     off_t current;
-    unsigned char *copy_buf = NULL;
     off_t start_mark, end_mark;
 
     if (!eval_marks (edit, &start_mark, &end_mark))
@@ -1343,10 +1386,10 @@ edit_block_move_cmd (WEdit *edit)
     if (edit->column_highlight)
     {
         off_t mark1, mark2;
-        off_t size;
         long c1, c2, b_width;
         long x, x2;
         off_t b1, b2;
+        GString *copy_buf;
 
         c1 = MIN (edit->column1, edit->column2);
         c2 = MAX (edit->column1, edit->column2);
@@ -1372,7 +1415,7 @@ edit_block_move_cmd (WEdit *edit)
                 x = c1;
         }
         // save current selection into buffer
-        copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
+        copy_buf = edit_get_block (edit, start_mark, end_mark);
 
         // remove current selection
         edit_block_delete_cmd (edit);
@@ -1388,11 +1431,13 @@ edit_block_move_cmd (WEdit *edit)
         if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 
-        edit_insert_column_of_text (edit, copy_buf, size, b_width, &mark1, &mark2, &c1, &c2);
+        edit_insert_column_of_text (edit, copy_buf, b_width, &mark1, &mark2, &c1, &c2);
         edit_set_markers (edit, mark1, mark2, c1, c2);
+        g_string_free (copy_buf, TRUE);
     }
     else
     {
+        unsigned char *copy_buf;
         off_t count, count_orig;
         off_t x;
 
@@ -1411,6 +1456,7 @@ edit_block_move_cmd (WEdit *edit)
         count_orig = count;
         while (count-- > start_mark)
             edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
+        g_free (copy_buf);
 
         edit_set_markers (edit, edit->buffer.curs1, edit->buffer.curs1 + end_mark - start_mark, 0,
                           0);
@@ -1421,7 +1467,6 @@ edit_block_move_cmd (WEdit *edit)
     }
 
     edit_scroll_screen_over_cursor (edit);
-    g_free (copy_buf);
     edit->force |= REDRAW_PAGE;
 }
 
@@ -1449,9 +1494,9 @@ edit_block_delete_cmd (WEdit *edit)
  */
 
 gboolean
-edit_ok_to_exit (WEdit *edit)
+edit_ok_to_quit (WEdit *edit)
 {
-    const char *fname = N_ ("[NoName]");
+    const char *fname;
     char *msg;
     int act;
 
@@ -1460,10 +1505,8 @@ edit_ok_to_exit (WEdit *edit)
 
     if (edit->filename_vpath != NULL)
         fname = vfs_path_as_str (edit->filename_vpath);
-#ifdef ENABLE_NLS
     else
-        fname = _ (fname);
-#endif
+        fname = _ ("[NoName]");
 
     if (!mc_global.midnight_shutdown)
     {
@@ -1474,7 +1517,7 @@ edit_ok_to_exit (WEdit *edit)
     }
     else
     {
-        msg = g_strdup_printf (_ ("Midnight Commander is being shut down.\nSave modified file %s?"),
+        msg = g_strdup_printf (_ ("%s is being shut down.\nSave modified file %s?"), PACKAGE_NAME,
                                fname);
         act = edit_query_dialog2 (_ ("Quit"), msg, _ ("&Yes"), _ ("&No"));
 
@@ -1498,7 +1541,7 @@ edit_ok_to_exit (WEdit *edit)
     case 1:  // No
     default:
         break;
-    case 2:   // Cancel quit
+    case 2:   // Cancel
     case -1:  // Esc
         return FALSE;
     }
@@ -1513,8 +1556,8 @@ gboolean
 edit_save_block (WEdit *edit, const char *filename, off_t start, off_t finish)
 {
     int file;
-    off_t len = 1;
     vfs_path_t *vpath;
+    off_t len = 1;
 
     vpath = vfs_path_from_str (filename);
     file = mc_open (vpath, O_CREAT | O_WRONLY | O_TRUNC,
@@ -1530,9 +1573,13 @@ edit_save_block (WEdit *edit, const char *filename, off_t start, off_t finish)
         r = mc_write (file, VERTICAL_MAGIC, sizeof (VERTICAL_MAGIC));
         if (r > 0)
         {
-            unsigned char *block, *p;
+            GString *block;
+            char *p;
 
-            p = block = edit_get_block (edit, start, finish, &len);
+            block = edit_get_block (edit, start, finish);
+            p = block->str;
+            len = block->len;
+
             while (len != 0)
             {
                 r = mc_write (file, p, len);
@@ -1541,7 +1588,8 @@ edit_save_block (WEdit *edit, const char *filename, off_t start, off_t finish)
                 p += r;
                 len -= r;
             }
-            g_free (block);
+
+            g_string_free (block, TRUE);
         }
     }
     else
@@ -1898,12 +1946,12 @@ edit_mail_dialog (WEdit *edit)
     char *mail_cc = NULL;
 
     quick_widget_t quick_widgets[] = {
-        QUICK_LABEL (N_ ("mail -s <subject> -c <cc> <to>"), NULL),
-        QUICK_LABELED_INPUT (N_ ("To"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-3",
+        QUICK_LABEL (_ ("mail -s <subject> -c <cc> <to>"), NULL),
+        QUICK_LABELED_INPUT (_ ("To"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-3",
                              &mail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
-        QUICK_LABELED_INPUT (N_ ("Subject"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-2",
+        QUICK_LABELED_INPUT (_ ("Subject"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-2",
                              &mail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-        QUICK_LABELED_INPUT (N_ ("Copies to"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input",
+        QUICK_LABELED_INPUT (_ ("Copies to"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input",
                              &mail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END,
@@ -1913,7 +1961,7 @@ edit_mail_dialog (WEdit *edit)
 
     quick_dialog_t qdlg = {
         .rect = r,
-        .title = N_ ("Mail"),
+        .title = _ ("Mail"),
         .help = "[Input Line Keys]",
         .widgets = quick_widgets,
         .callback = NULL,

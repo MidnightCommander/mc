@@ -18,15 +18,10 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-/*** enums ***************************************************************************************/
+#define FLAG_TRUECOLOR   (1 << 24)
+#define COLORS_TRUECOLOR (1 << 24)
 
-typedef enum
-{
-    SPEC_A_REVERSE = -100,
-    SPEC_A_BOLD = -101,
-    SPEC_A_BOLD_REVERSE = -102,
-    SPEC_A_UNDERLINE = -103
-} tty_special_color_t;
+/*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -44,12 +39,14 @@ typedef struct
 
 extern gboolean use_colors;
 extern gboolean mc_tty_color_disable;
+extern gboolean need_convert_256color;
 
 /*** declarations of public functions ************************************************************/
 
 const char *tty_color_get_name_by_index (int idx);
 int tty_color_get_index_by_name (const char *color_name);
 int tty_attr_get_bits (const char *attrs);
+int convert_256color_to_truecolor (int color);
 
 void tty_color_init_lib (gboolean disable, gboolean force);
 void tty_color_deinit_lib (void);

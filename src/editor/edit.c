@@ -60,6 +60,7 @@
 #include "src/usermenu.h"  // user_menu_cmd()
 
 #include "src/keymap.h"
+#include "src/util.h"  // file_error_message()
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -197,8 +198,7 @@ edit_load_file_fast (edit_buffer_t *buf, const vfs_path_t *filename_vpath)
     file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
     if (file < 0)
     {
-        message (D_ERROR, MSG_ERROR, _ ("Cannot open %s for reading"),
-                 vfs_path_as_str (filename_vpath));
+        file_error_message (_ ("Cannot open\n%s"), vfs_path_as_str (filename_vpath));
         return FALSE;
     }
 
@@ -307,9 +307,8 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
         file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
         if (file < 0)
         {
-            errmsg = g_strdup_printf (_ ("Cannot open %s for reading"),
-                                      vfs_path_as_str (filename_vpath));
-            goto cleanup;
+            file_error_message (_ ("Cannot open\n%s"), vfs_path_as_str (filename_vpath));
+            return FALSE;
         }
 
         // New file, delete it if it's not modified or saved
@@ -319,16 +318,15 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
     // Check what we have opened
     if (mc_fstat (file, st) < 0)
     {
-        errmsg = g_strdup_printf (_ ("Cannot get size/permissions for %s"),
-                                  vfs_path_as_str (filename_vpath));
-        goto cleanup;
+        file_error_message (_ ("Cannot stat\n%s"), vfs_path_as_str (filename_vpath));
+        return FALSE;
     }
 
     // We want to open regular files only
     if (!S_ISREG (st->st_mode))
     {
         errmsg =
-            g_strdup_printf (_ ("\"%s\" is not a regular file"), vfs_path_as_str (filename_vpath));
+            g_strdup_printf (_ ("%s\nis not a regular file"), vfs_path_as_str (filename_vpath));
         goto cleanup;
     }
 
@@ -476,7 +474,7 @@ edit_load_position (WEdit *edit, gboolean load_position)
 
     load_file_position (edit->filename_vpath, &line, &column, &offset, &edit->serialized_bookmarks);
     // apply bookmarks in any case
-    book_mark_restore (edit, BOOK_MARK_COLOR);
+    book_mark_restore (edit, EDITOR_BOOKMARK_COLOR);
 
     if (!load_position)
         return;
@@ -508,7 +506,7 @@ edit_save_position (WEdit *edit)
         || *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) == '\0')
         return;
 
-    book_mark_serialize (edit, BOOK_MARK_COLOR);
+    book_mark_serialize (edit, EDITOR_BOOKMARK_COLOR);
     save_file_position (edit->filename_vpath, edit->buffer.curs_line + 1, edit->curs_col,
                         edit->buffer.curs1, edit->serialized_bookmarks);
     edit->serialized_bookmarks = NULL;
@@ -1773,25 +1771,35 @@ void
 edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
 {
     char *block_file;
-    gboolean mark;
-    off_t curs;
-    off_t start_mark, end_mark;
-    struct stat status;
+    struct stat status_before;
     vfs_path_t *block_file_vpath;
+    gboolean modified = FALSE;
 
     block_file = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
     block_file_vpath = vfs_path_from_str (block_file);
-    curs = edit->buffer.curs1;
-    mark = eval_marks (edit, &start_mark, &end_mark);
-    if (mark)
-        edit_save_block (edit, block_file, start_mark, end_mark);
 
-    // run shell scripts from menu
-    if (user_menu_cmd (CONST_WIDGET (edit), menu_file, selected_entry)
-        && (mc_stat (block_file_vpath, &status) == 0) && (status.st_size != 0))
+    const gboolean status_before_ok = mc_stat (block_file_vpath, &status_before) == 0;
+
+    // run menu command. It can or can not create or modify block_file
+    if (user_menu_cmd (CONST_WIDGET (edit), menu_file, selected_entry))
+    {
+        struct stat status_after;
+        const gboolean status_after_ok = mc_stat (block_file_vpath, &status_after) == 0;
+
+        // was block file created or modified by menu command?
+        modified = (!status_before_ok && status_after_ok)
+            || (status_before_ok && status_after_ok && status_after.st_size != 0
+                && (status_after.st_size != status_before.st_size
+                    || status_after.st_mtime != status_before.st_mtime));
+    }
+
+    if (modified)
     {
         gboolean rc = TRUE;
-        FILE *fd;
+        off_t start_mark, end_mark;
+
+        const off_t curs = edit->buffer.curs1;
+        const gboolean mark = eval_marks (edit, &start_mark, &end_mark);
 
         // i.e. we have marked block
         if (mark)
@@ -1805,15 +1813,16 @@ edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
             if (mark && ins_len > 0)
                 edit_set_markers (edit, start_mark, start_mark + ins_len, 0, 0);
         }
-        // truncate block file
-        fd = fopen (block_file, "w");
-        if (fd != NULL)
-            fclose (fd);
+
+        // delete block file
+        mc_unlink (block_file_vpath);
+
+        edit_cursor_move (edit, curs - edit->buffer.curs1);
     }
+
     g_free (block_file);
     vfs_path_free (block_file_vpath, TRUE);
 
-    edit_cursor_move (edit, curs - edit->buffer.curs1);
     edit->force |= REDRAW_PAGE;
     widget_draw (WIDGET (edit));
 }
@@ -1991,7 +2000,7 @@ edit_insert_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot open pipe for reading: %s"), p);
+            file_error_message (_ ("Cannot open pipe for reading\n%s"), p);
             ins_len = -1;
         }
         g_free (p);
@@ -3434,7 +3443,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         if (char_for_insertion > 127 && str_isutf8 (get_codepage_id (mc_global.source_codepage))
             && !mc_global.utf8_display)
         {
-            unsigned char str[UTF8_CHAR_LEN + 1];
+            unsigned char str[MB_LEN_MAX + 1];
             size_t i;
             int res;
 
@@ -3447,7 +3456,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
             else
                 str[res] = '\0';
 
-            for (i = 0; i <= UTF8_CHAR_LEN && str[i] != '\0'; i++)
+            for (i = 0; i <= MB_LEN_MAX && str[i] != '\0'; i++)
             {
                 char_for_insertion = str[i];
                 edit_insert (edit, char_for_insertion);
@@ -3791,15 +3800,15 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         break;
 
     case CK_Bookmark:
-        book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_FOUND_COLOR);
-        if (book_mark_query_color (edit, edit->buffer.curs_line, BOOK_MARK_COLOR))
-            book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
+        book_mark_clear (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_FOUND_COLOR);
+        if (book_mark_query_color (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_COLOR))
+            book_mark_clear (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_COLOR);
         else
-            book_mark_insert (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
+            book_mark_insert (edit, edit->buffer.curs_line, EDITOR_BOOKMARK_COLOR);
         break;
     case CK_BookmarkFlush:
-        book_mark_flush (edit, BOOK_MARK_COLOR);
-        book_mark_flush (edit, BOOK_MARK_FOUND_COLOR);
+        book_mark_flush (edit, EDITOR_BOOKMARK_COLOR);
+        book_mark_flush (edit, EDITOR_BOOKMARK_FOUND_COLOR);
         edit->force |= REDRAW_PAGE;
         break;
     case CK_BookmarkNext:

@@ -197,15 +197,8 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
     if (fwrite ((const void *) contents, 1, length, backup_fd) != length)
         ret1 = FALSE;
 
-    {
-        int ret2;
-
-        // cppcheck-suppress redundantAssignment
-        ret2 = fflush (backup_fd);
-        // cppcheck-suppress redundantAssignment
-        ret2 = fclose (backup_fd);
-        (void) ret2;
-    }
+    fflush (backup_fd);
+    fclose (backup_fd);
 
     g_free (contents);
     return ret1;
@@ -218,8 +211,6 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
 int
 is_printable (int c)
 {
-    /* "Display bits" is ignored, since the user controls the output
-       by setting the output codepage */
     return is_8bit_printable (c & 0xff);
 }
 
@@ -301,19 +292,31 @@ fake_name_quote (const char *s, gboolean quote_percent)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * path_trunc() is the same as str_trunc() but
- * it deletes possible password from path for security
- * reasons.
+ * path_trunc() is the same as str_trunc() but it deletes possible password from path
+ * for security reasons.
+ *
+ * @param path file path to trancate
+ * @param width width (in characters) of truncation result. If negative, full path will be kept.
+ *
+ * @returns pointer to trancated path. It points to the internal static buffer, do not call
+            g_free() to free it.
  */
 
 const char *
-path_trunc (const char *path, size_t trunc_len)
+path_trunc (const char *path, const ssize_t width)
 {
     vfs_path_t *vpath;
     const char *ret;
 
     vpath = vfs_path_from_str_flags (path, VPF_STRIP_PASSWORD);
-    ret = str_trunc (vfs_path_as_str (vpath), trunc_len);
+
+    const char *p = vfs_path_as_str (vpath);
+
+    if (width < 0)
+        ret = str_trunc (p, -1);
+    else
+        ret = str_trunc (p, (size_t) width);
+
     vfs_path_free (vpath, TRUE);
 
     return ret;
@@ -977,7 +980,7 @@ void
 load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, off_t *offset,
                     GArray **bookmarks)
 {
-    char *fn;
+    char *fn, *filename_str;
     FILE *f;
     char buf[MC_MAXPATHLEN + 100];
     const size_t len = vfs_path_len (filename_vpath);
@@ -998,13 +1001,15 @@ load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, 
     if (bookmarks != NULL)
         *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
 
+    filename_str = str_escape (vfs_path_as_str (filename_vpath), -1, "", TRUE);
+
     while (fgets (buf, sizeof (buf), f) != NULL)
     {
         const char *p;
         gchar **pos_tokens;
 
         // check if the filename matches the beginning of string
-        if (strncmp (buf, vfs_path_as_str (filename_vpath), len) != 0)
+        if (strncmp (buf, filename_str, len) != 0)
             continue;
 
         // followed by single space
@@ -1056,6 +1061,7 @@ load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, 
         g_strfreev (pos_tokens);
     }
 
+    g_free (filename_str);
     fclose (f);
 }
 
@@ -1070,6 +1076,7 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
 {
     static size_t filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
+    char *filename_str = NULL;
     FILE *f, *tmp_f;
     char buf[MC_MAXPATHLEN + 100];
     size_t i;
@@ -1099,12 +1106,12 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
         goto open_source_error;
     }
 
+    filename_str = str_escape (vfs_path_as_str (filename_vpath), -1, "", TRUE);
+
     // put the new record
     if (line != 1 || column != 0 || bookmarks != NULL)
     {
-        if (fprintf (f, "%s %ld;%ld;%" PRIuMAX, vfs_path_as_str (filename_vpath), line, column,
-                     (uintmax_t) offset)
-            < 0)
+        if (fprintf (f, "%s %ld;%ld;%" PRIuMAX, filename_str, line, column, (uintmax_t) offset) < 0)
             goto write_position_error;
         if (bookmarks != NULL)
             for (i = 0; i < bookmarks->len && i < MAX_SAVED_BOOKMARKS; i++)
@@ -1118,7 +1125,7 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
     i = 1;
     while (fgets (buf, sizeof (buf), tmp_f) != NULL)
     {
-        if (buf[len] == ' ' && strncmp (buf, vfs_path_as_str (filename_vpath), len) == 0
+        if (buf[len] == ' ' && strncmp (buf, filename_str, len) == 0
             && strchr (&buf[len + 1], ' ') == NULL)
             continue;
 
@@ -1128,6 +1135,7 @@ save_file_position (const vfs_path_t *filename_vpath, long line, long column, of
     }
 
 write_position_error:
+    g_free (filename_str);
     fclose (tmp_f);
 open_source_error:
     g_free (tmp_fn);

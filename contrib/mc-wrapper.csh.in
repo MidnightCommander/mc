@@ -6,7 +6,8 @@ else
 	setenv MC_PWD_FILE "`mktemp '/tmp/mc.pwd.XXXXXX'`"
 endif
 
-@bindir@/mc -P "$MC_PWD_FILE" $*
+set MC_STATUS=0
+@bindir@/mc -P "$MC_PWD_FILE" $* || set MC_STATUS=$?
 
 if (-r "$MC_PWD_FILE") then
 	setenv MC_PWD "`cat '$MC_PWD_FILE'`"
@@ -16,5 +17,7 @@ if (-r "$MC_PWD_FILE") then
 	unsetenv MC_PWD
 endif
 
-rm -f "$MC_PWD_FILE"
+# invoke the external rm command, avoiding shell alias
+'rm' -f "$MC_PWD_FILE"
 unsetenv MC_PWD_FILE
+eval "unset MC_STATUS; exit $MC_STATUS"

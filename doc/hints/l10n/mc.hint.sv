@@ -14,9 +14,9 @@ Tips: Välja kataloger: Lägg till snedstreck i slutet av det matchande mönstre
 
 Tips: Om din terminal saknar funktionstangenter, använd ESC+siffersekvens.
 
-Tips: Hemsidan för GNU Midnight Commander: https://midnight-commander.org
+Tips: Webbsidan för GNU Midnight Commander: https://midnight-commander.org
 
-Tips: Skicka felrapporter till mc-devel@lists.midnight-commander.org
+Hint: Please file any bug reports at https://github.com/MidnightCommander/mc/issues
 
 Tips: Tab ändrar din nuvarande panel.
 

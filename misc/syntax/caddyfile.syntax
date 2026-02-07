@@ -1,0 +1,291 @@
+# Caddyfile syntax highlighting
+# Reference: https://caddyserver.com/docs/caddyfile
+
+context default
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.
+
+# Snippet definitions - match the opening parenthesis and name
+    keyword linestart (*) brightmagenta
+
+# Named routes
+    keyword linestart &(*) brightmagenta
+
+# Site addresses and labels (at start of line, not indented)
+    keyword linestart http:// brightmagenta
+    keyword linestart https:// brightmagenta
+    keyword linestart localhost brightmagenta
+
+# Block delimiters
+    keyword { yellow
+    keyword } yellow
+
+# Separators and operators
+    keyword , brightcyan
+    keyword = brightcyan
+
+# All types of placeholders with dots and underscores
+    keyword {http.*} brightred
+    keyword {system.*} brightred
+    keyword {client_ip} brightred
+    keyword {uri} brightred
+    keyword {path} brightred
+    keyword {query} brightred
+    keyword {host} brightred
+    keyword {method} brightred
+    keyword {scheme} brightred
+    keyword {remote} brightred
+    keyword {file} brightred
+    keyword {dir} brightred
+    keyword {\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.\]} brightred
+
+# Environment variables
+    keyword {$*} brightred
+    keyword {%*%} brightred
+
+# Boolean values
+    keyword whole true brightgreen
+    keyword whole false brightgreen
+    keyword whole on brightgreen
+    keyword whole off brightgreen
+
+# HTTP methods
+    keyword whole GET brightgreen
+    keyword whole POST brightgreen
+    keyword whole PUT brightgreen
+    keyword whole DELETE brightgreen
+    keyword whole PATCH brightgreen
+    keyword whole HEAD brightgreen
+    keyword whole OPTIONS brightgreen
+
+# Common protocols
+    keyword whole http brightblue
+    keyword whole https brightblue
+
+# Standard HTTP Directives (Caddy v1)
+    keyword whole basicauth yellow
+    keyword whole bind yellow
+    keyword whole browse yellow
+    keyword whole errors yellow
+    keyword whole expvar yellow
+    keyword whole ext yellow
+    keyword whole fastcgi yellow
+    keyword whole gzip yellow
+    keyword whole header yellow
+    keyword whole import yellow
+    keyword whole index yellow
+    keyword whole internal yellow
+    keyword whole limits yellow
+    keyword whole log yellow
+    keyword whole markdown yellow
+    keyword whole mime yellow
+    keyword whole on yellow
+    keyword whole pprof yellow
+    keyword whole proxy yellow
+    keyword whole push yellow
+    keyword whole redir yellow
+    keyword whole request_id yellow
+    keyword whole rewrite yellow
+    keyword whole root yellow
+    keyword whole status yellow
+    keyword whole templates yellow
+    keyword whole timeouts yellow
+    keyword whole tls yellow
+    keyword whole websocket yellow
+
+# Caddy v2 directives
+    keyword whole file_server yellow
+    keyword whole reverse_proxy yellow
+    keyword whole respond yellow
+    keyword whole route yellow
+    keyword whole handle yellow
+    keyword whole handle_path yellow
+    keyword whole handle_errors yellow
+    keyword whole encode yellow
+    keyword whole php_fastcgi yellow
+    keyword whole uri yellow
+    keyword whole try_files yellow
+    keyword whole vars yellow
+    keyword whole request_body yellow
+    keyword whole abort yellow
+    keyword whole acme_server yellow
+    keyword whole basic_auth yellow
+    keyword whole forward_auth yellow
+    keyword whole fs yellow
+    keyword whole intercept yellow
+    keyword whole invoke yellow
+    keyword whole log_append yellow
+    keyword whole log_skip yellow
+    keyword whole log_name yellow
+    keyword whole map yellow
+    keyword whole method yellow
+    keyword whole metrics yellow
+    keyword whole push yellow
+    keyword whole request_header yellow
+    keyword whole tracing yellow
+
+# Popular plugin directives
+    keyword whole cache yellow
+    keyword whole cors yellow
+    keyword whole jwt yellow
+    keyword whole ratelimit yellow
+    keyword whole realip yellow
+    keyword whole filter yellow
+    keyword whole git yellow
+    keyword whole prometheus yellow
+    keyword whole ipfilter yellow
+    keyword whole forwardproxy yellow
+    keyword whole login yellow
+    keyword whole authz yellow
+    keyword whole minify yellow
+    keyword whole expires yellow
+    keyword whole locale yellow
+    keyword whole webdav yellow
+    keyword whole awslambda yellow
+    keyword whole awses yellow
+
+# Common subdirectives and options (with underscores)
+    keyword whole to brightcyan
+    keyword whole transparent brightcyan
+    keyword whole upstream brightcyan
+    keyword whole policy brightcyan
+    keyword whole health_check brightcyan
+    keyword whole header_upstream brightcyan
+    keyword whole header_downstream brightcyan
+    keyword whole header_up brightcyan
+    keyword whole header_down brightcyan
+    keyword whole websocket brightcyan
+    keyword whole preset brightcyan
+    keyword whole except brightcyan
+    keyword whole only brightcyan
+    keyword whole not brightcyan
+    keyword whole match brightcyan
+    keyword whole matcher brightcyan
+    keyword whole strip_prefix brightcyan
+    keyword whole strip_suffix brightcyan
+    keyword whole lb_policy brightcyan
+    keyword whole lb_try_duration brightcyan
+    keyword whole lb_try_interval brightcyan
+
+# AWS Lambda specific subdirectives
+    keyword whole aws_access brightcyan
+    keyword whole aws_secret brightcyan
+    keyword whole aws_region brightcyan
+    keyword whole function_name brightcyan
+    keyword whole aws_endpoint brightcyan
+    keyword whole qualifier brightcyan
+    keyword whole include_body brightcyan
+    keyword whole timeout brightcyan
+
+# TLS options
+    keyword whole self_signed brightcyan
+    keyword whole dns brightcyan
+    keyword whole ca brightcyan
+    keyword whole protocols brightcyan
+    keyword whole ciphers brightcyan
+    keyword whole curves brightcyan
+    keyword whole alpn brightcyan
+    keyword whole must_staple brightcyan
+    keyword whole key_type brightcyan
+    keyword whole load brightcyan
+    keyword whole clients brightcyan
+    keyword whole client_auth brightcyan
+
+# Global options (top-level block)
+    keyword whole debug brightcyan
+    keyword whole http_port brightcyan
+    keyword whole https_port brightcyan
+    keyword whole default_bind brightcyan
+    keyword whole order brightcyan
+    keyword whole storage brightcyan
+    keyword whole storage_clean_interval brightcyan
+    keyword whole admin brightcyan
+    keyword whole persist_config brightcyan
+    keyword whole grace_period brightcyan
+    keyword whole shutdown_delay brightcyan
+    keyword whole metrics brightcyan
+    keyword whole auto_https brightcyan
+    keyword whole email brightcyan
+    keyword whole default_sni brightcyan
+    keyword whole fallback_sni brightcyan
+    keyword whole local_certs brightcyan
+    keyword whole skip_install_trust brightcyan
+    keyword whole acme_ca brightcyan
+    keyword whole acme_ca_root brightcyan
+    keyword whole acme_eab brightcyan
+    keyword whole acme_dns brightcyan
+    keyword whole dns brightcyan
+    keyword whole ech brightcyan
+    keyword whole on_demand_tls brightcyan
+    keyword whole cert_issuer brightcyan
+    keyword whole renew_interval brightcyan
+    keyword whole cert_lifetime brightcyan
+    keyword whole ocsp_interval brightcyan
+    keyword whole ocsp_stapling brightcyan
+    keyword whole preferred_chains brightcyan
+    keyword whole servers brightcyan
+    keyword whole filesystem brightcyan
+    keyword whole pki brightcyan
+    keyword whole events brightcyan
+    keyword whole keepalive_interval brightcyan
+    keyword whole client_ip_headers brightcyan
+    keyword whole trusted_proxies brightcyan
+    keyword whole trusted_proxies_strict brightcyan
+    keyword whole log_credentials brightcyan
+    keyword whole strict_sni_host brightcyan
+    keyword whole enable_full_duplex brightcyan
+    keyword whole max_header_size brightcyan
+
+# Matchers
+    keyword whole path brightcyan
+    keyword whole path_regexp brightcyan
+    keyword whole method brightcyan
+    keyword whole query brightcyan
+    keyword whole header_regexp brightcyan
+    keyword whole protocol brightcyan
+    keyword whole expression brightcyan
+    keyword whole file brightcyan
+    keyword whole remote_ip brightcyan
+    keyword whole host brightcyan
+    keyword whole client_ip brightcyan
+    keyword whole vars brightcyan
+    keyword whole vars_regexp brightcyan
+    keyword whole not brightcyan
+
+# Named matcher token
+    keyword @\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] brightmagenta
+
+# Arguments that start with + or - (like +header or -header)
+    keyword +\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] white
+    keyword -\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_\] white
+
+# Numbers (ports, status codes, sizes)
+    keyword whole :\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]k brightgreen
+    keyword whole \{0123456789\}\[0123456789\]m brightgreen
+    keyword whole \{0123456789\}\[0123456789\]g brightgreen
+    keyword whole \{0123456789\}\[0123456789\]s brightgreen
+    keyword whole \{0123456789\}\[0123456789\]ms brightgreen
+    keyword whole \{0123456789\}\[0123456789\]h brightgreen
+
+# Comments
+context # \n brown
+    spellcheck
+
+# String literals with quotes
+context " " green
+    keyword \\" brightgreen
+    keyword {*} brightred
+
+# Backtick-quoted strings
+context ` ` green
+    keyword \\` brightgreen
+    keyword {*} brightred
+
+# Heredocs (common markers)
+context whole <<\[\s\]\[-\]\[\s\]CSS CSS green
+context whole <<\[\s\]\[-\]\[\s\]HTML HTML green
+context whole <<\[\s\]\[-\]\[\s\]JSON JSON green
+context whole <<\[\s\]\[-\]\[\s\]JAVASCRIPT JAVASCRIPT green
+context whole <<\[\s\]\[-\]\[\s\]JS JS green
+context whole <<\[\s\]\[-\]\[\s\]XML XML green

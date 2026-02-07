@@ -5,6 +5,11 @@
 *~
 *.cache
 *.tar.gz
+# autoconf runs "mktemp ./confXXXXXX"
+/conf??????/
+/confdefs.h
+/conftest.err
+/conftest.c
 ABOUT-NLS
 Make.common
 Makefile
@@ -33,7 +38,6 @@ stamp-h?
 stamp-h.in
 tmpout
 debug
-Doxyfile
 mc.kdevelop
 version.h
 TAGS
@@ -45,6 +49,11 @@ make.log
 make.clang
 make.gcc
 make.tcc
+misc/mc.ext.ini
+mc.charsets
+src/vfs/extfs/helpers/torrent
+src/vfs/extfs/helpers/uc1541
 tests/src/editor/test-data.txt
+src/vfs/extfs/helpers/usqfs
 tests/src/vfs/extfs/helpers-list/data/config.sh
 mc-version.h

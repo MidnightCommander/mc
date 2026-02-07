@@ -180,7 +180,7 @@ buttonbar_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void 
         {
             buttonbar_init_button_positions (bb);
             widget_gotoyx (w, 0, 0);
-            tty_setcolor (DEFAULT_COLOR);
+            tty_setcolor (CORE_DEFAULT_COLOR);
             tty_printf ("%-*s", w->rect.cols, "");
             widget_gotoyx (w, 0, 0);
 

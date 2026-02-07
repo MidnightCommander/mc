@@ -29,14 +29,6 @@ Colors
 .\"Colors"
 for more information.
 .TP
-.I \-C arg, \-\-colors=arg
-Specify a different color set in the command line.  The format of arg is
-documented in the
-.\"LINK2"
-Colors
-.\"Colors"
-section.
-.TP
 .I \-\-configure\-options
 Display configure options.
 .TP
@@ -59,10 +51,6 @@ Midnight Commander.
 Force a "normal tracking" mouse mode. Used when running on
 xterm\-capable terminals (tmux/screen).
 .TP
-.I \-k, \-\-resetsoft
-Reset softkeys to their default from the termcap/terminfo
-database. Only useful on HP terminals when the function keys don't work.
-.TP
 .I \-K file, \-\-keymap=file
 Specify a name of keymap file in the command line.
 .TP
@@ -78,9 +66,11 @@ not meant to be used directly.  Instead, it's used from a special shell
 script that automatically changes the current directory of the shell to
 the last directory Midnight Commander was in. Source the file
 .B %pkglibexecdir%/mc.sh
-(bash and zsh users) or
-.B %libexecdir%/mc.csh
-(tcsh users) respectively to define
+(bash and zsh users),
+.B %pkglibexecdir%/mc.csh
+(tcsh users), or
+.B %pkglibexecdir%/mc.fish
+(fish users) respectively to define
 .B mc
 as an alias to the appropriate shell script.
 .TP
@@ -444,7 +434,7 @@ look at the section on
 Left and Right Menus\&.
 .\"Left and Right Menus"
 .TP
-.B Tab, C\-i
+.B Tab, C\-i, left\-key, right\-key
 change the current panel. The old other panel becomes the new current
 panel and the old current panel becomes the new other panel. The
 selection bar moves from the old current panel to the new current
@@ -518,6 +508,9 @@ move the selection bar one page down.
 .TP
 .B prev\-page, Alt\-v
 move the selection bar one page up.
+.TP
+.B Alt\-(, Alt\-)
+scroll long filenames to the right or left.
 .TP
 .B Alt\-o
 If the currently selected file is a directory, load that directory on
@@ -810,7 +803,8 @@ displays the file size.
 is an alternative form of the
 .B size
 format. It displays the size of the files and for directories it just
-shows SUB\-DIR or UP\-\-DIR.
+shows SUB\-DIR or UP\-\-DIR unless the directory size is computed by the
+"Show directory sizes" command.
 .TP
 .B type
 displays a one character wide type field.  This character is similar to
@@ -906,6 +900,15 @@ half name | size:7 | type mode:3
 .PP
 Panels may also be set to the following modes:
 .TP
+.B "Quick View"
+In this mode, the panel will switch to a reduced
+.\"LINK2"
+viewer
+.\"Internal File Viewer"
+that displays the contents of the currently selected file, if you
+select the panel (with the tab key or the mouse), you will have access
+to the usual viewer commands.
+.TP
 .B "Info"
 The info view display information related to the currently
 selected file and if possible information about the current file
@@ -918,17 +921,20 @@ directory tree
 .\"Directory Tree"
 feature. See the section about it for more information.
 .TP
-.B "Quick View"
-In this mode, the panel will switch to a reduced
+.B "Panelize"
+This mode shows the results of the latest
 .\"LINK2"
-viewer
-.\"Internal File Viewer"
-that displays the contents of the currently selected file, if you
-select the panel (with the tab key or the mouse), you will have access
-to the usual viewer commands.
+External panelize
+.\"External panelize"
+or
+.\"LINK2"
+Find file
+.\"Find File"
+commands.
 .\"NODE "    Sort Order..."
 .SH "    Sort Order..."
-The eight sort orders are by name, by extension, by modification time,
+The eight sort orders are by name (alphabetical sort or version sort,
+also known as natural sort), by extension, by modification time,
 by access time, and by inode information modification time, by size,
 by inode and unsorted.  In the Sort order dialog box you can choose
 the sort order and you may also specify if you want to sort in reverse
@@ -1198,6 +1204,13 @@ Used to unselect a group of files. This is the opposite of the
 .I "Select group"
 command.
 .PP
+.B Invert selection (*)
+.PP
+Select (tag) all items that are currently unselected, and unselect
+(untag) all items that are currently selected. Applies to only files
+or to both files and directories, depending on whether 'Reverse files
+only' is enabled.
+.PP
 .B Quit (F10, S\-F10)
 .PP
 Terminate Midnight Commander. S\-F10 is used when you want to
@@ -1406,7 +1419,8 @@ search. The Quit button quits the search operation. The Panelize
 button will place the found files to the current directory panel so
 that you can do additional operations on them (view, copy, move,
 delete and so on). To return to the normal file listing, change directory
-to "..".
+to ".."; to see the panelized search results again, select the Panelize
+mode in the Left and Right menu.
 .PP
 The 'Enable ignore directories' checkbox and input field below it
 allow one to set up the list of directories that should be skip during the search
@@ -1448,7 +1462,9 @@ find . \-type l \-print
 .PP
 Upon command completion, the directory contents of the panel will no
 longer be the directory listing of the current directory, but all the
-files that are symbolic links.
+files that are symbolic links. To return to the normal file listing,
+change directory to ".."; to see the command output again, select
+the Panelize mode in the Left and Right menu.
 .PP
 If you want to panelize all of the files that have been downloaded
 from your FTP server, you can use this awk command to extract the file
@@ -1680,13 +1696,6 @@ The
 Appearance
 .\"Appearance"
 command pops up a dialog from which you specify the skin.
-.PP
-The
-.\"LINK2"
-Display bits
-.\"Display bits"
-command pops up a dialog from which you may select which characters is your
-terminal able to display.
 .PP
 The
 .\"LINK2"
@@ -1971,11 +1980,8 @@ If enabled, the selection bar will move down when you mark a file (with
 Insert key). Enabled by default.
 .PP
 .I Reverse files only.
-Allow revert selection of files only. Enabled by default.
-If enabled, the reverse selection is applied to files only, not to directories.
-The selection of directories is untouched. If off, the reverse selection
-is applied to files as well to directories: all unselected items become
-selected, and vice versa.
+If enabled, 'Invert selection' in the File menu will apply to only files
+rather than to both files and directories. Enabled by default.
 .PP
 .I Simple swap.
 If both panels contain file listing, simple swap means that panels exchange
@@ -2065,13 +2071,6 @@ section for technical details about the skin definition files.
 .PP
 .I Shadows.
 If this option is enabled, all dialogs and drop down menus will have a shadow.
-.\"NODE "    Display bits"
-.SH "    Display bits"
-This is used to configure the range of visible characters on the
-screen.  This setting may be 7\-bits if your terminal/curses supports
-only seven output bits, ISO\-8859\-1 displays all the characters in the
-ISO\-8859\-1 map and full 8 bits is for those terminals that can display
-full 8 bit characters.
 .\"NODE "    Learn keys"
 .SH "    Learn keys"
 This dialog allows you to test and redefine functional keys, cursor
@@ -2299,7 +2298,7 @@ menu only.
 .I %y
 The syntax type of current file. For edit menu only.
 .TP
-.I %k
+.I %b
 The block file name.
 .TP
 .I %e
@@ -2315,7 +2314,7 @@ In mcedit user menu: the name of opened file.
 .I %x
 The extension of current file name.
 .TP
-.I %b
+.I %n
 The current file name without extension.
 .TP
 .I %d
@@ -2333,6 +2332,9 @@ The currently tagged files.
 .I %T
 The tagged files in the unselected panel.
 .TP
+.TP
+.IR %v " and " %V
+Similar to the %t and %T, but expands to full names of tagged files.
 .IR %u " and " %U
 Similar to the %t and %T macros, but in addition the files are untagged.
 You can use this macro only once per menu file entry or extension file
@@ -2717,6 +2719,11 @@ will be copied into
 determines whether to preserve the permissions, timestamps and (if you
 are root) the ownership of the original files.  If this option is not
 set, the current value of the umask will be respected.
+.PP
+.B Preserve ext2 attributes
+.PP
+determines whether to preserve the attributes of files and directories
+on an ext2/3/4 file system.
 .PP
 .B Use shell patterns
 .PP
@@ -3103,11 +3110,6 @@ file
 which is copied to
 .B ~/.local/share/mc/mcedit/edit.indent.rc
 in your home directory the first time you use it.
-.PP
-The editor also displays non\-us characters (160+). When editing
-binary files, you should set
-.B display bits
-to 7 bits in the options menu to keep the spacing clean.
 
 .\"NODE "Internal File Editor / options"
 .SH "Options of editor in ini\-file"
@@ -3387,28 +3389,6 @@ nevertheless (at you own risk).
 .PP
 .B [No]
 abort connection.
-.\"NODE "  Undelete File System"
-.SH "  Undelete File System"
-On Linux systems, if you asked configure to use the ext2fs undelete
-facilities, you will have the undelete file system available.
-Recovery of deleted files is only available on ext2 file systems.  The
-undelete file system is just an interface to the ext2fs library to
-retrieve all of the deleted files names on an ext2fs and provides and
-to extract the selected files into a regular partition.
-.PP
-To use this file system, you have to chdir into the special file name
-formed by the "undel://" prefix and the file name where the actual
-file system resides.
-.PP
-For example, to recover deleted files on the second partition of the
-first SCSI disk on Linux, you would use the following path name:
-.PP
-.nf
-    undel://sda2
-.fi
-.PP
-It may take a while for the undelfs to load the required information
-before you start browsing files there.
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs
@@ -3552,111 +3532,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 The program can be compiled with both ncurses and S\-Lang, ncurses does
 not provide a way to force color mode: ncurses uses just the
 information in the terminal database.
-.PP
-Midnight Commander provides a way to change the default colors.
-Currently the colors are configured using the environment variable
-.B MC_COLOR_TABLE
-or the Colors section in the initialization file.
-.PP
-In the Colors section, the default color map is loaded from the
-.I base_color
-variable.  You can specify an alternate color map for a terminal by
-using the terminal name as the key in this section.  Example:
-.PP
-.nf
-[Colors]
-base_color=
-xterm=menu=magenta:marked=,magenta:markselect=,red
-.fi
-.PP
-The format for the color definition is:
-.PP
-.nf
-  <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>=...
-.fi
-.PP
-The colors are optional, and the keywords are: normal, selected, disabled, marked,
-markselect, errors, input, inputmark, inputunchanged, commandlinemark,
-reverse, gauge, header, inputhistory, commandhistory. Button bar colors are:
-bbarhotkey, bbarbutton. Status bar color: statusbar. Menu colors are: menunormal,
-menusel, menuhot, menuhotsel, menuinactive. Dialog colors are: dnormal, dfocus,
-dhotnormal, dhotfocus, dtitle. Error dialog colors are: errdfocus, errdhotnormal,
-errdhotfocus, errdtitle.  Help colors are: helpnormal, helpitalic, helpbold,
-helplink, helpslink, helptitle.  Viewer colors are: viewnormal, viewbold,
-viewunderline, viewselected. Editor colors are: editnormal, editbold, editmarked,
-editwhitespace, editnonprintable, editlinestate. Popup menu colors are: pmenunormal,
-pmenusel, pmenutitle.
-.PP
-.I header
-determines the color of panel header, the line that contains column titles
-and sort mode indicator.
-.PP
-.I input
-determines the color of input lines used in query dialogs.
-.PP
-.I gauge
-determines the color of the filled part of the progress bar (gauge),
-which is used to show the user the progress of file operations, such as
-copying.
-.PP
-.I disabled
-determines the color of the widget that cannot be selected.
-.PP
-The dialog boxes use the following colors:
-.I dnormal
-is used for the normal text,
-.I dfocus
-is the color used for the currently selected component,
-.I dhotnormal
-is the color used to differentiate the hotkey color in normal
-components, whereas the
-.I dhotfocus
-color is used for the highlighted color in the currently selected
-component.
-.PP
-Menus use the same scheme but uses the menunormal, menusel, menuhot, menuhotsel
-and menuinactive tags instead.
-.PP
-Help uses the following colors:
-.I helpnormal
-is used for normal text,
-.I helpitalic
-is used for text which is emphasized in italic in the manual page,
-.I helpbold
-is used for text which is emphasized in bold in the manual page,
-.I helplink
-is used for not selected hyperlinks and
-.I helpslink
-is used for selected hyperlink.
-.PP
-Popup menu uses following colors:
-.I pmenunormal
-is used for non\-selected menu items and as a main color of popup menu window,
-.I pmenusel
-is used for selected menu item,
-.I pmenutitle
-is used for popup menu title.
-.PP
-The possible colors are: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white. And there is a special keyword
-for transparent background. It is 'default'. The 'default' can only be
-used for background color. Another special keyword "base" means mc's main
-colors.  When 256 colors are available, they can be specified either as
-color16 to color255, or as rgb000 to rgb555 and gray0 to gray23. Example:
-.PP
-.nf
-[Colors]
-base_color=normal=white,default:marked=magenta,default
-.fi
-.PP
-Attributes can be any of bold, italic, underline, reverse and blink, appended by a
-plus sign if more than one are desired.  The special word "none" means no
-attributes, without attempting to fall back to base_color.  Example:
-.PP
-.nf
-menuhotsel=yellow;black;bold+underline
-.fi
 
 .\"NODE "Skins"
 .SH "Skins"
@@ -3711,325 +3586,12 @@ or without it). Search of skin\-file will occur in (to the first one found):
 .br
 
 .PP
-For getting extended info, refer to:
-.IP
-.\"LINK2"
-Description of section and parameters
-.\"Skins sections"
-.br
-.\"LINK2"
-Color pair definitions
-.\"Skins colors"
-.br
-.\"LINK2"
-Color and attribute aliases
-.\"Skins aliases"
-.br
-.\"LINK2"
-Draw lines
-.\"Skins lines"
-.br
-.\"LINK2"
-Compatibility
-.\"Skins oldcolors"
-.br
+The format of skin files is described in
+.BR %pkgdatadir%/skins/README.txt .
 
-.\"NODE "  Skins sections"
-.SH "  Description of section and parameters"
-
-Section
-.B [skin]
-contain metainfo for skin\-file. Parameter
-.I description
-contain short text about skin.
-
-.PP
-Section
-.B [filehighlight]
-contain descriptions of color pairs for filenames highlighting.
-Name of parameters must be equal to names of sections into
-filehighlight.ini file.
-See
-.\"LINK2"
-Filenames Highlight
-.\"Filenames Highlight"
-for getting more info.
-
-.PP
-Section
-.B [core]
-describes the elements that are used everywhere.
-.TP
-.I _default_
-Default color pair. Used in all other sections if they not contain
-color definitions
-.TP
-.I selected
-cursor
-.TP
-.I marked
-selected data
-.TP
-.I markselect
-cursor on selected data
-.TP
-.I gauge
-color of the filled part of the progress bar
-.TP
-.I input
-color of input lines used in query dialogs
-.TP
-.I inputmark
-color of input selected text
-.TP
-.I inputunchanged
-color of input text before first modification or cursor movement
-.TP
-.I commandlinemark
-color of selected text in command line
-.TP
-.I reverse
-reverse color
-.PP
-Section
-.B [dialog]
-describes the elements that are placed on dialog windows (except error dialogs).
-.TP
-.I _default_
-Default color for this section. Used [core]._default_ if not specified
-.TP
-.I dfocus
-Color of active element (in focus)
-.TP
-.I dhotnormal
-Color of hotkeys
-.TP
-.I dhotfocus
-Color of hotkeys in focused element
-
-.PP
-Section
-.B [error]
-describes the elements that are placed on error dialog windows
-.TP
-.I _default_
-Default color for this section. Used [core]._default_ if not specified
-.TP
-.I errdhotnormal
-Color of hotkeys
-.TP
-.I errdhotfocus
-Color of hotkeys in focused element
-
-.PP
-Section
-.B [menu]
-describes the elements that are placed in menu. This section describes
-system menu (called by F9) and user\-defined menus (called by F2 in panels
-and by F11 in editor).
-.TP
-.I _default_
-Default color for this section. Used [core]._default_ if not specified
-.TP
-.I entry
-Color of menu items
-.TP
-.I menuhot
-Color of menu hotkeys
-.TP
-.I menusel
-Color of active menu item (in focus)
-.TP
-.I menuhotsel
-Color of menu hotkeys in focused menu item
-.TP
-.I menuinactive
-Color of inactive menu
-
-.PP
-Section
-.B [help]
-describes the elements that are placed on help window.
-.TP
-.I _default_
-Default color for this section. Used [core]._default_ if not specified
-.TP
-.I helpitalic
-Color pair for element with
-.B italic
-attribute
-.TP
-.I helpbold
-Color pair for element with
-.B bold
-attribute
-.TP
-.I helplink
-Color of links
-.TP
-.I helpslink
-Color of active link (on focus)
-
-.PP
-Section
-.B [editor]
-describes the colors of elements placed in editor.
-.TP
-.I _default_
-Default color for this section. Used [core]._default_ if not specified
-.TP
-.I editbold
-Color pair for element with
-.B bold
-attribute
-.TP
-.I editmarked
-Color of selected text
-.TP
-.I editwhitespace
-Color of tabs and trailing spaces highlighting
-.TP
-.I editlinestate
-Color for line state area
-
-.PP
-Section
-.B [viewer]
-describes the colors of elements placed in viewer.
-.TP
-.I viewunderline
-Color pair for element with
-.B underline
-attribute
-
-.\"NODE "  Skins colors"
-.SH "  Color pair definitions"
-Any parameter in skin\-file contain definition of color pair.
-.PP
-Color pairs described as two colors and the optional attributes
-separated by ';'. First field sets the foreground color, second
-field sets background color, third field sets the attributes.
-Any of the fields may be omitted, in this case value will be
-taken from default color pair (global color pair or from default
-color pair of this section).
-.PP
-Example:
-.br
-.nf
-[core]
-    # green on black
-    _default_=green;black
-    # green (default) on blue
-    selected=;blue
-    # yellow on black (default)
-    # underlined yellow on black (default)
-    marked=yellow;;underline
-.fi
-
-.PP
-Possible colors (names) and attributes are described in
-.\"LINK2"
-Colors\&.
-.\"Colors"
-section.
-
-.\"NODE "  Skins aliases"
-.SH "  Color and attribute aliases"
-This optional section might define aliases for single colors (not color pairs)
-as well as combination of attributes; in other words, for semicolon\-separated
-fragments of parameters. Aliases can refer to other aliases as long as they
-don't form a loop.
-.PP
-Example:
-.br
-.nf
-[aliases]
-    myfavfg=green
-    myfavbg=black
-    myfavattr=bold+italic
-[core]
-    _default_=myfavfg;myfavbg;myfavattr
-.fi
-
-.\"NODE "  Skins lines"
-.SH "  Draw lines"
-Lines sets in section
-.B [Lines]
-into skin\-file. By default single lines are used, but you may redefine
-to usage of any utf\-8 symbols (like to lines, for example).
-.PP
-.I WARNING!!!
-When you build Midnight Commander with the ncurses screen library
-usage of drawing lines is limited!
-Possible only drawing a single lines.
-For all questions and comments please contact the developers of ncurses.
-
-.PP
-Descriptions of parameters
-.BR [Lines] :
-.TP
-.I lefttop
-left\-top line fragment.
-.TP
-.I righttop
-right\-top line fragment.
-.TP
-.I centertop
-down branch of horizontal line
-.TP
-.I centerbottom
-up branch of horizontal line
-.TP
-.I leftbottom
-left\-bottom line fragment
-.TP
-.I rightbottom
-right\-bottom line fragment
-.TP
-.I leftmiddle
-right branch of vertical line
-.TP
-.I rightmiddle
-left branch of vertical line
-.TP
-.I centermiddle
-cross of lines
-.TP
-.I horiz
-horizontal line
-.TP
-.I vert
-vertical line
-.TP
-.I thinhoriz
-thin horizontal line
-.TP
-.I thinvert
-thin vertical line
-
-
-.\"NODE "  Skins oldcolors"
-.SH "  Compatibility"
-
-Appointment of color  by skin\-files fully compatible with
-the appointment of the colors described in
-.\"LINK2"
-Colors\&.
-.\"Colors"
-section.
-.PP
-In this case, reassignment of colors has priority over the skin file and is
-complementary.
-
-.\"NODE "Filenames Highlight"
 .SH "Filenames Highlight"
 Section [filehighlight] in current skin\-file contains key names as
-highlight groups and values as color pairs. Color pairs is documented
-in
-.\"LINK2"
-Skins
-.\"Skins"
-section.
+highlight groups and values as color pairs.
 .PP
 Rules of filenames highlight are placed in %pkgdatadir%/filehighlight.ini file
 (~/.config/mc/filehighlight.ini).
@@ -4138,20 +3700,6 @@ Change the time format used to display  dates older than 6 months from
 now or for dates in the future.
 See strftime or date man page for the format specification. If this
 option is absent, default timeformat is used.
-.TP
-.I torben_fj_mode
-If this flag is set, then the home and end keys will work slightly
-different on the panels, instead of moving the selection to the first
-and last files in the panels, they will act as follows:
-.IP
-The home key will: Go up to the middle line, if below it; else go to the
-top line unless it is already on the top line, in this case it will go
-to the first file in the panel.
-.IP
-The end key has a similar behavior: Go down to the middle line, if over
-it; else go to the bottom line unless you already are at the bottom
-line, in such case it will move the selection to the last file name in
-the panel.
 .TP
 .I use_file_to_guess_type
 If this variable is on (the default) it will spawn the file command to
@@ -4372,7 +3920,7 @@ help for details on the License and the lack of warranty.
 .\"NODE "AVAILABILITY"
 .SH "AVAILABILITY"
 The latest version of this program can be found at
-https://ftp.osuosl.org/pub/midnightcommander/ .
+\X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .\"NODE "SEE ALSO"
 .SH "SEE ALSO"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
@@ -4380,7 +3928,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Midnight Commander's page on the World Wide Web:
-	https://midnight\-commander.org
+	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTHORS"
@@ -4391,8 +3939,8 @@ distribution.
 See the file TODO in the distribution for information on what remains to
 be done.
 .PP
-If you want to report a problem with the program, please create bugreport
-at https://github.com/MidnightCommander/mc/issues .
+If you want to report a problem with the program, please create bugreport at
+\X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .
 .PP
 Provide a detailed description of the bug, the version of the program
 you are running

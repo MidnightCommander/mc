@@ -105,6 +105,15 @@ copy=xterm
 [terminal:xterm-256color]
 copy=xterm
 
+[terminal:xterm-direct]
+copy=xterm
+
+[terminal:xterm-direct16]
+copy=xterm
+
+[terminal:xterm-direct256]
+copy=xterm
+
 [terminal:screen]
 copy=xterm
 

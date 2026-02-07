@@ -73,15 +73,19 @@
  * final-byte = [\x40-\x7e]         # one of "@A–Z[\]^_`a–z{|}~"
  */
 gboolean
-parse_csi (struct csi_command_t *out, const char **sptr, const char *end)
+parse_csi (csi_command_t *out, const char **sptr, const char *end)
 {
     gboolean ok = FALSE;
+    char c;
+    char private_mode = '\0';
+    // parameter bytes
+    size_t param_count = 0;
 
     const char *s = *sptr;
     if (s == end)
         goto invalid_sequence;
 
-    char c = *s;
+    c = *s;
 
 #define NEXT_CHAR                                                                                  \
     do                                                                                             \
@@ -90,18 +94,13 @@ parse_csi (struct csi_command_t *out, const char **sptr, const char *end)
             goto invalid_sequence;                                                                 \
         c = *s;                                                                                    \
     }                                                                                              \
-    while (0)
-
-    char private_mode = '\0';
+    while (FALSE)
 
     if (c >= '<' && c <= '?')  // "<=>?"
     {
         private_mode = c;
         NEXT_CHAR;
     }
-
-    // parameter bytes
-    size_t param_count = 0;
 
     if (private_mode != '\0')
     {
@@ -110,13 +109,13 @@ parse_csi (struct csi_command_t *out, const char **sptr, const char *end)
     }
     else
     {
+        uint32_t tmp = 0;
+        size_t sub_index = 0;
+
         if (out != NULL)
             // N.B. empty parameter strings are allowed. For our current use,
             // treating them as zeroes happens to work.
             memset (out->params, 0, sizeof (out->params));
-
-        uint32_t tmp = 0;
-        size_t sub_index = 0;
 
         while (c >= 0x30 && c <= 0x3F)
         {
@@ -207,9 +206,7 @@ strip_ctrl_codes (char *s)
                  * OSC P s ; P t ST
                  * OSC P s ; P t BEL
                  */
-                const char *new_r;
-
-                for (new_r = r; *new_r != '\0'; new_r++)
+                for (const char *new_r = r; *new_r != '\0'; new_r++)
                 {
                     switch (*new_r)
                     {
@@ -240,17 +237,9 @@ strip_ctrl_codes (char *s)
                 r++;
         }
         else
-        {
-            const char *n;
-
-            n = str_cget_next_char (r);
-            if (str_isprint (r))
-            {
-                memmove (w, r, n - r);
-                w += n - r;
-            }
-            r = n;
-        }
+            // Copy byte by byte, thereby letting mc use its standard mechanism to denote invalid
+            // UTF-8 sequences. See #4801.
+            *(w++) = *(r++);
     }
 
     *w = '\0';

@@ -15,15 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-    if: ${{ ! github.event.issue.pull_request }}
-
     permissions:
       issues: write
 
     steps:
       - run: |
-          gh issue edit ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
-            --remove-label "state: in review,state: approved"
+          ISSUE=${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }}
+
+          gh issue edit $ISSUE --remove-label "state: in review,state: approved"
+
+          if [ "${{ github.event.issue.state_reason }}" = "not_planned" ]; then
+            gh issue edit $ISSUE --remove-milestone
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}

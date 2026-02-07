@@ -93,10 +93,8 @@ struct posix_header
 
 /* Descriptor for a single file hole */
 struct sparse
-{  // byte offset
-    // cppcheck-suppress unusedStructMember
-    char offset[12];  //   0
-    // cppcheck-suppress unusedStructMember
+{                       // byte offset
+    char offset[12];    //   0
     char numbytes[12];  //  12
                         //  24
 };

@@ -115,7 +115,7 @@ draw_history_button (WInput *in)
 
     widget_gotoyx (in, 0, WIDGET (in)->rect.cols - HISTORY_BUTTON_WIDTH);
     disabled = widget_get_state (WIDGET (in), WST_DISABLED);
-    tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
+    tty_setcolor (disabled ? CORE_DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
     tty_print_string ("[ ]");
@@ -842,14 +842,17 @@ input_save_history (const gchar *event_group_name, const gchar *event_name, gpoi
     (void) event_name;
 
     if (!in->is_password && (DIALOG (WIDGET (in)->owner)->ret_value != B_CANCEL))
-    {
-        ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
-
         input_push_history (in);
-        if (in->history.changed)
-            mc_config_history_save (ev->cfg, in->history.name, in->history.list);
-        in->history.changed = FALSE;
+
+    // save modified history regardless of ret_value
+    if (in->history.changed)
+    {
+        const ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
+
+        mc_config_history_save (ev->cfg, in->history.name, in->history.list);
     }
+
+    in->history.changed = FALSE;
 
     return TRUE;
 }
@@ -1078,10 +1081,10 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 void
 input_set_default_colors (void)
 {
-    input_colors[WINPUTC_MAIN] = INPUT_COLOR;
-    input_colors[WINPUTC_MARK] = INPUT_MARK_COLOR;
-    input_colors[WINPUTC_UNCHANGED] = INPUT_UNCHANGED_COLOR;
-    input_colors[WINPUTC_HISTORY] = INPUT_HISTORY_COLOR;
+    input_colors[WINPUTC_MAIN] = CORE_INPUT_COLOR;
+    input_colors[WINPUTC_MARK] = CORE_INPUT_MARK_COLOR;
+    input_colors[WINPUTC_UNCHANGED] = CORE_INPUT_UNCHANGED_COLOR;
+    input_colors[WINPUTC_HISTORY] = CORE_INPUT_HISTORY_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1221,7 +1224,7 @@ input_update (WInput *in, gboolean clear_first)
         draw_history_button (in);
 
     if (widget_get_state (wi, WST_DISABLED))
-        tty_setcolor (DISABLED_COLOR);
+        tty_setcolor (CORE_DISABLED_COLOR);
     else if (in->first)
         tty_setcolor (in->color[WINPUTC_UNCHANGED]);
     else

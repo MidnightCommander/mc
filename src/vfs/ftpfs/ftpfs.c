@@ -371,12 +371,13 @@ ftpfs_correct_url_parameters (const vfs_path_element_t *velement)
 
         ftpfs_netrc_lookup (path_element->host, &new_user, &new_passwd);
 
-        // If user is different, remove password
-        if (new_user != NULL && strcmp (path_element->user, new_user) != 0)
-            MC_PTR_FREE (path_element->password);
+        // Use the password if it matches the user
+        if (new_user != NULL && strcmp (path_element->user, new_user) == 0)
+            path_element->password = new_passwd;
+        else
+            g_free (new_passwd);
 
         g_free (new_user);
-        g_free (new_passwd);
     }
 
     return path_element;
@@ -400,7 +401,6 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
             return 4;
         }
 
-        // cppcheck-suppress invalidscanf
         switch (sscanf (answer, "%d", &code))
         {
         case 0:
@@ -422,7 +422,6 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
                         code = 421;
                         return 4;
                     }
-                    // cppcheck-suppress invalidscanf
                     if ((sscanf (answer, "%d", &i) > 0) && (code == i) && (answer[3] == ' '))
                         break;
                 }
@@ -1123,7 +1122,6 @@ ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super, int m
     if (*c == '\0' || !isdigit ((unsigned char) *c))
         return FALSE;
 
-    // cppcheck-suppress invalidscanf
     if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
         return FALSE;
 

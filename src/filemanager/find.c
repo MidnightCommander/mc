@@ -573,27 +573,27 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     gboolean return_value;
 
     // file name
-    const char *file_name_label = N_ ("File name:");
-    const char *file_recurs_label = N_ ("&Find recursively");
-    const char *file_follow_symlinks = N_ ("Follow s&ymlinks");
-    const char *file_pattern_label = N_ ("&Using shell patterns");
-    const char *file_all_charsets_label = N_ ("&All charsets");
-    const char *file_case_label = N_ ("Cas&e sensitive");
-    const char *file_skip_hidden_label = N_ ("S&kip hidden");
+    const char *file_name_label = _ ("File name:");
+    const char *file_recurs_label = _ ("&Find recursively");
+    const char *file_follow_symlinks = _ ("Follow s&ymlinks");
+    const char *file_pattern_label = _ ("&Using shell patterns");
+    const char *file_all_charsets_label = _ ("&All charsets");
+    const char *file_case_label = _ ("Cas&e sensitive");
+    const char *file_skip_hidden_label = _ ("S&kip hidden");
 
     // file content
-    const char *content_content_label = N_ ("Content:");
-    const char *content_use_label = N_ ("Sea&rch for content");
-    const char *content_regexp_label = N_ ("Re&gular expression");
-    const char *content_case_label = N_ ("Case sens&itive");
-    const char *content_all_charsets_label = N_ ("A&ll charsets");
-    const char *content_whole_words_label = N_ ("&Whole words");
-    const char *content_first_hit_label = N_ ("Fir&st hit");
+    const char *content_content_label = _ ("Content:");
+    const char *content_use_label = _ ("Sea&rch for content");
+    const char *content_regexp_label = _ ("Re&gular expression");
+    const char *content_case_label = _ ("Case sens&itive");
+    const char *content_all_charsets_label = _ ("A&ll charsets");
+    const char *content_whole_words_label = _ ("&Whole words");
+    const char *content_first_hit_label = _ ("Fir&st hit");
 
     const char *buts[] = {
-        N_ ("&Tree"),
-        N_ ("&OK"),
-        N_ ("&Cancel"),
+        _ ("&Tree"),
+        _ ("&OK"),
+        _ ("&Cancel"),
     };
 
     // button lengths
@@ -601,32 +601,6 @@ find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len, char *
     int y1, y2, x1, x2;
     // column width
     int cw;
-
-#ifdef ENABLE_NLS
-    {
-        size_t i;
-
-        file_name_label = _ (file_name_label);
-        file_recurs_label = _ (file_recurs_label);
-        file_follow_symlinks = _ (file_follow_symlinks);
-        file_pattern_label = _ (file_pattern_label);
-        file_all_charsets_label = _ (file_all_charsets_label);
-        file_case_label = _ (file_case_label);
-        file_skip_hidden_label = _ (file_skip_hidden_label);
-
-        // file content
-        content_content_label = _ (content_content_label);
-        content_use_label = _ (content_use_label);
-        content_regexp_label = _ (content_regexp_label);
-        content_case_label = _ (content_case_label);
-        content_all_charsets_label = _ (content_all_charsets_label);
-        content_whole_words_label = _ (content_whole_words_label);
-        content_first_hit_label = _ (content_first_hit_label);
-
-        for (i = 0; i < G_N_ELEMENTS (buts); i++)
-            buts[i] = _ (buts[i]);
-    }
-#endif
 
     // calculate dialog width
 
@@ -1272,7 +1246,7 @@ do_search (WDialog *h)
             {
                 vfs_path_t *tmp_vpath = NULL;
 
-                tty_setcolor (REVERSE_COLOR);
+                tty_setcolor (CORE_REVERSE_COLOR);
 
                 while (TRUE)
                 {
@@ -1359,18 +1333,31 @@ do_search (WDialog *h)
                 {
                     vfs_path_t *tmp_vpath;
                     int stat_res;
+                    gboolean descend = FALSE;
 
-                    tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
+                    if (dp->d_type == DT_UNKNOWN || dp->d_type == DT_DIR
+                        || (dp->d_type == DT_LNK && options.follow_symlinks))
+                    {
+                        tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
 
-                    if (options.follow_symlinks)
-                        stat_res = mc_stat (tmp_vpath, &tmp_stat);
-                    else
-                        stat_res = mc_lstat (tmp_vpath, &tmp_stat);
+                        if (dp->d_type == DT_DIR)
+                            descend = TRUE;
+                        else
+                        {
+                            if (options.follow_symlinks)
+                                stat_res = mc_stat (tmp_vpath, &tmp_stat);
+                            else
+                                stat_res = mc_lstat (tmp_vpath, &tmp_stat);
 
-                    if (stat_res == 0 && S_ISDIR (tmp_stat.st_mode))
-                        push_directory (tmp_vpath);
-                    else
-                        vfs_path_free (tmp_vpath, TRUE);
+                            if (stat_res == 0 && S_ISDIR (tmp_stat.st_mode))
+                                descend = TRUE;
+                        }
+
+                        if (descend)
+                            push_directory (tmp_vpath);
+                        else
+                            vfs_path_free (tmp_vpath, TRUE);
+                    }
                 }
             }
 

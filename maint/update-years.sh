@@ -21,8 +21,8 @@ for i in $SOURCES; do
 done
 
 # special case
-${SED-sed} -e "/$LINE/s/-[0-9]\{4\} the/-$YEAR the/" src/editor/editwidget.c > src/editor/editwidget.c.tmp && \
-  mv -f src/editor/editwidget.c.tmp src/editor/editwidget.c
+${SED-sed} -e "/last_year =/s/[0-9]\{4\};/$YEAR;/" lib/global.c > lib/global.c.tmp && \
+  mv -f lib/global.c.tmp lib/global.c
 
 # restore permissions
 chmod 755 tests/src/vfs/extfs/helpers-list/test_all

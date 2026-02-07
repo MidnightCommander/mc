@@ -9,13 +9,15 @@
 # linuxmetel <linuxmetel@gmail.com>, 2020
 # Takuro Onoue <kusanaginoturugi@gmail.com>, 2021
 # Yoshitaka Yamashita <drum@magic-touch.org>, 2012
+# 赤沼栄 <sakaeakanuma@gmail.com>, 2025
+# お餅のCreeeper, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2025-03-15 13:56+0100\n"
+"POT-Creation-Date: 2026-02-01 14:37+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
+"Last-Translator: お餅のCreeeper, 2025\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +26,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+msgid "No translation"
+msgstr ""
+
 msgid "Warning: cannot load codepages list"
 msgstr "警告: コードページの一覧を読み込めません"
 
@@ -44,14 +49,18 @@ msgid "Event system not initialized"
 msgstr "イベント システムが未初期化です"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr ""
+msgstr "入力データを確認してください！パラメーターの一部はnullです！"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr ""
+msgstr "イベント用のグループ\"%s”を作成できません！"
 
 #, c-format
 msgid "Unable to create event '%s'!"
+msgstr "イベント「%s」を作成できません！"
+
+#, c-format
+msgid "Copyright (C) 1996-%zu the Free Software Foundation"
 msgstr ""
 
 #, c-format
@@ -68,10 +77,10 @@ msgid "File locked"
 msgstr "ファイルがロックされています"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "ロックを取得(&G)"
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "ロックを無視(&I)"
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -84,12 +93,13 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"範囲外の数（バイト範囲、0 <= n <= 0xff、16進数で表される必要があります）"
 
 msgid "Invalid character"
 msgstr "不正な文字"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "クォート記号が閉じられていません"
 
 #, c-format
 msgid ""
@@ -114,16 +124,16 @@ msgid "Regular expression error"
 msgstr "正規表現のエラー"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "通常(r)"
 
 msgid "Re&gular expression"
-msgstr ""
+msgstr "正規表現(&g)"
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "16進数(&x)"
 
 msgid "Wil&dcard search"
-msgstr ""
+msgstr "ワイルドカード検索(&d)"
 
 #, c-format
 msgid ""
@@ -150,21 +160,41 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Unable to use '%s' skin with 256 colors support\n"
-"on non-256 colors terminal.\n"
+"Unable to use '%s' skin with 256 colors support:\n"
+"%s\n"
 "Default skin has been loaded"
 msgstr ""
 
-msgid "True color not supported with ncurses."
+msgid ""
+"\n"
+"If your terminal supports 256 colors, you need to set your TERM\n"
+"environment variable to match your terminal, perhaps using\n"
+"a *-256color or *-direct256 variant. Use the 'toe -a'\n"
+"command to list all available variants on your system.\n"
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid ""
+"For true color support, you need version 6.1 or later of the ncurses\n"
+"library with wide character and ABI 6 or higher support.\n"
+"Please upgrade your system.\n"
+msgstr ""
+
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
 msgstr ""
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "このSlangの版でサポートされない色です。"
 
-msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgid ""
+"\n"
+"If your terminal supports true colors, you need to set your TERM\n"
+"environment variable to a *-direct256, *-direct16, or *-direct variant.\n"
+"Use the 'toe -a' command to list all available variants on your system.\n"
+"Alternatively, you can set COLORTERM=truecolor.\n"
 msgstr ""
 
 msgid "Escape"
@@ -234,31 +264,31 @@ msgid "Completion/M-tab"
 msgstr "Completion/M-tab"
 
 msgid "BackTab/S-tab"
-msgstr ""
+msgstr "BackTab/S-tab"
 
 msgid "Backspace"
 msgstr "Backspace"
 
 msgid "Up arrow"
-msgstr ""
+msgstr "上矢印"
 
 msgid "Down arrow"
-msgstr ""
+msgstr "下矢印"
 
 msgid "Left arrow"
-msgstr ""
+msgstr "左矢印"
 
 msgid "Right arrow"
-msgstr ""
+msgstr "右矢印"
 
 msgid "Insert"
-msgstr ""
+msgstr "Insert キー"
 
 msgid "Delete"
 msgstr "Delete"
 
 msgid "Home"
-msgstr ""
+msgstr "HOME"
 
 msgid "End key"
 msgstr "Endキー"
@@ -270,7 +300,7 @@ msgid "Page Down"
 msgstr "Page Down"
 
 msgid "/ on keypad"
-msgstr ""
+msgstr "10キーの/"
 
 msgid "* on keypad"
 msgstr "10キーの *"
@@ -315,16 +345,16 @@ msgid "Enter on keypad"
 msgstr "10キーの Enter"
 
 msgid "Function key 21"
-msgstr "ファンクション キー 21"
+msgstr "Function キー21"
 
 msgid "Function key 22"
-msgstr "ファンクション キー 22"
+msgstr "Function キー 22"
 
 msgid "Function key 23"
-msgstr "ファンクション キー 23"
+msgstr "Function キー23"
 
 msgid "Function key 24"
-msgstr "ファンクション キー 24"
+msgstr "Function キー24"
 
 msgid "A1 key"
 msgstr "A1 キー"
@@ -461,6 +491,8 @@ msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr ""
+"\n"
+"SIGWINCH パイプを作成できません: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -483,7 +515,7 @@ msgstr ""
 "TERM環境変数の値をチェックしてください\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
 msgstr "kB"
@@ -507,7 +539,7 @@ msgid "Cannot create pipe descriptor"
 msgstr "パイプディスクリプタを作成できません"
 
 msgid "Cannot create pipe streams"
-msgstr ""
+msgstr "パイプストリームを作成できません"
 
 #, c-format
 msgid ""
@@ -567,17 +599,17 @@ msgid "Password:"
 msgstr "パスワード:"
 
 msgid "Screens"
-msgstr ""
+msgstr "スクリーン"
 
 msgid "History"
-msgstr ""
+msgstr "履歴"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr ""
+msgstr "DialogTitle |歴史のクリーンアップ"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "この履歴を消去しますか？"
 
 msgid "&Yes"
 msgstr "はい(&Y)"
@@ -608,7 +640,7 @@ msgid "Displays the current version"
 msgstr "バージョンを表示"
 
 msgid "Print data directory"
-msgstr ""
+msgstr "データディレクトリを印刷"
 
 msgid "Print extended info about used data directories"
 msgstr ""
@@ -635,7 +667,7 @@ msgid "Launches the file viewer on a file"
 msgstr "ファイルビューアを起動"
 
 msgid "Edit files"
-msgstr ""
+msgstr "ファイル編集"
 
 msgid "<file> ..."
 msgstr ""
@@ -644,10 +676,10 @@ msgid "Forces xterm features"
 msgstr "強制的に xterm 機能を使う"
 
 msgid "Disable X11 support"
-msgstr ""
+msgstr "X11サポートを無効にします"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "古いハイライトマウストラッキングの利用を試みます"
 
 msgid "Disable mouse support in text version"
 msgstr "テキスト版でのマウスのサポートを無効化"
@@ -729,7 +761,7 @@ msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
 msgstr ""
 
 msgid "file"
-msgstr "file"
+msgstr "ファイル"
 
 msgid "file1 file2"
 msgstr ""
@@ -740,7 +772,7 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of '%s -V')\n"
 "as tickets at %s\n"
 msgstr ""
 
@@ -806,23 +838,16 @@ msgstr "検索"
 msgid "Search is disabled"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot create temporary diff file\n"
-"%s"
+msgid "Cannot create temporary diff file"
 msgstr ""
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
-"%s%s\n"
-"%s"
+"%s~~~"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot create temporary merge file\n"
-"%s"
+msgid "Cannot create temporary merge file"
 msgstr ""
 
 msgid "&Fastest (Assume large files)"
@@ -891,30 +916,35 @@ msgstr ""
 msgid "ButtonBar|Quit"
 msgstr ""
 
-msgid "Quit"
-msgstr "終了"
-
 msgid "File(s) was modified. Save with exit?"
-msgstr ""
+msgstr "ファイルが変更されています。保存して終了しますか?"
 
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 
+msgid "Quit"
+msgstr "終了"
+
 msgid "Diff:"
-msgstr ""
+msgstr "差異:"
 
 msgid "File name is empty!"
-msgstr ""
-
-#, c-format
-msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "ファイル名が空欄です!"
 
 #, c-format
 msgid ""
-"Cannot stat \"%s\"\n"
+"%s\n"
+"is a directory"
+msgstr ""
+"%s\n"
+" はディレクトリです"
+
+#, c-format
+msgid ""
+"Cannot stat\n"
 "%s"
 msgstr ""
 
@@ -929,25 +959,25 @@ msgid "Loading: %3d%%"
 msgstr ""
 
 msgid "Loading..."
-msgstr ""
+msgstr "読み込み中..."
 
 #, c-format
-msgid "Cannot open %s for reading"
+msgid ""
+"Cannot open\n"
+"%s"
 msgstr ""
 
 msgid "Load file"
-msgstr ""
+msgstr "ファイルを読み込む"
 
 #, c-format
 msgid "Error reading %s"
 msgstr ""
 
 #, c-format
-msgid "Cannot get size/permissions for %s"
-msgstr ""
-
-#, c-format
-msgid "\"%s\" is not a regular file"
+msgid ""
+"%s\n"
+"is not a regular file"
 msgstr ""
 
 #, c-format
@@ -964,7 +994,9 @@ msgid "Error reading from pipe: %s"
 msgstr ""
 
 #, c-format
-msgid "Cannot open pipe for reading: %s"
+msgid ""
+"Cannot open pipe for reading\n"
+"%s"
 msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
@@ -978,11 +1010,10 @@ msgid "Error writing to pipe: %s"
 msgstr ""
 
 #, c-format
-msgid "Cannot open pipe for writing: %s"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file for writing: %s"
+msgid ""
+"Cannot open file\n"
+"%s\n"
+"for writing"
 msgstr ""
 
 msgid "The file you are saving does not end with a newline."
@@ -1007,16 +1038,22 @@ msgid "Enter file name:"
 msgstr "ファイル名の入力:"
 
 msgid "Change line breaks to:"
-msgstr ""
+msgstr "改行を以下に変更:"
 
 msgid "Save As"
 msgstr "別名で保存"
 
-msgid "&Quick save"
+#, c-format
+msgid ""
+"Cannot create directory\n"
+"%s"
 msgstr ""
 
+msgid "&Quick save"
+msgstr "直ちに保存(&Q)"
+
 msgid "&Safe save"
-msgstr ""
+msgstr "安全に保存(&S)"
 
 msgid "&Do backups with following extension:"
 msgstr ""
@@ -1027,11 +1064,15 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr "保存モードの編集"
 
-msgid "Cannot save: destination is not a regular file"
+#, c-format
+msgid ""
+"Cannot save\n"
+"%s:\n"
+"not a regular file"
 msgstr ""
 
 msgid "A file already exists with this name"
-msgstr ""
+msgstr "この名称のファイルは既に存在します"
 
 msgid "&Overwrite"
 msgstr "上書き(&O)"
@@ -1053,28 +1094,28 @@ msgid "Load"
 msgstr "読み込み"
 
 msgid "Syntax file edit"
-msgstr ""
+msgstr "文法ファイルを編集"
 
 msgid "Which syntax file you want to edit?"
-msgstr ""
+msgstr "どの構文ファイルを編集しますか？"
 
 msgid "&User"
 msgstr "ユーザ(&U)"
 
 msgid "&System wide"
-msgstr ""
+msgstr "システム全体(&S)"
 
 msgid "Menu edit"
 msgstr "メニューの編集"
 
 msgid "Which menu file do you want to edit?"
-msgstr ""
+msgstr "どのメニューファイルを編集しますか？"
 
 msgid "&Local"
 msgstr "ローカル(&L)"
 
 msgid "[NoName]"
-msgstr ""
+msgstr "[名無し]"
 
 #, c-format
 msgid ""
@@ -1083,11 +1124,11 @@ msgid ""
 msgstr ""
 
 msgid "Close file"
-msgstr ""
+msgstr "ファイルを閉じる"
 
 #, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 
@@ -1104,7 +1145,7 @@ msgid "Save block"
 msgstr "ブロックの保存"
 
 msgid "Cannot save block"
-msgstr ""
+msgstr "ブロックを保存できません"
 
 msgid "Insert file"
 msgstr "ファイルの挿入"
@@ -1113,13 +1154,13 @@ msgid "Cannot insert file"
 msgstr "ファイルの挿入ができません"
 
 msgid "You must first highlight a block of text"
-msgstr ""
+msgstr "最初にテキストのブロックを強調表示する必要があります"
 
 msgid "Run sort"
 msgstr "並び替えの実行"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr ""
+msgstr "並べ替えオプションを入力します（sort(1)マニュアルを参照）。"
 
 msgid "Cannot execute sort command"
 msgstr "sort コマンドを実行できません"
@@ -1144,16 +1185,16 @@ msgid "To"
 msgstr ""
 
 msgid "Subject"
-msgstr ""
+msgstr "件名"
 
 msgid "Copies to"
-msgstr ""
+msgstr "以下に複写"
 
 msgid "Mail"
 msgstr "メール"
 
 msgid "Insert literal"
-msgstr "りてらるの挿入"
+msgstr "リテラルの挿入"
 
 msgid "Press any key:"
 msgstr "どれかキーを押してください:"
@@ -1167,25 +1208,25 @@ msgid "Cancel"
 msgstr "キャンセル"
 
 msgid "Collect completions"
-msgstr ""
+msgstr "補完を修正"
 
 msgid "NoName"
-msgstr ""
+msgstr "名無し"
 
 msgid "Save macro"
 msgstr "マクロの保存"
 
 msgid "Press the macro's new hotkey:"
-msgstr ""
+msgstr "マクロの新規ホットキーを押下して下さい。"
 
 msgid "Delete macro"
 msgstr "マクロの削除"
 
 msgid "Press macro hotkey:"
-msgstr ""
+msgstr "マクロ起動キーを押下:"
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "マクロ未定義"
 
 msgid "Repeat last commands"
 msgstr "最後のコマンドを繰り返す"
@@ -1200,10 +1241,10 @@ msgid "&New"
 msgstr "新規(&N)"
 
 msgid "&Close"
-msgstr ""
+msgstr "クローズ(&C)"
 
 msgid "&History..."
-msgstr ""
+msgstr "履歴(&H)"
 
 msgid "Save &as..."
 msgstr "別名で保存(&A)..."
@@ -1236,7 +1277,7 @@ msgid "To&ggle mark"
 msgstr "マークの切り替え(&G)"
 
 msgid "&Mark columns"
-msgstr ""
+msgstr "カラムをマーク(&M)"
 
 msgid "Mark &all"
 msgstr "すべてマークする(&A)"
@@ -1301,6 +1342,9 @@ msgstr ""
 msgid "Toggle s&yntax highlighting"
 msgstr ""
 
+msgid "Togg&le right margin"
+msgstr ""
+
 msgid "&Find declaration"
 msgstr ""
 
@@ -1359,16 +1403,16 @@ msgid "&Move"
 msgstr "移動(&M)"
 
 msgid "&Resize"
-msgstr ""
+msgstr "リサイズ(&R)"
 
 msgid "&Toggle fullscreen"
 msgstr ""
 
 msgid "&Next"
-msgstr ""
+msgstr "次(&N)"
 
 msgid "&Previous"
-msgstr ""
+msgstr "前(&P)"
 
 msgid "&List..."
 msgstr ""
@@ -1520,100 +1564,98 @@ msgstr "置換の確認"
 msgid "%ld replacements made"
 msgstr ""
 
+#, c-format
 msgid ""
 "A user friendly text editor\n"
-"written for the Midnight Commander."
-msgstr ""
-
-msgid "Copyright (C) 1996-2025 the Free Software Foundation"
+"written for the %s."
 msgstr ""
 
 msgid "About"
-msgstr ""
+msgstr "紹介"
 
 msgid "Open files"
-msgstr ""
+msgstr "ファイルを開く"
 
 msgid "Edit: "
 msgstr "編集: "
 
 msgid "ButtonBar|Mark"
-msgstr ""
+msgstr "ボタンバー|マーク"
 
 msgid "ButtonBar|Replac"
-msgstr ""
+msgstr "ボタンバー|交換"
 
 msgid "ButtonBar|Copy"
-msgstr ""
+msgstr "ボタンバー|コピー"
 
 msgid "ButtonBar|Move"
-msgstr ""
+msgstr "ボタンバー|移動"
 
 msgid "ButtonBar|Delete"
-msgstr ""
+msgstr "ButtonBar |削除"
 
 msgid "ButtonBar|PullDn"
-msgstr ""
+msgstr "ボタンバー | プルダウン "
 
 msgid "Breton"
-msgstr ""
+msgstr "ブレトン"
 
 msgid "Czech"
-msgstr ""
+msgstr "チェコ語"
 
 msgid "Welsh"
-msgstr ""
+msgstr "ウェールズ語"
 
 msgid "Danish"
-msgstr ""
+msgstr "デンマーク語"
 
 msgid "German"
-msgstr ""
+msgstr "ドイツ語"
 
 msgid "Greek"
-msgstr ""
+msgstr "ギリシア語"
 
 msgid "English"
-msgstr ""
+msgstr "英語"
 
 msgid "British English"
-msgstr ""
+msgstr "イギリス英語"
 
 msgid "Canadian English"
-msgstr ""
+msgstr "カナダ英語"
 
 msgid "American English"
-msgstr ""
+msgstr "アメリカ英語"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "エスペラント語"
 
 msgid "Spanish"
-msgstr ""
+msgstr "スペイン語"
 
 msgid "Faroese"
 msgstr ""
 
 msgid "French"
-msgstr ""
+msgstr "フランス語"
 
 msgid "Italian"
 msgstr ""
 
 msgid "Dutch"
-msgstr ""
+msgstr "オランダ語"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "ノルウェー語"
 
 msgid "Polish"
-msgstr ""
+msgstr "ポーランド語"
 
 msgid "Portuguese"
 msgstr ""
 
 msgid "Romanian"
-msgstr ""
+msgstr "ルーマニア語"
 
 msgid "Russian"
 msgstr ""
@@ -1625,13 +1667,13 @@ msgid "Swedish"
 msgstr ""
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "ウクライナ語"
 
 msgid "&Add word"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
 msgid "Misspelled"
 msgstr ""
@@ -1640,13 +1682,13 @@ msgid "Check word"
 msgstr ""
 
 msgid "Suggest"
-msgstr ""
+msgstr "提案"
 
 msgid "Select language"
-msgstr ""
+msgstr "言語を選択"
 
 msgid "Choose syntax highlighting"
-msgstr ""
+msgstr "構文の強調表示を選択します"
 
 msgid "< Auto >"
 msgstr ""
@@ -1654,16 +1696,16 @@ msgstr ""
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-msgid "Load syntax file"
-msgstr "文法ファイルの読み込み"
-
 #, c-format
 msgid ""
-"Cannot open file %s\n"
+"Cannot open file\n"
 "%s"
 msgstr ""
-"ファイル %s が開けません\n"
-"%s"
+"ファイル %s\n"
+"を開くことができません"
+
+msgid "Load syntax file"
+msgstr "文法ファイルの読み込み"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1681,14 +1723,15 @@ msgid "Cannot fetch a local copy of %s"
 msgstr ""
 
 msgid "The shell is already running a command"
-msgstr ""
+msgstr "シェルはすでにコマンドを実行しています"
 
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
 
-msgid "Type 'exit' to return to the Midnight Commander"
+#, c-format
+msgid "Type 'exit' to return to the %s"
 msgstr ""
 
 msgid "Set &all"
@@ -1721,24 +1764,25 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chmod \"%s\"\n"
-"%s"
+"Cannot chmod\n"
+"%sn%s"
 msgstr ""
-"chmod \"%s\" ができません\n"
-"%s"
-
-msgid "&Ignore"
-msgstr ""
-
-msgid "Ignore &all"
-msgstr ""
-
-msgid "&Retry"
-msgstr "再試行(&R)"
 
 #, c-format
 msgid ""
-"Cannot chown \"%s\"\n"
+"Cannot chown\n"
+"%sn%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chmod\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chown\n"
 "%s"
 msgstr ""
 
@@ -1748,14 +1792,22 @@ msgstr ""
 msgid "Skins"
 msgstr ""
 
-msgid "Other 8 bit"
-msgstr "別の 8bit"
-
 msgid "Running"
 msgstr "実行しています"
 
 msgid "Stopped"
 msgstr "停止中"
+
+#, c-format
+msgid "Detected display codepage: %s"
+msgstr ""
+
+#, c-format
+msgid "Selected source (file I/O) codepage: %s"
+msgstr ""
+
+msgid "Classic terminal file manager inspired by Norton Commander."
+msgstr ""
 
 msgid "&Never"
 msgstr "一時停止しない(&N)"
@@ -1972,27 +2024,6 @@ msgstr ""
 msgid "Confirmation"
 msgstr "確認"
 
-msgid "&UTF-8 output"
-msgstr ""
-
-msgid "&Full 8 bits output"
-msgstr ""
-
-msgid "&ISO 8859-1"
-msgstr ""
-
-msgid "7 &bits"
-msgstr ""
-
-msgid "F&ull 8 bits input"
-msgstr "8 ビット入力(&u)"
-
-msgid "Display bits"
-msgstr ""
-
-msgid "Input / display codepage:"
-msgstr "入力 / コードページを表示:"
-
 msgid "Directory tree"
 msgstr "ディレクトリーのツリー"
 
@@ -2045,86 +2076,85 @@ msgid "&Kill"
 msgstr "強制終了(&K)"
 
 msgid "Background jobs"
-msgstr ""
+msgstr "バックグラウンドジョブ"
 
 #, c-format
 msgid ""
 "Cannot change directory to\n"
-"%s\n"
 "%s"
 msgstr ""
 
 msgid "Secure deletion"
-msgstr ""
+msgstr "安全な削除"
 
 msgid "Undelete"
-msgstr ""
+msgstr "回復"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "同期更新"
 
 msgid "Synchronous directory updates"
-msgstr ""
+msgstr "ディレクトリの同期更新"
 
 msgid "Immutable"
-msgstr ""
+msgstr "不変"
 
 msgid "Append only"
-msgstr ""
+msgstr "追記のみ"
 
 msgid "No dump"
 msgstr ""
 
 msgid "No update atime"
-msgstr ""
+msgstr "更新時間情報なし"
 
 msgid "Compress"
-msgstr ""
+msgstr "圧縮"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "圧縮クラスター"
 
 msgid "Compressed dirty file"
-msgstr ""
+msgstr "圧縮ダーティファイル"
 
 msgid "Compression raw access"
 msgstr ""
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "暗号化 Iノード"
 
 msgid "Journaled data"
 msgstr ""
 
 msgid "Indexed directory"
-msgstr ""
+msgstr "インデックス付きディレクトリ"
 
 msgid "No tail merging"
 msgstr ""
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "ディレクトリ階層の頂点"
 
 msgid "Inode uses extents"
 msgstr ""
 
-msgid "Huge_file"
+msgid "Huge file"
 msgstr ""
 
 msgid "No COW"
-msgstr ""
+msgstr "COWがありません"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "ファイルの直接アクセス"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "ケースフォールドファイル"
 
 msgid "Inode has inline data"
 msgstr ""
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "プロジェクト階層"
 
 msgid "Verity protected inode"
 msgstr ""
@@ -2139,37 +2169,43 @@ msgid "C&lear marked"
 msgstr "マークをクリア(&l)"
 
 msgid "Chattr command"
+msgstr "chattrコマンド"
+
+#, c-format
+msgid ""
+"Cannot chattr\n"
+"%sn%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chattr \"%s\"\n"
+"Cannot get ext2 attributes of\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of \"%s\"\n"
+"Cannot chattr\n"
 "%s"
-msgstr ""
+msgstr "%s への chattr ができません"
 
 msgid "set &user ID on execution"
-msgstr ""
+msgstr "実行時のユーザーIDを設定します(&u)"
 
 msgid "set &group ID on execution"
-msgstr ""
+msgstr "実行時のグループIDを設定します(&g)"
 
 msgid "stick&y bit"
-msgstr ""
+msgstr "スティッキービット(&y)"
 
 msgid "&read by owner"
-msgstr ""
+msgstr "所有者読み込み権限(&R)"
 
 msgid "&write by owner"
-msgstr ""
+msgstr "所有者書込み権限(&W)"
 
 msgid "e&xecute/search by owner"
-msgstr ""
+msgstr "所有者実行／検索権限(&X)"
 
 msgid "rea&d by group"
 msgstr ""
@@ -2181,7 +2217,7 @@ msgid "execu&te/search by group"
 msgstr ""
 
 msgid "read &by others"
-msgstr ""
+msgstr "他者の読み込みを許可(&b)"
 
 msgid "wr&ite by others"
 msgstr ""
@@ -2229,7 +2265,7 @@ msgid "Size"
 msgstr "サイズ"
 
 msgid "Chown command"
-msgstr ""
+msgstr "chown コマンド"
 
 msgid "User name"
 msgstr "ユーザーの名前"
@@ -2254,27 +2290,31 @@ msgid "Link"
 msgstr "リンク"
 
 #, c-format
-msgid "link: %s"
-msgstr "リンク: %s"
+msgid ""
+"Cannot create link\n"
+"%s"
+msgstr "link %s を作成できません"
 
 #, c-format
-msgid "symlink: %s"
-msgstr "シンボリックリンク: %s"
+msgid ""
+"Cannot create symbolic link\n"
+"%s"
+msgstr ""
 
 msgid "View file"
-msgstr ""
+msgstr "ファイルを閲覧"
 
 msgid "Filename:"
 msgstr "ファイル名:"
 
 msgid "Filtered view"
-msgstr ""
+msgstr "フィルタリングビュー"
 
 msgid "Filter command and arguments:"
 msgstr "フィルターのコマンドと引数:"
 
 msgid "Edit file"
-msgstr ""
+msgstr "ファイル編集"
 
 msgid "Create a new Directory"
 msgstr "新規ディレクトリの作成"
@@ -2286,7 +2326,7 @@ msgid "Extension file edit"
 msgstr "拡張ファイルの編集"
 
 msgid "Which extension file you want to edit?"
-msgstr ""
+msgstr "どの拡張機能ファイルを編集しますか？"
 
 msgid "&System Wide"
 msgstr "システム全体(&S)"
@@ -2295,7 +2335,7 @@ msgid "Highlighting groups file edit"
 msgstr ""
 
 msgid "Which highlighting file you want to edit?"
-msgstr ""
+msgstr "どのハイライトファイルを編集しますか？"
 
 msgid "Compare directories"
 msgstr "ディレクトリーの比較"
@@ -2329,28 +2369,24 @@ msgid "Edit symlink"
 msgstr "シンボリックリンクの編集"
 
 #, c-format
-msgid "edit symlink, unable to remove %s: %s"
+msgid ""
+"Edit symlink, unable to remove\n"
+"%s"
 msgstr ""
 
 #, c-format
-msgid "edit symlink: %s"
-msgstr "シンボリックリンクの編集: %s"
+msgid ""
+"Cannot edit symlink\n"
+"%s"
+msgstr ""
 
 msgid "FTP to machine"
-msgstr ""
+msgstr "機器とのFTP"
 
 msgid "SFTP to machine"
-msgstr ""
+msgstr "機器とのSFTP"
 
 msgid "Shell link to machine"
-msgstr ""
-
-msgid "Undelete files on an ext2 file system"
-msgstr ""
-
-msgid ""
-"Enter device (without /dev/) to undelete\n"
-"files on: (F1 for details)"
 msgstr ""
 
 msgid "Directory scanning"
@@ -2373,11 +2409,8 @@ msgstr ""
 msgid "Parameter"
 msgstr "パラメーター"
 
-#, c-format
-msgid ""
-"Cannot create temporary command file\n"
-"%s"
-msgstr ""
+msgid "Cannot create temporary command file"
+msgstr "一時コマンドファイルを作成できません"
 
 msgid "Pipe failed"
 msgstr "パイプの受け渡しに失敗しました"
@@ -2385,7 +2418,7 @@ msgstr "パイプの受け渡しに失敗しました"
 #, c-format
 msgid ""
 "You have an outdated %s file.\n"
-"Midnight Commander now uses %s file.\n"
+"%s now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
 
@@ -2395,7 +2428,7 @@ msgid ""
 "%s%s\n"
 "file has changed with version 4.0.\n"
 "It seems that the installation has failed.\n"
-"Please fetch a fresh copy from the Midnight Commander package."
+"Please fetch a fresh copy from the %s package."
 msgstr ""
 
 #, c-format
@@ -2428,23 +2461,23 @@ msgstr "ファイル操作|削除"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr ""
+msgstr "%o %f %n\"%s\"%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
 msgid "files"
-msgstr "files"
+msgstr "ファイル"
 
 msgid "directory"
-msgstr "directory"
+msgstr "ディレクトリ"
 
 msgid "directories"
-msgstr "directories"
+msgstr "ディレクトリ"
 
 msgid "files/directories"
-msgstr "files/directories"
+msgstr "ファイル／ディレクトリ"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
@@ -2452,23 +2485,19 @@ msgstr " with source mask:"
 
 #, c-format
 msgid ""
-"Cannot stat hardlink source file \"%s\"\n"
+"Cannot stat hardlink source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target hardlink \"%s\"\n"
+"Cannot create target hardlink\n"
 "%s"
 msgstr ""
 
 #, c-format
-msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-
-#, c-format
 msgid ""
-"Cannot read source link \"%s\"\n"
+"Cannot read source link\n"
 "%s"
 msgstr ""
 
@@ -2480,7 +2509,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target symlink \"%s\"\n"
+"Cannot create target symlink\n"
 "%s"
 msgstr ""
 
@@ -2500,19 +2529,29 @@ msgid ""
 "are the same file"
 msgstr ""
 
+msgid "&Ignore"
+msgstr "無視(&I)"
+
 msgid "Ignore a&ll"
 msgstr ""
 
+msgid "&Retry"
+msgstr "再試行(&R)"
+
 #, c-format
 msgid ""
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 
 #, c-format
 msgid ""
 "Background process:\n"
-"Directory \"%s\" not empty.\n"
+"Directory\n"
+"%s\n"
+"is not empty.\n"
 "Delete it recursively?"
 msgstr ""
 
@@ -2521,13 +2560,13 @@ msgstr "なし(&E)"
 
 #, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
+"Cannot remove file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot stat file\n"
 "%s"
 msgstr ""
 
@@ -2537,37 +2576,41 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
+"Cannot move file\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot remove directory \"%s\"\n"
+"Cannot remove directory\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot enter into directory \"%s\"\n"
+"Cannot enter into directory\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot overwrite directory \"%s\"\n"
+"Cannot overwrite directory\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot overwrite file \"%s\"\n"
+"Cannot overwrite file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
+"Cannot move directory\n"
+"%s\n"
+"to\n"
 "%s"
 msgstr ""
 
@@ -2576,43 +2619,43 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat source file \"%s\"\n"
+"Cannot stat source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot set ext2 attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create special file \"%s\"\n"
+"Cannot create special file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chown target file \"%s\"\n"
+"Cannot chown target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chmod target file \"%s\"\n"
+"Cannot chmod target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot open source file \"%s\"\n"
+"Cannot open source file\n"
 "%s"
 msgstr ""
 
@@ -2621,37 +2664,37 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot fstat source file \"%s\"\n"
+"Cannot fstat source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target file \"%s\"\n"
+"Cannot create target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot fstat target file \"%s\"\n"
+"Cannot fstat target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot preallocate space for target file \"%s\"\n"
+"Cannot preallocate space for target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot read source file \"%s\"\n"
+"Cannot read source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot write target file \"%s\"\n"
+"Cannot write target file\n"
 "%s"
 msgstr ""
 
@@ -2669,31 +2712,31 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot close source file \"%s\"\n"
+"Cannot close source file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot close target file \"%s\"\n"
+"Cannot close target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot set ext2 attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot stat source directory \"%s\"\n"
+"Cannot stat source directory\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot get ext2 attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory\n"
 "%s"
 msgstr ""
 
@@ -2711,19 +2754,21 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Destination \"%s\" must be a directory\n"
+"Destination\n"
+"%s\n"
+"must be a directory\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot create target directory \"%s\"\n"
+"Cannot create target directory\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot chown target directory \"%s\"\n"
+"Cannot chown target directory\n"
 "%s"
 msgstr ""
 
@@ -2849,6 +2894,9 @@ msgstr ""
 msgid "Preserve &attributes"
 msgstr ""
 
+msgid "Preserve e&xt2 attributes"
+msgstr ""
+
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
@@ -2874,6 +2922,9 @@ msgstr "情報(&I)"
 msgid "&Tree"
 msgstr "ツリー(&T)"
 
+msgid "Paneli&ze"
+msgstr ""
+
 msgid "&Listing format..."
 msgstr ""
 
@@ -2893,9 +2944,6 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "SFTP li&nk..."
-msgstr ""
-
-msgid "Paneli&ze"
 msgstr ""
 
 msgid "&Rescan"
@@ -3003,9 +3051,6 @@ msgstr ""
 msgid "Screen lis&t"
 msgstr "画面の一覧(&T)"
 
-msgid "&Undelete files (ext2fs only)"
-msgstr "ファイルの復活(&U) (ext2fsのみ)"
-
 msgid "&Listing format edit"
 msgstr "一覧形式編集(&L)"
 
@@ -3033,9 +3078,6 @@ msgstr "確認(&O)..."
 msgid "&Appearance..."
 msgstr ""
 
-msgid "&Display bits..."
-msgstr "表示ビット数(&D)..."
-
 msgid "&Virtual FS..."
 msgstr "仮想FS(&V)..."
 
@@ -3047,11 +3089,8 @@ msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] ""
 
-msgid "The Midnight Commander"
-msgstr "The Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "本当に Midnight Commander を終了しますか?"
+msgid "Do you really want to quit?"
+msgstr ""
 
 msgid "&Above"
 msgstr "上(&A)"
@@ -3220,29 +3259,33 @@ msgid "Directory path:"
 msgstr "ディレクトリーのパス:"
 
 msgid "New hotlist group"
-msgstr ""
+msgstr "新しいホットリストグループ"
 
 msgid "Name of new group:"
 msgstr "新しいグループの名前:"
 
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr ""
+msgstr "エントリ「%s」を削除しますか？"
 
 #, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
+"グループ「%s」は空ではありません。\n"
+"削除しますか？"
 
 msgid "Hotlist Load"
-msgstr ""
+msgstr "ホットリストをロード"
 
 #, c-format
 msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
+"MCは%sファイルを書き込むことができませんでした、\n"
+"古いホットリストエントリは削除されていません"
 
 #, c-format
 msgid "Label for \"%s\":"
@@ -3266,18 +3309,18 @@ msgstr "空き領域情報がありません"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr ""
+msgstr "空きスペース：%s /%s（%d %%）"
 
 #, c-format
 msgid "Type:       %s"
-msgstr ""
+msgstr "種別: %s"
 
 msgid "non-local vfs"
 msgstr "ローカルでないvfs"
 
 #, c-format
 msgid "Device:     %s"
-msgstr ""
+msgstr "デバイス: %s"
 
 #, c-format
 msgid "Filesystem: %s"
@@ -3285,58 +3328,58 @@ msgstr "ファイルシステム: %s"
 
 #, c-format
 msgid "Accessed:   %s"
-msgstr ""
+msgstr "最終アクセス日時:  %s"
 
 #, c-format
 msgid "Modified:   %s"
-msgstr ""
+msgstr "最終変更日時:  %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
 msgid "Changed:    %s"
-msgstr ""
+msgstr "最終編集日時:  %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "デバイス型：メジャー %lu、マイナー %lu"
 
 #, c-format
 msgid "Size:       %s"
-msgstr ""
+msgstr "サイズ:    %s"
 
 #, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] ""
+msgstr[0] "（%luブロック）"
 
 #, c-format
 msgid "Owner:      %s/%s"
-msgstr ""
+msgstr "所有者: %s/%s"
 
 #, c-format
 msgid "Links:      %d"
-msgstr ""
+msgstr "リンク数: %d"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "属性: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "属性：利用できません"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
-msgstr ""
+msgstr "モード:   %s（%04o）"
 
 #, c-format
 msgid "Location:   %Xh:%Xh"
-msgstr ""
+msgstr "場所：%XH：%XH"
 
 msgid "&Equal split"
 msgstr "同じ大きさに分割(&E)"
 
 msgid "&Menubar visible"
-msgstr ""
+msgstr "メニューバーを表示(&M)"
 
 msgid "Command &prompt"
 msgstr "コマンド プロンプト(&P)"
@@ -3345,16 +3388,16 @@ msgid "&Keybar visible"
 msgstr "キーバー表示(&K)"
 
 msgid "H&intbar visible"
-msgstr ""
+msgstr "ヒントバーを表示(&I)"
 
 msgid "&XTerm window title"
 msgstr "XTerm のウィンドウの名前(&X)"
 
 msgid "&Show free space"
-msgstr ""
+msgstr "空き容量を表示(&S)"
 
 msgid "Panel split"
-msgstr ""
+msgstr "パネル分割"
 
 msgid "Console output"
 msgstr "コンソール出力"
@@ -3372,12 +3415,12 @@ msgid "Layout"
 msgstr "レイアウト"
 
 msgid "Memory exhausted!"
-msgstr ""
+msgstr "メモリ不足!"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr ""
+msgstr "無"
 
 msgid "&Unsorted"
 msgstr "並べ替え無し(&U)"
@@ -3385,7 +3428,7 @@ msgstr "並べ替え無し(&U)"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr ""
+msgstr "名"
 
 msgid "&Name"
 msgstr "名前(&N)"
@@ -3393,7 +3436,7 @@ msgstr "名前(&N)"
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|v"
-msgstr ""
+msgstr "版"
 
 msgid "&Version"
 msgstr "バージョン(&V)"
@@ -3401,15 +3444,15 @@ msgstr "バージョン(&V)"
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr ""
+msgstr "種"
 
 msgid "E&xtension"
-msgstr ""
+msgstr "拡張子(&X)"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr ""
+msgstr "量"
 
 msgid "&Size"
 msgstr "サイズ(&S)"
@@ -3420,7 +3463,7 @@ msgstr "ブロック サイズ"
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr ""
+msgstr "更新"
 
 msgid "&Modify time"
 msgstr "更新時刻(&M)"
@@ -3428,7 +3471,7 @@ msgstr "更新時刻(&M)"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr ""
+msgstr "ア"
 
 msgid "&Access time"
 msgstr "アクセス時刻(&A)"
@@ -3436,7 +3479,7 @@ msgstr "アクセス時刻(&A)"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr ""
+msgstr "時"
 
 msgid "C&hange time"
 msgstr "時間の変更(&H)"
@@ -3474,7 +3517,7 @@ msgid "UP--DIR"
 msgstr "UP--DIR"
 
 msgid "SYMLINK"
-msgstr ""
+msgstr "SYMLINK"
 
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
@@ -3488,16 +3531,16 @@ msgid_plural "%s in %d files"
 msgstr[0] ""
 
 msgid "Panelize"
-msgstr ""
+msgstr "パネル化"
 
 msgid "Unknown tag on display format:"
-msgstr ""
+msgstr "未知の表示フォーマットタグ: "
 
 msgid "&Files only"
 msgstr "ファイルのみ(&F)"
 
 msgid "&Case sensitive"
-msgstr ""
+msgstr "大文字と小文字を区別(&C)"
 
 msgid "Select"
 msgstr "選択"
@@ -3512,7 +3555,7 @@ msgid "Do you really want to execute?"
 msgstr "本当に実行しますか?"
 
 msgid "Cannot read directory contents"
-msgstr ""
+msgstr "ディレクトリの内容を読み取れません"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "ユーザの指定した形式は不正なようです. デフォルトに戻します"
@@ -3530,10 +3573,10 @@ msgid "Command"
 msgstr "コマンド"
 
 msgid "Add to external panelize"
-msgstr ""
+msgstr "外部パネル化に追加"
 
 msgid "Enter command label:"
-msgstr ""
+msgstr "コマンドラベルを入力："
 
 #, c-format
 msgid ""
@@ -3541,18 +3584,16 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
 msgid ""
 "External panelize:\n"
-"failed to read data from child stdout:\n"
-"%s"
+"failed to read data from child stdout:"
 msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr ""
+msgstr "非ローカルディレクトリで外部パネル化を実行できません"
 
 msgid "Modified git files"
-msgstr ""
+msgstr "変更されたgitファイル"
 
 msgid "Find rejects after patching"
 msgstr "パッチを当てた後のrejectファイルを検索"
@@ -3586,6 +3627,13 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
+#, c-format
 msgid "Delete %s?"
 msgstr "%s を削除しますか?"
 
@@ -3613,10 +3661,10 @@ msgstr ""
 "%s\n"
 
 msgid "Help file format error\n"
-msgstr ""
+msgstr "ヘルプファイルフォーマットエラー\n"
 
 msgid "Internal bug: Double start of link area"
-msgstr ""
+msgstr "内部バグ：リンク領域のダブルスタート"
 
 #, c-format
 msgid "Cannot find node %s in help file"
@@ -3629,13 +3677,13 @@ msgid "ButtonBar|Index"
 msgstr ""
 
 msgid "ButtonBar|Prev"
-msgstr ""
+msgstr "ボタンバー|前"
 
 msgid "Learn keys"
 msgstr "キーの学習"
 
 msgid "Teach me a key"
-msgstr ""
+msgstr "キーを教えてください"
 
 #, c-format
 msgid ""
@@ -3689,18 +3737,24 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
+"ここに記載されているすべてのキーを押します。あなたがそれをした後、キーがOKで"
+"マークされていないことをチェックしてください。 MissingKeyのスペースを押すか、"
+"マウスをクリックして定義します。タブで移動します。"
 
 #, c-format
 msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
+"実行に失敗しました: \n"
+"%s\n"
 
 msgid "Home directory path is not absolute"
-msgstr ""
+msgstr "HOME ディレクトリが絶対パスではありません"
 
+#, c-format
 msgid ""
-"GNU Midnight Commander\n"
+"%s\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
@@ -3711,6 +3765,9 @@ msgid ""
 "Failed while close:\n"
 "%s\n"
 msgstr ""
+"\n"
+"ファイルクローズエラー: \n"
+"%s\n"
 
 msgid "Choose codepage"
 msgstr "コードページの選択"
@@ -3729,6 +3786,8 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
+"ファイル%s: \n"
+"%sを保存できません"
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
@@ -3739,16 +3798,16 @@ msgid "Cannot open named pipe %s\n"
 msgstr "名前付きパイプ %s をオープンできません\n"
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
+msgstr "シェルはまだアクティブです。とにかくやめる？"
 
 msgid "With builtin editor and aspell support"
-msgstr ""
+msgstr "組込エディタとaspell の使用"
 
 msgid "With builtin editor"
-msgstr ""
+msgstr "組込エディタを使用"
 
 msgid "With optional subshell support"
-msgstr ""
+msgstr "オプションのサブシェルサポートを使用"
 
 msgid "With subshell support as default"
 msgstr ""
@@ -3766,10 +3825,7 @@ msgid "With support for X11 events"
 msgstr ""
 
 msgid "With internationalization support"
-msgstr ""
-
-msgid "With multiple codepages support"
-msgstr ""
+msgstr "国際化機能を利用する"
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -3780,7 +3836,7 @@ msgstr ""
 
 #, c-format
 msgid "Built with S-Lang"
-msgstr ""
+msgstr "S言語で構築されています"
 
 #, c-format
 msgid " and terminfo database (using S-Lang %s)\n"
@@ -3788,7 +3844,7 @@ msgstr ""
 
 #, c-format
 msgid "Built with %s"
-msgstr ""
+msgstr "%sで構築されています"
 
 #, c-format
 msgid " (using %s)\n"
@@ -4141,6 +4197,12 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
+#, c-format
+msgid ""
+"sftp: cannot open %s:\n"
+"%s"
+msgstr ""
+
 msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
@@ -4285,87 +4347,15 @@ msgstr ""
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
-msgid "undelfs: error"
-msgstr ""
-
-msgid "not enough memory"
-msgstr ""
-
-msgid "while allocating block buffer"
-msgstr ""
-
-#, c-format
-msgid "open_inode_scan: %d"
-msgstr ""
-
-#, c-format
-msgid "while starting inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: %d iノードの削除ファイル情報をロード中です"
-
-#, c-format
-msgid "while calling ext2_block_iterate %d"
-msgstr ""
-
-msgid "no more memory while reallocating array"
-msgstr ""
-
-#, c-format
-msgid "while doing inode scan %d"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file %s"
-msgstr ""
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: iノードビットマップをロード中です..."
-
-#, c-format
-msgid ""
-"Cannot load inode bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: ブロックビットマップを読み込み中です..."
-
-#, c-format
-msgid ""
-"Cannot load block bitmap from:\n"
-"%s"
-msgstr ""
-
-msgid "vfs_info is not fs!"
-msgstr ""
-
-msgid "You have to chdir to extract files first"
-msgstr ""
-
-msgid "while iterating over blocks"
-msgstr ""
-
-#, c-format
-msgid "Cannot open file \"%s\""
-msgstr ""
-
-msgid "Ext2lib error"
-msgstr ""
-
 msgid "Invalid value"
 msgstr "不正な値"
 
 msgid "File was modified. Save with exit?"
 msgstr ""
 
-msgid "&Cancel quit"
-msgstr ""
-
+#, c-format
 msgid ""
-"Midnight Commander is being shut down.\n"
+"%s is being shut down.\n"
 "Save modified file?"
 msgstr ""
 
@@ -4414,10 +4404,11 @@ msgstr ""
 msgid "ButtonBar|Format"
 msgstr ""
 
-#, c-format
-msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
+#, fuzzy
+msgid "Quick view"
+msgstr "直ちに保存(&Q)"
+
+msgid "Failed to read data from child stdout"
 msgstr ""
 
 #, c-format
@@ -4440,18 +4431,16 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot open \"%s\"\n"
-"%s"
-msgstr ""
-"「%s」を開けません\n"
-"%s"
-
-msgid "Cannot view: not a regular file"
+"Cannot view\n"
+"%s\n"
+"Not a regular file"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot open \"%s\" in parse mode\n"
+"Cannot open\n"
+"%s\n"
+"in parse mode\n"
 "%s"
 msgstr ""
 
@@ -4463,3 +4452,19 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Undelete files on an ext2 file system"
+#~ msgstr "ext2ファイルシステム上の削除ファイルを復帰"
+
+#~ msgid "&Undelete files (ext2fs only)"
+#~ msgstr "ファイルの復活(&U) (ext2fsのみ)"
+
+#, c-format
+#~ msgid "undelfs: loading deleted files information %d inodes"
+#~ msgstr "undelfs: %d iノードの削除ファイル情報をロード中です"
+
+#~ msgid "undelfs: reading inode bitmap..."
+#~ msgstr "undelfs: iノードビットマップをロード中です..."
+
+#~ msgid "undelfs: reading block bitmap..."
+#~ msgstr "undelfs: ブロックビットマップを読み込み中です..."

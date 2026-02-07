@@ -88,6 +88,8 @@ mc_shell_get_installed_in_system (void)
         mc_shell->path = g_strdup ("/bin/csh");
     else if (access ("/bin/mksh", X_OK) == 0)
         mc_shell->path = g_strdup ("/bin/mksh");
+    else if (access ("/bin/lksh", X_OK) == 0)
+        mc_shell->path = g_strdup ("/bin/lksh");
     /* No fish as fallback because it is so much different from other shells and
      * in a way exotic (even though user-friendly by name) that we should not
      * present it as a subshell without the user's explicit intention. We rather
@@ -202,8 +204,13 @@ mc_shell_recognize_real_path (mc_shell_t *mc_shell)
         mc_shell->name = "ksh";
     }
     else if (strstr (mc_shell->path, "/mksh") != NULL
-             || strstr (mc_shell->real_path, "/mksh") != NULL)
+             || strstr (mc_shell->real_path, "/mksh") != NULL
+             || strstr (mc_shell->path, "/lksh") != NULL
+             || strstr (mc_shell->real_path, "/lksh") != NULL)
     {
+        /* lksh is present on many systems (all Debian derivatives, plus others) and is an mksh
+         * binary built with POSIX semantics where they cannot be made a run-time option (such as
+         * the width of the arithmetic data type); see #4634 */
         mc_shell->type = SHELL_MKSH;
         mc_shell->name = "mksh";
     }
@@ -240,7 +247,7 @@ mc_shell_recognize_path (mc_shell_t *mc_shell)
         mc_shell->type = SHELL_KSH;
         mc_shell->name = "ksh";
     }
-    else if (strstr (mc_shell->path, "/mksh") != NULL
+    else if (strstr (mc_shell->path, "/mksh") != NULL || strstr (mc_shell->path, "/lksh") != NULL
              || (getenv ("KSH_VERSION") != NULL
                  && strstr (getenv ("KSH_VERSION"), "MIRBSD KSH") != NULL))
     {

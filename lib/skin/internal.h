@@ -25,8 +25,6 @@ void mc_skin_hardcoded_ugly_lines (mc_skin_t *mc_skin);
 void mc_skin_hardcoded_space_lines (mc_skin_t *mc_skin);
 void mc_skin_hardcoded_blackwhite_colors (mc_skin_t *mc_skin);
 
-void mc_skin_colors_old_configure (mc_skin_t *mc_skin);
-
 /*** inline functions ****************************************************************************/
 
 #endif

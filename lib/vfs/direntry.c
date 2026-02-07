@@ -464,7 +464,7 @@ vfs_s_readdir (void *data)
 
     name = VFS_ENTRY (info->cur->data)->name;
     if (name != NULL)
-        dir = vfs_dirent_init (NULL, name, 0);
+        dir = vfs_dirent_init (NULL, name, 0, DT_UNKNOWN);
     else
         vfs_die ("Null in structure-cannot happen");
 

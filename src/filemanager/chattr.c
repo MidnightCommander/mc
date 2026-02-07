@@ -41,12 +41,13 @@
 
 #include "lib/tty/tty.h"    // tty_print*()
 #include "lib/tty/color.h"  // tty_setcolor()
-#include "lib/skin.h"       // COLOR_NORMAL, DISABLED_COLOR
+#include "lib/skin.h"       // DIALOG_NORMAL_COLOR, CORE_DISABLED_COLOR
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #include "lib/util.h"  // x_basename()
 
 #include "src/keymap.h"  // chattr_map
+#include "src/util.h"    // file_error_message()
 
 #include "cmd.h"  // chattr_cmd(), chattr_get_as_str()
 
@@ -173,7 +174,7 @@ static struct
 #ifdef EXT4_HUGE_FILE_FL
     /* removed in v1.43.9
        ext2fsprogs 4825daeb0228e556444d199274b08c499ac3706c 2018-02-06 */
-    { EXT4_HUGE_FILE_FL, 'h', N_ ("Huge_file"), FALSE, FALSE },
+    { EXT4_HUGE_FILE_FL, 'h', N_ ("Huge file"), FALSE, FALSE },
 #endif
     { FS_NOCOW_FL, 'C', N_ ("No COW"), FALSE, FALSE },
 #ifdef FS_DAX_FL
@@ -218,16 +219,15 @@ static struct
 {
     int ret_cmd;
     button_flags_t flags;
-    int width;
     const char *text;
     Widget *button;
 } chattr_but[BUTTONS] = {
-    /* 0 */ { B_SETALL, NORMAL_BUTTON, 0, N_ ("Set &all"), NULL },
-    /* 1 */ { B_MARKED, NORMAL_BUTTON, 0, N_ ("&Marked all"), NULL },
-    /* 2 */ { B_SETMRK, NORMAL_BUTTON, 0, N_ ("S&et marked"), NULL },
-    /* 3 */ { B_CLRMRK, NORMAL_BUTTON, 0, N_ ("C&lear marked"), NULL },
-    /* 4 */ { B_ENTER, DEFPUSH_BUTTON, 0, N_ ("&Set"), NULL },
-    /* 5 */ { B_CANCEL, NORMAL_BUTTON, 0, N_ ("&Cancel"), NULL },
+    /* 0 */ { B_SETALL, NORMAL_BUTTON, N_ ("Set &all"), NULL },
+    /* 1 */ { B_MARKED, NORMAL_BUTTON, N_ ("&Marked all"), NULL },
+    /* 2 */ { B_SETMRK, NORMAL_BUTTON, N_ ("S&et marked"), NULL },
+    /* 3 */ { B_CLRMRK, NORMAL_BUTTON, N_ ("C&lear marked"), NULL },
+    /* 4 */ { B_ENTER, DEFPUSH_BUTTON, N_ ("&Set"), NULL },
+    /* 5 */ { B_CANCEL, NORMAL_BUTTON, N_ ("&Cancel"), NULL },
 };
 
 static gboolean flags_changed;
@@ -284,7 +284,7 @@ fileattrtext_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
     {
     case MSG_DRAW:
     {
-        int color = COLOR_NORMAL;
+        int color = DIALOG_NORMAL_COLOR;
         size_t i;
 
         tty_setcolor (color);
@@ -307,17 +307,17 @@ fileattrtext_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
             // Do not set new color for each symbol. Try to use previous color.
             if (chattr_is_modifiable (i))
             {
-                if (color == DISABLED_COLOR)
+                if (color == CORE_DISABLED_COLOR)
                 {
-                    color = COLOR_NORMAL;
+                    color = DIALOG_NORMAL_COLOR;
                     tty_setcolor (color);
                 }
             }
             else
             {
-                if (color != DISABLED_COLOR)
+                if (color != CORE_DISABLED_COLOR)
                 {
-                    color = DISABLED_COLOR;
+                    color = CORE_DISABLED_COLOR;
                     tty_setcolor (color);
                 }
             }
@@ -394,7 +394,7 @@ chattr_toggle_select (const WChattrBoxes *cb, int Id)
 
     check_attr[Id].selected = !check_attr[Id].selected;
 
-    tty_setcolor (COLOR_NORMAL);
+    tty_setcolor (DIALOG_NORMAL_COLOR);
     chattr_draw_select (w, check_attr[Id].selected);
 }
 
@@ -936,16 +936,10 @@ chattr_init (void)
 
     check_attr_width += 1 + 3 + 1;  // mark, [x] and space
 
-    for (i = 0; i < BUTTONS; i++)
-    {
 #ifdef ENABLE_NLS
+    for (i = 0; i < BUTTONS; i++)
         chattr_but[i].text = _ (chattr_but[i].text);
 #endif
-
-        chattr_but[i].width = str_term_width1 (chattr_but[i].text) + 3;  // [], spaces and w/o &
-        if (chattr_but[i].flags == DEFPUSH_BUTTON)
-            chattr_but[i].width += 2;  // <>
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1021,23 +1015,24 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
         if (i == 0 || i == BUTTONS - 2)
             group_add_widget (dg, hline_new (y++, -1, -1));
 
-        chattr_but[i].button = WIDGET (button_new (y, dw->rect.cols / 2 + 1 - chattr_but[i].width,
-                                                   chattr_but[i].ret_cmd, chattr_but[i].flags,
+        chattr_but[i].button = WIDGET (button_new (y, 1, chattr_but[i].ret_cmd, chattr_but[i].flags,
                                                    chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
+        const int bw0 = button_get_width (BUTTON (chattr_but[i].button));
+
         i++;
-        chattr_but[i].button =
-            WIDGET (button_new (y++, dw->rect.cols / 2 + 2, chattr_but[i].ret_cmd,
-                                chattr_but[i].flags, chattr_but[i].text, NULL));
+        chattr_but[i].button = WIDGET (button_new (y++, 1, chattr_but[i].ret_cmd,
+                                                   chattr_but[i].flags, chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
+        const int bw1 = button_get_width (BUTTON (chattr_but[i].button));
+
         // two buttons in a row
-        cols =
-            MAX (cols, chattr_but[i - 1].button->rect.cols + 1 + chattr_but[i].button->rect.cols);
+        cols = MAX (cols, bw0 + 1 + bw1);
     }
 
-    // adjust dialog size and button positions
+    // adjust dialog size
     cols += 6;
     if (cols > dw->rect.cols)
     {
@@ -1045,24 +1040,25 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
         r.lines = lines;
         r.cols = cols;
         widget_set_size_rect (dw, &r);
+    }
 
-        // dialog center
-        cols = dw->rect.x + dw->rect.cols / 2 + 1;
+    // dialog center
+    const int mid = dw->rect.x + dw->rect.cols / 2 + 1;
 
-        for (i = single_set ? (BUTTONS - 2) : 0; i < BUTTONS; i++)
-        {
-            Widget *b;
+    // adjust button positions
+    for (i = single_set ? (BUTTONS - 2) : 0; i < BUTTONS; i++)
+    {
+        Widget *b;
 
-            b = chattr_but[i++].button;
-            r = b->rect;
-            r.x = cols - r.cols;
-            widget_set_size_rect (b, &r);
-
-            b = chattr_but[i].button;
-            r = b->rect;
-            r.x = cols + 1;
-            widget_set_size_rect (b, &r);
-        }
+        b = chattr_but[i].button;
+        r = b->rect;
+        r.x = mid - r.cols;
+        widget_set_size_rect (b, &r);
+        i++;
+        b = chattr_but[i].button;
+        r = b->rect;
+        r.x = mid + 1;
+        widget_set_size_rect (b, &r);
     }
 
     widget_select (WIDGET (cb));
@@ -1090,32 +1086,28 @@ try_chattr (const vfs_path_t *p, unsigned long m)
     while (mc_fsetflags (p, m) == -1 && !ignore_all)
     {
         int my_errno = errno;
-        int result;
-        char *msg;
 
         if (fname == NULL)
             fname = x_basename (vfs_path_as_str (p));
-        msg = g_strdup_printf (_ ("Cannot chattr \"%s\"\n%s"), fname, unix_error_string (my_errno));
-        result = query_dialog (MSG_ERROR, msg, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore &all"),
-                               _ ("&Retry"), _ ("&Cancel"));
-        g_free (msg);
 
-        switch (result)
+        errno = my_errno;  // restore errno for file_error(
+
+        switch (file_error (NULL, TRUE, _ ("Cannot chattr\n%sn%s"), fname))
         {
-        case 0:
+        case FILE_IGNORE:
             // try next file
             return TRUE;
 
-        case 1:
+        case FILE_IGNORE_ALL:
             ignore_all = TRUE;
             // try next file
             return TRUE;
 
-        case 2:
+        case FILE_RETRY:
             // retry this file
             break;
 
-        case 3:
+        case FILE_ABORT:
         default:
             // stop remain files processing
             return FALSE;
@@ -1215,8 +1207,7 @@ chattr_cmd (WPanel *panel)
 
         if (mc_fgetflags (vpath, &flags) != 0)
         {
-            message (D_ERROR, MSG_ERROR, _ ("Cannot get ext2 attributes of \"%s\"\n%s"), fname->str,
-                     unix_error_string (errno));
+            file_error_message (_ ("Cannot get ext2 attributes of\n%s"), fname->str);
             vfs_path_free (vpath, TRUE);
             break;
         }
@@ -1240,8 +1231,7 @@ chattr_cmd (WPanel *panel)
                 {
                     // single or last file
                     if (mc_fsetflags (vpath, flags) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _ ("Cannot chattr \"%s\"\n%s"), fname->str,
-                                 unix_error_string (errno));
+                        file_error_message (_ ("Cannot chattr\n%s"), fname->str);
                     end_chattr = TRUE;
                 }
                 else if (!try_chattr (vpath, flags))

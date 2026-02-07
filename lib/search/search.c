@@ -49,7 +49,7 @@
 
 /*** file scope variables ************************************************************************/
 
-static const mc_search_type_str_t mc_search__list_types[] = {
+static mc_search_type_str_t mc_search__list_types[] = {
     { N_ ("No&rmal"), MC_SEARCH_T_NORMAL },
     { N_ ("Re&gular expression"), MC_SEARCH_T_REGEX },
     { N_ ("He&xadecimal"), MC_SEARCH_T_HEX },
@@ -203,9 +203,8 @@ mc_search_prepare (mc_search_t *lc_mc_search)
 
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
-            const char *id;
+            const char *id = get_codepage_id (loop1);
 
-            id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
             if (g_ascii_strcasecmp (id, lc_mc_search->original.charset) == 0)
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search,
@@ -313,6 +312,18 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 const mc_search_type_str_t *
 mc_search_types_list_get (size_t *num)
 {
+#ifdef ENABLE_NLS
+    static gboolean i18n_flag = FALSE;
+
+    if (!i18n_flag)
+    {
+        for (size_t i = 0; i < G_N_ELEMENTS (mc_search__list_types); i++)
+            if (mc_search__list_types[i].str != NULL)
+                mc_search__list_types[i].str = _ (mc_search__list_types[i].str);
+        i18n_flag = TRUE;
+    }
+#endif
+
     // don't count last NULL item
     if (num != NULL)
         *num = G_N_ELEMENTS (mc_search__list_types) - 1;
