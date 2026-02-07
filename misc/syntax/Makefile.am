@@ -50,6 +50,7 @@ SYNTAXFILES =			\
 	java.syntax		\
 	js.syntax		\
 	json.syntax		\
+	kconfig.syntax		\
 	kotlin.syntax		\
 	latex.syntax		\
 	lisp.syntax		\
