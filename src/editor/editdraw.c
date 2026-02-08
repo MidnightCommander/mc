@@ -471,7 +471,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real, long 
         else if ((style & MOD_ABNORMAL) != 0)
             tty_setcolor (EDITOR_NONPRINTABLE_COLOR);
         else
-            tty_lowlevel_setcolor (p->style >> 16);
+            tty_setcolor (p->style >> 16);
 
         if (edit_options.show_right_margin)
         {

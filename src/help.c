@@ -113,6 +113,17 @@ static struct
 static GSList *link_area = NULL;
 static gboolean inside_link_area = FALSE;
 
+static const dlg_colors_t help_colors = {
+    [DLG_COLOR_NORMAL] = HELP_NORMAL_COLOR,
+    [DLG_COLOR_FOCUS] = 0,  // unused
+    [DLG_COLOR_HOT_NORMAL] = HELP_BOLD_COLOR,
+    [DLG_COLOR_HOT_FOCUS] = 0,        // unused
+    [DLG_COLOR_SELECTED_NORMAL] = 0,  // unused
+    [DLG_COLOR_SELECTED_FOCUS] = 0,   // unused
+    [DLG_COLOR_TITLE] = HELP_TITLE_COLOR,
+    [DLG_COLOR_FRAME] = HELP_FRAME_COLOR,
+};
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
