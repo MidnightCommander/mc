@@ -2320,10 +2320,6 @@ audio CD ripping and playing
 or
 .IR "cd device/audio://" ).
 .TP
-.B bpp
-package of Bad Penguin GNU/Linux distribution
-.RI ( "cd file.bpp/bpp://" ).
-.TP
 .B deb
 package of Debian GNU/Linux distribution
 .RI ( "cd file.deb/deb://" ).
