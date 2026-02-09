@@ -3225,10 +3225,6 @@ acceso y audición de CDs
 o
 .IR "cd dispositivo/audio://" ).
 .TP
-.B bpp
-paquete de la distribución GNU/Linux Bad Penguin
-.RI ( "cd archivo.bpp/bpp://" ).
-.TP
 .B deb
 paquete de la distribución GNU/Linux Debian
 .RI ( "cd archivo.deb/deb://" ).

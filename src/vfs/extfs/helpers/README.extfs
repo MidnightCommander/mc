@@ -57,9 +57,6 @@ deba
 # Simple filesystem for audio cdroms. Use /dev/cdrom#audio (or /#audio)
 audio
 
-# Package of Bad Penguin (an Italian GNU/Linux distribution)
-bpp
-
 # ISO image
 iso9660
 

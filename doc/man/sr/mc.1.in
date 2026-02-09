@@ -3305,10 +3305,6 @@ front end за Дебијанов систем управљања пакетим
 или
 .IR "cd uredjaj/audio://" ).
 .TP
-.B bpp
-пакет дистрибуције ГНУ\-а са Линуксом Bad Penguin
-.IR ( "cd paket.bpp/bpp://" ).
-.TP
 .B deb
 пакет дистрибуције ГНУ\-а са Линуксом Дебијан
 .RI ( "cd paket.deb/deb://" ).
