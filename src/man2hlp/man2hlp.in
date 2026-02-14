@@ -774,6 +774,7 @@ sub main
         }
 
         $in_row++;
+        $input_line =~ s/\X'tty:.*?'//g;  # Eliminate OSC 8 hyperlink targets
         $len = length($input_line);
 
         if ($verbatim_flag)
