@@ -168,7 +168,7 @@ tty_setcolor (int color)
 void
 tty_lowlevel_setcolor (int color)
 {
-    SLsmg_set_color (color & 0x7F);
+    SLsmg_set_color (color);
 }
 
 /* --------------------------------------------------------------------------------------------- */
