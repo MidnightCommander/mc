@@ -35,8 +35,8 @@ struct edit_syntax_rule_t
 {
     unsigned short keyword;
     off_t end;
-    unsigned char context;
-    unsigned char _context;
+    unsigned short context;
+    unsigned short _context;
     unsigned char border;
 };
 
