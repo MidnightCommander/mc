@@ -87,6 +87,7 @@ edition_post_exec (void)
     tty_flush_input ();
 
     tty_keypad (TRUE);
+    tty_kitty (TRUE);
     tty_raw_mode ();
     channels_up ();
     enable_mouse ();
@@ -113,6 +114,7 @@ edition_pre_exec (void)
     disable_bracketed_paste ();
 
     tty_reset_shell_mode ();
+    tty_kitty (FALSE);
     tty_keypad (FALSE);
     tty_reset_screen ();
 
@@ -485,6 +487,7 @@ toggle_subshell (void)
     tty_reset_shell_mode ();
 #endif
     tty_noecho ();
+    tty_kitty (FALSE);
     tty_keypad (FALSE);
     tty_reset_screen ();
     tty_exit_ca_mode ();
@@ -521,6 +524,7 @@ toggle_subshell (void)
 
     tty_reset_prog_mode ();
     tty_keypad (TRUE);
+    tty_kitty (TRUE);
 
     /* Prevent screen flash when user did 'exit' or 'logout' within
        subshell */

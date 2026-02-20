@@ -2861,6 +2861,14 @@ premendo qualsiasi tasto si tornerà al Midnight Commander.
 .I use_file_to_guess_type
 Se questa variabile è abilitata (valore predefinito) userà il comando
 file per trovare delle corrispondenze sui tipi di file elencati nel
+.TP
+.I kitty_keyboard_protocol
+Per impostazione predefinita, Midnight Commander invia una sequenza di
+escape che abilita il Kitty Keyboard Protocol, il quale consente una
+gestione precisa della tastiera (incluse combinazioni di tasti come
+C\-Enter o C\-S\-Enter) quando ci si connette da terminali che supportano
+questo protocollo. Se impostato su false, Midnight Commander non tenterà
+di abilitare questo protocollo.
 .\"LINK2"
 file mc.ext.ini\&.
 .\"Edit Extension File"

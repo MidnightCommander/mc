@@ -92,11 +92,16 @@ typedef enum
 // the values are either one of MCS_ACS_* or a character in the current locale.
 extern mc_tty_char_t mc_tty_frm[];
 
+/*** declarations of public functions ************************************************************/
+
 extern int tty_tigetflag (const char *terminfo_cap, const char *termcap_cap);
 extern int tty_tigetnum (const char *terminfo_cap, const char *termcap_cap);
 extern char *tty_tigetstr (const char *terminfo_cap, const char *termcap_cap);
-
-/*** declarations of public functions ************************************************************/
+#ifdef HAVE_SLANG
+extern char *tty_tiparm (const char *str, ...);
+#else
+#define tty_tiparm(str, ...) tiparm ((NCURSES_CONST char *) (str), __VA_ARGS__)
+#endif
 
 extern void tty_beep (void);
 
@@ -126,6 +131,7 @@ extern int tty_flush_input (void);
 extern void tty_keypad (gboolean set);
 extern void tty_nodelay (gboolean set);
 extern int tty_baudrate (void);
+extern void tty_kitty (gboolean set);
 
 /* {{{ Output }}} */
 
@@ -146,6 +152,7 @@ extern void tty_print_char (mc_tty_char_t c);
 extern void tty_print_anychar (mc_tty_char_t c);
 extern void tty_print_string (const char *s);
 extern void tty_printf (const char *s, ...) G_GNUC_PRINTF (1, 2);
+extern void tty_putp (const char *s);
 
 extern void tty_print_one_vline (gboolean single);
 extern void tty_print_one_hline (gboolean single);

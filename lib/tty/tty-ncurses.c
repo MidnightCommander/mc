@@ -307,6 +307,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     noecho ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
+    tty_kitty (TRUE);
 
     tty_setup_sigwinch (sigwinch_handler);
 }
@@ -317,6 +318,7 @@ void
 tty_shutdown (void)
 {
     tty_destroy_winch_pipe ();
+    tty_kitty (FALSE);
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);
@@ -719,6 +721,15 @@ tty_print_string (const char *s)
         len = COLS - (mc_curs_col - len);
 
     addstr (str_term_substring (s, start, len));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_putp (const char *s)
+{
+    putp (s);
+    fflush (stdout);
 }
 
 /* --------------------------------------------------------------------------------------------- */
