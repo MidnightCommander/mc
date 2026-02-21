@@ -255,6 +255,9 @@ enum
     CK_BookmarkFlush,
     CK_BookmarkNext,
     CK_BookmarkPrev,
+    // code folding
+    CK_FoldToggle,
+    CK_UnfoldAll,
     // mark commands
     CK_MarkColumn,
     CK_MarkWord,

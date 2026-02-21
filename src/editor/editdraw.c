@@ -433,6 +433,16 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real, long 
             edit_move (x1 + i - edit_options.line_state_width, y);
             if (status[i] == '\0')
                 status[i] = ' ';
+            if (i == LINE_STATE_WIDTH - 1 && status[i] == 'v')
+            {
+                tty_print_string (edit_fold_open_char);
+                continue;
+            }
+            if (i == LINE_STATE_WIDTH - 1 && status[i] == '>')
+            {
+                tty_print_string (edit_fold_close_char);
+                continue;
+            }
             tty_print_char (status[i]);
         }
     }
@@ -497,6 +507,8 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
     int col, start_col_real;
     int abn_style;
     int book_mark = 0;
+    int brace_depth = 0;
+    long fold_line_count = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
     if (row > w->rect.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen != 0 ? 0 : 1))
@@ -530,7 +542,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
 
         cur_line = edit->start_line + row;
         if (cur_line <= edit->buffer.lines)
-            g_snprintf (line_stat, sizeof (line_stat), "%7ld ", cur_line + 1);
+            g_snprintf (line_stat, sizeof (line_stat), "%7ld  ", cur_line + 1);
         else
         {
             memset (line_stat, ' ', LINE_STATE_WIDTH);
@@ -539,6 +551,18 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
 
         if (book_mark_query_color (edit, cur_line, EDITOR_BOOKMARK_COLOR))
             g_snprintf (line_stat, 2, "*");
+
+        if (cur_line <= edit->buffer.lines)
+        {
+            struct edit_fold_t *fold;
+
+            fold = edit_fold_find (edit, cur_line);
+            if (fold != NULL && cur_line == fold->line_start)
+            {
+                line_stat[LINE_STATE_WIDTH - 1] = '>';
+                fold_line_count = fold->line_count;
+            }
+        }
     }
 
     if (col <= -(edit->start_col + 16))
@@ -602,6 +626,11 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     c = edit_buffer_get_utf (&edit->buffer, q, &char_length);
                 else
                     c = edit_buffer_get_byte (&edit->buffer, q);
+
+                if (strchr ("{[(", c) != NULL)
+                    brace_depth++;
+                else if (strchr ("}])", c) != NULL)
+                    brace_depth--;
 
                 // we don't use bg for mc - fg contains both
                 if (book_mark != 0)
@@ -805,7 +834,48 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
         }
     }
 
+    if (fold_line_count > 0)
+    {
+        char fold_text[64];
+        int fi;
+        int style;
+        line_s *fp;
+
+        style = EDITOR_LINE_STATE_COLOR << 16;
+
+        /* find the opening bracket and determine the closing one */
+        {
+            char close_bracket = '}';
+
+            for (fp = p - 1; fp >= line; fp--)
+            {
+                if (fp->ch == '{' || fp->ch == '[' || fp->ch == '(')
+                {
+                    if (fp->ch == '[')
+                        close_bracket = ']';
+                    else if (fp->ch == '(')
+                        close_bracket = ')';
+                    fp->style = style;
+                    break;
+                }
+            }
+
+            g_snprintf (fold_text, sizeof (fold_text), _ ("...%c (%ld lines)"), close_bracket,
+                        fold_line_count);
+        }
+
+        for (fi = 0; fold_text[fi] != '\0' && p < line + MAX_LINE_LEN - 1; fi++)
+        {
+            p->ch = fold_text[fi];
+            p->style = style;
+            p++;
+        }
+    }
+
     p->ch = 0;
+
+    if (brace_depth > 0 && edit_options.line_state && line_stat[LINE_STATE_WIDTH - 1] != '>')
+        line_stat[LINE_STATE_WIDTH - 1] = 'v';
 
     print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat, book_mark);
 }
@@ -837,6 +907,11 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
     int force = edit->force;
     int y1, x1, y2, x2;
     int last_line, last_column;
+
+    /* When folds are active, always do a full page redraw so that
+       line numbers and content are rendered correctly. */
+    if (edit->folds != NULL)
+        force |= REDRAW_PAGE;
 
     // draw only visible region
 
@@ -891,13 +966,55 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
 
         if ((force & REDRAW_PAGE) != 0)
         {
+            long current_line;
+
             b = edit_buffer_get_forward_offset (&edit->buffer, edit->start_display, start_row, 0);
+            current_line = edit->start_line + start_row;
             for (row = start_row; row <= end_row; row++)
             {
+                edit_fold_t *fold;
+
                 if (key_pending (edit))
                     return;
-                edit_draw_this_line (edit, b, row, start_column, end_column);
-                b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
+
+                fold = edit_fold_find (edit, current_line);
+                if (fold != NULL && current_line == fold->line_start)
+                {
+                    /* draw fold start line normally (shows '>' indicator) */
+                    long saved_start_line = edit->start_line;
+                    edit->start_line = current_line - row;
+                    edit_draw_this_line (edit, b, row, start_column, end_column);
+                    edit->start_line = saved_start_line;
+
+                    /* skip hidden lines */
+                    b = edit_buffer_get_forward_offset (&edit->buffer, b,
+                                                        fold->line_count + 1, 0);
+                    current_line += fold->line_count + 1;
+                }
+                else if (fold != NULL && current_line > fold->line_start)
+                {
+                    /* start_line was inside a fold — skip to after it
+                       without consuming a screen row */
+                    long skip = fold->line_start + fold->line_count + 1 - current_line;
+
+                    b = edit_buffer_get_forward_offset (&edit->buffer, b, skip, 0);
+                    current_line += skip;
+                    row--;  /* compensate for loop increment */
+                }
+                else
+                {
+                    /* Temporarily adjust start_line so that edit_draw_this_line
+                       computes the correct line number as (start_line + row).
+                       With folds, the default (start_line + row) is wrong because
+                       folded lines don't occupy screen rows. */
+                    long saved_start_line = edit->start_line;
+                    edit->start_line = current_line - row;
+                    edit_draw_this_line (edit, b, row, start_column, end_column);
+                    edit->start_line = saved_start_line;
+
+                    b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
+                    current_line++;
+                }
             }
         }
         else
