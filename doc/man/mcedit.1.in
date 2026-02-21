@@ -292,17 +292,17 @@ file .\e*\e\e.c C\esProgram\esFile (#include|/\e\e\e*)
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
 # default colors
-define  comment   brown
+define  comment   yellow
 context default
-  keyword  whole  if       yellow
-  keyword  whole  else     yellow
-  keyword  whole  for      yellow
-  keyword  whole  while    yellow
-  keyword  whole  do       yellow
-  keyword  whole  switch   yellow
-  keyword  whole  case     yellow
-  keyword  whole  static   yellow
-  keyword  whole  extern   yellow
+  keyword  whole  if       brightyellow
+  keyword  whole  else     brightyellow
+  keyword  whole  for      brightyellow
+  keyword  whole  while    brightyellow
+  keyword  whole  do       brightyellow
+  keyword  whole  switch   brightyellow
+  keyword  whole  case     brightyellow
+  keyword  whole  static   brightyellow
+  keyword  whole  extern   brightyellow
   keyword         {        brightcyan
   keyword         }        brightcyan
   keyword         '*'      green
@@ -416,9 +416,9 @@ delimiters, this keyword prevents the context from ending at the end of
 the lines that end in a backslash, thus allowing C preprocessor
 directive to continue across multiple lines.
 .PP
-The possible colors are: black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white. The special keyword "default" means
+The possible colors are: black, brightblack, red, brightred, green,
+brightgreen, yellow, brightyellow, blue, brightblue, magenta, brightmagenta,
+cyan, brightcyan, white and brightwhite. The special keyword "default" means
 the terminal's default. Another special keyword "base" means mc's main
 colors, it is useful as a placeholder if you want to specify attributes
 without modifying the background color. When 256 colors are available,

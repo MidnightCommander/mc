@@ -6,21 +6,21 @@
 # a lot more readable.
 
 context default
-    keyword whole methodsFor yellow
-    keyword whole subclass yellow
-    keyword whole class yellow
-    keyword whole nil yellow
-    keyword whole self yellow
-    keyword whole instanceVariableNames yellow
-    keyword whole classVariableNames yellow
-    keyword whole poolDictionaries yellow
-    keyword whole category yellow
-    keyword whole super yellow
-    keyword whole category yellow
-    keyword whole variableSubclass yellow
-    keyword whole variableByteSubclass yellow
-    keyword whole variableWordSubclass yellow
-    keyword whole superclass yellow
+    keyword whole methodsFor brightyellow
+    keyword whole subclass brightyellow
+    keyword whole class brightyellow
+    keyword whole nil brightyellow
+    keyword whole self brightyellow
+    keyword whole instanceVariableNames brightyellow
+    keyword whole classVariableNames brightyellow
+    keyword whole poolDictionaries brightyellow
+    keyword whole category brightyellow
+    keyword whole super brightyellow
+    keyword whole category brightyellow
+    keyword whole variableSubclass brightyellow
+    keyword whole variableByteSubclass brightyellow
+    keyword whole variableWordSubclass brightyellow
+    keyword whole superclass brightyellow
 
     keyword whole not brightmagenta
     keyword whole comment brightmagenta
@@ -148,7 +148,7 @@ context default
 
 context $ ; cyan
 
-context " " brown
+context " " yellow
 
 context ' ' brightcyan
 

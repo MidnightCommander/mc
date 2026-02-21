@@ -5,35 +5,35 @@
 
 context default
 
-    keyword ->> brightred gray
-    keyword <<- brightred gray
-    keyword -> brightred gray
+    keyword ->> brightred brightblack
+    keyword <<- brightred brightblack
+    keyword -> brightred brightblack
 
     keyword <- brightred
 
-    keyword \\ gray white
+    keyword \\ brightblack brightwhite
 
-    keyword : yellow
-    keyword $ yellow
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword ^ yellow
-    keyword \* yellow
-    keyword | yellow
-    keyword / yellow
-    keyword != yellow
-    keyword == yellow
-    keyword ! yellow
-    keyword ~ yellow
-    keyword % yellow
-    keyword & yellow
+    keyword : brightyellow
+    keyword $ brightyellow
+    keyword > brightyellow
+    keyword < brightyellow
+    keyword \+ brightyellow
+    keyword - brightyellow
+    keyword ^ brightyellow
+    keyword \* brightyellow
+    keyword | brightyellow
+    keyword / brightyellow
+    keyword != brightyellow
+    keyword == brightyellow
+    keyword ! brightyellow
+    keyword ~ brightyellow
+    keyword % brightyellow
+    keyword & brightyellow
 
     keyword = red
 
-    keyword { white
-    keyword } white
+    keyword { brightwhite
+    keyword } brightwhite
 
     keyword ( brightcyan
     keyword ) brightcyan
@@ -48,117 +48,117 @@ context default
     keyword whole if brightmagenta
     keyword whole while brightmagenta
 
-    keyword whole abbreviate yellow
-    keyword whole abline yellow
-    keyword whole abs yellow
-    keyword whole aggregate yellow
-    keyword whole apply yellow
-    keyword whole as.character yellow
-    keyword whole as.data.frame yellow
-    keyword whole as.factor yellow
-    keyword whole as.matrix yellow
-    keyword whole as.numeric yellow
-    keyword whole as.vector yellow
-    keyword whole attr yellow
-    keyword whole boxplot yellow
-    keyword whole c yellow
-    keyword whole cat yellow
-    keyword whole cbind yellow
-    keyword whole chisq.test yellow
-    keyword whole colnames yellow
-    keyword whole colSums yellow
-    keyword whole cor yellow
-    keyword whole cor.test yellow
-    keyword whole data.frame yellow
-    keyword whole dev.off yellow
-    keyword whole dimnames yellow
-    keyword whole dist yellow
-    keyword whole dotchart yellow
-    keyword whole eqscplot yellow
-    keyword whole factor yellow
-    keyword whole function yellow
-    keyword whole get yellow
-    keyword whole grep yellow
-    keyword whole gsub yellow
-    keyword whole hclust yellow
-    keyword whole hist yellow
-    keyword whole ifelse yellow
-    keyword whole is.factor yellow
-    keyword whole is.na yellow
-    keyword whole kruskal.test yellow
-    keyword whole lda yellow
-    keyword whole legend yellow
-    keyword whole length yellow
-    keyword whole levels yellow
-    keyword whole library yellow
-    keyword whole lines yellow
-    keyword whole list yellow
-    keyword whole lm yellow
-    keyword whole loadings yellow
-    keyword whole log yellow
-    keyword whole manova yellow
-    keyword whole matrix yellow
-    keyword whole max yellow
-    keyword whole mean yellow
-    keyword whole median yellow
-    keyword whole min yellow
-    keyword whole mtext yellow
-    keyword whole names yellow
-    keyword whole na.omit yellow
-    keyword whole ncol yellow
-    keyword whole nrow yellow
-    keyword whole order yellow
-    keyword whole palette yellow
-    keyword whole par yellow
-    keyword whole paste yellow
-    keyword whole pdf yellow
-    keyword whole plot yellow
-    keyword whole png yellow
-    keyword whole points yellow
-    keyword whole predict yellow
-    keyword whole princomp yellow
-    keyword whole print yellow
-    keyword whole range yellow
-    keyword whole rbind yellow
-    keyword whole read.table yellow
-    keyword whole recode yellow
-    keyword whole rep yellow
-    keyword whole replace yellow
-    keyword whole return yellow
-    keyword whole rev yellow
-    keyword whole rnorm yellow
-    keyword whole round yellow
-    keyword whole row.names yellow
-    keyword whole rowSums yellow
-    keyword whole sapply yellow
-    keyword whole scale yellow
-    keyword whole seq yellow
-    keyword whole sink yellow
-    keyword whole smooth.spline yellow
-    keyword whole sort yellow
-    keyword whole source yellow
-    keyword whole sqrt yellow
-    keyword whole str yellow
-    keyword whole sum yellow
-    keyword whole summary yellow
-    keyword whole t yellow
-    keyword whole table yellow
-    keyword whole tapply yellow
-    keyword whole text yellow
-    keyword whole t.test yellow
-    keyword whole unique yellow
-    keyword whole wilcox.test yellow
-    keyword whole with yellow
-    keyword whole write.table yellow
-    keyword whole x11 yellow
+    keyword whole abbreviate brightyellow
+    keyword whole abline brightyellow
+    keyword whole abs brightyellow
+    keyword whole aggregate brightyellow
+    keyword whole apply brightyellow
+    keyword whole as.character brightyellow
+    keyword whole as.data.frame brightyellow
+    keyword whole as.factor brightyellow
+    keyword whole as.matrix brightyellow
+    keyword whole as.numeric brightyellow
+    keyword whole as.vector brightyellow
+    keyword whole attr brightyellow
+    keyword whole boxplot brightyellow
+    keyword whole c brightyellow
+    keyword whole cat brightyellow
+    keyword whole cbind brightyellow
+    keyword whole chisq.test brightyellow
+    keyword whole colnames brightyellow
+    keyword whole colSums brightyellow
+    keyword whole cor brightyellow
+    keyword whole cor.test brightyellow
+    keyword whole data.frame brightyellow
+    keyword whole dev.off brightyellow
+    keyword whole dimnames brightyellow
+    keyword whole dist brightyellow
+    keyword whole dotchart brightyellow
+    keyword whole eqscplot brightyellow
+    keyword whole factor brightyellow
+    keyword whole function brightyellow
+    keyword whole get brightyellow
+    keyword whole grep brightyellow
+    keyword whole gsub brightyellow
+    keyword whole hclust brightyellow
+    keyword whole hist brightyellow
+    keyword whole ifelse brightyellow
+    keyword whole is.factor brightyellow
+    keyword whole is.na brightyellow
+    keyword whole kruskal.test brightyellow
+    keyword whole lda brightyellow
+    keyword whole legend brightyellow
+    keyword whole length brightyellow
+    keyword whole levels brightyellow
+    keyword whole library brightyellow
+    keyword whole lines brightyellow
+    keyword whole list brightyellow
+    keyword whole lm brightyellow
+    keyword whole loadings brightyellow
+    keyword whole log brightyellow
+    keyword whole manova brightyellow
+    keyword whole matrix brightyellow
+    keyword whole max brightyellow
+    keyword whole mean brightyellow
+    keyword whole median brightyellow
+    keyword whole min brightyellow
+    keyword whole mtext brightyellow
+    keyword whole names brightyellow
+    keyword whole na.omit brightyellow
+    keyword whole ncol brightyellow
+    keyword whole nrow brightyellow
+    keyword whole order brightyellow
+    keyword whole palette brightyellow
+    keyword whole par brightyellow
+    keyword whole paste brightyellow
+    keyword whole pdf brightyellow
+    keyword whole plot brightyellow
+    keyword whole png brightyellow
+    keyword whole points brightyellow
+    keyword whole predict brightyellow
+    keyword whole princomp brightyellow
+    keyword whole print brightyellow
+    keyword whole range brightyellow
+    keyword whole rbind brightyellow
+    keyword whole read.table brightyellow
+    keyword whole recode brightyellow
+    keyword whole rep brightyellow
+    keyword whole replace brightyellow
+    keyword whole return brightyellow
+    keyword whole rev brightyellow
+    keyword whole rnorm brightyellow
+    keyword whole round brightyellow
+    keyword whole row.names brightyellow
+    keyword whole rowSums brightyellow
+    keyword whole sapply brightyellow
+    keyword whole scale brightyellow
+    keyword whole seq brightyellow
+    keyword whole sink brightyellow
+    keyword whole smooth.spline brightyellow
+    keyword whole sort brightyellow
+    keyword whole source brightyellow
+    keyword whole sqrt brightyellow
+    keyword whole str brightyellow
+    keyword whole sum brightyellow
+    keyword whole summary brightyellow
+    keyword whole t brightyellow
+    keyword whole table brightyellow
+    keyword whole tapply brightyellow
+    keyword whole text brightyellow
+    keyword whole t.test brightyellow
+    keyword whole unique brightyellow
+    keyword whole wilcox.test brightyellow
+    keyword whole with brightyellow
+    keyword whole write.table brightyellow
+    keyword whole x11 brightyellow
 
-context # \n brown
+context # \n yellow
     spellcheck
 
-context "http " white
+context "http " brightwhite
 
 context " " brightgreen
 
-context 'http ' white
+context 'http ' brightwhite
 
 context ' ' brightgreen

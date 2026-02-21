@@ -24,16 +24,16 @@ context default
     keyword linestart \{0123456789\} brightred
 
 # structure
-    keyword whole ASSIGNMENT white black
-    keyword whole CONTAINS white black
-    keyword whole END white black
-    keyword whole FUNCTION white black
-    keyword whole INTERFACE white black
-    keyword whole INCLUDE white black
-    keyword whole MODULE white black
-    keyword whole OPERATOR white black
-    keyword whole PROGRAM white black
-    keyword whole SUBROUTINE white black
+    keyword whole ASSIGNMENT brightwhite black
+    keyword whole CONTAINS brightwhite black
+    keyword whole END brightwhite black
+    keyword whole FUNCTION brightwhite black
+    keyword whole INTERFACE brightwhite black
+    keyword whole INCLUDE brightwhite black
+    keyword whole MODULE brightwhite black
+    keyword whole OPERATOR brightwhite black
+    keyword whole PROGRAM brightwhite black
+    keyword whole SUBROUTINE brightwhite black
 
 # boolean and logical expressions / operators
     keyword .and. brightred/orange
@@ -156,100 +156,100 @@ context default
     keyword whole write brightmagenta
 
 # mathematical functions
-    keyword whole abs yellow
-    keyword whole achar yellow
-    keyword whole acos yellow
-    keyword whole aimag yellow
-    keyword whole aint yellow
-    keyword whole alog yellow
-    keyword whole alog10 yellow
-    keyword whole amax0 yellow
-    keyword whole amax1 yellow
-    keyword whole amin0 yellow
-    keyword whole amin1 yellow
-    keyword whole amod yellow
-    keyword whole anint yellow
-    keyword whole aprime yellow
-    keyword whole asin yellow
-    keyword whole atan yellow
-    keyword whole atan2 yellow
-    keyword whole acos yellow
-    keyword whole cabs yellow
-    keyword whole ceiling yellow
-    keyword whole cexp yellow
-    keyword whole char yellow
-    keyword whole clog yellow
-    keyword whole cmplx yellow
-    keyword whole conjg yellow
-    keyword whole cos yellow
-    keyword whole cosh yellow
-    keyword whole ccos yellow
-    keyword whole csin yellow
-    keyword whole csqrt yellow
-    keyword whole dabs yellow
-    keyword whole dacos yellow
-    keyword whole dasin yellow
-    keyword whole datan yellow
-    keyword whole datan2 yellow
-    keyword whole dble yellow
-    keyword whole dcos yellow
-    keyword whole dcosh yellow
-    keyword whole dfloat yellow
-    keyword whole ddmim yellow
-    keyword whole dexp yellow
-    keyword whole dim yellow
-    keyword whole dint yellow
-    keyword whole dlog yellow
-    keyword whole dlog10 yellow
-    keyword whole dmax1 yellow
-    keyword whole dmin1 yellow
-    keyword whole dmod yellow
-    keyword whole dnint yellow
-    keyword whole dsign yellow
-    keyword whole dsin yellow
-    keyword whole dsinh yellow
-    keyword whole dsqrt yellow
-    keyword whole dtan yellow
-    keyword whole dtanh yellow
-    keyword whole exp yellow
-    keyword whole float yellow
-    keyword whole floor yellow
-    keyword whole iabs yellow
-    keyword whole iachar yellow
-    keyword whole ichar yellow
-    keyword whole idim yellow
-    keyword whole idint yellow
-    keyword whole ifix yellow
-    keyword whole index yellow
-    keyword whole int yellow
-    keyword whole isign yellow
-    keyword whole len yellow
-    keyword whole log yellow
-    keyword whole log10 yellow
-    keyword whole matmul yellow
-    keyword whole max yellow
-    keyword whole max0 yellow
-    keyword whole max1 yellow
-    keyword whole maxval yellow
-    keyword whole min yellow
-    keyword whole min0 yellow
-    keyword whole min1 yellow
-    keyword whole minval yellow
-    keyword whole mod yellow
-    keyword whole nint yellow
-    keyword whole product yellow
-    keyword whole rand yellow
-    keyword whole random_number yellow
-    keyword whole random_seed yellow
-    keyword whole sign yellow
-    keyword whole sin yellow
-    keyword whole sinh yellow
-    keyword whole sngl yellow
-    keyword whole sqrt yellow
-    keyword whole sum yellow
-    keyword whole tan yellow
-    keyword whole tanh yellow
-    keyword whole transpose yellow
+    keyword whole abs brightyellow
+    keyword whole achar brightyellow
+    keyword whole acos brightyellow
+    keyword whole aimag brightyellow
+    keyword whole aint brightyellow
+    keyword whole alog brightyellow
+    keyword whole alog10 brightyellow
+    keyword whole amax0 brightyellow
+    keyword whole amax1 brightyellow
+    keyword whole amin0 brightyellow
+    keyword whole amin1 brightyellow
+    keyword whole amod brightyellow
+    keyword whole anint brightyellow
+    keyword whole aprime brightyellow
+    keyword whole asin brightyellow
+    keyword whole atan brightyellow
+    keyword whole atan2 brightyellow
+    keyword whole acos brightyellow
+    keyword whole cabs brightyellow
+    keyword whole ceiling brightyellow
+    keyword whole cexp brightyellow
+    keyword whole char brightyellow
+    keyword whole clog brightyellow
+    keyword whole cmplx brightyellow
+    keyword whole conjg brightyellow
+    keyword whole cos brightyellow
+    keyword whole cosh brightyellow
+    keyword whole ccos brightyellow
+    keyword whole csin brightyellow
+    keyword whole csqrt brightyellow
+    keyword whole dabs brightyellow
+    keyword whole dacos brightyellow
+    keyword whole dasin brightyellow
+    keyword whole datan brightyellow
+    keyword whole datan2 brightyellow
+    keyword whole dble brightyellow
+    keyword whole dcos brightyellow
+    keyword whole dcosh brightyellow
+    keyword whole dfloat brightyellow
+    keyword whole ddmim brightyellow
+    keyword whole dexp brightyellow
+    keyword whole dim brightyellow
+    keyword whole dint brightyellow
+    keyword whole dlog brightyellow
+    keyword whole dlog10 brightyellow
+    keyword whole dmax1 brightyellow
+    keyword whole dmin1 brightyellow
+    keyword whole dmod brightyellow
+    keyword whole dnint brightyellow
+    keyword whole dsign brightyellow
+    keyword whole dsin brightyellow
+    keyword whole dsinh brightyellow
+    keyword whole dsqrt brightyellow
+    keyword whole dtan brightyellow
+    keyword whole dtanh brightyellow
+    keyword whole exp brightyellow
+    keyword whole float brightyellow
+    keyword whole floor brightyellow
+    keyword whole iabs brightyellow
+    keyword whole iachar brightyellow
+    keyword whole ichar brightyellow
+    keyword whole idim brightyellow
+    keyword whole idint brightyellow
+    keyword whole ifix brightyellow
+    keyword whole index brightyellow
+    keyword whole int brightyellow
+    keyword whole isign brightyellow
+    keyword whole len brightyellow
+    keyword whole log brightyellow
+    keyword whole log10 brightyellow
+    keyword whole matmul brightyellow
+    keyword whole max brightyellow
+    keyword whole max0 brightyellow
+    keyword whole max1 brightyellow
+    keyword whole maxval brightyellow
+    keyword whole min brightyellow
+    keyword whole min0 brightyellow
+    keyword whole min1 brightyellow
+    keyword whole minval brightyellow
+    keyword whole mod brightyellow
+    keyword whole nint brightyellow
+    keyword whole product brightyellow
+    keyword whole rand brightyellow
+    keyword whole random_number brightyellow
+    keyword whole random_seed brightyellow
+    keyword whole sign brightyellow
+    keyword whole sin brightyellow
+    keyword whole sinh brightyellow
+    keyword whole sngl brightyellow
+    keyword whole sqrt brightyellow
+    keyword whole sum brightyellow
+    keyword whole tan brightyellow
+    keyword whole tanh brightyellow
+    keyword whole transpose brightyellow
 
 # operators and syntax elements
     keyword ( brightcyan
@@ -257,13 +257,13 @@ context default
     keyword : brightcyan
     keyword , brightcyan
     keyword ; brightcyan
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword = yellow
-    keyword < yellow
-    keyword > yellow
+    keyword \+ brightyellow
+    keyword - brightyellow
+    keyword \* brightyellow
+    keyword / brightyellow
+    keyword = brightyellow
+    keyword < brightyellow
+    keyword > brightyellow
 
 # comments and quotes
     keyword '*' green
@@ -274,5 +274,5 @@ context default
 
 context format( ) green
 
-context ! \n brown
+context ! \n yellow
    spellcheck

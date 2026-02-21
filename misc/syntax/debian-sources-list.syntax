@@ -6,42 +6,42 @@ context default
     keyword \$\(ARCH\) brightred/18
 
     # Options (delimiters)
-    keyword [ yellow/24
-    keyword ] yellow/24
+    keyword [ brightyellow/24
+    keyword ] brightyellow/24
 
 
 # Options
 context exclusive [ ]
     # Basic syntax elements
-    keyword ! yellow/24
-    keyword , yellow/24
-    keyword = yellow/24
+    keyword ! brightyellow/24
+    keyword , brightyellow/24
+    keyword = brightyellow/24
 
     # Known options
-    keyword whole arch white
-    keyword whole allow-downgrade-to-insecure white
-    keyword whole allow-insecure white
-    keyword whole allow-weak white
-    keyword whole by-hash white
-    keyword whole check-date white
-    keyword whole check-valid-until white
-    keyword whole date-max-future white
-    keyword whole inrelease-path white
-    keyword whole lang white
-    keyword whole pdiffs white
-    keyword whole signed-by white
-    keyword whole target white
-    keyword whole trusted white
-    keyword whole valid-until-max white
-    keyword whole valid-until-min white
+    keyword whole arch brightwhite
+    keyword whole allow-downgrade-to-insecure brightwhite
+    keyword whole allow-insecure brightwhite
+    keyword whole allow-weak brightwhite
+    keyword whole by-hash brightwhite
+    keyword whole check-date brightwhite
+    keyword whole check-valid-until brightwhite
+    keyword whole date-max-future brightwhite
+    keyword whole inrelease-path brightwhite
+    keyword whole lang brightwhite
+    keyword whole pdiffs brightwhite
+    keyword whole signed-by brightwhite
+    keyword whole target brightwhite
+    keyword whole trusted brightwhite
+    keyword whole valid-until-max brightwhite
+    keyword whole valid-until-min brightwhite
 
     # Known values
-    keyword whole force white
-    keyword whole no white
-    keyword whole yes white
+    keyword whole force brightwhite
+    keyword whole no brightwhite
+    keyword whole yes brightwhite
 
 # Comment
-context # \n brown/22
+context # \n yellow/22
 
 # Common URI specifications
 context cdrom\:\/ \s cyan/24

@@ -8,7 +8,7 @@ context default
     keyword whole enabled=1 brightgreen
     keyword whole gpgcheck=1 brightgreen
 
-context # \n brown
+context # \n yellow
     spellcheck
 
 context [ ] brightcyan

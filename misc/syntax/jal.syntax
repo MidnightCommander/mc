@@ -9,13 +9,13 @@ context default
     #=========================
     # Variable types
     #
-    keyword whole bit blue white
-    keyword whole byte blue white
-    keyword whole sbyte blue white
-    keyword whole word blue white
-    keyword whole sword blue white
-    keyword whole dword blue white
-    keyword whole sdword blue white
+    keyword whole bit blue brightwhite
+    keyword whole byte blue brightwhite
+    keyword whole sbyte blue brightwhite
+    keyword whole word blue brightwhite
+    keyword whole sword blue brightwhite
+    keyword whole dword blue brightwhite
+    keyword whole sdword blue brightwhite
 
     #=========================
     # Predefined constants
@@ -30,31 +30,31 @@ context default
     #=========================
     # Keywords
     #
-    keyword whole alias yellow
-    keyword whole at yellow
-    keyword whole begin yellow
-    keyword whole const yellow
-    keyword whole count yellow
-    keyword whole defined yellow
-    keyword whole end yellow
-    keyword whole exit yellow
-    keyword whole function yellow
-    keyword whole get yellow
-    keyword whole in yellow
-    keyword whole is yellow
-    keyword whole local yellow
-    keyword whole of yellow
-    keyword whole out yellow
-    keyword whole put yellow
-    keyword whole procedure yellow
-    keyword whole record yellow
-    keyword whole repeat yellow
-    keyword whole return yellow
-    keyword whole then yellow
-    keyword whole until yellow
-    keyword whole var yellow
+    keyword whole alias brightyellow
+    keyword whole at brightyellow
+    keyword whole begin brightyellow
+    keyword whole const brightyellow
+    keyword whole count brightyellow
+    keyword whole defined brightyellow
+    keyword whole end brightyellow
+    keyword whole exit brightyellow
+    keyword whole function brightyellow
+    keyword whole get brightyellow
+    keyword whole in brightyellow
+    keyword whole is brightyellow
+    keyword whole local brightyellow
+    keyword whole of brightyellow
+    keyword whole out brightyellow
+    keyword whole put brightyellow
+    keyword whole procedure brightyellow
+    keyword whole record brightyellow
+    keyword whole repeat brightyellow
+    keyword whole return brightyellow
+    keyword whole then brightyellow
+    keyword whole until brightyellow
+    keyword whole var brightyellow
 
-    keyword whole volatile blue white
+    keyword whole volatile blue brightwhite
 
     keyword whole asm brightred
     keyword whole assembler brightred
@@ -153,9 +153,9 @@ context default
     keyword whole using brightcyan
     keyword whole while brightcyan
 
-    keyword whole _debug yellow
-    keyword whole _error yellow
-    keyword whole _warn yellow
+    keyword whole _debug brightyellow
+    keyword whole _error brightyellow
+    keyword whole _warn brightyellow
 
     keyword whole _code_size brightred
     keyword whole _fuses brightred
@@ -164,7 +164,7 @@ context default
     keyword whole target_cpu brightred
     keyword whole target_clock brightred
 
-    keyword whole _usec_delay yellow
+    keyword whole _usec_delay brightyellow
 
 wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
 
@@ -179,19 +179,19 @@ wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
     #=========================
     # Comments
     #
-    keyword --*\n white magenta
-    keyword ;*\n white magenta
+    keyword --*\n brightwhite magenta
+    keyword ;*\n brightwhite magenta
 
     #=========================
     # Special symbols
     #
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword \+ yellow
-    keyword << yellow
-    keyword >> yellow
+    keyword - brightyellow
+    keyword \* brightyellow
+    keyword / brightyellow
+    keyword % brightyellow
+    keyword \+ brightyellow
+    keyword << brightyellow
+    keyword >> brightyellow
 
     keyword ~ brightmagenta
     keyword !! brightmagenta
@@ -208,7 +208,7 @@ wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
     keyword < brightred
     keyword > brightred
 
-    keyword = yellow
+    keyword = brightyellow
     keyword ! brightmagenta
 
     #=========================

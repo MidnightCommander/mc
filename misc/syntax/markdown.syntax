@@ -1,16 +1,16 @@
 # Markdown syntax highlighting
 
-context default lightgray
+context default white
     spellcheck
     # links
-    keyword whole [*](*) yellow
-    keyword \*\* white
-    keyword \*   yellow
-    keyword \\_  lightgray
-    keyword wholeleft  __ white
-    keyword wholeright __ white
-    keyword wholeleft  _  yellow
-    keyword wholeright _  yellow
+    keyword whole [*](*) brightyellow
+    keyword \*\* brightwhite
+    keyword \*   brightyellow
+    keyword \\_  white
+    keyword wholeleft  __ brightwhite
+    keyword wholeright __ brightwhite
+    keyword wholeleft  _  brightyellow
+    keyword wholeright _  brightyellow
 
 context linestart #### \n red
     spellcheck

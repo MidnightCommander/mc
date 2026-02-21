@@ -5,32 +5,32 @@
 
 context default
 # Keywords
-    keyword whole break yellow
-    keyword whole closure yellow
-    keyword whole color yellow
-    keyword whole continue yellow
-    keyword whole do yellow
-    keyword whole else yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole if yellow
-    keyword whole illuminance yellow
-    keyword whole illuminate yellow
-    keyword whole int yellow
-    keyword whole matrix yellow
-    keyword whole normal yellow
-    keyword whole output yellow
-    keyword whole point yellow
-    keyword whole public yellow
-    keyword whole return yellow
-    keyword whole string yellow
-    keyword whole struct yellow
-    keyword whole vector yellow
-    keyword whole void yellow
-    keyword whole while yellow
-    keyword whole or yellow
-    keyword whole and yellow
-    keyword whole not yellow
+    keyword whole break brightyellow
+    keyword whole closure brightyellow
+    keyword whole color brightyellow
+    keyword whole continue brightyellow
+    keyword whole do brightyellow
+    keyword whole else brightyellow
+    keyword whole float brightyellow
+    keyword whole for brightyellow
+    keyword whole if brightyellow
+    keyword whole illuminance brightyellow
+    keyword whole illuminate brightyellow
+    keyword whole int brightyellow
+    keyword whole matrix brightyellow
+    keyword whole normal brightyellow
+    keyword whole output brightyellow
+    keyword whole point brightyellow
+    keyword whole public brightyellow
+    keyword whole return brightyellow
+    keyword whole string brightyellow
+    keyword whole struct brightyellow
+    keyword whole vector brightyellow
+    keyword whole void brightyellow
+    keyword whole while brightyellow
+    keyword whole or brightyellow
+    keyword whole and brightyellow
+    keyword whole not brightyellow
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
 
 # Reserved words
@@ -66,14 +66,14 @@ context default
     keyword whole virtual red
 
 # Shader types
-    keyword whole shader white
-    keyword whole surface white
-    keyword whole displacement white
-    keyword whole volume white
+    keyword whole shader brightwhite
+    keyword whole surface brightwhite
+    keyword whole displacement brightwhite
+    keyword whole volume brightwhite
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
     keyword '\\\{"abtnvfr\}' brightgreen
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
@@ -83,42 +83,42 @@ context default
     keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
 
 # punctuation characters, sorted by ASCII code
-    keyword ! yellow
-    keyword % yellow
-    keyword && yellow
+    keyword ! brightyellow
+    keyword % brightyellow
+    keyword && brightyellow
     keyword & brightmagenta
     keyword ( brightcyan
     keyword ) brightcyan
-    keyword \* yellow
-    keyword \+ yellow
+    keyword \* brightyellow
+    keyword \+ brightyellow
     keyword , brightcyan
-    keyword - yellow
-    keyword / yellow
+    keyword - brightyellow
+    keyword / brightyellow
     keyword : brightcyan
     keyword ; brightmagenta
-    keyword < yellow
-    keyword = yellow
-    keyword > yellow
+    keyword < brightyellow
+    keyword = brightyellow
+    keyword > brightyellow
     keyword ? brightcyan
     keyword [ brightcyan
     keyword ] brightcyan
     keyword ^ brightmagenta
     keyword { brightcyan
-    keyword || yellow
+    keyword || brightyellow
     keyword | brightmagenta
     keyword } brightcyan
     keyword ~ brightmagenta
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
+    keyword \\\n brightyellow
+    keyword /\**\*/ yellow
+    keyword //*\n yellow
     keyword "+" red
     keyword <+> red
 

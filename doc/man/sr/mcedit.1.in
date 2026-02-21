@@ -274,17 +274,17 @@ file .\e*\e\e.c C\esProgram\esFile (#include|/\e\e\e*)
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
 # подразумеване боје
-define  comment   brown
+define  comment   yellow
 context default
-  keyword  whole  if       yellow
-  keyword  whole  else     yellow
-  keyword  whole  for      yellow
-  keyword  whole  while    yellow
-  keyword  whole  do       yellow
-  keyword  whole  switch   yellow
-  keyword  whole  case     yellow
-  keyword  whole  static   yellow
-  keyword  whole  extern   yellow
+  keyword  whole  if       brightyellow
+  keyword  whole  else     brightyellow
+  keyword  whole  for      brightyellow
+  keyword  whole  while    brightyellow
+  keyword  whole  do       brightyellow
+  keyword  whole  switch   brightyellow
+  keyword  whole  case     brightyellow
+  keyword  whole  static   brightyellow
+  keyword  whole  extern   brightyellow
   keyword         {        brightcyan
   keyword         }        brightcyan
   keyword         '*'      green
@@ -396,8 +396,8 @@ tab\-ове и размаке преко секвенци \et и \es. Знако
 дозвољавајући претпроцесорској директиви C\-а да се простире преко неколико
 линија.
 .PP
-Могуће боје су: black, gray, red, brightred, green, brightgreen, brown, yellow,
-blue, brightblue, magenta, brightmagenta, cyan, brightcyan, lightgray и white.
+Могуће боје су: black, brightblack, red, brightred, green, brightgreen, yellow, brightyellow,
+blue, brightblue, magenta, brightmagenta, cyan, brightcyan, white и brightwhite.
 Посебна кључна реч „default“ значи подразумевану боју терминала. Друга посебна
 кључна реч „base“ значи основну боју ПН\-а, и корисна је као заузимач места ако
 желите да задате атрибуте без измене позадинске боје. Када је доступно 256 боја,

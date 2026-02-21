@@ -6,25 +6,25 @@ context default
     keyword whole black black blue
     keyword whole red red
     keyword whole green green
-    keyword whole brown brown
+    keyword whole yellow yellow
     keyword whole blue blue black
     keyword whole magenta magenta
     keyword whole cyan cyan
-    keyword whole lightgray lightgray
-    keyword whole gray gray black
+    keyword whole white white
+    keyword whole brightblack brightblack black
     keyword whole brightred brightred
     keyword whole brightgreen brightgreen
-    keyword whole yellow yellow
+    keyword whole brightyellow brightyellow
     keyword whole brightblue brightblue black
     keyword whole brightmagenta brightmagenta
     keyword whole brightcyan brightcyan
-    keyword whole white white
+    keyword whole brightwhite brightwhite
 
     keyword = brightcyan
     keyword ; brightmagenta
-    keyword whole extensions yellow
-    keyword whole extensions_case yellow
-    keyword whole type yellow
+    keyword whole extensions brightyellow
+    keyword whole extensions_case brightyellow
+    keyword whole type brightyellow
     keyword DEVICE brightred
     keyword DIR brightred
     keyword FILE_EXE brightred
@@ -33,13 +33,13 @@ context default
     keyword SYMLINK brightred
     keyword HARDLINK brightred
 
-context linestart # \n brown
+context linestart # \n yellow
 
-context linestart [ ] white
+context linestart [ ] brightwhite
 
-context regexp= \n lightgray
+context regexp= \n white
     keyword = brightcyan
-    keyword whole regexp yellow
+    keyword whole regexp brightyellow
 
 # regexp patterns
     keyword \\\/ brightcyan
@@ -76,16 +76,16 @@ context regexp= \n lightgray
     keyword { brightmagenta
     keyword } brightmagenta
 
-    keyword ?! yellow
-    keyword ?# yellow
-    keyword ?: yellow
-    keyword ?= yellow
-    keyword ?\{-imx:\}+ yellow
+    keyword ?! brightyellow
+    keyword ?# brightyellow
+    keyword ?: brightyellow
+    keyword ?= brightyellow
+    keyword ?\{-imx:\}+ brightyellow
 
-    keyword $ yellow
-    keyword \+ yellow
-    keyword . yellow
-    keyword ? yellow
-    keyword \* yellow
-    keyword ^ yellow
-    keyword | yellow
+    keyword $ brightyellow
+    keyword \+ brightyellow
+    keyword . brightyellow
+    keyword ? brightyellow
+    keyword \* brightyellow
+    keyword ^ brightyellow
+    keyword | brightyellow

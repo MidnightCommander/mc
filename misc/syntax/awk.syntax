@@ -19,74 +19,74 @@
 
 context default
 
-    keyword whole linestart #!\[\s\]/bin/\[msg\]awk yellow magenta
-    keyword whole linestart #!\[\s\]/usr/bin/\[msg\]awk yellow magenta
+    keyword whole linestart #!\[\s\]/bin/\[msg\]awk brightyellow magenta
+    keyword whole linestart #!\[\s\]/usr/bin/\[msg\]awk brightyellow magenta
 # Keywords
-    keyword whole AMNOISE white
-    keyword whole BEGIN white
-    keyword whole END white
-    keyword whole func white
-    keyword whole function white
-    keyword whole nextfile white
+    keyword whole AMNOISE brightwhite
+    keyword whole BEGIN brightwhite
+    keyword whole END brightwhite
+    keyword whole func brightwhite
+    keyword whole function brightwhite
+    keyword whole nextfile brightwhite
 
-    keyword whole return white/26
-    keyword whole print white/26
-    keyword whole printf white/26
-    keyword whole if white/26
-    keyword whole else white/26
-    keyword whole while white/26
-    keyword whole for white/26
-    keyword whole in white/26
-    keyword whole do white/26
-    keyword whole break white/26
-    keyword whole continue white/26
-    keyword whole next white/26
-    keyword whole exit white/26
-    keyword whole close white/26
-    keyword whole system white/26
-    keyword whole getline white/26
+    keyword whole return brightwhite/26
+    keyword whole print brightwhite/26
+    keyword whole printf brightwhite/26
+    keyword whole if brightwhite/26
+    keyword whole else brightwhite/26
+    keyword whole while brightwhite/26
+    keyword whole for brightwhite/26
+    keyword whole in brightwhite/26
+    keyword whole do brightwhite/26
+    keyword whole break brightwhite/26
+    keyword whole continue brightwhite/26
+    keyword whole next brightwhite/26
+    keyword whole exit brightwhite/26
+    keyword whole close brightwhite/26
+    keyword whole system brightwhite/26
+    keyword whole getline brightwhite/26
 # Builtin functions:
-    keyword whole atan2        white black
-    keyword whole cos          white black
-    keyword whole exp          white black
-    keyword whole int          white black
-    keyword whole log          white black
-    keyword whole rand         white black
-    keyword whole sin          white black
-    keyword whole sqrt         white black
-    keyword whole srand        white black
-    keyword whole gsub         white black
-    keyword whole index        white black
-    keyword whole length       white black
-    keyword whole match        white black
-    keyword whole split        white black
-    keyword whole sprintf      white black
-    keyword whole sub          white black
-    keyword whole substr       white black
-    keyword whole asort        white black
-    keyword whole asorti       white black
+    keyword whole atan2        brightwhite black
+    keyword whole cos          brightwhite black
+    keyword whole exp          brightwhite black
+    keyword whole int          brightwhite black
+    keyword whole log          brightwhite black
+    keyword whole rand         brightwhite black
+    keyword whole sin          brightwhite black
+    keyword whole sqrt         brightwhite black
+    keyword whole srand        brightwhite black
+    keyword whole gsub         brightwhite black
+    keyword whole index        brightwhite black
+    keyword whole length       brightwhite black
+    keyword whole match        brightwhite black
+    keyword whole split        brightwhite black
+    keyword whole sprintf      brightwhite black
+    keyword whole sub          brightwhite black
+    keyword whole substr       brightwhite black
+    keyword whole asort        brightwhite black
+    keyword whole asorti       brightwhite black
 
-    keyword whole xor white
-    keyword whole and white
-    keyword whole or white
+    keyword whole xor brightwhite
+    keyword whole and brightwhite
+    keyword whole or brightwhite
 
 # Gawk builtin functions:
-    keyword whole fflush       white black
-    keyword whole gensub       white black
-    keyword whole tolower      white black
-    keyword whole toupper      white black
-    keyword whole systime      white black
-    keyword whole strftime     white black
-    keyword whole strtonum white
-    keyword whole bindtextdomain white
-    keyword whole dcgettext white
-    keyword whole dcngettext white
-    keyword whole compl white
-    keyword whole delete white
-    keyword whole extension white
-    keyword whole mktime white
-    keyword whole lshift white
-    keyword whole rshift white
+    keyword whole fflush       brightwhite black
+    keyword whole gensub       brightwhite black
+    keyword whole tolower      brightwhite black
+    keyword whole toupper      brightwhite black
+    keyword whole systime      brightwhite black
+    keyword whole strftime     brightwhite black
+    keyword whole strtonum brightwhite
+    keyword whole bindtextdomain brightwhite
+    keyword whole dcgettext brightwhite
+    keyword whole dcngettext brightwhite
+    keyword whole compl brightwhite
+    keyword whole delete brightwhite
+    keyword whole extension brightwhite
+    keyword whole mktime brightwhite
+    keyword whole lshift brightwhite
+    keyword whole rshift brightwhite
 
 # Builtin variables:
     keyword whole ARGIND brightblue
@@ -118,23 +118,23 @@ context default
 
     keyword '\s' brightgreen/16
     keyword '+' brightgreen/16
-    keyword > yellow/24
-    keyword < yellow/24
-    keyword \+ yellow/24
-    keyword - yellow/24
-    keyword \* yellow/24
-    keyword % yellow/24
-    keyword = yellow/24
-    keyword != yellow/24
-    keyword == yellow/24
-    keyword { white/25
-    keyword } white/25
-    keyword ( white/25
-    keyword ) white/25
+    keyword > brightyellow/24
+    keyword < brightyellow/24
+    keyword \+ brightyellow/24
+    keyword - brightyellow/24
+    keyword \* brightyellow/24
+    keyword % brightyellow/24
+    keyword = brightyellow/24
+    keyword != brightyellow/24
+    keyword == brightyellow/24
+    keyword { brightwhite/25
+    keyword } brightwhite/25
+    keyword ( brightwhite/25
+    keyword ) brightwhite/25
     keyword [*] magenta
-    keyword , white/25
-    keyword : white/25
-    keyword ; lightgray/19
+    keyword , brightwhite/25
+    keyword : brightwhite/25
+    keyword ; white/19
     keyword $\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] brightred/18
 # Begin/End:
     keyword whole BEGIN red
@@ -144,7 +144,7 @@ context default
 # Hex constant:
     keyword 0\{xX\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] magenta/6
 # Tab:    \t
-#    keyword linestart \t lightgray/13 blue/6
+#    keyword linestart \t white/13 blue/6
 
 # Sed:
     keyword linestart /^ red
@@ -152,8 +152,8 @@ context default
 context /^#*/ red
 
 # Comments:
-context linestart # \n brown
-context linestart $ \n brown
+context linestart # \n yellow
+context linestart $ \n yellow
 
 # String:
 context " " green/6

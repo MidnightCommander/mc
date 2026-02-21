@@ -1,11 +1,11 @@
 # TOML: Tom's Obvious Minimal Language
 
-context default white
+context default brightwhite
 
 # groups
-context [ \n brown
-    keyword [ yellow
-    keyword ] yellow
+context [ \n yellow
+    keyword [ brightyellow
+    keyword ] brightyellow
 
 # assignment
 context exclusive = \n write
@@ -15,7 +15,7 @@ context exclusive = \n write
     keyword \{0123456789\} brightcyan
 
 # comments
-context # \n brown
+context # \n yellow
     spellcheck
 
 # other strings

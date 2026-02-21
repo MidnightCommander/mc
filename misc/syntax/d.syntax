@@ -30,219 +30,219 @@ context default
     keyword whole linestart #!\[\s\]/gdmd brightcyan black
 
 # keywords
-    keyword whole abstract yellow
-    keyword whole alias yellow
-    keyword whole align yellow
-    keyword whole assert yellow
-    keyword whole body yellow
-    keyword whole bool yellow
-    keyword whole byte yellow
-    keyword whole cast yellow
-    keyword whole catch yellow
-    keyword whole cdouble yellow
-    keyword whole cent yellow
-    keyword whole cfloat yellow
-    keyword whole class yellow
-    keyword whole creal yellow
-    keyword whole dchar yellow
-    keyword whole debug yellow
-    keyword whole delegate yellow
-    keyword whole delete yellow
-    keyword whole deprecated yellow
-    keyword whole dstring yellow
+    keyword whole abstract brightyellow
+    keyword whole alias brightyellow
+    keyword whole align brightyellow
+    keyword whole assert brightyellow
+    keyword whole body brightyellow
+    keyword whole bool brightyellow
+    keyword whole byte brightyellow
+    keyword whole cast brightyellow
+    keyword whole catch brightyellow
+    keyword whole cdouble brightyellow
+    keyword whole cent brightyellow
+    keyword whole cfloat brightyellow
+    keyword whole class brightyellow
+    keyword whole creal brightyellow
+    keyword whole dchar brightyellow
+    keyword whole debug brightyellow
+    keyword whole delegate brightyellow
+    keyword whole delete brightyellow
+    keyword whole deprecated brightyellow
+    keyword whole dstring brightyellow
     keyword whole false brightred
-    keyword whole finally yellow
-    keyword whole final yellow
-    keyword whole foreach_reverse yellow
-    keyword whole function yellow
-    keyword whole idouble yellow
-    keyword whole ifloat yellow
-    keyword whole inout yellow
-    keyword whole interface yellow
-    keyword whole invariant yellow
-    keyword whole in yellow
-    keyword whole is yellow
-    keyword whole ireal yellow
-    keyword whole lazy yellow
-    keyword whole long yellow
-    keyword whole macro yellow
-    keyword whole mixin yellow
-    keyword whole module yellow
-    keyword whole new yellow
+    keyword whole finally brightyellow
+    keyword whole final brightyellow
+    keyword whole foreach_reverse brightyellow
+    keyword whole function brightyellow
+    keyword whole idouble brightyellow
+    keyword whole ifloat brightyellow
+    keyword whole inout brightyellow
+    keyword whole interface brightyellow
+    keyword whole invariant brightyellow
+    keyword whole in brightyellow
+    keyword whole is brightyellow
+    keyword whole ireal brightyellow
+    keyword whole lazy brightyellow
+    keyword whole long brightyellow
+    keyword whole macro brightyellow
+    keyword whole mixin brightyellow
+    keyword whole module brightyellow
+    keyword whole new brightyellow
     keyword whole null brightred
-    keyword whole out yellow
-    keyword whole override yellow
-    keyword whole package yellow
-    keyword whole pragma yellow
-    keyword whole private yellow
-    keyword whole protected yellow
-    keyword whole public yellow
-    keyword whole real yellow
-    keyword whole ref yellow
-    keyword whole scope yellow
-    keyword whole string yellow
+    keyword whole out brightyellow
+    keyword whole override brightyellow
+    keyword whole package brightyellow
+    keyword whole pragma brightyellow
+    keyword whole private brightyellow
+    keyword whole protected brightyellow
+    keyword whole public brightyellow
+    keyword whole real brightyellow
+    keyword whole ref brightyellow
+    keyword whole scope brightyellow
+    keyword whole string brightyellow
     keyword whole super brightred
-    keyword whole synchronized yellow
-    keyword whole template yellow
+    keyword whole synchronized brightyellow
+    keyword whole template brightyellow
     keyword whole this brightred
-    keyword whole throw yellow
+    keyword whole throw brightyellow
     keyword whole true brightred
-    keyword whole try yellow
-    keyword whole typedef yellow
-    keyword whole typeid yellow
-    keyword whole typeof yellow
-    keyword whole ubyte yellow
-    keyword whole ucent yellow
-    keyword whole ulong yellow
-    keyword whole unittest yellow
-    keyword whole ushort yellow
-    keyword whole version yellow
-    keyword whole volatile yellow
-    keyword whole wchar yellow
-    keyword whole with yellow
-    keyword whole wstring yellow
-    keyword whole asm yellow
-    keyword whole auto yellow
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole char yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole default yellow
-    keyword whole double yellow
-    keyword whole do yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole export yellow
-    keyword whole extern yellow
-    keyword whole float yellow
-    keyword whole foreach yellow
-    keyword whole for yellow
-    keyword whole goto yellow
-    keyword whole if yellow
+    keyword whole try brightyellow
+    keyword whole typedef brightyellow
+    keyword whole typeid brightyellow
+    keyword whole typeof brightyellow
+    keyword whole ubyte brightyellow
+    keyword whole ucent brightyellow
+    keyword whole ulong brightyellow
+    keyword whole unittest brightyellow
+    keyword whole ushort brightyellow
+    keyword whole version brightyellow
+    keyword whole volatile brightyellow
+    keyword whole wchar brightyellow
+    keyword whole with brightyellow
+    keyword whole wstring brightyellow
+    keyword whole asm brightyellow
+    keyword whole auto brightyellow
+    keyword whole break brightyellow
+    keyword whole case brightyellow
+    keyword whole char brightyellow
+    keyword whole const brightyellow
+    keyword whole continue brightyellow
+    keyword whole default brightyellow
+    keyword whole double brightyellow
+    keyword whole do brightyellow
+    keyword whole else brightyellow
+    keyword whole enum brightyellow
+    keyword whole export brightyellow
+    keyword whole extern brightyellow
+    keyword whole float brightyellow
+    keyword whole foreach brightyellow
+    keyword whole for brightyellow
+    keyword whole goto brightyellow
+    keyword whole if brightyellow
     keyword whole import magenta
-    keyword whole inline yellow
-    keyword whole int yellow
-    keyword whole return yellow
-    keyword whole short yellow
-    keyword whole signed yellow
-    keyword whole sizeof yellow
-    keyword whole static yellow
-    keyword whole struct yellow
-    keyword whole switch yellow
-    keyword whole typedef yellow
-    keyword whole uint yellow
-    keyword whole union yellow
-    keyword whole unsigned yellow
-    keyword whole void yellow
-    keyword whole while yellow
+    keyword whole inline brightyellow
+    keyword whole int brightyellow
+    keyword whole return brightyellow
+    keyword whole short brightyellow
+    keyword whole signed brightyellow
+    keyword whole sizeof brightyellow
+    keyword whole static brightyellow
+    keyword whole struct brightyellow
+    keyword whole switch brightyellow
+    keyword whole typedef brightyellow
+    keyword whole uint brightyellow
+    keyword whole union brightyellow
+    keyword whole unsigned brightyellow
+    keyword whole void brightyellow
+    keyword whole while brightyellow
 
 # predefined aliases (deprecated)
-    keyword whole bit yellow
+    keyword whole bit brightyellow
 # predefined aliases (2.0)
-    keyword whole string yellow
-    keyword whole dstring yellow
-    keyword whole wstring yellow
+    keyword whole string brightyellow
+    keyword whole dstring brightyellow
+    keyword whole wstring brightyellow
 
 # D array attributes
-    keyword wholeright .sizeof yellow
-    keyword wholeright .length yellow
-    keyword wholeright .ptr yellow
-    keyword wholeright .dup yellow
-    keyword wholeright .reverse yellow
-    keyword wholeright .sort yellow
-    keyword wholeright .keys yellow
-    keyword wholeright .values yellow
-    keyword wholeright .rehash yellow
+    keyword wholeright .sizeof brightyellow
+    keyword wholeright .length brightyellow
+    keyword wholeright .ptr brightyellow
+    keyword wholeright .dup brightyellow
+    keyword wholeright .reverse brightyellow
+    keyword wholeright .sort brightyellow
+    keyword wholeright .keys brightyellow
+    keyword wholeright .values brightyellow
+    keyword wholeright .rehash brightyellow
 # D types attributes
-    keyword wholeright .init yellow
-    keyword wholeright .alignof yellow
-    keyword wholeright .mangleof yellow
-    keyword wholeright .stringof yellow
+    keyword wholeright .init brightyellow
+    keyword wholeright .alignof brightyellow
+    keyword wholeright .mangleof brightyellow
+    keyword wholeright .stringof brightyellow
 # +integer
-    keyword wholeright .min yellow
-    keyword wholeright .max yellow
+    keyword wholeright .min brightyellow
+    keyword wholeright .max brightyellow
 # +floating point
-    keyword wholeright .infinity yellow
-    keyword wholeright .nan yellow
-    keyword wholeright .dig yellow
-    keyword wholeright .epsilon yellow
-    keyword wholeright .mant_dig yellow
-    keyword wholeright .max_10_exp yellow
-    keyword wholeright .max_exp yellow
-    keyword wholeright .min_10_exp yellow
-    keyword wholeright .min_exp yellow
-    keyword wholeright .re yellow
-    keyword wholeright .im yellow
-    keyword wholeright .im yellow
+    keyword wholeright .infinity brightyellow
+    keyword wholeright .nan brightyellow
+    keyword wholeright .dig brightyellow
+    keyword wholeright .epsilon brightyellow
+    keyword wholeright .mant_dig brightyellow
+    keyword wholeright .max_10_exp brightyellow
+    keyword wholeright .max_exp brightyellow
+    keyword wholeright .min_10_exp brightyellow
+    keyword wholeright .min_exp brightyellow
+    keyword wholeright .re brightyellow
+    keyword wholeright .im brightyellow
+    keyword wholeright .im brightyellow
 # union
-    keyword wholeright .offsetof yellow
+    keyword wholeright .offsetof brightyellow
 
 # D 2.0 attributes
-    keyword wholeright .idup yellow
+    keyword wholeright .idup brightyellow
 
 # unary operators
-    keyword whole opNeg gray
-    keyword whole opPos gray
-    keyword whole opCom gray
-    keyword whole opPostInc gray
-    keyword whole opPostDec gray
-    keyword whole opCast gray
+    keyword whole opNeg brightblack
+    keyword whole opPos brightblack
+    keyword whole opCom brightblack
+    keyword whole opPostInc brightblack
+    keyword whole opPostDec brightblack
+    keyword whole opCast brightblack
 
 # binary operators
-    keyword whole opAdd gray
-    keyword whole opAdd_r gray
-    keyword whole opSub gray
-    keyword whole opSub_r gray
-    keyword whole opMul gray
-    keyword whole opMul_r gray
-    keyword whole opDiv gray
-    keyword whole opDiv_r gray
-    keyword whole opMod gray
-    keyword whole opMod_r gray
-    keyword whole opAnd gray
-    keyword whole opAnd_r gray
-    keyword whole opOr gray
-    keyword whole opOr_r gray
-    keyword whole opXor gray
-    keyword whole opXor_r gray
-    keyword whole opShl gray
-    keyword whole opShl_r gray
-    keyword whole opShr gray
-    keyword whole opShr_r gray
-    keyword whole opUShr gray
-    keyword whole opUShr_r gray
-    keyword whole opCat gray
-    keyword whole opCat_r gray
-    keyword whole opEquals gray
-    keyword whole opCmp gray
-    keyword whole opAssign gray
-    keyword whole opAddAssign gray
-    keyword whole opSubAssign gray
-    keyword whole opMulAssign gray
-    keyword whole opDivAssign gray
-    keyword whole opModAssign gray
-    keyword whole opAndAssign gray
-    keyword whole opOrAssign gray
-    keyword whole opXorAssign gray
-    keyword whole opShlAssign gray
-    keyword whole opShrAssign gray
-    keyword whole opUShrAssign gray
-    keyword whole opCatAssign gray
-    keyword whole opIn gray
-    keyword whole opIn_r gray
+    keyword whole opAdd brightblack
+    keyword whole opAdd_r brightblack
+    keyword whole opSub brightblack
+    keyword whole opSub_r brightblack
+    keyword whole opMul brightblack
+    keyword whole opMul_r brightblack
+    keyword whole opDiv brightblack
+    keyword whole opDiv_r brightblack
+    keyword whole opMod brightblack
+    keyword whole opMod_r brightblack
+    keyword whole opAnd brightblack
+    keyword whole opAnd_r brightblack
+    keyword whole opOr brightblack
+    keyword whole opOr_r brightblack
+    keyword whole opXor brightblack
+    keyword whole opXor_r brightblack
+    keyword whole opShl brightblack
+    keyword whole opShl_r brightblack
+    keyword whole opShr brightblack
+    keyword whole opShr_r brightblack
+    keyword whole opUShr brightblack
+    keyword whole opUShr_r brightblack
+    keyword whole opCat brightblack
+    keyword whole opCat_r brightblack
+    keyword whole opEquals brightblack
+    keyword whole opCmp brightblack
+    keyword whole opAssign brightblack
+    keyword whole opAddAssign brightblack
+    keyword whole opSubAssign brightblack
+    keyword whole opMulAssign brightblack
+    keyword whole opDivAssign brightblack
+    keyword whole opModAssign brightblack
+    keyword whole opAndAssign brightblack
+    keyword whole opOrAssign brightblack
+    keyword whole opXorAssign brightblack
+    keyword whole opShlAssign brightblack
+    keyword whole opShrAssign brightblack
+    keyword whole opUShrAssign brightblack
+    keyword whole opCatAssign brightblack
+    keyword whole opIn brightblack
+    keyword whole opIn_r brightblack
 
 # special operators
-    keyword whole opCall gray
-    keyword whole opIndex gray
-    keyword whole opIndexAssign gray
-    keyword whole opSlice gray
-    keyword whole opSliceAssign gray
-    keyword whole opAssign gray
-    keyword whole opApply gray
+    keyword whole opCall brightblack
+    keyword whole opIndex brightblack
+    keyword whole opIndexAssign brightblack
+    keyword whole opSlice brightblack
+    keyword whole opSliceAssign brightblack
+    keyword whole opAssign brightblack
+    keyword whole opApply brightblack
 
-    keyword whole ... yellow
-    keyword whole .. yellow
+    keyword whole ... brightyellow
+    keyword whole .. brightyellow
 #    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta # C preprocesor
 
 # special objects
@@ -367,31 +367,31 @@ context default
     keyword whole poly cyan
 
 # comments
-    keyword /\*\* brown
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\*\* yellow
+    keyword /\* yellow
+    keyword \*/ yellow
+    keyword // yellow
 
-    keyword /\+\+\+\+\+\+\+\+\+\+ brown
-    keyword /\+\+\+\+\+\+\+\+\+ brown
-    keyword /\+\+\+\+\+\+\+\+ brown
-    keyword /\+\+\+\+\+\+\+ brown
-    keyword /\+\+\+\+\+\+ brown
-    keyword /\+\+\+\+\+ brown
-    keyword /\+\+\+\+ brown
-    keyword /\+\+\+ brown
-    keyword /\+\+ brown
-    keyword /\+ brown
-    keyword \+\+\+\+\+\+\+\+\+\+/ brown
-    keyword \+\+\+\+\+\+\+\+\+/ brown
-    keyword \+\+\+\+\+\+\+\+/ brown
-    keyword \+\+\+\+\+\+\+/ brown
-    keyword \+\+\+\+\+\+/ brown
-    keyword \+\+\+\+\+/ brown
-    keyword \+\+\+\+/ brown
-    keyword \+\+\+/ brown
-    keyword \+\+/ brown
-    keyword \+/ brown
+    keyword /\+\+\+\+\+\+\+\+\+\+ yellow
+    keyword /\+\+\+\+\+\+\+\+\+ yellow
+    keyword /\+\+\+\+\+\+\+\+ yellow
+    keyword /\+\+\+\+\+\+\+ yellow
+    keyword /\+\+\+\+\+\+ yellow
+    keyword /\+\+\+\+\+ yellow
+    keyword /\+\+\+\+ yellow
+    keyword /\+\+\+ yellow
+    keyword /\+\+ yellow
+    keyword /\+ yellow
+    keyword \+\+\+\+\+\+\+\+\+\+/ yellow
+    keyword \+\+\+\+\+\+\+\+\+/ yellow
+    keyword \+\+\+\+\+\+\+\+/ yellow
+    keyword \+\+\+\+\+\+\+/ yellow
+    keyword \+\+\+\+\+\+/ yellow
+    keyword \+\+\+\+\+/ yellow
+    keyword \+\+\+\+/ yellow
+    keyword \+\+\+/ yellow
+    keyword \+\+/ yellow
+    keyword \+/ yellow
 
 # chars, 'x' and entities
     keyword '\\\{"abtnvfr\}' brightgreen
@@ -429,60 +429,60 @@ context default
     keyword ` green
 
 # operators
-    keyword !<>= yellow
-    keyword !<> yellow
-    keyword !>= yellow
-    keyword !> yellow
-    keyword !<= yellow
-    keyword !< yellow
-    keyword != yellow
-    keyword ! yellow
-    keyword %= yellow
-    keyword % yellow
-    keyword && yellow
-    keyword &= yellow
-    keyword & yellow
+    keyword !<>= brightyellow
+    keyword !<> brightyellow
+    keyword !>= brightyellow
+    keyword !> brightyellow
+    keyword !<= brightyellow
+    keyword !< brightyellow
+    keyword != brightyellow
+    keyword ! brightyellow
+    keyword %= brightyellow
+    keyword % brightyellow
+    keyword && brightyellow
+    keyword &= brightyellow
+    keyword & brightyellow
     keyword ( brightcyan
     keyword ) brightcyan
-    keyword \+\+ yellow
-    keyword -- yellow
-    keyword \*= yellow
-    keyword \* yellow
-    keyword \+= yellow
-    keyword \+ yellow
+    keyword \+\+ brightyellow
+    keyword -- brightyellow
+    keyword \*= brightyellow
+    keyword \* brightyellow
+    keyword \+= brightyellow
+    keyword \+ brightyellow
     keyword , brightcyan
-    keyword -= yellow
-    keyword - yellow
-    keyword /= yellow
-    keyword / yellow
+    keyword -= brightyellow
+    keyword - brightyellow
+    keyword /= brightyellow
+    keyword / brightyellow
     keyword : brightcyan
     keyword ; brightmagenta
-    keyword <>= yellow
-    keyword <> yellow
-    keyword <<= yellow
-    keyword << yellow
-    keyword <= yellow
-    keyword < yellow
-    keyword = yellow
-    keyword >>>= yellow
-    keyword >>> yellow
-    keyword >>= yellow
-    keyword >> yellow
-    keyword >= yellow
-    keyword > yellow
+    keyword <>= brightyellow
+    keyword <> brightyellow
+    keyword <<= brightyellow
+    keyword << brightyellow
+    keyword <= brightyellow
+    keyword < brightyellow
+    keyword = brightyellow
+    keyword >>>= brightyellow
+    keyword >>> brightyellow
+    keyword >>= brightyellow
+    keyword >> brightyellow
+    keyword >= brightyellow
+    keyword > brightyellow
     keyword ? brightcyan
     keyword [ brightcyan
     keyword ] brightcyan
-    keyword ^= yellow
-    keyword ^ yellow
-    keyword || yellow
-    keyword |= yellow
-    keyword | yellow
+    keyword ^= brightyellow
+    keyword ^ brightyellow
+    keyword || brightyellow
+    keyword |= brightyellow
+    keyword | brightyellow
     keyword { brightcyan
     keyword } brightcyan
     keyword $ brightcyan
-    keyword ~= yellow
-    keyword ~ yellow
+    keyword ~= brightyellow
+    keyword ~ brightyellow
 
 # predefined lexer entities
     keyword whole __FILE__ red
@@ -496,8 +496,8 @@ context default
 
     keyword #line*"*" red
 
-context exclusive /\*\* \*/ brown
-    keyword \*/ brown
+context exclusive /\*\* \*/ yellow
+    keyword \*/ yellow
     spellcheck
 # ddoc
     keyword Authors: red
@@ -523,20 +523,20 @@ context exclusive /\*\* \*/ brown
     keyword FIXME: red
     keyword Note: red
 
-context exclusive /\+\+\+\+\+\+\+\+\+ \+\+\+\+\+\+\+\+\+/ brown
-context exclusive /\+\+\+\+\+\+\+\+ \+\+\+\+\+\+\+\+/ brown
-context exclusive /\+\+\+\+\+\+\+ \+\+\+\+\+\+\+/ brown
-context exclusive /\+\+\+\+\+\+ \+\+\+\+\+\+/ brown
-context exclusive /\+\+\+\+\+ \+\+\+\+\+/ brown
-context exclusive /\+\+\+\+ \+\+\+\+/ brown
-context exclusive /\+\+\+ \+\+\+/ brown
-context exclusive /\+\+ \+\+/ brown
-context exclusive /\+ \+/ brown
+context exclusive /\+\+\+\+\+\+\+\+\+ \+\+\+\+\+\+\+\+\+/ yellow
+context exclusive /\+\+\+\+\+\+\+\+ \+\+\+\+\+\+\+\+/ yellow
+context exclusive /\+\+\+\+\+\+\+ \+\+\+\+\+\+\+/ yellow
+context exclusive /\+\+\+\+\+\+ \+\+\+\+\+\+/ yellow
+context exclusive /\+\+\+\+\+ \+\+\+\+\+/ yellow
+context exclusive /\+\+\+\+ \+\+\+\+/ yellow
+context exclusive /\+\+\+ \+\+\+/ yellow
+context exclusive /\+\+ \+\+/ yellow
+context exclusive /\+ \+/ yellow
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ yellow
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n yellow
     spellcheck
 
 context exclusive ` ` green

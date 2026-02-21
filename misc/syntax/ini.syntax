@@ -4,13 +4,13 @@ context default cyan
     keyword = brightred
 
 # groups
-context [ ] yellow
+context [ ] brightyellow
 
 # comments:
-context # \n brown
+context # \n yellow
     spellcheck
 
-context ; \n brown
+context ; \n yellow
     spellcheck
 
 context exclusive = \n brightcyan

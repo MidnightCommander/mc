@@ -25,24 +25,24 @@ context default
     keyword whole #ELSE brightred
     keyword whole #FI brightred
 
-    keyword whole ACCESSBANK yellow
-    keyword whole CODEPAGE yellow
-    keyword whole DATABANK yellow
-    keyword whole LINEARMEM yellow
-    keyword whole PROTECTED yellow
-    keyword whole RESERVED yellow
-    keyword whole SECTION yellow
-    keyword whole SHAREBANK yellow
-    keyword whole SHADOW yellow
-    keyword whole STACK yellow
+    keyword whole ACCESSBANK brightyellow
+    keyword whole CODEPAGE brightyellow
+    keyword whole DATABANK brightyellow
+    keyword whole LINEARMEM brightyellow
+    keyword whole PROTECTED brightyellow
+    keyword whole RESERVED brightyellow
+    keyword whole SECTION brightyellow
+    keyword whole SHAREBANK brightyellow
+    keyword whole SHADOW brightyellow
+    keyword whole STACK brightyellow
 
     keyword whole END brightmagenta
     keyword whole NAME brightmagenta
     keyword whole SIZE brightmagenta
     keyword whole START brightmagenta
 
-    keyword whole RAM brown
-    keyword whole ROM brown
+    keyword whole RAM yellow
+    keyword whole ROM yellow
 
 wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
 
@@ -57,7 +57,7 @@ wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
     #=========================
     # Comments
     #
-    keyword //*\n white magenta
+    keyword //*\n brightwhite magenta
 
     #=========================
     # Special symbols

@@ -14,21 +14,21 @@ context linestart \s\s\s\s\s\s\s\s \n\n
     keyword (*)\{\s\}[*]: cyan
     keyword whole \* brightcyan
 
-context linestart 19+-+\s \n yellow
+context linestart 19+-+\s \n brightyellow
     keyword <+> brightred
-context linestart 20+-+\s \n yellow
+context linestart 20+-+\s \n brightyellow
     keyword <+> brightred
-context linestart Mon\s \n yellow
+context linestart Mon\s \n brightyellow
     keyword <+> brightred
-context linestart Tue\s \n yellow
+context linestart Tue\s \n brightyellow
     keyword <+> brightred
-context linestart Wed\s \n yellow
+context linestart Wed\s \n brightyellow
     keyword <+> brightred
-context linestart Thu\s \n yellow
+context linestart Thu\s \n brightyellow
     keyword <+> brightred
-context linestart Fri\s \n yellow
+context linestart Fri\s \n brightyellow
     keyword <+> brightred
-context linestart Sat\s \n yellow
+context linestart Sat\s \n brightyellow
     keyword <+> brightred
-context linestart Sun\s \n yellow
+context linestart Sun\s \n brightyellow
     keyword <+> brightred

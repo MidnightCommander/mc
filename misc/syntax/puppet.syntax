@@ -6,23 +6,23 @@ context default
 
 # Operators
 
-  keyword =>  yellow
-  keyword !=  yellow
-  keyword \+= yellow
-  keyword \+> yellow
-  keyword ->  yellow
-  keyword ~>  yellow
-  keyword <-  yellow
-  keyword <~  yellow
-  keyword =   yellow
+  keyword =>  brightyellow
+  keyword !=  brightyellow
+  keyword \+= brightyellow
+  keyword \+> brightyellow
+  keyword ->  brightyellow
+  keyword ~>  brightyellow
+  keyword <-  brightyellow
+  keyword <~  brightyellow
+  keyword =   brightyellow
 
 # Exported/Virtual Resources & Collectors
 
-  keyword @   yellow
-  keyword |>  yellow
-  keyword |>> yellow
-  keyword <<| yellow
-  keyword <|  yellow
+  keyword @   brightyellow
+  keyword |>  brightyellow
+  keyword |>> brightyellow
+  keyword <<| brightyellow
+  keyword <|  brightyellow
 
 # Braces
 
@@ -48,11 +48,11 @@ context default
 
 # Variables
 
-  keyword wholeright $+\:\:+\:\:+\:\:+\:\:+ white
-  keyword wholeright $+\:\:+\:\:+\:\:+ white
-  keyword wholeright $+\:\:+\:\:+ white
-  keyword wholeright $+\:\:+ white
-  keyword wholeright $+ white
+  keyword wholeright $+\:\:+\:\:+\:\:+\:\:+ brightwhite
+  keyword wholeright $+\:\:+\:\:+\:\:+ brightwhite
+  keyword wholeright $+\:\:+\:\:+ brightwhite
+  keyword wholeright $+\:\:+ brightwhite
+  keyword wholeright $+ brightwhite
 
 # Parameters
 
@@ -506,43 +506,43 @@ context default
 
 # Conditional Statements and Expressions
 
-  keyword whole ? yellow
-  keyword whole and yellow
-  keyword whole case yellow
-  keyword whole default yellow
-  keyword whole else yellow
-  keyword whole elsif yellow
-  keyword whole if yellow
-  keyword whole in yellow
-  keyword whole or yellow
+  keyword whole ? brightyellow
+  keyword whole and brightyellow
+  keyword whole case brightyellow
+  keyword whole default brightyellow
+  keyword whole else brightyellow
+  keyword whole elsif brightyellow
+  keyword whole if brightyellow
+  keyword whole in brightyellow
+  keyword whole or brightyellow
 
 # Reserved words (reserved for future use)
 
-  keyword whole application yellow
-  keyword whole attr yellow
-  keyword whole consumes yellow
-  keyword whole environment yellow
-  keyword whole function yellow
-  keyword whole import yellow
-  keyword whole private yellow
-  keyword whole produces yellow
-  keyword whole type yellow
+  keyword whole application brightyellow
+  keyword whole attr brightyellow
+  keyword whole consumes brightyellow
+  keyword whole environment brightyellow
+  keyword whole function brightyellow
+  keyword whole import brightyellow
+  keyword whole private brightyellow
+  keyword whole produces brightyellow
+  keyword whole type brightyellow
 
 # Language keywords
 
-  keyword whole absent yellow
+  keyword whole absent brightyellow
   keyword whole class red
-  keyword whole define yellow
-  keyword whole directory yellow
-  keyword whole include yellow
-  keyword whole inherits yellow
-  keyword whole installed yellow
-  keyword whole latest yellow
-  keyword whole link yellow
-  keyword whole node yellow
-  keyword whole on_failure yellow
-  keyword whole present yellow
-  keyword whole running yellow
+  keyword whole define brightyellow
+  keyword whole directory brightyellow
+  keyword whole include brightyellow
+  keyword whole inherits brightyellow
+  keyword whole installed brightyellow
+  keyword whole latest brightyellow
+  keyword whole link brightyellow
+  keyword whole node brightyellow
+  keyword whole on_failure brightyellow
+  keyword whole present brightyellow
+  keyword whole running brightyellow
 
 # Stdlib 4.10.0 Types
 
@@ -664,21 +664,21 @@ context default
 
 # Other contexts
 
-context # \n brown
+context # \n yellow
   spellcheck
 
 context " " green
   keyword \\" brightgreen
   keyword \\\\ brightgreen
-  keyword wholeright ${+\:\:+\:\:+\:\:+\:\:+} white
-  keyword wholeright ${+\:\:+\:\:+\:\:+} white
-  keyword wholeright ${+\:\:+\:\:+} white
-  keyword wholeright ${+\:\:+} white
-  keyword wholeright ${+} white
-  keyword wholeright $+ white
+  keyword wholeright ${+\:\:+\:\:+\:\:+\:\:+} brightwhite
+  keyword wholeright ${+\:\:+\:\:+\:\:+} brightwhite
+  keyword wholeright ${+\:\:+\:\:+} brightwhite
+  keyword wholeright ${+\:\:+} brightwhite
+  keyword wholeright ${+} brightwhite
+  keyword wholeright $+ brightwhite
 
 context ' ' brightgreen
   keyword \\' green
   keyword \\\\ green
 
-context exclusive ` ` white black
+context exclusive ` ` brightwhite black

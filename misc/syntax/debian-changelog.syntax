@@ -8,13 +8,13 @@ context default
     keyword whole experimental; brightmagenta/magenta
     keyword whole unstable; brightmagenta/magenta
     keyword whole stable; brightmagenta/magenta
-    keyword whole urgency=low yellow/24
+    keyword whole urgency=low brightyellow/24
     keyword whole urgency=medium brightgreen/6
-    keyword whole urgency=high white/25
-    keyword whole urgency=LOW yellow/24
+    keyword whole urgency=high brightwhite/25
+    keyword whole urgency=LOW brightyellow/24
     keyword whole urgency=MEDIUM brightgreen/6
-    keyword whole urgency=HIGH white/25
+    keyword whole urgency=HIGH brightwhite/25
 
-    keyword whole bug white/25
-    keyword whole Bug white/25
-    keyword whole BUG white/25
+    keyword whole bug brightwhite/25
+    keyword whole Bug brightwhite/25
+    keyword whole BUG brightwhite/25

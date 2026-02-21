@@ -3,42 +3,42 @@
 ##################################################################################
 
 context default
-    keyword whole and yellow
-    keyword whole as yellow
-    keyword whole begin yellow
-    keyword whole do yellow
-    keyword whole done yellow
-    keyword whole downto yellow
-    keyword whole else yellow
-    keyword whole end yellow
-    keyword whole exception yellow
-    keyword whole for yellow
-    keyword whole fun yellow
-    keyword whole function yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole let yellow
-    keyword whole match yellow
-    keyword whole mutable yellow
-    keyword whole not yellow
-    keyword whole of yellow
-    keyword whole or yellow
-    keyword whole prefix yellow
-    keyword whole rec yellow
-    keyword whole then yellow
-    keyword whole to yellow
-    keyword whole try yellow
-    keyword whole type yellow
-    keyword whole value yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole mod yellow
-    keyword whole with yellow
-    keyword whole true yellow
-    keyword whole false yellow
+    keyword whole and brightyellow
+    keyword whole as brightyellow
+    keyword whole begin brightyellow
+    keyword whole do brightyellow
+    keyword whole done brightyellow
+    keyword whole downto brightyellow
+    keyword whole else brightyellow
+    keyword whole end brightyellow
+    keyword whole exception brightyellow
+    keyword whole for brightyellow
+    keyword whole fun brightyellow
+    keyword whole function brightyellow
+    keyword whole if brightyellow
+    keyword whole in brightyellow
+    keyword whole let brightyellow
+    keyword whole match brightyellow
+    keyword whole mutable brightyellow
+    keyword whole not brightyellow
+    keyword whole of brightyellow
+    keyword whole or brightyellow
+    keyword whole prefix brightyellow
+    keyword whole rec brightyellow
+    keyword whole then brightyellow
+    keyword whole to brightyellow
+    keyword whole try brightyellow
+    keyword whole type brightyellow
+    keyword whole value brightyellow
+    keyword whole where brightyellow
+    keyword whole while brightyellow
+    keyword whole mod brightyellow
+    keyword whole with brightyellow
+    keyword whole true brightyellow
+    keyword whole false brightyellow
 
-    keyword (\* brown
-    keyword \*) brown
+    keyword (\* yellow
+    keyword \*) yellow
 
     keyword `\s` brightcyan
     keyword `+` brightcyan
@@ -73,11 +73,11 @@ context default
 
     keyword ; cyan
 
-context exclusive (\* \*) brown
+context exclusive (\* \*) yellow
 
-    keyword \\\n yellow
-    keyword "+" brown
-    keyword <+> brown
+    keyword \\\n brightyellow
+    keyword "+" yellow
+    keyword <+> yellow
 
 context " " brightcyan
     keyword \\" brightmagenta

@@ -4,45 +4,45 @@
 # https://www.juancri.com
 
 context default
-    keyword "*" lightgray
-    keyword '*' lightgray
+    keyword "*" white
+    keyword '*' white
 
     spellcheck
 
 context <!-- --> brightgreen
     spellcheck
 
-context <! > yellow
+context <! > brightyellow
     keyword '+' brightcyan
     keyword "+" brightcyan
-    keyword \( lightgray
-    keyword \) lightgray
-    keyword \* lightgray
-    keyword \? lightgray
-    keyword \+ lightgray
-    keyword \| lightgray
-    keyword \, lightgray
+    keyword \( white
+    keyword \) white
+    keyword \* white
+    keyword \? white
+    keyword \+ white
+    keyword \| white
+    keyword \, white
     spellcheck
 
 context <% %> brightgreen
-    keyword Application white
-    keyword Assembly white
-    keyword Control white
-    keyword Implements white
-    keyword Import white
-    keyword Inherits white
-    keyword OutputCache white
-    keyword Page white
-    keyword Reference white
-    keyword Register white
-    keyword WebService white
-    keyword \s+\= yellow
+    keyword Application brightwhite
+    keyword Assembly brightwhite
+    keyword Control brightwhite
+    keyword Implements brightwhite
+    keyword Import brightwhite
+    keyword Inherits brightwhite
+    keyword OutputCache brightwhite
+    keyword Page brightwhite
+    keyword Reference brightwhite
+    keyword Register brightwhite
+    keyword WebService brightwhite
+    keyword \s+\= brightyellow
     keyword '*' brightcyan
     keyword "*" brightcyan
     spellcheck
 
-context < > white
-    keyword \s+\= yellow
+context < > brightwhite
+    keyword \s+\= brightyellow
     keyword "server" brightgreen
     keyword '*' brightcyan
     keyword "*" brightcyan

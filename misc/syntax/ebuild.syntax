@@ -70,226 +70,226 @@ context default
     keyword HTML_DOCS brightcyan
     keyword LINGUAS brightcyan
 
-    keyword whole addpredict yellow
-    keyword whole best_version yellow
-    keyword whole built_with_use yellow
-    keyword whole check_KV yellow
-    keyword whole default yellow
-    keyword whole die yellow
-    keyword whole diropts yellow
-    keyword whole dobin yellow
-    keyword whole docinto yellow
-    keyword whole docompress yellow
-    keyword whole doconfd yellow
-    keyword whole dodir yellow
-    keyword whole dodoc yellow
-    keyword whole doenvd yellow
-    keyword whole doexe yellow
-    keyword whole dohard yellow
-    keyword whole dohtml yellow
-    keyword whole doinfo yellow
-    keyword whole doinitd yellow
-    keyword whole doins yellow
-    keyword whole dolib yellow
-    keyword whole dolib.a yellow
-    keyword whole dolib.so yellow
-    keyword whole doman yellow
-    keyword whole dosbin yellow
-    keyword whole dosed yellow
-    keyword whole dosym yellow
-    keyword whole eapply yellow
-    keyword whole eapply_user yellow
-    keyword whole ebegin yellow
-    keyword whole econf yellow
-    keyword whole eend yellow
-    keyword whole eerror yellow
-    keyword whole einfo yellow
-    keyword whole einstall yellow
-    keyword whole einstalldocs yellow
-    keyword whole elog yellow
-    keyword whole emake yellow
-    keyword whole epatch yellow
-    keyword whole epatch_user yellow
-    keyword whole ewarn yellow
-    keyword whole exeinto yellow
-    keyword whole exeopts yellow
-    keyword whole enewgroup yellow
-    keyword whole enewuser yellow
-    keyword whole fowners yellow
-    keyword whole fperms yellow
-    keyword whole has yellow
-    keyword whole hasq yellow
-    keyword whole has_version yellow
-    keyword whole insinto yellow
-    keyword whole insopts yellow
-    keyword whole intltoolize yellow
-    keyword whole into yellow
-    keyword whole keepdir yellow
-    keyword whole libopts yellow
-    keyword whole newbin yellow
-    keyword whole newconfd yellow
-    keyword whole newdoc yellow
-    keyword whole newexe yellow
-    keyword whole newins yellow
-    keyword whole newman yellow
-    keyword whole newsbin yellow
-    keyword whole newinitd yellow
-    keyword whole pax-mark yellow
-    keyword whole prepall yellow
-    keyword whole prepalldocs yellow
-    keyword whole prepallinfo yellow
-    keyword whole prepallman yellow
-    keyword whole unpack yellow
-    keyword whole use yellow
-    keyword whole usev yellow
-    keyword whole usex yellow
-    keyword whole use_enable yellow
-    keyword whole use_with yellow
+    keyword whole addpredict brightyellow
+    keyword whole best_version brightyellow
+    keyword whole built_with_use brightyellow
+    keyword whole check_KV brightyellow
+    keyword whole default brightyellow
+    keyword whole die brightyellow
+    keyword whole diropts brightyellow
+    keyword whole dobin brightyellow
+    keyword whole docinto brightyellow
+    keyword whole docompress brightyellow
+    keyword whole doconfd brightyellow
+    keyword whole dodir brightyellow
+    keyword whole dodoc brightyellow
+    keyword whole doenvd brightyellow
+    keyword whole doexe brightyellow
+    keyword whole dohard brightyellow
+    keyword whole dohtml brightyellow
+    keyword whole doinfo brightyellow
+    keyword whole doinitd brightyellow
+    keyword whole doins brightyellow
+    keyword whole dolib brightyellow
+    keyword whole dolib.a brightyellow
+    keyword whole dolib.so brightyellow
+    keyword whole doman brightyellow
+    keyword whole dosbin brightyellow
+    keyword whole dosed brightyellow
+    keyword whole dosym brightyellow
+    keyword whole eapply brightyellow
+    keyword whole eapply_user brightyellow
+    keyword whole ebegin brightyellow
+    keyword whole econf brightyellow
+    keyword whole eend brightyellow
+    keyword whole eerror brightyellow
+    keyword whole einfo brightyellow
+    keyword whole einstall brightyellow
+    keyword whole einstalldocs brightyellow
+    keyword whole elog brightyellow
+    keyword whole emake brightyellow
+    keyword whole epatch brightyellow
+    keyword whole epatch_user brightyellow
+    keyword whole ewarn brightyellow
+    keyword whole exeinto brightyellow
+    keyword whole exeopts brightyellow
+    keyword whole enewgroup brightyellow
+    keyword whole enewuser brightyellow
+    keyword whole fowners brightyellow
+    keyword whole fperms brightyellow
+    keyword whole has brightyellow
+    keyword whole hasq brightyellow
+    keyword whole has_version brightyellow
+    keyword whole insinto brightyellow
+    keyword whole insopts brightyellow
+    keyword whole intltoolize brightyellow
+    keyword whole into brightyellow
+    keyword whole keepdir brightyellow
+    keyword whole libopts brightyellow
+    keyword whole newbin brightyellow
+    keyword whole newconfd brightyellow
+    keyword whole newdoc brightyellow
+    keyword whole newexe brightyellow
+    keyword whole newins brightyellow
+    keyword whole newman brightyellow
+    keyword whole newsbin brightyellow
+    keyword whole newinitd brightyellow
+    keyword whole pax-mark brightyellow
+    keyword whole prepall brightyellow
+    keyword whole prepalldocs brightyellow
+    keyword whole prepallinfo brightyellow
+    keyword whole prepallman brightyellow
+    keyword whole unpack brightyellow
+    keyword whole use brightyellow
+    keyword whole usev brightyellow
+    keyword whole usex brightyellow
+    keyword whole use_enable brightyellow
+    keyword whole use_with brightyellow
     #autotools
-    keyword whole _elibtoolize yellow
-    keyword whole eaclocal yellow
-    keyword whole eautoconf yellow
-    keyword whole eautopoint yellow
-    keyword whole eautoreconf yellow
-    keyword whole eautomake yellow
+    keyword whole _elibtoolize brightyellow
+    keyword whole eaclocal brightyellow
+    keyword whole eautoconf brightyellow
+    keyword whole eautopoint brightyellow
+    keyword whole eautoreconf brightyellow
+    keyword whole eautomake brightyellow
     #bashcomp
-    keyword whole bashcomp_alias yellow
-    keyword whole dobashcomp yellow
-    keyword whole newbashcomp yellow
+    keyword whole bashcomp_alias brightyellow
+    keyword whole dobashcomp brightyellow
+    keyword whole newbashcomp brightyellow
     #cvs
-    keyword whole cvs_src_unpack yellow
+    keyword whole cvs_src_unpack brightyellow
     #darcs
-    keyword whole darcs_src_unpack yellow
+    keyword whole darcs_src_unpack brightyellow
     #default
-    keyword whole default_src_unpack yellow
+    keyword whole default_src_unpack brightyellow
     #desktop
-    keyword whole doicon yellow
-    keyword whole domenu yellow
-    keyword whole make_desktop_entry yellow
-    keyword whole make_session_desktop yellow
-    keyword whole newicon yellow
-    keyword whole newmenu yellow
+    keyword whole doicon brightyellow
+    keyword whole domenu brightyellow
+    keyword whole make_desktop_entry brightyellow
+    keyword whole make_session_desktop brightyellow
+    keyword whole newicon brightyellow
+    keyword whole newmenu brightyellow
     #elisp-common
-    keyword whole elisp-compile yellow
-    keyword whole elisp-install yellow
-    keyword whole elisp-site-file-install yellow
-    keyword whole elisp-site-regen yellow
+    keyword whole elisp-compile brightyellow
+    keyword whole elisp-install brightyellow
+    keyword whole elisp-site-file-install brightyellow
+    keyword whole elisp-site-regen brightyellow
     #flag-o-matic
-    keyword whole append-cflags yellow
-    keyword whole append-cxxflags yellow
-    keyword whole append-flags yellow
-    keyword whole append-ldflags yellow
-    keyword whole append-lfs-flags yellow
-    keyword whole filter-flags yellow
-    keyword whole replace-flags yellow
-    keyword whole strip-flags yellow
-    keyword whole strip-unsupported-flags yellow
+    keyword whole append-cflags brightyellow
+    keyword whole append-cxxflags brightyellow
+    keyword whole append-flags brightyellow
+    keyword whole append-ldflags brightyellow
+    keyword whole append-lfs-flags brightyellow
+    keyword whole filter-flags brightyellow
+    keyword whole replace-flags brightyellow
+    keyword whole strip-flags brightyellow
+    keyword whole strip-unsupported-flags brightyellow
     #git-r3
-    keyword whole git-r3_checkout yellow
-    keyword whole git-r3_fetch yellow
-    keyword whole git-r3_src_unpack yellow
+    keyword whole git-r3_checkout brightyellow
+    keyword whole git-r3_fetch brightyellow
+    keyword whole git-r3_src_unpack brightyellow
     #java-ant-2
-    keyword whole EANT_BUILD_TARGET yellow
+    keyword whole EANT_BUILD_TARGET brightyellow
     #kernel-2
-    keyword whole kernel-2_src_unpack yellow
-    keyword whole kernel_is yellow
+    keyword whole kernel-2_src_unpack brightyellow
+    keyword whole kernel_is brightyellow
     #libtool
-    keyword whole elibtoolize yellow
+    keyword whole elibtoolize brightyellow
     #mercurial
-    keyword whole mercurial_src_unpack yellow
+    keyword whole mercurial_src_unpack brightyellow
     #mozilla
-    keyword whole mozconfig_annotate yellow
-    keyword whole mozconfig_config yellow
-    keyword whole mozconfig_final yellow
-    keyword whole mozconfig_init yellow
-    keyword whole mozconfig_install_prefs yellow
-    keyword whole mozconfig_use_enable yellow
-    keyword whole mozconfig_use_with yellow
-    keyword whole moz_pkg_setup yellow
+    keyword whole mozconfig_annotate brightyellow
+    keyword whole mozconfig_config brightyellow
+    keyword whole mozconfig_final brightyellow
+    keyword whole mozconfig_init brightyellow
+    keyword whole mozconfig_install_prefs brightyellow
+    keyword whole mozconfig_use_enable brightyellow
+    keyword whole mozconfig_use_with brightyellow
+    keyword whole moz_pkg_setup brightyellow
     #multilib
-    keyword whole multilib_copy_sources yellow
-    keyword whole multilib_env yellow
-    keyword whole multilib_foreach_abi yellow
-    keyword whole multilib_is_native_abi yellow
-    keyword whole multilib_layout yellow
-    keyword whole multilib_parallel_foreach_abi yellow
-    keyword whole multilib_toolchain_setup yellow
+    keyword whole multilib_copy_sources brightyellow
+    keyword whole multilib_env brightyellow
+    keyword whole multilib_foreach_abi brightyellow
+    keyword whole multilib_is_native_abi brightyellow
+    keyword whole multilib_layout brightyellow
+    keyword whole multilib_parallel_foreach_abi brightyellow
+    keyword whole multilib_toolchain_setup brightyellow
     #ninja-utils
-    keyword whole eninja yellow
+    keyword whole eninja brightyellow
     #pam
-    keyword whole cleanpamd yellow
-    keyword whole dopamd yellow
-    keyword whole dopammod yellow
-    keyword whole dopamsecurity yellow
-    keyword whole newpamd yellow
-    keyword whole newpammod yellow
-    keyword whole newpamsecurity yellow
-    keyword whole pamd_mimic yellow
-    keyword whole pamd_mimic_system yellow
+    keyword whole cleanpamd brightyellow
+    keyword whole dopamd brightyellow
+    keyword whole dopammod brightyellow
+    keyword whole dopamsecurity brightyellow
+    keyword whole newpamd brightyellow
+    keyword whole newpammod brightyellow
+    keyword whole newpamsecurity brightyellow
+    keyword whole pamd_mimic brightyellow
+    keyword whole pamd_mimic_system brightyellow
     #prefix
-    keyword whole eprefixify yellow
+    keyword whole eprefixify brightyellow
     #preserve-libs
-    keyword whole preserve_old_lib yellow
-    keyword whole preserve_old_lib_notify yellow
+    keyword whole preserve_old_lib brightyellow
+    keyword whole preserve_old_lib_notify brightyellow
     #python
-    keyword whole python_copy_sources yellow
-    keyword whole python_do yellow
-    keyword whole python_doexe yellow
-    keyword whole python_doheader yellow
-    keyword whole python_domodule yellow
-    keyword whole python_doscript yellow
-    keyword whole python_export yellow
-    keyword whole python_export_best yellow
-    keyword whole python_fix_shebang yellow
-    keyword whole python_foreach_impl yellow
-    keyword whole python_is_python3 yellow
-    keyword whole python_moduleinto yellow
-    keyword whole python_newexe yellow
-    keyword whole python_newscript yellow
-    keyword whole python_optimize yellow
-    keyword whole python_replicate_script yellow
-    keyword whole python_scriptinto yellow
-    keyword whole python_setup yellow
+    keyword whole python_copy_sources brightyellow
+    keyword whole python_do brightyellow
+    keyword whole python_doexe brightyellow
+    keyword whole python_doheader brightyellow
+    keyword whole python_domodule brightyellow
+    keyword whole python_doscript brightyellow
+    keyword whole python_export brightyellow
+    keyword whole python_export_best brightyellow
+    keyword whole python_fix_shebang brightyellow
+    keyword whole python_foreach_impl brightyellow
+    keyword whole python_is_python3 brightyellow
+    keyword whole python_moduleinto brightyellow
+    keyword whole python_newexe brightyellow
+    keyword whole python_newscript brightyellow
+    keyword whole python_optimize brightyellow
+    keyword whole python_replicate_script brightyellow
+    keyword whole python_scriptinto brightyellow
+    keyword whole python_setup brightyellow
     #rpm
-    keyword whole rpm_src_unpack yellow
-    keyword whole rpm_unpack yellow
+    keyword whole rpm_src_unpack brightyellow
+    keyword whole rpm_unpack brightyellow
     #svn
-    keyword whole subversion_src_unpack yellow
+    keyword whole subversion_src_unpack brightyellow
     #systemd
-    keyword whole systemd_dotmpfilesd yellow
-    keyword whole systemd_dounit yellow
-    keyword whole systemd_douserunit yellow
-    keyword whole systemd_enable_ntpunit yellow
-    keyword whole systemd_install_serviced yellow
-    keyword whole systemd_logger yellow
-    keyword whole systemd_newtmpfilesd yellow
-    keyword whole systemd_newunit yellow
-    keyword whole systemd_reenable yellow
-    keyword whole systemd_update_catalog yellow
+    keyword whole systemd_dotmpfilesd brightyellow
+    keyword whole systemd_dounit brightyellow
+    keyword whole systemd_douserunit brightyellow
+    keyword whole systemd_enable_ntpunit brightyellow
+    keyword whole systemd_install_serviced brightyellow
+    keyword whole systemd_logger brightyellow
+    keyword whole systemd_newtmpfilesd brightyellow
+    keyword whole systemd_newunit brightyellow
+    keyword whole systemd_reenable brightyellow
+    keyword whole systemd_update_catalog brightyellow
     #toolchain-funcs
-    keyword whole gen_usr_ldscript yellow
-    keyword whole tc-check-openmp yellow
-    keyword whole tc-enables-pie yellow
-    keyword whole tc-export yellow
-    keyword whole tc-export_build_env yellow
-    keyword whole tc-has-openmp yellow
-    keyword whole tc-has-tls yellow
-    keyword whole tc-is-clang yellow
-    keyword whole tc-is-cross-compiler yellow
-    keyword whole tc-is-gcc yellow
-    keyword whole tc-is-static-only yellow
-    keyword whole tc-ld-disable-gold yellow
+    keyword whole gen_usr_ldscript brightyellow
+    keyword whole tc-check-openmp brightyellow
+    keyword whole tc-enables-pie brightyellow
+    keyword whole tc-export brightyellow
+    keyword whole tc-export_build_env brightyellow
+    keyword whole tc-has-openmp brightyellow
+    keyword whole tc-has-tls brightyellow
+    keyword whole tc-is-clang brightyellow
+    keyword whole tc-is-cross-compiler brightyellow
+    keyword whole tc-is-gcc brightyellow
+    keyword whole tc-is-static-only brightyellow
+    keyword whole tc-ld-disable-gold brightyellow
     #toolchain
-    keyword whole toolchain_src_unpack yellow
+    keyword whole toolchain_src_unpack brightyellow
     #unpacker
-    keyword whole unpacker_src_unpack yellow
+    keyword whole unpacker_src_unpack brightyellow
     #virtualx
-    keyword whole virtx yellow
+    keyword whole virtx brightyellow
     #xdg
-    keyword whole xdg_desktop_database_update yellow
-    keyword whole xdg_environment_reset yellow
-    keyword whole xdg_icon_cache_update yellow
-    keyword whole xdg_mimeinfo_database_update yellow
+    keyword whole xdg_desktop_database_update brightyellow
+    keyword whole xdg_environment_reset brightyellow
+    keyword whole xdg_icon_cache_update brightyellow
+    keyword whole xdg_mimeinfo_database_update brightyellow
 
     #bashism (builtin extended 'test')
     keyword whole [[ brightcyan
@@ -368,35 +368,35 @@ context default
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole clear yellow
-    keyword whole continue yellow
-    keyword whole declare yellow
-    keyword whole done yellow
-    keyword whole do yellow
-    keyword whole elif yellow
-    keyword whole else yellow
-    keyword whole esac yellow
-    keyword whole exit yellow
-    keyword whole export yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole getopts yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole local yellow
-    keyword whole read yellow
-    keyword whole return yellow
-    keyword whole select yellow
-    keyword whole shift yellow
-    keyword whole source yellow
-    keyword whole then yellow
-    keyword whole trap yellow
-    keyword whole until yellow
-    keyword whole unset yellow
-    keyword whole wait yellow
-    keyword whole while yellow
+    keyword whole break brightyellow
+    keyword whole case brightyellow
+    keyword whole clear brightyellow
+    keyword whole continue brightyellow
+    keyword whole declare brightyellow
+    keyword whole done brightyellow
+    keyword whole do brightyellow
+    keyword whole elif brightyellow
+    keyword whole else brightyellow
+    keyword whole esac brightyellow
+    keyword whole exit brightyellow
+    keyword whole export brightyellow
+    keyword whole fi brightyellow
+    keyword whole for brightyellow
+    keyword whole getopts brightyellow
+    keyword whole if brightyellow
+    keyword whole in brightyellow
+    keyword whole local brightyellow
+    keyword whole read brightyellow
+    keyword whole return brightyellow
+    keyword whole select brightyellow
+    keyword whole shift brightyellow
+    keyword whole source brightyellow
+    keyword whole then brightyellow
+    keyword whole trap brightyellow
+    keyword whole until brightyellow
+    keyword whole unset brightyellow
+    keyword whole wait brightyellow
+    keyword whole while brightyellow
 
 # here goes usable subset for .ebuild commands
     keyword whole awk cyan
@@ -429,23 +429,23 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole xmkmf cyan
 
 # some interesting files to copy
-    keyword whole ANNOUNCEMENT white
-    keyword whole AUTHORS white
-    keyword whole BUGS white
-    keyword whole CHANGES white
-    keyword whole COPYING white
-    keyword whole COPYRIGHT white
-    keyword whole CREDITS white
-    keyword whole ChangeLog white
-    keyword whole FAQ white
-    keyword whole HACKING white
-    keyword whole INSTALL white
-    keyword whole LICENSE white
-    keyword whole NEWS white
-    keyword whole README white
-    keyword whole THANKS white
-    keyword whole TODO white
-    keyword whole VERSION white
+    keyword whole ANNOUNCEMENT brightwhite
+    keyword whole AUTHORS brightwhite
+    keyword whole BUGS brightwhite
+    keyword whole CHANGES brightwhite
+    keyword whole COPYING brightwhite
+    keyword whole COPYRIGHT brightwhite
+    keyword whole CREDITS brightwhite
+    keyword whole ChangeLog brightwhite
+    keyword whole FAQ brightwhite
+    keyword whole HACKING brightwhite
+    keyword whole INSTALL brightwhite
+    keyword whole LICENSE brightwhite
+    keyword whole NEWS brightwhite
+    keyword whole README brightwhite
+    keyword whole THANKS brightwhite
+    keyword whole TODO brightwhite
+    keyword whole VERSION brightwhite
 
     keyword whole /dev/audio brightblue
     keyword whole /dev/dsp brightblue
@@ -458,7 +458,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
-context # \n brown
+context # \n yellow
     spellcheck
 
 context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green
@@ -489,7 +489,7 @@ context " " green
 
     keyword $ brightgreen
 
-context exclusive ` ` lightgray black
+context exclusive ` ` white black
     keyword '*' green
     keyword " green
     keyword \\` green
@@ -520,34 +520,34 @@ context exclusive ` ` lightgray black
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole clear yellow
-    keyword whole continue yellow
-    keyword whole declare yellow
-    keyword whole done yellow
-    keyword whole do yellow
-    keyword whole elif yellow
-    keyword whole else yellow
-    keyword whole esac yellow
-    keyword whole exit yellow
-    keyword whole export yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole getopts yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole read yellow
-    keyword whole return yellow
-    keyword whole select yellow
-    keyword whole shift yellow
-    keyword whole source yellow
-    keyword whole then yellow
-    keyword whole trap yellow
-    keyword whole until yellow
-    keyword whole unset yellow
-    keyword whole wait yellow
-    keyword whole while yellow
+    keyword whole break brightyellow
+    keyword whole case brightyellow
+    keyword whole clear brightyellow
+    keyword whole continue brightyellow
+    keyword whole declare brightyellow
+    keyword whole done brightyellow
+    keyword whole do brightyellow
+    keyword whole elif brightyellow
+    keyword whole else brightyellow
+    keyword whole esac brightyellow
+    keyword whole exit brightyellow
+    keyword whole export brightyellow
+    keyword whole fi brightyellow
+    keyword whole for brightyellow
+    keyword whole getopts brightyellow
+    keyword whole if brightyellow
+    keyword whole in brightyellow
+    keyword whole read brightyellow
+    keyword whole return brightyellow
+    keyword whole select brightyellow
+    keyword whole shift brightyellow
+    keyword whole source brightyellow
+    keyword whole then brightyellow
+    keyword whole trap brightyellow
+    keyword whole until brightyellow
+    keyword whole unset brightyellow
+    keyword whole wait brightyellow
+    keyword whole while brightyellow
 
 # here goes usable subset for .ebuild commands
     keyword whole awk cyan
@@ -563,4 +563,4 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole /dev/zero brightblue
 
 context inherit \n magenta
-    keyword whole inherit yellow
+    keyword whole inherit brightyellow

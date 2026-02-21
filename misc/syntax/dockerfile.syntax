@@ -2,23 +2,23 @@
 # https://docs.docker.com/reference/dockerfile
 
 context default
-    keyword ADD yellow
-    keyword ARG yellow
-    keyword CMD yellow
-    keyword COPY yellow
-    keyword ENTRYPOINT yellow
-    keyword ENV yellow
-    keyword EXPOSE yellow
-    keyword FROM yellow
-    keyword HEALTHCHECK yellow
-    keyword LABEL yellow
-    keyword ONBUILD yellow
-    keyword RUN yellow
-    keyword SHELL yellow
-    keyword STOPSIGNAL yellow
-    keyword USER yellow
-    keyword VOLUME yellow
-    keyword WORKDIR yellow
+    keyword ADD brightyellow
+    keyword ARG brightyellow
+    keyword CMD brightyellow
+    keyword COPY brightyellow
+    keyword ENTRYPOINT brightyellow
+    keyword ENV brightyellow
+    keyword EXPOSE brightyellow
+    keyword FROM brightyellow
+    keyword HEALTHCHECK brightyellow
+    keyword LABEL brightyellow
+    keyword ONBUILD brightyellow
+    keyword RUN brightyellow
+    keyword SHELL brightyellow
+    keyword STOPSIGNAL brightyellow
+    keyword USER brightyellow
+    keyword VOLUME brightyellow
+    keyword WORKDIR brightyellow
     # deprecated things
     keyword MAINTAINER brightred
 
@@ -47,10 +47,10 @@ context default
     keyword } brightcyan
     keyword [ brightcyan
     keyword ] brightcyan
-    keyword = white
-    keyword && white
-    keyword || white
-    keyword \\$ white
+    keyword = brightwhite
+    keyword && brightwhite
+    keyword || brightwhite
+    keyword \\$ brightwhite
     keyword ${*} brightgreen
 
     keyword whole \{0123456789\}\[0123456789\] brightgreen
@@ -63,7 +63,7 @@ context ' ' green
 context " " green
 
 # Comments
-context # \n brown
+context # \n yellow
     keyword whole BUG brightred
     keyword whole FixMe brightred
     keyword whole FIXME brightred
