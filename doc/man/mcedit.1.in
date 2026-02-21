@@ -25,7 +25,9 @@ sign and the number). Several line numbers are allowed but only the last one
 will be used, and it will be applied to the first file only.
 .TP
 .I "\-b"
-Force black and white display.
+Force black and white display. Setting the
+.B NO_COLOR
+environment variable to a nonempty value has the same effect.
 .TP
 .I "\-c"
 Force ANSI color mode on terminals that don't seem to have color
