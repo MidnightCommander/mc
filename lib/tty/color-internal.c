@@ -270,3 +270,13 @@ convert_256color_to_truecolor (int color)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+int
+tty_maybe_map_color (int color)
+{
+    if (color >= TTY_COLOR_MAP_OFFSET)
+        return tty_color_role_to_pair[color - TTY_COLOR_MAP_OFFSET];
+    return color;
+}
+
+/* --------------------------------------------------------------------------------------------- */

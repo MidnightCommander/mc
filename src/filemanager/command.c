@@ -68,7 +68,12 @@ WInput *cmdline;
 /*** file scope variables ************************************************************************/
 
 /* Color styles command line */
-static input_colors_t command_colors;
+static const input_colors_t command_colors = {
+    [INPUT_COLOR_MAIN] = CORE_DEFAULT_COLOR,
+    [INPUT_COLOR_MARK] = CORE_COMMAND_MARK_COLOR,
+    [INPUT_COLOR_UNCHANGED] = CORE_DEFAULT_COLOR,
+    [INPUT_COLOR_HISTORY] = CORE_COMMAND_HISTORY_COLOR,
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -219,20 +224,6 @@ command_new (int y, int x, int cols)
     w->callback = command_callback;
 
     return cmd;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Set colors for the command line.
- */
-
-void
-command_set_default_colors (void)
-{
-    command_colors[INPUT_COLOR_MAIN] = CORE_DEFAULT_COLOR;
-    command_colors[INPUT_COLOR_MARK] = CORE_COMMAND_MARK_COLOR;
-    command_colors[INPUT_COLOR_UNCHANGED] = CORE_DEFAULT_COLOR;
-    command_colors[INPUT_COLOR_HISTORY] = CORE_COMMAND_HISTORY_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -79,7 +79,7 @@ extern int quote;
 extern const global_keymap_t *input_map;
 
 /* Color styles for normal and command line input widgets */
-extern input_colors_t input_colors;
+extern const input_colors_t input_colors;
 
 /*** declarations of public functions ************************************************************/
 
@@ -87,7 +87,6 @@ WInput *input_new (int y, int x, const int *colors, int len, const char *text, c
                    input_complete_t completion_flags);
 /* callback is public; needed for command line */
 cb_ret_t input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data);
-void input_set_default_colors (void);
 cb_ret_t input_handle_char (WInput *in, int key);
 void input_assign_text (WInput *in, const char *text);
 void input_insert (WInput *in, const char *text, gboolean insert_extra_space);

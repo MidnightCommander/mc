@@ -20,7 +20,6 @@ extern WInput *cmdline;
 /*** declarations of public functions ************************************************************/
 
 WInput *command_new (int y, int x, int len);
-void command_set_default_colors (void);
 void command_insert (WInput *in, const char *text, gboolean insert_extra_space);
 
 /*** inline functions ****************************************************************************/

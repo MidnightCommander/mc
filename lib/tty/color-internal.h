@@ -53,6 +53,8 @@ void tty_color_deinit_lib (void);
 
 void tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair);
 
+int tty_maybe_map_color (int color);
+
 /*** inline functions ****************************************************************************/
 
 #endif
