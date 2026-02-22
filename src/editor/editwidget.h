@@ -33,8 +33,8 @@ struct edit_book_mark_t
 typedef struct edit_fold_t edit_fold_t;
 struct edit_fold_t
 {
-    long line_start;   // first line of folded region
-    long line_count;   // number of hidden lines below line_start
+    long line_start;  // first line of folded region
+    long line_count;  // number of hidden lines below line_start
     edit_fold_t *next;
     edit_fold_t *prev;
 };

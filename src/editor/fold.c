@@ -27,9 +27,11 @@
 #include <config.h>
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "lib/global.h"
 
+#include "edit-impl.h"
 #include "editwidget.h"
 
 /* --------------------------------------------------------------------------------------------- */
@@ -134,8 +136,7 @@ edit_fold_make (WEdit *edit, long line_start, long line_count)
         q = p->next;
         /* overlap: fold [p->line_start, p->line_start + p->line_count]
            intersects [line_start, line_start + line_count] */
-        if (p->line_start + p->line_count >= line_start
-            && p->line_start <= line_start + line_count)
+        if (p->line_start + p->line_count >= line_start && p->line_start <= line_start + line_count)
         {
             /* remove p */
             if (p->prev != NULL)
@@ -334,6 +335,102 @@ edit_fold_dec (WEdit *edit, long line)
             }
         }
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Calculate the visual width of the fold indicator text "...} (N lines)".
+ *
+ * Uses str_term_width1 for correct i18n/UTF-8 handling.
+ *
+ * @param fold fold structure
+ * @return visual column width of the fold indicator text
+ */
+int
+edit_fold_indicator_width (const struct edit_fold_t *fold)
+{
+    (void) fold;
+    /* fold indicator is "...}" — always 4 columns */
+    return 4;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Toggle fold at the current cursor line.
+ *
+ * If the cursor is on a fold start, unfold it.
+ * If a selection is active, fold the selected lines.
+ * Otherwise, find an opening bracket on the line, match it, and fold that range.
+ *
+ * @param edit editor object
+ */
+void
+edit_fold_toggle (WEdit *edit)
+{
+    long line;
+    edit_fold_t *fold;
+
+    line = edit->buffer.curs_line;
+    fold = edit_fold_find (edit, line);
+
+    if (fold != NULL && line == fold->line_start)
+    {
+        /* existing fold — unfold */
+        edit_fold_remove (edit, fold->line_start);
+    }
+    else
+    {
+        off_t start_mark, end_mark;
+
+        if (eval_marks (edit, &start_mark, &end_mark))
+        {
+            /* selection active — fold selected lines */
+            long line1, line2;
+
+            line1 = edit_buffer_count_lines (&edit->buffer, 0, start_mark);
+            line2 = edit_buffer_count_lines (&edit->buffer, 0, end_mark);
+            if (line2 > line1)
+            {
+                edit_fold_make (edit, line1, line2 - line1);
+                edit_mark_cmd (edit, TRUE);
+            }
+        }
+        else
+        {
+            /* no selection — find { on this line, match } */
+            off_t bol, eol, pos;
+
+            bol = edit_buffer_get_current_bol (&edit->buffer);
+            eol = edit_buffer_get_current_eol (&edit->buffer);
+
+            for (pos = bol; pos < eol; pos++)
+            {
+                if (strchr ("{[(", edit_buffer_get_byte (&edit->buffer, pos)) != NULL)
+                {
+                    off_t match;
+
+                    edit_cursor_move (edit, pos - edit->buffer.curs1);
+                    match = edit_get_bracket (edit, 0, 0);
+                    if (match >= 0)
+                    {
+                        long line2;
+
+                        line2 = edit_buffer_count_lines (&edit->buffer, 0, match);
+                        if (line2 > line)
+                        {
+                            edit_fold_make (edit, line, line2 - line);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    edit->mark1 = edit->mark2 = edit->buffer.curs1;
+    edit->force |= REDRAW_PAGE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

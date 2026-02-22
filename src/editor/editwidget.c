@@ -740,6 +740,64 @@ edit_update_cursor (WEdit *edit, const mouse_event_t *event)
     else
         edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
 
+    /* On a fold start line, handle clicks relative to fold indicator */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL && edit->buffer.curs_line == fold->line_start)
+        {
+            off_t bol, eol, bracket_off;
+
+            bol = edit_buffer_get_current_bol (&edit->buffer);
+            eol = edit_buffer_get_current_eol (&edit->buffer);
+
+            /* Find the opening bracket by scanning backward from EOL */
+            for (bracket_off = eol - 1; bracket_off >= bol; bracket_off--)
+            {
+                int ch;
+
+                ch = edit_buffer_get_byte (&edit->buffer, bracket_off);
+                if (ch == '{' || ch == '[' || ch == '(')
+                    break;
+            }
+
+            if (bracket_off >= bol)
+            {
+                long bracket_col, click_col;
+
+                bracket_col = (long) edit_move_forward3 (edit, bol, 0, bracket_off);
+                click_col = x - edit->start_col - edit_options.line_state_width;
+
+                if (click_col >= bracket_col)
+                {
+                    long line_visual_len, fold_visual_end;
+
+                    /* Calculate visual end of fold indicator */
+                    line_visual_len = (long) edit_move_forward3 (edit, bol, 0, eol);
+                    fold_visual_end = line_visual_len + edit_fold_indicator_width (fold);
+
+                    /* Snap cursor to the bracket */
+                    edit_cursor_move (edit, bracket_off - edit->buffer.curs1);
+                    edit->curs_col = bracket_col;
+                    edit->prev_col = bracket_col;
+
+                    if (edit_options.cursor_beyond_eol && click_col >= fold_visual_end)
+                    {
+                        /* Click beyond fold indicator — cursor past fold end */
+                        edit->over_col = click_col - bracket_col;
+                    }
+                    else
+                    {
+                        /* Click on fold indicator — stay at bracket */
+                        edit->over_col = 0;
+                    }
+                }
+            }
+        }
+    }
+
     if (event->msg == MSG_MOUSE_CLICK)
     {
         edit_mark_cmd (edit, TRUE);  // reset
@@ -1168,8 +1226,8 @@ edit_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
                         }
                         else
                         {
-                            target_b = edit_buffer_get_forward_offset (&edit->buffer, target_b,
-                                                                       1, 0);
+                            target_b =
+                                edit_buffer_get_forward_offset (&edit->buffer, target_b, 1, 0);
                             target_line++;
                         }
                     }

@@ -238,6 +238,8 @@ long edit_fold_prev_visible (WEdit *edit, long line);
 void edit_fold_flush (WEdit *edit);
 void edit_fold_inc (WEdit *edit, long line);
 void edit_fold_dec (WEdit *edit, long line);
+void edit_fold_toggle (WEdit *edit);
+int edit_fold_indicator_width (const struct edit_fold_t *fold);
 
 gboolean edit_line_is_blank (WEdit *edit, long line);
 gboolean is_break_char (char c);
