@@ -22,7 +22,7 @@ jobs:
       - run: |
           ISSUE=${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }}
 
-          gh issue edit $ISSUE --remove-label "state: in review,state: approved"
+          gh issue edit $ISSUE --remove-label "state: in review,state: approved" || true
 
           if [ "${{ github.event.issue.state_reason }}" = "not_planned" ]; then
             gh issue edit $ISSUE --remove-milestone

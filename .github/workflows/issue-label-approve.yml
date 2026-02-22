@@ -24,7 +24,7 @@ jobs:
       - run: |
           gh issue edit \
             ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
-              --remove-label "state: in review"
+              --remove-label "state: in review" || true
           
           gh issue comment \
             ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \

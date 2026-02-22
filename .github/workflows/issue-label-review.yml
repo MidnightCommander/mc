@@ -24,7 +24,7 @@ jobs:
       - run: |
           gh issue edit \
             ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \
-              --remove-label "state: approved"
+              --remove-label "state: approved" || true
 
           gh issue comment \
             ${{ inputs.issue_number != '' && inputs.issue_number || github.event.issue.number }} \

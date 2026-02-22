@@ -24,7 +24,7 @@ jobs:
     steps:
       - run: |
           gh pr edit ${{ inputs.pr_number != '' && inputs.pr_number || github.event.pull_request.number }}  \
-            --remove-label "state: in review,state: approved"
+            --remove-label "state: in review,state: approved" || true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
