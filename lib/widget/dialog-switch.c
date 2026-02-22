@@ -33,8 +33,7 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/tty/tty.h"    // LINES, COLS
-#include "lib/tty/color.h"  // tty_set_normal_attrs()
+#include "lib/tty/tty.h"  // LINES, COLS
 #include "lib/widget.h"
 #include "lib/event.h"
 
