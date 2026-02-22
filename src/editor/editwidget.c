@@ -70,6 +70,8 @@
 
 char *edit_window_state_char = NULL;
 char *edit_window_close_char = NULL;
+char *edit_fold_open_char = NULL;
+char *edit_fold_close_char = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -100,6 +102,8 @@ edit_dlg_init (void)
     {
         edit_window_state_char = mc_skin_get ("widget-editor", "window-state-char", "*");
         edit_window_close_char = mc_skin_get ("widget-editor", "window-close-char", "X");
+        edit_fold_open_char = mc_skin_get ("widget-editor", "fold-open-char", "v");
+        edit_fold_close_char = mc_skin_get ("widget-editor", "fold-close-char", ">");
 
 #ifdef HAVE_ASPELL
         aspell_init ();
@@ -119,6 +123,8 @@ edit_dlg_deinit (void)
     {
         g_free (edit_window_state_char);
         g_free (edit_window_close_char);
+        g_free (edit_fold_open_char);
+        g_free (edit_fold_close_char);
 
 #ifdef HAVE_ASPELL
         aspell_clean ();
@@ -734,6 +740,64 @@ edit_update_cursor (WEdit *edit, const mouse_event_t *event)
     else
         edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
 
+    /* On a fold start line, handle clicks relative to fold indicator */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL && edit->buffer.curs_line == fold->line_start)
+        {
+            off_t bol, eol, bracket_off;
+
+            bol = edit_buffer_get_current_bol (&edit->buffer);
+            eol = edit_buffer_get_current_eol (&edit->buffer);
+
+            /* Find the opening bracket by scanning backward from EOL */
+            for (bracket_off = eol - 1; bracket_off >= bol; bracket_off--)
+            {
+                int ch;
+
+                ch = edit_buffer_get_byte (&edit->buffer, bracket_off);
+                if (ch == '{' || ch == '[' || ch == '(')
+                    break;
+            }
+
+            if (bracket_off >= bol)
+            {
+                long bracket_col, click_col;
+
+                bracket_col = (long) edit_move_forward3 (edit, bol, 0, bracket_off);
+                click_col = x - edit->start_col - edit_options.line_state_width;
+
+                if (click_col >= bracket_col)
+                {
+                    long line_visual_len, fold_visual_end;
+
+                    /* Calculate visual end of fold indicator */
+                    line_visual_len = (long) edit_move_forward3 (edit, bol, 0, eol);
+                    fold_visual_end = line_visual_len + edit_fold_indicator_width (fold);
+
+                    /* Snap cursor to the bracket */
+                    edit_cursor_move (edit, bracket_off - edit->buffer.curs1);
+                    edit->curs_col = bracket_col;
+                    edit->prev_col = bracket_col;
+
+                    if (edit_options.cursor_beyond_eol && click_col >= fold_visual_end)
+                    {
+                        /* Click beyond fold indicator — cursor past fold end */
+                        edit->over_col = click_col - bracket_col;
+                    }
+                    else
+                    {
+                        /* Click on fold indicator — stay at bracket */
+                        edit->over_col = 0;
+                    }
+                }
+            }
+        }
+    }
+
     if (event->msg == MSG_MOUSE_CLICK)
     {
         edit_mark_cmd (edit, TRUE);  // reset
@@ -1124,6 +1188,93 @@ edit_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
             {
                 // bottom-right corner -- start window resize
                 edit_execute_cmd (edit, CK_WindowResize, -1);
+                break;
+            }
+        }
+
+        // click in the line-state gutter area — toggle fold
+        if (edit_options.line_state)
+        {
+            int gutter_x;
+
+            gutter_x = event->x - (edit->fullscreen != 0 ? 0 : 1);
+            if (gutter_x >= 0 && gutter_x < edit_options.line_state_width)
+            {
+                int click_y;
+                long line;
+                edit_fold_t *fold;
+
+                // map screen row to file line and buffer offset
+                click_y = event->y - (edit->fullscreen != 0 ? 0 : 1);
+                {
+                    long target_line;
+                    off_t target_b;
+                    int r;
+
+                    target_line = edit->start_line;
+                    target_b = edit->start_display;
+                    for (r = 0; r < click_y; r++)
+                    {
+                        edit_fold_t *f;
+
+                        f = edit_fold_find (edit, target_line);
+                        if (f != NULL && target_line == f->line_start)
+                        {
+                            target_b = edit_buffer_get_forward_offset (&edit->buffer, target_b,
+                                                                       f->line_count + 1, 0);
+                            target_line += f->line_count + 1;
+                        }
+                        else
+                        {
+                            target_b =
+                                edit_buffer_get_forward_offset (&edit->buffer, target_b, 1, 0);
+                            target_line++;
+                        }
+                    }
+                    line = target_line;
+
+                    // move cursor directly to the target line
+                    edit_cursor_move (edit, target_b - edit->buffer.curs1);
+                }
+
+                fold = edit_fold_find (edit, line);
+
+                if (fold != NULL && line == fold->line_start)
+                {
+                    // existing fold — unfold
+                    edit_fold_remove (edit, fold->line_start);
+                }
+                else
+                {
+                    // try to create fold: find { on this line, match }
+                    off_t bol, eol, pos;
+
+                    bol = edit_buffer_get_current_bol (&edit->buffer);
+                    eol = edit_buffer_get_current_eol (&edit->buffer);
+
+                    for (pos = bol; pos < eol; pos++)
+                    {
+                        if (strchr ("{[(", edit_buffer_get_byte (&edit->buffer, pos)) != NULL)
+                        {
+                            off_t match;
+
+                            edit_cursor_move (edit, pos - edit->buffer.curs1);
+                            match = edit_get_bracket (edit, 0, 0);
+                            if (match >= 0)
+                            {
+                                long line2;
+
+                                line2 = edit_buffer_count_lines (&edit->buffer, 0, match);
+                                if (line2 > line)
+                                    edit_fold_make (edit, line, line2 - line);
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                edit->force |= REDRAW_PAGE;
+                edit_total_update (edit);
                 break;
             }
         }

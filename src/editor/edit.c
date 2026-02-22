@@ -884,6 +884,16 @@ edit_cursor_to_eol (WEdit *edit)
     edit->search_start = edit->buffer.curs1;
     edit->prev_col = edit_get_col (edit);
     edit->over_col = 0;
+
+    /* On a fold start line, End should place cursor after the fold indicator */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL && edit->buffer.curs_line == fold->line_start)
+            edit->over_col = edit_fold_indicator_width (fold);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1025,10 +1035,94 @@ edit_right_char_move_cmd (WEdit *edit)
     else
         c = edit_buffer_get_current_byte (&edit->buffer);
 
+    /* On a fold start line at or past the opening bracket: skip over fold indicator */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL && edit->buffer.curs_line == fold->line_start)
+        {
+            off_t bol, eol, bracket_off;
+
+            bol = edit_buffer_get_current_bol (&edit->buffer);
+            eol = edit_buffer_get_current_eol (&edit->buffer);
+
+            /* find the opening bracket by scanning backward from EOL */
+            for (bracket_off = eol - 1; bracket_off >= bol; bracket_off--)
+            {
+                int ch;
+
+                ch = edit_buffer_get_byte (&edit->buffer, bracket_off);
+                if (ch == '{' || ch == '[' || ch == '(')
+                    break;
+            }
+
+            if (bracket_off >= bol && edit->buffer.curs1 >= bracket_off)
+            {
+                if (edit_options.cursor_beyond_eol)
+                {
+                    int fold_width;
+
+                    fold_width = edit_fold_indicator_width (fold);
+
+                    /* move cursor to EOL if not already there */
+                    if (edit->buffer.curs1 < eol)
+                    {
+                        edit_cursor_move (edit, eol - edit->buffer.curs1);
+                        edit->over_col = 0;
+                    }
+
+                    if (edit->over_col < fold_width)
+                    {
+                        /* jump over fold indicator like over a tab */
+                        edit->over_col = fold_width;
+                    }
+                    else
+                    {
+                        /* past the fold indicator — keep going right */
+                        edit->over_col++;
+                    }
+                    return;
+                }
+
+                /* cursor_beyond_eol off: jump to next visible line */
+                {
+                    off_t target;
+
+                    target = edit_buffer_get_forward_offset (&edit->buffer, bol,
+                                                             fold->line_count + 1, 0);
+                    edit_cursor_move (edit, target - edit->buffer.curs1);
+                    edit->over_col = 0;
+                }
+                return;
+            }
+        }
+    }
+
     if (edit_options.cursor_beyond_eol && c == '\n')
         edit->over_col++;
     else
         edit_cursor_move (edit, char_length);
+
+    /* Skip over hidden (folded) lines — fallback for other entry points */
+    if (edit->folds != NULL && edit_fold_is_hidden (edit, edit->buffer.curs_line))
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL)
+        {
+            long delta;
+            off_t target;
+
+            delta = fold->line_start + fold->line_count + 1 - edit->buffer.curs_line;
+            target = edit_buffer_get_forward_offset (
+                &edit->buffer, edit_buffer_get_current_bol (&edit->buffer), delta, 0);
+            edit_cursor_move (edit, target - edit->buffer.curs1);
+            edit->over_col = 0;
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1050,9 +1144,94 @@ edit_left_char_move_cmd (WEdit *edit)
     }
 
     if (edit_options.cursor_beyond_eol && edit->over_col > 0)
+    {
+        /* On a fold start line, jump over the fold indicator in one step */
+        if (edit->folds != NULL)
+        {
+            edit_fold_t *fold;
+
+            fold = edit_fold_find (edit, edit->buffer.curs_line);
+            if (fold != NULL && edit->buffer.curs_line == fold->line_start)
+            {
+                int fold_width;
+
+                fold_width = edit_fold_indicator_width (fold);
+                if (edit->over_col <= fold_width)
+                {
+                    off_t bol, eol, bracket_off;
+
+                    bol = edit_buffer_get_current_bol (&edit->buffer);
+                    eol = edit_buffer_get_current_eol (&edit->buffer);
+
+                    /* find the opening bracket */
+                    for (bracket_off = eol - 1; bracket_off >= bol; bracket_off--)
+                    {
+                        int ch;
+
+                        ch = edit_buffer_get_byte (&edit->buffer, bracket_off);
+                        if (ch == '{' || ch == '[' || ch == '(')
+                            break;
+                    }
+
+                    if (bracket_off >= bol)
+                        edit_cursor_move (edit, bracket_off - edit->buffer.curs1);
+
+                    edit->over_col = 0;
+                    return;
+                }
+            }
+        }
         edit->over_col--;
+    }
     else
         edit_cursor_move (edit, -char_length);
+
+    /* Skip over hidden (folded) lines */
+    if (edit->folds != NULL && edit_fold_is_hidden (edit, edit->buffer.curs_line))
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL)
+        {
+            long delta;
+            off_t bol, eol;
+
+            /* Jump to fold start line */
+            delta = edit->buffer.curs_line - fold->line_start;
+            bol = edit_buffer_get_backward_offset (
+                &edit->buffer, edit_buffer_get_current_bol (&edit->buffer), delta);
+            eol = edit_buffer_get_eol (&edit->buffer, bol);
+
+            if (edit_options.cursor_beyond_eol)
+            {
+                /* cursor_beyond_eol on: land at end of fold indicator */
+                edit_cursor_move (edit, eol - edit->buffer.curs1);
+                edit->over_col = edit_fold_indicator_width (fold);
+            }
+            else
+            {
+                off_t bracket_off;
+
+                /* cursor_beyond_eol off: land on the opening bracket */
+                for (bracket_off = eol - 1; bracket_off >= bol; bracket_off--)
+                {
+                    int ch;
+
+                    ch = edit_buffer_get_byte (&edit->buffer, bracket_off);
+                    if (ch == '{' || ch == '[' || ch == '(')
+                        break;
+                }
+
+                if (bracket_off >= bol)
+                    edit_cursor_move (edit, bracket_off - edit->buffer.curs1);
+                else
+                    edit_cursor_move (edit, eol - edit->buffer.curs1);
+
+                edit->over_col = 0;
+            }
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1075,6 +1254,8 @@ edit_move_updown (WEdit *edit, long lines, gboolean do_scroll, gboolean directio
 
     if (lines > 1)
         edit->force |= REDRAW_PAGE;
+    if (edit->folds != NULL)
+        edit->force |= REDRAW_PAGE;
     if (do_scroll)
     {
         if (direction)
@@ -1087,6 +1268,38 @@ edit_move_updown (WEdit *edit, long lines, gboolean do_scroll, gboolean directio
                   : edit_buffer_get_forward_offset (&edit->buffer, p, lines, 0);
     edit_cursor_move (edit, p - edit->buffer.curs1);
     edit_move_to_prev_col (edit, p);
+
+    /* skip over folded (hidden) lines */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL && edit->buffer.curs_line > fold->line_start
+            && edit->buffer.curs_line <= fold->line_start + fold->line_count)
+        {
+            long target;
+
+            if (direction)
+                target = fold->line_start;
+            else
+                target = fold->line_start + fold->line_count + 1;
+
+            {
+                long delta = target - edit->buffer.curs_line;
+                off_t np;
+
+                if (delta > 0)
+                    np = edit_buffer_get_forward_offset (
+                        &edit->buffer, edit_buffer_get_current_bol (&edit->buffer), delta, 0);
+                else
+                    np = edit_buffer_get_backward_offset (
+                        &edit->buffer, edit_buffer_get_current_bol (&edit->buffer), -delta);
+                edit_cursor_move (edit, np - edit->buffer.curs1);
+                edit_move_to_prev_col (edit, np);
+            }
+        }
+    }
 
     // search start of current multibyte char (like CJK)
     if (edit->buffer.curs1 > 0 && edit->buffer.curs1 + 1 < edit->buffer.size
@@ -1517,7 +1730,7 @@ check_and_wrap_line (WEdit *edit)
  * @return position of the found bracket (-1 if no match)
  */
 
-static off_t
+off_t
 edit_get_bracket (WEdit *edit, gboolean in_screen, unsigned long furthest_bracket_search)
 {
     const char *const b = "{}{[][()(", *p;
@@ -2225,6 +2438,7 @@ edit_clean (WEdit *edit)
 
     edit_free_syntax_rules (edit);
     book_mark_flush (edit, -1);
+    edit_fold_flush (edit);
 
     edit_buffer_clean (&edit->buffer);
 
@@ -2544,6 +2758,7 @@ edit_insert (WEdit *edit, int c)
     if (c == '\n')
     {
         book_mark_inc (edit, edit->buffer.curs_line);
+        edit_fold_inc (edit, edit->buffer.curs_line);
         edit->buffer.curs_line++;
         edit->buffer.lines++;
         edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
@@ -2579,6 +2794,7 @@ edit_insert_ahead (WEdit *edit, int c)
     if (c == '\n')
     {
         book_mark_inc (edit, edit->buffer.curs_line);
+        edit_fold_inc (edit, edit->buffer.curs_line);
         edit->buffer.lines++;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -2652,6 +2868,7 @@ edit_delete (WEdit *edit, gboolean byte_delete)
     if (p == '\n')
     {
         book_mark_dec (edit, edit->buffer.curs_line);
+        edit_fold_dec (edit, edit->buffer.curs_line);
         edit->buffer.lines--;
         edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -2707,6 +2924,7 @@ edit_backspace (WEdit *edit, gboolean byte_delete)
     if (p == '\n')
     {
         book_mark_dec (edit, edit->buffer.curs_line);
+        edit_fold_dec (edit, edit->buffer.curs_line);
         edit->buffer.curs_line--;
         edit->buffer.lines--;
         edit->force |= REDRAW_AFTER_CURSOR;
@@ -2859,7 +3077,31 @@ edit_get_col (const WEdit *edit)
 void
 edit_update_curs_row (WEdit *edit)
 {
-    edit->curs_row = edit->buffer.curs_line - edit->start_line;
+    long hidden = 0;
+
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *f;
+
+        for (f = edit->folds; f != NULL; f = f->next)
+        {
+            long h_start, h_end;
+
+            /* hidden lines are [f->line_start + 1 .. f->line_start + f->line_count] */
+            if (f->line_start + f->line_count < edit->start_line)
+                continue;
+            if (f->line_start >= edit->buffer.curs_line)
+                break;
+
+            h_start = MAX (f->line_start + 1, edit->start_line);
+            h_end = MIN (f->line_start + f->line_count, edit->buffer.curs_line - 1);
+
+            if (h_end >= h_start)
+                hidden += h_end - h_start + 1;
+        }
+    }
+
+    edit->curs_row = edit->buffer.curs_line - edit->start_line - hidden;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2899,6 +3141,23 @@ edit_scroll_upward (WEdit *edit, long i)
         edit->force |= REDRAW_PAGE;
         edit->force &= (0xfff - REDRAW_CHAR_ONLY);
     }
+
+    /* if start_line landed inside a fold, move to fold start */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *f;
+
+        f = edit_fold_find (edit, edit->start_line);
+        if (f != NULL && edit->start_line > f->line_start)
+        {
+            long skip = edit->start_line - f->line_start;
+
+            edit->start_line -= skip;
+            edit->start_display =
+                edit_buffer_get_backward_offset (&edit->buffer, edit->start_display, skip);
+        }
+    }
+
     edit_update_curs_row (edit);
 }
 
@@ -2910,6 +3169,20 @@ edit_scroll_downward (WEdit *edit, long i)
     long lines_below;
 
     lines_below = edit->buffer.lines - edit->start_line - (WIDGET (edit)->rect.lines - 1);
+
+    /* Each fold in the viewport takes one screen row but covers line_count+1 buffer lines.
+       Add back fold->line_count so lines_below doesn't underestimate. */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *f;
+
+        for (f = edit->folds; f != NULL; f = f->next)
+        {
+            if (f->line_start >= edit->start_line)
+                lines_below += f->line_count;
+        }
+    }
+
     if (lines_below > 0)
     {
         if (i > lines_below)
@@ -2920,6 +3193,23 @@ edit_scroll_downward (WEdit *edit, long i)
         edit->force |= REDRAW_PAGE;
         edit->force &= (0xfff - REDRAW_CHAR_ONLY);
     }
+
+    /* if start_line landed inside a fold, skip past it */
+    if (edit->folds != NULL)
+    {
+        edit_fold_t *f;
+
+        f = edit_fold_find (edit, edit->start_line);
+        if (f != NULL && edit->start_line > f->line_start)
+        {
+            long skip = f->line_start + f->line_count + 1 - edit->start_line;
+
+            edit->start_line += skip;
+            edit->start_display =
+                edit_buffer_get_forward_offset (&edit->buffer, edit->start_display, skip, 0);
+        }
+    }
+
     edit_update_curs_row (edit);
 }
 
@@ -3420,6 +3710,28 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
 
     edit->redo_stack_reset = 1;
 
+    /* Snap cursor out of hidden (folded) lines — like tab-snap prevents mid-tab cursor */
+    if (edit->folds != NULL && edit_fold_is_hidden (edit, edit->buffer.curs_line))
+    {
+        edit_fold_t *fold;
+
+        fold = edit_fold_find (edit, edit->buffer.curs_line);
+        if (fold != NULL)
+        {
+            long delta;
+            off_t bol;
+
+            delta = edit->buffer.curs_line - fold->line_start;
+            bol = edit_buffer_get_backward_offset (
+                &edit->buffer, edit_buffer_get_current_bol (&edit->buffer), delta);
+            edit_cursor_move (edit, bol - edit->buffer.curs1);
+            /* position at EOL of fold start line */
+            edit_cursor_move (edit,
+                              edit_buffer_get_current_eol (&edit->buffer) - edit->buffer.curs1);
+            edit->over_col = 0;
+        }
+    }
+
     // An ordinary key press
     if (char_for_insertion >= 0)
     {
@@ -3842,6 +4154,14 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
                 edit_move_to_line (edit, p->line);
             }
         }
+        break;
+
+    case CK_FoldToggle:
+        edit_fold_toggle (edit);
+        break;
+    case CK_UnfoldAll:
+        edit_fold_flush (edit);
+        edit->force |= REDRAW_PAGE;
         break;
 
     case CK_Top:

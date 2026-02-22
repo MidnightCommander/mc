@@ -305,6 +305,8 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (BookmarkFlush),
     ADD_KEYMAP_NAME (BookmarkNext),
     ADD_KEYMAP_NAME (BookmarkPrev),
+    ADD_KEYMAP_NAME (FoldToggle),
+    ADD_KEYMAP_NAME (UnfoldAll),
     ADD_KEYMAP_NAME (MarkPageUp),
     ADD_KEYMAP_NAME (MarkPageDown),
     ADD_KEYMAP_NAME (MarkToFileBegin),

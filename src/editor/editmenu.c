@@ -162,6 +162,9 @@ create_command_menu (void)
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("Encod&ing..."), CK_SelectCodepage));
     entries = g_list_prepend (entries, menu_separator_new ());
+    entries = g_list_prepend (entries, menu_entry_new (_ ("&Fold / Unfold block"), CK_FoldToggle));
+    entries = g_list_prepend (entries, menu_entry_new (_ ("&Unfold all"), CK_UnfoldAll));
+    entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Refresh screen"), CK_Refresh));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (

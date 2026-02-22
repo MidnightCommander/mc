@@ -30,6 +30,15 @@ struct edit_book_mark_t
     edit_book_mark_t *prev;
 };
 
+typedef struct edit_fold_t edit_fold_t;
+struct edit_fold_t
+{
+    long line_start;  // first line of folded region
+    long line_count;  // number of hidden lines below line_start
+    edit_fold_t *next;
+    edit_fold_t *prev;
+};
+
 typedef struct edit_syntax_rule_t edit_syntax_rule_t;
 struct edit_syntax_rule_t
 {
@@ -120,6 +129,9 @@ struct WEdit
 
     edit_book_mark_t *book_mark;
     GArray *serialized_bookmarks;
+
+    // code folding
+    edit_fold_t *folds;
 
     // undo stack and pointers
     unsigned long undo_stack_pointer;

@@ -396,7 +396,13 @@ display. The characters in the skin files need to be encoded in UTF-8.
             Maximize or unmaximize an editor window
 
         window-close-char
-            Close an exitor window
+            Close an editor window
+
+        fold-open-char
+            Indicator for an open (expanded) fold in the editor
+
+        fold-close-char
+            Indicator for a closed (collapsed) fold in the editor
 
 
 Aliases section

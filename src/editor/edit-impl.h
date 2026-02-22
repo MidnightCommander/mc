@@ -67,7 +67,7 @@
 
 /* max count stack files */
 #define MAX_HISTORY_MOVETO                50
-#define LINE_STATE_WIDTH                  8
+#define LINE_STATE_WIDTH                  9
 
 #define LB_NAMES                          (LB_MAC + 1)
 
@@ -110,6 +110,8 @@ extern gboolean search_create_bookmark;
 
 extern char *edit_window_state_char;
 extern char *edit_window_close_char;
+extern char *edit_fold_open_char;
+extern char *edit_fold_close_char;
 
 /*** declarations of public functions ************************************************************/
 
@@ -224,6 +226,20 @@ void book_mark_inc (WEdit *edit, long line);
 void book_mark_dec (WEdit *edit, long line);
 void book_mark_serialize (WEdit *edit, int color);
 void book_mark_restore (WEdit *edit, int color);
+
+off_t edit_get_bracket (WEdit *edit, gboolean in_screen, unsigned long furthest_bracket_search);
+
+struct edit_fold_t *edit_fold_find (WEdit *edit, long line);
+gboolean edit_fold_is_hidden (WEdit *edit, long line);
+void edit_fold_make (WEdit *edit, long line_start, long line_count);
+gboolean edit_fold_remove (WEdit *edit, long line);
+long edit_fold_next_visible (WEdit *edit, long line);
+long edit_fold_prev_visible (WEdit *edit, long line);
+void edit_fold_flush (WEdit *edit);
+void edit_fold_inc (WEdit *edit, long line);
+void edit_fold_dec (WEdit *edit, long line);
+void edit_fold_toggle (WEdit *edit);
+int edit_fold_indicator_width (const struct edit_fold_t *fold);
 
 gboolean edit_line_is_blank (WEdit *edit, long line);
 gboolean is_break_char (char c);

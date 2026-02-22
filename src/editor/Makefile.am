@@ -14,6 +14,7 @@ libedit_la_SOURCES = \
 	editbuffer.c editbuffer.h \
 	editcmd.c \
 	editdraw.c \
+	fold.c \
 	editmacros.c editmacros.h \
 	editmenu.c \
 	editoptions.c \
