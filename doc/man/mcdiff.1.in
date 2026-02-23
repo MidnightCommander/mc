@@ -18,7 +18,9 @@ specified on the command line.
 .SH OPTIONS
 .TP
 .I "\-b"
-Force black and white display.
+Force black and white display. Setting the
+.B NO_COLOR
+environment variable to a nonempty value has the same effect.
 .TP
 .I "\-c"
 Force color mode on terminals where

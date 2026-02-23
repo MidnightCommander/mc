@@ -20,7 +20,9 @@ Unix\-like operating systems.
 Disable usage of graphic characters for line drawing.
 .TP
 .I \-b, \-\-nocolor
-Force black and white display.
+Force black and white display. Setting the
+.B NO_COLOR
+environment variable to a nonempty value has the same effect.
 .TP
 .I \-c, \-\-color
 Force color mode, please check the section
