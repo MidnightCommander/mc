@@ -79,8 +79,8 @@ label_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 
         disabled = widget_get_state (w, WST_DISABLED);
 
-        if (l->transparent)
-            tty_setcolor (disabled ? CORE_DISABLED_COLOR : CORE_DEFAULT_COLOR);
+        if (l->color != NULL)
+            tty_setcolor (l->color[disabled ? LABEL_COLOR_DISABLED : LABEL_COLOR_MAIN]);
         else
         {
             const int *colors;
@@ -145,7 +145,10 @@ label_new (int y, int x, const char *text)
 
     l->text = g_strdup (text);
     l->auto_adjust_cols = TRUE;
-    l->transparent = FALSE;
+
+    // Most of the labels inherit the colors from the parent widget, so don't take it as a parameter
+    // to the constructor. Instead have a separate call to replace these colors when needed.
+    l->color = NULL;
 
     return l;
 }

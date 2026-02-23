@@ -78,7 +78,7 @@ extern int quote;
 
 extern const global_keymap_t *input_map;
 
-/* Color styles for normal and command line input widgets */
+/* Color styles for input widgets */
 extern const input_colors_t input_colors;
 
 /*** declarations of public functions ************************************************************/

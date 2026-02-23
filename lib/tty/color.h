@@ -69,8 +69,6 @@ void tty_color_free_all (void);
 void tty_setcolor (int color);
 void tty_set_normal_attrs (void);
 
-void tty_color_set_defaults (const tty_color_pair_t *color);
-
 extern gboolean tty_use_256colors (GError **error);
 extern gboolean tty_use_truecolors (GError **error);
 

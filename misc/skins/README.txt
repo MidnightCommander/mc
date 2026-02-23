@@ -70,6 +70,15 @@ applies individually to each of these three properties.
         disabled
             Disabled UI elements, e.g. in Find File and some Options dialogs
 
+        hintbar
+            Usage hint message
+
+        shellprompt
+            Shell prompt
+
+        commandline
+            Command line
+
         commandlinemark
             Selected text in command line
 
