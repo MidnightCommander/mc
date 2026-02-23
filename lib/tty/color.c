@@ -38,6 +38,7 @@
 #include <sys/types.h>  // size_t
 
 #include "lib/global.h"
+#include "lib/util.h"  // MC_PTR_FREE
 
 #include "tty.h"
 #include "color.h"
@@ -49,6 +50,8 @@
 static tty_color_pair_t tty_color_defaults = {
     .fg = NULL, .bg = NULL, .attrs = NULL, .pair_index = 0
 };
+
+int *tty_color_role_to_pair = NULL;
 
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
@@ -123,8 +126,9 @@ tty_color_get_next__color_pair_number (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init_colors (gboolean disable, gboolean force)
+tty_init_colors (gboolean disable, gboolean force, int color_map_size)
 {
+    tty_color_role_to_pair = g_new (int, color_map_size);
     tty_color_init_lib (disable, force);
     mc_tty_color__hashtable = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 }
@@ -137,6 +141,7 @@ tty_colors_done (void)
     tty_color_deinit_lib ();
     mc_color__deinit (&tty_color_defaults);
     g_hash_table_destroy (mc_tty_color__hashtable);
+    MC_PTR_FREE (tty_color_role_to_pair);
 }
 
 /* --------------------------------------------------------------------------------------------- */

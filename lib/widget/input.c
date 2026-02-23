@@ -57,7 +57,12 @@ gboolean quote = FALSE;
 const global_keymap_t *input_map = NULL;
 
 /* Color styles for input widgets */
-input_colors_t input_colors;
+const input_colors_t input_colors = {
+    [INPUT_COLOR_MAIN] = CORE_INPUT_COLOR,
+    [INPUT_COLOR_MARK] = CORE_INPUT_MARK_COLOR,
+    [INPUT_COLOR_UNCHANGED] = CORE_INPUT_UNCHANGED_COLOR,
+    [INPUT_COLOR_HISTORY] = CORE_INPUT_HISTORY_COLOR,
+};
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -115,7 +120,7 @@ draw_history_button (WInput *in)
 
     widget_gotoyx (in, 0, WIDGET (in)->rect.cols - HISTORY_BUTTON_WIDTH);
     disabled = widget_get_state (WIDGET (in), WST_DISABLED);
-    tty_setcolor (disabled ? CORE_DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
+    tty_setcolor (disabled ? CORE_DISABLED_COLOR : in->color[INPUT_COLOR_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
     tty_print_string ("[ ]");
@@ -1078,17 +1083,6 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-input_set_default_colors (void)
-{
-    input_colors[WINPUTC_MAIN] = CORE_INPUT_COLOR;
-    input_colors[WINPUTC_MARK] = CORE_INPUT_MARK_COLOR;
-    input_colors[WINPUTC_UNCHANGED] = CORE_INPUT_UNCHANGED_COLOR;
-    input_colors[WINPUTC_HISTORY] = CORE_INPUT_HISTORY_COLOR;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 cb_ret_t
 input_handle_char (WInput *in, int key)
 {
@@ -1226,9 +1220,9 @@ input_update (WInput *in, gboolean clear_first)
     if (widget_get_state (wi, WST_DISABLED))
         tty_setcolor (CORE_DISABLED_COLOR);
     else if (in->first)
-        tty_setcolor (in->color[WINPUTC_UNCHANGED]);
+        tty_setcolor (in->color[INPUT_COLOR_UNCHANGED]);
     else
-        tty_setcolor (in->color[WINPUTC_MAIN]);
+        tty_setcolor (in->color[INPUT_COLOR_MAIN]);
 
     widget_gotoyx (in, 0, 0);
 
@@ -1243,11 +1237,11 @@ input_update (WInput *in, gboolean clear_first)
 
             if (input_eval_marks (in, &m1, &m2))
             {
-                tty_setcolor (in->color[WINPUTC_MAIN]);
+                tty_setcolor (in->color[INPUT_COLOR_MAIN]);
                 cp = str_term_substring (in->buffer->str, in->term_first_shown,
                                          w->cols - has_history);
                 tty_print_string (cp);
-                tty_setcolor (in->color[WINPUTC_MARK]);
+                tty_setcolor (in->color[INPUT_COLOR_MARK]);
                 if (m1 < in->term_first_shown)
                 {
                     widget_gotoyx (in, 0, 0);
@@ -1273,7 +1267,7 @@ input_update (WInput *in, gboolean clear_first)
         int i;
 
         cp = str_term_substring (in->buffer->str, in->term_first_shown, w->cols - has_history);
-        tty_setcolor (in->color[WINPUTC_MAIN]);
+        tty_setcolor (in->color[INPUT_COLOR_MAIN]);
         for (i = 0; i < w->cols - has_history; i++)
         {
             if (i < (buf_len - in->term_first_shown) && cp[0] != '\0')

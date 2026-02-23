@@ -333,10 +333,8 @@ add_permission_string (const char *dest, int width, file_entry_t *fe, file_attr_
             else
                 tty_setcolor (CORE_MARKED_COLOR);
         }
-        else if (color >= 0)
-            tty_setcolor (color);
         else
-            tty_lowlevel_setcolor (-color);
+            tty_setcolor (color);
 
         tty_print_char (dest[i]);
     }
@@ -654,17 +652,17 @@ file_compute_color (const file_attr_t attr, file_entry_t *fe)
     switch (attr)
     {
     case FATTR_CURRENT:
-        return (CORE_SELECTED_COLOR);
+        return CORE_SELECTED_COLOR;
     case FATTR_MARKED:
-        return (CORE_MARKED_COLOR);
+        return CORE_MARKED_COLOR;
     case FATTR_MARKED_CURRENT:
-        return (CORE_MARKED_SELECTED_COLOR);
+        return CORE_MARKED_SELECTED_COLOR;
     case FATTR_STATUS:
-        return (CORE_NORMAL_COLOR);
+        return CORE_NORMAL_COLOR;
     case FATTR_NORMAL:
     default:
         if (!panels_options.filetype_mode)
-            return (CORE_NORMAL_COLOR);
+            return CORE_NORMAL_COLOR;
     }
 
     return mc_fhl_get_color (mc_filehighlight, fe);
@@ -752,10 +750,7 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
                     perm = 2;
             }
 
-            if (color >= 0)
-                tty_setcolor (color);
-            else
-                tty_lowlevel_setcolor (-color);
+            tty_setcolor (color);
 
             if (!isstatus)
                 prepared_text = str_fit_to_term (txt + name_offset, len, HIDE_FIT (fi->just_mode));
