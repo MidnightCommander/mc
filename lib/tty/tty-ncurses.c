@@ -603,6 +603,7 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
     if (!use_colors || !tty_clip (&y, &x, &rows, &cols))
         return;
 
+    color = tty_maybe_map_color (color);
     tty_setcolor (color);
     ctext = g_malloc (sizeof (cchar_t) * (cols + 1));
 
