@@ -605,6 +605,7 @@ src/panel-plugins/Makefile
 src/panel-plugins/hello/Makefile
 src/panel-plugins/systemd/Makefile
 src/panel-plugins/sftp/Makefile
+src/panel-plugins/docker/Makefile
 
 src/vfs/Makefile
 

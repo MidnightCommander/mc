@@ -4,4 +4,6 @@ if ENABLE_VFS_SFTP
 SUBDIRS += sftp
 endif
 
-DIST_SUBDIRS = systemd sftp
+SUBDIRS += docker
+
+DIST_SUBDIRS = systemd sftp docker
