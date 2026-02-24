@@ -603,6 +603,7 @@ src/filemanager/Makefile
 
 src/panel-plugins/Makefile
 src/panel-plugins/hello/Makefile
+src/panel-plugins/systemd/Makefile
 
 src/vfs/Makefile
 
