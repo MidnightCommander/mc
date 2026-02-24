@@ -1439,9 +1439,18 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
   abort -> cancel stack
   ignore -> warn every level, gets default
   ignore_all -> remove as much as possible
+
+  This function should either be called with delete_resource_forks = TRUE always, or called twice,
+  first with FALSE and then with TRUE to make sure that no errors pop up due to resource forks being
+  deleted on macOS and then being re-created on the fly by the OS.
 */
 static FileProgressStatus
-recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
+recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath
+#ifdef __APPLE__
+                 ,
+                 const gboolean delete_resource_forks
+#endif
+)
 {
     struct vfs_dirent *next;
     DIR *reading;
@@ -1466,10 +1475,26 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
             vfs_path_free (tmp_vpath, TRUE);
             return FILE_RETRY;
         }
+#ifdef __APPLE__
+        if (S_ISDIR (buf.st_mode))
+        {
+            return_status = recursive_erase (ctx, tmp_vpath, FALSE);
+            if (return_status != FILE_ABORT)
+                return_status = recursive_erase (ctx, tmp_vpath, TRUE);
+        }
+        else
+        {
+            if (!delete_resource_forks && FILE_IS_RESOURCE_FORK (next->d_name))
+                return_status = FILE_SKIP;
+            else
+                return_status = erase_file (ctx, tmp_vpath);
+        }
+#else
         if (S_ISDIR (buf.st_mode))
             return_status = recursive_erase (ctx, tmp_vpath);
         else
             return_status = erase_file (ctx, tmp_vpath);
+#endif
         vfs_path_free (tmp_vpath, TRUE);
     }
     mc_closedir (reading);
@@ -3352,7 +3377,15 @@ erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
         // not empty
         error = query_recursive (ctx, vfs_path_as_str (vpath));
         if (error == FILE_CONT)
+        {
+#ifdef __APPLE__
+            error = recursive_erase (ctx, vpath, FALSE);
+            if (error != FILE_ABORT)
+                error = recursive_erase (ctx, vpath, TRUE);
+#else
             error = recursive_erase (ctx, vpath);
+#endif
+        }
         return error;
     }
 
