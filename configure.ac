@@ -470,6 +470,20 @@ mc_BACKGROUND
 mc_EXT2FS_ATTR
 mc_VFS_CHECKS
 
+AC_ARG_WITH([vfs-plugins-dir],
+    AS_HELP_STRING([--with-vfs-plugins-dir=DIR],
+        [Directory for dynamic VFS plugins [LIBDIR/mc/vfs-plugins]]),
+    [vfs_plugins_dir="$withval"],
+    [vfs_plugins_dir='${libdir}/mc/vfs-plugins'])
+AC_SUBST([vfs_plugins_dir])
+
+AC_ARG_WITH([panel-plugins-dir],
+    AS_HELP_STRING([--with-panel-plugins-dir=DIR],
+        [Directory for dynamic panel plugins [LIBDIR/mc/panel-plugins]]),
+    [panel_plugins_dir="$withval"],
+    [panel_plugins_dir='${libdir}/mc/panel-plugins'])
+AC_SUBST([panel_plugins_dir])
+
 dnl ############################################################################
 dnl Directories
 dnl ############################################################################
@@ -543,9 +557,8 @@ AM_CONDITIONAL(USE_INTERNAL_EDIT, [test x"$use_internal_edit" = xyes ])
 AM_CONDITIONAL(USE_ASPELL, [test x"$enable_aspell" = xyes ])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
-dnl Clarify do we really need GModule
-AM_CONDITIONAL([HAVE_GMODULE], [test -n "$g_module_supported" && \
-                                test x"$textmode_x11_support" = x"yes" -o x"$enable_aspell" = x"yes"])
+dnl Enable GModule when available (used for X11, aspell, and dynamic VFS plugins)
+AM_CONDITIONAL([HAVE_GMODULE], [test -n "$g_module_supported"])
 
 AC_ARG_ENABLE([configure-args],
     AS_HELP_STRING([--enable-configure-args], [Embed ./configure arguments into binaries]))
@@ -587,6 +600,9 @@ src/subshell/Makefile
 src/viewer/Makefile
 src/diffviewer/Makefile
 src/filemanager/Makefile
+
+src/panel-plugins/Makefile
+src/panel-plugins/hello/Makefile
 
 src/vfs/Makefile
 

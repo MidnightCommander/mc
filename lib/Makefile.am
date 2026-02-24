@@ -43,6 +43,8 @@ libmc_la_SOURCES = \
 	global.c global.h \
 	keybind.c keybind.h \
 	lock.c lock.h \
+	panel-plugin.c panel-plugin.h \
+	panel-plugin-loader.c \
 	serialize.c serialize.h \
 	shell.c shell.h \
 	stat-size.h \
@@ -57,7 +59,8 @@ libmc_la_SOURCES += charsets.c charsets.h
 EXTRA_DIST = \
 	stdckdint.in.h
 
-AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
+AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) \
+	-DMC_PANEL_PLUGINS_DIR=\""$(panel_plugins_dir)"\"
 
 libmc_la_LIBADD = \
 	event/libmcevent.la \

@@ -54,10 +54,6 @@
 #include "ftpfs/ftpfs.h"
 #endif
 
-#ifdef ENABLE_VFS_SFTP
-#include "sftpfs/sftpfs.h"
-#endif
-
 #ifdef ENABLE_VFS_SFS
 #include "sfs/sfs.h"
 #endif
@@ -105,12 +101,19 @@ vfs_plugins_init (void)
 #ifdef ENABLE_VFS_FTP
     vfs_init_ftpfs ();
 #endif
-#ifdef ENABLE_VFS_SFTP
-    vfs_init_sftpfs ();
-#endif
 #ifdef ENABLE_VFS_SHELL
     vfs_init_shell ();
 #endif
+
+    vfs_plugins_load_dynamic ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_plugins_done (void)
+{
+    vfs_plugins_unload_dynamic ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

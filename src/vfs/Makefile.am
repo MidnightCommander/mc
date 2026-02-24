@@ -28,7 +28,6 @@ endif
 
 if ENABLE_VFS_SFTP
 SUBDIRS += sftpfs
-libmc_vfs_la_LIBADD += sftpfs/libvfs-sftpfs.la
 endif
 
 if ENABLE_VFS_SFS

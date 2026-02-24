@@ -63,6 +63,7 @@
 
 #include "lib/keybind.h"
 #include "lib/event.h"
+#include "lib/panel-plugin.h"
 
 #include "tree.h"
 #include "boxes.h"  // sort_box(), tree_box()
@@ -196,6 +197,7 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Info"), CK_PanelInfo));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Tree"), CK_PanelTree));
     entries = g_list_prepend (entries, menu_entry_new (_ ("Paneli&ze"), CK_Panelize));
+    entries = g_list_prepend (entries, menu_entry_new (_ ("Pl&ugin panel..."), CK_PanelPlugin));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries =
         g_list_prepend (entries, menu_entry_new (_ ("&Listing format..."), CK_SetupListingFormat));
@@ -875,6 +877,8 @@ create_file_manager (void)
     group_add_widget (g, the_menubar);
     init_menu ();
 
+    mc_panel_plugins_load ();
+
     create_panels ();
     group_add_widget (g, get_panel_widget (0));
     group_add_widget (g, get_panel_widget (1));
@@ -1097,6 +1101,45 @@ midnight_execute_cmd (Widget *sender, long command)
     // stop quick search before executing any command
     send_message (current_panel, NULL, MSG_ACTION, CK_SearchStop, NULL);
 
+    /* Block destructive/inapplicable file operations on plugin panels — the listed
+       entries are virtual and do not exist on the real filesystem.
+       View and Edit are allowed (the viewer/editor will handle missing files). */
+    if (current_panel->is_plugin_panel)
+    {
+        switch (command)
+        {
+        case CK_Copy:
+            plugin_panel_copy_cmd (current_panel);
+            return MSG_HANDLED;
+        case CK_Move:
+            plugin_panel_move_cmd (current_panel);
+            return MSG_HANDLED;
+        case CK_Delete:
+            plugin_panel_delete_cmd (current_panel);
+            return MSG_HANDLED;
+        case CK_ChangeMode:
+        case CK_ChangeOwn:
+        case CK_ChangeOwnAdvanced:
+#ifdef ENABLE_EXT2FS_ATTR
+        case CK_ChangeAttributes:
+#endif
+        case CK_Link:
+        case CK_LinkSymbolic:
+        case CK_LinkSymbolicRelative:
+        case CK_LinkSymbolicEdit:
+        case CK_DirSize:
+        case CK_CompareDirs:
+#ifdef USE_DIFF_VIEW
+        case CK_CompareFiles:
+#endif
+            message (D_ERROR, MSG_ERROR,
+                     _ ("This operation is not supported for plugin panels"));
+            return MSG_HANDLED;
+        default:
+            break;
+        }
+    }
+
     switch (command)
     {
     case CK_About:
@@ -1225,6 +1268,9 @@ midnight_execute_cmd (Widget *sender, long command)
 #endif
     case CK_Panelize:
         panel_panelize_restore ();
+        break;
+    case CK_PanelPlugin:
+        panel_plugin_select_and_activate (current_panel);
         break;
     case CK_Help:
         help_cmd ();
@@ -1564,6 +1610,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         return midnight_execute_cmd (sender, parm);
 
     case MSG_DESTROY:
+        mc_panel_plugins_shutdown ();
         panel_deinit ();
         return MSG_HANDLED;
 

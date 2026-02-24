@@ -94,6 +94,12 @@ const char *chattr_get_as_str (unsigned long attr);
 /* find.c */
 void find_cmd (WPanel *panel);
 
+/* plugin panel file operations */
+void plugin_panel_copy_cmd (WPanel *panel);
+void plugin_panel_move_cmd (WPanel *panel);
+void plugin_panel_delete_cmd (WPanel *panel);
+void plugin_panel_create_cmd (WPanel *panel);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */

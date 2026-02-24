@@ -1278,6 +1278,10 @@ swap_panels (void)
         panelswap (current);
         panelswap (is_panelized);
         panelswap (panelized_descr);
+        panelswap (is_plugin_panel);
+        panelswap (plugin);
+        panelswap (plugin_data);
+        panelswap (plugin_host);
         panelswap (dir_stat);
 #undef panelswap
 
