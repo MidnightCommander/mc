@@ -176,7 +176,11 @@ VFS options:
 
 `--enable-vfs-sftp'
      (auto)
-     Support for SFTP vfs
+     Support for SFTP vfs.  When enabled, SFTP is built as a dynamic
+     plugin (mc-vfs-sftp.so) installed into the VFS plugins directory
+     (see --with-vfs-plugins-dir).  Requires libssh2 >= 1.2.8.
+     The main mc binary does not link against libssh2; the plugin
+     carries that dependency itself.
 
 `--enable-vfs-extfs'
      (on by default)
@@ -185,6 +189,16 @@ VFS options:
 `--enable-vfs-sfs`
      (on by default)
      Support for sfs
+
+`--with-vfs-plugins-dir=DIR'
+     Set the directory where Midnight Commander looks for dynamic VFS
+     plugins at runtime [default=LIBDIR/mc/vfs-plugins].  A dynamic VFS
+     plugin is a shared object (.so) that exports the mc_vfs_plugin_init
+     symbol.  When MC starts, it scans this directory and loads every
+     matching plugin, allowing third-party VFS modules (e.g. SMB, WebDAV)
+     to be added without recompiling MC.  GModule (part of GLib) is
+     required for this feature; if unavailable, dynamic loading is
+     silently skipped.
 
 
 Screen library:

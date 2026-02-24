@@ -1,0 +1,121 @@
+Dynamic VFS plugins for GNU Midnight Commander
+===============================================
+
+Since version 4.8.33 Midnight Commander can load VFS modules at runtime
+from shared objects (.so).  This lets distributions package optional VFS
+modules (and their external dependencies) separately from the core mc
+binary.
+
+How it works
+------------
+
+At startup, after initialising the built-in (static) VFS modules,
+mc scans the directory specified by --with-vfs-plugins-dir (default:
+${libdir}/mc/vfs-plugins).  Every .so file found there is opened with
+GModule (dlopen) and probed for the symbol:
+
+    void mc_vfs_plugin_init (void);
+
+If the symbol is found it is called immediately.  The plugin is expected
+to register its VFS class via vfs_init_subclass() / vfs_register_class()
+-- exactly the same way a statically linked module does.
+
+The mc binary is linked with -export-dynamic so that plugin code can
+call back into mc (vfs_init_subclass, tcp_init, query_dialog, etc.)
+without linking those symbols explicitly.
+
+GModule support (part of GLib) is required.  If it is unavailable at
+build time, dynamic loading is silently skipped.
+
+
+Current dynamic plugins
+-----------------------
+
+  mc-vfs-sftp.so    SFTP filesystem (requires libssh2 >= 1.2.8)
+
+
+Candidates for future conversion
+---------------------------------
+
+The following modules are currently compiled as static libraries and
+linked into libmc-vfs.la.  They are listed in order of conversion
+difficulty.
+
+Phase 1 -- no code changes needed (zero external symbol references):
+
+  tar       tar archives          no external deps
+  cpio      cpio archives         no external deps
+  extfs     extension filesystem  no external deps (uses helper scripts)
+  sfs       single-file fs        no external deps
+
+  These modules are fully self-contained: their init functions are only
+  called from src/vfs/plugins_init.c and no code outside src/vfs/
+  references their symbols.  Conversion is mechanical: rename the init
+  function to mc_vfs_plugin_init, switch Makefile.am from noinst to
+  vfsplugin, and remove the static init call.
+
+Phase 2 -- minimal refactoring (one exported global variable):
+
+  shell     SHELL/SSH filesystem  no external deps
+
+  src/setup.c reads/writes shell_directory_timeout.  A getter/setter
+  pair or an mc_config-based approach would decouple it.
+
+Phase 3 -- moderate refactoring (multiple exported globals):
+
+  ftpfs     FTP filesystem        no external deps
+
+  src/setup.c and src/filemanager/boxes.c directly access ~11 global
+  variables (ftpfs_use_netrc, ftpfs_proxy_host, ftpfs_anonymous_passwd,
+  ftpfs_use_passive_connections, etc.) for the configuration dialog and
+  settings persistence.  These would need to be exposed through a
+  callback/getter API or moved to mc_config key lookups.
+
+Not convertible:
+
+  local     local filesystem      core module, must be first
+
+  Other VFS modules depend on local_close(), local_read(), etc.
+  It must be initialised before any other VFS class.
+
+
+Writing a new plugin
+--------------------
+
+1.  Create a directory under src/vfs/ (e.g. src/vfs/myfs/).
+
+2.  Implement your VFS class.  Use src/vfs/sftpfs/ as a reference.
+    The key function is:
+
+        void
+        mc_vfs_plugin_init (void)
+        {
+            tcp_init ();   /* if network-based */
+            vfs_init_subclass (&myfs_subclass, "myfs", flags, "myfs");
+            /* assign callbacks to vfs_myfs_ops->open, ->read, ... */
+            vfs_register_class (vfs_myfs_ops);
+        }
+
+3.  In Makefile.am:
+
+        vfsplugindir = $(vfs_plugins_dir)
+        vfsplugin_LTLIBRARIES = mc-vfs-myfs.la
+
+        mc_vfs_myfs_la_SOURCES = ...
+        mc_vfs_myfs_la_LDFLAGS = -module -avoid-version
+        mc_vfs_myfs_la_LIBADD  = $(GLIB_LIBS) $(MY_EXTERNAL_LIBS)
+
+    Do NOT add -no-undefined -- the plugin resolves mc symbols at
+    runtime via -export-dynamic on the mc binary.
+
+4.  If the plugin has an external library dependency, add a PKG_CHECK
+    in an m4 file but do NOT append to MCLIBS -- the plugin links the
+    library itself.
+
+5.  Add SUBDIRS += myfs to src/vfs/Makefile.am (guarded by your
+    AM_CONDITIONAL), but do NOT add to libmc_vfs_la_LIBADD.
+
+6.  Install the resulting .so into $(vfs_plugins_dir) -- this happens
+    automatically via vfsplugin_LTLIBRARIES.
+
+7.  Test: run mc and verify your prefix is accessible (e.g. cd myfs://).

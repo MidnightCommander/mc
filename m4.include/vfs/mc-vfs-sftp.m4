@@ -8,7 +8,6 @@ AC_DEFUN([mc_VFS_SFTP],
         if test x"$found_libssh" = "xyes"; then
             mc_VFS_ADDNAME([sftp])
             AC_DEFINE([ENABLE_VFS_SFTP], [1], [Support for SFTP filesystem])
-            MCLIBS="$MCLIBS $LIBSSH_LIBS"
             enable_vfs_sftp="yes"
         else
             if test x"$enable_vfs_sftp" = x"yes"; then

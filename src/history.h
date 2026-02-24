@@ -25,6 +25,8 @@
 #define MC_HISTORY_FM_TREE_COPY       "mc.fm.tree-copy"
 #define MC_HISTORY_FM_TREE_MOVE       "mc.fm.tree-move"
 #define MC_HISTORY_FM_PANELIZE_ADD    "mc.fm.panelize.add"
+#define MC_HISTORY_FM_PLUGIN_COPY     "mc.fm.plugin-copy"
+#define MC_HISTORY_FM_PLUGIN_MOVE     "mc.fm.plugin-move"
 #define MC_HISTORY_FM_FILTERED_VIEW   "mc.fm.filtered-view"
 #define MC_HISTORY_FM_PANEL_SELECT    ":select_cmd: Select "
 #define MC_HISTORY_FM_PANEL_UNSELECT  ":select_cmd: Unselect "

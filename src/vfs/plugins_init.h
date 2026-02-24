@@ -12,6 +12,7 @@
 /*** declarations of public functions ************************************************************/
 
 void vfs_plugins_init (void);
+void vfs_plugins_done (void);
 
 /*** inline functions ****************************************************************************/
 

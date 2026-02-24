@@ -14,6 +14,7 @@
 #include "lib/widget.h"  // Widget
 #include "lib/filehighlight.h"
 #include "lib/file-entry.h"
+#include "lib/panel-plugin.h"
 
 #include "dir.h"  // dir_list
 
@@ -90,6 +91,11 @@ typedef struct
 
     gboolean is_panelized;               // Panelization: special mode, can't reload the file list
     panelized_descr_t *panelized_descr;  // Panelization descriptor
+
+    gboolean is_plugin_panel;                  // TRUE when driven by a panel plugin
+    const mc_panel_plugin_t *plugin;           // active plugin descriptor, or NULL
+    void *plugin_data;                         // instance handle from plugin->open()
+    mc_panel_host_t *plugin_host;              // host interface given to the plugin
 
     int codepage;  // Panel codepage
 
@@ -199,6 +205,11 @@ void panel_panelize_save (WPanel *panel);
 
 void panel_init (void);
 void panel_deinit (void);
+
+void panel_plugin_activate (WPanel *panel, const mc_panel_plugin_t *plugin,
+                            const char *open_path);
+void panel_plugin_close (WPanel *panel);
+void panel_plugin_select_and_activate (WPanel *panel);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/

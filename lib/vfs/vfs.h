@@ -89,6 +89,9 @@ typedef void (*fill_names_f) (const char *);
 
 typedef void *vfsid;
 
+typedef void (*mc_vfs_plugin_init_fn) (void);
+#define MC_VFS_PLUGIN_ENTRY "mc_vfs_plugin_init"
+
 #ifdef HAVE_UTIMENSAT
 typedef struct timespec mc_timesbuf_t[2];
 #else
@@ -341,6 +344,10 @@ int mc_mkstemps (vfs_path_t **pname_vpath, const char *prefix, const char *suffi
 
 /* Creating temporary files safely */
 const char *mc_tmpdir (void);
+
+/* Dynamic VFS plugin loader */
+void vfs_plugins_load_dynamic (void);
+void vfs_plugins_unload_dynamic (void);
 
 /*** inline functions ****************************************************************************/
 

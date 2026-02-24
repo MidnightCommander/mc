@@ -86,14 +86,28 @@ a lot of such code in vfs.c.
 Hierarchy of classes
 ====================
 
-vfs ---- direntry ---- cpio  } archives
-   |            | ---- tar   }
+vfs ---- direntry ---- cpio   } archives
+   |            | ---- tar    }
    |            |
-   |            | ---- fish  } remote systems
-   |            | ---- ftpfs }
+   |            | ---- fish   } remote systems
+   |            | ---- ftpfs  }
+   |            | ---- sftpfs } (dynamic plugin, loaded at runtime)
    |
    |---- extfs ---- extfs archives
    |---- localfs ---- sfs ---- sfs archives
+
+Dynamic plugins
+===============
+
+Some VFS modules are built as shared objects (.so) and loaded at
+runtime from the VFS plugins directory (see --with-vfs-plugins-dir
+configure option).  Each plugin exports the mc_vfs_plugin_init symbol
+which is called by the plugin loader after dlopen.  This lets
+distributions package optional VFS modules (and their dependencies)
+separately from the core mc binary.
+
+Currently built as dynamic plugins:
+  sftpfs  - SFTP filesystem (requires libssh2)
 
 
 Properties of classes
@@ -106,6 +120,7 @@ cpio               yes*         yes*           no            yes
 tar                yes*         yes*           no            yes
 fish               no           yes            yes           no
 ftpfs              no           yes            yes           no
+sftpfs             no           yes            yes           no
 extfs              no           no             yes           yes
 localfs            no           no             N/A           N/A
 sfs                no           yes            yes           N/A

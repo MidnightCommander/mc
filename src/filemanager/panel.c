@@ -52,6 +52,7 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"  // get_codepage_id ()
 #include "lib/event.h"
+#include "lib/panel-plugin.h"
 
 #include "src/setup.h"  // For loading/saving panel options
 #include "src/execute.h"
@@ -160,6 +161,8 @@ static const char *string_marked (const file_entry_t *fe, int len);
 static const char *string_space (const file_entry_t *fe, int len);
 static const char *string_dot (const file_entry_t *fe, int len);
 
+static void panel_plugin_reload (WPanel *panel);
+
 /*** file scope variables ************************************************************************/
 
 static panel_field_t panel_fields[] = {
@@ -267,6 +270,43 @@ panelized_descr_free (panelized_descr_t *p)
         vfs_path_free (p->root_vpath, TRUE);
         g_free (p);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+plugin_title_last_component (const char *title)
+{
+    char *tmp, *base, *ret;
+    size_t len;
+
+    if (title == NULL || title[0] == '\0')
+        return NULL;
+
+    tmp = g_strdup (title);
+    len = strlen (tmp);
+
+    while (len > 1 && tmp[len - 1] == '/')
+    {
+        tmp[len - 1] = '\0';
+        len--;
+    }
+
+    base = strrchr (tmp, '/');
+    if (base != NULL)
+        base++;
+    else
+        base = tmp;
+
+    if (base[0] == '\0')
+    {
+        g_free (tmp);
+        return NULL;
+    }
+
+    ret = g_strdup (base);
+    g_free (tmp);
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1258,7 +1298,31 @@ show_dir (const WPanel *panel)
     tty_setcolor (CORE_NORMAL_COLOR);
     widget_gotoyx (w, 0, 3);
 
-    if (panel->is_panelized)
+    if (panel->is_plugin_panel && panel->plugin != NULL)
+    {
+        const char *title = NULL;
+
+        if (panel->plugin->get_title != NULL && panel->plugin_data != NULL)
+            title = panel->plugin->get_title (panel->plugin_data);
+
+        if (panel->plugin->proto != NULL)
+        {
+            /* format as "Proto:/path" */
+            if (title != NULL)
+                tty_printf (" %s:%s ", panel->plugin->proto, title);
+            else
+                tty_printf (" %s:/ ", panel->plugin->proto);
+        }
+        else
+        {
+            if (title == NULL)
+                title = panel->plugin->display_name;
+            if (title == NULL)
+                title = panel->plugin->name;
+            tty_printf (" %s ", title);
+        }
+    }
+    else if (panel->is_panelized)
         tty_printf (" %s ", _ ("Panelize"));
     else
     {
@@ -1274,9 +1338,12 @@ show_dir (const WPanel *panel)
     if (panel->active)
         tty_setcolor (CORE_REVERSE_COLOR);
 
-    tmp = panel_correct_path_to_show (panel);
-    tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->rect.cols - 12, 0), w->rect.cols)));
-    g_free (tmp);
+    if (!panel->is_plugin_panel)
+    {
+        tmp = panel_correct_path_to_show (panel);
+        tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->rect.cols - 12, 0), w->rect.cols)));
+        g_free (tmp);
+    }
 
     if (!panels_options.show_mini_info)
     {
@@ -2270,6 +2337,47 @@ prev_page (WPanel *panel)
 static void
 goto_parent_dir (WPanel *panel)
 {
+    if (panel->is_plugin_panel && panel->plugin != NULL && panel->plugin_data != NULL)
+    {
+        char *focus_name = NULL;
+
+        if (panel->plugin->get_title != NULL)
+        {
+            const char *title = panel->plugin->get_title (panel->plugin_data);
+            focus_name = plugin_title_last_component (title);
+        }
+
+        if (panel->plugin->chdir != NULL && (panel->plugin->flags & MC_PPF_NAVIGATE) != 0)
+        {
+            mc_pp_result_t r;
+
+            r = panel->plugin->chdir (panel->plugin_data, "..");
+            if (r == MC_PPR_OK)
+            {
+                panel_plugin_reload (panel);
+                if (focus_name != NULL)
+                    panel_set_current_by_name (panel, focus_name);
+                g_free (focus_name);
+                return;
+            }
+            if (r == MC_PPR_NOT_SUPPORTED)
+            {
+                g_free (focus_name);
+                panel_plugin_close (panel);
+                return;
+            }
+        }
+        else
+        {
+            g_free (focus_name);
+            // no navigation support — close plugin panel
+            panel_plugin_close (panel);
+            return;
+        }
+
+        g_free (focus_name);
+    }
+
     if (!panel->is_panelized)
         cd_up_dir (panel);
     else
@@ -2939,10 +3047,65 @@ static inline gboolean
 do_enter (WPanel *panel)
 {
     const file_entry_t *fe;
+    char *focus_name = NULL;
 
     fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return FALSE;
 
-    return (fe == NULL ? FALSE : do_enter_on_file_entry (panel, fe));
+    if (panel->is_plugin_panel && panel->plugin != NULL && panel->plugin_data != NULL)
+    {
+        if (panel->plugin->get_title != NULL && fe->fname != NULL && fe->fname->str != NULL
+            && strcmp (fe->fname->str, "..") == 0)
+        {
+            const char *title = panel->plugin->get_title (panel->plugin_data);
+            focus_name = plugin_title_last_component (title);
+        }
+
+        // let plugin handle enter first
+        if (panel->plugin->enter != NULL)
+        {
+            mc_pp_result_t r;
+
+            r = panel->plugin->enter (panel->plugin_data, fe->fname->str, &fe->st);
+            if (r == MC_PPR_OK)
+            {
+                panel_plugin_reload (panel);
+                if (focus_name != NULL)
+                    panel_set_current_by_name (panel, focus_name);
+                g_free (focus_name);
+                return TRUE;
+            }
+        }
+
+        // try chdir for directories (st_mode == 0 covers ".." from dir_list_init)
+        if ((S_ISDIR (fe->st.st_mode) || link_isdir (fe) || fe->st.st_mode == 0)
+            && panel->plugin->chdir != NULL && (panel->plugin->flags & MC_PPF_NAVIGATE) != 0)
+        {
+            mc_pp_result_t r;
+
+            r = panel->plugin->chdir (panel->plugin_data, fe->fname->str);
+            if (r == MC_PPR_OK)
+            {
+                panel_plugin_reload (panel);
+                if (focus_name != NULL)
+                    panel_set_current_by_name (panel, focus_name);
+                g_free (focus_name);
+                return TRUE;
+            }
+            if (r == MC_PPR_NOT_SUPPORTED)
+            {
+                g_free (focus_name);
+                panel_plugin_close (panel);
+                return TRUE;
+            }
+        }
+
+        g_free (focus_name);
+        return TRUE; // consume the key even if plugin didn't handle it
+    }
+
+    return do_enter_on_file_entry (panel, fe);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3579,7 +3742,10 @@ panel_execute_cmd (WPanel *panel, long command)
         view_raw_cmd (panel);
         break;
     case CK_EditNew:
-        edit_cmd_new ();
+        if (panel->is_plugin_panel)
+            plugin_panel_create_cmd (panel);
+        else
+            edit_cmd_new ();
         break;
     case CK_MoveSingle:
         rename_cmd_local (panel);
@@ -3725,6 +3891,96 @@ panel_execute_cmd (WPanel *panel, long command)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* Panel plugin host callbacks and support                                                       */
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+host_refresh_impl (mc_panel_host_t *host)
+{
+    WPanel *panel = (WPanel *) host->host_data;
+    panel->dirty = TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+host_set_hint_impl (mc_panel_host_t *host, const char *text)
+{
+    (void) host;
+    set_hintbar (text);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+host_message_impl (mc_panel_host_t *host, int flags, const char *title, const char *text)
+{
+    (void) host;
+    message (flags, title, "%s", text);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+host_close_plugin_impl (mc_panel_host_t *host, const char *dir_path)
+{
+    WPanel *panel = (WPanel *) host->host_data;
+
+    (void) dir_path;
+    panel_plugin_close (panel);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+host_get_marked_count_impl (mc_panel_host_t *host)
+{
+    WPanel *panel = (WPanel *) host->host_data;
+    return panel->marked;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const GString *
+host_get_next_marked_impl (mc_panel_host_t *host, int *current)
+{
+    WPanel *panel = (WPanel *) host->host_data;
+    return panel_get_marked_file (panel, current);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_plugin_reload (WPanel *panel)
+{
+    gboolean was_dotdot = FALSE;
+
+    if (!panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL)
+        return;
+
+    {
+        const file_entry_t *fe = panel_current_entry (panel);
+        if (fe != NULL && fe->fname != NULL && fe->fname->str != NULL && strcmp (fe->fname->str, "..") == 0)
+            was_dotdot = TRUE;
+    }
+
+    panel_clean_dir (panel);
+    // panel_clean_dir resets is_panelized; restore plugin state
+    panel->is_panelized = TRUE;
+    panel->is_plugin_panel = TRUE;
+
+    dir_list_init (&panel->dir);
+    panel->plugin->get_items (panel->plugin_data, &panel->dir);
+
+    panel_re_sort (panel);
+
+    if (was_dotdot && panel->dir.len > 1)
+        panel_set_current (panel, 1);
+
+    panel->dirty = TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 panel_key (WPanel *panel, int key)
@@ -3823,12 +4079,25 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case MSG_KEY:
+        // let plugin try to handle the key first
+        if (panel->is_plugin_panel && panel->plugin != NULL && panel->plugin_data != NULL
+            && panel->plugin->handle_key != NULL)
+        {
+            if (panel->plugin->handle_key (panel->plugin_data, parm) == MC_PPR_OK)
+            {
+                panel_plugin_reload (panel);
+                return MSG_HANDLED;
+            }
+        }
         return panel_key (panel, parm);
 
     case MSG_ACTION:
         return panel_execute_cmd (panel, parm);
 
     case MSG_DESTROY:
+        // close plugin panel if active
+        if (panel->is_plugin_panel)
+            panel_plugin_close (panel);
         vfs_stamp_path (panel->cwd_vpath);
         // unsubscribe from "history_load" event
         mc_event_del (h->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w);
@@ -4175,6 +4444,26 @@ update_one_panel_widget (WPanel *panel, panel_update_flags_t flags, const char *
 {
     gboolean free_pointer;
     char *my_current_file = NULL;
+
+    if (panel->is_plugin_panel)
+    {
+        const file_entry_t *fe;
+        char *saved_name = NULL;
+
+        if (current_file == UP_KEEPSEL)
+        {
+            fe = panel_current_entry (panel);
+            if (fe != NULL)
+                saved_name = g_strndup (fe->fname->str, fe->fname->len);
+            current_file = saved_name;
+        }
+
+        panel_plugin_reload (panel);
+        panel_set_current_by_name (panel, current_file);
+        panel->dirty = TRUE;
+        g_free (saved_name);
+        return;
+    }
 
     if ((flags & UP_RELOAD) != 0)
     {
@@ -5387,6 +5676,9 @@ panel_panelize_save (WPanel *panel)
     dir_list *list = &panel->dir;
     dir_list *plist;
 
+    if (panel->is_plugin_panel)
+        return;
+
     panel_panelize_change_root (panel, panel->cwd_vpath);
 
     plist = &panel->panelized_descr->list;
@@ -5462,7 +5754,7 @@ panel_cd (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum exact)
     gboolean res;
     const vfs_path_t *_new_dir_vpath = new_dir_vpath;
 
-    if (panel->is_panelized)
+    if (panel->is_panelized && panel->panelized_descr != NULL)
     {
         size_t new_vpath_len;
 
@@ -5485,6 +5777,133 @@ panel_cd (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum exact)
     }
 
     return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_plugin_activate (WPanel *panel, const mc_panel_plugin_t *plugin, const char *open_path)
+{
+    mc_panel_host_t *host;
+
+    if (panel == NULL || plugin == NULL)
+        return;
+
+    // close any previous plugin
+    if (panel->is_plugin_panel)
+        panel_plugin_close (panel);
+
+    // build host interface
+    host = g_new0 (mc_panel_host_t, 1);
+    host->refresh = host_refresh_impl;
+    host->set_hint = host_set_hint_impl;
+    host->message = host_message_impl;
+    host->close_plugin = host_close_plugin_impl;
+    host->get_marked_count = host_get_marked_count_impl;
+    host->get_next_marked = host_get_next_marked_impl;
+    host->host_data = panel;
+
+    panel->plugin_data = plugin->open (host, open_path);
+    if (panel->plugin_data == NULL)
+    {
+        g_free (host);
+        return;
+    }
+
+    panel->plugin = plugin;
+    panel->plugin_host = host;
+    panel->is_plugin_panel = TRUE;
+    panel->is_panelized = TRUE;
+
+    // populate dir list
+    panel_clean_dir (panel);
+    // panel_clean_dir resets flags — restore them
+    panel->is_panelized = TRUE;
+    panel->is_plugin_panel = TRUE;
+
+    dir_list_init (&panel->dir);
+    plugin->get_items (panel->plugin_data, &panel->dir);
+
+    panel_re_sort (panel);
+    panel->dirty = TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_plugin_close (WPanel *panel)
+{
+    if (panel == NULL || !panel->is_plugin_panel)
+        return;
+
+    if (panel->plugin != NULL && panel->plugin_data != NULL)
+        panel->plugin->close (panel->plugin_data);
+
+    panel->plugin = NULL;
+    panel->plugin_data = NULL;
+    panel->is_plugin_panel = FALSE;
+
+    g_free (panel->plugin_host);
+    panel->plugin_host = NULL;
+
+    panel->is_panelized = FALSE;
+    panel_reload (panel);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_plugin_select_and_activate (WPanel *panel)
+{
+    const GSList *plugins;
+    const GSList *iter;
+    Listbox *listbox;
+    int count = 0;
+    int result;
+
+    plugins = mc_panel_plugin_list ();
+    if (plugins == NULL)
+    {
+        message (D_ERROR, _ ("Plugin panel"), "%s", _ ("No panel plugins are loaded."));
+        return;
+    }
+
+    listbox = listbox_window_new (12, 40, _ ("Plugin panel"), "[Panel Plugins]");
+
+    for (iter = plugins; iter != NULL; iter = g_slist_next (iter))
+    {
+        const mc_panel_plugin_t *p = (const mc_panel_plugin_t *) iter->data;
+        const char *label = p->display_name != NULL ? p->display_name : p->name;
+
+        listbox_add_item (listbox->list, LISTBOX_APPEND_AT_END, 0, label, (void *) p, FALSE);
+        count++;
+    }
+
+    if (count == 0)
+    {
+        // shouldn't happen since we checked above, but be safe
+        widget_destroy (WIDGET (listbox->dlg));
+        return;
+    }
+
+    result = listbox_run (listbox);
+    if (result >= 0)
+    {
+        const mc_panel_plugin_t *selected = NULL;
+        int i = 0;
+
+        for (iter = plugins; iter != NULL; iter = g_slist_next (iter), i++)
+        {
+            if (i == result)
+            {
+                selected = (const mc_panel_plugin_t *) iter->data;
+                break;
+            }
+        }
+
+        if (selected != NULL)
+            panel_plugin_activate (panel, selected, NULL);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

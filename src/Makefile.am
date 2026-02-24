@@ -1,4 +1,4 @@
-SUBDIRS = filemanager man2hlp vfs viewer
+SUBDIRS = filemanager man2hlp vfs viewer panel-plugins
 
 if USE_INTERNAL_EDIT
 SUBDIRS += editor
@@ -26,13 +26,6 @@ SUBDIRS += consaver
 AM_CPPFLAGS += -DSAVERDIR=\""$(pkglibexecdir)"\"
 endif
 
-# required for textconf.c
-if ENABLE_VFS
-if ENABLE_VFS_SFTP
-AM_CPPFLAGS += $(LIBSSH_CFLAGS)
-endif
-endif
-
 AM_CPPFLAGS += -I$(top_srcdir) $(GLIB_CFLAGS)
 
 bin_PROGRAMS = mc
@@ -54,6 +47,10 @@ libinternal_la_LIBADD = \
 	vfs/libmc-vfs.la \
 	viewer/libmcviewer.la \
 	$(DIFFLIB) $(EDITLIB) $(SUBSHELLLIB)
+
+if HAVE_GMODULE
+mc_LDFLAGS = -export-dynamic
+endif
 
 mc_LDADD = \
 	libinternal.la

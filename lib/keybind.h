@@ -190,6 +190,7 @@ enum
     CK_PanelOtherCd = 200L,
     CK_PanelOtherCdLink,
     CK_Panelize,
+    CK_PanelPlugin,
     CK_CopySingle,
     CK_MoveSingle,
     CK_DeleteSingle,

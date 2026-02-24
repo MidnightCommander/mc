@@ -810,7 +810,7 @@ sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *r
  */
 
 void
-vfs_init_sftpfs (void)
+mc_vfs_plugin_init (void)
 {
     tcp_init ();
 

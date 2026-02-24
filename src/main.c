@@ -304,6 +304,7 @@ main (int argc, char *argv[])
         vfs_expire (TRUE);
         (void) my_rmdir (tmpdir);
 
+        vfs_plugins_done ();
         vfs_shut ();
         done_setup ();
         g_free (saved_other_dir);
@@ -445,6 +446,7 @@ main (int argc, char *argv[])
     (void) my_rmdir (tmpdir);
 
     // Virtual File System shutdown
+    vfs_plugins_done ();
     vfs_shut ();
 
     flush_extension_file ();  // does only free memory
