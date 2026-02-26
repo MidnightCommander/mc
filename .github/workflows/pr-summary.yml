@@ -1,0 +1,111 @@
+name: PR summary from commits
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update PR body with commit summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pr = context.payload.pull_request;
+
+            // For PRs from forks, GITHUB_TOKEN may be read-only (depends on repo settings).
+            // We'll try; if forbidden, the action will fail.
+            const prNumber = pr.number;
+
+            const markerStart = "<!-- pr-summary:start -->";
+            const markerEnd = "<!-- pr-summary:end -->";
+
+            // 1) Collect commits
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              owner,
+              repo,
+              pull_number: prNumber,
+              per_page: 100
+            });
+
+            // 2) Collect changed files (limited to 300 for readability)
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner,
+              repo,
+              pull_number: prNumber,
+              per_page: 100
+            });
+
+            const commitLines = commits.map(c => {
+              const msg = (c.commit?.message || "").split("\n")[0].trim();
+              const sha = (c.sha || "").slice(0, 7);
+              return `- ${msg} (\`${sha}\`)`;
+            });
+
+            // Group files by status
+            const limit = 300;
+            const trimmedFiles = files.slice(0, limit);
+
+            const byStatus = new Map();
+            for (const f of trimmedFiles) {
+              const st = f.status || "modified";
+              if (!byStatus.has(st)) byStatus.set(st, []);
+              byStatus.get(st).push(f.filename);
+            }
+
+            const statusOrder = ["added", "modified", "removed", "renamed", "changed"];
+            const fileSectionParts = [];
+            for (const st of statusOrder) {
+              if (!byStatus.has(st)) continue;
+              const names = byStatus.get(st);
+              const shown = names.slice(0, 80);
+              const extra = names.length - shown.length;
+              const list = shown.map(n => `  - \`${n}\``).join("\n");
+              fileSectionParts.push(`**${st}** (${names.length})\n${list}${extra > 0 ? `\n  - ... (+${extra} more)` : ""}`);
+            }
+
+            const commitCount = commits.length;
+            const fileCount = files.length;
+
+            const summaryBlock =
+              `${markerStart}\n` +
+              `## Auto summary\n\n` +
+              `**Commits:** ${commitCount}  \n` +
+              `**Files changed:** ${fileCount}\n\n` +
+              `### Commit messages\n` +
+              `${commitLines.length ? commitLines.join("\n") : "_No commits found_"}\n\n` +
+              `### Changed files\n` +
+              `${fileSectionParts.length ? fileSectionParts.join("\n\n") : "_No files found_"}\n\n` +
+              `_This block is auto-generated. Edit outside this section._\n` +
+              `${markerEnd}\n`;
+
+            const currentBody = pr.body || "";
+
+            const hasMarkers = currentBody.includes(markerStart) && currentBody.includes(markerEnd);
+
+            let newBody;
+            if (hasMarkers) {
+              const startIdx = currentBody.indexOf(markerStart);
+              const endIdx = currentBody.indexOf(markerEnd) + markerEnd.length;
+              newBody = currentBody.slice(0, startIdx).trimEnd() + "\n\n" + summaryBlock + "\n" + currentBody.slice(endIdx).trimStart();
+            } else {
+              // Prepend summary
+              newBody = summaryBlock + "\n" + currentBody;
+            }
+
+            // Avoid unnecessary updates
+            if (newBody !== currentBody) {
+              await github.rest.pulls.update({
+                owner,
+                repo,
+                pull_number: prNumber,
+                body: newBody
+              });
+            }
