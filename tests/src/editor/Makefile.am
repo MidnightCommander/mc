@@ -7,6 +7,7 @@ AM_CPPFLAGS = \
 	@CHECK_CFLAGS@
 
 LIBS = @CHECK_LIBS@ \
+	$(top_builddir)/src/editor/libedit.la \
 	$(top_builddir)/src/libinternal.la \
 	$(top_builddir)/lib/libmc.la
 
@@ -21,6 +22,7 @@ TESTS = \
 	edit_fold \
 	edit_insert_column_of_text \
 	edit_plugin_etags \
+	edit_save_sudo \
 	edit_replace_cmd
 
 check_PROGRAMS = $(TESTS)
@@ -36,6 +38,9 @@ edit_insert_column_of_text_SOURCES = \
 
 edit_plugin_etags_SOURCES = \
 	edit_plugin_etags.c
+
+edit_save_sudo_SOURCES = \
+	edit_save_sudo.c
 
 edit_replace_cmd_SOURCES = \
 	edit_replace_cmd.c

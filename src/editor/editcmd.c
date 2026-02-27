@@ -121,6 +121,192 @@ edit_save_mode_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, 
 
 /* --------------------------------------------------------------------------------------------- */
 
+static vfs_path_t *
+edit_get_real_filename_vpath (const WEdit *edit, const vfs_path_t *filename_vpath)
+{
+    const char *start_filename;
+    const vfs_path_element_t *vpath_element;
+
+    vpath_element = vfs_path_get_by_index (filename_vpath, 0);
+    if (vpath_element == NULL)
+        return NULL;
+
+    start_filename = vpath_element->path;
+    if (*start_filename == '\0')
+        return NULL;
+
+    if (!IS_PATH_SEP (*start_filename) && edit->dir_vpath != NULL)
+        return vfs_path_append_vpath_new (edit->dir_vpath, filename_vpath, NULL);
+
+    return vfs_path_clone (filename_vpath);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+edit_save_with_sudo (WEdit *edit, const char *real_filename, const char *password)
+{
+    FILE *file;
+    char *cmd;
+    char *quoted_filename;
+    const int pwlen = (int) strlen (password);
+    int status;
+    off_t filelen;
+
+    quoted_filename = name_quote (real_filename, FALSE);
+    if (quoted_filename == NULL)
+        return FALSE;
+
+    cmd = g_strdup_printf ("sudo -S -p '' tee -- %s > /dev/null", quoted_filename);
+    g_free (quoted_filename);
+
+    file = (FILE *) popen (cmd, "w");
+    g_free (cmd);
+
+    if (file == NULL)
+        return FALSE;
+
+    if (pwlen > 0 && fwrite (password, 1, (size_t) pwlen, file) != (size_t) pwlen)
+    {
+        (void) pclose (file);
+        return FALSE;
+    }
+
+    if (fputc ('\n', file) == EOF)
+    {
+        (void) pclose (file);
+        return FALSE;
+    }
+
+    filelen = edit_write_stream (edit, file);
+    if (filelen != edit->buffer.size)
+    {
+        (void) pclose (file);
+        return FALSE;
+    }
+
+    status = pclose (file);
+    return (status == 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+edit_sudo_password_dialog (void)
+{
+    char *password = NULL;
+    quick_widget_t quick_widgets[] = {
+        QUICK_LABELED_INPUT (_ ("No write permissions for this file.\n"
+                                "Enter sudo password to save as root:"),
+                             input_label_above, "", "", &password, NULL, TRUE, FALSE,
+                             INPUT_COMPLETE_NONE),
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END,
+    };
+
+    WRect r = { -1, -1, 0, MIN (63, COLS - 2) };
+    quick_dialog_t qdlg = {
+        .rect = r,
+        .title = _ ("Save with sudo"),
+        .help = NULL,
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL,
+    };
+
+    return (quick_dialog (&qdlg) != B_CANCEL) ? password : NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* returns 1 on success, 0 on failure, -1 on cancel */
+static int
+edit_try_sudo_save_cmd (WEdit *edit)
+{
+    int result = 0;
+    vfs_path_t *real_filename_vpath;
+
+    real_filename_vpath = edit_get_real_filename_vpath (edit, edit->filename_vpath);
+    if (real_filename_vpath == NULL)
+        return 0;
+
+    if (!vfs_file_is_local (real_filename_vpath))
+    {
+        vfs_path_free (real_filename_vpath, TRUE);
+        return 0;
+    }
+
+    for (;;)
+    {
+        char *password;
+
+        password = edit_sudo_password_dialog ();
+        if (password == NULL)
+        {
+            result = -1;
+            break;
+        }
+
+        if (edit_save_with_sudo (edit, vfs_path_as_str (real_filename_vpath), password))
+        {
+            (void) mc_stat (real_filename_vpath, &edit->stat1);
+            memset (password, 0, strlen (password));
+            g_free (password);
+            result = 1;
+            break;
+        }
+
+        memset (password, 0, strlen (password));
+        g_free (password);
+
+        if (edit_query_dialog2 (_ ("Save with sudo"),
+                                _ ("Cannot save with sudo.\n"
+                                   "Wrong password or sudo is not configured."),
+                                _ ("&Retry"), _ ("&Cancel"))
+            != 0)
+        {
+            result = -1;
+            break;
+        }
+    }
+
+    vfs_path_free (real_filename_vpath, TRUE);
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+edit_save_should_try_sudo (int save_res, int save_errno)
+{
+    return (save_res == 0 && save_errno == EACCES);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* returns 1 if handled as success, -1 if handled as cancel/failure, 0 if not handled */
+int
+edit_save_handle_sudo_result (WEdit *edit, int sudo_res)
+{
+    if (sudo_res > 0)
+    {
+        edit->delete_file = 0;
+        edit->modified = 0;
+        edit->force |= REDRAW_COMPLETELY;
+        return 1;
+    }
+
+    if (sudo_res < 0)
+    {
+        edit->force |= REDRAW_COMPLETELY;
+        return -1;
+    }
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 edit_register_builtin_plugins (void)
 {
@@ -147,22 +333,11 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
     int this_save_mode, rv, fd = -1;
     vfs_path_t *real_filename_vpath;
     vfs_path_t *savename_vpath = NULL;
-    const char *start_filename;
-    const vfs_path_element_t *vpath_element;
     struct stat sb;
 
-    vpath_element = vfs_path_get_by_index (filename_vpath, 0);
-    if (vpath_element == NULL)
+    real_filename_vpath = edit_get_real_filename_vpath (edit, filename_vpath);
+    if (real_filename_vpath == NULL)
         return 0;
-
-    start_filename = vpath_element->path;
-    if (*start_filename == '\0')
-        return 0;
-
-    if (!IS_PATH_SEP (*start_filename) && edit->dir_vpath != NULL)
-        real_filename_vpath = vfs_path_append_vpath_new (edit->dir_vpath, filename_vpath, NULL);
-    else
-        real_filename_vpath = vfs_path_clone (filename_vpath);
 
     this_save_mode = edit_options.save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE)
@@ -442,11 +617,13 @@ static gboolean
 edit_save_cmd (WEdit *edit)
 {
     int save_lock = 0;
+    int save_errno = 0;
 
     if (edit->locked == 0 && edit->delete_file == 0)
         save_lock = lock_file (edit->filename_vpath);
 
     const int res = edit_save_file (edit, edit->filename_vpath);
+    save_errno = errno;
 
     // Maintain modify (not save) lock on failure
     if ((res > 0 && edit->locked != 0) || save_lock != 0)
@@ -454,7 +631,21 @@ edit_save_cmd (WEdit *edit)
 
     // On failure try 'save as', it does locking on its own
     if (res == 0)
+    {
+        if (edit_save_should_try_sudo (res, save_errno))
+        {
+            const int sudo_res = edit_try_sudo_save_cmd (edit);
+            const int handled = edit_save_handle_sudo_result (edit, sudo_res);
+
+            if (handled > 0)
+                return TRUE;
+
+            if (handled < 0)
+                return FALSE;
+        }
+
         return edit_save_as_cmd (edit);
+    }
 
     if (res > 0)
     {

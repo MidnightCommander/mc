@@ -158,6 +158,8 @@ off_t edit_write_stream (WEdit *edit, FILE *f);
 char *edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *filename_vpath);
 gboolean edit_save_confirm_cmd (WEdit *edit);
 gboolean edit_save_as_cmd (WEdit *edit);
+gboolean edit_save_should_try_sudo (int save_res, int save_errno);
+int edit_save_handle_sudo_result (WEdit *edit, int sudo_res);
 WEdit *edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg);
 gboolean edit_clean (WEdit *edit);
 gboolean edit_ok_to_quit (WEdit *edit);
