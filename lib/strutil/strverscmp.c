@@ -1,7 +1,7 @@
 /*
    Compare strings while treating digits characters numerically.
 
-   Copyright (C) 1997-2025
+   Copyright (C) 1997-2026
    Free Software Foundation, Inc.
 
    This file is part of the GNU C Library.

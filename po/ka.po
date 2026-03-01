@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-02-01 14:37+0100\n"
+"POT-Creation-Date: 2026-03-01 11:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -562,6 +562,12 @@ msgstr "წრფივი გადაგზავნის დაწყებ�
 msgid "Getting file"
 msgstr "ფაილის მიღება"
 
+#, fuzzy, c-format
+msgid ""
+"Changes to file lost:\n"
+"%s"
+msgstr "ფაილის ცვლილებები დაიკარგა"
+
 msgid "Changes to file lost"
 msgstr "ფაილის ცვლილებები დაიკარგა"
 
@@ -681,9 +687,6 @@ msgstr "ნელ ტერმინალებზე გასაშვებ�
 msgid "Use stickchars to draw"
 msgstr ""
 
-msgid "Resets soft keys on HP terminals"
-msgstr ""
-
 msgid "Load definitions of key bindings from specified file"
 msgstr ""
 
@@ -696,54 +699,11 @@ msgstr "შავ-თეთრ რეჟიმში გაშვება"
 msgid "Request to run in color mode"
 msgstr "ფერად რეჟიმში გაშვება"
 
-msgid "Specifies a color configuration"
-msgstr "ფერების კონფიგურაციის მითითება"
-
-msgid "<string>"
-msgstr "<string>"
-
 msgid "Show mc with specified skin"
 msgstr ""
 
-#. TRANSLATORS: don't translate keywords
-msgid ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
-"\n"
-" Keywords:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace, "
-"editnonprintable,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-msgstr ""
-
-#. TRANSLATORS: don't translate color names and attributes
-msgid ""
-"Standard Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-"Extended colors, when 256 colors are available:\n"
-"   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
-"\n"
-"Attributes:\n"
-"   bold, italic, underline, reverse, blink; append more with '+'\n"
-msgstr ""
-
-msgid "Color options"
-msgstr "ფერების პარამეტრები"
+msgid "<string>"
+msgstr "<string>"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
 msgstr "[+lineno] file1[:lineno] [file2[:lineno]...]"
@@ -769,6 +729,9 @@ msgstr "ძირითადი პარამეტრები"
 
 msgid "Terminal options"
 msgstr "ტერმინალის პარამეტრები"
+
+msgid "Color options"
+msgstr "ფერების პარამეტრები"
 
 msgid "Arguments parse error!"
 msgstr "არგუმენტების დამუშავების შეცდომა!"
@@ -3956,11 +3919,6 @@ msgid ""
 "wrong archive name"
 msgstr ""
 
-msgid ""
-"EXTFS virtual file system:\n"
-"cannot build command"
-msgstr ""
-
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr ""
@@ -4392,6 +4350,9 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Specifies a color configuration"
+#~ msgstr "ფერების კონფიგურაციის მითითება"
 
 #~ msgid "&Undelete files (ext2fs only)"
 #~ msgstr "ფაილების აღდგენა (მხოლოდ ext2fs)"

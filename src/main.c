@@ -1,7 +1,7 @@
 /*
    Main program for the Midnight Commander
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -60,7 +60,6 @@
 #include "filemanager/ext.h"      // flush_extension_file()
 #include "filemanager/command.h"  // cmdline
 #include "filemanager/panel.h"    // panalized_panel
-#include "filemanager/filenot.h"  // my_rmdir()
 
 #ifdef USE_INTERNAL_EDIT
 #include "editor/edit.h"  // edit_arg_free()
@@ -223,7 +222,7 @@ main (int argc, char *argv[])
 {
     GError *mcerror = NULL;
     int exit_code = EXIT_FAILURE;
-    const char *tmpdir = NULL;
+    vfs_path_t *tmp_vpath = NULL;
 
     mc_global.run_from_parent_mc = !check_sid ();
 
@@ -293,7 +292,9 @@ main (int argc, char *argv[])
     vfs_setup_work_dir ();
 
     // Set up temporary directory after VFS initialization
-    tmpdir = mc_tmpdir ();
+    const char *tmpdir = mc_tmpdir ();
+
+    tmp_vpath = vfs_path_from_str (tmpdir);
 
     /* do this after vfs initialization and vfs working directory setup
        due to mc_setctl() and mcedit_arg_vpath_new() calls in mc_setup_by_args() */
@@ -302,7 +303,8 @@ main (int argc, char *argv[])
         /* At exit, do this before vfs_shut():
            normally, temporary directory should be empty */
         vfs_expire (TRUE);
-        (void) my_rmdir (tmpdir);
+        (void) mc_rmdir (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
 
         vfs_shut ();
         done_setup ();
@@ -380,7 +382,9 @@ main (int argc, char *argv[])
         text = g_strdup_printf (_ ("%s\nis already running on this terminal.\n"
                                    "Subshell support will be disabled."),
                                 PACKAGE_NAME);
+
         const int quit_mc = query_dialog (_ ("Warning"), text, D_ERROR, 2, _ ("&OK"), _ ("&Quit"));
+
         g_free (text);
 
         if (quit_mc != 0)
@@ -438,7 +442,8 @@ main (int argc, char *argv[])
     /* At exit, do this before vfs_shut():
        normally, temporary directory should be empty */
     vfs_expire (TRUE);
-    (void) my_rmdir (tmpdir);
+    (void) mc_rmdir (tmp_vpath);
+    vfs_path_free (tmp_vpath, TRUE);
 
     // Virtual File System shutdown
     vfs_shut ();
@@ -467,6 +472,7 @@ main (int argc, char *argv[])
     {
         const int last_wd_fd =
             open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+
         if (last_wd_fd != -1)
         {
             MC_UNUSED const ssize_t ret1 = write (last_wd_fd, last_wd_str, strlen (last_wd_str));

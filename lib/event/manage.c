@@ -2,7 +2,7 @@
    Handle any events in application.
    Manage events: add, delete, destroy, search
 
-   Copyright (C) 2011-2025
+   Copyright (C) 2011-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -58,7 +58,7 @@ mc_event_group_destroy_value (gpointer data)
 
 gboolean
 mc_event_add (const gchar *event_group_name, const gchar *event_name,
-              mc_event_callback_func_t event_callback, gpointer event_init_data, GError **mcerror)
+              mc_event_callback_fn event_callback, gpointer event_init_data, GError **mcerror)
 {
     GTree *event_group;
     GPtrArray *callbacks;
@@ -96,7 +96,7 @@ mc_event_add (const gchar *event_group_name, const gchar *event_name,
 
 void
 mc_event_del (const gchar *event_group_name, const gchar *event_name,
-              mc_event_callback_func_t event_callback, gpointer event_init_data)
+              mc_event_callback_fn event_callback, gpointer event_init_data)
 {
     GTree *event_group;
     GPtrArray *callbacks;
@@ -197,7 +197,7 @@ mc_event_get_event_by_name (GTree *event_group, const gchar *event_name, gboolea
 /* --------------------------------------------------------------------------------------------- */
 
 mc_event_callback_t *
-mc_event_is_callback_in_array (GPtrArray *callbacks, mc_event_callback_func_t event_callback,
+mc_event_is_callback_in_array (GPtrArray *callbacks, mc_event_callback_fn event_callback,
                                gpointer event_init_data)
 {
     guint array_index;

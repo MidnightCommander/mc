@@ -1,7 +1,7 @@
 /*
    Some misc dialog boxes for the program.
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -44,8 +44,8 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"  // tty_use_colors()
 #include "lib/tty/key.h"    // XCTRL and ALT macros
-#include "lib/skin.h"       // CORE_INPUT_COLOR
-#include "lib/mcconfig.h"   // Load/save user formats
+#include "lib/skin.h"
+#include "lib/mcconfig.h"  // Load/save user formats
 #include "lib/strutil.h"
 
 #include "lib/vfs/vfs.h"
@@ -488,11 +488,13 @@ task_cb (WButton *button, int action)
 void
 about_box (void)
 {
+    char *version;
+    char *package_copyright;
     char *label_cp_display;
     char *label_cp_source;
 
-    char *version = g_strdup_printf ("%s %s", PACKAGE_NAME, mc_global.mc_version);
-    char *package_copyright = mc_get_package_copyright ();
+    version = g_strdup_printf ("%s %s", PACKAGE_NAME, mc_global.mc_version);
+    package_copyright = mc_get_package_copyright ();
 
     const char *name_cp_display = get_codepage_name (mc_global.display_codepage);
     const char *name_cp_source = get_codepage_name (mc_global.source_codepage);
@@ -501,41 +503,43 @@ about_box (void)
     label_cp_source =
         g_strdup_printf (_ ("Selected source (file I/O) codepage: %s"), name_cp_source);
 
-    quick_widget_t quick_widgets[] = {
-        QUICK_LABEL (version, NULL),
-        QUICK_SEPARATOR (TRUE),
-        QUICK_LABEL (_ ("Classic terminal file manager inspired by Norton Commander."), NULL),
-        QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (package_copyright, NULL),
-        QUICK_SEPARATOR (TRUE),
-        QUICK_LABEL (label_cp_display, NULL),
-        QUICK_LABEL (label_cp_source, NULL),
-        QUICK_START_BUTTONS (TRUE, TRUE),
-        QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
-        QUICK_END,
-    };
+    {
+        quick_widget_t quick_widgets[] = {
+            QUICK_LABEL (version, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABEL (_ ("Classic terminal file manager inspired by Norton Commander."), NULL),
+            QUICK_SEPARATOR (FALSE),
+            QUICK_LABEL (package_copyright, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABEL (label_cp_display, NULL),
+            QUICK_LABEL (label_cp_source, NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
+            QUICK_END,
+        };
 
-    WRect r = { -1, -1, 0, 40 };
+        WRect r = { -1, -1, 0, 40 };
 
-    quick_dialog_t qdlg = {
-        .rect = r,
-        .title = _ ("About"),
-        .help = "[Overview]",
-        .widgets = quick_widgets,
-        .callback = NULL,
-        .mouse_callback = NULL,
-    };
+        quick_dialog_t qdlg = {
+            .rect = r,
+            .title = _ ("About"),
+            .help = "[Overview]",
+            .widgets = quick_widgets,
+            .callback = NULL,
+            .mouse_callback = NULL,
+        };
 
-    quick_widgets[0].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
-    quick_widgets[2].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
-    quick_widgets[4].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+        quick_widgets[0].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+        quick_widgets[2].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+        quick_widgets[4].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
 
-    (void) quick_dialog (&qdlg);
+        (void) quick_dialog (&qdlg);
+    }
 
-    g_free (version);
-    g_free (package_copyright);
     g_free (label_cp_display);
     g_free (label_cp_source);
+    g_free (version);
+    g_free (package_copyright);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -548,6 +552,7 @@ configure_box (void)
         _ ("On dum&b terminals"),
         _ ("Alwa&ys"),
     };
+
     const int pause_options_num = G_N_ELEMENTS (pause_options);
 
     {

@@ -1,7 +1,7 @@
 /*
    Widget group features module for the Midnight Commander
 
-   Copyright (C) 2020-2025
+   Copyright (C) 2020-2026
    The Free Software Foundation, Inc.
 
    Written by:

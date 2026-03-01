@@ -1,7 +1,7 @@
 /*
    Client interface for General purpose Linux console save/restore server
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -397,7 +397,9 @@ console_save (void)
 
     for (i = 0; i < 256; i++)
     {
-        char *p = memchr (map.scrmap, i, 256);
+        char *p;
+
+        p = memchr (map.scrmap, i, 256);
         revmap.scrmap[i] = p ? p - map.scrmap : i;
     }
 

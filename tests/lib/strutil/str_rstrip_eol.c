@@ -1,7 +1,7 @@
 /*
    lib/strutil - tests for lib/strutil.c:str_rstrip_eol function
 
-   Copyright (C) 2025
+   Copyright (C) 2025-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -68,11 +68,13 @@ static const struct str_rstrip_eol_test_struct
 /* @Test(dataSource = "str_rstrip_eol_test_ds1") */
 START_TEST (str_rstrip_eol_test1)
 {
+    char *actual_result;
+
     /* given */
     const struct str_rstrip_eol_test_struct *data = &str_rstrip_eol_test_ds1[_i];
 
     /* when */
-    char *actual_result = g_strdup (data->input_string);
+    actual_result = g_strdup (data->input_string);
     str_rstrip_eol (actual_result);
 
     /* then */
@@ -82,16 +84,21 @@ START_TEST (str_rstrip_eol_test1)
 }
 
 END_TEST
+
 /* --------------------------------------------------------------------------------------------- */
+
 START_TEST (str_rstrip_eol_test_null)
 {
     char *ptr = NULL;
+
     str_rstrip_eol (ptr);
     ck_assert_ptr_null (ptr);
 }
 
 END_TEST
+
 /* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {

@@ -1,7 +1,7 @@
 /*
    Editor text keep buffer.
 
-   Copyright (C) 2013-2025
+   Copyright (C) 2013-2026
    Free Software Foundation, Inc.
 
    Written by:

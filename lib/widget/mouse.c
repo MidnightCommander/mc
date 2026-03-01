@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 2016-2025
+   Copyright (C) 2016-2026
    Free Software Foundation, Inc.
 
    Authors:

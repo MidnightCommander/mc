@@ -1,7 +1,7 @@
 /*
    Learn keys
 
-   Copyright (C) 1995-2025
+   Copyright (C) 1995-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -332,8 +332,8 @@ init_learn (void)
     bt0 = button_new (dlg_height - 3, 1, B_ENTER, DEFPUSH_BUTTON, b0, NULL);
     bt1 = button_new (dlg_height - 3, 1, B_CANCEL, NORMAL_BUTTON, b1, NULL);
 
-    const int bw0 = button_get_width (bt0);
-    const int bw1 = button_get_width (bt1);
+    const int bw0 = widget_get_columns (WIDGET (bt0));
+    const int bw1 = widget_get_columns (WIDGET (bt1));
 
     const int bx0 = (dlg_width - (bw0 + bw1 + 1)) / 2;
     const int bx1 = bx0 + bw0 + 1;

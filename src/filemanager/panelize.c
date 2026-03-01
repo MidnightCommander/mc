@@ -1,7 +1,7 @@
 /*
    External panelize
 
-   Copyright (C) 1995-2025
+   Copyright (C) 1995-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -229,7 +229,7 @@ external_panelize_init (void)
                         NULL);
         group_add_widget (g, b);
 
-        x += button_get_width (b) + 1;
+        x += widget_get_columns (WIDGET (b)) + 1;
     }
 
     widget_select (WIDGET (l_panelize));

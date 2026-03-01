@@ -1,7 +1,7 @@
 /*
    src/usermenu - tests for usermenu
 
-   Copyright (C) 2025
+   Copyright (C) 2025-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -111,12 +111,15 @@ static const struct check_test_condition_ds
 
 START_PARAMETRIZED_TEST (check_test_condition, check_test_condition_ds)
 {
+    char *condition;
+    gboolean result = FALSE;
+
     setup_charset (data->encoding, data->utf8_display);
-    char *condition = g_strdup ("f [[:space:]] & t r");
+
+    condition = g_strdup ("f [[:space:]] & t r");
 
     current_panel->current = data->current_file;
 
-    gboolean result = FALSE;
     test_condition (NULL, condition, &result);
     ck_assert_int_eq (result, data->expected_value);
 

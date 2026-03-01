@@ -1,7 +1,7 @@
 /*
    Virtual File System: interface functions
 
-   Copyright (C) 2011-2025
+   Copyright (C) 2011-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -78,6 +78,67 @@ extern struct vfs_dirent *mc_readdir_result;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static int
+mc_mkdir_internal (const vfs_path_t *vpath, mode_t mode)
+{
+    struct vfs_class *me;
+
+    if (vpath == NULL)
+        return (-1);
+
+    me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
+    if (me == NULL)
+        return (-1);
+
+    if (me->mkdir == NULL)
+    {
+        errno = ENOTSUP;
+        return (-1);
+    }
+
+    const int result = me->mkdir (vpath, mode);
+
+    if (result == -1)
+        errno = vfs_ferrno (me);
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+mc_mkdir_recursive (const vfs_path_t *vpath, mode_t mode)
+{
+    vfs_path_t *q;
+    int result;
+
+    if (mc_mkdir_internal (vpath, mode) == 0)
+        return 0;
+    if (errno != ENOENT)
+        return (-1);
+
+    // FIXME: should check instead if vpath is at the root of that filesystem
+    if (!vfs_file_is_local (vpath))
+        return (-1);
+
+    if (strcmp (vfs_path_as_str (vpath), PATH_SEP_STR) == 0)
+    {
+        errno = ENOTDIR;
+        return (-1);
+    }
+
+    q = vfs_path_append_new (vpath, "..", (char *) NULL);
+    result = mc_mkdir_recursive (q, mode);
+    vfs_path_free (q, TRUE);
+
+    if (result == 0)
+        result = mc_mkdir_internal (vpath, mode);
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static vfs_path_t *
 mc_def_getlocalcopy (const vfs_path_t *filename_vpath)
 {
@@ -133,8 +194,10 @@ mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath, const vfs_path_t *local
                        gboolean has_changed)
 {
     int fdin = -1, fdout = -1;
+    const char *filename;
     const char *local;
 
+    filename = vfs_path_get_last_path_str (filename_vpath);
     local = vfs_path_get_last_path_str (local_vpath);
 
     if (has_changed)
@@ -173,8 +236,11 @@ mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath, const vfs_path_t *local
     return 0;
 
 failed:
-    message (D_ERROR, _ ("Changes to file lost"), "%s",
-             vfs_path_get_last_path_str (filename_vpath));
+    if (filename != NULL)
+        message (D_ERROR, MSG_ERROR, _ ("Changes to file lost:\n%s"), filename);
+    else
+        message (D_ERROR, MSG_ERROR, "%s", _ ("Changes to file lost"));
+
     if (fdout != -1)
         mc_close (fdout);
     if (fdin != -1)
@@ -256,9 +322,16 @@ MC_NAMEOP (fsetflags, (const vfs_path_t *vpath, unsigned long flags), (vpath, fl
 MC_NAMEOP (utime, (const vfs_path_t *vpath, mc_timesbuf_t *times), (vpath, times))
 MC_NAMEOP (readlink, (const vfs_path_t *vpath, char *buf, size_t bufsiz), (vpath, buf, bufsiz))
 MC_NAMEOP (unlink, (const vfs_path_t *vpath), (vpath))
-MC_NAMEOP (mkdir, (const vfs_path_t *vpath, mode_t mode), (vpath, mode))
 MC_NAMEOP (rmdir, (const vfs_path_t *vpath), (vpath))
 MC_NAMEOP (mknod, (const vfs_path_t *vpath, mode_t mode, dev_t dev), (vpath, mode, dev))
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_mkdir (const vfs_path_t *vpath, mode_t mode)
+{
+    return mc_mkdir_recursive (vpath, mode);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 

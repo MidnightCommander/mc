@@ -1,7 +1,7 @@
 /*
    Chown command -- for the Midnight Commander
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -176,7 +176,7 @@ chown_buttons_create (WGroup *g, const int first, const int last)
     {
         chown_but[i].button =
             button_new (y, 1, chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text, NULL);
-        blen += button_get_width (chown_but[i].button) + 1;
+        blen += widget_get_columns (WIDGET (chown_but[i].button)) + 1;
         group_add_widget (g, chown_but[i].button);
     }
 
@@ -185,7 +185,7 @@ chown_buttons_create (WGroup *g, const int first, const int last)
     for (i = first; i <= last; i++)
     {
         WIDGET (chown_but[i].button)->rect.x = x;
-        x += button_get_width (chown_but[i].button) + 1;
+        x += widget_get_columns (WIDGET (chown_but[i].button)) + 1;
     }
 }
 

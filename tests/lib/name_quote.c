@@ -1,7 +1,7 @@
 /*
    lib - Quote file names
 
-   Copyright (C) 2011-2025
+   Copyright (C) 2011-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -47,15 +47,15 @@ static const struct data_source1
 START_PARAMETRIZED_TEST (quote_percent_test, data_source1)
 {
     // given
-    char *actual_string;
+    GString *actual_string;
 
     // when
     actual_string = name_quote (data->input_string, data->input_quote_percent);
 
     // then
-    mctest_assert_str_eq (actual_string, data->expected_string);
+    mctest_assert_str_eq (actual_string->str, data->expected_string);
 
-    g_free (actual_string);
+    g_string_free (actual_string, TRUE);
 }
 END_PARAMETRIZED_TEST
 
@@ -88,15 +88,21 @@ static const struct data_source2
 START_PARAMETRIZED_TEST (name_quote_test, data_source2)
 {
     // given
-    char *actual_string;
+    GString *actual_string;
 
     // when
     actual_string = name_quote (data->input_string, FALSE);
 
     // then
-    mctest_assert_str_eq (actual_string, data->expected_string);
-
-    g_free (actual_string);
+    if (actual_string == NULL)
+    {
+        mctest_assert_ptr_eq (NULL, data->expected_string);
+    }
+    else
+    {
+        mctest_assert_str_eq (actual_string->str, data->expected_string);
+        g_string_free (actual_string, TRUE);
+    }
 }
 END_PARAMETRIZED_TEST
 

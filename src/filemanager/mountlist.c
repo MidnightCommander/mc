@@ -1,7 +1,7 @@
 /*
    Return a list of mounted file systems
 
-   Copyright (C) 1991-2025
+   Copyright (C) 1991-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -49,7 +49,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#ifdef MOUNTED_GETFSSTAT  // OSF_1, also (obsolete) Apple Darwin 1.3
+#ifdef MOUNTED_GETFSSTAT  // (obsolete) Apple Darwin 1.3
 #ifdef HAVE_SYS_UCRED_H
 #include <grp.h>        /* needed on OSF V4.0 for definition of NGROUPS,
                                    NGROUPS is used as an array dimension in ucred.h */
@@ -79,7 +79,7 @@
 #include <sys/statfs.h>
 #endif
 
-#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, IRIX, Cygwin, Android,                                  \
+#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, Cygwin, Android,                                        \
                              also (obsolete) 4.3BSD, SunOS */
 #include <mntent.h>
 #include <sys/types.h>
@@ -201,16 +201,24 @@
 #undef opendir
 #undef closedir
 
+// clang-format off
 #define ME_DUMMY_0(Fs_name, Fs_type)                                                               \
-    (strcmp (Fs_type, "autofs") == 0 || strcmp (Fs_type, "proc") == 0                              \
-     || strcmp (Fs_type, "subfs") == 0 /* for Linux 2.6/3.x */                                     \
-     || strcmp (Fs_type, "debugfs") == 0 || strcmp (Fs_type, "devpts") == 0                        \
-     || strcmp (Fs_type, "fusectl") == 0 || strcmp (Fs_type, "fuse.portal") == 0                   \
-     || strcmp (Fs_type, "mqueue") == 0 || strcmp (Fs_type, "rpc_pipefs") == 0                     \
-     || strcmp (Fs_type, "sysfs") == 0  /* FreeBSD, Linux 2.4 */                                   \
-     || strcmp (Fs_type, "devfs") == 0  /* for NetBSD 3.0 */                                       \
-     || strcmp (Fs_type, "kernfs") == 0 /* for Irix 6.5 */                                         \
-     || strcmp (Fs_type, "ignore") == 0)
+    (strcmp (Fs_type, "autofs") == 0                                                               \
+    || strcmp (Fs_type, "proc") == 0                                                               \
+    || strcmp (Fs_type, "subfs") == 0                                                              \
+    /* for Linux 2.6/3.x */                                                                        \
+    || strcmp (Fs_type, "debugfs") == 0                                                            \
+    || strcmp (Fs_type, "devpts") == 0                                                             \
+    || strcmp (Fs_type, "fusectl") == 0                                                            \
+    || strcmp (Fs_type, "fuse.portal") == 0                                                        \
+    || strcmp (Fs_type, "mqueue") == 0                                                             \
+    || strcmp (Fs_type, "rpc_pipefs") == 0                                                         \
+    || strcmp (Fs_type, "sysfs") == 0                                                              \
+    /* FreeBSD, Linux 2.4 */                                                                       \
+    || strcmp (Fs_type, "devfs") == 0                                                              \
+    /* for NetBSD 3.0 */                                                                           \
+    || strcmp (Fs_type, "kernfs") == 0)
+// clang-format on
 
 /* Historically, we have marked as "dummy" any file system of type "none",
    but now that programs like du need to know about bind-mounted directories,
@@ -381,7 +389,7 @@ free_mount_entry (struct mount_entry *me)
 #ifdef MOUNTED_GETMNTINFO  // Mac OS X, FreeBSD, OpenBSD, also (obsolete) 4.4BSD
 
 #ifndef HAVE_STRUCT_STATFS_F_FSTYPENAME
-static char *
+static const char *
 fstype_to_string (short int t)
 {
     switch (t)
@@ -478,11 +486,11 @@ fstype_to_string (short int t)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static const char *
 fsp_to_string (const struct statfs *fsp)
 {
 #ifdef HAVE_STRUCT_STATFS_F_FSTYPENAME
-    return (char *) (fsp->f_fstypename);
+    return fsp->f_fstypename;
 #else
     return fstype_to_string (fsp->f_type);
 #endif
@@ -492,7 +500,7 @@ fsp_to_string (const struct statfs *fsp)
 /* --------------------------------------------------------------------------------------------- */
 
 #ifdef MOUNTED_VMOUNT  // AIX
-static char *
+static const char *
 fstype_to_string (int t)
 {
     struct vfs_ent *e;
@@ -587,7 +595,7 @@ read_file_system_list (void)
     GSList *mount_list = NULL;
     struct mount_entry *me;
 
-#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, IRIX, Cygwin, Android,                                  \
+#ifdef MOUNTED_GETMNTENT1 /* glibc, HP-UX, Cygwin, Android,                                        \
                              also (obsolete) 4.3BSD, SunOS */
     {
         FILE *fp;
@@ -726,14 +734,14 @@ read_file_system_list (void)
             return NULL;
         for (; entries-- > 0; fsp++)
         {
-            char *fs_type = fsp_to_string (fsp);
+            const char *fs_type = fsp_to_string (fsp);
 
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (fsp->f_mntfromname);
             me->me_mountdir = g_strdup (fsp->f_mntonname);
             me->me_mntroot = NULL;
-            me->me_type = fs_type;
-            me->me_type_malloced = 0;
+            me->me_type = g_strdup (fs_type);
+            me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = (dev_t) (-1);  // Magic; means not known yet.
@@ -868,7 +876,7 @@ read_file_system_list (void)
     }
 #endif
 
-#ifdef MOUNTED_GETFSSTAT  //  OSF/1, also (obsolete) Apple Darwin 1.3
+#ifdef MOUNTED_GETFSSTAT  //  (obsolete) Apple Darwin 1.3
     {
         int numsys, counter;
         size_t bufsize;
@@ -1091,8 +1099,7 @@ read_file_system_list (void)
         int i;
 
         // Ask how many bytes to allocate for the mounted file system info.
-        entries = &bufsize;
-        if (mntctl (MCTL_QUERY, sizeof (bufsize), entries) != 0)
+        if (mntctl (MCTL_QUERY, sizeof (bufsize), (char *) &bufsize) != 0)
             return NULL;
         entries = g_malloc (bufsize);
 
@@ -1563,15 +1570,6 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         fsp->fsu_blocksize =
             fsd.f_frsize ? PROPAGATE_ALL_ONES (fsd.f_frsize) : PROPAGATE_ALL_ONES (fsd.f_bsize);
 
-#elif defined STAT_STATFS3_OSF1  // OSF/1
-
-        struct statfs fsd;
-
-        if (statfs (file, &fsd, sizeof (struct statfs)) != 0)
-            return -1;
-
-        fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_fsize);
-
 #elif defined STAT_STATFS2_FRSIZE  // 2.6 < glibc/Linux < 2.6.36
 
         struct statfs fsd;
@@ -1616,7 +1614,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
         fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_fsize);
 
-#elif defined STAT_STATFS4  // SVR3, old Irix
+#elif defined STAT_STATFS4  // SVR3
 
         struct statfs fsd;
 
@@ -1629,8 +1627,8 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         fsp->fsu_blocksize = 512;
 #endif
 
-#if (defined STAT_STATVFS64 || defined STAT_STATFS3_OSF1 || defined STAT_STATFS2_FRSIZE            \
-     || defined STAT_STATFS2_BSIZE || defined STAT_STATFS2_FSIZE || defined STAT_STATFS4)
+#if (defined STAT_STATVFS64 || defined STAT_STATFS2_FRSIZE || defined STAT_STATFS2_BSIZE           \
+     || defined STAT_STATFS2_FSIZE || defined STAT_STATFS4)
 
         fsp->fsu_blocks = PROPAGATE_ALL_ONES (fsd.f_blocks);
         fsp->fsu_bfree = PROPAGATE_ALL_ONES (fsd.f_bfree);

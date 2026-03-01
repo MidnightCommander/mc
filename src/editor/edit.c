@@ -1,7 +1,7 @@
 /*
    Editor low level data handling and cursor fundamentals.
 
-   Copyright (C) 1996-2025
+   Copyright (C) 1996-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -247,7 +247,7 @@ static char *
 edit_get_filter (const vfs_path_t *filename_vpath)
 {
     int i;
-    char *quoted_name;
+    GString *quoted_name;
     char *p = NULL;
 
     i = edit_find_filter (filename_vpath);
@@ -257,8 +257,8 @@ edit_get_filter (const vfs_path_t *filename_vpath)
     quoted_name = name_quote (vfs_path_as_str (filename_vpath), FALSE);
     if (quoted_name != NULL)
     {
-        p = g_strdup_printf (all_filters[i].read, quoted_name);
-        g_free (quoted_name);
+        p = g_strdup_printf (all_filters[i].read, quoted_name->str);
+        g_string_free (quoted_name, TRUE);
     }
 
     return p;
@@ -518,8 +518,10 @@ edit_save_position (WEdit *edit)
 static void
 edit_purge_widget (WEdit *edit)
 {
-    size_t len = sizeof (WEdit) - sizeof (Widget);
-    char *start = (char *) edit + sizeof (Widget);
+    const size_t len = sizeof (WEdit) - sizeof (Widget);
+    char *start;
+
+    start = (char *) edit + sizeof (Widget);
     memset (start, 0, len);
 }
 
@@ -1834,7 +1836,7 @@ edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *fil
 {
     int i;
     const char *write_name;
-    char *write_name_quoted;
+    GString *write_name_quoted;
     char *p = NULL;
 
     i = edit_find_filter (filename_vpath);
@@ -1845,8 +1847,8 @@ edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *fil
     write_name_quoted = name_quote (write_name, FALSE);
     if (write_name_quoted != NULL)
     {
-        p = g_strdup_printf (all_filters[i].write, write_name_quoted);
-        g_free (write_name_quoted);
+        p = g_strdup_printf (all_filters[i].write, write_name_quoted->str);
+        g_string_free (write_name_quoted, TRUE);
     }
     return p;
 }

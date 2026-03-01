@@ -2,7 +2,7 @@
    Skins engine.
    Reading and parse ini-files
 
-   Copyright (C) 2009-2025
+   Copyright (C) 2009-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -73,8 +73,7 @@ mc_skin_get_list_from_dir (const gchar *base_dir, GPtrArray *list)
             if (slen <= 4 || strcmp (cname + slen - 4, ".ini") != 0)
                 continue;
 
-            sname = g_strndup (cname, slen);
-            sname[slen - 4] = '\0';
+            sname = g_strndup (cname, slen - 4);
 
             for (i = 0; i < list->len; i++)
                 if (strcmp (sname, g_ptr_array_index (list, i)) == 0)

@@ -1,7 +1,7 @@
 /*
    Virtual File System: External file system.
 
-   Copyright (C) 1995-2025
+   Copyright (C) 1995-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -520,11 +520,11 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
     static dev_t archive_counter = 0;
     mc_pipe_t *result = NULL;
     mode_t mode;
-    char *cmd;
+    GString *cmd;
     struct stat mystat;
     struct extfs_super_t *current_archive;
     struct vfs_s_entry *root_entry;
-    char *tmp = NULL;
+    GString *quoted_name = NULL;
     vfs_path_t *local_name_vpath = NULL;
     vfs_path_t *name_vpath;
 
@@ -548,18 +548,25 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
                 goto ret;
         }
 
-        tmp = name_quote (vfs_path_get_last_path_str (name_vpath), FALSE);
+        quoted_name = name_quote (vfs_path_get_last_path_str (name_vpath), FALSE);
     }
 
-    cmd = g_strconcat (info->path, info->prefix, " list ",
-                       vfs_path_get_last_path_str (local_name_vpath) != NULL
-                           ? vfs_path_get_last_path_str (local_name_vpath)
-                           : tmp,
-                       (char *) NULL);
-    g_free (tmp);
+    const char *local_last_path = vfs_path_get_last_path_str (local_name_vpath);
 
-    result = mc_popen (cmd, TRUE, TRUE, error);
-    g_free (cmd);
+    cmd = g_string_new (info->path);
+    g_string_append (cmd, info->prefix);
+    g_string_append (cmd, " list ");
+
+    if (local_last_path != NULL)
+        g_string_append (cmd, local_last_path);
+    else if (quoted_name != NULL)
+    {
+        mc_g_string_concat (cmd, quoted_name);
+        g_string_free (quoted_name, TRUE);
+    }
+
+    result = mc_popen (cmd->str, TRUE, TRUE, error);
+    g_string_free (cmd, TRUE);
 
     if (result == NULL)
     {
@@ -930,10 +937,11 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
            const struct vfs_s_entry *entry, const char *localname)
 {
     char *file;
-    char *quoted_file;
-    char *archive_name, *quoted_archive_name;
+    GString *quoted_file;
+    char *archive_name;
+    GString *quoted_archive_name;
     const extfs_plugin_info_t *info;
-    char *cmd = NULL;
+    GString *cmd;
     int retval = 0;
     GError *error = NULL;
     mc_pipe_t *pip;
@@ -949,7 +957,8 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
     }
 
     // Skip leading "./" (if present) added in name_quote()
-    file = extfs_skip_leading_dotslash (quoted_file);
+    file = extfs_skip_leading_dotslash (quoted_file->str);
+    g_string_free (quoted_file, TRUE);
 
     archive_name = extfs_get_archive_name (archive);
     quoted_archive_name = name_quote (archive_name, FALSE);
@@ -963,31 +972,28 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
 
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
 
-    if (localname == NULL || *localname == '\0')
-        cmd = g_strconcat (info->path, info->prefix, str_extfs_cmd, quoted_archive_name, " ", file,
-                           (char *) NULL);
-    else
+    cmd = g_string_new (info->path);
+    g_string_append (cmd, info->prefix);
+    g_string_append (cmd, str_extfs_cmd);
+    mc_g_string_concat (cmd, quoted_archive_name);
+    g_string_append_c (cmd, ' ');
+    g_string_append (cmd, file);
+
+    g_string_free (quoted_archive_name, TRUE);
+
+    if (localname != NULL && *localname != '\0')
     {
-        char *quoted_localname;
+        GString *quoted_localname;
 
         quoted_localname = name_quote (localname, FALSE);
-        cmd = g_strconcat (info->path, info->prefix, str_extfs_cmd, quoted_archive_name, " ", file,
-                           " ", quoted_localname, (char *) NULL);
-        g_free (quoted_localname);
-    }
-
-    g_free (quoted_file);
-    g_free (quoted_archive_name);
-
-    if (cmd == NULL)
-    {
-        message (D_ERROR, MSG_ERROR, _ ("EXTFS virtual file system:\ncannot build command"));
-        return (-1);
+        g_string_append_c (cmd, ' ');
+        mc_g_string_concat (cmd, quoted_localname);
+        g_string_free (quoted_localname, TRUE);
     }
 
     // don't read stdout
-    pip = mc_popen (cmd, FALSE, TRUE, &error);
-    g_free (cmd);
+    pip = mc_popen (cmd->str, FALSE, TRUE, &error);
+    g_string_free (cmd, TRUE);
 
     if (pip == NULL)
     {
@@ -1020,25 +1026,36 @@ extfs_run (const vfs_path_t *vpath)
 {
     struct extfs_super_t *archive = NULL;
     const char *p;
-    char *q, *archive_name, *quoted_archive_name;
-    char *cmd;
+    GString *quoted_name;
+    char *archive_name;
+    GString *quoted_archive_name;
+    GString *cmd;
     const extfs_plugin_info_t *info;
 
     p = extfs_get_path (vpath, &archive, FL_NONE);
     if (p == NULL)
         return;
-    q = name_quote (p, FALSE);
 
+    quoted_name = name_quote (p, FALSE);
     archive_name = extfs_get_archive_name (archive);
     quoted_archive_name = name_quote (archive_name, FALSE);
     g_free (archive_name);
+
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
-    cmd =
-        g_strconcat (info->path, info->prefix, " run ", quoted_archive_name, " ", q, (char *) NULL);
-    g_free (quoted_archive_name);
-    g_free (q);
-    shell_execute (cmd, 0);
-    g_free (cmd);
+
+    cmd = g_string_new (info->path);
+    g_string_append (cmd, info->prefix);
+    g_string_append (cmd, " run ");
+    mc_g_string_concat (cmd, quoted_archive_name);
+    g_string_append_c (cmd, ' ');
+    mc_g_string_concat (cmd, quoted_name);
+
+    g_string_free (quoted_archive_name, TRUE);
+    g_string_free (quoted_name, TRUE);
+
+    shell_execute (cmd->str, 0);
+
+    g_string_free (cmd, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

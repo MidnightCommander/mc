@@ -2,7 +2,7 @@
    Interface to the terminal controlling library.
    Ncurses wrapper.
 
-   Copyright (C) 2005-2025
+   Copyright (C) 2005-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -44,7 +44,7 @@
 #include "lib/strutil.h"  // str_term_form
 #include "lib/util.h"
 
-#include "tty-internal.h"  // mc_tty_normalize_from_utf8()
+#include "tty-internal.h"
 #include "tty.h"
 #include "color.h"  // tty_setcolor
 #include "color-internal.h"
@@ -269,6 +269,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     // ncurses versions before 6.5-20251115 are buggy in KOI8-R locale, see mc #4799.
     // Note: This check will fail at ncurses version 10. We can surely remove this workaround then.
     const char *ncurses_ver = curses_version ();
+
     ncurses_koi8r_double_line_bug =
         (strncmp (ncurses_ver, "ncurses ", 8) == 0 && strcmp (ncurses_ver + 8, "6.5.20251115") < 0);
 

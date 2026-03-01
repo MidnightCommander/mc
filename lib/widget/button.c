@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Authors:
@@ -53,6 +53,32 @@
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+button_get_columns (const WButton *b)
+{
+    int ret;
+
+    ret = hotkey_width (b->text);
+
+    switch (b->flags)
+    {
+    case DEFPUSH_BUTTON:
+        ret += 6;
+        break;
+    case NORMAL_BUTTON:
+        ret += 4;
+        break;
+    case NARROW_BUTTON:
+        ret += 2;
+        break;
+    case HIDDEN_BUTTON:
+    default:
+        return 0;
+    }
+
+    return ret;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -216,7 +242,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     b->action = action;
     b->flags = flags;
     b->text = hotkey_new (text);
-    r.cols = button_get_width (b);
+    r.cols = button_get_columns (b);
     widget_init (w, &r, button_default_callback, button_mouse_default_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     b->callback = callback;
@@ -251,34 +277,8 @@ button_set_text (WButton *b, const char *text)
     hotkey_free (b->text);
     b->text = hk;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
-    w->rect.cols = button_get_width (b);
+    w->rect.cols = button_get_columns (b);
     widget_draw (w);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-button_get_width (const WButton *b)
-{
-    int ret = hotkey_width (b->text);
-
-    switch (b->flags)
-    {
-    case DEFPUSH_BUTTON:
-        ret += 6;
-        break;
-    case NORMAL_BUTTON:
-        ret += 4;
-        break;
-    case NARROW_BUTTON:
-        ret += 2;
-        break;
-    case HIDDEN_BUTTON:
-    default:
-        return 0;
-    }
-
-    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

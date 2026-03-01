@@ -1,7 +1,7 @@
 /*
    src/usermenu - tests for usermenu
 
-   Copyright (C) 2025
+   Copyright (C) 2025-2026
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -170,7 +170,7 @@ START_PARAMETRIZED_TEST (check_expand_format, check_expand_format_ds)
 {
     const int current_marked = current_panel->marked;
     const int other_marked = other_panel->marked;
-    char *result;
+    GString *result;
 
     if (data->panel_marked > -1)
     {
@@ -181,9 +181,9 @@ START_PARAMETRIZED_TEST (check_expand_format, check_expand_format_ds)
     }
 
     result = expand_format (data->edit_widget, data->macro, data->do_quote);
-    ck_assert_str_eq (data->expected, result);
+    ck_assert_str_eq (data->expected, result->str);
 
-    g_free (result);
+    g_string_free (result, TRUE);
     current_panel->marked = current_marked;
     other_panel->marked = other_marked;
 }

@@ -1,7 +1,7 @@
 /*
    paths to configuration files
 
-   Copyright (C) 2010-2025
+   Copyright (C) 2010-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -49,8 +49,6 @@ static gboolean xdg_vars_initialized = FALSE;
 static char *mc_config_str = NULL;
 static char *mc_cache_str = NULL;
 static char *mc_data_str = NULL;
-
-static gboolean config_dir_present = FALSE;
 
 static const struct
 {
@@ -124,15 +122,10 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
 
     full_path = g_build_filename (path_base, subdir, (char *) NULL);
 
-    if (g_file_test (full_path, G_FILE_TEST_EXISTS))
+    if (g_file_test (full_path, G_FILE_TEST_EXISTS) && !g_file_test (full_path, G_FILE_TEST_IS_DIR))
     {
-        if (g_file_test (full_path, G_FILE_TEST_IS_DIR))
-            config_dir_present = TRUE;
-        else
-        {
-            fprintf (stderr, "%s %s\n", _ ("FATAL: not a directory:"), full_path);
-            exit (EXIT_FAILURE);
-        }
+        fprintf (stderr, "%s %s\n", _ ("FATAL: not a directory:"), full_path);
+        exit (EXIT_FAILURE);
     }
 
     mc_config_mkdir (full_path, mcerror);

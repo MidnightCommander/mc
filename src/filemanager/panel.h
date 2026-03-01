@@ -85,8 +85,7 @@ typedef struct
 
     panel_display_t frame_size;  // half or full frame
 
-    gboolean active;  // If panel is currently selected
-    gboolean dirty;   // Should we redisplay the panel?
+    gboolean dirty;  // Should we redisplay the panel?
 
     gboolean is_panelized;               // Panelization: special mode, can't reload the file list
     panelized_descr_t *panelized_descr;  // Panelization descriptor

@@ -1,7 +1,7 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009-2025
+   Copyright (C) 2009-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -299,6 +299,29 @@ mc_g_string_append_c_len (GString *s, gchar c, guint len)
     }
 
     return s;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * mc_g_string_concat:
+ * @dst: (not nullable): the destination #GString.
+ * @src: (not nullable): the source #GString.
+ * @return: @dst
+ *
+ * Adds @src to the end of @dst.
+ *
+ * There is no such API in GLib2.
+ */
+GString *
+mc_g_string_concat (GString *dest, const GString *src)
+{
+    g_return_val_if_fail (dest != NULL, NULL);
+    g_return_val_if_fail (src != NULL, NULL);
+
+    g_string_append_len (dest, src->str, src->len);
+
+    return dest;
 }
 
 /* --------------------------------------------------------------------------------------------- */

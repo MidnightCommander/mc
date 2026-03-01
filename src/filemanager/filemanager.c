@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -371,7 +371,7 @@ menu_cmd (void)
 {
     int selected;
 
-    if ((get_current_index () == 0) == current_panel->active)
+    if ((get_current_index () == 0) == widget_get_state (WIDGET (current_panel), WST_FOCUSED))
         selected = 0;
     else
         selected = g_list_length (the_menubar->menu) - 1;
@@ -827,6 +827,7 @@ setup_mc (void)
     tty_display_8bit (TRUE);
 
     const int baudrate = tty_baudrate ();
+
     if ((baudrate > 0 && baudrate < 9600) || mc_global.tty.slow_terminal)
         verbose = FALSE;
 }
@@ -1411,7 +1412,7 @@ is_cmdline_mute (void)
        it's activity. Thus, we can't use get_current_type() here.
        current_panel should point to actually current active panel
        independently of it's type. */
-    return (!current_panel->active
+    return (!widget_get_state (WIDGET (current_panel), WST_FOCUSED)
             && (get_other_type () == view_quick || get_other_type () == view_tree));
 }
 

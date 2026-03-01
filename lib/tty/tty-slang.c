@@ -2,7 +2,7 @@
    Interface to the terminal controlling library.
    Slang wrapper.
 
-   Copyright (C) 2005-2025
+   Copyright (C) 2005-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -46,7 +46,7 @@
 #include "lib/strutil.h"  // str_term_form
 #include "lib/util.h"     // is_printable()
 
-#include "tty-internal.h"  // mc_tty_normalize_from_utf8()
+#include "tty-internal.h"
 #include "tty.h"
 #include "color.h"
 #include "color-slang.h"

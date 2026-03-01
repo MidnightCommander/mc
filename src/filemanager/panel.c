@@ -1,7 +1,7 @@
 /*
    Panel managing.
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -974,7 +974,7 @@ paint_dir (WPanel *panel)
 
         if (n < panel->dir.len)
         {
-            if (panel->current == n && panel->active)
+            if (panel->current == n && widget_get_state (WIDGET (panel), WST_FOCUSED))
                 attr = marked ? FATTR_MARKED_CURRENT : FATTR_CURRENT;
             else if (marked)
                 attr = FATTR_MARKED;
@@ -1266,7 +1266,7 @@ show_dir (const WPanel *panel)
         }
     }
 
-    if (panel->active)
+    if (widget_get_state (WIDGET (panel), WST_FOCUSED))
         tty_setcolor (CORE_REVERSE_COLOR);
 
     tmp = panel_correct_path_to_show (panel);
@@ -1303,7 +1303,7 @@ show_dir (const WPanel *panel)
 
     show_free_space (panel);
 
-    if (panel->active)
+    if (widget_get_state (WIDGET (panel), WST_FOCUSED))
         tty_set_normal_attrs ();
 }
 
@@ -2859,7 +2859,7 @@ static gboolean
 do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
 {
     const char *fname = fe->fname->str;
-    char *fname_quoted;
+    GString *fname_quoted;
     vfs_path_t *full_name_vpath;
     gboolean ok;
 
@@ -2916,8 +2916,8 @@ do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
     {
         char *cmd;
 
-        cmd = g_strconcat ("." PATH_SEP_STR, fname_quoted, (char *) NULL);
-        g_free (fname_quoted);
+        cmd = g_strconcat ("." PATH_SEP_STR, fname_quoted->str, (char *) NULL);
+        g_string_free (fname_quoted, TRUE);
 
         shell_execute (cmd, 0);
         g_free (cmd);
@@ -3785,7 +3785,6 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
     case MSG_FOCUS:
         state_mark = -1;
         current_panel = panel;
-        panel->active = TRUE;
 
         if (mc_chdir (panel->cwd_vpath) != 0)
         {
@@ -3813,7 +3812,6 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
     case MSG_UNFOCUS:
         // Janne: look at this for the multiple panel options
         stop_search (panel);
-        panel->active = FALSE;
         unselect_item (panel);
         return MSG_HANDLED;
 

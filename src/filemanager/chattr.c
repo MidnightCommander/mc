@@ -1,7 +1,7 @@
 /*
    Chattr command -- for the Midnight Commander
 
-   Copyright (C) 2020-2025
+   Copyright (C) 2020-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -1019,14 +1019,14 @@ chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
                                                    chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
-        const int bw0 = button_get_width (BUTTON (chattr_but[i].button));
+        const int bw0 = widget_get_columns (chattr_but[i].button);
 
         i++;
         chattr_but[i].button = WIDGET (button_new (y++, 1, chattr_but[i].ret_cmd,
                                                    chattr_but[i].flags, chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
-        const int bw1 = button_get_width (BUTTON (chattr_but[i].button));
+        const int bw1 = widget_get_columns (chattr_but[i].button);
 
         // two buttons in a row
         cols = MAX (cols, bw0 + 1 + bw1);

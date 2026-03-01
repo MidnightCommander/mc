@@ -1,7 +1,7 @@
 /*
    Load and show history of edited and viewed files
 
-   Copyright (C) 2020-2025
+   Copyright (C) 2020-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -85,13 +85,11 @@ file_history_parse_entry (const char *buf, GList **file_list)
 static void
 file_history_write_entry (const file_history_data_t *fhd, GString *s)
 {
-    {
-        char *file_name;
+    char *file_name;
 
-        file_name = str_escape (fhd->file_name, -1, "", TRUE);
-        g_string_append (s, file_name);
-        g_free (file_name);
-    }
+    file_name = str_escape (fhd->file_name, -1, "", TRUE);
+    g_string_append (s, file_name);
+    g_free (file_name);
 
     if (fhd->file_pos != NULL)
     {

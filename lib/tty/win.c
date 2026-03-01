@@ -1,7 +1,7 @@
 /*
    Terminal management xterm and rxvt support
 
-   Copyright (C) 1995-2025
+   Copyright (C) 1995-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -157,6 +157,7 @@ look_for_rxvt_extensions (void)
     if (!been_called)
     {
         const char *e = getenv ("RXVT_EXT");
+
         rxvt_extensions = ((e != NULL) && (strcmp (e, "1.0") == 0));
         been_called = TRUE;
     }

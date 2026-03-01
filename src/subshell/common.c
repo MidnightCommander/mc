@@ -1,7 +1,7 @@
 /*
    Concurrent shell support for the Midnight Commander
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -284,7 +284,9 @@ read_nonblock (int fd, void *buf, size_t count)
     const int old_flags = fcntl (fd, F_GETFL);
 
     fcntl (fd, F_SETFL, old_flags | O_NONBLOCK);
+
     const ssize_t ret = read (fd, buf, count);
+
     fcntl (fd, F_SETFL, old_flags);
 
     return ret;
@@ -307,6 +309,7 @@ init_subshell_child (const char *pty_name)
     pid_t mc_sid;
 
     (void) pty_name;
+
     setsid ();  // Get a fresh terminal session
 
     // Make sure that it has become our controlling terminal
@@ -695,9 +698,10 @@ read_command_line_buffer (gboolean test_mode)
 
             // Did we receive the terminating '\0'? There shouldn't be an embedded '\0', but just in
             // case there is, stop at the first one.
-            const int latest_chunk_data_length =
+            const size_t latest_chunk_data_length =
                 strnlen (subshell_response_buffer + response_char_length, bytes);
-            if (latest_chunk_data_length < bytes)
+
+            if (latest_chunk_data_length < (size_t) bytes)
             {
                 // Terminating '\0' found, we're done reading
                 response_char_length += latest_chunk_data_length;
@@ -1439,10 +1443,10 @@ create_cd_command (const char *s)
         escape_fmt = "\\0%03o";
     }
 
-    const int quote_cmd_start_len = strlen (quote_cmd_start);
-    const int before_wrap_len = strlen (before_wrap);
-    const int after_wrap_len = strlen (after_wrap);
-    const int quote_cmd_end_len = strlen (quote_cmd_end);
+    const int quote_cmd_start_len = (int) strlen (quote_cmd_start);
+    const int before_wrap_len = (int) strlen (before_wrap);
+    const int after_wrap_len = (int) strlen (after_wrap);
+    const int quote_cmd_end_len = (int) strlen (quote_cmd_end);
 
     /* Measure the length of an escaped byte. In the unlikely case that it won't be uniform in some
      * future shell, have an upper estimate by measuring the largest byte. */
@@ -1461,9 +1465,10 @@ create_cd_command (const char *s)
      * see ticket #4480. Make sure to wrap in time. See how large we can grow so that an
      * additional line wrapping or closing string still fits. */
     const int max_length = COOKED_MODE_BUFFER_SIZE - MAX (before_wrap_len, quote_cmd_end_len);
+
     g_assert (max_length >= 64);  // make sure we have enough room to breathe
 
-    line_length = ret->len;
+    line_length = (int) ret->len;
 
     /* Print every character except digits and letters as a backslash-escape sequence. */
     for (const char *su = s; su[0] != '\0'; su = n)
@@ -1596,6 +1601,7 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean force, gboolean update_prom
         /* The initial space keeps this out of the command history (in bash
            because we set "HISTCONTROL=ignorespace") */
         const char *cmd = " cd /";
+
         write_all (mc_global.tty.subshell_pty, cmd, sizeof (cmd) - 1);
     }
     else
@@ -1605,6 +1611,7 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean force, gboolean update_prom
         if (translate == NULL)
         {
             const char *cmd = " cd .";
+
             write_all (mc_global.tty.subshell_pty, cmd, sizeof (cmd) - 1);
         }
         else

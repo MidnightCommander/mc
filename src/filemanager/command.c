@@ -4,7 +4,7 @@
    with all the magic of the command input line, we depend on some
    help from the program's callback.
 
-   Copyright (C) 1995-2025
+   Copyright (C) 1995-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -141,13 +141,13 @@ enter (WInput *lc_cmdline)
                 g_string_append_c (command, cmd[i]);
             else
             {
-                char *s;
+                GString *s;
 
                 s = expand_format (NULL, cmd[++i], TRUE);
                 if (s != NULL)
                 {
-                    g_string_append (command, s);
-                    g_free (s);
+                    mc_g_string_concat (command, s);
+                    g_string_free (s, TRUE);
                 }
             }
         }
@@ -239,13 +239,13 @@ command_new (int y, int x, int cols)
 void
 command_insert (WInput *in, const char *text, gboolean insert_extra_space)
 {
-    char *quoted_text;
+    GString *quoted_text;
 
     quoted_text = name_quote (text, TRUE);
     if (quoted_text != NULL)
     {
-        input_insert (in, quoted_text, insert_extra_space);
-        g_free (quoted_text);
+        input_insert (in, quoted_text->str, insert_extra_space);
+        g_string_free (quoted_text, TRUE);
     }
 }
 

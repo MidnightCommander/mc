@@ -1,7 +1,7 @@
 /*
    User Menu implementation
 
-   Copyright (C) 1994-2025
+   Copyright (C) 1994-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -82,27 +82,24 @@ static char *menu = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 /** strip file's extension */
-static char *
-strip_ext (char *ss)
+static void
+strip_ext (GString *ss)
 {
-    char *s;
-    char *e = NULL;
+    gssize e = -1;
 
     if (ss == NULL)
-        return NULL;
+        return;
 
-    for (s = ss; *s != '\0'; s++)
+    for (gsize i = 0; i < ss->len; i++)
     {
-        if (*s == '.')
-            e = s;
-        if (IS_PATH_SEP (*s) && e != NULL)
-            e = NULL;  // '.' in *directory* name
+        if (ss->str[i] == '.')
+            e = i;
+        if (IS_PATH_SEP (ss->str[i]) && e >= 0)
+            e = -1;  // '.' in *directory* name
     }
 
-    if (e != NULL)
-        *e = '\0';
-
-    return (*ss == '\0' ? NULL : ss);
+    if (e >= 0)
+        g_string_set_size (ss, (gsize) e);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -507,13 +504,13 @@ execute_menu_command (const Widget *edit_widget, const char *commands, gboolean 
                 }
                 if (do_quote)
                 {
-                    char *tmp;
+                    GString *tmp;
 
                     tmp = name_quote (parameter, FALSE);
                     if (tmp != NULL)
                     {
-                        fputs (tmp, cmd_file);
-                        g_free (tmp);
+                        fputs (tmp->str, cmd_file);
+                        g_string_free (tmp, TRUE);
                     }
                 }
                 else
@@ -537,13 +534,13 @@ execute_menu_command (const Widget *edit_widget, const char *commands, gboolean 
                 parameter = lc_prompt;
             else
             {
-                char *text;
+                GString *text;
 
                 text = expand_format (edit_widget, *commands, do_quote);
                 if (text != NULL)
                 {
-                    fputs (text, cmd_file);
-                    g_free (text);
+                    fputs (text->str, cmd_file);
+                    g_string_free (text, TRUE);
                 }
             }
         }
@@ -698,42 +695,42 @@ menu_file_own (char *path)
 int
 check_format_view (const char *p)
 {
-    const char *q = p;
+    if (strncmp (p, "view", 4) != 0)
+        return 0;
 
-    if (strncmp (p, "view", 4) == 0)
+    const char *q = p + 4;
+
+    if (*q == '{')
     {
-        q += 4;
-        if (*q == '{')
+        for (q++; *q != '\0' && *q != '}'; q++)
         {
-            for (q++; *q != '\0' && *q != '}'; q++)
+            if (strncmp (q, "ascii", 5) == 0)
             {
-                if (strncmp (q, DEFAULT_CHARSET, 5) == 0)
-                {
-                    mcview_global_flags.hex = FALSE;
-                    q += 4;
-                }
-                else if (strncmp (q, "hex", 3) == 0)
-                {
-                    mcview_global_flags.hex = TRUE;
-                    q += 2;
-                }
-                else if (strncmp (q, "nroff", 5) == 0)
-                {
-                    mcview_global_flags.nroff = TRUE;
-                    q += 4;
-                }
-                else if (strncmp (q, "unform", 6) == 0)
-                {
-                    mcview_global_flags.nroff = FALSE;
-                    q += 5;
-                }
+                mcview_global_flags.hex = FALSE;
+                q += 4;
             }
-            if (*q == '}')
-                q++;
+            else if (strncmp (q, "hex", 3) == 0)
+            {
+                mcview_global_flags.hex = TRUE;
+                q += 2;
+            }
+            else if (strncmp (q, "nroff", 5) == 0)
+            {
+                mcview_global_flags.nroff = TRUE;
+                q += 4;
+            }
+            else if (strncmp (q, "unform", 6) == 0)
+            {
+                mcview_global_flags.nroff = FALSE;
+                q += 5;
+            }
         }
-        return q - p;
+
+        if (*q == '}')
+            q++;
     }
-    return 0;
+
+    return q - p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -794,13 +791,13 @@ check_format_var (const char *p, char **v)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
+GString *
 expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
-    char *(*quote_func) (const char *, gboolean);
+    quote_fn quote_func = do_quote ? name_quote : fake_name_quote;
     const char *fname = NULL;
-    char *result;
+    GString *result;
     char c_lc;
 
 #ifdef USE_INTERNAL_EDIT
@@ -810,7 +807,7 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 #endif
 
     if (c == '%')
-        return g_strdup ("%");
+        return g_string_new ("%");
 
     switch (mc_global.mc_run_mode)
     {
@@ -853,11 +850,6 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
         return NULL;
     }
 
-    if (do_quote)
-        quote_func = name_quote;
-    else
-        quote_func = fake_name_quote;
-
     c_lc = g_ascii_tolower ((gchar) c);
 
     switch (c_lc)
@@ -870,7 +862,8 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
         result = quote_func (extension (fname), FALSE);
         goto ret;
     case 'n':  // strip extension
-        result = strip_ext (quote_func (fname, FALSE));
+        result = quote_func (fname, FALSE);
+        strip_ext (result);
         goto ret;
     case 'd':
     {
@@ -888,7 +881,8 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 #ifdef USE_INTERNAL_EDIT
         if (e != NULL)
         {
-            result = g_strdup_printf ("%u", (unsigned int) edit_get_cursor_offset (e));
+            result = g_string_sized_new (8);
+            g_string_printf (result, "%u", (unsigned int) edit_get_cursor_offset (e));
             goto ret;
         }
 #endif
@@ -897,7 +891,10 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 #ifdef USE_INTERNAL_EDIT
         if (e != NULL)
         {
-            result = g_strnfill (edit_get_curs_col (e), ' ');
+            const gsize col = (gsize) edit_get_curs_col (e);
+
+            result = g_string_sized_new (col);
+            mc_g_string_append_c_len (result, ' ', col);
             goto ret;
         }
 #endif
@@ -911,7 +908,7 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
             syntax_type = edit_get_syntax_type (e);
             if (syntax_type != NULL)
             {
-                result = g_strdup (syntax_type);
+                result = g_string_new (syntax_type);
                 goto ret;
             }
         }
@@ -952,7 +949,7 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
     {
         GString *block = NULL;
         int i;
-        char *qcwd = NULL;
+        GString *qcwd = NULL;
 
         if (panel == NULL)
         {
@@ -972,11 +969,11 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
         for (i = 0; i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked != 0)
             {
-                char *tmp;
+                GString *tmp;
 
                 if (qcwd != NULL)
                 {
-                    g_string_append (block, qcwd);
+                    mc_g_string_concat (block, qcwd);
                     g_string_append (block, PATH_SEP_STR);
                 }
 
@@ -984,26 +981,31 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 
                 if (tmp != NULL)
                 {
-                    g_string_append (block, tmp);
-                    g_free (tmp);
+                    mc_g_string_concat (block, tmp);
+                    g_string_free (tmp, TRUE);
                     g_string_append_c (block, ' ');
                 }
 
                 if (c_lc == 'u')
                     do_file_mark (panel, i, 0);
             }
-        g_free (qcwd);
-        result = g_string_free (block, block->len == 0);
+        g_string_free (qcwd, TRUE);
+        result = block;
         goto ret;
     }  // sub case block
     default:
         break;
     }  // switch
 
-    result = g_strdup ("% ");
-    result[1] = c;
+    result = g_string_new ("%");
+    return g_string_append_c (result, c);
+
 ret:
-    return result;
+    if (result == NULL || result->len != 0)
+        return result;
+
+    g_string_free (result, TRUE);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

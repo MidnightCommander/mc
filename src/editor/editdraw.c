@@ -1,7 +1,7 @@
 /*
    Editor text drawing.
 
-   Copyright (C) 1996-2025
+   Copyright (C) 1996-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -118,6 +118,7 @@ format_character_code (WEdit *edit)
             else
             {
                 char uplus[CHAR_CODE_BUF_SIZE];
+
                 g_snprintf (uplus, CHAR_CODE_BUF_SIZE, "U+%04X", cur_utf);
                 g_snprintf (buf, CHAR_CODE_BUF_SIZE, "%8s", uplus);
             }
@@ -378,15 +379,14 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real, long 
 {
     Widget *w = WIDGET (edit);
     line_s *p;
-    int x, x1, y, cols_to_skip;
+    int x1, y, cols_to_skip;
     int i;
     int wrap_start;
     int len;
 
-    x = start_col_real;
     x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + edit_options.line_state_width;
     y = row + EDIT_TEXT_VERTICAL_OFFSET;
-    cols_to_skip = abs (x);
+    cols_to_skip = abs (start_col_real);
 
     if (edit->fullscreen == 0)
     {
@@ -641,56 +641,35 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                             style = c | (book_mark << 16);
                         else
                             style = p->style | MOD_WHITESPACE;
-                        if (i > 2)
+
+                        if (i > 1)
                         {
                             p->ch = '<';
                             p->style = style;
                             p++;
+
                             while (--i > 1)
                             {
                                 p->ch = '-';
                                 p->style = style;
                                 p++;
                             }
-                            p->ch = '>';
-                            p->style = style;
-                            p++;
                         }
-                        else if (i > 1)
-                        {
-                            p->ch = '<';
-                            p->style = style;
-                            p++;
-                            p->ch = '>';
-                            p->style = style;
-                            p++;
-                        }
-                        else
-                        {
-                            p->ch = '>';
-                            p->style = style;
-                            p++;
-                        }
-                    }
-                    else if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
-                             && tty_use_colors ())
-                    {
-                        p->ch = '.';
-                        p->style |= MOD_WHITESPACE;
 
-                        const int style = p->style & ~MOD_CURSOR;
-
+                        p->ch = '>';
+                        p->style = style;
                         p++;
-                        while (--i != 0)
-                        {
-                            p->ch = ' ';
-                            p->style = style;
-                            p++;
-                        }
                     }
                     else
                     {
-                        p->ch |= ' ';
+                        if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
+                            && tty_use_colors ())
+                        {
+                            p->ch = '.';
+                            p->style |= MOD_WHITESPACE;
+                        }
+                        else
+                            p->ch |= ' ';
 
                         const int style = p->style & ~MOD_CURSOR;
 

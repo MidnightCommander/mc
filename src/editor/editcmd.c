@@ -1,7 +1,7 @@
 /*
    Editor high level editing commands
 
-   Copyright (C) 1996-2025
+   Copyright (C) 1996-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -623,33 +623,45 @@ static void
 pipe_mail (const edit_buffer_t *buf, char *to, char *subject, char *cc)
 {
     FILE *p = 0;
-    char *s = NULL;
+    GString *s = NULL;
+    GString *to_quoted;
 
-    to = name_quote (to, FALSE);
-    if (to != NULL)
+    to_quoted = name_quote (to, FALSE);
+    if (to_quoted != NULL)
     {
-        subject = name_quote (subject, FALSE);
-        if (subject != NULL)
+        GString *subject_quoted;
+
+        subject_quoted = name_quote (subject, FALSE);
+        if (subject_quoted != NULL)
         {
-            cc = name_quote (cc, FALSE);
-            if (cc == NULL)
-                s = g_strdup_printf ("mail -s %s %s", subject, to);
-            else
+            GString *cc_quoted;
+
+            s = g_string_new ("mail -s ");
+            mc_g_string_concat (s, subject_quoted);
+            g_string_append_c (s, ' ');
+
+            g_string_free (subject_quoted, TRUE);
+
+            cc_quoted = name_quote (cc, FALSE);
+            if (cc_quoted != NULL)
             {
-                s = g_strdup_printf ("mail -s %s -c %s %s", subject, cc, to);
-                g_free (cc);
+                g_string_append (s, "-c ");
+                mc_g_string_concat (s, cc_quoted);
+                g_string_append_c (s, ' ');
+
+                g_string_free (cc_quoted, TRUE);
             }
 
-            g_free (subject);
+            mc_g_string_concat (s, to_quoted);
         }
 
-        g_free (to);
+        g_string_free (to_quoted, TRUE);
     }
 
     if (s != NULL)
     {
-        p = popen (s, "w");
-        g_free (s);
+        p = popen (s->str, "w");
+        g_string_free (s, TRUE);
     }
 
     if (p != NULL)

@@ -1,7 +1,7 @@
 /*
    Panel layout module for the Midnight Commander
 
-   Copyright (C) 1995-2025
+   Copyright (C) 1995-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -1268,7 +1268,6 @@ swap_panels (void)
     panel2->x = panel.x;
         // Change content and related stuff
         panelswap (dir);
-        panelswap (active);
         panelswap (cwd_vpath);
         panelswap (lwd_vpath);
         panelswap (marked);

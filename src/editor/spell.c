@@ -1,7 +1,7 @@
 /*
    Editor spell checker
 
-   Copyright (C) 2012-2025
+   Copyright (C) 2012-2026
    Free Software Foundation, Inc.
 
    Written by:
@@ -348,11 +348,11 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
 
     add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _ ("&Add word"), 0);
     replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _ ("&Replace"), 0);
-    replace_width = button_get_width (replace_btn);
+    replace_width = widget_get_columns (WIDGET (replace_btn));
     skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _ ("&Skip"), 0);
-    skip_width = button_get_width (skip_btn);
+    skip_width = widget_get_columns (WIDGET (skip_btn));
     cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _ ("&Cancel"), 0);
-    cancel_width = button_get_width (cancel_button);
+    cancel_width = widget_get_columns (WIDGET (cancel_button));
 
     max_btn_width = MAX (replace_width, skip_width);
     max_btn_width = MAX (max_btn_width, cancel_width);

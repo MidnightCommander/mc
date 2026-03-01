@@ -2,7 +2,7 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009-2025
+   Copyright (C) 2009-2026
    Free Software Foundation, Inc.
 
    Written by:
