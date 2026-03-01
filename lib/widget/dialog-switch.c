@@ -262,16 +262,15 @@ dialog_switch_list (void)
 int
 dialog_switch_process_pending (void)
 {
-    WDialog *h;
     int ret = 0;
 
     if (mc_current == NULL)
         return ret;
 
-    h = DIALOG (mc_current->data);
-
     if (!dialog_switch_pending)
     {
+        WDialog *h = DIALOG (mc_current->data);
+
         // return to panels and reload them forced
         if (mc_global.mc_run_mode == MC_RUN_FULL && h == filemanager)
             mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
@@ -279,6 +278,7 @@ dialog_switch_process_pending (void)
     else
         while (dialog_switch_pending)
         {
+            WDialog *h = DIALOG (mc_current->data);
             Widget *wh = WIDGET (h);
 
             dialog_switch_pending = FALSE;
