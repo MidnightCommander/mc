@@ -29,13 +29,13 @@
 
 #include <ctype.h>
 #include <stdarg.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gmodule.h>
 
 #include "lib/global.h"
 #include "lib/charsets.h"
+#include "lib/logging.h"
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
 #include "lib/util.h"     // MC_PTR_FREE()
@@ -115,7 +115,6 @@ static unsigned long spell_settings_lang_input_id = 0;
 #define SPELL_PLUGIN_LANGUAGE_KEY "language"
 #define SPELL_ENGINE_ASPELL       "aspell"
 #define SPELL_ENGINE_HUNSPELL     "hunspell"
-#define SPELL_DEBUG_LOG_PATH      "/tmp/mc-spell.log"
 #define SPELL_STATE_CACHE_TTL_US  (250 * G_USEC_PER_SEC / 1000)
 
 static AspellConfig *(*mc_new_aspell_config) (void);
@@ -197,18 +196,22 @@ static struct
 static void
 spell_debug_log (const char *fmt, ...)
 {
-    FILE *fp;
+    char *msg;
     va_list ap;
 
-    fp = fopen (SPELL_DEBUG_LOG_PATH, "a");
-    if (fp == NULL)
+    va_start (ap, fmt);
+    msg = g_strdup_vprintf (fmt, ap);
+    va_end (ap);
+
+    if (msg == NULL)
         return;
 
-    va_start (ap, fmt);
-    vfprintf (fp, fmt, ap);
-    va_end (ap);
-    fputc ('\n', fp);
-    fclose (fp);
+#ifdef USE_MAINTAINER_MODE
+    mc_log ("%s", msg);
+#else
+    g_debug ("%s", msg);
+#endif
+    g_free (msg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
