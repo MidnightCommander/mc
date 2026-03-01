@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-02-01 14:37+0100\n"
+"POT-Creation-Date: 2026-03-01 11:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -579,6 +579,12 @@ msgstr "Pradedamas siuntimas..."
 msgid "Getting file"
 msgstr "Parsiunčiamas failas"
 
+#, fuzzy, c-format
+msgid ""
+"Changes to file lost:\n"
+"%s"
+msgstr "Failo pakeitimai prarasti"
+
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
 
@@ -698,9 +704,6 @@ msgstr "Leidžia lėtame terminale"
 msgid "Use stickchars to draw"
 msgstr "Naudoja alternatyvią pseudografiką"
 
-msgid "Resets soft keys on HP terminals"
-msgstr "Iš naujo nustato „soft keys“ HP terminaluose"
-
 msgid "Load definitions of key bindings from specified file"
 msgstr "Įkelti klavišų saistymo nustatymus iš failo"
 
@@ -714,54 +717,11 @@ msgstr "Paleidžia nespalvotu režimu"
 msgid "Request to run in color mode"
 msgstr "Paleidžia spalvotu režimu"
 
-msgid "Specifies a color configuration"
-msgstr "Nurodo spalvų konfigūraciją"
-
-msgid "<string>"
-msgstr ""
-
 msgid "Show mc with specified skin"
 msgstr ""
 
-#. TRANSLATORS: don't translate keywords
-msgid ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
-"\n"
-" Keywords:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace, "
-"editnonprintable,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+msgid "<string>"
 msgstr ""
-
-#. TRANSLATORS: don't translate color names and attributes
-msgid ""
-"Standard Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-"Extended colors, when 256 colors are available:\n"
-"   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
-"\n"
-"Attributes:\n"
-"   bold, italic, underline, reverse, blink; append more with '+'\n"
-msgstr ""
-
-msgid "Color options"
-msgstr "Spalvų parinktys"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
 msgstr ""
@@ -787,6 +747,9 @@ msgstr "Pagrindinės parinktys"
 
 msgid "Terminal options"
 msgstr "Terminalo parinktys"
+
+msgid "Color options"
+msgstr "Spalvų parinktys"
 
 msgid "Arguments parse error!"
 msgstr ""
@@ -4036,11 +3999,6 @@ msgid ""
 "wrong archive name"
 msgstr ""
 
-msgid ""
-"EXTFS virtual file system:\n"
-"cannot build command"
-msgstr ""
-
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Įspėjimas: nepavyko pereiti į aplanką %s\n"
@@ -4483,6 +4441,12 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Resets soft keys on HP terminals"
+#~ msgstr "Iš naujo nustato „soft keys“ HP terminaluose"
+
+#~ msgid "Specifies a color configuration"
+#~ msgstr "Nurodo spalvų konfigūraciją"
 
 #~ msgid "&Undelete files (ext2fs only)"
 #~ msgstr "Atk&urti failus  (tik ext2fs)"

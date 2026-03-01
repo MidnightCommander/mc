@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-02-01 14:37+0100\n"
+"POT-Creation-Date: 2026-03-01 11:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -584,6 +584,12 @@ msgstr "Aloitetaan lineaarinen transferrointi..."
 msgid "Getting file"
 msgstr "Tuodaan tiedostoa"
 
+#, fuzzy, c-format
+msgid ""
+"Changes to file lost:\n"
+"%s"
+msgstr "Muutokset tiedostoon menetetty"
+
 msgid "Changes to file lost"
 msgstr "Muutokset tiedostoon menetetty"
 
@@ -703,9 +709,6 @@ msgstr "Hitaissa päätteissä ajaminen"
 msgid "Use stickchars to draw"
 msgstr "Käytä pylväitä piirtämiseen"
 
-msgid "Resets soft keys on HP terminals"
-msgstr ""
-
 msgid "Load definitions of key bindings from specified file"
 msgstr ""
 
@@ -718,54 +721,11 @@ msgstr "Pyytää ajettavaksi mustavalkoisena"
 msgid "Request to run in color mode"
 msgstr "Pyytää ajettavaksi värillisenä"
 
-msgid "Specifies a color configuration"
-msgstr "Määrittää värikonfiguraation"
-
-msgid "<string>"
-msgstr "<string>"
-
 msgid "Show mc with specified skin"
 msgstr "Näytä mc määritetyllä ulkoasulla"
 
-#. TRANSLATORS: don't translate keywords
-msgid ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
-"\n"
-" Keywords:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace, "
-"editnonprintable,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-msgstr ""
-
-#. TRANSLATORS: don't translate color names and attributes
-msgid ""
-"Standard Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-"Extended colors, when 256 colors are available:\n"
-"   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
-"\n"
-"Attributes:\n"
-"   bold, italic, underline, reverse, blink; append more with '+'\n"
-msgstr ""
-
-msgid "Color options"
-msgstr "Väriasetukset"
+msgid "<string>"
+msgstr "<string>"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
 msgstr ""
@@ -791,6 +751,9 @@ msgstr "Pääasetukset"
 
 msgid "Terminal options"
 msgstr "Terminaalin asetukset"
+
+msgid "Color options"
+msgstr "Väriasetukset"
 
 msgid "Arguments parse error!"
 msgstr "Argumenttien rakennevirhe!"
@@ -3987,11 +3950,6 @@ msgid ""
 "wrong archive name"
 msgstr ""
 
-msgid ""
-"EXTFS virtual file system:\n"
-"cannot build command"
-msgstr ""
-
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Varoitus: Kansion %s avaaminen ei onnistu\n"
@@ -4428,6 +4386,9 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Specifies a color configuration"
+#~ msgstr "Määrittää värikonfiguraation"
 
 #~ msgid "while allocating block buffer"
 #~ msgstr "samalla kun valitaan alueen puskuria"

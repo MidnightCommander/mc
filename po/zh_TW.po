@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-02-01 14:37+0100\n"
+"POT-Creation-Date: 2026-03-01 11:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: MP Wang, 2025\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -575,6 +575,12 @@ msgstr "開始線性傳輸...."
 msgid "Getting file"
 msgstr "取得檔案中"
 
+#, fuzzy, c-format
+msgid ""
+"Changes to file lost:\n"
+"%s"
+msgstr "欲切換到的檔案已遺失"
+
 msgid "Changes to file lost"
 msgstr "欲切換到的檔案已遺失"
 
@@ -694,9 +700,6 @@ msgstr "於慢速的終端機上執行"
 msgid "Use stickchars to draw"
 msgstr "使用stickchars繪製"
 
-msgid "Resets soft keys on HP terminals"
-msgstr "在 HP 終端機上重設軟鍵 (soft keys)"
-
 msgid "Load definitions of key bindings from specified file"
 msgstr ""
 
@@ -709,54 +712,11 @@ msgstr "要求在黑白模式下執行"
 msgid "Request to run in color mode"
 msgstr "要求在彩色模式中執行"
 
-msgid "Specifies a color configuration"
-msgstr "指定一組色彩選項"
-
-msgid "<string>"
-msgstr ""
-
 msgid "Show mc with specified skin"
 msgstr "使用指定面板來顯示 mc"
 
-#. TRANSLATORS: don't translate keywords
-msgid ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
-"\n"
-" Keywords:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace, "
-"editnonprintable,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+msgid "<string>"
 msgstr ""
-
-#. TRANSLATORS: don't translate color names and attributes
-msgid ""
-"Standard Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-"Extended colors, when 256 colors are available:\n"
-"   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
-"\n"
-"Attributes:\n"
-"   bold, italic, underline, reverse, blink; append more with '+'\n"
-msgstr ""
-
-msgid "Color options"
-msgstr "色彩選項"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
 msgstr ""
@@ -785,6 +745,9 @@ msgstr "主要選項"
 
 msgid "Terminal options"
 msgstr "終端機選項"
+
+msgid "Color options"
+msgstr "色彩選項"
 
 msgid "Arguments parse error!"
 msgstr ""
@@ -4012,11 +3975,6 @@ msgid ""
 "wrong archive name"
 msgstr ""
 
-msgid ""
-"EXTFS virtual file system:\n"
-"cannot build command"
-msgstr ""
-
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "警告：無法開啟目錄 %s\n"
@@ -4472,6 +4430,12 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
+
+#~ msgid "Resets soft keys on HP terminals"
+#~ msgstr "在 HP 終端機上重設軟鍵 (soft keys)"
+
+#~ msgid "Specifies a color configuration"
+#~ msgstr "指定一組色彩選項"
 
 #~ msgid "&Undelete files (ext2fs only)"
 #~ msgstr "復原檔案 (只能用在 ext2fs 上面)"
