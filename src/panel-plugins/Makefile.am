@@ -5,5 +5,6 @@ SUBDIRS += sftp
 endif
 
 SUBDIRS += docker
+SUBDIRS += git
 
-DIST_SUBDIRS = systemd sftp docker
+DIST_SUBDIRS = systemd sftp docker git

@@ -1,0 +1,19 @@
+[Git panel plugin]
+
+Git panel plugin
+
+Tip: press F3 on a commit entry to view commit description.
+
+Actions:
+  F3         - show commit description for selected commit/parent item
+  Shift-F3   - show diff for selected file (in commit/status views)
+  Shift-F5   - stage selected file(s)
+  Shift-F6   - unstage selected file(s)
+  Shift-F8   - reset selected file(s) to HEAD (rollback)
+  Ctrl-R     - refresh panel content
+
+Notes:
+  /branches shows local and remote branches.
+  /commits shows commit history for selected branch.
+  In commit view, parent commits are shown as directories.
+
