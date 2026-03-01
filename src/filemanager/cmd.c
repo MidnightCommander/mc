@@ -131,6 +131,19 @@ do_view_cmd (WPanel *panel, gboolean plain_view)
     if (fe == NULL)
         return;
 
+    if (panel->is_plugin_panel && panel->plugin != NULL && panel->plugin_data != NULL
+        && panel->plugin->view != NULL)
+    {
+        mc_pp_result_t r;
+
+        r = panel->plugin->view (panel->plugin_data, fe->fname->str, &fe->st, plain_view);
+        if (r == MC_PPR_OK || r == MC_PPR_FAILED)
+        {
+            repaint_screen ();
+            return;
+        }
+    }
+
     // Directories are viewed by changing to them
     if (S_ISDIR (fe->st.st_mode) || link_isdir (fe))
     {
@@ -1657,6 +1670,7 @@ plugin_panel_copy_cmd (WPanel *panel)
     {
         const char *name = (const char *) g_ptr_array_index (names, i);
         char *local_path = NULL;
+        char *base_name = NULL;
         mc_pp_result_t r;
         char *dest_path;
 
@@ -1667,7 +1681,8 @@ plugin_panel_copy_cmd (WPanel *panel)
             continue;
         }
 
-        dest_path = mc_build_filename (dest_dir, name, (char *) NULL);
+        base_name = g_path_get_basename (name);
+        dest_path = mc_build_filename (dest_dir, base_name, (char *) NULL);
 
         if (!copy_local_file (local_path, dest_path))
             message (D_ERROR, MSG_ERROR, _ ("Cannot copy %s"), name);
@@ -1675,6 +1690,7 @@ plugin_panel_copy_cmd (WPanel *panel)
         unlink (local_path);
         g_free (local_path);
         g_free (dest_path);
+        g_free (base_name);
     }
 
     g_ptr_array_free (names, TRUE);
@@ -1792,6 +1808,7 @@ plugin_panel_move_cmd (WPanel *panel)
     {
         const char *name = (const char *) g_ptr_array_index (names, i);
         char *local_path = NULL;
+        char *base_name = NULL;
         mc_pp_result_t r;
         char *dest_path;
 
@@ -1802,7 +1819,8 @@ plugin_panel_move_cmd (WPanel *panel)
             continue;
         }
 
-        dest_path = mc_build_filename (dest_dir, name, (char *) NULL);
+        base_name = g_path_get_basename (name);
+        dest_path = mc_build_filename (dest_dir, base_name, (char *) NULL);
 
         if (!copy_local_file (local_path, dest_path))
         {
@@ -1810,12 +1828,14 @@ plugin_panel_move_cmd (WPanel *panel)
             unlink (local_path);
             g_free (local_path);
             g_free (dest_path);
+            g_free (base_name);
             continue;
         }
 
         unlink (local_path);
         g_free (local_path);
         g_free (dest_path);
+        g_free (base_name);
         g_ptr_array_add (moved_names, g_strdup (name));
     }
 

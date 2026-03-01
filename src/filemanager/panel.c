@@ -9,6 +9,7 @@
    Timur Bakeyev, 1997, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
    Andrew Borodin <aborodin@vmail.ru>, 2013-2023
+   Ilia Maslakov <il.smind@gmail.ru>, 2026
 
    This file is part of the Midnight Commander.
 
@@ -130,6 +131,9 @@ typedef struct format_item_t
     const char *(*string_fn) (const file_entry_t *fe, int len);
     char *title;
     const char *id;
+    gboolean is_separator;
+    gboolean is_plugin_column;
+    gboolean own_id;
 } format_item_t;
 
 /* File name scroll states */
@@ -326,6 +330,8 @@ set_colors (const WPanel *panel)
 static void
 format_item_free (format_item_t *format)
 {
+    if (format->own_id)
+        g_free ((char *) format->id);
     g_free (format->title);
     g_free (format);
 }
@@ -720,6 +726,37 @@ panel_items (const WPanel *p)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* Plugin custom columns */
+
+static const mc_panel_column_t *
+panel_plugin_get_columns (const WPanel *panel, size_t *count)
+{
+    if (count != NULL)
+        *count = 0;
+
+    if (panel == NULL || !panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL
+        || panel->plugin->get_columns == NULL)
+        return NULL;
+
+    return panel->plugin->get_columns (panel->plugin_data, count);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const char *
+panel_plugin_get_column_value (const WPanel *panel, const file_entry_t *fe, const char *column_id)
+{
+    if (panel == NULL || fe == NULL || column_id == NULL || fe->fname == NULL || fe->fname->str == NULL)
+        return NULL;
+
+    if (!panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL
+        || panel->plugin->get_column_value == NULL)
+        return NULL;
+
+    return panel->plugin->get_column_value (panel->plugin_data, fe->fname->str, column_id);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Formats the file number file_index of panel in the buffer dest */
 
 static filename_scroll_flag_t
@@ -746,7 +783,7 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
     {
         format_item_t *fi = (format_item_t *) format->data;
 
-        if (fi->string_fn != NULL)
+        if (fi->string_fn != NULL || fi->is_plugin_column)
         {
             const char *txt = " ";
             int len, perm = 0;
@@ -754,7 +791,15 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
             int name_offset = 0;
 
             if (fe != NULL)
-                txt = fi->string_fn (fe, fi->field_len);
+            {
+                if (fi->is_plugin_column)
+                    txt = panel_plugin_get_column_value (panel, fe, fi->id);
+                else
+                    txt = fi->string_fn (fe, fi->field_len);
+            }
+
+            if (txt == NULL)
+                txt = " ";
 
             len = fi->field_len;
             if (len + length > width)
@@ -811,12 +856,15 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
         }
         else
         {
-            if (attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT)
-                tty_setcolor (CORE_SELECTED_COLOR);
-            else
-                tty_setcolor (CORE_FRAME_COLOR);
-            tty_print_one_vline (TRUE);
-            length++;
+            if (fi->is_separator)
+            {
+                if (attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT)
+                    tty_setcolor (CORE_SELECTED_COLOR);
+                else
+                    tty_setcolor (CORE_FRAME_COLOR);
+                tty_print_one_vline (TRUE);
+                length++;
+            }
         }
     }
 
@@ -1138,6 +1186,40 @@ show_free_space (const WPanel *panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_print_plugin_footer (const WPanel *panel)
+{
+    const Widget *w = CONST_WIDGET (panel);
+    const char *footer = NULL;
+    int max_len;
+    char *tmp;
+
+    if (!panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL)
+        return;
+
+    if (panel->plugin->get_footer != NULL)
+        footer = panel->plugin->get_footer (panel->plugin_data);
+
+    if (footer == NULL || *footer == '\0')
+        return;
+
+    max_len = MAX (w->rect.cols - 20, 0);
+    if (max_len <= 0)
+        return;
+
+    if (panel->plugin->proto != NULL)
+        tmp = g_strdup_printf ("[%s: %s]", panel->plugin->proto, footer);
+    else
+        tmp = g_strdup (footer);
+
+    widget_gotoyx (w, w->rect.lines - 1, 2);
+    tty_setcolor (CORE_REVERSE_COLOR);
+    tty_print_string (str_term_trim (tmp, max_len));
+    g_free (tmp);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Prepare path string for showing in panel's header.
  * Passwords will removed, also home dir will replaced by ~
@@ -1273,9 +1355,9 @@ show_dir (const WPanel *panel)
         {
             format_item_t *fi = (format_item_t *) format->data;
 
-            if (fi->string_fn != NULL)
+            if (fi->string_fn != NULL || fi->is_plugin_column)
                 col += fi->field_len;
-            else
+            else if (fi->is_separator)
                 show_vertical_separator_tee (panel, ++col);
         }
 
@@ -1283,17 +1365,20 @@ show_dir (const WPanel *panel)
             show_vertical_separator_tee (panel, ++col);
     }
 
-    widget_gotoyx (w, 0, 1);
-    tty_print_string (panel_history_prev_item_char);
+    if (!panel->is_plugin_panel)
+    {
+        widget_gotoyx (w, 0, 1);
+        tty_print_string (panel_history_prev_item_char);
 
-    tmp = panels_options.show_dot_files ? panel_hiddenfiles_show_char : panel_hiddenfiles_hide_char;
-    tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_char,
-                           panel_history_next_item_char);
+        tmp = panels_options.show_dot_files ? panel_hiddenfiles_show_char : panel_hiddenfiles_hide_char;
+        tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_char,
+                               panel_history_next_item_char);
 
-    widget_gotoyx (w, 0, w->rect.cols - 6);
-    tty_print_string (tmp);
+        widget_gotoyx (w, 0, w->rect.cols - 6);
+        tty_print_string (tmp);
 
-    g_free (tmp);
+        g_free (tmp);
+    }
 
     tty_setcolor (CORE_NORMAL_COLOR);
     widget_gotoyx (w, 0, 3);
@@ -1373,6 +1458,7 @@ show_dir (const WPanel *panel)
         }
     }
 
+    panel_print_plugin_footer (panel);
     show_free_space (panel);
 
     if (panel->active)
@@ -1618,7 +1704,7 @@ panel_print_header (const WPanel *panel)
         {
             format_item_t *fi = (format_item_t *) format->data;
 
-            if (fi->string_fn != NULL)
+            if (fi->string_fn != NULL || fi->is_plugin_column)
             {
                 g_string_set_size (format_txt, 0);
 
@@ -1639,7 +1725,7 @@ panel_print_header (const WPanel *panel)
                 tty_setcolor (CORE_HEADER_COLOR);
                 tty_print_string (str_fit_to_term (format_txt->str, fi->field_len, J_CENTER_LEFT));
             }
-            else
+            else if (fi->is_separator)
             {
                 tty_setcolor (CORE_FRAME_COLOR);
                 tty_print_one_vline (TRUE);
@@ -1655,7 +1741,7 @@ panel_print_header (const WPanel *panel)
 
     g_string_free (format_txt, TRUE);
 
-    if (panel->list_format != list_long)
+    if (panel->list_format != list_long && !panel->is_plugin_panel)
         panel_paint_sort_info (panel);
 }
 
@@ -1756,6 +1842,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, gboolean 
         align_crt_t justify;          // Which mode.
         gboolean set_justify = TRUE;  // flag: set justification mode?
         gboolean found = FALSE;
+        const mc_panel_column_t *plugin_col_match = NULL;
         size_t klen = 0;
 
         darr = g_new0 (format_item_t, 1);
@@ -1783,11 +1870,31 @@ parse_display_format (WPanel *panel, const char *format, char **error, gboolean 
             break;
         }
 
-        for (i = 0; !found && panel_fields[i].id != NULL; i++)
+        if (panel->is_plugin_panel)
         {
-            klen = strlen (panel_fields[i].id);
-            found = strncmp (format, panel_fields[i].id, klen) == 0;
+            size_t c;
+            size_t plugin_cols_count = 0;
+            const mc_panel_column_t *plugin_cols = panel_plugin_get_columns (panel, &plugin_cols_count);
+
+            for (c = 0; plugin_cols != NULL && c < plugin_cols_count && plugin_col_match == NULL; c++)
+            {
+                if (plugin_cols[c].id == NULL)
+                    continue;
+                klen = strlen (plugin_cols[c].id);
+                if (strncmp (format, plugin_cols[c].id, klen) == 0)
+                    plugin_col_match = &plugin_cols[c];
+            }
         }
+        if (plugin_col_match == NULL)
+        {
+            for (i = 0; !found && panel_fields[i].id != NULL; i++)
+            {
+                klen = strlen (panel_fields[i].id);
+                found = strncmp (format, panel_fields[i].id, klen) == 0;
+            }
+        }
+        else
+            found = FALSE;
 
         if (found)
         {
@@ -1800,6 +1907,10 @@ parse_display_format (WPanel *panel, const char *format, char **error, gboolean 
             darr->id = panel_fields[i].id;
             darr->expand = panel_fields[i].expands;
             darr->just_mode = panel_fields[i].default_just;
+            darr->is_separator = (panel_fields[i].string_fn == NULL
+                                  && strcmp (panel_fields[i].id, "|") == 0);
+            darr->is_plugin_column = FALSE;
+            darr->own_id = FALSE;
 
             if (set_justify)
             {
@@ -1827,6 +1938,57 @@ parse_display_format (WPanel *panel, const char *format, char **error, gboolean 
                 format = skip_numbers (format);
 
                 // Now, if they insist on expansion
+                if (*format == '+')
+                {
+                    darr->expand = TRUE;
+                    format++;
+                }
+            }
+        }
+        else if (plugin_col_match != NULL)
+        {
+            const mc_panel_column_t *plugin_col = plugin_col_match;
+
+            format += klen;
+
+            if (plugin_col == NULL)
+            {
+                g_slist_free_full (home, (GDestroyNotify) format_item_free);
+                *error = g_strdup (_ ("Plugin column metadata not found"));
+                return NULL;
+            }
+
+            darr->requested_field_len = plugin_col->min_size;
+            darr->string_fn = NULL;
+            darr->title = g_strdup (plugin_col->title != NULL ? plugin_col->title : plugin_col->id);
+            darr->id = g_strdup (plugin_col->id);
+            darr->expand = plugin_col->expands;
+            darr->just_mode = plugin_col->default_just;
+            darr->is_separator = FALSE;
+            darr->is_plugin_column = TRUE;
+            darr->own_id = TRUE;
+
+            if (set_justify)
+            {
+                if (IS_FIT (darr->just_mode))
+                    darr->just_mode = MAKE_FIT (justify);
+                else
+                    darr->just_mode = justify;
+            }
+
+            format = skip_separators (format);
+
+            if (*format == ':')
+            {
+                int req_length;
+
+                darr->expand = FALSE;
+                format++;
+                req_length = atoi (format);
+                darr->requested_field_len = req_length;
+
+                format = skip_numbers (format);
+
                 if (*format == '+')
                 {
                     darr->expand = TRUE;
@@ -1893,6 +2055,8 @@ use_display_format (WPanel *panel, const char *format, char **error, gboolean is
         format_item_t *fi = (format_item_t *) darr->data;
 
         fi->field_len = fi->requested_field_len;
+        if (!fi->is_separator && fi->field_len < 1)
+            fi->field_len = 1;
         if (fi->expand)
             expand_top++;
     }
@@ -1947,6 +2111,62 @@ use_display_format (WPanel *panel, const char *format, char **error, gboolean is
     }
 
     return home;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_plugin_apply_default_columns_format (WPanel *panel)
+{
+    char *error = NULL;
+    const char *configured_fmt = NULL;
+    GString *fmt;
+    GSList *new_format;
+    size_t i;
+    size_t cols_count = 0;
+    const mc_panel_column_t *cols;
+
+    if (panel == NULL || !panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL)
+        return;
+
+    cols = panel_plugin_get_columns (panel, &cols_count);
+    if (cols == NULL || cols_count == 0)
+        return;
+
+    if (panel->plugin->get_default_format != NULL)
+        configured_fmt = panel->plugin->get_default_format (panel->plugin_data);
+
+    if (configured_fmt != NULL && *configured_fmt != '\0')
+        fmt = g_string_new (configured_fmt);
+    else
+        fmt = g_string_new ("");
+
+    if (fmt->len == 0)
+    {
+        g_string_append (fmt, "name");
+
+        for (i = 0; i < cols_count; i++)
+        {
+            if (cols[i].id == NULL || !cols[i].use_in_user_format)
+                continue;
+
+            g_string_append (fmt, " | ");
+            g_string_append (fmt, cols[i].id);
+        }
+
+        g_string_append (fmt, " | size");
+    }
+
+    new_format = use_display_format (panel, fmt->str, &error, FALSE);
+    if (new_format != NULL)
+    {
+        g_slist_free_full (panel->format, (GDestroyNotify) format_item_free);
+        panel->format = new_format;
+        panel->list_format = list_user;
+    }
+
+    g_free (error);
+    g_string_free (fmt, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2354,6 +2574,15 @@ goto_parent_dir (WPanel *panel)
             r = panel->plugin->chdir (panel->plugin_data, "..");
             if (r == MC_PPR_OK)
             {
+                if (panel->plugin->get_focus_name != NULL)
+                {
+                    const char *plugin_focus = panel->plugin->get_focus_name (panel->plugin_data);
+                    if (plugin_focus != NULL && *plugin_focus != '\0')
+                    {
+                        g_free (focus_name);
+                        focus_name = g_strdup (plugin_focus);
+                    }
+                }
                 panel_plugin_reload (panel);
                 if (focus_name != NULL)
                     panel_set_current_by_name (panel, focus_name);
@@ -3070,6 +3299,15 @@ do_enter (WPanel *panel)
             r = panel->plugin->enter (panel->plugin_data, fe->fname->str, &fe->st);
             if (r == MC_PPR_OK)
             {
+                if (panel->plugin->get_focus_name != NULL)
+                {
+                    const char *plugin_focus = panel->plugin->get_focus_name (panel->plugin_data);
+                    if (plugin_focus != NULL && *plugin_focus != '\0')
+                    {
+                        g_free (focus_name);
+                        focus_name = g_strdup (plugin_focus);
+                    }
+                }
                 panel_plugin_reload (panel);
                 if (focus_name != NULL)
                     panel_set_current_by_name (panel, focus_name);
@@ -3087,6 +3325,15 @@ do_enter (WPanel *panel)
             r = panel->plugin->chdir (panel->plugin_data, fe->fname->str);
             if (r == MC_PPR_OK)
             {
+                if (panel->plugin->get_focus_name != NULL)
+                {
+                    const char *plugin_focus = panel->plugin->get_focus_name (panel->plugin_data);
+                    if (plugin_focus != NULL && *plugin_focus != '\0')
+                    {
+                        g_free (focus_name);
+                        focus_name = g_strdup (plugin_focus);
+                    }
+                }
                 panel_plugin_reload (panel);
                 if (focus_name != NULL)
                     panel_set_current_by_name (panel, focus_name);
@@ -3922,6 +4169,41 @@ host_message_impl (mc_panel_host_t *host, int flags, const char *title, const ch
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+host_run_command_impl (mc_panel_host_t *host, const char *command, int flags)
+{
+    (void) host;
+    shell_execute (command, flags);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+host_open_diff_impl (mc_panel_host_t *host, const char *left_path, const char *right_path)
+{
+    char *q_left, *q_right, *cmd;
+
+    (void) host;
+
+    if (left_path == NULL || right_path == NULL || *left_path == '\0' || *right_path == '\0')
+        return FALSE;
+
+    if (g_find_program_in_path ("mcdiff") == NULL)
+        return FALSE;
+
+    q_left = g_shell_quote (left_path);
+    q_right = g_shell_quote (right_path);
+    cmd = g_strdup_printf ("mcdiff %s %s", q_left, q_right);
+    shell_execute (cmd, EXECUTE_INTERNAL);
+    g_free (cmd);
+    g_free (q_right);
+    g_free (q_left);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 host_close_plugin_impl (mc_panel_host_t *host, const char *dir_path)
 {
     WPanel *panel = (WPanel *) host->host_data;
@@ -3950,19 +4232,39 @@ host_get_next_marked_impl (mc_panel_host_t *host, int *current)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static const GString *
+host_get_current_impl (mc_panel_host_t *host)
+{
+    WPanel *panel = (WPanel *) host->host_data;
+    const file_entry_t *fe;
+
+    fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return NULL;
+
+    return fe->fname;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 panel_plugin_reload (WPanel *panel)
 {
     gboolean was_dotdot = FALSE;
+    char *focus_name = NULL;
 
     if (!panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL)
         return;
 
     {
         const file_entry_t *fe = panel_current_entry (panel);
-        if (fe != NULL && fe->fname != NULL && fe->fname->str != NULL
-            && strcmp (fe->fname->str, "..") == 0)
-            was_dotdot = TRUE;
+        if (fe != NULL && fe->fname != NULL && fe->fname->str != NULL)
+        {
+            if (strcmp (fe->fname->str, "..") == 0)
+                was_dotdot = TRUE;
+            else
+                focus_name = g_strdup (fe->fname->str);
+        }
     }
 
     panel_clean_dir (panel);
@@ -3975,9 +4277,13 @@ panel_plugin_reload (WPanel *panel)
 
     panel_re_sort (panel);
 
+    if (focus_name != NULL)
+        panel_set_current_by_name (panel, focus_name);
+    else
     if (was_dotdot && panel->dir.len > 1)
         panel_set_current (panel, 1);
 
+    g_free (focus_name);
     panel->dirty = TRUE;
 }
 
@@ -4002,7 +4308,28 @@ panel_key (WPanel *panel, int key)
 
     command = widget_lookup_key (WIDGET (panel), key);
     if (command != CK_IgnoreKey)
+    {
+        if (panel->is_plugin_panel && panel->plugin != NULL && panel->plugin_data != NULL
+            && panel->plugin->handle_key != NULL)
+        {
+            mc_pp_result_t r;
+
+            r = panel->plugin->handle_key (panel->plugin_data, command);
+            if (r != MC_PPR_OK && key != (int) command)
+            {
+                /* Fallback for plugin-local hotkeys that are stored as raw terminal keys
+                   (e.g. KEY_F(13)) rather than command ids (CK_*). */
+                r = panel->plugin->handle_key (panel->plugin_data, key);
+            }
+            if (r == MC_PPR_OK)
+            {
+                if (command != CK_View && command != CK_ViewRaw)
+                    panel_plugin_reload (panel);
+                return MSG_HANDLED;
+            }
+        }
         return panel_execute_cmd (panel, command);
+    }
 
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
@@ -4080,19 +4407,22 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case MSG_KEY:
-        // let plugin try to handle the key first
-        if (panel->is_plugin_panel && panel->plugin != NULL && panel->plugin_data != NULL
-            && panel->plugin->handle_key != NULL)
-        {
-            if (panel->plugin->handle_key (panel->plugin_data, parm) == MC_PPR_OK)
-            {
-                panel_plugin_reload (panel);
-                return MSG_HANDLED;
-            }
-        }
         return panel_key (panel, parm);
 
     case MSG_ACTION:
+        if (panel->is_plugin_panel && panel->plugin != NULL && panel->plugin_data != NULL
+            && panel->plugin->handle_key != NULL)
+        {
+            mc_pp_result_t r;
+
+            r = panel->plugin->handle_key (panel->plugin_data, parm);
+            if (r == MC_PPR_OK)
+            {
+                if (parm != CK_View && parm != CK_ViewRaw)
+                    panel_plugin_reload (panel);
+                return MSG_HANDLED;
+            }
+        }
         return panel_execute_cmd (panel, parm);
 
     case MSG_DESTROY:
@@ -4976,6 +5306,12 @@ set_panel_formats (WPanel *p)
     char *err = NULL;
     int retcode = 0;
 
+    if (p != NULL && p->is_plugin_panel)
+    {
+        panel_plugin_apply_default_columns_format (p);
+        return 0;
+    }
+
     form = use_display_format (p, panel_format (p), &err, FALSE);
 
     if (err != NULL)
@@ -5799,9 +6135,12 @@ panel_plugin_activate (WPanel *panel, const mc_panel_plugin_t *plugin, const cha
     host->refresh = host_refresh_impl;
     host->set_hint = host_set_hint_impl;
     host->message = host_message_impl;
+    host->run_command = host_run_command_impl;
+    host->open_diff = host_open_diff_impl;
     host->close_plugin = host_close_plugin_impl;
     host->get_marked_count = host_get_marked_count_impl;
     host->get_next_marked = host_get_next_marked_impl;
+    host->get_current = host_get_current_impl;
     host->host_data = panel;
 
     panel->plugin_data = plugin->open (host, open_path);
@@ -5821,6 +6160,8 @@ panel_plugin_activate (WPanel *panel, const mc_panel_plugin_t *plugin, const cha
     // panel_clean_dir resets flags — restore them
     panel->is_panelized = TRUE;
     panel->is_plugin_panel = TRUE;
+
+    panel_plugin_apply_default_columns_format (panel);
 
     dir_list_init (&panel->dir);
     plugin->get_items (panel->plugin_data, &panel->dir);
@@ -5903,7 +6244,7 @@ panel_plugin_select_and_activate (WPanel *panel)
         }
 
         if (selected != NULL)
-            panel_plugin_activate (panel, selected, NULL);
+            panel_plugin_activate (panel, selected, vfs_path_as_str (panel->cwd_vpath));
     }
 }
 

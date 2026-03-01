@@ -63,6 +63,7 @@
 
 #include "lib/keybind.h"
 #include "lib/event.h"
+#include "lib/event-types.h"
 #include "lib/panel-plugin.h"
 
 #include "tree.h"
@@ -1269,9 +1270,44 @@ midnight_execute_cmd (Widget *sender, long command)
         panel_panelize_restore ();
         break;
     case CK_PanelPlugin:
-        panel_plugin_select_and_activate (current_panel);
+    {
+        WPanel *target_panel = current_panel;
+
+        if (sender == WIDGET (the_menubar))
+        {
+            menu_t *active_menu =
+                (menu_t *) g_list_nth_data (the_menubar->menu, (int) the_menubar->current);
+
+            if (active_menu == left_menu)
+                target_panel = left_panel;
+            else if (active_menu == right_menu)
+                target_panel = right_panel;
+        }
+
+        panel_plugin_select_and_activate (target_panel);
         break;
+    }
     case CK_Help:
+        if (current_panel != NULL && current_panel->is_plugin_panel && current_panel->plugin != NULL
+            && current_panel->plugin_data != NULL && current_panel->plugin->get_help_info != NULL)
+        {
+            const char *help_filename = NULL;
+            const char *help_node = NULL;
+            mc_pp_result_t r;
+
+            r = current_panel->plugin->get_help_info (current_panel->plugin_data, &help_filename,
+                                                      &help_node);
+            if (r == MC_PPR_OK)
+            {
+                ev_help_t event_data = { help_filename, help_node };
+                mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+                break;
+            }
+        }
+
+        if (current_panel != NULL
+            && send_message (current_panel, filemanager, MSG_ACTION, CK_Help, NULL) == MSG_HANDLED)
+            break;
         help_cmd ();
         break;
     case CK_History:

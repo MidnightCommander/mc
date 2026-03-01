@@ -6,6 +6,7 @@
 #define MC__PANEL_PLUGIN_H
 
 #include "lib/global.h"
+#include "lib/strutil.h"
 
 /*
  * Note: get_items callback receives a dir_list* (from src/filemanager/dir.h)
@@ -14,7 +15,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MC_PANEL_PLUGIN_API_VERSION 1
+#define MC_PANEL_PLUGIN_API_VERSION 2
 #define MC_PANEL_PLUGIN_ENTRY       "mc_panel_plugin_register"
 
 /*** enums ***************************************************************************************/
@@ -38,15 +39,28 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+typedef struct mc_panel_column_t
+{
+    const char *id;
+    const char *title;
+    int min_size;
+    gboolean expands;
+    align_crt_t default_just;
+    gboolean use_in_user_format;
+} mc_panel_column_t;
+
 /* What mc provides to the plugin */
 typedef struct mc_panel_host_t
 {
     void (*refresh) (struct mc_panel_host_t *host);
     void (*set_hint) (struct mc_panel_host_t *host, const char *text);
     void (*message) (struct mc_panel_host_t *host, int flags, const char *title, const char *text);
+    void (*run_command) (struct mc_panel_host_t *host, const char *command, int flags);
+    gboolean (*open_diff) (struct mc_panel_host_t *host, const char *left_path, const char *right_path);
     void (*close_plugin) (struct mc_panel_host_t *host, const char *dir_path);
     int (*get_marked_count) (struct mc_panel_host_t *host);
     const GString *(*get_next_marked) (struct mc_panel_host_t *host, int *current);
+    const GString *(*get_current) (struct mc_panel_host_t *host);
     void *host_data; /* opaque, points to WPanel internally */
 } mc_panel_host_t;
 
@@ -71,11 +85,29 @@ typedef struct mc_panel_plugin_t
     /* Optional (NULL = not supported) */
     mc_pp_result_t (*chdir) (void *plugin_data, const char *path);
     mc_pp_result_t (*enter) (void *plugin_data, const char *fname, const struct stat *st);
+    /* Optional view hook for F3/Shift-F3 flow.
+       If returns MC_PPR_OK, core treats view command as handled.
+       If returns MC_PPR_NOT_SUPPORTED, core uses default view behavior. */
+    mc_pp_result_t (*view) (void *plugin_data, const char *fname, const struct stat *st,
+                            gboolean plain_view);
+    /* Optional help hook for plugin-specific help nodes/files.
+       If returns MC_PPR_OK, core opens help using returned filename/node.
+       filename may be NULL to use default help file; node may be NULL for default node. */
+    mc_pp_result_t (*get_help_info) (void *plugin_data, const char **filename, const char **node);
     mc_pp_result_t (*get_local_copy) (void *plugin_data, const char *fname, char **local_path);
     mc_pp_result_t (*delete_items) (void *plugin_data, const char **names, int count);
     const char *(*get_title) (void *plugin_data);
     mc_pp_result_t (*handle_key) (void *plugin_data, int key);
     mc_pp_result_t (*create_item) (void *plugin_data);
+    const mc_panel_column_t *(*get_columns) (void *plugin_data, size_t *count);
+    const char *(*get_column_value) (void *plugin_data, const char *fname, const char *column_id);
+    /* Optional footer text shown on panel bottom line near free space indicator. */
+    const char *(*get_footer) (void *plugin_data);
+    /* Optional preferred focus item name after plugin navigation/reload. */
+    const char *(*get_focus_name) (void *plugin_data);
+    /* Optional plugin-provided default panel format (e.g. "type name | status | size").
+       Return NULL or empty string to use generic core fallback from get_columns(). */
+    const char *(*get_default_format) (void *plugin_data);
 } mc_panel_plugin_t;
 
 typedef const mc_panel_plugin_t *(*mc_panel_plugin_register_fn) (void);

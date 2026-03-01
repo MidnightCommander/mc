@@ -1,121 +1,328 @@
-Dynamic VFS plugins for GNU Midnight Commander
-===============================================
+Plugin Development Guide for GNU Midnight Commander
+===================================================
 
-Since version 4.8.33 Midnight Commander can load VFS modules at runtime
-from shared objects (.so).  This lets distributions package optional VFS
-modules (and their external dependencies) separately from the core mc
-binary.
+This document describes how to create plugins from scratch for mc.
+It focuses on practical implementation details for:
 
-How it works
-------------
+- panel plugins (filemanager virtual panels)
+- editor plugins (mcedit extensions)
 
-At startup, after initialising the built-in (static) VFS modules,
-mc scans the directory specified by --with-vfs-plugins-dir (default:
-${libdir}/mc/vfs-plugins).  Every .so file found there is opened with
-GModule (dlopen) and probed for the symbol:
+If you need API declarations, use these headers as source of truth:
 
-    void mc_vfs_plugin_init (void);
-
-If the symbol is found it is called immediately.  The plugin is expected
-to register its VFS class via vfs_init_subclass() / vfs_register_class()
--- exactly the same way a statically linked module does.
-
-The mc binary is linked with -export-dynamic so that plugin code can
-call back into mc (vfs_init_subclass, tcp_init, query_dialog, etc.)
-without linking those symbols explicitly.
-
-GModule support (part of GLib) is required.  If it is unavailable at
-build time, dynamic loading is silently skipped.
+- lib/panel-plugin.h
+- lib/editor-plugin.h
 
 
-Current dynamic plugins
------------------------
+1. Plugin Types
+---------------
 
-  mc-vfs-sftp.so    SFTP filesystem (requires libssh2 >= 1.2.8)
+mc currently supports three plugin families:
 
+- VFS plugins (virtual filesystems)
+- Panel plugins (content providers for filemanager panels)
+- Editor plugins (extensions for mcedit)
 
-Candidates for future conversion
----------------------------------
-
-The following modules are currently compiled as static libraries and
-linked into libmc-vfs.la.  They are listed in order of conversion
-difficulty.
-
-Phase 1 -- no code changes needed (zero external symbol references):
-
-  tar       tar archives          no external deps
-  cpio      cpio archives         no external deps
-  extfs     extension filesystem  no external deps (uses helper scripts)
-  sfs       single-file fs        no external deps
-
-  These modules are fully self-contained: their init functions are only
-  called from src/vfs/plugins_init.c and no code outside src/vfs/
-  references their symbols.  Conversion is mechanical: rename the init
-  function to mc_vfs_plugin_init, switch Makefile.am from noinst to
-  vfsplugin, and remove the static init call.
-
-Phase 2 -- minimal refactoring (one exported global variable):
-
-  shell     SHELL/SSH filesystem  no external deps
-
-  src/setup.c reads/writes shell_directory_timeout.  A getter/setter
-  pair or an mc_config-based approach would decouple it.
-
-Phase 3 -- moderate refactoring (multiple exported globals):
-
-  ftpfs     FTP filesystem        no external deps
-
-  src/setup.c and src/filemanager/boxes.c directly access ~11 global
-  variables (ftpfs_use_netrc, ftpfs_proxy_host, ftpfs_anonymous_passwd,
-  ftpfs_use_passive_connections, etc.) for the configuration dialog and
-  settings persistence.  These would need to be exposed through a
-  callback/getter API or moved to mc_config key lookups.
-
-Not convertible:
-
-  local     local filesystem      core module, must be first
-
-  Other VFS modules depend on local_close(), local_read(), etc.
-  It must be initialised before any other VFS class.
+This guide focuses on panel/editor plugins. VFS has its own flow and is
+not the preferred starting point for new UI-oriented features.
 
 
-Writing a new plugin
+2. Common Rules
+---------------
+
+- Keep core plugin-agnostic.
+  Do not require plugin-specific checks in filemanager/editor core.
+- Use generic callback contracts from plugin headers.
+- Return explicit status codes:
+  - panel: MC_PPR_OK / MC_PPR_FAILED / MC_PPR_NOT_SUPPORTED
+  - editor: MC_EPR_OK / MC_EPR_FAILED / MC_EPR_NOT_SUPPORTED
+- Avoid shell string composition when a generic host callback exists.
+  Example: panel diff should use host->open_diff().
+
+
+3. Panel Plugins (Filemanager)
+------------------------------
+
+3.1 API Entry Point
+
+A panel plugin module must export:
+
+    const mc_panel_plugin_t *mc_panel_plugin_register (void);
+
+The descriptor must have:
+
+- api_version = MC_PANEL_PLUGIN_API_VERSION
+- unique name
+- required callbacks:
+  - open()
+  - close()
+  - get_items()
+
+
+3.2 Host Services Available to Plugin
+
+From mc_panel_host_t:
+
+- refresh(host)
+- set_hint(host, text)
+- message(host, flags, title, text)
+- run_command(host, command, flags)
+- open_diff(host, left_path, right_path)
+- close_plugin(host, dir_path)
+- get_marked_count(host)
+- get_next_marked(host, &current)
+- get_current(host)
+
+Use open_diff() for two-file diff integration.
+
+
+3.3 Minimal Panel Plugin Skeleton
+
+Minimal structure:
+
+- src/panel-plugins/myplugin/myplugin.c
+- src/panel-plugins/myplugin/Makefile.am
+
+Example descriptor:
+
+```c
+#include <config.h>
+#include "lib/global.h"
+#include "lib/panel-plugin.h"
+
+static void *my_open (mc_panel_host_t *host, const char *open_path)
+{
+    (void) host;
+    (void) open_path;
+    return g_new0 (int, 1);
+}
+
+static void my_close (void *plugin_data)
+{
+    g_free (plugin_data);
+}
+
+static mc_pp_result_t my_get_items (void *plugin_data, void *list_ptr)
+{
+    (void) plugin_data;
+    (void) list_ptr;
+    return MC_PPR_OK;
+}
+
+static const mc_panel_plugin_t my_plugin = {
+    .api_version = MC_PANEL_PLUGIN_API_VERSION,
+    .name = "myplugin",
+    .display_name = "My Plugin",
+    .proto = "my",
+    .prefix = "my:",
+    .flags = MC_PPF_NONE,
+
+    .open = my_open,
+    .close = my_close,
+    .get_items = my_get_items,
+};
+
+const mc_panel_plugin_t *
+mc_panel_plugin_register (void)
+{
+    return &my_plugin;
+}
+```
+
+
+3.4 Required get_items() Behavior
+
+get_items(plugin_data, list) receives a dir_list* as opaque void*.
+
+Important rule:
+
+- Do not add ".." yourself.
+  Core creates parent entry before calling plugin.
+
+
+3.5 Optional Panel Callbacks
+
+Navigation and actions:
+
+- chdir(plugin_data, path)
+- enter(plugin_data, fname, st)
+- handle_key(plugin_data, key_or_command)
+- create_item(plugin_data)                 (requires MC_PPF_CREATE)
+- delete_items(plugin_data, names, count)  (requires MC_PPF_DELETE)
+- get_local_copy(plugin_data, fname, &local_path)
+
+UI integration:
+
+- view(plugin_data, fname, st, plain_view)
+- get_help_info(plugin_data, &filename, &node)
+- get_title(plugin_data)
+- get_columns(plugin_data, &count)
+- get_column_value(plugin_data, fname, column_id)
+- get_default_format(plugin_data)
+- get_footer(plugin_data)
+- get_focus_name(plugin_data)
+
+
+3.6 Panel Build Integration
+
+Plugin Makefile.am example:
+
+```make
+panelplugindir = $(panel_plugins_dir)
+panelplugin_LTLIBRARIES = mc-panel-myplugin.la
+
+mc_panel_myplugin_la_SOURCES = myplugin.c
+mc_panel_myplugin_la_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
+mc_panel_myplugin_la_LDFLAGS = -module -avoid-version
+mc_panel_myplugin_la_LIBADD = $(GLIB_LIBS)
+```
+
+Then include subdir:
+
+- src/panel-plugins/Makefile.am: add SUBDIRS += myplugin
+- configure.ac: add src/panel-plugins/myplugin/Makefile
+
+
+4. Editor Plugins (mcedit)
+--------------------------
+
+4.1 API Entry Point
+
+An editor plugin module must export:
+
+    const mc_editor_plugin_t *mc_editor_plugin_register (void);
+
+Required callbacks:
+
+- open(host, editor_dialog)
+- close(plugin_data)
+
+
+4.2 Editor Callback Contract
+
+Main optional callbacks:
+
+- activate(plugin_data, edit)
+  Main action entry (for Plugins menu command).
+- configure(plugin_data, edit)
+  Settings action (for Plugin info/configure flow).
+- handle_action(plugin_data, command, edit)
+  Command dispatcher for editor actions.
+- query_state(plugin_data, edit, state)
+  Availability/enabled/reason for menu and execution logic.
+- handle_key(plugin_data, key, edit)
+  Raw key handling.
+- handle_event(plugin_data, edit, event_id, payload)
+  Generic event channel.
+- on_file_open(plugin_data, edit)
+- on_file_close(plugin_data, edit)
+
+State contract (mc_ep_state_t):
+
+- available: plugin can operate in current environment
+- enabled: action currently enabled
+- reason: optional explanation shown to user
+
+
+4.3 Editor Host Services
+
+From mc_editor_host_t:
+
+- refresh(host)
+- message(host, flags, title, text)
+
+
+4.4 Editor Build/Integration Modes
+
+There are two practical ways to integrate editor plugin code:
+
+- dynamic module (preferred for clean decoupling)
+- in-tree builtin registration (used for transition/bootstrapping)
+
+Dynamic mode requires module build/install to MC_EDITOR_PLUGINS_DIR.
+Builtin mode registers descriptors from core startup code and links
+plugin sources into editor library.
+
+When adding a new plugin from scratch, prefer dynamic mode unless
+project constraints require builtin linkage.
+
+
+5. Help Integration
+-------------------
+
+Panel plugin help:
+
+- implement get_help_info()
+- return filename/node
+- on MC_PPR_OK core opens that help node on F1
+
+Editor plugin help/config UX:
+
+- keep activate() for main action
+- keep configure() for settings
+- do not overload activate() with settings dialog
+
+
+6. Key Handling Model
+---------------------
+
+Panel plugins:
+
+- core first passes mapped command id to handle_key()
+- if not handled and raw key differs, core retries with raw key
+
+This allows either style:
+
+- CK_* command based
+- raw KEY_F(n) based
+
+Editor plugins:
+
+- use handle_action() for command semantics
+- use handle_key() for direct key interception only when needed
+
+
+7. Testing Checklist
 --------------------
 
-1.  Create a directory under src/vfs/ (e.g. src/vfs/myfs/).
+For panel plugins:
 
-2.  Implement your VFS class.  Use src/vfs/sftpfs/ as a reference.
-    The key function is:
+- plugin appears in Plugin panel menu
+- prefix activation works (example: my:.)
+- get_items() returns stable list and no duplicate ".."
+- F3/F4/F5/F8 behavior is correct for plugin entries
+- marked/current item flows work the same
+- help opens plugin-specific node if provided
 
-        void
-        mc_vfs_plugin_init (void)
-        {
-            tcp_init ();   /* if network-based */
-            vfs_init_subclass (&myfs_subclass, "myfs", flags, "myfs");
-            /* assign callbacks to vfs_myfs_ops->open, ->read, ... */
-            vfs_register_class (vfs_myfs_ops);
-        }
+For editor plugins:
 
-3.  In Makefile.am:
+- plugin appears in editor plugin menu/info
+- activate() runs primary action
+- configure() opens settings only
+- query_state() reflects backend/runtime availability
+- missing dependencies are reported via clear user message
 
-        vfsplugindir = $(vfs_plugins_dir)
-        vfsplugin_LTLIBRARIES = mc-vfs-myfs.la
 
-        mc_vfs_myfs_la_SOURCES = ...
-        mc_vfs_myfs_la_LDFLAGS = -module -avoid-version
-        mc_vfs_myfs_la_LIBADD  = $(GLIB_LIBS) $(MY_EXTERNAL_LIBS)
+8. Troubleshooting
+------------------
 
-    Do NOT add -no-undefined -- the plugin resolves mc symbols at
-    runtime via -export-dynamic on the mc binary.
+- Plugin not loaded:
+  - verify module installed into correct plugin directory
+  - verify exported symbol name (mc_panel_plugin_register or
+    mc_editor_plugin_register)
+  - verify api_version matches header constant
 
-4.  If the plugin has an external library dependency, add a PKG_CHECK
-    in an m4 file but do NOT append to MCLIBS -- the plugin links the
-    library itself.
+- Plugin listed but does nothing:
+  - check required callbacks are non-NULL
+  - confirm return codes (NOT_SUPPORTED vs FAILED)
 
-5.  Add SUBDIRS += myfs to src/vfs/Makefile.am (guarded by your
-    AM_CONDITIONAL), but do NOT add to libmc_vfs_la_LIBADD.
+- Key does not trigger:
+  - confirm command mapping and raw key fallback path
+  - verify plugin handle_key() compares against correct key ids
 
-6.  Install the resulting .so into $(vfs_plugins_dir) -- this happens
-    automatically via vfsplugin_LTLIBRARIES.
 
-7.  Test: run mc and verify your prefix is accessible (e.g. cd myfs://).
+9. Notes on VFS Plugins
+-----------------------
+
+VFS plugin mechanism still exists and uses mc_vfs_plugin_init().
+If you are implementing UI features, panel/editor plugins are usually
+a better fit than adding new VFS classes.
