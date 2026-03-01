@@ -567,6 +567,22 @@ AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 dnl Enable GModule when available (used for X11, aspell, and dynamic VFS plugins)
 AM_CONDITIONAL([HAVE_GMODULE], [test -n "$g_module_supported"])
 
+dnl Optional libsmbclient for Samba panel plugin
+SMBCLIENT_CFLAGS=""
+SMBCLIENT_LIBS=""
+have_panel_plugin_samba=no
+
+AC_CHECK_HEADERS([libsmbclient.h], [
+    AC_CHECK_LIB([smbclient], [smbc_new_context], [
+        SMBCLIENT_LIBS="-lsmbclient"
+        have_panel_plugin_samba=yes
+    ])
+])
+
+AC_SUBST([SMBCLIENT_CFLAGS])
+AC_SUBST([SMBCLIENT_LIBS])
+AM_CONDITIONAL([ENABLE_PANEL_PLUGIN_SAMBA], [test x"$have_panel_plugin_samba" = xyes])
+
 AC_ARG_ENABLE([configure-args],
     AS_HELP_STRING([--enable-configure-args], [Embed ./configure arguments into binaries]))
 if test "x$enable_configure_args" != xno; then
@@ -610,6 +626,7 @@ src/filemanager/Makefile
 
 src/panel-plugins/Makefile
 src/panel-plugins/hello/Makefile
+src/panel-plugins/samba/Makefile
 src/panel-plugins/systemd/Makefile
 src/panel-plugins/sftp/Makefile
 src/panel-plugins/docker/Makefile
