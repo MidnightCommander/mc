@@ -734,8 +734,8 @@ panel_plugin_get_columns (const WPanel *panel, size_t *count)
     if (count != NULL)
         *count = 0;
 
-    if (panel == NULL || !panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL
-        || panel->plugin->get_columns == NULL)
+    if (panel == NULL || !panel->is_plugin_panel || panel->plugin == NULL
+        || panel->plugin_data == NULL || panel->plugin->get_columns == NULL)
         return NULL;
 
     return panel->plugin->get_columns (panel->plugin_data, count);
@@ -746,7 +746,8 @@ panel_plugin_get_columns (const WPanel *panel, size_t *count)
 static const char *
 panel_plugin_get_column_value (const WPanel *panel, const file_entry_t *fe, const char *column_id)
 {
-    if (panel == NULL || fe == NULL || column_id == NULL || fe->fname == NULL || fe->fname->str == NULL)
+    if (panel == NULL || fe == NULL || column_id == NULL || fe->fname == NULL
+        || fe->fname->str == NULL)
         return NULL;
 
     if (!panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL
@@ -1370,7 +1371,8 @@ show_dir (const WPanel *panel)
         widget_gotoyx (w, 0, 1);
         tty_print_string (panel_history_prev_item_char);
 
-        tmp = panels_options.show_dot_files ? panel_hiddenfiles_show_char : panel_hiddenfiles_hide_char;
+        tmp = panels_options.show_dot_files ? panel_hiddenfiles_show_char
+                                            : panel_hiddenfiles_hide_char;
         tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_char,
                                panel_history_next_item_char);
 
@@ -1874,9 +1876,11 @@ parse_display_format (WPanel *panel, const char *format, char **error, gboolean 
         {
             size_t c;
             size_t plugin_cols_count = 0;
-            const mc_panel_column_t *plugin_cols = panel_plugin_get_columns (panel, &plugin_cols_count);
+            const mc_panel_column_t *plugin_cols =
+                panel_plugin_get_columns (panel, &plugin_cols_count);
 
-            for (c = 0; plugin_cols != NULL && c < plugin_cols_count && plugin_col_match == NULL; c++)
+            for (c = 0; plugin_cols != NULL && c < plugin_cols_count && plugin_col_match == NULL;
+                 c++)
             {
                 if (plugin_cols[c].id == NULL)
                     continue;
@@ -1907,8 +1911,8 @@ parse_display_format (WPanel *panel, const char *format, char **error, gboolean 
             darr->id = panel_fields[i].id;
             darr->expand = panel_fields[i].expands;
             darr->just_mode = panel_fields[i].default_just;
-            darr->is_separator = (panel_fields[i].string_fn == NULL
-                                  && strcmp (panel_fields[i].id, "|") == 0);
+            darr->is_separator =
+                (panel_fields[i].string_fn == NULL && strcmp (panel_fields[i].id, "|") == 0);
             darr->is_plugin_column = FALSE;
             darr->own_id = FALSE;
 
@@ -2126,7 +2130,8 @@ panel_plugin_apply_default_columns_format (WPanel *panel)
     size_t cols_count = 0;
     const mc_panel_column_t *cols;
 
-    if (panel == NULL || !panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL)
+    if (panel == NULL || !panel->is_plugin_panel || panel->plugin == NULL
+        || panel->plugin_data == NULL)
         return;
 
     cols = panel_plugin_get_columns (panel, &cols_count);
@@ -4279,8 +4284,7 @@ panel_plugin_reload (WPanel *panel)
 
     if (focus_name != NULL)
         panel_set_current_by_name (panel, focus_name);
-    else
-    if (was_dotdot && panel->dir.len > 1)
+    else if (was_dotdot && panel->dir.len > 1)
         panel_set_current (panel, 1);
 
     g_free (focus_name);

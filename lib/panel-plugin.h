@@ -56,7 +56,8 @@ typedef struct mc_panel_host_t
     void (*set_hint) (struct mc_panel_host_t *host, const char *text);
     void (*message) (struct mc_panel_host_t *host, int flags, const char *title, const char *text);
     void (*run_command) (struct mc_panel_host_t *host, const char *command, int flags);
-    gboolean (*open_diff) (struct mc_panel_host_t *host, const char *left_path, const char *right_path);
+    gboolean (*open_diff) (struct mc_panel_host_t *host, const char *left_path,
+                           const char *right_path);
     void (*close_plugin) (struct mc_panel_host_t *host, const char *dir_path);
     int (*get_marked_count) (struct mc_panel_host_t *host);
     const GString *(*get_next_marked) (struct mc_panel_host_t *host, int *current);

@@ -68,7 +68,7 @@ typedef struct
     char *selected_commit_list_name;
     int selected_branch_scope;
     char *pending_focus;
-    GPtrArray *commit_stack; /* stack of git_commit_nav_t* */
+    GPtrArray *commit_stack;     /* stack of git_commit_nav_t* */
     GHashTable *display_to_info; /* key: panel display name, value: git_entry_info_t* */
 } git_data_t;
 
@@ -88,12 +88,14 @@ static mc_pp_result_t git_chdir (void *plugin_data, const char *path);
 static mc_pp_result_t git_enter (void *plugin_data, const char *fname, const struct stat *st);
 static mc_pp_result_t git_view_item (void *plugin_data, const char *fname, const struct stat *st,
                                      gboolean plain_view);
-static mc_pp_result_t git_get_help_info (void *plugin_data, const char **filename, const char **node);
+static mc_pp_result_t git_get_help_info (void *plugin_data, const char **filename,
+                                         const char **node);
 static mc_pp_result_t git_get_local_copy (void *plugin_data, const char *fname, char **local_path);
 static const char *git_get_title (void *plugin_data);
 static mc_pp_result_t git_handle_key (void *plugin_data, int key);
 static const mc_panel_column_t *git_get_columns (void *plugin_data, size_t *count);
-static const char *git_get_column_value (void *plugin_data, const char *fname, const char *column_id);
+static const char *git_get_column_value (void *plugin_data, const char *fname,
+                                         const char *column_id);
 static const char *git_get_footer (void *plugin_data);
 static const char *git_get_focus_name (void *plugin_data);
 static const char *git_get_default_format (void *plugin_data);
@@ -137,25 +139,25 @@ static const mc_panel_column_t git_columns[] = {
 
 /*** file scope functions ************************************************************************/
 
-#define GIT_PANEL_CONFIG_FILE        "panels.git.ini"
-#define GIT_PANEL_CONFIG_FILE_LEGACY "git-panel.ini"
-#define GIT_PANEL_CONFIG_GROUP       "git-panel"
-#define GIT_PANEL_FORMAT_KEY         "default_format"
-#define GIT_PANEL_FORMAT_DEFAULT     "type name | status | mtime"
-#define GIT_PANEL_KEY_STAGE          "hotkey_stage"
-#define GIT_PANEL_KEY_UNSTAGE        "hotkey_unstage"
-#define GIT_PANEL_KEY_TOGGLE         "hotkey_toggle"
-#define GIT_PANEL_KEY_DIFF           "hotkey_diff"
-#define GIT_PANEL_KEY_DIFF_ALT       "hotkey_diff_alt"
-#define GIT_PANEL_KEY_REFRESH        "hotkey_refresh"
-#define GIT_PANEL_KEY_RESET          "hotkey_reset"
-#define GIT_PANEL_KEY_STAGE_DEFAULT   "f15"    /* Shift-F5 */
-#define GIT_PANEL_KEY_UNSTAGE_DEFAULT "f16"    /* Shift-F6 */
-#define GIT_PANEL_KEY_TOGGLE_DEFAULT  "none"
-#define GIT_PANEL_KEY_DIFF_DEFAULT    "ctrl-d"
+#define GIT_PANEL_CONFIG_FILE          "panels.git.ini"
+#define GIT_PANEL_CONFIG_FILE_LEGACY   "git-panel.ini"
+#define GIT_PANEL_CONFIG_GROUP         "git-panel"
+#define GIT_PANEL_FORMAT_KEY           "default_format"
+#define GIT_PANEL_FORMAT_DEFAULT       "type name | status | mtime"
+#define GIT_PANEL_KEY_STAGE            "hotkey_stage"
+#define GIT_PANEL_KEY_UNSTAGE          "hotkey_unstage"
+#define GIT_PANEL_KEY_TOGGLE           "hotkey_toggle"
+#define GIT_PANEL_KEY_DIFF             "hotkey_diff"
+#define GIT_PANEL_KEY_DIFF_ALT         "hotkey_diff_alt"
+#define GIT_PANEL_KEY_REFRESH          "hotkey_refresh"
+#define GIT_PANEL_KEY_RESET            "hotkey_reset"
+#define GIT_PANEL_KEY_STAGE_DEFAULT    "f15" /* Shift-F5 */
+#define GIT_PANEL_KEY_UNSTAGE_DEFAULT  "f16" /* Shift-F6 */
+#define GIT_PANEL_KEY_TOGGLE_DEFAULT   "none"
+#define GIT_PANEL_KEY_DIFF_DEFAULT     "ctrl-d"
 #define GIT_PANEL_KEY_DIFF_ALT_DEFAULT "f13"
-#define GIT_PANEL_KEY_REFRESH_DEFAULT "ctrl-r"
-#define GIT_PANEL_KEY_RESET_DEFAULT   "f18"    /* Shift-F8 */
+#define GIT_PANEL_KEY_REFRESH_DEFAULT  "ctrl-r"
+#define GIT_PANEL_KEY_RESET_DEFAULT    "f18" /* Shift-F8 */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -190,14 +192,14 @@ typedef enum
     GIT_ITEM_COMMIT_FILE
 } git_item_kind_t;
 
-#define GIT_COMMITS_DIR_NAME "commits"
-#define GIT_BRANCHES_DIR_NAME "branches"
+#define GIT_COMMITS_DIR_NAME        "commits"
+#define GIT_BRANCHES_DIR_NAME       "branches"
 #define GIT_BRANCHES_LOCAL_DIR_NAME "local"
-#define GIT_BRANCHES_REMOTE_PREFIX "remote/"
+#define GIT_BRANCHES_REMOTE_PREFIX  "remote/"
 
-#define GIT_BRANCH_SCOPE_NONE   0
-#define GIT_BRANCH_SCOPE_LOCAL  1
-#define GIT_BRANCH_SCOPE_REMOTE 2
+#define GIT_BRANCH_SCOPE_NONE       0
+#define GIT_BRANCH_SCOPE_LOCAL      1
+#define GIT_BRANCH_SCOPE_REMOTE     2
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -314,18 +316,22 @@ git_save_defaults_to_user_file (const char *path)
         return;
 
     cfg = mc_config_init (path, FALSE);
-    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_FORMAT_KEY, GIT_PANEL_FORMAT_DEFAULT);
-    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_STAGE, GIT_PANEL_KEY_STAGE_DEFAULT);
+    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_FORMAT_KEY,
+                          GIT_PANEL_FORMAT_DEFAULT);
+    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_STAGE,
+                          GIT_PANEL_KEY_STAGE_DEFAULT);
     mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_UNSTAGE,
                           GIT_PANEL_KEY_UNSTAGE_DEFAULT);
     mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_TOGGLE,
                           GIT_PANEL_KEY_TOGGLE_DEFAULT);
-    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_DIFF, GIT_PANEL_KEY_DIFF_DEFAULT);
+    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_DIFF,
+                          GIT_PANEL_KEY_DIFF_DEFAULT);
     mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_DIFF_ALT,
                           GIT_PANEL_KEY_DIFF_ALT_DEFAULT);
     mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_REFRESH,
                           GIT_PANEL_KEY_REFRESH_DEFAULT);
-    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_RESET, GIT_PANEL_KEY_RESET_DEFAULT);
+    mc_config_set_string (cfg, GIT_PANEL_CONFIG_GROUP, GIT_PANEL_KEY_RESET,
+                          GIT_PANEL_KEY_RESET_DEFAULT);
     mc_config_save_file (cfg, NULL);
     mc_config_deinit (cfg);
 }
@@ -501,7 +507,8 @@ git_commit_stack_pop_to_current (git_data_t *data)
     if (data->commit_stack == NULL || data->commit_stack->len == 0)
         return FALSE;
 
-    it = (git_commit_nav_t *) g_ptr_array_steal_index (data->commit_stack, data->commit_stack->len - 1);
+    it = (git_commit_nav_t *) g_ptr_array_steal_index (data->commit_stack,
+                                                       data->commit_stack->len - 1);
     if (it == NULL)
         return FALSE;
 
@@ -646,8 +653,12 @@ git_make_temp_copy (const char *src_path, char **tmp_path)
 static char *
 git_detect_repo_root (const char *start_path)
 {
-    char *argv[] = { (char *) "git", (char *) "-C", (char *) start_path, (char *) "rev-parse",
-                     (char *) "--show-toplevel", NULL };
+    char *argv[] = { (char *) "git",
+                     (char *) "-C",
+                     (char *) start_path,
+                     (char *) "rev-parse",
+                     (char *) "--show-toplevel",
+                     NULL };
     char *out = NULL;
     char *trimmed;
 
@@ -671,9 +682,10 @@ git_detect_repo_root (const char *start_path)
 static char *
 git_detect_upstream_ref (git_data_t *data)
 {
-    char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "rev-parse",
+    char *argv[] = { (char *) "git",          (char *) "-C",
+                     data->repo_root,         (char *) "rev-parse",
                      (char *) "--abbrev-ref", (char *) "--symbolic-full-name",
-                     (char *) "@{upstream}", NULL };
+                     (char *) "@{upstream}",  NULL };
     char *out = NULL;
     char *trimmed;
 
@@ -697,8 +709,10 @@ git_detect_upstream_ref (git_data_t *data)
 static char *
 git_detect_current_branch (git_data_t *data)
 {
-    char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "symbolic-ref",
-                     (char *) "--quiet", (char *) "--short", (char *) "HEAD", NULL };
+    char *argv[] = { (char *) "git",     (char *) "-C",
+                     data->repo_root,    (char *) "symbolic-ref",
+                     (char *) "--quiet", (char *) "--short",
+                     (char *) "HEAD",    NULL };
     char *out = NULL;
 
     if (git_run_stdout (argv, &out))
@@ -710,8 +724,13 @@ git_detect_current_branch (git_data_t *data)
     }
 
     {
-        char *argv2[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "rev-parse",
-                          (char *) "--short", (char *) "HEAD", NULL };
+        char *argv2[] = { (char *) "git",
+                          (char *) "-C",
+                          data->repo_root,
+                          (char *) "rev-parse",
+                          (char *) "--short",
+                          (char *) "HEAD",
+                          NULL };
 
         if (git_run_stdout (argv2, &out))
         {
@@ -757,15 +776,17 @@ git_update_title (git_data_t *data)
         break;
     case GIT_VIEW_COMMIT_FILES:
         if (data->selected_branch != NULL)
-            data->title = g_strdup_printf ("/commits/%s/%s", data->selected_branch,
-                                           data->selected_commit_name != NULL
-                                               ? data->selected_commit_name
-                                               : (data->selected_commit != NULL ? data->selected_commit : ""));
+            data->title = g_strdup_printf (
+                "/commits/%s/%s", data->selected_branch,
+                data->selected_commit_name != NULL
+                    ? data->selected_commit_name
+                    : (data->selected_commit != NULL ? data->selected_commit : ""));
         else
-            data->title = g_strdup_printf ("/commits/%s",
-                                           data->selected_commit_name != NULL
-                                               ? data->selected_commit_name
-                                               : (data->selected_commit != NULL ? data->selected_commit : ""));
+            data->title = g_strdup_printf (
+                "/commits/%s",
+                data->selected_commit_name != NULL
+                    ? data->selected_commit_name
+                    : (data->selected_commit != NULL ? data->selected_commit : ""));
         break;
     default:
         data->title = g_strdup (data->repo_root);
@@ -831,8 +852,8 @@ git_add_branch_entry (git_data_t *data, dir_list *list, const char *display_name
 
 static void
 git_add_entry (git_data_t *data, dir_list *list, char state_mark, const char *state_prefix,
-               const char *repo_path, gboolean is_deleted, gboolean is_staged,
-               git_item_kind_t kind, const char *commit_sha, const char *old_repo_path)
+               const char *repo_path, gboolean is_deleted, gboolean is_staged, git_item_kind_t kind,
+               const char *commit_sha, const char *old_repo_path)
 {
     struct stat st;
     git_entry_info_t *info;
@@ -907,8 +928,7 @@ git_parse_branches_and_fill (git_data_t *data, dir_list *list, const char *out,
             size_t prefix_len;
 
             prefix_len = strlen (remote_prefix);
-            if (!g_str_has_prefix (branch_name, remote_prefix)
-                || branch_name[prefix_len] != '/')
+            if (!g_str_has_prefix (branch_name, remote_prefix) || branch_name[prefix_len] != '/')
             {
                 g_strfreev (parts);
                 continue;
@@ -1095,7 +1115,8 @@ git_parse_log_and_fill (git_data_t *data, dir_list *list, const char *out)
 
         commit_time = (time_t) g_ascii_strtoll (parts[2], NULL, 10);
         name = g_strdup (parts[3] != NULL ? parts[3] : "");
-        git_add_virtual_dir (data, list, name, GIT_ITEM_COMMIT_DIR, parts[0], parts[1], commit_time);
+        git_add_virtual_dir (data, list, name, GIT_ITEM_COMMIT_DIR, parts[0], parts[1],
+                             commit_time);
         g_free (name);
         g_strfreev (parts);
     }
@@ -1207,8 +1228,9 @@ git_add_commit_parent_entry (git_data_t *data, dir_list *list, const char *paren
 static int
 git_parse_commit_parents_and_fill (git_data_t *data, dir_list *list, const char *commit_sha)
 {
-    char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "rev-list",
-                     (char *) "--parents", (char *) "-n", (char *) "1", (char *) commit_sha, NULL };
+    char *argv[] = { (char *) "git",      (char *) "-C",        data->repo_root,
+                     (char *) "rev-list", (char *) "--parents", (char *) "-n",
+                     (char *) "1",        (char *) commit_sha,  NULL };
     char *out = NULL;
     char **parts;
     int i;
@@ -1299,27 +1321,31 @@ git_apply_one (git_data_t *data, const char *display_name, git_action_t action)
     {
         if (info->state_text != NULL && strcmp (info->state_text, "UNTRACKED") == 0)
         {
-            char *argv[] = { (char *) "git",   (char *) "-C", data->repo_root, (char *) "clean",
-                             (char *) "-f",    (char *) "--", (char *) info->repo_path, NULL };
+            char *argv[] = { (char *) "git",           (char *) "-C", data->repo_root,
+                             (char *) "clean",         (char *) "-f", (char *) "--",
+                             (char *) info->repo_path, NULL };
 
             git_debug_log ("git: run clean -f -- %s", info->repo_path);
             ok = git_run_simple (argv, &err);
         }
         else
         {
-            char *argv[] = { (char *) "git",      (char *) "-C",       data->repo_root,
-                             (char *) "restore",  (char *) "--source=HEAD",
-                             (char *) "--staged", (char *) "--worktree",
-                             (char *) "--",       (char *) info->repo_path, NULL };
+            char *argv[] = { (char *) "git",           (char *) "-C",
+                             data->repo_root,          (char *) "restore",
+                             (char *) "--source=HEAD", (char *) "--staged",
+                             (char *) "--worktree",    (char *) "--",
+                             (char *) info->repo_path, NULL };
 
-            git_debug_log ("git: run restore --source=HEAD --staged --worktree -- %s", info->repo_path);
+            git_debug_log ("git: run restore --source=HEAD --staged --worktree -- %s",
+                           info->repo_path);
             ok = git_run_simple (argv, &err);
         }
     }
     else if (action == GIT_ACTION_UNSTAGE || (action == GIT_ACTION_TOGGLE && info->is_staged))
     {
-        char *argv[] = { (char *) "git",     (char *) "-C",       data->repo_root,
-                         (char *) "restore", (char *) "--staged", (char *) "--",
+        char *argv[] = { (char *) "git",           (char *) "-C",
+                         data->repo_root,          (char *) "restore",
+                         (char *) "--staged",      (char *) "--",
                          (char *) info->repo_path, NULL };
 
         git_debug_log ("git: run restore --staged -- %s", info->repo_path);
@@ -1327,7 +1353,7 @@ git_apply_one (git_data_t *data, const char *display_name, git_action_t action)
     }
     else
     {
-        char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "add",
+        char *argv[] = { (char *) "git", (char *) "-C", data->repo_root,          (char *) "add",
                          (char *) "-A",  (char *) "--", (char *) info->repo_path, NULL };
 
         git_debug_log ("git: run add -A -- %s", info->repo_path);
@@ -1375,7 +1401,8 @@ git_apply_selected (git_data_t *data, git_action_t action)
                             "Selected files will be reset to HEAD.\n"
                             "Untracked files will be deleted.\n\n"
                             "Do you want to continue?"),
-                         D_NORMAL, 2, _ ("&Reset"), _ ("&Cancel")) != 0)
+                         D_NORMAL, 2, _ ("&Reset"), _ ("&Cancel"))
+            != 0)
     {
         git_debug_log ("git: reset canceled by user");
         return FALSE;
@@ -1462,8 +1489,8 @@ git_write_temp_from_git_show (git_data_t *data, const char *object_spec, char **
     char *out = NULL;
     char *err = NULL;
     gboolean ok;
-    char *argv[] = { (char *) "git",  (char *) "-C", data->repo_root, (char *) "show",
-                     (char *) object_spec, NULL };
+    char *argv[] = { (char *) "git",  (char *) "-C",        data->repo_root,
+                     (char *) "show", (char *) object_spec, NULL };
 
     ok = git_run_capture (argv, &out, &err);
     if (!ok)
@@ -1518,8 +1545,10 @@ git_show_diff_selected (git_data_t *data)
     {
         char *object_old = NULL;
         char *object_new = NULL;
-        const char *old_path = (info->old_repo_path != NULL) ? info->old_repo_path : info->repo_path;
-        const gboolean is_added = (info->state_mark_text != NULL && info->state_mark_text[0] == '+');
+        const char *old_path =
+            (info->old_repo_path != NULL) ? info->old_repo_path : info->repo_path;
+        const gboolean is_added =
+            (info->state_mark_text != NULL && info->state_mark_text[0] == '+');
 
         if (is_added)
         {
@@ -1631,12 +1660,20 @@ git_show_commit_description_by_sha (git_data_t *data, const char *sha, const cha
     char *err = NULL;
     char *tmp_path = NULL;
     gboolean ok;
-    char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "show",
-                     (char *) "--no-color", (char *) "-s", (char *) "--format=fuller", NULL, NULL };
+    char *argv[] = { (char *) "git",
+                     (char *) "-C",
+                     data->repo_root,
+                     (char *) "show",
+                     (char *) "--no-color",
+                     (char *) "-s",
+                     (char *) "--format=fuller",
+                     NULL,
+                     NULL };
 
     if (sha == NULL || *sha == '\0')
     {
-        git_debug_log ("git: F3 empty sha name='%s'", name_for_log != NULL ? name_for_log : "(null)");
+        git_debug_log ("git: F3 empty sha name='%s'",
+                       name_for_log != NULL ? name_for_log : "(null)");
         return FALSE;
     }
 
@@ -1654,7 +1691,8 @@ git_show_commit_description_by_sha (git_data_t *data, const char *sha, const cha
         return FALSE;
     }
 
-    if (!git_write_temp_contents (out != NULL ? out : "", out != NULL ? (gssize) strlen (out) : 0, &tmp_path))
+    if (!git_write_temp_contents (out != NULL ? out : "", out != NULL ? (gssize) strlen (out) : 0,
+                                  &tmp_path))
     {
         git_debug_log ("git: F3 failed to write temp file for sha=%s", sha);
         g_free (out);
@@ -1704,11 +1742,13 @@ git_open (mc_panel_host_t *host, const char *open_path)
     data->host = host;
     data->repo_root = repo_root;
     data->title = g_strdup (repo_root);
-    data->help_filename = g_build_filename (mc_global.share_data_dir, "help", "git-panel.hlp", (char *) NULL);
+    data->help_filename =
+        g_build_filename (mc_global.share_data_dir, "help", "git-panel.hlp", (char *) NULL);
     data->display_to_info =
         g_hash_table_new_full (g_str_hash, g_str_equal, g_free, git_entry_info_free);
     data->default_format = git_load_default_format ();
-    data->key_stage = git_load_hotkey (GIT_PANEL_KEY_STAGE, GIT_PANEL_KEY_STAGE_DEFAULT, KEY_F (15));
+    data->key_stage =
+        git_load_hotkey (GIT_PANEL_KEY_STAGE, GIT_PANEL_KEY_STAGE_DEFAULT, KEY_F (15));
     data->key_unstage =
         git_load_hotkey (GIT_PANEL_KEY_UNSTAGE, GIT_PANEL_KEY_UNSTAGE_DEFAULT, KEY_F (16));
     data->key_toggle = git_load_hotkey (GIT_PANEL_KEY_TOGGLE, GIT_PANEL_KEY_TOGGLE_DEFAULT, -1);
@@ -1717,7 +1757,8 @@ git_open (mc_panel_host_t *host, const char *open_path)
         git_load_hotkey (GIT_PANEL_KEY_DIFF_ALT, GIT_PANEL_KEY_DIFF_ALT_DEFAULT, KEY_F (13));
     data->key_refresh =
         git_load_hotkey (GIT_PANEL_KEY_REFRESH, GIT_PANEL_KEY_REFRESH_DEFAULT, XCTRL ('r'));
-    data->key_reset = git_load_hotkey (GIT_PANEL_KEY_RESET, GIT_PANEL_KEY_RESET_DEFAULT, KEY_F (18));
+    data->key_reset =
+        git_load_hotkey (GIT_PANEL_KEY_RESET, GIT_PANEL_KEY_RESET_DEFAULT, KEY_F (18));
     data->view = GIT_VIEW_STATUS;
     data->selected_commit = NULL;
     data->current_branch = git_detect_current_branch (data);
@@ -1730,9 +1771,10 @@ git_open (mc_panel_host_t *host, const char *open_path)
     data->commit_stack = g_ptr_array_new_with_free_func (git_commit_nav_free);
     git_update_title (data);
 
-    git_debug_log ("git: keys stage=%d unstage=%d toggle=%d diff=%d diff_alt=%d refresh=%d reset=%d",
-                   data->key_stage, data->key_unstage, data->key_toggle, data->key_diff,
-                   data->key_diff_alt, data->key_refresh, data->key_reset);
+    git_debug_log (
+        "git: keys stage=%d unstage=%d toggle=%d diff=%d diff_alt=%d refresh=%d reset=%d",
+        data->key_stage, data->key_unstage, data->key_toggle, data->key_diff, data->key_diff_alt,
+        data->key_refresh, data->key_reset);
 
     return data;
 }
@@ -1774,15 +1816,20 @@ git_get_items (void *plugin_data, void *list_ptr)
 
     if ((git_view_t) data->view == GIT_VIEW_STATUS)
     {
-        char *argv[] = { (char *) "git",   (char *) "-C",     data->repo_root,
-                         (char *) "status", (char *) "--porcelain=v1", NULL };
+        char *argv[] = { (char *) "git",
+                         (char *) "-C",
+                         data->repo_root,
+                         (char *) "status",
+                         (char *) "--porcelain=v1",
+                         NULL };
 
         g_free (data->current_branch);
         data->current_branch = git_detect_current_branch (data);
         git_update_title (data);
         git_add_virtual_dir (data, list, GIT_BRANCHES_DIR_NAME, GIT_ITEM_BRANCHES_DIR, NULL, "",
                              time (NULL));
-        git_add_virtual_dir (data, list, GIT_COMMITS_DIR_NAME, GIT_ITEM_COMMITS_DIR, NULL, "", time (NULL));
+        git_add_virtual_dir (data, list, GIT_COMMITS_DIR_NAME, GIT_ITEM_COMMITS_DIR, NULL, "",
+                             time (NULL));
         ok = git_run_stdout (argv, &out);
         if (!ok)
             return MC_PPR_FAILED;
@@ -1794,7 +1841,8 @@ git_get_items (void *plugin_data, void *list_ptr)
                              NULL, "", time (NULL));
 
         {
-            char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "remote", NULL };
+            char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "remote",
+                             NULL };
 
             ok = git_run_stdout (argv, &out);
             if (!ok)
@@ -1804,10 +1852,15 @@ git_get_items (void *plugin_data, void *list_ptr)
     }
     else if ((git_view_t) data->view == GIT_VIEW_BRANCHES_LOCAL)
     {
-        char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "for-each-ref",
+        char *argv[] = { (char *) "git",
+                         (char *) "-C",
+                         data->repo_root,
+                         (char *) "for-each-ref",
                          (char *) "--sort=-committerdate",
-                         (char *) "--format=%(refname:short)\t%(objectname:short)\t%(committerdate:unix)\t%(HEAD)",
-                         (char *) "refs/heads", NULL };
+                         (char *) "--format=%(refname:short)\t%(objectname:short)\t%(committerdate:"
+                                  "unix)\t%(HEAD)",
+                         (char *) "refs/heads",
+                         NULL };
 
         ok = git_run_stdout (argv, &out);
         if (!ok)
@@ -1818,10 +1871,16 @@ git_get_items (void *plugin_data, void *list_ptr)
              && data->selected_remote != NULL)
     {
         char *remote_ref = NULL;
-        char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "for-each-ref",
-                         (char *) "--sort=-committerdate",
-                         (char *) "--format=%(refname:short)\t%(objectname:short)\t%(committerdate:unix)",
-                         NULL, NULL };
+        char *argv[] = {
+            (char *) "git",
+            (char *) "-C",
+            data->repo_root,
+            (char *) "for-each-ref",
+            (char *) "--sort=-committerdate",
+            (char *) "--format=%(refname:short)\t%(objectname:short)\t%(committerdate:unix)",
+            NULL,
+            NULL
+        };
 
         remote_ref = g_strdup_printf ("refs/remotes/%s", data->selected_remote);
         argv[6] = remote_ref;
@@ -1841,11 +1900,18 @@ git_get_items (void *plugin_data, void *list_ptr)
 
         if (data->selected_branch != NULL)
         {
-            char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "log",
-                             (char *) "--no-color", (char *) "--decorate=no",
+            char *argv[] = { (char *) "git",
+                             (char *) "-C",
+                             data->repo_root,
+                             (char *) "log",
+                             (char *) "--no-color",
+                             (char *) "--decorate=no",
                              (char *) "--first-parent",
                              (char *) "--pretty=format:%H%x09%h%x09%ct%x09%s",
-                             (char *) "-n", (char *) "200", data->selected_branch, NULL };
+                             (char *) "-n",
+                             (char *) "200",
+                             data->selected_branch,
+                             NULL };
             ok2 = git_run_stdout (argv, &out2);
         }
         else
@@ -1853,11 +1919,18 @@ git_get_items (void *plugin_data, void *list_ptr)
             upstream_ref = git_detect_upstream_ref (data);
             if (upstream_ref != NULL)
             {
-                char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "log",
-                                 (char *) "--no-color", (char *) "--decorate=no",
+                char *argv[] = { (char *) "git",
+                                 (char *) "-C",
+                                 data->repo_root,
+                                 (char *) "log",
+                                 (char *) "--no-color",
+                                 (char *) "--decorate=no",
                                  (char *) "--first-parent",
                                  (char *) "--pretty=format:%H%x09%h%x09%ct%x09%s",
-                                 (char *) "-n", (char *) "200", NULL, NULL };
+                                 (char *) "-n",
+                                 (char *) "200",
+                                 NULL,
+                                 NULL };
 
                 range = g_strdup_printf ("%s..HEAD", upstream_ref);
                 argv[10] = range;
@@ -1865,11 +1938,18 @@ git_get_items (void *plugin_data, void *list_ptr)
             }
             else
             {
-                char *argv[] = { (char *) "git", (char *) "-C", data->repo_root, (char *) "log",
-                                 (char *) "--no-color", (char *) "--decorate=no",
+                char *argv[] = { (char *) "git",
+                                 (char *) "-C",
+                                 data->repo_root,
+                                 (char *) "log",
+                                 (char *) "--no-color",
+                                 (char *) "--decorate=no",
                                  (char *) "--first-parent",
                                  (char *) "--pretty=format:%H%x09%h%x09%ct%x09%s",
-                                 (char *) "-n", (char *) "200", (char *) "HEAD", NULL };
+                                 (char *) "-n",
+                                 (char *) "200",
+                                 (char *) "HEAD",
+                                 NULL };
 
                 ok2 = git_run_stdout (argv, &out2);
             }
@@ -1887,10 +1967,15 @@ git_get_items (void *plugin_data, void *list_ptr)
     else if ((git_view_t) data->view == GIT_VIEW_COMMIT_FILES && data->selected_commit != NULL)
     {
         int files_added;
-        char *argv[] = { (char *) "git",      (char *) "-C", data->repo_root,
-                         (char *) "show",     (char *) "--name-status",
-                         (char *) "--format=", (char *) "--find-renames",
-                         data->selected_commit, NULL };
+        char *argv[] = { (char *) "git",
+                         (char *) "-C",
+                         data->repo_root,
+                         (char *) "show",
+                         (char *) "--name-status",
+                         (char *) "--format=",
+                         (char *) "--find-renames",
+                         data->selected_commit,
+                         NULL };
 
         ok = git_run_stdout (argv, &out);
         if (!ok)
@@ -1984,10 +2069,9 @@ git_chdir (void *plugin_data, const char *path)
             if ((git_view_t) data->view == GIT_VIEW_BRANCHES_LOCAL)
                 focus = g_strdup (GIT_BRANCHES_LOCAL_DIR_NAME);
             else
-                focus = g_strdup_printf ("remote/%s",
-                                         data->selected_remote != NULL ? data->selected_remote : "");
-            git_set_pending_focus (data,
-                                   focus);
+                focus = g_strdup_printf (
+                    "remote/%s", data->selected_remote != NULL ? data->selected_remote : "");
+            git_set_pending_focus (data, focus);
             g_free (focus);
             data->view = GIT_VIEW_BRANCHES;
             git_update_title (data);
@@ -2010,8 +2094,9 @@ git_chdir (void *plugin_data, const char *path)
             git_set_pending_focus (data,
                                    data->selected_commit_list_name != NULL
                                        ? data->selected_commit_list_name
-                                       : (data->selected_commit_name != NULL ? data->selected_commit_name
-                                                                            : data->selected_commit));
+                                       : (data->selected_commit_name != NULL
+                                              ? data->selected_commit_name
+                                              : data->selected_commit));
             data->view = GIT_VIEW_COMMITS;
             git_update_title (data);
             return MC_PPR_OK;
@@ -2103,7 +2188,8 @@ git_chdir (void *plugin_data, const char *path)
         return MC_PPR_OK;
     }
 
-    if ((git_view_t) data->view == GIT_VIEW_BRANCHES && g_str_has_prefix (path, GIT_BRANCHES_REMOTE_PREFIX))
+    if ((git_view_t) data->view == GIT_VIEW_BRANCHES
+        && g_str_has_prefix (path, GIT_BRANCHES_REMOTE_PREFIX))
     {
         info = git_lookup_info (data, path);
         if (info == NULL || info->kind != GIT_ITEM_REMOTE_DIR_ENTRY)
@@ -2165,8 +2251,7 @@ git_chdir (void *plugin_data, const char *path)
         g_free (data->selected_commit);
         data->selected_commit = g_strdup (info->commit_sha);
         g_free (data->selected_commit_name);
-        data->selected_commit_name =
-            g_strdup (info->state_text != NULL ? info->state_text : path);
+        data->selected_commit_name = g_strdup (info->state_text != NULL ? info->state_text : path);
         g_free (data->selected_commit_list_name);
         data->selected_commit_list_name = g_strdup (path);
         git_set_pending_focus (data, path);
@@ -2191,8 +2276,9 @@ git_enter (void *plugin_data, const char *fname, const struct stat *st)
         return MC_PPR_FAILED;
 
     info = git_lookup_info (data, fname);
-    git_debug_log ("git: enter name='%s' mode=0%o isdir=%d view=%s kind=%d", fname, (unsigned) st->st_mode,
-                   S_ISDIR (st->st_mode) ? 1 : 0, git_view_name (data->view), info != NULL ? info->kind : -1);
+    git_debug_log ("git: enter name='%s' mode=0%o isdir=%d view=%s kind=%d", fname,
+                   (unsigned) st->st_mode, S_ISDIR (st->st_mode) ? 1 : 0,
+                   git_view_name (data->view), info != NULL ? info->kind : -1);
 
     if (info != NULL)
     {
@@ -2235,7 +2321,8 @@ git_view_item (void *plugin_data, const char *fname, const struct stat *st, gboo
     if (info == NULL)
         return MC_PPR_NOT_SUPPORTED;
 
-    if ((git_view_t) data->view != GIT_VIEW_COMMITS && (git_view_t) data->view != GIT_VIEW_COMMIT_FILES)
+    if ((git_view_t) data->view != GIT_VIEW_COMMITS
+        && (git_view_t) data->view != GIT_VIEW_COMMIT_FILES)
         return MC_PPR_NOT_SUPPORTED;
 
     if (info->kind != GIT_ITEM_COMMIT_DIR && info->kind != GIT_ITEM_COMMIT_PARENT_ENTRY)
