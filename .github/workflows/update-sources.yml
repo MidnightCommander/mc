@@ -32,7 +32,7 @@ jobs:
           ssh-key: ${{ secrets.SOURCE_DEPLOY_KEY }}
 
       - name: Download rendered manual pages
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: man-pages-html-${{ github.sha }}
           path: man
