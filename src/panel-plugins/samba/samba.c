@@ -27,6 +27,9 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
@@ -83,6 +86,13 @@ typedef struct
     char *title_buf;
 } samba_data_t;
 
+typedef struct
+{
+    int saved_stderr_fd;
+    int null_fd;
+    gboolean active;
+} stderr_silence_t;
+
 /*** forward declarations (file scope functions) *************************************************/
 
 static void *samba_open (mc_panel_host_t *host, const char *open_path);
@@ -95,6 +105,7 @@ static mc_pp_result_t samba_get_local_copy (void *plugin_data, const char *fname
 static mc_pp_result_t samba_delete_items (void *plugin_data, const char **names, int count);
 static const char *samba_get_title (void *plugin_data);
 static mc_pp_result_t samba_create_item (void *plugin_data);
+static void samba_update_title (samba_data_t *data);
 
 /*** file scope variables ************************************************************************/
 
@@ -136,6 +147,99 @@ add_entry (dir_list *list, const char *name, mode_t mode, off_t size, time_t mti
     st.st_nlink = 1;
 
     dir_list_append (list, name, &st, S_ISDIR (mode), FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+stderr_silence_begin (stderr_silence_t *s)
+{
+    s->saved_stderr_fd = -1;
+    s->null_fd = -1;
+    s->active = FALSE;
+
+    s->saved_stderr_fd = dup (STDERR_FILENO);
+    if (s->saved_stderr_fd < 0)
+        return;
+
+    s->null_fd = open ("/dev/null", O_WRONLY);
+    if (s->null_fd < 0)
+    {
+        close (s->saved_stderr_fd);
+        s->saved_stderr_fd = -1;
+        return;
+    }
+
+    if (dup2 (s->null_fd, STDERR_FILENO) >= 0)
+        s->active = TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+stderr_silence_end (stderr_silence_t *s)
+{
+    if (s->saved_stderr_fd >= 0)
+    {
+        (void) dup2 (s->saved_stderr_fd, STDERR_FILENO);
+        close (s->saved_stderr_fd);
+    }
+    if (s->null_fd >= 0)
+        close (s->null_fd);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+env_is_true (const char *value)
+{
+    return (value != NULL
+            && (*value == '1' || g_ascii_strcasecmp (value, "true") == 0
+                || g_ascii_strcasecmp (value, "yes") == 0));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+samba_logging_enabled (void)
+{
+    const char *smb_enable;
+    const char *mc_enable;
+
+    smb_enable = g_getenv ("MC_SMB_LOG_ENABLE");
+    if (smb_enable != NULL)
+        return env_is_true (smb_enable);
+
+    mc_enable = g_getenv ("MC_LOG_ENABLE");
+    return env_is_true (mc_enable);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void G_GNUC_PRINTF (1, 2)
+samba_log (const char *fmt, ...)
+{
+    const char *log_file;
+    FILE *f;
+    va_list args;
+
+    if (!samba_logging_enabled ())
+        return;
+
+    log_file = g_getenv ("MC_SMB_LOG_FILE");
+    if (log_file == NULL || *log_file == '\0')
+        log_file = g_getenv ("MC_LOG_FILE");
+    if (log_file == NULL || *log_file == '\0')
+        log_file = "/tmp/mc-samba.log";
+
+    f = fopen (log_file, "a");
+    if (f == NULL)
+        return;
+
+    va_start (args, fmt);
+    (void) vfprintf (f, fmt, args);
+    va_end (args);
+    (void) fclose (f);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -269,6 +373,26 @@ save_connections (const char *filepath, GPtrArray *connections)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+samba_update_title (samba_data_t *data)
+{
+    g_free (data->title_buf);
+
+    if (data->at_root || data->current_url == NULL)
+    {
+        data->title_buf = g_strdup ("/");
+        return;
+    }
+
+    /* Strip "smb:/" to get path for display */
+    if (strlen (data->current_url) <= 5)
+        data->title_buf = g_strdup ("/");
+    else
+        data->title_buf = g_strdup (data->current_url + 5);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static const smb_connection_t *
 find_connection (const samba_data_t *data, const char *label)
 {
@@ -302,6 +426,11 @@ smb_auth_cb (SMBCCTX *ctx, const char *server, const char *share, char *wg, int 
     data = (samba_data_t *) smbc_getOptionUserData (ctx);
     if (data == NULL)
         return;
+
+    samba_log ("samba: auth callback server='%s' share='%s' user='%s' workgroup='%s'\n",
+               server != NULL ? server : "", share != NULL ? share : "",
+               data->auth_username != NULL ? data->auth_username : "",
+               data->auth_workgroup != NULL ? data->auth_workgroup : "");
 
     if (data->auth_workgroup != NULL)
         g_strlcpy (wg, data->auth_workgroup, (gsize) wg_len);
@@ -339,13 +468,22 @@ smb_load_entries (samba_data_t *data)
     int dh;
     struct smbc_dirent *dirent;
     gboolean inside_share;
+    guint count = 0;
+    stderr_silence_t sil;
 
     arr = g_ptr_array_new_with_free_func (smb_entry_free);
 
+    stderr_silence_begin (&sil);
     smbc_set_context (data->ctx);
+    errno = 0;
     dh = smbc_opendir (data->current_url);
     if (dh < 0)
+    {
+        stderr_silence_end (&sil);
+        samba_log ("samba: opendir failed url='%s' errno=%d (%s)\n",
+                   data->current_url != NULL ? data->current_url : "", errno, g_strerror (errno));
         return arr;
+    }
 
     inside_share = smb_is_inside_share (data->current_url);
 
@@ -386,9 +524,17 @@ smb_load_entries (samba_data_t *data)
         }
 
         g_ptr_array_add (arr, entry);
+        count++;
     }
 
+    if (errno != 0)
+        samba_log ("samba: readdir ended with errno=%d (%s), url='%s'\n", errno, g_strerror (errno),
+                   data->current_url != NULL ? data->current_url : "");
+    samba_log ("samba: loaded entries=%u url='%s' inside_share=%d\n", count,
+               data->current_url != NULL ? data->current_url : "", inside_share ? 1 : 0);
+
     smbc_closedir (dh);
+    stderr_silence_end (&sil);
     return arr;
 }
 
@@ -419,6 +565,93 @@ smb_entry_is_dir (unsigned int smbc_type)
 {
     return (smbc_type == SMBC_WORKGROUP || smbc_type == SMBC_SERVER || smbc_type == SMBC_FILE_SHARE
             || smbc_type == SMBC_DIR);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+smb_clean_component (const char *value)
+{
+    char *tmp;
+    char *p;
+
+    if (value == NULL)
+        return g_strdup ("");
+
+    tmp = g_strdup (value);
+    for (p = tmp; *p != '\0'; p++)
+        if (*p == '\\')
+            *p = '/';
+
+    if (g_str_has_prefix (tmp, "smb://"))
+        p = tmp + strlen ("smb://");
+    else
+        p = tmp;
+
+    while (*p == '/')
+        p++;
+
+    {
+        char *result;
+
+        result = g_strdup (p);
+        g_free (tmp);
+        g_strstrip (result);
+        return result;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+smb_normalize_share (const char *share_raw, const char *server_norm)
+{
+    char *s;
+    size_t server_len;
+
+    s = smb_clean_component (share_raw);
+    server_len = strlen (server_norm);
+
+    while (s[0] == '/')
+        memmove (s, s + 1, strlen (s));
+
+    if (server_len > 0 && g_ascii_strncasecmp (s, server_norm, server_len) == 0
+        && s[server_len] == '/')
+        memmove (s, s + server_len + 1, strlen (s + server_len + 1) + 1);
+
+    while (s[0] == '/')
+        memmove (s, s + 1, strlen (s));
+
+    g_strstrip (s);
+    return s;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+smb_extract_host_and_path (const char *raw, char **host_out, char **path_out)
+{
+    char *clean;
+    char *slash;
+
+    clean = smb_clean_component (raw);
+    slash = strchr (clean, '/');
+
+    if (slash == NULL)
+    {
+        *host_out = g_strdup (clean);
+        *path_out = g_strdup ("");
+    }
+    else
+    {
+        *slash = '\0';
+        *host_out = g_strdup (clean);
+        *path_out = g_strdup (slash + 1);
+    }
+
+    g_strstrip (*host_out);
+    g_strstrip (*path_out);
+    g_free (clean);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -461,20 +694,81 @@ set_auth_from_connection (samba_data_t *data, const smb_connection_t *conn)
 static mc_pp_result_t
 enter_connection (samba_data_t *data, const smb_connection_t *conn)
 {
+    char *server_norm;
+    char *share_norm;
+    char *srv_host = NULL;
+    char *srv_path = NULL;
+    char *sh_host = NULL;
+    char *sh_path = NULL;
+    char *tmp;
+
     set_auth_from_connection (data, conn);
 
-    g_free (data->current_url);
-    if (conn->share != NULL && conn->share[0] != '\0')
-        data->current_url = g_strdup_printf ("smb://%s/%s", conn->server, conn->share);
+    smb_extract_host_and_path (conn->server, &srv_host, &srv_path);
+    smb_extract_host_and_path (conn->share, &sh_host, &sh_path);
+
+    if (srv_host[0] != '\0')
+        server_norm = g_strdup (srv_host);
     else
-        data->current_url = g_strdup_printf ("smb://%s", conn->server);
+        server_norm = g_strdup (sh_host);
+
+    if (sh_path[0] != '\0')
+    {
+        if (srv_path[0] != '\0')
+            tmp = g_strdup_printf ("%s/%s", srv_path, sh_path);
+        else
+            tmp = g_strdup (sh_path);
+    }
+    else if (srv_path[0] != '\0')
+        tmp = g_strdup (srv_path);
+    else
+        tmp = g_strdup (conn->share != NULL ? conn->share : "");
+
+    share_norm = smb_normalize_share (tmp, server_norm);
+    g_free (tmp);
+
+    if (server_norm[0] == '\0')
+    {
+        samba_log (
+            "samba: enter connection failed, empty normalized server from server='%s' share='%s'\n",
+            conn->server != NULL ? conn->server : "", conn->share != NULL ? conn->share : "");
+        g_free (srv_host);
+        g_free (srv_path);
+        g_free (sh_host);
+        g_free (sh_path);
+        g_free (server_norm);
+        g_free (share_norm);
+        return MC_PPR_FAILED;
+    }
+
+    g_free (data->current_url);
+    if (share_norm[0] != '\0')
+        data->current_url = g_strdup_printf ("smb://%s/%s", server_norm, share_norm);
+    else
+        data->current_url = g_strdup_printf ("smb://%s", server_norm);
 
     if (data->entries != NULL)
         g_ptr_array_free (data->entries, TRUE);
 
+    samba_log ("samba: enter connection label='%s' server='%s' share='%s' user='%s' workgroup='%s' "
+               "url='%s'\n",
+               conn->label != NULL ? conn->label : "", server_norm, share_norm,
+               conn->username != NULL ? conn->username : "",
+               conn->workgroup != NULL ? conn->workgroup : "",
+               data->current_url != NULL ? data->current_url : "");
+
     smbc_set_context (data->ctx);
     data->entries = smb_load_entries (data);
+    samba_log ("samba: enter connection loaded %u entries\n",
+               data->entries != NULL ? data->entries->len : 0);
     data->at_root = FALSE;
+    samba_update_title (data);
+    g_free (srv_host);
+    g_free (srv_path);
+    g_free (sh_host);
+    g_free (sh_path);
+    g_free (server_norm);
+    g_free (share_norm);
 
     return MC_PPR_OK;
 }
@@ -484,7 +778,7 @@ enter_connection (samba_data_t *data, const smb_connection_t *conn)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-show_connection_dialog (char **label, char **server, char **share, char **username, char **password)
+show_connection_dialog (char **label, char **address, char **username, char **password)
 {
     /* clang-format off */
     quick_widget_t quick_widgets[] = {
@@ -492,13 +786,9 @@ show_connection_dialog (char **label, char **server, char **share, char **userna
                             *label != NULL ? *label : "", "smb-conn-label",
                             label, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABELED_INPUT (N_("Server:"), input_label_above,
-                            *server != NULL ? *server : "", "smb-conn-server",
-                            server, NULL, FALSE, FALSE, INPUT_COMPLETE_HOSTNAMES),
-        QUICK_SEPARATOR (FALSE),
-        QUICK_LABELED_INPUT (N_("Share/path:"), input_label_above,
-                            *share != NULL ? *share : "", "smb-conn-share",
-                            share, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+        QUICK_LABELED_INPUT (N_("Server/UNC path:"), input_label_above,
+                            *address != NULL ? *address : "", "smb-conn-address",
+                            address, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_SEPARATOR (FALSE),
         QUICK_LABELED_INPUT (N_("Username (DOMAIN\\user):"), input_label_above,
                             *username != NULL ? *username : "", "smb-conn-user",
@@ -534,6 +824,7 @@ static void *
 samba_open (mc_panel_host_t *host, const char *open_path)
 {
     samba_data_t *data;
+    stderr_silence_t sil;
 
     (void) open_path;
 
@@ -547,33 +838,45 @@ samba_open (mc_panel_host_t *host, const char *open_path)
     data->auth_username = NULL;
     data->auth_password = NULL;
     data->auth_workgroup = NULL;
+    samba_update_title (data);
 
     /* Load saved connections */
     data->connections_file = get_connections_file_path ();
     data->connections = load_connections (data->connections_file);
+    samba_log ("samba: open, connections_file='%s', loaded=%u\n",
+               data->connections_file != NULL ? data->connections_file : "",
+               data->connections != NULL ? data->connections->len : 0);
 
     /* Create libsmbclient context */
     data->ctx = smbc_new_context ();
     if (data->ctx == NULL)
     {
+        samba_log ("samba: smbc_new_context failed\n");
         g_ptr_array_free (data->connections, TRUE);
         g_free (data->connections_file);
         g_free (data);
         return NULL;
     }
 
+    /* Keep libsmbclient debug disabled to avoid writing diagnostic text into mc TTY UI. */
     smbc_setDebug (data->ctx, 0);
+    smbc_setOptionDebugToStderr (data->ctx, FALSE);
+    samba_log ("samba: libsmbclient debug forced to 0\n");
     smbc_setFunctionAuthDataWithContext (data->ctx, smb_auth_cb);
     smbc_setOptionUserData (data->ctx, data);
 
+    stderr_silence_begin (&sil);
     if (smbc_init_context (data->ctx) == NULL)
     {
+        stderr_silence_end (&sil);
+        samba_log ("samba: smbc_init_context failed errno=%d (%s)\n", errno, g_strerror (errno));
         smbc_free_context (data->ctx, 0);
         g_ptr_array_free (data->connections, TRUE);
         g_free (data->connections_file);
         g_free (data);
         return NULL;
     }
+    stderr_silence_end (&sil);
 
     return data;
 }
@@ -660,6 +963,9 @@ samba_chdir (void *plugin_data, const char *path)
 {
     samba_data_t *data = (samba_data_t *) plugin_data;
 
+    samba_log ("samba: chdir path='%s' at_root=%d current_url='%s'\n", path != NULL ? path : "",
+               data->at_root ? 1 : 0, data->current_url != NULL ? data->current_url : "");
+
     if (strcmp (path, "..") == 0)
     {
         if (data->at_root)
@@ -682,6 +988,7 @@ samba_chdir (void *plugin_data, const char *path)
                     g_ptr_array_free (data->entries, TRUE);
                     data->entries = NULL;
                 }
+                samba_update_title (data);
                 return MC_PPR_OK;
             }
 
@@ -694,6 +1001,10 @@ samba_chdir (void *plugin_data, const char *path)
 
             smbc_set_context (data->ctx);
             data->entries = smb_load_entries (data);
+            samba_update_title (data);
+            samba_log ("samba: chdir up to '%s', entries=%u\n",
+                       data->current_url != NULL ? data->current_url : "",
+                       data->entries != NULL ? data->entries->len : 0);
             return MC_PPR_OK;
         }
     }
@@ -705,7 +1016,10 @@ samba_chdir (void *plugin_data, const char *path)
 
         conn = find_connection (data, path);
         if (conn == NULL)
+        {
+            samba_log ("samba: chdir root connection '%s' not found\n", path != NULL ? path : "");
             return MC_PPR_FAILED;
+        }
 
         return enter_connection (data, conn);
     }
@@ -717,7 +1031,11 @@ samba_chdir (void *plugin_data, const char *path)
 
         entry = find_entry (data, path);
         if (entry == NULL || !smb_entry_is_dir (entry->smbc_type))
+        {
+            samba_log ("samba: chdir target '%s' is not a directory or missing\n",
+                       path != NULL ? path : "");
             return MC_PPR_FAILED;
+        }
 
         if (g_str_has_suffix (data->current_url, "/"))
             new_url = g_strdup_printf ("%s%s", data->current_url, path);
@@ -732,6 +1050,10 @@ samba_chdir (void *plugin_data, const char *path)
 
         smbc_set_context (data->ctx);
         data->entries = smb_load_entries (data);
+        samba_update_title (data);
+        samba_log ("samba: chdir entered '%s', entries=%u\n",
+                   data->current_url != NULL ? data->current_url : "",
+                   data->entries != NULL ? data->entries->len : 0);
         return MC_PPR_OK;
     }
 }
@@ -744,6 +1066,8 @@ samba_enter (void *plugin_data, const char *name, const struct stat *st)
     samba_data_t *data = (samba_data_t *) plugin_data;
 
     (void) st;
+    samba_log ("samba: enter name='%s' at_root=%d current_url='%s'\n", name != NULL ? name : "",
+               data->at_root ? 1 : 0, data->current_url != NULL ? data->current_url : "");
 
     /* At root: enter saved connection */
     if (data->at_root)
@@ -752,7 +1076,10 @@ samba_enter (void *plugin_data, const char *name, const struct stat *st)
 
         conn = find_connection (data, name);
         if (conn == NULL)
+        {
+            samba_log ("samba: enter root connection '%s' not found\n", name != NULL ? name : "");
             return MC_PPR_FAILED;
+        }
 
         return enter_connection (data, conn);
     }
@@ -763,7 +1090,11 @@ samba_enter (void *plugin_data, const char *name, const struct stat *st)
 
         entry = find_entry (data, name);
         if (entry == NULL)
+        {
+            samba_log ("samba: enter '%s' not found in current entries\n",
+                       name != NULL ? name : "");
             return MC_PPR_FAILED;
+        }
 
         if (smb_entry_is_dir (entry->smbc_type))
         {
@@ -782,6 +1113,10 @@ samba_enter (void *plugin_data, const char *name, const struct stat *st)
 
             smbc_set_context (data->ctx);
             data->entries = smb_load_entries (data);
+            samba_update_title (data);
+            samba_log ("samba: enter dir '%s', entries=%u\n",
+                       data->current_url != NULL ? data->current_url : "",
+                       data->entries != NULL ? data->entries->len : 0);
             return MC_PPR_OK;
         }
 
@@ -802,18 +1137,26 @@ samba_get_local_copy (void *plugin_data, const char *fname, char **local_path)
     GError *error = NULL;
     char buf[8192];
     ssize_t n;
+    stderr_silence_t sil;
 
     if (data->at_root || data->current_url == NULL)
         return MC_PPR_FAILED;
 
     smb_url = g_strdup_printf ("%s/%s", data->current_url, fname);
+    samba_log ("samba: get_local_copy url='%s'\n", smb_url);
 
+    stderr_silence_begin (&sil);
     smbc_set_context (data->ctx);
+    errno = 0;
     smb_fd = smbc_open (smb_url, O_RDONLY, 0);
     g_free (smb_url);
 
     if (smb_fd < 0)
+    {
+        stderr_silence_end (&sil);
+        samba_log ("samba: smbc_open failed errno=%d (%s)\n", errno, g_strerror (errno));
         return MC_PPR_FAILED;
+    }
 
     local_fd = g_file_open_tmp ("mc-pp-smb-XXXXXX", local_path, &error);
     if (local_fd == -1)
@@ -821,6 +1164,7 @@ samba_get_local_copy (void *plugin_data, const char *fname, char **local_path)
         if (error != NULL)
             g_error_free (error);
         smbc_close (smb_fd);
+        stderr_silence_end (&sil);
         return MC_PPR_FAILED;
     }
 
@@ -828,11 +1172,13 @@ samba_get_local_copy (void *plugin_data, const char *fname, char **local_path)
     {
         if (write (local_fd, buf, (size_t) n) != n)
         {
+            samba_log ("samba: write local copy failed errno=%d (%s)\n", errno, g_strerror (errno));
             close (local_fd);
             smbc_close (smb_fd);
             unlink (*local_path);
             g_free (*local_path);
             *local_path = NULL;
+            stderr_silence_end (&sil);
             return MC_PPR_FAILED;
         }
     }
@@ -842,12 +1188,15 @@ samba_get_local_copy (void *plugin_data, const char *fname, char **local_path)
 
     if (n < 0)
     {
+        samba_log ("samba: smbc_read failed errno=%d (%s)\n", errno, g_strerror (errno));
         unlink (*local_path);
         g_free (*local_path);
         *local_path = NULL;
+        stderr_silence_end (&sil);
         return MC_PPR_FAILED;
     }
 
+    stderr_silence_end (&sil);
     return MC_PPR_OK;
 }
 
@@ -858,6 +1207,7 @@ samba_delete_items (void *plugin_data, const char **names, int count)
 {
     samba_data_t *data = (samba_data_t *) plugin_data;
     int i;
+    stderr_silence_t sil;
 
     if (data->at_root)
     {
@@ -880,10 +1230,12 @@ samba_delete_items (void *plugin_data, const char **names, int count)
         }
 
         save_connections (data->connections_file, data->connections);
+        samba_log ("samba: deleted %d saved connections, now=%u\n", count, data->connections->len);
         return MC_PPR_OK;
     }
 
     /* Inside connection: delete files/dirs on SMB */
+    stderr_silence_begin (&sil);
     smbc_set_context (data->ctx);
 
     for (i = 0; i < count; i++)
@@ -895,9 +1247,19 @@ samba_delete_items (void *plugin_data, const char **names, int count)
         url = g_strdup_printf ("%s/%s", data->current_url, names[i]);
 
         if (entry != NULL && entry->smbc_type == SMBC_DIR)
-            smbc_rmdir (url);
+        {
+            errno = 0;
+            if (smbc_rmdir (url) != 0)
+                samba_log ("samba: rmdir failed url='%s' errno=%d (%s)\n", url, errno,
+                           g_strerror (errno));
+        }
         else
-            smbc_unlink (url);
+        {
+            errno = 0;
+            if (smbc_unlink (url) != 0)
+                samba_log ("samba: unlink failed url='%s' errno=%d (%s)\n", url, errno,
+                           g_strerror (errno));
+        }
 
         g_free (url);
     }
@@ -905,6 +1267,7 @@ samba_delete_items (void *plugin_data, const char **names, int count)
     if (data->entries != NULL)
         g_ptr_array_free (data->entries, TRUE);
     data->entries = smb_load_entries (data);
+    stderr_silence_end (&sil);
 
     return MC_PPR_OK;
 }
@@ -915,21 +1278,8 @@ static const char *
 samba_get_title (void *plugin_data)
 {
     samba_data_t *data = (samba_data_t *) plugin_data;
-
-    g_free (data->title_buf);
-
-    if (data->at_root || data->current_url == NULL)
-    {
-        data->title_buf = g_strdup ("/");
-        return data->title_buf;
-    }
-
-    /* Strip "smb:/" to get path for display */
-    if (strlen (data->current_url) <= 5)
-        data->title_buf = g_strdup ("/");
-    else
-        data->title_buf = g_strdup (data->current_url + 5);
-
+    if (data->title_buf == NULL)
+        samba_update_title (data);
     return data->title_buf;
 }
 
@@ -941,29 +1291,26 @@ samba_create_item (void *plugin_data)
     samba_data_t *data = (samba_data_t *) plugin_data;
     smb_connection_t *conn;
     char *label = NULL;
-    char *server = NULL;
-    char *share = NULL;
+    char *address = NULL;
     char *username = NULL;
     char *password = NULL;
 
     if (!data->at_root)
         return MC_PPR_NOT_SUPPORTED;
 
-    if (!show_connection_dialog (&label, &server, &share, &username, &password))
+    if (!show_connection_dialog (&label, &address, &username, &password))
     {
         g_free (label);
-        g_free (server);
-        g_free (share);
+        g_free (address);
         g_free (username);
         g_free (password);
         return MC_PPR_FAILED;
     }
 
-    if (label == NULL || label[0] == '\0' || server == NULL || server[0] == '\0')
+    if (label == NULL || label[0] == '\0' || address == NULL || address[0] == '\0')
     {
         g_free (label);
-        g_free (server);
-        g_free (share);
+        g_free (address);
         g_free (username);
         g_free (password);
         return MC_PPR_FAILED;
@@ -971,8 +1318,8 @@ samba_create_item (void *plugin_data)
 
     conn = g_new0 (smb_connection_t, 1);
     conn->label = label;
-    conn->server = server;
-    conn->share = share;
+    conn->server = address;
+    conn->share = g_strdup ("");
     conn->username = username;
     conn->password = password;
 
@@ -991,6 +1338,10 @@ samba_create_item (void *plugin_data)
 
     g_ptr_array_add (data->connections, conn);
     save_connections (data->connections_file, data->connections);
+    samba_log ("samba: created connection label='%s' server='%s' share='%s' user='%s'\n",
+               conn->label != NULL ? conn->label : "", conn->server != NULL ? conn->server : "",
+               conn->share != NULL ? conn->share : "",
+               conn->username != NULL ? conn->username : "");
 
     return MC_PPR_OK;
 }

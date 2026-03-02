@@ -146,6 +146,7 @@ typedef enum
 
 /*** forward declarations (file scope functions) *************************************************/
 
+static const char *panel_format (WPanel *panel);
 static const char *string_file_name (const file_entry_t *fe, int len);
 static const char *string_file_size (const file_entry_t *fe, int len);
 static const char *string_file_size_brief (const file_entry_t *fe, int len);
@@ -2136,7 +2137,20 @@ panel_plugin_apply_default_columns_format (WPanel *panel)
 
     cols = panel_plugin_get_columns (panel, &cols_count);
     if (cols == NULL || cols_count == 0)
+    {
+        /* Plugin has no custom columns — recalculate standard format for current width */
+        GSList *form;
+        char *err = NULL;
+
+        form = use_display_format (panel, panel_format (panel), &err, FALSE);
+        if (form != NULL)
+        {
+            g_slist_free_full (panel->format, (GDestroyNotify) format_item_free);
+            panel->format = form;
+        }
+        g_free (err);
         return;
+    }
 
     if (panel->plugin->get_default_format != NULL)
         configured_fmt = panel->plugin->get_default_format (panel->plugin_data);
@@ -5312,6 +5326,7 @@ set_panel_formats (WPanel *p)
 
     if (p != NULL && p->is_plugin_panel)
     {
+        panel_update_cols (WIDGET (p), p->frame_size);
         panel_plugin_apply_default_columns_format (p);
         return 0;
     }
