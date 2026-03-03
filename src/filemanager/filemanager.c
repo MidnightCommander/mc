@@ -1140,6 +1140,24 @@ midnight_execute_cmd (Widget *sender, long command)
         }
     }
 
+    /* Copy/Move FROM regular panel TO plugin panel with put_file support */
+    if (!current_panel->is_plugin_panel && get_other_type () == view_listing
+        && other_panel->is_plugin_panel && other_panel->plugin != NULL
+        && other_panel->plugin->put_file != NULL)
+    {
+        switch (command)
+        {
+        case CK_Copy:
+            plugin_panel_put_cmd (current_panel);
+            return MSG_HANDLED;
+        case CK_Move:
+            plugin_panel_put_move_cmd (current_panel);
+            return MSG_HANDLED;
+        default:
+            break;
+        }
+    }
+
     switch (command)
     {
     case CK_About:

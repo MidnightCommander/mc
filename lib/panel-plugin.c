@@ -32,10 +32,16 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "lib/global.h"
 #include "lib/editor-plugin.h"
 #include "lib/panel-plugin.h"
+
+#include "src/filemanager/dir.h"
 
 /*** global variables ****************************************************************************/
 
@@ -53,6 +59,24 @@ static GSList *editor_plugin_registry = NULL;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+mc_pp_add_entry (void *list, const char *name, mode_t mode, off_t size, time_t mtime)
+{
+    struct stat st;
+
+    memset (&st, 0, sizeof (st));
+    st.st_mode = mode;
+    st.st_size = size;
+    st.st_mtime = mtime;
+    st.st_uid = getuid ();
+    st.st_gid = getgid ();
+    st.st_nlink = 1;
+
+    dir_list_append ((dir_list *) list, name, &st, S_ISDIR (mode), FALSE);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
