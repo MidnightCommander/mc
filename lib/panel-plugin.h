@@ -15,7 +15,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MC_PANEL_PLUGIN_API_VERSION 2
+#define MC_PANEL_PLUGIN_API_VERSION 4
 #define MC_PANEL_PLUGIN_ENTRY       "mc_panel_plugin_register"
 
 /*** enums ***************************************************************************************/
@@ -24,7 +24,8 @@ typedef enum
 {
     MC_PPR_OK = 0,
     MC_PPR_FAILED = -1,
-    MC_PPR_NOT_SUPPORTED = -2
+    MC_PPR_NOT_SUPPORTED = -2,
+    MC_PPR_CLOSE = -3
 } mc_pp_result_t;
 
 typedef enum
@@ -34,7 +35,8 @@ typedef enum
     MC_PPF_GET_FILES = 1 << 1, /* can extract files */
     MC_PPF_DELETE = 1 << 2,    /* can delete items */
     MC_PPF_CUSTOM_TITLE = 1 << 3,
-    MC_PPF_CREATE = 1 << 4 /* supports Shift+F4 (create item) */
+    MC_PPF_CREATE = 1 << 4,   /* supports Shift+F4 (create item) */
+    MC_PPF_PUT_FILES = 1 << 5 /* can accept files (put_file/save_file) */
 } mc_pp_flags_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -96,6 +98,9 @@ typedef struct mc_panel_plugin_t
        filename may be NULL to use default help file; node may be NULL for default node. */
     mc_pp_result_t (*get_help_info) (void *plugin_data, const char **filename, const char **node);
     mc_pp_result_t (*get_local_copy) (void *plugin_data, const char *fname, char **local_path);
+    mc_pp_result_t (*put_file) (void *plugin_data, const char *local_path, const char *dest_name);
+    mc_pp_result_t (*save_file) (void *plugin_data, const char *local_path,
+                                 const char *remote_name);
     mc_pp_result_t (*delete_items) (void *plugin_data, const char **names, int count);
     const char *(*get_title) (void *plugin_data);
     mc_pp_result_t (*handle_key) (void *plugin_data, int key);
@@ -116,6 +121,10 @@ typedef const mc_panel_plugin_t *(*mc_panel_plugin_register_fn) (void);
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
+
+/* Shared helper: build a struct stat and append one entry to the dir_list.
+   Plugins that used a local add_entry()/add_fake_entry() can call this instead. */
+void mc_pp_add_entry (void *list, const char *name, mode_t mode, off_t size, time_t mtime);
 
 /* Registry */
 gboolean mc_panel_plugin_add (const mc_panel_plugin_t *plugin);

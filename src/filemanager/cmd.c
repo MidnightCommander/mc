@@ -747,11 +747,25 @@ edit_cmd (const WPanel *panel)
 
             {
                 vfs_path_t *local_vpath;
+                struct stat st_before, st_after;
+
+                (void) stat (local_path, &st_before);
 
                 local_vpath = vfs_path_from_str (local_path);
                 if (regex_command (local_vpath, "Edit") == 0)
                     do_edit (local_vpath);
                 vfs_path_free (local_vpath, TRUE);
+
+                if (panel->plugin->save_file != NULL && stat (local_path, &st_after) == 0
+                    && st_after.st_mtime != st_before.st_mtime)
+                {
+                    mc_pp_result_t sr;
+
+                    sr = panel->plugin->save_file (panel->plugin_data, local_path, fe->fname->str);
+                    if (sr != MC_PPR_OK)
+                        message (D_ERROR, MSG_ERROR, _ ("Cannot save %s back to plugin"),
+                                 fe->fname->str);
+                }
             }
             unlink (local_path);
             g_free (local_path);
@@ -799,11 +813,25 @@ edit_cmd_force_internal (const WPanel *panel)
 
             {
                 vfs_path_t *local_vpath;
+                struct stat st_before, st_after;
+
+                (void) stat (local_path, &st_before);
 
                 local_vpath = vfs_path_from_str (local_path);
                 if (regex_command (local_vpath, "Edit") == 0)
                     edit_file_at_line (local_vpath, TRUE, 1);
                 vfs_path_free (local_vpath, TRUE);
+
+                if (panel->plugin->save_file != NULL && stat (local_path, &st_after) == 0
+                    && st_after.st_mtime != st_before.st_mtime)
+                {
+                    mc_pp_result_t sr;
+
+                    sr = panel->plugin->save_file (panel->plugin_data, local_path, fe->fname->str);
+                    if (sr != MC_PPR_OK)
+                        message (D_ERROR, MSG_ERROR, _ ("Cannot save %s back to plugin"),
+                                 fe->fname->str);
+                }
             }
             unlink (local_path);
             g_free (local_path);
@@ -1853,6 +1881,148 @@ plugin_panel_move_cmd (WPanel *panel)
     g_ptr_array_free (names, TRUE);
     g_ptr_array_free (moved_names, TRUE);
     g_free (dest_dir);
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+plugin_panel_put_cmd (WPanel *panel)
+{
+    const WPanel *dest;
+    int i;
+
+    dest = other_panel;
+
+    if (!dest->is_plugin_panel || dest->plugin == NULL || dest->plugin_data == NULL)
+        return;
+
+    if (dest->plugin->put_file == NULL)
+    {
+        message (D_ERROR, MSG_ERROR, _ ("This plugin does not support receiving files"));
+        return;
+    }
+
+    if (panel->marked > 0)
+    {
+        for (i = 0; i < panel->dir.len; i++)
+        {
+            const file_entry_t *fe = &panel->dir.list[i];
+            char *full_path;
+            mc_pp_result_t r;
+
+            if (!fe->f.marked)
+                continue;
+
+            if (S_ISDIR (fe->st.st_mode))
+                continue;
+
+            full_path = mc_build_filename (vfs_path_as_str (panel->cwd_vpath), fe->fname->str,
+                                           (char *) NULL);
+            r = dest->plugin->put_file (dest->plugin_data, full_path, fe->fname->str);
+            if (r != MC_PPR_OK)
+                message (D_ERROR, MSG_ERROR, _ ("Cannot copy %s to plugin"), fe->fname->str);
+
+            g_free (full_path);
+        }
+    }
+    else
+    {
+        const file_entry_t *fe;
+        char *full_path;
+        mc_pp_result_t r;
+
+        fe = panel_current_entry (panel);
+        if (fe == NULL || S_ISDIR (fe->st.st_mode))
+            return;
+
+        full_path =
+            mc_build_filename (vfs_path_as_str (panel->cwd_vpath), fe->fname->str, (char *) NULL);
+        r = dest->plugin->put_file (dest->plugin_data, full_path, fe->fname->str);
+        if (r != MC_PPR_OK)
+            message (D_ERROR, MSG_ERROR, _ ("Cannot copy %s to plugin"), fe->fname->str);
+
+        g_free (full_path);
+    }
+
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+plugin_panel_put_move_cmd (WPanel *panel)
+{
+    const WPanel *dest;
+    int i;
+
+    dest = other_panel;
+
+    if (!dest->is_plugin_panel || dest->plugin == NULL || dest->plugin_data == NULL)
+        return;
+
+    if (dest->plugin->put_file == NULL)
+    {
+        message (D_ERROR, MSG_ERROR, _ ("This plugin does not support receiving files"));
+        return;
+    }
+
+    if (panel->marked > 0)
+    {
+        for (i = 0; i < panel->dir.len; i++)
+        {
+            const file_entry_t *fe = &panel->dir.list[i];
+            char *full_path;
+            mc_pp_result_t r;
+
+            if (!fe->f.marked)
+                continue;
+
+            if (S_ISDIR (fe->st.st_mode))
+                continue;
+
+            full_path = mc_build_filename (vfs_path_as_str (panel->cwd_vpath), fe->fname->str,
+                                           (char *) NULL);
+            r = dest->plugin->put_file (dest->plugin_data, full_path, fe->fname->str);
+            if (r != MC_PPR_OK)
+            {
+                message (D_ERROR, MSG_ERROR, _ ("Cannot move %s to plugin"), fe->fname->str);
+                g_free (full_path);
+                continue;
+            }
+
+            if (unlink (full_path) != 0)
+                message (D_ERROR, MSG_ERROR, _ ("Cannot delete local file %s"), fe->fname->str);
+
+            g_free (full_path);
+        }
+    }
+    else
+    {
+        const file_entry_t *fe;
+        char *full_path;
+        mc_pp_result_t r;
+
+        fe = panel_current_entry (panel);
+        if (fe == NULL || S_ISDIR (fe->st.st_mode))
+            return;
+
+        full_path =
+            mc_build_filename (vfs_path_as_str (panel->cwd_vpath), fe->fname->str, (char *) NULL);
+        r = dest->plugin->put_file (dest->plugin_data, full_path, fe->fname->str);
+        if (r != MC_PPR_OK)
+        {
+            message (D_ERROR, MSG_ERROR, _ ("Cannot move %s to plugin"), fe->fname->str);
+            g_free (full_path);
+            return;
+        }
+
+        if (unlink (full_path) != 0)
+            message (D_ERROR, MSG_ERROR, _ ("Cannot delete local file %s"), fe->fname->str);
+
+        g_free (full_path);
+    }
+
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 }
 

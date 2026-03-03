@@ -33,8 +33,6 @@
 #include "lib/global.h"
 #include "lib/panel-plugin.h"
 
-#include "src/filemanager/dir.h"
-
 /*** file scope type declarations ****************************************************************/
 
 typedef enum
@@ -100,30 +98,14 @@ static const mc_panel_plugin_t systemd_plugin = {
     .chdir = systemd_chdir,
     .enter = systemd_enter,
     .get_local_copy = systemd_get_local_copy,
+    .put_file = NULL,
+    .save_file = NULL,
     .delete_items = systemd_delete_items,
     .get_title = systemd_get_title,
     .handle_key = NULL,
 };
 
 /*** file scope functions ************************************************************************/
-
-static void
-add_entry (dir_list *list, const char *name, mode_t mode, off_t size)
-{
-    struct stat st;
-
-    memset (&st, 0, sizeof (st));
-    st.st_mode = mode;
-    st.st_size = size;
-    st.st_mtime = time (NULL);
-    st.st_uid = getuid ();
-    st.st_gid = getgid ();
-    st.st_nlink = 1;
-
-    dir_list_append (list, name, &st, S_ISDIR (mode), FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static mode_t
 state_to_mode (unit_state_t state)
@@ -429,7 +411,6 @@ systemd_close (void *plugin_data)
 static mc_pp_result_t
 systemd_get_items (void *plugin_data, void *list_ptr)
 {
-    dir_list *list = (dir_list *) list_ptr;
     systemd_data_t *data = (systemd_data_t *) plugin_data;
 
     if (data->current_type == NULL)
@@ -438,7 +419,8 @@ systemd_get_items (void *plugin_data, void *list_ptr)
         size_t i;
 
         for (i = 0; i < unit_type_dirs_count; i++)
-            add_entry (list, unit_type_dirs[i].dir_name, S_IFDIR | 0755, 4096);
+            mc_pp_add_entry (list_ptr, unit_type_dirs[i].dir_name, S_IFDIR | 0755, 4096,
+                             time (NULL));
     }
     else
     {
@@ -454,7 +436,7 @@ systemd_get_items (void *plugin_data, void *list_ptr)
                 char *display_name;
 
                 display_name = g_strdup_printf ("%s%s", state_to_prefix (u->state), u->name);
-                add_entry (list, display_name, state_to_mode (u->state), 0);
+                mc_pp_add_entry (list_ptr, display_name, state_to_mode (u->state), 0, time (NULL));
                 g_free (display_name);
             }
         }
@@ -488,7 +470,7 @@ systemd_chdir (void *plugin_data, const char *path)
         }
 
         /* already at root — close plugin */
-        return MC_PPR_NOT_SUPPORTED;
+        return MC_PPR_CLOSE;
     }
 
     /* entering a type directory */

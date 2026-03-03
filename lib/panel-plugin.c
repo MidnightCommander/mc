@@ -32,10 +32,16 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "lib/global.h"
 #include "lib/editor-plugin.h"
 #include "lib/panel-plugin.h"
+
+#include "src/filemanager/dir.h"
 
 /*** global variables ****************************************************************************/
 
@@ -51,8 +57,80 @@ static GSList *editor_plugin_registry = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+mc_pp_dir_list_grow (dir_list *list, int delta)
+{
+    int size;
+
+    if (list == NULL || delta == 0)
+        return (list != NULL);
+
+    size = list->size + delta;
+    if (size <= 0)
+        size = 128;
+
+    if (size != list->size)
+    {
+        file_entry_t *fe;
+
+        fe = g_try_renew (file_entry_t, list->list, size);
+        if (fe == NULL)
+            return FALSE;
+
+        list->list = fe;
+        list->size = size;
+    }
+
+    list->len = MIN (list->len, list->size);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+mc_pp_dir_list_append (dir_list *list, const char *fname, const struct stat *st)
+{
+    file_entry_t *fentry;
+
+    if (list->len == list->size && !mc_pp_dir_list_grow (list, 128))
+        return FALSE;
+
+    fentry = &list->list[list->len];
+    fentry->fname = g_string_new (fname);
+    fentry->f.marked = 0;
+    fentry->f.link_to_dir = S_ISDIR (st->st_mode) ? 1 : 0;
+    fentry->f.stale_link = 0;
+    fentry->f.dir_size_computed = 0;
+    fentry->st = *st;
+    fentry->name_sort_key = NULL;
+    fentry->extension_sort_key = NULL;
+
+    list->len++;
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
+mc_pp_add_entry (void *list, const char *name, mode_t mode, off_t size, time_t mtime)
+{
+    struct stat st;
+
+    memset (&st, 0, sizeof (st));
+    st.st_mode = mode;
+    st.st_size = size;
+    st.st_mtime = mtime;
+    st.st_uid = getuid ();
+    st.st_gid = getgid ();
+    st.st_nlink = 1;
+
+    (void) mc_pp_dir_list_append ((dir_list *) list, name, &st);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean

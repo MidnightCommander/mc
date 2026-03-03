@@ -2608,7 +2608,7 @@ goto_parent_dir (WPanel *panel)
                 g_free (focus_name);
                 return;
             }
-            if (r == MC_PPR_NOT_SUPPORTED)
+            if (r == MC_PPR_NOT_SUPPORTED || r == MC_PPR_CLOSE)
             {
                 g_free (focus_name);
                 panel_plugin_close (panel);
@@ -3359,7 +3359,7 @@ do_enter (WPanel *panel)
                 g_free (focus_name);
                 return TRUE;
             }
-            if (r == MC_PPR_NOT_SUPPORTED)
+            if (r == MC_PPR_NOT_SUPPORTED || r == MC_PPR_CLOSE)
             {
                 g_free (focus_name);
                 panel_plugin_close (panel);

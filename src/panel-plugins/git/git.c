@@ -121,6 +121,8 @@ static const mc_panel_plugin_t git_plugin = {
     .view = git_view_item,
     .get_help_info = git_get_help_info,
     .get_local_copy = git_get_local_copy,
+    .put_file = NULL,
+    .save_file = NULL,
     .delete_items = NULL,
     .get_title = git_get_title,
     .handle_key = git_handle_key,
@@ -744,6 +746,58 @@ git_detect_current_branch (git_data_t *data)
     }
 
     return g_strdup ("?");
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Try to find a base branch (master or main) to use as fallback when no upstream is configured. */
+static char *
+git_detect_base_ref (git_data_t *data)
+{
+    static const char *candidates[] = { "master", "main" };
+    char *current_branch;
+    size_t i;
+
+    current_branch = git_detect_current_branch (data);
+
+    for (i = 0; i < G_N_ELEMENTS (candidates); i++)
+    {
+        char *argv[] = { (char *) "git",
+                         (char *) "-C",
+                         data->repo_root,
+                         (char *) "rev-parse",
+                         (char *) "--verify",
+                         (char *) "--quiet",
+                         NULL,
+                         NULL };
+        char *ref;
+        char *out = NULL;
+
+        ref = g_strdup_printf ("refs/heads/%s", candidates[i]);
+        argv[6] = ref;
+
+        if (git_run_stdout (argv, &out))
+        {
+            g_free (out);
+
+            /* Don't use base ref if we ARE on that branch */
+            if (current_branch != NULL && strcmp (current_branch, candidates[i]) == 0)
+            {
+                g_free (ref);
+                continue;
+            }
+
+            g_free (ref);
+            g_free (current_branch);
+            return g_strdup (candidates[i]);
+        }
+
+        g_free (ref);
+        g_free (out);
+    }
+
+    g_free (current_branch);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1938,20 +1992,46 @@ git_get_items (void *plugin_data, void *list_ptr)
             }
             else
             {
-                char *argv[] = { (char *) "git",
-                                 (char *) "-C",
-                                 data->repo_root,
-                                 (char *) "log",
-                                 (char *) "--no-color",
-                                 (char *) "--decorate=no",
-                                 (char *) "--first-parent",
-                                 (char *) "--pretty=format:%H%x09%h%x09%ct%x09%s",
-                                 (char *) "-n",
-                                 (char *) "200",
-                                 (char *) "HEAD",
-                                 NULL };
+                char *base_ref;
 
-                ok2 = git_run_stdout (argv, &out2);
+                base_ref = git_detect_base_ref (data);
+                if (base_ref != NULL)
+                {
+                    char *argv[] = { (char *) "git",
+                                     (char *) "-C",
+                                     data->repo_root,
+                                     (char *) "log",
+                                     (char *) "--no-color",
+                                     (char *) "--decorate=no",
+                                     (char *) "--first-parent",
+                                     (char *) "--pretty=format:%H%x09%h%x09%ct%x09%s",
+                                     (char *) "-n",
+                                     (char *) "200",
+                                     NULL,
+                                     NULL };
+
+                    range = g_strdup_printf ("%s..HEAD", base_ref);
+                    argv[10] = range;
+                    ok2 = git_run_stdout (argv, &out2);
+                    g_free (base_ref);
+                }
+                else
+                {
+                    char *argv[] = { (char *) "git",
+                                     (char *) "-C",
+                                     data->repo_root,
+                                     (char *) "log",
+                                     (char *) "--no-color",
+                                     (char *) "--decorate=no",
+                                     (char *) "--first-parent",
+                                     (char *) "--pretty=format:%H%x09%h%x09%ct%x09%s",
+                                     (char *) "-n",
+                                     (char *) "200",
+                                     (char *) "HEAD",
+                                     NULL };
+
+                    ok2 = git_run_stdout (argv, &out2);
+                }
             }
             g_free (range);
             g_free (upstream_ref);
@@ -2051,7 +2131,7 @@ git_chdir (void *plugin_data, const char *path)
     if (strcmp (path, "..") == 0)
     {
         if ((git_view_t) data->view == GIT_VIEW_STATUS)
-            return MC_PPR_NOT_SUPPORTED;
+            return MC_PPR_CLOSE; /* close plugin */
 
         if ((git_view_t) data->view == GIT_VIEW_BRANCHES)
         {

@@ -99,6 +99,8 @@ void plugin_panel_copy_cmd (WPanel *panel);
 void plugin_panel_move_cmd (WPanel *panel);
 void plugin_panel_delete_cmd (WPanel *panel);
 void plugin_panel_create_cmd (WPanel *panel);
+void plugin_panel_put_cmd (WPanel *panel);
+void plugin_panel_put_move_cmd (WPanel *panel);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
