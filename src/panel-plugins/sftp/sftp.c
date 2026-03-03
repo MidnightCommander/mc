@@ -46,8 +46,6 @@
 #include "lib/vfs/utilvfs.h"
 #include "lib/widget.h"
 
-#include "src/filemanager/dir.h"
-
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
@@ -98,6 +96,8 @@ static mc_pp_result_t sftp_get_items (void *plugin_data, void *list_ptr);
 static mc_pp_result_t sftp_chdir (void *plugin_data, const char *path);
 static mc_pp_result_t sftp_enter (void *plugin_data, const char *name, const struct stat *st);
 static mc_pp_result_t sftp_get_local_copy (void *plugin_data, const char *fname, char **local_path);
+static mc_pp_result_t sftp_put_file (void *plugin_data, const char *local_path,
+                                     const char *dest_name);
 static mc_pp_result_t sftp_delete_items (void *plugin_data, const char **names, int count);
 static const char *sftp_get_title (void *plugin_data);
 static mc_pp_result_t sftp_create_item (void *plugin_data);
@@ -119,8 +119,8 @@ static const mc_panel_plugin_t sftp_plugin = {
     .display_name = "SFTP network",
     .proto = "sftp",
     .prefix = NULL,
-    .flags =
-        MC_PPF_NAVIGATE | MC_PPF_GET_FILES | MC_PPF_DELETE | MC_PPF_CUSTOM_TITLE | MC_PPF_CREATE,
+    .flags = MC_PPF_NAVIGATE | MC_PPF_GET_FILES | MC_PPF_DELETE | MC_PPF_CUSTOM_TITLE
+        | MC_PPF_CREATE | MC_PPF_PUT_FILES,
 
     .open = sftp_open,
     .close = sftp_close,
@@ -129,6 +129,8 @@ static const mc_panel_plugin_t sftp_plugin = {
     .chdir = sftp_chdir,
     .enter = sftp_enter,
     .get_local_copy = sftp_get_local_copy,
+    .put_file = sftp_put_file,
+    .save_file = sftp_put_file,
     .delete_items = sftp_delete_items,
     .get_title = sftp_get_title,
     .handle_key = NULL,
@@ -136,24 +138,6 @@ static const mc_panel_plugin_t sftp_plugin = {
 };
 
 /*** file scope functions ************************************************************************/
-
-static void
-add_entry (dir_list *list, const char *name, mode_t mode, off_t size, time_t mtime)
-{
-    struct stat st;
-
-    memset (&st, 0, sizeof (st));
-    st.st_mode = mode;
-    st.st_size = size;
-    st.st_mtime = mtime;
-    st.st_uid = getuid ();
-    st.st_gid = getgid ();
-    st.st_nlink = 1;
-
-    dir_list_append (list, name, &st, S_ISDIR (mode), FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void
 sftp_entry_free (gpointer p)
@@ -882,7 +866,6 @@ sftp_close (void *plugin_data)
 static mc_pp_result_t
 sftp_get_items (void *plugin_data, void *list_ptr)
 {
-    dir_list *list = (dir_list *) list_ptr;
     sftp_data_t *data = (sftp_data_t *) plugin_data;
     guint i;
 
@@ -893,7 +876,7 @@ sftp_get_items (void *plugin_data, void *list_ptr)
             const sftp_connection_t *conn =
                 (const sftp_connection_t *) g_ptr_array_index (data->connections, i);
 
-            add_entry (list, conn->label, S_IFDIR | 0755, 0, time (NULL));
+            mc_pp_add_entry (list_ptr, conn->label, S_IFDIR | 0755, 0, time (NULL));
         }
         return MC_PPR_OK;
     }
@@ -911,8 +894,8 @@ sftp_get_items (void *plugin_data, void *list_ptr)
                 mode = S_IFREG | 0644;
 
             size = S_ISDIR (mode) ? 0 : e->st.st_size;
-            add_entry (list, e->name, mode, size,
-                       e->st.st_mtime != 0 ? e->st.st_mtime : time (NULL));
+            mc_pp_add_entry (list_ptr, e->name, mode, size,
+                             e->st.st_mtime != 0 ? e->st.st_mtime : time (NULL));
         }
     }
 
@@ -929,7 +912,7 @@ sftp_chdir (void *plugin_data, const char *path)
     if (strcmp (path, "..") == 0)
     {
         if (data->at_root)
-            return MC_PPR_NOT_SUPPORTED;
+            return MC_PPR_CLOSE; /* close plugin */
 
         if (data->current_path != NULL && strcmp (data->current_path, "/") == 0)
         {
@@ -1095,6 +1078,60 @@ sftp_get_local_copy (void *plugin_data, const char *fname, char **local_path)
 
     close (local_fd);
     libssh2_sftp_close (fileh);
+
+    return MC_PPR_OK;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_pp_result_t
+sftp_put_file (void *plugin_data, const char *local_path, const char *dest_name)
+{
+    sftp_data_t *data = (sftp_data_t *) plugin_data;
+    LIBSSH2_SFTP_HANDLE *fileh;
+    char *remote_path;
+    int local_fd;
+
+    if (data->at_root || data->sftp_session == NULL || data->current_path == NULL)
+        return MC_PPR_FAILED;
+
+    local_fd = open (local_path, O_RDONLY);
+    if (local_fd < 0)
+        return MC_PPR_FAILED;
+
+    remote_path = sftp_join_path (data->current_path, dest_name);
+    fileh = libssh2_sftp_open (
+        data->sftp_session, remote_path, LIBSSH2_FXF_WRITE | LIBSSH2_FXF_CREAT | LIBSSH2_FXF_TRUNC,
+        LIBSSH2_SFTP_S_IRUSR | LIBSSH2_SFTP_S_IWUSR | LIBSSH2_SFTP_S_IRGRP | LIBSSH2_SFTP_S_IROTH);
+    g_free (remote_path);
+
+    if (fileh == NULL)
+    {
+        close (local_fd);
+        return MC_PPR_FAILED;
+    }
+
+    while (TRUE)
+    {
+        char buf[8192];
+        ssize_t n;
+
+        n = read (local_fd, buf, sizeof (buf));
+        if (n == 0)
+            break;
+
+        if (n < 0 || libssh2_sftp_write (fileh, buf, (size_t) n) != n)
+        {
+            close (local_fd);
+            libssh2_sftp_close (fileh);
+            return MC_PPR_FAILED;
+        }
+    }
+
+    close (local_fd);
+    libssh2_sftp_close (fileh);
+
+    sftp_reload_entries (data);
 
     return MC_PPR_OK;
 }

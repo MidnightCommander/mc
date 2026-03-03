@@ -41,8 +41,6 @@
 #include "lib/panel-plugin.h"
 #include "lib/widget.h"
 
-#include "src/filemanager/dir.h"
-
 /*** file scope type declarations ****************************************************************/
 
 /* A saved connection bookmark */
@@ -102,6 +100,8 @@ static mc_pp_result_t samba_chdir (void *plugin_data, const char *path);
 static mc_pp_result_t samba_enter (void *plugin_data, const char *name, const struct stat *st);
 static mc_pp_result_t samba_get_local_copy (void *plugin_data, const char *fname,
                                             char **local_path);
+static mc_pp_result_t samba_put_file (void *plugin_data, const char *local_path,
+                                      const char *dest_name);
 static mc_pp_result_t samba_delete_items (void *plugin_data, const char **names, int count);
 static const char *samba_get_title (void *plugin_data);
 static mc_pp_result_t samba_create_item (void *plugin_data);
@@ -115,8 +115,8 @@ static const mc_panel_plugin_t samba_plugin = {
     .display_name = "Samba network",
     .proto = "smb",
     .prefix = NULL,
-    .flags =
-        MC_PPF_NAVIGATE | MC_PPF_GET_FILES | MC_PPF_DELETE | MC_PPF_CUSTOM_TITLE | MC_PPF_CREATE,
+    .flags = MC_PPF_NAVIGATE | MC_PPF_GET_FILES | MC_PPF_DELETE | MC_PPF_CUSTOM_TITLE
+        | MC_PPF_CREATE | MC_PPF_PUT_FILES,
 
     .open = samba_open,
     .close = samba_close,
@@ -125,6 +125,8 @@ static const mc_panel_plugin_t samba_plugin = {
     .chdir = samba_chdir,
     .enter = samba_enter,
     .get_local_copy = samba_get_local_copy,
+    .put_file = samba_put_file,
+    .save_file = samba_put_file,
     .delete_items = samba_delete_items,
     .get_title = samba_get_title,
     .handle_key = NULL,
@@ -132,24 +134,6 @@ static const mc_panel_plugin_t samba_plugin = {
 };
 
 /*** file scope functions ************************************************************************/
-
-static void
-add_entry (dir_list *list, const char *name, mode_t mode, off_t size, time_t mtime)
-{
-    struct stat st;
-
-    memset (&st, 0, sizeof (st));
-    st.st_mode = mode;
-    st.st_size = size;
-    st.st_mtime = mtime;
-    st.st_uid = getuid ();
-    st.st_gid = getgid ();
-    st.st_nlink = 1;
-
-    dir_list_append (list, name, &st, S_ISDIR (mode), FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void
 stderr_silence_begin (stderr_silence_t *s)
@@ -910,7 +894,6 @@ samba_close (void *plugin_data)
 static mc_pp_result_t
 samba_get_items (void *plugin_data, void *list_ptr)
 {
-    dir_list *list = (dir_list *) list_ptr;
     samba_data_t *data = (samba_data_t *) plugin_data;
     guint i;
 
@@ -922,7 +905,7 @@ samba_get_items (void *plugin_data, void *list_ptr)
             const smb_connection_t *conn =
                 (const smb_connection_t *) g_ptr_array_index (data->connections, i);
 
-            add_entry (list, conn->label, S_IFDIR | 0755, 0, time (NULL));
+            mc_pp_add_entry (list_ptr, conn->label, S_IFDIR | 0755, 0, time (NULL));
         }
         return MC_PPR_OK;
     }
@@ -949,7 +932,7 @@ samba_get_items (void *plugin_data, void *list_ptr)
             }
 
             mtime = (e->st.st_mtime != 0) ? e->st.st_mtime : time (NULL);
-            add_entry (list, e->name, mode, size, mtime);
+            mc_pp_add_entry (list_ptr, e->name, mode, size, mtime);
         }
     }
 
@@ -969,7 +952,7 @@ samba_chdir (void *plugin_data, const char *path)
     if (strcmp (path, "..") == 0)
     {
         if (data->at_root)
-            return MC_PPR_NOT_SUPPORTED; /* close plugin */
+            return MC_PPR_CLOSE; /* close plugin */
 
         /* Are we at the connection's base URL (smb://SERVER or smb://SERVER/SHARE)? */
         {
@@ -1195,6 +1178,78 @@ samba_get_local_copy (void *plugin_data, const char *fname, char **local_path)
         stderr_silence_end (&sil);
         return MC_PPR_FAILED;
     }
+
+    stderr_silence_end (&sil);
+    return MC_PPR_OK;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_pp_result_t
+samba_put_file (void *plugin_data, const char *local_path, const char *dest_name)
+{
+    samba_data_t *data = (samba_data_t *) plugin_data;
+    char *smb_url;
+    int smb_fd;
+    int local_fd;
+    char buf[8192];
+    ssize_t n;
+    stderr_silence_t sil;
+
+    if (data->at_root || data->current_url == NULL)
+        return MC_PPR_FAILED;
+
+    local_fd = open (local_path, O_RDONLY);
+    if (local_fd < 0)
+    {
+        samba_log ("samba: put_file open local '%s' failed errno=%d (%s)\n", local_path, errno,
+                   g_strerror (errno));
+        return MC_PPR_FAILED;
+    }
+
+    smb_url = g_strdup_printf ("%s/%s", data->current_url, dest_name);
+    samba_log ("samba: put_file url='%s' local='%s'\n", smb_url, local_path);
+
+    stderr_silence_begin (&sil);
+    smbc_set_context (data->ctx);
+    errno = 0;
+    smb_fd = smbc_open (smb_url, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    g_free (smb_url);
+
+    if (smb_fd < 0)
+    {
+        stderr_silence_end (&sil);
+        close (local_fd);
+        samba_log ("samba: smbc_open for write failed errno=%d (%s)\n", errno, g_strerror (errno));
+        return MC_PPR_FAILED;
+    }
+
+    while ((n = read (local_fd, buf, sizeof (buf))) > 0)
+    {
+        if (smbc_write (smb_fd, buf, (size_t) n) != n)
+        {
+            samba_log ("samba: smbc_write failed errno=%d (%s)\n", errno, g_strerror (errno));
+            smbc_close (smb_fd);
+            close (local_fd);
+            stderr_silence_end (&sil);
+            return MC_PPR_FAILED;
+        }
+    }
+
+    close (local_fd);
+    smbc_close (smb_fd);
+
+    if (n < 0)
+    {
+        samba_log ("samba: read local file failed errno=%d (%s)\n", errno, g_strerror (errno));
+        stderr_silence_end (&sil);
+        return MC_PPR_FAILED;
+    }
+
+    /* Reload entries to reflect the new file */
+    if (data->entries != NULL)
+        g_ptr_array_free (data->entries, TRUE);
+    data->entries = smb_load_entries (data);
 
     stderr_silence_end (&sil);
     return MC_PPR_OK;

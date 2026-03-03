@@ -32,8 +32,6 @@
 #include "lib/panel-plugin.h"
 #include "lib/widget.h"
 
-#include "src/filemanager/dir.h"
-
 /*** file scope type declarations ****************************************************************/
 
 typedef enum
@@ -106,6 +104,8 @@ static const mc_panel_plugin_t docker_plugin = {
     .chdir = docker_chdir,
     .enter = docker_enter,
     .get_local_copy = docker_get_local_copy,
+    .put_file = NULL,
+    .save_file = NULL,
     .delete_items = docker_delete_items,
     .get_title = docker_get_title,
     .handle_key = NULL,
@@ -113,24 +113,6 @@ static const mc_panel_plugin_t docker_plugin = {
 };
 
 /*** file scope functions ************************************************************************/
-
-static void
-add_entry (dir_list *list, const char *name, mode_t mode, off_t size)
-{
-    struct stat st;
-
-    memset (&st, 0, sizeof (st));
-    st.st_mode = mode;
-    st.st_size = size;
-    st.st_mtime = time (NULL);
-    st.st_uid = getuid ();
-    st.st_gid = getgid ();
-    st.st_nlink = 1;
-
-    dir_list_append (list, name, &st, S_ISDIR (mode), FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void
 docker_item_free (gpointer p)
@@ -754,7 +736,6 @@ docker_close (void *plugin_data)
 static mc_pp_result_t
 docker_get_items (void *plugin_data, void *list_ptr)
 {
-    dir_list *list = (dir_list *) list_ptr;
     docker_data_t *data = (docker_data_t *) plugin_data;
     guint idx;
 
@@ -765,14 +746,14 @@ docker_get_items (void *plugin_data, void *list_ptr)
 
         for (sec_i = 0; sec_i < 4; sec_i++)
             if (data->root_focus != NULL && strcmp (sections[sec_i], data->root_focus) == 0)
-                add_entry (list, sections[sec_i], S_IFDIR | 0755, 0);
+                mc_pp_add_entry (list_ptr, sections[sec_i], S_IFDIR | 0755, 0, time (NULL));
 
         for (sec_i = 0; sec_i < 4; sec_i++)
             if (data->root_focus == NULL || strcmp (sections[sec_i], data->root_focus) != 0)
-                add_entry (list, sections[sec_i], S_IFDIR | 0755, 0);
+                mc_pp_add_entry (list_ptr, sections[sec_i], S_IFDIR | 0755, 0, time (NULL));
 
-        add_entry (list, docker_daemon_info_file, S_IFREG | 0644, 0);
-        add_entry (list, docker_version_file, S_IFREG | 0644, 0);
+        mc_pp_add_entry (list_ptr, docker_daemon_info_file, S_IFREG | 0644, 0, time (NULL));
+        mc_pp_add_entry (list_ptr, docker_version_file, S_IFREG | 0644, 0, time (NULL));
         return MC_PPR_OK;
     }
 
@@ -787,7 +768,7 @@ docker_get_items (void *plugin_data, void *list_ptr)
                 (const docker_item_t *) g_ptr_array_index (data->items, idx);
             mode_t mode = item->is_dir ? (S_IFDIR | 0755) : (S_IFREG | 0644);
 
-            add_entry (list, item->name, mode, item->size);
+            mc_pp_add_entry (list_ptr, item->name, mode, item->size, time (NULL));
         }
     }
 
@@ -806,7 +787,7 @@ docker_chdir (void *plugin_data, const char *path)
         switch (data->view)
         {
         case DOCKER_VIEW_ROOT:
-            return MC_PPR_NOT_SUPPORTED;
+            return MC_PPR_CLOSE; /* close plugin */
 
         case DOCKER_VIEW_CONTAINERS_PROJECTS:
             g_free (data->root_focus);

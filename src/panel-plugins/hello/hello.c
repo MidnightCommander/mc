@@ -33,11 +33,6 @@
 #include "lib/global.h"
 #include "lib/panel-plugin.h"
 
-/* dir_list and dir_list_append are in the filemanager dir.h, but we need the
-   dir_list_append prototype.  Since we're a loadable module, we rely on the
-   host exporting it (mc is built with -export-dynamic when HAVE_GMODULE). */
-#include "src/filemanager/dir.h"
-
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
@@ -75,30 +70,14 @@ static const mc_panel_plugin_t hello_plugin = {
     .chdir = hello_chdir,
     .enter = NULL,
     .get_local_copy = hello_get_local_copy,
+    .put_file = NULL,
+    .save_file = NULL,
     .delete_items = hello_delete_items,
     .get_title = hello_get_title,
     .handle_key = NULL,
 };
 
 /*** file scope functions ************************************************************************/
-
-static void
-add_fake_entry (dir_list *list, const char *name, mode_t mode, off_t size)
-{
-    struct stat st;
-
-    memset (&st, 0, sizeof (st));
-    st.st_mode = mode;
-    st.st_size = size;
-    st.st_mtime = time (NULL);
-    st.st_uid = getuid ();
-    st.st_gid = getgid ();
-    st.st_nlink = 1;
-
-    dir_list_append (list, name, &st, S_ISDIR (mode), FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void *
 hello_open (mc_panel_host_t *host, const char *open_path)
@@ -131,7 +110,6 @@ hello_close (void *plugin_data)
 static mc_pp_result_t
 hello_get_items (void *plugin_data, void *list_ptr)
 {
-    dir_list *list = (dir_list *) list_ptr;
     hello_data_t *data = (hello_data_t *) plugin_data;
 
     /* Note: dir_list_init() already creates the ".." entry at index 0,
@@ -140,17 +118,17 @@ hello_get_items (void *plugin_data, void *list_ptr)
     if (data->in_subdir)
     {
         if (!g_hash_table_contains (data->deleted, "deep-file.txt"))
-            add_fake_entry (list, "deep-file.txt", S_IFREG | 0644, 256);
+            mc_pp_add_entry (list_ptr, "deep-file.txt", S_IFREG | 0644, 256, time (NULL));
         if (!g_hash_table_contains (data->deleted, "another.dat"))
-            add_fake_entry (list, "another.dat", S_IFREG | 0644, 1024);
+            mc_pp_add_entry (list_ptr, "another.dat", S_IFREG | 0644, 1024, time (NULL));
     }
     else
     {
         if (!g_hash_table_contains (data->deleted, "hello.txt"))
-            add_fake_entry (list, "hello.txt", S_IFREG | 0644, 42);
+            mc_pp_add_entry (list_ptr, "hello.txt", S_IFREG | 0644, 42, time (NULL));
         if (!g_hash_table_contains (data->deleted, "world.txt"))
-            add_fake_entry (list, "world.txt", S_IFREG | 0644, 100);
-        add_fake_entry (list, "subdir", S_IFDIR | 0755, 4096);
+            mc_pp_add_entry (list_ptr, "world.txt", S_IFREG | 0644, 100, time (NULL));
+        mc_pp_add_entry (list_ptr, "subdir", S_IFDIR | 0755, 4096, time (NULL));
     }
 
     return MC_PPR_OK;
@@ -170,7 +148,7 @@ hello_chdir (void *plugin_data, const char *path)
             data->in_subdir = FALSE;
             return MC_PPR_OK;
         }
-        return MC_PPR_NOT_SUPPORTED; /* close plugin */
+        return MC_PPR_CLOSE; /* close plugin */
     }
 
     if (strcmp (path, "subdir") == 0 && !data->in_subdir)
