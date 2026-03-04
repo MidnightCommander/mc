@@ -80,6 +80,15 @@
 
 /*** forward declarations (file scope functions) *************************************************/
 
+// To prevent compiler warnings from being generated with --enable-tests
+MC_TESTABLE
+GString *exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath);
+
+// To prevent compiler warnings from being generated without --enable-tests
+#if defined(HAVE_TESTS)
+extern char buffer[BUF_1K];
+#endif
+
 /*** file scope variables ************************************************************************/
 
 /* This variable points to a copy of the mc.ext file in memory
@@ -89,7 +98,7 @@
 static mc_config_t *ext_ini = NULL;
 static gchar **ext_ini_groups = NULL;
 static vfs_path_t *localfilecopy_vpath = NULL;
-static char buffer[BUF_1K];
+MC_TESTABLE char buffer[BUF_1K];
 
 static char *pbuffer = NULL;
 static time_t localmtime = 0;
@@ -226,7 +235,7 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static GString *
+MC_TESTABLE GString *
 exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
 {
     GString *shell_string;
@@ -328,7 +337,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
                                     mc_g_string_concat (shell_string, text);
                                 else
                                 {
-                                    strncpy (pbuffer, text->str, text->len);
+                                    strncpy (pbuffer, text->str, text->len + 1);
                                     pbuffer = strchr (pbuffer, '\0');
                                 }
 
