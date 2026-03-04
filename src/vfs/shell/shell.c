@@ -75,6 +75,7 @@
 #include "lib/vfs/gc.h"  // vfs_stamp_create
 
 #include "shell.h"
+#include "shell_ssh2.h"
 #include "shelldef.h"
 
 /*** global variables ****************************************************************************/
@@ -144,6 +145,9 @@ typedef struct
     char *scr_info;
     int host_flags;
     GString *scr_env;
+#ifdef ENABLE_SHELL_SSH2
+    shell_ssh2_t *ssh2; /* NULL = legacy pipe+ssh mode */
+#endif
 } shell_super_t;
 
 typedef struct
@@ -166,6 +170,138 @@ static struct vfs_class *vfs_shell_ops = VFS_CLASS (&shell_subclass);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Write to remote: use libssh2 channel if available, otherwise pipe.
+ */
+static ssize_t
+shell_write (shell_super_t *shell_super, const void *buf, size_t len)
+{
+#ifdef ENABLE_SHELL_SSH2
+    if (shell_super->ssh2 != NULL)
+        return shell_ssh2_write (shell_super->ssh2, buf, len);
+#endif
+    return write (shell_super->sockw, buf, len);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Read from remote: use libssh2 channel if available, otherwise pipe.
+ */
+static ssize_t
+shell_read (shell_super_t *shell_super, void *buf, size_t len)
+{
+#ifdef ENABLE_SHELL_SSH2
+    if (shell_super->ssh2 != NULL)
+        return shell_ssh2_read (shell_super->ssh2, buf, len);
+#endif
+    return read (shell_super->sockr, buf, len);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Read a line terminated by @term from the remote side.
+ * Replacement for vfs_s_get_line() that works with both pipe and libssh2.
+ */
+static gboolean
+shell_get_line (struct vfs_class *me, shell_super_t *shell_super, char *buffer, int size, char term)
+{
+#ifdef ENABLE_SHELL_SSH2
+    if (shell_super->ssh2 != NULL)
+    {
+        int i = 0;
+
+        for (; i < size - 1; i++)
+        {
+            ssize_t n;
+            char c;
+
+            n = shell_ssh2_read (shell_super->ssh2, &c, 1);
+            if (n <= 0)
+            {
+                buffer[i] = '\0';
+                return (i > 0);
+            }
+            buffer[i] = c;
+            if (c == term)
+            {
+                buffer[i] = '\0';
+                return TRUE;
+            }
+            if (c == '\0')
+                return (i > 0);
+        }
+        buffer[i] = '\0';
+        return (i > 0);
+    }
+#endif
+    return vfs_s_get_line (me, shell_super->sockr, buffer, size, term);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Read a newline-terminated line, interruptible by Ctrl-C.
+ * Replacement for vfs_s_get_line_interruptible() that works with both pipe and libssh2.
+ * Returns: number of chars read, 0 on EOF, EINTR on interrupt.
+ */
+static int
+shell_get_line_interruptible (struct vfs_class *me, shell_super_t *shell_super, char *buffer,
+                              int size)
+{
+#ifdef ENABLE_SHELL_SSH2
+    if (shell_super->ssh2 != NULL)
+    {
+        int i = 0;
+
+        (void) me;
+
+        tty_enable_interrupt_key ();
+
+        for (; i < size - 1; i++)
+        {
+            ssize_t n;
+            char c;
+
+            if (tty_got_interrupt ())
+            {
+                buffer[i] = '\0';
+                tty_disable_interrupt_key ();
+                return EINTR;
+            }
+
+            n = shell_ssh2_read (shell_super->ssh2, &c, 1);
+            if (n <= 0)
+            {
+                buffer[i] = '\0';
+                tty_disable_interrupt_key ();
+                return 0;
+            }
+            if (c == '\n')
+            {
+                buffer[i] = '\0';
+                tty_disable_interrupt_key ();
+                return 1;
+            }
+            if (c == '\0')
+            {
+                buffer[i] = '\0';
+                tty_disable_interrupt_key ();
+                return 0;
+            }
+            buffer[i] = c;
+        }
+        buffer[i] = '\0';
+        tty_disable_interrupt_key ();
+        return i;
+    }
+#endif
+    return vfs_s_get_line_interruptible (me, buffer, size, shell_super->sockr);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -242,14 +378,14 @@ shell_decode_reply (char *s, gboolean was_garbage)
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
 
 static int
-shell_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len)
+shell_get_reply (struct vfs_class *me, shell_super_t *shell_super, char *string_buf, int string_len)
 {
     char answer[BUF_1K];
     gboolean was_garbage = FALSE;
 
     while (TRUE)
     {
-        if (!vfs_s_get_line (me, sock, answer, sizeof (answer), '\n'))
+        if (!shell_get_line (me, shell_super, answer, sizeof (answer), '\n'))
         {
             if (string_buf != NULL)
                 *string_buf = '\0';
@@ -287,14 +423,14 @@ shell_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
     }
 
     tty_enable_interrupt_key ();
-    status = write (SHELL_SUPER (super)->sockw, cmd, cmd_len);
+    status = shell_write (SHELL_SUPER (super), cmd, cmd_len);
     tty_disable_interrupt_key ();
 
     if (status < 0)
         return TRANSIENT;
 
     if (wait_reply)
-        return shell_get_reply (me, SHELL_SUPER (super)->sockr,
+        return shell_get_reply (me, SHELL_SUPER (super),
                                 (wait_reply & WANT_STRING) != 0 ? reply_str : NULL,
                                 sizeof (reply_str) - 1);
     return COMPLETE;
@@ -376,20 +512,33 @@ shell_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     shell_super_t *shell_super = SHELL_SUPER (super);
 
-    if ((shell_super->sockw != -1) || (shell_super->sockr != -1))
+#ifdef ENABLE_SHELL_SSH2
+    if (shell_super->ssh2 != NULL)
+    {
         vfs_print_message (_ ("shell: Disconnecting from %s"), super->name ? super->name : "???");
-
-    if (shell_super->sockw != -1)
-    {
         shell_command (me, super, NONE, "exit\n", -1);
-        close (shell_super->sockw);
-        shell_super->sockw = -1;
+        shell_ssh2_close (shell_super->ssh2);
+        shell_super->ssh2 = NULL;
     }
-
-    if (shell_super->sockr != -1)
+    else
+#endif
     {
-        close (shell_super->sockr);
-        shell_super->sockr = -1;
+        if ((shell_super->sockw != -1) || (shell_super->sockr != -1))
+            vfs_print_message (_ ("shell: Disconnecting from %s"),
+                               super->name ? super->name : "???");
+
+        if (shell_super->sockw != -1)
+        {
+            shell_command (me, super, NONE, "exit\n", -1);
+            close (shell_super->sockw);
+            shell_super->sockw = -1;
+        }
+
+        if (shell_super->sockr != -1)
+        {
+            close (shell_super->sockr);
+            shell_super->sockr = -1;
+        }
     }
 
     g_free (shell_super->scr_ls);
@@ -497,7 +646,7 @@ shell_info (struct vfs_class *me, struct vfs_s_super *super)
             int res;
             char buffer[BUF_8K] = "";
 
-            res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), shell_super->sockr);
+            res = shell_get_line_interruptible (me, shell_super, buffer, sizeof (buffer));
             if ((res == 0) || (res == EINTR))
                 ERRNOR (ECONNRESET, FALSE);
             if (strncmp (buffer, "### ", 4) == 0)
@@ -565,42 +714,15 @@ shell_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
 
     printf ("\n%s\n", _ ("shell: Waiting for initial line..."));
 
-    if (vfs_s_get_line (me, shell_super->sockr, answer, sizeof (answer), ':') == 0)
+    if (!shell_get_line (me, shell_super, answer, sizeof (answer), ':'))
         return FALSE;
 
     if (strstr (answer, "assword") != NULL)
     {
-        /* Currently, this does not work. ssh reads passwords from
-           /dev/tty, not from stdin :-(. */
-
+        /* ssh reads passwords from /dev/tty, not from stdin.
+           Password auth is handled by libssh2 transport (ENABLE_SHELL_SSH2). */
         printf ("\n%s\n", _ ("Sorry, we cannot do password authenticated connections for now."));
-
         return FALSE;
-#if 0
-        if (super->path_element->password == NULL)
-        {
-            char *p, *op;
-
-            p = g_strdup_printf (_("shell: Password is required for %s"),
-                                 super->path_element->user);
-            op = vfs_get_password (p);
-            g_free (p);
-            if (op == NULL)
-                return FALSE;
-            super->path_element->password = op;
-        }
-
-        printf ("\n%s\n", _("shell: Sending password..."));
-
-        {
-            size_t str_len;
-
-            str_len = strlen (super->path_element->password);
-            if ((write (shell_super.sockw, super->path_element->password, str_len) !=
-                 (ssize_t) str_len) || (write (shell_super->sockw, "\n", 1) != 1))
-                return FALSE;
-        }
-#endif
     }
     return TRUE;
 }
@@ -611,6 +733,29 @@ static int
 shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     gboolean ftalk;
+
+#ifdef ENABLE_SHELL_SSH2
+    {
+        GError *mcerror = NULL;
+        shell_ssh2_t *ssh2;
+
+        ssh2 = shell_ssh2_open (super, &mcerror);
+        if (ssh2 != NULL)
+        {
+            char answer[BUF_2K];
+
+            SHELL_SUPER (super)->ssh2 = ssh2;
+
+            /* Read the "SHELL:" line produced by "echo SHELL:; /bin/sh" */
+            shell_get_line (me, SHELL_SUPER (super), answer, sizeof (answer), ':');
+
+            goto connected;
+        }
+        /* libssh2 failed (rsh mode, or connection error) — fallback to pipe+ssh */
+        if (mcerror != NULL)
+            g_error_free (mcerror);
+    }
+#endif
 
     // hide panels
     pre_exec ();
@@ -626,6 +771,10 @@ shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
     if (!ftalk)
         ERRNOR (E_PROTO, -1);
+
+#ifdef ENABLE_SHELL_SSH2
+connected:
+#endif
 
     vfs_print_message ("%s", _ ("shell: Sending initial line..."));
 
@@ -916,8 +1065,7 @@ shell_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
     {
         int res;
 
-        res =
-            vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SHELL_SUPER (super)->sockr);
+        res = shell_get_line_interruptible (me, SHELL_SUPER (super), buffer, sizeof (buffer));
 
         if ((res == 0) || (res == EINTR))
         {
@@ -1042,7 +1190,7 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
         if (n == 0)
             break;
 
-        t = write (shell_super->sockw, buffer, n);
+        t = shell_write (shell_super, buffer, n);
         if (t != n)
         {
             if (t == -1)
@@ -1058,13 +1206,13 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
     }
     close (h);
 
-    if (shell_get_reply (me, shell_super->sockr, NULL, 0) != COMPLETE)
+    if (shell_get_reply (me, shell_super, NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     return 0;
 
 error_return:
     close (h);
-    shell_get_reply (me, shell_super->sockr, NULL, 0);
+    shell_get_reply (me, shell_super, NULL, 0);
     return -1;
 }
 
@@ -1129,7 +1277,7 @@ shell_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
         n = MIN ((off_t) sizeof (buffer), (shell->total - shell->got));
         if (n != 0)
         {
-            n = read (SHELL_SUPER (super)->sockr, buffer, n);
+            n = shell_read (SHELL_SUPER (super), buffer, n);
             if (n < 0)
                 return;
             shell->got += n;
@@ -1137,7 +1285,7 @@ shell_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
     }
     while (n != 0);
 
-    if (shell_get_reply (me, SHELL_SUPER (super)->sockr, NULL, 0) != COMPLETE)
+    if (shell_get_reply (me, SHELL_SUPER (super), NULL, 0) != COMPLETE)
         vfs_print_message ("%s", _ ("Error reported after abort."));
     else
         vfs_print_message ("%s", _ ("Aborted transfer would be successful."));
@@ -1154,7 +1302,7 @@ shell_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size
 
     len = MIN ((size_t) (shell->total - shell->got), len);
     tty_disable_interrupt_key ();
-    while (len != 0 && ((n = read (SHELL_SUPER (super)->sockr, buf, len)) < 0))
+    while (len != 0 && ((n = shell_read (SHELL_SUPER (super), buf, len)) < 0))
     {
         if ((errno == EINTR) && !tty_got_interrupt ())
             continue;
@@ -1166,7 +1314,7 @@ shell_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size
         shell->got += n;
     else if (n < 0)
         shell_linear_abort (me, fh);
-    else if (shell_get_reply (me, SHELL_SUPER (super)->sockr, NULL, 0) != COMPLETE)
+    else if (shell_get_reply (me, SHELL_SUPER (super), NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     ERRNOR (errno, n);
 }

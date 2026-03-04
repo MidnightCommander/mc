@@ -205,16 +205,30 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Sort order..."), CK_Sort));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Filter..."), CK_Filter));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Encoding..."), CK_SelectCodepage));
-    entries = g_list_prepend (entries, menu_separator_new ());
-#ifdef ENABLE_VFS_FTP
-    entries = g_list_prepend (entries, menu_entry_new (_ ("FT&P link..."), CK_ConnectFtp));
-#endif
-#ifdef ENABLE_VFS_SHELL
-    entries = g_list_prepend (entries, menu_entry_new (_ ("S&hell link..."), CK_ConnectShell));
-#endif
-#ifdef ENABLE_VFS_SFTP
-    entries = g_list_prepend (entries, menu_entry_new (_ ("SFTP li&nk..."), CK_ConnectSftp));
-#endif
+    /* dynamic plugin entries */
+    {
+        const GSList *plugins = mc_panel_plugin_list ();
+        const GSList *p;
+        gboolean separator_added = FALSE;
+        int idx = 0;
+
+        for (p = plugins; p != NULL; p = g_slist_next (p))
+        {
+            const mc_panel_plugin_t *pp = (const mc_panel_plugin_t *) p->data;
+
+            if ((pp->flags & MC_PPF_SHOW_IN_MENU) != 0)
+            {
+                if (!separator_added)
+                {
+                    entries = g_list_prepend (entries, menu_separator_new ());
+                    separator_added = TRUE;
+                }
+                entries = g_list_prepend (
+                    entries, menu_entry_new (pp->display_name, CK_PanelPluginBase + idx));
+            }
+            idx++;
+        }
+    }
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Rescan"), CK_Reread));
 
@@ -876,9 +890,10 @@ create_file_manager (void)
 
     the_menubar = menubar_new (NULL);
     group_add_widget (g, the_menubar);
-    init_menu ();
 
     mc_panel_plugins_load ();
+
+    init_menu ();
 
     create_panels ();
     group_add_widget (g, get_panel_widget (0));
@@ -1282,21 +1297,6 @@ midnight_execute_cmd (Widget *sender, long command)
     case CK_Find:
         find_cmd (current_panel);
         break;
-#ifdef ENABLE_VFS_SHELL
-    case CK_ConnectShell:
-        shelllink_cmd ();
-        break;
-#endif
-#ifdef ENABLE_VFS_FTP
-    case CK_ConnectFtp:
-        ftplink_cmd ();
-        break;
-#endif
-#ifdef ENABLE_VFS_SFTP
-    case CK_ConnectSftp:
-        sftplink_cmd ();
-        break;
-#endif
     case CK_Panelize:
         panel_panelize_restore ();
         break;
@@ -1490,7 +1490,33 @@ midnight_execute_cmd (Widget *sender, long command)
         // don't close panels due to SIGINT
         break;
     default:
-        res = MSG_NOT_HANDLED;
+        if (command >= CK_PanelPluginBase)
+        {
+            int idx = (int) (command - CK_PanelPluginBase);
+            const GSList *plugins = mc_panel_plugin_list ();
+            const mc_panel_plugin_t *pp =
+                (const mc_panel_plugin_t *) g_slist_nth_data ((GSList *) plugins, idx);
+
+            if (pp != NULL)
+            {
+                WPanel *target_panel = current_panel;
+
+                if (sender == WIDGET (the_menubar))
+                {
+                    menu_t *active_menu =
+                        (menu_t *) g_list_nth_data (the_menubar->menu, (int) the_menubar->current);
+
+                    if (active_menu == left_menu)
+                        target_panel = left_panel;
+                    else if (active_menu == right_menu)
+                        target_panel = right_panel;
+                }
+
+                panel_plugin_activate (target_panel, pp, vfs_path_as_str (target_panel->cwd_vpath));
+            }
+        }
+        else
+            res = MSG_NOT_HANDLED;
     }
 
     return res;

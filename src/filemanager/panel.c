@@ -3316,6 +3316,12 @@ do_enter (WPanel *panel)
             mc_pp_result_t r;
 
             r = panel->plugin->enter (panel->plugin_data, fe->fname->str, &fe->st);
+            if (!panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL)
+            {
+                g_free (focus_name);
+                return TRUE;
+            }
+
             if (r == MC_PPR_OK)
             {
                 if (panel->plugin->get_focus_name != NULL)
@@ -3333,6 +3339,12 @@ do_enter (WPanel *panel)
                 g_free (focus_name);
                 return TRUE;
             }
+        }
+
+        if (!panel->is_plugin_panel || panel->plugin == NULL || panel->plugin_data == NULL)
+        {
+            g_free (focus_name);
+            return TRUE;
         }
 
         // try chdir for directories (st_mode == 0 covers ".." from dir_list_init)
@@ -4227,8 +4239,17 @@ host_close_plugin_impl (mc_panel_host_t *host, const char *dir_path)
 {
     WPanel *panel = (WPanel *) host->host_data;
 
-    (void) dir_path;
     panel_plugin_close (panel);
+
+    if (dir_path != NULL && dir_path[0] != '\0')
+    {
+        vfs_path_t *cd_vpath;
+
+        cd_vpath = vfs_path_from_str (dir_path);
+        if (!panel_do_cd (panel, cd_vpath, cd_parse_command))
+            cd_error_message (dir_path);
+        vfs_path_free (cd_vpath, TRUE);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -6209,6 +6230,24 @@ panel_plugin_close (WPanel *panel)
 
     panel->is_panelized = FALSE;
     panel_reload (panel);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+panel_plugin_activate_by_name (WPanel *panel, const char *plugin_name, const char *open_path)
+{
+    const mc_panel_plugin_t *plugin;
+
+    if (panel == NULL || plugin_name == NULL || plugin_name[0] == '\0')
+        return FALSE;
+
+    plugin = mc_panel_plugin_find_by_name (plugin_name);
+    if (plugin == NULL)
+        return FALSE;
+
+    panel_plugin_activate (panel, plugin, open_path);
+    return (panel->is_plugin_panel && panel->plugin == plugin);
 }
 
 /* --------------------------------------------------------------------------------------------- */
