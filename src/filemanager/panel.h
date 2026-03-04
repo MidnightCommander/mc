@@ -207,6 +207,8 @@ void panel_init (void);
 void panel_deinit (void);
 
 void panel_plugin_activate (WPanel *panel, const mc_panel_plugin_t *plugin, const char *open_path);
+gboolean panel_plugin_activate_by_name (WPanel *panel, const char *plugin_name,
+                                        const char *open_path);
 void panel_plugin_close (WPanel *panel);
 void panel_plugin_select_and_activate (WPanel *panel);
 

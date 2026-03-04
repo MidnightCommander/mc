@@ -25,6 +25,7 @@
 
 #define KEYMAP_SHORTCUT_LENGTH         32  // FIXME: is 32 bytes enough for shortcut?
 
+#define CK_PanelPluginBase             30000L
 #define CK_PipeBlock(i)                (10000 + (i))
 #define CK_Macro(i)                    (20000 + (i))
 #define CK_MacroLast                   CK_Macro (0x7FFF)

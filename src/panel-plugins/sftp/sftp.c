@@ -149,7 +149,7 @@ static const mc_panel_plugin_t sftp_plugin = {
     .proto = "sftp",
     .prefix = NULL,
     .flags = MC_PPF_NAVIGATE | MC_PPF_GET_FILES | MC_PPF_DELETE | MC_PPF_CUSTOM_TITLE
-        | MC_PPF_CREATE | MC_PPF_PUT_FILES,
+        | MC_PPF_CREATE | MC_PPF_PUT_FILES | MC_PPF_SHOW_IN_MENU,
 
     .open = sftp_open,
     .close = sftp_close,

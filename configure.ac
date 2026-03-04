@@ -675,6 +675,7 @@ src/panel-plugins/systemd/Makefile
 src/panel-plugins/sftp/Makefile
 src/panel-plugins/docker/Makefile
 src/panel-plugins/git/Makefile
+src/panel-plugins/shell-link/Makefile
 
 src/vfs/Makefile
 
