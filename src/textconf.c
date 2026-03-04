@@ -191,6 +191,39 @@ show_version (void)
 #define PRINTF(a, b, c)       (void) printf ("\t%-15s %s/%s\n", a, b, c)
 #define PRINTF2(a, b, c)      (void) printf ("\t%-15s %s%s\n", a, b, c)
 
+static void
+print_plugins_in_dir (const char *label, const char *dir_path)
+{
+    GDir *dir;
+
+    if (dir_path == NULL)
+        return;
+
+    (void) printf ("    %s %s\n", label, dir_path);
+
+    dir = g_dir_open (dir_path, 0, NULL);
+    if (dir != NULL)
+    {
+        const gchar *name;
+        gboolean found = FALSE;
+
+        while ((name = g_dir_read_name (dir)) != NULL)
+        {
+            if (g_str_has_suffix (name, ".so") || g_str_has_suffix (name, ".dylib")
+                || g_str_has_suffix (name, ".dll"))
+            {
+                (void) printf ("                   %s\n", name);
+                found = TRUE;
+            }
+        }
+        g_dir_close (dir);
+        if (!found)
+            (void) printf ("                   (%s)\n", _ ("none"));
+    }
+    else
+        (void) printf ("                   (%s)\n", _ ("directory not found"));
+}
+
 void
 show_datadirs_extended (void)
 {
@@ -214,6 +247,13 @@ show_datadirs_extended (void)
     PRINTF2 ("shell:", LIBEXECDIR, VFS_SHELL_PREFIX PATH_SEP_STR);
 #endif
 #endif
+
+#ifdef MC_PANEL_PLUGINS_DIR
+    print_plugins_in_dir (_ ("Panel plugins:"), MC_PANEL_PLUGINS_DIR);
+#endif
+#ifdef MC_EDITOR_PLUGINS_DIR
+    print_plugins_in_dir (_ ("Editor plugins:"), MC_EDITOR_PLUGINS_DIR);
+#endif
     (void) puts ("");
 
     PRINTF_GROUP (_ ("User data"));
@@ -232,6 +272,32 @@ show_datadirs_extended (void)
     PRINTF ("mcedit external macros:", mc_config_get_data_path (), EDIT_HOME_MACRO_FILE ".*");
 #endif
     PRINTF_SECTION2 (_ ("Cache directory:"), mc_config_get_cache_path ());
+
+#if defined(MC_PANEL_PLUGINS_DIR) || defined(MC_EDITOR_PLUGINS_DIR)
+    {
+        gchar *user_lib_dir =
+            g_build_filename (g_get_home_dir (), ".local", "lib", "mc", (char *) NULL);
+
+#ifdef MC_PANEL_PLUGINS_DIR
+        {
+            gchar *user_panel_dir = g_build_filename (user_lib_dir, "panel-plugins", (char *) NULL);
+
+            print_plugins_in_dir (_ ("Panel plugins:"), user_panel_dir);
+            g_free (user_panel_dir);
+        }
+#endif
+#ifdef MC_EDITOR_PLUGINS_DIR
+        {
+            gchar *user_editor_dir =
+                g_build_filename (user_lib_dir, "editor-plugins", (char *) NULL);
+
+            print_plugins_in_dir (_ ("Editor plugins:"), user_editor_dir);
+            g_free (user_editor_dir);
+        }
+#endif
+        g_free (user_lib_dir);
+    }
+#endif
 }
 
 #undef PRINTF

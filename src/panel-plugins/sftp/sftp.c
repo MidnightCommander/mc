@@ -42,9 +42,13 @@
 #include <libssh2_sftp.h>
 
 #include "lib/global.h"
+#include "lib/keybind.h"
+#include "lib/mcconfig.h"
 #include "lib/panel-plugin.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/widget.h"
+
+#include "src/viewer/mcviewer.h"
 
 /*** file scope type declarations ****************************************************************/
 
@@ -59,6 +63,17 @@ typedef struct
     char *pubkey;
     char *privkey;
     gboolean use_agent;
+
+    /* Timeouts */
+    int timeout;         /* response timeout, sec (0 = 30 default) */
+    int connect_timeout; /* connect timeout, sec (0 = 10 default) */
+
+    /* Keepalive */
+    gboolean keepalive;     /* SSH keepalive */
+    int keepalive_interval; /* keepalive interval, sec (0 = 60 default) */
+
+    /* IP version */
+    int ip_version; /* 0=auto, 4=IPv4, 6=IPv6 */
 } sftp_connection_t;
 
 typedef struct
@@ -81,6 +96,8 @@ typedef struct
 
     sftp_connection_t *active_connection;
 
+    int key_edit;
+
     int socket_handle;
     LIBSSH2_SESSION *session;
     LIBSSH2_SFTP *sftp_session;
@@ -101,11 +118,23 @@ static mc_pp_result_t sftp_put_file (void *plugin_data, const char *local_path,
 static mc_pp_result_t sftp_delete_items (void *plugin_data, const char **names, int count);
 static const char *sftp_get_title (void *plugin_data);
 static mc_pp_result_t sftp_create_item (void *plugin_data);
+static mc_pp_result_t sftp_view_item (void *plugin_data, const char *fname, const struct stat *st,
+                                      gboolean plain_view);
+static mc_pp_result_t sftp_handle_key (void *plugin_data, int key);
 static void sftp_disconnect (sftp_data_t *data);
 
 /*** file scope variables ************************************************************************/
 
-#define SFTP_DEFAULT_PORT 22
+#define SFTP_DEFAULT_PORT           22
+
+#define SFTP_PANEL_CONFIG_FILE      "panels.sftp.ini"
+#define SFTP_PANEL_CONFIG_GROUP     "sftp-panel"
+#define SFTP_PANEL_KEY_EDIT         "hotkey_edit"
+#define SFTP_PANEL_KEY_EDIT_DEFAULT "f4"
+
+/* KEY_F(n) = 1000 + n, XCTRL(c) = c & 0x1f — matching lib/tty definitions */
+#define SFTP_KEY_F(n) (1000 + (n))
+#define SFTP_XCTRL(c) ((c) & 0x1f)
 
 #ifndef LIBSSH2_INVALID_SOCKET
 #define LIBSSH2_INVALID_SOCKET -1
@@ -133,7 +162,8 @@ static const mc_panel_plugin_t sftp_plugin = {
     .save_file = sftp_put_file,
     .delete_items = sftp_delete_items,
     .get_title = sftp_get_title,
-    .handle_key = NULL,
+    .view = sftp_view_item,
+    .handle_key = sftp_handle_key,
     .create_item = sftp_create_item,
 };
 
@@ -146,6 +176,135 @@ sftp_entry_free (gpointer p)
 
     g_free (e->name);
     g_free (e);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+sftp_read_config_string (const char *path, const char *key)
+{
+    char *value;
+    mc_config_t *cfg;
+
+    if (path == NULL || !g_file_test (path, G_FILE_TEST_IS_REGULAR))
+        return NULL;
+
+    cfg = mc_config_init (path, TRUE);
+    if (cfg == NULL)
+        return NULL;
+
+    value = mc_config_get_string (cfg, SFTP_PANEL_CONFIG_GROUP, key, NULL);
+    mc_config_deinit (cfg);
+
+    if (value == NULL)
+        return NULL;
+
+    g_strstrip (value);
+    if (*value == '\0')
+    {
+        g_free (value);
+        return NULL;
+    }
+
+    return value;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sftp_save_config_defaults (const char *path)
+{
+    mc_config_t *cfg;
+
+    if (path == NULL || g_file_test (path, G_FILE_TEST_EXISTS))
+        return;
+
+    cfg = mc_config_init (path, FALSE);
+    if (cfg == NULL)
+        return;
+
+    mc_config_set_string (cfg, SFTP_PANEL_CONFIG_GROUP, SFTP_PANEL_KEY_EDIT,
+                          SFTP_PANEL_KEY_EDIT_DEFAULT);
+    mc_config_save_file (cfg, NULL);
+    mc_config_deinit (cfg);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sftp_parse_hotkey (const char *value, int fallback)
+{
+    char *s;
+    int ret = fallback;
+
+    if (value == NULL || value[0] == '\0')
+        return fallback;
+
+    s = g_ascii_strdown (value, -1);
+    g_strstrip (s);
+
+    if (s[0] == '\0')
+    {
+        g_free (s);
+        return fallback;
+    }
+
+    if (strcmp (s, "none") == 0)
+        ret = -1;
+    else if (strncmp (s, "ctrl-", 5) == 0 && s[5] != '\0' && s[6] == '\0'
+             && g_ascii_isalpha ((guchar) s[5]))
+        ret = SFTP_XCTRL (g_ascii_tolower ((guchar) s[5]));
+    else if (s[0] == 'f' && s[1] != '\0' && g_ascii_isdigit ((guchar) s[1]) != 0)
+    {
+        int n = atoi (s + 1);
+
+        if (n >= 1 && n <= 24)
+            ret = SFTP_KEY_F (n);
+    }
+    else if ((strncmp (s, "shift-f", 7) == 0 || strncmp (s, "s-f", 3) == 0)
+             && g_ascii_isdigit ((guchar) s[strncmp (s, "shift-f", 7) == 0 ? 7 : 3]) != 0)
+    {
+        int base = atoi (s + (strncmp (s, "shift-f", 7) == 0 ? 7 : 3));
+
+        if (base >= 1 && base <= 12)
+            ret = SFTP_KEY_F (base + 10);
+    }
+
+    g_free (s);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sftp_load_hotkey (const char *key, const char *fallback_text, int fallback_key)
+{
+    char *config_path;
+    char *value;
+    int hotkey;
+
+    config_path = g_build_filename (mc_config_get_path (), SFTP_PANEL_CONFIG_FILE, (char *) NULL);
+
+    value = sftp_read_config_string (config_path, key);
+    if (value == NULL && mc_global.sysconfig_dir != NULL)
+    {
+        char *sys_path;
+
+        sys_path =
+            g_build_filename (mc_global.sysconfig_dir, SFTP_PANEL_CONFIG_FILE, (char *) NULL);
+        value = sftp_read_config_string (sys_path, key);
+        g_free (sys_path);
+    }
+
+    sftp_save_config_defaults (config_path);
+    g_free (config_path);
+
+    if (value == NULL)
+        value = g_strdup (fallback_text);
+
+    hotkey = sftp_parse_hotkey (value, fallback_key);
+    g_free (value);
+    return hotkey;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -163,6 +322,129 @@ sftp_connection_free (gpointer p)
     g_free (c->pubkey);
     g_free (c->privkey);
     g_free (c);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static sftp_connection_t *
+sftp_connection_dup (const sftp_connection_t *src)
+{
+    sftp_connection_t *d;
+
+    d = g_new0 (sftp_connection_t, 1);
+    d->label = g_strdup (src->label);
+    d->host = g_strdup (src->host);
+    d->port = src->port;
+    d->user = g_strdup (src->user);
+    d->path = g_strdup (src->path);
+    d->password = g_strdup (src->password);
+    d->pubkey = g_strdup (src->pubkey);
+    d->privkey = g_strdup (src->privkey);
+    d->use_agent = src->use_agent;
+    d->timeout = src->timeout;
+    d->connect_timeout = src->connect_timeout;
+    d->keepalive = src->keepalive;
+    d->keepalive_interval = src->keepalive_interval;
+    d->ip_version = src->ip_version;
+    return d;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sftp_connection_copy_from (sftp_connection_t *dst, const sftp_connection_t *src)
+{
+    g_free (dst->label);
+    g_free (dst->host);
+    g_free (dst->user);
+    g_free (dst->path);
+    g_free (dst->password);
+    g_free (dst->pubkey);
+    g_free (dst->privkey);
+
+    dst->label = g_strdup (src->label);
+    dst->host = g_strdup (src->host);
+    dst->port = src->port;
+    dst->user = g_strdup (src->user);
+    dst->path = g_strdup (src->path);
+    dst->password = g_strdup (src->password);
+    dst->pubkey = g_strdup (src->pubkey);
+    dst->privkey = g_strdup (src->privkey);
+    dst->use_agent = src->use_agent;
+    dst->timeout = src->timeout;
+    dst->connect_timeout = src->connect_timeout;
+    dst->keepalive = src->keepalive;
+    dst->keepalive_interval = src->keepalive_interval;
+    dst->ip_version = src->ip_version;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Simple XOR obfuscation to avoid storing passwords in plain text.
+   NOT cryptographically secure — just prevents casual reading. */
+
+static const unsigned char sftp_obfuscation_key[] = "Mc4SftpPanelKey!";
+
+static char *
+sftp_password_encode (const char *plain)
+{
+    size_t i, len, klen;
+    guchar *xored;
+    gchar *b64;
+    char *result;
+
+    if (plain == NULL || plain[0] == '\0')
+        return NULL;
+
+    len = strlen (plain);
+    klen = sizeof (sftp_obfuscation_key) - 1;
+    xored = g_new (guchar, len);
+
+    for (i = 0; i < len; i++)
+        xored[i] = (guchar) plain[i] ^ sftp_obfuscation_key[i % klen];
+
+    b64 = g_base64_encode (xored, len);
+    g_free (xored);
+
+    result = g_strdup_printf ("enc:%s", b64);
+    g_free (b64);
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+sftp_password_decode (const char *encoded)
+{
+    guchar *xored;
+    gsize len;
+    size_t i, klen;
+    char *plain;
+
+    if (encoded == NULL)
+        return NULL;
+
+    /* backward compatibility: plain text without "enc:" prefix */
+    if (strncmp (encoded, "enc:", 4) != 0)
+        return g_strdup (encoded);
+
+    xored = g_base64_decode (encoded + 4, &len);
+    if (xored == NULL || len == 0)
+    {
+        g_free (xored);
+        return g_strdup ("");
+    }
+
+    klen = sizeof (sftp_obfuscation_key) - 1;
+    plain = g_new (char, len + 1);
+
+    for (i = 0; i < len; i++)
+        plain[i] = (char) (xored[i] ^ sftp_obfuscation_key[i % klen]);
+    plain[len] = '\0';
+
+    g_free (xored);
+    return plain;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -203,9 +485,15 @@ load_connections (const char *filepath)
         conn->host = g_key_file_get_string (kf, groups[i], "host", NULL);
         conn->user = g_key_file_get_string (kf, groups[i], "user", NULL);
         conn->path = g_key_file_get_string (kf, groups[i], "path", NULL);
-        conn->password = g_key_file_get_string (kf, groups[i], "password", NULL);
         conn->pubkey = g_key_file_get_string (kf, groups[i], "pubkey", NULL);
         conn->privkey = g_key_file_get_string (kf, groups[i], "privkey", NULL);
+
+        {
+            char *raw_pw = g_key_file_get_string (kf, groups[i], "password", NULL);
+
+            conn->password = sftp_password_decode (raw_pw);
+            g_free (raw_pw);
+        }
 
         conn->port = g_key_file_get_integer (kf, groups[i], "port", &error);
         if (error != NULL)
@@ -220,6 +508,47 @@ load_connections (const char *filepath)
         {
             g_error_free (error);
             conn->use_agent = TRUE;
+        }
+
+        error = NULL;
+        conn->timeout = g_key_file_get_integer (kf, groups[i], "timeout", &error);
+        if (error != NULL)
+        {
+            g_error_free (error);
+            conn->timeout = 0;
+        }
+
+        error = NULL;
+        conn->connect_timeout = g_key_file_get_integer (kf, groups[i], "connect_timeout", &error);
+        if (error != NULL)
+        {
+            g_error_free (error);
+            conn->connect_timeout = 0;
+        }
+
+        error = NULL;
+        conn->keepalive = g_key_file_get_boolean (kf, groups[i], "keepalive", &error);
+        if (error != NULL)
+        {
+            g_error_free (error);
+            conn->keepalive = FALSE;
+        }
+
+        error = NULL;
+        conn->keepalive_interval =
+            g_key_file_get_integer (kf, groups[i], "keepalive_interval", &error);
+        if (error != NULL)
+        {
+            g_error_free (error);
+            conn->keepalive_interval = 0;
+        }
+
+        error = NULL;
+        conn->ip_version = g_key_file_get_integer (kf, groups[i], "ip_version", &error);
+        if (error != NULL)
+        {
+            g_error_free (error);
+            conn->ip_version = 0;
         }
 
         if (conn->host == NULL || conn->host[0] == '\0')
@@ -276,14 +605,33 @@ save_connections (const char *filepath, GPtrArray *connections)
             g_key_file_set_string (kf, conn->label, "user", conn->user);
         if (conn->path != NULL)
             g_key_file_set_string (kf, conn->label, "path", conn->path);
-        if (conn->password != NULL)
-            g_key_file_set_string (kf, conn->label, "password", conn->password);
+        if (conn->password != NULL && conn->password[0] != '\0')
+        {
+            char *enc = sftp_password_encode (conn->password);
+
+            if (enc != NULL)
+            {
+                g_key_file_set_string (kf, conn->label, "password", enc);
+                g_free (enc);
+            }
+        }
         if (conn->pubkey != NULL)
             g_key_file_set_string (kf, conn->label, "pubkey", conn->pubkey);
         if (conn->privkey != NULL)
             g_key_file_set_string (kf, conn->label, "privkey", conn->privkey);
 
         g_key_file_set_boolean (kf, conn->label, "use_agent", conn->use_agent);
+
+        if (conn->timeout > 0)
+            g_key_file_set_integer (kf, conn->label, "timeout", conn->timeout);
+        if (conn->connect_timeout > 0)
+            g_key_file_set_integer (kf, conn->label, "connect_timeout", conn->connect_timeout);
+        g_key_file_set_boolean (kf, conn->label, "keepalive", conn->keepalive);
+        if (conn->keepalive_interval > 0)
+            g_key_file_set_integer (kf, conn->label, "keepalive_interval",
+                                    conn->keepalive_interval);
+        if (conn->ip_version != 0)
+            g_key_file_set_integer (kf, conn->label, "ip_version", conn->ip_version);
     }
 
     data = g_key_file_to_data (kf, &length, NULL);
@@ -418,7 +766,12 @@ sftp_open_socket (const sftp_connection_t *conn)
         return LIBSSH2_INVALID_SOCKET;
 
     memset (&hints, 0, sizeof (hints));
-    hints.ai_family = AF_UNSPEC;
+    if (conn->ip_version == 4)
+        hints.ai_family = AF_INET;
+    else if (conn->ip_version == 6)
+        hints.ai_family = AF_INET6;
+    else
+        hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
 
     g_snprintf (port_buf, sizeof (port_buf), "%d", conn->port > 0 ? conn->port : SFTP_DEFAULT_PORT);
@@ -431,6 +784,16 @@ sftp_open_socket (const sftp_connection_t *conn)
         sock = socket (curr->ai_family, curr->ai_socktype, curr->ai_protocol);
         if (sock < 0)
             continue;
+
+        /* Apply connect timeout via SO_SNDTIMEO */
+        if (conn->connect_timeout > 0)
+        {
+            struct timeval tv;
+
+            tv.tv_sec = conn->connect_timeout;
+            tv.tv_usec = 0;
+            setsockopt (sock, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof (tv));
+        }
 
         if (connect (sock, curr->ai_addr, curr->ai_addrlen) == 0)
             break;
@@ -508,8 +871,23 @@ sftp_connect (sftp_data_t *data, sftp_connection_t *conn)
 
     libssh2_session_set_blocking (data->session, 1);
 
+    /* Timeouts */
+    {
+        long tout = (conn->timeout > 0) ? (long) conn->timeout * 1000 : 30000;
+
+        libssh2_session_set_timeout (data->session, tout);
+    }
+
     if (libssh2_session_handshake (data->session, (libssh2_socket_t) data->socket_handle) != 0)
         goto fail;
+
+    /* Keepalive */
+    if (conn->keepalive)
+    {
+        int interval = conn->keepalive_interval > 0 ? conn->keepalive_interval : 60;
+
+        libssh2_keepalive_config (data->session, 1, (unsigned int) interval);
+    }
 
     user = (conn->user != NULL && conn->user[0] != '\0') ? conn->user : g_get_user_name ();
     auth_list = libssh2_userauth_list (data->session, user, (unsigned int) strlen (user));
@@ -713,51 +1091,129 @@ sftp_reload_entries (sftp_data_t *data)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-show_connection_dialog (char **label, char **host, char **port, char **user, char **path,
-                        char **password, char **pubkey, char **privkey, gboolean *use_agent)
+#define SFTP_TAB_BASIC      (B_USER + 0)
+#define SFTP_TAB_CONNECTION (B_USER + 1)
+
+#define SFTP_DLG_HEIGHT     26
+#define SFTP_DLG_WIDTH      56
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sftp_save_page_basic (sftp_connection_t *conn, char *label, char *host, const char *port_str,
+                      char *user, char *password, char *path, char *pubkey, char *privkey,
+                      gboolean use_agent)
 {
+    g_free (conn->label);
+    conn->label = label;
+
+    g_free (conn->host);
+    conn->host = host;
+
+    conn->port = (port_str != NULL && port_str[0] != '\0') ? atoi (port_str) : SFTP_DEFAULT_PORT;
+    if (conn->port <= 0)
+        conn->port = SFTP_DEFAULT_PORT;
+
+    g_free (conn->user);
+    conn->user = user;
+
+    g_free (conn->password);
+    conn->password = (password != NULL && password[0] != '\0') ? password : NULL;
+    if (conn->password == NULL)
+        g_free (password);
+
+    g_free (conn->path);
+    conn->path = path;
+
+    g_free (conn->pubkey);
+    conn->pubkey = (pubkey != NULL && pubkey[0] != '\0') ? pubkey : NULL;
+    if (conn->pubkey == NULL)
+        g_free (pubkey);
+
+    g_free (conn->privkey);
+    conn->privkey = (privkey != NULL && privkey[0] != '\0') ? privkey : NULL;
+    if (conn->privkey == NULL)
+        g_free (privkey);
+
+    conn->use_agent = use_agent;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+sftp_save_page_connection (sftp_connection_t *conn, const char *connect_timeout_str,
+                           const char *timeout_str, gboolean keepalive,
+                           const char *keepalive_interval_str, int ip_version_idx)
+{
+    conn->connect_timeout = (connect_timeout_str != NULL) ? atoi (connect_timeout_str) : 0;
+    conn->timeout = (timeout_str != NULL) ? atoi (timeout_str) : 0;
+    conn->keepalive = keepalive;
+    conn->keepalive_interval = (keepalive_interval_str != NULL) ? atoi (keepalive_interval_str) : 0;
+
+    if (ip_version_idx == 1)
+        conn->ip_version = 4;
+    else if (ip_version_idx == 2)
+        conn->ip_version = 6;
+    else
+        conn->ip_version = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Connection dialog: Tab 1 — Basic                                                              */
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+show_connection_tab_basic (sftp_connection_t *conn)
+{
+    char *label = g_strdup (conn->label != NULL ? conn->label : "");
+    char *host = g_strdup (conn->host != NULL ? conn->host : "");
+    char *port_str = g_strdup_printf ("%d", conn->port > 0 ? conn->port : SFTP_DEFAULT_PORT);
+    char *user = g_strdup (conn->user != NULL ? conn->user : "");
+    char *path = g_strdup (conn->path != NULL ? conn->path : "/");
+    char *password = g_strdup (conn->password != NULL ? conn->password : "");
+    char *pubkey = g_strdup (conn->pubkey != NULL ? conn->pubkey : "");
+    char *privkey = g_strdup (conn->privkey != NULL ? conn->privkey : "");
+    gboolean use_agent = conn->use_agent;
+    int ret;
+
     /* clang-format off */
     quick_widget_t quick_widgets[] = {
-        QUICK_LABELED_INPUT (N_("Name:"), input_label_above,
-                            *label != NULL ? *label : "", "sftp-conn-label",
-                            label, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-        QUICK_SEPARATOR (FALSE),
+        /* tab buttons */
+        QUICK_TOP_BUTTONS (FALSE, TRUE),
+            QUICK_BUTTON (N_ ("&Basic"), SFTP_TAB_BASIC, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Connection"), SFTP_TAB_CONNECTION, NULL, NULL),
+        /* page content */
+        QUICK_LABELED_INPUT (N_("Connection name:"), input_label_above,
+                            label, "sftp-conn-label",
+                            &label, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_LABELED_INPUT (N_("Host:"), input_label_above,
-                            *host != NULL ? *host : "", "sftp-conn-host",
-                            host, NULL, FALSE, FALSE, INPUT_COMPLETE_HOSTNAMES),
-        QUICK_SEPARATOR (FALSE),
+                            host, "sftp-conn-host",
+                            &host, NULL, FALSE, FALSE, INPUT_COMPLETE_HOSTNAMES),
         QUICK_LABELED_INPUT (N_("Port:"), input_label_above,
-                            *port != NULL ? *port : "22", "sftp-conn-port",
-                            port, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-        QUICK_SEPARATOR (FALSE),
+                            port_str, "sftp-conn-port",
+                            &port_str, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_LABELED_INPUT (N_("User:"), input_label_above,
-                            *user != NULL ? *user : "", "sftp-conn-user",
-                            user, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-        QUICK_SEPARATOR (FALSE),
-        QUICK_LABELED_INPUT (N_("Remote path:"), input_label_above,
-                            *path != NULL ? *path : "/", "sftp-conn-path",
-                            path, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-        QUICK_SEPARATOR (FALSE),
+                            user, "sftp-conn-user",
+                            &user, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_LABELED_INPUT (N_("Password:"), input_label_above,
-                            *password != NULL ? *password : "", "sftp-conn-pass",
-                            password, NULL, TRUE, TRUE, INPUT_COMPLETE_NONE),
-        QUICK_SEPARATOR (FALSE),
+                            password, "sftp-conn-pass",
+                            &password, NULL, TRUE, TRUE, INPUT_COMPLETE_NONE),
+        QUICK_LABELED_INPUT (N_("Remote path:"), input_label_above,
+                            path, "sftp-conn-path",
+                            &path, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_LABELED_INPUT (N_("Public key file:"), input_label_above,
-                            *pubkey != NULL ? *pubkey : "", "sftp-conn-pubkey",
-                            pubkey, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-        QUICK_SEPARATOR (FALSE),
+                            pubkey, "sftp-conn-pubkey",
+                            &pubkey, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_LABELED_INPUT (N_("Private key file:"), input_label_above,
-                            *privkey != NULL ? *privkey : "", "sftp-conn-privkey",
-                            privkey, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-        QUICK_SEPARATOR (FALSE),
-        QUICK_CHECKBOX (N_("Use SSH &agent"), use_agent, NULL),
+                            privkey, "sftp-conn-privkey",
+                            &privkey, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+        QUICK_CHECKBOX (N_("Use SSH &agent"), &use_agent, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END,
     };
     /* clang-format on */
 
-    WRect r = { -1, -1, 0, 56 };
+    WRect r = { -1, -1, SFTP_DLG_HEIGHT, SFTP_DLG_WIDTH };
 
     quick_dialog_t qdlg = {
         .rect = r,
@@ -768,7 +1224,167 @@ show_connection_dialog (char **label, char **host, char **port, char **user, cha
         .mouse_callback = NULL,
     };
 
-    return (quick_dialog (&qdlg) == B_ENTER);
+    ret = quick_dialog (&qdlg);
+
+    if (ret != B_CANCEL)
+        sftp_save_page_basic (conn, label, host, port_str, user, password, path, pubkey, privkey,
+                              use_agent);
+    else
+    {
+        g_free (label);
+        g_free (host);
+        g_free (user);
+        g_free (path);
+        g_free (password);
+        g_free (pubkey);
+        g_free (privkey);
+    }
+
+    g_free (port_str);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Connection dialog: Tab 2 — Connection                                                         */
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+show_connection_tab_connection (sftp_connection_t *conn)
+{
+    char *connect_timeout_str =
+        g_strdup_printf ("%d", conn->connect_timeout > 0 ? conn->connect_timeout : 10);
+    char *timeout_str = g_strdup_printf ("%d", conn->timeout > 0 ? conn->timeout : 30);
+    char *keepalive_interval_str =
+        g_strdup_printf ("%d", conn->keepalive_interval > 0 ? conn->keepalive_interval : 60);
+    gboolean keepalive = conn->keepalive;
+    int ip_version_idx;
+    int ret;
+
+    static const char *ip_version_labels[] = { N_ ("A&uto"), N_ ("IPv&4"), N_ ("IPv&6"), NULL };
+
+    if (conn->ip_version == 4)
+        ip_version_idx = 1;
+    else if (conn->ip_version == 6)
+        ip_version_idx = 2;
+    else
+        ip_version_idx = 0;
+
+    /* clang-format off */
+    quick_widget_t quick_widgets[] = {
+        /* tab buttons */
+        QUICK_TOP_BUTTONS (FALSE, TRUE),
+            QUICK_BUTTON (N_ ("&Basic"), SFTP_TAB_BASIC, NULL, NULL),
+            QUICK_BUTTON (N_ ("&Connection"), SFTP_TAB_CONNECTION, NULL, NULL),
+        /* page content */
+        QUICK_START_GROUPBOX (N_("Timeouts")),
+            QUICK_START_COLUMNS,
+                QUICK_LABELED_INPUT (N_("Connect timeout:"), input_label_above,
+                                    connect_timeout_str, "sftp-conn-ctimeout",
+                                    &connect_timeout_str, NULL, FALSE, FALSE,
+                                    INPUT_COMPLETE_NONE),
+            QUICK_NEXT_COLUMN,
+                QUICK_LABELED_INPUT (N_("Session timeout:"), input_label_above,
+                                    timeout_str, "sftp-conn-timeout",
+                                    &timeout_str, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+            QUICK_STOP_COLUMNS,
+        QUICK_STOP_GROUPBOX,
+        QUICK_START_GROUPBOX (N_("Keepalive")),
+            QUICK_START_COLUMNS,
+                QUICK_CHECKBOX (N_("SSH &Keepalive"), &keepalive, NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_LABELED_INPUT (N_("Interval:"), input_label_above,
+                                    keepalive_interval_str, "sftp-conn-keepalive",
+                                    &keepalive_interval_str, NULL, FALSE, FALSE,
+                                    INPUT_COMPLETE_NONE),
+            QUICK_STOP_COLUMNS,
+        QUICK_STOP_GROUPBOX,
+        QUICK_START_GROUPBOX (N_("IP version")),
+            QUICK_RADIO (3, ip_version_labels, &ip_version_idx, NULL),
+        QUICK_STOP_GROUPBOX,
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END,
+    };
+    /* clang-format on */
+
+    WRect r = { -1, -1, SFTP_DLG_HEIGHT, SFTP_DLG_WIDTH };
+
+    quick_dialog_t qdlg = {
+        .rect = r,
+        .title = N_ ("SFTP Connection"),
+        .help = "[SFTP Plugin]",
+        .widgets = quick_widgets,
+        .callback = NULL,
+        .mouse_callback = NULL,
+    };
+
+    ret = quick_dialog_skip (&qdlg, 2);
+
+    if (ret != B_CANCEL)
+        sftp_save_page_connection (conn, connect_timeout_str, timeout_str, keepalive,
+                                   keepalive_interval_str, ip_version_idx);
+
+    g_free (connect_timeout_str);
+    g_free (timeout_str);
+    g_free (keepalive_interval_str);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Connection dialog: tab loop                                                                   */
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+show_connection_dialog (sftp_connection_t *conn)
+{
+    sftp_connection_t *backup;
+    int current_tab = SFTP_TAB_BASIC;
+
+    backup = sftp_connection_dup (conn);
+
+    while (TRUE)
+    {
+        int ret;
+
+        switch (current_tab)
+        {
+        case SFTP_TAB_BASIC:
+            ret = show_connection_tab_basic (conn);
+            break;
+        case SFTP_TAB_CONNECTION:
+            ret = show_connection_tab_connection (conn);
+            break;
+        default:
+            ret = show_connection_tab_basic (conn);
+            break;
+        }
+
+        if (ret == B_ENTER)
+        {
+            /* OK — accept all changes */
+            sftp_connection_free (backup);
+            return TRUE;
+        }
+
+        if (ret == B_CANCEL)
+        {
+            /* Cancel — rollback all changes */
+            sftp_connection_copy_from (conn, backup);
+            sftp_connection_free (backup);
+            return FALSE;
+        }
+
+        /* Tab switch — values already saved to conn by the page function */
+        if (ret >= SFTP_TAB_BASIC && ret <= SFTP_TAB_CONNECTION)
+        {
+            current_tab = ret;
+            continue;
+        }
+
+        /* unknown return code — treat as cancel */
+        sftp_connection_copy_from (conn, backup);
+        sftp_connection_free (backup);
+        return FALSE;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -823,6 +1439,8 @@ sftp_open (mc_panel_host_t *host, const char *open_path)
     data->current_path = NULL;
     data->entries = NULL;
     data->title_buf = NULL;
+    data->key_edit =
+        sftp_load_hotkey (SFTP_PANEL_KEY_EDIT, SFTP_PANEL_KEY_EDIT_DEFAULT, SFTP_KEY_F (4));
 
     data->socket_handle = LIBSSH2_INVALID_SOCKET;
     data->session = NULL;
@@ -1230,79 +1848,177 @@ sftp_create_item (void *plugin_data)
     sftp_data_t *data = (sftp_data_t *) plugin_data;
     sftp_connection_t *conn;
 
-    char *label = NULL;
-    char *host = NULL;
-    char *port = g_strdup ("22");
-    char *user = vfs_get_local_username ();
-    char *path = g_strdup ("/");
-    char *password = NULL;
-    char *pubkey = NULL;
-    char *privkey = NULL;
-    gboolean use_agent = TRUE;
-
-    if (user == NULL)
-        user = g_strdup (g_get_user_name ());
-
     if (!data->at_root)
         return MC_PPR_NOT_SUPPORTED;
 
-    if (!show_connection_dialog (&label, &host, &port, &user, &path, &password, &pubkey, &privkey,
-                                 &use_agent))
-    {
-        g_free (label);
-        g_free (host);
-        g_free (port);
-        g_free (user);
-        g_free (path);
-        g_free (password);
-        g_free (pubkey);
-        g_free (privkey);
-        return MC_PPR_FAILED;
-    }
-
-    if (label == NULL || label[0] == '\0' || host == NULL || host[0] == '\0')
-    {
-        g_free (label);
-        g_free (host);
-        g_free (port);
-        g_free (user);
-        g_free (path);
-        g_free (password);
-        g_free (pubkey);
-        g_free (privkey);
-        return MC_PPR_FAILED;
-    }
-
     conn = g_new0 (sftp_connection_t, 1);
-    conn->label = label;
-    conn->host = host;
-    conn->port = (port != NULL && port[0] != '\0') ? atoi (port) : SFTP_DEFAULT_PORT;
-    if (conn->port <= 0)
-        conn->port = SFTP_DEFAULT_PORT;
+    conn->port = SFTP_DEFAULT_PORT;
+    conn->user = vfs_get_local_username ();
+    if (conn->user == NULL)
+        conn->user = g_strdup (g_get_user_name ());
+    conn->path = g_strdup ("/");
+    conn->use_agent = TRUE;
 
-    conn->user = user;
-    conn->path = path;
+    if (!show_connection_dialog (conn))
+    {
+        sftp_connection_free (conn);
+        return MC_PPR_FAILED;
+    }
 
-    conn->password = (password != NULL && password[0] != '\0') ? password : NULL;
-    if (conn->password == NULL)
-        g_free (password);
-
-    conn->pubkey = (pubkey != NULL && pubkey[0] != '\0') ? pubkey : NULL;
-    if (conn->pubkey == NULL)
-        g_free (pubkey);
-
-    conn->privkey = (privkey != NULL && privkey[0] != '\0') ? privkey : NULL;
-    if (conn->privkey == NULL)
-        g_free (privkey);
-
-    conn->use_agent = use_agent;
-
-    g_free (port);
+    if (conn->label == NULL || conn->label[0] == '\0' || conn->host == NULL
+        || conn->host[0] == '\0')
+    {
+        sftp_connection_free (conn);
+        return MC_PPR_FAILED;
+    }
 
     g_ptr_array_add (data->connections, conn);
     save_connections (data->connections_file, data->connections);
 
     return MC_PPR_OK;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_pp_result_t
+sftp_edit_connection (sftp_data_t *data)
+{
+    const GString *current_name;
+    sftp_connection_t *conn;
+
+    if (!data->at_root)
+        return MC_PPR_NOT_SUPPORTED;
+
+    current_name = data->host->get_current (data->host);
+    if (current_name == NULL || current_name->len == 0)
+        return MC_PPR_FAILED;
+
+    conn = NULL;
+    {
+        guint i;
+
+        for (i = 0; i < data->connections->len; i++)
+        {
+            sftp_connection_t *c = (sftp_connection_t *) g_ptr_array_index (data->connections, i);
+
+            if (strcmp (c->label, current_name->str) == 0)
+            {
+                conn = c;
+                break;
+            }
+        }
+    }
+
+    if (conn == NULL)
+        return MC_PPR_FAILED;
+
+    if (!show_connection_dialog (conn))
+        return MC_PPR_FAILED;
+
+    if (conn->label == NULL || conn->label[0] == '\0' || conn->host == NULL
+        || conn->host[0] == '\0')
+        return MC_PPR_FAILED;
+
+    save_connections (data->connections_file, data->connections);
+
+    return MC_PPR_OK;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_pp_result_t
+sftp_view_item (void *plugin_data, const char *fname, const struct stat *st, gboolean plain_view)
+{
+    sftp_data_t *data = (sftp_data_t *) plugin_data;
+    const sftp_connection_t *conn;
+    GString *ini;
+    GError *error = NULL;
+    char *tmp_path = NULL;
+    int fd;
+
+    (void) st;
+    (void) plain_view;
+
+    if (!data->at_root)
+        return MC_PPR_NOT_SUPPORTED;
+
+    if (fname == NULL)
+        return MC_PPR_FAILED;
+
+    conn = find_connection (data, fname);
+    if (conn == NULL)
+        return MC_PPR_FAILED;
+
+    ini = g_string_new ("");
+    g_string_append_printf (ini, "[%s]\n", conn->label);
+    g_string_append_printf (ini, "host=%s\n", conn->host);
+    g_string_append_printf (ini, "port=%d\n", conn->port > 0 ? conn->port : SFTP_DEFAULT_PORT);
+    if (conn->user != NULL)
+        g_string_append_printf (ini, "user=%s\n", conn->user);
+    if (conn->path != NULL)
+        g_string_append_printf (ini, "path=%s\n", conn->path);
+    if (conn->password != NULL)
+        g_string_append (ini, "password=***\n");
+    if (conn->pubkey != NULL && conn->pubkey[0] != '\0')
+        g_string_append_printf (ini, "pubkey=%s\n", conn->pubkey);
+    if (conn->privkey != NULL && conn->privkey[0] != '\0')
+        g_string_append_printf (ini, "privkey=%s\n", conn->privkey);
+    g_string_append_printf (ini, "use_agent=%s\n", conn->use_agent ? "true" : "false");
+
+    if (conn->timeout > 0)
+        g_string_append_printf (ini, "timeout=%d\n", conn->timeout);
+    if (conn->connect_timeout > 0)
+        g_string_append_printf (ini, "connect_timeout=%d\n", conn->connect_timeout);
+    g_string_append_printf (ini, "keepalive=%s\n", conn->keepalive ? "true" : "false");
+    if (conn->keepalive_interval > 0)
+        g_string_append_printf (ini, "keepalive_interval=%d\n", conn->keepalive_interval);
+    if (conn->ip_version != 0)
+        g_string_append_printf (ini, "ip_version=%d\n", conn->ip_version);
+
+    fd = g_file_open_tmp ("mc-sftp-view-XXXXXX", &tmp_path, &error);
+    if (fd == -1)
+    {
+        if (error != NULL)
+            g_error_free (error);
+        g_string_free (ini, TRUE);
+        return MC_PPR_FAILED;
+    }
+    close (fd);
+
+    if (!g_file_set_contents (tmp_path, ini->str, (gssize) ini->len, NULL))
+    {
+        unlink (tmp_path);
+        g_free (tmp_path);
+        g_string_free (ini, TRUE);
+        return MC_PPR_FAILED;
+    }
+    g_string_free (ini, TRUE);
+
+    {
+        vfs_path_t *tmp_vpath;
+
+        tmp_vpath = vfs_path_from_str (tmp_path);
+        (void) mcview_viewer (NULL, tmp_vpath, 0, 0, 0);
+        vfs_path_free (tmp_vpath, TRUE);
+    }
+
+    unlink (tmp_path);
+    g_free (tmp_path);
+
+    return MC_PPR_OK;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_pp_result_t
+sftp_handle_key (void *plugin_data, int key)
+{
+    sftp_data_t *data = (sftp_data_t *) plugin_data;
+
+    if (key == CK_Edit || (data->key_edit >= 0 && key == data->key_edit))
+        return sftp_edit_connection (data);
+
+    return MC_PPR_NOT_SUPPORTED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
