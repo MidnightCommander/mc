@@ -1118,6 +1118,19 @@ midnight_execute_cmd (Widget *sender, long command)
         case CK_Delete:
             plugin_panel_delete_cmd (current_panel);
             return MSG_HANDLED;
+        case CK_Edit:
+            if (current_panel->plugin != NULL && current_panel->plugin->handle_key != NULL)
+            {
+                mc_pp_result_t r;
+
+                r = current_panel->plugin->handle_key (current_panel->plugin_data, CK_Edit);
+                if (r == MC_PPR_OK)
+                {
+                    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+                    return MSG_HANDLED;
+                }
+            }
+            break;
         case CK_ChangeMode:
         case CK_ChangeOwn:
         case CK_ChangeOwnAdvanced:

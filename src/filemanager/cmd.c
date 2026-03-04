@@ -883,6 +883,12 @@ mkdir_cmd (WPanel *panel)
     char *dir;
     const char *name = "";
 
+    if (panel != NULL && panel->is_plugin_panel)
+    {
+        plugin_panel_create_cmd (panel);
+        return;
+    }
+
     fe = panel_current_entry (panel);
     if (fe == NULL)
         return;
@@ -1802,6 +1808,27 @@ plugin_panel_create_cmd (WPanel *panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+plugin_panel_confirm_put (const WPanel *panel, gboolean move_op)
+{
+    int result;
+    const char *title = move_op ? _ ("Move") : _ ("Copy");
+
+    if (panel->marked <= 0)
+        result = query_dialog (
+            title, move_op ? _ ("Move file to plugin panel?") : _ ("Copy file to plugin panel?"),
+            D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+    else
+        result = query_dialog (title,
+                               move_op ? _ ("Move tagged files to plugin panel?")
+                                       : _ ("Copy tagged files to plugin panel?"),
+                               D_NORMAL, 2, _ ("&Yes"), _ ("&No"));
+
+    return (result == 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 plugin_panel_move_cmd (WPanel *panel)
 {
@@ -1903,6 +1930,19 @@ plugin_panel_put_cmd (WPanel *panel)
         return;
     }
 
+    /* validate before confirmation: single-file case may have nothing to copy */
+    if (panel->marked == 0)
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (panel);
+        if (fe == NULL || S_ISDIR (fe->st.st_mode))
+            return;
+    }
+
+    if (!plugin_panel_confirm_put (panel, FALSE))
+        return;
+
     if (panel->marked > 0)
     {
         for (i = 0; i < panel->dir.len; i++)
@@ -1933,6 +1973,7 @@ plugin_panel_put_cmd (WPanel *panel)
         mc_pp_result_t r;
 
         fe = panel_current_entry (panel);
+        /* already validated above, but keep the guard */
         if (fe == NULL || S_ISDIR (fe->st.st_mode))
             return;
 
@@ -1966,6 +2007,19 @@ plugin_panel_put_move_cmd (WPanel *panel)
         message (D_ERROR, MSG_ERROR, _ ("This plugin does not support receiving files"));
         return;
     }
+
+    /* validate before confirmation: single-file case may have nothing to move */
+    if (panel->marked == 0)
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (panel);
+        if (fe == NULL || S_ISDIR (fe->st.st_mode))
+            return;
+    }
+
+    if (!plugin_panel_confirm_put (panel, TRUE))
+        return;
 
     if (panel->marked > 0)
     {
@@ -2004,6 +2058,7 @@ plugin_panel_put_move_cmd (WPanel *panel)
         mc_pp_result_t r;
 
         fe = panel_current_entry (panel);
+        /* already validated above, but keep the guard */
         if (fe == NULL || S_ISDIR (fe->st.st_mode))
             return;
 

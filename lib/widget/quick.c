@@ -159,6 +159,7 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 {
     int len;
     int blen = 0;
+    int top_blen = 0;
     int x, y;        // current positions
     int y1 = 0;      // bottom of 1st column in case of two columns
     int y2 = -1;     // start of two columns
@@ -167,6 +168,9 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
     gboolean have_groupbox = FALSE;
     gboolean two_columns = FALSE;
     gboolean put_buttons = FALSE;
+    gboolean in_top_buttons = FALSE;
+    int top_btn_x = 0;
+    int btn_y_shift = 0;
 
     // x position of 1st column is 3
     const int x1 = 3;
@@ -369,6 +373,49 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
             quick_widget--;
             break;
 
+        case quick_top_buttons:
+        {
+            // horizontal button row (non-terminating, for tab bars at top)
+            int btn_x = x;
+
+            if (quick_widget->u.separator.space)
+            {
+                y++;
+
+                if (quick_widget->u.separator.line)
+                    item.widget = WIDGET (hline_new (y, 1, -1));
+            }
+
+            g_array_append_val (widgets, item);
+
+            y++;
+            quick_widget++;
+            for (; quick_widget->widget_type == quick_button; quick_widget++)
+            {
+                item.widget = WIDGET (button_new (y, btn_x++, quick_widget->u.button.action,
+                                                  NORMAL_BUTTON, quick_widget->u.button.text,
+                                                  quick_widget->u.button.callback));
+                item.quick_widget = quick_widget;
+                g_array_append_val (widgets, item);
+                top_blen += item.widget->rect.cols + 1;
+            }
+            if (top_blen > 0)
+                top_blen--;
+
+            // add a horizontal line below the tab buttons
+            y++;
+            {
+                static quick_widget_t top_hline_qw = { .widget_type = quick_separator };
+                quick_widget_item_t hline_item = { NULL, &top_hline_qw };
+                hline_item.widget = WIDGET (hline_new (y, 1, -1));
+                g_array_append_val (widgets, hline_item);
+            }
+
+            // do NOT set quick_end — continue processing remaining widgets
+            quick_widget--;
+            break;
+        }
+
         default:
             break;
         }
@@ -376,6 +423,7 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 
     // adjust dialog width
     quick_dlg->rect.cols = MAX (quick_dlg->rect.cols, blen + 6);
+    quick_dlg->rect.cols = MAX (quick_dlg->rect.cols, top_blen + 6);
     if (have_groupbox)
     {
         if (width1 != 0)
@@ -396,20 +444,33 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
     width1 = quick_dlg->rect.cols - 6;
     width2 = (quick_dlg->rect.cols - 7) / 2;
 
-    if (quick_dlg->rect.x == -1 || quick_dlg->rect.y == -1)
-        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->rect.cols, WPOS_CENTER | WPOS_TRYUP, FALSE,
-                         dialog_colors, quick_dlg->callback, quick_dlg->mouse_callback,
-                         quick_dlg->help, quick_dlg->title);
-    else
-        dd = dlg_create (TRUE, quick_dlg->rect.y, quick_dlg->rect.x, y + 3, quick_dlg->rect.cols,
-                         WPOS_KEEP_DEFAULT, FALSE, dialog_colors, quick_dlg->callback,
-                         quick_dlg->mouse_callback, quick_dlg->help, quick_dlg->title);
+    {
+        int dlg_height = y + 3;
+
+        // rect.lines can be used as minimum dialog height
+        if (quick_dlg->rect.lines > 0 && quick_dlg->rect.lines > dlg_height)
+        {
+            btn_y_shift = quick_dlg->rect.lines - dlg_height;
+            dlg_height = quick_dlg->rect.lines;
+        }
+
+        if (quick_dlg->rect.x == -1 || quick_dlg->rect.y == -1)
+            dd = dlg_create (TRUE, 0, 0, dlg_height, quick_dlg->rect.cols, WPOS_CENTER | WPOS_TRYUP,
+                             FALSE, dialog_colors, quick_dlg->callback, quick_dlg->mouse_callback,
+                             quick_dlg->help, quick_dlg->title);
+        else
+            dd = dlg_create (TRUE, quick_dlg->rect.y, quick_dlg->rect.x, dlg_height,
+                             quick_dlg->rect.cols, WPOS_KEEP_DEFAULT, FALSE, dialog_colors,
+                             quick_dlg->callback, quick_dlg->mouse_callback, quick_dlg->help,
+                             quick_dlg->title);
+    }
 
     // add widgets into the dialog
     x2 = x1 + width2 + 1;
     g = NULL;
     two_columns = FALSE;
     x = (WIDGET (dd)->rect.cols - blen) / 2;
+    top_btn_x = (WIDGET (dd)->rect.cols - top_blen) / 2;
 
     for (i = 0; i < widgets->len; i++)
     {
@@ -445,17 +506,23 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 
         case quick_button:
             r = &item->widget->rect;
-            if (!put_buttons)
+            if (in_top_buttons)
+            {
+                r->x = top_btn_x;
+                top_btn_x += r->cols + 1;
+            }
+            else if (put_buttons)
+            {
+                r->x = x;
+                x += r->cols + 1;
+                r->y += btn_y_shift;
+            }
+            else
             {
                 if (r->x != x1)
                     r->x = x2;
                 if (g != NULL)
                     r->x += 2;
-            }
-            else
-            {
-                r->x = x;
-                x += r->cols + 1;
             }
             break;
 
@@ -550,11 +617,23 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
         case quick_buttons:
             // several buttons in bottom line
             put_buttons = TRUE;
+            if (btn_y_shift > 0 && item->widget != NULL)
+                item->widget->rect.y += btn_y_shift;
+            break;
+
+        case quick_top_buttons:
+            // horizontal button row at top — center the following buttons
+            in_top_buttons = TRUE;
             break;
 
         default:
             break;
         }
+
+        // clear top button mode when we encounter a non-button widget
+        if (in_top_buttons && item->quick_widget->widget_type != quick_button
+            && item->quick_widget->widget_type != quick_top_buttons)
+            in_top_buttons = FALSE;
 
         if (item->widget != NULL)
         {
