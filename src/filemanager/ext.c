@@ -328,7 +328,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
                                     mc_g_string_concat (shell_string, text);
                                 else
                                 {
-                                    strncpy (pbuffer, text->str, text->len);
+                                    strncpy (pbuffer, text->str, text->len + 1);
                                     pbuffer = strchr (pbuffer, '\0');
                                 }
 
