@@ -45,6 +45,7 @@ libmc_la_SOURCES = \
 	keybind.c keybind.h \
 	lock.c lock.h \
 	panel-plugin.c panel-plugin.h \
+	panel-cache.h \
 	panel-plugin-loader.c \
 	serialize.c serialize.h \
 	shell.c shell.h \

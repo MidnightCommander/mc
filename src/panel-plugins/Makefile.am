@@ -9,7 +9,11 @@ if ENABLE_PANEL_PLUGIN_SAMBA
 SUBDIRS += samba
 endif
 
+if ENABLE_PANEL_PLUGIN_FTP
+SUBDIRS += ftp
+endif
+
 SUBDIRS += docker
 SUBDIRS += git
 
-DIST_SUBDIRS = systemd hello sftp samba docker git
+DIST_SUBDIRS = systemd hello sftp samba ftp docker git

@@ -211,6 +211,20 @@
         },                                                                                         \
     }
 
+#define QUICK_TOP_BUTTONS(space_, line_)                                                           \
+    {                                                                                              \
+        .widget_type = quick_top_buttons,                                                          \
+        .options = WOP_DEFAULT,                                                                    \
+        .pos_flags = WPOS_KEEP_DEFAULT,                                                            \
+        .id = NULL,                                                                                \
+        .u = {                                                                                     \
+            .separator = {                                                                         \
+                .space = space_,                                                                   \
+                .line = line_,                                                                     \
+            },                                                                                     \
+        },                                                                                         \
+    }
+
 #define QUICK_BUTTONS_OK_CANCEL                                                                    \
     QUICK_START_BUTTONS (TRUE, TRUE),                                                              \
         QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),                                             \
@@ -250,7 +264,8 @@ typedef enum
     quick_start_columns = 9,
     quick_next_column = 10,
     quick_stop_columns = 11,
-    quick_buttons = 12
+    quick_buttons = 12,
+    quick_top_buttons = 13
 } quick_t;
 
 typedef enum
@@ -333,8 +348,8 @@ struct quick_widget_t
 
 typedef struct
 {
-    WRect rect; /* if rect.x == -1 or rect.y == -1, then dialog is ceneterd;
-                 * rect.lines is unused and ignored */
+    WRect rect; /* if rect.x == -1 or rect.y == -1, then dialog is centered;
+                 * rect.lines if > 0 is used as minimum dialog height */
     const char *title;
     const char *help;
     quick_widget_t *widgets;
