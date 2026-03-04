@@ -15,5 +15,6 @@ endif
 
 SUBDIRS += docker
 SUBDIRS += git
+SUBDIRS += shell-link
 
-DIST_SUBDIRS = systemd hello sftp samba ftp docker git
+DIST_SUBDIRS = systemd hello sftp samba ftp docker git shell-link
