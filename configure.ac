@@ -583,6 +583,49 @@ AC_SUBST([SMBCLIENT_CFLAGS])
 AC_SUBST([SMBCLIENT_LIBS])
 AM_CONDITIONAL([ENABLE_PANEL_PLUGIN_SAMBA], [test x"$have_panel_plugin_samba" = xyes])
 
+dnl Optional libcurl for FTP/FTPS panel plugin
+LIBCURL_CFLAGS=""
+LIBCURL_LIBS=""
+have_panel_plugin_ftp=no
+enable_panel_plugin_ftp=auto
+
+AC_ARG_ENABLE([panel-plugin-ftp],
+    AS_HELP_STRING([--enable-panel-plugin-ftp@<:@=auto/yes/no@:>@],
+                   [Build FTP/FTPS panel plugin (default: auto)]),
+    [enable_panel_plugin_ftp="$enableval"],
+    [enable_panel_plugin_ftp=auto])
+
+AS_CASE([$enable_panel_plugin_ftp],
+    [yes|no|auto], [],
+    [AC_MSG_ERROR([bad value '$enable_panel_plugin_ftp' for --enable-panel-plugin-ftp (use auto, yes, or no)])])
+
+if test "x$enable_panel_plugin_ftp" != xno; then
+    PKG_CHECK_MODULES([LIBCURL], [libcurl >= 7.20.0], [
+        save_CPPFLAGS="$CPPFLAGS"
+        save_LIBS="$LIBS"
+        CPPFLAGS="$CPPFLAGS $LIBCURL_CFLAGS"
+        LIBS="$LIBCURL_LIBS $LIBS"
+        AC_LINK_IFELSE(
+            [AC_LANG_PROGRAM([[#include <curl/curl.h>]], [[curl_easy_init ();]])],
+            [have_panel_plugin_ftp=yes],
+            [have_panel_plugin_ftp=no]
+        )
+        CPPFLAGS="$save_CPPFLAGS"
+        LIBS="$save_LIBS"
+    ], [:])
+fi
+
+if test "x$enable_panel_plugin_ftp" = xyes && test "x$have_panel_plugin_ftp" != xyes; then
+    AC_MSG_ERROR([FTP panel plugin requested but usable libcurl headers/libs were not found.
+Install libcurl development package (for example: libcurl4-openssl-dev) or use --enable-panel-plugin-ftp=auto/no.])
+fi
+
+if test "x$enable_panel_plugin_ftp" = xauto && test "x$have_panel_plugin_ftp" != xyes; then
+    AC_MSG_WARN([FTP panel plugin disabled: usable libcurl headers/libs were not found.])
+fi
+
+AM_CONDITIONAL([ENABLE_PANEL_PLUGIN_FTP], [test x"$have_panel_plugin_ftp" = xyes])
+
 AC_ARG_ENABLE([configure-args],
     AS_HELP_STRING([--enable-configure-args], [Embed ./configure arguments into binaries]))
 if test "x$enable_configure_args" != xno; then
@@ -627,6 +670,7 @@ src/filemanager/Makefile
 src/panel-plugins/Makefile
 src/panel-plugins/hello/Makefile
 src/panel-plugins/samba/Makefile
+src/panel-plugins/ftp/Makefile
 src/panel-plugins/systemd/Makefile
 src/panel-plugins/sftp/Makefile
 src/panel-plugins/docker/Makefile
