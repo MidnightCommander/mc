@@ -1818,7 +1818,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, gboolean 
 {
     GSList *home = NULL;  // The formats we return
     int total_cols = 0;   // Used columns by the format
-    size_t i;
+    size_t i = 0;
 
     static size_t i18n_timelength = 0;  // flag: check ?Time length at startup
 

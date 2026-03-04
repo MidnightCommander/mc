@@ -19,7 +19,9 @@ AM_CPPFLAGS = \
 	-DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\" \
 	-DDATADIR=\""$(pkgdatadir)/"\" \
 	-DLOCALEDIR=\""$(localedir)"\" \
-	-DEXTHELPERSDIR=\""@EXTHELPERSDIR@/"\"
+	-DEXTHELPERSDIR=\""@EXTHELPERSDIR@/"\" \
+	-DMC_PANEL_PLUGINS_DIR=\""$(panel_plugins_dir)"\" \
+	-DMC_EDITOR_PLUGINS_DIR=\""$(editor_plugins_dir)"\"
 
 if CONS_SAVER
 SUBDIRS += consaver
