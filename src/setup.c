@@ -365,6 +365,7 @@ static const struct
 #ifdef ENABLE_EXT2FS_ATTR
     { "copymove_persistent_ext2_attr", &copymove_persistent_ext2_attr },
 #endif
+    { "kitty_keyboard_protocol", &mc_global.tty.kitty_keyboard_protocol },
     {
         NULL,
         NULL,
