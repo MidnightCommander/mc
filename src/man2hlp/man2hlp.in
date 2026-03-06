@@ -355,8 +355,8 @@ sub handle_node($$)
     }
     else
     {
-        # Remove quotes
-        $buffer =~ s/^"// and $buffer =~ s/"$//;
+        # Remove quotes and escaping from dashes
+        $buffer =~ s/^"// and $buffer =~ s/"$// and $buffer =~ s/\\-/-/;
         # Calculate heading level
         $heading_level = 0;
         $heading_level++ while substr($buffer, $heading_level, 1) eq ' ';
