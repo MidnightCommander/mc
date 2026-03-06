@@ -626,6 +626,49 @@ fi
 
 AM_CONDITIONAL([ENABLE_PANEL_PLUGIN_FTP], [test x"$have_panel_plugin_ftp" = xyes])
 
+dnl arcmc — archive browser panel plugin (libarchive)
+enable_panel_plugin_arcmc=auto
+
+AC_ARG_ENABLE([panel-plugin-arcmc],
+    AS_HELP_STRING([--enable-panel-plugin-arcmc@<:@=auto/yes/no@:>@],
+                   [Build archive browser panel plugin (default: auto)]),
+    [enable_panel_plugin_arcmc="$enableval"],
+    [enable_panel_plugin_arcmc=auto])
+
+AS_CASE([$enable_panel_plugin_arcmc],
+    [yes|no|auto], [],
+    [AC_MSG_ERROR([bad value '$enable_panel_plugin_arcmc' for --enable-panel-plugin-arcmc (use auto, yes, or no)])])
+
+if test "x$enable_panel_plugin_arcmc" != xno; then
+    PKG_CHECK_MODULES([LIBARCHIVE], [libarchive >= 3.0], [
+        have_panel_plugin_arcmc=yes
+    ], [:])
+fi
+
+dnl Optional libmagic support for arcmc content-based archive detection
+if test "x$have_panel_plugin_arcmc" = xyes; then
+    AC_CHECK_HEADERS([magic.h], [
+        AC_CHECK_LIB([magic], [magic_open], [
+            AC_DEFINE([HAVE_LIBMAGIC], [1], [Define if libmagic is available])
+            LIBMAGIC_LIBS="-lmagic"
+            LIBMAGIC_CFLAGS=""
+        ])
+    ])
+    AC_SUBST([LIBMAGIC_LIBS])
+    AC_SUBST([LIBMAGIC_CFLAGS])
+fi
+
+if test "x$enable_panel_plugin_arcmc" = xyes && test "x$have_panel_plugin_arcmc" != xyes; then
+    AC_MSG_ERROR([Archive browser panel plugin requested but libarchive >= 3.0 was not found.
+Install libarchive development package (for example: libarchive-dev) or use --enable-panel-plugin-arcmc=auto/no.])
+fi
+
+if test "x$enable_panel_plugin_arcmc" = xauto && test "x$have_panel_plugin_arcmc" != xyes; then
+    AC_MSG_WARN([Archive browser panel plugin disabled: libarchive >= 3.0 was not found.])
+fi
+
+AM_CONDITIONAL([ENABLE_PANEL_PLUGIN_ARCMC], [test x"$have_panel_plugin_arcmc" = xyes])
+
 AC_ARG_ENABLE([configure-args],
     AS_HELP_STRING([--enable-configure-args], [Embed ./configure arguments into binaries]))
 if test "x$enable_configure_args" != xno; then
@@ -676,6 +719,7 @@ src/panel-plugins/sftp/Makefile
 src/panel-plugins/docker/Makefile
 src/panel-plugins/git/Makefile
 src/panel-plugins/shell-link/Makefile
+src/panel-plugins/arcmc/Makefile
 
 src/vfs/Makefile
 
