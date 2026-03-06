@@ -103,7 +103,7 @@ menu_arrange (menu_t *menu, dlg_shortcut_str get_shortcut)
                 len = (size_t) hotkey_width (entry->text);
                 menu->max_hotkey_len = MAX (menu->max_hotkey_len, len);
 
-                if (get_shortcut != NULL)
+                if (entry->shortcut == NULL && get_shortcut != NULL)
                     entry->shortcut = get_shortcut (entry->command);
 
                 if (entry->shortcut != NULL)
@@ -902,6 +902,18 @@ menu_entry_new (const char *name, long command)
     entry->shortcut = NULL;
 
     return entry;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+menu_entry_set_shortcut (menu_entry_t *entry, const char *shortcut)
+{
+    if (entry != NULL)
+    {
+        g_free (entry->shortcut);
+        entry->shortcut = g_strdup (shortcut);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

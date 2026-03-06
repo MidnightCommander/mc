@@ -2610,8 +2610,22 @@ goto_parent_dir (WPanel *panel)
             }
             if (r == MC_PPR_NOT_SUPPORTED || r == MC_PPR_CLOSE)
             {
+                char *plugin_focus = NULL;
+
+                if (panel->plugin_host != NULL && panel->plugin_host->focus_after != NULL)
+                {
+                    plugin_focus = panel->plugin_host->focus_after;
+                    panel->plugin_host->focus_after = NULL;
+                }
+
                 g_free (focus_name);
                 panel_plugin_close (panel);
+
+                if (plugin_focus != NULL)
+                {
+                    panel_set_current_by_name (panel, plugin_focus);
+                    g_free (plugin_focus);
+                }
                 return;
             }
         }
@@ -3241,6 +3255,13 @@ do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
 
     full_name_vpath = vfs_path_append_new (panel->cwd_vpath, fname, (char *) NULL);
 
+    /* Try arcmc plugin for supported archive formats before falling back to extfs */
+    if (panel_plugin_activate_by_name (panel, "arcmc", vfs_path_as_str (full_name_vpath)))
+    {
+        vfs_path_free (full_name_vpath, TRUE);
+        return TRUE;
+    }
+
     // Try associated command
     ok = regex_command (full_name_vpath, "Open") != 0;
     vfs_path_free (full_name_vpath, TRUE);
@@ -3373,8 +3394,22 @@ do_enter (WPanel *panel)
             }
             if (r == MC_PPR_NOT_SUPPORTED || r == MC_PPR_CLOSE)
             {
+                char *plugin_focus = NULL;
+
+                if (panel->plugin_host != NULL && panel->plugin_host->focus_after != NULL)
+                {
+                    plugin_focus = panel->plugin_host->focus_after;
+                    panel->plugin_host->focus_after = NULL;
+                }
+
                 g_free (focus_name);
                 panel_plugin_close (panel);
+
+                if (plugin_focus != NULL)
+                {
+                    panel_set_current_by_name (panel, plugin_focus);
+                    g_free (plugin_focus);
+                }
                 return TRUE;
             }
         }
@@ -6225,6 +6260,8 @@ panel_plugin_close (WPanel *panel)
     panel->plugin_data = NULL;
     panel->is_plugin_panel = FALSE;
 
+    if (panel->plugin_host != NULL)
+        g_free (panel->plugin_host->focus_after);
     g_free (panel->plugin_host);
     panel->plugin_host = NULL;
 
@@ -6248,6 +6285,73 @@ panel_plugin_activate_by_name (WPanel *panel, const char *plugin_name, const cha
 
     panel_plugin_activate (panel, plugin, open_path);
     return (panel->is_plugin_panel && panel->plugin == plugin);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_plugin_run_action (WPanel *panel, const mc_panel_plugin_t *plugin, int action_index)
+{
+    mc_panel_host_t *host;
+    void *pdata;
+    const char *path;
+
+    if (panel == NULL || plugin == NULL)
+        return;
+    if (plugin->actions == NULL || action_index < 0 || action_index >= plugin->action_count)
+        return;
+
+    /* close any previous plugin */
+    if (panel->is_plugin_panel)
+        panel_plugin_close (panel);
+
+    /* build host interface */
+    host = g_new0 (mc_panel_host_t, 1);
+    host->refresh = host_refresh_impl;
+    host->set_hint = host_set_hint_impl;
+    host->message = host_message_impl;
+    host->run_command = host_run_command_impl;
+    host->open_diff = host_open_diff_impl;
+    host->close_plugin = host_close_plugin_impl;
+    host->get_marked_count = host_get_marked_count_impl;
+    host->get_next_marked = host_get_next_marked_impl;
+    host->get_current = host_get_current_impl;
+    host->host_data = panel;
+
+    path = vfs_path_as_str (panel->cwd_vpath);
+    pdata = plugin->actions[action_index].callback (host, path);
+    if (pdata == NULL)
+    {
+        /* action performed standalone operation (e.g. dialog), no panel activation */
+        if (host->focus_after != NULL)
+        {
+            panel_reload (panel);
+            panel_set_current_by_name (panel, host->focus_after);
+            g_free (host->focus_after);
+        }
+        g_free (host);
+        return;
+    }
+
+    panel->plugin_data = pdata;
+    panel->plugin = plugin;
+    panel->plugin_host = host;
+    panel->is_plugin_panel = TRUE;
+    panel->is_panelized = TRUE;
+
+    /* populate dir list */
+    panel_clean_dir (panel);
+    /* panel_clean_dir resets flags — restore them */
+    panel->is_panelized = TRUE;
+    panel->is_plugin_panel = TRUE;
+
+    panel_plugin_apply_default_columns_format (panel);
+
+    dir_list_init (&panel->dir);
+    plugin->get_items (panel->plugin_data, &panel->dir);
+
+    panel_re_sort (panel);
+    panel->dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -6302,7 +6406,29 @@ panel_plugin_select_and_activate (WPanel *panel)
         }
 
         if (selected != NULL)
-            panel_plugin_activate (panel, selected, vfs_path_as_str (panel->cwd_vpath));
+        {
+            if (selected->actions != NULL && selected->action_count > 0)
+            {
+                /* show second listbox with available actions */
+                Listbox *action_lb;
+                int action_result;
+                int ai;
+                const char *title =
+                    selected->display_name != NULL ? selected->display_name : selected->name;
+
+                action_lb = listbox_window_new (12, 40, title, "[Panel Plugins]");
+
+                for (ai = 0; ai < selected->action_count; ai++)
+                    listbox_add_item (action_lb->list, LISTBOX_APPEND_AT_END, 0,
+                                      _ (selected->actions[ai].label), NULL, FALSE);
+
+                action_result = listbox_run (action_lb);
+                if (action_result >= 0 && action_result < selected->action_count)
+                    panel_plugin_run_action (panel, selected, action_result);
+            }
+            else
+                panel_plugin_activate (panel, selected, vfs_path_as_str (panel->cwd_vpath));
+        }
     }
 }
 

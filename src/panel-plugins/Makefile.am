@@ -13,8 +13,12 @@ if ENABLE_PANEL_PLUGIN_FTP
 SUBDIRS += ftp
 endif
 
+if ENABLE_PANEL_PLUGIN_ARCMC
+SUBDIRS += arcmc
+endif
+
 SUBDIRS += docker
 SUBDIRS += git
 SUBDIRS += shell-link
 
-DIST_SUBDIRS = systemd hello sftp samba ftp docker git shell-link
+DIST_SUBDIRS = systemd hello sftp samba ftp arcmc docker git shell-link

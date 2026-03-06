@@ -42,6 +42,25 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+/* Forward declaration */
+struct mc_panel_host_t;
+
+/* Plugin action descriptor — one entry per action the plugin exposes. */
+typedef struct mc_pp_action_t
+{
+    const char *label; /* translatable action name shown in listbox/menu */
+    void *(*callback) (struct mc_panel_host_t *host, const char *open_path);
+} mc_pp_action_t;
+
+/* Entry added to the Command menu by a plugin. */
+typedef struct mc_pp_cmd_menu_entry_t
+{
+    const char *label;    /* menu item text (with & accelerator) */
+    int action_index;     /* index into mc_panel_plugin_t.actions[] */
+    const char *shortcut; /* shortcut text shown in menu (e.g. "S-F1"), or NULL */
+    int key;              /* key code (e.g. KEY_F(11) for S-F1), or 0 for none */
+} mc_pp_cmd_menu_entry_t;
+
 typedef struct mc_panel_column_t
 {
     const char *id;
@@ -66,6 +85,10 @@ typedef struct mc_panel_host_t
     const GString *(*get_next_marked) (struct mc_panel_host_t *host, int *current);
     const GString *(*get_current) (struct mc_panel_host_t *host);
     void *host_data; /* opaque, points to WPanel internally */
+
+    /* Set by plugin to request cursor positioning after standalone action completes.
+       The host frees this string after use. */
+    char *focus_after;
 } mc_panel_host_t;
 
 /* What the plugin provides (callback table) */
@@ -108,6 +131,18 @@ typedef struct mc_panel_plugin_t
     mc_pp_result_t (*create_item) (void *plugin_data);
     const mc_panel_column_t *(*get_columns) (void *plugin_data, size_t *count);
     const char *(*get_column_value) (void *plugin_data, const char *fname, const char *column_id);
+    /* Optional multi-action support.
+       If actions != NULL, plugin selection shows a second listbox with these actions.
+       Each action callback returns non-NULL to activate the plugin panel, or NULL to
+       just perform a standalone operation (e.g. show a dialog). */
+    const mc_pp_action_t *actions; /* NULL = legacy (use open) */
+    int action_count;
+
+    /* Optional entries injected into the Command menu.
+       Each entry references an action by index into actions[]. */
+    const mc_pp_cmd_menu_entry_t *cmd_menu_entries; /* NULL = none */
+    int cmd_menu_entry_count;
+
     /* Optional footer text shown on panel bottom line near free space indicator. */
     const char *(*get_footer) (void *plugin_data);
     /* Optional preferred focus item name after plugin navigation/reload. */
