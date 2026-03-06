@@ -43,6 +43,7 @@ extern const global_keymap_t *menu_map;
 /*** declarations of public functions ************************************************************/
 
 menu_entry_t *menu_entry_new (const char *name, long command);
+void menu_entry_set_shortcut (menu_entry_t *me, const char *shortcut);
 void menu_entry_free (menu_entry_t *me);
 
 menu_t *menu_new (const char *name, GList *entries, const char *help_node);

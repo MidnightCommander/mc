@@ -198,37 +198,12 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Info"), CK_PanelInfo));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Tree"), CK_PanelTree));
     entries = g_list_prepend (entries, menu_entry_new (_ ("Paneli&ze"), CK_Panelize));
-    entries = g_list_prepend (entries, menu_entry_new (_ ("Pl&ugin panel..."), CK_PanelPlugin));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries =
         g_list_prepend (entries, menu_entry_new (_ ("&Listing format..."), CK_SetupListingFormat));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Sort order..."), CK_Sort));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Filter..."), CK_Filter));
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Encoding..."), CK_SelectCodepage));
-    /* dynamic plugin entries */
-    {
-        const GSList *plugins = mc_panel_plugin_list ();
-        const GSList *p;
-        gboolean separator_added = FALSE;
-        int idx = 0;
-
-        for (p = plugins; p != NULL; p = g_slist_next (p))
-        {
-            const mc_panel_plugin_t *pp = (const mc_panel_plugin_t *) p->data;
-
-            if ((pp->flags & MC_PPF_SHOW_IN_MENU) != 0)
-            {
-                if (!separator_added)
-                {
-                    entries = g_list_prepend (entries, menu_separator_new ());
-                    separator_added = TRUE;
-                }
-                entries = g_list_prepend (
-                    entries, menu_entry_new (pp->display_name, CK_PanelPluginBase + idx));
-            }
-            idx++;
-        }
-    }
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Rescan"), CK_Reread));
 
@@ -318,6 +293,38 @@ create_command_menu (void)
     entries = g_list_prepend (entries, menu_entry_new (_ ("Edit &menu file"), CK_EditUserMenu));
     entries = g_list_prepend (
         entries, menu_entry_new (_ ("Edit hi&ghlighting group file"), CK_EditFileHighlightFile));
+
+    entries = g_list_prepend (entries, menu_separator_new ());
+    entries = g_list_prepend (entries, menu_entry_new (_ ("Pl&ugin panel..."), CK_PanelPlugin));
+
+    /* inject plugin Command-menu entries */
+    {
+        const GSList *plist = mc_panel_plugin_list ();
+        int plugin_idx = 0;
+
+        for (; plist != NULL; plist = g_slist_next (plist), plugin_idx++)
+        {
+            const mc_panel_plugin_t *pp = (const mc_panel_plugin_t *) plist->data;
+            int ci;
+
+            if (pp->cmd_menu_entries == NULL || pp->cmd_menu_entry_count <= 0)
+                continue;
+
+            entries = g_list_prepend (entries, menu_separator_new ());
+
+            for (ci = 0; ci < pp->cmd_menu_entry_count; ci++)
+            {
+                long cmd = CK_PluginActionBase + (long) plugin_idx * 16
+                    + pp->cmd_menu_entries[ci].action_index;
+                menu_entry_t *me;
+
+                me = menu_entry_new (_ (pp->cmd_menu_entries[ci].label), cmd);
+                if (pp->cmd_menu_entries[ci].shortcut != NULL)
+                    menu_entry_set_shortcut (me, pp->cmd_menu_entries[ci].shortcut);
+                entries = g_list_prepend (entries, me);
+            }
+        }
+    }
 
     return g_list_reverse (entries);
 }
@@ -1490,12 +1497,40 @@ midnight_execute_cmd (Widget *sender, long command)
         // don't close panels due to SIGINT
         break;
     default:
-        if (command >= CK_PanelPluginBase)
+        if (command >= CK_PluginActionBase)
+        {
+            /* plugin action: decode plugin_idx and action_idx */
+            int encoded = (int) (command - CK_PluginActionBase);
+            int plugin_idx = encoded / 16;
+            int action_idx = encoded % 16;
+            const GSList *plist = mc_panel_plugin_list ();
+            const mc_panel_plugin_t *pp =
+                (const mc_panel_plugin_t *) g_slist_nth_data ((GSList *) plist, plugin_idx);
+
+            if (pp != NULL && pp->actions != NULL && action_idx < pp->action_count)
+            {
+                WPanel *target_panel = current_panel;
+
+                if (sender == WIDGET (the_menubar))
+                {
+                    menu_t *active_menu =
+                        (menu_t *) g_list_nth_data (the_menubar->menu, (int) the_menubar->current);
+
+                    if (active_menu == left_menu)
+                        target_panel = left_panel;
+                    else if (active_menu == right_menu)
+                        target_panel = right_panel;
+                }
+
+                panel_plugin_run_action (target_panel, pp, action_idx);
+            }
+        }
+        else if (command >= CK_PanelPluginBase)
         {
             int idx = (int) (command - CK_PanelPluginBase);
-            const GSList *plugins = mc_panel_plugin_list ();
+            const GSList *plist = mc_panel_plugin_list ();
             const mc_panel_plugin_t *pp =
-                (const mc_panel_plugin_t *) g_slist_nth_data ((GSList *) plugins, idx);
+                (const mc_panel_plugin_t *) g_slist_nth_data ((GSList *) plist, idx);
 
             if (pp != NULL)
             {
@@ -1668,6 +1703,33 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
                                          NULL);
             }
         }
+
+        /* handle plugin cmd_menu shortcut keys */
+        {
+            const GSList *plist = mc_panel_plugin_list ();
+            int plugin_idx = 0;
+
+            for (; plist != NULL; plist = g_slist_next (plist), plugin_idx++)
+            {
+                const mc_panel_plugin_t *pp = (const mc_panel_plugin_t *) plist->data;
+                int ci;
+
+                if (pp->cmd_menu_entries == NULL || pp->cmd_menu_entry_count <= 0)
+                    continue;
+
+                for (ci = 0; ci < pp->cmd_menu_entry_count; ci++)
+                {
+                    if (pp->cmd_menu_entries[ci].key != 0 && parm == pp->cmd_menu_entries[ci].key)
+                    {
+                        long cmd = CK_PluginActionBase + (long) plugin_idx * 16
+                            + pp->cmd_menu_entries[ci].action_index;
+
+                        return midnight_execute_cmd (NULL, cmd);
+                    }
+                }
+            }
+        }
+
         return MSG_NOT_HANDLED;
 
     case MSG_HOTKEY_HANDLED:

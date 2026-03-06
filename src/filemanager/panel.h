@@ -210,6 +210,7 @@ void panel_plugin_activate (WPanel *panel, const mc_panel_plugin_t *plugin, cons
 gboolean panel_plugin_activate_by_name (WPanel *panel, const char *plugin_name,
                                         const char *open_path);
 void panel_plugin_close (WPanel *panel);
+void panel_plugin_run_action (WPanel *panel, const mc_panel_plugin_t *plugin, int action_index);
 void panel_plugin_select_and_activate (WPanel *panel);
 
 /* --------------------------------------------------------------------------------------------- */
