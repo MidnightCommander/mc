@@ -366,5 +366,8 @@ include caddyfile.syntax
 file Dockerfile.\*$ Dockerfile
 include dockerfile.syntax
 
+file .\*\\.qml$ QML\sFile
+include qml.syntax
+
 file .\* unknown
 include unknown.syntax
