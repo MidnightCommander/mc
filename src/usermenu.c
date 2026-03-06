@@ -989,7 +989,10 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
                 if (c_lc == 'u')
                     do_file_mark (panel, i, 0);
             }
-        g_string_free (qcwd, TRUE);
+
+        if (qcwd != NULL)
+            g_string_free (qcwd, TRUE);
+
         result = block;
         goto ret;
     }  // sub case block
