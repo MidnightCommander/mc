@@ -47,7 +47,7 @@ my_exit (int status)
 START_TEST (test_tty_check_term_unset)
 {
     // given
-    unsetenv ("TERM");
+    g_unsetenv ("TERM");
 
     // when
     tty_check_xterm_compat (FALSE);
@@ -62,7 +62,7 @@ END_TEST
 START_TEST (test_tty_check_term_set_empty)
 {
     // given
-    setenv ("TERM", "", TRUE);
+    g_setenv ("TERM", "", TRUE);
 
     // when
     tty_check_xterm_compat (FALSE);
@@ -77,7 +77,7 @@ END_TEST
 START_TEST (test_tty_check_term_non_xterm)
 {
     // given
-    setenv ("TERM", "gnome-terminal", 1);
+    g_setenv ("TERM", "gnome-terminal", TRUE);
 
     // when
     const gboolean actual_result_force_false = tty_check_xterm_compat (FALSE);
@@ -94,7 +94,7 @@ END_TEST
 START_TEST (test_tty_check_term_xterm_like)
 {
     // given
-    setenv ("TERM", "alacritty-terminal", 1);
+    g_setenv ("TERM", "alacritty-terminal", TRUE);
 
     // when
     const gboolean actual_result_force_false = tty_check_xterm_compat (FALSE);
