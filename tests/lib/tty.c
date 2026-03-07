@@ -47,7 +47,22 @@ my_exit (int status)
 START_TEST (test_tty_check_term_unset)
 {
     // given
-    setenv ("TERM", "", 1);
+    unsetenv ("TERM");
+
+    // when
+    tty_check_xterm_compat (FALSE);
+
+    // then
+    ck_assert_int_eq (my_exit__status__captured, 1);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+START_TEST (test_tty_check_term_set_empty)
+{
+    // given
+    setenv ("TERM", "", TRUE);
 
     // when
     tty_check_xterm_compat (FALSE);
@@ -103,6 +118,7 @@ main (void)
 
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_tty_check_term_unset);
+    tcase_add_test (tc_core, test_tty_check_term_set_empty);
     tcase_add_test (tc_core, test_tty_check_term_non_xterm);
     tcase_add_test (tc_core, test_tty_check_term_xterm_like);
     // ***********************************
