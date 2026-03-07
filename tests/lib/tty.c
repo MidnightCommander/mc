@@ -70,8 +70,8 @@ START_TEST (test_tty_check_term_non_xterm)
 
     // then
     ck_assert_int_eq (my_exit__status__captured, 0);
-    ck_assert_int_eq (actual_result_force_false, 0);
-    ck_assert_int_eq (actual_result_force_true, 1);
+    mctest_assert_false (actual_result_force_false);
+    mctest_assert_true (actual_result_force_true);
 }
 END_TEST
 /* --------------------------------------------------------------------------------------------- */
@@ -87,8 +87,8 @@ START_TEST (test_tty_check_term_xterm_like)
 
     // then
     ck_assert_int_eq (my_exit__status__captured, 0);
-    ck_assert_int_eq (actual_result_force_false, 1);
-    ck_assert_int_eq (actual_result_force_true, 1);
+    mctest_assert_true (actual_result_force_false);
+    mctest_assert_true (actual_result_force_true);
 }
 END_TEST
 
