@@ -129,6 +129,8 @@ tty_check_xterm_compat (const gboolean force_xterm)
     {
         fputs (_ ("The TERM environment variable is unset!\n"), stderr);
         my_exit (EXIT_FAILURE);
+        // my_exit() must terminate this function. Required for test_tty_check_term_unset().
+        return FALSE;
     }
 
     if (force_xterm)
