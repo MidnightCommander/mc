@@ -14,6 +14,7 @@ libmcfilemanager_la_SOURCES = \
 	file.c file.h \
 	filegui.c filegui.h \
 	filemanager.h filemanager.c \
+	filesystem-remote.c filesystem-remote.h \
 	find.c \
 	hotlist.c hotlist.h \
 	info.c info.h \
