@@ -21,6 +21,7 @@ TESTS = \
 	serialize \
 	terminal \
 	tty \
+	util__keycode_to_cntrl \
 	utilunix__mc_pstream_get_string \
 	utilunix__my_system_fork_fail \
 	utilunix__my_system_fork_child_shell \
@@ -52,6 +53,9 @@ terminal_SOURCES = \
 tty_SOURCES = \
 	tty.c
 
+util__keycode_to_cntrl_SOURCES = \
+	util__keycode_to_cntrl.c
+
 utilunix__mc_pstream_get_string_SOURCES = \
 	utilunix__mc_pstream_get_string.c
 
@@ -66,4 +70,3 @@ utilunix__my_system_fork_child_SOURCES = \
 
 x_basename_SOURCES = \
 	x_basename.c
-
