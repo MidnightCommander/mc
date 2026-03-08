@@ -182,6 +182,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"     // str_verscmp()
 #include "lib/unixcompat.h"  // makedev
+#include "filesystem-remote.h"
 #include "mountlist.h"
 
 /*** global variables ****************************************************************************/
@@ -259,20 +260,13 @@ me_remote (char const *fs_name, char const *fs_type)
 #endif
 #ifndef ME_REMOTE
 /* A file system is 'remote' if its Fs_name contains a ':'
-   or if (it is of type (smbfs or smb3 or cifs) and its Fs_name starts with '//')
-   or if it is of any other of the listed types
-   or Fs_name is equal to "-hosts" (used by autofs to mount remote fs).
+   or Fs_name is equal to "-hosts" (used by autofs to mount remote fs)
+   or if it is of any other of the listed types.
    "VM" file systems like prl_fs or vboxsf are not considered remote here. */
 #define ME_REMOTE(Fs_name, Fs_type)                                                                \
-    (strchr (Fs_name, ':') != NULL                                                                 \
-     || ((Fs_name)[0] == '/' && (Fs_name)[1] == '/'                                                \
-         && (strcmp (Fs_type, "smbfs") == 0 || strcmp (Fs_type, "smb3") == 0                       \
-             || strcmp (Fs_type, "cifs") == 0))                                                    \
-     || strcmp (Fs_type, "acfs") == 0 || strcmp (Fs_type, "afs") == 0                              \
-     || strcmp (Fs_type, "coda") == 0 || strcmp (Fs_type, "auristorfs") == 0                       \
-     || strcmp (Fs_type, "fhgfs") == 0 || strcmp (Fs_type, "gpfs") == 0                            \
-     || strcmp (Fs_type, "ibrix") == 0 || strcmp (Fs_type, "ocfs2") == 0                           \
-     || strcmp (Fs_type, "vxfs") == 0 || strcmp ("-hosts", Fs_name) == 0)
+    (strchr (Fs_name, ':') != NULL || strcmp ("-hosts", Fs_name) == 0)                             \
+        || is_remote_fs_type_name (Fs_type)
+
 #endif
 
 /* Many space usage primitives use all 1 bits to denote a value that is
