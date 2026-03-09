@@ -41,13 +41,19 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmissing-prototypes"
 
+extern int mc_skin_color__cache[64];
 int mc_skin_color__cache[64];
-void tty_lowlevel_setcolor (int color) { (void) color; }
+
+extern void *mc_editor_plugin_list;
 void *mc_editor_plugin_list = NULL;
+
+extern int we_are_strstrstrbackground;
+int we_are_strstrstrbackground = 0;
+
+void tty_lowlevel_setcolor (int color) { (void) color; }
 void mc_editor_plugin_add (void *p) { (void) p; }
 void mc_editor_plugins_load (void) {}
 int button_get_width (void *b) { (void) b; return 0; }
-int we_are_strstrstrbackground = 0;
 
 #pragma GCC diagnostic pop
 
