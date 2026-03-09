@@ -398,8 +398,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
 
                     if (fd1 == -1)
                     {
-                        mcview_close_datasource (view);
-                        mcview_show_error (view, _ ("Cannot open\n%s\nin parse mode\n%s"), file);
+                        // VFS decompression failed -- display raw file content
                     }
                     else
                     {
