@@ -12,9 +12,14 @@ context default
 ######################
 # Control structures
 
+    keyword whole abstract brightmagenta
     keyword whole break brightmagenta
+    keyword whole callable brightmagenta
     keyword whole case brightmagenta
+    keyword whole catch brightmagenta
     keyword whole class brightmagenta
+    keyword whole clone brightmagenta
+    keyword whole const brightmagenta
     keyword whole continue brightmagenta
     keyword whole declare brightmagenta
     keyword whole default brightmagenta
@@ -23,17 +28,29 @@ context default
     keyword whole echo brightmagenta
     keyword whole else brightmagenta
     keyword whole elseif brightmagenta
+    keyword whole enddeclare brightmagenta
+    keyword whole endfor brightmagenta
+    keyword whole endforeach brightmagenta
     keyword whole endif brightmagenta
+    keyword whole endswitch brightmagenta
     keyword whole endwhile brightmagenta
     keyword whole extends brightmagenta
     keyword whole false brightmagenta
+    keyword whole final brightmagenta
+    keyword whole finally brightmagenta
     keyword whole for brightmagenta
     keyword whole foreach brightmagenta
     keyword whole function brightmagenta
     keyword whole global brightmagenta
+    keyword whole goto brightmagenta
     keyword whole if brightmagenta
+    keyword whole implements brightmagenta
     keyword whole include brightmagenta
     keyword whole include_once brightmagenta
+    keyword whole instanceof brightmagenta
+    keyword whole insteadof brightmagenta
+    keyword whole interface brightmagenta
+    keyword whole namespace brightmagenta
     keyword whole new brightmagenta
     keyword whole null brightmagenta
     keyword whole private brightmagenta
@@ -44,12 +61,13 @@ context default
     keyword whole return brightmagenta
     keyword whole static brightmagenta
     keyword whole switch brightmagenta
-    keyword whole true brightmagenta
-    keyword whole while brightmagenta
     keyword whole throw brightmagenta
+    keyword whole trait brightmagenta
+    keyword whole true brightmagenta
     keyword whole try brightmagenta
-    keyword whole catch brightmagenta
-    keyword whole finally brightmagenta
+    keyword whole use brightmagenta
+    keyword whole while brightmagenta
+    keyword whole yield brightmagenta
 
 
 # .NET Functions
@@ -3639,6 +3657,7 @@ context default
     keyword whole as white
     keyword whole and white
     keyword whole or white
+    keyword whole xor white
 
 # Magic constants (https://www.php.net/manual/en/language.constants.magic.php)
     keyword whole __LINE__ brightred
