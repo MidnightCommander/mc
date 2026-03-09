@@ -376,7 +376,7 @@ create_message (int flags, const char *title, const char *text, ...)
 /* --------------------------------------------------------------------------------------------- */
 /** Show message box, background safe */
 
-void
+MC_MOCKABLE void
 message (int flags, const char *title, const char *text, ...)
 {
     char *p;

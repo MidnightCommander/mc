@@ -81,7 +81,7 @@ check_for_default (const vfs_path_t *default_file_vpath, const vfs_path_t *file_
  * @param file file name. Can be NULL.
  */
 
-void
+MC_MOCKABLE void
 file_error_message (const char *format, const char *filename)
 {
     const char *error_string = unix_error_string (errno);

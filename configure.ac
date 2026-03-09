@@ -696,6 +696,7 @@ tests/lib/vfs/mc.charsets
 tests/lib/widget/Makefile
 tests/src/Makefile
 tests/src/filemanager/Makefile
+tests/src/viewer/Makefile
 tests/src/editor/Makefile
 tests/src/editor/edit_complete_word_cmd_test_data.txt
 tests/src/vfs/Makefile
