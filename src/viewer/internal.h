@@ -259,9 +259,9 @@ gboolean mcview_dialog_goto (WView *view, off_t *offset);
 
 /* display.c: */
 void mcview_update (WView *view);
-void mcview_display (WView *view);
-void mcview_compute_areas (WView *view);
-void mcview_update_bytes_per_line (WView *view);
+MC_MOCKABLE void mcview_display (WView *view);
+MC_MOCKABLE void mcview_compute_areas (WView *view);
+MC_MOCKABLE void mcview_update_bytes_per_line (WView *view);
 void mcview_display_toggle_ruler (WView *view);
 void mcview_display_frame (const WView *view);
 void mcview_display_clean (WView *view);
@@ -291,8 +291,8 @@ void mcview_toggle_hex_mode (WView *view);
 void mcview_init (WView *view);
 void mcview_done (WView *view);
 void mcview_select_encoding (WView *view);
-void mcview_set_codeset (WView *view);
-void mcview_show_error (WView *view, const char *format, const char *filename);
+MC_MOCKABLE void mcview_set_codeset (WView *view);
+MC_MOCKABLE void mcview_show_error (WView *view, const char *format, const char *filename);
 off_t mcview_bol (WView *view, off_t current, off_t limit);
 off_t mcview_eol (WView *view, off_t current);
 char *mcview_get_title (const WDialog *h, ssize_t width);
