@@ -977,7 +977,7 @@ list_append_unique (GList *list, char *text)
  * If there is no stored data, return line 1 and col 0.
  */
 
-void
+MC_MOCKABLE void
 load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, off_t *offset,
                     GArray **bookmarks)
 {

@@ -234,7 +234,7 @@ mcview_update (WView *view)
 /* --------------------------------------------------------------------------------------------- */
 /** Displays as much data from view->dpy_start as fits on the screen */
 
-void
+MC_MOCKABLE void
 mcview_display (WView *view)
 {
     if (view->mode_flags.hex)
@@ -246,7 +246,7 @@ mcview_display (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+MC_MOCKABLE void
 mcview_compute_areas (WView *view)
 {
     WRect view_area;
@@ -302,7 +302,7 @@ mcview_compute_areas (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+MC_MOCKABLE void
 mcview_update_bytes_per_line (WView *view)
 {
     int cols = view->data_area.cols;

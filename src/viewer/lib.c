@@ -256,7 +256,7 @@ mcview_done (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+MC_MOCKABLE void
 mcview_set_codeset (WView *view)
 {
     const char *cp_id = NULL;
@@ -290,7 +290,7 @@ mcview_select_encoding (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+MC_MOCKABLE void
 mcview_show_error (WView *view, const char *format, const char *filename)
 {
     if (mcview_is_in_panel (view))
