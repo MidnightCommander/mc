@@ -152,7 +152,7 @@ int
 mcview_get_utf (WView *view, off_t byte_index, int *ch_len)
 {
     gchar *str = NULL;
-    int res = 0;
+    gunichar res;
     gchar utf8buf[MB_LEN_MAX + 1];
 
     switch (view->datasource)
@@ -176,7 +176,7 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch_len)
         return (-1);
 
     res = g_utf8_get_char_validated (str, -1);
-    if (res < 0)
+    if (res == (gunichar) (-1) || res == (gunichar) (-2))
     {
         // Retry with explicit bytes to make sure it's not a buffer boundary
         for (int i = 0; i < MB_LEN_MAX; i++)
@@ -196,7 +196,7 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch_len)
         res = g_utf8_get_char_validated (str, -1);
     }
 
-    if (res < 0)
+    if (res == (gunichar) (-1) || res == (gunichar) (-2))
     {
         // Implicit conversion from signed char to signed int keeps negative values.
         *ch_len = 1;
@@ -208,7 +208,7 @@ mcview_get_utf (WView *view, off_t byte_index, int *ch_len)
 
     *ch_len = next_ch - str;
 
-    return res;
+    return (int) res;
 }
 
 /* --------------------------------------------------------------------------------------------- */
