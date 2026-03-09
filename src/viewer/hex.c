@@ -204,6 +204,7 @@ mcview_display_hex (WView *view)
                     int j;
                     gchar utf8buf[MB_LEN_MAX + 1];
                     int first_changed = -1;
+                    gunichar uni;
 
                     for (j = 0; j < MB_LEN_MAX; j++)
                     {
@@ -228,21 +229,23 @@ mcview_display_hex (WView *view)
                     utf8buf[MB_LEN_MAX] = '\0';
 
                     // Determine the state of the current multibyte char
-                    ch = g_utf8_get_char_validated (utf8buf, -1);
-                    if (ch == -1 || ch == -2)
-                        ch = '.';
+                    uni = g_utf8_get_char_validated (utf8buf, -1);
+                    if (uni == (gunichar) (-1) || uni == (gunichar) (-2))
+                        uni = '.';
                     else
                     {
                         gchar *next_ch;
 
                         next_ch = g_utf8_next_char (utf8buf);
                         cont_bytes = next_ch - utf8buf - 1;
-                        if (g_unichar_iswide (ch))
+                        if (g_unichar_iswide (uni))
                             cjk_right = TRUE;
                     }
 
                     utf8_changed = (first_changed >= 0 && first_changed <= cont_bytes);
                     curr = corr;
+
+                    ch = (int) uni;
                 }
             }
 
