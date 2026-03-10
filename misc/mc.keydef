@@ -61,14 +61,10 @@ pgdn=\\e[6~
 pgup=\\e[5~
 
 # Arrows for both keypad modes (application and normal).
-up=\\e[A
-up=\\eOA
-down=\\e[B
-down=\\eOB
-right=\\e[C
-right=\\eOC
-left=\\e[D
-left=\\eOD
+up=\\e[A;\\eOA
+down=\\e[B;\\eOB
+right=\\e[C;\\eOC
+left=\\e[D;\\eOD
 
 [terminal:alacritty]
 copy=xterm
