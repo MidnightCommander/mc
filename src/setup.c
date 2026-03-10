@@ -614,22 +614,20 @@ load_layout (void)
 static void
 load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
 {
-    char *section_name;
     gchar **profile_keys, **keys;
     char *valcopy;
 
     if (terminal == NULL)
         return;
 
-    section_name = g_strconcat ("terminal:", terminal, (char *) NULL);
-    keys = mc_config_get_keys (cfg, section_name, NULL);
+    keys = mc_config_get_keys (cfg, terminal, NULL);
 
     for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
-        // copy=other causes all keys from [terminal:other] to be loaded.
+        // copy=other causes all keys from [other] to be loaded.
         if (g_ascii_strcasecmp (*profile_keys, "copy") == 0)
         {
-            valcopy = mc_config_get_string (cfg, section_name, *profile_keys, "");
+            valcopy = mc_config_get_string (cfg, terminal, *profile_keys, "");
             load_keydefs_from_section (valcopy, cfg);
             g_free (valcopy);
             continue;
@@ -641,7 +639,7 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
         {
             GString **values;
 
-            values = mc_config_get_escape_sequence_list (cfg, section_name, *profile_keys, NULL);
+            values = mc_config_get_escape_sequence_list (cfg, terminal, *profile_keys, NULL);
             if (values != NULL)
             {
                 GString **curr_values;
@@ -658,7 +656,6 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
         }
     }
     g_strfreev (keys);
-    g_free (section_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -674,7 +671,7 @@ load_keydefs_from_file (const char *fname)
     keydef_config = mc_config_init (NULL, TRUE);
     mc_config_read_file (keydef_config, fname, TRUE, TRUE);
 
-    load_keydefs_from_section ("general", keydef_config);
+    load_keydefs_from_section ("_common_", keydef_config);
     load_keydefs_from_section (getenv ("TERM"), keydef_config);
 
     mc_config_deinit (keydef_config);
