@@ -46,7 +46,7 @@
 #
 #   tput rmkx
 
-[terminal:console]
+[console]
 insert     = \e[2~
 f11        = \e[23~
 f12        = \e[24~
@@ -75,10 +75,10 @@ kpenter    = \eOM
 kpslash    = \eOQ
 kpnumlock  = \eOP
 
-[terminal:linux]
+[linux]
 copy = console
 
-[terminal:xterm]
+[xterm]
 insert     = \e[2~
 f11        = \e[23~ \eO2P \eO1;2P \e[1;2P
 f12        = \e[24~ \eO2Q \eO1;2Q \e[1;2Q
@@ -114,49 +114,49 @@ down       = \e[B \eOB
 right      = \e[C \eOC
 left       = \e[D \eOD
 
-[terminal:alacritty]
+[alacritty]
 copy = xterm
 
-[terminal:gnome]
+[gnome]
 copy = xterm
 
-[terminal:rxvt]
+[rxvt]
 copy = xterm
 
-[terminal:xterm-new]
+[xterm-new]
 copy = xterm
 
-[terminal:xterm-clear]
+[xterm-clear]
 copy = xterm
 
-[terminal:xterm-color]
+[xterm-color]
 copy = xterm
 
-[terminal:xterm-256color]
+[xterm-256color]
 copy = xterm
 
-[terminal:xterm-direct]
+[xterm-direct]
 copy = xterm
 
-[terminal:xterm-direct16]
+[xterm-direct16]
 copy = xterm
 
-[terminal:xterm-direct256]
+[xterm-direct256]
 copy = xterm
 
-[terminal:screen]
+[screen]
 copy = xterm
 
-[terminal:screen-256color]
+[screen-256color]
 copy = xterm
 
-[terminal:tmux]
+[tmux]
 copy = xterm
 
-[terminal:tmux-256color]
+[tmux-256color]
 copy = xterm
 
-[terminal:ibmpc3]
+[ibmpc3]
 f11        = \e[Y
 f12        = \e[Z
 f13        = \e[a
@@ -173,7 +173,7 @@ kpplus     = \e[+
 kpminus    = \e[-
 kpasterisk = \e[*
 
-[terminal:cons25]
+[cons25]
 f11 = \e[Y
 f12 = \e[Z
 f13 = \e[a
@@ -185,7 +185,7 @@ f18 = \e[f
 f19 = \e[g
 f20 = \e[h
 
-[terminal:st]
+[st]
 shift-right     = \e[1;2C
 shift-left      = \e[1;2D
 shift-up        = \e[1;2A
@@ -195,11 +195,11 @@ alt-shift-left  = \e[1;4D
 alt-shift-up    = \e[1;4A
 alt-shift-down  = \e[1;4B
 
-[terminal:st-256color]
+[st-256color]
 copy = st
 
-[terminal:st-git-256color]
+[st-git-256color]
 copy = st
 
-[terminal:xterm-kitty]
+[xterm-kitty]
 copy = xterm
