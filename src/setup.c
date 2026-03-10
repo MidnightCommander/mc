@@ -38,7 +38,7 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"  // num_history_items_recorded
 #include "lib/fileloc.h"
-#include "lib/terminal.h"  // convert_controls()
+#include "lib/terminal.h"  // unescape_controls()
 #include "lib/timefmt.h"
 #include "lib/util.h"
 #include "lib/charsets.h"
@@ -452,6 +452,14 @@ static const struct
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+setup__gstring_free (gpointer data)
+{
+    g_string_free ((GString *) data, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 setup__is_cfg_group_must_panel_config (const char *grp)
 {
@@ -616,7 +624,7 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
 {
     char *section_name;
     gchar **profile_keys, **keys;
-    char *valcopy, *value;
+    char *valcopy;
 
     if (terminal == NULL)
         return;
@@ -639,29 +647,22 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
 
         if (key_code != 0)
         {
-            gchar **values;
+            GPtrArray *values;
 
-            values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
+            values = mc_config_get_escape_sequence_list (cfg, section_name, *profile_keys);
             if (values != NULL)
             {
-                gchar **curr_values;
+                g_ptr_array_set_free_func (values, setup__gstring_free);
 
-                for (curr_values = values; *curr_values != NULL; curr_values++)
+                for (guint i = 0; i < values->len; i++)
                 {
-                    valcopy = convert_controls (*curr_values);
-                    define_sequence (key_code, valcopy, MCKEY_NOACTION);
-                    g_free (valcopy);
+                    const GString *curr_value = (GString *) g_ptr_array_index (values, i);
+
+                    if (curr_value->len != 0)
+                        define_sequence (key_code, curr_value->str, MCKEY_NOACTION);
                 }
 
-                g_strfreev (values);
-            }
-            else
-            {
-                value = mc_config_get_string (cfg, section_name, *profile_keys, "");
-                valcopy = convert_controls (value);
-                define_sequence (key_code, valcopy, MCKEY_NOACTION);
-                g_free (valcopy);
-                g_free (value);
+                g_ptr_array_free (values, TRUE);
             }
         }
     }
