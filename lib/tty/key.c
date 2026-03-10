@@ -1170,24 +1170,6 @@ getch_with_timeout (unsigned int delay_us)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-learn_store_key (GString *buffer, int c)
-{
-    if (c == ESC_CHAR)
-        g_string_append (buffer, "\\e");
-    else if (c < ' ')
-    {
-        g_string_append_c (buffer, '^');
-        g_string_append_c (buffer, c + 'a' - 1);
-    }
-    else if (c == '^')
-        g_string_append (buffer, "^^");
-    else
-        g_string_append_c (buffer, (char) c);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 k_dispose (key_def *k)
 {
     if (k != NULL)
@@ -2124,7 +2106,7 @@ learn_key (void)
     c = tty_lowlevel_getch ();
     while (c == -1)
         c = tty_lowlevel_getch ();  // Sanity check, should be unnecessary
-    learn_store_key (buffer, c);
+    g_string_append_c (buffer, c);
 
     end_time = g_get_monotonic_time () + LEARN_TIMEOUT * MC_USEC_PER_MSEC;
 
@@ -2148,7 +2130,7 @@ learn_key (void)
         }
         if (c == -1)
             break;
-        learn_store_key (buffer, c);
+        g_string_append_c (buffer, c);
     }
     tty_keypad (TRUE);
     tty_nodelay (FALSE);

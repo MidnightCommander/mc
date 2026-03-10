@@ -39,7 +39,7 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
-#include "lib/terminal.h"  // convert_controls()
+#include "lib/terminal.h"  // escape_controls()
 #include "lib/util.h"      // MC_PTR_FREE
 #include "lib/widget.h"
 
@@ -114,8 +114,7 @@ learn_button (WButton *button, int action)
             && strcmp (seq, "^i") != 0 && (seq[1] != '\0' || *seq < ' ' || *seq > '~'))
         {
             learnchanged = TRUE;
-            learnkeys[action - B_USER].sequence = seq;
-            seq = convert_controls (seq);
+            learnkeys[action - B_USER].sequence = g_strdup (seq);
             seq_ok = define_sequence (key_name_conv_tab[action - B_USER].code, seq, MCKEY_NOACTION);
         }
 
@@ -364,6 +363,7 @@ learn_save (void)
     mc_config_t *keydef_config;
     char *fname;
     char *section;
+    const GString *list[2];
     gboolean profile_changed = FALSE;
 
     fname = mc_config_get_full_path (GLOBAL_KEYDEF_FILE);
@@ -376,13 +376,14 @@ learn_save (void)
     for (i = 0; i < learn_total; i++)
         if (learnkeys[i].sequence != NULL)
         {
-            char *esc_str;
+            GString *sequence_string;
 
-            esc_str = str_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
-            mc_config_set_string_raw_value (keydef_config, section, key_name_conv_tab[i].name,
-                                            esc_str);
-            g_free (esc_str);
-
+            sequence_string = g_string_new (learnkeys[i].sequence);
+            list[0] = sequence_string;
+            list[1] = NULL;
+            mc_config_set_escape_sequence_list (keydef_config, section, key_name_conv_tab[i].name,
+                                                list, 1);
+            g_string_free (sequence_string, FALSE);
             profile_changed = TRUE;
         }
 

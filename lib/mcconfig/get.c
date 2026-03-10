@@ -24,6 +24,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#include "lib/terminal.h"  // encode_controls(), decode_controls()
 
 #include "lib/mcconfig.h"
 
@@ -251,6 +252,52 @@ mc_config_get_int_list (mc_config_t *mc_config, const gchar *group, const gchar 
         return NULL;
 
     return g_key_file_get_integer_list (mc_config->handle, group, param, length, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/*
+ * An interface matching the other mc_config_get_*_list methods.
+ *
+ * Gets space-separated values, each parsed according to decode_controls().
+ *
+ * Primarily useful for having escape sequences in easy-to-read format, including \e for the escape
+ * character without having to double-escape it, and without having to escape semicolons.
+ */
+GString **
+mc_config_get_escape_sequence_list (mc_config_t *mc_config, const gchar *group, const gchar *param,
+                                    gsize *length)
+{
+    const gchar *separator_str = " ";
+    const gchar *str;
+    gchar **encoded_list, **encoded_p;
+    GArray *decoded_list;
+
+    if (mc_config == NULL || group == NULL || param == NULL)
+        return NULL;
+
+    str = g_key_file_get_value (mc_config->handle, group, param, NULL);
+    if (str == NULL)
+        return NULL;
+
+    encoded_list = g_strsplit (str, separator_str, -1);
+    decoded_list = g_array_new (TRUE, FALSE, sizeof (GString *));
+
+    // Decode each element. Skip empty strings or where decoding fails.
+    encoded_p = encoded_list;
+    while (*encoded_p != NULL)
+    {
+        GString *decoded = decode_controls (*encoded_p++);
+        if (decoded != NULL)
+            g_array_append_val (decoded_list, decoded);
+    }
+
+    if (length != NULL)
+        *length = decoded_list->len;
+
+    g_strfreev (encoded_list);
+
+    return (GString **) g_array_free (decoded_list, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

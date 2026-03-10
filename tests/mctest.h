@@ -19,6 +19,11 @@
         g_assert_cmpstr (actual_result, ==, etalon_result);                                        \
     }
 
+#define mctest_assert_mem_eq(actual_mem, actual_len, etalon_mem, etalon_len)                       \
+    {                                                                                              \
+        g_assert_cmpmem (actual_mem, actual_len, etalon_mem, etalon_len);                          \
+    }
+
 #define mctest_assert_ptr_eq(actual_pointer, etalon_pointer)                                       \
     {                                                                                              \
         ck_assert_msg (actual_pointer == etalon_pointer,                                           \

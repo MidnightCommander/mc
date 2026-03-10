@@ -38,7 +38,7 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"  // num_history_items_recorded
 #include "lib/fileloc.h"
-#include "lib/terminal.h"  // convert_controls()
+#include "lib/terminal.h"  // unescape_controls()
 #include "lib/timefmt.h"
 #include "lib/util.h"
 #include "lib/charsets.h"
@@ -616,7 +616,7 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
 {
     char *section_name;
     gchar **profile_keys, **keys;
-    char *valcopy, *value;
+    char *valcopy;
 
     if (terminal == NULL)
         return;
@@ -639,29 +639,20 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
 
         if (key_code != 0)
         {
-            gchar **values;
+            GString **values;
 
-            values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
+            values = mc_config_get_escape_sequence_list (cfg, section_name, *profile_keys, NULL);
             if (values != NULL)
             {
-                gchar **curr_values;
+                GString **curr_values;
 
                 for (curr_values = values; *curr_values != NULL; curr_values++)
                 {
-                    valcopy = convert_controls (*curr_values);
-                    define_sequence (key_code, valcopy, MCKEY_NOACTION);
-                    g_free (valcopy);
+                    if ((*curr_values)->len > 0)
+                        define_sequence (key_code, (*curr_values)->str, MCKEY_NOACTION);
+                    g_string_free (*curr_values, TRUE);
                 }
-
-                g_strfreev (values);
-            }
-            else
-            {
-                value = mc_config_get_string (cfg, section_name, *profile_keys, "");
-                valcopy = convert_controls (value);
-                define_sequence (key_code, valcopy, MCKEY_NOACTION);
-                g_free (valcopy);
-                g_free (value);
+                g_free (values);
             }
         }
     }
