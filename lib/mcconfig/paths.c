@@ -59,6 +59,7 @@ static const struct
     { &mc_config_str, MC_CONFIG_FILE },
     { &mc_config_str, MC_FHL_INI_FILE },
     { &mc_config_str, MC_HOTLIST_FILE },
+    { &mc_config_str, GLOBAL_KEYDEF_FILE },
     { &mc_config_str, GLOBAL_KEYMAP_FILE },
     { &mc_config_str, MC_USERMENU_FILE },
     { &mc_config_str, EDIT_HOME_MENU },

@@ -33,6 +33,7 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/fileloc.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
@@ -360,8 +361,15 @@ static void
 learn_save (void)
 {
     int i;
+    mc_config_t *keydef_config;
+    char *fname;
     char *section;
     gboolean profile_changed = FALSE;
+
+    fname = mc_config_get_full_path (GLOBAL_KEYDEF_FILE);
+    keydef_config = mc_config_init (fname, FALSE);
+    if (exist_file (fname))
+        mc_config_read_file (keydef_config, fname, FALSE, TRUE);
 
     section = g_strconcat ("terminal:", getenv ("TERM"), (char *) NULL);
 
@@ -371,23 +379,19 @@ learn_save (void)
             char *esc_str;
 
             esc_str = str_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
-            mc_config_set_string_raw_value (mc_global.main_config, section,
-                                            key_name_conv_tab[i].name, esc_str);
+            mc_config_set_string_raw_value (keydef_config, section, key_name_conv_tab[i].name,
+                                            esc_str);
             g_free (esc_str);
 
             profile_changed = TRUE;
         }
 
-    /* On the one hand no good idea to save the complete setup but
-     * without 'Auto save setup' the new key-definitions will not be
-     * saved unless the user does an 'Options/Save Setup'.
-     * On the other hand a save-button that does not save anything to
-     * disk is much worse.
-     */
     if (profile_changed)
-        mc_config_save_file (mc_global.main_config, NULL);
+        mc_config_save_file (keydef_config, NULL);
 
+    g_free (fname);
     g_free (section);
+    mc_config_deinit (keydef_config);
 }
 
 /* --------------------------------------------------------------------------------------------- */
