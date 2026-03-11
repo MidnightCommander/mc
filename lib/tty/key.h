@@ -68,14 +68,15 @@ extern gboolean bracketed_pasting_in_progress;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean define_sequence (int code, const char *seq, int action);
-
 void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);
 
 int tty_keyname_to_keycode (const char *name, char **label);
 char *tty_keycode_to_keyname (const int keycode);
+
+gboolean define_sequence (int code, const char *seq, ssize_t len, int action);
+
 /* mouse support */
 int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);
 gboolean is_idle (void);
@@ -96,7 +97,7 @@ void channels_down (void);
 void load_xtra_key_defines (void);
 
 /* Learn a single key */
-char *learn_key (void);
+GString *learn_key (void);
 
 /* Returns a key code (interpreted) */
 int get_key_code (int nodelay);

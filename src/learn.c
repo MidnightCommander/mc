@@ -63,7 +63,7 @@ typedef struct
     Widget *button;
     Widget *label;
     gboolean ok;
-    char *sequence;
+    GString *sequence;  // might contain embedded NUL
 } learnkey_t;
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -82,19 +82,11 @@ static gboolean learnchanged = FALSE;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-learn_gstring_free (gpointer data)
-{
-    g_string_free ((GString *) data, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 learn_button (WButton *button, int action)
 {
     WDialog *d;
-    char *seq;
+    GString *seq;
 
     (void) button;
 
@@ -108,7 +100,10 @@ learn_button (WButton *button, int action)
                         _ (key_name_conv_tab[action - B_USER].longname));
     mc_refresh ();
     if (learnkeys[action - B_USER].sequence != NULL)
-        MC_PTR_FREE (learnkeys[action - B_USER].sequence);
+    {
+        g_string_free (learnkeys[action - B_USER].sequence, TRUE);
+        learnkeys[action - B_USER].sequence = NULL;
+    }
 
     seq = learn_key ();
     if (seq != NULL)
@@ -118,19 +113,25 @@ learn_button (WButton *button, int action)
          */
         gboolean seq_ok = FALSE;
 
-        if (strcmp (seq, "\\e") != 0 && strcmp (seq, "\\e\\e") != 0 && strcmp (seq, "^m") != 0
-            && strcmp (seq, "^i") != 0 && (seq[1] != '\0' || *seq < ' ' || *seq > '~'))
+        if (strcmp (seq->str, "\\e") != 0 && strcmp (seq->str, "\\e\\e") != 0
+            && strcmp (seq->str, "^m") != 0 && strcmp (seq->str, "^i") != 0
+            && (seq->str[1] != '\0' || *seq->str < ' ' || *seq->str > '~'))
         {
-            learnchanged = TRUE;
-            learnkeys[action - B_USER].sequence = g_strdup (seq);
-            seq_ok = define_sequence (key_name_conv_tab[action - B_USER].code, seq, MCKEY_NOACTION);
+            seq_ok = define_sequence (key_name_conv_tab[action - B_USER].code, seq->str, seq->len,
+                                      MCKEY_NOACTION);
         }
 
-        if (!seq_ok)
+        if (seq_ok)
+        {
+            learnchanged = TRUE;
+            learnkeys[action - B_USER].sequence = seq;
+        }
+        else
+        {
             message (D_NORMAL, _ ("Warning"),
-                     _ ("Cannot accept this key.\nYou have entered \"%s\""), seq);
-
-        g_free (seq);
+                     _ ("Cannot accept this key.\nYou have entered \"%s\""), seq->str);
+            g_string_free (seq, TRUE);
+        }
     }
 
     dlg_run_done (d);
@@ -380,15 +381,12 @@ learn_save (void)
         mc_config_read_file (keydef_config, fname, FALSE, TRUE);
 
     section = g_strconcat ("terminal:", getenv ("TERM"), (char *) NULL);
-    list = g_ptr_array_new_with_free_func (learn_gstring_free);
+    list = g_ptr_array_new ();
 
     for (i = 0; i < learn_total; i++)
         if (learnkeys[i].sequence != NULL)
         {
-            GString *sequence_string;
-
-            sequence_string = g_string_new (learnkeys[i].sequence);
-            g_ptr_array_add (list, sequence_string);
+            g_ptr_array_add (list, learnkeys[i].sequence);
             mc_config_set_escape_sequence_list (keydef_config, section, key_name_conv_tab[i].name,
                                                 list);
             g_ptr_array_remove_index_fast (list, 0);

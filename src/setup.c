@@ -659,7 +659,8 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
                     const GString *curr_value = (GString *) g_ptr_array_index (values, i);
 
                     if (curr_value->len != 0)
-                        define_sequence (key_code, curr_value->str, MCKEY_NOACTION);
+                        define_sequence (key_code, curr_value->str, curr_value->len,
+                                         MCKEY_NOACTION);
                 }
 
                 g_ptr_array_free (values, TRUE);
