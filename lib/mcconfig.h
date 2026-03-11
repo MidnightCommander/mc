@@ -96,6 +96,9 @@ const char *mc_config_get_path (void);
 char *mc_config_get_full_path (const char *config_name);
 vfs_path_t *mc_config_get_full_vpath (const char *config_name);
 
+char *mc_config_get_full_config_name (const char *subdir, const char *config_file_name,
+                                      const char *suffix);
+
 /* mcconfig/history.h */
 
 /* read history to the mc_config, but don't save config to file */
