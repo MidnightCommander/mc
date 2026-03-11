@@ -649,7 +649,8 @@ load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
                 for (curr_values = values; *curr_values != NULL; curr_values++)
                 {
                     if ((*curr_values)->len > 0)
-                        define_sequence (key_code, (*curr_values)->str, MCKEY_NOACTION);
+                        define_sequence (key_code, (*curr_values)->str, (*curr_values)->len,
+                                         MCKEY_NOACTION);
                     g_string_free (*curr_values, TRUE);
                 }
                 g_free (values);

@@ -659,12 +659,15 @@ try_channels (gboolean set_timeout)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/*
+ * len must contain seq's actual length. seq might contain an embedded NUL.
+ */
 static key_def *
-create_sequence (const char *seq, int code, int action)
+create_sequence (const char *seq, gsize len, int code, int action)
 {
     key_def *base, *attach;
 
-    for (base = attach = NULL; *seq != '\0'; seq++)
+    for (base = attach = NULL; len > 0; seq++, len--)
     {
         key_def *p;
 
@@ -678,7 +681,7 @@ create_sequence (const char *seq, int code, int action)
         p->code = code;
         p->child = NULL;
         p->next = NULL;
-        p->action = seq[1] == '\0' ? action : MCKEY_NOACTION;
+        p->action = len > 1 ? action : MCKEY_NOACTION;
         attach = p;
     }
     return base;
@@ -692,7 +695,7 @@ define_sequences (const key_define_t *kd)
     int i;
 
     for (i = 0; kd[i].code != 0; i++)
-        define_sequence (kd[i].code, kd[i].seq, kd[i].action);
+        define_sequence (kd[i].code, kd[i].seq, -1, kd[i].action);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1584,23 +1587,29 @@ tty_keycode_to_keyname (const int keycode)
 /**
  * Return TRUE on success, FALSE on error.
  * An error happens if SEQ is a beginning of an existing longer sequence.
+ *
+ * len may contain seq's actual length, in which case seq might contain an embedded NUL.
+ * Otherwise, if len is negative then it's a standard NUL-terminated C string.
  */
 
 gboolean
-define_sequence (int code, const char *seq, int action)
+define_sequence (int code, const char *seq, gssize len, int action)
 {
     key_def *base;
 
-    if (strlen (seq) > SEQ_BUFFER_LEN - 1)
+    if (len < 0)
+        len = strlen (seq);
+
+    if (len > SEQ_BUFFER_LEN - 1)
         return FALSE;
 
-    for (base = keys; (base != NULL) && (*seq != '\0');)
+    for (base = keys; base != NULL && len > 0;)
         if (*seq == base->ch)
         {
             if (base->child == NULL)
             {
-                if (*(seq + 1) != '\0')
-                    base->child = create_sequence (seq + 1, code, action);
+                if (len > 1)
+                    base->child = create_sequence (seq + 1, len - 1, code, action);
                 else
                 {
                     // The sequence matches an existing one.
@@ -1612,6 +1621,7 @@ define_sequence (int code, const char *seq, int action)
 
             base = base->child;
             seq++;
+            len--;
         }
         else
         {
@@ -1619,18 +1629,18 @@ define_sequence (int code, const char *seq, int action)
                 base = base->next;
             else
             {
-                base->next = create_sequence (seq, code, action);
+                base->next = create_sequence (seq, len, code, action);
                 return TRUE;
             }
         }
 
-    if (*seq == '\0')
+    if (len == 0)
     {
         // Attempt to redefine a sequence with a shorter sequence.
         return FALSE;
     }
 
-    keys = create_sequence (seq, code, action);
+    keys = create_sequence (seq, len, code, action);
     return TRUE;
 }
 
@@ -2089,7 +2099,8 @@ tty_getch (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
+/* Returned string might contain embedded NUL characters. */
+GString *
 learn_key (void)
 {
     // LEARN_TIMEOUT in ms
@@ -2135,7 +2146,13 @@ learn_key (void)
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
 
-    return g_string_free (buffer, buffer->len == 0);
+    if (buffer->len == 0)
+    {
+        g_string_free (buffer, TRUE);
+        return NULL;
+    }
+
+    return buffer;
 #undef LEARN_TIMEOUT
 }
 
