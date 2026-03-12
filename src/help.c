@@ -421,7 +421,7 @@ help_print_word (WDialog *h, GString *word, int *col, int *line, gboolean add_sp
         int w;
 
         w = str_term_width1 (word->str);
-        if (*col + w >= HELP_WINDOW_WIDTH)
+        if (*col + w >= HELP_WINDOW_WIDTH - 1)
         {
             *col = 0;
             (*line)++;
@@ -431,7 +431,7 @@ help_print_word (WDialog *h, GString *word, int *col, int *line, gboolean add_sp
             g_string_set_size (word, 0);
         else
         {
-            widget_gotoyx (h, *line + 2, *col + 2);
+            widget_gotoyx (h, *line + 2, *col + 3);
             tty_print_string (word->str);
             g_string_set_size (word, 0);
             *col += w;
@@ -440,7 +440,7 @@ help_print_word (WDialog *h, GString *word, int *col, int *line, gboolean add_sp
 
     if (add_space)
     {
-        if (*col < HELP_WINDOW_WIDTH - 1)
+        if (*col < HELP_WINDOW_WIDTH - 2)
         {
             tty_print_char (' ');
             (*col)++;
@@ -585,7 +585,7 @@ help_show (WDialog *h, const char *paint_start)
                 acs = FALSE;
                 break;
             case CHAR_VERSION:
-                widget_gotoyx (h, line + 2, col + 2);
+                widget_gotoyx (h, line + 2, col + 3);
                 tty_print_string (mc_global.mc_version);
                 col += str_term_width1 (mc_global.mc_version);
                 break;
@@ -614,7 +614,7 @@ help_show (WDialog *h, const char *paint_start)
                     if (c == '\t')
                     {
                         col = (col / 8 + 1) * 8;
-                        if (col >= HELP_WINDOW_WIDTH)
+                        if (col >= HELP_WINDOW_WIDTH - 1)
                         {
                             line++;
                             col = 8;
@@ -628,9 +628,9 @@ help_show (WDialog *h, const char *paint_start)
                     if (!acs)
                         // accumulate symbols in a word
                         g_string_append (word, buff);
-                    else if (col < HELP_WINDOW_WIDTH)
+                    else if (col < HELP_WINDOW_WIDTH - 1)
                     {
-                        widget_gotoyx (h, line + 2, col + 2);
+                        widget_gotoyx (h, line + 2, col + 3);
                         tty_print_char (mc_acs_map (c));
                         col++;
                     }

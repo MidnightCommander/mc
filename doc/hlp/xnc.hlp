@@ -1,15 +1,15 @@
 
 [main]
- lqwqk     k           k     
- x x x .   x     .     x     
- x x x k lqu wqk k lqw tqk n 
- x x x x x x x x x x x x x x 
- v   v v mqv v v v mqu v v mj
-     qqqqqqCommanderqj 
+lqwqk     k           k     
+x x x .   x     .     x     
+x x x k lqu wqk k lqw tqk n 
+x x x x x x x x x x x x x x 
+v   v v mqv v v v mqu v v mj
+    qqqqqqCommanderqj 
 
 This is the main help screen for GNU Midnight Commander.
 
-To learn more on how to use the interactive help facility just press EnterHow to use help.  You may want to go directly to the help contentsContents.
+To learn more on how to use the interactive help facility just press EnterHow to use help. You may want to go directly to the help contentsContents.
 
 GNU Midnight Commander is written by its authorsAUTHORS.
 
@@ -23,23 +23,23 @@ GNU Midnight Commander comes with ABSOLUTELY NO WARRANTYWarranty. This is fre
 Copyright © 2007 Free Software Foundation, Inc.
 <http://fsf.org/>
 
-    Everyone is  permitted  to copy  and  distribute  verbatim copies of this  license  document,  but  changing  it  is  not allowed.
+    Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
 
                          Preamble
 
     The GNU General Public License is a free, copyleft license for software and other kinds of works.
 
-    The licenses for most software and other practical works are designed to take away your freedom  to  share  and  change the works. By contrast, the  GNU  General  Public  License  is intended to guarantee your freedom to  share  and  change  all versions of a program to make sure it  remains  free  software for all its users. We, the Free Software Foundation,  use  the GNU General Public  License  for  most  of  our  software;  it applies also to any  other  work  released  this  way  by  its authors. You can apply it to your programs, too.
+    The licenses for most software and other practical works are designed to take away your freedom to share and change the works. By contrast, the GNU General Public License is intended to guarantee your freedom to share and change all versions of a program to make sure it remains free software for all its users. We, the Free Software Foundation, use the GNU General Public License for most of our software; it applies also to any other work released this way by its authors. You can apply it to your programs, too.
 
-    When we speak of free software, we are referring  to freedom, not price. Our General Public Licenses  are  designed to make sure that you have the freedom to distribute copies of free software (and charge for them  if  you  wish),  that  you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free  programs, and that you know you can do these things.
+    When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.
 
-    To protect your rights, we need to prevent others from denying you these  rights  or  asking  you  to  surrender  the rights. Therefore, you have certain  responsibilities  if  you distribute copies of  the  software,  or  if  you  modify  it: responsibilities to respect the freedom of others.
+    To protect your rights, we need to prevent others from denying you these rights or asking you to surrender the rights. Therefore, you have certain responsibilities if you distribute copies of the software, or if you modify it: responsibilities to respect the freedom of others.
 
-    For example, if you distribute copies of such a program, whether gratis or for a fee, you must pass on to the recipients the same freedoms that you received. You must make sure that they, too, receive or can get the source  code. And you must show them these terms so they know their rights.
+    For example, if you distribute copies of such a program, whether gratis or for a fee, you must pass on to the recipients the same freedoms that you received. You must make sure that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 
-    Developers that use the GNU GPL protect your rights with two steps: (1) assert copyright on the software, and (2) offer you  this License giving you legal permission to copy, distribute and/or modify it.
+    Developers that use the GNU GPL protect your rights with two steps: (1) assert copyright on the software, and (2) offer you this License giving you legal permission to copy, distribute and/or modify it.
 
-    For the developers' and authors' protection, the GPL clearly explains that there is no warranty for this free software.  For both users' and authors' sake, the GPL requires that modified versions be marked as changed, so that their problems will not be attributed erroneously to authors of previous versions.
+    For the developers' and authors' protection, the GPL clearly explains that there is no warranty for this free software. For both users' and authors' sake, the GPL requires that modified versions be marked as changed, so that their problems will not be attributed erroneously to authors of previous versions.
 
     Some devices are designed to deny users access to install or run modified versions of the software inside them, although the manufacturer can do so. This is fundamentally incompatible with the aim of protecting users' freedom to change the software. The systematic pattern of such abuseoccurs in the area of products for individuals to use, which is precisely where it is most unacceptable. Therefore, we have designed this version of the GPL to prohibit the practice for those products. If such problems arise substantially in other domains, we stand ready to extend this provision to those domains in future versions of the GPL, as needed to protect the freedom of users.
 
@@ -62,7 +62,7 @@ Copyright © 2007 Free Software Foundation, Inc.
 
     A “covered work” means either the unmodified Program or a work based on the Program.
 
-    To “propagate” a work means to do anything with  it  that, without permission, would make you directly or secondarily liable for infringement under applicable copyright law, except executing it on a computer or modifying a private copy. Propagation includes copying, distribution (with or without modification), making available to the public, and in some countries other activities as well.
+    To “propagate” a work means to do anything with it that, without permission, would make you directly or secondarily liable for infringement under applicable copyright law, except executing it on a computer or modifying a private copy. Propagation includes copying, distribution (with or without modification), making available to the public, and in some countries other activities as well.
 
     To “convey” a work means any kind of propagation that enables other parties to make or receive copies. Mere interaction with a user through a computer network, with no transfer of a copy, is not conveying.
 
@@ -76,14 +76,13 @@ Copyright © 2007 Free Software Foundation, Inc.
 
     A “Standard Interface” means an interface that either is an official standard defined by a recognized standards body, or, in the case of interfaces specified for a particular programming language, one that is widely used among developers working in that language.
 
-    The  “System Libraries” of an executable work include anything, other than the work as a whole, that (a) is included in the normal form of packaging a Major Component, but which is not part of that Major Component, and (b) serves only to enable use of the work with that Major Component, or to implement a Standard Interface for which an implementation is available to the public in source code form. A “Major Component”, in this context, means a major essential component (kernel, window system, and so on) of the specific operating system (if any) on which the executable work runs, or a compiler used to produce the work, or an object code interpreter used to run it.
+    The “System Libraries” of an executable work include anything, other than the work as a whole, that (a) is included in the normal form of packaging a Major Component, but which is not part of that Major Component, and (b) serves only to enable use of the work with that Major Component, or to implement a Standard Interface for which an implementation is available to the public in source code form. A “Major Component”, in this context, means a major essential component (kernel, window system, and so on) of the specific operating system (if any) on which the executable work runs, or a compiler used to produce the work, or an object code interpreter used to run it.
 
     The “Corresponding Source” for a work in object code form means all the source code needed to generate, install, and (for an executable work) run the object code and to modify the work, including scripts to control those activities. However, it does not include the work's System Libraries, or general-purpose tools or generally available free programs which are used unmodified in performing those activities but which are not part of the work. For example, Corresponding Source includes interface definition files associated with source files for the work, and the source code for shared libraries and dynamically linked subprograms that the work is specifically designed to require, such as by intimate data communication or control flow between those subprograms and other parts of the work.
 
     The Corresponding Source need not include anything that users can regenerate automatically from other parts of the Corresponding Source.
 
-    The Corresponding Source for a work in source code form is
-that same work.
+    The Corresponding Source for a work in source code form is that same work.
 
 2. Basic Permissions.
 ---------------------
@@ -118,14 +117,7 @@ that same work.
   c) You must license the entire work, as a whole, under this License to anyone who comes into possession of a copy. This License will therefore apply, along with any applicable section 7 additional terms, to the whole of the work, and all its parts, regardless of how they are packaged. This License gives no permission to license the work in any other way, but it does not invalidate such permission if you have separately received it.
   d) If the work has interactive user interfaces, each must display Appropriate Legal Notices; however, if the Program has interactive interfaces that do not display Appropriate Legal Notices, your work need not make them do so.
 
-    A compilation of a covered work with other separate and independent works,
-which are not by their nature extensions of the covered work, and which are not
-combined with it such as to form a larger program, in or on a volume of a
-storage or distribution medium, is called an “aggregate” if the compilation and
-its resulting copyright are not used to limit the access or legal rights of the
-compilation's users beyond what the individual works permit. Inclusion of a
-covered work in an aggregate does not cause this License to applyto the other
-parts of the aggregate.
+    A compilation of a covered work with other separate and independent works, which are not by their nature extensions of the covered work, and which are not combined with it such as to form a larger program, in or on a volume of a storage or distribution medium, is called an “aggregate” if the compilation and its resulting copyright are not used to limit the access or legal rights of the compilation's users beyond what the individual works permit. Inclusion of a covered work in an aggregate does not cause this License to applyto the other parts of the aggregate.
 
 6. Conveying Non-Source Forms.
 ------------------------------
@@ -134,7 +126,7 @@ parts of the aggregate.
 
   a) Convey the object code in, or embodied in, a physical product (including a physical distribution medium), accompanied by the Corresponding Source fixed on a durable physical medium customarily used for software interchange.
   b) Convey the object code in, or embodied in, a physical product (including a physical distribution medium), accompanied by a written offer, valid for at least three years and valid for as long as you offer spare parts or customer support for that product model, to give anyone who possesses the object code either (1) a copy of the Corresponding Source for all the software in the product that is covered by this License, on a durable physical medium customarily used for software interchange, for a price no more than your reasonable cost of physically performing this conveying of source, or (2) access to copy the Corresponding Source from a network server at no charge.
-  c) Convey individual copies of the  object code  with a copy of the written offer to provide the Corresponding Source. This alternative is allowed only occasionally and noncommercially, and only if you received the object code with such an offer, in accord with subsection 6b.
+  c) Convey individual copies of the object code with a copy of the written offer to provide the Corresponding Source. This alternative is allowed only occasionally and noncommercially, and only if you received the object code with such an offer, in accord with subsection 6b.
   d) Convey the object code by offering access from a designated place (gratis or for a charge), and offer equivalent access to the Corresponding Source in the same way through the same place at no further charge. You need not require recipients to copy the Corresponding Source along with the object code. If the place to copy the object code is a network server, the Corresponding Source may be on a different server (operated by you or a third party) that supports equivalent copying facilities, provided you maintain clear directions next to the object code saying where to find the Corresponding Source. Regardless of what server hosts the Corresponding Source, you remain obligated to ensure that it is available for as long as needed to satisfy these requirements.
   e) Convey the object code using peer-to-peer transmission, provided you inform other peers where the object code and Corresponding Source of the work are being offered to the general public at no charge under subsection 6d.
 
@@ -161,7 +153,7 @@ parts of the aggregate.
 
   a) Disclaiming warranty or limiting liability differently from the terms of sections 15 and 16 of this License; or
   b) Requiring preservation of specified reasonable legal notices or author attributions in that material or in the Appropriate Legal Notices displayed by works containing it; or
-  c) Prohibiting  misrepresentation of the origin of that  material, or requiring that modified versions of such material be marked in reasonable ways as different from the original version; or
+  c) Prohibiting misrepresentation of the origin of that material, or requiring that modified versions of such material be marked in reasonable ways as different from the original version; or
   d) Limiting the use for publicity purposes of names of licensors or authors of the material; or
   e) Declining to grant rights under trademark law for use of some trade names, trademarks, or service marks; or
   f) Requiring indemnification of licensors and authors of that material by anyone who conveys the material (or modified versions of it) with contractual assumptions of liability to the recipient, for any liability that these contractual assumptions directly impose on those licensors and authors.
@@ -175,7 +167,7 @@ parts of the aggregate.
 8. Termination.
 ---------------
 
-    You may not propagate or modify a covered work except as expressly provided under this License. Any attempt otherwise to propagate or modify it is void, and will automatically terminate your  rights  under  this  License  (including any patent licenses granted under the third paragraph of section 11).
+    You may not propagate or modify a covered work except as expressly provided under this License. Any attempt otherwise to propagate or modify it is void, and will automatically terminate your rights under this License (including any patent licenses granted under the third paragraph of section 11).
 
     However, if you cease all violation of this License, then your license from a particular copyright holder is reinstated (a) provisionally, unless and until the copyright holder explicitly and finally terminates your license, and (b) permanently, if the copyright holder fails to notify you of the violation by some reasonable means prior to 60 days after the cessation.
 
@@ -193,7 +185,7 @@ parts of the aggregate.
 
     Each time you convey a covered work, the recipient automatically receives a license from the original licensors, to run, modify and propagate that work, subject to this License. You are not responsible for enforcing compliance by third parties with this License.
 
-    An “entity transaction” is a transaction transferring control of an organization, or substantially all assets  of one, or subdividing an organization, or merging organizations. If propagation of a covered work results from an entity transaction, each party to that transaction who receives a copy of the work also receives whatever licenses to the work the party's  predecessor in interest had or could give under the previous paragraph, plus a right to possession of the Corresponding Source of the work from the predecessor in interest, if the predecessor has it or can get it with reasonable efforts.
+    An “entity transaction” is a transaction transferring control of an organization, or substantially all assets of one, or subdividing an organization, or merging organizations. If propagation of a covered work results from an entity transaction, each party to that transaction who receives a copy of the work also receives whatever licenses to the work the party's predecessor in interest had or could give under the previous paragraph, plus a right to possession of the Corresponding Source of the work from the predecessor in interest, if the predecessor has it or can get it with reasonable efforts.
 
     You may not impose any further restrictions on the exercise of the rights granted or affirmed under this License. For example, you may not impose a license fee, royalty, or other charge for exercise of rights granted under this License, and you may not initiate litigation (including a cross-claim or counterclaim in a lawsuit) alleging that any patent claim is infringed by making, using, selling, offering for sale, or importing the Program or any portion of it.
 
@@ -208,7 +200,7 @@ parts of the aggregate.
 
     In the following three paragraphs, a “patent license” is any express agreement or commitment, however denominated, not to enforce a patent (such as an express permission to practice a patent or covenant not to sue for patent infringement). To “grant” such a patent license to a party means to make such an agreement or commitment not to enforce a patent against the party.
 
-    If you convey a covered work, knowingly relying on a patent license, and the Corresponding Source of the work is not available for anyone to  copy, free of charge and under the terms of this License, through a publicly available network server or other readily accessible means, then you must either (1) cause the Corresponding Source to be so available, or (2) arrange to deprive yourself of the benefit of the patent license for this particular work, or (3) arrange, in a manner consistent with the requirements of this License, to extend the patent license to downstream recipients. “Knowingly relying” means you have actual knowledge that, but for the patent license, your conveying the covered work in a country, or your recipient's use of the covered work in a country, would infringe one or more identifiable patents in that country that you have reason to believe are valid.
+    If you convey a covered work, knowingly relying on a patent license, and the Corresponding Source of the work is not available for anyone to copy, free of charge and under the terms of this License, through a publicly available network server or other readily accessible means, then you must either (1) cause the Corresponding Source to be so available, or (2) arrange to deprive yourself of the benefit of the patent license for this particular work, or (3) arrange, in a manner consistent with the requirements of this License, to extend the patent license to downstream recipients. “Knowingly relying” means you have actual knowledge that, but for the patent license, your conveying the covered work in a country, or your recipient's use of the covered work in a country, would infringe one or more identifiable patents in that country that you have reason to believe are valid.
 
     If, pursuant to or in connection with a single transaction or arrangement, you convey, or propagate by procuring conveyance of, a covered work, and grant a patent license to some of the parties receiving the covered work authorizing them to use, propagate, modify or convey a specific copy of the covered work, then the patent license you grant is automatically extended to all recipients of the covered work and works based on it.
 
@@ -231,7 +223,7 @@ parts of the aggregate.
 
     The Free Software Foundation may publish revised and/or new versions of the GNU General Public License from time to time. Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns.
 
-    Each version is given a distinguishing version number. If the Program specifies that a certain numbered version of the GNU General Public License “or any later version” applies to it, you have the option of following the terms and conditions either of that numbered version or of any later version published by the Free Software Foundation. If the Program does not specify a version number of the GNU General Public  License, you may choose any version ever published by the Free Software Foundation.
+    Each version is given a distinguishing version number. If the Program specifies that a certain numbered version of the GNU General Public License “or any later version” applies to it, you have the option of following the terms and conditions either of that numbered version or of any later version published by the Free Software Foundation. If the Program does not specify a version number of the GNU General Public License, you may choose any version ever published by the Free Software Foundation.
 
     If the Program specifies that a proxy can decide which future versions of the GNU General Public License can be used, that proxy's public statement of acceptance of a version permanently authorizes you to choose that version for the Program.
 
@@ -304,11 +296,11 @@ In the query dialog box you can use the arrow keys or the first letter to select
 [How to use help]
 How to use help
 
-You can use the cursor keys or mouse to navigate in the help viewer.  Press down arrow to move to the next item or scroll down.  Press up arrow to move to the previous item or scroll up.  Press right arrow to follow the current link.  Press left arrow to go back in the history of nodes that you have visited.
+You can use the cursor keys or mouse to navigate in the help viewer. Press down arrow to move to the next item or scroll down. Press up arrow to move to the previous item or scroll up. Press right arrow to follow the current link. Press left arrow to go back in the history of nodes that you have visited.
 
-If you terminal doesn't support the cursor keys you can use the space bar to scroll forward and the b (back) key scroll back.  Use the TAB key to move to the next item and press ENTER to follow the current link.  The l (last) key can be used to go back in the history of nodes you have visited.  Press ESC to exit the help viewer.
+If you terminal doesn't support the cursor keys you can use the space bar to scroll forward and the b (back) key scroll back. Use the TAB key to move to the next item and press ENTER to follow the current link. The l (last) key can be used to go back in the history of nodes you have visited. Press ESC to exit the help viewer.
 
-The left mouse button will follow the link or scroll.  The right mouse button can be used to go back in the history of nodes.
+The left mouse button will follow the link or scroll. The right mouse button can be used to go back in the history of nodes.
 
 The full key list of the help viewer:
 
