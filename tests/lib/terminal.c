@@ -49,6 +49,23 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static char *
+encode_controls_simple (const char *s)
+{
+    return encode_controls (s, -1);
+}
+
+static char *
+decode_controls_simple (const char *s)
+{
+    GString *ret;
+
+    ret = decode_controls (s);
+    return g_string_free (ret, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 START_TEST (test_parse_csi)
 {
     const char *s = &"\x1b[=5uRest"[2];
@@ -110,6 +127,65 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+START_TEST (test_encode_controls)
+{
+    mctest_assert_str_eq (encode_controls_simple ("\001"), "^A");
+    mctest_assert_str_eq (encode_controls_simple ("\032"), "^Z");
+    mctest_assert_str_eq (encode_controls_simple ("\033"), "\\e");
+    mctest_assert_str_eq (encode_controls_simple ("\034"), "^\\");
+    mctest_assert_str_eq (encode_controls_simple ("\035"), "^]");
+    mctest_assert_str_eq (encode_controls_simple ("\036"), "^^");
+    mctest_assert_str_eq (encode_controls_simple ("\037"), "^_");
+    mctest_assert_str_eq (encode_controls_simple ("\177"), "^?");
+    mctest_assert_str_eq (encode_controls_simple (" "), "\\s");
+    mctest_assert_str_eq (encode_controls_simple ("\\"), "\\\\");
+    mctest_assert_str_eq (encode_controls_simple ("^"), "\\^");
+
+    mctest_assert_str_eq (encode_controls ("\000", 1), "^@");
+    mctest_assert_str_eq (encode_controls ("ab\000\000cd\000\000ef", 7), "ab^@^@cd^@");
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+START_TEST (test_decode_controls)
+{
+    GString *ret;
+
+    mctest_assert_str_eq (decode_controls_simple ("^A"), "\001");
+    mctest_assert_str_eq (decode_controls_simple ("^Z"), "\032");
+    mctest_assert_str_eq (decode_controls_simple ("^["), "\033");
+    mctest_assert_str_eq (decode_controls_simple ("\\e"), "\033");
+    mctest_assert_str_eq (decode_controls_simple ("\\E"), "\033");
+    mctest_assert_str_eq (decode_controls_simple ("^\\"), "\034");
+    mctest_assert_str_eq (decode_controls_simple ("^]"), "\035");
+    mctest_assert_str_eq (decode_controls_simple ("^^"), "\036");
+    mctest_assert_str_eq (decode_controls_simple ("^_"), "\037");
+    mctest_assert_str_eq (decode_controls_simple ("^?"), "\177");
+    mctest_assert_str_eq (decode_controls_simple ("\\s"), " ");
+    mctest_assert_str_eq (decode_controls_simple ("\\\\"), "\\");
+    mctest_assert_str_eq (decode_controls_simple ("\\^"), "^");
+    mctest_assert_str_eq (decode_controls_simple ("\\^"), "^");
+    mctest_assert_str_eq (decode_controls_simple ("^A^[\\e\\E^\\^^^?"),
+                          "\001\033\033\033\034\036\177");
+    mctest_assert_str_eq (decode_controls_simple ("\\\\\\\\\\\\"), "\\\\\\");
+    mctest_assert_str_eq (decode_controls_simple ("^^^^^^"), "\036\036\036");
+    mctest_assert_str_eq (decode_controls_simple ("^^^^^\\^\\\\\\\\\\\\^\\^^^^^"),
+                          "\036\036\034\034\\\\^^\036\036");
+    mctest_assert_str_eq (decode_controls_simple ("trailing^"), "trailing^");
+
+    ret = decode_controls ("^@");
+    mctest_assert_mem_eq (ret->str, ret->len, "\000", 1);
+    g_string_free (ret, TRUE);
+
+    ret = decode_controls ("ab^@^@cd^@");
+    mctest_assert_mem_eq (ret->str, ret->len, "ab\000\000cd\000", 7);
+    g_string_free (ret, TRUE);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -123,6 +199,8 @@ main (void)
     tcase_add_test (tc_core, test_parse_csi);
     tcase_add_test (tc_core, test_strip_ctrl_codes);
     tcase_add_test (tc_core, test_strip_ctrl_codes2);
+    tcase_add_test (tc_core, test_encode_controls);
+    tcase_add_test (tc_core, test_decode_controls);
     // ***********************************
 
     return mctest_run_all (tc_core);

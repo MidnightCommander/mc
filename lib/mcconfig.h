@@ -64,6 +64,8 @@ gboolean *mc_config_get_bool_list (mc_config_t *mc_config, const gchar *group, c
                                    gsize *length);
 int *mc_config_get_int_list (mc_config_t *mc_config, const gchar *group, const gchar *param,
                              gsize *length);
+GString **mc_config_get_escape_sequence_list (mc_config_t *mc_config, const gchar *group,
+                                              const gchar *param, gsize *length);
 
 /* mcconfig/set.c: */
 
@@ -83,6 +85,8 @@ void mc_config_set_bool_list (mc_config_t *mc_config, const gchar *group, const 
                               gboolean value[], gsize length);
 void mc_config_set_int_list (mc_config_t *mc_config, const gchar *group, const gchar *param,
                              int value[], gsize length);
+void mc_config_set_escape_sequence_list (mc_config_t *mc_config, const gchar *group,
+                                         const gchar *param, const GString *value[], gsize length);
 
 /* mcconfig/paths.c: */
 
@@ -95,6 +99,9 @@ MC_MOCKABLE const char *mc_config_get_home_dir (void);
 const char *mc_config_get_path (void);
 char *mc_config_get_full_path (const char *config_name);
 vfs_path_t *mc_config_get_full_vpath (const char *config_name);
+
+char *mc_config_get_full_config_name (const char *subdir, const char *config_file_name,
+                                      const char *suffix);
 
 /* mcconfig/history.h */
 

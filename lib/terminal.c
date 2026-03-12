@@ -247,61 +247,146 @@ strip_ctrl_codes (char *s)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key
+
+/*
+ * Escape the string according to these rules:
  *
- * @param p pointer to string
+ *   byte 0x00 => ^@
+ *   byte 0x01 => ^A
+ *         ...
+ *   byte 0x1A => ^Z
+ *   byte 0x1B => \e  - the decoder also accepts \E or ^[
+ *   byte 0x1C => ^\
+ *   byte 0x1D => ^]
+ *   byte 0x1E => ^^
+ *   byte 0x1F => ^_
+ *   byte 0x7F => ^?
+ *
+ *           \ => \\
+ *           ^ => \^
+ *       space => \s
+ *
+ * @param s raw input string, possibly containing an embedded NUL byte
  *
  * @return newly allocated string
  */
 
 char *
-convert_controls (const char *p)
+encode_controls (const char *s, ssize_t len)
 {
-    char *valcopy;
-    char *q;
+    GString *ret;
+    const char *end;
 
-    valcopy = g_strdup (p);
+    if (s == NULL)
+        return NULL;
 
-    // Parse the escape special character
-    for (q = valcopy; *p != '\0';)
-        switch (*p)
+    if (len < 0)
+        len = strlen (s);
+    end = s + len;
+
+    ret = g_string_new (NULL);
+
+    while (s < end)
+    {
+        if (*s == 0x1B)
+            g_string_append (ret, "\\e");
+        else if (*s >= 0 && *s < ' ')
+        {
+            g_string_append_c (ret, '^');
+            g_string_append_c (ret, *s + 0x40);
+        }
+        else if (*s == 0x7F)
+            g_string_append (ret, "^?");
+        else if (*s == '\\')
+            g_string_append (ret, "\\\\");
+        else if (*s == '^')
+            g_string_append (ret, "\\^");
+        else if (*s == ' ')
+            g_string_append (ret, "\\s");
+        else
+            g_string_append_c (ret, *s);
+        s++;
+    }
+
+    return g_string_free (ret, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Unescape control characters, performing the opposite of encode_controls().
+ *
+ * In addition to the notation of encode_controls(), the following are also accepted:
+ *   - \e and \E are the same as ^[, the escape character
+ *   - ^a .. ^z are the same as their ^A .. ^Z counterparts, the 0x01 .. 0x1A control characters
+ *   - a trailing unescaped ^ stands for itself, a literal caret
+ *
+ * @param s the escaped string
+ *
+ * @return newly allocated string, possibly containing an embedded NUL byte
+ */
+
+GString *
+decode_controls (const char *s)
+{
+    GString *ret;
+
+    if (s == NULL)
+        return NULL;
+
+    ret = g_string_new (NULL);
+
+    while (*s != '\0')
+        switch (*s)
         {
         case '\\':
-            p++;
+            s++;
+            if (*s == '\0')
+                goto err;
 
-            if (*p == 'e' || *p == 'E')
+            switch (*s)
             {
-                p++;
-                *q++ = ESC_CHAR;
+            case 'e':
+            case 'E':
+                g_string_append_c (ret, ESC_CHAR);
+                break;
+            case 's':
+                g_string_append_c (ret, ' ');
+                break;
+            default:
+                g_string_append_c (ret, *s);
             }
+            s++;
             break;
 
         case '^':
-            p++;
-            if (*p == '^')
-                *q++ = *p++;
-            else
+            s++;
+            if (*s == '\0')
             {
-                char c;
-
-                c = *p | 0x20;
-                if (c >= 'a' && c <= 'z')
-                {
-                    *q++ = c - 'a' + 1;
-                    p++;
-                }
-                else if (*p != '\0')
-                    p++;
+                g_string_append_c (ret, '^');
+                break;
             }
+            else if (*s >= 0x40 && *s < 0x60)
+                g_string_append_c (ret, *s - 0x40);
+            else if (*s >= 'a' && *s <= 'z')
+                g_string_append_c (ret, *s - 'a' + 1);
+            else if (*s == '?')
+                g_string_append_c (ret, 0x7F);
+            else
+                goto err;
+            s++;
             break;
 
         default:
-            *q++ = *p++;
+            g_string_append_c (ret, *s);
+            s++;
         }
 
-    *q = '\0';
-    return valcopy;
+    return ret;
+
+err:
+    g_string_free (ret, TRUE);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

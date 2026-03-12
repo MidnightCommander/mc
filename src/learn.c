@@ -33,12 +33,13 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/fileloc.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
-#include "lib/terminal.h"  // convert_controls()
+#include "lib/terminal.h"  // escape_controls()
 #include "lib/util.h"      // MC_PTR_FREE
 #include "lib/widget.h"
 
@@ -62,7 +63,7 @@ typedef struct
     Widget *button;
     Widget *label;
     gboolean ok;
-    char *sequence;
+    GString *sequence;  // might contain embedded NUL
 } learnkey_t;
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -85,7 +86,7 @@ static int
 learn_button (WButton *button, int action)
 {
     WDialog *d;
-    char *seq;
+    GString *seq;
 
     (void) button;
 
@@ -109,20 +110,25 @@ learn_button (WButton *button, int action)
          */
         gboolean seq_ok = FALSE;
 
-        if (strcmp (seq, "\\e") != 0 && strcmp (seq, "\\e\\e") != 0 && strcmp (seq, "^m") != 0
-            && strcmp (seq, "^i") != 0 && (seq[1] != '\0' || *seq < ' ' || *seq > '~'))
+        if (strcmp (seq->str, "\\e") != 0 && strcmp (seq->str, "\\e\\e") != 0
+            && strcmp (seq->str, "^m") != 0 && strcmp (seq->str, "^i") != 0
+            && (seq->str[1] != '\0' || *seq->str < ' ' || *seq->str > '~'))
+        {
+            seq_ok = define_sequence (key_name_conv_tab[action - B_USER].code, seq->str, seq->len,
+                                      MCKEY_NOACTION);
+        }
+
+        if (seq_ok)
         {
             learnchanged = TRUE;
             learnkeys[action - B_USER].sequence = seq;
-            seq = convert_controls (seq);
-            seq_ok = define_sequence (key_name_conv_tab[action - B_USER].code, seq, MCKEY_NOACTION);
         }
-
-        if (!seq_ok)
+        else
+        {
             message (D_NORMAL, _ ("Warning"),
-                     _ ("Cannot accept this key.\nYou have entered \"%s\""), seq);
-
-        g_free (seq);
+                     _ ("Cannot accept this key.\nYou have entered \"%s\""), seq->str);
+            g_string_free (seq, TRUE);
+        }
     }
 
     dlg_run_done (d);
@@ -360,34 +366,31 @@ static void
 learn_save (void)
 {
     int i;
-    char *section;
+    mc_config_t *keydef_config;
+    char *fname;
+    const GString *list[2];
     gboolean profile_changed = FALSE;
 
-    section = g_strconcat ("terminal:", getenv ("TERM"), (char *) NULL);
+    fname = mc_config_get_full_path (GLOBAL_KEYDEF_FILE);
+    keydef_config = mc_config_init (fname, FALSE);
+    if (exist_file (fname))
+        mc_config_read_file (keydef_config, fname, FALSE, TRUE);
 
     for (i = 0; i < learn_total; i++)
         if (learnkeys[i].sequence != NULL)
         {
-            char *esc_str;
-
-            esc_str = str_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
-            mc_config_set_string_raw_value (mc_global.main_config, section,
-                                            key_name_conv_tab[i].name, esc_str);
-            g_free (esc_str);
-
+            list[0] = learnkeys[i].sequence;
+            list[1] = NULL;
+            mc_config_set_escape_sequence_list (keydef_config, getenv ("TERM"),
+                                                key_name_conv_tab[i].name, list, 1);
             profile_changed = TRUE;
         }
 
-    /* On the one hand no good idea to save the complete setup but
-     * without 'Auto save setup' the new key-definitions will not be
-     * saved unless the user does an 'Options/Save Setup'.
-     * On the other hand a save-button that does not save anything to
-     * disk is much worse.
-     */
     if (profile_changed)
-        mc_config_save_file (mc_global.main_config, NULL);
+        mc_config_save_file (keydef_config, NULL);
 
-    g_free (section);
+    g_free (fname);
+    mc_config_deinit (keydef_config);
 }
 
 /* --------------------------------------------------------------------------------------------- */
