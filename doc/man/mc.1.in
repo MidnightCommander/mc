@@ -2935,14 +2935,10 @@ of your files.
 .PP
 The viewer supports syntax highlighting via an external highlighter.
 Press
+.B Shift\-F8
+to toggle syntax highlighting.  Press
 .B s
-to toggle syntax highlighting (or
-.B Shift\-S
-in vim keymap).  Press
-.B S
-(or
-.B Alt\-s
-in vim keymap) to choose the highlighting backend.
+to choose the highlighting backend.
 Five backends are supported:
 .BR bat ,
 .BR chroma ,
@@ -3053,11 +3049,11 @@ Jump to the next file.
 .B C\-b
 Jump to the previous file.
 .TP
-.B s
+.B Shift\-F8
 Toggle syntax highlighting.  Requires an external highlighter
 .RB ( bat ", " chroma ", " highlight ", " pygmentize ", or " source\-highlight ).
 .TP
-.B S
+.B s
 Open the syntax highlighting backend chooser dialog.  Installed
 backends and a "Custom..." option for arbitrary commands are shown.
 .TP
