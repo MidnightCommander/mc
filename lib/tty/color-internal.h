@@ -55,6 +55,8 @@ void tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair);
 
 int tty_maybe_map_color (int color);
 
+void tty_colorize_area (int y, int x, int rows, int cols, int color);
+
 /*** inline functions ****************************************************************************/
 
 #endif

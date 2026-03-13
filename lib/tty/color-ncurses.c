@@ -264,3 +264,43 @@ tty_use_truecolors (GError **error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+tty_colorize_area (int y, int x, int rows, int cols, int color)
+{
+#ifdef ENABLE_SHADOWS
+    cchar_t *ctext;
+    wchar_t wch[CCHARW_MAX + 1];
+    attr_t attrs;
+    short color_pair;
+
+    if (!use_colors || !tty_clip (&y, &x, &rows, &cols))
+        return;
+
+    color = tty_maybe_map_color (color);
+    ctext = g_malloc (sizeof (cchar_t) * (cols + 1));
+
+    for (int row = 0; row < rows; row++)
+    {
+        mvin_wchnstr (y + row, x, ctext, cols);
+
+        for (int col = 0; col < cols; col++)
+        {
+            getcchar (&ctext[col], wch, &attrs, &color_pair, NULL);
+            setcchar (&ctext[col], wch, attrs, color, NULL);
+        }
+
+        mvadd_wchnstr (y + row, x, ctext, cols);
+    }
+
+    g_free (ctext);
+#else
+    (void) y;
+    (void) x;
+    (void) rows;
+    (void) cols;
+    (void) color;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
