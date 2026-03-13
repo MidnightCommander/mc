@@ -62,6 +62,8 @@ Hint: To look at the output of a command in the viewer, use M-!
 
 Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
 
+Hint: Press 's' in the viewer for syntax highlighting. Shift-S chooses the backend.
+
 Hint: You may specify the editor for F4 with the shell variable EDITOR.
 
 Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
