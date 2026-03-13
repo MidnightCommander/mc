@@ -164,17 +164,17 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
 
     // Shady trick: if we don't have the exact color, because it is overlaid by backwards
     // compatibility indexed values, just borrow one degree of red. The user won't notice :)
-    if ((ifg & FLAG_TRUECOLOR) != 0)
+    if (ifg >= 0 && (ifg & FLAG_TRUECOLOR) != 0)
     {
         ifg &= ~FLAG_TRUECOLOR;
-        if (ifg != 0 && ifg <= overlay_colors)
+        if (ifg <= overlay_colors)
             ifg += (1 << 16);
     }
 
-    if ((ibg & FLAG_TRUECOLOR) != 0)
+    if (ibg >= 0 && (ibg & FLAG_TRUECOLOR) != 0)
     {
         ibg &= ~FLAG_TRUECOLOR;
-        if (ibg != 0 && ibg <= overlay_colors)
+        if (ibg <= overlay_colors)
             ibg += (1 << 16);
     }
 
