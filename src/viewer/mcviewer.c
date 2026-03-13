@@ -46,15 +46,16 @@
 #include "src/filemanager/filemanager.h"  // the_menubar
 
 #include "internal.h"
+#include "syntax.h"
 
 /*** global variables ****************************************************************************/
 
 mcview_mode_flags_t mcview_global_flags = {
-    .wrap = TRUE, .hex = FALSE, .magic = TRUE, .nroff = FALSE
+    .wrap = TRUE, .hex = FALSE, .magic = TRUE, .nroff = FALSE, .syntax = FALSE
 };
 
 mcview_mode_flags_t mcview_altered_flags = {
-    .wrap = FALSE, .hex = FALSE, .magic = FALSE, .nroff = FALSE
+    .wrap = FALSE, .hex = FALSE, .magic = FALSE, .nroff = FALSE, .syntax = FALSE
 };
 
 gboolean mcview_remember_file_position = FALSE;
@@ -78,6 +79,42 @@ char *mcview_show_eof = NULL;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Drain a syntax highlighter pipe so the total size is known and percentage works.
+ * Highlighters process a finite file, so this always terminates.
+ */
+static void
+mcview_drain_pipe (WView *view)
+{
+    off_t ofs;
+
+    if (!view->growbuf_in_use || view->growbuf_finished)
+        return;
+
+    ofs = mcview_get_filesize (view);
+    while (!view->growbuf_finished)
+    {
+        ofs += 8192;
+        mcview_growbuf_read_until (view, ofs);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Show "falling back to plain view" message and disable syntax mode.
+ */
+static void
+mcview_syntax_fallback (WView *view)
+{
+    message (D_NORMAL, _ ("Syntax Highlighting"), "%s",
+             _ ("Syntax highlighter could not process this file.\n"
+                "Falling back to plain view."));
+    view->mode_flags.syntax = FALSE;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -219,14 +256,25 @@ mcview_new (const WRect *r, gboolean is_panel)
 
     mcview_init (view);
 
-    if (mcview_global_flags.hex)
-        mcview_toggle_hex_mode (view);
-    if (mcview_global_flags.nroff)
-        mcview_toggle_nroff_mode (view);
-    if (mcview_global_flags.wrap)
-        mcview_toggle_wrap_mode (view);
-    if (mcview_global_flags.magic)
-        mcview_toggle_magic_mode (view);
+    // save global flags — toggle functions (especially mcview_toggle_magic_mode)
+    // call mcview_done() internally, which overwrites mcview_global_flags
+    // with the view's current mode_flags before all flags have been applied
+    {
+        mcview_mode_flags_t saved_global = mcview_global_flags;
+
+        if (saved_global.hex)
+            mcview_toggle_hex_mode (view);
+        if (saved_global.nroff)
+            mcview_toggle_nroff_mode (view);
+        if (saved_global.wrap)
+            mcview_toggle_wrap_mode (view);
+        if (saved_global.magic)
+            mcview_toggle_magic_mode (view);
+        if (saved_global.syntax)
+            view->mode_flags.syntax = TRUE;
+
+        mcview_global_flags = saved_global;
+    }
 
     return view;
 }
@@ -287,6 +335,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
 {
     gboolean retval = FALSE;
     vfs_path_t *vpath = NULL;
+    char *syntax_cmd = NULL;
 
     g_assert (view->bytes_per_line != 0);
 
@@ -323,9 +372,65 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
 
     mcview_set_codeset (view);
 
-    if (command != NULL && (view->mode_flags.magic || file == NULL || file[0] == '\0'))
+    // build syntax highlight command if syntax mode is on and no explicit command given
+    if (command == NULL && view->mode_flags.syntax && file != NULL && file[0] != '\0')
+    {
+        const char *cmd_template;
+
+        cmd_template =
+            mcview_syntax_command != NULL ? mcview_syntax_command : MCVIEW_SYNTAX_DEFAULT_CMD;
+        syntax_cmd = mcview_syntax_build_command (cmd_template, file);
+    }
+
+    if (syntax_cmd != NULL)
+    {
+        gboolean cmd_ok;
+
+        cmd_ok = mcview_load_command_output (view, syntax_cmd);
+        g_free (syntax_cmd);
+
+        if (view->datasource != DS_NONE)
+        {
+            mcview_drain_pipe (view);
+
+            // If highlighter produced output, use it; otherwise fall back to plain view.
+            if (view->growbuf_in_use && mcview_growbuf_filesize (view) > 0)
+                retval = TRUE;
+            else
+            {
+                mcview_syntax_fallback (view);
+                mcview_close_datasource (view);
+            }
+        }
+        else if (cmd_ok)
+        {
+            // Pipe opened but produced no output (e.g. chroma --fail on unrecognized file).
+            mcview_syntax_fallback (view);
+        }
+        else
+        {
+            // Pipe failed to open -- mcview_load_command_output already showed error.
+            view->mode_flags.syntax = FALSE;
+        }
+    }
+
+    if (!retval && command != NULL
+        && (view->mode_flags.magic || view->mode_flags.syntax || file == NULL || file[0] == '\0'))
+    {
         retval = mcview_load_command_output (view, command);
-    else if (file != NULL && file[0] != '\0')
+
+        // If syntax command produced no output, show message and fall back to plain view.
+        if (retval && view->mode_flags.syntax && view->datasource == DS_NONE)
+        {
+            mcview_syntax_fallback (view);
+            retval = FALSE;
+        }
+
+        if (retval && view->mode_flags.syntax)
+            mcview_drain_pipe (view);
+    }
+
+    if (!retval && file != NULL && file[0] != '\0')
     {
         int fd;
         char tmp[BUF_MEDIUM];

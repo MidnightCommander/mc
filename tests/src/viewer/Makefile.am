@@ -14,9 +14,13 @@ LIBS += $(GLIB_LIBS)
 endif
 
 TESTS = \
-	ansi_parser
+	ansi_parser \
+	syntax_cmd
 
 check_PROGRAMS = $(TESTS)
 
 ansi_parser_SOURCES = \
 	ansi_parser.c
+
+syntax_cmd_SOURCES = \
+	syntax_cmd.c

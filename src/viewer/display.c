@@ -49,6 +49,8 @@
 #include "src/keymap.h"
 
 #include "internal.h"
+#include "ansi.h"    // mcview_ansi_parse_char()
+#include "syntax.h"  // mcview_syntax_get_short_name()
 
 /*** global variables ****************************************************************************/
 
@@ -67,6 +69,35 @@ static enum ruler_type { RULER_NONE, RULER_TOP, RULER_BOTTOM } ruler = RULER_NON
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Count content (non-ANSI) bytes in the highlighted stream from 0 to end_offset.
+ * This gives the exact byte position in the original file.
+ */
+static off_t
+mcview_syntax_content_bytes (WView *view, off_t end_offset)
+{
+    mcview_ansi_state_t parser;
+    off_t i;
+    off_t count = 0;
+
+    mcview_ansi_state_init (&parser);
+
+    for (i = 0; i < end_offset; i++)
+    {
+        int byte_val;
+
+        if (!mcview_get_byte (view, i, &byte_val))
+            break;
+
+        if (mcview_ansi_parse_char (&parser, byte_val) == ANSI_RESULT_CHAR)
+            count++;
+    }
+
+    return count;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /** Define labels and handlers for functional keys */
@@ -163,6 +194,59 @@ mcview_display_status (WView *view)
         widget_gotoyx (view, r->y, r->cols - 32);
         if (view->mode_flags.hex)
             tty_printf ("0x%08" PRIxMAX, (uintmax_t) view->hex_cursor);
+        else if (view->mode_flags.syntax && view->filename_vpath != NULL)
+        {
+            // In syntax mode, byte offsets are inflated by ANSI escape codes.
+            // Use cached file size and content byte count to avoid repeated
+            // mc_stat() calls and O(N) scans on every status bar repaint.
+
+            // cache file size (doesn't change while viewing)
+            if (view->syntax_file_size == 0)
+            {
+                struct stat st;
+
+                if (mc_stat (view->filename_vpath, &st) == 0)
+                    view->syntax_file_size = st.st_size;
+            }
+
+            if (view->syntax_file_size > 0)
+            {
+                char buffer[BUF_TRUNC_LEN + 1];
+                off_t original_pos;
+                int percent;
+                int right;
+
+                // cache content byte scan (only rescan when scroll position changes)
+                if (view->dpy_end != view->syntax_content_cache_end)
+                {
+                    view->syntax_content_cache_bytes =
+                        mcview_syntax_content_bytes (view, view->dpy_end);
+                    view->syntax_content_cache_end = view->dpy_end;
+                }
+                original_pos = view->syntax_content_cache_bytes;
+
+                size_trunc_len (buffer, BUF_TRUNC_LEN, view->syntax_file_size, 0,
+                                panels_options.kilobyte_si);
+                tty_printf ("%9" PRIuMAX "/%s ", (uintmax_t) original_pos, buffer);
+
+                // draw percent at the standard position
+                if (r->cols > 26)
+                {
+                    right = r->x + r->cols;
+
+                    if (view->syntax_file_size == 0 || original_pos >= view->syntax_file_size)
+                        percent = 100;
+                    else if (original_pos > (INT_MAX / 100))
+                        percent = (int) (original_pos / (view->syntax_file_size / 100));
+                    else
+                        percent = (int) (original_pos * 100 / view->syntax_file_size);
+
+                    widget_gotoyx (view, r->y, right - 4);
+                    tty_printf ("%3d%%", percent);
+                    widget_gotoyx (view, r->y, right - 1);
+                }
+            }
+        }
         else
         {
             char buffer[BUF_TRUNC_LEN + 1];
@@ -177,11 +261,52 @@ mcview_display_status (WView *view)
     }
     widget_gotoyx (view, r->y, r->x);
     if (r->cols > 40)
-        tty_print_string (str_fit_to_term (file_label, r->cols - 34, J_LEFT_FIT));
+    {
+        int file_width = r->cols - 34;
+
+        if (view->mode_flags.syntax && file_width > 20)
+        {
+            const char *ext = NULL;
+            const char *backend;
+            int tag_width;
+
+            // extract file extension to show as syntax hint
+            if (view->filename_vpath != NULL)
+            {
+                const char *fname;
+
+                fname = vfs_path_get_last_path_str (view->filename_vpath);
+                if (fname != NULL)
+                    ext = strrchr (fname, '.');
+            }
+
+            if (ext != NULL)
+                ext++;  // skip the dot
+            else
+                ext = "txt";
+
+            backend = mcview_syntax_get_short_name ();
+
+            // format: " [backend:ext]"
+            tag_width = (int) strlen (backend) + (int) strlen (ext) + 4;
+            file_width -= tag_width;
+            if (file_width < 1)
+                file_width = 1;
+            tty_print_string (str_fit_to_term (file_label, file_width, J_LEFT_FIT));
+            tty_printf (" [%s:%s]", backend, ext);
+        }
+        else
+            tty_print_string (str_fit_to_term (file_label, file_width, J_LEFT_FIT));
+    }
     else
         tty_print_string (str_fit_to_term (file_label, r->cols - 5, J_LEFT_FIT));
-    if (r->cols > 26)
+    if (r->cols > 26 && !view->mode_flags.syntax)
         mcview_display_percent (view, view->mode_flags.hex ? view->hex_cursor : view->dpy_end);
+    else if (view->mode_flags.syntax)
+    {
+        // percent was drawn earlier; park cursor at end of status bar
+        widget_gotoyx (view, r->y, r->x + r->cols - 1);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
