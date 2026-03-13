@@ -363,6 +363,7 @@ mcview_display_clean (WView *view)
     widget_erase (w);
     if (mcview_is_in_panel (view))
         mcview_display_frame (view);
+    view->syntax_fill_color = VIEWER_NORMAL_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

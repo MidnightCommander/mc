@@ -156,6 +156,7 @@ struct WView
                                * text mode */
     int cursor_col;           // Cursor column
     int cursor_row;           // Cursor row
+    int syntax_fill_color;    // Last drawn char color, for filling empty lines in syntax mode
     struct hexedit_change_node *change_list;  // Linked list of changes
     WRect status_area;                        // Where the status line is displayed
     WRect ruler_area;                         // Where the ruler is displayed
