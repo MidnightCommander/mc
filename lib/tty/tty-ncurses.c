@@ -26,7 +26,7 @@
  */
 
 /** \file
- *  \brief Source: NCurses-based tty layer of Midnight-commander
+ *  \brief Source: NCurses-based tty layer of Midnight Commander
  */
 
 #include <config.h>
@@ -597,7 +597,7 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
 {
 #ifdef ENABLE_SHADOWS
     cchar_t *ctext;
-    wchar_t wch[10];  // TODO not sure if the length is correct
+    wchar_t wch[CCHARW_MAX + 1];
     attr_t attrs;
     short color_pair;
 
@@ -605,7 +605,6 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
         return;
 
     color = tty_maybe_map_color (color);
-    tty_setcolor (color);
     ctext = g_malloc (sizeof (cchar_t) * (cols + 1));
 
     for (int row = 0; row < rows; row++)
