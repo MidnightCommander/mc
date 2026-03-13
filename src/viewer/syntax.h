@@ -12,6 +12,11 @@
 /** Default syntax highlighting command */
 #define MCVIEW_SYNTAX_DEFAULT_CMD "source-highlight --failsafe --out-format=esc -i %s"
 
+/** Maximum file size (in bytes) for syntax highlighting.
+ *  Files larger than this are displayed without highlighting to avoid
+ *  long processing times from external highlighters. */
+#define MCVIEW_SYNTAX_MAX_FILE_SIZE (2 * 1024 * 1024)
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

@@ -108,14 +108,16 @@ mcview_ansi_rgb_to_256 (int r, int g, int b)
 static void
 mcview_ansi_csi_finalize_param (mcview_ansi_state_t *state)
 {
-    if (state->has_current_param && state->param_count < MCVIEW_ANSI_MAX_PARAMS)
+    if (state->param_count < MCVIEW_ANSI_MAX_PARAMS)
     {
         state->params[state->param_count] = state->current_param;
+        state->is_colon_sep[state->param_count] = state->next_is_colon;
         state->param_count++;
     }
 
     state->current_param = 0;
     state->has_current_param = FALSE;
+    state->next_is_colon = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -141,27 +143,53 @@ mcview_ansi_apply_one_sgr_param (mcview_ansi_state_t *state, int idx)
         state->fg = MCVIEW_ANSI_COLOR_DEFAULT;
         state->bg = MCVIEW_ANSI_COLOR_DEFAULT;
         state->bold = FALSE;
+        state->italic = FALSE;
         state->underline = FALSE;
+        state->blink = FALSE;
+        state->reverse = FALSE;
     }
     else if (code == 1)
         state->bold = TRUE;
+    else if (code == 3)
+        state->italic = TRUE;
     else if (code == 4)
+        state->underline = TRUE;
+    else if (code == 5)
+        state->blink = TRUE;
+    else if (code == 7)
+        state->reverse = TRUE;
+    else if (code == 21)
+        // double underline — map to regular underline (ncurses/slang limitation)
         state->underline = TRUE;
     else if (code == 22)
         state->bold = FALSE;
+    else if (code == 23)
+        state->italic = FALSE;
     else if (code == 24)
         state->underline = FALSE;
+    else if (code == 25)
+        state->blink = FALSE;
+    else if (code == 27)
+        state->reverse = FALSE;
     else if (code >= 30 && code <= 37)
         state->fg = code - 30;
     else if (code == 38)
     {
         if (idx + 2 < state->param_count && state->params[idx + 1] == 5)
-            // extended foreground 256-color: 38;5;N
+            // extended foreground 256-color: 38;5;N or 38:5:N
             state->fg = state->params[idx + 2];
         else if (idx + 4 < state->param_count && state->params[idx + 1] == 2)
-            // truecolor foreground: 38;2;R;G;B → approximate to 256-color
-            state->fg = mcview_ansi_rgb_to_256 (state->params[idx + 2], state->params[idx + 3],
-                                                state->params[idx + 4]);
+        {
+            // truecolor foreground → approximate to 256-color
+            if (idx + 5 < state->param_count && state->is_colon_sep[idx + 1])
+                // de jure colon notation: 38:2:CS:R:G:B — skip color space
+                state->fg = mcview_ansi_rgb_to_256 (state->params[idx + 3], state->params[idx + 4],
+                                                    state->params[idx + 5]);
+            else
+                // de facto semicolon notation: 38;2;R;G;B
+                state->fg = mcview_ansi_rgb_to_256 (state->params[idx + 2], state->params[idx + 3],
+                                                    state->params[idx + 4]);
+        }
     }
     else if (code == 39)
         state->fg = MCVIEW_ANSI_COLOR_DEFAULT;
@@ -170,12 +198,20 @@ mcview_ansi_apply_one_sgr_param (mcview_ansi_state_t *state, int idx)
     else if (code == 48)
     {
         if (idx + 2 < state->param_count && state->params[idx + 1] == 5)
-            // extended background 256-color: 48;5;N
+            // extended background 256-color: 48;5;N or 48:5:N
             state->bg = state->params[idx + 2];
         else if (idx + 4 < state->param_count && state->params[idx + 1] == 2)
-            // truecolor background: 48;2;R;G;B → approximate to 256-color
-            state->bg = mcview_ansi_rgb_to_256 (state->params[idx + 2], state->params[idx + 3],
-                                                state->params[idx + 4]);
+        {
+            // truecolor background → approximate to 256-color
+            if (idx + 5 < state->param_count && state->is_colon_sep[idx + 1])
+                // de jure colon notation: 48:2:CS:R:G:B — skip color space
+                state->bg = mcview_ansi_rgb_to_256 (state->params[idx + 3], state->params[idx + 4],
+                                                    state->params[idx + 5]);
+            else
+                // de facto semicolon notation: 48;2;R;G;B
+                state->bg = mcview_ansi_rgb_to_256 (state->params[idx + 2], state->params[idx + 3],
+                                                    state->params[idx + 4]);
+        }
     }
     else if (code == 49)
         state->bg = MCVIEW_ANSI_COLOR_DEFAULT;
@@ -202,7 +238,10 @@ mcview_ansi_apply_sgr (mcview_ansi_state_t *state)
         state->fg = MCVIEW_ANSI_COLOR_DEFAULT;
         state->bg = MCVIEW_ANSI_COLOR_DEFAULT;
         state->bold = FALSE;
+        state->italic = FALSE;
         state->underline = FALSE;
+        state->blink = FALSE;
+        state->reverse = FALSE;
         return;
     }
 
@@ -212,12 +251,22 @@ mcview_ansi_apply_sgr (mcview_ansi_state_t *state)
 
         code = state->params[i];
 
+        // skip colon-separated sub-parameters (they belong to the preceding parameter)
+        if (state->is_colon_sep[i])
+            continue;
+
         // skip sub-parameters consumed by extended color sequences
         if (code == 38 || code == 48)
         {
             mcview_ansi_apply_one_sgr_param (state, i);
 
-            if (i + 2 < state->param_count && state->params[i + 1] == 5)
+            if (i + 1 < state->param_count && state->is_colon_sep[i + 1])
+            {
+                // colon notation: skip all colon-separated sub-params
+                while (i + 1 < state->param_count && state->is_colon_sep[i + 1])
+                    i++;
+            }
+            else if (i + 2 < state->param_count && state->params[i + 1] == 5)
                 i += 2;  // 256-color: 38;5;N — skip 2
             else if (i + 4 < state->param_count && state->params[i + 1] == 2)
                 i += 4;  // truecolor: 38;2;R;G;B — skip 4
@@ -239,12 +288,16 @@ mcview_ansi_state_init (mcview_ansi_state_t *state)
     state->fg = MCVIEW_ANSI_COLOR_DEFAULT;
     state->bg = MCVIEW_ANSI_COLOR_DEFAULT;
     state->bold = FALSE;
+    state->italic = FALSE;
     state->underline = FALSE;
+    state->blink = FALSE;
+    state->reverse = FALSE;
     state->in_escape = FALSE;
     state->in_csi = FALSE;
     state->param_count = 0;
     state->current_param = 0;
     state->has_current_param = FALSE;
+    state->next_is_colon = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -283,10 +336,12 @@ mcview_ansi_parse_char (mcview_ansi_state_t *state, int ch)
             return ANSI_RESULT_CONSUMED;
         }
 
-        if (ch == ';')
+        if (ch == ';' || ch == ':')
         {
-            // parameter separator
+            // parameter separator (; is standard, : is sub-parameter separator)
             mcview_ansi_csi_finalize_param (state);
+            if (ch == ':')
+                state->next_is_colon = TRUE;
             return ANSI_RESULT_CONSUMED;
         }
 

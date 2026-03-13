@@ -348,17 +348,21 @@ mcview_ansi_get_color (const mcview_ansi_state_t *ansi)
 {
     tty_color_pair_t color;
     tty_color_pair_t *viewer_skin;
-    char fg_buf[16], bg_buf[16], attr_buf[32];
+    char fg_buf[16], bg_buf[16], attr_buf[64];
     const char *fg_name;
     const char *bg_name;
+    gboolean has_attrs;
+
+    has_attrs = ansi->bold || ansi->italic || ansi->underline || ansi->blink || ansi->reverse;
 
     // all defaults → use the skin's normal viewer color
     if (ansi->fg == MCVIEW_ANSI_COLOR_DEFAULT && ansi->bg == MCVIEW_ANSI_COLOR_DEFAULT
-        && !ansi->bold && !ansi->underline)
+        && !has_attrs)
         return VIEWER_NORMAL_COLOR;
 
-    // bold-only and underline-only map to existing skin colors
-    if (ansi->fg == MCVIEW_ANSI_COLOR_DEFAULT && ansi->bg == MCVIEW_ANSI_COLOR_DEFAULT)
+    // bold-only and underline-only map to existing skin colors (no other attrs active)
+    if (ansi->fg == MCVIEW_ANSI_COLOR_DEFAULT && ansi->bg == MCVIEW_ANSI_COLOR_DEFAULT
+        && !ansi->italic && !ansi->blink && !ansi->reverse)
     {
         if (ansi->bold && ansi->underline)
             return VIEWER_BOLD_UNDERLINED_COLOR;
@@ -393,20 +397,22 @@ mcview_ansi_get_color (const mcview_ansi_state_t *ansi)
     else
         color.bg = (viewer_skin != NULL) ? viewer_skin->bg : NULL;
 
-    // build attributes
-    if (ansi->bold && ansi->underline)
+    // build attributes string dynamically
+    if (has_attrs)
     {
-        g_strlcpy (attr_buf, "bold+underline", sizeof (attr_buf));
-        color.attrs = attr_buf;
-    }
-    else if (ansi->bold)
-    {
-        g_strlcpy (attr_buf, "bold", sizeof (attr_buf));
-        color.attrs = attr_buf;
-    }
-    else if (ansi->underline)
-    {
-        g_strlcpy (attr_buf, "underline", sizeof (attr_buf));
+        attr_buf[0] = '\0';
+        if (ansi->bold)
+            g_strlcat (attr_buf, "bold+", sizeof (attr_buf));
+        if (ansi->italic)
+            g_strlcat (attr_buf, "italic+", sizeof (attr_buf));
+        if (ansi->underline)
+            g_strlcat (attr_buf, "underline+", sizeof (attr_buf));
+        if (ansi->blink)
+            g_strlcat (attr_buf, "blink+", sizeof (attr_buf));
+        if (ansi->reverse)
+            g_strlcat (attr_buf, "reverse+", sizeof (attr_buf));
+        // remove trailing '+'
+        attr_buf[strlen (attr_buf) - 1] = '\0';
         color.attrs = attr_buf;
     }
     else

@@ -375,11 +375,22 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
     // build syntax highlight command if syntax mode is on and no explicit command given
     if (command == NULL && view->mode_flags.syntax && file != NULL && file[0] != '\0')
     {
-        const char *cmd_template;
+        struct stat syntax_st;
 
-        cmd_template =
-            mcview_syntax_command != NULL ? mcview_syntax_command : MCVIEW_SYNTAX_DEFAULT_CMD;
-        syntax_cmd = mcview_syntax_build_command (cmd_template, file);
+        // skip syntax highlighting for files larger than the threshold
+        if (mc_stat (view->filename_vpath, &syntax_st) == 0
+            && syntax_st.st_size > MCVIEW_SYNTAX_MAX_FILE_SIZE)
+        {
+            view->mode_flags.syntax = FALSE;
+        }
+        else
+        {
+            const char *cmd_template;
+
+            cmd_template =
+                mcview_syntax_command != NULL ? mcview_syntax_command : MCVIEW_SYNTAX_DEFAULT_CMD;
+            syntax_cmd = mcview_syntax_build_command (cmd_template, file);
+        }
     }
 
     if (syntax_cmd != NULL)

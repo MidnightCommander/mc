@@ -64,7 +64,10 @@ START_TEST (test_ansi_init_defaults)
     ck_assert_int_eq (state.fg, MCVIEW_ANSI_COLOR_DEFAULT);
     ck_assert_int_eq (state.bg, MCVIEW_ANSI_COLOR_DEFAULT);
     mctest_assert_false (state.bold);
+    mctest_assert_false (state.italic);
     mctest_assert_false (state.underline);
+    mctest_assert_false (state.blink);
+    mctest_assert_false (state.reverse);
     mctest_assert_false (state.in_escape);
     mctest_assert_false (state.in_csi);
 }
@@ -130,7 +133,10 @@ START_TEST (test_ansi_explicit_reset)
     ck_assert_int_eq (state.fg, MCVIEW_ANSI_COLOR_DEFAULT);
     ck_assert_int_eq (state.bg, MCVIEW_ANSI_COLOR_DEFAULT);
     mctest_assert_false (state.bold);
+    mctest_assert_false (state.italic);
     mctest_assert_false (state.underline);
+    mctest_assert_false (state.blink);
+    mctest_assert_false (state.reverse);
 }
 END_TEST
 
@@ -529,6 +535,233 @@ START_TEST (test_ansi_truecolor_no_misparse)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+/* Test: italic SGR code 3 */
+
+START_TEST (test_ansi_italic)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — ESC[3m = italic
+    g_string_free (parse_and_collect (&state, "\033[3m"), TRUE);
+
+    // then
+    mctest_assert_true (state.italic);
+    mctest_assert_false (state.bold);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: blink SGR code 5 */
+
+START_TEST (test_ansi_blink)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — ESC[5m = blink
+    g_string_free (parse_and_collect (&state, "\033[5m"), TRUE);
+
+    // then
+    mctest_assert_true (state.blink);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: reverse SGR code 7 */
+
+START_TEST (test_ansi_reverse)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — ESC[7m = reverse
+    g_string_free (parse_and_collect (&state, "\033[7m"), TRUE);
+
+    // then
+    mctest_assert_true (state.reverse);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: individual off codes 23, 25, 27 */
+
+START_TEST (test_ansi_individual_off_codes)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — enable italic, blink, reverse then disable each individually
+    g_string_free (parse_and_collect (&state, "\033[3;5;7m"), TRUE);
+    mctest_assert_true (state.italic);
+    mctest_assert_true (state.blink);
+    mctest_assert_true (state.reverse);
+
+    g_string_free (parse_and_collect (&state, "\033[23m"), TRUE);
+    mctest_assert_false (state.italic);
+    mctest_assert_true (state.blink);
+
+    g_string_free (parse_and_collect (&state, "\033[25m"), TRUE);
+    mctest_assert_false (state.blink);
+    mctest_assert_true (state.reverse);
+
+    g_string_free (parse_and_collect (&state, "\033[27m"), TRUE);
+    mctest_assert_false (state.reverse);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: SGR 21 = double underline → mapped to regular underline */
+
+START_TEST (test_ansi_double_underline)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — ESC[21m = double underline
+    g_string_free (parse_and_collect (&state, "\033[21m"), TRUE);
+
+    // then — mapped to regular underline
+    mctest_assert_true (state.underline);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: empty parameter treated as 0 (reset): ESC[1;;3m = bold, reset, italic */
+
+START_TEST (test_ansi_empty_param_is_zero)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — ESC[1;;3m → 1=bold, empty=0=reset all, 3=italic
+    g_string_free (parse_and_collect (&state, "\033[1;;3m"), TRUE);
+
+    // then — bold was reset by the 0, italic is on
+    mctest_assert_false (state.bold);
+    mctest_assert_true (state.italic);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: colon notation for 256-color: ESC[38:5:196m */
+
+START_TEST (test_ansi_colon_256_color)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — colon notation
+    g_string_free (parse_and_collect (&state, "\033[38:5:196m"), TRUE);
+
+    // then — fg = 196
+    ck_assert_int_eq (state.fg, 196);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: colon notation does NOT leak into SGR: ESC[38:5:4:7m → 7 is NOT reverse */
+
+START_TEST (test_ansi_colon_nested_no_leak)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — all colon-separated, 7 belongs to the color group
+    g_string_free (parse_and_collect (&state, "\033[38:5:4:7m"), TRUE);
+
+    // then — fg = 4 (from 38:5:4), reverse must NOT be set
+    ck_assert_int_eq (state.fg, 4);
+    mctest_assert_false (state.reverse);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: semicolon flat notation: ESC[38;5;4;7m → color 4 + reverse */
+
+START_TEST (test_ansi_semicolon_flat_with_reverse)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — semicolon notation, 7 is a separate SGR param
+    g_string_free (parse_and_collect (&state, "\033[38;5;4;7m"), TRUE);
+
+    // then — fg = 4, reverse IS set
+    ck_assert_int_eq (state.fg, 4);
+    mctest_assert_true (state.reverse);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: de jure truecolor with colon and color space: ESC[38:2::255:0:0m */
+
+START_TEST (test_ansi_colon_truecolor_with_colorspace)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — de jure: 38:2:CS:R:G:B with empty CS (=0)
+    // cube: r=5 g=0 b=0 → 16 + 180 + 0 + 0 = 196
+    g_string_free (parse_and_collect (&state, "\033[38:2::255:0:0m"), TRUE);
+
+    // then
+    ck_assert_int_eq (state.fg, 196);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+/* Test: reset clears all new attributes (italic, blink, reverse) */
+
+START_TEST (test_ansi_reset_clears_all_attrs)
+{
+    // given
+    mcview_ansi_state_t state;
+
+    mcview_ansi_state_init (&state);
+
+    // when — set everything, then reset
+    g_string_free (parse_and_collect (&state, "\033[1;3;4;5;7;31;42m"), TRUE);
+    mctest_assert_true (state.bold);
+    mctest_assert_true (state.italic);
+    mctest_assert_true (state.underline);
+    mctest_assert_true (state.blink);
+    mctest_assert_true (state.reverse);
+
+    g_string_free (parse_and_collect (&state, "\033[0m"), TRUE);
+
+    // then — all cleared
+    mctest_assert_false (state.bold);
+    mctest_assert_false (state.italic);
+    mctest_assert_false (state.underline);
+    mctest_assert_false (state.blink);
+    mctest_assert_false (state.reverse);
+    ck_assert_int_eq (state.fg, MCVIEW_ANSI_COLOR_DEFAULT);
+    ck_assert_int_eq (state.bg, MCVIEW_ANSI_COLOR_DEFAULT);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 main (void)
@@ -561,6 +794,17 @@ main (void)
     tcase_add_test (tc_core, test_ansi_truecolor_background);
     tcase_add_test (tc_core, test_ansi_truecolor_combined);
     tcase_add_test (tc_core, test_ansi_truecolor_no_misparse);
+    tcase_add_test (tc_core, test_ansi_italic);
+    tcase_add_test (tc_core, test_ansi_blink);
+    tcase_add_test (tc_core, test_ansi_reverse);
+    tcase_add_test (tc_core, test_ansi_individual_off_codes);
+    tcase_add_test (tc_core, test_ansi_double_underline);
+    tcase_add_test (tc_core, test_ansi_empty_param_is_zero);
+    tcase_add_test (tc_core, test_ansi_colon_256_color);
+    tcase_add_test (tc_core, test_ansi_colon_nested_no_leak);
+    tcase_add_test (tc_core, test_ansi_semicolon_flat_with_reverse);
+    tcase_add_test (tc_core, test_ansi_colon_truecolor_with_colorspace);
+    tcase_add_test (tc_core, test_ansi_reset_clears_all_attrs);
     // ***********************************
 
     return mctest_run_all (tc_core);

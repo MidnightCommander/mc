@@ -33,15 +33,20 @@ typedef struct
     int fg; /**< foreground: 0-7 base, 8-15 bright, -1 default */
     int bg; /**< background: 0-7 base, 8-15 bright, -1 default */
     gboolean bold;
+    gboolean italic;
     gboolean underline;
+    gboolean blink;
+    gboolean reverse;
 
     /* --- internal parser state --- */
     gboolean in_escape; /**< seen ESC, waiting for '[' */
     gboolean in_csi;    /**< inside CSI sequence (ESC[...) */
     int params[MCVIEW_ANSI_MAX_PARAMS];
+    gboolean is_colon_sep[MCVIEW_ANSI_MAX_PARAMS]; /**< TRUE if preceded by ':' */
     int param_count;
     int current_param;          /**< parameter being accumulated */
     gboolean has_current_param; /**< whether current_param has digits */
+    gboolean next_is_colon;     /**< next param preceded by ':' */
 } mcview_ansi_state_t;
 
 /*** declarations of public functions ************************************************************/
