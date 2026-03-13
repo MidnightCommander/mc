@@ -49,57 +49,78 @@
 
 /*** file scope type declarations ****************************************************************/
 
+typedef struct
+{
+    int pair;   // ncurses color pair index
+    int attrs;  // attributes
+} mc_tty_ncurses_color_pair_and_attrs_t;
+
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 
-static GHashTable *mc_tty_color_color_pair_attrs = NULL;
+/*
+ * Our bookkeeping of the ncurses color pair indices, indexed by the "{fg}.{bg}" string.
+ */
+static GHashTable *mc_tty_ncurses_color_pairs = NULL;
+
+/*
+ * Indexed by mc's color index, points to the mc_tty_ncurses_color_pair_and_attrs_t object
+ * representing the ncurses color pair index and the attributes.
+ *
+ * mc's color index represents unique (fg, bg, attrs) tuples. Allocating an ncurses color pair
+ * for each of them might be too wasteful and might cause us to run out of available color pairs
+ * too soon (especially in 8-color terminals), if many combinations only differ in attrs.
+ * So we allocate a new ncurses color pair only if the (fg, bg) tuple is newly seen.
+ * See #5020 for details.
+ */
+static GArray *mc_tty_ncurses_color_pair_and_attrs = NULL;
+
+static int mc_tty_ncurses_next_color_pair = 0;
+
 static int overlay_colors = 0;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-mc_tty_color_attr_destroy_cb (gpointer data)
-{
-    g_free (data);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-mc_tty_color_save_attr (int color_pair, int color_attr)
-{
-    int *attr, *key;
-
-    attr = g_try_new0 (int, 1);
-    if (attr == NULL)
-        return;
-
-    key = g_try_new (int, 1);
-    if (key == NULL)
-    {
-        g_free (attr);
-        return;
-    }
-
-    *key = color_pair;
-    *attr = color_attr;
-
-    g_hash_table_replace (mc_tty_color_color_pair_attrs, (gpointer) key, (gpointer) attr);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
-color_get_attr (int color_pair)
+get_ncurses_color_pair (int ifg, int ibg)
 {
-    int *fnd = NULL;
+    char *color_pair_str;
+    int *ncurses_color_pair;
+    int init_pair_ret;
 
-    if (mc_tty_color_color_pair_attrs != NULL)
-        fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) &color_pair);
-    return (fnd != NULL) ? *fnd : 0;
+    color_pair_str = g_strdup_printf ("%d.%d", ifg, ibg);
+
+    ncurses_color_pair =
+        (int *) g_hash_table_lookup (mc_tty_ncurses_color_pairs, (gpointer) color_pair_str);
+
+    if (ncurses_color_pair == NULL)
+    {
+        ncurses_color_pair = g_try_new0 (int, 1);
+        *ncurses_color_pair = mc_tty_ncurses_next_color_pair;
+#if NCURSES_VERSION_PATCH >= 20170401 && defined(NCURSES_EXT_COLORS) && defined(NCURSES_EXT_FUNCS) \
+    && defined(HAVE_NCURSES_WIDECHAR)
+        init_pair_ret = init_extended_pair (*ncurses_color_pair, ifg, ibg);
+#else
+        init_pair_ret = init_pair (*ncurses_color_pair, ifg, ibg);
+#endif
+
+        if (init_pair_ret == ERR)
+        {
+            g_free (ncurses_color_pair);
+            g_free (color_pair_str);
+            return 0;
+        }
+
+        g_hash_table_insert (mc_tty_ncurses_color_pairs, color_pair_str, ncurses_color_pair);
+        mc_tty_ncurses_next_color_pair++;
+    }
+    else
+        g_free (color_pair_str);
+
+    return *ncurses_color_pair;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -109,6 +130,8 @@ color_get_attr (int color_pair)
 void
 tty_color_init_lib (gboolean disable, gboolean force)
 {
+    int default_color_pair_id;
+
     (void) force;
 
     if (has_colors () && !disable)
@@ -122,8 +145,18 @@ tty_color_init_lib (gboolean disable, gboolean force)
         tty_use_truecolors (NULL);
     }
 
-    mc_tty_color_color_pair_attrs = g_hash_table_new_full (
-        g_int_hash, g_int_equal, mc_tty_color_attr_destroy_cb, mc_tty_color_attr_destroy_cb);
+    // our tracking of ncurses's color pairs
+    mc_tty_ncurses_color_pairs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+    // ncurses color pair 0 always refers to the default colors; add it to our hash
+    mc_tty_ncurses_next_color_pair = 0;
+    default_color_pair_id = get_ncurses_color_pair (-1, -1);
+    g_assert (default_color_pair_id == 0);
+    (void) default_color_pair_id;  // unused if g_assert is eliminated
+
+    // mapping from our index to ncurses's index and attributes
+    mc_tty_ncurses_color_pair_and_attrs =
+        g_array_new (FALSE, FALSE, sizeof (mc_tty_ncurses_color_pair_and_attrs_t));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -131,8 +164,13 @@ tty_color_init_lib (gboolean disable, gboolean force)
 void
 tty_color_deinit_lib (void)
 {
-    g_hash_table_destroy (mc_tty_color_color_pair_attrs);
-    mc_tty_color_color_pair_attrs = NULL;
+    g_hash_table_destroy (mc_tty_ncurses_color_pairs);
+    mc_tty_ncurses_color_pairs = NULL;
+
+    g_array_free (mc_tty_ncurses_color_pair_and_attrs, TRUE);
+    mc_tty_ncurses_color_pair_and_attrs = NULL;
+
+    mc_tty_ncurses_next_color_pair = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -178,13 +216,12 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
             ibg += (1 << 16);
     }
 
-#if NCURSES_VERSION_PATCH >= 20170401 && defined(NCURSES_EXT_COLORS) && defined(NCURSES_EXT_FUNCS) \
-    && defined(HAVE_NCURSES_WIDECHAR)
-    init_extended_pair (mc_color_pair->pair_index, ifg, ibg);
-#else
-    init_pair (mc_color_pair->pair_index, ifg, ibg);
-#endif
-    mc_tty_color_save_attr (mc_color_pair->pair_index, attr);
+    const int ncurses_color_pair = get_ncurses_color_pair (ifg, ibg);
+    const mc_tty_ncurses_color_pair_and_attrs_t pair_and_attrs = { .pair = ncurses_color_pair,
+                                                                   .attrs = attr };
+
+    g_array_insert_val (mc_tty_ncurses_color_pair_and_attrs, mc_color_pair->pair_index,
+                        pair_and_attrs);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -192,8 +229,12 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
 void
 tty_setcolor (int color)
 {
+    mc_tty_ncurses_color_pair_and_attrs_t *pair_and_attrs;
+
     color = tty_maybe_map_color (color);
-    attr_set (color_get_attr (color), color, NULL);
+    pair_and_attrs = &g_array_index (mc_tty_ncurses_color_pair_and_attrs,
+                                     mc_tty_ncurses_color_pair_and_attrs_t, color);
+    attr_set (pair_and_attrs->attrs, pair_and_attrs->pair, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -278,6 +319,10 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
         return;
 
     color = tty_maybe_map_color (color);
+    color = g_array_index (mc_tty_ncurses_color_pair_and_attrs,
+                           mc_tty_ncurses_color_pair_and_attrs_t, color)
+                .pair;
+
     ctext = g_malloc (sizeof (cchar_t) * (cols + 1));
 
     for (int row = 0; row < rows; row++)
