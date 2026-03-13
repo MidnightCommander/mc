@@ -17,6 +17,7 @@
 #include "src/filemanager/dir.h"  // dir_list
 
 #include "mcviewer.h"
+#include "ansi.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -85,6 +86,7 @@ typedef struct
     gboolean nroff_underscore_is_underlined;  // whether _\b_ is underlined rather than bold
     gboolean
         print_lonely_combining;  // whether lonely combining marks are printed on a dotted circle
+    mcview_ansi_state_t ansi;    // ANSI SGR escape sequence parser state
 } mcview_state_machine_t;
 
 struct mcview_nroff_struct;

@@ -3,6 +3,7 @@ noinst_LTLIBRARIES = libmcviewer.la
 
 libmcviewer_la_SOURCES = \
 	actions_cmd.c \
+	ansi.c ansi.h \
 	ascii.c \
 	coord_cache.c \
 	datasource.c \
