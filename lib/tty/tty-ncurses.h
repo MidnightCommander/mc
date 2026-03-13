@@ -43,6 +43,8 @@ extern gboolean ncurses_koi8r_double_line_bug;
 
 /*** declarations of public functions ************************************************************/
 
+gboolean tty_clip (int *y, int *x, int *rows, int *cols);
+
 /*** inline functions ****************************************************************************/
 
 #endif
