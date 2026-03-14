@@ -563,18 +563,6 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_colorize_area (int y, int x, int rows, int cols, int color)
-{
-    if (use_colors)
-    {
-        color = tty_maybe_map_color (color);
-        SLsmg_set_color_in_region (color, y, x, rows, cols);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 tty_display_8bit (gboolean what)
 {
     SLsmg_Display_Eight_Bit = what ? 128 : 160;
