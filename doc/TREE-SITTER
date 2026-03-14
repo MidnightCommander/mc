@@ -1,0 +1,745 @@
+Tree-sitter syntax highlighting for the internal editor
+-------------------------------------------------------
+
+Contents
+--------
+
+* Introduction
+* Building with tree-sitter support
+* Downloading grammar sources
+* How it works
+* Language injection
+* File layout
+* Grammar configuration file (grammars)
+* Highlight query files (queries/*.scm)
+* Color mapping
+* Adding a new language
+* Removing or disabling a language
+* Updating a grammar
+* Validating query files
+* Troubleshooting
+* Limitations
+
+
+Introduction
+------------
+
+The internal editor (mcedit) supports an alternative syntax highlighting
+backend based on tree-sitter (https://tree-sitter.github.io/).  When
+enabled at build time, tree-sitter provides AST-based highlighting that
+is more accurate than the legacy regex-based system.
+
+The tree-sitter backend is enabled with the --with-tree-sitter configure
+flag.  When a file is opened in the editor, the system first attempts to
+match it against a tree-sitter grammar.  If no grammar is found (or the
+query file fails to compile), the editor falls back to the legacy
+regex-based highlighting from *.syntax files.
+
+The two highlighting systems share the same rendering path: both produce
+a color pair integer per byte, which is consumed by editdraw.c.
+
+61 languages are supported via tree-sitter grammars, with language
+injection for HTML (JavaScript + CSS) and markdown (inline elements +
+fenced code blocks in any supported language).
+
+
+Building with tree-sitter support
+---------------------------------
+
+Requirements:
+
+- libtree-sitter >= 0.22 (development headers and shared library)
+  - https://github.com/tree-sitter/tree-sitter
+- gmodule-2.0 (for shared mode, part of GLib)
+- A C++ compiler (needed for the sql grammar which has a C++ scanner)
+- curl (needed to download grammar sources, unless using a local copy)
+
+There are two build modes for grammars: shared (default) and static.
+
+Shared mode (default) -- each grammar is built as a separate .so module
+and loaded at runtime via g_module_open().  The mc binary stays small
+(~5 MB) regardless of how many grammars are available.  Distros can
+package each grammar separately:
+
+    ./configure --with-tree-sitter
+    make -j$(nproc)
+
+Static mode -- all selected grammars are linked directly into the mc
+binary.  No runtime module loading, but the binary can grow large:
+
+    ./configure --with-tree-sitter --with-tree-sitter-static
+    make -j$(nproc)
+
+To build with only specific grammars (works in both modes):
+
+    ./configure --with-tree-sitter --with-tree-sitter-grammars=c,python,bash
+    make -j$(nproc)
+
+Grammar sources are automatically downloaded during configure if they
+are not already present.  For offline builds, set TREE_SITTER_GRAMMARS_DIR
+to a directory containing pre-downloaded grammar sources:
+
+    TREE_SITTER_GRAMMARS_DIR=/path/to/grammars ./configure --with-tree-sitter
+
+The --with-tree-sitter-grammars option accepts a comma-separated list
+of grammar names.  The default is 'all' (62 grammars).  Invalid names
+cause configure to abort with an error listing all valid grammars.
+
+Binary size comparison (approximate):
+- Without tree-sitter:              ~5 MB
+- Shared mode (any grammar count):  ~5 MB  (grammars in separate .so)
+- Static mode, 3 grammars:          ~8 MB
+- Static mode, all 62 grammars:     ~107 MB
+
+To build with the legacy highlighting only (default):
+
+    ./configure
+    make -j$(nproc)
+
+Both build modes are always supported.  The --with-tree-sitter flag
+controls which backend is compiled.  When --with-tree-sitter is not
+used, no tree-sitter headers or libraries are required and the
+tree-sitter code is excluded via #ifdef HAVE_TREE_SITTER guards.
+
+
+Downloading grammar sources
+----------------------------
+
+Grammar source files (parser.c, scanner.c, etc.) are not stored in the
+git repository.  Configure automatically downloads missing grammar
+sources when --with-tree-sitter is used.  Only grammars selected at
+configure time are downloaded (all by default, or the subset specified
+via --with-tree-sitter-grammars).
+
+For offline builds, set TREE_SITTER_GRAMMARS_DIR before running
+configure:
+
+    TREE_SITTER_GRAMMARS_DIR=/path/to/grammars ./configure --with-tree-sitter
+
+To manually re-download grammar sources (e.g. after updating a version
+in download-grammars.sh):
+
+    make -C src/editor/ts-grammars download-grammars
+
+The directory must contain subdirectories named after each grammar (e.g.
+c/, python/, bash/) with at least parser.c in each.
+
+The download script (download-grammars.sh) pins all grammar versions to
+specific commit SHAs for reproducible builds.  It also handles:
+- Grammars with non-standard repository layouts (monorepos)
+- GitLab-hosted grammars (bison)
+- Extra header files needed by some scanners
+- Post-download steps (perl/bsearch.h stub, include path fixes)
+
+Grammar source files MUST NOT be modified after download.  All
+compatibility is handled via the headers in tree_sitter/ and build
+flags in Makefile.in.
+
+
+How it works
+------------
+
+The integration point is edit_get_syntax_color() in src/editor/syntax.c.
+The renderer in editdraw.c calls this function for each byte position to
+get a color pair.  When tree-sitter is active the following happens:
+
+1. Initialization (edit_load_syntax / ts_init_for_file):
+   - The grammars config file is read to find a grammar matching the
+     current filename (by regex) or first line (shebang).
+   - The grammar is looked up via ts_grammar_registry_lookup():
+     * Shared mode: g_module_open() loads the grammar's .so module on
+       demand from the grammar module directory.
+     * Static mode: a compile-time registry maps names to functions.
+   - A TSParser is created with a 3-second parse timeout as safety net.
+   - The corresponding highlight query file (<name>-highlights.scm) is
+     loaded and compiled with ts_query_new().
+   - If injection is configured for this grammar, injection parsers
+     and queries are initialized (multiple per grammar supported).
+   - If any step fails, ts_active is set to FALSE and the legacy system
+     takes over transparently.
+
+2. Parsing:
+   - The TSParser uses a TSInput callback (ts_input_read) that reads
+     directly from MC's edit buffer (edit_buffer_t).  No copy of the
+     file contents is made.
+   - The initial parse produces a TSTree.
+
+3. Incremental re-parsing:
+   - When the buffer is modified (insert, delete, backspace), the
+     function edit_syntax_ts_notify_edit() is called from edit.c.
+   - It calls ts_tree_edit() with the byte range of the change.  The
+     actual re-parse is deferred to the next highlight cache rebuild,
+     avoiding redundant parses during bulk operations.
+
+4. Highlight cache (ts_rebuild_highlight_cache):
+   - A TSQueryCursor is restricted to a byte range around the viewport
+     (viewport +/- 8 KB).
+   - Query matches produce (start_byte, end_byte, color) entries stored
+     in a GArray cache (ts_highlights).
+   - If injection is active, injection ranges are collected from the
+     primary tree and injection queries are run on those ranges.
+   - For dynamic injection, fenced code blocks are detected, the
+     language name is read from the buffer, and the content is parsed
+     with the matching grammar (with per-language caching).
+   - The cache is rebuilt when the viewport scrolls outside the cached
+     range or the tree needs re-parsing.
+
+5. Color lookup (ts_get_color_at):
+   - For each byte, a linear scan in the highlight cache returns the
+     matching color (last match wins).
+   - When multiple captures overlap (e.g. a keyword inside a function
+     call), the last/innermost match wins because tree-sitter returns
+     parent nodes before child nodes.
+
+
+Language injection
+------------------
+
+Language injection allows one grammar to delegate parsing of specific
+AST nodes to another grammar.  This is configured via "inject" lines
+in the grammars config file:
+
+    inject <parent_grammar> <child_grammar> <node_type1>,<node_type2>,...
+
+For example, markdown inline elements are parsed by a separate grammar:
+
+    inject markdown markdown_inline inline,pipe_table_cell
+
+Multiple injections per parent grammar are supported.  HTML uses two
+injections for JavaScript and CSS:
+
+    inject html javascript script_element/raw_text
+    inject html css style_element/raw_text
+
+Node types support a "parent/child" syntax for targeting child nodes
+inside specific parent nodes.  For example, "script_element/raw_text"
+matches raw_text nodes that are children of script_element nodes.
+This is needed when different parent elements contain content for
+different languages (e.g. <script> vs <style> in HTML).
+
+When the primary grammar produces nodes of the listed types, those
+byte ranges are extracted and parsed by the child grammar using
+ts_parser_set_included_ranges().
+
+Dynamic injection is supported for cases where the language varies
+per block (e.g. fenced code blocks in markdown):
+
+    inject_dynamic <parent> <block_node> <lang_node> <content_node>
+
+For example, markdown fenced code blocks specify the language in
+the info string:
+
+    inject_dynamic markdown fenced_code_block info_string code_fence_content
+
+When the primary tree contains a fenced_code_block node, the text
+of the info_string child is read to determine the language name.
+If a matching grammar is available (installed as a .so in shared mode,
+or compiled in via static mode), the code_fence_content child is
+parsed with that grammar.  Parsers and queries are cached per language
+for efficiency.
+
+
+File layout
+-----------
+
+Source files (src/editor/):
+
+    syntax.c            Main file.  All tree-sitter code is inside
+                        #ifdef HAVE_TREE_SITTER blocks.  Contains:
+                        - ts_input_read() -- TSInput callback
+                        - ts_capture_name_to_color() -- color mapping
+                        - ts_open_config() -- opens grammars config
+                        - ts_find_grammar() -- reads config, matches filename
+                        - ts_load_query_file() -- loads .scm file
+                        - ts_find_injections() -- reads inject/inject_dynamic
+                        - ts_init_injections() -- sets up injection parsers
+                        - ts_get_dynamic_lang() -- lazy-loads dynamic grammar
+                        - ts_run_dynamic_injection() -- code block injection
+                        - ts_init_for_file() -- initialization
+                        - ts_free() -- cleanup (primary + injections)
+                        - ts_collect_injection_ranges() -- collects byte ranges
+                        - ts_append_node_range() -- range helper
+                        - ts_run_query_into_highlights() -- runs query on tree
+                        - ts_rebuild_highlight_cache() -- query cursor
+                        - ts_get_color_at() -- linear scan
+                        - edit_syntax_ts_notify_edit() -- incremental
+                        Conditional include: ts-grammar-registry.h (static
+                        mode) or ts-grammar-loader.h (shared mode).
+
+    ts-grammar-loader.h
+                        Shared mode grammar loader.  Provides
+                        ts_grammar_registry_lookup() using g_module_open()
+                        to load grammar .so modules on demand.  Caches
+                        loaded modules.  Handles naming overrides (e.g.
+                        cobol -> tree_sitter_COBOL).
+
+    editwidget.h        WEdit struct extended with tree-sitter fields:
+                        Primary: ts_parser, ts_tree, ts_highlight_query
+                        (void*), ts_highlights (GArray*),
+                        ts_highlights_start/end, ts_active, ts_need_reparse.
+                        Injections: ts_injections (GArray* of
+                        ts_injection_t, supports multiple and dynamic).
+
+    edit-impl.h         Declaration of edit_syntax_ts_notify_edit().
+
+    edit.c              Calls edit_syntax_ts_notify_edit() from four
+                        buffer modification functions: edit_insert(),
+                        edit_insert_ahead(), edit_delete(), edit_backspace().
+
+Grammar sources (src/editor/ts-grammars/):
+
+    Grammar source files are downloaded at build time and are NOT stored
+    in the git repository.  See "Downloading grammar sources" above.
+
+    <lang>/parser.c     Generated parser for each language.
+    <lang>/scanner.c    External scanner (optional, 38 grammars have one).
+    sql/scanner.cc      The sql grammar uses a C++ scanner.
+
+    The following files ARE stored in the repository:
+
+    tree_sitter/        Compatibility headers (parser.h, alloc.h, array.h,
+                        ts_assert.h) from tree-sitter v0.25.4.  These are
+                        needed because system libtree-sitter only installs
+                        api.h, not the internal headers that grammars
+                        #include.
+    ts-grammar-registry.h
+                        Static mode only.  Lookup table mapping grammar
+                        names to tree_sitter_*() functions.  Each grammar
+                        is guarded by #ifdef HAVE_GRAMMAR_<UPPER>.
+    Makefile.in         Hand-written (not automake).  Supports two build
+                        modes: static (libtsgrammars.la) and shared
+                        (per-grammar mc-ts-<name>.la modules).
+    download-grammars.sh
+                        Script to download grammar sources from upstream
+                        repositories (GitHub and GitLab).  All versions
+                        pinned to specific commit SHAs.
+    .gitignore          Excludes downloaded grammar directories from git.
+
+Runtime data files (misc/syntax-ts/):
+
+    grammars            Configuration file mapping filename patterns and
+                        shebang patterns to grammar names.  Also contains
+                        inject and inject_dynamic directives for language
+                        injection.
+    queries/<name>-highlights.scm
+                        Highlight query files, one per grammar (62 total:
+                        61 languages + markdown_inline).
+
+Shared grammar modules (shared mode only):
+
+    mc-ts-<name>.so     One loadable module per grammar.  Each exports a
+                        single tree_sitter_<name>() function.  Loaded on
+                        demand by syntax.c via g_module_open().
+
+    The loader checks two directories in order:
+    1. ~/.local/lib/mc/ts-grammars/  (user-local, checked first)
+    2. $(libdir)/mc/ts-grammars/     (system, set at configure time)
+
+    Users can install custom grammar modules in the user-local path
+    without needing root access.
+
+Build system files:
+
+    configure.ac        --with-tree-sitter, --with-tree-sitter-grammars,
+                        and --with-tree-sitter-static flags.  Validates
+                        grammar names, generates source/object lists,
+                        shared module list, -DHAVE_GRAMMAR_* defines
+                        (static only), GModule check (shared only).
+    src/editor/Makefile.am
+                        Conditional SUBDIRS = ts-grammars.  In static
+                        mode links libtsgrammars.la; in shared mode links
+                        only $(GMODULE_LIBS) and defines TS_GRAMMAR_LIBDIR.
+    src/Makefile.am     $(TREE_SITTER_LIBS) added to mc_LDADD.
+    misc/syntax-ts/Makefile.am
+                        Installation rules for grammars config and
+                        queries/*-highlights.scm files.
+
+Test files:
+
+    tests/src/editor/edit_syntax_ts.c
+                        Unit tests for tree-sitter integration.  Works in
+                        both static and shared modes.  Tests grammar
+                        lookup, query file compilation, C parsing, C query
+                        captures, markdown inline injection, and HTML
+                        multi-injection.
+
+
+Grammar configuration file (grammars)
+-------------------------------------
+
+Located at misc/syntax-ts/grammars, this file maps filenames and shebang
+lines to grammar names.  The format is:
+
+    file           <filename_regex>   <grammar_name> <display_name>
+    shebang        <first_line_regex> <grammar_name> <display_name>
+    inject         <parent_grammar>   <child_grammar> <node_type1>,...
+    inject_dynamic <parent_grammar>   <block_node> <lang_node> <content_node>
+
+The grammar_name is used to:
+- Look up the grammar (via static registry or shared module loader).
+- Load the query file <grammar_name>-highlights.scm from the queries/
+  directory.
+
+Example entries:
+
+    file \.[ch]$ c C\ Program
+    file \.py$ python Python\ Program
+    shebang [/\x20]python[0-9.]* python Python\ Program
+    inject markdown markdown_inline inline,pipe_table_cell
+    inject html javascript script_element/raw_text
+    inject_dynamic markdown fenced_code_block info_string code_fence_content
+
+Important notes about regex syntax:
+- MC's regex engine (mc_search with MC_SEARCH_T_REGEX) does NOT support
+  \b (word boundary) or \s (whitespace class).
+- Literal spaces in patterns are parsed as field separators, so they
+  must be escaped as \x20 in the regex.
+- Use [/\x20] instead of [\s/] for matching slash-or-space.
+
+The file is read at runtime from ~/.local/share/mc/syntax-ts/grammars
+(user path, checked first) or the system share directory.
+
+
+Highlight query files (queries/*.scm)
+--------------------------------------
+
+Each grammar has a corresponding query file in misc/syntax-ts/queries/
+named <grammar_name>-highlights.scm (e.g. c-highlights.scm,
+python-highlights.scm, bash-highlights.scm).
+
+Query files use the tree-sitter query syntax (S-expressions) to match
+AST node patterns and assign capture names.  For example:
+
+    (function_definition name: (identifier) @function)
+    (string_literal) @string
+    (comment) @comment
+    [
+      "if"
+      "else"
+      "return"
+    ] @keyword
+
+The capture names (the @name parts) are mapped to MC colors by the
+ts_default_colors[] table in syntax.c.
+
+Critical constraint: every node name and anonymous string literal in the
+query file MUST exist in the grammar's symbol table (ts_symbol_names[]
+in parser.c).  If any name is invalid, ts_query_new() returns NULL and
+the entire query fails silently, causing fallback to legacy highlighting.
+
+Query files support hierarchical capture names (e.g. @keyword.control,
+@string.special).  The color lookup performs longest-prefix matching, so
+@keyword.control is tried first, then @keyword.
+
+
+Color mapping
+-------------
+
+The ts_default_colors[] table in syntax.c maps capture names to MC
+foreground colors.  The colors are chosen to match MC's default syntax
+highlighting appearance (blue background skin):
+
+    Capture             Foreground Color    Purpose
+    -------             ----------------    -------
+    keyword             yellow              Language keywords
+    keyword.other       white               Secondary keywords
+    keyword.control     brightmagenta       Control flow (PHP)
+    keyword.directive   magenta             Directives (Make)
+    function            brightcyan          Function names
+    function.special    brightred           Preprocessor macros
+    function.builtin    brown               Built-in functions (Go)
+    function.macro      brightmagenta       Macro invocations (Rust)
+    type                yellow              Type names
+    type.builtin        brightgreen         Built-in types (Go)
+    string              green               String literals
+    string.special      brightgreen         Char literals, escapes
+    number              lightgray           Numeric literals
+    number.builtin      brightgreen         Special numbers (Haskell)
+    comment             brown               Comments
+    comment.error       red                 CSS hex colors
+    constant            lightgray           Constants
+    constant.builtin    brightmagenta       Built-in constants
+    variable            (default)           Variables
+    variable.builtin    brightred           self, $vars
+    variable.special    brightgreen         Shell expansions
+    operator            brightcyan          Operators
+    operator.word       yellow              Word-like operators
+    delimiter           brightcyan          Brackets, punctuation
+    delimiter.special   brightmagenta       Semicolons, bitwise ops
+    property            brightcyan          Object properties
+    property.key        yellow              Config file keys
+    label               cyan                Labels
+    tag                 brightcyan          HTML/XML tags
+    markup.addition     brightgreen         Diff additions
+    markup.deletion     brightred           Diff deletions
+    markup.heading      brightmagenta       Diff headers
+
+To change a color for all languages, edit the ts_default_colors[] table.
+To change a color for a specific language, use a more specific capture
+name in the query file (e.g. @keyword.control instead of @keyword) and
+add a corresponding entry to the table.
+
+
+Adding a new language
+---------------------
+
+To add tree-sitter highlighting for a new language:
+
+1. Add the grammar to the download script.
+
+   Edit src/editor/ts-grammars/download-grammars.sh and add a download
+   entry pinned to a specific commit SHA:
+
+       download <name> <github_org> <repo> <commit_sha>
+
+   For grammars with non-standard layouts, specify the src prefix:
+
+       download <name> <org> <repo> <sha> <src_prefix>
+
+   If the grammar needs extra headers, use download_extra().  For
+   GitLab-hosted grammars, use download_gitlab().
+
+2. Register the grammar for static mode.
+
+   Edit src/editor/ts-grammars/ts-grammar-registry.h:
+   - Add an #ifdef HAVE_GRAMMAR_<UPPER> guarded extern declaration:
+     #ifdef HAVE_GRAMMAR_<UPPER>
+     extern const TSLanguage *tree_sitter_<name>(void);
+     #endif
+   - Add a similarly guarded entry to the ts_grammar_registry[] array:
+     #ifdef HAVE_GRAMMAR_<UPPER>
+     { "<name>", tree_sitter_<name> },
+     #endif
+
+   For shared mode, no registration is needed -- the grammar is
+   discovered automatically from its .so file.  If the function name
+   does not follow the tree_sitter_<name> convention, add an override
+   to the ts_grammar_symbol_overrides[] table in ts-grammar-loader.h.
+
+   The <name> must exactly match the function name suffix exported by
+   the grammar's parser.c.  Some grammars use different names than their
+   directory (e.g. the lisp/ directory exports tree_sitter_commonlisp,
+   and cobol exports tree_sitter_COBOL).
+
+3. Add the grammar to the build.
+
+   Edit configure.ac (in the tree-sitter section):
+   - Add <name> to all_ts_grammars.
+   - If there is a scanner.c, add <name> to ts_scanner_c.
+   - If there is a scanner.cc, add <name> to ts_scanner_cc.
+
+4. Create a highlight query file.
+
+   Create misc/syntax-ts/queries/<name>-highlights.scm with tree-sitter
+   query patterns.  Use the grammar's node-types.json or the
+   ts_symbol_names[] array in parser.c to find valid node names.
+
+   You can also reference the upstream grammar repository's queries/
+   directory for inspiration, but those queries often use capture names
+   that don't match MC's color scheme and may reference nodes from
+   different grammar versions.
+
+   Test the query by extracting all node names used in the query and
+   verifying they exist in the grammar's ts_symbol_names[] (see the
+   "Validating query files" section).
+
+5. Add the grammar mapping.
+
+   Edit misc/syntax-ts/grammars and add file and/or shebang lines:
+     file \.<ext>$ <name> Display\ Name
+     shebang [/\x20]<interpreter> <name> Display\ Name
+
+6. Update the installation rules.
+
+   Edit misc/syntax-ts/Makefile.am and add <name>-highlights.scm to the
+   TS_QUERYFILES list.
+
+7. Rebuild.
+
+   Run autoreconf (or autogen.sh) to regenerate the build system, then
+   configure with --with-tree-sitter and build.  Run the unit tests:
+
+       make check -C tests/src/editor
+
+   The edit_syntax_ts test validates all query files against their
+   grammars.
+
+
+Removing or disabling a language
+--------------------------------
+
+To exclude a grammar at build time (without modifying any files):
+- Use --with-tree-sitter-grammars=LIST to specify only the grammars
+  you want.  Unselected grammars are not compiled, downloaded, or
+  registered.
+
+In shared mode, grammars can also be excluded at install time by simply
+not installing the corresponding .so file and .scm query file.
+
+To disable a grammar without removing its files:
+- Comment out or remove its lines from misc/syntax-ts/grammars.
+  The grammar will still be compiled but never matched at runtime.
+
+To fully remove a grammar:
+1. Remove its lines from misc/syntax-ts/grammars.
+2. Remove its #ifdef-guarded entries from ts-grammar-registry.h.
+3. Remove it from all_ts_grammars (and ts_scanner_c/ts_scanner_cc
+   if applicable) in configure.ac.
+4. Remove its download entry from download-grammars.sh.
+5. Delete misc/syntax-ts/queries/<name>-highlights.scm.
+6. Remove <name>-highlights.scm from TS_QUERYFILES in
+   misc/syntax-ts/Makefile.am.
+
+
+Updating a grammar
+------------------
+
+To update a grammar to a newer version:
+
+1. Update the commit SHA in download-grammars.sh and re-download:
+
+       make -C src/editor/ts-grammars download-grammars
+
+   This will replace the grammar files in src/editor/ts-grammars/<name>/.
+
+2. Check for ABI compatibility.  The grammars were generated by
+   different tree-sitter versions (ranging from pre-0.22 to 0.25.x).
+   The compatibility headers in src/editor/ts-grammars/tree_sitter/
+   include patches for:
+   - TSFieldMapSlice typedef (old grammars use this, new use TSMapSlice)
+   - version/abi_version union in TSLanguage struct
+   - Variadic REDUCE macro (old grammars use 2 positional args, new use
+     4 named args)
+
+   If the new grammar uses a newer ABI than 15 (TREE_SITTER_LANGUAGE_VERSION),
+   you may need to update the system libtree-sitter.
+
+3. Validate the query file against the new grammar.  Node names may have
+   changed between versions.  See "Validating query files" below.
+
+4. Rebuild and test:
+
+       make -j$(nproc)
+       make check -C tests/src/editor
+
+
+Validating query files
+----------------------
+
+A query file must only reference node names that exist in the grammar.
+If any node name is invalid, tree-sitter silently rejects the entire
+query and the language falls back to legacy highlighting.
+
+To extract the valid node names from a grammar:
+
+    grep -oP '"[^"]*"' src/editor/ts-grammars/<name>/parser.c \
+        | sort -u
+
+Specifically, look at the ts_symbol_names[] array in parser.c for the
+authoritative list.  Also check ts_field_names[] for valid field names.
+
+To extract node names used in a query file:
+
+    1. Strip ;; comments and #match?/#not-match? predicate lines.
+    2. Extract all bare identifiers (node names) and quoted strings
+       (anonymous nodes like "if", "return").
+    3. Ignore _ which is the tree-sitter wildcard.
+    4. Check each against the grammar's symbol table.
+
+The unit test (tests/src/editor/edit_syntax_ts.c) validates all query
+files by compiling them with ts_query_new() against their respective
+grammars.  Run it with:
+
+    make check -C tests/src/editor
+
+If you find invalid nodes, either remove the offending patterns from the
+query file or replace them with valid node names from the grammar.
+
+
+Troubleshooting
+---------------
+
+Tree-sitter highlighting does not appear:
+
+    The most common cause is a query compilation failure.  If any node
+    name or anonymous literal in the .scm file does not exist in the
+    grammar, the entire query is silently rejected and the editor falls
+    back to legacy highlighting.  Validate the query file as described
+    above.
+
+    Other possible causes:
+    - In shared mode, the grammar's .so module is not installed in
+      ~/.local/lib/mc/ts-grammars/ or $(libdir)/mc/ts-grammars/.
+    - In static mode, the grammar was not included in
+      --with-tree-sitter-grammars at configure time.
+    - The filename does not match any pattern in the grammars config.
+    - The grammar name in grammars does not match the function exported
+      by the grammar module.
+    - The .scm file is not found in the queries/ directory.
+
+Colors look wrong:
+
+    Check that the capture names in the query file match entries in the
+    ts_default_colors[] table.  The lookup uses longest-prefix matching:
+    @keyword.control is matched before @keyword.  If no prefix matches,
+    the capture is ignored (default editor color is used).
+
+A grammar causes high CPU usage or hangs:
+
+    A 3-second parse timeout (ts_parser_set_timeout_micros) is set for
+    all grammars as a safety net.  If a grammar consistently hits the
+    timeout, consider disabling it by removing its entry from the
+    grammars config file.
+
+Build fails with "grammar sources not found":
+
+    Grammar sources are normally downloaded automatically during
+    configure.  If that failed, download manually:
+
+        make -C src/editor/ts-grammars download-grammars
+
+    For offline builds, point to a directory with pre-downloaded sources:
+
+        TREE_SITTER_GRAMMARS_DIR=/path/to/grammars ./configure --with-tree-sitter
+
+Build fails with type errors in grammar code:
+
+    Grammars were generated by different tree-sitter versions.  The
+    compatibility headers in src/editor/ts-grammars/tree_sitter/ handle
+    most version mismatches.  If you encounter new errors after updating
+    a grammar, you may need to:
+    - Add new compatibility typedefs to tree_sitter/parser.h.
+    - Add warning suppression flags to AM_CFLAGS in
+      src/editor/ts-grammars/Makefile.in.
+
+Build fails with undefined reference to tree_sitter_<name>:
+
+    In static mode, ensure the grammar is listed in all_ts_grammars in
+    configure.ac and has an entry in ts-grammar-registry.h.  In shared
+    mode, ensure the .so module exports the expected symbol name (check
+    with: nm -D mc-ts-<name>.so | grep tree_sitter).
+
+
+Limitations
+-----------
+
+- Query files are all-or-nothing: if any node name is invalid, the
+  entire query is rejected.  There is no partial fallback within a
+  single query file.
+
+- Languages without a pre-built parser.c (i.e. those requiring
+  tree-sitter generate) are not supported.  Only grammars with
+  committed parser.c files in their upstream repos are included.
+
+- The color mapping is global.  Per-language color overrides are
+  achieved by using more specific capture names in query files (e.g.
+  @keyword.directive for Make), not by configuring colors per language.
+
+- The highlight cache covers the viewport plus 8 KB.  Very long lines
+  or extreme scroll speeds may cause brief flicker as the cache is
+  rebuilt.
+
+- Dynamic injection (inject_dynamic) relies on the language name
+  in the source matching a registered grammar name exactly.  Common
+  aliases (e.g. "py" for "python", "js" for "javascript") are not
+  resolved automatically.

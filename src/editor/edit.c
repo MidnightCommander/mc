@@ -1789,10 +1789,19 @@ edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
         const gboolean status_after_ok = mc_stat (block_file_vpath, &status_after) == 0;
 
         // was block file created or modified by menu command?
+        // Use nanosecond-precision mtime when available, because scripts that only
+        // rearrange bytes (e.g. word-wrap replacing spaces with newlines) produce
+        // the same file size and may finish within the same second.
         modified = (!status_before_ok && status_after_ok)
             || (status_before_ok && status_after_ok && status_after.st_size != 0
                 && (status_after.st_size != status_before.st_size
-                    || status_after.st_mtime != status_before.st_mtime));
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+                    || status_after.st_mtim.tv_sec != status_before.st_mtim.tv_sec
+                    || status_after.st_mtim.tv_nsec != status_before.st_mtim.tv_nsec
+#else
+                    || status_after.st_mtime != status_before.st_mtime
+#endif
+                    ));
     }
 
     if (modified)
@@ -2563,6 +2572,12 @@ edit_insert (WEdit *edit, int c)
     edit->last_get_rule += (edit->last_get_rule > edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert (&edit->buffer, c);
+
+#ifdef HAVE_TREE_SITTER
+    // Notify tree-sitter: one byte inserted at cursor position
+    edit_syntax_ts_notify_edit (edit, edit->buffer.curs1 - 1, edit->buffer.curs1 - 1,
+                                edit->buffer.curs1);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2595,6 +2610,12 @@ edit_insert_ahead (WEdit *edit, int c)
     edit->last_get_rule += (edit->last_get_rule >= edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert_ahead (&edit->buffer, c);
+
+#ifdef HAVE_TREE_SITTER
+    // Notify tree-sitter: one byte inserted ahead at cursor position
+    edit_syntax_ts_notify_edit (edit, edit->buffer.curs1, edit->buffer.curs1,
+                                edit->buffer.curs1 + 1);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2648,6 +2669,12 @@ edit_delete (WEdit *edit, gboolean byte_delete)
         p = edit_buffer_delete (&edit->buffer);
 
         edit_push_undo_action (edit, p + 256);
+
+#ifdef HAVE_TREE_SITTER
+        // Notify tree-sitter: one byte deleted at cursor position
+        edit_syntax_ts_notify_edit (edit, edit->buffer.curs1, edit->buffer.curs1 + 1,
+                                    edit->buffer.curs1);
+#endif
     }
 
     edit_modification (edit);
@@ -2704,6 +2731,12 @@ edit_backspace (WEdit *edit, gboolean byte_delete)
         p = edit_buffer_backspace (&edit->buffer);
 
         edit_push_undo_action (edit, p);
+
+#ifdef HAVE_TREE_SITTER
+        // Notify tree-sitter: one byte deleted before cursor position
+        edit_syntax_ts_notify_edit (edit, edit->buffer.curs1, edit->buffer.curs1 + 1,
+                                    edit->buffer.curs1);
+#endif
     }
     edit_modification (edit);
     if (p == '\n')

@@ -1,4 +1,10 @@
-EXTRA_DIST =
+EXTRA_DIST = ts-grammar-loader.h
+
+if USE_TREE_SITTER
+SUBDIRS = ts-grammars
+else
+SUBDIRS =
+endif
 
 if USE_INTERNAL_EDIT
 noinst_LTLIBRARIES = libedit.la
@@ -30,4 +36,16 @@ libedit_la_SOURCES += \
 endif
 endif
 
-AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
+AM_CPPFLAGS = $(GLIB_CFLAGS) $(TREE_SITTER_CFLAGS) -I$(top_srcdir)
+
+if USE_TREE_SITTER
+if TREE_SITTER_STATIC
+AM_CPPFLAGS += @TREE_SITTER_GRAMMAR_DEFS@
+libedit_la_LIBADD = ts-grammars/libtsgrammars.la $(TREE_SITTER_LIBS)
+else
+AM_CPPFLAGS += $(GMODULE_CFLAGS) -DTS_GRAMMAR_LIBDIR=\""$(libdir)/mc/ts-grammars"\"
+libedit_la_LIBADD = $(TREE_SITTER_LIBS) $(GMODULE_LIBS)
+endif
+else
+libedit_la_LIBADD =
+endif
