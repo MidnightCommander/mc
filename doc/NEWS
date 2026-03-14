@@ -32,6 +32,7 @@ Starting with this release, we will be using language features that require a C9
 
 - Fixes
 
+    * Extension column in user-defined panel format now displays only the file extension instead of the full filename
     * Segfault if filter makes file panel empty (#4600)
     * Segfault in built-in help when going to the previous topic (#4627)
     * Incorrect handling of ext2 attributes of a directory (#4590)

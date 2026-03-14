@@ -798,6 +798,10 @@ specifier.  This are the available fields you may display:
 .B name
 displays the file name.
 .TP
+.B extension
+displays the file extension (the part after the last dot).
+For directories and files without an extension, this field is empty.
+.TP
 .B size
 displays the file size.
 .TP
