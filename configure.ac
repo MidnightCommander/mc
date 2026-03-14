@@ -576,7 +576,9 @@ if test x"$with_tree_sitter" = xyes; then
             [AC_MSG_ERROR([gmodule-2.0 required for shared tree-sitter grammars (use --with-tree-sitter-static to avoid)])])
         TREE_SITTER_BUILD_TARGET="shared-modules"
         TREE_SITTER_BUILD_MODE="shared"
-        TREE_SITTER_GRAMMAR_LIBDIR="${libdir}/mc/ts-grammars"
+        dnl Resolve libdir for use in Makefile.in (which doesn't have automake's variable chain)
+        eval "ts_libdir=\"$libdir\""
+        TREE_SITTER_GRAMMAR_LIBDIR="${ts_libdir}/mc/ts-grammars"
     fi
     AC_SUBST([TREE_SITTER_BUILD_TARGET])
     AC_SUBST([TREE_SITTER_BUILD_MODE])
