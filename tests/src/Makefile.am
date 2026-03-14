@@ -1,6 +1,6 @@
 PACKAGE_STRING = "/src"
 
-SUBDIRS = . filemanager vfs
+SUBDIRS = . filemanager vfs viewer
 
 if USE_INTERNAL_EDIT
 SUBDIRS += editor
