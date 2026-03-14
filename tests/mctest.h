@@ -35,24 +35,26 @@
 
 #define mctest_assert_null(actual_pointer)                                                         \
     {                                                                                              \
-        ck_assert_msg ((void *) actual_pointer == NULL, "%s(%p) variable should be NULL",          \
+        ck_assert_msg (((void *) actual_pointer) == NULL, "%s(%p) variable should be NULL",        \
                        #actual_pointer, actual_pointer);                                           \
     }
 
 #define mctest_assert_not_null(actual_pointer)                                                     \
     {                                                                                              \
-        ck_assert_msg ((void *) actual_pointer != NULL, "%s(nil) variable should not be NULL",     \
+        ck_assert_msg (((void *) actual_pointer) != NULL, "%s(nil) variable should not be NULL",   \
                        #actual_pointer);                                                           \
     }
 
 #define mctest_assert_true(actual_pointer)                                                         \
     {                                                                                              \
-        ck_assert_msg ((int) actual_pointer != 0, "%s variable should be TRUE", #actual_pointer);  \
+        ck_assert_msg (((int) actual_pointer) != 0, "%s variable should be TRUE",                  \
+                       #actual_pointer);                                                           \
     }
 
 #define mctest_assert_false(actual_pointer)                                                        \
     {                                                                                              \
-        ck_assert_msg ((int) actual_pointer == 0, "%s variable should be FALSE", #actual_pointer); \
+        ck_assert_msg (((int) actual_pointer) == 0, "%s variable should be FALSE",                 \
+                       #actual_pointer);                                                           \
     }
 
 /**
