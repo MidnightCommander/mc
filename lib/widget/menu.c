@@ -728,17 +728,25 @@ menubar_get_menu_by_x_coord (const WMenuBar *menubar, int x)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/*
+ * Whether the mouse is over a dropped down menu entry (separators excluded).
+ */
 static gboolean
-menubar_mouse_on_menu (const WMenuBar *menubar, int y, int x)
+menubar_mouse_on_menu_entry (const WMenuBar *menubar, int y, int x)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
     menu_t *menu;
+    menu_entry_t *entry;
     int left_x, right_x, bottom_y;
 
     if (!menubar->is_dropped)
         return FALSE;
 
     menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
+    entry = MENUENTRY (g_list_nth_data (menu->entries, y - 2));
+    if (entry == NULL)
+        return FALSE;  // separator line
+
     left_x = menu->start_x;
     right_x = left_x + menu->max_entry_len + 2;
     if (right_x > w->cols - 1)
@@ -782,7 +790,7 @@ menubar_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
     WMenuBar *menubar = MENUBAR (w);
     gboolean mouse_on_drop;
 
-    mouse_on_drop = menubar_mouse_on_menu (menubar, event->y, event->x);
+    mouse_on_drop = menubar_mouse_on_menu_entry (menubar, event->y, event->x);
 
     switch (msg)
     {
