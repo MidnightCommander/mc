@@ -3530,6 +3530,79 @@ panel_execute_cmd (WPanel *panel, long command)
 {
     int res = MSG_HANDLED;
 
+    /* When quick search is active, Up/Down cycle through matches instead of exiting search */
+    if (panel->quick_search.active && (command == CK_Up || command == CK_Down))
+    {
+        int i, start, direction, found = -1;
+        gboolean wrapped = FALSE;
+        char *reg_exp, *esc_str;
+        mc_search_t *search;
+
+        if (panel->quick_search.buffer->len == 0)
+            goto normal_cmd;
+
+        direction = (command == CK_Down) ? 1 : -1;
+        start = panel->current + direction;
+
+        reg_exp = g_strdup_printf ("%s*", panel->quick_search.buffer->str);
+        esc_str = str_escape (reg_exp, -1, ",|\\{}[]", TRUE);
+        search = mc_search_new (esc_str, NULL);
+        search->search_type = MC_SEARCH_T_GLOB;
+        search->is_entire_line = TRUE;
+
+        switch (panels_options.qsearch_mode)
+        {
+        case QSEARCH_CASE_SENSITIVE:
+            search->is_case_sensitive = TRUE;
+            break;
+        case QSEARCH_CASE_INSENSITIVE:
+            search->is_case_sensitive = FALSE;
+            break;
+        default:
+            search->is_case_sensitive = panel->sort_info.case_sensitive;
+            break;
+        }
+
+        for (i = start; !wrapped || i != start; i += direction)
+        {
+            if (i >= panel->dir.len)
+            {
+                i = 0;
+                if (wrapped)
+                    break;
+                wrapped = TRUE;
+            }
+            if (i < 0)
+            {
+                i = panel->dir.len - 1;
+                if (wrapped)
+                    break;
+                wrapped = TRUE;
+            }
+            if (mc_search_run (search, panel->dir.list[i].fname->str, 0,
+                               panel->dir.list[i].fname->len, NULL))
+            {
+                found = i;
+                break;
+            }
+        }
+
+        mc_search_free (search);
+        g_free (reg_exp);
+        g_free (esc_str);
+
+        if (found >= 0)
+        {
+            unselect_item (panel);
+            panel->current = found;
+            select_item (panel);
+            widget_draw (WIDGET (panel));
+        }
+
+        return MSG_HANDLED;
+    }
+
+normal_cmd:
     if (command != CK_Search)
         stop_search (panel);
 
@@ -3732,6 +3805,27 @@ panel_key (WPanel *panel, int key)
         return MSG_HANDLED;
     }
 
+    /* When quick search is NOT active: Space = mark file, Backspace = parent dir.
+       When quick search IS active: Space and Backspace go to the search input. */
+    if (!panel->quick_search.active)
+    {
+        if (key == ' ')
+        {
+            const file_entry_t *fe;
+
+            fe = panel_current_entry (panel);
+            if (fe != NULL)
+                do_file_mark (panel, panel->current, fe->f.marked ? 0 : 1);
+            widget_draw (WIDGET (panel));
+            return MSG_HANDLED;
+        }
+        if (key == KEY_BACKSPACE)
+        {
+            goto_parent_dir (panel);
+            return MSG_HANDLED;
+        }
+    }
+
     if (panel->quick_search.active && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
         do_search (panel, key);
@@ -3742,7 +3836,7 @@ panel_key (WPanel *panel, int key)
     if (command != CK_IgnoreKey)
         return panel_execute_cmd (panel, command);
 
-    if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
+    if (!command_prompt && key > ' ' && key <= 255)
     {
         start_search (panel);
         do_search (panel, key);

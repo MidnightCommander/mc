@@ -565,6 +565,13 @@ or
 keys can be used to correct typing mistakes. If C\-s is pressed
 again, the next match is searched for.
 .P
+The
+.I Up
+and
+.I Down
+arrow keys can be used to cycle through files matching the current
+search pattern, wrapping around at the beginning or end of the list.
+.P
 If quick search is started with double pressing of C\-s, the previous quick
 search pattern will be used for current search.
 .P

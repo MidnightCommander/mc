@@ -4,6 +4,7 @@ Starting with this release, we will be using language features that require a C9
 
 - Core
 
+    * Quick search: Up/Down arrow keys now cycle through matching files instead of exiting the search
     * Minimal version of Automake is 1.14 (#4604)
     * Upgrade C standard to C99 (#4604)
     * Support ksh variants as subshell (#3748)
