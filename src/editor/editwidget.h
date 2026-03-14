@@ -142,7 +142,20 @@ struct WEdit
 
     unsigned int skip_detach_prompt : 1;  // Do not prompt whether to detach a file anymore
 
-    // syntax highlighting
+    // syntax highlighting (tree-sitter)
+    void *ts_parser;               // TSParser* - tree-sitter parser
+    void *ts_tree;                 // TSTree* - current parse tree
+    void *ts_highlight_query;      // TSQuery* - compiled highlight query
+    GArray *ts_highlights;         // array of ts_highlight_entry_t (start, end, color)
+    off_t ts_highlights_start;     // byte range start of cached highlights
+    off_t ts_highlights_end;       // byte range end of cached highlights
+    gboolean ts_active;            // TRUE if tree-sitter is being used
+    gboolean ts_need_reparse;      // TRUE if tree needs re-parsing before use
+
+    // tree-sitter language injections (e.g., markdown inline, or JS+CSS in HTML)
+    GArray *ts_injections;         // array of ts_injection_t, or NULL if none
+
+    // syntax highlighting (legacy fallback)
     GSList *syntax_marker;
     GPtrArray *rules;
     off_t last_get_rule;
