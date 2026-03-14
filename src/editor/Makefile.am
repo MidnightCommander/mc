@@ -1,4 +1,4 @@
-EXTRA_DIST =
+EXTRA_DIST = ts-grammar-loader.h
 
 if USE_TREE_SITTER
 SUBDIRS = ts-grammars
