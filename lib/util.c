@@ -51,6 +51,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
+#include "lib/tty/key.h"  // KEY_M_CTRL
 
 /*** global variables ****************************************************************************/
 
@@ -64,11 +65,6 @@
 #endif
 
 #define TMP_SUFFIX ".tmp"
-
-#define ASCII_A    (0x40 + 1)
-#define ASCII_Z    (0x40 + 26)
-#define ASCII_a    (0x60 + 1)
-#define ASCII_z    (0x60 + 26)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -1158,13 +1154,27 @@ early_error:
 
 /* --------------------------------------------------------------------------------------------- */
 
-extern int
-ascii_alpha_to_cntrl (int ch)
+int
+keycode_to_cntrl (int ch)
 {
-    if ((ch >= ASCII_A && ch <= ASCII_Z) || (ch >= ASCII_a && ch <= ASCII_z))
-        ch &= 0x1f;
+    // Extended keys such as F_KEY(n), Page Up and Page Down are not allowed.
+    if ((ch & ~(KEY_M_CTRL | 0x7f)) != 0)
+        return -1;
 
-    return ch;
+    // User pressed Ctrl+(ch) or '\t', '\'n
+    if ((ch & KEY_M_CTRL) != 0 || ch < 0x1b)
+        return ch & 0x1f;
+
+    if (ch >= '@' && ch <= '_')
+        return ch - '@';
+
+    if (ch >= 'a' && ch <= 'z')
+        return ch - '`';
+
+    if (ch == '?')
+        return 0x7f;
+
+    return -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */

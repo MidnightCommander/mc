@@ -1030,7 +1030,13 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         if (parm == XCTRL ('q'))
         {
             quote = TRUE;
-            v = input_handle_char (in, ascii_alpha_to_cntrl (tty_getch ()));
+
+            const int control_code = keycode_to_cntrl (tty_getch ());
+
+            if (control_code != -1)
+                v = input_handle_char (in, control_code);
+            else
+                v = MSG_NOT_HANDLED;
             quote = FALSE;
             return v;
         }

@@ -2006,11 +2006,13 @@ edit_select_codepage_cmd (WEdit *edit)
 void
 edit_insert_literal_cmd (WEdit *edit)
 {
-    int char_for_insertion;
-
-    char_for_insertion =
+    const int char_for_insertion =
         editcmd_dialog_raw_key_query (_ ("Insert literal"), _ ("Press any key:"), FALSE);
-    edit_execute_key_command (edit, -1, ascii_alpha_to_cntrl (char_for_insertion));
+
+    const int control_code = keycode_to_cntrl (char_for_insertion);
+
+    if (control_code != -1)
+        edit_execute_key_command (edit, -1, control_code);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -262,9 +262,9 @@ void load_file_position (const vfs_path_t *filename_vpath, long *line, long *col
 void save_file_position (const vfs_path_t *filename_vpath, long line, long column, off_t offset,
                          GArray *bookmarks);
 
-/* if ch is in [A-Za-z], returns the corresponding control character,
- * else returns the argument. */
-extern int ascii_alpha_to_cntrl (int ch);
+/* Return the control character corresponding to key code ch,
+   or -1 if ch cannot be represented as a control character. */
+int keycode_to_cntrl (int ch);
 
 #undef Q_
 const char *Q_ (const char *s);
