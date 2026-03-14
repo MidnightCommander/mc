@@ -1,0 +1,4 @@
+# Grammar source directories are downloaded at build time.
+# Only keep infrastructure files (tree_sitter/, ts-grammar-registry.h, etc.)
+*/
+!tree_sitter/

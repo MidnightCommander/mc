@@ -1,0 +1,108 @@
+# Tree-sitter grammar mappings for MC editor syntax highlighting
+#
+# Format:
+#   file           <filename_regex>   <grammar_name> <display_name>
+#   shebang        <first_line_regex> <grammar_name> <display_name>
+#   inject         <parent_grammar>   <child_grammar> <node_type1>,<node_type2>,...
+#   inject_dynamic <parent_grammar>   <block_node> <lang_node> <content_node>
+#
+# The grammar_name is used to look up:
+#   - Static registry function: tree_sitter_<name>()
+#   - Query file:               <name>-highlights.scm (in queries/ dir)
+#
+# Static injection (inject):
+#   Runs a secondary parser on byte ranges of specific node types from
+#   the parent tree. The child grammar's highlights override the parent's.
+#   Node types support "parent/child" syntax (e.g. "script_element/raw_text").
+#   Example: inject markdown markdown_inline inline,pipe_table_cell
+#
+# Dynamic injection (inject_dynamic):
+#   For code blocks where the language varies per block. Reads the language
+#   name from <lang_node> and parses <content_node> with the matching grammar.
+#   Example: inject_dynamic markdown fenced_code_block info_string code_fence_content
+#
+# To add a new language:
+#   1. Vendor the grammar sources in src/editor/ts-grammars/<name>/
+#   2. Add the entry to ts-grammar-registry.h
+#   3. Place a <name>-highlights.scm file in the queries/ directory
+#   4. Add a "file" and/or "shebang" line here
+
+file \.(adb|ads|ada)$ ada Ada\ Program
+file \.(s|S|asm)$ asm Assembly
+file \.(awk|gawk|mawk)$ awk AWK\ Program
+file \.(sh|bash|zsh|PKGBUILD|\.bashrc|\.bash_profile|\.profile)$ bash Shell\ Script
+file \.(y|yy|yxx|yacc)$ bison Yacc/Bison
+file \.[ch]$ c C\ Program
+file (Caddyfile|\.caddyfile)$ caddy Caddyfile
+file \.(cob|cbl|cpy)$ cobol COBOL
+file (CMakeLists\.txt|\.cmake)$ cmake CMake
+file \.(cpp|cxx|cc|c\+\+|hpp|hxx|hh|h\+\+|ii?)$ cpp C++\ Program
+file \.(cs)$ c_sharp C#\ Program
+file \.(css)$ css CSS
+file \.(cu|cuh)$ cuda CUDA
+file \.(d|di)$ d D\ Program
+file \.(diff|patch)$ diff Diff
+file (Dockerfile|\.dockerfile)$ dockerfile Dockerfile
+file \.(dot|gv)$ dot Graphviz\ DOT
+file \.(erl|hrl)$ erlang Erlang\ Program
+file \.(f90|f95|f03|f08|f|for|fpp|ftn)$ fortran Fortran\ Program
+file \.(glsl|vert|frag|geom|tesc|tese|comp)$ glsl GLSL\ Shader
+file \.(go)$ go Go\ Program
+file \.(hs|lhs)$ haskell Haskell\ Program
+file \.(tf|tfvars|hcl)$ hcl Terraform/HCL
+file \.(html?|xhtml)$ html HTML
+inject html javascript script_element/raw_text
+inject html css style_element/raw_text
+file \.(idl)$ idl IDL
+file \.(ini|cfg|inf)$ ini INI\ File
+file \.(java)$ java Java\ Program
+file \.(js|mjs|cjs|jsx)$ javascript JavaScript\ Program
+file \.(json|jsonc)$ json JSON
+file \.(kt|kts)$ kotlin Kotlin\ Program
+file \.(lisp|cl|lsp|el|asd)$ commonlisp Lisp
+file \.(lua)$ lua Lua\ Program
+file (Makefile|makefile|GNUmakefile|\.mk)$ make Makefile
+file \.(md|markdown|mkd)$ markdown Markdown
+inject markdown markdown_inline inline,pipe_table_cell
+inject_dynamic markdown fenced_code_block info_string code_fence_content
+
+file \.(m|octave)$ matlab MATLAB/Octave
+file (meson\.build|meson_options\.txt)$ meson Meson\ Build
+file (muttrc|\.muttrc|\.neomuttrc|neomuttrc)$ muttrc Muttrc
+file \.(ml|mli)$ ocaml OCaml\ Program
+file \.(pas|pp|lpr|dpr)$ pascal Pascal\ Program
+file \.(pl|pm|t)$ perl Perl\ Program
+file \.(php|phtml)$ php PHP\ Program
+file \.(po|pot)$ po PO\ Translation
+file \.(properties)$ properties Java\ Properties
+file \.(proto)$ proto Protocol\ Buffers
+file \.(py|pyw|pyi)$ python Python\ Program
+file \.(r|R|Rmd)$ r R\ Program
+file \.(rb|rake|gemspec|Rakefile|Gemfile)$ ruby Ruby\ Program
+file \.(rs)$ rust Rust\ Program
+file \.(scala|sc|sbt)$ scala Scala\ Program
+file \.(st)$ smalltalk Smalltalk
+file \.(sql)$ sql SQL
+file \.(strace)$ strace Strace\ Output
+file \.(swift)$ swift Swift\ Program
+file \.(tcl|tk|wish|exp)$ tcl Tcl\ Program
+file \.(toml)$ toml TOML
+file \.(ttl|turtle)$ turtle RDF\ Turtle
+file \.(ts|mts|cts|tsx)$ typescript TypeScript\ Program
+file \.(v|vh|sv|svh)$ verilog Verilog/SystemVerilog
+file \.(vhd|vhdl)$ vhdl VHDL\ Program
+file \.(xml|xsl|xslt|xsd|svg|rss|atom|plist)$ xml XML
+file \.(ya?ml)$ yaml YAML
+
+# Shebang-based detection (for files without recognized extensions)
+# Note: MC's regex engine does not support \b or \s.
+# Spaces in patterns must be escaped as \x20 (the parser splits on whitespace).
+shebang ^#!.*[/\x20](bash|sh)(\x20|$) bash Shell\ Script
+shebang ^#!.*[/\x20]python python Python\ Program
+shebang ^#!.*[/\x20]perl perl Perl\ Program
+shebang ^#!.*[/\x20]ruby ruby Ruby\ Program
+shebang ^#!.*[/\x20]lua lua Lua\ Program
+shebang ^#!.*[/\x20]tclsh tcl Tcl\ Program
+shebang ^#!.*[/\x20]node javascript JavaScript\ Program
+shebang ^#!.*[/\x20]awk awk AWK\ Program
+shebang ^#!.*[/\x20]php php PHP\ Program

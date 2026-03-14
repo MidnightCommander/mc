@@ -215,6 +215,11 @@ void edit_free_syntax_rules (WEdit *edit);
 MC_MOCKABLE int edit_get_syntax_color (WEdit *edit, off_t byte_index);
 void edit_syntax_dialog (WEdit *edit);
 
+#ifdef HAVE_TREE_SITTER
+void edit_syntax_ts_notify_edit (WEdit *edit, off_t start_byte, off_t old_end_byte,
+                                 off_t new_end_byte);
+#endif
+
 void book_mark_insert (WEdit *edit, long line, int c);
 gboolean book_mark_query_color (WEdit *edit, long line, int c);
 struct edit_book_mark_t *book_mark_find (WEdit *edit, long line);
