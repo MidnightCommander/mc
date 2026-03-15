@@ -1901,7 +1901,7 @@ invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
         // some sort of error.
         if (use_persistent_buffer)
             clear_cwd_pipe ();
-        else if (mc_global.mc_run_mode == MC_RUN_FULL)
+        else
         {
             /* We don't need to call feed_subshell here if we are using fish, because of a
              * quirk in the behavior of that particular shell. */
