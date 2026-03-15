@@ -1492,12 +1492,12 @@ edit_get_syntax_color (WEdit *edit, off_t byte_index)
         return 0;
 
 #ifdef HAVE_TREE_SITTER
-    if (edit_options.syntax_highlighting && edit->ts_active && byte_index < edit->buffer.size)
+    if (edit_options.syntax_highlighting && edit->ts.active && byte_index < edit->buffer.size)
     {
         // Check if we need to rebuild the highlight cache
         // Use a window of +/- 8K around the requested byte
-        if (edit->ts_highlights_start < 0 || byte_index < edit->ts_highlights_start
-            || byte_index >= edit->ts_highlights_end)
+        if (edit->ts.highlights_start < 0 || byte_index < edit->ts.highlights_start
+            || byte_index >= edit->ts.highlights_end)
         {
             off_t range_start = byte_index - 8192;
             off_t range_end = byte_index + 8192;
