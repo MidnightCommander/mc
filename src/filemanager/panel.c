@@ -159,6 +159,7 @@ static const char *string_file_group (const file_entry_t *fe, int len);
 static const char *string_marked (const file_entry_t *fe, int len);
 static const char *string_space (const file_entry_t *fe, int len);
 static const char *string_dot (const file_entry_t *fe, int len);
+static const char *string_file_ext (const file_entry_t *fe, int len);
 
 /*** file scope variables ************************************************************************/
 
@@ -178,9 +179,7 @@ static panel_field_t panel_fields[] = {
     { "extension", 12, TRUE, J_LEFT_FIT,
       // TRANSLATORS: one single character to represent 'extension' sort mode
       // TRANSLATORS: no need to translate 'sort', it's just a context prefix
-      N_ ("sort|e"), N_ ("E&xtension"), TRUE, FALSE,
-      string_file_name,  // TODO: string_file_ext
-      (GCompareFunc) sort_ext },
+      N_ ("sort|e"), N_ ("E&xtension"), TRUE, FALSE, string_file_ext, (GCompareFunc) sort_ext },
     { "size", 7, FALSE, J_RIGHT,
       // TRANSLATORS: one single character to represent 'size' sort mode
       // TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -349,6 +348,25 @@ string_file_name (const file_entry_t *fe, int len)
     (void) len;
 
     mc_g_string_copy (string_file_name_buffer, fe->fname);
+
+    return string_file_name_buffer->str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const char *
+string_file_ext (const file_entry_t *fe, int len)
+{
+    const char *ext;
+
+    (void) len;
+
+    ext = extension (fe->fname->str);
+
+    if (ext[0] == '\0' || S_ISDIR (fe->st.st_mode))
+        g_string_truncate (string_file_name_buffer, 0);
+    else
+        g_string_assign (string_file_name_buffer, ext);
 
     return string_file_name_buffer->str;
 }
