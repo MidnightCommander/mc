@@ -1789,19 +1789,10 @@ edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
         const gboolean status_after_ok = mc_stat (block_file_vpath, &status_after) == 0;
 
         // was block file created or modified by menu command?
-        // Use nanosecond-precision mtime when available, because scripts that only
-        // rearrange bytes (e.g. word-wrap replacing spaces with newlines) produce
-        // the same file size and may finish within the same second.
         modified = (!status_before_ok && status_after_ok)
             || (status_before_ok && status_after_ok && status_after.st_size != 0
                 && (status_after.st_size != status_before.st_size
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-                    || status_after.st_mtim.tv_sec != status_before.st_mtim.tv_sec
-                    || status_after.st_mtim.tv_nsec != status_before.st_mtim.tv_nsec
-#else
-                    || status_after.st_mtime != status_before.st_mtime
-#endif
-                    ));
+                    || status_after.st_mtime != status_before.st_mtime));
     }
 
     if (modified)
