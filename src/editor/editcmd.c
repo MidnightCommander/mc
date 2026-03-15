@@ -1939,6 +1939,19 @@ edit_block_process_cmd (WEdit *edit, int macro_number)
 {
     char *fname;
     char *macros_fname = NULL;
+    off_t start_mark, end_mark;
+
+    // Save the selected block to the block file so that macro scripts
+    // referencing %b can read it. Without this, the block file does not
+    // exist when the script runs and %b points to a nonexistent file.
+    if (eval_marks (edit, &start_mark, &end_mark))
+    {
+        char *tmp;
+
+        tmp = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
+        edit_save_block (edit, tmp, start_mark, end_mark);
+        g_free (tmp);
+    }
 
     fname = g_strdup_printf ("%s.%i.sh", EDIT_HOME_MACRO_FILE, macro_number);
     macros_fname = g_build_filename (mc_config_get_data_path (), fname, (char *) NULL);
