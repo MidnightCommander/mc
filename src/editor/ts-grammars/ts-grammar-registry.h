@@ -157,6 +157,9 @@ extern const TSLanguage *tree_sitter_proto (void);
 #ifdef HAVE_GRAMMAR_PYTHON
 extern const TSLanguage *tree_sitter_python (void);
 #endif
+#ifdef HAVE_GRAMMAR_QMLJS
+extern const TSLanguage *tree_sitter_qmljs (void);
+#endif
 #ifdef HAVE_GRAMMAR_R
 extern const TSLanguage *tree_sitter_r (void);
 #endif
@@ -353,6 +356,9 @@ static const ts_grammar_entry_static_t ts_grammar_registry[] = {
 #endif
 #ifdef HAVE_GRAMMAR_PYTHON
     { "python",          tree_sitter_python },
+#endif
+#ifdef HAVE_GRAMMAR_QMLJS
+    { "qmljs",           tree_sitter_qmljs },
 #endif
 #ifdef HAVE_GRAMMAR_R
     { "r",               tree_sitter_r },
