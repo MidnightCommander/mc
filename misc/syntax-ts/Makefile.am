@@ -47,6 +47,7 @@ QUERYFILES = \
 	queries/properties-highlights.scm \
 	queries/proto-highlights.scm \
 	queries/python-highlights.scm \
+	queries/qmljs-highlights.scm \
 	queries/r-highlights.scm \
 	queries/ruby-highlights.scm \
 	queries/rust-highlights.scm \

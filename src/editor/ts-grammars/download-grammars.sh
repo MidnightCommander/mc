@@ -271,6 +271,10 @@ download smalltalk  tom95               tree-sitter-smalltalk    f5d63d37ebb135f
 # strace — pinned to commit 2025-01-14
 download strace     sigmaSd             tree-sitter-strace       ac874ddfcc08d689fee1f4533789e06d88388f29
 
+# qmljs (Qt QML) — pinned to tag 0.3.0
+download qmljs      yuja                tree-sitter-qmljs        0.3.0
+download_extra qmljs yuja tree-sitter-qmljs 0.3.0 src/typescript-scanner.h
+
 # turtle (RDF Turtle) — pinned to commit 2024-10-09
 download turtle     GordianDziwis       tree-sitter-turtle       7f789ea7ef765080f71a298fc96b7c957fa24422
 
