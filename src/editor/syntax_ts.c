@@ -627,7 +627,7 @@ ts_init_injections (WEdit *edit, const char *grammar_name)
     if (configs == NULL)
         return;
 
-    edit->ts_injections = g_array_new (FALSE, TRUE, sizeof (ts_injection_t));
+    edit->ts.injections = g_array_new (FALSE, TRUE, sizeof (ts_injection_t));
 
     for (i = 0; i < configs->len; i++)
     {
@@ -648,7 +648,7 @@ ts_init_injections (WEdit *edit, const char *grammar_name)
             cfg->block_type = NULL;     // ownership transferred
             cfg->lang_type = NULL;
             cfg->content_type = NULL;
-            g_array_append_val (edit->ts_injections, inj);
+            g_array_append_val (edit->ts.injections, inj);
         }
         else
         {
@@ -698,7 +698,7 @@ ts_init_injections (WEdit *edit, const char *grammar_name)
             inj.query = query;
             inj.node_types = cfg->node_types;
             cfg->node_types = NULL;     // ownership transferred
-            g_array_append_val (edit->ts_injections, inj);
+            g_array_append_val (edit->ts.injections, inj);
             g_free (cfg->grammar_name);
             continue;
 
@@ -710,10 +710,10 @@ ts_init_injections (WEdit *edit, const char *grammar_name)
 
     g_array_free (configs, TRUE);
 
-    if (edit->ts_injections->len == 0)
+    if (edit->ts.injections->len == 0)
     {
-        g_array_free (edit->ts_injections, TRUE);
-        edit->ts_injections = NULL;
+        g_array_free (edit->ts.injections, TRUE);
+        edit->ts.injections = NULL;
     }
 }
 
@@ -813,14 +813,14 @@ ts_init_for_file (WEdit *edit)
     }
 
     // All good -- store in edit widget
-    edit->ts_parser = parser;
-    edit->ts_tree = tree;
-    edit->ts_highlight_query = query;
-    edit->ts_highlights = g_array_new (FALSE, FALSE, sizeof (ts_highlight_entry_t));
-    edit->ts_highlights_start = -1;
-    edit->ts_highlights_end = -1;
-    edit->ts_active = TRUE;
-    edit->ts_need_reparse = FALSE;
+    edit->ts.parser = parser;
+    edit->ts.tree = tree;
+    edit->ts.highlight_query = query;
+    edit->ts.highlights = g_array_new (FALSE, FALSE, sizeof (ts_highlight_entry_t));
+    edit->ts.highlights_start = -1;
+    edit->ts.highlights_end = -1;
+    edit->ts.active = TRUE;
+    edit->ts.need_reparse = FALSE;
 
     // Try to initialize language injection (e.g., markdown inline within markdown block)
     // Failure is non-fatal — highlighting works without injection.
@@ -843,13 +843,13 @@ void
 ts_free (WEdit *edit)
 {
     // Free injection resources
-    if (edit->ts_injections != NULL)
+    if (edit->ts.injections != NULL)
     {
         guint i;
 
-        for (i = 0; i < edit->ts_injections->len; i++)
+        for (i = 0; i < edit->ts.injections->len; i++)
         {
-            ts_injection_t *inj = &g_array_index (edit->ts_injections, ts_injection_t, i);
+            ts_injection_t *inj = &g_array_index (edit->ts.injections, ts_injection_t, i);
 
             if (inj->dynamic)
             {
@@ -886,38 +886,38 @@ ts_free (WEdit *edit)
                     g_strfreev (inj->node_types);
             }
         }
-        g_array_free (edit->ts_injections, TRUE);
-        edit->ts_injections = NULL;
+        g_array_free (edit->ts.injections, TRUE);
+        edit->ts.injections = NULL;
     }
 
     // Free primary resources
-    if (edit->ts_highlight_query != NULL)
+    if (edit->ts.highlight_query != NULL)
     {
-        ts_query_delete ((TSQuery *) edit->ts_highlight_query);
-        edit->ts_highlight_query = NULL;
+        ts_query_delete ((TSQuery *) edit->ts.highlight_query);
+        edit->ts.highlight_query = NULL;
     }
 
-    if (edit->ts_tree != NULL)
+    if (edit->ts.tree != NULL)
     {
-        ts_tree_delete ((TSTree *) edit->ts_tree);
-        edit->ts_tree = NULL;
+        ts_tree_delete ((TSTree *) edit->ts.tree);
+        edit->ts.tree = NULL;
     }
 
-    if (edit->ts_parser != NULL)
+    if (edit->ts.parser != NULL)
     {
-        ts_parser_delete ((TSParser *) edit->ts_parser);
-        edit->ts_parser = NULL;
+        ts_parser_delete ((TSParser *) edit->ts.parser);
+        edit->ts.parser = NULL;
     }
 
-    if (edit->ts_highlights != NULL)
+    if (edit->ts.highlights != NULL)
     {
-        g_array_free (edit->ts_highlights, TRUE);
-        edit->ts_highlights = NULL;
+        g_array_free (edit->ts.highlights, TRUE);
+        edit->ts.highlights = NULL;
     }
 
-    edit->ts_highlights_start = -1;
-    edit->ts_highlights_end = -1;
-    edit->ts_active = FALSE;
+    edit->ts.highlights_start = -1;
+    edit->ts.highlights_end = -1;
+    edit->ts.active = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1252,7 +1252,7 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
     TSTree *tree;
     TSInput input;
 
-    if (!edit->ts_active)
+    if (!edit->ts.active)
         return;
 
     input.payload = edit;
@@ -1260,50 +1260,50 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
     input.encoding = TSInputEncodingUTF8;
 
     // Perform deferred re-parse if the tree was edited since last parse
-    if (edit->ts_need_reparse)
+    if (edit->ts.need_reparse)
     {
         TSTree *new_tree;
 
         new_tree =
-            ts_parser_parse ((TSParser *) edit->ts_parser, (TSTree *) edit->ts_tree, input);
+            ts_parser_parse ((TSParser *) edit->ts.parser, (TSTree *) edit->ts.tree, input);
         if (new_tree != NULL)
         {
-            ts_tree_delete ((TSTree *) edit->ts_tree);
-            edit->ts_tree = new_tree;
+            ts_tree_delete ((TSTree *) edit->ts.tree);
+            edit->ts.tree = new_tree;
         }
 
-        edit->ts_need_reparse = FALSE;
+        edit->ts.need_reparse = FALSE;
     }
 
-    tree = (TSTree *) edit->ts_tree;
+    tree = (TSTree *) edit->ts.tree;
 
-    g_array_set_size (edit->ts_highlights, 0);
+    g_array_set_size (edit->ts.highlights, 0);
 
     // Run the primary highlight query
-    ts_run_query_into_highlights ((TSQuery *) edit->ts_highlight_query, tree,
+    ts_run_query_into_highlights ((TSQuery *) edit->ts.highlight_query, tree,
                                  (uint32_t) range_start, (uint32_t) range_end,
-                                 edit->ts_highlights);
+                                 edit->ts.highlights);
 
     // Run injection queries if configured.
     // Each injection range is parsed separately to avoid the inline parser's
     // scanner state leaking across disjoint ranges (e.g., backtick matching
     // crossing from one list item's inline content to another's).
-    if (edit->ts_injections != NULL)
+    if (edit->ts.injections != NULL)
     {
         TSNode root;
         guint ji;
 
         root = ts_tree_root_node (tree);
 
-        for (ji = 0; ji < edit->ts_injections->len; ji++)
+        for (ji = 0; ji < edit->ts.injections->len; ji++)
         {
-            ts_injection_t *inj = &g_array_index (edit->ts_injections, ts_injection_t, ji);
+            ts_injection_t *inj = &g_array_index (edit->ts.injections, ts_injection_t, ji);
 
             if (inj->dynamic)
             {
                 ts_run_dynamic_injection (inj, root, edit, input,
                                          (uint32_t) range_start, (uint32_t) range_end,
-                                         edit->ts_highlights);
+                                         edit->ts.highlights);
             }
             else
             {
@@ -1328,7 +1328,7 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
                         ts_run_query_into_highlights ((TSQuery *) inj->query,
                                                      inject_tree,
                                                      (uint32_t) range_start, (uint32_t) range_end,
-                                                     edit->ts_highlights);
+                                                     edit->ts.highlights);
                         ts_tree_delete (inject_tree);
                     }
                 }
@@ -1338,8 +1338,8 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
         }
     }
 
-    edit->ts_highlights_start = range_start;
-    edit->ts_highlights_end = range_end;
+    edit->ts.highlights_start = range_start;
+    edit->ts.highlights_end = range_end;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1355,14 +1355,14 @@ ts_get_color_at (WEdit *edit, off_t byte_index)
     guint i;
     int color = EDITOR_NORMAL_COLOR;
 
-    if (edit->ts_highlights == NULL)
+    if (edit->ts.highlights == NULL)
         return EDITOR_NORMAL_COLOR;
 
-    for (i = 0; i < edit->ts_highlights->len; i++)
+    for (i = 0; i < edit->ts.highlights->len; i++)
     {
         ts_highlight_entry_t *e;
 
-        e = &g_array_index (edit->ts_highlights, ts_highlight_entry_t, i);
+        e = &g_array_index (edit->ts.highlights, ts_highlight_entry_t, i);
 
         if ((off_t) e->start_byte <= byte_index && byte_index < (off_t) e->end_byte)
             color = e->color;
@@ -1387,7 +1387,7 @@ edit_syntax_ts_notify_edit (WEdit *edit, off_t start_byte, off_t old_end_byte,
 {
     TSInputEdit ts_edit;
 
-    if (!edit->ts_active || edit->ts_tree == NULL || edit->ts_parser == NULL)
+    if (!edit->ts.active || edit->ts.tree == NULL || edit->ts.parser == NULL)
         return;
 
     ts_edit.start_byte = (uint32_t) start_byte;
@@ -1397,14 +1397,14 @@ edit_syntax_ts_notify_edit (WEdit *edit, off_t start_byte, off_t old_end_byte,
     ts_edit.old_end_point = (TSPoint){ 0, 0 };
     ts_edit.new_end_point = (TSPoint){ 0, 0 };
 
-    ts_tree_edit ((TSTree *) edit->ts_tree, &ts_edit);
+    ts_tree_edit ((TSTree *) edit->ts.tree, &ts_edit);
 
     // Mark tree as needing re-parse; defer actual parsing to cache rebuild
-    edit->ts_need_reparse = TRUE;
+    edit->ts.need_reparse = TRUE;
 
     // Invalidate highlight cache
-    edit->ts_highlights_start = -1;
-    edit->ts_highlights_end = -1;
+    edit->ts.highlights_start = -1;
+    edit->ts.highlights_end = -1;
 }
 
 #endif /* HAVE_TREE_SITTER */
