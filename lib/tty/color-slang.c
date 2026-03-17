@@ -233,3 +233,15 @@ tty_use_truecolors (GError **error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+tty_colorize_area (int y, int x, int rows, int cols, int color)
+{
+    if (use_colors)
+    {
+        color = tty_maybe_map_color (color);
+        SLsmg_set_color_in_region (color, y, x, rows, cols);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
