@@ -1,77 +1,84 @@
-GRAMMARS_FILE = grammars
-
-QUERYFILES = \
-	queries/ada-highlights.scm \
-	queries/asm-highlights.scm \
-	queries/awk-highlights.scm \
-	queries/bash-highlights.scm \
-	queries/bison-highlights.scm \
-	queries/c-highlights.scm \
-	queries/caddy-highlights.scm \
-	queries/cobol-highlights.scm \
-	queries/cmake-highlights.scm \
-	queries/commonlisp-highlights.scm \
-	queries/cpp-highlights.scm \
-	queries/c_sharp-highlights.scm \
-	queries/css-highlights.scm \
-	queries/cuda-highlights.scm \
-	queries/d-highlights.scm \
-	queries/diff-highlights.scm \
-	queries/dockerfile-highlights.scm \
-	queries/dot-highlights.scm \
-	queries/erlang-highlights.scm \
-	queries/fortran-highlights.scm \
-	queries/glsl-highlights.scm \
-	queries/go-highlights.scm \
-	queries/haskell-highlights.scm \
-	queries/hcl-highlights.scm \
-	queries/html-highlights.scm \
-	queries/idl-highlights.scm \
-	queries/ini-highlights.scm \
-	queries/java-highlights.scm \
-	queries/javascript-highlights.scm \
-	queries/json-highlights.scm \
-	queries/kotlin-highlights.scm \
-	queries/lua-highlights.scm \
-	queries/make-highlights.scm \
-	queries/markdown-highlights.scm \
-	queries/markdown_inline-highlights.scm \
-	queries/matlab-highlights.scm \
-	queries/meson-highlights.scm \
-	queries/muttrc-highlights.scm \
-	queries/ocaml-highlights.scm \
-	queries/pascal-highlights.scm \
-	queries/perl-highlights.scm \
-	queries/php-highlights.scm \
-	queries/po-highlights.scm \
-	queries/properties-highlights.scm \
-	queries/proto-highlights.scm \
-	queries/python-highlights.scm \
-	queries/qmljs-highlights.scm \
-	queries/r-highlights.scm \
-	queries/ruby-highlights.scm \
-	queries/rust-highlights.scm \
-	queries/scala-highlights.scm \
-	queries/smalltalk-highlights.scm \
-	queries/sql-highlights.scm \
-	queries/strace-highlights.scm \
-	queries/swift-highlights.scm \
-	queries/tcl-highlights.scm \
-	queries/toml-highlights.scm \
-	queries/turtle-highlights.scm \
-	queries/typescript-highlights.scm \
-	queries/verilog-highlights.scm \
-	queries/vhdl-highlights.scm \
-	queries/xml-highlights.scm \
-	queries/yaml-highlights.scm
+CONFIGFILES = \
+	extensions \
+	filenames \
+	shebangs \
+	display-names \
+	symbols \
+	colors.ini
 
 if USE_INTERNAL_EDIT
 syntaxtsdir =		$(pkgdatadir)/syntax-ts
-syntaxts_DATA =		$(GRAMMARS_FILE)
+dist_syntaxts_DATA =	$(CONFIGFILES)
 
 queriesdir =		$(pkgdatadir)/syntax-ts/queries
-queries_DATA =		$(QUERYFILES)
+overridedir =		$(pkgdatadir)/syntax-ts/queries-override
+
+install-data-local:
+	$(MKDIR_P) $(DESTDIR)$(queriesdir)
+	$(MKDIR_P) $(DESTDIR)$(overridedir)
+	for f in $(srcdir)/queries/*-highlights.scm $(srcdir)/queries/*-injections.scm; do \
+		test -f "$$f" && $(INSTALL_DATA) "$$f" $(DESTDIR)$(queriesdir)/; \
+	done; true
+	for f in $(srcdir)/queries-override/*-highlights.scm $(srcdir)/queries-override/*-injections.scm; do \
+		test -f "$$f" && $(INSTALL_DATA) "$$f" $(DESTDIR)$(overridedir)/; \
+	done; true
+
+uninstall-local:
+	rm -f $(DESTDIR)$(queriesdir)/*-highlights.scm
+	rm -f $(DESTDIR)$(queriesdir)/*-injections.scm
+	rm -f $(DESTDIR)$(overridedir)/*-highlights.scm
+	rm -f $(DESTDIR)$(overridedir)/*-injections.scm
+	-rmdir $(DESTDIR)$(overridedir)
+	-rmdir $(DESTDIR)$(queriesdir)
 endif
 
-EXTRA_DIST =		$(GRAMMARS_FILE) \
-			$(QUERYFILES)
+EXTRA_DIST =		$(CONFIGFILES) \
+			queries \
+			queries-override
+
+# Build an MC-ready grammar tarball from the shared download staging directory.
+# Requires: ./scripts/ts-grammars-download.sh --shared to have been run first.
+# Output: mc-ts-grammars-<platform>.tar.gz in the top build directory.
+#
+# The tarball layout:
+#   mc-ts-grammars-<platform>/
+#     lib/<lang>.so          -- grammar shared libraries (bare names)
+#     queries/<lang>-highlights.scm
+#     queries/<lang>-injections.scm  (where available)
+#     queries-override/      -- MC-specific query overrides
+dist-shared:
+	@staging="$(top_srcdir)/ts-grammars-shared"; \
+	if [ ! -d "$$staging" ]; then \
+	    echo "Error: shared grammars not found. Run first:"; \
+	    echo "  ./scripts/ts-grammars-download.sh --shared"; \
+	    exit 1; \
+	fi; \
+	arch=$$(uname -m); \
+	case "$$(uname -s)" in \
+	    Linux)  platform="$${arch}-linux" ;; \
+	    Darwin) case "$$arch" in arm64) platform="aarch64-macos" ;; *) platform="$${arch}-macos" ;; esac ;; \
+	    MINGW*) platform="$${arch}-windows" ;; \
+	    *)      platform="$${arch}-unknown" ;; \
+	esac; \
+	outdir="$(top_builddir)/mc-ts-grammars-$$platform"; \
+	rm -rf "$$outdir"; \
+	mkdir -p "$$outdir/lib" "$$outdir/queries" "$$outdir/queries-override"; \
+	count=0; \
+	for lang_dir in "$$staging"/*/; do \
+	    lang=$$(basename "$$lang_dir"); \
+	    for ext in so dylib dll; do \
+	        for lib in "$$lang_dir"/$$lang.$$ext; do \
+	            [ -f "$$lib" ] && cp "$$lib" "$$outdir/lib/"; \
+	        done; \
+	    done; \
+	    count=$$((count + 1)); \
+	done; \
+	for f in $(srcdir)/queries/*-highlights.scm $(srcdir)/queries/*-injections.scm; do \
+	    [ -f "$$f" ] && cp "$$f" "$$outdir/queries/"; \
+	done; true; \
+	for f in $(srcdir)/queries-override/*-highlights.scm $(srcdir)/queries-override/*-injections.scm; do \
+	    [ -f "$$f" ] && cp "$$f" "$$outdir/queries-override/"; \
+	done; true; \
+	(cd "$(top_builddir)" && tar czf "mc-ts-grammars-$$platform.tar.gz" "mc-ts-grammars-$$platform"); \
+	rm -rf "$$outdir"; \
+	echo "Created: $(top_builddir)/mc-ts-grammars-$$platform.tar.gz ($$count grammars)"

@@ -40,6 +40,31 @@
 #error "TEST_TS_QUERIES_DIR must be defined"
 #endif
 
+/**
+ * Find a query file. Checks source tree first, then user's installed location.
+ * Returns TRUE and fills path on success, FALSE if not found.
+ */
+static gboolean
+test_find_query_file (char *path, size_t path_size, const char *filename)
+{
+    snprintf (path, path_size, "%s/%s", TEST_TS_QUERIES_DIR, filename);
+    if (g_file_test (path, G_FILE_TEST_IS_REGULAR))
+        return TRUE;
+
+    /* Fall back to user's installed queries */
+    {
+        const char *home = g_get_home_dir ();
+        if (home != NULL)
+        {
+            snprintf (path, path_size, "%s/.local/share/mc/syntax-ts/queries/%s", home, filename);
+            if (g_file_test (path, G_FILE_TEST_IS_REGULAR))
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
 /* In shared mode, HAVE_GRAMMAR_* macros are not defined.
    Define them all to 1 so tests compile unconditionally — runtime lookup
    via ts_grammar_registry_lookup() handles missing grammars gracefully. */
@@ -130,9 +155,14 @@ test_one_query (const char *name, const TSLanguage *lang)
     if (lang == NULL || ts_language_version (lang) < TREE_SITTER_MIN_COMPATIBLE_LANGUAGE_VERSION)
         return -1;
 
-    snprintf (path, sizeof (path), "%s/%s-highlights.scm", TEST_TS_QUERIES_DIR, name);
+    {
+        char filename[256];
+        snprintf (filename, sizeof (filename), "%s-highlights.scm", name);
+        if (!test_find_query_file (path, sizeof (path), filename))
+            return -1;  /* skip, query file not available */
+    }
     if (!g_file_get_contents (path, &src, &len, NULL))
-        return 1;
+        return -1;
 
     q = ts_query_new (lang, src, (uint32_t) len, &eo, &et);
     g_free (src);
@@ -167,30 +197,46 @@ START_TEST (test_all_query_files_compile)
     }
 #else
     {
-        GDir *dir = g_dir_open (TEST_TS_QUERIES_DIR, 0, NULL);
+        /* Scan for query files in source tree and user install location */
+        const char *dirs[2];
+        char user_path[1024];
+        int d;
 
-        ck_assert_msg (dir != NULL, "Cannot open query dir");
+        dirs[0] = TEST_TS_QUERIES_DIR;
+        snprintf (user_path, sizeof (user_path), "%s/.local/share/mc/syntax-ts/queries",
+                  g_get_home_dir ());
+        dirs[1] = user_path;
 
-        const gchar *fname;
-
-        while ((fname = g_dir_read_name (dir)) != NULL)
+        for (d = 0; d < 2; d++)
         {
-            if (g_str_has_suffix (fname, "-highlights.scm"))
-            {
-                gchar *name = g_strndup (fname, strlen (fname) - strlen ("-highlights.scm"));
-                const TSLanguage *lang = ts_grammar_registry_lookup (name);
-                int rc = test_one_query (name, lang);
+            GDir *dir = g_dir_open (dirs[d], 0, NULL);
+            const gchar *fname;
 
-                if (rc >= 0)
+            if (dir == NULL)
+                continue;
+
+            while ((fname = g_dir_read_name (dir)) != NULL)
+            {
+                if (g_str_has_suffix (fname, "-highlights.scm"))
                 {
-                    tested++;
-                    if (rc == 1 && ++failed == 1)
-                        snprintf (first_fail, sizeof (first_fail), "%s", name);
+                    gchar *name = g_strndup (fname, strlen (fname) - strlen ("-highlights.scm"));
+                    const TSLanguage *lang = ts_grammar_registry_lookup (name);
+                    int rc = test_one_query (name, lang);
+
+                    if (rc >= 0)
+                    {
+                        tested++;
+                        if (rc == 1 && ++failed == 1)
+                            snprintf (first_fail, sizeof (first_fail), "%s", name);
+                    }
+                    g_free (name);
                 }
-                g_free (name);
             }
+            g_dir_close (dir);
+
+            if (tested > 0)
+                break;  /* found queries, no need to check second dir */
         }
-        g_dir_close (dir);
     }
 #endif
 
@@ -262,7 +308,8 @@ START_TEST (test_query_captures_c)
     ck_assert_msg (tree != NULL, "Parse must succeed");
 
     // Load and compile query
-    snprintf (query_path, sizeof (query_path), "%s/c-highlights.scm", TEST_TS_QUERIES_DIR);
+    ck_assert_msg (test_find_query_file (query_path, sizeof (query_path), "c-highlights.scm"),
+                   "c-highlights.scm must be readable");
     ck_assert_msg (g_file_get_contents (query_path, &query_src, &query_len, NULL),
                    "c-highlights.scm must be readable");
 
@@ -384,8 +431,9 @@ START_TEST (test_markdown_inline_injection)
     ck_assert_msg (inline_tree != NULL, "Inline parse must succeed");
 
     // Load and compile inline query
-    snprintf (query_path, sizeof (query_path), "%s/markdown_inline-highlights.scm",
-              TEST_TS_QUERIES_DIR);
+    ck_assert_msg (test_find_query_file (query_path, sizeof (query_path),
+                                        "markdown_inline-highlights.scm"),
+                   "markdown_inline-highlights.scm must be readable");
     ck_assert_msg (g_file_get_contents (query_path, &query_src, &query_len, NULL),
                    "markdown_inline-highlights.scm must be readable");
 
@@ -544,8 +592,10 @@ START_TEST (test_html_multi_injection)
                                                               (uint32_t) strlen (test_html));
                             ck_assert_msg (js_tree != NULL, "JS injection parse must succeed");
 
-                            snprintf (query_path, sizeof (query_path),
-                                      "%s/javascript-highlights.scm", TEST_TS_QUERIES_DIR);
+                            ck_assert_msg (
+                                test_find_query_file (query_path, sizeof (query_path),
+                                                     "javascript-highlights.scm"),
+                                "javascript-highlights.scm must be readable");
                             ck_assert_msg (
                                 g_file_get_contents (query_path, &query_src, &query_len, NULL),
                                 "javascript-highlights.scm must be readable");

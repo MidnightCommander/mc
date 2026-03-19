@@ -1,0 +1,20 @@
+# Tree-sitter grammar filename mappings
+#
+# Format: <grammar_name> <filename1> <filename2> ...
+# Matches exact basenames (no path component).
+
+bash .bashrc .bash_profile .profile PKGBUILD
+caddy Caddyfile
+cmake CMakeLists.txt
+dockerfile Dockerfile
+earthfile Earthfile
+editorconfig .editorconfig
+gitattributes .gitattributes
+gitignore .gitignore
+just justfile Justfile
+make Makefile makefile GNUmakefile
+meson meson.build meson_options.txt
+muttrc muttrc .muttrc .neomuttrc neomuttrc
+ruby Vagrantfile Gemfile Rakefile
+tmux .tmux.conf
+zsh .zshrc .zshenv .zprofile .zlogin .zlogout

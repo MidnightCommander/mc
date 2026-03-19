@@ -53,7 +53,7 @@ shared-modules: check-grammar-sources $(OBJECTS)
 		echo "  LINK     $$lang.so"; \
 		$(LIBTOOL) --tag=$$tag --mode=link $$linker $(LDFLAGS) \
 			-module -avoid-version -rpath $(TREE_SITTER_GRAMMAR_LIBDIR) \
-			$(TREE_SITTER_LIBS) -o mc-ts-$$lang.la $$objs || exit 1; \
+			$(TREE_SITTER_LIBS) -o $$lang.la $$objs || exit 1; \
 	done
 
 # Pattern rules for compiling grammar sources
@@ -79,7 +79,7 @@ install-exec-static:
 install-exec-shared:
 	$(INSTALL) -d $(DESTDIR)$(TREE_SITTER_GRAMMAR_LIBDIR)
 	@for lang in $(TS_GRAMMAR_DIRS); do \
-		$(INSTALL) -m 755 .libs/mc-ts-$$lang.so $(DESTDIR)$(TREE_SITTER_GRAMMAR_LIBDIR)/mc-ts-$$lang.so; \
+		$(INSTALL) -m 755 .libs/$$lang.so $(DESTDIR)$(TREE_SITTER_GRAMMAR_LIBDIR)/$$lang.so; \
 	done
 
 # ============================================================================
@@ -92,7 +92,7 @@ clean-local:
 		rm -rf "$$lang/.libs"; \
 	done
 	rm -f libtsgrammars.la
-	rm -f mc-ts-*.la
+	rm -f *.la
 	rm -rf .libs
 
 distclean-local:
