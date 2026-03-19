@@ -1,0 +1,4 @@
+# Query files are downloaded at build time, not stored in git.
+# For static mode: ./scripts/ts-grammars-download.sh --source
+# For shared mode: installed from the grammar tarball.
+*.scm

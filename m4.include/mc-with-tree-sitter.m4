@@ -37,7 +37,7 @@ AC_DEFUN([mc_WITH_TREE_SITTER], [
             AC_DEFINE([TREE_SITTER_SHARED], [1], [Define if tree-sitter grammars are loaded as shared modules])
             PKG_CHECK_MODULES([GMODULE], [gmodule-2.0], [],
                 [AC_MSG_ERROR([gmodule-2.0 required for shared tree-sitter grammars (use --with-tree-sitter-static to avoid)])])
-            TREE_SITTER_BUILD_TARGET="shared-modules"
+            TREE_SITTER_BUILD_TARGET=""
             TREE_SITTER_BUILD_MODE="shared"
             dnl Resolve libdir for use in Makefile (which doesn't have automake's variable chain)
             eval "ts_libdir=\"$libdir\""
@@ -70,89 +70,83 @@ Valid grammars: $all_ts_grammars]) ;;
             done
         fi
 
-        dnl Build source/object file lists, -D flags, shared lib list, and grammar dir list
         TREE_SITTER_GRAMMAR_SOURCES=""
         TREE_SITTER_GRAMMAR_OBJECTS=""
         TREE_SITTER_GRAMMAR_DEFS=""
         TREE_SITTER_SHARED_LIBS=""
         TREE_SITTER_GRAMMARS=""
-        ts_need_cxx=no
-        for g in $tree_sitter_grammars; do
-            TREE_SITTER_GRAMMAR_SOURCES="$TREE_SITTER_GRAMMAR_SOURCES $g/parser.c"
-            TREE_SITTER_GRAMMAR_OBJECTS="$TREE_SITTER_GRAMMAR_OBJECTS $g/parser.lo"
-            case " $ts_scanner_c " in
-                *" $g "*)
-                    TREE_SITTER_GRAMMAR_SOURCES="$TREE_SITTER_GRAMMAR_SOURCES $g/scanner.c"
-                    TREE_SITTER_GRAMMAR_OBJECTS="$TREE_SITTER_GRAMMAR_OBJECTS $g/scanner.lo" ;;
-            esac
-            case " $ts_scanner_cc " in
-                *" $g "*)
-                    TREE_SITTER_GRAMMAR_SOURCES="$TREE_SITTER_GRAMMAR_SOURCES $g/scanner.cc"
-                    TREE_SITTER_GRAMMAR_OBJECTS="$TREE_SITTER_GRAMMAR_OBJECTS $g/scanner.lo"
-                    ts_need_cxx=yes ;;
-            esac
-            if test x"$with_tree_sitter_static" = xyes; then
+        TREE_SITTER_LIBS="-ltree-sitter"
+        TREE_SITTER_CFLAGS=""
+
+        if test x"$with_tree_sitter_static" = xyes; then
+            dnl Static mode: build source/object file lists and -D flags
+            ts_need_cxx=no
+            for g in $tree_sitter_grammars; do
+                TREE_SITTER_GRAMMAR_SOURCES="$TREE_SITTER_GRAMMAR_SOURCES $g/parser.c"
+                TREE_SITTER_GRAMMAR_OBJECTS="$TREE_SITTER_GRAMMAR_OBJECTS $g/parser.lo"
+                case " $ts_scanner_c " in
+                    *" $g "*)
+                        TREE_SITTER_GRAMMAR_SOURCES="$TREE_SITTER_GRAMMAR_SOURCES $g/scanner.c"
+                        TREE_SITTER_GRAMMAR_OBJECTS="$TREE_SITTER_GRAMMAR_OBJECTS $g/scanner.lo" ;;
+                esac
+                case " $ts_scanner_cc " in
+                    *" $g "*)
+                        TREE_SITTER_GRAMMAR_SOURCES="$TREE_SITTER_GRAMMAR_SOURCES $g/scanner.cc"
+                        TREE_SITTER_GRAMMAR_OBJECTS="$TREE_SITTER_GRAMMAR_OBJECTS $g/scanner.lo"
+                        ts_need_cxx=yes ;;
+                esac
                 upper=`echo "$g" | tr 'abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'`
                 TREE_SITTER_GRAMMAR_DEFS="$TREE_SITTER_GRAMMAR_DEFS -DHAVE_GRAMMAR_${upper}=1"
+                TREE_SITTER_GRAMMARS="$TREE_SITTER_GRAMMARS $g"
+            done
+            dnl Remove leading spaces
+            TREE_SITTER_GRAMMAR_SOURCES=`echo $TREE_SITTER_GRAMMAR_SOURCES`
+            TREE_SITTER_GRAMMAR_OBJECTS=`echo $TREE_SITTER_GRAMMAR_OBJECTS`
+            TREE_SITTER_GRAMMAR_DEFS=`echo $TREE_SITTER_GRAMMAR_DEFS`
+            TREE_SITTER_GRAMMARS=`echo $TREE_SITTER_GRAMMARS`
+            if test x"$ts_need_cxx" = xyes; then
+                TREE_SITTER_LIBS="-ltree-sitter -lstdc++"
             fi
-            TREE_SITTER_SHARED_LIBS="$TREE_SITTER_SHARED_LIBS mc-ts-$g.la"
-            TREE_SITTER_GRAMMARS="$TREE_SITTER_GRAMMARS $g"
-        done
-        dnl Remove leading spaces
-        TREE_SITTER_GRAMMAR_SOURCES=`echo $TREE_SITTER_GRAMMAR_SOURCES`
-        TREE_SITTER_GRAMMAR_OBJECTS=`echo $TREE_SITTER_GRAMMAR_OBJECTS`
-        TREE_SITTER_GRAMMAR_DEFS=`echo $TREE_SITTER_GRAMMAR_DEFS`
-        TREE_SITTER_SHARED_LIBS=`echo $TREE_SITTER_SHARED_LIBS`
-        TREE_SITTER_GRAMMARS=`echo $TREE_SITTER_GRAMMARS`
+        fi
+        dnl Shared mode: no grammar compilation. .so files are loaded at runtime.
 
         AC_SUBST([TREE_SITTER_GRAMMAR_SOURCES])
         AC_SUBST([TREE_SITTER_GRAMMAR_OBJECTS])
         AC_SUBST([TREE_SITTER_GRAMMAR_DEFS])
         AC_SUBST([TREE_SITTER_SHARED_LIBS])
         AC_SUBST([TREE_SITTER_GRAMMARS])
-
-        if test x"$ts_need_cxx" = xyes; then
-            TREE_SITTER_LIBS="-ltree-sitter -lstdc++"
-        else
-            TREE_SITTER_LIBS="-ltree-sitter"
-        fi
-        TREE_SITTER_CFLAGS=""
         AC_SUBST([TREE_SITTER_LIBS])
         AC_SUBST([TREE_SITTER_CFLAGS])
 
-        ts_grammar_count=`echo $tree_sitter_grammars | wc -w | tr -d ' '`
-        if test x"$with_tree_sitter_grammars" = xall; then
-            AC_MSG_NOTICE([tree-sitter: enabled ($TREE_SITTER_BUILD_MODE) with all $ts_grammar_count grammars])
+        if test x"$with_tree_sitter_static" = xyes; then
+            ts_grammar_count=`echo $tree_sitter_grammars | wc -w | tr -d ' '`
+            if test x"$with_tree_sitter_grammars" = xall; then
+                AC_MSG_NOTICE([tree-sitter: enabled (static) with all $ts_grammar_count grammars])
+            else
+                AC_MSG_NOTICE([tree-sitter: enabled (static) with $ts_grammar_count grammars: $TREE_SITTER_GRAMMARS])
+            fi
         else
-            AC_MSG_NOTICE([tree-sitter: enabled ($TREE_SITTER_BUILD_MODE) with $ts_grammar_count grammars: $TREE_SITTER_GRAMMARS])
+            AC_MSG_NOTICE([tree-sitter: enabled (shared) -- grammar .so files loaded at runtime])
         fi
 
-        dnl Auto-download missing grammar sources
-        ts_grammars_missing=""
-        for g in $tree_sitter_grammars; do
-            if test ! -f "$srcdir/src/editor/ts-grammars/$g/parser.c"; then
-                ts_grammars_missing="$ts_grammars_missing $g"
+        dnl Check that grammar files exist
+        ts_grammars_found=no
+        if test x"$with_tree_sitter_static" = xyes; then
+            dnl Static: check for at least one grammar source dir
+            for g in $tree_sitter_grammars; do
+                if test -f "$srcdir/src/editor/ts-grammars/$g/parser.c"; then
+                    ts_grammars_found=yes
+                    break
+                fi
+            done
+            if test x"$ts_grammars_found" = xno; then
+                AC_MSG_ERROR([tree-sitter grammar sources not found. Run:
+  ./scripts/ts-grammars-download.sh --source])
             fi
-        done
-
-        if test -n "$ts_grammars_missing"; then
-            ts_grammars_dir="$srcdir/src/editor/ts-grammars"
-            if test -n "$TREE_SITTER_GRAMMARS_DIR"; then
-                AC_MSG_NOTICE([copying missing grammar sources from $TREE_SITTER_GRAMMARS_DIR...])
-                for g in $ts_grammars_missing; do
-                    if test -d "$TREE_SITTER_GRAMMARS_DIR/$g"; then
-                        mkdir -p "$ts_grammars_dir/$g"
-                        cp -a "$TREE_SITTER_GRAMMARS_DIR/$g"/* "$ts_grammars_dir/$g/"
-                    else
-                        AC_MSG_ERROR([grammar $g not found in $TREE_SITTER_GRAMMARS_DIR])
-                    fi
-                done
-            else
-                AC_MSG_NOTICE([downloading missing grammar sources...])
-                (cd "$ts_grammars_dir" && $SHELL download-grammars.sh $ts_grammars_missing) || \
-                    AC_MSG_ERROR([failed to download grammar sources.
-For offline builds, set TREE_SITTER_GRAMMARS_DIR=/path/to/grammars])
-            fi
+        else
+            dnl Shared mode: grammars loaded at runtime, no compile-time check needed.
+            dnl Grammar .so files are an external dependency.
+            ts_grammars_found=yes
         fi
     else
         AC_MSG_NOTICE([tree-sitter syntax highlighting disabled])
