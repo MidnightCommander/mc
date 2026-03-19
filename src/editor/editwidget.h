@@ -151,7 +151,9 @@ struct WEdit
         GArray *highlights;        // array of ts_highlight_entry_t (start, end, color)
         off_t highlights_start;    // byte range start of cached highlights
         off_t highlights_end;      // byte range end of cached highlights
-        GArray *injections;        // array of ts_injection_t, or NULL if none
+        char *grammar_name;              // grammar name (for per-grammar color lookup)
+        void *injection_query;           // TSQuery* for injections.scm
+        GHashTable *injection_lang_cache; // lang name -> ts_dynamic_lang_t*
         gboolean active;           // TRUE if tree-sitter is being used
         gboolean need_reparse;     // TRUE if tree needs re-parsing before use
     } ts;

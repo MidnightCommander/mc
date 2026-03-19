@@ -56,10 +56,11 @@ edit_syntax_ts_LDADD = \
 	$(GLIB_LIBS) \
 	@CHECK_LIBS@
 else
-# Shared mode: point TS_GRAMMAR_LIBDIR to the build tree's .libs/
+# Shared mode: point TS_GRAMMAR_LIBDIR to the build tree
+# (g_module_open automatically looks in .libs/ for libtool modules)
 edit_syntax_ts_CPPFLAGS = \
 	-DTEST_TS_QUERIES_DIR=\"$(abs_top_srcdir)/misc/syntax-ts/queries\" \
-	-DTS_GRAMMAR_LIBDIR=\"$(abs_top_builddir)/src/editor/ts-grammars/.libs\" \
+	-DTS_GRAMMAR_LIBDIR=\"$(abs_top_builddir)/src/editor/ts-grammars\" \
 	$(GLIB_CFLAGS) \
 	$(TREE_SITTER_CFLAGS) \
 	$(GMODULE_CFLAGS) \

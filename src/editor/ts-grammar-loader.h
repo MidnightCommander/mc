@@ -14,17 +14,8 @@
 #include <gmodule.h>
 #include <tree_sitter/api.h>
 
-/*** Grammar name -> symbol name overrides for irregular naming ***/
-
-static const struct
-{
-    const char *name;
-    const char *symbol;
-} ts_grammar_symbol_overrides[] = {
-    { "cobol", "tree_sitter_COBOL" },
-    { "commonlisp", "tree_sitter_commonlisp" },
-    { NULL, NULL }
-};
+/* Implemented in syntax_ts.c -- reads grammar config files */
+char *ts_config_lookup_by_grammar (const char *config_name, const char *grammar_name);
 
 /*** Cached loaded modules ***/
 
@@ -47,10 +38,9 @@ ts_grammar_registry_lookup (const char *name)
 {
     ts_loaded_grammar_t *entry;
     char *module_path;
-    GModule *module;
+    GModule *module = NULL;
     char *symbol_name;
     gpointer symbol;
-    int i;
 
     if (ts_loaded_grammars == NULL)
         ts_loaded_grammars = g_hash_table_new (g_str_hash, g_str_equal);
@@ -60,7 +50,8 @@ ts_grammar_registry_lookup (const char *name)
     if (entry != NULL)
         return entry->func != NULL ? entry->func () : NULL;
 
-    /* Try to load the module.  Module files are named mc-ts-<name>.so.
+    /* Try to load the module.  Module files are named <name>.so/.dylib/.dll.
+       g_module_open() appends the platform suffix automatically when omitted.
        Check user-local path first (~/.local/lib/mc/ts-grammars/),
        then the system path (TS_GRAMMAR_LIBDIR). */
     {
@@ -68,7 +59,7 @@ ts_grammar_registry_lookup (const char *name)
 
         if (home != NULL)
         {
-            module_path = g_strdup_printf ("%s/.local/lib/mc/ts-grammars/mc-ts-%s.so", home, name);
+            module_path = g_strdup_printf ("%s/.local/lib/mc/ts-grammars/%s", home, name);
             module = g_module_open (module_path, G_MODULE_BIND_LAZY);
             g_free (module_path);
         }
@@ -76,7 +67,7 @@ ts_grammar_registry_lookup (const char *name)
 
     if (module == NULL)
     {
-        module_path = g_strdup_printf ("%s/mc-ts-%s.so", TS_GRAMMAR_LIBDIR, name);
+        module_path = g_strdup_printf ("%s/%s", TS_GRAMMAR_LIBDIR, name);
         module = g_module_open (module_path, G_MODULE_BIND_LAZY);
         g_free (module_path);
     }
@@ -89,18 +80,19 @@ ts_grammar_registry_lookup (const char *name)
         return NULL;
     }
 
-    /* Determine the symbol name */
-    symbol_name = NULL;
-    for (i = 0; ts_grammar_symbol_overrides[i].name != NULL; i++)
+    /* Determine the symbol name from the symbols config file.
+       Default is tree_sitter_<name>. Override if symbols config has an entry. */
     {
-        if (strcmp (ts_grammar_symbol_overrides[i].name, name) == 0)
+        char *override = ts_config_lookup_by_grammar ("symbols", name);
+
+        if (override != NULL)
         {
-            symbol_name = g_strdup (ts_grammar_symbol_overrides[i].symbol);
-            break;
+            symbol_name = g_strdup_printf ("tree_sitter_%s", override);
+            g_free (override);
         }
+        else
+            symbol_name = g_strdup_printf ("tree_sitter_%s", name);
     }
-    if (symbol_name == NULL)
-        symbol_name = g_strdup_printf ("tree_sitter_%s", name);
 
     if (!g_module_symbol (module, symbol_name, &symbol))
     {

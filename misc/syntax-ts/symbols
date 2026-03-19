@@ -1,0 +1,14 @@
+# Tree-sitter grammar symbol overrides
+#
+# Format: <grammar_name> <symbol_suffix>
+# The default symbol is tree_sitter_<grammar_name>().
+# Only grammars that don't follow this convention need entries here.
+
+cobol COBOL
+cql cgsql
+dtd xml
+html_blade blade
+lua nlua
+robots robots_txt
+tsx typescript
+vbnet tree_sitter_vb_dotnet

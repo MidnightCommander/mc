@@ -40,7 +40,6 @@
 #endif
 
 #include "lib/global.h"
-#include "lib/search.h"   // mc_search
 #include "lib/skin.h"
 #include "lib/fileloc.h"  // EDIT_SYNTAX_DIR, EDIT_SYNTAX_TS_DIR
 #include "lib/strutil.h"  // utf string functions
@@ -71,80 +70,16 @@ typedef struct
     void *query;            // TSQuery*
 } ts_dynamic_lang_t;
 
-// A single injection context: parser + query + node types to inject into
-typedef struct
-{
-    gboolean dynamic;       // FALSE = static injection, TRUE = dynamic (per-block language)
-
-    // Static injection fields (dynamic == FALSE):
-    void *parser;           // TSParser* for the injected language
-    void *query;            // TSQuery* for the injected language
-    char **node_types;      // NULL-terminated list of parent node types to inject into
-
-    // Dynamic injection fields (dynamic == TRUE):
-    char *block_type;       // parent node type (e.g. "fenced_code_block")
-    char *lang_type;        // child node containing language name (e.g. "info_string")
-    char *content_type;     // child node containing code (e.g. "code_fence_content")
-    GHashTable *lang_cache; // language name -> ts_dynamic_lang_t*
-} ts_injection_t;
-
-// mapping from tree-sitter capture name to MC color
-typedef struct
-{
-    const char *capture_name;
-    const char *fg;
-    const char *attrs;
-} ts_color_mapping_t;
-
 
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 
-// Default color theme for tree-sitter highlight capture names.
-// Colors are chosen to match MC's default syntax highlighting (blue background skin).
-static const ts_color_mapping_t ts_default_colors[] = {
-    { "keyword", "yellow", NULL },
-    { "keyword.other", "white", NULL },            // Lua, AWK, Pascal keywords
-    { "keyword.control", "brightmagenta", NULL },  // PHP keywords
-    { "keyword.directive", "magenta", NULL },      // Makefile directives
-    { "function", "brightcyan", NULL },
-    { "function.special", "brightred", NULL },     // preprocessor macros
-    { "function.builtin", "brown", NULL },         // Go builtins
-    { "function.macro", "brightmagenta", NULL },   // Rust macros
-    { "type", "yellow", NULL },
-    { "type.builtin", "brightgreen", NULL },       // Go builtin types
-    { "string", "green", NULL },
-    { "string.special", "brightgreen", NULL },     // char literals, escape sequences
-    { "number", "lightgray", NULL },
-    { "number.builtin", "brightgreen", NULL },     // JSON/JS/Rust/Go numbers
-    { "comment", "brown", NULL },
-    { "comment.special", "brightgreen", NULL },    // XML comments
-    { "comment.error", "red", NULL },              // Swift comments
-    { "constant", "lightgray", NULL },
-    { "constant.builtin", "brightmagenta", NULL },
-    { "variable", NULL, NULL },                    // default color
-    { "variable.builtin", "brightred", NULL },     // self, $vars
-    { "variable.special", "brightgreen", NULL },   // shell $() expansions
-    { "operator", "brightcyan", NULL },
-    { "operator.word", "yellow", NULL },           // Python/Ruby word operators
-    { "delimiter", "brightcyan", NULL },
-    { "delimiter.special", "brightmagenta", NULL }, // semicolons
-    { "property", "brightcyan", NULL },
-    { "property.key", "yellow", NULL },            // INI/properties keys
-    { "label", "cyan", NULL },
-    { "tag", "brightcyan", NULL },                 // HTML tags
-    { "tag.special", "white", NULL },              // XML tags
-    { "markup.bold", "brightmagenta", NULL },        // markdown bold
-    { "markup.italic", "magenta", NULL },            // markdown italic
-    { "markup.addition", "brightgreen", NULL },    // diff additions
-    { "markup.deletion", "brightred", NULL },      // diff deletions
-    { "markup.heading", "brightmagenta", NULL },   // diff file headers
-    { NULL, NULL, NULL }
-};
+/* Color mappings loaded from colors.ini.
+   Key: "section:capture_name" (e.g., "default:keyword", "markdown:comment")
+   Value: GINT_TO_POINTER(color_pair_id) */
+static GHashTable *ts_color_map = NULL;
 
-// Config file name for tree-sitter grammar mappings
-#define TS_GRAMMARS_FILE "grammars"
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -173,26 +108,193 @@ ts_input_read (void *payload, uint32_t byte_index, TSPoint position, uint32_t *b
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Allocate an MC color pair for a tree-sitter capture name.
- * Looks up the capture name in the default color mapping table.
+ * Parse a color spec "foreground;background" and allocate an MC color pair.
+ * A foreground of "-" means use the default color. Returns the color pair ID.
  */
 static int
-ts_capture_name_to_color (const char *capture_name)
+ts_alloc_color_from_spec (const char *spec)
 {
-    const ts_color_mapping_t *m;
+    char *buf, *fg, *bg, *semi;
     tty_color_pair_t color;
+    int result;
 
-    for (m = ts_default_colors; m->capture_name != NULL; m++)
+    buf = g_strdup (spec);
+    g_strstrip (buf);
+
+    semi = strchr (buf, ';');
+    if (semi != NULL)
     {
-        if (strcmp (m->capture_name, capture_name) == 0)
-        {
-            if (m->fg == NULL)
-                return EDITOR_NORMAL_COLOR;
+        *semi = '\0';
+        fg = buf;
+        bg = semi + 1;
+        if (*bg == '\0')
+            bg = NULL;
+    }
+    else
+    {
+        fg = buf;
+        bg = NULL;
+    }
 
-            color.fg = m->fg;
-            color.bg = NULL;
-            color.attrs = m->attrs;
-            return this_try_alloc_color_pair (&color);
+    if (fg != NULL && strcmp (fg, "-") == 0)
+        fg = NULL;
+
+    if (fg == NULL && bg == NULL)
+        result = EDITOR_NORMAL_COLOR;
+    else
+    {
+        color.fg = fg;
+        color.bg = bg;
+        color.attrs = NULL;
+        result = this_try_alloc_color_pair (&color);
+    }
+
+    g_free (buf);
+    return result;
+}
+
+/**
+ * Load the colors.ini config file. Uses GKeyFile (INI format).
+ * Sections: [default] for global colors, [grammar_name] for overrides.
+ * User file takes precedence over system file (loaded first).
+ */
+static void
+ts_load_color_config (void)
+{
+    const char *dirs[2];
+    int d;
+
+    if (ts_color_map != NULL)
+        return;
+
+    ts_color_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+    dirs[0] = mc_config_get_data_path ();
+    dirs[1] = mc_global.share_data_dir;
+
+    /* Load system file first, then user file overwrites */
+    for (d = 1; d >= 0; d--)
+    {
+        GKeyFile *kf;
+        char *path;
+        gchar **groups;
+        gsize g_count;
+        gsize gi;
+
+        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, "colors.ini", (char *) NULL);
+        kf = g_key_file_new ();
+
+        if (!g_key_file_load_from_file (kf, path, G_KEY_FILE_NONE, NULL))
+        {
+            g_key_file_free (kf);
+            g_free (path);
+            continue;
+        }
+        g_free (path);
+
+        groups = g_key_file_get_groups (kf, &g_count);
+        for (gi = 0; gi < g_count; gi++)
+        {
+            gchar **keys;
+            gsize k_count;
+            gsize ki;
+
+            keys = g_key_file_get_keys (kf, groups[gi], &k_count, NULL);
+            if (keys == NULL)
+                continue;
+
+            for (ki = 0; ki < k_count; ki++)
+            {
+                gchar *value;
+                char *map_key;
+                int color_pair;
+
+                value = g_key_file_get_value (kf, groups[gi], keys[ki], NULL);
+                if (value == NULL)
+                    continue;
+
+                color_pair = ts_alloc_color_from_spec (value);
+
+                map_key = g_strdup_printf ("%s:%s", groups[gi], keys[ki]);
+                g_free (value);
+                g_hash_table_insert (ts_color_map, map_key, GINT_TO_POINTER (color_pair));
+            }
+
+            g_strfreev (keys);
+        }
+
+        g_strfreev (groups);
+        g_key_file_free (kf);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Look up the color for a tree-sitter capture name.
+ * Uses longest-prefix matching: tries the full name first, then strips
+ * the last ".suffix" and retries until a match is found or exhausted.
+ *
+ * Lookup order for each prefix:
+ *   1. [grammar_name]:capture (per-grammar override)
+ *   2. [default]:capture (global default)
+ */
+static int
+ts_capture_name_to_color (const char *capture_name, const char *grammar_name)
+{
+    char *name;
+    char *dot;
+
+    if (ts_color_map == NULL)
+        return EDITOR_NORMAL_COLOR;
+
+    name = g_strdup (capture_name);
+
+    for (;;)
+    {
+        gpointer value;
+        char *key;
+
+        /* Try grammar-specific override first */
+        if (grammar_name != NULL)
+        {
+            key = g_strdup_printf ("%s:%s", grammar_name, name);
+            if (g_hash_table_lookup_extended (ts_color_map, key, NULL, &value))
+            {
+                g_free (key);
+                g_free (name);
+                return GPOINTER_TO_INT (value);
+            }
+            g_free (key);
+        }
+
+        /* Try default section */
+        key = g_strdup_printf ("default:%s", name);
+        if (g_hash_table_lookup_extended (ts_color_map, key, NULL, &value))
+        {
+            g_free (key);
+            g_free (name);
+            return GPOINTER_TO_INT (value);
+        }
+        g_free (key);
+
+        /* Strip the last .suffix and retry */
+        dot = strrchr (name, '.');
+        if (dot == NULL)
+            break;
+        *dot = '\0';
+    }
+
+    g_free (name);
+
+    {
+        FILE *dbg = fopen ("/tmp/ts_color_debug.txt", "a");
+        if (dbg != NULL)
+        {
+            fprintf (dbg, "UNRESOLVED: @%s grammar=%s hash_size=%u\n",
+                     capture_name, grammar_name ? grammar_name : "NULL",
+                     g_hash_table_size (ts_color_map));
+            fclose (dbg);
         }
     }
 
@@ -202,202 +304,389 @@ ts_capture_name_to_color (const char *capture_name)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Open the ts-grammars config file. Tries user config dir first, then system share dir.
- * Returns a FILE* on success, or NULL.
+ * Look up a config file by matching a value in the value list.
+ * Reads <config_name> file where each line is: <key> <val1> <val2> ...
+ * If value matches any val, returns g_strdup(key). Otherwise NULL.
+ * User file is searched first; if found there, system file is not searched.
+ * An empty value list means the grammar is disabled (skip it).
  */
-static FILE *
-ts_open_config (void)
+static char *
+ts_config_lookup_by_value (const char *config_name, const char *value)
 {
-    char *config_path;
-    FILE *f;
+    const char *dirs[2];
+    int d;
 
-    config_path = g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_TS_DIR, TS_GRAMMARS_FILE,
-                                    (char *) NULL);
-    f = fopen (config_path, "r");
-    g_free (config_path);
+    dirs[0] = mc_config_get_data_path ();
+    dirs[1] = mc_global.share_data_dir;
 
-    if (f == NULL)
+    for (d = 0; d < 2; d++)
     {
-        config_path = g_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_TS_DIR,
-                                        TS_GRAMMARS_FILE, (char *) NULL);
-        f = fopen (config_path, "r");
-        g_free (config_path);
+        char *path;
+        FILE *f;
+        char *line = NULL;
+
+        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, config_name, (char *) NULL);
+        f = fopen (path, "r");
+        g_free (path);
+
+        if (f == NULL)
+            continue;
+
+        while (read_one_line (&line, f) != 0)
+        {
+            char *p, *key;
+
+            p = line;
+
+            /* Skip whitespace */
+            while (*p != '\0' && whiteness (*p))
+                p++;
+
+            /* Skip comments and empty lines */
+            if (*p == '#' || *p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+
+            /* Extract key (first word) */
+            key = p;
+            while (*p != '\0' && !whiteness (*p))
+                p++;
+
+            /* If no values follow the key, grammar is disabled -- skip */
+            if (*p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+            *p++ = '\0';
+
+            /* Check each value on the line */
+            while (*p != '\0')
+            {
+                char *val;
+
+                /* Skip whitespace */
+                while (*p != '\0' && whiteness (*p))
+                    p++;
+
+                if (*p == '\0')
+                    break;
+
+                val = p;
+                while (*p != '\0' && !whiteness (*p))
+                    p++;
+                if (*p != '\0')
+                    *p++ = '\0';
+
+                if (strcmp (val, value) == 0)
+                {
+                    char *result = g_strdup (key);
+
+                    g_free (line);
+                    fclose (f);
+                    return result;
+                }
+            }
+
+            g_free (line);
+            line = NULL;
+        }
+
+        g_free (line);
+        fclose (f);
     }
 
-    return f;
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Read the ts-grammars config file and find a matching grammar for the filename.
- * On match, fills grammar_name and syntax_name (newly allocated strings).
+ * Look up a config file by matching the key (first field).
+ * Returns g_strdup of the rest of the line (trimmed). Otherwise NULL.
+ * User file takes precedence per-record.
+ */
+char *
+ts_config_lookup_by_grammar (const char *config_name, const char *grammar_name)
+{
+    const char *dirs[2];
+    int d;
+
+    dirs[0] = mc_config_get_data_path ();
+    dirs[1] = mc_global.share_data_dir;
+
+    for (d = 0; d < 2; d++)
+    {
+        char *path;
+        FILE *f;
+        char *line = NULL;
+
+        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, config_name, (char *) NULL);
+        f = fopen (path, "r");
+        g_free (path);
+
+        if (f == NULL)
+            continue;
+
+        while (read_one_line (&line, f) != 0)
+        {
+            char *p, *key;
+
+            p = line;
+
+            /* Skip whitespace */
+            while (*p != '\0' && whiteness (*p))
+                p++;
+
+            /* Skip comments and empty lines */
+            if (*p == '#' || *p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+
+            /* Extract key (first word) */
+            key = p;
+            while (*p != '\0' && !whiteness (*p))
+                p++;
+            if (*p == '\0')
+            {
+                /* Key only, no value */
+                if (strcmp (key, grammar_name) == 0)
+                {
+                    g_free (line);
+                    fclose (f);
+                    return g_strdup ("");
+                }
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+            *p++ = '\0';
+
+            if (strcmp (key, grammar_name) == 0)
+            {
+                char *rest, *end;
+
+                /* Skip whitespace before the rest */
+                while (*p != '\0' && whiteness (*p))
+                    p++;
+                rest = p;
+
+                /* Trim trailing whitespace */
+                end = rest + strlen (rest) - 1;
+                while (end > rest && whiteness (*end))
+                    *end-- = '\0';
+
+                {
+                    char *result = g_strdup (rest);
+
+                    g_free (line);
+                    fclose (f);
+                    return result;
+                }
+            }
+
+            g_free (line);
+            line = NULL;
+        }
+
+        g_free (line);
+        fclose (f);
+    }
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Extract interpreter name from a shebang line.
+ * "#!/usr/bin/env python3" -> "python3"
+ * "#!/usr/bin/python" -> "python"
+ * Returns newly allocated string or NULL.
+ */
+static char *
+ts_extract_interpreter (const char *first_line)
+{
+    const char *p;
+    const char *word_start;
+    const char *word_end;
+    const char *basename_start;
+
+    if (first_line == NULL || first_line[0] != '#' || first_line[1] != '!')
+        return NULL;
+
+    p = first_line + 2;
+
+    /* Skip whitespace after #! */
+    while (*p != '\0' && whiteness (*p))
+        p++;
+
+    if (*p == '\0')
+        return NULL;
+
+    /* Extract the first word (path to interpreter) */
+    word_start = p;
+    while (*p != '\0' && !whiteness (*p))
+        p++;
+    word_end = p;
+
+    /* Get basename of the path */
+    basename_start = word_end - 1;
+    while (basename_start > word_start && *(basename_start - 1) != PATH_SEP)
+        basename_start--;
+
+    /* If the basename is "env", skip to the next word */
+    if ((word_end - basename_start) == 3 && strncmp (basename_start, "env", 3) == 0)
+    {
+        /* Skip whitespace */
+        while (*p != '\0' && whiteness (*p))
+            p++;
+
+        if (*p == '\0')
+            return NULL;
+
+        /* Skip any flags (words starting with -) */
+        while (*p == '-')
+        {
+            while (*p != '\0' && !whiteness (*p))
+                p++;
+            while (*p != '\0' && whiteness (*p))
+                p++;
+        }
+
+        if (*p == '\0')
+            return NULL;
+
+        word_start = p;
+        while (*p != '\0' && !whiteness (*p))
+            p++;
+        word_end = p;
+
+        /* Get basename again */
+        basename_start = word_end - 1;
+        while (basename_start > word_start && *(basename_start - 1) != PATH_SEP)
+            basename_start--;
+    }
+
+    if (basename_start >= word_end)
+        return NULL;
+
+    return g_strndup (basename_start, (gsize) (word_end - basename_start));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Find a matching grammar for the given filename and first line.
+ * Precedence: exact filename > shebang > extension.
+ * On match, fills grammar_name and display_name (newly allocated strings).
  * Returns TRUE if a match was found.
  */
 static gboolean
-ts_find_grammar (const char *filename, const char *first_line, char **grammar_name,
-                 char **syntax_name)
+ts_find_grammar (const char *filename, const char *first_line,
+                 char **grammar_name, char **display_name)
 {
-    FILE *f;
-    char *line = NULL;
+    const char *basename;
 
     if (filename == NULL)
         return FALSE;
 
     *grammar_name = NULL;
-    *syntax_name = NULL;
+    *display_name = NULL;
 
-    f = ts_open_config ();
-    if (f == NULL)
-        return FALSE;
+    basename = strrchr (filename, PATH_SEP);
+    basename = (basename != NULL) ? basename + 1 : filename;
 
-    while (read_one_line (&line, f) != 0)
+    /* 1. Exact filename match (most specific) */
+    *grammar_name = ts_config_lookup_by_value ("filenames", basename);
+    if (*grammar_name != NULL)
     {
-        char *p, *pattern, *name, *display;
-
-        p = line;
-
-        // Skip whitespace
-        while (*p != '\0' && whiteness (*p))
-            p++;
-
-        // Skip comments and empty lines
-        if (*p == '#' || *p == '\0')
-        {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
-
-        // Must start with "file" or "shebang"
-        gboolean is_shebang = FALSE;
-
-        if (strncmp (p, "shebang", 7) == 0 && whiteness (p[7]))
-        {
-            is_shebang = TRUE;
-            p += 7;
-        }
-        else if (strncmp (p, "file", 4) == 0 && whiteness (p[4]))
-        {
-            p += 4;
-        }
-        else
-        {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
-
-        // Skip whitespace
-        while (*p != '\0' && whiteness (*p))
-            p++;
-        pattern = p;
-
-        // Find end of pattern (next whitespace)
-        while (*p != '\0' && !whiteness (*p))
-            p++;
-        if (*p == '\0')
-        {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
-        *p++ = '\0';
-
-        // Skip whitespace
-        while (*p != '\0' && whiteness (*p))
-            p++;
-        name = p;
-
-        // Find end of grammar name (next whitespace)
-        while (*p != '\0' && !whiteness (*p))
-            p++;
-        if (*p == '\0')
-        {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
-        *p++ = '\0';
-
-        // Skip whitespace - rest is display name (may contain backslash-escaped spaces)
-        while (*p != '\0' && whiteness (*p))
-            p++;
-        display = p;
-
-        // Unescape backslash-space in display name
-        {
-            char *src = display, *dst = display;
-
-            while (*src != '\0')
-            {
-                if (*src == '\\' && *(src + 1) == ' ')
-                {
-                    *dst++ = ' ';
-                    src += 2;
-                }
-                else
-                    *dst++ = *src++;
-            }
-            *dst = '\0';
-        }
-
-        // Check if filename or first line matches this pattern
-        const char *match_against = is_shebang ? first_line : filename;
-
-        if (match_against != NULL && match_against[0] != '\0'
-            && mc_search (pattern, NULL, match_against, MC_SEARCH_T_REGEX))
-        {
-            *grammar_name = g_strdup (name);
-            *syntax_name = g_strdup (display);
-            g_free (line);
-            fclose (f);
-            return TRUE;
-        }
-
-        g_free (line);
-        line = NULL;
+        *display_name = ts_config_lookup_by_grammar ("display-names", *grammar_name);
+        return TRUE;
     }
 
-    g_free (line);
-    fclose (f);
+    /* 2. Shebang match (content-based) */
+    if (first_line != NULL && first_line[0] == '#' && first_line[1] == '!')
+    {
+        char *interpreter = ts_extract_interpreter (first_line);
+
+        if (interpreter != NULL)
+        {
+            *grammar_name = ts_config_lookup_by_value ("shebangs", interpreter);
+            g_free (interpreter);
+            if (*grammar_name != NULL)
+            {
+                *display_name = ts_config_lookup_by_grammar ("display-names", *grammar_name);
+                return TRUE;
+            }
+        }
+    }
+
+    /* 3. Extension match (least specific) */
+    {
+        const char *dot = strrchr (basename, '.');
+
+        if (dot != NULL)
+        {
+            *grammar_name = ts_config_lookup_by_value ("extensions", dot);
+            if (*grammar_name != NULL)
+            {
+                *display_name = ts_config_lookup_by_grammar ("display-names", *grammar_name);
+                return TRUE;
+            }
+        }
+    }
+
     return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Load a highlight query file. Searches in user data dir, then system share dir.
+ * Load a query file. Search order:
+ *   1. User MC-specific override: ~/.local/share/mc/syntax-ts/queries-override/
+ *   2. System MC-specific override: $(datadir)/mc/syntax-ts/queries-override/
+ *   3. User upstream queries: ~/.local/share/mc/syntax-ts/queries/
+ *   4. System upstream queries: $(datadir)/mc/syntax-ts/queries/
  * Returns a newly allocated string with the file contents, or NULL on failure.
  */
 static char *
 ts_load_query_file (const char *query_filename, uint32_t *out_len)
 {
-    char *path;
+    static const char *subdirs[] = { "queries-override", "queries" };
+    const char *base_dirs[2];
     char *contents = NULL;
     gsize len = 0;
+    int b, s;
 
-    // Try user config dir first
-    path = g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_TS_DIR, "queries",
-                             query_filename, (char *) NULL);
-    if (g_file_get_contents (path, &contents, &len, NULL))
-    {
-        g_free (path);
-        *out_len = (uint32_t) len;
-        return contents;
-    }
-    g_free (path);
+    base_dirs[0] = mc_config_get_data_path ();
+    base_dirs[1] = mc_global.share_data_dir;
 
-    // Try system share dir
-    path = g_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_TS_DIR, "queries",
-                             query_filename, (char *) NULL);
-    if (g_file_get_contents (path, &contents, &len, NULL))
+    /* Try override dirs first, then upstream dirs */
+    for (s = 0; s < 2; s++)
     {
-        g_free (path);
-        *out_len = (uint32_t) len;
-        return contents;
+        for (b = 0; b < 2; b++)
+        {
+            char *path;
+
+            path = g_build_filename (base_dirs[b], EDIT_SYNTAX_TS_DIR, subdirs[s],
+                                     query_filename, (char *) NULL);
+            if (g_file_get_contents (path, &contents, &len, NULL))
+            {
+                g_free (path);
+                *out_len = (uint32_t) len;
+                return contents;
+            }
+            g_free (path);
+        }
     }
-    g_free (path);
 
     *out_len = 0;
     return NULL;
@@ -406,315 +695,300 @@ ts_load_query_file (const char *query_filename, uint32_t *out_len)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Find all injection configs for a grammar.
- * Searches for "inject <parent_grammar> <child_grammar> <node_type1>,<node_type2>,..."
- * lines in the config file.  Returns a GArray of ts_injection_t entries with only
- * the grammar_name (stored in parser as a temporary hack) and node_types filled in.
- * The caller is responsible for initializing the parser/query or freeing the results.
- *
- * Actually, we use a small helper struct for the config results to keep it clean.
+ * Extract the value of a #set! predicate for a given key from a query pattern.
+ * Returns the value string (owned by the query, do not free), or NULL if not found.
  */
-
-typedef struct
+static const char *
+ts_get_set_predicate (TSQuery *query, uint32_t pattern_index, const char *key)
 {
-    gboolean dynamic;       // FALSE = static inject, TRUE = inject_dynamic
+    uint32_t step_count;
+    const TSQueryPredicateStep *steps;
+    uint32_t i;
 
-    // Static inject fields:
-    char *grammar_name;
-    char **node_types;
+    steps = ts_query_predicates_for_pattern (query, pattern_index, &step_count);
 
-    // Dynamic inject fields:
-    char *block_type;
-    char *lang_type;
-    char *content_type;
-} ts_inject_config_t;
-
-static GArray *
-ts_find_injections (const char *grammar_name)
-{
-    FILE *f;
-    char *line = NULL;
-    GArray *configs;
-
-    f = ts_open_config ();
-    if (f == NULL)
-        return NULL;
-
-    configs = g_array_new (FALSE, TRUE, sizeof (ts_inject_config_t));
-
-    while (read_one_line (&line, f) != 0)
+    for (i = 0; i + 3 < step_count; i++)
     {
-        char *p, *parent, *child, *nodes_str;
-
-        p = line;
-
-        // Skip whitespace
-        while (*p != '\0' && whiteness (*p))
-            p++;
-
-        // Skip comments and empty lines
-        if (*p == '#' || *p == '\0')
+        /* #set! pattern: String("set!") String(key) String(value) Done */
+        if (steps[i].type == TSQueryPredicateStepTypeString
+            && steps[i + 1].type == TSQueryPredicateStepTypeString
+            && steps[i + 2].type == TSQueryPredicateStepTypeString
+            && steps[i + 3].type == TSQueryPredicateStepTypeDone)
         {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
+            uint32_t len;
+            const char *name;
 
-        // Check for "inject_dynamic" or "inject"
-        gboolean is_dynamic = FALSE;
-
-        if (strncmp (p, "inject_dynamic", 14) == 0 && whiteness (p[14]))
-        {
-            is_dynamic = TRUE;
-            p += 14;
-        }
-        else if (strncmp (p, "inject", 6) == 0 && whiteness (p[6]))
-        {
-            p += 6;
-        }
-        else
-        {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
-
-        // Skip whitespace -> parent grammar name
-        while (*p != '\0' && whiteness (*p))
-            p++;
-        parent = p;
-
-        // Find end of parent grammar name
-        while (*p != '\0' && !whiteness (*p))
-            p++;
-        if (*p == '\0')
-        {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
-        *p++ = '\0';
-
-        // Check if this injection is for our grammar
-        if (strcmp (parent, grammar_name) != 0)
-        {
-            g_free (line);
-            line = NULL;
-            continue;
-        }
-
-        if (is_dynamic)
-        {
-            // Format: inject_dynamic <parent> <block_node> <lang_node> <content_node>
-            char *block_type, *lang_type, *content_type;
-            ts_inject_config_t cfg;
-
-            // block_type
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            block_type = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
+            name = ts_query_string_value_for_id (query, steps[i].value_id, &len);
+            if (strcmp (name, "set!") == 0)
             {
-                g_free (line);
-                line = NULL;
-                continue;
+                const char *prop;
+
+                prop = ts_query_string_value_for_id (query, steps[i + 1].value_id, &len);
+                if (strcmp (prop, key) == 0)
+                    return ts_query_string_value_for_id (query, steps[i + 2].value_id, &len);
             }
-            *p++ = '\0';
-
-            // lang_type
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            lang_type = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            // content_type
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            content_type = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            *p = '\0';
-
-            memset (&cfg, 0, sizeof (cfg));
-            cfg.dynamic = TRUE;
-            cfg.block_type = g_strdup (block_type);
-            cfg.lang_type = g_strdup (lang_type);
-            cfg.content_type = g_strdup (content_type);
-            g_array_append_val (configs, cfg);
         }
-        else
-        {
-            // Format: inject <parent> <child_grammar> <node_type1>,<node_type2>,...
-            char *child, *nodes_str;
-            ts_inject_config_t cfg;
-            gchar **parts;
-            int count, i;
-
-            // child grammar name
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            child = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            // comma-separated node types
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            nodes_str = p;
-
-            parts = g_strsplit (nodes_str, ",", -1);
-            count = (int) g_strv_length (parts);
-
-            memset (&cfg, 0, sizeof (cfg));
-            cfg.dynamic = FALSE;
-            cfg.grammar_name = g_strdup (child);
-            cfg.node_types = g_new0 (char *, count + 1);
-            for (i = 0; i < count; i++)
-                cfg.node_types[i] = g_strstrip (g_strdup (parts[i]));
-            cfg.node_types[count] = NULL;
-
-            g_strfreev (parts);
-            g_array_append_val (configs, cfg);
-        }
-
-        g_free (line);
-        line = NULL;
     }
 
-    g_free (line);
-    fclose (f);
-
-    if (configs->len == 0)
-    {
-        g_array_free (configs, TRUE);
-        return NULL;
-    }
-
-    return configs;
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Initialize injection parsers/queries for a grammar.
+ * Read capture text from the edit buffer for a given node.
+ * Returns a newly allocated string, or NULL if the node is too large.
+ */
+static char *
+ts_read_node_text (WEdit *edit, TSNode node)
+{
+    uint32_t start, end, len, i;
+    char *buf;
+
+    start = ts_node_start_byte (node);
+    end = ts_node_end_byte (node);
+    len = end - start;
+
+    if (len == 0 || len > 256)
+        return NULL;
+
+    buf = g_new (char, len + 1);
+    for (i = 0; i < len; i++)
+        buf[i] = (char) edit_buffer_get_byte (&edit->buffer, (off_t) (start + i));
+    buf[len] = '\0';
+
+    return buf;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Evaluate filter predicates (#eq?, #any-of?, #not-any-of?, #match?) for a match.
+ * Returns TRUE if the match passes all predicates (should be used).
+ * Returns FALSE if any predicate rejects the match (should be skipped).
+ *
+ * Predicate format in TSQueryPredicateStep arrays:
+ *   #eq?        @capture "value" Done
+ *   #any-of?    @capture "v1" "v2" ... Done
+ *   #not-any-of? @capture "v1" "v2" ... Done
+ *   #match?     @capture "regex" Done
+ */
+static gboolean
+ts_evaluate_match_predicates (TSQuery *query, const TSQueryMatch *match, WEdit *edit)
+{
+    uint32_t step_count;
+    const TSQueryPredicateStep *steps;
+    uint32_t i;
+
+    steps = ts_query_predicates_for_pattern (query, match->pattern_index, &step_count);
+    if (step_count == 0)
+        return TRUE;
+
+    for (i = 0; i < step_count;)
+    {
+        uint32_t len;
+        const char *pred_name;
+
+        /* Each predicate starts with a String (the predicate name) */
+        if (steps[i].type != TSQueryPredicateStepTypeString)
+        {
+            /* Skip to next Done */
+            while (i < step_count && steps[i].type != TSQueryPredicateStepTypeDone)
+                i++;
+            if (i < step_count)
+                i++;    /* skip Done */
+            continue;
+        }
+
+        pred_name = ts_query_string_value_for_id (query, steps[i].value_id, &len);
+
+        if (strcmp (pred_name, "eq?") == 0 && i + 3 <= step_count)
+        {
+            /* #eq? @capture "value" Done */
+            if (steps[i + 1].type == TSQueryPredicateStepTypeCapture
+                && steps[i + 2].type == TSQueryPredicateStepTypeString)
+            {
+                uint32_t cap_idx = steps[i + 1].value_id;
+                const char *expected;
+                uint32_t ci;
+                gboolean found = FALSE;
+
+                expected = ts_query_string_value_for_id (query, steps[i + 2].value_id, &len);
+
+                for (ci = 0; ci < match->capture_count; ci++)
+                {
+                    if (match->captures[ci].index == cap_idx)
+                    {
+                        char *text = ts_read_node_text (edit, match->captures[ci].node);
+                        if (text != NULL)
+                        {
+                            found = (strcmp (text, expected) == 0);
+                            g_free (text);
+                        }
+                        break;
+                    }
+                }
+
+                if (!found)
+                    return FALSE;
+            }
+        }
+        else if (strcmp (pred_name, "any-of?") == 0 && i + 2 <= step_count)
+        {
+            /* #any-of? @capture "v1" "v2" ... Done */
+            if (steps[i + 1].type == TSQueryPredicateStepTypeCapture)
+            {
+                uint32_t cap_idx = steps[i + 1].value_id;
+                char *text = NULL;
+                gboolean matched = FALSE;
+                uint32_t ci, j;
+
+                /* Find capture text */
+                for (ci = 0; ci < match->capture_count; ci++)
+                {
+                    if (match->captures[ci].index == cap_idx)
+                    {
+                        text = ts_read_node_text (edit, match->captures[ci].node);
+                        break;
+                    }
+                }
+
+                if (text != NULL)
+                {
+                    /* Check against each value string */
+                    for (j = i + 2; j < step_count && steps[j].type == TSQueryPredicateStepTypeString;
+                         j++)
+                    {
+                        const char *val;
+                        val = ts_query_string_value_for_id (query, steps[j].value_id, &len);
+                        if (strcmp (text, val) == 0)
+                        {
+                            matched = TRUE;
+                            break;
+                        }
+                    }
+                    g_free (text);
+                }
+
+                if (!matched)
+                    return FALSE;
+            }
+        }
+        else if (strcmp (pred_name, "not-any-of?") == 0 && i + 2 <= step_count)
+        {
+            /* #not-any-of? @capture "v1" "v2" ... Done */
+            if (steps[i + 1].type == TSQueryPredicateStepTypeCapture)
+            {
+                uint32_t cap_idx = steps[i + 1].value_id;
+                char *text = NULL;
+                gboolean rejected = FALSE;
+                uint32_t ci, j;
+
+                for (ci = 0; ci < match->capture_count; ci++)
+                {
+                    if (match->captures[ci].index == cap_idx)
+                    {
+                        text = ts_read_node_text (edit, match->captures[ci].node);
+                        break;
+                    }
+                }
+
+                if (text != NULL)
+                {
+                    for (j = i + 2; j < step_count && steps[j].type == TSQueryPredicateStepTypeString;
+                         j++)
+                    {
+                        const char *val;
+                        val = ts_query_string_value_for_id (query, steps[j].value_id, &len);
+                        if (strcmp (text, val) == 0)
+                        {
+                            rejected = TRUE;
+                            break;
+                        }
+                    }
+                    g_free (text);
+                }
+
+                if (rejected)
+                    return FALSE;
+            }
+        }
+        else if (strcmp (pred_name, "match?") == 0 && i + 3 <= step_count)
+        {
+            /* #match? @capture "regex" Done */
+            if (steps[i + 1].type == TSQueryPredicateStepTypeCapture
+                && steps[i + 2].type == TSQueryPredicateStepTypeString)
+            {
+                uint32_t cap_idx = steps[i + 1].value_id;
+                const char *pattern;
+                gboolean matched = FALSE;
+                uint32_t ci;
+
+                pattern = ts_query_string_value_for_id (query, steps[i + 2].value_id, &len);
+
+                for (ci = 0; ci < match->capture_count; ci++)
+                {
+                    if (match->captures[ci].index == cap_idx)
+                    {
+                        char *text = ts_read_node_text (edit, match->captures[ci].node);
+                        if (text != NULL)
+                        {
+                            matched = g_regex_match_simple (pattern, text, 0, 0);
+                            g_free (text);
+                        }
+                        break;
+                    }
+                }
+
+                if (!matched)
+                    return FALSE;
+            }
+        }
+        /* Skip #set! and other predicates we don't filter on */
+
+        /* Advance to next Done */
+        while (i < step_count && steps[i].type != TSQueryPredicateStepTypeDone)
+            i++;
+        if (i < step_count)
+            i++;    /* skip Done */
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Initialize injection query for a grammar by loading <grammar_name>-injections.scm.
  * Called after the primary grammar is initialized.
  * Failure is non-fatal — highlighting works without injections.
  */
 static void
-ts_init_injections (WEdit *edit, const char *grammar_name)
+ts_init_injections (WEdit *edit, const char *grammar_name, const TSLanguage *lang)
 {
-    GArray *configs;
-    guint i;
+    char *query_filename;
+    char *query_src;
+    uint32_t query_len;
+    TSQuery *inj_query;
+    uint32_t error_offset;
+    TSQueryError error_type;
 
-    configs = ts_find_injections (grammar_name);
-    if (configs == NULL)
-        return;
+    query_filename = g_strdup_printf ("%s-injections.scm", grammar_name);
+    query_src = ts_load_query_file (query_filename, &query_len);
+    g_free (query_filename);
 
-    edit->ts.injections = g_array_new (FALSE, TRUE, sizeof (ts_injection_t));
+    if (query_src == NULL)
+        return; /* no injections for this grammar */
 
-    for (i = 0; i < configs->len; i++)
-    {
-        ts_inject_config_t *cfg = &g_array_index (configs, ts_inject_config_t, i);
-        ts_injection_t inj;
+    inj_query = ts_query_new (lang, query_src, query_len, &error_offset, &error_type);
+    g_free (query_src);
 
-        memset (&inj, 0, sizeof (inj));
+    if (inj_query == NULL)
+        return; /* query compilation failed */
 
-        if (cfg->dynamic)
-        {
-            // Dynamic injection: no parser/query created now — they're created
-            // on demand per language in ts_rebuild_highlight_cache.
-            inj.dynamic = TRUE;
-            inj.block_type = cfg->block_type;
-            inj.lang_type = cfg->lang_type;
-            inj.content_type = cfg->content_type;
-            inj.lang_cache = g_hash_table_new (g_str_hash, g_str_equal);
-            cfg->block_type = NULL;     // ownership transferred
-            cfg->lang_type = NULL;
-            cfg->content_type = NULL;
-            g_array_append_val (edit->ts.injections, inj);
-        }
-        else
-        {
-            // Static injection: create parser/query now
-            const TSLanguage *lang;
-            TSParser *parser;
-            char *query_filename;
-            char *query_src;
-            uint32_t query_len;
-            uint32_t error_offset;
-            TSQueryError error_type;
-            TSQuery *query;
-
-            lang = ts_grammar_registry_lookup (cfg->grammar_name);
-            if (lang == NULL)
-                goto skip;
-
-            parser = ts_parser_new ();
-            if (!ts_parser_set_language (parser, lang))
-            {
-                ts_parser_delete (parser);
-                goto skip;
-            }
-
-            ts_parser_set_timeout_micros (parser, 3000000);
-
-            query_filename = g_strdup_printf ("%s-highlights.scm", cfg->grammar_name);
-            query_src = ts_load_query_file (query_filename, &query_len);
-            g_free (query_filename);
-
-            if (query_src == NULL)
-            {
-                ts_parser_delete (parser);
-                goto skip;
-            }
-
-            query = ts_query_new (lang, query_src, query_len, &error_offset, &error_type);
-            g_free (query_src);
-
-            if (query == NULL)
-            {
-                ts_parser_delete (parser);
-                goto skip;
-            }
-
-            inj.parser = parser;
-            inj.query = query;
-            inj.node_types = cfg->node_types;
-            cfg->node_types = NULL;     // ownership transferred
-            g_array_append_val (edit->ts.injections, inj);
-            g_free (cfg->grammar_name);
-            continue;
-
-          skip:
-            g_free (cfg->grammar_name);
-            g_strfreev (cfg->node_types);
-        }
-    }
-
-    g_array_free (configs, TRUE);
-
-    if (edit->ts.injections->len == 0)
-    {
-        g_array_free (edit->ts.injections, TRUE);
-        edit->ts.injections = NULL;
-    }
+    /* Store the injection query and a cache for dynamic languages */
+    edit->ts.injection_query = inj_query;
+    edit->ts.injection_lang_cache = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -744,6 +1018,9 @@ ts_init_for_file (WEdit *edit)
     uint32_t error_offset;
     TSQueryError error_type;
     TSQuery *query;
+
+    /* Load color mappings from config on first use */
+    ts_load_color_config ();
 
     filename = vfs_path_as_str (edit->filename_vpath);
 
@@ -819,12 +1096,13 @@ ts_init_for_file (WEdit *edit)
     edit->ts.highlights = g_array_new (FALSE, FALSE, sizeof (ts_highlight_entry_t));
     edit->ts.highlights_start = -1;
     edit->ts.highlights_end = -1;
+    edit->ts.grammar_name = g_strdup (grammar_name);
     edit->ts.active = TRUE;
     edit->ts.need_reparse = FALSE;
 
     // Try to initialize language injection (e.g., markdown inline within markdown block)
     // Failure is non-fatal — highlighting works without injection.
-    ts_init_injections (edit, grammar_name);
+    ts_init_injections (edit, grammar_name, lang);
 
     g_free (edit->syntax_type);
     edit->syntax_type = display_name;  // takes ownership
@@ -843,51 +1121,31 @@ void
 ts_free (WEdit *edit)
 {
     // Free injection resources
-    if (edit->ts.injections != NULL)
+    if (edit->ts.injection_query != NULL)
     {
-        guint i;
+        ts_query_delete ((TSQuery *) edit->ts.injection_query);
+        edit->ts.injection_query = NULL;
+    }
 
-        for (i = 0; i < edit->ts.injections->len; i++)
+    if (edit->ts.injection_lang_cache != NULL)
+    {
+        GHashTableIter iter;
+        gpointer key, value;
+
+        g_hash_table_iter_init (&iter, edit->ts.injection_lang_cache);
+        while (g_hash_table_iter_next (&iter, &key, &value))
         {
-            ts_injection_t *inj = &g_array_index (edit->ts.injections, ts_injection_t, i);
+            ts_dynamic_lang_t *dl = (ts_dynamic_lang_t *) value;
 
-            if (inj->dynamic)
-            {
-                g_free (inj->block_type);
-                g_free (inj->lang_type);
-                g_free (inj->content_type);
-                if (inj->lang_cache != NULL)
-                {
-                    GHashTableIter iter;
-                    gpointer key, value;
-
-                    g_hash_table_iter_init (&iter, inj->lang_cache);
-                    while (g_hash_table_iter_next (&iter, &key, &value))
-                    {
-                        ts_dynamic_lang_t *dl = (ts_dynamic_lang_t *) value;
-
-                        if (dl->query != NULL)
-                            ts_query_delete ((TSQuery *) dl->query);
-                        if (dl->parser != NULL)
-                            ts_parser_delete ((TSParser *) dl->parser);
-                        g_free (dl);
-                        g_free (key);
-                    }
-                    g_hash_table_destroy (inj->lang_cache);
-                }
-            }
-            else
-            {
-                if (inj->query != NULL)
-                    ts_query_delete ((TSQuery *) inj->query);
-                if (inj->parser != NULL)
-                    ts_parser_delete ((TSParser *) inj->parser);
-                if (inj->node_types != NULL)
-                    g_strfreev (inj->node_types);
-            }
+            if (dl->query != NULL)
+                ts_query_delete ((TSQuery *) dl->query);
+            if (dl->parser != NULL)
+                ts_parser_delete ((TSParser *) dl->parser);
+            g_free (dl);
+            g_free (key);
         }
-        g_array_free (edit->ts.injections, TRUE);
-        edit->ts.injections = NULL;
+        g_hash_table_destroy (edit->ts.injection_lang_cache);
+        edit->ts.injection_lang_cache = NULL;
     }
 
     // Free primary resources
@@ -915,6 +1173,8 @@ ts_free (WEdit *edit)
         edit->ts.highlights = NULL;
     }
 
+    g_free (edit->ts.grammar_name);
+    edit->ts.grammar_name = NULL;
     edit->ts.highlights_start = -1;
     edit->ts.highlights_end = -1;
     edit->ts.active = FALSE;
@@ -923,93 +1183,14 @@ ts_free (WEdit *edit)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Append a TSRange for the given node to the ranges array.
- */
-static void
-ts_append_node_range (TSNode node, GArray *ranges)
-{
-    TSRange r;
-
-    r.start_point = ts_node_start_point (node);
-    r.end_point = ts_node_end_point (node);
-    r.start_byte = ts_node_start_byte (node);
-    r.end_byte = ts_node_end_byte (node);
-    g_array_append_val (ranges, r);
-}
-
-/**
- * Recursively collect byte ranges of nodes matching the injection node types.
- * Ranges are appended to the GArray of TSRange and are ordered by byte offset.
- *
- * Node types support two formats:
- *   "node_type"           — match nodes of this type directly
- *   "parent_type/child_type" — match child_type nodes inside parent_type nodes
- *     (used for HTML: "script_element/raw_text" targets the raw_text inside <script>)
- */
-static void
-ts_collect_injection_ranges (TSNode node, char **node_types, uint32_t range_start,
-                             uint32_t range_end, GArray *ranges)
-{
-    const char *type;
-    char **nt;
-    uint32_t child_count, i;
-
-    // Skip nodes entirely outside the range of interest
-    if (ts_node_end_byte (node) <= range_start || ts_node_start_byte (node) >= range_end)
-        return;
-
-    type = ts_node_type (node);
-
-    for (nt = node_types; *nt != NULL; nt++)
-    {
-        const char *slash = strchr (*nt, '/');
-
-        if (slash != NULL)
-        {
-            // parent/child format: check if this node matches the parent type
-            size_t parent_len = (size_t) (slash - *nt);
-
-            if (strncmp (type, *nt, parent_len) == 0 && type[parent_len] == '\0')
-            {
-                const char *child_type = slash + 1;
-
-                // Collect matching child nodes
-                child_count = ts_node_child_count (node);
-                for (i = 0; i < child_count; i++)
-                {
-                    TSNode child = ts_node_child (node, i);
-
-                    if (strcmp (ts_node_type (child), child_type) == 0)
-                        ts_append_node_range (child, ranges);
-                }
-                return;     // Don't recurse further into matched parent
-            }
-        }
-        else if (strcmp (type, *nt) == 0)
-        {
-            // Simple match
-            ts_append_node_range (node, ranges);
-            return;         // Don't recurse into injection target nodes
-        }
-    }
-
-    // Recurse into children
-    child_count = ts_node_child_count (node);
-    for (i = 0; i < child_count; i++)
-    {
-        TSNode child = ts_node_child (node, i);
-        ts_collect_injection_ranges (child, node_types, range_start, range_end, ranges);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
  * Run a highlight query on a tree and append results to the highlights array.
+ * grammar_name is used for per-grammar color lookup in colors.ini.
+ * Evaluates filter predicates (#eq?, #match?, etc.) to skip non-matching captures.
  */
 static void
 ts_run_query_into_highlights (TSQuery *query, TSTree *tree, uint32_t range_start,
-                              uint32_t range_end, GArray *highlights)
+                              uint32_t range_end, GArray *highlights,
+                              const char *grammar_name, WEdit *edit)
 {
     TSNode root;
     TSQueryCursor *cursor;
@@ -1025,6 +1206,10 @@ ts_run_query_into_highlights (TSQuery *query, TSTree *tree, uint32_t range_start
     {
         uint32_t ci;
 
+        /* Evaluate filter predicates (#eq?, #match?, #any-of?, etc.) */
+        if (edit != NULL && !ts_evaluate_match_predicates (query, &match, edit))
+            continue;
+
         for (ci = 0; ci < match.capture_count; ci++)
         {
             TSQueryCapture cap = match.captures[ci];
@@ -1036,7 +1221,7 @@ ts_run_query_into_highlights (TSQuery *query, TSTree *tree, uint32_t range_start
 
             entry.start_byte = ts_node_start_byte (cap.node);
             entry.end_byte = ts_node_end_byte (cap.node);
-            entry.color = ts_capture_name_to_color (cap_name);
+            entry.color = ts_capture_name_to_color (cap_name, grammar_name);
 
             // Only include entries that overlap with our range
             if (entry.end_byte > range_start && entry.start_byte < range_end)
@@ -1054,7 +1239,7 @@ ts_run_query_into_highlights (TSQuery *query, TSTree *tree, uint32_t range_start
  * Returns NULL if the language is unknown or the query fails to compile.
  */
 static ts_dynamic_lang_t *
-ts_get_dynamic_lang (ts_injection_t *inj, const char *lang_name)
+ts_get_dynamic_lang (GHashTable *lang_cache, const char *lang_name)
 {
     ts_dynamic_lang_t *dl;
     const TSLanguage *lang;
@@ -1066,7 +1251,7 @@ ts_get_dynamic_lang (ts_injection_t *inj, const char *lang_name)
     TSQueryError error_type;
     TSQuery *query;
 
-    dl = (ts_dynamic_lang_t *) g_hash_table_lookup (inj->lang_cache, lang_name);
+    dl = (ts_dynamic_lang_t *) g_hash_table_lookup (lang_cache, lang_name);
     if (dl != NULL)
         return dl->parser != NULL ? dl : NULL;
 
@@ -1076,7 +1261,7 @@ ts_get_dynamic_lang (ts_injection_t *inj, const char *lang_name)
     {
         // Cache a NULL entry so we don't retry
         dl = g_new0 (ts_dynamic_lang_t, 1);
-        g_hash_table_insert (inj->lang_cache, g_strdup (lang_name), dl);
+        g_hash_table_insert (lang_cache, g_strdup (lang_name), dl);
         return NULL;
     }
 
@@ -1085,7 +1270,7 @@ ts_get_dynamic_lang (ts_injection_t *inj, const char *lang_name)
     {
         ts_parser_delete (parser);
         dl = g_new0 (ts_dynamic_lang_t, 1);
-        g_hash_table_insert (inj->lang_cache, g_strdup (lang_name), dl);
+        g_hash_table_insert (lang_cache, g_strdup (lang_name), dl);
         return NULL;
     }
 
@@ -1099,7 +1284,7 @@ ts_get_dynamic_lang (ts_injection_t *inj, const char *lang_name)
     {
         ts_parser_delete (parser);
         dl = g_new0 (ts_dynamic_lang_t, 1);
-        g_hash_table_insert (inj->lang_cache, g_strdup (lang_name), dl);
+        g_hash_table_insert (lang_cache, g_strdup (lang_name), dl);
         return NULL;
     }
 
@@ -1110,135 +1295,15 @@ ts_get_dynamic_lang (ts_injection_t *inj, const char *lang_name)
     {
         ts_parser_delete (parser);
         dl = g_new0 (ts_dynamic_lang_t, 1);
-        g_hash_table_insert (inj->lang_cache, g_strdup (lang_name), dl);
+        g_hash_table_insert (lang_cache, g_strdup (lang_name), dl);
         return NULL;
     }
 
     dl = g_new0 (ts_dynamic_lang_t, 1);
     dl->parser = parser;
     dl->query = query;
-    g_hash_table_insert (inj->lang_cache, g_strdup (lang_name), dl);
+    g_hash_table_insert (lang_cache, g_strdup (lang_name), dl);
     return dl;
-}
-
-/**
- * Process a dynamic injection: walk the primary tree for block nodes,
- * read the language from a child node, parse the content with that language.
- */
-static void
-ts_run_dynamic_injection (ts_injection_t *inj, TSNode root, WEdit *edit, TSInput input,
-                          uint32_t range_start, uint32_t range_end, GArray *highlights)
-{
-    GArray *stack;
-
-    stack = g_array_new (FALSE, FALSE, sizeof (TSNode));
-    g_array_append_val (stack, root);
-
-    while (stack->len > 0)
-    {
-        TSNode node = g_array_index (stack, TSNode, stack->len - 1);
-        const char *type;
-        uint32_t child_count, ci;
-
-        g_array_set_size (stack, stack->len - 1);
-
-        // Skip nodes outside the range of interest
-        if (ts_node_end_byte (node) <= range_start || ts_node_start_byte (node) >= range_end)
-            continue;
-
-        type = ts_node_type (node);
-
-        if (strcmp (type, inj->block_type) == 0)
-        {
-            // Found a code block — extract language name and content range
-            TSNode lang_node = { .id = NULL };
-            TSNode content_node = { .id = NULL };
-
-            child_count = ts_node_child_count (node);
-            for (ci = 0; ci < child_count; ci++)
-            {
-                TSNode child = ts_node_child (node, ci);
-                const char *ctype = ts_node_type (child);
-
-                if (strcmp (ctype, inj->lang_type) == 0)
-                    lang_node = child;
-                else if (strcmp (ctype, inj->content_type) == 0)
-                    content_node = child;
-            }
-
-            if (!ts_node_is_null (lang_node) && !ts_node_is_null (content_node))
-            {
-                uint32_t lang_start = ts_node_start_byte (lang_node);
-                uint32_t lang_end = ts_node_end_byte (lang_node);
-                uint32_t lang_len = lang_end - lang_start;
-
-                if (lang_len > 0 && lang_len < 64)
-                {
-                    // Read the language name from the edit buffer
-                    char lang_name[64];
-                    uint32_t li;
-
-                    for (li = 0; li < lang_len; li++)
-                        lang_name[li] =
-                            (char) edit_buffer_get_byte (&edit->buffer,
-                                                        (off_t) (lang_start + li));
-                    lang_name[lang_len] = '\0';
-
-                    // Strip leading/trailing whitespace
-                    {
-                        char *s = lang_name;
-                        char *e;
-
-                        while (*s == ' ' || *s == '\t')
-                            s++;
-                        e = s + strlen (s);
-                        while (e > s && (e[-1] == ' ' || e[-1] == '\t' || e[-1] == '\n' || e[-1] == '\r'))
-                            e--;
-                        *e = '\0';
-
-                        if (*s != '\0')
-                        {
-                            ts_dynamic_lang_t *dl = ts_get_dynamic_lang (inj, s);
-
-                            if (dl != NULL)
-                            {
-                                TSRange r;
-                                TSTree *inject_tree;
-
-                                r.start_point = ts_node_start_point (content_node);
-                                r.end_point = ts_node_end_point (content_node);
-                                r.start_byte = ts_node_start_byte (content_node);
-                                r.end_byte = ts_node_end_byte (content_node);
-
-                                ts_parser_set_included_ranges ((TSParser *) dl->parser, &r, 1);
-                                inject_tree =
-                                    ts_parser_parse ((TSParser *) dl->parser, NULL, input);
-                                if (inject_tree != NULL)
-                                {
-                                    ts_run_query_into_highlights ((TSQuery *) dl->query,
-                                                                 inject_tree,
-                                                                 range_start, range_end,
-                                                                 highlights);
-                                    ts_tree_delete (inject_tree);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            continue;       // Don't recurse into code blocks
-        }
-
-        // Recurse into children
-        child_count = ts_node_child_count (node);
-        for (ci = 0; ci < child_count; ci++)
-        {
-            TSNode child = ts_node_child (node, ci);
-            g_array_append_val (stack, child);
-        }
-    }
-
-    g_array_free (stack, TRUE);
 }
 
 /**
@@ -1282,60 +1347,154 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
     // Run the primary highlight query
     ts_run_query_into_highlights ((TSQuery *) edit->ts.highlight_query, tree,
                                  (uint32_t) range_start, (uint32_t) range_end,
-                                 edit->ts.highlights);
+                                 edit->ts.highlights, edit->ts.grammar_name, edit);
 
     // Run injection queries if configured.
-    // Each injection range is parsed separately to avoid the inline parser's
-    // scanner state leaking across disjoint ranges (e.g., backtick matching
-    // crossing from one list item's inline content to another's).
-    if (edit->ts.injections != NULL)
+    // Execute the injection query against the primary tree, then for each match
+    // find @injection.content (byte range) and the language (from @injection.language
+    // capture or #set! injection.language predicate), parse and highlight.
+    if (edit->ts.injection_query != NULL)
     {
         TSNode root;
-        guint ji;
+        TSQuery *inj_query;
+        TSQueryCursor *inj_cursor;
+        TSQueryMatch match;
 
         root = ts_tree_root_node (tree);
+        inj_query = (TSQuery *) edit->ts.injection_query;
 
-        for (ji = 0; ji < edit->ts.injections->len; ji++)
+        inj_cursor = ts_query_cursor_new ();
+        ts_query_cursor_set_byte_range (inj_cursor, (uint32_t) range_start,
+                                        (uint32_t) range_end);
+        ts_query_cursor_exec (inj_cursor, inj_query, root);
+
+        while (ts_query_cursor_next_match (inj_cursor, &match))
         {
-            ts_injection_t *inj = &g_array_index (edit->ts.injections, ts_injection_t, ji);
+            TSNode content_node = { .id = NULL };
+            TSNode lang_node = { .id = NULL };
+            const char *static_lang = NULL;
+            uint32_t ci;
 
-            if (inj->dynamic)
+            /* Evaluate filter predicates (#eq?, #any-of?, etc.) */
+            if (!ts_evaluate_match_predicates (inj_query, &match, edit))
+                continue;
+
+            /* TODO: #set! injection.include-children affects range calculation.
+               Currently we use the full byte range of @injection.content which
+               is sufficient for most cases. */
+
+            // Find @injection.content and @injection.language captures
+            for (ci = 0; ci < match.capture_count; ci++)
             {
-                ts_run_dynamic_injection (inj, root, edit, input,
-                                         (uint32_t) range_start, (uint32_t) range_end,
-                                         edit->ts.highlights);
+                uint32_t name_len;
+                const char *cap_name;
+
+                cap_name =
+                    ts_query_capture_name_for_id (inj_query, match.captures[ci].index, &name_len);
+
+                if (strcmp (cap_name, "injection.content") == 0)
+                    content_node = match.captures[ci].node;
+                else if (strcmp (cap_name, "injection.language") == 0)
+                    lang_node = match.captures[ci].node;
             }
-            else
+
+            if (ts_node_is_null (content_node))
+                continue;
+
+            // Determine the injection language name
+            static_lang = ts_get_set_predicate (inj_query, match.pattern_index,
+                                                "injection.language");
+
+            if (static_lang == NULL && !ts_node_is_null (lang_node))
             {
-                GArray *ranges;
-                guint ri;
+                // Read the language name from the @injection.language capture node
+                uint32_t lang_start = ts_node_start_byte (lang_node);
+                uint32_t lang_end = ts_node_end_byte (lang_node);
+                uint32_t lang_len = lang_end - lang_start;
 
-                ranges = g_array_new (FALSE, FALSE, sizeof (TSRange));
-
-                ts_collect_injection_ranges (root, inj->node_types,
-                                            (uint32_t) range_start, (uint32_t) range_end, ranges);
-
-                for (ri = 0; ri < ranges->len; ri++)
+                if (lang_len > 0 && lang_len < 64)
                 {
-                    TSRange *r = &g_array_index (ranges, TSRange, ri);
+                    char lang_buf[64];
+                    uint32_t li;
+                    char *s, *e;
+
+                    for (li = 0; li < lang_len; li++)
+                        lang_buf[li] =
+                            (char) edit_buffer_get_byte (&edit->buffer,
+                                                        (off_t) (lang_start + li));
+                    lang_buf[lang_len] = '\0';
+
+                    // Strip leading/trailing whitespace
+                    s = lang_buf;
+                    while (*s == ' ' || *s == '\t')
+                        s++;
+                    e = s + strlen (s);
+                    while (e > s
+                           && (e[-1] == ' ' || e[-1] == '\t' || e[-1] == '\n' || e[-1] == '\r'))
+                        e--;
+                    *e = '\0';
+
+                    if (*s != '\0')
+                    {
+                        ts_dynamic_lang_t *dl;
+
+                        dl = ts_get_dynamic_lang (edit->ts.injection_lang_cache, s);
+                        if (dl != NULL)
+                        {
+                            TSRange r;
+                            TSTree *inject_tree;
+
+                            r.start_point = ts_node_start_point (content_node);
+                            r.end_point = ts_node_end_point (content_node);
+                            r.start_byte = ts_node_start_byte (content_node);
+                            r.end_byte = ts_node_end_byte (content_node);
+
+                            ts_parser_set_included_ranges ((TSParser *) dl->parser, &r, 1);
+                            inject_tree =
+                                ts_parser_parse ((TSParser *) dl->parser, NULL, input);
+                            if (inject_tree != NULL)
+                            {
+                                ts_run_query_into_highlights ((TSQuery *) dl->query, inject_tree,
+                                                             (uint32_t) range_start,
+                                                             (uint32_t) range_end,
+                                                             edit->ts.highlights, s, edit);
+                                ts_tree_delete (inject_tree);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (static_lang != NULL)
+            {
+                // Static language from #set! injection.language predicate
+                ts_dynamic_lang_t *dl;
+
+                dl = ts_get_dynamic_lang (edit->ts.injection_lang_cache, static_lang);
+                if (dl != NULL)
+                {
+                    TSRange r;
                     TSTree *inject_tree;
 
-                    ts_parser_set_included_ranges ((TSParser *) inj->parser, r, 1);
+                    r.start_point = ts_node_start_point (content_node);
+                    r.end_point = ts_node_end_point (content_node);
+                    r.start_byte = ts_node_start_byte (content_node);
+                    r.end_byte = ts_node_end_byte (content_node);
 
-                    inject_tree = ts_parser_parse ((TSParser *) inj->parser, NULL, input);
+                    ts_parser_set_included_ranges ((TSParser *) dl->parser, &r, 1);
+                    inject_tree = ts_parser_parse ((TSParser *) dl->parser, NULL, input);
                     if (inject_tree != NULL)
                     {
-                        ts_run_query_into_highlights ((TSQuery *) inj->query,
-                                                     inject_tree,
-                                                     (uint32_t) range_start, (uint32_t) range_end,
-                                                     edit->ts.highlights);
+                        ts_run_query_into_highlights ((TSQuery *) dl->query, inject_tree,
+                                                     (uint32_t) range_start,
+                                                     (uint32_t) range_end,
+                                                     edit->ts.highlights, static_lang, edit);
                         ts_tree_delete (inject_tree);
                     }
                 }
-
-                g_array_free (ranges, TRUE);
             }
         }
+
+        ts_query_cursor_delete (inj_cursor);
     }
 
     edit->ts.highlights_start = range_start;
@@ -1354,6 +1513,8 @@ ts_get_color_at (WEdit *edit, off_t byte_index)
 {
     guint i;
     int color = EDITOR_NORMAL_COLOR;
+    uint32_t match_start = 0;
+    uint32_t match_end = UINT32_MAX;
 
     if (edit->ts.highlights == NULL)
         return EDITOR_NORMAL_COLOR;
@@ -1365,7 +1526,19 @@ ts_get_color_at (WEdit *edit, off_t byte_index)
         e = &g_array_index (edit->ts.highlights, ts_highlight_entry_t, i);
 
         if ((off_t) e->start_byte <= byte_index && byte_index < (off_t) e->end_byte)
-            color = e->color;
+        {
+            /* For overlapping ranges, prefer the narrower (more specific) one.
+               For equal ranges, keep the first match (more specific pattern). */
+            uint32_t width = e->end_byte - e->start_byte;
+            uint32_t cur_width = match_end - match_start;
+
+            if (color == EDITOR_NORMAL_COLOR || width < cur_width)
+            {
+                color = e->color;
+                match_start = e->start_byte;
+                match_end = e->end_byte;
+            }
+        }
     }
 
     return color;

@@ -19,8 +19,6 @@ gboolean ts_init_for_file (WEdit *edit);
 void ts_free (WEdit *edit);
 int ts_get_color_at (WEdit *edit, off_t byte_index);
 void ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end);
-void edit_syntax_ts_notify_edit (WEdit *edit, off_t start_byte, off_t old_end_byte,
-                                  off_t new_end_byte);
 
 /* Functions from syntax.c needed by the tree-sitter module */
 size_t read_one_line (char **line, FILE *f);
