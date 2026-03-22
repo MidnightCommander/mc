@@ -3887,6 +3887,14 @@ clipboard_paste=xclip \-o
 .nf
 autodetect_codeset=russian
 .fi
+.TP
+.I kitty_keyboard_protocol
+Подразумевано, Midnight Commander шаље escape секвенцу која омогућава
+Kitty протокол тастатуре, што омогућава прецизно руковање тастатуром
+(укључујући комбинације тастера као што су C\-Enter или C\-S\-Enter)
+када се повезује са терминала који подржавају овај протокол. Ако је
+постављено на false, Midnight Commander неће покушати да омогући овај
+протокол.
 .\"NODE "Parameters for external editor or viewer"
 .SH "Параметри спољашњег уређивача или прегледача"
 Поноћни наредник обезбеђује начин да се задају опције за спољашње уређиваче и
