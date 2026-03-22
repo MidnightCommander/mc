@@ -956,10 +956,6 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
         return (-1);
     }
 
-    // Skip leading "./" (if present) added in name_quote()
-    file = extfs_skip_leading_dotslash (quoted_file->str);
-    g_string_free (quoted_file, TRUE);
-
     archive_name = extfs_get_archive_name (archive);
     quoted_archive_name = name_quote (archive_name, FALSE);
     g_free (archive_name);
@@ -967,10 +963,14 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
     if (quoted_archive_name == NULL)
     {
         message (D_ERROR, MSG_ERROR, _ ("EXTFS virtual file system:\nwrong archive name"));
+        g_string_free (quoted_file, TRUE);
         return (-1);
     }
 
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
+
+    // Skip leading "./" (if present) added in name_quote()
+    file = extfs_skip_leading_dotslash (quoted_file->str);
 
     cmd = g_string_new (info->path);
     g_string_append (cmd, info->prefix);
@@ -979,6 +979,7 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
     g_string_append_c (cmd, ' ');
     g_string_append (cmd, file);
 
+    g_string_free (quoted_file, TRUE);
     g_string_free (quoted_archive_name, TRUE);
 
     if (localname != NULL && *localname != '\0')
