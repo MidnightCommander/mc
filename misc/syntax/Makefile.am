@@ -99,6 +99,7 @@ SYNTAXFILES =			\
 	tcl.syntax		\
 	texinfo.syntax		\
 	toml.syntax		\
+	tree-meta.syntax	\
 	ts.syntax		\
 	tt.syntax		\
 	unknown.syntax		\
