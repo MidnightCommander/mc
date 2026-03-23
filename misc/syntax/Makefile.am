@@ -10,6 +10,7 @@ SYNTAXFILES =			\
 	assembler.syntax	\
 	awk.syntax		\
 	b.syntax		\
+	bnf.syntax		\
 	c.syntax		\
 	cabal.syntax		\
 	caddyfile.syntax	\
