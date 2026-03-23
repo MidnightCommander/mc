@@ -1,0 +1,145 @@
+# META II (both source and object code) Syntax Highlighting Definition
+# Version 1.0.0 2026-03-19
+# See updates and changelog at https://github.com/jip/syntax-highlighting
+#
+# META II is a metacompiler developed by D.V. Schorre in the 1964
+# http://doi.acm.org/10.1145/800257.808896
+#
+# This file is part of GNU Midnight Commander
+# https://midnight-commander.org/
+#
+# SPDX-FileCopyrightText: 2026 Igor Zhuravlov <zhuravlov.ip@ya.ru>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+caseinsensitive
+
+# for the default (lightgray on blue)
+define _alerthi lightgray red
+define _alertmi gray yellow
+define _alertlo gray cyan
+define _asm     cyan
+define _assign  white
+define _comb    yellow
+define _comment brown
+define _id      lightgray
+define _lbl     white
+define _num     brightgreen
+define _oper    yellow
+define _paren   yellow
+define _sep     brightmagenta
+define _src     cyan
+define _str     brightcyan
+
+context default
+    # object code
+    # - input
+    keyword whole TST _asm
+    keyword whole ID _asm
+    keyword whole NUM _asm
+    keyword whole SR _asm
+    # - procedures
+    keyword whole CLL _asm
+    keyword whole R _asm
+    # - branch flag
+    keyword whole SET _asm
+    # - execution flow
+    keyword whole BT _asm
+    keyword whole BF _asm
+    keyword whole BE _asm
+    keyword whole B _asm
+    # - output recognized information
+    keyword whole CL _asm
+    keyword whole CI _asm
+    # - generate labels
+    keyword whole GN1 _asm
+    keyword whole GN2 _asm
+    # - control the output
+    keyword whole LB _asm
+    # - output
+    keyword whole OUT _asm
+    # - pseudo: begin, end
+    keyword whole ADR _asm
+    keyword whole END _asm
+    # - extensions
+    keyword whole GN _asm
+    keyword whole NL _asm
+    keyword whole TB _asm
+    keyword whole LMI _asm
+    keyword whole LMD _asm
+    keyword whole CC _asm
+    keyword whole CGE _asm
+    keyword whole CLE _asm
+    keyword whole CE _asm
+    keyword whole LCH _asm
+    keyword whole NOT _asm
+    keyword whole TFT _asm
+    keyword whole TFF _asm
+    keyword whole RF _asm
+    keyword whole SCN _asm
+    # - label
+    keyword whole linestart \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]\n _lbl
+    # source
+    # - built-in keywords
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.
+    keyword whole .SYNTAX _src
+    keyword whole .END _src
+    keyword whole .ID _src
+    keyword whole .STRING _src
+    keyword whole .NUMBER _src
+    keyword whole .LB _src
+    keyword whole .OUT _src
+    keyword whole .EMPTY _src
+    keyword whole .LABEL _src
+    # - extensions
+    keyword whole .RESERVED _src
+    keyword whole .INCLUDE _src
+    keyword whole .CON _src
+    keyword whole .FILE _src
+    keyword whole .NL _src
+    keyword whole .TB _src
+    keyword whole .LM\+ _src
+    keyword whole .LM- _src
+    keyword whole .TOKEN _src
+    keyword whole .DELTOK _src
+    keyword whole .ANY _src
+    # - metalinguistic variables
+    keyword \*\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\] _id
+    keyword #\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\] _id
+    keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\] _id
+    # - natural decimal integer numbers
+    keyword whole 0 _num
+    keyword whole \{123456789_\}\[0123456789_\] _num
+    # - assignment
+    keyword \{:=\} _assign
+    # - operators
+    keyword \{$:\*#!\} _oper
+    # - alternation
+    keyword / _comb
+    # - parentheses
+    keyword ( _paren
+    keyword ) _paren
+    keyword < _paren
+    keyword > _paren
+    keyword [ _paren
+    keyword ] _paren
+    # - terminators
+    keyword ., _sep
+    keyword ; _sep
+
+# strings
+
+context ' ' _str
+
+context " " _str
+
+# comments
+
+context % % _comment
+    keyword whole BUG        _alerthi
+    keyword whole DEPRECATED _alertmi
+    keyword whole FIXME      _alerthi
+    keyword whole NOTE       _alertlo
+    keyword whole TEST       _alertlo
+    keyword whole TODO       _alertmi
+    keyword whole WARN       _alertmi
+    spellcheck
