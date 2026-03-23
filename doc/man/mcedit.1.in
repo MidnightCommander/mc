@@ -468,7 +468,38 @@ can do rather than try to do things that this implementation cannot deal
 with.  Also remember that the aim of syntax highlighting is to make
 programming less prone to error, not to make code look pretty.
 .PP
+Special sequences interpreted by
+.B mcedit
+are listed below:
+.PP
+.nf
+mcedit    PCRE2 equivalent
+
+[a\-c]     \(rs[a\-c\(rs]        ([ ] has no special meaning)
+\(rs[a\-c\(rs]   (a|\-|c)*       ( \-  has no special meaning)
+{a\-c}     \(rs{a\-c\(rs}        ({ } has no special meaning)
+\(rs{a\-c\(rs}   [ac\-]          ( \-  has no special meaning)
+\&.         \(rs.
+(         \(rs(
+)         \(rs)
+*         .*
++         [^ \(rst]*
+?         \(rs?
+\(rs*        \(rs*
+\(rs+        \(rs+
+^         \(rs^
+$         \(rs$
+|         \(rs|
+\(rss        [ ]            (space only)
+\(rst        \(rst
+\(rsn        \(rsn
+.fi
+.PP
 The syntax highlighting can be toggled using Ctrl\-s shortcut.
+Pressing C\-s twice effectively reloads the syntax file, so you
+don't have to exit the editor, or
+.B mc
+itself, to test your syntax modifications.
 .SH OPTIONS
 Most options can be set from Options dialog box.  See the
 .B Options
