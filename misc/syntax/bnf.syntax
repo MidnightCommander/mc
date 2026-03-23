@@ -1,0 +1,128 @@
+# BNF family (BNF, EBNF, ABNF, WBNF etc.) Syntax Highlighting Definition
+# Version 3.0.0 2026-03-23
+# See updates and changelog at https://github.com/jip/syntax-highlighting
+#
+# Backus-Naur form (BNF) is a notation technique for context-free grammars
+#
+# This file is part of GNU Midnight Commander
+# https://midnight-commander.org/
+#
+# SPDX-FileCopyrightText: 2026 Igor Zhuravlov <zhuravlov.ip@ya.ru>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# for the default (lightgray on blue)
+define _alerthi lightgray red
+define _alertmi gray yellow
+define _alertlo gray cyan
+define _assign  white
+define _comb    yellow
+define _comment brown
+define _esc     brightgreen
+define _group   brightcyan
+define _lbl     lightgray blue underline
+define _num     brightgreen
+define _oper    yellow
+define _sep     brightmagenta
+define _special lightgray black
+define _str     green
+define _var     lightgray
+
+context default
+    # labels
+    keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\]: _lbl
+    # nonterminals
+    keyword <\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\]> _var
+    keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\] _var
+    # decimal integer numbers
+    keyword wholeleft 0 _num
+    keyword wholeleft \{123456789_\}\[0123456789_\] _num
+    keyword wholeleft -\{123456789_\}\[0123456789_\] _num
+    # repeaters (EBNF)
+    keyword (/ _group
+    keyword /) _group
+    keyword (: _group
+    keyword :) _group
+    # exclude from highlighting
+    keyword ::== lightgray blue
+    # assignments
+    keyword :≡ _assign
+    keyword :== _assign
+    keyword := _assign
+    keyword ::= _assign
+    keyword :: _assign
+    keyword : _assign
+    keyword => _assign
+    keyword = _assign
+    keyword <- _assign
+    keyword -> _assign
+    keyword <= _assign
+    keyword ← _assign
+    keyword → _assign
+    keyword ⇐ _assign
+    keyword ⇒ _assign
+    keyword ≜ _assign
+    # combinators
+    keyword | _comb
+    keyword / _comb
+    keyword \\ _comb
+    keyword - _comb
+    keyword , _comb
+    # operators
+    keyword ! _oper
+    keyword # _oper
+    keyword $ _oper
+#    keyword % _oper
+    keyword & _oper
+    keyword \* _oper
+    keyword \+ _oper
+    keyword ? _oper
+    keyword @ _oper
+    keyword ^ _oper
+    keyword ~ _oper
+    # grouping
+    keyword ( _group
+    keyword ) _group
+    keyword < _group
+    keyword > _group
+    keyword [ _group
+    keyword ] _group
+    keyword { _group
+    keyword } _group
+    # concatenator,separator,terminator
+    keyword \{.;\} _sep
+
+# strings
+
+context ' ' _str
+    keyword \\' _esc
+    keyword \\\\ _esc
+    keyword \\\{abtnvfr\} _esc
+    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+    keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+    keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+
+context " " _str
+    keyword \\" _esc
+    keyword \\\\ _esc
+    keyword \\\{abtnvfr\} _esc
+    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+    keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+    keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+
+# special sequence
+
+context ` ` _special
+    keyword \\` _special
+
+# comments
+
+context % % _comment
+    keyword \\% _comment
+    keyword whole BUG        _alerthi
+    keyword whole DEPRECATED _alertmi
+    keyword whole FIXME      _alerthi
+    keyword whole NOTE       _alertlo
+    keyword whole TEST       _alertlo
+    keyword whole TODO       _alertmi
+    keyword whole WARN       _alertmi
+    spellcheck
