@@ -372,5 +372,8 @@ include bnf.syntax
 file ..\*\\.(?i:m2o?)$ META\sII\sMetasyntax
 include meta-ii.syntax
 
+file ..\*\\.(?i:tmo?)$ TREE-META\sMetasyntax
+include tree-meta.syntax
+
 file .\* unknown
 include unknown.syntax

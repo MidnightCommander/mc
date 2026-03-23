@@ -1,0 +1,210 @@
+# TREE-META (both source and object code) Syntax Highlighting Definition
+# Version 1.0.0 2026-03-19
+# See updates and changelog at https://github.com/jip/syntax-highlighting
+#
+# TREE-META is a metacompiler developed by D. Andrews and J. Rulifson in
+# the 1967, see:
+# Andrews, D. I., Rulifson, J. F. (1967). Tree Meta (Working Draft):
+# A Meta Compiler for the SDS 940. Stanford Research Institute, Menlo
+# Park, CA. Engelbart Collection, Stanford University Archive.
+#
+# This file is part of GNU Midnight Commander
+# https://midnight-commander.org/
+#
+# SPDX-FileCopyrightText: 2026 Igor Zhuravlov <zhuravlov.ip@ya.ru>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+caseinsensitive
+
+# for the default (lightgray on blue)
+define _alerthi lightgray red
+define _alertmi gray yellow
+define _alertlo gray cyan
+define _asm     cyan
+define _assign  white
+define _comb    yellow
+define _comment brown
+define _func    brightred
+define _id      lightgray
+define _lbl     white
+define _num     brightgreen
+define _oper    yellow
+define _paren   yellow
+define _sep     brightmagenta
+define _src     cyan
+define _str     brightcyan
+
+context default
+    # object code
+    keyword whole ADD _asm
+    keyword whole AND _asm
+    keyword whole BF _asm
+    keyword whole BRARG _asm
+    keyword whole BR _asm
+    keyword whole BT _asm
+    keyword whole CALL _asm
+    keyword whole CBTP _asm
+    keyword whole CELL _asm
+    keyword whole CGER _asm
+    keyword whole CHASE _asm
+    keyword whole CHRCODE _asm
+    keyword whole CHR _asm
+    keyword whole CKBR _asm
+    keyword whole CKCHR _asm
+    keyword whole CKDIG _asm
+    keyword whole CKHEX _asm
+    keyword whole CKID _asm
+    keyword whole CKLAB _asm
+    keyword whole CKLET _asm
+    keyword whole CKNDNAM _asm
+    keyword whole CKNUM _asm
+    keyword whole CKOCT _asm
+    keyword whole CKSR _asm
+    keyword whole CKTXT _asm
+    keyword whole CLABS _asm
+    keyword whole CMPEQ _asm
+    keyword whole CMPL _asm
+    keyword whole CMPNEQ _asm
+    keyword whole CMPSGET _asm
+    keyword whole CMPSGT _asm
+    keyword whole CMPSLET _asm
+    keyword whole CMPSLT _asm
+    keyword whole CMPUGET _asm
+    keyword whole CMPUGT _asm
+    keyword whole CMPULET _asm
+    keyword whole CMPULT _asm
+    keyword whole CNTCK _asm
+    keyword whole DIG _asm
+    keyword whole DUMP _asm
+    keyword whole EOR _asm
+    keyword whole ERCHK _asm
+    keyword whole ERSTR _asm
+    keyword whole FUNC _asm
+    keyword whole GNLB _asm
+    keyword whole HEX _asm
+    keyword whole ID _asm
+    keyword whole LBARG _asm
+    keyword whole LET _asm
+    keyword whole LNEG _asm
+    keyword whole LOADI _asm
+    keyword whole LOAD _asm
+    keyword whole LSH _asm
+    keyword whole MOVTO _asm
+    keyword whole MUL _asm
+    keyword whole NDLBL _asm
+    keyword whole NDMK _asm
+    keyword whole NEG _asm
+    keyword whole NUM _asm
+    keyword whole NXTBR _asm
+    keyword whole OCT _asm
+    keyword whole OER _asm
+    keyword whole ONL _asm
+    keyword whole OR _asm
+    keyword whole OUTCH _asm
+    keyword whole OUTCL _asm
+    keyword whole OUTRE _asm
+    keyword whole OUTSR _asm
+    keyword whole RC _asm
+    keyword whole RSTBR _asm
+    keyword whole RSTRP _asm
+    keyword whole R _asm
+    keyword whole SAVEP _asm
+    keyword whole SBTP _asm
+    keyword whole SDIV _asm
+    keyword whole SET _asm
+    keyword whole SMOD _asm
+    keyword whole SRARG _asm
+    keyword whole SRCHECK _asm
+    keyword whole SRINIT _asm
+    keyword whole SRP _asm
+    keyword whole SRSH _asm
+    keyword whole SR _asm
+    keyword whole STORE _asm
+    keyword whole SUB _asm
+    keyword whole TST _asm
+    keyword whole UDIV _asm
+    keyword whole UMOD _asm
+    keyword whole URSH _asm
+    # - label
+    keyword whole linestart %\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]: _lbl
+    keyword whole linestart \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]: _lbl
+    # source
+    # - keywords
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.
+    keyword whole .CHR _src
+    keyword whole .DELIM _src
+    keyword whole .DIG _src
+    keyword whole .EMPTY _src
+    keyword whole .END _src
+    keyword whole .HEX _src
+    keyword whole .ID _src
+    keyword whole .LET _src
+    keyword whole .LIST _src
+    keyword whole .META _src
+    keyword whole .NUM _src
+    keyword whole .OCT _src
+    keyword whole .SR _src
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+    # - functions
+    keyword whole CLEAR _func
+    keyword whole CODE _func
+    keyword whole CONV _func
+    keyword whole ENTER _func
+    keyword whole LEN _func
+    keyword whole LOOK _func
+    keyword whole OUTC _func
+    keyword whole OUTL _func
+    keyword whole OUTS _func
+    keyword whole OUT _func
+    keyword whole POP _func
+    keyword whole PUSH _func
+    keyword whole XCONV _func
+    # - identifier
+    keyword whole \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\] _id
+    # - natural decimal integer numbers
+    keyword whole 0 _num
+    keyword whole \{123456789_\}\[0123456789_\] _num
+    # - label
+    keyword whole #\{1234\} _src
+    # - assignment
+    keyword := _assign
+    keyword => _assign
+    keyword = _assign
+    # - operators
+    keyword %% _oper
+    keyword // _oper
+    keyword <- _oper
+    keyword << _oper
+    keyword >>> _oper
+    keyword >> _oper
+    keyword <= _oper
+    keyword >= _oper
+    keyword \{!#$%&\*\+-.<=>?@^~\} _oper
+    # - alternation
+    keyword / _comb
+    keyword | _comb
+    # - parentheses
+    keyword ( _paren
+    keyword ) _paren
+    keyword [ _paren
+    keyword ] _paren
+    # - separators,terminator
+    keyword \{,:;\} _sep
+
+# strings
+
+context ' ' _str
+
+context " " _str
+
+# comments
+
+context £ £ _comment
+    keyword whole BUG        _alerthi
+    keyword whole DEPRECATED _alertmi
+    keyword whole FIXME      _alerthi
+    keyword whole NOTE       _alertlo
+    keyword whole TEST       _alertlo
+    keyword whole TODO       _alertmi
+    keyword whole WARN       _alertmi
+    spellcheck
