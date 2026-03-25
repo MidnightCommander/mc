@@ -1,5 +1,5 @@
 # BNF family (BNF, EBNF, ABNF, WBNF etc.) Syntax Highlighting Definition
-# Version 3.0.0 2026-03-23
+# Version 3.0.1 2026-03-25
 # See updates and changelog at https://github.com/jip/syntax-highlighting
 #
 # Backus-Naur form (BNF) is a notation technique for context-free grammars
@@ -23,7 +23,7 @@ define _lbl     lightgray blue underline
 define _num     brightgreen
 define _oper    yellow
 define _sep     brightmagenta
-define _special lightgray black
+define _special gray
 define _str     green
 define _var     lightgray
 
