@@ -45,8 +45,6 @@ mc_skin_t mc_skin__default;
 
 /*** file scope variables ************************************************************************/
 
-static gboolean mc_skin_is_init = FALSE;
-
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -149,10 +147,11 @@ mc_skin_init (const gchar *skin_override, GError **mcerror)
     }
     if (is_good_init && mc_skin__default.have_true_colors && !tty_use_truecolors (&error))
     {
-        mc_propagate_error (mcerror, 0,
-                            _ ("Unable to use '%s' skin with true colors support:\n%s\nDefault "
-                               "skin has been loaded"),
-                            mc_skin__default.name, error->message);
+        if (!mc_global.tty.disable_colors || skin_override != NULL)
+            mc_propagate_error (mcerror, 0,
+                                _ ("Unable to use '%s' skin with true colors support:\n%s\n"
+                                   "Default skin has been loaded"),
+                                mc_skin__default.name, error->message);
         g_error_free (error);
         mc_skin_try_to_load_default ();
         (void) mc_skin_ini_file_parse (&mc_skin__default);
@@ -160,16 +159,16 @@ mc_skin_init (const gchar *skin_override, GError **mcerror)
     }
     if (is_good_init && mc_skin__default.have_256_colors && !tty_use_256colors (&error))
     {
-        mc_propagate_error (mcerror, 0,
-                            _ ("Unable to use '%s' skin with 256 colors support:\n%s\nDefault "
-                               "skin has been loaded"),
-                            mc_skin__default.name, error->message);
+        if (!mc_global.tty.disable_colors || skin_override != NULL)
+            mc_propagate_error (mcerror, 0,
+                                _ ("Unable to use '%s' skin with 256 colors support:\n%s\n"
+                                   "Default skin has been loaded"),
+                                mc_skin__default.name, error->message);
         g_error_free (error);
         mc_skin_try_to_load_default ();
         (void) mc_skin_ini_file_parse (&mc_skin__default);
         is_good_init = FALSE;
     }
-    mc_skin_is_init = TRUE;
     return is_good_init;
 }
 
@@ -188,8 +187,6 @@ mc_skin_deinit (void)
 
     mc_config_deinit (mc_skin__default.config);
     mc_skin__default.config = NULL;
-
-    mc_skin_is_init = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

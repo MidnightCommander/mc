@@ -62,7 +62,11 @@ gboolean need_convert_256color = FALSE;
 
 /*** file scope variables ************************************************************************/
 
-static GHashTable *mc_tty_color__hashtable = NULL;
+#ifdef HAVE_TESTS
+extern GHashTable *mc_tty_color__hashtable;
+#endif
+
+MC_TESTABLE GHashTable *mc_tty_color__hashtable = NULL;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

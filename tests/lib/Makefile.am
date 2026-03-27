@@ -1,6 +1,6 @@
 PACKAGE_STRING = "/lib"
 
-SUBDIRS = . mcconfig search strutil vfs widget
+SUBDIRS = . mcconfig search strutil vfs widget skin
 
 AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@
 
