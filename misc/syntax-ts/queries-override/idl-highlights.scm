@@ -59,6 +59,10 @@
 [
   "short"
   "long"
+  "unsigned"
+  "char"
+  "octet"
+  "wchar"
   "float"
   "double"
   "string"
@@ -67,7 +71,9 @@
   "sequence"
   "map"
   "fixed"
+  "native"
   "Object"
+  "ValueBase"
 ] @keyword
 
 ;; Boolean type -> yellow (@keyword)

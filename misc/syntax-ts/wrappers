@@ -1,0 +1,31 @@
+# Wrapper grammar configuration.
+#
+# Wrapper grammars are template languages that wrap a host language.
+# Content outside the template syntax (the "host" content) lives in a
+# specific AST node type and can be highlighted by injecting the host
+# grammar into those nodes.
+#
+# This enables two features:
+#
+# 1. ERROR fallback: when a host grammar produces a catastrophic parse
+#    failure (ERROR root node), each wrapper that lists that host is
+#    tried as an alternative.  If the wrapper parses successfully, the
+#    host grammar is injected into the wrapper's content node.
+#    Example: a .yaml file with {{ }} Go template syntax fails to
+#    parse as YAML, so gotmpl is tried.  The YAML portions are then
+#    highlighted via injection into gotmpl's "text" nodes.
+#
+# 2. Compound extensions: for files like README.md.gotmpl, the inner
+#    extension (.md) identifies the host grammar, which is injected
+#    into the wrapper's content node.
+#    Example: README.md.gotmpl -> gotmpl grammar with markdown
+#    injected into "text" nodes.
+#
+# Format:
+#   wrapper_grammar  content_node  host1 host2 host3 ...
+#
+# wrapper_grammar  Grammar name of the wrapper (must be in extensions).
+# content_node     AST node type that holds host language content.
+# host1 host2 ...  Grammar names that this wrapper can wrap.
+
+gotmpl text yaml json toml html xml markdown css

@@ -1,0 +1,61 @@
+# This is a comment about the patch
+# Another comment line
+diff --git a/src/main.c b/src/main.c
+index abc1234..def5678 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -10,8 +10,12 @@ static int init_module(void)
+ context line stays the same
+ another context line here
+-    int old_variable = 0;
+-    cleanup(old_variable);
++    int new_variable = 42;
++    if (new_variable > 0) {
++        process(new_variable);
++    }
++    cleanup(new_variable);
+ remaining context
+diff --git a/README.md b/README.md
+new file mode 100644
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,5 @@
++# Project Title
++
++A new readme file for the project.
++
++See docs for details.
+diff --git a/old_module.c b/old_module.c
+deleted file mode 100644
+--- a/old_module.c
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#include <stdio.h>
+-void old_func(void) {
+-    printf("removed\n");
+-}
+similarity index 85%
+rename from utils.c
+rename to helpers.c
+index 1111111..2222222 100644
+--- a/utils.c
++++ b/helpers.c
+@@ -1,6 +1,6 @@
+ #include "helpers.h"
+-static const char *name = "utils";
++static const char *name = "helpers";
+ void helper_init(void) {
+-    log("utils init");
++    log("helpers init");
+ }
+diff --git a/config.h b/config.h
+index aaa1111..bbb2222 100644
+mode 100644
+--- a/config.h
++++ b/config.h
+@@ -5,3 +5,4 @@
+ #define VERSION_MAJOR 1
+ #define VERSION_MINOR 0
+-#define VERSION_PATCH 3
++#define VERSION_PATCH 4
++#define VERSION_TAG "release"

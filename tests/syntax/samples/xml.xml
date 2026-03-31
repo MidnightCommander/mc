@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="transform.xsl"?>
+<!DOCTYPE catalog [
+  <!ELEMENT catalog (book+)>
+  <!ELEMENT book (title, author, year, price)>
+  <!ELEMENT title (#PCDATA)>
+  <!ELEMENT author (#PCDATA)>
+  <!ELEMENT year (#PCDATA)>
+  <!ELEMENT price (#PCDATA)>
+  <!ATTLIST book id ID #REQUIRED>
+  <!ENTITY publisher "O'Reilly Media">
+  <!ENTITY copyright "&#169; 2024">
+]>
+
+<!-- This is an XML comment -->
+<!-- Demonstrates all TS captures for XML grammar -->
+
+<catalog xmlns="http://example.com/catalog"
+         xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+  <book id="bk101">
+    <title>XML Developer's Guide</title>
+    <dc:creator>Author One</dc:creator>
+    <author>Gambardella, Matthew</author>
+    <year>2024</year>
+    <price currency="USD">44.95</price>
+    <description>An in-depth look at creating applications with XML.</description>
+  </book>
+
+  <book id="bk102">
+    <title>Midnight Rain</title>
+    <author>Ralls, Kim</author>
+    <year>2023</year>
+    <price currency="EUR">5.95</price>
+    <description>A former architect battles corporate zombies &amp; evil.</description>
+  </book>
+
+  <!-- Entity references -->
+  <metadata>
+    <publisher>&publisher;</publisher>
+    <rights>&copyright; All rights reserved.</rights>
+  </metadata>
+
+  <!-- Character references -->
+  <symbols>
+    <item>Copyright: &#169;</item>
+    <item>Euro: &#x20AC;</item>
+    <item>Snowman: &#x2603;</item>
+  </symbols>
+
+  <!-- Attributes with various values -->
+  <config enabled="true" count="42" ratio="3.14"
+          path="/usr/local/bin" empty="">
+    <setting name="debug" value="false"/>
+    <setting name="timeout" value="30"/>
+  </config>
+
+  <!-- Nested elements -->
+  <library>
+    <section name="Fiction">
+      <shelf row="1" col="A">
+        <book id="bk201">
+          <title>The Great Novel</title>
+          <author>Smith, Jane</author>
+        </book>
+      </shelf>
+    </section>
+  </library>
+
+  <!-- Empty and self-closing elements -->
+  <empty-element/>
+  <another-empty attr="value"/>
+  <br/>
+
+  <!-- Mixed content -->
+  <paragraph>
+    This is <bold>mixed</bold> content with <italic>inline</italic> elements
+    and an entity: &amp; plus a char ref: &#60;
+  </paragraph>
+
+  <!-- CDATA section (text content) -->
+  <script>
+    <![CDATA[
+      function test() {
+        if (x < 5 && y > 3) {
+          return true;
+        }
+      }
+    ]]>
+  </script>
+
+  <!-- Processing instruction -->
+  <?php echo "Hello"; ?>
+  <?custom-pi some data here?>
+
+  <!-- Long attribute values -->
+  <link href="https://example.com/very/long/path/to/resource.html"
+        rel="alternate"
+        type="text/html"
+        title="Example Resource"/>
+
+  <!-- Namespaced elements -->
+  <dc:description xml:lang="en">
+    A catalog of books available for purchase.
+  </dc:description>
+
+  <!-- Deeply nested -->
+  <root>
+    <level1>
+      <level2>
+        <level3>
+          <level4>Deep content</level4>
+        </level3>
+      </level2>
+    </level1>
+  </root>
+
+</catalog>

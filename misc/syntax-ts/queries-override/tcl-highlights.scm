@@ -49,3 +49,14 @@
 
 ;; Escape sequences -> brightgreen
 (escaped_character) @string.special
+
+;; Brackets -> brightcyan (MC legacy colors these as brightcyan)
+[
+  "["
+  "]"
+  "{"
+  "}"
+] @delimiter
+
+;; Semicolons -> brightmagenta (MC legacy colors ; as brightmagenta)
+";" @delimiter.special

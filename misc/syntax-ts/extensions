@@ -46,6 +46,7 @@ gdshader .gdshader
 gleam .gleam
 glsl .glsl .vert .frag .geom .tesc .tese .comp
 go .go
+gotmpl .tmpl .tpl .gotmpl .gohtml .gotxt
 graphql .graphql .gql
 groovy .groovy .gradle
 hack .hack

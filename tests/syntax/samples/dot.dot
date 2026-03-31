@@ -1,0 +1,128 @@
+// Sample Graphviz DOT file demonstrating syntax highlighting
+// This file exercises all TS captures from dot-highlights.scm
+
+// Simple digraph with edge operator ->
+digraph SampleGraph {
+    // Graph-level attributes
+    rankdir = LR;
+    label = "Sample Graph";
+    fontname = "Helvetica";
+    fontsize = 14;
+    bgcolor = "white";
+    splines = true;
+    nodesep = 0.8;
+
+    // Node defaults -> @keyword
+    node [
+        shape = box,
+        style = "filled,rounded",
+        fillcolor = "#E8E8E8",
+        fontname = "Courier",
+        fontsize = 12,
+        width = 1.5
+    ];
+
+    // Edge defaults -> @keyword
+    edge [
+        color = "#333333",
+        arrowhead = normal,
+        arrowsize = 0.8,
+        penwidth = 1.2
+    ];
+
+    // Nodes with attributes
+    start [
+        label = "Start",
+        shape = ellipse,
+        fillcolor = "#90EE90"
+    ];
+    process_a [label = "Process A", tooltip = "First step"];
+    process_b [label = "Process B", tooltip = "Second step"];
+    decision [
+        label = "Decision?",
+        shape = diamond,
+        fillcolor = "#FFD700"
+    ];
+    end_node [
+        label = "End",
+        shape = ellipse,
+        fillcolor = "#FFB6C1"
+    ];
+
+    // Edges with -> operator
+    start -> process_a [label = "begin"];
+    process_a -> process_b [
+        label = "next",
+        style = dashed,
+        constraint = true
+    ];
+    process_b -> decision;
+    decision -> end_node [label = "yes", color = "green"];
+    decision -> process_a [
+        label = "no",
+        color = "red",
+        style = dotted
+    ];
+
+    // Subgraph with cluster prefix
+    subgraph cluster_services {
+        label = "Backend Services";
+        style = filled;
+        fillcolor = "#F0F8FF";
+        color = "#4169E1";
+
+        api_server [label = "API Server"];
+        database [label = "Database", shape = cylinder];
+        cache [label = "Cache", shape = hexagon];
+
+        api_server -> database [label = "query"];
+        api_server -> cache [label = "lookup"];
+        database -> cache [
+            label = "populate",
+            dir = back
+        ];
+    }
+
+    // Another subgraph
+    subgraph cluster_frontend {
+        label = "Frontend";
+        color = "#228B22";
+        style = dashed;
+
+        web_app [label = "Web App"];
+        mobile [label = "Mobile App"];
+    }
+
+    // Cross-cluster edges
+    web_app -> api_server;
+    mobile -> api_server;
+    process_b -> web_app [style = bold, label = "deploy"];
+
+    /* Block comment demonstrating
+       multi-line comment syntax
+       for the DOT language */
+
+    // HTML labels
+    report [label = <
+        <TABLE BORDER="0">
+        <TR><TD>Report</TD></TR>
+        <TR><TD><FONT COLOR="blue">Generated</FONT></TD></TR>
+        </TABLE>
+    >];
+    database -> report [label = "export"];
+}
+
+// Preprocessor line
+#include "common.dot"
+
+// Undirected graph with -- operator
+graph UndirectedSample {
+    // Strict would prevent duplicate edges
+    a -- b [weight = 1.0];
+    b -- c;
+    c -- a [label = "cycle"];
+
+    a [label = "Node A"];
+    b [label = "Node B", color = blue];
+    c [label = "Node C"];
+}

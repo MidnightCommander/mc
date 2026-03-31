@@ -93,6 +93,10 @@ edit_options_t edit_options = {
     .confirm_save = TRUE,
     .save_position = TRUE,
     .syntax_highlighting = TRUE,
+#ifdef HAVE_TREE_SITTER
+    .syntax_highlight_mode = SYNTAX_HIGHLIGHT_TS,
+    .ts_available = TRUE,
+#endif
     .group_undo = FALSE,
     .backup_ext = NULL,
     .filesize_threshold = NULL,
@@ -1779,6 +1783,15 @@ edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
 
     block_file = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
     block_file_vpath = vfs_path_from_str (block_file);
+
+    /* Save the selected block to the block file before running the command.
+       This makes %b available to macro scripts that process the selection. */
+    {
+        off_t start_mark, end_mark;
+
+        if (eval_marks (edit, &start_mark, &end_mark))
+            edit_save_block (edit, block_file, start_mark, end_mark);
+    }
 
     const gboolean status_before_ok = mc_stat (block_file_vpath, &status_before) == 0;
 

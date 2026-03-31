@@ -309,6 +309,7 @@ enum
     CK_ShowMargin,
     CK_ShowTabTws,
     CK_SyntaxOnOff,
+    CK_SyntaxToggleTS,
     CK_SyntaxChoose,
     CK_InsertLiteral,
     CK_ExternalCommand,
