@@ -56,6 +56,9 @@
 #include <sys/wait.h>
 #include <pwd.h>
 #include <grp.h>
+#ifdef HAVE_SYS_CLONEFILE_H
+#include <sys/clonefile.h>
+#endif
 
 #include "lib/global.h"
 
@@ -388,6 +391,19 @@ my_execvp (const char *file, char *const argv[])
 {
     return execvp (file, argv);
 }
+
+#ifdef HAVE_SYS_CLONEFILE_H
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Wrapper for clonefile() system call on macOS.
+ */
+
+int
+my_clonefile (const char *src, const char *dst, uint32_t flags)
+{
+    return clonefile (src, dst, flags);
+}
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /**

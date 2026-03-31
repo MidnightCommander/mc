@@ -46,13 +46,15 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#ifdef __linux__
-#ifdef HAVE_LINUX_FS_H
-#include <linux/fs.h>
-#endif
-#ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
-#endif
+#ifdef HAVE_FICLONERANGE
+#include <linux/fs.h>   // FICLONERANGE
+#include <sys/ioctl.h>  // ioctl()
+#elif defined(HAVE_COPY_FILE_RANGE)
+#include <unistd.h>  // COPY_FILE_RANGE_CLONE
+#elif defined(HAVE_SYS_CLONEFILE_H)
+#include <sys/clonefile.h>  // CLONE_NOOWNERCOPY
+#elif defined(HAVE_REFLINK)
+#include <unistd.h>  // reflink()
 #endif
 
 #include "lib/global.h"
@@ -720,11 +722,12 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
 int
 vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
 {
-#ifdef FICLONE
+#ifdef HAVE_FILE_CLONING_BY_RANGE
     void *dest_fd = NULL;
     void *src_fd = NULL;
     struct vfs_class *dest_class;
     struct vfs_class *src_class;
+    off_t in_offset, out_offset;
 
     dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
     if ((dest_class->flags & VFSF_LOCAL) == 0)
@@ -750,10 +753,78 @@ vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
         return (-1);
     }
 
-    return ioctl (*(int *) dest_fd, FICLONE, *(int *) src_fd);
+    in_offset = mc_lseek (src_vfs_fd, 0, SEEK_CUR);
+    if (in_offset < 0)
+        return (-1);
+    out_offset = mc_lseek (dest_vfs_fd, 0, SEEK_CUR);
+    if (out_offset < 0)
+        return (-1);
+
+#if defined(FICLONERANGE)
+    {
+        struct file_clone_range fcr = {
+            .src_fd = *(int *) src_fd,
+            .src_offset = in_offset,
+            .src_length = 0,
+            .dest_offset = out_offset,
+        };
+
+        return ioctl (*(int *) dest_fd, FICLONERANGE, &fcr);
+    }
+#elif defined(COPY_FILE_RANGE_CLONE)
+    {
+        ssize_t result;
+
+        do
+        {
+            result = copy_file_range (*(int *) src_fd, &in_offset, *(int *) dest_fd, &out_offset,
+                                      SSIZE_MAX, COPY_FILE_RANGE_CLONE);
+        }
+        while (result > 0);
+        return result;
+    }
+#endif
+
 #else
     (void) dest_vfs_fd;
     (void) src_vfs_fd;
+    errno = ENOTSUP;
+    return (-1);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_clone_file_by_path (const vfs_path_t *dest_vpath, const vfs_path_t *src_vpath,
+                        gboolean preserve_uidgid)
+{
+#ifdef HAVE_FILE_CLONING_BY_PATH
+    const char *src_path;
+    const char *dest_path;
+
+    if (!vfs_file_is_local (dest_vpath) || !vfs_file_is_local (src_vpath))
+    {
+        errno = ENOTSUP;
+        return (-1);
+    }
+
+    src_path = vfs_path_get_last_path_str (src_vpath);
+    dest_path = vfs_path_get_last_path_str (dest_vpath);
+
+#if defined(HAVE_SYS_CLONEFILE_H)
+#ifndef CLONE_NOOWNERCOPY  // macOS 10.13+
+#define CLONE_NOOWNERCOPY 0
+#endif
+    return my_clonefile (src_path, dest_path, preserve_uidgid ? 0 : CLONE_NOOWNERCOPY);
+#elif defined(HAVE_REFLINK)
+    return reflink (src_path, dest_path, preserve_uidgid);
+#endif
+
+#else
+    (void) dest_vpath;
+    (void) src_vpath;
+    (void) preserve_uidgid;
     errno = ENOTSUP;
     return (-1);
 #endif

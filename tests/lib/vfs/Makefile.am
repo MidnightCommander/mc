@@ -29,6 +29,7 @@ TESTS = \
 	relative_cd \
 	tempdir \
 	vfs_adjust_stat \
+	vfs_clone_file \
 	vfs_parse_ls_lga \
 	vfs_path_from_str_flags \
 	vfs_path_string_convert \
@@ -71,6 +72,9 @@ tempdir_SOURCES = \
 
 vfs_adjust_stat_SOURCES = \
 	vfs_adjust_stat.c
+
+vfs_clone_file_SOURCES = \
+	vfs_clone_file.c
 
 vfs_get_encoding_SOURCES = \
 	vfs_get_encoding.c
