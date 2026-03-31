@@ -2590,14 +2590,47 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     src_gid = src_stat.st_gid;
     file_size = src_stat.st_size;
 
+#ifdef HAVE_FILE_CLONING_BY_PATH
+    // On macOS 10.12+ and Solaris 11.4+, the syscalls for file cloning respond for creation of the
+    // destination file, so try them before mc_open to avoid handling various races later.
+    // Full file cloning is not supported in append and reget modes.
+    if (mc_global.vfs.file_cloning && !(dst_exists && ctx->do_append))
+    {
+        // Destination file must not exist before the cloning syscall
+        if (dst_exists)
+        {
+            if (!try_remove_file (ctx, dst_vpath, &return_status))
+                goto ret;
+            dst_exists = FALSE;
+        }
+        // Passing preserve_uidgid to the syscall to reduce racing
+        if (vfs_clone_file_by_path (dst_vpath, src_vpath, ctx->preserve_uidgid) == 0)
+        {
+            dst_status = DEST_FULL;
+            return_status = FILE_CONT;
+            goto ret;
+        }
+    }
+#endif
+
     open_flags = O_WRONLY;
     if (!dst_exists)
         open_flags |= O_CREAT | O_EXCL;
     else if (ctx->do_append)
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+        // FICLONERANGE on Linux and copy_file_range(2) on FreeBSD support block-aligned ranges for
+        // cloning, but for not in O_APPEND mode. Use O_WRONLY + mc_lseek instead as we don't care
+        // about atomicity in our use cases.
+        open_flags |= mc_global.vfs.file_cloning ? O_WRONLY : O_APPEND;
+#else
         open_flags |= O_APPEND;
+#endif
     else
         open_flags |= O_CREAT | O_TRUNC;
 
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+open_dest:
+#endif
     while ((dest_desc = mc_open (dst_vpath, open_flags, src_mode)) < 0)
     {
         if (errno != EEXIST)
@@ -2624,13 +2657,28 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     appending = ctx->do_append;
     ctx->do_append = FALSE;
 
-    // Try clone the file first.
-    if (vfs_clone_file (dest_desc, src_desc) == 0)
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+    // Try clone the file first, but not if the file is in O_APPEND mode
+    if (mc_global.vfs.file_cloning && !(open_flags & O_APPEND))
     {
-        dst_status = DEST_FULL;
-        return_status = FILE_CONT;
-        goto ret;
+        if ((appending ? mc_lseek (dest_desc, 0, SEEK_END) >= 0 : TRUE)
+            && vfs_clone_file (dest_desc, src_desc) == 0)
+        {
+            dst_status = DEST_FULL;
+            return_status = FILE_CONT;
+            goto ret;
+        }
+        else if (appending && !(open_flags & O_APPEND))
+        {
+            // Cloning append has failed, resort to normal append
+            ctx->do_append = TRUE;
+            mc_close (dest_desc);
+            dst_status = DEST_NONE;
+            open_flags = (open_flags & ~O_WRONLY) | O_APPEND;
+            goto open_dest;
+        }
     }
+#endif
 
     // Find out the optimal buffer size.
     while (mc_fstat (dest_desc, &dst_stat) != 0)

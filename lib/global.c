@@ -46,8 +46,7 @@
 
 /*** global variables ****************************************************************************/
 
-mc_global_t mc_global =
-{
+mc_global_t mc_global = {
     .mc_version = MC_CURRENT_VERSION,
 
     .mc_run_mode = MC_RUN_FULL,
@@ -70,28 +69,26 @@ mc_global_t mc_global =
     .we_are_background = FALSE,
 #endif
 
-    .widget =
-    {
+    .widget = {
         .confirm_history_cleanup = TRUE,
         .show_all_if_ambiguous = FALSE,
-        .is_right = FALSE
+        .is_right = FALSE,
     },
 
     .shell = NULL,
 
-    .tty =
-    {
+    .tty = {
         .skin = NULL,
         .shadows = TRUE,
         .setup_color_string = NULL,
         .term_color_string = NULL,
         .color_terminal_string = NULL,
+
 #ifndef LINUX_CONS_SAVER_C
         .console_flag = '\0',
 #endif
 
         .use_subshell = SUBSHELL_USE,
-
 #ifdef ENABLE_SUBSHELL
         .subshell_pty = 0,
 #endif
@@ -102,14 +99,14 @@ mc_global_t mc_global =
         .disable_colors = FALSE,
         .ugly_line_drawing = FALSE,
         .old_mouse = FALSE,
-        .alternate_plus_minus = FALSE
+        .alternate_plus_minus = FALSE,
     },
 
-    .vfs =
-    {
+    .vfs = {
         .cd_symlinks = TRUE,
         .preallocate_space = FALSE,
-    }
+        .file_cloning = TRUE,
+    },
 
 };
 

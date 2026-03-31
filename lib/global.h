@@ -220,6 +220,8 @@ typedef struct
         // Preallocate space before file copying
         gboolean preallocate_space;
 
+        // Use COW file cloning on supported filesystems
+        gboolean file_cloning;
     } vfs;
 } mc_global_t;
 

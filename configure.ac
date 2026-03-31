@@ -380,11 +380,55 @@ case $host_os in
     AC_DEFINE([PTY_ZEROREAD], [1], [read(1) can return 0 for a non-closed fd])
 esac
 
-dnl Check linux/fs.h for FICLONE to support BTRFS's file clone operation
+dnl Check linux/fs.h for FICLONERANGE to support file clone operation
 case $host_os in
 linux*)
     AC_CHECK_HEADERS([linux/fs.h])
+    AC_MSG_CHECKING([for FICLONERANGE])
+    AC_EGREP_CPP([FICLONERANGE_IS_DEFINED],
+        [
+            #include <linux/fs.h>
+            #ifdef FICLONERANGE
+            FICLONERANGE_IS_DEFINED
+            #endif
+        ],
+        [
+            have_ficlonerange=yes
+            AC_DEFINE(HAVE_FICLONERANGE, 1, [Define if FICLONERANGE is supported on Linux])
+            AC_MSG_RESULT(yes)
+        ],
+        [
+            AC_MSG_RESULT(no)
+        ])
 esac
+
+dnl Check for copy_file_range(2) support (FreeBSD 13+)
+case $host_os in
+freebsd*)
+    AC_CHECK_FUNCS(copy_file_range)
+esac
+
+dnl Check for reflink(3C) support (Solaris 11.3+)
+case $host_os in
+solaris*)
+    AC_CHECK_FUNCS(reflink)
+esac
+
+dnl Check for clonefile(2) support (macOS 10.12+)
+case $host_os in
+darwin*)
+    AC_CHECK_HEADERS([sys/clonefile.h])
+esac
+
+if test "x$have_ficlonerange" = xyes || \
+   test "x$ac_cv_func_copy_file_range" = xyes; then
+    AC_DEFINE([HAVE_FILE_CLONING_BY_RANGE], [1], [Define if system can clone files by range])
+fi
+
+if test "x$ac_cv_header_sys_clonefile_h" = xyes || \
+   test "x$ac_cv_func_reflink" = xyes; then
+    AC_DEFINE([HAVE_FILE_CLONING_BY_PATH], [1], [Define if system can clone files by path])
+fi
 
 dnl Check if the OS is supported by the console saver.
 cons_saver=""
