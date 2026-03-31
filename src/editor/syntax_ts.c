@@ -80,6 +80,8 @@ typedef struct
    Value: GINT_TO_POINTER(color_pair_id) */
 static GHashTable *ts_color_map = NULL;
 
+/* Color pair for ERROR nodes (red foreground).  Allocated on first use, -1 = not yet allocated. */
+static int ts_error_color = -1;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -166,6 +168,9 @@ ts_load_color_config (void)
 
     if (ts_color_map != NULL)
         return;
+
+    /* Allocate red color for ERROR nodes (parse failures) */
+    ts_error_color = ts_alloc_color_from_spec ("red;");
 
     ts_color_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
@@ -506,6 +511,89 @@ ts_config_lookup_by_grammar (const char *config_name, const char *grammar_name)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Reverse lookup: given a config file and a display value (rest of line),
+ * return the key (first field).  For example, looking up "Go Template" in
+ * display-names returns "gotmpl".
+ * Returns newly allocated string or NULL.
+ */
+char *
+ts_config_reverse_lookup (const char *config_name, const char *display_value)
+{
+    const char *dirs[2];
+    int d;
+
+    dirs[0] = mc_config_get_data_path ();
+    dirs[1] = mc_global.share_data_dir;
+
+    for (d = 0; d < 2; d++)
+    {
+        char *path;
+        FILE *f;
+        char *line = NULL;
+
+        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, config_name, (char *) NULL);
+        f = fopen (path, "r");
+        g_free (path);
+
+        if (f == NULL)
+            continue;
+
+        while (read_one_line (&line, f) != 0)
+        {
+            char *p, *key, *rest, *end;
+
+            p = line;
+            while (*p != '\0' && whiteness (*p))
+                p++;
+            if (*p == '#' || *p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+
+            key = p;
+            while (*p != '\0' && !whiteness (*p))
+                p++;
+            if (*p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+            *p++ = '\0';
+
+            while (*p != '\0' && whiteness (*p))
+                p++;
+            rest = p;
+
+            end = rest + strlen (rest) - 1;
+            while (end > rest && whiteness (*end))
+                *end-- = '\0';
+
+            if (strcmp (rest, display_value) == 0)
+            {
+                char *result = g_strdup (key);
+
+                g_free (line);
+                fclose (f);
+                return result;
+            }
+
+            g_free (line);
+            line = NULL;
+        }
+
+        g_free (line);
+        fclose (f);
+    }
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Extract interpreter name from a shebang line.
  * "#!/usr/bin/env python3" -> "python3"
  * "#!/usr/bin/python" -> "python"
@@ -645,6 +733,232 @@ ts_find_grammar (const char *filename, const char *first_line,
     }
 
     return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Look up the wrappers config file to find a wrapper grammar for a given host.
+ * The wrappers file format is:
+ *   wrapper_grammar  content_node  host1 host2 ...
+ *
+ * If host_grammar matches one of the hosts, returns the wrapper grammar name
+ * (newly allocated) and fills content_node (newly allocated).
+ * Returns NULL if no wrapper handles this host.
+ */
+static char *
+ts_find_wrapper_for_host (const char *host_grammar, char **content_node)
+{
+    const char *dirs[2];
+    int d;
+
+    *content_node = NULL;
+    dirs[0] = mc_config_get_data_path ();
+    dirs[1] = mc_global.share_data_dir;
+
+    for (d = 0; d < 2; d++)
+    {
+        char *path;
+        FILE *f;
+        char *line = NULL;
+
+        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, "wrappers", (char *) NULL);
+        f = fopen (path, "r");
+        g_free (path);
+
+        if (f == NULL)
+            continue;
+
+        while (read_one_line (&line, f) != 0)
+        {
+            char *p, *wrapper, *node;
+
+            p = line;
+            while (*p != '\0' && whiteness (*p))
+                p++;
+            if (*p == '#' || *p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+
+            /* Field 1: wrapper grammar name */
+            wrapper = p;
+            while (*p != '\0' && !whiteness (*p))
+                p++;
+            if (*p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+            *p++ = '\0';
+
+            /* Field 2: content node name */
+            while (*p != '\0' && whiteness (*p))
+                p++;
+            node = p;
+            while (*p != '\0' && !whiteness (*p))
+                p++;
+            if (*p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+            *p++ = '\0';
+
+            /* Remaining fields: host grammar names */
+            while (*p != '\0')
+            {
+                char *host;
+
+                while (*p != '\0' && whiteness (*p))
+                    p++;
+                if (*p == '\0')
+                    break;
+
+                host = p;
+                while (*p != '\0' && !whiteness (*p))
+                    p++;
+                if (*p != '\0')
+                    *p++ = '\0';
+
+                if (strcmp (host, host_grammar) == 0)
+                {
+                    char *result = g_strdup (wrapper);
+
+                    *content_node = g_strdup (node);
+                    g_free (line);
+                    fclose (f);
+                    return result;
+                }
+            }
+
+            g_free (line);
+            line = NULL;
+        }
+
+        g_free (line);
+        fclose (f);
+    }
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Look up the wrappers config file to find the content node for a wrapper grammar.
+ * Returns the content node name (newly allocated), or NULL if not a wrapper.
+ */
+static char *
+ts_find_wrapper_content_node (const char *wrapper_grammar)
+{
+    const char *dirs[2];
+    int d;
+
+    dirs[0] = mc_config_get_data_path ();
+    dirs[1] = mc_global.share_data_dir;
+
+    for (d = 0; d < 2; d++)
+    {
+        char *path;
+        FILE *f;
+        char *line = NULL;
+
+        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, "wrappers", (char *) NULL);
+        f = fopen (path, "r");
+        g_free (path);
+
+        if (f == NULL)
+            continue;
+
+        while (read_one_line (&line, f) != 0)
+        {
+            char *p, *wrapper, *node;
+
+            p = line;
+            while (*p != '\0' && whiteness (*p))
+                p++;
+            if (*p == '#' || *p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+
+            /* Field 1: wrapper grammar name */
+            wrapper = p;
+            while (*p != '\0' && !whiteness (*p))
+                p++;
+            if (*p == '\0')
+            {
+                g_free (line);
+                line = NULL;
+                continue;
+            }
+            *p++ = '\0';
+
+            if (strcmp (wrapper, wrapper_grammar) == 0)
+            {
+                char *result;
+
+                /* Field 2: content node name */
+                while (*p != '\0' && whiteness (*p))
+                    p++;
+                node = p;
+                while (*p != '\0' && !whiteness (*p))
+                    p++;
+                *p = '\0';
+
+                result = g_strdup (node);
+                g_free (line);
+                fclose (f);
+                return result;
+            }
+
+            g_free (line);
+            line = NULL;
+        }
+
+        g_free (line);
+        fclose (f);
+    }
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Build and install an injection query that injects host_grammar into
+ * content_node nodes of the current wrapper grammar.
+ * Example: inject "yaml" into "text" nodes produces:
+ *   ((text) @injection.content (#set! injection.language "yaml"))
+ */
+static void
+ts_setup_wrapper_injection (WEdit *edit, const TSLanguage *lang,
+                            const char *content_node, const char *host_grammar)
+{
+    char *inj_src;
+    uint32_t inj_len;
+    uint32_t eo;
+    TSQueryError et;
+    TSQuery *inj_query;
+
+    inj_src = g_strdup_printf ("((%s) @injection.content (#set! injection.language \"%s\"))",
+                               content_node, host_grammar);
+    inj_len = (uint32_t) strlen (inj_src);
+    inj_query = ts_query_new (lang, inj_src, inj_len, &eo, &et);
+    g_free (inj_src);
+
+    if (inj_query != NULL)
+    {
+        edit->ts.injection_query = inj_query;
+        edit->ts.injection_lang_cache = g_hash_table_new (g_str_hash, g_str_equal);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1003,7 +1317,7 @@ ts_init_injections (WEdit *edit, const char *grammar_name, const TSLanguage *lan
  *   3. Query file by convention: <name>-highlights.scm
  */
 gboolean
-ts_init_for_file (WEdit *edit)
+ts_init_for_file (WEdit *edit, const char *forced_grammar)
 {
     const char *filename;
     char *grammar_name = NULL;
@@ -1024,7 +1338,16 @@ ts_init_for_file (WEdit *edit)
 
     filename = vfs_path_as_str (edit->filename_vpath);
 
-    if (!ts_find_grammar (filename, get_first_editor_line (edit), &grammar_name, &display_name))
+    if (forced_grammar != NULL)
+    {
+        /* Manual grammar selection — skip auto-detection */
+        grammar_name = g_strdup (forced_grammar);
+        display_name = ts_config_lookup_by_grammar ("display-names", forced_grammar);
+        if (display_name == NULL)
+            display_name = g_strdup (forced_grammar);
+    }
+    else if (!ts_find_grammar (filename, get_first_editor_line (edit), &grammar_name,
+                               &display_name))
         return FALSE;
 
     // Look up grammar in the static registry
@@ -1061,6 +1384,62 @@ ts_init_for_file (WEdit *edit)
         g_free (grammar_name);
         g_free (display_name);
         return FALSE;
+    }
+
+    /* If the parser produced an ERROR root (catastrophic parse failure), check
+       the wrappers config to see if a wrapper grammar can handle this file.
+       For example, a .yaml file with Go template syntax fails to parse as YAML,
+       so a wrapper like gotmpl is tried.  If it succeeds, the original grammar
+       is injected into the wrapper's content nodes (e.g. "text"). */
+    if (ts_node_is_error (ts_tree_root_node (tree)))
+    {
+        char *content_node = NULL;
+        char *wrapper_name;
+
+        wrapper_name = ts_find_wrapper_for_host (grammar_name, &content_node);
+        if (wrapper_name != NULL)
+        {
+            const TSLanguage *wrapper_lang;
+
+            wrapper_lang = ts_grammar_registry_lookup (wrapper_name);
+            if (wrapper_lang != NULL && ts_parser_set_language (parser, wrapper_lang))
+            {
+                TSTree *wrapper_tree;
+
+                wrapper_tree = ts_parser_parse (parser, NULL, input);
+                if (wrapper_tree != NULL
+                    && !ts_node_is_error (ts_tree_root_node (wrapper_tree)))
+                {
+                    char *wrapper_display;
+
+                    /* Inject the original grammar into the wrapper's content nodes */
+                    ts_setup_wrapper_injection (edit, wrapper_lang, content_node,
+                                                grammar_name);
+
+                    ts_tree_delete (tree);
+                    tree = wrapper_tree;
+                    lang = wrapper_lang;
+                    g_free (grammar_name);
+                    grammar_name = g_strdup (wrapper_name);
+                    g_free (display_name);
+                    wrapper_display =
+                        ts_config_lookup_by_grammar ("display-names", wrapper_name);
+                    display_name =
+                        (wrapper_display != NULL) ? wrapper_display : g_strdup (wrapper_name);
+                }
+                else
+                {
+                    /* Wrapper didn't help — restore original language and tree */
+                    if (wrapper_tree != NULL)
+                        ts_tree_delete (wrapper_tree);
+                    ts_parser_set_language (parser, lang);
+                }
+            }
+
+            g_free (wrapper_name);
+        }
+
+        g_free (content_node);
     }
 
     // Load and compile highlight query: <name>-highlights.scm
@@ -1102,7 +1481,60 @@ ts_init_for_file (WEdit *edit)
 
     // Try to initialize language injection (e.g., markdown inline within markdown block)
     // Failure is non-fatal — highlighting works without injection.
-    ts_init_injections (edit, grammar_name, lang);
+    // Skip if injection was already set up (e.g., by gotmpl fallback).
+    if (edit->ts.injection_query == NULL)
+        ts_init_injections (edit, grammar_name, lang);
+
+    /* For wrapper grammars with a compound extension (e.g., .md.gotmpl, .yaml.tmpl),
+       inject the host language into the wrapper's content nodes based on the
+       preceding extension.  The wrappers config defines which grammars are wrappers
+       and what content node they use. */
+    if (edit->ts.injection_query == NULL)
+    {
+        char *content_node;
+
+        content_node = ts_find_wrapper_content_node (grammar_name);
+        if (content_node != NULL)
+        {
+            const char *base;
+            const char *last_dot;
+
+            base = strrchr (filename, PATH_SEP);
+            base = (base != NULL) ? base + 1 : filename;
+            last_dot = strrchr (base, '.');
+
+            /* Look for a second extension before the wrapper extension */
+            if (last_dot != NULL && last_dot > base)
+            {
+                const char *prev_dot;
+                char ext_buf[32];
+                ptrdiff_t ext_len;
+
+                prev_dot = g_strrstr_len (base, (gssize) (last_dot - base), ".");
+                if (prev_dot != NULL)
+                {
+                    ext_len = last_dot - prev_dot;
+                    if (ext_len > 0 && ext_len < (ptrdiff_t) sizeof (ext_buf))
+                    {
+                        char *host_grammar;
+
+                        memcpy (ext_buf, prev_dot, (size_t) ext_len);
+                        ext_buf[ext_len] = '\0';
+
+                        host_grammar = ts_config_lookup_by_value ("extensions", ext_buf);
+                        if (host_grammar != NULL)
+                        {
+                            ts_setup_wrapper_injection (edit, lang, content_node,
+                                                        host_grammar);
+                            g_free (host_grammar);
+                        }
+                    }
+                }
+            }
+
+            g_free (content_node);
+        }
+    }
 
     g_free (edit->syntax_type);
     edit->syntax_type = display_name;  // takes ownership
@@ -1178,6 +1610,17 @@ ts_free (WEdit *edit)
     edit->ts.highlights_start = -1;
     edit->ts.highlights_end = -1;
     edit->ts.active = FALSE;
+
+    /* Clear the global color map so it's reloaded on next init.
+       This is needed because tty_color_free_temp() (called by
+       edit_free_syntax_rules) invalidates all temporary color pairs,
+       including the ones stored in ts_color_map. */
+    if (ts_color_map != NULL)
+    {
+        g_hash_table_destroy (ts_color_map);
+        ts_color_map = NULL;
+        ts_error_color = -1;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1307,6 +1750,196 @@ ts_get_dynamic_lang (GHashTable *lang_cache, const char *lang_name)
 }
 
 /**
+ * Recursively collect ERROR nodes within a byte range and append red highlights.
+ */
+static void
+ts_collect_error_highlights (TSNode node, uint32_t range_start, uint32_t range_end,
+                             GArray *highlights)
+{
+    uint32_t start, end, i, child_count;
+
+    start = ts_node_start_byte (node);
+    end = ts_node_end_byte (node);
+
+    /* Skip nodes entirely outside the range */
+    if (end <= range_start || start >= range_end)
+        return;
+
+    if (ts_node_is_error (node))
+    {
+        ts_highlight_entry_t entry;
+
+        entry.start_byte = start;
+        entry.end_byte = end;
+        entry.color = ts_error_color;
+        g_array_append_val (highlights, entry);
+        return;  /* Don't recurse into ERROR children */
+    }
+
+    child_count = ts_node_child_count (node);
+    for (i = 0; i < child_count; i++)
+        ts_collect_error_highlights (ts_node_child (node, i), range_start, range_end, highlights);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Maximum nesting depth for recursive injection (e.g., gotmpl -> markdown -> python).
+   Prevents infinite loops from circular injection configurations. */
+#define TS_MAX_INJECTION_DEPTH 3
+
+/**
+ * Parse an injected language within a content node range and run its highlights.
+ * If the injected language has its own injections.scm, recurse up to max_depth.
+ */
+static void
+ts_inject_and_highlight (const char *lang_name, TSNode content_node, TSInput input,
+                         uint32_t range_start, uint32_t range_end, GArray *highlights,
+                         GHashTable *lang_cache, WEdit *edit, int depth)
+{
+    ts_dynamic_lang_t *dl;
+    TSRange r;
+    TSTree *inject_tree;
+
+    dl = ts_get_dynamic_lang (lang_cache, lang_name);
+    if (dl == NULL)
+        return;
+
+    r.start_point = ts_node_start_point (content_node);
+    r.end_point = ts_node_end_point (content_node);
+    r.start_byte = ts_node_start_byte (content_node);
+    r.end_byte = ts_node_end_byte (content_node);
+
+    ts_parser_set_included_ranges ((TSParser *) dl->parser, &r, 1);
+    inject_tree = ts_parser_parse ((TSParser *) dl->parser, NULL, input);
+    if (inject_tree == NULL)
+        return;
+
+    ts_run_query_into_highlights ((TSQuery *) dl->query, inject_tree,
+                                 range_start, range_end, highlights, lang_name, edit);
+
+    /* Recurse: if the injected language has its own injections.scm,
+       process nested injections (e.g., markdown -> markdown_inline,
+       markdown -> python for fenced code blocks). */
+    if (depth > 0)
+    {
+        const TSLanguage *inj_lang;
+
+        inj_lang = ts_grammar_registry_lookup (lang_name);
+        if (inj_lang != NULL)
+        {
+            char *nested_inj_filename;
+            char *nested_inj_src;
+            uint32_t nested_inj_len;
+
+            nested_inj_filename = g_strdup_printf ("%s-injections.scm", lang_name);
+            nested_inj_src = ts_load_query_file (nested_inj_filename, &nested_inj_len);
+            g_free (nested_inj_filename);
+
+            if (nested_inj_src != NULL)
+            {
+                uint32_t eo;
+                TSQueryError et;
+                TSQuery *nested_inj_query;
+
+                nested_inj_query =
+                    ts_query_new (inj_lang, nested_inj_src, nested_inj_len, &eo, &et);
+                g_free (nested_inj_src);
+
+                if (nested_inj_query != NULL)
+                {
+                    TSNode inj_root;
+                    TSQueryCursor *nested_cursor;
+                    TSQueryMatch nested_match;
+
+                    inj_root = ts_tree_root_node (inject_tree);
+                    nested_cursor = ts_query_cursor_new ();
+                    ts_query_cursor_set_byte_range (nested_cursor, range_start, range_end);
+                    ts_query_cursor_exec (nested_cursor, nested_inj_query, inj_root);
+
+                    while (ts_query_cursor_next_match (nested_cursor, &nested_match))
+                    {
+                        TSNode nested_content = { .id = NULL };
+                        TSNode nested_lang_node = { .id = NULL };
+                        const char *nested_static_lang = NULL;
+                        uint32_t nci;
+
+                        if (!ts_evaluate_match_predicates (nested_inj_query, &nested_match, edit))
+                            continue;
+
+                        for (nci = 0; nci < nested_match.capture_count; nci++)
+                        {
+                            uint32_t nlen;
+                            const char *ncap;
+
+                            ncap = ts_query_capture_name_for_id (nested_inj_query,
+                                                                  nested_match.captures[nci].index,
+                                                                  &nlen);
+                            if (strcmp (ncap, "injection.content") == 0)
+                                nested_content = nested_match.captures[nci].node;
+                            else if (strcmp (ncap, "injection.language") == 0)
+                                nested_lang_node = nested_match.captures[nci].node;
+                        }
+
+                        if (ts_node_is_null (nested_content))
+                            continue;
+
+                        nested_static_lang =
+                            ts_get_set_predicate (nested_inj_query, nested_match.pattern_index,
+                                                  "injection.language");
+
+                        if (nested_static_lang != NULL)
+                        {
+                            ts_inject_and_highlight (nested_static_lang, nested_content, input,
+                                                     range_start, range_end, highlights,
+                                                     lang_cache, edit, depth - 1);
+                        }
+                        else if (!ts_node_is_null (nested_lang_node))
+                        {
+                            uint32_t ls = ts_node_start_byte (nested_lang_node);
+                            uint32_t le = ts_node_end_byte (nested_lang_node);
+                            uint32_t ll = le - ls;
+
+                            if (ll > 0 && ll < 64)
+                            {
+                                char lbuf[64];
+                                uint32_t li;
+                                char *s, *e;
+
+                                for (li = 0; li < ll; li++)
+                                    lbuf[li] = (char) edit_buffer_get_byte (&edit->buffer,
+                                                                            (off_t) (ls + li));
+                                lbuf[ll] = '\0';
+
+                                s = lbuf;
+                                while (*s == ' ' || *s == '\t')
+                                    s++;
+                                e = s + strlen (s);
+                                while (e > s && (e[-1] == ' ' || e[-1] == '\t' || e[-1] == '\n'
+                                                 || e[-1] == '\r'))
+                                    e--;
+                                *e = '\0';
+
+                                if (*s != '\0')
+                                    ts_inject_and_highlight (s, nested_content, input,
+                                                             range_start, range_end, highlights,
+                                                             lang_cache, edit, depth - 1);
+                            }
+                        }
+                    }
+
+                    ts_query_cursor_delete (nested_cursor);
+                    ts_query_delete (nested_inj_query);
+                }
+            }
+        }
+    }
+
+    ts_tree_delete (inject_tree);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Rebuild the highlight cache for the given byte range.
  * Runs the highlight query and collects (start_byte, end_byte, color) entries.
  * If injection is active, also runs the injection query on target node ranges.
@@ -1350,9 +1983,6 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
                                  edit->ts.highlights, edit->ts.grammar_name, edit);
 
     // Run injection queries if configured.
-    // Execute the injection query against the primary tree, then for each match
-    // find @injection.content (byte range) and the language (from @injection.language
-    // capture or #set! injection.language predicate), parse and highlight.
     if (edit->ts.injection_query != NULL)
     {
         TSNode root;
@@ -1375,15 +2005,9 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
             const char *static_lang = NULL;
             uint32_t ci;
 
-            /* Evaluate filter predicates (#eq?, #any-of?, etc.) */
             if (!ts_evaluate_match_predicates (inj_query, &match, edit))
                 continue;
 
-            /* TODO: #set! injection.include-children affects range calculation.
-               Currently we use the full byte range of @injection.content which
-               is sufficient for most cases. */
-
-            // Find @injection.content and @injection.language captures
             for (ci = 0; ci < match.capture_count; ci++)
             {
                 uint32_t name_len;
@@ -1401,13 +2025,18 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
             if (ts_node_is_null (content_node))
                 continue;
 
-            // Determine the injection language name
             static_lang = ts_get_set_predicate (inj_query, match.pattern_index,
                                                 "injection.language");
 
-            if (static_lang == NULL && !ts_node_is_null (lang_node))
+            if (static_lang != NULL)
             {
-                // Read the language name from the @injection.language capture node
+                ts_inject_and_highlight (static_lang, content_node, input,
+                                         (uint32_t) range_start, (uint32_t) range_end,
+                                         edit->ts.highlights, edit->ts.injection_lang_cache,
+                                         edit, TS_MAX_INJECTION_DEPTH);
+            }
+            else if (!ts_node_is_null (lang_node))
+            {
                 uint32_t lang_start = ts_node_start_byte (lang_node);
                 uint32_t lang_end = ts_node_end_byte (lang_node);
                 uint32_t lang_len = lang_end - lang_start;
@@ -1424,7 +2053,6 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
                                                         (off_t) (lang_start + li));
                     lang_buf[lang_len] = '\0';
 
-                    // Strip leading/trailing whitespace
                     s = lang_buf;
                     while (*s == ' ' || *s == '\t')
                         s++;
@@ -1435,66 +2063,53 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
                     *e = '\0';
 
                     if (*s != '\0')
-                    {
-                        ts_dynamic_lang_t *dl;
-
-                        dl = ts_get_dynamic_lang (edit->ts.injection_lang_cache, s);
-                        if (dl != NULL)
-                        {
-                            TSRange r;
-                            TSTree *inject_tree;
-
-                            r.start_point = ts_node_start_point (content_node);
-                            r.end_point = ts_node_end_point (content_node);
-                            r.start_byte = ts_node_start_byte (content_node);
-                            r.end_byte = ts_node_end_byte (content_node);
-
-                            ts_parser_set_included_ranges ((TSParser *) dl->parser, &r, 1);
-                            inject_tree =
-                                ts_parser_parse ((TSParser *) dl->parser, NULL, input);
-                            if (inject_tree != NULL)
-                            {
-                                ts_run_query_into_highlights ((TSQuery *) dl->query, inject_tree,
-                                                             (uint32_t) range_start,
-                                                             (uint32_t) range_end,
-                                                             edit->ts.highlights, s, edit);
-                                ts_tree_delete (inject_tree);
-                            }
-                        }
-                    }
-                }
-            }
-            else if (static_lang != NULL)
-            {
-                // Static language from #set! injection.language predicate
-                ts_dynamic_lang_t *dl;
-
-                dl = ts_get_dynamic_lang (edit->ts.injection_lang_cache, static_lang);
-                if (dl != NULL)
-                {
-                    TSRange r;
-                    TSTree *inject_tree;
-
-                    r.start_point = ts_node_start_point (content_node);
-                    r.end_point = ts_node_end_point (content_node);
-                    r.start_byte = ts_node_start_byte (content_node);
-                    r.end_byte = ts_node_end_byte (content_node);
-
-                    ts_parser_set_included_ranges ((TSParser *) dl->parser, &r, 1);
-                    inject_tree = ts_parser_parse ((TSParser *) dl->parser, NULL, input);
-                    if (inject_tree != NULL)
-                    {
-                        ts_run_query_into_highlights ((TSQuery *) dl->query, inject_tree,
-                                                     (uint32_t) range_start,
-                                                     (uint32_t) range_end,
-                                                     edit->ts.highlights, static_lang, edit);
-                        ts_tree_delete (inject_tree);
-                    }
+                        ts_inject_and_highlight (s, content_node, input,
+                                                 (uint32_t) range_start, (uint32_t) range_end,
+                                                 edit->ts.highlights,
+                                                 edit->ts.injection_lang_cache,
+                                                 edit, TS_MAX_INJECTION_DEPTH);
                 }
             }
         }
 
         ts_query_cursor_delete (inj_cursor);
+    }
+
+    /* Collect ERROR nodes and highlight them in red.  ERROR entries are appended
+       last so that valid captures (which are narrower) take precedence via the
+       "narrower wins" rule in ts_get_color_at(). */
+    if (ts_error_color >= 0)
+    {
+        TSNode root;
+
+        root = ts_tree_root_node (tree);
+
+        /* Only collect ERROR highlights if the root is NOT itself an ERROR node.
+           When the root is ERROR (e.g. macro-heavy C files like sqlite3.c), the
+           entire file would be painted red, which is unhelpful.  In that case,
+           let the highlight query captures show whatever they can and leave
+           uncaptured regions as DEFAULT. */
+        if (!ts_node_is_error (root))
+        {
+            ts_collect_error_highlights (root, (uint32_t) range_start,
+                                         (uint32_t) range_end, edit->ts.highlights);
+
+            /* If the tree root does not cover the full visible range (e.g. the
+               parser gave up early), color the uncovered tail as error too. */
+            if (ts_node_end_byte (root) < (uint32_t) range_end)
+            {
+                ts_highlight_entry_t entry;
+                uint32_t gap_start = ts_node_end_byte (root);
+
+                if (gap_start < (uint32_t) range_start)
+                    gap_start = (uint32_t) range_start;
+
+                entry.start_byte = gap_start;
+                entry.end_byte = (uint32_t) range_end;
+                entry.color = ts_error_color;
+                g_array_append_val (edit->ts.highlights, entry);
+            }
+        }
     }
 
     edit->ts.highlights_start = range_start;

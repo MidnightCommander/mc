@@ -63,6 +63,7 @@
 #include "lib/widget.h"  // Listbox, message()
 
 #include "src/util.h"  // file_error_message()
+#include "src/args.h"  // mc_args__no_tree_sitter
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -1529,10 +1530,15 @@ edit_get_syntax_color (WEdit *edit, off_t byte_index)
 void
 edit_free_syntax_rules (WEdit *edit)
 {
+#ifdef HAVE_TREE_SITTER
+    gboolean had_ts;
+#endif
+
     if (edit == NULL)
         return;
 
 #ifdef HAVE_TREE_SITTER
+    had_ts = edit->ts.active;
     ts_free (edit);
 #endif
 
@@ -1542,6 +1548,17 @@ edit_free_syntax_rules (WEdit *edit)
     if (edit->rules == NULL)
     {
         MC_PTR_FREE (edit->syntax_type);
+#ifdef HAVE_TREE_SITTER
+        /* Free temp color pairs even when no legacy rules exist.
+           TS color pairs are allocated as temporary and must be freed
+           before reloading to avoid stale pair indices. */
+        if (had_ts)
+            tty_color_free_temp ();
+#endif
+        /* Reset the rule scanner state so the next edit_get_rule() call
+           rescans from the beginning.  Without this, last_get_rule may
+           match the requested byte_index and return stale rule state. */
+        edit->last_get_rule = -1;
         return;
     }
 
@@ -1567,6 +1584,25 @@ edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
     int r;
     char *f = NULL;
 
+#ifdef HAVE_TREE_SITTER
+    /* Sync mode with syntax_highlighting boolean (which may have been
+       loaded from config).  If highlighting is off, mode should be NONE.
+       If highlighting is on and mode is NONE (e.g. restored from config),
+       reset to TS (or LEGACY if TS is unavailable). */
+    if (!edit_options.syntax_highlighting)
+    {
+        if (edit_options.syntax_highlight_mode != SYNTAX_HIGHLIGHT_NONE)
+            edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_NONE;
+    }
+    else if (edit_options.syntax_highlight_mode == SYNTAX_HIGHLIGHT_NONE)
+    {
+        edit_options.syntax_highlight_mode =
+            (edit_options.ts_available && !mc_args__no_tree_sitter)
+                ? SYNTAX_HIGHLIGHT_TS
+                : SYNTAX_HIGHLIGHT_LEGACY;
+    }
+#endif
+
     if (auto_syntax)
         type = NULL;
 
@@ -1589,11 +1625,32 @@ edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
         return;
 
 #ifdef HAVE_TREE_SITTER
-    // Try tree-sitter first (only for actual file loading, not name collection)
-    if (edit != NULL && pnames == NULL && type == NULL)
+    // Try tree-sitter first (only for actual file loading, not name collection).
+    // Skip if --no-tree-sitter was passed or if user cycled to legacy mode.
+    if (edit != NULL && pnames == NULL
+        && !mc_args__no_tree_sitter
+        && edit_options.syntax_highlight_mode == SYNTAX_HIGHLIGHT_TS)
     {
-        if (ts_init_for_file (edit))
+        const char *forced_grammar = NULL;
+        char *grammar_from_type = NULL;
+
+        if (type != NULL)
+        {
+            /* Manual syntax selection: reverse-lookup grammar name from display name */
+            grammar_from_type = ts_config_reverse_lookup ("display-names", type);
+            forced_grammar = grammar_from_type;
+        }
+
+        if (ts_init_for_file (edit, forced_grammar))
+        {
+            edit_options.ts_available = TRUE;
+            g_free (grammar_from_type);
             return;  // tree-sitter successfully initialized
+        }
+
+        g_free (grammar_from_type);
+        // TS failed for this file - fall through to legacy for this file only.
+        // Do NOT modify global state: other files may have valid grammars.
     }
 #endif
 

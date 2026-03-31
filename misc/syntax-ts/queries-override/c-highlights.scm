@@ -33,6 +33,32 @@
   "static"
 ] @keyword
 
+;; C11/C23 keywords that are grammar tokens -> yellow
+[
+  "_Atomic"
+  "_Noreturn"
+  "alignas"
+  "constexpr"
+] @keyword
+
+;; C11/C23 keywords recognized as type identifiers by the grammar
+((type_identifier) @keyword
+  (#any-of? @keyword
+    "_Bool" "_Complex" "_Imaginary" "wchar_t"))
+
+;; C11/C23 keywords recognized as identifiers by the grammar
+((identifier) @keyword
+  (#any-of? @keyword
+    "static_assert" "_Static_assert"
+    "_Alignas" "_Alignof"
+    "_Noreturn" "_Generic"
+    "thread_local" "_Thread_local"
+    "typeof" "typeof_unqual"
+    "alignof" "restrict" "asm"))
+
+;; Ellipsis -> yellow
+"..." @keyword
+
 ;; Preprocessor -> brightred
 [
   "#define"
@@ -105,19 +131,30 @@
   "}"
 ] @delimiter
 
+;; Strings -> green
 (string_literal) @string
 (system_lib_string) @string
+
+;; Escape sequences inside strings -> brightgreen
+(escape_sequence) @string.special
 
 ;; Constants -> lightgray
 (null) @constant
 (true) @constant
 (false) @constant
 
+;; Numbers -> lightgray
 (number_literal) @number
+
+;; Character literals -> brightgreen
 (char_literal) @string.special
 
+;; Labels -> cyan
 (statement_identifier) @label
+
+;; Types -> yellow
 (primitive_type) @type
 (sized_type_specifier) @type
 
+;; Comments -> brown
 (comment) @comment
