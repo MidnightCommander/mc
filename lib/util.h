@@ -223,6 +223,9 @@ MC_MOCKABLE sighandler_t my_signal (int signum, sighandler_t handler);
 MC_MOCKABLE int my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact);
 MC_MOCKABLE pid_t my_fork (void);
 MC_MOCKABLE int my_execvp (const char *file, char *const argv[]);
+#ifdef HAVE_SYS_CLONEFILE_H
+MC_MOCKABLE int my_clonefile (const char *src, const char *dst, uint32_t flags);
+#endif
 MC_MOCKABLE char *my_get_current_dir (void);
 
 // Process spawning
