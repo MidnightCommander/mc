@@ -1,0 +1,212 @@
+/* CSS Syntax Highlighting Sample */
+/* Demonstrates all TS captures for CSS grammar */
+
+/* @charset at-rule */
+@charset "UTF-8";
+
+/* @import at-rule */
+@import url("reset.css");
+@import "typography.css";
+
+/* @namespace at-rule */
+@namespace svg url(http://www.w3.org/2000/svg);
+
+/* Tag selectors */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+/* Class and ID selectors */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#main-content {
+  padding: 20px;
+}
+
+/* Pseudo-classes and pseudo-elements */
+a:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #551a8b;
+}
+
+p:first-child {
+  margin-top: 0;
+}
+
+li:nth-child(2n+1) {
+  background-color: #f0f0f0;
+}
+
+p::before {
+  content: "\2022";
+  margin-right: 0.5em;
+}
+
+p::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Combinators and attribute selectors */
+div > p {
+  color: #444444;
+}
+
+h2 + p {
+  font-size: 1.1em;
+}
+
+h2 ~ p {
+  color: #666666;
+}
+
+input[type="text"] {
+  border: 1px solid #cccccc;
+}
+
+a[href^="https"] {
+  color: green;
+}
+
+a[href$=".pdf"] {
+  color: red;
+}
+
+a[href*="example"] {
+  font-weight: bold;
+}
+
+/* Numbers and units */
+.box {
+  width: 300px;
+  height: 200px;
+  margin: 1.5em;
+  padding: 10pt;
+  border-radius: 50%;
+  opacity: 0.85;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+/* Color values */
+.colors {
+  color: #ff0000;
+  background: #0a0b0c;
+  border-color: #abc;
+}
+
+/* Functions */
+.gradient {
+  background: linear-gradient(to right, #ff0000, #00ff00);
+  width: calc(100% - 40px);
+  transform: rotate(45deg) scale(1.2);
+  filter: blur(5px);
+}
+
+.image {
+  background-image: url("background.png");
+  background-size: cover;
+}
+
+/* !important */
+.override {
+  color: red !important;
+  display: block !important;
+}
+
+/* @media at-rule */
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .box {
+    width: auto;
+  }
+}
+
+@media print {
+  body {
+    font-size: 12pt;
+    color: black;
+  }
+}
+
+/* Logical operators in media queries */
+@media not print and (color) {
+  body {
+    background: white;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .wide {
+    display: flex;
+  }
+}
+
+/* @keyframes at-rule */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* @supports at-rule */
+@supports (display: grid) {
+  .layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+/* @scope at-rule */
+@scope (.card) {
+  h2 {
+    font-size: 1.5em;
+  }
+}
+
+/* String values */
+.quote::before {
+  content: "Hello, world!";
+}
+
+/* Semicolons, colons, commas as delimiters */
+.multi {
+  font: italic bold 16px/1.2 "Helvetica Neue", Arial, sans-serif;
+  border: 1px solid black;
+}

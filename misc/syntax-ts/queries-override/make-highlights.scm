@@ -28,13 +28,31 @@
 ;; Variable assignment name -> yellow (property.key)
 (variable_assignment
   name: (word) @property.key)
+(shell_assignment
+  name: (word) @property.key)
 
-;; Variable references $() -> keyword (yellow)
+;; Variable references $() ${} -> keyword (yellow)
 (variable_reference
   (word) @keyword)
 
-;; Shell text in recipes -> default (variable)
-(shell_text) @variable
+;; Automatic variables ($@, $<, $^, $*, $?, $%) -> brightred (function.special)
+(automatic_variable) @function.special
+
+;; Escaped dollar $$ -> brightcyan (delimiter)
+(escape) @delimiter
+
+;; Line continuation \ -> yellow (keyword)
+"\\" @keyword
+
+;; Special targets -> white (tag.special)
+(rule
+  (targets
+    (word) @tag.special
+    (#any-of? @tag.special
+      ".PHONY" ".SUFFIXES" ".DEFAULT" ".PRECIOUS"
+      ".INTERMEDIATE" ".SECONDARY" ".DELETE_ON_ERROR"
+      ".IGNORE" ".LOW_RESOLUTION_TIME" ".SILENT"
+      ".EXPORT_ALL_VARIABLES" ".NOTPARALLEL" ".NOEXPORT")))
 
 ;; Strings -> green (string)
 (string) @string
@@ -55,7 +73,12 @@
   "::"
 ] @keyword
 
+;; Semicolons, commas -> brightcyan (delimiter)
 [
   ";"
   ","
 ] @delimiter
+
+;; Function calls -> brightcyan (label)
+(function_call
+  function: (_) @label)

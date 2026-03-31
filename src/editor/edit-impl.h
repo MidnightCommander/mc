@@ -181,6 +181,7 @@ gboolean edit_load_forward_cmd (WEdit *edit);
 void edit_block_process_cmd (WEdit *edit, int macro_number);
 void edit_refresh_cmd (void);
 void edit_syntax_onoff_cmd (WDialog *h);
+void edit_syntax_toggle_ts_cmd (WDialog *h);
 void edit_show_tabs_tws_cmd (WDialog *h);
 void edit_show_margin_cmd (WDialog *h);
 void edit_show_numbers_cmd (WDialog *h);

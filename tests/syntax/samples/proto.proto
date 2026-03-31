@@ -1,0 +1,149 @@
+// Protocol Buffers sample file
+// Exercises all TS captures for proto grammar
+
+syntax = "proto3";
+
+package example.api.v1;
+
+import "google/protobuf/timestamp.proto";
+import public "google/protobuf/empty.proto";
+
+// Enum definition
+enum Status {
+  STATUS_UNKNOWN = 0;
+  STATUS_ACTIVE = 1;
+  STATUS_INACTIVE = 2;
+  STATUS_DELETED = 3;
+}
+
+// Simple message
+message User {
+  string name = 1;
+  int32 age = 2;
+  bool active = 3;
+  Status status = 4;
+  bytes avatar = 5;
+  double score = 6;
+  float rating = 7;
+}
+
+// Message with nested types
+message Organization {
+  string id = 1;
+  string display_name = 2;
+
+  // Nested enum
+  enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ROLE_ADMIN = 1;
+    ROLE_MEMBER = 2;
+  }
+
+  // Nested message
+  message Member {
+    string user_id = 1;
+    Role role = 2;
+    google.protobuf.Timestamp joined_at = 3;
+  }
+
+  repeated Member members = 3;
+}
+
+// Message with oneof
+message SearchRequest {
+  string query = 1;
+  int32 page_size = 2;
+  int64 offset = 3;
+
+  oneof filter {
+    string category = 4;
+    int32 status_code = 5;
+    bool active_only = 6;
+  }
+}
+
+// Message with map fields
+message Config {
+  map<string, string> labels = 1;
+  map<int32, bool> flags = 2;
+  map<string, User> user_cache = 3;
+}
+
+// Message with various integer types
+message TypeShowcase {
+  uint32 unsigned_val = 1;
+  uint64 big_unsigned = 2;
+  sint32 signed_val = 3;
+  sint64 big_signed = 4;
+  fixed32 fixed_val = 5;
+  fixed64 big_fixed = 6;
+  sfixed32 sfixed_val = 7;
+  sfixed64 big_sfixed = 8;
+}
+
+// Field options and message options
+message Annotated {
+  option deprecated = true;
+
+  string value = 1 [deprecated = true];
+  repeated string tags = 2;
+  reserved 3, 4, 5;
+  reserved "old_field", "legacy_field";
+}
+
+// Boolean literals
+message Defaults {
+  bool enabled = 1;  // true or false
+}
+
+// Escape sequence in string
+message WithDescription {
+  string desc = 1;  // "line1\nline2\ttab"
+}
+
+// Service definition with RPCs
+service UserService {
+  rpc GetUser (GetUserRequest) returns (User);
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+  rpc CreateUser (CreateUserRequest) returns (User);
+  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
+  rpc StreamUpdates (StreamRequest) returns (stream User);
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message ListUsersRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  string next_page_token = 2;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  optional string email = 2;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message StreamRequest {
+  repeated string user_ids = 1;
+}
+
+// Extensions and max
+message Extensible {
+  extensions 100 to max;
+}
+
+// String with escape sequences
+message EscapeTest {
+  string path = 1;  // "C:\\Users\\test"
+  string quoted = 2;  // "say \"hello\""
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Syntax Highlighting Sample</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js"></script>
+</head>
+<body class="main-page" id="top" data-theme="dark">
+
+  <!-- This is an HTML comment -->
+
+  <!-- Headings -->
+  <h1>Main Heading</h1>
+  <h2 id="section-1">Section Heading</h2>
+  <h3>Subsection</h3>
+
+  <!-- Paragraph with entities -->
+  <p>Special characters: &amp; &lt; &gt; &quot; &apos; &nbsp;</p>
+  <p>Numeric entity: &#169; &#x2603;</p>
+
+  <!-- Links -->
+  <a href="https://example.com" target="_blank" rel="noopener">Visit Example</a>
+  <a href="/about" title="About page">About</a>
+
+  <!-- Image with various attributes -->
+  <img src="photo.jpg" alt="A photo" width="640" height="480" loading="lazy"/>
+
+  <!-- Self-closing and void elements -->
+  <br>
+  <hr>
+  <input type="text" name="query" value="search" placeholder="Type here" required>
+
+  <!-- List -->
+  <ul>
+    <li>First item</li>
+    <li>Second item</li>
+    <li>Third &amp; final item</li>
+  </ul>
+
+  <ol start="10">
+    <li>Numbered item</li>
+  </ol>
+
+  <!-- Table -->
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="odd">
+        <td>Alpha</td>
+        <td>100</td>
+      </tr>
+      <tr class="even">
+        <td>Beta</td>
+        <td>200</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Form -->
+  <form action="/submit" method="post" enctype="multipart/form-data">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <select name="role">
+      <option value="user">User</option>
+      <option value="admin" selected>Admin</option>
+    </select>
+    <textarea rows="4" cols="50">Default text</textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- Inline styles and event handlers -->
+  <div style="color: red; font-size: 14px;" onclick="handleClick()">
+    Styled &amp; interactive div
+  </div>
+
+  <!-- Semantic elements -->
+  <nav aria-label="Main navigation">
+    <a href="/">Home</a>
+  </nav>
+  <section>
+    <article>
+      <header><h2>Article Title</h2></header>
+      <p>Article content with &mdash; dash.</p>
+      <footer>Published 2024</footer>
+    </article>
+  </section>
+
+  <!-- Embedded content -->
+  <iframe src="https://example.com" width="800" height="600" frameborder="0"></iframe>
+  <video src="movie.mp4" controls autoplay muted></video>
+
+  <!-- Nested tags -->
+  <div>
+    <span class="highlight"><strong>Bold &amp; <em>italic</em></strong></span>
+  </div>
+
+  <!-- Erroneous end tag -->
+  </invalidtag>
+
+  <!-- Script and style blocks -->
+  <script>
+    var x = 1;
+  </script>
+  <style>
+    body { color: black; }
+  </style>
+
+</body>
+</html>

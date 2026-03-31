@@ -51,7 +51,7 @@ AC_DEFUN([mc_WITH_TREE_SITTER], [
         all_ts_grammars="ada asm awk bash bison c caddy cmake cobol cpp c_sharp css cuda d diff dockerfile dot erlang fortran glsl go haskell hcl html idl ini java javascript json kotlin lisp lua make markdown markdown_inline matlab meson muttrc ocaml pascal perl php po properties proto python qmljs r ruby rust scala smalltalk sql strace swift tcl toml turtle typescript verilog vhdl xml yaml"
 
         dnl Grammars that have scanner.c
-        ts_scanner_c="awk bash bison caddy cmake cobol cpp c_sharp css cuda d dockerfile fortran haskell hcl html javascript kotlin lua markdown markdown_inline matlab ocaml perl php properties python qmljs r ruby rust scala tcl toml typescript xml yaml"
+        ts_scanner_c="awk bash bison caddy cmake cobol cpp c_sharp css cuda d dockerfile erlang fortran haskell hcl html javascript kotlin lua markdown markdown_inline ocaml perl php properties python qmljs r ruby rust scala swift tcl toml typescript xml yaml"
 
         dnl Grammars that have scanner.cc (C++ scanner)
         ts_scanner_cc="sql"

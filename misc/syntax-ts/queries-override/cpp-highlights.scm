@@ -145,4 +145,19 @@
   "~"
 ] @delimiter.special
 
+;; Alternative operator tokens -> yellow (keyword)
+[
+  "and"
+  "or"
+  "not"
+  "xor"
+  "bitand"
+  "bitor"
+  "compl"
+  "and_eq"
+  "or_eq"
+  "xor_eq"
+  "not_eq"
+] @keyword
+
 (comment) @comment

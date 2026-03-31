@@ -57,6 +57,7 @@
 #include "lib/event.h"  // mc_event_raise()
 #include "lib/charsets.h"
 
+#include "src/args.h"  // mc_args__no_tree_sitter
 #include "src/history.h"
 #include "src/file_history.h"  // show_file_history()
 #include "src/selcodepage.h"
@@ -846,9 +847,62 @@ edit_refresh_cmd (void)
 void
 edit_syntax_onoff_cmd (WDialog *h)
 {
+#ifdef HAVE_TREE_SITTER
+    /* Cycle through available modes.
+       If TS is available: TS -> Legacy -> None -> TS
+       If TS is not available: Legacy -> None -> Legacy */
+    switch (edit_options.syntax_highlight_mode)
+    {
+    case SYNTAX_HIGHLIGHT_TS:
+        edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_LEGACY;
+        edit_options.syntax_highlighting = TRUE;
+        break;
+    case SYNTAX_HIGHLIGHT_LEGACY:
+        edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_NONE;
+        edit_options.syntax_highlighting = FALSE;
+        break;
+    case SYNTAX_HIGHLIGHT_NONE:
+    default:
+        if (edit_options.ts_available && !mc_args__no_tree_sitter)
+        {
+            edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_TS;
+        }
+        else
+        {
+            edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_LEGACY;
+        }
+        edit_options.syntax_highlighting = TRUE;
+        break;
+    }
+#else
     edit_options.syntax_highlighting = !edit_options.syntax_highlighting;
+#endif
     g_list_foreach (GROUP (h)->widgets, edit_syntax_onoff_cb, NULL);
     widget_draw (WIDGET (h));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_syntax_toggle_ts_cmd (WDialog *h)
+{
+#ifdef HAVE_TREE_SITTER
+    /* Toggle between TS and Legacy (skip None).
+       If TS not available, do nothing. */
+    if (!edit_options.ts_available || mc_args__no_tree_sitter)
+        return;
+
+    if (edit_options.syntax_highlight_mode == SYNTAX_HIGHLIGHT_TS)
+        edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_LEGACY;
+    else
+        edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_TS;
+
+    edit_options.syntax_highlighting = TRUE;
+    g_list_foreach (GROUP (h)->widgets, edit_syntax_onoff_cb, NULL);
+    widget_draw (WIDGET (h));
+#else
+    (void) h;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

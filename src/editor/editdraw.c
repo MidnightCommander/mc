@@ -148,12 +148,36 @@ static inline void
 status_string (WEdit *edit, char *s, int w)
 {
     char *character_code;
+#ifdef HAVE_TREE_SITTER
+    const char *syntax_mode_label;
+#endif
 
     character_code = format_character_code (edit);
 
+#ifdef HAVE_TREE_SITTER
+    switch (edit_options.syntax_highlight_mode)
+    {
+    case SYNTAX_HIGHLIGHT_TS:
+        syntax_mode_label = edit->ts.active ? "TS" : "Legacy";
+        break;
+    case SYNTAX_HIGHLIGHT_LEGACY:
+        syntax_mode_label = "Legacy";
+        break;
+    case SYNTAX_HIGHLIGHT_NONE:
+    default:
+        syntax_mode_label = "None";
+        break;
+    }
+#endif
+
     // The field lengths just prevent the status line from shortening too much
     if (edit_options.simple_statusbar)
-        g_snprintf (s, w, "%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s] %s",
+        g_snprintf (s, w,
+#ifdef HAVE_TREE_SITTER
+                    "%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s]  S:[%s]  %s",
+#else
+                    "%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s] %s",
+#endif
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
@@ -164,10 +188,19 @@ status_string (WEdit *edit, char *s, int w)
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
                     character_code,
+#ifdef HAVE_TREE_SITTER
+                    syntax_mode_label,
+#endif
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
-                                                   : "");
+                                                   : ""
+                    );
     else
-        g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s",
+        g_snprintf (s, w,
+#ifdef HAVE_TREE_SITTER
+                    "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  S:[%s]  %s",
+#else
+                    "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s",
+#endif
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
@@ -180,8 +213,12 @@ status_string (WEdit *edit, char *s, int w)
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
                     character_code,
+#ifdef HAVE_TREE_SITTER
+                    syntax_mode_label,
+#endif
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
-                                                   : "");
+                                                   : ""
+                    );
 
     g_free (character_code);
 }
@@ -319,6 +356,34 @@ edit_status_window (WEdit *edit)
         tty_printf ("[%s]", character_code);
         g_free (character_code);
     }
+
+#ifdef HAVE_TREE_SITTER
+    /* Show syntax highlighting mode indicator */
+    {
+        const char *mode_label;
+
+        switch (edit_options.syntax_highlight_mode)
+        {
+        case SYNTAX_HIGHLIGHT_TS:
+            mode_label = edit->ts.active ? "TS" : "Legacy";
+            break;
+        case SYNTAX_HIGHLIGHT_LEGACY:
+            mode_label = "Legacy";
+            break;
+        case SYNTAX_HIGHLIGHT_NONE:
+        default:
+            mode_label = "None";
+            break;
+        }
+
+        tty_getyx (&y, &x);
+        x -= w->rect.x;
+        if (x + (int) strlen (mode_label) + 5 <= cols - 2)
+        {
+            tty_printf ("  S:[%s]", mode_label);
+        }
+    }
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

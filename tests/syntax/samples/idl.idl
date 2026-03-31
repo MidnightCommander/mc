@@ -1,0 +1,164 @@
+/* IDL syntax sample file */
+
+#ifndef _SAMPLE_IDL_
+#define _SAMPLE_IDL_
+
+#include <orb.idl>
+#include "types.idl"
+
+#pragma prefix "example.org"
+
+// Module definition
+module SampleModule {
+
+    // Forward declaration
+    interface Logger;
+
+    // Type definitions
+    typedef long Identifier;
+    typedef sequence<string> StringList;
+    typedef sequence<long, 10> BoundedLongs;
+
+    // Enum
+    enum Color { RED, GREEN, BLUE };
+
+    // Constants
+    const long MAX_SIZE = 1024;
+    const double PI = 3.14159;
+    const boolean ENABLED = TRUE;
+    const string LABEL = "default";
+    const char DELIM = 'X';
+
+    // Struct
+    struct Point {
+        float x;
+        float y;
+        float z;
+    };
+
+    struct Record {
+        Identifier id;
+        string name;
+        long timestamp;
+        boolean active;
+    };
+
+    // Union with switch
+    union Variant switch (long) {
+        case 0: long intVal;
+        case 1: double floatVal;
+        case 2: string strVal;
+        default: octet rawData;
+    };
+
+    // Exception
+    exception NotFound {
+        string message;
+        long errorCode;
+    };
+
+    exception AccessDenied {
+        string reason;
+    };
+
+    // Valuetype
+    valuetype Timestamp {
+        public long seconds;
+        public long nanoseconds;
+        private string timezone;
+    };
+
+    // Interface with attributes and operations
+    interface DataStore {
+        // Readonly attribute
+        readonly attribute long count;
+        readonly attribute string version;
+
+        // Regular attribute
+        attribute boolean connected;
+        attribute string label;
+
+        // Void operation
+        void initialize();
+
+        // Parameterized operations
+        Record lookup(in Identifier id)
+            raises (NotFound);
+
+        void store(
+            in Identifier id,
+            in string name,
+            inout Record data
+        ) raises (NotFound, AccessDenied);
+
+        // Oneway operation
+        oneway void notify(in string message);
+
+        // Return types: short, long, float, double
+        short getStatus();
+        long getTimestamp();
+        float getLoad();
+        double getPreciseLoad();
+
+        // Unsigned types
+        unsigned short getPort();
+        unsigned long getSize();
+
+        // Wide string
+        wstring getDescription();
+
+        // Sequence return
+        StringList listNames(
+            in long offset,
+            out long total
+        );
+
+        // Any type
+        any getProperty(in string key);
+
+        // Context
+        void configure(in string key, in string val)
+            context("user", "session");
+
+        // Fixed type
+        fixed<10,2> getBalance();
+    };
+
+    // Interface inheritance
+    interface Logger {
+        void log(in string msg);
+    };
+
+    interface AuditLogger : Logger {
+        void audit(in string action, in Record rec);
+    };
+
+    // Operators in constant expressions
+    const long MASK = 0xFF << 4;
+    const long FLAGS = 0x0A | 0x50;
+    const long INVERTED = ~0xFF;
+    const long COMBINED = (MAX_SIZE + 1) * 2 - 1;
+    const long REMAINDER = MAX_SIZE % 10;
+    const long SHIFTED = FLAGS >> 2;
+
+    // Boolean type in operation
+    interface Validator {
+        boolean validate(
+            in string input,
+            out string error
+        );
+    };
+
+    // Map type
+    typedef map<string, long> NameMap;
+
+    // Nested module
+    module SubModule {
+        interface Helper {
+            void assist();
+        };
+    };
+
+}; // end module SampleModule
+
+#endif // _SAMPLE_IDL_

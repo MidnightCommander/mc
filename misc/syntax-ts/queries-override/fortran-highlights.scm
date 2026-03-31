@@ -126,6 +126,21 @@
   ">="
 ] @operator.word
 
+;; Logical/relational operators -> brightred (@function.special) -- MC uses brightred
+(logical_expression
+  operator: _ @function.special)
+(relational_expression
+  operator: [
+    ".eq."
+    ".ne."
+    ".lt."
+    ".gt."
+    ".le."
+    ".ge."
+  ] @function.special)
+(unary_expression
+  operator: ".not." @function.special)
+
 ;; Delimiters
 [
   ","

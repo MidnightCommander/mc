@@ -65,6 +65,23 @@
 (string_literal) @string
 (char_literal) @string.special
 
+;; Built-in functions -> brightmagenta (MC uses brightmagenta for builtins)
+(call_expression
+  function: (identifier) @function.macro
+  (#any-of? @function.macro
+    "length" "normalize" "dot" "cross" "reflect" "refract"
+    "mix" "clamp" "smoothstep" "step" "min" "max"
+    "abs" "sign" "floor" "ceil" "fract" "mod"
+    "pow" "exp" "log" "sqrt" "inversesqrt"
+    "sin" "cos" "tan" "asin" "acos" "atan"
+    "radians" "degrees"
+    "texture" "texture2D" "texture3D" "textureCube"
+    "texelFetch" "textureSize"
+    "dFdx" "dFdy" "fwidth"
+    "transpose" "inverse" "determinant" "distance"
+    "lessThan" "greaterThan" "equal" "notEqual"
+    "any" "all" "not"))
+
 ;; Operators -> white (MC uses white for arithmetic/comparison operators)
 [
   "="

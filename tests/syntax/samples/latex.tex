@@ -1,0 +1,133 @@
+% This is a line comment
+%% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\newcommand{\mycommand}[2]{#1 and #2}
+\newenvironment{myenv}{\begin{center}}{\end{center}}
+
+\title{A Sample Document}
+\author{Jane Doe \and John Smith}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\part{First Part}
+
+\chapter{Introduction}
+
+\section{Overview}
+This is a paragraph of normal text with some \emph{emphasized words}
+and some \textbf{bold text} for testing.
+
+\subsection{Details}
+Here we reference Section~\ref{sec:math} and cite~\cite{knuth1984}.
+
+\subsubsection{Fine Details}
+An item list:
+\begin{itemize}
+  \item First item
+  \item[*] Second item with optional label
+\end{itemize}
+
+\begin{enumerate}
+  \item Numbered one
+  \item Numbered two
+\end{enumerate}
+
+\paragraph{A Named Paragraph}
+Some text in a named paragraph.
+
+\subparagraph{A Subparagraph}
+Even finer granularity.
+
+\section{Math Mode}\label{sec:math}
+Inline math: $E = mc^2$ and $\alpha + \beta = \gamma$.
+
+Display math:
+\begin{equation}
+  \int_{0}^{\infty} e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
+\end{equation}
+
+\begin{displaymath}
+  \sum_{n=1}^{N} n = \frac{N(N+1)}{2}
+\end{displaymath}
+
+Operators and symbols: $a = b + c$, $x_1^{2}$, $\left( \frac{a}{b} \right)$.
+
+\section{Environments and Includes}
+\begin{verbatim}
+This is verbatim text, no formatting here.
+\end{verbatim}
+
+\begin{center}
+Centered text goes here.
+\end{center}
+
+\begin{quote}
+A quoted passage.
+\end{quote}
+
+\begin{tabular}{|l|c|r|}
+  \hline
+  Left & Center & Right \\
+  \hline
+  a & b & c \\
+  \hline
+\end{tabular}
+
+\section{References and Citations}
+\label{sec:refs}
+Cross-reference: see Section~\ref{sec:math}.
+Bibliography entry: \cite{lamport1994}.
+\bibliography{references}
+\bibliographystyle{plain}
+
+\section{File Inclusion}
+\input{preamble}
+\include{chapter1}
+\includegraphics[width=0.5\textwidth]{figure.png}
+
+\section{Definitions}
+\newcommand{\highlight}[1]{\textbf{#1}}
+\newenvironment{note}{\par\textbf{Note:}}{\par}
+
+% Conditional commands
+\ifx\undefined\something
+  Fallback text.
+\else
+  Alternative text.
+\fi
+
+\section{Accents and Symbols}
+\'{e} \`{a} \^{o} \"{u} \~{n}
+Special: \dag\ \ddag\ \S\ \P\ \copyright\ \pounds
+
+\section{Hyperlinks}
+\href{https://example.com}{Visit Example}
+\url{https://example.com/path}
+
+\section{Beamer Frame}
+\begin{frame}
+{Frame Title Here}
+Slide content goes in a frame.
+\end{frame}
+
+\frametitle{Another Frame Title}
+
+\section{Font Sizes}
+{\tiny tiny} {\scriptsize scriptsize} {\footnotesize footnotesize}
+{\small small} {\normalsize normalsize} {\large large}
+{\Large Large} {\LARGE LARGE} {\huge huge} {\Huge Huge}
+
+\section{Key-Value and Placeholders}
+\setlength{\parindent}{0pt}
+Text with a placeholder: #1.
+
+\end{document}

@@ -82,6 +82,16 @@
   ":"
 ] @label
 
+;; Brackets/parens/braces -> brightcyan (MC legacy colors these as cyan)
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+] @delimiter
+
 ;; Semicolons -> brightred (MC: ;; and ; are brightred)
 ";" @function.special
 

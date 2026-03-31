@@ -1,0 +1,65 @@
+From user@example.com Tue Mar 25 10:30:00 2025
+Return-Path: <sender@example.com>
+From: John Doe <john@example.com>
+To: Jane Smith <jane@example.com>
+Subject: Re: Meeting tomorrow at 3pm
+Date: Tue, 25 Mar 2025 10:30:00 -0400
+Message-ID: <abc123@mail.example.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: Thunderbird 128.0
+X-Priority: 3
+References: <prev789@mail.example.com>
+In-Reply-To: <prev789@mail.example.com>
+List-Unsubscribe: <mailto:unsub@example.com>
+Received: from smtp.example.com (192.168.1.10)
+    by mx.example.com with ESMTP id abc123
+
+Hi Jane,
+
+Thanks for the reminder about the meeting. I wanted to
+follow up on a few items before we get together.
+
+> Could you bring the quarterly report?
+> I also need the budget spreadsheet.
+
+Sure, I will bring both documents. I have updated the
+quarterly numbers as of last Friday.
+
+>> The original plan was to meet on Monday.
+>> But we moved it to Tuesday.
+> Yes, Tuesday works better for everyone.
+
+I agree completely. Tuesday is much better.
+
+> > > This is a triple-nested quote.
+> > Second level quote.
+> First level quote.
+
+> Here is another single-level quote to make
+> sure we cover enough quoting scenarios in
+> the sample file for testing purposes.
+
+Also, I wanted to mention that the project timeline
+has been updated. Please review the attached document
+before the meeting.
+
+The new deadline for Phase 1 is April 15th, and we
+need to have all deliverables ready by then.
+
+Let me know if you have any questions or concerns
+about the updated schedule.
+
+Best regards,
+John Doe
+john@example.com
+
+--
+John Doe
+Senior Developer
+Example Corp
+Phone: +1-555-0123
+Fax: +1-555-0124
+Web: https://example.com
+Email: john@example.com

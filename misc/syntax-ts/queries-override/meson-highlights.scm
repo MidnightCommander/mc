@@ -25,6 +25,11 @@
   "false"
 ] @keyword
 
+;; Built-in objects -> yellow (MC: legacy colors these as keyword/yellow)
+((identifier) @variable.builtin
+  (#any-of? @variable.builtin
+    "meson" "host_machine" "build_machine" "target_machine"))
+
 ;; Strings -> green (MC uses green for single-quoted strings)
 (string) @string
 

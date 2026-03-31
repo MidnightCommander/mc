@@ -49,6 +49,7 @@ gitignore Git Ignore
 gleam Gleam
 glsl GLSL Shader
 go Go Program
+gotmpl Go Template
 graphql GraphQL
 groovy Groovy
 hack Hack

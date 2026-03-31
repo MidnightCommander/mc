@@ -123,4 +123,12 @@
   ")"
 ] @delimiter
 
+;; Predefined type names -> yellow (keyword) to match legacy
+((identifier) @keyword
+ (#any-of? @keyword
+  "Boolean" "Integer" "Natural" "Positive" "Float"
+  "Character" "String" "Duration"
+  "Wide_Character" "Wide_String"
+  "Wide_Wide_Character" "Wide_Wide_String"))
+
 (label (identifier) @label)

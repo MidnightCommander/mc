@@ -1,0 +1,126 @@
+# TOML Syntax Highlighting Sample
+# Demonstrates all TS captures for TOML grammar
+
+# Simple key-value pairs
+title = "TOML Example"
+description = 'Single-quoted string'
+empty = ""
+
+# Integer values
+integer = 42
+negative = -17
+zero = 0
+hex = 0xDEADBEEF
+oct = 0o755
+bin = 0b11010110
+
+# Float values
+pi = 3.14159
+negative_float = -0.001
+exponent = 5e+22
+neg_exponent = 1e-7
+infinity = inf
+neg_infinity = -inf
+not_a_number = nan
+
+# Boolean values
+enabled = true
+disabled = false
+
+# Date and time values
+date = 2024-01-15
+time = 14:30:00
+datetime = 2024-01-15T14:30:00
+datetime_tz = 2024-01-15T14:30:00Z
+datetime_offset = 2024-01-15T14:30:00-05:00
+
+# String types
+basic = "Hello, world!"
+literal = 'No \escapes here'
+multiline_basic = """
+  This is a
+  multiline string
+"""
+multiline_literal = '''
+  This is a
+  literal multiline string
+'''
+escaped = "Tab:\tNewline:\nQuote:\""
+
+# Dotted keys
+physical.color = "orange"
+physical.shape = "round"
+site."google.com" = true
+
+# Standard tables
+[server]
+host = "localhost"
+port = 8080
+ssl = true
+
+[server.advanced]
+timeout = 30
+max_connections = 100
+debug = false
+
+[database]
+driver = "postgresql"
+host = "db.example.com"
+port = 5432
+name = "myapp"
+pool_size = 10
+
+[database.credentials]
+username = "admin"
+password = "s3cret"
+
+# Inline tables (parsed as regular key-value)
+point = {x = 1, y = 2}
+animal = {type.name = "pug"}
+
+# Array of tables
+[[products]]
+name = "Hammer"
+sku = 738594937
+color = "red"
+price = 9.99
+
+[[products]]
+name = "Nail"
+sku = 284758393
+color = "grey"
+price = 0.05
+
+[[products.variants]]
+size = "large"
+weight = 1.5
+
+[[products.variants]]
+size = "small"
+weight = 0.75
+
+# Arrays
+ports = [8001, 8001, 8002]
+hosts = ["alpha", "beta", "gamma"]
+mixed = ["string", 42, true, 3.14]
+nested = [[1, 2], [3, 4]]
+empty_array = []
+
+# Multiline arrays
+colors = [
+  "red",
+  "green",
+  "blue",
+]
+
+# More dotted key examples
+[fruit]
+apple.color = "red"
+apple.taste.sweet = true
+orange.color = "orange"
+
+[logging]
+level = "info"
+file = "/var/log/app.log"
+max_size = 104857600
+rotate = true

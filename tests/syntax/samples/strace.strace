@@ -1,0 +1,58 @@
+execve("/usr/bin/ls", ["ls", "-la"], 0x7ffd8a2e3f10 /* 42 vars */) = 0
+brk(NULL)                               = 0x55a3c8e41000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=89417, ...}) = 0
+mmap2(NULL, 89417, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f8a4c3e1000
+close(3)                                = 0
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat64(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
+old_mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f8a4bdf0000
+mmap2(0x7f8a4bfe7000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f7000) = 0x7f8a4bfe7000
+close(3)                                = 0
+uname({sysname="Linux", nodename="host", ...}) = 0
+stat64("/usr/bin/ls", {st_mode=S_IFREG|0755, st_size=133792, ...}) = 0
+open("/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+read(3, "# Locale name alias data base.\n#"..., 4096) = 2998
+close(3)                                = 0
+open("/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open(".", O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3
+fcntl64(3, F_GETFD)                     = 0x1 (flags FD_CLOEXEC)
+geteuid32()                             = 1000
+getegid32()                             = 1000
+getuid32()                              = 1000
+getgid32()                              = 1000
+gettimeofday({tv_sec=1617192000, tv_usec=123456}, NULL) = 0
+fstat64(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...}) = 0
+write(1, "total 48\n", 9)              = 9
+write(1, "drwxr-xr-x  2 user user 4096"..., 52) = 52
+writev(1, [{iov_base="file1.txt", iov_len=9}, {iov_base="\n", iov_len=1}], 2) = 10
+readv(0, [{iov_base="input", iov_len=5}], 1) = 5
+select(1, [0], NULL, NULL, {tv_sec=5, tv_usec=0}) = 1 (in [0])
+ioctl(1, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+rt_sigaction(SIGTERM, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f8a4be54a00}, NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+alarm(0)                                = 0
+statfs("/usr/bin/ls", {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, ...}) = 0
+munmap(0x7f8a4c3e1000, 89417)          = 0
+close(1)                                = 0
+close(2)                                = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=12345, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 12345
+kill(12345, SIGTERM)                    = 0
+12345 open("/tmp/test.txt", O_RDONLY)   = 4
+12345 read(4, "hello world\n", 4096)    = 12
+12345 close(4)                          = 0
+12345 write(1, "hello world\n", 12)     = 12
+12345 exit_group(0)                     = ?
++++ exited with 0 +++
+setresuid32(1000, 1000, 1000)           = 0
+setresgid32(1000, 1000, 1000)           = 0
+chmod("/tmp/test.txt", 0644)            = 0
+chown32("/tmp/test.txt", 1000, 1000)    = 0
+brk(0x55a3c8e62000)                     = 0x55a3c8e62000
+exit_group(0)                           = ?
++++ exited with 0 +++

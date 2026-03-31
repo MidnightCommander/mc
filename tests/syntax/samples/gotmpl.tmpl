@@ -1,0 +1,234 @@
+{{/* Comment: demonstrate Go template features */}}
+
+{{/* Simple variable output */}}
+Hello, {{ .Name }}!
+
+{{/* Conditional */}}
+{{ if .IsAdmin }}
+  <h1>Admin Dashboard</h1>
+{{ else if .IsModerator }}
+  <h1>Moderator View</h1>
+{{ else }}
+  <h1>User View</h1>
+{{ end }}
+
+{{/* Range loop */}}
+{{ range .Items }}
+  <li>{{ .Title }} - {{ .Price }}</li>
+{{ end }}
+
+{{/* Range with variables */}}
+{{ range $index, $item := .Items }}
+  <li>{{ $index }}: {{ $item.Name }}</li>
+{{ end }}
+
+{{/* With block */}}
+{{ with .Footer }}
+  <footer>{{ . }}</footer>
+{{ end }}
+
+{{/* Variable assignment */}}
+{{ $name := "World" }}
+{{ $name = "Hello World" }}
+{{ $count := 42 }}
+{{ $pi := 3.14 }}
+{{ $complex := 1i }}
+{{ $char := 'A' }}
+{{ $raw := `raw string` }}
+
+{{/* Go template builtin functions */}}
+{{ len .Items }}
+{{ index .Items 0 }}
+{{ slice .Items 1 3 }}
+{{ printf "%s has %d items" .Name (len .Items) }}
+{{ println "debug output" }}
+{{ html .Content }}
+{{ js .Script }}
+{{ urlquery .SearchTerm }}
+
+{{/* Comparison functions */}}
+{{ if eq .Status "active" }}active{{ end }}
+{{ if ne .Count 0 }}not zero{{ end }}
+{{ if lt .Price 10.0 }}cheap{{ end }}
+{{ if gt .Score 90 }}excellent{{ end }}
+{{ if le .Age 18 }}minor{{ end }}
+{{ if ge .Rating 4 }}good{{ end }}
+
+{{/* Logical functions */}}
+{{ if and .IsActive .IsVerified }}verified active user{{ end }}
+{{ if or .IsAdmin .IsModerator }}privileged user{{ end }}
+{{ if not .IsBlocked }}allowed{{ end }}
+
+{{/* Sprig string functions */}}
+{{ .Name | upper }}
+{{ .Name | lower }}
+{{ .Name | title }}
+{{ .Name | trim }}
+{{ .Name | trimSuffix "-" }}
+{{ .Name | trimPrefix "v" }}
+{{ .Name | trunc 63 }}
+{{ .Name | quote }}
+{{ .Name | squote }}
+{{ .Name | nospace }}
+{{ .Name | camelcase }}
+{{ .Name | snakecase }}
+{{ .Name | kebabcase }}
+{{ .Name | replace "old" "new" }}
+{{ .Name | repeat 3 }}
+{{ .Name | contains "sub" }}
+{{ .Name | hasPrefix "v" }}
+{{ .Name | hasSuffix "-" }}
+{{ .Name | substr 0 5 }}
+{{ indent 4 .Content }}
+{{ nindent 2 .Content }}
+
+{{/* Sprig list functions */}}
+{{ list 1 2 3 }}
+{{ .Items | first }}
+{{ .Items | last }}
+{{ .Items | rest }}
+{{ .Items | initial }}
+{{ .Items | reverse }}
+{{ .Items | uniq }}
+{{ .Items | sortAlpha }}
+{{ append .Items "new" }}
+{{ prepend .Items "first" }}
+{{ without .Items "remove" }}
+{{ has "item" .Items }}
+{{ .Items | compact }}
+{{ concat .ListA .ListB }}
+{{ chunk 3 .Items }}
+
+{{/* Sprig dict functions */}}
+{{ dict "key1" "val1" "key2" "val2" }}
+{{ .Map | keys }}
+{{ .Map | values }}
+{{ get .Map "key" }}
+{{ set .Map "key" "value" }}
+{{ unset .Map "key" }}
+{{ hasKey .Map "key" }}
+{{ merge .MapA .MapB }}
+{{ mergeOverwrite .MapA .MapB }}
+{{ pick .Map "key1" "key2" }}
+{{ omit .Map "key1" }}
+{{ deepCopy .Map }}
+{{ deepEqual .MapA .MapB }}
+{{ pluck "key" .MapA .MapB }}
+{{ dig "a" "b" "c" .Nested }}
+
+{{/* Sprig type and conversion functions */}}
+{{ .Value | toString }}
+{{ .Value | toJson }}
+{{ .Value | toPrettyJson }}
+{{ .Value | toRawJson }}
+{{ .Value | fromJson }}
+{{ .Value | toDate "2006-01-02" }}
+{{ kindOf .Value }}
+{{ typeOf .Value }}
+{{ typeIs "string" .Value }}
+{{ default "fallback" .Value }}
+{{ empty .Value }}
+{{ coalesce .A .B .C }}
+{{ ternary "yes" "no" .Cond }}
+
+{{/* Sprig math functions */}}
+{{ add 1 2 }}
+{{ sub 10 3 }}
+{{ mul 4 5 }}
+{{ div 10 2 }}
+{{ mod 10 3 }}
+{{ max 1 2 3 }}
+{{ min 1 2 3 }}
+{{ ceil 1.5 }}
+{{ floor 1.5 }}
+{{ round 3.14159 2 }}
+
+{{/* Sprig crypto functions */}}
+{{ sha256sum "data" }}
+{{ sha1sum "data" }}
+{{ b64enc "data" }}
+{{ b64dec .Encoded }}
+{{ uuidv4 }}
+
+{{/* Sprig date functions */}}
+{{ now }}
+{{ now | date "2006-01-02" }}
+{{ now | dateModify "+1h" }}
+{{ now | ago }}
+{{ now | unixEpoch }}
+{{ .Timestamp | duration }}
+{{ .Timestamp | durationRound }}
+
+{{/* Sprig regex functions */}}
+{{ regexMatch "^test" .Value }}
+{{ regexFind "\\d+" .Value }}
+{{ regexFindAll "\\d+" .Value -1 }}
+{{ regexReplaceAll "old" .Value "new" }}
+{{ regexSplit "," .Value -1 }}
+
+{{/* Sprig path functions */}}
+{{ base "/path/to/file.txt" }}
+{{ dir "/path/to/file.txt" }}
+{{ ext "/path/to/file.txt" }}
+{{ clean "/path/../to/file.txt" }}
+{{ isAbs "/path/to/file.txt" }}
+
+{{/* Sprig flow control functions */}}
+{{ fail "something went wrong" }}
+{{ until 5 }}
+{{ untilStep 0 10 2 }}
+{{ seq 1 5 }}
+
+{{/* Pipeline with pipe operator */}}
+{{ .Name | printf "Hello, %s" | html }}
+{{ .Items | len }}
+
+{{/* Boolean and nil constants */}}
+{{ if true }}always{{ end }}
+{{ if false }}never{{ end }}
+{{ if nil }}nil value{{ end }}
+
+{{/* Template calls */}}
+{{ template "header" . }}
+{{ template "footer" }}
+
+{{/* Define a template */}}
+{{ define "greeting" }}
+  Hello, {{ .Name }}!
+{{ end }}
+
+{{/* Block (define with default) */}}
+{{ block "sidebar" . }}
+  <aside>Default sidebar</aside>
+{{ end }}
+
+{{/* Method call */}}
+{{ .User.FullName }}
+{{ .Items.Sort.First }}
+
+{{/* Trim whitespace markers */}}
+{{- .Name -}}
+{{- if .Show -}}
+  visible
+{{- end -}}
+
+{{/* Nested pipelines */}}
+{{ if eq (len .Items) 0 }}
+  No items found.
+{{ end }}
+
+{{/* Escape sequences in strings */}}
+{{ printf "line1\nline2\ttab\\backslash" }}
+{{ printf "quote: \"hello\"" }}
+
+{{/* Range with break and continue */}}
+{{ range .Items }}
+  {{ if eq .Status "skip" }}{{ continue }}{{ end }}
+  {{ if eq .Status "stop" }}{{ break }}{{ end }}
+  {{ .Name }}
+{{ end }}
+
+{{/* User-defined (non-builtin) function calls */}}
+{{ include "mytemplate" . }}
+{{ toYaml .Values }}
+{{ mustMergeOverwrite (deepCopy .Defaults) .Overrides | toYaml | nindent 2 }}
