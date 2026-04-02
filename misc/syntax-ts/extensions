@@ -53,7 +53,8 @@ hack .hack
 hare .hare
 haskell .hs .lhs
 haxe .hx
-hcl .tf .tfvars .hcl
+hcl .hcl
+terraform .tf .tfvars
 heex .heex
 hjson .hjson
 hlsl .hlsl

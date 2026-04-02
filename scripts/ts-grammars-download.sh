@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-TS_GRAMMARS_VERSION='2026.04.01'
+TS_GRAMMARS_VERSION='2026.04.02'
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BASE_URL='https://github.com/jtyr/tree-sitter-grammars/releases/download'
 

@@ -56,7 +56,8 @@ hack Hack
 hare Hare
 haskell Haskell Program
 haxe Haxe
-hcl Terraform/HCL
+hcl HCL
+terraform Terraform
 heex HEEx
 hjson HJSON
 hlsl HLSL Shader

@@ -1,5 +1,6 @@
-;; Tree-sitter highlight queries for HCL (Terraform) language
-;; Adapted from helix-editor queries for the tree-sitter-hcl grammar
+;; Tree-sitter highlight queries for generic HCL files
+;; For Terraform-specific highlighting (.tf/.tfvars), see terraform-highlights.scm
+;; HCL is a generic language where block names are arbitrary identifiers.
 
 [
   "if"
@@ -57,8 +58,12 @@
 ((identifier) @type
  (#match? @type "^(bool|string|number|object|tuple|list|map|set|any)$"))
 
-((identifier) @keyword
- (#match? @keyword "^(var|local|path|module|root|cwd|resource|variable|data|locals|terraform|provider|output)$"))
+;; Top-level block names -> brightmagenta (keyword.directive)
+(config_file
+  (body
+    (block
+      (identifier) @keyword.directive)))
+
 
 (comment) @comment
 (null_lit) @constant
