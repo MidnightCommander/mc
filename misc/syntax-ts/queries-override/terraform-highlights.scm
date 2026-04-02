@@ -1,6 +1,6 @@
-;; Tree-sitter highlight queries for generic HCL files
-;; For Terraform-specific highlighting (.tf/.tfvars), see terraform-highlights.scm
-;; HCL is a generic language where block names are arbitrary identifiers.
+;; Tree-sitter highlight queries for Terraform (.tf/.tfvars) files
+;; Uses the HCL grammar with Terraform-specific variable reference prefixes.
+;; Block name coloring follows the same generic principle as HCL.
 
 [
   "if"
@@ -64,6 +64,11 @@
     (block
       (identifier) @keyword.directive)))
 
+
+;; Terraform variable reference prefixes
+(variable_expr
+  (identifier) @keyword
+  (#match? @keyword "^(var|local|data|module|path|terraform|count|each|self)$"))
 
 (comment) @comment
 (null_lit) @constant

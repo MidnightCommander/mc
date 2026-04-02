@@ -10,5 +10,6 @@ dtd xml
 html_blade blade
 lua nlua
 robots robots_txt
+terraform hcl
 tsx typescript
 vbnet tree_sitter_vb_dotnet
