@@ -19,6 +19,7 @@ TESTS = \
 	cd_to \
 	examine_cd \
 	exec_get_export_variables_ext \
+	ext__exec_make_shell_string \
 	filegui_is_wildcarded \
 	get_random_hint
 
@@ -32,6 +33,9 @@ examine_cd_SOURCES = \
 
 exec_get_export_variables_ext_SOURCES = \
 	exec_get_export_variables_ext.c
+
+ext__exec_make_shell_string_SOURCES = \
+	ext__exec_make_shell_string.c
 
 get_random_hint_SOURCES = \
 	get_random_hint.c

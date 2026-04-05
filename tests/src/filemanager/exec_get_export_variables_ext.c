@@ -28,14 +28,14 @@
 #include "tests/mctest.h"
 
 #include "lib/file-entry.h"
+#include "src/filemanager/filemanager.h"
 
 #include "src/vfs/local/local.c"
 
-#include "src/filemanager/ext.c"
+MC_TESTABLE GString *exec_get_export_variables (const vfs_path_t *filename_vpath);
 
 /* --------------------------------------------------------------------------------------------- */
 /* mocked functions */
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void
