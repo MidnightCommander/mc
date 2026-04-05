@@ -80,12 +80,12 @@
 
 /*** forward declarations (file scope functions) *************************************************/
 
-// To prevent compiler warnings from being generated with --enable-tests
+#if defined(HAVE_TESTS)
 MC_TESTABLE
 GString *exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath);
 
-// To prevent compiler warnings from being generated without --enable-tests
-#if defined(HAVE_TESTS)
+MC_TESTABLE GString *exec_get_export_variables (const vfs_path_t *filename_vpath);
+
 extern char buffer[BUF_1K];
 #endif
 
@@ -185,7 +185,7 @@ exec_expand_format (char symbol, gboolean is_result_quoted)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static GString *
+MC_TESTABLE GString *
 exec_get_export_variables (const vfs_path_t *filename_vpath)
 {
     GString *text;
