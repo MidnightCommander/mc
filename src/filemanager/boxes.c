@@ -623,7 +623,7 @@ configure_box (void)
 #endif
 
         if (!old_esc_mode)
-            quick_widgets[10].state = quick_widgets[11].state = WST_DISABLED;
+            quick_widgets[10].state = WST_DISABLED;
 
 #ifndef HAVE_POSIX_FALLOCATE
         mc_global.vfs.preallocate_space = FALSE;
