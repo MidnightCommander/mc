@@ -627,7 +627,7 @@ configure_box (void)
 
 #ifndef HAVE_POSIX_FALLOCATE
         mc_global.vfs.preallocate_space = FALSE;
-        quick_widgets[7].state = WST_DISABLED;
+        quick_widgets[6].state = WST_DISABLED;
 #endif
 
         if (quick_dialog (&qdlg) == B_ENTER)
