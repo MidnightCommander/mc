@@ -518,7 +518,9 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
                 // FIXME: do we must read from arch->fd in case of inode != NULL only or in any
                 // case?
 
-                inode->linkname = g_malloc (st->st_size + 1);
+                if (st->st_size < 0 || (gsize) st->st_size >= G_MAXSIZE)
+                    return STATUS_FAIL;
+                inode->linkname = g_malloc ((gsize) st->st_size + 1);
 
                 if (mc_read (arch->fd, inode->linkname, st->st_size) < st->st_size)
                 {
@@ -597,7 +599,12 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
     st.st_rdev = u.buf.c_rdev;
 #endif
     st.st_size = ((off_t) u.buf.c_filesizes[0] << 16) | u.buf.c_filesizes[1];
-
+    if (st.st_size < 0 || st.st_size > MC_MAXPATHLEN)
+    {
+        message (D_ERROR, MSG_ERROR, _ ("Corrupted cpio header encountered in\n%s"), super->name);
+        g_free (name);
+        return STATUS_FAIL;
+    }
     vfs_zero_stat_times (&st);
 
     st.st_atime = st.st_mtime = st.st_ctime =
@@ -751,7 +758,12 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
     u.st.st_rdev = makedev (hd.c_rdev, hd.c_rdevmin);
 #endif
     u.st.st_size = hd.c_filesize;
-
+    if (u.st.st_size < 0 || u.st.st_size > MC_MAXPATHLEN)
+    {
+        message (D_ERROR, MSG_ERROR, _ ("Corrupted cpio header encountered in\n%s"), super->name);
+        g_free (name);
+        return STATUS_FAIL;
+    }
     vfs_zero_stat_times (&u.st);
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
