@@ -162,10 +162,10 @@ include cs.syntax
 file ..\*\\.(?i:m?js)$ JavaScript\sProgram ^#!.\*[\s/](node|nodejs)\\b
 include js.syntax
 
-file ..\*\\.(?i:json)$ JSON\sFile
+file ..\*\\.(?i:json5?)$ JSON\sFile
 include json.syntax
 
-file ..\*\\.(?i:ts)$ TypeScript\sProgram
+file ..\*\\.(?i:e?ts)$ TypeScript\sProgram
 include ts.syntax
 
 file ..\*\\.(?i:as)$ ActionScript\sProgram
