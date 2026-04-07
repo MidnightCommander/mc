@@ -1,0 +1,95 @@
+{
+  "title": "JSON Syntax Highlighting Sample",
+  "description": "Demonstrates all TS captures for JSON grammar",
+  "version": 1,
+
+  "strings": {
+    "simple": "Hello, world!",
+    "empty": "",
+    "with_spaces": "  spaces  ",
+    "special_chars": "Quotes: \" Backslash: \\ Slash: \/",
+    "escapes": "Tab:\tNewline:\nReturn:\rBackspace:\bFormfeed:\f",
+    "unicode": "\u0041\u0042\u0043",
+    "unicode_snowman": "\u2603",
+    "url": "https://example.com/path?q=value&p=2",
+    "path": "/usr/local/bin/program",
+    "multiword": "The quick brown fox jumps over the lazy dog"
+  },
+
+  "numbers": {
+    "integer": 42,
+    "negative": -17,
+    "zero": 0,
+    "float": 3.14159,
+    "negative_float": -0.001,
+    "exponent": 1.5e10,
+    "negative_exponent": 2.99e-8,
+    "big_exponent": 6.022E23,
+    "exponent_plus": 1E+6
+  },
+
+  "booleans": {
+    "is_active": true,
+    "is_deleted": false
+  },
+
+  "null_value": null,
+
+  "arrays": {
+    "empty_array": [],
+    "numbers": [1, 2, 3, 4, 5],
+    "strings": ["alpha", "beta", "gamma"],
+    "mixed": [1, "two", true, null, 3.14],
+    "nested": [[1, 2], [3, 4], [5, 6]],
+    "objects_in_array": [
+      {"id": 1, "name": "Alice"},
+      {"id": 2, "name": "Bob"},
+      {"id": 3, "name": "Charlie"}
+    ]
+  },
+
+  "nested_objects": {
+    "database": {
+      "host": "localhost",
+      "port": 5432,
+      "name": "mydb",
+      "credentials": {
+        "username": "admin",
+        "password": "s3cret",
+        "ssl": true
+      }
+    },
+    "cache": {
+      "enabled": true,
+      "ttl": 3600,
+      "max_size": null
+    }
+  },
+
+  "complex_values": {
+    "coordinates": {"lat": 40.7128, "lng": -74.0060},
+    "tags": ["production", "v2.1", "stable"],
+    "metadata": {
+      "created": "2024-01-15T10:30:00Z",
+      "modified": "2024-06-20T14:45:00Z",
+      "author": "admin"
+    }
+  },
+
+  "edge_cases": {
+    "deep": {
+      "nesting": {
+        "level": {
+          "four": {
+            "value": "deep"
+          }
+        }
+      }
+    },
+    "long_string": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "special_key-with-dashes": "value",
+    "key.with.dots": "value",
+    "key with spaces": "value",
+    "escape_in_value": "Line 1\nLine 2\tTabbed"
+  }
+}

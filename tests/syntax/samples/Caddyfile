@@ -1,0 +1,122 @@
+# Global options block
+{
+    debug
+    http_port 80
+    https_port 443
+    admin off
+    email admin@example.com
+    order reverse_proxy before respond
+    storage file_system /var/lib/caddy
+    auto_https disable_redirects
+    grace_period 10s
+    servers {
+        protocols h1 h2 h3
+        strict_sni_host
+        max_header_size 16384
+    }
+}
+
+# Import shared snippet
+(logging) {
+    log {
+        output file /var/log/caddy/access.log
+        format json
+    }
+}
+
+# Simple site block with address
+localhost:8080 {
+    respond "Hello, world!" 200
+}
+
+# HTTPS site with multiple directives
+https://example.com {
+    import logging
+
+    root * /var/www/html
+
+    encode gzip zstd
+
+    # Matcher definition
+    @api {
+        path /api/*
+        method GET POST PUT DELETE
+    }
+
+    # Reverse proxy with options
+    reverse_proxy @api http://127.0.0.1:9000 {
+        header_up X-Real-IP {remote}
+        header_up Host {host}
+        lb_policy round_robin
+        health_check /health
+        transport http {
+            keepalive 30s
+        }
+    }
+
+    handle_path /docs/* {
+        file_server {
+            root /var/www/docs
+            browse
+        }
+    }
+
+    handle_errors {
+        respond "{http.error.status_code} {http.error.message}"
+    }
+
+    # Redirect with matcher
+    @old path /old-page
+    redir @old /new-page 301
+
+    # TLS configuration
+    tls /etc/ssl/cert.pem /etc/ssl/key.pem {
+        protocols tls1.2 tls1.3
+        ciphers TLS_AES_128_GCM_SHA256
+        curves x25519
+        alpn h2
+        client_auth {
+            mode require_and_verify
+            trusted_ca_cert_file /etc/ssl/ca.pem
+        }
+    }
+
+    # Headers with placeholders
+    header {
+        X-Request-ID {http.request.uuid}
+        X-Server {system.hostname}
+        Strict-Transport-Security "max-age=31536000"
+        -Server
+    }
+
+    # Variables and boolean values
+    vars {
+        is_admin true
+        is_guest false
+    }
+
+    uri strip_prefix /v1
+
+    try_files {path} {path}/ /index.html
+
+    # Environment variable placeholder
+    respond /env {$APP_ENV}
+}
+
+# Named route
+&(my-route) {
+    respond "Named route" 200
+}
+
+# Snippet usage with boolean
+*.example.com {
+    tls {
+        on_demand
+    }
+
+    log {
+        output file /var/log/caddy/{host}.log
+    }
+
+    reverse_proxy localhost:3000
+}

@@ -1,0 +1,105 @@
+# Translator comment for the PO file
+# Another translator comment line
+#. Extracted comment from source code
+#: src/main.c:42 src/utils.c:100
+#, c-format
+msgid ""
+msgstr ""
+"Project-Id-Version: sample 1.0\n"
+"Report-Msgid-Bugs-To: bugs@example.com\n"
+"POT-Creation-Date: 2024-01-15 10:00+0000\n"
+"PO-Revision-Date: 2024-02-20 14:30+0000\n"
+"Last-Translator: John Doe <john@example.com>\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Simple translation
+#: src/greeting.c:10
+msgid "Hello, world!"
+msgstr "Ahoj, svete!"
+
+# Translation with format string
+#: src/status.c:25
+#, c-format
+msgid "Found %d item"
+msgstr "Nalezeno %d polozek"
+
+# Multiline msgid
+#: src/help.c:50
+msgid ""
+"This is a long message that spans\n"
+"multiple lines in the source.\n"
+msgstr ""
+"Toto je dlouha zprava, ktera zabira\n"
+"vice radku ve zdroji.\n"
+
+# Plural forms
+#: src/count.c:30
+msgid "One file"
+msgid_plural "%d files"
+msgstr[0] "Jeden soubor"
+msgstr[1] "%d soubory"
+msgstr[2] "%d souboru"
+
+# Fuzzy translation needing review
+#, fuzzy
+#: src/dialog.c:88
+msgid "Save changes?"
+msgstr "Ulozit zmeny?"
+
+# Context disambiguation
+#: src/menu.c:12
+msgctxt "menu"
+msgid "Open"
+msgstr "Otevrit"
+
+#: src/button.c:45
+msgctxt "button"
+msgid "Open"
+msgstr "Otevrit"
+
+# Escape sequences in strings
+#: src/format.c:60
+#, c-format
+msgid "Path: %s\tSize: %d\n"
+msgstr "Cesta: %s\tVelikost: %d\n"
+
+# Previous untranslated string
+#~ msgid "Old deprecated message"
+#~ msgstr "Stara zastarala zprava"
+
+# Another extracted comment
+#. TRANSLATORS: This appears in the title bar
+#: src/window.c:5
+msgid "Application Title"
+msgstr "Nazev aplikace"
+
+# Flag with no-c-format
+#, no-c-format
+#: src/static.c:15
+msgid "No format specifiers here"
+msgstr "Zadne formatovaci znaky"
+
+# Multiple flags
+#, c-format, fuzzy
+#: src/report.c:99
+msgid "Total: %d items (%s)"
+msgstr "Celkem: %d polozek (%s)"
+
+# Empty translation (untranslated)
+#: src/new.c:1
+msgid "Untranslated string"
+msgstr ""
+
+# String with percent literal
+#: src/percent.c:7
+msgid "100%% complete"
+msgstr "100%% hotovo"
+
+# String with backslash escapes
+#: src/escape.c:20
+msgid "Line one\\nLine two\\tTabbed"
+msgstr "Radek jedna\\nRadek dva\\tOdsazeny"

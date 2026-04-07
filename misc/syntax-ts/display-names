@@ -1,0 +1,160 @@
+# Tree-sitter grammar display names
+#
+# Format: <grammar_name> <display name (rest of line)>
+# Spaces are allowed in the display name.
+
+ada Ada Program
+agda Agda
+asm Assembly
+astro Astro
+awk AWK Program
+bash Shell Script
+bicep Bicep
+bison Yacc/Bison
+bibtex BibTeX
+blueprint Blueprint
+c C Program
+c_sharp C# Program
+caddy Caddyfile
+cairo Cairo
+clojure Clojure
+cmake CMake
+cobol COBOL
+commonlisp Lisp
+cpp C++ Program
+css CSS
+csv CSV
+cuda CUDA
+cue CUE
+d D Program
+dart Dart Program
+devicetree Device Tree
+dhall Dhall
+diff Diff
+dockerfile Dockerfile
+dot Graphviz DOT
+earthfile Earthfile
+editorconfig EditorConfig
+elixir Elixir
+elm Elm
+erlang Erlang Program
+fennel Fennel
+fish Fish Shell
+forth Forth
+fortran Fortran Program
+gdscript GDScript
+gdshader GDShader
+gitattributes Git Attributes
+gitignore Git Ignore
+gleam Gleam
+glsl GLSL Shader
+go Go Program
+gotmpl Go Template
+graphql GraphQL
+groovy Groovy
+hack Hack
+hare Hare
+haskell Haskell Program
+haxe Haxe
+hcl HCL
+terraform Terraform
+heex HEEx
+hjson HJSON
+hlsl HLSL Shader
+html HTML
+idl IDL
+ini INI File
+java Java Program
+javascript JavaScript Program
+jq jq
+json JSON
+json5 JSON5
+jsonnet Jsonnet
+julia Julia
+just Justfile
+kcl KCL
+kdl KDL
+kotlin Kotlin Program
+latex LaTeX
+lua Lua Program
+make Makefile
+markdown Markdown
+matlab MATLAB/Octave
+meson Meson Build
+muttrc Muttrc
+nickel Nickel
+nim Nim
+nix Nix
+nu Nushell
+objc Objective-C
+ocaml OCaml Program
+odin Odin
+org Org Mode
+pascal Pascal Program
+perl Perl Program
+php PHP Program
+pkl Pkl
+po PO Translation
+powershell PowerShell
+prisma Prisma
+properties Java Properties
+proto Protocol Buffers
+prql PRQL
+puppet Puppet
+purescript PureScript
+python Python Program
+qmljs QML
+r R Program
+racket Racket
+rescript ReScript
+robot Robot Framework
+roc Roc
+ron RON
+rst reStructuredText
+ruby Ruby Program
+rust Rust Program
+satysfi SATySFi
+scala Scala Program
+scheme Scheme
+scss SCSS
+slim Slim
+slint Slint
+smalltalk Smalltalk
+sml Standard ML
+snakemake Snakemake
+solidity Solidity
+sql SQL
+starlark Starlark
+strace Strace Output
+svelte Svelte
+swift Swift Program
+tcl Tcl Program
+teal Teal
+templ Templ
+tera Tera
+textproto Text Proto
+thrift Thrift
+tlaplus TLA+
+tmux tmux Config
+toml TOML
+tsv TSV
+turtle RDF Turtle
+twig Twig
+typescript TypeScript Program
+typst Typst
+usd USD
+vala Vala
+verilog Verilog/SystemVerilog
+vhdl VHDL Program
+vim Vim Script
+vue Vue
+wgsl WGSL
+wit WIT
+xml XML
+xquery XQuery
+yaml YAML
+yang YANG
+yuck Yuck
+zeek Zeek
+zig Zig
+zsh Zsh Script

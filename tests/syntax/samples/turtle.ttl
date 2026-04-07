@@ -1,0 +1,114 @@
+## RDF Turtle sample for syntax highlighting comparison
+# Exercises TS captures from turtle-highlights.scm
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.org/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+@base <http://example.org/base/> .
+
+# SPARQL-style PREFIX and BASE declarations
+PREFIX schema: <http://schema.org/>
+BASE <http://example.org/sparql-base/>
+
+# Simple triple with prefixed names
+ex:Alice a foaf:Person .
+ex:Bob a foaf:Person .
+
+# Multiple predicates with semicolons
+ex:Alice
+    foaf:name "Alice Smith" ;
+    foaf:age "30"^^xsd:integer ;
+    foaf:mbox <mailto:alice@example.org> ;
+    foaf:knows ex:Bob .
+
+# Language-tagged strings
+ex:Book1
+    dc:title "The Great Book"@en ;
+    dc:title "Le Grand Livre"@fr ;
+    dc:title "Das groe Buch"@de .
+
+# Datatype annotations
+ex:Measurement1
+    ex:value "42.5"^^xsd:decimal ;
+    ex:unit "kg"^^xsd:string ;
+    ex:timestamp "2024-01-15T10:30:00"^^xsd:dateTime .
+
+# Boolean literals
+ex:Config
+    ex:enabled true ;
+    ex:debug false .
+
+# Blank nodes with bracket syntax
+ex:Alice foaf:knows [
+    a foaf:Person ;
+    foaf:name "Charlie" ;
+    foaf:age "25"^^xsd:integer
+] .
+
+# Blank node labels
+_:node1 a foaf:Organization .
+_:node1 foaf:name "ACME Corp" .
+_:node2 foaf:member _:node1 .
+
+# Collections (lists)
+ex:Favorites ex:colors (
+    "red"
+    "green"
+    "blue"
+) .
+
+# Nested collections
+ex:Matrix ex:row1 (
+    "1"^^xsd:integer
+    "2"^^xsd:integer
+    "3"^^xsd:integer
+) .
+
+# Multi-line strings
+ex:Document dc:description """This is a
+multi-line string literal
+that spans several lines.""" .
+
+# Escape sequences in strings
+ex:Escaped
+    ex:tab "before\tafter" ;
+    ex:newline "line1\nline2" ;
+    ex:carriage "text\rmore" ;
+    ex:unicode "caf\u00E9" ;
+    ex:backslash "path\\to\\file" .
+
+# Full IRI references
+<http://example.org/full/iri> a <http://example.org/Type> .
+<http://example.org/full/iri>
+    <http://purl.org/dc/elements/1.1/title> "Full IRI" .
+
+# Numeric values
+ex:Stats
+    ex:count "100"^^xsd:integer ;
+    ex:ratio "3.14"^^xsd:decimal ;
+    ex:score "9.8e2"^^xsd:double .
+
+# Commas for object lists
+ex:Alice foaf:knows ex:Bob , ex:Charlie , ex:Dave .
+
+# Reification-style triples
+ex:Statement1
+    rdf:subject ex:Alice ;
+    rdf:predicate foaf:knows ;
+    rdf:object ex:Bob .
+
+# Nested blank nodes
+ex:Complex a [
+    rdfs:subClassOf [
+        a rdfs:Class ;
+        rdfs:label "Nested"
+    ]
+] .
+
+# Empty prefix
+:localName a foaf:Thing .
+:another rdfs:label "local" .

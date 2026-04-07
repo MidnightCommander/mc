@@ -1,0 +1,102 @@
+# Sample YAML file demonstrating syntax highlighting features
+# Exercises all tree-sitter captures from yaml-highlights.scm
+
+---
+
+# Block mapping with various key types
+simple_key: plain value
+quoted_key: "double quoted value"
+single_quoted: 'single quoted value'
+
+# Nested mappings
+database:
+  host: localhost
+  port: 5432
+  name: mydb
+
+# Booleans and null
+enabled: true
+disabled: false
+empty: null
+also_empty: ~
+
+# Numbers (integer and float)
+count: 42
+negative: -7
+hex_value: 0x1A
+octal: 0o17
+pi: 3.14159
+scientific: 1.5e+10
+infinity: .inf
+not_a_number: .nan
+
+# Timestamps
+created: 2024-01-15
+updated: 2024-01-15T10:30:00Z
+
+# Block scalars (literal and folded)
+literal_block: |
+  This is a literal block scalar.
+  Line breaks are preserved.
+  Each line stays as-is.
+
+folded_block: >
+  This is a folded block scalar.
+  Lines are joined together.
+  Blank lines start new paragraphs.
+
+# Sequences
+fruits:
+  - apple
+  - banana
+  - cherry
+
+# Flow style
+flow_mapping: {name: John, age: 30}
+flow_sequence: [1, 2, 3, 4, 5]
+
+# Anchors and aliases
+defaults: &defaults
+  adapter: postgres
+  host: localhost
+
+development:
+  <<: *defaults
+  database: dev_db
+
+production:
+  <<: *defaults
+  database: prod_db
+
+# Tags
+tagged_value: !!str 123
+binary_data: !!binary |
+  R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=
+
+custom_tag: !custom
+  field: value
+
+# Escape sequences in strings
+escaped: "line1\nline2\ttab"
+unicode: "snowman: \u2603"
+hex_escape: "\x41\x42\x43"
+
+# Complex keys (flow pairs)
+? complex key
+: complex value
+
+# Document end marker
+...
+
+---
+# Second document
+second: document
+
+# Operator characters used in YAML
+list_item:
+  - first
+  - second
+colon_usage: value
+question_mark:
+  ? explicit_key
+  : explicit_value

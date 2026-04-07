@@ -1,0 +1,104 @@
+# Muttrc configuration file
+# Personal mail settings
+
+# Basic settings
+set realname = "John Doe"
+set from = "john@example.com"
+set folder = "imaps://imap.example.com/"
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
+# IMAP settings
+set imap_user = "john@example.com"
+set imap_pass = `gpg --quiet --decrypt ~/.mutt/pass.gpg`
+set imap_keepalive = 300
+set imap_check_subscribed
+set imap_idle
+
+# SMTP settings
+set smtp_url = "smtps://john@smtp.example.com:465/"
+set smtp_pass = `gpg --quiet --decrypt ~/.mutt/pass.gpg`
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+# Compose settings
+set editor = "vim"
+set edit_headers = yes
+set charset = "UTF-8"
+set send_charset = "us-ascii:utf-8"
+set assumed_charset = "iso-8859-1"
+
+# Index settings
+set sort = threads
+set sort_aux = reverse-last-date-received
+set index_format = "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+set date_format = "%d/%m/%Y %H:%M"
+set mark_old = no
+set beep_new = yes
+
+# Pstrstrings and strstrstrstrstrings
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop = yes
+set menu_scroll = yes
+set tilde = yes
+
+# Headers
+ignore *
+unignore From To Cc Bcc Date Subject
+unhdr_order *
+hdr_order From: To: Cc: Bcc: Date: Subject:
+
+# Aliases
+alias work "Work Contact" <work@example.com>
+alias home "Home Contact" <home@example.com>
+
+# Key bindings
+bind index,pager g noop
+bind index gg first-entry
+bind index G last-entry
+bind pager gg top
+bind pager G bottom
+
+# Macros
+macro index,pager \cb "|urlview\n" "Call urlview"
+macro index A \
+    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N" \
+    "Mark all new as read"
+
+# Colors
+color normal default default
+color indicator brightwhite blue
+color tree yellow default
+color status brightgreen blue
+color error brightred default
+color message brightcyan default
+color signature yellow default
+color attachment brightyellow default
+color search brightred black
+color hdrdefault cyan default
+color quoted green default
+color quoted1 yellow default
+color quoted2 red default
+
+# Hooks
+folder-hook . "set sort=threads"
+folder-hook =Sent "set sort=date-sent"
+send-hook . "set signature=~/.mutt/sig"
+reply-hook ~f@example.com "set from=john@example.com"
+save-hook ~f@work.com =Work
+message-hook . "set langstrstrstrstrstrstrstrstrstring"
+account-hook imaps://imap.example.com/ \
+    "set imap_user=john@example.com"
+
+# Mstrstrstrstrstrstrstrstrstrilings
+mailboxes +INBOX +Sent +Drafts +Trash +Work
+subscribe dev-list@example.com users@example.com
+lists announce@example.com
+
+# Source external files
+source ~/.mutt/colors
+source ~/.mutt/gpg.rc
+source `echo ~/.mutt/local`

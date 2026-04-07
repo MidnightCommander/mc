@@ -1,0 +1,153 @@
+# Tree-sitter grammar extension mappings
+#
+# Format: <grammar_name> <ext1> <ext2> ...
+# Extensions must start with a dot.
+# MC matches the file's extension against these to select a grammar.
+
+ada .adb .ads .ada
+agda .agda
+asm .s .S .asm
+astro .astro
+awk .awk .gawk .mawk
+bash .sh .bash
+bicep .bicep
+bison .y .yy .yxx .yacc
+bibtex .bib
+blueprint .blp
+c .c .h
+c_sharp .cs
+caddy .caddyfile
+cairo .cairo
+clojure .clj .cljs .cljc .edn
+cmake .cmake
+cobol .cob .cbl .cpy
+commonlisp .lisp .cl .lsp .asd .el
+cpp .cpp .cxx .cc .c++ .hpp .hxx .hh .h++ .ii .i
+css .css
+csv .csv
+cuda .cu .cuh
+cue .cue
+d .d .di
+dart .dart
+devicetree .dts .dtsi
+dhall .dhall
+diff .diff .patch
+dockerfile .dockerfile
+dot .dot .gv
+elixir .ex .exs
+elm .elm
+erlang .erl .hrl
+fennel .fnl
+fish .fish
+forth .4th .fth .forth
+fortran .f90 .f95 .f03 .f08 .f .for .fpp .ftn
+gdscript .gd
+gdshader .gdshader
+gleam .gleam
+glsl .glsl .vert .frag .geom .tesc .tese .comp
+go .go
+gotmpl .tmpl .tpl .gotmpl .gohtml .gotxt
+graphql .graphql .gql
+groovy .groovy .gradle
+hack .hack
+hare .hare
+haskell .hs .lhs
+haxe .hx
+hcl .hcl
+terraform .tf .tfvars
+heex .heex
+hjson .hjson
+hlsl .hlsl
+html .html .htm .xhtml
+idl .idl
+ini .ini .cfg .inf
+java .java
+javascript .js .mjs .cjs .jsx
+jq .jq
+json .json .jsonc
+json5 .json5
+jsonnet .jsonnet .libsonnet
+julia .jl
+kcl .k
+kdl .kdl
+kotlin .kt .kts
+latex .tex .ltx .sty .cls
+lua .lua
+make .mk
+markdown .md .markdown .mkd
+matlab .m .octave
+nickel .ncl
+nim .nim .nims .nimble
+nix .nix
+nu .nu
+objc .mm
+ocaml .ml .mli
+odin .odin
+org .org
+pascal .pas .pp .lpr .dpr
+perl .pl .pm .t
+php .php .phtml
+pkl .pkl
+po .po .pot
+powershell .ps1 .psm1 .psd1
+prisma .prisma
+properties .properties
+proto .proto
+prql .prql
+puppet .puppet
+purescript .purs
+python .py .pyw .pyi
+qmljs .qml
+r .r .R .Rmd
+racket .rkt
+rescript .res .resi
+robot .robot
+roc .roc
+ron .ron
+rst .rst
+ruby .rb .rake .gemspec
+rust .rs
+satysfi .saty .satyh
+scala .scala .sc .sbt
+scheme .scm .ss
+scss .scss
+slim .slim
+smalltalk .st
+slint .slint
+sml .sml .sig .fun
+snakemake .smk
+solidity .sol
+sql .sql
+starlark .star .bzl
+strace .strace
+svelte .svelte
+swift .swift
+tcl .tcl .tk .wish .exp
+teal .tl
+templ .templ
+tera .tera
+textproto .textproto .pbtxt
+thrift .thrift
+tlaplus .tla
+toml .toml
+tsv .tsv
+turtle .ttl .turtle
+twig .twig
+typescript .ts .mts .cts .tsx
+typst .typ
+usd .usda .usd
+vala .vala .vapi
+verilog .v .vh .sv .svh
+vhdl .vhd .vhdl
+vim .vim
+vue .vue
+wgsl .wgsl
+wit .wit
+xml .xml .xsl .xslt .xsd .svg .rss .atom .plist
+xquery .xq .xquery
+yaml .yml .yaml
+yang .yang
+yuck .yuck
+zeek .zeek .bro
+zig .zig
+zsh .zsh
