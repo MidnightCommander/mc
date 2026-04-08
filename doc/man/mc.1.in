@@ -2933,6 +2933,30 @@ Some character sequences, which appear most often in preformatted manual
 pages, are displayed bold and underlined, thus making a pretty display
 of your files.
 .PP
+The viewer supports syntax highlighting via an external highlighter.
+Press
+.B Shift\-F8
+to toggle syntax highlighting.  Press
+.B s
+to choose the highlighting backend.
+Five backends are supported:
+.BR bat ,
+.BR chroma ,
+.BR highlight ,
+.BR pygmentize ,
+and
+.BR source\-highlight .
+A custom command can also be configured via the backend chooser dialog.
+The command template must contain
+.B %s
+as a placeholder for the filename.
+The viewer pipes the file through the chosen highlighter and renders
+the ANSI\-colored output.  The backend and file extension are shown in
+the status bar, e.g.
+.IR [bat:py] .
+The syntax mode and backend choice are persisted in
+.IR ~/.config/mc/ini .
+.PP
 When in hex mode, the search function accepts text in quotes and
 constant numbers.  Text in quotes is matched exactly after removing
 the quotes.  Each number matches one byte.  You can mix quoted text
@@ -3024,6 +3048,14 @@ Jump to the next file.
 .TP
 .B C\-b
 Jump to the previous file.
+.TP
+.B Shift\-F8
+Toggle syntax highlighting.  Requires an external highlighter
+.RB ( bat ", " chroma ", " highlight ", " pygmentize ", or " source\-highlight ).
+.TP
+.B s
+Open the syntax highlighting backend chooser dialog.  Installed
+backends and a "Custom..." option for arbitrary commands are shown.
 .TP
 .B Alt\-r
 Toggle the ruler.

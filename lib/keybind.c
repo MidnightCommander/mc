@@ -350,6 +350,8 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (HexMode),
     ADD_KEYMAP_NAME (MagicMode),
     ADD_KEYMAP_NAME (NroffMode),
+    ADD_KEYMAP_NAME (SyntaxMode),
+    ADD_KEYMAP_NAME (SyntaxOptions),
     ADD_KEYMAP_NAME (BookmarkGoto),
     ADD_KEYMAP_NAME (Ruler),
     ADD_KEYMAP_NAME (SearchForward),
