@@ -38,7 +38,7 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"  // num_history_items_recorded
 #include "lib/fileloc.h"
-#include "lib/terminal.h"  // convert_controls()
+#include "lib/terminal.h"  // unescape_controls()
 #include "lib/timefmt.h"
 #include "lib/util.h"
 #include "lib/charsets.h"
@@ -452,6 +452,14 @@ static const struct
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+setup__gstring_free (gpointer data)
+{
+    g_string_free ((GString *) data, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 setup__is_cfg_group_must_panel_config (const char *grp)
 {
@@ -612,25 +620,23 @@ load_layout (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-load_keys_from_section (const char *terminal, mc_config_t *cfg)
+load_keydefs_from_section (const char *terminal, mc_config_t *cfg)
 {
-    char *section_name;
     gchar **profile_keys, **keys;
-    char *valcopy, *value;
+    char *valcopy;
 
     if (terminal == NULL)
         return;
 
-    section_name = g_strconcat ("terminal:", terminal, (char *) NULL);
-    keys = mc_config_get_keys (cfg, section_name, NULL);
+    keys = mc_config_get_keys (cfg, terminal, NULL);
 
     for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
-        // copy=other causes all keys from [terminal:other] to be loaded.
+        // copy=other causes all keys from [other] to be loaded.
         if (g_ascii_strcasecmp (*profile_keys, "copy") == 0)
         {
-            valcopy = mc_config_get_string (cfg, section_name, *profile_keys, "");
-            load_keys_from_section (valcopy, cfg);
+            valcopy = mc_config_get_string (cfg, terminal, *profile_keys, "");
+            load_keydefs_from_section (valcopy, cfg);
             g_free (valcopy);
             continue;
         }
@@ -639,34 +645,46 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
 
         if (key_code != 0)
         {
-            gchar **values;
+            GPtrArray *values;
 
-            values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
+            values = mc_config_get_escape_sequence_list (cfg, terminal, *profile_keys);
             if (values != NULL)
             {
-                gchar **curr_values;
+                g_ptr_array_set_free_func (values, setup__gstring_free);
 
-                for (curr_values = values; *curr_values != NULL; curr_values++)
+                for (guint i = 0; i < values->len; i++)
                 {
-                    valcopy = convert_controls (*curr_values);
-                    define_sequence (key_code, valcopy, MCKEY_NOACTION);
-                    g_free (valcopy);
+                    const GString *curr_value = (GString *) g_ptr_array_index (values, i);
+
+                    if (curr_value->len != 0)
+                        define_sequence (key_code, curr_value->str, curr_value->len,
+                                         MCKEY_NOACTION);
                 }
 
-                g_strfreev (values);
-            }
-            else
-            {
-                value = mc_config_get_string (cfg, section_name, *profile_keys, "");
-                valcopy = convert_controls (value);
-                define_sequence (key_code, valcopy, MCKEY_NOACTION);
-                g_free (valcopy);
-                g_free (value);
+                g_ptr_array_free (values, TRUE);
             }
         }
     }
     g_strfreev (keys);
-    g_free (section_name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+load_keydefs_from_file (const char *fname)
+{
+    mc_config_t *keydef_config;
+
+    if (!exist_file (fname))
+        return;
+
+    keydef_config = mc_config_init (NULL, TRUE);
+    mc_config_read_file (keydef_config, fname, TRUE, TRUE);
+
+    load_keydefs_from_section ("_common_", keydef_config);
+    load_keydefs_from_section (getenv ("TERM"), keydef_config);
+
+    mc_config_deinit (keydef_config);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1086,24 +1104,69 @@ setup_save_config_show_error (const char *filename, GError **mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-load_key_defs (void)
+load_keydefs (void)
 {
-    /*
-     * Load keys from mc.lib before ${XDG_CONFIG_HOME}/mc/ini, so that the user
-     * definitions override global settings.
-     */
-    mc_config_t *mc_global_config;
+    // This method is closely based on keymap.c's load_setup_get_keymap_profile_config().
+    // A main difference is that we don't collect the contents of all the files into a common
+    // mc_config_t object, but rather we process the key definitions from each file on the spot.
+    // This is in order to make the "copy" rule work on a given file only.
 
-    mc_global_config = mc_config_init (mc_global.profile_name, FALSE);
-    if (mc_global_config != NULL)
+    const char *suffix = ".keydef";
+    char *share_keydef, *sysconfig_keydef;
+    char *fname, *fname2;
+
+    // load and merge global keydefs
+
+    // 1) /usr/share/mc (mc_global.share_data_dir)
+    share_keydef = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYDEF_FILE, (char *) NULL);
+    load_keydefs_from_file (share_keydef);
+
+    // 2) /etc/mc (mc_global.sysconfig_dir)
+    sysconfig_keydef =
+        g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYDEF_FILE, (char *) NULL);
+    load_keydefs_from_file (sysconfig_keydef);
+
+    // then load and merge one of user-defined keydef
+
+    // 3) --keydef=<keydef>
+    fname = mc_config_get_full_config_name (NULL, mc_args__keydef_file, suffix);
+    if (fname != NULL && strcmp (fname, sysconfig_keydef) != 0 && strcmp (fname, share_keydef) != 0)
     {
-        load_keys_from_section ("general", mc_global_config);
-        load_keys_from_section (getenv ("TERM"), mc_global_config);
-        mc_config_deinit (mc_global_config);
+        load_keydefs_from_file (fname);
+        goto done;
+    }
+    g_free (fname);
+
+    // 4) getenv("MC_KEYDEF")
+    fname = mc_config_get_full_config_name (NULL, g_getenv ("MC_KEYDEF"), suffix);
+    if (fname != NULL && strcmp (fname, sysconfig_keydef) != 0 && strcmp (fname, share_keydef) != 0)
+    {
+        load_keydefs_from_file (fname);
+        goto done;
     }
 
-    load_keys_from_section ("general", mc_global.main_config);
-    load_keys_from_section (getenv ("TERM"), mc_global.main_config);
+    MC_PTR_FREE (fname);
+
+    // 5) main config; [Midnight Commander] -> keydef
+    fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keydef", NULL);
+    if (fname2 != NULL && *fname2 != '\0')
+        fname = mc_config_get_full_config_name (NULL, fname2, suffix);
+    g_free (fname2);
+    if (fname != NULL && strcmp (fname, sysconfig_keydef) != 0 && strcmp (fname, share_keydef) != 0)
+    {
+        load_keydefs_from_file (fname);
+        goto done;
+    }
+    g_free (fname);
+
+    // 6) ${XDG_CONFIG_HOME}/mc/mc.keydef
+    fname = mc_config_get_full_path (GLOBAL_KEYDEF_FILE);
+    load_keydefs_from_file (fname);
+
+done:
+    g_free (fname);
+    g_free (sysconfig_keydef);
+    g_free (share_keydef);
 }
 
 /* --------------------------------------------------------------------------------------------- */

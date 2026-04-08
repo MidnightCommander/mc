@@ -744,75 +744,6 @@ load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t 
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Get name of config file.
- *
- * @param subdir If not NULL, config is also searched in specified subdir.
- * @param config_file_name If relative, file if searched in standard paths.
- *
- * @return newly allocated string with config name or NULL if file is not found.
- */
-
-static char *
-load_setup_get_full_config_name (const char *subdir, const char *config_file_name)
-{
-    /*
-       TODO: IMHO, in future, this function shall be placed in mcconfig module.
-     */
-    char *lc_basename, *ret;
-    char *file_name;
-
-    if (config_file_name == NULL)
-        return NULL;
-
-    // check for .keymap suffix
-    if (g_str_has_suffix (config_file_name, ".keymap"))
-        file_name = g_strdup (config_file_name);
-    else
-        file_name = g_strconcat (config_file_name, ".keymap", (char *) NULL);
-
-    canonicalize_pathname (file_name);
-
-    if (g_path_is_absolute (file_name))
-        return file_name;
-
-    lc_basename = g_path_get_basename (file_name);
-    g_free (file_name);
-
-    if (lc_basename == NULL)
-        return NULL;
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, (char *) NULL);
-    else
-        ret = g_build_filename (mc_config_get_path (), lc_basename, (char *) NULL);
-
-    if (exist_file (ret))
-    {
-        g_free (lc_basename);
-        canonicalize_pathname (ret);
-        return ret;
-    }
-    g_free (ret);
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_global.share_data_dir, subdir, lc_basename, (char *) NULL);
-    else
-        ret = g_build_filename (mc_global.share_data_dir, lc_basename, (char *) NULL);
-
-    g_free (lc_basename);
-
-    if (exist_file (ret))
-    {
-        canonicalize_pathname (ret);
-        return ret;
-    }
-
-    g_free (ret);
-    return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
   Create new mc_config object from specified ini-file or
   append data to existing mc_config object from ini-file
 */
@@ -840,6 +771,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     /*
        TODO: IMHO, in future, this function shall be placed in mcconfig module.
      */
+    const char *suffix = ".keymap";
     mc_config_t *keymap_config;
     char *share_keymap, *sysconfig_keymap;
     char *fname, *fname2;
@@ -863,7 +795,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     // then load and merge one of user-defined keymap
 
     // 3) --keymap=<keymap>
-    fname = load_setup_get_full_config_name (NULL, mc_args__keymap_file);
+    fname = mc_config_get_full_config_name (NULL, mc_args__keymap_file, suffix);
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
         load_setup_init_config_from_file (&keymap_config, fname, TRUE);
@@ -872,7 +804,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     g_free (fname);
 
     // 4) getenv("MC_KEYMAP")
-    fname = load_setup_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"));
+    fname = mc_config_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"), suffix);
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
         load_setup_init_config_from_file (&keymap_config, fname, TRUE);
@@ -884,7 +816,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     // 5) main config; [Midnight Commander] -> keymap
     fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keymap", NULL);
     if (fname2 != NULL && *fname2 != '\0')
-        fname = load_setup_get_full_config_name (NULL, fname2);
+        fname = mc_config_get_full_config_name (NULL, fname2, suffix);
     g_free (fname2);
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
