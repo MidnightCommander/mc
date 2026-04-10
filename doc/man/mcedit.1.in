@@ -471,33 +471,30 @@ programming less prone to error, not to make code look pretty.
 Text sequences interpreted by
 .B mcedit
 are listed below:
-.TS
-tab(@), center;
-c c c.
-mcedit@PCRE2 equiv.@notes
-_
-[a\-c]@\\[a\-c\\]@no special meaning of [ ]
-\\[a\-c\\]@(a|\-|c)*@no special meaning of \-
-{a\-c}@\\{a\-c\\}@no special meaning of { }
-\\{a\-c\\}@[ac\-]@no special meaning of \-
-\.@\\\.@
-(@\\(@
-)@\\)@
-*@\.*@
-+@[^ \\t]*@
-?@\\?@
-\\*@\\*@
-\\+@\\+@
-^@\\^@
-$@\\$@
-|@\\|@
-\\s@[ ]@single space
-\\t@\\t@
-\\n@\\n@
-.TE
+.EX
+mcedit    PCRE2's equiv.
+[a\-c]     \(rs[a\-c\(rs]        (no special meaning of [ ])
+\(rs[a\-c\(rs]   (a|\-|c)*       (no special meaning of \-  )
+{a\-c}     \(rs{a\-c\(rs}        (no special meaning of { })
+\(rs{a\-c\(rs}   [ac\-]          (no special meaning of \-  )
+\&.         \(rs.
+(         \(rs(
+)         \(rs)
+*         .*
++         [^ \(rst]*
+?         \(rs?
+\(rs*        \(rs*
+\(rs+        \(rs+
+^         \(rs^
+$         \(rs$
+|         \(rs|
+\(rss        [ ]            (space only)
+\(rst        \(rst
+\(rsn        \(rsn
+.EE
 .PP
 The syntax highlighting can be toggled using Ctrl\-s shortcut.
-Pressing C-s twice effectively reloads the syntax file, so you
+Pressing C\-s twice effectively reloads the syntax file, so you
 don't have to exit the editor, or
 .B mc
 itself, to test your syntax modifications.
