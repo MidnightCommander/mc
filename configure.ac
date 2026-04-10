@@ -690,6 +690,7 @@ tests/Makefile
 tests/lib/Makefile
 tests/lib/mcconfig/Makefile
 tests/lib/search/Makefile
+tests/lib/skin/Makefile
 tests/lib/strutil/Makefile
 tests/lib/vfs/Makefile
 tests/lib/vfs/mc.charsets

@@ -69,8 +69,8 @@ void tty_color_free_all (void);
 void tty_setcolor (int color);
 void tty_set_normal_attrs (void);
 
-extern gboolean tty_use_256colors (GError **error);
-extern gboolean tty_use_truecolors (GError **error);
+MC_MOCKABLE gboolean tty_use_256colors (GError **error);
+MC_MOCKABLE gboolean tty_use_truecolors (GError **error);
 
 /*** inline functions ****************************************************************************/
 
