@@ -42,7 +42,7 @@ AM_CPPFLAGS = $(GLIB_CFLAGS) $(TREE_SITTER_CFLAGS) -I$(top_srcdir)
 if USE_TREE_SITTER
 if TREE_SITTER_STATIC
 AM_CPPFLAGS += @TREE_SITTER_GRAMMAR_DEFS@
-libedit_la_LIBADD = ts-grammars/libtsgrammars.la $(TREE_SITTER_LIBS)
+libedit_la_LIBADD = $(TREE_SITTER_LIBS)
 else
 AM_CPPFLAGS += $(GMODULE_CFLAGS) -DTS_GRAMMAR_LIBDIR=\""$(libdir)/mc/ts-grammars"\"
 libedit_la_LIBADD = $(TREE_SITTER_LIBS) $(GMODULE_LIBS)

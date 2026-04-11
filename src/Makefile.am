@@ -59,6 +59,10 @@ mc_LDADD = \
 	libinternal.la \
 	$(TREE_SITTER_LIBS)
 
+if TREE_SITTER_STATIC
+mc_LDADD += editor/ts-grammars/libtsgrammars.a
+endif
+
 if ENABLE_MCLIB
 libinternal_la_LIBADD += \
 	$(top_builddir)/lib/libmc.la

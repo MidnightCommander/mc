@@ -42,6 +42,7 @@
 #include "lib/global.h"
 #include "lib/skin.h"
 #include "lib/fileloc.h"  // EDIT_SYNTAX_DIR, EDIT_SYNTAX_TS_DIR
+#include "lib/tty/key.h"  // is_idle()
 #include "lib/strutil.h"  // utf string functions
 #include "lib/util.h"     // whiteness
 
@@ -67,7 +68,9 @@ typedef struct
 typedef struct
 {
     void *parser;           // TSParser*
-    void *query;            // TSQuery*
+    void *query;            // TSQuery* -- highlight query
+    void *injection_query;  // TSQuery* -- nested injection query (or NULL if none)
+    gboolean injection_query_loaded;  // TRUE once we tried to load it (success or fail)
 } ts_dynamic_lang_t;
 
 
@@ -965,41 +968,34 @@ ts_setup_wrapper_injection (WEdit *edit, const TSLanguage *lang,
 
 /**
  * Load a query file. Search order:
- *   1. User MC-specific override: ~/.local/share/mc/syntax-ts/queries-override/
- *   2. System MC-specific override: $(datadir)/mc/syntax-ts/queries-override/
- *   3. User upstream queries: ~/.local/share/mc/syntax-ts/queries/
- *   4. System upstream queries: $(datadir)/mc/syntax-ts/queries/
+ *   1. User queries: ~/.local/share/mc/syntax-ts/queries/
+ *   2. System queries: $(datadir)/mc/syntax-ts/queries/
  * Returns a newly allocated string with the file contents, or NULL on failure.
  */
 static char *
 ts_load_query_file (const char *query_filename, uint32_t *out_len)
 {
-    static const char *subdirs[] = { "queries-override", "queries" };
     const char *base_dirs[2];
     char *contents = NULL;
     gsize len = 0;
-    int b, s;
+    int b;
 
     base_dirs[0] = mc_config_get_data_path ();
     base_dirs[1] = mc_global.share_data_dir;
 
-    /* Try override dirs first, then upstream dirs */
-    for (s = 0; s < 2; s++)
+    for (b = 0; b < 2; b++)
     {
-        for (b = 0; b < 2; b++)
-        {
-            char *path;
+        char *path;
 
-            path = g_build_filename (base_dirs[b], EDIT_SYNTAX_TS_DIR, subdirs[s],
-                                     query_filename, (char *) NULL);
-            if (g_file_get_contents (path, &contents, &len, NULL))
-            {
-                g_free (path);
-                *out_len = (uint32_t) len;
-                return contents;
-            }
+        path = g_build_filename (base_dirs[b], EDIT_SYNTAX_TS_DIR, "queries",
+                                 query_filename, (char *) NULL);
+        if (g_file_get_contents (path, &contents, &len, NULL))
+        {
             g_free (path);
+            *out_len = (uint32_t) len;
+            return contents;
         }
+        g_free (path);
     }
 
     *out_len = 0;
@@ -1369,9 +1365,6 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
         return FALSE;
     }
 
-    // Set a timeout to prevent pathological grammars from freezing the editor
-    ts_parser_set_timeout_micros (parser, 3000000);  // 3 seconds
-
     // Parse the buffer
     input.payload = edit;
     input.read = ts_input_read;
@@ -1571,6 +1564,8 @@ ts_free (WEdit *edit)
 
             if (dl->query != NULL)
                 ts_query_delete ((TSQuery *) dl->query);
+            if (dl->injection_query != NULL)
+                ts_query_delete ((TSQuery *) dl->injection_query);
             if (dl->parser != NULL)
                 ts_parser_delete ((TSParser *) dl->parser);
             g_free (dl);
@@ -1717,8 +1712,6 @@ ts_get_dynamic_lang (GHashTable *lang_cache, const char *lang_name)
         return NULL;
     }
 
-    ts_parser_set_timeout_micros (parser, 3000000);
-
     query_filename = g_strdup_printf ("%s-highlights.scm", lang_name);
     query_src = ts_load_query_file (query_filename, &query_len);
     g_free (query_filename);
@@ -1827,109 +1820,117 @@ ts_inject_and_highlight (const char *lang_name, TSNode content_node, TSInput inp
         inj_lang = ts_grammar_registry_lookup (lang_name);
         if (inj_lang != NULL)
         {
-            char *nested_inj_filename;
-            char *nested_inj_src;
-            uint32_t nested_inj_len;
+            TSQuery *nested_inj_query;
 
-            nested_inj_filename = g_strdup_printf ("%s-injections.scm", lang_name);
-            nested_inj_src = ts_load_query_file (nested_inj_filename, &nested_inj_len);
-            g_free (nested_inj_filename);
-
-            if (nested_inj_src != NULL)
+            /* Lazy-load the nested injection query and cache it on the
+               dynamic language entry to avoid recompiling on every call. */
+            if (!dl->injection_query_loaded)
             {
-                uint32_t eo;
-                TSQueryError et;
-                TSQuery *nested_inj_query;
+                char *nested_inj_filename;
+                char *nested_inj_src;
+                uint32_t nested_inj_len;
 
-                nested_inj_query =
-                    ts_query_new (inj_lang, nested_inj_src, nested_inj_len, &eo, &et);
-                g_free (nested_inj_src);
+                nested_inj_filename = g_strdup_printf ("%s-injections.scm", lang_name);
+                nested_inj_src = ts_load_query_file (nested_inj_filename, &nested_inj_len);
+                g_free (nested_inj_filename);
 
-                if (nested_inj_query != NULL)
+                if (nested_inj_src != NULL)
                 {
-                    TSNode inj_root;
-                    TSQueryCursor *nested_cursor;
-                    TSQueryMatch nested_match;
+                    uint32_t eo;
+                    TSQueryError et;
 
-                    inj_root = ts_tree_root_node (inject_tree);
-                    nested_cursor = ts_query_cursor_new ();
-                    ts_query_cursor_set_byte_range (nested_cursor, range_start, range_end);
-                    ts_query_cursor_exec (nested_cursor, nested_inj_query, inj_root);
+                    dl->injection_query =
+                        ts_query_new (inj_lang, nested_inj_src, nested_inj_len, &eo, &et);
+                    g_free (nested_inj_src);
+                }
+                dl->injection_query_loaded = TRUE;
+            }
 
-                    while (ts_query_cursor_next_match (nested_cursor, &nested_match))
+            nested_inj_query = (TSQuery *) dl->injection_query;
+
+            if (nested_inj_query != NULL)
+            {
+                TSNode inj_root;
+                TSQueryCursor *nested_cursor;
+                TSQueryMatch nested_match;
+
+                inj_root = ts_tree_root_node (inject_tree);
+                nested_cursor = ts_query_cursor_new ();
+                ts_query_cursor_set_byte_range (nested_cursor, range_start, range_end);
+                ts_query_cursor_exec (nested_cursor, nested_inj_query, inj_root);
+
+                while (ts_query_cursor_next_match (nested_cursor, &nested_match))
+                {
+                    TSNode nested_content = { .id = NULL };
+                    TSNode nested_lang_node = { .id = NULL };
+                    const char *nested_static_lang = NULL;
+                    uint32_t nci;
+
+                    if (!ts_evaluate_match_predicates (nested_inj_query, &nested_match, edit))
+                        continue;
+
+                    for (nci = 0; nci < nested_match.capture_count; nci++)
                     {
-                        TSNode nested_content = { .id = NULL };
-                        TSNode nested_lang_node = { .id = NULL };
-                        const char *nested_static_lang = NULL;
-                        uint32_t nci;
+                        uint32_t nlen;
+                        const char *ncap;
 
-                        if (!ts_evaluate_match_predicates (nested_inj_query, &nested_match, edit))
-                            continue;
-
-                        for (nci = 0; nci < nested_match.capture_count; nci++)
-                        {
-                            uint32_t nlen;
-                            const char *ncap;
-
-                            ncap = ts_query_capture_name_for_id (nested_inj_query,
-                                                                  nested_match.captures[nci].index,
-                                                                  &nlen);
-                            if (strcmp (ncap, "injection.content") == 0)
-                                nested_content = nested_match.captures[nci].node;
-                            else if (strcmp (ncap, "injection.language") == 0)
-                                nested_lang_node = nested_match.captures[nci].node;
-                        }
-
-                        if (ts_node_is_null (nested_content))
-                            continue;
-
-                        nested_static_lang =
-                            ts_get_set_predicate (nested_inj_query, nested_match.pattern_index,
-                                                  "injection.language");
-
-                        if (nested_static_lang != NULL)
-                        {
-                            ts_inject_and_highlight (nested_static_lang, nested_content, input,
-                                                     range_start, range_end, highlights,
-                                                     lang_cache, edit, depth - 1);
-                        }
-                        else if (!ts_node_is_null (nested_lang_node))
-                        {
-                            uint32_t ls = ts_node_start_byte (nested_lang_node);
-                            uint32_t le = ts_node_end_byte (nested_lang_node);
-                            uint32_t ll = le - ls;
-
-                            if (ll > 0 && ll < 64)
-                            {
-                                char lbuf[64];
-                                uint32_t li;
-                                char *s, *e;
-
-                                for (li = 0; li < ll; li++)
-                                    lbuf[li] = (char) edit_buffer_get_byte (&edit->buffer,
-                                                                            (off_t) (ls + li));
-                                lbuf[ll] = '\0';
-
-                                s = lbuf;
-                                while (*s == ' ' || *s == '\t')
-                                    s++;
-                                e = s + strlen (s);
-                                while (e > s && (e[-1] == ' ' || e[-1] == '\t' || e[-1] == '\n'
-                                                 || e[-1] == '\r'))
-                                    e--;
-                                *e = '\0';
-
-                                if (*s != '\0')
-                                    ts_inject_and_highlight (s, nested_content, input,
-                                                             range_start, range_end, highlights,
-                                                             lang_cache, edit, depth - 1);
-                            }
-                        }
+                        ncap = ts_query_capture_name_for_id (nested_inj_query,
+                                                              nested_match.captures[nci].index,
+                                                              &nlen);
+                        if (strcmp (ncap, "injection.content") == 0)
+                            nested_content = nested_match.captures[nci].node;
+                        else if (strcmp (ncap, "injection.language") == 0)
+                            nested_lang_node = nested_match.captures[nci].node;
                     }
 
-                    ts_query_cursor_delete (nested_cursor);
-                    ts_query_delete (nested_inj_query);
+                    if (ts_node_is_null (nested_content))
+                        continue;
+
+                    nested_static_lang =
+                        ts_get_set_predicate (nested_inj_query, nested_match.pattern_index,
+                                              "injection.language");
+
+                    if (nested_static_lang != NULL)
+                    {
+                        ts_inject_and_highlight (nested_static_lang, nested_content, input,
+                                                 range_start, range_end, highlights,
+                                                 lang_cache, edit, depth - 1);
+                    }
+                    else if (!ts_node_is_null (nested_lang_node))
+                    {
+                        uint32_t ls = ts_node_start_byte (nested_lang_node);
+                        uint32_t le = ts_node_end_byte (nested_lang_node);
+                        uint32_t ll = le - ls;
+
+                        if (ll > 0 && ll < 64)
+                        {
+                            char lbuf[64];
+                            uint32_t li;
+                            char *s, *e;
+
+                            for (li = 0; li < ll; li++)
+                                lbuf[li] = (char) edit_buffer_get_byte (&edit->buffer,
+                                                                        (off_t) (ls + li));
+                            lbuf[ll] = '\0';
+
+                            s = lbuf;
+                            while (*s == ' ' || *s == '\t')
+                                s++;
+                            e = s + strlen (s);
+                            while (e > s && (e[-1] == ' ' || e[-1] == '\t' || e[-1] == '\n'
+                                             || e[-1] == '\r'))
+                                e--;
+                            *e = '\0';
+
+                            if (*s != '\0')
+                                ts_inject_and_highlight (s, nested_content, input,
+                                                         range_start, range_end, highlights,
+                                                         lang_cache, edit, depth - 1);
+                        }
+                    }
                 }
+
+                ts_query_cursor_delete (nested_cursor);
             }
         }
     }
@@ -1949,6 +1950,7 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
 {
     TSTree *tree;
     TSInput input;
+    gboolean had_edit;
 
     if (!edit->ts.active)
         return;
@@ -1956,6 +1958,12 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
     input.payload = edit;
     input.read = ts_input_read;
     input.encoding = TSInputEncodingUTF8;
+
+    /* Remember if this rebuild was triggered by an edit (vs scroll).
+       During rapid editing, we skip the expensive injection processing
+       to keep the render responsive.  Injections are only refreshed when
+       rebuilding due to a scroll (cache invalidated by viewport change). */
+    had_edit = edit->ts.need_reparse;
 
     // Perform deferred re-parse if the tree was edited since last parse
     if (edit->ts.need_reparse)
@@ -1982,8 +1990,11 @@ ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end)
                                  (uint32_t) range_start, (uint32_t) range_end,
                                  edit->ts.highlights, edit->ts.grammar_name, edit);
 
-    // Run injection queries if configured.
-    if (edit->ts.injection_query != NULL)
+    /* Run injection queries if configured.  Skip during rapid edits to keep
+       rendering responsive - injections are expensive (parse + query for each
+       injected range).  Edits that don't change injection structure won't lose
+       much; the next idle rebuild will refresh injections. */
+    if (edit->ts.injection_query != NULL && (!had_edit || is_idle ()))
     {
         TSNode root;
         TSQuery *inj_query;
