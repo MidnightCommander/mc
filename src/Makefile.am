@@ -61,6 +61,10 @@ mc_LDADD = \
 =======
 	$(TREE_SITTER_LIBS)
 
+if TREE_SITTER_STATIC
+mc_LDADD += editor/ts-grammars/libtsgrammars.a
+endif
+
 if ENABLE_MCLIB
 libinternal_la_LIBADD += \
 >>>>>>> 573b60e20 (Tree-sitter integration for better syntax highlighting)

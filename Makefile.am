@@ -11,7 +11,8 @@ EXTRA_DIST =
 
 dist_noinst_SCRIPTS = \
     build-glib2.sh \
-    version.sh
+    version.sh \
+    scripts/ts-grammars-download.sh
 
 dist_noinst_HEADERS = $(top_srcdir)/mc-version.h
 

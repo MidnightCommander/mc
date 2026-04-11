@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-TS_GRAMMARS_VERSION='2026.04.02'
+TS_GRAMMARS_VERSION='2026.04.11'
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BASE_URL='https://github.com/jtyr/tree-sitter-grammars/releases/download'
 
@@ -13,8 +13,9 @@ Usage: ts-grammars-download.sh [OPTIONS]
 Download tree-sitter grammar files from GitHub releases.
 
 Options:
-  --source              Download source tarball (for static builds)
-  --shared              Download platform-specific tarball (for shared builds)
+  --source              Download source tarball (for static builds from source)
+  --shared              Download shared library tarball (.so/.dylib/.dll)
+  --static              Download static library tarball (.a)
   --latest              Use latest release instead of pinned version
   --platform=<platform> Override platform auto-detection
                         Supported: x86_64-linux, aarch64-linux,
@@ -22,7 +23,7 @@ Options:
                                    x86_64-windows
   -h, --help            Show this help message
 
-At least one of --source or --shared must be specified.
+At least one of --source, --shared, or --static must be specified.
 USAGE
 }
 
@@ -123,10 +124,7 @@ extract_source() {
     tar -xzf "$tmp_dir/$filename" -C "$tmp_dir"
 
     local grammars_dest="$REPO_ROOT/src/editor/ts-grammars"
-    local queries_dest="$REPO_ROOT/misc/syntax-ts/queries"
     local count=0
-
-    mkdir -p "$queries_dest"
 
     # Tarball contains a top-level directory; iterate grammar dirs inside it
     for lang_dir in "$tmp_dir"/tree-sitter-grammars-*/*/; do
@@ -135,7 +133,6 @@ extract_source() {
 
         # Skip if not a grammar directory
         [[ -f "$lang_dir/src/parser.c" ]] || continue
-        [[ -f "$lang_dir/queries/highlights.scm" ]] || continue
 
         # Skip C++ scanners
         if [[ -f "$lang_dir/src/scanner.cc" ]]; then
@@ -147,12 +144,6 @@ extract_source() {
 
         mkdir -p "$grammars_dest/$lang"
         cp "$lang_dir"/src/* "$grammars_dest/$lang/"
-
-        cp "$lang_dir/queries/highlights.scm" "$queries_dest/${lang}-highlights.scm"
-
-        if [[ -f "$lang_dir/queries/injections.scm" ]]; then
-            cp "$lang_dir/queries/injections.scm" "$queries_dest/${lang}-injections.scm"
-        fi
 
         count=$((count + 1))
     done
@@ -169,7 +160,7 @@ extract_shared() {
     # Only set trap if not already set by extract_source
     trap "rm -rf '$tmp_dir'" EXIT
 
-    local filename="tree-sitter-grammars-$platform.tar.gz"
+    local filename="tree-sitter-grammars-$platform-shared.tar.gz"
 
     download_and_verify "$version" "$filename" "$tmp_dir"
 
@@ -177,18 +168,14 @@ extract_shared() {
     tar -xzf "$tmp_dir/$filename" -C "$tmp_dir"
 
     local shared_dest="$REPO_ROOT/ts-grammars-shared"
-    local queries_dest="$REPO_ROOT/misc/syntax-ts/queries"
     local count=0
 
-    mkdir -p "$shared_dest" "$queries_dest"
+    mkdir -p "$shared_dest"
 
     # Tarball contains a top-level directory; iterate grammar dirs inside it
     for lang_dir in "$tmp_dir"/tree-sitter-grammars-*/*/; do
         local lang
         lang="$(basename "$lang_dir")"
-
-        # Skip if no highlights query
-        [[ -f "$lang_dir/queries/highlights.scm" ]] || continue
 
         echo "  Extracting shared: $lang"
 
@@ -201,21 +188,55 @@ extract_shared() {
             done
         done
 
-        cp "$lang_dir/queries/highlights.scm" "$queries_dest/${lang}-highlights.scm"
-
-        if [[ -f "$lang_dir/queries/injections.scm" ]]; then
-            cp "$lang_dir/queries/injections.scm" "$queries_dest/${lang}-injections.scm"
-        fi
-
         count=$((count + 1))
     done
 
     echo "Shared extraction complete: $count grammars."
 }
 
+extract_static() {
+    local version=$1
+    local platform=$2
+    local tmp_dir
+
+    tmp_dir="$(mktemp -d)"
+    trap "rm -rf '$tmp_dir'" EXIT
+
+    local filename="tree-sitter-grammars-$platform-static.tar.gz"
+
+    download_and_verify "$version" "$filename" "$tmp_dir"
+
+    echo 'Extracting static tarball ...'
+    tar -xzf "$tmp_dir/$filename" -C "$tmp_dir"
+
+    local grammars_dest="$REPO_ROOT/src/editor/ts-grammars"
+    local count=0
+
+    mkdir -p "$grammars_dest"
+
+    # Tarball contains a top-level directory; iterate grammar dirs inside it
+    for lang_dir in "$tmp_dir"/tree-sitter-grammars-*/*/; do
+        local lang
+        lang="$(basename "$lang_dir")"
+
+        # Skip if no .a file
+        [[ -f "$lang_dir/$lang.a" ]] || continue
+
+        echo "  Extracting static: $lang"
+
+        mkdir -p "$grammars_dest/$lang"
+        cp "$lang_dir/$lang.a" "$grammars_dest/$lang/"
+
+        count=$((count + 1))
+    done
+
+    echo "Static extraction complete: $count grammars."
+}
+
 main() {
     local do_source=0
     local do_shared=0
+    local do_static=0
     local use_latest=0
     local platform=''
 
@@ -227,6 +248,10 @@ main() {
                 ;;
             --shared)
                 do_shared=1
+                shift
+                ;;
+            --static)
+                do_static=1
                 shift
                 ;;
             --latest)
@@ -249,8 +274,8 @@ main() {
         esac
     done
 
-    if [[ $do_source -eq 0 && $do_shared -eq 0 ]]; then
-        echo 'Error: at least one of --source or --shared must be specified' >&2
+    if [[ $do_source -eq 0 && $do_shared -eq 0 && $do_static -eq 0 ]]; then
+        echo 'Error: at least one of --source, --shared, or --static must be specified' >&2
         usage >&2
         exit 1
     fi
@@ -264,7 +289,7 @@ main() {
 
     echo "Using version: $version"
 
-    if [[ $do_shared -eq 1 && -z $platform ]]; then
+    if [[ ($do_shared -eq 1 || $do_static -eq 1) && -z $platform ]]; then
         platform="$(detect_platform)"
         echo "Detected platform: $platform"
     fi
@@ -275,6 +300,10 @@ main() {
 
     if [[ $do_shared -eq 1 ]]; then
         extract_shared "$version" "$platform"
+    fi
+
+    if [[ $do_static -eq 1 ]]; then
+        extract_static "$version" "$platform"
     fi
 
     echo 'Done.'
