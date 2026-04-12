@@ -244,7 +244,7 @@ static struct tar_sparse_optab const pax_optab = {
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-decode_num (uintmax_t *num, const char *arg, uintmax_t maxval)
+decode_num (intmax_t *num, const char *arg, intmax_t maxval)
 {
     char *arg_lim = NULL;
     gboolean overflow = FALSE;
@@ -533,7 +533,7 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
 {
     if (file->stat_info->sparse_major > 0)
     {
-        uintmax_t u;
+        intmax_t u;
         char nbuf[UINTMAX_STRSIZE_BOUND];
         union block *blk;
         char *p;
@@ -550,7 +550,7 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
         p = blk->buffer;
         COPY_BUF (archive, blk, nbuf, p);
 
-        if (!decode_num (&u, nbuf, SIZE_MAX))
+        if (!decode_num (&u, nbuf, IDX_MAX))
         {
             // malformed sparse archive member
             return FALSE;
