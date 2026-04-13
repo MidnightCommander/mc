@@ -52,6 +52,7 @@ terminal_SOURCES = \
 
 tty_SOURCES = \
 	tty.c
+tty_LDADD = $(SLANG_LIBS)
 
 util__keycode_to_cntrl_SOURCES = \
 	util__keycode_to_cntrl.c
