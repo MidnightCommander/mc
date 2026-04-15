@@ -62,7 +62,8 @@ AC_DEFUN([mc_WITH_TREE_SITTER], [
                 tree_sitter_grammars=""
                 for a in "$ts_grammar_dir"/*/*.a; do
                     test -f "$a" || continue
-                    g=`basename "\`dirname \"$a\"\`"`
+                    ts_grammar_a_dir=`dirname "$a"`
+                    g=`basename "$ts_grammar_a_dir"`
                     tree_sitter_grammars="$tree_sitter_grammars $g"
                 done
                 tree_sitter_grammars=`echo $tree_sitter_grammars`
