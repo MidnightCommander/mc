@@ -40,27 +40,8 @@ if USE_TREE_SITTER
 edit_syntax_ts_SOURCES = \
 	edit_syntax_ts.c
 
-if TREE_SITTER_STATIC
 edit_syntax_ts_CPPFLAGS = \
-	-DTEST_TS_QUERIES_DIR=\"$(abs_top_srcdir)/misc/syntax-ts/queries\" \
-	$(GLIB_CFLAGS) \
-	$(TREE_SITTER_CFLAGS) \
-	@TREE_SITTER_GRAMMAR_DEFS@ \
-	-I$(top_srcdir) \
-	-I$(top_srcdir)/src/editor/ts-grammars \
-	@CHECK_CFLAGS@
-
-edit_syntax_ts_LDADD = \
-	$(top_builddir)/src/editor/ts-grammars/libtsgrammars.la \
-	$(TREE_SITTER_LIBS) \
-	$(GLIB_LIBS) \
-	@CHECK_LIBS@
-else
-# Shared mode: point TS_GRAMMAR_LIBDIR to the build tree
-# (g_module_open automatically looks in .libs/ for libtool modules)
-edit_syntax_ts_CPPFLAGS = \
-	-DTEST_TS_QUERIES_DIR=\"$(abs_top_srcdir)/misc/syntax-ts/queries\" \
-	-DTS_GRAMMAR_LIBDIR=\"$(abs_top_builddir)/src/editor/ts-grammars\" \
+	-DTS_GRAMMAR_LIBDIR=\"$(libdir)/mc/ts-grammars\" \
 	$(GLIB_CFLAGS) \
 	$(TREE_SITTER_CFLAGS) \
 	$(GMODULE_CFLAGS) \
@@ -72,5 +53,4 @@ edit_syntax_ts_LDADD = \
 	$(GMODULE_LIBS) \
 	$(GLIB_LIBS) \
 	@CHECK_LIBS@
-endif
 endif

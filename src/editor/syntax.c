@@ -1597,7 +1597,7 @@ edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
     else if (edit_options.syntax_highlight_mode == SYNTAX_HIGHLIGHT_NONE)
     {
         edit_options.syntax_highlight_mode =
-            (edit_options.ts_available && !mc_args__no_tree_sitter)
+            (edit_options.use_tree_sitter && !mc_args__no_tree_sitter)
                 ? SYNTAX_HIGHLIGHT_TS
                 : SYNTAX_HIGHLIGHT_LEGACY;
     }

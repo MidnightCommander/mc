@@ -94,6 +94,7 @@ edit_options_t edit_options = {
     .save_position = TRUE,
     .syntax_highlighting = TRUE,
 #ifdef HAVE_TREE_SITTER
+    .use_tree_sitter = TRUE,
     .syntax_highlight_mode = SYNTAX_HIGHLIGHT_TS,
     .ts_available = TRUE,
 #endif

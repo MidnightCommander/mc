@@ -549,7 +549,6 @@ AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_INTERNAL_EDIT, [test x"$use_internal_edit" = xyes ])
 AM_CONDITIONAL(USE_ASPELL, [test x"$enable_aspell" = xyes ])
 AM_CONDITIONAL(USE_TREE_SITTER, [test x"$with_tree_sitter" = xyes])
-AM_CONDITIONAL(TREE_SITTER_STATIC, [test x"$with_tree_sitter" = xyes -a x"$with_tree_sitter_static" = xyes])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 dnl Clarify do we really need GModule
@@ -591,7 +590,6 @@ misc/mc.ext.ini
 src/Makefile
 src/consaver/Makefile
 src/editor/Makefile
-src/editor/ts-grammars/Makefile
 src/man2hlp/Makefile
 src/subshell/Makefile
 src/viewer/Makefile

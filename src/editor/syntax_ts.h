@@ -17,6 +17,7 @@
 
 gboolean ts_init_for_file (WEdit *edit, const char *forced_grammar);
 char *ts_config_reverse_lookup (const char *config_name, const char *display_value);
+void ts_load_grammar_registry (void);  /* exposed for mc-syntax-dump */
 void ts_free (WEdit *edit);
 int ts_get_color_at (WEdit *edit, off_t byte_index);
 void ts_rebuild_highlight_cache (WEdit *edit, off_t range_start, off_t range_end);

@@ -14,8 +14,8 @@
 #include <gmodule.h>
 #include <tree_sitter/api.h>
 
-/* Implemented in syntax_ts.c -- reads grammar config files */
-char *ts_config_lookup_by_grammar (const char *config_name, const char *grammar_name);
+/* Implemented in syntax_ts.c -- reads grammar config */
+char *ts_get_symbol_override (const char *grammar_name);
 
 /*** Cached loaded modules ***/
 
@@ -80,10 +80,10 @@ ts_grammar_registry_lookup (const char *name)
         return NULL;
     }
 
-    /* Determine the symbol name from the symbols config file.
-       Default is tree_sitter_<name>. Override if symbols config has an entry. */
+    /* Determine the symbol name from config.ini.
+       Default is tree_sitter_<name>. Override if config has symbol= entry. */
     {
-        char *override = ts_config_lookup_by_grammar ("symbols", name);
+        char *override = ts_get_symbol_override (name);
 
         if (override != NULL)
         {
