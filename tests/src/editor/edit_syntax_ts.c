@@ -27,11 +27,7 @@
 #include <string.h>
 #include <tree_sitter/api.h>
 
-#ifdef TREE_SITTER_STATIC
-#include "src/editor/ts-grammars/ts-grammar-registry.h"
-#else
 #include "src/editor/ts-grammar-loader.h"
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -180,65 +176,50 @@ START_TEST (test_all_query_files_compile)
     int failed = 0;
     char first_fail[128] = "";
 
-#ifdef TREE_SITTER_STATIC
     {
-        const ts_grammar_entry_static_t *entry;
-
-        for (entry = ts_grammar_registry; entry->name != NULL; entry++)
-        {
-            int rc = test_one_query (entry->name, entry->func ());
-
-            if (rc == -1)
-                continue;
-            tested++;
-            if (rc == 1 && ++failed == 1)
-                snprintf (first_fail, sizeof (first_fail), "%s", entry->name);
-        }
-    }
-#else
-    {
-        /* Scan for query files in source tree and user install location */
-        const char *dirs[2];
+        /* Scan per-grammar directories for highlights.scm */
         char user_path[1024];
+        const char *dirs[2];
         int d;
 
-        dirs[0] = TEST_TS_QUERIES_DIR;
-        snprintf (user_path, sizeof (user_path), "%s/.local/share/mc/syntax-ts/queries",
+        snprintf (user_path, sizeof (user_path), "%s/.local/share/mc/syntax-ts",
                   g_get_home_dir ());
-        dirs[1] = user_path;
+        dirs[0] = user_path;
+        dirs[1] = "/usr/share/mc/syntax-ts";
 
         for (d = 0; d < 2; d++)
         {
             GDir *dir = g_dir_open (dirs[d], 0, NULL);
-            const gchar *fname;
+            const gchar *entry;
 
             if (dir == NULL)
                 continue;
 
-            while ((fname = g_dir_read_name (dir)) != NULL)
+            while ((entry = g_dir_read_name (dir)) != NULL)
             {
-                if (g_str_has_suffix (fname, "-highlights.scm"))
+                gchar *scm_path;
+
+                scm_path = g_build_filename (dirs[d], entry, "highlights.scm", NULL);
+                if (g_file_test (scm_path, G_FILE_TEST_IS_REGULAR))
                 {
-                    gchar *name = g_strndup (fname, strlen (fname) - strlen ("-highlights.scm"));
-                    const TSLanguage *lang = ts_grammar_registry_lookup (name);
-                    int rc = test_one_query (name, lang);
+                    const TSLanguage *lang = ts_grammar_registry_lookup (entry);
+                    int rc = test_one_query (entry, lang);
 
                     if (rc >= 0)
                     {
                         tested++;
                         if (rc == 1 && ++failed == 1)
-                            snprintf (first_fail, sizeof (first_fail), "%s", name);
+                            snprintf (first_fail, sizeof (first_fail), "%s", entry);
                     }
-                    g_free (name);
                 }
+                g_free (scm_path);
             }
             g_dir_close (dir);
 
             if (tested > 0)
-                break;  /* found queries, no need to check second dir */
+                break;
         }
     }
-#endif
 
     ck_assert_msg (tested > 0, "No grammars found");
     ck_assert_msg (failed == 0, "Query failed for %d/%d (first: %s)", failed, tested, first_fail);

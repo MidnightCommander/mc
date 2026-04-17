@@ -33,11 +33,7 @@
 #ifdef HAVE_TREE_SITTER
 
 #include <tree_sitter/api.h>
-#ifdef TREE_SITTER_STATIC
-#include "ts-grammars/ts-grammar-registry.h"
-#else
 #include "ts-grammar-loader.h"
-#endif
 
 #include "lib/global.h"
 #include "lib/skin.h"
@@ -78,8 +74,31 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-/* Color mappings loaded from colors.ini.
-   Key: "section:capture_name" (e.g., "default:keyword", "markdown:comment")
+/* Per-grammar config loaded from config.ini files */
+typedef struct
+{
+    char *grammar_name;
+    char *display_name;
+    char *symbol_override;
+    char *wrapper_content_node;  /* first token of wrapper= (or NULL) */
+    char **wrapper_hosts;        /* remaining tokens of wrapper= (NULL-terminated, or NULL) */
+    char **extensions;           /* from extensions= (NULL-terminated, or NULL) */
+    char **filenames;            /* from filenames= (NULL-terminated, or NULL) */
+    char **shebangs;             /* from shebangs= (NULL-terminated, or NULL) */
+} ts_grammar_config_t;
+
+/* Grammar registry: populated on first use by scanning config.ini files */
+static GHashTable *ts_grammar_configs = NULL;   /* grammar_name -> ts_grammar_config_t* */
+static GHashTable *ts_ext_map = NULL;           /* ".py" -> "python" */
+static GHashTable *ts_filename_map = NULL;      /* "Makefile" -> "make" */
+static GHashTable *ts_shebang_map = NULL;       /* "python3" -> "python" */
+static GHashTable *ts_display_to_grammar = NULL; /* "Python Program" -> "python" */
+static GHashTable *ts_wrapper_host_map = NULL;  /* "yaml" -> "gotmpl" (wrapper name) */
+static GHashTable *ts_wrapper_node_map = NULL;  /* "gotmpl" -> "text" (content node) */
+static gboolean ts_registry_loaded = FALSE;
+
+/* Color mappings loaded from [colors] sections of config.ini files.
+   Key: "grammar_name:capture_name" (e.g., "python:keyword", "default:comment")
    Value: GINT_TO_POINTER(color_pair_id) */
 static GHashTable *ts_color_map = NULL;
 
@@ -159,81 +178,302 @@ ts_alloc_color_from_spec (const char *spec)
 }
 
 /**
- * Load the colors.ini config file. Uses GKeyFile (INI format).
- * Sections: [default] for global colors, [grammar_name] for overrides.
- * User file takes precedence over system file (loaded first).
+ * Split a space-separated string into a NULL-terminated array.
+ * Returns newly allocated array (and strings within), or NULL if empty.
+ */
+static char **
+ts_split_values (const char *str)
+{
+    char **result;
+    int src, dst;
+
+    if (str == NULL || *str == '\0')
+        return NULL;
+
+    result = g_strsplit_set (str, " \t", -1);
+
+    /* Remove empty strings from the array (from consecutive spaces) */
+    src = 0;
+    dst = 0;
+    while (result[src] != NULL)
+    {
+        if (result[src][0] != '\0')
+        {
+            result[dst] = result[src];
+            dst++;
+        }
+        else
+            g_free (result[src]);
+        src++;
+    }
+    result[dst] = NULL;
+
+    if (dst == 0)
+    {
+        g_free (result);
+        return NULL;
+    }
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Load one config.ini file and populate the registry.
+ * grammar_name is the directory name (canonical grammar name).
  */
 static void
-ts_load_color_config (void)
+ts_load_one_config (const char *config_path, const char *grammar_name)
+{
+    GKeyFile *kf;
+    ts_grammar_config_t *cfg;
+    char *value;
+    gchar **keys;
+    gsize k_count, ki;
+
+    kf = g_key_file_new ();
+    if (!g_key_file_load_from_file (kf, config_path, G_KEY_FILE_NONE, NULL))
+    {
+        g_key_file_free (kf);
+        return;
+    }
+
+    cfg = g_new0 (ts_grammar_config_t, 1);
+    cfg->grammar_name = g_strdup (grammar_name);
+
+    /* [grammar] section */
+    value = g_key_file_get_value (kf, "grammar", "display-name", NULL);
+    if (value != NULL)
+    {
+        g_strstrip (value);
+        cfg->display_name = value;
+    }
+
+    value = g_key_file_get_value (kf, "grammar", "symbol", NULL);
+    if (value != NULL)
+    {
+        g_strstrip (value);
+        cfg->symbol_override = value;
+    }
+
+    value = g_key_file_get_value (kf, "grammar", "extensions", NULL);
+    if (value != NULL)
+    {
+        g_strstrip (value);
+        cfg->extensions = ts_split_values (value);
+        g_free (value);
+    }
+
+    value = g_key_file_get_value (kf, "grammar", "filenames", NULL);
+    if (value != NULL)
+    {
+        g_strstrip (value);
+        cfg->filenames = ts_split_values (value);
+        g_free (value);
+    }
+
+    value = g_key_file_get_value (kf, "grammar", "shebangs", NULL);
+    if (value != NULL)
+    {
+        g_strstrip (value);
+        cfg->shebangs = ts_split_values (value);
+        g_free (value);
+    }
+
+    value = g_key_file_get_value (kf, "grammar", "wrapper", NULL);
+    if (value != NULL)
+    {
+        char **parts;
+
+        g_strstrip (value);
+        parts = ts_split_values (value);
+        g_free (value);
+
+        if (parts != NULL && parts[0] != NULL)
+        {
+            int count, i;
+            char **hosts;
+
+            cfg->wrapper_content_node = g_strdup (parts[0]);
+
+            /* Remaining tokens are host grammar names */
+            count = 0;
+            while (parts[count + 1] != NULL)
+                count++;
+            if (count > 0)
+            {
+                hosts = g_new0 (char *, count + 1);
+                for (i = 0; i < count; i++)
+                    hosts[i] = g_strdup (parts[i + 1]);
+                hosts[count] = NULL;
+                cfg->wrapper_hosts = hosts;
+            }
+        }
+        g_strfreev (parts);
+    }
+
+    /* Populate lookup maps */
+    g_hash_table_insert (ts_grammar_configs, g_strdup (grammar_name), cfg);
+
+    if (cfg->display_name != NULL)
+        g_hash_table_insert (ts_display_to_grammar, g_strdup (cfg->display_name),
+                             g_strdup (grammar_name));
+
+    if (cfg->extensions != NULL)
+    {
+        int i;
+
+        for (i = 0; cfg->extensions[i] != NULL; i++)
+            g_hash_table_insert (ts_ext_map, g_strdup (cfg->extensions[i]),
+                                 g_strdup (grammar_name));
+    }
+
+    if (cfg->filenames != NULL)
+    {
+        int i;
+
+        for (i = 0; cfg->filenames[i] != NULL; i++)
+            g_hash_table_insert (ts_filename_map, g_strdup (cfg->filenames[i]),
+                                 g_strdup (grammar_name));
+    }
+
+    if (cfg->shebangs != NULL)
+    {
+        int i;
+
+        for (i = 0; cfg->shebangs[i] != NULL; i++)
+            g_hash_table_insert (ts_shebang_map, g_strdup (cfg->shebangs[i]),
+                                 g_strdup (grammar_name));
+    }
+
+    if (cfg->wrapper_hosts != NULL)
+    {
+        int i;
+
+        g_hash_table_insert (ts_wrapper_node_map, g_strdup (grammar_name),
+                             g_strdup (cfg->wrapper_content_node));
+        for (i = 0; cfg->wrapper_hosts[i] != NULL; i++)
+            g_hash_table_insert (ts_wrapper_host_map, g_strdup (cfg->wrapper_hosts[i]),
+                                 g_strdup (grammar_name));
+    }
+
+    /* [colors] section -> populate ts_color_map */
+    keys = g_key_file_get_keys (kf, "colors", &k_count, NULL);
+    if (keys != NULL)
+    {
+        for (ki = 0; ki < k_count; ki++)
+        {
+            char *color_value;
+            char *map_key;
+            int color_pair;
+
+            color_value = g_key_file_get_value (kf, "colors", keys[ki], NULL);
+            if (color_value == NULL)
+                continue;
+
+            color_pair = ts_alloc_color_from_spec (color_value);
+            g_free (color_value);
+
+            map_key = g_strdup_printf ("%s:%s", grammar_name, keys[ki]);
+            g_hash_table_insert (ts_color_map, map_key, GINT_TO_POINTER (color_pair));
+        }
+        g_strfreev (keys);
+    }
+
+    g_key_file_free (kf);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Scan per-grammar config.ini files from both search paths.
+ * User-local entries take precedence over system entries.
+ */
+void
+ts_load_grammar_registry (void)
 {
     const char *dirs[2];
     int d;
 
-    if (ts_color_map != NULL)
+    if (ts_registry_loaded)
         return;
+
+    ts_registry_loaded = TRUE;
 
     /* Allocate red color for ERROR nodes (parse failures) */
     ts_error_color = ts_alloc_color_from_spec ("red;");
 
+    ts_grammar_configs = g_hash_table_new (g_str_hash, g_str_equal);
+    ts_ext_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    ts_filename_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    ts_shebang_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    ts_display_to_grammar = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    ts_wrapper_host_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    ts_wrapper_node_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     ts_color_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
     dirs[0] = mc_config_get_data_path ();
     dirs[1] = mc_global.share_data_dir;
 
-    /* Load system file first, then user file overwrites */
+    /* Scan system first, then user-local overwrites */
     for (d = 1; d >= 0; d--)
     {
-        GKeyFile *kf;
-        char *path;
-        gchar **groups;
-        gsize g_count;
-        gsize gi;
+        char *ts_dir;
+        GDir *dir;
+        const char *entry;
 
-        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, "colors.ini", (char *) NULL);
-        kf = g_key_file_new ();
-
-        if (!g_key_file_load_from_file (kf, path, G_KEY_FILE_NONE, NULL))
+        ts_dir = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, (char *) NULL);
+        dir = g_dir_open (ts_dir, 0, NULL);
+        if (dir == NULL)
         {
-            g_key_file_free (kf);
-            g_free (path);
+            g_free (ts_dir);
             continue;
         }
-        g_free (path);
 
-        groups = g_key_file_get_groups (kf, &g_count);
-        for (gi = 0; gi < g_count; gi++)
+        while ((entry = g_dir_read_name (dir)) != NULL)
         {
-            gchar **keys;
-            gsize k_count;
-            gsize ki;
+            char *config_path;
 
-            keys = g_key_file_get_keys (kf, groups[gi], &k_count, NULL);
-            if (keys == NULL)
-                continue;
-
-            for (ki = 0; ki < k_count; ki++)
-            {
-                gchar *value;
-                char *map_key;
-                int color_pair;
-
-                value = g_key_file_get_value (kf, groups[gi], keys[ki], NULL);
-                if (value == NULL)
-                    continue;
-
-                color_pair = ts_alloc_color_from_spec (value);
-
-                map_key = g_strdup_printf ("%s:%s", groups[gi], keys[ki]);
-                g_free (value);
-                g_hash_table_insert (ts_color_map, map_key, GINT_TO_POINTER (color_pair));
-            }
-
-            g_strfreev (keys);
+            config_path = g_build_filename (ts_dir, entry, "config.ini", (char *) NULL);
+            if (g_file_test (config_path, G_FILE_TEST_IS_REGULAR))
+                ts_load_one_config (config_path, entry);
+            g_free (config_path);
         }
 
-        g_strfreev (groups);
-        g_key_file_free (kf);
+        g_dir_close (dir);
+        g_free (ts_dir);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get the config record for a grammar. Triggers registry load on first use.
+ */
+static const ts_grammar_config_t *
+ts_get_grammar_config (const char *grammar_name)
+{
+    if (!ts_registry_loaded)
+        ts_load_grammar_registry ();
+
+    return (const ts_grammar_config_t *) g_hash_table_lookup (ts_grammar_configs, grammar_name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get the symbol override for a grammar (for .so loading).
+ * Returns newly allocated string or NULL.
+ */
+char *
+ts_get_symbol_override (const char *grammar_name)
+{
+    const ts_grammar_config_t *cfg = ts_get_grammar_config (grammar_name);
+
+    if (cfg != NULL && cfg->symbol_override != NULL)
+        return g_strdup (cfg->symbol_override);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -244,8 +484,8 @@ ts_load_color_config (void)
  * the last ".suffix" and retries until a match is found or exhausted.
  *
  * Lookup order for each prefix:
- *   1. [grammar_name]:capture (per-grammar override)
- *   2. [default]:capture (global default)
+ *   1. [grammar_name]:capture (per-grammar color)
+ *   2. [default]:capture (global default, if a default/ config exists)
  */
 static int
 ts_capture_name_to_color (const char *capture_name, const char *grammar_name)
@@ -263,7 +503,7 @@ ts_capture_name_to_color (const char *capture_name, const char *grammar_name)
         gpointer value;
         char *key;
 
-        /* Try grammar-specific override first */
+        /* Try grammar-specific color first */
         if (grammar_name != NULL)
         {
             key = g_strdup_printf ("%s:%s", grammar_name, name);
@@ -294,304 +534,27 @@ ts_capture_name_to_color (const char *capture_name, const char *grammar_name)
     }
 
     g_free (name);
-
-    {
-        FILE *dbg = fopen ("/tmp/ts_color_debug.txt", "a");
-        if (dbg != NULL)
-        {
-            fprintf (dbg, "UNRESOLVED: @%s grammar=%s hash_size=%u\n",
-                     capture_name, grammar_name ? grammar_name : "NULL",
-                     g_hash_table_size (ts_color_map));
-            fclose (dbg);
-        }
-    }
-
     return EDITOR_NORMAL_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Look up a config file by matching a value in the value list.
- * Reads <config_name> file where each line is: <key> <val1> <val2> ...
- * If value matches any val, returns g_strdup(key). Otherwise NULL.
- * User file is searched first; if found there, system file is not searched.
- * An empty value list means the grammar is disabled (skip it).
- */
-static char *
-ts_config_lookup_by_value (const char *config_name, const char *value)
-{
-    const char *dirs[2];
-    int d;
-
-    dirs[0] = mc_config_get_data_path ();
-    dirs[1] = mc_global.share_data_dir;
-
-    for (d = 0; d < 2; d++)
-    {
-        char *path;
-        FILE *f;
-        char *line = NULL;
-
-        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, config_name, (char *) NULL);
-        f = fopen (path, "r");
-        g_free (path);
-
-        if (f == NULL)
-            continue;
-
-        while (read_one_line (&line, f) != 0)
-        {
-            char *p, *key;
-
-            p = line;
-
-            /* Skip whitespace */
-            while (*p != '\0' && whiteness (*p))
-                p++;
-
-            /* Skip comments and empty lines */
-            if (*p == '#' || *p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-
-            /* Extract key (first word) */
-            key = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-
-            /* If no values follow the key, grammar is disabled -- skip */
-            if (*p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            /* Check each value on the line */
-            while (*p != '\0')
-            {
-                char *val;
-
-                /* Skip whitespace */
-                while (*p != '\0' && whiteness (*p))
-                    p++;
-
-                if (*p == '\0')
-                    break;
-
-                val = p;
-                while (*p != '\0' && !whiteness (*p))
-                    p++;
-                if (*p != '\0')
-                    *p++ = '\0';
-
-                if (strcmp (val, value) == 0)
-                {
-                    char *result = g_strdup (key);
-
-                    g_free (line);
-                    fclose (f);
-                    return result;
-                }
-            }
-
-            g_free (line);
-            line = NULL;
-        }
-
-        g_free (line);
-        fclose (f);
-    }
-
-    return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Look up a config file by matching the key (first field).
- * Returns g_strdup of the rest of the line (trimmed). Otherwise NULL.
- * User file takes precedence per-record.
- */
-char *
-ts_config_lookup_by_grammar (const char *config_name, const char *grammar_name)
-{
-    const char *dirs[2];
-    int d;
-
-    dirs[0] = mc_config_get_data_path ();
-    dirs[1] = mc_global.share_data_dir;
-
-    for (d = 0; d < 2; d++)
-    {
-        char *path;
-        FILE *f;
-        char *line = NULL;
-
-        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, config_name, (char *) NULL);
-        f = fopen (path, "r");
-        g_free (path);
-
-        if (f == NULL)
-            continue;
-
-        while (read_one_line (&line, f) != 0)
-        {
-            char *p, *key;
-
-            p = line;
-
-            /* Skip whitespace */
-            while (*p != '\0' && whiteness (*p))
-                p++;
-
-            /* Skip comments and empty lines */
-            if (*p == '#' || *p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-
-            /* Extract key (first word) */
-            key = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
-            {
-                /* Key only, no value */
-                if (strcmp (key, grammar_name) == 0)
-                {
-                    g_free (line);
-                    fclose (f);
-                    return g_strdup ("");
-                }
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            if (strcmp (key, grammar_name) == 0)
-            {
-                char *rest, *end;
-
-                /* Skip whitespace before the rest */
-                while (*p != '\0' && whiteness (*p))
-                    p++;
-                rest = p;
-
-                /* Trim trailing whitespace */
-                end = rest + strlen (rest) - 1;
-                while (end > rest && whiteness (*end))
-                    *end-- = '\0';
-
-                {
-                    char *result = g_strdup (rest);
-
-                    g_free (line);
-                    fclose (f);
-                    return result;
-                }
-            }
-
-            g_free (line);
-            line = NULL;
-        }
-
-        g_free (line);
-        fclose (f);
-    }
-
-    return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Reverse lookup: given a config file and a display value (rest of line),
- * return the key (first field).  For example, looking up "Go Template" in
- * display-names returns "gotmpl".
+ * Reverse lookup: given a display name, return the grammar name.
  * Returns newly allocated string or NULL.
  */
 char *
 ts_config_reverse_lookup (const char *config_name, const char *display_value)
 {
-    const char *dirs[2];
-    int d;
+    const char *grammar;
 
-    dirs[0] = mc_config_get_data_path ();
-    dirs[1] = mc_global.share_data_dir;
+    (void) config_name;  /* kept for API compatibility */
 
-    for (d = 0; d < 2; d++)
-    {
-        char *path;
-        FILE *f;
-        char *line = NULL;
+    if (!ts_registry_loaded)
+        ts_load_grammar_registry ();
 
-        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, config_name, (char *) NULL);
-        f = fopen (path, "r");
-        g_free (path);
-
-        if (f == NULL)
-            continue;
-
-        while (read_one_line (&line, f) != 0)
-        {
-            char *p, *key, *rest, *end;
-
-            p = line;
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            if (*p == '#' || *p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-
-            key = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            rest = p;
-
-            end = rest + strlen (rest) - 1;
-            while (end > rest && whiteness (*end))
-                *end-- = '\0';
-
-            if (strcmp (rest, display_value) == 0)
-            {
-                char *result = g_strdup (key);
-
-                g_free (line);
-                fclose (f);
-                return result;
-            }
-
-            g_free (line);
-            line = NULL;
-        }
-
-        g_free (line);
-        fclose (f);
-    }
-
-    return NULL;
+    grammar = (const char *) g_hash_table_lookup (ts_display_to_grammar, display_value);
+    return (grammar != NULL) ? g_strdup (grammar) : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -685,9 +648,14 @@ ts_find_grammar (const char *filename, const char *first_line,
                  char **grammar_name, char **display_name)
 {
     const char *basename;
+    const char *match;
+    const ts_grammar_config_t *cfg;
 
     if (filename == NULL)
         return FALSE;
+
+    if (!ts_registry_loaded)
+        ts_load_grammar_registry ();
 
     *grammar_name = NULL;
     *display_name = NULL;
@@ -696,10 +664,13 @@ ts_find_grammar (const char *filename, const char *first_line,
     basename = (basename != NULL) ? basename + 1 : filename;
 
     /* 1. Exact filename match (most specific) */
-    *grammar_name = ts_config_lookup_by_value ("filenames", basename);
-    if (*grammar_name != NULL)
+    match = (const char *) g_hash_table_lookup (ts_filename_map, basename);
+    if (match != NULL)
     {
-        *display_name = ts_config_lookup_by_grammar ("display-names", *grammar_name);
+        *grammar_name = g_strdup (match);
+        cfg = ts_get_grammar_config (match);
+        *display_name = (cfg != NULL && cfg->display_name != NULL)
+            ? g_strdup (cfg->display_name) : g_strdup (match);
         return TRUE;
     }
 
@@ -710,11 +681,14 @@ ts_find_grammar (const char *filename, const char *first_line,
 
         if (interpreter != NULL)
         {
-            *grammar_name = ts_config_lookup_by_value ("shebangs", interpreter);
+            match = (const char *) g_hash_table_lookup (ts_shebang_map, interpreter);
             g_free (interpreter);
-            if (*grammar_name != NULL)
+            if (match != NULL)
             {
-                *display_name = ts_config_lookup_by_grammar ("display-names", *grammar_name);
+                *grammar_name = g_strdup (match);
+                cfg = ts_get_grammar_config (match);
+                *display_name = (cfg != NULL && cfg->display_name != NULL)
+                    ? g_strdup (cfg->display_name) : g_strdup (match);
                 return TRUE;
             }
         }
@@ -726,10 +700,13 @@ ts_find_grammar (const char *filename, const char *first_line,
 
         if (dot != NULL)
         {
-            *grammar_name = ts_config_lookup_by_value ("extensions", dot);
-            if (*grammar_name != NULL)
+            match = (const char *) g_hash_table_lookup (ts_ext_map, dot);
+            if (match != NULL)
             {
-                *display_name = ts_config_lookup_by_grammar ("display-names", *grammar_name);
+                *grammar_name = g_strdup (match);
+                cfg = ts_get_grammar_config (match);
+                *display_name = (cfg != NULL && cfg->display_name != NULL)
+                    ? g_strdup (cfg->display_name) : g_strdup (match);
                 return TRUE;
             }
         }
@@ -741,196 +718,49 @@ ts_find_grammar (const char *filename, const char *first_line,
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Look up the wrappers config file to find a wrapper grammar for a given host.
- * The wrappers file format is:
- *   wrapper_grammar  content_node  host1 host2 ...
- *
- * If host_grammar matches one of the hosts, returns the wrapper grammar name
- * (newly allocated) and fills content_node (newly allocated).
+ * Look up the wrappers registry to find a wrapper grammar for a given host.
+ * Returns the wrapper grammar name (newly allocated) and fills content_node.
  * Returns NULL if no wrapper handles this host.
  */
 static char *
 ts_find_wrapper_for_host (const char *host_grammar, char **content_node)
 {
-    const char *dirs[2];
-    int d;
+    const char *wrapper;
+    const char *node;
 
     *content_node = NULL;
-    dirs[0] = mc_config_get_data_path ();
-    dirs[1] = mc_global.share_data_dir;
 
-    for (d = 0; d < 2; d++)
-    {
-        char *path;
-        FILE *f;
-        char *line = NULL;
+    if (!ts_registry_loaded)
+        ts_load_grammar_registry ();
 
-        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, "wrappers", (char *) NULL);
-        f = fopen (path, "r");
-        g_free (path);
+    wrapper = (const char *) g_hash_table_lookup (ts_wrapper_host_map, host_grammar);
+    if (wrapper == NULL)
+        return NULL;
 
-        if (f == NULL)
-            continue;
+    node = (const char *) g_hash_table_lookup (ts_wrapper_node_map, wrapper);
+    if (node == NULL)
+        return NULL;
 
-        while (read_one_line (&line, f) != 0)
-        {
-            char *p, *wrapper, *node;
-
-            p = line;
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            if (*p == '#' || *p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-
-            /* Field 1: wrapper grammar name */
-            wrapper = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            /* Field 2: content node name */
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            node = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            /* Remaining fields: host grammar names */
-            while (*p != '\0')
-            {
-                char *host;
-
-                while (*p != '\0' && whiteness (*p))
-                    p++;
-                if (*p == '\0')
-                    break;
-
-                host = p;
-                while (*p != '\0' && !whiteness (*p))
-                    p++;
-                if (*p != '\0')
-                    *p++ = '\0';
-
-                if (strcmp (host, host_grammar) == 0)
-                {
-                    char *result = g_strdup (wrapper);
-
-                    *content_node = g_strdup (node);
-                    g_free (line);
-                    fclose (f);
-                    return result;
-                }
-            }
-
-            g_free (line);
-            line = NULL;
-        }
-
-        g_free (line);
-        fclose (f);
-    }
-
-    return NULL;
+    *content_node = g_strdup (node);
+    return g_strdup (wrapper);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Look up the wrappers config file to find the content node for a wrapper grammar.
+ * Look up the wrappers registry to find the content node for a wrapper grammar.
  * Returns the content node name (newly allocated), or NULL if not a wrapper.
  */
 static char *
 ts_find_wrapper_content_node (const char *wrapper_grammar)
 {
-    const char *dirs[2];
-    int d;
+    const char *node;
 
-    dirs[0] = mc_config_get_data_path ();
-    dirs[1] = mc_global.share_data_dir;
+    if (!ts_registry_loaded)
+        ts_load_grammar_registry ();
 
-    for (d = 0; d < 2; d++)
-    {
-        char *path;
-        FILE *f;
-        char *line = NULL;
-
-        path = g_build_filename (dirs[d], EDIT_SYNTAX_TS_DIR, "wrappers", (char *) NULL);
-        f = fopen (path, "r");
-        g_free (path);
-
-        if (f == NULL)
-            continue;
-
-        while (read_one_line (&line, f) != 0)
-        {
-            char *p, *wrapper, *node;
-
-            p = line;
-            while (*p != '\0' && whiteness (*p))
-                p++;
-            if (*p == '#' || *p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-
-            /* Field 1: wrapper grammar name */
-            wrapper = p;
-            while (*p != '\0' && !whiteness (*p))
-                p++;
-            if (*p == '\0')
-            {
-                g_free (line);
-                line = NULL;
-                continue;
-            }
-            *p++ = '\0';
-
-            if (strcmp (wrapper, wrapper_grammar) == 0)
-            {
-                char *result;
-
-                /* Field 2: content node name */
-                while (*p != '\0' && whiteness (*p))
-                    p++;
-                node = p;
-                while (*p != '\0' && !whiteness (*p))
-                    p++;
-                *p = '\0';
-
-                result = g_strdup (node);
-                g_free (line);
-                fclose (f);
-                return result;
-            }
-
-            g_free (line);
-            line = NULL;
-        }
-
-        g_free (line);
-        fclose (f);
-    }
-
-    return NULL;
+    node = (const char *) g_hash_table_lookup (ts_wrapper_node_map, wrapper_grammar);
+    return (node != NULL) ? g_strdup (node) : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -967,13 +797,13 @@ ts_setup_wrapper_injection (WEdit *edit, const TSLanguage *lang,
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Load a query file. Search order:
- *   1. User queries: ~/.local/share/mc/syntax-ts/queries/
- *   2. System queries: $(datadir)/mc/syntax-ts/queries/
+ * Load a query file from per-grammar directory. Search order:
+ *   1. User: ~/.local/share/mc/syntax-ts/<grammar>/<filename>
+ *   2. System: $(datadir)/mc/syntax-ts/<grammar>/<filename>
  * Returns a newly allocated string with the file contents, or NULL on failure.
  */
 static char *
-ts_load_query_file (const char *query_filename, uint32_t *out_len)
+ts_load_query_file (const char *grammar_name, const char *query_filename, uint32_t *out_len)
 {
     const char *base_dirs[2];
     char *contents = NULL;
@@ -987,7 +817,7 @@ ts_load_query_file (const char *query_filename, uint32_t *out_len)
     {
         char *path;
 
-        path = g_build_filename (base_dirs[b], EDIT_SYNTAX_TS_DIR, "queries",
+        path = g_build_filename (base_dirs[b], EDIT_SYNTAX_TS_DIR, grammar_name,
                                  query_filename, (char *) NULL);
         if (g_file_get_contents (path, &contents, &len, NULL))
         {
@@ -1276,16 +1106,13 @@ ts_evaluate_match_predicates (TSQuery *query, const TSQueryMatch *match, WEdit *
 static void
 ts_init_injections (WEdit *edit, const char *grammar_name, const TSLanguage *lang)
 {
-    char *query_filename;
     char *query_src;
     uint32_t query_len;
     TSQuery *inj_query;
     uint32_t error_offset;
     TSQueryError error_type;
 
-    query_filename = g_strdup_printf ("%s-injections.scm", grammar_name);
-    query_src = ts_load_query_file (query_filename, &query_len);
-    g_free (query_filename);
+    query_src = ts_load_query_file (grammar_name, "injections.scm", &query_len);
 
     if (query_src == NULL)
         return; /* no injections for this grammar */
@@ -1318,7 +1145,6 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
     const char *filename;
     char *grammar_name = NULL;
     char *display_name = NULL;
-    char *query_filename = NULL;
     const TSLanguage *lang;
     TSParser *parser;
     TSTree *tree;
@@ -1329,8 +1155,9 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
     TSQueryError error_type;
     TSQuery *query;
 
-    /* Load color mappings from config on first use */
-    ts_load_color_config ();
+    /* Ensure grammar registry (and colors) are loaded */
+    if (!ts_registry_loaded)
+        ts_load_grammar_registry ();
 
     filename = vfs_path_as_str (edit->filename_vpath);
 
@@ -1338,9 +1165,11 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
     {
         /* Manual grammar selection — skip auto-detection */
         grammar_name = g_strdup (forced_grammar);
-        display_name = ts_config_lookup_by_grammar ("display-names", forced_grammar);
-        if (display_name == NULL)
-            display_name = g_strdup (forced_grammar);
+        {
+            const ts_grammar_config_t *cfg = ts_get_grammar_config (forced_grammar);
+            display_name = (cfg != NULL && cfg->display_name != NULL)
+                ? g_strdup (cfg->display_name) : g_strdup (forced_grammar);
+        }
     }
     else if (!ts_find_grammar (filename, get_first_editor_line (edit), &grammar_name,
                                &display_name))
@@ -1403,8 +1232,6 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
                 if (wrapper_tree != NULL
                     && !ts_node_is_error (ts_tree_root_node (wrapper_tree)))
                 {
-                    char *wrapper_display;
-
                     /* Inject the original grammar into the wrapper's content nodes */
                     ts_setup_wrapper_injection (edit, wrapper_lang, content_node,
                                                 grammar_name);
@@ -1415,10 +1242,11 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
                     g_free (grammar_name);
                     grammar_name = g_strdup (wrapper_name);
                     g_free (display_name);
-                    wrapper_display =
-                        ts_config_lookup_by_grammar ("display-names", wrapper_name);
-                    display_name =
-                        (wrapper_display != NULL) ? wrapper_display : g_strdup (wrapper_name);
+                    {
+                        const ts_grammar_config_t *wcfg = ts_get_grammar_config (wrapper_name);
+                        display_name = (wcfg != NULL && wcfg->display_name != NULL)
+                            ? g_strdup (wcfg->display_name) : g_strdup (wrapper_name);
+                    }
                 }
                 else
                 {
@@ -1435,10 +1263,8 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
         g_free (content_node);
     }
 
-    // Load and compile highlight query: <name>-highlights.scm
-    query_filename = g_strdup_printf ("%s-highlights.scm", grammar_name);
-    query_src = ts_load_query_file (query_filename, &query_len);
-    g_free (query_filename);
+    // Load and compile highlight query
+    query_src = ts_load_query_file (grammar_name, "highlights.scm", &query_len);
 
     if (query_src == NULL)
     {
@@ -1514,7 +1340,9 @@ ts_init_for_file (WEdit *edit, const char *forced_grammar)
                         memcpy (ext_buf, prev_dot, (size_t) ext_len);
                         ext_buf[ext_len] = '\0';
 
-                        host_grammar = ts_config_lookup_by_value ("extensions", ext_buf);
+                        host_grammar = g_hash_table_lookup (ts_ext_map, ext_buf) != NULL
+                            ? g_strdup ((const char *) g_hash_table_lookup (ts_ext_map, ext_buf))
+                            : NULL;
                         if (host_grammar != NULL)
                         {
                             ts_setup_wrapper_injection (edit, lang, content_node,
@@ -1606,7 +1434,7 @@ ts_free (WEdit *edit)
     edit->ts.highlights_end = -1;
     edit->ts.active = FALSE;
 
-    /* Clear the global color map so it's reloaded on next init.
+    /* Clear the grammar registry and color map so they're reloaded on next init.
        This is needed because tty_color_free_temp() (called by
        edit_free_syntax_rules) invalidates all temporary color pairs,
        including the ones stored in ts_color_map. */
@@ -1616,6 +1444,42 @@ ts_free (WEdit *edit)
         ts_color_map = NULL;
         ts_error_color = -1;
     }
+    if (ts_grammar_configs != NULL)
+    {
+        g_hash_table_destroy (ts_grammar_configs);
+        ts_grammar_configs = NULL;
+    }
+    if (ts_ext_map != NULL)
+    {
+        g_hash_table_destroy (ts_ext_map);
+        ts_ext_map = NULL;
+    }
+    if (ts_filename_map != NULL)
+    {
+        g_hash_table_destroy (ts_filename_map);
+        ts_filename_map = NULL;
+    }
+    if (ts_shebang_map != NULL)
+    {
+        g_hash_table_destroy (ts_shebang_map);
+        ts_shebang_map = NULL;
+    }
+    if (ts_display_to_grammar != NULL)
+    {
+        g_hash_table_destroy (ts_display_to_grammar);
+        ts_display_to_grammar = NULL;
+    }
+    if (ts_wrapper_host_map != NULL)
+    {
+        g_hash_table_destroy (ts_wrapper_host_map);
+        ts_wrapper_host_map = NULL;
+    }
+    if (ts_wrapper_node_map != NULL)
+    {
+        g_hash_table_destroy (ts_wrapper_node_map);
+        ts_wrapper_node_map = NULL;
+    }
+    ts_registry_loaded = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1682,7 +1546,6 @@ ts_get_dynamic_lang (GHashTable *lang_cache, const char *lang_name)
     ts_dynamic_lang_t *dl;
     const TSLanguage *lang;
     TSParser *parser;
-    char *query_filename;
     char *query_src;
     uint32_t query_len;
     uint32_t error_offset;
@@ -1712,9 +1575,7 @@ ts_get_dynamic_lang (GHashTable *lang_cache, const char *lang_name)
         return NULL;
     }
 
-    query_filename = g_strdup_printf ("%s-highlights.scm", lang_name);
-    query_src = ts_load_query_file (query_filename, &query_len);
-    g_free (query_filename);
+    query_src = ts_load_query_file (lang_name, "highlights.scm", &query_len);
 
     if (query_src == NULL)
     {
@@ -1826,13 +1687,10 @@ ts_inject_and_highlight (const char *lang_name, TSNode content_node, TSInput inp
                dynamic language entry to avoid recompiling on every call. */
             if (!dl->injection_query_loaded)
             {
-                char *nested_inj_filename;
                 char *nested_inj_src;
                 uint32_t nested_inj_len;
 
-                nested_inj_filename = g_strdup_printf ("%s-injections.scm", lang_name);
-                nested_inj_src = ts_load_query_file (nested_inj_filename, &nested_inj_len);
-                g_free (nested_inj_filename);
+                nested_inj_src = ts_load_query_file (lang_name, "injections.scm", &nested_inj_len);
 
                 if (nested_inj_src != NULL)
                 {

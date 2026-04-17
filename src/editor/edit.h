@@ -62,8 +62,9 @@ typedef struct
     gboolean save_position;
     gboolean syntax_highlighting;
 #ifdef HAVE_TREE_SITTER
+    gboolean use_tree_sitter;  /* persistent: prefer TS highlighting */
     syntax_highlight_mode_t syntax_highlight_mode;
-    gboolean ts_available;  /* FALSE if TS init failed for current file */
+    gboolean ts_available;  /* runtime: FALSE if TS init failed for current file */
 #endif
     gboolean group_undo;
     char *backup_ext;

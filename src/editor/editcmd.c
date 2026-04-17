@@ -849,30 +849,33 @@ edit_syntax_onoff_cmd (WDialog *h)
 {
 #ifdef HAVE_TREE_SITTER
     /* Cycle through available modes.
-       If TS is available: TS -> Legacy -> None -> TS
-       If TS is not available: Legacy -> None -> Legacy */
-    switch (edit_options.syntax_highlight_mode)
+       If TS enabled: TS -> Legacy -> None -> TS
+       If TS disabled: Legacy -> None -> Legacy */
+    if (!edit_options.use_tree_sitter || mc_args__no_tree_sitter)
     {
-    case SYNTAX_HIGHLIGHT_TS:
-        edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_LEGACY;
-        edit_options.syntax_highlighting = TRUE;
-        break;
-    case SYNTAX_HIGHLIGHT_LEGACY:
-        edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_NONE;
-        edit_options.syntax_highlighting = FALSE;
-        break;
-    case SYNTAX_HIGHLIGHT_NONE:
-    default:
-        if (edit_options.ts_available && !mc_args__no_tree_sitter)
+        /* No TS: just toggle Legacy <-> None */
+        edit_options.syntax_highlighting = !edit_options.syntax_highlighting;
+        edit_options.syntax_highlight_mode = edit_options.syntax_highlighting
+            ? SYNTAX_HIGHLIGHT_LEGACY : SYNTAX_HIGHLIGHT_NONE;
+    }
+    else
+    {
+        switch (edit_options.syntax_highlight_mode)
         {
-            edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_TS;
-        }
-        else
-        {
+        case SYNTAX_HIGHLIGHT_TS:
             edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_LEGACY;
+            edit_options.syntax_highlighting = TRUE;
+            break;
+        case SYNTAX_HIGHLIGHT_LEGACY:
+            edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_NONE;
+            edit_options.syntax_highlighting = FALSE;
+            break;
+        case SYNTAX_HIGHLIGHT_NONE:
+        default:
+            edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_TS;
+            edit_options.syntax_highlighting = TRUE;
+            break;
         }
-        edit_options.syntax_highlighting = TRUE;
-        break;
     }
 #else
     edit_options.syntax_highlighting = !edit_options.syntax_highlighting;
@@ -888,8 +891,8 @@ edit_syntax_toggle_ts_cmd (WDialog *h)
 {
 #ifdef HAVE_TREE_SITTER
     /* Toggle between TS and Legacy (skip None).
-       If TS not available, do nothing. */
-    if (!edit_options.ts_available || mc_args__no_tree_sitter)
+       Do nothing if TS is disabled. */
+    if (!edit_options.use_tree_sitter || mc_args__no_tree_sitter)
         return;
 
     if (edit_options.syntax_highlight_mode == SYNTAX_HIGHLIGHT_TS)
