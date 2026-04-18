@@ -132,25 +132,25 @@ ts_input_read (void *payload, uint32_t byte_index, TSPoint position, uint32_t *b
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Parse a color spec "foreground;background" and allocate an MC color pair.
+ * Parse a color spec "foreground/background" and allocate an MC color pair.
  * A foreground of "-" means use the default color. Returns the color pair ID.
  */
 static int
 ts_alloc_color_from_spec (const char *spec)
 {
-    char *buf, *fg, *bg, *semi;
+    char *buf, *fg, *bg, *sep;
     tty_color_pair_t color;
     int result;
 
     buf = g_strdup (spec);
     g_strstrip (buf);
 
-    semi = strchr (buf, ';');
-    if (semi != NULL)
+    sep = strchr (buf, '/');
+    if (sep != NULL)
     {
-        *semi = '\0';
+        *sep = '\0';
         fg = buf;
-        bg = semi + 1;
+        bg = sep + 1;
         if (*bg == '\0')
             bg = NULL;
     }
