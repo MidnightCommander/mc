@@ -1068,9 +1068,12 @@ for external editors.
 Press F5 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
 directory/filename you specify in the input dialog. The destination
-defaults to the directory in the non\-selected panel. Space for destination
-file may be preallocated relative to preallocate_space configure option.
-During this process, you can press C\-c or Esc to abort the operation.
+defaults to the directory in the non\-selected panel.
+If the
+.I Preallocate space
+(preallocate_space) option is on, Midnight Commander will try to preallocate
+space for the whole destination file before copying.
+During the copy process, you can press C\-c or Esc to abort the operation.
 For details about source mask (which will be usually either * or ^\e(.*\e)$
 depending on setting of Use shell patterns) and possible wildcards in the
 destination see
@@ -1721,9 +1724,9 @@ menus. A small number of other settings is saved, too.
 .\"NODE "    Configuration"
 .SH "    Configuration"
 The options in this dialog are divided into several groups: "File
-operation options", "Esc key mode", "Pause after run" and "Other options".
+operations", "Esc key mode", "Pause after run" and "Other options".
 .PP
-.B File operation options
+.B File operations
 .PP
 .I Verbose operation.
 This toggles whether the file Copy, Rename and Delete operations are
@@ -1742,7 +1745,7 @@ is disabled.
 .PP
 .I Classic progressbar.
 If this option is enabled, the progressbar of Copy/Move/Delete operations
-is always grown form left to right. If disabled, the growing direction
+is always grown from left to right. If disabled, the growing direction
 of progressbar follows to direction of Copy/Move/Delete operation:
 from left panel to right one and vice versa. Enabled by default.
 .PP
@@ -1769,7 +1772,7 @@ option below), and if no extra keys have arrived, then the Esc key
 is interpreted as a cancel key (Esc Esc).
 .PP
 .I Timeout.
-This options is used to setup the time interval (in microseconds)
+This option is used to setup the time interval (in microseconds)
 for single press of Esc key. By default, this interval is one second
 (1000000 microseconds). Also the timeout can be set via KEYBOARD_KEY_TIMEOUT_US
 environment variable (also in microseconds), which has higher priority
@@ -2577,7 +2580,7 @@ percentage of the current file that has been processed so far.  The
 total bytes bar indicates the percentage of the total size of the tagged
 files that has been handled. Counters that show how many of the tagged
 files have been handled are displayed. If the
-.I Verbose
+.I Verbose operation
 option is off, the file bytes bar and total bytes bar are not shown.
 .PP
 There are three buttons at the bottom of the dialog:
@@ -3587,6 +3590,7 @@ or without it). Search of skin\-file will occur in (to the first one found):
 The format of skin files is described in
 .BR %pkgdatadir%/skins/README.txt .
 
+.\"NODE "Filenames Highlight"
 .SH "Filenames Highlight"
 Section [filehighlight] in current skin\-file contains key names as
 highlight groups and values as color pairs.
