@@ -773,8 +773,10 @@ Włącza okno dialogowe, w którym standardowo znajduje się ścieżka do
 katalogu w
 nieaktywnym panelu, po czym kopiuje aktualny plik (lub wybrane
 jeśli wybrano jakiekolwiek) do katalogu, który wybraliśmy w oknie dialogowym.
-Space for destination file may be preallocated relative to preallocate_space
-configure option.
+Jeśli opcja
+.I Przydzielanie miejsca z wyprzedzeniem
+(preallocate_space) jest włączona, Midnight Commander spróbuje wstępnie
+przydzielić miejsce na cały plik docelowy przed kopiowaniem.
 Podczas procesu kopiowania możesz go w każdej chwili przerwać wciskając C\-c lub
 Esc. Żeby dowiedzieć się czegoś więcej na temat jokerów w ścieżce źródłowej
 (którymi najczęściej będą * lub ^\e(.*\e)$) i innych możliwych określeń w
@@ -1245,74 +1247,119 @@ w różnych oknach dialogowych z tego menu. Opcja jest włączona jeśli widniej
 przed nią gwiazdka lyb "x".
 .PP
 Komenda
-.I Configuration
+.\"LINK2"
+Konfiguracja (Configuration)
+.\"Configuration"
 włącza okno dialogowe, z którego możesz zmienić
 większość ustawień Midnight Commandera.
 .PP
 Menu
-.I Layout
+.\"LINK2"
+Układ (Layout)
+.\"Layout"
 pozwala na zmianę wielu ustawień, które mają znaczący wpływ
 na to jak MC będzie wyglądał na ekranie.
 .PP
 Menu
-.I Confirmation
+.\"LINK2"
+.I Opcje panelu (Panel options)
+.\"Panel options"
+powoduje wyświetlenie okna, w którym można określić opcje paneli menedżera plików.
+.PP
+Menu
+.\"LINK2"
+Confirmation
+.\"Confirmation"
 włącza okno dialogowe, w którym możesz ustawić przy wykonaniu
 których operacji chcesz być pytany o potwierdzenie.
 .PP
 Menu
-.I Learn Keys
+.\"LINK2"
+Wygląd
+.\"Appearance"
+powoduje wyświetlenie okna, w którym można określić skórkę.
+.PP
+Menu
+.\"LINK2"
+Learn Keys
+.\"Learn keys"
 pokazuje okno dialogowe, w którym możesz poznać
 które klawisze nie działają i w razie problemów naprawić to.
 .PP
 Menu
-.I Virtual FS
+.\"LINK2"
+Virtual FS
+.\"Virtual FS"
 pokazuje okno, w którym możesz zmienić niektóre ustawienia
 dotyczące systemów VFS.
 .PP
 Komenda
-.I Save Setup
+.\"LINK2"
+Save Setup
+.\"Save Setup"
 zachowuje wszystkie ustawienia z menu Lewego, Prawego i Opcji.
 .PP
 .\"NODE "    Configuration"
 .SH "    Konfiguracja"
-Opcje w tym oknie są podzielone na trzy grupy:
-opcje panelu (Panel Options), zatrzymaj po uruchomieniu (Pause after run) i
-inne opcje (Other Options).
+Opcje w tym oknie są podzielone na kilka grup:
+Działania na plikach (File operations), Tryb klawisza Escape (Esc key mode),
+Zatrzymaj po uruchomieniu (Pause after run) i Inne opcje (Other Options).
 .PP
-.B Opcje panelu
+.B Działania na plikach
 .PP
-.I Show Backup Files.
-Standardowo Midnight Commander nie wyświetla plików kończących się znakiem
-\&'~' (tak jak komenda ls \-B w wersji GNU).
+.I Więcej informacji (Verbose operation).
+Przełącza czy podczas kopiowania, kasowania, przenoszenia plików ma być
+pokazywane okno dialogowe pokazujące stopień zaawansowania. Jeśli masz powolny
+terminal, możesz chcieć wyłączyć weryfikację. Jest to wykonywane automatycznie
+za ciebie jeśli twój terminal jest wolniejszy niż 9600 bps.
 .PP
-.I Show Hidden Files.
-Standardowo Midnight Commander wyświetla wszystkie pliki zaczynające się
-od kropki (tak jak ls \-a).
+.I Zliczaj wszystko (Compute totals).
+Jeśli ta opcja jest włączona, Midnight Commander zlicza wszytkie bajty
+plików, które są przeznaczone do kopiowania, przenoszenia, kasowania. Spowoduje
+to wyświetlanie dużo bardziej zaawansowanego wskaźnika postępu w zamian
+zmiejszając trochę prędkość. Ta opcja nie ma żadnego znaczenia jeśli opcja
+.I Więcej informacji (Verbose operation)
+jest wyłączona.
+.I Klasyczny pasek postępu (Classic progressbar).
+Jeśli ta opcja jest włączona, pasek postępu operacji
+kopiowania/przenoszenia/usuwania jest zawsze powiększany od lewej do prawej.
+Jeśli jest wyłączona, kierunek powiększania paska postępu podąża za kierunkiem
+operacji kopiowania/przenoszenia/usuwania: od lewego panelu do prawego i
+odwrotnie.
+Domyślnie włączone.
 .PP
-.I Mark moves down.
-Standardowo kiedy zaznaczasz plik (zarówno przy klawisze Insert)
-linia wyboru przenosi się o jedno w dół.
+.I Automatyczna nazwa przy „mkdir” (Mkdir autoname).
+Po naciśnięciu klawisza F7 w celu utworzenia nowego katalogu, wiersz
+wprowadzania w wyskakującym oknie dialogowym zostanie wypełniony nazwą bieżącego
+pliku lub katalogu w aktywnym panelu.
+Domyślnie wyłączone.
 .PP
-.I Drop down menus.
-Kiedy ta opcja jest włączona, kiedy naciskasz klawisz
-.B F9
-menu będzie aktywowane, w przeciwnym wypadku zostaniesz tylko przeniosiony
-do tytułów w tym menu i będziesz musiał wybrać opcję ręcznie przy użyciu
-strzałek bądź też przy użyciu pierwszej litery z nazwy konkretnego menu.
+.I Przydzielanie miejsca z wyprzedzeniem (Preallocate space).
+Z wyprzedzeniem przydzielić miejsce dla całego pliku docelowego, jeśli to możliwe, przed operacją kopiowania.
+Domyślnie wyłączone.
 .PP
-.I Mix all files.
-Jeśli ta opcja jest włączona, wszystkie pliki i katalogi są pomieszane razem.
-Jeśli zaś jest wyłączona, katalogi (i dowiązania do nich), są listowane na
-początku a pozostałe pliki dopiero za nimi.
+.B Tryb klawisza Esc (Esc key mode).
 .PP
-.I Fast directory reload.
-Standardowo ta opcja jest wyłączona. Jeśli ją włączysz Midnight Commander
-będzie używał triku do sprawdzenia czy zawartość katalogu się zmieniła.
-Trik polega na tym, że sprawdza się i\-węzeł katalogu i jeśli się on zmienił
-to katalog jest ładowany na nowo. Oznacza to przeładowywanie zawartości panelu
-tylko wtedy, kiedy tworzysz lub kasujesz pliki. Jeśli robisz inne zmiany
-(rozmiaru, właściciela, uprawnień, grupy itp.) będziesz musiał ręcznie przeładować
-widok (np. używając kombinacji klawiszy C\-r).
+Domyślnie Midnight Commander traktuje klawisz Esc jako prefiks.
+Dlatego należy nacisnąć kod Esc dwukrotnie, aby wyjść z okna dialogowego.
+Istnieje jednak możliwość użycia pojedynczego naciśnięcia klawisza Esc do tej
+czynności.
+.PP
+.I Pojedyncze naciśnięcie (Single press).
+Domyślnie ta opcja jest wyłączona.
+Jeśli ją włączysz, klawisz Esc będzie działał jako prefiks dla ustawionego
+interwału czasowego (patrz
+.I Limit czasu (Timeout)
+poniżej), a jeśli nie pojawią się żadne dodatkowe klawisze, klawisz Esc zostanie
+zinterpretowany jako klawisz anuluj (Esc Esc).
+.PP
+.I Limit czasu (Timeout).
+Ta opcja służy do ustawienia interwału czasowego (w mikrosekundach) dla
+pojedynczego naciśnięcia klawisza Esc.
+Domyślnie interwał ten wynosi jedną sekundę (1000000 mikrosekund).
+Limit czasu można również ustawić za pomocą zmiennej środowiskowej
+KEYBOARD_KEY_TIMEOUT_US (również w mikrosekundach), która ma wyższy
+priorytet niż wartość opcji Limit czasu (Timeout).
 .PP
 .B Zatrzymaj po uruchomieniu
 .PP
@@ -1335,37 +1382,6 @@ Program zatrzyma się po wykonaniu każdej z twoich komend.
 .PP
 .B Inne opcje
 .PP
-.I Operacje weryfikacji (Verbose operation).
-Przełącza czy podczas kopiowania, kasowania, przenoszenia plików ma być
-pokazywane okno dialogowe pokazujące stopień zaawansowania. Jeśli masz powolny
-terminal, możesz chcieć wyłączyć weryfikację. Jest to wykonywane automatycznie
-za ciebie jeśli twój terminal jest wolniejszy niż 9600 bps.
-.PP
-.I Zliczaj wszystko (Compute totals).
-Jeśli ta opcja jest włączona, Midnight Commander zlicza wszytkie bajty
-plików, które są przeznaczone do kopiowania, przenoszenia, kasowania. Spowoduje
-to wyświetlanie dużo bardziej zaawansowanego wskaźnika postępu w zamian
-zmiejszając trochę prędkość. Ta opcja nie ma żadnego znaczenia jeśli opcja
-.I Verbose operation
-jest wyłączona.
-.PP
-.I Wzorce powłoki (Shell patterns).
-Standardowo komendy zaznacz (Select), odznacz (Unselect), i filtruj (Filter)
-będą używać wyrażeń takich samych jak powłoka. Oznacza to, że
-gwiazdka oznacza zero lub więcej znaków, znak zapytania dokładnie jeden znak,
-a każdy inny znak sam siebie. Jeśli ta opcja jest wyłączona, stosowane są
-te, których używa w komenda
-.BR ed (1).
-.PP
-.I Auto Save Setup.
-Jeśli ta opcja jest włączona, kiedy wychodzisz z Midnight Commandera
-konfiguracja MC zostanie zachowana automatycznie (bez pytania)
-do pliku ~/.config/mc/ini.
-.PP
-.I Auto menus.
-Jeśli ta opcja jest włączona, menu użytkownika będzie włączone na starcie.
-Użyteczne do budowania menu dla nie unixowców.
-.PP
 .I Używaj wewnętrznego edytora (Use internal editor).
 Jeśli ta opcja jest włączona, do edycji plików używany jest wbudowany
 edytor plików. Jeśli ta  opcja jest wyłączona, używany będzie edytor wybrany
@@ -1373,7 +1389,10 @@ w zmiennej
 .BR EDITOR .
 Jeśli żaden edytor nie został wybrany, używany będzie
 .BR vi (1).
-Zobacz sekcję Wewnętrzny edytor plików.
+Zobacz sekcję
+.\"LINK2"
+Wewnętrzny edytor plików\&.
+.\"Internal File Editor"
 .PP
 .I Używaj wewnętrznego podglądu (Use internal viewer).
 Jeśli ta opcja jest włączona, wbudowany podgląd pliku jest używany do oglądania
@@ -1382,6 +1401,29 @@ pliku. Jeśli ta opcja jest wyłączona, używany jest podgląd wybrany w zmienn
 Jeśli żaden podgląd nie został wybrany, wywoływana jest komenda
 .BR view .
 Zobacz sekcję Wbudowany podgląd plików.
+.PP
+.I Pytanie o nową nazwę pliku (Ask new file name).
+Jeśli ta opcja jest włączona, przed otwarciem nowego pliku w edytorze zostanie
+wyświetlone pytanie o nazwę pliku.
+.PP
+.I Automatyczne menu (Auto menus).
+Jeśli ta opcja jest włączona, menu użytkownika będzie włączone na starcie.
+Użyteczne do budowania menu dla nie unixowców.
+.PP
+.I Rozwijanie menu (Drop down menus).
+Kiedy ta opcja jest włączona, kiedy naciskasz klawisz
+.B F9
+menu będzie aktywowane, w przeciwnym wypadku zostaniesz tylko przeniosiony
+do tytułów w tym menu i będziesz musiał wybrać opcję ręcznie przy użyciu
+strzałek bądź też przy użyciu pierwszej litery z nazwy konkretnego menu.
+.PP
+.I Wzorce powłoki (Shell patterns).
+Standardowo komendy zaznacz (Select), odznacz (Unselect), i filtruj (Filter)
+będą używać wyrażeń takich samych jak powłoka. Oznacza to, że
+gwiazdka oznacza zero lub więcej znaków, znak zapytania dokładnie jeden znak,
+a każdy inny znak sam siebie. Jeśli ta opcja jest wyłączona, stosowane są
+te, których używa w komenda
+.BR ed (1).
 .PP
 .I Dokańczanie: pokaż wszystkie (Complete: show all).
 Standardowo Midnight Commander pokazuje wszystkie możliwe dokończenia
@@ -1397,11 +1439,6 @@ Jeśli ta opcja jest włączona, Midnight Commander będzie pokazywał obracają
 się myślnik w lewym górnym rogu, jeśli będzie akurat w trakcie wykonywania
 jakiegoś procesu.
 .PP
-.I Lynx\-like motion.
-Jeśli ta opcja jest włączona, możesz używać strzałek przemieszczenia
-żeby automatycznie zmieniać katalog jeśli aktualnie wybrany katalog jest
-podkatalogiem, a linia poleceń jest pusta. Standardowo ta opcja jest wyłączona.
-.PP
 .I Dowiązania podążające cd (Cd follows links).
 Ta opcja, jeśli jest włączona, zmusza Midnight Commandera żeby podążał
 za łańcuchem katalogów przy zmienianiu go w panelu czy za pomocą komendy cd.
@@ -1410,50 +1447,212 @@ podąża za prawdziwą strukturą katalogów, więc cd .. jeśli wszedłeś do
 katalogu poprzez dowiązanie, przeniesie cię do prawdziwego katalogu na dysku, a nie
 tam gdzie wskazywało dowiązanie.
 .PP
-.I Bezpieczne kasowanie (Safe delete).
+.I Bezpieczne usuwanie (Safe delete).
 Jeśli ta opcja jest włączona, nieumyślne kasowanie plików stanie się
 dużo trudniejsze. Standardowy wybór w linii potwierdzenia zmienia się z
-"Yes" na "No". Standardowo ta opcja jest wyłączona.
+.B Tak
+na
+.BR Nie .
+Standardowo ta opcja jest wyłączona.
+.PP
+.I Bezpieczne zastępowanie (Safe overwrite).
+Jeśli ta opcja jest włączona, nieumyślne zastępowanie plików stanie się dużo
+trudniejsze.
+Standardowy wybór w oknie potwierdzenia zastępowania zmienia się z
+.B Tak
+na
+.BR Nie .
+Standardowo ta opcja jest wyłączona.
+.PP
+.I Automatyczny zapis ustawień (Auto Save Setup).
+Jeśli ta opcja jest włączona, kiedy wychodzisz z Midnight Commandera
+konfiguracja MC zostanie zachowana automatycznie (bez pytania)
+do pliku ~/.config/mc/ini.
 .PP
 .\"NODE "    Layout"
-.SH "    Wygląd (Layout)"
-Meny wygląd pozwala ci na różne warianty zmieniania ogólnego wyglądu
-zewnętrznego ekranu. Możesz wybrać, czy linia menu, linia poleceń, linia
-hintów (pomocy) i linia klawiszy funkcyjnych mają być widoczne. Na
-konsolach typu Linux lub FreeBSD możesz wybrać ile linii ma być
-pokazywanych na wyjściu okna.
+.SH "    Układ (Layout)"
+Okno Układ pozwala ci na różne warianty zmieniania ogólnego wyglądu
+zewnętrznego ekranu.
+Opcje w tym oknie dialogowym są podzielone na kilka grup:
+"Podział na panele", "Wyjście konsoli" i "Inne opcje".
+.PP
+.B Podział na panele (Panel split)
 .PP
 Reszta powierzchni ekranu jest używana przez dwa panele katalogowe. Możesz
-wybrać nawet czy panele mają być ułożone poziomo czy pionowo.
+wybrać nawet czy panele mają być ułożone
+.I poziomo
+czy
+.I pionowo.
+Układ panelu można zmienić za pomocą skrótu Alt\-, (Alt\-przecinek).
 Kolejną możliwością jest zmiana ich standardowej szerokości (bądź wysokości).
 Jest ona standardowo równa, ale można to zmienić.
 .PP
-Standardowo cała zawartość panelu katalogowego jest wyświetlana tą samą barwą,
-ale możesz zmienić to tak aby
-.I uprawnienia
-i
-.I typy plików
-były wyświetlane specjalnym podświetlonym kolorem.
-Jeśli podświetlanie uprawnień jest włączone, część pól (ta z
-.I uprawnieniami
-i
-.IR "typami plików" )
-będzie podświetlona przy użyciu koloru wybranego jako
-.IR selected .
-Jeśli podświetlanie jest włączone, pliki są kolorowane w zależnośći od swojego
-typu (np. katalogi, pliki typu core, wykonywalne, ...).
+.B Wyjście konsoli (Console output)
+.PP
+Na konsolach typu Linux lub FreeBSD możesz wybrać ile linii ma być pokazywanych
+na wyjściu okna.
+.PP
+.B Inne opcje
+.PP
+.I Pasek menu.
+Jeśli opcja jest włączona, menu główne Midnight Commandera jest zawsze widoczne
+w górnym rzędzie ekranu nad panelami.
+Domyślnie włączone.
+.I Znak zachęty.
+Jeśli opcja jest włączona, linia poleceń jest dostępna.
+Domyślnie włączone.
+.I Pasek klawiszy.
+Jeśli opcja jest włączona, 10 etykiet powiązanych z klawiszami F1\-F10 znajduje
+się w dolnym rzędzie ekranu.
+Domyślnie włączone.
+.PP
+.I Pasek porad.
+Jeśli opcja jest włączona, jednowierszowe podpowiedzi są widoczne pod panelami.
+Domyślnie włączone.
+.PP
+.I Tytuł okna XTerm.
+Po uruchomieniu w emulatorze terminala dla X11, Midnight Commander ustawia tytuł
+okna terminala na bieżący katalog roboczy i aktualizuje go, gdy jest to
+konieczne.
+Jeśli emulator terminala jest uszkodzony i widzisz niepoprawne dane wyjściowe
+podczas uruchamiania i zmiany katalogu, wyłącz tę opcję.
+Domyślnie włączone.
+.PP
+.I Wolne miejsce.
+Jeśli opcja jest włączona, wolne miejsce i całkowita ilość miejsca w bieżącym
+systemie plików są wyświetlane w dolnej ramce panelu.
+Domyślnie włączone.
+.\"NODE "    Panel options"
+.SH "    Opcje panelu"
+.B Główne opcje panelu
 .PP
 Jeśli opcja
 .I Show Mini\-Status
 jest włączona, jeden wiersz informacji statusowych na temat aktualnie
 wybranej rzeczy w panelu, będzie pokazany na dole panelu.
 .PP
+.I Jednostki rozmiaru SI (Use SI size units).
+Jeśli ta opcja jest włączona, Midnight Commander będzie używać prefiksów SI (o
+podstawie 10) do wyświetlania dowolnych rozmiarów w bajtach.
+Jeśli opcja jest wyłączona (domyślnie), Midnight Commander będzie używać
+prefiksów IEC (o podstawie 2).
+.PP
+.I Mix all files.
+Jeśli ta opcja jest włączona, wszystkie pliki i katalogi są pomieszane razem.
+Jeśli zaś jest wyłączona, katalogi (i dowiązania do nich), są listowane na
+początku a pozostałe pliki dopiero za nimi.
+.PP
+.I Show Backup Files.
+Standardowo Midnight Commander nie wyświetla plików kończących się znakiem
+\&'~' (tak jak komenda ls \-B w wersji GNU).
+.PP
+.I Show Hidden Files.
+Standardowo Midnight Commander wyświetla wszystkie pliki zaczynające się
+od kropki (tak jak ls \-a).
+.PP
+.I Fast directory reload.
+Standardowo ta opcja jest wyłączona. Jeśli ją włączysz Midnight Commander
+będzie używał triku do sprawdzenia czy zawartość katalogu się zmieniła.
+Trik polega na tym, że sprawdza się i\-węzeł katalogu i jeśli się on zmienił
+to katalog jest ładowany na nowo. Oznacza to przeładowywanie zawartości panelu
+tylko wtedy, kiedy tworzysz lub kasujesz pliki. Jeśli robisz inne zmiany
+(rozmiaru, właściciela, uprawnień, grupy itp.) będziesz musiał ręcznie przeładować
+widok (np. używając kombinacji klawiszy C\-r).
+.PP
+.I Mark moves down.
+Standardowo kiedy zaznaczasz plik (zarówno przy klawisze Insert)
+linia wyboru przenosi się o jedno w dół.
+.PP
+.I Odwróć tylko pliki (Reverse files only).
+Jeśli ta opcja jest włączona, opcja 'Odwróć zaznaczenie' w menu Plik będzie
+dotyczyć tylko plików, a nie zarówno plików, jak i katalogów. Domyślnie włączona.
+.PP
+.I Proste przełączenie (Simple swap).
+Jeśli oba panele zawierają listę plików, proste przełączenie oznacza, że panele zamieniają się pozycjami na ekranie: lewy panel staje się prawym i odwrotnie.
+Jeśli ta opcja jest odznaczona, panele z listą plików zamieniają się zawartością, zachowując opcje formatowania i sortowania listy.
+Domyślnie odznaczona.
+.PP
+.I Automatyczne zapisywanie ustawień paneli (Auto save panels setup).
+Jeśli ta opcja jest włączona, po wyjściu z Midnight Commandera
+bieżące ustawienia paneli zostaną zapisane w pliku ~/.config/mc/panels.ini.
+Domyślnie wyłączona.
+.PP
+.B Nawigacja
+.PP
+.I Lynx\-like motion.
+Jeśli ta opcja jest włączona, możesz używać strzałek przemieszczenia
+żeby automatycznie zmieniać katalog jeśli aktualnie wybrany katalog jest
+podkatalogiem, a linia poleceń jest pusta. Standardowo ta opcja jest wyłączona.
+.PP
+.I Przewijanie stron (Page scrolling).
+Jeśli ustawione (domyślnie), panel będzie przewijał się o połowę ekranu, gdy
+kursor dotrze do końca lub początku panelu, w przeciwnym razie będzie przewijał
+tylko jeden plik na raz.
+.PP
+.I Przewijanie wyśrodkowane (Center scrolling).
+Jeśli ustawione, panel będzie przewijał się, gdy kursor dotrze do środka kolumny
+panelu, dotykając góry lub dołu panelu tylko wtedy, gdy znajduje się on na
+pierwszym lub ostatnim pliku.
+To zachowanie ma zastosowanie podczas przewijania jednego pliku naraz i nie ma
+zastosowania do klawiszy Page Up/Page Down.
+.PP
+.I Przewijanie stron myszą (Mouse page scrolling).
+Kontroluje przewijanie za pomocą kółka myszy stronami lub wiersz po wierszu w panelach.
+.PP
+.B Wyróżnianie plików (File highlight)
+.PP
+Standardowo cała zawartość panelu katalogowego jest wyświetlana tą samą barwą,
+ale możesz zmienić to tak aby
+.I uprawnienia
+i
+.I typy plików
+były wyświetlane specjalnym podświetlonym
+.\"LINK2"
+kolorem\&.
+.\"Colors"
+Jeśli podświetlanie uprawnień jest włączone, część
+.\"LINK2"
+pól
+.\"Listing Format..."
+(ta z
+.I uprawnieniami
+i
+.IR "typami plików" )
+będzie podświetlona przy użyciu koloru wybranego jako
+.IR selected .
+Jeśli podświetlanie jest włączone, pliki są kolorowane zgodnie z zasadami
+opisanymi w pliku %sysconfdir%/mc/filehighlight.ini.
+Więcej informacji można znaleźć w sekcji
+.\"LINK2"
+Podświetlanie nazw plików\&.
+.\"Filenames Highlight"
+.PP
+.B Szybkie wyszukiwanie
+.PP
+Możesz określić, jak ma działać tryb
+.\"LINK2"
+szybkiego wyszukiwania\&:
+.\"Quick search"
+bez uwzględniania wielkości liter, z uwzględnieniem wielkości liter lub w
+zależności od kolejności sortowania panelu: z uwzględnieniem wielkości liter lub
+bez.
 .\"NODE "    Confirmation"
 .SH "    Potwierdzanie (Confirmation)"
 W tym menu możesz skonfigurować opcje potwierdzania dla kasowania,
 zastępowania, wykonywania przez naciśnięcie klawisza Enter, jak również
 wychodzenia z programu.
+.\"NODE "    Appearance"
+.SH "    Wygląd (Appearance)"
+W tym oknie możesz wybrać skórkę, która ma zostać użyta, i włączyć cień dla
+okien i menu rozwijanych.
 .PP
+Szczegóły techniczne dotyczące plików definicji skórek znajdziesz w sekcji
+.\"LINK2"
+Skórki\&.
+.\"Skins"
+.PP
+.I Cienie.
+Jeśli ta opcja jest włączona, wszystkie okna i menu rozwijane będą miały cień.
 .\"NODE "    Learn keys"
 .SH "    Nauka klawiszy (Learn keys)"
 W tym oknie możesz przetestować czy twoje klawisz F1\-F20, Home, End itp.
@@ -2438,7 +2637,112 @@ color_terminals=terminal\-name1,terminal\-name2...
 Program może być skompilowany zarówno z bibliotekami S\-Lang jak i ncurses.
 Ncurses nie obsługuje metody wymuszania wyświetlania, zawsze sprawdza w bazie danych
 terminali.
+
+.\"NODE "Skins"
+.SH "Skórki"
+Możesz zmienić wygląd Midnight Commandera.
+Aby to zrobić, musisz określić plik zawierający opisy kolorów i linii do
+rysowania pól.
+Przedefiniowanie kolorów jest w pełni zgodne z przypisywaniem kolorów, jak
+opisano w sekcji
+.\"LINK2"
+Kolory\&.
+.\"Colors"
 .PP
+Jeśli twoja skórka zawiera definicje true\-color, powinieneś zdefiniować klucz
+\&'truecolors' ustawiony na wartość TRUE w sekcji [skin].
+Jeśli true\-color nie jest używany, ale 256\-color jest, powinieneś zamiast tego
+zdefiniować '256colors'.
+.PP
+Plik skórki jest przeszukiwany według następującego algorytmu (do pierwszego
+znalezionego):
+.IP
+.br
+1) opcja wiersza poleceń
+.B \-S <skórka>
+lub
+.B \-\-skin=<skórka>
+.br
+2) Zmienna środowiskowa
+.B MC_SKIN
+.br
+3) Parametr
+.B skin
+w sekcji
+.B [Midnight\-Commander]
+w pliku konfiguracyjnym.
+.br
+4) Plik
+.B %sysconfdir%/mc/skins/default.ini
+.br
+5) Plik
+.B %pkgdatadir%/skins/default.ini
+
+.PP
+Opcja wiersza poleceń, zmienna środowiskowa i parametr w pliku konfiguracyjnym
+mogą zawierać bezwzględną ścieżkę do pliku skórki (z rozszerzeniem .ini lub bez
+niego).
+Przeszukanie pliku skórki nastąpi w (pierwszym znalezionym):
+.IP
+1)
+.B ~/.local/share/mc/skins/
+.br
+2)
+.B %sysconfdir%/mc/skins/
+.br
+3)
+.B %pkgdatadir%/skins/
+.br
+
+.PP
+Format plików skórek opisano w
+.BR %pkgdatadir%/skins/README.txt .
+
+.\"NODE "Filenames Highlight"
+.SH "Podświetlanie nazw plików"
+Sekcja [filehighlight] w bieżącym pliku skórki zawiera nazwy kluczy jako
+grupy podświetleń i wartości jako pary kolorów.
+.PP
+Zasady podświetlania nazw plików znajdują się w pliku %pkgdatadir%/filehighlight.ini
+(~/.config/mc/filehighlight.ini).
+Nazwa sekcji w tym pliku musi być taka sama jak nazwy parametrów w sekcji
+[filehighlight] (w bieżącym pliku skórki).
+.PP
+Klucze w tych grupach to:
+.TP
+.I type
+typ pliku. Jeśli występuje, wszystkie pozostałe opcje są ignorowane.
+.TP
+.I regexp
+wyrażenie regularne. Jeśli występuje, opcja 'rozszerzenia' jest ignorowana.
+.TP
+.I extensions
+lista rozszerzeń plików. Rozdzielone znakiem ';' sign.
+.TP
+.I extensions_case
+(ma sens tylko z parametrem 'extensions') sprawia, że reguła 'extensions'
+rozróżnia wielkość liter (true) lub nie (false).
+.PP
+Klucz 'type' może przyjmować wartości:
+.nf
+\- FILE (wszystkie pliki)
+  \- FILE_EXE
+\- DIR (wszystkie katalogi)
+  \- LINK_DIR
+\- LINK (wszystkie linki z wyjątkiem nieaktualnego linku)
+  \- HARDLINK
+  \- SYMLINK
+\- STALE_LINK
+\- DEVICE (wszystkie pliki urządzeń)
+  \- DEVICE_BLOCK
+  \- DEVICE_CHAR
+\- SPECIAL (wszystkie pliki specjalne)
+  \- SPECIAL_SOCKET
+  \- SPECIAL_FIFO
+  \- SPECIAL_DOOR
+.fi
+.PP
+
 .\"NODE "Special Settings"
 .SH "Specjalne ustawienia"
 Większość ustawień Midnight Commandera może być zmieniana z poziomu menu.
