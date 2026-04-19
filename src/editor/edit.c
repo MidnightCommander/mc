@@ -93,6 +93,11 @@ edit_options_t edit_options = {
     .confirm_save = TRUE,
     .save_position = TRUE,
     .syntax_highlighting = TRUE,
+#ifdef HAVE_TREE_SITTER
+    .use_tree_sitter = TRUE,
+    .syntax_highlight_mode = SYNTAX_HIGHLIGHT_TS,
+    .ts_available = TRUE,
+#endif
     .group_undo = FALSE,
     .backup_ext = NULL,
     .filesize_threshold = NULL,
@@ -2563,6 +2568,12 @@ edit_insert (WEdit *edit, int c)
     edit->last_get_rule += (edit->last_get_rule > edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert (&edit->buffer, c);
+
+#ifdef HAVE_TREE_SITTER
+    // Notify tree-sitter: one byte inserted at cursor position
+    edit_syntax_ts_notify_edit (edit, edit->buffer.curs1 - 1, edit->buffer.curs1 - 1,
+                                edit->buffer.curs1);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2595,6 +2606,12 @@ edit_insert_ahead (WEdit *edit, int c)
     edit->last_get_rule += (edit->last_get_rule >= edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert_ahead (&edit->buffer, c);
+
+#ifdef HAVE_TREE_SITTER
+    // Notify tree-sitter: one byte inserted ahead at cursor position
+    edit_syntax_ts_notify_edit (edit, edit->buffer.curs1, edit->buffer.curs1,
+                                edit->buffer.curs1 + 1);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2648,6 +2665,12 @@ edit_delete (WEdit *edit, gboolean byte_delete)
         p = edit_buffer_delete (&edit->buffer);
 
         edit_push_undo_action (edit, p + 256);
+
+#ifdef HAVE_TREE_SITTER
+        // Notify tree-sitter: one byte deleted at cursor position
+        edit_syntax_ts_notify_edit (edit, edit->buffer.curs1, edit->buffer.curs1 + 1,
+                                    edit->buffer.curs1);
+#endif
     }
 
     edit_modification (edit);
@@ -2704,6 +2727,12 @@ edit_backspace (WEdit *edit, gboolean byte_delete)
         p = edit_buffer_backspace (&edit->buffer);
 
         edit_push_undo_action (edit, p);
+
+#ifdef HAVE_TREE_SITTER
+        // Notify tree-sitter: one byte deleted before cursor position
+        edit_syntax_ts_notify_edit (edit, edit->buffer.curs1, edit->buffer.curs1 + 1,
+                                    edit->buffer.curs1);
+#endif
     }
     edit_modification (edit);
     if (p == '\n')
