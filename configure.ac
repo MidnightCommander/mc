@@ -380,9 +380,12 @@ case $host_os in
     AC_DEFINE([PTY_ZEROREAD], [1], [read(1) can return 0 for a non-closed fd])
 esac
 
-dnl Check linux/fs.h for FICLONERANGE to support file clone operation
+dnl Check for file cloning support
 case $host_os in
-linux*)
+darwin*) AC_CHECK_HEADERS([sys/clonefile.h]) ;;  # clonefile(2) (macOS 10.12+)
+freebsd*) AC_CHECK_FUNCS(copy_file_range) ;;     # copy_file_range(2) (FreeBSD 13+)
+solaris*) AC_CHECK_FUNCS(reflink) ;;             # reflink(3C) (Solaris 11.3+)
+linux*)                                          # FICLONERANGE (Linux 4.5+)
     AC_CHECK_HEADERS([linux/fs.h])
     AC_MSG_CHECKING([for FICLONERANGE])
     AC_EGREP_CPP([FICLONERANGE_IS_DEFINED],
@@ -400,24 +403,7 @@ linux*)
         [
             AC_MSG_RESULT(no)
         ])
-esac
-
-dnl Check for copy_file_range(2) support (FreeBSD 13+)
-case $host_os in
-freebsd*)
-    AC_CHECK_FUNCS(copy_file_range)
-esac
-
-dnl Check for reflink(3C) support (Solaris 11.3+)
-case $host_os in
-solaris*)
-    AC_CHECK_FUNCS(reflink)
-esac
-
-dnl Check for clonefile(2) support (macOS 10.12+)
-case $host_os in
-darwin*)
-    AC_CHECK_HEADERS([sys/clonefile.h])
+    ;;
 esac
 
 if test "x$have_ficlonerange" = xyes || \

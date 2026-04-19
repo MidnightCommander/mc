@@ -2659,7 +2659,7 @@ open_dest:
 
 #ifdef HAVE_FILE_CLONING_BY_RANGE
     // Try clone the file first, but not if the file is in O_APPEND mode
-    if (mc_global.vfs.file_cloning && !(open_flags & O_APPEND))
+    if (mc_global.vfs.file_cloning && (open_flags & O_APPEND) == 0)
     {
         if ((appending ? mc_lseek (dest_desc, 0, SEEK_END) >= 0 : TRUE)
             && vfs_clone_file (dest_desc, src_desc) == 0)
@@ -2668,7 +2668,7 @@ open_dest:
             return_status = FILE_CONT;
             goto ret;
         }
-        else if (appending && !(open_flags & O_APPEND))
+        if (appending && (open_flags & O_APPEND) == 0)
         {
             // Cloning append has failed, resort to normal append
             ctx->do_append = TRUE;
