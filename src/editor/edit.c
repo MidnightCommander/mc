@@ -1780,6 +1780,15 @@ edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
     block_file = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
     block_file_vpath = vfs_path_from_str (block_file);
 
+    /* Save the selected block to the block file before running the command.
+       This makes %b available to macro scripts that process the selection. */
+    {
+        off_t start_mark, end_mark;
+
+        if (eval_marks (edit, &start_mark, &end_mark))
+            edit_save_block (edit, block_file, start_mark, end_mark);
+    }
+
     const gboolean status_before_ok = mc_stat (block_file_vpath, &status_before) == 0;
 
     // run menu command. It can or can not create or modify block_file
@@ -1789,10 +1798,19 @@ edit_user_menu (WEdit *edit, const char *menu_file, int selected_entry)
         const gboolean status_after_ok = mc_stat (block_file_vpath, &status_after) == 0;
 
         // was block file created or modified by menu command?
+        // Use nanosecond-precision mtime when available, because scripts that only
+        // rearrange bytes (e.g. word-wrap replacing spaces with newlines) produce
+        // the same file size and may finish within the same second.
         modified = (!status_before_ok && status_after_ok)
             || (status_before_ok && status_after_ok && status_after.st_size != 0
                 && (status_after.st_size != status_before.st_size
-                    || status_after.st_mtime != status_before.st_mtime));
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+                    || status_after.st_mtim.tv_sec != status_before.st_mtim.tv_sec
+                    || status_after.st_mtim.tv_nsec != status_before.st_mtim.tv_nsec
+#else
+                    || status_after.st_mtime != status_before.st_mtime
+#endif
+                    ));
     }
 
     if (modified)
