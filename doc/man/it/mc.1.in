@@ -934,9 +934,11 @@ Mostra una finestra di dialogo con destinazione predefinita alla
 directory del pannello non selezionato, che copia il file selezionato (o
 i file marcati, se ce n'è almeno uno) sulla directory specificata
 dall'utente nella finestra di dialogo.
-Lo spazio per il file di destinazione può essere preallocato in base
-all'opzione di configurazione preallocate_space.
-Durante il processo è possibile
+Se l'opzione
+.I Prealloca spazio
+(preallocate_space) è attiva, Midnight Commander tenterà di preallocare spazio
+per l'intero file di destinazione prima di copiarlo.
+Durante il processo di copia, è possibile
 premere C\-c o ESC per abortire l'operazione. Per maggiori dettagli sulla
 maschera sorgente (che sarà normalmente * o ^\e(.*\e)$ a seconda
 dell'impostazione di "modelli della shell") o sui caratteri jolly sulla
