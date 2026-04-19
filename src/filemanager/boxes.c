@@ -569,6 +569,7 @@ configure_box (void)
                     QUICK_CHECKBOX (_ ("Mkdi&r autoname"), &auto_fill_mkdir_name, NULL),
                     QUICK_CHECKBOX (_ ("&Preallocate space"), &mc_global.vfs.preallocate_space,
                                     NULL),
+                    QUICK_CHECKBOX (_ ("Use COW file cloning"), &mc_global.vfs.file_cloning, NULL),
                 QUICK_STOP_GROUPBOX,
                 QUICK_START_GROUPBOX (_ ("Esc key mode")),
                     QUICK_CHECKBOX (_ ("S&ingle press"), &old_esc_mode, &configure_old_esc_mode_id),
@@ -619,15 +620,20 @@ configure_box (void)
         g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
 #ifndef USE_INTERNAL_EDIT
-        quick_widgets[17].state = WST_DISABLED;
+        quick_widgets[18].state = WST_DISABLED;
 #endif
 
         if (!old_esc_mode)
-            quick_widgets[10].state = WST_DISABLED;
+            quick_widgets[11].state = WST_DISABLED;
 
 #ifndef HAVE_POSIX_FALLOCATE
         mc_global.vfs.preallocate_space = FALSE;
         quick_widgets[6].state = WST_DISABLED;
+#endif
+
+#if !defined(HAVE_FILE_CLONING_BY_RANGE) && !defined(HAVE_FILE_CLONING_BY_PATH)
+        mc_global.vfs.file_cloning = FALSE;
+        quick_widgets[7].state = WST_DISABLED;
 #endif
 
         if (quick_dialog (&qdlg) == B_ENTER)

@@ -1119,9 +1119,16 @@ Sobreimpresiona una ventana de entrada con destino por defecto al directorio del
 panel no seleccionado y copia el archivo actualmente seleccionado (o
 los archivos marcados, si hay al menos uno marcado) al directorio especificado
 por el usuario en la ventana.
-El espacio de archivo de destino se puede preasignar en relación con la opción
-de configuración preallocate_space.
-Durante este proceso, podemos pulsar
+Si la opción
+.I Reservar espacio
+(preallocate_space) está activada, Midnight Commander intentará preasignar
+espacio para todo el archivo de destino antes de copiarlo.
+Si la opción
+.I Usar clonación de archivos COW
+está habilitada (configuración predeterminada), Midnight Commander intenta usar
+la clonación de datos mediante copia en escritura en los sistemas de archivos
+locales compatibles.
+Durante el proceso de copia, podemos pulsar
 .IR Ctrl\-c " o " Esc
 para anular la operación. Para más detalles sobre la máscara de origen
 (que será normalmente * o ^\e(.*\e)$ dependiendo
@@ -1753,6 +1760,11 @@ directorio actual en el panbel activo. Está deshabilitado por defecto.
 .I Reservar Espacio.
 Antes de comenzar una copia reserva espacio para el archivo destino
 completo. Por defecto está desactivado.
+.PP
+.I Usar clonación de archivos COW.
+Intentar utilizar la clonación de datos copy\-on\-write en sistemas de archivos
+locales compatibles durante las operaciones de copia y movimiento.
+Por defecto, está activa.
 .PP
 .B Tecla de Escape.
 .PP

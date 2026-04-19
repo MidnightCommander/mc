@@ -32,8 +32,8 @@ mc \- interfaccia visuale per sistemi tipo Unix.
 .\"NODE "DESCRIPTION"
 .SH "DESCRIZIONE"
 Il Midnight Commander è un file manager per sistemi operativi di tipo Unix.  
-.\"DONT_SPLIT"
 .\"NODE "OPTIONS"
+.\"DONT_SPLIT"
 .SH "OPZIONI"
 .TP
 .I "\-a"
@@ -933,9 +933,16 @@ se l'opzione, "usa editor interno" è stata impostata.
 Mostra una finestra di dialogo con destinazione predefinita alla
 directory del pannello non selezionato, che copia il file selezionato (o
 i file marcati, se ce n'è almeno uno) sulla directory specificata
-dall'utente nella finestra di dialogo. Space for destination
-file may be preallocated relative to preallocate_space configure option.
-Durante il processo è possibile
+dall'utente nella finestra di dialogo.
+Se l'opzione
+.I Prealloca spazio
+(preallocate_space) è attiva, Midnight Commander tenterà di preallocare spazio
+per l'intero file di destinazione prima di copiarlo.
+Se l'opzione
+.I Usa clonazione file COW
+è abilitata (impostazione predefinita), Midnight Commander tenta di utilizzare
+la clonazione dei dati copy\-on\-write sui file system locali supportati.
+Durante il processo di copia, è possibile
 premere C\-c o ESC per abortire l'operazione. Per maggiori dettagli sulla
 maschera sorgente (che sarà normalmente * o ^\e(.*\e)$ a seconda
 dell'impostazione di "modelli della shell") o sui caratteri jolly sulla
@@ -1481,10 +1488,17 @@ molte delle inpostazioni del Midnight Commander.
 .PP
 Il comando
 .\"LINK2"
-aspetto
+Disposizione
 .\"Layout"
 mostra una finestra di dialogo con la quale è possibile impostare molte
 opzioni relative a come mc appare sullo schermo.
+.PP
+Il comando
+.\"LINK2"
+Opzioni del pannello
+.\"Opzioni del pannello"
+apre una finestra di dialogo da cui è possibile specificare le opzioni dei
+pannelli del file manager.
 .PP
 Il comando
 .\"LINK2"
@@ -1492,6 +1506,12 @@ conferme
 .\"Confirmation"
 mostra una finestra di dialogo dalla quale è possibile specificare per 
 quali azioni si vuole una richiesta di conferma.
+.PP
+Il comando
+.\"LINK2"
+Aspetto
+.\"Appearance"
+apre una finestra di dialogo da cui è possibile specificare la tema grafico.
 .PP
 Il comando
 .\"LINK2"
@@ -1515,46 +1535,76 @@ salva le impostazioni correnti dei menu sinistra, destra e opzioni. Viene salvat
 anche un piccolo numero di altre opzioni.
 .\"NODE "    Configuration"
 .SH "    Configurazione"
-Le opzioni in questa finestra sono divise in tre gruppi:
-Opzioni del pannello, Pausa dopo l'esecuzione e Altre opzioni.
+Le opzioni in questa finestra sono divise in diversi gruppi: Operazioni sui file,
+Modalità tasto esc, Pausa dopo l'esecuzione e Altre opzioni.
 .PP
-.B Opzioni del pannello
+.B Operazioni sui file
 .PP
-.I Mostra file di backup.
-Se abilitata, il Midnight Commander mostrerà i file che terminano con una tilde.
-Altrimenti essi non verranno mostrati (come nell'opzione \-B del comando GNU ls).
+.I Operazioni prolisse.
+Quest'opzione decide se le operazioni di Copia, Spostamento o Cancellazione
+saranno prolisse (cioè se mostreranno una finestra di dialogo per ogni
+operazione). Se si ha un terminale lento potresti voler disabilitare
+quest'opzione. Viene automaticamente spenta se la velocità del proprio
+terminale è inferiore a 9600 bps.
 .PP
-.I Mostra file nascosti.
-Se abilitata, il Midnight Commander mostrerà tutti i file che cominciano con
-un punto (come ls \-a).
+.I Calcola totali.
+Se quest'opzione è abilitata, il Midnight Commander calcolerà i totali
+delle ampiezze in byte e il numero totale dei file prima di ogni operazione di
+Copia, Spostamento o Cancellazione. Questo genererà una barra di progressione
+più accurata a discapito di un po' di velocità. Quest'opzione non ha effetto se
+.I Operazioni prolisse
+è disabilitata.
 .PP
-.I Cursore in basso mentre seleziona.
-Se abilitata, la barra di selezione si muoverà in basso dopo aver selezionato
-un file (sia con tasto Ins).
+.I Barra progressiva classica.
 .PP
-.I Rilascia menu a cascata.
-Quando quest'opzione è abilitata, la discesa dei menu sarà attivata non appena
-si preme il tasto
-.BR F9 .
-Altrimenti si otterrà solo il titolo del menu e si dovrà attivare il menu con
-i tasti freccia o con i tasti di selezione rapida.
-E' raccomandata se si stanno usando i tasti di selezione rapida.
+Se questa opzione è abilitata, la barra di progressione delle operazioni di
+copia/spostamento/eliminazione si espande sempre da sinistra a destra.
+Se disabilitata, la direzione di espansione della barra di avanzamento segue la
+direzione dell'operazione di copia/spostamento/eliminazione:
+dal pannello di sinistra a quello di destra e viceversa.
+Abilitata per impostazione predefinita.
 .PP
-.I Mescola tutti i file.
-Se quest'opzione è abilitata, tutti i file e le directory vengono mostrati
-mescolati insieme. Se l'opzione è spenta, le directory (e i collegamenti a
-sottodirectory) vengono mostrati all'inizio dell'elenco con gli altri file
-a seguire.
+.I Nomi automatici mkdir.
+Quando si preme F7 per creare una nuova directory, la riga di input nella
+finestra di dialogo a comparsa verrà compilata con il nome del file o della
+directory corrente nel pannello attivo.
+Disabilitata per impostazione predefinita.
 .PP
-.I Aggiornamento rapido directory.
-Se quest'opzione è abilitata, il Midnight Commander userà un trucco per
-determinare se i contenuti della directory sono cambiati. Il trucco consiste
-nel ricaricare la directory solo se l'i\-node della directory è cambiato.
-Ciò significa che la ricarica accade solo quando i file vengono creati o
-cancellati. Se quello che cambia è l'i\-node di un file nella directory 
-(cambia l'ampiezza di un file, cambiano il proprietario o le flag, etc.)
-la visualizzazione non viene aggiornata. In questi casi se l'opzione è
-abilitata, è necessario ricaricare la directory manualmente (con C\-r).
+.I Prealloca spazio.
+Prealloca spazio per l'intero file di destinazione, se possibile, prima
+dell'operazione di copia.
+Disabilitata per impostazione predefinita.
+.PP
+.I Usa clonazione file COW.
+Tenta di utilizzare la clonazione dati copy\-on\-write sui file system locali
+supportati durante le operazioni di copia e spostamento.
+Abilitata per impostazione predefinita.
+.PP
+.B Modalità tasto Esc
+Per impostazione predefinita, Midnight Commander interpreta il tasto Esc come
+un prefisso.
+Pertanto, è necessario premere il codice Esc due volte per uscire da una
+finestra di dialogo.
+Tuttavia, è possibile utilizzare una singola pressione del tasto Esc per questa
+azione.
+.PP
+.I Pressione singola.
+Per impostazione predefinita, questa opzione è disabilitata.
+Se la si abilita, il tasto Esc agirà come un prefisso per l'intervallo di tempo
+impostato (vedere l'opzione
+.I Timeout
+di seguito) e, se non vengono ricevuti altri tasti, il tasto Esc viene
+interpretato come un tasto di annullamento (Esc Esc).
+.PP
+.I Timeout.
+Questa opzione viene utilizzata per impostare l'intervallo di tempo (in
+microsecondi)
+per la singola pressione del tasto Esc.
+Per impostazione predefinita, questo intervallo è di un secondo (1000000 di
+microsecondi).
+Il timeout può essere impostato anche tramite la variabile d'ambiente
+KEYBOARD_KEY_TIMEOUT_US (anch'essa in microsecondi), che ha una priorità
+maggiore rispetto al valore dell'opzione Timeout.
 .PP
 .B Pausa dopo l'esecuzione
 .PP
@@ -1576,38 +1626,6 @@ che non sia un xterm o una console Linux o FreeBSD).
 Il programma si fermerà dopo l'esecuzione di tutti i comandi.
 .PP
 .B Altre opzioni
-.PP
-.I Operazioni prolisse.
-Quest'opzione decide se le operazioni di Copia, Spostamento o Cancellazione
-saranno prolisse (cioè se mostreranno una finestra di dialogo per ogni 
-operazione). Se si ha un terminale lento potresti voler disabilitare 
-quest'opzione. Viene automaticamente spenta se la velocità del proprio 
-terminale è inferiore a 9600 bps.
-.PP
-.I Calcola totali.
-Se quest'opzione è abilitata, il Midnight Commander calcolerà i totali 
-delle ampiezze in byte e il numero totale dei file prima di ogni operazione di 
-Copia, Spostamento o Cancellazione. Questo genererà una barra di progressione
-più accurata a discapito di un po' di velocità. Quest'opzione non ha effetto se
-.I Operazioni prolisse
-è disabilitata.
-.PP
-.I Modelli della shell.
-Normalmente i comandi Seleziona, Deseleziona e Filtro usano espressioni
-regolari di tipo shell. Le seguenti conversioni vengono eseguite per
-ottenere questo risultato: '*' viene rimpiazzato da '.*' (zero o più
-caratteri); '?' viene rimpiazzato da '.' (esattamente un carattere) e '.' 
-dal carattere letterale punto. Se l'opzione è disabilitata, allora le 
-espressioni regolari sono quelle descritte in ed(1).
-.PP
-.I Autosalva configurazione.
-Se quest'opzione è abilitata, quando si esce dal Midnight Commander le
-opzioni configurabili del Midnight Commander vengono salvate nel file
-~/.config/mc/ini.
-.PP
-.I Menu automatici.
-Se quest'opzione è abilitata, il menu utente sarà invocato alla partenza.
-Utile per creare menu per utenti non abituati a unix.
 .PP
 .I Usa editor interno.
 Se quest'opzione è abilitata, verrà usato l'editor integrato interno per
@@ -1633,6 +1651,30 @@ Vedere sezione
 visualizzatore file interno\&.
 .\"Internal File Viewer"
 .PP
+.I Domanda un nuovo nome file.
+Se questa opzione è abilitata, viene richiesto il nome del file prima di aprire
+un nuovo file nell'editor.
+.PP
+.I Menu automatici.
+Se quest'opzione è abilitata, il menu utente sarà invocato alla partenza.
+Utile per creare menu per utenti non abituati a unix.
+.PP
+.I Rilascia menu a cascata.
+Quando quest'opzione è abilitata, la discesa dei menu sarà attivata non appena
+si preme il tasto
+.BR F9 .
+Altrimenti si otterrà solo il titolo del menu e si dovrà attivare il menu con
+i tasti freccia o con i tasti di selezione rapida.
+E' raccomandata se si stanno usando i tasti di selezione rapida.
+.PP
+.I Modelli della shell.
+Normalmente i comandi Seleziona, Deseleziona e Filtro usano espressioni
+regolari di tipo shell. Le seguenti conversioni vengono eseguite per
+ottenere questo risultato: '*' viene rimpiazzato da '.*' (zero o più
+caratteri); '?' viene rimpiazzato da '.' (esattamente un carattere) e '.'
+dal carattere letterale punto. Se l'opzione è disabilitata, allora le
+espressioni regolari sono quelle descritte in ed(1).
+.PP
 .I Completamento: visualizza tutto
 Normalmente il Midnight Commander
 mostra tutti i possibili 
@@ -1653,12 +1695,6 @@ Se quest'opzione è abilitata, il Midnight Commander mostra
 una barra rotante nell'angolo in alto a destra come indicatore
 di progressione.
 .PP
-.I Navigazione stile Lynx.
-Se quest'opzione è abilitata, è possibile usare i tasti freccia per
-cambiare automaticamente directory se la selezione corrente è
-una subdirectory e se la riga di comando è vuota. Normalmente
-quest'opzione è spenta.
-.PP
 .I Cd segue i collegamenti.
 Quest'opzione, se impostata, fa in modo che il Midnight Commander
 segua la catena logica delle directory, quando si cambia la directory
@@ -1672,21 +1708,172 @@ e non alla directory dov'era il collegamento.
 .I Cancellazione sicura.
 Se quest'opzione è abilitata, la cancellazione non intenzionale dei file
 sarà più difficile. La preimpostazione della finestra di dialogo della
-conferma cambia da "Si" a "No". Normalmente quest'opzione è
-disabilitata.
+conferma cambia da
+.B Sì
+a
+.BR No .
+Normalmente quest'opzione è disabilitata.
+.PP
+.I Sovrascrittura sicura.
+Se questa opzione è abilitata, sovrascrivere i file involontariamente diventa
+più difficile.
+La preimpostazione della finestra di dialogo di conferma della sovrascrittura
+cambia da
+.B Sì
+a
+.BR No .
+Normalmente quest'opzione è disabilitata.
+.PP
+.I Autosalva configurazione.
+Se quest'opzione è abilitata, quando si esce dal Midnight Commander le
+opzioni configurabili del Midnight Commander vengono salvate nel file
+~/.config/mc/ini.
 .\"NODE "    Layout"
-.SH "    Aspetto"
-La finestra di aspetto da la possibilità di cambiare l'aspetto generale
-dello schermo. Si può specificare la visibilità della barra dei menu, 
-della riga dei comandi, della riga dei suggerimenti o della riga dei
-tasti funzione. Sulle console Linux o FreeBSD si può impostare quante
-righe siano visibili sulla finestra di uscita.
+.SH "    Disposizione"
+La finestra di disposizione da la possibilità di cambiare l'aspetto generale
+dello schermo.
+Le opzioni in questa finestra sono divise in diversi gruppi:
+"Divisione pannello", "Risultato a console" e "Altre opzioni".
+.PP
+.B Divisione pannello
 .PP
 Il resto dell'area dello schermo viene usata per i due pannelli directory.
 Si può specificare se l'area venga divisa dai due pannelli in direzione 
-verticale o orizzontale. La divisione può essere uguale o si può dividere
+.I Verticale
+o
+.I Orizzontale.
+Il layout del pannello può essere modificato utilizzando la scorciatoia Alt\-,
+(Alt\-virgola).
+.PP
+.I Divisione schermo uguale.
+La divisione può essere uguale o si può dividere
 in maniera asimmetrica.
 .PP
+.B Risultato a console
+.PP
+Sulle console Linux o FreeBSD si può impostare quante righe siano visibili
+sulla finestra di uscita.
+Questa opzione è disponibile solo se Midnight Commander viene eseguito sulla
+console nativa.
+.PP
+.B Altre opzioni
+.PP
+.I Mostra barra menu.
+Se abilitato, il menu principale di Midnight Commander è sempre visibile nella
+riga superiore dello schermo, sopra i pannelli.
+Abilitato per impostazione predefinita.
+.PP
+.I Riga di comando.
+Se abilitata, la riga di comando è disponibile.
+Abilitata per impostazione predefinita.
+.PP
+.I Mostra tasti funzione.
+Se abilitata, 10 etichette associate ai tasti F1\-F10 si trovano nella riga
+inferiore dello schermo.
+Abilitata per impostazione predefinita.
+.PP
+.I Mostra suggerimenti.
+Se abilitata, i suggerimenti su una sola riga sono visibili sotto i pannelli.
+Abilitata per impostazione predefinita.
+.PP
+.I Titolo finestra xterm.
+Quando eseguito in un emulatore di terminale per X11, Midnight Commander imposta
+il titolo della finestra del terminale sulla directory di lavoro corrente e lo
+aggiorna quando necessario.
+Se il tuo emulatore di terminale non funziona correttamente e visualizzi un
+output errato all'avvio e al cambio di directory, disattiva questa opzione.
+Abilitata per impostazione predefinita.
+.PP
+.I Mostra spazio libero.
+Se abilitata, lo spazio libero e lo spazio totale del file system corrente
+vengono visualizzati nella parte inferiore del pannello.
+Abilitata per impostazione predefinita.
+.\"NODE "    Panel options"
+.SH "    Panel options"
+.B Molte opzioni del pannello
+.PP
+Se l'opzione
+.I Mostra mini\-stato
+è abilitata, una riga di informazioni di stato circa la voce correntemente
+selezionata viene mostrata sul fondo dei pannelli.
+Abilitata per impostazione predefinita.
+.PP Usa le unità SI
+Se questa opzione è abilitata, Midnight Commander utilizzerà i prefissi SI (base 10)
+per visualizzare le dimensioni dei byte. Se disabilitata (impostazione predefinita),
+Midnight Commander utilizzerà i prefissi IEC (base 2).
+.PP
+.I Mescola tutti i file.
+Se quest'opzione è abilitata, tutti i file e le directory vengono mostrati
+mescolati insieme. Se l'opzione è spenta (impostazione predefinita), le directory (e i collegamenti a
+sottodirectory) vengono mostrati all'inizio dell'elenco con gli altri file
+a seguire.
+.PP
+.I Mostra file di backup.
+Se abilitata, il Midnight Commander mostrerà i file che terminano con una tilde.
+Altrimenti essi non verranno mostrati (come nell'opzione \-B del comando GNU ls).
+.PP
+.I Mostra file nascosti.
+Se abilitata, il Midnight Commander mostrerà tutti i file che cominciano con
+un punto (come ls \-a).
+.PP
+.I Aggiornamento rapido directory.
+Se quest'opzione è abilitata, il Midnight Commander userà un trucco per
+determinare se i contenuti della directory sono cambiati. Il trucco consiste
+nel ricaricare la directory solo se l'i\-node della directory è cambiato.
+Ciò significa che la ricarica accade solo quando i file vengono creati o
+cancellati. Se quello che cambia è l'i\-node di un file nella directory
+(cambia l'ampiezza di un file, cambiano il proprietario o le flag, etc.)
+la visualizzazione non viene aggiornata. In questi casi se l'opzione è
+abilitata, è necessario ricaricare la directory manualmente (con C\-r).
+.PP
+.I Cursore in basso mentre seleziona.
+Se abilitata, la barra di selezione si muoverà in basso dopo aver selezionato
+un file (sia con tasto Ins).
+.PP
+.I Solo file inversi.
+Se abilitata, l'opzione "Inverti selezione" nel menu File si applicherà solo ai file,
+anziché sia ai file che alle cartelle. Abilitata per impostazione predefinita.
+.PP
+.I Semplica scambio.
+Se entrambi i pannelli contengono un elenco di file, lo scambio semplice
+significa che i pannelli si scambiano le posizioni sullo schermo: il pannello
+di sinistra diventa quello di destra e viceversa.
+Se questa opzione non è selezionata, i pannelli dell'elenco dei file si
+scambiano il contenuto mantenendo il formato e le opzioni di ordinamento
+dell'elenco.
+Deselezionata per impostazione predefinita.
+.PP
+.I Autosalva configurazione dei panelli
+Se questa opzione è abilitata, all'uscita da Midnight Commander, le
+impostazioni correnti dei pannelli vengono salvate nel file
+~/.config/mc/panels.ini.
+Disabilitato per impostazione predefinita.
+.PP
+.B Navigazone
+.PP
+.I Navigazione stile Lynx.
+Se quest'opzione è abilitata, è possibile usare i tasti freccia per
+cambiare automaticamente directory se la selezione corrente è
+una subdirectory e se la riga di comando è vuota. Normalmente
+quest'opzione è spenta.
+.PP
+.I Scorrimento pagine
+Se impostato (impostazione predefinita), il pannello scorrerà di metà dello
+schermo quando il cursore raggiunge la fine o l'inizio del pannello,
+altrimenti scorrerà semplicemente un file alla volta.
+.PP
+.I Centra scorrimento
+Se impostato, il pannello scorrerà quando il cursore raggiunge il centro della
+colonna del pannello, toccando la parte superiore o inferiore del pannello
+solo quando si trova effettivamente sul primo o sull'ultimo file.
+Questo comportamento si applica quando si scorre un file alla volta e non si
+applica ai tasti Pagina Su/Pagina Giù.
+.PP
+.I Scorrimento pagine mouse
+Controlla il fatto che lo scorrimento con il mouse sui pannelli sia fatto
+per pagine o per righe.
+.PP
+.I Evidenziazione file
 Normalmente i contenuti dei pannelli directory sono visualizzati dello stesso
 colore, ma si può specificare se i 
 .I permessi 
@@ -1707,17 +1894,40 @@ valide per l'utente che usa il Midnight Commander
 sono evidenziati con il colore definito con la parolachiave
 .IR selezionata . 
 Se l'evidenziazione del tipo di file è abilitata, i file vengono colorati 
-a seconda del tipo (per esempio directory, file core, eseguibili, ...). 
+in base alle regole descritte nel file %sysconfdir%/mc/filehighlight.ini.
+Per ulteriori informazioni, consultare la sezione
+.\"LINK2"
+Evidenziazione dei nomi dei file\&.
+.\"Filenames Highlight"
 .PP
-Se l'opzione 
-.I Mostra mini\-stato
-è abilitata, una riga di informazioni di stato circa la voce correntemente
-selezionata viene mostrata sul fondo dei pannelli.
+.B Ricerca rapida
+.PP
+È possibile specificare come deve funzionare la modalità di
+.\"LINK2"
+Ricerca rapida\&:
+.\"Quick search"
+senza distinzione tra maiuscole e minuscole, con distinzione tra maiuscole e
+minuscole o in base all'ordinamento del pannello: con o senza distinzione tra
+maiuscole e minuscole.
 .\"NODE "    Confirmation"
 .SH "    Conferme"
 In questo menu è possibile configurare le opzioni di conferma per la
 cancellazione e sovrascrittura dei file, esecuzione dei file premendo invio e
 per l'uscita dal programma.
+.\"NODE "    Appearance"
+.SH "    Aspetto"
+In questa finestra è possibile selezionare il tema grafico da utilizzare e
+abilitare l'ombra per finestre di dialogo e menu a discesa.
+.PP
+Consultare la sezione
+.\"LINK2"
+Temi
+.\"Skins"
+per i dettagli tecnici relativi ai file di definizione dei temi.
+.PP
+.I Ombre.
+Se questa opzione è abilitata, tutte le finestre di dialogo e i menu a discesa
+avranno un'ombra.
 .\"NODE "    Learn keys"
 .SH "    Impara tasti"
 Questa finestra di dialogo permette di controllare e ridefinire i tasti
@@ -2153,7 +2363,8 @@ si sta operando attualmente e ci possono essere fino a tre barre di
 progressione. La barra file mostra quanta parte del file corrente è
 stata copiata. La barra conteggio mostra quanti dei file selezionati
 sono stati gestiti. La barra byte comunica quanto dell'ampiezza totale 
-dei file selezionati è stata elaborato. Se l'opzione operazioni prolisse
+dei file selezionati è stata elaborato. Se l'opzione
+.I Operazioni prolisse
 è deselezionata, non verranno mostrate la barra file e la barra byte.
 .PP
 Ci sono due bottoni sul fondo della finestra di dialogo. Premendo
@@ -2789,6 +3000,112 @@ color_terminals=nome_terminale\-1,nome\-terminale\-2...
 Il programma può essere compilato sia con il supporto di ncurses che
 di S\-Lang ma ncurses non fornisce alcun modo per forzare la modalità
 colore: ncurses userà solo le informazioni nel database dei terminali.
+
+.\"NODE "Skins"
+.SH "Temi"
+È possibile modificare l'aspetto di Midnight Commander.
+Per farlo, è necessario specificare un file contenente le descrizioni dei colori
+e le linee per disegnare i riquadri.
+La ridefinizione dei colori è completamente compatibile con l'assegnazione dei
+colori, come descritto nella sezione
+.\"LINK2"
+Colori\&.
+.\"Colors"
+.PP
+Se la tema contiene definizioni di true\-color, è necessario definire la chiave
+\&'truecolors' con valore TRUE nella sezione [skin].
+Se non si utilizza true\-color ma si utilizza 256\-color, è necessario definire
+\&'256colors' al suo posto.
+.PP
+La ricerca di un file del tema avviene secondo il seguente algoritmo (fino al primo
+trovato):
+.IP
+.br
+1) Opzione della riga di comando
+.B \-S <tema>
+oppure
+.B \-\-skin=<tema>
+.br
+2) Variabile d'ambiente
+.B MC_SKIN
+.br
+3) Parametro
+.B skin
+nella sezione
+.B [Midnight\-Commander]
+nel file di configurazione.
+.br
+4) File
+.B %sysconfdir%/mc/skins/default.ini
+.br
+5) File
+.B %pkgdatadir%/skins/default.ini
+
+.PP
+L'opzione della riga di comando, la variabile d'ambiente e il parametro nel file
+di configurazione possono contenere il percorso assoluto del file del tema (con
+estensione .ini o senza).
+La ricerca del file del tema avverrà (fino al primo trovato):
+.IP
+1)
+.B ~/.local/share/mc/skins/
+.br
+2)
+.B %sysconfdir%/mc/skins/
+.br
+3)
+.B %pkgdatadir%/skins/
+.br
+
+.PP
+Il formato dei file del tema è descritto in
+.BR %pkgdatadir%/skins/README.txt .
+
+.\"NODE "Filenames Highlight"
+.SH "Evidenziazione dei nomi dei file"
+La sezione [filehighlight] nel file del tema corrente contiene i nomi delle
+chiavi come gruppi di evidenziazione e i valori come coppie di colori.
+.PP
+Le regole per l'evidenziazione dei nomi dei file sono contenute nel file
+%pkgdatadir%/filehighlight.ini (~/.config/mc/filehighlight.ini).
+Il nome della sezione in questo file deve essere uguale ai nomi dei parametri
+nella sezione [filehighlight] (nel file del tema corrente).
+.PP
+Le chiavi in questi gruppi sono:
+.TP
+.I type
+tipo di file. Se presente, tutte le altre opzioni vengono ignorate.
+.TP
+.I regexp
+espressione regolare. Se presente, l'opzione 'extensions' viene ignorata.
+.TP
+.I extensions
+elenco delle estensioni dei file. Separate da un punto e virgola (;).
+.TP
+.I extensions_case
+(ha senso solo con il parametro 'extensions') rende 'extensions' sensibile alle
+maiuscole e minuscole (true) o meno (false).
+.PP
+La chiave `type` può avere i seguenti valori:
+.nf
+\- FILE (tutti i file)
+  \- FILE_EXE
+\- DIR (tutte le directory)
+  \- LINK_DIR
+\- LINK (tutti i collegamenti tranne quelli obsoleti)
+  \- HARDLINK
+  \- SYMLINK
+\- STALE_LINK
+\- DEVICE (tutti i file di dispositivo)
+  \- DEVICE_BLOCK
+  \- DEVICE_CHAR
+\- SPECIAL (tutti i file speciali)
+  \- SPECIAL_SOCKET
+  \- SPECIAL_FIFO
+  \- SPECIAL_DOOR
+.fi
+.PP
+
 .\"NODE "Special Settings"
 .SH "Impostazioni speciali"
 Molte delle impostazioni del Midnight Commander possono essere cambiate
