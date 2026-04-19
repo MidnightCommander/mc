@@ -938,6 +938,10 @@ Se l'opzione
 .I Prealloca spazio
 (preallocate_space) è attiva, Midnight Commander tenterà di preallocare spazio
 per l'intero file di destinazione prima di copiarlo.
+Se l'opzione
+.I Usa clonazione file COW
+è abilitata (impostazione predefinita), Midnight Commander tenta di utilizzare
+la clonazione dei dati copy\-on\-write sui file system locali supportati.
 Durante il processo di copia, è possibile
 premere C\-c o ESC per abortire l'operazione. Per maggiori dettagli sulla
 maschera sorgente (che sarà normalmente * o ^\e(.*\e)$ a seconda
@@ -1570,6 +1574,11 @@ Disabilitata per impostazione predefinita.
 Prealloca spazio per l'intero file di destinazione, se possibile, prima
 dell'operazione di copia.
 Disabilitata per impostazione predefinita.
+.PP
+.I Usa clonazione file COW.
+Tenta di utilizzare la clonazione dati copy\-on\-write sui file system locali
+supportati durante le operazioni di copia e spostamento.
+Abilitata per impostazione predefinita.
 .PP
 .B Modalità tasto Esc
 Per impostazione predefinita, Midnight Commander interpreta il tasto Esc come

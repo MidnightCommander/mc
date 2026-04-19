@@ -1073,6 +1073,10 @@ If the
 .I Preallocate space
 (preallocate_space) option is on, Midnight Commander will try to preallocate
 space for the whole destination file before copying.
+If
+.I Use COW file cloning
+is enabled (default setting), Midnight Commander attempts to use copy\-on\-write
+data cloning on supported local filesystems.
 During the copy process, you can press C\-c or Esc to abort the operation.
 For details about source mask (which will be usually either * or ^\e(.*\e)$
 depending on setting of Use shell patterns) and possible wildcards in the
@@ -1757,6 +1761,11 @@ Disabled by default.
 .I Preallocate space.
 Preallocate space for whole target file, if possible, before copy operation.
 Disabled by default.
+.PP
+.I Use COW file cloning.
+Attempt to use copy\-on\-write data cloning on supported local filesystems during
+copy and move operations.
+Enabled by default.
 .PP
 .B Esc key mode.
 .PP
