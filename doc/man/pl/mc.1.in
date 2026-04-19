@@ -773,8 +773,10 @@ Włącza okno dialogowe, w którym standardowo znajduje się ścieżka do
 katalogu w
 nieaktywnym panelu, po czym kopiuje aktualny plik (lub wybrane
 jeśli wybrano jakiekolwiek) do katalogu, który wybraliśmy w oknie dialogowym.
-Miejsce na plik docelowy może być wstępnie przydzielone w stosunku do opcji
-konfiguracji preallocate_space.
+Jeśli opcja
+.I Przydzielanie miejsca z wyprzedzeniem
+(preallocate_space) jest włączona, Midnight Commander spróbuje wstępnie
+przydzielić miejsce na cały plik docelowy przed kopiowaniem.
 Podczas procesu kopiowania możesz go w każdej chwili przerwać wciskając C\-c lub
 Esc. Żeby dowiedzieć się czegoś więcej na temat jokerów w ścieżce źródłowej
 (którymi najczęściej będą * lub ^\e(.*\e)$) i innych możliwych określeń w
@@ -1332,7 +1334,7 @@ wprowadzania w wyskakującym oknie dialogowym zostanie wypełniony nazwą bież�
 pliku lub katalogu w aktywnym panelu.
 Domyślnie wyłączone.
 .PP
-.I Przydz. miejsca z wyprzedzeniem (Preallocate space).
+.I Przydzielanie miejsca z wyprzedzeniem (Preallocate space).
 Z wyprzedzeniem przydzielić miejsce dla całego pliku docelowego, jeśli to możliwe, przed operacją kopiowania.
 Domyślnie wyłączone.
 .PP
