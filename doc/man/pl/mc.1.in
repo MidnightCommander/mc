@@ -777,6 +777,9 @@ Jeśli opcja
 .I Przydzielanie miejsca z wyprzedzeniem
 (preallocate_space) jest włączona, Midnight Commander spróbuje wstępnie
 przydzielić miejsce na cały plik docelowy przed kopiowaniem.
+Jeśli opcja Używaj klonowania plików COW jest włączona (ustawienie domyślne),
+Midnight Commander próbuje użyć klonowania danych typu "kopiuj przy zapisie”
+w obsługiwanych lokalnych systemach plików.
 Podczas procesu kopiowania możesz go w każdej chwili przerwać wciskając C\-c lub
 Esc. Żeby dowiedzieć się czegoś więcej na temat jokerów w ścieżce źródłowej
 (którymi najczęściej będą * lub ^\e(.*\e)$) i innych możliwych określeń w
@@ -1337,6 +1340,11 @@ Domyślnie wyłączone.
 .I Przydzielanie miejsca z wyprzedzeniem (Preallocate space).
 Z wyprzedzeniem przydzielić miejsce dla całego pliku docelowego, jeśli to możliwe, przed operacją kopiowania.
 Domyślnie wyłączone.
+.PP
+.I Używaj klonowania plików COW (Use COW file cloning).
+Podczas operacji kopiowania i przenoszenia spróbuj użyć klonowania danych z
+kopiowaniem przy zapisie na obsługiwanych lokalnych systemach plików.
+Domyślnie włączone.
 .PP
 .B Tryb klawisza Esc (Esc key mode).
 .PP
