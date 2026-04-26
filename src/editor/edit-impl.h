@@ -181,6 +181,7 @@ gboolean edit_load_forward_cmd (WEdit *edit);
 void edit_block_process_cmd (WEdit *edit, int macro_number);
 void edit_refresh_cmd (void);
 void edit_syntax_onoff_cmd (WDialog *h);
+void edit_syntax_toggle_ts_cmd (WDialog *h);
 void edit_show_tabs_tws_cmd (WDialog *h);
 void edit_show_margin_cmd (WDialog *h);
 void edit_show_numbers_cmd (WDialog *h);
@@ -214,6 +215,11 @@ MC_MOCKABLE void edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *t
 void edit_free_syntax_rules (WEdit *edit);
 MC_MOCKABLE int edit_get_syntax_color (WEdit *edit, off_t byte_index);
 void edit_syntax_dialog (WEdit *edit);
+
+#ifdef HAVE_TREE_SITTER
+void edit_syntax_ts_notify_edit (WEdit *edit, off_t start_byte, off_t old_end_byte,
+                                 off_t new_end_byte);
+#endif
 
 void book_mark_insert (WEdit *edit, long line, int c);
 gboolean book_mark_query_color (WEdit *edit, long line, int c);

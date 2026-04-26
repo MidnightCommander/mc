@@ -44,6 +44,7 @@ TAGS
 doc/devel/
 doc/html/
 .deps
+.dirstamp
 libtool
 make.log
 make.clang
@@ -57,3 +58,4 @@ tests/src/editor/test-data.txt
 src/vfs/extfs/helpers/usqfs
 tests/src/vfs/extfs/helpers-list/data/config.sh
 mc-version.h
+/ts-grammars-shared/
