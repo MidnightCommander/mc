@@ -10,6 +10,7 @@ SYNTAXFILES =			\
 	assembler.syntax	\
 	awk.syntax		\
 	b.syntax		\
+	bnf.syntax		\
 	c.syntax		\
 	cabal.syntax		\
 	caddyfile.syntax	\
@@ -60,6 +61,7 @@ SYNTAXFILES =			\
 	mail.syntax		\
 	makefile.syntax		\
 	markdown.syntax		\
+	meta-ii.syntax		\
 	ml.syntax		\
 	meson.syntax		\
 	muttrc.syntax		\
@@ -97,6 +99,7 @@ SYNTAXFILES =			\
 	tcl.syntax		\
 	texinfo.syntax		\
 	toml.syntax		\
+	tree-meta.syntax	\
 	ts.syntax		\
 	tt.syntax		\
 	unknown.syntax		\

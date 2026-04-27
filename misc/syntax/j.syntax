@@ -1,42 +1,120 @@
-# J syntax highlighting
+# J language Syntax highlighting Definition
+# Version 3.0.0 2026-03-18
+# See updates and changelog at https://github.com/jip/syntax-highlighting
+#
+# J is a high-level, general-purpose programming language
+# https://www.jsoftware.com
+#
+# This file is part of GNU Midnight Commander
+# https://midnight-commander.org/
+#
+# SPDX-FileCopyrightText: 2009,2026 Igor Zhuravlov <zhuravlov.ip@ya.ru>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# for the default (lightgray on blue)
+define _adverb  green blue bold
+define _alerthi lightgray red
+define _alertmi gray yellow
+define _alertlo gray cyan
+define _copulag white
+define _copulal brown
+define _comment gray
+define _conj    yellow blue bold
+define _control brightred
+define _noun    cyan blue bold
+define _nounblk lightgray brightblue
+define _num     green
+define _paren   brightgreen
+define _str     brightcyan
+define _verb    magenta blue bold
 
 context default
+    # controls
+    wholechars {}
+    keyword {{ _control
+    keyword }} _control
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._
+    keyword wholeleft assert. _control
+    keyword wholeleft break. _control
+    keyword wholeleft case. _control
+    keyword wholeleft catch. _control
+    keyword wholeleft catch\{dt\}. _control
+    keyword wholeleft continue. _control
+    keyword wholeleft do. _control
+    keyword wholeleft else. _control
+    keyword wholeleft elseif. _control
+    keyword wholeleft end. _control
+    keyword wholeleft fcase. _control
+    keyword wholeleft for. _control
+    keyword wholeleft for_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. _control
+    keyword wholeleft goto_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. _control
+    keyword wholeleft if. _control
+    keyword wholeleft label_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. _control
+    keyword wholeleft return. _control
+    keyword wholeleft select. _control
+    keyword wholeleft throw. _control
+    keyword wholeleft try. _control
+    keyword wholeleft while. _control
+    keyword wholeleft whilst. _control
+    # comments
+    keyword wholeleft NB. _comment
+    # copula
+    keyword =: _copulag
+    keyword =. _copulal
+    # parenthesis
+    keyword \{()\} _paren
+    # actors
+    keyword {:: _verb
+    keyword &.: _conj
+    keyword __: _verb
+    keyword /.. _adverb
+    keyword \{<>\+\*-%$~|,#{}"\}\{.:\} _verb
+    keyword \{_;/\\[\}: _verb
+    keyword \{^?\}. _verb
+    keyword \{^`\}: _conj
+    keyword \{;[]\}. _conj
+    keyword \{!:@&\}\{.:\} _conj
+    keyword \{/\\\}. _adverb
+    keyword ]: _adverb
+    keyword \{=<>\+\*-%^$|,;#![]{?\} _verb
+    keyword \{~/\\}\} _adverb
+    keyword \{".:`@&\} _conj
+    keyword wholeleft \{AcCeEIjLorv\}. _verb
+    keyword wholeleft \{bfM\}. _adverb
+    keyword wholeleft \{Hmt\}. _conj
+    keyword wholeleft p.. _verb
+    keyword wholeleft \{ipu\}\{.:\} _verb
+    keyword wholeleft \{LS\}: _conj
+    keyword wholeleft \{qsxZ\}: _verb
+    keyword whole     \{uv\} _verb
+    keyword wholeleft _\{123456789\}: _verb
+    keyword wholeleft \{0123456789\}: _verb
+    # numbers
+    keyword whole \{0123456789_\}\[abcdefghijklmnopqrstuvwxyz0123456789_.\] _num
+    # nouns
+    keyword whole a\{.:\} _noun
+    keyword whole \{mnxy\} _noun
 
-    keyword assert. brightred
-    keyword break. brightred
-    keyword case. brightred
-    keyword catch. brightred
-    keyword catchd. brightred
-    keyword catcht. brightred
-    keyword continue. brightred
-    keyword do. brightred
-    keyword else. brightred
-    keyword elseif. brightred
-    keyword end. brightred
-    keyword fcase. brightred
-    keyword for. brightred
-    keyword for_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. brightred
-    keyword goto_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. brightred
-    keyword if. brightred
-    keyword label_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. brightred
-    keyword return. brightred
-    keyword select. brightred
-    keyword throw. brightred
-    keyword trap. brightred
-    keyword try. brightred
-    keyword while. brightred
-    keyword whilst. brightred
+# strings
 
-    keyword NB. green
+context ' ' _str
 
-    keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]\[\s\]=: white
-    keyword '\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\s\]'\[\s\]=: white
+# block nouns
 
-context ' ' brightcyan
-#    spellcheck
+context exclusive 0\s\[\s\t\]:\[\s\t\]0\[)\s\t\]\n linestart ) _nounblk
 
-context exclusive linestart NB.\s\*\s \n brightgreen
-#    spellcheck
+context exclusive whole Note linestart ) _nounblk
 
-context exclusive NB. \n green
-#    spellcheck
+# comments
+
+context exclusive linestart NB.\s\*\s \n _comment blue underline
+
+context exclusive NB. \n _comment
+    keyword whole BUG        _alerthi
+    keyword whole DEPRECATED _alertmi
+    keyword whole FIXME      _alerthi
+    keyword whole NOTE       _alertlo
+    keyword whole TEST       _alertlo
+    keyword whole TODO       _alertmi
+    keyword whole WARN       _alertmi
+    spellcheck
