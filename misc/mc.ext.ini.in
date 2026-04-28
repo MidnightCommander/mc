@@ -406,7 +406,7 @@ Open=%cd %p/rpm://
 View=%view{ascii} @EXTHELPERSDIR@/package.sh view rpm
 
 [deb]
-Regex=\\.u?deb$
+Regex=\\.[ud]?deb$
 Open=%cd %p/deb://
 View=%view{ascii} @EXTHELPERSDIR@/package.sh view deb
 
