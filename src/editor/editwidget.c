@@ -454,6 +454,9 @@ edit_dialog_command_execute (WDialog *h, long command)
     case CK_SyntaxOnOff:
         edit_syntax_onoff_cmd (h);
         break;
+    case CK_SyntaxToggleTS:
+        edit_syntax_toggle_ts_cmd (h);
+        break;
     case CK_ShowTabTws:
         edit_show_tabs_tws_cmd (h);
         break;
