@@ -253,6 +253,14 @@ typedef struct
     int action;
 } key_define_t;
 
+typedef struct
+{
+    int code;
+    const char *terminfo_name;
+    const char *termcap_name;
+    int action;
+} term_key_define_t;
+
 /* File descriptor monitoring add/remove routines */
 typedef struct
 {
@@ -285,6 +293,166 @@ static key_define_t mc_default_keys[] = {
     { MCKEY_BRACKETED_PASTING_END, ESC_STR "[201~", MCKEY_NOACTION },
     { 0, NULL, MCKEY_NOACTION },
 };
+
+// Termcap/terminfo keys
+/*
+  Based on:
+  https://gist.github.com/ketsuban/651e24c2d59506922d928c65c163d79c
+  https://man7.org/linux/man-pages/man5/terminfo.5.html
+  https://www.gnu.org/software/termutils/manual/termcap-1.3/html_node/termcap_37.html
+ */
+// clang-format off
+static term_key_define_t term_key_defines[] = {
+    { KEY_BACKSPACE,                        "kbs",   "kb", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_BACKSPACE,           "cub1",  "le", MCKEY_NOACTION },
+
+    { KEY_IC,                               "kich1", "kI", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_IC,                 "kIC",   "#3", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_IC,                   "kIC3",  NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_IC,     "kIC4",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_IC,                  "kIC5",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_IC,    "kIC6",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_IC,      "kIC7",  NULL, MCKEY_NOACTION },
+
+    { KEY_DC,                               "kdch1", "kD", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DC,                 "kDC",   "*4", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_DC,                   "kDC3",  NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_DC,     "kDC4",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_DC,                  "kDC5",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_DC,    "kDC6",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_DC,      "kDC7",  NULL, MCKEY_NOACTION },
+
+    { KEY_HOME,                             "khome", "kh", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_HOME,               "kHOM",  "#2", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_HOME,                 "kHOM3", NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_HOME,   "kHOM4", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_HOME,                "kHOM5", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_HOME,  "kHOM6", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_HOME,    "kHOM7", NULL, MCKEY_NOACTION },
+
+    { KEY_END,                              "kend",  "@7", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_END,                "kEND",  "*7", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_END,                  "kEND3", NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_END,    "kEND4", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_END,                 "kEND5", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_END,   "kEND6", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_END,     "kEND7", NULL, MCKEY_NOACTION },
+
+    { KEY_PPAGE,                            "kpp",   "kP", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_PPAGE,              "kPRV",  "%e", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_PPAGE,                "kPRV3", NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_PPAGE,  "kPRV4", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_PPAGE,               "kPRV5", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_PPAGE, "kPRV6", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_PPAGE,   "kPRV7", NULL, MCKEY_NOACTION },
+
+    { KEY_NPAGE,                            "knp",   "kN", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_NPAGE,              "kNXT",  "%c", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_NPAGE,                "kNXT3", NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_NPAGE,  "kNXT4", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_NPAGE,               "kNXT5", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_NPAGE, "kNXT6", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_NPAGE,   "kNXT7", NULL, MCKEY_NOACTION },
+
+    { KEY_UP,                               "kcuu1", "ku", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_UP,                 "kUP",   NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_UP,                   "kUP3",  NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_UP,     "kUP4",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_UP,                  "kUP5",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_UP,    "kUP6",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_UP,      "kUP7",  NULL, MCKEY_NOACTION },
+
+    { KEY_DOWN,                             "kcud1", "kd", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DOWN,               "kDN",   NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_DOWN,                 "kDN3",  NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_DOWN,   "kDN4",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_DOWN,                "kDN5",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_DOWN,  "kDN6",  NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_DOWN,    "kDN7",  NULL, MCKEY_NOACTION },
+
+    { KEY_RIGHT,                            "kcuf1", "kr", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_RIGHT,              "kRIT",  "%i", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_RIGHT,                "kRIT3", NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_RIGHT,  "kRIT4", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_RIGHT,               "kRIT5", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_RIGHT, "kRIT6", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_RIGHT,   "kRIT7", NULL, MCKEY_NOACTION },
+
+    { KEY_LEFT,                             "kcub1", "kl", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_LEFT,               "kLFT",  "#4", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_LEFT,                 "kLFT3", NULL, MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_LEFT,   "kLFT4", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_LEFT,                "kLFT5", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_LEFT,  "kLFT6", NULL, MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_ALT | KEY_LEFT,    "kLFT7", NULL, MCKEY_NOACTION },
+
+    { KEY_F(1),                             "kf1",   "k1", MCKEY_NOACTION },
+    { KEY_F(2),                             "kf2",   "k2", MCKEY_NOACTION },
+    { KEY_F(3),                             "kf3",   "k3", MCKEY_NOACTION },
+    { KEY_F(4),                             "kf4",   "k4", MCKEY_NOACTION },
+    { KEY_F(5),                             "kf5",   "k5", MCKEY_NOACTION },
+    { KEY_F(6),                             "kf6",   "k6", MCKEY_NOACTION },
+    { KEY_F(7),                             "kf7",   "k7", MCKEY_NOACTION },
+    { KEY_F(8),                             "kf8",   "k8", MCKEY_NOACTION },
+    { KEY_F(9),                             "kf9",   "k9", MCKEY_NOACTION },
+    { KEY_F(10),                            "kf10",  "k;", MCKEY_NOACTION },
+    { KEY_F(11),                            "kf11",  "F1", MCKEY_NOACTION },
+    { KEY_F(12),                            "kf12",  "F2", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(1),               "kf13",  "F3", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(2),               "kf14",  "F4", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(3),               "kf15",  "F5", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(4),               "kf16",  "F6", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(5),               "kf17",  "F7", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(6),               "kf18",  "F8", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(7),               "kf19",  "F9", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(8),               "kf20",  "FA", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(9),               "kf21",  "FB", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(10),              "kf22",  "FC", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(11),              "kf23",  "FD", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_F(12),              "kf24",  "FE", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(1),                "kf25",  "FF", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(2),                "kf26",  "FG", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(3),                "kf27",  "FH", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(4),                "kf28",  "FI", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(5),                "kf29",  "FJ", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(6),                "kf30",  "FK", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(7),                "kf31",  "FL", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(8),                "kf32",  "FM", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(9),                "kf33",  "FN", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(10),               "kf34",  "FO", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(11),               "kf35",  "FP", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_F(12),               "kf36",  "FQ", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(1),  "kf37",  "FR", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(2),  "kf38",  "FS", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(3),  "kf39",  "FT", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(4),  "kf40",  "FU", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(5),  "kf41",  "FV", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(6),  "kf42",  "FW", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(7),  "kf43",  "FX", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(8),  "kf44",  "FY", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(9),  "kf45",  "FZ", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(10), "kf46",  "Fa", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(11), "kf47",  "Fb", MCKEY_NOACTION },
+    { KEY_M_CTRL | KEY_M_SHIFT | KEY_F(12), "kf48",  "Fc", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(1),                 "kf49",  "Fd", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(2),                 "kf50",  "Fe", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(3),                 "kf51",  "Ff", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(4),                 "kf52",  "Fg", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(5),                 "kf53",  "Fh", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(6),                 "kf54",  "Fi", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(7),                 "kf55",  "Fj", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(8),                 "kf56",  "Fk", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(9),                 "kf57",  "Fl", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(10),                "kf58",  "Fm", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(11),                "kf59",  "Fn", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_F(12),                "kf60",  "Fo", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_F(1),   "kf61",  "Fp", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_F(2),   "kf62",  "Fq", MCKEY_NOACTION },
+    { KEY_M_ALT | KEY_M_SHIFT | KEY_F(3),   "kf63",  "Fr", MCKEY_NOACTION },
+
+    { 0,                                    NULL,    NULL, MCKEY_NOACTION },
+};
+// clang-format on
 
 /* Broken terminfo and termcap databases on xterminals */
 static key_define_t xterm_key_defines[] = {
@@ -693,6 +861,23 @@ define_sequences (const key_define_t *kd)
 
     for (i = 0; kd[i].code != 0; i++)
         define_sequence (kd[i].code, kd[i].seq, kd[i].action);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+define_term_sequences (term_key_define_t *kd)
+{
+    int i;
+
+    for (i = 0; kd[i].code != 0; i++)
+    {
+        char *seq;
+
+        seq = tty_tigetstr (kd[i].terminfo_name, kd[i].termcap_name);
+        if (seq != NULL)
+            define_sequence (kd[i].code, seq, kd[i].action);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1319,6 +1504,8 @@ init_key (void)
     // This has to be the first define_sequence
     // So, we can assume that the first keys member has ESC
     define_sequences (mc_default_keys);
+
+    define_term_sequences (term_key_defines);
 
     // Terminfo on irix does not have some keys
     if (mc_global.tty.xterm_flag
