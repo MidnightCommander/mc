@@ -565,6 +565,18 @@ or
 keys can be used to correct typing mistakes. If C\-s is pressed
 again, the next match is searched for.
 .P
+The
+.I SearchNext
+and
+.I SearchPrev
+panel actions can be used to cycle through files matching the current
+search pattern, wrapping around at the beginning or end of the list.
+By default,
+.I SearchNext
+is bound to C\-s (same as repeating the search).
+.I SearchPrev
+has no default binding but can be configured in the keymap file.
+.P
 If quick search is started with double pressing of C\-s, the previous quick
 search pattern will be used for current search.
 .P
