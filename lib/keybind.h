@@ -319,6 +319,8 @@ enum
     CK_WrapMode = 600L,
     CK_MagicMode,
     CK_NroffMode,
+    CK_SyntaxMode,
+    CK_SyntaxOptions,
     CK_HexMode,
     CK_HexEditMode,
     CK_BookmarkGoto,
