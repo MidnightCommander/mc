@@ -2743,6 +2743,24 @@ ftpfs_init_passwd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static int
+ftpfs_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
+{
+    char buf[BUF_SMALL];
+    mc_timespec_t atime, mtime;
+    struct tm *tm;
+
+    vfs_get_timespecs_from_timesbuf (times, &atime, &mtime);
+    tm = gmtime (&mtime.tv_sec);
+
+    g_snprintf (buf, sizeof (buf), "MFMT %04d%02d%02d%02d%02d%02d /%%s", tm->tm_year + 1900,
+                tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
+
+    return ftpfs_send_command (vpath, buf, OPT_FLUSH);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 vfs_init_ftpfs (void)
 {
@@ -2761,6 +2779,7 @@ vfs_init_ftpfs (void)
     vfs_ftpfs_ops->mkdir = ftpfs_mkdir;
     vfs_ftpfs_ops->rmdir = ftpfs_rmdir;
     vfs_ftpfs_ops->ctl = ftpfs_ctl;
+    vfs_ftpfs_ops->utime = ftpfs_utime;
     ftpfs_subclass.archive_same = ftpfs_archive_same;
     ftpfs_subclass.new_archive = ftpfs_new_archive;
     ftpfs_subclass.open_archive = ftpfs_open_archive;
