@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: actions/github-script@v8
+      - uses: actions/github-script@v9
         id: get-head-hash
         with:
           result-encoding: string
