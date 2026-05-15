@@ -174,8 +174,6 @@ static const char *prompt_parts[] = {
 
 /*** forward declarations (file scope functions) *************************************************/
 
-static FileProgressStatus erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath);
-
 /*** file scope variables ************************************************************************/
 
 /* the hard link cache */
@@ -1413,6 +1411,62 @@ erase_file (file_op_context_t *ctx, const vfs_path_t *vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Check if directory is empty or not.
+ *
+ * @param ctx file operation context descriptor
+ * @param vpath directory handler
+ * @param error status of directory reading
+ *
+ * @return -1 on error,
+ *          1 if there are no entries besides "." and ".." in the directory path points to,
+ *          0 else.
+ *
+ * ATTENTION! Be careful when modifying this function (like commit 25e419ba0886f)!
+ * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), which is used
+ * in SHELL) don't return "." and ".." entries.
+ */
+static int
+check_dir_is_empty (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgressStatus *error)
+{
+    DIR *dir;
+    struct vfs_dirent *d;
+    int i = 1;
+
+    while ((dir = mc_opendir (vpath)) == NULL)
+    {
+        if (ctx->ignore_all)
+            *error = FILE_IGNORE_ALL;
+        else
+        {
+            const FileProgressStatus status = file_error (
+                ctx, TRUE, _ ("Cannot enter into directory\n%s"), vfs_path_as_str (vpath));
+
+            if (status == FILE_RETRY)
+                continue;
+            if (status == FILE_IGNORE_ALL)
+                ctx->ignore_all = TRUE;
+
+            *error = status;  // FILE_IGNORE, FILE_IGNORE_ALL, FILE_ABORT
+        }
+
+        return (-1);
+    }
+
+    for (d = mc_readdir (dir); d != NULL; d = mc_readdir (dir))
+        if (!DIR_IS_DOT (d->d_name) && !DIR_IS_DOTDOT (d->d_name))
+        {
+            i = 0;
+            break;
+        }
+
+    mc_closedir (dir);
+    *error = FILE_CONT;
+    return i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static FileProgressStatus
 try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
@@ -1429,6 +1483,32 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
     }
 
     return return_status;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
+erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath)
+{
+    FileProgressStatus error = FILE_CONT;
+
+    file_progress_show_deleting (ctx, vpath, NULL);
+    file_progress_show_count (ctx);
+    if (file_progress_check_buttons (ctx) == FILE_ABORT)
+        return FILE_ABORT;
+
+    mc_refresh ();
+
+    const int res = check_dir_is_empty (ctx, vpath, &error);
+
+    if (res == -1)
+        return error;
+
+    if (res != 1)
+        return FILE_CONT;
+
+    // not empty or error
+    return try_erase_dir (ctx, vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1493,87 +1573,6 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
     mc_refresh ();
 
     return erase_dir_iff_empty (ctx, vpath);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Check if directory is empty or not.
- *
- * @param ctx file operation context descriptor
- * @param vpath directory handler
- * @param error status of directory reading
- *
- * @return -1 on error,
- *          1 if there are no entries besides "." and ".." in the directory path points to,
- *          0 else.
- *
- * ATTENTION! Be careful when modifying this function (like commit 25e419ba0886f)!
- * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), which is used
- * in SHELL) don't return "." and ".." entries.
- */
-static int
-check_dir_is_empty (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgressStatus *error)
-{
-    DIR *dir;
-    struct vfs_dirent *d;
-    int i = 1;
-
-    while ((dir = mc_opendir (vpath)) == NULL)
-    {
-        if (ctx->ignore_all)
-            *error = FILE_IGNORE_ALL;
-        else
-        {
-            const FileProgressStatus status = file_error (
-                ctx, TRUE, _ ("Cannot enter into directory\n%s"), vfs_path_as_str (vpath));
-
-            if (status == FILE_RETRY)
-                continue;
-            if (status == FILE_IGNORE_ALL)
-                ctx->ignore_all = TRUE;
-
-            *error = status;  // FILE_IGNORE, FILE_IGNORE_ALL, FILE_ABORT
-        }
-
-        return (-1);
-    }
-
-    for (d = mc_readdir (dir); d != NULL; d = mc_readdir (dir))
-        if (!DIR_IS_DOT (d->d_name) && !DIR_IS_DOTDOT (d->d_name))
-        {
-            i = 0;
-            break;
-        }
-
-    mc_closedir (dir);
-    *error = FILE_CONT;
-    return i;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static FileProgressStatus
-erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath)
-{
-    FileProgressStatus error = FILE_CONT;
-
-    file_progress_show_deleting (ctx, vpath, NULL);
-    file_progress_show_count (ctx);
-    if (file_progress_check_buttons (ctx) == FILE_ABORT)
-        return FILE_ABORT;
-
-    mc_refresh ();
-
-    const int res = check_dir_is_empty (ctx, vpath, &error);
-
-    if (res == -1)
-        return error;
-
-    if (res != 1)
-        return FILE_CONT;
-
-    // not empty or error
-    return try_erase_dir (ctx, vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
