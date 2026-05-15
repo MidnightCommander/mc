@@ -174,6 +174,8 @@ static const char *prompt_parts[] = {
 
 /*** forward declarations (file scope functions) *************************************************/
 
+static FileProgressStatus erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath);
+
 /*** file scope variables ************************************************************************/
 
 /* the hard link cache */
@@ -1469,20 +1471,15 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
             return FILE_RETRY;
         }
         if (S_ISDIR (buf.st_mode))
-        {
-            return_status = recursive_erase (ctx, tmp_vpath, FALSE);
-            if (return_status != FILE_ABORT)
-                return_status = recursive_erase (ctx, tmp_vpath, TRUE);
-        }
+            return_status = recursive_erase (ctx, tmp_vpath, delete_resource_forks);
+        else if (delete_resource_forks || !FILE_IS_RESOURCE_FORK (next->d_name))
+            return_status = erase_file (ctx, tmp_vpath);
         else
-        {
-            if (delete_resource_forks || !FILE_IS_RESOURCE_FORK (next->d_name))
-                return_status = erase_file (ctx, tmp_vpath);
-            else
-                return_status = FILE_CONT;
-        }
+            return_status = FILE_SKIP;
+
         vfs_path_free (tmp_vpath, TRUE);
     }
+
     mc_closedir (reading);
 
     if (return_status == FILE_ABORT)
@@ -1495,7 +1492,7 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
 
     mc_refresh ();
 
-    return try_erase_dir (ctx, vpath);
+    return erase_dir_iff_empty (ctx, vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
