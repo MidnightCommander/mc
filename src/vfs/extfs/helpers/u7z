@@ -24,10 +24,33 @@
 # 7za    | Version that supports major formats only, has no plugins, and is smaller than the full version
 # 7zr    | Most limited version, which only supports the LZMA and related formats and cannot handle encrypted archives
 
-P7ZIP=`command -v 7z 2>/dev/null` \
-    || P7ZIP=`command -v 7zz 2>/dev/null` \
-    || P7ZIP=`command -v 7za 2>/dev/null` \
-    || P7ZIP=`command -v 7zr 2>/dev/null` \
+mcu7zip_find_binary ()
+{
+    cmd=$1
+    path=`command -v "$cmd" 2>/dev/null` || return 1
+
+    case $path in
+        */*)
+            dir=${path%/*}
+            base=${path##*/}
+
+            # Canonicalize the directory component. Some systems have
+            # compatibility symlinks such as /usr/sbin -> /usr/bin, and
+            # modular 7-Zip builds may derive the location of 7z.so from
+            # the invoked pathname.
+            dir=`cd -P "$dir" 2>/dev/null && pwd -P` || return 1
+            printf '%s\n' "$dir/$base"
+            ;;
+        *)
+            printf '%s\n' "$path"
+            ;;
+    esac
+}
+
+P7ZIP=`mcu7zip_find_binary 7z` \
+    || P7ZIP=`mcu7zip_find_binary 7zz` \
+    || P7ZIP=`mcu7zip_find_binary 7za` \
+    || P7ZIP=`mcu7zip_find_binary 7zr` \
     || P7ZIP=""
 
 # Let the test framework hook in:
