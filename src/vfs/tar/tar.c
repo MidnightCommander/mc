@@ -312,7 +312,13 @@ tar_available_space_after (const union block *pointer)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** Check header checksum.
+/**
+ * Check header checksum.
+ * 7th Edition Unix tar created the checksum by adding the bytes in the header as type char,
+ * which was signed. This caused the checksum to disagree when the same code was later compiled
+ * on platforms where char was unsigned. Although POSIX.1-1988 standardized on using unsigned char
+ * for checksums, old tar files created by pre-standard programs may have used plain char, which
+ * may happen to have been signed. So tar_checksum computes two checksums -- signed and unsigned.
  */
 static read_header
 tar_checksum (const union block *header)
