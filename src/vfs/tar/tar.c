@@ -725,6 +725,28 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
         char *link_name;
         struct vfs_s_inode *inode = NULL;
 
+        switch (h->typeflag)
+        {
+        /* For these file types, although POSIX does not specify the
+           meaning of the size, it does say there should be no data,
+           so treat the size as zero.  */
+        case BLKTYPE:
+        case CHRTYPE:
+        case FIFOTYPE:
+
+        /* For these file types, POSIX requires that the size be zero.
+           Be generous and accept any size as zero, as some
+           nonconforming programs generate nonzero size fields along
+           with no data.  */
+        case LNKTYPE:
+        case SYMTYPE:
+            current_stat_info.stat.st_size = 0;
+            break;
+
+        default:
+            break;
+        }
+
         g_free (recent_long_name);
 
         if (next_long_name != NULL)
