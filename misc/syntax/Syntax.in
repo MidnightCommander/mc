@@ -318,7 +318,7 @@ include cuda.syntax
 file ..\*\\.cl$ OpenCL\sProgram
 include opencl.syntax
 
-file ..\*\\.(?i:ya?ml)$ YAML\sFile
+file ..\*\\.(?i:ya?ml|ya?ml\.j2)$ YAML\sFile
 include yaml.syntax
 
 file .\*\\.osl$ OSL\sProgram
