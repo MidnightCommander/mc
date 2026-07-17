@@ -617,6 +617,29 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 switch (c)
                 {
                 case '\n':
+                    // draw a column block as a full rectangle past the end of a short line
+                    if (edit->column_highlight != 0 && b < m2 && q >= m1)
+                    {
+                        const long cl1 = MIN (edit->column1, edit->column2);
+                        const long cl2 = MAX (edit->column1, edit->column2);
+                        // past the line end the background is the one the line was cleared with
+                        int eol_style;
+
+                        if (book_mark != 0)
+                            eol_style = book_mark << 16;
+                        else if (tty_use_colors ())
+                            eol_style = EDITOR_NORMAL_COLOR << 16;
+                        else
+                            eol_style = 0;
+
+                        while (col < cl2 && col <= end_col - edit->start_col)
+                        {
+                            p->ch = ' ';
+                            p->style = col >= cl1 ? (eol_style | MOD_MARKED) : eol_style;
+                            p++;
+                            col++;
+                        }
+                    }
                     col = end_col - edit->start_col + 1;  // quit
                     break;
 
