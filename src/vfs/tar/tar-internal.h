@@ -308,6 +308,7 @@ union block *tar_find_next_block (tar_super_t *archive);
 gboolean tar_set_next_block_after (union block *block);
 off_t tar_current_block_ordinal (const tar_super_t *archive);
 gboolean tar_skip_file (tar_super_t *archive, off_t size);
+gboolean tar_dumpdir_ok (char const *dumpdir, idx_t size);
 
 /* tar-sparse.c */
 gboolean tar_sparse_member_p (tar_super_t *archive, struct tar_stat_info *st);

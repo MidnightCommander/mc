@@ -553,6 +553,9 @@ dumpdir_decoder (struct tar_stat_info *st, const char *keyword, const char *arg,
 {
     (void) keyword;
 
+    if (!tar_dumpdir_ok (arg, size))
+        return FALSE;
+
 #if GLIB_CHECK_VERSION(2, 68, 0)
     st->dumpdir = g_memdup2 (arg, size);
 #else
