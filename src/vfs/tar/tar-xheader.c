@@ -135,7 +135,7 @@ static struct xhdr_tab xhdr_tab[] = {
     { "ctime", ctime_decoder, 0 },
     { "gid", gid_decoder, 0 },
 #if 0
-    { "gname",                gname_decoder,            0  },
+    { "gname", gname_decoder, 0  },
 #endif
     { "linkpath", linkpath_decoder, 0 },
     { "mtime", mtime_decoder, 0 },
@@ -143,7 +143,7 @@ static struct xhdr_tab xhdr_tab[] = {
     { "size", size_decoder, 0 },
     { "uid", uid_decoder, 0 },
 #if 0
-    { "uname",                uname_decoder,            0  },
+    { "uname", uname_decoder,0 },
 #endif
 
     // Sparse file handling
