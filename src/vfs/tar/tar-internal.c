@@ -34,6 +34,7 @@
 
 #include <ctype.h>     // isdigit()
 #include <inttypes.h>  // uintmax_t
+#include <string.h>    // strlen()
 
 #include "lib/global.h"
 #include "lib/widget.h"   // message()
@@ -586,6 +587,63 @@ tar_skip_file (tar_super_t *archive, off_t size)
     }
 
     return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+tar_dumpdir_ok (char const *dumpdir, idx_t size)
+{
+    char const *p;
+    gboolean has_tempdir = FALSE;
+    char expect = '\0';
+
+    if (!(size > 0 && dumpdir[size - 1] == '\0' && (size == 1 || dumpdir[size - 2] == '\0')))
+        return FALSE;
+
+    for (p = dumpdir; *p != '\0'; p += strlen (p) + 1)
+    {
+        if (expect != '\0' && *p != expect)
+            return FALSE;
+
+        switch (*p)
+        {
+        case 'X':
+            if (has_tempdir)
+                return FALSE;
+            has_tempdir = TRUE;
+            break;
+
+        case 'R':
+            if (p[1] == '\0')
+            {
+                if (!has_tempdir)
+                    return FALSE;
+                has_tempdir = FALSE;
+            }
+            expect = 'T';
+            break;
+
+        case 'T':
+            if (expect != 'T')
+                return FALSE;
+            if (p[1] == '\0' && !has_tempdir)
+                return FALSE;
+            expect = '\0';
+            break;
+
+        case 'N':
+        case 'Y':
+        case 'D':
+            break;
+
+        default:
+            // FIXME: bail out?
+            break;
+        }
+    }
+
+    return (expect == '\0');
 }
 
 /* --------------------------------------------------------------------------------------------- */
