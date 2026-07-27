@@ -46,11 +46,11 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/timefmt.h"  // file_date()
+#include "lib/timefmt.h"  // file_date(), i18n_checktimelength()
 #include "lib/widget.h"
-#include "lib/util.h"  // canonicalize_pathname()
+#include "lib/util.h"  // canonicalize_pathname(), size_trunc_len()
 
-#include "src/setup.h"    // verbose
+#include "src/setup.h"    // verbose, panels_options
 #include "src/history.h"  // MC_HISTORY_SHARED_SEARCH
 
 #include "dir.h"
@@ -64,6 +64,9 @@
 
 #define MAX_REFRESH_INTERVAL  (G_USEC_PER_SEC / 20)  // 50 ms
 #define MIN_REFRESH_FILE_SIZE (256 * 1024)           // 256 KB
+
+// Width of the file size shown in the result list: up to 3 digits and a unit suffix
+#define FIND_SIZE_WIDTH 4
 
 /*** file scope type declarations ****************************************************************/
 
@@ -864,29 +867,50 @@ clear_stack (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Get the modification time of DIRECTORY/FILE formatted as in the file panels,
- * or NULL if it cannot be obtained.
+ * Format the modification time and the size of the file described by @st the way the file
+ * panels do.
+ *
+ * @return newly allocated string
  */
 
 static char *
-get_file_date (const char *dir, const char *file)
+format_file_info (const struct stat *st)
+{
+    char size[BUF_TINY];
+
+    size_trunc_len (size, FIND_SIZE_WIDTH, (uintmax_t) st->st_size, 0, panels_options.kilobyte_si);
+
+    return g_strdup_printf (
+        "%s %*s", str_fit_to_term (file_date (st->st_mtime), (int) i18n_checktimelength (), J_LEFT),
+        FIND_SIZE_WIDTH, size);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get the modification time and the size of DIRECTORY/FILE formatted as in the file panels,
+ * or NULL if they cannot be obtained.
+ */
+
+static char *
+get_file_info (const char *dir, const char *file)
 {
     vfs_path_t *vpath;
     struct stat st;
-    char *date = NULL;
+    char *info = NULL;
 
     vpath = vfs_path_build_filename (dir, file, (char *) NULL);
     if ((options.follow_symlinks ? mc_stat (vpath, &st) : mc_lstat (vpath, &st)) == 0)
-        date = g_strdup (file_date (st.st_mtime));
+        info = format_file_info (&st);
     vfs_path_free (vpath, TRUE);
 
-    return date;
+    return info;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-insert_file (const char *dir, const char *file, gsize start, gsize end, char *date)
+insert_file (const char *dir, const char *file, gsize start, gsize end, char *info)
 {
     char *tmp_name;
     static char *dirname = NULL;
@@ -915,20 +939,20 @@ insert_file (const char *dir, const char *file, gsize start, gsize end, char *da
     location->dir = dirname;
     location->start = start;
     location->end = end;
-    add_to_list_take (tmp_name, date, location);
+    add_to_list_take (tmp_name, info, location);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Add a match to the list. Ownership of @date, the modification time of the found file,
- * is transferred to the list.
+ * Add a match to the list. Ownership of @info, the modification time and the size of the
+ * found file, is transferred to the list.
  */
 
 static void
-find_add_match (const char *dir, const char *file, gsize start, gsize end, char *date)
+find_add_match (const char *dir, const char *file, gsize start, gsize end, char *info)
 {
-    insert_file (dir, file, start, end, date);
+    insert_file (dir, file, start, end, info);
 
     // Don't scroll
     if (matches == 0)
@@ -1111,7 +1135,7 @@ search_content (WDialog *h, const char *directory, const char *filename)
                 found_start =
                     off + search_content_handle->normal_offset + 1;  // off by one: ticket 3280
                 find_add_match (directory, result, found_start, found_start + found_len,
-                                g_strdup (file_date (s.st_mtime)));
+                                format_file_info (&s));
                 found = TRUE;
             }
 
@@ -1395,7 +1419,7 @@ do_search (WDialog *h)
             {
                 if (content_pattern == NULL)
                     find_add_match (directory, dp->d_name, 0, 0,
-                                    get_file_date (directory, dp->d_name));
+                                    get_file_info (directory, dp->d_name));
                 else if (search_content (h, directory, dp->d_name))
                     return 1;
             }
