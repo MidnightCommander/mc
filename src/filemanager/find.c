@@ -46,6 +46,7 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/timefmt.h"  // file_date()
 #include "lib/widget.h"
 #include "lib/util.h"  // canonicalize_pathname()
 
@@ -348,9 +349,10 @@ add_to_list (const char *text, void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline char *
-add_to_list_take (char *text, void *data)
+add_to_list_take (char *text, char *rtext, void *data)
 {
-    return listbox_add_item_take (find_list, LISTBOX_APPEND_AT_END, 0, text, data, TRUE);
+    return listbox_add_item_take_rtext (find_list, LISTBOX_APPEND_AT_END, 0, text, rtext, data,
+                                        TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -861,8 +863,30 @@ clear_stack (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Get the modification time of DIRECTORY/FILE formatted as in the file panels,
+ * or NULL if it cannot be obtained.
+ */
+
+static char *
+get_file_date (const char *dir, const char *file)
+{
+    vfs_path_t *vpath;
+    struct stat st;
+    char *date = NULL;
+
+    vpath = vfs_path_build_filename (dir, file, (char *) NULL);
+    if ((options.follow_symlinks ? mc_stat (vpath, &st) : mc_lstat (vpath, &st)) == 0)
+        date = g_strdup (file_date (st.st_mtime));
+    vfs_path_free (vpath, TRUE);
+
+    return date;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
-insert_file (const char *dir, const char *file, gsize start, gsize end)
+insert_file (const char *dir, const char *file, gsize start, gsize end, char *date)
 {
     char *tmp_name;
     static char *dirname = NULL;
@@ -891,15 +915,20 @@ insert_file (const char *dir, const char *file, gsize start, gsize end)
     location->dir = dirname;
     location->start = start;
     location->end = end;
-    add_to_list_take (tmp_name, location);
+    add_to_list_take (tmp_name, date, location);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Add a match to the list. Ownership of @date, the modification time of the found file,
+ * is transferred to the list.
+ */
+
 static void
-find_add_match (const char *dir, const char *file, gsize start, gsize end)
+find_add_match (const char *dir, const char *file, gsize start, gsize end, char *date)
 {
-    insert_file (dir, file, start, end);
+    insert_file (dir, file, start, end, date);
 
     // Don't scroll
     if (matches == 0)
@@ -1081,7 +1110,8 @@ search_content (WDialog *h, const char *directory, const char *filename)
                 g_snprintf (result, sizeof (result), "%d:%s", line, filename);
                 found_start =
                     off + search_content_handle->normal_offset + 1;  // off by one: ticket 3280
-                find_add_match (directory, result, found_start, found_start + found_len);
+                find_add_match (directory, result, found_start, found_start + found_len,
+                                g_strdup (file_date (s.st_mtime)));
                 found = TRUE;
             }
 
@@ -1364,7 +1394,8 @@ do_search (WDialog *h)
             if (search_ok)
             {
                 if (content_pattern == NULL)
-                    find_add_match (directory, dp->d_name, 0, 0);
+                    find_add_match (directory, dp->d_name, 0, 0,
+                                    get_file_date (directory, dp->d_name));
                 else if (search_content (h, directory, dp->d_name))
                     return 1;
             }
