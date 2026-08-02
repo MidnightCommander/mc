@@ -33,6 +33,10 @@ void g_queue_clear_full (GQueue *queue, GDestroyNotify free_func);
 GString *g_string_new_take (char *init);
 #endif
 
+#if !GLIB_CHECK_VERSION(2, 90, 0)
+void g_string_free_deep (GString *string);
+#endif
+
 /* There is no such API in GLib2 */
 GString *mc_g_string_copy (GString *dest, const GString *src);
 

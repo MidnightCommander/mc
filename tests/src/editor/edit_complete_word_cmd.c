@@ -128,17 +128,10 @@ edit_completion_dialog_show__init (void)
 }
 
 static void
-edit_completion_dialog_show__string_free (gpointer data)
-{
-    g_string_free ((GString *) data, TRUE);
-}
-
-static void
 edit_completion_dialog_show__deinit (void)
 {
     if (edit_completion_dialog_show__compl != NULL)
-        g_queue_free_full (edit_completion_dialog_show__compl,
-                           edit_completion_dialog_show__string_free);
+        g_queue_free_full (edit_completion_dialog_show__compl, (GDestroyNotify) g_string_free_deep);
 }
 
 /* --------------------------------------------------------------------------------------------- */

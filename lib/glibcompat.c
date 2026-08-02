@@ -226,6 +226,30 @@ g_string_new_take (char *init)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if !GLIB_CHECK_VERSION(2, 90, 0)
+/**
+ * g_string_free_deep:
+ * @string: (transfer full): a string
+ *
+ * Frees the memory allocated for the [struct@GLib.String] together with its
+ * character data.
+ *
+ * This is equivalent to calling 'g_string_free (string, TRUE)`, but it can
+ * be used with [func@GLib.clear_pointer]:
+ *
+ * ```c
+ * g_clear_pointer (&my_string, g_string_free_deep);
+ * ```
+ */
+void
+g_string_free_deep (GString *string)
+{
+    g_string_free (string, TRUE);
+}
+#endif
+
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * mc_g_string_copy:
  * @dest: (not nullable): the destination #GString. Its current contents are destroyed
