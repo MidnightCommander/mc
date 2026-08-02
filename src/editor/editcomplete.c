@@ -325,14 +325,6 @@ edit_complete_word_insert_recoded_completion (WEdit *edit, char *completion, gsi
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_completion_string_free (gpointer data)
-{
-    g_string_free ((GString *) data, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /* let the user select its preferred completion */
@@ -463,7 +455,7 @@ edit_complete_word_cmd (WEdit *edit)
         }
     }
 
-    g_queue_free_full (compl, edit_completion_string_free);
+    g_queue_free_full (compl, (GDestroyNotify) g_string_free_deep);
 }
 
 /* --------------------------------------------------------------------------------------------- */
