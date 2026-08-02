@@ -46,23 +46,23 @@
 
 /*** global variables ****************************************************************************/
 
-/* If true, assume we are running on an xterm terminal */
+// If true, assume we are running on an xterm terminal
 gboolean mc_args__force_xterm = FALSE;
 
 gboolean mc_args__nomouse = FALSE;
 
-/* Force colors, only used by Slang */
+// Force colors, only used by Slang
 gboolean mc_args__force_colors = FALSE;
 
-/* Don't load keymap from file and use default one */
+// Don't load keymap from file and use default one
 gboolean mc_args__nokeymap = FALSE;
 
 char *mc_args__last_wd_file = NULL;
 
-/* when enabled NETCODE, use following file as logfile */
+// when enabled NETCODE, use following file as logfile
 char *mc_args__netfs_logfile = NULL;
 
-/* keymap file */
+// keymap file
 char *mc_args__keymap_file = NULL;
 
 void *mc_run_param0 = NULL;
@@ -259,8 +259,15 @@ static const GOptionEntry argument_terminal_table[] = {
     },
 
 #ifdef HAVE_SLANG
-    { "termcap", 't', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE, &SLtt_Try_Termcap,
-      N_ ("Tries to use termcap instead of terminfo"), NULL },
+    {
+        "termcap",
+        't',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &SLtt_Try_Termcap,
+        N_ ("Tries to use termcap instead of terminfo"),
+        NULL,
+    },
 #endif
 
     {
