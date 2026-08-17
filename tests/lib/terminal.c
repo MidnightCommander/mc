@@ -110,6 +110,102 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+static const struct encode_source
+{
+    const gchar *input_string;
+    ssize_t input_string_len;
+    const gchar *expected_string;
+} encode_source[] = {
+    { "\001", -1, "^A" },
+    { "\032", -1, "^Z" },
+    { "\033", -1, "\\e" },
+    { "\034", -1, "^\\" },
+    { "\035", -1, "^]" },
+    { "\036", -1, "^^" },
+    { "\037", -1, "^_" },
+    { "\177", -1, "^?" },
+    { " ", -1, "\\s" },
+    { "\\", -1, "\\\\" },
+    { "^", -1, "\\^" },
+    { "\000", 1, "^@" },
+    { "ab\000\000cd\000\000ef", 7, "ab^@^@cd^@" },
+};
+
+/* --------------------------------------------------------------------------------------------- */
+
+START_PARAMETRIZED_TEST (test_encode_controls, encode_source)
+{
+    GString *actual_string;
+
+    actual_string = encode_controls (data->input_string, data->input_string_len);
+    mctest_assert_str_eq (actual_string->str, data->expected_string);
+
+    g_string_free (actual_string, TRUE);
+}
+END_PARAMETRIZED_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const struct decode_source
+{
+    const gchar *input_string;
+    const gchar *expected_string;
+} decode_source[] = {
+    { "^A", "\001" },
+    { "^Z", "\032" },
+    { "^[", "\033" },
+    { "\\e", "\033" },
+    { "\\E", "\033" },
+    { "^\\", "\034" },
+    { "^]", "\035" },
+    { "^^", "\036" },
+    { "^_", "\037" },
+    { "^?", "\177" },
+    { "\\s", " " },
+    { "\\\\", "\\" },
+    { "\\^", "^" },
+    { "^A^[\\e\\E^\\^^^?", "\001\033\033\033\034\036\177" },
+    { "\\\\\\\\\\\\", "\\\\\\" },
+    { "^^^^^^", "\036\036\036" },
+    { "^^^^^\\^\\\\\\\\\\\\^\\^^^^^", "\036\036\034\034\\\\^^\036\036" },
+    { "trailing^", "trailing^" },
+};
+
+START_PARAMETRIZED_TEST (test_decode_controls, decode_source)
+{
+    GString *actual_string;
+
+    actual_string = decode_controls (data->input_string);
+    mctest_assert_str_eq (actual_string->str, data->expected_string);
+    g_string_free (actual_string, TRUE);
+}
+END_PARAMETRIZED_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const struct decode_source_len
+{
+    const gchar *input_string;
+    const gchar *expected_string;
+    ssize_t expected_string_len;
+} decode_source_len[] = {
+    { "^@", "\000", 1 },
+    { "ab^@^@cd^@", "ab\000\000cd\000", 7 },
+};
+
+START_PARAMETRIZED_TEST (test_decode_controls_len, decode_source_len)
+{
+    GString *actual_string;
+
+    actual_string = decode_controls (data->input_string);
+    mctest_assert_mem_eq (actual_string->str, actual_string->len, data->expected_string,
+                          data->expected_string_len);
+    g_string_free (actual_string, TRUE);
+}
+END_PARAMETRIZED_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -123,6 +219,9 @@ main (void)
     tcase_add_test (tc_core, test_parse_csi);
     tcase_add_test (tc_core, test_strip_ctrl_codes);
     tcase_add_test (tc_core, test_strip_ctrl_codes2);
+    mctest_add_parameterized_test (tc_core, test_encode_controls, encode_source);
+    mctest_add_parameterized_test (tc_core, test_decode_controls, decode_source);
+    mctest_add_parameterized_test (tc_core, test_decode_controls_len, decode_source_len);
     // ***********************************
 
     return mctest_run_all (tc_core);

@@ -59,6 +59,7 @@ static const struct
     { &mc_config_str, MC_CONFIG_FILE },
     { &mc_config_str, MC_FHL_INI_FILE },
     { &mc_config_str, MC_HOTLIST_FILE },
+    { &mc_config_str, GLOBAL_KEYDEF_FILE },
     { &mc_config_str, GLOBAL_KEYMAP_FILE },
     { &mc_config_str, MC_USERMENU_FILE },
     { &mc_config_str, EDIT_HOME_MENU },
@@ -305,6 +306,75 @@ mc_config_get_full_vpath (const char *config_name)
     g_free (str_path);
 
     return ret_vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get name of config file.
+ *
+ * @param subdir If not NULL, config is searched in specified subdir.
+ * @param config_file_name If relative, file if searched in standard paths.
+ * @param suffix If file name does not end in this suffix then append it.
+ *
+ * @return newly allocated string with config name or NULL if file is not found.
+ */
+
+char *
+mc_config_get_full_config_name (const char *subdir, const char *config_file_name,
+                                const char *suffix)
+{
+    char *lc_basename, *ret;
+    char *file_name;
+
+    if (config_file_name == NULL)
+        return NULL;
+
+    // check for suffix
+    if (suffix != NULL && g_str_has_suffix (config_file_name, suffix))
+        file_name = g_strdup (config_file_name);
+    else
+        file_name = g_strconcat (config_file_name, suffix, (char *) NULL);
+
+    canonicalize_pathname (file_name);
+
+    if (g_path_is_absolute (file_name))
+        return file_name;
+
+    lc_basename = g_path_get_basename (file_name);
+    g_free (file_name);
+
+    if (lc_basename == NULL)
+        return NULL;
+
+    if (subdir != NULL)
+        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, (char *) NULL);
+    else
+        ret = g_build_filename (mc_config_get_path (), lc_basename, (char *) NULL);
+
+    if (exist_file (ret))
+    {
+        g_free (lc_basename);
+        canonicalize_pathname (ret);
+        return ret;
+    }
+    g_free (ret);
+
+    if (subdir != NULL)
+        ret = g_build_filename (mc_global.share_data_dir, subdir, lc_basename, (char *) NULL);
+    else
+        ret = g_build_filename (mc_global.share_data_dir, lc_basename, (char *) NULL);
+
+    g_free (lc_basename);
+
+    if (exist_file (ret))
+    {
+        canonicalize_pathname (ret);
+        return ret;
+    }
+
+    g_free (ret);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

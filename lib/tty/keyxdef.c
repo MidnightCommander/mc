@@ -425,7 +425,7 @@ load_qnx_key_defines (void)
             {
                 if (*__QTISSTR (str_idx))
                 {
-                    define_sequence (xtra_key_defines[idx].mc_code, __QTISSTR (str_idx),
+                    define_sequence (xtra_key_defines[idx].mc_code, __QTISSTR (str_idx), -1,
                                      MCKEY_NOACTION);
                 }
             }

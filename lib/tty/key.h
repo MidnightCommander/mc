@@ -68,7 +68,7 @@ extern gboolean bracketed_pasting_in_progress;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean define_sequence (int code, const char *seq, int action);
+gboolean define_sequence (int code, const char *seq, gssize len, int action);
 
 void init_key (void);
 void init_key_input_fd (void);
@@ -96,7 +96,7 @@ void channels_down (void);
 void load_xtra_key_defines (void);
 
 /* Learn a single key */
-char *learn_key (void);
+GString *learn_key (void);
 
 /* Returns a key code (interpreted) */
 int get_key_code (int nodelay);
