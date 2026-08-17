@@ -1411,80 +1411,6 @@ erase_file (file_op_context_t *ctx, const vfs_path_t *vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static FileProgressStatus
-try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
-{
-    FileProgressStatus return_status = FILE_CONT;
-
-    while (mc_rmdir (vpath) != 0 && !ctx->ignore_all)
-    {
-        return_status =
-            file_error (ctx, TRUE, _ ("Cannot remove directory\n%s"), vfs_path_as_str (vpath));
-        if (return_status == FILE_IGNORE_ALL)
-            ctx->ignore_all = TRUE;
-        if (return_status != FILE_RETRY)
-            break;
-    }
-
-    return return_status;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
-  Recursive removal of files
-  abort -> cancel stack
-  ignore -> warn every level, gets default
-  ignore_all -> remove as much as possible
-*/
-static FileProgressStatus
-recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
-{
-    struct vfs_dirent *next;
-    DIR *reading;
-    FileProgressStatus return_status = FILE_CONT;
-
-    reading = mc_opendir (vpath);
-    if (reading == NULL)
-        return FILE_RETRY;
-
-    while ((next = mc_readdir (reading)) && return_status != FILE_ABORT)
-    {
-        vfs_path_t *tmp_vpath;
-        struct stat buf;
-
-        if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
-            continue;
-
-        tmp_vpath = vfs_path_append_new (vpath, next->d_name, (char *) NULL);
-        if (mc_lstat (tmp_vpath, &buf) != 0)
-        {
-            mc_closedir (reading);
-            vfs_path_free (tmp_vpath, TRUE);
-            return FILE_RETRY;
-        }
-        if (S_ISDIR (buf.st_mode))
-            return_status = recursive_erase (ctx, tmp_vpath);
-        else
-            return_status = erase_file (ctx, tmp_vpath);
-        vfs_path_free (tmp_vpath, TRUE);
-    }
-    mc_closedir (reading);
-
-    if (return_status == FILE_ABORT)
-        return FILE_ABORT;
-
-    file_progress_show_deleting (ctx, vpath, NULL);
-    file_progress_show_count (ctx);
-    if (file_progress_check_buttons (ctx) == FILE_ABORT)
-        return FILE_ABORT;
-
-    mc_refresh ();
-
-    return try_erase_dir (ctx, vpath);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Check if directory is empty or not.
  *
@@ -1542,6 +1468,26 @@ check_dir_is_empty (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgres
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
+try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
+{
+    FileProgressStatus return_status = FILE_CONT;
+
+    while (mc_rmdir (vpath) != 0 && !ctx->ignore_all)
+    {
+        return_status =
+            file_error (ctx, TRUE, _ ("Cannot remove directory\n%s"), vfs_path_as_str (vpath));
+        if (return_status == FILE_IGNORE_ALL)
+            ctx->ignore_all = TRUE;
+        if (return_status != FILE_RETRY)
+            break;
+    }
+
+    return return_status;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static FileProgressStatus
 erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
     FileProgressStatus error = FILE_CONT;
@@ -1563,6 +1509,70 @@ erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath)
 
     // not empty or error
     return try_erase_dir (ctx, vpath);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  Recursive removal of files
+  abort -> cancel stack
+  ignore -> warn every level, gets default
+  ignore_all -> remove as much as possible
+
+  This function should either be called with delete_resource_forks = TRUE always, or called twice,
+  first with FALSE and then with TRUE to make sure that no errors pop up due to resource forks being
+  deleted on macOS and then being re-created on the fly by the OS.
+*/
+static FileProgressStatus
+recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath,
+                 const gboolean delete_resource_forks)
+{
+    struct vfs_dirent *next;
+    DIR *reading;
+    FileProgressStatus return_status = FILE_CONT;
+
+    reading = mc_opendir (vpath);
+    if (reading == NULL)
+        return FILE_RETRY;
+
+    while ((next = mc_readdir (reading)) && return_status != FILE_ABORT)
+    {
+        vfs_path_t *tmp_vpath;
+        struct stat buf;
+
+        if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
+            continue;
+
+        tmp_vpath = vfs_path_append_new (vpath, next->d_name, (char *) NULL);
+        if (mc_lstat (tmp_vpath, &buf) != 0)
+        {
+            mc_closedir (reading);
+            vfs_path_free (tmp_vpath, TRUE);
+            return FILE_RETRY;
+        }
+        if (S_ISDIR (buf.st_mode))
+            return_status = recursive_erase (ctx, tmp_vpath, delete_resource_forks);
+        else if (delete_resource_forks || !FILE_IS_RESOURCE_FORK (next->d_name))
+            return_status = erase_file (ctx, tmp_vpath);
+        else
+            return_status = FILE_SKIP;
+
+        vfs_path_free (tmp_vpath, TRUE);
+    }
+
+    mc_closedir (reading);
+
+    if (return_status == FILE_ABORT)
+        return FILE_ABORT;
+
+    file_progress_show_deleting (ctx, vpath, NULL);
+    file_progress_show_count (ctx);
+    if (file_progress_check_buttons (ctx) == FILE_ABORT)
+        return FILE_ABORT;
+
+    mc_refresh ();
+
+    return erase_dir_iff_empty (ctx, vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3390,7 +3400,11 @@ erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
         // not empty
         error = query_recursive (ctx, vfs_path_as_str (vpath));
         if (error == FILE_CONT)
-            error = recursive_erase (ctx, vpath);
+        {
+            error = recursive_erase (ctx, vpath, FALSE);
+            if (error != FILE_ABORT)
+                error = recursive_erase (ctx, vpath, TRUE);
+        }
         return error;
     }
 
