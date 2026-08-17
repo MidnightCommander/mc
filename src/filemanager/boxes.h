@@ -18,6 +18,7 @@
 
 /*** declarations of public functions ************************************************************/
 
+void mc_skin_reload (void);
 void about_box (void);
 void configure_box (void);
 void appearance_box (void);
