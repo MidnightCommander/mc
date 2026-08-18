@@ -375,5 +375,8 @@ include meta-ii.syntax
 file ..\*\\.(?i:tmo?)$ TREE-META\sMetasyntax
 include tree-meta.syntax
 
+file ..\*\\.qml$ QML\sFile
+include qml.syntax
+
 file .\* unknown
 include unknown.syntax

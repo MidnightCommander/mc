@@ -82,6 +82,7 @@ SYNTAXFILES =			\
 	protobuf.syntax		\
 	puppet.syntax		\
 	python.syntax		\
+	qml.syntax		\
 	r.syntax		\
 	ruby.syntax		\
 	rust.syntax		\
