@@ -729,6 +729,7 @@ tests/src/Makefile
 tests/src/filemanager/Makefile
 tests/src/editor/Makefile
 tests/src/editor/edit_complete_word_cmd_test_data.txt
+tests/src/viewer/Makefile
 tests/src/vfs/Makefile
 tests/src/vfs/extfs/Makefile
 tests/src/vfs/extfs/helpers-list/Makefile

@@ -67,6 +67,7 @@
 #include "src/keymap.h"
 
 #include "internal.h"
+#include "syntax.h"
 
 /*** global variables ****************************************************************************/
 
@@ -156,7 +157,14 @@ mcview_hook (void *v)
     if (fe == NULL)
         return;
 
-    mcview_done (view);
+    // save global flags — quick view panel refresh must not clobber
+    // flags set by the standalone viewer (e.g. syntax mode toggled via F3)
+    {
+        mcview_mode_flags_t saved_global = mcview_global_flags;
+
+        mcview_done (view);
+        mcview_global_flags = saved_global;
+    }
     mcview_init (view);
     mcview_load (view, 0, fe->fname->str, 0, 0, 0);
     mcview_display (view);
@@ -465,6 +473,31 @@ mcview_execute_cmd (WView *view, long command)
         break;
     case CK_NroffMode:
         mcview_toggle_nroff_mode (view);
+        break;
+    case CK_SyntaxMode:
+        // warn if trying to enable syntax but highlighter is missing
+        if (!view->mode_flags.syntax && !mcview_syntax_command_available ())
+        {
+            message (D_ERROR, _ ("Syntax Highlighting"), "%s",
+                     _ ("No syntax highlighting tool found.\n"
+                        "Please install one of:\n"
+                        "  bat, chroma, highlight,\n"
+                        "  pygmentize, source-highlight\n"
+                        "or press Shift-S to set a custom command."));
+            break;
+        }
+        mcview_toggle_syntax_mode (view);
+        break;
+    case CK_SyntaxOptions:
+        if (mcview_syntax_options_dialog ())
+        {
+            // backend changed — re-toggle to reload with new command
+            if (view->mode_flags.syntax)
+            {
+                view->mode_flags.syntax = FALSE;
+                mcview_toggle_syntax_mode (view);
+            }
+        }
         break;
     case CK_Home:
         mcview_moveto_bol (view);
