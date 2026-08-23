@@ -86,15 +86,6 @@ mc_fhl_t *mc_filehighlight = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-typedef enum
-{
-    FATTR_NORMAL = 0,
-    FATTR_CURRENT,
-    FATTR_MARKED,
-    FATTR_MARKED_CURRENT,
-    FATTR_STATUS
-} file_attr_t;
-
 #define DEFAULT_USER_FORMAT "half type name | size | perm"
 
 /* select/unselect dialog results */
@@ -107,6 +98,15 @@ typedef enum
 #define MOUSE_AFTER_LAST_FILE (-3)
 
 /*** file scope type declarations ****************************************************************/
+
+typedef enum
+{
+    FATTR_NORMAL = 0,
+    FATTR_CURRENT,
+    FATTR_MARKED,
+    FATTR_MARKED_CURRENT,
+    FATTR_STATUS
+} file_attr_t;
 
 typedef enum
 {
