@@ -331,10 +331,6 @@ main (int argc, char *argv[])
         vfs_path_free (vpath, TRUE);
     }
 
-    /* NOTE: This has to be called before tty_init or whatever routine
-       calls any define_sequence */
-    init_key ();
-
     // Must be done before installing the SIGCHLD handler [[FIXME]]
     handle_console (CONSOLE_INIT);
 
@@ -483,8 +479,6 @@ main (int argc, char *argv[])
     g_free (last_wd_str);
 
     mc_shell_deinit ();
-
-    done_key ();
 
 #ifdef USE_INTERNAL_EDIT
     if (macros_list != NULL)
