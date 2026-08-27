@@ -347,6 +347,34 @@ mc_skin_color_cache_init (void)
     for (size_t i = 0; i < G_N_ELEMENTS (color_keywords); i++)
         tty_color_role_to_pair[color_keywords[i].role - TTY_COLOR_MAP_OFFSET] =
             mc_skin_color_get (color_keywords[i].group, color_keywords[i].key);
+
+    /* Ticket #3160: dselnormal/dselfocus are new colors for listbox selected
+     * entry. Old skins don't define them, so they fall back to dialog _default_
+     * which makes the selection invisible. Fall back to dfocus/dhotfocus
+     * (the old behavior) instead. */
+    {
+        int sel_normal =
+            tty_color_role_to_pair[DIALOG_SELECTED_NORMAL_COLOR - TTY_COLOR_MAP_OFFSET];
+        int sel_focus = tty_color_role_to_pair[DIALOG_SELECTED_FOCUS_COLOR - TTY_COLOR_MAP_OFFSET];
+        int dlg_default = tty_color_role_to_pair[DIALOG_NORMAL_COLOR - TTY_COLOR_MAP_OFFSET];
+
+        if (sel_normal == dlg_default)
+        {
+            int dlg_focus = tty_color_role_to_pair[DIALOG_FOCUS_COLOR - TTY_COLOR_MAP_OFFSET];
+            if (dlg_focus != dlg_default)
+                tty_color_role_to_pair[DIALOG_SELECTED_NORMAL_COLOR - TTY_COLOR_MAP_OFFSET] =
+                    dlg_focus;
+        }
+
+        if (sel_focus == dlg_default)
+        {
+            int dlg_hot_focus =
+                tty_color_role_to_pair[DIALOG_HOT_FOCUS_COLOR - TTY_COLOR_MAP_OFFSET];
+            if (dlg_hot_focus != dlg_default)
+                tty_color_role_to_pair[DIALOG_SELECTED_FOCUS_COLOR - TTY_COLOR_MAP_OFFSET] =
+                    dlg_hot_focus;
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
