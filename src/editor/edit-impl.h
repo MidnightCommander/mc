@@ -152,7 +152,6 @@ void edit_push_undo_action (WEdit *edit, long c);
 void edit_push_redo_action (WEdit *edit, long c);
 void edit_push_key_press (WEdit *edit);
 void edit_insert_ahead (WEdit *edit, int c);
-off_t edit_write_stream (WEdit *edit, FILE *f);
 char *edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *filename_vpath);
 gboolean edit_save_confirm_cmd (WEdit *edit);
 gboolean edit_save_as_cmd (WEdit *edit);
