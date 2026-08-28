@@ -538,16 +538,11 @@ tty_draw_vline (int y, int x, mc_tty_char_t ch, int len)
     if ((mc_global.utf8_display && ch == 0x2502) || ch == MC_ACS_VLINE)
         SLsmg_draw_vline (len);
     else
-    {
-        int pos = 0;
-
-        while (len-- != 0)
+        for (int pos = 0; pos < len; pos++)
         {
             SLsmg_gotorc (y + pos, x);
             tty_print_char (ch);
-            pos++;
         }
-    }
 
     SLsmg_gotorc (y1, x);
 }
