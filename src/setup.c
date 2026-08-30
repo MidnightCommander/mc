@@ -1020,10 +1020,12 @@ save_setup (gboolean save_options, gboolean save_panel_options)
                               spell_language);
 #endif
 
-        mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "clipboard_store",
-                              clipboard_store_path);
-        mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "clipboard_paste",
-                              clipboard_paste_path);
+        if (clipboard_store_path[0] != '\0')
+            mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "clipboard_store",
+                                  clipboard_store_path);
+        if (clipboard_paste_path[0] != '\0')
+            mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "clipboard_paste",
+                                  clipboard_paste_path);
 
         tmp_profile = mc_config_get_full_path (MC_CONFIG_FILE);
         ret = mc_config_save_to_file (mc_global.main_config, tmp_profile, NULL);
