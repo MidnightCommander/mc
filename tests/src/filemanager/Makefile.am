@@ -21,7 +21,8 @@ TESTS = \
 	exec_get_export_variables_ext \
 	ext__exec_make_shell_string \
 	filegui_is_wildcarded \
-	get_random_hint
+	get_random_hint \
+	has_unquoted_metacharacters
 
 check_PROGRAMS = $(TESTS)
 
@@ -42,3 +43,6 @@ get_random_hint_SOURCES = \
 
 filegui_is_wildcarded_SOURCES = \
 	filegui_is_wildcarded.c
+
+has_unquoted_metacharacters_SOURCES = \
+	has_unquoted_metacharacters.c

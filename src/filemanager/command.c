@@ -10,6 +10,7 @@
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
    Andrew Borodin <aborodin@vmail.ru>, 2011-2022
+   Marek Libra <marek.libra@gmail.com>, 2026
 
    This file is part of the Midnight Commander.
 
@@ -65,6 +66,10 @@ WInput *cmdline;
 
 /*** forward declarations (file scope functions) *************************************************/
 
+#ifdef HAVE_TESTS
+MC_TESTABLE gboolean command_has_unquoted_metacharacters (const char *cmd);
+#endif
+
 /*** file scope variables ************************************************************************/
 
 /* Color styles command line */
@@ -77,6 +82,86 @@ static const input_colors_t command_colors = {
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Detect shell syntax that the internal cd handler cannot process.
+ *
+ * Returns TRUE when any of the following appears outside of single quotes
+ * and backslash escaping:
+ *   - Command separators/operators: ; | &
+ *   - Command substitution: $( or ` (including inside double quotes,
+ *     where the shell still expands them)
+ *
+ * Note: plain parameter expansion ($VAR, ${VAR}) is intentionally excluded
+ * because the internal cd handler expands environment variables itself.
+ *
+ * Motivation: the internal cd handler cannot expand command substitutions
+ * nor execute compound commands. When any of these constructs are present,
+ * the entire command line must be passed to the shell.
+ *
+ * Only single quotes and backslash fully suppress detection. Double quotes
+ * suppress ; | & but NOT $( and ` because the shell expands command
+ * substitution inside double quotes.
+ *
+ * Parsing strategy: forward scan tracking quote state.
+ * We treat $( and ` as immediate indicators rather than parsing their
+ * contents, because internal cd cannot handle them regardless
+ * of what is inside.
+ */
+
+MC_TESTABLE gboolean
+command_has_unquoted_metacharacters (const char *cmd)
+{
+    gboolean in_single_quote = FALSE;
+    gboolean in_double_quote = FALSE;
+
+    for (const char *p = cmd; *p != '\0'; p++)
+    {
+        if (in_single_quote)
+        {
+            if (*p == '\'')
+                in_single_quote = FALSE;
+            continue;
+        }
+
+        if (*p == '\\' && p[1] != '\0')
+        {
+            p++;
+            continue;
+        }
+
+        if (*p == '`')
+            return TRUE;
+
+        if (*p == '$' && p[1] == '(')
+            return TRUE;
+
+        if (in_double_quote)
+        {
+            if (*p == '"')
+                in_double_quote = FALSE;
+            continue;
+        }
+
+        if (*p == '\'')
+        {
+            in_single_quote = TRUE;
+            continue;
+        }
+
+        if (*p == '"')
+        {
+            in_double_quote = TRUE;
+            continue;
+        }
+
+        if (*p == ';' || *p == '|' || *p == '&')
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /** Handle Enter on the command line
@@ -102,7 +187,8 @@ enter (WInput *lc_cmdline)
     if (*cmd == '\0')
         return MSG_HANDLED;
 
-    if (strncmp (cmd, "cd", 2) == 0 && (cmd[2] == '\0' || whitespace (cmd[2])))
+    if (strncmp (cmd, "cd", 2) == 0 && (cmd[2] == '\0' || whitespace (cmd[2]))
+        && !command_has_unquoted_metacharacters (cmd))
     {
         cd_to (cmd + 2);
         input_clean (lc_cmdline);
