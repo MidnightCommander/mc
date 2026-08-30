@@ -34,6 +34,235 @@ get_ooffice_executable() {
     fi
 }
 
+format_markdown_table() {
+    table_file=$1
+    wrap_w=28
+
+    awk -v W="$wrap_w" '
+    function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
+    function rep(ch, n,    i, out) { out=""; for (i=0; i<n; i++) out=out ch; return out }
+    function boldify(s,    out,i,ch) {
+        out=""
+        for (i=1; i<=length(s); i++) {
+            ch=substr(s,i,1)
+            if (ch == " ")
+                out = out ch
+            else
+                out = out ch "\b" ch
+        }
+        return out
+    }
+    function push_seg(r, c, s,    k) {
+        k = ++cnt[r, c]
+        seg[r, c, k] = s
+        if (length(s) > colw[c])
+            colw[c] = length(s)
+    }
+    function add_wrapped_text(r, c, txt, w,    s, n, i, word, cur, chunk) {
+        s = trim(txt)
+        if (s == "") {
+            push_seg(r, c, "")
+            return
+        }
+
+        n = split(s, a, /[[:space:]]+/)
+        cur = ""
+        for (i = 1; i <= n; i++) {
+            word = a[i]
+            if (word == "")
+                continue
+
+            while (length(word) > w) {
+                if (cur != "") {
+                    push_seg(r, c, cur)
+                    cur = ""
+                }
+                chunk = substr(word, 1, w)
+                push_seg(r, c, chunk)
+                word = substr(word, w + 1)
+            }
+
+            if (cur == "")
+                cur = word
+            else if (length(cur) + 1 + length(word) <= w)
+                cur = cur " " word
+            else {
+                push_seg(r, c, cur)
+                cur = word
+            }
+        }
+
+        if (cur != "")
+            push_seg(r, c, cur)
+    }
+    function is_sep_row(fields, nf,    i, t) {
+        if (nf < 2)
+            return 0
+        for (i = 1; i <= nf; i++) {
+            t = trim(fields[i])
+            if (t !~ /^:?-+:?$/)
+                return 0
+        }
+        return 1
+    }
+    {
+        line = $0
+        sub(/^[[:space:]]*\|/, "", line)
+        sub(/\|[[:space:]]*$/, "", line)
+
+        nf = split(line, f, /\|/)
+        if (is_sep_row(f, nf))
+            next
+
+        r++
+        if (nf > maxc)
+            maxc = nf
+
+        for (c = 1; c <= nf; c++)
+            raw[r, c] = trim(f[c])
+    }
+    END {
+        if (r == 0)
+            exit
+
+        for (row = 1; row <= r; row++) {
+            row_len = 0
+            wrap_row[row] = 0
+            for (c = 1; c <= maxc; c++) {
+                cell_len = length(raw[row, c])
+                row_len += cell_len
+                if (cell_len > W)
+                    wrap_row[row] = 1
+            }
+            row_len += (maxc > 0 ? (maxc - 1) * 3 : 0)
+            if (row_len > 75)
+                wrap_row[row] = 1
+        }
+
+        for (row = 1; row <= r; row++) {
+            for (c = 1; c <= maxc; c++) {
+                if (wrap_row[row])
+                    add_wrapped_text(row, c, raw[row, c], W)
+                else
+                    push_seg(row, c, raw[row, c])
+            }
+        }
+
+        for (row = 1; row <= r; row++) {
+            rowh = 1
+            for (c = 1; c <= maxc; c++) {
+                if (cnt[row, c] > rowh)
+                    rowh = cnt[row, c]
+            }
+
+            for (k = 1; k <= rowh; k++) {
+                out = ""
+                for (c = 1; c <= maxc; c++) {
+                    cell = seg[row, c, k]
+                    if (cell == "")
+                        cell = ""
+                    pad = colw[c] - length(cell)
+                    if (row == 1)
+                        cell = boldify(cell)
+                    out = out (c == 1 ? "" : " │ ") cell rep(" ", pad)
+                }
+                print out
+            }
+
+            sep = ""
+            for (c = 1; c <= maxc; c++)
+                sep = sep (c == 1 ? "" : "─┼─") rep("─", colw[c])
+            print sep
+        }
+    }
+    ' "$table_file"
+}
+
+render_markdown_two_colors() {
+    awk '
+    function is_table_sep(s) {
+        return (s ~ /^[[:space:]]*\|?[[:space:]]*:?-+:?[[:space:]]*(\|[[:space:]]*:?-+:?[[:space:]]*)+\|?[[:space:]]*$/)
+    }
+    function boldify(s,    out,i,c) {
+        out=""
+        for (i=1; i<=length(s); i++) {
+            c=substr(s,i,1)
+            if (c == " ")
+                out = out c
+            else
+                out = out c "\b" c
+        }
+        return out
+    }
+    function underline_code(s,    out,i,c,in_code) {
+        out=""
+        in_code=0
+        for (i=1; i<=length(s); i++) {
+            c=substr(s,i,1)
+            if (c == "`") {
+                in_code = !in_code
+                continue
+            }
+            if (in_code && c != " ")
+                out = out "_\b" c
+            else
+                out = out c
+        }
+        return out
+    }
+    {
+        lines[++n] = $0
+    }
+    END {
+        for (i=1; i<=n; i++) {
+            if (index(lines[i], "|") > 0 && i < n && is_table_sep(lines[i+1])) {
+                print "__MC_TABLE_BEGIN__"
+                print lines[i]
+                i++
+                print lines[i]
+                while (i < n && lines[i+1] ~ /\|/ && lines[i+1] !~ /^[[:space:]]*$/) {
+                    i++
+                    print lines[i]
+                }
+                print "__MC_TABLE_END__"
+                continue
+            }
+
+            line = lines[i]
+            if (match(line, /^#+[ \t]*/)) {
+                rest = substr(line, RLENGTH + 1)
+                print boldify(rest)
+            } else {
+                print underline_code(line)
+            }
+        }
+    }
+    ' "$MC_EXT_FILENAME" | {
+        in_table=0
+        table_tmp=""
+        while IFS= read -r line; do
+            if [ "$line" = "__MC_TABLE_BEGIN__" ]; then
+                in_table=1
+                table_tmp=$(mktemp /tmp/mc-md-table.XXXXXX) || exit 1
+                continue
+            fi
+            if [ "$line" = "__MC_TABLE_END__" ]; then
+                in_table=0
+                format_markdown_table "$table_tmp"
+                rm -f "$table_tmp"
+                table_tmp=""
+                continue
+            fi
+
+            if [ "$in_table" -eq 1 ]; then
+                printf '%s\n' "$line" >> "$table_tmp"
+            else
+                printf '%s\n' "$line"
+            fi
+        done
+    }
+}
+
 do_view_action() {
     filetype=$1
 
@@ -89,6 +318,9 @@ do_view_action() {
         ;;
     ebook)
         einfo -v "${MC_EXT_FILENAME}"
+        ;;
+    markdown)
+        render_markdown_two_colors
         ;;
     *)
         ;;
