@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <locale.h>
 #include <pwd.h>  // for username in xterm title
 #include <stdio.h>
@@ -40,6 +41,9 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <unistd.h>  // getsid()
+#ifdef __linux__
+#include <sys/inotify.h>  // skin hot-reload watch
+#endif
 
 #include "lib/global.h"
 
@@ -60,6 +64,7 @@
 #include "filemanager/ext.h"      // flush_extension_file()
 #include "filemanager/command.h"  // cmdline
 #include "filemanager/panel.h"    // panalized_panel
+#include "filemanager/boxes.h"    // mc_skin_reload()
 
 #ifdef USE_INTERNAL_EDIT
 #include "editor/edit.h"  // edit_arg_free()
@@ -90,8 +95,80 @@
 
 /*** file scope variables ************************************************************************/
 
+#ifdef __linux__
+// Hot-reload: watch the active skin file and re-apply it on change.
+static int skin_watch_fd = -1;
+#endif
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef __linux__
+
+/* Arm the watch on whatever skin file is currently loaded. Only called once,
+   at startup: our write pattern (in-place truncate+write, not rename) never
+   invalidates the watch descriptor, so there is nothing to re-arm on reload.
+   (Calling inotify_rm_watch() from the event callback would itself raise
+   IN_IGNORED on the same fd, which the next select() sees immediately --
+   an infinite self-triggering loop.) */
+static void
+skin_watch_arm (void)
+{
+    if (mc_skin__default.config == NULL || mc_skin__default.config->ini_path == NULL)
+        return;
+
+    inotify_add_watch (skin_watch_fd, mc_skin__default.config->ini_path,
+                       IN_MODIFY | IN_CLOSE_WRITE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+skin_watch_callback (int fd, void *info)
+{
+    char buf[4096] __attribute__ ((aligned (__alignof__ (struct inotify_event))));
+
+    (void) info;
+
+    // Drain all pending events before acting; a plain "w" rewrite of the skin
+    // file typically raises both IN_MODIFY and IN_CLOSE_WRITE for one save.
+    while (read (fd, buf, sizeof (buf)) > 0)
+        ;
+
+    mc_skin_reload ();
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+skin_watch_init (void)
+{
+    skin_watch_fd = inotify_init1 (IN_NONBLOCK | IN_CLOEXEC);
+    if (skin_watch_fd < 0)
+        return;
+
+    skin_watch_arm ();
+    add_select_channel (skin_watch_fd, skin_watch_callback, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+skin_watch_deinit (void)
+{
+    if (skin_watch_fd < 0)
+        return;
+
+    delete_select_channel (skin_watch_fd);
+    close (skin_watch_fd);
+    skin_watch_fd = -1;
+}
+
+#endif  // __linux__
+
 /* --------------------------------------------------------------------------------------------- */
 
 /** POSIX version.  The only version we support.  */
@@ -372,6 +449,10 @@ main (int argc, char *argv[])
 
     mc_error_message (&mcerror, NULL);
 
+#ifdef __linux__
+    skin_watch_init ();
+#endif
+
 #ifdef ENABLE_SUBSHELL
     // Done here to ensure that the subshell doesn't
     // inherit the file descriptors opened below, etc
@@ -449,6 +530,10 @@ main (int argc, char *argv[])
     vfs_shut ();
 
     flush_extension_file ();  // does only free memory
+
+#ifdef __linux__
+    skin_watch_deinit ();
+#endif
 
     mc_skin_deinit ();
     tty_colors_done ();
