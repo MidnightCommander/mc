@@ -25,6 +25,16 @@
 
 /*** enums ***************************************************************************************/
 
+#ifdef HAVE_TREE_SITTER
+/* Syntax highlighting mode for Ctrl+S cycling */
+typedef enum
+{
+    SYNTAX_HIGHLIGHT_TS,      /* tree-sitter (default when available) */
+    SYNTAX_HIGHLIGHT_LEGACY,  /* legacy regex-based */
+    SYNTAX_HIGHLIGHT_NONE     /* highlighting disabled */
+} syntax_highlight_mode_t;
+#endif
+
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Editor widget */
@@ -51,6 +61,11 @@ typedef struct
     gboolean confirm_save;  // queries on a save
     gboolean save_position;
     gboolean syntax_highlighting;
+#ifdef HAVE_TREE_SITTER
+    gboolean use_tree_sitter;  /* persistent: prefer TS highlighting */
+    syntax_highlight_mode_t syntax_highlight_mode;
+    gboolean ts_available;  /* runtime: FALSE if TS init failed for current file */
+#endif
     gboolean group_undo;
     char *backup_ext;
     char *filesize_threshold;

@@ -154,6 +154,10 @@ create_command_menu (void)
         g_list_prepend (entries, menu_entry_new (_ ("Go to matching &bracket"), CK_MatchBracket));
     entries = g_list_prepend (entries,
                               menu_entry_new (_ ("Toggle s&yntax highlighting"), CK_SyntaxOnOff));
+#ifdef HAVE_TREE_SITTER
+    entries = g_list_prepend (entries,
+                              menu_entry_new (_ ("Toggle &TS/legacy syntax"), CK_SyntaxToggleTS));
+#endif
     entries = g_list_prepend (entries, menu_entry_new (_ ("Togg&le right margin"), CK_ShowMargin));
     entries = g_list_prepend (entries, menu_separator_new ());
     entries = g_list_prepend (entries, menu_entry_new (_ ("&Find declaration"), CK_Find));
