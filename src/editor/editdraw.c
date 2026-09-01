@@ -494,7 +494,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
     line_s line[MAX_LINE_LEN];
     line_s *p = line;
     off_t q;
-    int col, start_col_real;
+    long col, start_col_real;
     int abn_style;
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
@@ -521,7 +521,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
     }
 
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
-    col = (int) edit_move_forward3 (edit, b, 0, q);
+    col = (long) edit_move_forward3 (edit, b, 0, q);
     start_col_real = col + edit->start_col;
 
     if (edit_options.line_state)
