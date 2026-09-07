@@ -1454,16 +1454,27 @@ edit_auto_indent (WEdit *edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Insert a line break at the cursor.
+ */
+
+static inline void
+edit_insert_line_break (WEdit *edit)
+{
+    edit_insert (edit, '\n');
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 edit_double_newline (WEdit *edit)
 {
-    edit_insert (edit, '\n');
+    edit_insert_line_break (edit);
     if (edit_buffer_get_current_byte (&edit->buffer) == '\n'
         || edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - 2) == '\n')
         return;
     edit->force |= REDRAW_PAGE;
-    edit_insert (edit, '\n');
+    edit_insert_line_break (edit);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1530,14 +1541,14 @@ check_and_wrap_line (WEdit *edit)
         c = edit_buffer_get_byte (&edit->buffer, curs);
         if (c == '\n' || curs <= 0)
         {
-            edit_insert (edit, '\n');
+            edit_insert_line_break (edit);
             return;
         }
         if (whitespace (c))
         {
             off_t current = edit->buffer.curs1;
             edit_cursor_move (edit, curs - edit->buffer.curs1 + 1);
-            edit_insert (edit, '\n');
+            edit_insert_line_break (edit);
             edit_cursor_move (edit, current - edit->buffer.curs1 + 1);
             return;
         }
@@ -3652,13 +3663,13 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         }
         else
         {
-            edit_insert (edit, '\n');
+            edit_insert_line_break (edit);
             if (edit_options.return_does_auto_indent && !bracketed_pasting_in_progress)
                 edit_auto_indent (edit);
         }
         break;
     case CK_Return:
-        edit_insert (edit, '\n');
+        edit_insert_line_break (edit);
         break;
 
     case CK_MarkColumnPageUp:
