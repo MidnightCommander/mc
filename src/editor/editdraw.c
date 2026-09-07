@@ -143,21 +143,60 @@ format_character_code (WEdit *edit)
 #undef CHAR_CODE_BUF_SIZE
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the cached line break type of the buffer content.
+ * The result is recomputed only when line breaks have changed.
+ */
+
+static inline LineBreaks
+edit_get_detected_line_breaks (WEdit *edit)
+{
+    edit_buffer_refresh_line_breaks (&edit->buffer);
+    return edit_buffer_get_line_breaks (&edit->buffer);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the status line character describing the line break type
+ * of the buffer content: U - Unix ("\n"), W - Windows ("\r\n"),
+ * M - Macintosh ("\r"), - - mixture of line breaks or no line breaks.
+ */
+
+static inline char
+edit_line_breaks_status_char (WEdit *edit)
+{
+    switch (edit_get_detected_line_breaks (edit))
+    {
+    case LB_WIN:
+        return 'W';
+    case LB_MAC:
+        return 'M';
+    case LB_UNIX:
+        return 'U';
+    case LB_ASIS:
+    default:
+        return '-';
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 status_string (WEdit *edit, char *s, int w)
 {
     char *character_code;
+    const char lb = edit_line_breaks_status_char (edit);
 
     character_code = format_character_code (edit);
 
     // The field lengths just prevent the status line from shortening too much
     if (edit_options.simple_statusbar)
-        g_snprintf (s, w, "%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s] %s",
+        g_snprintf (s, w, "%c%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s] %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
                     edit->overwrite == 0 ? '-' : 'O',                                         //
+                    lb,                                                                       //
                     edit->curs_col + edit->over_col,                                          //
                     edit->buffer.curs_line + 1,                                               //
                     edit->buffer.lines + 1,                                                   //
@@ -167,11 +206,12 @@ status_string (WEdit *edit, char *s, int w)
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
                                                    : "");
     else
-        g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s",
+        g_snprintf (s, w, "[%c%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
                     edit->overwrite == 0 ? '-' : 'O',                                         //
+                    lb,                                                                       //
                     edit->curs_col + edit->over_col,                                          //
                     edit->start_line + 1,                                                     //
                     edit->curs_row,                                                           //
@@ -288,13 +328,13 @@ edit_status_window (WEdit *edit)
     tty_getyx (&y, &x);
     x -= w->rect.x;
     x += 4;
-    if (x + 6 <= cols - 2 - 6)
+    if (x + 7 <= cols - 2 - 6)
     {
         edit_move (x, 0);
-        tty_printf ("[%c%c%c%c]",
+        tty_printf ("[%c%c%c%c%c]",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
                     edit->modified != 0 ? 'M' : '-', macro_index < 0 ? '-' : 'R',
-                    edit->overwrite == 0 ? '-' : 'O');
+                    edit->overwrite == 0 ? '-' : 'O', edit_line_breaks_status_char (edit));
     }
 
     if (cols > 30)
@@ -497,10 +537,15 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
     int col, start_col_real;
     int abn_style;
     int book_mark = 0;
+    gboolean crlf_hidden;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
     if (row > w->rect.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen != 0 ? 0 : 1))
         return;
+
+    // in a pure Windows file the "\r" of a "\r\n" line break is a line break
+    // (hidden); in any other file it is shown as "^M"
+    crlf_hidden = (edit_buffer_get_line_breaks (&edit->buffer) == LB_WIN);
 
     if (book_mark_query_color (edit, edit->start_line + row, EDITOR_BOOKMARK_COLOR))
         book_mark = EDITOR_BOOKMARK_COLOR;
@@ -554,14 +599,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
             off_t tws = 0;
 
             if (edit_options.visible_tws && tty_use_colors ())
-                for (tws = edit_buffer_get_eol (&edit->buffer, b); tws > b; tws--)
-                {
-                    unsigned int c;
-
-                    c = edit_buffer_get_byte (&edit->buffer, tws - 1);
-                    if (!whitespace (c))
-                        break;
-                }
+                tws = edit_buffer_trailing_ws_start (&edit->buffer, b);
 
             while (col <= end_col - edit->start_col)
             {
@@ -602,6 +640,13 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     c = edit_buffer_get_utf (&edit->buffer, q, &char_length);
                 else
                     c = edit_buffer_get_byte (&edit->buffer, q);
+
+                // the "\r" of a hidden "\r\n" line break is not shown
+                if (c == '\r' && crlf_hidden && edit_buffer_is_crlf (&edit->buffer, q))
+                {
+                    q++;
+                    continue;
+                }
 
                 // we don't use bg for mc - fg contains both
                 if (book_mark != 0)
@@ -816,6 +861,10 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
     int force = edit->force;
     int y1, x1, y2, x2;
     int last_line, last_column;
+
+    // make sure the cached line break type (used to decide whether a "\r" is
+    // shown as "^M" or hidden) is up to date before drawing
+    edit_buffer_refresh_line_breaks (&edit->buffer);
 
     // draw only visible region
 

@@ -20,6 +20,9 @@ typedef struct edit_buffer_struct
     off_t size;      // file size
     long lines;      // total lines in the file
     long curs_line;  // line number of the cursor.
+
+    LineBreaks lb_detected;  // cached detect_line_breaks() result
+    gboolean lb_dirty;       // line breaks have changed, need detect_line_breaks()
 } edit_buffer_t;
 
 typedef struct edit_buffer_read_file_status_msg_struct
@@ -65,6 +68,8 @@ int edit_buffer_calc_percent (const edit_buffer_t *buf, off_t offset);
 
 off_t edit_buffer_trailing_ws_start (const edit_buffer_t *buf, off_t bol);
 LineBreaks edit_buffer_detect_line_breaks (const edit_buffer_t *buf);
+void edit_buffer_refresh_line_breaks (edit_buffer_t *buf);
+LineBreaks edit_buffer_get_line_breaks (const edit_buffer_t *buf);
 
 /*** inline functions ****************************************************************************/
 

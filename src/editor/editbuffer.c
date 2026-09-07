@@ -154,6 +154,9 @@ edit_buffer_init (edit_buffer_t *buf, off_t size)
 
     buf->size = size;
     buf->lines = 0;
+
+    buf->lb_detected = LB_ASIS;
+    buf->lb_dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -506,6 +509,9 @@ edit_buffer_insert (edit_buffer_t *buf, int c)
 
     // update file length
     buf->size++;
+
+    if (c == '\r' || c == '\n')
+        buf->lb_dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -538,6 +544,9 @@ edit_buffer_insert_ahead (edit_buffer_t *buf, int c)
 
     // update file length
     buf->size++;
+
+    if (c == '\r' || c == '\n')
+        buf->lb_dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -576,6 +585,9 @@ edit_buffer_delete (edit_buffer_t *buf)
 
     // update file length
     buf->size--;
+
+    if (c == '\r' || c == '\n')
+        buf->lb_dirty = TRUE;
 
     return c;
 }
@@ -616,6 +628,9 @@ edit_buffer_backspace (edit_buffer_t *buf)
 
     // update file length
     buf->size--;
+
+    if (c == '\r' || c == '\n')
+        buf->lb_dirty = TRUE;
 
     return c;
 }
@@ -789,6 +804,9 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
             }
         }
     }
+
+    // the loaded content may contain line breaks
+    buf->lb_dirty = TRUE;
 
     return ret;
 }
@@ -979,6 +997,41 @@ edit_buffer_detect_line_breaks (const edit_buffer_t *buf)
     }
 
     return LB_UNIX;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Recompute the cached line break type if the line breaks have changed.
+ * Cheap (O(1)) unless a line break was inserted or deleted since the last
+ * recomputation.
+ *
+ * @param buf pointer to editor buffer
+ */
+
+void
+edit_buffer_refresh_line_breaks (edit_buffer_t *buf)
+{
+    if (buf->lb_dirty)
+    {
+        buf->lb_detected = edit_buffer_detect_line_breaks (buf);
+        buf->lb_dirty = FALSE;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the cached line break type of the buffer content.
+ * Call edit_buffer_refresh_line_breaks() first if the result must be current.
+ *
+ * @param buf pointer to editor buffer
+ *
+ * @return cached detect_line_breaks() result
+ */
+
+LineBreaks
+edit_buffer_get_line_breaks (const edit_buffer_t *buf)
+{
+    return buf->lb_detected;
 }
 
 /* --------------------------------------------------------------------------------------------- */
