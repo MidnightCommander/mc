@@ -1,0 +1,218 @@
+# OpenSSH client/server config syntax highlighting
+# Reference: ssh_config(5), sshd_config(5)
+#
+# Used for ssh_config, sshd_config and dotted backups (e.g. sshd_config.bak).
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+context default
+
+    keyword = white
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+
+    keyword whole \{0123456789\}\[0123456789\] brightgreen
+
+# Structural keywords
+    keyword whole Match yellow
+    keyword whole Host yellow
+
+# Keywords from ssh_config(5) and sshd_config(5)
+    keyword whole AcceptEnv brightcyan
+    keyword whole AddKeysToAgent brightcyan
+    keyword whole AddressFamily brightcyan
+    keyword whole AllowAgentForwarding brightcyan
+    keyword whole AllowGroups brightcyan
+    keyword whole AllowStreamLocalForwarding brightcyan
+    keyword whole AllowTcpForwarding brightcyan
+    keyword whole AllowUsers brightcyan
+    keyword whole AuthenticationMethods brightcyan
+    keyword whole AuthorizedKeysCommand brightcyan
+    keyword whole AuthorizedKeysCommandUser brightcyan
+    keyword whole AuthorizedKeysFile brightcyan
+    keyword whole AuthorizedPrincipalsCommand brightcyan
+    keyword whole AuthorizedPrincipalsCommandUser brightcyan
+    keyword whole AuthorizedPrincipalsFile brightcyan
+    keyword whole Banner brightcyan
+    keyword whole BatchMode brightcyan
+    keyword whole BindAddress brightcyan
+    keyword whole BindInterface brightcyan
+    keyword whole CASignatureAlgorithms brightcyan
+    keyword whole CanonicalDomains brightcyan
+    keyword whole CanonicalizeFallbackLocal brightcyan
+    keyword whole CanonicalizeHostname brightcyan
+    keyword whole CanonicalizeMaxDots brightcyan
+    keyword whole CanonicalizePermittedCNAMEs brightcyan
+    keyword whole CertificateFile brightcyan
+    keyword whole ChannelTimeout brightcyan
+    keyword whole CheckHostIP brightcyan
+    keyword whole ChrootDirectory brightcyan
+    keyword whole Ciphers brightcyan
+    keyword whole ClearAllForwardings brightcyan
+    keyword whole ClientAliveCountMax brightcyan
+    keyword whole ClientAliveInterval brightcyan
+    keyword whole Compression brightcyan
+    keyword whole ConnectTimeout brightcyan
+    keyword whole ConnectionAttempts brightcyan
+    keyword whole ControlMaster brightcyan
+    keyword whole ControlPath brightcyan
+    keyword whole ControlPersist brightcyan
+    keyword whole DenyGroups brightcyan
+    keyword whole DenyUsers brightcyan
+    keyword whole DisableForwarding brightcyan
+    keyword whole DynamicForward brightcyan
+    keyword whole EnableEscapeCommandline brightcyan
+    keyword whole EnableSSHKeysign brightcyan
+    keyword whole EnableStrictKex brightcyan
+    keyword whole EscapeChar brightcyan
+    keyword whole ExitOnForwardFailure brightcyan
+    keyword whole ExposeAuthInfo brightcyan
+    keyword whole FingerprintHash brightcyan
+    keyword whole ForceCommand brightcyan
+    keyword whole ForkAfterAuthentication brightcyan
+    keyword whole ForwardAgent brightcyan
+    keyword whole ForwardX11 brightcyan
+    keyword whole ForwardX11Timeout brightcyan
+    keyword whole ForwardX11Trusted brightcyan
+    keyword whole GSSAPIAuthentication brightcyan
+    keyword whole GSSAPICleanupCredentials brightcyan
+    keyword whole GSSAPIDelegateCredentials brightcyan
+    keyword whole GSSAPIStrictAcceptorCheck brightcyan
+    keyword whole GatewayPorts brightcyan
+    keyword whole GlobalKnownHostsFile brightcyan
+    keyword whole HashKnownHosts brightcyan
+    keyword whole HostCertificate brightcyan
+    keyword whole HostKey brightcyan
+    keyword whole HostKeyAgent brightcyan
+    keyword whole HostKeyAlgorithms brightcyan
+    keyword whole HostKeyAlias brightcyan
+    keyword whole HostbasedAcceptedAlgorithms brightcyan
+    keyword whole HostbasedAuthentication brightcyan
+    keyword whole HostbasedUsesNameFromPacketOnly brightcyan
+    keyword whole Hostname brightcyan
+    keyword whole IPQoS brightcyan
+    keyword whole IdentitiesOnly brightcyan
+    keyword whole IdentityAgent brightcyan
+    keyword whole IdentityFile brightcyan
+    keyword whole IgnoreRhosts brightcyan
+    keyword whole IgnoreUnknown brightcyan
+    keyword whole IgnoreUserKnownHosts brightcyan
+    keyword whole Include brightcyan
+    keyword whole KbdInteractiveAuthentication brightcyan
+    keyword whole KbdInteractiveDevices brightcyan
+    keyword whole KerberosAuthentication brightcyan
+    keyword whole KerberosGetAFSToken brightcyan
+    keyword whole KerberosOrLocalPasswd brightcyan
+    keyword whole KerberosTicketCleanup brightcyan
+    keyword whole KexAlgorithms brightcyan
+    keyword whole KnownHostsCommand brightcyan
+    keyword whole ListenAddress brightcyan
+    keyword whole LocalCommand brightcyan
+    keyword whole LocalForward brightcyan
+    keyword whole LogLevel brightcyan
+    keyword whole LogVerbose brightcyan
+    keyword whole LoginGraceTime brightcyan
+    keyword whole Macs brightcyan
+    keyword whole MaxAuthTries brightcyan
+    keyword whole MaxSessions brightcyan
+    keyword whole MaxStartups brightcyan
+    keyword whole ModuliFile brightcyan
+    keyword whole NoHostAuthenticationForLocalhost brightcyan
+    keyword whole NumberOfPasswordPrompts brightcyan
+    keyword whole PKCS11Provider brightcyan
+    keyword whole PasswordAuthentication brightcyan
+    keyword whole PerSourceMaxStartups brightcyan
+    keyword whole PerSourceNetBlockSize brightcyan
+    keyword whole PerSourcePenalties brightcyan
+    keyword whole PermitEmptyPasswords brightcyan
+    keyword whole PermitListen brightcyan
+    keyword whole PermitLocalCommand brightcyan
+    keyword whole PermitOpen brightcyan
+    keyword whole PermitRemoteOpen brightcyan
+    keyword whole PermitRootLogin brightcyan
+    keyword whole PermitTTY brightcyan
+    keyword whole PermitTunnel brightcyan
+    keyword whole PermitUserEnvironment brightcyan
+    keyword whole PermitUserRC brightcyan
+    keyword whole PidFile brightcyan
+    keyword whole Port brightcyan
+    keyword whole PreferredAuthentications brightcyan
+    keyword whole PrintLastLog brightcyan
+    keyword whole PrintMotd brightcyan
+    keyword whole ProxyCommand brightcyan
+    keyword whole ProxyJump brightcyan
+    keyword whole ProxyUseFdpass brightcyan
+    keyword whole PubkeyAcceptedAlgorithms brightcyan
+    keyword whole PubkeyAuthOptions brightcyan
+    keyword whole PubkeyAuthentication brightcyan
+    keyword whole RDomain brightcyan
+    keyword whole RekeyLimit brightcyan
+    keyword whole RemoteCommand brightcyan
+    keyword whole RemoteForward brightcyan
+    keyword whole RequestTTY brightcyan
+    keyword whole RequiredRSASize brightcyan
+    keyword whole RevokedHostKeys brightcyan
+    keyword whole RevokedKeys brightcyan
+    keyword whole SecurityKeyProvider brightcyan
+    keyword whole SendEnv brightcyan
+    keyword whole ServerAliveCountMax brightcyan
+    keyword whole ServerAliveInterval brightcyan
+    keyword whole SessionType brightcyan
+    keyword whole SetEnv brightcyan
+    keyword whole SshdAuthPath brightcyan
+    keyword whole SshdSessionPath brightcyan
+    keyword whole StdinNull brightcyan
+    keyword whole StreamLocalBindMask brightcyan
+    keyword whole StreamLocalBindUnlink brightcyan
+    keyword whole StrictHostKeyChecking brightcyan
+    keyword whole StrictModes brightcyan
+    keyword whole Subsystem brightcyan
+    keyword whole SyslogFacility brightcyan
+    keyword whole TCPKeepAlive brightcyan
+    keyword whole Tag brightcyan
+    keyword whole TrustedUserCAKeys brightcyan
+    keyword whole Tunnel brightcyan
+    keyword whole TunnelDevice brightcyan
+    keyword whole UnusedConnectionTimeout brightcyan
+    keyword whole UpdateHostKeys brightcyan
+    keyword whole UseDNS brightcyan
+    keyword whole UsePAM brightcyan
+    keyword whole User brightcyan
+    keyword whole UserKnownHostsFile brightcyan
+    keyword whole VerifyHostKeyDNS brightcyan
+    keyword whole VersionAddendum brightcyan
+    keyword whole VisualHostKey brightcyan
+    keyword whole X11DisplayOffset brightcyan
+    keyword whole X11Forwarding brightcyan
+    keyword whole X11UseLocalhost brightcyan
+    keyword whole XAuthLocation brightcyan
+
+# Common values
+    keyword whole accept-new brightgreen
+    keyword whole any brightgreen
+    keyword whole ask brightgreen
+    keyword whole auto brightgreen
+    keyword whole confirm brightgreen
+    keyword whole forced-commands-only brightgreen
+    keyword whole no brightgreen
+    keyword whole none brightgreen
+    keyword whole off brightgreen
+    keyword whole on brightgreen
+    keyword whole prohibit-password brightgreen
+    keyword whole without-password brightgreen
+    keyword whole yes brightgreen
+
+context ' ' green
+context " " green
+
+context # \n brown
+    keyword whole BUG brightred
+    keyword whole FIXME brightred
+    keyword whole TODO brightred
+    keyword whole NOTE brightred
+    spellcheck
+

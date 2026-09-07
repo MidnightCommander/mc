@@ -92,6 +92,7 @@ SYNTAXFILES =			\
 	spec.syntax		\
 	spice.syntax		\
 	sql.syntax		\
+	sshd.syntax		\
 	strace.syntax 		\
 	swift.syntax		\
 	swig.syntax		\

@@ -358,7 +358,7 @@ file .\*\\.(mch|ref|imp)$ B\sFile
 include b.syntax
 
 file (.\*/)?ssh(d)?_config(\\..\*)?$ OpenSSH\sconfig\sfile
-include conf.syntax
+include sshd.syntax
 
 file ..\*\\.(?i:cfg|cnf|conf)$ Config\sfile
 include conf.syntax
