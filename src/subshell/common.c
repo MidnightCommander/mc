@@ -180,7 +180,9 @@ typedef enum
  * the current command buffer and the location of the cursor. */
 #define SHELL_BUFFER_KEYBINDING "_"
 
-/*** forward declarations (file scope functions) *************************************************/
+/*** file scope functions ************************************************************************/
+
+static int subshell_init_ready (int fd, void *info);
 
 /*** file scope variables ************************************************************************/
 
@@ -1702,8 +1704,6 @@ do_subshell_chdir (const vfs_path_t *vpath, gboolean force, gboolean update_prom
 void
 init_subshell (void)
 {
-    vfs_path_t *vfs_subshell_cwd;
-
     // This must be remembered across calls to init_subshell()
     static char pty_name[BUF_SMALL];
 
@@ -1823,7 +1823,19 @@ init_subshell (void)
         g_free (precmd);
     }
 
-    // Wait until the subshell has started up and processed the command
+    // Finish the handshake asynchronously from the main loop once the shell is ready
+    subshell_initialized = FALSE;
+    add_select_channel (subshell_pipe[READ], subshell_init_ready, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+// Second half of init_subshell(): consume the shell's first CWD report, probe the persistent
+// command buffer and get a fresh prompt printed. Runs from the main loop as soon as the shell
+// is ready, or right away from invoke_subshell() if the user got there first.
+
+static void
+subshell_finish_init (void)
+{
     subshell_state = RUNNING_COMMAND;
     tty_enable_interrupt_key ();
     if (!feed_subshell (QUIETLY, TRUE))
@@ -1841,12 +1853,54 @@ init_subshell (void)
 
     /* Force an initial `cd` command, even if the subshell is already in the target directory.
      * Testing the persistent command feature might have read and discarded the prompt. Just get
-     * a new one printed. See #4784#issuecomment-3435834623. */
-    vfs_subshell_cwd = vfs_path_from_str (subshell_cwd);
-    do_subshell_chdir (vfs_subshell_cwd, TRUE, FALSE);
-    vfs_path_free (vfs_subshell_cwd, TRUE);
+     * a new one printed. See #4784#issuecomment-3435834623.
+     *
+     * The panel may have moved on while the shell was starting up (subshell_chdir() is a no-op
+     * until we get here), so aim at the panel's directory rather than the shell's. */
+    do_subshell_chdir (subshell_get_cwd (), TRUE, FALSE);
 
     subshell_initialized = TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+// Remove both of the subshell's file descriptors from the main event loop; safe even if
+// unregistered.
+
+static void
+subshell_close_select_channels (void)
+{
+    delete_select_channel (mc_global.tty.subshell_pty);
+    delete_select_channel (subshell_pipe[READ]);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+// Event-loop callback: fires once the shell has written its CWD, i.e. reached its first prompt.
+
+static int
+subshell_init_ready (int fd, void *info)
+{
+    (void) info;
+
+    delete_select_channel (fd);
+
+    if (subshell_alive)
+        subshell_finish_init ();
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+// Finish the handshake synchronously if it isn't done yet. Called from
+// invoke_subshell(), so Ctrl-O and running a command always get a ready subshell.
+
+static void
+subshell_ensure_initialized (void)
+{
+    if (!subshell_initialized)
+    {
+        delete_select_channel (subshell_pipe[READ]);
+        subshell_finish_init ();
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1854,6 +1908,8 @@ init_subshell (void)
 int
 invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
 {
+    subshell_ensure_initialized ();
+
     // Make the MC terminal transparent
     tcsetattr (STDOUT_FILENO, TCSANOW, &raw_mode);
 
@@ -2099,7 +2155,8 @@ exit_subshell (void)
 void
 subshell_chdir (const vfs_path_t *vpath)
 {
-    if (mc_global.tty.use_subshell && vfs_current_is_local ())
+    // Before the handshake is done, subshell_finish_init() takes care of the panel's directory
+    if (mc_global.tty.use_subshell && subshell_initialized && vfs_current_is_local ())
         do_subshell_chdir (vpath, FALSE, FALSE);
 }
 
@@ -2149,7 +2206,9 @@ sigchld_handler (MC_UNUSED int sig)
         {
             // The subshell has either exited normally or been killed
             subshell_alive = FALSE;
-            delete_select_channel (mc_global.tty.subshell_pty);
+            subshell_close_select_channels ();
+            if (!subshell_initialized)
+                mc_global.tty.use_subshell = FALSE;  // Subshell died instantly, so don't use it
             if (WIFEXITED (status) && WEXITSTATUS (status) != FORK_FAILURE)
             {
                 const int subshell_quit =
