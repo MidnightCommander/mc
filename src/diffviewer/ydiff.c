@@ -1095,6 +1095,7 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
         GArray *ret;
         BRACKET b;
         int len;
+        gboolean ok = TRUE;
 
         ret = g_array_new (FALSE, TRUE, sizeof (PAIR));
 
@@ -1110,10 +1111,9 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
             b[DIFF_LEFT].len = (*data)[0];
             b[DIFF_RIGHT].off = bracket[DIFF_RIGHT].off;
             b[DIFF_RIGHT].len = (*data)[1];
-            if (!hdiff_multi (s, t, b, min, hdiff, depth))
-                return FALSE;
+            ok = hdiff_multi (s, t, b, min, hdiff, depth);
 
-            for (k = 0; k < ret->len - 1; k++)
+            for (k = 0; ok && k < ret->len - 1; k++)
             {
                 data = (const PAIR *) &g_array_index (ret, PAIR, k);
                 data2 = (const PAIR *) &g_array_index (ret, PAIR, k + 1);
@@ -1121,20 +1121,25 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
                 b[DIFF_LEFT].len = (*data2)[0] - (*data)[0] - len;
                 b[DIFF_RIGHT].off = bracket[DIFF_RIGHT].off + (*data)[1] + len;
                 b[DIFF_RIGHT].len = (*data2)[1] - (*data)[1] - len;
-                if (!hdiff_multi (s, t, b, min, hdiff, depth))
-                    return FALSE;
+                ok = hdiff_multi (s, t, b, min, hdiff, depth);
             }
-            data = (const PAIR *) &g_array_index (ret, PAIR, k);
-            b[DIFF_LEFT].off = bracket[DIFF_LEFT].off + (*data)[0] + len;
-            b[DIFF_LEFT].len = bracket[DIFF_LEFT].len - (*data)[0] - len;
-            b[DIFF_RIGHT].off = bracket[DIFF_RIGHT].off + (*data)[1] + len;
-            b[DIFF_RIGHT].len = bracket[DIFF_RIGHT].len - (*data)[1] - len;
-            if (!hdiff_multi (s, t, b, min, hdiff, depth))
-                return FALSE;
+
+            if (ok)
+            {
+                data = (const PAIR *) &g_array_index (ret, PAIR, k);
+                b[DIFF_LEFT].off = bracket[DIFF_LEFT].off + (*data)[0] + len;
+                b[DIFF_LEFT].len = bracket[DIFF_LEFT].len - (*data)[0] - len;
+                b[DIFF_RIGHT].off = bracket[DIFF_RIGHT].off + (*data)[1] + len;
+                b[DIFF_RIGHT].len = bracket[DIFF_RIGHT].len - (*data)[1] - len;
+                ok = hdiff_multi (s, t, b, min, hdiff, depth);
+            }
 
             g_array_free (ret, TRUE);
-            return TRUE;
+            return ok;
         }
+
+        // nothing in common: the whole bracket is one difference, recorded below
+        g_array_free (ret, TRUE);
     }
 
     p[DIFF_LEFT].off = bracket[DIFF_LEFT].off;
