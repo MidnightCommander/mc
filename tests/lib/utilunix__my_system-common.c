@@ -85,6 +85,9 @@ my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
     // store oldact
     if (oldact != NULL)
     {
+        /* The real sigaction() fills this in; without the same here the test
+           compares bytes that nobody has ever written. */
+        memset (oldact, 0, sizeof (*oldact));
         tmp_act = g_new (struct sigaction, 1);
         memcpy (tmp_act, oldact, sizeof (*tmp_act));
     }
