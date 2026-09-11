@@ -619,7 +619,17 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
         return length;
 
     if (g_utf8_validate (text, -1, NULL))
-        result = g_utf8_offset_to_pointer (text, length) - text;
+    {
+        const glong chars = g_utf8_strlen (text, -1);
+
+        if ((glong) length <= chars)
+            result = g_utf8_offset_to_pointer (text, length) - text;
+        else
+            /* Past the end of the line the rest is padding, a byte to a column.
+               g_utf8_offset_to_pointer() would count it out the same way, but by
+               walking over memory that is not the string's any more. */
+            result = (ptrdiff_t) strlen (text) + ((ptrdiff_t) length - chars);
+    }
     else
     {
         gunichar uni;
