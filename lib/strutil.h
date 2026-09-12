@@ -580,6 +580,9 @@ gboolean str_is_char_escaped (const char *start, const char *current);
 
 void str_rstrip_eol (char *s);
 
+void str_utf8_fix_string (char *text, char repl);
+int str_utf8_offset_to_pos (const char *text, size_t length);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */

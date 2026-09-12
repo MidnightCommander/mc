@@ -1046,3 +1046,43 @@ str_rstrip_eol (char *s)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+str_utf8_fix_string (char *text, char repl)
+{
+    while (text[0] != '\0')
+    {
+        gunichar uni;
+
+        uni = g_utf8_get_char_validated (text, -1);
+        if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
+            text = g_utf8_next_char (text);
+        else
+        {
+            text[0] = repl;
+            text++;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+str_utf8_offset_to_pos (const char *text, size_t length)
+{
+    if (g_utf8_validate (text, -1, NULL))
+        return g_utf8_offset_to_pointer (text, length) - text;
+
+    {
+        int result;
+        char *buffer;
+
+        buffer = g_strdup (text);
+        str_utf8_fix_string (buffer, '?');
+        result = g_utf8_offset_to_pointer (buffer, length) - buffer;
+        g_free (buffer);
+        return result;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

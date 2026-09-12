@@ -154,26 +154,6 @@ str_utf8_cprev_char_safe (const char **text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-str_utf8_fix_string (char *text, char repl)
-{
-    while (text[0] != '\0')
-    {
-        gunichar uni;
-
-        uni = g_utf8_get_char_validated (text, -1);
-        if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
-            text = g_utf8_next_char (text);
-        else
-        {
-            text[0] = repl;
-            text++;
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static gboolean
 str_utf8_isspace (const char *text)
 {
@@ -896,26 +876,6 @@ str_utf8_trunc (const char *text, const ssize_t width)
     if (tool.compose)
         utf8_tool_compose (result, sizeof (result));
     return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-str_utf8_offset_to_pos (const char *text, size_t length)
-{
-    if (str_utf8_is_valid_string (text))
-        return g_utf8_offset_to_pointer (text, length) - text;
-    else
-    {
-        int result;
-        char *buffer;
-
-        buffer = g_strdup (text);
-        str_utf8_fix_string (buffer, '?');
-        result = g_utf8_offset_to_pointer (buffer, length) - buffer;
-        g_free (buffer);
-        return result;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
