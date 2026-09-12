@@ -613,34 +613,12 @@ dview_get_utf (const char *str, const size_t pos, int *len)
 static size_t
 dview_str_utf8_offset_to_pos (const char *text, size_t length)
 {
-    ptrdiff_t result;
-
     if (text == NULL || text[0] == '\0')
         return length;
 
-    if (g_utf8_validate (text, -1, NULL))
-        result = g_utf8_offset_to_pointer (text, length) - text;
-    else
-    {
-        gunichar uni;
-        char *tmpbuf, *buffer;
+    const size_t result = str_utf8_offset_to_pos (text, length);
 
-        buffer = tmpbuf = g_strdup (text);
-        while (tmpbuf[0] != '\0')
-        {
-            uni = g_utf8_get_char_validated (tmpbuf, -1);
-            if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
-                tmpbuf = g_utf8_next_char (tmpbuf);
-            else
-            {
-                tmpbuf[0] = '.';
-                tmpbuf++;
-            }
-        }
-        result = g_utf8_offset_to_pointer (tmpbuf, length) - tmpbuf;
-        g_free (buffer);
-    }
-    return MAX (length, (size_t) result);
+    return MAX (length, result);
 }
 
 /* --------------------------------------------------------------------------------------------- */
