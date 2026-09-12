@@ -63,6 +63,7 @@ typedef struct
     Widget *label;
     gboolean ok;
     char *sequence;
+    int modifiers;
 } learnkey_t;
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -76,6 +77,55 @@ static learnkey_t *learnkeys = NULL;
 static int learn_total;
 static int learnok;
 static gboolean learnchanged = FALSE;
+static unsigned long learn_mod_ctrl_id = 0;
+static unsigned long learn_mod_meta_id = 0;
+static unsigned long learn_mod_shift_id = 0;
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+learn_selected_modifiers (const WDialog *dlg)
+{
+    int modifiers = 0;
+    Widget *w;
+
+    if (dlg == NULL)
+        return 0;
+
+    w = widget_find_by_id (WIDGET (dlg), learn_mod_ctrl_id);
+    if (w != NULL && CHECK (w)->state)
+        modifiers |= KEY_M_CTRL;
+
+    w = widget_find_by_id (WIDGET (dlg), learn_mod_meta_id);
+    if (w != NULL && CHECK (w)->state)
+        modifiers |= KEY_M_ALT;
+
+    w = widget_find_by_id (WIDGET (dlg), learn_mod_shift_id);
+    if (w != NULL && CHECK (w)->state)
+        modifiers |= KEY_M_SHIFT;
+
+    return modifiers;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+learn_build_key_name (const char *base_name, int modifiers)
+{
+    GString *name;
+
+    name = g_string_sized_new (32);
+
+    if ((modifiers & KEY_M_CTRL) != 0)
+        g_string_append (name, "ctrl-");
+    if ((modifiers & KEY_M_ALT) != 0)
+        g_string_append (name, "meta-");
+    if ((modifiers & KEY_M_SHIFT) != 0)
+        g_string_append (name, "shift-");
+
+    g_string_append (name, base_name);
+    return g_string_free (name, FALSE);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -86,6 +136,8 @@ learn_button (WButton *button, int action)
 {
     WDialog *d;
     char *seq;
+    int modifiers;
+    int keycode;
 
     (void) button;
 
@@ -109,13 +161,17 @@ learn_button (WButton *button, int action)
          */
         gboolean seq_ok = FALSE;
 
+        modifiers = learn_selected_modifiers (DIALOG (WIDGET (button)->owner));
+        keycode = key_name_conv_tab[action - B_USER].code | modifiers;
+
         if (strcmp (seq, "\\e") != 0 && strcmp (seq, "\\e\\e") != 0 && strcmp (seq, "^m") != 0
             && strcmp (seq, "^i") != 0 && (seq[1] != '\0' || *seq < ' ' || *seq > '~'))
         {
             learnchanged = TRUE;
             learnkeys[action - B_USER].sequence = seq;
+            learnkeys[action - B_USER].modifiers = modifiers;
             seq = convert_controls (seq);
-            seq_ok = define_sequence (key_name_conv_tab[action - B_USER].code, seq, MCKEY_NOACTION);
+            seq_ok = define_sequence (keycode, seq, MCKEY_NOACTION);
         }
 
         if (!seq_ok)
@@ -176,7 +232,7 @@ learn_check_key (int c)
 
     for (i = 0; i < learn_total; i++)
     {
-        if (key_name_conv_tab[i].code != c || learnkeys[i].ok)
+        if (((key_name_conv_tab[i].code | learnkeys[i].modifiers) != c) || learnkeys[i].ok)
             continue;
 
         widget_select (learnkeys[i].button);
@@ -253,7 +309,7 @@ init_learn (void)
     WGroup *g;
 
     const int dlg_width = 78;
-    const int dlg_height = 23;
+    const int dlg_height = 25;
 
     // buttons
     WButton *bt0, *bt1;
@@ -262,6 +318,9 @@ init_learn (void)
 
     int x, y, i;
     const key_code_name_t *key;
+    WCheck *mod_ctrl;
+    WCheck *mod_meta;
+    WCheck *mod_shift;
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
@@ -300,6 +359,7 @@ init_learn (void)
 
         learnkeys[i].ok = FALSE;
         learnkeys[i].sequence = NULL;
+        learnkeys[i].modifiers = 0;
 
         label = _ (key_name_conv_tab[i].longname);
         padding = 16 - str_term_width1 (label);
@@ -319,6 +379,19 @@ init_learn (void)
             y = UY;
         }
     }
+
+    group_add_widget (g, hline_new (dlg_height - 10, -1, -1));
+    group_add_widget (g, label_new (dlg_height - 9, 3, _ ("With modifiers")));
+
+    mod_ctrl = check_new (dlg_height - 9, 22, FALSE, _ ("C&trl"));
+    mod_meta = check_new (dlg_height - 9, 34, FALSE, _ ("&Meta (Alt)"));
+    mod_shift = check_new (dlg_height - 9, 54, FALSE, _ ("&Shift"));
+    learn_mod_ctrl_id = WIDGET (mod_ctrl)->id;
+    learn_mod_meta_id = WIDGET (mod_meta)->id;
+    learn_mod_shift_id = WIDGET (mod_shift)->id;
+    group_add_widget (g, mod_ctrl);
+    group_add_widget (g, mod_meta);
+    group_add_widget (g, mod_shift);
 
     group_add_widget (g, hline_new (dlg_height - 8, -1, -1));
     group_add_widget (
@@ -369,10 +442,12 @@ learn_save (void)
         if (learnkeys[i].sequence != NULL)
         {
             char *esc_str;
+            char *key_name;
 
             esc_str = str_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
-            mc_config_set_string_raw_value (mc_global.main_config, section,
-                                            key_name_conv_tab[i].name, esc_str);
+            key_name = learn_build_key_name (key_name_conv_tab[i].name, learnkeys[i].modifiers);
+            mc_config_set_string_raw_value (mc_global.main_config, section, key_name, esc_str);
+            g_free (key_name);
             g_free (esc_str);
 
             profile_changed = TRUE;
