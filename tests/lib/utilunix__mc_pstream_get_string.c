@@ -344,6 +344,7 @@ START_TEST (mc_pstream_get_long_file_list_test)
 
     mctest_assert_str_eq (etalon_long_file_list, result_long_file_list->str);
     g_string_free (result_long_file_list, TRUE);
+    g_free (pip);
 }
 END_TEST
 
