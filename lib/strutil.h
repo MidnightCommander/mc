@@ -134,7 +134,7 @@ struct str_class
     /*I*/ size_t (*term_width2) (const char *text, const ssize_t width);
     /*I*/ int (*term_char_width) (const char *length);
     /*I*/ const char *(*trunc) (const char *length, const ssize_t width);
-    /*I*/ int (*offset_to_pos) (const char *text, size_t length);
+    /*I*/ size_t (*offset_to_pos) (const char *text, size_t length);
     /*I*/ int (*column_to_pos) (const char *text, size_t pos);
     /*I*/ char *(*create_search_needle) (const char *needle, gboolean case_sen);
     void (*release_search_needle) (char *needle, gboolean case_sen);
@@ -435,7 +435,7 @@ int str_term_char_width (const char *text);
 /* convert position in characters to position in bytes
  * I
  */
-int str_offset_to_pos (const char *text, size_t length);
+size_t str_offset_to_pos (const char *text, size_t length);
 
 /* convert position on terminal to position in characters
  * I
@@ -581,7 +581,7 @@ gboolean str_is_char_escaped (const char *start, const char *current);
 void str_rstrip_eol (char *s);
 
 void str_utf8_fix_string (char *text, char repl);
-int str_utf8_offset_to_pos (const char *text, size_t length);
+size_t str_utf8_offset_to_pos (const char *text, size_t length);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/

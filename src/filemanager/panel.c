@@ -709,7 +709,7 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
             const char *txt = " ";
             int len, perm = 0;
             const char *prepared_text;
-            int name_offset = 0;
+            size_t name_offset = 0;
 
             if (fe != NULL)
                 txt = fi->string_fn (fe, fi->field_len);

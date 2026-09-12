@@ -1476,7 +1476,7 @@ static void
 find_adjust_header (WDialog *h)
 {
     char title[BUF_MEDIUM];
-    int title_len;
+    size_t title_len;
 
     if (content_pattern != NULL)
         g_snprintf (title, sizeof (title), _ ("Find File: \"%s\". Content: \"%s\""), find_pattern,

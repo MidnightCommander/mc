@@ -679,7 +679,7 @@ str_term_char_width (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+size_t
 str_offset_to_pos (const char *text, size_t length)
 {
     return used_class.offset_to_pos (text, length);
@@ -1067,22 +1067,24 @@ str_utf8_fix_string (char *text, char repl)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+size_t
 str_utf8_offset_to_pos (const char *text, size_t length)
 {
-    if (g_utf8_validate (text, -1, NULL))
-        return g_utf8_offset_to_pointer (text, length) - text;
+    ptrdiff_t result;
 
+    if (g_utf8_validate (text, -1, NULL))
+        result = g_utf8_offset_to_pointer (text, length) - text;
+    else
     {
-        int result;
         char *buffer;
 
         buffer = g_strdup (text);
         str_utf8_fix_string (buffer, '?');
         result = g_utf8_offset_to_pointer (buffer, length) - buffer;
         g_free (buffer);
-        return result;
     }
+
+    return (size_t) result;
 }
 
 /* --------------------------------------------------------------------------------------------- */

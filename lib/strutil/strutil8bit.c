@@ -538,11 +538,11 @@ finally:
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static size_t
 str_8bit_offset_to_pos (const char *text, size_t length)
 {
     (void) text;
-    return (int) length;
+    return length;
 }
 
 /* --------------------------------------------------------------------------------------------- */

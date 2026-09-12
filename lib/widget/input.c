@@ -269,14 +269,15 @@ static void
 move_buffer_backward (WInput *in, int start, int end)
 {
     int str_len;
+    size_t s, e;
 
     str_len = str_length (in->buffer->str);
     if (start >= str_len || end > str_len + 1)
         return;
 
-    start = str_offset_to_pos (in->buffer->str, start);
-    end = str_offset_to_pos (in->buffer->str, end);
-    g_string_erase (in->buffer, start, end - start);
+    s = str_offset_to_pos (in->buffer->str, start);
+    e = str_offset_to_pos (in->buffer->str, end);
+    g_string_erase (in->buffer, start, e - s);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -396,8 +397,8 @@ backward_delete (WInput *in)
 static void
 copy_region (WInput *in, int start, int end)
 {
-    int first = MIN (start, end);
-    int last = MAX (start, end);
+    size_t first = MIN (start, end);
+    size_t last = MAX (start, end);
 
     if (last == first)
     {
@@ -542,7 +543,7 @@ yank (WInput *in)
 static void
 kill_line (WInput *in)
 {
-    int chp;
+    size_t chp;
 
     chp = str_offset_to_pos (in->buffer->str, in->point);
     g_free (kill_buffer);

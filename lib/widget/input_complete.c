@@ -94,9 +94,9 @@ void complete_engine_fill_completions (WInput *in);
 /*** file scope variables ************************************************************************/
 
 static WInput *input;
-static int min_end;
-static int start = 0;
-static int end = 0;
+static size_t min_end;
+static size_t start = 0;
+static size_t end = 0;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

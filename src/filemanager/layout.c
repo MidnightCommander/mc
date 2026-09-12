@@ -987,7 +987,7 @@ setup_cmdline (void)
     // Check for prompts too big
     if (r->cols > 8 && prompt_width > r->cols - 8)
     {
-        int prompt_len;
+        size_t prompt_len;
 
         prompt_width = r->cols - 8;
         prompt_len = str_offset_to_pos (mc_prompt, prompt_width);
