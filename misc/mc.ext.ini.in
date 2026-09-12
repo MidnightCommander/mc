@@ -804,8 +804,9 @@ ShellIgnoreCase=true
 Include=editor
 
 [markdown]
-Regex=\\.mk?d$
+Regex=\\.(mk?d|markdown)$
 RegexIgnoreCase=true
+View=%view{ascii,nroff} @EXTHELPERSDIR@/doc.sh view markdown
 Include=editor
 
 [djvu]
