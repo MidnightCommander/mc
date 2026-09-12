@@ -155,6 +155,10 @@ edit_dialog_search_show (WEdit *edit)
 /**
  * Get EOL symbol for searching.
  *
+ * Line breaks in the buffer are either "\n" or "\r\n"; in both cases the
+ * line is terminated by "\n" (a "\r" only precedes it, it never terminates a
+ * line by itself). Therefore the search EOL symbol is always "\n".
+ *
  * @param edit editor object
  * @return EOL symbol
  */
@@ -162,13 +166,8 @@ edit_dialog_search_show (WEdit *edit)
 static inline char
 edit_search_get_current_end_line_char (const WEdit *edit)
 {
-    switch (edit->lb)
-    {
-    case LB_MAC:
-        return '\r';
-    default:
-        return '\n';
-    }
+    (void) edit;
+    return '\n';
 }
 
 /* --------------------------------------------------------------------------------------------- */

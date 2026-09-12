@@ -482,6 +482,13 @@ format_paragraph (WEdit *edit, gboolean force)
 
     p = begin_paragraph (edit, force, &lines);
     q = end_paragraph (edit, force);
+
+    // Formatting assumes "\n" line breaks: a "\r\n" line break would be mangled
+    // (the "\r" leaks into the reformatted text), so leave CRLF paragraphs as is.
+    for (off_t i = p; i + 1 <= q; i++)
+        if (edit_buffer_is_crlf (&edit->buffer, i))
+            return;
+
     indent = test_indent (edit, p, q);
 
     t = get_paragraph (&edit->buffer, p, q, indent != 0);

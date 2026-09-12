@@ -20,6 +20,9 @@ typedef struct edit_buffer_struct
     off_t size;      // file size
     long lines;      // total lines in the file
     long curs_line;  // line number of the cursor.
+
+    LineBreaks lb_detected;  // cached detect_line_breaks() result
+    gboolean lb_dirty;       // line breaks have changed, need detect_line_breaks()
 } edit_buffer_t;
 
 typedef struct edit_buffer_read_file_status_msg_struct
@@ -62,6 +65,11 @@ off_t edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
 off_t edit_buffer_write_file (edit_buffer_t *buf, int fd);
 
 int edit_buffer_calc_percent (const edit_buffer_t *buf, off_t offset);
+
+off_t edit_buffer_trailing_ws_start (const edit_buffer_t *buf, off_t bol);
+LineBreaks edit_buffer_detect_line_breaks (const edit_buffer_t *buf);
+void edit_buffer_refresh_line_breaks (edit_buffer_t *buf);
+LineBreaks edit_buffer_get_line_breaks (const edit_buffer_t *buf);
 
 /*** inline functions ****************************************************************************/
 
@@ -107,6 +115,25 @@ static inline off_t
 edit_buffer_get_current_eol (const edit_buffer_t *buf)
 {
     return edit_buffer_get_eol (buf, buf->curs1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Check whether the buffer contains a Windows ("\r\n") line break
+ * starting at the specified position.
+ *
+ * @param buf editor buffer
+ * @param byte_index position of the potential "\r" character
+ *
+ * @return TRUE if the two bytes at byte_index and byte_index + 1 are "\r" and "\n"
+ */
+
+static inline gboolean
+edit_buffer_is_crlf (const edit_buffer_t *buf, off_t byte_index)
+{
+    return (byte_index >= 0 && byte_index + 1 < buf->size
+            && edit_buffer_get_byte (buf, byte_index) == '\r'
+            && edit_buffer_get_byte (buf, byte_index + 1) == '\n');
 }
 
 /* --------------------------------------------------------------------------------------------- */
