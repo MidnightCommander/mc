@@ -780,9 +780,10 @@ str_8bit_caseprefix (const char *text, const char *prefix)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_8bit_fix_string (char *text)
+str_8bit_fix_string (char *text, char repl)
 {
     (void) text;
+    (void) repl;
 }
 
 /* --------------------------------------------------------------------------------------------- */

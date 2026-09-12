@@ -125,7 +125,7 @@ struct str_class
     /*I*/ int (*length_noncomb) (const char *text);
     /*I*/ gboolean (*char_toupper) (const char *ch, char **out, size_t *remain);
     gboolean (*char_tolower) (const char *ch, char **out, size_t *remain);
-    void (*fix_string) (char *text);
+    void (*fix_string) (char *text, char repl);
     /*I*/ const char *(*term_form) (const char *text);
     /*I*/ const char *(*fit_to_term) (const char *text, int width, align_crt_t just_mode);
     /*I*/ const char *(*term_trim) (const char *text, const ssize_t width);
@@ -380,11 +380,11 @@ int str_length_char (const char *text);
  */
 int str_length_noncomb (const char *text);
 
-/* replace all invalid characters in text with questionmark
+/* replace all invalid characters in text with repl character
  * after return, text is valid string in terminal encoding
  * I
  */
-void str_fix_string (char *text);
+void str_fix_string (char *text, char repl);
 
 /* replace all invalid characters in text with questionmark
  * replace all unprintable characters with '.'

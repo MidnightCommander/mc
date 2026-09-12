@@ -679,10 +679,10 @@ str_ascii_ncasecmp (const char *t1, const char *t2)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_ascii_fix_string (char *text)
+str_ascii_fix_string (char *text, char repl)
 {
     for (; text[0] != '\0'; text++)
-        text[0] = ((unsigned char) text[0] < 128) ? text[0] : '?';
+        text[0] = ((unsigned char) text[0] < 128) ? text[0] : repl;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -888,9 +888,9 @@ str_caseprefix (const char *text, const char *prefix)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-str_fix_string (char *text)
+str_fix_string (char *text, char repl)
 {
-    used_class.fix_string (text);
+    used_class.fix_string (text, repl);
 }
 
 /* --------------------------------------------------------------------------------------------- */

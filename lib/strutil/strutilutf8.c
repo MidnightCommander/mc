@@ -155,7 +155,7 @@ str_utf8_cprev_char_safe (const char **text)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_utf8_fix_string (char *text)
+str_utf8_fix_string (char *text, char repl)
 {
     while (text[0] != '\0')
     {
@@ -166,7 +166,7 @@ str_utf8_fix_string (char *text)
             text = g_utf8_next_char (text);
         else
         {
-            text[0] = '?';
+            text[0] = repl;
             text++;
         }
     }
@@ -911,7 +911,7 @@ str_utf8_offset_to_pos (const char *text, size_t length)
         char *buffer;
 
         buffer = g_strdup (text);
-        str_utf8_fix_string (buffer);
+        str_utf8_fix_string (buffer, '?');
         result = g_utf8_offset_to_pointer (buffer, length) - buffer;
         g_free (buffer);
         return result;
