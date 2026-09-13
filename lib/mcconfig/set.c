@@ -24,6 +24,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#include "lib/terminal.h"  // encode_controls(), decode_controls()
 
 #include "lib/mcconfig.h"
 
@@ -153,6 +154,51 @@ mc_config_set_int_list (mc_config_t *mc_config, const gchar *group, const gchar 
 {
     if (mc_config != NULL && group != NULL && param != NULL && value != NULL && length != 0)
         g_key_file_set_integer_list (mc_config->handle, group, param, value, length);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/*
+ * An interface matching the other mc_config_set_*_list methods.
+ *
+ * Sets space-separated values, each stored according to encode_controls().
+ *
+ * Primarily useful for having escape sequences in easy-to-read format, including \e for the escape
+ * character without having to double-escape it, and without having to escape semicolons.
+ */
+void
+mc_config_set_escape_sequence_list (mc_config_t *mc_config, const gchar *group, const gchar *param,
+                                    const GPtrArray *value)
+{
+    const gchar separator = ' ';
+    GString *str;
+    gboolean add_separator = FALSE;
+
+    if (mc_config == NULL || group == NULL || param == NULL || value == NULL || value->len == 0)
+        return;
+
+    str = g_string_new ("");
+
+    for (guint i = 0; i < value->len; i++)
+    {
+        GString *p = (GString *) g_ptr_array_index (value, i);
+
+        if (p->len != 0)
+        {
+            GString *encoded;
+
+            encoded = encode_controls (p->str, p->len);
+            if (add_separator)
+                g_string_append_c (str, separator);
+            mc_g_string_concat (str, encoded);
+            g_string_free (encoded, TRUE);
+            add_separator = TRUE;
+        }
+    }
+
+    g_key_file_set_value (mc_config->handle, group, param, str->str);
+
+    g_string_free (str, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

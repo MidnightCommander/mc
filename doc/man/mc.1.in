@@ -53,11 +53,18 @@ Midnight Commander.
 Force a "normal tracking" mouse mode. Used when running on
 xterm\-capable terminals (tmux/screen).
 .TP
+.I \-k file, \-\-keydef=file
+Specify a name of keydef file in the command line.
+.TP
 .I \-K file, \-\-keymap=file
 Specify a name of keymap file in the command line.
 .TP
 .I \-l file, \-\-ftplog=file
 Save the ftpfs dialog with the server in file.
+.TP
+.I \-\-nokeydef
+Don't load key definitions from any file, use hardcoded and terminfo
+escape sequences.
 .TP
 .I \-\-nokeymap
 Don't load key bindings from any file, use default hardcoded keys.
@@ -3796,11 +3803,11 @@ to save and restore position in opened files.
 .SH "Terminal databases"
 Midnight Commander provides a way to fix your system terminal
 database without requiring root privileges. Midnight Commander
-searches in the system initialization file (the mc.lib file located in
+searches in the mc.keydef file located in
 Midnight Commander's library directory) and in the 
-~/.config/mc/ini file for the section 
-"terminal:your\-terminal\-name" and then for the section
-"terminal:general", each line of the section contains a key symbol that
+~/.config/mc/mc.keydef file for the section 
+"your\-terminal\-name" and then for the section
+"_common_", each line of the section contains a key symbol that
 you want to define, followed by an equal sign and the definition for the
 key.  You can use the special \ee form to represent the escape character
 and the ^x to represent the control\-x character.

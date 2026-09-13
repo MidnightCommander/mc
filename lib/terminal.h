@@ -31,10 +31,8 @@ gboolean parse_csi (csi_command_t *out, const char **sptr, const char *end);
 
 char *strip_ctrl_codes (char *s);
 
-/* Replaces "\\E" and "\\e" with "\033". Replaces "^" + [a-z] with
- * ((char) 1 + (c - 'a')). The same goes for "^" + [A-Z].
- * Returns a newly allocated string. */
-char *convert_controls (const char *s);
+GString *encode_controls (const char *s, const ssize_t len);
+GString *decode_controls (const char *s);
 
 /*** inline functions ****************************************************************************/
 

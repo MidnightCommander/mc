@@ -54,6 +54,9 @@ gboolean mc_args__nomouse = FALSE;
 /* Force colors, only used by Slang */
 gboolean mc_args__force_colors = FALSE;
 
+/* Don't load keydef from file and use default one */
+gboolean mc_args__nokeydef = FALSE;
+
 /* Don't load keymap from file and use default one */
 gboolean mc_args__nokeymap = FALSE;
 
@@ -61,6 +64,9 @@ char *mc_args__last_wd_file = NULL;
 
 /* when enabled NETCODE, use following file as logfile */
 char *mc_args__netfs_logfile = NULL;
+
+/* keydef file */
+char *mc_args__keydef_file = NULL;
 
 /* keymap file */
 char *mc_args__keymap_file = NULL;
@@ -280,6 +286,26 @@ static const GOptionEntry argument_terminal_table[] = {
         G_OPTION_ARG_NONE,
         &mc_global.tty.ugly_line_drawing,
         N_ ("Use stickchars to draw"),
+        NULL,
+    },
+
+    {
+        "keydef",
+        'k',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_STRING,
+        &mc_args__keydef_file,
+        N_ ("Load definitions of key escape sequences from specified file"),
+        N_ ("<file>"),
+    },
+
+    {
+        "nokeydef",
+        '\0',
+        ARGS_TERM_OPTIONS,
+        G_OPTION_ARG_NONE,
+        &mc_args__nokeydef,
+        N_ ("Don't load definitions of key escape sequences from file, use defaults"),
         NULL,
     },
 
