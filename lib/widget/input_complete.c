@@ -87,7 +87,7 @@ typedef struct
 
 /*** forward declarations (file scope functions) *************************************************/
 
-MC_MOCKABLE GPtrArray *try_complete (char *text, int *lc_start, int *lc_end,
+MC_MOCKABLE GPtrArray *try_complete (char *text, size_t *lc_start, size_t *lc_end,
                                      input_complete_t flags);
 void complete_engine_fill_completions (WInput *in);
 
@@ -771,7 +771,7 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
 /* --------------------------------------------------------------------------------------------- */
 /** Check if directory completion is needed */
 static gboolean
-check_is_cd (const char *text, int lc_start, input_complete_t flags)
+check_is_cd (const char *text, size_t lc_start, input_complete_t flags)
 {
     const char *p, *q;
 
@@ -793,7 +793,7 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-try_complete_commands_prepare (try_complete_automation_state_t *state, char *text, int *lc_start)
+try_complete_commands_prepare (try_complete_automation_state_t *state, char *text, size_t *lc_start)
 {
     const char *command_separator_chars = ";|&{(`";
     char *ti;
@@ -864,7 +864,7 @@ try_complete_find_start_sign (try_complete_automation_state_t *state)
 /* --------------------------------------------------------------------------------------------- */
 
 static GPtrArray *
-try_complete_all_possible (try_complete_automation_state_t *state, char *text, int *lc_start)
+try_complete_all_possible (try_complete_automation_state_t *state, char *text, size_t *lc_start)
 {
     GPtrArray *matches = NULL;
 
@@ -1272,7 +1272,7 @@ complete_engine (WInput *in, int what_to_do)
 
 /** Returns an array of matches, or NULL if none. */
 GPtrArray *
-try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
+try_complete (char *text, size_t *lc_start, size_t *lc_end, input_complete_t flags)
 {
     try_complete_automation_state_t state;
     GPtrArray *matches = NULL;

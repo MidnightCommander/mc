@@ -1485,7 +1485,7 @@ find_adjust_header (WDialog *h)
         g_snprintf (title, sizeof (title), _ ("Find File: \"%s\""), find_pattern);
 
     title_len = str_term_width1 (title);
-    if (title_len > WIDGET (h)->rect.cols - 6)
+    if (title_len + 6 > (size_t) WIDGET (h)->rect.cols)
     {
         // title is too wide, truncate it
         title_len = WIDGET (h)->rect.cols - 6;

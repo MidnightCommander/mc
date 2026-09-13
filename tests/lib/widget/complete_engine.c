@@ -33,16 +33,16 @@
 /* --------------------------------------------------------------------------------------------- */
 
 void complete_engine_fill_completions (WInput *in);
-GPtrArray *try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
+GPtrArray *try_complete (char *text, size_t *lc_start, size_t *lc_end, input_complete_t flags);
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @CapturedValue */
 static char *try_complete__text__captured;
 /* @CapturedValue */
-static int try_complete__lc_start__captured;
+static size_t try_complete__lc_start__captured;
 /* @CapturedValue */
-static int try_complete__lc_end__captured;
+static size_t try_complete__lc_end__captured;
 /* @CapturedValue */
 static input_complete_t try_complete__flags__captured;
 
@@ -51,7 +51,7 @@ static GPtrArray *try_complete__return_value;
 
 /* @Mock */
 GPtrArray *
-try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
+try_complete (char *text, size_t *lc_start, size_t *lc_end, input_complete_t flags)
 {
     try_complete__text__captured = g_strdup (text);
     try_complete__lc_start__captured = *lc_start;
@@ -104,8 +104,8 @@ static const struct test_complete_engine_fill_completions_ds
     const char *input_buffer;
     const int input_point;
     const input_complete_t input_completion_flags;
-    int expected_start;
-    int expected_end;
+    size_t expected_start;
+    size_t expected_end;
 } test_complete_engine_fill_completions_ds[] = {
     { "string", 3, INPUT_COMPLETE_NONE, 0, 3 },
     { "some string", 7, INPUT_COMPLETE_NONE, 0, 7 },
