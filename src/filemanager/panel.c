@@ -3297,6 +3297,7 @@ panel_set_sort_type_by_id (WPanel *panel, const char *name)
             return;
 
         panel->sort_field = sort_order;
+        panel->sort_info.reverse = FALSE;
     }
 
     panel_set_sort_order (panel, panel->sort_field);
