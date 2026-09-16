@@ -44,7 +44,7 @@ FAIL() { log "FAIL: $run_name Command: ${run_cmd:-}; $1"; failed=true; }
 SKIP() { log "SKIP: $run_name: $1"; }
 assert_failure() { [ "$run_result" != 0 ] || FAIL "Expected: failure, actual: success"; }
 assert_success() { [ "$run_result" = 0 ] || FAIL "Expected: success, actual: exit code $run_result"; }
-assert_output() { diff_output=`printf '%s' "$1" | diff -u - "$state_dir/output" | tail -n +3` || FAIL "Expected output mismatch:
+assert_output() { diff_output=`printf '%s' "$1" | diff -u - "$state_dir/output" | sed -n '3,$p'` || FAIL "Expected output mismatch:
 $diff_output"; }
 assert_output_match() { grep -q "$@" "$state_dir/output" || FAIL "Output does not match '$*', actual: $(tail -50 "$state_dir/output")"; }
 assert_output_nomatch() { grep -q "$@" "$state_dir/output" || return 0; FAIL "Output matches '$*': $(grep -m1 "$@" "$state_dir/output")"; }
