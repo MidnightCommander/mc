@@ -106,6 +106,7 @@ local_opendir (const vfs_path_t *vpath)
         if (dir == NULL)
             return NULL;
 
+        errno = 0;
         if (readdir (dir) == NULL && errno == EINTR)
         {
             closedir (dir);
