@@ -1,15 +1,46 @@
+send_read_data() {
+	while [ "$bs" -gt "$SHELL_FILESIZE" ]; do
+		bs=`expr "$bs" / 2`
+	done
+	[ "$bs" -gt 511 ] || bs=1
+	count=`expr "$SHELL_FILESIZE" / "$bs"`
+	dd bs="$bs" count="$count" 2>/dev/null
+}
+
+send_piece() {
+	{ send_read_data | tee -a "$FILENAME" | wc -c; } 2>&1 | while read -r _output; do
+		if [ -z "$_output" ] || [ "${_output#+}" != "${_output}" ]; then
+			:
+		elif expr "$_output" : '[[:space:]]*[0-9][0-9]*$' >/dev/null; then
+			echo "SHELL_FILESIZE=`expr $SHELL_FILESIZE - $_output`"
+		else
+			echo 'FILENAME=/dev/null'
+			[ -n "$_err" ] || _err="$_output"
+		fi
+	done
+}
+
+append_for_real() {
+	>> "$FILENAME" || { echo "### 500 Could not reopen $FILENAME for appending"; return 1; }
+	echo "### 001"
+	bs=1048576
+	_err=""
+	while [ "$SHELL_FILESIZE" -gt 0 ]; do
+		eval "`send_piece`"
+	done
+	if [ -n "$_err" ]; then
+		echo "### 500 $_err"
+	else
+		echo "### 200"
+	fi
+}
+
 FILENAME="/${SHELL_FILENAME}"
-echo "### 001"
-{
-    bss=4096
-    bsl=4095
-    if [ $SHELL_FILESIZE -lt $bss ]; then
-        bss=1;
-        bsl=0;
-    fi
-    while [ $SHELL_FILESIZE -gt 0 ]; do
-        cnt=`expr \\( $SHELL_FILESIZE + $bsl \\) / $bss`
-        n=`dd bs=$bss count=$cnt | tee -a "${FILENAME}" | wc -c`
-        SHELL_FILESIZE=`expr $SHELL_FILESIZE - $n`
-    done
-}; echo "### 200"
+
+if [ -d "$FILENAME" ]; then
+	echo "### 500 $FILENAME is a directory"
+elif [ "${SHELL_HAVE_DD-0}" = "0" ]; then
+	echo "### 500 No supported send method"
+else
+	append_for_real
+fi
