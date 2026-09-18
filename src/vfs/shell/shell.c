@@ -115,6 +115,8 @@ int shell_directory_timeout = 900;
 #define SHELL_HAVE_LSQ         16
 #define SHELL_HAVE_DATE_MDYT   32
 #define SHELL_HAVE_TAIL        64
+#define SHELL_HAVE_DD          128
+#define SHELL_HAVE_POSIX_DD    256
 
 #define SHELL_SUPER(super)     ((shell_super_t *) (super))
 #define SHELL_FILE_HANDLER(fh) ((shell_file_handler_t *) fh)
@@ -479,6 +481,12 @@ shell_set_env (int flags)
 
     if ((flags & SHELL_HAVE_TAIL) != 0)
         g_string_append (ret, "SHELL_HAVE_TAIL=1 export SHELL_HAVE_TAIL; ");
+
+    if ((flags & SHELL_HAVE_DD) != 0)
+        g_string_append (ret, "SHELL_HAVE_DD=1 export SHELL_HAVE_DD; ");
+
+    if ((flags & SHELL_HAVE_POSIX_DD) != 0)
+        g_string_append (ret, "SHELL_HAVE_POSIX_DD=1 export SHELL_HAVE_POSIX_DD; ");
 
     return ret;
 }
@@ -1686,6 +1694,28 @@ shell_fill_names (struct vfs_class *me, fill_names_f func)
 static void *
 shell_open (const vfs_path_t *vpath, int flags, mode_t mode)
 {
+    if ((flags & O_WRONLY) != 0)
+    {
+        // We need to check if the path is writable to return the error ASAP
+        const char *name;
+        char *quoted_name;
+        char *command;
+        struct vfs_s_super *super;
+        struct vfs_class *me;
+        int r;
+
+        me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
+        name = vfs_s_get_path (vpath, &super, 0);
+        quoted_name = str_shell_escape (name);
+        command = g_strdup_printf ("if : %s /%s; then echo '### 200'; else echo '### 500'; fi\n",
+                                   ((flags & O_APPEND) != 0) ? ">>" : ">", quoted_name);
+        g_free (quoted_name);
+        r = shell_command (me, super, WAIT_REPLY, command, -1);
+        g_free (command);
+        if (r != COMPLETE)
+            ERRNOR (E_REMOTE, NULL);
+    }
+
     /*
        sorry, i've places hack here
        cause shell don't able to open files with O_EXCL flag
