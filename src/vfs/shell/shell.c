@@ -115,6 +115,8 @@ int shell_directory_timeout = 900;
 #define SHELL_HAVE_LSQ         16
 #define SHELL_HAVE_DATE_MDYT   32
 #define SHELL_HAVE_TAIL        64
+#define SHELL_HAVE_DD          128
+#define SHELL_HAVE_POSIX_DD    256
 
 #define SHELL_SUPER(super)     ((shell_super_t *) (super))
 #define SHELL_FILE_HANDLER(fh) ((shell_file_handler_t *) fh)
@@ -479,6 +481,12 @@ shell_set_env (int flags)
 
     if ((flags & SHELL_HAVE_TAIL) != 0)
         g_string_append (ret, "SHELL_HAVE_TAIL=1 export SHELL_HAVE_TAIL; ");
+
+    if ((flags & SHELL_HAVE_DD) != 0)
+        g_string_append (ret, "SHELL_HAVE_DD=1 export SHELL_HAVE_DD; ");
+
+    if ((flags & SHELL_HAVE_POSIX_DD) != 0)
+        g_string_append (ret, "SHELL_HAVE_POSIX_DD=1 export SHELL_HAVE_POSIX_DD; ");
 
     return ret;
 }

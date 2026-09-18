@@ -1,11 +1,26 @@
-send_read_data() {
-	while [ "$bs" -gt "$SHELL_FILESIZE" ]; do
-		bs=`expr "$bs" / 2`
-	done
-	[ "$bs" -gt 511 ] || bs=1
-	count=`expr "$SHELL_FILESIZE" / "$bs"`
-	dd bs="$bs" count="$count" 2>/dev/null
-}
+case "${SHELL_HAVE_POSIX_DD-0}${SHELL_HAVE_HEAD-0}${SHELL_HAVE_PERL-0}${SHELL_HAVE_DD-0}" in
+1???|0001)
+	send_read_data() {
+		while [ "$bs" -gt "$SHELL_FILESIZE" ]; do
+			bs=`expr "$bs" / 2`
+		done
+		[ "$bs" -gt 511 ] || bs=1
+		count=`expr "$SHELL_FILESIZE" / "$bs"`
+		dd bs="$bs" count="$count" ${SHELL_HAVE_POSIX_DD+iflag=fullblock} 2>/dev/null
+	}
+	;;
+01??)	send_read_data() { head -c "$SHELL_FILESIZE"; }
+	;;
+001?)	send_read_data() {
+		perl -e "\$n = $SHELL_FILESIZE; \$bs = $bs;"'
+			while ($n) {
+				 $m = sysread(STDIN, $b, ($n < $bs) ? $n : $bs);
+				 syswrite(STDOUT, $b, $m) if ($m);
+				 $n -= $m;
+			}'
+	}
+	;;
+esac
 
 send_piece() {
 	{ send_read_data | tee -a "$FILENAME" | wc -c; } 2>&1 | while read -r _output; do
@@ -39,7 +54,7 @@ FILENAME="/${SHELL_FILENAME}"
 
 if [ -d "$FILENAME" ]; then
 	echo "### 500 $FILENAME is a directory"
-elif [ "${SHELL_HAVE_DD-0}" = "0" ]; then
+elif [ "${SHELL_HAVE_POSIX_DD-0}${SHELL_HAVE_HEAD-0}${SHELL_HAVE_PERL-0}${SHELL_HAVE_DD-0}" = "0000" ]; then
 	echo "### 500 No supported send method"
 else
 	send_for_real
