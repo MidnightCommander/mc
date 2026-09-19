@@ -32,6 +32,7 @@
 #include "lib/global.h"
 
 #include "lib/search.h"
+#include "lib/strutil.h"  // str_shell_escape()
 #include "lib/util.h"  // tilde_expand()
 #include "lib/vfs/utilvfs.h"
 
@@ -57,8 +58,8 @@ typedef struct
     gboolean password_auth;    // FALSE - no passwords allowed (default TRUE)
     gboolean identities_only;  // TRUE - no ssh agent (default FALSE)
     gboolean pubkey_auth;      // FALSE - disable public key authentication (default TRUE)
-    char *identity_file;  // A file from which the user's DSA, ECDSA or DSA authentication identity
-                          // is read.
+    GSList *identity_file;     // A list of files from which the user's DSA, ECDSA or DSA
+                               // authentication identity is read.
 } sftpfs_ssh_config_entity_t;
 
 enum config_var_type
@@ -66,7 +67,7 @@ enum config_var_type
     STRING,
     INTEGER,
     BOOLEAN,
-    FILENAME
+    FILENAME_LIST
 };
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -101,7 +102,7 @@ static struct
     {
         "^\\s*IdentityFile\\s+(.*)$",
         NULL,
-        FILENAME,
+        FILENAME_LIST,
         offsetof (sftpfs_ssh_config_entity_t, identity_file),
     },
     {
@@ -139,7 +140,7 @@ sftpfs_ssh_config_entity_free (sftpfs_ssh_config_entity_t *config_entity)
 {
     g_free (config_entity->real_host);
     g_free (config_entity->user);
-    g_free (config_entity->identity_file);
+    g_slist_free_full (config_entity->identity_file, g_free);
     g_free (config_entity);
 }
 
@@ -208,6 +209,7 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
             int *pointer_int;
             char **pointer_str;
             gboolean *pointer_bool;
+            GSList **pointer_list;
 
             // Calculate start of value in string
             value_offset = mc_search_getstart_result_by_num (config_variables[i].pattern_regexp, 1);
@@ -219,9 +221,9 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
                 pointer_str = POINTER_TO_STRUCTURE_MEMBER (char **);
                 *pointer_str = g_strdup (value);
                 break;
-            case FILENAME:
-                pointer_str = POINTER_TO_STRUCTURE_MEMBER (char **);
-                *pointer_str = sftpfs_correct_file_name (value);
+            case FILENAME_LIST:
+                pointer_list = POINTER_TO_STRUCTURE_MEMBER (GSList **);
+                *pointer_list = g_slist_prepend (*pointer_list, sftpfs_correct_file_name (value));
                 break;
             case INTEGER:
                 pointer_int = POINTER_TO_STRUCTURE_MEMBER (int *);
@@ -331,6 +333,7 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
 
 done:
     mc_search_free (host_regexp);
+    config_entity->identity_file = g_slist_reverse (config_entity->identity_file);
     return ok;
 }
 
@@ -434,8 +437,9 @@ sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError **mce
 
     if (config_entity->identity_file != NULL)
     {
-        sftpfs_super->privkey = g_strdup (config_entity->identity_file);
-        sftpfs_super->pubkey = g_strdup_printf ("%s.pub", config_entity->identity_file);
+        // steal the list
+        sftpfs_super->privkeys = config_entity->identity_file;
+        config_entity->identity_file = NULL;
     }
 
     sftpfs_ssh_config_entity_free (config_entity);

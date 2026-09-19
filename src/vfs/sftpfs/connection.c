@@ -723,34 +723,46 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     char *p, *passwd;
     gboolean ret_value = FALSE;
+    GSList *node;
 
     mc_return_val_if_error (mcerror, FALSE);
 
     if ((sftpfs_super->auth_type & PUBKEY) == 0)
         return FALSE;
 
-    if (sftpfs_super->privkey == NULL)
+    if (sftpfs_super->privkeys == NULL)
         return FALSE;
 
-    if (libssh2_userauth_publickey_fromfile (sftpfs_super->session, super->path_element->user,
-                                             sftpfs_super->pubkey, sftpfs_super->privkey,
-                                             super->path_element->password)
-        == 0)
-        return TRUE;
-
-    p = g_strdup_printf (_ ("sftp: Enter passphrase for %s "), super->path_element->user);
-    passwd = vfs_get_password (p);
-    g_free (p);
-
-    if (passwd == NULL)
-        mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Passphrase is empty."));
-    else
+    for (node = sftpfs_super->privkeys; node != NULL && !ret_value; node = g_slist_next (node))
     {
-        ret_value = (libssh2_userauth_publickey_fromfile (
-                         sftpfs_super->session, super->path_element->user, sftpfs_super->pubkey,
-                         sftpfs_super->privkey, passwd)
-                     == 0);
-        g_free (passwd);
+        const char *privkey = node->data;
+        char *pubkey;
+        int res;
+
+        if (!exist_file (privkey))
+            continue;
+
+        pubkey = g_strdup_printf ("%s.pub", privkey);
+        res = libssh2_userauth_publickey_fromfile (sftpfs_super->session, super->path_element->user,
+                                                   pubkey, privkey, super->path_element->password);
+        if (res == 0)
+            ret_value = TRUE;
+        else if (res == LIBSSH2_ERROR_PUBLICKEY_UNVERIFIED)
+        {
+            p = g_strdup_printf (_ ("sftp: Enter passphrase for %s "), privkey);
+            passwd = vfs_get_password (p);
+            g_free (p);
+
+            if (passwd == NULL)
+                mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Passphrase is empty."));
+            else if (libssh2_userauth_publickey_fromfile (
+                         sftpfs_super->session, super->path_element->user, pubkey, privkey, passwd)
+                     == 0)
+                ret_value = TRUE;
+
+            g_free (passwd);
+        }
+        g_free (pubkey);
     }
 
     return ret_value;
