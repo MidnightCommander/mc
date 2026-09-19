@@ -32,7 +32,8 @@
 #include "lib/global.h"
 
 #include "lib/search.h"
-#include "lib/util.h"  // tilde_expand()
+#include "lib/strutil.h"  // str_shell_escape()
+#include "lib/util.h"     // tilde_expand()
 #include "lib/vfs/utilvfs.h"
 
 #include "internal.h"
@@ -57,8 +58,8 @@ typedef struct
     gboolean password_auth;    // FALSE - no passwords allowed (default TRUE)
     gboolean identities_only;  // TRUE - no ssh agent (default FALSE)
     gboolean pubkey_auth;      // FALSE - disable public key authentication (default TRUE)
-    char *identity_file;  // A file from which the user's DSA, ECDSA or DSA authentication identity
-                          // is read.
+    GSList *identity_file;     // A list of files from which the user's DSA, ECDSA or DSA
+                               // authentication identity is read.
 } sftpfs_ssh_config_entity_t;
 
 enum config_var_type
@@ -66,7 +67,7 @@ enum config_var_type
     STRING,
     INTEGER,
     BOOLEAN,
-    FILENAME
+    FILENAME_LIST
 };
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -101,7 +102,7 @@ static struct
     {
         "^\\s*IdentityFile\\s+(.*)$",
         NULL,
-        FILENAME,
+        FILENAME_LIST,
         offsetof (sftpfs_ssh_config_entity_t, identity_file),
     },
     {
@@ -139,7 +140,7 @@ sftpfs_ssh_config_entity_free (sftpfs_ssh_config_entity_t *config_entity)
 {
     g_free (config_entity->real_host);
     g_free (config_entity->user);
-    g_free (config_entity->identity_file);
+    g_slist_free_full (config_entity->identity_file, g_free);
     g_free (config_entity);
 }
 
@@ -208,6 +209,7 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
             int *pointer_int;
             char **pointer_str;
             gboolean *pointer_bool;
+            GSList **pointer_list;
 
             // Calculate start of value in string
             value_offset = mc_search_getstart_result_by_num (config_variables[i].pattern_regexp, 1);
@@ -219,9 +221,9 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
                 pointer_str = POINTER_TO_STRUCTURE_MEMBER (char **);
                 *pointer_str = g_strdup (value);
                 break;
-            case FILENAME:
-                pointer_str = POINTER_TO_STRUCTURE_MEMBER (char **);
-                *pointer_str = sftpfs_correct_file_name (value);
+            case FILENAME_LIST:
+                pointer_list = POINTER_TO_STRUCTURE_MEMBER (GSList **);
+                *pointer_list = g_slist_prepend (*pointer_list, sftpfs_correct_file_name (value));
                 break;
             case INTEGER:
                 pointer_int = POINTER_TO_STRUCTURE_MEMBER (int *);
@@ -331,6 +333,8 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
 
 done:
     mc_search_free (host_regexp);
+    if (config_entity->identity_file != NULL)
+        config_entity->identity_file = g_slist_reverse (config_entity->identity_file);
     return ok;
 }
 
@@ -349,6 +353,9 @@ sftpfs_get_config_entity (const vfs_path_element_t *vpath_element, GError **mcer
     sftpfs_ssh_config_entity_t *config_entity;
     FILE *ssh_config_handler;
     char *config_filename;
+    char *quoted_filename;
+    char *quoted_host;
+    char *ssh_command;
 
     mc_return_val_if_error (mcerror, FALSE);
 
@@ -358,9 +365,17 @@ sftpfs_get_config_entity (const vfs_path_element_t *vpath_element, GError **mcer
     config_entity->pubkey_auth = TRUE;
     config_entity->port = SFTP_DEFAULT_PORT;
 
+    // First, ask ssh to parse configs for us, filling in the defaults, includes etc.
+    // Only if it fails, parse user's config ourselves.
     config_filename = sftpfs_correct_file_name (SFTPFS_SSH_CONFIG);
-    ssh_config_handler = fopen (config_filename, "r");
+    quoted_filename = str_shell_escape (config_filename);
+    quoted_host = str_shell_escape (vpath_element->host);
+    ssh_command = g_strdup_printf ("ssh -G %s || cat %s", quoted_host, quoted_filename);
+    ssh_config_handler = popen (ssh_command, "r");
     g_free (config_filename);
+    g_free (quoted_filename);
+    g_free (quoted_host);
+    g_free (ssh_command);
 
     if (ssh_config_handler != NULL)
     {
@@ -368,7 +383,7 @@ sftpfs_get_config_entity (const vfs_path_element_t *vpath_element, GError **mcer
 
         ok = sftpfs_fill_config_entity_from_config (ssh_config_handler, config_entity,
                                                     vpath_element, mcerror);
-        fclose (ssh_config_handler);
+        pclose (ssh_config_handler);
 
         if (!ok)
         {
@@ -434,8 +449,9 @@ sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError **mce
 
     if (config_entity->identity_file != NULL)
     {
-        sftpfs_super->privkey = g_strdup (config_entity->identity_file);
-        sftpfs_super->pubkey = g_strdup_printf ("%s.pub", config_entity->identity_file);
+        // steal the list
+        sftpfs_super->privkeys = config_entity->identity_file;
+        config_entity->identity_file = NULL;
     }
 
     sftpfs_ssh_config_entity_free (config_entity);
