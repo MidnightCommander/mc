@@ -33,7 +33,7 @@
 
 #include "lib/search.h"
 #include "lib/strutil.h"  // str_shell_escape()
-#include "lib/util.h"  // tilde_expand()
+#include "lib/util.h"     // tilde_expand()
 #include "lib/vfs/utilvfs.h"
 
 #include "internal.h"
@@ -355,6 +355,9 @@ sftpfs_get_config_entity (const vfs_path_element_t *vpath_element, GError **mcer
     sftpfs_ssh_config_entity_t *config_entity;
     FILE *ssh_config_handler;
     char *config_filename;
+    char *quoted_filename;
+    char *quoted_host;
+    char *ssh_command;
 
     mc_return_val_if_error (mcerror, FALSE);
 
@@ -364,9 +367,20 @@ sftpfs_get_config_entity (const vfs_path_element_t *vpath_element, GError **mcer
     config_entity->pubkey_auth = TRUE;
     config_entity->port = SFTP_DEFAULT_PORT;
 
+    // First, ask ssh to parse configs for us, filling in the defaults, includes etc.
+    // Only if it fails, parse user's config ourselves.
+    // ssh -G was intoduced in OpenSSH 6.7, but before version 9.2 it omitted
+    // the Host line at the top, so our parser should parse the top level as well.
     config_filename = sftpfs_correct_file_name (SFTPFS_SSH_CONFIG);
-    ssh_config_handler = fopen (config_filename, "r");
+    quoted_filename = str_shell_escape (config_filename);
+    quoted_host = str_shell_escape (vpath_element->host);
+    ssh_command =
+        g_strdup_printf ("{ ssh -G %s || cat %s; } 2>/dev/null", quoted_host, quoted_filename);
+    ssh_config_handler = popen (ssh_command, "r");
     g_free (config_filename);
+    g_free (quoted_filename);
+    g_free (quoted_host);
+    g_free (ssh_command);
 
     if (ssh_config_handler != NULL)
     {
@@ -374,7 +388,7 @@ sftpfs_get_config_entity (const vfs_path_element_t *vpath_element, GError **mcer
 
         ok = sftpfs_fill_config_entity_from_config (ssh_config_handler, config_entity,
                                                     vpath_element, mcerror);
-        fclose (ssh_config_handler);
+        pclose (ssh_config_handler);
 
         if (!ok)
         {
