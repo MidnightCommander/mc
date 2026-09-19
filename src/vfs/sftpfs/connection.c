@@ -777,7 +777,9 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
 static LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
 {
     int i;
-    size_t len;
+    size_t len, user_len;
+    static const char password_for[] = "Password for ";  // "Password for USER@HOSTNAME:"
+    const size_t password_for_len = sizeof (password_for) - 1;
 
     (void) instruction;
     (void) instruction_len;
@@ -786,18 +788,28 @@ static LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper
     if (kbi_super == NULL || kbi_passwd == NULL)
         return;
 
-    if (strncmp (name, kbi_super->path_element->user, name_len) != 0)
+    // FIXME: name is most likely NULL, but even if it weren't, strncmp makes little sense here
+    if (name != NULL && strncmp (name, kbi_super->path_element->user, name_len) != 0)
         return;
 
     // assume these are password prompts
     len = strlen (kbi_passwd);
 
+    user_len = strlen (kbi_super->path_element->user);
     for (i = 0; i < num_prompts; ++i)
-        if (memcmp (prompts[i].text, "Password: ", prompts[i].length) == 0)
+    {
+        const unsigned char *text = prompts[i].text;
+
+        if (memcmp (text, "Password: ", prompts[i].length) == 0
+            || (prompts[i].length > password_for_len + user_len + sizeof ('@')
+                && memcmp (text, password_for, password_for_len) == 0
+                && memcmp (&text[password_for_len], kbi_super->path_element->user, user_len) == 0
+                && text[password_for_len + user_len] == '@'))
         {
             responses[i].text = strdup (kbi_passwd);
             responses[i].length = len;
         }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
