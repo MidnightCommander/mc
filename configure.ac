@@ -41,6 +41,7 @@ dnl that ar cannot be found and linking via libtool will fail at a later stage
 AC_CHECK_TOOLS([AR], [ar gar])
 
 AC_PROG_CC
+AC_PROG_CXX
 
 # AC_PROG_CC doesn't try enabling C99 in autoconf 2.69 and below, but
 # AC_PROG_CC_C99 is deprecated in newer ones. In autoconf 2.70+ both
@@ -566,11 +567,18 @@ AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 AC_SUBST(LIBS)
 
+dnl ############################################################################
+dnl Syntax highlighting system selection
+dnl ############################################################################
+
+mc_WITH_TREE_SITTER
+
 AM_CONDITIONAL(USE_NLS, [test x"$USE_NLS" = xyes])
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_INTERNAL_EDIT, [test x"$use_internal_edit" = xyes ])
 AM_CONDITIONAL(USE_ASPELL, [test x"$enable_aspell" = xyes ])
+AM_CONDITIONAL(USE_TREE_SITTER, [test x"$with_tree_sitter" = xyes])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 dnl Clarify do we really need GModule
@@ -684,6 +692,7 @@ lib/vfs/Makefile
 lib/widget/Makefile
 
 misc/syntax/Makefile
+misc/syntax-ts/Makefile
 
 doc/Makefile
 

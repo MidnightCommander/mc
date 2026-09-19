@@ -124,6 +124,9 @@ edit_options_dialog (WDialog *h)
     char *p, *q;
     int wrap_mode = 0;
     gboolean old_syntax_hl;
+#ifdef HAVE_TREE_SITTER
+    gboolean old_use_ts;
+#endif
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
@@ -144,6 +147,11 @@ edit_options_dialog (WDialog *h)
         wrap_mode = 2;
     else
         wrap_mode = 0;
+
+    old_syntax_hl = edit_options.syntax_highlighting;
+#ifdef HAVE_TREE_SITTER
+    old_use_ts = edit_options.use_tree_sitter;
+#endif
 
     {
         quick_widget_t quick_widgets[] = {
@@ -175,6 +183,10 @@ edit_options_dialog (WDialog *h)
                     QUICK_CHECKBOX (_ ("Visible &tabs"), &edit_options.visible_tabs, NULL),
                     QUICK_CHECKBOX (_ ("Synta&x highlighting"), &edit_options.syntax_highlighting,
                                     NULL),
+#ifdef HAVE_TREE_SITTER
+                    QUICK_CHECKBOX (_ ("Tree-&sitter highlighting"),
+                                    &edit_options.use_tree_sitter, NULL),
+#endif
                     QUICK_CHECKBOX (_ ("C&ursor after inserted block"),
                                     &edit_options.cursor_after_inserted_block, NULL),
                     QUICK_CHECKBOX (_ ("Pers&istent selection"),
@@ -205,8 +217,6 @@ edit_options_dialog (WDialog *h)
         if (quick_dialog (&qdlg) == B_CANCEL)
             return;
     }
-
-    old_syntax_hl = edit_options.syntax_highlighting;
 
     if (!edit_options.cursor_beyond_eol)
         g_list_foreach (GROUP (h)->widgets, edit_reset_over_col, NULL);
@@ -243,8 +253,12 @@ edit_options_dialog (WDialog *h)
         edit_options.typewriter_wrap = FALSE;
     }
 
-    // Load or unload syntax rules if the option has changed
-    if (edit_options.syntax_highlighting != old_syntax_hl)
+    // Load or unload syntax rules if any highlighting option changed
+    if (edit_options.syntax_highlighting != old_syntax_hl
+#ifdef HAVE_TREE_SITTER
+        || edit_options.use_tree_sitter != old_use_ts
+#endif
+       )
         g_list_foreach (GROUP (h)->widgets, edit_reload_syntax, NULL);
 }
 

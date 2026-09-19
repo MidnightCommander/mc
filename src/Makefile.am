@@ -56,7 +56,8 @@ libinternal_la_LIBADD = \
 	$(DIFFLIB) $(EDITLIB) $(SUBSHELLLIB)
 
 mc_LDADD = \
-	libinternal.la
+	libinternal.la \
+	$(TREE_SITTER_LIBS)
 
 if ENABLE_MCLIB
 libinternal_la_LIBADD += \

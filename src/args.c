@@ -57,6 +57,11 @@ gboolean mc_args__force_colors = FALSE;
 /* Don't load keymap from file and use default one */
 gboolean mc_args__nokeymap = FALSE;
 
+#ifdef HAVE_TREE_SITTER
+/* Disable tree-sitter highlighting, use legacy syntax engine */
+gboolean mc_args__no_tree_sitter = FALSE;
+#endif
+
 char *mc_args__last_wd_file = NULL;
 
 /* when enabled NETCODE, use following file as logfile */
@@ -210,6 +215,18 @@ static const GOptionEntry argument_main_table[] = {
         N_ ("Edit files"),
         N_ ("<file> ..."),
     },
+
+#ifdef HAVE_TREE_SITTER
+    {
+        "no-tree-sitter",
+        '\0',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_NONE,
+        &mc_args__no_tree_sitter,
+        N_ ("Disable tree-sitter syntax highlighting, use legacy engine"),
+        NULL,
+    },
+#endif
 
     G_OPTION_ENTRY_NULL,
 };
@@ -744,6 +761,11 @@ mc_setup_by_args (int argc, char **argv, GError **mcerror)
 #ifdef ENABLE_SUBSHELL
     if (mc_args__nouse_subshell)
         mc_global.tty.use_subshell = FALSE;
+#endif
+
+#ifdef HAVE_TREE_SITTER
+    if (mc_args__no_tree_sitter)
+        edit_options.syntax_highlight_mode = SYNTAX_HIGHLIGHT_LEGACY;
 #endif
 
 #ifdef ENABLE_VFS_FTP
