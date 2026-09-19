@@ -778,6 +778,7 @@ sftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
 
     vfs_path_element_free (SFTP_SUPER (super)->original_connection_info);
+    g_slist_free_full (SFTP_SUPER (super)->privkeys, g_free);
 
     mc_error_message (&mcerror, NULL);
 }
