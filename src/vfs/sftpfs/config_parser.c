@@ -262,6 +262,7 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
     char buffer[BUF_MEDIUM];
     gboolean host_block_hit = FALSE;
     gboolean pattern_block_hit = FALSE;
+    gboolean top_level = TRUE;
     mc_search_t *host_regexp;
     gboolean ok = TRUE;
 
@@ -305,6 +306,8 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
             if (host_block_hit)
                 goto done;
 
+            top_level = FALSE;
+
             host_pattern_offset = mc_search_getstart_result_by_num (host_regexp, 1);
             host_pattern = &buffer[host_pattern_offset];
             if (strcmp (host_pattern, vpath_element->host) == 0)
@@ -325,7 +328,7 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
                 mc_search_free (pattern_regexp);
             }
         }
-        else if (pattern_block_hit || host_block_hit)
+        else if (top_level || pattern_block_hit || host_block_hit)
         {
             sftpfs_fill_config_entity_from_string (config_entity, buffer);
         }
