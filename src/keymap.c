@@ -563,6 +563,8 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
     { "SearchBackwardContinue", "ctrl-r" },
     { "SearchOppositeContinue", "shift-n" },
     { "History", "alt-shift-e" },
+    { "SyntaxMode", "s" },
+    { "SyntaxOptions", "shift-s" },
     {
         NULL,
         NULL,
