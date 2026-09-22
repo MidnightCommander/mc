@@ -824,21 +824,16 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror
 
     if (super->path_element->password != NULL)
     {
-        while ((rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user,
-                                                super->path_element->password))
-               == LIBSSH2_ERROR_EAGAIN)
-            ;
+        rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user,
+                                        super->path_element->password);
         if (rc == 0)
             return TRUE;
 
         kbi_super = super;
         kbi_passwd = super->path_element->password;
 
-        while ((rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session,
-                                                            super->path_element->user,
-                                                            sftpfs_keyboard_interactive_helper))
-               == LIBSSH2_ERROR_EAGAIN)
-            ;
+        rc = libssh2_userauth_keyboard_interactive (
+            sftpfs_super->session, super->path_element->user, sftpfs_keyboard_interactive_helper);
 
         kbi_super = NULL;
         kbi_passwd = NULL;
@@ -855,21 +850,15 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror
         mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Password is empty."));
     else
     {
-        while ((rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user,
-                                                passwd))
-               == LIBSSH2_ERROR_EAGAIN)
-            ;
-
+        rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user, passwd);
         if (rc != 0)
         {
             kbi_super = super;
             kbi_passwd = passwd;
 
-            while ((rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session,
-                                                                super->path_element->user,
-                                                                sftpfs_keyboard_interactive_helper))
-                   == LIBSSH2_ERROR_EAGAIN)
-                ;
+            rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session,
+                                                        super->path_element->user,
+                                                        sftpfs_keyboard_interactive_helper);
 
             kbi_super = NULL;
             kbi_passwd = NULL;
@@ -920,16 +909,17 @@ sftpfs_open_connection (struct vfs_s_super *super, GError **mcerror)
     if (sftpfs_super->session == NULL)
         return (-1);
 
+    // Since we have not set non-blocking, tell libssh2 we are blocking
+    libssh2_session_set_blocking (sftpfs_super->session, 1);
+
     if (!sftpfs_read_known_hosts (super, mcerror))
         return (-1);
 
     /* ... start it up. This will trade welcome banners, exchange keys,
      * and setup crypto, compression, and MAC layers
      */
-    while ((rc = libssh2_session_handshake (sftpfs_super->session,
-                                            (libssh2_socket_t) sftpfs_super->socket_handle))
-           == LIBSSH2_ERROR_EAGAIN)
-        ;
+    rc = libssh2_session_handshake (sftpfs_super->session,
+                                    (libssh2_socket_t) sftpfs_super->socket_handle);
     if (rc != 0)
     {
         mc_propagate_error (mcerror, rc, "%s", _ ("sftp: failure establishing SSH session"));
@@ -957,9 +947,6 @@ sftpfs_open_connection (struct vfs_s_super *super, GError **mcerror)
 
     if (sftpfs_super->sftp_session == NULL)
         return (-1);
-
-    // Since we have not set non-blocking, tell libssh2 we are blocking
-    libssh2_session_set_blocking (sftpfs_super->session, 1);
 
     return 0;
 }
