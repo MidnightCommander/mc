@@ -282,13 +282,14 @@ sftpfs_read_file (vfs_file_handler_t *fh, char *buffer, size_t count, GError **m
  * @param count   data size
  * @param mcerror pointer to the error handler
  *
- * @return 0 on success, negative value otherwise
+ * @return bytes written on success, negative value otherwise
  */
 
 ssize_t
 sftpfs_write_file (vfs_file_handler_t *fh, const char *buffer, size_t count, GError **mcerror)
 {
     ssize_t rc;
+    size_t written;
     sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
     sftpfs_super_t *super = SFTP_SUPER (VFS_FILE_HANDLER_SUPER (fh));
 
@@ -296,13 +297,16 @@ sftpfs_write_file (vfs_file_handler_t *fh, const char *buffer, size_t count, GEr
 
     fh->pos = (off_t) libssh2_sftp_tell64 (file->handle);
 
+    for (written = 0; written < count; written += rc)
     {
-        rc = libssh2_sftp_write (file->handle, buffer, count);
+        rc = libssh2_sftp_write (file->handle, buffer + written, count - written);
         if (rc < 0)
             return sftpfs_file__handle_error (super, (int) rc, mcerror);
+
+        fh->pos += rc;
     }
 
-    return rc;
+    return written;
 }
 
 /* --------------------------------------------------------------------------------------------- */
