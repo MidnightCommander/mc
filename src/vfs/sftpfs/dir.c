@@ -40,12 +40,6 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef struct
-{
-    LIBSSH2_SFTP_HANDLE *handle;
-    sftpfs_super_t *super;
-} sftpfs_dir_data_t;
-
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
@@ -76,11 +70,12 @@ sftpfs_opendir (const vfs_path_t *vpath, GError **mcerror)
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    handle = libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, 0,
-                                   0, LIBSSH2_SFTP_OPENDIR);
+    handle = libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, 0, 0,
+                                   LIBSSH2_SFTP_OPENDIR);
     if (handle == NULL)
     {
-        sftpfs_ssherror_to_gliberror (sftpfs_super, libssh2_session_last_errno (sftpfs_super->session), mcerror);
+        sftpfs_ssherror_to_gliberror (sftpfs_super,
+                                      libssh2_session_last_errno (sftpfs_super->session), mcerror);
         return NULL;
     }
 
@@ -138,6 +133,11 @@ sftpfs_closedir (void *data, GError **mcerror)
     mc_return_val_if_error (mcerror, -1);
 
     rc = libssh2_sftp_closedir (sftpfs_dir->handle);
+    if (rc < 0)
+    {
+        sftpfs_ssherror_to_gliberror (sftpfs_dir->super, rc, mcerror);
+        rc = -1;
+    }
     g_free (sftpfs_dir);
     return rc;
 }
