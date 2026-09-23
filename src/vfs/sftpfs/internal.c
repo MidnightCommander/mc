@@ -274,7 +274,7 @@ sftpfs_stat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror)
  * @param buf     buffer for store stat-info
  * @param size    buffer size
  * @param mcerror pointer to error object
- * @return 0 if success, negative value otherwise
+ * @return        bytes written without NUL, negative value on failure
  */
 
 int

@@ -242,7 +242,7 @@ sftpfs_fstat (void *data, struct stat *buf, GError **mcerror)
  * @param count   data size
  * @param mcerror pointer to the error handler
  *
- * @return 0 on success, negative value otherwise
+ * @return bytes read on success, negative value otherwise
  */
 
 ssize_t

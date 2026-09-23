@@ -367,7 +367,7 @@ sftpfs_cb_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Callback for symlink VFS-function.
+ * Callback for mknod VFS-function.
  *
  * @param vpath unused
  * @param mode  unused
@@ -430,7 +430,7 @@ sftpfs_cb_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
  * @param data   file data handler
  * @param buffer buffer for data
  * @param count  data size
- * @return 0 if success, negative value otherwise
+ * @return bytes read if success, negative value otherwise
  */
 
 static ssize_t
@@ -458,7 +458,7 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
  * @param data  file data handler
  * @param buf   buffer for data
  * @param count data size
- * @return 0 if success, negative value otherwise
+ * @return bytes written if success, negative value otherwise
  */
 
 static ssize_t
