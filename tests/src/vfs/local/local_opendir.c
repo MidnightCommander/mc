@@ -36,12 +36,32 @@
 /* mocked functions */
 /* --------------------------------------------------------------------------------------------- */
 
+static DIR *mock_opendir (const char *name);
 static struct dirent *mock_readdir (DIR *dirp);
 
-// route the readdir() calls of the local VFS through the mock
+// route the opendir() and readdir() calls of the local VFS through the mocks
+#define opendir(name) mock_opendir (name)
 #define readdir(dirp) mock_readdir (dirp)
 #include "src/vfs/local/local.c"
+#undef opendir
 #undef readdir
+
+// calls to fail with EINTR before passing through
+static int mock_opendir__eintr_count = 0;
+
+/* @Mock */
+static DIR *
+mock_opendir (const char *name)
+{
+    if (mock_opendir__eintr_count > 0)
+    {
+        mock_opendir__eintr_count--;
+        errno = EINTR;
+        return NULL;
+    }
+
+    return opendir (name);
+}
 
 // whether to report the end of the directory right away
 static gboolean mock_readdir__eof = FALSE;
@@ -179,6 +199,35 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test */
+START_TEST (test_local_opendir_opendir_eintr)
+{
+    char *dir;
+    vfs_path_t *vpath;
+    void *info;
+
+    // given: a directory, the opening of which is interrupted once
+    dir = g_dir_make_tmp ("mctest-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    vpath = vfs_path_from_str (dir);
+    mock_opendir__eintr_count = 1;
+
+    // when
+    info = local_opendir (vpath);
+
+    // then: opening is retried
+    mctest_assert_not_null (info);
+
+    // cleanup
+    local_closedir (info);
+    vfs_path_free (vpath, TRUE);
+    rmdir (dir);
+    g_free (dir);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -191,6 +240,7 @@ main (void)
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_local_opendir_stale_eintr);
     tcase_add_test (tc_core, test_local_opendir_readdir_error);
+    tcase_add_test (tc_core, test_local_opendir_opendir_eintr);
     // ***********************************
 
     return mctest_run_all (tc_core);
