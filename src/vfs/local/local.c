@@ -93,9 +93,10 @@ local_opendir (const vfs_path_t *vpath)
      * networked filesystems such as CIFS. Networked FUSE-based systems appear to be affected as
      * well. What's worse is that when you retry `readdir`, the file list still comes out empty.
      *
-     * So our only option seems to be to try `readdir` immediately after `opendir` and use
-     * `rewinddir` if successful, otherwise reopen the directory, which usually leads to correct
-     * file listing.
+     * So our only option seems to be to try `readdir` immediately after `opendir` and reopen the
+     * directory if it failed with EINTR, which usually leads to correct file listing, or use
+     * `rewinddir` otherwise, even if `readdir` failed, since FreeBSD and macOS may have advanced
+     * the stream anyway.
      *
      * However, this has caused problems on FUSE-based systems that do not properly implement
      * `rewinddir` in the past. No silver bullet...
