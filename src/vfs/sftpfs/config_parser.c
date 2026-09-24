@@ -57,6 +57,7 @@ typedef struct
     gboolean password_auth;    // FALSE - no passwords allowed (default TRUE)
     gboolean identities_only;  // TRUE - no ssh agent (default FALSE)
     gboolean pubkey_auth;      // FALSE - disable public key authentication (default TRUE)
+    gboolean kbd_int_auth;     // FALSE - disable keyboard interactive authentication (default TRUE)
     char *identity_file;  // A file from which the user's DSA, ECDSA or DSA authentication identity
                           // is read.
 } sftpfs_ssh_config_entity_t;
@@ -103,6 +104,12 @@ static struct
         NULL,
         FILENAME,
         offsetof (sftpfs_ssh_config_entity_t, identity_file),
+    },
+    {
+        "^\\s*KbdInteractiveAuthentication\\s+(.*)$",
+        NULL,
+        BOOLEAN,
+        offsetof (sftpfs_ssh_config_entity_t, kbd_int_auth),
     },
     {
         "^\\s*Port\\s+(.*)$",
@@ -356,6 +363,7 @@ sftpfs_get_config_entity (const vfs_path_element_t *vpath_element, GError **mcer
     config_entity->password_auth = TRUE;
     config_entity->identities_only = FALSE;
     config_entity->pubkey_auth = TRUE;
+    config_entity->kbd_int_auth = TRUE;
     config_entity->port = SFTP_DEFAULT_PORT;
 
     config_filename = sftpfs_correct_file_name (SFTPFS_SSH_CONFIG);
@@ -415,6 +423,7 @@ sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError **mce
     sftpfs_super->config_auth_type = (config_entity->pubkey_auth) ? PUBKEY : 0;
     sftpfs_super->config_auth_type |= (config_entity->identities_only) ? 0 : AGENT;
     sftpfs_super->config_auth_type |= (config_entity->password_auth) ? PASSWORD : 0;
+    sftpfs_super->config_auth_type |= (config_entity->kbd_int_auth) ? KEYBOARD_INTERACTIVE : 0;
 
     if (super->path_element->port == 0)
         super->path_element->port = config_entity->port;

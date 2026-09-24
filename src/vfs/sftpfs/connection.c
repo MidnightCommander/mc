@@ -113,9 +113,6 @@ static const char *default_hostkey_methods =
  *
  */
 
-static const char *kbi_passwd = NULL;
-static const struct vfs_s_super *kbi_super = NULL;
-
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -641,8 +638,7 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
     if (userauthlist == NULL)
         return FALSE;
 
-    if ((strstr (userauthlist, "password") != NULL
-         || strstr (userauthlist, "keyboard-interactive") != NULL)
+    if (strstr (userauthlist, "password") != NULL
         && (sftpfs_super->config_auth_type & PASSWORD) != 0)
         sftpfs_super->auth_type |= PASSWORD;
 
@@ -652,6 +648,10 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
 
     if ((sftpfs_super->config_auth_type & AGENT) != 0)
         sftpfs_super->auth_type |= AGENT;
+
+    if (strstr (userauthlist, "keyboard-interactive") != NULL
+        && (sftpfs_super->config_auth_type & KEYBOARD_INTERACTIVE) != 0)
+        sftpfs_super->auth_type |= KEYBOARD_INTERACTIVE;
 
     return TRUE;
 }
@@ -764,11 +764,11 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
  *
  * Uses global kbi_super (data with existing connection) and kbi_passwd (password)
  *
- * @param name             username
- * @param name_len         length of @name
- * @param instruction      unused
- * @param instruction_len  unused
- * @param num_prompts      number of possible problems to process
+ * @param name             username. It's usually NULL, though, so unused
+ * @param name_len         length of @name. Unused
+ * @param instruction      optional instruction
+ * @param instruction_len  length of @instruction
+ * @param num_prompts      number of possible prompts to process
  * @param prompts          array of prompts to process
  * @param responses        array of responses, one per prompt
  * @param abstract         unused
@@ -777,27 +777,61 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
 static LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
 {
     int i;
-    size_t len;
 
-    (void) instruction;
-    (void) instruction_len;
+    (void) name;
+    (void) name_len;
     (void) abstract;
 
-    if (kbi_super == NULL || kbi_passwd == NULL)
-        return;
-
-    if (strncmp (name, kbi_super->path_element->user, name_len) != 0)
-        return;
-
-    // assume these are password prompts
-    len = strlen (kbi_passwd);
-
     for (i = 0; i < num_prompts; ++i)
-        if (memcmp (prompts[i].text, "Password: ", prompts[i].length) == 0)
+    {
+        char *full_prompt;
+        char *passwd;
+
+        full_prompt = (instruction_len > 0)
+            ? g_strdup_printf ("%.*s\n%.*s", instruction_len, instruction, (int) prompts[i].length,
+                               prompts[i].text)
+            : g_strndup ((const char *) prompts[i].text, prompts[i].length);
+        passwd = input_dialog (_ ("SFTP authentication"), full_prompt, "mc.vfs.password",
+                               INPUT_PASSWORD, INPUT_COMPLETE_NONE);
+
+        if (passwd != NULL)
         {
-            responses[i].text = strdup (kbi_passwd);
-            responses[i].length = len;
+            responses[i].text = strdup (passwd);
+            responses[i].length = strlen (passwd);
+            g_free (passwd);
         }
+        g_free (full_prompt);
+    }
+}
+
+/**
+ * Open connection to host using keyboard-interactive auth.
+ *
+ * @param super   connection data
+ * @param mcerror pointer to the error handler
+ * @return TRUE if connection was successfully opened, FALSE otherwise
+ */
+
+static gboolean
+sftpfs_open_connection_ssh_keyboard_interactive (struct vfs_s_super *super, GError **mcerror)
+{
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
+    int rc;
+
+    mc_return_val_if_error (mcerror, FALSE);
+
+    if ((sftpfs_super->auth_type & KEYBOARD_INTERACTIVE) == 0)
+        return FALSE;
+
+    rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session, super->path_element->user,
+                                                sftpfs_keyboard_interactive_helper);
+    if (rc < 0)
+    {
+        sftpfs_ssherror_to_gliberror (sftpfs_super, rc, mcerror);
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -830,21 +864,6 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror
             ;
         if (rc == 0)
             return TRUE;
-
-        kbi_super = super;
-        kbi_passwd = super->path_element->password;
-
-        while ((rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session,
-                                                            super->path_element->user,
-                                                            sftpfs_keyboard_interactive_helper))
-               == LIBSSH2_ERROR_EAGAIN)
-            ;
-
-        kbi_super = NULL;
-        kbi_passwd = NULL;
-
-        if (rc == 0)
-            return TRUE;
     }
 
     p = g_strdup_printf (_ ("sftp: Enter password for %s "), super->path_element->user);
@@ -855,25 +874,7 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror
         mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Password is empty."));
     else
     {
-        while ((rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user,
-                                                passwd))
-               == LIBSSH2_ERROR_EAGAIN)
-            ;
-
-        if (rc != 0)
-        {
-            kbi_super = super;
-            kbi_passwd = passwd;
-
-            while ((rc = libssh2_userauth_keyboard_interactive (sftpfs_super->session,
-                                                                super->path_element->user,
-                                                                sftpfs_keyboard_interactive_helper))
-                   == LIBSSH2_ERROR_EAGAIN)
-                ;
-
-            kbi_super = NULL;
-            kbi_passwd = NULL;
-        }
+        rc = libssh2_userauth_password (sftpfs_super->session, super->path_element->user, passwd);
 
         if (rc == 0)
         {
@@ -950,6 +951,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError **mcerror)
 
     if (!sftpfs_open_connection_ssh_agent (super, mcerror)
         && !sftpfs_open_connection_ssh_key (super, mcerror)
+        && !sftpfs_open_connection_ssh_keyboard_interactive (super, mcerror)
         && !sftpfs_open_connection_ssh_password (super, mcerror))
         return (-1);
 
