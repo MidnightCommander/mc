@@ -1,5 +1,5 @@
 /*
-   src/vfs/local - tests for local_opendir() function
+   src/vfs/local - tests for local_opendir() and local_readdir() functions
 
    Copyright (C) 2026
    Free Software Foundation, Inc.
@@ -63,6 +63,9 @@ mock_opendir (const char *name)
     return opendir (name);
 }
 
+// calls to fail with EINTR before passing through
+static int mock_readdir__eintr_count = 0;
+
 // whether to report the end of the directory right away
 static gboolean mock_readdir__eof = FALSE;
 
@@ -73,6 +76,13 @@ static int mock_readdir__fail_after = -1;
 static struct dirent *
 mock_readdir (DIR *dirp)
 {
+    if (mock_readdir__eintr_count > 0)
+    {
+        mock_readdir__eintr_count--;
+        errno = EINTR;
+        return NULL;
+    }
+
     if (mock_readdir__eof)
         return NULL;  // like readdir(), leaving errno untouched
 
@@ -228,6 +238,47 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test */
+START_TEST (test_local_readdir_eintr)
+{
+    char *dir;
+    vfs_path_t *vpath;
+    void *info;
+    struct vfs_dirent *entry;
+    int expected;
+    int actual;
+
+    // given: a directory with entries ("." and ".."), the listing of which is interrupted once
+    // after the first of them
+    dir = g_dir_make_tmp ("mctest-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    vpath = vfs_path_from_str (dir);
+    expected = count_entries (vpath);
+    ck_assert_int_gt (expected, 1);
+    info = local_opendir (vpath);
+    mctest_assert_not_null (info);
+    entry = local_readdir (info);
+    mctest_assert_not_null (entry);
+    vfs_dirent_free (entry);
+    mock_readdir__eintr_count = 1;
+
+    // when
+    for (actual = 1; (entry = local_readdir (info)) != NULL; actual++)
+        vfs_dirent_free (entry);
+
+    // then: reading is retried, so that the listing is complete
+    ck_assert_int_eq (actual, expected);
+
+    // cleanup
+    local_closedir (info);
+    vfs_path_free (vpath, TRUE);
+    rmdir (dir);
+    g_free (dir);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -241,6 +292,7 @@ main (void)
     tcase_add_test (tc_core, test_local_opendir_stale_eintr);
     tcase_add_test (tc_core, test_local_opendir_readdir_error);
     tcase_add_test (tc_core, test_local_opendir_opendir_eintr);
+    tcase_add_test (tc_core, test_local_readdir_eintr);
     // ***********************************
 
     return mctest_run_all (tc_core);
