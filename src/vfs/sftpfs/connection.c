@@ -275,11 +275,7 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError **mcerror)
         mc_build_filename (mc_config_get_home_dir (), ".ssh", "known_hosts", (char *) NULL);
 
     if (!exist_file (sftpfs_super->known_hosts_file))
-    {
-        mc_propagate_error (mcerror, 0, _ ("sftp: cannot open %s:\n%s"),
-                            sftpfs_super->known_hosts_file, unix_error_string (errno));
-        return FALSE;
-    }
+        return TRUE;
 
     rc = libssh2_knownhost_readfile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
                                      LIBSSH2_KNOWNHOST_FILE_OPENSSH);
@@ -395,13 +391,13 @@ err:
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Write new host + key pair to the ~/.ssh/known_hosts file.
+ * Add new host + key pair and save it to the ~/.ssh/known_hosts file.
  *
  * @param super connection data
  * @param remote_key he key for the remote host
  * @param remote_key_len length of @remote_key
  * @param type_mask info about format of host name, key and key type
- * @return 0 on success, regular libssh2 error code otherwise
+ * @return 0 on addition success, regular libssh2 error code otherwise. Save errors are silenced.
  *
  * Thanks the Curl project for the code used in this function.
  */
@@ -411,6 +407,7 @@ sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, si
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     int rc;
+    char *known_hosts_dir;
 
     // add this host + key pair
     rc = libssh2_knownhost_addc (sftpfs_super->known_hosts, super->path_element->host, NULL,
@@ -419,11 +416,22 @@ sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, si
         return rc;
 
     // write the entire in-memory list of known hosts to the known_hosts file
+    known_hosts_dir = g_path_get_dirname (sftpfs_super->known_hosts_file);
+
+    if (!g_file_test (known_hosts_dir, G_FILE_TEST_IS_DIR) && mkdir (known_hosts_dir, 0700) != 0)
+    {
+        vfs_print_message (_ ("SFTP: Could not create %s"), known_hosts_dir);
+        return 0;
+    }
+
     rc = libssh2_knownhost_writefile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
                                       LIBSSH2_KNOWNHOST_FILE_OPENSSH);
 
     if (rc < 0)
-        return rc;
+    {
+        vfs_print_message (_ ("SFTP: Could not write %s"), sftpfs_super->known_hosts_file);
+        return 0;
+    }
 
     (void) message (D_NORMAL, _ ("Information"),
                     _ ("Permanently added\n%s (%s)\nto the list of known hosts."),
