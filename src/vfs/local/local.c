@@ -138,7 +138,13 @@ local_readdir (void *data)
     struct dirent *d;
     unsigned char type;
 
-    d = readdir (*(DIR **) data);
+    // Retry if interrupted, resetting errno to avoid reading a stale EINTR (#5156)
+    do
+    {
+        errno = 0;
+        d = readdir (*(DIR **) data);
+    }
+    while (d == NULL && errno == EINTR);
 
     if (d == NULL)
         return NULL;
