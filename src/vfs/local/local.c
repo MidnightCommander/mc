@@ -104,7 +104,13 @@ local_opendir (const vfs_path_t *vpath)
     {
         dir = opendir (path);
         if (dir == NULL)
+        {
+            // Unlike readdir(), opendir() always sets errno on failure, so no reset is needed
+            if (errno == EINTR)
+                continue;
+
             return NULL;
+        }
 
         // Reset errno before readdir to avoid reading a stale EINTR (#5156)
         errno = 0;
