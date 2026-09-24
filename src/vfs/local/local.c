@@ -139,7 +139,15 @@ local_readdir (void *data)
     struct dirent *d;
     unsigned char type;
 
-    d = readdir (*(DIR **) data);
+    // Retry if interrupted, resetting errno to avoid reading a stale EINTR (#5156). FreeBSD and
+    // macOS may lose the entries read before the interruption, but rewinding would repeat the
+    // ones already returned.
+    do
+    {
+        errno = 0;
+        d = readdir (*(DIR **) data);
+    }
+    while (d == NULL && errno == EINTR);
 
     if (d == NULL)
         return NULL;
