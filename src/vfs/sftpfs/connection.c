@@ -275,11 +275,7 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError **mcerror)
         mc_build_filename (mc_config_get_home_dir (), ".ssh", "known_hosts", (char *) NULL);
 
     if (!exist_file (sftpfs_super->known_hosts_file))
-    {
-        mc_propagate_error (mcerror, 0, _ ("sftp: cannot open %s:\n%s"),
-                            sftpfs_super->known_hosts_file, unix_error_string (errno));
-        return FALSE;
-    }
+        return TRUE;
 
     rc = libssh2_knownhost_readfile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
                                      LIBSSH2_KNOWNHOST_FILE_OPENSSH);
@@ -395,13 +391,13 @@ err:
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Write new host + key pair to the ~/.ssh/known_hosts file.
+ * Add new host + key pair and save it to the ~/.ssh/known_hosts file.
  *
  * @param super connection data
  * @param remote_key he key for the remote host
  * @param remote_key_len length of @remote_key
  * @param type_mask info about format of host name, key and key type
- * @return 0 on success, regular libssh2 error code otherwise
+ * @return 0 on addition success, regular libssh2 error code otherwise. Save errors are silenced.
  *
  * Thanks the Curl project for the code used in this function.
  */
@@ -411,6 +407,7 @@ sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, si
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     int rc;
+    char *known_hosts_dir;
 
     // add this host + key pair
     rc = libssh2_knownhost_addc (sftpfs_super->known_hosts, super->path_element->host, NULL,
@@ -419,11 +416,22 @@ sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, si
         return rc;
 
     // write the entire in-memory list of known hosts to the known_hosts file
+    known_hosts_dir = g_path_get_dirname (sftpfs_super->known_hosts_file);
+
+    if (!g_file_test (known_hosts_dir, G_FILE_TEST_IS_DIR) && mkdir (known_hosts_dir, 0700) != 0)
+    {
+        vfs_print_message (_ ("SFTP: Could not create %s"), known_hosts_dir);
+        return 0;
+    }
+
     rc = libssh2_knownhost_writefile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
                                       LIBSSH2_KNOWNHOST_FILE_OPENSSH);
 
     if (rc < 0)
-        return rc;
+    {
+        vfs_print_message (_ ("SFTP: Could not write %s"), sftpfs_super->known_hosts_file);
+        return 0;
+    }
 
     (void) message (D_NORMAL, _ ("Information"),
                     _ ("Permanently added\n%s (%s)\nto the list of known hosts."),
@@ -723,34 +731,46 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     char *p, *passwd;
     gboolean ret_value = FALSE;
+    GSList *node;
 
     mc_return_val_if_error (mcerror, FALSE);
 
     if ((sftpfs_super->auth_type & PUBKEY) == 0)
         return FALSE;
 
-    if (sftpfs_super->privkey == NULL)
+    if (sftpfs_super->privkeys == NULL)
         return FALSE;
 
-    if (libssh2_userauth_publickey_fromfile (sftpfs_super->session, super->path_element->user,
-                                             sftpfs_super->pubkey, sftpfs_super->privkey,
-                                             super->path_element->password)
-        == 0)
-        return TRUE;
-
-    p = g_strdup_printf (_ ("sftp: Enter passphrase for %s "), super->path_element->user);
-    passwd = vfs_get_password (p);
-    g_free (p);
-
-    if (passwd == NULL)
-        mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Passphrase is empty."));
-    else
+    for (node = sftpfs_super->privkeys; node != NULL && !ret_value; node = g_slist_next (node))
     {
-        ret_value = (libssh2_userauth_publickey_fromfile (
-                         sftpfs_super->session, super->path_element->user, sftpfs_super->pubkey,
-                         sftpfs_super->privkey, passwd)
-                     == 0);
-        g_free (passwd);
+        const char *privkey = node->data;
+        char *pubkey;
+        int res;
+
+        if (!exist_file (privkey))
+            continue;
+
+        pubkey = g_strdup_printf ("%s.pub", privkey);
+        res = libssh2_userauth_publickey_fromfile (sftpfs_super->session, super->path_element->user,
+                                                   pubkey, privkey, super->path_element->password);
+        if (res == 0)
+            ret_value = TRUE;
+        else if (res == LIBSSH2_ERROR_PUBLICKEY_UNVERIFIED)
+        {
+            p = g_strdup_printf (_ ("sftp: Enter passphrase for %s "), privkey);
+            passwd = vfs_get_password (p);
+            g_free (p);
+
+            if (passwd == NULL)
+                mc_propagate_error (mcerror, 0, "%s", _ ("sftp: Passphrase is empty."));
+            else if (libssh2_userauth_publickey_fromfile (
+                         sftpfs_super->session, super->path_element->user, pubkey, privkey, passwd)
+                     == 0)
+                ret_value = TRUE;
+
+            g_free (passwd);
+        }
+        g_free (pubkey);
     }
 
     return ret_value;
