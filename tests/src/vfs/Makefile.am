@@ -1,5 +1,5 @@
 
-SUBDIRS =
+SUBDIRS = local
 
 if ENABLE_VFS_EXTFS
 SUBDIRS += extfs

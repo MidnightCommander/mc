@@ -735,6 +735,7 @@ tests/src/vfs/extfs/helpers-list/Makefile
 tests/src/vfs/extfs/helpers-list/data/config.sh
 tests/src/vfs/extfs/helpers-list/misc/Makefile
 tests/src/vfs/ftpfs/Makefile
+tests/src/vfs/local/Makefile
 ])
 
 AC_OUTPUT
