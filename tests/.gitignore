@@ -178,4 +178,5 @@ src/vfs/extfs/helpers-list/run.log
 src/vfs/extfs/helpers-list/run.trs
 src/vfs/extfs/helpers-list/test-suite.log
 src/vfs/ftpfs/ftpfs_parse_long_list
+src/vfs/local/local_opendir
 *.trs
