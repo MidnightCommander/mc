@@ -48,6 +48,22 @@ struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);  // used in fil
 
 /*** file scope macro definitions ****************************************************************/
 
+// Display the detailed error message before returning a non-specific errno
+#define MESSAGE_ERRNOR(err, ret)                                                                   \
+    do                                                                                             \
+    {                                                                                              \
+        if (err != NULL)                                                                           \
+        {                                                                                          \
+            int saved_errno = err->code;                                                           \
+            if (err->code == E_REMOTE)                                                             \
+                mc_error_message (&(err), NULL);                                                   \
+            else                                                                                   \
+                g_error_free (err);                                                                \
+            ERRNOR (saved_errno, (ret));                                                           \
+        }                                                                                          \
+    }                                                                                              \
+    while (0)
+
 /*** file scope type declarations ****************************************************************/
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -122,10 +138,7 @@ sftpfs_cb_open (const vfs_path_t *vpath, int flags, mode_t mode)
 
     path_inode = vfs_s_find_inode (me, super, path_super, LINK_FOLLOW, FL_NONE);
     if (path_inode != NULL && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
-    {
-        me->verrno = EEXIST;
-        return NULL;
-    }
+        ERRNOR (EEXIST, NULL);
 
     if (path_inode == NULL)
     {
@@ -137,7 +150,7 @@ sftpfs_cb_open (const vfs_path_t *vpath, int flags, mode_t mode)
         dir = vfs_s_find_inode (me, super, name, LINK_FOLLOW, FL_DIR);
         g_free (name);
         if (dir == NULL)
-            return NULL;
+            ERRNOR (ENOENT, NULL);
 
         name = g_path_get_basename (path_super);
         ent = vfs_s_generate_entry (me, name, dir, 0755);
@@ -148,17 +161,14 @@ sftpfs_cb_open (const vfs_path_t *vpath, int flags, mode_t mode)
     }
 
     if (S_ISDIR (path_inode->st.st_mode))
-    {
-        me->verrno = EISDIR;
-        return NULL;
-    }
+        ERRNOR (EISDIR, NULL);
 
     fh = sftpfs_fh_new (path_inode, is_changed);
 
     if (!sftpfs_open_file (fh, flags, mode, &mcerror))
     {
-        mc_error_message (&mcerror, NULL);
         g_free (fh);
+        MESSAGE_ERRNOR (mcerror, NULL);
         return NULL;
     }
 
@@ -181,12 +191,13 @@ sftpfs_cb_opendir (const vfs_path_t *vpath)
 {
     GError *mcerror = NULL;
     void *ret_value;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     // reset interrupt flag
     tty_got_interrupt ();
 
     ret_value = sftpfs_opendir (vpath, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, ret_value);
     return ret_value;
 }
 
@@ -203,6 +214,7 @@ sftpfs_cb_readdir (void *data)
 {
     GError *mcerror = NULL;
     struct vfs_dirent *sftpfs_dirent;
+    struct vfs_class *me = VFS_SUPER (((sftpfs_dir_data_t *) data)->super)->me;
 
     if (tty_got_interrupt ())
     {
@@ -211,13 +223,12 @@ sftpfs_cb_readdir (void *data)
     }
 
     sftpfs_dirent = sftpfs_readdir (data, &mcerror);
-    if (!mc_error_message (&mcerror, NULL))
-    {
-        if (sftpfs_dirent != NULL)
-            vfs_print_message (_ ("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->d_name);
-        else
-            vfs_print_message ("%s", _ ("sftp: Listing done."));
-    }
+    MESSAGE_ERRNOR (mcerror, sftpfs_dirent);
+
+    if (sftpfs_dirent != NULL)
+        vfs_print_message (_ ("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->d_name);
+    else
+        vfs_print_message ("%s", _ ("sftp: Listing done."));
 
     return sftpfs_dirent;
 }
@@ -235,9 +246,14 @@ sftpfs_cb_closedir (void *data)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me;
+
+    g_return_val_if_fail (data != NULL, -1);
+
+    me = VFS_SUPER (((sftpfs_dir_data_t *) data)->super)->me;
 
     rc = sftpfs_closedir (data, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -255,9 +271,10 @@ sftpfs_cb_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rc = sftpfs_lstat (vpath, buf, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -275,9 +292,10 @@ sftpfs_cb_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rc = sftpfs_stat (vpath, buf, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -295,9 +313,10 @@ sftpfs_cb_fstat (void *data, struct stat *buf)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (data)->me;
 
     rc = sftpfs_fstat (data, buf, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -316,9 +335,10 @@ sftpfs_cb_readlink (const vfs_path_t *vpath, char *buf, size_t size)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rc = sftpfs_readlink (vpath, buf, size, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -337,11 +357,12 @@ sftpfs_cb_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
     int rc;
     GError *mcerror = NULL;
     mc_timespec_t atime, mtime;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     vfs_get_timespecs_from_timesbuf (times, &atime, &mtime);
     rc = sftpfs_utime (vpath, atime.tv_sec, mtime.tv_sec, &mcerror);
 
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -359,15 +380,16 @@ sftpfs_cb_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath2));
 
     rc = sftpfs_symlink (vpath1, vpath2, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Callback for symlink VFS-function.
+ * Callback for mknod VFS-function.
  *
  * @param vpath unused
  * @param mode  unused
@@ -430,7 +452,7 @@ sftpfs_cb_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
  * @param data   file data handler
  * @param buffer buffer for data
  * @param count  data size
- * @return 0 if success, negative value otherwise
+ * @return bytes read if success, negative value otherwise
  */
 
 static ssize_t
@@ -439,15 +461,16 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
     int rc;
     GError *mcerror = NULL;
     vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (data)->me;
 
     if (tty_got_interrupt ())
     {
         tty_disable_interrupt_key ();
-        return 0;
+        ERRNOR (EINTR, 0);
     }
 
     rc = sftpfs_read_file (fh, buffer, count, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -458,7 +481,7 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
  * @param data  file data handler
  * @param buf   buffer for data
  * @param count data size
- * @return 0 if success, negative value otherwise
+ * @return bytes written if success, negative value otherwise
  */
 
 static ssize_t
@@ -467,9 +490,10 @@ sftpfs_cb_write (void *data, const char *buf, size_t nbyte)
     int rc;
     GError *mcerror = NULL;
     vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (data)->me;
 
     rc = sftpfs_write_file (fh, buf, nbyte, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -488,19 +512,20 @@ sftpfs_cb_close (void *data)
     GError *mcerror = NULL;
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (data);
     vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (data)->me;
 
     super->fd_usage--;
     if (super->fd_usage == 0)
         vfs_stamp_create (vfs_sftpfs_ops, super);
 
     rc = sftpfs_close_file (fh, &mcerror);
-    mc_error_message (&mcerror, NULL);
 
     if (fh->handle != -1)
         close (fh->handle);
 
     vfs_s_free_inode (vfs_sftpfs_ops, fh->ino);
 
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -518,9 +543,10 @@ sftpfs_cb_chmod (const vfs_path_t *vpath, mode_t mode)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rc = sftpfs_chmod (vpath, mode, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -538,9 +564,10 @@ sftpfs_cb_mkdir (const vfs_path_t *vpath, mode_t mode)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rc = sftpfs_mkdir (vpath, mode, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -557,9 +584,10 @@ sftpfs_cb_rmdir (const vfs_path_t *vpath)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rc = sftpfs_rmdir (vpath, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -579,9 +607,10 @@ sftpfs_cb_lseek (void *data, off_t offset, int whence)
     off_t ret_offset;
     vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (data)->me;
 
     ret_offset = sftpfs_lseek (fh, offset, whence, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return ret_offset;
 }
 
@@ -598,9 +627,10 @@ sftpfs_cb_unlink (const vfs_path_t *vpath)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rc = sftpfs_unlink (vpath, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
 }
 
@@ -618,26 +648,11 @@ sftpfs_cb_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_class *me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath1));
 
     rc = sftpfs_rename (vpath1, vpath2, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return rc;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Callback for errno VFS-function.
- *
- * @param me unused
- * @return value of errno global variable
- */
-
-static int
-sftpfs_cb_errno (struct vfs_class *me)
-{
-    (void) me;
-
-    return errno;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -732,31 +747,27 @@ sftpfs_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
     GError *mcerror = NULL;
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     int ret_value;
+    vfs_class *me = vpath_element->class;
 
     (void) vpath;
 
     if (vpath_element->host == NULL || *vpath_element->host == '\0')
     {
         vfs_print_message ("%s", _ ("sftp: Invalid host name."));
-        vpath_element->class->verrno = EPERM;
-        return -1;
+        ERRNOR (ENOENT, -1);
     }
 
     sftpfs_super->original_connection_info = vfs_path_element_clone (vpath_element);
     super->path_element = vfs_path_element_clone (vpath_element);
 
     sftpfs_fill_connection_data_from_config (super, &mcerror);
-    if (mc_error_message (&mcerror, &ret_value))
-    {
-        vpath_element->class->verrno = ret_value;
-        return -1;
-    }
+    MESSAGE_ERRNOR (mcerror, -1);
 
     super->root = vfs_s_new_inode (vpath_element->class, super,
                                    vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
 
     ret_value = sftpfs_open_connection (super, &mcerror);
-    mc_error_message (&mcerror, NULL);
+    MESSAGE_ERRNOR (mcerror, -1);
     return ret_value;
 }
 
@@ -764,7 +775,7 @@ sftpfs_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
 /**
  * Callback for closing connection.
  *
- * @param me    unused
+ * @param me    VFS class
  * @param super connection data
  */
 
@@ -773,13 +784,18 @@ sftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     GError *mcerror = NULL;
 
-    (void) me;
-
     sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
 
     vfs_path_element_free (SFTP_SUPER (super)->original_connection_info);
 
-    mc_error_message (&mcerror, NULL);
+    if (mcerror != NULL)
+    {
+        me->verrno = mcerror->code;
+        if (mcerror->code == E_REMOTE)
+            mc_error_message (&mcerror, NULL);
+        else
+            g_error_free (mcerror);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -845,7 +861,6 @@ vfs_init_sftpfs (void)
     vfs_sftpfs_ops->lseek = sftpfs_cb_lseek;
     vfs_sftpfs_ops->unlink = sftpfs_cb_unlink;
     vfs_sftpfs_ops->rename = sftpfs_cb_rename;
-    vfs_sftpfs_ops->ferrno = sftpfs_cb_errno;
 
     sftpfs_subclass.archive_same = sftpfs_archive_same;
     sftpfs_subclass.new_archive = sftpfs_new_archive;

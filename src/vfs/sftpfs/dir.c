@@ -40,12 +40,6 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef struct
-{
-    LIBSSH2_SFTP_HANDLE *handle;
-    sftpfs_super_t *super;
-} sftpfs_dir_data_t;
-
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
@@ -76,18 +70,13 @@ sftpfs_opendir (const vfs_path_t *vpath, GError **mcerror)
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    while (TRUE)
+    handle = libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, 0, 0,
+                                   LIBSSH2_SFTP_OPENDIR);
+    if (handle == NULL)
     {
-        int libssh_errno;
-
-        handle = libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, 0,
-                                       0, LIBSSH2_SFTP_OPENDIR);
-        if (handle != NULL)
-            break;
-
-        libssh_errno = libssh2_session_last_errno (sftpfs_super->session);
-        if (!sftpfs_waitsocket (sftpfs_super, libssh_errno, mcerror))
-            return NULL;
+        sftpfs_ssherror_to_gliberror (sftpfs_super,
+                                      libssh2_session_last_errno (sftpfs_super->session), mcerror);
+        return NULL;
     }
 
     sftpfs_dir = g_new0 (sftpfs_dir_data_t, 1);
@@ -116,16 +105,12 @@ sftpfs_readdir (void *data, GError **mcerror)
 
     mc_return_val_if_error (mcerror, NULL);
 
-    do
+    rc = libssh2_sftp_readdir (sftpfs_dir->handle, mem, sizeof (mem), &attrs);
+    if (rc < 0)
     {
-        rc = libssh2_sftp_readdir (sftpfs_dir->handle, mem, sizeof (mem), &attrs);
-        if (rc >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (sftpfs_dir->super, rc, mcerror))
-            return NULL;
+        sftpfs_ssherror_to_gliberror (sftpfs_dir->super, rc, mcerror);
+        return NULL;
     }
-    while (rc == LIBSSH2_ERROR_EAGAIN);
 
     return (rc != 0 ? vfs_dirent_init (NULL, mem, 0, DT_UNKNOWN) : NULL);  // FIXME: inode
 }
@@ -148,6 +133,11 @@ sftpfs_closedir (void *data, GError **mcerror)
     mc_return_val_if_error (mcerror, -1);
 
     rc = libssh2_sftp_closedir (sftpfs_dir->handle);
+    if (rc < 0)
+    {
+        sftpfs_ssherror_to_gliberror (sftpfs_dir->super, rc, mcerror);
+        rc = -1;
+    }
     g_free (sftpfs_dir);
     return rc;
 }
@@ -175,17 +165,12 @@ sftpfs_mkdir (const vfs_path_t *vpath, mode_t mode, GError **mcerror)
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    do
+    res = libssh2_sftp_mkdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, mode);
+    if (res < 0)
     {
-        res =
-            libssh2_sftp_mkdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, mode);
-        if (res >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (sftpfs_super, res, mcerror))
-            return -1;
+        sftpfs_ssherror_to_gliberror (sftpfs_super, res, mcerror);
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }
@@ -212,16 +197,12 @@ sftpfs_rmdir (const vfs_path_t *vpath, GError **mcerror)
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    do
+    res = libssh2_sftp_rmdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len);
+    if (res < 0)
     {
-        res = libssh2_sftp_rmdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len);
-        if (res >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (sftpfs_super, res, mcerror))
-            return -1;
+        sftpfs_ssherror_to_gliberror (sftpfs_super, res, mcerror);
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }

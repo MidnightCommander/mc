@@ -68,48 +68,150 @@ sftpfs_blksize (struct stat *s)
     vfs_adjust_stat (s);
 }
 
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Awaiting for any activity on socket.
- *
- * @param super extra data for SFTP connection
- * @param mcerror    pointer to the error object
- * @return 0 if success, negative value otherwise
- */
+static const char *
+sftpfs_sftp_errstr (unsigned long sftp_error)
+{
+    static const char *sftp_error_messages[] = {
+        /* LIBSSH2_FX_OK */ N_ ("OK"),
+        /* LIBSSH2_FX_EOF */ N_ ("EOF"),
+        /* LIBSSH2_FX_NO_SUCH_FILE */ N_ ("No such file"),
+        /* LIBSSH2_FX_PERMISSION_DENIED */ N_ ("Permission denied"),
+        /* LIBSSH2_FX_FAILURE */ N_ ("Failure"),
+        /* LIBSSH2_FX_BAD_MESSAGE */ N_ ("Bad message"),
+        /* LIBSSH2_FX_NO_CONNECTION */ N_ ("No connection"),
+        /* LIBSSH2_FX_CONNECTION_LOST */ N_ ("Connection lost"),
+        /* LIBSSH2_FX_OP_UNSUPPORTED */ N_ ("Operation unsupported"),
+        /* LIBSSH2_FX_INVALID_HANDLE */ N_ ("Invalid handle"),
+        /* LIBSSH2_FX_NO_SUCH_PATH */ N_ ("No such path"),
+        /* LIBSSH2_FX_FILE_ALREADY_EXISTS */ N_ ("File already exists"),
+        /* LIBSSH2_FX_WRITE_PROTECT */ N_ ("Write protect"),
+        /* LIBSSH2_FX_NO_MEDIA */ N_ ("No media"),
+        /* LIBSSH2_FX_NO_SPACE_ON_FILESYSTEM */ N_ ("No space on filesystem"),
+        /* LIBSSH2_FX_QUOTA_EXCEEDED */ N_ ("Quota exceeded"),
+        /* LIBSSH2_FX_UNKNOWN_PRINCIPAL */ N_ ("Unknown principal"),
+        /* LIBSSH2_FX_LOCK_CONFLICT */ N_ ("Lock conflict"),
+        /* LIBSSH2_FX_DIR_NOT_EMPTY */ N_ ("Directory not empty"),
+        /* LIBSSH2_FX_NOT_A_DIRECTORY */ N_ ("Not a directory"),
+        /* LIBSSH2_FX_INVALID_FILENAME */ N_ ("Invalid filename"),
+        /* LIBSSH2_FX_LINK_LOOP */ N_ ("Link loop"),
+    };
+    static char buffer[64];
+    const char *sftp_errstr = (sftp_error < G_N_ELEMENTS (sftp_error_messages))
+        ? sftp_error_messages[sftp_error]
+        : buffer;
+
+    if (sftp_errstr == buffer)
+        g_snprintf (buffer, sizeof (buffer), N_ ("Unknown error code %lu"), sftp_error);
+    return sftp_errstr;
+}
 
 static int
-sftpfs_internal_waitsocket (sftpfs_super_t *super, GError **mcerror)
+sftpfs_sftp_error_to_errno (unsigned long sftp_error)
 {
-    struct timeval timeout = { 10, 0 };
-    fd_set fd;
-    fd_set *writefd = NULL;
-    fd_set *readfd = NULL;
-    int dir, ret;
+    // Map libssh2's extended SFTP error codes to POSIX errnos.
+    // When there's no exact match, map to E_REMOTE.
+    static int sftp_errnos[] = {
+        /* LIBSSH2_FX_OK */ 0,
+        /* LIBSSH2_FX_EOF */ E_REMOTE,
+        /* LIBSSH2_FX_NO_SUCH_FILE */ ENOENT,
+        /* LIBSSH2_FX_PERMISSION_DENIED */ EACCES,
+        /* LIBSSH2_FX_FAILURE */ E_REMOTE,
+        /* LIBSSH2_FX_BAD_MESSAGE */ EBADMSG,
+        /* LIBSSH2_FX_NO_CONNECTION */ ENOTCONN,
+        /* LIBSSH2_FX_CONNECTION_LOST */ E_REMOTE,
+        /* LIBSSH2_FX_OP_UNSUPPORTED */ EOPNOTSUPP,
+        /* LIBSSH2_FX_INVALID_HANDLE */ EBADF,
+        /* LIBSSH2_FX_NO_SUCH_PATH */ ENOENT,
+        /* LIBSSH2_FX_FILE_ALREADY_EXISTS */ EEXIST,
+        /* LIBSSH2_FX_WRITE_PROTECT */ EROFS,
+#ifdef ENOMEDIUM
+        /* LIBSSH2_FX_NO_MEDIA */ ENOMEDIUM,
+#else
+        /* LIBSSH2_FX_NO_MEDIA */ E_REMOTE,
+#endif
+        /* LIBSSH2_FX_NO_SPACE_ON_FILESYSTEM */ ENOSPC,
+        /* LIBSSH2_FX_QUOTA_EXCEEDED */ EDQUOT,
+        /* LIBSSH2_FX_UNKNOWN_PRINCIPAL */ E_REMOTE,
+        /* LIBSSH2_FX_LOCK_CONFLICT */ EDEADLK,
+        /* LIBSSH2_FX_DIR_NOT_EMPTY */ ENOTEMPTY,
+        /* LIBSSH2_FX_NOT_A_DIRECTORY */ ENOTDIR,
+        /* LIBSSH2_FX_INVALID_FILENAME */ E_REMOTE,
+        /* LIBSSH2_FX_LINK_LOOP */ ELOOP,
+    };
 
-    mc_return_val_if_error (mcerror, -1);
+    return (sftp_error < G_N_ELEMENTS (sftp_errnos)) ? sftp_errnos[sftp_error] : E_REMOTE;
+}
 
-    FD_ZERO (&fd);
-    FD_SET (super->socket_handle, &fd);
+static int
+sftpfs_libssh2_error_to_errno (int code)
+{
+    // Map libssh2's error codes to POSIX errnos.
+    // When there's no exact match, map to E_REMOTE.
+    static int libssh2_errnos[] = {
+        /* LIBSSH2_ERROR_NONE */ 0,
+        /* LIBSSH2_ERROR_SOCKET_NONE */ E_REMOTE,
+        /* LIBSSH2_ERROR_BANNER_RECV */ E_REMOTE,
+        /* LIBSSH2_ERROR_BANNER_SEND */ E_REMOTE,
+        /* LIBSSH2_ERROR_INVALID_MAC */ E_REMOTE,
+        /* LIBSSH2_ERROR_KEX_FAILURE */ E_REMOTE,
+        /* LIBSSH2_ERROR_ALLOC */ ENOMEM,
+#ifdef ECOMM
+        /* LIBSSH2_ERROR_SOCKET_SEND */ ECOMM,
+#else
+        /* LIBSSH2_ERROR_SOCKET_SEND */ E_REMOTE,
+#endif
+        /* LIBSSH2_ERROR_KEY_EXCHANGE_FAILURE */ E_REMOTE,
+        /* LIBSSH2_ERROR_TIMEOUT */ ETIMEDOUT,
+        /* LIBSSH2_ERROR_HOSTKEY_INIT */ E_REMOTE,
+        /* LIBSSH2_ERROR_HOSTKEY_SIGN */ E_REMOTE,
+        /* LIBSSH2_ERROR_DECRYPT */ E_REMOTE,
+        /* LIBSSH2_ERROR_SOCKET_DISCONNECT */ E_REMOTE,
+        /* LIBSSH2_ERROR_PROTO */ EPROTO,
+        /* LIBSSH2_ERROR_PASSWORD_EXPIRED */ E_REMOTE,
+        /* LIBSSH2_ERROR_FILE */ E_REMOTE,
+        /* LIBSSH2_ERROR_METHOD_NONE */ E_REMOTE,
+        /* LIBSSH2_ERROR_AUTHENTICATION_FAILED */ E_REMOTE,
+        /* LIBSSH2_ERROR_PUBLICKEY_UNVERIFIED */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_OUTOFORDER */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_FAILURE */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_REQUEST_DENIED */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_UNKNOWN */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_WINDOW_EXCEEDED */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_PACKET_EXCEEDED */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_CLOSED */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_EOF_SENT */ E_REMOTE,
+        /* LIBSSH2_ERROR_SCP_PROTOCOL */ E_REMOTE,
+        /* LIBSSH2_ERROR_ZLIB */ E_REMOTE,
+        /* LIBSSH2_ERROR_SOCKET_TIMEOUT */ E_REMOTE,
+        /* LIBSSH2_ERROR_SFTP_PROTOCOL */ E_REMOTE,
+        /* LIBSSH2_ERROR_REQUEST_DENIED */ E_REMOTE,
+        /* LIBSSH2_ERROR_METHOD_NOT_SUPPORTED */ E_REMOTE,
+        /* LIBSSH2_ERROR_INVAL */ EINVAL,
+        /* LIBSSH2_ERROR_INVALID_POLL_TYPE */ E_REMOTE,
+        /* LIBSSH2_ERROR_PUBLICKEY_PROTOCOL */ E_REMOTE,
+        /* LIBSSH2_ERROR_EAGAIN */ EAGAIN,
+        /* LIBSSH2_ERROR_BUFFER_TOO_SMALL */ E_REMOTE,
+        /* LIBSSH2_ERROR_BAD_USE */ E_REMOTE,
+        /* LIBSSH2_ERROR_COMPRESS */ E_REMOTE,
+        /* LIBSSH2_ERROR_OUT_OF_BOUNDARY */ E_REMOTE,
+        /* LIBSSH2_ERROR_AGENT_PROTOCOL */ E_REMOTE,
+        /* LIBSSH2_ERROR_SOCKET_RECV */ E_REMOTE,
+        /* LIBSSH2_ERROR_ENCRYPT */ E_REMOTE,
+        /* LIBSSH2_ERROR_BAD_SOCKET */ EBADF,
+        /* LIBSSH2_ERROR_KNOWN_HOSTS */ E_REMOTE,
+        /* LIBSSH2_ERROR_CHANNEL_WINDOW_FULL */ E_REMOTE,
+        /* LIBSSH2_ERROR_KEYFILE_AUTH_FAILED */ E_REMOTE,
+        /* LIBSSH2_ERROR_RANDGEN */ E_REMOTE,
+        /* LIBSSH2_ERROR_MISSING_USERAUTH_BANNER */ E_REMOTE,
+        /* LIBSSH2_ERROR_ALGO_UNSUPPORTED */ EOPNOTSUPP,
+        /* LIBSSH2_ERROR_MAC_FAILURE */ E_REMOTE,
+        /* LIBSSH2_ERROR_HASH_INIT */ E_REMOTE,
+        /* LIBSSH2_ERROR_HASH_CALC */ E_REMOTE,
+    };
 
-    // now make sure we wait in the correct direction
-    dir = libssh2_session_block_directions (super->session);
+    g_return_val_if_fail (code <= 0, 0);
 
-    if ((dir & LIBSSH2_SESSION_BLOCK_INBOUND) != 0)
-        readfd = &fd;
-
-    if ((dir & LIBSSH2_SESSION_BLOCK_OUTBOUND) != 0)
-        writefd = &fd;
-
-    ret = select (super->socket_handle + 1, readfd, writefd, NULL, &timeout);
-    if (ret < 0)
-    {
-        int my_errno = errno;
-
-        mc_propagate_error (mcerror, my_errno, _ ("sftp: socket error: %s"),
-                            unix_error_string (my_errno));
-    }
-
-    return ret;
+    return ((unsigned) -code < G_N_ELEMENTS (libssh2_errnos)) ? libssh2_errnos[-code] : E_REMOTE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -127,45 +229,19 @@ sftpfs_stat_init (sftpfs_super_t **super, const vfs_path_element_t **path_elemen
 
     fixfname = sftpfs_fix_filename ((*path_element)->path);
 
-    do
+    res = libssh2_sftp_stat_ex ((*super)->sftp_session, fixfname->str, fixfname->len, stat_type,
+                                attrs);
+    if (res < 0)
     {
-        res = libssh2_sftp_stat_ex ((*super)->sftp_session, fixfname->str, fixfname->len, stat_type,
-                                    attrs);
-        if (res >= 0)
-            break;
-
-        if (sftpfs_is_sftp_error ((*super)->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
-            return -EACCES;
-
-        if (sftpfs_is_sftp_error ((*super)->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
-            return -ENOENT;
-
-        if (!sftpfs_waitsocket (*super, res, mcerror))
-            return -1;
+        sftpfs_ssherror_to_gliberror (*super, res, mcerror);
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-sftpfs_waitsocket (sftpfs_super_t *super, int sftp_res, GError **mcerror)
-{
-    if (sftp_res != LIBSSH2_ERROR_EAGAIN)
-    {
-        sftpfs_ssherror_to_gliberror (super, sftp_res, mcerror);
-        return FALSE;
-    }
-
-    sftpfs_internal_waitsocket (super, mcerror);
-
-    return (mcerror == NULL || *mcerror == NULL);
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
@@ -187,18 +263,27 @@ sftpfs_is_sftp_error (LIBSSH2_SFTP *sftp_session, int sftp_res, int sftp_error)
 void
 sftpfs_ssherror_to_gliberror (sftpfs_super_t *super, int libssh_errno, GError **mcerror)
 {
-    char *err = NULL;
-    int err_len;
+    int converted_errno;
 
     mc_return_if_error (mcerror);
 
-    libssh2_session_last_error (super->session, &err, &err_len, 1);
     if (libssh_errno == LIBSSH2_ERROR_SFTP_PROTOCOL && super->sftp_session != NULL)
-        mc_propagate_error (mcerror, libssh_errno, "%s %lu", err,
-                            libssh2_sftp_last_error (super->sftp_session));
+    {
+        unsigned long sftp_error = libssh2_sftp_last_error (super->sftp_session);
+        converted_errno = sftpfs_sftp_error_to_errno (sftp_error);
+        mc_propagate_error (mcerror, converted_errno, "SFTP: %s",
+                            _ (sftpfs_sftp_errstr (sftp_error)));
+    }
     else
-        mc_propagate_error (mcerror, libssh_errno, "%s", err);
-    g_free (err);
+    {
+        char *err = NULL;
+        int err_len;
+
+        libssh2_session_last_error (super->session, &err, &err_len, 1);
+        converted_errno = sftpfs_libssh2_error_to_errno (libssh_errno);
+        mc_propagate_error (mcerror, converted_errno, "%s", err);
+        g_free (err);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -224,23 +309,30 @@ gboolean
 sftpfs_op_init (sftpfs_super_t **super, const vfs_path_element_t **path_element,
                 const vfs_path_t *vpath, GError **mcerror)
 {
-    struct vfs_s_super *lc_super = NULL;
-
     mc_return_val_if_error (mcerror, FALSE);
 
-    if (vfs_s_get_path (vpath, &lc_super, 0) == NULL)
-        return FALSE;
+    do
+    {
+        struct vfs_s_super *lc_super = NULL;
 
-    if (lc_super == NULL)
-        return FALSE;
+        if (vfs_s_get_path (vpath, &lc_super, 0) == NULL)
+            break;
 
-    *super = SFTP_SUPER (lc_super);
-    if ((*super)->sftp_session == NULL)
-        return FALSE;
+        if (lc_super == NULL)
+            break;
 
-    *path_element = vfs_path_get_by_index (vpath, -1);
+        *super = SFTP_SUPER (lc_super);
+        if ((*super)->sftp_session == NULL)
+            break;
 
-    return TRUE;
+        *path_element = vfs_path_get_by_index (vpath, -1);
+
+        return TRUE;
+    }
+    while (0);
+
+    mc_propagate_error (mcerror, ENOENT, _ ("sftp: %s"), unix_error_string (ENOENT));
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -337,7 +429,7 @@ sftpfs_stat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror)
  * @param buf     buffer for store stat-info
  * @param size    buffer size
  * @param mcerror pointer to error object
- * @return 0 if success, negative value otherwise
+ * @return        bytes written without NUL, negative value on failure
  */
 
 int
@@ -353,17 +445,13 @@ sftpfs_readlink (const vfs_path_t *vpath, char *buf, size_t size, GError **mcerr
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    do
+    res = libssh2_sftp_symlink_ex (super->sftp_session, fixfname->str, fixfname->len, buf, size,
+                                   LIBSSH2_SFTP_READLINK);
+    if (res < 0)
     {
-        res = libssh2_sftp_symlink_ex (super->sftp_session, fixfname->str, fixfname->len, buf, size,
-                                       LIBSSH2_SFTP_READLINK);
-        if (res >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (super, res, mcerror))
-            return -1;
+        sftpfs_ssherror_to_gliberror (super, res, mcerror);
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }
@@ -400,21 +488,15 @@ sftpfs_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2, GError **mce
     path1 = vfs_path_get_last_path_str (vpath1);
     path1_len = strlen (path1);
 
-    do
-    {
-        res = libssh2_sftp_symlink_ex (super->sftp_session, path1, path1_len, tmp_path,
-                                       tmp_path_len, LIBSSH2_SFTP_SYMLINK);
-        if (res >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (super, res, mcerror))
-        {
-            g_free (tmp_path);
-            return -1;
-        }
-    }
-    while (res == LIBSSH2_ERROR_EAGAIN);
+    res = libssh2_sftp_symlink_ex (super->sftp_session, path1, path1_len, tmp_path, tmp_path_len,
+                                   LIBSSH2_SFTP_SYMLINK);
     g_free (tmp_path);
+
+    if (res < 0)
+    {
+        sftpfs_ssherror_to_gliberror (super, res, mcerror);
+        return -1;
+    }
 
     return 0;
 }
@@ -449,26 +531,16 @@ sftpfs_utime (const vfs_path_t *vpath, time_t atime, time_t mtime, GError **mcer
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    do
+    res = libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
+                                LIBSSH2_SFTP_SETSTAT, &attrs);
+    if (res < 0)
     {
-        res = libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
-                                    LIBSSH2_SFTP_SETSTAT, &attrs);
-        if (res >= 0)
-            break;
-
-        if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
-            return -ENOENT;
-
         if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_FAILURE))
-        {
-            res = 0;  // need something like ftpfs_ignore_chattr_errors
-            break;
-        }
+            return 0;  // need something like ftpfs_ignore_chattr_errors
 
-        if (!sftpfs_waitsocket (super, res, mcerror))
-            return -1;
+        sftpfs_ssherror_to_gliberror (super, res, mcerror);
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }
@@ -501,26 +573,16 @@ sftpfs_chmod (const vfs_path_t *vpath, mode_t mode, GError **mcerror)
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    do
+    res = libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
+                                LIBSSH2_SFTP_SETSTAT, &attrs);
+    if (res < 0)
     {
-        res = libssh2_sftp_stat_ex (super->sftp_session, fixfname->str, fixfname->len,
-                                    LIBSSH2_SFTP_SETSTAT, &attrs);
-        if (res >= 0)
-            break;
-
-        if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
-            return -ENOENT;
-
         if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_FAILURE))
-        {
-            res = 0;  // need something like ftpfs_ignore_chattr_errors
-            break;
-        }
+            return 0;  // need something like ftpfs_ignore_chattr_errors
 
-        if (!sftpfs_waitsocket (super, res, mcerror))
-            return -1;
+        sftpfs_ssherror_to_gliberror (super, res, mcerror);
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }
@@ -547,16 +609,12 @@ sftpfs_unlink (const vfs_path_t *vpath, GError **mcerror)
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
-    do
+    res = libssh2_sftp_unlink_ex (super->sftp_session, fixfname->str, fixfname->len);
+    if (res < 0)
     {
-        res = libssh2_sftp_unlink_ex (super->sftp_session, fixfname->str, fixfname->len);
-        if (res >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (super, res, mcerror))
-            return -1;
+        sftpfs_ssherror_to_gliberror (super, res, mcerror);
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }
@@ -593,21 +651,14 @@ sftpfs_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2, GError **mcer
     path1 = vfs_path_get_last_path_str (vpath1);
     fixfname = sftpfs_fix_filename (path1);
 
-    do
-    {
-        res = libssh2_sftp_rename_ex (super->sftp_session, fixfname->str, fixfname->len, tmp_path,
-                                      tmp_path_len, LIBSSH2_SFTP_SYMLINK);
-        if (res >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (super, res, mcerror))
-        {
-            g_free (tmp_path);
-            return -1;
-        }
-    }
-    while (res == LIBSSH2_ERROR_EAGAIN);
+    res = libssh2_sftp_rename_ex (super->sftp_session, fixfname->str, fixfname->len, tmp_path,
+                                  tmp_path_len, LIBSSH2_SFTP_SYMLINK);
     g_free (tmp_path);
+    if (res < 0)
+    {
+        sftpfs_ssherror_to_gliberror (super, res, mcerror);
+        return -1;
+    }
 
     return 0;
 }
