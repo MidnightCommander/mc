@@ -421,6 +421,8 @@ linux*)                                          # FICLONERANGE (Linux 4.5+)
         [
             AC_MSG_RESULT(no)
         ])
+    # copy_file_range(2) (Linux): glibc declares it with off64_t *, so require a 64-bit off_t
+    AS_IF([test "x$ac_cv_sizeof_off_t" = x8], [AC_CHECK_FUNCS(copy_file_range)])
     ;;
 esac
 

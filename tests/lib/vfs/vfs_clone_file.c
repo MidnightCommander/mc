@@ -33,8 +33,12 @@
 #ifdef HAVE_FICLONERANGE
 #include <linux/fs.h>   // FICLONERANGE
 #include <sys/ioctl.h>  // ioctl()
-#elif defined(HAVE_COPY_FILE_RANGE)
+#endif
+#if defined(HAVE_COPY_FILE_RANGE)
 #include <unistd.h>  // copy_file_range()
+#ifndef COPY_FILE_RANGE_CLONE
+#define COPY_FILE_RANGE_CLONE 0  // Linux shim
+#endif
 #elif defined(HAVE_REFLINK)
 #include <unistd.h>  // reflink()
 #elif defined(HAVE_SYS_CLONEFILE_H)
