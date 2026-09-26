@@ -70,6 +70,7 @@ struct menu_t
     size_t max_entry_len;   // cached max length of entry texts (text + shortcut)
     size_t max_hotkey_len;  // cached max length of shortcuts
     unsigned int current;   // pointer to current menu entry
+    unsigned int top;       // menu entry currently at the top of the scroll area
     char *help_node;
 };
 
@@ -128,7 +129,7 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
     const WRect *w = &CONST_WIDGET (menubar)->rect;
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, idx));
-    const int y = 2 + idx;
+    const int y = 2 + idx - menu->top;
     int x = menu->start_x;
 
     if (x + menu->max_entry_len + 3 > (gsize) w->cols)
@@ -150,6 +151,12 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
         int yt, xt;
 
         // menu text
+
+        // left non-connecting border
+        widget_gotoyx (menubar, y, x - 1);
+        tty_setcolor (MENU_FRAME_COLOR);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DVERT]);
+
         tty_setcolor (color);
         widget_gotoyx (menubar, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
@@ -173,6 +180,11 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
             tty_print_string (entry->shortcut);
         }
 
+        // right non-connecting border
+        widget_gotoyx (menubar, y, x + menu->max_entry_len + 2);
+        tty_setcolor (MENU_FRAME_COLOR);
+        tty_print_char (mc_tty_frm[MC_TTY_FRM_DVERT]);
+
         // move cursor to the start of entry text
         widget_gotoyx (menubar, y, x + 1);
     }
@@ -181,13 +193,23 @@ menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+menubar_draw_drop_entries (const WMenuBar *menubar, const menu_t *menu)
+{
+    unsigned int count = g_list_length (menu->entries);
+    unsigned int i;
+
+    count = MIN (count, menu->top + WIDGET (menubar)->rect.lines - 2);
+    for (i = menu->top; i < count; i++)
+        menubar_paint_idx (menubar, i, i == menu->current ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
+}
+
+static void
 menubar_draw_drop (const WMenuBar *menubar)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
-    unsigned int i;
 
     if (column + menu->max_entry_len + 4 > (gsize) w->cols)
         column = w->cols - menu->max_entry_len - 4;
@@ -199,8 +221,7 @@ menubar_draw_drop (const WMenuBar *menubar)
     tty_setcolor (MENU_FRAME_COLOR);
     tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 4, FALSE);
 
-    for (i = 0; i < count; i++)
-        menubar_paint_idx (menubar, i, i == menu->current ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
+    menubar_draw_drop_entries (menubar, menu);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -367,6 +388,24 @@ menubar_execute (WMenuBar *menubar)
     }
 }
 
+static void
+menubar_scroll_to_view (WMenuBar *menubar, menu_t *menu, unsigned int idx)
+{
+    Widget *w = WIDGET (menubar);
+    int lines = w->rect.lines - 3;
+
+    g_return_if_fail (lines > 0);
+
+    if (idx < menu->top)
+        menu->top = idx;
+    else if (idx > menu->top + lines)
+        menu->top = idx - lines;
+    else
+        return;
+
+    menubar_draw_drop_entries (menubar, menu);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -385,6 +424,7 @@ menubar_down (WMenuBar *menubar)
     }
     while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
+    menubar_scroll_to_view (menubar, menu, menu->current);
     menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
 }
 
@@ -409,6 +449,7 @@ menubar_up (WMenuBar *menubar)
     }
     while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
+    menubar_scroll_to_view (menubar, menu, menu->current);
     menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
 }
 
@@ -440,6 +481,7 @@ menubar_first (WMenuBar *menubar)
                 break;
         }
 
+        menubar_scroll_to_view (menubar, menu, menu->current);
         menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
     }
     else
@@ -474,6 +516,7 @@ menubar_last (WMenuBar *menubar)
         }
         while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
+        menubar_scroll_to_view (menubar, menu, menu->current);
         menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
     }
     else
@@ -939,6 +982,7 @@ menu_new (const char *name, GList *entries, const char *help_node)
     menu->max_entry_len = 1;
     menu->max_hotkey_len = 0;
     menu->current = 0;
+    menu->top = 0;
     menu->help_node = g_strdup (help_node);
 
     return menu;
