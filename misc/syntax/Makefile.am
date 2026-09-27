@@ -62,6 +62,7 @@ SYNTAXFILES =			\
 	makefile.syntax		\
 	markdown.syntax		\
 	meta-ii.syntax		\
+	mib.syntax		\
 	ml.syntax		\
 	meson.syntax		\
 	muttrc.syntax		\

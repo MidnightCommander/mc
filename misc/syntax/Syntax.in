@@ -300,6 +300,9 @@ include yxx.syntax
 file ..\*\\.dlink\\.sw$ D-Link\sSwitch\sCommands
 include dlink.syntax
 
+file ..\*\\.(?i:mib)$ SNMP\sMIB\sFile
+include mib.syntax
+
 file ..\*\\.(?i:jalt?)$ Jal\ssource
 include jal.syntax
 
