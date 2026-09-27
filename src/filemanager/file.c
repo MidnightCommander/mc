@@ -66,6 +66,7 @@
 #include "lib/search.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
+#include "lib/vfs/xdirentry.h"
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/widget.h"
@@ -2617,6 +2618,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 #endif
 
 #ifdef HAVE_FILE_CLONING_BY_RANGE
+    const gboolean dst_is_local = vfs_file_is_local (dst_vpath);
+
     try_cloning = mc_global.vfs.file_cloning && vfs_cloning_supported (src_vpath, dst_vpath);
 #endif
 
@@ -2625,10 +2628,17 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         open_flags |= O_CREAT | O_EXCL;
     else if (ctx->do_append)
 #ifdef HAVE_FILE_CLONING_BY_RANGE
+    {
+        // Can't use non-O_APPEND mode for appending on arbitrary VFS implementations. Disable
+        // cloning in this case.
+        if (!dst_is_local)
+            try_cloning = FALSE;
+
         // FICLONERANGE on Linux and copy_file_range(2) support block-aligned ranges for cloning,
         // but not in O_APPEND mode. Use O_WRONLY + mc_lseek instead as we don't care about
         // atomicity in our use cases. Non-local VFSes (ftpfs, shell) need O_APPEND to append.
         open_flags |= try_cloning ? 0 : O_APPEND;
+    }
 #else
         open_flags |= O_APPEND;
 #endif
@@ -2726,24 +2736,35 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         ssize_t (*copy_method) (int, off_t *, int, off_t *, size_t) = NULL;
 
         off_t src_offset = ctx->do_reget;
+
         // In append and reget modes, the destination fd was positioned at its end above
         off_t dst_offset = appending ? dst_stat.st_size : 0;
 
-        void *local_src_fd = NULL;
-        void *local_dst_fd = NULL;
+        int local_src_fd = -1;
+        int local_dst_fd = -1;
 
         // Try to clone the initial chunk to choose a working copy_method
         if (try_cloning)
         {
+            void *src_fsinfo = NULL;
+            void *dst_fsinfo = NULL;
+
+            // Obtain the source fd. The source is always local.
+            vfs_class_find_by_handle (src_desc, &src_fsinfo);
+            local_src_fd = *(int *) src_fsinfo;
+
+            // Obtain the destination fd. The destination is either local or VFSF_USETMP.
+            vfs_class_find_by_handle (dest_desc, &dst_fsinfo);
+            local_dst_fd =
+                dst_is_local ? *(int *) dst_fsinfo : VFS_FILE_HANDLER (dst_fsinfo)->handle;
+
             bufsize = 1 << 20;
             if ((off_t) bufsize > file_size - src_offset)
                 bufsize = SSIZE_MAX;  // don't try to read behind EOF
-            vfs_class_find_by_handle (src_desc, &local_src_fd);
-            vfs_class_find_by_handle (dest_desc, &local_dst_fd);
+
 #ifdef HAVE_FICLONERANGE
             copy_method = mc_copy_file_range_ficlonerange;
-            n_copied = copy_method (*(int *) local_src_fd, &src_offset, *(int *) local_dst_fd,
-                                    &dst_offset, bufsize);
+            n_copied = copy_method (local_src_fd, &src_offset, local_dst_fd, &dst_offset, bufsize);
 #ifdef HAVE_COPY_FILE_RANGE
             if (n_copied < 0 && errno == EXDEV)
 #endif
@@ -2751,11 +2772,21 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 #ifdef HAVE_COPY_FILE_RANGE
             {
                 copy_method = mc_copy_file_range_native;
-                n_copied = copy_method (*(int *) local_src_fd, &src_offset, *(int *) local_dst_fd,
-                                        &dst_offset, bufsize);
+                n_copied =
+                    copy_method (local_src_fd, &src_offset, local_dst_fd, &dst_offset, bufsize);
             }
 #endif
-            if (n_copied < 0)
+            if (n_copied >= 0)
+            {
+                // We've found a working clone method.
+                // For a VFSF_USETMP destination, ensure the VFS changed flag is set, as it's
+                // required for the final file_store() call on mc_close(), and we can't be sure
+                // every VFS has set the changed flag to TRUE on mc_open() and we're not calling
+                // mc_write() that would set the flag on the normal copy path.
+                if (!dst_is_local)
+                    VFS_FILE_HANDLER (dst_fsinfo)->changed = TRUE;
+            }
+            else
                 copy_method = NULL;
         }
 
@@ -2827,8 +2858,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
                 if ((off_t) bufsize > n_rest)
                     bufsize = SSIZE_MAX;  // don't try to read behind EOF
-                n_copied = copy_method (*(int *) local_src_fd, &src_offset, *(int *) local_dst_fd,
-                                        &dst_offset, bufsize);
+                n_copied =
+                    copy_method (local_src_fd, &src_offset, local_dst_fd, &dst_offset, bufsize);
                 if (n_copied < 0)
                 {
                     return_status = ctx->ignore_all
