@@ -195,7 +195,8 @@ sftpsfs_expand_hostname (const char *host, const char *real_host)
  */
 
 static void
-sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity, char *buffer)
+sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity, char *buffer,
+                                       unsigned int *filled_mask)
 {
     int i;
 
@@ -215,23 +216,32 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
             value_offset = mc_search_getstart_result_by_num (config_variables[i].pattern_regexp, 1);
             value = &buffer[value_offset];
 
+            // Don't overwrite existing scalar values, since the first obtained value for each
+            // parameter is used, according to ssh_config(5).
             switch (config_variables[i].type)
             {
             case STRING:
                 pointer_str = POINTER_TO_STRUCTURE_MEMBER (char **);
-                *pointer_str = g_strdup (value);
+                if ((*filled_mask & (1 << i)) == 0)
+                    *pointer_str = g_strdup (value);
+                *filled_mask |= 1 << i;
                 break;
             case FILENAME_LIST:
                 pointer_list = POINTER_TO_STRUCTURE_MEMBER (GSList **);
                 *pointer_list = g_slist_prepend (*pointer_list, sftpfs_correct_file_name (value));
+                *filled_mask |= 1 << i;
                 break;
             case INTEGER:
                 pointer_int = POINTER_TO_STRUCTURE_MEMBER (int *);
-                *pointer_int = atoi (value);
+                if ((*filled_mask & (1 << i)) == 0)
+                    *pointer_int = atoi (value);
+                *filled_mask |= 1 << i;
                 break;
             case BOOLEAN:
                 pointer_bool = POINTER_TO_STRUCTURE_MEMBER (gboolean *);
-                *pointer_bool = strcasecmp (value, "yes") == 0;
+                if ((*filled_mask & (1 << i)) == 0)
+                    *pointer_bool = strcasecmp (value, "yes") == 0;
+                *filled_mask |= 1 << i;
                 break;
             default:
                 continue;
@@ -265,6 +275,7 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
     gboolean top_level = TRUE;
     mc_search_t *host_regexp;
     gboolean ok = TRUE;
+    unsigned int filled_mask = 0;
 
     mc_return_val_if_error (mcerror, FALSE);
 
@@ -329,9 +340,7 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
             }
         }
         else if (top_level || pattern_block_hit || host_block_hit)
-        {
-            sftpfs_fill_config_entity_from_string (config_entity, buffer);
-        }
+            sftpfs_fill_config_entity_from_string (config_entity, buffer, &filled_mask);
     }
 
 done:
