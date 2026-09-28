@@ -1421,6 +1421,9 @@ You can start the search by pressing the OK button.
 During the search you can stop from the Stop button and continue from
 the Start button.
 .PP
+The list of found files shows the modification time and the size of each
+file at the right edge, unless the window is too narrow to display them.
+.PP
 You can browse the filelist with the up and down arrow keys. The Chdir
 button will change to the directory of the currently selected
 file. The Again button will ask for the parameters for a new
