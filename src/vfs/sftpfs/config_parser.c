@@ -106,7 +106,7 @@ static struct
         offsetof (sftpfs_ssh_config_entity_t, identity_file),
     },
     {
-        "^\\s*KbdInteractiveAuthentication\\s+(.*)$",
+        "^\\s*(?:KbdInteractiveAuthentication|ChallengeResponseAuthentication)\\s+(.*)$",
         NULL,
         BOOLEAN,
         offsetof (sftpfs_ssh_config_entity_t, kbd_int_auth),
