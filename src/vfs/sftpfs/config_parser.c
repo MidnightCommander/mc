@@ -231,7 +231,7 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
                 break;
             case BOOLEAN:
                 pointer_bool = POINTER_TO_STRUCTURE_MEMBER (gboolean *);
-                *pointer_bool = strcasecmp (value, "True") == 0;
+                *pointer_bool = strcasecmp (value, "yes") == 0;
                 break;
             default:
                 continue;
