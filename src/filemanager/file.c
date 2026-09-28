@@ -2762,10 +2762,11 @@ open_dest:
 
             // src_read
             if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0) == 0)
-                while ((n_read = mc_read (src_desc, buf, bufsize)) < 0 && !ctx->ignore_all)
+                while ((n_read = mc_read (src_desc, buf, bufsize)) < 0)
                 {
-                    return_status =
-                        file_error (ctx, TRUE, _ ("Cannot read source file\n%s"), src_path);
+                    return_status = ctx->ignore_all
+                        ? FILE_IGNORE_ALL
+                        : file_error (ctx, TRUE, _ ("Cannot read source file\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
                     if (return_status == FILE_IGNORE_ALL)
