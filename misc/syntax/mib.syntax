@@ -1,0 +1,126 @@
+# SNMP MIB file syntax highlighting (SMI / SMIv2)
+#
+# Reserved keywords per RFC 2578 (SMIv2), section 3.7, clause keywords per
+# RFC 2579 (Textual Conventions) and RFC 2580 (Conformance Statements),
+# SMIv1 constructs per RFC 1155.
+
+caseinsensitive
+
+context default
+wholechars abcdefghijklmnopqrstuvwxyz0123456789_-
+
+    # module structure (SMIv1/v2)
+    keyword whole DEFINITIONS white
+    keyword whole BEGIN white
+    keyword whole END white
+    keyword whole IMPORTS white
+    keyword whole EXPORTS white
+    keyword whole FROM white
+    keyword whole MODULE white
+    keyword whole MIB white
+    keyword whole GROUP white
+    keyword whole NOTIFICATION white
+
+    # SMIv2 macros
+    keyword whole MODULE-IDENTITY brightcyan
+    keyword whole OBJECT-TYPE brightcyan
+    keyword whole NOTIFICATION-TYPE brightcyan
+    keyword whole TEXTUAL-CONVENTION brightcyan
+    keyword whole MODULE-COMPLIANCE brightcyan
+    keyword whole OBJECT-GROUP brightcyan
+    keyword whole NOTIFICATION-GROUP brightcyan
+    keyword whole TRAP-TYPE brightcyan
+
+    # clause keywords
+    keyword whole LAST-UPDATED yellow
+    keyword whole ORGANIZATION yellow
+    keyword whole CONTACT-INFO yellow
+    keyword whole DESCRIPTION yellow
+    keyword whole REVISION yellow
+    keyword whole STATUS yellow
+    keyword whole REFERENCE yellow
+    keyword whole SYNTAX yellow
+    keyword whole UNITS yellow
+    keyword whole MAX-ACCESS yellow
+    keyword whole MIN-ACCESS yellow
+    keyword whole ACCESS yellow
+    keyword whole DEFVAL yellow
+    keyword whole INDEX yellow
+    keyword whole AUGMENTS yellow
+    keyword whole OBJECTS yellow
+    keyword whole NOTIFICATIONS yellow
+    keyword whole DISPLAY-HINT yellow
+    keyword whole MANDATORY-GROUPS yellow
+    keyword whole CREATION-REQUIRES yellow
+    keyword whole SIZE yellow
+    keyword whole ENUMERATED yellow
+
+    # ASN.1 / SMIv2 types
+    keyword whole OBJECT\sIDENTIFIER brightgreen
+    keyword whole OCTET\sSTRING brightgreen
+    keyword whole INTEGER brightgreen
+    keyword whole SEQUENCE brightgreen
+    keyword whole SET brightgreen
+    keyword whole OF brightgreen
+    keyword whole BITS brightgreen
+    keyword whole BOOLEAN brightgreen
+    keyword whole NULL brightgreen
+    keyword whole REAL brightgreen
+    keyword whole Counter brightgreen
+    keyword whole Counter32 brightgreen
+    keyword whole Counter64 brightgreen
+    keyword whole Gauge brightgreen
+    keyword whole Gauge32 brightgreen
+    keyword whole Integer32 brightgreen
+    keyword whole Unsigned32 brightgreen
+    keyword whole IpAddress brightgreen
+    keyword whole TimeTicks brightgreen
+    keyword whole Opaque brightgreen
+
+    # common textual conventions (RFC 2579 and successors)
+    keyword whole DisplayString brightgreen
+    keyword whole String brightgreen
+    keyword whole TruthValue brightgreen
+    keyword whole TestAndIncr brightgreen
+    keyword whole TimeStamp brightgreen
+    keyword whole DateAndTime brightgreen
+    keyword whole RowStatus brightgreen
+    keyword whole AutonomousType brightgreen
+    keyword whole CounterBasedGauge64 brightgreen
+    keyword whole PhysAddress brightgreen
+    keyword whole MacAddress brightgreen
+    keyword whole AgentCapabilities brightgreen
+
+    # MAX-ACCESS values
+    keyword whole not-accessible magenta
+    keyword whole accessible-for-notify magenta
+    keyword whole read-only magenta
+    keyword whole read-write magenta
+    keyword whole read-create magenta
+    keyword whole write-only magenta
+
+    # STATUS values (SMIv1 per RFC 1155: mandatory/optional)
+    keyword whole current magenta
+    keyword whole deprecated magenta
+    keyword whole obsolete magenta
+    keyword whole mandatory magenta
+    keyword whole optional magenta
+
+    # assignment operator
+    keyword ::= brightmagenta
+
+    # brackets
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+
+    # numbers (OID sub-identifiers, value ranges, enum values)
+    keyword whole -\{0123456789\}\[0123456789\] cyan
+    keyword whole \{0123456789\}\[0123456789\] cyan
+
+context -- \n brown
+    spellcheck
+
+context " " green
+    spellcheck
