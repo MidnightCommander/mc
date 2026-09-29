@@ -2918,6 +2918,12 @@ ret:
         if (temp_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
         return_status = temp_status;
+
+        // On destination close error, DEST_FULL is not a good dst_status anymore.
+        // A remote write error in vfs/shell manifests itself as a destination close error here.
+        if (dst_status == DEST_FULL)
+            dst_status = DEST_SHORT_QUERY;
+
         break;
     }
 

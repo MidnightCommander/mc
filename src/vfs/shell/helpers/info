@@ -7,8 +7,10 @@ export LC_TIME
 #SHELL_HAVE_LSQ         16
 #SHELL_HAVE_DATE_MDYT   32
 #SHELL_HAVE_TAIL        64
+#SHELL_HAVE_DD         128
+#SHELL_HAVE_POSIX_DD   256
 res=0
-if `echo yes| head -c 1 > /dev/null 2>&1` ; then
+if [ "`echo yes | { head -c 1 > /dev/null; cat; } 2>&1`" = es ]; then
     res=`expr $res + 1`
 fi
 if `echo 1 | sed 's/1/2/' >/dev/null 2>&1` ; then
@@ -39,6 +41,12 @@ if [ -z "$r" ]; then
 fi
 if `echo yes| tail -c +1 - > /dev/null 2>&1` ; then
     res=`expr $res + 64`
+fi
+if dd if=/dev/null >/dev/null 2>&1; then
+    res=`expr $res + 128`
+fi
+if dd if=/dev/null iflag=fullblock >/dev/null 2>&1; then
+    res=`expr $res + 256`
 fi
 echo $res
 echo "### 200"
