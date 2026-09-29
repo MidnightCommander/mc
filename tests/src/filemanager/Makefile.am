@@ -17,6 +17,7 @@ endif
 
 TESTS = \
 	cd_to \
+	copy_file_file \
 	examine_cd \
 	exec_get_export_variables_ext \
 	ext__exec_make_shell_string \
@@ -28,6 +29,9 @@ check_PROGRAMS = $(TESTS)
 
 cd_to_SOURCES = \
 	cd_to.c
+
+copy_file_file_SOURCES = \
+	copy_file_file.c
 
 examine_cd_SOURCES = \
 	examine_cd.c
