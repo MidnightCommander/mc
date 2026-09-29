@@ -2619,7 +2619,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     else if (ctx->do_append)
 #ifdef HAVE_FILE_CLONING_BY_RANGE
         // FICLONERANGE on Linux and copy_file_range(2) on FreeBSD support block-aligned ranges for
-        // cloning, but for not in O_APPEND mode. Use O_WRONLY + mc_lseek instead as we don't care
+        // cloning, but not in O_APPEND mode. Use O_WRONLY + mc_lseek instead as we don't care
         // about atomicity in our use cases.
         open_flags |= mc_global.vfs.file_cloning ? 0 : O_APPEND;
 #else
@@ -3671,7 +3671,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 break;
 
             if (ctx->ignore_all
-                || file_error (ctx, TRUE, _ ("Destination\n%s\nmust be a directory\n%s"), dest)
+                || file_error (ctx, TRUE, _ ("Destination\n%s\nmust be a directory"), dest)
                     != FILE_RETRY)
                 goto clean_up;
         }
