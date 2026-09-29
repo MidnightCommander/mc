@@ -2696,9 +2696,11 @@ open_dest:
         goto ret;
     }
 
-    // try preallocate space; if fail, try copy anyway
-    while (mc_global.vfs.preallocate_space
-           && vfs_preallocate (dest_desc, file_size, appending ? dst_stat.st_size : 0) != 0)
+    // try preallocate space; if fail, try copy anyway.
+    // Not in append and reget modes: posix_fallocate() extends the file, so the data would be
+    // appended after the preallocated area.
+    while (mc_global.vfs.preallocate_space && !appending
+           && vfs_preallocate (dest_desc, file_size, 0) != 0)
     {
         if (ctx->ignore_all)
         {
