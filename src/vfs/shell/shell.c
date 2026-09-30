@@ -515,11 +515,38 @@ static void
 shell_open_archive_pipeopen (struct vfs_s_super *super)
 {
     char gbuf[10];
-    const char *argv[10];  // All of 10 is used now
+    const char *argv[14]; // increased for optional sh -c prefix
     const char *xsh = (super->path_element->port == SHELL_FLAG_RSH ? "rsh" : "ssh");
+    const char *mc_ssh_cmd;
+    gboolean use_shell_cmd;
     int i = 0;
 
-    argv[i++] = xsh;
+    mc_ssh_cmd = g_getenv ("MC_SSH_COMMAND");
+    use_shell_cmd =
+        (mc_ssh_cmd != NULL && *mc_ssh_cmd != '\0' && super->path_element->port != SHELL_FLAG_RSH);
+
+    /* MC_SSH: plain executable override, lower priority than MC_SSH_COMMAND.
+     * Ignored for rsh connections, mirroring the GIT_SSH convention. */
+    if (!use_shell_cmd && super->path_element->port != SHELL_FLAG_RSH)
+    {
+        const char *mc_ssh = g_getenv ("MC_SSH");
+
+        if (mc_ssh != NULL && *mc_ssh != '\0')
+            xsh = mc_ssh;
+    }
+
+    if (use_shell_cmd)
+    {
+        /* Invoke as: sh -c "$MC_SSH_COMMAND" ssh [MC-generated-args...]
+         * MC's flags (-C, -p, -l, host, remote-cmd) arrive as $@ inside the
+         * shell command, mirroring the GIT_SSH_COMMAND convention. */
+        argv[i++] = "sh";
+        argv[i++] = "-c";
+        argv[i++] = mc_ssh_cmd;
+        argv[i++] = "ssh"; // $0 inside the shell script
+    }
+    else
+        argv[i++] = xsh;
     if (super->path_element->port == SHELL_FLAG_COMPRESSED)
         argv[i++] = "-C";
 
@@ -552,7 +579,7 @@ shell_open_archive_pipeopen (struct vfs_s_super *super)
     argv[i++] = "echo SHELL:; /bin/sh";
     argv[i++] = NULL;
 
-    shell_pipeopen (super, xsh, argv);
+    shell_pipeopen (super, use_shell_cmd ? "sh" : xsh, argv);
 }
 
 /* --------------------------------------------------------------------------------------------- */
