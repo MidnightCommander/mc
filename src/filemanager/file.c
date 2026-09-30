@@ -2924,13 +2924,21 @@ ret:
 
     if (dst_status == DEST_SHORT_QUERY)
     {
-        // Query to remove short file
-        if (query_dialog (Q_ ("DialogTitle|Copy"), _ ("Incomplete file was retrieved"), D_ERROR, 2,
-                          _ ("&Delete"), _ ("&Keep"))
-            == 0)
-            dst_status = DEST_SHORT_DELETE;
+        if (ctx->ignore_all)
+        {
+            // "Ignore all" answers this question too, but never deletes pre-existing data
+            dst_status = appending ? DEST_SHORT_KEEP : DEST_SHORT_DELETE;
+        }
         else
-            dst_status = DEST_SHORT_KEEP;
+        {
+            // Query to remove short file
+            if (query_dialog (Q_ ("DialogTitle|Copy"), _ ("Incomplete file was retrieved"), D_ERROR,
+                              2, _ ("&Delete"), _ ("&Keep"))
+                == 0)
+                dst_status = DEST_SHORT_DELETE;
+            else
+                dst_status = DEST_SHORT_KEEP;
+        }
     }
 
     if (dst_status == DEST_SHORT_DELETE)
