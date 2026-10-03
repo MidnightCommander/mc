@@ -383,8 +383,26 @@ esac
 dnl Check for file cloning support
 case $host_os in
 darwin*) AC_CHECK_HEADERS([sys/clonefile.h]) ;;  # clonefile(2) (macOS 10.12+)
-freebsd*) AC_CHECK_FUNCS(copy_file_range) ;;     # copy_file_range(2) (FreeBSD 13+)
 solaris*) AC_CHECK_FUNCS(reflink) ;;             # reflink(3C) (Solaris 11.3+)
+freebsd*)                                        # copy_file_range(2) (FreeBSD 13+)
+    AC_CHECK_FUNCS(copy_file_range)
+    AC_MSG_CHECKING([for COPY_FILE_RANGE_CLONE])
+    AC_EGREP_CPP([COPY_FILE_RANGE_CLONE_IS_DEFINED],
+        [
+            #include <unistd.h>
+            #ifdef COPY_FILE_RANGE_CLONE
+            COPY_FILE_RANGE_CLONE_IS_DEFINED
+            #endif
+        ],
+        [
+            have_copy_file_range_clone=yes
+            AC_DEFINE(HAVE_COPY_FILE_RANGE_CLONE, 1, [Define if COPY_FILE_RANGE_CLONE is supported on FreeBSD])
+            AC_MSG_RESULT(yes)
+        ],
+        [
+            AC_MSG_RESULT(no)
+        ])
+    ;;
 linux*)                                          # FICLONERANGE (Linux 4.5+)
     AC_CHECK_HEADERS([linux/fs.h])
     AC_MSG_CHECKING([for FICLONERANGE])
@@ -407,7 +425,7 @@ linux*)                                          # FICLONERANGE (Linux 4.5+)
 esac
 
 if test "x$have_ficlonerange" = xyes || \
-   test "x$ac_cv_func_copy_file_range" = xyes; then
+   test "x$have_copy_file_range_clone" = xyes; then
     AC_DEFINE([HAVE_FILE_CLONING_BY_RANGE], [1], [Define if system can clone files by range])
 fi
 
