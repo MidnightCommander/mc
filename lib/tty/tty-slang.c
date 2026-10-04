@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <stdlib.h>
@@ -249,14 +250,33 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
         exit (EXIT_FAILURE);
     }
 
-    tcgetattr (fileno (stdin), &boot_mode);
+    // the terminal modes are restored from boot_mode before running external commands
+    if (tcgetattr (fileno (stdin), &boot_mode) != 0)
+    {
+        fprintf (stderr, _ ("Cannot get terminal settings: %s\n"), unix_error_string (errno));
+        exit (EXIT_FAILURE);
+    }
+
     // 255 = ignore abort char; XCTRL('g') for abort char = ^g
-    SLang_init_tty (XCTRL ('g'), 1, 0);
+    if (SLang_init_tty (XCTRL ('g'), 1, 0) != 0)
+    {
+        fprintf (stderr, _ ("Cannot initialize the terminal: %s\n"), unix_error_string (errno));
+        exit (EXIT_FAILURE);
+    }
 
     if (mc_global.tty.ugly_line_drawing)
         SLtt_Has_Alt_Charset = 0;
 
-    tcgetattr (SLang_TT_Read_FD, &new_mode);
+    // cannot fail after SLang_init_tty() has read the modes from the same descriptor, but a
+    // zero-filled structure must never be applied to the terminal, so check it anyway
+    if (tcgetattr (SLang_TT_Read_FD, &new_mode) != 0)
+    {
+        const int saved_errno = errno;
+
+        SLang_reset_tty ();
+        fprintf (stderr, _ ("Cannot get terminal settings: %s\n"), unix_error_string (saved_errno));
+        exit (EXIT_FAILURE);
+    }
 
     tty_reset_prog_mode ();
     load_terminfo_keys ();
