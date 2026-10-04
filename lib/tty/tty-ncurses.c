@@ -243,12 +243,15 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     ESCDELAY = 200;
 #endif
 
-    tcgetattr (STDIN_FILENO, &mode);
-    // use Ctrl-g to generate SIGINT
-    mode.c_cc[VINTR] = CTRL ('g');  // ^g
-    // disable SIGQUIT to allow use Ctrl-\ key
-    mode.c_cc[VQUIT] = NULL_VALUE;
-    tcsetattr (STDIN_FILENO, TCSANOW, &mode);
+    // don't apply an uninitialized structure if the terminal modes cannot be read
+    if (tcgetattr (STDIN_FILENO, &mode) == 0)
+    {
+        // use Ctrl-g to generate SIGINT
+        mode.c_cc[VINTR] = CTRL ('g');  // ^g
+        // disable SIGQUIT to allow use Ctrl-\ key
+        mode.c_cc[VQUIT] = NULL_VALUE;
+        tcsetattr (STDIN_FILENO, TCSANOW, &mode);
+    }
 
     // curses remembers the "in-program" modes after this call
     def_prog_mode ();
