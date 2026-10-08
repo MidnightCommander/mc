@@ -49,6 +49,7 @@
 #include "src/util.h"  // file_error_message()
 
 #include "internal.h"
+#include "syntax.h"
 
 /*** global variables ****************************************************************************/
 
@@ -120,6 +121,77 @@ mcview_toggle_nroff_mode (WView *view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+mcview_toggle_syntax_mode (WView *view)
+{
+    char *filename;
+    dir_list *dir;
+    int *dir_idx;
+    off_t saved_line, saved_col;
+
+    // save position as line number (byte offsets differ between file and pipe)
+    mcview_offset_to_coord (view, &saved_line, &saved_col, view->dpy_start);
+
+    view->mode_flags.syntax = !view->mode_flags.syntax;
+    mcview_altered_flags.syntax = TRUE;
+
+    // syntax and nroff are mutually exclusive
+    if (view->mode_flags.syntax && view->mode_flags.nroff)
+    {
+        view->mode_flags.nroff = FALSE;
+        mcview_altered_flags.nroff = TRUE;
+    }
+
+    // reinit view
+    filename = g_strdup (vfs_path_as_str (view->filename_vpath));
+    dir = view->dir;
+    dir_idx = view->dir_idx;
+    view->dir = NULL;
+    view->dir_idx = NULL;
+    mcview_done (view);
+    mcview_init (view);
+
+    if (view->mode_flags.syntax && filename != NULL && filename[0] != '\0')
+    {
+        const char *cmd_template;
+        char *syntax_cmd;
+
+        cmd_template =
+            mcview_syntax_command != NULL ? mcview_syntax_command : MCVIEW_SYNTAX_DEFAULT_CMD;
+        syntax_cmd = mcview_syntax_build_command (cmd_template, filename);
+        if (syntax_cmd != NULL)
+        {
+            mcview_load (view, syntax_cmd, filename, 0, 0, 0);
+            g_free (syntax_cmd);
+
+            // highlighter failed (stderr or no output) -- fall back to plain view
+            if (view->datasource == DS_NONE)
+            {
+                view->mode_flags.syntax = FALSE;
+                mcview_load (view, NULL, filename, 0, 0, 0);
+            }
+        }
+        else
+            mcview_load (view, NULL, filename, 0, 0, 0);
+    }
+    else
+        mcview_load (view, NULL, filename, 0, 0, 0);
+
+    // restore position by line number
+    mcview_coord_to_offset (view, &view->dpy_start, saved_line, 0);
+    view->dpy_start = mcview_bol (view, view->dpy_start, 0);
+    view->dpy_wrap_dirty = TRUE;
+
+    view->dir = dir;
+    view->dir_idx = dir_idx;
+    g_free (filename);
+
+    view->dpy_bbar_dirty = TRUE;
+    view->dirty++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 mcview_toggle_hex_mode (WView *view)
 {
     view->mode_flags.hex = !view->mode_flags.hex;
@@ -175,6 +247,9 @@ mcview_init (WView *view)
     view->cursor_col = 0;
     view->cursor_row = 0;
     view->change_list = NULL;
+    view->syntax_file_size = 0;
+    view->syntax_content_cache_end = -1;
+    view->syntax_content_cache_bytes = 0;
 
     // {status,ruler,data}_area are left uninitialized
 
