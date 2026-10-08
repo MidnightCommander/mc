@@ -93,9 +93,10 @@ local_opendir (const vfs_path_t *vpath)
      * networked filesystems such as CIFS. Networked FUSE-based systems appear to be affected as
      * well. What's worse is that when you retry `readdir`, the file list still comes out empty.
      *
-     * So our only option seems to be to try `readdir` immediately after `opendir` and use
-     * `rewinddir` if successful, otherwise reopen the directory, which usually leads to correct
-     * file listing.
+     * So our only option seems to be to try `readdir` immediately after `opendir` and reopen the
+     * directory if it failed with EINTR, which usually leads to correct file listing, or use
+     * `rewinddir` otherwise, even if `readdir` failed, since FreeBSD and macOS may have advanced
+     * the stream anyway.
      *
      * However, this has caused problems on FUSE-based systems that do not properly implement
      * `rewinddir` in the past. No silver bullet...
@@ -104,7 +105,16 @@ local_opendir (const vfs_path_t *vpath)
     {
         dir = opendir (path);
         if (dir == NULL)
+        {
+            // Unlike readdir(), opendir() always sets errno on failure, so no reset is needed
+            if (errno == EINTR)
+                continue;
+
             return NULL;
+        }
+
+        // Reset errno before readdir to avoid reading a stale EINTR (#5156)
+        errno = 0;
 
         if (readdir (dir) == NULL && errno == EINTR)
         {
@@ -129,7 +139,15 @@ local_readdir (void *data)
     struct dirent *d;
     unsigned char type;
 
-    d = readdir (*(DIR **) data);
+    // Retry if interrupted, resetting errno to avoid reading a stale EINTR (#5156). FreeBSD and
+    // macOS may lose the entries read before the interruption, but rewinding would repeat the
+    // ones already returned.
+    do
+    {
+        errno = 0;
+        d = readdir (*(DIR **) data);
+    }
+    while (d == NULL && errno == EINTR);
 
     if (d == NULL)
         return NULL;
