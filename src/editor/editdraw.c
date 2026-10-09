@@ -143,17 +143,58 @@ format_character_code (WEdit *edit)
 #undef CHAR_CODE_BUF_SIZE
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the cached line break type of the buffer content.
+ * The result is recomputed only when line breaks have changed.
+ */
+
+static inline LineBreaks
+edit_get_detected_line_breaks (edit_buffer_t *buf)
+{
+    edit_buffer_refresh_line_breaks (buf);
+    return edit_buffer_get_line_breaks (buf);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the status line sign describing the line break type
+ * of the buffer content:
+ * <CRLF> - Windows ("\r\n")
+ * <CR>   - Macintosh ("\r")
+ * <LF>   - Unix ("\n"), also if there are no line breaks
+ * <?>    - mixture of line breaks
+ */
+
+static inline const char *
+edit_line_breaks_status_sign (edit_buffer_t *buf)
+{
+    switch (edit_get_detected_line_breaks (buf))
+    {
+    case LB_WIN:
+        return "<CRLF>";
+    case LB_MAC:
+        return "<CR>";
+    case LB_UNIX:
+        return "<LF>";
+    case LB_ASIS:
+    default:
+        return "<?>";
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 status_string (WEdit *edit, char *s, int w)
 {
     char *character_code;
+    const char *lb = edit_line_breaks_status_sign (&edit->buffer);
 
     character_code = format_character_code (edit);
 
     // The field lengths just prevent the status line from shortening too much
     if (edit_options.simple_statusbar)
-        g_snprintf (s, w, "%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s] %s",
+        g_snprintf (s, w, "%c%c%c%c %3ld %5ld/%ld %6ld/%ld [%s] %s %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
@@ -165,9 +206,11 @@ status_string (WEdit *edit, char *s, int w)
                     (long) edit->buffer.size,                                                 //
                     character_code,
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
-                                                   : "");
+                                                   : "",
+                    lb  //
+        );
     else
-        g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s",
+        g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s  %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
                     edit->modified != 0 ? 'M' : '-',                                          //
                     macro_index < 0 ? '-' : 'R',                                              //
@@ -181,7 +224,9 @@ status_string (WEdit *edit, char *s, int w)
                     (long) edit->buffer.size,                                                 //
                     character_code,
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
-                                                   : "");
+                                                   : "",
+                    lb  //
+        );
 
     g_free (character_code);
 }
@@ -295,6 +340,15 @@ edit_status_window (WEdit *edit)
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
                     edit->modified != 0 ? 'M' : '-', macro_index < 0 ? '-' : 'R',
                     edit->overwrite == 0 ? '-' : 'O');
+    }
+
+    tty_getyx (&y, &x);
+    x -= w->rect.x;
+    x += 4;
+    if (x + 6 <= cols - 2 - 6)
+    {
+        edit_move (x, 0);
+        tty_printf ("%s", edit_line_breaks_status_sign (&edit->buffer));
     }
 
     if (cols > 30)
