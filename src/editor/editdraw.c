@@ -551,10 +551,15 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
     int col, start_col_real;
     int abn_style;
     int book_mark = 0;
+    gboolean crlf_hidden;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
     if (row > w->rect.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen != 0 ? 0 : 1))
         return;
+
+    // in a pure Windows file the "\r" of a "\r\n" line break is a line break
+    // (hidden); in any other file it is shown as "^M"
+    crlf_hidden = (edit_buffer_get_line_breaks (&edit->buffer) == LB_WIN);
 
     if (book_mark_query_color (edit, edit->start_line + row, EDITOR_BOOKMARK_COLOR))
         book_mark = EDITOR_BOOKMARK_COLOR;
@@ -608,14 +613,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
             off_t tws = 0;
 
             if (edit_options.visible_tws && tty_use_colors ())
-                for (tws = edit_buffer_get_eol (&edit->buffer, b); tws > b; tws--)
-                {
-                    unsigned int c;
-
-                    c = edit_buffer_get_byte (&edit->buffer, tws - 1);
-                    if (!whitespace (c))
-                        break;
-                }
+                tws = edit_buffer_trailing_ws_start (&edit->buffer, b);
 
             while (col <= end_col - edit->start_col)
             {
@@ -656,6 +654,13 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     c = edit_buffer_get_utf (&edit->buffer, q, &char_length);
                 else
                     c = edit_buffer_get_byte (&edit->buffer, q);
+
+                // the "\r" of a hidden "\r\n" line break is not shown
+                if (c == '\r' && crlf_hidden && edit_buffer_is_crlf (&edit->buffer, q))
+                {
+                    q++;
+                    continue;
+                }
 
                 // we don't use bg for mc - fg contains both
                 if (book_mark != 0)
@@ -870,6 +875,10 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
     int force = edit->force;
     int y1, x1, y2, x2;
     int last_line, last_column;
+
+    // make sure the cached line break type (used to decide whether a "\r" is
+    // shown as "^M" or hidden) is up to date before drawing
+    edit_buffer_refresh_line_breaks (&edit->buffer);
 
     // draw only visible region
 

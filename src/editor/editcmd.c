@@ -575,10 +575,16 @@ edit_get_block (WEdit *edit, const off_t start, const off_t finish)
 
     if (edit->column_highlight)
     {
+        const gboolean crlf_unit = edit_crlf_is_unit (edit);
+
         // copy from buffer, excluding chars that are out of the column 'margins'
         for (off_t i = start; i < finish; i++)
         {
             off_t x;
+
+            // the hidden "\r" of a "\r\n" line break is not a part of the line text
+            if (crlf_unit && edit_buffer_is_crlf (&edit->buffer, i))
+                continue;
 
             x = edit_buffer_get_bol (&edit->buffer, i);
             x = edit_move_forward3 (edit, x, 0, i);
@@ -680,7 +686,8 @@ pipe_mail (const edit_buffer_t *buf, char *to, char *subject, char *cc)
 static void
 edit_append_spaces_at_eol (WEdit *edit, const long col, const long width)
 {
-    if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+    if (edit_buffer_get_current_byte (&edit->buffer) != '\n'
+        && !(edit_crlf_is_unit (edit) && edit_buffer_is_crlf (&edit->buffer, edit->buffer.curs1)))
         for (long l = width - (edit_get_col (edit) - col); l > 0; l--)
             edit_insert (edit, ' ');
 }
@@ -711,9 +718,17 @@ edit_insert_column_of_text (WEdit *edit, GString *data, long width, off_t *start
             {
                 if (p == edit->buffer.size)
                 {
+                    // a new line break in a file with hidden "\r\n" line breaks is "\r\n"
+                    const gboolean crlf = edit_crlf_is_unit (edit);
+
                     edit_cursor_move (edit, edit->buffer.size - edit->buffer.curs1);
                     edit_insert_ahead (edit, '\n');
                     p++;
+                    if (crlf)
+                    {
+                        edit_insert_ahead (edit, '\r');
+                        p++;
+                    }
                     break;
                 }
                 if (edit_buffer_get_byte (&edit->buffer, p) == '\n')

@@ -68,6 +68,7 @@ off_t edit_buffer_write_file (edit_buffer_t *buf, int fd);
 
 int edit_buffer_calc_percent (const edit_buffer_t *buf, off_t offset);
 
+off_t edit_buffer_trailing_ws_start (const edit_buffer_t *buf, off_t bol);
 LineBreaks edit_buffer_detect_line_breaks (const edit_buffer_t *buf);
 void edit_buffer_refresh_line_breaks (edit_buffer_t *buf);
 LineBreaks edit_buffer_get_line_breaks (const edit_buffer_t *buf);

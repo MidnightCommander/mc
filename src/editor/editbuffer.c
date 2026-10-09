@@ -927,6 +927,44 @@ edit_buffer_calc_percent (const edit_buffer_t *buf, off_t offset)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Get the start offset of the trailing whitespace (spaces and tabs) run of the
+ * line that begins at the given offset. If the line has no trailing whitespace
+ * the end of the line content is returned, so no character of the line is at or
+ * after the result.
+ *
+ * @param buf editor buffer
+ * @param bol offset of the first character of the line
+ *
+ * @return start offset of the trailing whitespace run (or end of line content)
+ */
+
+off_t
+edit_buffer_trailing_ws_start (const edit_buffer_t *buf, off_t bol)
+{
+    off_t tws, eol;
+
+    eol = edit_buffer_get_eol (buf, bol);
+
+    // the content of a line ends at the hidden "\r" of a "\r\n" line break,
+    // a visible "\r" ("^M") is an ordinary character
+    if (eol > bol && edit_buffer_get_line_breaks (buf) == LB_WIN
+        && edit_buffer_is_crlf (buf, eol - 1))
+        eol--;
+
+    for (tws = eol; tws > bol; tws--)
+    {
+        int c;
+
+        c = edit_buffer_get_byte (buf, tws - 1);
+        if (c != ' ' && c != '\t')
+            break;
+    }
+
+    return tws;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Detect the line break type used in the buffer content.
  *
  * @param buf editor buffer

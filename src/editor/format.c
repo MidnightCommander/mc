@@ -488,6 +488,10 @@ format_paragraph (WEdit *edit, gboolean force)
     for (off_t i = p; i + 1 <= q; i++)
         if (edit_buffer_is_crlf (&edit->buffer, i))
             return;
+    // in a file with hidden "\r\n" line breaks, even a paragraph without line breaks
+    // (the last line) would get "\n" line breaks
+    if (edit_crlf_is_unit (edit))
+        return;
 
     indent = test_indent (edit, p, q);
 
