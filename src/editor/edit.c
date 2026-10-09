@@ -1898,99 +1898,63 @@ edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *fil
 off_t
 edit_write_stream (WEdit *edit, FILE *f)
 {
-    long i;
+    const off_t size = edit->buffer.size;
+    off_t i;
 
     if (edit->lb == LB_ASIS)
     {
-        for (i = 0; i < edit->buffer.size; i++)
+        for (i = 0; i < size; i++)
             if (fputc (edit_buffer_get_byte (&edit->buffer, i), f) < 0)
                 break;
         return i;
     }
 
     // change line breaks
-    for (i = 0; i < edit->buffer.size; i++)
+    for (i = 0; i < size; i++)
     {
-        unsigned char c;
+        const unsigned char c = edit_buffer_get_byte (&edit->buffer, i);
 
-        c = edit_buffer_get_byte (&edit->buffer, i);
-        if (!(c == '\n' || c == '\r'))
+        if (c != '\n' && c != '\r')
         {
             // not line break
             if (fputc (c, f) < 0)
                 return i;
+            continue;
         }
-        else
-        {  // (c == '\n' || c == '\r')
-            unsigned char c1;
 
-            c1 = edit_buffer_get_byte (&edit->buffer, i + 1);  // next char
+        // c is a line break; c1 is the char after it (-1 if there is none)
+        const int c1 = (i + 1 < size) ? edit_buffer_get_byte (&edit->buffer, i + 1) : -1;
 
-            switch (edit->lb)
-            {
-            case LB_UNIX:  // replace "\r\n" or '\r' to '\n'
-                // put one line break unconditionally
-                if (fputc ('\n', f) < 0)
-                    return i;
+        switch (edit->lb)
+        {
+        case LB_WIN:  // replace "\r\n", "\r" or "\n" to "\r\n"
+            if (fputc ('\r', f) < 0 || fputc ('\n', f) < 0)
+                return i;
+            if (c == '\r' && c1 == '\n')
+                // Windows line break; skip the second char
+                i++;
+            break;
 
-                i++;  // 2 chars are processed
+        case LB_MAC:  // replace "\r\n", "\r" or "\n" to "\r"
+            if (fputc ('\r', f) < 0)
+                return i;
+            if (c == '\r' && c1 == '\n')
+                // Windows line break; skip the second char
+                i++;
+            break;
 
-                if (c == '\r' && c1 == '\n')
-                    // Windows line break; go to the next char
-                    break;
-
-                if (c == '\r' && c1 == '\r')
-                {
-                    // two Macintosh line breaks; put second line break
-                    if (fputc ('\n', f) < 0)
-                        return i;
-                    break;
-                }
-
-                if (fputc (c1, f) < 0)
-                    return i;
-                break;
-
-            case LB_WIN:  // replace '\n' or '\r' to "\r\n"
-                // put one line break unconditionally
-                if (fputc ('\r', f) < 0 || fputc ('\n', f) < 0)
-                    return i;
-
-                if (c == '\r' && c1 == '\n')
-                    // Windows line break; go to the next char
-                    i++;
-                break;
-
-            case LB_MAC:  // replace "\r\n" or '\n' to '\r'
-                // put one line break unconditionally
-                if (fputc ('\r', f) < 0)
-                    return i;
-
-                i++;  // 2 chars are processed
-
-                if (c == '\r' && c1 == '\n')
-                    // Windows line break; go to the next char
-                    break;
-
-                if (c == '\n' && c1 == '\n')
-                {
-                    // two Windows line breaks; put second line break
-                    if (fputc ('\r', f) < 0)
-                        return i;
-                    break;
-                }
-
-                if (fputc (c1, f) < 0)
-                    return i;
-                break;
-            case LB_ASIS:  // default without changes
-            default:
-                break;
-            }
+        case LB_UNIX:  // replace "\r\n", "\r" or "\n" to "\n"
+        default:
+            if (fputc ('\n', f) < 0)
+                return i;
+            if (c == '\r' && c1 == '\n')
+                // Windows line break; skip the second char
+                i++;
+            break;
         }
     }
 
-    return edit->buffer.size;
+    return size;
 }
 
 /* --------------------------------------------------------------------------------------------- */

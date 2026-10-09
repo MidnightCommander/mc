@@ -329,6 +329,58 @@ START_PARAMETRIZED_TEST (test_is_crlf, test_is_crlf_ds)
 END_PARAMETRIZED_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+/* edit_write_stream() */
+
+static const struct test_write_ds
+{
+    const char *in;
+    LineBreaks lb;
+    const char *out;
+} test_write_ds[] = {
+    { "a\r\nb\r\n", LB_ASIS, "a\r\nb\r\n" },  // as-is
+    { "a\r\nb\r\n", LB_UNIX, "a\nb\n" },      // "\r\n" -> "\n"
+    { "a\r\nb\r\n", LB_WIN, "a\r\nb\r\n" },   // "\r\n" -> "\r\n"
+    { "a\r\nb\r\n", LB_MAC, "a\rb\r" },       // "\r\n" -> "\r"
+    { "a\nb\n", LB_WIN, "a\r\nb\r\n" },       // "\n" -> "\r\n"
+    { "a\nb\n", LB_MAC, "a\rb\r" },           // "\n" -> "\r"
+    { "a\nb", LB_WIN, "a\r\nb" },             // no trailing line break
+    { "a\r\nb", LB_UNIX, "a\nb" },            // no trailing line break
+    { "abc\n", LB_UNIX, "abc\n" },            // no extra "\n" is appended (regression)
+    { "abc\r\n", LB_UNIX, "abc\n" },
+    { "abc\r\n", LB_WIN, "abc\r\n" },
+    { "\n", LB_WIN, "\r\n" },              // line break at the beginning
+    { "a\r\n\r\nb", LB_UNIX, "a\n\nb" },   // blank line
+    { "a\r\r\nb", LB_UNIX, "a\n\nb" },     // standalone "\r" before "\r\n"
+    { "a\r\nb\r\nc", LB_MAC, "a\rb\rc" },  // last line without line break
+    { "a\rb", LB_UNIX, "a\nb" },           // standalone "\r" is a line break too
+    { "abc", LB_WIN, "abc" },              // no line breaks
+};
+
+/* @Test(dataSource = "test_write_ds") */
+START_PARAMETRIZED_TEST (test_write_stream, test_write_ds)
+{
+    char *mem = NULL;
+    size_t mem_size = 0;
+    FILE *f;
+    off_t written;
+
+    // given
+    test_load_text (data->in);
+    test_edit->lb = data->lb;
+
+    // when
+    f = open_memstream (&mem, &mem_size);
+    written = edit_write_stream (test_edit, f);
+    fclose (f);
+
+    // then
+    ck_assert_int_eq (written, (off_t) strlen (data->in));
+    mctest_assert_str_eq (mem, data->out);
+    free (mem);
+}
+END_PARAMETRIZED_TEST
+
+/* --------------------------------------------------------------------------------------------- */
 /* loading a file: the buffer keeps the raw content, detection works on the loaded text */
 
 START_TEST (test_load_crlf_file)
@@ -392,6 +444,7 @@ main (void)
     mctest_add_parameterized_test (tc_core, test_detect, test_detect_ds);
     tcase_add_test (tc_core, test_detect_after_joining_cr_lf);
     mctest_add_parameterized_test (tc_core, test_is_crlf, test_is_crlf_ds);
+    mctest_add_parameterized_test (tc_core, test_write_stream, test_write_ds);
     tcase_add_test (tc_core, test_load_crlf_file);
     // ***********************************
 
