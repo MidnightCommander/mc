@@ -1454,16 +1454,74 @@ edit_auto_indent (WEdit *edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Check whether a line break ("\n" or "\r\n") ends exactly at the specified position,
+ * i.e. whether the line before that position is empty.
+ */
+
+static inline gboolean
+edit_line_break_ends_at (const edit_buffer_t *buf, off_t p)
+{
+    if (p >= 1 && edit_buffer_get_byte (buf, p - 1) == '\n')
+        return TRUE;
+
+    return edit_buffer_is_crlf (buf, p - 2);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Insert a line break at the cursor inheriting the type of the line break
+ * of the current line ("\r\n" or "\n"). If the current line has no line
+ * break (the last line of the file), use the line break of the previous line.
+ */
+
+static inline void
+edit_insert_line_break (WEdit *edit)
+{
+    const off_t eol = edit_buffer_get_current_eol (&edit->buffer);
+    gboolean crlf;
+
+    if (edit_buffer_is_crlf (&edit->buffer, eol - 1))
+        crlf = TRUE;
+    else if (eol == edit->buffer.size)
+    {
+        const off_t bol = edit_buffer_get_current_bol (&edit->buffer);
+
+        crlf = (bol > 0) && edit_buffer_is_crlf (&edit->buffer, bol - 2);
+    }
+    else
+        crlf = FALSE;
+
+    // if the character right before the cursor is already a "\r" (e.g. the
+    // cursor is between the "\r" and the "\n" of a "\r\n" line break),
+    // inserting another "\r" would create a duplicate, so insert only "\n"
+    if (crlf && edit_buffer_get_previous_byte (&edit->buffer) == '\r')
+        crlf = FALSE;
+
+    if (crlf)
+        edit_insert (edit, '\r');
+
+    edit_insert (edit, '\n');
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 edit_double_newline (WEdit *edit)
 {
-    edit_insert (edit, '\n');
+    const off_t pos = edit->buffer.curs1;
+
+    edit_insert_line_break (edit);
+
+    // do not add a second line break if the next char or the previous line
+    // is already a line break, i.e. there is already a blank line
     if (edit_buffer_get_current_byte (&edit->buffer) == '\n'
-        || edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - 2) == '\n')
+        || edit_buffer_is_crlf (&edit->buffer, edit->buffer.curs1)
+        || edit_line_break_ends_at (&edit->buffer, pos))
         return;
+
     edit->force |= REDRAW_PAGE;
-    edit_insert (edit, '\n');
+    edit_insert_line_break (edit);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1530,15 +1588,18 @@ check_and_wrap_line (WEdit *edit)
         c = edit_buffer_get_byte (&edit->buffer, curs);
         if (c == '\n' || curs <= 0)
         {
-            edit_insert (edit, '\n');
+            edit_insert_line_break (edit);
             return;
         }
         if (whitespace (c))
         {
-            off_t current = edit->buffer.curs1;
+            // the line break is one or two bytes long: restore the cursor position
+            // counting from the end of the text
+            const off_t tail = edit->buffer.curs2;
+
             edit_cursor_move (edit, curs - edit->buffer.curs1 + 1);
-            edit_insert (edit, '\n');
-            edit_cursor_move (edit, current - edit->buffer.curs1 + 1);
+            edit_insert_line_break (edit);
+            edit_cursor_move (edit, edit->buffer.size - tail - edit->buffer.curs1);
             return;
         }
     }
@@ -3616,13 +3677,13 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         }
         else
         {
-            edit_insert (edit, '\n');
+            edit_insert_line_break (edit);
             if (edit_options.return_does_auto_indent && !bracketed_pasting_in_progress)
                 edit_auto_indent (edit);
         }
         break;
     case CK_Return:
-        edit_insert (edit, '\n');
+        edit_insert_line_break (edit);
         break;
 
     case CK_MarkColumnPageUp:

@@ -381,6 +381,190 @@ START_PARAMETRIZED_TEST (test_write_stream, test_write_ds)
 END_PARAMETRIZED_TEST
 
 /* --------------------------------------------------------------------------------------------- */
+/* CK_Enter: a new line break inherits the type of the current line break */
+
+START_TEST (test_enter_inherits_crlf)
+{
+    // given: cursor is at the end of the first line
+    test_load_text ("line1\r\nline2\r\n");
+    test_cursor_to (5);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("line1\r\n\r\nline2\r\n");
+}
+END_TEST
+
+START_TEST (test_enter_inherits_lf)
+{
+    // given: cursor is at the end of the first line
+    test_load_text ("line1\nline2\n");
+    test_cursor_to (5);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("line1\n\nline2\n");
+}
+END_TEST
+
+// the last line has no line break of its own: use the previous line's line break
+START_TEST (test_enter_last_line_inherits_crlf)
+{
+    // given: cursor is at the end of the last line
+    test_load_text ("a\r\nb\r\nc");
+    test_cursor_to (7);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("a\r\nb\r\nc\r\n");
+}
+END_TEST
+
+START_TEST (test_enter_last_line_inherits_lf)
+{
+    // given: cursor is at the end of the last line
+    test_load_text ("a\nb\nc");
+    test_cursor_to (5);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("a\nb\nc\n");
+}
+END_TEST
+
+START_TEST (test_enter_empty_buffer)
+{
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("\n");
+}
+END_TEST
+
+/* with auto indent enabled the line break must stay of the file's type */
+START_TEST (test_enter_auto_indent_crlf)
+{
+    // given: indented line, cursor at the end of the second line
+    edit_options.return_does_auto_indent = TRUE;
+    test_load_text ("  a\r\n  b\r\n");
+    test_cursor_to (8);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then: the new line gets the indent of the previous line, line break stays CRLF
+    test_check ("  a\r\n  b\r\n  \r\n");
+}
+END_TEST
+
+/* with auto paragraph formatting enabled pressing Enter must keep the file's line breaks */
+START_TEST (test_enter_auto_para_format_crlf)
+{
+    // given: cursor at the end of the second line
+    edit_options.auto_para_formatting = TRUE;
+    test_load_text ("aaaa\r\nbbbb\r\n");
+    test_cursor_to (10);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("aaaa\r\nbbbb\r\n\r\n");
+}
+END_TEST
+
+/* formatting a CRLF paragraph must not leak "\r" into the text or change line breaks */
+START_TEST (test_format_paragraph_crlf)
+{
+    // given: a CRLF paragraph, cursor on a non-blank line
+    test_load_text ("aaaa bbbb\r\ncccc dddd\r\n");
+    test_cursor_to (11);
+
+    // when
+    format_paragraph (test_edit, FALSE);
+
+    // then: the paragraph is left unchanged (line breaks intact, no stray "\r")
+    test_check ("aaaa bbbb\r\ncccc dddd\r\n");
+}
+END_TEST
+
+START_TEST (test_enter_auto_indent_crlf_empty_prev_line)
+{
+    // given: cursor is on an empty line
+    edit_options.return_does_auto_indent = TRUE;
+    test_load_text ("line1\r\n\r\nline3\r\n");
+    test_cursor_to (7);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("line1\r\n\r\n\r\nline3\r\n");
+}
+END_TEST
+
+START_TEST (test_enter_auto_indent_crlf_last_line)
+{
+    // given: cursor is at the end of the last (indented) line
+    edit_options.return_does_auto_indent = TRUE;
+    test_load_text ("  a\r\n  b\r\n  c");
+    test_cursor_to (13);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then: the new line gets the indent of the previous line, line break stays CRLF
+    test_check ("  a\r\n  b\r\n  c\r\n  ");
+}
+END_TEST
+
+/* typewriter wrap: the line is broken at the last space, the text typed after it stays in order */
+START_TEST (test_typewriter_wrap_crlf)
+{
+    // given: a CRLF file, wrap at column 8
+    edit_options.typewriter_wrap = TRUE;
+    edit_options.word_wrap_line_length = 8;
+    test_load_text ("\r\n");
+    test_cursor_to (0);
+
+    // when
+    for (const char *s = "aaaa bbbbcd"; *s != '\0'; s++)
+        edit_execute_cmd (test_edit, -1, *s);
+
+    // then
+    test_check ("aaaa \r\nbbbbcd\r\n");
+    ck_assert_int_eq (test_edit->buffer.curs1, 13);
+}
+END_TEST
+
+START_TEST (test_typewriter_wrap_lf)
+{
+    // given: an LF file, wrap at column 8
+    edit_options.typewriter_wrap = TRUE;
+    edit_options.word_wrap_line_length = 8;
+    test_load_text ("\n");
+    test_cursor_to (0);
+
+    // when
+    for (const char *s = "aaaa bbbbcd"; *s != '\0'; s++)
+        edit_execute_cmd (test_edit, -1, *s);
+
+    // then
+    test_check ("aaaa \nbbbbcd\n");
+    ck_assert_int_eq (test_edit->buffer.curs1, 12);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
 /* loading a file: the buffer keeps the raw content, detection works on the loaded text */
 
 START_TEST (test_load_crlf_file)
@@ -445,6 +629,18 @@ main (void)
     tcase_add_test (tc_core, test_detect_after_joining_cr_lf);
     mctest_add_parameterized_test (tc_core, test_is_crlf, test_is_crlf_ds);
     mctest_add_parameterized_test (tc_core, test_write_stream, test_write_ds);
+    tcase_add_test (tc_core, test_enter_inherits_crlf);
+    tcase_add_test (tc_core, test_enter_inherits_lf);
+    tcase_add_test (tc_core, test_enter_last_line_inherits_crlf);
+    tcase_add_test (tc_core, test_enter_last_line_inherits_lf);
+    tcase_add_test (tc_core, test_enter_empty_buffer);
+    tcase_add_test (tc_core, test_enter_auto_indent_crlf);
+    tcase_add_test (tc_core, test_enter_auto_para_format_crlf);
+    tcase_add_test (tc_core, test_format_paragraph_crlf);
+    tcase_add_test (tc_core, test_enter_auto_indent_crlf_empty_prev_line);
+    tcase_add_test (tc_core, test_enter_auto_indent_crlf_last_line);
+    tcase_add_test (tc_core, test_typewriter_wrap_crlf);
+    tcase_add_test (tc_core, test_typewriter_wrap_lf);
     tcase_add_test (tc_core, test_load_crlf_file);
     // ***********************************
 
