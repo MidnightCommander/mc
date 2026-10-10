@@ -172,6 +172,7 @@ src/filemanager/get_random_hint.log
 src/filemanager/get_random_hint.trs
 src/filemanager/test-suite.log
 src/test-suite.log
+src/vfs/cpio/cpio_open_archive
 src/vfs/extfs/helpers-list/mc_parse_ls_l
 src/vfs/extfs/helpers-list/run
 src/vfs/extfs/helpers-list/run.log
