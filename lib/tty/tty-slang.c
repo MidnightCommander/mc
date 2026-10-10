@@ -82,52 +82,6 @@ static gboolean no_slang_delay;
 
 static gboolean slsmg_active = FALSE;
 
-/* This table describes which capabilities we want and which values we
- * assign to them.
- */
-static const struct
-{
-    int key_code;
-    const char *key_name;
-} key_table[] = {
-    { KEY_F (0), "k0" },
-    { KEY_F (1), "k1" },
-    { KEY_F (2), "k2" },
-    { KEY_F (3), "k3" },
-    { KEY_F (4), "k4" },
-    { KEY_F (5), "k5" },
-    { KEY_F (6), "k6" },
-    { KEY_F (7), "k7" },
-    { KEY_F (8), "k8" },
-    { KEY_F (9), "k9" },
-    { KEY_F (10), "k;" },
-    { KEY_F (11), "F1" },
-    { KEY_F (12), "F2" },
-    { KEY_F (13), "F3" },
-    { KEY_F (14), "F4" },
-    { KEY_F (15), "F5" },
-    { KEY_F (16), "F6" },
-    { KEY_F (17), "F7" },
-    { KEY_F (18), "F8" },
-    { KEY_F (19), "F9" },
-    { KEY_F (20), "FA" },
-    { KEY_IC, "kI" },
-    { KEY_NPAGE, "kN" },
-    { KEY_PPAGE, "kP" },
-    { KEY_LEFT, "kl" },
-    { KEY_RIGHT, "kr" },
-    { KEY_UP, "ku" },
-    { KEY_DOWN, "kd" },
-    { KEY_DC, "kD" },
-    { KEY_BACKSPACE, "kb" },
-    { KEY_HOME, "kh" },
-    { KEY_END, "@7" },
-    {
-        0,
-        NULL,
-    },
-};
-
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -157,24 +111,18 @@ sigwinch_handler (int dummy)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_define_key (int code, const char *strcap)
-{
-    char *seq;
-
-    seq = SLtt_tgetstr ((SLFUTURE_CONST char *) strcap);
-    if (seq != NULL)
-        define_sequence (code, seq, MCKEY_NOACTION);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 load_terminfo_keys (void)
 {
     int i;
 
     for (i = 0; key_table[i].key_code; i++)
-        do_define_key (key_table[i].key_code, key_table[i].key_name);
+    {
+        char *seq;
+
+        seq = tty_tgetstr (key_table[i].key_name);
+        if (seq != NULL)
+            define_sequence (key_table[i].key_code, seq, MCKEY_NOACTION);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -259,7 +207,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     tcgetattr (SLang_TT_Read_FD, &new_mode);
 
     tty_reset_prog_mode ();
-    load_terminfo_keys ();
+    init_key ();
 
     SLtt_Blink_Mode = (tty_use_256colors (NULL) || tty_use_truecolors (NULL)) ? 1 : 0;
 
@@ -295,6 +243,7 @@ tty_shutdown (void)
     char *op_cap;
 
     tty_destroy_winch_pipe ();
+    done_key ();
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);
@@ -306,7 +255,7 @@ tty_shutdown (void)
     /* Load the op capability to reset the colors to those that were
      * active when the program was started up
      */
-    op_cap = SLtt_tgetstr ((SLFUTURE_CONST char *) "op");
+    op_cap = tty_tgetstr ("op");
     if (op_cap != NULL)
     {
         fputs (op_cap, stdout);
@@ -403,8 +352,7 @@ tty_keypad (gboolean set)
 {
     char *keypad_string;
 
-    keypad_string = SLtt_tgetstr ((SLFUTURE_CONST char *) (set ? "ks" : "ke"));
-
+    keypad_string = tty_tgetstr (set ? "ks" : "ke");
     if (keypad_string != NULL)
         SLtt_write_string (keypad_string);
 }
