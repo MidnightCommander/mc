@@ -332,6 +332,13 @@ sftpfs_write_file (vfs_file_handler_t *fh, const char *buffer, size_t count, GEr
         int err;
 
         rc = libssh2_sftp_write (file->handle, buffer, count);
+
+        /* libssh2 pipelines the write: 0 means the data has been sent, but the server hasn't
+         * acknowledged any of it yet, and the same buffer must be passed again. This happens
+         * with servers that have a small channel window, e.g. dropbear. */
+        if (rc == 0 && count != 0)
+            continue;
+
         if (rc >= 0)
             break;
 
@@ -339,7 +346,7 @@ sftpfs_write_file (vfs_file_handler_t *fh, const char *buffer, size_t count, GEr
         if (err < 0)
             return err;
     }
-    while (rc == LIBSSH2_ERROR_EAGAIN);
+    while (rc == LIBSSH2_ERROR_EAGAIN || rc == 0);
 
     return rc;
 }
