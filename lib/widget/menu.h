@@ -34,6 +34,7 @@ typedef struct WMenuBar
     GList *menu;                    // The actual menus
     guint current;                  // Current menu on the top bar
     unsigned long previous_widget;  // Selected widget ID before activating menu
+    gboolean previously_visible;    // Visibility of menubar before activating menu
 } WMenuBar;
 
 /*** global variables defined in .c file *********************************************************/

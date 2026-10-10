@@ -340,6 +340,20 @@ layout_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void 
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* Sync visibility of the menu bar, command line, key bar, and hint bar with layout options.
+   Don't call this from setup_panels(): menu bar can be shown temporarily (F9) while hidden. */
+
+static void
+layout_update_visibility (void)
+{
+    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
+    widget_set_visibility (WIDGET (the_prompt), command_prompt);
+    widget_set_visibility (WIDGET (cmdline), command_prompt);
+    widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
+    widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
@@ -469,6 +483,7 @@ layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
             if (ok)
             {
                 update_split (h);
+                layout_update_visibility ();
                 layout_change ();
                 do_refresh ();
                 return MSG_HANDLED;
@@ -725,6 +740,7 @@ layout_box (void)
         layout_restore ();
 
     widget_destroy (WIDGET (layout_dlg));
+    layout_update_visibility ();
     layout_change ();
     do_refresh ();
 }
@@ -835,7 +851,6 @@ setup_panels (void)
     rb = *r;
     rb.lines = 1;
     widget_set_size_rect (WIDGET (the_menubar), &rb);
-    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
 
     check_split (&panels_layout);
     start_y = r->y + (menubar_visible ? 1 : 0);
@@ -860,7 +875,6 @@ setup_panels (void)
     }
 
     widget_set_size (WIDGET (the_hint), height + start_y, r->x, 1, r->cols);
-    widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
 
     // Output window
     if (mc_global.tty.console_flag != '\0' && output_lines != 0)
@@ -873,24 +887,15 @@ setup_panels (void)
     }
 
     if (command_prompt)
-    {
 #ifdef ENABLE_SUBSHELL
         if (!mc_global.tty.use_subshell || !do_load_prompt ())
 #endif
             setup_cmdline ();
-    }
-    else
-    {
-        // make invisible
-        widget_hide (WIDGET (cmdline));
-        widget_hide (WIDGET (the_prompt));
-    }
 
     rb = *r;
     rb.y = r->lines - 1;
     rb.lines = 1;
     widget_set_size_rect (WIDGET (the_bar), &rb);
-    widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
 
     update_xterm_title_path ();
     update_terminal_cwd ();
@@ -999,9 +1004,6 @@ setup_cmdline (void)
     widget_set_size (WIDGET (the_prompt), y, r->x, 1, prompt_width);
     label_set_text (the_prompt, mc_prompt);
     widget_set_size (WIDGET (cmdline), y, r->x + prompt_width, 1, r->cols - prompt_width);
-
-    widget_show (WIDGET (the_prompt));
-    widget_show (WIDGET (cmdline));
 }
 
 /* --------------------------------------------------------------------------------------------- */
