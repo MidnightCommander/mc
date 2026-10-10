@@ -537,7 +537,10 @@ ok:
         status = ftpfs_get_reply (me, ftp_super->sock,
                                   (wait_reply & WANT_STRING) != 0 ? reply_str : NULL,
                                   sizeof (reply_str) - 1);
-        if ((wait_reply & WANT_STRING) != 0 && !retry && level == 0 && code == 421)
+        /* 421 means the server has closed the control connection, e.g. after an idle
+         * timeout. Reconnect and resend the command whatever kind of reply it waits for,
+         * otherwise the first command after a timeout (usually CWD) fails. */
+        if (!retry && level == 0 && code == 421)
         {
             retry = TRUE;
             level = 1;
