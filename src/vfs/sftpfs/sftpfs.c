@@ -58,6 +58,22 @@ struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);  // used in fil
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Drop the directory cache of the connection after an operation that changed the remote side.
+ *
+ * @param vpath path the operation was done on
+ */
+
+static void
+sftpfs_invalidate (const vfs_path_t *vpath)
+{
+    struct vfs_s_super *super = NULL;
+
+    if (vfs_s_get_path (vpath, &super, FL_NO_OPEN) != NULL && super != NULL)
+        vfs_s_invalidate (vfs_sftpfs_ops, super);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Callback for VFS-class init action.
  *
  * @param me structure of VFS class
@@ -170,99 +186,6 @@ sftpfs_cb_open (const vfs_path_t *vpath, int flags, mode_t mode)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Callback for opening directory.
- *
- * @param vpath path to directory
- * @return directory data handler if success, NULL otherwise
- */
-
-static void *
-sftpfs_cb_opendir (const vfs_path_t *vpath)
-{
-    GError *mcerror = NULL;
-    void *ret_value;
-
-    // reset interrupt flag
-    tty_got_interrupt ();
-
-    ret_value = sftpfs_opendir (vpath, &mcerror);
-    mc_error_message (&mcerror, NULL);
-    return ret_value;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Callback for reading directory entry.
- *
- * @param data directory data handler
- * @return information about direntry if success, NULL otherwise
- */
-
-static struct vfs_dirent *
-sftpfs_cb_readdir (void *data)
-{
-    GError *mcerror = NULL;
-    struct vfs_dirent *sftpfs_dirent;
-
-    if (tty_got_interrupt ())
-    {
-        tty_disable_interrupt_key ();
-        return NULL;
-    }
-
-    sftpfs_dirent = sftpfs_readdir (data, &mcerror);
-    if (!mc_error_message (&mcerror, NULL))
-    {
-        if (sftpfs_dirent != NULL)
-            vfs_print_message (_ ("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->d_name);
-        else
-            vfs_print_message ("%s", _ ("sftp: Listing done."));
-    }
-
-    return sftpfs_dirent;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Callback for closing directory.
- *
- * @param data directory data handler
- * @return 0 if success, negative value otherwise
- */
-
-static int
-sftpfs_cb_closedir (void *data)
-{
-    int rc;
-    GError *mcerror = NULL;
-
-    rc = sftpfs_closedir (data, &mcerror);
-    mc_error_message (&mcerror, NULL);
-    return rc;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Callback for lstat VFS-function.
- *
- * @param vpath path to file or directory
- * @param buf   buffer for store stat-info
- * @return 0 if success, negative value otherwise
- */
-
-static int
-sftpfs_cb_lstat (const vfs_path_t *vpath, struct stat *buf)
-{
-    int rc;
-    GError *mcerror = NULL;
-
-    rc = sftpfs_lstat (vpath, buf, &mcerror);
-    mc_error_message (&mcerror, NULL);
-    return rc;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Callback for stat VFS-function.
  *
  * @param vpath path to file or directory
@@ -275,7 +198,24 @@ sftpfs_cb_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     int rc;
     GError *mcerror = NULL;
+    struct vfs_s_super *super;
+    const char *path;
 
+    path = vfs_s_get_path (vpath, &super, 0);
+    if (path != NULL)
+    {
+        struct vfs_s_inode *ino;
+
+        ino = vfs_s_find_inode (vfs_sftpfs_ops, super, path, LINK_NO_FOLLOW, FL_NONE);
+        if (ino != NULL && !S_ISLNK (ino->st.st_mode))
+        {
+            *buf = ino->st;
+            return 0;
+        }
+    }
+
+    /* Symbolic links (and anything not found in the directory cache): let the server follow
+     * the link instead of loading the directory listing of the link target. */
     rc = sftpfs_stat (vpath, buf, &mcerror);
     mc_error_message (&mcerror, NULL);
     return rc;
@@ -303,27 +243,6 @@ sftpfs_cb_fstat (void *data, struct stat *buf)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Callback for readlink VFS-function.
- *
- * @param vpath path to file or directory
- * @param buf   buffer for store stat-info
- * @param size  buffer size
- * @return 0 if success, negative value otherwise
- */
-
-static int
-sftpfs_cb_readlink (const vfs_path_t *vpath, char *buf, size_t size)
-{
-    int rc;
-    GError *mcerror = NULL;
-
-    rc = sftpfs_readlink (vpath, buf, size, &mcerror);
-    mc_error_message (&mcerror, NULL);
-    return rc;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Callback for utime VFS-function.
  *
  * @param vpath path to file or directory
@@ -340,6 +259,7 @@ sftpfs_cb_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 
     vfs_get_timespecs_from_timesbuf (times, &atime, &mtime);
     rc = sftpfs_utime (vpath, atime.tv_sec, mtime.tv_sec, &mcerror);
+    sftpfs_invalidate (vpath);
 
     mc_error_message (&mcerror, NULL);
     return rc;
@@ -361,6 +281,7 @@ sftpfs_cb_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
     GError *mcerror = NULL;
 
     rc = sftpfs_symlink (vpath1, vpath2, &mcerror);
+    sftpfs_invalidate (vpath2);
     mc_error_message (&mcerror, NULL);
     return rc;
 }
@@ -520,6 +441,7 @@ sftpfs_cb_chmod (const vfs_path_t *vpath, mode_t mode)
     GError *mcerror = NULL;
 
     rc = sftpfs_chmod (vpath, mode, &mcerror);
+    sftpfs_invalidate (vpath);
     mc_error_message (&mcerror, NULL);
     return rc;
 }
@@ -540,6 +462,7 @@ sftpfs_cb_mkdir (const vfs_path_t *vpath, mode_t mode)
     GError *mcerror = NULL;
 
     rc = sftpfs_mkdir (vpath, mode, &mcerror);
+    sftpfs_invalidate (vpath);
     mc_error_message (&mcerror, NULL);
     return rc;
 }
@@ -559,6 +482,7 @@ sftpfs_cb_rmdir (const vfs_path_t *vpath)
     GError *mcerror = NULL;
 
     rc = sftpfs_rmdir (vpath, &mcerror);
+    sftpfs_invalidate (vpath);
     mc_error_message (&mcerror, NULL);
     return rc;
 }
@@ -600,6 +524,7 @@ sftpfs_cb_unlink (const vfs_path_t *vpath)
     GError *mcerror = NULL;
 
     rc = sftpfs_unlink (vpath, &mcerror);
+    sftpfs_invalidate (vpath);
     mc_error_message (&mcerror, NULL);
     return rc;
 }
@@ -620,6 +545,7 @@ sftpfs_cb_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
     GError *mcerror = NULL;
 
     rc = sftpfs_rename (vpath1, vpath2, &mcerror);
+    sftpfs_invalidate (vpath1);
     mc_error_message (&mcerror, NULL);
     return rc;
 }
@@ -784,22 +710,23 @@ sftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Callback for getting directory content.
+ * Callback for loading directory content into the directory cache.
  *
- * @param me          unused
- * @param dir         unused
- * @param remote_path unused
- * @return always 0
+ * @param me          VFS class
+ * @param dir         inode of the directory
+ * @param remote_path path of the directory
+ * @return 0 if success, -1 otherwise
  */
 
 static int
 sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote_path)
 {
-    (void) me;
-    (void) dir;
-    (void) remote_path;
+    int rc;
+    GError *mcerror = NULL;
 
-    return 0;
+    rc = sftpfs_dir_load (me, dir, remote_path, &mcerror);
+    mc_error_message (&mcerror, NULL);
+    return rc;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -821,16 +748,11 @@ vfs_init_sftpfs (void)
 
     vfs_sftpfs_ops->fill_names = sftpfs_cb_fill_names;
 
-    vfs_sftpfs_ops->opendir = sftpfs_cb_opendir;
-    vfs_sftpfs_ops->readdir = sftpfs_cb_readdir;
-    vfs_sftpfs_ops->closedir = sftpfs_cb_closedir;
     vfs_sftpfs_ops->mkdir = sftpfs_cb_mkdir;
     vfs_sftpfs_ops->rmdir = sftpfs_cb_rmdir;
 
     vfs_sftpfs_ops->stat = sftpfs_cb_stat;
-    vfs_sftpfs_ops->lstat = sftpfs_cb_lstat;
     vfs_sftpfs_ops->fstat = sftpfs_cb_fstat;
-    vfs_sftpfs_ops->readlink = sftpfs_cb_readlink;
     vfs_sftpfs_ops->symlink = sftpfs_cb_symlink;
     vfs_sftpfs_ops->link = sftpfs_cb_link;
     vfs_sftpfs_ops->utime = sftpfs_cb_utime;
