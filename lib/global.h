@@ -138,8 +138,12 @@ typedef struct
     // If utf-8 terminal utf8_display = TRUE
     gboolean utf8_display;
 
-    // Set if the nice message (hint) bar is visible
-    gboolean message_visible;
+    // Set if the main menu is visible
+    gboolean menubar_visible;
+    // Set if the hint bar is visible
+    gboolean hint_visible;
+    // Set if the prompt and the command line are visible
+    gboolean cmdline_visible;
     // Set if the nice and useful keybar is visible
     gboolean keybar_visible;
 

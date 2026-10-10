@@ -88,12 +88,6 @@ gboolean nice_rotating_dash = TRUE;
 /* The number of output lines shown (if available) */
 int output_lines = 0;
 
-/* Set if the command prompt is to be displayed */
-gboolean command_prompt = TRUE;
-
-/* Set if the main menu is visible */
-gboolean menubar_visible = TRUE;
-
 /* Set to show current working dir in xterm window title */
 gboolean xterm_title = TRUE;
 
@@ -128,9 +122,9 @@ int ok_to_refresh = 1;
 typedef struct
 {
     gboolean menubar_visible;
-    gboolean command_prompt;
+    gboolean cmdline_visible;
     gboolean keybar_visible;
-    gboolean message_visible;
+    gboolean hint_visible;
     gboolean xterm_title;
     gboolean free_space;
     int output_lines;
@@ -168,10 +162,10 @@ static struct
     WCheck *widget;
 } check_options[] = {
     { N_ ("&Equal split"), &equal_split, NULL },
-    { N_ ("&Menubar visible"), &menubar_visible, NULL },
-    { N_ ("Command &prompt"), &command_prompt, NULL },
+    { N_ ("&Menubar visible"), &mc_global.menubar_visible, NULL },
+    { N_ ("Command &prompt"), &mc_global.cmdline_visible, NULL },
     { N_ ("&Keybar visible"), &mc_global.keybar_visible, NULL },
-    { N_ ("H&intbar visible"), &mc_global.message_visible, NULL },
+    { N_ ("H&intbar visible"), &mc_global.hint_visible, NULL },
     { N_ ("&XTerm window title"), &xterm_title, NULL },
     { N_ ("&Show free space"), &free_space, NULL },
 };
@@ -346,11 +340,11 @@ layout_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void 
 static void
 layout_update_visibility (void)
 {
-    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
-    widget_set_visibility (WIDGET (the_prompt), command_prompt);
-    widget_set_visibility (WIDGET (the_cmdline), command_prompt);
+    widget_set_visibility (WIDGET (the_menubar), mc_global.menubar_visible);
+    widget_set_visibility (WIDGET (the_prompt), mc_global.cmdline_visible);
+    widget_set_visibility (WIDGET (the_cmdline), mc_global.cmdline_visible);
     widget_set_visibility (WIDGET (the_keybar), mc_global.keybar_visible);
-    widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
+    widget_set_visibility (WIDGET (the_hint), mc_global.hint_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -365,24 +359,24 @@ layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
     case MSG_POST_KEY:
     {
         const Widget *mw = CONST_WIDGET (filemanager);
-        gboolean _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
+        gboolean _menubar_visible, _cmdline_visible, _keybar_visible, _hint_visible;
 
         _menubar_visible = check_options[1].widget->state;
-        _command_prompt = check_options[2].widget->state;
+        _cmdline_visible = check_options[2].widget->state;
         _keybar_visible = check_options[3].widget->state;
-        _message_visible = check_options[4].widget->state;
+        _hint_visible = check_options[4].widget->state;
 
         if (mc_global.tty.console_flag == '\0')
-            height = mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0)
-                - (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
+            height = mw->rect.lines - (_keybar_visible ? 1 : 0) - (_cmdline_visible ? 1 : 0)
+                - (_menubar_visible ? 1 : 0) - _output_lines - (_hint_visible ? 1 : 0);
         else
         {
             int minimum;
 
             if (_output_lines < 0)
                 _output_lines = 0;
-            height = mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0)
-                - (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
+            height = mw->rect.lines - (_keybar_visible ? 1 : 0) - (_cmdline_visible ? 1 : 0)
+                - (_menubar_visible ? 1 : 0) - _output_lines - (_hint_visible ? 1 : 0);
             minimum = MINHEIGHT * (1 + (panels_layout.horizontal_split ? 1 : 0));
             if (height < minimum)
             {
@@ -466,13 +460,13 @@ layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
             gboolean ok = TRUE;
 
             if (sender == WIDGET (check_options[1].widget))
-                menubar_visible = check_options[1].widget->state;
+                mc_global.menubar_visible = check_options[1].widget->state;
             else if (sender == WIDGET (check_options[2].widget))
-                command_prompt = check_options[2].widget->state;
+                mc_global.cmdline_visible = check_options[2].widget->state;
             else if (sender == WIDGET (check_options[3].widget))
                 mc_global.keybar_visible = check_options[3].widget->state;
             else if (sender == WIDGET (check_options[4].widget))
-                mc_global.message_visible = check_options[4].widget->state;
+                mc_global.hint_visible = check_options[4].widget->state;
             else if (sender == WIDGET (check_options[5].widget))
                 xterm_title = check_options[5].widget->state;
             else if (sender == WIDGET (check_options[6].widget))
@@ -671,10 +665,10 @@ restore_into_right_dir_panel (int idx, gboolean last_was_panel, const WRect *r)
 static void
 layout_save (void)
 {
-    old_layout.menubar_visible = menubar_visible;
-    old_layout.command_prompt = command_prompt;
+    old_layout.menubar_visible = mc_global.menubar_visible;
+    old_layout.cmdline_visible = mc_global.cmdline_visible;
     old_layout.keybar_visible = mc_global.keybar_visible;
-    old_layout.message_visible = mc_global.message_visible;
+    old_layout.hint_visible = mc_global.hint_visible;
     old_layout.xterm_title = xterm_title;
     old_layout.free_space = free_space;
     old_layout.output_lines = -1;
@@ -689,10 +683,10 @@ layout_save (void)
 static void
 layout_restore (void)
 {
-    menubar_visible = old_layout.menubar_visible;
-    command_prompt = old_layout.command_prompt;
+    mc_global.menubar_visible = old_layout.menubar_visible;
+    mc_global.cmdline_visible = old_layout.cmdline_visible;
     mc_global.keybar_visible = old_layout.keybar_visible;
-    mc_global.message_visible = old_layout.message_visible;
+    mc_global.hint_visible = old_layout.hint_visible;
     xterm_title = old_layout.xterm_title;
     free_space = old_layout.free_space;
     output_lines = old_layout.output_lines;
@@ -829,8 +823,8 @@ setup_panels (void)
         widget_set_state (mw, WST_SUSPENDED, TRUE);
 
     // initial height of panels
-    height = r->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0)
-        - (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
+    height = r->lines - (mc_global.menubar_visible ? 1 : 0) - (mc_global.hint_visible ? 1 : 0)
+        - (mc_global.cmdline_visible ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
 
     if (mc_global.tty.console_flag != '\0')
     {
@@ -853,7 +847,7 @@ setup_panels (void)
     widget_set_size_rect (WIDGET (the_menubar), &rb);
 
     check_split (&panels_layout);
-    start_y = r->y + (menubar_visible ? 1 : 0);
+    start_y = r->y + (mc_global.menubar_visible ? 1 : 0);
 
     // update columns first...
     panel_do_cols (0);
@@ -882,11 +876,11 @@ setup_panels (void)
         unsigned char end_line;
 
         end_line = r->lines - (mc_global.keybar_visible ? 1 : 0) - 1;
-        output_start_y = end_line - (command_prompt ? 1 : 0) - output_lines + 1;
+        output_start_y = end_line - (mc_global.cmdline_visible ? 1 : 0) - output_lines + 1;
         show_console_contents (output_start_y, end_line - output_lines, end_line);
     }
 
-    if (command_prompt)
+    if (mc_global.cmdline_visible)
 #ifdef ENABLE_SUBSHELL
         if (!mc_global.tty.use_subshell || !do_load_prompt ())
 #endif
@@ -970,7 +964,7 @@ setup_cmdline (void)
     int prompt_width;
     int y;
 
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
 #ifdef ENABLE_SUBSHELL
@@ -1044,7 +1038,7 @@ rotate_dash (gboolean show)
     if (show && !mc_time_elapsed (&timestamp, delay))
         return;
 
-    widget_gotoyx (w, menubar_visible ? 1 : 0, w->rect.cols - 1);
+    widget_gotoyx (w, mc_global.menubar_visible ? 1 : 0, w->rect.cols - 1);
     tty_setcolor (CORE_NORMAL_COLOR);
 
     if (!show)
@@ -1468,7 +1462,7 @@ do_load_prompt (void)
         return ret;
 
     // Don't actually change the prompt if it's invisible
-    if (top_dlg != NULL && DIALOG (top_dlg->data) == filemanager && command_prompt)
+    if (top_dlg != NULL && DIALOG (top_dlg->data) == filemanager && mc_global.cmdline_visible)
     {
         setup_cmdline ();
 

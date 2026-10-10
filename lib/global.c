@@ -62,7 +62,9 @@ mc_global_t mc_global = {
     .display_codepage = -1,
     .utf8_display = FALSE,
 
-    .message_visible = TRUE,
+    .menubar_visible = TRUE,
+    .hint_visible = TRUE,
+    .cmdline_visible = TRUE,
     .keybar_visible = TRUE,
 
 #ifdef ENABLE_BACKGROUND
