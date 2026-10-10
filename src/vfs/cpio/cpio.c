@@ -527,6 +527,8 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
                 // FIXME: do we must read from arch->fd in case of inode != NULL only or in any
                 // case?
 
+                // the inode of a hardlink may already have the target from an earlier entry
+                g_free (inode->linkname);
                 inode->linkname = g_malloc ((gsize) st->st_size + 1);
 
                 if (mc_read (arch->fd, inode->linkname, st->st_size) < st->st_size)
