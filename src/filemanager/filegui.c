@@ -150,6 +150,7 @@ statfs (char const *filename, struct fs_info *buf)
 #include "src/setup.h"  // verbose, safe_overwrite, copymove_persistent_ext2_attr
 
 #include "filemanager.h"
+#include "layout.h"  // terminal_progress
 
 #include "filegui.h"
 
@@ -914,6 +915,9 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
         if (!classic_progressbar && (current_panel == right_panel))
             ui->progress_file_gauge->from_left_to_right = FALSE;
+        // show the progress in the terminal too: the total one if there is, else the file one
+        ui->progress_file_gauge->terminal_progress = terminal_progress && mc_global.tty.xterm_flag
+            && !(verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM && ctx->totals_computed);
         group_add_widget_autopos (g, ui->progress_file_gauge, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
 
         ui->progress_file_label = label_new (y++, x, NULL);
@@ -930,6 +934,8 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
                     gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
                 if (!classic_progressbar && (current_panel == right_panel))
                     ui->progress_total_gauge->from_left_to_right = FALSE;
+                ui->progress_total_gauge->terminal_progress =
+                    terminal_progress && mc_global.tty.xterm_flag;
                 group_add_widget_autopos (g, ui->progress_total_gauge,
                                           WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
             }

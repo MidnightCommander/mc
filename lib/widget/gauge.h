@@ -21,6 +21,8 @@ typedef struct WGauge
     int max;
     int current;
     gboolean from_left_to_right;
+    gboolean terminal_progress;  // report the progress to the terminal as well (OSC 9;4)
+    int terminal_percentage;     // last percentage reported to the terminal, -1 if none
 } WGauge;
 
 /*** global variables defined in .c file *********************************************************/
