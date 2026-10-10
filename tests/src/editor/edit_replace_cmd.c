@@ -118,6 +118,10 @@ static const char *replace_regex_insert_char_at_begin_of_string__from = "^";
 static const char *replace_regex_replace_first_char_of_string__from = "^.";
 static const char *replace_regex_begin_of_string__to = "X";
 
+// replace "\r" with nothing: convert "\r\n" line breaks to "\n"
+static const char *replace_regex_cr__from = "\\r";
+static const char *replace_regex_cr__to = "";
+
 /* --------------------------------------------------------------------------------------------- */
 
 void edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *replace_default,
@@ -465,6 +469,28 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+// every replacement deletes exactly the matched bytes, also when they are a part of "\r\n"
+START_TEST (test_replace_regex__crlf_to_lf)
+{
+    // given
+    only_in_selection = FALSE;
+    replace_regex__from = &replace_regex_cr__from;
+    replace_regex__to = &replace_regex_cr__to;
+
+    for (const char *ti = "qwe\r\nqwe\r\nqwe\r\n"; *ti != '\0'; ti++)
+        edit_buffer_insert (&test_edit->buffer, *ti);
+
+    // when
+    edit_cursor_move (test_edit, 0);
+    edit_replace_cmd (test_edit, FALSE);
+
+    // then
+    test_replace_check ("qwe\nqwe\nqwe\n");
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -482,6 +508,7 @@ main (void)
     tcase_add_test (tc_core, test_replace_regex__in_selection_top_down_2);
     tcase_add_test (tc_core, test_replace_regex__in_selection_bottom_up_1);
     tcase_add_test (tc_core, test_replace_regex__in_selection_bottom_up_2);
+    tcase_add_test (tc_core, test_replace_regex__crlf_to_lf);
     // ***********************************
 
     return mctest_run_all (tc_core);
