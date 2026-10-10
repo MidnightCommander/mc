@@ -2594,15 +2594,10 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     // On macOS 10.12+ and Solaris 11.4+, the syscalls for file cloning respond for creation of the
     // destination file, so try them before mc_open to avoid handling various races later.
     // Full file cloning is not supported in append and reget modes.
-    if (mc_global.vfs.file_cloning && !(dst_exists && ctx->do_append))
+    // Destination file must not exist before the cloning syscall, and removing it before the
+    // cloning attempt has undesirable side effects (#5176).
+    if (mc_global.vfs.file_cloning && !dst_exists)
     {
-        // Destination file must not exist before the cloning syscall
-        if (dst_exists)
-        {
-            if (!try_remove_file (ctx, dst_vpath, &return_status))
-                goto ret;
-            dst_exists = FALSE;
-        }
         // Passing preserve_uidgid to the syscall to reduce racing
         if (vfs_clone_file_by_path (dst_vpath, src_vpath, ctx->preserve_uidgid) == 0)
         {
