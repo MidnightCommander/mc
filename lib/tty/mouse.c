@@ -93,9 +93,9 @@ init_mouse (void)
     case MOUSE_XTERM_NORMAL_TRACKING:
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
         if (xmouse_seq != NULL)
-            define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
+            define_sequence (MCKEY_MOUSE, xmouse_seq, -1, MCKEY_NOACTION);
         if (xmouse_extended_seq != NULL)
-            define_sequence (MCKEY_EXTENDED_MOUSE, xmouse_extended_seq, MCKEY_NOACTION);
+            define_sequence (MCKEY_EXTENDED_MOUSE, xmouse_extended_seq, -1, MCKEY_NOACTION);
         break;
 
     default:

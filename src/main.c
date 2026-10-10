@@ -358,7 +358,7 @@ main (int argc, char *argv[])
     tty_init (!mc_args__nomouse, mc_global.tty.xterm_flag);
 
     // Removing this from the X code let's us type C-c
-    load_key_defs ();
+    load_keydefs ();
 
     keymap_load (!mc_args__nokeymap);
 

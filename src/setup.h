@@ -149,7 +149,7 @@ gboolean save_setup (gboolean save_options, gboolean save_panel_options);
 void done_setup (void);
 void setup_save_config_show_error (const char *filename, GError **mcerror);
 
-void load_key_defs (void);
+void load_keydefs (void);
 #ifdef ENABLE_VFS_FTP
 char *load_anon_passwd (void);
 #endif

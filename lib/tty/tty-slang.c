@@ -163,7 +163,7 @@ do_define_key (int code, const char *strcap)
 
     seq = SLtt_tgetstr ((SLFUTURE_CONST char *) strcap);
     if (seq != NULL)
-        define_sequence (code, seq, MCKEY_NOACTION);
+        define_sequence (code, seq, -1, MCKEY_NOACTION);
 }
 
 /* --------------------------------------------------------------------------------------------- */
