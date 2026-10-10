@@ -857,6 +857,7 @@ create_file_manager (void)
     the_menubar = menubar_new (NULL);
     group_add_widget (g, the_menubar);
     init_menu ();
+    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
 
     create_panels ();
     group_add_widget (g, get_panel_widget (0));
@@ -867,17 +868,21 @@ create_file_manager (void)
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->rect.cols = COLS;
     group_add_widget (g, the_hint);
+    widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
 
     cmdline = command_new (0, 0, 0);
     group_add_widget (g, cmdline);
+    widget_set_visibility (WIDGET (cmdline), command_prompt);
 
     the_prompt = label_new (0, 0, mc_prompt);
     the_prompt->color = prompt_colors;
     group_add_widget (g, the_prompt);
+    widget_set_visibility (WIDGET (the_prompt), command_prompt);
 
     the_bar = buttonbar_new ();
     group_add_widget (g, the_bar);
     midnight_set_buttonbar (the_bar);
+    widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
 
 #ifdef ENABLE_SUBSHELL
     /* Must be done after creation of cmdline and prompt widgets to avoid potential
