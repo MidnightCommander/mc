@@ -1,0 +1,294 @@
+# Jinja2 template syntax highlighting
+#
+# Reference:
+#   https://jinja.palletsprojects.com/en/stable/templates/
+#
+# Highlights the Jinja2 template constructs:
+#   {{ ... }}    output / expression tags
+#   {% ... %}    statement / block tags (if / for / set / block / macro / ...)
+#   {# ... #}    comments
+#   # ...        line comments (typical in config templates)
+#   "..." '...'  strings
+#   numbers
+# and colors every builtin filter, test and global function as a builtin name.
+
+context default
+    # numbers in the template body (engine takes the first matching rule at a
+    # position, so most specific forms go first: decimal+exp, exp, decimal, int)
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\+-\}\{0123456789\}\[0123456789\] cyan
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] cyan
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\+-\}\{0123456789\}\[0123456789\] cyan
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] cyan
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\] cyan
+    keyword whole \{0123456789\}\[0123456789\] cyan
+    keyword whole \{0123456789\} cyan
+
+    # jinja2 statement / block tag: {% ... %}
+    context {% %} brightcyan
+        # statement keywords
+        keyword whole if white
+        keyword whole elif white
+        keyword whole else white
+        keyword whole endif white
+        keyword whole for white
+        keyword whole endfor white
+        keyword whole set white
+        keyword whole endset white
+        keyword whole macro white
+        keyword whole endmacro white
+        keyword whole call white
+        keyword whole endcall white
+        keyword whole filter white
+        keyword whole endfilter white
+        keyword whole extends white
+        keyword whole block white
+        keyword whole endblock white
+        keyword whole include white
+        keyword whole import white
+        keyword whole from white
+        keyword whole as white
+        keyword whole raw white
+        keyword whole endraw white
+        keyword whole autoescape white
+        keyword whole endautoescape white
+        keyword whole scoped white
+        keyword whole required white
+        keyword whole recursive white
+        keyword whole ignore white
+        keyword whole missing white
+        keyword whole with white
+        keyword whole without white
+        keyword whole context white
+
+        # operators
+        keyword whole and brightmagenta
+        keyword whole or brightmagenta
+        keyword whole not brightmagenta
+        keyword whole in brightmagenta
+        keyword whole is brightmagenta
+
+        # literals
+        keyword whole true magenta
+        keyword whole false magenta
+        keyword whole none magenta
+
+        # pipe (filter separator)
+        keyword | brightmagenta
+
+        # builtin filters
+        keyword whole abs brightgreen
+        keyword whole attr brightgreen
+        keyword whole batch brightgreen
+        keyword whole capitalize brightgreen
+        keyword whole center brightgreen
+        keyword whole default brightgreen
+        keyword whole dictsort brightgreen
+        keyword whole escape brightgreen
+        keyword whole filesizeformat brightgreen
+        keyword whole first brightgreen
+        keyword whole float brightgreen
+        keyword whole forceescape brightgreen
+        keyword whole format brightgreen
+        keyword whole groupby brightgreen
+        keyword whole indent brightgreen
+        keyword whole int brightgreen
+        keyword whole items brightgreen
+        keyword whole join brightgreen
+        keyword whole last brightgreen
+        keyword whole length brightgreen
+        keyword whole list brightgreen
+        keyword whole lower brightgreen
+        keyword whole map brightgreen
+        keyword whole max brightgreen
+        keyword whole min brightgreen
+        keyword whole pprint brightgreen
+        keyword whole random brightgreen
+        keyword whole reject brightgreen
+        keyword whole rejectattr brightgreen
+        keyword whole replace brightgreen
+        keyword whole reverse brightgreen
+        keyword whole round brightgreen
+        keyword whole safe brightgreen
+        keyword whole select brightgreen
+        keyword whole selectattr brightgreen
+        keyword whole slice brightgreen
+        keyword whole sort brightgreen
+        keyword whole string brightgreen
+        keyword whole striptags brightgreen
+        keyword whole sum brightgreen
+        keyword whole title brightgreen
+        keyword whole tojson brightgreen
+        keyword whole trim brightgreen
+        keyword whole truncate brightgreen
+        keyword whole unique brightgreen
+        keyword whole upper brightgreen
+        keyword whole urlencode brightgreen
+        keyword whole urlize brightgreen
+        keyword whole wordcount brightgreen
+        keyword whole wordwrap brightgreen
+        keyword whole xmlattr brightgreen
+
+        # builtin tests
+        keyword whole boolean yellow
+        keyword whole callable yellow
+        keyword whole defined yellow
+        keyword whole divisibleby yellow
+        keyword whole eq yellow
+        keyword whole escaped yellow
+        keyword whole even yellow
+        keyword whole ge yellow
+        keyword whole gt yellow
+        keyword whole integer yellow
+        keyword whole iterable yellow
+        keyword whole le yellow
+        keyword whole lt yellow
+        keyword whole mapping yellow
+        keyword whole ne yellow
+        keyword whole number yellow
+        keyword whole odd yellow
+        keyword whole sameas yellow
+        keyword whole sequence yellow
+        keyword whole test yellow
+        keyword whole undefined yellow
+
+        # builtin global functions
+        keyword whole cycler brightblue
+        keyword whole dict brightblue
+        keyword whole joiner brightblue
+        keyword whole lipsum brightblue
+        keyword whole namespace brightblue
+        keyword whole range brightblue
+
+        # numbers (most specific first, see note in default context)
+        keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\+-\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\+-\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\} cyan
+
+    # jinja2 expression tag: {{ ... }}
+    context {{ }} brightred
+        # operators (incl. inline if-expression)
+        keyword whole and brightmagenta
+        keyword whole or brightmagenta
+        keyword whole not brightmagenta
+        keyword whole in brightmagenta
+        keyword whole is brightmagenta
+        keyword whole if brightgreen
+        keyword whole else brightgreen
+
+        # literals
+        keyword whole true magenta
+        keyword whole false magenta
+        keyword whole none magenta
+
+        # pipe (filter separator)
+        keyword | brightmagenta
+
+        # builtin filters
+        keyword whole abs brightgreen
+        keyword whole attr brightgreen
+        keyword whole batch brightgreen
+        keyword whole capitalize brightgreen
+        keyword whole center brightgreen
+        keyword whole default brightgreen
+        keyword whole dictsort brightgreen
+        keyword whole escape brightgreen
+        keyword whole filesizeformat brightgreen
+        keyword whole first brightgreen
+        keyword whole float brightgreen
+        keyword whole forceescape brightgreen
+        keyword whole format brightgreen
+        keyword whole groupby brightgreen
+        keyword whole indent brightgreen
+        keyword whole int brightgreen
+        keyword whole items brightgreen
+        keyword whole join brightgreen
+        keyword whole last brightgreen
+        keyword whole length brightgreen
+        keyword whole list brightgreen
+        keyword whole lower brightgreen
+        keyword whole map brightgreen
+        keyword whole max brightgreen
+        keyword whole min brightgreen
+        keyword whole pprint brightgreen
+        keyword whole random brightgreen
+        keyword whole reject brightgreen
+        keyword whole rejectattr brightgreen
+        keyword whole replace brightgreen
+        keyword whole reverse brightgreen
+        keyword whole round brightgreen
+        keyword whole safe brightgreen
+        keyword whole select brightgreen
+        keyword whole selectattr brightgreen
+        keyword whole slice brightgreen
+        keyword whole sort brightgreen
+        keyword whole string brightgreen
+        keyword whole striptags brightgreen
+        keyword whole sum brightgreen
+        keyword whole title brightgreen
+        keyword whole tojson brightgreen
+        keyword whole trim brightgreen
+        keyword whole truncate brightgreen
+        keyword whole unique brightgreen
+        keyword whole upper brightgreen
+        keyword whole urlencode brightgreen
+        keyword whole urlize brightgreen
+        keyword whole wordcount brightgreen
+        keyword whole wordwrap brightgreen
+        keyword whole xmlattr brightgreen
+
+        # builtin tests
+        keyword whole boolean yellow
+        keyword whole callable yellow
+        keyword whole defined yellow
+        keyword whole divisibleby yellow
+        keyword whole eq yellow
+        keyword whole escaped yellow
+        keyword whole even yellow
+        keyword whole ge yellow
+        keyword whole gt yellow
+        keyword whole integer yellow
+        keyword whole iterable yellow
+        keyword whole le yellow
+        keyword whole lt yellow
+        keyword whole mapping yellow
+        keyword whole ne yellow
+        keyword whole number yellow
+        keyword whole odd yellow
+        keyword whole sameas yellow
+        keyword whole sequence yellow
+        keyword whole test yellow
+        keyword whole undefined yellow
+
+        # builtin global functions
+        keyword whole cycler brightblue
+        keyword whole dict brightblue
+        keyword whole joiner brightblue
+        keyword whole lipsum brightblue
+        keyword whole namespace brightblue
+        keyword whole range brightblue
+
+        # builtin function
+        keyword whole super yellow
+
+        # numbers (most specific first, see note in default context)
+        keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\+-\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\+-\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\}\[0123456789\] cyan
+        keyword whole \{0123456789\} cyan
+
+    # jinja2 comment: {# ... #}
+    context {# #} brown
+
+    # line comment: # to end of line
+    context # \n brown
+
+    # strings
+    context " " green
+    context ' ' green
