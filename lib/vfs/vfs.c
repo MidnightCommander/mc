@@ -49,8 +49,16 @@
 #ifdef HAVE_FICLONERANGE
 #include <linux/fs.h>   // FICLONERANGE
 #include <sys/ioctl.h>  // ioctl()
-#elif defined(HAVE_COPY_FILE_RANGE)
-#include <unistd.h>  // COPY_FILE_RANGE_CLONE
+#endif
+
+#if defined(HAVE_COPY_FILE_RANGE)
+
+#include <unistd.h>  // copy_file_range(), COPY_FILE_RANGE_CLONE
+
+#ifdef __linux__
+#include <sys/utsname.h>  // uname()
+#endif
+
 #elif defined(HAVE_SYS_CLONEFILE_H)
 #include <sys/clonefile.h>  // CLONE_NOOWNERCOPY
 #elif defined(HAVE_REFLINK)
@@ -209,6 +217,31 @@ vfs_test_current_dir (const vfs_path_t *vpath)
             && mc_stat (vfs_get_raw_current_dir (), &my_stat2) == 0
             && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef HAVE_COPY_FILE_RANGE
+/* Return true if copy_file_range(2) works well. To stay on the safe side, this is false on Linux
+ * kernels before 5.19 and on FreeBSD builds before 15.0 which has introduced
+ * COPY_FILE_RANGE_CLONE. */
+static gboolean
+vfs_copy_file_range_works (void)
+{
+#if defined(__FreeBSD__) && defined(COPY_FILE_RANGE_CLONE)
+    return TRUE;
+#elif defined(__linux__)
+    static int copy_file_range_works_cache = -1;
+    struct utsname name;
+
+    if (copy_file_range_works_cache < 0)
+        copy_file_range_works_cache =
+            uname (&name) == 0 && 0 <= str_verscmp (name.release, "5.19.0");
+    return (gboolean) copy_file_range_works_cache;
+#else
+    return FALSE;
+#endif
+}
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -719,78 +752,64 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
-{
-#ifdef HAVE_FILE_CLONING_BY_RANGE
-    void *dest_fd = NULL;
-    void *src_fd = NULL;
-    struct vfs_class *dest_class;
-    struct vfs_class *src_class;
-    off_t in_offset, out_offset;
-
-    dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
-    if ((dest_class->flags & VFSF_LOCAL) == 0)
-    {
-        errno = ENOTSUP;
-        return (-1);
-    }
-    if (dest_fd == NULL)
-    {
-        errno = EBADF;
-        return (-1);
-    }
-
-    src_class = vfs_class_find_by_handle (src_vfs_fd, &src_fd);
-    if ((src_class->flags & VFSF_LOCAL) == 0)
-    {
-        errno = ENOTSUP;
-        return (-1);
-    }
-    if (src_fd == NULL)
-    {
-        errno = EBADF;
-        return (-1);
-    }
-
-    in_offset = mc_lseek (src_vfs_fd, 0, SEEK_CUR);
-    if (in_offset < 0)
-        return (-1);
-    out_offset = mc_lseek (dest_vfs_fd, 0, SEEK_CUR);
-    if (out_offset < 0)
-        return (-1);
-
 #if defined(FICLONERANGE)
-    {
-        struct file_clone_range fcr = {
-            .src_fd = *(int *) src_fd,
-            .src_offset = in_offset,
-            .src_length = 0,
-            .dest_offset = out_offset,
-        };
+ssize_t
+mc_copy_file_range_ficlonerange (int src_fd, off_t *src_offset, int dest_fd, off_t *dest_offset,
+                                 size_t len)
+{
+    int rc;
+    struct file_clone_range fcr = {
+        .src_fd = src_fd,
+        .src_offset = *src_offset,
+        .src_length = (len == SSIZE_MAX) ? 0 : len,
+        .dest_offset = *dest_offset,
+    };
+    off_t n_copied;
 
-        return ioctl (*(int *) dest_fd, FICLONERANGE, &fcr);
-    }
-#elif defined(COPY_FILE_RANGE_CLONE)
-    {
-        ssize_t result;
+    rc = ioctl (dest_fd, FICLONERANGE, &fcr);
+    if (rc == -1)
+        return rc;
 
-        do
-        {
-            result = copy_file_range (*(int *) src_fd, &in_offset, *(int *) dest_fd, &out_offset,
-                                      SSIZE_MAX, COPY_FILE_RANGE_CLONE);
-        }
-        while (result > 0);
-        return result;
-    }
+    n_copied = (len == SSIZE_MAX) ? lseek (src_fd, 0, SEEK_END) - *src_offset : (off_t) len;
+    *src_offset += n_copied;
+    *dest_offset += n_copied;
+    return n_copied;
+}
 #endif
 
+/* --------------------------------------------------------------------------------------------- */
+
+#if defined(HAVE_COPY_FILE_RANGE)
+ssize_t
+mc_copy_file_range_native (int src_fd, off_t *src_offset, int dest_fd, off_t *dest_offset,
+                           size_t len)
+{
+    if (!vfs_copy_file_range_works ())
+    {
+        errno = ENOTSUP;
+        return -1;
+    }
+
+#if defined(COPY_FILE_RANGE_CLONE)
+    return copy_file_range (src_fd, src_offset, dest_fd, dest_offset, len, COPY_FILE_RANGE_CLONE);
 #else
-    (void) dest_vfs_fd;
-    (void) src_vfs_fd;
-    errno = ENOTSUP;
-    return (-1);
+    return copy_file_range (src_fd, src_offset, dest_fd, dest_offset, len, 0);
 #endif
+}
+#endif
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+vfs_cloning_supported (const vfs_path_t *src_vpath, const vfs_path_t *dst_vpath)
+{
+    if (!vfs_file_is_local (src_vpath))
+        return FALSE;
+    if (vfs_file_is_local (dst_vpath))
+        return TRUE;
+    if ((vfs_file_class_flags (dst_vpath) & VFSF_USETMP) != 0)
+        return TRUE;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

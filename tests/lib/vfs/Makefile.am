@@ -22,6 +22,7 @@ endif
 TESTS = \
 	canonicalize_pathname \
 	current_dir \
+	mc_copy_file_range \
 	path_cmp \
 	path_len \
 	path_manipulations \
@@ -48,6 +49,9 @@ canonicalize_pathname_SOURCES = \
 
 current_dir_SOURCES = \
 	current_dir.c
+
+mc_copy_file_range_SOURCES = \
+	mc_copy_file_range.c
 
 path_cmp_SOURCES = \
 	path_cmp.c

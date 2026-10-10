@@ -66,6 +66,7 @@
 #include "lib/search.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
+#include "lib/vfs/xdirentry.h"
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/widget.h"
@@ -2294,6 +2295,9 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     int open_flags;
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
     char *buf = NULL;
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+    gboolean try_cloning = FALSE;
+#endif
 
     /* Keep the non-default value applied in chain of calls:
        move_file_file() -> file_progress_real_query_replace()
@@ -2613,24 +2617,34 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     }
 #endif
 
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+    const gboolean dst_is_local = vfs_file_is_local (dst_vpath);
+
+    try_cloning = mc_global.vfs.file_cloning && vfs_cloning_supported (src_vpath, dst_vpath);
+#endif
+
     open_flags = O_WRONLY;
     if (!dst_exists)
         open_flags |= O_CREAT | O_EXCL;
     else if (ctx->do_append)
 #ifdef HAVE_FILE_CLONING_BY_RANGE
-        // FICLONERANGE on Linux and copy_file_range(2) on FreeBSD support block-aligned ranges for
-        // cloning, but not in O_APPEND mode. Use O_WRONLY + mc_lseek instead as we don't care
-        // about atomicity in our use cases.
-        open_flags |= mc_global.vfs.file_cloning ? 0 : O_APPEND;
+    {
+        // Can't use non-O_APPEND mode for appending on arbitrary VFS implementations. Disable
+        // cloning in this case.
+        if (!dst_is_local)
+            try_cloning = FALSE;
+
+        // FICLONERANGE on Linux and copy_file_range(2) support block-aligned ranges for cloning,
+        // but not in O_APPEND mode. Use O_WRONLY + mc_lseek instead as we don't care about
+        // atomicity in our use cases. Non-local VFSes (ftpfs, shell) need O_APPEND to append.
+        open_flags |= try_cloning ? 0 : O_APPEND;
+    }
 #else
         open_flags |= O_APPEND;
 #endif
     else
         open_flags |= O_CREAT | O_TRUNC;
 
-#ifdef HAVE_FILE_CLONING_BY_RANGE
-open_dest:
-#endif
     while ((dest_desc = mc_open (dst_vpath, open_flags, src_mode)) < 0)
     {
         if (errno != EEXIST)
@@ -2658,24 +2672,23 @@ open_dest:
     ctx->do_append = FALSE;
 
 #ifdef HAVE_FILE_CLONING_BY_RANGE
-    // Try clone the file first, but not if the file is in O_APPEND mode
-    if (mc_global.vfs.file_cloning && (open_flags & O_APPEND) == 0)
+    if (try_cloning)
     {
-        if ((appending ? mc_lseek (dest_desc, 0, SEEK_END) >= 0 : TRUE)
-            && vfs_clone_file (dest_desc, src_desc) == 0)
+        // If we're appending but not in O_APPEND mode, seek first
+        while (appending && mc_lseek (dest_desc, 0, SEEK_END) < 0)
         {
-            dst_status = DEST_FULL;
-            return_status = FILE_CONT;
+            if (ctx->ignore_all)
+                return_status = FILE_IGNORE_ALL;
+            else
+            {
+                return_status =
+                    file_error (ctx, TRUE, _ ("Cannot seek in target file\n%s"), dst_path);
+                if (return_status == FILE_RETRY)
+                    continue;
+                if (return_status == FILE_IGNORE_ALL)
+                    ctx->ignore_all = TRUE;
+            }
             goto ret;
-        }
-        if (appending && (open_flags & O_APPEND) == 0)
-        {
-            // Cloning append has failed, resort to normal append
-            ctx->do_append = TRUE;
-            mc_close (dest_desc);
-            dst_status = DEST_NONE;
-            open_flags |= O_APPEND;
-            goto open_dest;
         }
     }
 #endif
@@ -2694,42 +2707,6 @@ open_dest:
                 ctx->ignore_all = TRUE;
         }
         goto ret;
-    }
-
-    // try preallocate space; if fail, try copy anyway
-    while (mc_global.vfs.preallocate_space
-           && vfs_preallocate (dest_desc, file_size, appending ? dst_stat.st_size : 0) != 0)
-    {
-        if (ctx->ignore_all)
-        {
-            // cannot allocate, start the file copying anyway
-            return_status = FILE_CONT;
-            break;
-        }
-
-        return_status =
-            file_error (ctx, TRUE, _ ("Cannot preallocate space for target file\n%s"), dst_path);
-
-        if (return_status == FILE_IGNORE_ALL)
-            ctx->ignore_all = TRUE;
-
-        if (ctx->ignore_all || return_status == FILE_IGNORE)
-        {
-            // skip the space allocation error, start file copying
-            return_status = FILE_CONT;
-            break;
-        }
-
-        if (return_status == FILE_ABORT)
-        {
-            mc_close (dest_desc);
-            dest_desc = -1;
-            mc_unlink (dst_vpath);
-            dst_status = DEST_NONE;
-            goto ret;
-        }
-
-        // return_status == FILE_RETRY -- try allocate space again
     }
 
     ctx->eta_secs = 0.0;
@@ -2752,13 +2729,160 @@ open_dest:
         gint64 tv_last_update = ctx->transfer_start;
         gint64 tv_last_input = 0;
         gboolean is_first_time = TRUE;
+        size_t bufsize = 0;
 
-        const size_t bufsize = io_blksize (dst_stat);
-        buf = g_malloc (bufsize);
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+        ssize_t n_copied = -1;
+        ssize_t (*copy_method) (int, off_t *, int, off_t *, size_t) = NULL;
+
+        off_t src_offset = ctx->do_reget;
+
+        // In append and reget modes, the destination fd was positioned at its end above
+        off_t dst_offset = appending ? dst_stat.st_size : 0;
+
+        int local_src_fd = -1;
+        int local_dst_fd = -1;
+
+        // Try to clone the initial chunk to choose a working copy_method
+        if (try_cloning)
+        {
+            void *src_fsinfo = NULL;
+            void *dst_fsinfo = NULL;
+
+            // Obtain the source fd. The source is always local.
+            vfs_class_find_by_handle (src_desc, &src_fsinfo);
+            local_src_fd = *(int *) src_fsinfo;
+
+            // Obtain the destination fd. The destination is either local or VFSF_USETMP.
+            vfs_class_find_by_handle (dest_desc, &dst_fsinfo);
+            local_dst_fd =
+                dst_is_local ? *(int *) dst_fsinfo : VFS_FILE_HANDLER (dst_fsinfo)->handle;
+
+            bufsize = 1 << 20;
+            if ((off_t) bufsize > file_size - src_offset)
+                bufsize = SSIZE_MAX;  // don't try to read behind EOF
+
+#ifdef HAVE_FICLONERANGE
+            copy_method = mc_copy_file_range_ficlonerange;
+            n_copied = copy_method (local_src_fd, &src_offset, local_dst_fd, &dst_offset, bufsize);
+#ifdef HAVE_COPY_FILE_RANGE
+            if (n_copied < 0 && errno == EXDEV)
+#endif
+#endif
+#ifdef HAVE_COPY_FILE_RANGE
+            {
+                copy_method = mc_copy_file_range_native;
+                n_copied =
+                    copy_method (local_src_fd, &src_offset, local_dst_fd, &dst_offset, bufsize);
+            }
+#endif
+            if (n_copied >= 0)
+            {
+                // We've found a working clone method.
+                // For a VFSF_USETMP destination, ensure the VFS changed flag is set, as it's
+                // required for the final file_store() call on mc_close(), and we can't be sure
+                // every VFS has set the changed flag to TRUE on mc_open() and we're not calling
+                // mc_write() that would set the flag on the normal copy path.
+                if (!dst_is_local)
+                    VFS_FILE_HANDLER (dst_fsinfo)->changed = TRUE;
+            }
+            else
+                copy_method = NULL;
+        }
+
+        if (copy_method == NULL)  // cloning has failed, fallback to normal copy
+#endif
+        {
+            bufsize = io_blksize (dst_stat);
+            buf = g_malloc (bufsize);
+
+            // In normal copy, we may want to preallocate.
+            // try preallocate space; if fail, try copy anyway.
+            // Not in append and reget modes: posix_fallocate() extends the file, so the data would
+            // be appended after the preallocated area.
+            while (mc_global.vfs.preallocate_space && !appending
+                   && vfs_preallocate (dest_desc, file_size, 0) != 0)
+            {
+                if (ctx->ignore_all)
+                {
+                    // cannot allocate, start the file copying anyway
+                    return_status = FILE_CONT;
+                    break;
+                }
+
+                return_status = file_error (
+                    ctx, TRUE, _ ("Cannot preallocate space for target file\n%s"), dst_path);
+
+                if (return_status == FILE_IGNORE_ALL)
+                    ctx->ignore_all = TRUE;
+
+                if (ctx->ignore_all || return_status == FILE_IGNORE)
+                {
+                    // skip the space allocation error, start file copying
+                    return_status = FILE_CONT;
+                    break;
+                }
+
+                if (return_status == FILE_ABORT)
+                {
+                    mc_close (dest_desc);
+                    dest_desc = -1;
+                    mc_unlink (dst_vpath);
+                    dst_status = DEST_NONE;
+                    goto ret;
+                }
+
+                // return_status == FILE_RETRY -- try allocate space again
+            }
+        }
 
         while (TRUE)
         {
             ssize_t n_read = -1;
+            gint64 tv_current;
+
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+            if (copy_method != NULL)
+            {
+                off_t n_rest = file_size - src_offset;
+
+                if (n_rest == 0)
+                    break;
+
+                tv_current = g_get_monotonic_time ();
+
+                // Optimize bufsize until it hurts progress smoothness
+                if (tv_current - tv_last_input < FILEOP_UPDATE_INTERVAL_US >> 1
+                    && bufsize < SSIZE_MAX >> 1)
+                    bufsize <<= 1;
+
+                if ((off_t) bufsize > n_rest)
+                    bufsize = SSIZE_MAX;  // don't try to read behind EOF
+                n_copied =
+                    copy_method (local_src_fd, &src_offset, local_dst_fd, &dst_offset, bufsize);
+                if (n_copied < 0)
+                {
+                    return_status = ctx->ignore_all
+                        ? FILE_IGNORE_ALL
+                        : files_error (ctx, TRUE, _ ("Cannot copy file data from\n%s\nto\n%s"),
+                                       src_path, dst_path);
+                    if (return_status == FILE_RETRY)
+                        continue;
+                    if (return_status == FILE_IGNORE_ALL)
+                        ctx->ignore_all = TRUE;
+                    goto ret;
+                }
+
+                if (n_copied == 0)
+                    break;
+
+                file_part = src_offset - ctx->do_reget;
+
+                tv_last_input = tv_current;
+
+                goto chunk_done;
+            }
+#endif
 
             // src_read
             if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0) == 0)
@@ -2776,7 +2900,7 @@ open_dest:
             if (n_read == 0)
                 break;
 
-            const gint64 tv_current = g_get_monotonic_time ();
+            tv_current = g_get_monotonic_time ();
 
             if (n_read > 0)
             {
@@ -2824,6 +2948,9 @@ open_dest:
                 }
             }
 
+#ifdef HAVE_FILE_CLONING_BY_RANGE
+        chunk_done:
+#endif
             ctx->progress_bytes = file_part + ctx->do_reget;
 
             const gint64 usecs = tv_current - tv_last_update;
