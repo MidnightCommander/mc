@@ -490,7 +490,7 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name, gpoin
     if (mc_global.midnight_shutdown)
         goto ret;
 
-    if (!mc_global.message_visible || the_hint == NULL || WIDGET (the_hint)->owner == NULL)
+    if (!mc_global.hint_visible || the_hint == NULL || WIDGET (the_hint)->owner == NULL)
     {
         int col, row;
 
@@ -510,7 +510,7 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name, gpoin
         goto ret;
     }
 
-    if (mc_global.message_visible)
+    if (mc_global.hint_visible)
         set_hintbar (event_data->msg);
 
 ret:
@@ -657,7 +657,7 @@ midnight_put_panel_path (WPanel *panel)
     vfs_path_t *cwd_vpath;
     const char *cwd_vpath_str;
 
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
     cwd_vpath = remove_encoding_from_path (panel->cwd_vpath);
@@ -678,7 +678,7 @@ put_link (WPanel *panel)
 {
     const file_entry_t *fe;
 
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
     fe = panel_current_entry (panel);
@@ -724,7 +724,7 @@ put_other_link (void)
 static void
 put_current_selected (void)
 {
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
     if (get_current_type () == view_tree)
@@ -751,7 +751,7 @@ put_current_selected (void)
 static void
 put_tagged (const WPanel *panel)
 {
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
     input_disable_update (the_cmdline);
@@ -857,7 +857,7 @@ create_file_manager (void)
     the_menubar = menubar_new (NULL);
     group_add_widget (g, the_menubar);
     init_menu ();
-    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
+    widget_set_visibility (WIDGET (the_menubar), mc_global.menubar_visible);
 
     create_panels ();
     group_add_widget (g, get_panel_widget (0));
@@ -868,16 +868,16 @@ create_file_manager (void)
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->rect.cols = COLS;
     group_add_widget (g, the_hint);
-    widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
+    widget_set_visibility (WIDGET (the_hint), mc_global.hint_visible);
 
     the_cmdline = command_new (0, 0, 0);
     group_add_widget (g, the_cmdline);
-    widget_set_visibility (WIDGET (the_cmdline), command_prompt);
+    widget_set_visibility (WIDGET (the_cmdline), mc_global.cmdline_visible);
 
     the_prompt = label_new (0, 0, mc_prompt);
     the_prompt->color = prompt_colors;
     group_add_widget (g, the_prompt);
-    widget_set_visibility (WIDGET (the_prompt), command_prompt);
+    widget_set_visibility (WIDGET (the_prompt), mc_global.cmdline_visible);
 
     the_keybar = buttonbar_new ();
     group_add_widget (g, the_keybar);
@@ -1497,7 +1497,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
                     return send_message (current_panel, filemanager, MSG_ACTION, CK_SelectInvert,
                                          NULL);
             }
-            else if (!command_prompt || input_is_empty (the_cmdline))
+            else if (!mc_global.cmdline_visible || input_is_empty (the_cmdline))
             {
                 /* Special treatment '+', '-', '\', '*' only when this is
                  * first char on input line
@@ -1531,7 +1531,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         if (command != CK_IgnoreKey)
             v = midnight_execute_cmd (NULL, command);
 
-        if (v == MSG_NOT_HANDLED && command_prompt && !is_cmdline_mute ())
+        if (v == MSG_NOT_HANDLED && mc_global.cmdline_visible && !is_cmdline_mute ())
             v = send_message (the_cmdline, NULL, MSG_KEY, parm, NULL);
 
         return v;
@@ -1565,7 +1565,7 @@ update_menu (void)
     menu_set_name (left_menu, panels_layout.horizontal_split ? _ ("&Above") : _ ("&Left"));
     menu_set_name (right_menu, panels_layout.horizontal_split ? _ ("&Below") : _ ("&Right"));
     menubar_arrange (the_menubar);
-    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
+    widget_set_visibility (WIDGET (the_menubar), mc_global.menubar_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1668,7 +1668,7 @@ load_hint (gboolean force)
     if (WIDGET (the_hint)->owner == NULL)
         return;
 
-    if (!mc_global.message_visible)
+    if (!mc_global.hint_visible)
     {
         label_set_text (the_hint, NULL);
         return;

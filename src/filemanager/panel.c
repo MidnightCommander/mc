@@ -3742,7 +3742,7 @@ panel_key (WPanel *panel, int key)
     if (command != CK_IgnoreKey)
         return panel_execute_cmd (panel, command);
 
-    if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
+    if (!mc_global.cmdline_visible && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
         start_search (panel);
         do_search (panel, key);

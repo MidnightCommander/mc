@@ -269,11 +269,11 @@ static const struct
     const char *opt_name;
     gboolean *opt_addr;
 } layout_bool_options[] = {
-    { "message_visible", &mc_global.message_visible },
+    { "message_visible", &mc_global.hint_visible },
     { "keybar_visible", &mc_global.keybar_visible },
     { "xterm_title", &xterm_title },
-    { "command_prompt", &command_prompt },
-    { "menubar_visible", &menubar_visible },
+    { "command_prompt", &mc_global.cmdline_visible },
+    { "menubar_visible", &mc_global.menubar_visible },
     { "free_space", &free_space },
     { "horizontal_split", &panels_layout.horizontal_split },
     { "vertical_equal", &panels_layout.vertical_equal },
