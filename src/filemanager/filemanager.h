@@ -29,7 +29,7 @@
 extern WMenuBar *the_menubar;
 extern WLabel *the_prompt;
 extern WLabel *the_hint;
-extern WButtonBar *the_bar;
+extern WButtonBar *the_keybar;
 
 extern WPanel *left_panel;
 extern WPanel *right_panel;

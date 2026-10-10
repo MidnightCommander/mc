@@ -15,7 +15,7 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern WInput *cmdline;
+extern WInput *the_cmdline;
 
 /*** declarations of public functions ************************************************************/
 

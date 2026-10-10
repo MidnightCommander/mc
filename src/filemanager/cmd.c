@@ -80,7 +80,7 @@
 #include "hotlist.h"      // hotlist_show()
 #include "tree.h"         // tree_chdir()
 #include "filemanager.h"  // change_panel()
-#include "command.h"      // cmdline
+#include "command.h"      // the_cmdline
 #include "layout.h"       // get_current_type()
 #include "ext.h"          // regex_command()
 #include "boxes.h"        // cd_box()
@@ -611,7 +611,7 @@ view_filtered_cmd (const WPanel *panel)
     char *command;
     const char *initial_command;
 
-    if (input_is_empty (cmdline))
+    if (input_is_empty (the_cmdline))
     {
         const file_entry_t *fe;
 
@@ -622,7 +622,7 @@ view_filtered_cmd (const WPanel *panel)
         initial_command = fe->fname->str;
     }
     else
-        initial_command = input_get_ctext (cmdline);
+        initial_command = input_get_ctext (the_cmdline);
 
     command = input_dialog (_ ("Filtered view"), _ ("Filter command and arguments:"),
                             MC_HISTORY_FM_FILTERED_VIEW, initial_command,

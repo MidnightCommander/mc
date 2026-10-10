@@ -348,8 +348,8 @@ layout_update_visibility (void)
 {
     widget_set_visibility (WIDGET (the_menubar), menubar_visible);
     widget_set_visibility (WIDGET (the_prompt), command_prompt);
-    widget_set_visibility (WIDGET (cmdline), command_prompt);
-    widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
+    widget_set_visibility (WIDGET (the_cmdline), command_prompt);
+    widget_set_visibility (WIDGET (the_keybar), mc_global.keybar_visible);
     widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
 }
 
@@ -895,7 +895,7 @@ setup_panels (void)
     rb = *r;
     rb.y = r->lines - 1;
     rb.lines = 1;
-    widget_set_size_rect (WIDGET (the_bar), &rb);
+    widget_set_size_rect (WIDGET (the_keybar), &rb);
 
     update_xterm_title_path ();
     update_terminal_cwd ();
@@ -1003,7 +1003,7 @@ setup_cmdline (void)
 
     widget_set_size (WIDGET (the_prompt), y, r->x, 1, prompt_width);
     label_set_text (the_prompt, mc_prompt);
-    widget_set_size (WIDGET (cmdline), y, r->x + prompt_width, 1, r->cols - prompt_width);
+    widget_set_size (WIDGET (the_cmdline), y, r->x + prompt_width, 1, r->cols - prompt_width);
 }
 
 /* --------------------------------------------------------------------------------------------- */
