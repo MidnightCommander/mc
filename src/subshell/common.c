@@ -109,7 +109,7 @@
 #include "lib/widget.h"
 
 #include "src/filemanager/layout.h"   // setup_cmdline()
-#include "src/filemanager/command.h"  // cmdline
+#include "src/filemanager/command.h"  // the_cmdline
 
 #include "subshell.h"
 #include "internal.h"
@@ -752,8 +752,8 @@ read_command_line_buffer (gboolean test_mode)
         if (*p < 32 || *p == 127)
             *p = ' ';
 
-    input_assign_text (cmdline, "");
-    input_insert (cmdline, subshell_command, FALSE);
+    input_assign_text (the_cmdline, "");
+    input_insert (the_cmdline, subshell_command, FALSE);
 
     if (bash_version < 5)  // implies SHELL_BASH
     {
@@ -769,7 +769,7 @@ read_command_line_buffer (gboolean test_mode)
     }
     if (cursor_position > command_length)
         cursor_position = command_length;
-    cmdline->point = cursor_position;
+    the_cmdline->point = cursor_position;
 
     // We send any remaining data to STDOUT before we finish.
     flush_subshell (0, VISIBLY);
@@ -1059,7 +1059,7 @@ feed_subshell (int how, gboolean fail_on_error)
 
                             subshell_state = ACTIVE;
                             flush_subshell (0, VISIBLY);
-                            input_assign_text (cmdline, "");
+                            input_assign_text (the_cmdline, "");
                         }
                     }
 
@@ -1073,7 +1073,7 @@ feed_subshell (int how, gboolean fail_on_error)
                 /* We should only clear the command line if we are using a shell that works
                  * with persistent command buffer, otherwise we get awkward results. */
                 if (use_persistent_buffer)
-                    input_assign_text (cmdline, "");
+                    input_assign_text (the_cmdline, "");
                 subshell_ready = FALSE;
             }
         }
@@ -1874,19 +1874,19 @@ invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
 
             if (use_persistent_buffer)
             {
-                const char *s = input_get_ctext (cmdline);
+                const char *s = input_get_ctext (the_cmdline);
 
                 /* Check to make sure there are no non text characters in the command buffer,
                  * such as tab, or newline, as this could cause problems. */
-                for (size_t i = 0; i < cmdline->buffer->len; i++)
+                for (size_t i = 0; i < the_cmdline->buffer->len; i++)
                     if ((unsigned char) s[i] < 32 || (unsigned char) s[i] == 127)
-                        g_string_overwrite_len (cmdline->buffer, i, " ", 1);
+                        g_string_overwrite_len (the_cmdline->buffer, i, " ", 1);
 
                 // Write the command buffer to the subshell.
-                write_all (mc_global.tty.subshell_pty, s, cmdline->buffer->len);
+                write_all (mc_global.tty.subshell_pty, s, the_cmdline->buffer->len);
 
                 // Put the cursor in the correct place in the subshell.
-                const int pos = (int) (str_length (s) - cmdline->point);
+                const int pos = (int) (str_length (s) - the_cmdline->point);
 
                 for (int i = 0; i < pos; i++)
                     write_all (mc_global.tty.subshell_pty, ESC_STR "[D", 3);

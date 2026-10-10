@@ -59,7 +59,7 @@
 #include "src/setup.h"  // For profile_bname
 #include "src/history.h"
 
-#include "command.h"  // cmdline
+#include "command.h"  // the_cmdline
 
 #include "hotlist.h"
 
@@ -539,7 +539,7 @@ hotlist_handle_key (WDialog *h, int key)
                     char *tmp;
 
                     tmp = g_strconcat ("cd ", hlp->directory, (char *) NULL);
-                    input_insert (cmdline, tmp, FALSE);
+                    input_insert (the_cmdline, tmp, FALSE);
                     g_free (tmp);
                     h->ret_value = B_CANCEL;
                     dlg_close (h);

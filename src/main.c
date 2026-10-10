@@ -57,9 +57,8 @@
 #include "filemanager/filemanager.h"
 #include "filemanager/treestore.h"  // tree_store_save
 #include "filemanager/layout.h"
-#include "filemanager/ext.h"      // flush_extension_file()
-#include "filemanager/command.h"  // cmdline
-#include "filemanager/panel.h"    // panalized_panel
+#include "filemanager/ext.h"    // flush_extension_file()
+#include "filemanager/panel.h"  // panalized_panel
 
 #ifdef USE_INTERNAL_EDIT
 #include "editor/edit.h"  // edit_arg_free()

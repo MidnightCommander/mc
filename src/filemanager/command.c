@@ -58,7 +58,7 @@
 /*** global variables ****************************************************************************/
 
 /* This holds the command line */
-WInput *cmdline;
+WInput *the_cmdline;
 
 /*** file scope macro definitions ****************************************************************/
 
