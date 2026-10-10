@@ -34,6 +34,7 @@
 
 #include <config.h>
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -57,6 +58,30 @@
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Show the progress in the terminal's tab, title bar or taskbar, using the ConEmu
+ * "OSC 9 ; 4" sequence supported by Windows Terminal, GNOME Terminal (VTE), iTerm2 and others.
+ *
+ * @param g          gauge
+ * @param percentage progress to report, -1 to remove the progress indicator
+ */
+
+static void
+gauge_report_to_terminal (WGauge *g, int percentage)
+{
+    if (!g->terminal_progress || g->terminal_percentage == percentage)
+        return;
+
+    g->terminal_percentage = percentage;
+
+    if (percentage < 0)
+        fprintf (stdout, ESC_STR "]9;4;0" ESC_STR "\\");
+    else
+        fprintf (stdout, ESC_STR "]9;4;1;%d" ESC_STR "\\", percentage);
+    (void) fflush (stdout);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 gauge_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
@@ -73,6 +98,7 @@ gauge_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         {
             tty_setcolor (colors[DLG_COLOR_NORMAL]);
             tty_printf ("%*s", w->rect.cols, "");
+            gauge_report_to_terminal (g, -1);
         }
         else
         {
@@ -115,8 +141,14 @@ gauge_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
                 tty_setcolor (colors[DLG_COLOR_NORMAL]);
                 tty_printf ("] %3d%%", percentage);
             }
+
+            gauge_report_to_terminal (g, percentage);
         }
         return MSG_HANDLED;
+
+    case MSG_DESTROY:
+        gauge_report_to_terminal (g, -1);
+        return widget_default_callback (w, sender, msg, parm, data);
 
     default:
         return widget_default_callback (w, sender, msg, parm, data);
@@ -144,6 +176,8 @@ gauge_new (int y, int x, int cols, gboolean shown, int max, int current)
     g->max = max;
     g->current = current;
     g->from_left_to_right = TRUE;
+    g->terminal_progress = FALSE;
+    g->terminal_percentage = -1;
 
     return g;
 }

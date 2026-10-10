@@ -97,6 +97,9 @@ gboolean menubar_visible = TRUE;
 /* Set to show current working dir in xterm window title */
 gboolean xterm_title = TRUE;
 
+// Show the progress of file operations in the terminal's tab or taskbar
+gboolean terminal_progress = FALSE;
+
 /* Set to show free space on device assigned to current directory */
 gboolean free_space = TRUE;
 
@@ -174,6 +177,7 @@ static struct
     { N_ ("H&intbar visible"), &mc_global.message_visible, NULL },
     { N_ ("&XTerm window title"), &xterm_title, NULL },
     { N_ ("&Show free space"), &free_space, NULL },
+    { N_ ("&Terminal progress bar"), &terminal_progress, NULL },
 };
 
 static const char *output_lines_label = NULL;
