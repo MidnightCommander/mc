@@ -23,6 +23,9 @@
 
 #define SFTP_SUPER(super) ((sftpfs_super_t *) (super))
 
+// how long a directory listing is kept in the cache, in seconds (Ctrl-R rereads it at once)
+#define SFTPFS_DIR_CACHE_TIMEOUT 900
+
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -79,9 +82,7 @@ gboolean sftpfs_op_init (sftpfs_super_t **super, const vfs_path_element_t **path
                          const vfs_path_t *vpath, GError **mcerror);
 
 void sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES *attrs, struct stat *s);
-int sftpfs_lstat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror);
 int sftpfs_stat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror);
-int sftpfs_readlink (const vfs_path_t *vpath, char *buf, size_t size, GError **mcerror);
 int sftpfs_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2, GError **mcerror);
 int sftpfs_utime (const vfs_path_t *vpath, time_t atime, time_t mtime, GError **mcerror);
 int sftpfs_chmod (const vfs_path_t *vpath, mode_t mode, GError **mcerror);
@@ -95,9 +96,8 @@ void sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_me
 
 vfs_file_handler_t *sftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed);
 
-void *sftpfs_opendir (const vfs_path_t *vpath, GError **mcerror);
-struct vfs_dirent *sftpfs_readdir (void *data, GError **mcerror);
-int sftpfs_closedir (void *data, GError **mcerror);
+int sftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote_path,
+                     GError **mcerror);
 int sftpfs_mkdir (const vfs_path_t *vpath, mode_t mode, GError **mcerror);
 int sftpfs_rmdir (const vfs_path_t *vpath, GError **mcerror);
 
