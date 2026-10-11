@@ -35,6 +35,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <signal.h>
+#include <unistd.h>
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
@@ -323,7 +324,7 @@ tty_change_screen_size (void)
 #endif
 
     // Ioctl on the STDIN_FILENO
-    ioctl (fileno (stdout), TIOCGWINSZ, &winsz);
+    ioctl (STDOUT_FILENO, TIOCGWINSZ, &winsz);
     if (winsz.ws_col != 0 && winsz.ws_row != 0)
     {
 #if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
