@@ -50,8 +50,7 @@ typedef struct
 
     LIBSSH2_AGENT *agent;
 
-    char *pubkey;
-    char *privkey;
+    GSList *privkeys;
 
     int socket_handle;
     const char *ip_address;
