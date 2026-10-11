@@ -130,6 +130,7 @@ struct WEdit
     unsigned long undo_stack_size_mask;
     unsigned long undo_stack_bottom;
     unsigned int undo_stack_disable : 1;  // If not 0, don't save events in the undo stack
+    unsigned int redo_key_pushed : 1;     // KEY_PRESS of the current undo step is on the redo stack
 
     unsigned long redo_stack_pointer;
     long *redo_stack;
