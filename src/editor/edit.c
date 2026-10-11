@@ -1299,9 +1299,11 @@ edit_do_redo (WEdit *edit)
             edit_cursor_move (edit, -1);
             break;
         case BACKSPACE:
+        case BACKSPACE_BR:
             edit_backspace (edit, TRUE);
             break;
         case DELCHAR:
+        case DELCHAR_BR:
             edit_delete (edit, TRUE);
             break;
         case COLUMN_ON:
