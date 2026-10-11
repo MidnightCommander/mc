@@ -54,6 +54,11 @@ struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);  // used in fil
 
 /*** file scope variables ************************************************************************/
 
+// the generic vfs_s directory cache lookup, wrapped by sftpfs_find_entry()
+static struct vfs_s_entry *(*sftpfs_find_entry_cached) (struct vfs_class *me,
+                                                        struct vfs_s_inode *root, const char *path,
+                                                        int follow, int flags);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -710,6 +715,26 @@ sftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Callback for looking up an entry in the directory cache.
+ *
+ * The root directory is cached as "", but looking up an entry of the root directory asks for its
+ * parent as "." (g_path_get_dirname()). Use the same cache entry for all of them, otherwise the
+ * root directory is listed twice, and after Ctrl-R the two listings may differ: a new entry is
+ * shown, but lstat() can't find it.
+ */
+
+static struct vfs_s_entry *
+sftpfs_find_entry (struct vfs_class *me, struct vfs_s_inode *root, const char *path, int follow,
+                   int flags)
+{
+    if (DIR_IS_DOT (path) || (IS_PATH_SEP (path[0]) && path[1] == '\0'))
+        path = "";
+
+    return sftpfs_find_entry_cached (me, root, path, follow, flags);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Callback for loading directory content into the directory cache.
  *
  * @param me          VFS class
@@ -775,6 +800,8 @@ vfs_init_sftpfs (void)
     sftpfs_subclass.free_archive = sftpfs_free_archive;
     sftpfs_subclass.fh_new = sftpfs_fh_new;
     sftpfs_subclass.dir_load = sftpfs_cb_dir_load;
+    sftpfs_find_entry_cached = sftpfs_subclass.find_entry;
+    sftpfs_subclass.find_entry = sftpfs_find_entry;
 
     vfs_register_class (vfs_sftpfs_ops);
 }
