@@ -166,7 +166,7 @@ end_paragraph (WEdit *edit, gboolean force)
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-get_paragraph (const edit_buffer_t *buf, off_t p, off_t q, gboolean indent)
+get_paragraph (const edit_buffer_t *buf, off_t p, off_t q, gboolean indent, gboolean crlf)
 {
     GString *t;
 
@@ -177,6 +177,10 @@ get_paragraph (const edit_buffer_t *buf, off_t p, off_t q, gboolean indent)
         if (indent && edit_buffer_get_byte (buf, p - 1) == '\n')
             while (strchr ("\t ", edit_buffer_get_byte (buf, p)) != NULL)
                 p++;
+
+        // the text is formatted with "\n" line breaks
+        if (crlf && edit_buffer_is_crlf (buf, p))
+            continue;
 
         g_string_append_c (t, edit_buffer_get_byte (buf, p));
     }
@@ -393,7 +397,7 @@ edit_insert_indent (WEdit *edit, long indent)
 /** replaces a block of text */
 
 static inline void
-put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size)
+put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size, gboolean crlf)
 {
     off_t cursor;
     off_t i;
@@ -437,10 +441,64 @@ put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size)
         }
 
         c = edit_buffer_get_byte (&edit->buffer, p);
+
+        if (crlf && edit_buffer_is_crlf (&edit->buffer, p))
+        {
+            if (t[i] == '\n')
+                p++;  // keep the "\r" of the line break
+            else
+            {
+                // the line break is removed: remove its "\r", the "\n" is replaced below
+                edit_cursor_move (edit, p - edit->buffer.curs1);
+                edit_delete (edit, TRUE);
+                if (cursor > p)
+                    cursor--;
+            }
+            c = '\n';
+        }
+        else if (crlf && t[i] == '\n' && c != '\n')
+        {
+            // a new line break: insert its "\r", the "\n" is put below
+            edit_cursor_move (edit, p - edit->buffer.curs1);
+            edit_insert (edit, '\r');
+            if (cursor > p)
+                cursor++;
+            p++;
+        }
+
         if (c != t[i])
             replace_at (edit, p, t[i]);
     }
     edit_cursor_move (edit, cursor - edit->buffer.curs1);  // restore cursor position
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Check the line breaks of the paragraph from p up to the line break of its last line at q.
+ *
+ * @param crlf set to TRUE if all line breaks are "\r\n", to FALSE if all are "\n"
+ *
+ * @return FALSE if the paragraph has both "\r\n" and "\n" line breaks
+ */
+
+static gboolean
+get_paragraph_line_breaks (const edit_buffer_t *buf, off_t p, off_t q, gboolean *crlf)
+{
+    gboolean lf_seen = FALSE;
+    gboolean crlf_seen = FALSE;
+
+    for (; p <= q && p < buf->size; p++)
+        if (edit_buffer_get_byte (buf, p) == '\n')
+        {
+            if (p > 0 && edit_buffer_get_byte (buf, p - 1) == '\r')
+                crlf_seen = TRUE;
+            else
+                lf_seen = TRUE;
+        }
+
+    *crlf = crlf_seen;
+    return !(crlf_seen && lf_seen);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -474,6 +532,7 @@ format_paragraph (WEdit *edit, gboolean force)
     GString *t;
     long indent;
     unsigned char *t2;
+    gboolean crlf;
 
     if (edit_options.word_wrap_line_length < 2)
         return;
@@ -483,19 +542,17 @@ format_paragraph (WEdit *edit, gboolean force)
     p = begin_paragraph (edit, force, &lines);
     q = end_paragraph (edit, force);
 
-    // Formatting assumes "\n" line breaks: a "\r\n" line break would be mangled
-    // (the "\r" leaks into the reformatted text), so leave CRLF paragraphs as is.
-    for (off_t i = p; i + 1 <= q; i++)
-        if (edit_buffer_is_crlf (&edit->buffer, i))
-            return;
-    // in a file with hidden "\r\n" line breaks, even a paragraph without line breaks
-    // (the last line) would get "\n" line breaks
-    if (edit_crlf_is_unit (edit))
+    // a paragraph with both "\r\n" and "\n" line breaks is left as is
+    if (!get_paragraph_line_breaks (&edit->buffer, p, q, &crlf))
         return;
+    // a paragraph without line breaks of its own (the last line of a text) gets "\r\n" line
+    // breaks in a file with hidden "\r\n" line breaks
+    if (edit_crlf_is_unit (edit))
+        crlf = TRUE;
 
     indent = test_indent (edit, p, q);
 
-    t = get_paragraph (&edit->buffer, p, q, indent != 0);
+    t = get_paragraph (&edit->buffer, p, q, indent != 0, crlf);
     size = t->len - 1;
 
     if (!force)
@@ -527,8 +584,8 @@ format_paragraph (WEdit *edit, gboolean force)
     }
 
     t2 = (unsigned char *) g_string_free (t, FALSE);
-    format_this (t2, q - p, indent, edit->utf8);
-    put_paragraph (edit, t2, p, indent, size);
+    format_this (t2, size, indent, edit->utf8);
+    put_paragraph (edit, t2, p, indent, size, crlf);
     g_free ((char *) t2);
 
     // Scroll left as much as possible to show the formatted paragraph

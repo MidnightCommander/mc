@@ -522,18 +522,104 @@ START_TEST (test_enter_auto_para_format_crlf)
 }
 END_TEST
 
-/* formatting a CRLF paragraph must not leak "\r" into the text or change line breaks */
+/* formatting an indented paragraph keeps the indentation of its lines */
+START_TEST (test_format_paragraph_indented)
+{
+    // given: an indented paragraph, cursor on its first line
+    test_load_text ("  aa\n  bb\n  cc\n");
+    test_cursor_to (2);
+
+    // when
+    format_paragraph (test_edit, TRUE);
+
+    // then
+    test_check ("  aa bb cc\n");
+}
+END_TEST
+
+/* formatting a CRLF paragraph joins its lines without leaking "\r" into the text */
 START_TEST (test_format_paragraph_crlf)
 {
-    // given: a CRLF paragraph, cursor on a non-blank line
+    // given: a CRLF paragraph, cursor at the beginning of the second line
     test_load_text ("aaaa bbbb\r\ncccc dddd\r\n");
     test_cursor_to (11);
 
     // when
     format_paragraph (test_edit, FALSE);
 
-    // then: the paragraph is left unchanged (line breaks intact, no stray "\r")
-    test_check ("aaaa bbbb\r\ncccc dddd\r\n");
+    // then: the cursor stays at the same character
+    test_check ("aaaa bbbb cccc dddd\r\n");
+    ck_assert_int_eq (test_edit->buffer.curs1, 10);
+}
+END_TEST
+
+/* formatting a CRLF paragraph breaks its lines with "\r\n" */
+START_TEST (test_format_paragraph_crlf_split)
+{
+    // given: a long CRLF line, cursor at "dddd"
+    edit_options.word_wrap_line_length = 10;
+    test_load_text ("aaaa bbbb cccc dddd\r\nxx\r\n");
+    test_cursor_to (15);
+
+    // when
+    edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
+
+    // then: the cursor stays at the same character
+    test_check ("aaaa bbbb\r\ncccc dddd\r\nxx\r\n");
+    ck_assert_int_eq (test_edit->buffer.curs1, 16);
+
+    // when
+    edit_execute_key_command (test_edit, CK_Undo, -1);
+
+    // then
+    test_check ("aaaa bbbb cccc dddd\r\nxx\r\n");
+}
+END_TEST
+
+/* formatting an indented CRLF paragraph */
+START_TEST (test_format_paragraph_crlf_indented)
+{
+    // given: an indented CRLF paragraph, cursor on its second line
+    edit_options.word_wrap_line_length = 10;
+    test_load_text ("  aa\r\n  bb bb bb\r\n  cc\r\n\r\nzz\r\n");
+    test_cursor_to (8);
+
+    // when
+    format_paragraph (test_edit, TRUE);
+
+    // then
+    test_check ("  aa bb bb\r\n  bb cc\r\n\r\nzz\r\n");
+}
+END_TEST
+
+/* typing with auto paragraph formatting reformats a CRLF paragraph the same way as an LF one */
+START_TEST (test_auto_para_format_typing_crlf)
+{
+    // given: cursor at the end of the second line
+    edit_options.auto_para_formatting = TRUE;
+    test_load_text ("aaaa\r\nbbbb\r\n");
+    test_cursor_to (10);
+
+    // when
+    edit_execute_cmd (test_edit, -1, 'x');
+
+    // then
+    test_check ("aaaa bbbbx\r\n");
+}
+END_TEST
+
+/* a paragraph with both "\r\n" and "\n" line breaks is not formatted */
+START_TEST (test_format_paragraph_mixed)
+{
+    // given
+    test_load_text ("aa\r\nbb\ncc\r\n");
+    test_cursor_to (0);
+
+    // when
+    format_paragraph (test_edit, FALSE);
+
+    // then
+    test_check ("aa\r\nbb\ncc\r\n");
 }
 END_TEST
 
@@ -1059,7 +1145,7 @@ START_TEST (test_column_paste_from_file_past_eof_crlf)
 }
 END_TEST
 
-// formatting must not add a "\n" line break to a file with hidden "\r\n" line breaks
+// formatting adds "\r\n" line breaks to a file with hidden "\r\n" line breaks
 START_TEST (test_format_last_line_crlf)
 {
     // given: the last line has no line break and is longer than the wrap length
@@ -1070,8 +1156,8 @@ START_TEST (test_format_last_line_crlf)
     // when
     edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
 
-    // then: the paragraph is left as is
-    test_check ("aa\r\n\r\nbbbb cccc dddd");
+    // then: the same result as with "\n" line breaks
+    test_check ("aa\r\n\r\nbbbb cccc\r\ndddd");
 }
 END_TEST
 
@@ -1406,7 +1492,12 @@ main (void)
     tcase_add_test (tc_core, test_enter_empty_buffer);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf);
     tcase_add_test (tc_core, test_enter_auto_para_format_crlf);
+    tcase_add_test (tc_core, test_format_paragraph_indented);
     tcase_add_test (tc_core, test_format_paragraph_crlf);
+    tcase_add_test (tc_core, test_format_paragraph_crlf_split);
+    tcase_add_test (tc_core, test_format_paragraph_crlf_indented);
+    tcase_add_test (tc_core, test_auto_para_format_typing_crlf);
+    tcase_add_test (tc_core, test_format_paragraph_mixed);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf_empty_prev_line);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf_last_line);
     tcase_add_test (tc_core, test_typewriter_wrap_crlf);
