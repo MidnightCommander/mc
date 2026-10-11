@@ -39,7 +39,8 @@ EXTFS_IN    = 			\
 	usqfs.in		\
 	uwim.in			\
 	uzip.in			\
-	uzoo.in
+	uzoo.in			\
+	pgdump.in
 
 # Scripts that need adaptation to the local system - files to install
 EXTFS_OUT = 			\

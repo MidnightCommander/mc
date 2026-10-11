@@ -1,0 +1,262 @@
+#! @PYTHON@
+#
+#  Midnight Commander compatible EXTFS for browsing PostgreSQL pg_dump
+#  custom-format archives (the output of `pg_dump -Fc`).
+#
+#  Schemas are shown as folders and database objects (tables, views,
+#  sequences, functions, types, indexes, triggers, ...) as ".sql" files.
+#  Viewing or copying out an object yields a runnable SQL script: its CREATE
+#  statement, its data as a COPY block (terminated with \.), and the dependent
+#  indexes / constraints / triggers, so it can be pasted straight into psql.
+#
+#  Read-only.  Standard library only (gzip via zlib); Zstandard-compressed
+#  archives (PostgreSQL 16+) are supported when the python3 "zstandard" module
+#  is installed.
+#
+#  Written by Gabriel Diaconu, 2026.
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+import sys
+import zlib
+
+try:
+    import zstandard as _zstd
+except Exception:
+    _zstd = None
+
+BLK_DATA = 1
+K_OFFSET_POS_SET = 2
+
+
+def _mkver(maj, minr, rev):
+    return (maj << 16) | (minr << 8) | rev
+
+
+class PgDump:
+    """Reader for the PostgreSQL custom-format (-Fc) archive, versions 1.12..1.16
+    (PostgreSQL 9.x .. 17)."""
+
+    FILE_OBJECTS = {"TABLE", "VIEW", "MATERIALIZED VIEW", "SEQUENCE", "FUNCTION",
+                    "PROCEDURE", "AGGREGATE", "TYPE", "DOMAIN", "INDEX", "TRIGGER",
+                    "RULE", "CONSTRAINT", "FK CONSTRAINT", "CHECK CONSTRAINT"}
+
+    def __init__(self, path):
+        self.f = open(path, "rb")
+        if self.f.read(5) != b"PGDMP":
+            raise ValueError("not a pg_dump custom-format archive")
+        vmaj, vmin, vrev = self.f.read(1)[0], self.f.read(1)[0], self.f.read(1)[0]
+        self.version = _mkver(vmaj, vmin, vrev)
+        self.intsize = self.f.read(1)[0]
+        self.offsize = self.f.read(1)[0]
+        self.fmt = self.f.read(1)[0]
+        # compression: 1.15+ stores a 1-byte algorithm id; older an int level
+        if self.version >= _mkver(1, 15, 0):
+            self.comp = self.f.read(1)[0]          # 0 none, 1 gzip, 2 lz4, 3 zstd
+            self.comp_is_alg = True
+        else:
+            self.comp = self._rint()               # zlib level (0 => none)
+            self.comp_is_alg = False
+        if self.version >= _mkver(1, 4, 0):
+            for _ in range(7):                     # creation timestamp
+                self._rint()
+            self.dbname = self._rstr()
+        else:
+            self.dbname = None
+        if self.version >= _mkver(1, 10, 0):
+            self._rstr()                           # remote (server) version
+            self._rstr()                           # pg_dump version
+        self.entries = []
+        self._read_toc()
+
+    def _rbyte(self):
+        b = self.f.read(1)
+        if not b:
+            raise EOFError
+        return b[0]
+
+    def _rint(self):
+        sign = self._rbyte() if self.version > _mkver(1, 0, 0) else 0
+        res = 0
+        for i in range(self.intsize):
+            res |= self._rbyte() << (8 * i)
+        return -res if sign else res
+
+    def _rstr(self):
+        n = self._rint()
+        if n < 0:
+            return None
+        return self.f.read(n).decode("utf-8", "replace")
+
+    def _roffset(self):
+        flag = self._rbyte()
+        val = 0
+        for i in range(self.offsize):
+            val |= self._rbyte() << (8 * i)
+        return flag, val
+
+    def _read_toc(self):
+        n = self._rint()
+        v = self.version
+        for _ in range(n):
+            e = {}
+            e["dumpId"] = self._rint()
+            self._rint()                            # hadDumper
+            if v >= _mkver(1, 8, 0):
+                self._rstr()                        # tableoid
+            self._rstr()                            # oid
+            e["tag"] = self._rstr()
+            e["desc"] = self._rstr()
+            if v >= _mkver(1, 11, 0):
+                self._rint()                        # section
+            e["defn"] = self._rstr()
+            self._rstr()                            # dropStmt
+            e["copyStmt"] = self._rstr() if v >= _mkver(1, 3, 0) else None
+            e["namespace"] = self._rstr() if v >= _mkver(1, 6, 0) else None
+            if v >= _mkver(1, 10, 0):
+                self._rstr()                        # tablespace
+            if v >= _mkver(1, 14, 0):
+                self._rstr()                        # tableam (PostgreSQL 12+)
+            if v >= _mkver(1, 16, 0):
+                self._rint()                        # relkind (PostgreSQL 17+)
+            self._rstr()                            # owner
+            if v >= _mkver(1, 9, 0):
+                self._rstr()                        # with-oids flag
+            deps = []
+            while True:
+                d = self._rstr()
+                if d is None:
+                    break
+                deps.append(int(d))
+            e["deps"] = deps
+            flag, pos = self._roffset()
+            e["dataState"] = flag
+            e["dataPos"] = pos
+            self.entries.append(e)
+
+    def _emit_data(self, out):
+        algo = self.comp
+        if self.comp_is_alg:
+            none_, gzip_, zstd_ = (algo == 0), (algo == 1), (algo == 3)
+        else:
+            none_, gzip_, zstd_ = (algo == 0), (algo != 0), False
+        if zstd_:
+            if _zstd is None:
+                out.write("-- (zstd-compressed data; install the python3 "
+                          "\"zstandard\" module to read it)\n")
+                return
+            dobj = _zstd.ZstdDecompressor().decompressobj()
+            while True:
+                blen = self._rint()
+                if blen == 0:
+                    break
+                out.write(dobj.decompress(self.f.read(blen)).decode("utf-8", "replace"))
+        elif none_:
+            while True:
+                blen = self._rint()
+                if blen == 0:
+                    break
+                out.write(self.f.read(blen).decode("utf-8", "replace"))
+        else:
+            d = zlib.decompressobj()
+            while True:
+                blen = self._rint()
+                if blen == 0:
+                    break
+                out.write(d.decompress(self.f.read(blen)).decode("utf-8", "replace"))
+
+    def _find_data(self, tag, ns, descs):
+        for e in self.entries:
+            if e["desc"] in descs and e["tag"] == tag and e["namespace"] == ns:
+                return e
+        return None
+
+    def nodes(self):
+        out = []
+        for e in self.entries:
+            ns = e["namespace"]
+            if ns and e["desc"] in self.FILE_OBJECTS:
+                name = (e["tag"] or "object").replace("/", "_")
+                out.append((ns, name, e))
+        return out
+
+    def write_sql(self, ent, out):
+        if ent.get("defn"):
+            out.write(ent["defn"].rstrip("\n") + "\n")
+        if ent["desc"] in ("TABLE", "MATERIALIZED VIEW"):
+            de = self._find_data(ent["tag"], ent["namespace"],
+                                 ("TABLE DATA", "MATERIALIZED VIEW DATA"))
+            if de and de["dataState"] == K_OFFSET_POS_SET:
+                self.f.seek(de["dataPos"])
+                t = self._rbyte()
+                self._rint()                        # dumpId
+                if t == BLK_DATA:
+                    out.write("\n")
+                    if de.get("copyStmt"):
+                        out.write(de["copyStmt"])
+                    self._emit_data(out)
+                    out.write("\\.\n")
+        idx = [o for o in self.entries
+               if o["desc"] in ("INDEX", "CONSTRAINT", "FK CONSTRAINT",
+                                "CHECK CONSTRAINT", "TRIGGER", "RULE")
+               and ent["dumpId"] in o["deps"] and o.get("defn")]
+        if idx:
+            out.write("\n")
+            for o in idx:
+                out.write("-- %s: %s\n%s\n" % (o["desc"], o["tag"], o["defn"].rstrip("\n")))
+
+
+def cmd_list(path):
+    a = PgDump(path)
+    seen = set()
+    o = sys.stdout
+    for ns, name, e in a.nodes():
+        if ns not in seen:
+            seen.add(ns)
+            o.write("dr-xr-xr-x 1 root root 0 Jan  1 2026 %s\n" % ns)
+        o.write("-r--r--r-- 1 root root 0 Jan  1 2026 %s/%s.sql\n" % (ns, name))
+
+
+def cmd_copyout(path, stored, dest):
+    a = PgDump(path)
+    want = stored[:-4] if stored.endswith(".sql") else stored
+    for ns, name, e in a.nodes():
+        if "%s/%s" % (ns, name) == want:
+            with open(dest, "w", encoding="utf-8") as out:
+                a.write_sql(e, out)
+            return 0
+    sys.stderr.write("pgdump: object not found: %s\n" % stored)
+    return 1
+
+
+def main(argv):
+    if len(argv) < 3:
+        sys.stderr.write("usage: pgdump list ARCHIVE\n"
+                         "       pgdump copyout ARCHIVE NAME DEST\n")
+        return 2
+    cmd = argv[1]
+    if cmd == "list":
+        cmd_list(argv[2])
+        return 0
+    if cmd == "copyout" and len(argv) >= 5:
+        return cmd_copyout(argv[2], argv[3], argv[4])
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main(sys.argv))
+    except (OSError, ValueError, EOFError) as exc:
+        sys.stderr.write("pgdump: %s\n" % exc)
+        sys.exit(1)
