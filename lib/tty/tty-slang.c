@@ -251,7 +251,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     }
 
     // the terminal modes are restored from boot_mode before running external commands
-    if (tcgetattr (fileno (stdin), &boot_mode) != 0)
+    if (tcgetattr (STDIN_FILENO, &boot_mode) != 0)
     {
         fprintf (stderr, _ ("Cannot get terminal settings: %s\n"), unix_error_string (errno));
         exit (EXIT_FAILURE);
