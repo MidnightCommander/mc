@@ -36,6 +36,7 @@
 
 static WGroup owner;
 static WEdit *test_edit;
+static gboolean saved_utf8_display;
 
 /* --------------------------------------------------------------------------------------------- */
 /* @Mock */
@@ -87,6 +88,7 @@ setup (void)
     WRect r;
 
     str_init_strings (NULL);
+    saved_utf8_display = mc_global.utf8_display;
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
@@ -106,6 +108,10 @@ setup (void)
 
     do_set_codepage (0);
     edit_set_codeset (test_edit);
+
+    // the terminal sends a UTF-8 character one byte at a time
+    test_edit->utf8 = TRUE;
+    mc_global.utf8_display = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -120,6 +126,8 @@ teardown (void)
 
     free_codepages_list ();
     str_uninit_strings ();
+    mc_global.utf8_display = saved_utf8_display;
+    edit_options.group_undo = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -167,6 +175,69 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test */
+START_TEST (test_undo_redo_utf8_char)
+{
+    // "a", U+0438 (2 bytes), U+65E5 (3 bytes)
+    type_bytes ("a\xD0\xB8\xE6\x97\xA5");
+    check_text ("a\xD0\xB8\xE6\x97\xA5");
+
+    edit_execute_key_command (test_edit, CK_Undo, -1);
+    check_text ("a\xD0\xB8");
+    edit_execute_key_command (test_edit, CK_Undo, -1);
+    check_text ("a");
+
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    check_text ("a\xD0\xB8");
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    check_text ("a\xD0\xB8\xE6\x97\xA5");
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Test */
+START_TEST (test_group_undo_redo_utf8_char)
+{
+    edit_options.group_undo = TRUE;
+
+    type_bytes ("\xD0\xB0\xD0\xB1");
+    check_text ("\xD0\xB0\xD0\xB1");
+
+    // group undo removes the whole word
+    edit_execute_key_command (test_edit, CK_Undo, -1);
+    check_text ("");
+
+    // redo brings back one character at a time
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    check_text ("\xD0\xB0");
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    check_text ("\xD0\xB0\xD0\xB1");
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Test */
+START_TEST (test_redo_deleted_line)
+{
+    type_bytes ("one\ntwo\n");
+    edit_cursor_move (test_edit, -test_edit->buffer.curs1);
+
+    edit_execute_key_command (test_edit, CK_DeleteLine, -1);
+    check_text ("two\n");
+
+    edit_execute_key_command (test_edit, CK_Undo, -1);
+    check_text ("one\ntwo\n");
+
+    // one redo deletes the whole line again
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    check_text ("two\n");
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -178,6 +249,9 @@ main (void)
 
     // Add new tests here: ***************
     tcase_add_test (tc_core, test_redo_line_break);
+    tcase_add_test (tc_core, test_undo_redo_utf8_char);
+    tcase_add_test (tc_core, test_group_undo_redo_utf8_char);
+    tcase_add_test (tc_core, test_redo_deleted_line);
     // ***********************************
 
     return mctest_run_all (tc_core);
