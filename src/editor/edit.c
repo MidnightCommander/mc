@@ -2089,63 +2089,45 @@ edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *fil
 off_t
 edit_write_stream (WEdit *edit, FILE *f)
 {
-    const off_t size = edit->buffer.size;
+    const char *lb;
     off_t i;
 
-    if (edit->lb == LB_ASIS)
+    switch (edit->lb)
     {
-        for (i = 0; i < size; i++)
-            if (fputc (edit_buffer_get_byte (&edit->buffer, i), f) < 0)
-                break;
-        return i;
+    case LB_UNIX:
+        lb = "\n";
+        break;
+    case LB_WIN:
+        lb = "\r\n";
+        break;
+    case LB_MAC:
+        lb = "\r";
+        break;
+    default:
+        lb = NULL;
+        break;
     }
 
-    // change line breaks
-    for (i = 0; i < size; i++)
+    for (i = 0; i < edit->buffer.size; i++)
     {
-        const unsigned char c = edit_buffer_get_byte (&edit->buffer, i);
+        const int c = edit_buffer_get_byte (&edit->buffer, i);
 
-        if (c != '\n' && c != '\r')
+        if (lb == NULL || (c != '\r' && c != '\n'))
         {
-            // not line break
             if (fputc (c, f) < 0)
                 return i;
-            continue;
         }
-
-        // c is a line break; c1 is the char after it (-1 if there is none)
-        const int c1 = (i + 1 < size) ? edit_buffer_get_byte (&edit->buffer, i + 1) : -1;
-
-        switch (edit->lb)
+        else
         {
-        case LB_WIN:  // replace "\r\n", "\r" or "\n" to "\r\n"
-            if (fputc ('\r', f) < 0 || fputc ('\n', f) < 0)
+            // write each "\r\n", "\r" and "\n" as one line break of the selected type
+            if (fputs (lb, f) < 0)
                 return i;
-            if (c == '\r' && c1 == '\n')
-                // Windows line break; skip the second char
+            if (edit_buffer_is_crlf (&edit->buffer, i))
                 i++;
-            break;
-
-        case LB_MAC:  // replace "\r\n", "\r" or "\n" to "\r"
-            if (fputc ('\r', f) < 0)
-                return i;
-            if (c == '\r' && c1 == '\n')
-                // Windows line break; skip the second char
-                i++;
-            break;
-
-        case LB_UNIX:  // replace "\r\n", "\r" or "\n" to "\n"
-        default:
-            if (fputc ('\n', f) < 0)
-                return i;
-            if (c == '\r' && c1 == '\n')
-                // Windows line break; skip the second char
-                i++;
-            break;
         }
     }
 
-    return size;
+    return i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
