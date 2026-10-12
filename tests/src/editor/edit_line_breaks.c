@@ -523,6 +523,22 @@ START_TEST (test_enter_auto_para_format_crlf)
 }
 END_TEST
 
+/* with auto paragraph formatting Enter at the beginning of the text adds one line break */
+START_TEST (test_enter_auto_para_format_bof)
+{
+    // given: cursor at the beginning of the text
+    edit_options.auto_para_formatting = TRUE;
+    test_load_text ("aaaa\r\n");
+    test_cursor_to (0);
+
+    // when
+    edit_execute_cmd (test_edit, CK_Enter, -1);
+
+    // then
+    test_check ("\r\naaaa\r\n");
+}
+END_TEST
+
 /* formatting an indented paragraph keeps the indentation of its lines */
 START_TEST (test_format_paragraph_indented)
 {
@@ -1509,6 +1525,7 @@ main (void)
     tcase_add_test (tc_core, test_enter_empty_buffer);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf);
     tcase_add_test (tc_core, test_enter_auto_para_format_crlf);
+    tcase_add_test (tc_core, test_enter_auto_para_format_bof);
     tcase_add_test (tc_core, test_format_paragraph_indented);
     tcase_add_test (tc_core, test_format_paragraph_crlf);
     tcase_add_test (tc_core, test_format_paragraph_crlf_split);

@@ -1552,21 +1552,6 @@ edit_auto_indent (WEdit *edit)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Check whether a line break ("\n" or "\r\n") ends exactly at the specified position,
- * i.e. whether the line before that position is empty.
- */
-
-static inline gboolean
-edit_line_break_ends_at (const edit_buffer_t *buf, off_t p)
-{
-    if (p >= 1 && edit_buffer_get_byte (buf, p - 1) == '\n')
-        return TRUE;
-
-    return edit_buffer_is_crlf (buf, p - 2);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Insert a line break at the cursor inheriting the type of the line break
  * of the current line ("\r\n" or "\n"). If the current line has no line
  * break (the last line of the file), use the line break of the previous line.
@@ -1610,11 +1595,10 @@ edit_double_newline (WEdit *edit)
 
     edit_insert_line_break (edit);
 
-    // do not add a second line break if the next char or the previous line
-    // is already a line break, i.e. there is already a blank line
+    // do not add a second line break if there is already a blank line
     if (edit_buffer_get_current_byte (&edit->buffer) == '\n'
         || edit_buffer_is_crlf (&edit->buffer, edit->buffer.curs1)
-        || edit_line_break_ends_at (&edit->buffer, pos))
+        || edit_buffer_get_byte (&edit->buffer, pos - 1) == '\n')
         return;
 
     edit->force |= REDRAW_PAGE;
