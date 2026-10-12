@@ -153,7 +153,7 @@ tty_check_xterm_compat (const gboolean force_xterm)
  * and the key reader use stdin, and both backends save the initial terminal modes from it.
  * If stdin is redirected (e.g. "mc < /dev/null" or "find ... | xargs mcedit"), attach it to the
  * controlling terminal, like "xargs -o" does. Like S-Lang, fall back to stderr if there is
- * no controlling terminal.
+ * no controlling terminal, but only if the keyboard can be read from it.
  *
  * @return TRUE if stdin is a terminal now, FALSE otherwise
  */
@@ -166,7 +166,8 @@ tty_stdin_to_terminal (void)
         return TRUE;
 
     fd = open ("/dev/tty", O_RDWR);
-    if (fd == -1 && isatty (STDERR_FILENO))
+    if (fd == -1 && isatty (STDERR_FILENO)
+        && (fcntl (STDERR_FILENO, F_GETFL) & O_ACCMODE) != O_WRONLY)
         fd = dup (STDERR_FILENO);
     if (fd == -1)
         return FALSE;
