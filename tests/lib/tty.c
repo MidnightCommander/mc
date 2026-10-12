@@ -25,6 +25,7 @@
 #include "tests/mctest.h"
 
 #include <fcntl.h>
+#include <signal.h>
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -32,7 +33,10 @@
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
-#include <termios.h>
+#ifdef HAVE_STROPTS_H
+#include <stropts.h>  // I_FIND, I_PUSH
+#endif
+#include <termios.h>  // tcgetsid()
 
 #include "lib/strutil.h"
 #include "lib/util.h"
@@ -117,11 +121,10 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Open a new pseudo-terminal and return the descriptor of its slave side. If @controlling is
-   TRUE, the calling process must be a session leader, and the slave becomes its controlling
-   terminal. The master descriptor is stored in @master. */
+/* Open a new pseudo-terminal and return the descriptor of its slave side, which does not become
+   the controlling terminal. The master descriptor is stored in @master. */
 static int
-open_pty_slave (int *master, gboolean controlling)
+open_pty_slave (int *master)
 {
     int slave;
 
@@ -129,13 +132,39 @@ open_pty_slave (int *master, gboolean controlling)
     if (*master == -1 || grantpt (*master) != 0 || unlockpt (*master) != 0)
         return -1;
 
-    slave = open (ptsname (*master), O_RDWR | (controlling ? 0 : O_NOCTTY));
-#ifdef TIOCSCTTY
-    if (slave != -1 && controlling && ioctl (slave, TIOCSCTTY, 0) == -1)
+    slave = open (ptsname (*master), O_RDWR | O_NOCTTY);
+#if defined(I_FIND) && defined(I_PUSH)
+    // System V (e.g. Solaris): the slave is not a terminal until these modules are pushed
+    if (slave != -1 && ioctl (slave, I_FIND, "ptem") == 0 && ioctl (slave, I_PUSH, "ptem") == -1)
+        return -1;
+    if (slave != -1 && ioctl (slave, I_FIND, "ldterm") == 0
+        && ioctl (slave, I_PUSH, "ldterm") == -1)
         return -1;
 #endif
 
     return slave;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Make the pseudo-terminal with the @master and @slave sides the controlling terminal of the
+   calling process, which must be a session leader without one. */
+static gboolean
+acquire_controlling_terminal (int master, int slave)
+{
+    // System V, Linux: open the terminal without O_NOCTTY
+    const int fd = open (ptsname (master), O_RDWR);
+
+    if (fd != -1)
+        close (fd);
+
+#ifdef TIOCSCTTY
+    // BSD: ask for it explicitly
+    if (tcgetsid (slave) != getpid ())
+        ioctl (slave, TIOCSCTTY, 0);
+#endif
+
+    return tcgetsid (slave) == getpid ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -157,7 +186,6 @@ key_reaches_stdin (int master)
 {
     char buf[8] = "";
 
-    alarm (5);  // don't hang the test if stdin is not that terminal
     return write (master, "k\n", 2) == 2 && read (STDIN_FILENO, buf, sizeof (buf)) == 2
         && buf[0] == 'k';
 }
@@ -170,11 +198,13 @@ typedef enum
     STDIN_IS_TTY,                         // stdin is a terminal, no controlling terminal
     STDIN_REDIRECTED,                     // stdin is /dev/null, there is a controlling terminal
     STDIN_REDIRECTED_NO_CTTY_STDERR_TTY,  // stdin is /dev/null, no ctty, stderr is a terminal
+    STDIN_REDIRECTED_NO_CTTY_STDERR_WO,   // same, but stderr is open on the terminal write-only
     NO_TERMINAL_AT_ALL,                   // stdin and stderr are /dev/null, no controlling terminal
 } stdin_setup_t;
 
 /* Run tty_stdin_to_terminal() in a new session prepared according to @setup and return
-   0 if the result is as expected, a positive code of the failed check otherwise. */
+   0 if the result is as expected, a positive code of the failed check otherwise, or 100 plus
+   the number of the signal that killed the session (SIGALRM: the session got stuck). */
 static int
 run_stdin_to_terminal (stdin_setup_t setup)
 {
@@ -184,24 +214,41 @@ run_stdin_to_terminal (stdin_setup_t setup)
     pid = fork ();
     if (pid == 0)
     {
-        int master, slave, devnull, saved_stdin;
+        int master, slave, devnull, stderr_fd, saved_stdin;
         gboolean ret;
 
-        if (setsid () == -1)
-            _exit (10);
+        // don't hang the test; the SIGALRM handler inherited from Check kills the wrong processes
+        signal (SIGALRM, SIG_DFL);
+        alarm (3);
 
-        slave = open_pty_slave (&master, setup == STDIN_REDIRECTED);
+        // before setsid(), so that the terminal cannot become the controlling one by accident
+        // (on illumos, pushing a STREAMS module in a session leader makes it such, as opening does)
+        slave = open_pty_slave (&master);
         devnull = open ("/dev/null", O_RDWR);
         if (slave == -1 || devnull == -1)
+            _exit (10);
+
+        if (setsid () == -1)
             _exit (11);
 
-        dup2 (setup == STDIN_IS_TTY ? slave : devnull, STDIN_FILENO);
-        dup2 (setup == STDIN_REDIRECTED_NO_CTTY_STDERR_TTY ? slave : devnull, STDERR_FILENO);
+        if (setup == STDIN_REDIRECTED && !acquire_controlling_terminal (master, slave))
+            _exit (12);
+
+        if (setup == STDIN_REDIRECTED_NO_CTTY_STDERR_TTY)
+            stderr_fd = slave;
+        else if (setup == STDIN_REDIRECTED_NO_CTTY_STDERR_WO)
+            stderr_fd = open (ptsname (master), O_WRONLY | O_NOCTTY);
+        else
+            stderr_fd = devnull;
+
+        if (dup2 (setup == STDIN_IS_TTY ? slave : devnull, STDIN_FILENO) == -1
+            || dup2 (stderr_fd, STDERR_FILENO) == -1)
+            _exit (13);
         saved_stdin = dup (STDIN_FILENO);
 
         ret = tty_stdin_to_terminal ();
 
-        if (setup == NO_TERMINAL_AT_ALL)
+        if (setup == NO_TERMINAL_AT_ALL || setup == STDIN_REDIRECTED_NO_CTTY_STDERR_WO)
             // must fail and leave stdin untouched
             _exit (ret ? 1 : (same_file (STDIN_FILENO, saved_stdin) ? 0 : 2));
 
@@ -215,10 +262,10 @@ run_stdin_to_terminal (stdin_setup_t setup)
         _exit (0);
     }
 
-    if (pid == -1 || waitpid (pid, &status, 0) != pid || !WIFEXITED (status))
+    if (pid == -1 || waitpid (pid, &status, 0) != pid)
         return 100;
 
-    return WEXITSTATUS (status);
+    return WIFSIGNALED (status) ? 100 + WTERMSIG (status) : WEXITSTATUS (status);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -265,6 +312,20 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+START_TEST (test_tty_stdin_to_terminal_stderr_write_only)
+{
+    // given: stdin is redirected, no controlling terminal, stderr is a write-only terminal
+
+    // when
+    const int actual_result = run_stdin_to_terminal (STDIN_REDIRECTED_NO_CTTY_STDERR_WO);
+
+    // then: failure is reported and stdin is left as is
+    ck_assert_int_eq (actual_result, 0);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 START_TEST (test_tty_stdin_to_terminal_no_terminal)
 {
     // given: no terminal at all
@@ -294,6 +355,7 @@ main (void)
     tcase_add_test (tc_core, test_tty_stdin_to_terminal_stdin_is_tty);
     tcase_add_test (tc_core, test_tty_stdin_to_terminal_redirected);
     tcase_add_test (tc_core, test_tty_stdin_to_terminal_stderr_fallback);
+    tcase_add_test (tc_core, test_tty_stdin_to_terminal_stderr_write_only);
     tcase_add_test (tc_core, test_tty_stdin_to_terminal_no_terminal);
     // ***********************************
 
