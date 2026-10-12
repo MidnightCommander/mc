@@ -40,6 +40,8 @@
 
 static WGroup owner;
 static WEdit *test_edit;
+static edit_options_t saved_edit_options;
+static edit_search_options_t saved_edit_search_options;
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -132,6 +134,9 @@ setup (void)
 
     str_init_strings (NULL);
 
+    saved_edit_options = edit_options;
+    saved_edit_search_options = edit_search_options;
+
     vfs_init ();
     vfs_init_localfs ();
     vfs_setup_work_dir ();
@@ -170,6 +175,9 @@ teardown (void)
     free_codepages_list ();
     vfs_shut ();
     str_uninit_strings ();
+
+    edit_options = saved_edit_options;
+    edit_search_options = saved_edit_search_options;
 }
 
 /* --------------------------------------------------------------------------------------------- */
