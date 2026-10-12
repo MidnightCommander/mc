@@ -460,7 +460,7 @@ put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size, 
         {
             // a new line break: insert its "\r", the "\n" is put below
             edit_cursor_move (edit, p - edit->buffer.curs1);
-            edit_insert (edit, '\r');
+            edit_insert_ahead (edit, '\r');
             if (cursor > p)
                 cursor++;
             p++;

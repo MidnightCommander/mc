@@ -757,6 +757,26 @@ START_TEST (test_format_last_line_crlf_mixed)
 }
 END_TEST
 
+/* formatting moves a mark on a space that becomes a line break past it, as with "\n" */
+START_TEST (test_format_mark_on_new_line_break_crlf)
+{
+    // given: " bbbb" is marked
+    edit_options.persistent_selections = TRUE;
+    edit_options.word_wrap_line_length = 6;
+    test_load_text ("aaaa bbbb\r\n");
+    test_cursor_to (0);
+    test_edit->mark1 = 4;
+    test_edit->mark2 = 9;
+
+    // when
+    edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
+    edit_execute_key_command (test_edit, CK_Remove, -1);
+
+    // then: the new line break is kept, as in "aaaa\n\n" with "\n" line breaks
+    test_check ("aaaa\r\n\r\n");
+}
+END_TEST
+
 START_TEST (test_enter_auto_indent_crlf_empty_prev_line)
 {
     // given: cursor is on an empty line
@@ -1623,6 +1643,7 @@ main (void)
     tcase_add_test (tc_core, test_format_paragraph_mixed);
     tcase_add_test (tc_core, test_format_last_line_crlf);
     tcase_add_test (tc_core, test_format_last_line_crlf_mixed);
+    tcase_add_test (tc_core, test_format_mark_on_new_line_break_crlf);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf_empty_prev_line);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf_last_line);
     tcase_add_test (tc_core, test_typewriter_wrap_crlf);
