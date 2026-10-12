@@ -1,6 +1,5 @@
 /*
-   src/editor - tests for line break handling: CRLF/LF/CR detection,
-   atomic "\r\n" editing, line break inheritance and write conversion
+   src/editor - tests for line breaks
 
    Copyright (C) 2026
    Free Software Foundation, Inc.
@@ -657,6 +656,38 @@ START_TEST (test_format_paragraph_mixed)
 }
 END_TEST
 
+/* the last line, which has no line break, gets the line break of the line before it */
+START_TEST (test_format_last_line_crlf)
+{
+    // given: the last line has no line break and is longer than the wrap length
+    edit_options.word_wrap_line_length = 10;
+    test_load_text ("aa\r\n\r\nbbbb cccc dddd");
+    test_cursor_to (20);
+
+    // when
+    edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
+
+    // then: the same result as with "\n" line breaks
+    test_check ("aa\r\n\r\nbbbb cccc\r\ndddd");
+}
+END_TEST
+
+/* the same in a mixed file */
+START_TEST (test_format_last_line_crlf_mixed)
+{
+    // given: the last line has no line break and is longer than the wrap length
+    edit_options.word_wrap_line_length = 10;
+    test_load_text ("aa\n\r\nbbbb cccc dddd");
+    test_cursor_to (19);
+
+    // when
+    edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
+
+    // then
+    test_check ("aa\n\r\nbbbb cccc\r\ndddd");
+}
+END_TEST
+
 START_TEST (test_enter_auto_indent_crlf_empty_prev_line)
 {
     // given: cursor is on an empty line
@@ -1179,38 +1210,6 @@ START_TEST (test_column_paste_from_file_past_eof_crlf)
 }
 END_TEST
 
-// formatting adds "\r\n" line breaks to a file with hidden "\r\n" line breaks
-START_TEST (test_format_last_line_crlf)
-{
-    // given: the last line has no line break and is longer than the wrap length
-    edit_options.word_wrap_line_length = 10;
-    test_load_text ("aa\r\n\r\nbbbb cccc dddd");
-    test_cursor_to (20);
-
-    // when
-    edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
-
-    // then: the same result as with "\n" line breaks
-    test_check ("aa\r\n\r\nbbbb cccc\r\ndddd");
-}
-END_TEST
-
-// the last line gets the line breaks of the line before it, also in a mixed file
-START_TEST (test_format_last_line_crlf_mixed)
-{
-    // given: the last line has no line break and is longer than the wrap length
-    edit_options.word_wrap_line_length = 10;
-    test_load_text ("aa\n\r\nbbbb cccc dddd");
-    test_cursor_to (19);
-
-    // when
-    edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
-
-    // then
-    test_check ("aa\n\r\nbbbb cccc\r\ndddd");
-}
-END_TEST
-
 /* --------------------------------------------------------------------------------------------- */
 /* CK_DeleteToEnd: stop before the "\r" of a "\r\n" line break */
 
@@ -1550,6 +1549,8 @@ main (void)
     tcase_add_test (tc_core, test_format_paragraph_crlf_indented);
     tcase_add_test (tc_core, test_auto_para_format_typing_crlf);
     tcase_add_test (tc_core, test_format_paragraph_mixed);
+    tcase_add_test (tc_core, test_format_last_line_crlf);
+    tcase_add_test (tc_core, test_format_last_line_crlf_mixed);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf_empty_prev_line);
     tcase_add_test (tc_core, test_enter_auto_indent_crlf_last_line);
     tcase_add_test (tc_core, test_typewriter_wrap_crlf);
@@ -1579,8 +1580,6 @@ main (void)
     tcase_add_test (tc_core, test_search_in_selection_crlf);
     tcase_add_test (tc_core, test_column_copy_past_eof_crlf);
     tcase_add_test (tc_core, test_column_paste_from_file_past_eof_crlf);
-    tcase_add_test (tc_core, test_format_last_line_crlf);
-    tcase_add_test (tc_core, test_format_last_line_crlf_mixed);
     tcase_add_test (tc_core, test_delete_to_line_end_crlf);
     tcase_add_test (tc_core, test_delete_to_line_end_lf);
     tcase_add_test (tc_core, test_end_stops_after_cr_mixed);
