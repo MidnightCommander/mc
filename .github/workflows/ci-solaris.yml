@@ -18,17 +18,17 @@ jobs:
         uses: vmactions/solaris-vm@v1
         with:
           release: "11.4-gcc"  # autoconf automake developer/gcc/gcc-c libtool pkg-config
+          sync: nfs
           prepare: |
             pkg install --no-backup-be --no-refresh --accept -v \
               aspell check glib2 libssh2 libx11
 
           run: |
-            ./autogen.sh
-
             useradd -d "$(pwd)" test
-            chown -R test $(pwd)
 
             su - test -c ' \
+              ./autogen.sh && \
+              \
               export PKG_CONFIG_PATH=/usr/lib/64/pkgconfig && \
               \
               ./configure \
