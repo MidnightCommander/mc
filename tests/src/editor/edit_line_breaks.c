@@ -319,6 +319,67 @@ START_TEST (test_type_after_joining_cr_lf)
 }
 END_TEST
 
+// Redo replays the actions from where Undo left the cursor, also between "\r" and "\n"
+START_TEST (test_redo_after_search_crlf)
+{
+    // given: a search for "\n" left the cursor between "\r" and "\n", then "Q" was typed
+    test_load_text ("abc\r\nxyz\r\n");
+    test_cursor_to (0);
+    edit_search_options.type = MC_SEARCH_T_HEX;
+    test_edit->last_search_string = g_strdup ("0a");
+    edit_search_init (test_edit, test_edit->last_search_string);
+    test_edit->search_start = 0;
+    edit_search_cmd (test_edit, TRUE);
+    edit_execute_key_command (test_edit, -1, 'Q');
+    edit_execute_key_command (test_edit, CK_Undo, -1);
+    test_check ("abc\r\nxyz\r\n");
+
+    // when
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+
+    // then
+    test_check ("abcQ\r\nxyz\r\n");
+}
+END_TEST
+
+// the same after Backspace made a mixed file pure "\r\n"
+START_TEST (test_redo_after_joining_cr_lf)
+{
+    // given
+    test_load_text ("x\r\r\ny\r\n");
+    test_cursor_to (3);
+    edit_execute_key_command (test_edit, CK_BackSpace, -1);
+    edit_execute_key_command (test_edit, -1, 'Q');
+    edit_execute_key_command (test_edit, CK_Undo, -1);
+    test_check ("x\r\ny\r\n");
+
+    // when
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+    edit_execute_key_command (test_edit, CK_Redo, -1);
+
+    // then
+    test_check ("xQ\r\ny\r\n");
+}
+END_TEST
+
+// delete word right stops at a "\r\n" line break as soon as the file has only such line breaks
+START_TEST (test_right_delete_word_joining_cr_lf)
+{
+    // given: a stray "\r" before a "\r\n" line break
+    test_load_text ("x\r\r\ny");
+    test_cursor_to (1);
+
+    // when
+    edit_execute_cmd (test_edit, CK_DeleteToWordEnd, -1);
+
+    // then
+    test_check ("x\r\ny");
+}
+END_TEST
+
 /* --------------------------------------------------------------------------------------------- */
 /* edit_buffer_is_crlf() */
 
@@ -1540,6 +1601,9 @@ main (void)
     mctest_add_parameterized_test (tc_core, test_detect, test_detect_ds);
     tcase_add_test (tc_core, test_detect_after_joining_cr_lf);
     tcase_add_test (tc_core, test_type_after_joining_cr_lf);
+    tcase_add_test (tc_core, test_redo_after_search_crlf);
+    tcase_add_test (tc_core, test_redo_after_joining_cr_lf);
+    tcase_add_test (tc_core, test_right_delete_word_joining_cr_lf);
     mctest_add_parameterized_test (tc_core, test_is_crlf, test_is_crlf_ds);
     mctest_add_parameterized_test (tc_core, test_trailing_ws_start, test_trailing_ws_ds);
     mctest_add_parameterized_test (tc_core, test_write_stream, test_write_ds);

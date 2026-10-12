@@ -896,7 +896,7 @@ edit_get_current_eol (WEdit *edit)
  * Move the cursor before the "\r" if it is between the "\r" and the "\n" of a hidden "\r\n"
  * line break. A search can leave it there, but also any change that makes the line breaks of
  * a mixed file pure "\r\n", e.g. deleting the byte between a "\r" and a "\n" or undoing its
- * insertion. Therefore, this is checked before each command.
+ * insertion. Therefore, this is checked before each command except Undo and Redo.
  */
 
 static void
@@ -3504,7 +3504,9 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
     if (edit_handle_move_resize (edit, command))
         return;
 
-    edit_cursor_fix_crlf (edit);
+    // Undo and Redo replay cursor moves from where they were recorded
+    if (command != CK_Undo && command != CK_Redo)
+        edit_cursor_fix_crlf (edit);
 
     edit->force |= REDRAW_LINE;
 
