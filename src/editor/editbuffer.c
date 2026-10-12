@@ -965,53 +965,41 @@ edit_buffer_trailing_ws_start (const edit_buffer_t *buf, off_t bol)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Detect the line break type used in the buffer content.
+ * Detect the type of the line breaks of the buffer.
  *
  * @param buf editor buffer
  *
- * @return LB_WIN if all line breaks are "\r\n"; LB_UNIX if all line breaks
- *         are "\n" (including buffers without any line breaks); LB_MAC if
- *         all line breaks are "\r"; LB_MIXED if the buffer uses a mixture of
- *         different line breaks (such a file can only be saved as-is)
+ * @return LB_UNIX if all line breaks are "\n" (also if there are none), LB_WIN if all are "\r\n",
+ *         LB_MAC if all are "\r", LB_MIXED otherwise
  */
 
 LineBreaks
 edit_buffer_detect_line_breaks (const edit_buffer_t *buf)
 {
-    off_t crlf = 0;  // "\r\n" line breaks
-    off_t cr = 0;    // "\r" line breaks not followed by "\n"
-    off_t lf = 0;    // "\n" line breaks not preceded by "\r"
+    gboolean lf = FALSE, crlf = FALSE, cr = FALSE;
     off_t i;
 
     for (i = 0; i < buf->size; i++)
     {
-        if (edit_buffer_get_byte (buf, i) == '\r')
+        const int c = edit_buffer_get_byte (buf, i);
+
+        if (c == '\n')
+            lf = TRUE;
+        else if (c == '\r' && i + 1 < buf->size && edit_buffer_get_byte (buf, i + 1) == '\n')
         {
-            if (edit_buffer_is_crlf (buf, i))
-                crlf++;
-            else
-                cr++;
+            crlf = TRUE;
+            i++;
         }
-        else if (edit_buffer_get_byte (buf, i) == '\n'
-                 && (i == 0 || edit_buffer_get_byte (buf, i - 1) != '\r'))
-            lf++;
+        else if (c == '\r')
+            cr = TRUE;
+        else
+            continue;
+
+        if (lf + crlf + cr > 1)
+            return LB_MIXED;
     }
 
-    if (crlf > 0)
-    {
-        if (cr > 0 || lf > 0)
-            return LB_MIXED;  // mixture of line breaks
-        return LB_WIN;
-    }
-
-    if (cr > 0)
-    {
-        if (lf > 0)
-            return LB_MIXED;  // mixture of line breaks
-        return LB_MAC;
-    }
-
-    return LB_UNIX;
+    return crlf ? LB_WIN : cr ? LB_MAC : LB_UNIX;
 }
 
 /* --------------------------------------------------------------------------------------------- */

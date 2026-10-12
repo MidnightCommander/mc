@@ -260,6 +260,7 @@ static const struct test_detect_ds
     { "a\rb\n", LB_MIXED },
     { "a\nb\rc", LB_MIXED },
     { "a\r\nb\rc", LB_MIXED },
+    { "a\r\nb\r", LB_MIXED },  // trailing "\r"
 };
 
 /* @Test(dataSource = "test_detect_ds") */
