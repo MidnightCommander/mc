@@ -144,31 +144,15 @@ format_character_code (WEdit *edit)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Get the cached line break type of the buffer content.
- * The result is recomputed only when line breaks have changed.
- */
-
-static inline LineBreaks
-edit_get_detected_line_breaks (edit_buffer_t *buf)
-{
-    edit_buffer_refresh_line_breaks (buf);
-    return edit_buffer_get_line_breaks (buf);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Get the status line sign describing the line break type
- * of the buffer content:
- * <CRLF> - Windows ("\r\n")
- * <CR>   - Macintosh ("\r")
- * <LF>   - Unix ("\n"), also if there are no line breaks
- * <MIX>  - mixture of line breaks
+ * Get the sign of the type of the line breaks for the status line.
  */
 
 static inline const char *
 edit_line_breaks_status_sign (edit_buffer_t *buf)
 {
-    switch (edit_get_detected_line_breaks (buf))
+    edit_buffer_refresh_line_breaks (buf);
+
+    switch (edit_buffer_get_line_breaks (buf))
     {
     case LB_WIN:
         return "<CRLF>";
@@ -188,9 +172,12 @@ static inline void
 status_string (WEdit *edit, char *s, int w)
 {
     char *character_code;
-    const char *lb = edit_line_breaks_status_sign (&edit->buffer);
+    const char *codepage;
+    const char *lb;
 
     character_code = format_character_code (edit);
+    codepage = mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) : "";
+    lb = edit_line_breaks_status_sign (&edit->buffer);
 
     // The field lengths just prevent the status line from shortening too much
     if (edit_options.simple_statusbar)
@@ -204,11 +191,7 @@ status_string (WEdit *edit, char *s, int w)
                     edit->buffer.lines + 1,                                                   //
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
-                    character_code,
-                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
-                                                   : "",
-                    lb  //
-        );
+                    character_code, codepage, lb);
     else
         g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) [%s]  %s  %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',  //
@@ -222,11 +205,7 @@ status_string (WEdit *edit, char *s, int w)
                     edit->buffer.lines + 1,                                                   //
                     (long) edit->buffer.curs1,                                                //
                     (long) edit->buffer.size,                                                 //
-                    character_code,
-                    mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
-                                                   : "",
-                    lb  //
-        );
+                    character_code, codepage, lb);
 
     g_free (character_code);
 }
