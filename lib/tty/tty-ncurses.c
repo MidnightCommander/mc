@@ -323,7 +323,7 @@ tty_change_screen_size (void)
     tty_reset_screen ();
 #endif
 
-    // Ioctl on the STDIN_FILENO
+    // the screen is drawn on stdout, so get the size of that terminal
     ioctl (STDOUT_FILENO, TIOCGWINSZ, &winsz);
     if (winsz.ws_col != 0 && winsz.ws_row != 0)
     {
