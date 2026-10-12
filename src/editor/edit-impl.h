@@ -150,6 +150,7 @@ void edit_insert (WEdit *edit, int c);
 void edit_insert_over (WEdit *edit);
 void edit_cursor_move (WEdit *edit, off_t increment);
 gboolean edit_crlf_is_unit (WEdit *edit);
+gboolean edit_crlf_unit_at (WEdit *edit, off_t pos);
 void edit_push_undo_action (WEdit *edit, long c);
 void edit_push_redo_action (WEdit *edit, long c);
 void edit_push_key_press (WEdit *edit);

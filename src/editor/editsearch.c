@@ -348,7 +348,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     {
         end_mark = edit_calculate_end_of_previous_line (buf, end_mark);
         // the selection ends before the hidden "\r" of a "\r\n" line break
-        if (edit_crlf_is_unit (edit) && edit_buffer_is_crlf (buf, end_mark - 1))
+        if (edit_crlf_unit_at (edit, end_mark - 1))
             end_mark--;
 
         // update bottom marker
