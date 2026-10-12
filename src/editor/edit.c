@@ -1554,9 +1554,8 @@ edit_auto_indent (WEdit *edit)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Insert a line break at the cursor inheriting the type of the line break
- * of the current line ("\r\n" or "\n"). If the current line has no line
- * break (the last line of the file), use the line break of the previous line.
+ * Insert a line break of the type of the line break of the current line, or of the line before it
+ * on the last line, which has none.
  */
 
 static inline void
@@ -1565,26 +1564,14 @@ edit_insert_line_break (WEdit *edit)
     const off_t eol = edit_buffer_get_current_eol (&edit->buffer);
     gboolean crlf;
 
-    if (edit_buffer_is_crlf (&edit->buffer, eol - 1))
-        crlf = TRUE;
-    else if (eol == edit->buffer.size)
-    {
-        const off_t bol = edit_buffer_get_current_bol (&edit->buffer);
-
-        crlf = (bol > 0) && edit_buffer_is_crlf (&edit->buffer, bol - 2);
-    }
+    if (eol < edit->buffer.size)
+        crlf = edit_buffer_is_crlf (&edit->buffer, eol - 1);
     else
-        crlf = FALSE;
+        crlf = edit_buffer_is_crlf (&edit->buffer, edit_buffer_get_current_bol (&edit->buffer) - 2);
 
-    // if the character right before the cursor is already a "\r" (e.g. the
-    // cursor is between the "\r" and the "\n" of a "\r\n" line break),
-    // inserting another "\r" would create a duplicate, so insert only "\n"
-    if (crlf && edit_buffer_get_previous_byte (&edit->buffer) == '\r')
-        crlf = FALSE;
-
-    if (crlf)
+    // do not double a "\r" before the cursor, e.g. between "\r" and "\n"
+    if (crlf && edit_buffer_get_previous_byte (&edit->buffer) != '\r')
         edit_insert (edit, '\r');
-
     edit_insert (edit, '\n');
 }
 
