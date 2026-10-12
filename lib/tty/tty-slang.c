@@ -267,7 +267,16 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     if (mc_global.tty.ugly_line_drawing)
         SLtt_Has_Alt_Charset = 0;
 
-    tcgetattr (SLang_TT_Read_FD, &new_mode);
+    // cannot fail after SLang_init_tty() has read the modes from the same descriptor, but a
+    // zero-filled structure must never be applied to the terminal, so check it anyway
+    if (tcgetattr (SLang_TT_Read_FD, &new_mode) != 0)
+    {
+        const int saved_errno = errno;
+
+        SLang_reset_tty ();
+        fprintf (stderr, _ ("Cannot get terminal settings: %s\n"), unix_error_string (saved_errno));
+        exit (EXIT_FAILURE);
+    }
 
     tty_reset_prog_mode ();
     load_terminfo_keys ();
