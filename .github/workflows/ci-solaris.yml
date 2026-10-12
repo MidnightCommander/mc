@@ -40,7 +40,7 @@ jobs:
                 && \
               \
               make && \
-              make check && \
+              make check VERBOSE=1 && \
               make install \
             '
 
