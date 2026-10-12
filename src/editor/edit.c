@@ -894,7 +894,9 @@ edit_get_current_eol (WEdit *edit)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Move the cursor before the "\r" if it is between the "\r" and the "\n" of a hidden "\r\n"
- * line break, where e.g. a search can leave it.
+ * line break. A search can leave it there, but also any change that makes the line breaks of
+ * a mixed file pure "\r\n", e.g. deleting the byte between a "\r" and a "\n" or undoing its
+ * insertion. Therefore, this is checked before each command.
  */
 
 static void

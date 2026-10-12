@@ -295,6 +295,23 @@ START_TEST (test_detect_after_joining_cr_lf)
 }
 END_TEST
 
+// the cursor is left between "\r" and "\n": the next command starts before "\r"
+START_TEST (test_type_after_joining_cr_lf)
+{
+    // given: the cursor is between "\r" and "\n" of a now hidden "\r\n" line break
+    test_load_text ("a\rX\nb\r\n");
+    test_cursor_to (3);
+    edit_execute_cmd (test_edit, CK_BackSpace, -1);
+    ck_assert_int_eq (test_edit->buffer.curs1, 2);
+
+    // when
+    edit_execute_cmd (test_edit, -1, 'Q');
+
+    // then
+    test_check ("aQ\r\nb\r\n");
+}
+END_TEST
+
 /* --------------------------------------------------------------------------------------------- */
 /* edit_buffer_is_crlf() */
 
@@ -1515,6 +1532,7 @@ main (void)
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_detect, test_detect_ds);
     tcase_add_test (tc_core, test_detect_after_joining_cr_lf);
+    tcase_add_test (tc_core, test_type_after_joining_cr_lf);
     mctest_add_parameterized_test (tc_core, test_is_crlf, test_is_crlf_ds);
     mctest_add_parameterized_test (tc_core, test_trailing_ws_start, test_trailing_ws_ds);
     mctest_add_parameterized_test (tc_core, test_write_stream, test_write_ds);
