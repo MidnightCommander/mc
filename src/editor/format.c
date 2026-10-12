@@ -476,8 +476,10 @@ put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size, 
 
 /**
  * Check the line breaks of the paragraph from p up to the line break of its last line at q.
+ * A paragraph without line breaks (the last line of the text) gets the line break of the line
+ * before it, like a new line.
  *
- * @param crlf set to TRUE if all line breaks are "\r\n", to FALSE if all are "\n"
+ * @param crlf set to TRUE for "\r\n" line breaks, to FALSE for "\n" ones
  *
  * @return FALSE if the paragraph has both "\r\n" and "\n" line breaks
  */
@@ -487,15 +489,19 @@ get_paragraph_line_breaks (const edit_buffer_t *buf, off_t p, off_t q, gboolean 
 {
     gboolean lf_seen = FALSE;
     gboolean crlf_seen = FALSE;
+    off_t i;
 
-    for (; p <= q && p < buf->size; p++)
-        if (edit_buffer_get_byte (buf, p) == '\n')
+    for (i = p; i <= q && i < buf->size; i++)
+        if (edit_buffer_get_byte (buf, i) == '\n')
         {
-            if (p > 0 && edit_buffer_get_byte (buf, p - 1) == '\r')
+            if (i > 0 && edit_buffer_get_byte (buf, i - 1) == '\r')
                 crlf_seen = TRUE;
             else
                 lf_seen = TRUE;
         }
+
+    if (!crlf_seen && !lf_seen)
+        crlf_seen = edit_buffer_is_crlf (buf, p - 2);
 
     *crlf = crlf_seen;
     return !(crlf_seen && lf_seen);
@@ -545,10 +551,6 @@ format_paragraph (WEdit *edit, gboolean force)
     // a paragraph with both "\r\n" and "\n" line breaks is left as is
     if (!get_paragraph_line_breaks (&edit->buffer, p, q, &crlf))
         return;
-    // a paragraph without line breaks of its own (the last line of a text) gets "\r\n" line
-    // breaks in a file with hidden "\r\n" line breaks
-    if (edit_crlf_is_unit (edit))
-        crlf = TRUE;
 
     indent = test_indent (edit, p, q);
 

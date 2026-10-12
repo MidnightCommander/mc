@@ -1162,6 +1162,22 @@ START_TEST (test_format_last_line_crlf)
 }
 END_TEST
 
+// the last line gets the line breaks of the line before it, also in a mixed file
+START_TEST (test_format_last_line_crlf_mixed)
+{
+    // given: the last line has no line break and is longer than the wrap length
+    edit_options.word_wrap_line_length = 10;
+    test_load_text ("aa\n\r\nbbbb cccc dddd");
+    test_cursor_to (19);
+
+    // when
+    edit_execute_key_command (test_edit, CK_ParagraphFormat, -1);
+
+    // then
+    test_check ("aa\n\r\nbbbb cccc\r\ndddd");
+}
+END_TEST
+
 /* --------------------------------------------------------------------------------------------- */
 /* CK_DeleteToEnd: stop before the "\r" of a "\r\n" line break */
 
@@ -1529,6 +1545,7 @@ main (void)
     tcase_add_test (tc_core, test_column_copy_past_eof_crlf);
     tcase_add_test (tc_core, test_column_paste_from_file_past_eof_crlf);
     tcase_add_test (tc_core, test_format_last_line_crlf);
+    tcase_add_test (tc_core, test_format_last_line_crlf_mixed);
     tcase_add_test (tc_core, test_delete_to_line_end_crlf);
     tcase_add_test (tc_core, test_delete_to_line_end_lf);
     tcase_add_test (tc_core, test_end_stops_after_cr_mixed);
