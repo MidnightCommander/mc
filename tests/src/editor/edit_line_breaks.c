@@ -255,11 +255,11 @@ static const struct test_detect_ds
     { "a\rb\r", LB_MAC },
     { "a\rb", LB_MAC },
     // mixture of line breaks
-    { "a\r\nb\n", LB_ASIS },
-    { "a\nb\r\n", LB_ASIS },
-    { "a\rb\n", LB_ASIS },
-    { "a\nb\rc", LB_ASIS },
-    { "a\r\nb\rc", LB_ASIS },
+    { "a\r\nb\n", LB_MIXED },
+    { "a\nb\r\n", LB_MIXED },
+    { "a\rb\n", LB_MIXED },
+    { "a\nb\rc", LB_MIXED },
+    { "a\r\nb\rc", LB_MIXED },
 };
 
 /* @Test(dataSource = "test_detect_ds") */
@@ -282,7 +282,7 @@ START_TEST (test_detect_after_joining_cr_lf)
     // given: a mixed text, cursor is after the "X" between "\r" and "\n"
     test_load_text ("a\rX\nb\r\n");
     test_cursor_to (3);
-    ck_assert_int_eq (edit_buffer_get_line_breaks (&test_edit->buffer), LB_ASIS);
+    ck_assert_int_eq (edit_buffer_get_line_breaks (&test_edit->buffer), LB_MIXED);
 
     // when
     edit_execute_cmd (test_edit, CK_BackSpace, -1);
@@ -1196,7 +1196,7 @@ END_TEST
 /* In a file with a mixture of line breaks the "\r" of a "\r\n" pair is NOT hidden: it is shown
  * as "^M" and is edited as an ordinary character, exactly as in a file without any special line
  * break handling. The test buffers below are mixed (contain both "\r\n" and "\n"), so they are
- * LB_ASIS. */
+ * LB_MIXED. */
 
 // CK_End: the cursor stops after the visible "\r", at the "\n"
 START_TEST (test_end_stops_after_cr_mixed)

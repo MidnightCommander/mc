@@ -82,7 +82,8 @@ typedef enum
     LB_ASIS = 0,
     LB_UNIX,
     LB_WIN,
-    LB_MAC
+    LB_MAC,
+    LB_MIXED  // detected only, not a conversion mode
 } LineBreaks;
 
 typedef enum

@@ -168,7 +168,7 @@ edit_buffer_init (edit_buffer_t *buf, off_t size)
     buf->size = size;
     buf->lines = 0;
 
-    buf->lb_detected = LB_ASIS;
+    buf->lb_detected = LB_UNIX;
     buf->lb_dirty = TRUE;
 }
 
@@ -971,7 +971,7 @@ edit_buffer_trailing_ws_start (const edit_buffer_t *buf, off_t bol)
  *
  * @return LB_WIN if all line breaks are "\r\n"; LB_UNIX if all line breaks
  *         are "\n" (including buffers without any line breaks); LB_MAC if
- *         all line breaks are "\r"; LB_ASIS if the buffer uses a mixture of
+ *         all line breaks are "\r"; LB_MIXED if the buffer uses a mixture of
  *         different line breaks (such a file can only be saved as-is)
  */
 
@@ -1000,14 +1000,14 @@ edit_buffer_detect_line_breaks (const edit_buffer_t *buf)
     if (crlf > 0)
     {
         if (cr > 0 || lf > 0)
-            return LB_ASIS;  // mixture of line breaks
+            return LB_MIXED;  // mixture of line breaks
         return LB_WIN;
     }
 
     if (cr > 0)
     {
         if (lf > 0)
-            return LB_ASIS;  // mixture of line breaks
+            return LB_MIXED;  // mixture of line breaks
         return LB_MAC;
     }
 

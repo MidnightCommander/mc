@@ -162,7 +162,7 @@ edit_get_detected_line_breaks (edit_buffer_t *buf)
  * <CRLF> - Windows ("\r\n")
  * <CR>   - Macintosh ("\r")
  * <LF>   - Unix ("\n"), also if there are no line breaks
- * <?>    - mixture of line breaks
+ * <MIX>  - mixture of line breaks
  */
 
 static inline const char *
@@ -176,9 +176,9 @@ edit_line_breaks_status_sign (edit_buffer_t *buf)
         return "<CR>";
     case LB_UNIX:
         return "<LF>";
-    case LB_ASIS:
+    case LB_MIXED:
     default:
-        return "<?>";
+        return "<MIX>";
     }
 }
 
