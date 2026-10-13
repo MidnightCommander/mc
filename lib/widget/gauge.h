@@ -27,7 +27,8 @@ typedef struct WGauge
 
 /*** declarations of public functions ************************************************************/
 
-WGauge *gauge_new (int y, int x, int cols, gboolean shown, int max, int current);
+WGauge *gauge_new (int y, int x, int cols, gboolean shown, int max, int current,
+                   gboolean from_left_to_right);
 void gauge_set_value (WGauge *g, int max, int current);
 void gauge_show (WGauge *g, gboolean shown);
 
