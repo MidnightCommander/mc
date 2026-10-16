@@ -1,0 +1,348 @@
+{
+    "name": "Rosé Pine",
+    "description": "All natural pine, faux fur and a bit of soho vibes for the classy minimalist",
+    "type": "dark",
+    "project": "https://github.com/rose-pine/sublime-text",
+    "author": "Chris Hallberg <chris.hallberg@hey.com>",
+    "variables": {
+        // https://rosepinetheme.com/palette
+        "base": "#191724",
+        "surface": "#1f1d2e",
+        "overlay": "#26233a",
+        "muted": "#6e6a86",
+        "subtle": "#908caa",
+        "text": "#e0def4",
+        "love": "#eb6f92",
+        "gold": "#f6c177",
+        "rose": "#ebbcba",
+        "pine": "#31748f",
+        "foam": "#9ccfd8",
+        "iris": "#c4a7e7",
+        "highlight-low": "#21202e",
+        "highlight-med": "#403d52",
+        "highlight-high": "#524f67",
+
+        // https://rosepinetheme.com/docs/usage
+        "comments": "var(muted)",
+        "operators": "var(subtle)",
+        "punctuation": "var(subtle)",
+        "variables": "var(text)",
+        "built-ins": "var(love)",
+        "strings": "var(gold)",
+        "booleans": "var(rose)",
+        "functions": "var(pine)",
+        "keys": "var(foam)",
+        "tags": "var(foam)",
+        "parameters": "var(iris)",
+
+        // Usage notes and extrapolations
+        "borders": "var(highlight-high)",
+        "constants": "var(booleans)",
+        "links": "var(iris)",
+
+        "error": "var(love)",
+        "hint": "var(iris)",
+        "info": "var(foam)",
+        "warning": "var(gold)",
+
+        "match": "var(rose)",
+        "match_foreground": "var(base)",
+
+        // Tooltips and Extensions
+        "--redish": "var(love)",
+        "--orangish": "var(gold)",
+        "--yellowish": "var(gold)",
+        "--greenish": "var(pine)",
+        "--cyanish": "var(foam)",
+        "--bluish": "var(foam)",
+        "--purplish": "var(iris)",
+        "--pinkish": "var(love)",
+    },
+    "globals": {
+        /**
+         * all settings listed, in documentation order
+         * https://www.sublimetext.com/docs/color_schemes.html#global-settings
+         */
+
+        // Global
+        "background": "var(base)",
+        "foreground": "var(text)",
+        "invisibles": "var(overlay)",
+        "caret": "var(text)",
+        "block_caret": "var(highlight-high)",
+        "block_caret_border": "var(highlight-high)",
+        "block_caret_underline": "var(text)",
+        "block_caret_corner_style": "square",
+        "line_highlight": "var(highlight-low)",
+
+        // Accents
+        "misspelling": "var(love)",
+        "fold_marker": "var(iris)",
+        "minimap_border": "var(borders)",
+        "accent": "var(foam)", // interface colors
+
+        // Gutter
+        "gutter": "var(surface)", // background
+        "gutter_foreground": "var(muted)",
+        "gutter_foreground_highlight": "var(info)",
+
+        // Diff
+        "line_diff_width": "4",
+        "line_diff_added": "var(foam)",
+        "line_diff_deleted": "var(love)",
+        "line_diff_modified": "var(rose)",
+
+        // Selection
+        "selection": "var(highlight-med)",
+        "selection_foreground": "var(text)",
+        "selection_border": "var(highlight-med)",
+        "selection_border_width": "1",
+        "inactive_selection": "var(highlight-med)",
+        "inactive_selection_border": "var(highlight-med)",
+        "inactive_selection_foreground": "var(text)",
+        "selection_corner_style": "rounded",
+        "selection_corner_radius": "2", // default
+
+        // Find
+        "highlight": "var(match)",
+        "find_highlight": "var(match)",
+        "find_highlight_foreground": "var(match_foreground)",
+        "scroll_highlight": "var(match)",
+        "scroll_selected_highlight": "var(match)",
+
+        // Rulers and Guides
+        "rulers": "var(borders)",
+        "guide": "var(borders)",
+        "active_guide": "var(borders)",
+        "stack_guide": "var(borders)",
+
+        // Brackets
+        "brackets_options": "underline",
+        "brackets_foreground": "var(info)",
+        "bracket_contents_options": "underline",
+        "bracket_contents_foreground": "var(info)",
+
+        // Tags
+        "tags_options": "underline",
+        "tags_foreground": "var(tags)",
+
+        // Shadow (to the right when text overflows)
+        "shadow": "var(highlight-high)",
+        "shadow_width": "2",
+    },
+    "rules": [
+        /**
+         * Minimal Scope Coverage
+         * https://www.sublimetext.com/docs/scope_naming.html#minimal-scope-coverage
+         *
+         * Sorted by increasing specificity.
+         */
+        {
+            "name": "Built-Ins",
+            "scope": "keyword, storage, support, constant.language, entity.other, keyword.control, keyword.declaration, storage.modifier, storage.type, variable.language",
+            "foreground": "var(built-ins)"
+        },
+        {
+            "name": "Comments",
+            "scope": "comment, punctuation.definition.comment",
+            "foreground": "var(comments)"
+        },
+        {
+            "name": "Constants",
+            "scope": "constant, constant.numeric, support.constant, constant.character.escape",
+            "foreground": "var(booleans)"
+        },
+        {
+            "name": "Functions",
+            "scope": "support.function, variable.function",
+            "foreground": "var(functions)"
+        },
+        {
+            "name": "Operators",
+            "scope": "keyword.operator",
+            "foreground": "var(operators)"
+        },
+        {
+            "name": "Parameters",
+            "scope": "variable.parameter, entity.other.attribute-name",
+            "foreground": "var(parameters)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Punctuation",
+            "scope": "punctuation",
+            "foreground": "var(punctuation)"
+        },
+        {
+            "name": "Strings",
+            "scope": "string",
+            "foreground": "var(strings)"
+        },
+        {
+            "name": "Tags",
+            "scope": "entity.name, entity.name.tag, entity.name.section, entity.other",
+            "foreground": "var(tags)"
+        },
+        {
+            "name": "Variables",
+            "scope": "variable",
+            "foreground": "var(variables)"
+        },
+        {
+            "name": "Invalid",
+            "scope": "invalid",
+            "foreground": "var(rose)"
+        },
+        {
+            "name": "Deprecated",
+            "scope": "invalid.deprecated",
+            "foreground": "var(pine)"
+        },
+
+        // Diffs
+        {
+            "name": "diff: header",
+            "scope": "meta.diff, meta.diff.header",
+            "foreground": "var(muted)"
+        },
+        {
+            "name": "diff: range",
+            "scope": "meta.diff.range",
+            "foreground": "var(pine)"
+        },
+        {
+            "name": "diff: deleted",
+            "scope": "markup.deleted",
+            "foreground": "var(love)"
+        },
+        {
+            "name": "diff: changed",
+            "scope": "markup.changed",
+            "foreground": "var(rose)"
+        },
+        {
+            "name": "diff: inserted",
+            "scope": "markup.inserted",
+            "foreground": "var(foam)"
+        },
+        {
+            "name": "Warning",
+            "scope": "markup.warning",
+            "foreground": "var(gold)"
+        },
+        {
+            "name": "Error",
+            "scope": "markup.error",
+            "foreground": "var(love)"
+        },
+
+        /**
+         * Enhancements
+         */
+
+        // Keys
+
+        {
+            "name": "JSON keys",
+            "scope": "meta.mapping.key string",
+            "foreground": "var(keys)"
+        },
+
+        // from rose-pine.tmTheme by That1Calculator
+
+        {
+            "name": "Links",
+            "scope": "meta.link, markup.underline.link",
+            "foreground": "var(links)",
+        },
+        {
+            "name": "Language methods",
+            "scope": "variable.language",
+            "font_style": "italic",
+        },
+        {
+            "name": "Namespace",
+            "scope": "support.other.namespace",
+            "foreground": "var(text)",
+        },
+        {
+            "name": "Inherited class",
+            "scope": "support.class",
+            "foreground": "var(foam)",
+            "font_style": "italic",
+        },
+        {
+            "name": "Storage modifiers and types",
+            "scope": "storage.modifier, storage.type, keyword.declaration.function",
+            "font_style": "italic",
+        },
+
+        // Markdown
+
+        {
+            "name": "Markdown bold",
+            "scope": "markup.bold",
+            "foreground": "var(gold)",
+            "font_style": "bold",
+        },
+        {
+            "name": "Markdown italic",
+            "scope": "markup.italic",
+            "foreground": "var(foam)",
+            "font_style": "italic",
+        },
+        {
+            "name": "Markdown headings",
+            "scope": "markup.heading",
+            "font_style": "bold",
+        },
+        {
+            "name": "Markdown headings",
+            "scope": "markup.heading punctuation.definition.heading",
+            "foreground": "var(rose)",
+            "font_style": "normal",
+        },
+        {
+            "name": "Markdown link href",
+            "scope": "markup.underline.link",
+            "foreground": "var(pine)",
+            "font_style": "underline",
+        },
+        {
+            "name": "Markdown ordered list markers",
+            "scope": "markup.list.numbered.bullet",
+            "foreground": "var(punctuation)",
+        },
+        {
+            "name": "Markdown quote",
+            "scope": "markup.quote",
+            "foreground": "var(rose)",
+            "font_style": "italic",
+        },
+        {
+            "name": "Markdown quote punctuation",
+            "scope": "punctuation.definition.blockquote",
+            "foreground": "var(rose)",
+            "background": "var(rose)",
+            "thankyou": "Dracula Theme",
+        },
+        {
+            "name": "Markdown raw",
+            "scope": "markup.raw",
+            "foreground": "var(love)",
+        },
+
+        // Find results
+
+        {
+            "name": "Find line number",
+            "scope": "constant.numeric.line-number",
+            "foreground": "var(muted)",
+        },
+        {
+            "name": "Find match line number",
+            "scope": "constant.numeric.line-number.match",
+            "foreground": "var(booleans)",
+        },
+    ]
+}

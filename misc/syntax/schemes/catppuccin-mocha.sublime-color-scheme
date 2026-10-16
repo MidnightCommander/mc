@@ -1,0 +1,578 @@
+{
+    "name": "Catppuccin",
+    "author": "Catppuccin Org",
+
+    "variables": {
+        "rosewater": "#f5e0dc",
+        "flamingo": "#f2cdcd",
+        "pink": "#f5c2e7",
+        "mauve": "#cba6f7",
+        "red": "#f38ba8",
+        "maroon": "#eba0ac",
+        "peach": "#fab387",
+        "yellow": "#f9e2af",
+        "green": "#a6e3a1",
+        "teal": "#94e2d5",
+        "sky": "#89dceb",
+        "sapphire": "#74c7ec",
+        "blue": "#89b4fa",
+        "lavender": "#b4befe",
+        "text": "#cdd6f4",
+        "subtext1": "#bac2de",
+        "subtext0": "#a6adc8",
+        "overlay2": "#9399b2",
+        "overlay1": "#7f849c",
+        "overlay0": "#6c7086",
+        "surface2": "#585b70",
+        "surface1": "#45475a",
+        "surface0": "#313244",
+        "base": "#1e1e2e",
+        "mantle": "#181825",
+        "crust": "#11111b"
+    },
+
+    "globals": {
+        "foreground": "var(text)",
+        "background": "var(base)",
+        "caret": "var(subtext1)",
+        "invisibles": "color(var(overlay2) alpha(0.4))",
+        "gutter_foreground": "var(overlay2)",
+        "gutter_foreground_highlight": "var(lavender)",
+        "line_highlight": "color(var(text) alpha(0.07))",
+        "selection": "color(var(overlay1) alpha(0.4))",
+        "selection_border": "var(base)",
+        "active_guide": "color(var(peach) alpha(0.5))",
+        "find_highlight_foreground": "var(mantle)",
+        "find_highlight": "var(yellow)",
+        "brackets_options": "underline",
+        "brackets_foreground": "color(var(overlay2) alpha(0.5))",
+        "bracket_contents_options": "underline",
+        "bracket_contents_foreground": "color(var(overlay2) alpha(0.5))",
+        "tags_options": "stippled_underline"
+    },
+    "rules": [
+        {
+            "scope": "meta.semantic-token",
+            "background": "#00000101"
+        },
+        {
+            "name": "Comment",
+            "scope": "comment",
+            "foreground": "var(overlay2)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Shebang",
+            "scope": "comment.line.shebang.shell, constant.language.shebang",
+            "foreground": "var(pink)",
+            "font_style": "italic"
+        },
+        {
+            "name": "String",
+            "scope": "string",
+            "foreground": "var(green)"
+        },
+        {
+            "name": "String regex",
+            "scope": "string.regexp",
+            "foreground": "var(pink)"
+        },
+        {
+            "name": "Number",
+            "scope": "constant.numeric",
+            "foreground": "var(peach)"
+        },
+        {
+            "name": "Boolean",
+            "scope": "constant.language.boolean",
+            "foreground": "var(peach)",
+            "font_style": "bold italic"
+        },
+        {
+            "name": "Built-in constant",
+            "scope": "constant.language",
+            "foreground": "var(peach)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Built-in function",
+            "scope": "support.function.builtin",
+            "foreground": "var(peach)",
+            "font_style": "italic"
+        },
+        {
+            "name": "User-defined constant",
+            "scope": "variable.other.constant, entity.name.constant",
+            "foreground": "var(peach)"
+        },
+        {
+            "name": "Symbol",
+            "scope": "constant.other.symbol",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "Keyword",
+            "scope": "keyword",
+            "foreground": "var(mauve)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Conditional/loop",
+            "scope": "keyword.control.loop, keyword.control.conditional",
+            "foreground": "var(mauve)",
+            "font_style": "bold"
+        },
+        {
+            "name": "Return",
+            "scope": "keyword.control.return, keyword.control.flow.return",
+            "foreground": "var(mauve)",
+            "font_style": "bold"
+        },
+        {
+            "name": "Variable declaration",
+            "scope": "keyword.declaration",
+            "foreground": "var(mauve)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Class declaration",
+            "scope": "keyword.declaration.class",
+            "foreground": "var(mauve)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Function declaration",
+            "scope": "keyword.declaration.function",
+            "foreground": "var(mauve)",
+            "font_style": "italic"
+        },
+        {
+            "name": "C++ directive (define, ifdef, ...)",
+            "scope": "keyword.control.import.c++, keyword.control.import.define.c++, keyword.control.import.include.c++, keyword.control.import.include.c",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "C# type/variable declaration keywords",
+            "scope": "storage.type.delegate, storage.type.variable",
+            "foreground": "var(mauve)"
+        },
+        {
+            "name": "Exception",
+            "scope": "support.type.exception",
+            "foreground": "var(peach)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Keyword operator",
+            "scope": "keyword.operator.word",
+            "foreground": "var(mauve)"
+        },
+        {
+            "name": "Operator",
+            "scope": "punctuation.accessor, keyword.operator",
+            "foreground": "var(teal)"
+        },
+        {
+            "name": "Punctuation separator",
+            "scope": "punctuation.separator - (punctuation.separator.path)",
+            "foreground": "var(overlay2)"
+        },
+        {
+            "name": "Punctuation terminator",
+            "scope": "punctuation.terminator",
+            "foreground": "var(overlay2)"
+        },
+        {
+            "name": "Punctuation bracket",
+            "scope": "punctuation.section",
+            "foreground": "var(overlay2)"
+        },
+        {
+            "name": "Import/include",
+            "scope": "keyword.control.import, keyword.control.import.include",
+            "foreground": "var(mauve)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Storage",
+            "scope": "storage",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "Storage type",
+            "scope": "storage.type",
+            "foreground": "var(yellow)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Storage modifier",
+            "scope": "storage.modifier",
+            "foreground": "var(mauve)"
+        },
+        {
+            "name": "Storage type namespace",
+            "scope": "entity.name.namespace",
+            "foreground": "var(yellow)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Storage type class",
+            "scope": "storage.type.class",
+            "foreground": "var(rosewater)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Label",
+            "scope": "entity.name.label",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "Class name",
+            "scope": "entity.name.class, meta.toc-list.full-identifier",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "Function name",
+            "scope": "entity.name.function, variable.function, support.function",
+            "foreground": "var(blue)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Function macro",
+            "scope": "entity.name.function.preprocessor",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "Library constant",
+            "scope": "support.constant",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "Class/type identifier",
+            "scope": "support.type, support.class, entity.name.type, entity.name.struct, entity.name.impl, entity.name.trait, entity.name.union, meta.enum, entity.other.inherited-class, variable.other.member.delegate.cs",
+            "foreground": "var(yellow)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Builtin type",
+            "scope": "storage.type.primitive, support.type.primitive, support.type.builtin, storage.type.c, storage.type.cs, support.type.python",
+            "foreground": "var(mauve)"
+        },
+        {
+            "name": "Library variable",
+            "scope": "support.other.variable"
+        },
+        {
+            "name": "Unquoted keys",
+            "scope": "meta.mapping.key string.unquoted",
+            "foreground": "var(text)"
+        },
+        {
+            "name": "Variable parameter",
+            "scope": "variable.parameter, variable.parameter.function",
+            "foreground": "var(maroon)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Variable field",
+            "scope": "variable.other.member",
+            "foreground": "var(text)"
+        },
+        {
+            "name": "Variable language (builtin)",
+            "scope": "variable.language",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "Annotation (decorator)",
+            "scope": "variable.annotation, punctuation.definition.annotation",
+            "foreground": "var(peach)"
+        },
+        {
+            "name": "C/Rust attribute",
+            "scope": "variable.annotation.rust, variable.annotation.cs, punctuation.definition.annotation.rust",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "Python variable identifier",
+            "scope": "meta.generic-name",
+            "foreground": "var(text)"
+        },
+        {
+            "name": "Python docstring",
+            "scope": "source.python comment.block.documentation",
+            "foreground": "var(green)"
+        },
+        {
+            "name": "Tag name",
+            "scope": "entity.name.tag",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "Tag attribute",
+            "scope": "entity.other.attribute-name",
+            "foreground": "var(yellow)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Tag delimiters and attribute key/value separators",
+            "scope": "punctuation.definition.tag, punctuation.separator.key-value",
+            "foreground": "var(teal)"
+        },
+        {
+            "name": "Markdown URL",
+            "scope": "markup.underline.link",
+            "foreground": "var(blue)",
+            "font_style": "italic underline"
+        },
+        {
+            "name": "Markdown reference",
+            "scope": "meta.link.inline.description, meta.image.inline.description",
+            "foreground": "var(lavender)"
+        },
+        {
+            "name": "Markdown raw code",
+            "scope": "markup.raw.code-fence",
+            "foreground": "var(text)"
+        },
+        {
+            "name": "Markdown inline code",
+            "scope": "markup.raw.inline",
+            "foreground": "var(green)"
+        },
+        {
+            "name": "Markdown code fence definition",
+            "scope": "meta.code-fence.definition",
+            "foreground": "var(overlay2)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Markdown code fence definition language",
+            "scope": "constant.other.language-name.markdown",
+            "foreground": "var(sky)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Markdown heading 1",
+            "scope": "markup.heading.1",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "Markdown heading 2",
+            "scope": "markup.heading.2",
+            "foreground": "var(peach)"
+        },
+        {
+            "name": "Markdown heading 3",
+            "scope": "markup.heading.3",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "Markdown heading 4",
+            "scope": "markup.heading.4",
+            "foreground": "var(green)"
+        },
+        {
+            "name": "Markdown heading 5",
+            "scope": "markup.heading.5",
+            "foreground": "var(sapphire)"
+        },
+        {
+            "name": "Markdown heading 6",
+            "scope": "markup.heading.6",
+            "foreground": "var(lavender)"
+        },
+        {
+            "name": "Markdown emphasis",
+            "scope": "markup.italic",
+            "foreground": "var(maroon)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Markdown strong",
+            "scope": "markup.bold",
+            "foreground": "var(maroon)",
+            "font_style": "bold"
+        },
+        {
+            "name": "Escape",
+            "scope": "constant.character.escape",
+            "foreground": "var(pink)"
+        },
+        {
+            "name": "Bash built-in function",
+            "scope": "meta.function-call.identifier.shell support.function",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "Bash parameter",
+            "scope": "variable.language.shell",
+            "foreground": "var(red)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Lua field",
+            "scope": "source.lua meta.function.lua meta.block.lua meta.mapping.value.lua meta.mapping.key.lua string.unquoted.key.lua",
+            "foreground": "var(lavender)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Lua constructor",
+            "scope": "source.lua meta.function.lua meta.block.lua meta.mapping.key.lua string.unquoted.key.lua",
+            "foreground": "var(flamingo)"
+        },
+        {
+            "name": "Java constant",
+            "scope": "entity.name.constant.java",
+            "foreground": "var(teal)"
+        },
+        {
+            "name": "Java void keyword",
+            "scope": "storage.type.void.java",
+            "foreground": "var(mauve)"
+        },
+        {
+            "name": "CSS property",
+            "scope": "support.type.property-name.css, meta.property-name.css entity.other.custom-property.css",
+            "foreground": "var(blue)",
+            "font_style": "italic"
+        },
+        {
+            "name": "CSS property vendor prefix",
+            "scope": "support.type.vendor-prefix.css",
+            "foreground": "var(sky)",
+            "font_style": "italic"
+        },
+        {
+            "name": "CSS variable usage",
+            "scope": "variable.other.custom-property.css",
+            "foreground": "var(maroon)",
+            "font_style": "italic"
+        },
+        {
+            "name": "CSS var function",
+            "scope": "support.function.var.css",
+            "foreground": "var(blue)",
+            "font_style": "italic"
+        },
+        {
+            "name": "CSS constant",
+            "scope": "support.constant.property-value.css",
+            "foreground": "var(text)"
+        },
+        {
+            "name": "CSS unit suffix",
+            "scope": "constant.numeric.suffix.css, keyword.other.unit.css",
+            "foreground": "var(mauve)",
+            "font_style": "italic"
+        },
+        {
+            "name": "SCSS tag",
+            "scope": "entity.name.tag.css",
+            "foreground": "var(lavender)"
+        },
+        {
+            "name": "Sass/SCSS variable",
+            "scope": "variable.other.sass, variable.other.scss",
+            "foreground": "var(maroon)"
+        },
+        {
+            "name": "SCSS mixin",
+            "scope": "entity.name.mixin.scss, variable.other.mixin.scss",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "Rust macro",
+            "scope": "support.macro.rust",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "Rust macro definition parameters",
+            "scope": "meta.macro.rust meta.macro.matchers.rust variable.parameter.rust",
+            "foreground": "var(pink)"
+        },
+        {
+            "name": "Generic/type parameter angle brackets",
+            "scope": "punctuation.definition.generic",
+            "foreground": "var(teal)"
+        },
+        {
+            "name": "Invalid",
+            "scope": "invalid",
+            "foreground": "var(text)",
+            "background": "var(red)"
+        },
+        {
+            "name": "Invalid deprecated",
+            "scope": "invalid.deprecated",
+            "foreground": "var(text)",
+            "background": "var(mauve)"
+        },
+        {
+            "name": "Diff header",
+            "scope": "meta.diff, meta.diff.header",
+            "foreground": "var(overlay1)"
+        },
+        {
+            "name": "Diff deleted",
+            "scope": "markup.deleted",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "Diff inserted",
+            "scope": "markup.inserted",
+            "foreground": "var(green)"
+        },
+        {
+            "name": "Diff changed",
+            "scope": "markup.changed",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "Message error",
+            "scope": "message.error",
+            "foreground": "var(red)"
+        },
+        {
+            "name": "JSON keys",
+            "scope": "source.json meta.mapping.key string",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "JSON key surrounding quotes",
+            "scope": "source.json meta.mapping.key punctuation.definition.string.begin, source.json meta.mapping.key punctuation.definition.string.end",
+            "foreground": "var(overlay2)"
+        },
+        {
+            "name": "YAML unquoted keys",
+            "scope": "source.yaml meta.mapping.key string.unquoted",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "YAML anchor/reference",
+            "scope": "variable.other.alias, entity.name.other.anchor",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "Python double underscore functions",
+            "scope": "support.function.magic.python",
+            "foreground": "var(sky)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Javadoc, JSDoc",
+            "scope": "entity.name.tag.documentation, entity.other.attribute-name.documentation.js",
+            "foreground": "var(mauve)"
+        },
+        {
+            "name": "TOML datetime",
+            "scope": "constant.other.datetime.toml",
+            "foreground": "var(pink)"
+        },
+        {
+            "name": "TOML table name",
+            "scope": "entity.name.table.toml",
+            "foreground": "var(yellow)"
+        },
+    ]
+}

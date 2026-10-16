@@ -1,0 +1,35 @@
+// Dracula, from the official palette (https://draculatheme.com/contribute)
+{
+  "name": "Dracula",
+  "variables": {
+    "background": "#282a36",
+    "foreground": "#f8f8f2",
+    "comment": "#6272a4",
+    "cyan": "#8be9fd",
+    "green": "#50fa7b",
+    "orange": "#ffb86c",
+    "pink": "#ff79c6",
+    "purple": "#bd93f9",
+    "red": "#ff5555",
+    "yellow": "#f1fa8c",
+  },
+  "globals": {
+    "foreground": "var(foreground)",
+    "background": "var(background)",
+  },
+  "rules": [
+    { "scope": "comment", "foreground": "var(comment)" },
+    { "scope": "string", "foreground": "var(yellow)" },
+    { "scope": "constant", "foreground": "var(purple)" },
+    { "scope": "constant.character.escape, constant.other.placeholder", "foreground": "var(pink)" },
+    { "scope": "keyword, storage", "foreground": "var(pink)" },
+    { "scope": "storage.type", "foreground": "var(cyan)", "font_style": "italic" },
+    { "scope": "variable.language", "foreground": "var(purple)", "font_style": "italic" },
+    { "scope": "variable.parameter", "foreground": "var(orange)", "font_style": "italic" },
+    { "scope": "entity.name.function, support.function", "foreground": "var(green)" },
+    { "scope": "entity.name, support.type, support.class", "foreground": "var(cyan)" },
+    { "scope": "punctuation", "foreground": "var(foreground)" },
+    { "scope": "meta.preprocessor", "foreground": "var(pink)" },
+    { "scope": "invalid", "foreground": "var(foreground)", "background": "var(red)" },
+  ],
+}
