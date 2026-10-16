@@ -1,6 +1,10 @@
 
 SUBDIRS = local
 
+if ENABLE_VFS_CPIO
+SUBDIRS += cpio
+endif
+
 if ENABLE_VFS_EXTFS
 SUBDIRS += extfs
 endif
