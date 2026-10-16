@@ -1,0 +1,26 @@
+name: Syntax tokens
+
+on:
+  push:
+    paths:
+      - "misc/syntax/**"
+      - ".github/workflows/syntax-tokens.yml"
+  pull_request:
+    paths:
+      - "misc/syntax/**"
+      - ".github/workflows/syntax-tokens.yml"
+
+jobs:
+  check-tokens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v7
+
+      # Literal foreground colors are rejected, including rules marked "# TODO scope"
+      - name: Check syntax files use scope tokens
+        run: python3 misc/syntax/check-tokens.py --strict
