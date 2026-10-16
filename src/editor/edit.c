@@ -67,7 +67,8 @@
 #include "editsearch.h"
 #include "editcomplete.h"  // edit_complete_word_cmd()
 #include "editmacros.h"
-#include "etags.h"  // edit_get_match_keyword_cmd()
+#include "etags.h"          // edit_get_match_keyword_cmd()
+#include "syntax_scheme.h"  // syntax_scheme_done()
 #ifdef HAVE_ASPELL
 #include "spell.h"
 #endif
@@ -97,6 +98,7 @@ edit_options_t edit_options = {
     .backup_ext = NULL,
     .filesize_threshold = NULL,
     .stop_format_chars = NULL,
+    .syntax_color_scheme = NULL,
     .visible_tabs = TRUE,
     .visible_tws = TRUE,
     .show_right_margin = FALSE,
@@ -3961,6 +3963,9 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
     case CK_SyntaxChoose:
         edit_syntax_dialog (edit);
         break;
+    case CK_SyntaxSchemeChoose:
+        edit_syntax_scheme_dialog (edit);
+        break;
 
     case CK_Search:
         edit_search_cmd (edit, FALSE);
@@ -4142,6 +4147,8 @@ edit_stack_free (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
         vfs_path_free (edit_history_moveto[edit_stack_iterator].file_vpath, TRUE);
+
+    syntax_scheme_done ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

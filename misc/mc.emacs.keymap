@@ -369,6 +369,7 @@ ShowNumbers = alt-n
 ShowTabTws = alt-underline
 SyntaxOnOff = ctrl-s
 # SyntaxChoose =
+SyntaxSchemeChoose = alt-shift-s
 # ShowMargin =
 Find = alt-enter
 FilePrev = alt-minus

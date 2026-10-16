@@ -66,6 +66,7 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#include "syntax_scheme.h"
 
 /*** global variables ****************************************************************************/
 
@@ -152,6 +153,11 @@ typedef struct
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
+
+/* state of the color scheme dialog */
+static WGroup *scheme_dialog_editors = NULL;
+static WListbox *scheme_dialog_list = NULL;
+static const GPtrArray *scheme_dialog_names = NULL;
 
 static char *error_file_name = NULL;
 
@@ -844,7 +850,7 @@ this_try_alloc_color_pair (tty_color_pair_t *color)
     if (color->attrs != NULL && *color->attrs == '\0')
         color->attrs = NULL;
 
-    if (color->fg == NULL && color->bg == NULL)
+    if (color->fg == NULL && color->bg == NULL && color->attrs == NULL)
         return EDITOR_NORMAL_COLOR;
 
     if (color->fg != NULL)
@@ -910,6 +916,32 @@ this_try_alloc_color_pair (tty_color_pair_t *color)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Allocate color of context or keyword.  If the foreground is a scope token
+ * (e.g. KEYWORD_CONTROL), colors are taken from the color scheme;
+ * explicitly given background and attributes still take precedence.
+ * ctx_token is the scope token of the enclosing context or NULL.
+ */
+
+static int
+syntax_alloc_color (tty_color_pair_t *color, const char *ctx_token)
+{
+    syntax_scheme_style_t style;
+
+    if (syntax_scheme_is_scope_token (color->fg))
+    {
+        syntax_scheme_lookup (ctx_token, color->fg, &style);
+        color->fg = style.fg;
+        if (color->bg == NULL || *color->bg == '\0')
+            color->bg = style.bg;
+        if (color->attrs == NULL || *color->attrs == '\0')
+            color->attrs = style.attrs;
+    }
+
+    return this_try_alloc_color_pair (color);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static FILE *
 open_include_file (const char *filename)
@@ -960,6 +992,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
     char last_fg[BUF_TINY / 2] = "";
     char last_bg[BUF_TINY / 2] = "";
     char last_attrs[BUF_TINY] = "";
+    char last_scope[BUF_TINY] = "";
     char whole_right[BUF_MEDIUM];
     char whole_left[BUF_MEDIUM];
     char *l = NULL;
@@ -1136,7 +1169,9 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
             g_strlcpy (last_fg, color.fg != NULL ? color.fg : "", sizeof (last_fg));
             g_strlcpy (last_bg, color.bg != NULL ? color.bg : "", sizeof (last_bg));
             g_strlcpy (last_attrs, color.attrs != NULL ? color.attrs : "", sizeof (last_attrs));
-            k->color = this_try_alloc_color_pair (&color);
+            g_strlcpy (last_scope, syntax_scheme_is_scope_token (color.fg) ? color.fg : "",
+                       sizeof (last_scope));
+            k->color = syntax_alloc_color (&color, NULL);
             k->keyword = g_string_new (" ");
             check_not_a;
         }
@@ -1203,7 +1238,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
                 color.bg = last_bg;
             if (color.attrs == NULL)
                 color.attrs = last_attrs;
-            k->color = this_try_alloc_color_pair (&color);
+            k->color = syntax_alloc_color (&color, last_scope);
             check_not_a;
         }
         else if (*(args[0]) == '#')
@@ -1478,6 +1513,56 @@ exec_edit_syntax_dialog (const GPtrArray *names, const char *current_syntax)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+scheme_reload_editor (void *data, void *user_data)
+{
+    (void) user_data;
+
+    if (edit_widget_is_editor (CONST_WIDGET (data)))
+    {
+        WEdit *edit = EDIT (data);
+
+        edit_load_syntax (edit, NULL, edit->syntax_type);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* make the scheme of list entry @n current and repaint all editors */
+static void
+scheme_apply (const GPtrArray *names, int n)
+{
+    const char *name;
+
+    name = n <= 0 ? "" : (const char *) g_ptr_array_index (names, n - 1);
+    if (edit_options.syntax_color_scheme != NULL
+        && strcmp (edit_options.syntax_color_scheme, name) == 0)
+        return;
+
+    g_free (edit_options.syntax_color_scheme);
+    edit_options.syntax_color_scheme = g_strdup (name);
+
+    g_list_foreach (GROUP (scheme_dialog_editors)->widgets, scheme_reload_editor, NULL);
+    do_refresh ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* preview the scheme as the selection moves */
+static cb_ret_t
+scheme_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
+{
+    if (msg == MSG_NOTIFY && parm == 0 && sender != NULL && sender == WIDGET (scheme_dialog_list))
+    {
+        scheme_apply (scheme_dialog_names, scheme_dialog_list->current);
+        return MSG_HANDLED;
+    }
+
+    return dlg_default_callback (w, sender, msg, parm, data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1633,6 +1718,61 @@ edit_syntax_dialog (WEdit *edit)
         g_free (current_syntax);
     }
 
+    g_ptr_array_free (names, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/** Choose color scheme for scope tokens; the editors follow the selection live */
+
+void
+edit_syntax_scheme_dialog (WEdit *edit)
+{
+    GPtrArray *names;
+    Listbox *list;
+    char *saved;
+    int i, n;
+
+    names = syntax_scheme_list ();
+    saved =
+        g_strdup (edit_options.syntax_color_scheme != NULL ? edit_options.syntax_color_scheme : "");
+
+    list = listbox_window_new (LIST_LINES, MAX_ENTRY_LEN, _ ("Choose color scheme"), NULL);
+    LISTBOX_APPEND_TEXT (list, 'D', _ ("< Default >"), NULL, FALSE);
+    for (i = 0; i < (int) names->len; i++)
+    {
+        const char *name = g_ptr_array_index (names, i);
+
+        LISTBOX_APPEND_TEXT (list, 0, name, NULL, FALSE);
+        if (strcmp (name, saved) == 0)
+            listbox_set_current (list->list, i + 1);
+    }
+
+    scheme_dialog_editors = GROUP (WIDGET (edit)->owner);
+    scheme_dialog_list = list->list;
+    scheme_dialog_names = names;
+    WIDGET (list->dlg)->callback = scheme_dialog_callback;
+
+    n = listbox_run (list);
+
+    if (n >= 0)
+        scheme_apply (names, n);
+    else
+    {
+        // cancelled: back to the original scheme
+        GPtrArray *orig;
+
+        orig = g_ptr_array_new ();
+        g_ptr_array_add (orig, saved);
+        scheme_apply (orig, *saved == '\0' ? 0 : 1);
+        g_ptr_array_free (orig, TRUE);
+    }
+
+    scheme_dialog_editors = NULL;
+    scheme_dialog_list = NULL;
+    scheme_dialog_names = NULL;
+    g_free (saved);
     g_ptr_array_free (names, TRUE);
 }
 
