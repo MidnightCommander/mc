@@ -290,6 +290,14 @@ applies individually to each of these three properties.
         bookmarkfound
             Lines as the result of "Find all"
 
+        syntax_scheme
+            Not a color pair: the name of a .sublime-color-scheme file used
+            to color the scope tokens in syntax files, looked up in
+            ~/.local/share/mc/syntax/schemes/, then in the system
+            syntax/schemes/ directory. The editor option
+            editor_syntax_color_scheme overrides it. Empty or absent means
+            the classic mcedit colors.
+
 
     [viewer]
         Built-in viewer, or mcview.

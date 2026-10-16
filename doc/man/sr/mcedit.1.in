@@ -274,34 +274,34 @@ file .\e*\e\e.c C\esProgram\esFile (#include|/\e\e\e*)
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
 # подразумеване боје
-define  comment   brown
+define  comment   COMMENT_BLOCK
 context default
-  keyword  whole  if       yellow
-  keyword  whole  else     yellow
-  keyword  whole  for      yellow
-  keyword  whole  while    yellow
-  keyword  whole  do       yellow
-  keyword  whole  switch   yellow
-  keyword  whole  case     yellow
-  keyword  whole  static   yellow
-  keyword  whole  extern   yellow
-  keyword         {        brightcyan
-  keyword         }        brightcyan
-  keyword         '*'      green
+  keyword  whole  if       KEYWORD_CONTROL
+  keyword  whole  else     KEYWORD_CONTROL
+  keyword  whole  for      KEYWORD_CONTROL
+  keyword  whole  while    KEYWORD_CONTROL
+  keyword  whole  do       KEYWORD_CONTROL
+  keyword  whole  switch   KEYWORD_CONTROL
+  keyword  whole  case     KEYWORD_CONTROL
+  keyword  whole  static   STORAGE_MODIFIER
+  keyword  whole  extern   STORAGE_MODIFIER
+  keyword         {        PUNCTUATION_SECTION
+  keyword         }        PUNCTUATION_SECTION
+  keyword         '*'      CONSTANT_CHARACTER
 
 # C коментари
 context /\e* \e*/ comment
 
 # C претпроцесорске директиве
-context linestart # \en red
-  keyword  \e\e\en  brightred
+context linestart # \en META_PREPROCESSOR
+  keyword  \e\e\en  PUNCTUATION_SEPARATOR_CONTINUATION
 
 # C константне ниске
-context " " green
-  keyword  %d    brightgreen
-  keyword  %s    brightgreen
-  keyword  %c    brightgreen
-  keyword  \e\e"   brightgreen
+context " " STRING_QUOTED_DOUBLE
+  keyword  %d    CONSTANT_OTHER_PLACEHOLDER
+  keyword  %s    CONSTANT_OTHER_PLACEHOLDER
+  keyword  %c    CONSTANT_OTHER_PLACEHOLDER
+  keyword  \e\e"   CONSTANT_CHARACTER_ESCAPE
 .fi
 .PP
 Сваки контекст почиње линијом облика:
@@ -370,13 +370,13 @@ tab\-ове и размаке преко секвенци \et и \es. Знако
 знакова. На пример,
 .PP
 .nf
-  keyword         '*'      green
+  keyword         '*'      CONSTANT_CHARACTER
 .fi
 .PP
 боји све знаковне константе у C\-у зелено. Можете користити и
 .PP
 .nf
-  keyword         "*"      green
+  keyword         "*"      STRING_QUOTED_DOUBLE
 .fi
 .PP
 да бисте обојили константне ниске, али нисци која се упоређује неће бити
@@ -387,7 +387,7 @@ tab\-ове и размаке преко секвенци \et и \es. Знако
 Битно је истаћи линију
 .PP
 .nf
-  keyword  \e\e\en  brightgreen
+  keyword  \e\e\en  PUNCTUATION_SEPARATOR_CONTINUATION
 .fi
 .PP
 Ова линија дефинише кључну реч која садржи обрнуту косу црту и знак за нови ред.

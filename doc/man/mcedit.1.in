@@ -293,35 +293,35 @@ file .\e*\e\e.c C\esProgram\esFile (#include|/\e\e\e*)
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
-# default colors
-define  comment   brown
+# default context
+define  comment   COMMENT_BLOCK
 context default
-  keyword  whole  if       yellow
-  keyword  whole  else     yellow
-  keyword  whole  for      yellow
-  keyword  whole  while    yellow
-  keyword  whole  do       yellow
-  keyword  whole  switch   yellow
-  keyword  whole  case     yellow
-  keyword  whole  static   yellow
-  keyword  whole  extern   yellow
-  keyword         {        brightcyan
-  keyword         }        brightcyan
-  keyword         '*'      green
+  keyword  whole  if       KEYWORD_CONTROL
+  keyword  whole  else     KEYWORD_CONTROL
+  keyword  whole  for      KEYWORD_CONTROL
+  keyword  whole  while    KEYWORD_CONTROL
+  keyword  whole  do       KEYWORD_CONTROL
+  keyword  whole  switch   KEYWORD_CONTROL
+  keyword  whole  case     KEYWORD_CONTROL
+  keyword  whole  static   STORAGE_MODIFIER
+  keyword  whole  extern   STORAGE_MODIFIER
+  keyword         {        PUNCTUATION_SECTION
+  keyword         }        PUNCTUATION_SECTION
+  keyword         '*'      CONSTANT_CHARACTER
 
 # C comments
 context /\e* \e*/ comment
 
 # C preprocessor directives
-context linestart # \en red
-  keyword  \e\e\en  brightred
+context linestart # \en META_PREPROCESSOR
+  keyword  \e\e\en  PUNCTUATION_SEPARATOR_CONTINUATION
 
 # C string constants
-context " " green
-  keyword  %d    brightgreen
-  keyword  %s    brightgreen
-  keyword  %c    brightgreen
-  keyword  \e\e"   brightgreen
+context " " STRING_QUOTED_DOUBLE
+  keyword  %d    CONSTANT_OTHER_PLACEHOLDER
+  keyword  %s    CONSTANT_OTHER_PLACEHOLDER
+  keyword  %c    CONSTANT_OTHER_PLACEHOLDER
+  keyword  \e\e"   CONSTANT_CHARACTER_ESCAPE
 .fi
 .PP
 Each context starts with a line of the form:
@@ -392,13 +392,14 @@ an asterisk.  The * itself is a wildcard that matches any length of
 characters.  For example,
 .PP
 .nf
-  keyword         '*'      green
+  keyword         '*'      CONSTANT_CHARACTER
 .fi
 .PP
-colors all C single character constants green.  You also could use
+colors all C single character constants as character constants.  You
+also could use
 .PP
 .nf
-  keyword         "*"      green
+  keyword         "*"      STRING_QUOTED_DOUBLE
 .fi
 .PP
 to color string constants, but the matched string would not be allowed
@@ -409,7 +410,7 @@ or first character.
 Important to note is the line
 .PP
 .nf
-  keyword  \e\e\en  brightgreen
+  keyword  \e\e\en  PUNCTUATION_SEPARATOR_CONTINUATION
 .fi
 .PP
 This line defines a keyword containing the backslash and newline
@@ -417,6 +418,12 @@ characters.  Since the keywords are matched before the context
 delimiters, this keyword prevents the context from ending at the end of
 the lines that end in a backslash, thus allowing C preprocessor
 directive to continue across multiple lines.
+.PP
+The foreground is normally a scope token, described in the next section.
+A literal color is still accepted in its place, and a literal background
+may follow a token.  The syntax files shipped with
+.B mcedit
+use tokens for every foreground and literal colors only for backgrounds.
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
@@ -446,6 +453,90 @@ colors.
 .PP
 Attributes can be any of bold, italic, underline, reverse and blink, appended by a
 plus sign if more than one are desired.
+.SS Scope tokens and color schemes
+A scope token is an upper\-case name made of letters, digits and
+underscores, such as
+.BR KEYWORD_CONTROL .
+It names what the text
+.I is
+rather than how it looks.  The token is turned into a scope of the kind
+used by Sublime Text color schemes by lower\-casing it and replacing each
+underscore with a dot:
+.B KEYWORD_CONTROL
+becomes
+.BR keyword.control .
+A color scheme colors scopes by prefix, so
+.B KEYWORD_CONTROL_IMPORT
+is colored by a rule for
+.BR keyword.control.import ,
+or else for
+.BR keyword.control ,
+or else for
+.BR keyword .
+.PP
+Commonly used tokens, with their colors when no scheme is selected:
+.PP
+.nf
+  KEYWORD_CONTROL, KEYWORD_OPERATOR             yellow
+  STORAGE_TYPE, STORAGE_MODIFIER                yellow
+  CONSTANT_LANGUAGE, VARIABLE_LANGUAGE          yellow
+  CONSTANT_NUMERIC, CONSTANT_CHARACTER_ESCAPE   brightgreen
+  STRING_QUOTED_DOUBLE, STRING_QUOTED_SINGLE    green
+  COMMENT_LINE, COMMENT_BLOCK                   brown
+  SUPPORT_FUNCTION, SUPPORT_CLASS               brightred
+  ENTITY_NAME_FUNCTION, ENTITY_NAME_TAG         brightcyan
+  PUNCTUATION_SECTION, PUNCTUATION_SEPARATOR    brightcyan
+  PUNCTUATION_TERMINATOR                        brightmagenta
+  META_PREPROCESSOR                             brightred
+  MARKUP_HEADING                                brightcyan
+  MARKUP_INSERTED, MARKUP_DELETED               brightgreen, brightred
+  KEYWORD_OTHER_TODO                            brightred
+  INVALID                                       white on red
+  VARIABLE_OTHER                                normal text color
+.fi
+.PP
+All tokens used by the shipped syntax files, with recommendations for
+writing syntax files and color schemes, are described in
+.BR %pkgdatadir%/syntax/README.txt .
+.PP
+A keyword is colored with the scope of its context as parent, so a scheme
+rule such as
+.B string constant.character.escape
+applies to an escape inside a string.  A background or attributes given
+after the token override the scheme, for example
+.PP
+.nf
+  keyword  whole  linestart  #!*\en  COMMENT_LINE  black
+.fi
+.PP
+The global background of a scheme is ignored; the editor background stays
+the one of the current skin.
+.PP
+The color scheme is chosen with Options \-> Color scheme (Alt\-Shift\-S)
+in the editor, which stores it as
+.I editor_syntax_color_scheme
+in the ini file.  When that option is empty, the
+.B syntax_scheme
+key in the
+.B [editor]
+section of the current skin is used.  When neither is set, a built\-in
+scheme reproduces the classic
+.B mcedit
+colors.  A scheme
+.I name
+is a
+.IB name .sublime\-color\-scheme
+file, looked up first in
+.B ~/.local/share/mc/syntax/schemes/
+and then in
+.BR %pkgdatadir%/syntax/schemes/ .
+.PP
+The following schemes are shipped with
+.BR mcedit :
+ayu\-dark, ayu\-light, ayu\-mirage, catppuccin\-frappe, catppuccin\-latte,
+catppuccin\-macchiato, catppuccin\-mocha, dracula, gruvbox, nord, rose\-pine,
+solarized\-dark and solarized\-light.  Their licenses are in
+.BR %pkgdatadir%/syntax/schemes/LICENSE .
 .PP
 Comments may be put on a separate line starting with the hash sign (#).
 .PP
@@ -591,6 +682,16 @@ Allow moving cursor after inserted block.
 .I editor_syntax_highlighting
 enable syntax highlighting.
 .TP
+.I editor_syntax_color_scheme
+Name or path of the color scheme used for scope tokens in syntax files.
+When empty, the
+.B syntax_scheme
+key of the skin's
+.B [editor]
+section is used, or else the classic colors.  See the
+.B Scope tokens and color schemes
+section.
+.TP
 .I editor_edit_confirm_save
 Show confirmation dialog on save.
 .TP
@@ -656,6 +757,16 @@ The default system\-wide syntax files for mcedit, used only if
 the corresponding user's own file in
 .B ~/.local/share/mc/syntax/
 is missing.
+.PP
+.I %pkgdatadir%/syntax/schemes/*
+.IP
+The system\-wide color schemes
+.RI ( name .sublime\-color\-scheme)
+for scope tokens in syntax files.
+.PP
+.I ~/.local/share/mc/syntax/schemes/
+.IP
+User's own color schemes, searched before the system\-wide ones.
 .PP
 .I ~/.config/mc/ini
 .IP
