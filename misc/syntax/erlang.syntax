@@ -24,271 +24,271 @@
 # include erlang.syntax
 
 context default
-    keyword whole after yellow
-    keyword whole and brown
-    keyword whole andalso brown
-    keyword whole band brown
-    keyword whole begin yellow
-    keyword whole bnot brown
-    keyword whole bor brown
-    keyword whole bsl brown
-    keyword whole bsr brown
-    keyword whole bxor brown
-    keyword whole case yellow
-    keyword whole catch yellow
-    keyword whole cond yellow
-    keyword whole div brown
-    keyword whole end yellow
-    keyword whole fun yellow
-    keyword whole if yellow
-    keyword whole let yellow
-    keyword whole not brown
-    keyword whole of yellow
-    keyword whole or brown
-    keyword whole orelse brown
-    keyword whole query yellow
-    keyword whole receive yellow
-    keyword whole rem brown
-    keyword whole try yellow
-    keyword whole throw yellow
-    keyword whole xor brown
+    keyword whole after KEYWORD_CONTROL
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole andalso KEYWORD_OPERATOR_WORD
+    keyword whole band KEYWORD_OPERATOR_WORD
+    keyword whole begin KEYWORD_CONTROL
+    keyword whole bnot KEYWORD_OPERATOR_WORD
+    keyword whole bor KEYWORD_OPERATOR_WORD
+    keyword whole bsl KEYWORD_OPERATOR_WORD
+    keyword whole bsr KEYWORD_OPERATOR_WORD
+    keyword whole bxor KEYWORD_OPERATOR_WORD
+    keyword whole case KEYWORD_CONTROL
+    keyword whole catch KEYWORD_CONTROL
+    keyword whole cond KEYWORD_CONTROL
+    keyword whole div KEYWORD_OPERATOR_WORD
+    keyword whole end KEYWORD_CONTROL
+    keyword whole fun STORAGE_TYPE_FUNCTION
+    keyword whole if KEYWORD_CONTROL
+    keyword whole let KEYWORD_CONTROL
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole of KEYWORD_CONTROL
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole orelse KEYWORD_OPERATOR_WORD
+    keyword whole query KEYWORD_CONTROL
+    keyword whole receive KEYWORD_CONTROL
+    keyword whole rem KEYWORD_OPERATOR_WORD
+    keyword whole try KEYWORD_CONTROL
+    keyword whole throw KEYWORD_CONTROL
+    keyword whole xor KEYWORD_OPERATOR_WORD
 
-    keyword whole when yellow
+    keyword whole when KEYWORD_CONTROL
 
-    keyword whole -module brightmagenta
-    keyword whole -compile brightmagenta
-    keyword whole -behaviour brightmagenta
-    keyword whole -record brightmagenta
-    keyword whole -define brightmagenta
-    keyword whole -include brightmagenta
-    keyword whole -include_lib brightmagenta
-    keyword whole -vsn magenta
-    keyword whole -author magenta
-    keyword whole -copyright magenta
-    keyword whole -export brightmagenta
-    keyword whole -\{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTVWXYZ0123456789_\] red
+    keyword whole -module KEYWORD_OTHER_RESERVED
+    keyword whole -compile KEYWORD_OTHER_RESERVED
+    keyword whole -behaviour KEYWORD_OTHER_RESERVED
+    keyword whole -record KEYWORD_OTHER_RESERVED
+    keyword whole -define META_PREPROCESSOR
+    keyword whole -include META_PREPROCESSOR
+    keyword whole -include_lib META_PREPROCESSOR
+    keyword whole -vsn KEYWORD_OTHER_RESERVED
+    keyword whole -author KEYWORD_OTHER_RESERVED
+    keyword whole -copyright KEYWORD_OTHER_RESERVED
+    keyword whole -export KEYWORD_OTHER_RESERVED
+    keyword whole -\{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTVWXYZ0123456789_\] KEYWORD_OTHER_RESERVED
 
 # erlang:*
-    keyword whole abs brightgreen
-    keyword whole accept brightgreen
-    keyword whole alarm brightgreen
-    keyword whole apply brightgreen
-    keyword whole atom_to_list brightgreen
-    keyword whole binary_to_list brightgreen
-    keyword whole binary_to_term brightgreen
-    keyword whole check_process_code brightgreen
-    keyword whole concat_binary brightgreen
-    keyword whole date brightgreen
-    keyword whole delete_module brightgreen
-    keyword whole disconnect_node brightgreen
-    keyword whole element brightgreen
-    keyword whole erase brightgreen
-    keyword whole exit brightgreen
-    keyword whole float brightgreen
-    keyword whole float_to_list brightgreen
-    keyword whole garbage_collect brightgreen
-    keyword whole get brightgreen
-    keyword whole get_keys brightgreen
-    keyword whole group_leader brightgreen
-    keyword whole halt brightgreen
-    keyword whole hd brightgreen
-    keyword whole integer_to_list brightgreen
-    keyword whole is_alive brightgreen
-    keyword whole is_atom brightgreen
-    keyword whole is_binary brightgreen
-    keyword whole is_boolean brightgreen
-    keyword whole is_float brightgreen
-    keyword whole is_function brightgreen
-    keyword whole is_integer brightgreen
-    keyword whole is_list brightgreen
-    keyword whole is_number brightgreen
-    keyword whole is_pid brightgreen
-    keyword whole is_port brightgreen
-    keyword whole is_process_alive brightgreen
-    keyword whole is_record brightgreen
-    keyword whole is_reference brightgreen
-    keyword whole is_tuple brightgreen
-    keyword whole length brightgreen
-    keyword whole link brightgreen
-    keyword whole list_to_atom brightgreen
-    keyword whole list_to_binary brightgreen
-    keyword whole list_to_float brightgreen
-    keyword whole list_to_integer brightgreen
-    keyword whole list_to_pid brightgreen
-    keyword whole list_to_tuple brightgreen
-    keyword whole load_module brightgreen
-    keyword whole loaded brightgreen
-    keyword whole localtime brightgreen
-    keyword whole make_ref brightgreen
-    keyword whole module_loaded brightgreen
-    keyword whole node brightgreen
-    keyword whole nodes brightgreen
-    keyword whole now brightgreen
-    keyword whole open_port brightgreen
-    keyword whole pid_to_list brightgreen
-    keyword whole port_close brightgreen
-    keyword whole port_command brightgreen
-    keyword whole port_connect brightgreen
-    keyword whole port_control brightgreen
-    keyword whole ports brightgreen
-    keyword whole pre_loaded brightgreen
-    keyword whole process_flag brightgreen
-    keyword whole process_info brightgreen
-    keyword whole processes brightgreen
-    keyword whole purge_module brightgreen
-    keyword whole put brightgreen
-    keyword whole register brightgreen
-    keyword whole registered brightgreen
-    keyword whole round brightgreen
-    keyword whole self brightgreen
-    keyword whole setelement brightgreen
-    keyword whole size brightgreen
-    keyword whole spawn brightgreen
-    keyword whole spawn_link brightgreen
-    keyword whole spawn_opt brightgreen
-    keyword whole split_binary brightgreen
-    keyword whole statistics brightgreen
-    keyword whole term_to_binary brightgreen
-    keyword whole throw brightgreen
-    keyword whole time brightgreen
-    keyword whole tl brightgreen
-    keyword whole trunc brightgreen
-    keyword whole tuple_to_list brightgreen
-    keyword whole unlink brightgreen
-    keyword whole unregister brightgreen
-    keyword whole whereis brightgreen
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole accept SUPPORT_FUNCTION
+    keyword whole alarm SUPPORT_FUNCTION
+    keyword whole apply SUPPORT_FUNCTION
+    keyword whole atom_to_list SUPPORT_FUNCTION
+    keyword whole binary_to_list SUPPORT_FUNCTION
+    keyword whole binary_to_term SUPPORT_FUNCTION
+    keyword whole check_process_code SUPPORT_FUNCTION
+    keyword whole concat_binary SUPPORT_FUNCTION
+    keyword whole date SUPPORT_FUNCTION
+    keyword whole delete_module SUPPORT_FUNCTION
+    keyword whole disconnect_node SUPPORT_FUNCTION
+    keyword whole element SUPPORT_FUNCTION
+    keyword whole erase SUPPORT_FUNCTION
+    keyword whole exit SUPPORT_FUNCTION
+    keyword whole float SUPPORT_FUNCTION
+    keyword whole float_to_list SUPPORT_FUNCTION
+    keyword whole garbage_collect SUPPORT_FUNCTION
+    keyword whole get SUPPORT_FUNCTION
+    keyword whole get_keys SUPPORT_FUNCTION
+    keyword whole group_leader SUPPORT_FUNCTION
+    keyword whole halt SUPPORT_FUNCTION
+    keyword whole hd SUPPORT_FUNCTION
+    keyword whole integer_to_list SUPPORT_FUNCTION
+    keyword whole is_alive SUPPORT_FUNCTION
+    keyword whole is_atom SUPPORT_FUNCTION
+    keyword whole is_binary SUPPORT_FUNCTION
+    keyword whole is_boolean SUPPORT_FUNCTION
+    keyword whole is_float SUPPORT_FUNCTION
+    keyword whole is_function SUPPORT_FUNCTION
+    keyword whole is_integer SUPPORT_FUNCTION
+    keyword whole is_list SUPPORT_FUNCTION
+    keyword whole is_number SUPPORT_FUNCTION
+    keyword whole is_pid SUPPORT_FUNCTION
+    keyword whole is_port SUPPORT_FUNCTION
+    keyword whole is_process_alive SUPPORT_FUNCTION
+    keyword whole is_record SUPPORT_FUNCTION
+    keyword whole is_reference SUPPORT_FUNCTION
+    keyword whole is_tuple SUPPORT_FUNCTION
+    keyword whole length SUPPORT_FUNCTION
+    keyword whole link SUPPORT_FUNCTION
+    keyword whole list_to_atom SUPPORT_FUNCTION
+    keyword whole list_to_binary SUPPORT_FUNCTION
+    keyword whole list_to_float SUPPORT_FUNCTION
+    keyword whole list_to_integer SUPPORT_FUNCTION
+    keyword whole list_to_pid SUPPORT_FUNCTION
+    keyword whole list_to_tuple SUPPORT_FUNCTION
+    keyword whole load_module SUPPORT_FUNCTION
+    keyword whole loaded SUPPORT_FUNCTION
+    keyword whole localtime SUPPORT_FUNCTION
+    keyword whole make_ref SUPPORT_FUNCTION
+    keyword whole module_loaded SUPPORT_FUNCTION
+    keyword whole node SUPPORT_FUNCTION
+    keyword whole nodes SUPPORT_FUNCTION
+    keyword whole now SUPPORT_FUNCTION
+    keyword whole open_port SUPPORT_FUNCTION
+    keyword whole pid_to_list SUPPORT_FUNCTION
+    keyword whole port_close SUPPORT_FUNCTION
+    keyword whole port_command SUPPORT_FUNCTION
+    keyword whole port_connect SUPPORT_FUNCTION
+    keyword whole port_control SUPPORT_FUNCTION
+    keyword whole ports SUPPORT_FUNCTION
+    keyword whole pre_loaded SUPPORT_FUNCTION
+    keyword whole process_flag SUPPORT_FUNCTION
+    keyword whole process_info SUPPORT_FUNCTION
+    keyword whole processes SUPPORT_FUNCTION
+    keyword whole purge_module SUPPORT_FUNCTION
+    keyword whole put SUPPORT_FUNCTION
+    keyword whole register SUPPORT_FUNCTION
+    keyword whole registered SUPPORT_FUNCTION
+    keyword whole round SUPPORT_FUNCTION
+    keyword whole self SUPPORT_FUNCTION
+    keyword whole setelement SUPPORT_FUNCTION
+    keyword whole size SUPPORT_FUNCTION
+    keyword whole spawn SUPPORT_FUNCTION
+    keyword whole spawn_link SUPPORT_FUNCTION
+    keyword whole spawn_opt SUPPORT_FUNCTION
+    keyword whole split_binary SUPPORT_FUNCTION
+    keyword whole statistics SUPPORT_FUNCTION
+    keyword whole term_to_binary SUPPORT_FUNCTION
+    keyword whole throw SUPPORT_FUNCTION
+    keyword whole time SUPPORT_FUNCTION
+    keyword whole tl SUPPORT_FUNCTION
+    keyword whole trunc SUPPORT_FUNCTION
+    keyword whole tuple_to_list SUPPORT_FUNCTION
+    keyword whole unlink SUPPORT_FUNCTION
+    keyword whole unregister SUPPORT_FUNCTION
+    keyword whole whereis SUPPORT_FUNCTION
 
-    keyword whole gen_server:cast brightgreen
-    keyword whole gen_server:call brightgreen
-    keyword whole gen_server:reply brightgreen
-    keyword whole gen_server:start_link brightgreen
-    keyword whole gen_server:start brightgreen
-    keyword whole io:format brightgreen
+    keyword whole gen_server:cast SUPPORT_FUNCTION
+    keyword whole gen_server:call SUPPORT_FUNCTION
+    keyword whole gen_server:reply SUPPORT_FUNCTION
+    keyword whole gen_server:start_link SUPPORT_FUNCTION
+    keyword whole gen_server:start SUPPORT_FUNCTION
+    keyword whole io:format SUPPORT_FUNCTION
 
-    keyword whole init white
-    keyword whole handle_cast white
-    keyword whole handle_call white
-    keyword whole handle_info white
-    keyword whole handle_event white
-    keyword whole handle_sync_event white
-    keyword whole terminate white
-    keyword whole code_change white
+    keyword whole init ENTITY_NAME_FUNCTION
+    keyword whole handle_cast ENTITY_NAME_FUNCTION
+    keyword whole handle_call ENTITY_NAME_FUNCTION
+    keyword whole handle_info ENTITY_NAME_FUNCTION
+    keyword whole handle_event ENTITY_NAME_FUNCTION
+    keyword whole handle_sync_event ENTITY_NAME_FUNCTION
+    keyword whole terminate ENTITY_NAME_FUNCTION
+    keyword whole code_change ENTITY_NAME_FUNCTION
 
 # list comprehension
-    keyword <- yellow
+    keyword <- KEYWORD_OPERATOR
 # clause
-    keyword -> yellow
+    keyword -> KEYWORD_OPERATOR
 # guards
-    keyword =:= brown
-    keyword == brown
-    keyword /= brown
-    keyword =/= brown
+    keyword =:= KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword /= KEYWORD_OPERATOR
+    keyword =/= KEYWORD_OPERATOR
 # binary
-    keyword << brightcyan
-    keyword >> brightcyan
+    keyword << PUNCTUATION_SECTION
+    keyword >> PUNCTUATION_SECTION
 # guards
-    keyword < brown
-    keyword =< brown
-    keyword >= brown
-    keyword > brown
+    keyword < KEYWORD_OPERATOR
+    keyword =< KEYWORD_OPERATOR
+    keyword >= KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
 # ops
-    keyword - yellow
-    keyword \+ yellow
-    keyword / yellow
-    keyword \* yellow
+    keyword - KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
 
-    keyword ; brightcyan
-    keyword , brightcyan
-    keyword . brightcyan
-    keyword = yellow
-    keyword % brown
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword . PUNCTUATION_TERMINATOR
+    keyword = KEYWORD_OPERATOR
+    keyword % COMMENT_LINE
 
-    keyword \+\+ yellow
-    keyword -- yellow
-    keyword ! yellow
+    keyword \+\+ KEYWORD_OPERATOR
+    keyword -- KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
 # TODO this does not work for $" or $', use $\" or $\' instead. ?
-    keyword $\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_{}[]()(\\/`~!@#$%^&\*+-=;:'"|,./?<>\} red
-    keyword $\ red
+    keyword $\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_{}[]()(\\/`~!@#$%^&\*+-=;:'"|,./?<>\} CONSTANT_CHARACTER
+    keyword $\ CONSTANT_CHARACTER
 
 #    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
 
 # TODO: integers, inegers of form Base#digits, 2#1010101
 # todo: records access via #state{}
 
-    keyword whole ?MODULE red
-    keyword whole ?LINE red
-    keyword whole ?FILE red
-    keyword whole ?\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] red
+    keyword whole ?MODULE META_PREPROCESSOR
+    keyword whole ?LINE META_PREPROCESSOR
+    keyword whole ?FILE META_PREPROCESSOR
+    keyword whole ?\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] META_PREPROCESSOR
 
 # gray operatory
 # cyan - moduly
 
 
-    keyword whole true red
-    keyword whole false red
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
 
-    keyword [ brightcyan
-    keyword || brightcyan
-    keyword | brightcyan
-    keyword ] brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword { cyan
-    keyword } cyan
+    keyword [ PUNCTUATION_SECTION
+    keyword || PUNCTUATION_SEPARATOR
+    keyword | PUNCTUATION_SEPARATOR
+    keyword ] PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword whole lists:seq gray
-    keyword whole lists:map gray
-    keyword whole lists:filter gray
-    keyword whole lists:reduce gray
-    keyword whole lists:foldl gray
-    keyword whole lists:foldr gray
-    keyword whole lists:append gray
-    keyword whole lists:nth gray
-    keyword whole behaviour_info gray
-    keyword whole dict:find gray
-    keyword whole dict:is_key gray
-    keyword whole dict:erase gray
-    keyword whole dict:new gray
-    keyword whole dict:map gray
-    keyword whole dict:store gray
-    keyword whole dict:fetch_keys gray
-    keyword whole dict:append gray
-    keyword whole dict:update gray
-    keyword whole dict:update_counter gray
-    keyword whole dict:fold gray
-    keyword whole dict:to_list gray
-    keyword whole dict:fetch gray
+    keyword whole lists:seq SUPPORT_FUNCTION
+    keyword whole lists:map SUPPORT_FUNCTION
+    keyword whole lists:filter SUPPORT_FUNCTION
+    keyword whole lists:reduce SUPPORT_FUNCTION
+    keyword whole lists:foldl SUPPORT_FUNCTION
+    keyword whole lists:foldr SUPPORT_FUNCTION
+    keyword whole lists:append SUPPORT_FUNCTION
+    keyword whole lists:nth SUPPORT_FUNCTION
+    keyword whole behaviour_info SUPPORT_FUNCTION
+    keyword whole dict:find SUPPORT_FUNCTION
+    keyword whole dict:is_key SUPPORT_FUNCTION
+    keyword whole dict:erase SUPPORT_FUNCTION
+    keyword whole dict:new SUPPORT_FUNCTION
+    keyword whole dict:map SUPPORT_FUNCTION
+    keyword whole dict:store SUPPORT_FUNCTION
+    keyword whole dict:fetch_keys SUPPORT_FUNCTION
+    keyword whole dict:append SUPPORT_FUNCTION
+    keyword whole dict:update SUPPORT_FUNCTION
+    keyword whole dict:update_counter SUPPORT_FUNCTION
+    keyword whole dict:fold SUPPORT_FUNCTION
+    keyword whole dict:to_list SUPPORT_FUNCTION
+    keyword whole dict:fetch SUPPORT_FUNCTION
 
 # todo: no more than one dot in atom, and not at the end
-    keyword whole \{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_.@\] lightgray
-    keyword whole \{_ABCDEFGHIJKLMNOPRQSTUVWXYZ\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] white
+    keyword whole \{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_.@\] CONSTANT_OTHER
+    keyword whole \{_ABCDEFGHIJKLMNOPRQSTUVWXYZ\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] VARIABLE_OTHER
 
-context exclusive % \n brown
+context exclusive % \n COMMENT_LINE
     spellcheck
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword ~p brightgreen
-    keyword ~n brightgreen
-    keyword ~w brightgreen
-    keyword ~~ brightgreen
-    keyword \\" brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\{01234567\}\{01234567\} brightgreen
-    keyword \\\{01234567\} brightgreen
-    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{bdefrstv\} brightgreen
-    keyword \\^\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ\} brightgreen
+    keyword ~p CONSTANT_OTHER_PLACEHOLDER
+    keyword ~n CONSTANT_OTHER_PLACEHOLDER
+    keyword ~w CONSTANT_OTHER_PLACEHOLDER
+    keyword ~~ CONSTANT_OTHER_PLACEHOLDER
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{bdefrstv\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\^\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ\} CONSTANT_CHARACTER_ESCAPE
 
-context ' ' red
-    keyword \\" brightred
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightred
-    keyword \\\{01234567\}\{01234567\} brightred
-    keyword \\\{01234567\} brightred
-    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightred
-    keyword \\\\ brightred
-    keyword \\' brightred
-    keyword \\\{bdefrstv\} brightred
-    keyword \\^\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ\} brightred
+context ' ' STRING_QUOTED_SINGLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{bdefrstv\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\^\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ\} CONSTANT_CHARACTER_ESCAPE

@@ -2,75 +2,75 @@
 # https://docs.docker.com/reference/dockerfile
 
 context default
-    keyword ADD yellow
-    keyword ARG yellow
-    keyword CMD yellow
-    keyword COPY yellow
-    keyword ENTRYPOINT yellow
-    keyword ENV yellow
-    keyword EXPOSE yellow
-    keyword FROM yellow
-    keyword HEALTHCHECK yellow
-    keyword LABEL yellow
-    keyword ONBUILD yellow
-    keyword RUN yellow
-    keyword SHELL yellow
-    keyword STOPSIGNAL yellow
-    keyword USER yellow
-    keyword VOLUME yellow
-    keyword WORKDIR yellow
+    keyword ADD KEYWORD_OTHER_RESERVED
+    keyword ARG KEYWORD_OTHER_RESERVED
+    keyword CMD KEYWORD_OTHER_RESERVED
+    keyword COPY KEYWORD_OTHER_RESERVED
+    keyword ENTRYPOINT KEYWORD_OTHER_RESERVED
+    keyword ENV KEYWORD_OTHER_RESERVED
+    keyword EXPOSE KEYWORD_OTHER_RESERVED
+    keyword FROM KEYWORD_OTHER_RESERVED
+    keyword HEALTHCHECK KEYWORD_OTHER_RESERVED
+    keyword LABEL KEYWORD_OTHER_RESERVED
+    keyword ONBUILD KEYWORD_OTHER_RESERVED
+    keyword RUN KEYWORD_OTHER_RESERVED
+    keyword SHELL KEYWORD_OTHER_RESERVED
+    keyword STOPSIGNAL KEYWORD_OTHER_RESERVED
+    keyword USER KEYWORD_OTHER_RESERVED
+    keyword VOLUME KEYWORD_OTHER_RESERVED
+    keyword WORKDIR KEYWORD_OTHER_RESERVED
     # deprecated things
-    keyword MAINTAINER brightred
+    keyword MAINTAINER KEYWORD_OTHER_RESERVED
 
     # Options for RUN
-    keyword --mount brightmagenta
-    keyword --device brightmagenta
-    keyword --network brightmagenta
-    keyword --security brightmagenta
+    keyword --mount VARIABLE_PARAMETER
+    keyword --device VARIABLE_PARAMETER
+    keyword --network VARIABLE_PARAMETER
+    keyword --security VARIABLE_PARAMETER
 
     # Options for ADD
-    keyword --keep-git-dir brightmagenta
-    keyword --checksum brightmagenta
-    keyword --chown brightmagenta
-    keyword --chmod brightmagenta
-    keyword --link brightmagenta
-    keyword --exclude brightmagenta
+    keyword --keep-git-dir VARIABLE_PARAMETER
+    keyword --checksum VARIABLE_PARAMETER
+    keyword --chown VARIABLE_PARAMETER
+    keyword --chmod VARIABLE_PARAMETER
+    keyword --link VARIABLE_PARAMETER
+    keyword --exclude VARIABLE_PARAMETER
 
     # Options for COPY (some already in ADD)
-    keyword --from brightmagenta
-    keyword --parents brightmagenta
+    keyword --from VARIABLE_PARAMETER
+    keyword --parents VARIABLE_PARAMETER
 
-    keyword ; brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword = white
-    keyword && white
-    keyword || white
-    keyword \\$ white
-    keyword ${*} brightgreen
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword = KEYWORD_OPERATOR
+    keyword && KEYWORD_OPERATOR
+    keyword || KEYWORD_OPERATOR
+    keyword \\$ PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword ${*} VARIABLE_OTHER
 
-    keyword whole \{0123456789\}\[0123456789\] brightgreen
-    keyword wholeright $+ brightgreen
+    keyword whole \{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword wholeright $+ VARIABLE_OTHER
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
 # String values
-context ' ' green
-context " " green
+context ' ' STRING_QUOTED_SINGLE
+context " " STRING_QUOTED_DOUBLE
 
 # Comments
-context # \n brown
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
+context # \n COMMENT_LINE
+    keyword whole BUG KEYWORD_OTHER_TODO
+    keyword whole FixMe KEYWORD_OTHER_TODO
+    keyword whole FIXME KEYWORD_OTHER_TODO
+    keyword whole Note KEYWORD_OTHER_TODO
+    keyword whole NOTE KEYWORD_OTHER_TODO
+    keyword whole ToDo KEYWORD_OTHER_TODO
+    keyword whole TODO KEYWORD_OTHER_TODO
+    keyword !!\[!\] KEYWORD_OTHER_TODO
+    keyword ??\[?\] KEYWORD_OTHER_TODO
     spellcheck

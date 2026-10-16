@@ -1,14 +1,14 @@
 context default
-    keyword linestart Format green
-    keyword linestart Source brightmagenta
-    keyword linestart Version yellow
-    keyword linestart Binary brightgreen
-    keyword linestart Maintainer brightmagenta
-    keyword <*@*> brightred
-    keyword linestart Architecture cyan
-    keyword linestart Standards-Version brightmagenta
-    keyword linestart Build-Depends green
-    keyword linestart Files green
+    keyword linestart Format ENTITY_NAME_TAG
+    keyword linestart Source ENTITY_NAME_TAG
+    keyword linestart Version ENTITY_NAME_TAG
+    keyword linestart Binary ENTITY_NAME_TAG
+    keyword linestart Maintainer ENTITY_NAME_TAG
+    keyword <*@*> CONSTANT_OTHER
+    keyword linestart Architecture ENTITY_NAME_TAG
+    keyword linestart Standards-Version ENTITY_NAME_TAG
+    keyword linestart Build-Depends ENTITY_NAME_TAG
+    keyword linestart Files ENTITY_NAME_TAG
 
-context --- \n                brightred
+context --- \n                KEYWORD_OTHER
     spellcheck

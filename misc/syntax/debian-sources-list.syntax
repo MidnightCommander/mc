@@ -1,70 +1,70 @@
 context default
-    keyword linestart deb-src brightmagenta/20
-    keyword linestart deb brightmagenta/20
+    keyword linestart deb-src KEYWORD_OTHER_RESERVED
+    keyword linestart deb KEYWORD_OTHER_RESERVED
 
     # Variables
-    keyword \$\(ARCH\) brightred/18
+    keyword \$\(ARCH\) VARIABLE_OTHER
 
     # Options (delimiters)
-    keyword [ yellow/24
-    keyword ] yellow/24
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
 
 
 # Options
 context exclusive [ ]
     # Basic syntax elements
-    keyword ! yellow/24
-    keyword , yellow/24
-    keyword = yellow/24
+    keyword ! KEYWORD_OPERATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword = KEYWORD_OPERATOR
 
     # Known options
-    keyword whole arch white
-    keyword whole allow-downgrade-to-insecure white
-    keyword whole allow-insecure white
-    keyword whole allow-weak white
-    keyword whole by-hash white
-    keyword whole check-date white
-    keyword whole check-valid-until white
-    keyword whole date-max-future white
-    keyword whole inrelease-path white
-    keyword whole lang white
-    keyword whole pdiffs white
-    keyword whole signed-by white
-    keyword whole target white
-    keyword whole trusted white
-    keyword whole valid-until-max white
-    keyword whole valid-until-min white
+    keyword whole arch ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole allow-downgrade-to-insecure ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole allow-insecure ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole allow-weak ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole by-hash ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole check-date ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole check-valid-until ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole date-max-future ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole inrelease-path ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole lang ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pdiffs ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole signed-by ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole target ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole trusted ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole valid-until-max ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole valid-until-min ENTITY_OTHER_ATTRIBUTE_NAME
 
     # Known values
-    keyword whole force white
-    keyword whole no white
-    keyword whole yes white
+    keyword whole force CONSTANT_OTHER
+    keyword whole no CONSTANT_LANGUAGE
+    keyword whole yes CONSTANT_LANGUAGE
 
 # Comment
-context # \n brown/22
+context # \n COMMENT_LINE
 
 # Common URI specifications
-context cdrom\:\/ \s cyan/24
-context copy\: \s cyan/24
-context file\:\/ \s cyan/24
-context ftp\:\/\/ \s green/6
-context http\:\/\/ \s green/6
-context https\:\/\/ \s green/6
-context mirror\:\/\/ \s green/6
-context mirror\+cdrom\:\/ \s cyan/24
-context mirror\+copy\: \s cyan/24
-context mirror\+file\:\/ \s cyan/24
-context mirror\+ftp\:\/\/ \s green/6
-context mirror\+https\:\/\/ \s green/6
-context mirror\+rsh\:\/\/ \s green/6
-context mirror\+ssh\:\/\/ \s green/6
-context rsh\:\/\/ \s green/6
-context ssh\:\/\/ \s green/6
+context cdrom\:\/ \s STRING_UNQUOTED
+context copy\: \s STRING_UNQUOTED
+context file\:\/ \s STRING_UNQUOTED
+context ftp\:\/\/ \s STRING_UNQUOTED
+context http\:\/\/ \s STRING_UNQUOTED
+context https\:\/\/ \s STRING_UNQUOTED
+context mirror\:\/\/ \s STRING_UNQUOTED
+context mirror\+cdrom\:\/ \s STRING_UNQUOTED
+context mirror\+copy\: \s STRING_UNQUOTED
+context mirror\+file\:\/ \s STRING_UNQUOTED
+context mirror\+ftp\:\/\/ \s STRING_UNQUOTED
+context mirror\+https\:\/\/ \s STRING_UNQUOTED
+context mirror\+rsh\:\/\/ \s STRING_UNQUOTED
+context mirror\+ssh\:\/\/ \s STRING_UNQUOTED
+context rsh\:\/\/ \s STRING_UNQUOTED
+context ssh\:\/\/ \s STRING_UNQUOTED
 
 # Other URI specifications
-context mirror\+s3\:\/\/ \s brightgreen/6
-context mirror\+tor\+http\:\/\/ \s brightgreen/6
-context mirror\+tor\+https\:\/\/ \s brightgreen/6
-context s3\:\/\/ \s brightgreen/6
-context tor\+http\:\/\/ \s brightgreen/6
-context tor\+https\:\/\/ \s brightgreen/6
+context mirror\+s3\:\/\/ \s STRING_UNQUOTED
+context mirror\+tor\+http\:\/\/ \s STRING_UNQUOTED
+context mirror\+tor\+https\:\/\/ \s STRING_UNQUOTED
+context s3\:\/\/ \s STRING_UNQUOTED
+context tor\+http\:\/\/ \s STRING_UNQUOTED
+context tor\+https\:\/\/ \s STRING_UNQUOTED

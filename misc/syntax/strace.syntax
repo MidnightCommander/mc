@@ -1,42 +1,42 @@
 context default
-    keyword access(*) green
-    keyword execve(*) brightgreen
-    keyword uname(*) brightblue
+    keyword access(*) SUPPORT_FUNCTION
+    keyword execve(*) SUPPORT_FUNCTION
+    keyword uname(*) SUPPORT_FUNCTION
 
-    keyword open(*) cyan
-    keyword close(*) cyan
+    keyword open(*) SUPPORT_FUNCTION
+    keyword close(*) SUPPORT_FUNCTION
 
-    keyword read(*) magenta
-    keyword select(*) magenta
-    keyword write(*) magenta
+    keyword read(*) SUPPORT_FUNCTION
+    keyword select(*) SUPPORT_FUNCTION
+    keyword write(*) SUPPORT_FUNCTION
 
-    keyword readv(*) brightmagenta
-    keyword writev(*) brightmagenta
+    keyword readv(*) SUPPORT_FUNCTION
+    keyword writev(*) SUPPORT_FUNCTION
 
-    keyword fcntl64(*) white
-    keyword fstat64(*) white
-    keyword stat64(*) white
+    keyword fcntl64(*) SUPPORT_FUNCTION
+    keyword fstat64(*) SUPPORT_FUNCTION
+    keyword stat64(*) SUPPORT_FUNCTION
 
-    keyword old_mmap(*) red
-    keyword mmap2(*) red
-    keyword munmap(*) red
+    keyword old_mmap(*) SUPPORT_FUNCTION
+    keyword mmap2(*) SUPPORT_FUNCTION
+    keyword munmap(*) SUPPORT_FUNCTION
 
-    keyword exit_group(*) brightred
-    keyword kill(*) brightred
-    keyword wait4(*) brightred
-    keyword statfs(*) brightred
-    keyword ioctl(*) brightred
-    keyword rt_sigaction(*) brightred
-    keyword rt_sigprocmask(*) brightred
-    keyword alarm(*) brightred
-    keyword brk(*) brightred
+    keyword exit_group(*) SUPPORT_FUNCTION
+    keyword kill(*) SUPPORT_FUNCTION
+    keyword wait4(*) SUPPORT_FUNCTION
+    keyword statfs(*) SUPPORT_FUNCTION
+    keyword ioctl(*) SUPPORT_FUNCTION
+    keyword rt_sigaction(*) SUPPORT_FUNCTION
+    keyword rt_sigprocmask(*) SUPPORT_FUNCTION
+    keyword alarm(*) SUPPORT_FUNCTION
+    keyword brk(*) SUPPORT_FUNCTION
 
-    keyword chown32(*) yellow
-    keyword chmod(*) yellow
-    keyword geteuid32(*) yellow
-    keyword getegid32(*) yellow
-    keyword getuid32(*) yellow
-    keyword getgid32(*) yellow
-    keyword setresuid32(*) yellow
-    keyword setresgid32(*) yellow
-    keyword gettimeofday(*) yellow
+    keyword chown32(*) SUPPORT_FUNCTION
+    keyword chmod(*) SUPPORT_FUNCTION
+    keyword geteuid32(*) SUPPORT_FUNCTION
+    keyword getegid32(*) SUPPORT_FUNCTION
+    keyword getuid32(*) SUPPORT_FUNCTION
+    keyword getgid32(*) SUPPORT_FUNCTION
+    keyword setresuid32(*) SUPPORT_FUNCTION
+    keyword setresgid32(*) SUPPORT_FUNCTION
+    keyword gettimeofday(*) SUPPORT_FUNCTION

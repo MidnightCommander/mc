@@ -17,189 +17,177 @@
 caseinsensitive
 
 # for the default (lightgray on blue)
-define _alerthi lightgray red
-define _alertmi gray yellow
-define _alertlo gray cyan
-define _asm     cyan
-define _assign  white
-define _comb    yellow
-define _comment brown
-define _func    brightred
-define _id      lightgray
-define _lbl     white
-define _num     brightgreen
-define _oper    yellow
-define _paren   yellow
-define _sep     brightmagenta
-define _src     cyan
-define _str     brightcyan
+define _alerthi KEYWORD_OTHER_TODO red
+define _alertmi KEYWORD_OTHER_TODO yellow
+define _alertlo KEYWORD_OTHER_TODO cyan
+define _sep     PUNCTUATION_SEPARATOR
 
 context default
     # object code
-    keyword whole ADD _asm
-    keyword whole AND _asm
-    keyword whole BF _asm
-    keyword whole BRARG _asm
-    keyword whole BR _asm
-    keyword whole BT _asm
-    keyword whole CALL _asm
-    keyword whole CBTP _asm
-    keyword whole CELL _asm
-    keyword whole CGER _asm
-    keyword whole CHASE _asm
-    keyword whole CHRCODE _asm
-    keyword whole CHR _asm
-    keyword whole CKBR _asm
-    keyword whole CKCHR _asm
-    keyword whole CKDIG _asm
-    keyword whole CKHEX _asm
-    keyword whole CKID _asm
-    keyword whole CKLAB _asm
-    keyword whole CKLET _asm
-    keyword whole CKNDNAM _asm
-    keyword whole CKNUM _asm
-    keyword whole CKOCT _asm
-    keyword whole CKSR _asm
-    keyword whole CKTXT _asm
-    keyword whole CLABS _asm
-    keyword whole CMPEQ _asm
-    keyword whole CMPL _asm
-    keyword whole CMPNEQ _asm
-    keyword whole CMPSGET _asm
-    keyword whole CMPSGT _asm
-    keyword whole CMPSLET _asm
-    keyword whole CMPSLT _asm
-    keyword whole CMPUGET _asm
-    keyword whole CMPUGT _asm
-    keyword whole CMPULET _asm
-    keyword whole CMPULT _asm
-    keyword whole CNTCK _asm
-    keyword whole DIG _asm
-    keyword whole DUMP _asm
-    keyword whole EOR _asm
-    keyword whole ERCHK _asm
-    keyword whole ERSTR _asm
-    keyword whole FUNC _asm
-    keyword whole GNLB _asm
-    keyword whole HEX _asm
-    keyword whole ID _asm
-    keyword whole LBARG _asm
-    keyword whole LET _asm
-    keyword whole LNEG _asm
-    keyword whole LOADI _asm
-    keyword whole LOAD _asm
-    keyword whole LSH _asm
-    keyword whole MOVTO _asm
-    keyword whole MUL _asm
-    keyword whole NDLBL _asm
-    keyword whole NDMK _asm
-    keyword whole NEG _asm
-    keyword whole NUM _asm
-    keyword whole NXTBR _asm
-    keyword whole OCT _asm
-    keyword whole OER _asm
-    keyword whole ONL _asm
-    keyword whole OR _asm
-    keyword whole OUTCH _asm
-    keyword whole OUTCL _asm
-    keyword whole OUTRE _asm
-    keyword whole OUTSR _asm
-    keyword whole RC _asm
-    keyword whole RSTBR _asm
-    keyword whole RSTRP _asm
-    keyword whole R _asm
-    keyword whole SAVEP _asm
-    keyword whole SBTP _asm
-    keyword whole SDIV _asm
-    keyword whole SET _asm
-    keyword whole SMOD _asm
-    keyword whole SRARG _asm
-    keyword whole SRCHECK _asm
-    keyword whole SRINIT _asm
-    keyword whole SRP _asm
-    keyword whole SRSH _asm
-    keyword whole SR _asm
-    keyword whole STORE _asm
-    keyword whole SUB _asm
-    keyword whole TST _asm
-    keyword whole UDIV _asm
-    keyword whole UMOD _asm
-    keyword whole URSH _asm
+    keyword whole ADD KEYWORD_OTHER_RESERVED
+    keyword whole AND KEYWORD_OTHER_RESERVED
+    keyword whole BF KEYWORD_OTHER_RESERVED
+    keyword whole BRARG KEYWORD_OTHER_RESERVED
+    keyword whole BR KEYWORD_OTHER_RESERVED
+    keyword whole BT KEYWORD_OTHER_RESERVED
+    keyword whole CALL KEYWORD_OTHER_RESERVED
+    keyword whole CBTP KEYWORD_OTHER_RESERVED
+    keyword whole CELL KEYWORD_OTHER_RESERVED
+    keyword whole CGER KEYWORD_OTHER_RESERVED
+    keyword whole CHASE KEYWORD_OTHER_RESERVED
+    keyword whole CHRCODE KEYWORD_OTHER_RESERVED
+    keyword whole CHR KEYWORD_OTHER_RESERVED
+    keyword whole CKBR KEYWORD_OTHER_RESERVED
+    keyword whole CKCHR KEYWORD_OTHER_RESERVED
+    keyword whole CKDIG KEYWORD_OTHER_RESERVED
+    keyword whole CKHEX KEYWORD_OTHER_RESERVED
+    keyword whole CKID KEYWORD_OTHER_RESERVED
+    keyword whole CKLAB KEYWORD_OTHER_RESERVED
+    keyword whole CKLET KEYWORD_OTHER_RESERVED
+    keyword whole CKNDNAM KEYWORD_OTHER_RESERVED
+    keyword whole CKNUM KEYWORD_OTHER_RESERVED
+    keyword whole CKOCT KEYWORD_OTHER_RESERVED
+    keyword whole CKSR KEYWORD_OTHER_RESERVED
+    keyword whole CKTXT KEYWORD_OTHER_RESERVED
+    keyword whole CLABS KEYWORD_OTHER_RESERVED
+    keyword whole CMPEQ KEYWORD_OTHER_RESERVED
+    keyword whole CMPL KEYWORD_OTHER_RESERVED
+    keyword whole CMPNEQ KEYWORD_OTHER_RESERVED
+    keyword whole CMPSGET KEYWORD_OTHER_RESERVED
+    keyword whole CMPSGT KEYWORD_OTHER_RESERVED
+    keyword whole CMPSLET KEYWORD_OTHER_RESERVED
+    keyword whole CMPSLT KEYWORD_OTHER_RESERVED
+    keyword whole CMPUGET KEYWORD_OTHER_RESERVED
+    keyword whole CMPUGT KEYWORD_OTHER_RESERVED
+    keyword whole CMPULET KEYWORD_OTHER_RESERVED
+    keyword whole CMPULT KEYWORD_OTHER_RESERVED
+    keyword whole CNTCK KEYWORD_OTHER_RESERVED
+    keyword whole DIG KEYWORD_OTHER_RESERVED
+    keyword whole DUMP KEYWORD_OTHER_RESERVED
+    keyword whole EOR KEYWORD_OTHER_RESERVED
+    keyword whole ERCHK KEYWORD_OTHER_RESERVED
+    keyword whole ERSTR KEYWORD_OTHER_RESERVED
+    keyword whole FUNC KEYWORD_OTHER_RESERVED
+    keyword whole GNLB KEYWORD_OTHER_RESERVED
+    keyword whole HEX KEYWORD_OTHER_RESERVED
+    keyword whole ID KEYWORD_OTHER_RESERVED
+    keyword whole LBARG KEYWORD_OTHER_RESERVED
+    keyword whole LET KEYWORD_OTHER_RESERVED
+    keyword whole LNEG KEYWORD_OTHER_RESERVED
+    keyword whole LOADI KEYWORD_OTHER_RESERVED
+    keyword whole LOAD KEYWORD_OTHER_RESERVED
+    keyword whole LSH KEYWORD_OTHER_RESERVED
+    keyword whole MOVTO KEYWORD_OTHER_RESERVED
+    keyword whole MUL KEYWORD_OTHER_RESERVED
+    keyword whole NDLBL KEYWORD_OTHER_RESERVED
+    keyword whole NDMK KEYWORD_OTHER_RESERVED
+    keyword whole NEG KEYWORD_OTHER_RESERVED
+    keyword whole NUM KEYWORD_OTHER_RESERVED
+    keyword whole NXTBR KEYWORD_OTHER_RESERVED
+    keyword whole OCT KEYWORD_OTHER_RESERVED
+    keyword whole OER KEYWORD_OTHER_RESERVED
+    keyword whole ONL KEYWORD_OTHER_RESERVED
+    keyword whole OR KEYWORD_OTHER_RESERVED
+    keyword whole OUTCH KEYWORD_OTHER_RESERVED
+    keyword whole OUTCL KEYWORD_OTHER_RESERVED
+    keyword whole OUTRE KEYWORD_OTHER_RESERVED
+    keyword whole OUTSR KEYWORD_OTHER_RESERVED
+    keyword whole RC KEYWORD_OTHER_RESERVED
+    keyword whole RSTBR KEYWORD_OTHER_RESERVED
+    keyword whole RSTRP KEYWORD_OTHER_RESERVED
+    keyword whole R KEYWORD_OTHER_RESERVED
+    keyword whole SAVEP KEYWORD_OTHER_RESERVED
+    keyword whole SBTP KEYWORD_OTHER_RESERVED
+    keyword whole SDIV KEYWORD_OTHER_RESERVED
+    keyword whole SET KEYWORD_OTHER_RESERVED
+    keyword whole SMOD KEYWORD_OTHER_RESERVED
+    keyword whole SRARG KEYWORD_OTHER_RESERVED
+    keyword whole SRCHECK KEYWORD_OTHER_RESERVED
+    keyword whole SRINIT KEYWORD_OTHER_RESERVED
+    keyword whole SRP KEYWORD_OTHER_RESERVED
+    keyword whole SRSH KEYWORD_OTHER_RESERVED
+    keyword whole SR KEYWORD_OTHER_RESERVED
+    keyword whole STORE KEYWORD_OTHER_RESERVED
+    keyword whole SUB KEYWORD_OTHER_RESERVED
+    keyword whole TST KEYWORD_OTHER_RESERVED
+    keyword whole UDIV KEYWORD_OTHER_RESERVED
+    keyword whole UMOD KEYWORD_OTHER_RESERVED
+    keyword whole URSH KEYWORD_OTHER_RESERVED
     # - label
-    keyword whole linestart %\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]: _lbl
-    keyword whole linestart \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]: _lbl
+    keyword whole linestart %\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]: ENTITY_NAME_LABEL
+    keyword whole linestart \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]: ENTITY_NAME_LABEL
     # source
     # - keywords
     wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.
-    keyword whole .CHR _src
-    keyword whole .DELIM _src
-    keyword whole .DIG _src
-    keyword whole .EMPTY _src
-    keyword whole .END _src
-    keyword whole .HEX _src
-    keyword whole .ID _src
-    keyword whole .LET _src
-    keyword whole .LIST _src
-    keyword whole .META _src
-    keyword whole .NUM _src
-    keyword whole .OCT _src
-    keyword whole .SR _src
+    keyword whole .CHR KEYWORD_OTHER_RESERVED
+    keyword whole .DELIM KEYWORD_OTHER_RESERVED
+    keyword whole .DIG KEYWORD_OTHER_RESERVED
+    keyword whole .EMPTY KEYWORD_OTHER_RESERVED
+    keyword whole .END KEYWORD_OTHER_RESERVED
+    keyword whole .HEX KEYWORD_OTHER_RESERVED
+    keyword whole .ID KEYWORD_OTHER_RESERVED
+    keyword whole .LET KEYWORD_OTHER_RESERVED
+    keyword whole .LIST KEYWORD_OTHER_RESERVED
+    keyword whole .META KEYWORD_OTHER_RESERVED
+    keyword whole .NUM KEYWORD_OTHER_RESERVED
+    keyword whole .OCT KEYWORD_OTHER_RESERVED
+    keyword whole .SR KEYWORD_OTHER_RESERVED
     wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
     # - functions
-    keyword whole CLEAR _func
-    keyword whole CODE _func
-    keyword whole CONV _func
-    keyword whole ENTER _func
-    keyword whole LEN _func
-    keyword whole LOOK _func
-    keyword whole OUTC _func
-    keyword whole OUTL _func
-    keyword whole OUTS _func
-    keyword whole OUT _func
-    keyword whole POP _func
-    keyword whole PUSH _func
-    keyword whole XCONV _func
+    keyword whole CLEAR SUPPORT_FUNCTION
+    keyword whole CODE SUPPORT_FUNCTION
+    keyword whole CONV SUPPORT_FUNCTION
+    keyword whole ENTER SUPPORT_FUNCTION
+    keyword whole LEN SUPPORT_FUNCTION
+    keyword whole LOOK SUPPORT_FUNCTION
+    keyword whole OUTC SUPPORT_FUNCTION
+    keyword whole OUTL SUPPORT_FUNCTION
+    keyword whole OUTS SUPPORT_FUNCTION
+    keyword whole OUT SUPPORT_FUNCTION
+    keyword whole POP SUPPORT_FUNCTION
+    keyword whole PUSH SUPPORT_FUNCTION
+    keyword whole XCONV SUPPORT_FUNCTION
     # - identifier
-    keyword whole \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\] _id
+    keyword whole \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\] VARIABLE_OTHER
     # - natural decimal integer numbers
-    keyword whole 0 _num
-    keyword whole \{123456789_\}\[0123456789_\] _num
+    keyword whole 0 CONSTANT_NUMERIC
+    keyword whole \{123456789_\}\[0123456789_\] CONSTANT_NUMERIC
     # - label
-    keyword whole #\{1234\} _src
+    keyword whole #\{1234\} KEYWORD_OTHER_RESERVED
     # - assignment
-    keyword := _assign
-    keyword => _assign
-    keyword = _assign
+    keyword := KEYWORD_OPERATOR
+    keyword => KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
     # - operators
-    keyword %% _oper
-    keyword // _oper
-    keyword <- _oper
-    keyword << _oper
-    keyword >>> _oper
-    keyword >> _oper
-    keyword <= _oper
-    keyword >= _oper
-    keyword \{!#$%&\*\+-.<=>?@^~\} _oper
+    keyword %% KEYWORD_OPERATOR
+    keyword // KEYWORD_OPERATOR
+    keyword <- KEYWORD_OPERATOR
+    keyword << KEYWORD_OPERATOR
+    keyword >>> KEYWORD_OPERATOR
+    keyword >> KEYWORD_OPERATOR
+    keyword <= KEYWORD_OPERATOR
+    keyword >= KEYWORD_OPERATOR
+    keyword \{!#$%&\*\+-.<=>?@^~\} KEYWORD_OPERATOR
     # - alternation
-    keyword / _comb
-    keyword | _comb
+    keyword / KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
     # - parentheses
-    keyword ( _paren
-    keyword ) _paren
-    keyword [ _paren
-    keyword ] _paren
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
     # - separators,terminator
     keyword \{,:;\} _sep
 
 # strings
 
-context ' ' _str
+context ' ' STRING_QUOTED_SINGLE
 
-context " " _str
+context " " STRING_QUOTED_DOUBLE
 
 # comments
 
-context £ £ _comment
+context £ £ COMMENT_BLOCK
     keyword whole BUG        _alerthi
     keyword whole DEPRECATED _alertmi
     keyword whole FIXME      _alerthi

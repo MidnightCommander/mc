@@ -3,93 +3,93 @@
 ##################################################################################
 
 context default
-    keyword whole and yellow
-    keyword whole as yellow
-    keyword whole begin yellow
-    keyword whole do yellow
-    keyword whole done yellow
-    keyword whole downto yellow
-    keyword whole else yellow
-    keyword whole end yellow
-    keyword whole exception yellow
-    keyword whole for yellow
-    keyword whole fun yellow
-    keyword whole function yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole let yellow
-    keyword whole match yellow
-    keyword whole mutable yellow
-    keyword whole not yellow
-    keyword whole of yellow
-    keyword whole or yellow
-    keyword whole prefix yellow
-    keyword whole rec yellow
-    keyword whole then yellow
-    keyword whole to yellow
-    keyword whole try yellow
-    keyword whole type yellow
-    keyword whole value yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole mod yellow
-    keyword whole with yellow
-    keyword whole true yellow
-    keyword whole false yellow
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole as KEYWORD_OTHER
+    keyword whole begin KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole done KEYWORD_CONTROL
+    keyword whole downto KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole end KEYWORD_CONTROL
+    keyword whole exception KEYWORD_OTHER
+    keyword whole for KEYWORD_CONTROL
+    keyword whole fun STORAGE_TYPE_FUNCTION
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole if KEYWORD_CONTROL
+    keyword whole in KEYWORD_OTHER
+    keyword whole let KEYWORD_OTHER
+    keyword whole match KEYWORD_CONTROL
+    keyword whole mutable STORAGE_MODIFIER
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole of KEYWORD_OTHER
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole prefix KEYWORD_OTHER
+    keyword whole rec KEYWORD_OTHER
+    keyword whole then KEYWORD_CONTROL
+    keyword whole to KEYWORD_CONTROL
+    keyword whole try KEYWORD_CONTROL
+    keyword whole type STORAGE_TYPE
+    keyword whole value KEYWORD_OTHER
+    keyword whole where KEYWORD_OTHER
+    keyword whole while KEYWORD_CONTROL
+    keyword whole mod KEYWORD_OPERATOR_WORD
+    keyword whole with KEYWORD_CONTROL
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
 
-    keyword (\* brown
-    keyword \*) brown
+    keyword (\* COMMENT_BLOCK
+    keyword \*) COMMENT_BLOCK
 
-    keyword `\s` brightcyan
-    keyword `+` brightcyan
-    keyword > cyan
-    keyword <> cyan
-    keyword < cyan
-    keyword . cyan
-    keyword -> brightgreen
-    keyword <- cyan
-    keyword \+ cyan
-    keyword - cyan
-    keyword \* cyan
-    keyword / cyan
-    keyword % cyan
-    keyword = cyan
-    keyword | cyan
-    keyword # cyan
-    keyword @ cyan
-    keyword ^ cyan
-    keyword { cyan
-    keyword } cyan
-    keyword ( cyan
-    keyword ) cyan
-    keyword [ cyan
-    keyword ] cyan
-    keyword , cyan
-    keyword : cyan
-    keyword & cyan
+    keyword `\s` CONSTANT_CHARACTER
+    keyword `+` CONSTANT_CHARACTER
+    keyword > KEYWORD_OPERATOR
+    keyword <> KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword . KEYWORD_OPERATOR
+    keyword -> KEYWORD_OPERATOR
+    keyword <- KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword # KEYWORD_OPERATOR
+    keyword @ KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword & KEYWORD_OPERATOR
 
-    keyword wholeright ;; brightred
-    keyword wholeright ; brightred
+    keyword wholeright ;; PUNCTUATION_TERMINATOR
+    keyword wholeright ; PUNCTUATION_TERMINATOR
 
-    keyword ; cyan
+    keyword ; PUNCTUATION_TERMINATOR
 
-context exclusive (\* \*) brown
+context exclusive (\* \*) COMMENT_BLOCK
 
-    keyword \\\n yellow
-    keyword "+" brown
-    keyword <+> brown
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword "+" COMMENT_BLOCK
+    keyword <+> COMMENT_BLOCK
 
-context " " brightcyan
-    keyword \\" brightmagenta
-    keyword \\n brightmagenta
-    keyword %% brightmagenta
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightmagenta
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} brightmagenta
-    keyword %\[hl\]n brightmagenta
-    keyword %\[.\]\[0123456789\]s brightmagenta
-    keyword %[*] brightmagenta
-    keyword %c brightmagenta
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightmagenta
-    keyword \\\\ brightmagenta
-    keyword \\' brightmagenta
-    keyword \\\{abtnvfr\} brightmagenta
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\n CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[.\]\[0123456789\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

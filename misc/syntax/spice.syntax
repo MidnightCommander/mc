@@ -1,420 +1,420 @@
 caseinsensitive
 
 context default
-    keyword linestart \**\n brown
-    keyword $*\n brown
-    keyword ;*\n brown
-    keyword //*\n brown
-    keyword linestart \+ red
+    keyword linestart \**\n COMMENT_LINE
+    keyword $*\n COMMENT_LINE
+    keyword ;*\n COMMENT_LINE
+    keyword //*\n COMMENT_LINE
+    keyword linestart \+ PUNCTUATION_SEPARATOR_CONTINUATION
 
     # dot commands
-    keyword whole .ac brightmagenta
-    keyword whole .control brightmagenta
-    keyword whole .csparam brightmagenta
-    keyword whole .dc brightmagenta
-    keyword whole .disto brightmagenta
-    keyword whole .else brightmagenta
-    keyword whole .elseif brightmagenta
-    keyword whole .end brightmagenta
-    keyword whole .endc brightmagenta
-    keyword whole .endif brightmagenta
-    keyword whole .ends brightmagenta
-    keyword whole .four brightmagenta
-    keyword whole .func brightmagenta
-    keyword whole .global brightmagenta
-    keyword whole .ic brightmagenta
-    keyword whole .if brightmagenta
-    keyword whole .include brightmagenta
-    keyword whole .lib brightmagenta
-    keyword whole .meas brightmagenta
-    keyword whole .model brightmagenta
-    keyword whole .nodeset brightmagenta
-    keyword whole .noise brightmagenta
-    keyword whole .op brightmagenta
-    keyword whole .options brightmagenta
-    keyword whole .param brightmagenta
-    keyword whole .plot brightmagenta
-    keyword whole .print brightmagenta
-    keyword whole .probe brightmagenta
-    keyword whole .pss brightmagenta
-    keyword whole .pz brightmagenta
-    keyword whole .save brightmagenta
-    keyword whole .sens brightmagenta
-    keyword whole .subckt brightmagenta
-    keyword whole .temp brightmagenta
-    keyword whole .tf brightmagenta
-    keyword whole .title brightmagenta
-    keyword whole .tran brightmagenta
-    keyword whole .width brightmagenta
+    keyword whole .ac KEYWORD_OTHER_RESERVED
+    keyword whole .control KEYWORD_OTHER_RESERVED
+    keyword whole .csparam KEYWORD_OTHER_RESERVED
+    keyword whole .dc KEYWORD_OTHER_RESERVED
+    keyword whole .disto KEYWORD_OTHER_RESERVED
+    keyword whole .else KEYWORD_OTHER_RESERVED
+    keyword whole .elseif KEYWORD_OTHER_RESERVED
+    keyword whole .end KEYWORD_OTHER_RESERVED
+    keyword whole .endc KEYWORD_OTHER_RESERVED
+    keyword whole .endif KEYWORD_OTHER_RESERVED
+    keyword whole .ends KEYWORD_OTHER_RESERVED
+    keyword whole .four KEYWORD_OTHER_RESERVED
+    keyword whole .func KEYWORD_OTHER_RESERVED
+    keyword whole .global KEYWORD_OTHER_RESERVED
+    keyword whole .ic KEYWORD_OTHER_RESERVED
+    keyword whole .if KEYWORD_OTHER_RESERVED
+    keyword whole .include KEYWORD_OTHER_RESERVED
+    keyword whole .lib KEYWORD_OTHER_RESERVED
+    keyword whole .meas KEYWORD_OTHER_RESERVED
+    keyword whole .model KEYWORD_OTHER_RESERVED
+    keyword whole .nodeset KEYWORD_OTHER_RESERVED
+    keyword whole .noise KEYWORD_OTHER_RESERVED
+    keyword whole .op KEYWORD_OTHER_RESERVED
+    keyword whole .options KEYWORD_OTHER_RESERVED
+    keyword whole .param KEYWORD_OTHER_RESERVED
+    keyword whole .plot KEYWORD_OTHER_RESERVED
+    keyword whole .print KEYWORD_OTHER_RESERVED
+    keyword whole .probe KEYWORD_OTHER_RESERVED
+    keyword whole .pss KEYWORD_OTHER_RESERVED
+    keyword whole .pz KEYWORD_OTHER_RESERVED
+    keyword whole .save KEYWORD_OTHER_RESERVED
+    keyword whole .sens KEYWORD_OTHER_RESERVED
+    keyword whole .subckt KEYWORD_OTHER_RESERVED
+    keyword whole .temp KEYWORD_OTHER_RESERVED
+    keyword whole .tf KEYWORD_OTHER_RESERVED
+    keyword whole .title KEYWORD_OTHER_RESERVED
+    keyword whole .tran KEYWORD_OTHER_RESERVED
+    keyword whole .width KEYWORD_OTHER_RESERVED
 
     # circuit elements
-    keyword wholeleft linestart A*\s brightcyan
-    keyword wholeleft linestart A*\t brightcyan
-    keyword wholeleft linestart B*\s brightcyan
-    keyword wholeleft linestart B*\t brightcyan
-    keyword wholeleft linestart C*\s brightcyan
-    keyword wholeleft linestart C*\t brightcyan
-    keyword wholeleft linestart D*\s brightcyan
-    keyword wholeleft linestart D*\t brightcyan
-    keyword wholeleft linestart E*\s brightcyan
-    keyword wholeleft linestart E*\t brightcyan
-    keyword wholeleft linestart F*\s brightcyan
-    keyword wholeleft linestart F*\t brightcyan
-    keyword wholeleft linestart G*\s brightcyan
-    keyword wholeleft linestart G*\t brightcyan
-    keyword wholeleft linestart H*\s brightcyan
-    keyword wholeleft linestart H*\t brightcyan
-    keyword wholeleft linestart I*\s brightcyan
-    keyword wholeleft linestart I*\t brightcyan
-    keyword wholeleft linestart J*\s brightcyan
-    keyword wholeleft linestart J*\t brightcyan
-    keyword wholeleft linestart K*\s brightcyan
-    keyword wholeleft linestart K*\t brightcyan
-    keyword wholeleft linestart L*\s brightcyan
-    keyword wholeleft linestart L*\t brightcyan
-    keyword wholeleft linestart M*\s brightcyan
-    keyword wholeleft linestart M*\t brightcyan
-    keyword wholeleft linestart N*\s brightcyan
-    keyword wholeleft linestart N*\t brightcyan
-    keyword wholeleft linestart O*\s brightcyan
-    keyword wholeleft linestart O*\t brightcyan
-    keyword wholeleft linestart P*\s brightcyan
-    keyword wholeleft linestart P*\t brightcyan
-    keyword wholeleft linestart Q*\s brightcyan
-    keyword wholeleft linestart Q*\t brightcyan
-    keyword wholeleft linestart R*\s brightcyan
-    keyword wholeleft linestart R*\t brightcyan
-    keyword wholeleft linestart S*\s brightcyan
-    keyword wholeleft linestart S*\t brightcyan
-    keyword wholeleft linestart T*\s brightcyan
-    keyword wholeleft linestart T*\t brightcyan
-    keyword wholeleft linestart U*\s brightcyan
-    keyword wholeleft linestart U*\t brightcyan
-    keyword wholeleft linestart V*\s brightcyan
-    keyword wholeleft linestart V*\t brightcyan
-    keyword wholeleft linestart W*\s brightcyan
-    keyword wholeleft linestart W*\t brightcyan
-    keyword wholeleft linestart X*\s brightcyan
-    keyword wholeleft linestart X*\t brightcyan
-    keyword wholeleft linestart Y*\s brightcyan
-    keyword wholeleft linestart Y*\t brightcyan
-    keyword wholeleft linestart Z*\s brightcyan
-    keyword wholeleft linestart Z*\t brightcyan
+    keyword wholeleft linestart A*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart A*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart B*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart B*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart C*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart C*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart D*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart D*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart E*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart E*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart F*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart F*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart G*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart G*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart H*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart H*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart I*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart I*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart J*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart J*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart K*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart K*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart L*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart L*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart M*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart M*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart N*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart N*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart O*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart O*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart P*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart P*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart Q*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart Q*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart R*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart R*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart S*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart S*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart T*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart T*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart U*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart U*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart V*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart V*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart W*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart W*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart X*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart X*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart Y*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart Y*\t ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart Z*\s ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart Z*\t ENTITY_NAME_FUNCTION
 
     # model types
-    keyword whole R white
-    keyword whole C white
-    keyword whole L white
-    keyword whole SW white
-    keyword whole CSW white
-    keyword whole URC white
-    keyword whole LTRA white
-    keyword whole D white
-    keyword whole NPN white
-    keyword whole PNP white
-    keyword whole NJF white
-    keyword whole PJF white
-    keyword whole NMOS white
-    keyword whole PMOS white
-    keyword whole NMF white
-    keyword whole PMF white
-    keyword whole VDMOS white
+    keyword whole R SUPPORT_TYPE
+    keyword whole C SUPPORT_TYPE
+    keyword whole L SUPPORT_TYPE
+    keyword whole SW SUPPORT_TYPE
+    keyword whole CSW SUPPORT_TYPE
+    keyword whole URC SUPPORT_TYPE
+    keyword whole LTRA SUPPORT_TYPE
+    keyword whole D SUPPORT_TYPE
+    keyword whole NPN SUPPORT_TYPE
+    keyword whole PNP SUPPORT_TYPE
+    keyword whole NJF SUPPORT_TYPE
+    keyword whole PJF SUPPORT_TYPE
+    keyword whole NMOS SUPPORT_TYPE
+    keyword whole PMOS SUPPORT_TYPE
+    keyword whole NMF SUPPORT_TYPE
+    keyword whole PMF SUPPORT_TYPE
+    keyword whole VDMOS SUPPORT_TYPE
 
     # XSPICE models
-    keyword whole gain white
-    keyword whole summer white
-    keyword whole mult white
-    keyword whole divide white
-    keyword whole limit white
-    keyword whole climit white
-    keyword whole pwl white
-    keyword whole filesource white
-    keyword whole multi_input_pwl white
-    keyword whole aswitch white
-    keyword whole pswitch white
-    keyword whole zener white
-    keyword whole ilimit white
-    keyword whole hyst white
-    keyword whole d_dt white
-    keyword whole int white
-    keyword whole s_xfer white
-    keyword whole slew white
-    keyword whole lcouple white
-    keyword whole core white
-    keyword whole sine white
-    keyword whole triangle white
-    keyword whole square white
-    keyword whole oneshot white
-    keyword whole cmeter white
-    keyword whole lmeter white
-    keyword whole memristor white
-    keyword whole table2D white
-    keyword whole table3D white
-    keyword whole sidiode white
-    keyword whole dac_bridge white
-    keyword whole adc_bridge white
-    keyword whole d_osc white
-    keyword whole d_to_real white
-    keyword whole real_delay white
-    keyword whole real_gain white
-    keyword whole real_to_v white
-    keyword whole d_buffer white
-    keyword whole d_inverter white
-    keyword whole d_and white
-    keyword whole d_nand white
-    keyword whole d_or white
-    keyword whole d_nor white
-    keyword whole d_xor white
-    keyword whole d_xnor white
-    keyword whole d_tristate white
-    keyword whole d_pullup white
-    keyword whole d_pulldown white
-    keyword whole d_dff white
-    keyword whole d_jkff white
-    keyword whole d_tff white
-    keyword whole d_srff white
-    keyword whole d_dlatch white
-    keyword whole d_srlatch white
-    keyword whole d_state white
-    keyword whole d_fdiv white
-    keyword whole d_ram white
-    keyword whole d_source white
-    keyword whole d_lut white
-    keyword whole d_genlut white
-    keyword whole xfer white
+    keyword whole gain SUPPORT_TYPE
+    keyword whole summer SUPPORT_TYPE
+    keyword whole mult SUPPORT_TYPE
+    keyword whole divide SUPPORT_TYPE
+    keyword whole limit SUPPORT_TYPE
+    keyword whole climit SUPPORT_TYPE
+    keyword whole pwl SUPPORT_TYPE
+    keyword whole filesource SUPPORT_TYPE
+    keyword whole multi_input_pwl SUPPORT_TYPE
+    keyword whole aswitch SUPPORT_TYPE
+    keyword whole pswitch SUPPORT_TYPE
+    keyword whole zener SUPPORT_TYPE
+    keyword whole ilimit SUPPORT_TYPE
+    keyword whole hyst SUPPORT_TYPE
+    keyword whole d_dt SUPPORT_TYPE
+    keyword whole int SUPPORT_TYPE
+    keyword whole s_xfer SUPPORT_TYPE
+    keyword whole slew SUPPORT_TYPE
+    keyword whole lcouple SUPPORT_TYPE
+    keyword whole core SUPPORT_TYPE
+    keyword whole sine SUPPORT_TYPE
+    keyword whole triangle SUPPORT_TYPE
+    keyword whole square SUPPORT_TYPE
+    keyword whole oneshot SUPPORT_TYPE
+    keyword whole cmeter SUPPORT_TYPE
+    keyword whole lmeter SUPPORT_TYPE
+    keyword whole memristor SUPPORT_TYPE
+    keyword whole table2D SUPPORT_TYPE
+    keyword whole table3D SUPPORT_TYPE
+    keyword whole sidiode SUPPORT_TYPE
+    keyword whole dac_bridge SUPPORT_TYPE
+    keyword whole adc_bridge SUPPORT_TYPE
+    keyword whole d_osc SUPPORT_TYPE
+    keyword whole d_to_real SUPPORT_TYPE
+    keyword whole real_delay SUPPORT_TYPE
+    keyword whole real_gain SUPPORT_TYPE
+    keyword whole real_to_v SUPPORT_TYPE
+    keyword whole d_buffer SUPPORT_TYPE
+    keyword whole d_inverter SUPPORT_TYPE
+    keyword whole d_and SUPPORT_TYPE
+    keyword whole d_nand SUPPORT_TYPE
+    keyword whole d_or SUPPORT_TYPE
+    keyword whole d_nor SUPPORT_TYPE
+    keyword whole d_xor SUPPORT_TYPE
+    keyword whole d_xnor SUPPORT_TYPE
+    keyword whole d_tristate SUPPORT_TYPE
+    keyword whole d_pullup SUPPORT_TYPE
+    keyword whole d_pulldown SUPPORT_TYPE
+    keyword whole d_dff SUPPORT_TYPE
+    keyword whole d_jkff SUPPORT_TYPE
+    keyword whole d_tff SUPPORT_TYPE
+    keyword whole d_srff SUPPORT_TYPE
+    keyword whole d_dlatch SUPPORT_TYPE
+    keyword whole d_srlatch SUPPORT_TYPE
+    keyword whole d_state SUPPORT_TYPE
+    keyword whole d_fdiv SUPPORT_TYPE
+    keyword whole d_ram SUPPORT_TYPE
+    keyword whole d_source SUPPORT_TYPE
+    keyword whole d_lut SUPPORT_TYPE
+    keyword whole d_genlut SUPPORT_TYPE
+    keyword whole xfer SUPPORT_TYPE
 
     # common model parameters
-    keyword whole m white
+    keyword whole m SUPPORT_TYPE
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
 
 context exclusive .control .endc
-    keyword linestart \**\n brown
-    keyword $*\n brown
-    keyword ;*\n brown
-    keyword //*\n brown
-    keyword linestart \+ red
+    keyword linestart \**\n COMMENT_LINE
+    keyword $*\n COMMENT_LINE
+    keyword ;*\n COMMENT_LINE
+    keyword //*\n COMMENT_LINE
+    keyword linestart \+ PUNCTUATION_SEPARATOR_CONTINUATION
 
     # commands
-    keyword whole ac yellow
-    keyword whole alias yellow
-    keyword whole alter yellow
-    keyword whole altermod yellow
-    keyword whole alterparam yellow
-    keyword whole asciiplot yellow
-    keyword whole aspice yellow
-    keyword whole bug yellow
-    keyword whole cd yellow
-    keyword whole cdump yellow
-    keyword whole circbyline yellow
-    keyword whole codemodel yellow
-    keyword whole compose yellow
-    keyword whole cutout yellow
-    keyword whole dc yellow
-    keyword whole define yellow
-    keyword whole deftype yellow
-    keyword whole delete yellow
-    keyword whole destroy yellow
-    keyword whole devhelp yellow
-    keyword whole diff yellow
-    keyword whole display yellow
-    keyword whole echo yellow
-    keyword whole edit yellow
-    keyword whole edisplay yellow
-    keyword whole eprint yellow
-    keyword whole eprvcd yellow
-    keyword whole fft yellow
-    keyword whole fourier yellow
-    keyword whole getcwd yellow
-    keyword whole gnuplot yellow
-    keyword whole hardcopy yellow
-    keyword whole help yellow
-    keyword whole history yellow
-    keyword whole inventory yellow
-    keyword whole iplot yellow
-    keyword whole jobs yellow
-    keyword whole let yellow
-    keyword whole linearize yellow
-    keyword whole listing yellow
-    keyword whole load yellow
-    keyword whole mc_source yellow
-    keyword whole meas yellow
-    keyword whole mdump yellow
-    keyword whole mrdump yellow
-    keyword whole noise yellow
-    keyword whole op yellow
-    keyword whole option yellow
-    keyword whole plot yellow
+    keyword whole ac SUPPORT_FUNCTION
+    keyword whole alias KEYWORD_OTHER_RESERVED
+    keyword whole alter SUPPORT_FUNCTION
+    keyword whole altermod SUPPORT_FUNCTION
+    keyword whole alterparam SUPPORT_FUNCTION
+    keyword whole asciiplot SUPPORT_FUNCTION
+    keyword whole aspice SUPPORT_FUNCTION
+    keyword whole bug SUPPORT_FUNCTION
+    keyword whole cd SUPPORT_FUNCTION
+    keyword whole cdump SUPPORT_FUNCTION
+    keyword whole circbyline SUPPORT_FUNCTION
+    keyword whole codemodel SUPPORT_FUNCTION
+    keyword whole compose SUPPORT_FUNCTION
+    keyword whole cutout SUPPORT_FUNCTION
+    keyword whole dc SUPPORT_FUNCTION
+    keyword whole define KEYWORD_OTHER_RESERVED
+    keyword whole deftype KEYWORD_OTHER_RESERVED
+    keyword whole delete SUPPORT_FUNCTION
+    keyword whole destroy SUPPORT_FUNCTION
+    keyword whole devhelp SUPPORT_FUNCTION
+    keyword whole diff SUPPORT_FUNCTION
+    keyword whole display SUPPORT_FUNCTION
+    keyword whole echo SUPPORT_FUNCTION
+    keyword whole edit SUPPORT_FUNCTION
+    keyword whole edisplay SUPPORT_FUNCTION
+    keyword whole eprint SUPPORT_FUNCTION
+    keyword whole eprvcd SUPPORT_FUNCTION
+    keyword whole fft SUPPORT_FUNCTION
+    keyword whole fourier SUPPORT_FUNCTION
+    keyword whole getcwd SUPPORT_FUNCTION
+    keyword whole gnuplot SUPPORT_FUNCTION
+    keyword whole hardcopy SUPPORT_FUNCTION
+    keyword whole help SUPPORT_FUNCTION
+    keyword whole history SUPPORT_FUNCTION
+    keyword whole inventory SUPPORT_FUNCTION
+    keyword whole iplot SUPPORT_FUNCTION
+    keyword whole jobs SUPPORT_FUNCTION
+    keyword whole let KEYWORD_OTHER_RESERVED
+    keyword whole linearize SUPPORT_FUNCTION
+    keyword whole listing SUPPORT_FUNCTION
+    keyword whole load SUPPORT_FUNCTION
+    keyword whole mc_source SUPPORT_FUNCTION
+    keyword whole meas SUPPORT_FUNCTION
+    keyword whole mdump SUPPORT_FUNCTION
+    keyword whole mrdump SUPPORT_FUNCTION
+    keyword whole noise SUPPORT_FUNCTION
+    keyword whole op SUPPORT_FUNCTION
+    keyword whole option SUPPORT_FUNCTION
+    keyword whole plot SUPPORT_FUNCTION
     # FIXME: other pre_* keywords?
-    keyword whole pre_codemodel yellow
-    keyword whole pre_set yellow
-    keyword whole pre_unset yellow
-    keyword whole print yellow
-    keyword whole psd yellow
-    keyword whole quit yellow
-    keyword whole rehash yellow
-    keyword whole remcirc yellow
-    keyword whole remzerovec yellow
-    keyword whole reset yellow
-    keyword whole reshape yellow
-    keyword whole resume yellow
-    keyword whole rspice yellow
-    keyword whole run yellow
-    keyword whole rusage yellow
-    keyword whole save yellow
-    keyword whole sens yellow
-    keyword whole set yellow
-    keyword whole setcs yellow
-    keyword whole setcirc yellow
-    keyword whole setplot yellow
-    keyword whole setscale yellow
-    keyword whole setseed yellow
-    keyword whole settype yellow
-    keyword whole shell yellow
-    keyword whole shift yellow
-    keyword whole show yellow
-    keyword whole showmod yellow
-    keyword whole snload yellow
-    keyword whole snsave yellow
-    keyword whole source yellow
-    keyword whole spec yellow
-    keyword whole status yellow
-    keyword whole step yellow
-    keyword whole stop yellow
-    keyword whole strcmp yellow
-    keyword whole sysinfo yellow
-    keyword whole tf yellow
-    keyword whole trace yellow
-    keyword whole tran yellow
-    keyword whole transpose yellow
-    keyword whole unalias yellow
-    keyword whole undefine yellow
-    keyword whole unlet yellow
-    keyword whole unset yellow
-    keyword whole version yellow
-    keyword whole where yellow
-    keyword whole wrdata yellow
-    keyword whole write yellow
-    keyword whole wrs2p yellow
+    keyword whole pre_codemodel SUPPORT_FUNCTION
+    keyword whole pre_set SUPPORT_FUNCTION
+    keyword whole pre_unset SUPPORT_FUNCTION
+    keyword whole print SUPPORT_FUNCTION
+    keyword whole psd SUPPORT_FUNCTION
+    keyword whole quit SUPPORT_FUNCTION
+    keyword whole rehash SUPPORT_FUNCTION
+    keyword whole remcirc SUPPORT_FUNCTION
+    keyword whole remzerovec SUPPORT_FUNCTION
+    keyword whole reset SUPPORT_FUNCTION
+    keyword whole reshape SUPPORT_FUNCTION
+    keyword whole resume SUPPORT_FUNCTION
+    keyword whole rspice SUPPORT_FUNCTION
+    keyword whole run SUPPORT_FUNCTION
+    keyword whole rusage SUPPORT_FUNCTION
+    keyword whole save SUPPORT_FUNCTION
+    keyword whole sens SUPPORT_FUNCTION
+    keyword whole set KEYWORD_OTHER_RESERVED
+    keyword whole setcs SUPPORT_FUNCTION
+    keyword whole setcirc SUPPORT_FUNCTION
+    keyword whole setplot SUPPORT_FUNCTION
+    keyword whole setscale SUPPORT_FUNCTION
+    keyword whole setseed SUPPORT_FUNCTION
+    keyword whole settype SUPPORT_FUNCTION
+    keyword whole shell SUPPORT_FUNCTION
+    keyword whole shift SUPPORT_FUNCTION
+    keyword whole show SUPPORT_FUNCTION
+    keyword whole showmod SUPPORT_FUNCTION
+    keyword whole snload SUPPORT_FUNCTION
+    keyword whole snsave SUPPORT_FUNCTION
+    keyword whole source SUPPORT_FUNCTION
+    keyword whole spec SUPPORT_FUNCTION
+    keyword whole status SUPPORT_FUNCTION
+    keyword whole step SUPPORT_FUNCTION
+    keyword whole stop SUPPORT_FUNCTION
+    keyword whole strcmp SUPPORT_FUNCTION
+    keyword whole sysinfo SUPPORT_FUNCTION
+    keyword whole tf SUPPORT_FUNCTION
+    keyword whole trace SUPPORT_FUNCTION
+    keyword whole tran SUPPORT_FUNCTION
+    keyword whole transpose SUPPORT_FUNCTION
+    keyword whole unalias SUPPORT_FUNCTION
+    keyword whole undefine SUPPORT_FUNCTION
+    keyword whole unlet SUPPORT_FUNCTION
+    keyword whole unset KEYWORD_OTHER_RESERVED
+    keyword whole version SUPPORT_FUNCTION
+    keyword whole where SUPPORT_FUNCTION
+    keyword whole wrdata SUPPORT_FUNCTION
+    keyword whole write SUPPORT_FUNCTION
+    keyword whole wrs2p SUPPORT_FUNCTION
 
     # control structures
-    keyword whole break brightred
-    keyword whole continue brightred
-    keyword whole dowhile brightred
-    keyword whole else brightred
-    keyword whole end brightred
-    keyword whole foreach brightred
-    keyword whole goto brightred
-    keyword whole if brightred
-    keyword whole label brightred
-    keyword whole repeat brightred
-    keyword whole then brightred
-    keyword whole while brightred
+    keyword whole break KEYWORD_CONTROL
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole dowhile KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole end KEYWORD_CONTROL
+    keyword whole foreach KEYWORD_CONTROL
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole label KEYWORD_CONTROL
+    keyword whole repeat KEYWORD_CONTROL
+    keyword whole then KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
 
     # internally predefined variables
-    keyword whole appendwrite white
-    keyword whole askquit white
-    keyword whole batchmode white
+    keyword whole appendwrite VARIABLE_OTHER
+    keyword whole askquit VARIABLE_OTHER
+    keyword whole batchmode VARIABLE_OTHER
     # FIXME: N between 0 and 22
-    keyword wholeleft color*\s white
-    keyword wholeleft color*\t white
-    keyword whole controlswait white
-    keyword whole cpdebug white
-    keyword whole curplot white
-    keyword whole curplotdate white
-    keyword whole curplotname white
-    keyword whole curplottitle white
-    keyword whole debug white
-    keyword whole device white
-    keyword whole diff_abstol white
-    keyword whole diff_reltol white
-    keyword whole diff_vntol white
-    keyword whole echo white
-    keyword whole editor white
-    keyword whole filetype white
-    keyword whole fourgridsize white
-    keyword whole gridsize white
-    keyword whole gridstyle white
-    keyword whole hcopydev white
-    keyword whole hcopyfont white
-    keyword whole hcopyfontsize white
-    keyword whole hcopydevtype white
-    keyword whole hcopyscale white
-    keyword whole hcopywidth white
-    keyword whole hcopyheight white
-    keyword whole hcopypscolor white
-    keyword whole hcopypstxcolor white
-    keyword whole height white
-    keyword whole history white
-    keyword whole inputdir white
-    keyword whole interactive white
-    keyword whole lprplot5 white
-    keyword whole lprps white
-    keyword whole modelcard white
-    keyword whole moremode white
-    keyword whole nfreqs white
-    keyword whole ngbehavior white
-    keyword whole ngdebug white
-    keyword whole ng_nomodcheck white
-    keyword whole no_auto_gnd white
-    keyword whole nobjthack white
-    keyword whole nobreak white
-    keyword whole noasciiplotvalue white
-    keyword whole noclobber white
-    keyword whole noglob white
-    keyword whole nolegend white
-    keyword whole nonomatch white
-    keyword whole noparse white
-    keyword whole noprintscale white
-    keyword whole nosavecurrents white
-    keyword whole nosort white
-    keyword whole nostepsizelimit white
-    keyword whole nosubckt white
-    keyword whole notrnoise white
-    keyword whole nounits white
-    keyword whole numdgt white
-    keyword whole num_threads white
-    keyword whole oscompiled white
-    keyword whole plainlet white
-    keyword whole plainplot white
-    keyword whole plainwrite white
-    keyword whole plainstyle white
-    keyword whole pointchars white
-    keyword whole polydegree white
-    keyword whole polysteps white
-    keyword whole program white
-    keyword whole prompt white
-    keyword whole rawfile white
-    keyword whole remote_shell white
-    keyword whole renumber white
-    keyword whole rndseed white
-    keyword whole rhost white
-    keyword whole rprogram white
-    keyword whole sharedmode white
-    keyword whole sim_status white
-    keyword whole sourcepath white
-    keyword whole specwindow white
-    keyword whole specwindoworder white
-    keyword whole spicepath white
-    keyword whole sqrnoise white
-    keyword whole strict_errorhandling white
-    keyword whole subend white
-    keyword whole subinvoke white
-    keyword whole substart white
-    keyword whole term white
-    keyword whole ticchar white
-    keyword whole ticmarks white
-    keyword whole ticlist white
-    keyword whole units white
-    keyword whole unixcom white
-    keyword whole wfont white
-    keyword whole wfont_size white
-    keyword whole width white
-    keyword whole win_console white
-    keyword whole wr_singlescale white
-    keyword whole wr_vecnames white
-    keyword whole x11lineararcs white
-    keyword whole xbrushwidth white
-    keyword whole xgridwidth white
-    keyword whole xfont white
-    keyword whole xtrtol white
+    keyword wholeleft color*\s VARIABLE_OTHER
+    keyword wholeleft color*\t VARIABLE_OTHER
+    keyword whole controlswait VARIABLE_OTHER
+    keyword whole cpdebug VARIABLE_OTHER
+    keyword whole curplot VARIABLE_OTHER
+    keyword whole curplotdate VARIABLE_OTHER
+    keyword whole curplotname VARIABLE_OTHER
+    keyword whole curplottitle VARIABLE_OTHER
+    keyword whole debug VARIABLE_OTHER
+    keyword whole device VARIABLE_OTHER
+    keyword whole diff_abstol VARIABLE_OTHER
+    keyword whole diff_reltol VARIABLE_OTHER
+    keyword whole diff_vntol VARIABLE_OTHER
+    keyword whole echo VARIABLE_OTHER
+    keyword whole editor VARIABLE_OTHER
+    keyword whole filetype VARIABLE_OTHER
+    keyword whole fourgridsize VARIABLE_OTHER
+    keyword whole gridsize VARIABLE_OTHER
+    keyword whole gridstyle VARIABLE_OTHER
+    keyword whole hcopydev VARIABLE_OTHER
+    keyword whole hcopyfont VARIABLE_OTHER
+    keyword whole hcopyfontsize VARIABLE_OTHER
+    keyword whole hcopydevtype VARIABLE_OTHER
+    keyword whole hcopyscale VARIABLE_OTHER
+    keyword whole hcopywidth VARIABLE_OTHER
+    keyword whole hcopyheight VARIABLE_OTHER
+    keyword whole hcopypscolor VARIABLE_OTHER
+    keyword whole hcopypstxcolor VARIABLE_OTHER
+    keyword whole height VARIABLE_OTHER
+    keyword whole history VARIABLE_OTHER
+    keyword whole inputdir VARIABLE_OTHER
+    keyword whole interactive VARIABLE_OTHER
+    keyword whole lprplot5 VARIABLE_OTHER
+    keyword whole lprps VARIABLE_OTHER
+    keyword whole modelcard VARIABLE_OTHER
+    keyword whole moremode VARIABLE_OTHER
+    keyword whole nfreqs VARIABLE_OTHER
+    keyword whole ngbehavior VARIABLE_OTHER
+    keyword whole ngdebug VARIABLE_OTHER
+    keyword whole ng_nomodcheck VARIABLE_OTHER
+    keyword whole no_auto_gnd VARIABLE_OTHER
+    keyword whole nobjthack VARIABLE_OTHER
+    keyword whole nobreak VARIABLE_OTHER
+    keyword whole noasciiplotvalue VARIABLE_OTHER
+    keyword whole noclobber VARIABLE_OTHER
+    keyword whole noglob VARIABLE_OTHER
+    keyword whole nolegend VARIABLE_OTHER
+    keyword whole nonomatch VARIABLE_OTHER
+    keyword whole noparse VARIABLE_OTHER
+    keyword whole noprintscale VARIABLE_OTHER
+    keyword whole nosavecurrents VARIABLE_OTHER
+    keyword whole nosort VARIABLE_OTHER
+    keyword whole nostepsizelimit VARIABLE_OTHER
+    keyword whole nosubckt VARIABLE_OTHER
+    keyword whole notrnoise VARIABLE_OTHER
+    keyword whole nounits VARIABLE_OTHER
+    keyword whole numdgt VARIABLE_OTHER
+    keyword whole num_threads VARIABLE_OTHER
+    keyword whole oscompiled VARIABLE_OTHER
+    keyword whole plainlet VARIABLE_OTHER
+    keyword whole plainplot VARIABLE_OTHER
+    keyword whole plainwrite VARIABLE_OTHER
+    keyword whole plainstyle VARIABLE_OTHER
+    keyword whole pointchars VARIABLE_OTHER
+    keyword whole polydegree VARIABLE_OTHER
+    keyword whole polysteps VARIABLE_OTHER
+    keyword whole program VARIABLE_OTHER
+    keyword whole prompt VARIABLE_OTHER
+    keyword whole rawfile VARIABLE_OTHER
+    keyword whole remote_shell VARIABLE_OTHER
+    keyword whole renumber VARIABLE_OTHER
+    keyword whole rndseed VARIABLE_OTHER
+    keyword whole rhost VARIABLE_OTHER
+    keyword whole rprogram VARIABLE_OTHER
+    keyword whole sharedmode VARIABLE_OTHER
+    keyword whole sim_status VARIABLE_OTHER
+    keyword whole sourcepath VARIABLE_OTHER
+    keyword whole specwindow VARIABLE_OTHER
+    keyword whole specwindoworder VARIABLE_OTHER
+    keyword whole spicepath VARIABLE_OTHER
+    keyword whole sqrnoise VARIABLE_OTHER
+    keyword whole strict_errorhandling VARIABLE_OTHER
+    keyword whole subend VARIABLE_OTHER
+    keyword whole subinvoke VARIABLE_OTHER
+    keyword whole substart VARIABLE_OTHER
+    keyword whole term VARIABLE_OTHER
+    keyword whole ticchar VARIABLE_OTHER
+    keyword whole ticmarks VARIABLE_OTHER
+    keyword whole ticlist VARIABLE_OTHER
+    keyword whole units VARIABLE_OTHER
+    keyword whole unixcom VARIABLE_OTHER
+    keyword whole wfont VARIABLE_OTHER
+    keyword whole wfont_size VARIABLE_OTHER
+    keyword whole width VARIABLE_OTHER
+    keyword whole win_console VARIABLE_OTHER
+    keyword whole wr_singlescale VARIABLE_OTHER
+    keyword whole wr_vecnames VARIABLE_OTHER
+    keyword whole x11lineararcs VARIABLE_OTHER
+    keyword whole xbrushwidth VARIABLE_OTHER
+    keyword whole xgridwidth VARIABLE_OTHER
+    keyword whole xfont VARIABLE_OTHER
+    keyword whole xtrtol VARIABLE_OTHER

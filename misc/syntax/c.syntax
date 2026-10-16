@@ -13,40 +13,9 @@
 #
 
 
-# For the default (blue) background.
-# The colors almost match the original "c.syntax" file, slightly extending it:
-define _punctuation		yellow
-define _punct_operator	brightcyan
-define _punct_semicolon	brightmagenta
-define _punct_bracket	brightcyan
-define _punct_sqbracket	brightcyan
-define _punct_field		yellow
-define _punct_comma		brightcyan
-define _punct_ternary	brightcyan
-define _punct_bitwise	brightmagenta
-define _label			cyan
-define _preproc			brightred
-define _preproc_str		red
-define _preproc_nl_esc	red
-define _preproc_indent	brightmagenta
-define _keyword			yellow
-define _datatype		yellow
-define _datatype_void	yellow
-define _datatype_mod	yellow
-define _datatype_scope	yellow
-define _const			lightgray
-define _num_integer		lightgray
-define _num_hex			lightgray
-define _num_oct			lightgray
-define _num_float		lightgray
-define _string			green
-define _string_specsymb	brightgreen
-define _string_escchar	brightgreen
-define _char			brightgreen
-define _comment			brown
-define _comment_word	black brown
-define _comment_exmark	black yellow
-define _comment_qnmark	black brown
+define _comment_word	KEYWORD_OTHER_TODO brown
+define _comment_exmark	KEYWORD_OTHER_TODO yellow
+define _comment_qnmark	KEYWORD_OTHER_TODO brown
 
 # I think this highlighting is easier for the eyes for the black background themes. Can be also used with the blue background:
 #define _punctuation		yellow
@@ -84,147 +53,147 @@ define _comment_qnmark	black brown
 
 
 context default
-    keyword whole asm _keyword
-    keyword whole break _keyword
-    keyword whole case _keyword
-    keyword whole const _keyword
-    keyword whole continue _keyword
-    keyword whole do _keyword
-    keyword whole else _keyword
-    keyword whole enum _keyword
-    keyword whole for _keyword
-    keyword whole goto _keyword
-    keyword whole if _keyword
-    keyword whole inline _keyword
-    keyword whole restrict _keyword
-    keyword whole return _keyword
-    keyword whole sizeof _keyword
-    keyword whole struct _keyword
-    keyword whole switch _keyword
-    keyword whole typedef _keyword
-    keyword whole union _keyword
-    keyword whole volatile _keyword
-    keyword whole while _keyword
+    keyword whole asm KEYWORD_OTHER_RESERVED
+    keyword whole break KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole const STORAGE_MODIFIER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole for KEYWORD_CONTROL
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole inline STORAGE_MODIFIER
+    keyword whole restrict STORAGE_MODIFIER
+    keyword whole return KEYWORD_CONTROL
+    keyword whole sizeof KEYWORD_OPERATOR_WORD
+    keyword whole struct STORAGE_TYPE_CLASS
+    keyword whole switch KEYWORD_CONTROL
+    keyword whole typedef STORAGE_TYPE
+    keyword whole union STORAGE_TYPE_CLASS
+    keyword whole volatile STORAGE_MODIFIER
+    keyword whole while KEYWORD_CONTROL
 
     # C11/C23 extensions:
-    keyword whole alignas _keyword
-    keyword whole alignof _keyword
-    keyword whole constexpr _keyword
-    keyword whole typeof _keyword
-    keyword whole typeof_unqual _keyword
-    keyword whole static_assert _keyword
-    keyword whole thread_local _keyword
-    keyword whole _Alignas _keyword
-    keyword whole _Alignof _keyword
-    keyword whole _Atomic _keyword
-    keyword whole _Bool _keyword
-    keyword whole _Complex _keyword
-    keyword whole _Decimal32 _keyword
-    keyword whole _Decimal64 _keyword
-    keyword whole _Decimal128 _keyword
-    keyword whole _Generic _keyword
-    keyword whole _Imaginary _keyword
-    keyword whole _Noreturn _keyword
-    keyword whole _Static_assert _keyword
-    keyword whole _Thread_local _keyword
+    keyword whole alignas KEYWORD_OTHER_RESERVED
+    keyword whole alignof KEYWORD_OTHER_RESERVED
+    keyword whole constexpr STORAGE_MODIFIER
+    keyword whole typeof KEYWORD_OTHER_RESERVED
+    keyword whole typeof_unqual KEYWORD_OTHER_RESERVED
+    keyword whole static_assert KEYWORD_OTHER_RESERVED
+    keyword whole thread_local STORAGE_MODIFIER
+    keyword whole _Alignas KEYWORD_OTHER_RESERVED
+    keyword whole _Alignof KEYWORD_OTHER_RESERVED
+    keyword whole _Atomic STORAGE_MODIFIER
+    keyword whole _Bool STORAGE_TYPE_PRIMITIVE
+    keyword whole _Complex STORAGE_TYPE_PRIMITIVE
+    keyword whole _Decimal32 STORAGE_TYPE_PRIMITIVE
+    keyword whole _Decimal64 STORAGE_TYPE_PRIMITIVE
+    keyword whole _Decimal128 STORAGE_TYPE_PRIMITIVE
+    keyword whole _Generic KEYWORD_OTHER_RESERVED
+    keyword whole _Imaginary STORAGE_TYPE_PRIMITIVE
+    keyword whole _Noreturn STORAGE_MODIFIER
+    keyword whole _Static_assert KEYWORD_OTHER_RESERVED
+    keyword whole _Thread_local STORAGE_MODIFIER
 
-    keyword whole auto _datatype_scope
-    keyword whole extern _datatype_scope
-    keyword whole register _datatype_scope
-    keyword whole static _datatype_scope
+    keyword whole auto STORAGE_MODIFIER
+    keyword whole extern STORAGE_MODIFIER
+    keyword whole register STORAGE_MODIFIER
+    keyword whole static STORAGE_MODIFIER
 
-    keyword whole void _datatype_void
-    keyword whole int _datatype
-    keyword whole char _datatype
-    keyword whole float _datatype
-    keyword whole double _datatype
-    keyword whole wchar_t _datatype
-    keyword whole short _datatype_mod
-    keyword whole long _datatype_mod
-    keyword whole signed _datatype_mod
-    keyword whole unsigned _datatype_mod
-    keyword whole wchar_t _datatype
-    keyword whole ... _keyword
+    keyword whole void STORAGE_TYPE_PRIMITIVE
+    keyword whole int STORAGE_TYPE_PRIMITIVE
+    keyword whole char STORAGE_TYPE_PRIMITIVE
+    keyword whole float STORAGE_TYPE_PRIMITIVE
+    keyword whole double STORAGE_TYPE_PRIMITIVE
+    keyword whole wchar_t STORAGE_TYPE_PRIMITIVE
+    keyword whole short STORAGE_TYPE_PRIMITIVE
+    keyword whole long STORAGE_TYPE_PRIMITIVE
+    keyword whole signed STORAGE_TYPE_PRIMITIVE
+    keyword whole unsigned STORAGE_TYPE_PRIMITIVE
+    keyword whole wchar_t STORAGE_TYPE_PRIMITIVE
+    keyword whole ... PUNCTUATION_SEPARATOR
 
-    keyword NULL _const
+    keyword NULL CONSTANT_LANGUAGE
     # Since C23:
-    keyword true _const
-    keyword false _const
-    keyword nullptr _const
+    keyword true CONSTANT_LANGUAGE
+    keyword false CONSTANT_LANGUAGE
+    keyword nullptr CONSTANT_LANGUAGE
 
-    keyword linestart \{\s\t\}\[\s\t\]#*\n _preproc_indent
-    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: _label
-    keyword whole \[\s\t\]default _keyword
+    keyword linestart \{\s\t\}\[\s\t\]#*\n META_PREPROCESSOR
+    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: ENTITY_NAME_LABEL
+    keyword whole \[\s\t\]default KEYWORD_CONTROL
 
     # Comments:
-    keyword /\* _comment
-    keyword \*/ _comment
-    keyword // _comment
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword // COMMENT_LINE
 
     # Characters:
-    keyword '\\\{"abtnvfr\}' _char
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' _char
-    keyword '\\'' _char
-    keyword '\\\\' _char
-    keyword '\\0' _char
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' _char
+    keyword '\\\{"abtnvfr\}' CONSTANT_CHARACTER
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\'' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\\\' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\0' CONSTANT_CHARACTER_ESCAPE
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' CONSTANT_CHARACTER
 
     # Punctuation characters, sorted by ASCII code:
-    keyword ! _punctuation
-    keyword % _punctuation
-    keyword && _punctuation
+    keyword ! KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword && KEYWORD_OPERATOR
     # Note: the '&' symbol uses both in the reference/address and in the bitwise operation.
-    keyword & _punct_bitwise
-    keyword ( _punct_bracket
-    keyword ) _punct_bracket
-    keyword \* _punctuation
-    keyword \+ _punctuation
-    keyword , _punct_comma
-    keyword . _punct_field
-    keyword -> _punct_field
-    keyword - _punctuation
-    keyword / _punctuation
-    keyword : _punct_ternary
-    keyword ; _punct_semicolon
-    keyword < _punctuation
-    keyword = _punctuation
-    keyword > _punctuation
-    keyword ? _punct_ternary
-    keyword [ _punct_sqbracket
-    keyword ] _punct_sqbracket
-    keyword ^ _punct_bitwise
-    keyword { _punct_operator
-    keyword || _punctuation
-    keyword | _punct_bitwise
-    keyword } _punct_operator
-    keyword ~ _punct_bitwise
+    keyword & KEYWORD_OPERATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword \* KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword . PUNCTUATION_SEPARATOR
+    keyword -> PUNCTUATION_SEPARATOR
+    keyword - KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword < KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword ? PUNCTUATION_SEPARATOR
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword ^ KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword || KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword } PUNCTUATION_SECTION
+    keyword ~ KEYWORD_OPERATOR
 
     # Numbers:
     wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
 
-    keyword whole 0x\{0123456789abcdefABCDEF_\}\[0123456789abcdefABCDEF_\] _num_hex
-    keyword whole 0\{01234567_\}\[01234567_\] _num_oct
-    keyword whole 0 _num_integer
-    keyword whole 0\{lu\} _num_integer
-    keyword whole \{123456789_\}\[0123456789_\] _num_integer
-    keyword whole \{123456789_\}\[0123456789_\]\{lu\} _num_integer
+    keyword whole 0x\{0123456789abcdefABCDEF_\}\[0123456789abcdefABCDEF_\] CONSTANT_NUMERIC
+    keyword whole 0\{01234567_\}\[01234567_\] CONSTANT_NUMERIC
+    keyword whole 0 CONSTANT_NUMERIC
+    keyword whole 0\{lu\} CONSTANT_NUMERIC
+    keyword whole \{123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{123456789_\}\[0123456789_\]\{lu\} CONSTANT_NUMERIC
     # Float-point values:
-    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\] _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\] _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] _num_float
+    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
     # Explicit float (not double):
-    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\]f _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\]f _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\]f _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\]f _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\]f _num_float
-    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\]f _num_float
+    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\]f CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\]f CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\]f CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\]f CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\]f CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\]f CONSTANT_NUMERIC
 
 
-context exclusive /\* \*/ _comment
+context exclusive /\* \*/ COMMENT_BLOCK
     keyword whole BUG 	_comment_word
     keyword whole FixMe _comment_word
     keyword whole FIXME _comment_word
@@ -236,7 +205,7 @@ context exclusive /\* \*/ _comment
     keyword ??\[?\] 	_comment_qnmark
     spellcheck
 
-context exclusive // \n _comment
+context exclusive // \n COMMENT_LINE
     keyword whole BUG:		_comment_word
     keyword whole FixMe: 	_comment_word
     keyword whole FIXME: 	_comment_word
@@ -248,25 +217,25 @@ context exclusive // \n _comment
     keyword ??\[?\] 		_comment_qnmark
     spellcheck
 
-context linestart # \n _preproc
-    keyword \\\n _preproc_nl_esc
-    keyword /\**\*/ _comment
-    keyword //*\n _comment
-    keyword "+" _preproc_str
-    keyword <+> _preproc_str
+context linestart # \n META_PREPROCESSOR
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword /\**\*/ COMMENT_BLOCK
+    keyword //*\n COMMENT_LINE
+    keyword "+" STRING_QUOTED_OTHER
+    keyword <+> STRING_QUOTED_OTHER
 
-context " " _string
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\" _string_escchar
-    keyword %% _string_specsymb
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} _string_specsymb
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} _string_specsymb
-    keyword %\[hl\]n _string_specsymb
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s _string_specsymb
-    keyword %[*] _string_specsymb
-    keyword %c _string_specsymb
-    keyword %p _string_specsymb
-    keyword \\\{0123\}\{01234567\}\{01234567\} _string_specsymb
-    keyword \\\\ _string_escchar
-    keyword \\' _string_escchar
-    keyword \\\{abtnvfr\} _string_escchar
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword %p CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

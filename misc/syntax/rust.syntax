@@ -1,153 +1,153 @@
 context default
 
 # keywords
-    keyword whole as yellow
-    keyword whole break yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole crate yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extern yellow
-    keyword whole fn yellow
-    keyword whole for yellow
-    keyword whole if yellow
-    keyword whole impl yellow
-    keyword whole in yellow
-    keyword whole let yellow
-    keyword whole loop yellow
-    keyword whole match yellow
-    keyword whole mod yellow
-    keyword whole move yellow
-    keyword whole mut yellow
-    keyword whole pub yellow
-    keyword whole ref yellow
-    keyword whole return yellow
-    keyword whole Self yellow
-    keyword whole self brightgreen
-    keyword whole static yellow
-    keyword whole struct yellow
-    keyword whole super yellow
-    keyword whole trait yellow
-    keyword whole type yellow
-    keyword whole unsafe yellow
-    keyword whole use yellow
-    keyword whole where yellow
-    keyword whole while yellow
+    keyword whole as KEYWORD_OPERATOR_WORD
+    keyword whole break KEYWORD_CONTROL
+    keyword whole const STORAGE_MODIFIER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole crate KEYWORD_CONTROL_IMPORT
+    keyword whole else KEYWORD_CONTROL
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole extern KEYWORD_CONTROL_IMPORT
+    keyword whole fn STORAGE_TYPE_FUNCTION
+    keyword whole for KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole impl STORAGE_TYPE_CLASS
+    keyword whole in KEYWORD_CONTROL
+    keyword whole let KEYWORD_OTHER_RESERVED
+    keyword whole loop KEYWORD_CONTROL
+    keyword whole match KEYWORD_CONTROL
+    keyword whole mod KEYWORD_CONTROL_IMPORT
+    keyword whole move KEYWORD_OTHER_RESERVED
+    keyword whole mut STORAGE_MODIFIER
+    keyword whole pub STORAGE_MODIFIER
+    keyword whole ref STORAGE_MODIFIER
+    keyword whole return KEYWORD_CONTROL
+    keyword whole Self VARIABLE_LANGUAGE
+    keyword whole self VARIABLE_LANGUAGE
+    keyword whole static STORAGE_MODIFIER
+    keyword whole struct STORAGE_TYPE_CLASS
+    keyword whole super VARIABLE_LANGUAGE
+    keyword whole trait STORAGE_TYPE_CLASS
+    keyword whole type STORAGE_TYPE
+    keyword whole unsafe STORAGE_MODIFIER
+    keyword whole use KEYWORD_CONTROL_IMPORT
+    keyword whole where KEYWORD_OTHER_RESERVED
+    keyword whole while KEYWORD_CONTROL
 
 # keywords reserved for future use
-    keyword whole abstract red
-    keyword whole alignof red
-    keyword whole become red
-    keyword whole box red
-    keyword whole do red
-    keyword whole final red
-    keyword whole macro red
-    keyword whole offsetof red
-    keyword whole override red
-    keyword whole priv red
-    keyword whole proc red
-    keyword whole pure red
-    keyword whole sizeof red
-    keyword whole typeof red
-    keyword whole unsized red
-    keyword whole virtual red
-    keyword whole yield red
+    keyword whole abstract KEYWORD_OTHER_RESERVED
+    keyword whole alignof KEYWORD_OTHER_RESERVED
+    keyword whole become KEYWORD_OTHER_RESERVED
+    keyword whole box KEYWORD_OTHER_RESERVED
+    keyword whole do KEYWORD_OTHER_RESERVED
+    keyword whole final KEYWORD_OTHER_RESERVED
+    keyword whole macro KEYWORD_OTHER_RESERVED
+    keyword whole offsetof KEYWORD_OTHER_RESERVED
+    keyword whole override KEYWORD_OTHER_RESERVED
+    keyword whole priv KEYWORD_OTHER_RESERVED
+    keyword whole proc KEYWORD_OTHER_RESERVED
+    keyword whole pure KEYWORD_OTHER_RESERVED
+    keyword whole sizeof KEYWORD_OTHER_RESERVED
+    keyword whole typeof KEYWORD_OTHER_RESERVED
+    keyword whole unsized KEYWORD_OTHER_RESERVED
+    keyword whole virtual KEYWORD_OTHER_RESERVED
+    keyword whole yield KEYWORD_OTHER_RESERVED
 
 # common types
-    keyword whole bool brightcyan
-    keyword whole char brightcyan
-    keyword whole isize brightcyan
-    keyword whole usize brightcyan
+    keyword whole bool STORAGE_TYPE_PRIMITIVE
+    keyword whole char STORAGE_TYPE_PRIMITIVE
+    keyword whole isize STORAGE_TYPE_PRIMITIVE
+    keyword whole usize STORAGE_TYPE_PRIMITIVE
 
-    keyword whole i8 brightcyan
-    keyword whole i16 brightcyan
-    keyword whole i32 brightcyan
-    keyword whole i64 brightcyan
-    keyword whole u8 brightcyan
-    keyword whole u16 brightcyan
-    keyword whole u32 brightcyan
-    keyword whole u64 brightcyan
-    keyword whole isize brightcyan
-    keyword whole usize brightcyan
-    keyword whole f32 brightcyan
-    keyword whole f64 brightcyan
+    keyword whole i8 STORAGE_TYPE_PRIMITIVE
+    keyword whole i16 STORAGE_TYPE_PRIMITIVE
+    keyword whole i32 STORAGE_TYPE_PRIMITIVE
+    keyword whole i64 STORAGE_TYPE_PRIMITIVE
+    keyword whole u8 STORAGE_TYPE_PRIMITIVE
+    keyword whole u16 STORAGE_TYPE_PRIMITIVE
+    keyword whole u32 STORAGE_TYPE_PRIMITIVE
+    keyword whole u64 STORAGE_TYPE_PRIMITIVE
+    keyword whole isize STORAGE_TYPE_PRIMITIVE
+    keyword whole usize STORAGE_TYPE_PRIMITIVE
+    keyword whole f32 STORAGE_TYPE_PRIMITIVE
+    keyword whole f64 STORAGE_TYPE_PRIMITIVE
 
-    keyword whole str brightcyan
-    keyword whole String brightcyan
-    keyword whole Vec brightcyan
-    keyword whole Option brightcyan
-    keyword whole Result brightcyan
+    keyword whole str STORAGE_TYPE_PRIMITIVE
+    keyword whole String SUPPORT_CLASS
+    keyword whole Vec SUPPORT_CLASS
+    keyword whole Option SUPPORT_CLASS
+    keyword whole Result SUPPORT_CLASS
 
 # constants
-    keyword whole false brightgreen
-    keyword whole true brightgreen
-    keyword whole Some brightgreen
-    keyword whole None brightgreen
-    keyword whole Ok brightgreen
-    keyword whole Err brightgreen
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole Some CONSTANT_OTHER
+    keyword whole None CONSTANT_OTHER
+    keyword whole Ok CONSTANT_OTHER
+    keyword whole Err CONSTANT_OTHER
 
 # macros
-    keyword whole +! brightmagenta
-    keyword whole $+ brightblue
+    keyword whole +! KEYWORD_OPERATOR
+    keyword whole $+ VARIABLE_OTHER
 
 # numbers
     wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
 
-    keyword whole 0x\{0123456789abcdefABCDEF_\}\[0123456789abcdefABCDEF_\] brightgreen
-    keyword whole 0o\{01234567_\}\[01234567_\] brightgreen
-    keyword whole 0b\{01_\}\[01_\] brightgreen
-    keyword whole \{0123456789_\}\[0123456789_\] brightgreen
-    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\] brightgreen
-    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\] brightgreen
-    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] brightgreen
-    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] brightgreen
-    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] brightgreen
-    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole 0x\{0123456789abcdefABCDEF_\}\[0123456789abcdefABCDEF_\] CONSTANT_NUMERIC
+    keyword whole 0o\{01234567_\}\[01234567_\] CONSTANT_NUMERIC
+    keyword whole 0b\{01_\}\[01_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
 
 # char
-    keyword '\\'' brightgreen
-    keyword '*' brightgreen
+    keyword '\\'' CONSTANT_CHARACTER
+    keyword '*' CONSTANT_CHARACTER
 
 # comments
 
-context /\* \*/ brown
+context /\* \*/ COMMENT_BLOCK
     spellcheck
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
+    keyword whole BUG KEYWORD_OTHER_TODO
+    keyword whole FixMe KEYWORD_OTHER_TODO
+    keyword whole FIXME KEYWORD_OTHER_TODO
+    keyword whole Note KEYWORD_OTHER_TODO
+    keyword whole NOTE KEYWORD_OTHER_TODO
+    keyword whole ToDo KEYWORD_OTHER_TODO
+    keyword whole TODO KEYWORD_OTHER_TODO
+    keyword !!\[!\] KEYWORD_OTHER_TODO
+    keyword ??\[?\] KEYWORD_OTHER_TODO
 
 
-context // \n brown
+context // \n COMMENT_LINE
     spellcheck
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
+    keyword whole BUG KEYWORD_OTHER_TODO
+    keyword whole FixMe KEYWORD_OTHER_TODO
+    keyword whole FIXME KEYWORD_OTHER_TODO
+    keyword whole Note KEYWORD_OTHER_TODO
+    keyword whole NOTE KEYWORD_OTHER_TODO
+    keyword whole ToDo KEYWORD_OTHER_TODO
+    keyword whole TODO KEYWORD_OTHER_TODO
+    keyword !!\[!\] KEYWORD_OTHER_TODO
+    keyword ??\[?\] KEYWORD_OTHER_TODO
 
 # strings
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\" brightgreen
-    keyword \\' brightgreen
-    keyword \\\\ brightgreen
-    keyword \\\{abtnvfr0\} brightgreen
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr0\} CONSTANT_CHARACTER_ESCAPE
 
 
-context r#" "# green
+context r#" "# STRING_QUOTED_OTHER
     spellcheck
 
 
-context #[ ] white
-context #![ ] white
+context #[ ] META_PREPROCESSOR
+context #![ ] META_PREPROCESSOR

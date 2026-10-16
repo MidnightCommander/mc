@@ -1,18 +1,18 @@
 # DOS / Windows INI files
 
-context default cyan
-    keyword = brightred
+context default
+    keyword = KEYWORD_OPERATOR
 
 # groups
-context [ ] yellow
+context [ ] ENTITY_NAME_SECTION
 
 # comments:
-context # \n brown
+context # \n COMMENT_LINE
     spellcheck
 
-context ; \n brown
+context ; \n COMMENT_LINE
     spellcheck
 
-context exclusive = \n brightcyan
+context exclusive = \n STRING_UNQUOTED
 
 

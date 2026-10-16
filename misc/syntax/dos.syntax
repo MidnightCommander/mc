@@ -4,71 +4,71 @@
 caseinsensitive
 
 context default
-    keyword whole break yellow
-    keyword whole call yellow
-    keyword whole cd yellow
-    keyword whole chdir yellow
-    keyword whole cls yellow
-    keyword whole copy yellow
-    keyword whole del yellow
-    keyword whole dir yellow
-    keyword whole do yellow
-    keyword whole echo yellow
-    keyword whole else yellow
-    keyword whole erase yellow
-    keyword whole endlocal yellow
-    keyword whole errorlevel yellow
-    keyword whole exist yellow
-    keyword whole exit yellow
-    keyword whole for yellow
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole md yellow
-    keyword whole mkdir yellow
-    keyword whole move yellow
-    keyword whole not yellow
-    keyword whole off yellow
-    keyword whole on yellow
-    keyword whole pause yellow
-    keyword whole popd yellow
-    keyword whole pushd yellow
-    keyword whole rd yellow
-    keyword wholeleft rem\s*\n brown
-    keyword whole ren yellow
-    keyword whole rename yellow
-    keyword whole rmdir yellow
-    keyword whole set yellow
-    keyword whole setlocal yellow
-    keyword whole shift yellow
-    keyword whole then yellow
-    keyword whole type yellow
-    keyword whole ver yellow
+    keyword whole break SUPPORT_FUNCTION
+    keyword whole call SUPPORT_FUNCTION
+    keyword whole cd SUPPORT_FUNCTION
+    keyword whole chdir SUPPORT_FUNCTION
+    keyword whole cls SUPPORT_FUNCTION
+    keyword whole copy SUPPORT_FUNCTION
+    keyword whole del SUPPORT_FUNCTION
+    keyword whole dir SUPPORT_FUNCTION
+    keyword whole do KEYWORD_CONTROL
+    keyword whole echo SUPPORT_FUNCTION
+    keyword whole else KEYWORD_CONTROL
+    keyword whole erase SUPPORT_FUNCTION
+    keyword whole endlocal SUPPORT_FUNCTION
+    keyword whole errorlevel KEYWORD_OTHER_RESERVED
+    keyword whole exist SUPPORT_FUNCTION
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole in KEYWORD_CONTROL
+    keyword whole md SUPPORT_FUNCTION
+    keyword whole mkdir SUPPORT_FUNCTION
+    keyword whole move SUPPORT_FUNCTION
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole off CONSTANT_LANGUAGE
+    keyword whole on CONSTANT_LANGUAGE
+    keyword whole pause SUPPORT_FUNCTION
+    keyword whole popd SUPPORT_FUNCTION
+    keyword whole pushd SUPPORT_FUNCTION
+    keyword whole rd SUPPORT_FUNCTION
+    keyword wholeleft rem\s*\n COMMENT_LINE
+    keyword whole ren SUPPORT_FUNCTION
+    keyword whole rename SUPPORT_FUNCTION
+    keyword whole rmdir SUPPORT_FUNCTION
+    keyword whole set SUPPORT_FUNCTION
+    keyword whole setlocal SUPPORT_FUNCTION
+    keyword whole shift SUPPORT_FUNCTION
+    keyword whole then KEYWORD_CONTROL
+    keyword whole type SUPPORT_FUNCTION
+    keyword whole ver SUPPORT_FUNCTION
 
-    keyword \\ lightgray
-    keyword whole \%\* brightmagenta
-    keyword whole \%\$ brightmagenta
-    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta
-    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta
-    keyword >> white
-    keyword > white
-    keyword < white
-    keyword | white
+    keyword \\ PUNCTUATION_SEPARATOR
+    keyword whole \%\* VARIABLE_OTHER
+    keyword whole \%\$ VARIABLE_OTHER
+    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% VARIABLE_OTHER
+    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ VARIABLE_OTHER
+    keyword >> KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
 
-context ' ' brightcyan
+context ' ' STRING_QUOTED_SINGLE
     spellcheck
 
-context " " brightcyan
-    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta
-    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta
+context " " STRING_QUOTED_DOUBLE
+    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% VARIABLE_OTHER
+    keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ VARIABLE_OTHER
     spellcheck
 
-context linestart :: \n brightgreen
-    keyword $+:*$ black green
+context linestart :: \n COMMENT_LINE
+    keyword $+:*$ VARIABLE_OTHER green
     spellcheck
 
-context linestart : \n white black
+context linestart : \n ENTITY_NAME_LABEL black
     spellcheck
 
-context :: \n brightgreen
+context :: \n COMMENT_LINE
     spellcheck

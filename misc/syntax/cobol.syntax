@@ -5,702 +5,702 @@
 caseinsensitive
 
 context default
-    keyword ;; brightred
-    keyword \\@ brightred
-    keyword \\$ brightred
-    keyword \\\\ brightred
-    keyword \\" brightred
-    keyword \\' brightred
-    keyword \\` brightred
-    keyword ` brightred
-    keyword ; brightcyan
-    keyword $(*) brightgreen
-    keyword ${*} brightgreen
-    keyword { brightcyan
-    keyword } brightcyan
+    keyword ;; KEYWORD_CONTROL
+    keyword \\@ CONSTANT_CHARACTER_ESCAPE
+    keyword \\$ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
+    keyword ` PUNCTUATION_SECTION
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword whole linestart #!\[\s\]*\n brightcyan black
+    keyword whole linestart #!\[\s\]*\n COMMENT_LINE black
 
-    keyword $\* brightred
-    keyword $@ brightred
-    keyword $# brightred
-    keyword $? brightred
-    keyword $- brightred
-    keyword $$ brightred
-    keyword $! brightred
-    keyword $_ brightred
+    keyword $\* VARIABLE_OTHER
+    keyword $@ VARIABLE_OTHER
+    keyword $# VARIABLE_OTHER
+    keyword $? VARIABLE_OTHER
+    keyword $- VARIABLE_OTHER
+    keyword $$ VARIABLE_OTHER
+    keyword $! VARIABLE_OTHER
+    keyword $_ VARIABLE_OTHER
 
-    keyword wholeright $\[0123456789\] brightred
+    keyword wholeright $\[0123456789\] VARIABLE_OTHER
 
-    keyword wholeright $+ brightgreen
+    keyword wholeright $+ VARIABLE_OTHER
 
-    keyword $ brightgreen
+    keyword $ VARIABLE_OTHER
 
-    keyword wholeleft linestart function*() brightmagenta
-    keyword wholeleft linestart function\[\s\]+ brightmagenta
-    keyword wholeright +() brightmagenta
+    keyword wholeleft linestart function*() ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart function\[\s\]+ KEYWORD_OTHER_RESERVED
+    keyword wholeright +() ENTITY_NAME_FUNCTION
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole accept yellow
-    keyword whole access yellow
-    keyword whole add yellow
-    keyword whole adress yellow
-    keyword whole advancing yellow
-    keyword whole after yellow
-    keyword whole allowing yellow
-    keyword whole all yellow
-    keyword whole alpahanumeric-edited yellow
-    keyword whole alphabetic-lower yellow
-    keyword whole alphabetic-upper yellow
-    keyword whole alphabetic yellow
-    keyword whole alphabet yellow
-    keyword whole alphanumeric-edited yellow
-    keyword whole alphanumeric yellow
-    keyword whole also yellow
-    keyword whole alternate yellow
-    keyword whole alter yellow
-    keyword whole and yellow
-    keyword whole any yellow
-    keyword whole apply yellow
-    keyword whole areas yellow
-    keyword whole area yellow
-    keyword whole are yellow
-    keyword whole arithmetic yellow
-    keyword whole ascending yellow
-    keyword whole assign yellow
-    keyword whole as yellow
-    keyword whole at yellow
-    keyword whole author. yellow
-    keyword whole b-and yellow
-    keyword whole based-storage yellow
-    keyword whole based yellow
-    keyword whole basis yellow
-    keyword whole before yellow
-    keyword whole beginning yellow
-    keyword whole begin yellow
-    keyword whole between yellow
-    keyword whole b-exor yellow
-    keyword whole binary yellow
-    keyword whole binary- yellow
-    keyword whole bits yellow
-    keyword whole bit yellow
-    keyword whole blank yellow
-    keyword whole b-less yellow
-    keyword whole block yellow
-    keyword whole b-not yellow
-    keyword whole boolean yellow
-    keyword whole b-or yellow
-    keyword whole bottom yellow
-    keyword whole byte yellow
-    keyword whole by yellow
-    keyword whole call yellow
-    keyword whole cancel yellow
-    keyword whole caracter yellow
-    keyword whole cbl yellow
-    keyword whole cd yellow
-    keyword whole cf yellow
-    keyword whole characters yellow
-    keyword whole character yellow
-    keyword whole ch yellow
-    keyword whole class-id yellow
-    keyword whole class yellow
-    keyword whole clock-units yellow
-    keyword whole cobol yellow
-    keyword whole code-set yellow
-    keyword whole code yellow
-    keyword whole collating yellow
-    keyword whole column yellow
-    keyword whole command yellow
-    keyword whole comma yellow
-    keyword whole common yellow
-    keyword whole communication yellow
-    keyword whole comp-1 yellow
-    keyword whole comp-2 yellow
-    keyword whole comp-3 yellow
-    keyword whole comp-4 yellow
-    keyword whole comp-5 yellow
-    keyword whole comp-6 yellow
-    keyword whole comp-7 yellow
-    keyword whole comp-8 yellow
-    keyword whole complex yellow
-    keyword whole comp-n yellow
-    keyword whole computational-1 yellow
-    keyword whole computational-2 yellow
-    keyword whole computational-3 yellow
-    keyword whole computational-4 yellow
-    keyword whole computational-5 yellow
-    keyword whole computational-n yellow
-    keyword whole computational-x yellow
-    keyword whole computational yellow
-    keyword whole compute yellow
-    keyword whole comp-x yellow
-    keyword whole com-reg yellow
-    keyword whole configuration yellow
-    keyword whole console yellow
-    keyword whole constant yellow
-    keyword whole contained yellow
-    keyword whole contains yellow
-    keyword whole content yellow
-    keyword whole continue yellow
-    keyword whole control-area yellow
-    keyword whole controls yellow
-    keyword whole control yellow
-    keyword whole converting yellow
-    keyword whole copy yellow
-    keyword whole corresponding yellow
-    keyword whole corr yellow
-    keyword whole count yellow
-    keyword whole currency yellow
-    keyword whole current yellow
-    keyword whole cursor yellow
-    keyword whole custom-attribute yellow
-    keyword whole cycle yellow
-    keyword whole data yellow
-    keyword whole date-compiled. yellow
-    keyword whole date-written. yellow
-    keyword whole date yellow
-    keyword whole day-of-week yellow
-    keyword whole day yellow
-    keyword whole db-access-control-key yellow
-    keyword whole dbcs yellow
-    keyword whole db-data-name yellow
-    keyword whole db-exception yellow
-    keyword whole db-record-name yellow
-    keyword whole db-set-name yellow
-    keyword whole db-status yellow
-    keyword whole db yellow
-    keyword whole debug-contents yellow
-    keyword whole debugging yellow
-    keyword whole debug-item yellow
-    keyword whole debug-line yellow
-    keyword whole debug-name yellow
-    keyword whole debug-sub-1 yellow
-    keyword whole debug-sub-2 yellow
-    keyword whole debug-sub-3 yellow
-    keyword whole debug-sub yellow
-    keyword whole debug yellow
-    keyword whole decimal-point yellow
-    keyword whole declaratives yellow
-    keyword whole default yellow
-    keyword whole delegate-id yellow
-    keyword whole delegate yellow
-    keyword whole delimited yellow
-    keyword whole delimiter yellow
-    keyword whole depending yellow
-    keyword whole descending yellow
-    keyword whole destination yellow
-    keyword whole destination- yellow
-    keyword whole detail yellow
-    keyword whole de yellow
-    keyword whole disable yellow
-    keyword whole display-1 yellow
-    keyword whole display-2 yellow
-    keyword whole display-3 yellow
-    keyword whole display-4 yellow
-    keyword whole display-5 yellow
-    keyword whole display-6 yellow
-    keyword whole display-7 yellow
-    keyword whole display-8 yellow
-    keyword whole display-9 yellow
-    keyword whole display yellow
-    keyword whole display- yellow
-    keyword whole divide yellow
-    keyword whole division. yellow
-    keyword whole down yellow
-    keyword whole duplicates yellow
-    keyword whole duplicate yellow
-    keyword whole dynamic yellow
-    keyword whole egcs yellow
-    keyword whole egi yellow
-    keyword whole eject yellow
-    keyword whole else yellow
-    keyword whole emi yellow
-    keyword whole empty yellow
-    keyword whole enable yellow
-    keyword whole end-add yellow
-    keyword whole end-call yellow
-    keyword whole end-ch yellow
-    keyword whole end-class yellow
-    keyword whole end-compute yellow
-    keyword whole end*delegate. yellow
-    keyword whole end-delegate yellow
-    keyword whole end-disable yellow
-    keyword whole end-display yellow
-    keyword whole end-divide yellow
-    keyword whole end-enable yellow
-    keyword whole end-enum yellow
-    keyword whole end-evaluate yellow
-    keyword whole end-if yellow
-    keyword whole ending yellow
-    keyword whole end-invoke yellow
-    keyword whole end-multiply yellow
-    keyword whole end-of-page yellow
-    keyword whole end-perform yellow
-    keyword whole end-receive yellow
-    keyword whole end-return yellow
-    keyword whole end-send yellow
-    keyword whole end-start yellow
-    keyword whole end-string yellow
-    keyword whole end-subtract yellow
-    keyword whole endter yellow
-    keyword whole end-transceive yellow
-    keyword whole end-unstring yellow
-    keyword whole end yellow
-    keyword whole enter yellow
-    keyword whole entry yellow
-    keyword whole enum*id yellow
-    keyword whole enum-id yellow
-    keyword whole enum yellow
-    keyword whole eop yellow
-    keyword whole equals yellow
-    keyword whole equal yellow
-    keyword whole erase yellow
-    keyword whole error yellow
-    keyword whole esi yellow
-    keyword whole evaluate yellow
-    keyword whole every yellow
-    keyword whole exact yellow
-    keyword whole examine yellow
-    keyword whole exceeds yellow
-    keyword whole exception-object yellow
-    keyword whole exception yellow
-    keyword whole exclusive yellow
-    keyword whole exceeds yellow
-    keyword whole exist yellow
-    keyword whole exit yellow
-    keyword whole extend yellow
-    keyword whole external yellow
-    keyword whole factory yellow
-    keyword whole false yellow
-    keyword whole fd yellow
-    keyword whole file-control. yellow
-    keyword whole file-limits yellow
-    keyword whole files yellow
-    keyword whole file yellow
-    keyword whole final yellow
-    keyword whole find yellow
-    keyword whole finish yellow
-    keyword whole first yellow
-    keyword whole footing yellow
-    keyword whole format yellow
-    keyword whole form yellow
-    keyword whole free yellow
-    keyword whole from yellow
-    keyword whole function yellow
-    keyword whole f yellow
-    keyword whole f. yellow
-    keyword whole generate yellow
-    keyword whole get yellow
-    keyword whole giving yellow
-    keyword whole global yellow
-    keyword whole goback yellow
-    keyword whole goback. yellow
-    keyword whole go yellow
-    keyword whole greater yellow
-    keyword whole group yellow
-    keyword whole having yellow
-    keyword whole heading yellow
-    keyword whole high-values yellow
-    keyword whole high*value yellow
-    keyword whole high-value yellow
-    keyword whole id yellow
-    keyword whole if yellow
-    keyword whole include yellow
-    keyword whole indexed yellow
-    keyword whole index yellow
-    keyword whole indicate yellow
-    keyword whole inherits yellow
-    keyword whole initialize yellow
-    keyword whole initial yellow
-    keyword whole initiate yellow
-    keyword whole input-output yellow
-    keyword whole input yellow
-    keyword whole inspect yellow
-    keyword whole installation yellow
-    keyword whole interface-id yellow
-    keyword whole interface yellow
-    keyword whole into yellow
-    keyword whole invalid yellow
-    keyword whole invoke yellow
-    keyword whole in yellow
-    keyword whole i-o-control. yellow
-    keyword whole i-o yellow
-    keyword whole is yellow
-    keyword whole item yellow
-    keyword whole justified yellow
-    keyword whole just yellow
-    keyword whole kanji yellow
-    keyword whole keep yellow
-    keyword whole key yellow
-    keyword whole label yellow
-    keyword whole last yellow
-    keyword whole ld yellow
-    keyword whole leading yellow
-    keyword whole left yellow
-    keyword whole lenght yellow
-    keyword whole less yellow
-    keyword whole like yellow
-    keyword whole limits yellow
-    keyword whole limit yellow
-    keyword whole linage*counter yellow
-    keyword whole linage-counter yellow
-    keyword whole linage yellow
-    keyword whole line*counter yellow
-    keyword whole line-counter yellow
-    keyword whole lines yellow
-    keyword whole line yellow
-    keyword whole linkage yellow
-    keyword whole locally yellow
-    keyword whole local-storage yellow
-    keyword whole lock yellow
-    keyword whole low-values yellow
-    keyword whole low-value yellow
-    keyword whole ls-area yellow
-    keyword whole member yellow
-    keyword whole memory yellow
-    keyword whole merge yellow
-    keyword whole message yellow
-    keyword whole metaclass yellow
-    keyword whole method-id yellow
-    keyword whole method yellow
-    keyword whole mode yellow
-    keyword whole mode- yellow
-    keyword whole modify yellow
-    keyword whole modules yellow
-    keyword whole more-labels yellow
-    keyword whole more yellow
-    keyword whole move yellow
-    keyword whole multiple yellow
-    keyword whole multiply yellow
-    keyword whole native yellow
-    keyword whole negative yellow
-    keyword whole next yellow
-    keyword whole normal yellow
-    keyword whole not yellow
-    keyword whole no yellow
-    keyword whole nulls yellow
-    keyword whole null yellow
-    keyword whole number yellow
-    keyword whole numeric-edited yellow
-    keyword whole numeric yellow
-    keyword whole object-computer. yellow
-    keyword whole object yellow
-    keyword whole occurs yellow
-    keyword whole off yellow
-    keyword whole of yellow
-    keyword whole omitted yellow
-    keyword whole only yellow
-    keyword whole on yellow
-    keyword whole optional yellow
-    keyword whole order yellow
-    keyword whole organisation yellow
-    keyword whole or yellow
-    keyword whole other yellow
-    keyword whole output yellow
-    keyword whole overflow yellow
-    keyword whole override yellow
-    keyword whole owner yellow
-    keyword whole packed*decimal yellow
-    keyword whole packed-decimal yellow
-    keyword whole padding yellow
-    keyword whole page-counter yellow
-    keyword whole page yellow
-    keyword whole password yellow
-    keyword whole perform yellow
-    keyword whole pf yellow
-    keyword whole ph yellow
-    keyword whole picture yellow
-    keyword whole pic yellow
-    keyword whole plus yellow
-    keyword whole pointer yellow
-    keyword whole positioning yellow
-    keyword whole position yellow
-    keyword whole positive yellow
-    keyword whole present yellow
-    keyword whole previous yellow
-    keyword whole printing yellow
-    keyword whole prior yellow
-    keyword whole private yellow
-    keyword whole procedure-pointer yellow
-    keyword whole procedures yellow
-    keyword whole proceed yellow
-    keyword whole processing yellow
-    keyword whole process yellow
-    keyword whole program-id. yellow
-    keyword whole program yellow
-    keyword whole program. yellow
-    keyword whole property yellow
-    keyword whole protected yellow
-    keyword whole prototype yellow
-    keyword whole public yellow
-    keyword whole purge yellow
-    keyword whole queue yellow
-    keyword whole quotes yellow
-    keyword whole quote yellow
-    keyword whole raise yellow
-    keyword whole raising yellow
-    keyword whole random yellow
-    keyword whole range yellow
-    keyword whole rd yellow
-    keyword whole ready yellow
-    keyword whole realm yellow
-    keyword whole receive yellow
-    keyword whole reconnect yellow
-    keyword whole recording yellow
-    keyword whole record-name yellow
-    keyword whole records yellow
-    keyword whole record yellow
-    keyword whole recursive yellow
-    keyword whole redefines yellow
-    keyword whole reel yellow
-    keyword whole references yellow
-    keyword whole reference yellow
-    keyword whole relation yellow
-    keyword whole relative yellow
-    keyword whole release yellow
-    keyword whole reload yellow
-    keyword whole remainder yellow
-    keyword whole remarks yellow
-    keyword whole removal yellow
-    keyword whole renames yellow
-    keyword whole repeated yellow
-    keyword whole replace yellow
-    keyword whole replacing yellow
-    keyword whole reporting yellow
-    keyword whole reports yellow
-    keyword whole report yellow
-    keyword whole repository yellow
-    keyword whole rerun yellow
-    keyword whole reserve yellow
-    keyword whole reset yellow
-    keyword whole retaining yellow
-    keyword whole retrieval yellow
-    keyword whole return-code yellow
-    keyword whole returning yellow
-    keyword whole return yellow
-    keyword whole reversed yellow
-    keyword whole rewind yellow
-    keyword whole rf yellow
-    keyword whole rh yellow
-    keyword whole right yellow
-    keyword whole rounded yellow
-    keyword whole run yellow
-    keyword whole run. yellow
-    keyword whole same yellow
-    keyword whole screen yellow
-    keyword whole sd yellow
-    keyword whole search yellow
-    keyword whole section. yellow
-    keyword whole security yellow
-    keyword whole segment-limit yellow
-    keyword whole segment yellow
-    keyword whole self yellow
-    keyword whole send yellow
-    keyword whole sentence yellow
-    keyword whole separate yellow
-    keyword whole sequence yellow
-    keyword whole sequential yellow
-    keyword whole service yellow
-    keyword whole session-id yellow
-    keyword whole session yellow
-    keyword whole set yellow
-    keyword whole shared yellow
-    keyword whole shift-in yellow
-    keyword whole shift-out yellow
-    keyword whole signed yellow
-    keyword whole sign yellow
-    keyword whole size yellow
-    keyword whole skip yellow
-    keyword whole sort-control yellow
-    keyword whole sort-core-size yellow
-    keyword whole sort-file-size yellow
-    keyword whole sort-merge yellow
-    keyword whole sort-message yellow
-    keyword whole sort-mode-size yellow
-    keyword whole sort-return yellow
-    keyword whole sort-status yellow
-    keyword whole sort yellow
-    keyword whole source-computer. yellow
-    keyword whole source yellow
-    keyword whole spaces yellow
-    keyword whole space yellow
-    keyword whole special-names. yellow
-    keyword whole standard yellow
-    keyword whole standard- yellow
-    keyword whole start yellow
-    keyword whole static yellow
-    keyword whole status yellow
-    keyword whole stop yellow
-    keyword whole storage yellow
-    keyword whole store yellow
-    keyword whole string yellow
-    keyword whole sub-queue- yellow
-    keyword whole sub-schema yellow
-    keyword whole subtract yellow
-    keyword whole suffix yellow
-    keyword whole sum yellow
-    keyword whole super yellow
-    keyword whole suppress yellow
-    keyword whole symbolic yellow
-    keyword whole synchronized yellow
-    keyword whole sync yellow
-    keyword whole table yellow
-    keyword whole tallying yellow
-    keyword whole tally yellow
-    keyword whole tape yellow
-    keyword whole tenant yellow
-    keyword whole terminal yellow
-    keyword whole terminate yellow
-    keyword whole test yellow
-    keyword whole text yellow
-    keyword whole than yellow
-    keyword whole then yellow
-    keyword whole through yellow
-    keyword whole thru yellow
-    keyword whole timeout yellow
-    keyword whole times yellow
-    keyword whole time yellow
-    keyword whole title yellow
-    keyword whole top yellow
-    keyword whole to yellow
-    keyword whole trace yellow
-    keyword whole trailing yellow
-    keyword whole transceive yellow
-    keyword whole true yellow
-    keyword whole typedef yellow
-    keyword whole type yellow
-    keyword whole unequal yellow
-    keyword whole unit yellow
-    keyword whole unlock yellow
-    keyword whole unsigned yellow
-    keyword whole unstring yellow
-    keyword whole until yellow
-    keyword whole upon yellow
-    keyword whole up yellow
-    keyword whole usage-mode yellow
-    keyword whole usage yellow
-    keyword whole use yellow
-    keyword whole using yellow
-    keyword whole validate yellow
-    keyword whole valid yellow
-    keyword whole values yellow
-    keyword whole value yellow
-    keyword whole varying yellow
-    keyword whole wait yellow
-    keyword whole when-compiled yellow
-    keyword whole whenever yellow
-    keyword whole when yellow
-    keyword whole where yellow
-    keyword whole within yellow
-    keyword whole with yellow
-    keyword whole words yellow
-    keyword whole working-storage yellow
-    keyword whole write-only yellow
-    keyword whole zeroes yellow
-    keyword whole zeros yellow
-    keyword whole zero yellow
+    keyword whole accept KEYWORD_OTHER_RESERVED
+    keyword whole access KEYWORD_OTHER_RESERVED
+    keyword whole add KEYWORD_OTHER_RESERVED
+    keyword whole adress KEYWORD_OTHER_RESERVED
+    keyword whole advancing KEYWORD_OTHER_RESERVED
+    keyword whole after KEYWORD_OTHER_RESERVED
+    keyword whole allowing KEYWORD_OTHER_RESERVED
+    keyword whole all KEYWORD_OTHER_RESERVED
+    keyword whole alpahanumeric-edited KEYWORD_OTHER_RESERVED
+    keyword whole alphabetic-lower KEYWORD_OTHER_RESERVED
+    keyword whole alphabetic-upper KEYWORD_OTHER_RESERVED
+    keyword whole alphabetic KEYWORD_OTHER_RESERVED
+    keyword whole alphabet KEYWORD_OTHER_RESERVED
+    keyword whole alphanumeric-edited KEYWORD_OTHER_RESERVED
+    keyword whole alphanumeric KEYWORD_OTHER_RESERVED
+    keyword whole also KEYWORD_OTHER_RESERVED
+    keyword whole alternate KEYWORD_OTHER_RESERVED
+    keyword whole alter KEYWORD_OTHER_RESERVED
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole any KEYWORD_OTHER_RESERVED
+    keyword whole apply KEYWORD_OTHER_RESERVED
+    keyword whole areas KEYWORD_OTHER_RESERVED
+    keyword whole area KEYWORD_OTHER_RESERVED
+    keyword whole are KEYWORD_OTHER_RESERVED
+    keyword whole arithmetic KEYWORD_OTHER_RESERVED
+    keyword whole ascending KEYWORD_OTHER_RESERVED
+    keyword whole assign KEYWORD_OTHER_RESERVED
+    keyword whole as KEYWORD_OTHER_RESERVED
+    keyword whole at KEYWORD_OTHER_RESERVED
+    keyword whole author. KEYWORD_OTHER_RESERVED
+    keyword whole b-and KEYWORD_OTHER_RESERVED
+    keyword whole based-storage KEYWORD_OTHER_RESERVED
+    keyword whole based KEYWORD_OTHER_RESERVED
+    keyword whole basis KEYWORD_OTHER_RESERVED
+    keyword whole before KEYWORD_OTHER_RESERVED
+    keyword whole beginning KEYWORD_OTHER_RESERVED
+    keyword whole begin KEYWORD_OTHER_RESERVED
+    keyword whole between KEYWORD_OTHER_RESERVED
+    keyword whole b-exor KEYWORD_OTHER_RESERVED
+    keyword whole binary KEYWORD_OTHER_RESERVED
+    keyword whole binary- KEYWORD_OTHER_RESERVED
+    keyword whole bits KEYWORD_OTHER_RESERVED
+    keyword whole bit KEYWORD_OTHER_RESERVED
+    keyword whole blank KEYWORD_OTHER_RESERVED
+    keyword whole b-less KEYWORD_OTHER_RESERVED
+    keyword whole block KEYWORD_OTHER_RESERVED
+    keyword whole b-not KEYWORD_OTHER_RESERVED
+    keyword whole boolean STORAGE_TYPE_PRIMITIVE
+    keyword whole b-or KEYWORD_OTHER_RESERVED
+    keyword whole bottom KEYWORD_OTHER_RESERVED
+    keyword whole byte STORAGE_TYPE_PRIMITIVE
+    keyword whole by KEYWORD_OTHER_RESERVED
+    keyword whole call KEYWORD_OTHER_RESERVED
+    keyword whole cancel KEYWORD_OTHER_RESERVED
+    keyword whole caracter KEYWORD_OTHER_RESERVED
+    keyword whole cbl KEYWORD_OTHER_RESERVED
+    keyword whole cd KEYWORD_OTHER_RESERVED
+    keyword whole cf KEYWORD_OTHER_RESERVED
+    keyword whole characters KEYWORD_OTHER_RESERVED
+    keyword whole character KEYWORD_OTHER_RESERVED
+    keyword whole ch KEYWORD_OTHER_RESERVED
+    keyword whole class-id STORAGE_TYPE_CLASS
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole clock-units KEYWORD_OTHER_RESERVED
+    keyword whole cobol KEYWORD_OTHER_RESERVED
+    keyword whole code-set KEYWORD_OTHER_RESERVED
+    keyword whole code KEYWORD_OTHER_RESERVED
+    keyword whole collating KEYWORD_OTHER_RESERVED
+    keyword whole column KEYWORD_OTHER_RESERVED
+    keyword whole command KEYWORD_OTHER_RESERVED
+    keyword whole comma KEYWORD_OTHER_RESERVED
+    keyword whole common KEYWORD_OTHER_RESERVED
+    keyword whole communication KEYWORD_OTHER_RESERVED
+    keyword whole comp-1 STORAGE_TYPE_PRIMITIVE
+    keyword whole comp-2 STORAGE_TYPE_PRIMITIVE
+    keyword whole comp-3 STORAGE_TYPE_PRIMITIVE
+    keyword whole comp-4 STORAGE_TYPE_PRIMITIVE
+    keyword whole comp-5 STORAGE_TYPE_PRIMITIVE
+    keyword whole comp-6 STORAGE_TYPE_PRIMITIVE
+    keyword whole comp-7 STORAGE_TYPE_PRIMITIVE
+    keyword whole comp-8 STORAGE_TYPE_PRIMITIVE
+    keyword whole complex KEYWORD_OTHER_RESERVED
+    keyword whole comp-n STORAGE_TYPE_PRIMITIVE
+    keyword whole computational-1 STORAGE_TYPE_PRIMITIVE
+    keyword whole computational-2 STORAGE_TYPE_PRIMITIVE
+    keyword whole computational-3 STORAGE_TYPE_PRIMITIVE
+    keyword whole computational-4 STORAGE_TYPE_PRIMITIVE
+    keyword whole computational-5 STORAGE_TYPE_PRIMITIVE
+    keyword whole computational-n STORAGE_TYPE_PRIMITIVE
+    keyword whole computational-x STORAGE_TYPE_PRIMITIVE
+    keyword whole computational STORAGE_TYPE_PRIMITIVE
+    keyword whole compute KEYWORD_OTHER_RESERVED
+    keyword whole comp-x STORAGE_TYPE_PRIMITIVE
+    keyword whole com-reg KEYWORD_OTHER_RESERVED
+    keyword whole configuration KEYWORD_OTHER_RESERVED
+    keyword whole console KEYWORD_OTHER_RESERVED
+    keyword whole constant KEYWORD_OTHER_RESERVED
+    keyword whole contained KEYWORD_OTHER_RESERVED
+    keyword whole contains KEYWORD_OTHER_RESERVED
+    keyword whole content KEYWORD_OTHER_RESERVED
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole control-area KEYWORD_OTHER_RESERVED
+    keyword whole controls KEYWORD_OTHER_RESERVED
+    keyword whole control KEYWORD_OTHER_RESERVED
+    keyword whole converting KEYWORD_OTHER_RESERVED
+    keyword whole copy KEYWORD_CONTROL_IMPORT
+    keyword whole corresponding KEYWORD_OTHER_RESERVED
+    keyword whole corr KEYWORD_OTHER_RESERVED
+    keyword whole count KEYWORD_OTHER_RESERVED
+    keyword whole currency KEYWORD_OTHER_RESERVED
+    keyword whole current KEYWORD_OTHER_RESERVED
+    keyword whole cursor KEYWORD_OTHER_RESERVED
+    keyword whole custom-attribute KEYWORD_OTHER_RESERVED
+    keyword whole cycle KEYWORD_OTHER_RESERVED
+    keyword whole data KEYWORD_OTHER_RESERVED
+    keyword whole date-compiled. KEYWORD_OTHER_RESERVED
+    keyword whole date-written. KEYWORD_OTHER_RESERVED
+    keyword whole date KEYWORD_OTHER_RESERVED
+    keyword whole day-of-week KEYWORD_OTHER_RESERVED
+    keyword whole day KEYWORD_OTHER_RESERVED
+    keyword whole db-access-control-key KEYWORD_OTHER_RESERVED
+    keyword whole dbcs KEYWORD_OTHER_RESERVED
+    keyword whole db-data-name KEYWORD_OTHER_RESERVED
+    keyword whole db-exception KEYWORD_OTHER_RESERVED
+    keyword whole db-record-name KEYWORD_OTHER_RESERVED
+    keyword whole db-set-name KEYWORD_OTHER_RESERVED
+    keyword whole db-status KEYWORD_OTHER_RESERVED
+    keyword whole db KEYWORD_OTHER_RESERVED
+    keyword whole debug-contents KEYWORD_OTHER_RESERVED
+    keyword whole debugging KEYWORD_OTHER_RESERVED
+    keyword whole debug-item KEYWORD_OTHER_RESERVED
+    keyword whole debug-line KEYWORD_OTHER_RESERVED
+    keyword whole debug-name KEYWORD_OTHER_RESERVED
+    keyword whole debug-sub-1 KEYWORD_OTHER_RESERVED
+    keyword whole debug-sub-2 KEYWORD_OTHER_RESERVED
+    keyword whole debug-sub-3 KEYWORD_OTHER_RESERVED
+    keyword whole debug-sub KEYWORD_OTHER_RESERVED
+    keyword whole debug KEYWORD_OTHER_RESERVED
+    keyword whole decimal-point KEYWORD_OTHER_RESERVED
+    keyword whole declaratives KEYWORD_OTHER_RESERVED
+    keyword whole default KEYWORD_OTHER_RESERVED
+    keyword whole delegate-id KEYWORD_OTHER_RESERVED
+    keyword whole delegate KEYWORD_OTHER_RESERVED
+    keyword whole delimited KEYWORD_OTHER_RESERVED
+    keyword whole delimiter KEYWORD_OTHER_RESERVED
+    keyword whole depending KEYWORD_OTHER_RESERVED
+    keyword whole descending KEYWORD_OTHER_RESERVED
+    keyword whole destination KEYWORD_OTHER_RESERVED
+    keyword whole destination- KEYWORD_OTHER_RESERVED
+    keyword whole detail KEYWORD_OTHER_RESERVED
+    keyword whole de KEYWORD_OTHER_RESERVED
+    keyword whole disable KEYWORD_OTHER_RESERVED
+    keyword whole display-1 KEYWORD_OTHER_RESERVED
+    keyword whole display-2 KEYWORD_OTHER_RESERVED
+    keyword whole display-3 KEYWORD_OTHER_RESERVED
+    keyword whole display-4 KEYWORD_OTHER_RESERVED
+    keyword whole display-5 KEYWORD_OTHER_RESERVED
+    keyword whole display-6 KEYWORD_OTHER_RESERVED
+    keyword whole display-7 KEYWORD_OTHER_RESERVED
+    keyword whole display-8 KEYWORD_OTHER_RESERVED
+    keyword whole display-9 KEYWORD_OTHER_RESERVED
+    keyword whole display KEYWORD_OTHER_RESERVED
+    keyword whole display- KEYWORD_OTHER_RESERVED
+    keyword whole divide KEYWORD_OTHER_RESERVED
+    keyword whole division. KEYWORD_OTHER_RESERVED
+    keyword whole down KEYWORD_OTHER_RESERVED
+    keyword whole duplicates KEYWORD_OTHER_RESERVED
+    keyword whole duplicate KEYWORD_OTHER_RESERVED
+    keyword whole dynamic KEYWORD_OTHER_RESERVED
+    keyword whole egcs KEYWORD_OTHER_RESERVED
+    keyword whole egi KEYWORD_OTHER_RESERVED
+    keyword whole eject KEYWORD_OTHER_RESERVED
+    keyword whole else KEYWORD_CONTROL
+    keyword whole emi KEYWORD_OTHER_RESERVED
+    keyword whole empty KEYWORD_OTHER_RESERVED
+    keyword whole enable KEYWORD_OTHER_RESERVED
+    keyword whole end-add KEYWORD_OTHER_RESERVED
+    keyword whole end-call KEYWORD_OTHER_RESERVED
+    keyword whole end-ch KEYWORD_OTHER_RESERVED
+    keyword whole end-class KEYWORD_OTHER_RESERVED
+    keyword whole end-compute KEYWORD_OTHER_RESERVED
+    keyword whole end*delegate. KEYWORD_OTHER_RESERVED
+    keyword whole end-delegate KEYWORD_OTHER_RESERVED
+    keyword whole end-disable KEYWORD_OTHER_RESERVED
+    keyword whole end-display KEYWORD_OTHER_RESERVED
+    keyword whole end-divide KEYWORD_OTHER_RESERVED
+    keyword whole end-enable KEYWORD_OTHER_RESERVED
+    keyword whole end-enum KEYWORD_OTHER_RESERVED
+    keyword whole end-evaluate KEYWORD_CONTROL
+    keyword whole end-if KEYWORD_CONTROL
+    keyword whole ending KEYWORD_OTHER_RESERVED
+    keyword whole end-invoke KEYWORD_OTHER_RESERVED
+    keyword whole end-multiply KEYWORD_OTHER_RESERVED
+    keyword whole end-of-page KEYWORD_OTHER_RESERVED
+    keyword whole end-perform KEYWORD_CONTROL
+    keyword whole end-receive KEYWORD_OTHER_RESERVED
+    keyword whole end-return KEYWORD_OTHER_RESERVED
+    keyword whole end-send KEYWORD_OTHER_RESERVED
+    keyword whole end-start KEYWORD_OTHER_RESERVED
+    keyword whole end-string KEYWORD_OTHER_RESERVED
+    keyword whole end-subtract KEYWORD_OTHER_RESERVED
+    keyword whole endter KEYWORD_OTHER_RESERVED
+    keyword whole end-transceive KEYWORD_OTHER_RESERVED
+    keyword whole end-unstring KEYWORD_OTHER_RESERVED
+    keyword whole end KEYWORD_OTHER_RESERVED
+    keyword whole enter KEYWORD_OTHER_RESERVED
+    keyword whole entry KEYWORD_OTHER_RESERVED
+    keyword whole enum*id KEYWORD_OTHER_RESERVED
+    keyword whole enum-id STORAGE_TYPE_CLASS
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole eop KEYWORD_OTHER_RESERVED
+    keyword whole equals KEYWORD_OPERATOR_WORD
+    keyword whole equal KEYWORD_OPERATOR_WORD
+    keyword whole erase KEYWORD_OTHER_RESERVED
+    keyword whole error KEYWORD_OTHER_RESERVED
+    keyword whole esi KEYWORD_OTHER_RESERVED
+    keyword whole evaluate KEYWORD_CONTROL
+    keyword whole every KEYWORD_OTHER_RESERVED
+    keyword whole exact KEYWORD_OTHER_RESERVED
+    keyword whole examine KEYWORD_OTHER_RESERVED
+    keyword whole exceeds KEYWORD_OPERATOR_WORD
+    keyword whole exception-object KEYWORD_OTHER_RESERVED
+    keyword whole exception KEYWORD_OTHER_RESERVED
+    keyword whole exclusive KEYWORD_OTHER_RESERVED
+    keyword whole exceeds KEYWORD_OPERATOR_WORD
+    keyword whole exist KEYWORD_OTHER_RESERVED
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole extend KEYWORD_OTHER_RESERVED
+    keyword whole external KEYWORD_OTHER_RESERVED
+    keyword whole factory KEYWORD_OTHER_RESERVED
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole fd KEYWORD_OTHER_RESERVED
+    keyword whole file-control. KEYWORD_OTHER_RESERVED
+    keyword whole file-limits KEYWORD_OTHER_RESERVED
+    keyword whole files KEYWORD_OTHER_RESERVED
+    keyword whole file KEYWORD_OTHER_RESERVED
+    keyword whole final STORAGE_MODIFIER
+    keyword whole find KEYWORD_OTHER_RESERVED
+    keyword whole finish KEYWORD_OTHER_RESERVED
+    keyword whole first KEYWORD_OTHER_RESERVED
+    keyword whole footing KEYWORD_OTHER_RESERVED
+    keyword whole format KEYWORD_OTHER_RESERVED
+    keyword whole form KEYWORD_OTHER_RESERVED
+    keyword whole free KEYWORD_OTHER_RESERVED
+    keyword whole from KEYWORD_OTHER_RESERVED
+    keyword whole function KEYWORD_OTHER_RESERVED
+    keyword whole f KEYWORD_OTHER_RESERVED
+    keyword whole f. KEYWORD_OTHER_RESERVED
+    keyword whole generate KEYWORD_OTHER_RESERVED
+    keyword whole get KEYWORD_OTHER_RESERVED
+    keyword whole giving KEYWORD_OTHER_RESERVED
+    keyword whole global KEYWORD_OTHER_RESERVED
+    keyword whole goback KEYWORD_CONTROL
+    keyword whole goback. KEYWORD_CONTROL
+    keyword whole go KEYWORD_CONTROL
+    keyword whole greater KEYWORD_OPERATOR_WORD
+    keyword whole group KEYWORD_OTHER_RESERVED
+    keyword whole having KEYWORD_OTHER_RESERVED
+    keyword whole heading KEYWORD_OTHER_RESERVED
+    keyword whole high-values KEYWORD_OTHER_RESERVED
+    keyword whole high*value KEYWORD_OTHER_RESERVED
+    keyword whole high-value KEYWORD_OTHER_RESERVED
+    keyword whole id KEYWORD_OTHER_RESERVED
+    keyword whole if KEYWORD_CONTROL
+    keyword whole include KEYWORD_CONTROL_IMPORT
+    keyword whole indexed KEYWORD_OTHER_RESERVED
+    keyword whole index KEYWORD_OTHER_RESERVED
+    keyword whole indicate KEYWORD_OTHER_RESERVED
+    keyword whole inherits KEYWORD_OTHER_RESERVED
+    keyword whole initialize KEYWORD_OTHER_RESERVED
+    keyword whole initial KEYWORD_OTHER_RESERVED
+    keyword whole initiate KEYWORD_OTHER_RESERVED
+    keyword whole input-output KEYWORD_OTHER_RESERVED
+    keyword whole input KEYWORD_OTHER_RESERVED
+    keyword whole inspect KEYWORD_OTHER_RESERVED
+    keyword whole installation KEYWORD_OTHER_RESERVED
+    keyword whole interface-id STORAGE_TYPE_CLASS
+    keyword whole interface STORAGE_TYPE_CLASS
+    keyword whole into KEYWORD_OTHER_RESERVED
+    keyword whole invalid KEYWORD_OTHER_RESERVED
+    keyword whole invoke KEYWORD_OTHER_RESERVED
+    keyword whole in KEYWORD_OTHER_RESERVED
+    keyword whole i-o-control. KEYWORD_OTHER_RESERVED
+    keyword whole i-o KEYWORD_OTHER_RESERVED
+    keyword whole is KEYWORD_OTHER_RESERVED
+    keyword whole item KEYWORD_OTHER_RESERVED
+    keyword whole justified KEYWORD_OTHER_RESERVED
+    keyword whole just KEYWORD_OTHER_RESERVED
+    keyword whole kanji KEYWORD_OTHER_RESERVED
+    keyword whole keep KEYWORD_OTHER_RESERVED
+    keyword whole key KEYWORD_OTHER_RESERVED
+    keyword whole label KEYWORD_OTHER_RESERVED
+    keyword whole last KEYWORD_OTHER_RESERVED
+    keyword whole ld KEYWORD_OTHER_RESERVED
+    keyword whole leading KEYWORD_OTHER_RESERVED
+    keyword whole left KEYWORD_OTHER_RESERVED
+    keyword whole lenght KEYWORD_OTHER_RESERVED
+    keyword whole less KEYWORD_OPERATOR_WORD
+    keyword whole like KEYWORD_OTHER_RESERVED
+    keyword whole limits KEYWORD_OTHER_RESERVED
+    keyword whole limit KEYWORD_OTHER_RESERVED
+    keyword whole linage*counter KEYWORD_OTHER_RESERVED
+    keyword whole linage-counter KEYWORD_OTHER_RESERVED
+    keyword whole linage KEYWORD_OTHER_RESERVED
+    keyword whole line*counter KEYWORD_OTHER_RESERVED
+    keyword whole line-counter KEYWORD_OTHER_RESERVED
+    keyword whole lines KEYWORD_OTHER_RESERVED
+    keyword whole line KEYWORD_OTHER_RESERVED
+    keyword whole linkage KEYWORD_OTHER_RESERVED
+    keyword whole locally KEYWORD_OTHER_RESERVED
+    keyword whole local-storage KEYWORD_OTHER_RESERVED
+    keyword whole lock KEYWORD_OTHER_RESERVED
+    keyword whole low-values KEYWORD_OTHER_RESERVED
+    keyword whole low-value KEYWORD_OTHER_RESERVED
+    keyword whole ls-area KEYWORD_OTHER_RESERVED
+    keyword whole member KEYWORD_OTHER_RESERVED
+    keyword whole memory KEYWORD_OTHER_RESERVED
+    keyword whole merge KEYWORD_OTHER_RESERVED
+    keyword whole message KEYWORD_OTHER_RESERVED
+    keyword whole metaclass KEYWORD_OTHER_RESERVED
+    keyword whole method-id KEYWORD_OTHER_RESERVED
+    keyword whole method KEYWORD_OTHER_RESERVED
+    keyword whole mode KEYWORD_OTHER_RESERVED
+    keyword whole mode- KEYWORD_OTHER_RESERVED
+    keyword whole modify KEYWORD_OTHER_RESERVED
+    keyword whole modules KEYWORD_OTHER_RESERVED
+    keyword whole more-labels KEYWORD_OTHER_RESERVED
+    keyword whole more KEYWORD_OTHER_RESERVED
+    keyword whole move KEYWORD_OTHER_RESERVED
+    keyword whole multiple KEYWORD_OTHER_RESERVED
+    keyword whole multiply KEYWORD_OTHER_RESERVED
+    keyword whole native KEYWORD_OTHER_RESERVED
+    keyword whole negative KEYWORD_OTHER_RESERVED
+    keyword whole next KEYWORD_OTHER_RESERVED
+    keyword whole normal KEYWORD_OTHER_RESERVED
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole no KEYWORD_OTHER_RESERVED
+    keyword whole nulls KEYWORD_OTHER_RESERVED
+    keyword whole null CONSTANT_LANGUAGE
+    keyword whole number KEYWORD_OTHER_RESERVED
+    keyword whole numeric-edited KEYWORD_OTHER_RESERVED
+    keyword whole numeric KEYWORD_OTHER_RESERVED
+    keyword whole object-computer. KEYWORD_OTHER_RESERVED
+    keyword whole object KEYWORD_OTHER_RESERVED
+    keyword whole occurs KEYWORD_OTHER_RESERVED
+    keyword whole off KEYWORD_OTHER_RESERVED
+    keyword whole of KEYWORD_OTHER_RESERVED
+    keyword whole omitted KEYWORD_OTHER_RESERVED
+    keyword whole only KEYWORD_OTHER_RESERVED
+    keyword whole on KEYWORD_OTHER_RESERVED
+    keyword whole optional KEYWORD_OTHER_RESERVED
+    keyword whole order KEYWORD_OTHER_RESERVED
+    keyword whole organisation KEYWORD_OTHER_RESERVED
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole other KEYWORD_OTHER_RESERVED
+    keyword whole output KEYWORD_OTHER_RESERVED
+    keyword whole overflow KEYWORD_OTHER_RESERVED
+    keyword whole override STORAGE_MODIFIER
+    keyword whole owner KEYWORD_OTHER_RESERVED
+    keyword whole packed*decimal KEYWORD_OTHER_RESERVED
+    keyword whole packed-decimal KEYWORD_OTHER_RESERVED
+    keyword whole padding KEYWORD_OTHER_RESERVED
+    keyword whole page-counter KEYWORD_OTHER_RESERVED
+    keyword whole page KEYWORD_OTHER_RESERVED
+    keyword whole password KEYWORD_OTHER_RESERVED
+    keyword whole perform KEYWORD_CONTROL
+    keyword whole pf KEYWORD_OTHER_RESERVED
+    keyword whole ph KEYWORD_OTHER_RESERVED
+    keyword whole picture KEYWORD_OTHER_RESERVED
+    keyword whole pic KEYWORD_OTHER_RESERVED
+    keyword whole plus KEYWORD_OTHER_RESERVED
+    keyword whole pointer KEYWORD_OTHER_RESERVED
+    keyword whole positioning KEYWORD_OTHER_RESERVED
+    keyword whole position KEYWORD_OTHER_RESERVED
+    keyword whole positive KEYWORD_OTHER_RESERVED
+    keyword whole present KEYWORD_OTHER_RESERVED
+    keyword whole previous KEYWORD_OTHER_RESERVED
+    keyword whole printing KEYWORD_OTHER_RESERVED
+    keyword whole prior KEYWORD_OTHER_RESERVED
+    keyword whole private STORAGE_MODIFIER
+    keyword whole procedure-pointer KEYWORD_OTHER_RESERVED
+    keyword whole procedures KEYWORD_OTHER_RESERVED
+    keyword whole proceed KEYWORD_OTHER_RESERVED
+    keyword whole processing KEYWORD_OTHER_RESERVED
+    keyword whole process KEYWORD_OTHER_RESERVED
+    keyword whole program-id. KEYWORD_OTHER_RESERVED
+    keyword whole program KEYWORD_OTHER_RESERVED
+    keyword whole program. KEYWORD_OTHER_RESERVED
+    keyword whole property KEYWORD_OTHER_RESERVED
+    keyword whole protected STORAGE_MODIFIER
+    keyword whole prototype KEYWORD_OTHER_RESERVED
+    keyword whole public STORAGE_MODIFIER
+    keyword whole purge KEYWORD_OTHER_RESERVED
+    keyword whole queue KEYWORD_OTHER_RESERVED
+    keyword whole quotes KEYWORD_OTHER_RESERVED
+    keyword whole quote KEYWORD_OTHER_RESERVED
+    keyword whole raise KEYWORD_OTHER_RESERVED
+    keyword whole raising KEYWORD_OTHER_RESERVED
+    keyword whole random KEYWORD_OTHER_RESERVED
+    keyword whole range KEYWORD_OTHER_RESERVED
+    keyword whole rd KEYWORD_OTHER_RESERVED
+    keyword whole ready KEYWORD_OTHER_RESERVED
+    keyword whole realm KEYWORD_OTHER_RESERVED
+    keyword whole receive KEYWORD_OTHER_RESERVED
+    keyword whole reconnect KEYWORD_OTHER_RESERVED
+    keyword whole recording KEYWORD_OTHER_RESERVED
+    keyword whole record-name KEYWORD_OTHER_RESERVED
+    keyword whole records KEYWORD_OTHER_RESERVED
+    keyword whole record KEYWORD_OTHER_RESERVED
+    keyword whole recursive KEYWORD_OTHER_RESERVED
+    keyword whole redefines KEYWORD_OTHER_RESERVED
+    keyword whole reel KEYWORD_OTHER_RESERVED
+    keyword whole references KEYWORD_OTHER_RESERVED
+    keyword whole reference KEYWORD_OTHER_RESERVED
+    keyword whole relation KEYWORD_OTHER_RESERVED
+    keyword whole relative KEYWORD_OTHER_RESERVED
+    keyword whole release KEYWORD_OTHER_RESERVED
+    keyword whole reload KEYWORD_OTHER_RESERVED
+    keyword whole remainder KEYWORD_OTHER_RESERVED
+    keyword whole remarks KEYWORD_OTHER_RESERVED
+    keyword whole removal KEYWORD_OTHER_RESERVED
+    keyword whole renames KEYWORD_OTHER_RESERVED
+    keyword whole repeated KEYWORD_OTHER_RESERVED
+    keyword whole replace KEYWORD_OTHER_RESERVED
+    keyword whole replacing KEYWORD_OTHER_RESERVED
+    keyword whole reporting KEYWORD_OTHER_RESERVED
+    keyword whole reports KEYWORD_OTHER_RESERVED
+    keyword whole report KEYWORD_OTHER_RESERVED
+    keyword whole repository KEYWORD_OTHER_RESERVED
+    keyword whole rerun KEYWORD_OTHER_RESERVED
+    keyword whole reserve KEYWORD_OTHER_RESERVED
+    keyword whole reset KEYWORD_OTHER_RESERVED
+    keyword whole retaining KEYWORD_OTHER_RESERVED
+    keyword whole retrieval KEYWORD_OTHER_RESERVED
+    keyword whole return-code KEYWORD_OTHER_RESERVED
+    keyword whole returning KEYWORD_OTHER_RESERVED
+    keyword whole return KEYWORD_OTHER_RESERVED
+    keyword whole reversed KEYWORD_OTHER_RESERVED
+    keyword whole rewind KEYWORD_OTHER_RESERVED
+    keyword whole rf KEYWORD_OTHER_RESERVED
+    keyword whole rh KEYWORD_OTHER_RESERVED
+    keyword whole right KEYWORD_OTHER_RESERVED
+    keyword whole rounded KEYWORD_OTHER_RESERVED
+    keyword whole run KEYWORD_OTHER_RESERVED
+    keyword whole run. KEYWORD_OTHER_RESERVED
+    keyword whole same KEYWORD_OTHER_RESERVED
+    keyword whole screen KEYWORD_OTHER_RESERVED
+    keyword whole sd KEYWORD_OTHER_RESERVED
+    keyword whole search KEYWORD_OTHER_RESERVED
+    keyword whole section. KEYWORD_OTHER_RESERVED
+    keyword whole security KEYWORD_OTHER_RESERVED
+    keyword whole segment-limit KEYWORD_OTHER_RESERVED
+    keyword whole segment KEYWORD_OTHER_RESERVED
+    keyword whole self VARIABLE_LANGUAGE
+    keyword whole send KEYWORD_OTHER_RESERVED
+    keyword whole sentence KEYWORD_OTHER_RESERVED
+    keyword whole separate KEYWORD_OTHER_RESERVED
+    keyword whole sequence KEYWORD_OTHER_RESERVED
+    keyword whole sequential KEYWORD_OTHER_RESERVED
+    keyword whole service KEYWORD_OTHER_RESERVED
+    keyword whole session-id KEYWORD_OTHER_RESERVED
+    keyword whole session KEYWORD_OTHER_RESERVED
+    keyword whole set KEYWORD_OTHER_RESERVED
+    keyword whole shared KEYWORD_OTHER_RESERVED
+    keyword whole shift-in KEYWORD_OTHER_RESERVED
+    keyword whole shift-out KEYWORD_OTHER_RESERVED
+    keyword whole signed KEYWORD_OTHER_RESERVED
+    keyword whole sign KEYWORD_OTHER_RESERVED
+    keyword whole size KEYWORD_OTHER_RESERVED
+    keyword whole skip KEYWORD_OTHER_RESERVED
+    keyword whole sort-control KEYWORD_OTHER_RESERVED
+    keyword whole sort-core-size KEYWORD_OTHER_RESERVED
+    keyword whole sort-file-size KEYWORD_OTHER_RESERVED
+    keyword whole sort-merge KEYWORD_OTHER_RESERVED
+    keyword whole sort-message KEYWORD_OTHER_RESERVED
+    keyword whole sort-mode-size KEYWORD_OTHER_RESERVED
+    keyword whole sort-return KEYWORD_OTHER_RESERVED
+    keyword whole sort-status KEYWORD_OTHER_RESERVED
+    keyword whole sort KEYWORD_OTHER_RESERVED
+    keyword whole source-computer. KEYWORD_OTHER_RESERVED
+    keyword whole source KEYWORD_OTHER_RESERVED
+    keyword whole spaces KEYWORD_OTHER_RESERVED
+    keyword whole space KEYWORD_OTHER_RESERVED
+    keyword whole special-names. KEYWORD_OTHER_RESERVED
+    keyword whole standard KEYWORD_OTHER_RESERVED
+    keyword whole standard- KEYWORD_OTHER_RESERVED
+    keyword whole start KEYWORD_OTHER_RESERVED
+    keyword whole static STORAGE_MODIFIER
+    keyword whole status KEYWORD_OTHER_RESERVED
+    keyword whole stop KEYWORD_CONTROL
+    keyword whole storage KEYWORD_OTHER_RESERVED
+    keyword whole store KEYWORD_OTHER_RESERVED
+    keyword whole string KEYWORD_OTHER_RESERVED
+    keyword whole sub-queue- KEYWORD_OTHER_RESERVED
+    keyword whole sub-schema KEYWORD_OTHER_RESERVED
+    keyword whole subtract KEYWORD_OTHER_RESERVED
+    keyword whole suffix KEYWORD_OTHER_RESERVED
+    keyword whole sum KEYWORD_OTHER_RESERVED
+    keyword whole super VARIABLE_LANGUAGE
+    keyword whole suppress KEYWORD_OTHER_RESERVED
+    keyword whole symbolic KEYWORD_OTHER_RESERVED
+    keyword whole synchronized KEYWORD_OTHER_RESERVED
+    keyword whole sync KEYWORD_OTHER_RESERVED
+    keyword whole table KEYWORD_OTHER_RESERVED
+    keyword whole tallying KEYWORD_OTHER_RESERVED
+    keyword whole tally KEYWORD_OTHER_RESERVED
+    keyword whole tape KEYWORD_OTHER_RESERVED
+    keyword whole tenant KEYWORD_OTHER_RESERVED
+    keyword whole terminal KEYWORD_OTHER_RESERVED
+    keyword whole terminate KEYWORD_OTHER_RESERVED
+    keyword whole test KEYWORD_OTHER_RESERVED
+    keyword whole text KEYWORD_OTHER_RESERVED
+    keyword whole than KEYWORD_OTHER_RESERVED
+    keyword whole then KEYWORD_CONTROL
+    keyword whole through KEYWORD_OTHER_RESERVED
+    keyword whole thru KEYWORD_OTHER_RESERVED
+    keyword whole timeout KEYWORD_OTHER_RESERVED
+    keyword whole times KEYWORD_OTHER_RESERVED
+    keyword whole time KEYWORD_OTHER_RESERVED
+    keyword whole title KEYWORD_OTHER_RESERVED
+    keyword whole top KEYWORD_OTHER_RESERVED
+    keyword whole to KEYWORD_OTHER_RESERVED
+    keyword whole trace KEYWORD_OTHER_RESERVED
+    keyword whole trailing KEYWORD_OTHER_RESERVED
+    keyword whole transceive KEYWORD_OTHER_RESERVED
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole typedef KEYWORD_OTHER_RESERVED
+    keyword whole type KEYWORD_OTHER_RESERVED
+    keyword whole unequal KEYWORD_OPERATOR_WORD
+    keyword whole unit KEYWORD_OTHER_RESERVED
+    keyword whole unlock KEYWORD_OTHER_RESERVED
+    keyword whole unsigned KEYWORD_OTHER_RESERVED
+    keyword whole unstring KEYWORD_OTHER_RESERVED
+    keyword whole until KEYWORD_CONTROL
+    keyword whole upon KEYWORD_OTHER_RESERVED
+    keyword whole up KEYWORD_OTHER_RESERVED
+    keyword whole usage-mode KEYWORD_OTHER_RESERVED
+    keyword whole usage KEYWORD_OTHER_RESERVED
+    keyword whole use KEYWORD_OTHER_RESERVED
+    keyword whole using KEYWORD_OTHER_RESERVED
+    keyword whole validate KEYWORD_OTHER_RESERVED
+    keyword whole valid KEYWORD_OTHER_RESERVED
+    keyword whole values KEYWORD_OTHER_RESERVED
+    keyword whole value KEYWORD_OTHER_RESERVED
+    keyword whole varying KEYWORD_OTHER_RESERVED
+    keyword whole wait KEYWORD_OTHER_RESERVED
+    keyword whole when-compiled KEYWORD_OTHER_RESERVED
+    keyword whole whenever KEYWORD_OTHER_RESERVED
+    keyword whole when KEYWORD_CONTROL
+    keyword whole where KEYWORD_OTHER_RESERVED
+    keyword whole within KEYWORD_OTHER_RESERVED
+    keyword whole with KEYWORD_OTHER_RESERVED
+    keyword whole words KEYWORD_OTHER_RESERVED
+    keyword whole working-storage KEYWORD_OTHER_RESERVED
+    keyword whole write-only KEYWORD_OTHER_RESERVED
+    keyword whole zeroes KEYWORD_OTHER_RESERVED
+    keyword whole zeros KEYWORD_OTHER_RESERVED
+    keyword whole zero KEYWORD_OTHER_RESERVED
 
-    keyword whole environment*division. cyan
-    keyword whole data*division. cyan
-    keyword whole program cyan
-    keyword whole procedure*division cyan
-    keyword whole procedure*division. cyan
-    keyword whole identification*division. cyan
-    keyword whole section cyan
-    keyword whole paragraph cyan
-    keyword whole end-program cyan
-    keyword whole end*program. cyan
+    keyword whole environment*division. ENTITY_NAME_SECTION
+    keyword whole data*division. ENTITY_NAME_SECTION
+    keyword whole program ENTITY_NAME_SECTION
+    keyword whole procedure*division ENTITY_NAME_SECTION
+    keyword whole procedure*division. ENTITY_NAME_SECTION
+    keyword whole identification*division. ENTITY_NAME_SECTION
+    keyword whole section ENTITY_NAME_SECTION
+    keyword whole paragraph ENTITY_NAME_SECTION
+    keyword whole end-program ENTITY_NAME_SECTION
+    keyword whole end*program. ENTITY_NAME_SECTION
 
-    keyword whole s9 brightgreen
-    keyword whole v9 brightgreen
+    keyword whole s9 CONSTANT_NUMERIC
+    keyword whole v9 CONSTANT_NUMERIC
 
-    keyword whole close brightred
-    keyword whole commit brightred
-    keyword whole connect brightred
-    keyword whole declare brightred
-    keyword whole delete brightred
-    keyword whole disconnect brightred
-    keyword whole end-delete brightred
-    keyword whole end-exec brightred
-    keyword whole end-read brightred
-    keyword whole end-rewrite brightred
-    keyword whole end-write brightred
-    keyword whole exec brightred
-    keyword whole execute brightred
-    keyword whole execute*immediate. brightred
-    keyword whole fetch brightred
-    keyword whole for brightred
-    keyword whole insert brightred
-    keyword whole open brightred
-    keyword whole phase brightred
-    keyword whole prepare brightred
-    keyword whole read brightred
-    keyword whole rewrite brightred
-    keyword whole rollback brightred
-    keyword whole select brightred
-    keyword whole sql brightred
-    keyword whole update brightred
-    keyword whole work brightred
-    keyword whole write brightred
+    keyword whole close KEYWORD_OTHER_RESERVED
+    keyword whole commit KEYWORD_OTHER_RESERVED
+    keyword whole connect KEYWORD_OTHER_RESERVED
+    keyword whole declare KEYWORD_OTHER_RESERVED
+    keyword whole delete KEYWORD_OTHER_RESERVED
+    keyword whole disconnect KEYWORD_OTHER_RESERVED
+    keyword whole end-delete KEYWORD_OTHER_RESERVED
+    keyword whole end-exec KEYWORD_OTHER_RESERVED
+    keyword whole end-read KEYWORD_OTHER_RESERVED
+    keyword whole end-rewrite KEYWORD_OTHER_RESERVED
+    keyword whole end-write KEYWORD_OTHER_RESERVED
+    keyword whole exec KEYWORD_OTHER_RESERVED
+    keyword whole execute KEYWORD_OTHER_RESERVED
+    keyword whole execute*immediate. KEYWORD_OTHER_RESERVED
+    keyword whole fetch KEYWORD_OTHER_RESERVED
+    keyword whole for KEYWORD_CONTROL
+    keyword whole insert KEYWORD_OTHER_RESERVED
+    keyword whole open KEYWORD_OTHER_RESERVED
+    keyword whole phase KEYWORD_OTHER_RESERVED
+    keyword whole prepare KEYWORD_OTHER_RESERVED
+    keyword whole read KEYWORD_OTHER_RESERVED
+    keyword whole rewrite KEYWORD_OTHER_RESERVED
+    keyword whole rollback KEYWORD_OTHER_RESERVED
+    keyword whole select KEYWORD_OTHER_RESERVED
+    keyword whole sql KEYWORD_OTHER_RESERVED
+    keyword whole update KEYWORD_OTHER_RESERVED
+    keyword whole work KEYWORD_OTHER_RESERVED
+    keyword whole write KEYWORD_OTHER_RESERVED
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
-context \* \n brown
+context \* \n COMMENT_LINE
     spellcheck
 
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END green
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF STRING_QUOTED_OTHER
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END STRING_QUOTED_OTHER
 
-context ' ' green
+context ' ' STRING_QUOTED_SINGLE
 
-context " " green
-    keyword \\* brightgreen
-    keyword \\@ brightgreen
-    keyword \\$ brightgreen
-    keyword \\\\ brightgreen
-    keyword \\` brightgreen
-    keyword \\" brightgreen
-    keyword $(*) brightgreen
-    keyword ${*} brightgreen
-    keyword $\* brightred
-    keyword $@ brightred
-    keyword $# brightred
-    keyword $? brightred
-    keyword $- brightred
-    keyword $$ brightred
-    keyword $! brightred
-    keyword $_ brightred
-    keyword wholeright $\[0123456789\] brightred
+context " " STRING_QUOTED_DOUBLE
+    keyword \\* CONSTANT_CHARACTER_ESCAPE
+    keyword \\@ CONSTANT_CHARACTER_ESCAPE
+    keyword \\$ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword $\* VARIABLE_OTHER
+    keyword $@ VARIABLE_OTHER
+    keyword $# VARIABLE_OTHER
+    keyword $? VARIABLE_OTHER
+    keyword $- VARIABLE_OTHER
+    keyword $$ VARIABLE_OTHER
+    keyword $! VARIABLE_OTHER
+    keyword $_ VARIABLE_OTHER
+    keyword wholeright $\[0123456789\] VARIABLE_OTHER
 
-    keyword wholeright $+ brightgreen
+    keyword wholeright $+ VARIABLE_OTHER
 
-    keyword $ brightgreen
+    keyword $ VARIABLE_OTHER
 
-context exclusive ` ` lightgray black
-    keyword '*' green
-    keyword " green
-    keyword \\` green
-    keyword ; brightcyan
-    keyword $(*) brightgreen
-    keyword ${*} brightgreen
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive ` ` STRING_QUOTED_OTHER black
+    keyword '*' STRING_QUOTED_SINGLE
+    keyword " STRING_QUOTED_DOUBLE
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword $\* brightred
-    keyword $@ brightred
-    keyword $# brightred
-    keyword $? brightred
-    keyword $- brightred
-    keyword $$ brightred
-    keyword $! brightred
-    keyword $_ brightred
+    keyword $\* VARIABLE_OTHER
+    keyword $@ VARIABLE_OTHER
+    keyword $# VARIABLE_OTHER
+    keyword $? VARIABLE_OTHER
+    keyword $- VARIABLE_OTHER
+    keyword $$ VARIABLE_OTHER
+    keyword $! VARIABLE_OTHER
+    keyword $_ VARIABLE_OTHER
 
-    keyword wholeright $\[0123456789\] brightred
+    keyword wholeright $\[0123456789\] VARIABLE_OTHER
 
-    keyword wholeright $+ brightgreen
+    keyword wholeright $+ VARIABLE_OTHER
 
-    keyword $ brightgreen
+    keyword $ VARIABLE_OTHER
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 

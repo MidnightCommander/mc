@@ -2,113 +2,113 @@
 # Daniel F Moisset - dmoisset@grulic.org.ar
 # Based on mc's pascal.syntax
 
-context default yellow
+context default
 
-    keyword whole agent white
-    keyword whole alias white
-    keyword whole as white
-    keyword whole check white
-    keyword whole class white
-    keyword whole create white
-    keyword whole creation white
-    keyword whole debug white
-    keyword whole deferred white
-    keyword whole do white
-    keyword whole else white
-    keyword whole elseif white
-    keyword whole end white
-    keyword whole ensure white
-    keyword whole expanded white
-    keyword whole export white
-    keyword whole external white
-    keyword whole feature white
-    keyword whole from white
-    keyword whole if white
-    keyword whole is white
-    keyword whole indexing white
-    keyword whole inherit white
-    keyword whole inspect white
-    keyword whole invariant white
-    keyword whole like white
-    keyword whole local white
-    keyword whole loop white
-    keyword whole obsolete white
-    keyword whole old white
-    keyword whole once white
-    keyword whole redefine white
-    keyword whole reference white
-    keyword whole rename white
-    keyword whole require white
-    keyword whole rescue white
-    keyword whole retry white
-    keyword whole select white
-    keyword whole then white
-    keyword whole undefine white
-    keyword whole unique white
-    keyword whole until white
-    keyword whole variant white
-    keyword whole when white
+    keyword whole agent KEYWORD_OTHER_RESERVED
+    keyword whole alias KEYWORD_OTHER_RESERVED
+    keyword whole as KEYWORD_OTHER_RESERVED
+    keyword whole check KEYWORD_CONTROL
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole create KEYWORD_OTHER_NEW
+    keyword whole creation KEYWORD_OTHER_RESERVED
+    keyword whole debug KEYWORD_OTHER_RESERVED
+    keyword whole deferred STORAGE_MODIFIER
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elseif KEYWORD_CONTROL
+    keyword whole end KEYWORD_CONTROL
+    keyword whole ensure KEYWORD_CONTROL
+    keyword whole expanded STORAGE_MODIFIER
+    keyword whole export KEYWORD_OTHER_RESERVED
+    keyword whole external STORAGE_MODIFIER
+    keyword whole feature KEYWORD_OTHER_RESERVED
+    keyword whole from KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole is KEYWORD_OTHER_RESERVED
+    keyword whole indexing KEYWORD_OTHER_RESERVED
+    keyword whole inherit KEYWORD_CONTROL_IMPORT
+    keyword whole inspect KEYWORD_CONTROL
+    keyword whole invariant KEYWORD_OTHER_RESERVED
+    keyword whole like KEYWORD_OTHER_RESERVED
+    keyword whole local KEYWORD_OTHER_RESERVED
+    keyword whole loop KEYWORD_CONTROL
+    keyword whole obsolete KEYWORD_OTHER_RESERVED
+    keyword whole old KEYWORD_OTHER_RESERVED
+    keyword whole once STORAGE_MODIFIER
+    keyword whole redefine KEYWORD_OTHER_RESERVED
+    keyword whole reference STORAGE_MODIFIER
+    keyword whole rename KEYWORD_OTHER_RESERVED
+    keyword whole require KEYWORD_CONTROL
+    keyword whole rescue KEYWORD_CONTROL
+    keyword whole retry KEYWORD_CONTROL
+    keyword whole select KEYWORD_CONTROL
+    keyword whole then KEYWORD_CONTROL
+    keyword whole undefine KEYWORD_OTHER_RESERVED
+    keyword whole unique KEYWORD_OTHER_RESERVED
+    keyword whole until KEYWORD_CONTROL
+    keyword whole variant KEYWORD_OTHER_RESERVED
+    keyword whole when KEYWORD_CONTROL
 
-    keyword whole Current brightmagenta
-    keyword whole Precursor brightmagenta
-    keyword whole Result brightmagenta
-    keyword whole Void brightmagenta
+    keyword whole Current VARIABLE_LANGUAGE
+    keyword whole Precursor VARIABLE_LANGUAGE
+    keyword whole Result VARIABLE_LANGUAGE
+    keyword whole Void CONSTANT_LANGUAGE
 
 # prevents - keyword from interfering with comment
-    keyword -- lightgray
+    keyword -- COMMENT_LINE
 
-    keyword := brightcyan
-    keyword ?= brightcyan
-    keyword ! brightcyan
-    keyword : brightcyan
-    keyword ; brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
+    keyword := KEYWORD_OPERATOR
+    keyword ?= KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
 
-    keyword {*} brightred
+    keyword {*} STORAGE_TYPE
 
-    keyword \+ cyan
-    keyword - cyan
-    keyword \* cyan
-    keyword / cyan
-    keyword > cyan
-    keyword < cyan
-    keyword = cyan
-    keyword ^ cyan
-    keyword \\ cyan
-    keyword @ cyan
-    keyword | cyan
-    keyword whole and cyan
-    keyword whole implies cyan
-    keyword whole not cyan
-    keyword whole xor cyan
-    keyword whole or cyan
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword \\ KEYWORD_OPERATOR
+    keyword @ KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole implies KEYWORD_OPERATOR_WORD
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole xor KEYWORD_OPERATOR_WORD
+    keyword whole or KEYWORD_OPERATOR_WORD
 
 # Uncomment this to highlight tabs and trailing spaces
 #    keyword \t yellow red
 #    keyword \s\[\s\]\n yellow red
 
 # Comments
-context exclusive -- \n    lightgray
-    keyword `*' brown
+context exclusive -- \n    COMMENT_LINE
+    keyword `*' MARKUP_RAW
 
 # Strings and characters
-context " "    green
-    keyword %N brightgreen
-    keyword %R brightgreen
-    keyword %U brightgreen
-    keyword %" brightgreen
-    keyword %' brightgreen
-    keyword %% brightgreen
-    keyword %/\[0123456789\]/ brightgreen
+context " "    STRING_QUOTED_DOUBLE
+    keyword %N CONSTANT_CHARACTER_ESCAPE
+    keyword %R CONSTANT_CHARACTER_ESCAPE
+    keyword %U CONSTANT_CHARACTER_ESCAPE
+    keyword %" CONSTANT_CHARACTER_ESCAPE
+    keyword %' CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_CHARACTER_ESCAPE
+    keyword %/\[0123456789\]/ CONSTANT_CHARACTER_ESCAPE
 
-context ' '    green
-    keyword %N brightgreen
-    keyword %R brightgreen
-    keyword %U brightgreen
-    keyword %" brightgreen
-    keyword %' brightgreen
-    keyword %% brightgreen
-    keyword %/\[0123456789\]/ brightgreen
+context ' '    STRING_QUOTED_SINGLE
+    keyword %N CONSTANT_CHARACTER_ESCAPE
+    keyword %R CONSTANT_CHARACTER_ESCAPE
+    keyword %U CONSTANT_CHARACTER_ESCAPE
+    keyword %" CONSTANT_CHARACTER_ESCAPE
+    keyword %' CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_CHARACTER_ESCAPE
+    keyword %/\[0123456789\]/ CONSTANT_CHARACTER_ESCAPE

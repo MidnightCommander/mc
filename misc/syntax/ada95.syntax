@@ -3,122 +3,122 @@
 caseinsensitive
 
 context default
-    keyword whole abort yellow
-    keyword whole abs yellow
-    keyword whole and yellow
-    keyword whole delay yellow
-    keyword whole delta yellow
-    keyword whole digits yellow
-    keyword whole do yellow
-    keyword whole in yellow
-    keyword whole is yellow
-    keyword whole mod yellow
-    keyword whole not yellow
-    keyword whole null yellow
-    keyword whole of yellow
-    keyword whole or yellow
-    keyword whole others yellow
-    keyword whole out yellow
-    keyword whole pragma yellow
-    keyword whole raise yellow
-    keyword whole range yellow
-    keyword whole renames yellow
-    keyword whole requeue yellow
-    keyword whole return yellow
-    keyword whole reverse yellow
-    keyword whole separate yellow
-    keyword whole task yellow
-    keyword whole terminate yellow
-    keyword whole use yellow
-    keyword whole with yellow
-    keyword whole xor yellow
+    keyword whole abort KEYWORD_OTHER_RESERVED
+    keyword whole abs KEYWORD_OPERATOR_WORD
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole delay KEYWORD_CONTROL
+    keyword whole delta KEYWORD_OTHER_RESERVED
+    keyword whole digits KEYWORD_OTHER_RESERVED
+    keyword whole do KEYWORD_OTHER_RESERVED
+    keyword whole in KEYWORD_OPERATOR_WORD
+    keyword whole is KEYWORD_OTHER_RESERVED
+    keyword whole mod KEYWORD_OPERATOR_WORD
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole null CONSTANT_LANGUAGE
+    keyword whole of KEYWORD_OTHER_RESERVED
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole others KEYWORD_OTHER_RESERVED
+    keyword whole out KEYWORD_OTHER_RESERVED
+    keyword whole pragma KEYWORD_OTHER_RESERVED
+    keyword whole raise KEYWORD_CONTROL
+    keyword whole range KEYWORD_OTHER_RESERVED
+    keyword whole renames KEYWORD_OTHER_RESERVED
+    keyword whole requeue KEYWORD_CONTROL
+    keyword whole return KEYWORD_CONTROL
+    keyword whole reverse KEYWORD_CONTROL
+    keyword whole separate KEYWORD_CONTROL
+    keyword whole task KEYWORD_OTHER_RESERVED
+    keyword whole terminate KEYWORD_CONTROL
+    keyword whole use KEYWORD_CONTROL_IMPORT
+    keyword whole with KEYWORD_CONTROL_IMPORT
+    keyword whole xor KEYWORD_OPERATOR_WORD
 
 # prevents - keyword from interfering with comment
-    keyword -- brown
+    keyword -- COMMENT_LINE
 
-    keyword # brightgreen
-    keyword ' brightgreen
-    keyword ( brightgreen
-    keyword ) brightgreen
-    keyword \*\* brightgreen
-    keyword \* brightgreen
-    keyword \+ brightgreen
-    keyword , brightgreen
-    keyword - brightgreen
-    keyword . brightgreen
-    keyword .. brightgreen
-    keyword /= brightgreen
-    keyword / brightgreen
-    keyword < brightgreen
-    keyword <= brightgreen
-    keyword >= brightgreen
-    keyword > brightgreen
-    keyword := brightgreen
-    keyword : brightgreen
-    keyword ; brightgreen
-    keyword => brightgreen
-    keyword <> brightgreen
-    keyword \\& brightgreen
-    keyword = brightgreen
+    keyword # KEYWORD_OPERATOR
+    keyword ' KEYWORD_OPERATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword \*\* CONSTANT_CHARACTER_ESCAPE
+    keyword \* CONSTANT_CHARACTER_ESCAPE
+    keyword \+ CONSTANT_CHARACTER_ESCAPE
+    keyword , PUNCTUATION_SEPARATOR
+    keyword - KEYWORD_OPERATOR
+    keyword . KEYWORD_OPERATOR
+    keyword .. KEYWORD_OPERATOR
+    keyword /= KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword <= KEYWORD_OPERATOR
+    keyword >= KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword := KEYWORD_OPERATOR
+    keyword : KEYWORD_OPERATOR
+    keyword ; KEYWORD_OPERATOR
+    keyword => KEYWORD_OPERATOR
+    keyword <> KEYWORD_OPERATOR
+    keyword \\& CONSTANT_CHARACTER_ESCAPE
+    keyword = KEYWORD_OPERATOR
 
-    keyword whole begin brightred
-    keyword whole case brightred
-    keyword whole declare brightred
-    keyword whole else brightred
-    keyword whole elsif brightred
-    keyword whole end brightred
-    keyword whole entry brightred
-    keyword whole exception brightred
-    keyword whole exit brightred
-    keyword whole for brightred
-    keyword whole if brightred
-    keyword whole loop brightred
-    keyword whole private brightred
-    keyword whole protected brightred
-    keyword whole select brightred
-    keyword whole then brightred
-    keyword whole until brightred
-    keyword whole when brightred
-    keyword whole while brightred
+    keyword whole begin KEYWORD_OTHER_RESERVED
+    keyword whole case KEYWORD_CONTROL
+    keyword whole declare KEYWORD_OTHER_RESERVED
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elsif KEYWORD_CONTROL
+    keyword whole end KEYWORD_OTHER_RESERVED
+    keyword whole entry KEYWORD_CONTROL
+    keyword whole exception KEYWORD_CONTROL
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole loop KEYWORD_CONTROL
+    keyword whole private STORAGE_MODIFIER
+    keyword whole protected STORAGE_MODIFIER
+    keyword whole select KEYWORD_CONTROL
+    keyword whole then KEYWORD_CONTROL
+    keyword whole until KEYWORD_CONTROL
+    keyword whole when KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
 
-    keyword whole array cyan
-    keyword whole boolean cyan
-    keyword whole character cyan
-    keyword whole duration cyan
-    keyword whole false cyan
-    keyword whole fixed cyan
-    keyword whole float cyan
-    keyword whole integer cyan
-    keyword whole natural cyan
-    keyword whole positive cyan
-    keyword whole record cyan
-    keyword whole string cyan
-    keyword whole true cyan
-    keyword whole universal_integer cyan
-    keyword whole universal_float cyan
-    keyword whole wide_character cyan
+    keyword whole array STORAGE_TYPE
+    keyword whole boolean STORAGE_TYPE_PRIMITIVE
+    keyword whole character STORAGE_TYPE_PRIMITIVE
+    keyword whole duration STORAGE_TYPE_PRIMITIVE
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole fixed STORAGE_TYPE_PRIMITIVE
+    keyword whole float STORAGE_TYPE_PRIMITIVE
+    keyword whole integer STORAGE_TYPE_PRIMITIVE
+    keyword whole natural STORAGE_TYPE_PRIMITIVE
+    keyword whole positive STORAGE_TYPE_PRIMITIVE
+    keyword whole record STORAGE_TYPE_CLASS
+    keyword whole string STORAGE_TYPE_PRIMITIVE
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole universal_integer STORAGE_TYPE_PRIMITIVE
+    keyword whole universal_float STORAGE_TYPE_PRIMITIVE
+    keyword whole wide_character STORAGE_TYPE_PRIMITIVE
 
-    keyword whole abstract brightcyan
-    keyword whole accept brightcyan
-    keyword whole access brightcyan
-    keyword whole aliased brightcyan
-    keyword whole all brightcyan
-    keyword whole at brightcyan
-    keyword whole constant brightcyan
-    keyword whole goto brightcyan
-    keyword whole limited brightcyan
-    keyword whole new_line brightcyan
-    keyword whole subtype brightcyan
-    keyword whole tagged brightcyan
-    keyword whole type brightcyan
+    keyword whole abstract STORAGE_MODIFIER
+    keyword whole accept KEYWORD_CONTROL
+    keyword whole access STORAGE_TYPE
+    keyword whole aliased STORAGE_MODIFIER
+    keyword whole all KEYWORD_OTHER_RESERVED
+    keyword whole at KEYWORD_OTHER_RESERVED
+    keyword whole constant STORAGE_MODIFIER
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole limited STORAGE_MODIFIER
+    keyword whole new_line SUPPORT_FUNCTION
+    keyword whole subtype STORAGE_TYPE
+    keyword whole tagged STORAGE_MODIFIER
+    keyword whole type STORAGE_TYPE
 
-    keyword whole body magenta
-    keyword whole function magenta
-    keyword whole generic magenta
-    keyword whole new magenta
-    keyword whole package magenta
-    keyword whole procedure magenta
+    keyword whole body KEYWORD_OTHER_RESERVED
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole generic KEYWORD_OTHER_RESERVED
+    keyword whole new KEYWORD_OTHER_RESERVED
+    keyword whole package KEYWORD_OTHER_RESERVED
+    keyword whole procedure STORAGE_TYPE_FUNCTION
 
-context exclusive -- \n    brown
+context exclusive -- \n    COMMENT_LINE
 
-context " "    green
+context " "    STRING_QUOTED_DOUBLE

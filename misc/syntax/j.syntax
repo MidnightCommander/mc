@@ -12,104 +12,94 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # for the default (lightgray on blue)
-define _adverb  green blue bold
-define _alerthi lightgray red
-define _alertmi gray yellow
-define _alertlo gray cyan
-define _copulag white
-define _copulal brown
-define _comment gray
-define _conj    yellow blue bold
-define _control brightred
-define _noun    cyan blue bold
-define _nounblk lightgray brightblue
-define _num     green
-define _paren   brightgreen
-define _str     brightcyan
-define _verb    magenta blue bold
+define _alerthi KEYWORD_OTHER_TODO red
+define _alertmi KEYWORD_OTHER_TODO yellow
+define _alertlo KEYWORD_OTHER_TODO cyan
+define _noun    VARIABLE_PARAMETER blue bold
+define _nounblk STRING_UNQUOTED brightblue
 
 context default
     # controls
     wholechars {}
-    keyword {{ _control
-    keyword }} _control
+    keyword {{ KEYWORD_CONTROL
+    keyword }} KEYWORD_CONTROL
     wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._
-    keyword wholeleft assert. _control
-    keyword wholeleft break. _control
-    keyword wholeleft case. _control
-    keyword wholeleft catch. _control
-    keyword wholeleft catch\{dt\}. _control
-    keyword wholeleft continue. _control
-    keyword wholeleft do. _control
-    keyword wholeleft else. _control
-    keyword wholeleft elseif. _control
-    keyword wholeleft end. _control
-    keyword wholeleft fcase. _control
-    keyword wholeleft for. _control
-    keyword wholeleft for_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. _control
-    keyword wholeleft goto_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. _control
-    keyword wholeleft if. _control
-    keyword wholeleft label_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. _control
-    keyword wholeleft return. _control
-    keyword wholeleft select. _control
-    keyword wholeleft throw. _control
-    keyword wholeleft try. _control
-    keyword wholeleft while. _control
-    keyword wholeleft whilst. _control
+    keyword wholeleft assert. KEYWORD_CONTROL
+    keyword wholeleft break. KEYWORD_CONTROL
+    keyword wholeleft case. KEYWORD_CONTROL
+    keyword wholeleft catch. KEYWORD_CONTROL
+    keyword wholeleft catch\{dt\}. KEYWORD_CONTROL
+    keyword wholeleft continue. KEYWORD_CONTROL
+    keyword wholeleft do. KEYWORD_CONTROL
+    keyword wholeleft else. KEYWORD_CONTROL
+    keyword wholeleft elseif. KEYWORD_CONTROL
+    keyword wholeleft end. KEYWORD_CONTROL
+    keyword wholeleft fcase. KEYWORD_CONTROL
+    keyword wholeleft for. KEYWORD_CONTROL
+    keyword wholeleft for_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. KEYWORD_CONTROL
+    keyword wholeleft goto_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. KEYWORD_CONTROL
+    keyword wholeleft if. KEYWORD_CONTROL
+    keyword wholeleft label_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. KEYWORD_CONTROL
+    keyword wholeleft return. KEYWORD_CONTROL
+    keyword wholeleft select. KEYWORD_CONTROL
+    keyword wholeleft throw. KEYWORD_CONTROL
+    keyword wholeleft try. KEYWORD_CONTROL
+    keyword wholeleft while. KEYWORD_CONTROL
+    keyword wholeleft whilst. KEYWORD_CONTROL
     # comments
-    keyword wholeleft NB. _comment
+    keyword wholeleft NB. COMMENT_LINE
     # copula
-    keyword =: _copulag
-    keyword =. _copulal
+    keyword =: KEYWORD_OPERATOR
+    keyword =. KEYWORD_OPERATOR
     # parenthesis
-    keyword \{()\} _paren
+    keyword \{()\} PUNCTUATION_SECTION
     # actors
-    keyword {:: _verb
-    keyword &.: _conj
-    keyword __: _verb
-    keyword /.. _adverb
-    keyword \{<>\+\*-%$~|,#{}"\}\{.:\} _verb
-    keyword \{_;/\\[\}: _verb
-    keyword \{^?\}. _verb
-    keyword \{^`\}: _conj
-    keyword \{;[]\}. _conj
-    keyword \{!:@&\}\{.:\} _conj
-    keyword \{/\\\}. _adverb
-    keyword ]: _adverb
-    keyword \{=<>\+\*-%^$|,;#![]{?\} _verb
-    keyword \{~/\\}\} _adverb
-    keyword \{".:`@&\} _conj
-    keyword wholeleft \{AcCeEIjLorv\}. _verb
-    keyword wholeleft \{bfM\}. _adverb
-    keyword wholeleft \{Hmt\}. _conj
-    keyword wholeleft p.. _verb
-    keyword wholeleft \{ipu\}\{.:\} _verb
-    keyword wholeleft \{LS\}: _conj
-    keyword wholeleft \{qsxZ\}: _verb
-    keyword whole     \{uv\} _verb
-    keyword wholeleft _\{123456789\}: _verb
-    keyword wholeleft \{0123456789\}: _verb
+    keyword {:: KEYWORD_OPERATOR blue bold
+    keyword &.: KEYWORD_OPERATOR blue bold
+    keyword __: KEYWORD_OPERATOR blue bold
+    keyword /.. KEYWORD_OPERATOR blue bold
+    keyword \{<>\+\*-%$~|,#{}"\}\{.:\} KEYWORD_OPERATOR blue bold
+    keyword \{_;/\\[\}: KEYWORD_OPERATOR blue bold
+    keyword \{^?\}. KEYWORD_OPERATOR blue bold
+    keyword \{^`\}: KEYWORD_OPERATOR blue bold
+    keyword \{;[]\}. KEYWORD_OPERATOR blue bold
+    keyword \{!:@&\}\{.:\} KEYWORD_OPERATOR blue bold
+    keyword \{/\\\}. KEYWORD_OPERATOR blue bold
+    keyword ]: KEYWORD_OPERATOR blue bold
+    keyword \{=<>\+\*-%^$|,;#![]{?\} KEYWORD_OPERATOR blue bold
+    keyword \{~/\\}\} KEYWORD_OPERATOR blue bold
+    keyword \{".:`@&\} KEYWORD_OPERATOR blue bold
+    keyword wholeleft \{AcCeEIjLorv\}. KEYWORD_OPERATOR blue bold
+    keyword wholeleft \{bfM\}. KEYWORD_OPERATOR blue bold
+    keyword wholeleft \{Hmt\}. KEYWORD_OPERATOR blue bold
+    keyword wholeleft p.. KEYWORD_OPERATOR blue bold
+    keyword wholeleft \{ipu\}\{.:\} KEYWORD_OPERATOR blue bold
+    keyword wholeleft \{LS\}: KEYWORD_OPERATOR blue bold
+    keyword wholeleft \{qsxZ\}: KEYWORD_OPERATOR blue bold
+    keyword whole     \{uv\} KEYWORD_OPERATOR blue bold
+    keyword wholeleft _\{123456789\}: KEYWORD_OPERATOR blue bold
+    keyword wholeleft \{0123456789\}: KEYWORD_OPERATOR blue bold
     # numbers
-    keyword whole \{0123456789_\}\[abcdefghijklmnopqrstuvwxyz0123456789_.\] _num
+    keyword whole \{0123456789_\}\[abcdefghijklmnopqrstuvwxyz0123456789_.\] CONSTANT_NUMERIC
     # nouns
     keyword whole a\{.:\} _noun
     keyword whole \{mnxy\} _noun
 
 # strings
 
-context ' ' _str
+context ' ' STRING_QUOTED_SINGLE
 
 # block nouns
 
 context exclusive 0\s\[\s\t\]:\[\s\t\]0\[)\s\t\]\n linestart ) _nounblk
 
-context exclusive whole Note linestart ) _nounblk
+context exclusive whole Note linestart ) COMMENT_BLOCK brightblue
 
 # comments
 
-context exclusive linestart NB.\s\*\s \n _comment blue underline
+context exclusive linestart NB.\s\*\s \n COMMENT_LINE blue underline
 
-context exclusive NB. \n _comment
+context exclusive NB. \n COMMENT_LINE
     keyword whole BUG        _alerthi
     keyword whole DEPRECATED _alertmi
     keyword whole FIXME      _alerthi

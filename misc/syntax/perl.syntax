@@ -1,364 +1,364 @@
 context default
 
 # subroutine prototypes
-    keyword (\[$%&\*;@[\\]\]) brightcyan
+    keyword (\[$%&\*;@[\\]\]) PUNCTUATION_SECTION
 
-    keyword $_ red
-    keyword $. red
-    keyword $/ red
-    keyword $, red
-    keyword $" red
-    keyword $\\ red
-    keyword $# red
-    keyword $\* red
-    keyword $? red
-    keyword $] red
-    keyword $[ red
-    keyword $; red
-    keyword $! red
-    keyword $@ red
-    keyword $: red
-    keyword $0 red
-    keyword $$ red
-    keyword $< red
-    keyword $> red
-    keyword $( red
-    keyword $) red
+    keyword $_ VARIABLE_OTHER
+    keyword $. VARIABLE_OTHER
+    keyword $/ VARIABLE_OTHER
+    keyword $, VARIABLE_OTHER
+    keyword $" VARIABLE_OTHER
+    keyword $\\ VARIABLE_OTHER
+    keyword $# VARIABLE_OTHER
+    keyword $\* VARIABLE_OTHER
+    keyword $? VARIABLE_OTHER
+    keyword $] VARIABLE_OTHER
+    keyword $[ VARIABLE_OTHER
+    keyword $; VARIABLE_OTHER
+    keyword $! VARIABLE_OTHER
+    keyword $@ VARIABLE_OTHER
+    keyword $: VARIABLE_OTHER
+    keyword $0 VARIABLE_OTHER
+    keyword $$ VARIABLE_OTHER
+    keyword $< VARIABLE_OTHER
+    keyword $> VARIABLE_OTHER
+    keyword $( VARIABLE_OTHER
+    keyword $) VARIABLE_OTHER
 
-    keyword $% red
-    keyword $= red
-    keyword $- red
-    keyword $~ red
-    keyword $| red
-    keyword $& red
-    keyword $` red
-    keyword $' red
-    keyword $\+ red
-    keyword $\{0123456789\}\{0123456789\} red
-    keyword $\{0123456789\} red
+    keyword $% VARIABLE_OTHER
+    keyword $= VARIABLE_OTHER
+    keyword $- VARIABLE_OTHER
+    keyword $~ VARIABLE_OTHER
+    keyword $| VARIABLE_OTHER
+    keyword $& VARIABLE_OTHER
+    keyword $` VARIABLE_OTHER
+    keyword $' VARIABLE_OTHER
+    keyword $\+ VARIABLE_OTHER
+    keyword $\{0123456789\}\{0123456789\} VARIABLE_OTHER
+    keyword $\{0123456789\} VARIABLE_OTHER
 
-    keyword $^A red
-    keyword $^D red
-    keyword $^E red
-    keyword $^I red
-    keyword $^L red
-    keyword $^P red
-    keyword $^T red
-    keyword $^W red
-    keyword $^X red
-    keyword $^A red
+    keyword $^A VARIABLE_OTHER
+    keyword $^D VARIABLE_OTHER
+    keyword $^E VARIABLE_OTHER
+    keyword $^I VARIABLE_OTHER
+    keyword $^L VARIABLE_OTHER
+    keyword $^P VARIABLE_OTHER
+    keyword $^T VARIABLE_OTHER
+    keyword $^W VARIABLE_OTHER
+    keyword $^X VARIABLE_OTHER
+    keyword $^A VARIABLE_OTHER
 
-    keyword @EXPORT_OK red
-    keyword @EXPORT red
-    keyword @INC red
-    keyword @ISA red
-    keyword @_ red
-    keyword @ENV red
-    keyword @OVERLOAD red
-    keyword @SIG red
+    keyword @EXPORT_OK VARIABLE_OTHER
+    keyword @EXPORT VARIABLE_OTHER
+    keyword @INC VARIABLE_OTHER
+    keyword @ISA VARIABLE_OTHER
+    keyword @_ VARIABLE_OTHER
+    keyword @ENV VARIABLE_OTHER
+    keyword @OVERLOAD VARIABLE_OTHER
+    keyword @SIG VARIABLE_OTHER
 
 
-    keyword <+> brightred
-    keyword -> yellow
-    keyword => yellow
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
-    keyword && yellow
-    keyword || yellow
-    keyword ! yellow
-    keyword whole ge yellow
-    keyword whole le yellow
-    keyword whole gt yellow
-    keyword whole lt yellow
-    keyword whole eq yellow
-    keyword whole ne yellow
-    keyword whole cmp yellow
-    keyword ~ yellow
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword .. brightcyan
-    keyword : brightcyan
-    keyword ; brightmagenta
+    keyword <+> KEYWORD_OPERATOR
+    keyword -> KEYWORD_OPERATOR
+    keyword => KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword != KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword && KEYWORD_OPERATOR
+    keyword || KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
+    keyword whole ge KEYWORD_OPERATOR_WORD
+    keyword whole le KEYWORD_OPERATOR_WORD
+    keyword whole gt KEYWORD_OPERATOR_WORD
+    keyword whole lt KEYWORD_OPERATOR_WORD
+    keyword whole eq KEYWORD_OPERATOR_WORD
+    keyword whole ne KEYWORD_OPERATOR_WORD
+    keyword whole cmp KEYWORD_OPERATOR_WORD
+    keyword ~ KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword .. KEYWORD_OPERATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
 
-    keyword whole sub yellow
-    keyword whole STDIN brightred
-    keyword whole STDOUT brightred
-    keyword whole STDERR brightred
-    keyword whole STDARGV brightred
-    keyword whole DATA brightred
+    keyword whole sub STORAGE_TYPE_FUNCTION
+    keyword whole STDIN VARIABLE_OTHER
+    keyword whole STDOUT VARIABLE_OTHER
+    keyword whole STDERR VARIABLE_OTHER
+    keyword whole STDARGV VARIABLE_OTHER
+    keyword whole DATA VARIABLE_OTHER
 
-    keyword wholeright $+ brightgreen
-    keyword wholeright %+ brightcyan
-    keyword wholeright @+ white
-    keyword \\" brightred
-    keyword \\' brightred
+    keyword wholeright $+ VARIABLE_OTHER
+    keyword wholeright %+ VARIABLE_OTHER
+    keyword wholeright @+ VARIABLE_OTHER
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
 
-    keyword % yellow
-    keyword & brightmagenta
+    keyword % KEYWORD_OPERATOR
+    keyword & KEYWORD_OPERATOR
 
-    keyword whole and magenta
-    keyword whole bless magenta
-    keyword whole break magenta
-    keyword whole caller magenta
-    keyword whole do magenta
-    keyword whole else magenta
-    keyword whole elsif magenta
-    keyword whole foreach magenta
-    keyword whole for magenta
-    keyword whole goto magenta
-    keyword whole if magenta
-    keyword whole import magenta
-    keyword whole last magenta
-    keyword whole next magenta
-    keyword whole not magenta
-    keyword whole or magenta
-    keyword whole package magenta
-    keyword whole require magenta
-    keyword whole return magenta
-    keyword whole unless magenta
-    keyword whole untie magenta
-    keyword whole until magenta
-    keyword whole use magenta
-    keyword whole while magenta
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole bless KEYWORD_OTHER_NEW
+    keyword whole break KEYWORD_CONTROL
+    keyword whole caller SUPPORT_FUNCTION
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elsif KEYWORD_CONTROL
+    keyword whole foreach KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole import KEYWORD_CONTROL_IMPORT
+    keyword whole last KEYWORD_CONTROL
+    keyword whole next KEYWORD_CONTROL
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole package KEYWORD_OTHER_PACKAGE
+    keyword whole require KEYWORD_CONTROL_IMPORT
+    keyword whole return KEYWORD_CONTROL
+    keyword whole unless KEYWORD_CONTROL
+    keyword whole untie SUPPORT_FUNCTION
+    keyword whole until KEYWORD_CONTROL
+    keyword whole use KEYWORD_CONTROL_IMPORT
+    keyword whole while KEYWORD_CONTROL
 
-    keyword whole diagnostics brightcyan
-    keyword whole integer brightcyan
-    keyword whole less brightcyan
-    keyword whole lib brightcyan
-    keyword whole ops brightcyan
-    keyword whole overload brightcyan
-    keyword whole sigtrap brightcyan
-    keyword whole strict brightcyan
-    keyword whole vars brightcyan
-    keyword whole warnings brightcyan
+    keyword whole diagnostics SUPPORT_CLASS
+    keyword whole integer SUPPORT_CLASS
+    keyword whole less SUPPORT_CLASS
+    keyword whole lib SUPPORT_CLASS
+    keyword whole ops SUPPORT_CLASS
+    keyword whole overload SUPPORT_CLASS
+    keyword whole sigtrap SUPPORT_CLASS
+    keyword whole strict SUPPORT_CLASS
+    keyword whole vars SUPPORT_CLASS
+    keyword whole warnings SUPPORT_CLASS
 
-    keyword whole abs yellow
-    keyword whole atan2 yellow
-    keyword whole chr yellow
-    keyword whole cos yellow
-    keyword whole exp yellow
-    keyword whole gmtime yellow
-    keyword whole hex yellow
-    keyword whole int yellow
-    keyword whole localtime yellow
-    keyword whole log yellow
-    keyword whole oct yellow
-    keyword whole ord yellow
-    keyword whole pack yellow
-    keyword whole rand yellow
-    keyword whole sin yellow
-    keyword whole sqrt yellow
-    keyword whole srand yellow
-    keyword whole time yellow
-    keyword whole unpack yellow
-    keyword whole vec yellow
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole atan2 SUPPORT_FUNCTION
+    keyword whole chr SUPPORT_FUNCTION
+    keyword whole cos SUPPORT_FUNCTION
+    keyword whole exp SUPPORT_FUNCTION
+    keyword whole gmtime SUPPORT_FUNCTION
+    keyword whole hex SUPPORT_FUNCTION
+    keyword whole int SUPPORT_FUNCTION
+    keyword whole localtime SUPPORT_FUNCTION
+    keyword whole log SUPPORT_FUNCTION
+    keyword whole oct SUPPORT_FUNCTION
+    keyword whole ord SUPPORT_FUNCTION
+    keyword whole pack SUPPORT_FUNCTION
+    keyword whole rand SUPPORT_FUNCTION
+    keyword whole sin SUPPORT_FUNCTION
+    keyword whole sqrt SUPPORT_FUNCTION
+    keyword whole srand SUPPORT_FUNCTION
+    keyword whole time SUPPORT_FUNCTION
+    keyword whole unpack SUPPORT_FUNCTION
+    keyword whole vec SUPPORT_FUNCTION
 
-    keyword whole chomp yellow
-    keyword whole chop yellow
-    keyword whole crypt yellow
-    keyword whole eval yellow
-    keyword whole index yellow
-    keyword whole lc yellow
-    keyword whole lcfirst yellow
-    keyword whole length yellow
-    keyword whole quotemeta yellow
-    keyword whole rindex yellow
-    keyword whole substr yellow
-    keyword whole uc yellow
-    keyword whole ucfirst yellow
+    keyword whole chomp SUPPORT_FUNCTION
+    keyword whole chop SUPPORT_FUNCTION
+    keyword whole crypt SUPPORT_FUNCTION
+    keyword whole eval SUPPORT_FUNCTION
+    keyword whole index SUPPORT_FUNCTION
+    keyword whole lc SUPPORT_FUNCTION
+    keyword whole lcfirst SUPPORT_FUNCTION
+    keyword whole length SUPPORT_FUNCTION
+    keyword whole quotemeta SUPPORT_FUNCTION
+    keyword whole rindex SUPPORT_FUNCTION
+    keyword whole substr SUPPORT_FUNCTION
+    keyword whole uc SUPPORT_FUNCTION
+    keyword whole ucfirst SUPPORT_FUNCTION
 
-    keyword whole delete yellow
-    keyword whole each yellow
-    keyword whole exists yellow
-    keyword whole grep yellow
-    keyword whole join yellow
-    keyword whole keys yellow
-    keyword whole map yellow
-    keyword whole pop yellow
-    keyword whole push yellow
-    keyword whole reverse yellow
-    keyword whole scalar yellow
-    keyword whole shift yellow
-    keyword whole sort yellow
-    keyword whole splice yellow
-    keyword whole split yellow
-    keyword whole unshift yellow
-    keyword whole values yellow
+    keyword whole delete SUPPORT_FUNCTION
+    keyword whole each SUPPORT_FUNCTION
+    keyword whole exists SUPPORT_FUNCTION
+    keyword whole grep SUPPORT_FUNCTION
+    keyword whole join SUPPORT_FUNCTION
+    keyword whole keys SUPPORT_FUNCTION
+    keyword whole map SUPPORT_FUNCTION
+    keyword whole pop SUPPORT_FUNCTION
+    keyword whole push SUPPORT_FUNCTION
+    keyword whole reverse SUPPORT_FUNCTION
+    keyword whole scalar SUPPORT_FUNCTION
+    keyword whole shift SUPPORT_FUNCTION
+    keyword whole sort SUPPORT_FUNCTION
+    keyword whole splice SUPPORT_FUNCTION
+    keyword whole split SUPPORT_FUNCTION
+    keyword whole unshift SUPPORT_FUNCTION
+    keyword whole values SUPPORT_FUNCTION
 
-    keyword whole chmod yellow
-    keyword whole chown yellow
-    keyword whole link yellow
-    keyword whole lstat yellow
-    keyword whole mkdir yellow
-    keyword whole readlink yellow
-    keyword whole rename yellow
-    keyword whole rmdir yellow
-    keyword whole stat yellow
-    keyword whole symlink yellow
-    keyword whole truncate yellow
-    keyword whole unlink yellow
-    keyword whole utime yellow
+    keyword whole chmod SUPPORT_FUNCTION
+    keyword whole chown SUPPORT_FUNCTION
+    keyword whole link SUPPORT_FUNCTION
+    keyword whole lstat SUPPORT_FUNCTION
+    keyword whole mkdir SUPPORT_FUNCTION
+    keyword whole readlink SUPPORT_FUNCTION
+    keyword whole rename SUPPORT_FUNCTION
+    keyword whole rmdir SUPPORT_FUNCTION
+    keyword whole stat SUPPORT_FUNCTION
+    keyword whole symlink SUPPORT_FUNCTION
+    keyword whole truncate SUPPORT_FUNCTION
+    keyword whole unlink SUPPORT_FUNCTION
+    keyword whole utime SUPPORT_FUNCTION
 
-    keyword whole binmode yellow
-    keyword whole close yellow
-    keyword whole dbmclose yellow
-    keyword whole dbmopen yellow
-    keyword whole eof yellow
-    keyword whole fcntl yellow
-    keyword whole fileno yellow
-    keyword whole flock yellow
-    keyword whole getc yellow
-    keyword whole ioctl yellow
-    keyword whole open yellow
-    keyword whole pipe yellow
-    keyword whole print yellow
-    keyword whole printf yellow
-    keyword whole read yellow
-    keyword whole seek yellow
-    keyword whole select yellow
-    keyword whole sprintf yellow
-    keyword whole sysopen yellow
-    keyword whole sysread yellow
-    keyword whole syswrite yellow
-    keyword whole tell yellow
+    keyword whole binmode SUPPORT_FUNCTION
+    keyword whole close SUPPORT_FUNCTION
+    keyword whole dbmclose SUPPORT_FUNCTION
+    keyword whole dbmopen SUPPORT_FUNCTION
+    keyword whole eof SUPPORT_FUNCTION
+    keyword whole fcntl SUPPORT_FUNCTION
+    keyword whole fileno SUPPORT_FUNCTION
+    keyword whole flock SUPPORT_FUNCTION
+    keyword whole getc SUPPORT_FUNCTION
+    keyword whole ioctl SUPPORT_FUNCTION
+    keyword whole open SUPPORT_FUNCTION
+    keyword whole pipe SUPPORT_FUNCTION
+    keyword whole print SUPPORT_FUNCTION
+    keyword whole printf SUPPORT_FUNCTION
+    keyword whole read SUPPORT_FUNCTION
+    keyword whole seek SUPPORT_FUNCTION
+    keyword whole select SUPPORT_FUNCTION
+    keyword whole sprintf SUPPORT_FUNCTION
+    keyword whole sysopen SUPPORT_FUNCTION
+    keyword whole sysread SUPPORT_FUNCTION
+    keyword whole syswrite SUPPORT_FUNCTION
+    keyword whole tell SUPPORT_FUNCTION
 
-    keyword whole formline yellow
-    keyword whole write yellow
+    keyword whole formline SUPPORT_FUNCTION
+    keyword whole write SUPPORT_FUNCTION
 
-    keyword whole closedir yellow
-    keyword whole opendir yellow
-    keyword whole readdir yellow
-    keyword whole rewinddir yellow
-    keyword whole seekdir yellow
-    keyword whole telldir yellow
+    keyword whole closedir SUPPORT_FUNCTION
+    keyword whole opendir SUPPORT_FUNCTION
+    keyword whole readdir SUPPORT_FUNCTION
+    keyword whole rewinddir SUPPORT_FUNCTION
+    keyword whole seekdir SUPPORT_FUNCTION
+    keyword whole telldir SUPPORT_FUNCTION
 
-    keyword whole alarm yellow
-    keyword whole chdir yellow
-    keyword whole chroot yellow
-    keyword whole die yellow
-    keyword whole exec yellow
-    keyword whole exit yellow
-    keyword whole fork yellow
-    keyword whole getlogin yellow
-    keyword whole getpgrp yellow
-    keyword whole getppid yellow
-    keyword whole getpriority yellow
-    keyword whole glob yellow
-    keyword whole kill yellow
-    keyword whole setpgrp yellow
-    keyword whole setpriority yellow
-    keyword whole sleep yellow
-    keyword whole syscall yellow
-    keyword whole system yellow
-    keyword whole times yellow
-    keyword whole umask yellow
-    keyword whole waitpid yellow
-    keyword whole wait yellow
-    keyword whole warn yellow
+    keyword whole alarm SUPPORT_FUNCTION
+    keyword whole chdir SUPPORT_FUNCTION
+    keyword whole chroot SUPPORT_FUNCTION
+    keyword whole die SUPPORT_FUNCTION
+    keyword whole exec SUPPORT_FUNCTION
+    keyword whole exit SUPPORT_FUNCTION
+    keyword whole fork SUPPORT_FUNCTION
+    keyword whole getlogin SUPPORT_FUNCTION
+    keyword whole getpgrp SUPPORT_FUNCTION
+    keyword whole getppid SUPPORT_FUNCTION
+    keyword whole getpriority SUPPORT_FUNCTION
+    keyword whole glob SUPPORT_FUNCTION
+    keyword whole kill SUPPORT_FUNCTION
+    keyword whole setpgrp SUPPORT_FUNCTION
+    keyword whole setpriority SUPPORT_FUNCTION
+    keyword whole sleep SUPPORT_FUNCTION
+    keyword whole syscall SUPPORT_FUNCTION
+    keyword whole system SUPPORT_FUNCTION
+    keyword whole times SUPPORT_FUNCTION
+    keyword whole umask SUPPORT_FUNCTION
+    keyword whole waitpid SUPPORT_FUNCTION
+    keyword whole wait SUPPORT_FUNCTION
+    keyword whole warn SUPPORT_FUNCTION
 
-    keyword whole accept yellow
-    keyword whole bind yellow
-    keyword whole connect yellow
-    keyword whole getpeername yellow
-    keyword whole getsockname yellow
-    keyword whole getsockopt yellow
-    keyword whole listen yellow
-    keyword whole recv yellow
-    keyword whole send yellow
-    keyword whole setsockopt yellow
-    keyword whole shutdown yellow
-    keyword whole socketpair yellow
-    keyword whole socket yellow
+    keyword whole accept SUPPORT_FUNCTION
+    keyword whole bind SUPPORT_FUNCTION
+    keyword whole connect SUPPORT_FUNCTION
+    keyword whole getpeername SUPPORT_FUNCTION
+    keyword whole getsockname SUPPORT_FUNCTION
+    keyword whole getsockopt SUPPORT_FUNCTION
+    keyword whole listen SUPPORT_FUNCTION
+    keyword whole recv SUPPORT_FUNCTION
+    keyword whole send SUPPORT_FUNCTION
+    keyword whole setsockopt SUPPORT_FUNCTION
+    keyword whole shutdown SUPPORT_FUNCTION
+    keyword whole socketpair SUPPORT_FUNCTION
+    keyword whole socket SUPPORT_FUNCTION
 
-    keyword whole msgctl yellow
-    keyword whole msgget yellow
-    keyword whole msgrcv yellow
-    keyword whole msgsnd yellow
-    keyword whole semctl yellow
-    keyword whole semget yellow
-    keyword whole semop yellow
-    keyword whole shmctl yellow
-    keyword whole shmget yellow
-    keyword whole shmread yellow
-    keyword whole shmwrite yellow
+    keyword whole msgctl SUPPORT_FUNCTION
+    keyword whole msgget SUPPORT_FUNCTION
+    keyword whole msgrcv SUPPORT_FUNCTION
+    keyword whole msgsnd SUPPORT_FUNCTION
+    keyword whole semctl SUPPORT_FUNCTION
+    keyword whole semget SUPPORT_FUNCTION
+    keyword whole semop SUPPORT_FUNCTION
+    keyword whole shmctl SUPPORT_FUNCTION
+    keyword whole shmget SUPPORT_FUNCTION
+    keyword whole shmread SUPPORT_FUNCTION
+    keyword whole shmwrite SUPPORT_FUNCTION
 
-    keyword whole defined yellow
-    keyword whole dump yellow
-    keyword whole eval yellow
-    keyword whole local yellow
-    keyword whole my yellow
-    keyword whole our yellow
-    keyword whole ref yellow
-    keyword whole reset yellow
-    keyword whole scalar yellow
-    keyword whole undef yellow
-    keyword whole wantarray yellow
+    keyword whole defined SUPPORT_FUNCTION
+    keyword whole dump SUPPORT_FUNCTION
+    keyword whole eval SUPPORT_FUNCTION
+    keyword whole local STORAGE_TYPE
+    keyword whole my STORAGE_TYPE
+    keyword whole our STORAGE_TYPE
+    keyword whole ref SUPPORT_FUNCTION
+    keyword whole reset SUPPORT_FUNCTION
+    keyword whole scalar SUPPORT_FUNCTION
+    keyword whole undef SUPPORT_FUNCTION
+    keyword whole wantarray SUPPORT_FUNCTION
 
-    keyword whole endgrent yellow
-    keyword whole endpwent yellow
-    keyword whole getgrent yellow
-    keyword whole getgrgid yellow
-    keyword whole getgrnam yellow
-    keyword whole getpwent yellow
-    keyword whole getpwnam yellow
-    keyword whole getpwuid yellow
-    keyword whole setgrent yellow
-    keyword whole setpwent yellow
+    keyword whole endgrent SUPPORT_FUNCTION
+    keyword whole endpwent SUPPORT_FUNCTION
+    keyword whole getgrent SUPPORT_FUNCTION
+    keyword whole getgrgid SUPPORT_FUNCTION
+    keyword whole getgrnam SUPPORT_FUNCTION
+    keyword whole getpwent SUPPORT_FUNCTION
+    keyword whole getpwnam SUPPORT_FUNCTION
+    keyword whole getpwuid SUPPORT_FUNCTION
+    keyword whole setgrent SUPPORT_FUNCTION
+    keyword whole setpwent SUPPORT_FUNCTION
 
-    keyword whole endhostent yellow
-    keyword whole gethostbyaddr yellow
-    keyword whole gethostbyname yellow
-    keyword whole gethostent yellow
-    keyword whole sethostent yellow
+    keyword whole endhostent SUPPORT_FUNCTION
+    keyword whole gethostbyaddr SUPPORT_FUNCTION
+    keyword whole gethostbyname SUPPORT_FUNCTION
+    keyword whole gethostent SUPPORT_FUNCTION
+    keyword whole sethostent SUPPORT_FUNCTION
 
-    keyword whole endnetent yellow
-    keyword whole endprotoent yellow
-    keyword whole endservent yellow
-    keyword whole getnetbyaddr yellow
-    keyword whole getnetbyname yellow
-    keyword whole getnetent yellow
-    keyword whole getprotobyname yellow
-    keyword whole getprotobynumber yellow
-    keyword whole getprotoent yellow
-    keyword whole getservbyname yellow
-    keyword whole getservbyport yellow
-    keyword whole getservent yellow
-    keyword whole serservent yellow
-    keyword whole setnetent yellow
-    keyword whole setprotoent yellow
+    keyword whole endnetent SUPPORT_FUNCTION
+    keyword whole endprotoent SUPPORT_FUNCTION
+    keyword whole endservent SUPPORT_FUNCTION
+    keyword whole getnetbyaddr SUPPORT_FUNCTION
+    keyword whole getnetbyname SUPPORT_FUNCTION
+    keyword whole getnetent SUPPORT_FUNCTION
+    keyword whole getprotobyname SUPPORT_FUNCTION
+    keyword whole getprotobynumber SUPPORT_FUNCTION
+    keyword whole getprotoent SUPPORT_FUNCTION
+    keyword whole getservbyname SUPPORT_FUNCTION
+    keyword whole getservbyport SUPPORT_FUNCTION
+    keyword whole getservent SUPPORT_FUNCTION
+    keyword whole serservent SUPPORT_FUNCTION
+    keyword whole setnetent SUPPORT_FUNCTION
+    keyword whole setprotoent SUPPORT_FUNCTION
 
-context linestart #! \n brightcyan black
+context linestart #! \n COMMENT_LINE black
 
-context exclusive whole <\[\s\\\]EOF EOF green
+context exclusive whole <\[\s\\\]EOF EOF STRING_QUOTED_OTHER
 
-context # \n brown
+context # \n COMMENT_LINE
     spellcheck
 
-context exclusive linestart = linestart =cut brown
+context exclusive linestart = linestart =cut COMMENT_BLOCK
     spellcheck
 
-context " " green
-    keyword \\" brightgreen
-    keyword \\\\ brightgreen
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
 
-context ' ' brightgreen
-    keyword \\' green
-    keyword \\\\ green
+context ' ' STRING_QUOTED_SINGLE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
 
-context exclusive qw( ) green
+context exclusive qw( ) STRING_QUOTED_OTHER
 
-context exclusive ` ` white black
+context exclusive ` ` STRING_QUOTED_OTHER black
 
-context whole __END__ guacomale_pudding brown
+context whole __END__ guacomale_pudding COMMENT_BLOCK

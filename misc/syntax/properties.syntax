@@ -5,31 +5,31 @@
 # - Does not support escapes in keys: \ , \=, \:
 # - Additionally highlights numbers, HTML color codes (#AABBCC), some sort of "variable references" (${ref.to.other.key}), and more
 
-context default lightgray
+context default
 # Keys
-    keyword linestart \[\s\t\]\{"$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\}\[!"#$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\] yellow
-    keyword = brightcyan
-    keyword : brightcyan
+    keyword linestart \[\s\t\]\{"$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\}\[!"#$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\] ENTITY_NAME_TAG
+    keyword = KEYWORD_OPERATOR
+    keyword : PUNCTUATION_SEPARATOR
 # Value continuation (first line)
-    keyword \\\n yellow
-    keyword ${*} brightgreen
-    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
-    keyword whole \{-0123456789\}\[0123456789\] brightcyan
-    keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] green
-    keyword whole true white
-    keyword whole false white
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword ${*} VARIABLE_OTHER
+    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword whole \{-0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] CONSTANT_OTHER
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
 
 # Value continuation (rest of the lines)
-context exclusive \\\n \n lightgray
-    keyword linestart \{\s\t\}\[\s\t\] lightgray black
-    keyword \\\n yellow
-    keyword ${*} brightgreen
-    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
-    keyword whole \{-0123456789\}\[0123456789\] brightcyan
-    keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] green
+context exclusive \\\n \n
+    keyword linestart \{\s\t\}\[\s\t\] default black
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword ${*} VARIABLE_OTHER
+    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword whole \{-0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] CONSTANT_OTHER
 
-context linestart # \n brown
+context linestart # \n COMMENT_LINE
     spellcheck
 
-context linestart ! \n brown
+context linestart ! \n COMMENT_LINE
     spellcheck

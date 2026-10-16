@@ -1,4 +1,5 @@
 # Syntax highlighting rules for file highlighting rules
+# check-tokens: literal colors by design
 
 # Use \[\] at the end of keywords to suppress their special meaning
 
@@ -20,72 +21,72 @@ context default
     keyword whole brightcyan brightcyan
     keyword whole white white
 
-    keyword = brightcyan
-    keyword ; brightmagenta
-    keyword whole extensions yellow
-    keyword whole extensions_case yellow
-    keyword whole type yellow
-    keyword DEVICE brightred
-    keyword DIR brightred
-    keyword FILE_EXE brightred
-    keyword SPECIAL brightred
-    keyword STALE_LINK brightred
-    keyword SYMLINK brightred
-    keyword HARDLINK brightred
+    keyword = KEYWORD_OPERATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword whole extensions KEYWORD_OTHER_RESERVED
+    keyword whole extensions_case KEYWORD_OTHER_RESERVED
+    keyword whole type KEYWORD_OTHER_RESERVED
+    keyword DEVICE SUPPORT_CONSTANT
+    keyword DIR SUPPORT_CONSTANT
+    keyword FILE_EXE SUPPORT_CONSTANT
+    keyword SPECIAL SUPPORT_CONSTANT
+    keyword STALE_LINK SUPPORT_CONSTANT
+    keyword SYMLINK SUPPORT_CONSTANT
+    keyword HARDLINK SUPPORT_CONSTANT
 
-context linestart # \n brown
+context linestart # \n COMMENT_LINE
 
-context linestart [ ] white
+context linestart [ ] ENTITY_NAME_SECTION
 
-context regexp= \n lightgray
-    keyword = brightcyan
-    keyword whole regexp yellow
+context regexp= \n STRING_REGEXP
+    keyword = KEYWORD_OPERATOR
+    keyword whole regexp KEYWORD_OTHER_RESERVED
 
 # regexp patterns
-    keyword \\\/ brightcyan
-    keyword \\\\ brightcyan
-    keyword \\B brightcyan
-    keyword \\b brightcyan
-    keyword \\D brightcyan
-    keyword \\d brightcyan
-    keyword \\S brightcyan
-    keyword \\s brightcyan
-    keyword \\W brightcyan
-    keyword \\w brightcyan
-    keyword \\A brightcyan
-    keyword \\Z brightcyan
+    keyword \\\/ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\B CONSTANT_CHARACTER_ESCAPE
+    keyword \\b CONSTANT_CHARACTER_ESCAPE
+    keyword \\D CONSTANT_CHARACTER_ESCAPE
+    keyword \\d CONSTANT_CHARACTER_ESCAPE
+    keyword \\S CONSTANT_CHARACTER_ESCAPE
+    keyword \\s CONSTANT_CHARACTER_ESCAPE
+    keyword \\W CONSTANT_CHARACTER_ESCAPE
+    keyword \\w CONSTANT_CHARACTER_ESCAPE
+    keyword \\A CONSTANT_CHARACTER_ESCAPE
+    keyword \\Z CONSTANT_CHARACTER_ESCAPE
 
-    keyword \\( brightcyan
-    keyword \\) brightcyan
-    keyword \\[ brightcyan
-    keyword \\] brightcyan
-    keyword \\{ brightcyan
-    keyword \\} brightcyan
-    keyword \\$ brightcyan
-    keyword \\\+ brightcyan
-    keyword \\. brightcyan
-    keyword \\? brightcyan
-    keyword \\\* brightcyan
-    keyword \\^ brightcyan
-    keyword \\| brightcyan
+    keyword \\( CONSTANT_CHARACTER_ESCAPE
+    keyword \\) CONSTANT_CHARACTER_ESCAPE
+    keyword \\[ CONSTANT_CHARACTER_ESCAPE
+    keyword \\] CONSTANT_CHARACTER_ESCAPE
+    keyword \\{ CONSTANT_CHARACTER_ESCAPE
+    keyword \\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\$ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\+ CONSTANT_CHARACTER_ESCAPE
+    keyword \\. CONSTANT_CHARACTER_ESCAPE
+    keyword \\? CONSTANT_CHARACTER_ESCAPE
+    keyword \\\* CONSTANT_CHARACTER_ESCAPE
+    keyword \\^ CONSTANT_CHARACTER_ESCAPE
+    keyword \\| CONSTANT_CHARACTER_ESCAPE
 
-    keyword ( brightmagenta
-    keyword ) brightmagenta
-    keyword [ brightmagenta
-    keyword ] brightmagenta
-    keyword { brightmagenta
-    keyword } brightmagenta
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword ?! yellow
-    keyword ?# yellow
-    keyword ?: yellow
-    keyword ?= yellow
-    keyword ?\{-imx:\}+ yellow
+    keyword ?! KEYWORD_OPERATOR
+    keyword ?# KEYWORD_OPERATOR
+    keyword ?: KEYWORD_OPERATOR
+    keyword ?= KEYWORD_OPERATOR
+    keyword ?\{-imx:\}+ KEYWORD_OPERATOR
 
-    keyword $ yellow
-    keyword \+ yellow
-    keyword . yellow
-    keyword ? yellow
-    keyword \* yellow
-    keyword ^ yellow
-    keyword | yellow
+    keyword $ KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword . KEYWORD_OPERATOR
+    keyword ? KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR

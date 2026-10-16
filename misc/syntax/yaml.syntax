@@ -6,36 +6,36 @@
 
 context default
     spellcheck
-    keyword #*\n brown
-    keyword {{*}} brightred
-    keyword linestart --- brightcyan
-    keyword linestart \[\s\]-\s brightcyan
+    keyword #*\n COMMENT_LINE
+    keyword {{*}} META_PREPROCESSOR
+    keyword linestart --- PUNCTUATION_SEPARATOR
+    keyword linestart \[\s\]-\s PUNCTUATION_SEPARATOR
     # "YAML requires that colons and commas used as list separators be followed by a space [...]"
-    keyword ,\{\s\n\} brightcyan
-    keyword , red
+    keyword ,\{\s\n\} PUNCTUATION_SEPARATOR
+    keyword , INVALID_ILLEGAL
     # Below, we can get by with just "*:\{\s\n\}", but we prefer to restrict the
     # key names in order not to grab too much (e.g., "{one: 1, two: 2}", "one: 1  # possibilities: 1 or 2").
-    keyword \{0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\s-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} yellow
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword whole true brightmagenta
-    keyword whole false brightmagenta
-    keyword whole null brightmagenta
+    keyword \{0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\s-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} ENTITY_NAME_TAG
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole null CONSTANT_LANGUAGE
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword {{*}} brightred
-    keyword \\" brightgreen
-    keyword \\\\ brightgreen
-    keyword \\\{xuU\}\[0123456789\] brightgreen
-    keyword \\\{0abfnrtve_NLP\} brightgreen
+    keyword {{*}} META_PREPROCESSOR
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{xuU\}\[0123456789\] CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{0abfnrtve_NLP\} CONSTANT_CHARACTER_ESCAPE
 
-context ' ' green
+context ' ' STRING_QUOTED_SINGLE
     spellcheck
-    keyword {{*}} brightred
+    keyword {{*}} META_PREPROCESSOR
 
 # The last word below may be: "\n*:\{\s\n\}", but used strict version suitable for more cases
-context exclusive |\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} brown
-context exclusive >\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} brown
+context exclusive |\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} STRING_UNQUOTED
+context exclusive >\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} STRING_UNQUOTED

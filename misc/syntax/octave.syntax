@@ -1,373 +1,373 @@
 # Octave/Matlab syntax file
 
 context default
-    keyword whole function white
-    keyword whole endfunction white
-    keyword whole global white
-    keyword whole for white
-    keyword whole end white
-    keyword whole while white
-    keyword whole if white
-    keyword whole else white
-    keyword whole elseif white
-    keyword whole endif white
-    keyword whole break white
-    keyword whole switch white
-    keyword whole case white
-    keyword whole and white
-    keyword whole or white
-    keyword whole and white
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole endfunction KEYWORD_OTHER
+    keyword whole global STORAGE_MODIFIER
+    keyword whole for KEYWORD_CONTROL
+    keyword whole end KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elseif KEYWORD_CONTROL
+    keyword whole endif KEYWORD_CONTROL
+    keyword whole break KEYWORD_CONTROL
+    keyword whole switch KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole and KEYWORD_OPERATOR_WORD
 
-    keyword ) brightcyan
-    keyword ( brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword ; brightcyan
-    keyword = brightcyan
-    keyword \+ brightcyan
-    keyword - brightcyan
-    keyword \* brightcyan
-    keyword / brightcyan
-    keyword \^ brightcyan
-    keyword ! brightcyan
-    keyword & brightcyan
-    keyword | brightcyan
-    keyword > brightcyan
-    keyword < brightcyan
+    keyword ) PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword = KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword \^ KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
+    keyword & KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
 
 # STD functions
 
-    keyword whole info yellow
-    keyword whole whatsnew yellow
-    keyword whole hostid yellow
-    keyword whole help yellow
-    keyword whole lookfor yellow
-    keyword whole what yellow
-    keyword whole which yellow
-    keyword whole type yellow
-    keyword whole edit yellow
-    keyword whole pcode yellow
-    keyword whole quit yellow
-    keyword whole exit yellow
-    keyword whole who yellow
-    keyword whole whos yellow
-    keyword whole save yellow
-    keyword whole load yellow
-    keyword whole memory yellow
-    keyword whole clear yellow
-    keyword whole pack yellow
-    keyword whole workspace yellow
-    keyword whole pathdef yellow
-    keyword whole path yellow
-    keyword whole addpath yellow
-    keyword whole echo yellow
-    keyword whole format yellow
-    keyword whole diary yellow
-    keyword whole pwd yellow
-    keyword whole cd yellow
-    keyword whole dir yellow
+    keyword whole info SUPPORT_FUNCTION
+    keyword whole whatsnew SUPPORT_FUNCTION
+    keyword whole hostid SUPPORT_FUNCTION
+    keyword whole help SUPPORT_FUNCTION
+    keyword whole lookfor SUPPORT_FUNCTION
+    keyword whole what SUPPORT_FUNCTION
+    keyword whole which SUPPORT_FUNCTION
+    keyword whole type SUPPORT_FUNCTION
+    keyword whole edit SUPPORT_FUNCTION
+    keyword whole pcode SUPPORT_FUNCTION
+    keyword whole quit SUPPORT_FUNCTION
+    keyword whole exit SUPPORT_FUNCTION
+    keyword whole who SUPPORT_FUNCTION
+    keyword whole whos SUPPORT_FUNCTION
+    keyword whole save SUPPORT_FUNCTION
+    keyword whole load SUPPORT_FUNCTION
+    keyword whole memory SUPPORT_FUNCTION
+    keyword whole clear SUPPORT_FUNCTION
+    keyword whole pack SUPPORT_FUNCTION
+    keyword whole workspace SUPPORT_FUNCTION
+    keyword whole pathdef SUPPORT_FUNCTION
+    keyword whole path SUPPORT_FUNCTION
+    keyword whole addpath SUPPORT_FUNCTION
+    keyword whole echo SUPPORT_FUNCTION
+    keyword whole format SUPPORT_FUNCTION
+    keyword whole diary SUPPORT_FUNCTION
+    keyword whole pwd SUPPORT_FUNCTION
+    keyword whole cd SUPPORT_FUNCTION
+    keyword whole dir SUPPORT_FUNCTION
 
 # Data/Type functions
 
-    keyword whole logical yellow
-    keyword whole isnumeric yellow
-    keyword whole islogical yellow
-    keyword whole isempty yellow
-    keyword whole isequal yellow
-    keyword whole reshape yellow
-    keyword whole repmat yellow
-    keyword whole find yellow
-    keyword whole length yellow
-    keyword whole size yellow
-    keyword whole cross yellow
-    keyword whole kron yellow
-    keyword whole linspace yellow
-    keyword whole logspace yellow
-    keyword whole meshgrid yellow
-    keyword whole zeros yellow
-    keyword whole ones yellow
-    keyword whole rand yellow
-    keyword whole randn yellow
-    keyword whole end yellow
-    keyword whole ind2sub yellow
-    keyword whole sub2ind yellow
-    keyword whole repmat yellow
-    keyword whole cat yellow
-    keyword whole ndims yellow
-    keyword whole ndgrid yellow
-    keyword whole permute yellow
-    keyword whole ipermute yellow
-    keyword whole shiftdim yellow
-    keyword whole flipdim yellow
-    keyword whole squeeze yellow
-    keyword whole struct yellow
-    keyword whole fieldnames yellow
-    keyword whole getfield yellow
-    keyword whole setfield yellow
-    keyword whole rmfield yellow
-    keyword whole isfield yellow
-    keyword whole isstruct yellow
-    keyword whole cell yellow
-    keyword whole celldisp yellow
-    keyword whole cellplot yellow
-    keyword whole cellstr yellow
-    keyword whole deal yellow
-    keyword whole iscell yellow
-    keyword whole num2cell yellow
-    keyword whole cell2struct yellow
-    keyword whole struct2cell yellow
-    keyword whole lists yellow
-    keyword whole varargin yellow
-    keyword whole varargout yellow
-    keyword whole inline yellow
-    keyword whole argnames yellow
-    keyword whole formula yellow
-    keyword whole char yellow
-    keyword whole vectorsize yellow
-    keyword whole class yellow
-    keyword whole isa yellow
-    keyword whole isobject yellow
-    keyword whole methods yellow
-    keyword whole inferioto yellow
-    keyword whole superioto yellow
-    keyword whole horzcat yellow
-    keyword whole vertcat yellow
-    keyword whole subsref yellow
-    keyword whole subsasgn yellow
-    keyword whole subsindex yellow
+    keyword whole logical SUPPORT_FUNCTION
+    keyword whole isnumeric SUPPORT_FUNCTION
+    keyword whole islogical SUPPORT_FUNCTION
+    keyword whole isempty SUPPORT_FUNCTION
+    keyword whole isequal SUPPORT_FUNCTION
+    keyword whole reshape SUPPORT_FUNCTION
+    keyword whole repmat SUPPORT_FUNCTION
+    keyword whole find SUPPORT_FUNCTION
+    keyword whole length SUPPORT_FUNCTION
+    keyword whole size SUPPORT_FUNCTION
+    keyword whole cross SUPPORT_FUNCTION
+    keyword whole kron SUPPORT_FUNCTION
+    keyword whole linspace SUPPORT_FUNCTION
+    keyword whole logspace SUPPORT_FUNCTION
+    keyword whole meshgrid SUPPORT_FUNCTION
+    keyword whole zeros SUPPORT_FUNCTION
+    keyword whole ones SUPPORT_FUNCTION
+    keyword whole rand SUPPORT_FUNCTION
+    keyword whole randn SUPPORT_FUNCTION
+    keyword whole end SUPPORT_FUNCTION
+    keyword whole ind2sub SUPPORT_FUNCTION
+    keyword whole sub2ind SUPPORT_FUNCTION
+    keyword whole repmat SUPPORT_FUNCTION
+    keyword whole cat SUPPORT_FUNCTION
+    keyword whole ndims SUPPORT_FUNCTION
+    keyword whole ndgrid SUPPORT_FUNCTION
+    keyword whole permute SUPPORT_FUNCTION
+    keyword whole ipermute SUPPORT_FUNCTION
+    keyword whole shiftdim SUPPORT_FUNCTION
+    keyword whole flipdim SUPPORT_FUNCTION
+    keyword whole squeeze SUPPORT_FUNCTION
+    keyword whole struct SUPPORT_FUNCTION
+    keyword whole fieldnames SUPPORT_FUNCTION
+    keyword whole getfield SUPPORT_FUNCTION
+    keyword whole setfield SUPPORT_FUNCTION
+    keyword whole rmfield SUPPORT_FUNCTION
+    keyword whole isfield SUPPORT_FUNCTION
+    keyword whole isstruct SUPPORT_FUNCTION
+    keyword whole cell SUPPORT_FUNCTION
+    keyword whole celldisp SUPPORT_FUNCTION
+    keyword whole cellplot SUPPORT_FUNCTION
+    keyword whole cellstr SUPPORT_FUNCTION
+    keyword whole deal SUPPORT_FUNCTION
+    keyword whole iscell SUPPORT_FUNCTION
+    keyword whole num2cell SUPPORT_FUNCTION
+    keyword whole cell2struct SUPPORT_FUNCTION
+    keyword whole struct2cell SUPPORT_FUNCTION
+    keyword whole lists SUPPORT_FUNCTION
+    keyword whole varargin SUPPORT_FUNCTION
+    keyword whole varargout SUPPORT_FUNCTION
+    keyword whole inline SUPPORT_FUNCTION
+    keyword whole argnames SUPPORT_FUNCTION
+    keyword whole formula SUPPORT_FUNCTION
+    keyword whole char SUPPORT_FUNCTION
+    keyword whole vectorsize SUPPORT_FUNCTION
+    keyword whole class SUPPORT_FUNCTION
+    keyword whole isa SUPPORT_FUNCTION
+    keyword whole isobject SUPPORT_FUNCTION
+    keyword whole methods SUPPORT_FUNCTION
+    keyword whole inferioto SUPPORT_FUNCTION
+    keyword whole superioto SUPPORT_FUNCTION
+    keyword whole horzcat SUPPORT_FUNCTION
+    keyword whole vertcat SUPPORT_FUNCTION
+    keyword whole subsref SUPPORT_FUNCTION
+    keyword whole subsasgn SUPPORT_FUNCTION
+    keyword whole subsindex SUPPORT_FUNCTION
 
 #   <!-- Misc functions -->
 
-    keyword whole ans yellow
-    keyword whole inf yellow
-    keyword whole NaN yellow
-    keyword whole Pi yellow
-    keyword whole eps yellow
-    keyword whole log2 yellow
-    keyword whole pow2 yellow
-    keyword whole realmin yellow
-    keyword whole realmax yellow
-    keyword whole all yellow
-    keyword whole any yellow
-    keyword whole exist yellow
-    keyword whole bitset yellow
-    keyword whole bitget yellow
-    keyword whole bitmax yellow
-    keyword whole bitcmp yellow
-    keyword whole bitand yellow
-    keyword whole bitor yellow
-    keyword whole bitxor yellow
-    keyword whole bitshift yellow
-    keyword whole ismember yellow
-    keyword whole unique yellow
-    keyword whole union yellow
-    keyword whole intersect yellow
-    keyword whole setdiff yellow
-    keyword whole setxor yellow
-    keyword whole eval yellow
-    keyword whole feval yellow
-    keyword whole builtin yellow
-    keyword whole assignin yellow
-    keyword whole evalin yellow
-    keyword whole run yellow
-    keyword whole nargchk yellow
-    keyword whole nargin yellow
-    keyword whole nargout yellow
-    keyword whole inputname yellow
-    keyword whole input yellow
-    keyword whole pause yellow
-    keyword whole error yellow
-    keyword whole warning yellow
-    keyword whole lasterr yellow
-    keyword whole lastwarn yellow
-    keyword whole disp yellow
-    keyword whole fprintf yellow
-    keyword whole sprintf yellow
+    keyword whole ans SUPPORT_FUNCTION
+    keyword whole inf SUPPORT_FUNCTION
+    keyword whole NaN SUPPORT_FUNCTION
+    keyword whole Pi SUPPORT_FUNCTION
+    keyword whole eps SUPPORT_FUNCTION
+    keyword whole log2 SUPPORT_FUNCTION
+    keyword whole pow2 SUPPORT_FUNCTION
+    keyword whole realmin SUPPORT_FUNCTION
+    keyword whole realmax SUPPORT_FUNCTION
+    keyword whole all SUPPORT_FUNCTION
+    keyword whole any SUPPORT_FUNCTION
+    keyword whole exist SUPPORT_FUNCTION
+    keyword whole bitset SUPPORT_FUNCTION
+    keyword whole bitget SUPPORT_FUNCTION
+    keyword whole bitmax SUPPORT_FUNCTION
+    keyword whole bitcmp SUPPORT_FUNCTION
+    keyword whole bitand SUPPORT_FUNCTION
+    keyword whole bitor SUPPORT_FUNCTION
+    keyword whole bitxor SUPPORT_FUNCTION
+    keyword whole bitshift SUPPORT_FUNCTION
+    keyword whole ismember SUPPORT_FUNCTION
+    keyword whole unique SUPPORT_FUNCTION
+    keyword whole union SUPPORT_FUNCTION
+    keyword whole intersect SUPPORT_FUNCTION
+    keyword whole setdiff SUPPORT_FUNCTION
+    keyword whole setxor SUPPORT_FUNCTION
+    keyword whole eval SUPPORT_FUNCTION
+    keyword whole feval SUPPORT_FUNCTION
+    keyword whole builtin SUPPORT_FUNCTION
+    keyword whole assignin SUPPORT_FUNCTION
+    keyword whole evalin SUPPORT_FUNCTION
+    keyword whole run SUPPORT_FUNCTION
+    keyword whole nargchk SUPPORT_FUNCTION
+    keyword whole nargin SUPPORT_FUNCTION
+    keyword whole nargout SUPPORT_FUNCTION
+    keyword whole inputname SUPPORT_FUNCTION
+    keyword whole input SUPPORT_FUNCTION
+    keyword whole pause SUPPORT_FUNCTION
+    keyword whole error SUPPORT_FUNCTION
+    keyword whole warning SUPPORT_FUNCTION
+    keyword whole lasterr SUPPORT_FUNCTION
+    keyword whole lastwarn SUPPORT_FUNCTION
+    keyword whole disp SUPPORT_FUNCTION
+    keyword whole fprintf SUPPORT_FUNCTION
+    keyword whole sprintf SUPPORT_FUNCTION
 
 #   <!-- Math functions -->
 
-    keyword whole abs yellow
-    keyword whole angle yellow
-    keyword whole real yellow
-    keyword whole imag yellow
-    keyword whole conj yellow
-    keyword whole cplxpair yellow
-    keyword whole ceil yellow
-    keyword whole fix yellow
-    keyword whole floor yellow
-    keyword whole round yellow
-    keyword whole mod yellow
-    keyword whole rem yellow
-    keyword whole sign yellow
-    keyword whole factor yellow
-    keyword whole primes yellow
-    keyword whole gcd yellow
-    keyword whole lcm yellow
-    keyword whole rat yellow
-    keyword whole rats yellow
-    keyword whole perms yellow
-    keyword whole nchoosek yellow
-    keyword whole sqrt yellow
-    keyword whole exp yellow
-    keyword whole log yellow
-    keyword whole pow2 yellow
-    keyword whole nextpow yellow
-    keyword whole log2 yellow
-    keyword whole log10 yellow
-    keyword whole sin yellow
-    keyword whole sinh yellow
-    keyword whole asin yellow
-    keyword whole asinh yellow
-    keyword whole csc yellow
-    keyword whole csch yellow
-    keyword whole ascc yellow
-    keyword whole ascch yellow
-    keyword whole cos yellow
-    keyword whole cosh yellow
-    keyword whole acos yellow
-    keyword whole acosh yellow
-    keyword whole sec yellow
-    keyword whole sech yellow
-    keyword whole asec yellow
-    keyword whole asech yellow
-    keyword whole tan yellow
-    keyword whole tanh yellow
-    keyword whole atan yellow
-    keyword whole atan2 yellow
-    keyword whole atanh yellow
-    keyword whole cot yellow
-    keyword whole coth yellow
-    keyword whole acot yellow
-    keyword whole acoth yellow
-    keyword whole cart2pol yellow
-    keyword whole cart2sph yellow
-    keyword whole pol2cartsph2cart yellow
-    keyword whole besselj yellow
-    keyword whole bessely yellow
-    keyword whole besseli yellow
-    keyword whole besselk yellow
-    keyword whole besselh yellow
-    keyword whole airy yellow
-    keyword whole beta yellow
-    keyword whole betainc yellow
-    keyword whole betaln yellow
-    keyword whole ellipj yellow
-    keyword whole ellipke yellow
-    keyword whole erf yellow
-    keyword whole erfc yellow
-    keyword whole erfcx yellow
-    keyword whole erfinv yellow
-    keyword whole gamma yellow
-    keyword whole gammainc yellow
-    keyword whole gammaln yellow
-    keyword whole expint yellow
-    keyword whole legendre yellow
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole angle SUPPORT_FUNCTION
+    keyword whole real SUPPORT_FUNCTION
+    keyword whole imag SUPPORT_FUNCTION
+    keyword whole conj SUPPORT_FUNCTION
+    keyword whole cplxpair SUPPORT_FUNCTION
+    keyword whole ceil SUPPORT_FUNCTION
+    keyword whole fix SUPPORT_FUNCTION
+    keyword whole floor SUPPORT_FUNCTION
+    keyword whole round SUPPORT_FUNCTION
+    keyword whole mod SUPPORT_FUNCTION
+    keyword whole rem SUPPORT_FUNCTION
+    keyword whole sign SUPPORT_FUNCTION
+    keyword whole factor SUPPORT_FUNCTION
+    keyword whole primes SUPPORT_FUNCTION
+    keyword whole gcd SUPPORT_FUNCTION
+    keyword whole lcm SUPPORT_FUNCTION
+    keyword whole rat SUPPORT_FUNCTION
+    keyword whole rats SUPPORT_FUNCTION
+    keyword whole perms SUPPORT_FUNCTION
+    keyword whole nchoosek SUPPORT_FUNCTION
+    keyword whole sqrt SUPPORT_FUNCTION
+    keyword whole exp SUPPORT_FUNCTION
+    keyword whole log SUPPORT_FUNCTION
+    keyword whole pow2 SUPPORT_FUNCTION
+    keyword whole nextpow SUPPORT_FUNCTION
+    keyword whole log2 SUPPORT_FUNCTION
+    keyword whole log10 SUPPORT_FUNCTION
+    keyword whole sin SUPPORT_FUNCTION
+    keyword whole sinh SUPPORT_FUNCTION
+    keyword whole asin SUPPORT_FUNCTION
+    keyword whole asinh SUPPORT_FUNCTION
+    keyword whole csc SUPPORT_FUNCTION
+    keyword whole csch SUPPORT_FUNCTION
+    keyword whole ascc SUPPORT_FUNCTION
+    keyword whole ascch SUPPORT_FUNCTION
+    keyword whole cos SUPPORT_FUNCTION
+    keyword whole cosh SUPPORT_FUNCTION
+    keyword whole acos SUPPORT_FUNCTION
+    keyword whole acosh SUPPORT_FUNCTION
+    keyword whole sec SUPPORT_FUNCTION
+    keyword whole sech SUPPORT_FUNCTION
+    keyword whole asec SUPPORT_FUNCTION
+    keyword whole asech SUPPORT_FUNCTION
+    keyword whole tan SUPPORT_FUNCTION
+    keyword whole tanh SUPPORT_FUNCTION
+    keyword whole atan SUPPORT_FUNCTION
+    keyword whole atan2 SUPPORT_FUNCTION
+    keyword whole atanh SUPPORT_FUNCTION
+    keyword whole cot SUPPORT_FUNCTION
+    keyword whole coth SUPPORT_FUNCTION
+    keyword whole acot SUPPORT_FUNCTION
+    keyword whole acoth SUPPORT_FUNCTION
+    keyword whole cart2pol SUPPORT_FUNCTION
+    keyword whole cart2sph SUPPORT_FUNCTION
+    keyword whole pol2cartsph2cart SUPPORT_FUNCTION
+    keyword whole besselj SUPPORT_FUNCTION
+    keyword whole bessely SUPPORT_FUNCTION
+    keyword whole besseli SUPPORT_FUNCTION
+    keyword whole besselk SUPPORT_FUNCTION
+    keyword whole besselh SUPPORT_FUNCTION
+    keyword whole airy SUPPORT_FUNCTION
+    keyword whole beta SUPPORT_FUNCTION
+    keyword whole betainc SUPPORT_FUNCTION
+    keyword whole betaln SUPPORT_FUNCTION
+    keyword whole ellipj SUPPORT_FUNCTION
+    keyword whole ellipke SUPPORT_FUNCTION
+    keyword whole erf SUPPORT_FUNCTION
+    keyword whole erfc SUPPORT_FUNCTION
+    keyword whole erfcx SUPPORT_FUNCTION
+    keyword whole erfinv SUPPORT_FUNCTION
+    keyword whole gamma SUPPORT_FUNCTION
+    keyword whole gammainc SUPPORT_FUNCTION
+    keyword whole gammaln SUPPORT_FUNCTION
+    keyword whole expint SUPPORT_FUNCTION
+    keyword whole legendre SUPPORT_FUNCTION
 
 #   <!-- Matrix functions -->
 
-    keyword whole eye yellow
-    keyword whole diag yellow
-    keyword whole tril yellow
-    keyword whole triu yellow
-    keyword whole fliplr yellow
-    keyword whole flipud yellow
-    keyword whole rot90 yellow
-    keyword whole compan yellow
-    keyword whole cond yellow
-    keyword whole normest yellow
-    keyword whole norm yellow
-    keyword whole det yellow
-    keyword whole see yellow
-    keyword whole rank yellow
-    keyword whole trace yellow
-    keyword whole null yellow
-    keyword whole orth yellow
-    keyword whole inv yellow
-    keyword whole lu yellow
-    keyword whole qr yellow
-    keyword whole svd yellow
-    keyword whole gsvd yellow
-    keyword whole roots yellow
-    keyword whole poly yellow
+    keyword whole eye SUPPORT_FUNCTION
+    keyword whole diag SUPPORT_FUNCTION
+    keyword whole tril SUPPORT_FUNCTION
+    keyword whole triu SUPPORT_FUNCTION
+    keyword whole fliplr SUPPORT_FUNCTION
+    keyword whole flipud SUPPORT_FUNCTION
+    keyword whole rot90 SUPPORT_FUNCTION
+    keyword whole compan SUPPORT_FUNCTION
+    keyword whole cond SUPPORT_FUNCTION
+    keyword whole normest SUPPORT_FUNCTION
+    keyword whole norm SUPPORT_FUNCTION
+    keyword whole det SUPPORT_FUNCTION
+    keyword whole see SUPPORT_FUNCTION
+    keyword whole rank SUPPORT_FUNCTION
+    keyword whole trace SUPPORT_FUNCTION
+    keyword whole null SUPPORT_FUNCTION
+    keyword whole orth SUPPORT_FUNCTION
+    keyword whole inv SUPPORT_FUNCTION
+    keyword whole lu SUPPORT_FUNCTION
+    keyword whole qr SUPPORT_FUNCTION
+    keyword whole svd SUPPORT_FUNCTION
+    keyword whole gsvd SUPPORT_FUNCTION
+    keyword whole roots SUPPORT_FUNCTION
+    keyword whole poly SUPPORT_FUNCTION
 
 #   <!-- Data analize functions -->
 
-    keyword whole sum yellow
-    keyword whole cumsum yellow
-    keyword whole prod yellow
-    keyword whole cumprod yellow
-    keyword whole sort yellow
-    keyword whole sortrows yellow
-    keyword whole max yellow
-    keyword whole min yellow
-    keyword whole median yellow
-    keyword whole mean yellow
-    keyword whole std yellow
-    keyword whole cov yellow
-    keyword whole corrcoef yellow
-    keyword whole diff yellow
-    keyword whole gradient yellow
-    keyword whole polyfit yellow
-    keyword whole interpft yellow
-    keyword whole spline yellow
-    keyword whole ppval yellow
-    keyword whole fft yellow
-    keyword whole ifft yellow
-    keyword whole fft2 yellow
-    keyword whole ifft2 yellow
-    keyword whole fftn yellow
-    keyword whole ifftn yellow
-    keyword whole filter yellow
-    keyword whole filter2 yellow
+    keyword whole sum SUPPORT_FUNCTION
+    keyword whole cumsum SUPPORT_FUNCTION
+    keyword whole prod SUPPORT_FUNCTION
+    keyword whole cumprod SUPPORT_FUNCTION
+    keyword whole sort SUPPORT_FUNCTION
+    keyword whole sortrows SUPPORT_FUNCTION
+    keyword whole max SUPPORT_FUNCTION
+    keyword whole min SUPPORT_FUNCTION
+    keyword whole median SUPPORT_FUNCTION
+    keyword whole mean SUPPORT_FUNCTION
+    keyword whole std SUPPORT_FUNCTION
+    keyword whole cov SUPPORT_FUNCTION
+    keyword whole corrcoef SUPPORT_FUNCTION
+    keyword whole diff SUPPORT_FUNCTION
+    keyword whole gradient SUPPORT_FUNCTION
+    keyword whole polyfit SUPPORT_FUNCTION
+    keyword whole interpft SUPPORT_FUNCTION
+    keyword whole spline SUPPORT_FUNCTION
+    keyword whole ppval SUPPORT_FUNCTION
+    keyword whole fft SUPPORT_FUNCTION
+    keyword whole ifft SUPPORT_FUNCTION
+    keyword whole fft2 SUPPORT_FUNCTION
+    keyword whole ifft2 SUPPORT_FUNCTION
+    keyword whole fftn SUPPORT_FUNCTION
+    keyword whole ifftn SUPPORT_FUNCTION
+    keyword whole filter SUPPORT_FUNCTION
+    keyword whole filter2 SUPPORT_FUNCTION
 
 #   <!-- Plotting functions -->
 
-    keyword whole root yellow
-    keyword whole figure yellow
-    keyword whole axes yellow
-    keyword whole line yellow
-    keyword whole patch yellow
-    keyword whole surface yellow
-    keyword whole text yellow
-    keyword whole plot yellow
-    keyword whole fplot yellow
-    keyword whole ezplot yellow
-    keyword whole loglog yellow
-    keyword whole semilogx yellow
-    keyword whole semilogy yellow
-    keyword whole polar yellow
-    keyword whole piotyy yellow
-    keyword whole plot3 yellow
-    keyword whole meshgrid yellow
-    keyword whole mesh yellow
-    keyword whole meshc yellow
-    keyword whole meshz yellow
-    keyword whole axis yellow
-    keyword whole hold yellow
-    keyword whole grid yellow
-    keyword whole bar yellow
-    keyword whole barh yellow
-    keyword whole pie yellow
-    keyword whole subplot yellow
-    keyword whole zoom yellow
-    keyword whole colormap yellow
-    keyword whole label yellow
-    keyword whole legend yellow
-    keyword whole errorbar yellow
-    keyword whole hist yellow
-    keyword whole stem yellow
-    keyword whole stairs yellow
-    keyword whole scatter yellow
-    keyword whole roze yellow
+    keyword whole root SUPPORT_FUNCTION
+    keyword whole figure SUPPORT_FUNCTION
+    keyword whole axes SUPPORT_FUNCTION
+    keyword whole line SUPPORT_FUNCTION
+    keyword whole patch SUPPORT_FUNCTION
+    keyword whole surface SUPPORT_FUNCTION
+    keyword whole text SUPPORT_FUNCTION
+    keyword whole plot SUPPORT_FUNCTION
+    keyword whole fplot SUPPORT_FUNCTION
+    keyword whole ezplot SUPPORT_FUNCTION
+    keyword whole loglog SUPPORT_FUNCTION
+    keyword whole semilogx SUPPORT_FUNCTION
+    keyword whole semilogy SUPPORT_FUNCTION
+    keyword whole polar SUPPORT_FUNCTION
+    keyword whole piotyy SUPPORT_FUNCTION
+    keyword whole plot3 SUPPORT_FUNCTION
+    keyword whole meshgrid SUPPORT_FUNCTION
+    keyword whole mesh SUPPORT_FUNCTION
+    keyword whole meshc SUPPORT_FUNCTION
+    keyword whole meshz SUPPORT_FUNCTION
+    keyword whole axis SUPPORT_FUNCTION
+    keyword whole hold SUPPORT_FUNCTION
+    keyword whole grid SUPPORT_FUNCTION
+    keyword whole bar SUPPORT_FUNCTION
+    keyword whole barh SUPPORT_FUNCTION
+    keyword whole pie SUPPORT_FUNCTION
+    keyword whole subplot SUPPORT_FUNCTION
+    keyword whole zoom SUPPORT_FUNCTION
+    keyword whole colormap SUPPORT_FUNCTION
+    keyword whole label SUPPORT_FUNCTION
+    keyword whole legend SUPPORT_FUNCTION
+    keyword whole errorbar SUPPORT_FUNCTION
+    keyword whole hist SUPPORT_FUNCTION
+    keyword whole stem SUPPORT_FUNCTION
+    keyword whole stairs SUPPORT_FUNCTION
+    keyword whole scatter SUPPORT_FUNCTION
+    keyword whole roze SUPPORT_FUNCTION
 
-context %{ %} brown
+context %{ %} COMMENT_BLOCK
     spellcheck
 
-context # \n brown
+context # \n COMMENT_LINE
     spellcheck
 
-context % \n brown
+context % \n COMMENT_LINE
     spellcheck
 
-context " " green
+context " " STRING_QUOTED_DOUBLE

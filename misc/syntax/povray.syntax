@@ -3,252 +3,252 @@
 # // Mike Gorchak
 #
 
-context default lightgray
+context default
 
 # Keywords
-    keyword whole global_settings yellow
-    keyword whole radiosity yellow
-    keyword whole light_source yellow
-    keyword whole fog yellow
-    keyword whole sphere yellow
-    keyword whole camera yellow
-    keyword whole plane yellow
-    keyword whole union yellow
-    keyword whole box yellow
-    keyword whole cylinder yellow
-    keyword whole torus yellow
-    keyword whole difference yellow
-    keyword whole intersection yellow
-    keyword whole object yellow
-    keyword whole photons yellow
-    keyword whole material yellow
-    keyword whole texture yellow
-    keyword whole pigment yellow
-    keyword whole pigment_pattern yellow
-    keyword whole pigment_map yellow
-    keyword whole finish yellow
-    keyword whole interior yellow
-    keyword whole merge yellow
-    keyword whole warp yellow
-    keyword whole color_map yellow
-    keyword whole colour_map yellow
-    keyword whole isosurface yellow
-    keyword whole sky_sphere yellow
-    keyword whole bounded_by yellow
-    keyword whole clipped_by yellow
-    keyword whole normal yellow
-    keyword whole tiles yellow
-    keyword whole height_field yellow
-    keyword whole image_map yellow
-    keyword whole looks_like yellow
-    keyword whole quadric yellow
-    keyword whole scattering yellow
-    keyword whole text yellow
-    keyword whole bump_map yellow
-    keyword whole texture_map yellow
-    keyword whole slope yellow
-    keyword whole contained_by yellow
-    keyword whole superellipsoid yellow
-    keyword whole cone yellow
-    keyword whole blob yellow
-    keyword whole light_group yellow
+    keyword whole global_settings KEYWORD_OTHER
+    keyword whole radiosity KEYWORD_OTHER
+    keyword whole light_source KEYWORD_OTHER
+    keyword whole fog KEYWORD_OTHER
+    keyword whole sphere KEYWORD_OTHER
+    keyword whole camera KEYWORD_OTHER
+    keyword whole plane KEYWORD_OTHER
+    keyword whole union KEYWORD_OTHER
+    keyword whole box KEYWORD_OTHER
+    keyword whole cylinder KEYWORD_OTHER
+    keyword whole torus KEYWORD_OTHER
+    keyword whole difference KEYWORD_OTHER
+    keyword whole intersection KEYWORD_OTHER
+    keyword whole object KEYWORD_OTHER
+    keyword whole photons KEYWORD_OTHER
+    keyword whole material KEYWORD_OTHER
+    keyword whole texture KEYWORD_OTHER
+    keyword whole pigment KEYWORD_OTHER
+    keyword whole pigment_pattern KEYWORD_OTHER
+    keyword whole pigment_map KEYWORD_OTHER
+    keyword whole finish KEYWORD_OTHER
+    keyword whole interior KEYWORD_OTHER
+    keyword whole merge KEYWORD_OTHER
+    keyword whole warp KEYWORD_OTHER
+    keyword whole color_map KEYWORD_OTHER
+    keyword whole colour_map KEYWORD_OTHER
+    keyword whole isosurface KEYWORD_OTHER
+    keyword whole sky_sphere KEYWORD_OTHER
+    keyword whole bounded_by KEYWORD_OTHER
+    keyword whole clipped_by KEYWORD_OTHER
+    keyword whole normal KEYWORD_OTHER
+    keyword whole tiles KEYWORD_OTHER
+    keyword whole height_field KEYWORD_OTHER
+    keyword whole image_map KEYWORD_OTHER
+    keyword whole looks_like KEYWORD_OTHER
+    keyword whole quadric KEYWORD_OTHER
+    keyword whole scattering KEYWORD_OTHER
+    keyword whole text KEYWORD_OTHER
+    keyword whole bump_map KEYWORD_OTHER
+    keyword whole texture_map KEYWORD_OTHER
+    keyword whole slope KEYWORD_OTHER
+    keyword whole contained_by KEYWORD_OTHER
+    keyword whole superellipsoid KEYWORD_OTHER
+    keyword whole cone KEYWORD_OTHER
+    keyword whole blob KEYWORD_OTHER
+    keyword whole light_group KEYWORD_OTHER
 
 # Constructions
-    keyword whole #switch white
-    keyword whole #break white
-    keyword whole #case white
-    keyword whole #end white
-    keyword whole #declare white
-    keyword whole #macro white
-    keyword whole #local white
-    keyword whole #while white
-    keyword whole #ifndef white
-    keyword whole #version white
-    keyword whole #ifdef white
-    keyword whole #debug white
-    keyword whole #include white
-    keyword whole #if white
-    keyword whole function white
-    keyword whole array white
+    keyword whole #switch KEYWORD_CONTROL
+    keyword whole #break KEYWORD_CONTROL
+    keyword whole #case KEYWORD_CONTROL
+    keyword whole #end KEYWORD_CONTROL
+    keyword whole #declare KEYWORD_OTHER
+    keyword whole #macro KEYWORD_OTHER
+    keyword whole #local KEYWORD_OTHER
+    keyword whole #while KEYWORD_CONTROL
+    keyword whole #ifndef KEYWORD_CONTROL
+    keyword whole #version KEYWORD_OTHER
+    keyword whole #ifdef KEYWORD_CONTROL
+    keyword whole #debug KEYWORD_OTHER
+    keyword whole #include KEYWORD_CONTROL_IMPORT
+    keyword whole #if KEYWORD_CONTROL
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole array STORAGE_TYPE
 
 # Predefined constants
-    keyword whole on brightblue
-    keyword whole off brightblue
-    keyword whole true brightblue
-    keyword whole false brightblue
-    keyword whole no brightblue
-    keyword whole yes brightblue
+    keyword whole on CONSTANT_LANGUAGE
+    keyword whole off CONSTANT_LANGUAGE
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole no CONSTANT_LANGUAGE
+    keyword whole yes CONSTANT_LANGUAGE
 
 # Built-in functions
-    keyword whole sqrt brightmagenta
-    keyword whole mod brightmagenta
-    keyword whole min brightmagenta
-    keyword whole max brightmagenta
-    keyword whole sin brightmagenta
-    keyword whole cos brightmagenta
-    keyword whole pow brightmagenta
-    keyword whole abs brightmagenta
-    keyword whole concat brightmagenta
-    keyword whole str brightmagenta
-    keyword whole rand brightmagenta
-    keyword whole seed brightmagenta
+    keyword whole sqrt SUPPORT_FUNCTION
+    keyword whole mod SUPPORT_FUNCTION
+    keyword whole min SUPPORT_FUNCTION
+    keyword whole max SUPPORT_FUNCTION
+    keyword whole sin SUPPORT_FUNCTION
+    keyword whole cos SUPPORT_FUNCTION
+    keyword whole pow SUPPORT_FUNCTION
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole concat SUPPORT_FUNCTION
+    keyword whole str SUPPORT_FUNCTION
+    keyword whole rand SUPPORT_FUNCTION
+    keyword whole seed SUPPORT_FUNCTION
 
 # Arguments
-    keyword whole assumed_gamma brightgreen
-    keyword whole max_trace_level brightgreen
-    keyword whole noise_generator brightgreen
-    keyword whole number_of_waves brightgreen
-    keyword whole fog_type brightgreen
-    keyword whole fog_alt brightgreen
-    keyword whole fog_offset brightgreen
-    keyword whole color brightgreen
-    keyword whole colour brightgreen
-    keyword whole rgb brightgreen
-    keyword whole rgbf brightgreen
-    keyword whole rgbt brightgreen
-    keyword whole distance brightgreen
-    keyword whole pretrace_start brightgreen
-    keyword whole pretrace_end brightgreen
-    keyword whole count brightgreen
-    keyword whole nearest_count brightgreen
-    keyword whole error_bound brightgreen
-    keyword whole recursion_limit brightgreen
-    keyword whole low_error_factor brightgreen
-    keyword whole gray_threshold brightgreen
-    keyword whole minimum_reuse brightgreen
-    keyword whole brightness brightgreen
-    keyword whole adc_bailout brightgreen
-    keyword whole normal brightgreen
-    keyword whole diffuse brightgreen
-    keyword whole ambient brightgreen
-    keyword whole scale brightgreen
-    keyword whole translate brightgreen
-    keyword whole rotate brightgreen
-    keyword whole red brightgreen
-    keyword whole green brightgreen
-    keyword whole blue brightgreen
-    keyword whole spacing brightgreen
-    keyword whole location brightgreen
-    keyword whole direction brightgreen
-    keyword whole sky brightgreen
-    keyword whole up brightgreen
-    keyword whole right brightgreen
-    keyword whole look_at brightgreen
-    keyword whole angle brightgreen
-    keyword whole reflection brightgreen
-    keyword whole refraction brightgreen
-    keyword whole area_light brightgreen
-    keyword whole jitter brightgreen
-    keyword whole circular brightgreen
-    keyword whole orient brightgreen
-    keyword whole specular brightgreen
-    keyword whole roughness brightgreen
-    keyword whole conserve_energy brightgreen
-    keyword whole fresnel brightgreen
-    keyword whole ior brightgreen
-    keyword whole fade_distance brightgreen
-    keyword whole fade_power brightgreen
-    keyword whole fade_color brightgreen
-    keyword whole fade_colour brightgreen
-    keyword whole agate brightgreen
-    keyword whole turbulence brightgreen
-    keyword whole octaves brightgreen
-    keyword whole granite brightgreen
-    keyword whole checker brightgreen
-    keyword whole gradient brightgreen
-    keyword whole caustics brightgreen
-    keyword whole phong brightgreen
-    keyword whole phong_size brightgreen
-    keyword whole filter brightgreen
-    keyword whole inverse brightgreen
-    keyword whole onion brightgreen
-    keyword whole frequency brightgreen
-    keyword whole sine_wave brightgreen
-    keyword whole marble brightgreen
-    keyword whole lambda brightgreen
-    keyword whole omega brightgreen
-    keyword whole quilted brightgreen
-    keyword whole control0 brightgreen
-    keyword whole control1 brightgreen
-    keyword whole wrinkles brightgreen
-    keyword whole boxed brightgreen
-    keyword whole repeat brightgreen
-    keyword whole png brightgreen
-    keyword whole water_level brightgreen
-    keyword whole png brightgreen
-    keyword whole quick_color brightgreen
-    keyword whole quick_colour brightgreen
-    keyword whole hollow brightgreen
-    keyword whole waves brightgreen
-    keyword whole bozo brightgreen
-    keyword whole adaptive brightgreen
-    keyword whole media brightgreen
-    keyword whole media_interaction brightgreen
-    keyword whole brilliance brightgreen
-    keyword whole spotlight brightgreen
-    keyword whole radius brightgreen
-    keyword whole falloff brightgreen
-    keyword whole point_at brightgreen
-    keyword whole extinction brightgreen
-    keyword whole emission brightgreen
-    keyword whole method brightgreen
-    keyword whole intervals brightgreen
-    keyword whole samples brightgreen
-    keyword whole target brightgreen
-    keyword whole collect brightgreen
-    keyword whole ttf brightgreen
-    keyword whole metallic brightgreen
-    keyword whole cylindrical brightgreen
-    keyword whole dispersion brightgreen
-    keyword whole dispersion_samples brightgreen
-    keyword whole crand brightgreen
-    keyword whole pot brightgreen
-    keyword whole bump_size brightgreen
-    keyword whole interpolate brightgreen
-    keyword whole ripples brightgreen
-    keyword whole brick brightgreen
-    keyword whole aa_threshold brightgreen
-    keyword whole aa_level brightgreen
-    keyword whole no_shadow brightgreen
-    keyword whole accuracy brightgreen
-    keyword whole altitude brightgreen
-    keyword whole max_gradient brightgreen
-    keyword whole support_piece brightgreen
-    keyword whole open brightgreen
-    keyword whole support brightgreen
-    keyword whole bezier_spline brightgreen
-    keyword whole cubic_spline brightgreen
-    keyword whole shadowless brightgreen
-    keyword whole threshold brightgreen
-    keyword whole global_lights brightgreen
-    keyword whole absorption brightgreen
+    keyword whole assumed_gamma ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole max_trace_level ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole noise_generator ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole number_of_waves ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fog_type ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fog_alt ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fog_offset ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole color ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole colour ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rgb ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rgbf ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rgbt ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole distance ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pretrace_start ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pretrace_end ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole count ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole nearest_count ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole error_bound ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole recursion_limit ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole low_error_factor ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole gray_threshold ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole minimum_reuse ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole brightness ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole adc_bailout ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole normal ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole diffuse ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ambient ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole scale ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole translate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rotate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole red ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole green ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole blue ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole spacing ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole location ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole direction ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole sky ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole up ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole right ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole look_at ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole angle ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole reflection ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole refraction ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole area_light ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole jitter ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole circular ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole orient ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole specular ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole roughness ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole conserve_energy ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fresnel ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ior ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fade_distance ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fade_power ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fade_color ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fade_colour ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole agate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole turbulence ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole octaves ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole granite ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole checker ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole gradient ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole caustics ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole phong ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole phong_size ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole filter ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole inverse ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole onion ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole frequency ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole sine_wave ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole marble ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole lambda ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole omega ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole quilted ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole control0 ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole control1 ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole wrinkles ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole boxed ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole repeat ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole png ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole water_level ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole png ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole quick_color ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole quick_colour ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole hollow ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole waves ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole bozo ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole adaptive ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole media ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole media_interaction ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole brilliance ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole spotlight ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole radius ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole falloff ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole point_at ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole extinction ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole emission ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole method ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole intervals ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole samples ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole target ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole collect ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ttf ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole metallic ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole cylindrical ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole dispersion ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole dispersion_samples ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole crand ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pot ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole bump_size ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole interpolate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ripples ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole brick ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole aa_threshold ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole aa_level ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole no_shadow ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole accuracy ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole altitude ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole max_gradient ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole support_piece ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole open ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole support ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole bezier_spline ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole cubic_spline ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole shadowless ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole threshold ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole global_lights ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole absorption ENTITY_OTHER_ATTRIBUTE_NAME
 
 # Common symbols
-    keyword // brown
-    keyword /\* brown
-    keyword \*/ brown
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword , brightcyan
-    keyword . brightcyan
-    keyword \* brightcyan
-    keyword / brightcyan
-    keyword \+ brightcyan
-    keyword - brightcyan
-    keyword = brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword < brightcyan
-    keyword > brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword ; brightcyan
+    keyword // COMMENT_LINE
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword . KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword < KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword ; PUNCTUATION_TERMINATOR
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck

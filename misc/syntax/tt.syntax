@@ -4,9 +4,9 @@
 # HTML entities
 #
 context default
-    keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen
-    keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen
-    keyword &#\[0123456789\]; brightgreen
+    keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; CONSTANT_CHARACTER_ESCAPE
+    keyword &#\{xX\}\[0123456789abcdefABCDEF\]; CONSTANT_CHARACTER_ESCAPE
+    keyword &#\[0123456789\]; CONSTANT_CHARACTER_ESCAPE
 
 # Although TT is most often used to generate HTML, it's not *only* used for that, so assuming HTML around it may be presumptuous anyway.
 # Since cooledit doesn't support sub-context, we can't have TT *in* HTML, like <img src="[% image_url %]">
@@ -15,110 +15,110 @@ context default
     spellcheck
 
 # TT directives - https://template-toolkit.org/docs/manual/Directives.html
-context [% %] red black
-    keyword whole GET yellow
-    keyword whole CALL yellow
-    keyword whole SET yellow
-    keyword whole DEFAULT yellow
+context [% %] META_PREPROCESSOR black
+    keyword whole GET KEYWORD_OTHER_RESERVED
+    keyword whole CALL KEYWORD_OTHER_RESERVED
+    keyword whole SET KEYWORD_OTHER_RESERVED
+    keyword whole DEFAULT KEYWORD_OTHER_RESERVED
 
-    keyword whole INSERT yellow
-    keyword whole INCLUDE yellow
-    keyword whole PROCESS yellow
-    keyword whole WRAPPER yellow
-    keyword whole BLOCK yellow
+    keyword whole INSERT KEYWORD_OTHER_RESERVED
+    keyword whole INCLUDE KEYWORD_OTHER_RESERVED
+    keyword whole PROCESS KEYWORD_OTHER_RESERVED
+    keyword whole WRAPPER KEYWORD_OTHER_RESERVED
+    keyword whole BLOCK KEYWORD_OTHER_RESERVED
 
-    keyword whole IF yellow
-    keyword whole UNLESS yellow
-    keyword whole ELSIF yellow
-    keyword whole ELSE yellow
-    keyword whole SWITCH yellow
-    keyword whole CASE yellow
+    keyword whole IF KEYWORD_CONTROL
+    keyword whole UNLESS KEYWORD_CONTROL
+    keyword whole ELSIF KEYWORD_CONTROL
+    keyword whole ELSE KEYWORD_CONTROL
+    keyword whole SWITCH KEYWORD_CONTROL
+    keyword whole CASE KEYWORD_CONTROL
 
-    keyword whole FOREACH yellow
-    keyword whole IN yellow
-    keyword whole WHILE yellow
+    keyword whole FOREACH KEYWORD_CONTROL
+    keyword whole IN KEYWORD_CONTROL
+    keyword whole WHILE KEYWORD_CONTROL
 
-    keyword whole FILTER yellow
-    keyword whole USE yellow
-    keyword whole MACRO yellow
-    keyword whole PERL yellow
-    keyword whole RAWPERL yellow
+    keyword whole FILTER KEYWORD_OTHER_RESERVED
+    keyword whole USE KEYWORD_OTHER_RESERVED
+    keyword whole MACRO KEYWORD_OTHER_RESERVED
+    keyword whole PERL KEYWORD_OTHER_RESERVED
+    keyword whole RAWPERL KEYWORD_OTHER_RESERVED
 
-    keyword whole TRY yellow
-    keyword whole THROW yellow
-    keyword whole CATCH yellow
-    keyword whole FINAL yellow
+    keyword whole TRY KEYWORD_CONTROL
+    keyword whole THROW KEYWORD_CONTROL
+    keyword whole CATCH KEYWORD_CONTROL
+    keyword whole FINAL KEYWORD_CONTROL
 
-    keyword whole NEXT yellow
-    keyword whole LAST yellow
-    keyword whole RETURN yellow
-    keyword whole STOP yellow
-    keyword whole CLEAR yellow
-    keyword whole META yellow
-    keyword whole TAGS yellow
-    keyword whole DEBUG yellow
+    keyword whole NEXT KEYWORD_CONTROL
+    keyword whole LAST KEYWORD_CONTROL
+    keyword whole RETURN KEYWORD_CONTROL
+    keyword whole STOP KEYWORD_CONTROL
+    keyword whole CLEAR KEYWORD_OTHER_RESERVED
+    keyword whole META KEYWORD_OTHER_RESERVED
+    keyword whole TAGS KEYWORD_OTHER_RESERVED
+    keyword whole DEBUG KEYWORD_OTHER_RESERVED
 
-    keyword whole END yellow
+    keyword whole END KEYWORD_CONTROL
 
 # AND, OR and NOT are apparently not documented
-    keyword whole AND white
-    keyword whole OR white
-    keyword whole NOT white
-    keyword | white
+    keyword whole AND KEYWORD_OPERATOR_WORD
+    keyword whole OR KEYWORD_OPERATOR_WORD
+    keyword whole NOT KEYWORD_OPERATOR_WORD
+    keyword | KEYWORD_OPERATOR
 
 # TT VMethods - https://template-toolkit.org/docs/manual/VMethods.html
-    keyword .defined brown
-    keyword .length brown
-    keyword .repeat brown
-    keyword .replace brown
-    keyword .remove brown
-    keyword .match brown
-    keyword .search brown
-    keyword .split brown
-    keyword .chunk brown
-    keyword .substr brown
-    keyword .list brown
-    keyword .hash brown
-    keyword .size brown
-    keyword .keys brown
-    keyword .values brown
-    keyword .items brown
-    keyword .each brown
-    keyword .pairs brown
-    keyword .sort brown
-    keyword .nsort brown
-    keyword .import brown
-    keyword .exists brown
-    keyword .delete brown
-    keyword .item brown
-    keyword .first brown
-    keyword .last brown
-    keyword .max brown
-    keyword .reverse brown
-    keyword .join brown
-    keyword .grep brown
-    keyword .unshift brown
-    keyword .push brown
-    keyword .shift brown
-    keyword .pop brown
-    keyword .unique brown
-    keyword .merge brown
-    keyword .slice brown
-    keyword .splice brown
+    keyword .defined SUPPORT_FUNCTION
+    keyword .length SUPPORT_FUNCTION
+    keyword .repeat SUPPORT_FUNCTION
+    keyword .replace SUPPORT_FUNCTION
+    keyword .remove SUPPORT_FUNCTION
+    keyword .match SUPPORT_FUNCTION
+    keyword .search SUPPORT_FUNCTION
+    keyword .split SUPPORT_FUNCTION
+    keyword .chunk SUPPORT_FUNCTION
+    keyword .substr SUPPORT_FUNCTION
+    keyword .list SUPPORT_FUNCTION
+    keyword .hash SUPPORT_FUNCTION
+    keyword .size SUPPORT_FUNCTION
+    keyword .keys SUPPORT_FUNCTION
+    keyword .values SUPPORT_FUNCTION
+    keyword .items SUPPORT_FUNCTION
+    keyword .each SUPPORT_FUNCTION
+    keyword .pairs SUPPORT_FUNCTION
+    keyword .sort SUPPORT_FUNCTION
+    keyword .nsort SUPPORT_FUNCTION
+    keyword .import SUPPORT_FUNCTION
+    keyword .exists SUPPORT_FUNCTION
+    keyword .delete SUPPORT_FUNCTION
+    keyword .item SUPPORT_FUNCTION
+    keyword .first SUPPORT_FUNCTION
+    keyword .last SUPPORT_FUNCTION
+    keyword .max SUPPORT_FUNCTION
+    keyword .reverse SUPPORT_FUNCTION
+    keyword .join SUPPORT_FUNCTION
+    keyword .grep SUPPORT_FUNCTION
+    keyword .unshift SUPPORT_FUNCTION
+    keyword .push SUPPORT_FUNCTION
+    keyword .shift SUPPORT_FUNCTION
+    keyword .pop SUPPORT_FUNCTION
+    keyword .unique SUPPORT_FUNCTION
+    keyword .merge SUPPORT_FUNCTION
+    keyword .slice SUPPORT_FUNCTION
+    keyword .splice SUPPORT_FUNCTION
 
-    keyword "*" green
-    keyword '*' brightgreen
+    keyword "*" STRING_QUOTED_DOUBLE
+    keyword '*' STRING_QUOTED_SINGLE
 
 # HTML comments
-context <!-- --> brown
+context <!-- --> COMMENT_BLOCK
     spellcheck
 
 # HTML DOCTYPE
-context <! > brightred/orange
+context <! > META_PREPROCESSOR
     spellcheck
 
 # HTML end tags
-context </ > brightcyan
+context </ > ENTITY_NAME_TAG
 
 # HTML open tags - enabling this will hide TT syntax in HTML, e.g. <img src="[% image_url %]">
 #context < > brightcyan

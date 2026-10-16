@@ -1,158 +1,158 @@
 context default
 # keywords
-	keyword whole break yellow
-	keyword whole case yellow
-	keyword whole chan yellow
-	keyword whole const yellow
-	keyword whole continue yellow
-	keyword whole default yellow
-	keyword whole defer yellow
-	keyword whole else yellow
-	keyword whole fallthrough yellow
-	keyword whole for yellow
-	keyword whole func yellow
-	keyword whole go yellow
-	keyword whole goto yellow
-	keyword whole if yellow
-	keyword whole import yellow
-	keyword whole interface yellow
-	keyword whole map yellow
-	keyword whole package yellow
-	keyword whole range yellow
-	keyword whole return yellow
-	keyword whole select yellow
-	keyword whole struct yellow
-	keyword whole switch yellow
-	keyword whole type yellow
-	keyword whole var yellow
+	keyword whole break KEYWORD_CONTROL
+	keyword whole case KEYWORD_CONTROL
+	keyword whole chan STORAGE_TYPE
+	keyword whole const STORAGE_MODIFIER
+	keyword whole continue KEYWORD_CONTROL
+	keyword whole default KEYWORD_CONTROL
+	keyword whole defer KEYWORD_CONTROL
+	keyword whole else KEYWORD_CONTROL
+	keyword whole fallthrough KEYWORD_CONTROL
+	keyword whole for KEYWORD_CONTROL
+	keyword whole func STORAGE_TYPE_FUNCTION
+	keyword whole go KEYWORD_CONTROL
+	keyword whole goto KEYWORD_CONTROL
+	keyword whole if KEYWORD_CONTROL
+	keyword whole import KEYWORD_CONTROL_IMPORT
+	keyword whole interface STORAGE_TYPE_CLASS
+	keyword whole map STORAGE_TYPE
+	keyword whole package KEYWORD_OTHER_PACKAGE
+	keyword whole range KEYWORD_CONTROL
+	keyword whole return KEYWORD_CONTROL
+	keyword whole select KEYWORD_CONTROL
+	keyword whole struct STORAGE_TYPE_CLASS
+	keyword whole switch KEYWORD_CONTROL
+	keyword whole type STORAGE_TYPE
+	keyword whole var STORAGE_MODIFIER
 # builtin types
-	keyword whole uint8 brightgreen
-	keyword whole uint16 brightgreen
-	keyword whole uint32 brightgreen
-	keyword whole uint64 brightgreen
-	keyword whole int8 brightgreen
-	keyword whole int16 brightgreen
-	keyword whole int32 brightgreen
-	keyword whole int64 brightgreen
-	keyword whole float32 brightgreen
-	keyword whole float64 brightgreen
-	keyword whole byte brightgreen
-	keyword whole uint brightgreen
-	keyword whole int brightgreen
-	keyword whole float brightgreen
-	keyword whole uintptr brightgreen
-	keyword whole string brightgreen
-	keyword whole bool brightgreen
-	keyword whole time brightgreen
+	keyword whole uint8 STORAGE_TYPE_PRIMITIVE
+	keyword whole uint16 STORAGE_TYPE_PRIMITIVE
+	keyword whole uint32 STORAGE_TYPE_PRIMITIVE
+	keyword whole uint64 STORAGE_TYPE_PRIMITIVE
+	keyword whole int8 STORAGE_TYPE_PRIMITIVE
+	keyword whole int16 STORAGE_TYPE_PRIMITIVE
+	keyword whole int32 STORAGE_TYPE_PRIMITIVE
+	keyword whole int64 STORAGE_TYPE_PRIMITIVE
+	keyword whole float32 STORAGE_TYPE_PRIMITIVE
+	keyword whole float64 STORAGE_TYPE_PRIMITIVE
+	keyword whole byte STORAGE_TYPE_PRIMITIVE
+	keyword whole uint STORAGE_TYPE_PRIMITIVE
+	keyword whole int STORAGE_TYPE_PRIMITIVE
+	keyword whole float STORAGE_TYPE_PRIMITIVE
+	keyword whole uintptr STORAGE_TYPE_PRIMITIVE
+	keyword whole string STORAGE_TYPE_PRIMITIVE
+	keyword whole bool STORAGE_TYPE_PRIMITIVE
+	keyword whole time SUPPORT_CLASS
 # builtin functions
-	keyword whole nil brown
-	keyword whole true brown
-	keyword whole false brown
-	keyword whole iota brown
-	keyword whole cap brown
-	keyword whole close brown
-	keyword whole closed brown
-	keyword whole len brown
-	keyword whole make brown
-	keyword whole new brown
-	keyword whole panic brown
-	keyword whole panicln brown
-	keyword whole print brown
-	keyword whole println brown
+	keyword whole nil CONSTANT_LANGUAGE
+	keyword whole true CONSTANT_LANGUAGE
+	keyword whole false CONSTANT_LANGUAGE
+	keyword whole iota CONSTANT_OTHER
+	keyword whole cap SUPPORT_FUNCTION
+	keyword whole close SUPPORT_FUNCTION
+	keyword whole closed SUPPORT_FUNCTION
+	keyword whole len SUPPORT_FUNCTION
+	keyword whole make SUPPORT_FUNCTION
+	keyword whole new SUPPORT_FUNCTION
+	keyword whole panic SUPPORT_FUNCTION
+	keyword whole panicln SUPPORT_FUNCTION
+	keyword whole print SUPPORT_FUNCTION
+	keyword whole println SUPPORT_FUNCTION
 # builtin packages
-	keyword whole tar brightgreen
-	keyword whole zip brightgreen
-	keyword whole bufio brightgreen
-	keyword whole bytes brightgreen
-	keyword whole cmd brightgreen
-	keyword whole compress brightgreen
-	keyword whole container brightgreen
-	keyword whole crypto brightgreen
-	keyword whole database brightgreen
-	keyword whole debug brightgreen
-	keyword whole encoding brightgreen
-	keyword whole errors brightgreen
-	keyword whole expvar brightgreen
-	keyword whole flag brightgreen
-	keyword whole fmt brightgreen
-	keyword whole hash brightgreen
-	keyword whole html brightgreen
-	keyword whole image brightgreen
-	keyword whole suffixarray brightgreen
-	keyword whole race  brightgreen
-	keyword whole singleflight brightgreen
-	keyword whole syscall brightgreen
-	keyword whole testenv brightgreen
-	keyword whole trace brightgreen
-	keyword whole io brightgreen
-	keyword whole log brightgreen
-	keyword whole math brightgreen
-	keyword whole mime brightgreen
-	keyword whole net brightgreen
-	keyword whole os brightgreen
-	keyword whole path brightgreen
-	keyword whole reflect brightgreen
-	keyword whole regexp brightgreen
-	keyword whole runtime brightgreen
-	keyword whole sort brightgreen
-	keyword whole strconv brightgreen
-	keyword whole strings brightgreen
-	keyword whole sync brightgreen
-	keyword whole testing brightgreen
-	keyword whole text brightgreen
-	keyword whole time brightgreen
-	keyword whole unicode brightgreen
-	keyword whole unsafe brightgreen
-	keyword whole vendor brightgreen
-	keyword whole unicode brightgreen
+	keyword whole tar SUPPORT_CLASS
+	keyword whole zip SUPPORT_CLASS
+	keyword whole bufio SUPPORT_CLASS
+	keyword whole bytes SUPPORT_CLASS
+	keyword whole cmd SUPPORT_CLASS
+	keyword whole compress SUPPORT_CLASS
+	keyword whole container SUPPORT_CLASS
+	keyword whole crypto SUPPORT_CLASS
+	keyword whole database SUPPORT_CLASS
+	keyword whole debug SUPPORT_CLASS
+	keyword whole encoding SUPPORT_CLASS
+	keyword whole errors SUPPORT_CLASS
+	keyword whole expvar SUPPORT_CLASS
+	keyword whole flag SUPPORT_CLASS
+	keyword whole fmt SUPPORT_CLASS
+	keyword whole hash SUPPORT_CLASS
+	keyword whole html SUPPORT_CLASS
+	keyword whole image SUPPORT_CLASS
+	keyword whole suffixarray SUPPORT_CLASS
+	keyword whole race  SUPPORT_CLASS
+	keyword whole singleflight SUPPORT_CLASS
+	keyword whole syscall SUPPORT_CLASS
+	keyword whole testenv SUPPORT_CLASS
+	keyword whole trace SUPPORT_CLASS
+	keyword whole io SUPPORT_CLASS
+	keyword whole log SUPPORT_CLASS
+	keyword whole math SUPPORT_CLASS
+	keyword whole mime SUPPORT_CLASS
+	keyword whole net SUPPORT_CLASS
+	keyword whole os SUPPORT_CLASS
+	keyword whole path SUPPORT_CLASS
+	keyword whole reflect SUPPORT_CLASS
+	keyword whole regexp SUPPORT_CLASS
+	keyword whole runtime SUPPORT_CLASS
+	keyword whole sort SUPPORT_CLASS
+	keyword whole strconv SUPPORT_CLASS
+	keyword whole strings SUPPORT_CLASS
+	keyword whole sync SUPPORT_CLASS
+	keyword whole testing SUPPORT_CLASS
+	keyword whole text SUPPORT_CLASS
+	keyword whole time SUPPORT_CLASS
+	keyword whole unicode SUPPORT_CLASS
+	keyword whole unsafe SUPPORT_CLASS
+	keyword whole vendor SUPPORT_CLASS
+	keyword whole unicode SUPPORT_CLASS
 # special functions
-	keyword whole init brown
-	keyword whole main brown
+	keyword whole init ENTITY_NAME_FUNCTION
+	keyword whole main ENTITY_NAME_FUNCTION
 # comment chars
-	keyword /\* green
-	keyword \*/ green
-	keyword // green
+	keyword /\* COMMENT_BLOCK
+	keyword \*/ COMMENT_BLOCK
+	keyword // COMMENT_LINE
 # punctuation, operator chars
-	keyword <- brightmagenta
-	keyword \+ brightcyan
-	keyword & brightcyan
-	keyword ( brightcyan
-	keyword ) brightcyan
-	keyword - brightcyan
-	keyword | brightcyan
-	keyword < brightcyan
-	keyword [ brightcyan
-	keyword ] brightcyan
-	keyword \* brightcyan
-	keyword ^ brightcyan
-	keyword > brightcyan
-	keyword { brightcyan
-	keyword } brightcyan
-	keyword / brightcyan
-	keyword = brightcyan
-	keyword , brightcyan
-	keyword ; brightcyan
-	keyword % brightcyan
-	keyword ! brightcyan
-	keyword . brightcyan
-	keyword : brightcyan
+	keyword <- KEYWORD_OPERATOR
+	keyword \+ KEYWORD_OPERATOR
+	keyword & KEYWORD_OPERATOR
+	keyword ( PUNCTUATION_SECTION
+	keyword ) PUNCTUATION_SECTION
+	keyword - KEYWORD_OPERATOR
+	keyword | KEYWORD_OPERATOR
+	keyword < KEYWORD_OPERATOR
+	keyword [ PUNCTUATION_SECTION
+	keyword ] PUNCTUATION_SECTION
+	keyword \* KEYWORD_OPERATOR
+	keyword ^ KEYWORD_OPERATOR
+	keyword > KEYWORD_OPERATOR
+	keyword { PUNCTUATION_SECTION
+	keyword } PUNCTUATION_SECTION
+	keyword / KEYWORD_OPERATOR
+	keyword = KEYWORD_OPERATOR
+	keyword , PUNCTUATION_SEPARATOR
+	keyword ; PUNCTUATION_TERMINATOR
+	keyword % KEYWORD_OPERATOR
+	keyword ! KEYWORD_OPERATOR
+	keyword . KEYWORD_OPERATOR
+	keyword : PUNCTUATION_SEPARATOR
 
 # comment
-context exclusive /\* \*/ brown
-context exclusive // \n brown
+context exclusive /\* \*/ COMMENT_BLOCK
+context exclusive // \n COMMENT_LINE
 
 # char, raw string, string
-context ' ' gray
-	keyword \\\{abfnrtv\\'"\} white
-	keyword \\\{0123\}\{01234567\}\{01234567\} white
-	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
-	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
-	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
-context ` ` green
-context " " green
+context ' ' CONSTANT_CHARACTER
+	keyword \\\{abfnrtv\\'"\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+context ` ` STRING_QUOTED_OTHER
+context " " STRING_QUOTED_DOUBLE
 	spellcheck
-	keyword \\\{abfnrtv\\'"\} brightgreen
-	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
-	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
-	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
+	keyword \\\{abfnrtv\\'"\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE

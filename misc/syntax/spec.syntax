@@ -1,394 +1,394 @@
 context default
-    keyword whole Auto\{Pp\}rov: green
-    keyword whole Auto\{Rr\}eq\{Pp\}rov: green
-    keyword whole Auto\{Rr\}eq: green
-    keyword whole Build\{Aa\}rch: green
-    keyword whole Build\{Cc\}onflicts: green
-    keyword whole Build\{Pp\}re\{Rr\}eq: green
-    keyword whole Build\{Rr\}oot: blue
-    keyword whole Build\{Rr\}equires: green
-    keyword whole Conflicts: green
-    keyword whole Copyright: blue
-    keyword whole Description: green
-    keyword whole Distribution: blue
-    keyword whole Doc\{Dd\}ir: blue
-    keyword whole Epoch: green
-    keyword whole Exclude\{Aa\}rch: green
-    keyword whole Exclusive\{Aa\}rch: green
-    keyword whole Exclusive\{Oo\}\{Ss\}: green
-    keyword whole Group: blue
-    keyword whole Icon: green
-    keyword whole License: green
-    keyword whole Name: green
-    keyword whole NoSource\[0123456789\]: green
-    keyword whole Obsoletes: green
-    keyword whole Packager: blue
-    keyword whole Patch\[0123456789\]: green
-    keyword whole Prefix: green
-    keyword whole Pre\{Rr\}eq: green
-    keyword whole Provides: green
-    keyword whole Recommends: green
-    keyword whole Release: green
-    keyword whole Requires: green
-    keyword whole Requires(\[abcdefghijklmnopqrstuvwxyz\]): green
-    keyword whole Root: green
-    keyword whole Serial: white
-    keyword whole Source\[0123456789\]: green
-    keyword whole Suggests: green
-    keyword whole Summary: green
-    keyword whole VCS: green
-    keyword whole Vendor: blue
-    keyword whole Version: green
-    keyword whole U\{Rr\}\{Ll\}: green
+    keyword whole Auto\{Pp\}rov: KEYWORD_OTHER_RESERVED
+    keyword whole Auto\{Rr\}eq\{Pp\}rov: KEYWORD_OTHER_RESERVED
+    keyword whole Auto\{Rr\}eq: KEYWORD_OTHER_RESERVED
+    keyword whole Build\{Aa\}rch: KEYWORD_OTHER_RESERVED
+    keyword whole Build\{Cc\}onflicts: KEYWORD_OTHER_RESERVED
+    keyword whole Build\{Pp\}re\{Rr\}eq: KEYWORD_OTHER_RESERVED
+    keyword whole Build\{Rr\}oot: KEYWORD_OTHER_RESERVED
+    keyword whole Build\{Rr\}equires: KEYWORD_OTHER_RESERVED
+    keyword whole Conflicts: KEYWORD_OTHER_RESERVED
+    keyword whole Copyright: KEYWORD_OTHER_RESERVED
+    keyword whole Description: KEYWORD_OTHER_RESERVED
+    keyword whole Distribution: KEYWORD_OTHER_RESERVED
+    keyword whole Doc\{Dd\}ir: KEYWORD_OTHER_RESERVED
+    keyword whole Epoch: KEYWORD_OTHER_RESERVED
+    keyword whole Exclude\{Aa\}rch: KEYWORD_OTHER_RESERVED
+    keyword whole Exclusive\{Aa\}rch: KEYWORD_OTHER_RESERVED
+    keyword whole Exclusive\{Oo\}\{Ss\}: KEYWORD_OTHER_RESERVED
+    keyword whole Group: KEYWORD_OTHER_RESERVED
+    keyword whole Icon: KEYWORD_OTHER_RESERVED
+    keyword whole License: KEYWORD_OTHER_RESERVED
+    keyword whole Name: KEYWORD_OTHER_RESERVED
+    keyword whole NoSource\[0123456789\]: KEYWORD_OTHER_RESERVED
+    keyword whole Obsoletes: KEYWORD_OTHER_RESERVED
+    keyword whole Packager: KEYWORD_OTHER_RESERVED
+    keyword whole Patch\[0123456789\]: KEYWORD_OTHER_RESERVED
+    keyword whole Prefix: KEYWORD_OTHER_RESERVED
+    keyword whole Pre\{Rr\}eq: KEYWORD_OTHER_RESERVED
+    keyword whole Provides: KEYWORD_OTHER_RESERVED
+    keyword whole Recommends: KEYWORD_OTHER_RESERVED
+    keyword whole Release: KEYWORD_OTHER_RESERVED
+    keyword whole Requires: KEYWORD_OTHER_RESERVED
+    keyword whole Requires(\[abcdefghijklmnopqrstuvwxyz\]): KEYWORD_OTHER_RESERVED
+    keyword whole Root: KEYWORD_OTHER_RESERVED
+    keyword whole Serial: KEYWORD_OTHER_RESERVED
+    keyword whole Source\[0123456789\]: KEYWORD_OTHER_RESERVED
+    keyword whole Suggests: KEYWORD_OTHER_RESERVED
+    keyword whole Summary: KEYWORD_OTHER_RESERVED
+    keyword whole VCS: KEYWORD_OTHER_RESERVED
+    keyword whole Vendor: KEYWORD_OTHER_RESERVED
+    keyword whole Version: KEYWORD_OTHER_RESERVED
+    keyword whole U\{Rr\}\{Ll\}: KEYWORD_OTHER_RESERVED
 
-    keyword whole linestart %build red
-    keyword whole linestart %changelog red
-    keyword whole linestart %check red
-    keyword whole linestart %clean red
-    keyword whole linestart %description red
-    keyword whole linestart %files red
-    keyword whole linestart %install red
-    keyword whole linestart %package red
-    keyword whole linestart %post red
-    keyword whole linestart %postun red
-    keyword whole linestart %pre red
-    keyword whole linestart %prep red
-    keyword whole linestart %preun red
-    keyword whole linestart %pretrans red
-    keyword whole linestart %posttrans red
-    keyword whole linestart %verifyscript red
+    keyword whole linestart %build ENTITY_NAME_SECTION
+    keyword whole linestart %changelog ENTITY_NAME_SECTION
+    keyword whole linestart %check ENTITY_NAME_SECTION
+    keyword whole linestart %clean ENTITY_NAME_SECTION
+    keyword whole linestart %description ENTITY_NAME_SECTION
+    keyword whole linestart %files ENTITY_NAME_SECTION
+    keyword whole linestart %install ENTITY_NAME_SECTION
+    keyword whole linestart %package ENTITY_NAME_SECTION
+    keyword whole linestart %post ENTITY_NAME_SECTION
+    keyword whole linestart %postun ENTITY_NAME_SECTION
+    keyword whole linestart %pre ENTITY_NAME_SECTION
+    keyword whole linestart %prep ENTITY_NAME_SECTION
+    keyword whole linestart %preun ENTITY_NAME_SECTION
+    keyword whole linestart %pretrans ENTITY_NAME_SECTION
+    keyword whole linestart %posttrans ENTITY_NAME_SECTION
+    keyword whole linestart %verifyscript ENTITY_NAME_SECTION
 
-    keyword whole %define brightmagenta
-    keyword linestart \[\s\t\]%dnl\[\s\t\]*\n brown
-    keyword whole %dump brightmagenta
-    keyword whole %global brightmagenta
-    keyword whole %trace brightmagenta
-    keyword whole %undefine brightmagenta
-    keyword %\{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\}\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\] brightred
+    keyword whole %define KEYWORD_OTHER_RESERVED
+    keyword linestart \[\s\t\]%dnl\[\s\t\]*\n COMMENT_LINE
+    keyword whole %dump KEYWORD_OTHER_RESERVED
+    keyword whole %global KEYWORD_OTHER_RESERVED
+    keyword whole %trace KEYWORD_OTHER_RESERVED
+    keyword whole %undefine KEYWORD_OTHER_RESERVED
+    keyword %\{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\}\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\] VARIABLE_OTHER
 
-    keyword whole echo: brightmagenta
-    keyword whole warn: brightmagenta
-    keyword whole error: brightmagenta
-    keyword whole uncompress: brightmagenta
-    keyword whole expand: brightmagenta
-    keyword whole S: brightmagenta
-    keyword whole P: brightmagenta
-    keyword whole F: brightmagenta
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+    keyword whole echo: KEYWORD_OTHER_RESERVED
+    keyword whole warn: KEYWORD_OTHER_RESERVED
+    keyword whole error: KEYWORD_OTHER_RESERVED
+    keyword whole uncompress: KEYWORD_OTHER_RESERVED
+    keyword whole expand: KEYWORD_OTHER_RESERVED
+    keyword whole S: KEYWORD_OTHER_RESERVED
+    keyword whole P: KEYWORD_OTHER_RESERVED
+    keyword whole F: KEYWORD_OTHER_RESERVED
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword whole %triggerin magenta
-    keyword whole %triggerun magenta
-    keyword whole %triggerun magenta
+    keyword whole %triggerin ENTITY_NAME_SECTION
+    keyword whole %triggerun ENTITY_NAME_SECTION
+    keyword whole %triggerun ENTITY_NAME_SECTION
 
-    keyword \\\n yellow
-    keyword wholeright $+ brightgreen
-    keyword ftp://+ brightgreen
-    keyword http://+ brightgreen
-    keyword https://+ brightgreen
-    keyword cvs://+ brightgreen
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword wholeright $+ VARIABLE_OTHER
+    keyword ftp://+ STRING_UNQUOTED
+    keyword http://+ STRING_UNQUOTED
+    keyword https://+ STRING_UNQUOTED
+    keyword cvs://+ STRING_UNQUOTED
 
-    keyword whole missingok brightcyan
-    keyword whole noreplace brightcyan
+    keyword whole missingok KEYWORD_OTHER_RESERVED
+    keyword whole noreplace KEYWORD_OTHER_RESERVED
 
-    keyword whole PATCH\[0123456789\] cyan
-    keyword whole SOURCE\[0123456789\] cyan
+    keyword whole PATCH\[0123456789\] VARIABLE_OTHER
+    keyword whole SOURCE\[0123456789\] VARIABLE_OTHER
 
-context Group( ): blue
-    keyword whole af yellow
-    keyword whole az yellow
-    keyword whole bg yellow
-    keyword whole br yellow
-    keyword whole ca yellow
-    keyword whole ca_ES yellow
-    keyword whole cs yellow
-    keyword whole cs_CZ yellow
-    keyword whole da yellow
-    keyword whole da_DK yellow
-    keyword whole de yellow
-    keyword whole de_AT yellow
-    keyword whole de_DE yellow
-    keyword whole el yellow
-    keyword whole el_GR yellow
-    keyword whole en yellow
-    keyword whole en_GB yellow
-    keyword whole eo yellow
-    keyword whole es yellow
-    keyword whole es_ES yellow
-    keyword whole et yellow
-    keyword whole et_EE yellow
-    keyword whole eu yellow
-    keyword whole fi yellow
-    keyword whole fi_FI yellow
-    keyword whole fr yellow
-    keyword whole fr_FR yellow
-    keyword whole gl yellow
-    keyword whole gl_ES yellow
-    keyword whole gr yellow
-    keyword whole he yellow
-    keyword whole he_IL yellow
-    keyword whole hi yellow
-    keyword whole hr yellow
-    keyword whole hr_HR yellow
-    keyword whole hu yellow
-    keyword whole hu_HU yellow
-    keyword whole id yellow
-    keyword whole is yellow
-    keyword whole is_IS yellow
-    keyword whole it yellow
-    keyword whole it_IT yellow
-    keyword whole ja yellow
-    keyword whole ja_JP yellow
-    keyword whole ja_JP.SJIS yellow
-    keyword whole ko yellow
-    keyword whole ko_KR yellow
-    keyword whole lt yellow
-    keyword whole lt_LT yellow
-    keyword whole lv yellow
-    keyword whole ms yellow
-    keyword whole nb yellow
-    keyword whole nl yellow
-    keyword whole nl_NL yellow
-    keyword whole nn yellow
-    keyword whole nn_NO yellow
-    keyword whole no yellow
-    keyword whole no_NO yellow
-    keyword whole pl yellow
-    keyword whole pl_PL yellow
-    keyword whole pt yellow
-    keyword whole pt_BR yellow
-    keyword whole pt_PT yellow
-    keyword whole ro yellow
-    keyword whole ro_RO yellow
-    keyword whole ru yellow
-    keyword whole ru_RU yellow
-    keyword whole sk yellow
-    keyword whole sk_SK yellow
-    keyword whole sl yellow
-    keyword whole sl_SI yellow
-    keyword whole sr yellow
-    keyword whole sv yellow
-    keyword whole sv_SE yellow
-    keyword whole ta yellow
-    keyword whole th_TH yellow
-    keyword whole tr yellow
-    keyword whole tr_TR yellow
-    keyword whole uk yellow
-    keyword whole vi yellow
-    keyword whole wa yellow
-    keyword whole zh yellow
-    keyword whole zh_CN yellow
-    keyword whole zh_CN.GB2312 yellow
-    keyword whole zh_TW yellow
-    keyword whole zh_TW.Big5 yellow
+context Group( ): KEYWORD_OTHER_RESERVED
+    keyword whole af CONSTANT_OTHER
+    keyword whole az CONSTANT_OTHER
+    keyword whole bg CONSTANT_OTHER
+    keyword whole br CONSTANT_OTHER
+    keyword whole ca CONSTANT_OTHER
+    keyword whole ca_ES CONSTANT_OTHER
+    keyword whole cs CONSTANT_OTHER
+    keyword whole cs_CZ CONSTANT_OTHER
+    keyword whole da CONSTANT_OTHER
+    keyword whole da_DK CONSTANT_OTHER
+    keyword whole de CONSTANT_OTHER
+    keyword whole de_AT CONSTANT_OTHER
+    keyword whole de_DE CONSTANT_OTHER
+    keyword whole el CONSTANT_OTHER
+    keyword whole el_GR CONSTANT_OTHER
+    keyword whole en CONSTANT_OTHER
+    keyword whole en_GB CONSTANT_OTHER
+    keyword whole eo CONSTANT_OTHER
+    keyword whole es CONSTANT_OTHER
+    keyword whole es_ES CONSTANT_OTHER
+    keyword whole et CONSTANT_OTHER
+    keyword whole et_EE CONSTANT_OTHER
+    keyword whole eu CONSTANT_OTHER
+    keyword whole fi CONSTANT_OTHER
+    keyword whole fi_FI CONSTANT_OTHER
+    keyword whole fr CONSTANT_OTHER
+    keyword whole fr_FR CONSTANT_OTHER
+    keyword whole gl CONSTANT_OTHER
+    keyword whole gl_ES CONSTANT_OTHER
+    keyword whole gr CONSTANT_OTHER
+    keyword whole he CONSTANT_OTHER
+    keyword whole he_IL CONSTANT_OTHER
+    keyword whole hi CONSTANT_OTHER
+    keyword whole hr CONSTANT_OTHER
+    keyword whole hr_HR CONSTANT_OTHER
+    keyword whole hu CONSTANT_OTHER
+    keyword whole hu_HU CONSTANT_OTHER
+    keyword whole id CONSTANT_OTHER
+    keyword whole is CONSTANT_OTHER
+    keyword whole is_IS CONSTANT_OTHER
+    keyword whole it CONSTANT_OTHER
+    keyword whole it_IT CONSTANT_OTHER
+    keyword whole ja CONSTANT_OTHER
+    keyword whole ja_JP CONSTANT_OTHER
+    keyword whole ja_JP.SJIS CONSTANT_OTHER
+    keyword whole ko CONSTANT_OTHER
+    keyword whole ko_KR CONSTANT_OTHER
+    keyword whole lt CONSTANT_OTHER
+    keyword whole lt_LT CONSTANT_OTHER
+    keyword whole lv CONSTANT_OTHER
+    keyword whole ms CONSTANT_OTHER
+    keyword whole nb CONSTANT_OTHER
+    keyword whole nl CONSTANT_OTHER
+    keyword whole nl_NL CONSTANT_OTHER
+    keyword whole nn CONSTANT_OTHER
+    keyword whole nn_NO CONSTANT_OTHER
+    keyword whole no CONSTANT_OTHER
+    keyword whole no_NO CONSTANT_OTHER
+    keyword whole pl CONSTANT_OTHER
+    keyword whole pl_PL CONSTANT_OTHER
+    keyword whole pt CONSTANT_OTHER
+    keyword whole pt_BR CONSTANT_OTHER
+    keyword whole pt_PT CONSTANT_OTHER
+    keyword whole ro CONSTANT_OTHER
+    keyword whole ro_RO CONSTANT_OTHER
+    keyword whole ru CONSTANT_OTHER
+    keyword whole ru_RU CONSTANT_OTHER
+    keyword whole sk CONSTANT_OTHER
+    keyword whole sk_SK CONSTANT_OTHER
+    keyword whole sl CONSTANT_OTHER
+    keyword whole sl_SI CONSTANT_OTHER
+    keyword whole sr CONSTANT_OTHER
+    keyword whole sv CONSTANT_OTHER
+    keyword whole sv_SE CONSTANT_OTHER
+    keyword whole ta CONSTANT_OTHER
+    keyword whole th_TH CONSTANT_OTHER
+    keyword whole tr CONSTANT_OTHER
+    keyword whole tr_TR CONSTANT_OTHER
+    keyword whole uk CONSTANT_OTHER
+    keyword whole vi CONSTANT_OTHER
+    keyword whole wa CONSTANT_OTHER
+    keyword whole zh CONSTANT_OTHER
+    keyword whole zh_CN CONSTANT_OTHER
+    keyword whole zh_CN.GB2312 CONSTANT_OTHER
+    keyword whole zh_TW CONSTANT_OTHER
+    keyword whole zh_TW.Big5 CONSTANT_OTHER
 
-context Requires( ): green
-    keyword whole post yellow
-    keyword whole pre yellow
-    keyword whole postun yellow
-    keyword whole preun yellow
-    keyword , lightgray
+context Requires( ): KEYWORD_OTHER_RESERVED
+    keyword whole post KEYWORD_OTHER_RESERVED
+    keyword whole pre KEYWORD_OTHER_RESERVED
+    keyword whole postun KEYWORD_OTHER_RESERVED
+    keyword whole preun KEYWORD_OTHER_RESERVED
+    keyword , PUNCTUATION_SEPARATOR
 
-context Summary( ): green
-    keyword whole af yellow
-    keyword whole az yellow
-    keyword whole bg yellow
-    keyword whole br yellow
-    keyword whole ca yellow
-    keyword whole ca_ES yellow
-    keyword whole cs yellow
-    keyword whole cs_CZ yellow
-    keyword whole da yellow
-    keyword whole da_DK yellow
-    keyword whole de yellow
-    keyword whole de_AT yellow
-    keyword whole de_DE yellow
-    keyword whole el yellow
-    keyword whole el_GR yellow
-    keyword whole en yellow
-    keyword whole en_GB yellow
-    keyword whole eo yellow
-    keyword whole es yellow
-    keyword whole es_ES yellow
-    keyword whole et yellow
-    keyword whole et_EE yellow
-    keyword whole eu yellow
-    keyword whole fi yellow
-    keyword whole fi_FI yellow
-    keyword whole fr yellow
-    keyword whole fr_FR yellow
-    keyword whole gl yellow
-    keyword whole gl_ES yellow
-    keyword whole gr yellow
-    keyword whole he yellow
-    keyword whole he_IL yellow
-    keyword whole hi yellow
-    keyword whole hr yellow
-    keyword whole hr_HR yellow
-    keyword whole hu yellow
-    keyword whole hu_HU yellow
-    keyword whole id yellow
-    keyword whole is yellow
-    keyword whole is_IS yellow
-    keyword whole it yellow
-    keyword whole it_IT yellow
-    keyword whole ja yellow
-    keyword whole ja_JP yellow
-    keyword whole ja_JP.SJIS yellow
-    keyword whole ko yellow
-    keyword whole ko_KR yellow
-    keyword whole lt yellow
-    keyword whole lt_LT yellow
-    keyword whole lv yellow
-    keyword whole ms yellow
-    keyword whole nb yellow
-    keyword whole nl yellow
-    keyword whole nl_NL yellow
-    keyword whole nn yellow
-    keyword whole nn_NO yellow
-    keyword whole no yellow
-    keyword whole no_NO yellow
-    keyword whole pl yellow
-    keyword whole pl_PL yellow
-    keyword whole pt yellow
-    keyword whole pt_BR yellow
-    keyword whole pt_PT yellow
-    keyword whole ro yellow
-    keyword whole ro_RO yellow
-    keyword whole ru yellow
-    keyword whole ru_RU yellow
-    keyword whole sk yellow
-    keyword whole sk_SK yellow
-    keyword whole sl yellow
-    keyword whole sl_SI yellow
-    keyword whole sr yellow
-    keyword whole sv yellow
-    keyword whole sv_SE yellow
-    keyword whole ta yellow
-    keyword whole th_TH yellow
-    keyword whole tr yellow
-    keyword whole tr_TR yellow
-    keyword whole uk yellow
-    keyword whole vi yellow
-    keyword whole wa yellow
-    keyword whole zh yellow
-    keyword whole zh_CN yellow
-    keyword whole zh_CN.GB2312 yellow
-    keyword whole zh_TW yellow
-    keyword whole zh_TW.Big5 yellow
+context Summary( ): KEYWORD_OTHER_RESERVED
+    keyword whole af CONSTANT_OTHER
+    keyword whole az CONSTANT_OTHER
+    keyword whole bg CONSTANT_OTHER
+    keyword whole br CONSTANT_OTHER
+    keyword whole ca CONSTANT_OTHER
+    keyword whole ca_ES CONSTANT_OTHER
+    keyword whole cs CONSTANT_OTHER
+    keyword whole cs_CZ CONSTANT_OTHER
+    keyword whole da CONSTANT_OTHER
+    keyword whole da_DK CONSTANT_OTHER
+    keyword whole de CONSTANT_OTHER
+    keyword whole de_AT CONSTANT_OTHER
+    keyword whole de_DE CONSTANT_OTHER
+    keyword whole el CONSTANT_OTHER
+    keyword whole el_GR CONSTANT_OTHER
+    keyword whole en CONSTANT_OTHER
+    keyword whole en_GB CONSTANT_OTHER
+    keyword whole eo CONSTANT_OTHER
+    keyword whole es CONSTANT_OTHER
+    keyword whole es_ES CONSTANT_OTHER
+    keyword whole et CONSTANT_OTHER
+    keyword whole et_EE CONSTANT_OTHER
+    keyword whole eu CONSTANT_OTHER
+    keyword whole fi CONSTANT_OTHER
+    keyword whole fi_FI CONSTANT_OTHER
+    keyword whole fr CONSTANT_OTHER
+    keyword whole fr_FR CONSTANT_OTHER
+    keyword whole gl CONSTANT_OTHER
+    keyword whole gl_ES CONSTANT_OTHER
+    keyword whole gr CONSTANT_OTHER
+    keyword whole he CONSTANT_OTHER
+    keyword whole he_IL CONSTANT_OTHER
+    keyword whole hi CONSTANT_OTHER
+    keyword whole hr CONSTANT_OTHER
+    keyword whole hr_HR CONSTANT_OTHER
+    keyword whole hu CONSTANT_OTHER
+    keyword whole hu_HU CONSTANT_OTHER
+    keyword whole id CONSTANT_OTHER
+    keyword whole is CONSTANT_OTHER
+    keyword whole is_IS CONSTANT_OTHER
+    keyword whole it CONSTANT_OTHER
+    keyword whole it_IT CONSTANT_OTHER
+    keyword whole ja CONSTANT_OTHER
+    keyword whole ja_JP CONSTANT_OTHER
+    keyword whole ja_JP.SJIS CONSTANT_OTHER
+    keyword whole ko CONSTANT_OTHER
+    keyword whole ko_KR CONSTANT_OTHER
+    keyword whole lt CONSTANT_OTHER
+    keyword whole lt_LT CONSTANT_OTHER
+    keyword whole lv CONSTANT_OTHER
+    keyword whole ms CONSTANT_OTHER
+    keyword whole nb CONSTANT_OTHER
+    keyword whole nl CONSTANT_OTHER
+    keyword whole nl_NL CONSTANT_OTHER
+    keyword whole nn CONSTANT_OTHER
+    keyword whole nn_NO CONSTANT_OTHER
+    keyword whole no CONSTANT_OTHER
+    keyword whole no_NO CONSTANT_OTHER
+    keyword whole pl CONSTANT_OTHER
+    keyword whole pl_PL CONSTANT_OTHER
+    keyword whole pt CONSTANT_OTHER
+    keyword whole pt_BR CONSTANT_OTHER
+    keyword whole pt_PT CONSTANT_OTHER
+    keyword whole ro CONSTANT_OTHER
+    keyword whole ro_RO CONSTANT_OTHER
+    keyword whole ru CONSTANT_OTHER
+    keyword whole ru_RU CONSTANT_OTHER
+    keyword whole sk CONSTANT_OTHER
+    keyword whole sk_SK CONSTANT_OTHER
+    keyword whole sl CONSTANT_OTHER
+    keyword whole sl_SI CONSTANT_OTHER
+    keyword whole sr CONSTANT_OTHER
+    keyword whole sv CONSTANT_OTHER
+    keyword whole sv_SE CONSTANT_OTHER
+    keyword whole ta CONSTANT_OTHER
+    keyword whole th_TH CONSTANT_OTHER
+    keyword whole tr CONSTANT_OTHER
+    keyword whole tr_TR CONSTANT_OTHER
+    keyword whole uk CONSTANT_OTHER
+    keyword whole vi CONSTANT_OTHER
+    keyword whole wa CONSTANT_OTHER
+    keyword whole zh CONSTANT_OTHER
+    keyword whole zh_CN CONSTANT_OTHER
+    keyword whole zh_CN.GB2312 CONSTANT_OTHER
+    keyword whole zh_TW CONSTANT_OTHER
+    keyword whole zh_TW.Big5 CONSTANT_OTHER
 
-context linestart # \n brown
-context %( ) brightcyan
+context linestart # \n COMMENT_LINE
+context %( ) STRING_QUOTED_OTHER
 
 # Changelog
-context exclusive whole linestart %changelog EOF lightgray
-    keyword Revision*\n brightgreen
-    keyword \*\s\{MWTFS\}*\n brightgreen
-    keyword \s\s[*] brightgreen
-    keyword $Log*$\n brightred
+context exclusive whole linestart %changelog EOF
+    keyword Revision*\n MARKUP_HEADING
+    keyword \*\s\{MWTFS\}*\n MARKUP_HEADING
+    keyword \s\s[*] MARKUP_LIST
+    keyword $Log*$\n KEYWORD_OTHER
 
 #sections
-context exclusive linestart %build \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %build \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %clean \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %clean \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %description \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %description \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %files \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %files \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %install \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %install \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %package \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %package \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %pre \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %pre \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %prep \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %prep \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %preun \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %preun \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %post \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %post \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive linestart %postun \n yellow
-    keyword whole -l brightred
-    keyword whole -n brightred
-    keyword whole -p brightred
-    keyword %{ brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive linestart %postun \n ENTITY_NAME_SECTION
+    keyword whole -l VARIABLE_PARAMETER
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword %{ PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
 #triggers
-context exclusive %triggerin \n lightgray
-    keyword whole -n brightmagenta
-    keyword whole -p brightmagenta
-    keyword whole -- brightmagenta
+context exclusive %triggerin \n ENTITY_NAME_SECTION
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword whole -- VARIABLE_PARAMETER
 
-context exclusive %triggerun \n lightgray
-    keyword whole -n brightmagenta
-    keyword whole -p brightmagenta
-    keyword whole -- brightmagenta
+context exclusive %triggerun \n ENTITY_NAME_SECTION
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword whole -- VARIABLE_PARAMETER
 
-context exclusive %triggerpostun \n lightgray
-    keyword whole -n brightmagenta
-    keyword whole -p brightmagenta
-    keyword whole -- brightmagenta
+context exclusive %triggerpostun \n ENTITY_NAME_SECTION
+    keyword whole -n VARIABLE_PARAMETER
+    keyword whole -p VARIABLE_PARAMETER
+    keyword whole -- VARIABLE_PARAMETER

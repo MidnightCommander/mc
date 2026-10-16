@@ -23,69 +23,69 @@
 
 context default
 # Functions
-    keyword whole add_global_arguments white
-    keyword whole add_global_link_arguments white
-    keyword whole add_languages white
-    keyword whole add_project_arguments white
-    keyword whole add_project_link_arguments white
-    keyword whole add_test_setup white
-    keyword whole benchmark white
-    keyword whole both_libraries white
-    keyword whole build_target white
-    keyword whole configuration_data white
-    keyword whole configure_file white
-    keyword whole custom_target white
-    keyword whole declare_dependency white
-    keyword whole dependency white
-    keyword whole disabler white
-    keyword whole error white
-    keyword whole environment white
-    keyword whole executable white
-    keyword whole find_library white
-    keyword whole find_program white
-    keyword whole files white
-    keyword whole generator white
-    keyword whole get_option white
-    keyword whole get_variable white
-    keyword whole import white
-    keyword whole include_directories white
-    keyword whole install_data white
-    keyword whole install_headers white
-    keyword whole install_man white
-    keyword whole install_subdir white
-    keyword whole is_variable white
-    keyword whole jar white
-    keyword whole join_paths white
-    keyword whole library white
-    keyword whole message white
-    keyword whole warning white
-    keyword whole project white
-    keyword whole run_command white
-    keyword whole run_target white
-    keyword whole set_variable white
-    keyword whole shared_library white
-    keyword whole shared_module white
-    keyword whole static_library white
-    keyword whole subdir white
-    keyword whole subdir_done white
-    keyword whole subproject white
-    keyword whole test white
-    keyword whole vcs_tag white
+    keyword whole add_global_arguments SUPPORT_FUNCTION
+    keyword whole add_global_link_arguments SUPPORT_FUNCTION
+    keyword whole add_languages SUPPORT_FUNCTION
+    keyword whole add_project_arguments SUPPORT_FUNCTION
+    keyword whole add_project_link_arguments SUPPORT_FUNCTION
+    keyword whole add_test_setup SUPPORT_FUNCTION
+    keyword whole benchmark SUPPORT_FUNCTION
+    keyword whole both_libraries SUPPORT_FUNCTION
+    keyword whole build_target SUPPORT_FUNCTION
+    keyword whole configuration_data SUPPORT_FUNCTION
+    keyword whole configure_file SUPPORT_FUNCTION
+    keyword whole custom_target SUPPORT_FUNCTION
+    keyword whole declare_dependency SUPPORT_FUNCTION
+    keyword whole dependency SUPPORT_FUNCTION
+    keyword whole disabler SUPPORT_FUNCTION
+    keyword whole error SUPPORT_FUNCTION
+    keyword whole environment SUPPORT_FUNCTION
+    keyword whole executable SUPPORT_FUNCTION
+    keyword whole find_library SUPPORT_FUNCTION
+    keyword whole find_program SUPPORT_FUNCTION
+    keyword whole files SUPPORT_FUNCTION
+    keyword whole generator SUPPORT_FUNCTION
+    keyword whole get_option SUPPORT_FUNCTION
+    keyword whole get_variable SUPPORT_FUNCTION
+    keyword whole import SUPPORT_FUNCTION
+    keyword whole include_directories SUPPORT_FUNCTION
+    keyword whole install_data SUPPORT_FUNCTION
+    keyword whole install_headers SUPPORT_FUNCTION
+    keyword whole install_man SUPPORT_FUNCTION
+    keyword whole install_subdir SUPPORT_FUNCTION
+    keyword whole is_variable SUPPORT_FUNCTION
+    keyword whole jar SUPPORT_FUNCTION
+    keyword whole join_paths SUPPORT_FUNCTION
+    keyword whole library SUPPORT_FUNCTION
+    keyword whole message SUPPORT_FUNCTION
+    keyword whole warning SUPPORT_FUNCTION
+    keyword whole project SUPPORT_FUNCTION
+    keyword whole run_command SUPPORT_FUNCTION
+    keyword whole run_target SUPPORT_FUNCTION
+    keyword whole set_variable SUPPORT_FUNCTION
+    keyword whole shared_library SUPPORT_FUNCTION
+    keyword whole shared_module SUPPORT_FUNCTION
+    keyword whole static_library SUPPORT_FUNCTION
+    keyword whole subdir SUPPORT_FUNCTION
+    keyword whole subdir_done SUPPORT_FUNCTION
+    keyword whole subproject SUPPORT_FUNCTION
+    keyword whole test SUPPORT_FUNCTION
+    keyword whole vcs_tag SUPPORT_FUNCTION
 # Build-in objects
-    keyword whole meson yellow
-    keyword whole build_machine yellow
-    keyword whole host_machine yellow
-    keyword whole target_machine yellow
-    keyword whole compiler yellow
-    keyword whole string yellow
-    keyword whole Number yellow
-    keyword whole boolean yellow
-    keyword whole array yellow
-    keyword whole dictionary yellow
+    keyword whole meson SUPPORT_CLASS
+    keyword whole build_machine SUPPORT_CLASS
+    keyword whole host_machine SUPPORT_CLASS
+    keyword whole target_machine SUPPORT_CLASS
+    keyword whole compiler SUPPORT_CLASS
+    keyword whole string SUPPORT_TYPE
+    keyword whole Number SUPPORT_TYPE
+    keyword whole boolean SUPPORT_TYPE
+    keyword whole array SUPPORT_TYPE
+    keyword whole dictionary SUPPORT_TYPE
 
-context ' ' green
+context ' ' STRING_QUOTED_SINGLE
 
-context " " brightred
+context " " STRING_QUOTED_DOUBLE
 
-context linestart # \n brown
+context linestart # \n COMMENT_LINE
     spellcheck

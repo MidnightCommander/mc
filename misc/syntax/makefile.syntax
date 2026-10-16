@@ -1,71 +1,71 @@
 context default
-    keyword $$ brightcyan
-    keyword $(*) yellow
-    keyword ${*} brightgreen
+    keyword $$ CONSTANT_CHARACTER_ESCAPE
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
 # GNU Makefiles
-    keyword whole linestart define magenta
-    keyword whole linestart endef magenta
-    keyword whole linestart include magenta
-    keyword whole linestart ifdef magenta
-    keyword whole linestart ifndef magenta
-    keyword whole linestart endif magenta
-    keyword whole linestart if magenta
-    keyword whole linestart ifeq magenta
-    keyword whole linestart ifneq magenta
-    keyword whole linestart else magenta
+    keyword whole linestart define KEYWORD_OTHER
+    keyword whole linestart endef KEYWORD_OTHER
+    keyword whole linestart include KEYWORD_CONTROL_IMPORT
+    keyword whole linestart ifdef KEYWORD_CONTROL
+    keyword whole linestart ifndef KEYWORD_CONTROL
+    keyword whole linestart endif KEYWORD_CONTROL
+    keyword whole linestart if KEYWORD_CONTROL
+    keyword whole linestart ifeq KEYWORD_CONTROL
+    keyword whole linestart ifneq KEYWORD_CONTROL
+    keyword whole linestart else KEYWORD_CONTROL
 # BSD Makefiles
-    keyword whole linestart .\[\s\t\]elif magenta
-    keyword whole linestart .\[\s\t\]else magenta
-    keyword whole linestart .\[\s\t\]endfor magenta
-    keyword whole linestart .\[\s\t\]endif magenta
-    keyword whole linestart .\[\s\t\]for magenta
-    keyword whole linestart .\[\s\t\]if magenta
-    keyword whole linestart .\[\s\t\]include magenta
-    keyword whole linestart .\[\s\t\]undef magenta
+    keyword whole linestart .\[\s\t\]elif KEYWORD_CONTROL
+    keyword whole linestart .\[\s\t\]else KEYWORD_CONTROL
+    keyword whole linestart .\[\s\t\]endfor KEYWORD_CONTROL
+    keyword whole linestart .\[\s\t\]endif KEYWORD_CONTROL
+    keyword whole linestart .\[\s\t\]for KEYWORD_CONTROL
+    keyword whole linestart .\[\s\t\]if KEYWORD_CONTROL
+    keyword whole linestart .\[\s\t\]include KEYWORD_CONTROL_IMPORT
+    keyword whole linestart .\[\s\t\]undef KEYWORD_OTHER
 
-    keyword linestart \t lightgray red
-    keyword whole .PHONY white
-    keyword whole .SUFFIXES white
-    keyword whole .DEFAULT white
-    keyword whole .PRECIOUS white
-    keyword whole .INTERMEDIATE white
-    keyword whole .SECONDARY white
-    keyword whole .DELETE_ON_ERROR white
-    keyword whole .IGNORE white
-    keyword whole .LOW_RESOLUTION_TIME white
-    keyword whole .SILENT white
-    keyword whole .EXPORT_ALL_VARIABLES white
-    keyword whole .NOTPARALLEL white
-    keyword whole .NOEXPORT white
-    keyword = white
-    keyword : yellow
-    keyword \\\n yellow
+    keyword linestart \t default red
+    keyword whole .PHONY KEYWORD_OTHER
+    keyword whole .SUFFIXES KEYWORD_OTHER
+    keyword whole .DEFAULT KEYWORD_OTHER
+    keyword whole .PRECIOUS KEYWORD_OTHER
+    keyword whole .INTERMEDIATE KEYWORD_OTHER
+    keyword whole .SECONDARY KEYWORD_OTHER
+    keyword whole .DELETE_ON_ERROR KEYWORD_OTHER
+    keyword whole .IGNORE KEYWORD_OTHER
+    keyword whole .LOW_RESOLUTION_TIME KEYWORD_OTHER
+    keyword whole .SILENT KEYWORD_OTHER
+    keyword whole .EXPORT_ALL_VARIABLES KEYWORD_OTHER
+    keyword whole .NOTPARALLEL KEYWORD_OTHER
+    keyword whole .NOEXPORT KEYWORD_OTHER
+    keyword = KEYWORD_OPERATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
 # this handles strange cases like @something@@somethingelse@ properly
-    keyword whole @+@ brightmagenta black
-    keyword @+@ brightmagenta black
+    keyword whole @+@ VARIABLE_OTHER black
+    keyword @+@ VARIABLE_OTHER black
 
 # comment
-context linestart # \n brown
+context linestart # \n COMMENT_LINE
     spellcheck
-    keyword whole @+@ brightmagenta black
-    keyword @+@ brightmagenta black
+    keyword whole @+@ VARIABLE_OTHER black
+    keyword @+@ VARIABLE_OTHER black
 
 # right part of an assignment
-context exclusive = \n brightcyan
-    keyword \\\n yellow
-    keyword $$ brightcyan
-    keyword $(*) yellow
-    keyword ${*} brightgreen
-    keyword linestart \t lightgray red
-    keyword whole @+@ brightmagenta black
-    keyword @+@ brightmagenta black
+context exclusive = \n STRING_UNQUOTED
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword $$ CONSTANT_CHARACTER_ESCAPE
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword linestart \t default red
+    keyword whole @+@ VARIABLE_OTHER black
+    keyword @+@ VARIABLE_OTHER black
 
 # shell code
 context exclusive linestart \t \n
-    keyword \\\n yellow
-    keyword $$ brightcyan
-    keyword $(*) yellow
-    keyword ${*} brightgreen
-    keyword linestart \t lightgray red
-    keyword whole @+@ brightmagenta black
-    keyword @+@ brightmagenta black
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword $$ CONSTANT_CHARACTER_ESCAPE
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword linestart \t default red
+    keyword whole @+@ VARIABLE_OTHER black
+    keyword @+@ VARIABLE_OTHER black

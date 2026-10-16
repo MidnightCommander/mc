@@ -13,271 +13,271 @@ context default
 #   reserved keywords:
 
 #   unused symbols
-    keyword whole _\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightmagenta
+    keyword whole _\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] KEYWORD_OTHER_RESERVED
 
-    keyword whole as yellow
-    keyword whole case yellow
-    keyword whole class yellow
-    keyword whole data yellow
-    keyword whole default yellow
-    keyword whole deriving yellow
-    keyword whole do yellow
-    keyword whole else yellow
-    keyword whole hiding yellow
-    keyword whole if yellow
-    keyword whole import yellow
-    keyword whole in yellow
-    keyword whole infix yellow
-    keyword whole infixl yellow
-    keyword whole infixr yellow
-    keyword whole instance yellow
-    keyword whole let yellow
-    keyword whole module yellow
-    keyword whole newtype yellow
-    keyword whole of yellow
-    keyword whole qualified yellow
-    keyword whole then yellow
-    keyword whole type yellow
-    keyword whole where yellow
+    keyword whole as KEYWORD_OTHER
+    keyword whole case KEYWORD_CONTROL
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole data STORAGE_TYPE
+    keyword whole default KEYWORD_CONTROL
+    keyword whole deriving KEYWORD_OTHER
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole hiding KEYWORD_CONTROL_IMPORT
+    keyword whole if KEYWORD_CONTROL
+    keyword whole import KEYWORD_CONTROL_IMPORT
+    keyword whole in KEYWORD_CONTROL
+    keyword whole infix KEYWORD_OTHER
+    keyword whole infixl KEYWORD_OTHER
+    keyword whole infixr KEYWORD_OTHER
+    keyword whole instance KEYWORD_OTHER
+    keyword whole let KEYWORD_OTHER
+    keyword whole module KEYWORD_CONTROL_IMPORT
+    keyword whole newtype STORAGE_TYPE
+    keyword whole of KEYWORD_CONTROL
+    keyword whole qualified KEYWORD_CONTROL_IMPORT
+    keyword whole then KEYWORD_CONTROL
+    keyword whole type STORAGE_TYPE
+    keyword whole where KEYWORD_OTHER
 
 #   extension keywords
-    keyword whole forall yellow
-    keyword whole mdo yellow
-    keyword whole family yellow
-    keyword whole group yellow
-    keyword whole by yellow
-    keyword whole using yellow
+    keyword whole forall KEYWORD_OTHER
+    keyword whole mdo KEYWORD_OTHER
+    keyword whole family KEYWORD_OTHER
+    keyword whole group KEYWORD_OTHER
+    keyword whole by KEYWORD_OTHER
+    keyword whole using KEYWORD_CONTROL_IMPORT
 
 #   ffi
-    keyword whole foreign yellow
-    keyword whole export yellow
-    keyword whole label yellow
-    keyword whole dynamic yellow
-    keyword whole safe yellow
-    keyword whole threadsafe yellow
-    keyword whole unsafe yellow
-    keyword whole stdcall yellow
-    keyword whole ccall yellow
-    keyword whole dotnet yellow
+    keyword whole foreign KEYWORD_OTHER
+    keyword whole export KEYWORD_CONTROL_IMPORT
+    keyword whole label KEYWORD_OTHER
+    keyword whole dynamic KEYWORD_OTHER
+    keyword whole safe KEYWORD_OTHER
+    keyword whole threadsafe KEYWORD_OTHER
+    keyword whole unsafe KEYWORD_OTHER
+    keyword whole stdcall KEYWORD_OTHER
+    keyword whole ccall KEYWORD_OTHER
+    keyword whole dotnet KEYWORD_OTHER
 
-    keyword whole rec yellow
-    keyword whole proc yellow
+    keyword whole rec KEYWORD_OTHER
+    keyword whole proc KEYWORD_OTHER
 
 #   other
-    keyword . white
+    keyword . KEYWORD_OPERATOR
 #    keyword whole .. white
 
 #   unboxed (started from upcase)
-    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]# white
+    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]# STORAGE_TYPE
 #   types/modules
-    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] STORAGE_TYPE
 
 # C keywords (TODO: remove unused in haskell source)
-    keyword whole auto yellow
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole char yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole do yellow
-    keyword whole double yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extern yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole int yellow
-    keyword whole long yellow
-    keyword whole register yellow
-    keyword whole return yellow
-    keyword whole short yellow
-    keyword whole signed yellow
-    keyword whole sizeof yellow
-    keyword whole static yellow
-    keyword whole struct yellow
-    keyword whole switch yellow
-    keyword whole typedef yellow
-    keyword whole union yellow
-    keyword whole unsigned yellow
-    keyword whole void yellow
-    keyword whole volatile yellow
-    keyword whole while yellow
-    keyword whole asm yellow
-    keyword whole inline yellow
-    keyword whole wchar_t yellow
-    keyword whole ... yellow
-    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
-    keyword whole \[\s\t\]default yellow
-    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: cyan
+    keyword whole auto STORAGE_MODIFIER
+    keyword whole break KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole char STORAGE_TYPE_PRIMITIVE
+    keyword whole const STORAGE_MODIFIER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole double STORAGE_TYPE_PRIMITIVE
+    keyword whole else KEYWORD_CONTROL
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole extern STORAGE_MODIFIER
+    keyword whole float STORAGE_TYPE_PRIMITIVE
+    keyword whole for KEYWORD_CONTROL
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole int STORAGE_TYPE_PRIMITIVE
+    keyword whole long STORAGE_TYPE_PRIMITIVE
+    keyword whole register STORAGE_MODIFIER
+    keyword whole return KEYWORD_CONTROL
+    keyword whole short STORAGE_TYPE_PRIMITIVE
+    keyword whole signed STORAGE_TYPE_PRIMITIVE
+    keyword whole sizeof KEYWORD_OPERATOR_WORD
+    keyword whole static STORAGE_MODIFIER
+    keyword whole struct STORAGE_TYPE_CLASS
+    keyword whole switch KEYWORD_CONTROL
+    keyword whole typedef STORAGE_TYPE
+    keyword whole union STORAGE_TYPE_CLASS
+    keyword whole unsigned STORAGE_TYPE_PRIMITIVE
+    keyword whole void STORAGE_TYPE_PRIMITIVE
+    keyword whole volatile STORAGE_MODIFIER
+    keyword whole while KEYWORD_CONTROL
+    keyword whole asm KEYWORD_OTHER_RESERVED
+    keyword whole inline STORAGE_MODIFIER
+    keyword whole wchar_t STORAGE_TYPE_PRIMITIVE
+    keyword whole ... PUNCTUATION_SEPARATOR
+    keyword whole linestart \{\s\t\}\[\s\t\]#*\n META_PREPROCESSOR
+    keyword whole \[\s\t\]default KEYWORD_CONTROL
+    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: ENTITY_NAME_LABEL
 
 #digits
-    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
 #comments
-    keyword {- brown
-    keyword -} brown
-    keyword -- brown
+    keyword {- COMMENT_BLOCK
+    keyword -} COMMENT_BLOCK
+    keyword -- COMMENT_LINE
 
-    keyword \*/ brown
-    keyword /\* brown
-    keyword // brown
+    keyword \*/ COMMENT_BLOCK
+    keyword /\* COMMENT_BLOCK
+    keyword // COMMENT_LINE
 
-    keyword '\\\{"abtnvfr\}' brightgreen
+    keyword '\\\{"abtnvfr\}' CONSTANT_CHARACTER_ESCAPE
 
 #haskell standalone char escapes
-    keyword '\\NUL' brightgreen
-    keyword '\\SOH' brightgreen
-    keyword '\\STX' brightgreen
-    keyword '\\ETX' brightgreen
-    keyword '\\EOT' brightgreen
-    keyword '\\ENQ' brightgreen
-    keyword '\\ACK' brightgreen
-    keyword '\\BEL' brightgreen
-    keyword '\\BS' brightgreen
-    keyword '\\HT' brightgreen
-    keyword '\\LF' brightgreen
-    keyword '\\VT' brightgreen
-    keyword '\\FF' brightgreen
-    keyword '\\CR' brightgreen
-    keyword '\\SO' brightgreen
-    keyword '\\SI' brightgreen
-    keyword '\\DLE' brightgreen
-    keyword '\\DC1' brightgreen
-    keyword '\\DC2' brightgreen
-    keyword '\\DC3' brightgreen
-    keyword '\\DC4' brightgreen
-    keyword '\\NAK' brightgreen
-    keyword '\\SYN' brightgreen
-    keyword '\\ETB' brightgreen
-    keyword '\\CAN' brightgreen
-    keyword '\\EM' brightgreen
-    keyword '\\SUB' brightgreen
-    keyword '\\ESC' brightgreen
-    keyword '\\FS' brightgreen
-    keyword '\\GS' brightgreen
-    keyword '\\RS' brightgreen
-    keyword '\\US' brightgreen
-    keyword '\\SP' brightgreen
-    keyword '\\DEL' brightgreen
+    keyword '\\NUL' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\SOH' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\STX' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\ETX' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\EOT' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\ENQ' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\ACK' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\BEL' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\BS' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\HT' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\LF' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\VT' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\FF' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\CR' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\SO' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\SI' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\DLE' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\DC1' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\DC2' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\DC3' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\DC4' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\NAK' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\SYN' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\ETB' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\CAN' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\EM' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\SUB' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\ESC' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\FS' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\GS' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\RS' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\US' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\SP' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\DEL' CONSTANT_CHARACTER_ESCAPE
 
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
-    keyword '\\'' brightgreen
-    keyword '\\\\' brightgreen
-    keyword '\\0' brightgreen
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\'' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\\\' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\0' CONSTANT_CHARACTER_ESCAPE
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' CONSTANT_CHARACTER
 
 # some punctuation characters
-    keyword whole $ yellow
-    keyword whole ! white
-    keyword whole && white
-    keyword whole \* yellow
-    keyword whole \+ yellow
-    keyword whole / yellow
-    keyword whole < yellow
-    keyword whole > yellow
-    keyword whole ^ white
-    keyword whole || white
-    keyword whole | white
+    keyword whole $ KEYWORD_OPERATOR
+    keyword whole ! KEYWORD_OPERATOR
+    keyword whole && KEYWORD_OPERATOR
+    keyword whole \* KEYWORD_OPERATOR
+    keyword whole \+ KEYWORD_OPERATOR
+    keyword whole / KEYWORD_OPERATOR
+    keyword whole < KEYWORD_OPERATOR
+    keyword whole > KEYWORD_OPERATOR
+    keyword whole ^ KEYWORD_OPERATOR
+    keyword whole || KEYWORD_OPERATOR
+    keyword whole | KEYWORD_OPERATOR
 
-    keyword ~ white
-    keyword , brightcyan
-    keyword - yellow
-    keyword : brightcyan
-    keyword ; yellow
-    keyword = yellow
-    keyword { white
-    keyword } white
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
+    keyword ~ KEYWORD_OPERATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword - KEYWORD_OPERATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword = KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
 
 # comments
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive {-# #-} green
+context exclusive {-# #-} META_PREPROCESSOR
     spellcheck
 
-context exclusive {- -} brown
+context exclusive {- -} COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context exclusive \-\- \n brown
+context exclusive \-\- \n COMMENT_LINE
     spellcheck
 
 # C macros
-context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
-    keyword "+" red
-    keyword <+> red
+context linestart # \n META_PREPROCESSOR
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword /\**\*/ COMMENT_BLOCK
+    keyword //*\n COMMENT_LINE
+    keyword "+" STRING_QUOTED_OTHER
+    keyword <+> STRING_QUOTED_OTHER
 
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
 
 #haskell escapes in ""s
-    keyword \\NUL brightgreen
-    keyword \\SOH brightgreen
-    keyword \\STX brightgreen
-    keyword \\ETX brightgreen
-    keyword \\EOT brightgreen
-    keyword \\ENQ brightgreen
-    keyword \\ACK brightgreen
-    keyword \\BEL brightgreen
-    keyword \\BS brightgreen
-    keyword \\HT brightgreen
-    keyword \\LF brightgreen
-    keyword \\VT brightgreen
-    keyword \\FF brightgreen
-    keyword \\CR brightgreen
-    keyword \\SO brightgreen
-    keyword \\SI brightgreen
-    keyword \\DLE brightgreen
-    keyword \\DC1 brightgreen
-    keyword \\DC2 brightgreen
-    keyword \\DC3 brightgreen
-    keyword \\DC4 brightgreen
-    keyword \\NAK brightgreen
-    keyword \\SYN brightgreen
-    keyword \\ETB brightgreen
-    keyword \\CAN brightgreen
-    keyword \\EM brightgreen
-    keyword \\SUB brightgreen
-    keyword \\ESC brightgreen
-    keyword \\FS brightgreen
-    keyword \\GS brightgreen
-    keyword \\RS brightgreen
-    keyword \\US brightgreen
-    keyword \\SP brightgreen
-    keyword \\DEL brightgreen
+    keyword \\NUL CONSTANT_CHARACTER_ESCAPE
+    keyword \\SOH CONSTANT_CHARACTER_ESCAPE
+    keyword \\STX CONSTANT_CHARACTER_ESCAPE
+    keyword \\ETX CONSTANT_CHARACTER_ESCAPE
+    keyword \\EOT CONSTANT_CHARACTER_ESCAPE
+    keyword \\ENQ CONSTANT_CHARACTER_ESCAPE
+    keyword \\ACK CONSTANT_CHARACTER_ESCAPE
+    keyword \\BEL CONSTANT_CHARACTER_ESCAPE
+    keyword \\BS CONSTANT_CHARACTER_ESCAPE
+    keyword \\HT CONSTANT_CHARACTER_ESCAPE
+    keyword \\LF CONSTANT_CHARACTER_ESCAPE
+    keyword \\VT CONSTANT_CHARACTER_ESCAPE
+    keyword \\FF CONSTANT_CHARACTER_ESCAPE
+    keyword \\CR CONSTANT_CHARACTER_ESCAPE
+    keyword \\SO CONSTANT_CHARACTER_ESCAPE
+    keyword \\SI CONSTANT_CHARACTER_ESCAPE
+    keyword \\DLE CONSTANT_CHARACTER_ESCAPE
+    keyword \\DC1 CONSTANT_CHARACTER_ESCAPE
+    keyword \\DC2 CONSTANT_CHARACTER_ESCAPE
+    keyword \\DC3 CONSTANT_CHARACTER_ESCAPE
+    keyword \\DC4 CONSTANT_CHARACTER_ESCAPE
+    keyword \\NAK CONSTANT_CHARACTER_ESCAPE
+    keyword \\SYN CONSTANT_CHARACTER_ESCAPE
+    keyword \\ETB CONSTANT_CHARACTER_ESCAPE
+    keyword \\CAN CONSTANT_CHARACTER_ESCAPE
+    keyword \\EM CONSTANT_CHARACTER_ESCAPE
+    keyword \\SUB CONSTANT_CHARACTER_ESCAPE
+    keyword \\ESC CONSTANT_CHARACTER_ESCAPE
+    keyword \\FS CONSTANT_CHARACTER_ESCAPE
+    keyword \\GS CONSTANT_CHARACTER_ESCAPE
+    keyword \\RS CONSTANT_CHARACTER_ESCAPE
+    keyword \\US CONSTANT_CHARACTER_ESCAPE
+    keyword \\SP CONSTANT_CHARACTER_ESCAPE
+    keyword \\DEL CONSTANT_CHARACTER_ESCAPE
 
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword %p CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
 
 # infix binop
-context exclusive ` ` white
+context exclusive ` ` STRING_QUOTED_OTHER

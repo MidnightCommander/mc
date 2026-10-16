@@ -10,117 +10,117 @@ context default
 wholechars abcdefghijklmnopqrstuvwxyz0123456789_-
 
     # module structure (SMIv1/v2)
-    keyword whole DEFINITIONS white
-    keyword whole BEGIN white
-    keyword whole END white
-    keyword whole IMPORTS white
-    keyword whole EXPORTS white
-    keyword whole FROM white
-    keyword whole MODULE white
-    keyword whole MIB white
-    keyword whole GROUP white
-    keyword whole NOTIFICATION white
+    keyword whole DEFINITIONS KEYWORD_OTHER
+    keyword whole BEGIN KEYWORD_OTHER
+    keyword whole END KEYWORD_OTHER
+    keyword whole IMPORTS KEYWORD_CONTROL_IMPORT
+    keyword whole EXPORTS KEYWORD_CONTROL_IMPORT
+    keyword whole FROM KEYWORD_CONTROL_IMPORT
+    keyword whole MODULE KEYWORD_OTHER
+    keyword whole MIB KEYWORD_OTHER
+    keyword whole GROUP KEYWORD_OTHER
+    keyword whole NOTIFICATION KEYWORD_OTHER
 
     # SMIv2 macros
-    keyword whole MODULE-IDENTITY brightcyan
-    keyword whole OBJECT-TYPE brightcyan
-    keyword whole NOTIFICATION-TYPE brightcyan
-    keyword whole TEXTUAL-CONVENTION brightcyan
-    keyword whole MODULE-COMPLIANCE brightcyan
-    keyword whole OBJECT-GROUP brightcyan
-    keyword whole NOTIFICATION-GROUP brightcyan
-    keyword whole TRAP-TYPE brightcyan
+    keyword whole MODULE-IDENTITY KEYWORD_OTHER
+    keyword whole OBJECT-TYPE KEYWORD_OTHER
+    keyword whole NOTIFICATION-TYPE KEYWORD_OTHER
+    keyword whole TEXTUAL-CONVENTION KEYWORD_OTHER
+    keyword whole MODULE-COMPLIANCE KEYWORD_OTHER
+    keyword whole OBJECT-GROUP KEYWORD_OTHER
+    keyword whole NOTIFICATION-GROUP KEYWORD_OTHER
+    keyword whole TRAP-TYPE KEYWORD_OTHER
 
     # clause keywords
-    keyword whole LAST-UPDATED yellow
-    keyword whole ORGANIZATION yellow
-    keyword whole CONTACT-INFO yellow
-    keyword whole DESCRIPTION yellow
-    keyword whole REVISION yellow
-    keyword whole STATUS yellow
-    keyword whole REFERENCE yellow
-    keyword whole SYNTAX yellow
-    keyword whole UNITS yellow
-    keyword whole MAX-ACCESS yellow
-    keyword whole MIN-ACCESS yellow
-    keyword whole ACCESS yellow
-    keyword whole DEFVAL yellow
-    keyword whole INDEX yellow
-    keyword whole AUGMENTS yellow
-    keyword whole OBJECTS yellow
-    keyword whole NOTIFICATIONS yellow
-    keyword whole DISPLAY-HINT yellow
-    keyword whole MANDATORY-GROUPS yellow
-    keyword whole CREATION-REQUIRES yellow
-    keyword whole SIZE yellow
-    keyword whole ENUMERATED yellow
+    keyword whole LAST-UPDATED KEYWORD_OTHER
+    keyword whole ORGANIZATION KEYWORD_OTHER
+    keyword whole CONTACT-INFO KEYWORD_OTHER
+    keyword whole DESCRIPTION KEYWORD_OTHER
+    keyword whole REVISION KEYWORD_OTHER
+    keyword whole STATUS KEYWORD_OTHER
+    keyword whole REFERENCE KEYWORD_OTHER
+    keyword whole SYNTAX KEYWORD_OTHER
+    keyword whole UNITS KEYWORD_OTHER
+    keyword whole MAX-ACCESS KEYWORD_OTHER
+    keyword whole MIN-ACCESS KEYWORD_OTHER
+    keyword whole ACCESS KEYWORD_OTHER
+    keyword whole DEFVAL KEYWORD_OTHER
+    keyword whole INDEX KEYWORD_OTHER
+    keyword whole AUGMENTS KEYWORD_OTHER
+    keyword whole OBJECTS KEYWORD_OTHER
+    keyword whole NOTIFICATIONS KEYWORD_OTHER
+    keyword whole DISPLAY-HINT KEYWORD_OTHER
+    keyword whole MANDATORY-GROUPS KEYWORD_OTHER
+    keyword whole CREATION-REQUIRES KEYWORD_OTHER
+    keyword whole SIZE KEYWORD_OTHER
+    keyword whole ENUMERATED KEYWORD_OTHER
 
     # ASN.1 / SMIv2 types
-    keyword whole OBJECT\sIDENTIFIER brightgreen
-    keyword whole OCTET\sSTRING brightgreen
-    keyword whole INTEGER brightgreen
-    keyword whole SEQUENCE brightgreen
-    keyword whole SET brightgreen
-    keyword whole OF brightgreen
-    keyword whole BITS brightgreen
-    keyword whole BOOLEAN brightgreen
-    keyword whole NULL brightgreen
-    keyword whole REAL brightgreen
-    keyword whole Counter brightgreen
-    keyword whole Counter32 brightgreen
-    keyword whole Counter64 brightgreen
-    keyword whole Gauge brightgreen
-    keyword whole Gauge32 brightgreen
-    keyword whole Integer32 brightgreen
-    keyword whole Unsigned32 brightgreen
-    keyword whole IpAddress brightgreen
-    keyword whole TimeTicks brightgreen
-    keyword whole Opaque brightgreen
+    keyword whole OBJECT\sIDENTIFIER STORAGE_TYPE_PRIMITIVE
+    keyword whole OCTET\sSTRING STORAGE_TYPE_PRIMITIVE
+    keyword whole INTEGER STORAGE_TYPE_PRIMITIVE
+    keyword whole SEQUENCE STORAGE_TYPE
+    keyword whole SET STORAGE_TYPE
+    keyword whole OF STORAGE_TYPE
+    keyword whole BITS STORAGE_TYPE_PRIMITIVE
+    keyword whole BOOLEAN STORAGE_TYPE_PRIMITIVE
+    keyword whole NULL STORAGE_TYPE_PRIMITIVE
+    keyword whole REAL STORAGE_TYPE_PRIMITIVE
+    keyword whole Counter SUPPORT_TYPE
+    keyword whole Counter32 SUPPORT_TYPE
+    keyword whole Counter64 SUPPORT_TYPE
+    keyword whole Gauge SUPPORT_TYPE
+    keyword whole Gauge32 SUPPORT_TYPE
+    keyword whole Integer32 SUPPORT_TYPE
+    keyword whole Unsigned32 SUPPORT_TYPE
+    keyword whole IpAddress SUPPORT_TYPE
+    keyword whole TimeTicks SUPPORT_TYPE
+    keyword whole Opaque SUPPORT_TYPE
 
     # common textual conventions (RFC 2579 and successors)
-    keyword whole DisplayString brightgreen
-    keyword whole String brightgreen
-    keyword whole TruthValue brightgreen
-    keyword whole TestAndIncr brightgreen
-    keyword whole TimeStamp brightgreen
-    keyword whole DateAndTime brightgreen
-    keyword whole RowStatus brightgreen
-    keyword whole AutonomousType brightgreen
-    keyword whole CounterBasedGauge64 brightgreen
-    keyword whole PhysAddress brightgreen
-    keyword whole MacAddress brightgreen
-    keyword whole AgentCapabilities brightgreen
+    keyword whole DisplayString SUPPORT_TYPE
+    keyword whole String SUPPORT_TYPE
+    keyword whole TruthValue SUPPORT_TYPE
+    keyword whole TestAndIncr SUPPORT_TYPE
+    keyword whole TimeStamp SUPPORT_TYPE
+    keyword whole DateAndTime SUPPORT_TYPE
+    keyword whole RowStatus SUPPORT_TYPE
+    keyword whole AutonomousType SUPPORT_TYPE
+    keyword whole CounterBasedGauge64 SUPPORT_TYPE
+    keyword whole PhysAddress SUPPORT_TYPE
+    keyword whole MacAddress SUPPORT_TYPE
+    keyword whole AgentCapabilities SUPPORT_TYPE
 
     # MAX-ACCESS values
-    keyword whole not-accessible magenta
-    keyword whole accessible-for-notify magenta
-    keyword whole read-only magenta
-    keyword whole read-write magenta
-    keyword whole read-create magenta
-    keyword whole write-only magenta
+    keyword whole not-accessible CONSTANT_OTHER
+    keyword whole accessible-for-notify CONSTANT_OTHER
+    keyword whole read-only CONSTANT_OTHER
+    keyword whole read-write CONSTANT_OTHER
+    keyword whole read-create CONSTANT_OTHER
+    keyword whole write-only CONSTANT_OTHER
 
     # STATUS values (SMIv1 per RFC 1155: mandatory/optional)
-    keyword whole current magenta
-    keyword whole deprecated magenta
-    keyword whole obsolete magenta
-    keyword whole mandatory magenta
-    keyword whole optional magenta
+    keyword whole current CONSTANT_OTHER
+    keyword whole deprecated CONSTANT_OTHER
+    keyword whole obsolete CONSTANT_OTHER
+    keyword whole mandatory CONSTANT_OTHER
+    keyword whole optional CONSTANT_OTHER
 
     # assignment operator
-    keyword ::= brightmagenta
+    keyword ::= KEYWORD_OPERATOR
 
     # brackets
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
     # numbers (OID sub-identifiers, value ranges, enum values)
-    keyword whole -\{0123456789\}\[0123456789\] cyan
-    keyword whole \{0123456789\}\[0123456789\] cyan
+    keyword whole -\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
-context -- \n brown
+context -- \n COMMENT_LINE
     spellcheck
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck

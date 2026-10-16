@@ -9,232 +9,232 @@ context default
     #=========================
     # Variable types
     #
-    keyword whole bit blue white
-    keyword whole byte blue white
-    keyword whole sbyte blue white
-    keyword whole word blue white
-    keyword whole sword blue white
-    keyword whole dword blue white
-    keyword whole sdword blue white
+    keyword whole bit STORAGE_TYPE_PRIMITIVE white
+    keyword whole byte STORAGE_TYPE_PRIMITIVE white
+    keyword whole sbyte STORAGE_TYPE_PRIMITIVE white
+    keyword whole word STORAGE_TYPE_PRIMITIVE white
+    keyword whole sword STORAGE_TYPE_PRIMITIVE white
+    keyword whole dword STORAGE_TYPE_PRIMITIVE white
+    keyword whole sdword STORAGE_TYPE_PRIMITIVE white
 
     #=========================
     # Predefined constants
     #
-    keyword whole false black green
-    keyword whole true black green
-    keyword whole off black green
-    keyword whole on black green
-    keyword whole low black green
-    keyword whole high black green
+    keyword whole false CONSTANT_LANGUAGE green
+    keyword whole true CONSTANT_LANGUAGE green
+    keyword whole off CONSTANT_OTHER green
+    keyword whole on CONSTANT_OTHER green
+    keyword whole low CONSTANT_OTHER green
+    keyword whole high CONSTANT_OTHER green
 
     #=========================
     # Keywords
     #
-    keyword whole alias yellow
-    keyword whole at yellow
-    keyword whole begin yellow
-    keyword whole const yellow
-    keyword whole count yellow
-    keyword whole defined yellow
-    keyword whole end yellow
-    keyword whole exit yellow
-    keyword whole function yellow
-    keyword whole get yellow
-    keyword whole in yellow
-    keyword whole is yellow
-    keyword whole local yellow
-    keyword whole of yellow
-    keyword whole out yellow
-    keyword whole put yellow
-    keyword whole procedure yellow
-    keyword whole record yellow
-    keyword whole repeat yellow
-    keyword whole return yellow
-    keyword whole then yellow
-    keyword whole until yellow
-    keyword whole var yellow
+    keyword whole alias KEYWORD_OTHER
+    keyword whole at KEYWORD_OTHER
+    keyword whole begin KEYWORD_CONTROL
+    keyword whole const STORAGE_MODIFIER
+    keyword whole count KEYWORD_CONTROL
+    keyword whole defined KEYWORD_OPERATOR_WORD
+    keyword whole end KEYWORD_CONTROL
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole get KEYWORD_OTHER
+    keyword whole in KEYWORD_OTHER
+    keyword whole is KEYWORD_OTHER
+    keyword whole local STORAGE_MODIFIER
+    keyword whole of KEYWORD_OTHER
+    keyword whole out KEYWORD_OTHER
+    keyword whole put KEYWORD_OTHER
+    keyword whole procedure STORAGE_TYPE_FUNCTION
+    keyword whole record STORAGE_TYPE_CLASS
+    keyword whole repeat KEYWORD_CONTROL
+    keyword whole return KEYWORD_CONTROL
+    keyword whole then KEYWORD_CONTROL
+    keyword whole until KEYWORD_CONTROL
+    keyword whole var STORAGE_TYPE
 
-    keyword whole volatile blue white
+    keyword whole volatile STORAGE_MODIFIER white
 
-    keyword whole asm brightred
-    keyword whole assembler brightred
-    keyword whole assert brightred
-    keyword whole include brightred
-    keyword whole task brightred
+    keyword whole asm KEYWORD_OTHER_RESERVED
+    keyword whole assembler KEYWORD_OTHER_RESERVED
+    keyword whole assert KEYWORD_OTHER
+    keyword whole include KEYWORD_CONTROL_IMPORT
+    keyword whole task KEYWORD_OTHER
 
     #=========================
     # Pragma keywords
     #
-    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]bloader brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]long_start brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]loader18 brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]rickpic brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]clear\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]clear\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]code brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]data brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]codegen\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]codegen\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]pcode\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]pcode\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]eedata brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]eeprom brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]error brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]frame brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]fuse_def brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]id brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]iddata brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]inline brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]fast brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]normal brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]raw brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]interrupt brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]jump_table brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]keep\{\t\s\}\[\t\s\]bank brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]keep\{\t\s\}\[\t\s\]page brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]keep brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]name brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]nostack brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]expr_reduce\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]expr_reduce\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]cexpr_reduce\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]cexpr_reduce\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]const_detect\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]const_detect\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]load_reduce\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]load_reduce\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]temp_reduce\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]temp_reduce\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_frame\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_frame\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_reduce\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_reduce\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]shared brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]size brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]speed brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]stack brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]bank brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]clock brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]chip brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]cpu brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]fuses brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]fuses_def brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]page brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]target brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]task brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]all\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]all\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]backend\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]backend\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]conversion\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]conversion\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]directives\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]directives\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]misc\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]misc\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]range\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]range\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]stack_overflow\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]stack_overflow\{\t\s\}\[\t\s\]yes brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]truncate\{\t\s\}\[\t\s\]no brightred
-    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]truncate\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]bloader META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]long_start META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]loader18 META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]rickpic META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]clear\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]clear\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]code META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]data META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]codegen\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]codegen\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]pcode\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]pcode\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]eedata META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]eeprom META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]error META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]frame META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]fuse_def META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]id META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]iddata META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]inline META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]fast META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]normal META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]raw META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]jump_table META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]keep\{\t\s\}\[\t\s\]bank META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]keep\{\t\s\}\[\t\s\]page META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]keep META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]name META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]nostack META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]expr_reduce\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]expr_reduce\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]cexpr_reduce\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]cexpr_reduce\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]const_detect\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]const_detect\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]load_reduce\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]load_reduce\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]temp_reduce\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]temp_reduce\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_frame\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_frame\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_reduce\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_reduce\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]shared META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]size META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]speed META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]stack META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]bank META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]clock META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]chip META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]cpu META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]fuses META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]fuses_def META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]page META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]target META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]task META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]all\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]all\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]backend\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]backend\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]conversion\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]conversion\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]directives\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]directives\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]misc\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]misc\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]range\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]range\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]stack_overflow\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]stack_overflow\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]truncate\{\t\s\}\[\t\s\]no META_PREPROCESSOR
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]truncate\{\t\s\}\[\t\s\]yes META_PREPROCESSOR
 
-    keyword whole block brightcyan
-    keyword whole case brightcyan
-    keyword whole else brightcyan
-    keyword whole elsif brightcyan
-    keyword whole for brightcyan
-    keyword whole forever brightcyan
-    keyword whole if brightcyan
-    keyword whole loop brightcyan
-    keyword whole otherwise brightcyan
-    keyword whole start brightcyan
-    keyword whole suspend brightcyan
-    keyword whole using brightcyan
-    keyword whole while brightcyan
+    keyword whole block KEYWORD_OTHER
+    keyword whole case KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elsif KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole forever KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole loop KEYWORD_CONTROL
+    keyword whole otherwise KEYWORD_CONTROL
+    keyword whole start KEYWORD_OTHER
+    keyword whole suspend KEYWORD_CONTROL
+    keyword whole using KEYWORD_CONTROL_IMPORT
+    keyword whole while KEYWORD_CONTROL
 
-    keyword whole _debug yellow
-    keyword whole _error yellow
-    keyword whole _warn yellow
+    keyword whole _debug SUPPORT_FUNCTION
+    keyword whole _error SUPPORT_FUNCTION
+    keyword whole _warn SUPPORT_FUNCTION
 
-    keyword whole _code_size brightred
-    keyword whole _fuses brightred
-    keyword whole _fuses_base brightred
-    keyword whole target_chip brightred
-    keyword whole target_cpu brightred
-    keyword whole target_clock brightred
+    keyword whole _code_size CONSTANT_OTHER
+    keyword whole _fuses CONSTANT_OTHER
+    keyword whole _fuses_base CONSTANT_OTHER
+    keyword whole target_chip CONSTANT_OTHER
+    keyword whole target_cpu CONSTANT_OTHER
+    keyword whole target_clock CONSTANT_OTHER
 
-    keyword whole _usec_delay yellow
+    keyword whole _usec_delay SUPPORT_FUNCTION
 
 wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
 
     #=========================
     # Numbers
     #
-    keyword whole 0b\{01_\}\[01_\] brightgreen
-    keyword whole 0q\{0123456_\}\[0123456_\] brightgreen
-    keyword whole \[-\]\{0123456789_\}\[0123456789_\] brightgreen
-    keyword whole 0x\{0123456789ABCDEFabcdef_\}\[0123456789ABCDEFabcdef_\] brightgreen
+    keyword whole 0b\{01_\}\[01_\] CONSTANT_NUMERIC
+    keyword whole 0q\{0123456_\}\[0123456_\] CONSTANT_NUMERIC
+    keyword whole \[-\]\{0123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword whole 0x\{0123456789ABCDEFabcdef_\}\[0123456789ABCDEFabcdef_\] CONSTANT_NUMERIC
 
     #=========================
     # Comments
     #
-    keyword --*\n white magenta
-    keyword ;*\n white magenta
+    keyword --*\n COMMENT_LINE magenta
+    keyword ;*\n COMMENT_LINE magenta
 
     #=========================
     # Special symbols
     #
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword \+ yellow
-    keyword << yellow
-    keyword >> yellow
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword << KEYWORD_OPERATOR
+    keyword >> KEYWORD_OPERATOR
 
-    keyword ~ brightmagenta
-    keyword !! brightmagenta
-    keyword & brightmagenta
-    keyword | brightmagenta
-    keyword ^ brightmagenta
-    keyword ' brightmagenta
+    keyword ~ KEYWORD_OPERATOR
+    keyword !! KEYWORD_OPERATOR
+    keyword & KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword ' KEYWORD_OPERATOR
 
-    keyword : brightred
-    keyword != brightred
-    keyword == brightred
-    keyword <= brightred
-    keyword >= brightred
-    keyword < brightred
-    keyword > brightred
+    keyword : PUNCTUATION_SEPARATOR
+    keyword != KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword <= KEYWORD_OPERATOR
+    keyword >= KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
 
-    keyword = yellow
-    keyword ! brightmagenta
+    keyword = KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
 
     #=========================
     # Separators
     #
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword , brightcyan
-    keyword . brightcyan
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword . KEYWORD_OPERATOR
 
     #=========================
     # Assembler lines
     #
-context exclusive asm\{\t\s\}\[\t\s\] \n blue cyan
+context exclusive asm\{\t\s\}\[\t\s\] \n META_EMBEDDED cyan
 
     #=========================
     # Strings
     #
-context " " black green
+context " " STRING_QUOTED_DOUBLE green
     spellcheck
-    keyword \\" red
-    keyword \\\\ red
-    keyword \\\{abfnrtv?\} red
-    keyword \\0\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} red
-    keyword \\\x\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} red
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abfnrtv?\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\0\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\x\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} CONSTANT_CHARACTER_ESCAPE

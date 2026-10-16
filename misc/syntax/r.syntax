@@ -5,160 +5,160 @@
 
 context default
 
-    keyword ->> brightred gray
-    keyword <<- brightred gray
-    keyword -> brightred gray
+    keyword ->> KEYWORD_OPERATOR gray
+    keyword <<- KEYWORD_OPERATOR gray
+    keyword -> KEYWORD_OPERATOR gray
 
-    keyword <- brightred
+    keyword <- KEYWORD_OPERATOR
 
-    keyword \\ gray white
+    keyword \\ KEYWORD_OTHER white
 
-    keyword : yellow
-    keyword $ yellow
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword ^ yellow
-    keyword \* yellow
-    keyword | yellow
-    keyword / yellow
-    keyword != yellow
-    keyword == yellow
-    keyword ! yellow
-    keyword ~ yellow
-    keyword % yellow
-    keyword & yellow
+    keyword : PUNCTUATION_SEPARATOR
+    keyword $ KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword != KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
+    keyword ~ KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword & KEYWORD_OPERATOR
 
-    keyword = red
+    keyword = KEYWORD_OPERATOR
 
-    keyword { white
-    keyword } white
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword ( brightcyan
-    keyword ) brightcyan
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
 
-    keyword [ brightblue
-    keyword ] brightblue
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
 
-    keyword ; black
+    keyword ; PUNCTUATION_TERMINATOR
 
-    keyword whole else brightmagenta
-    keyword whole for brightmagenta
-    keyword whole if brightmagenta
-    keyword whole while brightmagenta
+    keyword whole else KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
 
-    keyword whole abbreviate yellow
-    keyword whole abline yellow
-    keyword whole abs yellow
-    keyword whole aggregate yellow
-    keyword whole apply yellow
-    keyword whole as.character yellow
-    keyword whole as.data.frame yellow
-    keyword whole as.factor yellow
-    keyword whole as.matrix yellow
-    keyword whole as.numeric yellow
-    keyword whole as.vector yellow
-    keyword whole attr yellow
-    keyword whole boxplot yellow
-    keyword whole c yellow
-    keyword whole cat yellow
-    keyword whole cbind yellow
-    keyword whole chisq.test yellow
-    keyword whole colnames yellow
-    keyword whole colSums yellow
-    keyword whole cor yellow
-    keyword whole cor.test yellow
-    keyword whole data.frame yellow
-    keyword whole dev.off yellow
-    keyword whole dimnames yellow
-    keyword whole dist yellow
-    keyword whole dotchart yellow
-    keyword whole eqscplot yellow
-    keyword whole factor yellow
-    keyword whole function yellow
-    keyword whole get yellow
-    keyword whole grep yellow
-    keyword whole gsub yellow
-    keyword whole hclust yellow
-    keyword whole hist yellow
-    keyword whole ifelse yellow
-    keyword whole is.factor yellow
-    keyword whole is.na yellow
-    keyword whole kruskal.test yellow
-    keyword whole lda yellow
-    keyword whole legend yellow
-    keyword whole length yellow
-    keyword whole levels yellow
-    keyword whole library yellow
-    keyword whole lines yellow
-    keyword whole list yellow
-    keyword whole lm yellow
-    keyword whole loadings yellow
-    keyword whole log yellow
-    keyword whole manova yellow
-    keyword whole matrix yellow
-    keyword whole max yellow
-    keyword whole mean yellow
-    keyword whole median yellow
-    keyword whole min yellow
-    keyword whole mtext yellow
-    keyword whole names yellow
-    keyword whole na.omit yellow
-    keyword whole ncol yellow
-    keyword whole nrow yellow
-    keyword whole order yellow
-    keyword whole palette yellow
-    keyword whole par yellow
-    keyword whole paste yellow
-    keyword whole pdf yellow
-    keyword whole plot yellow
-    keyword whole png yellow
-    keyword whole points yellow
-    keyword whole predict yellow
-    keyword whole princomp yellow
-    keyword whole print yellow
-    keyword whole range yellow
-    keyword whole rbind yellow
-    keyword whole read.table yellow
-    keyword whole recode yellow
-    keyword whole rep yellow
-    keyword whole replace yellow
-    keyword whole return yellow
-    keyword whole rev yellow
-    keyword whole rnorm yellow
-    keyword whole round yellow
-    keyword whole row.names yellow
-    keyword whole rowSums yellow
-    keyword whole sapply yellow
-    keyword whole scale yellow
-    keyword whole seq yellow
-    keyword whole sink yellow
-    keyword whole smooth.spline yellow
-    keyword whole sort yellow
-    keyword whole source yellow
-    keyword whole sqrt yellow
-    keyword whole str yellow
-    keyword whole sum yellow
-    keyword whole summary yellow
-    keyword whole t yellow
-    keyword whole table yellow
-    keyword whole tapply yellow
-    keyword whole text yellow
-    keyword whole t.test yellow
-    keyword whole unique yellow
-    keyword whole wilcox.test yellow
-    keyword whole with yellow
-    keyword whole write.table yellow
-    keyword whole x11 yellow
+    keyword whole abbreviate SUPPORT_FUNCTION
+    keyword whole abline SUPPORT_FUNCTION
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole aggregate SUPPORT_FUNCTION
+    keyword whole apply SUPPORT_FUNCTION
+    keyword whole as.character SUPPORT_FUNCTION
+    keyword whole as.data.frame SUPPORT_FUNCTION
+    keyword whole as.factor SUPPORT_FUNCTION
+    keyword whole as.matrix SUPPORT_FUNCTION
+    keyword whole as.numeric SUPPORT_FUNCTION
+    keyword whole as.vector SUPPORT_FUNCTION
+    keyword whole attr SUPPORT_FUNCTION
+    keyword whole boxplot SUPPORT_FUNCTION
+    keyword whole c SUPPORT_FUNCTION
+    keyword whole cat SUPPORT_FUNCTION
+    keyword whole cbind SUPPORT_FUNCTION
+    keyword whole chisq.test SUPPORT_FUNCTION
+    keyword whole colnames SUPPORT_FUNCTION
+    keyword whole colSums SUPPORT_FUNCTION
+    keyword whole cor SUPPORT_FUNCTION
+    keyword whole cor.test SUPPORT_FUNCTION
+    keyword whole data.frame SUPPORT_FUNCTION
+    keyword whole dev.off SUPPORT_FUNCTION
+    keyword whole dimnames SUPPORT_FUNCTION
+    keyword whole dist SUPPORT_FUNCTION
+    keyword whole dotchart SUPPORT_FUNCTION
+    keyword whole eqscplot SUPPORT_FUNCTION
+    keyword whole factor SUPPORT_FUNCTION
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole get SUPPORT_FUNCTION
+    keyword whole grep SUPPORT_FUNCTION
+    keyword whole gsub SUPPORT_FUNCTION
+    keyword whole hclust SUPPORT_FUNCTION
+    keyword whole hist SUPPORT_FUNCTION
+    keyword whole ifelse SUPPORT_FUNCTION
+    keyword whole is.factor SUPPORT_FUNCTION
+    keyword whole is.na SUPPORT_FUNCTION
+    keyword whole kruskal.test SUPPORT_FUNCTION
+    keyword whole lda SUPPORT_FUNCTION
+    keyword whole legend SUPPORT_FUNCTION
+    keyword whole length SUPPORT_FUNCTION
+    keyword whole levels SUPPORT_FUNCTION
+    keyword whole library KEYWORD_CONTROL_IMPORT
+    keyword whole lines SUPPORT_FUNCTION
+    keyword whole list SUPPORT_FUNCTION
+    keyword whole lm SUPPORT_FUNCTION
+    keyword whole loadings SUPPORT_FUNCTION
+    keyword whole log SUPPORT_FUNCTION
+    keyword whole manova SUPPORT_FUNCTION
+    keyword whole matrix SUPPORT_FUNCTION
+    keyword whole max SUPPORT_FUNCTION
+    keyword whole mean SUPPORT_FUNCTION
+    keyword whole median SUPPORT_FUNCTION
+    keyword whole min SUPPORT_FUNCTION
+    keyword whole mtext SUPPORT_FUNCTION
+    keyword whole names SUPPORT_FUNCTION
+    keyword whole na.omit SUPPORT_FUNCTION
+    keyword whole ncol SUPPORT_FUNCTION
+    keyword whole nrow SUPPORT_FUNCTION
+    keyword whole order SUPPORT_FUNCTION
+    keyword whole palette SUPPORT_FUNCTION
+    keyword whole par SUPPORT_FUNCTION
+    keyword whole paste SUPPORT_FUNCTION
+    keyword whole pdf SUPPORT_FUNCTION
+    keyword whole plot SUPPORT_FUNCTION
+    keyword whole png SUPPORT_FUNCTION
+    keyword whole points SUPPORT_FUNCTION
+    keyword whole predict SUPPORT_FUNCTION
+    keyword whole princomp SUPPORT_FUNCTION
+    keyword whole print SUPPORT_FUNCTION
+    keyword whole range SUPPORT_FUNCTION
+    keyword whole rbind SUPPORT_FUNCTION
+    keyword whole read.table SUPPORT_FUNCTION
+    keyword whole recode SUPPORT_FUNCTION
+    keyword whole rep SUPPORT_FUNCTION
+    keyword whole replace SUPPORT_FUNCTION
+    keyword whole return KEYWORD_CONTROL
+    keyword whole rev SUPPORT_FUNCTION
+    keyword whole rnorm SUPPORT_FUNCTION
+    keyword whole round SUPPORT_FUNCTION
+    keyword whole row.names SUPPORT_FUNCTION
+    keyword whole rowSums SUPPORT_FUNCTION
+    keyword whole sapply SUPPORT_FUNCTION
+    keyword whole scale SUPPORT_FUNCTION
+    keyword whole seq SUPPORT_FUNCTION
+    keyword whole sink SUPPORT_FUNCTION
+    keyword whole smooth.spline SUPPORT_FUNCTION
+    keyword whole sort SUPPORT_FUNCTION
+    keyword whole source KEYWORD_CONTROL_IMPORT
+    keyword whole sqrt SUPPORT_FUNCTION
+    keyword whole str SUPPORT_FUNCTION
+    keyword whole sum SUPPORT_FUNCTION
+    keyword whole summary SUPPORT_FUNCTION
+    keyword whole t SUPPORT_FUNCTION
+    keyword whole table SUPPORT_FUNCTION
+    keyword whole tapply SUPPORT_FUNCTION
+    keyword whole text SUPPORT_FUNCTION
+    keyword whole t.test SUPPORT_FUNCTION
+    keyword whole unique SUPPORT_FUNCTION
+    keyword whole wilcox.test SUPPORT_FUNCTION
+    keyword whole with SUPPORT_FUNCTION
+    keyword whole write.table SUPPORT_FUNCTION
+    keyword whole x11 SUPPORT_FUNCTION
 
-context # \n brown
+context # \n COMMENT_LINE
     spellcheck
 
-context "http " white
+context "http " MARKUP_UNDERLINE_LINK
 
-context " " brightgreen
+context " " STRING_QUOTED_DOUBLE
 
-context 'http ' white
+context 'http ' MARKUP_UNDERLINE_LINK
 
-context ' ' brightgreen
+context ' ' STRING_QUOTED_SINGLE
