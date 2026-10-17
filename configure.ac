@@ -64,7 +64,7 @@ if test "x$enable_werror" = xyes; then
     AX_APPEND_COMPILE_FLAGS([-Werror], [mc_configured_cflags])
 fi
 
-LT_INIT
+LT_INIT([disable-shared])
 
 
 dnl ############################################################################
@@ -444,34 +444,6 @@ linux*)
     fi
     ;;
 esac
-
-
-dnl ############################################################################
-dnl libmc
-dnl ############################################################################
-
-LIBMC_VERSION="0.0.1"
-LIBMC_RELEASE="1"
-AC_SUBST(LIBMC_VERSION)
-AC_SUBST(LIBMC_RELEASE)
-
-AC_ARG_ENABLE([mclib],
-        [AS_HELP_STRING([--enable-mclib], [Compile shared library libmc.so @<:@no@:>@])],
-        [
-            if test "x$enableval" = "xno" ; then
-                enable_mclib=no
-            else
-                if test "x$enable_shared" = "xno" ; then
-                    AC_MSG_WARN([Build of shared library is disabled. Specify --enable-shared first])
-                    enable_mclib=no
-                else
-                    enable_mclib=yes
-                fi
-            fi
-        ],
-        [enable_mclib=no])
-
-AM_CONDITIONAL([ENABLE_MCLIB], [test x$enable_mclib = xyes])
 
 
 dnl ############################################################################

@@ -36,7 +36,6 @@ jobs:
 
           ./configure \
             --prefix="$(pwd)/install-prefix" \
-            --enable-mclib \
             --enable-aspell=/opt/homebrew
 
           make -j$(sysctl -n hw.logicalcpu)

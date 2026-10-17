@@ -34,7 +34,6 @@ jobs:
               ./configure \
                 --prefix="$(pwd)/install-prefix" \
                 --with-screen=ncurses \
-                --enable-mclib \
                 --enable-aspell \
                 --enable-werror \
                 && \

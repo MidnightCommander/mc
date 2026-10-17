@@ -56,15 +56,8 @@ libinternal_la_LIBADD = \
 	$(DIFFLIB) $(EDITLIB) $(SUBSHELLLIB)
 
 mc_LDADD = \
-	libinternal.la
-
-if ENABLE_MCLIB
-libinternal_la_LIBADD += \
+	libinternal.la \
 	$(top_builddir)/lib/libmc.la
-else
-mc_LDADD += \
-	$(top_builddir)/lib/libmc.la
-endif
 
 SRC_mc_conssaver = \
 	cons.handler.c consaver/cons.saver.h
