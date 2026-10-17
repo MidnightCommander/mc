@@ -64,7 +64,7 @@ if test "x$enable_werror" = xyes; then
     AX_APPEND_COMPILE_FLAGS([-Werror], [mc_configured_cflags])
 fi
 
-LT_INIT
+LT_INIT([disable-shared])
 
 
 dnl ############################################################################
