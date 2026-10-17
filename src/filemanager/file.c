@@ -1182,7 +1182,7 @@ calc_copy_file_progress (file_op_context_t *ctx, gint64 tv_current, off_t file_p
 static gboolean
 try_remove_file (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgressStatus *status)
 {
-    while (mc_unlink (vpath) != 0 && !ctx->ignore_all)
+    while (mc_unlink (vpath) != 0 && errno != ENOENT && !ctx->ignore_all)
     {
         *status = file_error (ctx, TRUE, _ ("Cannot remove file\n%s"), vfs_path_as_str (vpath));
         if (*status == FILE_RETRY)
@@ -1459,8 +1459,15 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
         tmp_vpath = vfs_path_append_new (vpath, next->d_name, (char *) NULL);
         if (mc_lstat (tmp_vpath, &buf) != 0)
         {
-            mc_closedir (reading);
+            const gboolean vanished = (errno == ENOENT);
+
             vfs_path_free (tmp_vpath, TRUE);
+
+            // The entry has been removed since the directory was read, e.g. "._" (#4720)
+            if (vanished)
+                continue;
+
+            mc_closedir (reading);
             return FILE_RETRY;
         }
         if (S_ISDIR (buf.st_mode))
