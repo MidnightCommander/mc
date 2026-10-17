@@ -26,11 +26,16 @@
 
 #include <config.h>
 
+#include <errno.h>
+#include <string.h>
+
 #include <libssh2.h>
 #include <libssh2_sftp.h>
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/tty/tty.h"  // tty_got_interrupt ()
+#include "lib/vfs/utilvfs.h"
 
 #include "internal.h"
 
@@ -40,116 +45,169 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef struct
-{
-    LIBSSH2_SFTP_HANDLE *handle;
-    sftpfs_super_t *super;
-} sftpfs_dir_data_t;
-
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Read the target of a symbolic link found in the directory being loaded.
+ *
+ * @param super  connection data
+ * @param path   full remote path of the symbolic link
+ * @return newly allocated link target, NULL on failure
+ */
+
+static char *
+sftpfs_dir_load_linkname (sftpfs_super_t *super, const char *path)
+{
+    char buf[MC_MAXPATHLEN];
+    int res;
+
+    do
+        res = libssh2_sftp_symlink_ex (super->sftp_session, path, (unsigned int) strlen (path), buf,
+                                       sizeof (buf), LIBSSH2_SFTP_READLINK);
+    while (res == LIBSSH2_ERROR_EAGAIN && sftpfs_waitsocket (super, res, NULL));
+
+    return (res > 0 ? g_strndup (buf, (gsize) res) : NULL);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Open a directory stream corresponding to the directory name.
+ * Load the content of a directory into the directory cache.
  *
- * @param vpath   path to directory
- * @param mcerror pointer to the error handler
- * @return directory data handler if success, NULL otherwise
- */
-
-void *
-sftpfs_opendir (const vfs_path_t *vpath, GError **mcerror)
-{
-    sftpfs_dir_data_t *sftpfs_dir;
-    sftpfs_super_t *sftpfs_super;
-    const vfs_path_element_t *path_element;
-    LIBSSH2_SFTP_HANDLE *handle = NULL;
-    const GString *fixfname;
-
-    if (!sftpfs_op_init (&sftpfs_super, &path_element, vpath, mcerror))
-        return NULL;
-
-    fixfname = sftpfs_fix_filename (path_element->path);
-
-    while (TRUE)
-    {
-        int libssh_errno;
-
-        handle = libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, 0,
-                                       0, LIBSSH2_SFTP_OPENDIR);
-        if (handle != NULL)
-            break;
-
-        libssh_errno = libssh2_session_last_errno (sftpfs_super->session);
-        if (!sftpfs_waitsocket (sftpfs_super, libssh_errno, mcerror))
-            return NULL;
-    }
-
-    sftpfs_dir = g_new0 (sftpfs_dir_data_t, 1);
-    sftpfs_dir->handle = handle;
-    sftpfs_dir->super = sftpfs_super;
-
-    return (void *) sftpfs_dir;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Get a pointer to a structure representing the next directory entry.
+ * The attributes returned by READDIR are stored in the cached inodes, so the following lstat()
+ * calls for the entries are answered from the cache without a round trip per file.
  *
- * @param data    directory data handler
- * @param mcerror pointer to the error handler
- * @return information about direntry if success, NULL otherwise
- */
-
-struct vfs_dirent *
-sftpfs_readdir (void *data, GError **mcerror)
-{
-    char mem[BUF_MEDIUM];
-    LIBSSH2_SFTP_ATTRIBUTES attrs;
-    sftpfs_dir_data_t *sftpfs_dir = (sftpfs_dir_data_t *) data;
-    int rc;
-
-    mc_return_val_if_error (mcerror, NULL);
-
-    do
-    {
-        rc = libssh2_sftp_readdir (sftpfs_dir->handle, mem, sizeof (mem), &attrs);
-        if (rc >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (sftpfs_dir->super, rc, mcerror))
-            return NULL;
-    }
-    while (rc == LIBSSH2_ERROR_EAGAIN);
-
-    return (rc != 0 ? vfs_dirent_init (NULL, mem, 0, DT_UNKNOWN) : NULL);  // FIXME: inode
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Close the directory stream.
- *
- * @param data    directory data handler
- * @param mcerror pointer to the error handler
- * @return 0 if success, negative value otherwise
+ * @param me          VFS class
+ * @param dir         inode of the directory to fill
+ * @param remote_path path of the directory
+ * @param mcerror     pointer to the error handler
+ * @return 0 if success, -1 otherwise
  */
 
 int
-sftpfs_closedir (void *data, GError **mcerror)
+sftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote_path,
+                 GError **mcerror)
 {
+    sftpfs_super_t *super = SFTP_SUPER (dir->super);
+    LIBSSH2_SFTP_HANDLE *handle;
+    char *path;
+    size_t path_len;
     int rc;
-    sftpfs_dir_data_t *sftpfs_dir = (sftpfs_dir_data_t *) data;
 
     mc_return_val_if_error (mcerror, -1);
 
-    rc = libssh2_sftp_closedir (sftpfs_dir->handle);
-    g_free (sftpfs_dir);
-    return rc;
+    if (super->sftp_session == NULL)
+    {
+        errno = me->verrno = ECONNRESET;
+        return -1;
+    }
+
+    // sftpfs_fix_filename() returns a shared buffer, keep a copy of the path
+    path = g_strdup (sftpfs_fix_filename (remote_path)->str);
+    path_len = strlen (path);
+
+    vfs_print_message (_ ("sftp: Reading directory %s..."), path);
+
+    while (TRUE)
+    {
+        int err = 0;
+
+        handle = libssh2_sftp_open_ex (super->sftp_session, path, (unsigned int) path_len, 0, 0,
+                                       LIBSSH2_SFTP_OPENDIR);
+        if (handle != NULL)
+            break;
+
+        rc = libssh2_session_last_errno (super->session);
+
+        // a missing or unreadable directory is not worth an error dialog
+        if (sftpfs_is_sftp_error (super->sftp_session, rc, LIBSSH2_FX_NO_SUCH_FILE))
+            err = ENOENT;
+        else if (sftpfs_is_sftp_error (super->sftp_session, rc, LIBSSH2_FX_PERMISSION_DENIED))
+            err = EACCES;
+
+        if (err != 0)
+        {
+            errno = me->verrno = err;
+            g_free (path);
+            return -1;
+        }
+
+        if (!sftpfs_waitsocket (super, rc, mcerror))
+        {
+            errno = me->verrno = EIO;
+            g_free (path);
+            return -1;
+        }
+    }
+
+    // reset interrupt flag
+    tty_got_interrupt ();
+
+    while (TRUE)
+    {
+        char name[BUF_MEDIUM];
+        LIBSSH2_SFTP_ATTRIBUTES attrs;
+        struct stat st;
+        struct vfs_s_entry *ent;
+
+        rc = libssh2_sftp_readdir (handle, name, sizeof (name), &attrs);
+        if (rc == 0)
+            break;
+
+        if (rc < 0)
+        {
+            if (rc == LIBSSH2_ERROR_EAGAIN && sftpfs_waitsocket (super, rc, mcerror))
+                continue;
+            break;
+        }
+
+        if (tty_got_interrupt ())
+        {
+            tty_disable_interrupt_key ();
+            rc = LIBSSH2_ERROR_EAGAIN;
+            break;
+        }
+
+        if (DIR_IS_DOT (name) || DIR_IS_DOTDOT (name))
+            continue;
+
+        /* Fill the stat before creating the inode: vfs_s_new_inode() sets the inode number and
+         * the device of the cache entry on top of it. */
+        st = *vfs_s_default_stat (me, S_IFREG | 0644);
+        sftpfs_attr_to_stat (&attrs, &st);
+        ent = vfs_s_new_entry (me, name, vfs_s_new_inode (me, dir->super, &st));
+
+        if (S_ISLNK (ent->ino->st.st_mode))
+        {
+            char *link_path;
+
+            link_path = g_strconcat (path, IS_PATH_SEP (path[path_len - 1]) ? "" : PATH_SEP_STR,
+                                     name, (char *) NULL);
+            ent->ino->linkname = sftpfs_dir_load_linkname (super, link_path);
+            g_free (link_path);
+        }
+
+        vfs_s_insert_entry (me, dir, ent);
+    }
+
+    libssh2_sftp_closedir (handle);
+    g_free (path);
+
+    if (rc < 0)
+    {
+        if (*mcerror == NULL)
+            vfs_print_message ("%s", _ ("sftp: failure"));
+        errno = me->verrno = EIO;
+        return -1;
+    }
+
+    dir->timestamp = g_get_monotonic_time () + SFTPFS_DIR_CACHE_TIMEOUT * G_USEC_PER_SEC;
+    vfs_print_message ("%s", _ ("sftp: Listing done."));
+
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
