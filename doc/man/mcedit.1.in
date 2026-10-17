@@ -513,7 +513,8 @@ The global background of a scheme is ignored; the editor background stays
 the one of the current skin.
 .PP
 The color scheme is chosen with Options \-> Color scheme (Alt\-Shift\-S)
-in the editor, which stores it as
+in the editor; the list shows the format of each scheme (Sublime or VS Code)
+on the right.  The editor stores the choice as
 .I editor_syntax_color_scheme
 in the ini file.  When that option is empty, the
 .B syntax_scheme

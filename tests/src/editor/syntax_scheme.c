@@ -26,6 +26,8 @@
 
 #include <glib/gstdio.h>
 
+#include "lib/fileloc.h"
+
 #include "src/editor/syntax_scheme.h"
 
 /* lenient JSON: comments, trailing commas, variables */
@@ -306,6 +308,57 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* scheme format shown in the chooser; a Sublime scheme wins over a same-named VS Code theme */
+START_TEST (test_scheme_type)
+{
+    char *saved_share = mc_global.share_data_dir;
+    char *share, *syntax_dir, *dir, *files[3];
+    GPtrArray *names;
+    int i;
+
+    // given
+    share = g_dir_make_tmp ("mc-share-XXXXXX", NULL);
+    mctest_assert_not_null (share);
+    syntax_dir = g_build_filename (share, EDIT_SYNTAX_DIR, (char *) NULL);
+    dir = g_build_filename (syntax_dir, SYNTAX_SCHEME_DIR, (char *) NULL);
+    ck_assert_int_eq (g_mkdir_with_parents (dir, 0700), 0);
+
+    files[0] = write_file (dir, "both" SYNTAX_SCHEME_EXT, "{}");
+    files[1] = write_file (dir, "both.json", "{}");
+    files[2] = write_file (dir, "code.json", "{}");
+    mc_global.share_data_dir = share;
+    // keep the user's own schemes out: user data dir becomes <share>/mc, which has none
+    g_setenv ("XDG_DATA_HOME", share, TRUE);
+
+    // when
+    names = syntax_scheme_list ();
+
+    // then
+    mctest_assert_str_eq (syntax_scheme_type ("both"), "Sublime");
+    mctest_assert_str_eq (syntax_scheme_type ("code"), "VS Code");
+    mctest_assert_null (syntax_scheme_type ("missing"));
+    ck_assert_int_eq (names->len, 2);
+    mctest_assert_str_eq (g_ptr_array_index (names, 0), "both");
+    mctest_assert_str_eq (g_ptr_array_index (names, 1), "code");
+
+    mc_global.share_data_dir = saved_share;
+    g_ptr_array_free (names, TRUE);
+    for (i = 0; i < 3; i++)
+    {
+        g_unlink (files[i]);
+        g_free (files[i]);
+    }
+    g_rmdir (dir);
+    g_rmdir (syntax_dir);
+    g_rmdir (share);
+    g_free (dir);
+    g_free (syntax_dir);
+    g_free (share);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 START_TEST (test_tokens)
 {
     char *s;
@@ -356,6 +409,7 @@ main (void)
     mctest_add_parameterized_test (tc_core, test_builtin, test_builtin_ds);
     mctest_add_parameterized_test (tc_core, test_vscode, test_vscode_ds);
     tcase_add_test (tc_core, test_vscode_include);
+    tcase_add_test (tc_core, test_scheme_type);
     tcase_add_test (tc_core, test_tokens);
     tcase_add_test (tc_core, test_parse_error);
     // ***********************************

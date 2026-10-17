@@ -1732,19 +1732,30 @@ edit_syntax_scheme_dialog (WEdit *edit)
     GPtrArray *names;
     Listbox *list;
     char *saved;
-    int i, n;
+    int i, n, width;
 
     names = syntax_scheme_list ();
     saved =
         g_strdup (edit_options.syntax_color_scheme != NULL ? edit_options.syntax_color_scheme : "");
 
     list = listbox_window_new (LIST_LINES, MAX_ENTRY_LEN, _ ("Choose color scheme"), NULL);
+    // text area of the listbox: items are drawn with one column of margin on each side
+    width = WIDGET (list->list)->rect.cols - 2;
     LISTBOX_APPEND_TEXT (list, 'D', _ ("< Default >"), NULL, FALSE);
     for (i = 0; i < (int) names->len; i++)
     {
         const char *name = g_ptr_array_index (names, i);
+        const char *type = syntax_scheme_type (name);
+        char *label;
+        int pad;
 
-        LISTBOX_APPEND_TEXT (list, 0, name, NULL, FALSE);
+        if (type == NULL)
+            type = "";
+        // scheme format right-aligned
+        pad = MAX (1, width - str_term_width1 (name) - str_term_width1 (type));
+        label = g_strdup_printf ("%s%*s%s", name, pad, "", type);
+        LISTBOX_APPEND_TEXT (list, 0, label, NULL, FALSE);
+        g_free (label);
         if (strcmp (name, saved) == 0)
             listbox_set_current (list->list, i + 1);
     }

@@ -49,6 +49,7 @@ void syntax_scheme_resolve (const syntax_scheme_t *scheme, const char *ctx_scope
 /* editor glue: resolve scope tokens with the configured scheme */
 void syntax_scheme_lookup (const char *ctx_token, const char *token, syntax_scheme_style_t *style);
 GPtrArray *syntax_scheme_list (void);
+const char *syntax_scheme_type (const char *name);
 void syntax_scheme_done (void);
 
 /*** inline functions ****************************************************************************/

@@ -61,7 +61,8 @@ the one of the current skin.
 Choosing a color scheme
 -----------------------
 
-In the editor: Options -> Color scheme (Alt-Shift-S).  The choice is stored
+In the editor: Options -> Color scheme (Alt-Shift-S).  The list shows the
+format of each scheme (Sublime or VS Code) on the right.  The choice is stored
 as editor_syntax_color_scheme in the [Midnight-Commander] section of the ini
 file.
 

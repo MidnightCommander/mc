@@ -1492,6 +1492,24 @@ syntax_scheme_list (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Format of the file scheme @name resolves to: "Sublime" or "VS Code"; NULL if not found.
+ */
+
+const char *
+syntax_scheme_type (const char *name)
+{
+    char *path;
+    const char *type = NULL;
+
+    path = find_scheme_file (name);
+    if (path != NULL)
+        type = g_str_has_suffix (path, SYNTAX_SCHEME_EXT) ? "Sublime" : "VS Code";
+    g_free (path);
+    return type;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 syntax_scheme_done (void)
