@@ -273,6 +273,15 @@ main (int argc, char *argv[])
         goto startup_exit_ok;
     }
 
+    if (!tty_stdin_to_terminal ())
+    {
+        mc_propagate_error (&mcerror, 0, "%s",
+                            _ ("Standard input is not a terminal and there is no controlling "
+                               "terminal to read the keyboard from"));
+        mc_event_deinit (NULL);
+        goto startup_exit_falure;
+    }
+
     if (!events_init (&mcerror))
         goto startup_exit_falure;
 

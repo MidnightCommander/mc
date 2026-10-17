@@ -413,7 +413,7 @@ load_qnx_key_defines (void)
         int idx;
         int term_setup_ok;
 
-        __setupterm (NULL, fileno (stdout), &term_setup_ok);
+        __setupterm (NULL, STDOUT_FILENO, &term_setup_ok);
         if (term_setup_ok != 1)
             return;
 
