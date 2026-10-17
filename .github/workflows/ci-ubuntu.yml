@@ -38,7 +38,6 @@ jobs:
 
           ../configure \
               --prefix="$(pwd)/install" \
-              --enable-mclib \
               --enable-aspell \
               --enable-werror
 
@@ -72,7 +71,6 @@ jobs:
               --disable-largefile \
               --disable-nls \
               --disable-rpath \
-              --disable-mclib \
               --disable-assert \
               --disable-aspell \
               --disable-background \
