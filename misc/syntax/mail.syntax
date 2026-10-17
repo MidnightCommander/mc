@@ -3,71 +3,71 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890.-
 context default
     spellcheck
 
-context linestart From\s \n\n cyan
-    keyword linestart From: brightgreen
-    keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
-    keyword linestart To: brightmagenta
-    keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+context linestart From\s \n\n META_HEADER
+    keyword linestart From: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart From\s KEYWORD_OTHER
+    keyword <*@*> STRING_UNQUOTED
+    keyword whole +@+ STRING_UNQUOTED
+    keyword linestart To: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart Subject: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart +: ENTITY_OTHER_ATTRIBUTE_NAME
 
-context linestart Return-path:\s \n\n cyan
-    keyword linestart From: brightgreen
-    keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
-    keyword linestart To: brightmagenta
-    keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+context linestart Return-path:\s \n\n META_HEADER
+    keyword linestart From: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart From\s KEYWORD_OTHER
+    keyword <*@*> STRING_UNQUOTED
+    keyword whole +@+ STRING_UNQUOTED
+    keyword linestart To: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart Subject: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart +: ENTITY_OTHER_ATTRIBUTE_NAME
 
-context linestart Return-Path:\s \n\n cyan
-    keyword linestart From: brightgreen
-    keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
-    keyword linestart To: brightmagenta
-    keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+context linestart Return-Path:\s \n\n META_HEADER
+    keyword linestart From: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart From\s KEYWORD_OTHER
+    keyword <*@*> STRING_UNQUOTED
+    keyword whole +@+ STRING_UNQUOTED
+    keyword linestart To: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart Subject: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart +: ENTITY_OTHER_ATTRIBUTE_NAME
 
-context linestart From:\s \n\n cyan
-    keyword linestart From: brightgreen
-    keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
-    keyword linestart To: brightmagenta
-    keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+context linestart From:\s \n\n META_HEADER
+    keyword linestart From: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart From\s KEYWORD_OTHER
+    keyword <*@*> STRING_UNQUOTED
+    keyword whole +@+ STRING_UNQUOTED
+    keyword linestart To: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart Subject: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart +: ENTITY_OTHER_ATTRIBUTE_NAME
 
-context linestart Date:\s \n\n cyan
-    keyword linestart From: brightgreen
-    keyword linestart From\s brightred
-    keyword <*@*> white
-    keyword whole +@+ white
-    keyword linestart To: brightmagenta
-    keyword linestart Subject: brightred/Orange
-    keyword linestart +: brown
+context linestart Date:\s \n\n META_HEADER
+    keyword linestart From: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart From\s KEYWORD_OTHER
+    keyword <*@*> STRING_UNQUOTED
+    keyword whole +@+ STRING_UNQUOTED
+    keyword linestart To: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart Subject: ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword linestart +: ENTITY_OTHER_ATTRIBUTE_NAME
 
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]>\[\s\]>\[\s\]> \n brightred
-context linestart >\[\s\]>\[\s\]> \n brightgreen
-context linestart >\[\s\]> \n brightred
-context linestart > \n brightgreen
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]>\[\s\]> \n MARKUP_QUOTE
+context linestart >\[\s\]> \n MARKUP_QUOTE
+context linestart > \n MARKUP_QUOTE

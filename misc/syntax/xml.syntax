@@ -3,43 +3,43 @@
 # Author: Petr Kozelka <pkozelka@email.cz>
 
 context default
-    keyword &*; white cyan
+    keyword &*; CONSTANT_CHARACTER_ESCAPE cyan
     spellcheck
 
-context <!-- --> brightgreen
+context <!-- --> COMMENT_BLOCK
     spellcheck
 
-context <! > yellow
-    keyword '+' brightcyan
-    keyword "+" brightcyan
-    keyword whole DOCTYPE white red
-    keyword whole PUBLIC brightred
-    keyword whole SYSTEM brightred
-    keyword whole NDATA brightred
-    keyword whole CDATA white
-    keyword whole #PCDATA white
-    keyword whole EMPTY white
-    keyword whole #REQUIRED white
-    keyword whole #IMPLIED white
-    keyword whole ELEMENT white
-    keyword whole ENTITY brightred
-    keyword whole ATTLIST white
-    keyword whole %*; white cyan
-    keyword \( lightgray
-    keyword \) lightgray
-    keyword \* lightgray
-    keyword \? lightgray
-    keyword \+ lightgray
-    keyword \| lightgray
-    keyword \, lightgray
+context <! > META_PREPROCESSOR
+    keyword '+' STRING_QUOTED_SINGLE
+    keyword "+" STRING_QUOTED_DOUBLE
+    keyword whole DOCTYPE KEYWORD_OTHER_RESERVED red
+    keyword whole PUBLIC KEYWORD_OTHER_RESERVED
+    keyword whole SYSTEM KEYWORD_OTHER_RESERVED
+    keyword whole NDATA KEYWORD_OTHER_RESERVED
+    keyword whole CDATA STORAGE_TYPE
+    keyword whole #PCDATA CONSTANT_OTHER
+    keyword whole EMPTY CONSTANT_OTHER
+    keyword whole #REQUIRED CONSTANT_OTHER
+    keyword whole #IMPLIED CONSTANT_OTHER
+    keyword whole ELEMENT KEYWORD_OTHER_RESERVED
+    keyword whole ENTITY KEYWORD_OTHER_RESERVED
+    keyword whole ATTLIST KEYWORD_OTHER_RESERVED
+    keyword whole %*; CONSTANT_CHARACTER_ESCAPE cyan
+    keyword \( PUNCTUATION_SECTION
+    keyword \) PUNCTUATION_SECTION
+    keyword \* KEYWORD_OPERATOR
+    keyword \? KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword \| KEYWORD_OPERATOR
+    keyword \, PUNCTUATION_SEPARATOR
     spellcheck
 
-context <\?xml \?> white red
-context <\? \?> lightgray black
-context < > white
-    keyword \sxmlns\:*\="+" brightred
-    keyword \sxmlns\="+" brightred
-    keyword \s*= yellow
-    keyword '*' brightcyan
-    keyword "*" brightcyan
+context <\?xml \?> META_PREPROCESSOR red
+context <\? \?> META_PREPROCESSOR black
+context < > ENTITY_NAME_TAG
+    keyword \sxmlns\:*\="+" ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword \sxmlns\="+" ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword \s*= KEYWORD_OPERATOR
+    keyword '*' STRING_QUOTED_SINGLE
+    keyword "*" STRING_QUOTED_DOUBLE
     spellcheck

@@ -328,6 +328,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (ShowTabTws),
     ADD_KEYMAP_NAME (SyntaxOnOff),
     ADD_KEYMAP_NAME (SyntaxChoose),
+    ADD_KEYMAP_NAME (SyntaxSchemeChoose),
     ADD_KEYMAP_NAME (ShowMargin),
     ADD_KEYMAP_NAME (OptionsSaveMode),
     ADD_KEYMAP_NAME (About),

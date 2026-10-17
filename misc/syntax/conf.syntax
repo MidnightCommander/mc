@@ -5,32 +5,32 @@
 #
 
 context default
-    keyword ; brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword = white
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword = KEYWORD_OPERATOR
 
-    keyword whole \{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
 # String values
-context ' ' green
-context " " green
+context ' ' STRING_QUOTED_SINGLE
+context " " STRING_QUOTED_DOUBLE
 
 # Comments
-context # \n brown
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
+context # \n COMMENT_LINE
+    keyword whole BUG KEYWORD_OTHER_TODO
+    keyword whole FixMe KEYWORD_OTHER_TODO
+    keyword whole FIXME KEYWORD_OTHER_TODO
+    keyword whole Note KEYWORD_OTHER_TODO
+    keyword whole NOTE KEYWORD_OTHER_TODO
+    keyword whole ToDo KEYWORD_OTHER_TODO
+    keyword whole TODO KEYWORD_OTHER_TODO
+    keyword !!\[!\] KEYWORD_OTHER_TODO
+    keyword ??\[?\] KEYWORD_OTHER_TODO
     spellcheck

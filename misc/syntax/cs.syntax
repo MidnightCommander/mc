@@ -2,148 +2,148 @@
 
 context default
 
-    keyword whole abstract yellow
-    keyword whole as yellow
-    keyword whole base yellow
-    keyword whole bool yellow
-    keyword whole break yellow
-    keyword whole byte yellow
-    keyword whole case yellow
-    keyword whole catch yellow
-    keyword whole char yellow
-    keyword whole checked yellow
-    keyword whole class white
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole decimal yellow
-    keyword whole default yellow
-    keyword whole delegate white
-    keyword whole do yellow
-    keyword whole double yellow
-    keyword whole else yellow
-    keyword whole enum white
-    keyword whole event yellow
-    keyword whole explicit yellow
-    keyword whole extern yellow
-    keyword whole false yellow
-    keyword whole finally yellow
-    keyword whole fixed yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole foreach yellow
-    keyword whole get brightgreen
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole implicit yellow
-    keyword whole in yellow
-    keyword whole int yellow
-    keyword whole interface white
-    keyword whole internal brightred
-    keyword whole is yellow
-    keyword whole lock yellow
-    keyword whole long yellow
-    keyword whole namespace white
-    keyword whole new yellow
-    keyword whole null yellow
-    keyword whole object yellow
-    keyword whole operator yellow
-    keyword whole out yellow
-    keyword whole override yellow
-    keyword whole params yellow
-    keyword whole partial yellow
-    keyword whole private brightred
-    keyword whole protected yellow
-    keyword whole public brightred
-    keyword whole readonly yellow
-    keyword whole ref yellow
-    keyword whole return yellow
-    keyword whole sbyte yellow
-    keyword whole sealed yellow
-    keyword whole set brightgreen
-    keyword whole short yellow
-    keyword whole sizeof yellow
-    keyword whole stackalloc yellow
-    keyword whole static yellow
-    keyword whole string yellow
-    keyword whole struct white
-    keyword whole switch yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole true yellow
-    keyword whole try yellow
-    keyword whole typeof yellow
-    keyword whole uint yellow
-    keyword whole ulong yellow
-    keyword whole unchecked yellow
-    keyword whole unsafe yellow
-    keyword whole ushort yellow
-    keyword whole using brightcyan
-    keyword whole value yellow
-    keyword whole virtual yellow
-    keyword whole void yellow
-    keyword whole volatile yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole yield yellow
+    keyword whole abstract STORAGE_MODIFIER
+    keyword whole as KEYWORD_OPERATOR_WORD
+    keyword whole base VARIABLE_LANGUAGE
+    keyword whole bool STORAGE_TYPE_PRIMITIVE
+    keyword whole break KEYWORD_CONTROL
+    keyword whole byte STORAGE_TYPE_PRIMITIVE
+    keyword whole case KEYWORD_CONTROL
+    keyword whole catch KEYWORD_CONTROL
+    keyword whole char STORAGE_TYPE_PRIMITIVE
+    keyword whole checked KEYWORD_OTHER_RESERVED
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole const STORAGE_MODIFIER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole decimal STORAGE_TYPE_PRIMITIVE
+    keyword whole default KEYWORD_CONTROL
+    keyword whole delegate STORAGE_TYPE_CLASS
+    keyword whole do KEYWORD_CONTROL
+    keyword whole double STORAGE_TYPE_PRIMITIVE
+    keyword whole else KEYWORD_CONTROL
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole event STORAGE_MODIFIER
+    keyword whole explicit STORAGE_MODIFIER
+    keyword whole extern STORAGE_MODIFIER
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole finally KEYWORD_CONTROL
+    keyword whole fixed KEYWORD_CONTROL
+    keyword whole float STORAGE_TYPE_PRIMITIVE
+    keyword whole for KEYWORD_CONTROL
+    keyword whole foreach KEYWORD_CONTROL
+    keyword whole get KEYWORD_OTHER_RESERVED
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole implicit STORAGE_MODIFIER
+    keyword whole in KEYWORD_CONTROL
+    keyword whole int STORAGE_TYPE_PRIMITIVE
+    keyword whole interface STORAGE_TYPE_CLASS
+    keyword whole internal STORAGE_MODIFIER
+    keyword whole is KEYWORD_OPERATOR_WORD
+    keyword whole lock KEYWORD_CONTROL
+    keyword whole long STORAGE_TYPE_PRIMITIVE
+    keyword whole namespace KEYWORD_OTHER_RESERVED
+    keyword whole new KEYWORD_OTHER_NEW
+    keyword whole null CONSTANT_LANGUAGE
+    keyword whole object STORAGE_TYPE_PRIMITIVE
+    keyword whole operator KEYWORD_OTHER_RESERVED
+    keyword whole out STORAGE_MODIFIER
+    keyword whole override STORAGE_MODIFIER
+    keyword whole params STORAGE_MODIFIER
+    keyword whole partial STORAGE_MODIFIER
+    keyword whole private STORAGE_MODIFIER
+    keyword whole protected STORAGE_MODIFIER
+    keyword whole public STORAGE_MODIFIER
+    keyword whole readonly STORAGE_MODIFIER
+    keyword whole ref STORAGE_MODIFIER
+    keyword whole return KEYWORD_CONTROL
+    keyword whole sbyte STORAGE_TYPE_PRIMITIVE
+    keyword whole sealed STORAGE_MODIFIER
+    keyword whole set KEYWORD_OTHER_RESERVED
+    keyword whole short STORAGE_TYPE_PRIMITIVE
+    keyword whole sizeof KEYWORD_OPERATOR_WORD
+    keyword whole stackalloc KEYWORD_OTHER_NEW
+    keyword whole static STORAGE_MODIFIER
+    keyword whole string STORAGE_TYPE_PRIMITIVE
+    keyword whole struct STORAGE_TYPE_CLASS
+    keyword whole switch KEYWORD_CONTROL
+    keyword whole this VARIABLE_LANGUAGE
+    keyword whole throw KEYWORD_CONTROL
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole try KEYWORD_CONTROL
+    keyword whole typeof KEYWORD_OPERATOR_WORD
+    keyword whole uint STORAGE_TYPE_PRIMITIVE
+    keyword whole ulong STORAGE_TYPE_PRIMITIVE
+    keyword whole unchecked KEYWORD_OTHER_RESERVED
+    keyword whole unsafe STORAGE_MODIFIER
+    keyword whole ushort STORAGE_TYPE_PRIMITIVE
+    keyword whole using KEYWORD_CONTROL_IMPORT
+    keyword whole value VARIABLE_LANGUAGE
+    keyword whole virtual STORAGE_MODIFIER
+    keyword whole void STORAGE_TYPE_PRIMITIVE
+    keyword whole volatile STORAGE_MODIFIER
+    keyword whole where KEYWORD_OTHER_RESERVED
+    keyword whole while KEYWORD_CONTROL
+    keyword whole yield KEYWORD_CONTROL
 
 
-    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
+    keyword whole linestart \{\s\t\}\[\s\t\]#*\n META_PREPROCESSOR
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword // COMMENT_LINE
 
-    keyword '\\\{"abtnvfr\}' brightgreen
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
-    keyword '\\'' brightgreen
-    keyword '\\\\' brightgreen
-    keyword '\\0' brightgreen
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+    keyword '\\\{"abtnvfr\}' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\'' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\\\' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\0' CONSTANT_CHARACTER_ESCAPE
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' CONSTANT_CHARACTER
 
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword : brightcyan
-    keyword ? brightcyan
-    keyword ; brightmagenta
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword != KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ? PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword "+" red
+context linestart # \n META_PREPROCESSOR
+    keyword \\\n CONSTANT_CHARACTER_ESCAPE
+    keyword /\**\*/ COMMENT_BLOCK
+    keyword "+" STRING_QUOTED_OTHER
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword %p CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

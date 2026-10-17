@@ -8,77 +8,77 @@
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-*0123456789
 
 context default
-    keyword whole apply yellow
-    keyword whole and yellow
-    keyword whole car yellow
-    keyword whole caar yellow
-    keyword whole cadr yellow
-    keyword whole cdar yellow
-    keyword whole cddr yellow
-    keyword whole cdr yellow
-    keyword whole close yellow
-    keyword whole cond yellow
-    keyword whole cons yellow
-    keyword whole count yellow
-    keyword whole defvar yellow
-    keyword whole defstruct yellow
-    keyword whole defun yellow
-    keyword whole do yellow
-    keyword whole eq yellow
-    keyword whole eql yellow
-    keyword whole equal yellow
-    keyword whole eval yellow
-    keyword whole format yellow
-    keyword whole if yellow
-    keyword whole let* yellow
-    keyword whole let yellow
-    keyword whole list yellow
-    keyword whole load yellow
-    keyword whole make-package yellow
-    keyword whole mapcar yellow
-    keyword whole not yellow
-    keyword whole null yellow
-    keyword whole numberp yellow
-    keyword whole open yellow
-    keyword whole or yellow
-    keyword whole pprint yellow
-    keyword whole prin1 yellow
-    keyword whole princ yellow
-    keyword whole print yellow
-    keyword whole provide yellow
-    keyword whole read yellow
-    keyword whole require yellow
-    keyword whole set yellow
-    keyword whole setf yellow
-    keyword whole setq yellow
-    keyword whole slot-value yellow
-    keyword whole sort yellow
-    keyword whole stringp yellow
-    keyword whole terpri yellow
-    keyword whole write yellow
+    keyword whole apply SUPPORT_FUNCTION
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole car SUPPORT_FUNCTION
+    keyword whole caar SUPPORT_FUNCTION
+    keyword whole cadr SUPPORT_FUNCTION
+    keyword whole cdar SUPPORT_FUNCTION
+    keyword whole cddr SUPPORT_FUNCTION
+    keyword whole cdr SUPPORT_FUNCTION
+    keyword whole close SUPPORT_FUNCTION
+    keyword whole cond KEYWORD_CONTROL
+    keyword whole cons SUPPORT_FUNCTION
+    keyword whole count SUPPORT_FUNCTION
+    keyword whole defvar KEYWORD_OTHER
+    keyword whole defstruct KEYWORD_OTHER
+    keyword whole defun STORAGE_TYPE_FUNCTION
+    keyword whole do KEYWORD_CONTROL
+    keyword whole eq SUPPORT_FUNCTION
+    keyword whole eql SUPPORT_FUNCTION
+    keyword whole equal SUPPORT_FUNCTION
+    keyword whole eval SUPPORT_FUNCTION
+    keyword whole format SUPPORT_FUNCTION
+    keyword whole if KEYWORD_CONTROL
+    keyword whole let* KEYWORD_OTHER
+    keyword whole let KEYWORD_OTHER
+    keyword whole list SUPPORT_FUNCTION
+    keyword whole load SUPPORT_FUNCTION
+    keyword whole make-package SUPPORT_FUNCTION
+    keyword whole mapcar SUPPORT_FUNCTION
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole null SUPPORT_FUNCTION
+    keyword whole numberp SUPPORT_FUNCTION
+    keyword whole open SUPPORT_FUNCTION
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole pprint SUPPORT_FUNCTION
+    keyword whole prin1 SUPPORT_FUNCTION
+    keyword whole princ SUPPORT_FUNCTION
+    keyword whole print SUPPORT_FUNCTION
+    keyword whole provide SUPPORT_FUNCTION
+    keyword whole read SUPPORT_FUNCTION
+    keyword whole require SUPPORT_FUNCTION
+    keyword whole set SUPPORT_FUNCTION
+    keyword whole setf KEYWORD_OTHER
+    keyword whole setq KEYWORD_OTHER
+    keyword whole slot-value SUPPORT_FUNCTION
+    keyword whole sort SUPPORT_FUNCTION
+    keyword whole stringp SUPPORT_FUNCTION
+    keyword whole terpri SUPPORT_FUNCTION
+    keyword whole write SUPPORT_FUNCTION
 
-    keyword whole lambda brightred
-    keyword whole nil brightred
-    keyword whole t brightred
+    keyword whole lambda KEYWORD_OTHER
+    keyword whole nil CONSTANT_LANGUAGE
+    keyword whole t CONSTANT_LANGUAGE
 
-    keyword #' brightmagenta
-    keyword ' brightmagenta
-    keyword , brightmagenta
+    keyword #' KEYWORD_OPERATOR
+    keyword ' KEYWORD_OPERATOR
+    keyword , PUNCTUATION_SEPARATOR
 
-    keyword ( brightcyan
-    keyword ) brightcyan
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
 
 # Keyword declarations and keywords
 
-    keyword :\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white
-    keyword &\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white
+    keyword :\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] CONSTANT_OTHER
+    keyword &\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] KEYWORD_OTHER
 
 # Comments
 
-context ; \n brown
+context ; \n COMMENT_LINE
 
 # Strings
 
-context " " green
-    keyword \\" green
-    keyword \\\\ green
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE

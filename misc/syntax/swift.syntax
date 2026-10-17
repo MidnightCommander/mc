@@ -1,123 +1,123 @@
-define keywords yellow
-define attributes yellow
-define operators brightcyan
-define comments red
-define strings green
-define escapedchars brightgreen
-define interpolation brightgreen
-define unicode brightgreen
-define brackets brightcyan
-define punctuation brightcyan
-define range brightcyan
-define semicolon brightmagenta
-define compilerstatements brightred
+define keywords KEYWORD_CONTROL
+define attributes STORAGE_MODIFIER
+define operators KEYWORD_OPERATOR
+define comments COMMENT_LINE
+define strings STRING_QUOTED_DOUBLE
+define escapedchars CONSTANT_CHARACTER_ESCAPE
+define interpolation VARIABLE_OTHER
+define unicode CONSTANT_CHARACTER_ESCAPE
+define brackets PUNCTUATION_SECTION
+define punctuation PUNCTUATION_SEPARATOR
+define range KEYWORD_OPERATOR
+define semicolon PUNCTUATION_TERMINATOR
+define compilerstatements META_PREPROCESSOR
 
 context default
-    keyword whole associatedtype keywords
-    keyword whole class keywords
-    keyword whole deinit keywords
-    keyword whole enum keywords
-    keyword whole extension keywords
-    keyword whole fileprivate keywords
-    keyword whole func keywords
-    keyword whole import keywords
-    keyword whole init keywords
-    keyword whole inout keywords
-    keyword whole internal keywords
-    keyword whole let keywords
-    keyword whole open keywords
-    keyword whole operator keywords
-    keyword whole private keywords
-    keyword whole protocol keywords
-    keyword whole public keywords
-    keyword whole rethrows keywords
-    keyword whole static keywords
-    keyword whole struct keywords
-    keyword whole subscript keywords
-    keyword whole typealias keywords
-    keyword whole var keywords
+    keyword whole associatedtype STORAGE_TYPE
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole deinit STORAGE_TYPE_FUNCTION
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole extension STORAGE_TYPE_CLASS
+    keyword whole fileprivate STORAGE_MODIFIER
+    keyword whole func STORAGE_TYPE_FUNCTION
+    keyword whole import KEYWORD_CONTROL_IMPORT
+    keyword whole init STORAGE_TYPE_FUNCTION
+    keyword whole inout STORAGE_MODIFIER
+    keyword whole internal STORAGE_MODIFIER
+    keyword whole let STORAGE_TYPE
+    keyword whole open STORAGE_MODIFIER
+    keyword whole operator STORAGE_MODIFIER
+    keyword whole private STORAGE_MODIFIER
+    keyword whole protocol STORAGE_TYPE_CLASS
+    keyword whole public STORAGE_MODIFIER
+    keyword whole rethrows STORAGE_MODIFIER
+    keyword whole static STORAGE_MODIFIER
+    keyword whole struct STORAGE_TYPE_CLASS
+    keyword whole subscript STORAGE_TYPE_FUNCTION
+    keyword whole typealias STORAGE_TYPE
+    keyword whole var STORAGE_TYPE
 
-    keyword whole break keywords
-    keyword whole case keywords
-    keyword whole continue keywords
-    keyword whole default keywords
-    keyword whole defer keywords
-    keyword whole do keywords
-    keyword whole else keywords
-    keyword whole fallthrough keywords
-    keyword whole for keywords
-    keyword whole guard keywords
-    keyword whole if keywords
-    keyword whole in keywords
-    keyword whole repeat keywords
-    keyword whole return keywords
-    keyword whole switch keywords
-    keyword whole where keywords
-    keyword whole while keywords
+    keyword whole break KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole default KEYWORD_CONTROL
+    keyword whole defer KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole fallthrough KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole guard KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole in KEYWORD_CONTROL
+    keyword whole repeat KEYWORD_CONTROL
+    keyword whole return KEYWORD_CONTROL
+    keyword whole switch KEYWORD_CONTROL
+    keyword whole where KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
 
-    keyword whole as keywords
-    keyword whole catch keywords
-    keyword whole false keywords
-    keyword whole is keywords
-    keyword whole nil keywords
-    keyword whole self keywords
-    keyword whole Self keywords
-    keyword whole super keywords
-    keyword whole throws keywords
-    keyword whole throw keywords
-    keyword whole true keywords
-    keyword whole try keywords
+    keyword whole as KEYWORD_OPERATOR_WORD
+    keyword whole catch KEYWORD_CONTROL
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole is KEYWORD_OPERATOR_WORD
+    keyword whole nil CONSTANT_LANGUAGE
+    keyword whole self VARIABLE_LANGUAGE
+    keyword whole Self VARIABLE_LANGUAGE
+    keyword whole super VARIABLE_LANGUAGE
+    keyword whole throws STORAGE_MODIFIER
+    keyword whole throw KEYWORD_CONTROL
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole try KEYWORD_CONTROL
 
-    keyword whole associativity keywords
-    keyword whole convenience keywords
-    keyword whole didSet keywords
-    keyword whole dynamic keywords
-    keyword whole final keywords
-    keyword whole get keywords
-    keyword whole indirect keywords
-    keyword whole infix keywords
-    keyword whole lazy keywords
-    keyword whole left keywords
-    keyword whole mutating keywords
-    keyword whole none keywords
-    keyword whole nonmutating keywords
-    keyword whole optional keywords
-    keyword whole override keywords
-    keyword whole postfix keywords
-    keyword whole precedence keywords
-    keyword whole prefix keywords
-    keyword whole Protocol keywords
-    keyword whole required keywords
-    keyword whole right keywords
-    keyword whole set keywords
-    keyword whole Type keywords
-    keyword whole unowned keywords
-    keyword whole weak keywords
-    keyword whole willSet keywords
+    keyword whole associativity KEYWORD_OTHER_RESERVED
+    keyword whole convenience STORAGE_MODIFIER
+    keyword whole didSet KEYWORD_OTHER_RESERVED
+    keyword whole dynamic STORAGE_MODIFIER
+    keyword whole final STORAGE_MODIFIER
+    keyword whole get KEYWORD_OTHER_RESERVED
+    keyword whole indirect STORAGE_MODIFIER
+    keyword whole infix STORAGE_MODIFIER
+    keyword whole lazy STORAGE_MODIFIER
+    keyword whole left KEYWORD_OTHER_RESERVED
+    keyword whole mutating STORAGE_MODIFIER
+    keyword whole none KEYWORD_OTHER_RESERVED
+    keyword whole nonmutating STORAGE_MODIFIER
+    keyword whole optional STORAGE_MODIFIER
+    keyword whole override STORAGE_MODIFIER
+    keyword whole postfix STORAGE_MODIFIER
+    keyword whole precedence KEYWORD_OTHER_RESERVED
+    keyword whole prefix STORAGE_MODIFIER
+    keyword whole Protocol KEYWORD_OTHER_RESERVED
+    keyword whole required STORAGE_MODIFIER
+    keyword whole right KEYWORD_OTHER_RESERVED
+    keyword whole set KEYWORD_OTHER_RESERVED
+    keyword whole Type KEYWORD_OTHER_RESERVED
+    keyword whole unowned STORAGE_MODIFIER
+    keyword whole weak STORAGE_MODIFIER
+    keyword whole willSet KEYWORD_OTHER_RESERVED
 
-    keyword whole Any keywords
-    keyword whole Bool keywords
-    keyword whole Double keywords
-    keyword whole Float keywords
-    keyword whole Character keywords
-    keyword whole Int keywords
-    keyword whole Int16 keywords
-    keyword whole Int32 keywords
-    keyword whole Int64 keywords
-    keyword whole Int8 keywords
-    keyword whole String keywords
-    keyword whole UInt keywords
-    keyword whole UInt16 keywords
-    keyword whole UInt32 keywords
-    keyword whole UInt64 keywords
-    keyword whole UInt8 keywords
+    keyword whole Any SUPPORT_TYPE
+    keyword whole Bool STORAGE_TYPE_PRIMITIVE
+    keyword whole Double STORAGE_TYPE_PRIMITIVE
+    keyword whole Float STORAGE_TYPE_PRIMITIVE
+    keyword whole Character SUPPORT_TYPE
+    keyword whole Int STORAGE_TYPE_PRIMITIVE
+    keyword whole Int16 STORAGE_TYPE_PRIMITIVE
+    keyword whole Int32 STORAGE_TYPE_PRIMITIVE
+    keyword whole Int64 STORAGE_TYPE_PRIMITIVE
+    keyword whole Int8 STORAGE_TYPE_PRIMITIVE
+    keyword whole String SUPPORT_TYPE
+    keyword whole UInt STORAGE_TYPE_PRIMITIVE
+    keyword whole UInt16 STORAGE_TYPE_PRIMITIVE
+    keyword whole UInt32 STORAGE_TYPE_PRIMITIVE
+    keyword whole UInt64 STORAGE_TYPE_PRIMITIVE
+    keyword whole UInt8 STORAGE_TYPE_PRIMITIVE
 
-    keyword whole assert keywords
-    keyword whole precondition keywords
+    keyword whole assert SUPPORT_FUNCTION
+    keyword whole precondition SUPPORT_FUNCTION
 
-    keyword // comments
-    keyword /\* comments
-    keyword *\*/ comments
+    keyword // COMMENT_LINE
+    keyword /\* COMMENT_BLOCK
+    keyword *\*/ COMMENT_BLOCK
 
     keyword > operators
     keyword < operators
@@ -141,82 +141,82 @@ context default
     keyword ) brackets
     keyword [ brackets
     keyword ] brackets
-    keyword . punctuation
-    keyword , punctuation
-    keyword : punctuation
-    keyword ? punctuation
+    keyword . PUNCTUATION_SEPARATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ? PUNCTUATION_SEPARATOR
     keyword ... range
     keyword ..< range
     keyword ; semicolon
 
-    keyword `*` base
+    keyword `*` VARIABLE_OTHER
 
-    keyword whole @available attributes
-    keyword whole @escaping attributes
-    keyword whole @unavailable attributes
-    keyword whole @introduced attributes
-    keyword whole @deprecated attributes
-    keyword whole @obsolete attributes
-    keyword whole @message attributes
-    keyword whole @main attributes
-    keyword whole @renamed attributes
-    keyword whole @discardableResult attributes
-    keyword whole @dynamicCallable attributes
-    keyword whole @dynamicMemberLookup attributes
-    keyword whole @frozen attributes
-    keyword whole @GKInspectable attributes
-    keyword whole @inlinable attributes
-    keyword whole @nonobjc attributes
-    keyword whole @NSApplicationMain attributes
-    keyword whole @NSCopying attributes
-    keyword whole @objc attributes
-    keyword whole @NSManaged attributes
-    keyword whole @objcMembers attributes
-    keyword whole @propertyWrapper attributes
-    keyword whole @requires_stored_property_inits attributes
-    keyword whole @testable attributes
-    keyword whole @UIApplicationMain attributes
-    keyword whole @usableFromInline attributes
-    keyword whole @warn_unqualified_access attributes
-    keyword whole @autoclosure attributes
-    keyword whole @convention attributes
-    keyword whole @escaping attributes
-    keyword whole @unknown attributes
+    keyword whole @available STORAGE_MODIFIER
+    keyword whole @escaping STORAGE_MODIFIER
+    keyword whole @unavailable STORAGE_MODIFIER
+    keyword whole @introduced STORAGE_MODIFIER
+    keyword whole @deprecated STORAGE_MODIFIER
+    keyword whole @obsolete STORAGE_MODIFIER
+    keyword whole @message STORAGE_MODIFIER
+    keyword whole @main STORAGE_MODIFIER
+    keyword whole @renamed STORAGE_MODIFIER
+    keyword whole @discardableResult STORAGE_MODIFIER
+    keyword whole @dynamicCallable STORAGE_MODIFIER
+    keyword whole @dynamicMemberLookup STORAGE_MODIFIER
+    keyword whole @frozen STORAGE_MODIFIER
+    keyword whole @GKInspectable STORAGE_MODIFIER
+    keyword whole @inlinable STORAGE_MODIFIER
+    keyword whole @nonobjc STORAGE_MODIFIER
+    keyword whole @NSApplicationMain STORAGE_MODIFIER
+    keyword whole @NSCopying STORAGE_MODIFIER
+    keyword whole @objc STORAGE_MODIFIER
+    keyword whole @NSManaged STORAGE_MODIFIER
+    keyword whole @objcMembers STORAGE_MODIFIER
+    keyword whole @propertyWrapper STORAGE_MODIFIER
+    keyword whole @requires_stored_property_inits STORAGE_MODIFIER
+    keyword whole @testable STORAGE_MODIFIER
+    keyword whole @UIApplicationMain STORAGE_MODIFIER
+    keyword whole @usableFromInline STORAGE_MODIFIER
+    keyword whole @warn_unqualified_access STORAGE_MODIFIER
+    keyword whole @autoclosure STORAGE_MODIFIER
+    keyword whole @convention STORAGE_MODIFIER
+    keyword whole @escaping STORAGE_MODIFIER
+    keyword whole @unknown STORAGE_MODIFIER
 
 
-context exclusive /\* \*/ comments
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
 
-context exclusive // \n comments
+context exclusive // \n COMMENT_LINE
     spellcheck
 
 
-context linestart # \n compilerstatements
+context linestart # \n META_PREPROCESSOR
 
 
-context #""" """# string
-    spellcheck
-    keyword \\(*) interpolation
-    keyword \\\{0tnr"'\\\} escapedchars
-    keyword \\u{*} unicode
-
-
-context """ """ string
+context #""" """# STRING_QUOTED_DOUBLE
     spellcheck
     keyword \\(*) interpolation
     keyword \\\{0tnr"'\\\} escapedchars
     keyword \\u{*} unicode
 
 
-context #" "# string
+context """ """ STRING_QUOTED_DOUBLE
     spellcheck
     keyword \\(*) interpolation
     keyword \\\{0tnr"'\\\} escapedchars
     keyword \\u{*} unicode
 
 
-context " " string
+context #" "# STRING_QUOTED_DOUBLE
+    spellcheck
+    keyword \\(*) interpolation
+    keyword \\\{0tnr"'\\\} escapedchars
+    keyword \\u{*} unicode
+
+
+context " " STRING_QUOTED_DOUBLE
     spellcheck
     keyword \\(*) interpolation
     keyword \\\{0tnr"'\\\} escapedchars

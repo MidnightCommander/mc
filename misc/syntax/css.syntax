@@ -1,550 +1,550 @@
 # Updated by Mikhail S. Pobolovets on 2010.09.12
 context default
 #   -moz-...
-    keyword whole \-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] lightgray
+    keyword whole \-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] SUPPORT_TYPE
 #   class
-    keyword whole \.\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] green
+    keyword whole \.\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] ENTITY_NAME_CLASS
 
-    keyword whole body white
-    keyword whole div white
-    keyword whole p white
-    keyword whole a white
-    keyword whole h1 white
-    keyword whole h2 white
-    keyword whole h3 white
-    keyword whole h4 white
-    keyword whole h5 white
-    keyword whole h6 white
-    keyword whole 'font' white
-    keyword whole br white
-    keyword whole table white
-    keyword whole td white
-    keyword whole th white
-    keyword whole tr white
-    keyword whole u white
-    keyword whole i white
-    keyword whole b white
-    keyword whole address white
-    keyword whole big white
-    keyword whole small white
-    keyword whole sub white
-    keyword whole sup white
-    keyword whole img white
-    keyword whole form white
-    keyword whole textarea white
-    keyword whole input white
-    keyword whole select white
-    keyword whole option white
-    keyword whole optgroup white
-
-
-    keyword \:\:add-line white
-    keyword \:\:add-page white
-    keyword \:\:branch white
-    keyword \:\:chunk white
-    keyword \:\:close-button white
-    keyword \:\:down-arrow white
-    keyword \:\:down-button white
-    keyword \:\:drop-down white
-    keyword \:\:float-button white
-    keyword \:\:groove white
-    keyword \:\:indicator white
-    keyword \:\:handle white
-    keyword \:\:icon white
-    keyword \:\:item white
-    keyword \:\:left-arrow white
-    keyword \:\:left-corner white
-    keyword \:\:menu-arrow white
-    keyword \:\:menu-button white
-    keyword \:\:menu-indicator white
-    keyword \:\:right-arrow white
-    keyword \:\:pane white
-    keyword \:\:right-corner white
-    keyword \:\:scroller white
-    keyword \:\:section white
-    keyword \:\:separator white
-    keyword \:\:sub-line white
-    keyword \:\:sub-page white
-    keyword \:\:tab white
-    keyword \:\:tab-bar white
-    keyword \:\:tear white
-    keyword \:\:tear-off white
-    keyword \:\:text white
-    keyword \:\:title white
-    keyword \:\:up-arrow white
-    keyword \:\:up-button white
-
-    keyword  \:active brightmagenta
-    keyword  \:after brightmagenta
-    keyword  \:visited brightmagenta
-    keyword  \:before brightmagenta
-    keyword  \:first-child brightmagenta
-    keyword  \:first-letter brightmagenta
-    keyword  \:first-line brightmagenta
-    keyword  \:focus brightmagenta
-    keyword  \:lang brightmagenta
-    keyword  \:link brightmagenta
-    keyword  \:adjoins-item brightmagenta
-    keyword  \:alternate brightmagenta
-    keyword  \:bottom brightmagenta
-    keyword  \:checked brightmagenta
-    keyword  \:closable brightmagenta
-    keyword  \:closed brightmagenta
-    keyword  \:default brightmagenta
-    keyword  \:disabled brightmagenta
-    keyword  \:editable brightmagenta
-    keyword  \:edit-focus brightmagenta
-    keyword  \:enabled brightmagenta
-    keyword  \:exclusive brightmagenta
-    keyword  \:first brightmagenta
-    keyword  \:flat brightmagenta
-    keyword  \:floatable brightmagenta
-    keyword  \:has-children brightmagenta
-    keyword  \:has-siblings brightmagenta
-    keyword  \:horizontal brightmagenta
-    keyword  \:hover brightmagenta
-    keyword  \:indeterminate brightmagenta
-    keyword  \:last brightmagenta
-    keyword  \:left brightmagenta
-    keyword  \:maximized brightmagenta
-    keyword  \:middle brightmagenta
-    keyword  \:minimized brightmagenta
-    keyword  \:movable brightmagenta
-    keyword  \:no-frame brightmagenta
-    keyword  \:non-exclusive brightmagenta
-    keyword  \:off brightmagenta
-    keyword  \:on brightmagenta
-    keyword  \:only-one brightmagenta
-    keyword  \:open brightmagenta
-    keyword  \:next-selected brightmagenta
-    keyword  \:pressed brightmagenta
-    keyword  \:previous-selected brightmagenta
-    keyword  \:read-only brightmagenta
-    keyword  \:right brightmagenta
-    keyword  \:selected brightmagenta
-    keyword  \:top brightmagenta
-    keyword  \:unchecked brightmagenta
-    keyword  \:vertical brightmagenta
-    keyword  \:window brightmagenta
-
-    keyword whole \!important brightred
-
-    keyword whole background-attachment lightgray
-    keyword whole background-color lightgray
-    keyword whole background-image lightgray
-    keyword whole background-position lightgray
-    keyword whole background-repeat lightgray
-    keyword whole background lightgray
-    keyword whole bidi-override lightgray
-    keyword whole border-bottom lightgray
-    keyword whole border-bottom-color lightgray
-    keyword whole border-bottom-style lightgray
-    keyword whole border-bottom-width lightgray
-    keyword whole border-collapse lightgray
-    keyword whole border-color lightgray
-    keyword whole border-left lightgray
-    keyword whole border-left-color lightgray
-    keyword whole border-left-style lightgray
-    keyword whole border-left-width lightgray
-    keyword whole border-right lightgray
-    keyword whole border-right-color lightgray
-    keyword whole border-right-style lightgray
-    keyword whole border-right-width lightgray
-    keyword whole border-spacing lightgray
-    keyword whole border-style lightgray
-    keyword whole border-top lightgray
-    keyword whole border-top-color lightgray
-    keyword whole border-top-style lightgray
-    keyword whole border-top-width lightgray
-    keyword whole border-width lightgray
-    keyword whole border lightgray
-    keyword whole bottom lightgray
-    keyword whole caption-side lightgray
-    keyword whole clear lightgray
-    keyword whole clip lightgray
-    keyword whole color lightgray
-    keyword whole content lightgray
-    keyword whole counter-increment lightgray
-    keyword whole cursor lightgray
-    keyword whole direction lightgray
-    keyword whole display lightgray
-    keyword whole empty-cells lightgray
-    keyword whole fixed lightgray
-    keyword whole float lightgray
-    keyword whole font-size-adjust lightgray
-    keyword whole font-stretch lightgray
-    keyword whole font-family lightgray
-    keyword whole font-size lightgray
-    keyword whole font-style lightgray
-    keyword whole font-variant lightgray
-    keyword whole font-weight lightgray
-    keyword whole font lightgray
-    keyword whole generic-family lightgray
-    keyword whole height lightgray
-    keyword whole identifier lightgray
-    keyword whole image lightgray
-    keyword whole justify lightgray
-    keyword whole left lightgray
-    keyword whole length lightgray
-    keyword whole letter-spacing lightgray
-    keyword whole line-height lightgray
-    keyword whole list-style-image lightgray
-    keyword whole list-style-position lightgray
-    keyword whole list-style-type lightgray
-    keyword whole list-style lightgray
-    keyword whole margin-left lightgray
-    keyword whole margin-top lightgray
-    keyword whole margin lightgray
-    keyword whole marker-offset lightgray
-    keyword whole max-height lightgray
-    keyword whole max-width lightgray
-    keyword whole min-height lightgray
-    keyword whole min-width lightgray
-    keyword whole nowrap lightgray
-    keyword whole outline-color lightgray
-    keyword whole outline-style lightgray
-    keyword whole outline-width lightgray
-    keyword whole outline lightgray
-    keyword whole padding-left lightgray
-    keyword whole padding-top lightgray
-    keyword whole padding lightgray
-    keyword whole position lightgray
-    keyword whole quotes lightgray
-    keyword whole right lightgray
-    keyword whole subcontrol-origin lightgray
-    keyword whole subcontrol-position lightgray
-    keyword whole table-layout lightgray
-    keyword whole text-align lightgray
-    keyword whole text-decoration lightgray
-    keyword whole text-indent lightgray
-    keyword whole text-shadow lightgray
-    keyword whole text-transform lightgray
-    keyword whole top lightgray
-    keyword whole unicode-bidi lightgray
-    keyword whole vertical-align lightgray
-    keyword whole visibility lightgray
-    keyword whole white-space lightgray
-    keyword whole width lightgray
-    keyword whole word-spacing lightgray
-    keyword whole opacity lightgray
-    keyword whole filter lightgray
-
-    keyword whole qconicalgradient brightgreen
-    keyword whole qlineargradient brightgreen
-    keyword whole qradialgradient brightgreen
-
-    keyword whole center brightgreen
-    keyword whole bold brightgreen
-    keyword whole smaller brightgreen
-    keyword whole italic brightgreen
-    keyword whole bolder brightgreen
-    keyword whole underline brightgreen
-    keyword whole absolute brightgreen
-
-    keyword whole none brightgreen
-    keyword whole auto brightgreen
-    keyword whole blink brightgreen
-    keyword whole hide brightgreen
-
-    keyword whole thin brightgreen
-    keyword whole medium brightgreen
-    keyword whole thick brightgreen
+    keyword whole body ENTITY_NAME_TAG
+    keyword whole div ENTITY_NAME_TAG
+    keyword whole p ENTITY_NAME_TAG
+    keyword whole a ENTITY_NAME_TAG
+    keyword whole h1 ENTITY_NAME_TAG
+    keyword whole h2 ENTITY_NAME_TAG
+    keyword whole h3 ENTITY_NAME_TAG
+    keyword whole h4 ENTITY_NAME_TAG
+    keyword whole h5 ENTITY_NAME_TAG
+    keyword whole h6 ENTITY_NAME_TAG
+    keyword whole 'font' STRING_QUOTED_SINGLE
+    keyword whole br ENTITY_NAME_TAG
+    keyword whole table ENTITY_NAME_TAG
+    keyword whole td ENTITY_NAME_TAG
+    keyword whole th ENTITY_NAME_TAG
+    keyword whole tr ENTITY_NAME_TAG
+    keyword whole u ENTITY_NAME_TAG
+    keyword whole i ENTITY_NAME_TAG
+    keyword whole b ENTITY_NAME_TAG
+    keyword whole address ENTITY_NAME_TAG
+    keyword whole big ENTITY_NAME_TAG
+    keyword whole small ENTITY_NAME_TAG
+    keyword whole sub ENTITY_NAME_TAG
+    keyword whole sup ENTITY_NAME_TAG
+    keyword whole img ENTITY_NAME_TAG
+    keyword whole form ENTITY_NAME_TAG
+    keyword whole textarea ENTITY_NAME_TAG
+    keyword whole input ENTITY_NAME_TAG
+    keyword whole select ENTITY_NAME_TAG
+    keyword whole option ENTITY_NAME_TAG
+    keyword whole optgroup ENTITY_NAME_TAG
 
 
-    keyword whole disc brightgreen
-    keyword whole circle brightgreen
-    keyword whole square brightgreen
-    keyword whole decimal brightgreen
-    keyword whole decimal-leading-zero brightgreen
-    keyword whole lower-roman brightgreen
-    keyword whole upper-roman brightgreen
-    keyword whole lower-alpha brightgreen
-    keyword whole upper-alpha brightgreen
-    keyword whole lower-greek brightgreen
-    keyword whole lower-latin brightgreen
-    keyword whole upper-latin brightgreen
-    keyword whole hebrew brightgreen
-    keyword whole armenian brightgreen
-    keyword whole georgian brightgreen
-    keyword whole cjk-ideographic brightgreen
-    keyword whole hiragana brightgreen
-    keyword whole katakana brightgreen
-    keyword whole hiragana-iroha brightgreen
-    keyword whole katakana-iroha brightgreen
+    keyword \:\:add-line ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:add-page ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:branch ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:chunk ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:close-button ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:down-arrow ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:down-button ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:drop-down ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:float-button ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:groove ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:indicator ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:handle ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:icon ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:item ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:left-arrow ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:left-corner ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:menu-arrow ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:menu-button ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:menu-indicator ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:right-arrow ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:pane ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:right-corner ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:scroller ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:section ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:separator ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:sub-line ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:sub-page ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:tab ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:tab-bar ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:tear ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:tear-off ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:text ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:title ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:up-arrow ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword \:\:up-button ENTITY_OTHER_PSEUDO_ELEMENT
 
-    keyword whole invert brightgreen
-    keyword whole oblique brightgreen
-    keyword whole no-close-quote brightgreen
-    keyword whole repeat-x brightgreen
-    keyword whole repeat-y brightgreen
-    keyword whole repeat brightgreen
-    keyword whole no-repeat brightgreen
-    keyword whole small-caps brightgreen
-    keyword whole transparent brightgreen
+    keyword  \:active ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:after ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword  \:visited ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:before ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword  \:first-child ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:first-letter ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword  \:first-line ENTITY_OTHER_PSEUDO_ELEMENT
+    keyword  \:focus ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:lang ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:link ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:adjoins-item ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:alternate ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:bottom ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:checked ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:closable ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:closed ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:default ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:disabled ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:editable ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:edit-focus ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:enabled ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:exclusive ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:first ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:flat ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:floatable ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:has-children ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:has-siblings ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:horizontal ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:hover ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:indeterminate ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:last ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:left ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:maximized ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:middle ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:minimized ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:movable ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:no-frame ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:non-exclusive ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:off ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:on ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:only-one ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:open ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:next-selected ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:pressed ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:previous-selected ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:read-only ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:right ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:selected ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:top ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:unchecked ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:vertical ENTITY_OTHER_PSEUDO_CLASS
+    keyword  \:window ENTITY_OTHER_PSEUDO_CLASS
 
-    keyword whole visible brightgreen
-    keyword whole hidden brightgreen
-    keyword whole dotted brightgreen
+    keyword whole \!important STORAGE_MODIFIER
 
-    keyword whole dashed brightgreen
-    keyword whole solid brightgreen
-    keyword whole double brightgreen
-    keyword whole groove brightgreen
-    keyword whole ridge brightgreen
-    keyword whole inset brightgreen
-    keyword whole outset brightgreen
+    keyword whole background-attachment SUPPORT_TYPE
+    keyword whole background-color SUPPORT_TYPE
+    keyword whole background-image SUPPORT_TYPE
+    keyword whole background-position SUPPORT_TYPE
+    keyword whole background-repeat SUPPORT_TYPE
+    keyword whole background SUPPORT_TYPE
+    keyword whole bidi-override SUPPORT_TYPE
+    keyword whole border-bottom SUPPORT_TYPE
+    keyword whole border-bottom-color SUPPORT_TYPE
+    keyword whole border-bottom-style SUPPORT_TYPE
+    keyword whole border-bottom-width SUPPORT_TYPE
+    keyword whole border-collapse SUPPORT_TYPE
+    keyword whole border-color SUPPORT_TYPE
+    keyword whole border-left SUPPORT_TYPE
+    keyword whole border-left-color SUPPORT_TYPE
+    keyword whole border-left-style SUPPORT_TYPE
+    keyword whole border-left-width SUPPORT_TYPE
+    keyword whole border-right SUPPORT_TYPE
+    keyword whole border-right-color SUPPORT_TYPE
+    keyword whole border-right-style SUPPORT_TYPE
+    keyword whole border-right-width SUPPORT_TYPE
+    keyword whole border-spacing SUPPORT_TYPE
+    keyword whole border-style SUPPORT_TYPE
+    keyword whole border-top SUPPORT_TYPE
+    keyword whole border-top-color SUPPORT_TYPE
+    keyword whole border-top-style SUPPORT_TYPE
+    keyword whole border-top-width SUPPORT_TYPE
+    keyword whole border-width SUPPORT_TYPE
+    keyword whole border SUPPORT_TYPE
+    keyword whole bottom SUPPORT_TYPE
+    keyword whole caption-side SUPPORT_TYPE
+    keyword whole clear SUPPORT_TYPE
+    keyword whole clip SUPPORT_TYPE
+    keyword whole color SUPPORT_TYPE
+    keyword whole content SUPPORT_TYPE
+    keyword whole counter-increment SUPPORT_TYPE
+    keyword whole cursor SUPPORT_TYPE
+    keyword whole direction SUPPORT_TYPE
+    keyword whole display SUPPORT_TYPE
+    keyword whole empty-cells SUPPORT_TYPE
+    keyword whole fixed SUPPORT_TYPE
+    keyword whole float SUPPORT_TYPE
+    keyword whole font-size-adjust SUPPORT_TYPE
+    keyword whole font-stretch SUPPORT_TYPE
+    keyword whole font-family SUPPORT_TYPE
+    keyword whole font-size SUPPORT_TYPE
+    keyword whole font-style SUPPORT_TYPE
+    keyword whole font-variant SUPPORT_TYPE
+    keyword whole font-weight SUPPORT_TYPE
+    keyword whole font SUPPORT_TYPE
+    keyword whole generic-family SUPPORT_TYPE
+    keyword whole height SUPPORT_TYPE
+    keyword whole identifier SUPPORT_TYPE
+    keyword whole image SUPPORT_TYPE
+    keyword whole justify SUPPORT_TYPE
+    keyword whole left SUPPORT_TYPE
+    keyword whole length SUPPORT_TYPE
+    keyword whole letter-spacing SUPPORT_TYPE
+    keyword whole line-height SUPPORT_TYPE
+    keyword whole list-style-image SUPPORT_TYPE
+    keyword whole list-style-position SUPPORT_TYPE
+    keyword whole list-style-type SUPPORT_TYPE
+    keyword whole list-style SUPPORT_TYPE
+    keyword whole margin-left SUPPORT_TYPE
+    keyword whole margin-top SUPPORT_TYPE
+    keyword whole margin SUPPORT_TYPE
+    keyword whole marker-offset SUPPORT_TYPE
+    keyword whole max-height SUPPORT_TYPE
+    keyword whole max-width SUPPORT_TYPE
+    keyword whole min-height SUPPORT_TYPE
+    keyword whole min-width SUPPORT_TYPE
+    keyword whole nowrap SUPPORT_TYPE
+    keyword whole outline-color SUPPORT_TYPE
+    keyword whole outline-style SUPPORT_TYPE
+    keyword whole outline-width SUPPORT_TYPE
+    keyword whole outline SUPPORT_TYPE
+    keyword whole padding-left SUPPORT_TYPE
+    keyword whole padding-top SUPPORT_TYPE
+    keyword whole padding SUPPORT_TYPE
+    keyword whole position SUPPORT_TYPE
+    keyword whole quotes SUPPORT_TYPE
+    keyword whole right SUPPORT_TYPE
+    keyword whole subcontrol-origin SUPPORT_TYPE
+    keyword whole subcontrol-position SUPPORT_TYPE
+    keyword whole table-layout SUPPORT_TYPE
+    keyword whole text-align SUPPORT_TYPE
+    keyword whole text-decoration SUPPORT_TYPE
+    keyword whole text-indent SUPPORT_TYPE
+    keyword whole text-shadow SUPPORT_TYPE
+    keyword whole text-transform SUPPORT_TYPE
+    keyword whole top SUPPORT_TYPE
+    keyword whole unicode-bidi SUPPORT_TYPE
+    keyword whole vertical-align SUPPORT_TYPE
+    keyword whole visibility SUPPORT_TYPE
+    keyword whole white-space SUPPORT_TYPE
+    keyword whole width SUPPORT_TYPE
+    keyword whole word-spacing SUPPORT_TYPE
+    keyword whole opacity SUPPORT_TYPE
+    keyword whole filter SUPPORT_TYPE
 
-    keyword whole crosshair brightgreen
-    keyword whole default brightgreen
-    keyword whole pointer brightgreen
-    keyword whole move brightgreen
-    keyword whole e-resize brightgreen
-    keyword whole ne-resize brightgreen
-    keyword whole nw-resize brightgreen
-    keyword whole n-resize brightgreen
-    keyword whole se-resize brightgreen
-    keyword whole sw-resize brightgreen
-    keyword whole s-resize brightgreen
-    keyword whole w-resize brightgreen
-    keyword whole text brightgreen
-    keyword whole wait brightgreen
-    keyword whole help brightgreen
+    keyword whole qconicalgradient CONSTANT_OTHER
+    keyword whole qlineargradient CONSTANT_OTHER
+    keyword whole qradialgradient CONSTANT_OTHER
 
-    keyword whole inline brightgreen
-    keyword whole block brightgreen
-    keyword whole list-item brightgreen
-    keyword whole run-in brightgreen
-    keyword whole compact brightgreen
-    keyword whole marker brightgreen
-    keyword whole inline-table brightgreen
-    keyword whole table-row-group brightgreen
-    keyword whole table-header-group brightgreen
-    keyword whole table-footer-group brightgreen
-    keyword whole table-row brightgreen
-    keyword whole table-column-group brightgreen
-    keyword whole table-column brightgreen
-    keyword whole table-cell brightgreen
-    keyword whole table-caption brightgreen
+    keyword whole center CONSTANT_OTHER
+    keyword whole bold CONSTANT_OTHER
+    keyword whole smaller CONSTANT_OTHER
+    keyword whole italic CONSTANT_OTHER
+    keyword whole bolder CONSTANT_OTHER
+    keyword whole underline CONSTANT_OTHER
+    keyword whole absolute CONSTANT_OTHER
 
-    keyword whole large brightgreen
+    keyword whole none CONSTANT_OTHER
+    keyword whole auto CONSTANT_OTHER
+    keyword whole blink CONSTANT_OTHER
+    keyword whole hide CONSTANT_OTHER
 
-    keyword whole normal brightgreen
-    keyword whole lighter brightgreen
+    keyword whole thin CONSTANT_OTHER
+    keyword whole medium CONSTANT_OTHER
+    keyword whole thick CONSTANT_OTHER
 
-    keyword whole open-quote brightgreen
-    keyword whole close-quote brightgreen
-    keyword whole no-open-quote brightgreen
 
-    keyword whole baseline brightgreen
-    keyword whole super brightgreen
-    keyword whole text-top brightgreen
-    keyword whole middle brightgreen
-    keyword whole text-bottom brightgreen
+    keyword whole disc CONSTANT_OTHER
+    keyword whole circle CONSTANT_OTHER
+    keyword whole square CONSTANT_OTHER
+    keyword whole decimal CONSTANT_OTHER
+    keyword whole decimal-leading-zero CONSTANT_OTHER
+    keyword whole lower-roman CONSTANT_OTHER
+    keyword whole upper-roman CONSTANT_OTHER
+    keyword whole lower-alpha CONSTANT_OTHER
+    keyword whole upper-alpha CONSTANT_OTHER
+    keyword whole lower-greek CONSTANT_OTHER
+    keyword whole lower-latin CONSTANT_OTHER
+    keyword whole upper-latin CONSTANT_OTHER
+    keyword whole hebrew CONSTANT_OTHER
+    keyword whole armenian CONSTANT_OTHER
+    keyword whole georgian CONSTANT_OTHER
+    keyword whole cjk-ideographic CONSTANT_OTHER
+    keyword whole hiragana CONSTANT_OTHER
+    keyword whole katakana CONSTANT_OTHER
+    keyword whole hiragana-iroha CONSTANT_OTHER
+    keyword whole katakana-iroha CONSTANT_OTHER
 
-    keyword whole collapse brightgreen
-    keyword whole separate brightgreen
+    keyword whole invert CONSTANT_OTHER
+    keyword whole oblique CONSTANT_OTHER
+    keyword whole no-close-quote CONSTANT_OTHER
+    keyword whole repeat-x CONSTANT_OTHER
+    keyword whole repeat-y CONSTANT_OTHER
+    keyword whole repeat CONSTANT_OTHER
+    keyword whole no-repeat CONSTANT_OTHER
+    keyword whole small-caps CONSTANT_OTHER
+    keyword whole transparent CONSTANT_OTHER
 
-    keyword whole capitalize brightgreen
-    keyword whole uppercase brightgreen
-    keyword whole lowercase brightgreen
+    keyword whole visible CONSTANT_OTHER
+    keyword whole hidden CONSTANT_OTHER
+    keyword whole dotted CONSTANT_OTHER
 
-    keyword whole pre brightgreen
+    keyword whole dashed CONSTANT_OTHER
+    keyword whole solid CONSTANT_OTHER
+    keyword whole double CONSTANT_OTHER
+    keyword whole groove CONSTANT_OTHER
+    keyword whole ridge CONSTANT_OTHER
+    keyword whole inset CONSTANT_OTHER
+    keyword whole outset CONSTANT_OTHER
 
-    keyword whole aliceblue brightgreen
-    keyword whole antiquewhite brightgreen
-    keyword whole aqua brightgreen
-    keyword whole aquamarine brightgreen
-    keyword whole azure brightgreen
-    keyword whole beige brightgreen
-    keyword whole bisque brightgreen
-    keyword whole black brightgreen
-    keyword whole blanchedalmond brightgreen
-    keyword whole blue brightgreen
-    keyword whole blueviolet brightgreen
-    keyword whole brown brightgreen
-    keyword whole burlywood brightgreen
-    keyword whole cadetblue brightgreen
-    keyword whole chartreuse brightgreen
-    keyword whole chocolate brightgreen
-    keyword whole coral brightgreen
-    keyword whole cornflowerblue brightgreen
-    keyword whole cornsilk brightgreen
-    keyword whole crimson brightgreen
-    keyword whole cyan brightgreen
-    keyword whole darkblue brightgreen
-    keyword whole darkcyan brightgreen
-    keyword whole darkgoldenrod brightgreen
-    keyword whole darkgray brightgreen
-    keyword whole darkgreen brightgreen
-    keyword whole darkkhaki brightgreen
-    keyword whole darkmagenta brightgreen
-    keyword whole darkolivegreen brightgreen
-    keyword whole darkorange brightgreen
-    keyword whole darkorchid brightgreen
-    keyword whole darkred brightgreen
-    keyword whole darksalmon brightgreen
-    keyword whole darkseagreen brightgreen
-    keyword whole darkslateblue brightgreen
-    keyword whole darkslategray brightgreen
-    keyword whole darkturquoise brightgreen
-    keyword whole darkviolet brightgreen
-    keyword whole deeppink brightgreen
-    keyword whole deepskyblue brightgreen
-    keyword whole dimgray brightgreen
-    keyword whole dodgerblue brightgreen
-    keyword whole feldspar brightgreen
-    keyword whole firebrick brightgreen
-    keyword whole floralwhite brightgreen
-    keyword whole forestgreen brightgreen
-    keyword whole fuchsia brightgreen
-    keyword whole gainsboro brightgreen
-    keyword whole ghostwhite brightgreen
-    keyword whole gold brightgreen
-    keyword whole goldenrod brightgreen
-    keyword whole gray brightgreen
-    keyword whole green brightgreen
-    keyword whole greenyellow brightgreen
-    keyword whole honeydew brightgreen
-    keyword whole hotpink brightgreen
-    keyword whole indianred brightgreen
-    keyword whole indigo brightgreen
-    keyword whole ivory brightgreen
-    keyword whole khaki brightgreen
-    keyword whole lavender brightgreen
-    keyword whole lavenderblush brightgreen
-    keyword whole lawngreen brightgreen
-    keyword whole lemonchiffon brightgreen
-    keyword whole lightblue brightgreen
-    keyword whole lightcoral brightgreen
-    keyword whole lightcyan brightgreen
-    keyword whole lightgoldenrodyellow brightgreen
-    keyword whole lightgray brightgreen
-    keyword whole lightgreen brightgreen
-    keyword whole lightpink brightgreen
-    keyword whole lightsalmon brightgreen
-    keyword whole lightseagreen brightgreen
-    keyword whole lightskyblue brightgreen
-    keyword whole lightslateblue brightgreen
-    keyword whole lightslategray brightgreen
-    keyword whole lightsteelblue brightgreen
-    keyword whole lightyellow brightgreen
-    keyword whole lime brightgreen
-    keyword whole limegreen brightgreen
-    keyword whole linen brightgreen
-    keyword whole magenta brightgreen
-    keyword whole maroon brightgreen
-    keyword whole mediumaquamarine brightgreen
-    keyword whole mediumblue brightgreen
-    keyword whole mediumorchid brightgreen
-    keyword whole mediumpurple brightgreen
-    keyword whole mediumseagreen brightgreen
-    keyword whole mediumslateblue brightgreen
-    keyword whole mediumspringgreen brightgreen
-    keyword whole mediumturquoise brightgreen
-    keyword whole mediumvioletred brightgreen
-    keyword whole midnightblue brightgreen
-    keyword whole mintcream brightgreen
-    keyword whole mistyrose brightgreen
-    keyword whole moccasin brightgreen
-    keyword whole navajowhite brightgreen
-    keyword whole navy brightgreen
-    keyword whole oldlace brightgreen
-    keyword whole olive brightgreen
-    keyword whole olivedrab brightgreen
-    keyword whole orange brightgreen
-    keyword whole orangered brightgreen
-    keyword whole orchid brightgreen
-    keyword whole palegoldenrod brightgreen
-    keyword whole palegreen brightgreen
-    keyword whole paleturquoise brightgreen
-    keyword whole palevioletred brightgreen
-    keyword whole papayawhip brightgreen
-    keyword whole peachpuff brightgreen
-    keyword whole peru brightgreen
-    keyword whole pink brightgreen
-    keyword whole plum brightgreen
-    keyword whole powderblue brightgreen
-    keyword whole purple brightgreen
-    keyword whole red brightgreen
-    keyword whole rosybrown brightgreen
-    keyword whole royalblue brightgreen
-    keyword whole saddlebrown brightgreen
-    keyword whole salmon brightgreen
-    keyword whole sandybrown brightgreen
-    keyword whole seagreen brightgreen
-    keyword whole seashell brightgreen
-    keyword whole sienna brightgreen
-    keyword whole silver brightgreen
-    keyword whole skyblue brightgreen
-    keyword whole slateblue brightgreen
-    keyword whole slategray brightgreen
-    keyword whole snow brightgreen
-    keyword whole springgreen brightgreen
-    keyword whole steelblue brightgreen
-    keyword whole tan brightgreen
-    keyword whole teal brightgreen
-    keyword whole thistle brightgreen
-    keyword whole tomato brightgreen
-    keyword whole turquoise brightgreen
-    keyword whole violet brightgreen
-    keyword whole violetred brightgreen
-    keyword whole wheat brightgreen
-    keyword whole white brightgreen
-    keyword whole whitesmoke brightgreen
-    keyword whole yellow brightgreen
-    keyword whole yellowgreen brightgreen
+    keyword whole crosshair CONSTANT_OTHER
+    keyword whole default CONSTANT_OTHER
+    keyword whole pointer CONSTANT_OTHER
+    keyword whole move CONSTANT_OTHER
+    keyword whole e-resize CONSTANT_OTHER
+    keyword whole ne-resize CONSTANT_OTHER
+    keyword whole nw-resize CONSTANT_OTHER
+    keyword whole n-resize CONSTANT_OTHER
+    keyword whole se-resize CONSTANT_OTHER
+    keyword whole sw-resize CONSTANT_OTHER
+    keyword whole s-resize CONSTANT_OTHER
+    keyword whole w-resize CONSTANT_OTHER
+    keyword whole text CONSTANT_OTHER
+    keyword whole wait CONSTANT_OTHER
+    keyword whole help CONSTANT_OTHER
 
-    keyword { yellow
-    keyword } yellow
+    keyword whole inline CONSTANT_OTHER
+    keyword whole block CONSTANT_OTHER
+    keyword whole list-item CONSTANT_OTHER
+    keyword whole run-in CONSTANT_OTHER
+    keyword whole compact CONSTANT_OTHER
+    keyword whole marker CONSTANT_OTHER
+    keyword whole inline-table CONSTANT_OTHER
+    keyword whole table-row-group CONSTANT_OTHER
+    keyword whole table-header-group CONSTANT_OTHER
+    keyword whole table-footer-group CONSTANT_OTHER
+    keyword whole table-row CONSTANT_OTHER
+    keyword whole table-column-group CONSTANT_OTHER
+    keyword whole table-column CONSTANT_OTHER
+    keyword whole table-cell CONSTANT_OTHER
+    keyword whole table-caption CONSTANT_OTHER
 
-    keyword /\* brown
-    keyword \*/ brown
+    keyword whole large CONSTANT_OTHER
 
-    keyword whole Arial brightgreen
-    keyword whole arial brightgreen
-    keyword whole Narrow brightgreen
-    keyword whole narrow brightgreen
-    keyword whole Trebuchet\sMS brightgreen
-    keyword whole trebuchet\sms brightgreen
-    keyword whole verdana brightgreen
-    keyword whole Verdana brightgreen
-    keyword whole sans-serif brightgreen
-    keyword whole serif brightgreen
-    keyword whole tahoma brightgreen
-    keyword whole Tahoma brightgreen
-    keyword whole Helvetica brightgreen
-    keyword whole helvetica brightgreen
+    keyword whole normal CONSTANT_OTHER
+    keyword whole lighter CONSTANT_OTHER
+
+    keyword whole open-quote CONSTANT_OTHER
+    keyword whole close-quote CONSTANT_OTHER
+    keyword whole no-open-quote CONSTANT_OTHER
+
+    keyword whole baseline CONSTANT_OTHER
+    keyword whole super CONSTANT_OTHER
+    keyword whole text-top CONSTANT_OTHER
+    keyword whole middle CONSTANT_OTHER
+    keyword whole text-bottom CONSTANT_OTHER
+
+    keyword whole collapse CONSTANT_OTHER
+    keyword whole separate CONSTANT_OTHER
+
+    keyword whole capitalize CONSTANT_OTHER
+    keyword whole uppercase CONSTANT_OTHER
+    keyword whole lowercase CONSTANT_OTHER
+
+    keyword whole pre CONSTANT_OTHER
+
+    keyword whole aliceblue CONSTANT_OTHER
+    keyword whole antiquewhite CONSTANT_OTHER
+    keyword whole aqua CONSTANT_OTHER
+    keyword whole aquamarine CONSTANT_OTHER
+    keyword whole azure CONSTANT_OTHER
+    keyword whole beige CONSTANT_OTHER
+    keyword whole bisque CONSTANT_OTHER
+    keyword whole black CONSTANT_OTHER
+    keyword whole blanchedalmond CONSTANT_OTHER
+    keyword whole blue CONSTANT_OTHER
+    keyword whole blueviolet CONSTANT_OTHER
+    keyword whole brown CONSTANT_OTHER
+    keyword whole burlywood CONSTANT_OTHER
+    keyword whole cadetblue CONSTANT_OTHER
+    keyword whole chartreuse CONSTANT_OTHER
+    keyword whole chocolate CONSTANT_OTHER
+    keyword whole coral CONSTANT_OTHER
+    keyword whole cornflowerblue CONSTANT_OTHER
+    keyword whole cornsilk CONSTANT_OTHER
+    keyword whole crimson CONSTANT_OTHER
+    keyword whole cyan CONSTANT_OTHER
+    keyword whole darkblue CONSTANT_OTHER
+    keyword whole darkcyan CONSTANT_OTHER
+    keyword whole darkgoldenrod CONSTANT_OTHER
+    keyword whole darkgray CONSTANT_OTHER
+    keyword whole darkgreen CONSTANT_OTHER
+    keyword whole darkkhaki CONSTANT_OTHER
+    keyword whole darkmagenta CONSTANT_OTHER
+    keyword whole darkolivegreen CONSTANT_OTHER
+    keyword whole darkorange CONSTANT_OTHER
+    keyword whole darkorchid CONSTANT_OTHER
+    keyword whole darkred CONSTANT_OTHER
+    keyword whole darksalmon CONSTANT_OTHER
+    keyword whole darkseagreen CONSTANT_OTHER
+    keyword whole darkslateblue CONSTANT_OTHER
+    keyword whole darkslategray CONSTANT_OTHER
+    keyword whole darkturquoise CONSTANT_OTHER
+    keyword whole darkviolet CONSTANT_OTHER
+    keyword whole deeppink CONSTANT_OTHER
+    keyword whole deepskyblue CONSTANT_OTHER
+    keyword whole dimgray CONSTANT_OTHER
+    keyword whole dodgerblue CONSTANT_OTHER
+    keyword whole feldspar CONSTANT_OTHER
+    keyword whole firebrick CONSTANT_OTHER
+    keyword whole floralwhite CONSTANT_OTHER
+    keyword whole forestgreen CONSTANT_OTHER
+    keyword whole fuchsia CONSTANT_OTHER
+    keyword whole gainsboro CONSTANT_OTHER
+    keyword whole ghostwhite CONSTANT_OTHER
+    keyword whole gold CONSTANT_OTHER
+    keyword whole goldenrod CONSTANT_OTHER
+    keyword whole gray CONSTANT_OTHER
+    keyword whole green CONSTANT_OTHER
+    keyword whole greenyellow CONSTANT_OTHER
+    keyword whole honeydew CONSTANT_OTHER
+    keyword whole hotpink CONSTANT_OTHER
+    keyword whole indianred CONSTANT_OTHER
+    keyword whole indigo CONSTANT_OTHER
+    keyword whole ivory CONSTANT_OTHER
+    keyword whole khaki CONSTANT_OTHER
+    keyword whole lavender CONSTANT_OTHER
+    keyword whole lavenderblush CONSTANT_OTHER
+    keyword whole lawngreen CONSTANT_OTHER
+    keyword whole lemonchiffon CONSTANT_OTHER
+    keyword whole lightblue CONSTANT_OTHER
+    keyword whole lightcoral CONSTANT_OTHER
+    keyword whole lightcyan CONSTANT_OTHER
+    keyword whole lightgoldenrodyellow CONSTANT_OTHER
+    keyword whole lightgray CONSTANT_OTHER
+    keyword whole lightgreen CONSTANT_OTHER
+    keyword whole lightpink CONSTANT_OTHER
+    keyword whole lightsalmon CONSTANT_OTHER
+    keyword whole lightseagreen CONSTANT_OTHER
+    keyword whole lightskyblue CONSTANT_OTHER
+    keyword whole lightslateblue CONSTANT_OTHER
+    keyword whole lightslategray CONSTANT_OTHER
+    keyword whole lightsteelblue CONSTANT_OTHER
+    keyword whole lightyellow CONSTANT_OTHER
+    keyword whole lime CONSTANT_OTHER
+    keyword whole limegreen CONSTANT_OTHER
+    keyword whole linen CONSTANT_OTHER
+    keyword whole magenta CONSTANT_OTHER
+    keyword whole maroon CONSTANT_OTHER
+    keyword whole mediumaquamarine CONSTANT_OTHER
+    keyword whole mediumblue CONSTANT_OTHER
+    keyword whole mediumorchid CONSTANT_OTHER
+    keyword whole mediumpurple CONSTANT_OTHER
+    keyword whole mediumseagreen CONSTANT_OTHER
+    keyword whole mediumslateblue CONSTANT_OTHER
+    keyword whole mediumspringgreen CONSTANT_OTHER
+    keyword whole mediumturquoise CONSTANT_OTHER
+    keyword whole mediumvioletred CONSTANT_OTHER
+    keyword whole midnightblue CONSTANT_OTHER
+    keyword whole mintcream CONSTANT_OTHER
+    keyword whole mistyrose CONSTANT_OTHER
+    keyword whole moccasin CONSTANT_OTHER
+    keyword whole navajowhite CONSTANT_OTHER
+    keyword whole navy CONSTANT_OTHER
+    keyword whole oldlace CONSTANT_OTHER
+    keyword whole olive CONSTANT_OTHER
+    keyword whole olivedrab CONSTANT_OTHER
+    keyword whole orange CONSTANT_OTHER
+    keyword whole orangered CONSTANT_OTHER
+    keyword whole orchid CONSTANT_OTHER
+    keyword whole palegoldenrod CONSTANT_OTHER
+    keyword whole palegreen CONSTANT_OTHER
+    keyword whole paleturquoise CONSTANT_OTHER
+    keyword whole palevioletred CONSTANT_OTHER
+    keyword whole papayawhip CONSTANT_OTHER
+    keyword whole peachpuff CONSTANT_OTHER
+    keyword whole peru CONSTANT_OTHER
+    keyword whole pink CONSTANT_OTHER
+    keyword whole plum CONSTANT_OTHER
+    keyword whole powderblue CONSTANT_OTHER
+    keyword whole purple CONSTANT_OTHER
+    keyword whole red CONSTANT_OTHER
+    keyword whole rosybrown CONSTANT_OTHER
+    keyword whole royalblue CONSTANT_OTHER
+    keyword whole saddlebrown CONSTANT_OTHER
+    keyword whole salmon CONSTANT_OTHER
+    keyword whole sandybrown CONSTANT_OTHER
+    keyword whole seagreen CONSTANT_OTHER
+    keyword whole seashell CONSTANT_OTHER
+    keyword whole sienna CONSTANT_OTHER
+    keyword whole silver CONSTANT_OTHER
+    keyword whole skyblue CONSTANT_OTHER
+    keyword whole slateblue CONSTANT_OTHER
+    keyword whole slategray CONSTANT_OTHER
+    keyword whole snow CONSTANT_OTHER
+    keyword whole springgreen CONSTANT_OTHER
+    keyword whole steelblue CONSTANT_OTHER
+    keyword whole tan CONSTANT_OTHER
+    keyword whole teal CONSTANT_OTHER
+    keyword whole thistle CONSTANT_OTHER
+    keyword whole tomato CONSTANT_OTHER
+    keyword whole turquoise CONSTANT_OTHER
+    keyword whole violet CONSTANT_OTHER
+    keyword whole violetred CONSTANT_OTHER
+    keyword whole wheat CONSTANT_OTHER
+    keyword whole white CONSTANT_OTHER
+    keyword whole whitesmoke CONSTANT_OTHER
+    keyword whole yellow CONSTANT_OTHER
+    keyword whole yellowgreen CONSTANT_OTHER
+
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+
+    keyword whole Arial CONSTANT_OTHER
+    keyword whole arial CONSTANT_OTHER
+    keyword whole Narrow CONSTANT_OTHER
+    keyword whole narrow CONSTANT_OTHER
+    keyword whole Trebuchet\sMS CONSTANT_OTHER
+    keyword whole trebuchet\sms CONSTANT_OTHER
+    keyword whole verdana CONSTANT_OTHER
+    keyword whole Verdana CONSTANT_OTHER
+    keyword whole sans-serif CONSTANT_OTHER
+    keyword whole serif CONSTANT_OTHER
+    keyword whole tahoma CONSTANT_OTHER
+    keyword whole Tahoma CONSTANT_OTHER
+    keyword whole Helvetica CONSTANT_OTHER
+    keyword whole helvetica CONSTANT_OTHER
 
 #   #1234BEAF
-    keyword #\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} red
+    keyword #\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_OTHER
 
-    keyword whole \[\-\.0123456789\]px brightgreen
-    keyword whole \[\-\.0123456789\]em brightgreen
-    keyword whole \[\-\.0123456789\]cm brightgreen
-    keyword whole \[\-\.0123456789\]mm brightgreen
-    keyword whole \[\-\.0123456789\]ex brightgreen
-    keyword whole \[\-\.0123456789\]pt brightgreen
-    keyword whole \[\-\.0123456789\]pc brightgreen
-    keyword whole \[\-\.0123456789\]%  brightred
+    keyword whole \[\-\.0123456789\]px CONSTANT_NUMERIC
+    keyword whole \[\-\.0123456789\]em CONSTANT_NUMERIC
+    keyword whole \[\-\.0123456789\]cm CONSTANT_NUMERIC
+    keyword whole \[\-\.0123456789\]mm CONSTANT_NUMERIC
+    keyword whole \[\-\.0123456789\]ex CONSTANT_NUMERIC
+    keyword whole \[\-\.0123456789\]pt CONSTANT_NUMERIC
+    keyword whole \[\-\.0123456789\]pc CONSTANT_NUMERIC
+    keyword whole \[\-\.0123456789\]% CONSTANT_NUMERIC
 
-    keyword whole \{0123456789\} brightgreen
-    keyword whole \.\[0123456789\] brightgreen
-    keyword whole \-\{0123456789\} brightgreen
+    keyword whole \{0123456789\} CONSTANT_NUMERIC
+    keyword whole \.\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \-\{0123456789\} CONSTANT_NUMERIC
 
-    keyword whole '.' white
+    keyword whole '.' STRING_QUOTED_SINGLE
 
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword , brightcyan
-    keyword : brightcyan
-    keyword ; brightmagenta
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive counter( ) magenta
-context exclusive counters( ) magenta
-context exclusive rgb( ) magenta
-context exclusive url( ) magenta
+context exclusive counter( ) SUPPORT_FUNCTION
+context exclusive counters( ) SUPPORT_FUNCTION
+context exclusive rgb( ) SUPPORT_FUNCTION
+context exclusive url( ) SUPPORT_FUNCTION

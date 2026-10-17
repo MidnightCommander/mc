@@ -6,397 +6,397 @@
 
 caseinsensitive
 
-context default lightgray
+context default
 
 # NASM directives
-    keyword whole BITS white
-    keyword whole SECTION white
-    keyword whole SEGMENT white
-    keyword whole ABSOLUTE white
-    keyword whole EXTERN white
-    keyword whole GLOBAL white
-    keyword whole COMMON white
-    keyword whole CPU white
+    keyword whole BITS KEYWORD_OTHER_RESERVED
+    keyword whole SECTION KEYWORD_OTHER_RESERVED
+    keyword whole SEGMENT KEYWORD_OTHER_RESERVED
+    keyword whole ABSOLUTE KEYWORD_OTHER_RESERVED
+    keyword whole EXTERN KEYWORD_OTHER_RESERVED
+    keyword whole GLOBAL KEYWORD_OTHER_RESERVED
+    keyword whole COMMON KEYWORD_OTHER_RESERVED
+    keyword whole CPU KEYWORD_OTHER_RESERVED
 
 # NASM, WASM, TASM, MASM and common modifiers
-    keyword whole ALIGN white
-    keyword whole ALIGNB white
-    keyword whole STRUC white
-    keyword whole ENDSTRUC white
-    keyword whole ISTRUC white
-    keyword whole IEND white
-    keyword whole AT white
-    keyword whole __FILE__ white
-    keyword whole __LINE__ white
-    keyword whole __NASM_VER__ white
-    keyword whole __NASM_VERSION_ID__ white
-    keyword whole __NASM_MAJOR__ white
-    keyword whole __NASM_MINOR__ white
-    keyword whole __NASM_SUBMINOR__ white
-    keyword whole __NASM_PATCHLEVEL__ white
-    keyword whole __SECT__ white
-    keyword whole STRICT white
-    keyword whole SEG white
-    keyword whole WRT white
-    keyword whole NOSPLIT white
-    keyword whole BYTE white
-    keyword whole WORD white
-    keyword whole DWORD white
-    keyword whole QWORD white
-    keyword whole TWORD white
+    keyword whole ALIGN KEYWORD_OTHER_RESERVED
+    keyword whole ALIGNB KEYWORD_OTHER_RESERVED
+    keyword whole STRUC KEYWORD_OTHER_RESERVED
+    keyword whole ENDSTRUC KEYWORD_OTHER_RESERVED
+    keyword whole ISTRUC KEYWORD_OTHER_RESERVED
+    keyword whole IEND KEYWORD_OTHER_RESERVED
+    keyword whole AT KEYWORD_OTHER_RESERVED
+    keyword whole __FILE__ CONSTANT_OTHER
+    keyword whole __LINE__ CONSTANT_OTHER
+    keyword whole __NASM_VER__ CONSTANT_OTHER
+    keyword whole __NASM_VERSION_ID__ CONSTANT_OTHER
+    keyword whole __NASM_MAJOR__ CONSTANT_OTHER
+    keyword whole __NASM_MINOR__ CONSTANT_OTHER
+    keyword whole __NASM_SUBMINOR__ CONSTANT_OTHER
+    keyword whole __NASM_PATCHLEVEL__ CONSTANT_OTHER
+    keyword whole __SECT__ CONSTANT_OTHER
+    keyword whole STRICT KEYWORD_OTHER_RESERVED
+    keyword whole SEG KEYWORD_OTHER_RESERVED
+    keyword whole WRT KEYWORD_OTHER_RESERVED
+    keyword whole NOSPLIT KEYWORD_OTHER_RESERVED
+    keyword whole BYTE STORAGE_TYPE
+    keyword whole WORD STORAGE_TYPE
+    keyword whole DWORD STORAGE_TYPE
+    keyword whole QWORD STORAGE_TYPE
+    keyword whole TWORD STORAGE_TYPE
 
 # Pseudo instructions
-    keyword whole ORG white
-    keyword whole EQU white
-    keyword whole DB white
-    keyword whole DW white
-    keyword whole DD white
-    keyword whole DQ white
-    keyword whole DT white
-    keyword whole RESB white
-    keyword whole RESW white
-    keyword whole RESD white
-    keyword whole RESQ white
-    keyword whole REST white
-    keyword whole INCBIN white
-    keyword whole TIMES white
+    keyword whole ORG KEYWORD_OTHER_RESERVED
+    keyword whole EQU KEYWORD_OTHER_RESERVED
+    keyword whole DB STORAGE_TYPE
+    keyword whole DW STORAGE_TYPE
+    keyword whole DD STORAGE_TYPE
+    keyword whole DQ STORAGE_TYPE
+    keyword whole DT STORAGE_TYPE
+    keyword whole RESB STORAGE_TYPE
+    keyword whole RESW STORAGE_TYPE
+    keyword whole RESD STORAGE_TYPE
+    keyword whole RESQ STORAGE_TYPE
+    keyword whole REST STORAGE_TYPE
+    keyword whole INCBIN KEYWORD_CONTROL
+    keyword whole TIMES KEYWORD_CONTROL
 
 # GAS specific
-    keyword whole .string white
-    keyword whole .section white
-    keyword whole .align white
-    keyword whole .type white
-    keyword whole .size white
-    keyword whole .comm white
-    keyword whole .ident white
-    keyword whole .globl white
-    keyword whole .rodata brightblue
-    keyword whole .data brightblue
-    keyword whole .text brightblue
-    keyword whole .bss brightblue
+    keyword whole .string KEYWORD_OTHER_RESERVED
+    keyword whole .section KEYWORD_OTHER_RESERVED
+    keyword whole .align KEYWORD_OTHER_RESERVED
+    keyword whole .type KEYWORD_OTHER_RESERVED
+    keyword whole .size KEYWORD_OTHER_RESERVED
+    keyword whole .comm KEYWORD_OTHER_RESERVED
+    keyword whole .ident KEYWORD_OTHER_RESERVED
+    keyword whole .globl KEYWORD_OTHER_RESERVED
+    keyword whole .rodata ENTITY_NAME_SECTION
+    keyword whole .data ENTITY_NAME_SECTION
+    keyword whole .text ENTITY_NAME_SECTION
+    keyword whole .bss ENTITY_NAME_SECTION
 
 # NASM/TASM Macroses
-    keyword whole %ifdef brightred
-    keyword whole %define brightred
-    keyword whole %else brightred
-    keyword whole %elif brightred
-    keyword whole %endif brightred
-    keyword whole %macro brightred
-    keyword whole %endmacro brightred
-    keyword whole %rep brightred
-    keyword whole %repl brightred
-    keyword whole %strlen brightred
-    keyword whole %substr brightred
-    keyword whole %arg brightred
-    keyword whole %stacksize brightred
-    keyword whole %local brightred
-    keyword whole %push brightred
-    keyword whole %pop brightred
-    keyword whole %line brightred
-    keyword whole %\! brightred
-    keyword whole %\+ brightred
+    keyword whole %ifdef META_PREPROCESSOR
+    keyword whole %define META_PREPROCESSOR
+    keyword whole %else META_PREPROCESSOR
+    keyword whole %elif META_PREPROCESSOR
+    keyword whole %endif META_PREPROCESSOR
+    keyword whole %macro META_PREPROCESSOR
+    keyword whole %endmacro META_PREPROCESSOR
+    keyword whole %rep META_PREPROCESSOR
+    keyword whole %repl META_PREPROCESSOR
+    keyword whole %strlen META_PREPROCESSOR
+    keyword whole %substr META_PREPROCESSOR
+    keyword whole %arg META_PREPROCESSOR
+    keyword whole %stacksize META_PREPROCESSOR
+    keyword whole %local META_PREPROCESSOR
+    keyword whole %push META_PREPROCESSOR
+    keyword whole %pop META_PREPROCESSOR
+    keyword whole %line META_PREPROCESSOR
+    keyword whole %\! META_PREPROCESSOR
+    keyword whole %\+ META_PREPROCESSOR
 
 # Generic 16-bit registers set
-    keyword whole %al brightmagenta
-    keyword whole %bl brightmagenta
-    keyword whole %cl brightmagenta
-    keyword whole %dl brightmagenta
-    keyword whole %ah brightmagenta
-    keyword whole %bh brightmagenta
-    keyword whole %ch brightmagenta
-    keyword whole %dh brightmagenta
-    keyword whole %ax brightmagenta
-    keyword whole %bx brightmagenta
-    keyword whole %cx brightmagenta
-    keyword whole %dx brightmagenta
-    keyword whole %si brightmagenta
-    keyword whole %di brightmagenta
-    keyword whole %bp brightmagenta
-    keyword whole %sp brightmagenta
-    keyword whole %es brightmagenta
-    keyword whole %cs brightmagenta
-    keyword whole %ds brightmagenta
+    keyword whole %al CONSTANT_OTHER
+    keyword whole %bl CONSTANT_OTHER
+    keyword whole %cl CONSTANT_OTHER
+    keyword whole %dl CONSTANT_OTHER
+    keyword whole %ah CONSTANT_OTHER
+    keyword whole %bh CONSTANT_OTHER
+    keyword whole %ch CONSTANT_OTHER
+    keyword whole %dh CONSTANT_OTHER
+    keyword whole %ax CONSTANT_OTHER
+    keyword whole %bx CONSTANT_OTHER
+    keyword whole %cx CONSTANT_OTHER
+    keyword whole %dx CONSTANT_OTHER
+    keyword whole %si CONSTANT_OTHER
+    keyword whole %di CONSTANT_OTHER
+    keyword whole %bp CONSTANT_OTHER
+    keyword whole %sp CONSTANT_OTHER
+    keyword whole %es CONSTANT_OTHER
+    keyword whole %cs CONSTANT_OTHER
+    keyword whole %ds CONSTANT_OTHER
 
-    keyword whole AL brightmagenta
-    keyword whole BL brightmagenta
-    keyword whole CL brightmagenta
-    keyword whole DL brightmagenta
-    keyword whole AH brightmagenta
-    keyword whole BH brightmagenta
-    keyword whole CH brightmagenta
-    keyword whole DH brightmagenta
-    keyword whole AX brightmagenta
-    keyword whole BX brightmagenta
-    keyword whole CX brightmagenta
-    keyword whole DX brightmagenta
-    keyword whole SI brightmagenta
-    keyword whole DI brightmagenta
-    keyword whole BP brightmagenta
-    keyword whole SP brightmagenta
-    keyword whole ES brightmagenta
-    keyword whole CS brightmagenta
-    keyword whole DS brightmagenta
+    keyword whole AL CONSTANT_OTHER
+    keyword whole BL CONSTANT_OTHER
+    keyword whole CL CONSTANT_OTHER
+    keyword whole DL CONSTANT_OTHER
+    keyword whole AH CONSTANT_OTHER
+    keyword whole BH CONSTANT_OTHER
+    keyword whole CH CONSTANT_OTHER
+    keyword whole DH CONSTANT_OTHER
+    keyword whole AX CONSTANT_OTHER
+    keyword whole BX CONSTANT_OTHER
+    keyword whole CX CONSTANT_OTHER
+    keyword whole DX CONSTANT_OTHER
+    keyword whole SI CONSTANT_OTHER
+    keyword whole DI CONSTANT_OTHER
+    keyword whole BP CONSTANT_OTHER
+    keyword whole SP CONSTANT_OTHER
+    keyword whole ES CONSTANT_OTHER
+    keyword whole CS CONSTANT_OTHER
+    keyword whole DS CONSTANT_OTHER
 
 # Generic 32-bit registers set
-    keyword whole %eax brightmagenta
-    keyword whole %ebx brightmagenta
-    keyword whole %ecx brightmagenta
-    keyword whole %edx brightmagenta
-    keyword whole %esi brightmagenta
-    keyword whole %edi brightmagenta
-    keyword whole %ebp brightmagenta
-    keyword whole %esp brightmagenta
-    keyword whole %fs brightmagenta
-    keyword whole %gs brightmagenta
+    keyword whole %eax CONSTANT_OTHER
+    keyword whole %ebx CONSTANT_OTHER
+    keyword whole %ecx CONSTANT_OTHER
+    keyword whole %edx CONSTANT_OTHER
+    keyword whole %esi CONSTANT_OTHER
+    keyword whole %edi CONSTANT_OTHER
+    keyword whole %ebp CONSTANT_OTHER
+    keyword whole %esp CONSTANT_OTHER
+    keyword whole %fs CONSTANT_OTHER
+    keyword whole %gs CONSTANT_OTHER
 
-    keyword whole EAX brightmagenta
-    keyword whole EBX brightmagenta
-    keyword whole ECX brightmagenta
-    keyword whole EDX brightmagenta
-    keyword whole ESI brightmagenta
-    keyword whole EDI brightmagenta
-    keyword whole EBP brightmagenta
-    keyword whole ESP brightmagenta
-    keyword whole FS brightmagenta
-    keyword whole GS brightmagenta
+    keyword whole EAX CONSTANT_OTHER
+    keyword whole EBX CONSTANT_OTHER
+    keyword whole ECX CONSTANT_OTHER
+    keyword whole EDX CONSTANT_OTHER
+    keyword whole ESI CONSTANT_OTHER
+    keyword whole EDI CONSTANT_OTHER
+    keyword whole EBP CONSTANT_OTHER
+    keyword whole ESP CONSTANT_OTHER
+    keyword whole FS CONSTANT_OTHER
+    keyword whole GS CONSTANT_OTHER
 
-    keyword whole CR0 magenta
-    keyword whole CR1 magenta
-    keyword whole CR2 magenta
-    keyword whole CR3 magenta
-    keyword whole DR0 magenta
-    keyword whole DR1 magenta
-    keyword whole DR3 magenta
-    keyword whole DR4 magenta
-    keyword whole DR5 magenta
-    keyword whole DR6 magenta
-    keyword whole DR7 magenta
-    keyword whole TR0 magenta
-    keyword whole TR1 magenta
-    keyword whole TR2 magenta
-    keyword whole TR3 magenta
-    keyword whole TR4 magenta
-    keyword whole TR5 magenta
-    keyword whole TR6 magenta
-    keyword whole TR7 magenta
-    keyword whole TR8 magenta
-    keyword whole TR9 magenta
-    keyword whole TR10 magenta
-    keyword whole TR11 magenta
+    keyword whole CR0 CONSTANT_OTHER
+    keyword whole CR1 CONSTANT_OTHER
+    keyword whole CR2 CONSTANT_OTHER
+    keyword whole CR3 CONSTANT_OTHER
+    keyword whole DR0 CONSTANT_OTHER
+    keyword whole DR1 CONSTANT_OTHER
+    keyword whole DR3 CONSTANT_OTHER
+    keyword whole DR4 CONSTANT_OTHER
+    keyword whole DR5 CONSTANT_OTHER
+    keyword whole DR6 CONSTANT_OTHER
+    keyword whole DR7 CONSTANT_OTHER
+    keyword whole TR0 CONSTANT_OTHER
+    keyword whole TR1 CONSTANT_OTHER
+    keyword whole TR2 CONSTANT_OTHER
+    keyword whole TR3 CONSTANT_OTHER
+    keyword whole TR4 CONSTANT_OTHER
+    keyword whole TR5 CONSTANT_OTHER
+    keyword whole TR6 CONSTANT_OTHER
+    keyword whole TR7 CONSTANT_OTHER
+    keyword whole TR8 CONSTANT_OTHER
+    keyword whole TR9 CONSTANT_OTHER
+    keyword whole TR10 CONSTANT_OTHER
+    keyword whole TR11 CONSTANT_OTHER
 
 # Generic AMD64 registers set
-    keyword whole %rax brightmagenta
-    keyword whole %rbx brightmagenta
-    keyword whole %rcx brightmagenta
-    keyword whole %rdx brightmagenta
-    keyword whole %rsi brightmagenta
-    keyword whole %rdi brightmagenta
-    keyword whole %rbp brightmagenta
-    keyword whole %rsp brightmagenta
-    keyword whole %r8 brightmagenta
-    keyword whole %r9 brightmagenta
-    keyword whole %r10 brightmagenta
-    keyword whole %r11 brightmagenta
-    keyword whole %r12 brightmagenta
-    keyword whole %r13 brightmagenta
-    keyword whole %r14 brightmagenta
-    keyword whole %r15 brightmagenta
+    keyword whole %rax CONSTANT_OTHER
+    keyword whole %rbx CONSTANT_OTHER
+    keyword whole %rcx CONSTANT_OTHER
+    keyword whole %rdx CONSTANT_OTHER
+    keyword whole %rsi CONSTANT_OTHER
+    keyword whole %rdi CONSTANT_OTHER
+    keyword whole %rbp CONSTANT_OTHER
+    keyword whole %rsp CONSTANT_OTHER
+    keyword whole %r8 CONSTANT_OTHER
+    keyword whole %r9 CONSTANT_OTHER
+    keyword whole %r10 CONSTANT_OTHER
+    keyword whole %r11 CONSTANT_OTHER
+    keyword whole %r12 CONSTANT_OTHER
+    keyword whole %r13 CONSTANT_OTHER
+    keyword whole %r14 CONSTANT_OTHER
+    keyword whole %r15 CONSTANT_OTHER
 
-    keyword whole RAX brightmagenta
-    keyword whole RBX brightmagenta
-    keyword whole RCX brightmagenta
-    keyword whole RDX brightmagenta
-    keyword whole RSI brightmagenta
-    keyword whole RDI brightmagenta
-    keyword whole RBP brightmagenta
-    keyword whole RSP brightmagenta
-    keyword whole R8 brightmagenta
-    keyword whole R9 brightmagenta
-    keyword whole R10 brightmagenta
-    keyword whole R11 brightmagenta
-    keyword whole R12 brightmagenta
-    keyword whole R13 brightmagenta
-    keyword whole R14 brightmagenta
-    keyword whole R15 brightmagenta
+    keyword whole RAX CONSTANT_OTHER
+    keyword whole RBX CONSTANT_OTHER
+    keyword whole RCX CONSTANT_OTHER
+    keyword whole RDX CONSTANT_OTHER
+    keyword whole RSI CONSTANT_OTHER
+    keyword whole RDI CONSTANT_OTHER
+    keyword whole RBP CONSTANT_OTHER
+    keyword whole RSP CONSTANT_OTHER
+    keyword whole R8 CONSTANT_OTHER
+    keyword whole R9 CONSTANT_OTHER
+    keyword whole R10 CONSTANT_OTHER
+    keyword whole R11 CONSTANT_OTHER
+    keyword whole R12 CONSTANT_OTHER
+    keyword whole R13 CONSTANT_OTHER
+    keyword whole R14 CONSTANT_OTHER
+    keyword whole R15 CONSTANT_OTHER
 
 #AMD64 32-bit registers. 64-bit mode
-    keyword whole %r8d brightmagenta
-    keyword whole %r9d brightmagenta
-    keyword whole %r10d brightmagenta
-    keyword whole %r11d brightmagenta
-    keyword whole %r12d brightmagenta
-    keyword whole %r13d brightmagenta
-    keyword whole %r14d brightmagenta
-    keyword whole %r15d brightmagenta
+    keyword whole %r8d CONSTANT_OTHER
+    keyword whole %r9d CONSTANT_OTHER
+    keyword whole %r10d CONSTANT_OTHER
+    keyword whole %r11d CONSTANT_OTHER
+    keyword whole %r12d CONSTANT_OTHER
+    keyword whole %r13d CONSTANT_OTHER
+    keyword whole %r14d CONSTANT_OTHER
+    keyword whole %r15d CONSTANT_OTHER
 
-    keyword whole R8D brightmagenta
-    keyword whole R9D brightmagenta
-    keyword whole R10D brightmagenta
-    keyword whole R11D brightmagenta
-    keyword whole R12D brightmagenta
-    keyword whole R13D brightmagenta
-    keyword whole R14D brightmagenta
-    keyword whole R15D brightmagenta
+    keyword whole R8D CONSTANT_OTHER
+    keyword whole R9D CONSTANT_OTHER
+    keyword whole R10D CONSTANT_OTHER
+    keyword whole R11D CONSTANT_OTHER
+    keyword whole R12D CONSTANT_OTHER
+    keyword whole R13D CONSTANT_OTHER
+    keyword whole R14D CONSTANT_OTHER
+    keyword whole R15D CONSTANT_OTHER
 
 #AMD64 16-bit registers. 64-bit mode
-    keyword whole %r8w brightmagenta
-    keyword whole %r9w brightmagenta
-    keyword whole %r10w brightmagenta
-    keyword whole %r11w brightmagenta
-    keyword whole %r12w brightmagenta
-    keyword whole %r13w brightmagenta
-    keyword whole %r14w brightmagenta
-    keyword whole %r15w brightmagenta
+    keyword whole %r8w CONSTANT_OTHER
+    keyword whole %r9w CONSTANT_OTHER
+    keyword whole %r10w CONSTANT_OTHER
+    keyword whole %r11w CONSTANT_OTHER
+    keyword whole %r12w CONSTANT_OTHER
+    keyword whole %r13w CONSTANT_OTHER
+    keyword whole %r14w CONSTANT_OTHER
+    keyword whole %r15w CONSTANT_OTHER
 
-    keyword whole R8W brightmagenta
-    keyword whole R9W brightmagenta
-    keyword whole R10W brightmagenta
-    keyword whole R11W brightmagenta
-    keyword whole R12W brightmagenta
-    keyword whole R13W brightmagenta
-    keyword whole R14W brightmagenta
-    keyword whole R15W brightmagenta
+    keyword whole R8W CONSTANT_OTHER
+    keyword whole R9W CONSTANT_OTHER
+    keyword whole R10W CONSTANT_OTHER
+    keyword whole R11W CONSTANT_OTHER
+    keyword whole R12W CONSTANT_OTHER
+    keyword whole R13W CONSTANT_OTHER
+    keyword whole R14W CONSTANT_OTHER
+    keyword whole R15W CONSTANT_OTHER
 
 #AMD64 8-bit registers. 64-bit mode
-    keyword whole %sil brightmagenta
-    keyword whole %dil brightmagenta
-    keyword whole %bpl brightmagenta
-    keyword whole %spl brightmagenta
-    keyword whole %r8b brightmagenta
-    keyword whole %r9b brightmagenta
-    keyword whole %r10b brightmagenta
-    keyword whole %r11b brightmagenta
-    keyword whole %r12b brightmagenta
-    keyword whole %r13b brightmagenta
-    keyword whole %r14b brightmagenta
-    keyword whole %r15b brightmagenta
+    keyword whole %sil CONSTANT_OTHER
+    keyword whole %dil CONSTANT_OTHER
+    keyword whole %bpl CONSTANT_OTHER
+    keyword whole %spl CONSTANT_OTHER
+    keyword whole %r8b CONSTANT_OTHER
+    keyword whole %r9b CONSTANT_OTHER
+    keyword whole %r10b CONSTANT_OTHER
+    keyword whole %r11b CONSTANT_OTHER
+    keyword whole %r12b CONSTANT_OTHER
+    keyword whole %r13b CONSTANT_OTHER
+    keyword whole %r14b CONSTANT_OTHER
+    keyword whole %r15b CONSTANT_OTHER
 
-    keyword whole SIL brightmagenta
-    keyword whole DIL brightmagenta
-    keyword whole BPL brightmagenta
-    keyword whole SPL brightmagenta
-    keyword whole R8B brightmagenta
-    keyword whole R9B brightmagenta
-    keyword whole R10B brightmagenta
-    keyword whole R11B brightmagenta
-    keyword whole R12B brightmagenta
-    keyword whole R13B brightmagenta
-    keyword whole R14B brightmagenta
-    keyword whole R15B brightmagenta
+    keyword whole SIL CONSTANT_OTHER
+    keyword whole DIL CONSTANT_OTHER
+    keyword whole BPL CONSTANT_OTHER
+    keyword whole SPL CONSTANT_OTHER
+    keyword whole R8B CONSTANT_OTHER
+    keyword whole R9B CONSTANT_OTHER
+    keyword whole R10B CONSTANT_OTHER
+    keyword whole R11B CONSTANT_OTHER
+    keyword whole R12B CONSTANT_OTHER
+    keyword whole R13B CONSTANT_OTHER
+    keyword whole R14B CONSTANT_OTHER
+    keyword whole R15B CONSTANT_OTHER
 
 #AMD64 System registers. 64-bit mode
-    keyword whole CR8 magenta
+    keyword whole CR8 CONSTANT_OTHER
 
 #AMD64 SSE Registers. 64-bit mode
-    keyword whole %xmm8 brightcyan
-    keyword whole %xmm9 brightcyan
-    keyword whole %xmm10 brightcyan
-    keyword whole %xmm11 brightcyan
-    keyword whole %xmm12 brightcyan
-    keyword whole %xmm13 brightcyan
-    keyword whole %xmm14 brightcyan
-    keyword whole %xmm15 brightcyan
+    keyword whole %xmm8 CONSTANT_OTHER
+    keyword whole %xmm9 CONSTANT_OTHER
+    keyword whole %xmm10 CONSTANT_OTHER
+    keyword whole %xmm11 CONSTANT_OTHER
+    keyword whole %xmm12 CONSTANT_OTHER
+    keyword whole %xmm13 CONSTANT_OTHER
+    keyword whole %xmm14 CONSTANT_OTHER
+    keyword whole %xmm15 CONSTANT_OTHER
 
-    keyword whole xmm8 brightcyan
-    keyword whole xmm9 brightcyan
-    keyword whole xmm10 brightcyan
-    keyword whole xmm11 brightcyan
-    keyword whole xmm12 brightcyan
-    keyword whole xmm13 brightcyan
-    keyword whole xmm14 brightcyan
-    keyword whole xmm15 brightcyan
+    keyword whole xmm8 CONSTANT_OTHER
+    keyword whole xmm9 CONSTANT_OTHER
+    keyword whole xmm10 CONSTANT_OTHER
+    keyword whole xmm11 CONSTANT_OTHER
+    keyword whole xmm12 CONSTANT_OTHER
+    keyword whole xmm13 CONSTANT_OTHER
+    keyword whole xmm14 CONSTANT_OTHER
+    keyword whole xmm15 CONSTANT_OTHER
 
 # FPU registers set
-    keyword whole st0 brightcyan
-    keyword whole st1 brightcyan
-    keyword whole st2 brightcyan
-    keyword whole st3 brightcyan
-    keyword whole st4 brightcyan
-    keyword whole st5 brightcyan
-    keyword whole st6 brightcyan
-    keyword whole st7 brightcyan
-    keyword whole %st0 brightcyan
-    keyword whole %st1 brightcyan
-    keyword whole %st2 brightcyan
-    keyword whole %st3 brightcyan
-    keyword whole %st4 brightcyan
-    keyword whole %st5 brightcyan
-    keyword whole %st6 brightcyan
-    keyword whole %st7 brightcyan
+    keyword whole st0 CONSTANT_OTHER
+    keyword whole st1 CONSTANT_OTHER
+    keyword whole st2 CONSTANT_OTHER
+    keyword whole st3 CONSTANT_OTHER
+    keyword whole st4 CONSTANT_OTHER
+    keyword whole st5 CONSTANT_OTHER
+    keyword whole st6 CONSTANT_OTHER
+    keyword whole st7 CONSTANT_OTHER
+    keyword whole %st0 CONSTANT_OTHER
+    keyword whole %st1 CONSTANT_OTHER
+    keyword whole %st2 CONSTANT_OTHER
+    keyword whole %st3 CONSTANT_OTHER
+    keyword whole %st4 CONSTANT_OTHER
+    keyword whole %st5 CONSTANT_OTHER
+    keyword whole %st6 CONSTANT_OTHER
+    keyword whole %st7 CONSTANT_OTHER
 
 # MMX/3DNOW registers set
-    keyword whole mm0 brightcyan
-    keyword whole mm1 brightcyan
-    keyword whole mm2 brightcyan
-    keyword whole mm3 brightcyan
-    keyword whole mm4 brightcyan
-    keyword whole mm5 brightcyan
-    keyword whole mm6 brightcyan
-    keyword whole mm7 brightcyan
-    keyword whole %mm0 brightcyan
-    keyword whole %mm1 brightcyan
-    keyword whole %mm2 brightcyan
-    keyword whole %mm3 brightcyan
-    keyword whole %mm4 brightcyan
-    keyword whole %mm5 brightcyan
-    keyword whole %mm6 brightcyan
-    keyword whole %mm7 brightcyan
+    keyword whole mm0 CONSTANT_OTHER
+    keyword whole mm1 CONSTANT_OTHER
+    keyword whole mm2 CONSTANT_OTHER
+    keyword whole mm3 CONSTANT_OTHER
+    keyword whole mm4 CONSTANT_OTHER
+    keyword whole mm5 CONSTANT_OTHER
+    keyword whole mm6 CONSTANT_OTHER
+    keyword whole mm7 CONSTANT_OTHER
+    keyword whole %mm0 CONSTANT_OTHER
+    keyword whole %mm1 CONSTANT_OTHER
+    keyword whole %mm2 CONSTANT_OTHER
+    keyword whole %mm3 CONSTANT_OTHER
+    keyword whole %mm4 CONSTANT_OTHER
+    keyword whole %mm5 CONSTANT_OTHER
+    keyword whole %mm6 CONSTANT_OTHER
+    keyword whole %mm7 CONSTANT_OTHER
 
 # SSE registers set
-    keyword whole xmm0 brightcyan
-    keyword whole xmm1 brightcyan
-    keyword whole xmm2 brightcyan
-    keyword whole xmm3 brightcyan
-    keyword whole xmm4 brightcyan
-    keyword whole xmm5 brightcyan
-    keyword whole xmm6 brightcyan
-    keyword whole xmm7 brightcyan
-    keyword whole %xmm0 brightcyan
-    keyword whole %xmm1 brightcyan
-    keyword whole %xmm2 brightcyan
-    keyword whole %xmm3 brightcyan
-    keyword whole %xmm4 brightcyan
-    keyword whole %xmm5 brightcyan
-    keyword whole %xmm6 brightcyan
-    keyword whole %xmm7 brightcyan
+    keyword whole xmm0 CONSTANT_OTHER
+    keyword whole xmm1 CONSTANT_OTHER
+    keyword whole xmm2 CONSTANT_OTHER
+    keyword whole xmm3 CONSTANT_OTHER
+    keyword whole xmm4 CONSTANT_OTHER
+    keyword whole xmm5 CONSTANT_OTHER
+    keyword whole xmm6 CONSTANT_OTHER
+    keyword whole xmm7 CONSTANT_OTHER
+    keyword whole %xmm0 CONSTANT_OTHER
+    keyword whole %xmm1 CONSTANT_OTHER
+    keyword whole %xmm2 CONSTANT_OTHER
+    keyword whole %xmm3 CONSTANT_OTHER
+    keyword whole %xmm4 CONSTANT_OTHER
+    keyword whole %xmm5 CONSTANT_OTHER
+    keyword whole %xmm6 CONSTANT_OTHER
+    keyword whole %xmm7 CONSTANT_OTHER
 
 # Common symbols
-    keyword ; brown
-    keyword ! brown
-    keyword /\* brown
-    keyword \*/ brown
-    keyword [ white
-    keyword ] white
-    keyword , white
-    keyword \+ white
-    keyword - white
-    keyword . white
-    keyword ( white
-    keyword ) white
-    keyword : white
-    keyword @ white
-    keyword >> white
-    keyword << white
-    keyword % white
-    keyword \\ white
-    keyword / white
-    keyword // white
-    keyword ~ white
-    keyword ^ white
-    keyword & white
-    keyword \* white
-    keyword | white
-    keyword $ brightgreen
-    keyword $$ brightgreen
-    keyword %% cyan
+    keyword ; COMMENT_LINE
+    keyword ! COMMENT_LINE
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword . KEYWORD_OPERATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword : PUNCTUATION_SEPARATOR
+    keyword @ KEYWORD_OPERATOR
+    keyword >> KEYWORD_OPERATOR
+    keyword << KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword \\ KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword // KEYWORD_OPERATOR
+    keyword ~ KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword & KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword $ CONSTANT_OTHER
+    keyword $$ CONSTANT_OTHER
+    keyword %% KEYWORD_OPERATOR
 
-context " " green
-context ' ' brightgreen
-context exclusive ; \n brown
+context " " STRING_QUOTED_DOUBLE
+context ' ' STRING_QUOTED_SINGLE
+context exclusive ; \n COMMENT_LINE
     spellcheck
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive ! \n brown
+context exclusive ! \n COMMENT_LINE
     spellcheck

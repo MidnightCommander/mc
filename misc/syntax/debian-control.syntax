@@ -1,23 +1,23 @@
 context default
-    keyword linestart Source brightmagenta/20
-    keyword linestart Section brightmagenta/20
-    keyword linestart Priority brightmagenta/20
-    keyword linestart Maintainer brightmagenta/20
-    keyword linestart Standards-Version brightmagenta/20
-    keyword linestart Package green/6
-    keyword linestart Architecture green/6
-    keyword linestart Depends green/6
-    keyword linestart Recommends green/6
-    keyword linestart Suggests green/6
-    keyword linestart Conflicts green/6
-    keyword linestart Replaces green/6
-    keyword linestart Provides green/6
-    keyword linestart Pre-Depends green/6
-    keyword linestart Build-Depends green/6
-    keyword linestart Build-Depends-Indep green/6
-    keyword linestart Build-Conflicts green/6
-    keyword linestart Build-Conflicts-Indep green/6
-    keyword linestart Description green/6
-    keyword <*@*> brightred/19
+    keyword linestart Source ENTITY_NAME_TAG
+    keyword linestart Section ENTITY_NAME_TAG
+    keyword linestart Priority ENTITY_NAME_TAG
+    keyword linestart Maintainer ENTITY_NAME_TAG
+    keyword linestart Standards-Version ENTITY_NAME_TAG
+    keyword linestart Package ENTITY_NAME_TAG
+    keyword linestart Architecture ENTITY_NAME_TAG
+    keyword linestart Depends ENTITY_NAME_TAG
+    keyword linestart Recommends ENTITY_NAME_TAG
+    keyword linestart Suggests ENTITY_NAME_TAG
+    keyword linestart Conflicts ENTITY_NAME_TAG
+    keyword linestart Replaces ENTITY_NAME_TAG
+    keyword linestart Provides ENTITY_NAME_TAG
+    keyword linestart Pre-Depends ENTITY_NAME_TAG
+    keyword linestart Build-Depends ENTITY_NAME_TAG
+    keyword linestart Build-Depends-Indep ENTITY_NAME_TAG
+    keyword linestart Build-Conflicts ENTITY_NAME_TAG
+    keyword linestart Build-Conflicts-Indep ENTITY_NAME_TAG
+    keyword linestart Description ENTITY_NAME_TAG
+    keyword <*@*> CONSTANT_OTHER
 
-context linestart \s \n brown/22
+context linestart \s \n

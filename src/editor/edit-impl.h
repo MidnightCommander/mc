@@ -214,6 +214,7 @@ MC_MOCKABLE void edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *t
 void edit_free_syntax_rules (WEdit *edit);
 MC_MOCKABLE int edit_get_syntax_color (WEdit *edit, off_t byte_index);
 void edit_syntax_dialog (WEdit *edit);
+void edit_syntax_scheme_dialog (WEdit *edit);
 
 void book_mark_insert (WEdit *edit, long line, int c);
 gboolean book_mark_query_color (WEdit *edit, long line, int c);

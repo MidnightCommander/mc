@@ -1,0 +1,55 @@
+Color schemes for scope tokens in mcedit syntax files
+
+These .sublime-color-scheme files come from third-party projects. Each is
+distributed under the MIT license; the copyright notices and the license
+text are reproduced below as that license requires.
+
+  ayu-dark, ayu-light, ayu-mirage
+      https://github.com/dempfi/ayu
+      Copyright (c) 2016 Ike Kurghinyan (Ike Ku)
+
+  catppuccin-frappe, catppuccin-latte, catppuccin-macchiato, catppuccin-mocha
+      https://github.com/catppuccin/sublime-text
+      Copyright (c) 2021 Catppuccin
+
+  dracula
+      https://github.com/dracula/sublime (palette: https://draculatheme.com)
+      Copyright (c) 2013-present Dracula Theme
+
+  gruvbox
+      https://github.com/Briles/gruvbox
+      Copyright (c) 2016 Brian Reilly
+
+  nord
+      https://github.com/nordtheme/sublime-text
+      Copyright (c) 2016-present Sven Greb <development@svengreb.de> (https://www.svengreb.de)
+
+  rose-pine
+      https://github.com/rose-pine/sublime-text
+      Copyright (c) Rosé Pine
+
+  solarized-dark, solarized-light
+      https://github.com/braver/Solarized
+      Copyright (c) 2016 Koen Lageveen
+
+-------------------------------------------------------------------------------
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

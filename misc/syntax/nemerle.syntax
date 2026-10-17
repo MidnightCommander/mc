@@ -29,141 +29,141 @@
 # Adapted from java.syntax by Jacek Sliwerski.
 
 context default
-    keyword whole abstract yellow
-    keyword whole and yellow
-    keyword whole array yellow
-    keyword whole as yellow
-    keyword whole base yellow
-    keyword whole bool yellow
-    keyword whole catch yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole def yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extends yellow
-    keyword whole extern yellow
-    keyword whole false yellow
-    keyword whole finally yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole foreach yellow
-    keyword whole fun yellow
-    keyword whole if yellow
-    keyword whole implements yellow
-    keyword whole in yellow
-    keyword whole int yellow
-    keyword whole interface yellow
-    keyword whole internal yellow
-    keyword whole list yellow
-    keyword whole macro yellow
-    keyword whole match yellow
-    keyword whole module yellow
-    keyword whole mutable yellow
-    keyword whole namespace yellow
-    keyword whole new yellow
-    keyword whole null yellow
-    keyword whole object yellow
-    keyword whole option yellow
-    keyword whole out yellow
-    keyword whole override yellow
-    keyword whole params yellow
-    keyword whole private yellow
-    keyword whole protected yellow
-    keyword whole public yellow
-    keyword whole ref yellow
-    keyword whole sealed yellow
-    keyword whole static yellow
-    keyword whole string yellow
-    keyword whole syntax yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole true yellow
-    keyword whole try yellow
-    keyword whole tymatch yellow
-    keyword whole type yellow
-    keyword whole typeof yellow
-    keyword whole unless yellow
-    keyword whole using yellow
-    keyword whole variant yellow
-    keyword whole virtual yellow
-    keyword whole void yellow
-    keyword whole when yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole with yellow
+    keyword whole abstract STORAGE_MODIFIER
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole array SUPPORT_TYPE
+    keyword whole as KEYWORD_OPERATOR_WORD
+    keyword whole base VARIABLE_LANGUAGE
+    keyword whole bool STORAGE_TYPE_PRIMITIVE
+    keyword whole catch KEYWORD_CONTROL
+    keyword whole const STORAGE_MODIFIER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole def STORAGE_TYPE_FUNCTION
+    keyword whole else KEYWORD_CONTROL
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole extends KEYWORD_OTHER
+    keyword whole extern STORAGE_MODIFIER
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole finally KEYWORD_CONTROL
+    keyword whole float STORAGE_TYPE_PRIMITIVE
+    keyword whole for KEYWORD_CONTROL
+    keyword whole foreach KEYWORD_CONTROL
+    keyword whole fun STORAGE_TYPE_FUNCTION
+    keyword whole if KEYWORD_CONTROL
+    keyword whole implements KEYWORD_OTHER
+    keyword whole in KEYWORD_OPERATOR_WORD
+    keyword whole int STORAGE_TYPE_PRIMITIVE
+    keyword whole interface STORAGE_TYPE_CLASS
+    keyword whole internal STORAGE_MODIFIER
+    keyword whole list SUPPORT_TYPE
+    keyword whole macro KEYWORD_OTHER_RESERVED
+    keyword whole match KEYWORD_CONTROL
+    keyword whole module KEYWORD_CONTROL_IMPORT
+    keyword whole mutable STORAGE_MODIFIER
+    keyword whole namespace KEYWORD_OTHER_RESERVED
+    keyword whole new KEYWORD_OTHER_NEW
+    keyword whole null CONSTANT_LANGUAGE
+    keyword whole object SUPPORT_TYPE
+    keyword whole option SUPPORT_TYPE
+    keyword whole out STORAGE_MODIFIER
+    keyword whole override STORAGE_MODIFIER
+    keyword whole params KEYWORD_OTHER_RESERVED
+    keyword whole private STORAGE_MODIFIER
+    keyword whole protected STORAGE_MODIFIER
+    keyword whole public STORAGE_MODIFIER
+    keyword whole ref STORAGE_MODIFIER
+    keyword whole sealed STORAGE_MODIFIER
+    keyword whole static STORAGE_MODIFIER
+    keyword whole string STORAGE_TYPE_PRIMITIVE
+    keyword whole syntax KEYWORD_OTHER_RESERVED
+    keyword whole this VARIABLE_LANGUAGE
+    keyword whole throw KEYWORD_CONTROL
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole try KEYWORD_CONTROL
+    keyword whole tymatch KEYWORD_OTHER_RESERVED
+    keyword whole type STORAGE_TYPE
+    keyword whole typeof KEYWORD_OPERATOR_WORD
+    keyword whole unless KEYWORD_CONTROL
+    keyword whole using KEYWORD_CONTROL_IMPORT
+    keyword whole variant STORAGE_TYPE_CLASS
+    keyword whole virtual STORAGE_MODIFIER
+    keyword whole void STORAGE_TYPE_PRIMITIVE
+    keyword whole when KEYWORD_CONTROL
+    keyword whole where KEYWORD_OTHER
+    keyword whole while KEYWORD_CONTROL
+    keyword whole with KEYWORD_CONTROL
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword // COMMENT_LINE
 
-    keyword '\\\{"abtnvfr\}' brightgreen
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
-    keyword '\\'' brightgreen
-    keyword '\\\\' brightgreen
-    keyword '\\0' brightgreen
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+    keyword '\\\{"abtnvfr\}' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\'' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\\\' CONSTANT_CHARACTER_ESCAPE
+    keyword '\\0' CONSTANT_CHARACTER_ESCAPE
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' CONSTANT_CHARACTER
 
 
-    keyword %&& brightcyan
-    keyword || brightcyan
-    keyword && brightcyan
-    keyword %| brightcyan
-    keyword %& brightcyan
-    keyword %^ brightcyan
-    keyword :> brightcyan
-    keyword <[ brightcyan
-    keyword ]> brightcyan
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword : brightcyan
-    keyword ? brightcyan
-    keyword | brightcyan
-    keyword ~ brightcyan
-    keyword ! brightcyan
-    keyword ; brightmagenta
+    keyword %&& KEYWORD_OPERATOR
+    keyword || KEYWORD_OPERATOR
+    keyword && KEYWORD_OPERATOR
+    keyword %| KEYWORD_OPERATOR
+    keyword %& KEYWORD_OPERATOR
+    keyword %^ KEYWORD_OPERATOR
+    keyword :> KEYWORD_OPERATOR
+    keyword <[ PUNCTUATION_SECTION
+    keyword ]> PUNCTUATION_SECTION
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword != KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ? PUNCTUATION_SEPARATOR
+    keyword | KEYWORD_OPERATOR
+    keyword ~ KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
+    keyword ; PUNCTUATION_TERMINATOR
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
-    keyword "+" red
-    keyword <+> red
+context linestart # \n META_PREPROCESSOR
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword /\**\*/ COMMENT_BLOCK
+    keyword //*\n COMMENT_LINE
+    keyword "+" STRING_QUOTED_OTHER
+    keyword <+> STRING_QUOTED_OTHER
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword $\[().abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\*\] brightgreen
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword $\[().abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\*\] VARIABLE_OTHER
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword %p CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

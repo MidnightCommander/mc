@@ -3,214 +3,214 @@
 
 context default
 
-    keyword whole linestart create yellow
-    keyword whole linestart config yellow
-    keyword whole linestart delete yellow
-    keyword whole linestart enable yellow
-    keyword whole linestart disable yellow
-    keyword whole linestart save yellow
-    keyword whole linestart logout yellow
-    keyword whole linestart reset\sconfig brightred
+    keyword whole linestart create KEYWORD_OTHER_RESERVED
+    keyword whole linestart config KEYWORD_OTHER_RESERVED
+    keyword whole linestart delete KEYWORD_OTHER_RESERVED
+    keyword whole linestart enable KEYWORD_OTHER_RESERVED
+    keyword whole linestart disable KEYWORD_OTHER_RESERVED
+    keyword whole linestart save KEYWORD_OTHER_RESERVED
+    keyword whole linestart logout KEYWORD_OTHER_RESERVED
+    keyword whole linestart reset\sconfig KEYWORD_OTHER_RESERVED
 
-    keyword whole permit brightgreen
-    keyword whole enable brightgreen
-    keyword whole disable brightred
-    keyword whole delete brightred
-    keyword whole deny brightred
-    keyword whole drop brightred
+    keyword whole permit KEYWORD_OTHER_RESERVED
+    keyword whole enable KEYWORD_OTHER_RESERVED
+    keyword whole disable KEYWORD_OTHER_RESERVED
+    keyword whole delete KEYWORD_OTHER_RESERVED
+    keyword whole deny KEYWORD_OTHER_RESERVED
+    keyword whole drop KEYWORD_OTHER_RESERVED
 
-    keyword whole authen_enable brightcyan
-    keyword whole authen\sapplication brightcyan
-    keyword whole authen\sparameter brightcyan
-    keyword whole authen\senable_admin brightcyan
-    keyword whole authen_policy brightcyan
-    keyword whole authen_login brightcyan
+    keyword whole authen_enable KEYWORD_OTHER_RESERVED
+    keyword whole authen\sapplication KEYWORD_OTHER_RESERVED
+    keyword whole authen\sparameter KEYWORD_OTHER_RESERVED
+    keyword whole authen\senable_admin KEYWORD_OTHER_RESERVED
+    keyword whole authen_policy KEYWORD_OTHER_RESERVED
+    keyword whole authen_login KEYWORD_OTHER_RESERVED
 
-    keyword whole snmp\ssystem_name brightcyan
-    keyword whole snmp\ssystem_location brightcyan
-    keyword whole snmp\ssystem_contact brightcyan
-    keyword whole snmp\scommunity brightcyan
-    keyword whole snmp\suser brightcyan
-    keyword whole snmp\sgroup brightcyan
-    keyword whole snmp\sview brightcyan
-    keyword whole snmp\sengineID brightcyan
-    keyword whole snmp brightcyan
+    keyword whole snmp\ssystem_name KEYWORD_OTHER_RESERVED
+    keyword whole snmp\ssystem_location KEYWORD_OTHER_RESERVED
+    keyword whole snmp\ssystem_contact KEYWORD_OTHER_RESERVED
+    keyword whole snmp\scommunity KEYWORD_OTHER_RESERVED
+    keyword whole snmp\suser KEYWORD_OTHER_RESERVED
+    keyword whole snmp\sgroup KEYWORD_OTHER_RESERVED
+    keyword whole snmp\sview KEYWORD_OTHER_RESERVED
+    keyword whole snmp\sengineID KEYWORD_OTHER_RESERVED
+    keyword whole snmp KEYWORD_OTHER_RESERVED
 
-    keyword whole vlan brightcyan
-    keyword whole gvrp brightcyan
-    keyword whole lldp brightcyan
-    keyword whole stp brightcyan
-    keyword whole double_vlan brightcyan
-    keyword whole clipaging brightcyan
-    keyword whole hol_prevention brightcyan
-    keyword whole ssl\sciphersuite brightcyan
-    keyword whole ssl\scachetimeout brightcyan
-    keyword whole jumbo_frame brightcyan
-    keyword whole pvid\sauto_assign brightcyan
-    keyword whole qinq brightcyan
-    keyword whole rspan brightcyan
-    keyword whole filter\sdhcp_server brightcyan
-    keyword whole bpdu_tunnel brightcyan
-    keyword whole greeting_message brightcyan
-    keyword whole ssh\salgorithm brightcyan
-    keyword whole ssh\sauthmode brightcyan
-    keyword whole ssh\suser brightcyan
-    keyword whole ipif_mac_mapping brightcyan
-    keyword whole mac_based_access_control brightcyan
-    keyword whole ipv6\snd brightcyan
-    keyword whole wac\smethod brightcyan
-    keyword whole wac brightcyan
-    keyword whole route\spreference brightcyan
-    keyword whole ecmp\salgorithm brightcyan
-    keyword whole ecmp\sospf brightcyan
-    keyword whole igmp brightcyan
-    keyword whole pim brightcyan
-    keyword whole dvmrp brightcyan
-    keyword whole rip brightcyan
-    keyword whole ospf brightcyan
-    keyword whole dnsr brightcyan
-    keyword whole dhcp_server brightcyan
-    keyword whole dhcp brightcyan
-    keyword whole option_82 brightcyan
-    keyword whole option_60 brightcyan
-    keyword whole option_61 brightcyan
-    keyword whole vrrp brightcyan
-    keyword whole autoconfig brightcyan
-    keyword whole lacp_port brightcyan
-    keyword whole serial_port brightcyan
-    keyword whole terminal_line brightcyan
-    keyword whole port_security brightcyan
-    keyword whole rmon brightcyan
-    keyword whole password\sencryption brightcyan
-    keyword whole traffic\strap brightcyan
-    keyword whole traffic\scontrol brightcyan
-    keyword whole traffic\scontrol_trap brightcyan
-    keyword whole loopdetect brightcyan
-    keyword whole sim brightcyan
-    keyword whole system_severity brightcyan
-    keyword whole scheduling brightcyan
-    keyword whole fdb brightcyan
-    keyword whole ssh brightcyan
-    keyword whole ssl brightcyan
-    keyword whole safeguard_engine brightcyan
-    keyword whole time_zone brightcyan
-    keyword whole dst brightcyan
-    keyword whole igmp_snooping brightcyan
-    keyword whole multicast_range brightcyan
-    keyword whole limited_multicast_addr brightcyan
-    keyword whole arp_aging brightcyan
-    keyword whole gratuitous_arp brightcyan
-    keyword whole command_prompt brightcyan
-    keyword whole iproute brightcyan
-    keyword whole time brightcyan
-    keyword whole sntp brightcyan
-    keyword whole multicast brightcyan
-    keyword whole arpentry brightcyan
-    keyword whole address_binding brightcyan
-    keyword whole dhcp_relay brightcyan
-    keyword whole dhcp_local_relay brightcyan
-    keyword whole traffic_segmentation brightcyan
-    keyword whole account brightcyan
-    keyword whole syslog brightcyan
-    keyword whole 802.1x brightcyan
-    keyword whole 802.1p brightcyan
-    keyword whole ipif brightcyan
-    keyword whole mirror brightcyan
-    keyword whole policy_route brightcyan
-    keyword whole asymmetric_vlan brightcyan
-    keyword whole bandwidth_control brightcyan
-    keyword whole scheduling_mechanism brightcyan
-    keyword whole log_save_timing brightcyan
-    keyword whole mac_notification brightcyan
-    keyword whole link_aggregation brightcyan
-    keyword whole cpu_interface_filtering brightcyan
+    keyword whole vlan KEYWORD_OTHER_RESERVED
+    keyword whole gvrp KEYWORD_OTHER_RESERVED
+    keyword whole lldp KEYWORD_OTHER_RESERVED
+    keyword whole stp KEYWORD_OTHER_RESERVED
+    keyword whole double_vlan KEYWORD_OTHER_RESERVED
+    keyword whole clipaging KEYWORD_OTHER_RESERVED
+    keyword whole hol_prevention KEYWORD_OTHER_RESERVED
+    keyword whole ssl\sciphersuite KEYWORD_OTHER_RESERVED
+    keyword whole ssl\scachetimeout KEYWORD_OTHER_RESERVED
+    keyword whole jumbo_frame KEYWORD_OTHER_RESERVED
+    keyword whole pvid\sauto_assign KEYWORD_OTHER_RESERVED
+    keyword whole qinq KEYWORD_OTHER_RESERVED
+    keyword whole rspan KEYWORD_OTHER_RESERVED
+    keyword whole filter\sdhcp_server KEYWORD_OTHER_RESERVED
+    keyword whole bpdu_tunnel KEYWORD_OTHER_RESERVED
+    keyword whole greeting_message KEYWORD_OTHER_RESERVED
+    keyword whole ssh\salgorithm KEYWORD_OTHER_RESERVED
+    keyword whole ssh\sauthmode KEYWORD_OTHER_RESERVED
+    keyword whole ssh\suser KEYWORD_OTHER_RESERVED
+    keyword whole ipif_mac_mapping KEYWORD_OTHER_RESERVED
+    keyword whole mac_based_access_control KEYWORD_OTHER_RESERVED
+    keyword whole ipv6\snd KEYWORD_OTHER_RESERVED
+    keyword whole wac\smethod KEYWORD_OTHER_RESERVED
+    keyword whole wac KEYWORD_OTHER_RESERVED
+    keyword whole route\spreference KEYWORD_OTHER_RESERVED
+    keyword whole ecmp\salgorithm KEYWORD_OTHER_RESERVED
+    keyword whole ecmp\sospf KEYWORD_OTHER_RESERVED
+    keyword whole igmp KEYWORD_OTHER_RESERVED
+    keyword whole pim KEYWORD_OTHER_RESERVED
+    keyword whole dvmrp KEYWORD_OTHER_RESERVED
+    keyword whole rip KEYWORD_OTHER_RESERVED
+    keyword whole ospf KEYWORD_OTHER_RESERVED
+    keyword whole dnsr KEYWORD_OTHER_RESERVED
+    keyword whole dhcp_server KEYWORD_OTHER_RESERVED
+    keyword whole dhcp KEYWORD_OTHER_RESERVED
+    keyword whole option_82 KEYWORD_OTHER_RESERVED
+    keyword whole option_60 KEYWORD_OTHER_RESERVED
+    keyword whole option_61 KEYWORD_OTHER_RESERVED
+    keyword whole vrrp KEYWORD_OTHER_RESERVED
+    keyword whole autoconfig KEYWORD_OTHER_RESERVED
+    keyword whole lacp_port KEYWORD_OTHER_RESERVED
+    keyword whole serial_port KEYWORD_OTHER_RESERVED
+    keyword whole terminal_line KEYWORD_OTHER_RESERVED
+    keyword whole port_security KEYWORD_OTHER_RESERVED
+    keyword whole rmon KEYWORD_OTHER_RESERVED
+    keyword whole password\sencryption KEYWORD_OTHER_RESERVED
+    keyword whole traffic\strap KEYWORD_OTHER_RESERVED
+    keyword whole traffic\scontrol KEYWORD_OTHER_RESERVED
+    keyword whole traffic\scontrol_trap KEYWORD_OTHER_RESERVED
+    keyword whole loopdetect KEYWORD_OTHER_RESERVED
+    keyword whole sim KEYWORD_OTHER_RESERVED
+    keyword whole system_severity KEYWORD_OTHER_RESERVED
+    keyword whole scheduling KEYWORD_OTHER_RESERVED
+    keyword whole fdb KEYWORD_OTHER_RESERVED
+    keyword whole ssh KEYWORD_OTHER_RESERVED
+    keyword whole ssl KEYWORD_OTHER_RESERVED
+    keyword whole safeguard_engine KEYWORD_OTHER_RESERVED
+    keyword whole time_zone KEYWORD_OTHER_RESERVED
+    keyword whole dst KEYWORD_OTHER_RESERVED
+    keyword whole igmp_snooping KEYWORD_OTHER_RESERVED
+    keyword whole multicast_range KEYWORD_OTHER_RESERVED
+    keyword whole limited_multicast_addr KEYWORD_OTHER_RESERVED
+    keyword whole arp_aging KEYWORD_OTHER_RESERVED
+    keyword whole gratuitous_arp KEYWORD_OTHER_RESERVED
+    keyword whole command_prompt KEYWORD_OTHER_RESERVED
+    keyword whole iproute KEYWORD_OTHER_RESERVED
+    keyword whole time KEYWORD_OTHER_RESERVED
+    keyword whole sntp KEYWORD_OTHER_RESERVED
+    keyword whole multicast KEYWORD_OTHER_RESERVED
+    keyword whole arpentry KEYWORD_OTHER_RESERVED
+    keyword whole address_binding KEYWORD_OTHER_RESERVED
+    keyword whole dhcp_relay KEYWORD_OTHER_RESERVED
+    keyword whole dhcp_local_relay KEYWORD_OTHER_RESERVED
+    keyword whole traffic_segmentation KEYWORD_OTHER_RESERVED
+    keyword whole account KEYWORD_OTHER_RESERVED
+    keyword whole syslog KEYWORD_OTHER_RESERVED
+    keyword whole 802.1x KEYWORD_OTHER_RESERVED
+    keyword whole 802.1p KEYWORD_OTHER_RESERVED
+    keyword whole ipif KEYWORD_OTHER_RESERVED
+    keyword whole mirror KEYWORD_OTHER_RESERVED
+    keyword whole policy_route KEYWORD_OTHER_RESERVED
+    keyword whole asymmetric_vlan KEYWORD_OTHER_RESERVED
+    keyword whole bandwidth_control KEYWORD_OTHER_RESERVED
+    keyword whole scheduling_mechanism KEYWORD_OTHER_RESERVED
+    keyword whole log_save_timing KEYWORD_OTHER_RESERVED
+    keyword whole mac_notification KEYWORD_OTHER_RESERVED
+    keyword whole link_aggregation KEYWORD_OTHER_RESERVED
+    keyword whole cpu_interface_filtering KEYWORD_OTHER_RESERVED
 
-    keyword whole access_profile\spacket_content_mask brightcyan
-    keyword whole access_profile\sip brightcyan
-    keyword whole access_profile\sethernet brightcyan
-    keyword whole access_profile\sprofile_id\s\[1234567890\] magenta
-    keyword whole profile_id\s\[1234567890\] brightmagenta
-    keyword whole access_id\s\[1234567890\] blue
-    keyword whole access_id\sauto_assign blue
-    keyword whole \*\*\*\*\*\*\*\* brightred
-    keyword whole \[1234567890\].\[1234567890\].\[1234567890\].\[1234567890\]/\[1234567890\] red
-    keyword whole \[1234567890\].\[1234567890\].\[1234567890\].\[1234567890\] red
-    keyword whole \[1234567890abcdefABCDEDF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\] cyan
-    keyword whole \[1234567890abcdefABCDEDF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\] cyan
-    keyword whole mst_ports\s\[1234567890\-\] white
-    keyword whole ports\s\[1234567890\-\] white
-    keyword whole port\s\[1234567890\-\] white
-    keyword whole web\s\[1234567890\] green
-    keyword whole telnet\s\[1234567890\] green
-    keyword whole udp_port\s\[1234567890\] green
-    keyword whole tcp_port\s\[1234567890\] green
-    keyword whole src_port\s\[1234567890\] green
-    keyword whole dst_port\s\[1234567890\] green
-    keyword whole icmp\stype\s\[1234567890\] green
-    keyword whole ports\sall white
-    keyword whole port\sall white
-    keyword whole telnet brightcyan
-    keyword whole web brightcyan
+    keyword whole access_profile\spacket_content_mask KEYWORD_OTHER_RESERVED
+    keyword whole access_profile\sip KEYWORD_OTHER_RESERVED
+    keyword whole access_profile\sethernet KEYWORD_OTHER_RESERVED
+    keyword whole access_profile\sprofile_id\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole profile_id\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole access_id\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole access_id\sauto_assign KEYWORD_OTHER_RESERVED
+    keyword whole \*\*\*\*\*\*\*\* CONSTANT_OTHER
+    keyword whole \[1234567890\].\[1234567890\].\[1234567890\].\[1234567890\]/\[1234567890\] CONSTANT_OTHER
+    keyword whole \[1234567890\].\[1234567890\].\[1234567890\].\[1234567890\] CONSTANT_NUMERIC
+    keyword whole \[1234567890abcdefABCDEDF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\]:\[1234567890abcdefABCDEF\] CONSTANT_OTHER
+    keyword whole \[1234567890abcdefABCDEDF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\]-\[1234567890abcdefABCDEF\] CONSTANT_OTHER
+    keyword whole mst_ports\s\[1234567890\-\] KEYWORD_OTHER_RESERVED
+    keyword whole ports\s\[1234567890\-\] KEYWORD_OTHER_RESERVED
+    keyword whole port\s\[1234567890\-\] KEYWORD_OTHER_RESERVED
+    keyword whole web\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole telnet\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole udp_port\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole tcp_port\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole src_port\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole dst_port\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole icmp\stype\s\[1234567890\] KEYWORD_OTHER_RESERVED
+    keyword whole ports\sall KEYWORD_OTHER_RESERVED
+    keyword whole port\sall KEYWORD_OTHER_RESERVED
+    keyword whole telnet KEYWORD_OTHER_RESERVED
+    keyword whole web KEYWORD_OTHER_RESERVED
 
 context exclusive config\sgvrp state
-    keyword whole gvrp brightcyan
-    keyword whole \[1234567890\-\] white
+    keyword whole gvrp KEYWORD_OTHER_RESERVED
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive traffic_segmentation \n
-    keyword whole \[1234567890\-\] white
-    keyword whole all white
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
+    keyword whole all CONSTANT_OTHER
 
 context exclusive traffic\scontrol action
-    keyword whole enable brightgreen
-    keyword whole disable brightred
-    keyword whole \[1234567890\-\] white
+    keyword whole enable KEYWORD_OTHER_RESERVED
+    keyword whole disable KEYWORD_OTHER_RESERVED
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive bandwidth_control \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive default_priority \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive filtering_mode \n
-    keyword whole all white
+    keyword whole all CONSTANT_OTHER
 
 context exclusive config\srouter_ports_forbidden \n
-    keyword whole router_ports_forbidden brightcyan
-    keyword whole \[1234567890\-\] white
+    keyword whole router_ports_forbidden KEYWORD_OTHER_RESERVED
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive config\sssh\sserver \n
-    keyword whole ssh\sserver brightcyan
-    keyword whole port\s\[1234567890\-\] green
+    keyword whole ssh\sserver KEYWORD_OTHER_RESERVED
+    keyword whole port\s\[1234567890\-\] KEYWORD_OTHER_RESERVED
 
 context exclusive create\svlan \n
-    keyword whole vlan brightcyan
-    keyword whole \[1234567890\] brightblue
+    keyword whole vlan KEYWORD_OTHER_RESERVED
+    keyword whole \[1234567890\] CONSTANT_NUMERIC
 
 context exclusive pvid \n
-    keyword whole \[1234567890\] brightblue
+    keyword whole \[1234567890\] CONSTANT_NUMERIC
 
 context exclusive config\svlan\s\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_\-\]\sdelete \n
-    keyword whole vlan brightcyan
-    keyword whole \[1234567890\-\] white
+    keyword whole vlan KEYWORD_OTHER_RESERVED
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive CommunityView \n
-    keyword whole \[1234567890\.\] blue
+    keyword whole \[1234567890\.\] CONSTANT_NUMERIC
 
 context exclusive restricted \n
-    keyword whole \[1234567890\.\] blue
+    keyword whole \[1234567890\.\] CONSTANT_NUMERIC
 
 context exclusive lacp_port mode
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive add\sforbidden \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive add\suntagged \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
 context exclusive add\stagged \n
-    keyword whole \[1234567890\-\] white
+    keyword whole \[1234567890\-\] CONSTANT_NUMERIC
 
-context linestart # \n brown
+context linestart # \n COMMENT_LINE
     spellcheck
 

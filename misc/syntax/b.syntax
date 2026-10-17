@@ -27,356 +27,356 @@
 #
 
 context default
-    keyword whole ABSTRACT_CONSTANTS yellow
-    keyword whole ABSTRACT_VARIABLES yellow
-    keyword whole CONCRETE_CONSTANTS yellow
-    keyword whole CONCRETE_VARIABLES yellow
-    keyword whole LOCAL_OPERATIONS yellow
-    keyword whole IMPLEMENTATION yellow
-    keyword whole INITIALISATION yellow
-    keyword whole CONSTRAINTS yellow
-    keyword whole DEFINITIONS yellow
-    keyword whole ASSERTIONS yellow
-    keyword whole OPERATIONS yellow
-    keyword whole PROPERTIES yellow
-    keyword whole REFINEMENT yellow
-    keyword whole CONSTANTS yellow
-    keyword whole INVARIANT yellow
-    keyword whole sequences yellow
-    keyword whole VARIABLES yellow
-    keyword whole Cardinal yellow
+    keyword whole ABSTRACT_CONSTANTS KEYWORD_OTHER_RESERVED
+    keyword whole ABSTRACT_VARIABLES KEYWORD_OTHER_RESERVED
+    keyword whole CONCRETE_CONSTANTS KEYWORD_OTHER_RESERVED
+    keyword whole CONCRETE_VARIABLES KEYWORD_OTHER_RESERVED
+    keyword whole LOCAL_OPERATIONS KEYWORD_OTHER_RESERVED
+    keyword whole IMPLEMENTATION KEYWORD_OTHER_RESERVED
+    keyword whole INITIALISATION KEYWORD_OTHER_RESERVED
+    keyword whole CONSTRAINTS KEYWORD_OTHER_RESERVED
+    keyword whole DEFINITIONS KEYWORD_OTHER_RESERVED
+    keyword whole ASSERTIONS KEYWORD_OTHER_RESERVED
+    keyword whole OPERATIONS KEYWORD_OTHER_RESERVED
+    keyword whole PROPERTIES KEYWORD_OTHER_RESERVED
+    keyword whole REFINEMENT KEYWORD_OTHER_RESERVED
+    keyword whole CONSTANTS KEYWORD_OTHER_RESERVED
+    keyword whole INVARIANT KEYWORD_OTHER_RESERVED
+    keyword whole sequences SUPPORT_FUNCTION
+    keyword whole VARIABLES KEYWORD_OTHER_RESERVED
+    keyword whole Cardinal KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword whole closure1 white
+    keyword whole closure1 SUPPORT_FUNCTION
 
-    keyword whole INCLUDES yellow
-
-    # Arithmetic
-    keyword whole NATURAL1 yellow
-
-    keyword whole PROMOTES yellow
-    keyword whole Boolean yellow
-    keyword whole EXTENDS yellow
-    keyword whole IMPORTS yellow
+    keyword whole INCLUDES KEYWORD_OTHER_RESERVED
 
     # Arithmetic
-    keyword whole INTEGER yellow
+    keyword whole NATURAL1 KEYWORD_OTHER_RESERVED
 
-    keyword whole iterate yellow
-    keyword whole MACHINE yellow
+    keyword whole PROMOTES KEYWORD_OTHER_RESERVED
+    keyword whole Boolean KEYWORD_OTHER_RESERVED
+    keyword whole EXTENDS KEYWORD_OTHER_RESERVED
+    keyword whole IMPORTS KEYWORD_OTHER_RESERVED
 
     # Arithmetic
-    keyword whole NATURAL yellow
+    keyword whole INTEGER KEYWORD_OTHER_RESERVED
 
-    keyword whole postfix yellow
-    keyword whole REFINES yellow
-    keyword whole subtree yellow
-    keyword whole VARIANT yellow
-    keyword whole ASSERT yellow
-    keyword whole CHOICE yellow
+    keyword whole iterate SUPPORT_FUNCTION
+    keyword whole MACHINE KEYWORD_OTHER_RESERVED
+
+    # Arithmetic
+    keyword whole NATURAL KEYWORD_OTHER_RESERVED
+
+    keyword whole postfix SUPPORT_FUNCTION
+    keyword whole REFINES KEYWORD_OTHER_RESERVED
+    keyword whole subtree SUPPORT_FUNCTION
+    keyword whole VARIANT KEYWORD_OTHER_RESERVED
+    keyword whole ASSERT KEYWORD_OTHER_RESERVED
+    keyword whole CHOICE KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword whole closure white
+    keyword whole closure SUPPORT_FUNCTION
 
-    keyword whole EITHER yellow
-    keyword whole father yellow
-    keyword whole MAXINT yellow
-    keyword whole MININT yellow
-    keyword whole mirror yellow
-    keyword whole modulo yellow
-    keyword whole prefix yellow
-    keyword whole SELECT yellow
-    keyword whole STRING yellow
-    keyword whole struct yellow
-    keyword whole VALUES yellow
-    keyword whole arity yellow
-    keyword whole BEGIN yellow
-    keyword whole btree yellow
-    keyword whole const yellow
-    keyword whole ELSIF yellow
-    keyword whole FALSE yellow
-    keyword whole first yellow
-    keyword whole front yellow
-    keyword whole infix yellow
+    keyword whole EITHER KEYWORD_OTHER_RESERVED
+    keyword whole father SUPPORT_FUNCTION
+    keyword whole MAXINT KEYWORD_OTHER_RESERVED
+    keyword whole MININT KEYWORD_OTHER_RESERVED
+    keyword whole mirror SUPPORT_FUNCTION
+    keyword whole modulo SUPPORT_FUNCTION
+    keyword whole prefix SUPPORT_FUNCTION
+    keyword whole SELECT KEYWORD_OTHER_RESERVED
+    keyword whole STRING KEYWORD_OTHER_RESERVED
+    keyword whole struct SUPPORT_FUNCTION
+    keyword whole VALUES KEYWORD_OTHER_RESERVED
+    keyword whole arity KEYWORD_OTHER_RESERVED
+    keyword whole BEGIN KEYWORD_OTHER_RESERVED
+    keyword whole btree SUPPORT_FUNCTION
+    keyword whole const KEYWORD_OTHER_RESERVED
+    keyword whole ELSIF KEYWORD_OTHER_RESERVED
+    keyword whole FALSE KEYWORD_OTHER_RESERVED
+    keyword whole first SUPPORT_FUNCTION
+    keyword whole front SUPPORT_FUNCTION
+    keyword whole infix KEYWORD_OTHER_RESERVED
 
     # Sets
-    keyword whole INTER yellow
+    keyword whole INTER KEYWORD_OTHER_RESERVED
 
-    keyword whole inter yellow
-    keyword whole iseq1 yellow
-    keyword whole right yellow
+    keyword whole inter KEYWORD_OTHER_RESERVED
+    keyword whole iseq1 KEYWORD_OTHER_RESERVED
+    keyword whole right SUPPORT_FUNCTION
 
     # Arithmetic
-    keyword whole SIGMA yellow
+    keyword whole SIGMA KEYWORD_OTHER_RESERVED
 
-    keyword whole sizet yellow
-
-    # Sets
-    keyword whole UNION yellow
-
-    keyword whole union yellow
-    keyword whole WHERE yellow
-    keyword whole WHILE yellow
-    keyword whole bool yellow
-    keyword whole BOOL yellow
-    keyword whole card yellow
-    keyword whole CASE yellow
-    keyword whole conc yellow
-    keyword whole ELSE yellow
+    keyword whole sizet KEYWORD_OTHER_RESERVED
 
     # Sets
-    keyword whole FIN1 yellow
+    keyword whole UNION KEYWORD_OTHER_RESERVED
 
-    keyword whole iseq yellow
-    keyword whole last yellow
-    keyword whole left yellow
-    keyword whole NAT1 yellow
-
-    # Sets
-    keyword whole POW1 yellow
-
-    keyword whole perm yellow
-    keyword whole pred yellow
-    keyword whole prj1 yellow
-    keyword whole prj2 yellow
-    keyword whole rank yellow
-    keyword whole SEES yellow
-    keyword whole seq1 yellow
-    keyword whole SETS yellow
-    keyword whole size yellow
-    keyword whole skip yellow
-    keyword whole sons yellow
-    keyword whole succ yellow
-    keyword whole tail yellow
-    keyword whole THEN yellow
-    keyword whole tree yellow
-    keyword whole TRUE yellow
-    keyword whole USES yellow
-    keyword whole WHEN yellow
-    keyword whole ANY yellow
-    keyword whole bin yellow
-    keyword whole dom yellow
-    keyword whole END yellow
+    keyword whole union KEYWORD_OTHER_RESERVED
+    keyword whole WHERE KEYWORD_OTHER_RESERVED
+    keyword whole WHILE KEYWORD_OTHER_RESERVED
+    keyword whole bool KEYWORD_OTHER_RESERVED
+    keyword whole BOOL KEYWORD_OTHER_RESERVED
+    keyword whole card KEYWORD_OTHER_RESERVED
+    keyword whole CASE KEYWORD_OTHER_RESERVED
+    keyword whole conc KEYWORD_OTHER_RESERVED
+    keyword whole ELSE KEYWORD_OTHER_RESERVED
 
     # Sets
-    keyword whole FIN yellow
+    keyword whole FIN1 KEYWORD_OTHER_RESERVED
 
-    keyword whole fnc yellow
-    keyword whole INT yellow
-    keyword whole LET yellow
-    keyword whole max yellow
-    keyword whole min yellow
-    keyword whole mod yellow
-    keyword whole NAT yellow
+    keyword whole iseq KEYWORD_OTHER_RESERVED
+    keyword whole last SUPPORT_FUNCTION
+    keyword whole left SUPPORT_FUNCTION
+    keyword whole NAT1 KEYWORD_OTHER_RESERVED
+
+    # Sets
+    keyword whole POW1 KEYWORD_OTHER_RESERVED
+
+    keyword whole perm SUPPORT_FUNCTION
+    keyword whole pred KEYWORD_OTHER_RESERVED
+    keyword whole prj1 KEYWORD_OTHER_RESERVED
+    keyword whole prj2 KEYWORD_OTHER_RESERVED
+    keyword whole rank KEYWORD_OTHER_RESERVED
+    keyword whole SEES KEYWORD_OTHER_RESERVED
+    keyword whole seq1 KEYWORD_OTHER_RESERVED
+    keyword whole SETS KEYWORD_OTHER_RESERVED
+    keyword whole size SUPPORT_FUNCTION
+    keyword whole skip KEYWORD_OTHER_RESERVED
+    keyword whole sons KEYWORD_OTHER_RESERVED
+    keyword whole succ KEYWORD_OTHER_RESERVED
+    keyword whole tail KEYWORD_OTHER_RESERVED
+    keyword whole THEN KEYWORD_OTHER_RESERVED
+    keyword whole tree KEYWORD_OTHER_RESERVED
+    keyword whole TRUE KEYWORD_OTHER_RESERVED
+    keyword whole USES KEYWORD_OTHER_RESERVED
+    keyword whole WHEN KEYWORD_OTHER_RESERVED
+    keyword whole ANY KEYWORD_OTHER_RESERVED
+    keyword whole bin KEYWORD_OTHER_RESERVED
+    keyword whole dom KEYWORD_OTHER_RESERVED
+    keyword whole END KEYWORD_OTHER_RESERVED
+
+    # Sets
+    keyword whole FIN KEYWORD_OTHER_RESERVED
+
+    keyword whole fnc KEYWORD_OTHER_RESERVED
+    keyword whole INT KEYWORD_OTHER_RESERVED
+    keyword whole LET KEYWORD_OTHER_RESERVED
+    keyword whole max KEYWORD_OTHER_RESERVED
+    keyword whole min KEYWORD_OTHER_RESERVED
+    keyword whole mod KEYWORD_OTHER_RESERVED
+    keyword whole NAT KEYWORD_OTHER_RESERVED
 
     # Logical
-    keyword whole not cyan
+    keyword whole not KEYWORD_OPERATOR_WORD
 
     # Sets
-    keyword whole POW yellow
+    keyword whole POW KEYWORD_OTHER_RESERVED
 
-    keyword whole PRE yellow
-    keyword whole ran yellow
-    keyword whole rec yellow
-    keyword whole rel yellow
-    keyword whole rev yellow
-    keyword whole seq yellow
-    keyword whole Set yellow
-    keyword whole son yellow
-    keyword whole top yellow
-    keyword whole VAR yellow
-    keyword whole BE yellow
-    keyword whole DO yellow
-    keyword whole id yellow
-    keyword whole IF yellow
-    keyword whole IN yellow
-    keyword whole OF yellow
-    keyword whole OR yellow
+    keyword whole PRE KEYWORD_OTHER_RESERVED
+    keyword whole ran KEYWORD_OTHER_RESERVED
+    keyword whole rec KEYWORD_OTHER_RESERVED
+    keyword whole rel KEYWORD_OTHER_RESERVED
+    keyword whole rev KEYWORD_OTHER_RESERVED
+    keyword whole seq KEYWORD_OTHER_RESERVED
+    keyword whole Set KEYWORD_OTHER_RESERVED
+    keyword whole son KEYWORD_OTHER_RESERVED
+    keyword whole top KEYWORD_OTHER_RESERVED
+    keyword whole VAR KEYWORD_OTHER_RESERVED
+    keyword whole BE KEYWORD_OTHER_RESERVED
+    keyword whole DO KEYWORD_OTHER_RESERVED
+    keyword whole id KEYWORD_OTHER_RESERVED
+    keyword whole IF KEYWORD_OTHER_RESERVED
+    keyword whole IN KEYWORD_OTHER_RESERVED
+    keyword whole OF KEYWORD_OTHER_RESERVED
+    keyword whole OR KEYWORD_OTHER_RESERVED
 
     # Logical
-    keyword whole or cyan
+    keyword whole or KEYWORD_OPERATOR_WORD
 
     # Arithmetic
-    keyword whole PI yellow
+    keyword whole PI KEYWORD_OTHER_RESERVED
 
 # prevents - keyword from interfering with comment
-    keyword /\* green
-    keyword \*/ green
-    keyword // green
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword // COMMENT_LINE
 
 
-    keyword <-- yellow
-    keyword := yellow
+    keyword <-- KEYWORD_OTHER_RESERVED
+    keyword := KEYWORD_OTHER_RESERVED
 
 
     # Relations
-    keyword \+->> white
+    keyword \+->> KEYWORD_OPERATOR
 
     # Relations
-    keyword -->> white
+    keyword -->> KEYWORD_OPERATOR
 
     # Sets
-    keyword /<<: yellow
+    keyword /<<: KEYWORD_OTHER_RESERVED
 
     # Sequences
-    keyword /|\\ magenta
+    keyword /|\\ KEYWORD_OPERATOR
 
     # Relations
-    keyword >->> white
+    keyword >->> KEYWORD_OPERATOR
 
     # Relations
-    keyword >\+> white
+    keyword >\+> KEYWORD_OPERATOR
 
     # Arithmetic
-    keyword \*\* yellow
+    keyword \*\* KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword \+-> white
+    keyword \+-> KEYWORD_OPERATOR
 
     # Sequences
-    keyword \\|/ magenta
+    keyword \\|/ KEYWORD_OPERATOR
 
     # Relations
-    keyword --> white
+    keyword --> KEYWORD_OPERATOR
 
     # Sets
-    keyword /<: yellow
+    keyword /<: KEYWORD_OTHER_RESERVED
 
     # Sets
-    keyword /\\ yellow
+    keyword /\\ KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword <-> white
+    keyword <-> KEYWORD_OPERATOR
 
     # Sets
-    keyword <<: yellow
+    keyword <<: KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword <<| white
+    keyword <<| KEYWORD_OPERATOR
 
     # Logical
-    keyword <=> cyan
+    keyword <=> KEYWORD_OPERATOR
 
     # Relations
-    keyword <\+ white
+    keyword <\+ KEYWORD_OPERATOR
 
     # Relations
-    keyword >-> white
+    keyword >-> KEYWORD_OPERATOR
 
     # Sets
-    keyword \\/ yellow
+    keyword \\/ KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword |-> white
+    keyword |-> KEYWORD_OPERATOR
 
     # Relations
-    keyword |>> white
+    keyword |>> KEYWORD_OPERATOR
 
-    keyword != yellow
+    keyword != KEYWORD_OTHER_RESERVED
 
     # Sequences
-    keyword -> magenta
+    keyword -> KEYWORD_OPERATOR
 
     # Sets
-    keyword /: yellow
+    keyword /: KEYWORD_OTHER_RESERVED
 
     # Logical
-    keyword /= cyan
+    keyword /= KEYWORD_OPERATOR
 
     # Substitutions
-    keyword :: yellow
+    keyword :: KEYWORD_OTHER_RESERVED
 
     # Sequences
-    keyword <- magenta
+    keyword <- KEYWORD_OPERATOR
 
     # Sets
-    keyword <: yellow
+    keyword <: KEYWORD_OTHER_RESERVED
 
     # Arithmetic
-    keyword <= yellow
+    keyword <= KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword <| white
+    keyword <| KEYWORD_OPERATOR
 
-    keyword == yellow
+    keyword == KEYWORD_OTHER_RESERVED
 
     # Logical
-    keyword => cyan
+    keyword => KEYWORD_OPERATOR
 
     # Relations
-    keyword >< white
+    keyword >< KEYWORD_OPERATOR
 
     # Arithmetic
-    keyword >= yellow
+    keyword >= KEYWORD_OTHER_RESERVED
 
     # Arithmetic
-    keyword \* yellow
+    keyword \* KEYWORD_OTHER_RESERVED
 
     # Arithmetic
-    keyword \+ yellow
+    keyword \+ KEYWORD_OTHER_RESERVED
 
     # Sets
-    keyword {} yellow
+    keyword {} KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword |> white
+    keyword |> KEYWORD_OPERATOR
 
     # Logical
-    keyword ! cyan
+    keyword ! KEYWORD_OPERATOR
 
     # Logical
-    keyword # cyan
+    keyword # KEYWORD_OPERATOR
 
     # Relations
-    keyword % white
+    keyword % KEYWORD_OPERATOR
 
     # Logical
-    keyword & cyan
+    keyword & KEYWORD_OPERATOR
 
-    keyword ( yellow
-    keyword ) yellow
-    keyword , yellow
-
-    # Arithmetic
-    keyword - yellow
+    keyword ( KEYWORD_OTHER_RESERVED
+    keyword ) KEYWORD_OTHER_RESERVED
+    keyword , KEYWORD_OTHER_RESERVED
 
     # Arithmetic
-    keyword / yellow
+    keyword - KEYWORD_OTHER_RESERVED
+
+    # Arithmetic
+    keyword / KEYWORD_OTHER_RESERVED
 
     # Sets
-    keyword : yellow
+    keyword : KEYWORD_OTHER_RESERVED
 
-    keyword ; yellow
+    keyword ; KEYWORD_OTHER_RESERVED
 
     # Arithmetic
-    keyword < yellow
+    keyword < KEYWORD_OTHER_RESERVED
 
     # Logical
-    keyword = cyan
+    keyword = KEYWORD_OPERATOR
 
     # Arithmetic
-    keyword > yellow
+    keyword > KEYWORD_OTHER_RESERVED
 
-    keyword ? yellow
-    keyword [ yellow
-    keyword ] yellow
+    keyword ? KEYWORD_OTHER_RESERVED
+    keyword [ KEYWORD_OTHER_RESERVED
+    keyword ] KEYWORD_OTHER_RESERVED
 
     # Sequences
-    keyword ^ magenta
+    keyword ^ KEYWORD_OPERATOR
 
-    keyword { yellow
-    keyword } yellow
+    keyword { KEYWORD_OTHER_RESERVED
+    keyword } KEYWORD_OTHER_RESERVED
 
-    keyword | yellow
+    keyword | KEYWORD_OTHER_RESERVED
 
     # Relations
-    keyword ~ white
+    keyword ~ KEYWORD_OPERATOR
 
 
-context exclusive /\* \*/ green
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n green
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context " "    brightgreen
+context " "    STRING_QUOTED_DOUBLE

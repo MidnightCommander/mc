@@ -113,11 +113,34 @@ SYNTAXFILES =			\
 	yum-repo.syntax		\
 	yxx.syntax
 
+SCHEMEFILES =						\
+	schemes/LICENSE						\
+	schemes/ayu-dark.sublime-color-scheme			\
+	schemes/ayu-light.sublime-color-scheme			\
+	schemes/ayu-mirage.sublime-color-scheme			\
+	schemes/catppuccin-frappe.sublime-color-scheme		\
+	schemes/catppuccin-latte.sublime-color-scheme		\
+	schemes/catppuccin-macchiato.sublime-color-scheme	\
+	schemes/catppuccin-mocha.sublime-color-scheme		\
+	schemes/dracula.sublime-color-scheme			\
+	schemes/gruvbox.sublime-color-scheme			\
+	schemes/nord.sublime-color-scheme			\
+	schemes/rose-pine.sublime-color-scheme			\
+	schemes/solarized-dark.sublime-color-scheme		\
+	schemes/solarized-light.sublime-color-scheme
+
 if USE_INTERNAL_EDIT
 syntaxdir =		$(pkgdatadir)/syntax
 syntax_DATA =		$(SYNTAX_OUT) \
+			README.txt \
 			$(SYNTAXFILES)
+
+schemedir =		$(pkgdatadir)/syntax/schemes
+scheme_DATA =		$(SCHEMEFILES)
 endif
 
 EXTRA_DIST =		$(SYNTAX_IN) \
-			$(SYNTAXFILES)
+			README.txt \
+			check-tokens.py \
+			$(SYNTAXFILES) \
+			$(SCHEMEFILES)

@@ -1,22 +1,22 @@
 # TOML: Tom's Obvious Minimal Language
 
-context default white
+context default
 
 # groups
-context [ \n brown
-    keyword [ yellow
-    keyword ] yellow
+context [ \n ENTITY_NAME_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
 
 # assignment
-context exclusive = \n write
-    keyword "*" brightgreen
-    keyword whole false brightcyan
-    keyword whole true brightcyan
-    keyword \{0123456789\} brightcyan
+context exclusive = \n STRING_UNQUOTED
+    keyword "*" STRING_QUOTED_DOUBLE
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole true CONSTANT_LANGUAGE
+    keyword \{0123456789\} CONSTANT_NUMERIC
 
 # comments
-context # \n brown
+context # \n COMMENT_LINE
     spellcheck
 
 # other strings
-context " " brightgreen
+context " " STRING_QUOTED_DOUBLE

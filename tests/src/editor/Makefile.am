@@ -19,7 +19,8 @@ EXTRA_DIST = edit_complete_word_cmd_test_data.txt.in
 TESTS = \
 	edit_complete_word_cmd \
 	edit_insert_column_of_text \
-	edit_replace_cmd
+	edit_replace_cmd \
+	syntax_scheme
 
 check_PROGRAMS = $(TESTS)
 
@@ -32,3 +33,6 @@ edit_insert_column_of_text_SOURCES = \
 edit_replace_cmd_SOURCES = \
 	edit_replace_cmd.c
 
+
+syntax_scheme_SOURCES = \
+	syntax_scheme.c

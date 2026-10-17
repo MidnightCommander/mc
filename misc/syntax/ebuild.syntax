@@ -15,552 +15,552 @@ context default
     #.ebuild specific commands/glo vars
     # TODO: 1. split keywords by .eclass'es
     #       2. grep all exports and place here
-    keyword whole AT_M4DIR brightcyan
-    keyword whole BDEPEND brightcyan
-    keyword whole CABAL_FEATURES brightcyan
-    keyword whole CHECKREQS_DISK_BUILD brightcyan
-    keyword whole CHECKREQS_DISK_USR brightcyan
-    keyword whole CHECKREQS_DISK_VAR brightcyan
-    keyword whole CHECKREQS_MEMORY brightcyan
-    keyword whole CONFIG_CHECK brightcyan
-    keyword whole DEPEND brightcyan
-    keyword whole DESCRIPTION brightcyan
-    keyword whole EAPI brightcyan
-    keyword whole ECONF_SOURCE brightcyan
-    keyword whole EDARCS_REPOSITORY brightcyan
-    keyword whole EDARCS_GET_CMD brightcyan
-    keyword whole EDARCS_LOCALREPO brightcyan
-    keyword whole EGIT_BRANCH brightcyan
-    keyword whole EGIT_PROJECT brightcyan
-    keyword whole EGIT_REPO_URI brightcyan
-    keyword whole EGIT_SUBMODULES brightcyan
-    keyword whole EGIT_TREE brightcyan
-    keyword whole ESVN_REPO_URI brightcyan
-    keyword whole EXPORT_FUNCTIONS brightcyan
-    keyword whole HOMEPAGE brightcyan
-    keyword whole IUSE brightcyan
-    keyword whole KEYWORDS brightcyan
-    keyword whole LICENSE brightcyan
-    keyword whole PATCHES brightcyan
-    keyword whole PDEPEND brightcyan
-    keyword whole PROVIDE brightcyan
-    keyword whole PYTHON_COMPAT brightcyan
-    keyword whole QA_AM_MAINTAINER_MODE brightcyan
-    keyword whole QA_CONFIGURE_OPTIONS brightcyan
-    keyword whole QA_DESKTOP_FILE brightcyan
-    keyword whole QA_DT_NEEDED brightcyan
-    keyword whole QA_EXECSTACK brightcyan
-    keyword whole QA_FLAGS_IGNORED brightcyan
-    keyword whole QA_MULTILIB_PATHS brightcyan
-    keyword whole QA_PREBUILT brightcyan
-    keyword whole QA_PRESTRIPPED brightcyan
-    keyword whole QA_SONAME brightcyan
-    keyword whole QA_TEXTRELS brightcyan
-    keyword whole QA_WX_LOAD brightcyan
-    keyword whole RDEPEND brightcyan
-    keyword whole REQUIRED_USE brightcyan
-    keyword whole RESTRICT brightcyan
-    keyword whole S brightcyan
-    keyword whole SITEFILE brightcyan
-    keyword whole SLOT brightcyan
-    keyword whole SRC_URI brightcyan
-    keyword whole WANT_AUTOCONF brightcyan
-    keyword whole WANT_AUTOMAKE brightcyan
-    keyword DOCS brightcyan
-    keyword HTML_DOCS brightcyan
-    keyword LINGUAS brightcyan
+    keyword whole AT_M4DIR VARIABLE_OTHER
+    keyword whole BDEPEND VARIABLE_OTHER
+    keyword whole CABAL_FEATURES VARIABLE_OTHER
+    keyword whole CHECKREQS_DISK_BUILD VARIABLE_OTHER
+    keyword whole CHECKREQS_DISK_USR VARIABLE_OTHER
+    keyword whole CHECKREQS_DISK_VAR VARIABLE_OTHER
+    keyword whole CHECKREQS_MEMORY VARIABLE_OTHER
+    keyword whole CONFIG_CHECK VARIABLE_OTHER
+    keyword whole DEPEND VARIABLE_OTHER
+    keyword whole DESCRIPTION VARIABLE_OTHER
+    keyword whole EAPI VARIABLE_OTHER
+    keyword whole ECONF_SOURCE VARIABLE_OTHER
+    keyword whole EDARCS_REPOSITORY VARIABLE_OTHER
+    keyword whole EDARCS_GET_CMD VARIABLE_OTHER
+    keyword whole EDARCS_LOCALREPO VARIABLE_OTHER
+    keyword whole EGIT_BRANCH VARIABLE_OTHER
+    keyword whole EGIT_PROJECT VARIABLE_OTHER
+    keyword whole EGIT_REPO_URI VARIABLE_OTHER
+    keyword whole EGIT_SUBMODULES VARIABLE_OTHER
+    keyword whole EGIT_TREE VARIABLE_OTHER
+    keyword whole ESVN_REPO_URI VARIABLE_OTHER
+    keyword whole EXPORT_FUNCTIONS VARIABLE_OTHER
+    keyword whole HOMEPAGE VARIABLE_OTHER
+    keyword whole IUSE VARIABLE_OTHER
+    keyword whole KEYWORDS VARIABLE_OTHER
+    keyword whole LICENSE VARIABLE_OTHER
+    keyword whole PATCHES VARIABLE_OTHER
+    keyword whole PDEPEND VARIABLE_OTHER
+    keyword whole PROVIDE VARIABLE_OTHER
+    keyword whole PYTHON_COMPAT VARIABLE_OTHER
+    keyword whole QA_AM_MAINTAINER_MODE VARIABLE_OTHER
+    keyword whole QA_CONFIGURE_OPTIONS VARIABLE_OTHER
+    keyword whole QA_DESKTOP_FILE VARIABLE_OTHER
+    keyword whole QA_DT_NEEDED VARIABLE_OTHER
+    keyword whole QA_EXECSTACK VARIABLE_OTHER
+    keyword whole QA_FLAGS_IGNORED VARIABLE_OTHER
+    keyword whole QA_MULTILIB_PATHS VARIABLE_OTHER
+    keyword whole QA_PREBUILT VARIABLE_OTHER
+    keyword whole QA_PRESTRIPPED VARIABLE_OTHER
+    keyword whole QA_SONAME VARIABLE_OTHER
+    keyword whole QA_TEXTRELS VARIABLE_OTHER
+    keyword whole QA_WX_LOAD VARIABLE_OTHER
+    keyword whole RDEPEND VARIABLE_OTHER
+    keyword whole REQUIRED_USE VARIABLE_OTHER
+    keyword whole RESTRICT VARIABLE_OTHER
+    keyword whole S VARIABLE_OTHER
+    keyword whole SITEFILE VARIABLE_OTHER
+    keyword whole SLOT VARIABLE_OTHER
+    keyword whole SRC_URI VARIABLE_OTHER
+    keyword whole WANT_AUTOCONF VARIABLE_OTHER
+    keyword whole WANT_AUTOMAKE VARIABLE_OTHER
+    keyword DOCS VARIABLE_OTHER
+    keyword HTML_DOCS VARIABLE_OTHER
+    keyword LINGUAS VARIABLE_OTHER
 
-    keyword whole addpredict yellow
-    keyword whole best_version yellow
-    keyword whole built_with_use yellow
-    keyword whole check_KV yellow
-    keyword whole default yellow
-    keyword whole die yellow
-    keyword whole diropts yellow
-    keyword whole dobin yellow
-    keyword whole docinto yellow
-    keyword whole docompress yellow
-    keyword whole doconfd yellow
-    keyword whole dodir yellow
-    keyword whole dodoc yellow
-    keyword whole doenvd yellow
-    keyword whole doexe yellow
-    keyword whole dohard yellow
-    keyword whole dohtml yellow
-    keyword whole doinfo yellow
-    keyword whole doinitd yellow
-    keyword whole doins yellow
-    keyword whole dolib yellow
-    keyword whole dolib.a yellow
-    keyword whole dolib.so yellow
-    keyword whole doman yellow
-    keyword whole dosbin yellow
-    keyword whole dosed yellow
-    keyword whole dosym yellow
-    keyword whole eapply yellow
-    keyword whole eapply_user yellow
-    keyword whole ebegin yellow
-    keyword whole econf yellow
-    keyword whole eend yellow
-    keyword whole eerror yellow
-    keyword whole einfo yellow
-    keyword whole einstall yellow
-    keyword whole einstalldocs yellow
-    keyword whole elog yellow
-    keyword whole emake yellow
-    keyword whole epatch yellow
-    keyword whole epatch_user yellow
-    keyword whole ewarn yellow
-    keyword whole exeinto yellow
-    keyword whole exeopts yellow
-    keyword whole enewgroup yellow
-    keyword whole enewuser yellow
-    keyword whole fowners yellow
-    keyword whole fperms yellow
-    keyword whole has yellow
-    keyword whole hasq yellow
-    keyword whole has_version yellow
-    keyword whole insinto yellow
-    keyword whole insopts yellow
-    keyword whole intltoolize yellow
-    keyword whole into yellow
-    keyword whole keepdir yellow
-    keyword whole libopts yellow
-    keyword whole newbin yellow
-    keyword whole newconfd yellow
-    keyword whole newdoc yellow
-    keyword whole newexe yellow
-    keyword whole newins yellow
-    keyword whole newman yellow
-    keyword whole newsbin yellow
-    keyword whole newinitd yellow
-    keyword whole pax-mark yellow
-    keyword whole prepall yellow
-    keyword whole prepalldocs yellow
-    keyword whole prepallinfo yellow
-    keyword whole prepallman yellow
-    keyword whole unpack yellow
-    keyword whole use yellow
-    keyword whole usev yellow
-    keyword whole usex yellow
-    keyword whole use_enable yellow
-    keyword whole use_with yellow
+    keyword whole addpredict SUPPORT_FUNCTION
+    keyword whole best_version SUPPORT_FUNCTION
+    keyword whole built_with_use SUPPORT_FUNCTION
+    keyword whole check_KV SUPPORT_FUNCTION
+    keyword whole default SUPPORT_FUNCTION
+    keyword whole die SUPPORT_FUNCTION
+    keyword whole diropts SUPPORT_FUNCTION
+    keyword whole dobin SUPPORT_FUNCTION
+    keyword whole docinto SUPPORT_FUNCTION
+    keyword whole docompress SUPPORT_FUNCTION
+    keyword whole doconfd SUPPORT_FUNCTION
+    keyword whole dodir SUPPORT_FUNCTION
+    keyword whole dodoc SUPPORT_FUNCTION
+    keyword whole doenvd SUPPORT_FUNCTION
+    keyword whole doexe SUPPORT_FUNCTION
+    keyword whole dohard SUPPORT_FUNCTION
+    keyword whole dohtml SUPPORT_FUNCTION
+    keyword whole doinfo SUPPORT_FUNCTION
+    keyword whole doinitd SUPPORT_FUNCTION
+    keyword whole doins SUPPORT_FUNCTION
+    keyword whole dolib SUPPORT_FUNCTION
+    keyword whole dolib.a SUPPORT_FUNCTION
+    keyword whole dolib.so SUPPORT_FUNCTION
+    keyword whole doman SUPPORT_FUNCTION
+    keyword whole dosbin SUPPORT_FUNCTION
+    keyword whole dosed SUPPORT_FUNCTION
+    keyword whole dosym SUPPORT_FUNCTION
+    keyword whole eapply SUPPORT_FUNCTION
+    keyword whole eapply_user SUPPORT_FUNCTION
+    keyword whole ebegin SUPPORT_FUNCTION
+    keyword whole econf SUPPORT_FUNCTION
+    keyword whole eend SUPPORT_FUNCTION
+    keyword whole eerror SUPPORT_FUNCTION
+    keyword whole einfo SUPPORT_FUNCTION
+    keyword whole einstall SUPPORT_FUNCTION
+    keyword whole einstalldocs SUPPORT_FUNCTION
+    keyword whole elog SUPPORT_FUNCTION
+    keyword whole emake SUPPORT_FUNCTION
+    keyword whole epatch SUPPORT_FUNCTION
+    keyword whole epatch_user SUPPORT_FUNCTION
+    keyword whole ewarn SUPPORT_FUNCTION
+    keyword whole exeinto SUPPORT_FUNCTION
+    keyword whole exeopts SUPPORT_FUNCTION
+    keyword whole enewgroup SUPPORT_FUNCTION
+    keyword whole enewuser SUPPORT_FUNCTION
+    keyword whole fowners SUPPORT_FUNCTION
+    keyword whole fperms SUPPORT_FUNCTION
+    keyword whole has SUPPORT_FUNCTION
+    keyword whole hasq SUPPORT_FUNCTION
+    keyword whole has_version SUPPORT_FUNCTION
+    keyword whole insinto SUPPORT_FUNCTION
+    keyword whole insopts SUPPORT_FUNCTION
+    keyword whole intltoolize SUPPORT_FUNCTION
+    keyword whole into SUPPORT_FUNCTION
+    keyword whole keepdir SUPPORT_FUNCTION
+    keyword whole libopts SUPPORT_FUNCTION
+    keyword whole newbin SUPPORT_FUNCTION
+    keyword whole newconfd SUPPORT_FUNCTION
+    keyword whole newdoc SUPPORT_FUNCTION
+    keyword whole newexe SUPPORT_FUNCTION
+    keyword whole newins SUPPORT_FUNCTION
+    keyword whole newman SUPPORT_FUNCTION
+    keyword whole newsbin SUPPORT_FUNCTION
+    keyword whole newinitd SUPPORT_FUNCTION
+    keyword whole pax-mark SUPPORT_FUNCTION
+    keyword whole prepall SUPPORT_FUNCTION
+    keyword whole prepalldocs SUPPORT_FUNCTION
+    keyword whole prepallinfo SUPPORT_FUNCTION
+    keyword whole prepallman SUPPORT_FUNCTION
+    keyword whole unpack SUPPORT_FUNCTION
+    keyword whole use SUPPORT_FUNCTION
+    keyword whole usev SUPPORT_FUNCTION
+    keyword whole usex SUPPORT_FUNCTION
+    keyword whole use_enable SUPPORT_FUNCTION
+    keyword whole use_with SUPPORT_FUNCTION
     #autotools
-    keyword whole _elibtoolize yellow
-    keyword whole eaclocal yellow
-    keyword whole eautoconf yellow
-    keyword whole eautopoint yellow
-    keyword whole eautoreconf yellow
-    keyword whole eautomake yellow
+    keyword whole _elibtoolize SUPPORT_FUNCTION
+    keyword whole eaclocal SUPPORT_FUNCTION
+    keyword whole eautoconf SUPPORT_FUNCTION
+    keyword whole eautopoint SUPPORT_FUNCTION
+    keyword whole eautoreconf SUPPORT_FUNCTION
+    keyword whole eautomake SUPPORT_FUNCTION
     #bashcomp
-    keyword whole bashcomp_alias yellow
-    keyword whole dobashcomp yellow
-    keyword whole newbashcomp yellow
+    keyword whole bashcomp_alias SUPPORT_FUNCTION
+    keyword whole dobashcomp SUPPORT_FUNCTION
+    keyword whole newbashcomp SUPPORT_FUNCTION
     #cvs
-    keyword whole cvs_src_unpack yellow
+    keyword whole cvs_src_unpack SUPPORT_FUNCTION
     #darcs
-    keyword whole darcs_src_unpack yellow
+    keyword whole darcs_src_unpack SUPPORT_FUNCTION
     #default
-    keyword whole default_src_unpack yellow
+    keyword whole default_src_unpack SUPPORT_FUNCTION
     #desktop
-    keyword whole doicon yellow
-    keyword whole domenu yellow
-    keyword whole make_desktop_entry yellow
-    keyword whole make_session_desktop yellow
-    keyword whole newicon yellow
-    keyword whole newmenu yellow
+    keyword whole doicon SUPPORT_FUNCTION
+    keyword whole domenu SUPPORT_FUNCTION
+    keyword whole make_desktop_entry SUPPORT_FUNCTION
+    keyword whole make_session_desktop SUPPORT_FUNCTION
+    keyword whole newicon SUPPORT_FUNCTION
+    keyword whole newmenu SUPPORT_FUNCTION
     #elisp-common
-    keyword whole elisp-compile yellow
-    keyword whole elisp-install yellow
-    keyword whole elisp-site-file-install yellow
-    keyword whole elisp-site-regen yellow
+    keyword whole elisp-compile SUPPORT_FUNCTION
+    keyword whole elisp-install SUPPORT_FUNCTION
+    keyword whole elisp-site-file-install SUPPORT_FUNCTION
+    keyword whole elisp-site-regen SUPPORT_FUNCTION
     #flag-o-matic
-    keyword whole append-cflags yellow
-    keyword whole append-cxxflags yellow
-    keyword whole append-flags yellow
-    keyword whole append-ldflags yellow
-    keyword whole append-lfs-flags yellow
-    keyword whole filter-flags yellow
-    keyword whole replace-flags yellow
-    keyword whole strip-flags yellow
-    keyword whole strip-unsupported-flags yellow
+    keyword whole append-cflags SUPPORT_FUNCTION
+    keyword whole append-cxxflags SUPPORT_FUNCTION
+    keyword whole append-flags SUPPORT_FUNCTION
+    keyword whole append-ldflags SUPPORT_FUNCTION
+    keyword whole append-lfs-flags SUPPORT_FUNCTION
+    keyword whole filter-flags SUPPORT_FUNCTION
+    keyword whole replace-flags SUPPORT_FUNCTION
+    keyword whole strip-flags SUPPORT_FUNCTION
+    keyword whole strip-unsupported-flags SUPPORT_FUNCTION
     #git-r3
-    keyword whole git-r3_checkout yellow
-    keyword whole git-r3_fetch yellow
-    keyword whole git-r3_src_unpack yellow
+    keyword whole git-r3_checkout SUPPORT_FUNCTION
+    keyword whole git-r3_fetch SUPPORT_FUNCTION
+    keyword whole git-r3_src_unpack SUPPORT_FUNCTION
     #java-ant-2
-    keyword whole EANT_BUILD_TARGET yellow
+    keyword whole EANT_BUILD_TARGET SUPPORT_FUNCTION
     #kernel-2
-    keyword whole kernel-2_src_unpack yellow
-    keyword whole kernel_is yellow
+    keyword whole kernel-2_src_unpack SUPPORT_FUNCTION
+    keyword whole kernel_is SUPPORT_FUNCTION
     #libtool
-    keyword whole elibtoolize yellow
+    keyword whole elibtoolize SUPPORT_FUNCTION
     #mercurial
-    keyword whole mercurial_src_unpack yellow
+    keyword whole mercurial_src_unpack SUPPORT_FUNCTION
     #mozilla
-    keyword whole mozconfig_annotate yellow
-    keyword whole mozconfig_config yellow
-    keyword whole mozconfig_final yellow
-    keyword whole mozconfig_init yellow
-    keyword whole mozconfig_install_prefs yellow
-    keyword whole mozconfig_use_enable yellow
-    keyword whole mozconfig_use_with yellow
-    keyword whole moz_pkg_setup yellow
+    keyword whole mozconfig_annotate SUPPORT_FUNCTION
+    keyword whole mozconfig_config SUPPORT_FUNCTION
+    keyword whole mozconfig_final SUPPORT_FUNCTION
+    keyword whole mozconfig_init SUPPORT_FUNCTION
+    keyword whole mozconfig_install_prefs SUPPORT_FUNCTION
+    keyword whole mozconfig_use_enable SUPPORT_FUNCTION
+    keyword whole mozconfig_use_with SUPPORT_FUNCTION
+    keyword whole moz_pkg_setup SUPPORT_FUNCTION
     #multilib
-    keyword whole multilib_copy_sources yellow
-    keyword whole multilib_env yellow
-    keyword whole multilib_foreach_abi yellow
-    keyword whole multilib_is_native_abi yellow
-    keyword whole multilib_layout yellow
-    keyword whole multilib_parallel_foreach_abi yellow
-    keyword whole multilib_toolchain_setup yellow
+    keyword whole multilib_copy_sources SUPPORT_FUNCTION
+    keyword whole multilib_env SUPPORT_FUNCTION
+    keyword whole multilib_foreach_abi SUPPORT_FUNCTION
+    keyword whole multilib_is_native_abi SUPPORT_FUNCTION
+    keyword whole multilib_layout SUPPORT_FUNCTION
+    keyword whole multilib_parallel_foreach_abi SUPPORT_FUNCTION
+    keyword whole multilib_toolchain_setup SUPPORT_FUNCTION
     #ninja-utils
-    keyword whole eninja yellow
+    keyword whole eninja SUPPORT_FUNCTION
     #pam
-    keyword whole cleanpamd yellow
-    keyword whole dopamd yellow
-    keyword whole dopammod yellow
-    keyword whole dopamsecurity yellow
-    keyword whole newpamd yellow
-    keyword whole newpammod yellow
-    keyword whole newpamsecurity yellow
-    keyword whole pamd_mimic yellow
-    keyword whole pamd_mimic_system yellow
+    keyword whole cleanpamd SUPPORT_FUNCTION
+    keyword whole dopamd SUPPORT_FUNCTION
+    keyword whole dopammod SUPPORT_FUNCTION
+    keyword whole dopamsecurity SUPPORT_FUNCTION
+    keyword whole newpamd SUPPORT_FUNCTION
+    keyword whole newpammod SUPPORT_FUNCTION
+    keyword whole newpamsecurity SUPPORT_FUNCTION
+    keyword whole pamd_mimic SUPPORT_FUNCTION
+    keyword whole pamd_mimic_system SUPPORT_FUNCTION
     #prefix
-    keyword whole eprefixify yellow
+    keyword whole eprefixify SUPPORT_FUNCTION
     #preserve-libs
-    keyword whole preserve_old_lib yellow
-    keyword whole preserve_old_lib_notify yellow
+    keyword whole preserve_old_lib SUPPORT_FUNCTION
+    keyword whole preserve_old_lib_notify SUPPORT_FUNCTION
     #python
-    keyword whole python_copy_sources yellow
-    keyword whole python_do yellow
-    keyword whole python_doexe yellow
-    keyword whole python_doheader yellow
-    keyword whole python_domodule yellow
-    keyword whole python_doscript yellow
-    keyword whole python_export yellow
-    keyword whole python_export_best yellow
-    keyword whole python_fix_shebang yellow
-    keyword whole python_foreach_impl yellow
-    keyword whole python_is_python3 yellow
-    keyword whole python_moduleinto yellow
-    keyword whole python_newexe yellow
-    keyword whole python_newscript yellow
-    keyword whole python_optimize yellow
-    keyword whole python_replicate_script yellow
-    keyword whole python_scriptinto yellow
-    keyword whole python_setup yellow
+    keyword whole python_copy_sources SUPPORT_FUNCTION
+    keyword whole python_do SUPPORT_FUNCTION
+    keyword whole python_doexe SUPPORT_FUNCTION
+    keyword whole python_doheader SUPPORT_FUNCTION
+    keyword whole python_domodule SUPPORT_FUNCTION
+    keyword whole python_doscript SUPPORT_FUNCTION
+    keyword whole python_export SUPPORT_FUNCTION
+    keyword whole python_export_best SUPPORT_FUNCTION
+    keyword whole python_fix_shebang SUPPORT_FUNCTION
+    keyword whole python_foreach_impl SUPPORT_FUNCTION
+    keyword whole python_is_python3 SUPPORT_FUNCTION
+    keyword whole python_moduleinto SUPPORT_FUNCTION
+    keyword whole python_newexe SUPPORT_FUNCTION
+    keyword whole python_newscript SUPPORT_FUNCTION
+    keyword whole python_optimize SUPPORT_FUNCTION
+    keyword whole python_replicate_script SUPPORT_FUNCTION
+    keyword whole python_scriptinto SUPPORT_FUNCTION
+    keyword whole python_setup SUPPORT_FUNCTION
     #rpm
-    keyword whole rpm_src_unpack yellow
-    keyword whole rpm_unpack yellow
+    keyword whole rpm_src_unpack SUPPORT_FUNCTION
+    keyword whole rpm_unpack SUPPORT_FUNCTION
     #svn
-    keyword whole subversion_src_unpack yellow
+    keyword whole subversion_src_unpack SUPPORT_FUNCTION
     #systemd
-    keyword whole systemd_dotmpfilesd yellow
-    keyword whole systemd_dounit yellow
-    keyword whole systemd_douserunit yellow
-    keyword whole systemd_enable_ntpunit yellow
-    keyword whole systemd_install_serviced yellow
-    keyword whole systemd_logger yellow
-    keyword whole systemd_newtmpfilesd yellow
-    keyword whole systemd_newunit yellow
-    keyword whole systemd_reenable yellow
-    keyword whole systemd_update_catalog yellow
+    keyword whole systemd_dotmpfilesd SUPPORT_FUNCTION
+    keyword whole systemd_dounit SUPPORT_FUNCTION
+    keyword whole systemd_douserunit SUPPORT_FUNCTION
+    keyword whole systemd_enable_ntpunit SUPPORT_FUNCTION
+    keyword whole systemd_install_serviced SUPPORT_FUNCTION
+    keyword whole systemd_logger SUPPORT_FUNCTION
+    keyword whole systemd_newtmpfilesd SUPPORT_FUNCTION
+    keyword whole systemd_newunit SUPPORT_FUNCTION
+    keyword whole systemd_reenable SUPPORT_FUNCTION
+    keyword whole systemd_update_catalog SUPPORT_FUNCTION
     #toolchain-funcs
-    keyword whole gen_usr_ldscript yellow
-    keyword whole tc-check-openmp yellow
-    keyword whole tc-enables-pie yellow
-    keyword whole tc-export yellow
-    keyword whole tc-export_build_env yellow
-    keyword whole tc-has-openmp yellow
-    keyword whole tc-has-tls yellow
-    keyword whole tc-is-clang yellow
-    keyword whole tc-is-cross-compiler yellow
-    keyword whole tc-is-gcc yellow
-    keyword whole tc-is-static-only yellow
-    keyword whole tc-ld-disable-gold yellow
+    keyword whole gen_usr_ldscript SUPPORT_FUNCTION
+    keyword whole tc-check-openmp SUPPORT_FUNCTION
+    keyword whole tc-enables-pie SUPPORT_FUNCTION
+    keyword whole tc-export SUPPORT_FUNCTION
+    keyword whole tc-export_build_env SUPPORT_FUNCTION
+    keyword whole tc-has-openmp SUPPORT_FUNCTION
+    keyword whole tc-has-tls SUPPORT_FUNCTION
+    keyword whole tc-is-clang SUPPORT_FUNCTION
+    keyword whole tc-is-cross-compiler SUPPORT_FUNCTION
+    keyword whole tc-is-gcc SUPPORT_FUNCTION
+    keyword whole tc-is-static-only SUPPORT_FUNCTION
+    keyword whole tc-ld-disable-gold SUPPORT_FUNCTION
     #toolchain
-    keyword whole toolchain_src_unpack yellow
+    keyword whole toolchain_src_unpack SUPPORT_FUNCTION
     #unpacker
-    keyword whole unpacker_src_unpack yellow
+    keyword whole unpacker_src_unpack SUPPORT_FUNCTION
     #virtualx
-    keyword whole virtx yellow
+    keyword whole virtx SUPPORT_FUNCTION
     #xdg
-    keyword whole xdg_desktop_database_update yellow
-    keyword whole xdg_environment_reset yellow
-    keyword whole xdg_icon_cache_update yellow
-    keyword whole xdg_mimeinfo_database_update yellow
+    keyword whole xdg_desktop_database_update SUPPORT_FUNCTION
+    keyword whole xdg_environment_reset SUPPORT_FUNCTION
+    keyword whole xdg_icon_cache_update SUPPORT_FUNCTION
+    keyword whole xdg_mimeinfo_database_update SUPPORT_FUNCTION
 
     #bashism (builtin extended 'test')
-    keyword whole [[ brightcyan
-    keyword whole ]] brightcyan
+    keyword whole [[ PUNCTUATION_SECTION
+    keyword whole ]] PUNCTUATION_SECTION
 
     #common Makefile variables
-    keyword whole AR cyan
-    keyword whole AS cyan
-    keyword whole BINDIR cyan
-    keyword whole CC cyan
-    keyword whole CFLAGS cyan
-    keyword whole CPPFLAGS cyan
-    keyword whole CXX cyan
-    keyword whole CXXFLAGS cyan
-    keyword whole DESTDIR cyan
-    keyword whole DOCDIR cyan
-    keyword whole LD cyan
-    keyword whole LDFLAGS cyan
-    keyword whole LIBDIR cyan
-    keyword whole MANDIR cyan
-    keyword whole NM cyan
-    keyword whole OBJCOPY cyan
-    keyword whole PKG_CONFIG cyan
-    keyword whole PREFIX cyan
-    keyword whole RANLIB cyan
-    keyword whole SBINDIR cyan
-    keyword whole SHELL cyan
-    keyword whole STRIP cyan
-    keyword whole SYSCONFDIR cyan
-    keyword whole YACC cyan
+    keyword whole AR VARIABLE_OTHER
+    keyword whole AS VARIABLE_OTHER
+    keyword whole BINDIR VARIABLE_OTHER
+    keyword whole CC VARIABLE_OTHER
+    keyword whole CFLAGS VARIABLE_OTHER
+    keyword whole CPPFLAGS VARIABLE_OTHER
+    keyword whole CXX VARIABLE_OTHER
+    keyword whole CXXFLAGS VARIABLE_OTHER
+    keyword whole DESTDIR VARIABLE_OTHER
+    keyword whole DOCDIR VARIABLE_OTHER
+    keyword whole LD VARIABLE_OTHER
+    keyword whole LDFLAGS VARIABLE_OTHER
+    keyword whole LIBDIR VARIABLE_OTHER
+    keyword whole MANDIR VARIABLE_OTHER
+    keyword whole NM VARIABLE_OTHER
+    keyword whole OBJCOPY VARIABLE_OTHER
+    keyword whole PKG_CONFIG VARIABLE_OTHER
+    keyword whole PREFIX VARIABLE_OTHER
+    keyword whole RANLIB VARIABLE_OTHER
+    keyword whole SBINDIR VARIABLE_OTHER
+    keyword whole SHELL VARIABLE_OTHER
+    keyword whole STRIP VARIABLE_OTHER
+    keyword whole SYSCONFDIR VARIABLE_OTHER
+    keyword whole YACC VARIABLE_OTHER
 
 ####################
 # here starts original sh.syntax (with core commands only)
 ####################
 
-    keyword ! brightred
-    keyword ;; brightred
-    keyword \\@ brightred
-    keyword \\$ brightred
-    keyword \\\\ brightred
-    keyword \\" brightred
-    keyword \\' brightred
-    keyword \\` brightred
-    keyword ` brightred
-    keyword ; brightcyan
-    keyword $(*) brightgreen
-    keyword ${*} brightgreen
-    keyword { brightcyan
-    keyword } brightcyan
+    keyword ! KEYWORD_OPERATOR
+    keyword ;; KEYWORD_CONTROL
+    keyword \\@ CONSTANT_CHARACTER_ESCAPE
+    keyword \\$ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
+    keyword ` PUNCTUATION_SECTION
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword whole linestart #!\[\s\]*\n brightcyan black
+    keyword whole linestart #!\[\s\]*\n COMMENT_LINE black
 
-    keyword $\* brightred
-    keyword $@ brightred
-    keyword $# brightred
-    keyword $? brightred
-    keyword $- brightred
-    keyword $$ brightred
-    keyword $! brightred
-    keyword $_ brightred
+    keyword $\* VARIABLE_OTHER
+    keyword $@ VARIABLE_OTHER
+    keyword $# VARIABLE_OTHER
+    keyword $? VARIABLE_OTHER
+    keyword $- VARIABLE_OTHER
+    keyword $$ VARIABLE_OTHER
+    keyword $! VARIABLE_OTHER
+    keyword $_ VARIABLE_OTHER
 
-    keyword whole 2>&1 brightred
-    keyword whole 1>&2 brightred
-    keyword whole 2> brightred
-    keyword whole 1> brightred
+    keyword whole 2>&1 KEYWORD_OPERATOR
+    keyword whole 1>&2 KEYWORD_OPERATOR
+    keyword whole 2> KEYWORD_OPERATOR
+    keyword whole 1> KEYWORD_OPERATOR
 
-    keyword wholeright $\[0123456789\] brightred
+    keyword wholeright $\[0123456789\] VARIABLE_OTHER
 
-    keyword wholeright $+ brightgreen
+    keyword wholeright $+ VARIABLE_OTHER
 
-    keyword $ brightgreen
+    keyword $ VARIABLE_OTHER
 
-    keyword wholeleft linestart function*() brightmagenta
-    keyword wholeleft linestart function\[\s\]+ brightmagenta
-    keyword wholeright +() brightmagenta
+    keyword wholeleft linestart function*() ENTITY_NAME_FUNCTION
+    keyword wholeleft linestart function\[\s\]+ KEYWORD_OTHER_RESERVED
+    keyword wholeright +() ENTITY_NAME_FUNCTION
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole clear yellow
-    keyword whole continue yellow
-    keyword whole declare yellow
-    keyword whole done yellow
-    keyword whole do yellow
-    keyword whole elif yellow
-    keyword whole else yellow
-    keyword whole esac yellow
-    keyword whole exit yellow
-    keyword whole export yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole getopts yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole local yellow
-    keyword whole read yellow
-    keyword whole return yellow
-    keyword whole select yellow
-    keyword whole shift yellow
-    keyword whole source yellow
-    keyword whole then yellow
-    keyword whole trap yellow
-    keyword whole until yellow
-    keyword whole unset yellow
-    keyword whole wait yellow
-    keyword whole while yellow
+    keyword whole break KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole clear SUPPORT_FUNCTION
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole declare SUPPORT_FUNCTION
+    keyword whole done KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole elif KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole esac KEYWORD_CONTROL
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole export SUPPORT_FUNCTION
+    keyword whole fi KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole getopts SUPPORT_FUNCTION
+    keyword whole if KEYWORD_CONTROL
+    keyword whole in KEYWORD_CONTROL
+    keyword whole local SUPPORT_FUNCTION
+    keyword whole read SUPPORT_FUNCTION
+    keyword whole return KEYWORD_CONTROL
+    keyword whole select KEYWORD_CONTROL
+    keyword whole shift SUPPORT_FUNCTION
+    keyword whole source SUPPORT_FUNCTION
+    keyword whole then KEYWORD_CONTROL
+    keyword whole trap SUPPORT_FUNCTION
+    keyword whole until KEYWORD_CONTROL
+    keyword whole unset SUPPORT_FUNCTION
+    keyword whole wait SUPPORT_FUNCTION
+    keyword whole while KEYWORD_CONTROL
 
 # here goes usable subset for .ebuild commands
-    keyword whole awk cyan
-    keyword whole cd cyan
-    keyword whole chown cyan
-    keyword whole chmod cyan
-    keyword whole cmake cyan
-    keyword whole cp cyan
-    keyword whole echo cyan
-    keyword whole egrep cyan
-    keyword whole fgrep cyan
-    keyword whole find cyan
-    keyword whole grep cyan
-    keyword whole ln cyan
-    keyword whole make cyan
-    keyword whole mkdir cyan
-    keyword whole mknod cyan
-    keyword whole mv cyan
-    keyword whole perl cyan
-    keyword whole pod2man cyan
-    keyword whole popd cyan
-    keyword whole printf cyan
-    keyword whole pushd cyan
-    keyword whole rm cyan
-    keyword whole rmdir cyan
-    keyword whole sed cyan
-    keyword whole sh cyan
-    keyword whole shopt cyan
-    keyword whole touch cyan
-    keyword whole xmkmf cyan
+    keyword whole awk SUPPORT_FUNCTION
+    keyword whole cd SUPPORT_FUNCTION
+    keyword whole chown SUPPORT_FUNCTION
+    keyword whole chmod SUPPORT_FUNCTION
+    keyword whole cmake SUPPORT_FUNCTION
+    keyword whole cp SUPPORT_FUNCTION
+    keyword whole echo SUPPORT_FUNCTION
+    keyword whole egrep SUPPORT_FUNCTION
+    keyword whole fgrep SUPPORT_FUNCTION
+    keyword whole find SUPPORT_FUNCTION
+    keyword whole grep SUPPORT_FUNCTION
+    keyword whole ln SUPPORT_FUNCTION
+    keyword whole make SUPPORT_FUNCTION
+    keyword whole mkdir SUPPORT_FUNCTION
+    keyword whole mknod SUPPORT_FUNCTION
+    keyword whole mv SUPPORT_FUNCTION
+    keyword whole perl SUPPORT_FUNCTION
+    keyword whole pod2man SUPPORT_FUNCTION
+    keyword whole popd SUPPORT_FUNCTION
+    keyword whole printf SUPPORT_FUNCTION
+    keyword whole pushd SUPPORT_FUNCTION
+    keyword whole rm SUPPORT_FUNCTION
+    keyword whole rmdir SUPPORT_FUNCTION
+    keyword whole sed SUPPORT_FUNCTION
+    keyword whole sh SUPPORT_FUNCTION
+    keyword whole shopt SUPPORT_FUNCTION
+    keyword whole touch SUPPORT_FUNCTION
+    keyword whole xmkmf SUPPORT_FUNCTION
 
 # some interesting files to copy
-    keyword whole ANNOUNCEMENT white
-    keyword whole AUTHORS white
-    keyword whole BUGS white
-    keyword whole CHANGES white
-    keyword whole COPYING white
-    keyword whole COPYRIGHT white
-    keyword whole CREDITS white
-    keyword whole ChangeLog white
-    keyword whole FAQ white
-    keyword whole HACKING white
-    keyword whole INSTALL white
-    keyword whole LICENSE white
-    keyword whole NEWS white
-    keyword whole README white
-    keyword whole THANKS white
-    keyword whole TODO white
-    keyword whole VERSION white
+    keyword whole ANNOUNCEMENT CONSTANT_OTHER
+    keyword whole AUTHORS CONSTANT_OTHER
+    keyword whole BUGS CONSTANT_OTHER
+    keyword whole CHANGES CONSTANT_OTHER
+    keyword whole COPYING CONSTANT_OTHER
+    keyword whole COPYRIGHT CONSTANT_OTHER
+    keyword whole CREDITS CONSTANT_OTHER
+    keyword whole ChangeLog CONSTANT_OTHER
+    keyword whole FAQ CONSTANT_OTHER
+    keyword whole HACKING CONSTANT_OTHER
+    keyword whole INSTALL CONSTANT_OTHER
+    keyword whole LICENSE CONSTANT_OTHER
+    keyword whole NEWS CONSTANT_OTHER
+    keyword whole README CONSTANT_OTHER
+    keyword whole THANKS CONSTANT_OTHER
+    keyword whole TODO CONSTANT_OTHER
+    keyword whole VERSION CONSTANT_OTHER
 
-    keyword whole /dev/audio brightblue
-    keyword whole /dev/dsp brightblue
-    keyword whole /dev/null brightblue
-    keyword whole /dev/mixed brightblue
-    keyword whole /dev/stdin brightblue
-    keyword whole /dev/stdout brightblue
-    keyword whole /dev/stderr brightblue
-    keyword whole /dev/zero brightblue
+    keyword whole /dev/audio CONSTANT_OTHER
+    keyword whole /dev/dsp CONSTANT_OTHER
+    keyword whole /dev/null CONSTANT_OTHER
+    keyword whole /dev/mixed CONSTANT_OTHER
+    keyword whole /dev/stdin CONSTANT_OTHER
+    keyword whole /dev/stdout CONSTANT_OTHER
+    keyword whole /dev/stderr CONSTANT_OTHER
+    keyword whole /dev/zero CONSTANT_OTHER
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
-context # \n brown
+context # \n COMMENT_LINE
     spellcheck
 
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END green
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF STRING_QUOTED_OTHER
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END STRING_QUOTED_OTHER
 
-context ' ' green
+context ' ' STRING_QUOTED_SINGLE
 
-context " " green
-    keyword \\* brightgreen
-    keyword \\@ brightgreen
-    keyword \\$ brightgreen
-    keyword \\\\ brightgreen
-    keyword \\` brightgreen
-    keyword \\" brightgreen
-    keyword $(*) brightgreen
-    keyword ${*} brightgreen
-    keyword $\* brightred
-    keyword $@ brightred
-    keyword $# brightred
-    keyword $? brightred
-    keyword $- brightred
-    keyword $$ brightred
-    keyword $! brightred
-    keyword $_ brightred
-    keyword wholeright $\[0123456789\] brightred
+context " " STRING_QUOTED_DOUBLE
+    keyword \\* CONSTANT_CHARACTER_ESCAPE
+    keyword \\@ CONSTANT_CHARACTER_ESCAPE
+    keyword \\$ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword $\* VARIABLE_OTHER
+    keyword $@ VARIABLE_OTHER
+    keyword $# VARIABLE_OTHER
+    keyword $? VARIABLE_OTHER
+    keyword $- VARIABLE_OTHER
+    keyword $$ VARIABLE_OTHER
+    keyword $! VARIABLE_OTHER
+    keyword $_ VARIABLE_OTHER
+    keyword wholeright $\[0123456789\] VARIABLE_OTHER
 
-    keyword wholeright $+ brightgreen
+    keyword wholeright $+ VARIABLE_OTHER
 
-    keyword $ brightgreen
+    keyword $ VARIABLE_OTHER
 
-context exclusive ` ` lightgray black
-    keyword '*' green
-    keyword " green
-    keyword \\` green
-    keyword ; brightcyan
-    keyword $(*) brightgreen
-    keyword ${*} brightgreen
-    keyword { brightcyan
-    keyword } brightcyan
+context exclusive ` ` STRING_QUOTED_OTHER black
+    keyword '*' STRING_QUOTED_SINGLE
+    keyword " STRING_QUOTED_DOUBLE
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-    keyword $\* brightred
-    keyword $@ brightred
-    keyword $# brightred
-    keyword $? brightred
-    keyword $- brightred
-    keyword $$ brightred
-    keyword $! brightred
-    keyword $_ brightred
+    keyword $\* VARIABLE_OTHER
+    keyword $@ VARIABLE_OTHER
+    keyword $# VARIABLE_OTHER
+    keyword $? VARIABLE_OTHER
+    keyword $- VARIABLE_OTHER
+    keyword $$ VARIABLE_OTHER
+    keyword $! VARIABLE_OTHER
+    keyword $_ VARIABLE_OTHER
 
-    keyword whole 2>&1 brightred
-    keyword whole 2> brightred
-    keyword whole 1> brightred
+    keyword whole 2>&1 KEYWORD_OPERATOR
+    keyword whole 2> KEYWORD_OPERATOR
+    keyword whole 1> KEYWORD_OPERATOR
 
-    keyword wholeright $\[0123456789\] brightred
+    keyword wholeright $\[0123456789\] VARIABLE_OTHER
 
-    keyword wholeright $+ brightgreen
+    keyword wholeright $+ VARIABLE_OTHER
 
-    keyword $ brightgreen
+    keyword $ VARIABLE_OTHER
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole clear yellow
-    keyword whole continue yellow
-    keyword whole declare yellow
-    keyword whole done yellow
-    keyword whole do yellow
-    keyword whole elif yellow
-    keyword whole else yellow
-    keyword whole esac yellow
-    keyword whole exit yellow
-    keyword whole export yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole getopts yellow
-    keyword whole if yellow
-    keyword whole in yellow
-    keyword whole read yellow
-    keyword whole return yellow
-    keyword whole select yellow
-    keyword whole shift yellow
-    keyword whole source yellow
-    keyword whole then yellow
-    keyword whole trap yellow
-    keyword whole until yellow
-    keyword whole unset yellow
-    keyword whole wait yellow
-    keyword whole while yellow
+    keyword whole break KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole clear SUPPORT_FUNCTION
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole declare SUPPORT_FUNCTION
+    keyword whole done KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole elif KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole esac KEYWORD_CONTROL
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole export SUPPORT_FUNCTION
+    keyword whole fi KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole getopts SUPPORT_FUNCTION
+    keyword whole if KEYWORD_CONTROL
+    keyword whole in KEYWORD_CONTROL
+    keyword whole read SUPPORT_FUNCTION
+    keyword whole return KEYWORD_CONTROL
+    keyword whole select KEYWORD_CONTROL
+    keyword whole shift SUPPORT_FUNCTION
+    keyword whole source SUPPORT_FUNCTION
+    keyword whole then KEYWORD_CONTROL
+    keyword whole trap SUPPORT_FUNCTION
+    keyword whole until KEYWORD_CONTROL
+    keyword whole unset SUPPORT_FUNCTION
+    keyword whole wait SUPPORT_FUNCTION
+    keyword whole while KEYWORD_CONTROL
 
 # here goes usable subset for .ebuild commands
-    keyword whole awk cyan
-    keyword whole sed cyan
+    keyword whole awk SUPPORT_FUNCTION
+    keyword whole sed SUPPORT_FUNCTION
 
-    keyword whole /dev/audio brightblue
-    keyword whole /dev/dsp brightblue
-    keyword whole /dev/null brightblue
-    keyword whole /dev/mixed brightblue
-    keyword whole /dev/stdin brightblue
-    keyword whole /dev/stdout brightblue
-    keyword whole /dev/stderr brightblue
-    keyword whole /dev/zero brightblue
+    keyword whole /dev/audio CONSTANT_OTHER
+    keyword whole /dev/dsp CONSTANT_OTHER
+    keyword whole /dev/null CONSTANT_OTHER
+    keyword whole /dev/mixed CONSTANT_OTHER
+    keyword whole /dev/stdin CONSTANT_OTHER
+    keyword whole /dev/stdout CONSTANT_OTHER
+    keyword whole /dev/stderr CONSTANT_OTHER
+    keyword whole /dev/zero CONSTANT_OTHER
 
-context inherit \n magenta
-    keyword whole inherit yellow
+context inherit \n KEYWORD_CONTROL_IMPORT
+    keyword whole inherit KEYWORD_CONTROL_IMPORT

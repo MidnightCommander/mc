@@ -11,113 +11,102 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # for the default (lightgray on blue)
-define _alerthi lightgray red
-define _alertmi gray yellow
-define _alertlo gray cyan
-define _assign  white
-define _comb    yellow
-define _comment brown
-define _esc     brightgreen
-define _group   brightcyan
-define _lbl     lightgray blue underline
-define _num     brightgreen
-define _oper    yellow
-define _sep     brightmagenta
-define _special gray
-define _str     green
-define _var     lightgray
+define _alerthi KEYWORD_OTHER_TODO red
+define _alertmi KEYWORD_OTHER_TODO yellow
+define _alertlo KEYWORD_OTHER_TODO cyan
+define _lbl     ENTITY_NAME_OTHER blue underline
 
 context default
     # labels
     keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\]: _lbl
     # nonterminals
-    keyword <\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\]> _var
-    keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\] _var
+    keyword <\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\]> VARIABLE_OTHER
+    keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._\] VARIABLE_OTHER
     # decimal integer numbers
-    keyword wholeleft 0 _num
-    keyword wholeleft \{123456789_\}\[0123456789_\] _num
-    keyword wholeleft -\{123456789_\}\[0123456789_\] _num
+    keyword wholeleft 0 CONSTANT_NUMERIC
+    keyword wholeleft \{123456789_\}\[0123456789_\] CONSTANT_NUMERIC
+    keyword wholeleft -\{123456789_\}\[0123456789_\] CONSTANT_NUMERIC
     # repeaters (EBNF)
-    keyword (/ _group
-    keyword /) _group
-    keyword (: _group
-    keyword :) _group
+    keyword (/ PUNCTUATION_SECTION
+    keyword /) PUNCTUATION_SECTION
+    keyword (: PUNCTUATION_SECTION
+    keyword :) PUNCTUATION_SECTION
     # exclude from highlighting
-    keyword ::== lightgray blue
+    keyword ::== KEYWORD_OPERATOR blue
     # assignments
-    keyword :≡ _assign
-    keyword :== _assign
-    keyword := _assign
-    keyword ::= _assign
-    keyword :: _assign
-    keyword : _assign
-    keyword => _assign
-    keyword = _assign
-    keyword <- _assign
-    keyword -> _assign
-    keyword <= _assign
-    keyword ← _assign
-    keyword → _assign
-    keyword ⇐ _assign
-    keyword ⇒ _assign
-    keyword ≜ _assign
+    keyword :≡ KEYWORD_OPERATOR
+    keyword :== KEYWORD_OPERATOR
+    keyword := KEYWORD_OPERATOR
+    keyword ::= KEYWORD_OPERATOR
+    keyword :: KEYWORD_OPERATOR
+    keyword : KEYWORD_OPERATOR
+    keyword => KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword <- KEYWORD_OPERATOR
+    keyword -> KEYWORD_OPERATOR
+    keyword <= KEYWORD_OPERATOR
+    keyword ← KEYWORD_OPERATOR
+    keyword → KEYWORD_OPERATOR
+    keyword ⇐ KEYWORD_OPERATOR
+    keyword ⇒ KEYWORD_OPERATOR
+    keyword ≜ KEYWORD_OPERATOR
     # combinators
-    keyword | _comb
-    keyword / _comb
-    keyword \\ _comb
-    keyword - _comb
-    keyword , _comb
+    keyword | KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword \\ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword , PUNCTUATION_SEPARATOR
     # operators
-    keyword ! _oper
-    keyword # _oper
-    keyword $ _oper
+    keyword ! KEYWORD_OPERATOR
+    keyword # KEYWORD_OPERATOR
+    keyword $ KEYWORD_OPERATOR
 #    keyword % _oper
-    keyword & _oper
-    keyword \* _oper
-    keyword \+ _oper
-    keyword ? _oper
-    keyword @ _oper
-    keyword ^ _oper
-    keyword ~ _oper
+    keyword & KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword ? KEYWORD_OPERATOR
+    keyword @ KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword ~ KEYWORD_OPERATOR
     # grouping
-    keyword ( _group
-    keyword ) _group
-    keyword < _group
-    keyword > _group
-    keyword [ _group
-    keyword ] _group
-    keyword { _group
-    keyword } _group
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword < PUNCTUATION_SECTION
+    keyword > PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
     # concatenator,separator,terminator
-    keyword \{.;\} _sep
+    keyword \{.;\} PUNCTUATION_TERMINATOR
 
 # strings
 
-context ' ' _str
-    keyword \\' _esc
-    keyword \\\\ _esc
-    keyword \\\{abtnvfr\} _esc
-    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
-    keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
-    keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+context ' ' STRING_QUOTED_SINGLE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
 
-context " " _str
-    keyword \\" _esc
-    keyword \\\\ _esc
-    keyword \\\{abtnvfr\} _esc
-    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
-    keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
-    keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} _esc
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} CONSTANT_CHARACTER_ESCAPE
 
 # special sequence
 
-context ` ` _special
-    keyword \\` _special
+context ` ` STRING_QUOTED_OTHER
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
 
 # comments
 
-context % % _comment
-    keyword \\% _comment
+context % % COMMENT_BLOCK
+    keyword \\% COMMENT_BLOCK
     keyword whole BUG        _alerthi
     keyword whole DEPRECATED _alertmi
     keyword whole FIXME      _alerthi

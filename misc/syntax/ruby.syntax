@@ -5,226 +5,226 @@ context default
 
 #Bang path
 
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
-    keyword whole linestart #!\[\s\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby META_PREPROCESSOR black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby META_PREPROCESSOR black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby META_PREPROCESSOR black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby META_PREPROCESSOR black
+    keyword whole linestart #!\[\s\]/bin/ruby META_PREPROCESSOR black
 
 # Symbols :bla-bla
-    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] CONSTANT_OTHER
 
 #Operators
 
-    keyword > yellow
-    keyword < yellow
-    keyword - yellow
-    keyword \+ yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword \+= yellow
-    keyword -= yellow
-    keyword == yellow
-    keyword != yellow
-    keyword === yellow
-    keyword <=> yellow
-    keyword ! yellow
-    keyword ~ yellow
-    keyword =~ yellow
-    keyword & yellow
-    keyword | yellow
-    keyword .. yellow
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword \+= KEYWORD_OPERATOR
+    keyword -= KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword != KEYWORD_OPERATOR
+    keyword === KEYWORD_OPERATOR
+    keyword <=> KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
+    keyword ~ KEYWORD_OPERATOR
+    keyword =~ KEYWORD_OPERATOR
+    keyword & KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword .. KEYWORD_OPERATOR
 
 #System variables
 
 # hack for regexps
-    keyword $/ yellow
-    keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} red
-    keyword $\{\0123456789\} red
-    keyword $-+ red
+    keyword $/ VARIABLE_OTHER
+    keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} VARIABLE_OTHER
+    keyword $\{\0123456789\} VARIABLE_OTHER
+    keyword $-+ VARIABLE_OTHER
 
-    keyword whole $defout red
-    keyword whole $DEBUG red
-    keyword whole $F red
-    keyword whole $FILENAME red
-    keyword whole $LOAD_PATH red
-    keyword whole $SAFE red
-    keyword whole $VERBOSE red
-    keyword whole __FILE__ red
-    keyword whole __LINE__ red
-    keyword whole BEGIN red
-    keyword whole END red
-    keyword whole DATA red
-    keyword whole RUBY_PLATFORM red
-    keyword whole RUBY_RELEASE_DATE red
-    keyword whole RUBY_VERSION red
-    keyword whole $stdin red
-    keyword whole STDIN red
-    keyword whole $stdout red
-    keyword whole STDOUT red
-    keyword whole $stderr red
-    keyword whole STDERR red
-    keyword whole argv red
-    keyword whole ARGV red
-    keyword whole ARGF red
-    keyword whole env red
-    keyword whole ENV red
+    keyword whole $defout VARIABLE_OTHER
+    keyword whole $DEBUG VARIABLE_OTHER
+    keyword whole $F VARIABLE_OTHER
+    keyword whole $FILENAME VARIABLE_OTHER
+    keyword whole $LOAD_PATH VARIABLE_OTHER
+    keyword whole $SAFE VARIABLE_OTHER
+    keyword whole $VERBOSE VARIABLE_OTHER
+    keyword whole __FILE__ CONSTANT_LANGUAGE
+    keyword whole __LINE__ CONSTANT_LANGUAGE
+    keyword whole BEGIN KEYWORD_OTHER_RESERVED
+    keyword whole END KEYWORD_OTHER_RESERVED
+    keyword whole DATA CONSTANT_OTHER
+    keyword whole RUBY_PLATFORM CONSTANT_OTHER
+    keyword whole RUBY_RELEASE_DATE CONSTANT_OTHER
+    keyword whole RUBY_VERSION CONSTANT_OTHER
+    keyword whole $stdin VARIABLE_OTHER
+    keyword whole STDIN CONSTANT_OTHER
+    keyword whole $stdout VARIABLE_OTHER
+    keyword whole STDOUT CONSTANT_OTHER
+    keyword whole $stderr VARIABLE_OTHER
+    keyword whole STDERR CONSTANT_OTHER
+    keyword whole argv SUPPORT_FUNCTION
+    keyword whole ARGV CONSTANT_OTHER
+    keyword whole ARGF CONSTANT_OTHER
+    keyword whole env SUPPORT_FUNCTION
+    keyword whole ENV CONSTANT_OTHER
 
 #Braces &
 
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword : brightcyan
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
 
-    keyword whole false brightred
-    keyword whole FALSE brightred
-    keyword whole nil brightred
-    keyword whole NIL brightred
-    keyword whole true brightred
-    keyword whole TRUE brightred
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole FALSE CONSTANT_LANGUAGE
+    keyword whole nil CONSTANT_LANGUAGE
+    keyword whole NIL CONSTANT_LANGUAGE
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole TRUE CONSTANT_LANGUAGE
 
 #Variables
 
-    keyword wholeright $+ brightgreen
-    keyword wholeright @+ white
-    keyword \\" brightred
-    keyword \\' brightred
+    keyword wholeright $+ VARIABLE_OTHER
+    keyword wholeright @+ VARIABLE_OTHER
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
 
 #Reserved words (see ruby manual)
 
-    keyword whole def magenta
+    keyword whole def STORAGE_TYPE_FUNCTION
 
-    keyword whole alias magenta
-    keyword whole and magenta
-    keyword whole begin magenta
-    keyword whole break magenta
-    keyword whole case magenta
-    keyword whole class magenta
-    keyword whole defined\? magenta
-    keyword whole do magenta
-    keyword whole else magenta
-    keyword whole elsif magenta
-    keyword whole end magenta
-    keyword whole ensure magenta
-    keyword whole for magenta
-    keyword whole if magenta
-    keyword whole in magenta
-    keyword whole module magenta
-    keyword whole next magenta
-    keyword whole not magenta
-    keyword whole or magenta
-    keyword whole redo magenta
-    keyword whole rescue magenta
-    keyword whole retry magenta
-    keyword whole return magenta
-    keyword whole self magenta
-    keyword whole super magenta
-    keyword whole then magenta
-    keyword whole undef magenta
-    keyword whole unless magenta
-    keyword whole until magenta
-    keyword whole when magenta
-    keyword whole while magenta
-    keyword whole yeld magenta
+    keyword whole alias KEYWORD_OTHER_RESERVED
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole begin KEYWORD_CONTROL
+    keyword whole break KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole defined\? KEYWORD_OTHER_RESERVED
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elsif KEYWORD_CONTROL
+    keyword whole end KEYWORD_CONTROL
+    keyword whole ensure KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole in KEYWORD_CONTROL
+    keyword whole module STORAGE_TYPE_CLASS
+    keyword whole next KEYWORD_CONTROL
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole redo KEYWORD_CONTROL
+    keyword whole rescue KEYWORD_CONTROL
+    keyword whole retry KEYWORD_CONTROL
+    keyword whole return KEYWORD_CONTROL
+    keyword whole self VARIABLE_LANGUAGE
+    keyword whole super VARIABLE_LANGUAGE
+    keyword whole then KEYWORD_CONTROL
+    keyword whole undef KEYWORD_OTHER_RESERVED
+    keyword whole unless KEYWORD_CONTROL
+    keyword whole until KEYWORD_CONTROL
+    keyword whole when KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
+    keyword whole yeld KEYWORD_CONTROL
 
 #First class methods
 
-    keyword whole new yellow
-    keyword whole inherited yellow
-    keyword whole superclass yellow
+    keyword whole new KEYWORD_OTHER_NEW
+    keyword whole inherited SUPPORT_FUNCTION
+    keyword whole superclass SUPPORT_FUNCTION
 
 #Class module
 #   exclusion
-    keyword whole include\? green
-    keyword whole include magenta
-    keyword whole require magenta
-    keyword whole require_relative magenta
+    keyword whole include\? SUPPORT_FUNCTION
+    keyword whole include KEYWORD_CONTROL_IMPORT
+    keyword whole require KEYWORD_CONTROL_IMPORT
+    keyword whole require_relative KEYWORD_CONTROL_IMPORT
 #    keyword whole where magenta
 
 #Class numeric
 
-    keyword whole abs red
-    keyword whole modulo red
-    keyword whole remainder red
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole modulo SUPPORT_FUNCTION
+    keyword whole remainder SUPPORT_FUNCTION
 
 #Class IO
 
-    keyword whole close yellow
-    keyword whole crypt yellow
-    keyword whole delete yellow
-    keyword whole each yellow
-    keyword whole gets yellow
-    keyword whole grep yellow
-    keyword whole inspect yellow
-    keyword whole join yellow
-    keyword whole sync yellow
+    keyword whole close SUPPORT_FUNCTION
+    keyword whole crypt SUPPORT_FUNCTION
+    keyword whole delete SUPPORT_FUNCTION
+    keyword whole each SUPPORT_FUNCTION
+    keyword whole gets SUPPORT_FUNCTION
+    keyword whole grep SUPPORT_FUNCTION
+    keyword whole inspect SUPPORT_FUNCTION
+    keyword whole join SUPPORT_FUNCTION
+    keyword whole sync SUPPORT_FUNCTION
 
 #Class Array
 
-    keyword whole index yellow
-    keyword whole indexes yellow
-    keyword whole indices yellow
-    keyword whole size yellow
-    keyword whole pop yellow
-    keyword whole push yellow
-    keyword whole sort yellow
-    keyword whole shift yellow
-    keyword whole unshift yellow
+    keyword whole index SUPPORT_FUNCTION
+    keyword whole indexes SUPPORT_FUNCTION
+    keyword whole indices SUPPORT_FUNCTION
+    keyword whole size SUPPORT_FUNCTION
+    keyword whole pop SUPPORT_FUNCTION
+    keyword whole push SUPPORT_FUNCTION
+    keyword whole sort SUPPORT_FUNCTION
+    keyword whole shift SUPPORT_FUNCTION
+    keyword whole unshift SUPPORT_FUNCTION
 
 #Math module
 
-    keyword whole Math::PI red
-    keyword whole Math::E red
-    keyword whole atan2 red
-    keyword whole cos red
-    keyword whole exp red
-    keyword whole frexp red
-    keyword whole ldexp red
-    keyword whole log red
-    keyword whole log10 red
-    keyword whole sin red
-    keyword whole sqrt red
-    keyword whole tan red
+    keyword whole Math::PI CONSTANT_OTHER
+    keyword whole Math::E CONSTANT_OTHER
+    keyword whole atan2 SUPPORT_FUNCTION
+    keyword whole cos SUPPORT_FUNCTION
+    keyword whole exp SUPPORT_FUNCTION
+    keyword whole frexp SUPPORT_FUNCTION
+    keyword whole ldexp SUPPORT_FUNCTION
+    keyword whole log SUPPORT_FUNCTION
+    keyword whole log10 SUPPORT_FUNCTION
+    keyword whole sin SUPPORT_FUNCTION
+    keyword whole sqrt SUPPORT_FUNCTION
+    keyword whole tan SUPPORT_FUNCTION
 
 #Kernel module
 
-    keyword whole chomp yellow
-    keyword whole chomp! yellow
-    keyword whole chop yellow
-    keyword whole chop! yellow
-    keyword whole raise yellow
-    keyword whole fork yellow
-    keyword whole rand yellow
-    keyword whole srand yellow
-    keyword whole open yellow
-    keyword whole print yellow
-    keyword whole puts yellow
-    keyword whole printf yellow
-    keyword whole sprintf yellow
-    keyword whole exec yellow
-    keyword whole eval yellow
-    keyword whole exit yellow
-    keyword whole sleep yellow
+    keyword whole chomp SUPPORT_FUNCTION
+    keyword whole chomp! SUPPORT_FUNCTION
+    keyword whole chop SUPPORT_FUNCTION
+    keyword whole chop! SUPPORT_FUNCTION
+    keyword whole raise SUPPORT_FUNCTION
+    keyword whole fork SUPPORT_FUNCTION
+    keyword whole rand SUPPORT_FUNCTION
+    keyword whole srand SUPPORT_FUNCTION
+    keyword whole open SUPPORT_FUNCTION
+    keyword whole print SUPPORT_FUNCTION
+    keyword whole puts SUPPORT_FUNCTION
+    keyword whole printf SUPPORT_FUNCTION
+    keyword whole sprintf SUPPORT_FUNCTION
+    keyword whole exec SUPPORT_FUNCTION
+    keyword whole eval SUPPORT_FUNCTION
+    keyword whole exit SUPPORT_FUNCTION
+    keyword whole sleep SUPPORT_FUNCTION
 
 #this works only with label EOF :-(
 #context exclusive whole <<\[\s\]EOF EOF green
 
-context # \n brown
+context # \n COMMENT_LINE
     spellcheck
 
-context " " green
-    keyword \\" brightgreen
-    keyword \\\\ brightgreen
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
 
-context ' ' brightgreen
-    keyword \\' green
-    keyword \\\\ green
+context ' ' STRING_QUOTED_SINGLE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ SUPPORT_FUNCTION
 
-context exclusive ` ` white black
+context exclusive ` ` STRING_QUOTED_OTHER black

@@ -6,622 +6,622 @@ caseinsensitive
 context default
 
 # Keywords
-    keyword whole TRUE                                     white
-    keyword whole FALSE                                    white
-    keyword whole ALL                                      white
-    keyword whole NONE                                     white
-    keyword whole AND                                      white
-    keyword whole OR                                       white
-    keyword whole NOT                                      white
-    keyword whole !                                        brightcyan
-    keyword whole LIKE                                     white
-    keyword whole ANY                                      white
-    keyword whole IF                                       white
-    keyword whole EXISTS                                   white
-    keyword whole ASC                                      white
-    keyword whole DESC                                     white
-    keyword whole NULLS                                    white
-    keyword whole LAST                                     white
-    keyword whole ORDER                                    white
-    keyword whole GROUP                                    white
-    keyword whole BY                                       white
-    keyword whole HAVING                                   white
-    keyword whole WHERE                                    white
-    keyword whole FROM                                     white
-    keyword whole AS                                       white
-    keyword whole SELECT                                   white
-    keyword whole DISTINCT                                 white
-    keyword whole INSERT                                   white
-    keyword whole OVERWRITE                                magenta
-    keyword whole OUTER                                    white
-    keyword whole UNIQUEJOIN                               white
-    keyword whole PRESERVE                                 white
-    keyword whole JOIN                                     white
-    keyword whole LEFT                                     white
-    keyword whole RIGHT                                    white
-    keyword whole FULL                                     white
-    keyword whole ON                                       white
-    keyword whole PARTITION                                white
-    keyword whole PARTITIONS                               white
-    keyword whole TABLE                                    white
-    keyword whole TABLES                                   white
-    keyword whole COLUMNS                                  white
-    keyword whole INDEX                                    white
-    keyword whole INDEXES                                  white
-    keyword whole REBUILD                                  white
-    keyword whole FUNCTIONS                                white
-    keyword whole SHOW                                     white
-    keyword whole MSCK                                     white
-    keyword whole REPAIR                                   white
-    keyword whole DIRECTORY                                magenta
-    keyword whole LOCAL                                    magenta
-    keyword whole TRANSFORM                                white
-    keyword whole USING                                    white
-    keyword whole CLUSTER                                  white
-    keyword whole DISTRIBUTE                               white
-    keyword whole SORT                                     white
-    keyword whole UNION                                    white
-    keyword whole EXCEPT                                   white
-    keyword whole LOAD                                     white
-    keyword whole EXPORT                                   white
-    keyword whole IMPORT                                   white
-    keyword whole REPLICATION                              white
-    keyword whole METADATA                                 white
-    keyword whole DATA                                     white
-    keyword whole INPATH                                   white
-    keyword whole IS                                       white
-    keyword whole NULL                                     white
-    keyword whole CREATE                                   white
-    keyword whole EXTERNAL                                 white
-    keyword whole ALTER                                    white
-    keyword whole CHANGE                                   white
-    keyword whole COLUMN                                   white
-    keyword whole FIRST                                    white
-    keyword whole AFTER                                    white
-    keyword whole DESCRIBE                                 magenta
-    keyword whole DROP                                     white
-    keyword whole RENAME                                   white
-    keyword whole TO                                       white
-    keyword whole COMMENT                                  white
-    keyword whole BOOLEAN                                  white
-    keyword whole TINYINT                                  white
-    keyword whole SMALLINT                                 white
-    keyword whole INT                                      white
-    keyword whole INTEGER                                  white
-    keyword whole BIGINT                                   white
-    keyword whole FLOAT                                    white
-    keyword whole DOUBLE                                   white
-    keyword whole PRECISION                                white
-    keyword whole DATE                                     white
-    keyword whole DATETIME                                 white
-    keyword whole TIMESTAMP                                white
-    keyword whole TIMESTAMPTZ                              white
-    keyword whole TIME                                     white
-    keyword whole ZONE                                     white
-    keyword whole INTERVAL                                 white
-    keyword whole DECIMAL                                  white
-    keyword whole DEC                                      white
-    keyword whole NUMERIC                                  white
-    keyword whole STRING                                   white
-    keyword whole CHAR                                     white
-    keyword whole VARCHAR                                  white
-    keyword whole ARRAY                                    white
-    keyword whole STRUCT                                   white
-    keyword whole MAP                                      white
-    keyword whole UNIONTYPE                                white
-    keyword whole REDUCE                                   white
-    keyword whole PARTITIONED                              white
-    keyword whole CLUSTERED                                white
-    keyword whole SORTED                                   white
-    keyword whole INTO                                     white
-    keyword whole BUCKETS                                  white
-    keyword whole ROW                                      magenta
-    keyword whole ROWS                                     magenta
-    keyword whole FORMAT                                   magenta
-    keyword whole DELIMITED                                magenta
-    keyword whole FIELDS                                   magenta
-    keyword whole TERMINATED                               magenta
-    keyword whole ESCAPED                                  magenta
-    keyword whole COLLECTION                               white
-    keyword whole ITEMS                                    white
-    keyword whole KEYS                                     white
-    keyword whole $KEY$                                    white
-    keyword whole LINES                                    magenta
-    keyword whole STORED                                   magenta
-    keyword whole FILEFORMAT                               magenta
-    keyword whole INPUTFORMAT                              magenta
-    keyword whole OUTPUTFORMAT                             magenta
-    keyword whole INPUTDRIVER                              white
-    keyword whole OUTPUTDRIVER                             white
-    keyword whole ENABLE                                   white
-    keyword whole DISABLE                                  white
-    keyword whole LOCATION                                 magenta
-    keyword whole TABLESAMPLE                              white
-    keyword whole BUCKET                                   white
-    keyword whole OUT                                      white
-    keyword whole OF                                       white
-    keyword whole PERCENT                                  white
-    keyword whole CAST                                     cyan
-    keyword whole ADD                                      white
-    keyword whole REPLACE                                  white
-    keyword whole RLIKE                                    white
-    keyword whole REGEXP                                   white
-    keyword whole TEMPORARY                                white
-    keyword whole FUNCTION                                 white
-    keyword whole MACRO                                    white
-    keyword whole FILE                                     white
-    keyword whole JAR                                      white
-    keyword whole EXPLAIN                                  white
-    keyword whole EXTENDED                                 white
-    keyword whole FORMATTED                                white
-    keyword whole PRETTY                                   white
-    keyword whole DEPENDENCY                               white
-    keyword whole LOGICAL                                  white
-    keyword whole SERDE                                    white
-    keyword whole WITH                                     white
-    keyword whole DEFERRED                                 white
-    keyword whole SERDEPROPERTIES                          white
-    keyword whole DBPROPERTIES                             white
-    keyword whole LIMIT                                    white
-    keyword whole OFFSET                                   white
-    keyword whole SET                                      white
-    keyword whole UNSET                                    white
-    keyword whole TBLPROPERTIES                            white
-    keyword whole IDXPROPERTIES                            white
-    keyword whole $VALUE$                                  white
-    keyword whole $ELEM$                                   white
-    keyword whole DEFINED                                  white
-    keyword whole CASE                                     white
-    keyword whole WHEN                                     white
-    keyword whole THEN                                     white
-    keyword whole ELSE                                     white
-    keyword whole END                                      white
-    keyword whole MAPJOIN                                  white
-    keyword whole STREAMTABLE                              white
-    keyword whole CLUSTERSTATUS                            white
-    keyword whole UTC                                      white
-    keyword whole UTC_TMESTAMP                             white
-    keyword whole LONG                                     white
-    keyword whole DELETE                                   white
-    keyword whole PLUS                                     white
-    keyword whole MINUS                                    white
-    keyword whole FETCH                                    white
-    keyword whole INTERSECT                                white
-    keyword whole VIEW                                     white
-    keyword whole VIEWS                                    white
-    keyword whole IN                                       white
-    keyword whole DATABASE                                 white
-    keyword whole DATABASES                                white
-    keyword whole MATERIALIZED                             white
-    keyword whole SCHEMA                                   white
-    keyword whole SCHEMAS                                  white
-    keyword whole GRANT                                    white
-    keyword whole REVOKE                                   white
-    keyword whole SSL                                      white
-    keyword whole UNDO                                     white
-    keyword whole LOCK                                     white
-    keyword whole LOCKS                                    white
-    keyword whole UNLOCK                                   white
-    keyword whole SHARED                                   white
-    keyword whole EXCLUSIVE                                white
-    keyword whole PROCEDURE                                white
-    keyword whole UNSIGNED                                 white
-    keyword whole WHILE                                    white
-    keyword whole READ                                     white
-    keyword whole READS                                    white
-    keyword whole PURGE                                    white
-    keyword whole RANGE                                    white
-    keyword whole ANALYZE                                  white
-    keyword whole BEFORE                                   white
-    keyword whole BETWEEN                                  white
-    keyword whole BOTH                                     white
-    keyword whole BINARY                                   white
-    keyword whole CROSS                                    white
-    keyword whole CONTINUE                                 white
-    keyword whole CURSOR                                   white
-    keyword whole TRIGGER                                  white
-    keyword whole RECORDREADER                             white
-    keyword whole RECORDWRITER                             white
-    keyword whole SEMI                                     white
-    keyword whole LATERAL                                  magenta
-    keyword whole TOUCH                                    white
-    keyword whole ARCHIVE                                  magenta
-    keyword whole UNARCHIVE                                magenta
-    keyword whole COMPUTE                                  white
-    keyword whole STATISTICS                               white
-    keyword whole USE                                      magenta
-    keyword whole OPTION                                   white
-    keyword whole CONCATENATE                              magenta
-    keyword whole SHOW_DATABASE                            white
-    keyword whole UPDATE                                   white
-    keyword whole RESTRICT                                 white
-    keyword whole CASCADE                                  white
-    keyword whole SKEWED                                   white
-    keyword whole ROLLUP                                   white
-    keyword whole CUBE                                     white
-    keyword whole DIRECTORIES                              white
-    keyword whole FOR                                      white
-    keyword whole WINDOW                                   white
-    keyword whole UNBOUNDED                                white
-    keyword whole PRECEDING                                white
-    keyword whole FOLLOWING                                white
-    keyword whole CURRENT                                  white
-    keyword whole CURRENT_DATE                             white
-    keyword whole CURRENT_TIMESTAMP                        white
-    keyword whole LESS                                     white
-    keyword whole MORE                                     white
-    keyword whole OVER                                     white
-    keyword whole GROUPING                                 white
-    keyword whole SETS                                     white
-    keyword whole TRUNCATE                                 white
-    keyword whole NOSCAN                                   white
-    keyword whole PARTIALSCAN                              white
-    keyword whole USER                                     white
-    keyword whole ROLE                                     white
-    keyword whole ROLES                                    white
-    keyword whole INNER                                    white
-    keyword whole EXCHANGE                                 white
-    keyword whole URI                                      white
-    keyword whole SERVER                                   white
-    keyword whole ADMIN                                    white
-    keyword whole OWNER                                    white
-    keyword whole PRINCIPALS                               white
-    keyword whole COMPACT                                  white
-    keyword whole COMPACTIONS                              white
-    keyword whole TRANSACTIONS                             white
-    keyword whole REWRITE                                  white
-    keyword whole AUTHORIZATION                            white
-    keyword whole CONF                                     white
-    keyword whole VALUES                                   white
-    keyword whole RELOAD                                   white
-    keyword whole YEAR                                     white
-    keyword whole YEARS                                    white
-    keyword whole QUARTER                                  white
-    keyword whole MONTH                                    white
-    keyword whole MONTHS                                   white
-    keyword whole WEEK                                     white
-    keyword whole WEEKS                                    white
-    keyword whole DAY                                      white
-    keyword whole DAYS                                     white
-    keyword whole DAYOFWEEK                                white
-    keyword whole HOUR                                     white
-    keyword whole HOURS                                    white
-    keyword whole MINUTE                                   white
-    keyword whole MINUTES                                  white
-    keyword whole SECOND                                   white
-    keyword whole SECONDS                                  white
-    keyword whole START                                    white
-    keyword whole TRANSACTION                              white
-    keyword whole COMMIT                                   white
-    keyword whole ROLLBACK                                 white
-    keyword whole WORK                                     white
-    keyword whole ONLY                                     white
-    keyword whole WRITE                                    white
-    keyword whole ISOLATION                                white
-    keyword whole LEVEL                                    white
-    keyword whole SNAPSHOT                                 white
-    keyword whole AUTOCOMMIT                               white
-    keyword whole CACHE                                    white
-    keyword whole PRIMARY                                  white
-    keyword whole FOREIGN                                  white
-    keyword whole REFERENCES                               white
-    keyword whole CONSTRAINT                               white
-    keyword whole VALIDATE                                 white
-    keyword whole NOVALIDATE                               white
-    keyword whole RELY                                     white
-    keyword whole NORELY                                   white
-    keyword whole UNIQUE                                   white
-    keyword whole KEY                                      white
-    keyword whole ABORT                                    white
-    keyword whole EXTRACT                                  white
-    keyword whole FLOOR                                    white
-    keyword whole MERGE                                    white
-    keyword whole MATCHED                                  white
-    keyword whole REPL                                     white
-    keyword whole DUMP                                     white
-    keyword whole STATUS                                   white
-    keyword whole VECTORIZATION                            white
-    keyword whole SUMMARY                                  white
-    keyword whole OPERATOR                                 white
-    keyword whole EXPRESSION                               white
-    keyword whole DETAIL                                   white
-    keyword whole WAIT                                     white
+    keyword whole TRUE                                     CONSTANT_LANGUAGE
+    keyword whole FALSE                                    CONSTANT_LANGUAGE
+    keyword whole ALL                                      KEYWORD_OTHER_RESERVED
+    keyword whole NONE                                     KEYWORD_OTHER_RESERVED
+    keyword whole AND                                      KEYWORD_OPERATOR_WORD
+    keyword whole OR                                       KEYWORD_OPERATOR_WORD
+    keyword whole NOT                                      KEYWORD_OPERATOR_WORD
+    keyword whole !                                        KEYWORD_OPERATOR
+    keyword whole LIKE                                     KEYWORD_OPERATOR_WORD
+    keyword whole ANY                                      KEYWORD_OTHER_RESERVED
+    keyword whole IF                                       KEYWORD_CONTROL
+    keyword whole EXISTS                                   KEYWORD_OTHER_RESERVED
+    keyword whole ASC                                      KEYWORD_OTHER_RESERVED
+    keyword whole DESC                                     KEYWORD_OTHER_RESERVED
+    keyword whole NULLS                                    KEYWORD_OTHER_RESERVED
+    keyword whole LAST                                     KEYWORD_OTHER_RESERVED
+    keyword whole ORDER                                    KEYWORD_OTHER_RESERVED
+    keyword whole GROUP                                    KEYWORD_OTHER_RESERVED
+    keyword whole BY                                       KEYWORD_OTHER_RESERVED
+    keyword whole HAVING                                   KEYWORD_OTHER_RESERVED
+    keyword whole WHERE                                    KEYWORD_OTHER_RESERVED
+    keyword whole FROM                                     KEYWORD_OTHER_RESERVED
+    keyword whole AS                                       KEYWORD_OTHER_RESERVED
+    keyword whole SELECT                                   KEYWORD_OTHER_RESERVED
+    keyword whole DISTINCT                                 KEYWORD_OTHER_RESERVED
+    keyword whole INSERT                                   KEYWORD_OTHER_RESERVED
+    keyword whole OVERWRITE                                KEYWORD_OTHER_RESERVED
+    keyword whole OUTER                                    KEYWORD_OTHER_RESERVED
+    keyword whole UNIQUEJOIN                               KEYWORD_OTHER_RESERVED
+    keyword whole PRESERVE                                 KEYWORD_OTHER_RESERVED
+    keyword whole JOIN                                     KEYWORD_OTHER_RESERVED
+    keyword whole LEFT                                     KEYWORD_OTHER_RESERVED
+    keyword whole RIGHT                                    KEYWORD_OTHER_RESERVED
+    keyword whole FULL                                     KEYWORD_OTHER_RESERVED
+    keyword whole ON                                       KEYWORD_OTHER_RESERVED
+    keyword whole PARTITION                                KEYWORD_OTHER_RESERVED
+    keyword whole PARTITIONS                               KEYWORD_OTHER_RESERVED
+    keyword whole TABLE                                    KEYWORD_OTHER_RESERVED
+    keyword whole TABLES                                   KEYWORD_OTHER_RESERVED
+    keyword whole COLUMNS                                  KEYWORD_OTHER_RESERVED
+    keyword whole INDEX                                    KEYWORD_OTHER_RESERVED
+    keyword whole INDEXES                                  KEYWORD_OTHER_RESERVED
+    keyword whole REBUILD                                  KEYWORD_OTHER_RESERVED
+    keyword whole FUNCTIONS                                KEYWORD_OTHER_RESERVED
+    keyword whole SHOW                                     KEYWORD_OTHER_RESERVED
+    keyword whole MSCK                                     KEYWORD_OTHER_RESERVED
+    keyword whole REPAIR                                   KEYWORD_OTHER_RESERVED
+    keyword whole DIRECTORY                                KEYWORD_OTHER_RESERVED
+    keyword whole LOCAL                                    KEYWORD_OTHER_RESERVED
+    keyword whole TRANSFORM                                KEYWORD_OTHER_RESERVED
+    keyword whole USING                                    KEYWORD_OTHER_RESERVED
+    keyword whole CLUSTER                                  KEYWORD_OTHER_RESERVED
+    keyword whole DISTRIBUTE                               KEYWORD_OTHER_RESERVED
+    keyword whole SORT                                     KEYWORD_OTHER_RESERVED
+    keyword whole UNION                                    KEYWORD_OTHER_RESERVED
+    keyword whole EXCEPT                                   KEYWORD_OTHER_RESERVED
+    keyword whole LOAD                                     KEYWORD_OTHER_RESERVED
+    keyword whole EXPORT                                   KEYWORD_OTHER_RESERVED
+    keyword whole IMPORT                                   KEYWORD_OTHER_RESERVED
+    keyword whole REPLICATION                              KEYWORD_OTHER_RESERVED
+    keyword whole METADATA                                 KEYWORD_OTHER_RESERVED
+    keyword whole DATA                                     KEYWORD_OTHER_RESERVED
+    keyword whole INPATH                                   KEYWORD_OTHER_RESERVED
+    keyword whole IS                                       KEYWORD_OPERATOR_WORD
+    keyword whole NULL                                     CONSTANT_LANGUAGE
+    keyword whole CREATE                                   KEYWORD_OTHER_RESERVED
+    keyword whole EXTERNAL                                 STORAGE_MODIFIER
+    keyword whole ALTER                                    KEYWORD_OTHER_RESERVED
+    keyword whole CHANGE                                   KEYWORD_OTHER_RESERVED
+    keyword whole COLUMN                                   KEYWORD_OTHER_RESERVED
+    keyword whole FIRST                                    KEYWORD_OTHER_RESERVED
+    keyword whole AFTER                                    KEYWORD_OTHER_RESERVED
+    keyword whole DESCRIBE                                 KEYWORD_OTHER_RESERVED
+    keyword whole DROP                                     KEYWORD_OTHER_RESERVED
+    keyword whole RENAME                                   KEYWORD_OTHER_RESERVED
+    keyword whole TO                                       KEYWORD_OTHER_RESERVED
+    keyword whole COMMENT                                  KEYWORD_OTHER_RESERVED
+    keyword whole BOOLEAN                                  STORAGE_TYPE_PRIMITIVE
+    keyword whole TINYINT                                  STORAGE_TYPE_PRIMITIVE
+    keyword whole SMALLINT                                 STORAGE_TYPE_PRIMITIVE
+    keyword whole INT                                      STORAGE_TYPE_PRIMITIVE
+    keyword whole INTEGER                                  STORAGE_TYPE_PRIMITIVE
+    keyword whole BIGINT                                   STORAGE_TYPE_PRIMITIVE
+    keyword whole FLOAT                                    STORAGE_TYPE_PRIMITIVE
+    keyword whole DOUBLE                                   STORAGE_TYPE_PRIMITIVE
+    keyword whole PRECISION                                STORAGE_TYPE_PRIMITIVE
+    keyword whole DATE                                     STORAGE_TYPE_PRIMITIVE
+    keyword whole DATETIME                                 STORAGE_TYPE_PRIMITIVE
+    keyword whole TIMESTAMP                                STORAGE_TYPE_PRIMITIVE
+    keyword whole TIMESTAMPTZ                              STORAGE_TYPE_PRIMITIVE
+    keyword whole TIME                                     STORAGE_TYPE_PRIMITIVE
+    keyword whole ZONE                                     KEYWORD_OTHER_RESERVED
+    keyword whole INTERVAL                                 STORAGE_TYPE
+    keyword whole DECIMAL                                  STORAGE_TYPE_PRIMITIVE
+    keyword whole DEC                                      STORAGE_TYPE_PRIMITIVE
+    keyword whole NUMERIC                                  STORAGE_TYPE_PRIMITIVE
+    keyword whole STRING                                   STORAGE_TYPE_PRIMITIVE
+    keyword whole CHAR                                     STORAGE_TYPE_PRIMITIVE
+    keyword whole VARCHAR                                  STORAGE_TYPE_PRIMITIVE
+    keyword whole ARRAY                                    STORAGE_TYPE
+    keyword whole STRUCT                                   STORAGE_TYPE
+    keyword whole MAP                                      STORAGE_TYPE
+    keyword whole UNIONTYPE                                STORAGE_TYPE
+    keyword whole REDUCE                                   KEYWORD_OTHER_RESERVED
+    keyword whole PARTITIONED                              KEYWORD_OTHER_RESERVED
+    keyword whole CLUSTERED                                KEYWORD_OTHER_RESERVED
+    keyword whole SORTED                                   KEYWORD_OTHER_RESERVED
+    keyword whole INTO                                     KEYWORD_OTHER_RESERVED
+    keyword whole BUCKETS                                  KEYWORD_OTHER_RESERVED
+    keyword whole ROW                                      KEYWORD_OTHER_RESERVED
+    keyword whole ROWS                                     KEYWORD_OTHER_RESERVED
+    keyword whole FORMAT                                   KEYWORD_OTHER_RESERVED
+    keyword whole DELIMITED                                KEYWORD_OTHER_RESERVED
+    keyword whole FIELDS                                   KEYWORD_OTHER_RESERVED
+    keyword whole TERMINATED                               KEYWORD_OTHER_RESERVED
+    keyword whole ESCAPED                                  KEYWORD_OTHER_RESERVED
+    keyword whole COLLECTION                               KEYWORD_OTHER_RESERVED
+    keyword whole ITEMS                                    KEYWORD_OTHER_RESERVED
+    keyword whole KEYS                                     KEYWORD_OTHER_RESERVED
+    keyword whole $KEY$                                    KEYWORD_OTHER_RESERVED
+    keyword whole LINES                                    KEYWORD_OTHER_RESERVED
+    keyword whole STORED                                   KEYWORD_OTHER_RESERVED
+    keyword whole FILEFORMAT                               KEYWORD_OTHER_RESERVED
+    keyword whole INPUTFORMAT                              KEYWORD_OTHER_RESERVED
+    keyword whole OUTPUTFORMAT                             KEYWORD_OTHER_RESERVED
+    keyword whole INPUTDRIVER                              KEYWORD_OTHER_RESERVED
+    keyword whole OUTPUTDRIVER                             KEYWORD_OTHER_RESERVED
+    keyword whole ENABLE                                   KEYWORD_OTHER_RESERVED
+    keyword whole DISABLE                                  KEYWORD_OTHER_RESERVED
+    keyword whole LOCATION                                 KEYWORD_OTHER_RESERVED
+    keyword whole TABLESAMPLE                              KEYWORD_OTHER_RESERVED
+    keyword whole BUCKET                                   KEYWORD_OTHER_RESERVED
+    keyword whole OUT                                      KEYWORD_OTHER_RESERVED
+    keyword whole OF                                       KEYWORD_OTHER_RESERVED
+    keyword whole PERCENT                                  KEYWORD_OTHER_RESERVED
+    keyword whole CAST                                     SUPPORT_FUNCTION
+    keyword whole ADD                                      KEYWORD_OTHER_RESERVED
+    keyword whole REPLACE                                  KEYWORD_OTHER_RESERVED
+    keyword whole RLIKE                                    KEYWORD_OPERATOR_WORD
+    keyword whole REGEXP                                   KEYWORD_OPERATOR_WORD
+    keyword whole TEMPORARY                                STORAGE_MODIFIER
+    keyword whole FUNCTION                                 KEYWORD_OTHER_RESERVED
+    keyword whole MACRO                                    KEYWORD_OTHER_RESERVED
+    keyword whole FILE                                     KEYWORD_OTHER_RESERVED
+    keyword whole JAR                                      KEYWORD_OTHER_RESERVED
+    keyword whole EXPLAIN                                  KEYWORD_OTHER_RESERVED
+    keyword whole EXTENDED                                 KEYWORD_OTHER_RESERVED
+    keyword whole FORMATTED                                KEYWORD_OTHER_RESERVED
+    keyword whole PRETTY                                   KEYWORD_OTHER_RESERVED
+    keyword whole DEPENDENCY                               KEYWORD_OTHER_RESERVED
+    keyword whole LOGICAL                                  KEYWORD_OTHER_RESERVED
+    keyword whole SERDE                                    KEYWORD_OTHER_RESERVED
+    keyword whole WITH                                     KEYWORD_OTHER_RESERVED
+    keyword whole DEFERRED                                 KEYWORD_OTHER_RESERVED
+    keyword whole SERDEPROPERTIES                          KEYWORD_OTHER_RESERVED
+    keyword whole DBPROPERTIES                             KEYWORD_OTHER_RESERVED
+    keyword whole LIMIT                                    KEYWORD_OTHER_RESERVED
+    keyword whole OFFSET                                   KEYWORD_OTHER_RESERVED
+    keyword whole SET                                      KEYWORD_OTHER_RESERVED
+    keyword whole UNSET                                    KEYWORD_OTHER_RESERVED
+    keyword whole TBLPROPERTIES                            KEYWORD_OTHER_RESERVED
+    keyword whole IDXPROPERTIES                            KEYWORD_OTHER_RESERVED
+    keyword whole $VALUE$                                  KEYWORD_OTHER_RESERVED
+    keyword whole $ELEM$                                   KEYWORD_OTHER_RESERVED
+    keyword whole DEFINED                                  KEYWORD_OTHER_RESERVED
+    keyword whole CASE                                     KEYWORD_CONTROL
+    keyword whole WHEN                                     KEYWORD_CONTROL
+    keyword whole THEN                                     KEYWORD_CONTROL
+    keyword whole ELSE                                     KEYWORD_CONTROL
+    keyword whole END                                      KEYWORD_CONTROL
+    keyword whole MAPJOIN                                  KEYWORD_OTHER_RESERVED
+    keyword whole STREAMTABLE                              KEYWORD_OTHER_RESERVED
+    keyword whole CLUSTERSTATUS                            KEYWORD_OTHER_RESERVED
+    keyword whole UTC                                      KEYWORD_OTHER_RESERVED
+    keyword whole UTC_TMESTAMP                             KEYWORD_OTHER_RESERVED
+    keyword whole LONG                                     STORAGE_TYPE_PRIMITIVE
+    keyword whole DELETE                                   KEYWORD_OTHER_RESERVED
+    keyword whole PLUS                                     KEYWORD_OTHER_RESERVED
+    keyword whole MINUS                                    KEYWORD_OTHER_RESERVED
+    keyword whole FETCH                                    KEYWORD_OTHER_RESERVED
+    keyword whole INTERSECT                                KEYWORD_OTHER_RESERVED
+    keyword whole VIEW                                     KEYWORD_OTHER_RESERVED
+    keyword whole VIEWS                                    KEYWORD_OTHER_RESERVED
+    keyword whole IN                                       KEYWORD_OPERATOR_WORD
+    keyword whole DATABASE                                 KEYWORD_OTHER_RESERVED
+    keyword whole DATABASES                                KEYWORD_OTHER_RESERVED
+    keyword whole MATERIALIZED                             KEYWORD_OTHER_RESERVED
+    keyword whole SCHEMA                                   KEYWORD_OTHER_RESERVED
+    keyword whole SCHEMAS                                  KEYWORD_OTHER_RESERVED
+    keyword whole GRANT                                    KEYWORD_OTHER_RESERVED
+    keyword whole REVOKE                                   KEYWORD_OTHER_RESERVED
+    keyword whole SSL                                      KEYWORD_OTHER_RESERVED
+    keyword whole UNDO                                     KEYWORD_OTHER_RESERVED
+    keyword whole LOCK                                     KEYWORD_OTHER_RESERVED
+    keyword whole LOCKS                                    KEYWORD_OTHER_RESERVED
+    keyword whole UNLOCK                                   KEYWORD_OTHER_RESERVED
+    keyword whole SHARED                                   KEYWORD_OTHER_RESERVED
+    keyword whole EXCLUSIVE                                KEYWORD_OTHER_RESERVED
+    keyword whole PROCEDURE                                KEYWORD_OTHER_RESERVED
+    keyword whole UNSIGNED                                 STORAGE_MODIFIER
+    keyword whole WHILE                                    KEYWORD_CONTROL
+    keyword whole READ                                     KEYWORD_OTHER_RESERVED
+    keyword whole READS                                    KEYWORD_OTHER_RESERVED
+    keyword whole PURGE                                    KEYWORD_OTHER_RESERVED
+    keyword whole RANGE                                    KEYWORD_OTHER_RESERVED
+    keyword whole ANALYZE                                  KEYWORD_OTHER_RESERVED
+    keyword whole BEFORE                                   KEYWORD_OTHER_RESERVED
+    keyword whole BETWEEN                                  KEYWORD_OPERATOR_WORD
+    keyword whole BOTH                                     KEYWORD_OTHER_RESERVED
+    keyword whole BINARY                                   STORAGE_TYPE_PRIMITIVE
+    keyword whole CROSS                                    KEYWORD_OTHER_RESERVED
+    keyword whole CONTINUE                                 KEYWORD_CONTROL
+    keyword whole CURSOR                                   KEYWORD_OTHER_RESERVED
+    keyword whole TRIGGER                                  KEYWORD_OTHER_RESERVED
+    keyword whole RECORDREADER                             KEYWORD_OTHER_RESERVED
+    keyword whole RECORDWRITER                             KEYWORD_OTHER_RESERVED
+    keyword whole SEMI                                     KEYWORD_OTHER_RESERVED
+    keyword whole LATERAL                                  KEYWORD_OTHER_RESERVED
+    keyword whole TOUCH                                    KEYWORD_OTHER_RESERVED
+    keyword whole ARCHIVE                                  KEYWORD_OTHER_RESERVED
+    keyword whole UNARCHIVE                                KEYWORD_OTHER_RESERVED
+    keyword whole COMPUTE                                  KEYWORD_OTHER_RESERVED
+    keyword whole STATISTICS                               KEYWORD_OTHER_RESERVED
+    keyword whole USE                                      KEYWORD_CONTROL_IMPORT
+    keyword whole OPTION                                   KEYWORD_OTHER_RESERVED
+    keyword whole CONCATENATE                              KEYWORD_OTHER_RESERVED
+    keyword whole SHOW_DATABASE                            KEYWORD_OTHER_RESERVED
+    keyword whole UPDATE                                   KEYWORD_OTHER_RESERVED
+    keyword whole RESTRICT                                 KEYWORD_OTHER_RESERVED
+    keyword whole CASCADE                                  KEYWORD_OTHER_RESERVED
+    keyword whole SKEWED                                   KEYWORD_OTHER_RESERVED
+    keyword whole ROLLUP                                   KEYWORD_OTHER_RESERVED
+    keyword whole CUBE                                     KEYWORD_OTHER_RESERVED
+    keyword whole DIRECTORIES                              KEYWORD_OTHER_RESERVED
+    keyword whole FOR                                      KEYWORD_CONTROL
+    keyword whole WINDOW                                   KEYWORD_OTHER_RESERVED
+    keyword whole UNBOUNDED                                KEYWORD_OTHER_RESERVED
+    keyword whole PRECEDING                                KEYWORD_OTHER_RESERVED
+    keyword whole FOLLOWING                                KEYWORD_OTHER_RESERVED
+    keyword whole CURRENT                                  KEYWORD_OTHER_RESERVED
+    keyword whole CURRENT_DATE                             SUPPORT_FUNCTION
+    keyword whole CURRENT_TIMESTAMP                        SUPPORT_FUNCTION
+    keyword whole LESS                                     KEYWORD_OTHER_RESERVED
+    keyword whole MORE                                     KEYWORD_OTHER_RESERVED
+    keyword whole OVER                                     KEYWORD_OTHER_RESERVED
+    keyword whole GROUPING                                 KEYWORD_OTHER_RESERVED
+    keyword whole SETS                                     KEYWORD_OTHER_RESERVED
+    keyword whole TRUNCATE                                 KEYWORD_OTHER_RESERVED
+    keyword whole NOSCAN                                   KEYWORD_OTHER_RESERVED
+    keyword whole PARTIALSCAN                              KEYWORD_OTHER_RESERVED
+    keyword whole USER                                     KEYWORD_OTHER_RESERVED
+    keyword whole ROLE                                     KEYWORD_OTHER_RESERVED
+    keyword whole ROLES                                    KEYWORD_OTHER_RESERVED
+    keyword whole INNER                                    KEYWORD_OTHER_RESERVED
+    keyword whole EXCHANGE                                 KEYWORD_OTHER_RESERVED
+    keyword whole URI                                      KEYWORD_OTHER_RESERVED
+    keyword whole SERVER                                   KEYWORD_OTHER_RESERVED
+    keyword whole ADMIN                                    KEYWORD_OTHER_RESERVED
+    keyword whole OWNER                                    KEYWORD_OTHER_RESERVED
+    keyword whole PRINCIPALS                               KEYWORD_OTHER_RESERVED
+    keyword whole COMPACT                                  KEYWORD_OTHER_RESERVED
+    keyword whole COMPACTIONS                              KEYWORD_OTHER_RESERVED
+    keyword whole TRANSACTIONS                             KEYWORD_OTHER_RESERVED
+    keyword whole REWRITE                                  KEYWORD_OTHER_RESERVED
+    keyword whole AUTHORIZATION                            KEYWORD_OTHER_RESERVED
+    keyword whole CONF                                     KEYWORD_OTHER_RESERVED
+    keyword whole VALUES                                   KEYWORD_OTHER_RESERVED
+    keyword whole RELOAD                                   KEYWORD_OTHER_RESERVED
+    keyword whole YEAR                                     KEYWORD_OTHER_RESERVED
+    keyword whole YEARS                                    KEYWORD_OTHER_RESERVED
+    keyword whole QUARTER                                  KEYWORD_OTHER_RESERVED
+    keyword whole MONTH                                    KEYWORD_OTHER_RESERVED
+    keyword whole MONTHS                                   KEYWORD_OTHER_RESERVED
+    keyword whole WEEK                                     KEYWORD_OTHER_RESERVED
+    keyword whole WEEKS                                    KEYWORD_OTHER_RESERVED
+    keyword whole DAY                                      KEYWORD_OTHER_RESERVED
+    keyword whole DAYS                                     KEYWORD_OTHER_RESERVED
+    keyword whole DAYOFWEEK                                KEYWORD_OTHER_RESERVED
+    keyword whole HOUR                                     KEYWORD_OTHER_RESERVED
+    keyword whole HOURS                                    KEYWORD_OTHER_RESERVED
+    keyword whole MINUTE                                   KEYWORD_OTHER_RESERVED
+    keyword whole MINUTES                                  KEYWORD_OTHER_RESERVED
+    keyword whole SECOND                                   KEYWORD_OTHER_RESERVED
+    keyword whole SECONDS                                  KEYWORD_OTHER_RESERVED
+    keyword whole START                                    KEYWORD_OTHER_RESERVED
+    keyword whole TRANSACTION                              KEYWORD_OTHER_RESERVED
+    keyword whole COMMIT                                   KEYWORD_OTHER_RESERVED
+    keyword whole ROLLBACK                                 KEYWORD_OTHER_RESERVED
+    keyword whole WORK                                     KEYWORD_OTHER_RESERVED
+    keyword whole ONLY                                     KEYWORD_OTHER_RESERVED
+    keyword whole WRITE                                    KEYWORD_OTHER_RESERVED
+    keyword whole ISOLATION                                KEYWORD_OTHER_RESERVED
+    keyword whole LEVEL                                    KEYWORD_OTHER_RESERVED
+    keyword whole SNAPSHOT                                 KEYWORD_OTHER_RESERVED
+    keyword whole AUTOCOMMIT                               KEYWORD_OTHER_RESERVED
+    keyword whole CACHE                                    KEYWORD_OTHER_RESERVED
+    keyword whole PRIMARY                                  KEYWORD_OTHER_RESERVED
+    keyword whole FOREIGN                                  KEYWORD_OTHER_RESERVED
+    keyword whole REFERENCES                               KEYWORD_OTHER_RESERVED
+    keyword whole CONSTRAINT                               KEYWORD_OTHER_RESERVED
+    keyword whole VALIDATE                                 KEYWORD_OTHER_RESERVED
+    keyword whole NOVALIDATE                               KEYWORD_OTHER_RESERVED
+    keyword whole RELY                                     KEYWORD_OTHER_RESERVED
+    keyword whole NORELY                                   KEYWORD_OTHER_RESERVED
+    keyword whole UNIQUE                                   KEYWORD_OTHER_RESERVED
+    keyword whole KEY                                      KEYWORD_OTHER_RESERVED
+    keyword whole ABORT                                    KEYWORD_OTHER_RESERVED
+    keyword whole EXTRACT                                  KEYWORD_OTHER_RESERVED
+    keyword whole FLOOR                                    KEYWORD_OTHER_RESERVED
+    keyword whole MERGE                                    KEYWORD_OTHER_RESERVED
+    keyword whole MATCHED                                  KEYWORD_OTHER_RESERVED
+    keyword whole REPL                                     KEYWORD_OTHER_RESERVED
+    keyword whole DUMP                                     KEYWORD_OTHER_RESERVED
+    keyword whole STATUS                                   KEYWORD_OTHER_RESERVED
+    keyword whole VECTORIZATION                            KEYWORD_OTHER_RESERVED
+    keyword whole SUMMARY                                  KEYWORD_OTHER_RESERVED
+    keyword whole OPERATOR                                 KEYWORD_OTHER_RESERVED
+    keyword whole EXPRESSION                               KEYWORD_OTHER_RESERVED
+    keyword whole DETAIL                                   KEYWORD_OTHER_RESERVED
+    keyword whole WAIT                                     KEYWORD_OTHER_RESERVED
 
 # Storage Formats
-    keyword whole TEXTFILE                                 brightblue
-    keyword whole ORC                                      brightblue
-    keyword whole SEQUENCEFILE                             brightblue
-    keyword whole RCFILE                                   brightblue
-    keyword whole PARQUET                                  brightblue
-    keyword whole AVRO                                     brightblue
+    keyword whole TEXTFILE                                 STORAGE_TYPE
+    keyword whole ORC                                      STORAGE_TYPE
+    keyword whole SEQUENCEFILE                             STORAGE_TYPE
+    keyword whole RCFILE                                   STORAGE_TYPE
+    keyword whole PARQUET                                  STORAGE_TYPE
+    keyword whole AVRO                                     STORAGE_TYPE
 
 # Comments
-    keyword /\*                                            brown
-    keyword \*/                                            brown
-    keyword --                                             brown
+    keyword /\*                                            COMMENT_BLOCK
+    keyword \*/                                            COMMENT_BLOCK
+    keyword --                                             COMMENT_LINE
 
 # Operators
-    keyword >                                              brightcyan
-    keyword <                                              brightcyan
-    keyword \+                                             brightcyan
-    keyword -                                              brightcyan
-    keyword \*                                             brightcyan
-    keyword /                                              brightcyan
-    keyword %                                              brightcyan
-    keyword =                                              brightcyan
-    keyword (                                              brightcyan
-    keyword )                                              brightcyan
-    keyword ,                                              brightcyan
-    keyword ;                                              brightcyan
-    keyword .                                              white
-    keyword \|                                             white
-    keyword !=                                             white
-    keyword \^                                             white
-    keyword \~                                             white
-    keyword whole DIV                                      white
-    keyword [                                              brightcyan
-    keyword ]                                              brightcyan
-    keyword {                                              brightcyan
-    keyword }                                              brightcyan
-    keyword :                                              white
-    keyword &                                              white
-    keyword ?                                              white
+    keyword >                                              KEYWORD_OPERATOR
+    keyword <                                              KEYWORD_OPERATOR
+    keyword \+                                             KEYWORD_OPERATOR
+    keyword -                                              KEYWORD_OPERATOR
+    keyword \*                                             KEYWORD_OPERATOR
+    keyword /                                              KEYWORD_OPERATOR
+    keyword %                                              KEYWORD_OPERATOR
+    keyword =                                              KEYWORD_OPERATOR
+    keyword (                                              PUNCTUATION_SECTION
+    keyword )                                              PUNCTUATION_SECTION
+    keyword ,                                              PUNCTUATION_SEPARATOR
+    keyword ;                                              PUNCTUATION_TERMINATOR
+    keyword .                                              KEYWORD_OPERATOR
+    keyword \|                                             KEYWORD_OPERATOR
+    keyword !=                                             KEYWORD_OPERATOR
+    keyword \^                                             KEYWORD_OPERATOR
+    keyword \~                                             KEYWORD_OPERATOR
+    keyword whole DIV                                      KEYWORD_OPERATOR_WORD
+    keyword [                                              PUNCTUATION_SECTION
+    keyword ]                                              PUNCTUATION_SECTION
+    keyword {                                              PUNCTUATION_SECTION
+    keyword }                                              PUNCTUATION_SECTION
+    keyword :                                              PUNCTUATION_SEPARATOR
+    keyword &                                              KEYWORD_OPERATOR
+    keyword ?                                              KEYWORD_OPERATOR
 
 # Mathematical Functions
-    keyword whole round                                    yellow
-    keyword whole bround                                   yellow
-    keyword whole floor                                    yellow
-    keyword whole ceil                                     yellow
-    keyword whole rand                                     yellow
-    keyword whole exp                                      yellow
-    keyword whole ln                                       yellow
-    keyword whole log10                                    yellow
-    keyword whole log2                                     yellow
-    keyword whole log                                      yellow
-    keyword whole pow                                      yellow
-    keyword whole sqrt                                     yellow
-    keyword whole bin                                      yellow
-    keyword whole hex                                      yellow
-    keyword whole unhex                                    yellow
-    keyword whole conv                                     yellow
-    keyword whole abs                                      yellow
-    keyword whole pmod                                     yellow
-    keyword whole sin                                      yellow
-    keyword whole asin                                     yellow
-    keyword whole cos                                      yellow
-    keyword whole acos                                     yellow
-    keyword whole tan                                      yellow
-    keyword whole atan                                     yellow
-    keyword whole degrees                                  yellow
-    keyword whole radians                                  yellow
-    keyword whole positive                                 yellow
-    keyword whole negative                                 yellow
-    keyword whole sign                                     yellow
-    keyword whole e()                                      yellow
-    keyword whole pi()                                     yellow
-    keyword whole factorial                                yellow
-    keyword whole cbrt                                     yellow
-    keyword whole shiftleft                                yellow
-    keyword whole shiftright                               yellow
-    keyword whole shiftrightunsigned                       yellow
-    keyword whole greatest                                 yellow
-    keyword whole least                                    yellow
-    keyword whole width_bucket                             yellow
+    keyword whole round                                    SUPPORT_FUNCTION
+    keyword whole bround                                   SUPPORT_FUNCTION
+    keyword whole floor                                    SUPPORT_FUNCTION
+    keyword whole ceil                                     SUPPORT_FUNCTION
+    keyword whole rand                                     SUPPORT_FUNCTION
+    keyword whole exp                                      SUPPORT_FUNCTION
+    keyword whole ln                                       SUPPORT_FUNCTION
+    keyword whole log10                                    SUPPORT_FUNCTION
+    keyword whole log2                                     SUPPORT_FUNCTION
+    keyword whole log                                      SUPPORT_FUNCTION
+    keyword whole pow                                      SUPPORT_FUNCTION
+    keyword whole sqrt                                     SUPPORT_FUNCTION
+    keyword whole bin                                      SUPPORT_FUNCTION
+    keyword whole hex                                      SUPPORT_FUNCTION
+    keyword whole unhex                                    SUPPORT_FUNCTION
+    keyword whole conv                                     SUPPORT_FUNCTION
+    keyword whole abs                                      SUPPORT_FUNCTION
+    keyword whole pmod                                     SUPPORT_FUNCTION
+    keyword whole sin                                      SUPPORT_FUNCTION
+    keyword whole asin                                     SUPPORT_FUNCTION
+    keyword whole cos                                      SUPPORT_FUNCTION
+    keyword whole acos                                     SUPPORT_FUNCTION
+    keyword whole tan                                      SUPPORT_FUNCTION
+    keyword whole atan                                     SUPPORT_FUNCTION
+    keyword whole degrees                                  SUPPORT_FUNCTION
+    keyword whole radians                                  SUPPORT_FUNCTION
+    keyword whole positive                                 SUPPORT_FUNCTION
+    keyword whole negative                                 SUPPORT_FUNCTION
+    keyword whole sign                                     SUPPORT_FUNCTION
+    keyword whole e()                                      SUPPORT_FUNCTION
+    keyword whole pi()                                     SUPPORT_FUNCTION
+    keyword whole factorial                                SUPPORT_FUNCTION
+    keyword whole cbrt                                     SUPPORT_FUNCTION
+    keyword whole shiftleft                                SUPPORT_FUNCTION
+    keyword whole shiftright                               SUPPORT_FUNCTION
+    keyword whole shiftrightunsigned                       SUPPORT_FUNCTION
+    keyword whole greatest                                 SUPPORT_FUNCTION
+    keyword whole least                                    SUPPORT_FUNCTION
+    keyword whole width_bucket                             SUPPORT_FUNCTION
 
 # Collection Functions
-    keyword whole size                                     yellow
-    keyword whole map_keys                                 yellow
-    keyword whole map_values                               yellow
-    keyword whole array_contains                           yellow
-    keyword whole sort_array                               yellow
+    keyword whole size                                     SUPPORT_FUNCTION
+    keyword whole map_keys                                 SUPPORT_FUNCTION
+    keyword whole map_values                               SUPPORT_FUNCTION
+    keyword whole array_contains                           SUPPORT_FUNCTION
+    keyword whole sort_array                               SUPPORT_FUNCTION
 
 # Type Conversion
 #   binary # keyword
 #   cast   # keyword
 
 # Date Functions
-    keyword whole from_unixtime                            yellow
-    keyword whole unix_timestamp                           yellow
-    keyword whole to_date                                  yellow
-    keyword whole year                                     yellow
-    keyword whole quarter                                  yellow
-    keyword whole month                                    yellow
-    keyword whole day                                      yellow
-    keyword whole hour                                     yellow
-    keyword whole minute                                   yellow
-    keyword whole second                                   yellow
-    keyword whole weekofyear                               yellow
-    keyword whole extract                                  yellow
-    keyword whole datediff                                 yellow
-    keyword whole date_add                                 yellow
-    keyword whole date_sub                                 yellow
-    keyword whole from_utc_timestamp                       yellow
-    keyword whole to_utc_timestamp                         yellow
-    keyword whole current_date                             yellow
-    keyword whole add_months                               yellow
-    keyword whole last_day                                 yellow
-    keyword whole next_day                                 yellow
-    keyword whole trunc                                    yellow
-    keyword whole months_between                           yellow
-    keyword whole date_format                              yellow
+    keyword whole from_unixtime                            SUPPORT_FUNCTION
+    keyword whole unix_timestamp                           SUPPORT_FUNCTION
+    keyword whole to_date                                  SUPPORT_FUNCTION
+    keyword whole year                                     SUPPORT_FUNCTION
+    keyword whole quarter                                  SUPPORT_FUNCTION
+    keyword whole month                                    SUPPORT_FUNCTION
+    keyword whole day                                      SUPPORT_FUNCTION
+    keyword whole hour                                     SUPPORT_FUNCTION
+    keyword whole minute                                   SUPPORT_FUNCTION
+    keyword whole second                                   SUPPORT_FUNCTION
+    keyword whole weekofyear                               SUPPORT_FUNCTION
+    keyword whole extract                                  SUPPORT_FUNCTION
+    keyword whole datediff                                 SUPPORT_FUNCTION
+    keyword whole date_add                                 SUPPORT_FUNCTION
+    keyword whole date_sub                                 SUPPORT_FUNCTION
+    keyword whole from_utc_timestamp                       SUPPORT_FUNCTION
+    keyword whole to_utc_timestamp                         SUPPORT_FUNCTION
+    keyword whole current_date                             SUPPORT_FUNCTION
+    keyword whole add_months                               SUPPORT_FUNCTION
+    keyword whole last_day                                 SUPPORT_FUNCTION
+    keyword whole next_day                                 SUPPORT_FUNCTION
+    keyword whole trunc                                    SUPPORT_FUNCTION
+    keyword whole months_between                           SUPPORT_FUNCTION
+    keyword whole date_format                              SUPPORT_FUNCTION
 
 # Conditional Functions
-    keyword whole if                                       yellow
-    keyword whole isnull                                   yellow
-    keyword whole isnotnull                                yellow
-    keyword whole coalesce                                 yellow
-    keyword whole nullif                                   yellow
-    keyword whole assert_true                              yellow
+    keyword whole if                                       SUPPORT_FUNCTION
+    keyword whole isnull                                   SUPPORT_FUNCTION
+    keyword whole isnotnull                                SUPPORT_FUNCTION
+    keyword whole coalesce                                 SUPPORT_FUNCTION
+    keyword whole nullif                                   SUPPORT_FUNCTION
+    keyword whole assert_true                              SUPPORT_FUNCTION
 
 # String Functions
-    keyword whole ascii                                    yellow
-    keyword whole base64                                   yellow
-    keyword whole character_length                         yellow
-    keyword whole chr                                      yellow
-    keyword whole concat                                   yellow
-    keyword whole context_ngrams                           yellow
-    keyword whole concat_ws                                yellow
-    keyword whole decode                                   yellow
-    keyword whole elt                                      yellow
-    keyword whole encode                                   yellow
-    keyword whole field                                    yellow
-    keyword whole find_in_set                              yellow
-    keyword whole format_number                            yellow
-    keyword whole get_json_object                          yellow
-    keyword whole in_file                                  yellow
-    keyword whole instr                                    yellow
-    keyword whole length                                   yellow
-    keyword whole locate                                   yellow
-    keyword whole lower                                    yellow
-    keyword whole lpad                                     yellow
-    keyword whole ltrim                                    yellow
-    keyword whole ngrams                                   yellow
-    keyword whole octet_length                             yellow
-    keyword whole parse_url                                yellow
-    keyword whole printf                                   yellow
-    keyword whole regexp_extract                           yellow
-    keyword whole regexp_replace                           yellow
-    keyword whole repeat                                   yellow
-    keyword whole replace                                  yellow
-    keyword whole reverse                                  yellow
-    keyword whole rpad                                     yellow
-    keyword whole rtrim                                    yellow
-    keyword whole sentences                                yellow
-    keyword whole space                                    yellow
-    keyword whole split                                    yellow
-    keyword whole str_to_map                               yellow
-    keyword whole substr                                   yellow
-    keyword whole substr_index                             yellow
-    keyword whole translate                                yellow
-    keyword whole trim                                     yellow
-    keyword whole unbase64                                 yellow
-    keyword whole upper                                    yellow
-    keyword whole initcap                                  yellow
-    keyword whole levenshtein                              yellow
-    keyword whole soundex                                  yellow
+    keyword whole ascii                                    SUPPORT_FUNCTION
+    keyword whole base64                                   SUPPORT_FUNCTION
+    keyword whole character_length                         SUPPORT_FUNCTION
+    keyword whole chr                                      SUPPORT_FUNCTION
+    keyword whole concat                                   SUPPORT_FUNCTION
+    keyword whole context_ngrams                           SUPPORT_FUNCTION
+    keyword whole concat_ws                                SUPPORT_FUNCTION
+    keyword whole decode                                   SUPPORT_FUNCTION
+    keyword whole elt                                      SUPPORT_FUNCTION
+    keyword whole encode                                   SUPPORT_FUNCTION
+    keyword whole field                                    SUPPORT_FUNCTION
+    keyword whole find_in_set                              SUPPORT_FUNCTION
+    keyword whole format_number                            SUPPORT_FUNCTION
+    keyword whole get_json_object                          SUPPORT_FUNCTION
+    keyword whole in_file                                  SUPPORT_FUNCTION
+    keyword whole instr                                    SUPPORT_FUNCTION
+    keyword whole length                                   SUPPORT_FUNCTION
+    keyword whole locate                                   SUPPORT_FUNCTION
+    keyword whole lower                                    SUPPORT_FUNCTION
+    keyword whole lpad                                     SUPPORT_FUNCTION
+    keyword whole ltrim                                    SUPPORT_FUNCTION
+    keyword whole ngrams                                   SUPPORT_FUNCTION
+    keyword whole octet_length                             SUPPORT_FUNCTION
+    keyword whole parse_url                                SUPPORT_FUNCTION
+    keyword whole printf                                   SUPPORT_FUNCTION
+    keyword whole regexp_extract                           SUPPORT_FUNCTION
+    keyword whole regexp_replace                           SUPPORT_FUNCTION
+    keyword whole repeat                                   SUPPORT_FUNCTION
+    keyword whole replace                                  SUPPORT_FUNCTION
+    keyword whole reverse                                  SUPPORT_FUNCTION
+    keyword whole rpad                                     SUPPORT_FUNCTION
+    keyword whole rtrim                                    SUPPORT_FUNCTION
+    keyword whole sentences                                SUPPORT_FUNCTION
+    keyword whole space                                    SUPPORT_FUNCTION
+    keyword whole split                                    SUPPORT_FUNCTION
+    keyword whole str_to_map                               SUPPORT_FUNCTION
+    keyword whole substr                                   SUPPORT_FUNCTION
+    keyword whole substr_index                             SUPPORT_FUNCTION
+    keyword whole translate                                SUPPORT_FUNCTION
+    keyword whole trim                                     SUPPORT_FUNCTION
+    keyword whole unbase64                                 SUPPORT_FUNCTION
+    keyword whole upper                                    SUPPORT_FUNCTION
+    keyword whole initcap                                  SUPPORT_FUNCTION
+    keyword whole levenshtein                              SUPPORT_FUNCTION
+    keyword whole soundex                                  SUPPORT_FUNCTION
 
 # Data Masking Functions
-    keyword whole mask                                     yellow
-    keyword whole mask_first_n                             yellow
-    keyword whole mask_last_n                              yellow
-    keyword whole mask_show_first_n                        yellow
-    keyword whole mask_show_last_n                         yellow
-    keyword whole mask_hash                                yellow
+    keyword whole mask                                     SUPPORT_FUNCTION
+    keyword whole mask_first_n                             SUPPORT_FUNCTION
+    keyword whole mask_last_n                              SUPPORT_FUNCTION
+    keyword whole mask_show_first_n                        SUPPORT_FUNCTION
+    keyword whole mask_show_last_n                         SUPPORT_FUNCTION
+    keyword whole mask_hash                                SUPPORT_FUNCTION
 
 # Misc. Functions
-    keyword whole java_method                              yellow
-    keyword whole reflect                                  yellow
-    keyword whole hash                                     yellow
-    keyword whole current_user                             yellow
-    keyword whole logged_user                              yellow
-    keyword whole md5                                      yellow
-    keyword whole sha1                                     yellow
-    keyword whole sha                                      yellow
-    keyword whole crc32                                    yellow
-    keyword whole sha2                                     yellow
-    keyword whole aes_encrypt                              yellow
-    keyword whole aes_decrypt                              yellow
-    keyword whole version                                  yellow
+    keyword whole java_method                              SUPPORT_FUNCTION
+    keyword whole reflect                                  SUPPORT_FUNCTION
+    keyword whole hash                                     SUPPORT_FUNCTION
+    keyword whole current_user                             SUPPORT_FUNCTION
+    keyword whole logged_user                              SUPPORT_FUNCTION
+    keyword whole md5                                      SUPPORT_FUNCTION
+    keyword whole sha1                                     SUPPORT_FUNCTION
+    keyword whole sha                                      SUPPORT_FUNCTION
+    keyword whole crc32                                    SUPPORT_FUNCTION
+    keyword whole sha2                                     SUPPORT_FUNCTION
+    keyword whole aes_encrypt                              SUPPORT_FUNCTION
+    keyword whole aes_decrypt                              SUPPORT_FUNCTION
+    keyword whole version                                  SUPPORT_FUNCTION
 
 # xpath
-    keyword whole xpath                                    yellow
-    keyword whole xpath_short                              yellow
-    keyword whole xpath_int                                yellow
-    keyword whole xpath_long                               yellow
-    keyword whole xpath_float                              yellow
-    keyword whole xpath_double                             yellow
-    keyword whole xpath_number                             yellow
-    keyword whole xpath_string                             yellow
+    keyword whole xpath                                    SUPPORT_FUNCTION
+    keyword whole xpath_short                              SUPPORT_FUNCTION
+    keyword whole xpath_int                                SUPPORT_FUNCTION
+    keyword whole xpath_long                               SUPPORT_FUNCTION
+    keyword whole xpath_float                              SUPPORT_FUNCTION
+    keyword whole xpath_double                             SUPPORT_FUNCTION
+    keyword whole xpath_number                             SUPPORT_FUNCTION
+    keyword whole xpath_string                             SUPPORT_FUNCTION
 
 # Aggregate Functions
-    keyword whole count                                    yellow
-    keyword whole sum                                      yellow
-    keyword whole avg                                      yellow
-    keyword whole min                                      yellow
-    keyword whole max                                      yellow
-    keyword whole variance                                 yellow
-    keyword whole var_samp                                 yellow
-    keyword whole stddev_pop                               yellow
-    keyword whole stddev_samp                              yellow
-    keyword whole covar_pop                                yellow
-    keyword whole covar_samp                               yellow
-    keyword whole corr                                     yellow
-    keyword whole percentile                               yellow
-    keyword whole regr_avgx                                yellow
-    keyword whole regr_avgy                                yellow
-    keyword whole regr_count                               yellow
-    keyword whole regr_intercept                           yellow
-    keyword whole regr_r2                                  yellow
-    keyword whole regr_slope                               yellow
-    keyword whole regr_sxx                                 yellow
-    keyword whole regr_sxy                                 yellow
-    keyword whole regr_syy                                 yellow
-    keyword whole histogram_numeric                        yellow
-    keyword whole collect_set                              yellow
-    keyword whole collect_list                             yellow
-    keyword whole ntile                                    yellow
+    keyword whole count                                    SUPPORT_FUNCTION
+    keyword whole sum                                      SUPPORT_FUNCTION
+    keyword whole avg                                      SUPPORT_FUNCTION
+    keyword whole min                                      SUPPORT_FUNCTION
+    keyword whole max                                      SUPPORT_FUNCTION
+    keyword whole variance                                 SUPPORT_FUNCTION
+    keyword whole var_samp                                 SUPPORT_FUNCTION
+    keyword whole stddev_pop                               SUPPORT_FUNCTION
+    keyword whole stddev_samp                              SUPPORT_FUNCTION
+    keyword whole covar_pop                                SUPPORT_FUNCTION
+    keyword whole covar_samp                               SUPPORT_FUNCTION
+    keyword whole corr                                     SUPPORT_FUNCTION
+    keyword whole percentile                               SUPPORT_FUNCTION
+    keyword whole regr_avgx                                SUPPORT_FUNCTION
+    keyword whole regr_avgy                                SUPPORT_FUNCTION
+    keyword whole regr_count                               SUPPORT_FUNCTION
+    keyword whole regr_intercept                           SUPPORT_FUNCTION
+    keyword whole regr_r2                                  SUPPORT_FUNCTION
+    keyword whole regr_slope                               SUPPORT_FUNCTION
+    keyword whole regr_sxx                                 SUPPORT_FUNCTION
+    keyword whole regr_sxy                                 SUPPORT_FUNCTION
+    keyword whole regr_syy                                 SUPPORT_FUNCTION
+    keyword whole histogram_numeric                        SUPPORT_FUNCTION
+    keyword whole collect_set                              SUPPORT_FUNCTION
+    keyword whole collect_list                             SUPPORT_FUNCTION
+    keyword whole ntile                                    SUPPORT_FUNCTION
 
 # Table-Generating Functions
-    keyword whole explode                                  yellow
-    keyword whole posexplode                               yellow
-    keyword whole inline                                   yellow
-    keyword whole stack                                    yellow
-    keyword whole json_tuple                               yellow
-    keyword whole parse_url                                yellow
+    keyword whole explode                                  SUPPORT_FUNCTION
+    keyword whole posexplode                               SUPPORT_FUNCTION
+    keyword whole inline                                   SUPPORT_FUNCTION
+    keyword whole stack                                    SUPPORT_FUNCTION
+    keyword whole json_tuple                               SUPPORT_FUNCTION
+    keyword whole parse_url                                SUPPORT_FUNCTION
 
 # Window Functions
-    keyword whole lead                                     yellow
-    keyword whole lag                                      yellow
-    keyword whole first_value                              yellow
-    keyword whole last_value                               yellow
-    keyword whole rank                                     yellow
-    keyword whole row_number                               yellow
-    keyword whole dense_rank                               yellow
-    keyword whole cume_dist                                yellow
-    keyword whole percent_rank                             yellow
-    keyword whole ntile                                    yellow
+    keyword whole lead                                     SUPPORT_FUNCTION
+    keyword whole lag                                      SUPPORT_FUNCTION
+    keyword whole first_value                              SUPPORT_FUNCTION
+    keyword whole last_value                               SUPPORT_FUNCTION
+    keyword whole rank                                     SUPPORT_FUNCTION
+    keyword whole row_number                               SUPPORT_FUNCTION
+    keyword whole dense_rank                               SUPPORT_FUNCTION
+    keyword whole cume_dist                                SUPPORT_FUNCTION
+    keyword whole percent_rank                             SUPPORT_FUNCTION
+    keyword whole ntile                                    SUPPORT_FUNCTION
 
 # Variables
     # oozie variables
-    keyword whole ${+}                                     brightgreen
+    keyword whole ${+}                                     VARIABLE_OTHER
     # hive variables
-    keyword whole ${hiveconf:+}                            magenta
+    keyword whole ${hiveconf:+}                            VARIABLE_OTHER
 
 
 # Hive options
-    keyword wholeright hive.+.+.+                          red
-    keyword wholeright tez.+.+                             red
-    keyword wholeright mapreduce.+.+                       red
+    keyword wholeright hive.+.+.+                          SUPPORT_CONSTANT
+    keyword wholeright tez.+.+                             SUPPORT_CONSTANT
+    keyword wholeright mapreduce.+.+                       SUPPORT_CONSTANT
 
 # Literals
     # float
-    keyword whole \[0123456789\]\{.\}\[0123456789\]                                           brightmagenta
+    keyword whole \[0123456789\]\{.\}\[0123456789\]                                           CONSTANT_NUMERIC
     # float e notation
-    keyword whole \[0123456789\]\[.\]\[0123456789\]\{e\}\[\+-\]\{0123456789\}\[0123456789\]   brightmagenta
+    keyword whole \[0123456789\]\[.\]\[0123456789\]\{e\}\[\+-\]\{0123456789\}\[0123456789\]   CONSTANT_NUMERIC
 
     # tinyint
-    keyword whole \{0123456789\}\[0123456789\]Y                magenta
+    keyword whole \{0123456789\}\[0123456789\]Y                CONSTANT_NUMERIC
     # smallint
-    keyword whole \{0123456789\}\[0123456789\]S                magenta
+    keyword whole \{0123456789\}\[0123456789\]S                CONSTANT_NUMERIC
     # bigint
-    keyword whole \{0123456789\}\[0123456789\]L                magenta
+    keyword whole \{0123456789\}\[0123456789\]L                CONSTANT_NUMERIC
     # int
-    keyword whole \{0123456789\}\[0123456789\]                 brightmagenta
+    keyword whole \{0123456789\}\[0123456789\]                 CONSTANT_NUMERIC
     # big decimal
-    keyword whole \{0123456789\}\[0123456789\]BD               magenta
+    keyword whole \{0123456789\}\[0123456789\]BD               CONSTANT_NUMERIC
 
-context exclusive -- \n brown
+context exclusive -- \n COMMENT_LINE
     spellcheck
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context ' ' green
-    keyword \\' brightgreen
+context ' ' STRING_QUOTED_SINGLE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
     # oozie variables
-    keyword whole ${+}                                         brightgreen
+    keyword whole ${+}                                         VARIABLE_OTHER
     # hive variables
-    keyword whole ${hiveconf:+}                                magenta
+    keyword whole ${hiveconf:+}                                VARIABLE_OTHER
 
-context " " red
-    keyword \\" brightred
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE

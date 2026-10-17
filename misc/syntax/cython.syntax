@@ -1,304 +1,304 @@
 context default
-    keyword : brightred
-    keyword . white/Orange
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword ; brightmagenta
-    keyword whole self brightred
-    keyword whole and yellow
-    keyword whole as yellow
-    keyword whole assert yellow
-    keyword whole break yellow
-    keyword whole class yellow
-    keyword whole continue yellow
-    keyword whole def yellow
-    keyword whole del yellow
-    keyword whole elif yellow
-    keyword whole else yellow
-    keyword whole except? yellow
-    keyword whole except yellow
-    keyword whole exec yellow
-    keyword whole finally yellow
-    keyword whole for yellow
-    keyword whole from yellow
-    keyword whole global yellow
-    keyword whole if yellow
-    keyword whole import yellow
-    keyword whole in yellow
-    keyword whole is yellow
-    keyword whole lambda yellow
-    keyword whole not yellow
-    keyword whole or yellow
-    keyword whole pass yellow
-    keyword whole print yellow
-    keyword whole raise yellow
-    keyword whole return yellow
-    keyword whole try yellow
-    keyword whole while yellow
-    keyword whole with yellow
-    keyword whole yield yellow
-    keyword whole by yellow
-    keyword whole cdef yellow
-    keyword whole cimport yellow
-    keyword whole cpdef yellow
-    keyword whole ctypedef yellow
-    keyword whole enum yellow
-    keyword whole extern yellow
-    keyword whole public yellow
-    keyword whole sizeof yellow
-    keyword whole struct yellow
-    keyword whole union yellow
-    keyword whole DEF yellow
-    keyword whole IF yellow
-    keyword whole ELIF yellow
-    keyword whole ELSE yellow
+    keyword : PUNCTUATION_SEPARATOR
+    keyword . KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword != KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword whole self VARIABLE_LANGUAGE
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole as KEYWORD_CONTROL_IMPORT
+    keyword whole assert KEYWORD_CONTROL
+    keyword whole break KEYWORD_CONTROL
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole def STORAGE_TYPE_FUNCTION
+    keyword whole del KEYWORD_OTHER_RESERVED
+    keyword whole elif KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole except? KEYWORD_CONTROL
+    keyword whole except KEYWORD_CONTROL
+    keyword whole exec KEYWORD_CONTROL
+    keyword whole finally KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole from KEYWORD_CONTROL_IMPORT
+    keyword whole global STORAGE_MODIFIER
+    keyword whole if KEYWORD_CONTROL
+    keyword whole import KEYWORD_CONTROL_IMPORT
+    keyword whole in KEYWORD_OPERATOR_WORD
+    keyword whole is KEYWORD_OPERATOR_WORD
+    keyword whole lambda KEYWORD_OTHER_RESERVED
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole pass KEYWORD_CONTROL
+    keyword whole print KEYWORD_CONTROL
+    keyword whole raise KEYWORD_CONTROL
+    keyword whole return KEYWORD_CONTROL
+    keyword whole try KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
+    keyword whole with KEYWORD_CONTROL
+    keyword whole yield KEYWORD_CONTROL
+    keyword whole by KEYWORD_OTHER_RESERVED
+    keyword whole cdef STORAGE_MODIFIER
+    keyword whole cimport KEYWORD_OTHER_RESERVED
+    keyword whole cpdef STORAGE_MODIFIER
+    keyword whole ctypedef STORAGE_MODIFIER
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole extern STORAGE_MODIFIER
+    keyword whole public STORAGE_MODIFIER
+    keyword whole sizeof KEYWORD_OPERATOR_WORD
+    keyword whole struct STORAGE_TYPE_CLASS
+    keyword whole union STORAGE_TYPE_CLASS
+    keyword whole DEF KEYWORD_CONTROL
+    keyword whole IF KEYWORD_CONTROL
+    keyword whole ELIF KEYWORD_CONTROL
+    keyword whole ELSE KEYWORD_CONTROL
 
-    keyword whole abs brightcyan
-    keyword whole all brightcyan
-    keyword whole any brightcyan
-    keyword whole basestring brightcyan
-    keyword whole bin brightcyan
-    keyword whole bool brightcyan
-    keyword whole callable brightcyan
-    keyword whole chr brightcyan
-    keyword whole classmethod brightcyan
-    keyword whole cmp brightcyan
-    keyword whole coerce brightcyan
-    keyword whole compile brightcyan
-    keyword whole complex brightcyan
-    keyword whole delattr brightcyan
-    keyword whole dict brightcyan
-    keyword whole dir brightcyan
-    keyword whole divmod brightcyan
-    keyword whole enumerate brightcyan
-    keyword whole eval brightcyan
-    keyword whole execfile brightcyan
-    keyword whole file brightcyan
-    keyword whole filter brightcyan
-    keyword whole float brightcyan
-    keyword whole frozenset brightcyan
-    keyword whole getattr brightcyan
-    keyword whole globals brightcyan
-    keyword whole hasattr brightcyan
-    keyword whole hash brightcyan
-    keyword whole help brightcyan
-    keyword whole hex brightcyan
-    keyword whole id brightcyan
-    keyword whole input brightcyan
-    keyword whole int brightcyan
-    keyword whole isinstance brightcyan
-    keyword whole issubclass brightcyan
-    keyword whole iter brightcyan
-    keyword whole len brightcyan
-    keyword whole list brightcyan
-    keyword whole locals brightcyan
-    keyword whole long brightcyan
-    keyword whole map brightcyan
-    keyword whole max brightcyan
-    keyword whole min brightcyan
-    keyword whole next brightcyan
-    keyword whole object brightcyan
-    keyword whole oct brightcyan
-    keyword whole open brightcyan
-    keyword whole ord brightcyan
-    keyword whole pow brightcyan
-    keyword whole print brightcyan
-    keyword whole property brightcyan
-    keyword whole range brightcyan
-    keyword whole raw_input brightcyan
-    keyword whole reduce brightcyan
-    keyword whole reload brightcyan
-    keyword whole repr brightcyan
-    keyword whole reversed brightcyan
-    keyword whole round brightcyan
-    keyword whole setattr brightcyan
-    keyword whole slice brightcyan
-    keyword whole sorted brightcyan
-    keyword whole staticmethod brightcyan
-    keyword whole str brightcyan
-    keyword whole sum brightcyan
-    keyword whole super brightcyan
-    keyword whole tuple brightcyan
-    keyword whole type brightcyan
-    keyword whole unichr brightcyan
-    keyword whole unicode brightcyan
-    keyword whole vars brightcyan
-    keyword whole xrange brightcyan
-    keyword whole zip brightcyan
-    keyword whole NULL brightcyan
-    keyword whole void brightcyan
-    keyword whole bint brightcyan
-    keyword whole char brightcyan
-    keyword whole short brightcyan
-    keyword whole double brightcyan
-    keyword whole Py_ssize_t brightcyan
-    keyword whole size_t brightcyan
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole all SUPPORT_FUNCTION
+    keyword whole any SUPPORT_FUNCTION
+    keyword whole basestring SUPPORT_CLASS
+    keyword whole bin SUPPORT_FUNCTION
+    keyword whole bool SUPPORT_CLASS
+    keyword whole callable SUPPORT_FUNCTION
+    keyword whole chr SUPPORT_FUNCTION
+    keyword whole classmethod SUPPORT_CLASS
+    keyword whole cmp SUPPORT_FUNCTION
+    keyword whole coerce SUPPORT_FUNCTION
+    keyword whole compile SUPPORT_FUNCTION
+    keyword whole complex SUPPORT_CLASS
+    keyword whole delattr SUPPORT_FUNCTION
+    keyword whole dict SUPPORT_CLASS
+    keyword whole dir SUPPORT_FUNCTION
+    keyword whole divmod SUPPORT_FUNCTION
+    keyword whole enumerate SUPPORT_FUNCTION
+    keyword whole eval SUPPORT_FUNCTION
+    keyword whole execfile SUPPORT_FUNCTION
+    keyword whole file SUPPORT_CLASS
+    keyword whole filter SUPPORT_FUNCTION
+    keyword whole float SUPPORT_CLASS
+    keyword whole frozenset SUPPORT_CLASS
+    keyword whole getattr SUPPORT_FUNCTION
+    keyword whole globals SUPPORT_FUNCTION
+    keyword whole hasattr SUPPORT_FUNCTION
+    keyword whole hash SUPPORT_FUNCTION
+    keyword whole help SUPPORT_FUNCTION
+    keyword whole hex SUPPORT_FUNCTION
+    keyword whole id SUPPORT_FUNCTION
+    keyword whole input SUPPORT_FUNCTION
+    keyword whole int SUPPORT_CLASS
+    keyword whole isinstance SUPPORT_FUNCTION
+    keyword whole issubclass SUPPORT_FUNCTION
+    keyword whole iter SUPPORT_FUNCTION
+    keyword whole len SUPPORT_FUNCTION
+    keyword whole list SUPPORT_CLASS
+    keyword whole locals SUPPORT_FUNCTION
+    keyword whole long SUPPORT_CLASS
+    keyword whole map SUPPORT_FUNCTION
+    keyword whole max SUPPORT_FUNCTION
+    keyword whole min SUPPORT_FUNCTION
+    keyword whole next SUPPORT_FUNCTION
+    keyword whole object SUPPORT_CLASS
+    keyword whole oct SUPPORT_FUNCTION
+    keyword whole open SUPPORT_FUNCTION
+    keyword whole ord SUPPORT_FUNCTION
+    keyword whole pow SUPPORT_FUNCTION
+    keyword whole print SUPPORT_FUNCTION
+    keyword whole property SUPPORT_CLASS
+    keyword whole range SUPPORT_FUNCTION
+    keyword whole raw_input SUPPORT_FUNCTION
+    keyword whole reduce SUPPORT_FUNCTION
+    keyword whole reload SUPPORT_FUNCTION
+    keyword whole repr SUPPORT_FUNCTION
+    keyword whole reversed SUPPORT_FUNCTION
+    keyword whole round SUPPORT_FUNCTION
+    keyword whole setattr SUPPORT_FUNCTION
+    keyword whole slice SUPPORT_CLASS
+    keyword whole sorted SUPPORT_FUNCTION
+    keyword whole staticmethod SUPPORT_CLASS
+    keyword whole str SUPPORT_CLASS
+    keyword whole sum SUPPORT_FUNCTION
+    keyword whole super SUPPORT_CLASS
+    keyword whole tuple SUPPORT_CLASS
+    keyword whole type SUPPORT_CLASS
+    keyword whole unichr SUPPORT_FUNCTION
+    keyword whole unicode SUPPORT_CLASS
+    keyword whole vars SUPPORT_FUNCTION
+    keyword whole xrange SUPPORT_FUNCTION
+    keyword whole zip SUPPORT_FUNCTION
+    keyword whole NULL CONSTANT_LANGUAGE
+    keyword whole void STORAGE_TYPE_PRIMITIVE
+    keyword whole bint STORAGE_TYPE_PRIMITIVE
+    keyword whole char STORAGE_TYPE_PRIMITIVE
+    keyword whole short STORAGE_TYPE_PRIMITIVE
+    keyword whole double STORAGE_TYPE_PRIMITIVE
+    keyword whole Py_ssize_t STORAGE_TYPE_PRIMITIVE
+    keyword whole size_t STORAGE_TYPE_PRIMITIVE
 
-    keyword whole atof magenta
-    keyword whole atoi magenta
-    keyword whole atol magenta
-    keyword whole expandtabs magenta
-    keyword whole find magenta
-    keyword whole rfind magenta
-    keyword whole index magenta
-    keyword whole rindex magenta
-    keyword whole count magenta
-    keyword whole split magenta
-    keyword whole splitfields magenta
-    keyword whole join magenta
-    keyword whole joinfields magenta
-    keyword whole strip magenta
-    keyword whole lstrip magenta
-    keyword whole rstrip magenta
-    keyword whole swapcase magenta
-    keyword whole upper magenta
-    keyword whole lower magenta
-    keyword whole ljust magenta
-    keyword whole rjust magenta
-    keyword whole center magenta
-    keyword whole zfill magenta
+    keyword whole atof SUPPORT_FUNCTION
+    keyword whole atoi SUPPORT_FUNCTION
+    keyword whole atol SUPPORT_FUNCTION
+    keyword whole expandtabs SUPPORT_FUNCTION
+    keyword whole find SUPPORT_FUNCTION
+    keyword whole rfind SUPPORT_FUNCTION
+    keyword whole index SUPPORT_FUNCTION
+    keyword whole rindex SUPPORT_FUNCTION
+    keyword whole count SUPPORT_FUNCTION
+    keyword whole split SUPPORT_FUNCTION
+    keyword whole splitfields SUPPORT_FUNCTION
+    keyword whole join SUPPORT_FUNCTION
+    keyword whole joinfields SUPPORT_FUNCTION
+    keyword whole strip SUPPORT_FUNCTION
+    keyword whole lstrip SUPPORT_FUNCTION
+    keyword whole rstrip SUPPORT_FUNCTION
+    keyword whole swapcase SUPPORT_FUNCTION
+    keyword whole upper SUPPORT_FUNCTION
+    keyword whole lower SUPPORT_FUNCTION
+    keyword whole ljust SUPPORT_FUNCTION
+    keyword whole rjust SUPPORT_FUNCTION
+    keyword whole center SUPPORT_FUNCTION
+    keyword whole zfill SUPPORT_FUNCTION
 
-    keyword whole include brightmagenta
-    keyword whole gil red
-    keyword whole nogil red
-    keyword whole readonly red
+    keyword whole include KEYWORD_CONTROL_IMPORT
+    keyword whole gil STORAGE_MODIFIER
+    keyword whole nogil STORAGE_MODIFIER
+    keyword whole readonly STORAGE_MODIFIER
 
-    keyword whole __init__ lightgray
-    keyword whole __del__ lightgray
-    keyword whole __repr__ lightgray
-    keyword whole __str__ lightgray
-    keyword whole __cmp__ lightgray
-    keyword whole __hash__ lightgray
-    keyword whole __call__ lightgray
-    keyword whole __getattr__ lightgray
-    keyword whole __setattr__ lightgray
-    keyword whole __delattr__ lightgray
-    keyword whole __len__ lightgray
-    keyword whole __getitem__ lightgray
-    keyword whole __setitem__ lightgray
-    keyword whole __delitem__ lightgray
-    keyword whole __getslice__ lightgray
-    keyword whole __setslice__ lightgray
-    keyword whole __delslice__ lightgray
-    keyword whole __add__ lightgray
-    keyword whole __sub__ lightgray
-    keyword whole __mul__ lightgray
-    keyword whole __div__ lightgray
-    keyword whole __mod__ lightgray
-    keyword whole __divmod__ lightgray
-    keyword whole __pow__ lightgray
-    keyword whole __lshift__ lightgray
-    keyword whole __rshift__ lightgray
-    keyword whole __and__ lightgray
-    keyword whole __xor__ lightgray
-    keyword whole __or__ lightgray
-    keyword whole __neg__ lightgray
-    keyword whole __pos__ lightgray
-    keyword whole __abs__ lightgray
-    keyword whole __invert__ lightgray
-    keyword whole __nonzero__ lightgray
-    keyword whole __coerce__ lightgray
-    keyword whole __int__ lightgray
-    keyword whole __long__ lightgray
-    keyword whole __float__ lightgray
-    keyword whole __oct__ lightgray
-    keyword whole __hex__ lightgray
+    keyword whole __init__ SUPPORT_FUNCTION
+    keyword whole __del__ SUPPORT_FUNCTION
+    keyword whole __repr__ SUPPORT_FUNCTION
+    keyword whole __str__ SUPPORT_FUNCTION
+    keyword whole __cmp__ SUPPORT_FUNCTION
+    keyword whole __hash__ SUPPORT_FUNCTION
+    keyword whole __call__ SUPPORT_FUNCTION
+    keyword whole __getattr__ SUPPORT_FUNCTION
+    keyword whole __setattr__ SUPPORT_FUNCTION
+    keyword whole __delattr__ SUPPORT_FUNCTION
+    keyword whole __len__ SUPPORT_FUNCTION
+    keyword whole __getitem__ SUPPORT_FUNCTION
+    keyword whole __setitem__ SUPPORT_FUNCTION
+    keyword whole __delitem__ SUPPORT_FUNCTION
+    keyword whole __getslice__ SUPPORT_FUNCTION
+    keyword whole __setslice__ SUPPORT_FUNCTION
+    keyword whole __delslice__ SUPPORT_FUNCTION
+    keyword whole __add__ SUPPORT_FUNCTION
+    keyword whole __sub__ SUPPORT_FUNCTION
+    keyword whole __mul__ SUPPORT_FUNCTION
+    keyword whole __div__ SUPPORT_FUNCTION
+    keyword whole __mod__ SUPPORT_FUNCTION
+    keyword whole __divmod__ SUPPORT_FUNCTION
+    keyword whole __pow__ SUPPORT_FUNCTION
+    keyword whole __lshift__ SUPPORT_FUNCTION
+    keyword whole __rshift__ SUPPORT_FUNCTION
+    keyword whole __and__ SUPPORT_FUNCTION
+    keyword whole __xor__ SUPPORT_FUNCTION
+    keyword whole __or__ SUPPORT_FUNCTION
+    keyword whole __neg__ SUPPORT_FUNCTION
+    keyword whole __pos__ SUPPORT_FUNCTION
+    keyword whole __abs__ SUPPORT_FUNCTION
+    keyword whole __invert__ SUPPORT_FUNCTION
+    keyword whole __nonzero__ SUPPORT_FUNCTION
+    keyword whole __coerce__ SUPPORT_FUNCTION
+    keyword whole __int__ SUPPORT_FUNCTION
+    keyword whole __long__ SUPPORT_FUNCTION
+    keyword whole __float__ SUPPORT_FUNCTION
+    keyword whole __oct__ SUPPORT_FUNCTION
+    keyword whole __hex__ SUPPORT_FUNCTION
 
-    keyword whole __radd__ lightgray
-    keyword whole __rsub__ lightgray
-    keyword whole __rmul__ lightgray
-    keyword whole __rdiv__ lightgray
-    keyword whole __rmod__ lightgray
-    keyword whole __rdivmod__ lightgray
-    keyword whole __rpow__ lightgray
-    keyword whole __rlshift__ lightgray
-    keyword whole __rrshift__ lightgray
-    keyword whole __rand__ lightgray
-    keyword whole __rxor__ lightgray
-    keyword whole __ror__ lightgray
+    keyword whole __radd__ SUPPORT_FUNCTION
+    keyword whole __rsub__ SUPPORT_FUNCTION
+    keyword whole __rmul__ SUPPORT_FUNCTION
+    keyword whole __rdiv__ SUPPORT_FUNCTION
+    keyword whole __rmod__ SUPPORT_FUNCTION
+    keyword whole __rdivmod__ SUPPORT_FUNCTION
+    keyword whole __rpow__ SUPPORT_FUNCTION
+    keyword whole __rlshift__ SUPPORT_FUNCTION
+    keyword whole __rrshift__ SUPPORT_FUNCTION
+    keyword whole __rand__ SUPPORT_FUNCTION
+    keyword whole __rxor__ SUPPORT_FUNCTION
+    keyword whole __ror__ SUPPORT_FUNCTION
 
-    keyword whole __+__ brightred
+    keyword whole __+__ SUPPORT_FUNCTION
 
-context """ """ green
-    keyword \\" brightgreen
-    keyword \\\n brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[.\]\[0123456789\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\{01234567\}\{01234567\} brightgreen
-    keyword \\\\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+context """ """ STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\n CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[.\]\[0123456789\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
 
-context ''' ''' green
-    keyword \\" brightgreen
-    keyword \\\n brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[.\]\[0123456789\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\{01234567\}\{01234567\} brightgreen
-    keyword \\\\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+context ''' ''' STRING_QUOTED_SINGLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\n CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[.\]\[0123456789\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
 
-context # \n brown
-    keyword coding\{=:\}\[\s\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightmagenta
-    keyword vim:fileencoding=\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightmagenta
-    keyword -\*-\[\s\]coding:\[\s\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]\[\s\]-\*- brightmagenta
+context # \n COMMENT_LINE
+    keyword coding\{=:\}\[\s\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] COMMENT_LINE
+    keyword vim:fileencoding=\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] COMMENT_LINE
+    keyword -\*-\[\s\]coding:\[\s\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]\[\s\]-\*- COMMENT_LINE
     spellcheck
 
-context " " green
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[.\]\[0123456789\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[.\]\[0123456789\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
 
-context ' ' green
-    keyword \\" brightgreen
-    keyword \\\n brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[.\]\[0123456789\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+context ' ' STRING_QUOTED_SINGLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\n CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[.\]\[0123456789\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

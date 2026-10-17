@@ -9,31 +9,31 @@ context default
 
     #=========================
     # Constants
-    keyword whole true brightgreen
-    keyword whole false brightgreen
-    keyword whole null brightgreen
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole null CONSTANT_LANGUAGE
 
     #=========================
     # Numbers
-    keyword whole \[-\]\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[-\]\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[-\]\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[-\]\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
     #=========================
     # Separators
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword : brightcyan
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
 
 #=============================
 # Strings
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\\{"\\/bfnrt\} brightgreen
-    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} brightgreen
+    keyword \\\{"\\/bfnrt\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} CONSTANT_CHARACTER_ESCAPE

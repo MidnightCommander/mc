@@ -1,227 +1,227 @@
 # DOT/Graphviz graphs
 context default
-    keyword whole strict brightred
-    keyword whole graph brightred
-    keyword whole digraph brightred
-    keyword whole subgraph brightred
+    keyword whole strict STORAGE_MODIFIER
+    keyword whole graph KEYWORD_OTHER_RESERVED
+    keyword whole digraph KEYWORD_OTHER_RESERVED
+    keyword whole subgraph KEYWORD_OTHER_RESERVED
 
-    keyword whole node yellow
-    keyword whole edge yellow
+    keyword whole node KEYWORD_OTHER_RESERVED
+    keyword whole edge KEYWORD_OTHER_RESERVED
 
-    keyword wholeleft cluster_ yellow
+    keyword wholeleft cluster_ ENTITY_NAME_SECTION
 
-    keyword whole -> brightred
-    keyword whole -- brightred
+    keyword whole -> KEYWORD_OPERATOR
+    keyword whole -- KEYWORD_OPERATOR
 
-    keyword whole _background white
-    keyword whole area white
-    keyword whole arrowhead white
-    keyword whole arrowsize white
-    keyword whole arrowtail white
-    keyword whole bb white
-    keyword whole bgcolor white
-    keyword whole center white
-    keyword whole charset white
-    keyword whole class white
-    keyword whole clusterrank white
-    keyword whole color white
-    keyword whole colorscheme white
-    keyword whole comment white
-    keyword whole compound white
-    keyword whole concentrate white
-    keyword whole constraint white
-    keyword whole Damping white
-    keyword whole decorate white
-    keyword whole defaultdist white
-    keyword whole dim white
-    keyword whole dimen white
-    keyword whole dir white
-    keyword whole diredgeconstraints white
-    keyword whole distortion white
-    keyword whole dpi white
-    keyword whole edgehref white
-    keyword whole edgetarget white
-    keyword whole edgetooltip white
-    keyword whole edgeURL white
-    keyword whole epsilon white
-    keyword whole esep white
-    keyword whole fillcolor white
-    keyword whole fixedsize white
-    keyword whole fontcolor white
-    keyword whole fontname white
-    keyword whole fontnames white
-    keyword whole fontpath white
-    keyword whole fontsize white
-    keyword whole forcelabels white
-    keyword whole gradientangle white
-    keyword whole group white
-    keyword whole head_lp white
-    keyword whole headclip white
-    keyword whole headhref white
-    keyword whole headlabel white
-    keyword whole headport white
-    keyword whole headtarget white
-    keyword whole headtooltip white
-    keyword whole headURL white
-    keyword whole height white
-    keyword whole href white
-    keyword whole id white
-    keyword whole image white
-    keyword whole imagepath white
-    keyword whole imagepos white
-    keyword whole imagescale white
-    keyword whole inputscale white
-    keyword whole K white
-    keyword whole label white
-    keyword whole label_scheme white
-    keyword whole labelangle white
-    keyword whole labeldistance white
-    keyword whole labelfloat white
-    keyword whole labelfontcolor white
-    keyword whole labelfontname white
-    keyword whole labelfontsize white
-    keyword whole labelhref white
-    keyword whole labeljust white
-    keyword whole labelloc white
-    keyword whole labeltarget white
-    keyword whole labeltooltip white
-    keyword whole labelURL white
-    keyword whole landscape white
-    keyword whole layer white
-    keyword whole layerlistsep white
-    keyword whole layers white
-    keyword whole layerselect white
-    keyword whole layersep white
-    keyword whole layout white
-    keyword whole len white
-    keyword whole levels white
-    keyword whole levelsgap white
-    keyword whole lhead white
-    keyword whole lheight white
-    keyword whole lp white
-    keyword whole ltail white
-    keyword whole lwidth white
-    keyword whole margin white
-    keyword whole maxiter white
-    keyword whole mclimit white
-    keyword whole mindist white
-    keyword whole minlen white
-    keyword whole mode white
-    keyword whole model white
-    keyword whole mosek white
-    keyword whole newrank white
-    keyword whole nodesep white
-    keyword whole nojustify white
-    keyword whole normalize white
-    keyword whole notranslate white
-    keyword whole nslimit white
-    keyword whole nslimit1 white
-    keyword whole ordering white
-    keyword whole orientation white
-    keyword whole outputorder white
-    keyword whole overlap white
-    keyword whole overlap_scaling white
-    keyword whole overlap_shrink white
-    keyword whole pack white
-    keyword whole packmode white
-    keyword whole pad white
-    keyword whole page white
-    keyword whole pagedir white
-    keyword whole pencolor white
-    keyword whole penwidth white
-    keyword whole peripheries white
-    keyword whole pin white
-    keyword whole pos white
-    keyword whole quadtree white
-    keyword whole quantum white
-    keyword whole rank white
-    keyword whole rankdir white
-    keyword whole ranksep white
-    keyword whole ratio white
-    keyword whole rects white
-    keyword whole regular white
-    keyword whole remincross white
-    keyword whole repulsiveforce white
-    keyword whole resolution white
-    keyword whole root white
-    keyword whole rotate white
-    keyword whole rotation white
-    keyword whole samehead white
-    keyword whole sametail white
-    keyword whole samplepoints white
-    keyword whole scale white
-    keyword whole searchsize white
-    keyword whole sep white
-    keyword whole shape white
-    keyword whole shapefile white
-    keyword whole showboxes white
-    keyword whole sides white
-    keyword whole size white
-    keyword whole skew white
-    keyword whole smoothing white
-    keyword whole sortv white
-    keyword whole splines white
-    keyword whole start white
-    keyword whole style white
-    keyword whole stylesheet white
-    keyword whole tail_lp white
-    keyword whole tailclip white
-    keyword whole tailhref white
-    keyword whole taillabel white
-    keyword whole tailport white
-    keyword whole tailtarget white
-    keyword whole tailtooltip white
-    keyword whole tailURL white
-    keyword whole target white
-    keyword whole tooltip white
-    keyword whole truecolor white
-    keyword whole URL white
-    keyword whole vertices white
-    keyword whole viewport white
-    keyword whole voro_margin white
-    keyword whole weight white
-    keyword whole width white
-    keyword whole xdotversion white
-    keyword whole xlabel white
-    keyword whole xlp white
-    keyword whole z white
+    keyword whole _background ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole area ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole arrowhead ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole arrowsize ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole arrowtail ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole bb ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole bgcolor ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole center ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole charset ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole class ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole clusterrank ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole color ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole colorscheme ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole comment ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole compound ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole concentrate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole constraint ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole Damping ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole decorate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole defaultdist ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole dim ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole dimen ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole dir ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole diredgeconstraints ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole distortion ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole dpi ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole edgehref ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole edgetarget ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole edgetooltip ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole edgeURL ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole epsilon ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole esep ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fillcolor ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fixedsize ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fontcolor ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fontname ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fontnames ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fontpath ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole fontsize ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole forcelabels ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole gradientangle ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole group ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole head_lp ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole headclip ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole headhref ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole headlabel ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole headport ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole headtarget ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole headtooltip ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole headURL ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole height ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole href ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole id ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole image ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole imagepath ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole imagepos ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole imagescale ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole inputscale ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole K ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole label ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole label_scheme ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelangle ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labeldistance ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelfloat ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelfontcolor ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelfontname ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelfontsize ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelhref ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labeljust ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelloc ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labeltarget ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labeltooltip ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole labelURL ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole landscape ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole layer ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole layerlistsep ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole layers ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole layerselect ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole layersep ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole layout ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole len ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole levels ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole levelsgap ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole lhead ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole lheight ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole lp ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ltail ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole lwidth ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole margin ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole maxiter ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole mclimit ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole mindist ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole minlen ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole mode ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole model ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole mosek ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole newrank ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole nodesep ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole nojustify ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole normalize ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole notranslate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole nslimit ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole nslimit1 ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ordering ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole orientation ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole outputorder ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole overlap ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole overlap_scaling ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole overlap_shrink ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pack ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole packmode ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pad ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole page ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pagedir ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pencolor ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole penwidth ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole peripheries ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pin ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole pos ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole quadtree ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole quantum ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rank ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rankdir ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ranksep ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole ratio ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rects ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole regular ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole remincross ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole repulsiveforce ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole resolution ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole root ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rotate ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole rotation ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole samehead ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole sametail ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole samplepoints ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole scale ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole searchsize ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole sep ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole shape ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole shapefile ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole showboxes ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole sides ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole size ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole skew ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole smoothing ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole sortv ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole splines ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole start ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole style ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole stylesheet ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tail_lp ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tailclip ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tailhref ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole taillabel ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tailport ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tailtarget ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tailtooltip ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tailURL ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole target ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole tooltip ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole truecolor ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole URL ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole vertices ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole viewport ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole voro_margin ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole weight ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole width ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole xdotversion ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole xlabel ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole xlp ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole z ENTITY_OTHER_ATTRIBUTE_NAME
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword // COMMENT_LINE
 
-    keyword \+ red
-    keyword , brightcyan
-    keyword : brightcyan
-    keyword ; brightmagenta
-    keyword < green
-    keyword = yellow
-    keyword > green
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword { brightcyan
-    keyword } brightcyan
+    keyword \+ KEYWORD_OPERATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword < KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
-    keyword "+" red
-    keyword <+> red
+context linestart # \n META_PREPROCESSOR
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword /\**\*/ COMMENT_BLOCK
+    keyword //*\n COMMENT_LINE
+    keyword "+" STRING_QUOTED_DOUBLE
+    keyword <+> STRING_QUOTED_OTHER
 
-context exclusive < > green
+context exclusive < > STRING_QUOTED_OTHER
     spellcheck
 
-    keyword <*> cyan
+    keyword <*> PUNCTUATION_SECTION
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\\n yellow
-    keyword \\" brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword \\\n PUNCTUATION_SEPARATOR_CONTINUATION
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

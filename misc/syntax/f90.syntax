@@ -17,262 +17,262 @@ caseinsensitive
 
 context default
 # keywords at the beginning of line
-    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\} brightred
-    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\} brightred
-    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\} brightred
-    keyword linestart \{0123456789\}\{0123456789\} brightred
-    keyword linestart \{0123456789\} brightred
+    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\} CONSTANT_NUMERIC
+    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\} CONSTANT_NUMERIC
+    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\} CONSTANT_NUMERIC
+    keyword linestart \{0123456789\}\{0123456789\} CONSTANT_NUMERIC
+    keyword linestart \{0123456789\} CONSTANT_NUMERIC
 
 # structure
-    keyword whole ASSIGNMENT white black
-    keyword whole CONTAINS white black
-    keyword whole END white black
-    keyword whole FUNCTION white black
-    keyword whole INTERFACE white black
-    keyword whole INCLUDE white black
-    keyword whole MODULE white black
-    keyword whole OPERATOR white black
-    keyword whole PROGRAM white black
-    keyword whole SUBROUTINE white black
+    keyword whole ASSIGNMENT KEYWORD_OTHER_RESERVED black
+    keyword whole CONTAINS KEYWORD_OTHER_RESERVED black
+    keyword whole END KEYWORD_CONTROL black
+    keyword whole FUNCTION STORAGE_TYPE black
+    keyword whole INTERFACE STORAGE_TYPE_CLASS black
+    keyword whole INCLUDE KEYWORD_CONTROL_IMPORT black
+    keyword whole MODULE STORAGE_TYPE black
+    keyword whole OPERATOR KEYWORD_OTHER_RESERVED black
+    keyword whole PROGRAM STORAGE_TYPE black
+    keyword whole SUBROUTINE STORAGE_TYPE black
 
 # boolean and logical expressions / operators
-    keyword .and. brightred/orange
-    keyword .eq. brightred/orange
-    keyword .eqv. brightred/orange
-    keyword .false. brightred/orange
-    keyword .ge. brightred/orange
-    keyword .gt. brightred/orange
-    keyword .le. brightred/orange
-    keyword .lt. brightred/orange
-    keyword .ne. brightred/orange
-    keyword .neqv. brightred/orange
-    keyword .not. brightred/orange
-    keyword .or. brightred/orange
-    keyword .true. brightred/orange
-    keyword whole lge brightred/orange
-    keyword whole lgt brightred/orange
-    keyword whole lle brightred/orange
-    keyword whole llt brightred/orange
+    keyword .and. KEYWORD_OPERATOR_WORD orange
+    keyword .eq. KEYWORD_OPERATOR_WORD orange
+    keyword .eqv. KEYWORD_OPERATOR_WORD orange
+    keyword .false. CONSTANT_LANGUAGE orange
+    keyword .ge. KEYWORD_OPERATOR_WORD orange
+    keyword .gt. KEYWORD_OPERATOR_WORD orange
+    keyword .le. KEYWORD_OPERATOR_WORD orange
+    keyword .lt. KEYWORD_OPERATOR_WORD orange
+    keyword .ne. KEYWORD_OPERATOR_WORD orange
+    keyword .neqv. KEYWORD_OPERATOR_WORD orange
+    keyword .not. KEYWORD_OPERATOR_WORD orange
+    keyword .or. KEYWORD_OPERATOR_WORD orange
+    keyword .true. CONSTANT_LANGUAGE orange
+    keyword whole lge KEYWORD_OPERATOR_WORD orange
+    keyword whole lgt KEYWORD_OPERATOR_WORD orange
+    keyword whole lle KEYWORD_OPERATOR_WORD orange
+    keyword whole llt KEYWORD_OPERATOR_WORD orange
 
 # declarations
-    keyword whole ALLOCATABLE brightcyan
-    keyword whole BLOCK brightcyan
-    keyword whole CHARACTER brightcyan
-    keyword whole COMMON brightcyan
-    keyword whole COMPLEX brightcyan
-    keyword whole DATA brightcyan
-    keyword whole DIMENSION brightcyan
-    keyword whole DOUBLE brightcyan
-    keyword whole ELEMENTAL brightcyan
-    keyword whole EQUIVALENCE brightcyan
-    keyword whole EXTERNAL brightcyan
-    keyword whole FORMAT brightcyan
-    keyword whole IMPLICIT brightcyan
-    keyword whole INTEGER brightcyan
-    keyword whole INTENT brightcyan
-    keyword whole INTRINSIC brightcyan
-    keyword whole LOGICAL brightcyan
-    keyword whole NAMELIST brightcyan
-    keyword whole NONE brightcyan
-    keyword whole ONLY brightcyan
-    keyword whole OPTIONAL brightcyan
-    keyword whole PARAMETER brightcyan
-    keyword whole POINTER brightcyan
-    keyword whole PRECISION brightcyan
-    keyword whole PRIVATE brightcyan
-    keyword whole PUBLIC brightcyan
-    keyword whole PURE brightcyan
-    keyword whole REAL brightcyan
-    keyword whole SAVE brightcyan
-    keyword whole TYPE brightcyan
-    keyword whole USE brightcyan
+    keyword whole ALLOCATABLE STORAGE_MODIFIER
+    keyword whole BLOCK KEYWORD_OTHER_RESERVED
+    keyword whole CHARACTER STORAGE_TYPE_PRIMITIVE
+    keyword whole COMMON KEYWORD_OTHER_RESERVED
+    keyword whole COMPLEX STORAGE_TYPE_PRIMITIVE
+    keyword whole DATA KEYWORD_OTHER_RESERVED
+    keyword whole DIMENSION KEYWORD_OTHER_RESERVED
+    keyword whole DOUBLE STORAGE_TYPE_PRIMITIVE
+    keyword whole ELEMENTAL STORAGE_MODIFIER
+    keyword whole EQUIVALENCE KEYWORD_OTHER_RESERVED
+    keyword whole EXTERNAL STORAGE_MODIFIER
+    keyword whole FORMAT KEYWORD_OTHER_RESERVED
+    keyword whole IMPLICIT KEYWORD_OTHER_RESERVED
+    keyword whole INTEGER STORAGE_TYPE_PRIMITIVE
+    keyword whole INTENT STORAGE_MODIFIER
+    keyword whole INTRINSIC KEYWORD_OTHER_RESERVED
+    keyword whole LOGICAL STORAGE_TYPE_PRIMITIVE
+    keyword whole NAMELIST KEYWORD_OTHER_RESERVED
+    keyword whole NONE KEYWORD_OTHER_RESERVED
+    keyword whole ONLY KEYWORD_CONTROL_IMPORT
+    keyword whole OPTIONAL STORAGE_MODIFIER
+    keyword whole PARAMETER STORAGE_MODIFIER
+    keyword whole POINTER STORAGE_MODIFIER
+    keyword whole PRECISION STORAGE_TYPE_PRIMITIVE
+    keyword whole PRIVATE STORAGE_MODIFIER
+    keyword whole PUBLIC STORAGE_MODIFIER
+    keyword whole PURE STORAGE_MODIFIER
+    keyword whole REAL STORAGE_TYPE_PRIMITIVE
+    keyword whole SAVE STORAGE_MODIFIER
+    keyword whole TYPE STORAGE_TYPE_CLASS
+    keyword whole USE KEYWORD_CONTROL_IMPORT
 
 # general programming syntax
-    keyword whole allocate brightgreen
-    keyword whole assign brightgreen
-    keyword whole call brightgreen
-    keyword whole case brightgreen
-    keyword whole deallocate brightgreen
-    keyword whole default brightgreen
-    keyword whole continue brightgreen
-    keyword whole cycle brightgreen
-    keyword whole do brightgreen
-    keyword whole else brightgreen
-    keyword whole elseif brightgreen
-    keyword whole elsewhere brightgreen
-    keyword whole end brightgreen
-    keyword whole enddo brightgreen
-    keyword whole endif brightgreen
-    keyword whole exit brightgreen
-    keyword whole for brightgreen
-    keyword whole forall brightgreen
-    keyword whole goto brightgreen
-    keyword whole if brightgreen
-    keyword whole nullify brightgreen
-    keyword whole pause brightgreen
-    keyword whole return brightgreen
-    keyword whole select brightgreen
-    keyword whole stop brightgreen
-    keyword whole target brightgreen
-    keyword whole then brightgreen
-    keyword whole to brightgreen
-    keyword whole where brightgreen
-    keyword whole while brightgreen
+    keyword whole allocate KEYWORD_OTHER_RESERVED
+    keyword whole assign KEYWORD_OTHER_RESERVED
+    keyword whole call KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole deallocate KEYWORD_OTHER_RESERVED
+    keyword whole default KEYWORD_CONTROL
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole cycle KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elseif KEYWORD_CONTROL
+    keyword whole elsewhere KEYWORD_CONTROL
+    keyword whole end KEYWORD_CONTROL
+    keyword whole enddo KEYWORD_CONTROL
+    keyword whole endif KEYWORD_CONTROL
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole forall KEYWORD_CONTROL
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole nullify KEYWORD_OTHER_RESERVED
+    keyword whole pause KEYWORD_CONTROL
+    keyword whole return KEYWORD_CONTROL
+    keyword whole select KEYWORD_CONTROL
+    keyword whole stop KEYWORD_CONTROL
+    keyword whole target STORAGE_MODIFIER
+    keyword whole then KEYWORD_CONTROL
+    keyword whole to KEYWORD_CONTROL
+    keyword whole where KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
 
 # headers
-    keyword whole entry brightgreen
+    keyword whole entry KEYWORD_OTHER_RESERVED
 
 # I/O functions
 # may have optional equal signs after them: 'keyword ='
-    keyword whole access brightmagenta
-    keyword whole backspace brightmagenta
-    keyword whole blank brightmagenta
-    keyword whole close brightmagenta
-    keyword whole direct brightmagenta
-    keyword whole endfile brightmagenta
-    keyword whole err brightmagenta
-    keyword whole exist brightmagenta
-    keyword whole file brightmagenta
-    keyword whole fmt brightmagenta
-    keyword whole form brightmagenta
-    keyword whole formatted brightmagenta
-    keyword whole inquire brightmagenta
-    keyword whole iostat brightmagenta
-    keyword whole name brightmagenta
-    keyword whole named brightmagenta
-    keyword whole nextrec brightmagenta
-    keyword whole number brightmagenta
-    keyword whole open brightmagenta
-    keyword whole opened brightmagenta
-    keyword whole print brightmagenta
-    keyword whole read brightmagenta
-    keyword whole rec brightmagenta
-    keyword whole recl brightmagenta
-    keyword whole rewind brightmagenta
-    keyword whole sequential brightmagenta
-    keyword whole status brightmagenta
-    keyword whole unformatted brightmagenta
-    keyword whole unit brightmagenta
-    keyword whole write brightmagenta
+    keyword whole access KEYWORD_OTHER_RESERVED
+    keyword whole backspace KEYWORD_OTHER_RESERVED
+    keyword whole blank KEYWORD_OTHER_RESERVED
+    keyword whole close KEYWORD_OTHER_RESERVED
+    keyword whole direct KEYWORD_OTHER_RESERVED
+    keyword whole endfile KEYWORD_OTHER_RESERVED
+    keyword whole err KEYWORD_OTHER_RESERVED
+    keyword whole exist KEYWORD_OTHER_RESERVED
+    keyword whole file KEYWORD_OTHER_RESERVED
+    keyword whole fmt KEYWORD_OTHER_RESERVED
+    keyword whole form KEYWORD_OTHER_RESERVED
+    keyword whole formatted KEYWORD_OTHER_RESERVED
+    keyword whole inquire KEYWORD_OTHER_RESERVED
+    keyword whole iostat KEYWORD_OTHER_RESERVED
+    keyword whole name KEYWORD_OTHER_RESERVED
+    keyword whole named KEYWORD_OTHER_RESERVED
+    keyword whole nextrec KEYWORD_OTHER_RESERVED
+    keyword whole number KEYWORD_OTHER_RESERVED
+    keyword whole open KEYWORD_OTHER_RESERVED
+    keyword whole opened KEYWORD_OTHER_RESERVED
+    keyword whole print KEYWORD_OTHER_RESERVED
+    keyword whole read KEYWORD_OTHER_RESERVED
+    keyword whole rec KEYWORD_OTHER_RESERVED
+    keyword whole recl KEYWORD_OTHER_RESERVED
+    keyword whole rewind KEYWORD_OTHER_RESERVED
+    keyword whole sequential KEYWORD_OTHER_RESERVED
+    keyword whole status KEYWORD_OTHER_RESERVED
+    keyword whole unformatted KEYWORD_OTHER_RESERVED
+    keyword whole unit KEYWORD_OTHER_RESERVED
+    keyword whole write KEYWORD_OTHER_RESERVED
 
 # mathematical functions
-    keyword whole abs yellow
-    keyword whole achar yellow
-    keyword whole acos yellow
-    keyword whole aimag yellow
-    keyword whole aint yellow
-    keyword whole alog yellow
-    keyword whole alog10 yellow
-    keyword whole amax0 yellow
-    keyword whole amax1 yellow
-    keyword whole amin0 yellow
-    keyword whole amin1 yellow
-    keyword whole amod yellow
-    keyword whole anint yellow
-    keyword whole aprime yellow
-    keyword whole asin yellow
-    keyword whole atan yellow
-    keyword whole atan2 yellow
-    keyword whole acos yellow
-    keyword whole cabs yellow
-    keyword whole ceiling yellow
-    keyword whole cexp yellow
-    keyword whole char yellow
-    keyword whole clog yellow
-    keyword whole cmplx yellow
-    keyword whole conjg yellow
-    keyword whole cos yellow
-    keyword whole cosh yellow
-    keyword whole ccos yellow
-    keyword whole csin yellow
-    keyword whole csqrt yellow
-    keyword whole dabs yellow
-    keyword whole dacos yellow
-    keyword whole dasin yellow
-    keyword whole datan yellow
-    keyword whole datan2 yellow
-    keyword whole dble yellow
-    keyword whole dcos yellow
-    keyword whole dcosh yellow
-    keyword whole dfloat yellow
-    keyword whole ddmim yellow
-    keyword whole dexp yellow
-    keyword whole dim yellow
-    keyword whole dint yellow
-    keyword whole dlog yellow
-    keyword whole dlog10 yellow
-    keyword whole dmax1 yellow
-    keyword whole dmin1 yellow
-    keyword whole dmod yellow
-    keyword whole dnint yellow
-    keyword whole dsign yellow
-    keyword whole dsin yellow
-    keyword whole dsinh yellow
-    keyword whole dsqrt yellow
-    keyword whole dtan yellow
-    keyword whole dtanh yellow
-    keyword whole exp yellow
-    keyword whole float yellow
-    keyword whole floor yellow
-    keyword whole iabs yellow
-    keyword whole iachar yellow
-    keyword whole ichar yellow
-    keyword whole idim yellow
-    keyword whole idint yellow
-    keyword whole ifix yellow
-    keyword whole index yellow
-    keyword whole int yellow
-    keyword whole isign yellow
-    keyword whole len yellow
-    keyword whole log yellow
-    keyword whole log10 yellow
-    keyword whole matmul yellow
-    keyword whole max yellow
-    keyword whole max0 yellow
-    keyword whole max1 yellow
-    keyword whole maxval yellow
-    keyword whole min yellow
-    keyword whole min0 yellow
-    keyword whole min1 yellow
-    keyword whole minval yellow
-    keyword whole mod yellow
-    keyword whole nint yellow
-    keyword whole product yellow
-    keyword whole rand yellow
-    keyword whole random_number yellow
-    keyword whole random_seed yellow
-    keyword whole sign yellow
-    keyword whole sin yellow
-    keyword whole sinh yellow
-    keyword whole sngl yellow
-    keyword whole sqrt yellow
-    keyword whole sum yellow
-    keyword whole tan yellow
-    keyword whole tanh yellow
-    keyword whole transpose yellow
+    keyword whole abs SUPPORT_FUNCTION
+    keyword whole achar SUPPORT_FUNCTION
+    keyword whole acos SUPPORT_FUNCTION
+    keyword whole aimag SUPPORT_FUNCTION
+    keyword whole aint SUPPORT_FUNCTION
+    keyword whole alog SUPPORT_FUNCTION
+    keyword whole alog10 SUPPORT_FUNCTION
+    keyword whole amax0 SUPPORT_FUNCTION
+    keyword whole amax1 SUPPORT_FUNCTION
+    keyword whole amin0 SUPPORT_FUNCTION
+    keyword whole amin1 SUPPORT_FUNCTION
+    keyword whole amod SUPPORT_FUNCTION
+    keyword whole anint SUPPORT_FUNCTION
+    keyword whole aprime SUPPORT_FUNCTION
+    keyword whole asin SUPPORT_FUNCTION
+    keyword whole atan SUPPORT_FUNCTION
+    keyword whole atan2 SUPPORT_FUNCTION
+    keyword whole acos SUPPORT_FUNCTION
+    keyword whole cabs SUPPORT_FUNCTION
+    keyword whole ceiling SUPPORT_FUNCTION
+    keyword whole cexp SUPPORT_FUNCTION
+    keyword whole char SUPPORT_FUNCTION
+    keyword whole clog SUPPORT_FUNCTION
+    keyword whole cmplx SUPPORT_FUNCTION
+    keyword whole conjg SUPPORT_FUNCTION
+    keyword whole cos SUPPORT_FUNCTION
+    keyword whole cosh SUPPORT_FUNCTION
+    keyword whole ccos SUPPORT_FUNCTION
+    keyword whole csin SUPPORT_FUNCTION
+    keyword whole csqrt SUPPORT_FUNCTION
+    keyword whole dabs SUPPORT_FUNCTION
+    keyword whole dacos SUPPORT_FUNCTION
+    keyword whole dasin SUPPORT_FUNCTION
+    keyword whole datan SUPPORT_FUNCTION
+    keyword whole datan2 SUPPORT_FUNCTION
+    keyword whole dble SUPPORT_FUNCTION
+    keyword whole dcos SUPPORT_FUNCTION
+    keyword whole dcosh SUPPORT_FUNCTION
+    keyword whole dfloat SUPPORT_FUNCTION
+    keyword whole ddmim SUPPORT_FUNCTION
+    keyword whole dexp SUPPORT_FUNCTION
+    keyword whole dim SUPPORT_FUNCTION
+    keyword whole dint SUPPORT_FUNCTION
+    keyword whole dlog SUPPORT_FUNCTION
+    keyword whole dlog10 SUPPORT_FUNCTION
+    keyword whole dmax1 SUPPORT_FUNCTION
+    keyword whole dmin1 SUPPORT_FUNCTION
+    keyword whole dmod SUPPORT_FUNCTION
+    keyword whole dnint SUPPORT_FUNCTION
+    keyword whole dsign SUPPORT_FUNCTION
+    keyword whole dsin SUPPORT_FUNCTION
+    keyword whole dsinh SUPPORT_FUNCTION
+    keyword whole dsqrt SUPPORT_FUNCTION
+    keyword whole dtan SUPPORT_FUNCTION
+    keyword whole dtanh SUPPORT_FUNCTION
+    keyword whole exp SUPPORT_FUNCTION
+    keyword whole float SUPPORT_FUNCTION
+    keyword whole floor SUPPORT_FUNCTION
+    keyword whole iabs SUPPORT_FUNCTION
+    keyword whole iachar SUPPORT_FUNCTION
+    keyword whole ichar SUPPORT_FUNCTION
+    keyword whole idim SUPPORT_FUNCTION
+    keyword whole idint SUPPORT_FUNCTION
+    keyword whole ifix SUPPORT_FUNCTION
+    keyword whole index SUPPORT_FUNCTION
+    keyword whole int SUPPORT_FUNCTION
+    keyword whole isign SUPPORT_FUNCTION
+    keyword whole len SUPPORT_FUNCTION
+    keyword whole log SUPPORT_FUNCTION
+    keyword whole log10 SUPPORT_FUNCTION
+    keyword whole matmul SUPPORT_FUNCTION
+    keyword whole max SUPPORT_FUNCTION
+    keyword whole max0 SUPPORT_FUNCTION
+    keyword whole max1 SUPPORT_FUNCTION
+    keyword whole maxval SUPPORT_FUNCTION
+    keyword whole min SUPPORT_FUNCTION
+    keyword whole min0 SUPPORT_FUNCTION
+    keyword whole min1 SUPPORT_FUNCTION
+    keyword whole minval SUPPORT_FUNCTION
+    keyword whole mod SUPPORT_FUNCTION
+    keyword whole nint SUPPORT_FUNCTION
+    keyword whole product SUPPORT_FUNCTION
+    keyword whole rand SUPPORT_FUNCTION
+    keyword whole random_number SUPPORT_FUNCTION
+    keyword whole random_seed SUPPORT_FUNCTION
+    keyword whole sign SUPPORT_FUNCTION
+    keyword whole sin SUPPORT_FUNCTION
+    keyword whole sinh SUPPORT_FUNCTION
+    keyword whole sngl SUPPORT_FUNCTION
+    keyword whole sqrt SUPPORT_FUNCTION
+    keyword whole sum SUPPORT_FUNCTION
+    keyword whole tan SUPPORT_FUNCTION
+    keyword whole tanh SUPPORT_FUNCTION
+    keyword whole transpose SUPPORT_FUNCTION
 
 # operators and syntax elements
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword : brightcyan
-    keyword , brightcyan
-    keyword ; brightcyan
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword = yellow
-    keyword < yellow
-    keyword > yellow
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword : PUNCTUATION_SEPARATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
 
 # comments and quotes
-    keyword '*' green
-    keyword "*" green
+    keyword '*' STRING_QUOTED_SINGLE
+    keyword "*" STRING_QUOTED_DOUBLE
 
 #context &\n \n black cyan
-    keyword &\n black cyan
+    keyword &\n PUNCTUATION_SEPARATOR_CONTINUATION cyan
 
-context format( ) green
+context format( ) STRING_QUOTED_OTHER
 
-context ! \n brown
+context ! \n COMMENT_LINE
    spellcheck

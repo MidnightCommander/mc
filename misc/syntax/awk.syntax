@@ -19,154 +19,154 @@
 
 context default
 
-    keyword whole linestart #!\[\s\]/bin/\[msg\]awk yellow magenta
-    keyword whole linestart #!\[\s\]/usr/bin/\[msg\]awk yellow magenta
+    keyword whole linestart #!\[\s\]/bin/\[msg\]awk COMMENT_LINE magenta
+    keyword whole linestart #!\[\s\]/usr/bin/\[msg\]awk COMMENT_LINE magenta
 # Keywords
-    keyword whole AMNOISE white
-    keyword whole BEGIN white
-    keyword whole END white
-    keyword whole func white
-    keyword whole function white
-    keyword whole nextfile white
+    keyword whole AMNOISE CONSTANT_OTHER
+    keyword whole BEGIN KEYWORD_OTHER_RESERVED
+    keyword whole END KEYWORD_OTHER_RESERVED
+    keyword whole func STORAGE_TYPE_FUNCTION
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole nextfile KEYWORD_CONTROL
 
-    keyword whole return white/26
-    keyword whole print white/26
-    keyword whole printf white/26
-    keyword whole if white/26
-    keyword whole else white/26
-    keyword whole while white/26
-    keyword whole for white/26
-    keyword whole in white/26
-    keyword whole do white/26
-    keyword whole break white/26
-    keyword whole continue white/26
-    keyword whole next white/26
-    keyword whole exit white/26
-    keyword whole close white/26
-    keyword whole system white/26
-    keyword whole getline white/26
+    keyword whole return KEYWORD_CONTROL
+    keyword whole print SUPPORT_FUNCTION
+    keyword whole printf SUPPORT_FUNCTION
+    keyword whole if KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole while KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole in KEYWORD_OPERATOR_WORD
+    keyword whole do KEYWORD_CONTROL
+    keyword whole break KEYWORD_CONTROL
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole next KEYWORD_CONTROL
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole close KEYWORD_CONTROL
+    keyword whole system KEYWORD_CONTROL
+    keyword whole getline SUPPORT_FUNCTION
 # Builtin functions:
-    keyword whole atan2        white black
-    keyword whole cos          white black
-    keyword whole exp          white black
-    keyword whole int          white black
-    keyword whole log          white black
-    keyword whole rand         white black
-    keyword whole sin          white black
-    keyword whole sqrt         white black
-    keyword whole srand        white black
-    keyword whole gsub         white black
-    keyword whole index        white black
-    keyword whole length       white black
-    keyword whole match        white black
-    keyword whole split        white black
-    keyword whole sprintf      white black
-    keyword whole sub          white black
-    keyword whole substr       white black
-    keyword whole asort        white black
-    keyword whole asorti       white black
+    keyword whole atan2        SUPPORT_FUNCTION black
+    keyword whole cos          SUPPORT_FUNCTION black
+    keyword whole exp          SUPPORT_FUNCTION black
+    keyword whole int          SUPPORT_FUNCTION black
+    keyword whole log          SUPPORT_FUNCTION black
+    keyword whole rand         SUPPORT_FUNCTION black
+    keyword whole sin          SUPPORT_FUNCTION black
+    keyword whole sqrt         SUPPORT_FUNCTION black
+    keyword whole srand        SUPPORT_FUNCTION black
+    keyword whole gsub         SUPPORT_FUNCTION black
+    keyword whole index        SUPPORT_FUNCTION black
+    keyword whole length       SUPPORT_FUNCTION black
+    keyword whole match        SUPPORT_FUNCTION black
+    keyword whole split        SUPPORT_FUNCTION black
+    keyword whole sprintf      SUPPORT_FUNCTION black
+    keyword whole sub          SUPPORT_FUNCTION black
+    keyword whole substr       SUPPORT_FUNCTION black
+    keyword whole asort        SUPPORT_FUNCTION black
+    keyword whole asorti       SUPPORT_FUNCTION black
 
-    keyword whole xor white
-    keyword whole and white
-    keyword whole or white
+    keyword whole xor SUPPORT_FUNCTION
+    keyword whole and SUPPORT_FUNCTION
+    keyword whole or SUPPORT_FUNCTION
 
 # Gawk builtin functions:
-    keyword whole fflush       white black
-    keyword whole gensub       white black
-    keyword whole tolower      white black
-    keyword whole toupper      white black
-    keyword whole systime      white black
-    keyword whole strftime     white black
-    keyword whole strtonum white
-    keyword whole bindtextdomain white
-    keyword whole dcgettext white
-    keyword whole dcngettext white
-    keyword whole compl white
-    keyword whole delete white
-    keyword whole extension white
-    keyword whole mktime white
-    keyword whole lshift white
-    keyword whole rshift white
+    keyword whole fflush       SUPPORT_FUNCTION black
+    keyword whole gensub       SUPPORT_FUNCTION black
+    keyword whole tolower      SUPPORT_FUNCTION black
+    keyword whole toupper      SUPPORT_FUNCTION black
+    keyword whole systime      SUPPORT_FUNCTION black
+    keyword whole strftime     SUPPORT_FUNCTION black
+    keyword whole strtonum SUPPORT_FUNCTION
+    keyword whole bindtextdomain SUPPORT_FUNCTION
+    keyword whole dcgettext SUPPORT_FUNCTION
+    keyword whole dcngettext SUPPORT_FUNCTION
+    keyword whole compl SUPPORT_FUNCTION
+    keyword whole delete SUPPORT_FUNCTION
+    keyword whole extension SUPPORT_FUNCTION
+    keyword whole mktime SUPPORT_FUNCTION
+    keyword whole lshift SUPPORT_FUNCTION
+    keyword whole rshift SUPPORT_FUNCTION
 
 # Builtin variables:
-    keyword whole ARGIND brightblue
-    keyword whole BINMODE brightblue
-    keyword whole CONVFMT brightblue
-    keyword whole ENVIRON brightblue
-    keyword whole LINT brightblue
-    keyword whole TEXTDOMAIN brightblue
-    keyword whole ARGC brightblue
-    keyword whole ARGV brightblue
-    keyword whole FILENAME brightblue
-    keyword whole FNR brightblue
-    keyword whole FS brightblue
-    keyword whole NF brightblue
-    keyword whole NR brightblue
-    keyword whole OFMT brightblue
-    keyword whole OFS brightblue
-    keyword whole ORS brightblue
-    keyword whole RLENGTH brightblue
-    keyword whole RS brightblue
-    keyword whole RSTART brightblue
-    keyword whole SUBSEP brightblue
+    keyword whole ARGIND VARIABLE_OTHER
+    keyword whole BINMODE VARIABLE_OTHER
+    keyword whole CONVFMT VARIABLE_OTHER
+    keyword whole ENVIRON VARIABLE_OTHER
+    keyword whole LINT VARIABLE_OTHER
+    keyword whole TEXTDOMAIN VARIABLE_OTHER
+    keyword whole ARGC VARIABLE_OTHER
+    keyword whole ARGV VARIABLE_OTHER
+    keyword whole FILENAME VARIABLE_OTHER
+    keyword whole FNR VARIABLE_OTHER
+    keyword whole FS VARIABLE_OTHER
+    keyword whole NF VARIABLE_OTHER
+    keyword whole NR VARIABLE_OTHER
+    keyword whole OFMT VARIABLE_OTHER
+    keyword whole OFS VARIABLE_OTHER
+    keyword whole ORS VARIABLE_OTHER
+    keyword whole RLENGTH VARIABLE_OTHER
+    keyword whole RS VARIABLE_OTHER
+    keyword whole RSTART VARIABLE_OTHER
+    keyword whole SUBSEP VARIABLE_OTHER
 # Gawk builtin variables:
-    keyword whole ARGIND brightblue
-    keyword whole ERRNO brightblue
-    keyword whole RT brightblue
-    keyword whole IGNORECASE brightblue
-    keyword whole FIELDWIDTHS brightblue
+    keyword whole ARGIND VARIABLE_OTHER
+    keyword whole ERRNO VARIABLE_OTHER
+    keyword whole RT VARIABLE_OTHER
+    keyword whole IGNORECASE VARIABLE_OTHER
+    keyword whole FIELDWIDTHS VARIABLE_OTHER
 
-    keyword '\s' brightgreen/16
-    keyword '+' brightgreen/16
-    keyword > yellow/24
-    keyword < yellow/24
-    keyword \+ yellow/24
-    keyword - yellow/24
-    keyword \* yellow/24
-    keyword % yellow/24
-    keyword = yellow/24
-    keyword != yellow/24
-    keyword == yellow/24
-    keyword { white/25
-    keyword } white/25
-    keyword ( white/25
-    keyword ) white/25
-    keyword [*] magenta
-    keyword , white/25
-    keyword : white/25
-    keyword ; lightgray/19
-    keyword $\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] brightred/18
+    keyword '\s' CONSTANT_CHARACTER
+    keyword '+' CONSTANT_CHARACTER
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword != KEYWORD_OPERATOR
+    keyword == KEYWORD_OPERATOR
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [*] KEYWORD_OPERATOR
+    keyword , PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword $\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] VARIABLE_OTHER
 # Begin/End:
-    keyword whole BEGIN red
-    keyword whole END red
+    keyword whole BEGIN KEYWORD_OTHER_RESERVED
+    keyword whole END KEYWORD_OTHER_RESERVED
 # Function keyword:
-    keyword whole function brightmagenta
+    keyword whole function STORAGE_TYPE_FUNCTION
 # Hex constant:
-    keyword 0\{xX\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] magenta/6
+    keyword 0\{xX\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] CONSTANT_NUMERIC
 # Tab:    \t
 #    keyword linestart \t lightgray/13 blue/6
 
 # Sed:
-    keyword linestart /^ red
-    keyword linestart /^# red
-context /^#*/ red
+    keyword linestart /^ STRING_REGEXP
+    keyword linestart /^# STRING_REGEXP
+context /^#*/ STRING_REGEXP
 
 # Comments:
-context linestart # \n brown
-context linestart $ \n brown
+context linestart # \n COMMENT_LINE
+context linestart $ \n COMMENT_LINE
 
 # String:
-context " " green/6
-    keyword \\" brightgreen/16
-    keyword \\\n brightgreen/16
-    keyword %% brightgreen/16
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen/16
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen/16
-    keyword %\[hl\]n brightgreen/16
-    keyword %\[.\]\[0123456789\]s brightgreen/16
-    keyword %[*] brightgreen/16
-    keyword %c brightgreen/16
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen/16
-    keyword \\\\ brightgreen/16
-    keyword \\' brightgreen/16
-    keyword \\\{abtnvfr\} brightgreen/16
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword \\\n CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[.\]\[0123456789\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

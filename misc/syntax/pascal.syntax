@@ -2,139 +2,139 @@
 
 caseinsensitive
 
-context default yellow
-    keyword whole absolute white
-    keyword whole abstract white
-    keyword whole and cyan
-    keyword whole array white
-    keyword whole as white
-    keyword whole asm white
-    keyword whole assembler white
-    keyword whole begin white
-    keyword whole break white
-    keyword whole case white
-    keyword whole cdecl white
-    keyword whole class white
-    keyword whole const white
-    keyword whole continue white
-    keyword whole constructor white
-    keyword whole destructor white
-    keyword whole dispid white
-    keyword whole dispinterface white
-    keyword whole dispose white
-    keyword whole div cyan
-    keyword whole do white
-    keyword whole downto white
-    keyword whole dynamic white
-    keyword whole else white
-    keyword whole end white
-    keyword whole except white
-    keyword whole exit white
-    keyword whole export white
-    keyword whole exports white
-    keyword whole external white
-    keyword whole fail white
-    keyword whole far white
-    keyword whole false white
-    keyword whole file white
-    keyword whole finalisation white
-    keyword whole finally white
-    keyword whole for white
-    keyword whole forward white
-    keyword whole function white
-    keyword whole goto white
-    keyword whole if white
-    keyword whole implementation white
-    keyword whole in white
-    keyword whole inherited white
-    keyword whole initialization white
-    keyword whole inline white
-    keyword whole interface white
-    keyword whole interrupt white
-    keyword whole is white
-    keyword whole label white
-    keyword whole library white
-    keyword whole mod cyan
-    keyword whole near white
-    keyword whole new white
-    keyword whole nil white
-    keyword whole not white
-    keyword whole object white
-    keyword whole of white
-    keyword whole on white
-    keyword whole operator white
-    keyword whole or cyan
-    keyword whole otherwise white
-    keyword whole overload white
-    keyword whole override white
-    keyword whole packed white
-    keyword whole pascal white
-    keyword whole private white
-    keyword whole procedure white
-    keyword whole program white
-    keyword whole property white
-    keyword whole protected white
-    keyword whole public white
-    keyword whole published white
-    keyword whole raise white
-    keyword whole read white
-    keyword whole readonly white
-    keyword whole record white
-    keyword whole register white
-    keyword whole repeat white
-    keyword whole safecall white
-    keyword whole self white
-    keyword whole set cyan
-    keyword whole shl cyan
-    keyword whole shr cyan
-    keyword whole stdcall white
-    keyword whole string white
-    keyword whole then white
-    keyword whole to white
-    keyword whole true white
-    keyword whole try white
-    keyword whole type white
-    keyword whole unit white
-    keyword whole until white
-    keyword whole uses white
-    keyword whole var white
-    keyword whole virtual white
-    keyword whole while white
-    keyword whole with white
-    keyword whole write white
-    keyword whole writeln white
-    keyword whole xor cyan
-    keyword whole .. white
+context default
+    keyword whole absolute STORAGE_MODIFIER
+    keyword whole abstract STORAGE_MODIFIER
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole array STORAGE_TYPE
+    keyword whole as KEYWORD_OPERATOR_WORD
+    keyword whole asm KEYWORD_OTHER_RESERVED
+    keyword whole assembler KEYWORD_OTHER
+    keyword whole begin KEYWORD_CONTROL
+    keyword whole break KEYWORD_CONTROL
+    keyword whole case KEYWORD_CONTROL
+    keyword whole cdecl STORAGE_MODIFIER
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole const STORAGE_MODIFIER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole constructor KEYWORD_OTHER
+    keyword whole destructor KEYWORD_OTHER
+    keyword whole dispid KEYWORD_OTHER
+    keyword whole dispinterface STORAGE_TYPE_CLASS
+    keyword whole dispose SUPPORT_FUNCTION
+    keyword whole div KEYWORD_OPERATOR_WORD
+    keyword whole do KEYWORD_CONTROL
+    keyword whole downto KEYWORD_CONTROL
+    keyword whole dynamic STORAGE_MODIFIER
+    keyword whole else KEYWORD_CONTROL
+    keyword whole end KEYWORD_CONTROL
+    keyword whole except KEYWORD_CONTROL
+    keyword whole exit KEYWORD_CONTROL
+    keyword whole export KEYWORD_CONTROL_IMPORT
+    keyword whole exports KEYWORD_CONTROL_IMPORT
+    keyword whole external STORAGE_MODIFIER
+    keyword whole fail KEYWORD_CONTROL
+    keyword whole far STORAGE_MODIFIER
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole file STORAGE_TYPE
+    keyword whole finalisation KEYWORD_OTHER
+    keyword whole finally KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole forward STORAGE_MODIFIER
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole if KEYWORD_CONTROL
+    keyword whole implementation KEYWORD_OTHER
+    keyword whole in KEYWORD_OPERATOR_WORD
+    keyword whole inherited KEYWORD_OTHER
+    keyword whole initialization KEYWORD_OTHER
+    keyword whole inline STORAGE_MODIFIER
+    keyword whole interface KEYWORD_OTHER
+    keyword whole interrupt STORAGE_MODIFIER
+    keyword whole is KEYWORD_OPERATOR_WORD
+    keyword whole label KEYWORD_OTHER
+    keyword whole library KEYWORD_OTHER
+    keyword whole mod KEYWORD_OPERATOR_WORD
+    keyword whole near STORAGE_MODIFIER
+    keyword whole new KEYWORD_OTHER
+    keyword whole nil CONSTANT_LANGUAGE
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole object STORAGE_TYPE_CLASS
+    keyword whole of KEYWORD_OTHER
+    keyword whole on KEYWORD_OTHER
+    keyword whole operator KEYWORD_OTHER
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole otherwise KEYWORD_CONTROL
+    keyword whole overload STORAGE_MODIFIER
+    keyword whole override STORAGE_MODIFIER
+    keyword whole packed STORAGE_MODIFIER
+    keyword whole pascal STORAGE_MODIFIER
+    keyword whole private STORAGE_MODIFIER
+    keyword whole procedure STORAGE_TYPE_FUNCTION
+    keyword whole program KEYWORD_OTHER
+    keyword whole property KEYWORD_OTHER
+    keyword whole protected STORAGE_MODIFIER
+    keyword whole public STORAGE_MODIFIER
+    keyword whole published STORAGE_MODIFIER
+    keyword whole raise KEYWORD_CONTROL
+    keyword whole read KEYWORD_OTHER
+    keyword whole readonly STORAGE_MODIFIER
+    keyword whole record STORAGE_TYPE_CLASS
+    keyword whole register STORAGE_MODIFIER
+    keyword whole repeat KEYWORD_CONTROL
+    keyword whole safecall STORAGE_MODIFIER
+    keyword whole self VARIABLE_LANGUAGE
+    keyword whole set STORAGE_TYPE
+    keyword whole shl KEYWORD_OPERATOR_WORD
+    keyword whole shr KEYWORD_OPERATOR_WORD
+    keyword whole stdcall STORAGE_MODIFIER
+    keyword whole string STORAGE_TYPE
+    keyword whole then KEYWORD_CONTROL
+    keyword whole to KEYWORD_CONTROL
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole try KEYWORD_CONTROL
+    keyword whole type STORAGE_TYPE
+    keyword whole unit KEYWORD_OTHER
+    keyword whole until KEYWORD_CONTROL
+    keyword whole uses KEYWORD_CONTROL_IMPORT
+    keyword whole var KEYWORD_OTHER
+    keyword whole virtual STORAGE_MODIFIER
+    keyword whole while KEYWORD_CONTROL
+    keyword whole with KEYWORD_CONTROL
+    keyword whole write KEYWORD_OTHER
+    keyword whole writeln SUPPORT_FUNCTION
+    keyword whole xor KEYWORD_OPERATOR_WORD
+    keyword whole .. KEYWORD_OPERATOR
 
-    keyword // brightgreen
+    keyword // COMMENT_LINE
 
-    keyword > cyan
-    keyword < cyan
-    keyword \+ cyan
-    keyword - cyan
-    keyword / cyan
-    keyword % lightgray
-    keyword = cyan
-    keyword [ lightgray
-    keyword ] lightgray
-    keyword ( lightgray
-    keyword ) lightgray
-    keyword , lightgray
-    keyword . lightgray
-    keyword : lightgray
-    keyword ; lightgray
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword . PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
 #    keyword {$*} brightred
 
-context ' ' brightcyan
-context exclusive // \n brightgreen
-    keyword $+:*$ black green
-context exclusive (\* \*) brightgreen
-    keyword $+:*$ black green
-context exclusive (\*\* \*) brightgreen black
-    keyword $+:*$ black green
-context {$ } green
-context { } brightgreen
+context ' ' STRING_QUOTED_SINGLE
+context exclusive // \n COMMENT_LINE
+    keyword $+:*$ KEYWORD_OTHER green
+context exclusive (\* \*) COMMENT_BLOCK
+    keyword $+:*$ KEYWORD_OTHER green
+context exclusive (\*\* \*) COMMENT_BLOCK_DOCUMENTATION black
+    keyword $+:*$ KEYWORD_OTHER green
+context {$ } META_PREPROCESSOR
+context { } COMMENT_BLOCK
 #    keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]\[-\+\] brightgreen
 #    keyword $* green
-    keyword $+:*$ black green
+    keyword $+:*$ KEYWORD_OTHER green
     spellcheck

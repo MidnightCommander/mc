@@ -310,6 +310,7 @@ enum
     CK_ShowTabTws,
     CK_SyntaxOnOff,
     CK_SyntaxChoose,
+    CK_SyntaxSchemeChoose,
     CK_InsertLiteral,
     CK_ExternalCommand,
     CK_Date,

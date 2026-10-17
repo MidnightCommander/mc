@@ -17,79 +17,79 @@
 # Reference:
 #   https://www.w3.org/TeamSubmission/turtle/
 
-context default lightgray
+context default
     spellcheck
 
 # declarations
-    keyword whole @base magenta
-    keyword whole @prefix magenta
+    keyword whole @base KEYWORD_CONTROL_IMPORT
+    keyword whole @prefix KEYWORD_CONTROL_IMPORT
 
-    keyword whole a yellow
+    keyword whole a KEYWORD_OTHER_RESERVED
 
-    keyword ^^ brightmagenta
+    keyword ^^ KEYWORD_OPERATOR
 
 # Collection
-    keyword ( brightmagenta
-    keyword ) brightmagenta
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
 
 # Shorthand prefix
-    keyword wholeleft \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[\abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-\]: cyan
-    keyword wholeleft : cyan
+    keyword wholeleft \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[\abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-\]: ENTITY_NAME_TAG
+    keyword wholeleft : PUNCTUATION_SEPARATOR
 
 # Anonymous node
-    keyword wholeleft _: cyan
-    keyword [ cyan
-    keyword ] cyan
+    keyword wholeleft _: ENTITY_NAME_TAG
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
 
 # Decimal integers
-    keyword whole \{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{-+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
 # Decimal floating point arbitrary precision number
-    keyword whole \{0123456789\}.\[0123456789\] yellow
-    keyword whole .\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}.\[0123456789\] yellow
-    keyword whole \{-+\}.\{0123456789\}\[0123456789\] yellow
+    keyword whole \{0123456789\}.\[0123456789\] CONSTANT_NUMERIC
+    keyword whole .\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
 # Decimal floating point double/fixed precision number
-    keyword whole \{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole .\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole .\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] yellow
-    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] yellow
+    keyword whole \{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole .\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole .\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{-+\}\{0123456789\}.\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{-+\}.\{0123456789\}\[0123456789\]\{-+\}\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
 # Boolean
-    keyword whole true yellow
-    keyword whole false yellow
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
 
 # Language
-    keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789-\]\[abcdefghijklmnopqrstuvwxyz0123456789\] brightmagenta
-    keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789\] brightmagenta
+    keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789-\]\[abcdefghijklmnopqrstuvwxyz0123456789\] CONSTANT_OTHER
+    keyword wholeright @\{abcdefghijklmnopqrstuvwxyz\}\[abcdefghijklmnopqrstuvwxyz0123456789\] CONSTANT_OTHER
 
 # Punctuation
-    keyword , white
-    keyword ; white
+    keyword , PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
 #    keyword . black white
-    keyword . white brightmagenta
+    keyword . PUNCTUATION_TERMINATOR brightmagenta
 
 # URL
 #    keyword whole <*> brightred
-context < > brightred
+context < > STRING_QUOTED_OTHER
 
 # TODO: enable when context ending at newline doesn't ruin next context
 # syntax violation
 #    keyword  +\n black red
 
 # String escape
-    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
-    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
-    keyword \\\{tnr>\\} brightgreen
+    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{tnr>\\} CONSTANT_CHARACTER_ESCAPE
 
 # Single-line literals
-context exclusive " " green
+context exclusive " " STRING_QUOTED_DOUBLE
     spellcheck
 
 # TODO: enable when context ending at newline doesn't ruin next context
@@ -97,24 +97,24 @@ context exclusive " " green
 #    keyword +\n black red
 
 # String escape
-    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
-    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
-    keyword \\\{tnr"\\} brightgreen
+    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{tnr"\\} CONSTANT_CHARACTER_ESCAPE
 
 # Multi-line literals
-context """ """ green
+context """ """ STRING_QUOTED_DOUBLE
     spellcheck
 
 # String escape
-    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
-    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} brightgreen
-    keyword \\\{tnr"\\} brightgreen
+    keyword \\u\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\U\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\}\{0123456789abcdef\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{tnr"\\} CONSTANT_CHARACTER_ESCAPE
 
 # Comment
-context linestart # \n brown
+context linestart # \n COMMENT_LINE
     spellcheck
 
 # Ideally we would have defined comments with "context linestart \[\s\]# ...",
 # but contexts can't start with a character class. So we define comments twice.
-context linestart \s\[\s\]# \n brown
+context linestart \s\[\s\]# \n COMMENT_LINE
     spellcheck

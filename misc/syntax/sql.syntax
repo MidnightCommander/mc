@@ -4,364 +4,364 @@
 caseinsensitive
 
 context default
-    keyword whole abort yellow
-    keyword whole absolute yellow
-    keyword whole action yellow
-    keyword whole ada yellow
-    keyword whole add yellow
-    keyword whole all yellow
-    keyword whole allocate yellow
-    keyword whole alter yellow
-    keyword whole and yellow
-    keyword whole any yellow
-    keyword whole are yellow
-    keyword whole as yellow
-    keyword whole asc yellow
-    keyword whole assertion yellow
-    keyword whole at yellow
-    keyword whole authorization yellow
-    keyword whole auto_increment yellow
-    keyword whole begin yellow
-    keyword whole between yellow
-    keyword whole bigint yellow
-    keyword whole bit yellow
-    keyword whole bit_length yellow
-    keyword whole blob yellow
-    keyword whole both yellow
-    keyword whole by yellow
-    keyword whole cascade yellow
-    keyword whole cascaded yellow
-    keyword whole case yellow
-    keyword whole cast yellow
-    keyword whole catalog yellow
-    keyword whole char yellow
-    keyword whole char_length yellow
-    keyword whole character yellow
-    keyword whole character_length yellow
-    keyword whole check yellow
-    keyword whole close yellow
-    keyword whole coalesce yellow
-    keyword whole collate yellow
-    keyword whole collation yellow
-    keyword whole column yellow
-    keyword whole comment yellow
-    keyword whole commit yellow
-    keyword whole compile yellow
-    keyword whole connect yellow
-    keyword whole connection yellow
-    keyword whole constraint yellow
-    keyword whole constraint yellow
-    keyword whole constraints yellow
-    keyword whole continue yellow
-    keyword whole copy yellow
-    keyword whole corresponding yellow
-    keyword whole create yellow
-    keyword whole cross yellow
-    keyword whole count yellow
-    keyword whole current yellow
-    keyword whole current_date yellow
-    keyword whole current_time yellow
-    keyword whole current_timestamp yellow
-    keyword whole current_user yellow
-    keyword whole cursor yellow
-    keyword whole database yellow
-    keyword whole date yellow
-    keyword whole datetime yellow
-    keyword whole day yellow
-    keyword whole deallocate yellow
-    keyword whole dec yellow
-    keyword whole decimal yellow
-    keyword whole declare yellow
-    keyword whole default yellow
-    keyword whole deferrable yellow
-    keyword whole deferred yellow
-    keyword whole delete yellow
-    keyword whole desc yellow
-    keyword whole describe yellow
-    keyword whole descriptor yellow
-    keyword whole diagnostics yellow
-    keyword whole disconnect yellow
-    keyword whole distinct yellow
-    keyword whole domain yellow
-    keyword whole double yellow
-    keyword whole drop yellow
-    keyword whole else yellow
-    keyword whole elsif yellow
-    keyword whole encoding yellow
-    keyword whole end yellow
-    keyword whole end-exec yellow
-    keyword whole enum yellow
-    keyword whole escape yellow
-    keyword whole except yellow
-    keyword whole exception yellow
-    keyword whole exec yellow
-    keyword whole execute yellow
-    keyword whole exists yellow
-    keyword whole external yellow
-    keyword whole extract yellow
-    keyword whole false yellow
-    keyword whole fetch yellow
-    keyword whole first yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole foreign yellow
-    keyword whole fortran yellow
-    keyword whole found yellow
-    keyword whole from yellow
-    keyword whole full yellow
-    keyword whole function yellow
-    keyword whole get yellow
-    keyword whole global yellow
-    keyword whole go yellow
-    keyword whole goto yellow
-    keyword whole grant yellow
-    keyword whole group yellow
-    keyword whole having yellow
-    keyword whole hour yellow
-    keyword whole identity yellow
-    keyword whole if yellow
-    keyword whole immediate yellow
-    keyword whole in yellow
-    keyword whole include yellow
-    keyword whole index yellow
-    keyword whole indicator yellow
-    keyword whole initially yellow
-    keyword whole inner yellow
-    keyword whole input yellow
-    keyword whole insensitive yellow
-    keyword whole insert yellow
-    keyword whole int yellow
-    keyword whole integer yellow
-    keyword whole intersect yellow
-    keyword whole interval yellow
-    keyword whole into yellow
-    keyword whole is yellow
-    keyword whole isolation yellow
-    keyword whole join yellow
-    keyword whole key yellow
-    keyword whole key yellow
-    keyword whole language yellow
-    keyword whole last yellow
-    keyword whole leading yellow
-    keyword whole left yellow
-    keyword whole level yellow
-    keyword whole like yellow
-    keyword whole local yellow
-    keyword whole lock yellow
-    keyword whole longblob yellow
-    keyword whole longtext yellow
-    keyword whole loop yellow
-    keyword whole min yellow
-    keyword whole match yellow
-    keyword whole max yellow
-    keyword whole mediumblob yellow
-    keyword whole mediumint yellow
-    keyword whole mediumtext yellow
-    keyword whole merge yellow
-    keyword whole minute yellow
-    keyword whole minus yellow
-    keyword whole module yellow
-    keyword whole month yellow
-    keyword whole names yellow
-    keyword whole national yellow
-    keyword whole natural yellow
-    keyword whole nchar yellow
-    keyword whole next yellow
-    keyword whole no yellow
-    keyword whole none yellow
-    keyword whole not yellow
-    keyword whole null yellow
-    keyword whole nullif yellow
-    keyword whole number yellow
-    keyword whole numeric yellow
-    keyword whole octet_length yellow
-    keyword whole of yellow
-    keyword whole offline yellow
-    keyword whole on yellow
-    keyword whole online yellow
-    keyword whole only yellow
-    keyword whole open yellow
-    keyword whole option yellow
-    keyword whole or yellow
-    keyword whole order yellow
-    keyword whole out yellow
-    keyword whole outer yellow
-    keyword whole output yellow
-    keyword whole overlaps yellow
-    keyword whole pad yellow
-    keyword whole partial yellow
-    keyword whole pascal yellow
-    keyword whole position yellow
-    keyword whole precision yellow
-    keyword whole prepare yellow
-    keyword whole preserve yellow
-    keyword whole primary yellow
-    keyword whole primary yellow
-    keyword whole prior yellow
-    keyword whole privileges yellow
-    keyword whole procedure yellow
-    keyword whole public yellow
-    keyword whole raise yellow
-    keyword whole read yellow
-    keyword whole real yellow
-    keyword whole rebuild yellow
-    keyword whole references yellow
-    keyword whole relative yellow
-    keyword whole rename yellow
-    keyword whole replace yellow
-    keyword whole restrict yellow
-    keyword whole revoke yellow
-    keyword whole right yellow
-    keyword whole rollback yellow
-    keyword whole round yellow
-    keyword whole rows yellow
-    keyword whole schema yellow
-    keyword whole scroll yellow
-    keyword whole second yellow
-    keyword whole section yellow
-    keyword whole select yellow
-    keyword whole sequence yellow
-    keyword whole session yellow
-    keyword whole session_user yellow
-    keyword whole set yellow
-    keyword whole size yellow
-    keyword whole smallint yellow
-    keyword whole some yellow
-    keyword whole space yellow
-    keyword whole sql yellow
-    keyword whole sqlca yellow
-    keyword whole sqlstate yellow
-    keyword whole sqlwarning yellow
-    keyword whole substring yellow
-    keyword whole sum yellow
-    keyword whole system_user yellow
-    keyword whole table yellow
-    keyword whole tablespace yellow
-    keyword whole template yellow
-    keyword whole temporary yellow
-    keyword whole text yellow
-    keyword whole then yellow
-    keyword whole time yellow
-    keyword whole truncate yellow
-    keyword whole timestamp yellow
-    keyword whole timezone_hour yellow
-    keyword whole timezone_minute yellow
-    keyword whole tinyblob yellow
-    keyword whole tinyint yellow
-    keyword whole tinytext yellow
-    keyword whole to yellow
-    keyword whole trailing yellow
-    keyword whole transaction yellow
-    keyword whole translation yellow
-    keyword whole trigger yellow
-    keyword whole trim yellow
-    keyword whole true yellow
-    keyword whole type yellow
-    keyword whole union yellow
-    keyword whole unique yellow
-    keyword whole unknown yellow
-    keyword whole unsigned yellow
-    keyword whole update yellow
-    keyword whole usage yellow
-    keyword whole use yellow
-    keyword whole user yellow
-    keyword whole using yellow
-    keyword whole value yellow
-    keyword whole values yellow
-    keyword whole varchar yellow
-    keyword whole varying yellow
-    keyword whole view yellow
-    keyword whole when yellow
-    keyword whole whenever yellow
-    keyword whole where yellow
-    keyword whole while yellow
-    keyword whole with yellow
-    keyword whole work yellow
-    keyword whole write yellow
-    keyword whole year yellow
-    keyword whole zone yellow
+    keyword whole abort KEYWORD_OTHER
+    keyword whole absolute KEYWORD_OTHER
+    keyword whole action KEYWORD_OTHER
+    keyword whole ada KEYWORD_OTHER
+    keyword whole add KEYWORD_OTHER
+    keyword whole all KEYWORD_OTHER
+    keyword whole allocate KEYWORD_OTHER
+    keyword whole alter KEYWORD_OTHER
+    keyword whole and KEYWORD_OPERATOR_WORD
+    keyword whole any KEYWORD_OPERATOR_WORD
+    keyword whole are KEYWORD_OTHER
+    keyword whole as KEYWORD_OTHER
+    keyword whole asc KEYWORD_OTHER
+    keyword whole assertion KEYWORD_OTHER
+    keyword whole at KEYWORD_OTHER
+    keyword whole authorization KEYWORD_OTHER
+    keyword whole auto_increment STORAGE_MODIFIER
+    keyword whole begin KEYWORD_CONTROL
+    keyword whole between KEYWORD_OPERATOR_WORD
+    keyword whole bigint STORAGE_TYPE
+    keyword whole bit STORAGE_TYPE
+    keyword whole bit_length SUPPORT_FUNCTION
+    keyword whole blob STORAGE_TYPE
+    keyword whole both KEYWORD_OTHER
+    keyword whole by KEYWORD_OTHER
+    keyword whole cascade KEYWORD_OTHER
+    keyword whole cascaded KEYWORD_OTHER
+    keyword whole case KEYWORD_CONTROL
+    keyword whole cast SUPPORT_FUNCTION
+    keyword whole catalog KEYWORD_OTHER
+    keyword whole char STORAGE_TYPE
+    keyword whole char_length SUPPORT_FUNCTION
+    keyword whole character STORAGE_TYPE
+    keyword whole character_length SUPPORT_FUNCTION
+    keyword whole check KEYWORD_OTHER
+    keyword whole close KEYWORD_OTHER
+    keyword whole coalesce SUPPORT_FUNCTION
+    keyword whole collate KEYWORD_OTHER
+    keyword whole collation KEYWORD_OTHER
+    keyword whole column KEYWORD_OTHER
+    keyword whole comment KEYWORD_OTHER
+    keyword whole commit KEYWORD_OTHER
+    keyword whole compile KEYWORD_OTHER
+    keyword whole connect KEYWORD_OTHER
+    keyword whole connection KEYWORD_OTHER
+    keyword whole constraint KEYWORD_OTHER
+    keyword whole constraint KEYWORD_OTHER
+    keyword whole constraints KEYWORD_OTHER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole copy KEYWORD_OTHER
+    keyword whole corresponding KEYWORD_OTHER
+    keyword whole create KEYWORD_OTHER
+    keyword whole cross KEYWORD_OTHER
+    keyword whole count SUPPORT_FUNCTION
+    keyword whole current KEYWORD_OTHER
+    keyword whole current_date SUPPORT_FUNCTION
+    keyword whole current_time SUPPORT_FUNCTION
+    keyword whole current_timestamp SUPPORT_FUNCTION
+    keyword whole current_user SUPPORT_FUNCTION
+    keyword whole cursor KEYWORD_OTHER
+    keyword whole database KEYWORD_OTHER
+    keyword whole date STORAGE_TYPE
+    keyword whole datetime STORAGE_TYPE
+    keyword whole day KEYWORD_OTHER
+    keyword whole deallocate KEYWORD_OTHER
+    keyword whole dec STORAGE_TYPE
+    keyword whole decimal STORAGE_TYPE
+    keyword whole declare KEYWORD_OTHER
+    keyword whole default KEYWORD_OTHER
+    keyword whole deferrable KEYWORD_OTHER
+    keyword whole deferred KEYWORD_OTHER
+    keyword whole delete KEYWORD_OTHER
+    keyword whole desc KEYWORD_OTHER
+    keyword whole describe KEYWORD_OTHER
+    keyword whole descriptor KEYWORD_OTHER
+    keyword whole diagnostics KEYWORD_OTHER
+    keyword whole disconnect KEYWORD_OTHER
+    keyword whole distinct KEYWORD_OTHER
+    keyword whole domain KEYWORD_OTHER
+    keyword whole double STORAGE_TYPE
+    keyword whole drop KEYWORD_OTHER
+    keyword whole else KEYWORD_CONTROL
+    keyword whole elsif KEYWORD_CONTROL
+    keyword whole encoding KEYWORD_OTHER
+    keyword whole end KEYWORD_CONTROL
+    keyword whole end-exec KEYWORD_CONTROL
+    keyword whole enum STORAGE_TYPE
+    keyword whole escape KEYWORD_OTHER
+    keyword whole except KEYWORD_OTHER
+    keyword whole exception KEYWORD_CONTROL
+    keyword whole exec KEYWORD_OTHER
+    keyword whole execute KEYWORD_OTHER
+    keyword whole exists KEYWORD_OPERATOR_WORD
+    keyword whole external KEYWORD_OTHER
+    keyword whole extract SUPPORT_FUNCTION
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole fetch KEYWORD_OTHER
+    keyword whole first KEYWORD_OTHER
+    keyword whole float STORAGE_TYPE
+    keyword whole for KEYWORD_CONTROL
+    keyword whole foreign KEYWORD_OTHER
+    keyword whole fortran KEYWORD_OTHER
+    keyword whole found KEYWORD_OTHER
+    keyword whole from KEYWORD_OTHER
+    keyword whole full KEYWORD_OTHER
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole get KEYWORD_OTHER
+    keyword whole global KEYWORD_OTHER
+    keyword whole go KEYWORD_OTHER
+    keyword whole goto KEYWORD_CONTROL
+    keyword whole grant KEYWORD_OTHER
+    keyword whole group KEYWORD_OTHER
+    keyword whole having KEYWORD_OTHER
+    keyword whole hour KEYWORD_OTHER
+    keyword whole identity KEYWORD_OTHER
+    keyword whole if KEYWORD_CONTROL
+    keyword whole immediate KEYWORD_OTHER
+    keyword whole in KEYWORD_OPERATOR_WORD
+    keyword whole include KEYWORD_OTHER
+    keyword whole index KEYWORD_OTHER
+    keyword whole indicator KEYWORD_OTHER
+    keyword whole initially KEYWORD_OTHER
+    keyword whole inner KEYWORD_OTHER
+    keyword whole input KEYWORD_OTHER
+    keyword whole insensitive KEYWORD_OTHER
+    keyword whole insert KEYWORD_OTHER
+    keyword whole int STORAGE_TYPE
+    keyword whole integer STORAGE_TYPE
+    keyword whole intersect KEYWORD_OTHER
+    keyword whole interval STORAGE_TYPE
+    keyword whole into KEYWORD_OTHER
+    keyword whole is KEYWORD_OPERATOR_WORD
+    keyword whole isolation KEYWORD_OTHER
+    keyword whole join KEYWORD_OTHER
+    keyword whole key KEYWORD_OTHER
+    keyword whole key KEYWORD_OTHER
+    keyword whole language KEYWORD_OTHER
+    keyword whole last KEYWORD_OTHER
+    keyword whole leading KEYWORD_OTHER
+    keyword whole left KEYWORD_OTHER
+    keyword whole level KEYWORD_OTHER
+    keyword whole like KEYWORD_OPERATOR_WORD
+    keyword whole local KEYWORD_OTHER
+    keyword whole lock KEYWORD_OTHER
+    keyword whole longblob STORAGE_TYPE
+    keyword whole longtext STORAGE_TYPE
+    keyword whole loop KEYWORD_CONTROL
+    keyword whole min SUPPORT_FUNCTION
+    keyword whole match KEYWORD_OTHER
+    keyword whole max SUPPORT_FUNCTION
+    keyword whole mediumblob STORAGE_TYPE
+    keyword whole mediumint STORAGE_TYPE
+    keyword whole mediumtext STORAGE_TYPE
+    keyword whole merge KEYWORD_OTHER
+    keyword whole minute KEYWORD_OTHER
+    keyword whole minus KEYWORD_OTHER
+    keyword whole module KEYWORD_OTHER
+    keyword whole month KEYWORD_OTHER
+    keyword whole names KEYWORD_OTHER
+    keyword whole national KEYWORD_OTHER
+    keyword whole natural KEYWORD_OTHER
+    keyword whole nchar STORAGE_TYPE
+    keyword whole next KEYWORD_OTHER
+    keyword whole no KEYWORD_OTHER
+    keyword whole none KEYWORD_OTHER
+    keyword whole not KEYWORD_OPERATOR_WORD
+    keyword whole null CONSTANT_LANGUAGE
+    keyword whole nullif SUPPORT_FUNCTION
+    keyword whole number STORAGE_TYPE
+    keyword whole numeric STORAGE_TYPE
+    keyword whole octet_length SUPPORT_FUNCTION
+    keyword whole of KEYWORD_OTHER
+    keyword whole offline KEYWORD_OTHER
+    keyword whole on KEYWORD_OTHER
+    keyword whole online KEYWORD_OTHER
+    keyword whole only KEYWORD_OTHER
+    keyword whole open KEYWORD_OTHER
+    keyword whole option KEYWORD_OTHER
+    keyword whole or KEYWORD_OPERATOR_WORD
+    keyword whole order KEYWORD_OTHER
+    keyword whole out KEYWORD_OTHER
+    keyword whole outer KEYWORD_OTHER
+    keyword whole output KEYWORD_OTHER
+    keyword whole overlaps KEYWORD_OPERATOR_WORD
+    keyword whole pad KEYWORD_OTHER
+    keyword whole partial KEYWORD_OTHER
+    keyword whole pascal KEYWORD_OTHER
+    keyword whole position SUPPORT_FUNCTION
+    keyword whole precision KEYWORD_OTHER
+    keyword whole prepare KEYWORD_OTHER
+    keyword whole preserve KEYWORD_OTHER
+    keyword whole primary KEYWORD_OTHER
+    keyword whole primary KEYWORD_OTHER
+    keyword whole prior KEYWORD_OTHER
+    keyword whole privileges KEYWORD_OTHER
+    keyword whole procedure STORAGE_TYPE_FUNCTION
+    keyword whole public KEYWORD_OTHER
+    keyword whole raise KEYWORD_CONTROL
+    keyword whole read KEYWORD_OTHER
+    keyword whole real STORAGE_TYPE
+    keyword whole rebuild KEYWORD_OTHER
+    keyword whole references KEYWORD_OTHER
+    keyword whole relative KEYWORD_OTHER
+    keyword whole rename KEYWORD_OTHER
+    keyword whole replace KEYWORD_OTHER
+    keyword whole restrict KEYWORD_OTHER
+    keyword whole revoke KEYWORD_OTHER
+    keyword whole right KEYWORD_OTHER
+    keyword whole rollback KEYWORD_OTHER
+    keyword whole round SUPPORT_FUNCTION
+    keyword whole rows KEYWORD_OTHER
+    keyword whole schema KEYWORD_OTHER
+    keyword whole scroll KEYWORD_OTHER
+    keyword whole second KEYWORD_OTHER
+    keyword whole section KEYWORD_OTHER
+    keyword whole select KEYWORD_OTHER
+    keyword whole sequence KEYWORD_OTHER
+    keyword whole session KEYWORD_OTHER
+    keyword whole session_user SUPPORT_FUNCTION
+    keyword whole set KEYWORD_OTHER
+    keyword whole size KEYWORD_OTHER
+    keyword whole smallint STORAGE_TYPE
+    keyword whole some KEYWORD_OPERATOR_WORD
+    keyword whole space KEYWORD_OTHER
+    keyword whole sql KEYWORD_OTHER
+    keyword whole sqlca KEYWORD_OTHER
+    keyword whole sqlstate KEYWORD_OTHER
+    keyword whole sqlwarning KEYWORD_OTHER
+    keyword whole substring SUPPORT_FUNCTION
+    keyword whole sum SUPPORT_FUNCTION
+    keyword whole system_user SUPPORT_FUNCTION
+    keyword whole table KEYWORD_OTHER
+    keyword whole tablespace KEYWORD_OTHER
+    keyword whole template KEYWORD_OTHER
+    keyword whole temporary KEYWORD_OTHER
+    keyword whole text STORAGE_TYPE
+    keyword whole then KEYWORD_CONTROL
+    keyword whole time STORAGE_TYPE
+    keyword whole truncate KEYWORD_OTHER
+    keyword whole timestamp STORAGE_TYPE
+    keyword whole timezone_hour KEYWORD_OTHER
+    keyword whole timezone_minute KEYWORD_OTHER
+    keyword whole tinyblob STORAGE_TYPE
+    keyword whole tinyint STORAGE_TYPE
+    keyword whole tinytext STORAGE_TYPE
+    keyword whole to KEYWORD_OTHER
+    keyword whole trailing KEYWORD_OTHER
+    keyword whole transaction KEYWORD_OTHER
+    keyword whole translation KEYWORD_OTHER
+    keyword whole trigger KEYWORD_OTHER
+    keyword whole trim SUPPORT_FUNCTION
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole type KEYWORD_OTHER
+    keyword whole union KEYWORD_OTHER
+    keyword whole unique KEYWORD_OTHER
+    keyword whole unknown KEYWORD_OTHER
+    keyword whole unsigned STORAGE_MODIFIER
+    keyword whole update KEYWORD_OTHER
+    keyword whole usage KEYWORD_OTHER
+    keyword whole use KEYWORD_OTHER
+    keyword whole user KEYWORD_OTHER
+    keyword whole using KEYWORD_OTHER
+    keyword whole value KEYWORD_OTHER
+    keyword whole values KEYWORD_OTHER
+    keyword whole varchar STORAGE_TYPE
+    keyword whole varying KEYWORD_OTHER
+    keyword whole view KEYWORD_OTHER
+    keyword whole when KEYWORD_CONTROL
+    keyword whole whenever KEYWORD_OTHER
+    keyword whole where KEYWORD_OTHER
+    keyword whole while KEYWORD_CONTROL
+    keyword whole with KEYWORD_OTHER
+    keyword whole work KEYWORD_OTHER
+    keyword whole write KEYWORD_OTHER
+    keyword whole year STORAGE_TYPE
+    keyword whole zone KEYWORD_OTHER
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword -- brown
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword -- COMMENT_LINE
 
-    keyword > brightcyan
-    keyword < brightcyan
-    keyword \+ brightcyan
-    keyword - brightcyan
-    keyword \* brightcyan
-    keyword / brightcyan
-    keyword % brightcyan
-    keyword = brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword , brightcyan
-    keyword ; brightcyan
-    keyword . white
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword . KEYWORD_OPERATOR
 
 # PostgreSQL specific
-    keyword aggregate yellow
-    keyword checkpoint yellow
-    keyword cluster yellow
-    keyword conversion yellow
-    keyword listen yellow
-    keyword notify yellow
-    keyword operator yellow
-    keyword reindex yellow
-    keyword savepoint yellow
-    keyword unlisten yellow
-    keyword vacuum yellow
+    keyword aggregate KEYWORD_OTHER
+    keyword checkpoint KEYWORD_OTHER
+    keyword cluster KEYWORD_OTHER
+    keyword conversion KEYWORD_OTHER
+    keyword listen KEYWORD_OTHER
+    keyword notify KEYWORD_OTHER
+    keyword operator KEYWORD_OTHER
+    keyword reindex KEYWORD_OTHER
+    keyword savepoint KEYWORD_OTHER
+    keyword unlisten KEYWORD_OTHER
+    keyword vacuum KEYWORD_OTHER
 
-    keyword createdb white
-    keyword createuser white
-    keyword nocreatedb white
-    keyword nocreateuser white
-    keyword password white
-    keyword sysid white
+    keyword createdb KEYWORD_OTHER
+    keyword createuser KEYWORD_OTHER
+    keyword nocreatedb KEYWORD_OTHER
+    keyword nocreateuser KEYWORD_OTHER
+    keyword password KEYWORD_OTHER
+    keyword sysid KEYWORD_OTHER
 
-    keyword currval white
-    keyword nextval white
-    keyword pg_database white
-    keyword pg_group white
-    keyword pg_shadow white
-    keyword setval white
-    keyword stdin white
+    keyword currval SUPPORT_FUNCTION
+    keyword nextval SUPPORT_FUNCTION
+    keyword pg_database SUPPORT_TYPE
+    keyword pg_group SUPPORT_TYPE
+    keyword pg_shadow SUPPORT_TYPE
+    keyword setval SUPPORT_FUNCTION
+    keyword stdin KEYWORD_OTHER
 
 # PostgreSQL sequences
-    keyword cache white
-    keyword increment white
-    keyword maxvalue white
-    keyword minvalue white
-    keyword start white
+    keyword cache KEYWORD_OTHER
+    keyword increment KEYWORD_OTHER
+    keyword maxvalue KEYWORD_OTHER
+    keyword minvalue KEYWORD_OTHER
+    keyword start KEYWORD_OTHER
 
 # Oracle specific
-    keyword dual white
-    keyword whole lag yellow
-    keyword whole lead yellow
-    keyword whole nvl yellow
-    keyword whole over yellow
-    keyword whole partition yellow
-    keyword whole pragma yellow
-    keyword whole varchar2 yellow
-    keyword whole sys_refcursor yellow
+    keyword dual SUPPORT_TYPE
+    keyword whole lag SUPPORT_FUNCTION
+    keyword whole lead SUPPORT_FUNCTION
+    keyword whole nvl SUPPORT_FUNCTION
+    keyword whole over KEYWORD_OTHER
+    keyword whole partition KEYWORD_OTHER
+    keyword whole pragma KEYWORD_OTHER
+    keyword whole varchar2 STORAGE_TYPE
+    keyword whole sys_refcursor STORAGE_TYPE
 
 # MySQL comment
-context linestart # \n brown
+context linestart # \n COMMENT_LINE
     spellcheck
 
 # ANSI SQL comment
-context exclusive -- \n brown
+context exclusive -- \n COMMENT_LINE
     spellcheck
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context ' ' green
-    keyword \\' green
+context ' ' STRING_QUOTED_SINGLE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
 
-context " " green
-    keyword \\" green
+context " " STRING_QUOTED_DOUBLE
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
 
 # Beckticks are used to escape reserved words in MySQL
-context ` ` cyan
-    keyword . white
+context ` ` STRING_QUOTED_OTHER
+    keyword . KEYWORD_OPERATOR

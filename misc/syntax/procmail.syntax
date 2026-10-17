@@ -4,268 +4,268 @@
 
 
 context default
-    keyword whole linestart #*procmail\n brightcyan black
-    keyword whole #*\n brown
+    keyword whole linestart #*procmail\n COMMENT_LINE black
+    keyword whole #*\n COMMENT_LINE
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
 ##############################################################
 #  Vars from procmail
-    keyword whole MAILDIR brightgreen
-    keyword whole DEFAULT brightgreen
-    keyword whole LOGFILE brightgreen
-    keyword whole VERBOSE brightgreen
-    keyword whole LOGABSTRACT brightgreen
-    keyword whole LOG brightgreen
-    keyword whole ORGMAIL brightgreen
-    keyword whole LOCKFILE brightgreen
-    keyword whole LOCKEXT brightgreen
-    keyword whole LOCKSLEEP brightgreen
-    keyword whole LOCKTIMEOUT brightgreen
-    keyword whole TIMEOUT brightgreen
-    keyword whole MSGPREFIX brightgreen
-    keyword whole HOST brightgreen
-    keyword whole UMASK brightgreen
-    keyword whole SHELLMETAS brightgreen
-    keyword whole SHELLFLAGS brightgreen
-    keyword whole SENDMAIL brightgreen
-    keyword whole SENDMAILFLAGS brightgreen
-    keyword whole NORESRETRY brightgreen
-    keyword whole SUSPEND brightgreen
-    keyword whole LINEBUF brightgreen
-    keyword whole DELIVERED brightgreen
-    keyword whole TRAP brightgreen
-    keyword whole EXITCODE brightgreen
-    keyword whole LASTFOLDER brightgreen
-    keyword whole MATCH brightgreen
-    keyword whole SHIFT brightgreen
-    keyword whole INCLUDERC brightmagenta
-    keyword whole SWITCHRC brightgreen
-    keyword whole PROCMAIL_VERSION brightgreen
-    keyword whole PROCMAIL_OVERFLOW brightgreen
-    keyword whole COMSAT brightgreen
-    keyword whole DROPPRIVS brightgreen
-    keyword whole LOGNAME brightgreen
-    keyword whole HOME brightgreen
-    keyword whole PATH brightgreen
-    keyword whole SHELL brightgreen
+    keyword whole MAILDIR VARIABLE_OTHER
+    keyword whole DEFAULT VARIABLE_OTHER
+    keyword whole LOGFILE VARIABLE_OTHER
+    keyword whole VERBOSE VARIABLE_OTHER
+    keyword whole LOGABSTRACT VARIABLE_OTHER
+    keyword whole LOG VARIABLE_OTHER
+    keyword whole ORGMAIL VARIABLE_OTHER
+    keyword whole LOCKFILE VARIABLE_OTHER
+    keyword whole LOCKEXT VARIABLE_OTHER
+    keyword whole LOCKSLEEP VARIABLE_OTHER
+    keyword whole LOCKTIMEOUT VARIABLE_OTHER
+    keyword whole TIMEOUT VARIABLE_OTHER
+    keyword whole MSGPREFIX VARIABLE_OTHER
+    keyword whole HOST VARIABLE_OTHER
+    keyword whole UMASK VARIABLE_OTHER
+    keyword whole SHELLMETAS VARIABLE_OTHER
+    keyword whole SHELLFLAGS VARIABLE_OTHER
+    keyword whole SENDMAIL VARIABLE_OTHER
+    keyword whole SENDMAILFLAGS VARIABLE_OTHER
+    keyword whole NORESRETRY VARIABLE_OTHER
+    keyword whole SUSPEND VARIABLE_OTHER
+    keyword whole LINEBUF VARIABLE_OTHER
+    keyword whole DELIVERED VARIABLE_OTHER
+    keyword whole TRAP VARIABLE_OTHER
+    keyword whole EXITCODE VARIABLE_OTHER
+    keyword whole LASTFOLDER VARIABLE_OTHER
+    keyword whole MATCH VARIABLE_OTHER
+    keyword whole SHIFT VARIABLE_OTHER
+    keyword whole INCLUDERC VARIABLE_OTHER
+    keyword whole SWITCHRC VARIABLE_OTHER
+    keyword whole PROCMAIL_VERSION VARIABLE_OTHER
+    keyword whole PROCMAIL_OVERFLOW VARIABLE_OTHER
+    keyword whole COMSAT VARIABLE_OTHER
+    keyword whole DROPPRIVS VARIABLE_OTHER
+    keyword whole LOGNAME VARIABLE_OTHER
+    keyword whole HOME VARIABLE_OTHER
+    keyword whole PATH VARIABLE_OTHER
+    keyword whole SHELL VARIABLE_OTHER
 
-    keyword whole ST brightgreen
-    keyword whole STN brightgreen
-    keyword whole NL brightgreen
+    keyword whole ST VARIABLE_OTHER
+    keyword whole STN VARIABLE_OTHER
+    keyword whole NL VARIABLE_OTHER
 
 ##############################################################
 # Vars used by tdtools-procmail
-    keyword TDTP_DIRPREFIX brightgreen
-    keyword TDTP_INC brightgreen
-    keyword TDTP_DIR brightgreen
-    keyword TDTP_USE_SEPARATOR brightgreen
-    keyword TDTP_SHOW_MSGINFO brightgreen
-    keyword TDTP_USE_SERNO brightgreen
-    keyword TDTP_SERNO_MAX brightgreen
-    keyword TDTP_LEFT_MAX brightgreen
-    keyword TDTP_SHOW_FILTERS brightgreen
-    keyword TDTP_USE_TAG_N_DROP brightgreen
-    keyword TDTP_HITS_MIN brightgreen
-    keyword TDTP_USE_L10N brightgreen
-    keyword TDTP_USE_MAILHEADERS brightgreen
-    keyword TDTP_DATE_PREFIX brightgreen
-    keyword TDTP_USE_LISTDIR brightgreen
-    keyword TDTP_LISTDIR_SEPARATOR brightgreen
-    keyword TDTP_USE_EXPURGATE_BULK brightgreen
-    keyword TDTP_SPAM_AT_END brightgreen
-    keyword TDTP_MAXSIZE brightgreen
+    keyword TDTP_DIRPREFIX VARIABLE_OTHER
+    keyword TDTP_INC VARIABLE_OTHER
+    keyword TDTP_DIR VARIABLE_OTHER
+    keyword TDTP_USE_SEPARATOR VARIABLE_OTHER
+    keyword TDTP_SHOW_MSGINFO VARIABLE_OTHER
+    keyword TDTP_USE_SERNO VARIABLE_OTHER
+    keyword TDTP_SERNO_MAX VARIABLE_OTHER
+    keyword TDTP_LEFT_MAX VARIABLE_OTHER
+    keyword TDTP_SHOW_FILTERS VARIABLE_OTHER
+    keyword TDTP_USE_TAG_N_DROP VARIABLE_OTHER
+    keyword TDTP_HITS_MIN VARIABLE_OTHER
+    keyword TDTP_USE_L10N VARIABLE_OTHER
+    keyword TDTP_USE_MAILHEADERS VARIABLE_OTHER
+    keyword TDTP_DATE_PREFIX VARIABLE_OTHER
+    keyword TDTP_USE_LISTDIR VARIABLE_OTHER
+    keyword TDTP_LISTDIR_SEPARATOR VARIABLE_OTHER
+    keyword TDTP_USE_EXPURGATE_BULK VARIABLE_OTHER
+    keyword TDTP_SPAM_AT_END VARIABLE_OTHER
+    keyword TDTP_MAXSIZE VARIABLE_OTHER
 
-    keyword DATE_NOW_RFC brightgreen
-    keyword DATE_NOW_SER brightgreen
-    keyword FROM brightgreen
-    keyword TO brightgreen
-    keyword CC brightgreen
-    keyword ENVTO brightgreen
-    keyword SIZE brightgreen
-    keyword DATE_DATE brightgreen
-    keyword DATE_RFC brightgreen
-    keyword DATE_SER brightgreen
-    keyword DATE_RECV_RFC brightgreen
-    keyword DATE_RECV_SER brightgreen
-    keyword MSG_HOUR brightgreen
-    keyword MSG_DAY brightgreen
-    keyword MSG_WEEK brightgreen
-    keyword MSG_MONTH brightgreen
-    keyword MSG_YEAR brightgreen
-    keyword TDTP_LISTDIR brightgreen
-    keyword TDTP_NAME brightgreen
-    keyword SPAMTAG brightgreen
-    keyword FILTER brightgreen
-    keyword TDTP_HITS_TOT brightgreen
+    keyword DATE_NOW_RFC VARIABLE_OTHER
+    keyword DATE_NOW_SER VARIABLE_OTHER
+    keyword FROM VARIABLE_OTHER
+    keyword TO VARIABLE_OTHER
+    keyword CC VARIABLE_OTHER
+    keyword ENVTO VARIABLE_OTHER
+    keyword SIZE VARIABLE_OTHER
+    keyword DATE_DATE VARIABLE_OTHER
+    keyword DATE_RFC VARIABLE_OTHER
+    keyword DATE_SER VARIABLE_OTHER
+    keyword DATE_RECV_RFC VARIABLE_OTHER
+    keyword DATE_RECV_SER VARIABLE_OTHER
+    keyword MSG_HOUR VARIABLE_OTHER
+    keyword MSG_DAY VARIABLE_OTHER
+    keyword MSG_WEEK VARIABLE_OTHER
+    keyword MSG_MONTH VARIABLE_OTHER
+    keyword MSG_YEAR VARIABLE_OTHER
+    keyword TDTP_LISTDIR VARIABLE_OTHER
+    keyword TDTP_NAME VARIABLE_OTHER
+    keyword SPAMTAG VARIABLE_OTHER
+    keyword FILTER VARIABLE_OTHER
+    keyword TDTP_HITS_TOT VARIABLE_OTHER
 
-    keyword whole linestart TDTP_L10N_* brightgreen
-    keyword TDTP_L10N_LL_CC brightgreen
-    keyword TDTP_L10N_LL brightgreen
-    keyword TDTP_L10N_FILE brightgreen
+    keyword whole linestart TDTP_L10N_* VARIABLE_OTHER
+    keyword TDTP_L10N_LL_CC VARIABLE_OTHER
+    keyword TDTP_L10N_LL VARIABLE_OTHER
+    keyword TDTP_L10N_FILE VARIABLE_OTHER
 
-    keyword TDTP_EMAIL_NET brightgreen
-    keyword TDTP_EMAIL_TDAUTOBUILDER brightgreen
-    keyword TDTP_EMAIL_TDCONTROL brightgreen
-    keyword TDTP_EMAIL_TDAUTODOWNLOADER brightgreen
-    keyword TDTP_EMAIL_BUSINESS brightgreen
-    keyword TDTP_EMAIL_BTS_DEBIAN brightgreen
-    keyword TDTP_EMAIL_ML brightgreen
-    keyword TDTP_EMAIL_PRI brightgreen
+    keyword TDTP_EMAIL_NET VARIABLE_OTHER
+    keyword TDTP_EMAIL_TDAUTOBUILDER VARIABLE_OTHER
+    keyword TDTP_EMAIL_TDCONTROL VARIABLE_OTHER
+    keyword TDTP_EMAIL_TDAUTODOWNLOADER VARIABLE_OTHER
+    keyword TDTP_EMAIL_BUSINESS VARIABLE_OTHER
+    keyword TDTP_EMAIL_BTS_DEBIAN VARIABLE_OTHER
+    keyword TDTP_EMAIL_ML VARIABLE_OTHER
+    keyword TDTP_EMAIL_PRI VARIABLE_OTHER
 
-    keyword tdmcRDATE brightgreen
-    keyword tdmcSDATE brightgreen
-    keyword tdmcNL brightgreen
+    keyword tdmcRDATE VARIABLE_OTHER
+    keyword tdmcSDATE VARIABLE_OTHER
+    keyword tdmcNL VARIABLE_OTHER
 
-    keyword USEWNAME brightgreen
-    keyword USEWLIST brightgreen
-    keyword WLIST brightgreen
-    keyword USEBNAME brightgreen
-    keyword USEBLIST brightgreen
-    keyword BLIST brightgreen
-    keyword USETNAME brightgreen
-    keyword USETLIST brightgreen
-    keyword TLIST brightgreen
-    keyword USEHNAME brightgreen
-    keyword USEHLIST brightgreen
-    keyword HLIST brightgreen
+    keyword USEWNAME VARIABLE_OTHER
+    keyword USEWLIST VARIABLE_OTHER
+    keyword WLIST VARIABLE_OTHER
+    keyword USEBNAME VARIABLE_OTHER
+    keyword USEBLIST VARIABLE_OTHER
+    keyword BLIST VARIABLE_OTHER
+    keyword USETNAME VARIABLE_OTHER
+    keyword USETLIST VARIABLE_OTHER
+    keyword TLIST VARIABLE_OTHER
+    keyword USEHNAME VARIABLE_OTHER
+    keyword USEHLIST VARIABLE_OTHER
+    keyword HLIST VARIABLE_OTHER
 
-    keyword RESULT brightgreen
-    keyword PACKAGE brightgreen
-    keyword SUB brightgreen
-    keyword COUNT brightgreen
-    keyword NEWMSG brightgreen
-    keyword OLDMSG brightgreen
-    keyword TMPMSG brightgreen
-    keyword ADDR_ME brightgreen
-    keyword ADDR_LISTS brightgreen
-    keyword HIT brightgreen
-    keyword STRING brightgreen
-    keyword STRG brightgreen
-    keyword SHOW_FILTER brightgreen
-    keyword TMPSPAM brightgreen
+    keyword RESULT VARIABLE_OTHER
+    keyword PACKAGE VARIABLE_OTHER
+    keyword SUB VARIABLE_OTHER
+    keyword COUNT VARIABLE_OTHER
+    keyword NEWMSG VARIABLE_OTHER
+    keyword OLDMSG VARIABLE_OTHER
+    keyword TMPMSG VARIABLE_OTHER
+    keyword ADDR_ME VARIABLE_OTHER
+    keyword ADDR_LISTS VARIABLE_OTHER
+    keyword HIT VARIABLE_OTHER
+    keyword STRING VARIABLE_OTHER
+    keyword STRG VARIABLE_OTHER
+    keyword SHOW_FILTER VARIABLE_OTHER
+    keyword TMPSPAM VARIABLE_OTHER
 
 ##############################################################
 # Vars used by other recipes from the procmail mailinglist
-    keyword PROCMAIL_DIR brightgreen
-    keyword PROCMAILDIR brightgreen
-    keyword PROCDIR brightgreen
-    keyword OCTET brightgreen
-    keyword DOTQUAD brightgreen
-    keyword RCVD brightgreen
-    keyword RCVD_COUNT brightgreen
-    keyword FROMX brightgreen
-    keyword RETX brightgreen
-    keyword GPGFROM brightgreen
-    keyword GPGGET brightgreen
-    keyword GPGEXP brightgreen
-    keyword EMAIL brightgreen
-    keyword DUMMY_EXEC brightgreen
-    keyword DUMMY brightgreen
-    keyword TMPVAL brightgreen
-    keyword TMPVAR brightgreen
-    keyword HOMEDIR brightgreen
-    keyword NULL brightgreen
-    keyword whole H_From* brightgreen
+    keyword PROCMAIL_DIR VARIABLE_OTHER
+    keyword PROCMAILDIR VARIABLE_OTHER
+    keyword PROCDIR VARIABLE_OTHER
+    keyword OCTET VARIABLE_OTHER
+    keyword DOTQUAD VARIABLE_OTHER
+    keyword RCVD VARIABLE_OTHER
+    keyword RCVD_COUNT VARIABLE_OTHER
+    keyword FROMX VARIABLE_OTHER
+    keyword RETX VARIABLE_OTHER
+    keyword GPGFROM VARIABLE_OTHER
+    keyword GPGGET VARIABLE_OTHER
+    keyword GPGEXP VARIABLE_OTHER
+    keyword EMAIL VARIABLE_OTHER
+    keyword DUMMY_EXEC VARIABLE_OTHER
+    keyword DUMMY VARIABLE_OTHER
+    keyword TMPVAL VARIABLE_OTHER
+    keyword TMPVAR VARIABLE_OTHER
+    keyword HOMEDIR VARIABLE_OTHER
+    keyword NULL VARIABLE_OTHER
+    keyword whole H_From* VARIABLE_OTHER
 
-    keyword whole on red
-    keyword whole true red
-    keyword whole yes red
-    keyword whole off red
-    keyword whole false red
-    keyword whole no red
-    keyword whole all red
+    keyword whole on CONSTANT_LANGUAGE
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole yes CONSTANT_LANGUAGE
+    keyword whole off CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole no CONSTANT_LANGUAGE
+    keyword whole all CONSTANT_OTHER
 
-    keyword whole :0*\n        black magenta
-    keyword whole \**\n cyan
+    keyword whole :0*\n        KEYWORD_CONTROL magenta
+    keyword whole \**\n STRING_REGEXP
 
-    keyword whole |*\n yellow
-    keyword whole !*\n brightblue
+    keyword whole |*\n KEYWORD_OPERATOR
+    keyword whole !*\n KEYWORD_OPERATOR
 
-    keyword ${*} brightgreen
+    keyword ${*} VARIABLE_OTHER
 
-    keyword ` brightred
-    keyword { brightcyan
-    keyword } brightcyan
+    keyword ` PUNCTUATION_SECTION
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
 
-context  " "            green
-    keyword ${*} brightgreen
+context  " "            STRING_QUOTED_DOUBLE
+    keyword ${*} VARIABLE_OTHER
 
-context exclusive ` `        lightgray black
-    keyword '*' green
-    keyword " green
-    keyword \\` brightred
-    keyword ; brightcyan
-    keyword $(*) brightgreen
-    keyword ${*} brightgreen
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword -eq brightcyan
-    keyword -ne brightcyan
+context exclusive ` `        STRING_QUOTED_OTHER black
+    keyword '*' STRING_QUOTED_SINGLE
+    keyword " STRING_QUOTED_DOUBLE
+    keyword \\` CONSTANT_CHARACTER_ESCAPE
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword $(*) VARIABLE_OTHER
+    keyword ${*} VARIABLE_OTHER
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword -eq KEYWORD_OPERATOR
+    keyword -ne KEYWORD_OPERATOR
 
-    keyword wholeright $+ brightgreen
-    keyword $ brightgreen
+    keyword wholeright $+ VARIABLE_OTHER
+    keyword $ VARIABLE_OTHER
 
-    keyword >/dev/null brightblue
-    keyword 2>&1 brightblue
-    keyword 1>&2 brightblue
+    keyword >/dev/null KEYWORD_OPERATOR
+    keyword 2>&1 KEYWORD_OPERATOR
+    keyword 1>&2 KEYWORD_OPERATOR
 
-    keyword && brightblue
-    keyword || brightblue
-    keyword >> brightblue
+    keyword && KEYWORD_OPERATOR
+    keyword || KEYWORD_OPERATOR
+    keyword >> KEYWORD_OPERATOR
 
-    keyword ES=$? brightgreen
+    keyword ES=$? VARIABLE_OTHER
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword | cyan
-    keyword whole --* cyan
-    keyword whole -*\s cyan
-    keyword whole \+* cyan
-    keyword whole \** cyan
-    keyword whole /* cyan
-    keyword whole *: cyan
+    keyword | KEYWORD_OPERATOR
+    keyword whole --* VARIABLE_PARAMETER
+    keyword whole -*\s VARIABLE_PARAMETER
+    keyword whole \+* VARIABLE_PARAMETER
+    keyword whole \** VARIABLE_PARAMETER
+    keyword whole /* VARIABLE_PARAMETER
+    keyword whole *: VARIABLE_PARAMETER
 
-    keyword whole bash cyan
-    keyword whole bc cyan
-    keyword whole cp cyan
-    keyword whole cut cyan
-    keyword whole date cyan
-    keyword whole echo cyan
-    keyword whole egrep cyan
-    keyword whole env cyan
-    keyword whole expand cyan
-    keyword whole formail cyan
-    keyword whole gpg cyan
-    keyword whole grep cyan
-    keyword whole head cyan
-    keyword whole killall cyan
-    keyword whole md5sum cyan
-    keyword whole mimedecode cyan
-    keyword whole mkdir cyan
-    keyword whole mv cyan
-    keyword whole rm cyan
-    keyword whole sed cyan
-    keyword whole sendmail cyan
-    keyword whole sort cyan
-    keyword whole tail cyan
-    keyword whole tddebbtsd cyan
-    keyword whole tdnetsound cyan
-    keyword whole test cyan
-    keyword whole touch cyan
-    keyword whole tr cyan
-    keyword whole wc cyan
-    keyword whole which cyan
+    keyword whole bash SUPPORT_FUNCTION
+    keyword whole bc SUPPORT_FUNCTION
+    keyword whole cp SUPPORT_FUNCTION
+    keyword whole cut SUPPORT_FUNCTION
+    keyword whole date SUPPORT_FUNCTION
+    keyword whole echo SUPPORT_FUNCTION
+    keyword whole egrep SUPPORT_FUNCTION
+    keyword whole env SUPPORT_FUNCTION
+    keyword whole expand SUPPORT_FUNCTION
+    keyword whole formail SUPPORT_FUNCTION
+    keyword whole gpg SUPPORT_FUNCTION
+    keyword whole grep SUPPORT_FUNCTION
+    keyword whole head SUPPORT_FUNCTION
+    keyword whole killall SUPPORT_FUNCTION
+    keyword whole md5sum VARIABLE_PARAMETER
+    keyword whole mimedecode SUPPORT_FUNCTION
+    keyword whole mkdir SUPPORT_FUNCTION
+    keyword whole mv SUPPORT_FUNCTION
+    keyword whole rm SUPPORT_FUNCTION
+    keyword whole sed SUPPORT_FUNCTION
+    keyword whole sendmail SUPPORT_FUNCTION
+    keyword whole sort SUPPORT_FUNCTION
+    keyword whole tail SUPPORT_FUNCTION
+    keyword whole tddebbtsd SUPPORT_FUNCTION
+    keyword whole tdnetsound SUPPORT_FUNCTION
+    keyword whole test SUPPORT_FUNCTION
+    keyword whole touch SUPPORT_FUNCTION
+    keyword whole tr SUPPORT_FUNCTION
+    keyword whole wc SUPPORT_FUNCTION
+    keyword whole which SUPPORT_FUNCTION
 
-    keyword whole if yellow
-    keyword whole then yellow
-    keyword whole else yellow
-    keyword whole fi yellow
-    keyword whole for yellow
-    keyword whole in yellow
-    keyword whole do yellow
-    keyword whole done yellow
+    keyword whole if KEYWORD_CONTROL
+    keyword whole then KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole fi KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole in KEYWORD_CONTROL
+    keyword whole do KEYWORD_CONTROL
+    keyword whole done KEYWORD_CONTROL

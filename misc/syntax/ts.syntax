@@ -13,285 +13,285 @@ context default
 
     #=========================
     # Keywords
-    keyword whole abstract yellow
-    keyword whole arguments yellow
-    keyword whole as yellow
-    keyword whole async yellow
-    keyword whole await yellow
-    keyword whole break yellow
-    keyword whole caller yellow
-    keyword whole case yellow
-    keyword whole catch yellow
-    keyword whole class yellow
-    keyword whole constructor yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole debugger yellow
-    keyword whole declare yellow
-    keyword whole default yellow
-    keyword whole delete yellow
-    keyword whole do yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole export yellow
-    keyword whole extends yellow
-    keyword whole finally yellow
-    keyword whole for yellow
-    keyword whole from yellow
-    keyword whole function yellow
-    keyword whole get yellow
-    keyword whole if yellow
-    keyword whole implements yellow
-    keyword whole import yellow
-    keyword whole instanceof yellow
-    keyword whole interface yellow
-    keyword whole in yellow
-    keyword whole let yellow
-    keyword whole module yellow
-    keyword whole namespace yellow
-    keyword whole new yellow
-    keyword whole of yellow
-    keyword whole private yellow
-    keyword whole protected yellow
-    keyword whole prototype yellow
-    keyword whole public yellow
-    keyword whole readonly yellow
-    keyword whole return yellow
-    keyword whole set yellow
-    keyword whole static yellow
-    keyword whole super yellow
-    keyword whole switch yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole try yellow
-    keyword whole typeof yellow
-    keyword whole var yellow
-    keyword whole while yellow
-    keyword whole with yellow
-    keyword whole yield yellow
+    keyword whole abstract STORAGE_MODIFIER
+    keyword whole arguments VARIABLE_LANGUAGE
+    keyword whole as SUPPORT_CLASS
+    keyword whole async STORAGE_MODIFIER
+    keyword whole await KEYWORD_CONTROL
+    keyword whole break KEYWORD_CONTROL
+    keyword whole caller VARIABLE_LANGUAGE
+    keyword whole case KEYWORD_CONTROL
+    keyword whole catch KEYWORD_CONTROL
+    keyword whole class STORAGE_TYPE_CLASS
+    keyword whole constructor KEYWORD_OTHER_RESERVED
+    keyword whole const STORAGE_MODIFIER
+    keyword whole continue KEYWORD_CONTROL
+    keyword whole debugger KEYWORD_OTHER_RESERVED
+    keyword whole declare STORAGE_MODIFIER
+    keyword whole default KEYWORD_CONTROL
+    keyword whole delete KEYWORD_OTHER_RESERVED
+    keyword whole do KEYWORD_CONTROL
+    keyword whole else KEYWORD_CONTROL
+    keyword whole enum STORAGE_TYPE_CLASS
+    keyword whole export KEYWORD_CONTROL_IMPORT
+    keyword whole extends KEYWORD_OTHER_RESERVED
+    keyword whole finally KEYWORD_CONTROL
+    keyword whole for KEYWORD_CONTROL
+    keyword whole from KEYWORD_CONTROL_IMPORT
+    keyword whole function STORAGE_TYPE_FUNCTION
+    keyword whole get KEYWORD_OTHER_RESERVED
+    keyword whole if KEYWORD_CONTROL
+    keyword whole implements KEYWORD_OTHER_RESERVED
+    keyword whole import KEYWORD_CONTROL_IMPORT
+    keyword whole instanceof KEYWORD_OPERATOR_WORD
+    keyword whole interface STORAGE_TYPE_CLASS
+    keyword whole in KEYWORD_OPERATOR_WORD
+    keyword whole let STORAGE_MODIFIER
+    keyword whole module KEYWORD_OTHER_RESERVED
+    keyword whole namespace KEYWORD_OTHER_RESERVED
+    keyword whole new KEYWORD_OTHER_NEW
+    keyword whole of KEYWORD_CONTROL
+    keyword whole private STORAGE_MODIFIER
+    keyword whole protected STORAGE_MODIFIER
+    keyword whole prototype KEYWORD_OTHER_RESERVED
+    keyword whole public STORAGE_MODIFIER
+    keyword whole readonly STORAGE_MODIFIER
+    keyword whole return KEYWORD_CONTROL
+    keyword whole set KEYWORD_OTHER_RESERVED
+    keyword whole static STORAGE_MODIFIER
+    keyword whole super VARIABLE_LANGUAGE
+    keyword whole switch KEYWORD_CONTROL
+    keyword whole this VARIABLE_LANGUAGE
+    keyword whole throw KEYWORD_CONTROL
+    keyword whole try KEYWORD_CONTROL
+    keyword whole typeof KEYWORD_OPERATOR_WORD
+    keyword whole var STORAGE_MODIFIER
+    keyword whole while KEYWORD_CONTROL
+    keyword whole with KEYWORD_CONTROL
+    keyword whole yield KEYWORD_CONTROL
 
     #=========================
     # Basic Types
-    keyword whole any cyan
-    keyword whole bigint cyan
-    keyword whole boolean cyan
-    keyword whole never cyan
-    keyword whole null cyan
-    keyword whole number cyan
-    keyword whole object cyan
-    keyword whole string cyan
-    keyword whole symbol cyan
-    keyword whole undefined cyan
-    keyword whole unknown cyan
-    keyword whole void cyan
-    keyword whole T cyan
+    keyword whole any STORAGE_TYPE_PRIMITIVE
+    keyword whole bigint STORAGE_TYPE_PRIMITIVE
+    keyword whole boolean STORAGE_TYPE_PRIMITIVE
+    keyword whole never STORAGE_TYPE_PRIMITIVE
+    keyword whole null CONSTANT_LANGUAGE
+    keyword whole number STORAGE_TYPE_PRIMITIVE
+    keyword whole object STORAGE_TYPE
+    keyword whole string STORAGE_TYPE_PRIMITIVE
+    keyword whole symbol STORAGE_TYPE_PRIMITIVE
+    keyword whole undefined STORAGE_TYPE_PRIMITIVE
+    keyword whole unknown STORAGE_TYPE_PRIMITIVE
+    keyword whole void STORAGE_TYPE_PRIMITIVE
+    keyword whole T STORAGE_TYPE
 
     #=========================
     # Objects
-    keyword whole AbortController yellow
-    keyword whole AbortSignal yellow
-    keyword whole AggregateError yellow
-    keyword whole Array yellow
-    keyword whole ArrayBuffer yellow
-    keyword whole AsyncFunction yellow
-    keyword whole AsyncGenerator yellow
-    keyword whole AsyncGeneratorFunction yellow
-    keyword whole Atomics yellow
-    keyword whole BigInt64Array yellow
-    keyword whole BigInt yellow
-    keyword whole BigUint64Array yellow
-    keyword whole Blob yellowOB
-    keyword whole Boolean yellow
-    keyword whole Buffer yellow
-    keyword whole DataView yellow
-    keyword whole Date yellow
-    keyword whole DOMException yellow
-    keyword whole Error yellow
-    keyword whole EvalError yellow
-    keyword whole Float32Array yellow
-    keyword whole Float64Array yellow
-    keyword whole Function yellow
-    keyword whole Generator yellow
-    keyword whole GeneratorFunction yellow
-    keyword whole global yellow
-    keyword whole globalThis yellow
-    keyword whole Image yellow
-    keyword whole Infinity yellow
-    keyword whole Int16Array yellow
-    keyword whole Int32Array yellow
-    keyword whole Int8Array yellow
-    keyword whole Intl yellow
-    keyword whole JSON yellow
-    keyword whole Map yellow
-    keyword whole Math yellow
-    keyword whole Number yellow
-    keyword whole Object yellow
-    keyword whole Promise yellow
-    keyword whole Promise yellow
-    keyword whole Proxy yellow
-    keyword whole RangeError yellow
-    keyword whole ReferenceError yellow
-    keyword whole Reflect yellow
-    keyword whole RegExp yellow
-    keyword whole Set yellow
-    keyword whole SharedArrayBuffer yellow
-    keyword whole SyntaxError yellow
-    keyword whole TextDecoder yellow
-    keyword whole TypeError yellow
-    keyword whole Uint16Array yellow
-    keyword whole Uint32Array yellow
-    keyword whole Uint8Array yellow
-    keyword whole Uint8ClampedArray yellow
-    keyword whole URIError yellow
-    keyword whole URL yellow
-    keyword whole URLSearchParams yellow
-    keyword whole WeakMap yellow
-    keyword whole WeakSet yellow
-    keyword whole WebAssembly yellow
-    keyword whole window yellow
+    keyword whole AbortController SUPPORT_CLASS
+    keyword whole AbortSignal SUPPORT_CLASS
+    keyword whole AggregateError SUPPORT_CLASS
+    keyword whole Array SUPPORT_CLASS
+    keyword whole ArrayBuffer SUPPORT_CLASS
+    keyword whole AsyncFunction SUPPORT_CLASS
+    keyword whole AsyncGenerator SUPPORT_CLASS
+    keyword whole AsyncGeneratorFunction SUPPORT_CLASS
+    keyword whole Atomics SUPPORT_CLASS
+    keyword whole BigInt64Array SUPPORT_CLASS
+    keyword whole BigInt SUPPORT_CLASS
+    keyword whole BigUint64Array SUPPORT_CLASS
+    keyword whole Blob SUPPORT_CLASS
+    keyword whole Boolean SUPPORT_CLASS
+    keyword whole Buffer SUPPORT_CLASS
+    keyword whole DataView SUPPORT_CLASS
+    keyword whole Date SUPPORT_CLASS
+    keyword whole DOMException SUPPORT_CLASS
+    keyword whole Error SUPPORT_CLASS
+    keyword whole EvalError SUPPORT_CLASS
+    keyword whole Float32Array SUPPORT_CLASS
+    keyword whole Float64Array SUPPORT_CLASS
+    keyword whole Function SUPPORT_CLASS
+    keyword whole Generator SUPPORT_CLASS
+    keyword whole GeneratorFunction SUPPORT_CLASS
+    keyword whole global SUPPORT_CLASS
+    keyword whole globalThis SUPPORT_CLASS
+    keyword whole Image SUPPORT_CLASS
+    keyword whole Infinity CONSTANT_LANGUAGE
+    keyword whole Int16Array SUPPORT_CLASS
+    keyword whole Int32Array SUPPORT_CLASS
+    keyword whole Int8Array SUPPORT_CLASS
+    keyword whole Intl SUPPORT_CLASS
+    keyword whole JSON SUPPORT_CLASS
+    keyword whole Map SUPPORT_CLASS
+    keyword whole Math SUPPORT_CLASS
+    keyword whole Number SUPPORT_CLASS
+    keyword whole Object SUPPORT_CLASS
+    keyword whole Promise SUPPORT_CLASS
+    keyword whole Promise SUPPORT_CLASS
+    keyword whole Proxy SUPPORT_CLASS
+    keyword whole RangeError SUPPORT_CLASS
+    keyword whole ReferenceError SUPPORT_CLASS
+    keyword whole Reflect SUPPORT_CLASS
+    keyword whole RegExp SUPPORT_CLASS
+    keyword whole Set SUPPORT_CLASS
+    keyword whole SharedArrayBuffer SUPPORT_CLASS
+    keyword whole SyntaxError SUPPORT_CLASS
+    keyword whole TextDecoder SUPPORT_CLASS
+    keyword whole TypeError SUPPORT_CLASS
+    keyword whole Uint16Array SUPPORT_CLASS
+    keyword whole Uint32Array SUPPORT_CLASS
+    keyword whole Uint8Array SUPPORT_CLASS
+    keyword whole Uint8ClampedArray SUPPORT_CLASS
+    keyword whole URIError SUPPORT_CLASS
+    keyword whole URL SUPPORT_CLASS
+    keyword whole URLSearchParams SUPPORT_CLASS
+    keyword whole WeakMap SUPPORT_CLASS
+    keyword whole WeakSet SUPPORT_CLASS
+    keyword whole WebAssembly SUPPORT_CLASS
+    keyword whole window SUPPORT_CLASS
 
     #=========================
     # Most common functions
-    keyword whole alert yellow
-    keyword whole clearInterval yellow
-    keyword whole clearTimeout yellow
-    keyword whole console yellow
-    keyword whole decodeURIComponent yellow
-    keyword whole decodeURI yellow
-    keyword whole encodeURIComponent yellow
-    keyword whole escape yellow
-    keyword whole eval yellow
-    keyword whole fetch yellow
-    keyword whole isFinite yellow
-    keyword whole isNaN yellow
-    keyword whole module yellow
-    keyword whole parseFloat yellow
-    keyword whole parseInt yellow
-    keyword whole performance yellow
-    keyword whole process yellow
-    keyword whole queueMicrotask yellow
-    keyword whole require yellow
-    keyword whole setImmediate yellow
-    keyword whole setInterval yellow
-    keyword whole setTimeout yellow
-    keyword whole structuredClone yellow
-    keyword whole unescape yellow
+    keyword whole alert SUPPORT_FUNCTION
+    keyword whole clearInterval SUPPORT_FUNCTION
+    keyword whole clearTimeout SUPPORT_FUNCTION
+    keyword whole console SUPPORT_CLASS
+    keyword whole decodeURIComponent SUPPORT_FUNCTION
+    keyword whole decodeURI SUPPORT_FUNCTION
+    keyword whole encodeURIComponent SUPPORT_FUNCTION
+    keyword whole escape SUPPORT_FUNCTION
+    keyword whole eval SUPPORT_FUNCTION
+    keyword whole fetch SUPPORT_FUNCTION
+    keyword whole isFinite SUPPORT_FUNCTION
+    keyword whole isNaN SUPPORT_FUNCTION
+    keyword whole module KEYWORD_OTHER_RESERVED
+    keyword whole parseFloat SUPPORT_FUNCTION
+    keyword whole parseInt SUPPORT_FUNCTION
+    keyword whole performance SUPPORT_CLASS
+    keyword whole process SUPPORT_CLASS
+    keyword whole queueMicrotask SUPPORT_FUNCTION
+    keyword whole require SUPPORT_FUNCTION
+    keyword whole setImmediate SUPPORT_FUNCTION
+    keyword whole setInterval SUPPORT_FUNCTION
+    keyword whole setTimeout SUPPORT_FUNCTION
+    keyword whole structuredClone SUPPORT_FUNCTION
+    keyword whole unescape SUPPORT_FUNCTION
 
     #=========================
     # Constants
-    keyword whole true brightgreen
-    keyword whole false brightgreen
-    keyword whole NaN yellow
-    keyword whole __dirname yellow
-    keyword whole __filename yellow
+    keyword whole true CONSTANT_LANGUAGE
+    keyword whole false CONSTANT_LANGUAGE
+    keyword whole NaN CONSTANT_LANGUAGE
+    keyword whole __dirname CONSTANT_OTHER
+    keyword whole __filename CONSTANT_OTHER
 
     #=========================
     # Comments
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    keyword /\* COMMENT_BLOCK
+    keyword \*/ COMMENT_BLOCK
+    keyword // COMMENT_LINE
 
     #=========================
     # Numbers
     wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
 
-    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
     #=========================
     # Special symbols
-    keyword <+> cyan
-    keyword => brightcyan
-    keyword \. yellow
-    keyword \* yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword ! yellow
-    keyword & yellow
-    keyword | yellow
-    keyword ^ yellow
-    keyword ~ yellow
-    keyword > yellow
-    keyword < yellow
-    keyword wholeright @+ cyan
+    keyword <+> KEYWORD_OPERATOR
+    keyword => KEYWORD_OPERATOR
+    keyword \. PUNCTUATION_SEPARATOR
+    keyword \* KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword - KEYWORD_OPERATOR
+    keyword / KEYWORD_OPERATOR
+    keyword % KEYWORD_OPERATOR
+    keyword = KEYWORD_OPERATOR
+    keyword ! KEYWORD_OPERATOR
+    keyword & KEYWORD_OPERATOR
+    keyword | KEYWORD_OPERATOR
+    keyword ^ KEYWORD_OPERATOR
+    keyword ~ KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword wholeright @+ STORAGE_TYPE_ANNOTATION
 
     #=========================
     # Separators
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword ? brightcyan
-    keyword : brightcyan
-    keyword ; brightmagenta
+    keyword { PUNCTUATION_SECTION
+    keyword } PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword , PUNCTUATION_SEPARATOR
+    keyword ? PUNCTUATION_SEPARATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
 
 # Function return type
-context exclusive wholeright ): \n cyan
-    keyword ; brightmagenta
-    keyword { brightcyan
+context exclusive wholeright ): \n STORAGE_TYPE
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword { PUNCTUATION_SECTION
 
 #=============================
 # Comments
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
+    keyword whole BUG KEYWORD_OTHER_TODO
+    keyword whole FixMe KEYWORD_OTHER_TODO
+    keyword whole FIXME KEYWORD_OTHER_TODO
+    keyword whole Note KEYWORD_OTHER_TODO
+    keyword whole NOTE KEYWORD_OTHER_TODO
+    keyword whole ToDo KEYWORD_OTHER_TODO
+    keyword whole TODO KEYWORD_OTHER_TODO
+    keyword !!\[!\] KEYWORD_OTHER_TODO
+    keyword ??\[?\] KEYWORD_OTHER_TODO
 
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
+    keyword whole BUG KEYWORD_OTHER_TODO
+    keyword whole FixMe KEYWORD_OTHER_TODO
+    keyword whole FIXME KEYWORD_OTHER_TODO
+    keyword whole Note KEYWORD_OTHER_TODO
+    keyword whole NOTE KEYWORD_OTHER_TODO
+    keyword whole ToDo KEYWORD_OTHER_TODO
+    keyword whole TODO KEYWORD_OTHER_TODO
+    keyword !!\[!\] KEYWORD_OTHER_TODO
+    keyword ??\[?\] KEYWORD_OTHER_TODO
 
 
 #=============================
 # Strings
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\\{\\'"abtnvfr\} brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\{\\'"abtnvfr\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
 
-    keyword ' brightgreen
+    keyword ' CONSTANT_NUMERIC
 
-context ' ' green
+context ' ' STRING_QUOTED_SINGLE
     spellcheck
-    keyword \\\{\\'"abtnvfr\} brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\{\\'"abtnvfr\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
 
-    keyword " brightgreen
+    keyword " CONSTANT_NUMERIC
 
-context ` ` green
+context ` ` STRING_QUOTED_OTHER
     spellcheck
-    keyword \\\{\\'"abtnvfr\} brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword ${*} yellow
+    keyword \\\{\\'"abtnvfr\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword ${*} PUNCTUATION_SECTION
 
 

@@ -4,46 +4,46 @@
 # https://www.juancri.com
 
 context default
-    keyword "*" lightgray
-    keyword '*' lightgray
+    keyword "*" STRING_QUOTED_DOUBLE
+    keyword '*' STRING_QUOTED_SINGLE
 
     spellcheck
 
-context <!-- --> brightgreen
+context <!-- --> COMMENT_BLOCK
     spellcheck
 
-context <! > yellow
-    keyword '+' brightcyan
-    keyword "+" brightcyan
-    keyword \( lightgray
-    keyword \) lightgray
-    keyword \* lightgray
-    keyword \? lightgray
-    keyword \+ lightgray
-    keyword \| lightgray
-    keyword \, lightgray
+context <! > META_PREPROCESSOR
+    keyword '+' STRING_QUOTED_SINGLE
+    keyword "+" STRING_QUOTED_DOUBLE
+    keyword \( PUNCTUATION_SECTION
+    keyword \) PUNCTUATION_SECTION
+    keyword \* KEYWORD_OPERATOR
+    keyword \? KEYWORD_OPERATOR
+    keyword \+ KEYWORD_OPERATOR
+    keyword \| KEYWORD_OPERATOR
+    keyword \, PUNCTUATION_SEPARATOR
     spellcheck
 
-context <% %> brightgreen
-    keyword Application white
-    keyword Assembly white
-    keyword Control white
-    keyword Implements white
-    keyword Import white
-    keyword Inherits white
-    keyword OutputCache white
-    keyword Page white
-    keyword Reference white
-    keyword Register white
-    keyword WebService white
-    keyword \s+\= yellow
-    keyword '*' brightcyan
-    keyword "*" brightcyan
+context <% %> META_PREPROCESSOR
+    keyword Application KEYWORD_OTHER
+    keyword Assembly KEYWORD_OTHER
+    keyword Control KEYWORD_OTHER
+    keyword Implements KEYWORD_OTHER
+    keyword Import KEYWORD_OTHER
+    keyword Inherits KEYWORD_OTHER
+    keyword OutputCache KEYWORD_OTHER
+    keyword Page KEYWORD_OTHER
+    keyword Reference KEYWORD_OTHER
+    keyword Register KEYWORD_OTHER
+    keyword WebService KEYWORD_OTHER
+    keyword \s+\= KEYWORD_OPERATOR
+    keyword '*' STRING_QUOTED_SINGLE
+    keyword "*" STRING_QUOTED_DOUBLE
     spellcheck
 
-context < > white
-    keyword \s+\= yellow
-    keyword "server" brightgreen
-    keyword '*' brightcyan
-    keyword "*" brightcyan
+context < > ENTITY_NAME_TAG
+    keyword \s+\= KEYWORD_OPERATOR
+    keyword "server" STRING_QUOTED_DOUBLE
+    keyword '*' STRING_QUOTED_SINGLE
+    keyword "*" STRING_QUOTED_DOUBLE
     spellcheck

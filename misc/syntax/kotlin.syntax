@@ -7,182 +7,182 @@
 context default
 
 # hard keywords
-	keyword whole as yellow
-	keyword whole as? yellow
-	keyword whole break yellow
-	keyword whole class yellow
-	keyword whole continue yellow
-	keyword whole do yellow
-	keyword whole else yellow
-	keyword whole false yellow
-	keyword whole for yellow
-	keyword whole fun yellow
-	keyword whole if yellow
-	keyword whole in yellow
-	keyword whole !in yellow
-	keyword whole interface yellow
-	keyword whole is yellow
-	keyword whole !is yellow
-	keyword whole null yellow
-	keyword whole object yellow
-	keyword whole package brown
-	keyword whole return yellow
-	keyword whole super yellow
-	keyword whole this yellow
-	keyword whole throw yellow
-	keyword whole true yellow
-	keyword whole try yellow
-	keyword whole typealias yellow
-	keyword whole val yellow
-	keyword whole var yellow
-	keyword whole when yellow
-	keyword whole while yellow	
+	keyword whole as KEYWORD_OPERATOR_WORD
+	keyword whole as? KEYWORD_OPERATOR_WORD
+	keyword whole break KEYWORD_CONTROL
+	keyword whole class STORAGE_TYPE_CLASS
+	keyword whole continue KEYWORD_CONTROL
+	keyword whole do KEYWORD_CONTROL
+	keyword whole else KEYWORD_CONTROL
+	keyword whole false CONSTANT_LANGUAGE
+	keyword whole for KEYWORD_CONTROL
+	keyword whole fun STORAGE_TYPE_FUNCTION
+	keyword whole if KEYWORD_CONTROL
+	keyword whole in KEYWORD_OPERATOR_WORD
+	keyword whole !in KEYWORD_OPERATOR_WORD
+	keyword whole interface STORAGE_TYPE_CLASS
+	keyword whole is KEYWORD_OPERATOR_WORD
+	keyword whole !is KEYWORD_OPERATOR_WORD
+	keyword whole null CONSTANT_LANGUAGE
+	keyword whole object STORAGE_TYPE_CLASS
+	keyword whole package KEYWORD_OTHER_PACKAGE
+	keyword whole return KEYWORD_CONTROL
+	keyword whole super VARIABLE_LANGUAGE
+	keyword whole this VARIABLE_LANGUAGE
+	keyword whole throw KEYWORD_CONTROL
+	keyword whole true CONSTANT_LANGUAGE
+	keyword whole try KEYWORD_CONTROL
+	keyword whole typealias STORAGE_TYPE
+	keyword whole val STORAGE_TYPE
+	keyword whole var STORAGE_TYPE
+	keyword whole when KEYWORD_CONTROL
+	keyword whole while KEYWORD_CONTROL	
 
 # soft keywords
-	keyword whole by brightgreen
-	keyword whole catch yellow
-	keyword whole constructor brightgreen
-	keyword whole delegate brightgreen
-	keyword whole dynamic brightgreen
+	keyword whole by KEYWORD_OTHER
+	keyword whole catch KEYWORD_CONTROL
+	keyword whole constructor KEYWORD_OTHER
+	keyword whole delegate KEYWORD_OTHER
+	keyword whole dynamic KEYWORD_OTHER
 #	keyword whole field brightgreen
-	keyword whole file brightgreen
-	keyword whole finally brightgreen
-	keyword whole get brightgreen
-	keyword whole import brown
-	keyword whole init brightgreen
-	keyword whole param brightgreen
-	keyword whole property brightgreen
-	keyword whole reciever brightgreen
-	keyword whole set brightgreen
-	keyword whole setparam brightgreen
-	keyword whole where brightgreen
+	keyword whole file KEYWORD_OTHER
+	keyword whole finally KEYWORD_CONTROL
+	keyword whole get KEYWORD_OTHER
+	keyword whole import KEYWORD_CONTROL_IMPORT
+	keyword whole init KEYWORD_OTHER
+	keyword whole param KEYWORD_OTHER
+	keyword whole property KEYWORD_OTHER
+	keyword whole reciever KEYWORD_OTHER
+	keyword whole set KEYWORD_OTHER
+	keyword whole setparam KEYWORD_OTHER
+	keyword whole where KEYWORD_OTHER
 
 # modifier keywords
-	keyword whole abstract brightmagenta
-	keyword whole annotation brightmagenta
-	keyword whole companion brightmagenta
-	keyword whole const brightmagenta
-	keyword whole crossinline brightmagenta
-	keyword whole data brightmagenta
-	keyword whole enum brightmagenta
-	keyword whole external brightmagenta
-	keyword whole final brightmagenta
-	keyword whole infix brightmagenta
-	keyword whole inline brightmagenta
-	keyword whole inner brightmagenta
-	keyword whole internal brightmagenta
-	keyword whole lateinit brightmagenta
-	keyword whole noinline brightmagenta
-	keyword whole open brightmagenta
-	keyword whole operator brightmagenta
-	keyword whole out brightmagenta
-	keyword whole override brightmagenta
-	keyword whole private brightmagenta
-	keyword whole protected brightmagenta
-	keyword whole public brightmagenta
-	keyword whole reified brightmagenta
-	keyword whole sealed brightmagenta
-	keyword whole suspend brightmagenta
-	keyword whole tailrec brightmagenta
-	keyword whole vararg brightmagenta
+	keyword whole abstract STORAGE_MODIFIER
+	keyword whole annotation STORAGE_MODIFIER
+	keyword whole companion STORAGE_MODIFIER
+	keyword whole const STORAGE_MODIFIER
+	keyword whole crossinline STORAGE_MODIFIER
+	keyword whole data STORAGE_MODIFIER
+	keyword whole enum STORAGE_TYPE_CLASS
+	keyword whole external STORAGE_MODIFIER
+	keyword whole final STORAGE_MODIFIER
+	keyword whole infix STORAGE_MODIFIER
+	keyword whole inline STORAGE_MODIFIER
+	keyword whole inner STORAGE_MODIFIER
+	keyword whole internal STORAGE_MODIFIER
+	keyword whole lateinit STORAGE_MODIFIER
+	keyword whole noinline STORAGE_MODIFIER
+	keyword whole open STORAGE_MODIFIER
+	keyword whole operator STORAGE_MODIFIER
+	keyword whole out STORAGE_MODIFIER
+	keyword whole override STORAGE_MODIFIER
+	keyword whole private STORAGE_MODIFIER
+	keyword whole protected STORAGE_MODIFIER
+	keyword whole public STORAGE_MODIFIER
+	keyword whole reified STORAGE_MODIFIER
+	keyword whole sealed STORAGE_MODIFIER
+	keyword whole suspend STORAGE_MODIFIER
+	keyword whole tailrec STORAGE_MODIFIER
+	keyword whole vararg STORAGE_MODIFIER
 
 # special identifiers
-	keyword whole field brightgreen
-	keyword whole it brightgreen
+	keyword whole field VARIABLE_LANGUAGE
+	keyword whole it VARIABLE_LANGUAGE
 
-	keyword @\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightcyan	
-	keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]@ brightcyan
+	keyword @\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] STORAGE_TYPE_ANNOTATION	
+	keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]@ ENTITY_NAME_LABEL
 
 # operators and special symbols
-	keyword \+ brightcyan
-	keyword - brightcyan
-	keyword \* brightcyan
-	keyword / brightcyan
-	keyword % brightcyan
-	keyword = brightcyan
-	keyword \+= brightcyan
-	keyword -= brightcyan
-	keyword \*= brightcyan
-	keyword /= brightcyan
-	keyword %= brightcyan
-	keyword \+\+ brightcyan
-	keyword -- brightcyan
-	keyword && brightcyan
-	keyword || brightcyan
-	keyword ! brightcyan
-	keyword == brightcyan
-	keyword != brightcyan
-	keyword === brightcyan
-	keyword !== brightcyan
-	keyword > brightcyan
-	keyword < brightcyan
-	keyword >= brightcyan
-	keyword <= brightcyan
-	keyword [ brightcyan
-	keyword ] brightcyan
-	keyword !! brightcyan
-	keyword ?. brightcyan
-	keyword ?: brightcyan
-	keyword :: brightcyan
-	keyword .. brightcyan
-	keyword : brightcyan
-	keyword ? brightcyan
-	keyword -> brightcyan
-	keyword @ brightcyan
-	keyword ; brightcyan
-	keyword $ brightcyan
-	keyword _ brightcyan
+	keyword \+ KEYWORD_OPERATOR
+	keyword - KEYWORD_OPERATOR
+	keyword \* KEYWORD_OPERATOR
+	keyword / KEYWORD_OPERATOR
+	keyword % KEYWORD_OPERATOR
+	keyword = KEYWORD_OPERATOR
+	keyword \+= KEYWORD_OPERATOR
+	keyword -= KEYWORD_OPERATOR
+	keyword \*= KEYWORD_OPERATOR
+	keyword /= KEYWORD_OPERATOR
+	keyword %= KEYWORD_OPERATOR
+	keyword \+\+ KEYWORD_OPERATOR
+	keyword -- KEYWORD_OPERATOR
+	keyword && KEYWORD_OPERATOR
+	keyword || KEYWORD_OPERATOR
+	keyword ! KEYWORD_OPERATOR
+	keyword == KEYWORD_OPERATOR
+	keyword != KEYWORD_OPERATOR
+	keyword === KEYWORD_OPERATOR
+	keyword !== KEYWORD_OPERATOR
+	keyword > KEYWORD_OPERATOR
+	keyword < KEYWORD_OPERATOR
+	keyword >= KEYWORD_OPERATOR
+	keyword <= KEYWORD_OPERATOR
+	keyword [ PUNCTUATION_SECTION
+	keyword ] PUNCTUATION_SECTION
+	keyword !! KEYWORD_OPERATOR
+	keyword ?. KEYWORD_OPERATOR
+	keyword ?: KEYWORD_OPERATOR
+	keyword :: KEYWORD_OPERATOR
+	keyword .. KEYWORD_OPERATOR
+	keyword : PUNCTUATION_SEPARATOR
+	keyword ? PUNCTUATION_SEPARATOR
+	keyword -> KEYWORD_OPERATOR
+	keyword @ STORAGE_TYPE_ANNOTATION
+	keyword ; PUNCTUATION_TERMINATOR
+	keyword $ VARIABLE_OTHER
+	keyword _ KEYWORD_OTHER_RESERVED
 
 # built-in types
-	keyword whole Double brightred
-	keyword whole Float brightred
-	keyword whole Long brightred
-	keyword whole Int brightred
-	keyword whole Short brightred
-	keyword whole Byte brightred
-	keyword whole Char brightred
-	keyword whole Boolean brightred
-	keyword whole Array brightred
-	keyword whole String brightred
-	keyword whole ByteArray brightred
-	keyword whole ByteSequence brightred
+	keyword whole Double SUPPORT_TYPE
+	keyword whole Float SUPPORT_TYPE
+	keyword whole Long SUPPORT_TYPE
+	keyword whole Int SUPPORT_TYPE
+	keyword whole Short SUPPORT_TYPE
+	keyword whole Byte SUPPORT_TYPE
+	keyword whole Char SUPPORT_TYPE
+	keyword whole Boolean SUPPORT_TYPE
+	keyword whole Array SUPPORT_TYPE
+	keyword whole String SUPPORT_TYPE
+	keyword whole ByteArray SUPPORT_TYPE
+	keyword whole ByteSequence SUPPORT_TYPE
 
 # comment
-context exclusive /\* \*/ gray
-context exclusive // \n gray
+context exclusive /\* \*/ COMMENT_BLOCK
+context exclusive // \n COMMENT_LINE
 
-context """ """ green
+context """ """ STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword $\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword %p CONSTANT_OTHER_PLACEHOLDER
+    keyword $\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] VARIABLE_OTHER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
 
-context ' ' green
+context ' ' STRING_QUOTED_SINGLE
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword $\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword %p CONSTANT_OTHER_PLACEHOLDER
+    keyword $\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] VARIABLE_OTHER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

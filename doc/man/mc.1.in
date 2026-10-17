@@ -3598,6 +3598,17 @@ or without it). Search of skin\-file will occur in (to the first one found):
 .PP
 The format of skin files is described in
 .BR %pkgdatadir%/skins/README.txt .
+.PP
+A skin may choose the color scheme for the scope tokens in the editor's
+syntax files with the
+.B syntax_scheme
+key in its
+.B [editor]
+section, set to the name of a
+.I .sublime\-color\-scheme
+file.  The editor's own
+.I editor_syntax_color_scheme
+option takes precedence.  See mcedit(1) for details.
 
 .\"NODE "Filenames Highlight"
 .SH "Filenames Highlight"

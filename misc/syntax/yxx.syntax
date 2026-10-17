@@ -1,205 +1,205 @@
 context default
-    keyword whole auto yellow
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole char yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole default yellow
-    keyword whole do yellow
-    keyword whole double yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extern yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole int yellow
-    keyword whole long yellow
-    keyword whole register yellow
-    keyword whole return yellow
-    keyword whole short yellow
-    keyword whole signed yellow
-    keyword whole sizeof yellow
-    keyword whole static yellow
-    keyword whole struct yellow
-    keyword whole switch yellow
-    keyword whole typedef yellow
-    keyword whole union yellow
-    keyword whole unsigned yellow
-    keyword whole void yellow
-    keyword whole volatile yellow
-    keyword whole while yellow
-    keyword whole asm yellow
-    keyword whole catch yellow
-    keyword whole class yellow
-    keyword whole friend yellow
-    keyword whole delete yellow
-    keyword whole inline yellow
-    keyword whole new yellow
-    keyword whole operator yellow
-    keyword whole private yellow
-    keyword whole protected yellow
-    keyword whole public yellow
-    keyword whole this yellow
-    keyword whole throw yellow
-    keyword whole template yellow
-    keyword whole try yellow
-    keyword whole virtual yellow
-    keyword whole bool yellow
-    keyword whole const_cast yellow
-    keyword whole dynamic_cast yellow
-    keyword whole explicit yellow
-    keyword whole false yellow
-    keyword whole mutable yellow
-    keyword whole namespace yellow
-    keyword whole reinterpret_cast yellow
-    keyword whole static_cast yellow
-    keyword whole true yellow
-    keyword whole typeid yellow
-    keyword whole typename yellow
-    keyword whole using yellow
-    keyword whole wchar_t yellow
-    keyword whole ... yellow
-    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
+        keyword whole auto STORAGE_MODIFIER
+        keyword whole break KEYWORD_CONTROL
+        keyword whole case KEYWORD_CONTROL
+        keyword whole char STORAGE_TYPE_PRIMITIVE
+        keyword whole const STORAGE_MODIFIER
+        keyword whole continue KEYWORD_CONTROL
+        keyword whole default KEYWORD_CONTROL
+        keyword whole do KEYWORD_CONTROL
+        keyword whole double STORAGE_TYPE_PRIMITIVE
+        keyword whole else KEYWORD_CONTROL
+        keyword whole enum STORAGE_TYPE_CLASS
+        keyword whole extern STORAGE_MODIFIER
+        keyword whole float STORAGE_TYPE_PRIMITIVE
+        keyword whole for KEYWORD_CONTROL
+        keyword whole goto KEYWORD_CONTROL
+        keyword whole if KEYWORD_CONTROL
+        keyword whole int STORAGE_TYPE_PRIMITIVE
+        keyword whole long STORAGE_TYPE_PRIMITIVE
+        keyword whole register STORAGE_MODIFIER
+        keyword whole return KEYWORD_CONTROL
+        keyword whole short STORAGE_TYPE_PRIMITIVE
+        keyword whole signed STORAGE_TYPE_PRIMITIVE
+        keyword whole sizeof KEYWORD_OPERATOR_WORD
+        keyword whole static STORAGE_MODIFIER
+        keyword whole struct STORAGE_TYPE_CLASS
+        keyword whole switch KEYWORD_CONTROL
+        keyword whole typedef STORAGE_TYPE
+        keyword whole union STORAGE_TYPE_CLASS
+        keyword whole unsigned STORAGE_TYPE_PRIMITIVE
+        keyword whole void STORAGE_TYPE_PRIMITIVE
+        keyword whole volatile STORAGE_MODIFIER
+        keyword whole while KEYWORD_CONTROL
+        keyword whole asm KEYWORD_OTHER_RESERVED
+        keyword whole catch KEYWORD_CONTROL
+        keyword whole class STORAGE_TYPE_CLASS
+        keyword whole friend STORAGE_MODIFIER
+        keyword whole delete KEYWORD_OTHER_NEW
+        keyword whole inline STORAGE_MODIFIER
+        keyword whole new KEYWORD_OTHER_NEW
+        keyword whole operator KEYWORD_OTHER_RESERVED
+        keyword whole private STORAGE_MODIFIER
+        keyword whole protected STORAGE_MODIFIER
+        keyword whole public STORAGE_MODIFIER
+        keyword whole this VARIABLE_LANGUAGE
+        keyword whole throw KEYWORD_CONTROL
+        keyword whole template KEYWORD_OTHER_RESERVED
+        keyword whole try KEYWORD_CONTROL
+        keyword whole virtual STORAGE_MODIFIER
+        keyword whole bool STORAGE_TYPE_PRIMITIVE
+        keyword whole const_cast KEYWORD_OTHER_RESERVED
+        keyword whole dynamic_cast KEYWORD_OTHER_RESERVED
+        keyword whole explicit STORAGE_MODIFIER
+        keyword whole false CONSTANT_LANGUAGE
+        keyword whole mutable STORAGE_MODIFIER
+        keyword whole namespace KEYWORD_OTHER_RESERVED
+        keyword whole reinterpret_cast KEYWORD_OTHER_RESERVED
+        keyword whole static_cast KEYWORD_OTHER_RESERVED
+        keyword whole true CONSTANT_LANGUAGE
+        keyword whole typeid KEYWORD_OTHER_RESERVED
+        keyword whole typename KEYWORD_OTHER_RESERVED
+        keyword whole using KEYWORD_CONTROL_IMPORT
+        keyword whole wchar_t STORAGE_TYPE_PRIMITIVE
+        keyword whole ... PUNCTUATION_SEPARATOR
+    keyword whole linestart \{\s\t\}\[\s\t\]#*\n META_PREPROCESSOR
 
-    keyword whole accept yellow
-    keyword whole code yellow
-    keyword whole debug yellow
-    keyword whole defines yellow
-    keyword whole destructor yellow
-    keyword whole dprec yellow
-    keyword whole end yellow
-    keyword whole error yellow
-    keyword whole error-verbose yellow
-    keyword whole expect yellow
-    keyword whole file-prefix yellow
-    keyword whole glr-parser yellow
-    keyword whole initial-action yellow
-    keyword whole language yellow
-    keyword whole left yellow
-    keyword whole lex-param yellow
-    keyword whole locations yellow
-    keyword whole merge yellow
-    keyword whole name-prefix yellow
-    keyword whole node yellow
-    keyword whole nonassoc yellow
-    keyword whole no-parser yellow
-    keyword whole no-lines yellow
-    keyword whole output yellow
-    keyword whole parse-param yellow
-    keyword whole prec yellow
-    keyword whole pure-parser yellow
-    keyword whole require yellow
-    keyword whole right yellow
-    keyword whole skeleton yellow
-    keyword whole start yellow
-    keyword whole token yellow
-    keyword whole token-table yellow
-    keyword whole type yellow
-    keyword whole undefined yellow
-    keyword whole union yellow
-    keyword whole verbose yellow
-    keyword whole yacc yellow
+        keyword whole accept KEYWORD_OTHER_RESERVED
+        keyword whole code KEYWORD_OTHER_RESERVED
+        keyword whole debug KEYWORD_OTHER_RESERVED
+        keyword whole defines KEYWORD_OTHER_RESERVED
+        keyword whole destructor KEYWORD_OTHER_RESERVED
+        keyword whole dprec KEYWORD_OTHER_RESERVED
+        keyword whole end KEYWORD_OTHER_RESERVED
+        keyword whole error KEYWORD_OTHER_RESERVED
+        keyword whole error-verbose KEYWORD_OTHER_RESERVED
+        keyword whole expect KEYWORD_OTHER_RESERVED
+        keyword whole file-prefix KEYWORD_OTHER_RESERVED
+        keyword whole glr-parser KEYWORD_OTHER_RESERVED
+        keyword whole initial-action KEYWORD_OTHER_RESERVED
+        keyword whole language KEYWORD_OTHER_RESERVED
+        keyword whole left KEYWORD_OTHER_RESERVED
+        keyword whole lex-param KEYWORD_OTHER_RESERVED
+        keyword whole locations KEYWORD_OTHER_RESERVED
+        keyword whole merge KEYWORD_OTHER_RESERVED
+        keyword whole name-prefix KEYWORD_OTHER_RESERVED
+        keyword whole node KEYWORD_OTHER_RESERVED
+        keyword whole nonassoc KEYWORD_OTHER_RESERVED
+        keyword whole no-parser KEYWORD_OTHER_RESERVED
+        keyword whole no-lines KEYWORD_OTHER_RESERVED
+        keyword whole output KEYWORD_OTHER_RESERVED
+        keyword whole parse-param KEYWORD_OTHER_RESERVED
+        keyword whole prec KEYWORD_OTHER_RESERVED
+        keyword whole pure-parser KEYWORD_OTHER_RESERVED
+        keyword whole require KEYWORD_OTHER_RESERVED
+        keyword whole right KEYWORD_OTHER_RESERVED
+        keyword whole skeleton KEYWORD_OTHER_RESERVED
+        keyword whole start KEYWORD_OTHER_RESERVED
+        keyword whole token KEYWORD_OTHER_RESERVED
+        keyword whole token-table KEYWORD_OTHER_RESERVED
+        keyword whole type KEYWORD_OTHER_RESERVED
+        keyword whole undefined KEYWORD_OTHER_RESERVED
+        keyword whole union STORAGE_TYPE_CLASS
+        keyword whole verbose KEYWORD_OTHER_RESERVED
+        keyword whole yacc KEYWORD_OTHER_RESERVED
 
-    keyword whole YYABORT brightred
-    keyword whole YYACCEPT brightred
-    keyword whole YYBACKUP brightred
-    keyword whole YYDEBUG brightred
-    keyword whole YYERROR brightred
-    keyword whole YYERROR_VERBOSE brightred
-    keyword whole YYINITDEPTH brightred
-    keyword whole YYLEX_PARAM brightred
-    keyword whole YYLTYPE brightred
-    keyword whole YYMAXDEPTH brightred
-    keyword whole YYPARSE_PARAM brightred
-    keyword whole YYRECOVERING brightred
-    keyword whole YYSTACK_USE_ALLOCA brightred
-    keyword whole YYSTYPE brightred
+        keyword whole YYABORT META_PREPROCESSOR
+        keyword whole YYACCEPT META_PREPROCESSOR
+        keyword whole YYBACKUP META_PREPROCESSOR
+        keyword whole YYDEBUG META_PREPROCESSOR
+        keyword whole YYERROR META_PREPROCESSOR
+        keyword whole YYERROR_VERBOSE META_PREPROCESSOR
+        keyword whole YYINITDEPTH META_PREPROCESSOR
+        keyword whole YYLEX_PARAM META_PREPROCESSOR
+        keyword whole YYLTYPE SUPPORT_TYPE
+        keyword whole YYMAXDEPTH META_PREPROCESSOR
+        keyword whole YYPARSE_PARAM META_PREPROCESSOR
+        keyword whole YYRECOVERING META_PREPROCESSOR
+        keyword whole YYSTACK_USE_ALLOCA META_PREPROCESSOR
+        keyword whole YYSTYPE SUPPORT_TYPE
 
-    keyword whole yychar brightmagenta
-    keyword whole yyclearin brightmagenta
-    keyword whole yydebug brightmagenta
-    keyword whole yyerrok brightmagenta
-    keyword whole yyerror brightmagenta
-    keyword whole yylex brightmagenta
-    keyword whole yylloc brightmagenta
-    keyword whole yylval brightmagenta
-    keyword whole yynerrs brightmagenta
-    keyword whole yyparse brightmagenta
-    keyword whole yypstate_delete brightmagenta
-    keyword whole yypstate_new brightmagenta
-    keyword whole yypull_parse brightmagenta
-    keyword whole yypush_parse brightmagenta
-    keyword whole yywrap brightmagenta
+        keyword whole yychar VARIABLE_OTHER
+        keyword whole yyclearin SUPPORT_FUNCTION
+        keyword whole yydebug VARIABLE_OTHER
+        keyword whole yyerrok SUPPORT_FUNCTION
+        keyword whole yyerror SUPPORT_FUNCTION
+        keyword whole yylex SUPPORT_FUNCTION
+        keyword whole yylloc VARIABLE_OTHER
+        keyword whole yylval VARIABLE_OTHER
+        keyword whole yynerrs VARIABLE_OTHER
+        keyword whole yyparse SUPPORT_FUNCTION
+        keyword whole yypstate_delete SUPPORT_FUNCTION
+        keyword whole yypstate_new SUPPORT_FUNCTION
+        keyword whole yypull_parse SUPPORT_FUNCTION
+        keyword whole yypush_parse SUPPORT_FUNCTION
+        keyword whole yywrap SUPPORT_FUNCTION
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+        keyword /\* COMMENT_BLOCK
+        keyword \*/ COMMENT_BLOCK
+        keyword // COMMENT_LINE
 
-    keyword '\\\{"abtnvfr\}' brightgreen
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
-    keyword '\\'' brightgreen
-    keyword '\\\\' brightgreen
-    keyword '\\0' brightgreen
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+        keyword '\\\{"abtnvfr\}' CONSTANT_CHARACTER_ESCAPE
+        keyword '\\\{0123\}\{01234567\}\{01234567\}' CONSTANT_CHARACTER_ESCAPE
+        keyword '\\'' CONSTANT_CHARACTER_ESCAPE
+        keyword '\\\\' CONSTANT_CHARACTER_ESCAPE
+        keyword '\\0' CONSTANT_CHARACTER_ESCAPE
+        keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' CONSTANT_CHARACTER
 
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
-    keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword , brightcyan
-    keyword : brightcyan
-    keyword ? brightcyan
-    keyword ; brightmagenta
+        keyword > KEYWORD_OPERATOR
+        keyword < KEYWORD_OPERATOR
+        keyword \+ KEYWORD_OPERATOR
+        keyword - KEYWORD_OPERATOR
+        keyword \* KEYWORD_OPERATOR
+        keyword / KEYWORD_OPERATOR
+        keyword % KEYWORD_OPERATOR
+        keyword = KEYWORD_OPERATOR
+        keyword != KEYWORD_OPERATOR
+        keyword == KEYWORD_OPERATOR
+        keyword { PUNCTUATION_SECTION
+        keyword } PUNCTUATION_SECTION
+        keyword ( PUNCTUATION_SECTION
+        keyword ) PUNCTUATION_SECTION
+        keyword [ PUNCTUATION_SECTION
+        keyword ] PUNCTUATION_SECTION
+        keyword , PUNCTUATION_SEPARATOR
+        keyword : PUNCTUATION_SEPARATOR
+        keyword ? PUNCTUATION_SEPARATOR
+        keyword ; PUNCTUATION_TERMINATOR
 
-    keyword wholeright %{ brightcyan
-    keyword wholeright %} brightcyan
-    keyword wholeright %% brightcyan
-    keyword % yellow
-    keyword $$ yellow
-    keyword $\[0123456789\] yellow
-    keyword @$ yellow
-    keyword @\[0123456789\] yellow
+        keyword wholeright %{ PUNCTUATION_SECTION
+        keyword wholeright %} PUNCTUATION_SECTION
+        keyword wholeright %% PUNCTUATION_SECTION
+        keyword % KEYWORD_OPERATOR
+        keyword $$ VARIABLE_OTHER
+        keyword $\[0123456789\] VARIABLE_OTHER
+        keyword @$ VARIABLE_OTHER
+        keyword @\[0123456789\] VARIABLE_OTHER
 
-context exclusive /\* \*/ brown
+context exclusive /\* \*/ COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
-    keyword "+" red
-    keyword <+> red
+context linestart # \n META_PREPROCESSOR
+        keyword \\\n CONSTANT_CHARACTER_ESCAPE
+        keyword /\**\*/ COMMENT_BLOCK
+        keyword //*\n COMMENT_LINE
+        keyword "+" STRING_QUOTED_OTHER
+        keyword <+> STRING_QUOTED_OTHER
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+        keyword \\" CONSTANT_CHARACTER_ESCAPE
+        keyword %% CONSTANT_OTHER_PLACEHOLDER
+        keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+        keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+        keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+        keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+        keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+        keyword %c CONSTANT_OTHER_PLACEHOLDER
+        keyword %p CONSTANT_OTHER_PLACEHOLDER
+        keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+        keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+        keyword \\' CONSTANT_CHARACTER_ESCAPE
+        keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE

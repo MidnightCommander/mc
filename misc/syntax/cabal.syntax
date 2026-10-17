@@ -13,194 +13,194 @@ context default
 #   reserved keywords:
 
 #comments
-    keyword -- brown
+    keyword -- COMMENT_LINE
 
 #   unused symbols
-    keyword whole _\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] magenta
+    keyword whole _\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] VARIABLE_OTHER
 
 #   known fields
-    keyword whole \[\s\]author cyan
-    keyword whole \[\s\]bug-reports cyan
-    keyword whole \[\s\]buildable cyan
-    keyword whole \[\s\]build-depends cyan
-    keyword whole \[\s\]build-tools cyan
-    keyword whole \[\s\]build-type cyan
-    keyword whole \[\s\]cabal-version cyan
-    keyword whole \[\s\]category cyan
-    keyword whole \[\s\]cc-options cyan
-    keyword whole \[\s\]copyright cyan
-    keyword whole \[\s\]cpp-options cyan
-    keyword whole \[\s\]c-sources cyan
-    keyword whole \[\s\]data-dir cyan
-    keyword whole \[\s\]data-files cyan
-    keyword whole \[\s\]default-language cyan
-    keyword whole \[\s\]default cyan
-    keyword whole \[\s\]description cyan
-    keyword whole \[\s\]exposed-modules cyan
-    keyword whole \[\s\]exposed cyan
-    keyword whole \[\s\]extensions cyan
-    keyword whole \[\s\]extra-lib-dirs cyan
-    keyword whole \[\s\]extra-libraries cyan
-    keyword whole \[\s\]extra-source-files cyan
-    keyword whole \[\s\]extra-tmp-files cyan
-    keyword whole \[\s\]frameworks cyan
-    keyword whole \[\s\]ghc-options cyan
-    keyword whole \[\s\]ghc-prof-options cyan
-    keyword whole \[\s\]ghc-shared-options cyan
-    keyword whole \[\s\]homepage cyan
-    keyword whole \[\s\]hs-source-dirs cyan
-    keyword whole \[\s\]hugs-options cyan
-    keyword whole \[\s\]include-dirs cyan
-    keyword whole \[\s\]includes cyan
-    keyword whole \[\s\]install-includes cyan
-    keyword whole \[\s\]jhc-options cyan
-    keyword whole \[\s\]ld-options cyan
-    keyword whole \[\s\]license-file cyan
-    keyword whole \[\s\]license cyan
-    keyword whole \[\s\]location cyan
-    keyword whole \[\s\]main-is cyan
-    keyword whole \[\s\]maintainer cyan
-    keyword whole \[\s\]name cyan
-    keyword whole \[\s\]nhc98-options cyan
-    keyword whole \[\s\]other-extensions cyan
-    keyword whole \[\s\]other-modules cyan
-    keyword whole \[\s\]package-url cyan
-    keyword whole \[\s\]pkgconfig-depends cyan
-    keyword whole \[\s\]source-repository cyan
-    keyword whole \[\s\]stability cyan
-    keyword whole \[\s\]synopsis cyan
-    keyword whole \[\s\]tag cyan
-    keyword whole \[\s\]tested-with cyan
-    keyword whole \[\s\]type cyan
-    keyword whole \[\s\]version cyan
+    keyword whole \[\s\]author ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]bug-reports ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]buildable ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]build-depends ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]build-tools ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]build-type ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]cabal-version ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]category ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]cc-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]copyright ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]cpp-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]c-sources ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]data-dir ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]data-files ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]default-language ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]default ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]description ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]exposed-modules ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]exposed ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]extensions ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]extra-lib-dirs ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]extra-libraries ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]extra-source-files ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]extra-tmp-files ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]frameworks ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]ghc-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]ghc-prof-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]ghc-shared-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]homepage ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]hs-source-dirs ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]hugs-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]include-dirs ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]includes ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]install-includes ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]jhc-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]ld-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]license-file ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]license ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]location ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]main-is ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]maintainer ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]name ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]nhc98-options ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]other-extensions ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]other-modules ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]package-url ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]pkgconfig-depends ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]source-repository ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]stability ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]synopsis ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]tag ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]tested-with ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]type ENTITY_OTHER_ATTRIBUTE_NAME
+    keyword whole \[\s\]version ENTITY_OTHER_ATTRIBUTE_NAME
 
 #   extended fields
-    keyword whole x\-\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] cyan
+    keyword whole x\-\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] ENTITY_OTHER_ATTRIBUTE_NAME
 
 #   version wildcard
-    keyword whole -any red
+    keyword whole -any KEYWORD_OPERATOR_WORD
 
 #   commandline keys
-    keyword whole -\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz_0123456789\] brightred
+    keyword whole -\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz_0123456789\] KEYWORD_OPERATOR
 
 #   known extensions
-    keyword whole Arrows brightmagenta
-    keyword whole BangPatterns brightmagenta
-    keyword whole ConstrainedClassMethods brightmagenta
-    keyword whole DeriveDataTypeable brightmagenta
-    keyword whole DisambiguateRecordFields brightmagenta
-    keyword whole EmptyDataDecls brightmagenta
-    keyword whole CPP brightmagenta
-    keyword whole ExistentialQuantification brightmagenta
-    keyword whole ExtendedDefaultRules brightmagenta
-    keyword whole ExtensibleRecords brightmagenta
-    keyword whole FlexibleContexts brightmagenta
-    keyword whole FlexibleInstances brightmagenta
-    keyword whole ForeignFunctionInterface brightmagenta
-    keyword whole FunctionalDependencies brightmagenta
-    keyword whole GADTs brightmagenta
-    keyword whole GeneralizedNewtypeDeriving brightmagenta
-    keyword whole Generics brightmagenta
-    keyword whole HereDocuments brightmagenta
-    keyword whole ImplicitParams brightmagenta
-    keyword whole ImpredicativeTypes brightmagenta
-    keyword whole IncoherentInstances brightmagenta
-    keyword whole KindSignatures brightmagenta
-    keyword whole LiberalTypeSynonyms brightmagenta
-    keyword whole MagicHash brightmagenta
-    keyword whole MultiParamTypeClasses brightmagenta
-    keyword whole NamedFieldPuns brightmagenta
-    keyword whole NewQualifiedOperators brightmagenta
-    keyword whole NoImplicitPrelude brightmagenta
-    keyword whole NoMonomorphismRestriction brightmagenta
-    keyword whole NoMonoPatBinds brightmagenta
-    keyword whole OverlappingInstances brightmagenta
-    keyword whole OverloadedStrings brightmagenta
-    keyword whole PackageImports brightmagenta
-    keyword whole ParallelListComp brightmagenta
-    keyword whole PatternGuards brightmagenta
-    keyword whole PatternSignatures brightmagenta
-    keyword whole PolymorphicComponents brightmagenta
-    keyword whole PostfixOperators brightmagenta
-    keyword whole QuasiQuotes brightmagenta
-    keyword whole Rank2Types brightmagenta
-    keyword whole RankNTypes brightmagenta
-    keyword whole RecordPuns brightmagenta
-    keyword whole RecordWildCards brightmagenta
-    keyword whole RecursiveDo brightmagenta
-    keyword whole RelaxedPolyRec brightmagenta
-    keyword whole RestrictedTypeSynonyms brightmagenta
-    keyword whole ScopedTypeVariables brightmagenta
-    keyword whole StandaloneDeriving brightmagenta
-    keyword whole TemplateHaskell brightmagenta
-    keyword whole TransformListComp brightmagenta
-    keyword whole TypeFamilies brightmagenta
-    keyword whole TypeOperators brightmagenta
-    keyword whole TypeSynonymInstances brightmagenta
-    keyword whole UnboxedTuples brightmagenta
-    keyword whole UndecidableInstances brightmagenta
-    keyword whole UnicodeSyntax brightmagenta
-    keyword whole UnliftedFFITypes brightmagenta
-    keyword whole ViewPatterns brightmagenta
+    keyword whole Arrows CONSTANT_OTHER
+    keyword whole BangPatterns CONSTANT_OTHER
+    keyword whole ConstrainedClassMethods CONSTANT_OTHER
+    keyword whole DeriveDataTypeable CONSTANT_OTHER
+    keyword whole DisambiguateRecordFields CONSTANT_OTHER
+    keyword whole EmptyDataDecls CONSTANT_OTHER
+    keyword whole CPP CONSTANT_OTHER
+    keyword whole ExistentialQuantification CONSTANT_OTHER
+    keyword whole ExtendedDefaultRules CONSTANT_OTHER
+    keyword whole ExtensibleRecords CONSTANT_OTHER
+    keyword whole FlexibleContexts CONSTANT_OTHER
+    keyword whole FlexibleInstances CONSTANT_OTHER
+    keyword whole ForeignFunctionInterface CONSTANT_OTHER
+    keyword whole FunctionalDependencies CONSTANT_OTHER
+    keyword whole GADTs CONSTANT_OTHER
+    keyword whole GeneralizedNewtypeDeriving CONSTANT_OTHER
+    keyword whole Generics CONSTANT_OTHER
+    keyword whole HereDocuments CONSTANT_OTHER
+    keyword whole ImplicitParams CONSTANT_OTHER
+    keyword whole ImpredicativeTypes CONSTANT_OTHER
+    keyword whole IncoherentInstances CONSTANT_OTHER
+    keyword whole KindSignatures CONSTANT_OTHER
+    keyword whole LiberalTypeSynonyms CONSTANT_OTHER
+    keyword whole MagicHash CONSTANT_OTHER
+    keyword whole MultiParamTypeClasses CONSTANT_OTHER
+    keyword whole NamedFieldPuns CONSTANT_OTHER
+    keyword whole NewQualifiedOperators CONSTANT_OTHER
+    keyword whole NoImplicitPrelude CONSTANT_OTHER
+    keyword whole NoMonomorphismRestriction CONSTANT_OTHER
+    keyword whole NoMonoPatBinds CONSTANT_OTHER
+    keyword whole OverlappingInstances CONSTANT_OTHER
+    keyword whole OverloadedStrings CONSTANT_OTHER
+    keyword whole PackageImports CONSTANT_OTHER
+    keyword whole ParallelListComp CONSTANT_OTHER
+    keyword whole PatternGuards CONSTANT_OTHER
+    keyword whole PatternSignatures CONSTANT_OTHER
+    keyword whole PolymorphicComponents CONSTANT_OTHER
+    keyword whole PostfixOperators CONSTANT_OTHER
+    keyword whole QuasiQuotes CONSTANT_OTHER
+    keyword whole Rank2Types CONSTANT_OTHER
+    keyword whole RankNTypes CONSTANT_OTHER
+    keyword whole RecordPuns CONSTANT_OTHER
+    keyword whole RecordWildCards CONSTANT_OTHER
+    keyword whole RecursiveDo CONSTANT_OTHER
+    keyword whole RelaxedPolyRec CONSTANT_OTHER
+    keyword whole RestrictedTypeSynonyms CONSTANT_OTHER
+    keyword whole ScopedTypeVariables CONSTANT_OTHER
+    keyword whole StandaloneDeriving CONSTANT_OTHER
+    keyword whole TemplateHaskell CONSTANT_OTHER
+    keyword whole TransformListComp CONSTANT_OTHER
+    keyword whole TypeFamilies CONSTANT_OTHER
+    keyword whole TypeOperators CONSTANT_OTHER
+    keyword whole TypeSynonymInstances CONSTANT_OTHER
+    keyword whole UnboxedTuples CONSTANT_OTHER
+    keyword whole UndecidableInstances CONSTANT_OTHER
+    keyword whole UnicodeSyntax CONSTANT_OTHER
+    keyword whole UnliftedFFITypes CONSTANT_OTHER
+    keyword whole ViewPatterns CONSTANT_OTHER
 
 #   links
-    keyword http://+ gray
-    keyword https://+ gray
-    keyword ftp://+ gray
-    keyword git://+ gray
-    keyword cvs://+ gray
-    keyword svn://+ gray
-    keyword darcs://+ gray
+    keyword http://+ STRING_UNQUOTED
+    keyword https://+ STRING_UNQUOTED
+    keyword ftp://+ STRING_UNQUOTED
+    keyword git://+ STRING_UNQUOTED
+    keyword cvs://+ STRING_UNQUOTED
+    keyword svn://+ STRING_UNQUOTED
+    keyword darcs://+ STRING_UNQUOTED
 #   special text inside of <>, i.e. emails
-    keyword \<+\> red
+    keyword \<+\> KEYWORD_OPERATOR
 
 #   build types with '\s & \n' hack to remove too stupid highlighting
-    keyword whole Configure\s white
-    keyword whole Configure\n white
-    keyword whole Custom\s white
-    keyword whole Custom\n white
-    keyword whole Make\s white
-    keyword whole Make\n white
-    keyword whole Simple\n white
-    keyword whole Simple\s white
+    keyword whole Configure\s CONSTANT_OTHER
+    keyword whole Configure\n CONSTANT_OTHER
+    keyword whole Custom\s CONSTANT_OTHER
+    keyword whole Custom\n CONSTANT_OTHER
+    keyword whole Make\s CONSTANT_OTHER
+    keyword whole Make\n CONSTANT_OTHER
+    keyword whole Simple\n CONSTANT_OTHER
+    keyword whole Simple\s CONSTANT_OTHER
 
 #   licenses
-    keyword whole AllRightsReserved white
-    keyword whole OtherLicense white
-    keyword whole PublicDomain white
-    keyword whole LGPL white
-    keyword whole GPL white
-    keyword whole LGPL2 white
-    keyword whole GPL2 white
-    keyword whole LGPL3 white
-    keyword whole GPL3 white
-    keyword whole BSD white
-    keyword whole BSD3 white
-    keyword whole BSD4 white
-    keyword whole MIT white
+    keyword whole AllRightsReserved CONSTANT_OTHER
+    keyword whole OtherLicense CONSTANT_OTHER
+    keyword whole PublicDomain CONSTANT_OTHER
+    keyword whole LGPL CONSTANT_OTHER
+    keyword whole GPL CONSTANT_OTHER
+    keyword whole LGPL2 CONSTANT_OTHER
+    keyword whole GPL2 CONSTANT_OTHER
+    keyword whole LGPL3 CONSTANT_OTHER
+    keyword whole GPL3 CONSTANT_OTHER
+    keyword whole BSD CONSTANT_OTHER
+    keyword whole BSD3 CONSTANT_OTHER
+    keyword whole BSD4 CONSTANT_OTHER
+    keyword whole MIT CONSTANT_OTHER
 
 #   compilers
-    keyword whole GHC white
-    keyword whole NHC white
-    keyword whole JHC white
-    keyword whole HBC white
-    keyword whole Helium white
-    keyword whole Hugs white
+    keyword whole GHC CONSTANT_OTHER
+    keyword whole NHC CONSTANT_OTHER
+    keyword whole JHC CONSTANT_OTHER
+    keyword whole HBC CONSTANT_OTHER
+    keyword whole Helium CONSTANT_OTHER
+    keyword whole Hugs CONSTANT_OTHER
 
 #   special keywords
-    keyword whole True white
-    keyword whole False white
-    keyword whole if white
-    keyword whole else white
-    keyword whole os white
-    keyword whole impl white
-    keyword whole arch white
+    keyword whole True CONSTANT_OTHER
+    keyword whole False CONSTANT_OTHER
+    keyword whole if CONSTANT_OTHER
+    keyword whole else CONSTANT_OTHER
+    keyword whole os CONSTANT_OTHER
+    keyword whole impl CONSTANT_OTHER
+    keyword whole arch CONSTANT_OTHER
 
-    keyword whole linestart \[\s\]executable yellow
-    keyword whole linestart \[\s\]library yellow
-    keyword whole linestart \[\s\]test-suite yellow
-    keyword whole flag yellow
-    keyword whole repo yellow
+    keyword whole linestart \[\s\]executable KEYWORD_OPERATOR
+    keyword whole linestart \[\s\]library KEYWORD_OPERATOR
+    keyword whole linestart \[\s\]test-suite KEYWORD_OPERATOR
+    keyword whole flag KEYWORD_OTHER_RESERVED
+    keyword whole repo KEYWORD_OTHER_RESERVED
 
 
 #   unboxed (started from upcase)
@@ -209,68 +209,68 @@ context default
 #    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
 
 #digits
-    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\] brightgreen
-    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] CONSTANT_NUMERIC
 
 
 # some punctuation characters
-    keyword whole $ yellow
-    keyword whole ! white
-    keyword whole && white
-    keyword whole \* yellow
-    keyword whole \+ yellow
-    keyword whole / yellow
-    keyword whole ^ white
-    keyword whole || white
-    keyword whole | white
+    keyword whole $ VARIABLE_OTHER
+    keyword whole ! CONSTANT_OTHER
+    keyword whole && CONSTANT_OTHER
+    keyword whole \* KEYWORD_OPERATOR
+    keyword whole \+ KEYWORD_OPERATOR
+    keyword whole / KEYWORD_OPERATOR
+    keyword whole ^ CONSTANT_OTHER
+    keyword whole || CONSTANT_OTHER
+    keyword whole | CONSTANT_OTHER
 
-    keyword ~ white
-    keyword , brightcyan
-    keyword - yellow
-    keyword : brightcyan
-    keyword ; yellow
-    keyword = yellow
-    keyword < yellow
-    keyword > yellow
-    keyword { white
-    keyword } white
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
+    keyword ~ CONSTANT_OTHER
+    keyword , PUNCTUATION_SEPARATOR
+    keyword - KEYWORD_OPERATOR
+    keyword : PUNCTUATION_SEPARATOR
+    keyword ; PUNCTUATION_TERMINATOR
+    keyword = KEYWORD_OPERATOR
+    keyword < KEYWORD_OPERATOR
+    keyword > KEYWORD_OPERATOR
+    keyword { CONSTANT_OTHER
+    keyword } CONSTANT_OTHER
+    keyword [ PUNCTUATION_SECTION
+    keyword ] PUNCTUATION_SECTION
+    keyword ( PUNCTUATION_SECTION
+    keyword ) PUNCTUATION_SECTION
 
 # comments
-context exclusive {- -} brown
+context exclusive {- -} COMMENT_BLOCK
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n COMMENT_LINE
     spellcheck
 
-context exclusive \-\- \n brown
+context exclusive \-\- \n COMMENT_LINE
     spellcheck
 
-context " " green
+context " " STRING_QUOTED_DOUBLE
     spellcheck
 
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword \\" CONSTANT_CHARACTER_ESCAPE
+    keyword %% CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[hl\]n CONSTANT_OTHER_PLACEHOLDER
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s CONSTANT_OTHER_PLACEHOLDER
+    keyword %[*] CONSTANT_OTHER_PLACEHOLDER
+    keyword %c CONSTANT_OTHER_PLACEHOLDER
+    keyword %p CONSTANT_OTHER_PLACEHOLDER
+    keyword \\\{0123\}\{01234567\}\{01234567\} CONSTANT_CHARACTER_ESCAPE
+    keyword \\\\ CONSTANT_CHARACTER_ESCAPE
+    keyword \\' CONSTANT_CHARACTER_ESCAPE
+    keyword \\\{abtnvfr\} CONSTANT_CHARACTER_ESCAPE
 
 # infix binop
-context exclusive ` ` white
+context exclusive ` ` STRING_QUOTED_OTHER
