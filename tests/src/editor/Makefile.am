@@ -10,10 +10,6 @@ LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/src/libinternal.la \
 	$(top_builddir)/lib/libmc.la
 
-if ENABLE_MCLIB
-LIBS += $(GLIB_LIBS)
-endif
-
 EXTRA_DIST = edit_complete_word_cmd_test_data.txt.in
 
 TESTS = \

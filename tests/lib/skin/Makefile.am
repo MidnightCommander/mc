@@ -10,11 +10,6 @@ LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/src/libinternal.la \
 	$(top_builddir)/lib/libmc.la
 
-if ENABLE_MCLIB
-LIBS += $(GLIB_LIBS) \
-	@E2P_LIBS@
-endif
-
 EXTRA_DIST = \
 	fixtures/skins/dark.ini \
 	fixtures/skins/julia256.ini \

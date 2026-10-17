@@ -1,17 +1,6 @@
 SUBDIRS = event filehighlight mcconfig search skin tty vfs strutil widget .
 
-if ENABLE_MCLIB
-    LIB_VERSION=`echo $(LIBMC_VERSION) | \
-	tr '.' ' '| \
-	while read v1 v2 v3; do echo $$v2':'$$v3':'$$v1; done`
-
-    AM_LDFLAGS=-no-undefined -version-info $(LIB_VERSION) -release $(LIBMC_RELEASE)
-
-    lib_LTLIBRARIES = libmc.la
-else
-    noinst_LTLIBRARIES = libmc.la
-endif
-
+noinst_LTLIBRARIES = libmc.la
 
 SUBLIB_includes = \
 	event.h event-types.h \
