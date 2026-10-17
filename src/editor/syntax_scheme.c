@@ -182,6 +182,8 @@ static const char *const scheme_exts[] = { SYNTAX_SCHEME_EXT, ".json" };
 
 static syntax_scheme_t *current_scheme = NULL;
 static char *current_name = NULL;
+// why the selected scheme could not be used, NULL if it loaded
+static char *current_error = NULL;
 
 /* the skin's [editor] syntax_scheme, cached per skin: reading it from the skin config on
    every token lookup made loading a large syntax file noticeably slower */
@@ -979,8 +981,20 @@ ensure_scheme (void)
     if (*name != '\0')
     {
         path = find_scheme_file (name);
-        if (path != NULL)
-            current_scheme = syntax_scheme_load (path, NULL);
+        if (path == NULL)
+            current_error = g_strdup_printf (_ ("Cannot find scheme \"%s\""), name);
+        else
+        {
+            GError *error = NULL;
+
+            current_scheme = syntax_scheme_load (path, &error);
+            if (current_scheme == NULL)
+            {
+                current_error =
+                    g_strdup (error != NULL ? error->message : _ ("Cannot load scheme"));
+                g_clear_error (&error);
+            }
+        }
         g_free (path);
     }
 
@@ -1055,19 +1069,29 @@ parse_sublime (const jv_t *root, syntax_scheme_t *scheme)
 
 /* VS Code color theme: colors["editor.foreground"], tokenColors[{scope, settings}] */
 static jv_t *
-load_json (const char *dir, const char *name, char **dir_out)
+load_json (const char *dir, const char *name, jv_type_t type, char **dir_out, GError **error)
 {
     char *path, *text;
     jv_t *root = NULL;
 
     path =
         g_path_is_absolute (name) ? g_strdup (name) : g_build_filename (dir, name, (char *) NULL);
-    if (g_file_get_contents (path, &text, NULL, NULL))
+    if (!g_file_get_contents (path, &text, NULL, NULL))
+        g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT, "cannot read \"%s\"", name);
+    else
     {
-        jv_parser_t ps = { text, 1, NULL };
+        jv_parser_t ps = { text, 1, error };
 
         root = jv_parse_value (&ps);
         g_free (text);
+        if (root != NULL && root->type != type)
+        {
+            jv_error (&ps, type == JV_OBJECT ? "object expected" : "array expected");
+            jv_free (root);
+            root = NULL;
+        }
+        if (root == NULL)
+            g_prefix_error (error, "%s: ", name);
     }
 
     if (root != NULL && dir_out != NULL)
@@ -1141,22 +1165,30 @@ add_token_colors (const jv_t *section, syntax_scheme_t *scheme)
  * "include" and a tokenColors file name are resolved relative to @dir (NULL: ignored);
  * included rules come first, so the theme's own rules win ties.
  */
-static void
-parse_vscode (const jv_t *root, syntax_scheme_t *scheme, const char *dir, int depth)
+static gboolean
+parse_vscode (const jv_t *root, syntax_scheme_t *scheme, const char *dir, int depth, GError **error)
 {
     const jv_t *section, *v;
 
     v = jv_get (root, "include", JV_STRING);
-    if (v != NULL && dir != NULL && depth < MAX_VAR_DEPTH)
+    if (v != NULL && dir != NULL)
     {
         char *inc_dir = NULL;
         jv_t *inc;
+        gboolean ok;
 
-        inc = load_json (dir, v->str, &inc_dir);
-        if (inc != NULL && inc->type == JV_OBJECT)
-            parse_vscode (inc, scheme, inc_dir, depth + 1);
+        if (depth >= MAX_VAR_DEPTH)
+        {
+            g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_INVAL, "includes nested too deeply");
+            return FALSE;
+        }
+
+        inc = load_json (dir, v->str, JV_OBJECT, &inc_dir, error);
+        ok = inc != NULL && parse_vscode (inc, scheme, inc_dir, depth + 1, error);
         jv_free (inc);
         g_free (inc_dir);
+        if (!ok)
+            return FALSE;
     }
 
     section = jv_get (root, "colors", JV_OBJECT);
@@ -1172,13 +1204,16 @@ parse_vscode (const jv_t *root, syntax_scheme_t *scheme, const char *dir, int de
     {
         jv_t *list;
 
-        list = load_json (dir, v->str, NULL);
-        if (list != NULL && list->type == JV_ARRAY)
-            add_token_colors (list, scheme);
+        list = load_json (dir, v->str, JV_ARRAY, NULL, error);
+        if (list == NULL)
+            return FALSE;
+        add_token_colors (list, scheme);
         jv_free (list);
     }
     else
         add_token_colors (jv_get (root, "tokenColors", JV_ARRAY), scheme);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1215,7 +1250,13 @@ parse_text (const char *text, const char *dir, GError **error)
     scheme->rules = g_ptr_array_new_with_free_func (scheme_rule_free);
 
     if (is_vscode (root))
-        parse_vscode (root, scheme, dir, 0);
+    {
+        if (!parse_vscode (root, scheme, dir, 0, error))
+        {
+            syntax_scheme_free (scheme);
+            scheme = NULL;
+        }
+    }
     else
         parse_sublime (root, scheme);
 
@@ -1493,6 +1534,19 @@ syntax_scheme_list (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Why the configured scheme could not be loaded (the built-in colors are used instead);
+ * NULL if it loaded or none is set.
+ */
+
+const char *
+syntax_scheme_error (void)
+{
+    ensure_scheme ();
+    return current_error;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Format of the file scheme @name resolves to: "Sublime" or "VS Code"; NULL if not found.
  */
 
@@ -1517,6 +1571,7 @@ syntax_scheme_done (void)
     syntax_scheme_free (current_scheme);
     current_scheme = NULL;
     MC_PTR_FREE (current_name);
+    MC_PTR_FREE (current_error);
     MC_PTR_FREE (skin_scheme_name);
     MC_PTR_FREE (skin_name_seen);
     skin_config_seen = NULL;

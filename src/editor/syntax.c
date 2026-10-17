@@ -157,6 +157,12 @@ typedef struct
 /* state of the color scheme dialog */
 static WGroup *scheme_dialog_editors = NULL;
 static WListbox *scheme_dialog_list = NULL;
+static WLabel *scheme_dialog_status = NULL;
+/* scheme load errors stand out in the skin's error colors */
+static const label_colors_t scheme_error_colors = {
+    [LABEL_COLOR_MAIN] = ERROR_NORMAL_COLOR,
+    [LABEL_COLOR_DISABLED] = CORE_DISABLED_COLOR,  // unused
+};
 static const GPtrArray *scheme_dialog_names = NULL;
 
 static char *error_file_name = NULL;
@@ -1550,12 +1556,42 @@ scheme_apply (const GPtrArray *names, int n)
 /* --------------------------------------------------------------------------------------------- */
 
 /* preview the scheme as the selection moves */
+/* show why the selected scheme is not used, under the dialog frame */
+static void
+scheme_status_update (void)
+{
+    const char *error;
+
+    if (scheme_dialog_status == NULL)
+        return;
+
+    error = syntax_scheme_error ();
+    if (error == NULL)
+        label_set_text (scheme_dialog_status, "");
+    else
+    {
+        char *text;
+
+        text = g_strdup_printf (_ ("Error: %s"), error);
+        label_set_text (scheme_dialog_status,
+                        str_trunc (text, WIDGET (scheme_dialog_list)->rect.cols));
+        g_free (text);
+    }
+
+    // the label shrinks with its text: repaint the dialog so no old message is left behind
+    if (widget_get_state (WIDGET (WIDGET (scheme_dialog_status)->owner), WST_ACTIVE))
+        widget_draw (WIDGET (WIDGET (scheme_dialog_status)->owner));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 scheme_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     if (msg == MSG_NOTIFY && parm == 0 && sender != NULL && sender == WIDGET (scheme_dialog_list))
     {
         scheme_apply (scheme_dialog_names, scheme_dialog_list->current);
+        scheme_status_update ();
         return MSG_HANDLED;
     }
 
@@ -1763,6 +1799,11 @@ edit_syntax_scheme_dialog (WEdit *edit)
     scheme_dialog_editors = GROUP (WIDGET (edit)->owner);
     scheme_dialog_list = list->list;
     scheme_dialog_names = names;
+    // the row under the bottom frame line, in the dialog margin
+    scheme_dialog_status = label_new (WIDGET (list->list)->rect.lines + 3, 2, "");
+    scheme_dialog_status->color = scheme_error_colors;
+    group_add_widget (GROUP (list->dlg), scheme_dialog_status);
+    scheme_status_update ();
     WIDGET (list->dlg)->callback = scheme_dialog_callback;
 
     n = listbox_run (list);
@@ -1782,6 +1823,7 @@ edit_syntax_scheme_dialog (WEdit *edit)
 
     scheme_dialog_editors = NULL;
     scheme_dialog_list = NULL;
+    scheme_dialog_status = NULL;
     scheme_dialog_names = NULL;
     g_free (saved);
     g_ptr_array_free (names, TRUE);

@@ -27,7 +27,9 @@
 #include <glib/gstdio.h>
 
 #include "lib/fileloc.h"
+#include "lib/util.h"  // MC_PTR_FREE
 
+#include "src/editor/edit-impl.h"  // edit_options
 #include "src/editor/syntax_scheme.h"
 
 /* lenient JSON: comments, trailing commas, variables */
@@ -308,6 +310,45 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* a missing or broken included file fails the whole theme */
+START_TEST (test_vscode_include_error)
+{
+    char *dir, *files[3];
+    GError *error = NULL;
+    syntax_scheme_t *theme;
+    int i;
+
+    // given
+    dir = g_dir_make_tmp ("mc-scheme-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    files[0] = write_file (dir, "missing.json", "{ \"include\": \"./nope.json\" }");
+    files[1] = write_file (dir, "tokens.json", "{ \"scope\": \"comment\" }");
+    files[2] = write_file (dir, "bad.json", "{ \"tokenColors\": \"tokens.json\" }");
+
+    // when/then: include not found
+    theme = syntax_scheme_load (files[0], &error);
+    mctest_assert_null (theme);
+    mctest_assert_str_eq (error->message, "cannot read \"./nope.json\"");
+    g_clear_error (&error);
+
+    // tokenColors file is not an array
+    theme = syntax_scheme_load (files[2], &error);
+    mctest_assert_null (theme);
+    mctest_assert_str_eq (error->message, "tokens.json: line 1: array expected");
+    g_clear_error (&error);
+
+    for (i = 0; i < 3; i++)
+    {
+        g_unlink (files[i]);
+        g_free (files[i]);
+    }
+    g_rmdir (dir);
+    g_free (dir);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* scheme format shown in the chooser; a Sublime scheme wins over a same-named VS Code theme */
 START_TEST (test_scheme_type)
 {
@@ -354,6 +395,44 @@ START_TEST (test_scheme_type)
     g_free (dir);
     g_free (syntax_dir);
     g_free (share);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* reason a configured scheme is not used, shown in the chooser */
+START_TEST (test_scheme_error)
+{
+    char *dir, *good, *bad;
+
+    // given
+    dir = g_dir_make_tmp ("mc-scheme-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    good = write_file (dir, "good.json", "{ \"tokenColors\": [] }");
+    bad = write_file (dir, "bad.json", "{\n \"rules\": [ { \"scope\" \"x\" } ]\n}");
+
+    // when/then: missing
+    edit_options.syntax_color_scheme = g_strdup ("no-such-scheme");
+    mctest_assert_str_eq (syntax_scheme_error (), "Cannot find scheme \"no-such-scheme\"");
+
+    // broken
+    g_free (edit_options.syntax_color_scheme);
+    edit_options.syntax_color_scheme = g_strdup (bad);
+    mctest_assert_str_eq (syntax_scheme_error (), "line 2: ':' expected");
+
+    // fine
+    g_free (edit_options.syntax_color_scheme);
+    edit_options.syntax_color_scheme = g_strdup (good);
+    mctest_assert_null (syntax_scheme_error ());
+
+    syntax_scheme_done ();
+    MC_PTR_FREE (edit_options.syntax_color_scheme);
+    g_unlink (good);
+    g_unlink (bad);
+    g_rmdir (dir);
+    g_free (good);
+    g_free (bad);
+    g_free (dir);
 }
 END_TEST
 
@@ -409,7 +488,9 @@ main (void)
     mctest_add_parameterized_test (tc_core, test_builtin, test_builtin_ds);
     mctest_add_parameterized_test (tc_core, test_vscode, test_vscode_ds);
     tcase_add_test (tc_core, test_vscode_include);
+    tcase_add_test (tc_core, test_vscode_include_error);
     tcase_add_test (tc_core, test_scheme_type);
+    tcase_add_test (tc_core, test_scheme_error);
     tcase_add_test (tc_core, test_tokens);
     tcase_add_test (tc_core, test_parse_error);
     // ***********************************

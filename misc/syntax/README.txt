@@ -62,9 +62,10 @@ Choosing a color scheme
 -----------------------
 
 In the editor: Options -> Color scheme (Alt-Shift-S).  The list shows the
-format of each scheme (Sublime or VS Code) on the right.  The choice is stored
-as editor_syntax_color_scheme in the [Midnight-Commander] section of the ini
-file.
+format of each scheme (Sublime or VS Code) on the right.  A scheme that cannot
+be loaded leaves the built-in colors, and the reason is shown under the list.
+The choice is stored as editor_syntax_color_scheme in the [Midnight-Commander]
+section of the ini file.
 
 When that option is empty, a skin can suggest a scheme with the key
 syntax_scheme in its [editor] section.  When neither is set, the built-in
@@ -324,5 +325,7 @@ the default foreground when "editor.foreground" is missing.  All other
 come first, so the including theme's own rules win.  Includes may be nested
 (VS Code's Dark Modern includes Dark+, which includes Dark), so copy the
 whole chain into the same directory.  "tokenColors" may also be the name of a
-JSON file holding the list of rules.  "semanticTokenColors" and .tmTheme
+JSON file holding the list of rules.  If an included file is missing or
+broken, the whole theme is not used and the chooser shows why.
+"semanticTokenColors" and .tmTheme
 files are not supported.
