@@ -474,6 +474,54 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* hostile input is rejected with an error instead of crashing */
+START_TEST (test_hostile_input)
+{
+    GError *error = NULL;
+    syntax_scheme_t *bad;
+    syntax_scheme_style_t style;
+    GString *deep;
+    char *dir;
+
+    // a \u escape cut short by the end of input
+    bad = syntax_scheme_parse ("{ \"a\": \"\\u1", &error);
+    mctest_assert_null (bad);
+    mctest_assert_str_eq (error->message, "line 1: bad \\u escape");
+    g_clear_error (&error);
+
+    // nesting deep enough to overflow the stack of a recursive parser
+    deep = g_string_new (NULL);
+    while (deep->len < 100000)
+        g_string_append_c (deep, '[');
+    bad = syntax_scheme_parse (deep->str, &error);
+    mctest_assert_null (bad);
+    mctest_assert_str_eq (error->message, "line 1: nested too deeply");
+    g_clear_error (&error);
+    g_string_free (deep, TRUE);
+
+    // non-finite numbers in colors are not colors
+    bad = syntax_scheme_parse ("{ \"rules\": [ { \"scope\": \"comment\", "
+                               "\"foreground\": \"rgb(nan, inf, 0)\" } ] }",
+                               NULL);
+    mctest_assert_not_null (bad);
+    syntax_scheme_resolve (bad, NULL, "comment", SYNTAX_SCHEME_DEPTH_256, &style);
+    mctest_assert_str_eq (style.fg, "");
+    syntax_scheme_free (bad);
+
+    // a directory (like a FIFO or a device) is not read
+    dir = g_dir_make_tmp ("mc-scheme-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    bad = syntax_scheme_load (dir, &error);
+    mctest_assert_null (bad);
+    mctest_assert_str_eq (error->message, "not a regular file");
+    g_clear_error (&error);
+    g_rmdir (dir);
+    g_free (dir);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -493,6 +541,7 @@ main (void)
     tcase_add_test (tc_core, test_scheme_error);
     tcase_add_test (tc_core, test_tokens);
     tcase_add_test (tc_core, test_parse_error);
+    tcase_add_test (tc_core, test_hostile_input);
     // ***********************************
 
     return mctest_run_all (tc_core);

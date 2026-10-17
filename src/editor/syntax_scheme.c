@@ -34,10 +34,12 @@
 #include <config.h>
 
 #include <ctype.h>
+#include <errno.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include "lib/global.h"
 #include "lib/fileloc.h"  // EDIT_SYNTAX_DIR
@@ -55,6 +57,9 @@
 /*** file scope macro definitions ****************************************************************/
 
 #define MAX_VAR_DEPTH 8
+// limits against hostile scheme files
+#define MAX_JSON_DEPTH       256
+#define MAX_SCHEME_FILE_SIZE (4 * 1024 * 1024)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -80,6 +85,7 @@ typedef struct
 {
     const char *p;
     int line;
+    int depth;  // nesting of containers
     GError **error;
 } jv_parser_t;
 
@@ -307,15 +313,20 @@ jv_parse_string (jv_parser_t *ps)
             break;
         case 'u':
         {
-            unsigned int u;
+            gunichar u = 0;
+            int k;
 
-            if (sscanf (ps->p + 1, "%4x", &u) != 1)
+            for (k = 1; k <= 4; k++)
             {
-                jv_error (ps, "bad \\u escape");
-                g_string_free (s, TRUE);
-                return NULL;
+                if (!g_ascii_isxdigit (ps->p[k]))
+                {
+                    jv_error (ps, "bad \\u escape");
+                    g_string_free (s, TRUE);
+                    return NULL;
+                }
+                u = u * 16 + (gunichar) g_ascii_xdigit_value (ps->p[k]);
             }
-            g_string_append_unichar (s, (gunichar) u);
+            g_string_append_unichar (s, u);
             ps->p += 4;
             break;
         }
@@ -339,6 +350,13 @@ jv_parse_container (jv_parser_t *ps, gboolean is_object)
 {
     const char close = is_object ? '}' : ']';
     jv_t *v;
+
+    if (ps->depth >= MAX_JSON_DEPTH)
+    {
+        jv_error (ps, "nested too deeply");
+        return NULL;
+    }
+    ps->depth++;
 
     v = g_new0 (jv_t, 1);
     v->type = is_object ? JV_OBJECT : JV_ARRAY;
@@ -395,9 +413,11 @@ jv_parse_container (jv_parser_t *ps, gboolean is_object)
     }
 
     ps->p++;  // closing bracket
+    ps->depth--;
     return v;
 
 fail:
+    ps->depth--;
     jv_free (v);
     return NULL;
 }
@@ -582,6 +602,8 @@ parse_color (const syntax_scheme_t *scheme, const char *text, int depth, rgba_t 
                 if ((strncmp (p, "alpha(", 6) == 0 && sscanf (p + 6, "%lf", &alpha) == 1)
                     || (strncmp (p, "a(", 2) == 0 && sscanf (p + 2, "%lf", &alpha) == 1))
                 {
+                    if (!isfinite (alpha))
+                        break;
                     if (strchr (p, '%') != NULL && strchr (p, '%') < strchr (p, ')'))
                         alpha /= 100.0;
                     out->a = CLAMP (alpha, 0.0, 1.0);
@@ -634,7 +656,7 @@ parse_color (const syntax_scheme_t *scheme, const char *text, int depth, rgba_t 
                 while (*p != '\0' && (isspace ((unsigned char) *p) || *p == ',' || *p == '/'))
                     p++;
                 v[n] = g_ascii_strtod (p, &end);
-                if (end == p)
+                if (end == p || !isfinite (v[n]))  // "nan", "inf"
                     break;
                 p = end;
                 if (*p == '%')
@@ -711,7 +733,7 @@ static int
 cube_index (double v)
 {
     // xterm cube levels: 0, 95, 135, 175, 215, 255
-    return v < 48 ? 0 : v < 115 ? 1 : (int) ((v - 35) / 40);
+    return v < 48 ? 0 : v < 115 ? 1 : v >= 255 ? 5 : (int) ((v - 35) / 40);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1067,6 +1089,35 @@ parse_sublime (const jv_t *root, syntax_scheme_t *scheme)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* read a scheme file: only regular files of sane size, so a FIFO or /dev/zero cannot hang mc */
+static gboolean
+read_scheme_file (const char *path, char **text, GError **error)
+{
+    struct stat st;
+
+    if (stat (path, &st) != 0)
+    {
+        const int saved_errno = errno;
+
+        g_set_error (error, G_FILE_ERROR, g_file_error_from_errno (saved_errno), "%s",
+                     g_strerror (saved_errno));
+        return FALSE;
+    }
+    if (!S_ISREG (st.st_mode))
+    {
+        g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_INVAL, "not a regular file");
+        return FALSE;
+    }
+    if (st.st_size > MAX_SCHEME_FILE_SIZE)
+    {
+        g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_INVAL, "file too large");
+        return FALSE;
+    }
+    return g_file_get_contents (path, text, NULL, error);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* VS Code color theme: colors["editor.foreground"], tokenColors[{scope, settings}] */
 static jv_t *
 load_json (const char *dir, const char *name, jv_type_t type, char **dir_out, GError **error)
@@ -1076,11 +1127,11 @@ load_json (const char *dir, const char *name, jv_type_t type, char **dir_out, GE
 
     path =
         g_path_is_absolute (name) ? g_strdup (name) : g_build_filename (dir, name, (char *) NULL);
-    if (!g_file_get_contents (path, &text, NULL, NULL))
+    if (!read_scheme_file (path, &text, NULL))
         g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT, "cannot read \"%s\"", name);
     else
     {
-        jv_parser_t ps = { text, 1, error };
+        jv_parser_t ps = { text, 1, 0, error };
 
         root = jv_parse_value (&ps);
         g_free (text);
@@ -1231,7 +1282,7 @@ is_vscode (const jv_t *root)
 static syntax_scheme_t *
 parse_text (const char *text, const char *dir, GError **error)
 {
-    jv_parser_t ps = { text, 1, error };
+    jv_parser_t ps = { text, 1, 0, error };
     syntax_scheme_t *scheme;
     jv_t *root;
 
@@ -1330,7 +1381,7 @@ syntax_scheme_load (const char *path, GError **error)
     syntax_scheme_t *scheme;
     char *text, *dir;
 
-    if (!g_file_get_contents (path, &text, NULL, error))
+    if (!read_scheme_file (path, &text, error))
         return NULL;
 
     dir = g_path_get_dirname (path);
