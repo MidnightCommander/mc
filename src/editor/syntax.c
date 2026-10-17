@@ -975,16 +975,13 @@ open_include_file (const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* lower-case a match pattern; color fields are left alone so scope tokens keep their case */
 inline static void
-xx_lowerize_line (WEdit *edit, char *line, size_t len)
+xx_lowerize_pattern (const WEdit *edit, char *pattern)
 {
     if (edit->is_case_insensitive)
-    {
-        size_t i;
-
-        for (i = 0; i < len; ++i)
-            line[i] = tolower (line[i]);
-    }
+        for (; *pattern != '\0'; pattern++)
+            *pattern = tolower ((unsigned char) *pattern);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1044,8 +1041,6 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
                 break;
         }
 
-        xx_lowerize_line (edit, l, len);
-
         argc = get_args (l, args, args_size);
         a = args + 1;
         if (args[0] == NULL)
@@ -1081,16 +1076,20 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
             {
                 a++;
                 g_strlcpy (whole_left, *a, sizeof (whole_left));
+                xx_lowerize_pattern (edit, whole_left);
             }
             else if (strcmp (*a, "right") == 0)
             {
                 a++;
                 g_strlcpy (whole_right, *a, sizeof (whole_right));
+                xx_lowerize_pattern (edit, whole_right);
             }
             else
             {
                 g_strlcpy (whole_left, *a, sizeof (whole_left));
                 g_strlcpy (whole_right, *a, sizeof (whole_right));
+                xx_lowerize_pattern (edit, whole_left);
+                xx_lowerize_pattern (edit, whole_right);
             }
             a++;
             check_not_a;
@@ -1155,6 +1154,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
                 }
                 check_a;
                 c->right = g_string_new (*a++);
+                xx_lowerize_pattern (edit, c->left->str);
+                xx_lowerize_pattern (edit, c->right->str);
                 c->first_left = c->left->str[0];
                 c->first_right = c->right->str[0];
             }
@@ -1228,6 +1229,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
                 break_a;
 
             k->keyword = g_string_new (*a++);
+            xx_lowerize_pattern (edit, k->keyword->str);
             subst_defines (edit->defines, a, &args[ARGS_LEN]);
             color.fg = *a;
             if (*a != NULL)
