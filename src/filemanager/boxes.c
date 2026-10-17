@@ -485,6 +485,16 @@ task_cb (WButton *button, int action)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+/* Re-read the currently configured skin from disk and redraw. Used to hot-reload
+   the skin file when it changes on disk (see the skin_watch_* functions in main.c). */
+void
+mc_skin_reload (void)
+{
+    skin_apply (NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 about_box (void)
 {
