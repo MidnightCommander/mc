@@ -16,7 +16,10 @@ AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_HEADERS(config.h)
 
 dnl Apply "no-define" to avoid defining the VERSION macro in config.h
-AM_INIT_AUTOMAKE([no-define])
+dnl Use "foreign" to stop `automake --add-missing --force-missing` from replacing
+dnl our INSTALL symlink with the stock GNU file; "-Wportability" and "-Wgnu" keep
+dnl the warnings that "gnu" strictness enables by default
+AM_INIT_AUTOMAKE([foreign -Wportability -Wgnu no-define])
 dnl PACKAGE macro isn't defined if "no-define" is applied
 AC_DEFINE([PACKAGE], ["mc"], [Name of package])
 
