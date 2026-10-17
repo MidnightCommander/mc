@@ -8,6 +8,7 @@ Contents
 * Recommendations for syntax file authors
 * Checking a syntax file
 * Writing a color scheme
+* VS Code color themes
 
 
 Introduction
@@ -68,10 +69,14 @@ When that option is empty, a skin can suggest a scheme with the key
 syntax_scheme in its [editor] section.  When neither is set, the built-in
 classic scheme is used.
 
-A scheme NAME is the file NAME.sublime-color-scheme.  It is looked up in
+A scheme NAME is the file NAME.sublime-color-scheme, or a VS Code color theme
+NAME.json.  It is looked up in
 
     ~/.local/share/mc/syntax/schemes/       (user's own schemes, first)
     <datadir>/mc/syntax/schemes/            (shipped with mc)
+
+If both NAME.sublime-color-scheme and NAME.json exist, the Sublime scheme is
+used.
 
 mc ships ayu-dark, ayu-light, ayu-mirage, catppuccin-frappe, catppuccin-latte,
 catppuccin-macchiato, catppuccin-mocha, dracula, gruvbox, nord, rose-pine,
@@ -286,3 +291,37 @@ Put the file in ~/.local/share/mc/syntax/schemes/ and select it with
 Alt-Shift-S.  The roots worth covering are comment, keyword, storage,
 constant, string, support, entity.name, variable, punctuation,
 meta.preprocessor, markup and invalid.
+
+
+VS Code color themes
+--------------------
+
+VS Code color themes color the same TextMate scopes, so they can be used as
+they are: copy the theme's JSON file (in a VS Code extension it is usually
+themes/*-color-theme.json) into ~/.local/share/mc/syntax/schemes/ and select
+it with Alt-Shift-S.
+
+    {
+        "name": "My theme",
+        "colors": { "editor.foreground": "#d4d4d4" },
+        "tokenColors": [
+            { "scope": "comment",
+              "settings": { "foreground": "#6a9955", "fontStyle": "italic" } },
+            { "scope": ["string", "string.quoted"],
+              "settings": { "foreground": "#ce9178" } }
+        ]
+    }
+
+A file is read as a VS Code theme when it has "tokenColors" or "include".
+mcedit reads "editor.foreground" from "colors" and each "tokenColors" entry's
+"scope" (a selector string or an array of selectors) and its "settings":
+"foreground", "background" and "fontStyle".  An entry without "scope" gives
+the default foreground when "editor.foreground" is missing.  All other
+"colors" are UI colors and are ignored.
+
+"include" names another theme file, relative to the including one; its rules
+come first, so the including theme's own rules win.  Includes may be nested
+(VS Code's Dark Modern includes Dark+, which includes Dark), so copy the
+whole chain into the same directory.  "tokenColors" may also be the name of a
+JSON file holding the list of rules.  "semanticTokenColors" and .tmTheme
+files are not supported.

@@ -24,6 +24,8 @@
 
 #include "tests/mctest.h"
 
+#include <glib/gstdio.h>
+
 #include "src/editor/syntax_scheme.h"
 
 /* lenient JSON: comments, trailing commas, variables */
@@ -167,6 +169,143 @@ END_PARAMETRIZED_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* VS Code color theme: string, array and comma-separated scopes, fontStyle, JSONC */
+static const char test_vscode_theme[] =
+    "{\n"
+    "  \"name\": \"Test Theme\",\n"
+    "  \"type\": \"dark\",\n"
+    "  \"colors\": { \"editor.foreground\": \"#d4d4d4\", \"editor.background\": \"#1e1e1e\" },\n"
+    "  // token colors\n"
+    "  \"tokenColors\": [\n"
+    "    { \"settings\": { \"foreground\": \"#ffffff\" } },\n"
+    "    { \"scope\": \"comment\", \"settings\": { \"foreground\": \"#6a9955\", "
+    "\"fontStyle\": \"italic\" } },\n"
+    "    { \"scope\": [\"string\", \"string.quoted\"], \"settings\": { \"foreground\": \"#ce9178\" "
+    "} "
+    "},\n"
+    "    { \"scope\": \"keyword, storage.type\", \"settings\": { \"foreground\": \"#569cd6\", "
+    "\"fontStyle\": \"bold underline\" } },\n"
+    "    { \"scope\": \"string constant.character.escape\", \"settings\": { \"foreground\": "
+    "\"#d7ba7d\" } },\n"
+    "  ],\n"
+    "}\n";
+
+static const struct test_vscode_ds
+{
+    const char *ctx_scope;
+    const char *scope;
+    const char *fg;
+    const char *attrs;
+} test_vscode_ds[] = {
+    // 0. string scope, fontStyle
+    { NULL, "comment.line.double-slash", "#6a9955", "italic" },
+    // 1. array scope
+    { NULL, "string.quoted.double", "#ce9178", "" },
+    // 2. comma-separated scope, several font styles
+    { NULL, "storage.type.function", "#569cd6", "bold+underline" },
+    { NULL, "keyword.control", "#569cd6", "bold+underline" },
+    // 3. descendant selector
+    { "string.quoted.double", "constant.character.escape", "#d7ba7d", "" },
+    // 4. unmatched scope gets editor.foreground, not the scope-less entry
+    { NULL, "variable.other", "#d4d4d4", "" },
+};
+
+/* @Test(dataSource = "test_vscode_ds") */
+START_PARAMETRIZED_TEST (test_vscode, test_vscode_ds)
+{
+    syntax_scheme_t *theme;
+    syntax_scheme_style_t style;
+
+    // given
+    theme = syntax_scheme_parse (test_vscode_theme, NULL);
+    mctest_assert_not_null (theme);
+
+    // when
+    syntax_scheme_resolve (theme, data->ctx_scope, data->scope, SYNTAX_SCHEME_DEPTH_TRUECOLOR,
+                           &style);
+
+    // then
+    mctest_assert_str_eq (style.fg, data->fg);
+    mctest_assert_str_eq (style.bg, "");
+    mctest_assert_str_eq (style.attrs, data->attrs);
+    syntax_scheme_free (theme);
+}
+END_PARAMETRIZED_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+write_file (const char *dir, const char *name, const char *text)
+{
+    char *path;
+
+    path = g_build_filename (dir, name, (char *) NULL);
+    mctest_assert_true (g_file_set_contents (path, text, -1, NULL));
+    return path;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* "include" chain and tokenColors given as a file name, relative to the including file */
+START_TEST (test_vscode_include)
+{
+    char *dir, *sub, *files[4];
+    syntax_scheme_t *theme;
+    syntax_scheme_style_t style;
+    int i;
+
+    // given
+    dir = g_dir_make_tmp ("mc-scheme-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    sub = g_build_filename (dir, "base", (char *) NULL);
+    ck_assert_int_eq (g_mkdir (sub, 0700), 0);
+
+    files[0] = write_file (
+        sub, "tokens.json",
+        "[ { \"scope\": \"comment\", \"settings\": { \"foreground\": \"#111111\" } } ]");
+    files[1] = write_file (sub, "base.json",
+                           "{ \"colors\": { \"editor.foreground\": \"#222222\" },\n"
+                           "  \"tokenColors\": \"./tokens.json\" }");
+    files[2] = write_file (dir, "middle.json",
+                           "{ \"include\": \"./base/base.json\",\n"
+                           "  \"tokenColors\": [ { \"scope\": \"string\", \"settings\": "
+                           "{ \"foreground\": \"#333333\" } },\n"
+                           "                   { \"scope\": \"keyword\", \"settings\": "
+                           "{ \"foreground\": \"#444444\" } } ] }");
+    files[3] = write_file (dir, "theme.json",
+                           "{ \"include\": \"middle.json\",\n"
+                           "  \"tokenColors\": [ { \"scope\": \"keyword\", \"settings\": "
+                           "{ \"foreground\": \"#555555\" } } ] }");
+
+    // when
+    theme = syntax_scheme_load (files[3], NULL);
+
+    // then: rules from all levels, the theme's own rule wins over the included one
+    mctest_assert_not_null (theme);
+    syntax_scheme_resolve (theme, NULL, "comment.line", SYNTAX_SCHEME_DEPTH_TRUECOLOR, &style);
+    mctest_assert_str_eq (style.fg, "#111111");
+    syntax_scheme_resolve (theme, NULL, "string.quoted", SYNTAX_SCHEME_DEPTH_TRUECOLOR, &style);
+    mctest_assert_str_eq (style.fg, "#333333");
+    syntax_scheme_resolve (theme, NULL, "keyword.control", SYNTAX_SCHEME_DEPTH_TRUECOLOR, &style);
+    mctest_assert_str_eq (style.fg, "#555555");
+    syntax_scheme_resolve (theme, NULL, "variable.other", SYNTAX_SCHEME_DEPTH_TRUECOLOR, &style);
+    mctest_assert_str_eq (style.fg, "#222222");
+
+    syntax_scheme_free (theme);
+    for (i = 0; i < 4; i++)
+    {
+        g_unlink (files[i]);
+        g_free (files[i]);
+    }
+    g_rmdir (sub);
+    g_rmdir (dir);
+    g_free (sub);
+    g_free (dir);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 START_TEST (test_tokens)
 {
     char *s;
@@ -215,6 +354,8 @@ main (void)
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_resolve, test_resolve_ds);
     mctest_add_parameterized_test (tc_core, test_builtin, test_builtin_ds);
+    mctest_add_parameterized_test (tc_core, test_vscode, test_vscode_ds);
+    tcase_add_test (tc_core, test_vscode_include);
     tcase_add_test (tc_core, test_tokens);
     tcase_add_test (tc_core, test_parse_error);
     // ***********************************

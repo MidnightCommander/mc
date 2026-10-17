@@ -526,10 +526,17 @@ colors.  A scheme
 .I name
 is a
 .IB name .sublime\-color\-scheme
-file, looked up first in
+file, or a VS Code color theme
+.IB name .json
+(its
+.B tokenColors
+are used), looked up first in
 .B ~/.local/share/mc/syntax/schemes/
 and then in
 .BR %pkgdatadir%/syntax/schemes/ .
+See
+.B %pkgdatadir%/syntax/README.txt
+for the keys that are read.
 .PP
 The following schemes are shipped with
 .BR mcedit :
@@ -761,7 +768,9 @@ is missing.
 .I %pkgdatadir%/syntax/schemes/*
 .IP
 The system\-wide color schemes
-.RI ( name .sublime\-color\-scheme)
+.RI ( name .sublime\-color\-scheme
+or VS Code
+.IR name .json)
 for scope tokens in syntax files.
 .PP
 .I ~/.local/share/mc/syntax/schemes/

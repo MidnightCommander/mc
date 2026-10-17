@@ -39,6 +39,7 @@ gboolean syntax_scheme_is_scope_token (const char *token);
 char *syntax_scheme_token_to_scope (const char *token);
 
 syntax_scheme_t *syntax_scheme_parse (const char *text, GError **error);
+syntax_scheme_t *syntax_scheme_load (const char *path, GError **error);
 syntax_scheme_t *syntax_scheme_builtin (void);
 void syntax_scheme_free (syntax_scheme_t *scheme);
 

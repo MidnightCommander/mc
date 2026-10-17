@@ -25,7 +25,8 @@
  *
  *  A .syntax file may use a scope token (e.g. KEYWORD_CONTROL) instead of literal colors.
  *  The token is translated to a Sublime scope (keyword.control) and its colors are taken
- *  from a .sublime-color-scheme file using Sublime's selector rules:
+ *  from a .sublime-color-scheme file or a VS Code color theme (.json, tokenColors)
+ *  using Sublime's selector rules:
  *  the most specific matching selector wins, separately for foreground, background
  *  and font style.
  */
@@ -175,6 +176,9 @@ static const struct
     { "teal", 0, 128, 128 },    { "orange", 255, 165, 0 },   { "pink", 255, 192, 203 },
     { "brown", 165, 42, 42 },
 };
+
+// Sublime color schemes first, then VS Code color themes
+static const char *const scheme_exts[] = { SYNTAX_SCHEME_EXT, ".json" };
 
 static syntax_scheme_t *current_scheme = NULL;
 static char *current_name = NULL;
@@ -899,25 +903,34 @@ scheme_rule_free (gpointer data)
 static char *
 find_scheme_file (const char *name)
 {
-    char *base, *path;
+    const char *const roots[] = { mc_config_get_data_path (), mc_global.share_data_dir };
+    gboolean has_ext = FALSE;
+    size_t r, e;
 
     if (strchr (name, PATH_SEP) != NULL)
         return tilde_expand (name);
 
-    base = g_str_has_suffix (name, SYNTAX_SCHEME_EXT) ? g_strdup (name)
-                                                      : g_strconcat (name, SYNTAX_SCHEME_EXT, NULL);
+    for (e = 0; e < G_N_ELEMENTS (scheme_exts); e++)
+        if (g_str_has_suffix (name, scheme_exts[e]))
+            has_ext = TRUE;
 
-    path = g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_DIR, SYNTAX_SCHEME_DIR, base,
-                             (char *) NULL);
-    if (!g_file_test (path, G_FILE_TEST_IS_REGULAR))
-    {
-        g_free (path);
-        path = g_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_DIR, SYNTAX_SCHEME_DIR, base,
-                                 (char *) NULL);
-    }
+    for (r = 0; r < G_N_ELEMENTS (roots); r++)
+        for (e = 0; e < G_N_ELEMENTS (scheme_exts); e++)
+        {
+            char *base, *path;
 
-    g_free (base);
-    return path;
+            base = has_ext ? g_strdup (name) : g_strconcat (name, scheme_exts[e], (char *) NULL);
+            path = g_build_filename (roots[r], EDIT_SYNTAX_DIR, SYNTAX_SCHEME_DIR, base,
+                                     (char *) NULL);
+            g_free (base);
+            if (g_file_test (path, G_FILE_TEST_IS_REGULAR))
+                return path;
+            g_free (path);
+            if (has_ext)
+                break;
+        }
+
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -946,7 +959,7 @@ skin_scheme (void)
 static void
 ensure_scheme (void)
 {
-    char *name, *path, *text = NULL;
+    char *name, *path;
 
     // user's choice first, then the skin's suggestion
     if (edit_options.syntax_color_scheme != NULL && *edit_options.syntax_color_scheme != '\0')
@@ -966,17 +979,248 @@ ensure_scheme (void)
     if (*name != '\0')
     {
         path = find_scheme_file (name);
-        if (g_file_get_contents (path, &text, NULL, NULL))
-        {
-            current_scheme = syntax_scheme_parse (text, NULL);
-            g_free (text);
-        }
+        if (path != NULL)
+            current_scheme = syntax_scheme_load (path, NULL);
         g_free (path);
     }
 
     // missing or broken scheme: keep classic colors
     if (current_scheme == NULL)
         current_scheme = syntax_scheme_builtin ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static scheme_rule_t *
+new_rule (const syntax_scheme_t *scheme, const char *selector, const jv_t *settings,
+          const char *font_style_key)
+{
+    scheme_rule_t *rule;
+    const jv_t *v;
+
+    rule = g_new0 (scheme_rule_t, 1);
+    rule->selector = g_strdup (selector);
+    v = jv_get (settings, "foreground", JV_STRING);
+    if (v != NULL)
+        parse_color (scheme, v->str, 0, &rule->fg);
+    v = jv_get (settings, "background", JV_STRING);
+    if (v != NULL)
+        parse_color (scheme, v->str, 0, &rule->bg);
+    v = jv_get (settings, font_style_key, JV_STRING);
+    if (v != NULL)
+        rule->font_style = g_strdup (v->str);
+
+    return rule;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* .sublime-color-scheme: variables, globals, rules */
+static void
+parse_sublime (const jv_t *root, syntax_scheme_t *scheme)
+{
+    const jv_t *section, *v;
+    guint i;
+
+    section = jv_get (root, "variables", JV_OBJECT);
+    for (i = 0; section != NULL && i < section->keys->len; i++)
+    {
+        const jv_t *val = g_ptr_array_index (section->items, i);
+
+        if (val->type == JV_STRING)
+            g_hash_table_insert (scheme->variables, g_strdup (g_ptr_array_index (section->keys, i)),
+                                 g_strdup (val->str));
+    }
+
+    section = jv_get (root, "globals", JV_OBJECT);
+    v = jv_get (section, "foreground", JV_STRING);
+    if (v != NULL)
+        parse_color (scheme, v->str, 0, &scheme->fg);
+    v = jv_get (section, "background", JV_STRING);
+    if (v != NULL)
+        parse_color (scheme, v->str, 0, &scheme->bg);
+
+    section = jv_get (root, "rules", JV_ARRAY);
+    for (i = 0; section != NULL && i < section->items->len; i++)
+    {
+        const jv_t *item = g_ptr_array_index (section->items, i);
+
+        v = jv_get (item, "scope", JV_STRING);
+        if (v != NULL)
+            g_ptr_array_add (scheme->rules, new_rule (scheme, v->str, item, "font_style"));
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* VS Code color theme: colors["editor.foreground"], tokenColors[{scope, settings}] */
+static jv_t *
+load_json (const char *dir, const char *name, char **dir_out)
+{
+    char *path, *text;
+    jv_t *root = NULL;
+
+    path =
+        g_path_is_absolute (name) ? g_strdup (name) : g_build_filename (dir, name, (char *) NULL);
+    if (g_file_get_contents (path, &text, NULL, NULL))
+    {
+        jv_parser_t ps = { text, 1, NULL };
+
+        root = jv_parse_value (&ps);
+        g_free (text);
+    }
+
+    if (root != NULL && dir_out != NULL)
+        *dir_out = g_path_get_dirname (path);
+    g_free (path);
+    return root;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+add_token_colors (const jv_t *section, syntax_scheme_t *scheme)
+{
+    const jv_t *v;
+    guint i;
+
+    for (i = 0; section != NULL && i < section->items->len; i++)
+    {
+        const jv_t *item = g_ptr_array_index (section->items, i);
+        const jv_t *settings = jv_get (item, "settings", JV_OBJECT);
+        const jv_t *scope;
+        GString *selector;
+        guint k;
+
+        if (settings == NULL)
+            continue;
+
+        scope = jv_get (item, "scope", JV_STRING);
+        if (scope == NULL)
+            scope = jv_get (item, "scope", JV_ARRAY);
+        if (scope == NULL)
+        {
+            // TextMate-style defaults entry
+            v = jv_get (settings, "foreground", JV_STRING);
+            if (v != NULL && !scheme->fg.set)
+                parse_color (scheme, v->str, 0, &scheme->fg);
+            v = jv_get (settings, "background", JV_STRING);
+            if (v != NULL && !scheme->bg.set)
+                parse_color (scheme, v->str, 0, &scheme->bg);
+            continue;
+        }
+
+        if (scope->type == JV_STRING)
+            selector = g_string_new (scope->str);
+        else
+        {
+            selector = g_string_new (NULL);
+            for (k = 0; k < scope->items->len; k++)
+            {
+                const jv_t *s = g_ptr_array_index (scope->items, k);
+
+                if (s->type != JV_STRING)
+                    continue;
+                if (selector->len != 0)
+                    g_string_append (selector, ", ");
+                g_string_append (selector, s->str);
+            }
+        }
+
+        if (selector->len != 0)
+            g_ptr_array_add (scheme->rules,
+                             new_rule (scheme, selector->str, settings, "fontStyle"));
+        g_string_free (selector, TRUE);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * VS Code color theme: colors["editor.foreground"], tokenColors[{scope, settings}].
+ * "include" and a tokenColors file name are resolved relative to @dir (NULL: ignored);
+ * included rules come first, so the theme's own rules win ties.
+ */
+static void
+parse_vscode (const jv_t *root, syntax_scheme_t *scheme, const char *dir, int depth)
+{
+    const jv_t *section, *v;
+
+    v = jv_get (root, "include", JV_STRING);
+    if (v != NULL && dir != NULL && depth < MAX_VAR_DEPTH)
+    {
+        char *inc_dir = NULL;
+        jv_t *inc;
+
+        inc = load_json (dir, v->str, &inc_dir);
+        if (inc != NULL && inc->type == JV_OBJECT)
+            parse_vscode (inc, scheme, inc_dir, depth + 1);
+        jv_free (inc);
+        g_free (inc_dir);
+    }
+
+    section = jv_get (root, "colors", JV_OBJECT);
+    v = jv_get (section, "editor.foreground", JV_STRING);
+    if (v != NULL)
+        parse_color (scheme, v->str, 0, &scheme->fg);
+    v = jv_get (section, "editor.background", JV_STRING);
+    if (v != NULL)
+        parse_color (scheme, v->str, 0, &scheme->bg);
+
+    v = jv_get (root, "tokenColors", JV_STRING);
+    if (v != NULL && dir != NULL)
+    {
+        jv_t *list;
+
+        list = load_json (dir, v->str, NULL);
+        if (list != NULL && list->type == JV_ARRAY)
+            add_token_colors (list, scheme);
+        jv_free (list);
+    }
+    else
+        add_token_colors (jv_get (root, "tokenColors", JV_ARRAY), scheme);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+is_vscode (const jv_t *root)
+{
+    return jv_get (root, "tokenColors", JV_ARRAY) != NULL
+        || jv_get (root, "tokenColors", JV_STRING) != NULL
+        || jv_get (root, "include", JV_STRING) != NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static syntax_scheme_t *
+parse_text (const char *text, const char *dir, GError **error)
+{
+    jv_parser_t ps = { text, 1, error };
+    syntax_scheme_t *scheme;
+    jv_t *root;
+
+    root = jv_parse_value (&ps);
+    if (root == NULL)
+        return NULL;
+    if (root->type != JV_OBJECT)
+    {
+        jv_error (&ps, "top-level object expected");
+        jv_free (root);
+        return NULL;
+    }
+
+    scheme = g_new0 (syntax_scheme_t, 1);
+    scheme->variables = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    scheme->rules = g_ptr_array_new_with_free_func (scheme_rule_free);
+
+    if (is_vscode (root))
+        parse_vscode (root, scheme, dir, 0);
+    else
+        parse_sublime (root, scheme);
+
+    jv_free (root);
+    return scheme;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1029,72 +1273,29 @@ syntax_scheme_token_to_scope (const char *token)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* parse scheme text; files a VS Code theme includes are not followed */
 syntax_scheme_t *
 syntax_scheme_parse (const char *text, GError **error)
 {
-    jv_parser_t ps = { text, 1, error };
+    return parse_text (text, NULL, error);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* load scheme file @path, following "include" of VS Code themes */
+syntax_scheme_t *
+syntax_scheme_load (const char *path, GError **error)
+{
     syntax_scheme_t *scheme;
-    jv_t *root;
-    const jv_t *section, *v;
-    guint i;
+    char *text, *dir;
 
-    root = jv_parse_value (&ps);
-    if (root == NULL)
+    if (!g_file_get_contents (path, &text, NULL, error))
         return NULL;
-    if (root->type != JV_OBJECT)
-    {
-        jv_error (&ps, "top-level object expected");
-        jv_free (root);
-        return NULL;
-    }
 
-    scheme = g_new0 (syntax_scheme_t, 1);
-    scheme->variables = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    scheme->rules = g_ptr_array_new_with_free_func (scheme_rule_free);
-
-    section = jv_get (root, "variables", JV_OBJECT);
-    for (i = 0; section != NULL && i < section->keys->len; i++)
-    {
-        const jv_t *val = g_ptr_array_index (section->items, i);
-
-        if (val->type == JV_STRING)
-            g_hash_table_insert (scheme->variables, g_strdup (g_ptr_array_index (section->keys, i)),
-                                 g_strdup (val->str));
-    }
-
-    section = jv_get (root, "globals", JV_OBJECT);
-    v = jv_get (section, "foreground", JV_STRING);
-    if (v != NULL)
-        parse_color (scheme, v->str, 0, &scheme->fg);
-    v = jv_get (section, "background", JV_STRING);
-    if (v != NULL)
-        parse_color (scheme, v->str, 0, &scheme->bg);
-
-    section = jv_get (root, "rules", JV_ARRAY);
-    for (i = 0; section != NULL && i < section->items->len; i++)
-    {
-        const jv_t *item = g_ptr_array_index (section->items, i);
-        scheme_rule_t *rule;
-
-        v = jv_get (item, "scope", JV_STRING);
-        if (v == NULL)
-            continue;
-
-        rule = g_new0 (scheme_rule_t, 1);
-        rule->selector = g_strdup (v->str);
-        v = jv_get (item, "foreground", JV_STRING);
-        if (v != NULL)
-            parse_color (scheme, v->str, 0, &rule->fg);
-        v = jv_get (item, "background", JV_STRING);
-        if (v != NULL)
-            parse_color (scheme, v->str, 0, &rule->bg);
-        v = jv_get (item, "font_style", JV_STRING);
-        if (v != NULL)
-            rule->font_style = g_strdup (v->str);
-        g_ptr_array_add (scheme->rules, rule);
-    }
-
-    jv_free (root);
+    dir = g_path_get_dirname (path);
+    scheme = parse_text (text, dir, error);
+    g_free (dir);
+    g_free (text);
     return scheme;
 }
 
@@ -1261,12 +1462,18 @@ syntax_scheme_list (void)
             continue;
 
         while ((file = g_dir_read_name (dir)) != NULL)
-            if (g_str_has_suffix (file, SYNTAX_SCHEME_EXT))
+        {
+            size_t e;
+
+            for (e = 0; e < G_N_ELEMENTS (scheme_exts); e++)
+                if (g_str_has_suffix (file, scheme_exts[e]))
+                    break;
+            if (e < G_N_ELEMENTS (scheme_exts))
             {
                 char *name;
                 guint k;
 
-                name = g_strndup (file, strlen (file) - strlen (SYNTAX_SCHEME_EXT));
+                name = g_strndup (file, strlen (file) - strlen (scheme_exts[e]));
                 for (k = 0; k < names->len; k++)
                     if (strcmp (g_ptr_array_index (names, k), name) == 0)
                         break;
@@ -1275,6 +1482,7 @@ syntax_scheme_list (void)
                 else
                     g_ptr_array_add (names, name);
             }
+        }
 
         g_dir_close (dir);
     }
