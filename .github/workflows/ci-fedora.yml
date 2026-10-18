@@ -53,7 +53,6 @@ jobs:
           su - test -c ' \
             ./configure \
               --prefix="$(pwd)/install-prefix" \
-              --enable-mclib \
               --enable-aspell \
               --enable-werror \
               && \

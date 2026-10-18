@@ -11,10 +11,6 @@ LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/src/libinternal.la \
 	$(top_builddir)/lib/libmc.la
 
-if ENABLE_MCLIB
-LIBS += $(GLIB_LIBS)
-endif
-
 EXTRA_DIST = \
 	data/aix_list.input \
 	data/aix_list.output \

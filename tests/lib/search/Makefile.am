@@ -9,10 +9,6 @@ AM_CPPFLAGS = \
 LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/lib/libmc.la
 
-if ENABLE_MCLIB
-LIBS += $(GLIB_LIBS)
-endif
-
 TESTS = \
 	glob_prepare_replace_str \
 	glob_translate_to_regex \
