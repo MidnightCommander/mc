@@ -63,7 +63,6 @@
 #include "dir.h"
 #include "filemanager.h"  // the_menubar
 #include "file.h"         // copy_dir_dir(), move_dir_dir(), erase_dir()
-#include "layout.h"       // command_prompt
 #include "treestore.h"
 #include "cmd.h"
 #include "filegui.h"
@@ -1092,7 +1091,7 @@ tree_key (WTree *tree, int key)
     }
 
     // Do not eat characters not meant for the tree below ' ' (e.g. C-l).
-    if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
+    if (!mc_global.cmdline_visible && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
         tree_start_search (tree);
         tree_do_search (tree, key);

@@ -70,7 +70,7 @@
 #include "ext.h"     // regexp_command
 #include "layout.h"  // Most layout variables are here
 #include "cmd.h"
-#include "command.h"  // cmdline
+#include "command.h"  // the_cmdline
 #include "filemanager.h"
 #include "mountlist.h"  // my_statfs
 #include "cd.h"         // cd_error_message()
@@ -1959,7 +1959,7 @@ cd_up_dir (WPanel *panel)
 static cb_ret_t
 maybe_cd (WPanel *panel, gboolean move_up_dir)
 {
-    if (panels_options.navigate_with_arrows && input_is_empty (cmdline))
+    if (panels_options.navigate_with_arrows && input_is_empty (the_cmdline))
     {
         const file_entry_t *fe;
 
@@ -1995,7 +1995,7 @@ maybe_cd (WPanel *panel, gboolean move_up_dir)
 static cb_ret_t
 force_maybe_cd (WPanel *panel)
 {
-    if (input_is_empty (cmdline))
+    if (input_is_empty (the_cmdline))
     {
         cd_up_dir (panel);
         return MSG_HANDLED;
@@ -3379,7 +3379,7 @@ panel_do_cd_int (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum cd
     // Success: save previous directory, shutdown status of previous dir
     olddir_vpath = vfs_path_clone (panel->cwd_vpath);
     panel_set_lwd (panel, panel->cwd_vpath);
-    input_complete_free (cmdline);
+    input_complete_free (the_cmdline);
 
     vfs_path_free (panel->cwd_vpath, TRUE);
     vfs_setup_cwd ();
@@ -3742,7 +3742,7 @@ panel_key (WPanel *panel, int key)
     if (command != CK_IgnoreKey)
         return panel_execute_cmd (panel, command);
 
-    if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
+    if (!mc_global.cmdline_visible && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
         start_search (panel);
         do_search (panel, key);

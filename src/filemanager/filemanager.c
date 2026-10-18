@@ -70,7 +70,7 @@
 #include "cmd.h"  // commands
 #include "hotlist.h"
 #include "panelize.h"
-#include "command.h"  // cmdline
+#include "command.h"  // the_cmdline
 #include "dir.h"      // dir_list_clean()
 
 #ifdef USE_INTERNAL_EDIT
@@ -106,7 +106,7 @@ WLabel *the_prompt;
 /* The hint bar */
 WLabel *the_hint;
 /* The button bar */
-WButtonBar *the_bar;
+WButtonBar *the_keybar;
 
 /* The prompt */
 char *mc_prompt = NULL;
@@ -490,7 +490,7 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name, gpoin
     if (mc_global.midnight_shutdown)
         goto ret;
 
-    if (!mc_global.message_visible || the_hint == NULL || WIDGET (the_hint)->owner == NULL)
+    if (!mc_global.hint_visible || the_hint == NULL || WIDGET (the_hint)->owner == NULL)
     {
         int col, row;
 
@@ -510,7 +510,7 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name, gpoin
         goto ret;
     }
 
-    if (mc_global.message_visible)
+    if (mc_global.hint_visible)
         set_hintbar (event_data->msg);
 
 ret:
@@ -657,16 +657,16 @@ midnight_put_panel_path (WPanel *panel)
     vfs_path_t *cwd_vpath;
     const char *cwd_vpath_str;
 
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
     cwd_vpath = remove_encoding_from_path (panel->cwd_vpath);
     cwd_vpath_str = vfs_path_as_str (cwd_vpath);
 
-    command_insert (cmdline, cwd_vpath_str, FALSE);
+    command_insert (the_cmdline, cwd_vpath_str, FALSE);
 
     if (!IS_PATH_SEP (cwd_vpath_str[strlen (cwd_vpath_str) - 1]))
-        command_insert (cmdline, PATH_SEP_STR, FALSE);
+        command_insert (the_cmdline, PATH_SEP_STR, FALSE);
 
     vfs_path_free (cwd_vpath, TRUE);
 }
@@ -678,7 +678,7 @@ put_link (WPanel *panel)
 {
     const file_entry_t *fe;
 
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
     fe = panel_current_entry (panel);
@@ -696,7 +696,7 @@ put_link (WPanel *panel)
         if (i > 0)
         {
             buffer[i] = '\0';
-            command_insert (cmdline, buffer, TRUE);
+            command_insert (the_cmdline, buffer, TRUE);
         }
     }
 }
@@ -724,7 +724,7 @@ put_other_link (void)
 static void
 put_current_selected (void)
 {
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
     if (get_current_type () == view_tree)
@@ -734,7 +734,7 @@ put_current_selected (void)
 
         tree = (WTree *) get_panel_widget (get_current_index ());
         selected_name = tree_selected_name (tree);
-        command_insert (cmdline, vfs_path_as_str (selected_name), TRUE);
+        command_insert (the_cmdline, vfs_path_as_str (selected_name), TRUE);
     }
     else
     {
@@ -742,7 +742,7 @@ put_current_selected (void)
 
         fe = panel_current_entry (current_panel);
         if (fe != NULL)
-            command_insert (cmdline, fe->fname->str, TRUE);
+            command_insert (the_cmdline, fe->fname->str, TRUE);
     }
 }
 
@@ -751,27 +751,27 @@ put_current_selected (void)
 static void
 put_tagged (const WPanel *panel)
 {
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return;
 
-    input_disable_update (cmdline);
+    input_disable_update (the_cmdline);
 
     if (panel->marked == 0)
     {
         const file_entry_t *fe = panel_current_entry (panel);
 
         if (fe != NULL)
-            command_insert (cmdline, fe->fname->str, TRUE);
+            command_insert (the_cmdline, fe->fname->str, TRUE);
     }
     else
         for (int m = 0, i = 0; m < panel->marked && i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked != 0)
             {
-                command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
+                command_insert (the_cmdline, panel->dir.list[i].fname->str, TRUE);
                 m++;
             }
 
-    input_enable_update (cmdline);
+    input_enable_update (the_cmdline);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -857,6 +857,7 @@ create_file_manager (void)
     the_menubar = menubar_new (NULL);
     group_add_widget (g, the_menubar);
     init_menu ();
+    widget_set_visibility (WIDGET (the_menubar), mc_global.menubar_visible);
 
     create_panels ();
     group_add_widget (g, get_panel_widget (0));
@@ -867,17 +868,21 @@ create_file_manager (void)
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->rect.cols = COLS;
     group_add_widget (g, the_hint);
+    widget_set_visibility (WIDGET (the_hint), mc_global.hint_visible);
 
-    cmdline = command_new (0, 0, 0);
-    group_add_widget (g, cmdline);
+    the_cmdline = command_new (0, 0, 0);
+    group_add_widget (g, the_cmdline);
+    widget_set_visibility (WIDGET (the_cmdline), mc_global.cmdline_visible);
 
     the_prompt = label_new (0, 0, mc_prompt);
     the_prompt->color = prompt_colors;
     group_add_widget (g, the_prompt);
+    widget_set_visibility (WIDGET (the_prompt), mc_global.cmdline_visible);
 
-    the_bar = buttonbar_new ();
-    group_add_widget (g, the_bar);
-    midnight_set_buttonbar (the_bar);
+    the_keybar = buttonbar_new ();
+    group_add_widget (g, the_keybar);
+    midnight_set_buttonbar (the_keybar);
+    widget_set_visibility (WIDGET (the_keybar), mc_global.keybar_visible);
 
 #ifdef ENABLE_SUBSHELL
     /* Must be done after creation of cmdline and prompt widgets to avoid potential
@@ -1214,7 +1219,7 @@ midnight_execute_cmd (Widget *sender, long command)
         break;
     case CK_History:
         // show the history of command line widget
-        send_message (cmdline, NULL, MSG_ACTION, CK_History, NULL);
+        send_message (the_cmdline, NULL, MSG_ACTION, CK_History, NULL);
         break;
     case CK_PanelInfo:
         if (sender == WIDGET (the_menubar))
@@ -1395,17 +1400,17 @@ handle_cmdline_enter (void)
 {
     const char *s;
 
-    for (s = input_get_ctext (cmdline); *s != '\0' && whitespace (*s); s++)
+    for (s = input_get_ctext (the_cmdline); *s != '\0' && whitespace (*s); s++)
         ;
 
     if (*s != '\0')
     {
-        send_message (cmdline, NULL, MSG_KEY, '\n', NULL);
+        send_message (the_cmdline, NULL, MSG_KEY, '\n', NULL);
         return TRUE;
     }
 
-    input_insert (cmdline, "", FALSE);
-    cmdline->point = 0;
+    input_insert (the_cmdline, "", FALSE);
+    the_cmdline->point = 0;
 
     return FALSE;
 }
@@ -1492,7 +1497,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
                     return send_message (current_panel, filemanager, MSG_ACTION, CK_SelectInvert,
                                          NULL);
             }
-            else if (!command_prompt || input_is_empty (cmdline))
+            else if (!mc_global.cmdline_visible || input_is_empty (the_cmdline))
             {
                 /* Special treatment '+', '-', '\', '*' only when this is
                  * first char on input line
@@ -1526,8 +1531,8 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         if (command != CK_IgnoreKey)
             v = midnight_execute_cmd (NULL, command);
 
-        if (v == MSG_NOT_HANDLED && command_prompt && !is_cmdline_mute ())
-            v = send_message (cmdline, NULL, MSG_KEY, parm, NULL);
+        if (v == MSG_NOT_HANDLED && mc_global.cmdline_visible && !is_cmdline_mute ())
+            v = send_message (the_cmdline, NULL, MSG_KEY, parm, NULL);
 
         return v;
     }
@@ -1560,7 +1565,7 @@ update_menu (void)
     menu_set_name (left_menu, panels_layout.horizontal_split ? _ ("&Above") : _ ("&Left"));
     menu_set_name (right_menu, panels_layout.horizontal_split ? _ ("&Below") : _ ("&Right"));
     menubar_arrange (the_menubar);
-    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
+    widget_set_visibility (WIDGET (the_menubar), mc_global.menubar_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1663,7 +1668,7 @@ load_hint (gboolean force)
     if (WIDGET (the_hint)->owner == NULL)
         return;
 
-    if (!mc_global.message_visible)
+    if (!mc_global.hint_visible)
     {
         label_set_text (the_hint, NULL);
         return;
@@ -1696,7 +1701,7 @@ load_hint (gboolean force)
 WPanel *
 change_panel (void)
 {
-    input_complete_free (cmdline);
+    input_complete_free (the_cmdline);
     group_select_next_widget (GROUP (filemanager));
     return current_panel;
 }

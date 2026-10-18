@@ -65,7 +65,6 @@
 #endif
 #include "src/selcodepage.h"
 
-#include "command.h"  // For cmdline
 #include "dir.h"
 #include "tree.h"
 #include "layout.h"  // for get_nth_panel_name proto

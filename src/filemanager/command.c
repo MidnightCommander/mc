@@ -58,7 +58,7 @@
 /*** global variables ****************************************************************************/
 
 /* This holds the command line */
-WInput *cmdline;
+WInput *the_cmdline;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -175,7 +175,7 @@ enter (WInput *lc_cmdline)
 {
     const char *cmd;
 
-    if (!command_prompt)
+    if (!mc_global.cmdline_visible)
         return MSG_HANDLED;
 
     cmd = input_get_ctext (lc_cmdline);

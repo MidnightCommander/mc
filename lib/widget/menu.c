@@ -321,7 +321,7 @@ menubar_finish (WMenuBar *menubar)
     widget_want_hotkey (w, FALSE);
     widget_set_options (w, WOP_SELECTABLE, FALSE);
 
-    if (!mc_global.keybar_visible)
+    if (!menubar->previously_visible)
         widget_hide (w);
     else
     {
@@ -1087,6 +1087,9 @@ void
 menubar_activate (WMenuBar *menubar, gboolean dropped, int which)
 {
     Widget *w = WIDGET (menubar);
+
+    if (!widget_get_state (w, WST_FOCUSED))
+        menubar->previously_visible = widget_get_state (w, WST_VISIBLE);
 
     widget_show (w);
 
