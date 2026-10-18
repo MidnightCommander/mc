@@ -277,6 +277,23 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test */
+START_TEST (test_get_utf_before_gap)
+{
+    int char_length;
+
+    // U+0438 without its second byte: the byte stays in the gap after the cursor
+    edit_buffer_insert (&test_edit->buffer, 0xD0);
+    edit_buffer_insert (&test_edit->buffer, 0xB8);
+    edit_buffer_backspace (&test_edit->buffer);
+
+    edit_buffer_get_utf (&test_edit->buffer, 0, &char_length);
+    ck_assert_int_eq (char_length, 0);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -293,6 +310,7 @@ main (void)
     tcase_add_test (tc_core, test_undo_redo_utf8_char);
     tcase_add_test (tc_core, test_group_undo_redo_utf8_char);
     tcase_add_test (tc_core, test_redo_deleted_line);
+    tcase_add_test (tc_core, test_get_utf_before_gap);
     // ***********************************
 
     return mctest_run_all (tc_core);
