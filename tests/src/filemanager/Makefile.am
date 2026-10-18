@@ -7,9 +7,10 @@ AM_CPPFLAGS = \
 	-DTEST_SHARE_DIR=\"$(abs_srcdir)/../fixtures\" \
 	@CHECK_CFLAGS@
 
-LIBS = @CHECK_LIBS@ \
+LDADD = \
 	$(top_builddir)/src/libinternal.la \
-	$(top_builddir)/lib/libmc.la
+	$(top_builddir)/lib/libmc.la \
+	@CHECK_LIBS@
 
 TESTS = \
 	cd_to \

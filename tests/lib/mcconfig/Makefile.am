@@ -6,8 +6,9 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	@CHECK_CFLAGS@
 
-LIBS = @CHECK_LIBS@ \
-	$(top_builddir)/lib/libmc.la
+LDADD = \
+	$(top_builddir)/lib/libmc.la \
+	@CHECK_LIBS@
 
 TESTS = \
 	config_string \
