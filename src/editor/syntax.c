@@ -837,9 +837,10 @@ this_try_alloc_color_pair (tty_color_pair_t *color)
 {
     char f[80], b[80], a[80], *p;
 
-    if (color->bg != NULL && *color->bg == '\0')
+    // "default" in syntax files means the editor's default color from the skin
+    if (color->bg != NULL && (*color->bg == '\0' || strcmp (color->bg, "default") == 0))
         color->bg = NULL;
-    if (color->fg != NULL && *color->fg == '\0')
+    if (color->fg != NULL && (*color->fg == '\0' || strcmp (color->fg, "default") == 0))
         color->fg = NULL;
     if (color->attrs != NULL && *color->attrs == '\0')
         color->attrs = NULL;
