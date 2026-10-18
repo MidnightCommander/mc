@@ -214,6 +214,7 @@ edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_lengt
     gunichar res;
     gunichar ch;
     gchar *next_ch = NULL;
+    off_t len;
 
     if (byte_index >= (buf->curs1 + buf->curs2) || byte_index < 0)
     {
@@ -228,7 +229,13 @@ edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_lengt
         return 0;
     }
 
-    res = g_utf8_get_char_validated (str, -1);
+    // the text bytes that follow in the same chunk: the gap or the chunk end comes after them
+    if (byte_index < buf->curs1)
+        len = MIN (buf->curs1 - byte_index, EDIT_BUF_SIZE - (byte_index & M_EDIT_BUF_SIZE));
+    else
+        len = ((buf->curs1 + buf->curs2 - byte_index - 1) & M_EDIT_BUF_SIZE) + 1;
+
+    res = g_utf8_get_char_validated (str, (gssize) len);
     if (res == (gunichar) (-2) || res == (gunichar) (-1))
     {
         // Retry with explicit bytes to make sure it's not a buffer boundary
