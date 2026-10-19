@@ -2036,6 +2036,12 @@ Wszystkie pliki pasujące do maski źródłowej są kopiowane/przenoszone
 w zgodzie z maską docelową. Jeśli są jakieś pliki zaznaczone, tylko one są
 brane pod uwagę przy wybieraniu plików.
 .PP
+Podczas kopiowania lub przenoszenia pojedynczego pliku naciśnięcie
+Alt\-Enter (lub Ctrl\-Enter) w polu docelowym wstawia nazwę pliku
+źródłowego w miejscu kursora. Nazwa jest odpowiednio cytowana zgodnie
+z ustawieniem opcji
+.BR "Wzorce dopasowywania" .
+.PP
 Są jeszcze inne opcje, które możesz ustawić:
 .PP
 Opcja

@@ -2415,6 +2415,12 @@ copiati/rinominati secondo la maschera destinazione. Se ci sono file
 marcati, vengono rinominati solo i file marcati che corrispondono alla
 maschera sorgente.
 .PP
+Quando si copia o si sposta un singolo file, premendo Alt\-Enter (o
+Ctrl\-Enter) nel campo di destinazione si inserisce il nome del file
+sorgente nella posizione del cursore. Il nome viene protetto con i
+caratteri di escape in base all'impostazione
+.BR "Usa i modelli della shell" .
+.PP
 Queste le opzioni che possono essere impostate:
 .PP
 Segue i collegamenti, specifica se creare i collegamenti simbolici o no
