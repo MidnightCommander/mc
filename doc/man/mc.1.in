@@ -2693,6 +2693,12 @@ All the files matching the source mask are copied/renamed according to
 the target mask.  If there are tagged files, only the tagged files
 matching the source mask are renamed.
 .PP
+When a single file is copied or moved, pressing Alt\-Enter (or Ctrl\-Enter)
+in the destination field inserts the source file name at the cursor
+position.  The name is escaped according to the
+.B Using shell patterns
+setting.
+.PP
 There are other options which you can set:
 .PP
 .B Follow links

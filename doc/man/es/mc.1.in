@@ -2538,6 +2538,11 @@ Todos los archivos que concuerden con la máscara origen son copiados/renombrado
 según la máscara destino. Si hay archivos marcados, solo aquellos que encajen con
 la máscara de origen serán renombrados.
 .PP
+Al copiar o mover un solo archivo, pulsar Alt\-Enter (o Ctrl\-Enter) en
+el campo de destino inserta el nombre del archivo origen en la posición
+del cursor. El nombre se escapa según el estado de la opción
+.BR "Usando patrones shell" .
+.PP
 Hay otras opción que podemos seleccionar:
 .PP
 Seguir Enlaces indica si los enlaces simbólicos o físicos en el directorio

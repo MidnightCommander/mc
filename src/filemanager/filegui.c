@@ -147,7 +147,8 @@ statfs (char const *filename, struct fs_info *buf)
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"  // verbose, safe_overwrite, copymove_persistent_ext2_attr
+#include "src/keymap.h"  // filemanager_map
+#include "src/setup.h"   // verbose, safe_overwrite, copymove_persistent_ext2_attr
 
 #include "filemanager.h"
 
@@ -241,6 +242,10 @@ static struct
     { NULL, FILE_SUSPEND, N_ ("Con&tinue"), NORMAL_BUTTON, -1 },
     { NULL, FILE_ABORT, N_ ("&Abort"), NORMAL_BUTTON, -1 },
 };
+
+// file mask dialog: source name to put into destination input, NULL for many files
+static const char *fmd_src_name = NULL;
+static unsigned long fmd_patterns_id, fmd_dest_id;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -716,6 +721,35 @@ is_wildcarded (const char *p)
         }
     }
     return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+file_mask_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
+{
+    if (msg == MSG_KEY && fmd_src_name != NULL
+        && keybind_lookup_keymap_command (filemanager_map, parm) == CK_PutCurrentSelected)
+    {
+        Widget *dest;
+
+        dest = widget_find_by_id (w, fmd_dest_id);
+        if (widget_get_state (dest, WST_FOCUSED))
+        {
+            char *name;
+
+            // destination is a replace template: escape the name as the default text is
+            if (CHECK (widget_find_by_id (w, fmd_patterns_id))->state)
+                name = str_glob_escape (fmd_src_name);
+            else
+                name = str_regex_escape (fmd_src_name);
+            input_insert (INPUT (dest), name, FALSE);
+            g_free (name);
+            return MSG_HANDLED;
+        }
+    }
+
+    return dlg_default_callback (w, sender, msg, parm, data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1343,6 +1377,8 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         def_text_secure = str_regex_escape (tmp);
     g_free (tmp);
 
+    fmd_src_name = only_one ? (const char *) text : NULL;
+
     if (only_one)
     {
         int format_len, text_len;
@@ -1386,10 +1422,11 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
             QUICK_START_COLUMNS,
                 QUICK_SEPARATOR (FALSE),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (_ ("&Using shell patterns"), &source_easy_patterns, NULL),
+                QUICK_CHECKBOX (_ ("&Using shell patterns"), &source_easy_patterns,
+                                &fmd_patterns_id),
             QUICK_STOP_COLUMNS,
             QUICK_LABELED_INPUT (_ ("to:"), input_label_above, def_text_secure, "input2",
-                                 &dest_dir, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+                                 &dest_dir, &fmd_dest_id, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_CHECKBOX (_ ("Follow &links"), &ctx->follow_links, NULL),
@@ -1418,7 +1455,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
             .title = op_names[ctx->operation],
             .help = "[Mask Copy/Rename]",
             .widgets = quick_widgets,
-            .callback = NULL,
+            .callback = file_mask_dialog_callback,
             .mouse_callback = NULL,
         };
 
