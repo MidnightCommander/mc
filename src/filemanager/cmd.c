@@ -165,6 +165,43 @@ do_edit (const vfs_path_t *what_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Read from @fd until @buf is full or the end of the file is reached: read() may return less
+ * than requested before the end of the file (network and FUSE/FSKit file systems, VFS).
+ *
+ * @return number of bytes read, -1 on error
+ */
+
+static ssize_t
+compare_read (int fd, char *buf, size_t size)
+{
+    size_t done = 0;
+
+    while (done < size)
+    {
+        const ssize_t n = mc_read (fd, buf + done, size - done);
+
+        if (n < 0)
+        {
+            if (errno == EINTR)
+                continue;
+            return -1;
+        }
+        if (n == 0)
+            break;
+        done += (size_t) n;
+    }
+
+    return (ssize_t) done;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Compare the contents of two files, which can be on any VFS.
+ *
+ * @return 0 if the files are identical, non-zero if they differ or can't be read
+ */
+
 static int
 compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
 {
@@ -174,32 +211,35 @@ compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
     if (size == 0)
         return 0;
 
-    file1 = open (vfs_path_as_str (vpath1), O_RDONLY);
+    file1 = mc_open (vpath1, O_RDONLY);
     if (file1 >= 0)
     {
         int file2;
 
-        file2 = open (vfs_path_as_str (vpath2), O_RDONLY);
+        file2 = mc_open (vpath2, O_RDONLY);
         if (file2 >= 0)
         {
-            char buf1[IO_BUFSIZE], buf2[IO_BUFSIZE];
+            char *buf1, *buf2;
             ssize_t n1, n2;
+
+            buf1 = g_malloc (IO_BUFSIZE);
+            buf2 = g_malloc (IO_BUFSIZE);
 
             rotate_dash (TRUE);
             do
             {
-                while ((n1 = read (file1, buf1, sizeof (buf1))) == -1 && errno == EINTR)
-                    ;
-                while ((n2 = read (file2, buf2, sizeof (buf2))) == -1 && errno == EINTR)
-                    ;
+                n1 = compare_read (file1, buf1, IO_BUFSIZE);
+                n2 = compare_read (file2, buf2, IO_BUFSIZE);
             }
-            while (n1 == n2 && n1 == sizeof (buf1) && memcmp (buf1, buf2, sizeof (buf1)) == 0);
-            result = (n1 != n2) || (memcmp (buf1, buf2, MIN ((size_t) n1, sizeof (buf1))) != 0);
+            while (n1 == IO_BUFSIZE && n2 == IO_BUFSIZE && memcmp (buf1, buf2, IO_BUFSIZE) == 0);
+            result = n1 < 0 || n2 < 0 || n1 != n2 || memcmp (buf1, buf2, (size_t) n1) != 0;
             rotate_dash (FALSE);
 
-            close (file2);
+            g_free (buf1);
+            g_free (buf2);
+            mc_close (file2);
         }
-        close (file1);
+        mc_close (file1);
     }
 
     return result;
