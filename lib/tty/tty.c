@@ -31,6 +31,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <fcntl.h>  // open()
 #include <signal.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -143,6 +144,46 @@ tty_check_xterm_compat (const gboolean force_xterm)
 
     return FALSE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Make sure that the standard input is a terminal.
+ *
+ * MC does not read data from stdin, but it reads the keyboard from there: the ncurses backend
+ * and the key reader use stdin, and both backends save the initial terminal modes from it.
+ * If stdin is redirected (e.g. "mc < /dev/null" or "find ... | xargs mcedit"), attach it to the
+ * controlling terminal, like "xargs -o" does. Like S-Lang, fall back to stderr if there is
+ * no controlling terminal, but only if the keyboard can be read from it.
+ *
+ * @return TRUE if stdin is a terminal now, FALSE otherwise
+ */
+gboolean
+tty_stdin_to_terminal (void)
+{
+    int fd;
+
+    if (isatty (STDIN_FILENO))
+        return TRUE;
+
+    fd = open ("/dev/tty", O_RDWR);
+    if (fd == -1 && isatty (STDERR_FILENO)
+        && (fcntl (STDERR_FILENO, F_GETFL) & O_ACCMODE) != O_WRONLY)
+        fd = dup (STDERR_FILENO);
+    if (fd == -1)
+        return FALSE;
+
+    if (fd != STDIN_FILENO)
+    {
+        const int ret = dup2 (fd, STDIN_FILENO);
+
+        close (fd);
+        if (ret == -1)
+            return FALSE;
+    }
+
+    return isatty (STDIN_FILENO) != 0;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 extern void
