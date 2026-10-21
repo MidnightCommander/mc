@@ -22,11 +22,11 @@
 
 #define TEST_SUITE_NAME "/src/viewer"
 
+#include "tests/mctest.h"
+
 #include <glib/gstdio.h>  // g_unlink()
 #include <string.h>
 #include <unistd.h>
-
-#include "tests/mctest.h"
 
 #include "lib/strutil.h"
 #include "lib/vfs/vfs.h"

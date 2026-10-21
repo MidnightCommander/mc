@@ -24,10 +24,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
+#include <termios.h>  // in some systems (like Solaris) TIOCGWINSZ is defined here
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -147,16 +150,20 @@ static void
 mcview_image_fit (const WView *view, int *cols, int *lines)
 {
     const WRect *r = &view->data_area;
+#ifdef TIOCGWINSZ
     struct winsize ws;
+#endif
     double cw = 1.0, ch = 2.0;  // cell size; only the ratio matters. Typical cell is 1:2
     double box_w, box_h;
 
+#ifdef TIOCGWINSZ
     if (ioctl (STDOUT_FILENO, TIOCGWINSZ, &ws) == 0 && ws.ws_col != 0 && ws.ws_row != 0
         && ws.ws_xpixel != 0 && ws.ws_ypixel != 0)
     {
         cw = (double) ws.ws_xpixel / ws.ws_col;
         ch = (double) ws.ws_ypixel / ws.ws_row;
     }
+#endif
 
     box_w = r->cols * cw;
     box_h = r->lines * ch;
