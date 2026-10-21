@@ -87,10 +87,18 @@ typedef struct
     char **shebangs;             /* from shebangs= (NULL-terminated, or NULL) */
 } ts_grammar_config_t;
 
+/* Filename glob pattern from filenames= (entries containing '*' or '?') */
+typedef struct
+{
+    char *pattern;
+    char *grammar_name;
+} ts_filename_glob_t;
+
 /* Grammar registry: populated on first use by scanning config.ini files */
 static GHashTable *ts_grammar_configs = NULL;   /* grammar_name -> ts_grammar_config_t* */
 static GHashTable *ts_ext_map = NULL;           /* ".py" -> "python" */
 static GHashTable *ts_filename_map = NULL;      /* "Makefile" -> "make" */
+static GPtrArray *ts_filename_globs = NULL;     /* ts_filename_glob_t*: "Dockerfile.*" -> "dockerfile" */
 static GHashTable *ts_shebang_map = NULL;       /* "python3" -> "python" */
 static GHashTable *ts_display_to_grammar = NULL; /* "Python Program" -> "python" */
 static GHashTable *ts_wrapper_host_map = NULL;  /* "yaml" -> "gotmpl" (wrapper name) */
@@ -176,6 +184,18 @@ ts_alloc_color_from_spec (const char *spec)
     g_free (buf);
     return result;
 }
+
+static void
+ts_filename_glob_free (gpointer data)
+{
+    ts_filename_glob_t *glob = (ts_filename_glob_t *) data;
+
+    g_free (glob->pattern);
+    g_free (glob->grammar_name);
+    g_free (glob);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 /**
  * Split a space-separated string into a NULL-terminated array.
@@ -334,8 +354,20 @@ ts_load_one_config (const char *config_path, const char *grammar_name)
         int i;
 
         for (i = 0; cfg->filenames[i] != NULL; i++)
-            g_hash_table_insert (ts_filename_map, g_strdup (cfg->filenames[i]),
-                                 g_strdup (grammar_name));
+        {
+            if (strpbrk (cfg->filenames[i], "*?") != NULL)
+            {
+                ts_filename_glob_t *glob;
+
+                glob = g_new (ts_filename_glob_t, 1);
+                glob->pattern = g_strdup (cfg->filenames[i]);
+                glob->grammar_name = g_strdup (grammar_name);
+                g_ptr_array_add (ts_filename_globs, glob);
+            }
+            else
+                g_hash_table_insert (ts_filename_map, g_strdup (cfg->filenames[i]),
+                                     g_strdup (grammar_name));
+        }
     }
 
     if (cfg->shebangs != NULL)
@@ -407,6 +439,7 @@ ts_load_grammar_registry (void)
     ts_grammar_configs = g_hash_table_new (g_str_hash, g_str_equal);
     ts_ext_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     ts_filename_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    ts_filename_globs = g_ptr_array_new_with_free_func (ts_filename_glob_free);
     ts_shebang_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     ts_display_to_grammar = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     ts_wrapper_host_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
@@ -560,6 +593,61 @@ ts_config_reverse_lookup (const char *config_name, const char *display_value)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Check whether the shared module of a grammar is present in one of the
+ * directories searched by ts_grammar_registry_lookup().
+ */
+static gboolean
+ts_grammar_module_exists (const char *grammar_name)
+{
+    const char *home;
+    char *path;
+    gboolean found = FALSE;
+
+    home = g_get_home_dir ();
+    if (home != NULL)
+    {
+        path = g_strdup_printf ("%s/.local/lib/mc/ts-grammars/%s.%s", home, grammar_name,
+                                G_MODULE_SUFFIX);
+        found = g_file_test (path, G_FILE_TEST_IS_REGULAR);
+        g_free (path);
+    }
+
+    if (!found)
+    {
+        path = g_strdup_printf ("%s/%s.%s", TS_GRAMMAR_LIBDIR, grammar_name, G_MODULE_SUFFIX);
+        found = g_file_test (path, G_FILE_TEST_IS_REGULAR);
+        g_free (path);
+    }
+
+    return found;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Append display names of all selectable grammars to names (strings are
+ * newly allocated).  A grammar is selectable if its config.ini has a
+ * display-name and its shared module is installed.  Grammars without a
+ * display-name are injection-only and are not listed.
+ */
+void
+ts_get_display_names (GPtrArray *names)
+{
+    GHashTableIter iter;
+    gpointer key, value;
+
+    if (!ts_registry_loaded)
+        ts_load_grammar_registry ();
+
+    g_hash_table_iter_init (&iter, ts_display_to_grammar);
+    while (g_hash_table_iter_next (&iter, &key, &value))
+        if (ts_grammar_module_exists ((const char *) value))
+            g_ptr_array_add (names, g_strdup ((const char *) key));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Extract interpreter name from a shebang line.
  * "#!/usr/bin/env python3" -> "python3"
  * "#!/usr/bin/python" -> "python"
@@ -639,7 +727,7 @@ ts_extract_interpreter (const char *first_line)
 
 /**
  * Find a matching grammar for the given filename and first line.
- * Precedence: exact filename > shebang > extension.
+ * Precedence: exact filename > filename glob > shebang > extension.
  * On match, fills grammar_name and display_name (newly allocated strings).
  * Returns TRUE if a match was found.
  */
@@ -674,7 +762,26 @@ ts_find_grammar (const char *filename, const char *first_line,
         return TRUE;
     }
 
-    /* 2. Shebang match (content-based) */
+    /* 2. Filename glob match (user-local entries were added last, so search backwards) */
+    {
+        guint i;
+
+        for (i = ts_filename_globs->len; i > 0; i--)
+        {
+            const ts_filename_glob_t *glob = g_ptr_array_index (ts_filename_globs, i - 1);
+
+            if (g_pattern_match_simple (glob->pattern, basename))
+            {
+                *grammar_name = g_strdup (glob->grammar_name);
+                cfg = ts_get_grammar_config (glob->grammar_name);
+                *display_name = (cfg != NULL && cfg->display_name != NULL)
+                    ? g_strdup (cfg->display_name) : g_strdup (glob->grammar_name);
+                return TRUE;
+            }
+        }
+    }
+
+    /* 3. Shebang match (content-based) */
     if (first_line != NULL && first_line[0] == '#' && first_line[1] == '!')
     {
         char *interpreter = ts_extract_interpreter (first_line);
@@ -694,7 +801,7 @@ ts_find_grammar (const char *filename, const char *first_line,
         }
     }
 
-    /* 3. Extension match (least specific) */
+    /* 4. Extension match (least specific) */
     {
         const char *dot = strrchr (basename, '.');
 
@@ -1458,6 +1565,11 @@ ts_free (WEdit *edit)
     {
         g_hash_table_destroy (ts_filename_map);
         ts_filename_map = NULL;
+    }
+    if (ts_filename_globs != NULL)
+    {
+        g_ptr_array_free (ts_filename_globs, TRUE);
+        ts_filename_globs = NULL;
     }
     if (ts_shebang_map != NULL)
     {

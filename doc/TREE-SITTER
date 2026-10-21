@@ -123,7 +123,7 @@ get a color pair.  When tree-sitter is active the following happens:
      then system).  This builds lookup tables for extensions, filenames,
      shebangs, display names, symbols, wrappers, and colors.
    - The file is matched against a grammar using these lookup tables.
-     Precedence: filenames > shebangs > extensions.
+     Precedence: filenames > filename globs > shebangs > extensions.
    - The grammar .so module is loaded via g_module_open() from
      ~/.local/lib/mc/ts-grammars/ or $(libdir)/mc/ts-grammars/.
    - A TSParser is created for the grammar.
@@ -274,7 +274,8 @@ Source files (src/editor/):
                         - Grammar registry scanner (scans per-grammar
                           config.ini files on first use)
                         - ts_find_grammar() -- matches filename via registry
-                          lookup tables (filenames > shebangs > extensions)
+                          lookup tables (filenames > filename globs >
+                          shebangs > extensions)
                         - ts_capture_name_to_color() -- color mapping with
                           longest-prefix matching
                         - ts_find_wrapper_for_host() -- finds a wrapper
@@ -370,7 +371,8 @@ grammar:
 The [grammar] section holds:
 
     extensions       Space-separated file extensions (must start with .).
-    filenames        Space-separated exact basenames.
+    filenames        Space-separated basenames.  An entry containing
+                     * or ? is a glob pattern (e.g. Dockerfile.*).
     shebangs         Space-separated interpreter names.
     display-name     Human-readable name for the status bar.
     symbol           Override for tree_sitter_<name>() function
@@ -387,8 +389,9 @@ The [colors] section maps capture names to MC terminal colors:
 
 Lookup precedence when opening a file:
 1. filenames  -- exact basename match (highest priority)
-2. shebangs   -- interpreter from first line
-3. extensions -- file extension match (lowest priority)
+2. filenames  -- glob pattern basename match
+3. shebangs   -- interpreter from first line
+4. extensions -- file extension match (lowest priority)
 
 At startup, MC scans per-grammar directories from:
 1. ~/.local/share/mc/syntax-ts/*/config.ini  (user-local, wins)

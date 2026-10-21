@@ -1614,6 +1614,7 @@ edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
         saved_type = g_strdup (type);  // save edit->syntax_type
         edit_free_syntax_rules (edit);
         edit->syntax_type = saved_type;  // restore edit->syntax_type
+        type = saved_type;               // old value was freed above
     }
 
     if (!tty_use_colors ())
@@ -1632,24 +1633,21 @@ edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
         && !mc_args__no_tree_sitter
         && edit_options.syntax_highlight_mode == SYNTAX_HIGHLIGHT_TS)
     {
-        const char *forced_grammar = NULL;
-        char *grammar_from_type = NULL;
+        char *forced_grammar = NULL;
 
+        /* Manual syntax selection: reverse-lookup grammar name from display name.
+           A name with no grammar is a legacy syntax, so skip tree-sitter for it. */
         if (type != NULL)
-        {
-            /* Manual syntax selection: reverse-lookup grammar name from display name */
-            grammar_from_type = ts_config_reverse_lookup ("display-names", type);
-            forced_grammar = grammar_from_type;
-        }
+            forced_grammar = ts_config_reverse_lookup ("display-names", type);
 
-        if (ts_init_for_file (edit, forced_grammar))
+        if ((type == NULL || forced_grammar != NULL) && ts_init_for_file (edit, forced_grammar))
         {
             edit_options.ts_available = TRUE;
-            g_free (grammar_from_type);
+            g_free (forced_grammar);
             return;  // tree-sitter successfully initialized
         }
 
-        g_free (grammar_from_type);
+        g_free (forced_grammar);
         // TS failed for this file - fall through to legacy for this file only.
         // Do NOT modify global state: other files may have valid grammars.
     }
@@ -1705,7 +1703,14 @@ edit_syntax_dialog (WEdit *edit)
     /* We fill the list of syntax files every time the editor is invoked.
        Instead we could save the list to a file and update it once the syntax
        file gets updated (either by testing or by explicit user command). */
-    edit_load_syntax (NULL, names, NULL);
+#ifdef HAVE_TREE_SITTER
+    // In tree-sitter mode offer the installed grammars, otherwise the legacy syntaxes
+    if (!mc_args__no_tree_sitter && edit_options.syntax_highlight_mode == SYNTAX_HIGHLIGHT_TS)
+        ts_get_display_names (names);
+
+    if (names->len == 0)
+#endif
+        edit_load_syntax (NULL, names, NULL);
     g_ptr_array_sort (names, pstrcmp);
 
     syntax = exec_edit_syntax_dialog (names, edit->syntax_type);
