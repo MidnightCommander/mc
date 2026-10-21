@@ -57,6 +57,13 @@ libinternal_la_LIBADD = \
 
 mc_LDADD = \
 	libinternal.la \
+<<<<<<< HEAD
+=======
+	$(TREE_SITTER_LIBS)
+
+if ENABLE_MCLIB
+libinternal_la_LIBADD += \
+>>>>>>> 573b60e20 (Tree-sitter integration for better syntax highlighting)
 	$(top_builddir)/lib/libmc.la
 
 SRC_mc_conssaver = \
