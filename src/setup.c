@@ -419,6 +419,7 @@ static const struct
     { "editor_stop_format_chars", &edit_options.stop_format_chars, "-+*\\,.;:&>" },
 #endif
     { "mcview_eof", &mcview_show_eof, "" },
+    { "quickview_image_protocol", &mcview_image_protocol, "auto" },
     { NULL, NULL, NULL },
 };
 

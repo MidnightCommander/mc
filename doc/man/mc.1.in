@@ -3683,6 +3683,20 @@ and that is the default value.
 Controls if scrolling with the mouse is done by pages or line by line
 on the internal file viewer.
 .TP
+.I quickview_image_protocol
+Selects how images are shown in the quick view panel.  Possible values are:
+.B auto
+(default; detect the terminal from the environment),
+.B iterm2
+(iTerm2 inline images protocol, used by iTerm2, WezTerm and others; all
+image formats supported by the terminal),
+.B kitty
+(kitty graphics protocol, used by kitty, Ghostty and others; PNG files
+only) and
+.B none
+(never show images).  Explicitly selected protocol is used even if the
+terminal can't be detected, but never inside tmux or screen.
+.TP
 .I only_leading_plus_minus
 Allow special treatment for '+', '\-', '*' in the command line (select,
 unselect, reverse selection) only if the command line is empty.  You
