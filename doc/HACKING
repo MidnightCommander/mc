@@ -28,7 +28,7 @@ This command can take a while.
 
 Note that the version of gettext doesn't affect the snapshot because the
 distributed files are installed by gettext from archives for the version
-used in the AM_GNU_GETTEXT_VERSION macro, which is 0.18.2.
+used in the AM_GNU_GETTEXT_VERSION macro.
 
 
 
