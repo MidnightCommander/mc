@@ -62,7 +62,7 @@ jobs:
             make indent && \
             git diff --exit-code && \
             \
-            make distcheck && \
+            make -j$(nproc) distcheck && \
             \
             make -C doc/man \
           '
