@@ -44,9 +44,7 @@ MSGID_BUGS_ADDRESS =
 EXTRA_LOCALE_CATEGORIES =
 
 # Suppress location information by default
-MSGMERGE_FLAGS =	--no-location
-MSGMERGE =		msgmerge ${MSGMERGE_FLAGS}
-MSGMERGE_UPDATE =	msgmerge --update ${MSGMERGE_FLAGS}
+MSGMERGE_OPTIONS = --no-location
 
 # mc.pot is tracked in git, which doesn't preserve timestamps, and the PO
 # files come from Transifex, so neither "make" nor "make dist" should
