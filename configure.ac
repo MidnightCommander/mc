@@ -334,7 +334,13 @@ dnl ############################################################################
 AC_CHECK_FUNCS([setlocale])
 
 AM_GNU_GETTEXT([external], [need-ngettext])
-AM_GNU_GETTEXT_VERSION([0.18.2])
+
+dnl Do NOT replace this with AM_GNU_GETTEXT_REQUIRE_VERSION: it makes autopoint
+dnl copy the files of the installed gettext instead. Since gettext 0.24, these
+dnl require a make that supports `!=' (GNU make >= 4.0 or BSD make), so tarballs
+dnl made on a recent system wouldn't build with the native make on macOS,
+dnl Solaris or AIX.
+AM_GNU_GETTEXT_VERSION([0.19.8])
 
 mc_ENCODING
 
