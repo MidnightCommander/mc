@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -513,12 +513,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Skift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Omgivningsvariablen TERM är inte satt!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan inte kontrollera SIGWINCH-tunnel"
-
 #, c-format
 msgid ""
 "\n"
@@ -550,6 +544,12 @@ msgid ""
 msgstr ""
 "Skärmstorleken %d×%d stöds inte.\n"
 "Kontrollera miljövariabeln TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Omgivningsvariablen TERM är inte satt!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kan inte kontrollera SIGWINCH-tunnel"
 
 msgid "B"
 msgstr "B"
@@ -1895,6 +1895,9 @@ msgstr "&Mkdir auto-namnger"
 msgid "&Preallocate space"
 msgstr "F&örallokera utrymme"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Esc-tangentläge"
 
@@ -2970,6 +2973,16 @@ msgstr "Kataloger: %zu, total storlek: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Jobbet kunde tyvärr inte göras i bakgrunden"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Destination\n"
+"%s\n"
+"måste vara en katalog"
+
 msgid "S&uspend"
 msgstr "Pa&usa"
 
@@ -3241,9 +3254,6 @@ msgstr "&Bakgrundsjobb"
 
 msgid "Screen lis&t"
 msgstr "Skä&rmlista"
-
-msgid "&Listing format edit"
-msgstr "Redigera &listningsformatet"
 
 msgid "Edit &extension file"
 msgstr "Redigera &utökningsfil"
@@ -3828,16 +3838,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"Destination\n"
-"%s\n"
-"måste vara en katalog"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Ta bort %s?"
 
@@ -4158,6 +4158,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Felaktig cpio-header påträffad i\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4171,14 +4179,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s innehåller dubbla poster! Hoppar över den!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Felaktig cpio-header påträffad i\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4564,6 +4564,9 @@ msgstr "Fel rapporterades efter avslutningen."
 msgid "Aborted transfer would be successful."
 msgstr "Avbruten överföring skulle ha varit lyckad."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek inte stoppad vid en postgräns"
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistensfel i tararkivet"
 
@@ -4585,9 +4588,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ser inte ut som ett tar-arkiv"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek inte stoppad vid en postgräns"
 
 msgid "Invalid value"
 msgstr "Ogiltigt värde"
@@ -4686,12 +4686,11 @@ msgstr ""
 "%s\n"
 "Inte en vanlig fil"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Kan inte öppna\n"
 "%s\n"
@@ -4704,8 +4703,11 @@ msgstr "Sökning klar"
 msgid "Continue from beginning?"
 msgstr "Fortsätt från början?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Redigera &listningsformatet"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Nollställ mjuka tangenter på HP-terminaler"

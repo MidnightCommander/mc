@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: お餅のCreeeper, 2025\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -480,12 +480,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "環境変数 TERM がセットされていません\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH パイプをチェックできません"
-
 #, c-format
 msgid ""
 "\n"
@@ -513,6 +507,12 @@ msgid ""
 msgstr ""
 "スクリーンサイズ %dx%d はサポートされていません\n"
 "TERM環境変数の値をチェックしてください\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "環境変数 TERM がセットされていません\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH パイプをチェックできません"
 
 msgid "B"
 msgstr "B"
@@ -1799,6 +1799,9 @@ msgstr ""
 msgid "&Preallocate space"
 msgstr ""
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr ""
 
@@ -2742,6 +2745,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr ""
 
@@ -3013,9 +3023,6 @@ msgstr ""
 
 msgid "Screen lis&t"
 msgstr "画面の一覧(&T)"
-
-msgid "&Listing format edit"
-msgstr "一覧形式編集(&L)"
 
 msgid "Edit &extension file"
 msgstr "拡張ファイルを編集(&E)"
@@ -3590,13 +3597,6 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "%s を削除しますか?"
 
@@ -3912,6 +3912,12 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr "%s の中で壊れた cpio ヘッダに遭遇した"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3924,12 +3930,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s 不正なエントリが含まれます! スキップ!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr "%s の中で壊れた cpio ヘッダに遭遇した"
 
 #, c-format
 msgid ""
@@ -4282,6 +4282,9 @@ msgstr "中断後にエラーが報告されました"
 msgid "Aborted transfer would be successful."
 msgstr "転送中断に成功しました"
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
 
@@ -4300,9 +4303,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4398,8 +4398,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4408,8 +4407,8 @@ msgstr "検索終了"
 msgid "Continue from beginning?"
 msgstr "初めから続けますか?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
+#~ msgid "&Listing format edit"
+#~ msgstr "一覧形式編集(&L)"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "HPターミナルでソフトウェアキーボードを要求"

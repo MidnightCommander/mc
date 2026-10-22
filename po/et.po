@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>, "
 "2013-2016,2018-2019,2024-2026\n"
@@ -504,12 +504,6 @@ msgstr "Klahv Alt"
 msgid "Shift"
 msgstr "Klahv Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Keskkonnamuutujat TERM on määramata!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH toru ei saa kontrollida"
-
 #, c-format
 msgid ""
 "\n"
@@ -543,6 +537,12 @@ msgid ""
 msgstr ""
 "Ekraani suurus %dx%d ei ole toetatud.\n"
 "Kontrolli keskkonna muutujat TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Keskkonnamuutujat TERM on määramata!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH toru ei saa kontrollida"
 
 msgid "B"
 msgstr "B"
@@ -1887,6 +1887,9 @@ msgstr "&Automaatne kausta nimi"
 msgid "&Preallocate space"
 msgstr "&Ruumi eelhankimine"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Klahvi Esc režiim"
 
@@ -2957,6 +2960,16 @@ msgstr "Kaustu: %zu, kogumaht: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Vabandust, töö saatmine taustale nurjus"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Siht\n"
+"%s\n"
+"peab olema kaust"
+
 msgid "S&uspend"
 msgstr "Se&iska"
 
@@ -3228,9 +3241,6 @@ msgstr "&Tööd taustal"
 
 msgid "Screen lis&t"
 msgstr "&Ekraanide loend"
-
-msgid "&Listing format edit"
-msgstr "Muuda &loendi vormindust"
 
 msgid "Edit &extension file"
 msgstr "Muuda &laiendite faili"
@@ -3815,16 +3825,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"Siht\n"
-"%s\n"
-"peab olema kaust"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Kas kustutada %s?"
 
@@ -4145,6 +4145,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Leiti vigane cpio päis failis\n"
+" %s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4158,14 +4166,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s sisaldab korduvkirjeid! Jäetakse vahele!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Leiti vigane cpio päis failis\n"
-" %s"
 
 #, c-format
 msgid ""
@@ -4549,6 +4549,9 @@ msgstr "Pärast katkestamist raporteeriti viga."
 msgid "Aborted transfer would be successful."
 msgstr "Katkestatud ülekanne oleks edukas."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek ei peatunud kirje piiril"
+
 msgid "Inconsistent tar archive"
 msgstr "Tar arhiiv sisaldab vasturääkivusi"
 
@@ -4570,9 +4573,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ei meenuta tar arhiivi"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek ei peatunud kirje piiril"
 
 msgid "Invalid value"
 msgstr "Vigane väärtus"
@@ -4671,12 +4671,11 @@ msgstr ""
 "%s\n"
 "See pole harilik fail"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "%s\n"
 "faili\n"
@@ -4688,8 +4687,12 @@ msgstr "Otsing lõpetatud"
 msgid "Continue from beginning?"
 msgstr "Kas jätkata algusest?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr ""
+#~ "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Muuda &loendi vormindust"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Lähtesta HP terminalidel seadistatavad klahvid"
