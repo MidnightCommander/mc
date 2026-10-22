@@ -517,7 +517,7 @@ ALL_DOC_LINGUAS="es hu it pl ru sr"
 DOC_LINGUAS=
 if test "x$USE_NLS" = xyes; then
     if test -z "$LINGUAS"; then
-        langs="`grep -v '^#' $srcdir/po/LINGUAS`"
+        langs="`sed -e '/^#/d' -e 's/#.*//' $srcdir/po/LINGUAS`"
     else
         langs="$LINGUAS"
     fi
