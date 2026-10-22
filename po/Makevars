@@ -57,3 +57,7 @@ DIST_DEPENDS_ON_UPDATE_PO = no
 # Without "update-po", "make -j dist" builds the same .gmo files both from
 # "dist2" and from "stamp-po" in parallel, which then fail to rename
 .NOTPARALLEL:
+
+# The .gmo files are only rebuilt via "stamp-po", so it must also be
+# outdated when the PO files change, e.g., after "git pull"
+stamp-po: $(POFILES)
