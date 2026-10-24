@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -482,12 +482,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Vaihto"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ei voi tarkistaa SIGWINCH -putkea"
-
 #, c-format
 msgid ""
 "\n"
@@ -519,6 +513,12 @@ msgid ""
 msgstr ""
 "Näytön koko %dx%d ei ole yhteensopiva.\n"
 "Tarkista TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM-ympäristön muuttujaa ei ole asetettu!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ei voi tarkistaa SIGWINCH -putkea"
 
 msgid "B"
 msgstr "t"
@@ -1813,6 +1813,9 @@ msgstr ""
 msgid "&Preallocate space"
 msgstr ""
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr ""
 
@@ -2758,6 +2761,13 @@ msgstr "Kansioiden: %zu, koko yhteensä: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Anteeksi, en voinut laittaa työtä taustalle"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr ""
 
@@ -3028,9 +3038,6 @@ msgid "&Background jobs"
 msgstr ""
 
 msgid "Screen lis&t"
-msgstr ""
-
-msgid "&Listing format edit"
 msgstr ""
 
 msgid "Edit &extension file"
@@ -3604,13 +3611,6 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr ""
 
@@ -3896,6 +3896,12 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3904,12 +3910,6 @@ msgstr ""
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr ""
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
 msgstr ""
 
 #, c-format
@@ -4262,6 +4262,9 @@ msgstr "Virhe raportoitu keskeyttämisen jälkeen."
 msgid "Aborted transfer would be successful."
 msgstr "Keskeytetty siirto olisi onnistunut."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4278,9 +4281,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4374,17 +4374,13 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
 msgstr ""
 
 msgid "Continue from beginning?"
-msgstr ""
-
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
 #~ msgid "Specifies a color configuration"

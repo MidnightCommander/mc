@@ -44,6 +44,18 @@ MSGID_BUGS_ADDRESS =
 EXTRA_LOCALE_CATEGORIES =
 
 # Suppress location information by default
-MSGMERGE_FLAGS =	--no-location
-MSGMERGE =		msgmerge ${MSGMERGE_FLAGS}
-MSGMERGE_UPDATE =	msgmerge --update ${MSGMERGE_FLAGS}
+MSGMERGE_OPTIONS = --no-location
+
+# mc.pot is tracked in git, which doesn't preserve timestamps, and the PO
+# files come from Transifex, so neither "make" nor "make dist" should
+# update them; use "make update-po" explicitly.
+PO_DEPENDS_ON_POT = no
+DIST_DEPENDS_ON_UPDATE_PO = no
+
+# Without "update-po", "make -j dist" builds the same .gmo files both from
+# "dist2" and from "stamp-po" in parallel, which then fail to rename
+.NOTPARALLEL:
+
+# The .gmo files are only rebuilt via "stamp-po", so it must also be
+# outdated when the PO files change, e.g., after "git pull"
+stamp-po: $(POFILES)
