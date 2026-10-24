@@ -26,6 +26,11 @@ AC_DEFINE([PACKAGE], ["mc"], [Name of package])
 dnl Enable silent rules by default (if yes)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
+# Enforce failing upon unknown `./configure` options by default
+if test "x$enable_option_checking" != xno; then
+  enable_option_checking=fatal
+fi
+
 mc_VERSION
 
 AM_MAINTAINER_MODE
@@ -742,12 +747,3 @@ Configuration:
   Internal editor:                ${edit_msg}
   Diff viewer:                    ${diff_msg}
 ])
-
-dnl option checking is disable by default due to AC_CONFIG_SUBDIRS
-dnl we enable it back for top-level ./configure
-if test -n "$ac_unrecognized_opts"; then
-  case $enable_option_checking in
-    fatal) AC_MSG_ERROR([unrecognized options: $ac_unrecognized_opts]) ;;
-    *)     AC_MSG_WARN( [unrecognized options: $ac_unrecognized_opts]) ;;
-  esac
-fi
