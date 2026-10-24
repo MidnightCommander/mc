@@ -868,6 +868,8 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
     int dlg_width = 58, dlg_height = 17;
     int y = 2, x = 3;
     WRect r;
+    // the progress bars grow towards the other panel, unless the classic look is requested
+    const gboolean from_left_to_right = classic_progressbar || current_panel != right_panel;
 
     if (ctx == NULL || ctx->ui != NULL)
         return;
@@ -911,9 +913,13 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         ui->tgt_file = label_new (y++, x, NULL);
         group_add_widget (g, ui->tgt_file);
 
-        ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
-        if (!classic_progressbar && (current_panel == right_panel))
-            ui->progress_file_gauge->from_left_to_right = FALSE;
+        // the terminal shows the progress of the total gauge if there is one, else of this one
+        const gboolean has_total_gauge =
+            verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM && ctx->totals_computed;
+
+        ui->progress_file_gauge =
+            gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0, from_left_to_right,
+                       mc_global.tty.xterm_flag && !has_total_gauge);
         group_add_widget_autopos (g, ui->progress_file_gauge, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
 
         ui->progress_file_label = label_new (y++, x, NULL);
@@ -927,9 +933,8 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
             if (ctx->totals_computed)
             {
                 ui->progress_total_gauge =
-                    gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
-                if (!classic_progressbar && (current_panel == right_panel))
-                    ui->progress_total_gauge->from_left_to_right = FALSE;
+                    gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0,
+                               from_left_to_right, mc_global.tty.xterm_flag);
                 group_add_widget_autopos (g, ui->progress_total_gauge,
                                           WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
             }
