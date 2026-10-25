@@ -622,7 +622,7 @@ tty_print_anychar (mc_tty_char_t c)
         if (res == 0)
         {
             if (yx_in_screen (mc_curs_row, mc_curs_col))
-                addch_maybe_acs ('.');
+                addch_maybe_acs (NON_PRINTABLE_CHAR);
             mc_curs_col++;
         }
         else

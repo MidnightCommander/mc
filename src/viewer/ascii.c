@@ -253,7 +253,7 @@ mcview_char_display (const gboolean utf8, const combining_char_t *c, char *s)
     {
         if (c->width == 2)
         {
-            s[0] = s[1] = '.';
+            s[0] = s[1] = NON_PRINTABLE_CHAR;
             return 2;
         }
 
@@ -653,7 +653,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
             // Nonprintable, or lonely spacing mark
             if (!cs[0].printable || mcview_ismark (conv->utf8, cs[0].src))
             {
-                cs[0].ch = '.';
+                cs[0].ch = NON_PRINTABLE_CHAR;
                 cs[0].width = 1;
                 cs[0].printable = TRUE;
             }

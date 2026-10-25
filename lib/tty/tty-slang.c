@@ -598,7 +598,7 @@ tty_print_anychar (mc_tty_char_t c)
         res = g_unichar_to_utf8 (c, str);
         if (res == 0)
         {
-            str[0] = '.';
+            str[0] = NON_PRINTABLE_CHAR;
             str[1] = '\0';
         }
         else
@@ -610,7 +610,7 @@ tty_print_anychar (mc_tty_char_t c)
     else
     {
         if (!is_printable (c))
-            c = '.';
+            c = NON_PRINTABLE_CHAR;
         SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
     }
 }

@@ -254,7 +254,7 @@ str_ascii_term_form (const char *text)
     for (; pos < length && remain > 1; pos++, actual++, remain--)
     {
         actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-        actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+        actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
     }
 
     actual[0] = '\0';
@@ -303,7 +303,7 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
         for (; pos < (gsize) length && remain > 1; pos++, actual++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
 
         // add space after text
@@ -321,7 +321,7 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
         for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
 
         if (remain <= 1)
@@ -336,7 +336,7 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
         for (; pos < length && remain > 1; pos++, actual++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
     }
     else
@@ -359,7 +359,7 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
         for (; pos < (gsize) (ident + width) && remain > 1; pos++, actual++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
     }
 
@@ -394,7 +394,7 @@ str_ascii_term_trim (const char *text, const ssize_t width)
             for (pos = 0; pos < length && remain > 1; pos++, actual++, remain--)
             {
                 actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
             }
         }
         else if (width <= 3)
@@ -413,7 +413,7 @@ str_ascii_term_trim (const char *text, const ssize_t width)
                  pos++, actual++, remain--)
             {
                 actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
             }
         }
     }
@@ -472,7 +472,7 @@ str_ascii_term_substring (const char *text, int start, int width)
              pos++, width--, actual++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
     }
 
@@ -505,7 +505,7 @@ str_ascii_trunc (const char *text, const ssize_t width)
         for (; pos + 1 <= (size_t) width / 2 && remain > 1; actual++, pos++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
 
         if (remain <= 1)
@@ -520,7 +520,7 @@ str_ascii_trunc (const char *text, const ssize_t width)
         for (; pos < length && remain > 1; pos++, actual++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
     }
     else
@@ -529,7 +529,7 @@ str_ascii_trunc (const char *text, const ssize_t width)
         for (; pos < length && remain > 1; pos++, actual++, remain--)
         {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : NON_PRINTABLE_CHAR;
         }
     }
 

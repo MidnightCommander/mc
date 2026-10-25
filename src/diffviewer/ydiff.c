@@ -648,7 +648,7 @@ dview_str_offset_to_pos (const char *text, size_t length, const gboolean utf8)
                 tmpbuf = g_utf8_next_char (tmpbuf);
             else
             {
-                tmpbuf[0] = '.';
+                tmpbuf[0] = NON_PRINTABLE_CHAR;
                 tmpbuf++;
             }
         }
@@ -1371,7 +1371,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
                     else
                     {
                         dstsize--;
-                        *dst++ = '.';
+                        *dst++ = NON_PRINTABLE_CHAR;
                     }
                 }
                 break;
@@ -1467,7 +1467,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
                     {
                         dstsize--;
                         *att++ = is_inside (k, hdiff, ord);
-                        *dst++ = '.';
+                        *dst++ = NON_PRINTABLE_CHAR;
                     }
                 }
                 break;
@@ -2483,7 +2483,7 @@ dview_display_line (const int y, const int x, const size_t width, const char *at
         if (conv->printable)
             tty_print_anychar (conv->ch);
         else
-            tty_print_anychar ('.');
+            tty_print_anychar (NON_PRINTABLE_CHAR);
 
         j += (conv->printable && conv->wide) ? 2 : 1;
     }

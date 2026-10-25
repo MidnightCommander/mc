@@ -490,7 +490,7 @@ str_utf8_make_make_term_form (const char *text, const ssize_t width)
             }
             else
             {
-                actual[0] = '.';
+                actual[0] = NON_PRINTABLE_CHAR;
                 actual++;
                 result.width++;
             }

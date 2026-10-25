@@ -299,7 +299,7 @@ str_8bit_term_form (const char *text)
     length = strlen (text);
 
     for (; pos < length && remain > 1; pos++, actual++, remain--)
-        actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+        actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
 
     actual[0] = '\0';
     return result;
@@ -343,7 +343,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
         remain -= ident;
 
         for (; pos < length && remain > 1; pos++, actual++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
 
         if (width - length - ident > 0)
         {
@@ -356,7 +356,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
     else if (IS_FIT (just_mode))
     {
         for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
 
         if (remain <= 1)
             goto finally;
@@ -366,7 +366,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 
         pos += length - width + 1;
         for (; pos < length && remain > 1; pos++, actual++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
     }
     else
     {
@@ -384,7 +384,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 
         pos += ident;
         for (; pos < (gsize) (ident + width) && remain > 1; pos++, actual++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
     }
 
 finally:
@@ -415,7 +415,7 @@ str_8bit_term_trim (const char *text, const ssize_t width)
         if ((size_t) width >= length)
         {
             for (pos = 0; pos < length && remain > 1; pos++, actual++, remain--)
-                actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+                actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
         }
         else if (width <= 3)
         {
@@ -430,7 +430,7 @@ str_8bit_term_trim (const char *text, const ssize_t width)
 
             for (pos = length - (size_t) width + 3; pos < length && remain > 1;
                  pos++, actual++, remain--)
-                actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+                actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
         }
     }
 
@@ -485,7 +485,7 @@ str_8bit_term_substring (const char *text, int start, int width)
 
         for (pos = start; pos < length && width > 0 && remain > 1;
              pos++, width--, actual++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
     }
 
     for (; width > 0 && remain > 1; actual++, remain--, width--)
@@ -513,7 +513,7 @@ str_8bit_trunc (const char *text, const ssize_t width)
     if (width >= 0 && length > (size_t) width)
     {
         for (; pos + 1 <= (size_t) width / 2 && remain > 1; actual++, pos++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
 
         if (remain <= 1)
             goto finally;
@@ -523,12 +523,12 @@ str_8bit_trunc (const char *text, const ssize_t width)
 
         pos += length - (size_t) width + 1;
         for (; pos < length && remain > 1; pos++, actual++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
     }
     else
     {
         for (; pos < length && remain > 1; pos++, actual++, remain--)
-            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+            actual[0] = char_isprint (text[pos]) ? text[pos] : NON_PRINTABLE_CHAR;
     }
 
 finally:

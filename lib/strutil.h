@@ -42,11 +42,13 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define IS_FIT(x)    ((x) & 0x0010)
-#define MAKE_FIT(x)  ((x) | 0x0010)
-#define HIDE_FIT(x)  ((x) & 0x000f)
+#define IS_FIT(x)          ((x) & 0x0010)
+#define MAKE_FIT(x)        ((x) | 0x0010)
+#define HIDE_FIT(x)        ((x) & 0x000f)
 
-#define INVALID_CONV ((GIConv) (-1))
+#define INVALID_CONV       ((GIConv) (-1))
+
+#define NON_PRINTABLE_CHAR '.'
 
 /*** enums ***************************************************************************************/
 
@@ -387,7 +389,7 @@ int str_length_noncomb (const char *text);
 void str_fix_string (char *text);
 
 /* replace all invalid characters in text with questionmark
- * replace all unprintable characters with '.'
+ * replace all unprintable characters with NON_PRINTABLE_CHAR
  * return static allocated string, "text" is not changed
  * returned string do not need to be freed
  * I

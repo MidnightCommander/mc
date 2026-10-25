@@ -713,7 +713,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         }
                         else
                         {
-                            p->ch = '.';
+                            p->ch = NON_PRINTABLE_CHAR;
                             p->style = abn_style;
                         }
                         p++;
