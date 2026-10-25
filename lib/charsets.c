@@ -64,8 +64,6 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-static const char NON_PRINTABLE_CHAR = '.';
-
 static const char NO_TRANSLATION[] = N_ ("No translation");
 
 static unsigned char conv_display_table[256];
@@ -589,7 +587,7 @@ convert_char_to_display (charset_conv_t *conv, void *from, const off_t pos)
             if (b != -1)
             {
                 // Invalid UTF-8 sequence: display one byte as non-printable character
-                conv->ch = '.';
+                conv->ch = NON_PRINTABLE_CHAR;
                 conv->src = b;
                 conv->len = 1;
                 conv->printable = FALSE;

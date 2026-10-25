@@ -3480,7 +3480,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
             res = g_unichar_to_utf8 (char_for_insertion, (char *) str);
             if (res == 0)
             {
-                str[0] = '.';
+                str[0] = NON_PRINTABLE_CHAR;
                 str[1] = '\0';
             }
             else

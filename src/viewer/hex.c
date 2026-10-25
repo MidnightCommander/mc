@@ -44,6 +44,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/lock.h"  // lock_file() and unlock_file()
 #include "lib/util.h"
+#include "lib/strutil.h"  // NON_PRINTABLE_CHAR
 #include "lib/widget.h"
 
 #include "internal.h"
@@ -231,7 +232,7 @@ mcview_display_hex (WView *view)
                     // Determine the state of the current multibyte char
                     uni = g_utf8_get_char_validated (utf8buf, -1);
                     if (uni == (gunichar) (-1) || uni == (gunichar) (-2))
-                        uni = '.';
+                        uni = NON_PRINTABLE_CHAR;
                     else
                     {
                         gchar *next_ch;
@@ -343,7 +344,7 @@ mcview_display_hex (WView *view)
             if (mc_global.utf8_display)
             {
                 if (!mcview_isprint (view, c))
-                    c = '.';
+                    c = NON_PRINTABLE_CHAR;
             }
             else if (view->conv.utf8)
                 ch = convert_unichar_to_8bit (ch, view->conv.conv);
@@ -351,7 +352,7 @@ mcview_display_hex (WView *view)
             {
                 c = convert_8bit_to_display (c);
                 if (!is_printable (c))
-                    c = '.';
+                    c = NON_PRINTABLE_CHAR;
             }
 
             // Print corresponding character on the text side
