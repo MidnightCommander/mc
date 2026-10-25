@@ -146,6 +146,9 @@ src/editor/editcmd__edit_complete_word_cmd
 src/editor/editcmd__edit_complete_word_cmd.log
 src/editor/editcmd__edit_complete_word_cmd.trs
 src/editor/edit_complete_word_cmd
+src/editor/edit_move_forward3
+src/editor/edit_move_forward3.log
+src/editor/edit_move_forward3.trs
 src/editor/edit_replace_cmd
 src/editor/test-suite.log
 src/execute__execute_external_editor_or_viewer
