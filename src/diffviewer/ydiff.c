@@ -601,7 +601,7 @@ dview_get_utf (const char *str, const size_t pos, int *len)
     }
     else
     {
-        c = (unsigned char) (*s);
+        c = (signed char) (*s);
         *len = 1;
     }
 
