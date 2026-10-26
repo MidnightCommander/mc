@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -490,12 +490,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Majús"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La variable d'entorn TERM no està definida!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -529,6 +523,12 @@ msgid ""
 msgstr ""
 "La mida de pantalla %dx%d no està admesa.\n"
 "Reviseu la variable d'entorn TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La variable d'entorn TERM no està definida!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -762,8 +762,8 @@ msgid ""
 "as tickets at %s\n"
 msgstr ""
 "\n"
-"Si us plau, envieu qualsevol informe d'error (incloent-hi la sortida de «%s -"
-"V»)\n"
+"Si us plau, envieu qualsevol informe d'error (incloent-hi la sortida de «%s "
+"-V»)\n"
 "com a entrades a %s\n"
 
 msgid "Main options"
@@ -1878,6 +1878,9 @@ msgstr "Nom aut&omàtic en crear un directori"
 msgid "&Preallocate space"
 msgstr "&Reserva espai"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Mode de la tecla Esc"
 
@@ -2879,6 +2882,13 @@ msgstr "Directoris: %zu, mida total: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Ho sentim, no hem pogut posar la tasca en segon pla"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "S&uspèn"
 
@@ -3150,9 +3160,6 @@ msgstr "Tasques en se&gon pla"
 
 msgid "Screen lis&t"
 msgstr "Llis&ta les pantalles"
-
-msgid "&Listing format edit"
-msgstr "Edita el format del &llistat"
 
 msgid "Edit &extension file"
 msgstr "Edita el fitxer d'&extensions"
@@ -3739,13 +3746,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Voleu suprimir %s?"
 
@@ -4064,6 +4064,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"S'ha trobat una capçalera cpio corrupta a\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4077,14 +4085,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s conté registres duplicats! S'estan ometent!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"S'ha trobat una capçalera cpio corrupta a\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4476,6 +4476,9 @@ msgstr "S'ha informat d'un error després d'interrompre."
 msgid "Aborted transfer would be successful."
 msgstr "Transferència interrompuda amb èxit."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
+
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu TAR no és coherent"
 
@@ -4497,9 +4500,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "no sembla un arxiu tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
 msgid "Invalid value"
 msgstr "Valor no vàlid"
@@ -4593,13 +4593,14 @@ msgid ""
 "Not a regular file"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
+"No s'ha pogut obrir\n"
+"%s"
 
 msgid "Search done"
 msgstr "Cerca finalitzada"
@@ -4607,9 +4608,12 @@ msgstr "Cerca finalitzada"
 msgid "Continue from beginning?"
 msgstr "Voleu continuar des del començament?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
-"No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr ""
+#~ "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Edita el format del &llistat"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Reinicia les tecles programades als terminals HP"

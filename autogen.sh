@@ -10,16 +10,13 @@ cd "$srcdir"
 
 ${AUTORECONF:-autoreconf} --verbose --install --force -I m4 ${AUTORECONF_FLAGS}
 
-# Generate po/POTFILES.in
-if ! xgettext -h 2>&1 | grep -- '--keyword' >/dev/null ; then
-  echo "gettext is unable to extract translations, set XGETTEXT to GNU gettext!" >&2
-  touch po/POTFILES.in
-else
-  ${XGETTEXT:-xgettext} --keyword=_ --keyword=N_ --keyword=Q_ --output=- \
-	`find . -name '*.[ch]'` | ${SED-sed} -ne '/^#:/{s/#://;s/:[0-9]*/\
-/g;s/ //g;p;}' | \
-	grep -v '^$' | sort | uniq >po/POTFILES.in
-fi
+# Generate po/POTFILES.in from sources that call `_ ()`, `N_ ()`, `Q_ ()`
+# or `ngettext ()`; false positives are harmless, `xgettext` skips them
+for f in `find lib src -name '*.[ch]'`; do
+  if grep '_ *(' "$f" >/dev/null || grep 'gettext *(' "$f" >/dev/null; then
+    echo "$f"
+  fi
+done | LC_ALL=C sort >po/POTFILES.in
 
 "$srcdir/version.sh" "$srcdir"
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Galician (http://app.transifex.com/mc/mc/language/gl/)\n"
@@ -487,12 +487,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maiús"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variábel de contorno TERM está sen definir!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -518,6 +512,12 @@ msgid ""
 msgstr ""
 "O tamaño de xanela %dx%d non esta admitido.\n"
 "Verifique o valor da variábel de contorno TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variábel de contorno TERM está sen definir!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1816,6 +1816,9 @@ msgstr "Nomear automaticamente ao crear di&Rectorio"
 msgid "&Preallocate space"
 msgstr "&Preasignar espazo"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Tecla «Escape»"
 
@@ -2782,6 +2785,13 @@ msgstr "Directorios: %zu, tamaño total: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Síntoo, non se puido pór a tarefa en 2º plano"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "s&Uspender"
 
@@ -3053,9 +3063,6 @@ msgstr "&Procesos en 2º plano"
 
 msgid "Screen lis&t"
 msgstr "&Lista de pantallas"
-
-msgid "&Listing format edit"
-msgstr "Edición do formato de &Lista"
 
 msgid "Edit &extension file"
 msgstr "&Editar o ficheiro de extensións"
@@ -3636,13 +3643,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Eliminar %s?"
 
@@ -3958,6 +3958,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Cabeceira cpio danada atopada en\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3971,14 +3979,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s conten entradas duplicadas! Ignorando!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Cabeceira cpio danada atopada en\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4333,6 +4333,9 @@ msgstr "Informouse dun erro despois de interromper."
 msgid "Aborted transfer would be successful."
 msgstr "Transferencia interrompida satisfactoriamente."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Arquivo de tipo tar inconsistente"
 
@@ -4351,9 +4354,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4452,8 +4452,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4462,8 +4461,11 @@ msgstr "Busca rematada"
 msgid "Continue from beginning?"
 msgstr "Continuar desde o principio?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Edición do formato de &Lista"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Restabelecer teclas en terminais HP"
