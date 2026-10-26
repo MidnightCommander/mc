@@ -553,8 +553,10 @@ dumpdir_decoder (struct tar_stat_info *st, const char *keyword, const char *arg,
 {
     (void) keyword;
 
+    /* Like GNU tar, ignore a malformed dumpdir instead of rejecting the whole archive:
+       it is not needed to list or extract the member. */
     if (!tar_dumpdir_ok (arg, size))
-        return FALSE;
+        return TRUE;
 
 #if GLIB_CHECK_VERSION(2, 68, 0)
     st->dumpdir = g_memdup2 (arg, size);
@@ -655,14 +657,15 @@ decg (void *data, const char *keyword, const char *value, size_t size)
 static gboolean
 decx (void *data, const char *keyword, const char *value, size_t size)
 {
-    struct keyword_item kp = {
-        .pattern = (char *) keyword,
-        .value = (char *) value,
-    };
+    struct xhdr_tab const *t;
 
-    (void) size;
+    /* Don't use keyword_item_run() here: it passes strlen (value) as the value size,
+       which is wrong for binary values such as GNU.dumpdir that contain NUL bytes. */
+    t = locate_handler (keyword);
+    if (t != NULL)
+        return t->decoder ((struct tar_stat_info *) data, keyword, value, size);
 
-    return keyword_item_run (&kp, data);
+    return TRUE;  // FIXME
 }
 
 /* --------------------------------------------------------------------------------------------- */
