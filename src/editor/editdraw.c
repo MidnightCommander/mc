@@ -541,6 +541,14 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
             g_snprintf (line_stat, 2, "*");
     }
 
+    if (col <= -(edit->start_col + 16) && edit->column_highlight != 0)
+    {
+        /* The line ends far to the left of the visible area, but a column block can be
+           visible past its end: start drawing the line from the first visible column. */
+        col = -edit->start_col;
+        start_col_real = start_col = 0;
+    }
+
     if (col <= -(edit->start_col + 16))
         start_col_real = start_col = 0;
     else
@@ -618,7 +626,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 {
                 case '\n':
                     // draw a column block as a full rectangle past the end of a short line
-                    if (edit->column_highlight != 0 && b < m2 && q >= m1)
+                    if (edit->column_highlight != 0 && b <= m2 && q >= m1)
                     {
                         const long cl1 = MIN (edit->column1, edit->column2);
                         const long cl2 = MAX (edit->column1, edit->column2);
