@@ -194,10 +194,9 @@ mcview_fast_search_prepare (const WView *view, gboolean *caseless)
                 return NULL;
 
         *caseless = !search->is_case_sensitive;
-        needle = g_string_new_len (str->str, (gssize) str->len);
+        needle = mc_g_string_dup (str);
         if (*caseless)
-            for (i = 0; i < needle->len; i++)
-                needle->str[i] = g_ascii_tolower (needle->str[i]);
+            g_string_ascii_down (needle);
         return needle;
     }
 
