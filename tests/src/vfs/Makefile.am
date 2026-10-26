@@ -12,3 +12,7 @@ endif
 if ENABLE_VFS_FTP
 SUBDIRS += ftpfs
 endif
+
+if ENABLE_VFS_TAR
+SUBDIRS += tar
+endif
