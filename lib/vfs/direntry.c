@@ -1184,6 +1184,8 @@ vfs_s_get_path (const vfs_path_t *vpath, struct vfs_s_super **archive, int flags
         return NULL;
     }
 
+    path_element->class->verrno = 0;
+
     subclass = VFS_SUBCLASS (path_element->class);
 
     super = subclass->new_archive != NULL ? subclass->new_archive (path_element->class)
@@ -1202,7 +1204,8 @@ vfs_s_get_path (const vfs_path_t *vpath, struct vfs_s_super **archive, int flags
     if (result == -1)
     {
         vfs_s_free_super (path_element->class, super);
-        path_element->class->verrno = EIO;
+        if (path_element->class->verrno == 0)
+            path_element->class->verrno = EIO;
         return NULL;
     }
     if (super->name == NULL)

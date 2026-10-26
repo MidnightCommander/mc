@@ -26,7 +26,7 @@
 
 #include <config.h>
 
-#include <errno.h>  // ENOENT, EACCES
+#include <errno.h>  // EBADF
 
 #include <libssh2.h>
 #include <libssh2_sftp.h>
@@ -87,16 +87,8 @@ sftpfs_reopen (vfs_file_handler_t *fh, GError **mcerror)
 static int
 sftpfs_file__handle_error (sftpfs_super_t *super, int sftp_res, GError **mcerror)
 {
-    if (sftpfs_is_sftp_error (super->sftp_session, sftp_res, LIBSSH2_FX_PERMISSION_DENIED))
-        return -EACCES;
-
-    if (sftpfs_is_sftp_error (super->sftp_session, sftp_res, LIBSSH2_FX_NO_SUCH_FILE))
-        return -ENOENT;
-
-    if (!sftpfs_waitsocket (super, sftp_res, mcerror))
-        return -1;
-
-    return 0;
+    sftpfs_ssherror_to_gliberror (super, sftp_res, mcerror);
+    return -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -141,6 +133,7 @@ sftpfs_open_file (vfs_file_handler_t *fh, int flags, mode_t mode, GError **mcerr
 
     name = vfs_s_fullpath (vfs_sftpfs_ops, fh->ino);
     if (name == NULL)
+        // vfs_s_fullpath has set verrno in this case
         return FALSE;
 
     if ((flags & O_CREAT) != 0 || (flags & O_WRONLY) != 0)
@@ -162,26 +155,17 @@ sftpfs_open_file (vfs_file_handler_t *fh, int flags, mode_t mode, GError **mcerr
 
     fixfname = sftpfs_fix_filename (name);
 
-    while (TRUE)
+    file->handle = libssh2_sftp_open_ex (super->sftp_session, fixfname->str, fixfname->len,
+                                         sftp_open_flags, sftp_open_mode, LIBSSH2_SFTP_OPENFILE);
+    g_free (name);
+    if (file->handle == NULL)
     {
         int libssh_errno;
 
-        file->handle =
-            libssh2_sftp_open_ex (super->sftp_session, fixfname->str, fixfname->len,
-                                  sftp_open_flags, sftp_open_mode, LIBSSH2_SFTP_OPENFILE);
-        if (file->handle != NULL)
-            break;
-
         libssh_errno = libssh2_session_last_errno (super->session);
-        if (libssh_errno != LIBSSH2_ERROR_EAGAIN)
-        {
-            sftpfs_ssherror_to_gliberror (super, libssh_errno, mcerror);
-            g_free (name);
-            return FALSE;
-        }
+        sftpfs_ssherror_to_gliberror (super, libssh_errno, mcerror);
+        return FALSE;
     }
-
-    g_free (name);
 
     file->flags = flags;
     file->mode = mode;
@@ -233,21 +217,14 @@ sftpfs_fstat (void *data, struct stat *buf, GError **mcerror)
     mc_return_val_if_error (mcerror, -1);
 
     if (sftpfs_fh->handle == NULL)
-        return -1;
-
-    do
     {
-        int err;
-
-        res = libssh2_sftp_fstat_ex (sftpfs_fh->handle, &attrs, 0);
-        if (res >= 0)
-            break;
-
-        err = sftpfs_file__handle_error (sftpfs_super, res, mcerror);
-        if (err < 0)
-            return err;
+        mc_propagate_error (mcerror, EBADF, "%s", unix_error_string (EBADF));
+        return -1;
     }
-    while (res == LIBSSH2_ERROR_EAGAIN);
+
+    res = libssh2_sftp_fstat_ex (sftpfs_fh->handle, &attrs, 0);
+    if (res < 0)
+        return sftpfs_file__handle_error (sftpfs_super, res, mcerror);
 
     sftpfs_attr_to_stat (&attrs, buf);
 
@@ -263,7 +240,7 @@ sftpfs_fstat (void *data, struct stat *buf, GError **mcerror)
  * @param count   data size
  * @param mcerror pointer to the error handler
  *
- * @return 0 on success, negative value otherwise
+ * @return bytes read on success, negative value otherwise
  */
 
 ssize_t
@@ -277,26 +254,16 @@ sftpfs_read_file (vfs_file_handler_t *fh, char *buffer, size_t count, GError **m
 
     if (fh == NULL)
     {
-        mc_propagate_error (mcerror, 0, "%s",
+        mc_propagate_error (mcerror, EBADF, "%s",
                             _ ("sftp: No file handler data present for reading file"));
         return -1;
     }
 
     super = SFTP_SUPER (VFS_FILE_HANDLER_SUPER (fh));
 
-    do
-    {
-        int err;
-
-        rc = libssh2_sftp_read (file->handle, buffer, count);
-        if (rc >= 0)
-            break;
-
-        err = sftpfs_file__handle_error (super, (int) rc, mcerror);
-        if (err < 0)
-            return err;
-    }
-    while (rc == LIBSSH2_ERROR_EAGAIN);
+    rc = libssh2_sftp_read (file->handle, buffer, count);
+    if (rc < 0)
+        return sftpfs_file__handle_error (super, (int) rc, mcerror);
 
     fh->pos = (off_t) libssh2_sftp_tell64 (file->handle);
 
@@ -313,13 +280,14 @@ sftpfs_read_file (vfs_file_handler_t *fh, char *buffer, size_t count, GError **m
  * @param count   data size
  * @param mcerror pointer to the error handler
  *
- * @return 0 on success, negative value otherwise
+ * @return bytes written on success, negative value otherwise
  */
 
 ssize_t
 sftpfs_write_file (vfs_file_handler_t *fh, const char *buffer, size_t count, GError **mcerror)
 {
     ssize_t rc;
+    size_t written;
     sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
     sftpfs_super_t *super = SFTP_SUPER (VFS_FILE_HANDLER_SUPER (fh));
 
@@ -327,21 +295,16 @@ sftpfs_write_file (vfs_file_handler_t *fh, const char *buffer, size_t count, GEr
 
     fh->pos = (off_t) libssh2_sftp_tell64 (file->handle);
 
-    do
+    for (written = 0; written < count; written += rc)
     {
-        int err;
+        rc = libssh2_sftp_write (file->handle, buffer + written, count - written);
+        if (rc < 0)
+            return sftpfs_file__handle_error (super, (int) rc, mcerror);
 
-        rc = libssh2_sftp_write (file->handle, buffer, count);
-        if (rc >= 0)
-            break;
-
-        err = sftpfs_file__handle_error (super, (int) rc, mcerror);
-        if (err < 0)
-            return err;
+        fh->pos += rc;
     }
-    while (rc == LIBSSH2_ERROR_EAGAIN);
 
-    return rc;
+    return written;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -364,7 +327,12 @@ sftpfs_close_file (vfs_file_handler_t *fh, GError **mcerror)
 
     ret = libssh2_sftp_close (SFTP_FILE_HANDLER (fh)->handle);
 
-    return ret == 0 ? 0 : -1;
+    if (ret < 0)
+    {
+        sftpfs_super_t *super = SFTP_SUPER (VFS_FILE_HANDLER_SUPER (fh));
+        return sftpfs_file__handle_error (super, ret, mcerror);
+    }
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -385,7 +353,7 @@ sftpfs_lseek (vfs_file_handler_t *fh, off_t offset, int whence, GError **mcerror
 {
     sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
 
-    mc_return_val_if_error (mcerror, 0);
+    mc_return_val_if_error (mcerror, -1);
 
     switch (whence)
     {
@@ -397,7 +365,7 @@ sftpfs_lseek (vfs_file_handler_t *fh, off_t offset, int whence, GError **mcerror
         if (fh->pos > offset || offset == 0)
         {
             sftpfs_reopen (fh, mcerror);
-            mc_return_val_if_error (mcerror, 0);
+            mc_return_val_if_error (mcerror, -1);
         }
         fh->pos = offset;
         break;
@@ -408,7 +376,7 @@ sftpfs_lseek (vfs_file_handler_t *fh, off_t offset, int whence, GError **mcerror
         if (fh->pos > fh->ino->st.st_size - offset)
         {
             sftpfs_reopen (fh, mcerror);
-            mc_return_val_if_error (mcerror, 0);
+            mc_return_val_if_error (mcerror, -1);
         }
         fh->pos = fh->ino->st.st_size - offset;
         break;
