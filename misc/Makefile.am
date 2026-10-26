@@ -1,6 +1,6 @@
 ## Process this file with automake to create Makefile.in.
 
-SUBDIRS = ext.d macros.d skins syntax
+SUBDIRS = ext.d macros.d skins syntax syntax-ts
 
 LIBFILES_OUT = mc.ext.ini
 

@@ -355,6 +355,9 @@ static const struct
     { "editor_show_right_margin", &edit_options.show_right_margin },
     { "editor_group_undo", &edit_options.group_undo },
     { "editor_state_full_filename", &edit_options.state_full_filename },
+#ifdef HAVE_TREE_SITTER
+    { "editor_use_tree_sitter", &edit_options.use_tree_sitter },
+#endif
 #endif
     { "editor_ask_filename_before_edit", &editor_ask_filename_before_edit },
     { "nice_rotating_dash", &nice_rotating_dash },
