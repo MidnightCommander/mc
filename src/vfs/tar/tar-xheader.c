@@ -742,10 +742,11 @@ sparse_numblocks_decoder (struct tar_stat_info *st, const char *keyword, const c
     if (!decode_num (&u, arg, SIZE_MAX, keyword))
         return FALSE;
 
+    // the map is filled by GNU.sparse.offset and GNU.sparse.numbytes records
     if (st->sparse_map == NULL)
         st->sparse_map = g_array_sized_new (FALSE, FALSE, sizeof (struct sp_array), u);
     else
-        g_array_set_size (st->sparse_map, u);
+        g_array_set_size (st->sparse_map, 0);
 
     return TRUE;
 }
@@ -756,15 +757,20 @@ static gboolean
 sparse_offset_decoder (struct tar_stat_info *st, const char *keyword, const char *arg, size_t size)
 {
     uintmax_t u;
-    struct sp_array *s;
+    struct sp_array s;
 
     (void) size;
 
     if (!decode_num (&u, arg, TYPE_MAXIMUM (off_t), keyword))
         return FALSE;
 
-    s = &g_array_index (st->sparse_map, struct sp_array, st->sparse_map->len - 1);
-    s->offset = u;
+    // GNU.sparse.offset starts a new map entry, GNU.sparse.numbytes completes it
+    if (st->sparse_map == NULL)
+        st->sparse_map = g_array_sized_new (FALSE, FALSE, sizeof (struct sp_array), 1);
+
+    s.offset = u;
+    s.numbytes = 0;
+    g_array_append_val (st->sparse_map, s);
     return TRUE;
 }
 
@@ -775,16 +781,19 @@ sparse_numbytes_decoder (struct tar_stat_info *st, const char *keyword, const ch
                          size_t size)
 {
     uintmax_t u;
-    struct sp_array s;
+    struct sp_array *s;
 
     (void) size;
 
     if (!decode_num (&u, arg, SIZE_MAX, keyword))
         return FALSE;
 
-    s.offset = 0;
-    s.numbytes = u;
-    g_array_append_val (st->sparse_map, s);
+    // like GNU tar, ignore GNU.sparse.numbytes without preceding GNU.sparse.offset
+    if (st->sparse_map == NULL || st->sparse_map->len == 0)
+        return TRUE;
+
+    s = &g_array_index (st->sparse_map, struct sp_array, st->sparse_map->len - 1);
+    s->numbytes = u;
     return TRUE;
 }
 
@@ -799,7 +808,9 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
     (void) keyword;
     (void) size;
 
-    if (st->sparse_map != NULL)
+    if (st->sparse_map == NULL)
+        st->sparse_map = g_array_sized_new (FALSE, FALSE, sizeof (struct sp_array), 1);
+    else
         g_array_set_size (st->sparse_map, 0);
 
     while (TRUE)
