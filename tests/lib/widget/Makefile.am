@@ -13,6 +13,7 @@ LDADD = \
 TESTS = \
 	complete_engine \
 	hotkey_equal \
+	group_handle_mouse_event \
 	group_init_destroy \
 	widget_find_by_id \
 	widget_make_global_local
@@ -24,6 +25,9 @@ complete_engine_SOURCES = \
 
 hotkey_equal_SOURCES = \
 	hotkey_equal.c
+
+group_handle_mouse_event_SOURCES = \
+	group_handle_mouse_event.c
 
 group_init_destroy_SOURCES = \
 	group_init_destroy.c
