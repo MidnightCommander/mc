@@ -977,7 +977,8 @@ menubar_new (GList *menu)
     w = WIDGET (menubar);
     widget_init (w, &r, menubar_callback, menubar_mouse_callback);
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_TOP;
-    w->options |= WOP_TOP_SELECT;
+    // hidden menubar is shown by a mouse click on the top line
+    w->options |= WOP_TOP_SELECT | WOP_MOUSE_WHEN_HIDDEN;
     w->keymap = menu_map;
     menubar_set_menu (menubar, menu);
 

@@ -727,8 +727,12 @@ group_handle_mouse_event (Widget *w, Gpm_Event *event)
 
             /* Don't use widget_is_selectable() here.
                If WOP_SELECTABLE option is not set, widget can handle mouse events.
-               For example, commandl line in file manager */
-            if (widget_get_state (wp, WST_VISIBLE) && !widget_get_state (wp, WST_DISABLED))
+               For example, commandl line in file manager.
+               Hidden widgets don't get mouse events unless they ask for them.
+               For example, hidden menubar is shown by a click on the top line. */
+            if ((widget_get_state (wp, WST_VISIBLE)
+                 || widget_get_options (wp, WOP_MOUSE_WHEN_HIDDEN))
+                && !widget_get_state (wp, WST_DISABLED))
             {
                 // put global cursor position to the widget
                 int ret;
