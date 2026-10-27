@@ -1,0 +1,596 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MCEDIT 1 "%DATE_OF_MAN_PAGE%" "Versiunea MC %MAN_VERSION%" "GNU Midnight Commander"
+.SH NUME
+mcedit \- Editor intern al GNU Midnight Commander.
+.SH SINOPSIS
+\fBmcedit\fP [\-bcCdfhstVx?] [+lineno] [fișier1] [fișier2] ...
+.PP
+\fBmcedit\fP [\-bcCdfhstVx?] fișier1:nrlinie[:] fișier2:nrlinie[:] ...
+.SH DESCRIERE
+.LP
+mcedit este o legătură către \fBmc\fP, executabilul principal al GNU Midnight
+Commander. Executând GNU Midnight Commander sub acest nume se va porni
+editorul intern și se vor deschide fișierele specificate în linia de
+comandă. Editorul este bazat pe versiunea de terminal a \fBcooledit\fP \- editor
+de sine stătător pentru X Window System.
+.SH OPȚIUNI
+.TP 
+\fI+nrlinie\fP
+Mergi la linia specificată de număr (nu pune spațiu între semnul \fI+\fP și
+număr). Sunt permise mai multe numere de linie, dar va fi folosit doar
+ultimul, iar acesta se va aplica doar primului fișier.
+.TP 
+\fI\-b\fP
+Forțează afișarea în alb\-negru. Setarea variabilei de mediu \fBNO_COLOR\fP la o
+valoare nevidă are același efect.
+.TP 
+\fI\-c\fP
+Forțează modul de culoare ANSI pe terminalele care nu par să aibă suport de
+culori.
+.TP 
+\fI\-d\fP
+Dezactivează suportul pentru maus.
+.TP 
+\fI\-f\fP
+Afișează calea de căutare compilată pentru fișierele de date ale Midnight
+Commander.
+.TP 
+\fI\-S arg, \-\-skin=arg\fP
+Specifică în linia de comandă numele unei tematici.  Vezi secțiunea
+\fBTematici\fP din mc(1) pentru mai multe informații.
+.TP 
+\fI\-t\fP
+Forțează folosirea bazei de date termcap în locul terminfo.  Această opțiune
+este aplicabilă doar dacă GNU Midnight Commander a fost compilat cu librăria
+S\-Lang cu suport terminfo.
+.TP 
+\fI\-V\fP
+Afișează versiunea programului.
+.TP 
+\fI\-x\fP
+Forțează modul xterm.  Se folosește când rulează pe terminale capabile xterm
+(două moduri de ecran, capabile să trimită secvențe escape de la maus).
+.SH CARACTERISTICI
+Editorul intern de fișiere este un editor complet, cu ferestre.  Poate edita
+mai multe fișiere în același timp. Mărimea maximă a fiecărui fișier este de
+64 de megaocteți. Se pot edita și fișiere binare. Funcționalitățile
+suportate în prezent sunt: copiere, mutare, ștergere, decupare și lipire de
+blocuri; anulare tastă cu tastă; meniuri derulante; inserare de fișiere;
+comenzi macro; căutare și înlocuire cu expresii regulate; evidențierea
+textului cu shift+săgeți (dacă este suportată de terminal); comutare
+inserare/suprascriere; indentare automată; dimensiune reglabilă a
+tabulatorului; evidențierea sintaxei pentru diverse tipuri de fișiere; și o
+opțiune de a trece blocuri de text prin comenzi shell precum indent și
+ispell.
+.PP
+Fiecare fișier este deschis în propria fereastră, în modul ecran
+complet. Controlul ferestrelor în mcedit este similar cu cel din alte
+programe cu mai multe ferestre: dublu clic pe titlul ferestrei maximizează
+fereastra pe tot ecranul sau restaurează mărimea și poziția ferestrei; clic
+stânga pe titlul ferestrei și tragerea cu mausul mută fereastra în zona
+editorului; clic stânga pe colțul din dreapta jos al cadrului și tragerea cu
+mausul redimensionează fereastra. Aceste acțiuni se pot face și din meniul
+"Fereastră".
+.SH TASTE
+Editorul este ușor de folosit chiar și fără învățare.  Desfășurarea meniului
+se face apăsând tasta F9.  Poți învăța alte taste din meniu sau din
+etichetele din bara de butoane.
+.PP
+Adițional, Shift combinat cu săgețile face evidențierea textului (dacă este
+suportat de terminal): \fBCtrl\-Ins\fP copiază în fișierul
+\fB~/.cache/mc/mcedit/mcedit.clip\fP, \fBShift\-Ins\fP lipește din
+\fB~/.cache/mc/mcedit/mcedit.clip\fP, \fBShift\-Del\fP taie în
+\fB~/.cache/mc/mcedit/mcedit.clip\fP, și \fBCtrl\-Del\fP șterge textul evidențiat.
+Evidențierea cu mausul funcționează în unele terminale.  Pentru a folosi
+suportul de maus standard oferit de terminalul tău, apasă tasta Shift.
+Notează te rog că suportul de maus în terminal nu împarte clipboardul cu
+\fBmcedit\fP.
+.PP
+Tasta de completare (de obicei \fBMeta\-Tab\fP sau \fBEscape Tab\fP)  completează
+cuvântul de sub cursor folosind cuvintele folosite în fișier.
+.SH MACRO
+.PP
+Pentru a defini un macro, apasă \fBCtrl\-R\fP și apoi apasă tastele pe care le
+vrei executate.  Apasă \fBCtrl\-R\fP din nou când ai terminat.  Unui macro i se
+poate desemna orice tastă apăsând acea tastă.  Macro\-ul este executat când
+apeși tasta desemnată.
+.PP
+Comenzile macro sunt stocate în secțiunea \fB[editor]\fP în fișierul
+\fB~/.local/share/mc/mc.macros\fP.
+.PP
+Scripturilor externe (filtre) li se pot desemna orice tastă prin editarea
+\fBmc.macros\fP după cum urmează:
+.PP
+.nf
+[editor]
+ctrl\-W=ExecuteScript:25;
+.fi
+.PP
+Asta înseamnă ca secvența ctrl\-W inițiază acțiunea \fIExecuteScript(25)\fP, iar
+manipulatorul editorului translatează asta în executarea scriptului shell
+\fB~/.local/share/mc/mcedit/macros.d/macro.25.sh\fP.
+.PP
+Scripturile externe sunt stocate în dosarul
+\fB~/.local/share/mc/mcedit/macros.d/\fP și trebuie să fie numite ca
+\fBmacro.XXXX.sh\fP, unde \fBXXXX\fP este un număr de la 0 la 9999.  Vezi \fBEdit Menu File\fP pentru mai multe detalii despre formatul scriptului.
+.PP
+Se pot folosi următoarele definiții și directive macro:
+.TP 
+\fI#silent\fP
+Dacă este setată această directivă scriptul va porni fără subshell
+interactiv.
+.TP 
+\fI%c\fP
+Numărul coloanei pentru poziția cursorului.
+.TP 
+\fI%i\fP
+Indentarea de spații goale, egală cu coloana cursorului.
+.TP 
+\fI%y\fP
+Tipul de sintaxă pentru fișierul curent.
+.TP 
+\fI%b\fP
+Numele de fișier al blocului.
+.TP 
+\fI%f\fP
+Numele de fișier curent.
+.TP 
+\fI%n\fP
+Doar numele fișierului curent fără extensie.
+.TP 
+\fI%x\fP
+Extensia fișierului curent.
+.TP 
+\fI%d\fP
+Numele dosarului curent.
+.TP 
+\fI%F\fP
+Fișierul curent din panoul neselectat.
+.TP 
+\fI%D\fP
+Numele dosarului din panoul neselectat.
+.TP 
+\fI%t\fP
+Fișierele marcate curent.
+.TP 
+\fI%T\fP
+Fișierele marcate din panoul neselectat.
+.TP 
+\fI%v\fP și \fI%V\fP
+Similar cu \fI%t\fP și \fI%T\fP, dar se expandează la numele complete ale
+fișierelor marcate.
+.TP 
+\fI%u\fP și \fI%U\fP
+Similar cu macro\-urile \fI%t\fP și \fI%T\fP, dar în plus fișierele sunt
+demarcate. Poți folosi acest macro doar o dată pe intrare de fișier de meniu
+sau de fișier de extensii, deoarece data viitoare nu vor mai exista fișiere
+marcate.
+.TP 
+\fI%s\fP și \fI%S\fP
+Fișierele selectate: fișierele marcate, dacă există. Altfel fișierul curent.
+.PP
+Simte\-te liber să editezi aceste fișiere dacă ai nevoie.  Uite un exemplu de
+script extern:
+.PP
+.nf
+l       comment selection
+	TMPFILE=`mktemp ${MC_TMPDIR:\-/tmp}/up.XXXXXX` || exit 1
+	echo #if 0 > $TMPFILE
+	cat %b >> $TMPFILE
+	echo #endif >> $TMPFILE
+	cat $TMPFILE > %b
+	rm \-f $TMPFILE
+.fi
+.PP
+Dacă unele taste nu funcționează, poți folosi \fBLearn Keys\fP în meniul
+\fBOptions\fP.
+.SH "NAVIGARE COD"
+\fBmcedit\fP poate fi folosit pentru navigarea prin cod cu ajutorul fișierelor
+de etichete create de comenzile etags sau ctags. Dacă nu există fișierul
+TAGS, navigarea în cod nu va funcționa.  De exemplu, în cazul
+exuberant\-ctags pentru limbajul C, comanda va fi:
+.PP
+ctags \-e \-\-language\-force=C \-R ./
+.PP
+\fBMeta\-Enter\fP afișează o listă pentru selectarea elementului de sub cursor
+(cursorul ar trebui să fie la sfârșitul cuvântului).
+.PP
+\fBMeta\-Minus\fP, unde minus este simbolul "\-", merge la funcția precedentă din
+lista de navigare (ca butonul Înapoi al unui browser).
+.PP
+\fBMeta\-Equal\fP, unde equal este simbolul "=", merge la funcția următoare din
+lista de navigare (ca butonul Înainte al unui browser).
+.PP
+.SH "EVIDENȚIERE DE SINTAXĂ"
+\fBmcedit\fP suportă evidențierea sintaxei.  Aceasta înseamnă că cuvintele
+cheie și contextele (precum comentariile C, constantele șir etc.) sunt
+evidențiate în culori diferite.  Secțiunea următoare explică formatul
+fișierului \fB~/.local/share/mc/syntax/Syntax\fP.  Dacă acest fișier lipsește,
+se folosește fișierul de sistem \fB%pkgdatadir%/syntax/Syntax\fP.  Fișierul
+\fB~/.local/share/mc/syntax/Syntax\fP este rescanat la deschiderea fiecărui
+fișier nou în editor.  Fișierul conține reguli de evidențiere, fiecare dată
+pe o linie separată, care definesc ce cuvinte cheie vor fi evidențiate și cu
+ce culoare.
+.PP
+Fișierul este împărțit în secțiuni, fiecare începând cu o linie ce conține
+comanda \fBfile\fP.  În mod normal secțiunile sunt puse în fișiere separate
+folosind comanda \fBinclude\fP.
+.PP
+Comanda \fBfile\fP are trei argumente.  Primul argument este o expresie
+regulată care este aplicată asupra numelui de fișier pentru a determina dacă
+secțiunea următoare i se aplică.  Al doilea argument este descrierea tipului
+de fișier.  Este folosită în \fBcooledit\fP; este posibil ca versiunile
+viitoare ale \fBmcedit\fP să o folosească de asemenea.  Al treilea argument
+opțional este o expresie regulată care face potrivirea cu prima linie de
+text din fișier.  Regulile din secțiunea următoare se aplică dacă doar
+numele sau doar prima linie de text se potrivește.
+.PP
+O secțiune se termină odată cu începutul altei secțiuni.  Fiecare secțiune
+este împărțită în contexte, iar fiecare context conține reguli.  Un context
+este un domeniu din text căruia îi aparține un anumit set de reguli.  De
+exemplu, textul dintr\-un comentariu în stil C (adică între \fB/*\fP și \fB*/\fP)
+are propria culoare.  Acesta este un context, deși nu conține alte reguli,
+deoarece probabil nu vrem să evidențiem nimic în interiorul unui comentariu
+C.
+.PP
+O secțiune trivială pentru programarea C ar putea arăta ca:
+.PP
+.nf
+file .\e*\e\e.c C\esProgram\esFile (#include|/\e\e\e*)
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
+
+# culorile implicite
+define  comment   brown
+context default
+  keyword  whole  if       yellow
+  keyword  whole  else     yellow
+  keyword  whole  for      yellow
+  keyword  whole  while    yellow
+  keyword  whole  do       yellow
+  keyword  whole  switch   yellow
+  keyword  whole  case     yellow
+  keyword  whole  static   yellow
+  keyword  whole  extern   yellow
+  keyword         {        brightcyan
+  keyword         }        brightcyan
+  keyword         '*'      green
+
+# comentarii C
+context /\e* \e*/ comment
+
+# Directive de preprocesare C
+context linestart # \en red
+  keyword  \e\e\en  brightred
+
+# Constante string C
+context " " green
+  keyword  %d    brightgreen
+  keyword  %s    brightgreen
+  keyword  %c    brightgreen
+  keyword  \e\e"   brightgreen
+.fi
+.PP
+Fiecare context începe cu o linie de forma:
+.PP
+\fBcontext\fP [\fBexclusive\fP] [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP]
+[\fBlinestart\fP] \fIdelim\fP [\fBlinestart\fP] \fIdelim\fP [\fIforeground\fP]
+[\fIbackground\fP] [\fIattributes\fP]
+.PP
+Primul context este o excepție.  Trebuie să înceapă cu comanda
+.PP
+\fBcontext default\fP [\fIforeground\fP] [\fIbackground\fP] [\fIattributes\fP]
+.PP
+altfel \fBmcedit\fP va raporta o eroare.  Opțiunea \fBlinestart\fP specifică
+faptul că \fIdelim\fP trebuie să înceapă la începutul unei linii.  Opțiunea
+\fBwhole\fP indică faptul că \fIdelim\fP trebuie să fie un cuvânt întreg.  Pentru
+a specifica faptul că un cuvânt trebuie să înceapă la limita cuvântului doar
+pe partea stângă, poți folosi opțiunea \fBwholeleft\fP, iar în mod similar un
+cuvânt care trebuie să se termine la limita cuvântului se specifică prin
+\fBwholeright\fP.
+.PP
+Setul de caractere care alcătuiesc un cuvânt întreg poate fi schimbat în
+orice punct din fișier cu comanda \fBwholechars\fP.  Seturile de caractere din
+stânga și din dreapta pot fi setate separat cu
+.PP
+\fBwholechars\fP [\fBleft\fP|\fBright\fP] \fIcharacters\fP
+.PP
+Opțiunea \fBexclusive\fP face ca textul dintre delimitatori să fie evidențiat,
+dar nu și delimitatorii înșiși.
+.PP
+Fiecare regulă este o linie de forma:
+.PP
+\fBkeyword\fP [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP] [\fBlinestart\fP] \fIstring foreground\fP [\fIbackground\fP] [\fIattributes\fP]
+.PP
+Șirurile de context sau de cuvinte cheie sunt interpretate, astfel încât
+poți include tab\-uri și spații cu secvențele \et și \es.  Newline\-urile și
+backslash\-urile se specifică cu \en, respectiv \e\e.  Deoarece spațiul alb
+este folosit ca separator, nu poate fi folosit ca atare.  De asemenea,
+trebuie folosit \e* pentru a specifica un asterisc.  Simbolul * în sine este
+un wildcard care se potrivește cu orice număr de caractere.  De exemplu,
+.PP
+.nf
+  keyword         '*'      green
+.fi
+.PP
+colorează cu verde toate constantele C de un singur caracter.  Ai putea
+folosi și
+.PP
+.nf
+  keyword         "*"      green
+.fi
+.PP
+pentru a colora constantele șir, dar șirul potrivit nu ar avea voie să se
+întindă pe mai multe linii.  Wildcard\-ul poate fi folosit și în interiorul
+delimitatorilor de context, dar nu poți avea un wildcard ca prim sau ultim
+caracter.
+.PP
+Important de notat este linia
+.PP
+.nf
+  keyword  \e\e\en  brightgreen
+.fi
+.PP
+Această linie definește un cuvânt cheie care conține caracterele backslash
+și newline.  Deoarece cuvintele cheie sunt potrivite înaintea
+delimitatorilor de context, acest cuvânt cheie împiedică terminarea
+contextului la sfârșitul liniilor care se termină cu backslash, permițând
+astfel directivelor preprocesorului C să continue pe mai multe linii.
+.PP
+Culorile posibile sunt: black, gray, red, brightred, green, brightgreen,
+brown, yellow, blue, brightblue, magenta, brightmagenta, cyan, brightcyan,
+lightgray și white. Cuvântul cheie special "default" înseamnă culoarea
+implicită a terminalului. Un alt cuvânt cheie special "base" înseamnă
+culorile principale ale mc și este util ca substituent dacă vrei să
+specifici atribute fără a modifica culoarea fundalului. Când sunt
+disponibile 256 de culori, acestea pot fi specificate fie ca color16 până la
+color255, fie ca rgb000 până la rgb555 și gray0 până la gray23.
+.PP
+Dacă fișierul de sintaxă este partajat cu \fBcooledit\fP, este posibil să
+specifici culori diferite pentru \fBmcedit\fP și \fBcooledit\fP separându\-le
+printr\-o bară oblică, de ex.
+.PP
+.nf
+keyword  #include  red/Orange
+.fi
+.PP
+\fBmcedit\fP folosește culoarea înainte de slash.  Vezi cooledit(1) pentru
+culorile suportate de \fBcooledit\fP.
+.PP
+Atributele pot fi oricare dintre bold, italic, underline, reverse și blink,
+adăugate cu semnul plus dacă dorești mai multe.
+.PP
+Comentariile pot fi puse pe o linie separată care începe cu semnul #.
+.PP
+Dacă descrii un limbaj care nu face distincție între majuscule și minuscule,
+trebuie să folosești directiva \fBcaseinsensitive\fP. Ea trebuie specificată la
+începutul fișierului de sintaxă.
+.PP
+Din cauza simplității implementării, există câteva subtilități care nu vor
+fi tratate corect, dar acestea sunt o neplăcere minoră.  În ansamblu, un
+spectru larg de situații destul de complicate este tratat cu aceste reguli
+simple.  Este o idee bună să te uiți la fișierul de sintaxă pentru a vedea
+câteva trucuri ingenioase pe care le poți face cu puțină imaginație.  Dacă
+nu te descurci cu regulile pe care le\-am codat și crezi că ai o regulă care
+ar fi utilă, trimite\-mi un e\-mail cu cererea ta.  Totuși, nu cere suport
+pentru expresii regulate, deoarece este pur și simplu imposibil.
+.PP
+Un sfat util este să lucrezi pe cât posibil cu lucrurile pe care le poți
+face, în loc să încerci lucruri cu care această implementare nu se poate
+descurca.  Amintește\-ți, de asemenea, că scopul evidențierii sintaxei este
+să facă programarea mai puțin predispusă la erori, nu să facă codul să arate
+frumos.
+.PP
+Secvențele speciale interpretate de \fBmcedit\fP sunt listate mai jos:
+.PP
+.nf
+mcedit    echivalent PCRE2
+
+[a\-c]     \(rs[a\-c\(rs]        ([ ] nu are semnificație specială)
+\(rs[a\-c\(rs]   (a|\-|c)*       ( \-  nu are semnificație specială)
+{a\-c}     \(rs{a\-c\(rs}        ({ } nu are semnificație specială)
+\(rs{a\-c\(rs}   [ac\-]          ( \-  nu are semnificație specială)
+\&.         \(rs.
+(         \(rs(
+)         \(rs)
+*         .*
++         [^ \(rst]*
+?         \(rs?
+\(rs*        \(rs*
+\(rs+        \(rs+
+^         \(rs^
+$         \(rs$
+|         \(rs|
+\(rss        [ ]            (doar spațiu)
+\(rst        \(rst
+\(rsn        \(rsn
+.fi
+.PP
+Evidențierea sintaxei poate fi comutată cu scurtătura Ctrl\-s.  Apăsând C\-s
+de două ori se reîncarcă efectiv fișierul de sintaxă, așa că nu trebuie să
+ieși din editor sau din \fBmc\fP pentru a\-ți testa modificările de sintaxă.
+.SH OPȚIUNI
+Majoritatea opțiunilor pot fi setate din caseta de dialog Opțiuni.  Vezi
+meniul \fBOptions\fP.  Următoarele opțiuni sunt definite în \fB~/.config/mc/ini\fP
+și au corespondente evidente în caseta de dialog.  Le poți modifica pentru a
+schimba comportamentul editorului, editând fișierul.  Dacă nu se specifică
+altfel, 1 activează opțiunea, iar 0 o dezactivează, ca de obicei.
+.TP 
+\fIuse_internal_edit\fP
+Această opțiune este ignorată când este invocat \fBmcedit\fP.
+.TP 
+\fIeditor_tab_spacing\fP
+Interpretează caracterul tab ca având această lungime.  Valoarea implicită
+este 8. Ar trebui să eviți alte valori decât 8, deoarece majoritatea
+celorlalte editoare și vizualizatoare de text presupun o lungime a tabului
+de 8. Folosește \fBeditor_fake_half_tabs\fP pentru a simula o lungime mai mică
+a tabului.
+.TP 
+\fIeditor_fill_tabs_with_spaces\fP
+Nu insera niciodată un caracter tab. Inserează în schimb spații (ascii 32)
+pentru a ajunge la dimensiunea dorită a tabului.
+.TP 
+\fIeditor_return_does_auto_indent\fP
+Apăsarea tastei Enter va indenta pentru a se potrivi cu indentarea primei
+linii de deasupra care conține text.
+.TP 
+\fIeditor_backspace_through_tabs\fP
+Face ca o singură apăsare de backspace să șteargă tot spațiul până la
+marginea din stânga, dacă nu există text între cursor și marginea din
+stânga.
+.TP 
+\fIeditor_fake_half_tabs\fP
+Aceasta va emula o jumătate de tab pentru cei care vor să programeze cu un
+tab de 4, dar nu vor să schimbe dimensiunea tabului de la 8 (astfel încât
+codul să fie formatat la fel când este afișat de alte programe).  La
+editarea între text și marginea din stânga, deplasarea și tabularea vor fi
+ca și cum un tab ar fi 4, folosind în realitate spații și tab\-uri normale
+pentru o umplere optimă.  La editarea în orice alt loc, se inserează un tab
+normal.
+.TP 
+\fIeditor_option_save_mode\fP
+Valorile posibile sunt 0, 1 și 2.  Modul de salvare (vezi și meniul de
+opțiuni)  îți permite să schimbi metoda de salvare a unui fișier.  Salvarea
+rapidă (0) salvează fișierul imediat, trunchiind fișierul de pe disc la
+lungime zero (adică ștergându\-l) și apoi scriind conținutul editorului în
+fișier.  Această metodă este rapidă, dar periculoasă, deoarece o eroare de
+sistem în timpul salvării va lăsa fișierul scris doar parțial, putând face
+datele irecuperabile.  La salvare, opțiunea de salvare sigură (1) activează
+crearea unui fișier temporar în care este scris mai întâi conținutul
+fișierului.  În caz de problemă, fișierul original rămâne neatins.  După ce
+fișierul temporar a fost scris cu succes, acesta este redenumit cu numele
+fișierului original, înlocuindu\-l.  Cea mai sigură metodă este crearea de
+copii de rezervă (2): se creează un fișier de rezervă înainte de a se face
+orice modificare.  Poți specifica propria extensie pentru fișierul de
+rezervă în dialog.  Reține că salvarea de două ori va înlocui atât copia de
+rezervă, cât și fișierul original.
+.TP 
+\fIeditor_word_wrap_line_length\fP
+Lungimea liniei la care se face trecerea la rând nou. Valoarea implicită
+este 72.
+.TP 
+\fIeditor_backup_extension\fP
+Simbolul adăugat la numele fișierelor de rezervă. Valoarea implicită este
+"~".
+.TP 
+\fIeditor_line_state\fP
+Afișează linia de stare a editorului. În prezent arată numărul liniei
+curente (în viitor poate arăta lucruri precum pliere, puncte de întrerupere
+etc.). M\-n comută această opțiune.
+.TP 
+\fIeditor_visible_spaces\fP
+Comută "afișarea spațiilor finale vizibile".  Dacă editor_visible_spaces=1,
+ele sunt afișate ca '.'
+.TP 
+\fIeditor_visible_tabs\fP
+Comută "afișarea tab\-urilor vizibile".  Dacă editor_visible_tabs=1,
+tab\-urile sunt afișate ca '<\-\-\-\->'
+.TP 
+\fIeditor_persistent_selections\fP
+Nu elimina selecția blocului după mutarea cursorului.
+.TP 
+\fIeditor_drop_selection_on_copy\fP
+Resetează selecția după copierea în clipboard.
+.TP 
+\fIeditor_cursor_beyond_eol\fP
+Permite mutarea cursorului dincolo de sfârșitul liniei.
+.TP 
+\fIeditor_cursor_after_inserted_block\fP
+Permite mutarea cursorului după blocul inserat.
+.TP 
+\fIeditor_syntax_highlighting\fP
+activează evidențierea sintaxei.
+.TP 
+\fIeditor_edit_confirm_save\fP
+Afișează dialogul de confirmare la salvare.
+.TP 
+\fIeditor_option_typewriter_wrap\fP
+de descris
+.TP 
+\fIeditor_option_auto_para_formatting\fP
+de descris
+.TP 
+\fIeditor_option_save_position\fP
+Salvează poziția în fișier la ieșire.
+.TP 
+\fIsource_codepage\fP
+Reprezentarea simbolică a numelui paginii de cod pentru fișier (de
+ex. CP1251, ~ \- implicit).
+.TP 
+\fIeditor_group_undo\fP
+Combină acțiunile UNDO pentru mai multe acțiuni de același tip
+(inserare/suprascriere, ștergere, navigare, tastare)
+.TP 
+\fIeditor_wordcompletion_collect_entire_file\fP
+Caută candidați de autocompletare în întregul fișier (1) sau doar de la
+începutul fișierului până la poziția cursorului (0).
+.TP 
+\fIeditor_wordcompletion_collect_all_files\fP
+Caută candidați de autocompletare în toate fișierele încărcate (1,
+implicit), nu doar în cel editat curent (0).
+.TP 
+\fIspell_language\fP
+Limba de verificare ortografică (en, en\-variant_0, ru etc.) instalată cu
+pachetul aspell (o listă completă se poate obține cu utilitarul 'aspell').
+Folosește \fBspell_language = NONE\fP pentru a dezactiva suportul
+aspell. Valoarea implicită este 'en'. Opțiunea trebuie să se afle în
+secțiunea [Misc].
+.TP 
+\fIeditor_stop_format_chars\fP
+Setul de caractere la care se oprește formatarea paragrafului. Dacă unul
+dintre aceste caractere se află la începutul liniei, acea linie și toate
+liniile următoare ale paragrafului nu vor fi atinse. Valoarea implicită este
+"\fB\-\fP\fB+\fP\fB*\fP\fB\e\fP\fB,\fP\fB.\fP\fB;\fP\fB:\fP\fB&\fP\fB>\fP".
+.TP 
+\fIeditor_state_full_filename\fP
+Afișează numele complet al căii în linia de stare. Dacă este dezactivată
+(implicit), se afișează doar numele de bază al fișierului.
+.SH FIȘIERE
+\fI%pkgdatadir%/help/mc.hlp\fP
+.IP
+Fișierul de ajutor al programului.
+.PP
+\fI%pkgdatadir%/mc.ini\fP
+.IP
+Configurația implicită de sistem pentru GNU Midnight Commander, folosită
+doar când cea a utilizatorului ~/.config/mc/ini lipsește.
+.PP
+\fI%pkgdatadir%/mc.lib\fP
+.IP
+Setările globale pentru Midnight Commander. Setările din acest fișier
+afectează toți utilizatorii, indiferent dacă au sau nu ~/.config/mc/ini.
+.PP
+\fI%pkgdatadir%/syntax/*\fP
+.IP
+Fișierele de sintaxă implicite, la nivel de sistem, pentru mcedit, folosite
+doar dacă fișierul corespunzător al utilizatorului din
+\fB~/.local/share/mc/syntax/\fP lipsește.
+.PP
+\fI~/.config/mc/ini\fP
+.IP
+Configurația proprie utilizatorului.  Dacă acest fișier este prezent,
+configurația va fi încărcată de aici în locul fișierului de configurare de
+sistem.
+.PP
+\fI~/.local/share/mc/mcedit/\fP
+.IP
+Dosarul propriu al utilizatorului, unde sunt procesate și salvate comenzile
+de bloc și unde se află fișierele proprii de sintaxă ale utilizatorului.
+.SH LICENȚĂ
+Acest program este distribuit sub termenii Licenței Publice Generale GNU,
+așa cum este publicată de Free Software Foundation.  Vezi ajutorul
+încorporat al Midnight Commander pentru detalii despre licență și lipsa
+garanției.
+.SH DISPONIBILITATE
+Cea mai recentă versiune a acestui program poate fi găsită la \X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
+.SH "VEZI ȘI"
+cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
+.SH AUTORI
+Paul Sheer (psheer@obsidian.co.za) este autorul original al editorului
+intern al Midnight Commander.
+.SH BUGURI
+Erorile ar trebui raportate la \X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .
