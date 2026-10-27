@@ -506,7 +506,7 @@ MAN_DATE="$(LC_ALL=C date "+%B %Y")"
 AC_SUBST(MAN_DATE)
 
 dnl Determine which help translations we want to install.
-ALL_DOC_LINGUAS="es hu it pl ru sr"
+ALL_DOC_LINGUAS="es hu it pl ro ru sr"
 
 DOC_LINGUAS=
 if test "x$USE_NLS" = xyes; then
@@ -670,6 +670,7 @@ doc/man/es/Makefile
 doc/man/hu/Makefile
 doc/man/it/Makefile
 doc/man/pl/Makefile
+doc/man/ro/Makefile
 doc/man/ru/Makefile
 doc/man/sr/Makefile
 
