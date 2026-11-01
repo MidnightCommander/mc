@@ -261,6 +261,7 @@ static gboolean
 tar_skip_member (tar_super_t *archive, struct vfs_s_inode *inode)
 {
     char save_typeflag;
+    gboolean ret = TRUE;
 
     if (current_stat_info.skipped)
         return TRUE;
@@ -285,15 +286,17 @@ tar_skip_member (tar_super_t *archive, struct vfs_s_inode *inode)
             tar_calc_sparse_offsets (inode);
         }
     }
-    else if (save_typeflag != DIRTYPE)
+    else
     {
         if (inode != NULL && (save_typeflag == REGTYPE || save_typeflag == AREGTYPE))
             inode->data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
 
-        return tar_skip_file (archive, current_stat_info.stat.st_size);
+        ret = tar_skip_file (archive, current_stat_info.stat.st_size);
     }
 
-    return TRUE;
+    current_stat_info.skipped = TRUE;
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -613,17 +616,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
         if (status != HEADER_SUCCESS)
             goto ret;
 
-        if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
-            current_stat_info.stat.st_size = 0;  // Links 0 size on tape
-        else
+        current_stat_info.stat.st_size = OFF_FROM_HEADER (header->header.size);
+        if (current_stat_info.stat.st_size < 0)
         {
-            current_stat_info.stat.st_size = OFF_FROM_HEADER (header->header.size);
-            if (current_stat_info.stat.st_size < 0)
-            {
-                status = HEADER_FAILURE;
-                goto ret;
-            }
+            status = HEADER_FAILURE;
+            goto ret;
         }
+
+        current_stat_info.skipped = FALSE;
 
         tar_decode_header (header, arch);
         tar_fill_stat (archive, header);
@@ -687,6 +687,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
             }
 
             *bp = '\0';
+            current_stat_info.skipped = TRUE;
         }
         else if (header->header.typeflag == XHDTYPE || header->header.typeflag == SOLARIS_XHDTYPE)
         {
@@ -719,6 +720,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
                 status = HEADER_FAILURE;
                 goto ret;
             }
+
+            current_stat_info.skipped = TRUE;
         }
         else
             break;
