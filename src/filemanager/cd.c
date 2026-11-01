@@ -30,6 +30,7 @@
 
 #include <config.h>
 
+#include <fnmatch.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -209,6 +210,161 @@ handle_cdpath (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Make a path relative to the current directory of the panel absolute. */
+
+static vfs_path_t *
+cd_make_vpath (const char *path)
+{
+    if (IS_PATH_SEP (*path))
+        return vfs_path_from_str (path);
+    if (*path != '\0')
+        return vfs_path_append_new (current_panel->cwd_vpath, path, (char *) NULL);
+    return vfs_path_clone (current_panel->cwd_vpath);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+cd_compare_names (gconstpointer a, gconstpointer b)
+{
+    return strcmp (*(const char *const *) a, *(const char *const *) b);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Find the directories in @dir_vpath whose names match the shell wildcard @pattern. Like in the
+ * shell, wildcards don't match a leading '.'.
+ *
+ * @return the names of the directories in alphabetical order
+ */
+
+static GPtrArray *
+cd_find_matching_dirs (const vfs_path_t *dir_vpath, const char *pattern)
+{
+    GPtrArray *names;
+    DIR *dir;
+    struct vfs_dirent *dirent;
+
+    names = g_ptr_array_new_with_free_func (g_free);
+
+    dir = mc_opendir (dir_vpath);
+    if (dir == NULL)
+        return names;
+
+    while ((dirent = mc_readdir (dir)) != NULL)
+    {
+        const char *name = dirent->d_name;
+        vfs_path_t *vpath;
+        struct stat st;
+
+        if (DIR_IS_DOT (name) || DIR_IS_DOTDOT (name) || fnmatch (pattern, name, FNM_PERIOD) != 0)
+            continue;
+
+        // mc_stat() follows symlinks, so links to directories are found too
+        vpath = vfs_path_append_new (dir_vpath, name, (char *) NULL);
+        if (mc_stat (vpath, &st) == 0 && S_ISDIR (st.st_mode))
+            g_ptr_array_add (names, g_strdup (name));
+        vfs_path_free (vpath, TRUE);
+    }
+
+    mc_closedir (dir);
+
+    g_ptr_array_sort (names, cd_compare_names);
+
+    return names;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Expand the shell wildcards ('*', '?' and '[...]') in @path after the first @pos bytes, which
+ * are already expanded. Unlike the shell, which expands them to all matching names, every path
+ * component with wildcards is replaced with one matching directory: the first one (in
+ * alphabetical order) with which the rest of the path can be expanded to a directory too.
+ *
+ * @return newly allocated expanded path, NULL if it can't be expanded to a directory
+ */
+
+static char *
+cd_expand_wildcards (const char *path, size_t pos)
+{
+    const char *w, *start, *end;
+    char *prefix, *pattern, *result = NULL;
+    vfs_path_t *vpath;
+    GPtrArray *names;
+    guint i;
+
+    w = strpbrk (path + pos, "*?[");
+    if (w == NULL)
+    {
+        struct stat st;
+
+        // everything is expanded: is it a directory?
+        vpath = cd_make_vpath (path);
+        if (mc_stat (vpath, &st) == 0 && S_ISDIR (st.st_mode))
+            result = g_strdup (path);
+        vfs_path_free (vpath, TRUE);
+        return result;
+    }
+
+    for (start = w; start > path && !IS_PATH_SEP (start[-1]); start--)
+        ;
+    end = strchr (w, PATH_SEP);
+    if (end == NULL)
+        end = strchr (w, '\0');
+
+    prefix = g_strndup (path, (gsize) (start - path));
+    pattern = g_strndup (start, (gsize) (end - start));
+
+    vpath = cd_make_vpath (prefix);
+    names = cd_find_matching_dirs (vpath, pattern);
+    vfs_path_free (vpath, TRUE);
+
+    for (i = 0; i < names->len && result == NULL; i++)
+    {
+        const char *name = g_ptr_array_index (names, i);
+        char *candidate;
+
+        candidate = g_strconcat (prefix, name, end, (char *) NULL);
+        // don't expand the wildcards in the name of the found directory again
+        result = cd_expand_wildcards (candidate, strlen (prefix) + strlen (name));
+        g_free (candidate);
+    }
+
+    g_ptr_array_free (names, TRUE);
+    g_free (pattern);
+    g_free (prefix);
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Wildcards handling: "cd fo*" changes to the first directory matching "fo*", see
+ * cd_expand_wildcards() */
+static gboolean
+handle_wildcards (const char *path)
+{
+    gboolean result = FALSE;
+    char *expanded;
+
+    if (strpbrk (path, "*?[") == NULL)
+        return FALSE;
+
+    expanded = cd_expand_wildcards (path, 0);
+    if (expanded != NULL)
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str_flags (expanded, VPF_NO_CANON);
+        result = panel_cd (current_panel, vpath, cd_parse_command);
+        vfs_path_free (vpath, TRUE);
+        g_free (expanded);
+    }
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -278,6 +434,8 @@ cd_to (const char *path)
             q_vpath = vfs_path_from_str_flags (s_path->str, VPF_NO_CANON);
 
         ok = panel_cd (current_panel, q_vpath, cd_parse_command);
+        if (!ok)
+            ok = handle_wildcards (s_path->str);
         if (!ok)
             ok = handle_cdpath (s_path->str);
         if (!ok)
