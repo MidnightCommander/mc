@@ -1447,14 +1447,6 @@ get_first_editor_line (WEdit *edit)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-pstrcmp (const void *p1, const void *p2)
-{
-    return strcmp (*(char *const *) p1, *(char *const *) p2);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
 exec_edit_syntax_dialog (const GPtrArray *names, const char *current_syntax)
 {
     size_t i;
@@ -1599,7 +1591,7 @@ edit_syntax_dialog (WEdit *edit)
        Instead we could save the list to a file and update it once the syntax
        file gets updated (either by testing or by explicit user command). */
     edit_load_syntax (NULL, names, NULL);
-    g_ptr_array_sort (names, pstrcmp);
+    g_ptr_array_sort_values (names, (GCompareFunc) strcmp);
 
     syntax = exec_edit_syntax_dialog (names, edit->syntax_type);
     if (syntax >= 0)
