@@ -154,6 +154,9 @@ src/execute__execute_get_external_cmd_opts_from_config.trs
 src/execute__execute_with_vfs_arg
 src/execute__execute_with_vfs_arg.log
 src/execute__execute_with_vfs_arg.trs
+src/filemanager/cd_expand_wildcards
+src/filemanager/cd_expand_wildcards.log
+src/filemanager/cd_expand_wildcards.trs
 src/filemanager/cd_to
 src/filemanager/do_cd_command
 src/filemanager/do_cd_command.log
