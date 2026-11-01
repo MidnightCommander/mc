@@ -65,6 +65,7 @@
 #include "lib/fileloc.h"
 #include "lib/util.h"  // my_exit()
 #include "lib/mcconfig.h"
+#include "lib/widget.h"  // message()
 
 #include "src/execute.h"  // pre_exec, post_exec
 
@@ -75,7 +76,6 @@
 #include "lib/vfs/gc.h"  // vfs_stamp_create
 
 #include "shell.h"
-#include "shelldef.h"
 
 /*** global variables ****************************************************************************/
 
@@ -164,6 +164,28 @@ static char reply_str[80];
 static struct vfs_s_subclass shell_subclass;
 static struct vfs_class *vfs_shell_ops = VFS_CLASS (&shell_subclass);
 
+static const struct
+{
+    size_t offset;
+    const char *name;
+} scripts[] = {
+    { offsetof (shell_super_t, scr_ls), VFS_SHELL_LS_FILE },
+    { offsetof (shell_super_t, scr_exists), VFS_SHELL_EXISTS_FILE },
+    { offsetof (shell_super_t, scr_mkdir), VFS_SHELL_MKDIR_FILE },
+    { offsetof (shell_super_t, scr_unlink), VFS_SHELL_UNLINK_FILE },
+    { offsetof (shell_super_t, scr_chown), VFS_SHELL_CHOWN_FILE },
+    { offsetof (shell_super_t, scr_chmod), VFS_SHELL_CHMOD_FILE },
+    { offsetof (shell_super_t, scr_utime), VFS_SHELL_UTIME_FILE },
+    { offsetof (shell_super_t, scr_rmdir), VFS_SHELL_RMDIR_FILE },
+    { offsetof (shell_super_t, scr_ln), VFS_SHELL_LN_FILE },
+    { offsetof (shell_super_t, scr_mv), VFS_SHELL_MV_FILE },
+    { offsetof (shell_super_t, scr_hardlink), VFS_SHELL_HARDLINK_FILE },
+    { offsetof (shell_super_t, scr_get), VFS_SHELL_GET_FILE },
+    { offsetof (shell_super_t, scr_send), VFS_SHELL_SEND_FILE },
+    { offsetof (shell_super_t, scr_append), VFS_SHELL_APPEND_FILE },
+    { offsetof (shell_super_t, scr_info), VFS_SHELL_INFO_FILE },
+};
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -194,7 +216,7 @@ shell_default_stat (struct vfs_class *me)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-shell_load_script_from_file (const char *hostname, const char *script_name, const char *def_content)
+shell_load_script_from_file (const char *hostname, const char *script_name, GError **error)
 {
     char *scr_filename = NULL;
     char *scr_content;
@@ -211,14 +233,11 @@ shell_load_script_from_file (const char *hostname, const char *script_name, cons
     {
         scr_filename =
             g_build_path (PATH_SEP_STR, LIBEXECDIR, VFS_SHELL_PREFIX, script_name, (char *) NULL);
-        g_file_get_contents (scr_filename, &scr_content, &scr_len, NULL);
+        g_file_get_contents (scr_filename, &scr_content, &scr_len, error);
         g_free (scr_filename);
     }
 
-    if (scr_content != NULL)
-        return scr_content;
-
-    return g_strdup (def_content);
+    return scr_content;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -377,6 +396,7 @@ static void
 shell_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     shell_super_t *shell_super = SHELL_SUPER (super);
+    size_t i;
 
     if ((shell_super->sockw != -1) || (shell_super->sockr != -1))
         vfs_print_message (_ ("shell: Disconnecting from %s"), super->name ? super->name : "???");
@@ -394,21 +414,9 @@ shell_free_archive (struct vfs_class *me, struct vfs_s_super *super)
         shell_super->sockr = -1;
     }
 
-    g_free (shell_super->scr_ls);
-    g_free (shell_super->scr_exists);
-    g_free (shell_super->scr_mkdir);
-    g_free (shell_super->scr_unlink);
-    g_free (shell_super->scr_chown);
-    g_free (shell_super->scr_chmod);
-    g_free (shell_super->scr_utime);
-    g_free (shell_super->scr_rmdir);
-    g_free (shell_super->scr_ln);
-    g_free (shell_super->scr_mv);
-    g_free (shell_super->scr_hardlink);
-    g_free (shell_super->scr_get);
-    g_free (shell_super->scr_send);
-    g_free (shell_super->scr_append);
-    g_free (shell_super->scr_info);
+    for (i = 0; i < G_N_ELEMENTS (scripts); i++)
+        g_free (G_STRUCT_MEMBER (char *, shell_super, scripts[i].offset));
+
     if (shell_super->scr_env != NULL)
         g_string_free (shell_super->scr_env, TRUE);
 }
@@ -663,6 +671,7 @@ shell_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
                     const vfs_path_element_t *vpath_element)
 {
     shell_super_t *shell_super = SHELL_SUPER (super);
+    size_t i;
 
     (void) vpath;
 
@@ -671,36 +680,19 @@ shell_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
     if (strncmp (vpath_element->vfs_prefix, "rsh", 3) == 0)
         super->path_element->port = SHELL_FLAG_RSH;
 
-    shell_super->scr_ls = shell_load_script_from_file (super->path_element->host, VFS_SHELL_LS_FILE,
-                                                       VFS_SHELL_LS_DEF_CONTENT);
-    shell_super->scr_exists = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_EXISTS_FILE, VFS_SHELL_EXISTS_DEF_CONTENT);
-    shell_super->scr_mkdir = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_MKDIR_FILE, VFS_SHELL_MKDIR_DEF_CONTENT);
-    shell_super->scr_unlink = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_UNLINK_FILE, VFS_SHELL_UNLINK_DEF_CONTENT);
-    shell_super->scr_chown = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_CHOWN_FILE, VFS_SHELL_CHOWN_DEF_CONTENT);
-    shell_super->scr_chmod = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_CHMOD_FILE, VFS_SHELL_CHMOD_DEF_CONTENT);
-    shell_super->scr_utime = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_UTIME_FILE, VFS_SHELL_UTIME_DEF_CONTENT);
-    shell_super->scr_rmdir = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_RMDIR_FILE, VFS_SHELL_RMDIR_DEF_CONTENT);
-    shell_super->scr_ln = shell_load_script_from_file (super->path_element->host, VFS_SHELL_LN_FILE,
-                                                       VFS_SHELL_LN_DEF_CONTENT);
-    shell_super->scr_mv = shell_load_script_from_file (super->path_element->host, VFS_SHELL_MV_FILE,
-                                                       VFS_SHELL_MV_DEF_CONTENT);
-    shell_super->scr_hardlink = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_HARDLINK_FILE, VFS_SHELL_HARDLINK_DEF_CONTENT);
-    shell_super->scr_get = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_GET_FILE, VFS_SHELL_GET_DEF_CONTENT);
-    shell_super->scr_send = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_SEND_FILE, VFS_SHELL_SEND_DEF_CONTENT);
-    shell_super->scr_append = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_APPEND_FILE, VFS_SHELL_APPEND_DEF_CONTENT);
-    shell_super->scr_info = shell_load_script_from_file (
-        super->path_element->host, VFS_SHELL_INFO_FILE, VFS_SHELL_INFO_DEF_CONTENT);
+    for (i = 0; i < G_N_ELEMENTS (scripts); i++)
+    {
+        GError *error = NULL;
+
+        G_STRUCT_MEMBER (char *, shell_super, scripts[i].offset) =
+            shell_load_script_from_file (super->path_element->host, scripts[i].name, &error);
+        if (error != NULL)
+        {
+            message (D_ERROR, MSG_ERROR, _ ("shell: Cannot load script\n%s"), error->message);
+            g_error_free (error);
+            return -1;
+        }
+    }
 
     return shell_open_archive_int (vpath_element->class, super);
 }
