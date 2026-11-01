@@ -365,6 +365,8 @@ shell_new_archive (struct vfs_class *me)
 
     arch = g_new0 (shell_super_t, 1);
     arch->base.me = me;
+    arch->sockr = -1;
+    arch->sockw = -1;
 
     return VFS_SUPER (arch);
 }
