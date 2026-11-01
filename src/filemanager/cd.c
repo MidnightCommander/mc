@@ -235,21 +235,19 @@ cd_compare_names (gconstpointer a, gconstpointer b)
  * Find the directories in @dir_vpath whose names match the shell wildcard @pattern. Like in the
  * shell, wildcards don't match a leading '.'.
  *
- * @return the names of the directories in alphabetical order
+ * @return the names of the directories in alphabetical order, NULL if there is none
  */
 
 static GPtrArray *
 cd_find_matching_dirs (const vfs_path_t *dir_vpath, const char *pattern)
 {
-    GPtrArray *names;
+    GPtrArray *names = NULL;
     DIR *dir;
     struct vfs_dirent *dirent;
 
-    names = g_ptr_array_new_with_free_func (g_free);
-
     dir = mc_opendir (dir_vpath);
     if (dir == NULL)
-        return names;
+        return NULL;
 
     while ((dirent = mc_readdir (dir)) != NULL)
     {
@@ -263,13 +261,18 @@ cd_find_matching_dirs (const vfs_path_t *dir_vpath, const char *pattern)
         // mc_stat() follows symlinks, so links to directories are found too
         vpath = vfs_path_append_new (dir_vpath, name, (char *) NULL);
         if (mc_stat (vpath, &st) == 0 && S_ISDIR (st.st_mode))
+        {
+            if (names == NULL)
+                names = g_ptr_array_new_with_free_func (g_free);
             g_ptr_array_add (names, g_strdup (name));
+        }
         vfs_path_free (vpath, TRUE);
     }
 
     mc_closedir (dir);
 
-    g_ptr_array_sort (names, cd_compare_names);
+    if (names != NULL)
+        g_ptr_array_sort (names, cd_compare_names);
 
     return names;
 }
@@ -319,18 +322,22 @@ cd_expand_wildcards (const char *path, size_t pos)
     names = cd_find_matching_dirs (vpath, pattern);
     vfs_path_free (vpath, TRUE);
 
-    for (i = 0; i < names->len && result == NULL; i++)
+    if (names != NULL)
     {
-        const char *name = g_ptr_array_index (names, i);
-        char *candidate;
+        for (i = 0; i < names->len && result == NULL; i++)
+        {
+            const char *name = g_ptr_array_index (names, i);
+            char *candidate;
 
-        candidate = g_strconcat (prefix, name, end, (char *) NULL);
-        // don't expand the wildcards in the name of the found directory again
-        result = cd_expand_wildcards (candidate, strlen (prefix) + strlen (name));
-        g_free (candidate);
+            candidate = g_strconcat (prefix, name, end, (char *) NULL);
+            // don't expand the wildcards in the name of the found directory again
+            result = cd_expand_wildcards (candidate, strlen (prefix) + strlen (name));
+            g_free (candidate);
+        }
+
+        g_ptr_array_free (names, TRUE);
     }
 
-    g_ptr_array_free (names, TRUE);
     g_free (pattern);
     g_free (prefix);
 
