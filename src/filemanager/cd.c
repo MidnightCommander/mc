@@ -301,8 +301,9 @@ cd_expand_wildcards (const char *path, size_t pos)
         return result;
     }
 
-    for (start = w; start > path && !IS_PATH_SEP (start[-1]); start--)
-        ;
+    start = w;
+    while (start > path && !IS_PATH_SEP (start[-1]))
+        start--;
     end = strchr (w, PATH_SEP);
     if (end == NULL)
         end = strchr (w, '\0');
@@ -316,7 +317,7 @@ cd_expand_wildcards (const char *path, size_t pos)
 
     if (names != NULL)
     {
-        for (i = 0; i < names->len && result == NULL; i++)
+        for (i = 0; i < names->len; i++)
         {
             const char *name = g_ptr_array_index (names, i);
             char *candidate;
@@ -325,6 +326,10 @@ cd_expand_wildcards (const char *path, size_t pos)
             // don't expand the wildcards in the name of the found directory again
             result = cd_expand_wildcards (candidate, strlen (prefix) + strlen (name));
             g_free (candidate);
+
+            // the rest of the path can be expanded with this directory: done
+            if (result != NULL)
+                break;
         }
 
         g_ptr_array_free (names, TRUE);
