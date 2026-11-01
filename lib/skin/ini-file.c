@@ -91,14 +91,6 @@ mc_skin_get_list_from_dir (const gchar *base_dir, GPtrArray *list)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-string_array_comparator (gconstpointer a, gconstpointer b)
-{
-    return strcmp (*(char *const *) a, *(char *const *) b);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static gboolean
 mc_skin_ini_file_load_search_in_dir (mc_skin_t *mc_skin, const gchar *base_dir)
 {
@@ -140,7 +132,7 @@ mc_skin_list (void)
     mc_skin_get_list_from_dir (mc_config_get_data_path (), list);
     mc_skin_get_list_from_dir (mc_global.sysconfig_dir, list);
     mc_skin_get_list_from_dir (mc_global.share_data_dir, list);
-    g_ptr_array_sort (list, (GCompareFunc) string_array_comparator);
+    g_ptr_array_sort_values (list, (GCompareFunc) strcmp);
 
     return list;
 }

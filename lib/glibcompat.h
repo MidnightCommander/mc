@@ -29,6 +29,10 @@ void g_clear_list (GList **list_ptr, GDestroyNotify destroy);
 void g_queue_clear_full (GQueue *queue, GDestroyNotify free_func);
 #endif
 
+#if !GLIB_CHECK_VERSION(2, 76, 0)
+void g_ptr_array_sort_values (GPtrArray *array, GCompareFunc func);
+#endif
+
 #if !GLIB_CHECK_VERSION(2, 77, 0)
 GString *g_string_new_take (char *init);
 #endif
