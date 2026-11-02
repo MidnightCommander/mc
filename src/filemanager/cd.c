@@ -292,6 +292,7 @@ cd_expand_wildcards (const char *path, size_t pos)
 {
     const char *w, *start, *end;
     char *prefix, *pattern, *result = NULL;
+    size_t prefix_len;
     vfs_path_t *vpath;
     GPtrArray *names;
     guint i;
@@ -309,14 +310,14 @@ cd_expand_wildcards (const char *path, size_t pos)
         return result;
     }
 
-    start = w;
-    while (start > path && !IS_PATH_SEP (start[-1]))
-        start--;
+    for (start = w; start > path && !IS_PATH_SEP (start[-1]); start--)
+        ;
     end = strchr (w, PATH_SEP);
     if (end == NULL)
         end = strchr (w, '\0');
 
-    prefix = g_strndup (path, (gsize) (start - path));
+    prefix_len = (size_t) (start - path);
+    prefix = g_strndup (path, prefix_len);
     pattern = g_strndup (start, (gsize) (end - start));
 
     vpath = cd_make_vpath (prefix);
@@ -325,19 +326,15 @@ cd_expand_wildcards (const char *path, size_t pos)
 
     if (names != NULL)
     {
-        for (i = 0; i < names->len; i++)
+        for (i = 0; i < names->len && result == NULL; i++)
         {
             const char *name = g_ptr_array_index (names, i);
             char *candidate;
 
             candidate = g_strconcat (prefix, name, end, (char *) NULL);
             // don't expand the wildcards in the name of the found directory again
-            result = cd_expand_wildcards (candidate, strlen (prefix) + strlen (name));
+            result = cd_expand_wildcards (candidate, prefix_len + strlen (name));
             g_free (candidate);
-
-            // the rest of the path can be expanded with this directory: done
-            if (result != NULL)
-                break;
         }
 
         g_ptr_array_free (names, TRUE);
