@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -487,12 +487,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM çevre değişkeni atanmamış!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "SIGWINCH borusu kontrol edilemiyor"
-
 #, c-format
 msgid ""
 "\n"
@@ -524,6 +518,12 @@ msgid ""
 msgstr ""
 "%dx%d ekran boyutu desteklenmiyor.\n"
 "TERM ortam değişkenini kontrol ediniz.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM çevre değişkeni atanmamış!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "SIGWINCH borusu kontrol edilemiyor"
 
 msgid "B"
 msgstr "B"
@@ -1830,6 +1830,9 @@ msgstr "Mkdi&r otomatik ad"
 msgid "&Preallocate space"
 msgstr "Alanı önceden a&yır"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Esc tuş kipi"
 
@@ -2795,6 +2798,13 @@ msgstr "Dizinler:%zu, toplam boyut:%s"
 msgid "Sorry, I could not put the job in background"
 msgstr "İş artalana konulamadı"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "A&skıya Al"
 
@@ -3066,9 +3076,6 @@ msgstr "&Artalan İşleri"
 
 msgid "Screen lis&t"
 msgstr "Ekran listes&i"
-
-msgid "&Listing format edit"
-msgstr "&Listeleme biçimini düzenle"
 
 msgid "Edit &extension file"
 msgstr "Dosya &Uzantılarını düzenle"
@@ -3649,13 +3656,6 @@ msgstr ""
 " %s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "%s silinsin mi ?"
 
@@ -3972,6 +3972,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"%s'de\n"
+"bozuk cpio başlığı saptandı"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3985,14 +3993,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s ikiyüzlü girdiler içeriyor! Atlanıyor"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"%s'de\n"
-"bozuk cpio başlığı saptandı"
 
 #, c-format
 msgid ""
@@ -4348,6 +4348,9 @@ msgstr "Durdurma sonra hata raporlandı."
 msgid "Aborted transfer would be successful."
 msgstr "Aktarımın durdurulması başarıldı."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Tar arşivi düzgün değil"
 
@@ -4366,9 +4369,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4467,8 +4467,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4477,8 +4476,11 @@ msgstr "Arama yapıldı"
 msgid "Continue from beginning?"
 msgstr "Başından devam edilsin mi?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "&Listeleme biçimini düzenle"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "HP terminallerde soft tuşları sıfırlar"

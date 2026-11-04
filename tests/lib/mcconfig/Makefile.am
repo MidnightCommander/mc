@@ -16,6 +16,8 @@ TESTS = \
 
 check_PROGRAMS = $(TESTS)
 
+CLEANFILES = config_string.ini
+
 config_string_SOURCES = \
 	config_string.c
 

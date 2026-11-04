@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -501,43 +501,43 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "The TERM environment variable is unset!\n"
 
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Cannot check SIGWINCH pipe"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot create pipe for SIGWINCH: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr ""
-"\n"
-"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
 
 msgid "B"
 msgstr "B"
@@ -1879,6 +1879,9 @@ msgstr "Mkdi&r autoname"
 msgid "&Preallocate space"
 msgstr "&Preallocate space"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Esc key mode"
 
@@ -2954,6 +2957,16 @@ msgstr "Directories: %zu, total size: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Sorry, I could not put the job in background"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+
 msgid "S&uspend"
 msgstr "S&uspend"
 
@@ -3225,9 +3238,6 @@ msgstr "&Background jobs"
 
 msgid "Screen lis&t"
 msgstr "Screen lis&t"
-
-msgid "&Listing format edit"
-msgstr "&Listing format edit"
 
 msgid "Edit &extension file"
 msgstr "Edit &extension file"
@@ -3812,16 +3822,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Delete %s?"
 
@@ -4142,6 +4142,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Corrupted cpio header encountered in\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4155,14 +4163,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s contains duplicate entries! Skipping!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Corrupted cpio header encountered in\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4546,6 +4546,9 @@ msgstr "Error reported after abort."
 msgid "Aborted transfer would be successful."
 msgstr "Aborted transfer would be successful."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek not stopped at a record boundary"
+
 msgid "Inconsistent tar archive"
 msgstr "Inconsistent tar archive"
 
@@ -4567,9 +4570,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "doesn't look like a tar archive"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek not stopped at a record boundary"
 
 msgid "Invalid value"
 msgstr "Invalid value"
@@ -4668,12 +4668,11 @@ msgstr ""
 "%s\n"
 "Not a regular file"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Cannot open\n"
 "%s\n"
@@ -4686,8 +4685,11 @@ msgstr "Search done"
 msgid "Continue from beginning?"
 msgstr "Continue from beginning?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "&Listing format edit"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Resets soft keys on HP terminals"

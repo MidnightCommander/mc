@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2019,2025\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -29,9 +29,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "No translation"
@@ -495,12 +495,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Немагчыма праверыць канал SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -532,6 +526,12 @@ msgid ""
 msgstr ""
 "Памер экрана %d×%d не падтрымліваецца.\n"
 "Праверце зменную асяроддзя \"TERM\".\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Зменную асяроддзя \"TERM\" не вызначылі!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Немагчыма праверыць канал SIGWINCH"
 
 msgid "B"
 msgstr "Б"
@@ -1835,6 +1835,9 @@ msgstr "Аўтаматычна даваць назву каталогу(&R)"
 msgid "&Preallocate space"
 msgstr "Загадзя зарэзерваваць прастору(&P)"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Рэжым клавішы \"Esc\""
 
@@ -2802,6 +2805,13 @@ msgstr "Каталогаў: %zu, агульны памер: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Гэта нельга рабіць у фоне"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "Прыпыніць(&U)"
 
@@ -3073,9 +3083,6 @@ msgstr "Задачы ў фоне(&B)"
 
 msgid "Screen lis&t"
 msgstr "Спіс экранаў(&T)"
-
-msgid "&Listing format edit"
-msgstr "Змяніць выгляд спіса(&L)"
 
 msgid "Edit &extension file"
 msgstr "Рэдагаваць файл пашырэнняў(&E)"
@@ -3669,13 +3676,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Выдаліць \"%s\"?"
 
@@ -3992,6 +3992,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Трапіўся пашкоджаны загаловак cpio\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4005,14 +4013,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "\"%s\" змяшчае падвоеныя запісы! Будзе прапушчана!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Трапіўся пашкоджаны загаловак cpio\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4394,6 +4394,9 @@ msgstr "Пасля перарывання выяўлена памылка."
 msgid "Aborted transfer would be successful."
 msgstr "Перадача перарваная."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
+
 msgid "Inconsistent tar archive"
 msgstr "Несумяшчальны архіў tar"
 
@@ -4415,9 +4418,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "не падобны на архіў tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek не спыніўся на мяжы запісу"
 
 msgid "Invalid value"
 msgstr "Хібнае значэнне"
@@ -4511,13 +4511,14 @@ msgid ""
 "Not a regular file"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
+"Немагчыма адкрыць %s архіў\n"
+"%s"
 
 msgid "Search done"
 msgstr "Пошук завершаны"
@@ -4525,8 +4526,11 @@ msgstr "Пошук завершаны"
 msgid "Continue from beginning?"
 msgstr "Працягваць ад пачатку?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Змяніць выгляд спіса(&L)"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Скідвае праграмныя клавішы на тэрміналах HP"
