@@ -1797,7 +1797,8 @@ Se l'opzione
 è abilitata, una riga di informazioni di stato circa la voce correntemente
 selezionata viene mostrata sul fondo dei pannelli.
 Abilitata per impostazione predefinita.
-.PP Usa le unità SI
+.PP
+.I Usa le unità SI.
 Se questa opzione è abilitata, Midnight Commander utilizzerà i prefissi SI (base 10)
 per visualizzare le dimensioni dei byte. Se disabilitata (impostazione predefinita),
 Midnight Commander utilizzerà i prefissi IEC (base 2).

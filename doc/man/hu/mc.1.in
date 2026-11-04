@@ -217,7 +217,8 @@ Meta, vagy az Alt billentyű, akkor használd az ESC\-et, a megfelelő
 karakter <kar> begépelésekor. A Meta funkció Linux alatt úgy érhető el,
 hogy megnyomjuk, majd elengedjük az ESC billentyűt. A Meta funkció az
 ezután megnyomott billentyűre vonatkozik!
-.PP A Midnight Commander
+.PP
+A Midnight Commander
 beviteli eszköze a GNU Emacs szerkesztő billentyűzet\-kombinációihoz
 hasonlóan működik.
 .PP
