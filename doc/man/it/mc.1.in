@@ -708,7 +708,7 @@ mostra il nome del file.
 .B size
 mostra l'ampiezza del file.
 .TP
-.BR bsize
+.B bsize
 è una forma alternativa del formato
 .B size
 mostra l'ampiezza del file e per le directory mostra solo 
@@ -1496,7 +1496,7 @@ opzioni relative a come mc appare sullo schermo.
 Il comando
 .\"LINK2"
 Opzioni del pannello
-.\"Opzioni del pannello"
+.\"Panel options"
 apre una finestra di dialogo da cui è possibile specificare le opzioni dei
 pannelli del file manager.
 .PP
@@ -1797,7 +1797,8 @@ Se l'opzione
 è abilitata, una riga di informazioni di stato circa la voce correntemente
 selezionata viene mostrata sul fondo dei pannelli.
 Abilitata per impostazione predefinita.
-.PP Usa le unità SI
+.PP
+.I Usa le unità SI.
 Se questa opzione è abilitata, Midnight Commander utilizzerà i prefissi SI (base 10)
 per visualizzare le dimensioni dei byte. Se disabilitata (impostazione predefinita),
 Midnight Commander utilizzerà i prefissi IEC (base 2).
@@ -2739,9 +2740,8 @@ Attualmente il Midnight Commander viene confezionato con alcuni File
 System Virtuali (VFS): il file system locale, usato per accedere al 
 normale file system Unix; l'ftpfs, usato per manipolare file su sistemi 
 remoti con il protocollo FTP; il tarfs, usato per manipolare file tar
-e file tar compressi; l'undelfs, usato per recuperare file cancellati
-su file system di tipo ext2 (il file system predefinito per sistemi
-Unix), fish (per manipolare file su connessioni shell come rsh e ssh) e
+e file tar compressi; fish (per manipolare file su connessioni shell
+come rsh e ssh) e
 per ultimo l'mcfs (file system del Midnight Commander), un file system
 basato sulla rete.
 .PP
@@ -3055,7 +3055,6 @@ La ricerca del file del tema avverrà (fino al primo trovato):
 .br
 3)
 .B %pkgdatadir%/skins/
-.br
 
 .PP
 Il formato dei file del tema è descritto in
@@ -3104,8 +3103,6 @@ La chiave `type` può avere i seguenti valori:
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
-.PP
-
 .\"NODE "Special Settings"
 .SH "Impostazioni speciali"
 Molte delle impostazioni del Midnight Commander possono essere cambiate
@@ -3296,7 +3293,7 @@ Menu locale definito dall'utente. Se questo file è presente viene usato
 al posto del menu delle applicazioni utente o di sistema.
 .PP
 To change default home directory of MC, you can use 
-.BR MC_PROFILE_ROOT
+.B MC_PROFILE_ROOT
 environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
 If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
 or empty, MC directories are get from GLib library.

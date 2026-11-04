@@ -5,7 +5,6 @@ mcdiff \- Уграђени diff прегледач ГНУ\-овог поноћн
 .B mcdiff
 [\-bcCdfhstVx?] дато1 дато2
 .SH ОПИС
-.LP
 mcdiff је веза ка
 .BR mc \-у,
 главној извршној датотеци ГНУ\-овог поноћног наредника. Извршавање ГНУ\-овог
@@ -46,7 +45,6 @@ mcdiff је веза ка
 .I "\-x"
 Намеће xterm режим. Користи се на терминалима сагласним са xterm\-ом (два
 екранска режима и способност за слање ескејп секвенци миша).
-.PP
 .SH ДАТОТЕКЕ
 .I %pkgdatadir%/mc.hlp
 .IP
@@ -66,7 +64,6 @@ mcdiff је веза ка
 .IP
 Корисничка подешавања. Ако је ова датотека присутна, онда се подешавања
 учитавају одавде уместо из системске датотеке са подешавањима.
-.PP
 .SH ЛИЦЕНЦА
 Овај програм се расподељује под одредбама ГНУ\-ове опште јавне лиценце коју је
 објавила Задужбина за слободни софтвер. Погледајте уграђену помоћ за детаље о
@@ -76,6 +73,5 @@ mcdiff је веза ка
 \X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .SH ВИДЕТИ И
 mc(1), mcedit(1), mcview(1)
-.PP
 .SH ГРЕШКЕ
 Грешке пријавите на \X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .

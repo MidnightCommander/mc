@@ -2346,9 +2346,9 @@ The currently tagged files.
 .I %T
 The tagged files in the unselected panel.
 .TP
-.TP
 .IR %v " and " %V
 Similar to the %t and %T, but expands to full names of tagged files.
+.TP
 .IR %u " and " %U
 Similar to the %t and %T macros, but in addition the files are untagged.
 You can use this macro only once per menu file entry or extension file
@@ -3222,9 +3222,6 @@ file system, used for accessing the regular Unix file system; the
 used to manipulate files on remote systems with the FTP protocol; the
 .IR tarfs ,
 used to manipulate tar and compressed tar files; the
-.IR undelfs ,
-used to recover deleted files on ext2 file systems (the default file
-system for Linux systems),
 .I shell
 (for manipulating files over shell connections such as rsh and ssh).
 If the code was compiled with
@@ -3593,7 +3590,6 @@ or without it). Search of skin\-file will occur in (to the first one found):
 .br
 3)
 .B %pkgdatadir%/skins/
-.br
 
 .PP
 The format of skin files is described in
@@ -3642,8 +3638,6 @@ rule case sensitive (true) or not (false).
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
-.PP
-
 .\"NODE "Special Settings"
 .SH "Special Settings"
 Most of Midnight Commander settings can be changed from the
@@ -3874,7 +3868,7 @@ User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
 .PP
 .I %sysconfdir%/mc/mc.ini
-.RE
+.br
 .I %pkgdatadir%/mc.ini
 .IP
 System\-wide setup files for Midnight Commander, used only if the user

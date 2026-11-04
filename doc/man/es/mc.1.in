@@ -524,7 +524,6 @@ Favoritos
 .\"Hotlist"
 y permite cambiar al directorio seleccionado.
 
-.TP
 .PP
 .B * N. del T.:
 En el teclado castellano, existe un pequeño inconveniente, dado que la
@@ -553,7 +552,6 @@ la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 usaremos las teclas «\-» o «\e» para deseleccionar un grupo de archivos.  Esta es
 la operación opuesta a la realizada por la tecla «+».
 
-.TP
 .PP
 .B * N. del T.:
 La tecla que realiza originalmente la función descrita es la «\-» (menos)
@@ -2180,7 +2178,6 @@ transferencia de datos es iniciada por la máquina cliente, no por el
 servidor).  Esta opción es la recomendada, y de hecho está activada
 por defecto.  Si se desactiva, la conexión la inicia el servidor,
 y puede ser impedida por algún cortafuegos.
-.PP
 .\"NODE "    Save Setup"
 .SH "    Guardar Configuración"
 Al arrancar Midnight Commander se carga la información de inicio del
@@ -2775,7 +2772,6 @@ Invoca el visor de ayuda de hipertexto interno.
 .B F2
 Cambia el modo de ajuste de líneas en pantalla.
 
-.TP
 .PP
 .B * N. del T.:
 Envuelta (Ajustada), se muestra toda la información de la línea en la pantalla, de
@@ -3008,9 +3004,6 @@ utilizado para acceder al sistema de archivos Unix habitual;
 .I tarfs
 para manipular archivos empaquetados con el comando tar y acaso
 comprimidos;
-.I undelfs
-para recuperar archivos borrados en sistemas de archivos de tipo ext2
-(sistema de archivos habitual en Linux);
 .I ftpfs
 para manipular archivos en sistemas remotos a través de FTP;
 .I fish
@@ -3372,7 +3365,6 @@ en orden, en:
 .br
 3)
 .BR %pkgdatadir%/skins/ .
-.br
 
 .PP
 Para más información consultar:
@@ -3392,7 +3384,6 @@ Trazado de líneas
 .\"LINK2"
 Compatibilidad
 .\"Skins oldcolors"
-.br
 
 .\"NODE "  Skins sections"
 .SH "  Descripción de secciones y parámetros"

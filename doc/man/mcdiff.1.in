@@ -5,7 +5,6 @@ mcdiff \- Internal diff viewer of GNU Midnight Commander.
 .B mcdiff
 [\-bcCdfhstVx?] file1 file2
 .SH DESCRIPTION
-.LP
 mcdiff is a link to
 .BR mc ,
 the main GNU Midnight Commander executable.  Executing GNU Midnight
@@ -51,7 +50,6 @@ Displays the version of the program.
 .I "\-x"
 Forces xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
-.PP
 .SH FILES
 .I %pkgdatadir%/mc.hlp
 .IP
@@ -71,7 +69,6 @@ affect all users, whether they have ~/.config/mc/ini or not.
 .IP
 User's own setup.  If this file is present, the setup is loaded from
 here instead of the system\-wide startup file.
-.PP
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation.  See the built\-in
@@ -82,7 +79,6 @@ The latest version of this program can be found at
 \X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .SH SEE ALSO
 mc(1), mcedit(1), mcview(1)
-.PP
 .SH BUGS
 Bugs should be reported to
 \X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .
