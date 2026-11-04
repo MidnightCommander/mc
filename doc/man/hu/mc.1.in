@@ -462,7 +462,6 @@ Megjeleníti a könyvtár előzményeket, azonos a 'v' egérrel történő
 lenyomásával.
 .\"NODE "  Quick search"
 .SH "  Quick search"
-.PP
 .B C\-s, M\-s
 Elindítja a fájl keresést a könyvtár listában.  Amikor a keresés
 aktív, a billentyűlenyomások hozzáadódnak a keresett szöveghez a

@@ -2178,7 +2178,6 @@ transferencia de datos es iniciada por la máquina cliente, no por el
 servidor).  Esta opción es la recomendada, y de hecho está activada
 por defecto.  Si se desactiva, la conexión la inicia el servidor,
 y puede ser impedida por algún cortafuegos.
-.PP
 .\"NODE "    Save Setup"
 .SH "    Guardar Configuración"
 Al arrancar Midnight Commander se carga la información de inicio del
@@ -3366,7 +3365,6 @@ en orden, en:
 .br
 3)
 .BR %pkgdatadir%/skins/ .
-.br
 
 .PP
 Para más información consultar:
@@ -3386,7 +3384,6 @@ Trazado de líneas
 .\"LINK2"
 Compatibilidad
 .\"Skins oldcolors"
-.br
 
 .\"NODE "  Skins sections"
 .SH "  Descripción de secciones y parámetros"

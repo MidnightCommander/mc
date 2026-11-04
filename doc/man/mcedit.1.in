@@ -8,7 +8,6 @@ mcedit \- Internal file editor of GNU Midnight Commander.
 .B mcedit
 [\-bcCdfhstVx?] file1:lineno[:] file2:lineno[:] ...
 .SH DESCRIPTION
-.LP
 mcedit is a link to
 .BR mc ,
 the main GNU Midnight Commander executable. Executing GNU Midnight Commander
@@ -103,7 +102,6 @@ or
 .BR "Escape Tab" )
 completes the word under the cursor using the words used in the file.
 .SH MACRO
-.PP
 To define a macro, press
 .B Ctrl\-R
 and then type out the keys you want to be executed.  Press
@@ -240,7 +238,6 @@ where minus is symbol "\-" goes to previous function in navigation list
 .B Meta\-Equal
 where equal is symbol "=" goes to next function in navigation list
 (like browser's Forward button).
-.PP
 .SH SYNTAX HIGHLIGHTING
 .B mcedit
 supports syntax highlighting.  This means that keywords and contexts

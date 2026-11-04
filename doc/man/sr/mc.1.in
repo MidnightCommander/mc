@@ -3443,7 +3443,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 .br
 3)
 .B %pkgdatadir%/skins/
-.br
 
 .PP
 За додатне информације, видети:
@@ -3467,7 +3466,6 @@ color_terminals=terminal\-name1,terminal\-name2...
 .\"LINK2"
 Компатибилност
 .\"Skins oldcolors"
-.br
 
 .\"NODE "  Skins sections"
 .SH "  Опис одељака и параметара"
@@ -3786,8 +3784,6 @@ color_terminals=terminal\-name1,terminal\-name2...
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
-.PP
-
 .\"NODE "Special Settings"
 .SH "Посебна подешавања"
 Већина подешавања Поноћног наредника се могу изменити из менија.  Међутим,

@@ -3590,7 +3590,6 @@ or without it). Search of skin\-file will occur in (to the first one found):
 .br
 3)
 .B %pkgdatadir%/skins/
-.br
 
 .PP
 The format of skin files is described in
@@ -3639,8 +3638,6 @@ rule case sensitive (true) or not (false).
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
-.PP
-
 .\"NODE "Special Settings"
 .SH "Special Settings"
 Most of Midnight Commander settings can be changed from the

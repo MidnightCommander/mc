@@ -3055,7 +3055,6 @@ La ricerca del file del tema avverrà (fino al primo trovato):
 .br
 3)
 .B %pkgdatadir%/skins/
-.br
 
 .PP
 Il formato dei file del tema è descritto in
@@ -3104,8 +3103,6 @@ La chiave `type` può avere i seguenti valori:
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
-.PP
-
 .\"NODE "Special Settings"
 .SH "Impostazioni speciali"
 Molte delle impostazioni del Midnight Commander possono essere cambiate

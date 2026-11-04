@@ -131,7 +131,6 @@ piszesz pojawia się w linii poleceń i po naciśnięciu klawisza Enter zostanie
 wykonane przez Midnight Commandera. Przeczytaj sekcję
 .BR "Linia powłoki i Linia wejściowa klawiszy" ,
 żeby nauczyć się więcej na ten temat.
-.PP
 .\"NODE "Mouse Support"
 .SH "Obsługa myszy"
 Midnight Commander obsługuje mysz. Moduł ten jest uruchamiany wtedy kiedy
@@ -218,7 +217,6 @@ pozwala zwiedzić historię komend linii poleceń.
 są używane do edytowania linii na wejściu (przy wpisywaniu). Oznacza,
 to że stosuje się je zarówno
 do linii poleceń jak do okien dialogowych.
-.PP
 .\"NODE "  Miscellaneous Keys"
 .SH "Klawisze różne"
 Jest tu kilka klawiszy, które nie kwalifikują się do żadnej z wymienionych
@@ -288,7 +286,6 @@ Commandera dopóki nie zamkniesz zawieszonego programu.
 Aby dowiedzieć się czegoś na temat polskiech liter w Midnight Commanderze
 przeczytaj sekcję
 .IR "Polskie litery" .
-.PP
 .\"NODE "  Directory Panels"
 .SH "  Panel Katalogów"
 Sekcja opisuje klawisze, które operują na panelu katalogów. Jeśli chcesz
@@ -384,10 +381,8 @@ w '>'.
 .PP
 .BR M\-S\-h ", " M\-H .
 Wyświetla historię katalogów, podobne działanie do kliknięcia myszką 'v'.
-.PP
 .\"NODE "  Quick search"
 .SH "  Quick search"
-.PP
 .BR C\-s ", " M\-s .
 Uruchamia szukanie pliku w katalogu na podstawie jego nazwy. Kiedy szukanie
 jest aktywne, każde naciśnięcie klawisza doda jeden znak do poszukiwania
@@ -435,7 +430,6 @@ a M\-n następną komendę.
 .PP
 .BR M\-h .
 Wyświetla historię aktualnej linii poleceń.
-.PP
 .\"NODE "  General Movement Keys"
 .SH "  Podstawowe klawisze ruchu"
 Przeglądarka pomocy, podgląd plików i drzewo katalogów używają podobnych
@@ -477,7 +471,6 @@ Przechodzi pół strony naprzód lub wstecz.
 .PP
 .BR g ", " G .
 Przechodzi do początku lub do końca.
-.PP
 .\"NODE "  Input Line Keys"
 .SH "  Linia wejściowa klawiszy"
 Linie wejściowe (te używane w linii komend i w oknach dialogowych), akceptują
@@ -533,7 +526,6 @@ kasuje jedno słowo wstecz (poprzednie).
 .BR M\-Tab .
 Wykonuje dokończenie nazw plików, komend, zmiennych, użytkowników, nazw hostów
 za Ciebie.
-.PP
 .SH ""
 .\"NODE "Menu Bar"
 .SH "Linia menu"
@@ -549,14 +541,12 @@ Menu plik pozwala na wykonanie akcji na aktualnym lub zaznaczonych plikach.
 .PP
 Menu komend mieści w sobie możliwe do wykonania akcje, które są dużo bardziej
 globalne i nie mają związku z aktualnym i zaznaczonymi plikami.
-.PP
 .\"NODE "  Left and Right Menus"
 .SH "  Lewe i prawe menu"
 Wygląd panelu katalogowego może zostać zmieniony poprzez menu
 .B left
 i
 .BR right .
-.PP
 .\"NODE "    Listing Format..."
 .SH "    Tryby wyświetlania (Listing modes)"
 Tryby wyświetlania są używane do zmienia ustawień przy wyświetlaniu.
@@ -702,14 +692,12 @@ wstecznego (od tyłu).
 Standardowo, katalogi są sortowane przed plikami, ale może to być zmienione
 przez opcję
 .BR "Mix all files (mieszaj wszystkie pliki)" .
-.PP
 .\"NODE "    Filter..."
 .SH "    Filtry (Filter...)"
 Komenda filtra pozwala ci na podanie rozszerzenia, które musi być spełnione,
 żeby pliki były widoczne (na przykład
 .BR "*.tar.gz" ).
 Niezależnie od filtru katalalogi i dowiązania do katalogów są zawsze pokazywane.
-.PP
 .\"NODE "    Reread"
 .SH "    Odśwież (Reread)"
 Komenda odśwież odświeża widok wszystkich plików w katalogów. Jest to użyteczne
@@ -717,7 +705,6 @@ jeśli inny proces stworzył lub usunął jakiś pliki. Jeśli użyłeś panelu
 zewnętrznego, wszystkie informacje zostaną przywrócone do prawdziwego stanu.
 .\"NODE "  File Menu"
 .SH "Menu plików (File menu)"
-.PP
 Midnight Commander używa klawiszy F1 \- F10 jako skrótów klawiszowych do komend
 występujących w menu plików. Na terminalach bez funkcji klawiszowych (F1 \- F10)
 można używać kombinacji klawisza Escape i numeru ( odpowiednio 1 dla F1,
@@ -869,7 +856,6 @@ Zamyka Midnight Commandera. Shift\-F10 jest używany jeśli używasz
 "wrappera" powłoki. Shift\-F10 nie przeniesie cię do katalogu, w którym
 byłeś ostatnio w Midnight Commanderze, zamiast tego przejdzie do katalogu,
 z którego uruchomiłeś program.
-.PP
 .\"NODE "    Quick cd"
 .SH "    Szybka zmiana katalogów (Quick cd) M\-c"
 Ta komenda jest bardzo użyteczna, jeśli masz już pełną linię poleceń, a
@@ -878,7 +864,6 @@ w którym podajesz to co po normalnej komendzie
 .B cd
 po czym naciskasz Enter. Wszystkie opcje są dokładnie takie same jak we
 wbudowanej komendzie cd.
-.PP
 .\"NODE "  Command Menu"
 .SH "  Menu komend (Command Menu)"
 Komenda drzewo katalogów (Directory tree) pokazuje drzewo katalogów.
@@ -913,7 +898,6 @@ programów, które mają być używane do wykonywania plików z podanymi
 rozszerzeniami. Komenda edycji pliku menu (Edit Menu File) może być używana do
 edytowania menu użytkownika (tego, które pojawia się po naciśnięciu kombinacji
 F2).
-.PP
 .\"NODE "    Directory Tree"
 .SH "    Drzewo katalogów (Directory Tree)"
 Możesz wybierać katalogi z drzewa katalogów i Midnight Commander przejdzie do
@@ -999,7 +983,6 @@ Wychodzi z drzewa. Nie zmienia katalogów.
 Mysz jest obsługiwana. Podwójne kliknięcie ma znaczenie identyczne do
 klawisza Enter. Zobacz również sekcję
 .IR "Obsługa myszy" .
-.PP
 .\"NODE "    Find File"
 .SH "    Znajdź plik (Find File)"
 Komenda znajdź plik najpierw pyta się o startowy katalog do przeszukiwania
@@ -1045,7 +1028,6 @@ Możesz woleć używać panelu zewnętrznego do wykonywania niektórych operacji
 Szukanie pliku jest dobre tylko dla prostych zapytań. Używając panelu
 zewnętrznego możesz dokonywać tak skomplikowanych wyszukiwań jak tylko
 pragniesz.
-.PP
 .\"NODE "    External panelize"
 .SH "    Panel zewnętrzny"
 Panel zewnętrzny pozwala ci na wykonywanie zewnętrznych programów i
@@ -1075,7 +1057,6 @@ Możesz zapisać sobie często używane komendy pod jakąś nazwą, po to
 w linii wejściowej, a potem naciskająć przycisk Add. Potem wpisujesz nazwę,
 pod jaką ta komenda ma być widoczna. Następnym razem po prostu wybierasz
 tę komendę z listy i nie musisz już wpisywać jej ponownie.
-.PP
 .\"NODE "    Hotlist"
 .SH "    Hotlist"
 Hotlista katalogów pokazuje nazwy katalogów wprowadzonych do hotlisty.
@@ -1089,7 +1070,6 @@ nazwą ma być ten katalog widoczny.
 Powoduje to przechodzenie do częściej przeglądanych katalogów znacznie szybciej.
 Możesz używać ciągle wartości CDPATH opisanej w sekcji Wewnętrzne
 przemieszczanie.
-.PP
 .\"NODE "    Edit Extension File"
 .SH "    Edycja rozszerzeń pliów (Edit Extension File)"
 Ta komenda wywoła twój edytor na plik
@@ -1109,7 +1089,6 @@ w tle
 przez Midnight Commandera (tylko operacje kopiowania i przenoszenia, mogą
 być wykonywane w tle). Z tego menu możesz zastopować, zresetować i "zabić"
 proces w tle.
-.PP
 .\"NODE "    Edit Menu File"
 .SH "    Edycja menu użytkownika (Edit Menu File)"
 Menu użytkownika jest bardzo użytecznym menu, które może być tworzone
@@ -1242,7 +1221,6 @@ możesz poprzedzić wpis menu dwoma wierszami warunkowymi. Jednym zaczynającym
 się od znaku '+', a drugim od '='.
 .PP
 Wszelkie komentarze rozpoczynają się od znaku '#'.
-.PP
 .\"NODE "  Options Menu"
 .SH "  Menu opcji (Options Menu)"
 Midnight Commander ma niektóre opcje, które mogą być włączane lyb wyłączane
@@ -1301,7 +1279,6 @@ Komenda
 Save Setup
 .\"Save Setup"
 zachowuje wszystkie ustawienia z menu Lewego, Prawego i Opcji.
-.PP
 .\"NODE "    Configuration"
 .SH "    Konfiguracja"
 Opcje w tym oknie są podzielone na kilka grup:
@@ -1476,7 +1453,6 @@ Standardowo ta opcja jest wyłączona.
 Jeśli ta opcja jest włączona, kiedy wychodzisz z Midnight Commandera
 konfiguracja MC zostanie zachowana automatycznie (bez pytania)
 do pliku ~/.config/mc/ini.
-.PP
 .\"NODE "    Layout"
 .SH "    Układ (Layout)"
 Okno Układ pozwala ci na różne warianty zmieniania ogólnego wyglądu
@@ -1689,7 +1665,6 @@ i również poczekaj na zniknięcie okna.
 Kiedy skończysz już ze wszystkimi klawiszami, możesz nacisnąć Save
 żeby zachować zmiany do pliku ~/.config/mc/ini do sekcji [terminal:TERM] (gdzie
 TERM jest nazwą twojego aktualnego terminala) lub po prostu odrzucić je.
-.PP
 .\"NODE "    Virtual FS"
 .SH "    Wirtualny system plików (Virtual FS)"
 Ta opcja daje ci kontrolę nad ustawieniami informacji wirtualnego systemu
@@ -1757,7 +1732,6 @@ Istnieją również ustawienia, które nie mogą być zmienione z poziomu menu.
 Dla tych ustawień musisz wyedytować swój plik konfiguracyjny za pomocą
 twojego ulubionego edytora. Zobacz sekcję Specjalne ustawienia po więcej
 informacji.
-.PP
 .SH ""
 .\"NODE "Executing operating system commands"
 .SH "Wykonywanie poleceń systemu operacyjnego (Executing operating system commands)"
@@ -1769,7 +1743,6 @@ Jeśli naciśniesz Enter na pliku, który nie jest wykonywalny, Midnight Command
 sprawdzi rozszerzenie pliku i porówna je z rozszerzeniami wybranymi w pliku
 rozszerzeń (Extensions File). Jeśli jakaś pozycja się zgadza, wykonywana
 jest komenda (raczej bardziej rozszerzone makro) powiązana z tym rozszerzeniem.
-.PP
 .\"NODE "  The cd internal command"
 .SH "  Wbudowana komenda cd (The cd internal command)"
 Komenda cd jest interpretowana przez Midnight Commandera, nie
@@ -1801,10 +1774,8 @@ Na przykład, możesz ustawić swoją zmienną
 na katalogi ~/src:/usr/src, pozwalając na zmianę katalogów na jakikolwiek
 inny wewnątrz ~/src i /usr/src, z miejsca w którym jesteś (np. cd linux
 przeniesie cię do katalogu /usr/src/linux).
-.PP
 .\"NODE "  Macro Substitution"
 .SH "  Obsługa makr (Macro Substitution)"
-.PP
 Kiedy używamy menu użytkownika, wykonujemy plik o znajomym rozszerzeniu, lub
 wykonujemy komendę z linii poleceń, możemy użyć kilku bardzo prostych makr.
 .PP
@@ -1883,7 +1854,6 @@ Pyta się o zmienną. Pokazuje się okienko wejściowe i tekst wewnątrz klamere
 używany jest jako zachęta (prompt). Makro jest zastępowane tekstem wpisanym
 przez użytkownika. Użytkownik może nacisnąć ESC lub F10 aby anulować. To
 makro nie działa jeszcze w linii poleceń.
-.PP
 .\"NODE "  The subshell support"
 .SH "  Obsługa podpowłoki (The subshell support)"
 Podpowłoka (powłoka w tle) jest opcją, która musi być wybrana przy kompilacji,
@@ -1917,7 +1887,6 @@ w Midnight Commanderze jest tą samą, którą aktualnie używasz w powłoce.
 .PP
 Zobacz sekcję Opcje po więcej informacji na temat tego, jak możesz
 kontrolować powłokę w tle.
-.PP
 .\"NODE "Chmod"
 .SH "Chmod"
 Okno Chmod jest używane do zmieniania atrybutów grupy plików lub katalogów.
@@ -1972,17 +1941,14 @@ ustawia atrybuty jednego pliku.
 .PP
 .B [Cancel]
 unieważnia komendę chmod.
-.PP
 .\"NODE "Chown"
 .SH "Chown"
 Komenda chown jest używana do zmiany właściela/grupy pliku. Skrótem
 klawiszowym jest kombinacja C\-x o.
-.PP
 .\"NODE "Advanced Chown"
 .SH "Zaawansowane chown (Advanced Chown)"
 Zaawansowane chown jest komendą łączącą w sobie komendy chmod i chown.
 Możesz za jednym zamachem zmienić atrybuty i właściela/grupę pliku.
-.PP
 .\"NODE "File Operations"
 .SH "Operacje na plikach (File Operations)"
 Kiedy kopiujesz, przenosisz lub kasujesz pliki, Midnight Commander pokazuje
@@ -2026,7 +1992,6 @@ wybrałeś przycisk Yes lub alL będziesz zapytany o potwierdzenie. Wybierz
 Jeśli zaznaczyłeś pliki, i wykonujesz operacje tylko na nich, to jeśli
 operacja się udała zostaną one odznaczone, te, na których operacja
 nie przebiegła całkowicie pomyślnie, pozostaną zaznaczone.
-.PP
 .\"NODE "Mask Copy/Rename"
 .SH "Maski kopiowania/przenoszenia (Mask Copy/Rename)"
 Operacje przenoszenia i kopiowania pozwalają ci na tłumaczenie nazw
@@ -2119,7 +2084,6 @@ nazwy.
 .PP
 Możesz również używać '\e' aby "podkreślić" znak. Na przykład, '\e\e' jest
 backsleshem, a '\e*' jest gwiazdką.
-.PP
 .\"NODE "Internal File Viewer"
 .SH "Wbudowany podgląd plików"
 Wbudowany podgląd plików pozwala na dwa tryby wyśmietlania: ASCII i hex.
@@ -2283,10 +2247,8 @@ w twoim katalogu domowym zawierający poniższe:
 /usr/bin/indent \-kr \-pcs ~/.cache/mc/mcedit/mcedit.block>& /dev/null
 cat /dev/null > ~/.cache/mc/mcedit/cooledit.error
 .fi
-.PP
 .\"NODE "Completion"
 .SH Dokańczanie
-.PP
 Pozwól Midnight Commanderowi pisać za ciebie.
 .PP
 Spróbuj użyć dokończenia na tekście przed aktualną pozycją. MC próbuje
@@ -2324,7 +2286,6 @@ Complete: show all
 jest wyłączone, okno z listą włącza się dopiero wtedy, kiedy naciskasz
 .B M\-Tab
 po raz drugi. Za pierwszym razem MC wydaje tylko krótki dźwięk.
-.PP
 .\"NODE "Virtual File System"
 .SH "Wirtualny system plików (Virtual File System)"
 Midnight Commander jest dostarczany z kodem pozwalający na dostęp do
@@ -2344,7 +2305,6 @@ plików Midnight Commandera), oparty o sieć.
 Kod VFS potrafi interpretować poprawnie wszystkie nazwy ścieżek i przekazuje
 je do właściwego systemu plików. Format używany dla każdego z systemów plików
 jest opisany w swojej oddzielnej sekcji.
-.PP
 .\"NODE "  FTP File System"
 .SH "  System plików FTP (FTP File System)"
 Ftpfs pozwala na manipulowanie plikami na zdalnych komputerach, do
@@ -2407,7 +2367,6 @@ będą one pokazane w strukturze katalogów, dopóki nie wymusisz tego przy
 użyciu kombinacji C\-r. To jest dobre rozwiązanie (jeśli myślisz, że to jest
 bug, to pomyśl o pracy na zdalnych systemach położonych po drugiej stronie
 Atlantyku przy użyciu ftpfs :) ).
-.PP
 .\"NODE "  Tar File System"
 .SH "  System plików tar (Tar File System)"
 System plików tar pozwala na dostęp w trybie tylko\-do\-odczytu do plików typu
@@ -2432,7 +2391,6 @@ Przykłady
 Późniejszy podaje pełną ścieżkę archiwum tar.
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Transfer plików pomiędzy systemami plików (FIle transfer over SHell filesystem)"
-.PP
 System plików fish jest systemem opartym na sieci, który pozwala na
 manipulowanie plikami na obcej maszynie tak jakby były one lokalne. Aby
 tego używać, druga strona musi również mieć ustawiony serwer fish, lub musi
@@ -2615,7 +2573,6 @@ tu dopiszę  [ patrz tłumacz na dole ;)) ]].
 .PP
 I gotowe \- polskie literki działają również w podglądzie i wbudowanym
 edytorze plików.
-.PP
 .\"NODE "Colors"
 .SH Kolory
 Midnight Commander próbuje sprawdzić czy twój terminal obsługuje
@@ -2699,7 +2656,6 @@ Przeszukanie pliku skórki nastąpi w (pierwszym znalezionym):
 .br
 3)
 .B %pkgdatadir%/skins/
-.br
 
 .PP
 Format plików skórek opisano w
@@ -2748,8 +2704,6 @@ Klucz 'type' może przyjmować wartości:
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
-.PP
-
 .\"NODE "Special Settings"
 .SH "Specjalne ustawienia"
 Większość ustawień Midnight Commandera może być zmieniana z poziomu menu.
@@ -2829,7 +2783,6 @@ Standardowo Midnight Commander traktuje klawisz ESC jako przedrostek
 ESC będzie przedrostkiem dla innego klawisza, ale jeśli ten nie nastąpi,
 będzie on zinterpretowany jako klawisz anulowania (tak jak ESC ESC).
 .PP
-.PP
 .I only_leading_plus_minus
 .IP
 zmienia znaczenia znaków '+', '\-', '*' w linii komend (wybór, odznaczenie,
@@ -2886,7 +2839,6 @@ rozszerzenie pliku do tego wybranego w pliku mc.ext.ini.
 Jeśli ta opcja jest włączona (standardowo tak nie jest) kiedy przeglądasz plik
 w panelu drzewa, będzie on automatycznie przeładowywał drugi panel na
 zawartość wybranego katalogu.
-.PP
 .\"NODE "Terminal databases"
 .SH Baza danych terminali (Terminal databases)
 Midnight Commander pozwala ci na naprawienie bazy danych terminali bez
@@ -2929,11 +2881,9 @@ reprezentuje sekwencję wyjścia używaną do wywoływania procesu dokańczania,
 jest to wywoływane kombinacją M\-tab, ale możesz zdefiniować inne klawisze
 do wykonywania tych samych funkcji (na tych klawiaturach z toną fajnych i
 zupełnie bezużytecznych klawiszy).
-.PP
 .SH ""
 .\"NODE "FILES"
 .SH PLIKI
-.PP
 Program będzie pobierał wszystkie swoje informacje ze zmiennej
 .BR MC_DATADIR ,
 jeśli jest ona nie ustawiona to znowu przetwarzany jest katalog /usr.
@@ -3018,7 +2968,6 @@ tcsh(1), zsh(1).
 Strona Midnight Commander w sieci World Wide Web:
 	\X'tty: link https://midnight\-commander.org'https://midnight\-commander.org\X'tty: link'
 .fi
-.PP
 .\"NODE "AUTHORS"
 .SH AUTORZY
 Miguel de Icaza (miguel@roxanne.nuclecu.unam.mx), Janne Kukonlehto
@@ -3053,7 +3002,6 @@ Sergey Ya. Korshunoff (seyko2@gmail.com), Thomas Pundt
 (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
 (torben.fjerdingstad@uni\-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
-.PP
 .\"NODE "BUGS"
 .SH BŁĘDY
 W pliku TODO dystrybucji znajdziesz informacje na temat tego, co
