@@ -3005,9 +3005,6 @@ utilizado para acceder al sistema de archivos Unix habitual;
 .I tarfs
 para manipular archivos empaquetados con el comando tar y acaso
 comprimidos;
-.I undelfs
-para recuperar archivos borrados en sistemas de archivos de tipo ext2
-(sistema de archivos habitual en Linux);
 .I ftpfs
 para manipular archivos en sistemas remotos a través de FTP;
 .I fish

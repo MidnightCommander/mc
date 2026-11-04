@@ -2488,9 +2488,7 @@ Jelenleg a Midnight Commander a következő Csatolt Fájlrendszerekkel
 rendelkezik (VFS): a helyi fájlrendszert a szokásos Unix fájlrendszeren
 lévő fájlokhoz használja; az ftpfs\-t, az FTP protokollal rendelkező
 távoli gépek fájlainak módosítására használja; a tarfs\-t a tar
-és tömörített tar fájlok módosítására használja; az undelfs\-t, a
-törölt fájlok visszaállítására használja az ext2\-es fájlrendszeren
-(az alapértelmezett fájlrendszer Linux rendszereken), a fish (a fájlok
+és tömörített tar fájlok módosítására használja; a fish (a fájlok
 shellen keresztüli módosításához, mint pl. rsh és ssh) és végül az mcfs
 (a Midnight Commander fájlrendszere), amely hálózat alapú fájlrendszer.
 .PP

@@ -2740,9 +2740,8 @@ Attualmente il Midnight Commander viene confezionato con alcuni File
 System Virtuali (VFS): il file system locale, usato per accedere al 
 normale file system Unix; l'ftpfs, usato per manipolare file su sistemi 
 remoti con il protocollo FTP; il tarfs, usato per manipolare file tar
-e file tar compressi; l'undelfs, usato per recuperare file cancellati
-su file system di tipo ext2 (il file system predefinito per sistemi
-Unix), fish (per manipolare file su connessioni shell come rsh e ssh) e
+e file tar compressi; fish (per manipolare file su connessioni shell
+come rsh e ssh) e
 per ultimo l'mcfs (file system del Midnight Commander), un file system
 basato sulla rete.
 .PP

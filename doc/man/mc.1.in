@@ -3222,9 +3222,6 @@ file system, used for accessing the regular Unix file system; the
 used to manipulate files on remote systems with the FTP protocol; the
 .IR tarfs ,
 used to manipulate tar and compressed tar files; the
-.IR undelfs ,
-used to recover deleted files on ext2 file systems (the default file
-system for Linux systems),
 .I shell
 (for manipulating files over shell connections such as rsh and ssh).
 If the code was compiled with
