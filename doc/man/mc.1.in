@@ -3874,7 +3874,7 @@ User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
 .PP
 .I %sysconfdir%/mc/mc.ini
-.RE
+.br
 .I %pkgdatadir%/mc.ini
 .IP
 System\-wide setup files for Midnight Commander, used only if the user

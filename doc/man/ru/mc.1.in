@@ -4591,7 +4591,7 @@ insert=\ee[Op
 вместо общесистемного файла расширений.
 .PP
 .I %sysconfdir%/mc/mc.ini
-.RE
+.br
 .I %pkgdatadir%/mc.ini
 .IP
 Общесистемные файлы установок для Midnight Commander; используются только
