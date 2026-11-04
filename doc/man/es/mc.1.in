@@ -524,7 +524,6 @@ Favoritos
 .\"Hotlist"
 y permite cambiar al directorio seleccionado.
 
-.TP
 .PP
 .B * N. del T.:
 En el teclado castellano, existe un pequeño inconveniente, dado que la
@@ -553,7 +552,6 @@ la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 usaremos las teclas «\-» o «\e» para deseleccionar un grupo de archivos.  Esta es
 la operación opuesta a la realizada por la tecla «+».
 
-.TP
 .PP
 .B * N. del T.:
 La tecla que realiza originalmente la función descrita es la «\-» (menos)
@@ -2775,7 +2773,6 @@ Invoca el visor de ayuda de hipertexto interno.
 .B F2
 Cambia el modo de ajuste de líneas en pantalla.
 
-.TP
 .PP
 .B * N. del T.:
 Envuelta (Ajustada), se muestra toda la información de la línea en la pantalla, de
