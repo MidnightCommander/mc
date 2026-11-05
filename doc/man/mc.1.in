@@ -1069,6 +1069,9 @@ Press F5 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
 directory/filename you specify in the input dialog. The destination
 defaults to the directory in the non\-selected panel.
+For a single file or directory, the last component of the destination
+is the name of the copy, even if a directory of that name exists.
+To copy into an existing directory, end the destination with a slash.
 If the
 .I Preallocate space
 (preallocate_space) option is on, Midnight Commander will try to preallocate

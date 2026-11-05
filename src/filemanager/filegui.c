@@ -748,26 +748,15 @@ filegui__escape_dest (const char *def_text, gboolean shell_patterns)
  */
 
 static char *
-filegui__split_dest (char *dest, gboolean only_one, gboolean dive_into_subdirs)
+filegui__split_dest (char *dest, gboolean only_one)
 {
     char *name, *mask;
-    vfs_path_t *vpath;
-    struct stat buf;
-    gboolean into;
 
     name = strrchr (dest, PATH_SEP);
     name = name == NULL ? dest : name + 1;
 
-    vpath = vfs_path_from_str (dest);
-    into = *name == '\0'
-        || (!dive_into_subdirs && !is_wildcarded (name)
-            && (!only_one || (mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode))))
-        || (dive_into_subdirs
-            && ((!only_one && !is_wildcarded (name))
-                || (only_one && mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode))));
-    vfs_path_free (vpath, TRUE);
-
-    if (into)
+    // a trailing slash means "into"; else a single item's last component is its new name
+    if (*name == '\0' || (!only_one && !is_wildcarded (name)))
         return g_strdup ("\\0");
 
     mask = g_strdup (name);
@@ -1530,7 +1519,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         dest_dir = tilde_expand (tmp);
         g_free (tmp);
 
-        ctx->dest_mask = filegui__split_dest (dest_dir, only_one, ctx->dive_into_subdirs);
+        ctx->dest_mask = filegui__split_dest (dest_dir, only_one);
 
         if (*dest_dir == '\0')
         {
