@@ -14,6 +14,7 @@ LDADD = \
 
 TESTS = \
 	cd_to \
+	copy_move_dest \
 	examine_cd \
 	exec_get_export_variables_ext \
 	ext__exec_make_shell_string \
@@ -25,6 +26,9 @@ check_PROGRAMS = $(TESTS)
 
 cd_to_SOURCES = \
 	cd_to.c
+
+copy_move_dest_SOURCES = \
+	copy_move_dest.c
 
 examine_cd_SOURCES = \
 	examine_cd.c

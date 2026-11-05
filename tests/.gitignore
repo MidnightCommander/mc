@@ -155,6 +155,9 @@ src/execute__execute_with_vfs_arg
 src/execute__execute_with_vfs_arg.log
 src/execute__execute_with_vfs_arg.trs
 src/filemanager/cd_to
+src/filemanager/copy_move_dest
+src/filemanager/copy_move_dest.log
+src/filemanager/copy_move_dest.trs
 src/filemanager/do_cd_command
 src/filemanager/do_cd_command.log
 src/filemanager/do_cd_command.trs
