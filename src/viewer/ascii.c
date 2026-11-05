@@ -148,6 +148,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
+#include "lib/tty/color-internal.h"  // tty_color_get_name_by_index()
 #include "lib/skin.h"
 #include "lib/util.h"  // is_printable()
 #include "lib/charsets.h"
@@ -336,6 +337,137 @@ mcview_get_next_char (WView *view, mcview_state_machine_t *state, int *c)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Convert ANSI parser color state to a tty color pair index.
+ *
+ * Maps the fg/bg/bold/underline from the ANSI parser into MC's color system.
+ * When all attributes are default, returns VIEWER_NORMAL_COLOR to avoid
+ * unnecessary color pair allocation.
+ */
+static int
+mcview_ansi_get_color (const mcview_ansi_state_t *ansi)
+{
+    tty_color_pair_t color;
+    tty_color_pair_t *viewer_skin;
+    char fg_buf[16], bg_buf[16], attr_buf[64];
+    const char *fg_name;
+    const char *bg_name;
+    gboolean has_attrs;
+
+    has_attrs = ansi->bold || ansi->italic || ansi->underline || ansi->blink || ansi->reverse;
+
+    // all defaults → use the skin's normal viewer color
+    if (ansi->fg == MCVIEW_ANSI_COLOR_DEFAULT && ansi->bg == MCVIEW_ANSI_COLOR_DEFAULT
+        && !has_attrs)
+        return VIEWER_NORMAL_COLOR;
+
+    // bold-only and underline-only map to existing skin colors (no other attrs active)
+    if (ansi->fg == MCVIEW_ANSI_COLOR_DEFAULT && ansi->bg == MCVIEW_ANSI_COLOR_DEFAULT
+        && !ansi->italic && !ansi->blink && !ansi->reverse)
+    {
+        if (ansi->bold && ansi->underline)
+            return VIEWER_BOLD_UNDERLINED_COLOR;
+        if (ansi->bold)
+            return VIEWER_BOLD_COLOR;
+        if (ansi->underline)
+            return VIEWER_UNDERLINED_COLOR;
+    }
+
+    // Retrieve viewer skin colors so that ANSI-colored text inherits the
+    // viewer's fg/bg rather than the terminal's "default" colors.
+    viewer_skin =
+        (tty_color_pair_t *) g_hash_table_lookup (mc_skin__default.colors, "viewer._default_");
+
+    // build fg color name
+    if (ansi->fg != MCVIEW_ANSI_COLOR_DEFAULT)
+    {
+        fg_name = tty_color_get_name_by_index (ansi->fg);
+        g_strlcpy (fg_buf, fg_name, sizeof (fg_buf));
+        color.fg = fg_buf;
+    }
+    else
+        color.fg = (viewer_skin != NULL) ? viewer_skin->fg : NULL;
+
+    // build bg color name
+    if (ansi->bg != MCVIEW_ANSI_COLOR_DEFAULT)
+    {
+        bg_name = tty_color_get_name_by_index (ansi->bg);
+        g_strlcpy (bg_buf, bg_name, sizeof (bg_buf));
+        color.bg = bg_buf;
+    }
+    else
+        color.bg = (viewer_skin != NULL) ? viewer_skin->bg : NULL;
+
+    // build attributes string dynamically
+    if (has_attrs)
+    {
+        attr_buf[0] = '\0';
+        if (ansi->bold)
+            g_strlcat (attr_buf, "bold+", sizeof (attr_buf));
+        if (ansi->italic)
+            g_strlcat (attr_buf, "italic+", sizeof (attr_buf));
+        if (ansi->underline)
+            g_strlcat (attr_buf, "underline+", sizeof (attr_buf));
+        if (ansi->blink)
+            g_strlcat (attr_buf, "blink+", sizeof (attr_buf));
+        if (ansi->reverse)
+            g_strlcat (attr_buf, "reverse+", sizeof (attr_buf));
+        // remove trailing '+'
+        attr_buf[strlen (attr_buf) - 1] = '\0';
+        color.attrs = attr_buf;
+    }
+    else
+        color.attrs = NULL;
+
+    color.pair_index = 0;
+
+    return tty_try_alloc_color_pair (&color, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * ANSI escape sequence processing layer.
+ *
+ * Feeds characters through the ANSI SGR parser. Escape sequence bytes are
+ * consumed (skipped), and displayable characters are returned with the
+ * accumulated ANSI color. This layer sits between raw byte reading and
+ * nroff processing.
+ *
+ * Normally: stores c and color, updates state, returns TRUE.
+ * At EOF: state is unchanged, c and color are undefined, returns FALSE.
+ *
+ * color can be NULL if the caller doesn't care.
+ */
+static gboolean
+mcview_get_next_maybe_ansi_char (WView *view, mcview_state_machine_t *state, int *c, int *color)
+{
+    while (TRUE)
+    {
+        mcview_state_machine_t state_saved;
+        mcview_ansi_result_t result;
+
+        state_saved = *state;
+
+        if (!mcview_get_next_char (view, state, c))
+        {
+            *state = state_saved;
+            return FALSE;
+        }
+
+        result = mcview_ansi_parse_char (&state->ansi, *c);
+
+        if (result == ANSI_RESULT_CHAR)
+        {
+            if (color != NULL)
+                *color = mcview_ansi_get_color (&state->ansi);
+            return TRUE;
+        }
+
+        // ANSI_RESULT_CONSUMED — escape sequence byte, skip and read next
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * This function parses the next nroff character and gives it to you along with its desired color,
  * so you never have to care about nroff again.
  *
@@ -364,7 +496,7 @@ mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, in
         *color = VIEWER_NORMAL_COLOR;
 
     if (!view->mode_flags.nroff)
-        return mcview_get_next_char (view, state, c);
+        return mcview_get_next_maybe_ansi_char (view, state, c, color);
 
     if (!mcview_get_next_char (view, state, c))
         return FALSE;
@@ -524,6 +656,31 @@ mcview_next_combining_char_sequence (WView *view, mcview_state_machine_t *state,
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * In syntax mode, fill remaining columns on a visible row with spaces
+ * using the given color, extending the line's background to the viewport edge.
+ */
+static void
+mcview_fill_line_remaining (WView *view, int row, int col, int fill_color, off_t dpy_text_column)
+{
+    const WRect *r = &view->data_area;
+    int scr_col;
+    int x;
+
+    if (!view->mode_flags.syntax || row < 0 || row >= r->lines)
+        return;
+
+    scr_col = ((off_t) col > dpy_text_column) ? (int) ((off_t) col - dpy_text_column) : 0;
+    if (scr_col >= r->cols)
+        return;
+
+    tty_setcolor (fill_color);
+    widget_gotoyx (view, r->y + row, r->x + scr_col);
+    for (x = scr_col; x < r->cols; x++)
+        tty_print_char (' ');
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Parse, format and possibly display one visual line of text.
  *
  * Formatting starts at the given "state" (which encodes the file offset and parser and formatter's
@@ -554,6 +711,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
     const WRect *r = &view->data_area;
     off_t dpy_text_column = view->mode_flags.wrap ? 0 : view->dpy_text_column;
     int col = 0;
+    int fill_color = view->syntax_fill_color;
     int cs[1 + MAX_COMBINING_CHARS];
     char str[(1 + MAX_COMBINING_CHARS) * MB_LEN_MAX + 1];
     int i, j;
@@ -586,6 +744,7 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
         n = mcview_next_combining_char_sequence (view, state, cs, 1 + MAX_COMBINING_CHARS, &color);
         if (n == 0)
         {
+            mcview_fill_line_remaining (view, row, col, fill_color, dpy_text_column);
             if (linewidth != NULL)
                 *linewidth = col;
             return (col > 0) ? 1 : 0;
@@ -596,6 +755,13 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
 
         if (cs[0] == '\n')
         {
+            // For empty lines (col==0), use the newline's own color which may
+            // carry the syntax highlighter's theme background from ANSI state.
+            // For non-empty lines, use the last drawn character's color.
+            int line_fill = (col > 0) ? fill_color : color;
+
+            mcview_fill_line_remaining (view, row, col, line_fill, dpy_text_column);
+
             // New line: reset all formatting state for the next paragraph.
             mcview_state_machine_init (state, state->offset);
             if (linewidth != NULL)
@@ -695,6 +861,9 @@ mcview_display_line (WView *view, mcview_state_machine_t *state, int row, gboole
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_RIGHT_MARGIN);
                 }
             }
+
+            fill_color = color;
+            view->syntax_fill_color = color;
         }
 
         col += charwidth;
@@ -1022,6 +1191,7 @@ mcview_state_machine_init (mcview_state_machine_t *state, off_t offset)
     memset (state, 0, sizeof (*state));
     state->offset = offset;
     state->print_lonely_combining = TRUE;
+    mcview_ansi_state_init (&state->ansi);
 }
 
 /* --------------------------------------------------------------------------------------------- */
