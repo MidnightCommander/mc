@@ -679,6 +679,7 @@ doc/hlp/es/Makefile
 doc/hlp/hu/Makefile
 doc/hlp/it/Makefile
 doc/hlp/pl/Makefile
+doc/hlp/ro/Makefile
 doc/hlp/ru/Makefile
 doc/hlp/sr/Makefile
 
