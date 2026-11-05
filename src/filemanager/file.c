@@ -1251,10 +1251,15 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
 
     if (mc_lstat (dst_vpath, &dst_stat) == 0)
     {
+        struct stat link_stat;
+
         if (check_same_file (ctx, s, &src_stat, d, &dst_stat, &return_status))
             goto ret;
 
-        if (S_ISDIR (dst_stat.st_mode))
+        // a symlink to a directory is a directory, as in copy_file_file()
+        if (S_ISDIR (dst_stat.st_mode)
+            || (S_ISLNK (dst_stat.st_mode) && mc_stat (dst_vpath, &link_stat) == 0
+                && S_ISDIR (link_stat.st_mode)))
         {
             message (D_ERROR, MSG_ERROR, _ ("Cannot overwrite directory \"%s\""), d);
             do_refresh ();
