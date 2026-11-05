@@ -35,3 +35,7 @@ jobs:
       - run: ./maint/sync-transifex/hints-to-transifex.py
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
+
+      - run: ./maint/sync-transifex/man-to-transifex.py
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
