@@ -725,12 +725,13 @@ is_wildcarded (const char *p)
  */
 
 static char *
-filegui__escape_dest (const char *def_text, gboolean only_one, gboolean shell_patterns)
+filegui__escape_dest (const char *def_text, gboolean shell_patterns)
 {
     vfs_path_t *vpath;
     char *tmp, *ret;
 
-    vpath = vfs_path_from_str_flags (def_text, only_one ? VPF_NO_CANON : VPF_NONE);
+    // no canonicalization: it would remove the trailing slash
+    vpath = vfs_path_from_str_flags (def_text, VPF_NO_CANON);
     tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
     vfs_path_free (vpath, TRUE);
 
@@ -1392,7 +1393,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
     ctx->stable_symlinks = FALSE;
     *do_bg = FALSE;
 
-    def_text_secure = filegui__escape_dest (def_text, only_one, source_easy_patterns);
+    def_text_secure = filegui__escape_dest (def_text, source_easy_patterns);
 
     if (only_one)
     {
