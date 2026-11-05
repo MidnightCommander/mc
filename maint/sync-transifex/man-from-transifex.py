@@ -35,7 +35,8 @@ for resource in MAN_RESOURCES:
 for lang in args.languages:
     if not (SOURCE_DIR / "doc" / "man" / lang / "Makefile.am").exists():
         print(
-            f"warning: doc/man/{lang}/Makefile.am does not exist; add it, and add {lang} to ALL_DOC_LINGUAS "
-            "in configure.ac, to AC_CONFIG_FILES in configure.ac and to DIST_SUBDIRS in doc/man/Makefile.am",
+            f"warning: doc/man/{lang}/Makefile.am does not exist; add it and doc/hlp/{lang} (Makefile.am and "
+            f"xnc.hlp), add {lang} to ALL_DOC_LINGUAS in configure.ac, both Makefiles to AC_CONFIG_FILES in "
+            "configure.ac and the language to DIST_SUBDIRS in doc/man/Makefile.am and doc/hlp/Makefile.am",
             file=sys.stderr,
         )
