@@ -1,5 +1,5 @@
 .\" -*- mode: troff; coding: UTF-8 -*-
-.\"TOPICS "Topics:"
+.\"TOPICS "Cuprins:"
 .\"*******************************************************************
 .\"
 .\" This file was generated with po4a. Translate the source file.
@@ -8,62 +8,63 @@
 .TH MC 1 "%DATE_OF_MAN_PAGE%" "Versiunea MC %MAN_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH NUME
-.\"SKIP_SECTION"
 mc \- Shell vizual pentru sisteme de tip Unix.
+.\"SKIP_SECTION"
 .SH SINOPSIS
-.\"NODE "DESCRIPTION"
 \fBmc\fP [\-abcCdfhPstuUVx] [\-l jurnal] [dosar1 [dosar2]] [\-e [fișier] ...] [\-v
 fișier]
+.\"NODE "DESCRIPTION"
 .SH DESCRIERE
-.\"NODE "OPTIONS"
-.\"DONT_SPLIT"
 GNU Midnight Commander este un navigator de dosare/manager de fișiere pentru
 sisteme de operare de tip Unix.
+.\"NODE "OPTIONS"
+.\"DONT_SPLIT"
 .SH OPȚIUNI
 .TP 
-\fI\-a, \-\-stickchars\fP
+.I \-a, \-\-stickchars
 Dezactivează folosirea caracterelor grafice pentru desenarea liniilor.
 .TP 
-\fI\-b, \-\-nocolor\fP
+.I \-b, \-\-nocolor
 Forțează afișarea în alb\-negru. Setarea variabilei de mediu \fBNO_COLOR\fP la o
 valoare nevidă are același efect.
 .TP 
-\fI\-c, \-\-color\fP
+.I \-c, \-\-color
+Forțează modul color; pentru mai multe informații consultă secțiunea
 .\"LINK2"
+Culori\&.
 .\"Colors"
-Forțează modul color; pentru mai multe informații consultă secțiunea Culori.
 .TP 
-\fI\-\-configure\-options\fP
+.I \-\-configure\-options
 Afișează opțiunile de configurare.
 .TP 
-\fI\-d, \-\-nomouse\fP
+.I \-d, \-\-nomouse
 Dezactivează suportul pentru maus.
 .TP 
-\fI\-e [file], \-\-edit[=file]\fP
+.I \-e [file], \-\-edit[=file]
 Pornește editorul intern.  Dacă este specificat un fișier, îl deschide la
 pornire.  Vezi și \fBmcedit (1)\fP.
 .TP 
-\fI\-f, \-\-datadir\fP
+.I \-f, \-\-datadir
 Afișează căile de căutare compilate pentru fișierele Midnight Commander.
 .TP 
-\fI\-F, \-\-datadir\-info\fP
+.I \-F, \-\-datadir\-info
 Afișează informații extinse despre căile compilate în Midnight Commander.
 .TP 
-\fI\-g, \-\-oldmouse\fP
+.I \-g, \-\-oldmouse
 Forțează modul maus "normal tracking". Se folosește pe terminale capabile
 xterm (tmux/screen).
 .TP 
-\fI\-K fișier, \-\-keymap=fișier\fP
+.I \-K fișier, \-\-keymap=fișier
 Specifică în linia de comandă numele unui fișier de asocieri de taste.
 .TP 
-\fI\-l fișier, \-\-ftplog=fișier\fP
+.I \-l fișier, \-\-ftplog=fișier
 Salvează în fișier dialogul ftpfs cu serverul.
 .TP 
-\fI\-\-nokeymap\fP
+.I \-\-nokeymap
 Nu încărca asocierile de taste din niciun fișier, folosește tastele
 implicite din cod.
 .TP 
-\fI\-P fișier, \-\-printwd=fișier\fP
+.I \-P fișier, \-\-printwd=fișier
 Scrie în fișierul specificat ultimul dosar de lucru.  Această opțiune nu
 este menită să fie folosită direct.  Ea este folosită de un script shell
 special care schimbă automat dosarul curent al shell\-ului în ultimul dosar
@@ -73,43 +74,44 @@ special care schimbă automat dosarul curent al shell\-ului în ultimul dosar
 \fB%pkglibexecdir%/mc.fish\fP (utilizatorii de fish) pentru a defini \fBmc\fP ca
 alias către scriptul shell potrivit.
 .TP 
-\fI\-s, \-\-slow\fP
+.I \-s, \-\-slow
 Pornește modul pentru terminale lente; în acest mod programul nu va desena
 caractere costisitoare pentru linii și va dezactiva modul detaliat.
 .TP 
-\fI\-S arg, \-\-skin=arg\fP
-.\"LINK2"
-.\"Skins"
+.I \-S arg, \-\-skin=arg
 Specifică în linia de comandă numele unei tematici. Tehnologia tematicilor
-este documentată în secțiunea Tematici.
+este documentată în secțiunea
+.\"LINK2"
+Tematici\&.
+.\"Skins"
 .TP 
-\fI\-t, \-\-termcap\fP
+.I \-t, \-\-termcap
 Folosită doar dacă programul a fost compilat cu S\-Lang și terminfo: face ca
 Midnight Commander să folosească valoarea variabilei \fBTERMCAP\fP pentru
 informațiile despre terminal, în loc de informațiile din baza de date de
 terminale a sistemului
 .TP 
-\fI\-u, \-\-nosubshell\fP
+.I \-u, \-\-nosubshell
 Dezactivează folosirea shell\-ului concurent (are sens doar dacă Midnight
 Commander a fost compilat cu suport pentru shell concurent).
 .TP 
-\fI\-U, \-\-subshell\fP
+.I \-U, \-\-subshell
 Activează folosirea suportului pentru shell concurent (are sens doar dacă
 Midnight Commander a fost compilat cu suportul pentru subshell ca
 funcționalitate opțională).
 .TP 
-\fI\-v fișier, \-\-view=fișier\fP
+.I \-v fișier, \-\-view=fișier
 Pornește vizualizatorul intern pentru a vedea fișierul specificat.  Vezi și
 \fBmcview (1)\fP.
 .TP 
-\fI\-V, \-\-version\fP
+.I \-V, \-\-version
 Afișează versiunea programului.
 .TP 
-\fI\-x, \-\-xterm\fP
+.I \-x, \-\-xterm
 Forțează modul xterm.  Se folosește când rulează pe terminale capabile xterm
 (două moduri de ecran, capabile să trimită secvențe escape de la maus).
 .TP 
-\fI\-X, \-\-no\-x11\fP
+.I \-X, \-\-no\-x11
 Nu folosi X11 pentru a obține starea modificatorilor Alt, Ctrl, Shift
 .PP
 Dacă sunt specificate ambele căi, primul nume de cale este dosarul care va
@@ -120,44 +122,54 @@ Dacă este specificată o singură cale, numele căii este dosarul care va fi
 afișat în panoul activ; valoarea "other_dir" din panels.ini este dosarul
 care va fi afișat în panoul pasiv.
 .PP
-.\"NODE "Overview"
 Dacă nu este specificată nicio cale, dosarul curent este afișat în panoul
 activ; valoarea "other_dir" din panels.ini este dosarul care va fi afișat în
 panoul pasiv.
+.\"NODE "Overview"
 .SH "Privire de ansamblu"
-.\"LINK2"
-.\"Menu Bar"
 Ecranul Midnight Commander este împărțit în patru părți.  Aproape tot
 spațiul ecranului este ocupat de două panouri de dosare.  Implicit,
 penultima linie de jos a ecranului este linia de comandă a shell\-ului, iar
 ultima linie afișează etichetele tastelor funcționale.  Linia cea mai de sus
-este bara de meniu\&.  Bara de meniu poate fi invizibilă, dar apare dacă
-faci clic pe linia de sus cu mausul sau apeși tasta F9.
+este
+.\"LINK2"
+bara de meniu\&.
+.\"Menu Bar"
+Bara de meniu poate fi
+invizibilă, dar apare dacă faci clic pe linia de sus cu mausul sau apeși
+tasta F9.
 .PP
-.\"LINK2"
-.\"Directory Panels"
-.\"LINK2"
-.\"Left and Right Menus"
-.\"LINK2"
-.\"File Menu"
 Midnight Commander afișează două dosare în același timp. Unul dintre panouri
 este panoul curent (în panoul curent se află o bară de selecție). Aproape
 toate operațiile au loc în panoul curent. Unele operații cu fișiere, precum
 Redenumire și Copiere, folosesc implicit ca destinație dosarul din panoul
 neselectat (nu\-ți face griji, mereu îți cer mai întâi confirmarea). Pentru
-mai multe informații, vezi secțiunile despre Panourile de dosare\&,
-Meniurile Stânga și Dreapta și Meniul Fișier\&.
+mai multe informații, vezi secțiunile despre
+.\"LINK2"
+Panourile de dosare\&,
+.\"Directory Panels"
+
+.\"LINK2"
+Meniurile Stânga și Dreapta
+.\"Left and Right Menus"
+și
+.\"LINK2"
+Meniul Fișier\&.
+.\"File Menu"
 .PP
-.\"LINK2"
-.\"Shell Command Line"
-.\"LINK2"
-.\"Input Line Keys"
-.\"NODE "Mouse Support"
 Poți executa comenzi de sistem din Midnight Commander pur și simplu
 tastându\-le. Tot ce tastezi va apărea în linia de comandă a shell\-ului, iar
 când apeși Enter, Midnight Commander va executa linia de comandă tastată;
-citește secțiunile Linia de comandă a shell\-ului și Tastele liniei de
-introducere pentru a afla mai multe despre linia de comandă.
+citește secțiunile
+.\"LINK2"
+Linia de comandă a shell\-ului
+.\"Shell Command Line"
+și
+.\"LINK2"
+Tastele liniei de introducere
+.\"Input Line Keys"
+pentru a afla mai multe despre linia de comandă.
+.\"NODE "Mouse Support"
 .SH "Suport pentru maus"
 Midnight Commander vine cu suport pentru maus.  Acesta este activat oricând
 rulezi pe un terminal \fBxterm(1)\fP (funcționează chiar și dacă te conectezi
@@ -168,20 +180,24 @@ Când faci clic stânga pe un fișier din panourile de dosare, fișierul este
 selectat; dacă faci clic cu butonul din dreapta, fișierul este marcat (sau
 demarcat, în funcție de starea anterioară).
 .PP
-.\"LINK2"
-.\"Edit Extension File"
 Dublu clic pe un fișier va încerca să execute comanda, dacă este un program
-executabil; iar dacă extensia fișierului are un program specificat, se
-execută programul respectiv.
+executabil; iar dacă
+.\"LINK2"
+extensia fișierului
+.\"Edit Extension File"
+are un program specificat, se execută programul
+respectiv.
 .PP
 De asemenea, poți executa comenzile asociate etichetelor tastelor
 funcționale făcând clic pe ele.
 .PP
-.\"LINK2"
-.\"Save Setup"
 Rata implicită de repetare automată pentru butoanele mausului este de 400 de
-milisecunde. Aceasta poate fi schimbată editând fișierul \&~/.config/mc/ini
-și modificând parametrul \fImouse_repeat_rate\fP.
+milisecunde. Aceasta poate fi schimbată editând fișierul
+.\"LINK2"
+\&~/.config/mc/ini
+.\"Save Setup"
+și modificând parametrul
+\fImouse_repeat_rate\fP.
 .PP
 Dacă rulezi Midnight Commander cu suport pentru maus, poți obține
 comportamentul implicit al mausului (tăiere și lipire de text) ținând
@@ -193,25 +209,26 @@ Unele comenzi din Midnight Commander folosesc tastele \fIControl\fP (uneori
 etichetată CTRL sau CTL) și \fIMeta\fP (uneori etichetată ALT sau chiar
 Compose). În acest manual vom folosi următoarele abrevieri:
 .TP 
-\fBC\-<chr>\fP
+.B C\-<chr>
 înseamnă că ții apăsată tasta Control în timp ce tastezi caracterul
 <chr>.  Astfel, C\-f ar fi: ține apăsată tasta Control și tastează f.
 .TP 
-\fBAlt\-<chr>\fP
+.B Alt\-<chr>
 înseamnă că ții apăsată tasta Meta sau Alt în timp ce tastezi caracterul
 <chr>.  Dacă nu există tastă Meta sau Alt, tastează \fIEsc\fP,
 eliberează\-o, apoi tastează caracterul <chr>.
 .TP 
-\fBS\-<chr>\fP
+.B S\-<chr>
 înseamnă că ții apăsată tasta Shift în timp ce tastezi caracterul
 <chr>.
 .PP
 Toate liniile de introducere din Midnight Commander folosesc o aproximare a
 asocierilor de taste ale editorului GNU Emacs (implicit).
 .PP
+Poți redefini asocierile de taste. Vezi
 .\"LINK2"
+.I redefinirea asocierilor de taste rapide
 .\"Keys_redefine"
-Poți redefini asocierile de taste. Vezi \fIredefinirea asocierilor de taste rapide\fP
 .PP
 pentru mai multe informații. Toate celelalte asocieri de taste (descrise în
 acest manual) se referă la comportamentul implicit.
@@ -220,31 +237,39 @@ acest manual) se referă la comportamentul implicit.
 Există multe secțiuni care vorbesc despre taste. Următoarele sunt cele mai
 importante.
 .PP
+Secțiunea
 .\"LINK2"
+Meniul Fișier
 .\"File Menu"
-Secțiunea Meniul Fișier documentează scurtăturile de tastatură pentru
-comenzile din meniul Fișier. Această secțiune include tastele
-funcționale. Majoritatea acestor comenzi execută o acțiune, de obicei asupra
-fișierului selectat sau a fișierelor marcate.
+documentează
+scurtăturile de tastatură pentru comenzile din meniul Fișier. Această
+secțiune include tastele funcționale. Majoritatea acestor comenzi execută o
+acțiune, de obicei asupra fișierului selectat sau a fișierelor marcate.
 .PP
+Secțiunea
 .\"LINK2"
+Panourile de dosare
 .\"Directory Panels"
-Secțiunea Panourile de dosare documentează tastele care selectează un fișier
-sau marchează fișiere ca țintă pentru o acțiune ulterioară (acțiunea este de
-obicei una din meniul fișier).
+documentează tastele care selectează un fișier sau marchează fișiere ca
+țintă pentru o acțiune ulterioară (acțiunea este de obicei una din meniul
+fișier).
 .PP
+Secțiunea
 .\"LINK2"
+Linia de comandă a shell\-ului
 .\"Shell Command Line"
-Secțiunea Linia de comandă a shell\-ului listează tastele folosite pentru
-introducerea și editarea liniilor de comandă. Majoritatea copiază nume de
-fișiere și altele din panourile de dosare în linia de comandă (pentru a
-evita tastarea excesivă) sau accesează istoricul liniei de comandă.
+listează tastele folosite pentru introducerea și
+editarea liniilor de comandă. Majoritatea copiază nume de fișiere și altele
+din panourile de dosare în linia de comandă (pentru a evita tastarea
+excesivă) sau accesează istoricul liniei de comandă.
 .PP
 .\"LINK2"
+Tastele liniei de introducere
 .\"Input Line Keys"
-Tastele liniei de introducere sunt folosite pentru editarea liniilor de
-introducere. Aceasta înseamnă atât linia de comandă, cât și liniile de
-introducere din dialogurile de interogare.
+sunt
+folosite pentru editarea liniilor de introducere. Aceasta înseamnă atât
+linia de comandă, cât și liniile de introducere din dialogurile de
+interogare.
 
 .\"NODE "  Keys_redefine"
 .SH "  Redefinirea asocierilor de taste rapide"
@@ -257,7 +282,7 @@ utilizatorului este căutat după următorul algoritm (până la primul găsit):
 .IP
 .br
 1) opțiunea din linia de comandă \fB\-K <keymap>\fP sau
-\fB\-\-keymap=<keymap>\fP
+.B \-\-keymap=<keymap>
 .br
 2) variabila de mediu \fBMC_KEYMAP\fP
 .br
@@ -283,122 +308,141 @@ găsit):
 .SH "  Taste diverse"
 Iată câteva taste care nu se încadrează în nicio altă categorie:
 .TP 
-\fBEnter\fP
-.\"LINK2"
-.\"Edit Extension File"
+.B Enter
 dacă există text în linia de comandă (cea din partea de jos a panourilor),
 comanda respectivă este executată. Dacă nu există text în linia de comandă
 și bara de selecție se află pe un dosar, Midnight Commander execută
 \fBchdir(2)\fP în dosarul selectat și reîncarcă informațiile din panou; dacă
 selecția este un fișier executabil, acesta este executat. În final, dacă
 extensia numelui fișierului selectat se potrivește cu una din extensiile din
-fișierul de extensii, se execută comanda corespunzătoare.
+.\"LINK2"
+fișierul de extensii\&,
+.\"Edit Extension File"
+se execută
+comanda corespunzătoare.
 .TP 
-\fBC\-l\fP
+.B C\-l
 redesenează toate informațiile din Midnight Commander.
 .TP 
-\fBC\-x c\fP
+.B C\-x c
+rulează comanda
 .\"LINK2"
+Chmod
 .\"Chmod"
-rulează comanda Chmod pe un fișier sau pe fișierele marcate.
+pe un fișier sau pe
+fișierele marcate.
 .TP 
-\fBC\-x o\fP
+.B C\-x o
+rulează comanda
 .\"LINK2"
+Chown
 .\"Chown"
-rulează comanda Chown pe fișierul curent sau pe fișierele marcate.
+pe fișierul curent sau pe
+fișierele marcate.
 .TP 
-\fBC\-x l\fP
+.B C\-x l
 rulează comanda de legătură reală.
 .TP 
-\fBC\-x s\fP
+.B C\-x s
 rulează comanda de legătură simbolică absolută.
 .TP 
-\fBC\-x v\fP
+.B C\-x v
+rulează comanda de legătură simbolică relativă. Vezi secțiunea
 .\"LINK2"
+Meniul Fișier
 .\"File Menu"
-rulează comanda de legătură simbolică relativă. Vezi secțiunea Meniul Fișier
-pentru mai multe informații despre legăturile simbolice.
+pentru mai multe informații
+despre legăturile simbolice.
 .TP 
-\fBC\-x i\fP
+.B C\-x i
 setează modul de afișare al celuilalt panou la informații.
 .TP 
-\fBC\-x q\fP
+.B C\-x q
 setează modul de afișare al celuilalt panou la vizualizare rapidă.
 .TP 
-\fBC\-x !\fP
+.B C\-x !
+execută comanda
 .\"LINK2"
+Panelizare externă\&.
 .\"External panelize"
-execută comanda Panelizare externă.
 .TP 
-\fBC\-x h\fP
+.B C\-x h
+rulează comanda de
 .\"LINK2"
+adăugare a dosarului la lista rapidă\&.
 .\"Hotlist"
-rulează comanda de adăugare a dosarului la lista rapidă.
 .TP 
-\fBAlt\-!\fP
+.B Alt\-!
+execută comanda Vizualizare filtrată, descrisă la
 .\"LINK2"
+comanda de vizualizare\&.
 .\"Internal File Viewer"
-execută comanda Vizualizare filtrată, descrisă la comanda de vizualizare\&.
 .TP 
-\fBAlt\-?\fP
+.B Alt\-?
+execută comanda
 .\"LINK2"
+Căutare fișier\&.
 .\"Find File"
-execută comanda Căutare fișier.
 .TP 
-\fBAlt\-c\fP
+.B Alt\-c
+afișează dialogul
 .\"LINK2"
+Cd rapid\&.
 .\"Quick cd"
-afișează dialogul Cd rapid.
 .TP 
-\fBC\-o\fP
+.B C\-o
 când programul rulează în consola Linux sau FreeBSD ori într\-un xterm, îți
 va afișa rezultatul comenzii anterioare.  Când rulează în consola Linux,
 Midnight Commander folosește un program extern (cons.saver) pentru a salva
 și restaura informațiile de pe ecran.
 .PP
-.\"NODE "  Directory Panels"
 Când suportul pentru subshell este compilat, poți tasta C\-o oricând și vei
 fi readus în ecranul principal al Midnight Commander; pentru a reveni la
 aplicația ta, tastează din nou C\-o.  Dacă ai o aplicație suspendată prin
 acest truc, nu vei putea executa alte programe din Midnight Commander până
 când nu închizi aplicația suspendată.
+.\"NODE "  Directory Panels"
 .SH "  Panourile de dosare"
-.\"LINK2"
-.\"Left and Right Menus"
 Această secțiune listează tastele care acționează asupra panourilor de
 dosare. Dacă vrei să știi cum poți schimba aspectul panourilor, citește
-secțiunea despre Meniurile Stânga și Dreapta\&.
+secțiunea despre
+.\"LINK2"
+Meniurile Stânga și Dreapta\&.
+.\"Left and Right Menus"
 .TP 
-\fBTab, C\-i, left\-key, right\-key\fP
+.B Tab, C\-i, left\-key, right\-key
 schimbă panoul curent. Vechiul celălalt panou devine noul panou curent, iar
 vechiul panou curent devine noul celălalt panou. Bara de selecție se mută
 din vechiul panou curent în noul panou curent.
 .TP 
-\fBInsert, C\-t\fP
+.B Insert, C\-t
 pentru a marca fișiere poți folosi tasta Insert (secvența terminfo kich1).
 Pentru a demarca fișiere, marchează din nou un fișier marcat.
 .TP 
-\fBAlt\-e\fP
+.B Alt\-e
 pentru a schimba setul de caractere al panoului poți folosi Alt\-e (M\-e).
 Recodarea se face din pagina de cod selectată în pagina de cod a
 sistemului. Pentru a anula recodarea, selectează "Fără conversie" în
 dialogul de codificări.
 .TP 
-\fBAlt\-g, Alt\-r, Alt\-j\fP
+.B Alt\-g, Alt\-r, Alt\-j
 folosite pentru a selecta fișierul de sus dintr\-un panou, cel din mijloc și
 cel de jos, respectiv.
 .TP 
-\fBAlt\-t\fP
+.B Alt\-t
 comută listarea curentă la următorul format de listare.  Astfel se poate
 trece rapid la listarea scurtă, la cea lungă, la formatul de listare definit
 de utilizator și înapoi la cea implicită.
 .TP 
-\fBC\-\e (control\-backslash)\fP
+.B C\-\e (control\-backslash)
+afișează
 .\"LINK2"
+lista rapidă de dosare
 .\"Hotlist"
-afișează lista rapidă de dosare și schimbă dosarul curent în cel selectat.
+și schimbă
+dosarul curent în cel selectat.
 .TP 
-\fB+ \ (plus)\fP
+.B + \ (plus)
 se folosește pentru a selecta (marca) un grup de fișiere.  Midnight
 Commander va cere opțiunile de selecție. Când este bifată caseta \fIFiles only\fP, vor fi selectate doar fișierele.  Când \fIFiles only\fP este debifată,
 vor fi selectate atât fișierele, cât și dosarele.  Când caseta \fIShell Patterns\fP este bifată, expresia regulată este asemănătoare cu expandarea
@@ -409,57 +453,57 @@ marcarea fișierelor se face cu expresii regulate obișnuite (vezi ed
 majuscule și minuscule.  Când \fICase sensitive\fP este debifată, diferența
 dintre majuscule și minuscule este ignorată.
 .TP 
-\fB\e (backslash)\fP
+.B \e (backslash)
 folosește tasta "\e" pentru a deselecta un grup de fișiere. Este opusul
 tastei Plus.
 .TP 
-\fBup\-key, C\-p\fP
+.B up\-key, C\-p
 mută bara de selecție la intrarea anterioară din panou.
 .TP 
-\fBdown\-key, C\-n\fP
+.B down\-key, C\-n
 mută bara de selecție la intrarea următoare din panou.
 .TP 
-\fBhome, a1, Alt\-<\fP
+.B home, a1, Alt\-<
 mută bara de selecție la prima intrare din panou.
 .TP 
-\fBend, c1, Alt\->\fP
+.B end, c1, Alt\->
 mută bara de selecție la ultima intrare din panou.
 .TP 
-\fBnext\-page, C\-v\fP
+.B next\-page, C\-v
 mută bara de selecție cu o pagină în jos.
 .TP 
-\fBprev\-page, Alt\-v\fP
+.B prev\-page, Alt\-v
 mută bara de selecție cu o pagină în sus.
 .TP 
-\fBAlt\-(, Alt\-)\fP
+.B Alt\-(, Alt\-)
 derulează spre dreapta sau spre stânga numele lungi de fișiere.
 .TP 
-\fBAlt\-o\fP
+.B Alt\-o
 Dacă fișierul selectat curent este un dosar, încarcă acel dosar în celălalt
 panou și mută selecția la fișierul următor. Dacă fișierul selectat curent nu
 este un dosar, încarcă dosarul părinte în celălalt panou și mută selecția la
 fișierul următor.
 .TP 
-\fBAlt\-i\fP
+.B Alt\-i
 face din dosarul curent al panoului curent și dosarul curent al celuilalt
 panou.  Trece celălalt panou în modul de listare, dacă este nevoie.  Dacă
 panoul curent este panelizat, celălalt panou nu devine panelizat.
 .TP 
-\fBC\-PageUp, C\-PageDown\fP
+.B C\-PageUp, C\-PageDown
 doar când este suportat de terminal: schimbă la "..", respectiv la dosarul
 selectat curent.
 .TP 
-\fBAlt\-y\fP
+.B Alt\-y
 trece la dosarul anterior din istoric, echivalent cu un clic pe \fI<\fP cu
 mausul.
 .TP 
-\fBAlt\-u\fP
+.B Alt\-u
 trece la dosarul următor din istoric, echivalent cu un clic pe \fI>\fP cu
 mausul.
 .TP 
-\fBAlt\-S\-h, Alt\-H\fP
-.\"NODE "  Quick search"
+.B Alt\-S\-h, Alt\-H
 afișează istoricul dosarelor, echivalent cu apăsarea lui "v" cu mausul.
+.\"NODE "  Quick search"
 .SH "  Căutare rapidă"
 Modul Căutare rapidă permite efectuarea unei căutări rapide de fișiere în
 panoul de fișiere.  Apasă \fIC\-s\fP sau \fIAlt\-s\fP pentru a începe o căutare după
@@ -475,50 +519,53 @@ se caută următoarea potrivire.
 Dacă căutarea rapidă este pornită apăsând de două ori C\-s, se va folosi
 pentru căutarea curentă modelul de căutare rapidă anterior.
 .P
-.\"NODE "  Shell Command Line"
 Pe lângă caracterele din numele fișierelor, poți folosi și caracterele
 wildcard "*" și "?".
+.\"NODE "  Shell Command Line"
 .SH "  Linia de comandă a shell\-ului"
 Această secțiune listează tastele utile pentru a evita tastarea excesivă la
 introducerea comenzilor shell.
 .TP 
-\fBAlt\-Enter\fP
+.B Alt\-Enter
 copiază numele fișierului selectat curent în linia de comandă.
 .TP 
-\fBC\-Enter\fP
+.B C\-Enter
 la fel ca Alt\-Enter.  Poate să nu funcționeze pe sisteme la distanță și pe
 unele terminale.
 .TP 
-\fBC\-S\-Enter\fP
+.B C\-S\-Enter
 copiază în linia de comandă calea completă a fișierului selectat curent.
 Poate să nu funcționeze pe sisteme la distanță și pe unele terminale.
 .TP 
-\fBAlt\-Tab\fP
+.B Alt\-Tab
+face pentru tine
 .\"LINK2"
+completarea
 .\"Completion"
-face pentru tine completarea numelor de fișiere, comenzilor, variabilelor,
-numelor de utilizator și numelor de gazdă.
+numelor de
+fișiere, comenzilor, variabilelor, numelor de utilizator și numelor de
+gazdă.
 .TP 
-\fBC\-x t, C\-x C\-t\fP
+.B C\-x t, C\-x C\-t
 copiază în linia de comandă fișierele marcate (sau, dacă nu există fișiere
 marcate, fișierul selectat) din panoul curent (C\-x t) sau din celălalt panou
 (C\-x C\-t).
 .TP 
-\fBC\-x p, C\-x C\-p\fP
+.B C\-x p, C\-x C\-p
 prima secvență de taste copiază în linia de comandă numele căii curente, iar
 a doua copiază numele căii panoului neselectat.
 .TP 
-\fBC\-q\fP
+.B C\-q
 comanda de citare poate fi folosită pentru a insera caractere care altfel
 sunt interpretate de Midnight Commander (precum simbolul "+")
 .TP 
-\fBAlt\-p, Alt\-n\fP
+.B Alt\-p, Alt\-n
 folosește aceste taste pentru a răsfoi istoricul comenzilor. Alt\-p te duce
 la ultima intrare, Alt\-n te duce la următoarea.
 .TP 
-\fBAlt\-h\fP
-.\"NODE "  General Movement Keys"
+.B Alt\-h
 afișează istoricul liniei de introducere curente.
+.\"NODE "  General Movement Keys"
 .SH "  Taste generale de deplasare"
 Vizualizatorul de ajutor, vizualizatorul de fișiere și arborele de dosare
 folosesc cod comun pentru deplasare. De aceea acceptă exact aceleași
@@ -527,97 +574,102 @@ taste. Fiecare dintre ele acceptă și câteva taste proprii.
 Alte părți din Midnight Commander folosesc unele dintre aceleași taste de
 deplasare, așa că această secțiune poate fi utilă și pentru acele părți.
 .TP 
-\fBUp, C\-p\fP
+.B Up, C\-p
 se deplasează o linie înapoi.
 .TP 
-\fBDown, C\-n\fP
+.B Down, C\-n
 se deplasează o linie înainte.
 .TP 
-\fBPrev Page, Page Up, Alt\-v\fP
+.B Prev Page, Page Up, Alt\-v
 se deplasează o pagină în sus.
 .TP 
-\fBNext Page, Page Down, C\-v\fP
+.B Next Page, Page Down, C\-v
 se deplasează o pagină în jos.
 .TP 
-\fBHome, A1\fP
+.B Home, A1
 se deplasează la început.
 .TP 
-\fBEnd, C1\fP
+.B End, C1
 se deplasează la sfârșit.
 .PP
 Vizualizatorul de ajutor și vizualizatorul de fișiere acceptă următoarele
 taste în plus față de cele menționate mai sus:
 .TP 
-\fBb, C\-b, C\-h, Backspace, Delete\fP
+.B b, C\-b, C\-h, Backspace, Delete
 se deplasează o pagină în sus.
 .TP 
-\fBSpace bar\fP
+.B Space bar
 se deplasează o pagină în jos.
 .TP 
-\fBu, d\fP
+.B u, d
 se deplasează o jumătate de pagină în sus sau în jos.
 .TP 
-\fBg, G\fP
-.\"NODE "  Input Line Keys"
+.B g, G
 se deplasează la început sau la sfârșit.
+.\"NODE "  Input Line Keys"
 .SH "  Tastele liniei de introducere"
+Liniile de introducere (folosite pentru
 .\"LINK2"
+linia de comandă
 .\"Shell Command Line"
-Liniile de introducere (folosite pentru linia de comandă și pentru
-dialogurile de interogare din program) acceptă aceste taste:
+și pentru dialogurile de interogare din program)
+acceptă aceste taste:
 .TP 
-\fBC\-a\fP
+.B C\-a
 mută cursorul la începutul liniei.
 .TP 
-\fBC\-e\fP
+.B C\-e
 mută cursorul la sfârșitul liniei.
 .TP 
-\fBC\-b, move\-left\fP
+.B C\-b, move\-left
 mută cursorul o poziție la stânga.
 .TP 
-\fBC\-f, move\-right\fP
+.B C\-f, move\-right
 mută cursorul o poziție la dreapta.
 .TP 
-\fBAlt\-f\fP
+.B Alt\-f
 se deplasează un cuvânt înainte.
 .TP 
-\fBAlt\-b\fP
+.B Alt\-b
 se deplasează un cuvânt înapoi.
 .TP 
-\fBC\-h, Backspace\fP
+.B C\-h, Backspace
 șterge caracterul anterior.
 .TP 
-\fBC\-d, Delete\fP
+.B C\-d, Delete
 șterge caracterul din punctul curent (de sub cursor).
 .TP 
-\fBC\-@\fP
+.B C\-@
 setează marcajul pentru tăiere.
 .TP 
-\fBC\-w\fP
+.B C\-w
 copiază textul dintre cursor și marcaj într\-un buffer de ștergere și îl
 elimină din linia de introducere.
 .TP 
-\fBAlt\-w\fP
+.B Alt\-w
 copiază textul dintre cursor și marcaj într\-un buffer de ștergere.
 .TP 
-\fBC\-y\fP
+.B C\-y
 readuce conținutul bufferului de ștergere.
 .TP 
-\fBC\-k\fP
+.B C\-k
 șterge textul de la cursor până la sfârșitul liniei.
 .TP 
-\fBAlt\-p, Alt\-n\fP
+.B Alt\-p, Alt\-n
 Folosește aceste taste pentru a răsfoi istoricul comenzilor. Alt\-p te duce
 la ultima intrare, Alt\-n te duce la următoarea.
 .TP 
-\fBAlt\-C\-h, Alt\-Backspace\fP
+.B Alt\-C\-h, Alt\-Backspace
 șterge un cuvânt înapoi.
 .TP 
-\fBAlt\-Tab\fP
+.B Alt\-Tab
+face pentru tine
 .\"LINK2"
+completarea
 .\"Completion"
-face pentru tine completarea numelor de fișiere, comenzilor, variabilelor,
-numelor de utilizator și numelor de gazdă.
+numelor de
+fișiere, comenzilor, variabilelor, numelor de utilizator și numelor de
+gazdă.
 .SH ""
 .\"NODE "Menu Bar"
 .SH "Bara de meniu"
@@ -626,32 +678,41 @@ sus al ecranului. Bara de meniu are cinci meniuri: "Stânga", "Fișier",
 "Comandă", "Opțiuni" și "Dreapta".
 .PP
 .\"LINK2"
+Meniurile Stânga și Dreapta
 .\"Left and Right Menus"
-Meniurile Stânga și Dreapta îți permit să modifici aspectul panourilor de
-dosare din stânga și din dreapta.
+îți
+permit să modifici aspectul panourilor de dosare din stânga și din dreapta.
 .PP
 .\"LINK2"
+Meniul Fișier
 .\"File Menu"
-Meniul Fișier listează acțiunile pe care le poți efectua asupra fișierului
-selectat curent sau asupra fișierelor marcate.
+listează acțiunile pe care le
+poți efectua asupra fișierului selectat curent sau asupra fișierelor
+marcate.
 .PP
 .\"LINK2"
+Meniul Comandă
 .\"Command Menu"
-Meniul Comandă listează acțiunile mai generale, care nu au legătură cu
-fișierul selectat curent sau cu fișierele marcate.
+listează acțiunile mai
+generale, care nu au legătură cu fișierul selectat curent sau cu fișierele
+marcate.
 .PP
 .\"LINK2"
+Meniul Opțiuni
 .\"Options Menu"
+listează acțiunile care îți
+permit să personalizezi Midnight Commander.
 .\"NODE "  Left and Right Menus"
-Meniul Opțiuni listează acțiunile care îți permit să personalizezi Midnight
-Commander.
 .SH "  Meniurile Stânga și Dreapta (Deasupra și Dedesubt)"
-.\"LINK2"
-.\"Layout"
-.\"NODE "    Listing Format..."
 Aspectul panourilor de dosare poate fi schimbat din meniurile \fBStânga\fP și
 \fBDreapta\fP (ele se numesc \fBDeasupra\fP și \fBDedesubt\fP când în dialogul de
-opțiuni Aspect este aleasă împărțirea orizontală a panourilor).
+opțiuni
+.\"LINK2"
+Aspect
+.\"Layout"
+este aleasă împărțirea orizontală
+a panourilor).
+.\"NODE "    Listing Format..."
 .SH "    Format de listare..."
 Modul de listare este folosit pentru a afișa o listă de fișiere; sunt
 disponibile patru formate de listare diferite: \fBComplet\fP, \fBScurt\fP, \fBLung\fP
@@ -678,18 +739,18 @@ număr de la 1 la 9 la șirul de format.
 După aceasta adaugi numele câmpurilor, cu un specificator de mărime
 opțional.  Acestea sunt câmpurile disponibile pe care le poți afișa:
 .TP 
-\fBname\fP
+.B name
 afișează numele fișierului.
 .TP 
-\fBsize\fP
+.B size
 afișează mărimea fișierului.
 .TP 
-\fBbsize\fP
+.B bsize
 este o formă alternativă a formatului \fBsize\fP. Afișează mărimea fișierelor,
 iar pentru dosare arată doar SUB\-DIR sau UP\-\-DIR, cu excepția cazului în
 care mărimea dosarului este calculată cu comanda "Arată mărimea dosarelor".
 .TP 
-\fBtype\fP
+.B type
 afișează un câmp de tip cu lățimea de un caracter.  Acest caracter este
 similar cu cel afișat de ls cu opțiunea \-F \- \fB*\fP pentru fișiere
 executabile, \fB/\fP pentru dosare, \fB@\fP pentru legături, \fB=\fP pentru
@@ -697,49 +758,49 @@ socket\-uri, \fB\-\fP pentru dispozitive de caractere, \fB+\fP pentru dispozitiv
 bloc, \fB|\fP pentru pipe\-uri, \fB~\fP pentru legături simbolice către dosare și
 \fB!\fP pentru legături simbolice expirate (legături care nu duc nicăieri).
 .TP 
-\fBmark\fP
+.B mark
 un asterisc dacă fișierul este marcat, un spațiu dacă nu este.
 .TP 
-\fBmtime\fP
+.B mtime
 data ultimei modificări a fișierului.
 .TP 
-\fBatime\fP
+.B atime
 data ultimului acces la fișier.
 .TP 
-\fBctime\fP
+.B ctime
 data ultimei schimbări de stare a fișierului.
 .TP 
-\fBperm\fP
+.B perm
 un șir care reprezintă biții de permisiuni curenți ai fișierului.
 .TP 
-\fBmode\fP
+.B mode
 o valoare octală cu biții de permisiuni curenți ai fișierului.
 .TP 
-\fBnlink\fP
+.B nlink
 numărul de legături către fișier.
 .TP 
-\fBngid\fP
+.B ngid
 GID\-ul (numeric).
 .TP 
-\fBnuid\fP
+.B nuid
 UID\-ul (numeric).
 .TP 
-\fBowner\fP
+.B owner
 proprietarul fișierului.
 .TP 
-\fBgroup\fP
+.B group
 grupul fișierului.
 .TP 
-\fBinode\fP
+.B inode
 inode\-ul fișierului.
 .PP
 De asemenea, poți folosi următoarele cuvinte cheie pentru a defini aspectul
 panoului:
 .TP 
-\fBspace\fP
+.B space
 un spațiu în formatul de afișare.
 .TP 
-\fB|\fP
+.B |
 adaugă o linie verticală în formatul de afișare.
 .PP
 Pentru a forța un câmp la o mărime fixă (un specificator de mărime), adaugi
@@ -763,31 +824,37 @@ half name | size:7 | type mode:3
 .PP
 Panourile pot fi setate și în următoarele moduri:
 .TP 
-\fBVizualizare rapidă\fP
+.B Vizualizare rapidă
+În acest mod, panoul va trece la un
 .\"LINK2"
+vizualizator
 .\"Internal File Viewer"
-În acest mod, panoul va trece la un vizualizator redus care afișează
-conținutul fișierului selectat curent; dacă selectezi panoul (cu tasta tab
-sau cu mausul), vei avea acces la comenzile obișnuite ale vizualizatorului.
+redus care afișează conținutul fișierului
+selectat curent; dacă selectezi panoul (cu tasta tab sau cu mausul), vei
+avea acces la comenzile obișnuite ale vizualizatorului.
 .TP 
-\fBInfo\fP
+.B Info
 Vizualizarea de informații afișează informații despre fișierul selectat
 curent și, dacă este posibil, informații despre sistemul de fișiere curent.
 .TP 
-\fBArbore\fP
+.B Arbore
+Vizualizarea arbore este destul de asemănătoare cu funcția
 .\"LINK2"
+arbore de dosare\&.
 .\"Directory Tree"
-Vizualizarea arbore este destul de asemănătoare cu funcția arbore de
-dosare. Vezi secțiunea despre aceasta pentru mai multe informații.
+Vezi secțiunea despre
+aceasta pentru mai multe informații.
 .TP 
-\fBPanelizare\fP
+.B Panelizare
+Acest mod afișează rezultatele ultimelor comenzi
 .\"LINK2"
+Panelizare externă
 .\"External panelize"
+sau
 .\"LINK2"
+Căutare fișier\&.
 .\"Find File"
 .\"NODE "    Sort Order..."
-Acest mod afișează rezultatele ultimelor comenzi Panelizare externă sau
-Căutare fișier.
 .SH "    Ordinea de sortare..."
 Cele opt ordini de sortare sunt: după nume (sortare alfabetică sau sortare
 după versiune, cunoscută și ca sortare naturală), după extensie, după data
@@ -796,20 +863,23 @@ după mărime, după inode și nesortat.  În caseta de dialog Ordinea de sortar
 poți alege ordinea de sortare și poți specifica și dacă vrei sortare inversă
 bifând caseta reverse.
 .PP
-.\"LINK2"
-.\"Panel options"
-.\"NODE "    Filter..."
 Implicit, dosarele sunt sortate înaintea fișierelor, dar acest lucru poate
-fi schimbat din meniul de opțiuni al panoului (opțiunea \fBMix all files\fP).
-.SH "    Filtru..."
+fi schimbat din
 .\"LINK2"
-.\"Input Line Keys"
+meniul de opțiuni al panoului
+.\"Panel options"
+(opțiunea \fBMix all files\fP).
+.\"NODE "    Filter..."
+.SH "    Filtru..."
 Comanda filtru îți permite să specifici un model shell (de exemplu
 \fB*.tar.gz\fP)  pe care trebuie să\-l respecte fișierele și dosarele pentru a
-fi afișate.  Linia de introducere permite introducerea modelului pentru
-numele de fișiere/dosare care vor fi afișate în panou.
+fi afișate.
+.\"LINK2"
+Linia de introducere
+.\"Input Line Keys"
+permite introducerea modelului pentru numele de fișiere/dosare care vor fi
+afișate în panou.
 .PP
-.\"NODE "    Reread"
 Când caseta \fIFiles only\fP este bifată, doar fișierele sunt potrivite cu
 filtrul, iar toate dosarele sunt afișate. Altfel sunt filtrate atât
 fișierele, cât și dosarele. Când caseta \fIShell Patterns\fP este bifată,
@@ -819,10 +889,11 @@ singur caracter). Altfel, potrivirea fișierelor/dosarelor se face cu
 expresii regulate obișnuite (vezi ed(1)). Când caseta \fICase sensitive\fP este
 bifată, filtrarea ține cont de majuscule și minuscule. Altfel, diferența
 dintre ele este ignorată.
+.\"NODE "    Reread"
 .SH "    Reîncarcă"
-.\"NODE "  File Menu"
 Comanda reîncarcă reîncarcă lista de fișiere din dosar. Este utilă dacă alte
 procese au creat sau au șters fișiere.
+.\"NODE "  File Menu"
 .SH "  Meniul Fișier"
 Midnight Commander folosește tastele F1 \- F10 ca scurtături de tastatură
 pentru comenzile din meniul fișier.  Secvențele escape pentru tastele
@@ -834,67 +905,75 @@ apăsând tasta Esc și apoi un număr din intervalul 1 până la 9 și 0
 Meniul Fișier are următoarele comenzi (scurtăturile de tastatură sunt între
 paranteze):
 .PP
-\fBAjutor (F1)\fP
+.B Ajutor (F1)
 .PP
+Pornește vizualizatorul hipertext de ajutor încorporat. În
 .\"LINK2"
+vizualizatorul de ajutor\&,
 .\"Contents"
-Pornește vizualizatorul hipertext de ajutor încorporat. În vizualizatorul de
-ajutor\&, poți folosi tasta Tab pentru a selecta următoarea legătură și
-tasta Enter pentru a urma acea legătură. Tastele Space și Backspace se
-folosesc pentru a te deplasa înainte și înapoi într\-o pagină de
-ajutor. Apasă din nou F1 pentru a obține lista completă a tastelor
-acceptate.
+poți folosi tasta
+Tab pentru a selecta următoarea legătură și tasta Enter pentru a urma acea
+legătură. Tastele Space și Backspace se folosesc pentru a te deplasa înainte
+și înapoi într\-o pagină de ajutor. Apasă din nou F1 pentru a obține lista
+completă a tastelor acceptate.
 .PP
-\fBMeniu (F2)\fP
+.B Meniu (F2)
 .PP
+Pornește
 .\"LINK2"
+meniul utilizatorului\&.
 .\"Edit Menu File"
-Pornește meniul utilizatorului\&.  Meniul utilizatorului oferă o modalitate
-simplă de a pune la dispoziția utilizatorilor un meniu și de a adăuga
-funcții suplimentare în Midnight Commander.
+Meniul
+utilizatorului oferă o modalitate simplă de a pune la dispoziția
+utilizatorilor un meniu și de a adăuga funcții suplimentare în Midnight
+Commander.
 .PP
-\fBVizualizare (F3, F13)\fP
+.B Vizualizare (F3, F13)
 .PP
-.\"LINK2"
-.\"Internal File Viewer"
 Vizualizează fișierul selectat curent. Implicit, aceasta pornește
-Vizualizatorul intern de fișiere, dar dacă opțiunea "Use internal view" este
-dezactivată, pornește un vizualizator extern de fișiere specificat prin
-variabila de mediu \fBVIEWER\fP.  Dacă \fBVIEWER\fP nu este definită, se încearcă
-variabila de mediu \fBPAGER\fP.  Dacă nici \fBPAGER\fP nu este definită, se
-apelează comanda "view".  Dacă folosești F13 în loc de F3, vizualizatorul va
-fi pornit fără nicio formatare sau preprocesare a fișierului.
-.P
 .\"LINK2"
+Vizualizatorul intern de fișiere\&,
+.\"Internal File Viewer"
+dar dacă opțiunea "Use internal view" este dezactivată, pornește un
+vizualizator extern de fișiere specificat prin variabila de mediu
+\fBVIEWER\fP.  Dacă \fBVIEWER\fP nu este definită, se încearcă variabila de mediu
+\fBPAGER\fP.  Dacă nici \fBPAGER\fP nu este definită, se apelează comanda "view".
+Dacă folosești F13 în loc de F3, vizualizatorul va fi pornit fără nicio
+formatare sau preprocesare a fișierului.
+.P
+Vezi
+.\"LINK2"
+parametrii pentru vizualizatorul extern
 .\"Parameters for external editor or viewer"
-Vezi parametrii pentru vizualizatorul extern pentru a afla cum poți
-specifica opțiuni extinse de linie de comandă pentru vizualizatoarele
-externe.
+pentru a afla cum poți specifica opțiuni
+extinse de linie de comandă pentru vizualizatoarele externe.
 .PP
-\fBVizualizare filtrată (Alt\-!)\fP
+.B Vizualizare filtrată (Alt\-!)
 .PP
 Această comandă cere o comandă și argumentele ei (argumentul implicit este
 numele fișierului selectat curent); rezultatul comenzii este afișat în
 vizualizatorul intern de fișiere.
 .PP
-\fBEditare (F4, F14)\fP
+.B Editare (F4, F14)
 .PP
-.\"LINK2"
-.\"Internal File Editor"
 Apasă F4 pentru a edita fișierul evidențiat.  Apasă F14 (de obicei F14)
 pentru a porni editorul cu un fișier nou, gol.  În prezent acestea pornesc
 editorul \fBvi\fP, sau editorul specificat în variabila de mediu \fBEDITOR\fP, sau
-Editorul intern de fișiere dacă opțiunea use_internal_edit este activată.
+.\"LINK2"
+Editorul intern de fișiere
+.\"Internal File Editor"
+dacă
+opțiunea use_internal_edit este activată.
 .P
+Vezi
 .\"LINK2"
+parametrii pentru editorul extern
 .\"Parameters for external editor or viewer"
-Vezi parametrii pentru editorul extern pentru a afla cum poți specifica
-opțiuni extinse de linie de comandă pentru editoarele externe.
+pentru a afla cum poți specifica opțiuni extinse
+de linie de comandă pentru editoarele externe.
 .PP
-\fBCopiere (F5, F15)\fP
+.B Copiere (F5, F15)
 .PP
-.\"LINK2"
-.\"Mask Copy/Rename"
 Apasă F5 pentru a deschide un dialog de introducere pentru copierea
 fișierului selectat curent (sau a fișierelor marcate, dacă există cel puțin
 un fișier marcat) în dosarul/numele de fișier pe care îl specifici în
@@ -907,27 +986,31 @@ copy\-on\-write pe sistemele de fișiere locale care o suportă.  În timpul
 copierii poți apăsa C\-c sau Esc pentru a abandona operația.  Pentru detalii
 despre masca sursă (care va fi de obicei * sau ^\e(.*\e)$, în funcție de
 setarea Use shell patterns) și despre wildcard\-urile posibile în destinație,
-vezi Copierea/redenumirea cu mască\&.
+vezi
+.\"LINK2"
+Copierea/redenumirea cu mască\&.
+.\"Mask Copy/Rename"
 .PP
 F15 (de obicei F15) este similar, dar destinația implicită este dosarul din
 panoul selectat. Operează întotdeauna asupra fișierului selectat, indiferent
 de fișierele marcate.
 .PP
-.\"LINK2"
-.\"Background jobs"
 Pe unele sisteme este posibil să faci copierea în fundal făcând clic pe
 butonul de fundal (sau apăsând Alt\-b în caseta de dialog).  Sarcinile în
-fundal sunt controlate din Sarcini în fundal.
+fundal sunt controlate din
+.\"LINK2"
+Sarcini în fundal\&.
+.\"Background jobs"
 .PP
-\fBLegătură (C\-x l)\fP
+.B Legătură (C\-x l)
 .PP
 Creează o legătură reală către fișierul curent.
 .PP
-\fBLegătură simbolică absolută (C\-x s)\fP
+.B Legătură simbolică absolută (C\-x s)
 .PP
 Creează o legătură simbolică absolută către fișierul curent.
 .PP
-\fBLegătură simbolică relativă (C\-x v)\fP
+.B Legătură simbolică relativă (C\-x v)
 .PP
 Creează o legătură simbolică relativă către fișierul curent.
 .PP
@@ -961,17 +1044,17 @@ schimba oricare dintre ele.
 Uneori poate vrei să schimbi calea absolută a originalului într\-o cale
 relativă. O cale absolută pornește din dosarul rădăcină:
 .PP
-\fI/home/frodo/mc/mc \-> /home/frodo/new/mc\fP
+.I /home/frodo/mc/mc \-> /home/frodo/new/mc
 .PP
 O legătură relativă descrie locația fișierului original pornind de la
 locația legăturii însăși:
 .PP
-\fI/home/frodo/mc/mc \-> ../new/mc\fP
+.I /home/frodo/mc/mc \-> ../new/mc
 .PP
 Poți forța Midnight Commander să sugereze o cale relativă apăsând "C\-x v" în
 loc de "C\-x s".
 .PP
-\fBRedenumire/Mutare (F6, F16)\fP
+.B Redenumire/Mutare (F6, F16)
 .PP
 Apasă F6 pentru a deschide un dialog de introducere pentru mutarea
 fișierului selectat curent (sau a fișierelor marcate, dacă există cel puțin
@@ -984,28 +1067,30 @@ F16 (de obicei F16) este similar, dar destinația implicită este dosarul din
 panoul selectat. Operează întotdeauna asupra fișierului selectat, indiferent
 de fișierele marcate.
 .PP
-.\"LINK2"
-.\"Background jobs"
 Pe unele sisteme este posibil să faci copierea în fundal făcând clic pe
 butonul de fundal (sau apăsând Alt\-b în caseta de dialog).  Sarcinile în
-fundal sunt controlate din Sarcini în fundal.
+fundal sunt controlate din
+.\"LINK2"
+Sarcini în fundal\&.
+.\"Background jobs"
 .PP
-\fBMkdir (F7)\fP
+.B Mkdir (F7)
 .PP
 Deschide un dialog de introducere și creează dosarul specificat.
 .PP
-\fBȘtergere (F8)\fP
+.B Ștergere (F8)
 .PP
 Șterge fișierul selectat curent sau fișierele marcate din panoul selectat
 curent. În timpul procesului poți apăsa C\-c sau Esc pentru a abandona
 operația.
 .PP
+\fBCd rapid (Alt\-c)\fP Folosește comanda
 .\"LINK2"
+cd rapid
 .\"Quick cd"
-\fBCd rapid (Alt\-c)\fP Folosește comanda cd rapid dacă ai linia de comandă
-plină și vrei să faci cd undeva.
+dacă ai linia de comandă plină și vrei să faci cd undeva.
 .PP
-\fBSelectare grup (+)\fP
+.B Selectare grup (+)
 .PP
 Se folosește pentru a selecta (marca) un grup de fișiere. Midnight Commander
 va cere opțiunile de selecție. Când este bifată caseta \fIFiles only\fP, vor fi
@@ -1019,44 +1104,52 @@ marcarea fișierelor se face cu expresii regulate obișnuite (vezi ed
 majuscule și minuscule.  Când \fICase sensitive\fP este debifată, diferența
 dintre majuscule și minuscule este ignorată.
 .PP
-\fBDeselectare grup (\e)\fP
+.B Deselectare grup (\e)
 .PP
 Se folosește pentru a deselecta un grup de fișiere. Este opusul comenzii
 \fISelect group\fP.
 .PP
-\fBInversează selecția (*)\fP
+.B Inversează selecția (*)
 .PP
 Selectează (marchează) toate elementele care sunt în prezent neselectate și
 deselectează (demarchează) toate elementele care sunt în prezent
 selectate. Se aplică doar fișierelor sau atât fișierelor, cât și dosarelor,
 în funcție de dacă 'Reverse files only' este activată.
 .PP
-\fBIeșire (F10, S\-F10)\fP
+.B Ieșire (F10, S\-F10)
 .PP
-.\"NODE "    Quick cd"
 Închide Midnight Commander.  S\-F10 se folosește când vrei să ieși și
 folosești shell wrapper\-ul.  S\-F10 nu te va duce în ultimul dosar vizitat cu
 Midnight Commander, ci vei rămâne în dosarul din care ai pornit Midnight
 Commander.
+.\"NODE "    Quick cd"
 .SH "    Cd rapid"
+Această comandă este utilă dacă ai linia de comandă plină și vrei să faci
 .\"LINK2"
+cd
 .\"The cd internal command"
+undeva fără a fi nevoie să
+decupezi și să lipești linia de comandă. Comanda deschide un mic dialog în
+care introduci tot ce ai introduce după \fBcd\fP în linia de comandă, apoi
+apeși Enter. Aceasta oferă tot ce există deja în
 .\"LINK2"
+comanda internă cd\&.
 .\"The cd internal command"
 .\"NODE "  Command Menu"
-Această comandă este utilă dacă ai linia de comandă plină și vrei să faci cd
-undeva fără a fi nevoie să decupezi și să lipești linia de comandă. Comanda
-deschide un mic dialog în care introduci tot ce ai introduce după \fBcd\fP în
-linia de comandă, apoi apeși Enter. Aceasta oferă tot ce există deja în
-comanda internă cd\&.
 .SH "  Meniul Comandă"
+Comanda
 .\"LINK2"
+Arbore de dosare
 .\"Directory Tree"
-Comanda Arbore de dosare afișează o figură arborescentă a dosarelor.
+afișează o
+structură arborescentă a dosarelor.
 .PP
+Comanda
 .\"LINK2"
+"Căutare fișier"
 .\"Find File"
-Comanda "Căutare fișier" îți permite să cauți un anumit fișier.
+îți permite să cauți
+un anumit fișier.
 .PP
 Comanda "Schimbă panourile" schimbă între ele conținutul celor două panouri
 de dosare.
@@ -1072,73 +1165,82 @@ octet. Metoda de comparare doar după mărime compară doar mărimile fișierelo
 și nu verifică conținutul sau datele, ci doar mărimea fișierului.
 .PP
 .\"LINK2"
+"Panelizare externă"
 .\"External panelize"
-"Panelizare externă" îți permite să execuți un program extern și să faci din
-rezultatul acelui program conținutul panoului curent.
+îți permite să
+execuți un program extern și să faci din rezultatul acelui program
+conținutul panoului curent.
 .PP
 Comanda "Istoricul comenzilor" afișează o listă de comenzi tastate. Comanda
 selectată este copiată în linia de comandă. Istoricul comenzilor poate fi
 accesat și tastând Alt\-p sau Alt\-n.
 .PP
+Comanda
 .\"LINK2"
+"Lista rapidă de dosare"
 .\"Hotlist"
-Comanda "Lista rapidă de dosare" face mai rapidă schimbarea dosarului curent
-în dosare folosite des.
+face mai rapidă
+schimbarea dosarului curent în dosare folosite des.
 .PP
+Comanda
 .\"LINK2"
+"Lista ecranelor"
 .\"Screen selector"
-Comanda "Lista ecranelor" afișează o fereastră de dialog cu lista
-editoarelor interne, a vizualizatoarelor și a altor module MC care suportă
-acest mod, aflate în execuție.
+afișează o
+fereastră de dialog cu lista editoarelor interne, a vizualizatoarelor și a
+altor module MC care suportă acest mod, aflate în execuție.
 .PP
+Comanda
 .\"LINK2"
+"Editare fișier de extensii"
 .\"Edit Extension File"
-Comanda "Editare fișier de extensii" îți permite să specifici programele
-care să fie executate când încerci să execuți, să vizualizezi, să editezi și
-să faci multe altele cu fișiere având anumite extensii (terminații ale
-numelor de fișiere).
+îți permite să specifici programele care să fie executate când încerci să
+execuți, să vizualizezi, să editezi și să faci multe altele cu fișiere având
+anumite extensii (terminații ale numelor de fișiere).
 .PP
+Comanda
 .\"LINK2"
+"Editare fișier de meniu"
 .\"Edit Menu File"
+poate
+fi folosită pentru a edita meniul utilizatorului (care apare apăsând F2).
 .\"NODE "    Directory Tree"
-Comanda "Editare fișier de meniu" poate fi folosită pentru a edita meniul
-utilizatorului (care apare apăsând F2).
 .SH "    Arbore de dosare"
-Comanda Arbore de dosare afișează o figură arborescentă a dosarelor. Poți
-selecta un dosar din figură, iar Midnight Commander va schimba dosarul
+Comanda Arbore de dosare afișează o structură arborescentă a dosarelor. Poți
+selecta un dosar din structură, iar Midnight Commander va schimba dosarul
 curent în cel ales.
 .PP
 Există două moduri de a porni arborele. Comanda reală de arbore de dosare
 este disponibilă din meniul Comandă. Cealaltă cale este să alegi
 vizualizarea arbore din meniul Stânga sau Dreapta.
 .PP
-Pentru a evita întârzierile lungi, Midnight Commander creează figura
+Pentru a evita întârzierile lungi, Midnight Commander creează structura
 arborescentă scanând doar un mic subset al tuturor dosarelor. Dacă dosarul
 pe care vrei să\-l vezi lipsește, mută\-te în dosarul părinte și apasă C\-r
 (sau F2).
 .PP
 Poți folosi următoarele taste:
-.TP 
+.TP
 .\"LINK2"
 Taste generale de deplasare
 .\"General Movement Keys"
 sunt acceptate.
 .TP 
-\fBEnter.\fP
+.B Enter.
 În arborele de dosare, iese din arborele de dosare și schimbă în acest dosar
 în panoul curent. În vizualizarea arbore, schimbă în acest dosar în celălalt
 panou și rămâne în modul vizualizare arbore în panoul curent.
 .TP 
-\fBC\-r, F2 (Rescanare).\fP
-Rescanează acest dosar. Folosește\-o când figura arborescentă este depășită:
-lipsesc subdosare sau sunt afișate subdosare care nu mai există.
+.B C\-r, F2 (Rescanare).
+Rescanează acest dosar. Folosește\-o când structura arborescentă este
+depășită: lipsesc subdosare sau sunt afișate subdosare care nu mai există.
 .TP 
-\fBF3 (Uitare).\fP
-Șterge acest dosar din figura arborescentă. Folosește\-o pentru a elimina
-aglomerarea din figură. Dacă vrei dosarul înapoi în figura arborescentă,
-apasă F2 în dosarul său părinte.
+.B F3 (Uitare).
+Șterge acest dosar din structura arborescentă. Folosește\-o pentru a elimina
+aglomerarea din structură. Dacă vrei dosarul înapoi în structura
+arborescentă, apasă F2 în dosarul său părinte.
 .TP 
-\fBF4 (Static/Dinamic).\fP
+.B F4 (Static/Dinamic).
 Comută între modul de navigare dinamic (implicit) și modul de navigare
 static.
 .PP
@@ -1148,29 +1250,29 @@ un dosar. Sunt afișate toate dosarele cunoscute.
 În modul de navigare dinamic poți folosi tastele Sus și Jos pentru a selecta
 un dosar vecin, tasta Stânga pentru a trece la dosarul părinte și tasta
 Dreapta pentru a trece la un dosar copil. Sunt afișate doar dosarele
-părinte, vecine și copil, celelalte sunt omise. Figura arborescentă se
+părinte, vecine și copil, celelalte sunt omise. Structura arborescentă se
 schimbă dinamic pe măsură ce navighezi.
 .TP 
-\fBF5 (Copiere).\fP
+.B F5 (Copiere).
 Copiază dosarul.
 .TP 
-\fBF6 (RenMov).\fP
+.B F6 (RenMov).
 Mută dosarul.
 .TP 
-\fBF7 (Mkdir).\fP
+.B F7 (Mkdir).
 Creează un dosar nou sub acest dosar.
 .TP 
-\fBF8 (Ștergere).\fP
+.B F8 (Ștergere).
 Șterge acest dosar din sistemul de fișiere.
 .TP 
-\fBC\-s, Alt\-s.\fP
+.B C\-s, Alt\-s.
 Caută următorul dosar care se potrivește cu șirul de căutare. Dacă nu există
 un astfel de dosar, aceste taste vor muta o linie în jos.
 .TP 
-\fBC\-h, Backspace.\fP
+.B C\-h, Backspace.
 Șterge ultimul caracter al șirului de căutare.
 .TP 
-\fBOrice alt caracter.\fP
+.B Orice alt caracter.
 Adaugă caracterul la șirul de căutare și trece la următorul dosar care
 începe cu aceste caractere. În vizualizarea arbore trebuie mai întâi să
 activezi modul de căutare apăsând C\-s. Șirul de căutare este afișat în linia
@@ -1179,23 +1281,25 @@ de mini\-stare.
 Următoarele acțiuni sunt disponibile doar în arborele de dosare. Nu sunt
 suportate în vizualizarea arbore.
 .TP 
-\fBF1 (Ajutor).\fP
+.B F1 (Ajutor).
 Pornește vizualizatorul de ajutor și afișează această secțiune.
 .TP 
-\fBEsc, F10.\fP
+.B Esc, F10.
 Iese din arborele de dosare. Nu schimbă dosarul.
 .PP
+Mausul este suportat. Un dublu clic se comportă ca Enter. Vezi și secțiunea
+despre
 .\"LINK2"
+suportul pentru maus\&.
 .\"Mouse Support"
 .\"NODE "    Find File"
-Mausul este suportat. Un dublu clic se comportă ca Enter. Vezi și secțiunea
-despre suportul pentru maus\&.
 .SH "    Caută fișier"
-.\"LINK2"
-.\"Directory Tree"
 Funcția Căutare fișier întreabă mai întâi dosarul de pornire pentru căutare
 și numele fișierului căutat. Apăsând butonul Tree poți selecta dosarul de
-pornire din figura arborescentă a dosarelor.
+pornire din
+.\"LINK2"
+structura arborescentă a dosarelor\&.
+.\"Directory Tree"
 .PP
 Câmpul de introducere "File name" conține un model de nume de fișier care va
 fi căutat. Este interpretat ca model shell sau ca expresie regulată, în
@@ -1241,13 +1345,14 @@ dosarele speciale ale sistemelor de control al versiunilor:
 Atenție: câmpul de introducere poate conține un punct (.), ceea ce înseamnă
 calea absolută curentă.
 .PP
+Poți lua în considerare folosirea comenzii
 .\"LINK2"
+Panelizare externă
 .\"External panelize"
+pentru unele operații. Comanda Căutare
+fișier este doar pentru interogări simple, în timp ce cu Panelizare externă
+poți face căutări atât de misterioase pe cât îți dorești.
 .\"NODE "    External panelize"
-Poți lua în considerare folosirea comenzii Panelizare externă pentru unele
-operații. Comanda Căutare fișier este doar pentru interogări simple, în timp
-ce cu Panelizare externă poți face căutări atât de misterioase pe cât îți
-dorești.
 .SH "    Panelizare externă"
 Panelizarea externă îți permite să execuți un program extern și să faci din
 rezultatul acelui program conținutul panoului curent.
@@ -1274,12 +1379,12 @@ fișierului din fișierele jurnal de transfer:
 awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
-.\"NODE "    Hotlist"
 Poate vrei să salvezi comenzile de panelizare folosite des sub un nume
 descriptiv, pentru a le reapela rapid. Faci acest lucru tastând comanda în
 linia de introducere și apăsând butonul Add new. Apoi introduci un nume sub
 care vrei să fie salvată comanda. Data viitoare alegi pur și simplu comanda
 din listă și nu mai trebuie să o tastezi din nou.
+.\"NODE "    Hotlist"
 .SH "    Listă rapidă"
 Comanda Lista rapidă de dosare afișează etichetele dosarelor din lista
 rapidă de dosare.  Midnight Commander va schimba în dosarul corespunzător
@@ -1288,25 +1393,25 @@ etichetă/dosar deja create și poți adăuga altele noi.  Pentru a adăuga rapi
 dosare noi, poți folosi comanda Adaugă la lista rapidă (C\-x h), care adaugă
 dosarul curent în lista rapidă de dosare, cerând doar eticheta pentru dosar.
 .PP
+Aceasta face mai rapid cd\-ul către dosare folosite des. Poți lua în
+considerare folosirea variabilei CDPATH, așa cum este descrisă la
 .\"LINK2"
+comanda internă cd\&.
 .\"The cd internal command"
 .\"NODE "    Edit Extension File"
-Aceasta face mai rapid cd\-ul către dosare folosite des. Poți lua în
-considerare folosirea variabilei CDPATH, așa cum este descrisă la comanda
-internă cd.
 .SH "    Editare fișier de extensii"
-.\"NODE "    Background jobs"
 Aceasta va porni editorul tău pe fișierul \fI~/.config/mc/mc.ext.ini\fP.  Dacă
 acest fișier nu există și nu ești root, va fi copiat din
 \fI%sysconfdir%/mc/mc.ext.ini\fP.  Dacă ești root, poți alege fișierul de
 editat: \fI~/.config/mc/mc.ext.ini\fP al utilizatorului sau
 \fI%sysconfdir%/mc/mc.ext.ini\fP de la nivel de sistem.  Formatul acestui
 fișier este descris în detaliu în el.
+.\"NODE "    Background jobs"
 .SH "    Sarcini în fundal"
-.\"NODE "    Edit Menu File"
 Aceasta îți permite să controlezi starea oricărui proces Midnight Commander
 din fundal (doar operațiile de copiere și mutare de fișiere pot fi făcute în
 fundal).  De aici poți opri, reporni și termina o sarcină din fundal.
+.\"NODE "    Edit Menu File"
 .SH "    Editare fișier de meniu"
 Meniul utilizatorului este un meniu de acțiuni utile care pot fi
 personalizate de utilizator. Când accesezi meniul utilizatorului, se
@@ -1322,14 +1427,15 @@ altceva în afară de spațiu sau tab sunt considerate intrări ale meniului
 literă). Toate liniile care încep cu un spațiu sau un tab sunt comenzile
 care vor fi executate când este selectată intrarea.
 .PP
-.\"LINK2"
-.\"Macro Substitution"
 Când este selectată o opțiune, toate liniile de comandă ale opțiunii sunt
 copiate într\-un fișier temporar din dosarul temporar (de obicei /usr/tmp),
 iar apoi acel fișier este executat. Astfel utilizatorul poate pune
 construcții obișnuite de shell în meniuri. De asemenea, înainte de
 executarea codului din meniu are loc o substituție simplă de
-macro\-uri. Pentru mai multe informații, vezi substituția de macro\-uri\&.
+macro\-uri. Pentru mai multe informații, vezi
+.\"LINK2"
+substituția de macro\-uri\&.
+.\"Macro Substitution"
 .PP
 Iată un exemplu de fișier mc.menu:
 .PP
@@ -1367,7 +1473,7 @@ X       Extrage conținutul unui fișier tar comprimat
 	tar xzvf %f
 .fi
 .PP
-\fBCondiții implicite\fP
+.B Condiții implicite
 .PP
 Fiecare intrare de meniu poate fi precedată de o condiție. Condiția trebuie
 să înceapă din prima coloană cu caracterul '='. Dacă condiția este
@@ -1437,7 +1543,7 @@ L	Listează conținutul unei arhive tar comprimate
 	gzip \-cd %f | tar xvf \-
 .fi
 .PP
-\fBCondiții de adăugare\fP
+.B Condiții de adăugare
 .PP
 Dacă condiția începe cu '+' (sau '+?') în loc de '=' (sau '=?'), este o
 condiție de adăugare. Dacă condiția este adevărată, intrarea de meniu va fi
@@ -1450,58 +1556,77 @@ folosești două condiții diferite, una pentru adăugare și alta pentru
 implicit, poți preceda o intrare de meniu cu două linii de condiție, una
 începând cu '+' și alta cu '='.
 .PP
-.\"NODE "  Options Menu"
 Comentariile încep cu '#'. Liniile suplimentare de comentariu trebuie să
 înceapă cu '#', spațiu sau tab.
+.\"NODE "  Options Menu"
 .SH "  Meniul Opțiuni"
 Midnight Commander are unele opțiuni care pot fi activate și dezactivate în
 mai multe dialoguri accesibile din acest meniu. Opțiunile sunt activate dacă
 au în față un asterisc sau "x".
 .PP
+Comanda
 .\"LINK2"
+Configurare
 .\"Configuration"
-Comanda Configurare deschide un dialog din care poți schimba majoritatea
-setărilor Midnight Commander.
+deschide un dialog din
+care poți schimba majoritatea setărilor Midnight Commander.
 .PP
+Comanda
 .\"LINK2"
+Aspect
 .\"Layout"
-Comanda Aspect deschide un dialog din care specifici mai multe opțiuni
-privind cum arată mc pe ecran.
+deschide un dialog din care
+specifici mai multe opțiuni privind cum arată mc pe ecran.
 .PP
+Comanda
 .\"LINK2"
+Opțiuni panou
 .\"Panel options"
-Comanda Opțiuni panou deschide un dialog din care specifici opțiunile
-panourilor managerului de fișiere.
+deschide un dialog
+din care specifici opțiunile panourilor managerului de fișiere.
 .PP
+Comanda
 .\"LINK2"
+Confirmare
 .\"Confirmation"
-Comanda Confirmare deschide un dialog din care specifici ce acțiuni vrei să
-fie confirmate.
+deschide un dialog din
+care specifici ce acțiuni vrei să fie confirmate.
 .PP
+Comanda
 .\"LINK2"
+Aspect
 .\"Appearance"
-Comanda Aspect deschide un dialog din care specifici tematica.
+deschide un dialog din care
+specifici tematica.
 .PP
+Comanda
 .\"LINK2"
+Învață taste
 .\"Learn keys"
-Comanda Învață taste deschide un dialog din care testezi unele taste care nu
-funcționează pe anumite terminale și le poți repara.
+deschide un dialog din
+care testezi unele taste care nu funcționează pe anumite terminale și le
+poți repara.
 .PP
+Comanda
 .\"LINK2"
+FS virtual
 .\"Virtual FS"
-Comanda FS virtual deschide un dialog din care specifici unele opțiuni
-legate de VFS.
+deschide un dialog din
+care specifici unele opțiuni legate de VFS.
 .PP
+Comanda
 .\"LINK2"
+Salvează setările
 .\"Save Setup"
+salvează setările
+curente ale meniurilor Stânga, Dreapta și Opțiuni. Este salvat și un număr
+mic de alte setări.
 .\"NODE "    Configuration"
-Comanda Salvează setările salvează setările curente ale meniurilor Stânga,
-Dreapta și Opțiuni. Este salvat și un număr mic de alte setări.
 .SH "    Configurare"
 Opțiunile din acest dialog sunt împărțite în mai multe grupuri: "Operații cu
 fișiere", "Modul tastei Esc", "Pauză după execuție" și "Alte opțiuni".
 .PP
-\fBOperații cu fișiere\fP
+.B Operații cu fișiere
 .PP
 \fIOperații detaliate.\fP Aceasta comută dacă operațiile de Copiere, Redenumire
 și Ștergere a fișierelor sunt detaliate (adică afișează o casetă de dialog
@@ -1533,7 +1658,7 @@ este posibil, înainte de operația de copiere.  Dezactivată implicit.
 datelor copy\-on\-write pe sistemele de fișiere locale care o suportă, în
 timpul operațiilor de copiere și mutare.  Activată implicit.
 .PP
-\fBModul tastei ESC.\fP
+.B Modul tastei ESC.
 .PP
 Implicit, Midnight Commander tratează tasta Esc ca prefix de taste.  De
 aceea trebuie să apeși codul Esc de două ori pentru a ieși dintr\-un
@@ -1551,7 +1676,7 @@ interval este o secundă (1000000 de microsecunde). Timeout\-ul poate fi setat
 și prin variabila de mediu KEYBOARD_KEY_TIMEOUT_US (tot în microsecunde),
 care are prioritate mai mare decât valoarea opțiunii Timeout.
 .PP
-\fBPauză după rulare\fP
+.B Pauză după rulare
 .PP
 După executarea comenzilor tale, Midnight Commander poate face o pauză,
 pentru a putea examina rezultatul comenzii.  Există trei setări posibile
@@ -1568,24 +1693,25 @@ xterm sau consola Linux).
 \fIAlways.\fP Programul va face o pauză după executarea tuturor comenzilor
 tale.
 .PP
-\fBAlte opțiuni\fP
+.B Alte opțiuni
 .PP
-.\"LINK2"
-.\"Internal File Editor"
 \fIFolosește editorul intern.\fP Dacă această opțiune este activată, pentru
 editarea fișierelor se folosește editorul de fișiere încorporat. Dacă
 opțiunea este dezactivată, se folosește editorul specificat în variabila de
 mediu \fBEDITOR\fP.  Dacă nu este specificat niciun editor, se folosește
-\fBvi\fP.  Vezi secțiunea despre editorul intern de fișiere\&.
-.PP
+\fBvi\fP.  Vezi secțiunea despre
 .\"LINK2"
-.\"Internal File Viewer"
+editorul intern de fișiere\&.
+.\"Internal File Editor"
+.PP
 \fIFolosește vizualizatorul intern.\fP Dacă această opțiune este activată,
 pentru vizualizarea fișierelor se folosește vizualizatorul de fișiere
 încorporat. Dacă opțiunea este dezactivată, se folosește pager\-ul specificat
 în variabila de mediu \fBPAGER\fP.  Dacă nu este specificat niciun pager, se
-folosește comanda \fBview\fP.  Vezi secțiunea despre vizualizatorul intern de
-fișiere\&.
+folosește comanda \fBview\fP.  Vezi secțiunea despre
+.\"LINK2"
+vizualizatorul intern de fișiere\&.
+.\"Internal File Viewer"
 .PP
 \fICere numele noului fișier.\fP Dacă această opțiune este activată, numele
 fișierului este cerut înainte de deschiderea unui fișier nou în editor.
@@ -1605,14 +1731,15 @@ conversii: '*' este înlocuit cu '.*' (zero sau mai multe caractere); '?'
 este înlocuit cu '.' (exact un caracter), iar '.' cu punctul literal. Dacă
 opțiunea este dezactivată, expresiile regulate sunt cele descrise în ed(1).
 .PP
-.\"LINK2"
-.\"Completion"
 \fICompletare: arată tot.\fP Implicit, Midnight Commander afișează toate
-completările posibile, dacă completarea este ambiguă, doar când apeși
-\fBAlt\-Tab\fP a doua oară.  Prima dată doar completează cât se poate de mult și
-emite un semnal sonor în caz de ambiguitate.  Activează această opțiune dacă
-vrei să vezi toate completările posibile chiar și după prima apăsare a lui
-\fBAlt\-Tab\fP.
+.\"LINK2"
+completările
+.\"Completion"
+posibile, dacă completarea este
+ambiguă, doar când apeși \fBAlt\-Tab\fP a doua oară.  Prima dată doar
+completează cât se poate de mult și emite un semnal sonor în caz de
+ambiguitate.  Activează această opțiune dacă vrei să vezi toate completările
+posibile chiar și după prima apăsare a lui \fBAlt\-Tab\fP.
 .PP
 \fILiniuță rotitoare.\fP Dacă această opțiune este activată, Midnight Commander
 afișează o liniuță rotitoare în colțul din dreapta sus, ca indicator al unei
@@ -1636,16 +1763,16 @@ fișierelor din greșeală devine mai dificilă.  Selecția implicită în dialo
 de confirmare a suprascrierii se schimbă din \fBDa\fP în \fBNu\fP.  Această
 opțiune este dezactivată implicit.
 .PP
-.\"NODE "    Layout"
 \fISalvare automată a setărilor.\fP Dacă această opțiune este activată, la
 ieșirea din Midnight Commander opțiunile configurabile ale Midnight
 Commander sunt salvate în fișierul ~/.config/mc/ini.
+.\"NODE "    Layout"
 .SH "    Aspect"
 Dialogul Aspect îți dă posibilitatea de a schimba aspectul general al
 ecranului. Opțiunile din acest dialog sunt împărțite în mai multe grupuri:
 "Împărțirea panourilor", "Ieșirea consolei" și "Alte opțiuni".
 .PP
-\fBÎmpărțirea panourilor\fP
+.B Împărțirea panourilor
 .PP
 Restul zonei ecranului este folosit pentru cele două panouri de dosare. Poți
 specifica dacă zona este împărțită între panouri în direcție \fIverticală\fP
@@ -1655,13 +1782,13 @@ sau \fIorizontală\fP. Aspectul panourilor poate fi schimbat cu scurtătura Alt\
 \fIÎmpărțire egală.\fP Implicit, panourile au mărimi egale. Cu această opțiune
 poți specifica o împărțire inegală.
 .PP
-\fBIeșire consolă\fP
+.B Ieșire consolă
 .PP
 În consola Linux sau FreeBSD poți specifica câte linii sunt afișate în
 fereastra de ieșire. Această opțiune este disponibilă doar dacă Midnight
 Commander rulează pe consola nativă.
 .PP
-\fBAlte opțiuni\fP
+.B Alte opțiuni
 .PP
 \fIBara de meniu vizibilă.\fP Dacă este activată, meniul principal al Midnight
 Commander este mereu vizibil pe rândul de sus al ecranului, deasupra
@@ -1683,12 +1810,12 @@ lucru curent și îl actualizează la nevoie.  Dacă emulatorul tău de terminal
 este defect și vezi o ieșire incorectă la pornire și la schimbarea
 dosarului, dezactivează această opțiune.  Activată implicit.
 .PP
-.\"NODE "    Panel options"
 \fIArată spațiul liber.\fP Dacă este activată, spațiul liber și spațiul total
 al sistemului de fișiere curent sunt afișate în cadrul de jos al
 panoului. Activată implicit.
+.\"NODE "    Panel options"
 .SH "    Opțiuni panou"
-\fBOpțiunile panoului principal\fP
+.B Opțiunile panoului principal
 .PP
 \fIArată mini\-starea.\fP Dacă este activată, în partea de jos a panourilor este
 afișată o linie cu informații de stare despre elementul selectat
@@ -1738,7 +1865,7 @@ opțiunile de sortare. Debifată implicit.
 activată, la ieșirea din Midnight Commander setările curente ale panourilor
 sunt salvate în fișierul ~/.config/mc/panels.ini.  Dezactivată implicit.
 .PP
-\fBNavigare\fP
+.B Navigare
 .PP
 \fIMișcare în stil Lynx.\fP Dacă această opțiune este activată, poți folosi
 tastele săgeți pentru a face chdir automat dacă selecția curentă este un
@@ -1758,49 +1885,58 @@ page up/down.
 \fIDerulare pe pagini cu mausul.\fP Controlează dacă derularea cu rotița
 mausului se face pe pagini sau linie cu linie în panouri.
 .PP
-\fBEvidențierea fișierelor\fP
+.B Evidențierea fișierelor
 .PP
-.\"LINK2"
-.\"Colors"
-.\"LINK2"
-.\"Listing Format..."
-.\"LINK2"
-.\"Filenames Highlight"
 Poți specifica dacă \fIpermisiunile\fP și \fItipurile de fișiere\fP să fie
-evidențiate cu Culori\& distinctive.  Dacă evidențierea permisiunilor este
-activată, părțile câmpurilor de afișare \fIperm\fP și \fImode\fP care se aplică
+evidențiate cu
+.\"LINK2"
+culori distinctive\&.
+.\"Colors"
+Dacă
+evidențierea permisiunilor este activată, părțile
+.\"LINK2"
+câmpurilor de afișare
+.\"Listing Format..."
+\fIperm\fP și \fImode\fP care se aplică
 utilizatorului care rulează Midnight Commander sunt evidențiate cu culoarea
 definită de cuvântul cheie \fIselected\fP.  Dacă evidențierea tipurilor de
 fișiere este activată, numele fișierelor sunt colorate conform regulilor
-descrise în fișierul %sysconfdir%/mc/filehighlight.ini. Vezi Evidențierea
-numelor de fișiere pentru mai multe informații.
-.PP
-\fBCăutare rapidă\fP
-.PP
+descrise în fișierul %sysconfdir%/mc/filehighlight.ini. Vezi
 .\"LINK2"
+Evidențierea numelor de fișiere
+.\"Filenames Highlight"
+pentru mai multe informații.
+.PP
+.B Căutare rapidă
+.PP
+Poți specifica cum să funcționeze modul
+.\"LINK2"
+Căutare rapidă\&:
 .\"Quick search"
+fără a ține cont de majuscule și minuscule, ținând cont
+de ele, sau potrivit ordinii de sortare a panoului: cu sau fără diferențiere
+între majuscule și minuscule.
 .\"NODE "    Confirmation"
-Poți specifica cum să funcționeze modul Căutare rapidă: fără a ține cont de
-majuscule și minuscule, ținând cont de ele, sau potrivit ordinii de sortare
-a panoului: cu sau fără diferențiere între majuscule și minuscule.
 .SH "    Confirmare"
-.\"NODE "    Appearance"
 În acest dialog configurezi opțiunile de confirmare pentru ștergerea
 fișierelor, suprascrierea fișierelor, execuția prin apăsarea Enter, ieșirea
 din program, ștergerea intrărilor din lista rapidă de dosare și curățarea
 istoricului.
+.\"NODE "    Appearance"
 .SH "    Aspect"
 În acest dialog poți selecta tematica folosită și poți activa umbra pentru
 dialoguri și meniuri derulante.
 .PP
+Vezi secțiunea
 .\"LINK2"
+Tematici
 .\"Skins"
-Vezi secțiunea Tematici pentru detalii tehnice despre fișierele de definire
-a tematicilor.
+pentru detalii tehnice
+despre fișierele de definire a tematicilor.
 .PP
-.\"NODE "    Learn keys"
 \fIUmbre.\fP Dacă această opțiune este activată, toate dialogurile și meniurile
 derulante vor avea umbră.
+.\"NODE "    Learn keys"
 .SH "    Învață taste"
 Acest dialog îți permite să testezi și să redefinești tastele funcționale,
 săgețile cursorului și alte taste, pentru a le face să funcționeze corect pe
@@ -1826,16 +1962,16 @@ care îți cere să apeși acea tastă.  Fă\-o și așteaptă până când case
 mesaj dispare.  Dacă vrei să abandonezi, apasă o singură dată Escape și
 așteaptă.
 .PP
-.\"NODE "    Virtual FS"
 Când ai terminat cu toate tastele, le poți Salva.  Definițiile tastelor pe
 care le\-ai redefinit vor fi scrise în secțiunea [terminal:TERM] a fișierului
 tău ~/.config/mc/ini (unde TERM este numele terminalului tău curent).
 Definițiile tastelor care funcționau deja corect nu sunt salvate.
+.\"NODE "    Virtual FS"
 .SH "    Sistem virtual de fișiere"
+Această opțiune îți oferă controlul asupra setărilor
 .\"LINK2"
+Sistemului virtual de fișiere\&.
 .\"Virtual File System"
-Această opțiune îți oferă controlul asupra setărilor Sistemului virtual de
-fișiere\&.
 .PP
 Midnight Commander păstrează în memorie informațiile legate de unele sisteme
 de fișiere virtuale pentru a accelera accesul la fișierele din sistemul de
@@ -1865,9 +2001,11 @@ expiră, toate resursele asociate sistemului de fișiere sunt eliberate.
 Timpul implicit este setat la un minut.
 .PP
 .\"LINK2"
+Sistemul de fișiere FTP
 .\"FTP File System"
-Sistemul de fișiere FTP (ftpfs) îți permite să răsfoiești dosarele de pe
-servere FTP la distanță.  Are mai multe opțiuni.
+(ftpfs) îți
+permite să răsfoiești dosarele de pe servere FTP la distanță.  Are mai multe
+opțiuni.
 .PP
 \fIftp anonymous password\fP este parola folosită când te conectezi ca
 "anonymous".  Unele site\-uri cer o adresă de e\-mail validă.  Pe de altă
@@ -1883,10 +2021,11 @@ Poți defini o gazdă proxy FTP pentru lucrul cu FTP.  Reține că majoritatea
 firewall\-urilor moderne sunt complet transparente cel puțin pentru FTP pasiv
 (vezi mai jos), așa că proxy\-urile FTP sunt considerate învechite.
 .PP
-.\"LINK2"
-.\"FTP File System"
 Dacă \fIAlways use ftp proxy\fP nu este setată, poți folosi semnul exclamării
-pentru a activa proxy\-ul pentru anumite gazde.  Vezi Sistemul de fișiere FTP
+pentru a activa proxy\-ul pentru anumite gazde.  Vezi
+.\"LINK2"
+Sistemul de fișiere FTP
+.\"FTP File System"
 pentru exemple.
 .PP
 Dacă această opțiune este setată, programul va face două lucruri: va
@@ -1900,12 +2039,12 @@ Poți activa folosirea fișierului \fI~/.netrc\fP, care păstrează numele de
 utilizator și parolele pentru serverele ftp.  Vezi netrc (5) pentru
 descrierea formatului .netrc.
 .PP
-.\"NODE "    Save Setup"
 \fIUse passive mode\fP activează folosirea modului pasiv FTP, în care
 conexiunea pentru transferul de date este inițiată de client, nu de server.
 Această opțiune este recomandată și activată implicit.  Dacă opțiunea este
 dezactivată, conexiunea de date este inițiată de server.  Este posibil să nu
 funcționeze cu unele firewall\-uri.
+.\"NODE "    Save Setup"
 .SH "    Salvează setările"
 La pornire, Midnight Commander încearcă să încarce informațiile de
 inițializare din fișierul ~/.config/mc/ini.  Dacă acest fișier nu există, se
@@ -1913,21 +2052,26 @@ folosește fișierul de sistem \fB%sysconfdir%/mc/mc.ini\fP. Dacă nici acesta n
 există, se folosește fișierul de sistem \fB%pkgdatadir%/mc.ini\fP. Dacă nici
 acesta nu există, MC folosește setările implicite.
 .PP
-.\"LINK2"
-.\"Left and Right Menus"
-.\"LINK2"
-.\"Options Menu"
 Comanda \fISave Setup\fP creează fișierul ~/.config/mc/ini salvând setările
-curente ale meniurilor Stânga, Dreapta și Opțiuni.
+curente ale meniurilor
+.\"LINK2"
+Stânga, Dreapta
+.\"Left and Right Menus"
+și
+.\"LINK2"
+Opțiuni\&.
+.\"Options Menu"
 .PP
 Dacă activezi opțiunea \fIauto save setup\fP, MC va salva întotdeauna setările
 curente la ieșire.
 .PP
-.\"LINK2"
-.\"Special Settings"
 Există și setări care nu pot fi schimbate din meniuri. Pentru a schimba
 aceste setări trebuie să editezi fișierul de configurare cu editorul tău
-preferat. Vezi secțiunea Setări speciale pentru mai multe informații.
+preferat. Vezi secțiunea
+.\"LINK2"
+Setări speciale
+.\"Special Settings"
+pentru mai multe informații.
 .SH ""
 .\"NODE "Executing operating system commands"
 .SH "Executarea comenzilor sistemului de operare"
@@ -1935,16 +2079,18 @@ Poți executa comenzi tastându\-le direct în linia de introducere a Midnight
 Commander sau selectând programul pe care vrei să\-l execuți cu bara de
 selecție dintr\-unul dintre panouri și apăsând Enter.
 .PP
+Dacă apeși Enter pe un fișier care nu este executabil, Midnight Commander
+verifică extensia fișierului selectat în raport cu extensiile din
 .\"LINK2"
+Fișierul de extensii\&.
 .\"Edit Extension File"
+Dacă se
+găsește o potrivire, se execută codul asociat acelei extensii. Înainte de
+executarea comenzii are loc o
 .\"LINK2"
+expandare foarte simplă de macro\-uri\&.
 .\"Macro Substitution"
 .\"NODE "  The cd internal command"
-Dacă apeși Enter pe un fișier care nu este executabil, Midnight Commander
-verifică extensia fișierului selectat în raport cu extensiile din Fișierul
-de extensii\&.  Dacă se găsește o potrivire, se execută codul asociat acelei
-extensii. Înainte de executarea comenzii are loc o expandare foarte simplă
-de macro\-uri.
 .SH "  Comanda internă cd"
 Comanda \fIcd\fP este interpretată de Midnight Commander, nu este transmisă
 shell\-ului pentru execuție.  De aceea este posibil să nu gestioneze toată
@@ -1965,36 +2111,40 @@ folosind numele special de dosar '\-', astfel: \fBcd \-\fP
 dosarul curent, atunci Midnight Commander folosește valoarea variabilei de
 mediu \fBCDPATH\fP pentru a căuta dosarul în oricare dintre dosarele numite.
 .PP
-.\"NODE "  Macro Substitution"
 De exemplu, poți seta variabila \fBCDPATH\fP la ~/src:/usr/src, ceea ce îți
 permite să schimbi dosarul în oricare dintre dosarele din ~/src și /usr/src,
 din orice loc din sistemul de fișiere, folosind numele său relativ (de
 exemplu, cd linux te\-ar putea duce în /usr/src/linux).
+.\"NODE "  Macro Substitution"
 .SH "  Substituția de macro\-uri"
+La accesarea unui
 .\"LINK2"
+meniu al utilizatorului\&,
 .\"Edit Menu File"
+la executarea unei
 .\"LINK2"
+comenzi dependente de extensie
 .\"Edit Extension File"
-La accesarea unui meniu al utilizatorului\&, la executarea unei comenzi
-dependente de extensie\& sau la rularea unei comenzi din linia de
-introducere a comenzilor, are loc o substituție simplă de macro\-uri.
+sau la rularea unei comenzi
+din linia de introducere a comenzilor, are loc o substituție simplă de
+macro\-uri.
 .PP
 Macro\-urile sunt:
 .TP 
-\fI%i\fP
+.I %i
 Indentarea de spațiu liber, egală cu poziția coloanei cursorului.  Doar
 pentru meniul de editare.
 .TP 
-\fI%y\fP
+.I %y
 Tipul de sintaxă al fișierului curent. Doar pentru meniul de editare.
 .TP 
-\fI%b\fP
+.I %b
 Numele fișierului de bloc.
 .TP 
-\fI%e\fP
+.I %e
 Numele fișierului de erori.
 .TP 
-\fI%m\fP
+.I %m
 Numele meniului curent.
 .TP 
 \fI%f\fP și \fI%p\fP
@@ -2002,47 +2152,48 @@ Numele meniului curent.
 din panoul selectat.  În meniul utilizatorului din mcedit: numele fișierului
 deschis.
 .TP 
-\fI%x\fP
+.I %x
 Extensia numelui fișierului curent.
 .TP 
-\fI%n\fP
+.I %n
 Numele fișierului curent fără extensie.
 .TP 
-\fI%d\fP
+.I %d
 Numele dosarului curent.
 .TP 
-\fI%F\fP
+.I %F
 Fișierul curent din panoul neselectat.
 .TP 
-\fI%D\fP
+.I %D
 Numele dosarului din panoul neselectat.
 .TP 
-\fI%t\fP
+.I %t
 Fișierele marcate curent.
 .TP 
-\fI%T\fP
+.I %T
 Fișierele marcate din panoul neselectat.
-.TP 
 .TP 
 \fI%v\fP și \fI%V\fP
 Similar cu %t și %T, dar se expandează la numele complete ale fișierelor
-marcate.  \fI%u\fP și \fI%U\fP Similar cu macro\-urile %t și %T, dar în plus
-fișierele sunt demarcate.  Poți folosi acest macro doar o dată pe intrare de
-fișier de meniu sau de fișier de extensii, deoarece data viitoare nu vor mai
-exista fișiere marcate.
+marcate.
+.TP 
+\fI%u\fP și \fI%U\fP
+Similar cu macro\-urile %t și %T, dar în plus fișierele sunt demarcate.  Poți
+folosi acest macro doar o dată pe intrare de fișier de meniu sau de fișier
+de extensii, deoarece data viitoare nu vor mai exista fișiere marcate.
 .TP 
 \fI%s\fP și \fI%S\fP
 Fișierele selectate: fișierele marcate, dacă există. Altfel, fișierul
 curent.
 .TP 
-\fI%cd\fP
-.\"LINK2"
-.\"Virtual File System"
+.I %cd
 Acesta este un macro special care schimbă dosarul curent în dosarul
 specificat înaintea lui.  Este folosit în principal ca interfață către
+.\"LINK2"
 Sistemul virtual de fișiere\&.
+.\"Virtual File System"
 .TP 
-\fI%view\fP
+.I %view
 Acest macro se folosește pentru a invoca vizualizatorul intern.  Poate fi
 folosit singur sau cu argumente.  Dacă transmiți argumente acestui macro,
 ele trebuie încadrate între paranteze.
@@ -2053,19 +2204,19 @@ vizualizatorului să interpreteze secvențele nroff de text aldin și
 subliniat; \fIunformatted\fP pentru a\-i spune vizualizatorului să nu
 interpreteze comenzile nroff pentru text aldin sau subliniat.
 .TP 
-\fI%%\fP
+.I %%
 Caracterul %
 .TP 
-\fI%{niște text}\fP
+.I %{niște text}
 Cere substituția. Se afișează o casetă de introducere, iar textul dintre
 acolade este folosit ca prompt. Macro\-ul este înlocuit cu textul tastat de
 utilizator. Utilizatorul poate apăsa Esc sau F10 pentru a anula. Acest macro
 nu funcționează încă în linia de comandă.
 .TP 
-\fI%var{ENV:default}\fP
-.\"NODE "  The subshell support"
+.I %var{ENV:default}
 Dacă variabila de mediu \fIENV\fP nu este setată, se înlocuiește cu
 \fIdefault\fP.  Altfel se înlocuiește cu valoarea lui \fIENV\fP.
+.\"NODE "  The subshell support"
 .SH "  Suport pentru subshell"
 Suportul pentru subshell este o opțiune la compilare, care funcționează cu
 shell\-urile: bash, ash (BusyBox și Debian), (o/m)ksh, tcsh, zsh și fish.
@@ -2114,14 +2265,16 @@ folosești în prezent în shell.
 (Există o problemă cunoscută la folosirea fish: prompt\-ul este afișat doar
 în modul ecran complet (Ctrl\-o), nu și când panourile sunt vizibile.)
 .PP
+Secțiunea
 .\"LINK2"
+OPȚIUNI
 .\"OPTIONS"
+are mai multe informații
+despre cum poți controla folosirea subshell\-ului (\-U/\-u).  În plus, pentru a
+seta un subshell specific, diferit de variabila ta SHELL curentă sau de
+shell\-ul de autentificare definit în /etc/passwd, poți porni MC astfel:
+.B SHELL=/bin/myshell mc
 .\"NODE "Chmod"
-Secțiunea OPȚIUNI are mai multe informații despre cum poți controla
-folosirea subshell\-ului (\-U/\-u).  În plus, pentru a seta un subshell
-specific, diferit de variabila ta SHELL curentă sau de shell\-ul de
-autentificare definit în /etc/passwd, poți porni MC astfel:
-\fBSHELL=/bin/myshell mc\fP
 .SH Chmod
 Fereastra Chmod se folosește pentru a schimba biții de atribute ai unui grup
 de fișiere și dosare.  Poate fi pornită cu combinația de taste C\-x c.
@@ -2162,21 +2315,26 @@ selectate
 .PP
 \fB[Set]\fP setează atributele unui fișier
 .PP
-.\"NODE "Chown"
 \fB[Cancel]\fP anulează comanda Chmod
+.\"NODE "Chown"
 .SH Chown
-.\"NODE "Advanced Chown"
 Comanda Chown se folosește pentru a schimba proprietarul/grupul unui
 fișier. Tasta rapidă pentru această comandă este C\-x o.
+.\"NODE "Advanced Chown"
 .SH "Chown avansat"
+Comanda Chown avansat este comanda
 .\"LINK2"
+Chmod
 .\"Chmod"
+și
+comanda
 .\"LINK2"
+Chown
 .\"Chown"
-.\"NODE "Chattr"
-Comanda Chown avansat este comanda Chmod și comanda Chown combinate într\-o
-singură fereastră. Poți schimba odată permisiunile și proprietarul/grupul
+combinate într\-o singură
+fereastră. Poți schimba odată permisiunile și proprietarul/grupul
 fișierelor.
+.\"NODE "Chattr"
 .SH Chattr
 Fereastra Chattr se folosește pentru a schimba atributele unui grup de
 fișiere și dosare de pe un sistem de fișiere Linux. Poate fi pornită cu
@@ -2213,8 +2371,8 @@ fișierelor selectate.
 .PP
 \fB[Set]\fP setează atributele unui fișier.
 .PP
-.\"NODE "File Operations"
 \fB[Cancel]\fP anulează comanda Chattr.
+.\"NODE "File Operations"
 .SH "Operații cu fișiere"
 Când copiezi, muți sau ștergi fișiere, Midnight Commander afișează dialogul
 operațiilor cu fișiere.  Acesta arată fișierele procesate în prezent și
@@ -2228,14 +2386,14 @@ afișate.
 .PP
 În partea de jos a dialogului există trei butoane:
 .TP 
-\fB[Skip]\fP
+.B [Skip]
 buton pentru a sări peste restul fișierului curent.
 .TP 
-\fB[Suspend]\fP
+.B [Suspend]
 buton pentru a suspenda operația cu fișiere; butonul se transformă în
 \fB[Continue]\fP, care continuă operația suspendată.
 .TP 
-\fB[Abort]\fP
+.B [Abort]
 buton pentru a abandona întreaga operație; restul fișierelor sunt omise.
 .PP
 Există alte trei dialoguri pe care le poți întâlni în timpul operațiilor cu
@@ -2244,54 +2402,54 @@ fișiere.
 Dialogul de eroare informează despre condițiile de eroare și are patru
 opțiuni:
 .TP 
-\fB[Ignore]\fP
+.B [Ignore]
 buton pentru a ignora această eroare.
 .TP 
-\fB[Ignore all]\fP
+.B [Ignore all]
 buton pentru a ignora această eroare și toate erorile viitoare.
 .TP 
-\fB[Abort]\fP
+.B [Abort]
 buton pentru a abandona complet operația.
 .TP 
-\fB[Retry]\fP
+.B [Retry]
 buton pentru a continua dacă ai rezolvat problema de pe alt terminal.
 .PP
 Dialogul de înlocuire este afișat când încerci să copiezi sau să muți un
 fișier peste un fișier existent.  Dialogul arată datele și mărimile ambelor
 fișiere. În acest dialog există următoarele butoane:
 .TP 
-\fB[Yes]\fP
+.B [Yes]
 buton pentru a suprascrie fișierul.
 .TP 
-\fB[No]\fP
+.B [No]
 buton pentru a sări peste fișier.
 .TP 
-\fB[Append]\fP
+.B [Append]
 buton pentru a adăuga fișierul sursă la fișierul destinație.
 .TP 
-\fB[Reget]\fP
+.B [Reget]
 buton pentru a adăuga restul fișierului sursă la fișierul destinație.  Acest
 buton este afișat doar dacă mărimea fișierului destinație este nenulă și mai
 mică decât mărimea fișierului sursă.
 .TP 
-\fB[All]\fP
+.B [All]
 buton pentru a suprascrie toate fișierele.
 .TP 
-\fB[Older]\fP
+.B [Older]
 buton pentru a suprascrie dacă fișierul sursă este mai nou decât fișierul
 destinație.
 .TP 
-\fB[None]\fP
+.B [None]
 buton pentru a nu suprascrie niciodată fișiere
 .TP 
-\fB[Smaller]\fP
+.B [Smaller]
 buton pentru a suprascrie dacă mărimea fișierului sursă este mai mică decât
 cea a destinației.
 .TP 
-\fB[Size differs]\fP
+.B [Size differs]
 buton pentru a suprascrie fișierele cu mărimi diferite.
 .TP 
-\fB[Abort]\fP
+.B [Abort]
 buton pentru a abandona întreaga operație.
 .PP
 Dacă caseta \fBDon't overwrite with zero length file\fP este bifată, fișierele
@@ -2300,25 +2458,25 @@ sursă de mărime zero nu suprascriu fișierele destinație de mărime nenulă.
 Dialogul de ștergere recursivă este afișat când încerci să ștergi un dosar
 care nu este gol. În acest dialog există următoarele butoane:
 .TP 
-\fB[Yes]\fP
+.B [Yes]
 buton pentru a șterge recursiv dosarul.
 .TP 
-\fB[No]\fP
+.B [No]
 buton pentru a sări peste dosar.
 .TP 
-\fB[All]\fP
+.B [All]
 buton pentru a șterge toate dosarele.
 .TP 
-\fB[None]\fP
+.B [None]
 buton pentru a sări peste toate dosarele care nu sunt goale.
 .TP 
-\fB[Abort]\fP
+.B [Abort]
 buton pentru a abandona întreaga operație.
 .PP
-.\"NODE "Mask Copy/Rename"
 Dacă ai fișiere marcate și faci o operație asupra lor, doar fișierele la
 care operația a reușit sunt demarcate. Fișierele eșuate și cele omise rămân
 marcate.
+.\"NODE "Mask Copy/Rename"
 .SH "Copierea/redenumirea cu mască"
 Operațiile de copiere/mutare îți permit să transformi ușor numele
 fișierelor.  Pentru aceasta trebuie să specifici masca sursă corectă și, de
@@ -2329,13 +2487,13 @@ marcate care se potrivesc cu masca sursă sunt redenumite.
 .PP
 Există și alte opțiuni pe care le poți seta:
 .PP
-\fBUrmărește legăturile\fP
+.B Urmărește legăturile
 .PP
 determină dacă legăturile simbolice și cele reale din dosarul sursă
 (recursiv în subdosare) devin legături noi în dosarul destinație sau dacă
 vrei să le copiezi conținutul.
 .PP
-\fBIntră în subdosare\fP
+.B Intră în subdosare
 .PP
 determină comportamentul atunci când dosarul sursă urmează să fie copiat,
 dar dosarul destinație există deja.  Acțiunea implicită este copierea
@@ -2348,18 +2506,18 @@ De exemplu, vrei să copiezi dosarul \fI/foo\fP, care conține fișierul \fIbar\
 fișierul \fI/bla/foo/bar\fP.  Activând această opțiune, se va crea dosarul
 \fI/bla/foo/foo\fP, iar \fI/foo/bar\fP va fi copiat în \fI/bla/foo/foo/bar\fP.
 .PP
-\fBPăstrează atributele\fP
+.B Păstrează atributele
 .PP
 determină dacă se păstrează permisiunile, marcajele de timp și (dacă ești
 root) proprietarul fișierelor originale.  Dacă această opțiune nu este
 setată, se va respecta valoarea curentă a umask.
 .PP
-\fBPăstrează atributele ext2\fP
+.B Păstrează atributele ext2
 .PP
 determină dacă se păstrează atributele fișierelor și dosarelor pe un sistem
 de fișiere ext2/3/4.
 .PP
-\fBFolosește modele shell\fP
+.B Folosește modele shell
 .PP
 Când această opțiune este activată, poți folosi wildcard\-urile '*' și '?' în
 masca sursă.  Ele funcționează ca în shell.  În masca destinație sunt
@@ -2379,7 +2537,7 @@ Presupune că vrei să interschimbi numele de bază și extensia, astfel încât
 "file.c" să devină "c.file" și așa mai departe.  Masca sursă pentru aceasta
 este "*.*", iar destinația este "\e2.\e1".
 .PP
-\fBFără modele shell\fP
+.B Fără modele shell
 .PP
 Când opțiunea modele shell este dezactivată, MC nu mai face gruparea
 automată. Trebuie să folosești expresii '\e(...\e)' în masca sursă pentru a
@@ -2397,7 +2555,7 @@ Să presupunem că vrei să interschimbi numele de bază și extensia, astfel
 încât "file.c" să devină "c.file" și așa mai departe. Masca sursă pentru
 aceasta este "^\e(.*\e)\e.\e(.*\e)$", iar destinația este "\e2.\e1".
 .PP
-\fBConversii de majuscule și minuscule\fP
+.B Conversii de majuscule și minuscule
 .PP
 Poți schimba și majusculele/minusculele din numele fișierelor.  Dacă
 folosești '\eu' sau '\el' în masca destinație, următorul caracter va fi
@@ -2417,7 +2575,7 @@ inițiala majusculă, iar restul minuscule.
 Poți folosi și '\e' ca fel de caracter de citare. De exemplu, '\e\e' este un
 backslash, iar '\e*' este un asterisc.
 .PP
-\fBLegături simbolice stabile\fP
+.B Legături simbolice stabile
 .PP
 comandă lui Midnight Commander să schimbe legăturile simbolice din
 destinație, astfel încât să indice aceeași locație ca înainte. La legăturile
@@ -2429,13 +2587,14 @@ pe disc).
 
 .\"NODE "Select/Unselect Files"
 .SH "Selectarea/Deselectarea fișierelor"
-.\"LINK2"
-.\"Input Line Keys"
 Dialogul de selectare sau deselectare a unui grup de fișiere și dosare.
-Linia de introducere permite introducerea expresiei regulate a numelor de
-fișiere care vor fi selectate/deselectate.
+.\"LINK2"
+Linia de introducere
+.\"Input Line Keys"
+permite
+introducerea expresiei regulate a numelor de fișiere care vor fi
+selectate/deselectate.
 .PP
-.\"NODE "Diff Viewer"
 Când caseta \fIFiles only\fP este bifată, vor fi selectate doar fișierele.
 Când \fIFiles only\fP este debifată, vor fi selectate atât fișierele, cât și
 dosarele.  Când caseta \fIShell Patterns\fP este bifată, expresia regulată este
@@ -2444,6 +2603,7 @@ sau mai multe caractere și ? reprezentând un singur caracter). Dacă \fIShell 
 obișnuite (vezi ed (1)). Când caseta \fICase sensitive\fP este bifată, selecția
 va ține cont de majuscule și minuscule.  Când \fICase sensitive\fP este
 debifată, diferența dintre majuscule și minuscule este ignorată.
+.\"NODE "Diff Viewer"
 .SH "Vizualizatorul intern de diferențe"
 mcdiff este un instrument vizual de diferențe. Poți compara două fișiere și
 le poți edita pe loc (diferențele sunt actualizate dinamic). Poți răsfoi și
@@ -2453,97 +2613,97 @@ vizualiza o copie de lucru din sisteme populare de control al versiunilor
 În vizualizatorul intern de diferențe al Midnight Commander sunt disponibile
 următoarele scurtături.
 .TP 
-\fBF1\fP
+.B F1
 Pornește vizualizatorul hipertext de ajutor încorporat.
 .TP 
-\fBF2\fP
+.B F2
 Salvează fișierele modificate.
 .TP 
-\fBF4\fP
+.B F4
 Editează în editorul intern fișierul din panoul stâng.
 .TP 
-\fBF14\fP
+.B F14
 Editează în editorul intern fișierul din panoul drept.
 .TP 
-\fBF5\fP
+.B F5
 Îmbină bucata curentă. Va fi îmbinată doar bucata curentă.
 .TP 
-\fBF7\fP
+.B F7
 Pornește căutarea.
 .TP 
-\fBF17\fP
+.B F17
 Continuă căutarea.
 .TP 
-\fBF10, Esc, q\fP
+.B F10, Esc, q
 Iese din vizualizatorul de diferențe.
 .TP 
-\fBAlt\-s, s\fP
+.B Alt\-s, s
 Comută afișarea stării bucăților.
 .TP 
-\fBAlt\-n, l\fP
+.B Alt\-n, l
 Comută afișarea numerelor de linie.
 .TP 
-\fBf\fP
+.B f
 Maximizează panoul stâng.
 .TP 
-\fB=\fP
+.B =
 Face panourile de lățime egală.
 .TP 
-\fB>\fP
+.B >
 Reduce mărimea panoului drept.
 .TP 
-\fB<\fP
+.B <
 Reduce mărimea panoului stâng.
 .TP 
-\fBc\fP
+.B c
 Comută afișarea simbolului de retur de car (CR) de la sfârșitul liniei ca
 ^M.
 .TP 
-\fB2, 3, 4, 8\fP
+.B 2, 3, 4, 8
 Setează mărimea tabulării
 .TP 
-\fBC\-u\fP
+.B C\-u
 Interschimbă conținutul panourilor de diferențe.
 .TP 
-\fBC\-r\fP
+.B C\-r
 Reîmprospătează ecranul.
 .TP 
-\fBC\-o\fP
+.B C\-o
 Trece la subshell și afișează ecranul de comenzi.
 .TP 
-\fBEnter, Space, n\fP
+.B Enter, Space, n
 Găsește următoarea bucată diferită.
 .TP 
-\fBBackspace, p\fP
+.B Backspace, p
 Găsește bucata diferită anterioară.
 .TP 
-\fBg\fP
+.B g
 Salt la linie.
 .TP 
-\fBDown\fP
+.B Down
 Derulează o linie înainte.
 .TP 
-\fBUp\fP
+.B Up
 Derulează o linie înapoi.
 .TP 
-\fBPageUp\fP
+.B PageUp
 Se deplasează o pagină în sus.
 .TP 
-\fBPageDown\fP
+.B PageDown
 Se deplasează o pagină în jos.
 .TP 
-\fBHome, A1\fP
+.B Home, A1
 Se deplasează la începutul liniei.
 .TP 
-\fBEnd\fP
+.B End
 Se deplasează la sfârșitul liniei.
 .TP 
-\fBC\-Home\fP
+.B C\-Home
 Se deplasează la începutul fișierului.
 .TP 
-\fBC\-End, C1\fP
-.\"NODE "Internal File Viewer"
+.B C\-End, C1
 Se deplasează la sfârșitul fișierului.
+.\"NODE "Internal File Viewer"
 .SH "Vizualizatorul intern de fișiere"
 Vizualizatorul intern de fișiere oferă două moduri de afișare: ASCII și
 hex.  Pentru a comuta între moduri, folosește tasta F4.
@@ -2571,96 +2731,97 @@ octal.
 Iată o listă a acțiunilor asociate fiecărei taste pe care le gestionează
 Midnight Commander în vizualizatorul intern de fișiere.
 .TP 
-\fBF1\fP
+.B F1
 Pornește vizualizatorul hipertext de ajutor încorporat.
 .TP 
-\fBF2\fP
+.B F2
 Comută modul de împachetare a liniilor.
 .TP 
-\fBF4\fP
+.B F4
 Comută modul hex.
 .TP 
-\fBF5\fP
+.B F5
 Salt. Poți specifica un număr de linie, un decalaj sau un procent din
 mărimea fișierului pentru poziția pe care vrei să o vezi.
 .TP 
-\fBF7, /, ?\fP
+.B F7, /, ?
 Pornește căutarea. Aceste taste deschid fereastra de dialog care îți permite
 să configurezi opțiunile de căutare. Dacă tasta este ?, opțiunea "Backwards"
 este activată.
 .TP 
-\fBC\-s\fP
+.B C\-s
 Continuă căutarea înainte.
 .TP 
-\fBC\-r\fP
+.B C\-r
 Continuă căutarea inversă.
 .TP 
-\fBF17, n\fP
+.B F17, n
 Continuă căutarea în direcția aleasă.
 .TP 
-\fBN\fP
+.B N
 Schimbă temporar direcția de căutare: înapoi dacă este aleasă căutarea
 înainte, și invers.
 .TP 
-\fBF8\fP
+.B F8
 Comută modul Brut/Procesat: va afișa fișierul așa cum se găsește pe disc
 sau, dacă în fișierul mc.ext.ini a fost specificat un filtru de procesare,
 rezultatul filtrului. Modul curent este mereu cel diferit de cel scris pe
 eticheta butonului, deoarece pe buton este modul în care intri apăsând acea
 tastă.
 .TP 
-\fBF9\fP
+.B F9
 Comută modul formatat/neformatat: când modul formatat este activat,
 vizualizatorul va interpreta unele secvențe de șiruri pentru a afișa text
 aldin și subliniat cu culori diferite. De asemenea, pe eticheta butonului
 este celălalt mod decât cel curent.
 .TP 
-\fBF10, Esc.\fP
+.B F10, Esc.
 Iese din vizualizatorul intern de fișiere.
 .TP 
-\fBPageDown, space, C\-v.\fP
+.B PageDown, space, C\-v.
 Derulează o pagină înainte.
 .TP 
-\fBPageUp, Alt\-v, C\-b, Backspace.\fP
+.B PageUp, Alt\-v, C\-b, Backspace.
 Derulează o pagină înapoi.
 .TP 
-\fBDown\fP
+.B Down
 Derulează o linie înainte.
 .TP 
-\fBUp\fP
+.B Up
 Derulează o linie înapoi.
 .TP 
-\fBC\-l\fP
+.B C\-l
 Reîmprospătează ecranul.
 .TP 
-\fBC\-o\fP
+.B C\-o
 Trece la subshell și afișează ecranul de comenzi.
 .TP 
-\fB[n] m\fP
+.B [n] m
 Setează marcajul n.
 .TP 
-\fB[n] r\fP
+.B [n] r
 Salt la marcajul n.
 .TP 
-\fBC\-f\fP
+.B C\-f
 Salt la fișierul următor.
 .TP 
-\fBC\-b\fP
+.B C\-b
 Salt la fișierul anterior.
 .TP 
-\fBAlt\-r\fP
+.B Alt\-r
 Comută rigla.
 .TP 
-\fBAlt\-e\fP
+.B Alt\-e
 pentru a schimba setul de caractere al textului afișat poți folosi Alt\-e
 (M\-e).  Recodarea se face din pagina de cod selectată în pagina de cod a
 sistemului. Pentru a anula recodarea poți selecta "<Fără conversie>"
 în dialogul de selecție a setului de caractere.
 .PP
-.\"LINK2"
-.\"Edit Extension File"
 Este posibil să\-i spui vizualizatorului de fișiere cum să afișeze un fișier;
-vezi secțiunea Editare fișier de extensii
+vezi
+.\"LINK2"
+secțiunea Editare fișier de extensii
+.\"Edit Extension File"
 
 .\"NODE "Internal File Editor"
 .SH "Editorul intern de fișiere"
@@ -2681,8 +2842,8 @@ de text prin comenzi shell precum indent și ispell.
 Secțiuni:
 .IP
 .\"LINK2"
-.\"Internal File Editor / options"
 Opțiunile editorului în fișierul ini
+.\"Internal File Editor / options"
 .PP
 Editorul este foarte ușor de folosit și nu necesită îndrumare. Pentru a
 vedea ce face fiecare tastă, consultă meniul derulant potrivit. Alte taste:
@@ -2720,7 +2881,7 @@ când îl folosești.
 Unele opțiuni ale editorului din fișierul ini sunt descrise în această
 secțiune.  Opțiunile sunt plasate în secțiunea [Midnight\-Commander]
 .TP 
-\fIeditor_wordcompletion_collect_entire_file\fP
+.I editor_wordcompletion_collect_entire_file
 Caută candidați de autocompletare în întregul fișier sau doar de la
 începutul fișierului până la poziția cursorului (0)
 
@@ -2734,16 +2895,16 @@ mai multor manageri de fișiere nu este însă suportată în prezent.
 Să numim fiecare dintre aceste module un ecran. Există trei moduri de a
 comuta între ecrane, folosind una dintre aceste scurtături globale:
 .TP 
-\fBAlt\-}\fP
+.B Alt\-}
 trece la ecranul următor;
 .TP 
-\fBAlt\-{\fP
+.B Alt\-{
 trece la ecranul anterior;
 .TP 
-\fBAlt\-`\fP
-.\"NODE "Completion"
+.B Alt\-`
 deschide o fereastră de dialog cu lista ecranelor deschise în prezent (sau
 folosește elementul de meniu "Lista ecranelor").
+.\"NODE "Completion"
 .SH Completare
 Lasă Midnight Commander să tasteze în locul tău.
 .PP
@@ -2756,28 +2917,33 @@ atunci și cuvintele rezervate ale shell\-ului și comenzile încorporate ale
 shell\-ului).  Dacă niciuna nu se potrivește, se încearcă completarea numelui
 de fișier.
 .PP
-.\"LINK2"
-.\"Configuration"
-.\"LINK2"
-.\"Configuration"
-.\"LINK2"
-.\"Configuration"
 Completarea numelor de fișiere, de utilizator, de variabile și de gazdă
 funcționează în toate liniile de introducere; completarea comenzilor este
 specifică liniei de comandă.  Dacă completarea este ambiguă (există mai
 multe posibilități diferite), MC emite un semnal sonor, iar acțiunea
-următoare depinde de setarea opțiunii Complete: show all din dialogul
-Configurare.  Dacă este activată, lângă poziția curentă apare o listă cu
-toate posibilitățile, iar tu poți selecta intrarea corectă cu tastele săgeți
-și \fBEnter\fP.  Poți tasta și primele litere în care diferă posibilitățile,
+următoare depinde de setarea opțiunii
+.\"LINK2"
+Complete: show all
+.\"Configuration"
+din dialogul
+.\"LINK2"
+Configurare\&.
+.\"Configuration"
+Dacă este activată, lângă poziția curentă apare o listă cu toate
+posibilitățile, iar tu poți selecta intrarea corectă cu tastele săgeți și
+\fBEnter\fP.  Poți tasta și primele litere în care diferă posibilitățile,
 pentru a trece la un subset al tuturor posibilităților și pentru a completa
 cât se poate de mult.  Dacă apeși din nou \fBAlt\-Tab\fP, în lista de selecție
 va fi afișat doar subsetul; altfel va fi evidențiat primul element care se
 potrivește cu toate caracterele anterioare.  De îndată ce nu mai există
 ambiguitate, dialogul dispare, dar îl poți ascunde cu tastele de anulare
-\fBEsc\fP, \fBF10\fP și tastele săgeată stânga și dreapta. Dacă Complete: show all
-este dezactivată, dialogul apare doar dacă apeși \fBAlt\-Tab\fP a doua oară;
-prima dată MC doar emite un semnal sonor.
+\fBEsc\fP, \fBF10\fP și tastele săgeată stânga și dreapta. Dacă
+.\"LINK2"
+Complete: show all
+.\"Configuration"
+este dezactivată,
+dialogul apare doar dacă apeși \fBAlt\-Tab\fP a doua oară; prima dată MC doar
+emite un semnal sonor.
 .PP
 Aplică escaparea simbolurilor \fB?\fP, \fB*\fP și \fB&\fP (ca \fB\e?\fP, \fB\e*\fP și
 \fB\e&\fP) în numele de fișiere, pentru a nu permite folosirea lor ca
@@ -2795,25 +2961,24 @@ să manipuleze fișiere care nu se află în sistemul de fișiere Unix.
 virtuale (VFS): sistemul de fișiere \fIlocal\fP, folosit pentru accesul la
 sistemul de fișiere Unix obișnuit; \fIftpfs\fP, folosit pentru manipularea
 fișierelor de pe sisteme la distanță cu protocolul FTP; \fItarfs\fP, folosit
-pentru manipularea fișierelor tar și tar comprimate; \fIundelfs\fP, folosit
-pentru recuperarea fișierelor șterse pe sisteme de fișiere ext2 (sistemul de
-fișiere implicit pentru sistemele Linux), \fIshell\fP (pentru manipularea
-fișierelor prin conexiuni shell precum rsh și ssh).  Dacă codul a fost
-compilat cu \fIsftpfs\fP (pentru manipularea fișierelor prin conexiuni SFTP).
+pentru manipularea fișierelor tar și tar comprimate; \fIshell\fP (pentru
+manipularea fișierelor prin conexiuni shell precum rsh și ssh).  Dacă codul
+a fost compilat cu \fIsftpfs\fP (pentru manipularea fișierelor prin conexiuni
+SFTP).
 .PP
 Este oferit un \fIextfs\fP generic (EXTernal virtual File System) pentru a
 extinde ușor capabilitățile VFS folosind scripturi și software extern.
 .PP
-.\"NODE "  FTP File System"
 Codul switch\-ului VFS va interpreta toate numele de căi folosite și le va
 trimite la sistemul de fișiere corect; formatele folosite pentru fiecare
 dintre sistemele de fișiere sunt descrise mai târziu în secțiunile lor.
+.\"NODE "  FTP File System"
 .SH "  Sistemul de fișiere FTP"
 Sistemul de fișiere FTP (ftpfs) îți permite să manipulezi fișiere de pe
 mașini la distanță.  Pentru a\-l folosi efectiv, poți folosi elementul \fIFTP link\fP din meniu sau poți schimba direct dosarul curent cu comanda \fIcd\fP
 într\-un nume de cale care arată astfel:
 .PP
-\fIftp://[!][utilizator[:parolă]@]mașină[:port]/[dosar\-distant]\fP
+.I ftp://[!][utilizator[:parolă]@]mașină[:port]/[dosar\-distant]
 .PP
 Elementele \fIuser\fP, \fIport\fP și \fIremote\-dir\fP sunt opționale.  Dacă specifici
 elementul \fIuser\fP, Midnight Commander se va autentifica pe mașina la
@@ -2836,24 +3001,27 @@ Exemple:
     ftp://miguel:xxx@server/pub
 .fi
 .PP
+Verifică dialogul
 .\"LINK2"
+Sistemul virtual de fișiere
 .\"Virtual FS"
+pentru opțiunile ftpfs.
 .\"NODE "  Tar File System"
-Verifică dialogul Sistemul virtual de fișiere pentru opțiunile ftpfs.
 .SH "  Sistemul de fișiere Tar"
 Sistemul de fișiere tar îți oferă acces doar pentru citire la fișierele tar
 și tar comprimate, folosind comanda chdir.  Pentru a schimba dosarul într\-un
 fișier tar, schimbi dosarul curent în fișierul tar folosind următoarea
 sintaxă:
 .PP
-\fI/filename.tar/utar://[dir\-inside\-tar]\fP
+.I /filename.tar/utar://[dir\-inside\-tar]
 .PP
-.\"LINK2"
-.\"Edit Extension File"
 Fișierul mc.ext.ini oferă deja o scurtătură pentru fișierele tar; aceasta
 înseamnă că, de obicei, doar indici un fișier tar și apeși Enter pentru a
-intra în el; vezi secțiunea Editare fișier de extensii pentru detalii despre
-cum se face acest lucru.
+intra în el; vezi secțiunea
+.\"LINK2"
+Editare fișier de extensii
+.\"Edit Extension File"
+pentru detalii despre cum se face acest lucru.
 .PP
 Exemple:
 .PP
@@ -2862,8 +3030,8 @@ Exemple:
     /ftp/GCC/gcc\-2.7.0.tar/utar://
 .fi
 .PP
-.\"NODE "  FIle transfer over SHell filesystem"
 Ultimul specifică calea completă a arhivei tar.
+.\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Transfer de fișiere peste sistemul de fișiere SHell"
 Sistemul de fișiere shell este un sistem de fișiere în rețea care îți
 permite să manipulezi fișierele de pe o mașină la distanță ca și cum ar fi
@@ -2873,7 +3041,7 @@ compatibil cu bash.
 Pentru a te conecta la o mașină la distanță, trebuie doar să faci chdir
 într\-un dosar special al cărui nume are următorul format:
 .PP
-\fIsh://[user@]machine[:options]/[remote\-dir]\fP
+.I sh://[user@]machine[:options]/[remote\-dir]
 .PP
 Elementele \fIuser,\fP \fIoptions\fP și \fIremote\-dir\fP sunt opționale.  Dacă
 specifici elementul \fIuser\fP, Midnight Commander va încerca să se autentifice
@@ -2905,7 +3073,7 @@ să manipulezi fișierele de pe o mașină la distanță ca și cum ar fi locale
 Pentru a te conecta la o mașină la distanță, trebuie doar să faci chdir
 într\-un dosar special al cărui nume are următorul format:
 .PP
-\fIsftp://[utilizator@]mașină:[port]/[dosar\-distant]\fP
+.I sftp://[utilizator@]mașină:[port]/[dosar\-distant]
 .PP
 Elementele \fIuser,\fP \fIport\fP și \fIremote\-dir\fP sunt opționale.  Dacă specifici
 elementul \fIuser\fP, Midnight Commander va încerca să se autentifice pe mașina
@@ -2934,8 +3102,8 @@ continuă.
 \fB[Ignore]\fP nu adaugă noua pereche gazdă/cheie în fișierul
 ~/.ssh/known_hosts, dar continuă totuși (pe riscul tău).
 .PP
-.\"NODE "  EXTernal File System"
 \fB[No]\fP abandonează conexiunea.
+.\"NODE "  EXTernal File System"
 .SH "  Sistemul de fișiere EXTern"
 \fBextfs\fP permite integrarea ușoară în GNU Midnight Commander a numeroase
 funcționalități și tipuri de fișiere, prin scrierea de scripturi.
@@ -2978,48 +3146,49 @@ extfs, la fel ca în orice alt VFS nelocal.
 .PP
 Scripturile extfs obișnuite incluse cu Midnight Commander sunt:
 .TP 
-\fBa\fP
+.B a
 acces la discheta 'A:' DOS/Windows (\fIcd a://\fP).
 .TP 
-\fBapt\fP
+.B apt
 interfață pentru sistemul de gestiune a pachetelor APT al Debian (\fIcd apt://\fP).
 .TP 
-\fBaudio\fP
+.B audio
 extragerea și redarea CD\-urilor audio (\fIcd audio://\fP sau \fIcd device/audio://\fP).
 .TP 
-\fBdeb\fP
+.B deb
 pachet al distribuției Debian GNU/Linux (\fIcd file.deb/deb://\fP).
 .TP 
-\fBdpkg\fP
+.B dpkg
 pachete instalate Debian GNU/Linux (\fIcd deb://\fP).
 .TP 
-\fBhp48\fP
+.B hp48
 vizualizarea și copierea fișierelor către/de la un calculator HP48 (\fIcd hp48://\fP).
 .TP 
-\fBlslR\fP
+.B lslR
 răsfoirea listelor lslR așa cum se găsesc pe multe FTP\-uri (\fIcd filename/lslR://\fP).
 .TP 
-\fBmailfs\fP
+.B mailfs
 suport pentru fișiere căsuță poștală în stil mbox (\fIcd mailbox/mailfs://\fP).
 .TP 
-\fBpatchfs\fP
+.B patchfs
 extfs pentru gestionarea diferențelor unificate și de context (\fIcd filename/patchfs://\fP).
 .TP 
-\fBrpm\fP
+.B rpm
 pachet RPM (\fIcd filename/rpm://\fP).
 .TP 
-\fBrpms\fP
+.B rpms
 gestionarea bazei de date RPM (\fIcd rpms://\fP).
 .TP 
-\fBulha, urar, uzip, uzoo, uar, uha\fP
+.B ulha, urar, uzip, uzoo, uar, uha
 arhivatoare (\fIcd archive/xxxx://\fP, unde xxxx este unul dintre: \fIulha\fP,
 \fIurar\fP, \fIuzip\fP, \fIuzoo\fP, \fIuar\fP, \fIuha\fP).
 .PP
-.\"LINK2"
-.\"Edit Extension File"
 Poți asocia un tip de fișier/o extensie unui anumit extfs, așa cum este
-descris în secțiunea Editare fișier de extensii.  Iată un exemplu de intrare
-pentru pachetele Debian:
+descris în secțiunea
+.\"LINK2"
+Editare fișier de extensii\&.
+.\"Edit Extension File"
+Iată un exemplu de intrare pentru pachetele Debian:
 .PP
 .nf
   regex/\e.deb$
@@ -3053,12 +3222,13 @@ informațiile din baza de date de terminale.
 
 .\"NODE "Skins"
 .SH Tematici
-.\"LINK2"
-.\"Colors"
 Poți schimba aspectul Midnight Commander.  Pentru aceasta trebuie să
 specifici un fișier care conține descrieri ale culorilor și ale liniilor de
 desenat pentru casete. Redefinirea culorilor este complet compatibilă cu
-atribuirea culorilor, așa cum este descrisă în secțiunea Culori\&.
+atribuirea culorilor, așa cum este descrisă în secțiunea
+.\"LINK2"
+Culori\&.
+.\"Colors"
 .PP
 Dacă tematica ta conține oricare dintre definițiile true\-color, ar trebui să
 definești cheia 'truecolors' cu valoarea TRUE în secțiunea [skin]. Dacă nu
@@ -3070,7 +3240,7 @@ găsit):
 .IP
 .br
 1) opțiunea din linia de comandă \fB\-S <tematică>\fP sau
-\fB\-\-skin=<tematică>\fP
+.B \-\-skin=<tematică>
 .br
 2) variabila de mediu \fBMC_SKIN\fP
 .br
@@ -3092,7 +3262,6 @@ la primul găsit):
 2)  \fB%sysconfdir%/mc/skins/\fP
 .br
 3)  \fB%pkgdatadir%/skins/\fP
-.br
 
 .PP
 Formatul fișierelor de tematică este descris în
@@ -3110,16 +3279,16 @@ secțiunea [filehighlight] (din fișierul de tematică curent).
 .PP
 Cheile din aceste grupuri sunt:
 .TP 
-\fItype\fP
+.I type
 tipul fișierului. Dacă este prezent, toate celelalte opțiuni sunt ignorate.
 .TP 
-\fIregexp\fP
+.I regexp
 expresie regulată. Dacă este prezentă, opțiunea 'extensions' este ignorată.
 .TP 
-\fIextensions\fP
+.I extensions
 lista extensiilor fișierelor. Separate prin semnul ';'.
 .TP 
-\fIextensions_case\fP
+.I extensions_case
 (are sens doar cu parametrul 'extensions') face ca regula 'extensions' să
 țină cont de majuscule și minuscule (true) sau nu (false).
 .PP
@@ -3141,8 +3310,6 @@ Cheia `type' poate avea valorile:
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
-.PP
-
 .\"NODE "Special Settings"
 .SH "Setări speciale"
 Majoritatea setărilor Midnight Commander pot fi schimbate din
@@ -3151,24 +3318,24 @@ editând fișierul de configurare.
 .PP
 Aceste variabile pot fi setate în fișierul tău ~/.config/mc/ini:
 .TP 
-\fIclear_before_exec\fP
+.I clear_before_exec
 Implicit, Midnight Commander șterge ecranul înainte de a executa o comandă.
 Dacă preferi să vezi rezultatul comenzii în partea de jos a ecranului,
 editează fișierul ~/.config/mc/ini și schimbă valoarea câmpului
 clear_before_exec în 0.
 .TP 
-\fIconfirm_view_dir\fP
+.I confirm_view_dir
 Dacă apeși F3 pe un dosar, în mod normal MC intră în acel dosar.  Dacă acest
 indicator este setat la 1, atunci MC va cere confirmarea înainte de a
 schimba dosarul, dacă ai fișiere marcate.
 .TP 
-\fIftpfs_retry_seconds\fP
+.I ftpfs_retry_seconds
 Această valoare este numărul de secunde pe care le va aștepta Midnight
 Commander înainte de a încerca să se reconecteze la un server FTP care a
 refuzat autentificarea.  Dacă valoarea este zero, autentificarea nu va fi
 reîncercată.
 .TP 
-\fImax_dirt_limit\fP
+.I max_dirt_limit
 Specifică de câte ori cel mult pot fi omise actualizările ecranului în
 vizualizatorul intern de fișiere.  În mod normal această valoare nu este
 semnificativă, deoarece codul ajustează automat numărul de actualizări de
@@ -3179,55 +3346,56 @@ valoare mare poate face actualizările ecranului prea sacadate.
 Se pare că setarea max_dirt_limit la 10 oferă cel mai bun comportament, iar
 aceasta este valoarea implicită.
 .TP 
-\fImouse_move_pages_viewer\fP
+.I mouse_move_pages_viewer
 Controlează dacă derularea cu mausul în vizualizatorul intern de fișiere se
 face pe pagini sau linie cu linie.
 .TP 
-\fIonly_leading_plus_minus\fP
+.I only_leading_plus_minus
 Permite tratamentul special al caracterelor '+', '\-', '*' din linia de
 comandă (selectare, deselectare, inversarea selecției) doar dacă linia de
 comandă este goală.  Nu trebuie să citezi aceste caractere în mijlocul
 liniei de comandă.  În schimb, nu le poți folosi pentru a schimba selecția
 când linia de comandă nu este goală.
 .TP 
-\fIalternate_plus_minus\fP
+.I alternate_plus_minus
 Dacă este true, folosește normal tastele '+', '\-', '\e' și '*'. Pentru
 selectare/deselectare, folosește 'Alt\-+', 'Alt\-\-' și 'Alt\-*'.
 .TP 
-\fIshow_output_starts_shell\fP
+.I show_output_starts_shell
 Această variabilă funcționează doar dacă nu folosești suportul pentru
 subshell.  Când folosești combinația C\-o pentru a reveni la ecranul
 utilizatorului, dacă aceasta este setată, vei primi un shell nou.  Altfel,
 apăsarea oricărei taste te va readuce în Midnight Commander.
 .TP 
-\fItimeformat_recent\fP
+.I timeformat_recent
 Schimbă formatul de timp folosit pentru afișarea datelor mai noi de 6 luni
 de acum.  Vezi pagina de manual strftime sau date pentru specificația
 formatului. Dacă această opțiune lipsește, se folosește formatul de timp
 implicit.
 .TP 
-\fItimeformat_old\fP
+.I timeformat_old
 Schimbă formatul de timp folosit pentru afișarea datelor mai vechi de 6 luni
 de acum sau a datelor din viitor.  Vezi pagina de manual strftime sau date
 pentru specificația formatului. Dacă această opțiune lipsește, se folosește
 formatul de timp implicit.
 .TP 
-\fIuse_file_to_guess_type\fP
-.\"LINK2"
-.\"Edit Extension File"
+.I use_file_to_guess_type
 Dacă această variabilă este activată (implicit), va porni comanda file
-pentru a potrivi tipurile de fișiere listate în fișierul mc.ext.ini\&.
+pentru a potrivi tipurile de fișiere listate în
+.\"LINK2"
+fișierul mc.ext.ini\&.
+.\"Edit Extension File"
 .TP 
-\fIxtree_mode\fP
+.I xtree_mode
 Dacă această variabilă este activată (implicit este dezactivată), când
 răsfoiești sistemul de fișiere într\-un panou Arbore, va reîncărca automat
 celălalt panou cu conținutul dosarului selectat.
 .TP 
-\fIshell_directory_timeout\fP
+.I shell_directory_timeout
 Această variabilă păstrează durata de viață a unei intrări din cache\-ul de
 dosare, în secunde. Valoarea implicită este 900 de secunde.
 .TP 
-\fIclipboard_store\fP
+.I clipboard_store
 Această variabilă conține calea (cu opțiuni) către utilitarul extern de
 clipboard, precum 'xclip', pentru a citi text în selecția X dintr\-un
 fișier.  De exemplu:
@@ -3236,7 +3404,7 @@ fișier.  De exemplu:
 clipboard_store=xclip \-i
 .fi
 .TP 
-\fIclipboard_paste\fP
+.I clipboard_paste
 Această variabilă conține calea (cu opțiuni) către utilitarul extern de
 clipboard, precum 'xclip', pentru a afișa selecția la ieșirea standard.  De
 exemplu:
@@ -3245,7 +3413,7 @@ exemplu:
 clipboard_paste=xclip \-o
 .fi
 .TP 
-\fIautodetect_codeset\fP
+.I autodetect_codeset
 Această opțiune permite folosirea comenzii `enca' pentru detectarea automată
 a codificării fișierelor text în vizualizatorul și editorul intern. Lista
 valorilor valide poate fi obținută cu comanda `enca \-\-list languages | cut
@@ -3266,10 +3434,10 @@ Commander) și apoi în fișierul ~/.config/mc/ini. Numele opțiunii trebuie să
 fie egal cu numele (calea completă) editorului sau vizualizatorului
 extern. Valoarea opțiunii poate conține următoarele variabile:
 .TP 
-\fI%filename\fP
+.I %filename
 Numele fișierului de editat/vizualizat.
 .TP 
-\fI%lineno\fP
+.I %lineno
 Linia de start din fișierul care se deschide.
 .PP
 De exemplu:
@@ -3281,17 +3449,18 @@ De exemplu:
     more=%filename +%lineno
 .fi
 .PP
-.\"LINK2"
-.\"Find File"
 Linia de start este transmisă editorului/vizualizatorului extern doar dacă
-este apelat din fereastra cu rezultatele Căutare fișier.
+este apelat din fereastra cu rezultatele
+.\"LINK2"
+Căutare fișier\&.
+.\"Find File"
 .PP
-.\"NODE "Terminal databases"
 Dacă editorul/vizualizatorul extern este pornit cu tastele F4/F3, MC speră
 că programul (cel puțin "joe", dar probabil și altele) are propria funcție
 care deschide implicit fișierul în locul unde a fost deschis ultima dată. MC
 nu împiedică editorul/vizualizatorul extern să salveze și să restaureze
 poziția în fișierele deschise.
+.\"NODE "Terminal databases"
 .SH "Baze de date de terminale"
 Midnight Commander oferă o modalitate de a repara baza de date de terminale
 a sistemului tău fără a fi nevoie de privilegii root.  Midnight Commander
@@ -3352,80 +3521,81 @@ Căile complete de mai jos pot varia între instalări.  Ele sunt afectate și
 de variabila de mediu \fBMC_DATADIR\fP.  Dacă aceasta este setată, valoarea ei
 este folosită în locul lui %pkgdatadir% în căile de mai jos.
 .PP
-\fI%pkgdatadir%/help/mc.hlp\fP
+.I %pkgdatadir%/help/mc.hlp
 .IP
 Fișierul de ajutor al programului.
 .PP
-\fI%pkgdatadir%/mc.ext.ini\fP
+.I %pkgdatadir%/mc.ext.ini
 .IP
 Fișierul implicit de extensii la nivel de sistem.
 .PP
-\fI~/.config/mc/mc.ext.ini\fP
+.I ~/.config/mc/mc.ext.ini
 .IP
 Fișierele proprii ale utilizatorului pentru extensii, configurarea
 vizualizării și configurarea editării.  Acestea suprascriu conținutul
 fișierelor la nivel de sistem, dacă sunt prezente.
 .PP
-\fI%sysconfdir%/mc/mc.ini\fP
-.RE
-\fI%pkgdatadir%/mc.ini\fP
+.I %sysconfdir%/mc/mc.ini
+.br
+.I %pkgdatadir%/mc.ini
 .IP
 Fișierele de configurare la nivel de sistem pentru Midnight Commander,
 folosite doar dacă utilizatorul nu are propriul fișier
 \fB~/.config/mc/ini\fP. Dacă %sysconfdir%/mc/mc.ini există, %pkgdatadir%/mc.ini
 nu este folosit.
 .PP
-\fI%pkgdatadir%/mc.lib\fP
+.I %pkgdatadir%/mc.lib
 .IP
-.\"LINK2"
-.\"Terminal databases"
 Setările globale pentru Midnight Commander.  Setările din acest fișier
 afectează toți utilizatorii, indiferent dacă au sau nu ~/.config/mc/ini.  În
-prezent, din mc.lib se încarcă doar setările terminalului.
+prezent, din mc.lib se încarcă doar
+.\"LINK2"
+setările terminalului\&.
+.\"Terminal databases"
 .PP
-\fI~/.config/mc/ini\fP
+.I ~/.config/mc/ini
 .IP
 Configurația proprie a utilizatorului. Dacă acest fișier este prezent,
 configurația este încărcată de aici în locul fișierului de pornire la nivel
 de sistem.
 .PP
-\fI%pkgdatadir%/hints/mc.hint\fP
+.I %pkgdatadir%/hints/mc.hint
 .IP
 Acest fișier conține sugestiile afișate de program.
 .PP
-\fI%pkgdatadir%/mc.menu\fP
+.I %pkgdatadir%/mc.menu
 .IP
 Acest fișier conține meniul implicit de aplicații la nivel de sistem.
 .PP
-\fI~/.config/mc/menu\fP
+.I ~/.config/mc/menu
 .IP
 Meniul propriu de aplicații al utilizatorului. Dacă acest fișier este
 prezent, este folosit în locul meniului de aplicații la nivel de sistem.
 .PP
-\fI~/.cache/mc/Tree\fP
+.I ~/.cache/mc/Tree
 .IP
 Lista de dosare pentru funcțiile arbore de dosare și vizualizare arbore.
 .PP
-\fI~/.local/share/mc.menu\fP
+.I ~/.local/share/mc.menu
 .IP
 Meniul local definit de utilizator. Dacă acest fișier este prezent, este
 folosit în locul meniului de aplicații din dosarul acasă sau de la nivel de
 sistem.
 .PP
-.\"SKIP_SECTION"
 Pentru a schimba dosarul rădăcină implicit al MC, poți folosi variabila de
 mediu \fBMC_PROFILE_ROOT\fP. Valoarea lui MC_PROFILE_ROOT trebuie să fie o cale
 absolută.  Dacă MC_PROFILE_ROOT nu este setată sau este goală, se folosește
 variabila HOME. Dacă HOME nu este setată sau este goală, dosarele MC se
 obțin din biblioteca GLib.
+.\"SKIP_SECTION"
 .SH LICENȚĂ
-.\"NODE "AVAILABILITY"
 Acest program este distribuit sub termenii Licenței Publice Generale GNU,
 așa cum este publicată de Free Software Foundation. Vezi ajutorul încorporat
 pentru detalii despre licență și despre lipsa garanției.
+.\"NODE "AVAILABILITY"
 .SH DISPONIBILITATE
-.\"NODE "SEE ALSO"
 Cea mai recentă versiune a acestui program poate fi găsită la \X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
+.\"NODE "SEE ALSO"
 .SH "VEZI ȘI"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1), tcsh(1), zsh(1).
 .PP
@@ -3435,9 +3605,9 @@ Pagina Midnight Commander pe World Wide Web:
 .fi
 .\"NODE "AUTHORS"
 .SH AUTORI
-.\"NODE "BUGS"
 Autorii și contribuitorii sunt listați în fișierul AUTHORS din distribuția
 sursă.
+.\"NODE "BUGS"
 .SH BUGURI
 Vezi fișierul TODO din distribuție pentru informații despre ce a mai rămas
 de făcut.

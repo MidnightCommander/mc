@@ -9,65 +9,62 @@ mcview \- Vizualizator de fișiere intern al GNU Midnight Commander.
 .SH SINOPSIS
 \fBmcview\fP [\-bcCdfhstVx?] fișier
 .SH DESCRIERE
-.LP
 mcview este o legătură către \fBmc\fP, executabilul GNU Midnight Commander
 principal.  Executând GNU Midnight Commander sub acest nume se va porni
 vizualizatorul intern și se va deschide \fIfile\fP specificat în linia de
 comandă.
 .SH OPȚIUNI
 .TP 
-\fI\-b\fP
+.I \-b
 Forțează afișarea în alb\-negru. Setarea variabilei de mediu \fBNO_COLOR\fP la o
 valoare nevidă are același efect.
 .TP 
-\fI\-c\fP
+.I \-c
 Forțează modul color pe terminalele pe care \fBmcview\fP folosește implicit
 alb\-negru.
 .TP 
-\fI\-d\fP
+.I \-d
 Dezactivează suportul pentru maus.
 .TP 
-\fI\-f\fP
+.I \-f
 Afișează căile de căutare compilate pentru fișierele Midnight Commander.
 .TP 
-\fI\-S arg, \-\-skin=arg\fP
+.I \-S arg, \-\-skin=arg
 Specifică în linia de comandă numele unei tematici.  Vezi secțiunea
 \fBTematici\fP din mc(1) pentru mai multe informații.
 .TP 
-\fI\-t\fP
+.I \-t
 Folosită doar dacă programul a fost compilat cu S\-Lang și terminfo: face ca
 Midnight Commander să folosească valoarea variabilei \fBTERMCAP\fP pentru
 informațiile despre terminal, în loc de informațiile din baza de date de
 terminale a sistemului
 .TP 
-\fI\-V\fP
+.I \-V
 Afișează versiunea programului.
 .TP 
-\fI\-x\fP
+.I \-x
 Forțează modul xterm. Se folosește când rulează pe terminale capabile xterm
 (două moduri de ecran, capabile să trimită secvențe escape de la maus).
-.PP
 .SH FIȘIERE
-\fI%pkgdatadir%/help/mc.hlp\fP
+.I %pkgdatadir%/help/mc.hlp
 .IP
 Fișierul de ajutor al programului.
 .PP
-\fI%pkgdatadir%/mc.ini\fP
+.I %pkgdatadir%/mc.ini
 .IP
 Configurația implicită de sistem pentru GNU Midnight Commander, folosită
 doar când cea a utilizatorului ~/.config/mc/ini lipsește.
 .PP
-\fI%pkgdatadir%/mc.lib\fP
+.I %pkgdatadir%/mc.lib
 .IP
 Setările globale pentru Midnight Commander. Setările din acest fișier
 afectează toți utilizatorii, indiferent dacă au sau nu ~/.config/mc/ini.
 .PP
-\fI~/.config/mc/ini\fP
+.I ~/.config/mc/ini
 .IP
 Configurația proprie utilizatorului.  Dacă acest fișier este prezent,
 configurația va fi încărcată de aici în locul fișierului de inițializare de
 sistem.
-.PP
 .SH LICENȚĂ
 Acest program este distribuit sub termenii Licenței Publice Generale GNU,
 așa cum este publicată de Free Software Foundation.  Vezi ajutorul
@@ -77,6 +74,5 @@ garanției.
 Cea mai recentă versiune a acestui program poate fi găsită la \X'tty: link https://ftp.osuosl.org/pub/midnightcommander/'https://ftp.osuosl.org/pub/midnightcommander/\X'tty: link' .
 .SH "VEZI ȘI"
 mc(1), mcedit(1)
-.PP
 .SH BUGURI
 Erorile ar trebui raportate la \X'tty: link https://github.com/MidnightCommander/mc/issues'https://github.com/MidnightCommander/mc/issues\X'tty: link' .
