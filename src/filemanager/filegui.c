@@ -719,6 +719,62 @@ is_wildcarded (const char *p)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Make the default text of the destination input: hide a password, and escape the text,
+ * because the destination is a replacement pattern.
+ */
+
+static char *
+filegui__escape_dest (const char *def_text, gboolean only_one, gboolean shell_patterns)
+{
+    vfs_path_t *vpath;
+    char *tmp, *ret;
+
+    vpath = vfs_path_from_str_flags (def_text, only_one ? VPF_NO_CANON : VPF_NONE);
+    tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath, TRUE);
+
+    ret = shell_patterns ? str_glob_escape (tmp) : str_regex_escape (tmp);
+    g_free (tmp);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Split the destination into the directory, which stays in @dest, and the mask for the name,
+ * which is returned.  The mask "\\0" (the name of the source) means: into the directory.
+ */
+
+static char *
+filegui__split_dest (char *dest, gboolean only_one, gboolean dive_into_subdirs)
+{
+    char *name, *mask;
+    vfs_path_t *vpath;
+    struct stat buf;
+    gboolean into;
+
+    name = strrchr (dest, PATH_SEP);
+    name = name == NULL ? dest : name + 1;
+
+    vpath = vfs_path_from_str (dest);
+    into = *name == '\0'
+        || (!dive_into_subdirs && !is_wildcarded (name)
+            && (!only_one || (mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode))))
+        || (dive_into_subdirs
+            && ((!only_one && !is_wildcarded (name))
+                || (only_one && mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode))));
+    vfs_path_free (vpath, TRUE);
+
+    if (into)
+        return g_strdup ("\\0");
+
+    mask = g_strdup (name);
+    *name = '\0';
+    return mask;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 place_progress_buttons (WDialog *h, const gboolean suspended)
@@ -1321,7 +1377,6 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
 {
     gboolean preserve;
     size_t fmd_xlen;
-    vfs_path_t *vpath;
     gboolean source_easy_patterns = easy_patterns;
     char fmd_buf[BUF_MEDIUM];
     char *dest_dir = NULL;
@@ -1337,16 +1392,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
     ctx->stable_symlinks = FALSE;
     *do_bg = FALSE;
 
-    // filter out a possible password from def_text
-    vpath = vfs_path_from_str_flags (def_text, only_one ? VPF_NO_CANON : VPF_NONE);
-    tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-    vfs_path_free (vpath, TRUE);
-
-    if (source_easy_patterns)
-        def_text_secure = str_glob_escape (tmp);
-    else
-        def_text_secure = str_regex_escape (tmp);
-    g_free (tmp);
+    def_text_secure = filegui__escape_dest (def_text, only_one, source_easy_patterns);
 
     if (only_one)
     {
@@ -1379,9 +1425,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
 
     {
         char *source_mask = NULL;
-        char *orig_mask;
         int val;
-        struct stat buf;
 
         quick_widget_t quick_widgets[] = {
             // clang-format off
@@ -1484,36 +1528,14 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         tmp = dest_dir;
         dest_dir = tilde_expand (tmp);
         g_free (tmp);
-        vpath = vfs_path_from_str (dest_dir);
 
-        ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
-        if (ctx->dest_mask == NULL)
-            ctx->dest_mask = dest_dir;
-        else
-            ctx->dest_mask++;
-
-        orig_mask = ctx->dest_mask;
-
-        if (*ctx->dest_mask == '\0'
-            || (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask)
-                && (!only_one || (mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode))))
-            || (ctx->dive_into_subdirs
-                && ((!only_one && !is_wildcarded (ctx->dest_mask))
-                    || (only_one && mc_stat (vpath, &buf) == 0 && S_ISDIR (buf.st_mode)))))
-            ctx->dest_mask = g_strdup ("\\0");
-        else
-        {
-            ctx->dest_mask = g_strdup (ctx->dest_mask);
-            *orig_mask = '\0';
-        }
+        ctx->dest_mask = filegui__split_dest (dest_dir, only_one, ctx->dive_into_subdirs);
 
         if (*dest_dir == '\0')
         {
             g_free (dest_dir);
             dest_dir = g_strdup ("./");
         }
-
-        vfs_path_free (vpath, TRUE);
 
         if (val == B_USER)
             *do_bg = TRUE;

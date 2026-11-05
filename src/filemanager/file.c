@@ -233,6 +233,22 @@ dirsize_status_locate_buttons (dirsize_status_msg_t *dsm)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Default destination of a copy or move: the directory with a trailing separator.
+ * It saves user from occasional file renames (when destination dir is deleted)
+ */
+
+static char *
+build_default_dest (const char *dir)
+{
+    if (dir == NULL || *dir == '\0' || IS_PATH_SEP (dir[strlen (dir) - 1]))
+        return g_strdup (dir);
+
+    return g_strconcat (dir, PATH_SEP_STR, (char *) NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 build_dest (file_op_context_t *ctx, const char *src, const char *dest, FileProgressStatus *status)
 {
@@ -1955,35 +1971,17 @@ static char *
 do_confirm_copy_move (const WPanel *panel, gboolean force_single, const char *source,
                       struct stat *src_stat, file_op_context_t *ctx, gboolean *do_bg)
 {
-    const char *tmp_dest_dir;
     char *dest_dir;
     char *format;
     char *ret;
 
     // Forced single operations default to the original name
     if (force_single)
-        tmp_dest_dir = source;
+        dest_dir = g_strdup (source);
     else if (get_other_type () == view_listing)
-        tmp_dest_dir = vfs_path_as_str (other_panel->cwd_vpath);
+        dest_dir = build_default_dest (vfs_path_as_str (other_panel->cwd_vpath));
     else
-        tmp_dest_dir = vfs_path_as_str (panel->cwd_vpath);
-
-    /*
-     * Add trailing backslash only when do non-local ops.
-     * It saves user from occasional file renames (when destination
-     * dir is deleted)
-     */
-    if (!force_single && tmp_dest_dir != NULL && tmp_dest_dir[0] != '\0'
-        && !IS_PATH_SEP (tmp_dest_dir[strlen (tmp_dest_dir) - 1]))
-    {
-        // add trailing separator
-        dest_dir = g_strconcat (tmp_dest_dir, PATH_SEP_STR, (char *) NULL);
-    }
-    else
-    {
-        // just copy
-        dest_dir = g_strdup (tmp_dest_dir);
-    }
+        dest_dir = build_default_dest (vfs_path_as_str (panel->cwd_vpath));
 
     if (dest_dir == NULL)
         return NULL;
