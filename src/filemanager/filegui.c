@@ -1377,7 +1377,9 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         return NULL;
 
     // unselect checkbox if target filesystem doesn't support attributes
-    preserve = copymove_persistent_attr && filegui__check_attrs_on_fs (def_text);
+    tmp = g_path_get_dirname (def_text);  // def_text can name a file that does not exist yet
+    preserve = copymove_persistent_attr && filegui__check_attrs_on_fs (tmp);
+    g_free (tmp);
 
     ctx->stable_symlinks = FALSE;
     *do_bg = FALSE;

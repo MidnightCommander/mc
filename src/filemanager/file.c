@@ -234,17 +234,23 @@ dirsize_status_locate_buttons (dirsize_status_msg_t *dsm)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Default destination of a copy or move: the directory with a trailing separator.
- * It saves user from occasional file renames (when destination dir is deleted)
+ * Default destination of a copy or move: the directory with a trailing separator, and for
+ * a single item (@source is not NULL) its name, to be edited in place.
+ * The separator saves user from occasional file renames (when destination dir is deleted)
  */
 
 static char *
-build_default_dest (const char *dir)
+build_default_dest (const char *dir, const char *source)
 {
-    if (dir == NULL || *dir == '\0' || IS_PATH_SEP (dir[strlen (dir) - 1]))
-        return g_strdup (dir);
+    const char *sep;
 
-    return g_strconcat (dir, PATH_SEP_STR, (char *) NULL);
+    if (dir == NULL)
+        return NULL;
+
+    sep = *dir == '\0' || IS_PATH_SEP (dir[strlen (dir) - 1]) ? "" : PATH_SEP_STR;
+
+    // panelized panels and the tree give a path, but only the name is copied
+    return g_strconcat (dir, sep, source == NULL ? "" : x_basename (source), (char *) NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1979,9 +1985,9 @@ do_confirm_copy_move (const WPanel *panel, gboolean force_single, const char *so
     if (force_single)
         dest_dir = g_strdup (source);
     else if (get_other_type () == view_listing)
-        dest_dir = build_default_dest (vfs_path_as_str (other_panel->cwd_vpath));
+        dest_dir = build_default_dest (vfs_path_as_str (other_panel->cwd_vpath), source);
     else
-        dest_dir = build_default_dest (vfs_path_as_str (panel->cwd_vpath));
+        dest_dir = build_default_dest (vfs_path_as_str (panel->cwd_vpath), source);
 
     if (dest_dir == NULL)
         return NULL;

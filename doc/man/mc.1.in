@@ -1068,7 +1068,9 @@ for external editors.
 Press F5 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
 directory/filename you specify in the input dialog. The destination
-defaults to the directory in the non\-selected panel.
+defaults to the directory in the non\-selected panel, followed by the
+name of the file or directory if there is only one, so that you can
+edit it.
 For a single file or directory, the last component of the destination
 is the name of the copy, even if a directory of that name exists.
 To copy into an existing directory, end the destination with a slash.
@@ -1156,7 +1158,8 @@ You can force Midnight Commander to suggest a relative path by pressing
 Press F6 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
 directory/filename you specify in the input dialog.  The destination
-defaults to the directory in the non\-selected panel. For more details
+defaults to the directory in the non\-selected panel, followed by the
+name of the file or directory if there is only one. For more details
 look at Copy (F5) operation above, most of the things are quite similar.
 .PP
 F16 (usually F16) is similar, but defaults to the directory in the
