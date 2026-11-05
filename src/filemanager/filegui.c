@@ -755,8 +755,9 @@ filegui__split_dest (char *dest, gboolean only_one)
     name = strrchr (dest, PATH_SEP);
     name = name == NULL ? dest : name + 1;
 
-    // a trailing slash means "into"; else a single item's last component is its new name
-    if (*name == '\0' || (!only_one && !is_wildcarded (name)))
+    // a trailing slash, "." or ".." means "into"; else a single item's last component is its name
+    if (*name == '\0' || DIR_IS_DOT (name) || DIR_IS_DOTDOT (name)
+        || (!only_one && !is_wildcarded (name)))
         return g_strdup ("\\0");
 
     mask = g_strdup (name);

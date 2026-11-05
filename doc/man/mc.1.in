@@ -1074,6 +1074,7 @@ edit it.
 For a single file or directory, the last component of the destination
 is the name of the copy, even if a directory of that name exists.
 To copy into an existing directory, end the destination with a slash.
+A destination that ends with "." or ".." also means "into".
 If the
 .I Preallocate space
 (preallocate_space) option is on, Midnight Commander will try to preallocate
