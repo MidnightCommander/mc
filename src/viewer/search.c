@@ -35,6 +35,9 @@
 
 #include <config.h>
 
+#include <stdio.h>   // sscanf()
+#include <string.h>  // memchr(), memcmp()
+
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/charsets.h"  // cp_source
@@ -70,6 +73,9 @@ typedef struct
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
+
+// size of the chunks read by the fast plain ASCII search
+#define MCVIEW_FAST_SEARCH_CHUNK (1024 * 1024)
 
 static int search_cb_char_curr_index = -1;
 static char search_cb_char_buffer[6];
@@ -150,6 +156,237 @@ mcview_search_update_steps (WView *view)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Prepare the fast path of mcview_find() if it can be used for this search. It handles the most
+ * common cases only: a forward search in a file, without whole words, all charsets or nroff mode,
+ * either
+ *  - normal (not regex/wildcard) search for a case sensitive string or a plain ASCII one: the
+ *    search string is already in the charset of the file (see mcview_dialog_search()), so a case
+ *    sensitive match is a byte match, while a case insensitive one needs Unicode case folding
+ *    for non-ASCII characters;
+ *  - hex search for hex bytes only (no quoted strings): the bytes are always matched exactly.
+ * Everything else goes through the generic mc_search_run(), which fetches the data byte by byte
+ * through mcview_search_cmd_callback() and is much slower.
+ *
+ * @param view     viewer
+ * @param caseless set to TRUE if ASCII letters must be matched case insensitively
+ * @return the bytes to search for, NULL if the fast path can't be used
+ */
+
+static GString *
+mcview_fast_search_prepare (const WView *view, gboolean *caseless)
+{
+    const mc_search_t *search = view->search;
+    const GString *str = search->original.str;
+    GString *needle;
+    gsize i;
+
+    if (view->datasource != DS_FILE || view->mode_flags.nroff || mcview_search_options.backwards
+        || view->search_line_type != 0 || search->is_all_charsets || search->whole_words
+        || str == NULL || str->len == 0)
+        return NULL;
+
+    if (search->search_type == MC_SEARCH_T_NORMAL)
+    {
+        for (i = 0; i < str->len; i++)
+            if (str->str[i] == '\n'
+                || ((unsigned char) str->str[i] >= 0x80 && !search->is_case_sensitive))
+                return NULL;
+
+        *caseless = !search->is_case_sensitive;
+        needle = mc_g_string_dup (str);
+        if (*caseless)
+            g_string_ascii_down (needle);
+        return needle;
+    }
+
+    if (search->search_type == MC_SEARCH_T_HEX)
+    {
+        // same syntax as mc_search__hex_translate_to_regex(), but hex numbers only
+        needle = g_string_sized_new (str->len / 2);
+        for (i = 0; i < str->len;)
+        {
+            unsigned int val;
+            int n;
+
+            if (g_ascii_isspace (str->str[i]))
+                i++;
+            else if (sscanf (str->str + i, "%x%n", &val, &n) == 1 && val <= 255)
+            {
+                g_string_append_c (needle, (char) val);
+                i += (gsize) n;
+            }
+            else
+            {
+                // quoted string or error: leave it to the generic search
+                g_string_free (needle, TRUE);
+                return NULL;
+            }
+        }
+        if (needle->len == 0)
+        {
+            g_string_free (needle, TRUE);
+            return NULL;
+        }
+
+        *caseless = FALSE;
+        return needle;
+    }
+
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Returns the first @c in [@p, @end), or @end if there is none. */
+
+static inline const char *
+mcview_fast_search_next (const char *p, const char *end, char c)
+{
+    const char *q;
+
+    q = memchr (p, c, (size_t) (end - p));
+    return q != NULL ? q : end;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Find @needle in @hay, like memmem() (which isn't available everywhere). If @caseless, ASCII
+ * letters are matched case insensitively and @needle must be in lower case: both cases of its
+ * first byte are looked for with memchr(), which is much faster than folding the whole @hay.
+ */
+
+static const char *
+mcview_fast_search_find (const char *hay, gsize hay_len, const char *needle, gsize needle_len,
+                         gboolean caseless)
+{
+    const char *end, *lower, *upper;
+    const char c_lower = needle[0];
+    const char c_upper = caseless ? g_ascii_toupper (c_lower) : c_lower;
+
+    if (hay_len < needle_len)
+        return NULL;
+
+    end = hay + hay_len - needle_len + 1;  // the last possible start of a match + 1
+    lower = mcview_fast_search_next (hay, end, c_lower);
+    upper = c_upper != c_lower ? mcview_fast_search_next (hay, end, c_upper) : end;
+
+    while (TRUE)
+    {
+        const char *p = MIN (lower, upper);
+        gsize i;
+
+        if (p == end)
+            return NULL;
+
+        if (!caseless)
+        {
+            if (memcmp (p + 1, needle + 1, needle_len - 1) == 0)
+                return p;
+        }
+        else
+        {
+            for (i = 1; i < needle_len; i++)
+            {
+                const char c = p[i];
+
+                if (((c >= 'A' && c <= 'Z') ? c - 'A' + 'a' : c) != needle[i])
+                    break;
+            }
+            if (i == needle_len)
+                return p;
+        }
+
+        if (p == lower)
+            lower = mcview_fast_search_next (p + 1, end, c_lower);
+        else
+            upper = mcview_fast_search_next (p + 1, end, c_upper);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Fast path of mcview_find(): read the file in big chunks and search the bytes directly. Case
+ * insensitive search matches ASCII letters only, which is enough for an ASCII search string
+ * (see mcview_fast_search_prepare()).
+ * Sets the same result fields (normal_offset, error) as mc_search_run().
+ */
+
+static gboolean
+mcview_fast_search (mcview_search_status_msg_t *ssm, off_t search_start, off_t search_end,
+                    gsize *len, const GString *needle_str, gboolean caseless)
+{
+    WView *view = ssm->view;
+    mc_search_t *search = view->search;
+    const char *const needle = needle_str->str;
+    const gsize needle_len = needle_str->len;
+    char *buf;
+    gsize keep = 0;  // bytes kept from the previous chunk for matches across chunks
+    off_t pos = search_start;
+    gboolean found = FALSE;
+    mc_search_error_t error = MC_SEARCH_E_NOTFOUND;
+
+    buf = g_malloc (MCVIEW_FAST_SEARCH_CHUNK + needle_len);
+
+    while (pos < search_end)
+    {
+        const size_t want = (size_t) MIN ((off_t) MCVIEW_FAST_SEARCH_CHUNK, search_end - pos);
+        size_t got = 0;
+        const char *hit;
+        gsize total;
+
+        if (mc_lseek (view->ds_file_fd, pos, SEEK_SET) != pos)
+        {
+            error = MC_SEARCH_E_INPUT;
+            break;
+        }
+        while (got < want)
+        {
+            const ssize_t n = mc_read (view->ds_file_fd, buf + keep + got, want - got);
+
+            if (n <= 0)
+                break;
+            got += (size_t) n;
+        }
+        if (got == 0)
+            break;
+
+        total = keep + got;
+        hit = mcview_fast_search_find (buf, total, needle, needle_len, caseless);
+        if (hit != NULL)
+        {
+            search->normal_offset = pos - (off_t) keep + (hit - buf);
+            search->start_buffer = search->normal_offset;
+            *len = needle_len;
+            found = TRUE;
+            break;
+        }
+
+        pos += (off_t) got;
+        keep = MIN (total, needle_len - 1);
+        memmove (buf, buf + total - keep, keep);
+
+        if (search->update_fn != NULL && search->update_fn (ssm, pos) == MC_SEARCH_CB_ABORT)
+        {
+            error = MC_SEARCH_E_ABORT;
+            break;
+        }
+    }
+
+    g_free (buf);
+
+    if (found)
+        mc_search_set_error (search, MC_SEARCH_E_OK, NULL);
+    else if (error == MC_SEARCH_E_NOTFOUND)
+        mc_search_set_error (search, MC_SEARCH_E_NOTFOUND, "%s", _ (STR_E_NOTFOUND));
+    else if (error == MC_SEARCH_E_ABORT)
+        mc_search_set_error (search, MC_SEARCH_E_ABORT, NULL);
+    else
+        mc_search_set_error (search, error, "%s", unix_error_string (errno));
+
+    return found;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 mcview_find (mcview_search_status_msg_t *ssm, off_t search_start, off_t search_end, gsize *len)
@@ -202,6 +439,21 @@ mcview_find (mcview_search_status_msg_t *ssm, off_t search_start, off_t search_e
 
     if ((view->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && search_start != 0)
         search_start = mcview_eol (view, search_start);
+
+    {
+        gboolean caseless = FALSE;
+        GString *needle;
+
+        needle = mcview_fast_search_prepare (view, &caseless);
+        if (needle != NULL)
+        {
+            gboolean found;
+
+            found = mcview_fast_search (ssm, search_start, search_end, len, needle, caseless);
+            g_string_free (needle, TRUE);
+            return found;
+        }
+    }
 
     view->search_nroff_seq->index = search_start;
     mcview_nroff_seq_info (view->search_nroff_seq);
