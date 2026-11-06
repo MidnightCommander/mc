@@ -364,6 +364,10 @@ sftpfs_close_file (vfs_file_handler_t *fh, GError **mcerror)
 
     ret = libssh2_sftp_close (SFTP_FILE_HANDLER (fh)->handle);
 
+    // size and times of a written file have changed: drop the directory cache
+    if ((SFTP_FILE_HANDLER (fh)->flags & (O_WRONLY | O_RDWR)) != 0)
+        vfs_s_invalidate (vfs_sftpfs_ops, VFS_FILE_HANDLER_SUPER (fh));
+
     return ret == 0 ? 0 : -1;
 }
 
