@@ -9,5 +9,4 @@ AM_CPPFLAGS = \
 noinst_LTLIBRARIES = libvfs-shell.la
 
 libvfs_shell_la_SOURCES = \
-	shell.c shell.h \
-	shelldef.h
+	shell.c shell.h
