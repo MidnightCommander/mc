@@ -30,7 +30,8 @@ typedef enum
     NONE = 0,
     PUBKEY = (1 << 0),
     PASSWORD = (1 << 1),
-    AGENT = (1 << 2)
+    AGENT = (1 << 2),
+    KEYBOARD_INTERACTIVE = (1 << 3),
 } sftpfs_auth_type_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
