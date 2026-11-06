@@ -6,6 +6,10 @@ if USE_INTERNAL_EDIT
 SUBDIRS += editor
 endif
 
+if ENABLE_SUBSHELL
+SUBDIRS += subshell
+endif
+
 AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \
 	-I$(top_srcdir) \
