@@ -47,4 +47,6 @@ jobs:
         if: failure()
         with:
           name: test-suite-logs-solaris
-          path: ./**/test-suite.log
+          path: |
+            ./**/test-suite.log
+            ./tests/lib/charsets__convert_char_to_display.log
