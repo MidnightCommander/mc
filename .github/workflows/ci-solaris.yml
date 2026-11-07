@@ -49,4 +49,4 @@ jobs:
           name: test-suite-logs-solaris
           path: |
             ./**/test-suite.log
-            ./tests/lib/charsets__convert_char_to_display.log
+            ./**/charsets__convert_char_to_display.log
