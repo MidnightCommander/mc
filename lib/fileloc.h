@@ -85,6 +85,7 @@
 #define EDIT_HOME_TEMP_FILE  EDIT_HOME_DIR PATH_SEP_STR "mcedit.temp"
 #define EDIT_SYNTAX_DIR      "syntax"
 #define EDIT_SYNTAX_FILE     EDIT_SYNTAX_DIR PATH_SEP_STR "Syntax"
+#define EDIT_SYNTAX_TS_DIR   "syntax-ts"
 
 #define EDIT_GLOBAL_MENU     "mcedit.menu"
 #define EDIT_LOCAL_MENU      ".cedit.menu"
