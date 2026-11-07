@@ -32,6 +32,7 @@ check_PROGRAMS = $(TESTS)
 
 charsets__convert_char_to_display_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
+	-DENCODING_CP1251=\"$(ENCODING_CP1251)\" \
 	-DTEST_SHARE_DIR=\"$(abs_srcdir)/fixtures\"
 
 charsets__convert_char_to_display_SOURCES = \

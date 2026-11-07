@@ -18,6 +18,31 @@ AC_DEFUN([mc_ENCODING],[
             ENCODING_CP1251="ANSI-1251"
             ;;
         *)
+            dnl The built-in iconv utility in musl (Alpine) often lacks
+            dnl out-of-the-box support for cp1251 and may throw
+            dnl an iconv_open: Invalid argument error.
+            AC_MSG_CHECKING([whether iconv supports CP1251])
+            AC_RUN_IFELSE(
+                [AC_LANG_PROGRAM(
+                    [[#include <iconv.h>]],
+                    [[
+                        iconv_t cd;
+                        cd = iconv_open("UTF-8", "CP1251");
+                        if (cd == (iconv_t)-1)
+                            return 1;
+                        iconv_close(cd);
+                        return 0;
+                    ]]
+                )],
+                [
+                    AC_MSG_RESULT([yes])
+                    AC_DEFINE([HAVE_ICONV_CP1251], [1], [Define to 1 if iconv supports CP1251])
+                ],
+                [AC_MSG_RESULT([no])],
+                []
+            )
+
+            dnl Use this name in any case
             ENCODING_CP1251="CP1251"
             ;;
     esac
