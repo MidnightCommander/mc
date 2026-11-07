@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://app.transifex.com/mc/mc/language/vi/)\n"
@@ -465,12 +465,6 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Biến môi trườn TERM chưa được xác định!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -496,6 +490,12 @@ msgid ""
 msgstr ""
 "Kích thước màn hình %dx%d không được hỗ trợ.\n"
 "Hãy kiểm tra biến môi trường TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Biến môi trườn TERM chưa được xác định!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1778,6 +1778,9 @@ msgstr ""
 msgid "&Preallocate space"
 msgstr ""
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr ""
 
@@ -2721,6 +2724,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr ""
 
@@ -2992,9 +3002,6 @@ msgstr ""
 
 msgid "Screen lis&t"
 msgstr ""
-
-msgid "&Listing format edit"
-msgstr "&Soạn thảo định dạng danh sách"
 
 msgid "Edit &extension file"
 msgstr "soạn thảo tập tin phần mở &Rộng"
@@ -3566,13 +3573,6 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr ""
 
@@ -3878,6 +3878,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Lỗi phần đầu cpio phát hiện trong\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3891,14 +3899,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s chứa mục lặp lại! Nhảy qua!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Lỗi phần đầu cpio phát hiện trong\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4251,6 +4251,9 @@ msgstr "Có lỗi báo cáo sau khi dừng."
 msgid "Aborted transfer would be successful."
 msgstr "Dừng truyền tải thành công."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Tập tin tar không thích hợp"
 
@@ -4269,9 +4272,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4365,8 +4365,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4375,8 +4374,8 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
+#~ msgid "&Listing format edit"
+#~ msgstr "&Soạn thảo định dạng danh sách"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Đặt lại phím phần mềm trên các terminal HP"

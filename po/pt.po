@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2025\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
@@ -506,12 +506,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variável de ambiente TERM foi limpa!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Não é possível verificar o pipe SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -543,6 +537,12 @@ msgid ""
 msgstr ""
 "Tamanho de ecrã %dx%d não é suportado.\n"
 "Verifique a variável de ambiente TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variável de ambiente TERM foi limpa!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Não é possível verificar o pipe SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1890,6 +1890,9 @@ msgstr "Mkdi&r auto nome"
 msgid "&Preallocate space"
 msgstr "&Prealocar espaço"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Modo tecla Esc"
 
@@ -2966,6 +2969,16 @@ msgstr "Directórios: %zu, tamanho total: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Desculpe, não foi possível colocar o job em background"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Destino\n"
+"%s\n"
+"deve ser um directório"
+
 msgid "S&uspend"
 msgstr "S&uspender"
 
@@ -3237,9 +3250,6 @@ msgstr "Jobs em &background"
 
 msgid "Screen lis&t"
 msgstr "Lis&ta de ecrãs"
-
-msgid "&Listing format edit"
-msgstr "Editar formato de &listagem"
 
 msgid "Edit &extension file"
 msgstr "Editar &extensão de ficheiro"
@@ -3829,16 +3839,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"Destino\n"
-"%s\n"
-"deve ser um directório"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Apagar %s?"
 
@@ -4159,6 +4159,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Encontrado cabeçalho de cpio corrompido em\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4172,14 +4180,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s contém entradas duplicadas! A ignorar!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Encontrado cabeçalho de cpio corrompido em\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4564,6 +4564,9 @@ msgstr "Erro reportado após abortar."
 msgid "Aborted transfer would be successful."
 msgstr "Transferência abortada teria tido sucesso."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek não parou num limite de registo"
+
 msgid "Inconsistent tar archive"
 msgstr "Arquivo tar inconsistente"
 
@@ -4585,9 +4588,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "não parece um arquivo tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek não parou num limite de registo"
 
 msgid "Invalid value"
 msgstr "Valor inválido"
@@ -4685,12 +4685,11 @@ msgstr ""
 "Não é possível visualizar%s\n"
 "Não é um ficheiro regular."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Nõ é possível abrir %s\n"
 "em mode parse\n"
@@ -4702,8 +4701,11 @@ msgstr "Procura terminada"
 msgid "Continue from beginning?"
 msgstr "Continuar do início?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Editar formato de &listagem"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Limpa teclas de atalho nos terminais HP"

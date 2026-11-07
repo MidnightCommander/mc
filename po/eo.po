@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022,2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -480,12 +480,6 @@ msgstr "Alternativo"
 msgid "Shift"
 msgstr "Uskleca inversigilo"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "La medivariablo TERM ne estas valorizita!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Ne eblas kontroli SIGWINCH-dukton"
-
 #, c-format
 msgid ""
 "\n"
@@ -517,6 +511,12 @@ msgid ""
 msgstr ""
 "Ekrangrando %dx%d ne estas regata.\n"
 "Kontroli la medivariablon TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "La medivariablo TERM ne estas valorizita!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ne eblas kontroli SIGWINCH-dukton"
 
 msgid "B"
 msgstr "B"
@@ -1860,6 +1860,9 @@ msgstr "&Aŭtomate nomi novan dosierujon"
 msgid "&Preallocate space"
 msgstr "Generi spacon antaŭ o&l fari ion"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Eskapo-klava reĝimo"
 
@@ -2933,6 +2936,16 @@ msgstr "Dosierujoj: %zu, ĉioma grando: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Bedaŭrinde mi ne povis meti la taskon en la fonon"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Celo\n"
+"%s\n"
+"devas esti dosierujo"
+
 msgid "S&uspend"
 msgstr "P&aŭzigi"
 
@@ -3204,9 +3217,6 @@ msgstr "Fo&naj taskoj"
 
 msgid "Screen lis&t"
 msgstr "&Paĝa listo"
-
-msgid "&Listing format edit"
-msgstr "Redakti &listan aranĝon"
 
 msgid "Edit &extension file"
 msgstr "Redakti &sufikso-dosieron"
@@ -3791,16 +3801,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"Celo\n"
-"%s\n"
-"devas esti dosierujo"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Ĉu forigi je %s?"
 
@@ -4122,6 +4122,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Putrigita cpio-kapo renkontita en\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4135,14 +4143,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s enhavas duobligitajn erojn! Preterlasanta!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Putrigita cpio-kapo renkontita en\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4526,6 +4526,9 @@ msgstr "Eraro raportita post ĉesigo."
 msgid "Aborted transfer would be successful."
 msgstr "Ĉesigita transigo estus sukcesa."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
+
 msgid "Inconsistent tar archive"
 msgstr "Malkonsekvenca tar-dosiero"
 
@@ -4547,9 +4550,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "ne ŝajnas esti TAR-arkivo"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
 
 msgid "Invalid value"
 msgstr "Nevalida valoro"
@@ -4648,12 +4648,11 @@ msgstr ""
 "%s\n"
 "Ne ordinara dosiero"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Ne eblas malfermi\n"
 "%s\n"
@@ -4666,8 +4665,11 @@ msgstr "Serĉo finita"
 msgid "Continue from beginning?"
 msgstr "Ĉu deiri de la komenco?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Redakti &listan aranĝon"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Restarigi molajn klavojn en HP-terminaloj"

@@ -23,7 +23,7 @@ Build requirements for GNU Midnight Commander
 - slang2 or ncurses screen library
   - https://www.jedsoft.org/slang/
   - https://invisible-island.net/ncurses/ncurses.html
-- gettext >= 0.18.2
+- gettext >= 0.19.8
   - https://www.gnu.org/software/gettext/
 - gpm (general purpose mouse daemon as an alternative to xterm mouse)
   - https://www.nico.schottelius.org/software/gpm/
