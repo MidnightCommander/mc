@@ -183,9 +183,6 @@ sftpsfs_expand_hostname (const char *host, const char *real_host)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define POINTER_TO_STRUCTURE_MEMBER(type)                                                          \
-    ((type) ((char *) config_entity + (size_t) config_variables[i].offset))
-
 /**
  * Parse string and filling one config entity by parsed data.
  *
@@ -205,10 +202,6 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
             int value_offset;
             char *value;
 
-            int *pointer_int;
-            char **pointer_str;
-            gboolean *pointer_bool;
-
             // Calculate start of value in string
             value_offset = mc_search_getstart_result_by_num (config_variables[i].pattern_regexp, 1);
             value = &buffer[value_offset];
@@ -216,20 +209,19 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
             switch (config_variables[i].type)
             {
             case STRING:
-                pointer_str = POINTER_TO_STRUCTURE_MEMBER (char **);
-                *pointer_str = g_strdup (value);
+                G_STRUCT_MEMBER (char *, config_entity, config_variables[i].offset) =
+                    g_strdup (value);
                 break;
             case FILENAME:
-                pointer_str = POINTER_TO_STRUCTURE_MEMBER (char **);
-                *pointer_str = sftpfs_correct_file_name (value);
+                G_STRUCT_MEMBER (char *, config_entity, config_variables[i].offset) =
+                    sftpfs_correct_file_name (value);
                 break;
             case INTEGER:
-                pointer_int = POINTER_TO_STRUCTURE_MEMBER (int *);
-                *pointer_int = atoi (value);
+                G_STRUCT_MEMBER (int, config_entity, config_variables[i].offset) = atoi (value);
                 break;
             case BOOLEAN:
-                pointer_bool = POINTER_TO_STRUCTURE_MEMBER (gboolean *);
-                *pointer_bool = strcasecmp (value, "True") == 0;
+                G_STRUCT_MEMBER (gboolean, config_entity, config_variables[i].offset) =
+                    strcasecmp (value, "True") == 0;
                 break;
             default:
                 continue;
@@ -238,8 +230,6 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
         }
     }
 }
-
-#undef POINTER_TO_STRUCTURE_MEMBER
 
 /* --------------------------------------------------------------------------------------------- */
 /**

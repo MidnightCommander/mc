@@ -169,7 +169,7 @@ D       Delete tagged files if a copy exists in the other directory.
 
 m       View manual page
         MAN=%{Enter manual name}
-        %view{ascii,nroff} MANROFFOPT='@MAN_FLAGS@' MAN_KEEP_FORMATTING=1 man -P cat "$MAN"
+        %view{ascii,nroff} MANROFFOPT='@MAN_FLAGS@' MAN_KEEP_FORMATTING=1 PAGER=cat man "$MAN"
 
 = f \.gz$ & t r
 + ! t t

@@ -217,7 +217,8 @@ Meta, vagy az Alt billentyű, akkor használd az ESC\-et, a megfelelő
 karakter <kar> begépelésekor. A Meta funkció Linux alatt úgy érhető el,
 hogy megnyomjuk, majd elengedjük az ESC billentyűt. A Meta funkció az
 ezután megnyomott billentyűre vonatkozik!
-.PP A Midnight Commander
+.PP
+A Midnight Commander
 beviteli eszköze a GNU Emacs szerkesztő billentyűzet\-kombinációihoz
 hasonlóan működik.
 .PP
@@ -461,7 +462,6 @@ Megjeleníti a könyvtár előzményeket, azonos a 'v' egérrel történő
 lenyomásával.
 .\"NODE "  Quick search"
 .SH "  Quick search"
-.PP
 .B C\-s, M\-s
 Elindítja a fájl keresést a könyvtár listában.  Amikor a keresés
 aktív, a billentyűlenyomások hozzáadódnak a keresett szöveghez a
@@ -2487,9 +2487,7 @@ Jelenleg a Midnight Commander a következő Csatolt Fájlrendszerekkel
 rendelkezik (VFS): a helyi fájlrendszert a szokásos Unix fájlrendszeren
 lévő fájlokhoz használja; az ftpfs\-t, az FTP protokollal rendelkező
 távoli gépek fájlainak módosítására használja; a tarfs\-t a tar
-és tömörített tar fájlok módosítására használja; az undelfs\-t, a
-törölt fájlok visszaállítására használja az ext2\-es fájlrendszeren
-(az alapértelmezett fájlrendszer Linux rendszereken), a fish (a fájlok
+és tömörített tar fájlok módosítására használja; a fish (a fájlok
 shellen keresztüli módosításához, mint pl. rsh és ssh) és végül az mcfs
 (a Midnight Commander fájlrendszere), amely hálózat alapú fájlrendszer.
 .PP
@@ -2917,7 +2915,7 @@ valamelyik gomb nem használható).
 .\"NODE "FILES"
 .SH "Fájlok"
 A progam minden ezzel kapcsolatos infomációt az
-.BR MC_DATADIR
+.B MC_DATADIR
 környezeti változóban tárol. Ha ezt a változót nem állítottuk be, akkor
 ez vissza fog állítódni a /usr könyvtárra.
 .PP
@@ -2984,7 +2982,7 @@ Helyi felhasználó által definiált menü. Ha ez a fájl létezik, ezt
 használja a home, vagy rendszerszintű alkalmazás menü helyett.
 .PP
 To change default home directory of MC, you can use 
-.BR MC_PROFILE_ROOT
+.B MC_PROFILE_ROOT
 environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
 If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
 or empty, MC directories are get from GLib library.
