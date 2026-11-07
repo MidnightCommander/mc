@@ -84,15 +84,19 @@ static const struct test_convert_char_to_display_ds
     { "UTF-8", "UTF-8", "\xc3Z", NON_PRINTABLE_CHAR, 1, FALSE, FALSE },
     { "UTF-8", "UTF-8", "\xff", NON_PRINTABLE_CHAR, 1, FALSE, FALSE },
     { "UTF-8", "UTF-8", "", -1, 0, FALSE, FALSE },
+#ifdef HAVE_ICONV_CP1251
     // ticket #4668: 8-bit letters are printable on UTF-8 display
     { "UTF-8", "CP1251", "\xc0", 0x0410, 1, TRUE, FALSE },
     { "UTF-8", "CP1251", "\xcf", 0x041F, 1, TRUE, FALSE },
     { "UTF-8", "CP1251", "\n", '\n', 1, FALSE, FALSE },
+#endif
     // 8-bit display
     { "KOI8-R", "UTF-8", "\xd0\x96", 0xF6, 2, TRUE, FALSE },
     { "KOI8-R", "UTF-8", "\xe4\xb8\xad", NON_PRINTABLE_CHAR, 3, TRUE, FALSE },
     { "KOI8-R", "UTF-8", "\xff", NON_PRINTABLE_CHAR, 1, FALSE, FALSE },
+#ifdef HAVE_ICONV_CP1251
     { "KOI8-R", "CP1251", "\xc0", 0xE1, 1, TRUE, FALSE },
+#endif
     { "KOI8-R", "KOI8-R", "\xc1", 0xC1, 1, TRUE, FALSE },
 };
 
