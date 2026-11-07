@@ -35,6 +35,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <signal.h>
+#include <unistd.h>
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
@@ -243,12 +244,15 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     ESCDELAY = 200;
 #endif
 
-    tcgetattr (STDIN_FILENO, &mode);
-    // use Ctrl-g to generate SIGINT
-    mode.c_cc[VINTR] = CTRL ('g');  // ^g
-    // disable SIGQUIT to allow use Ctrl-\ key
-    mode.c_cc[VQUIT] = NULL_VALUE;
-    tcsetattr (STDIN_FILENO, TCSANOW, &mode);
+    // don't apply an uninitialized structure if the terminal modes cannot be read
+    if (tcgetattr (STDIN_FILENO, &mode) == 0)
+    {
+        // use Ctrl-g to generate SIGINT
+        mode.c_cc[VINTR] = CTRL ('g');  // ^g
+        // disable SIGQUIT to allow use Ctrl-\ key
+        mode.c_cc[VQUIT] = NULL_VALUE;
+        tcsetattr (STDIN_FILENO, TCSANOW, &mode);
+    }
 
     // curses remembers the "in-program" modes after this call
     def_prog_mode ();
@@ -319,8 +323,8 @@ tty_change_screen_size (void)
     tty_reset_screen ();
 #endif
 
-    // Ioctl on the STDIN_FILENO
-    ioctl (fileno (stdout), TIOCGWINSZ, &winsz);
+    // the screen is drawn on stdout, so get the size of that terminal
+    ioctl (STDOUT_FILENO, TIOCGWINSZ, &winsz);
     if (winsz.ws_col != 0 && winsz.ws_row != 0)
     {
 #if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)

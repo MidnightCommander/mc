@@ -40,12 +40,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
 #else
 #include <sys/time.h>
 #include <sys/types.h>
-#include <unistd.h>
 #endif
 
 #include "lib/global.h"
@@ -952,7 +952,7 @@ get_modifier (void)
         int mod_status;
         int shift_ext_status;
 
-        if (devctl (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (mod_status), NULL)
+        if (devctl (STDIN_FILENO, DCMD_CHR_LINESTATUS, &mod_status, sizeof (mod_status), NULL)
             == -1)
             return 0;
 
