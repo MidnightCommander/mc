@@ -796,7 +796,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
         {
             g_regex_options |= G_REGEX_RAW;
 
-            if (!lc_mc_search->is_case_sensitive)
+            if (!lc_mc_search->is_case_sensitive && !mc_search_cond->case_handled)
             {
                 GString *tmp;
 

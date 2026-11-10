@@ -88,6 +88,8 @@ mcview_dialog_search (WView *view)
                 QUICK_CHECKBOX (_ ("&Backwards"), &mcview_search_options.backwards, NULL),
                 QUICK_CHECKBOX (_ ("&Whole words"), &mcview_search_options.whole_words, NULL),
                 QUICK_CHECKBOX (_ ("&All charsets"), &mcview_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("&Ignore accents"), &mcview_search_options.ignore_accents,
+                                NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,

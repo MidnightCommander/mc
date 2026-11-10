@@ -391,6 +391,9 @@ mc_search_is_fixed_search_str (const mc_search_t *lc_mc_search)
     case MC_SEARCH_T_REGEX:
     case MC_SEARCH_T_GLOB:
         return FALSE;
+    case MC_SEARCH_T_NORMAL:
+        // a letter can match an accented one, which can be longer
+        return !lc_mc_search->ignore_accents;
     default:
         return TRUE;
     }
