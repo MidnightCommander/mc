@@ -52,6 +52,7 @@ edit_search_options_t edit_search_options = {
     .only_in_selection = FALSE,
     .whole_words = FALSE,
     .all_codepages = FALSE,
+    .ignore_accents = FALSE,
 };
 
 /*** file scope macro definitions ****************************************************************/
@@ -99,6 +100,7 @@ edit_dialog_search_show (WEdit *edit)
                 QUICK_CHECKBOX (_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
                 QUICK_CHECKBOX (_ ("&Whole words"), &edit_search_options.whole_words, NULL),
                 QUICK_CHECKBOX (_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("&Ignore accents"), &edit_search_options.ignore_accents, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_START_BUTTONS (TRUE, TRUE),
                 QUICK_BUTTON (_ ("&OK"), B_ENTER, NULL, NULL),
@@ -567,6 +569,7 @@ edit_search_init (WEdit *edit, const char *str)
     edit->search->is_all_charsets = edit_search_options.all_codepages;
     edit->search->is_case_sensitive = edit_search_options.case_sens;
     edit->search->whole_words = edit_search_options.whole_words;
+    edit->search->ignore_accents = edit_search_options.ignore_accents;
     edit->search->search_fn = edit_search_cmd_callback;
     edit->search->update_fn = edit_search_update_callback;
 
@@ -709,6 +712,7 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
                 QUICK_CHECKBOX (_ ("In se&lection"), &edit_search_options.only_in_selection, NULL),
                 QUICK_CHECKBOX (_ ("&Whole words"), &edit_search_options.whole_words, NULL),
                 QUICK_CHECKBOX (_ ("&All charsets"), &edit_search_options.all_codepages, NULL),
+                QUICK_CHECKBOX (_ ("&Ignore accents"), &edit_search_options.ignore_accents, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END,
