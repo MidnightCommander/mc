@@ -154,7 +154,7 @@ struct WEdit
     gboolean is_case_insensitive;  // selects language case sensitivity
 
     // line break
-    LineBreaks lb;
+    LineBreaks lb;  // line break conversion mode on save (set in Save As dialog)
 };
 
 /*** global variables defined in .c file *********************************************************/
