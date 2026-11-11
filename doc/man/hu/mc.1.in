@@ -2180,6 +2180,12 @@ megfelelően. Minden forrás maszkkal azonos fájl átmásolásra vagy
 átnevezésre kerül a cél maszknak megfelelően. Ha vannak kijelölt fájlok,
 csak a kijelölt fájlokra vonatkozik a átnevezett forrás maszk.
 .PP
+Egyetlen fájl másolásakor vagy áthelyezésekor az Alt\-Enter (vagy
+Ctrl\-Enter) lenyomása a cél mezőben beszúrja a forrásfájl nevét a
+kurzor helyére. A név a
+.B Shell-minta
+beállításnak megfelelően escape-elve kerül beszúrásra.
+.PP
 Ezen kívül vannak egyéb opciók is, amiket még beállíthatsz:
 .PP
 A link követés megadja vajon symlink, vagy hardlink készült\-e a forrás
