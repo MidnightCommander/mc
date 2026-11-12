@@ -1,0 +1,6 @@
+The s3+ helper normally lists a live S3 service. Under the tester it reads
+a JSON document shaped like the ListBuckets and ListObjectsV2 responses
+instead (see test_listing() in the helper), so neither boto3 nor network
+access is needed.
+
+The "2024/" key in s3+.input is a directory marker, which the helper skips.

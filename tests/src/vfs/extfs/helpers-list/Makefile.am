@@ -47,6 +47,11 @@ data_files_to_distribute = \
 	data/rpm.glib.input \
 	data/rpm.glib.output \
 	data/rpm.rewrite.sh \
+	data/s3+.README \
+	data/s3+.args \
+	data/s3+.env_vars \
+	data/s3+.input \
+	data/s3+.output \
 	data/torrent.input \
 	data/torrent.output \
 	data/u7z.README \
