@@ -70,7 +70,7 @@ char *input_dialog_help (const char *header, const char *text, const char *help,
 char *input_expand_dialog (const char *header, const char *text, const char *history_name,
                            const char *def_text, input_complete_t completion_flags);
 
-int query_dialog (const char *header, const char *text, int flags, int count, ...);
+MC_MOCKABLE int query_dialog (const char *header, const char *text, int flags, int count, ...);
 void query_set_sel (int new_sel);
 
 /* Create message box but don't dismiss it yet, not background safe */
