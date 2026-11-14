@@ -219,6 +219,7 @@ mcview_done (WView *view)
     vfs_path_free (view->workdir_vpath, TRUE);
     view->workdir_vpath = NULL;
     MC_PTR_FREE (view->command);
+    MC_PTR_FREE (view->image_b64);
 
     mcview_close_datasource (view);
     // the growing buffer is freed with the datasource

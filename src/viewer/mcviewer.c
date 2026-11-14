@@ -68,6 +68,9 @@ gboolean mcview_mouse_move_pages = TRUE;
 /* end of file will be showen from mcview_show_eof */
 char *mcview_show_eof = NULL;
 
+/* protocol for images in quick view: "auto", "iterm2", "kitty" or "none" */
+char *mcview_image_protocol = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -411,6 +414,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
             }
 
             mcview_set_datasource_file (view, fd, &st);
+            mcview_image_load (view);
         }
         retval = TRUE;
     }
