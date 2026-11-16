@@ -17,6 +17,7 @@
 #include "src/filemanager/dir.h"  // dir_list
 
 #include "mcviewer.h"
+#include "ansi.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -85,6 +86,7 @@ typedef struct
     gboolean nroff_underscore_is_underlined;  // whether _\b_ is underlined rather than bold
     gboolean
         print_lonely_combining;  // whether lonely combining marks are printed on a dotted circle
+    mcview_ansi_state_t ansi;    // ANSI SGR escape sequence parser state
 } mcview_state_machine_t;
 
 struct mcview_nroff_struct;
@@ -154,6 +156,10 @@ struct WView
                                * text mode */
     int cursor_col;           // Cursor column
     int cursor_row;           // Cursor row
+    int syntax_fill_color;    // Last drawn char color, for filling empty lines in syntax mode
+    off_t syntax_file_size;   // Cached st_size for syntax status bar (0 = not yet cached)
+    off_t syntax_content_cache_end;    // dpy_end used for cached content bytes (-1 = invalid)
+    off_t syntax_content_cache_bytes;  // Cached result of content byte scan
     struct hexedit_change_node *change_list;  // Linked list of changes
     WRect status_area;                        // Where the status line is displayed
     WRect ruler_area;                         // Where the ruler is displayed
@@ -287,6 +293,7 @@ void mcview_enqueue_change (struct hexedit_change_node **head, struct hexedit_ch
 void mcview_toggle_magic_mode (WView *view);
 void mcview_toggle_wrap_mode (WView *view);
 void mcview_toggle_nroff_mode (WView *view);
+void mcview_toggle_syntax_mode (WView *view);
 void mcview_toggle_hex_mode (WView *view);
 void mcview_init (WView *view);
 void mcview_done (WView *view);
