@@ -438,6 +438,12 @@ ShellIgnoreCase=true
 Open=%cd %p/ulib://
 View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lib
 
+[whl]
+Shell=.whl
+ShellIgnoreCase=true
+Open=%cd %p/uzip://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
 ### Sources ###
 
 [C/C++]
