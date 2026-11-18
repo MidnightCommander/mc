@@ -89,6 +89,13 @@ typedef struct
 
 struct mcview_nroff_struct;
 
+typedef enum
+{
+    MCVIEW_IMAGE_NONE = 0,
+    MCVIEW_IMAGE_ITERM2,  // OSC 1337, the terminal decodes any image format
+    MCVIEW_IMAGE_KITTY    // kitty graphics protocol, PNG only
+} mcview_image_proto_t;
+
 struct WView
 {
     Widget widget;
@@ -191,6 +198,11 @@ struct WView
     int *dir_idx;            /* Index of current file in dir structure.
                               * Pointer is used here as reference to WPanel::dir::count */
     vfs_path_t *ext_script;  // Temporary script file created by regex_command_for()
+
+    char *image_b64;                   // Base64 of the image file shown in quick view, or NULL
+    mcview_image_proto_t image_proto;  // How to show the image
+    int image_width, image_height;     // Size in pixels, if known (kitty only)
+    gboolean image_shown;              // Inline image is currently on the screen
 };
 
 typedef struct mcview_nroff_struct
@@ -289,6 +301,12 @@ void mcview_toggle_wrap_mode (WView *view);
 void mcview_toggle_nroff_mode (WView *view);
 void mcview_toggle_hex_mode (WView *view);
 void mcview_init (WView *view);
+
+// image.c
+void mcview_image_load (WView *view);
+gboolean mcview_image_active (const WView *view);
+void mcview_image_draw (WView *view);
+void mcview_image_forget (WView *view, gboolean redraw);
 void mcview_done (WView *view);
 void mcview_select_encoding (WView *view);
 void mcview_set_codeset (WView *view);

@@ -719,6 +719,7 @@ mcview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
             if (mc_global.midnight_shutdown)
                 mcview_ok_to_quit (view);
         }
+        mcview_image_forget (view, FALSE);
         mcview_done (view);
         mcview_remove_ext_script (view);
         return MSG_HANDLED;

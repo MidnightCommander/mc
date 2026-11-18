@@ -29,6 +29,7 @@ TESTS = \
 	execute__execute_external_editor_or_viewer \
 	execute__execute_get_external_cmd_opts_from_config \
 	file_history \
+	viewer_image \
 	usermenu__test_condition \
 	usermenu__test_expand_format
 
@@ -47,6 +48,9 @@ execute__execute_get_external_cmd_opts_from_config_SOURCES = \
 
 file_history_SOURCES = \
 	file_history.c
+
+viewer_image_SOURCES = \
+	viewer_image.c
 
 usermenu__test_condition_SOURCES = \
 	usermenu__test_condition.c
