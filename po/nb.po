@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad, 2024-2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -484,12 +484,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Miljøvariabelen TERM mangler.\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Klarte ikke sjekke SIGWINCH-røret"
-
 #, c-format
 msgid ""
 "\n"
@@ -521,6 +515,12 @@ msgid ""
 msgstr ""
 "Skjermstørrelsen %dx%d støttes ikke.\n"
 "Sjekk miljøvariabelen TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Miljøvariabelen TERM mangler.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Klarte ikke sjekke SIGWINCH-røret"
 
 msgid "B"
 msgstr "B"
@@ -1869,6 +1869,9 @@ msgstr "Fyll inn sti for &mkdir"
 msgid "&Preallocate space"
 msgstr "Forh&åndsreserver plass"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Escape-modus"
 
@@ -2944,6 +2947,16 @@ msgstr "Mapper: %zu, total størrelse: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Klarte ikke legge jobben i bakgrunnen"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Målet\n"
+"%s\n"
+"må være ei mappe"
+
 msgid "S&uspend"
 msgstr "&Pause"
 
@@ -3215,9 +3228,6 @@ msgstr "Bakgrunns&jobber"
 
 msgid "Screen lis&t"
 msgstr "Kjørende mo&duler"
-
-msgid "&Listing format edit"
-msgstr "Redigering av listeformat"
 
 msgid "Edit &extension file"
 msgstr "Rediger &utvidelsesfil"
@@ -3802,16 +3812,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"Målet\n"
-"%s\n"
-"må være ei mappe"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Slette %s?"
 
@@ -4131,6 +4131,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Fant skadet cpio-hode i\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4144,14 +4152,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s inneholder dupliserte oppføringer. Hopper over."
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Fant skadet cpio-hode i\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4538,6 +4538,9 @@ msgstr "Feil rapportert etter avbrudd."
 msgid "Aborted transfer would be successful."
 msgstr "Avbrutt overføring ville vært i orden."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek stoppet ikke på kanten av en post"
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
 
@@ -4559,9 +4562,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "fremstår ikke som et tar-arkiv"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek stoppet ikke på kanten av en post"
 
 msgid "Invalid value"
 msgstr "Ugyldig verdi"
@@ -4660,12 +4660,11 @@ msgstr ""
 "%s\n"
 "Dette er ikke en vanlig fil"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Klarte ikke åpne\n"
 "%s\n"
@@ -4678,8 +4677,11 @@ msgstr "Søket er ferdig"
 msgid "Continue from beginning?"
 msgstr "Fortsett fra begynnelsen?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Redigering av listeformat"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Tilbakestill hurtigtaster på HP-terminaler"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
@@ -508,12 +508,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Mayús"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "¡La variable de entorno TERM está sin definir!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Imposible comprobar tuberia para SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -547,6 +541,12 @@ msgid ""
 msgstr ""
 "El tamaño de ventana %dx%d no está soportado.\n"
 "Verifique el valor de la variable de entorno TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "¡La variable de entorno TERM está sin definir!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Imposible comprobar tuberia para SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1892,6 +1892,9 @@ msgstr "proponer nombre m&Kdir"
 msgid "&Preallocate space"
 msgstr "&Reservar espacio"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Tecla de escape (Esc)"
 
@@ -2969,6 +2972,16 @@ msgstr "Directorios: %zu, tamaño total: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Lo siento, no se pudo poner la tarea en 2º plano"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"El destino\n"
+"%s\n"
+"tiene que ser un directorio"
+
 msgid "S&uspend"
 msgstr "&Detener"
 
@@ -3240,9 +3253,6 @@ msgstr "&Procesos en 2º plano..."
 
 msgid "Screen lis&t"
 msgstr "&Lista de pantallas..."
-
-msgid "&Listing format edit"
-msgstr "edición del formato de &Listado"
 
 msgid "Edit &extension file"
 msgstr "&Editar extensiones..."
@@ -3831,16 +3841,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"El destino\n"
-"%s\n"
-"tiene que ser un directorio"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "¿Borrar %s?"
 
@@ -4161,6 +4161,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Cabecera cpio corrupta, encontrada en\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4174,14 +4182,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "¡%s contiene entradas duplicadas! ¡Ignorando!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Cabecera cpio corrupta, encontrada en\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4564,6 +4564,9 @@ msgstr "Error denunciado tras abortar."
 msgid "Aborted transfer would be successful."
 msgstr "Abortada transferencia con éxito."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
+
 msgid "Inconsistent tar archive"
 msgstr "Archivo de tipo tar inconsistente"
 
@@ -4585,9 +4588,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "no parece un archivo de tipo tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
 
 msgid "Invalid value"
 msgstr "Posición incorrecta"
@@ -4686,12 +4686,11 @@ msgstr ""
 "%s\n"
 "No es un archivo ordinario"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Imposible abrir\n"
 "%s\n"
@@ -4704,8 +4703,11 @@ msgstr "Búsqueda finalizada"
 msgid "Continue from beginning?"
 msgstr "¿Continuar desde el principio?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "edición del formato de &Listado"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Restablecer teclas en terminales HP"

@@ -26,6 +26,11 @@ AC_DEFINE([PACKAGE], ["mc"], [Name of package])
 dnl Enable silent rules by default (if yes)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
+# Enforce failing upon unknown `./configure` options by default
+if test "x$enable_option_checking" != xno; then
+  enable_option_checking=fatal
+fi
+
 mc_VERSION
 
 AM_MAINTAINER_MODE
@@ -334,7 +339,13 @@ dnl ############################################################################
 AC_CHECK_FUNCS([setlocale])
 
 AM_GNU_GETTEXT([external], [need-ngettext])
-AM_GNU_GETTEXT_VERSION([0.18.2])
+
+dnl Do NOT replace this with AM_GNU_GETTEXT_REQUIRE_VERSION: it makes autopoint
+dnl copy the files of the installed gettext instead. Since gettext 0.24, these
+dnl require a make that supports `!=' (GNU make >= 4.0 or BSD make), so tarballs
+dnl made on a recent system wouldn't build with the native make on macOS,
+dnl Solaris or AIX.
+AM_GNU_GETTEXT_VERSION([0.19.8])
 
 mc_ENCODING
 
@@ -511,7 +522,7 @@ ALL_DOC_LINGUAS="es hu it pl ru sr"
 DOC_LINGUAS=
 if test "x$USE_NLS" = xyes; then
     if test -z "$LINGUAS"; then
-        langs="`grep -v '^#' $srcdir/po/LINGUAS`"
+        langs="`sed -e '/^#/d' -e 's/#.*//' $srcdir/po/LINGUAS`"
     else
         langs="$LINGUAS"
     fi
@@ -736,12 +747,3 @@ Configuration:
   Internal editor:                ${edit_msg}
   Diff viewer:                    ${diff_msg}
 ])
-
-dnl option checking is disable by default due to AC_CONFIG_SUBDIRS
-dnl we enable it back for top-level ./configure
-if test -n "$ac_unrecognized_opts"; then
-  case $enable_option_checking in
-    fatal) AC_MSG_ERROR([unrecognized options: $ac_unrecognized_opts]) ;;
-    *)     AC_MSG_WARN( [unrecognized options: $ac_unrecognized_opts]) ;;
-  esac
-fi

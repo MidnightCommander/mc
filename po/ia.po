@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -475,12 +475,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Clave \"Shift\""
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Le variabile de ambiente TERM non es definite!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -506,6 +500,12 @@ msgid ""
 msgstr ""
 "Le dimenion de schermo %dx%d non es supportate.\n"
 "Verifica le variabile de ambiente TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Le variabile de ambiente TERM non es definite!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr ""
@@ -1790,6 +1790,9 @@ msgstr ""
 msgid "&Preallocate space"
 msgstr ""
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr ""
 
@@ -2733,6 +2736,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr ""
 
@@ -3003,9 +3013,6 @@ msgid "&Background jobs"
 msgstr ""
 
 msgid "Screen lis&t"
-msgstr ""
-
-msgid "&Listing format edit"
 msgstr ""
 
 msgid "Edit &extension file"
@@ -3579,13 +3586,6 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Deler %s?"
 
@@ -3875,6 +3875,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Capite de cpio corrumpite incontrate in\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3888,14 +3896,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s contine entratas duplicate, e es ignorate."
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Capite de cpio corrumpite incontrate in\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4252,6 +4252,9 @@ msgstr "Error reportate post abortamento."
 msgid "Aborted transfer would be successful."
 msgstr "Le transferentia abortate haberea succedite."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "Archivo tar inconsistente"
 
@@ -4270,9 +4273,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4365,8 +4365,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4374,9 +4373,6 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr "Continuar ab initio?"
-
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Reinitialisar le \"soft keys\" sur terminales HP"

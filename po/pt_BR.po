@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022-2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/mc/mc/language/"
@@ -523,12 +523,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "A variável de ambiente TERM não foi definida!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Não foi possível verificar o canal do SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -561,6 +555,12 @@ msgid ""
 msgstr ""
 "O tamanho da tela %d x %d não é suportado. \n"
 "Verifique a variável de ambiente TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "A variável de ambiente TERM não foi definida!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Não foi possível verificar o canal do SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1920,6 +1920,9 @@ msgstr "Mkdi&r com nome automático"
 msgid "&Preallocate space"
 msgstr "&Pré-alocar o espaço"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Modo da tecla Esc"
 
@@ -3008,6 +3011,16 @@ msgstr ""
 "Desculpe-me, eu não consegui colocar os processos que estão sendo executados "
 "em segundo plano"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"O destino\n"
+"%s\n"
+"deve ser um diretório"
+
 msgid "S&uspend"
 msgstr "S&uspender"
 
@@ -3280,9 +3293,6 @@ msgstr "&Trabalhos em segundo plano"
 
 msgid "Screen lis&t"
 msgstr "Lis&ta de telas"
-
-msgid "&Listing format edit"
-msgstr "Editar o formato da &listagem"
 
 msgid "Edit &extension file"
 msgstr "Editar a &extensão do arquivo"
@@ -3877,16 +3887,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"O destino\n"
-"%s\n"
-"deve ser um diretório"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Você quer excluir ‘%s’?"
 
@@ -4220,6 +4220,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"O cabeçalho do arquivo ‘cpio’ está corrompido e pode ser encontrado em\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4233,14 +4241,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "O %s contém entradas duplicadas e será ignorado!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"O cabeçalho do arquivo ‘cpio’ está corrompido e pode ser encontrado em\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4651,6 +4651,10 @@ msgstr "O erro foi reportado e depois será finalizado."
 msgid "Aborted transfer would be successful."
 msgstr "A transferência foi interrompida, mas poderia ser bem-sucedida."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+"O ‘mc_lseek’ não parou no limite do registro do arquivo compactado ‘tar’"
+
 msgid "Inconsistent tar archive"
 msgstr "O arquivo compactado ‘tar’ não é consistente"
 
@@ -4672,10 +4676,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "não parece ser um arquivo do tipo ‘tar’"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
-"O ‘mc_lseek’ não parou no limite do registro do arquivo compactado ‘tar’"
 
 msgid "Invalid value"
 msgstr "O valor não é válido"
@@ -4774,12 +4774,11 @@ msgstr ""
 "%s\n"
 "Não é um arquivo normal"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Não foi possível abrir o\n"
 "%s\n"
@@ -4792,8 +4791,12 @@ msgstr "A pesquisa foi concluída com sucesso"
 msgid "Continue from beginning?"
 msgstr "Você quer continuar a partir do início?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr ""
+#~ "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Editar o formato da &listagem"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Redefinir as teclas programáveis nos terminais da HP"

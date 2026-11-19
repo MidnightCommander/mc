@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2017,2020,2025\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -484,12 +484,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Променливата TERM не е зададена!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Каналът за SIGWINCH не може да се провери"
-
 #, c-format
 msgid ""
 "\n"
@@ -521,6 +515,12 @@ msgid ""
 msgstr ""
 "Не се поддържа размер на екрана %dx%d.\n"
 "Проверете променливата на средата TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променливата TERM не е зададена!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Каналът за SIGWINCH не може да се провери"
 
 msgid "B"
 msgstr "B"
@@ -1824,6 +1824,9 @@ msgstr "&Автоматично име за нови директории"
 msgid "&Preallocate space"
 msgstr "&Предварително заделяне на пространство"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Режим на Esc"
 
@@ -2789,6 +2792,13 @@ msgstr "Директории: %zu, общ размер %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Задачата не може да се премести във фонов режим"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "П&реустановяване"
 
@@ -3060,9 +3070,6 @@ msgstr "Фонови &задачи"
 
 msgid "Screen lis&t"
 msgstr "Списък на &екрани"
-
-msgid "&Listing format edit"
-msgstr "&Формат на списъка"
 
 msgid "Edit &extension file"
 msgstr "&Файл за разширения"
@@ -3645,13 +3652,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Да се изтрие ли „%s“?"
 
@@ -3968,6 +3968,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Грешна заглавна част на cpio в\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3981,14 +3989,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s съдържа повтарящи се елементи! Те се пропускат!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Грешна заглавна част на cpio в\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4366,6 +4366,9 @@ msgstr "Грешка след отмяната."
 msgid "Aborted transfer would be successful."
 msgstr "Преносът е отменен успешно."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "сгрешен архив tar"
 
@@ -4384,9 +4387,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4485,8 +4485,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4495,8 +4494,12 @@ msgstr "Търсенето приключи"
 msgid "Continue from beginning?"
 msgstr "Да се продължи ли от началото?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr ""
+#~ "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "&Формат на списъка"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Реинициализира програмните клавищи на HP терминали"

@@ -62,9 +62,9 @@ jobs:
             make indent && \
             git diff --exit-code && \
             \
-            make -j$(nproc) && \
-            make check && \
-            make install \
+            make -j$(nproc) distcheck && \
+            \
+            make -C doc/man \
           '
 
       - name: Render manual pages to HTML
@@ -76,7 +76,7 @@ jobs:
 
           for MANPAGE in $MANPAGES ; do
             man.mandoc -K utf-8 -mandoc -T html -O style=mandoc.css \
-              $(pwd)/install-prefix/share/man/man1/$MANPAGE.1 > man/$MANPAGE.html
+              $(pwd)/doc/man/$MANPAGE.1 > man/$MANPAGE.html
           done
 
           echo "<div align='right'>Manual pages: " > man/header.html

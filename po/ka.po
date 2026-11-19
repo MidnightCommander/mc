@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -468,12 +468,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "გარემოს ცვლადი TERM დაყენებული არაა!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -499,6 +493,12 @@ msgid ""
 msgstr ""
 "ეკრანიზ ზომა %dx%d არ არის მხარდაჭერილი.\n"
 "შეამოწმეთ გარემოს ცვლადი TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "გარემოს ცვლადი TERM დაყენებული არაა!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "ბ"
@@ -1783,6 +1783,9 @@ msgstr "Mkdir-ის ავტომატური სახელი"
 msgid "&Preallocate space"
 msgstr "ადგილის წინასწარი გამოყოფა"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Esc ღილაკის რეჟიმი"
 
@@ -2727,6 +2730,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "&შეჩერება"
 
@@ -2998,9 +3008,6 @@ msgstr "ფონური ამოცანები"
 
 msgid "Screen lis&t"
 msgstr "ეკრანის სია"
-
-msgid "&Listing format edit"
-msgstr "&სიის ფორმატის ჩასწორება"
 
 msgid "Edit &extension file"
 msgstr "გაფართოების ფაილის ჩასწორება"
@@ -3573,13 +3580,6 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "წავშალო \"%s\"?"
 
@@ -3865,6 +3865,12 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3873,12 +3879,6 @@ msgstr ""
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr ""
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
 msgstr ""
 
 #, c-format
@@ -4226,6 +4226,9 @@ msgstr ""
 msgid "Aborted transfer would be successful."
 msgstr ""
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr ""
 
@@ -4242,9 +4245,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4338,8 +4338,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4348,8 +4347,8 @@ msgstr "ძებნა დასრულდა"
 msgid "Continue from beginning?"
 msgstr "თავიდან დავიწყო?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
+#~ msgid "&Listing format edit"
+#~ msgstr "&სიის ფორმატის ჩასწორება"
 
 #~ msgid "Specifies a color configuration"
 #~ msgstr "ფერების კონფიგურაციის მითითება"
