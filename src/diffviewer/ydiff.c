@@ -610,41 +610,6 @@ dview_get_utf (const char *str, const size_t pos, int *len)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static size_t
-dview_str_utf8_offset_to_pos (const char *text, size_t length)
-{
-    ptrdiff_t result;
-
-    if (text == NULL || text[0] == '\0')
-        return length;
-
-    if (g_utf8_validate (text, -1, NULL))
-        result = g_utf8_offset_to_pointer (text, length) - text;
-    else
-    {
-        gunichar uni;
-        char *tmpbuf, *buffer;
-
-        buffer = tmpbuf = g_strdup (text);
-        while (tmpbuf[0] != '\0')
-        {
-            uni = g_utf8_get_char_validated (tmpbuf, -1);
-            if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
-                tmpbuf = g_utf8_next_char (tmpbuf);
-            else
-            {
-                tmpbuf[0] = '.';
-                tmpbuf++;
-            }
-        }
-        result = g_utf8_offset_to_pointer (tmpbuf, length) - tmpbuf;
-        g_free (buffer);
-    }
-    return MAX (length, (size_t) result);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* diff parse *************************************************************** */
 
 /**
@@ -1299,39 +1264,118 @@ cvt_ncpy (char *dst, int dstsize, const char **_src, size_t srcsize, int base, i
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Screen columns taken by a byte of a line: a UTF-8 character is counted at its first byte (two
+ * columns if wide), the rest of its bytes take none.
+ *
+ * @param src current byte
+ * @param srcsize number of bytes left in the line
+ * @param utf8 TRUE if the line is UTF-8
+ * @param[in,out] tail number of bytes of the current UTF-8 character still to come
+ *
+ * @return number of columns
+ */
+
+static int
+cvt_columns (const char *src, size_t srcsize, gboolean utf8, int *tail)
+{
+    gunichar uni;
+
+    if (!utf8)
+        return 1;
+
+    if (*tail > 0)
+    {
+        (*tail)--;
+        return 0;
+    }
+
+    uni = g_utf8_get_char_validated (src, (gssize) srcsize);
+    if (uni == (gunichar) (-1) || uni == (gunichar) (-2))
+        return 1;
+
+    *tail = g_utf8_next_char (src) - src - 1;
+    if (g_unichar_iszerowidth (uni))
+        return 0;
+    return g_unichar_iswide (uni) ? 2 : 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Skip a character scrolled out at the left: all of its bytes, and as many columns as it takes.
+ *
+ * @param[in,out] src current byte, the last byte of the character on return
+ * @param[in,out] srcsize number of bytes left in the line
+ * @param utf8 TRUE if the line is UTF-8
+ * @param cols columns taken by the character
+ * @param[in,out] skip number of columns still to skip
+ *
+ * @return number of columns of the character that are not scrolled out (the second half of a wide
+ *         character): they are shown as spaces
+ */
+
+static int
+cvt_skip_char (const char **src, size_t *srcsize, gboolean utf8, int cols, int *skip)
+{
+    int rest = 0;
+
+    if (utf8)
+    {
+        int ch_length = 1;
+
+        (void) dview_get_utf (*src, 0, &ch_length);
+        ch_length = MIN ((size_t) ch_length, *srcsize);
+        *src += ch_length - 1;
+        *srcsize -= ch_length - 1;
+    }
+
+    if (cols > *skip)
+        rest = cols - *skip;
+    *skip = MAX (*skip - cols, 0);
+
+    return rest;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Read line from memory, converting tabs to spaces and padding with spaces.
  *
  * @param src buffer to read from
  * @param srcsize size of src buffer
  * @param dst buffer to read to
  * @param dstsize size of dst buffer, excluding trailing null
- * @param skip number of characters to skip
+ * @param skip number of columns to skip
  * @param ts tab size
  * @param show_cr show trailing carriage return as ^M
+ * @param utf8 TRUE if the line is UTF-8 (for the columns of the tab stops)
  *
  * @return negative on error, otherwise number of bytes except padding
  */
 
 static int
 cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int ts,
-          gboolean show_cr)
+          gboolean show_cr, gboolean utf8)
 {
     int sz = 0;
 
     if (src != NULL)
     {
         int i;
+        int tail = 0;
         char *tmp = dst;
         const int base = 0;
 
-        for (i = 0; dstsize != 0 && srcsize != 0 && *src != '\n'; i++, src++, srcsize--)
+        for (i = 0; dstsize != 0 && srcsize != 0 && *src != '\n'; src++, srcsize--)
         {
+            const int cols = cvt_columns (src, srcsize, utf8, &tail);
+
             if (*src == '\t')
             {
                 int j;
 
                 j = TAB_SKIP (ts, i + base);
-                i += j - 1;
+                i += j;
                 while (j-- > 0)
                 {
                     if (skip > 0)
@@ -1363,18 +1407,21 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
             }
             else if (skip > 0)
             {
-                int ch_length = 1;
+                const int rest = cvt_skip_char (&src, &srcsize, utf8, cols, &skip);
 
-                (void) dview_get_utf (src, 0, &ch_length);
-                if (ch_length > 1)
-                    skip += ch_length - 1;
-
-                skip--;
+                tail = 0;
+                for (int n = 0; n < rest && dstsize != 0; n++)
+                {
+                    dstsize--;
+                    *dst++ = ' ';
+                }
+                i += cols;
             }
             else
             {
                 dstsize--;
                 *dst++ = *src;
+                i += cols;
             }
         }
         sz = dst - tmp;
@@ -1394,9 +1441,10 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
  * @param srcsize size of src buffer
  * @param dst buffer to read to
  * @param dstsize size of dst buffer, excluding trailing null
- * @param skip number of characters to skip
+ * @param skip number of columns to skip
  * @param ts tab size
  * @param show_cr show trailing carriage return as ^M
+ * @param utf8 TRUE if the line is UTF-8 (for the columns of the tab stops)
  * @param hdiff horizontal diff structure
  * @param ord DIFF_LEFT if reading from first file, DIFF_RIGHT if reading from 2nd file
  * @param att buffer of attributes
@@ -1406,24 +1454,27 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
 
 static int
 cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int ts,
-           gboolean show_cr, GArray *hdiff, diff_place_t ord, char *att)
+           gboolean show_cr, gboolean utf8, GArray *hdiff, diff_place_t ord, char *att)
 {
     int sz = 0;
 
     if (src != NULL)
     {
         int i, k;
+        int tail = 0;
         char *tmp = dst;
         const int base = 0;
 
-        for (i = 0, k = 0; dstsize != 0 && srcsize != 0 && *src != '\n'; i++, k++, src++, srcsize--)
+        for (i = 0, k = 0; dstsize != 0 && srcsize != 0 && *src != '\n'; k++, src++, srcsize--)
         {
+            const int cols = cvt_columns (src, srcsize, utf8, &tail);
+
             if (*src == '\t')
             {
                 int j;
 
                 j = TAB_SKIP (ts, i + base);
-                i += j - 1;
+                i += j;
                 while (j-- > 0)
                 {
                     if (skip != 0)
@@ -1459,19 +1510,25 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             }
             else if (skip != 0)
             {
-                int ch_length = 1;
+                const char *start = src;
+                const int rest = cvt_skip_char (&src, &srcsize, utf8, cols, &skip);
 
-                (void) dview_get_utf (src, 0, &ch_length);
-                if (ch_length > 1)
-                    skip += ch_length - 1;
-
-                skip--;
+                tail = 0;
+                for (int n = 0; n < rest && dstsize != 0; n++)
+                {
+                    dstsize--;
+                    *att++ = is_inside (k, hdiff, ord);
+                    *dst++ = ' ';
+                }
+                k += src - start;
+                i += cols;
             }
             else
             {
                 dstsize--;
                 *att++ = is_inside (k, hdiff, ord);
                 *dst++ = *src;
+                i += cols;
             }
         }
         sz = dst - tmp;
@@ -2471,6 +2528,71 @@ dview_fini (WDiff *dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Print a line made by cvt_mget(), cvt_mgeta() or cvt_fget() and fill the rest of it with spaces,
+ * counting screen columns: a UTF-8 character takes one column (two if wide), not one per byte.
+ *
+ * @param dview diff viewer
+ * @param buf line to print
+ * @param att attributes of the bytes of @buf (inside a change or not), or NULL
+ * @param width width of the line in columns
+ */
+
+static void
+dview_print_line (const WDiff *dview, const char *buf, const char *att, int width)
+{
+    const size_t len = strlen (buf);
+    int col = 0;
+
+    for (size_t cnt = 0; cnt < len && col < width; cnt++)
+    {
+        int next_ch;
+        int ch_width = 1;
+
+        if (att != NULL)
+            tty_setcolor (att[cnt] ? DIFFVIEWER_CHANGEDNEW_COLOR : DIFFVIEWER_CHANGEDLINE_COLOR);
+
+        if (dview->utf8)
+        {
+            int ch_length = 0;
+
+            next_ch = dview_get_utf (buf, cnt, &ch_length);
+            if (ch_length > 1)
+                cnt += ch_length - 1;
+            if (!g_unichar_isprint (next_ch))
+                next_ch = '.';
+        }
+        else
+            next_ch = dview_get_byte (buf, cnt);
+
+        if (mc_global.utf8_display)
+        {
+            if (!dview->utf8)
+                next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
+            if (g_unichar_iszerowidth (next_ch))
+                ch_width = 0;
+            else if (g_unichar_iswide (next_ch))
+                ch_width = 2;
+        }
+        else if (dview->utf8)
+            next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+        else
+            next_ch = convert_to_display_c (next_ch);
+
+        // a wide character doesn't fit into the last column
+        if (col + ch_width > width)
+            break;
+
+        tty_print_anychar (next_ch);
+        col += ch_width;
+    }
+
+    for (; col < width; col++)
+        tty_print_char (' ');
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int height, int width)
 {
@@ -2519,10 +2641,13 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         return -1;
     }
 
+    // bytes to take from a line: in UTF-8 a character of one column takes up to 4 bytes,
+    // dview_print_line() stops at the width of the panel
+    k = dview->utf8 ? MIN ((size_t) width * 4, sizeof (buf) - 1) : (size_t) width;
+
     for (i = dview->skip_rows, j = 0; i < dview->a[ord]->len && j < height; j++, i++)
     {
         int ch;
-        int next_ch = 0;
 
         p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
@@ -2552,56 +2677,17 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
                 {
                     char att[BUFSIZ];
 
-                    if (dview->utf8)
-                        k = dview_str_utf8_offset_to_pos (p->p, width);
-                    else
-                        k = width;
-
-                    cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
+                    cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr, dview->utf8,
                                g_ptr_array_index (dview->hdiff, i), ord, att);
                     tty_gotoyx (r + j, c);
-
-                    for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
-                    {
-                        if (dview->utf8)
-                        {
-                            int ch_length = 0;
-
-                            next_ch = dview_get_utf (buf, cnt, &ch_length);
-                            if (ch_length > 1)
-                                cnt += ch_length - 1;
-                            if (!g_unichar_isprint (next_ch))
-                                next_ch = '.';
-                        }
-                        else
-                            next_ch = dview_get_byte (buf, cnt);
-
-                        tty_setcolor (att[cnt] ? DIFFVIEWER_CHANGEDNEW_COLOR
-                                               : DIFFVIEWER_CHANGEDLINE_COLOR);
-                        if (mc_global.utf8_display)
-                        {
-                            if (!dview->utf8)
-                                next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch,
-                                                                      dview->converter);
-                        }
-                        else if (dview->utf8)
-                            next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
-                        else
-                            next_ch = convert_to_display_c (next_ch);
-
-                        tty_print_anychar (next_ch);
-                    }
+                    dview_print_line (dview, buf, att, width);
                     continue;
                 }
 
                 if (ch == CHG_CH)
                     tty_setcolor (DIFFVIEWER_CHANGEDNEW_COLOR);
 
-                if (dview->utf8)
-                    k = dview_str_utf8_offset_to_pos (p->p, width);
-                else
-                    k = width;
-                cvt_mget (p->p, p->u.len, buf, k, skip, tab_size, show_cr);
+                cvt_mget (p->p, p->u.len, buf, k, skip, tab_size, show_cr, dview->utf8);
             }
             else
                 cvt_fget (f, p->u.off, buf, width, skip, tab_size, show_cr);
@@ -2621,36 +2707,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
             fill_by_space (buf, width, TRUE);
         }
         tty_gotoyx (r + j, c);
-        // tty_print_nstring (buf, width);
-
-        for (size_t cnt = 0; cnt < strlen (buf) && cnt < (size_t) width; cnt++)
-        {
-            if (dview->utf8)
-            {
-                int ch_length = 0;
-
-                next_ch = dview_get_utf (buf, cnt, &ch_length);
-                if (ch_length > 1)
-                    cnt += ch_length - 1;
-                if (!g_unichar_isprint (next_ch))
-                    next_ch = '.';
-            }
-            else
-                next_ch = dview_get_byte (buf, cnt);
-
-            if (mc_global.utf8_display)
-            {
-                if (!dview->utf8)
-                    next_ch =
-                        convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
-            }
-            else if (dview->utf8)
-                next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
-            else
-                next_ch = convert_to_display_c (next_ch);
-
-            tty_print_anychar (next_ch);
-        }
+        dview_print_line (dview, buf, NULL, width);
     }
 
     tty_setcolor (CORE_NORMAL_COLOR);
