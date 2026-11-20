@@ -995,8 +995,14 @@ vfs_prefix_to_class (const char *prefix)
             return vfs;
         }
 
-        if (vfs->prefix != NULL && strncmp (prefix, vfs->prefix, strlen (vfs->prefix)) == 0)
-            return vfs;
+        if (vfs->prefix != NULL)
+        {
+            const size_t prefix_len = strlen (vfs->prefix);
+
+            if (strncmp (prefix, vfs->prefix, prefix_len) == 0
+                && (prefix[prefix_len] == '\0' || prefix[prefix_len] == ':'))
+                return vfs;
+        }
     }
 
     return NULL;

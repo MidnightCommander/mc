@@ -133,6 +133,16 @@ static const struct test_vfs_prefix_to_class_ds
         "test4:",
         NULL,
     },
+    {
+        // 8
+        "test2extra",
+        NULL,
+    },
+    {
+        // exact prefix, as passed after stripping the "://" delimiter
+        "test2",
+        &vfs_test_ops2,
+    },
 };
 
 /* @Test(dataSource = "test_vfs_prefix_to_class_ds") */
