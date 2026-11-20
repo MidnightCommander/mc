@@ -1,0 +1,23 @@
+{
+  "Buckets": [
+    {
+      "Name": "photos",
+      "Contents": [
+        {"Key": "2024/", "Size": 0, "LastModified": "2024-03-01T08:00:00.000Z"},
+        {"Key": "2024/beach.jpg", "Size": 2481923, "LastModified": "2024-03-01T08:15:42.000Z"},
+        {"Key": "2024/garden/rose.jpg", "Size": 1048576, "LastModified": "2024-06-21T17:03:09.000Z"},
+        {"Key": "readme.txt", "Size": 41, "LastModified": "2023-12-31T23:59:59.000Z"}
+      ]
+    },
+    {
+      "Name": "backup-plus-archive-at-example.com",
+      "Contents": [
+        {"Key": "disk.img", "Size": 5368709120, "LastModified": "2025-01-15T04:30:00.000Z"},
+        {"Key": "notes/café müller.txt", "Size": 12, "LastModified": "2025-02-02T10:20:30.000Z"}
+      ]
+    },
+    {
+      "Name": "empty"
+    }
+  ]
+}

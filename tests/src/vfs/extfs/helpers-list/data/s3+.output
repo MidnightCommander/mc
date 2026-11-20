@@ -1,0 +1,8 @@
+drwxr-xr-x   1    3530540 2024-06-21 17:03:00 photos
+-rw-r--r--   1    2481923 2024-03-01 08:15:00 photos/2024/beach.jpg
+-rw-r--r--   1    1048576 2024-06-21 17:03:00 photos/2024/garden/rose.jpg
+-rw-r--r--   1         41 2023-12-31 23:59:00 photos/readme.txt
+drwxr-xr-x   1 5368709132 2025-02-02 10:20:00 backup-plus-archive-at-example.com
+-rw-r--r--   1 5368709120 2025-01-15 04:30:00 backup-plus-archive-at-example.com/disk.img
+-rw-r--r--   1         12 2025-02-02 10:20:00 backup-plus-archive-at-example.com/notes/café müller.txt
+drwxr-xr-x   1          0 1970-01-01 00:00:00 empty
