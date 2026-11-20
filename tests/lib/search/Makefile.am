@@ -14,6 +14,7 @@ TESTS = \
 	glob_prepare_replace_str \
 	glob_translate_to_regex \
 	hex_translate_to_regex \
+	ignore_accents \
 	regex_replace_esc_seq \
 	regex_process_escape_sequence \
 	translate_replace_glob_to_regex
@@ -37,3 +38,6 @@ glob_translate_to_regex_SOURCES = \
 
 hex_translate_to_regex_SOURCES = \
 	hex_translate_to_regex.c
+
+ignore_accents_SOURCES = \
+	ignore_accents.c

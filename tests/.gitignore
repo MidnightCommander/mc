@@ -27,6 +27,9 @@ lib/search/glob_translate_to_regex.trs
 lib/search/hex_translate_to_regex
 lib/search/hex_translate_to_regex.log
 lib/search/hex_translate_to_regex.trs
+lib/search/ignore_accents
+lib/search/ignore_accents.log
+lib/search/ignore_accents.trs
 lib/search/regex_process_escape_sequence
 lib/search/regex_process_escape_sequence.log
 lib/search/regex_process_escape_sequence.trs

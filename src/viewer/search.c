@@ -52,6 +52,7 @@ mcview_search_options_t mcview_search_options = {
     .backwards = FALSE,
     .whole_words = FALSE,
     .all_codepages = FALSE,
+    .ignore_accents = FALSE,
 };
 
 /*** file scope macro definitions ****************************************************************/
@@ -394,6 +395,7 @@ mcview_search_init (WView *view)
     view->search->is_all_charsets = mcview_search_options.all_codepages;
     view->search->is_case_sensitive = mcview_search_options.case_sens;
     view->search->whole_words = mcview_search_options.whole_words;
+    view->search->ignore_accents = mcview_search_options.ignore_accents;
     view->search->search_fn = mcview_search_cmd_callback;
     view->search->update_fn = mcview_search_update_cmd_callback;
 

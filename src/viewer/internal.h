@@ -210,6 +210,7 @@ typedef struct mcview_search_options_t
     gboolean backwards;
     gboolean whole_words;
     gboolean all_codepages;
+    gboolean ignore_accents;
 } mcview_search_options_t;
 
 /*** global variables defined in .c file *********************************************************/
