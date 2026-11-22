@@ -48,6 +48,19 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+#if !GLIB_CHECK_VERSION(2, 76, 0)
+/* Call the GCompareFunc pointed to by @user_data with the elements pointed to by @a and @b. */
+static gint
+ptr_array_sort_values_compare (gconstpointer a, gconstpointer b, gpointer user_data)
+{
+    const GCompareFunc func = *(const GCompareFunc *) user_data;
+
+    return func (*(const gconstpointer *) a, *(const gconstpointer *) b);
+}
+#endif
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -186,6 +199,26 @@ g_queue_clear_full (GQueue *queue, GDestroyNotify free_func)
         g_queue_foreach (queue, (GFunc) free_func, NULL);
 
     g_queue_clear (queue);
+}
+#endif
+
+/* --------------------------------------------------------------------------------------------- */
+
+#if !GLIB_CHECK_VERSION(2, 76, 0)
+/**
+ * g_ptr_array_sort_values:
+ * @array: a #GPtrArray
+ * @func: comparison function
+ *
+ * Sorts the array like g_ptr_array_sort(), but @func is called with the elements of the array,
+ * not with pointers to them, so e.g. strcmp() can be used to sort an array of strings.
+ *
+ * Since: 2.76
+ */
+void
+g_ptr_array_sort_values (GPtrArray *array, GCompareFunc func)
+{
+    g_ptr_array_sort_with_data (array, ptr_array_sort_values_compare, &func);
 }
 #endif
 

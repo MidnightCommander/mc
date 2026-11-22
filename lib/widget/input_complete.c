@@ -677,14 +677,6 @@ command_completion_function (const char *text, int state, input_complete_t flags
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static int
-match_compare (gconstpointer a, gconstpointer b)
-{
-    return strcmp (*(char *const *) a, *(char *const *) b);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Returns an array of char * matches with the longest common denominator
    in the 1st entry. Then a NULL terminated list of different possible
    completions follows.
@@ -720,7 +712,7 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
         size_t i, j;
         size_t low = 4096;  // Count of max-matched characters.
 
-        g_ptr_array_sort (match_list, match_compare);
+        g_ptr_array_sort_values (match_list, (GCompareFunc) strcmp);
 
         /* And compare each member of the list with
            the next, finding out where they stop matching.
