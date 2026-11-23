@@ -684,7 +684,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
         }
         else if (header->header.typeflag == XHDTYPE || header->header.typeflag == SOLARIS_XHDTYPE)
         {
-            if (arch->type == TAR_UNKNOWN)
+            // ustar and pax share the magic, only an extended header tells them apart
+            if (arch->type == TAR_UNKNOWN || arch->type == TAR_USTAR)
                 arch->type = TAR_POSIX;
             if (!tar_xheader_read (arch, &current_stat_info.xhdr, header,
                                    OFF_FROM_HEADER (header->header.size)))

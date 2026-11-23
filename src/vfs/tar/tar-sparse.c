@@ -522,8 +522,8 @@ star_get_sparse_info (tar_super_t *archive, struct tar_sparse_file *file)
 static gboolean
 pax_sparse_member_p (struct tar_sparse_file *file)
 {
-    return file->stat_info->sparse_map != NULL && file->stat_info->sparse_map->len > 0
-        && file->stat_info->sparse_major > 0;
+    return (file->stat_info->sparse_map != NULL && file->stat_info->sparse_map->len > 0)
+        || file->stat_info->sparse_major > 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
