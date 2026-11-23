@@ -237,6 +237,16 @@ mcview_update (WView *view)
 void
 mcview_display (WView *view)
 {
+    if (mcview_image_active (view))
+    {
+        mcview_display_clean (view);
+        mcview_display_status (view);
+        mcview_image_draw (view);
+        return;
+    }
+
+    mcview_image_forget (view, TRUE);
+
     if (view->mode_flags.hex)
         mcview_display_hex (view);
     else

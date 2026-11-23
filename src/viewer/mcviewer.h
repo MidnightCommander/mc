@@ -36,6 +36,9 @@ extern int mcview_max_dirt_limit;
 extern gboolean mcview_mouse_move_pages;
 extern char *mcview_show_eof;
 
+// Protocol used to show images in quick view: auto, iterm2, kitty or none
+extern char *mcview_image_protocol;
+
 /*** declarations of public functions ************************************************************/
 
 /* Creates a new WView object with the given properties. */
