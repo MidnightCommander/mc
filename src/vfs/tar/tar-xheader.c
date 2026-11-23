@@ -750,15 +750,20 @@ static gboolean
 sparse_offset_decoder (struct tar_stat_info *st, const char *keyword, const char *arg, size_t size)
 {
     uintmax_t u;
-    struct sp_array *s;
+    struct sp_array s;
 
     (void) size;
 
     if (!decode_num (&u, arg, TYPE_MAXIMUM (off_t), keyword))
         return FALSE;
 
-    s = &g_array_index (st->sparse_map, struct sp_array, st->sparse_map->len - 1);
-    s->offset = u;
+    // the offset starts a chunk, which needs GNU.sparse.numblocks before it
+    if (st->sparse_map == NULL)
+        return FALSE;
+
+    s.offset = u;
+    s.numbytes = 0;
+    g_array_append_val (st->sparse_map, s);
     return TRUE;
 }
 
@@ -769,16 +774,17 @@ sparse_numbytes_decoder (struct tar_stat_info *st, const char *keyword, const ch
                          size_t size)
 {
     uintmax_t u;
-    struct sp_array s;
 
     (void) size;
 
     if (!decode_num (&u, arg, SIZE_MAX, keyword))
         return FALSE;
 
-    s.offset = 0;
-    s.numbytes = u;
-    g_array_append_val (st->sparse_map, s);
+    // the size ends the chunk started by GNU.sparse.offset
+    if (st->sparse_map == NULL || st->sparse_map->len == 0)
+        return FALSE;
+
+    g_array_index (st->sparse_map, struct sp_array, st->sparse_map->len - 1).numbytes = u;
     return TRUE;
 }
 
