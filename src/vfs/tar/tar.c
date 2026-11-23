@@ -251,7 +251,7 @@ tar_calc_sparse_offsets (struct vfs_s_inode *inode)
 
         sp = &g_array_index (sm, struct sp_array, i);
         sp->arch_offset = begin;
-        begin += BLOCKSIZE * (sp->numbytes / BLOCKSIZE + sp->numbytes % BLOCKSIZE);
+        begin += BLOCKSIZE * (sp->numbytes / BLOCKSIZE + (sp->numbytes % BLOCKSIZE != 0));
     }
 }
 
