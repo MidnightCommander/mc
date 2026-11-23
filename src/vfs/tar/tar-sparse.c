@@ -628,7 +628,7 @@ tar_sparse_fixup_header (tar_super_t *archive, struct tar_stat_info *st)
 /* --------------------------------------------------------------------------------------------- */
 
 enum dump_status
-tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st)
+tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st, off_t *data_offset)
 {
     gboolean rc = TRUE;
     struct tar_sparse_file file;
@@ -640,6 +640,8 @@ tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st)
     file.fd = -1;
 
     rc = sparse_decode_header (archive, &file);
+    // the data follows the sparse map or the extension headers, if any
+    *data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
     (void) tar_skip_file (archive, file.stat_info->archive_file_size - file.dumped_size);
     return (sparse_done (&file) && rc) ? dump_status_ok : dump_status_short;
 }

@@ -312,7 +312,8 @@ gboolean tar_skip_file (tar_super_t *archive, off_t size);
 /* tar-sparse.c */
 gboolean tar_sparse_member_p (tar_super_t *archive, struct tar_stat_info *st);
 gboolean tar_sparse_fixup_header (tar_super_t *archive, struct tar_stat_info *st);
-enum dump_status tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st);
+enum dump_status tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st,
+                                       off_t *data_offset);
 
 /* tar-xheader.c */
 gboolean tar_xheader_decode (struct tar_stat_info *st);
