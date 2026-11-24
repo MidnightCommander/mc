@@ -40,13 +40,13 @@ body:
       required: true
 
   - type: checkboxes
-    id: reproducible-latest
+    id: reproducible-master
     attributes:
-      label: Is this issue reproducible using the latest version of Midnight Commander?
+      label: Is this issue also present on the `master` branch of Midnight Commander?
       description: |
-        Check [Releases](/MidnightCommander/mc/tags) for the latest version of Midnight Commander. If you are not up to date, please try to reproduce your problem after updating to the latest version.
+        Please try to reproduce the problem after checking out and building the Midnight Commander code from the `master` branch, or at least the latest released version.
       options:
-        - label: I confirm the issue is still reproducible with the latest version of Midnight Commander
+        - label: I confirm that the issue is still reproducible on the `master` branch of Midnight Commander
 
   - type: textarea
     id: reproduction-steps
