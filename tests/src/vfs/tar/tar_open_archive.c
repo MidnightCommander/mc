@@ -160,6 +160,7 @@ static const struct test_tar_pax_sparse_ds
         "15 path=sparse\n",
         NULL,
         0,
+        FALSE,
     },
     // GNU tar --sparse-version=0.1: the map is in the extended header
     {
@@ -169,6 +170,7 @@ static const struct test_tar_pax_sparse_ds
         "15 path=sparse\n",
         NULL,
         0,
+        FALSE,
     },
     // GNU tar and bsdtar default (1.0): the map precedes the chunk in the data
     {
@@ -178,6 +180,7 @@ static const struct test_tar_pax_sparse_ds
         "31 GNU.sparse.realsize=1048576\n",
         "1\n2048\n6\n",
         0,
+        FALSE,
     },
     // 1.0 with a chunk that doesn't fill its last block, which is padded in the archive
     {
@@ -187,6 +190,7 @@ static const struct test_tar_pax_sparse_ds
         "31 GNU.sparse.realsize=1048576\n",
         "2\n0\n1000\n2048\n6\n",
         1000,
+        FALSE,
     },
     // 0.0 with a chunk count that doesn't fit into memory
     {
@@ -197,6 +201,7 @@ static const struct test_tar_pax_sparse_ds
         "15 path=sparse\n",
         NULL,
         0,
+        FALSE,
     },
     // 1.0 with a chunk count that doesn't fit into memory
     {
