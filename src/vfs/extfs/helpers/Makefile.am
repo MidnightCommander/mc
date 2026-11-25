@@ -30,6 +30,7 @@ EXTFS_IN    = 			\
 	uarc.in			\
 	uarj.in			\
 	uc1541.in		\
+	uc2.in			\
 	ucab.in			\
 	uha.in			\
 	ulha.in			\
@@ -65,6 +66,7 @@ EXTFS_OUT = 			\
 	uarc			\
 	uarj			\
 	uc1541			\
+	uc2			\
 	ucab			\
 	uha			\
 	ulha			\
