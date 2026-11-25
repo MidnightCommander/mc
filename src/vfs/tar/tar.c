@@ -643,7 +643,13 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 
             size -= size % BLOCKSIZE;
 
-            header_copy = g_malloc (size + 1);
+            header_copy = g_try_malloc (size + 1);
+            if (header_copy == NULL)
+            {
+                message (D_ERROR, MSG_ERROR, _ ("Inconsistent tar archive"));
+                status = HEADER_FAILURE;
+                goto ret;
+            }
 
             if (header->header.typeflag == GNUTYPE_LONGNAME)
             {
@@ -706,8 +712,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
                 arch->type = TAR_POSIX;
 
             memset (&xhdr, 0, sizeof (xhdr));
-            tar_xheader_read (arch, &xhdr, header, OFF_FROM_HEADER (header->header.size));
-            ok = tar_xheader_decode_global (&xhdr);
+            ok = tar_xheader_read (arch, &xhdr, header, OFF_FROM_HEADER (header->header.size))
+                && tar_xheader_decode_global (&xhdr);
             tar_xheader_destroy (&xhdr);
 
             if (!ok)

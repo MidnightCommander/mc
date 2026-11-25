@@ -103,13 +103,26 @@ append_data (GByteArray *archive, const char *data, size_t len)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Fill in the checksum of a header. */
+static void
+set_checksum (union block *b)
+{
+    unsigned int sum = 0;
+    size_t i;
+
+    memset (b->header.chksum, ' ', sizeof (b->header.chksum));
+    for (i = 0; i < sizeof (*b); i++)
+        sum += (unsigned char) b->buffer[i];
+    snprintf (b->header.chksum, sizeof (b->header.chksum), "%06o", sum);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* Append an ustar header followed by its data. */
 static void
 append_member (GByteArray *archive, const char *name, char typeflag, const char *data, size_t len)
 {
     union block b;
-    unsigned int sum = 0;
-    size_t i;
 
     memset (&b, 0, sizeof (b));
     g_strlcpy (b.header.name, name, sizeof (b.header.name));
@@ -121,11 +134,7 @@ append_member (GByteArray *archive, const char *name, char typeflag, const char 
     b.header.typeflag = typeflag;
     memcpy (b.header.magic, TMAGIC, sizeof (b.header.magic));
     memcpy (b.header.version, "00", sizeof (b.header.version));
-
-    memset (b.header.chksum, ' ', sizeof (b.header.chksum));
-    for (i = 0; i < sizeof (b); i++)
-        sum += (unsigned char) b.buffer[i];
-    snprintf (b.header.chksum, sizeof (b.header.chksum), "%06o", sum);
+    set_checksum (&b);
 
     g_byte_array_append (archive, (const guint8 *) b.buffer, sizeof (b));
     append_data (archive, data, len);
@@ -288,6 +297,64 @@ END_PARAMETRIZED_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @DataSource("test_tar_huge_header_size_ds") */
+static const struct test_tar_huge_header_size_ds
+{
+    char typeflag;
+} test_tar_huge_header_size_ds[] = {
+    { XHDTYPE }, { SOLARIS_XHDTYPE }, { XGLTYPE }, { GNUTYPE_LONGNAME }, { GNUTYPE_LONGLINK },
+};
+
+/* @Test(dataSource = "test_tar_huge_header_size_ds") */
+START_PARAMETRIZED_TEST (test_tar_huge_header_size, test_tar_huge_header_size_ds)
+{
+    static const guint8 zero_blocks[2 * BLOCKSIZE] = { 0 };
+    GByteArray *archive;
+    union block *b;
+    char *dir, *path, *archive_path;
+    vfs_path_t *vpath;
+    DIR *d;
+
+    // given: a header the data of which doesn't fit into memory
+    archive = g_byte_array_new ();
+    append_member (archive, "huge", data->typeflag, "", 0);
+    b = (union block *) archive->data;
+    // 2^60 bytes in base-256
+    memset (b->header.size, 0, sizeof (b->header.size));
+    b->header.size[0] = (char) 0x80;
+    b->header.size[4] = 0x10;
+    set_checksum (b);
+    append_member (archive, "a", REGTYPE, "hello\n", 6);
+    g_byte_array_append (archive, zero_blocks, sizeof (zero_blocks));
+
+    dir = g_dir_make_tmp ("mctest-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    path = g_build_filename (dir, "test.tar", (char *) NULL);
+    mctest_assert_true (
+        g_file_set_contents (path, (const char *) archive->data, (gssize) archive->len, NULL));
+    archive_path = g_strconcat (path, PATH_SEP_STR "utar" VFS_PATH_URL_DELIMITER, (char *) NULL);
+    vpath = vfs_path_from_str (archive_path);
+
+    // when
+    d = mc_opendir (vpath);
+
+    // then: an error instead of an abort
+    mctest_assert_null (d);
+    mctest_assert_not_null (message__text);
+
+    // cleanup
+    vfs_path_free (vpath, TRUE);
+    g_free (archive_path);
+    unlink (path);
+    g_free (path);
+    rmdir (dir);
+    g_free (dir);
+    g_byte_array_free (archive, TRUE);
+}
+END_PARAMETRIZED_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -299,6 +366,8 @@ main (void)
 
     // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_tar_pax_sparse, test_tar_pax_sparse_ds);
+    mctest_add_parameterized_test (tc_core, test_tar_huge_header_size,
+                                   test_tar_huge_header_size_ds);
     // ***********************************
 
     return mctest_run_all (tc_core);

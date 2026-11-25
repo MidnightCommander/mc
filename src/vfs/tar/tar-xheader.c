@@ -912,7 +912,9 @@ tar_xheader_read (tar_super_t *archive, struct xheader *xhdr, union block *p, of
         return FALSE;
     size = size_plus_1 - 1;
     xhdr->size = size;
-    xhdr->buffer = g_malloc (size_plus_1);
+    xhdr->buffer = g_try_malloc (size_plus_1);
+    if (xhdr->buffer == NULL)
+        return FALSE;
     xhdr->buffer[size] = '\0';
 
     do
