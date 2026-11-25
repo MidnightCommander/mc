@@ -363,12 +363,15 @@ START_TEST (test_tar_parent_dirs)
     const struct utimbuf archive_time = { 1234567890, 1234567890 };
     GByteArray *archive;
     char *dir, *path, *archive_path;
-    vfs_path_t *vpath, *dir_vpath;
-    struct stat st;
+    vfs_path_t *vpath, *dir_vpath, *late_vpath;
+    struct stat st, late_st;
 
-    // given: a member in a directory that has no entry of its own
+    // given: a member in a directory that has no entry of its own,
+    // and a member in a directory the entry of which comes after it
     archive = g_byte_array_new ();
     append_member (archive, "dir/a", REGTYPE, "hello\n", 6);
+    append_member (archive, "late/a", REGTYPE, "hello\n", 6);
+    append_member (archive, "late/", DIRTYPE, "", 0);
     g_byte_array_append (archive, zero_blocks, sizeof (zero_blocks));
 
     dir = g_dir_make_tmp ("mctest-XXXXXX", NULL);
@@ -380,15 +383,22 @@ START_TEST (test_tar_parent_dirs)
     archive_path = g_strconcat (path, PATH_SEP_STR "utar" VFS_PATH_URL_DELIMITER, (char *) NULL);
     vpath = vfs_path_from_str (archive_path);
     dir_vpath = vfs_path_append_new (vpath, "dir", (char *) NULL);
+    late_vpath = vfs_path_append_new (vpath, "late", (char *) NULL);
 
     // when
     ck_assert_int_eq (mc_stat (dir_vpath, &st), 0);
+    ck_assert_int_eq (mc_stat (late_vpath, &late_st), 0);
 
-    // then: the generated directory has the time of the archive
+    // then: the generated directory has the time of the archive,
+    // and the other one has the mode and the time of its own entry
     mctest_assert_true (S_ISDIR (st.st_mode));
     ck_assert_int_eq (st.st_mtime, archive_time.modtime);
+    mctest_assert_true (S_ISDIR (late_st.st_mode));
+    ck_assert_int_eq (late_st.st_mode & 07777, 0644);
+    ck_assert_int_eq (late_st.st_mtime, 0);
 
     // cleanup
+    vfs_path_free (late_vpath, TRUE);
     vfs_path_free (dir_vpath, TRUE);
     vfs_path_free (vpath, TRUE);
     g_free (archive_path);

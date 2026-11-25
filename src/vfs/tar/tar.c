@@ -565,7 +565,19 @@ tar_insert_entry (struct vfs_class *me, struct vfs_s_super *archive, union block
         {
             entry = VFS_SUBCLASS (me)->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
             if (entry != NULL)
+            {
+                if (S_ISDIR (entry->ino->st.st_mode))
+                {
+                    entry->ino->st.st_mode = current_stat_info.stat.st_mode;
+                    entry->ino->st.st_uid = current_stat_info.stat.st_uid;
+                    entry->ino->st.st_gid = current_stat_info.stat.st_gid;
+                    vfs_zero_stat_times (&entry->ino->st);
+                    entry->ino->st.st_mtime = current_stat_info.mtime.tv_sec;
+                    entry->ino->st.st_atime = current_stat_info.atime.tv_sec;
+                    entry->ino->st.st_ctime = current_stat_info.ctime.tv_sec;
+                }
                 return HEADER_SUCCESS;
+            }
         }
 
         *inode = vfs_s_new_inode (me, archive, &current_stat_info.stat);
