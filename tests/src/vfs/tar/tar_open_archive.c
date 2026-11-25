@@ -29,6 +29,7 @@
 
 #include <stdio.h>   // snprintf()
 #include <unistd.h>  // unlink(), rmdir()
+#include <utime.h>   // utime()
 
 #include "lib/strutil.h"
 #include "src/vfs/local/local.h"
@@ -355,6 +356,52 @@ END_PARAMETRIZED_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test */
+START_TEST (test_tar_parent_dirs)
+{
+    static const guint8 zero_blocks[2 * BLOCKSIZE] = { 0 };
+    const struct utimbuf archive_time = { 1234567890, 1234567890 };
+    GByteArray *archive;
+    char *dir, *path, *archive_path;
+    vfs_path_t *vpath, *dir_vpath;
+    struct stat st;
+
+    // given: a member in a directory that has no entry of its own
+    archive = g_byte_array_new ();
+    append_member (archive, "dir/a", REGTYPE, "hello\n", 6);
+    g_byte_array_append (archive, zero_blocks, sizeof (zero_blocks));
+
+    dir = g_dir_make_tmp ("mctest-XXXXXX", NULL);
+    mctest_assert_not_null (dir);
+    path = g_build_filename (dir, "test.tar", (char *) NULL);
+    mctest_assert_true (
+        g_file_set_contents (path, (const char *) archive->data, (gssize) archive->len, NULL));
+    ck_assert_int_eq (utime (path, &archive_time), 0);
+    archive_path = g_strconcat (path, PATH_SEP_STR "utar" VFS_PATH_URL_DELIMITER, (char *) NULL);
+    vpath = vfs_path_from_str (archive_path);
+    dir_vpath = vfs_path_append_new (vpath, "dir", (char *) NULL);
+
+    // when
+    ck_assert_int_eq (mc_stat (dir_vpath, &st), 0);
+
+    // then: the generated directory has the time of the archive
+    mctest_assert_true (S_ISDIR (st.st_mode));
+    ck_assert_int_eq (st.st_mtime, archive_time.modtime);
+
+    // cleanup
+    vfs_path_free (dir_vpath, TRUE);
+    vfs_path_free (vpath, TRUE);
+    g_free (archive_path);
+    unlink (path);
+    g_free (path);
+    rmdir (dir);
+    g_free (dir);
+    g_byte_array_free (archive, TRUE);
+}
+END_TEST
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -368,6 +415,7 @@ main (void)
     mctest_add_parameterized_test (tc_core, test_tar_pax_sparse, test_tar_pax_sparse_ds);
     mctest_add_parameterized_test (tc_core, test_tar_huge_header_size,
                                    test_tar_huge_header_size_ds);
+    tcase_add_test (tc_core, test_tar_parent_dirs);
     // ***********************************
 
     return mctest_run_all (tc_core);

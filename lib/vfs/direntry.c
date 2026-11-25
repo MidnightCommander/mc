@@ -117,6 +117,7 @@ vfs_s_automake (struct vfs_class *me, struct vfs_s_inode *dir, char *path, int f
         *sep = '\0';
 
     res = vfs_s_generate_entry (me, path, dir, (flags & FL_MKDIR) != 0 ? (0777 | S_IFDIR) : 0777);
+    vfs_copy_stat_times (&dir->super->root->st, &res->ino->st);
     vfs_s_insert_entry (me, dir, res);
 
     if (sep != NULL)
