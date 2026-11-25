@@ -556,11 +556,8 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
             return FALSE;
         }
 
-        if (file->stat_info->sparse_map == NULL)
-            file->stat_info->sparse_map =
-                g_array_sized_new (FALSE, FALSE, sizeof (struct sp_array), u);
-        else
-            g_array_set_size (file->stat_info->sparse_map, u);
+        if (file->stat_info->sparse_map != NULL)
+            g_array_set_size (file->stat_info->sparse_map, 0);
 
         sparse_map_len = u;
 

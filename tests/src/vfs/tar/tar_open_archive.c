@@ -137,8 +137,9 @@ append_member (GByteArray *archive, const char *name, char typeflag, const char 
 static const struct test_tar_pax_sparse_ds
 {
     const char *xheader;
-    const char *map;  // sparse map stored in the data, if any
-    size_t head_len;  // size of a chunk at offset 0 before the last chunk, if any
+    const char *map;   // sparse map stored in the data, if any
+    size_t head_len;   // size of a chunk at offset 0 before the last chunk, if any
+    gboolean bad_map;  // the map is malformed: check the listing only
 } test_tar_pax_sparse_ds[] = {
     // GNU tar --sparse-version=0.0: each chunk is a pair of keywords in the extended header
     {
@@ -176,6 +177,26 @@ static const struct test_tar_pax_sparse_ds
         "31 GNU.sparse.realsize=1048576\n",
         "2\n0\n1000\n2048\n6\n",
         1000,
+    },
+    // 0.0 with a chunk count that doesn't fit into memory
+    {
+        "27 GNU.sparse.size=1048576\n"
+        "35 GNU.sparse.numblocks=4294967295\n"
+        "26 GNU.sparse.offset=2048\n"
+        "25 GNU.sparse.numbytes=6\n"
+        "15 path=sparse\n",
+        NULL,
+        0,
+    },
+    // 1.0 with a chunk count that doesn't fit into memory
+    {
+        "22 GNU.sparse.major=1\n"
+        "22 GNU.sparse.minor=0\n"
+        "26 GNU.sparse.name=sparse\n"
+        "31 GNU.sparse.realsize=1048576\n",
+        "4294967295\n2048\n6\n",
+        0,
+        TRUE,
     },
 };
 
@@ -246,7 +267,8 @@ START_PARAMETRIZED_TEST (test_tar_pax_sparse, test_tar_pax_sparse_ds)
     mctest_assert_null (message__text);
     mctest_assert_str_eq (joined, "a sparse z ");
     ck_assert_int_eq (total, SPARSE_SIZE);
-    mctest_assert_true (memcmp (actual, expected, SPARSE_SIZE) == 0);
+    if (!data->bad_map)
+        mctest_assert_true (memcmp (actual, expected, SPARSE_SIZE) == 0);
 
     // cleanup
     g_free (joined);

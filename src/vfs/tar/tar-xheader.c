@@ -737,9 +737,9 @@ sparse_numblocks_decoder (struct tar_stat_info *st, const char *keyword, const c
         return FALSE;
 
     if (st->sparse_map == NULL)
-        st->sparse_map = g_array_sized_new (FALSE, FALSE, sizeof (struct sp_array), u);
+        st->sparse_map = g_array_new (FALSE, FALSE, sizeof (struct sp_array));
     else
-        g_array_set_size (st->sparse_map, u);
+        g_array_set_size (st->sparse_map, 0);
 
     return TRUE;
 }
