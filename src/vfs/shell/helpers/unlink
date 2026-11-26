@@ -1,4 +1,4 @@
-if rm -f "/${SHELL_FILENAME}" 2>/dev/null; then
+if command rm "/${SHELL_FILENAME}" 2>/dev/null; then
     echo "### 000"
 else
     echo "### 500"
