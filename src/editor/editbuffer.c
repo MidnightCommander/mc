@@ -135,6 +135,19 @@ edit_buffer_get_byte_ptr (const edit_buffer_t *buf, off_t byte_index)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Check whether the bytes at the specified positions are a "\r" and a "\n", i.e. whether a byte
+ * inserted or deleted between them changes the line breaks of the buffer.
+ */
+
+static inline gboolean
+edit_buffer_is_cr_lf (const edit_buffer_t *buf, off_t cr_index, off_t lf_index)
+{
+    return (cr_index >= 0 && lf_index < buf->size && edit_buffer_get_byte (buf, cr_index) == '\r'
+            && edit_buffer_get_byte (buf, lf_index) == '\n');
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -154,6 +167,9 @@ edit_buffer_init (edit_buffer_t *buf, off_t size)
 
     buf->size = size;
     buf->lines = 0;
+
+    buf->lb_detected = LB_UNIX;
+    buf->lb_dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -506,6 +522,9 @@ edit_buffer_insert (edit_buffer_t *buf, int c)
 
     // update file length
     buf->size++;
+
+    if (c == '\r' || c == '\n' || edit_buffer_is_cr_lf (buf, buf->curs1 - 2, buf->curs1))
+        buf->lb_dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -538,6 +557,9 @@ edit_buffer_insert_ahead (edit_buffer_t *buf, int c)
 
     // update file length
     buf->size++;
+
+    if (c == '\r' || c == '\n' || edit_buffer_is_cr_lf (buf, buf->curs1 - 1, buf->curs1 + 1))
+        buf->lb_dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -576,6 +598,9 @@ edit_buffer_delete (edit_buffer_t *buf)
 
     // update file length
     buf->size--;
+
+    if (c == '\r' || c == '\n' || edit_buffer_is_cr_lf (buf, buf->curs1 - 1, buf->curs1))
+        buf->lb_dirty = TRUE;
 
     return c;
 }
@@ -616,6 +641,9 @@ edit_buffer_backspace (edit_buffer_t *buf)
 
     // update file length
     buf->size--;
+
+    if (c == '\r' || c == '\n' || edit_buffer_is_cr_lf (buf, buf->curs1 - 1, buf->curs1))
+        buf->lb_dirty = TRUE;
 
     return c;
 }
@@ -790,6 +818,9 @@ edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
         }
     }
 
+    // the loaded content may contain line breaks
+    buf->lb_dirty = TRUE;
+
     return ret;
 }
 
@@ -892,6 +923,113 @@ edit_buffer_calc_percent (const edit_buffer_t *buf, off_t offset)
         percent = offset * 100 / buf->size;
 
     return percent;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the start of the trailing whitespace of a line, or the end of its text if it has none.
+ *
+ * @param buf editor buffer
+ * @param bol offset of the beginning of the line
+ *
+ * @return offset of the first trailing space or tab, or of the end of the text of the line
+ */
+
+off_t
+edit_buffer_trailing_ws_start (const edit_buffer_t *buf, off_t bol)
+{
+    off_t tws, eol;
+
+    eol = edit_buffer_get_eol (buf, bol);
+
+    // the text ends before a hidden "\r", a visible one ("^M") is an ordinary character
+    if (edit_buffer_is_crlf (buf, eol - 1) && edit_buffer_get_line_breaks (buf) == LB_WIN)
+        eol--;
+
+    for (tws = eol; tws > bol; tws--)
+    {
+        int c;
+
+        c = edit_buffer_get_byte (buf, tws - 1);
+        if (c != ' ' && c != '\t')
+            break;
+    }
+
+    return tws;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Detect the type of the line breaks of the buffer.
+ *
+ * @param buf editor buffer
+ *
+ * @return LB_UNIX if all line breaks are "\n" (also if there are none), LB_WIN if all are "\r\n",
+ *         LB_MAC if all are "\r", LB_MIXED otherwise
+ */
+
+LineBreaks
+edit_buffer_detect_line_breaks (const edit_buffer_t *buf)
+{
+    gboolean lf = FALSE, crlf = FALSE, cr = FALSE;
+    off_t i;
+
+    for (i = 0; i < buf->size; i++)
+    {
+        const int c = edit_buffer_get_byte (buf, i);
+
+        if (c == '\n')
+            lf = TRUE;
+        else if (c == '\r' && i + 1 < buf->size && edit_buffer_get_byte (buf, i + 1) == '\n')
+        {
+            crlf = TRUE;
+            i++;
+        }
+        else if (c == '\r')
+            cr = TRUE;
+        else
+            continue;
+
+        if (lf + crlf + cr > 1)
+            return LB_MIXED;
+    }
+
+    return crlf ? LB_WIN : cr ? LB_MAC : LB_UNIX;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Recompute the cached line break type if the line breaks have changed.
+ * Cheap (O(1)) unless a line break was inserted or deleted since the last
+ * recomputation.
+ *
+ * @param buf pointer to editor buffer
+ */
+
+void
+edit_buffer_refresh_line_breaks (edit_buffer_t *buf)
+{
+    if (buf->lb_dirty)
+    {
+        buf->lb_detected = edit_buffer_detect_line_breaks (buf);
+        buf->lb_dirty = FALSE;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the cached line break type of the buffer content.
+ * Call edit_buffer_refresh_line_breaks() first if the result must be current.
+ *
+ * @param buf pointer to editor buffer
+ *
+ * @return cached detect_line_breaks() result
+ */
+
+LineBreaks
+edit_buffer_get_line_breaks (const edit_buffer_t *buf)
+{
+    return buf->lb_detected;
 }
 
 /* --------------------------------------------------------------------------------------------- */

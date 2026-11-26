@@ -874,6 +874,39 @@ edit_cursor_to_bol (WEdit *edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the end of the text of the current line: the position of the line break, or of the "\r"
+ * of a hidden "\r\n" line break.
+ */
+
+static off_t
+edit_get_current_eol (WEdit *edit)
+{
+    off_t eol;
+
+    eol = edit_buffer_get_current_eol (&edit->buffer);
+    if (edit_crlf_unit_at (edit, eol - 1))
+        eol--;
+
+    return eol;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Move the cursor before the "\r" if it is between the "\r" and the "\n" of a hidden "\r\n"
+ * line break. A search can leave it there, but also any change that makes the line breaks of
+ * a mixed file pure "\r\n", e.g. deleting the byte between a "\r" and a "\n" or undoing its
+ * insertion. Therefore, this is checked before each command except Undo and Redo.
+ */
+
+static void
+edit_cursor_fix_crlf (WEdit *edit)
+{
+    if (edit_crlf_unit_at (edit, edit->buffer.curs1 - 1))
+        edit_cursor_move (edit, -1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** goto end of line */
 
 static void
@@ -881,7 +914,7 @@ edit_cursor_to_eol (WEdit *edit)
 {
     off_t b;
 
-    b = edit_buffer_get_current_eol (&edit->buffer);
+    b = edit_get_current_eol (edit);
     edit_cursor_move (edit, b - edit->buffer.curs1);
     edit->search_start = edit->buffer.curs1;
     edit->prev_col = edit_get_col (edit);
@@ -950,6 +983,9 @@ edit_get_current_word_extents (WEdit *edit, off_t *start, off_t *end)
             {
                 *start = pos;
                 *end = pos + 1;
+                // a hidden "\r\n" line break is a single character
+                if (edit_crlf_unit_at (edit, pos))
+                    *end = pos + 2;
                 return;
             }
             break;
@@ -979,14 +1015,18 @@ edit_left_word_move (WEdit *edit, int s)
         if (edit->column_highlight && edit->mark1 != edit->mark2 && edit->over_col == 0
             && edit->buffer.curs1 == edit_buffer_get_current_bol (&edit->buffer))
             break;
-        edit_cursor_move (edit, -1);
+        // a hidden "\r\n" line break is a single unit
+        if (edit_crlf_unit_at (edit, edit->buffer.curs1 - 2))
+            edit_cursor_move (edit, -2);
+        else
+            edit_cursor_move (edit, -1);
         if (edit->buffer.curs1 == 0)
             break;
         c1 = edit_buffer_get_previous_byte (&edit->buffer);
         if (c1 == '\n')
             break;
         c2 = edit_buffer_get_current_byte (&edit->buffer);
-        if (c2 == '\n')
+        if (c2 == '\n' || edit_crlf_unit_at (edit, edit->buffer.curs1))
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
@@ -1016,16 +1056,20 @@ edit_right_word_move (WEdit *edit, int s)
         int c1, c2;
 
         if (edit->column_highlight && edit->mark1 != edit->mark2 && edit->over_col == 0
-            && edit->buffer.curs1 == edit_buffer_get_current_eol (&edit->buffer))
+            && edit->buffer.curs1 == edit_get_current_eol (edit))
             break;
-        edit_cursor_move (edit, 1);
+        // a hidden "\r\n" line break is a single unit
+        if (edit_crlf_unit_at (edit, edit->buffer.curs1))
+            edit_cursor_move (edit, 2);
+        else
+            edit_cursor_move (edit, 1);
         if (edit->buffer.curs1 >= edit->buffer.size)
             break;
         c1 = edit_buffer_get_previous_byte (&edit->buffer);
         if (c1 == '\n')
             break;
         c2 = edit_buffer_get_current_byte (&edit->buffer);
-        if (c2 == '\n')
+        if (c2 == '\n' || edit_crlf_unit_at (edit, edit->buffer.curs1))
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
@@ -1062,6 +1106,13 @@ edit_right_char_move_cmd (WEdit *edit)
     else
         c = edit_buffer_get_current_byte (&edit->buffer);
 
+    // a hidden "\r\n" line break is a single unit: do not stop between "\r" and "\n"
+    if (edit_crlf_unit_at (edit, edit->buffer.curs1))
+    {
+        c = '\n';
+        char_length = 2;
+    }
+
     if (edit_options.cursor_beyond_eol && c == '\n')
         edit->over_col++;
     else
@@ -1085,6 +1136,10 @@ edit_left_char_move_cmd (WEdit *edit)
         if (char_length < 1)
             char_length = 1;
     }
+
+    // a hidden "\r\n" line break is a single unit: do not stop between "\r" and "\n"
+    if (edit_crlf_unit_at (edit, edit->buffer.curs1 - 2))
+        char_length = 2;
 
     if (edit_options.cursor_beyond_eol && edit->over_col > 0)
         edit->over_col--;
@@ -1139,6 +1194,48 @@ edit_move_updown (WEdit *edit, long lines, gboolean do_scroll, gboolean directio
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Delete the character under the cursor as a result of a user command.
+ * Unlike edit_delete(), a hidden "\r\n" line break is deleted as a single unit.
+ *
+ * @return the deleted character, '\n' for a "\r\n" line break
+ */
+
+static int
+edit_delete_char (WEdit *edit, gboolean byte_delete)
+{
+    if (edit_crlf_unit_at (edit, edit->buffer.curs1))
+    {
+        (void) edit_delete (edit, TRUE);
+        return edit_delete (edit, TRUE);
+    }
+
+    return edit_delete (edit, byte_delete);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Delete the character before the cursor as a result of a user command.
+ * Unlike edit_backspace(), a hidden "\r\n" line break is deleted as a single unit.
+ *
+ * @return the deleted character, '\n' for a "\r\n" line break
+ */
+
+static int
+edit_backspace_char (WEdit *edit, gboolean byte_delete)
+{
+    if (edit_crlf_unit_at (edit, edit->buffer.curs1 - 2))
+    {
+        (void) edit_backspace (edit, TRUE);
+        (void) edit_backspace (edit, TRUE);
+        return '\n';
+    }
+
+    return edit_backspace (edit, byte_delete);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 edit_right_delete_word (WEdit *edit)
 {
@@ -1146,11 +1243,11 @@ edit_right_delete_word (WEdit *edit)
     {
         int c1, c2;
 
-        c1 = edit_delete (edit, TRUE);
+        c1 = edit_delete_char (edit, TRUE);
         if (c1 == '\n')
             break;
         c2 = edit_buffer_get_current_byte (&edit->buffer);
-        if (c2 == '\n')
+        if (c2 == '\n' || edit_crlf_unit_at (edit, edit->buffer.curs1))
             break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
             break;
@@ -1168,7 +1265,7 @@ edit_left_delete_word (WEdit *edit)
     {
         int c1, c2;
 
-        c1 = edit_backspace (edit, TRUE);
+        c1 = edit_backspace_char (edit, TRUE);
         if (c1 == '\n')
             break;
         c2 = edit_buffer_get_previous_byte (&edit->buffer);
@@ -1379,7 +1476,9 @@ edit_group_undo (WEdit *edit)
 static void
 edit_delete_to_line_end (WEdit *edit)
 {
-    while (edit_buffer_get_current_byte (&edit->buffer) != '\n' && edit->buffer.curs2 != 0)
+    off_t n;
+
+    for (n = edit_get_current_eol (edit) - edit->buffer.curs1; n > 0; n--)
         edit_delete (edit, TRUE);
 }
 
@@ -1454,16 +1553,45 @@ edit_auto_indent (WEdit *edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Insert a line break of the type of the line break of the current line, or of the line before it
+ * on the last line, which has none.
+ */
+
+static inline void
+edit_insert_line_break (WEdit *edit)
+{
+    const off_t eol = edit_buffer_get_current_eol (&edit->buffer);
+    gboolean crlf;
+
+    if (eol < edit->buffer.size)
+        crlf = edit_buffer_is_crlf (&edit->buffer, eol - 1);
+    else
+        crlf = edit_buffer_is_crlf (&edit->buffer, edit_buffer_get_current_bol (&edit->buffer) - 2);
+
+    // do not double a "\r" before the cursor, e.g. between "\r" and "\n"
+    if (crlf && edit_buffer_get_previous_byte (&edit->buffer) != '\r')
+        edit_insert (edit, '\r');
+    edit_insert (edit, '\n');
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline void
 edit_double_newline (WEdit *edit)
 {
-    edit_insert (edit, '\n');
+    const off_t pos = edit->buffer.curs1;
+
+    edit_insert_line_break (edit);
+
+    // do not add a second line break if there is already a blank line
     if (edit_buffer_get_current_byte (&edit->buffer) == '\n'
-        || edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - 2) == '\n')
+        || edit_buffer_is_crlf (&edit->buffer, edit->buffer.curs1)
+        || edit_buffer_get_byte (&edit->buffer, pos - 1) == '\n')
         return;
+
     edit->force |= REDRAW_PAGE;
-    edit_insert (edit, '\n');
+    edit_insert_line_break (edit);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1530,15 +1658,18 @@ check_and_wrap_line (WEdit *edit)
         c = edit_buffer_get_byte (&edit->buffer, curs);
         if (c == '\n' || curs <= 0)
         {
-            edit_insert (edit, '\n');
+            edit_insert_line_break (edit);
             return;
         }
         if (whitespace (c))
         {
-            off_t current = edit->buffer.curs1;
+            // the line break is one or two bytes long: restore the cursor position
+            // counting from the end of the text
+            const off_t tail = edit->buffer.curs2;
+
             edit_cursor_move (edit, curs - edit->buffer.curs1 + 1);
-            edit_insert (edit, '\n');
-            edit_cursor_move (edit, current - edit->buffer.curs1 + 1);
+            edit_insert_line_break (edit);
+            edit_cursor_move (edit, edit->buffer.size - tail - edit->buffer.curs1);
             return;
         }
     }
@@ -1761,7 +1892,8 @@ edit_insert_column_from_file (WEdit *edit, int file, off_t *start_pos, off_t *en
                 long l;
                 off_t p;
 
-                if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+                if (edit_buffer_get_current_byte (&edit->buffer) != '\n'
+                    && !edit_crlf_unit_at (edit, edit->buffer.curs1))
                     for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
                         edit_insert (edit, ' ');
 
@@ -1769,9 +1901,17 @@ edit_insert_column_from_file (WEdit *edit, int file, off_t *start_pos, off_t *en
                 {
                     if (p == edit->buffer.size)
                     {
+                        // a new line break in a file with hidden "\r\n" line breaks is "\r\n"
+                        const gboolean crlf = edit_crlf_is_unit (edit);
+
                         edit_cursor_move (edit, edit->buffer.size - edit->buffer.curs1);
                         edit_insert_ahead (edit, '\n');
                         p++;
+                        if (crlf)
+                        {
+                            edit_insert_ahead (edit, '\r');
+                            p++;
+                        }
                         break;
                     }
                     if (edit_buffer_get_byte (&edit->buffer, p) == '\n')
@@ -1800,6 +1940,31 @@ edit_insert_column_from_file (WEdit *edit, int file, off_t *start_pos, off_t *en
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Check whether a "\r\n" line break is edited as a single unit. This is the case only in a file
+ * with pure Windows line breaks, where the "\r" is hidden. In any other file the "\r" is shown
+ * as "^M" and is edited as an ordinary character.
+ */
+
+gboolean
+edit_crlf_is_unit (WEdit *edit)
+{
+    edit_buffer_refresh_line_breaks (&edit->buffer);
+    return (edit_buffer_get_line_breaks (&edit->buffer) == LB_WIN);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Check whether a "\r\n" line break edited as a single unit starts at the specified position.
+ */
+
+gboolean
+edit_crlf_unit_at (WEdit *edit, off_t pos)
+{
+    return edit_buffer_is_crlf (&edit->buffer, pos) && edit_crlf_is_unit (edit);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /** User edit menu, like user menu (F2) but only in editor. */
@@ -1898,99 +2063,45 @@ edit_get_write_filter (const vfs_path_t *write_name_vpath, const vfs_path_t *fil
 off_t
 edit_write_stream (WEdit *edit, FILE *f)
 {
-    long i;
+    const char *lb;
+    off_t i;
 
-    if (edit->lb == LB_ASIS)
+    switch (edit->lb)
     {
-        for (i = 0; i < edit->buffer.size; i++)
-            if (fputc (edit_buffer_get_byte (&edit->buffer, i), f) < 0)
-                break;
-        return i;
+    case LB_UNIX:
+        lb = "\n";
+        break;
+    case LB_WIN:
+        lb = "\r\n";
+        break;
+    case LB_MAC:
+        lb = "\r";
+        break;
+    default:
+        lb = NULL;
+        break;
     }
 
-    // change line breaks
     for (i = 0; i < edit->buffer.size; i++)
     {
-        unsigned char c;
+        const int c = edit_buffer_get_byte (&edit->buffer, i);
 
-        c = edit_buffer_get_byte (&edit->buffer, i);
-        if (!(c == '\n' || c == '\r'))
+        if (lb == NULL || (c != '\r' && c != '\n'))
         {
-            // not line break
             if (fputc (c, f) < 0)
                 return i;
         }
         else
-        {  // (c == '\n' || c == '\r')
-            unsigned char c1;
-
-            c1 = edit_buffer_get_byte (&edit->buffer, i + 1);  // next char
-
-            switch (edit->lb)
-            {
-            case LB_UNIX:  // replace "\r\n" or '\r' to '\n'
-                // put one line break unconditionally
-                if (fputc ('\n', f) < 0)
-                    return i;
-
-                i++;  // 2 chars are processed
-
-                if (c == '\r' && c1 == '\n')
-                    // Windows line break; go to the next char
-                    break;
-
-                if (c == '\r' && c1 == '\r')
-                {
-                    // two Macintosh line breaks; put second line break
-                    if (fputc ('\n', f) < 0)
-                        return i;
-                    break;
-                }
-
-                if (fputc (c1, f) < 0)
-                    return i;
-                break;
-
-            case LB_WIN:  // replace '\n' or '\r' to "\r\n"
-                // put one line break unconditionally
-                if (fputc ('\r', f) < 0 || fputc ('\n', f) < 0)
-                    return i;
-
-                if (c == '\r' && c1 == '\n')
-                    // Windows line break; go to the next char
-                    i++;
-                break;
-
-            case LB_MAC:  // replace "\r\n" or '\n' to '\r'
-                // put one line break unconditionally
-                if (fputc ('\r', f) < 0)
-                    return i;
-
-                i++;  // 2 chars are processed
-
-                if (c == '\r' && c1 == '\n')
-                    // Windows line break; go to the next char
-                    break;
-
-                if (c == '\n' && c1 == '\n')
-                {
-                    // two Windows line breaks; put second line break
-                    if (fputc ('\r', f) < 0)
-                        return i;
-                    break;
-                }
-
-                if (fputc (c1, f) < 0)
-                    return i;
-                break;
-            case LB_ASIS:  // default without changes
-            default:
-                break;
-            }
+        {
+            // write each "\r\n", "\r" and "\n" as one line break of the selected type
+            if (fputs (lb, f) < 0)
+                return i;
+            if (edit_buffer_is_crlf (&edit->buffer, i))
+                i++;
         }
     }
 
-    return edit->buffer.size;
+    return i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2812,6 +2923,10 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
 {
     off_t p, q;
     long col;
+    gboolean crlf_hidden;
+
+    // a "\r" of a "\r\n" line break is hidden only in a pure Windows file
+    crlf_hidden = (edit_buffer_get_line_breaks (&edit->buffer) == LB_WIN);
 
     if (upto != 0)
     {
@@ -2855,11 +2970,18 @@ edit_move_forward3 (const WEdit *edit, off_t current, long cols, off_t upto)
         c = convert_to_display_c (c);
 
         if (c == '\n')
-            return (upto != 0 ? (off_t) col : p);
+        {
+            if (upto != 0)
+                return (off_t) col;
+            // a hidden CRLF line break ends the line before the "\r", not after it
+            return (crlf_hidden && edit_buffer_is_crlf (&edit->buffer, p - 1)) ? p - 1 : p;
+        }
+        // a hidden "\r" of a "\r\n" line break (a pure Windows file) occupies no column
+        if (c == '\r' && crlf_hidden && edit_buffer_is_crlf (&edit->buffer, p))
+            continue;
         if (c == '\t')
             col += TAB_SIZE - col % TAB_SIZE;
         else if ((c < 32 || c == 127) && (orig_c == c || (!mc_global.utf8_display && !edit->utf8)))
-            // '\r' is shown as ^M, so we must advance 2 characters
             // Caret notation for control characters
             col += 2;
         else
@@ -3154,7 +3276,7 @@ eval_marks (WEdit *edit, off_t *start_mark, off_t *end_mark)
         else if (edit->line_highlight)
         {
             *start_mark = MIN (edit->mark1, edit_buffer_get_current_bol (&edit->buffer));
-            *end_mark = MAX (end_mark_curs, edit_buffer_get_current_eol (&edit->buffer));
+            *end_mark = MAX (end_mark_curs, edit_get_current_eol (edit));
         }
         else
         {
@@ -3216,7 +3338,7 @@ edit_mark_cmd (WEdit *edit, gboolean unmark)
         else if (edit->line_highlight)
         {
             m1 = edit_buffer_get_current_bol (&edit->buffer);
-            edit->end_mark_curs = edit_buffer_get_current_eol (&edit->buffer);
+            edit->end_mark_curs = edit_get_current_eol (edit);
         }
         edit_set_markers (edit, m1, -1, edit->curs_col + edit->over_col,
                           edit->curs_col + edit->over_col);
@@ -3250,7 +3372,7 @@ void
 edit_mark_current_line_cmd (WEdit *edit)
 {
     edit->mark1 = edit_buffer_get_current_bol (&edit->buffer);
-    edit->mark2 = edit_buffer_get_current_eol (&edit->buffer);
+    edit->mark2 = edit_get_current_eol (edit);
 
     edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
 }
@@ -3382,6 +3504,10 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
     if (edit_handle_move_resize (edit, command))
         return;
 
+    // Undo and Redo replay cursor moves from where they were recorded
+    if (command != CK_Undo && command != CK_Redo)
+        edit_cursor_fix_crlf (edit);
+
     edit->force |= REDRAW_LINE;
 
     /* The next key press will unhighlight the found string, so update
@@ -3471,7 +3597,8 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         {
             // remove char only one time, after input first byte, multibyte chars
             if (!mc_global.utf8_display || edit->charpoint == 0)
-                if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+                if (edit_buffer_get_current_byte (&edit->buffer) != '\n'
+                    && !edit_crlf_unit_at (edit, edit->buffer.curs1))
                     edit_delete (edit, FALSE);
         }
         if (edit_options.cursor_beyond_eol && edit->over_col > 0)
@@ -3599,7 +3726,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
                 edit_backspace (edit, TRUE);
         }
         else
-            edit_backspace (edit, FALSE);
+            edit_backspace_char (edit, FALSE);
         break;
     case CK_Delete:
         // if non persistent selection and text selected
@@ -3619,7 +3746,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
                     edit_delete (edit, TRUE);
             }
             else
-                edit_delete (edit, FALSE);
+                edit_delete_char (edit, FALSE);
         }
         break;
     case CK_DeleteToWordBegin:
@@ -3652,13 +3779,13 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         }
         else
         {
-            edit_insert (edit, '\n');
+            edit_insert_line_break (edit);
             if (edit_options.return_does_auto_indent && !bracketed_pasting_in_progress)
                 edit_auto_indent (edit);
         }
         break;
     case CK_Return:
-        edit_insert (edit, '\n');
+        edit_insert_line_break (edit);
         break;
 
     case CK_MarkColumnPageUp:
