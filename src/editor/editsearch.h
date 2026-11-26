@@ -19,6 +19,7 @@ typedef struct edit_search_options_t
     gboolean only_in_selection;
     gboolean whole_words;
     gboolean all_codepages;
+    gboolean ignore_accents;
 } edit_search_options_t;
 
 typedef struct

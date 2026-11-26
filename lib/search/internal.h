@@ -24,6 +24,7 @@ typedef struct mc_search_cond_struct
     GString *lower;
     GRegex *regex_handle;
     gchar *charset;
+    gboolean case_handled;  // str already matches both cases, it needs no case conversion
 } mc_search_cond_t;
 
 /*** global variables defined in .c file *********************************************************/

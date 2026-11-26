@@ -78,6 +78,10 @@ typedef struct mc_search_struct
     // search only whole words (from begin to end). Used only with NORMAL search type
     gboolean whole_words;
 
+    // letters match their accented forms too (e.g. "a" matches "á"). Used only with NORMAL search
+    // type
+    gboolean ignore_accents;
+
     // search entire string (from begin to end). Used only with GLOB search type
     gboolean is_entire_line;
 
