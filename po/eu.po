@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2025\n"
 "Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
@@ -481,12 +481,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Maius"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -512,6 +506,12 @@ msgid ""
 msgstr ""
 "%dx%d pantaila-neurria ez da onartzen.\n"
 "Egiaztatu TERM ingurune-aldagaia.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
 
 msgid "B"
 msgstr "B"
@@ -1810,6 +1810,9 @@ msgstr "Mkdi&r autoizena"
 msgid "&Preallocate space"
 msgstr "&Aurrealokatu lekua"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Ihes (Esc) tekla modua"
 
@@ -2777,6 +2780,13 @@ msgstr "Direktorioak: %zu, guztizko neurria: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Barkatu, ezin izan dut lana hondoan ipini"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "E&seki"
 
@@ -3048,9 +3058,6 @@ msgstr "&Hondoko lanak"
 
 msgid "Screen lis&t"
 msgstr "Pantaila &zerrenda"
-
-msgid "&Listing format edit"
-msgstr "Zerrendatzeko &formatua editatu"
 
 msgid "Edit &extension file"
 msgstr "Editatu &luzapen fitxategia"
@@ -3632,13 +3639,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "%s ezabatu?"
 
@@ -3954,6 +3954,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"cpio-ren goiburua hondatuta aurkitu zaio\n"
+"%s-ri"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3967,14 +3975,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s(e)k sarrera bikoiztuak ditu! Baztertzen!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"cpio-ren goiburua hondatuta aurkitu zaio\n"
-"%s-ri"
 
 #, c-format
 msgid ""
@@ -4330,6 +4330,9 @@ msgstr "Akatsaren berri eman da galarazi ondoren."
 msgid "Aborted transfer would be successful."
 msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
+
 msgid "Inconsistent tar archive"
 msgstr "tar artxibo inkoherentea"
 
@@ -4348,9 +4351,6 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
-msgstr ""
-
-msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "Invalid value"
@@ -4449,8 +4449,7 @@ msgstr ""
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 
 msgid "Search done"
@@ -4459,9 +4458,12 @@ msgstr "Bilaketa eginda"
 msgid "Continue from beginning?"
 msgstr "Hasieratik jarraitu?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
-"Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr ""
+#~ "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Zerrendatzeko &formatua editatu"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Tekla transferigarriak HP terminalean berrezartzen ditu"

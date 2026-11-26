@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2016,2025\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
@@ -496,12 +496,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Umschalt"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Die TERM-Variable ist nicht gesetzt!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Kann SIGWINCH-Pipe nicht überprüfen"
-
 #, c-format
 msgid ""
 "\n"
@@ -533,6 +527,12 @@ msgid ""
 msgstr ""
 "Bildschirmgröße %dx%d wird nicht unterstützt.\n"
 "Überprüfen Sie die TERM-Umgebungsvariable.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Die TERM-Variable ist nicht gesetzt!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Kann SIGWINCH-Pipe nicht überprüfen"
 
 msgid "B"
 msgstr "B"
@@ -1842,6 +1842,9 @@ msgstr "Ver&zeichnis autom. benennen"
 msgid "&Preallocate space"
 msgstr "&Platz reservieren"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Escape-Tastenmodus"
 
@@ -2812,6 +2815,13 @@ msgstr "Verzeichnisse: %zu, Gesamtgröße: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Ich kann den Job nicht in den Hintergrund legen"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+
 msgid "S&uspend"
 msgstr "&Unterbrechen"
 
@@ -3083,9 +3093,6 @@ msgstr "Hintergrundaufga&ben"
 
 msgid "Screen lis&t"
 msgstr "Bildschirm&liste"
-
-msgid "&Listing format edit"
-msgstr "&Listenformat bearbeiten"
 
 msgid "Edit &extension file"
 msgstr "Erweiterungsdatei b&earbeiten"
@@ -3669,13 +3676,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-
-#, c-format
 msgid "Delete %s?"
 msgstr "\"%s\" löschen?"
 
@@ -3992,6 +3992,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Beschädigter cpio-Kopfeintrag in\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4005,14 +4013,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s enthält doppelte Einträge! Überspringe!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Beschädigter cpio-Kopfeintrag in\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4401,6 +4401,9 @@ msgstr "Fehler nach Abbruch gemeldet."
 msgid "Aborted transfer would be successful."
 msgstr "Abgebrochener Transfer wäre erfolgreich."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek hält nicht an einer Satzgrenze an"
+
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistentes tar-Archiv"
 
@@ -4422,9 +4425,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "sieht nicht wie ein tar-Archiv aus"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek hält nicht an einer Satzgrenze an"
 
 msgid "Invalid value"
 msgstr "Ungültiger Wert"
@@ -4518,13 +4518,14 @@ msgid ""
 "Not a regular file"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
+"Kann Archiv %s nicht öffnen\n"
+"%s"
 
 msgid "Search done"
 msgstr "Suche abgeschlossen"
@@ -4532,8 +4533,11 @@ msgstr "Suche abgeschlossen"
 msgid "Continue from beginning?"
 msgstr "Am Anfang fortsetzen?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "&Listenformat bearbeiten"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Setzt Softkeys auf HP-Terminals zurück"

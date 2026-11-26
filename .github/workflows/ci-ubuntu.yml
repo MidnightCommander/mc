@@ -23,18 +23,9 @@ jobs:
       - name: Bootstrap build system
         run: ./autogen.sh
 
-      - name: Build distribution archive
-        run: |
-          mkdir -p build-distrib && cd $_
-
-          ../configure
-
-          make dist-bzip2
-
       - name: Build full configuration
         run: |
-          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-full
-          cd build-full
+          mkdir build-full && cd $_
 
           ../configure \
               --prefix="$(pwd)/install" \
@@ -47,8 +38,7 @@ jobs:
 
       - name: Build ncurses configuration
         run: |
-          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-ncurses
-          cd build-ncurses
+          mkdir build-ncurses && cd $_
 
           ../configure \
               --prefix="$(pwd)/install" \
@@ -60,8 +50,7 @@ jobs:
 
       - name: Build minimal configuration
         run: |
-          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-minimal
-          cd build-minimal
+          mkdir build-minimal && cd $_
 
           ../configure \
               --prefix="$(pwd)/install" \

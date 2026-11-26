@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://github.com/MidnightCommander/mc/issues\n"
-"POT-Creation-Date: 2026-03-01 11:35+0300\n"
+"POT-Creation-Date: 2026-10-22 11:34+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023,2025\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -514,12 +514,6 @@ msgstr "Alt"
 msgid "Shift"
 msgstr "Shift"
 
-msgid "The TERM environment variable is unset!\n"
-msgstr "Proměnná prostředí TERM není nastavena!\n"
-
-msgid "Cannot check SIGWINCH pipe"
-msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
-
 #, c-format
 msgid ""
 "\n"
@@ -551,6 +545,12 @@ msgid ""
 msgstr ""
 "Velikost obrazovky %d×%d není podporovaná.\n"
 "Prověřte nastavení proměnné prostředí TERM.\n"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Proměnná prostředí TERM není nastavena!\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
 
 msgid "B"
 msgstr "B"
@@ -1891,6 +1891,9 @@ msgstr "Vytvořit automaticky nazvanou složku"
 msgid "&Preallocate space"
 msgstr "&Předem přidělit prostor"
 
+msgid "Use COW file cloning"
+msgstr ""
+
 msgid "Esc key mode"
 msgstr "Režim klávesy Esc"
 
@@ -2969,6 +2972,16 @@ msgstr "Složky: %zu, celková velikost: %s"
 msgid "Sorry, I could not put the job in background"
 msgstr "Je nám líto, úlohu nelze přesunout na pozadí"
 
+#, c-format
+msgid ""
+"Destination\n"
+"%s\n"
+"must be a directory"
+msgstr ""
+"Je třeba, aby cíl\n"
+"%s\n"
+"byla složka"
+
 msgid "S&uspend"
 msgstr "&Uspat"
 
@@ -3240,9 +3253,6 @@ msgstr "Úlohy na po&zadí"
 
 msgid "Screen lis&t"
 msgstr "Seznam obrazove&k"
-
-msgid "&Listing format edit"
-msgstr "Upravit formát &výpisu"
 
 msgid "Edit &extension file"
 msgstr "Upravit akc&e k příponám"
@@ -3835,16 +3845,6 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"Destination\n"
-"%s\n"
-"must be a directory"
-msgstr ""
-"Je třeba, aby cíl\n"
-"%s\n"
-"byla složka"
-
-#, c-format
 msgid "Delete %s?"
 msgstr "Smazat %s?"
 
@@ -4167,6 +4167,14 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Poškozená hlavička cpio v souboru\n"
+"%s"
+
+#, c-format
+msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -4180,14 +4188,6 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s obsahuje duplicitní položky! Budou přeskočeny!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Poškozená hlavička cpio v souboru\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4574,6 +4574,9 @@ msgstr "Po přerušení byla oznámena chyba."
 msgid "Aborted transfer would be successful."
 msgstr "Přerušení přenosu proběhlo v pořádku."
 
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
+
 msgid "Inconsistent tar archive"
 msgstr "Nekonzistentní archiv .tar"
 
@@ -4595,9 +4598,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "nevypadá jako archiv .tar"
-
-msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
 
 msgid "Invalid value"
 msgstr "Neplatná hodnota"
@@ -4696,12 +4696,11 @@ msgstr ""
 "%s\n"
 "Nejedná se o běžný soubor"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open\n"
 "%s\n"
-"in parse mode\n"
-"%s"
+"in parse mode"
 msgstr ""
 "Není možné otevřít\n"
 "%s\n"
@@ -4714,8 +4713,11 @@ msgstr "Hledání dokončeno"
 msgid "Continue from beginning?"
 msgstr "Pokračovat od začátku?"
 
-msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+#~ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+#~ msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "&Listing format edit"
+#~ msgstr "Upravit formát &výpisu"
 
 #~ msgid "Resets soft keys on HP terminals"
 #~ msgstr "Vynulovat programové klávesy na HP terminálech"

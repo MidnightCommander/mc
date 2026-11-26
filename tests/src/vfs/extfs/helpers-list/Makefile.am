@@ -64,9 +64,15 @@ data_files_to_distribute = \
 	data/uace.README \
 	data/uace.input \
 	data/uace.output \
+	data/ualz.README \
+	data/ualz.input \
+	data/ualz.output \
 	data/uarc.README \
 	data/uarc.input \
 	data/uarc.output \
+	data/uarj.README \
+	data/uarj.input \
+	data/uarj.output \
 	data/urar.README \
 	data/urar.v4,v3.env_vars \
 	data/urar.v4,v3.input \
@@ -74,10 +80,12 @@ data_files_to_distribute = \
 	data/urar.v6,v5.env_vars \
 	data/urar.v6,v5.input \
 	data/urar.v6,v5.output \
+	data/usqfs.args \
 	data/usqfs.input \
 	data/usqfs.output \
 	data/uwim.README \
 	data/uwim.input \
+	data/uwim.mock.sh \
 	data/uwim.output \
 	data/uwim.env_vars \
 	data/uzip.README \
