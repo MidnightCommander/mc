@@ -1,0 +1,6 @@
+Listing records captured with the native UC2 3.0.0-alpha.13 CLI.
+Covers directories, spaces, CP850, literal glob and semicolon names,
+stored versions, empty timestamps and a real timestamp from the
+UC2 tests/archives/basic.uc2 hello.txt member. The helper requires
+Python 3.6 or newer, a UTF-8 locale and a separately installed uc2.
+Source and implementation tests: https://github.com/evvaletov/uc2

@@ -285,6 +285,12 @@ RegexIgnoreCase=true
 Open=%cd %p/uarj://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arj
 
+[uc2]
+Shell=.uc2
+ShellIgnoreCase=true
+Open=%cd %p/uc2://
+View=%view{ascii} uc2 -la -- %f
+
 [cab]
 Shell=.cab
 ShellIgnoreCase=true

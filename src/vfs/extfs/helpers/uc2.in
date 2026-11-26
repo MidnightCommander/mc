@@ -1,0 +1,93 @@
+#! @PYTHON@
+# SPDX-License-Identifier: GPL-3.0-or-later OR BSD-2-Clause
+# Copyright (c) 2026 Eremey Valetov.
+"""Read-only UC2 extfs helper for Midnight Commander (Python 3.6 or newer, UTF-8 locale)."""
+import os
+import shlex
+import subprocess
+import sys
+import tempfile
+
+
+def entries(archive):
+    command = (shlex.split(os.environ['MC_TEST_EXTFS_LIST_CMD'])
+               if 'MC_TEST_EXTFS_LIST_CMD' in os.environ else [os.environ.get('UC2', 'uc2')])
+    result = subprocess.run(command + ['-qlaT', '--', archive],
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            encoding='utf-8', errors='strict')
+    if result.returncode:
+        raise ValueError(result.stderr.strip() or 'UC2 listing failed')
+    found = {}
+    for line in result.stdout.split('\n'):
+        if '\t' not in line:
+            continue
+        fields = line.split('\t')
+        if len(fields) not in (4, 5):
+            raise ValueError('Archive filename cannot be represented by the tab-separated interface')
+        attr, date, size, name = fields[:4]
+        version = fields[4] if len(fields) == 5 else '0'
+        if len(attr) != 6 or not version.isdecimal():
+            raise ValueError('Invalid UC2 listing')
+        if (not name or name.startswith('/') or '\\' in name or
+                any(part in ('', '.', '..') for part in name.split('/')) or
+                any(ord(c) < 32 or ord(c) == 127 for c in name)):
+            raise ValueError('Unsafe or unrepresentable archive path')
+        visible = name + (';'+version if version != '0' else '')
+        if visible in found:
+            raise ValueError('Ambiguous versioned filename: '+visible)
+        found[visible] = (attr, date, int(size or '0'), name, version)
+    return found
+
+
+def literal_pattern(name, version):
+    # The CLI uses fnmatch and a trailing ;version selector, not literal names.
+    return ''.join('\\'+c if c in '\\*?[]' else c for c in name) + ';' + version
+
+
+def main():
+    if len(sys.argv) < 3:
+        raise ValueError('usage: uc2 list ARCHIVE | copyout ARCHIVE MEMBER DESTINATION')
+    action, archive = sys.argv[1:3]
+    if action not in ('list', 'copyout'):
+        raise ValueError('UC2 extfs is read-only')
+    content = entries(archive)
+    if action == 'list':
+        if len(sys.argv) != 3:
+            raise ValueError('list takes one archive')
+        for visible, (attr, date, size, _, _) in content.items():
+            directory = attr[1] == 'd'
+            mode = 'dr-xr-xr-x' if directory else '-r--r--r--'
+            if date:
+                day, _, hour = date.partition(' ')
+                year, month, day = day.split('-')
+                stamp = f'{month}-{day}-{year} {hour or "00:00"}'
+            else:
+                stamp = '01-01-1980 00:00'
+            print(f'{mode} 1 0 0 {size} {stamp} {visible}')
+    else:
+        if len(sys.argv) != 5:
+            raise ValueError('copyout takes archive, member and destination')
+        member, destination = sys.argv[3:5]
+        if member not in content or content[member][0][1] == 'd':
+            raise ValueError('No such file in archive: '+member)
+        _, _, size, name, version = content[member]
+        target = destination
+        fd, temporary = tempfile.mkstemp(prefix='.uc2-', dir=os.path.dirname(target) or '.')
+        try:
+            with os.fdopen(fd, 'wb') as out:
+                result = subprocess.run([os.environ.get('UC2', 'uc2'), '-qp', '--',
+                                         archive, literal_pattern(name, version)], stdout=out)
+            if result.returncode or os.path.getsize(temporary) != size:
+                raise ValueError('UC2 extraction failed or returned the wrong size')
+            os.replace(temporary, target)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (ValueError, OSError, UnicodeError) as error:
+        print(f'uc2 extfs: {error}', file=sys.stderr)
+        sys.exit(1)
