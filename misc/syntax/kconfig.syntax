@@ -1,0 +1,83 @@
+# Kconfig syntax
+#
+# Specifications:
+# https://docs.kernel.org/kbuild/kconfig-language.html
+# https://github.com/ulfalizer/Kconfiglib?tab=readme-ov-file#kconfig-extensions
+
+define kword     yellow
+define type      brightmagenta
+define property  brightmagenta
+define condition yellow
+define operator  brightcyan
+define brace     brightcyan
+define number    cyan
+define string    green
+define escape    brightgreen
+define comment   brown
+
+context default
+    keyword whole linestart \[\t\s\]config kword
+    keyword whole linestart \[\t\s\]menuconfig kword
+    keyword whole linestart \[\t\s\]menu kword
+    keyword whole linestart \[\t\s\]endmenu kword
+    keyword whole linestart \[\t\s\]mainmenu kword
+    keyword whole linestart \[\t\s\]choice kword
+    keyword whole linestart \[\t\s\]endchoice kword
+    keyword whole linestart \[\t\s\]comment kword
+    keyword whole linestart \[\t\s\]source kword
+    keyword whole linestart \[\t\s\]osource kword
+    keyword whole linestart \[\t\s\]rsource kword
+    keyword whole linestart \[\t\s\]orsource kword
+
+    keyword whole if condition
+    keyword whole linestart \[\t\s\]endif condition
+
+    keyword whole linestart \[\t\s\]bool type
+    keyword whole linestart \[\t\s\]tristate type
+    keyword whole linestart \[\t\s\]string type
+    keyword whole linestart \[\t\s\]hex type
+    keyword whole linestart \[\t\s\]int type
+
+    keyword whole linestart \[\t\s\]def_bool type
+    keyword whole linestart \[\t\s\]def_tristate type
+    keyword whole linestart \[\t\s\]def_string type
+    keyword whole linestart \[\t\s\]def_hex type
+    keyword whole linestart \[\t\s\]def_int type
+
+    keyword whole linestart \[\t\s\]prompt property
+    keyword whole linestart \[\t\s\]default property
+    keyword whole linestart \[\t\s\]depends\son property
+    keyword whole linestart \[\t\s\]select property
+    keyword whole linestart \[\t\s\]imply property
+    keyword whole linestart \[\t\s\]transitional property
+    keyword whole linestart \[\t\s\]visible\sif property
+    keyword whole linestart \[\t\s\]range property
+    keyword whole linestart \[\t\s\]option property
+    keyword whole linestart \[\t\s\]optional property
+    keyword whole linestart \[\t\s\]help property
+    keyword whole linestart \[\t\s\]---help--- property
+
+    keyword = operator
+    keyword > operator
+    keyword < operator
+    keyword >= operator
+    keyword <= operator
+    keyword || operator
+    keyword && operator
+    keyword ! operator
+
+    keyword ( brace
+    keyword ) brace
+
+    keyword whole 0x\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] number
+    keyword whole \{0123456789\}\[0123456789\] number
+
+    # sometimes quotes are escaped in help like \"foo\" => do not start string context
+    keyword \\"
+
+context # \n comment
+    spellcheck
+
+context " " string
+    keyword \\" escape
+    keyword \\\\ escape

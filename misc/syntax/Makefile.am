@@ -52,6 +52,7 @@ SYNTAXFILES =			\
 	jinja2.syntax		\
 	js.syntax		\
 	json.syntax		\
+	kconfig.syntax		\
 	kotlin.syntax		\
 	latex.syntax		\
 	lisp.syntax		\
