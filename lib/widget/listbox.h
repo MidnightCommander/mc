@@ -35,7 +35,8 @@ typedef lcback_ret_t (*lcback_fn) (struct WListbox *l);
 
 typedef struct WLEntry
 {
-    char *text;  // Text to display
+    char *text;   // Text to display
+    char *rtext;  // Optional text to display at the right edge of the widget
     int hotkey;
     void *data;          // Client information
     gboolean free_data;  // Whether to free the data on entry's removal
@@ -78,6 +79,8 @@ char *listbox_add_item (WListbox *l, listbox_append_t pos, int hotkey, const cha
                         gboolean free_data);
 char *listbox_add_item_take (WListbox *l, listbox_append_t pos, int hotkey, char *text, void *data,
                              gboolean free_data);
+char *listbox_add_item_take_rtext (WListbox *l, listbox_append_t pos, int hotkey, char *text,
+                                   char *rtext, void *data, gboolean free_data);
 
 /*** inline functions ****************************************************************************/
 

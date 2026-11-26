@@ -53,6 +53,9 @@ const global_keymap_t *listbox_map = NULL;
 /* Gives the position of the last item. */
 #define LISTBOX_LAST(l) (listbox_is_empty (l) ? 0 : (int) g_queue_get_length ((l)->list) - 1)
 
+/* Minimal width of the entry text left when the right text is shown. */
+#define LISTBOX_MIN_TEXT_WIDTH 16
+
 /*** file scope type declarations ****************************************************************/
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -82,6 +85,7 @@ listbox_entry_free (void *data)
     WLEntry *e = data;
 
     g_free (e->text);
+    g_free (e->rtext);
     if (e->free_data)
         g_free (e->data);
     g_free (e);
@@ -138,6 +142,7 @@ listbox_draw (WListbox *l, gboolean focused)
     const int *colors;
     gboolean disabled;
     int normalc, selc, scrollbarc;
+    const int width = w->cols - 2;
     int length = 0;
     GList *le = NULL;
     int pos;
@@ -164,6 +169,8 @@ listbox_draw (WListbox *l, gboolean focused)
     for (i = 0; i < w->lines; i++)
     {
         const char *text = "";
+        const char *rtext = NULL;
+        int rwidth = 0;
 
         // Display the entry
         if (pos == l->current && sel_line == -1)
@@ -181,11 +188,26 @@ listbox_draw (WListbox *l, gboolean focused)
             WLEntry *e = LENTRY (le->data);
 
             text = e->text;
+            rtext = e->rtext;
             le = g_list_next (le);
             pos++;
         }
 
-        tty_print_string (str_fit_to_term (text, w->cols - 2, J_LEFT_FIT));
+        if (rtext != NULL && *rtext != '\0')
+        {
+            rwidth = str_term_width1 (rtext) + 1;  // + 1 space between the texts
+
+            // show the right text only if a reasonable part of the entry remains visible
+            if (width - rwidth < LISTBOX_MIN_TEXT_WIDTH)
+                rwidth = 0;
+        }
+
+        tty_print_string (str_fit_to_term (text, width - rwidth, J_LEFT_FIT));
+        if (rwidth != 0)
+        {
+            tty_print_char (' ');
+            tty_print_string (rtext);
+        }
     }
 
     l->cursor_y = sel_line;
@@ -849,6 +871,31 @@ char *
 listbox_add_item_take (WListbox *l, listbox_append_t pos, int hotkey, char *text, void *data,
                        gboolean free_data)
 {
+    return listbox_add_item_take_rtext (l, pos, hotkey, text, NULL, data, free_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Add new item with additional right aligned text to the listbox.
+ *
+ * @param l WListbox object
+ * @param pos position of the item
+ * @param hotkey position of the item
+ * @param text item text. Ownership of the text is transferred to the @l.
+ * @param rtext text shown at the right edge of the @l, or NULL. Ownership of the text is
+ *              transferred to the @l.
+ * @param data item data
+ * @param free_data if TRUE free the @data when @l is destroyed,
+ *
+ * After this call, @text and @rtext belong to the @l and may no longer be modified by the caller.
+ *
+ * @return pointer to @text.
+ */
+char *
+listbox_add_item_take_rtext (WListbox *l, listbox_append_t pos, int hotkey, char *text, char *rtext,
+                             void *data, gboolean free_data)
+{
     WLEntry *entry;
 
     if (l == NULL)
@@ -859,6 +906,7 @@ listbox_add_item_take (WListbox *l, listbox_append_t pos, int hotkey, char *text
 
     entry = g_new (WLEntry, 1);
     entry->text = text;
+    entry->rtext = rtext;
     entry->data = data;
     entry->free_data = free_data;
     entry->hotkey = hotkey;
