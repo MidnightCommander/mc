@@ -502,6 +502,8 @@ tty_draw_hline (int y, int x, mc_tty_char_t ch, int len)
         x = 0;
     }
 
+    len = MAX (len, 0);
+
     SLsmg_gotorc (y, x);
 
     if ((mc_global.utf8_display && ch == 0x2500) || ch == MC_ACS_HLINE)
@@ -532,6 +534,8 @@ tty_draw_vline (int y, int x, mc_tty_char_t ch, int len)
             return;
         y = 0;
     }
+
+    len = MAX (len, 0);
 
     SLsmg_gotorc (y, x);
 

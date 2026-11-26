@@ -487,6 +487,8 @@ tty_draw_hline (int y, int x, mc_tty_char_t ch, int len)
         x = 0;
     }
 
+    len = MAX (len, 0);
+
     move (y, x);
     hline_maybe_acs (ch, len);
     move (y, x1);
@@ -514,6 +516,8 @@ tty_draw_vline (int y, int x, mc_tty_char_t ch, int len)
             return;
         y = 0;
     }
+
+    len = MAX (len, 0);
 
     move (y, x);
     vline_maybe_acs (ch, len);
