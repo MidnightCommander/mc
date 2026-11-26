@@ -274,34 +274,6 @@ sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES *attrs, struct stat *s)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Getting information about a symbolic link.
- *
- * @param vpath   path to file, directory or symbolic link
- * @param buf     buffer for store stat-info
- * @param mcerror pointer to error object
- * @return 0 if success, negative value otherwise
- */
-
-int
-sftpfs_lstat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror)
-{
-    sftpfs_super_t *super = NULL;
-    const vfs_path_element_t *path_element = NULL;
-    LIBSSH2_SFTP_ATTRIBUTES attrs;
-    int res;
-
-    res = sftpfs_stat_init (&super, &path_element, vpath, mcerror, LIBSSH2_SFTP_LSTAT, &attrs);
-    if (res >= 0)
-    {
-        sftpfs_attr_to_stat (&attrs, buf);
-        res = 0;
-    }
-
-    return res;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Getting information about a file or directory.
  *
  * @param vpath   path to file or directory
@@ -325,45 +297,6 @@ sftpfs_stat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror)
         sftpfs_attr_to_stat (&attrs, buf);
         res = 0;
     }
-
-    return res;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Read value of a symbolic link.
- *
- * @param vpath   path to file or directory
- * @param buf     buffer for store stat-info
- * @param size    buffer size
- * @param mcerror pointer to error object
- * @return 0 if success, negative value otherwise
- */
-
-int
-sftpfs_readlink (const vfs_path_t *vpath, char *buf, size_t size, GError **mcerror)
-{
-    sftpfs_super_t *super = NULL;
-    const vfs_path_element_t *path_element = NULL;
-    const GString *fixfname;
-    int res;
-
-    if (!sftpfs_op_init (&super, &path_element, vpath, mcerror))
-        return -1;
-
-    fixfname = sftpfs_fix_filename (path_element->path);
-
-    do
-    {
-        res = libssh2_sftp_symlink_ex (super->sftp_session, fixfname->str, fixfname->len, buf, size,
-                                       LIBSSH2_SFTP_READLINK);
-        if (res >= 0)
-            break;
-
-        if (!sftpfs_waitsocket (super, res, mcerror))
-            return -1;
-    }
-    while (res == LIBSSH2_ERROR_EAGAIN);
 
     return res;
 }
