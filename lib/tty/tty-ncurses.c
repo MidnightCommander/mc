@@ -230,17 +230,17 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 
     initscr ();
 
-#ifdef HAVE_ESCDELAY
+#ifdef HAVE_SET_ESCDELAY
     /*
-     * If ncurses exports the ESCDELAY variable, it should be set to
-     * a low value, or you'll experience a delay in processing escape
-     * sequences that are recognized by mc (e.g. Esc-Esc).  On the other
-     * hand, making ESCDELAY too small can result in some sequences
-     * (e.g. cursor arrows) being reported as separate keys under heavy
-     * processor load, and this can be a problem if mc hasn't learned
-     * them in the "Learn Keys" dialog.  The value is in milliseconds.
+     * ESCDELAY variable should be set to a low value, or you'll experience a
+     * delay in processing escape sequences recognized by mc (e.g. Esc-Esc).
+     * Making ESCDELAY too small can result in some sequences (like cursor
+     * arrows) being reported as separate keys under heavy processor load,
+     * and this can be a problem if mc hasn't learned them in the "Learn Keys"
+     * dialog. The value is in milliseconds (AIX defaults to 0.1s, ncurses 1s).
      */
-    ESCDELAY = 200;
+    if (g_getenv ("ESCDELAY") == NULL)
+        set_escdelay (100);
 #endif
 
     tcgetattr (STDIN_FILENO, &mode);
