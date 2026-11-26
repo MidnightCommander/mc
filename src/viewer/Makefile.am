@@ -3,6 +3,7 @@ noinst_LTLIBRARIES = libmcviewer.la
 
 libmcviewer_la_SOURCES = \
 	actions_cmd.c \
+	ansi.c ansi.h \
 	ascii.c \
 	coord_cache.c \
 	datasource.c \
@@ -16,6 +17,7 @@ libmcviewer_la_SOURCES = \
 	mcviewer.h \
 	move.c \
 	nroff.c \
-	search.c
+	search.c \
+	syntax.c syntax.h
 
 AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)
