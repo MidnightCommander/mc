@@ -98,6 +98,8 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (EditUserMenu),
     ADD_KEYMAP_NAME (Search),
     ADD_KEYMAP_NAME (SearchContinue),
+    ADD_KEYMAP_NAME (SearchNext),
+    ADD_KEYMAP_NAME (SearchPrev),
     ADD_KEYMAP_NAME (Replace),
     ADD_KEYMAP_NAME (ReplaceContinue),
     ADD_KEYMAP_NAME (Help),

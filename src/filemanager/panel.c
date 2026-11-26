@@ -3530,11 +3530,81 @@ panel_execute_cmd (WPanel *panel, long command)
 {
     int res = MSG_HANDLED;
 
-    if (command != CK_Search)
+    if (command != CK_Search && command != CK_SearchNext && command != CK_SearchPrev)
         stop_search (panel);
 
     switch (command)
     {
+    case CK_SearchNext:
+    case CK_SearchPrev:
+        if (panel->quick_search.active)
+        {
+            int direction = (command == CK_SearchNext) ? 1 : -1;
+            int start = panel->current + direction;
+            int i, found = -1;
+            gboolean wrapped = FALSE;
+            char *reg_exp, *esc_str;
+            mc_search_t *search;
+
+            if (panel->quick_search.buffer->len == 0)
+                break;
+
+            reg_exp = g_strdup_printf ("%s*", panel->quick_search.buffer->str);
+            esc_str = str_escape (reg_exp, -1, ",|\\{}[]", TRUE);
+            search = mc_search_new (esc_str, NULL);
+            search->search_type = MC_SEARCH_T_GLOB;
+            search->is_entire_line = TRUE;
+
+            switch (panels_options.qsearch_mode)
+            {
+            case QSEARCH_CASE_SENSITIVE:
+                search->is_case_sensitive = TRUE;
+                break;
+            case QSEARCH_CASE_INSENSITIVE:
+                search->is_case_sensitive = FALSE;
+                break;
+            default:
+                search->is_case_sensitive = panel->sort_info.case_sensitive;
+                break;
+            }
+
+            for (i = start; !wrapped || i != start; i += direction)
+            {
+                if (i >= panel->dir.len)
+                {
+                    i = 0;
+                    if (wrapped)
+                        break;
+                    wrapped = TRUE;
+                }
+                if (i < 0)
+                {
+                    i = panel->dir.len - 1;
+                    if (wrapped)
+                        break;
+                    wrapped = TRUE;
+                }
+                if (mc_search_run (search, panel->dir.list[i].fname->str, 0,
+                                   panel->dir.list[i].fname->len, NULL))
+                {
+                    found = i;
+                    break;
+                }
+            }
+
+            mc_search_free (search);
+            g_free (reg_exp);
+            g_free (esc_str);
+
+            if (found >= 0)
+            {
+                unselect_item (panel);
+                panel->current = found;
+                select_item (panel);
+                widget_draw (WIDGET (panel));
+            }
+        }
+        break;
     case CK_Up:
     case CK_Down:
     case CK_Left:

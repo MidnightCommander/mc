@@ -80,6 +80,8 @@ enum
     CK_Replace,
     CK_ReplaceContinue,
     CK_SearchStop,
+    CK_SearchNext,
+    CK_SearchPrev,
     CK_Help,
     CK_Edit,
     CK_EditNew,
