@@ -58,6 +58,12 @@ typedef struct
     vfs_path_element_t *original_connection_info;
 } sftpfs_super_t;
 
+typedef struct
+{
+    LIBSSH2_SFTP_HANDLE *handle;
+    sftpfs_super_t *super;
+} sftpfs_dir_data_t;
+
 /*** global variables defined in .c file *********************************************************/
 
 extern GString *sftpfs_filename_buffer;
@@ -71,7 +77,6 @@ void sftpfs_deinit_config_variables_patterns (void);
 
 gboolean sftpfs_is_sftp_error (LIBSSH2_SFTP *sftp_session, int sftp_res, int sftp_error);
 void sftpfs_ssherror_to_gliberror (sftpfs_super_t *super, int libssh_errno, GError **mcerror);
-gboolean sftpfs_waitsocket (sftpfs_super_t *super, int sftp_res, GError **mcerror);
 
 const GString *sftpfs_fix_filename (const char *file_name);
 
