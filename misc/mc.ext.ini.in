@@ -360,6 +360,11 @@ ShellIgnoreCase=true
 Open=%cd %p/u7z://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view 7z
 
+[PostgreSQL dump]
+# pg_dump custom-format archive (pg_dump -Fc); matched by content, any extension
+Type=PostgreSQL custom database dump
+Open=%cd %p/pgdump://
+
 [patch]
 Regex=\\.(diff|patch)$
 Open=%cd %p/patchfs://
