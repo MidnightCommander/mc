@@ -737,9 +737,9 @@ sparse_numblocks_decoder (struct tar_stat_info *st, const char *keyword, const c
         return FALSE;
 
     if (st->sparse_map == NULL)
-        st->sparse_map = g_array_sized_new (FALSE, FALSE, sizeof (struct sp_array), u);
+        st->sparse_map = g_array_new (FALSE, FALSE, sizeof (struct sp_array));
     else
-        g_array_set_size (st->sparse_map, u);
+        g_array_set_size (st->sparse_map, 0);
 
     return TRUE;
 }
@@ -750,15 +750,20 @@ static gboolean
 sparse_offset_decoder (struct tar_stat_info *st, const char *keyword, const char *arg, size_t size)
 {
     uintmax_t u;
-    struct sp_array *s;
+    struct sp_array s;
 
     (void) size;
 
     if (!decode_num (&u, arg, TYPE_MAXIMUM (off_t), keyword))
         return FALSE;
 
-    s = &g_array_index (st->sparse_map, struct sp_array, st->sparse_map->len - 1);
-    s->offset = u;
+    // the offset starts a chunk, which needs GNU.sparse.numblocks before it
+    if (st->sparse_map == NULL)
+        return FALSE;
+
+    s.offset = u;
+    s.numbytes = 0;
+    g_array_append_val (st->sparse_map, s);
     return TRUE;
 }
 
@@ -769,16 +774,17 @@ sparse_numbytes_decoder (struct tar_stat_info *st, const char *keyword, const ch
                          size_t size)
 {
     uintmax_t u;
-    struct sp_array s;
 
     (void) size;
 
     if (!decode_num (&u, arg, SIZE_MAX, keyword))
         return FALSE;
 
-    s.offset = 0;
-    s.numbytes = u;
-    g_array_append_val (st->sparse_map, s);
+    // the size ends the chunk started by GNU.sparse.offset
+    if (st->sparse_map == NULL || st->sparse_map->len == 0)
+        return FALSE;
+
+    g_array_index (st->sparse_map, struct sp_array, st->sparse_map->len - 1).numbytes = u;
     return TRUE;
 }
 
@@ -906,7 +912,9 @@ tar_xheader_read (tar_super_t *archive, struct xheader *xhdr, union block *p, of
         return FALSE;
     size = size_plus_1 - 1;
     xhdr->size = size;
-    xhdr->buffer = g_malloc (size_plus_1);
+    xhdr->buffer = g_try_malloc (size_plus_1);
+    if (xhdr->buffer == NULL)
+        return FALSE;
     xhdr->buffer[size] = '\0';
 
     do

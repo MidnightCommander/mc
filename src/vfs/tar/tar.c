@@ -251,7 +251,7 @@ tar_calc_sparse_offsets (struct vfs_s_inode *inode)
 
         sp = &g_array_index (sm, struct sp_array, i);
         sp->arch_offset = begin;
-        begin += BLOCKSIZE * (sp->numbytes / BLOCKSIZE + sp->numbytes % BLOCKSIZE);
+        begin += BLOCKSIZE * (sp->numbytes / BLOCKSIZE + (sp->numbytes % BLOCKSIZE != 0));
     }
 }
 
@@ -271,13 +271,14 @@ tar_skip_member (tar_super_t *archive, struct vfs_s_inode *inode)
 
     if (current_stat_info.is_sparse)
     {
-        if (inode != NULL)
-            inode->data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
+        off_t data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
 
-        (void) tar_sparse_skip_file (archive, &current_stat_info);
+        (void) tar_sparse_skip_file (archive, &current_stat_info, &data_offset);
 
         if (inode != NULL)
         {
+            inode->data_offset = data_offset;
+
             // use vfs_s_inode::user_data to keep the sparse map
             inode->user_data = current_stat_info.sparse_map;
             current_stat_info.sparse_map = NULL;
@@ -564,7 +565,19 @@ tar_insert_entry (struct vfs_class *me, struct vfs_s_super *archive, union block
         {
             entry = VFS_SUBCLASS (me)->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
             if (entry != NULL)
+            {
+                if (S_ISDIR (entry->ino->st.st_mode))
+                {
+                    entry->ino->st.st_mode = current_stat_info.stat.st_mode;
+                    entry->ino->st.st_uid = current_stat_info.stat.st_uid;
+                    entry->ino->st.st_gid = current_stat_info.stat.st_gid;
+                    vfs_zero_stat_times (&entry->ino->st);
+                    entry->ino->st.st_mtime = current_stat_info.mtime.tv_sec;
+                    entry->ino->st.st_atime = current_stat_info.atime.tv_sec;
+                    entry->ino->st.st_ctime = current_stat_info.ctime.tv_sec;
+                }
                 return HEADER_SUCCESS;
+            }
         }
 
         *inode = vfs_s_new_inode (me, archive, &current_stat_info.stat);
@@ -642,7 +655,13 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 
             size -= size % BLOCKSIZE;
 
-            header_copy = g_malloc (size + 1);
+            header_copy = g_try_malloc (size + 1);
+            if (header_copy == NULL)
+            {
+                message (D_ERROR, MSG_ERROR, _ ("Inconsistent tar archive"));
+                status = HEADER_FAILURE;
+                goto ret;
+            }
 
             if (header->header.typeflag == GNUTYPE_LONGNAME)
             {
@@ -684,7 +703,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
         }
         else if (header->header.typeflag == XHDTYPE || header->header.typeflag == SOLARIS_XHDTYPE)
         {
-            if (arch->type == TAR_UNKNOWN)
+            // the first header of a pax archive is this extended header, which has the ustar
+            // magic: like GNU tar, treat an archive with an extended header as pax, not ustar
+            if (arch->type == TAR_UNKNOWN || arch->type == TAR_USTAR)
                 arch->type = TAR_POSIX;
             if (!tar_xheader_read (arch, &current_stat_info.xhdr, header,
                                    OFF_FROM_HEADER (header->header.size)))
@@ -703,8 +724,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
                 arch->type = TAR_POSIX;
 
             memset (&xhdr, 0, sizeof (xhdr));
-            tar_xheader_read (arch, &xhdr, header, OFF_FROM_HEADER (header->header.size));
-            ok = tar_xheader_decode_global (&xhdr);
+            ok = tar_xheader_read (arch, &xhdr, header, OFF_FROM_HEADER (header->header.size))
+                && tar_xheader_decode_global (&xhdr);
             tar_xheader_destroy (&xhdr);
 
             if (!ok)

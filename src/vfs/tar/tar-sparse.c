@@ -522,8 +522,8 @@ star_get_sparse_info (tar_super_t *archive, struct tar_sparse_file *file)
 static gboolean
 pax_sparse_member_p (struct tar_sparse_file *file)
 {
-    return file->stat_info->sparse_map != NULL && file->stat_info->sparse_map->len > 0
-        && file->stat_info->sparse_major > 0;
+    return (file->stat_info->sparse_map != NULL && file->stat_info->sparse_map->len > 0)
+        || file->stat_info->sparse_major > 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -556,11 +556,8 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
             return FALSE;
         }
 
-        if (file->stat_info->sparse_map == NULL)
-            file->stat_info->sparse_map =
-                g_array_sized_new (FALSE, FALSE, sizeof (struct sp_array), u);
-        else
-            g_array_set_size (file->stat_info->sparse_map, u);
+        if (file->stat_info->sparse_map != NULL)
+            g_array_set_size (file->stat_info->sparse_map, 0);
 
         sparse_map_len = u;
 
@@ -628,7 +625,7 @@ tar_sparse_fixup_header (tar_super_t *archive, struct tar_stat_info *st)
 /* --------------------------------------------------------------------------------------------- */
 
 enum dump_status
-tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st)
+tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st, off_t *data_offset)
 {
     gboolean rc = TRUE;
     struct tar_sparse_file file;
@@ -640,6 +637,8 @@ tar_sparse_skip_file (tar_super_t *archive, struct tar_stat_info *st)
     file.fd = -1;
 
     rc = sparse_decode_header (archive, &file);
+    // the data follows the sparse map or the extension headers, if any
+    *data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
     (void) tar_skip_file (archive, file.stat_info->archive_file_size - file.dumped_size);
     return (sparse_done (&file) && rc) ? dump_status_ok : dump_status_short;
 }
